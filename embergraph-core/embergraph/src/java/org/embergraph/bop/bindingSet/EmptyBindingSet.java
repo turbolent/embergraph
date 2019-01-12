@@ -23,163 +23,133 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.bindingSet;
 
+import cutthecrap.utils.striterators.EmptyIterator;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map.Entry;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-import cutthecrap.utils.striterators.EmptyIterator;
-
 /**
  * An immutable empty binding set.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
-final public class EmptyBindingSet implements IBindingSet, Serializable {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public final class EmptyBindingSet implements IBindingSet, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4270590461117389862L;
-    
-    /**
-     * Immutable singleton.
-     */
-    public static transient final EmptyBindingSet INSTANCE = new EmptyBindingSet();
-    
-    private EmptyBindingSet() {
-        
-    }
+  /** */
+  private static final long serialVersionUID = 4270590461117389862L;
 
-    /**
-     * @todo Clone returns the same object, which is immutable. Since we use
-     *       clone when binding, it might be better to return a mutable object.
-     */
-    public EmptyBindingSet clone() {
-        
-        return this;
-        
-    }
-    
-    public EmptyBindingSet copy(IVariable[] variablesToDrop) {
-        
-        return this;
-        
-    }
-        
-    /** Returns the same object. */
-    @Override
-    public EmptyBindingSet copyMinusErrors(final IVariable[] variablesToDrop) {
-        return this;
-    }
-        
-    
-    /** 
-     * @return false, always
-     */
-    @Override
-    public final boolean containsErrorValues() {  
-        return false;
-    }
-    
-    
-    public void clear(IVariable var) {
-        throw new UnsupportedOperationException();
-    }
+  /** Immutable singleton. */
+  public static final transient EmptyBindingSet INSTANCE = new EmptyBindingSet();
 
-    public void clearAll() {
-        throw new UnsupportedOperationException();
-    }
+  private EmptyBindingSet() {}
 
-    public Iterator<Entry<IVariable, IConstant>> iterator() {
-        
-        return EmptyIterator.DEFAULT;
-        
-    }
+  /**
+   * @todo Clone returns the same object, which is immutable. Since we use clone when binding, it
+   *     might be better to return a mutable object.
+   */
+  public EmptyBindingSet clone() {
 
-    public void set(IVariable var, IConstant val) {
-        throw new UnsupportedOperationException();
-    }
+    return this;
+  }
 
-    public boolean isEmpty() {
-        return true;
-    }
-    
-    public int size() {
-        return 0;
-    }
+  public EmptyBindingSet copy(IVariable[] variablesToDrop) {
 
-    public boolean equals(final Object t) {
-        
-        if (this == t)
-            return true;
+    return this;
+  }
 
-        if (!(t instanceof IBindingSet))
-            return false;
+  /** Returns the same object. */
+  @Override
+  public EmptyBindingSet copyMinusErrors(final IVariable[] variablesToDrop) {
+    return this;
+  }
 
-        final IBindingSet o = (IBindingSet) t;
+  /** @return false, always */
+  @Override
+  public final boolean containsErrorValues() {
+    return false;
+  }
 
-        if (o.size() == 0)
-            return true;
+  public void clear(IVariable var) {
+    throw new UnsupportedOperationException();
+  }
 
-        return false;
+  public void clearAll() {
+    throw new UnsupportedOperationException();
+  }
 
-    }
+  public Iterator<Entry<IVariable, IConstant>> iterator() {
 
-    /**
-     * The hash code of an empty binding set is always zero.
-     */
-    public int hashCode() {
+    return EmptyIterator.DEFAULT;
+  }
 
-        return 0;
-        
-    }
-    
-    public IConstant get(IVariable var) {
+  public void set(IVariable var, IConstant val) {
+    throw new UnsupportedOperationException();
+  }
 
-        if (var == null)
-            throw new IllegalArgumentException();
+  public boolean isEmpty() {
+    return true;
+  }
 
-        return null;
-        
-    }
+  public int size() {
+    return 0;
+  }
 
-    public boolean isBound(IVariable var) {
-        
-        if (var == null)
-            throw new IllegalArgumentException();
+  public boolean equals(final Object t) {
 
-        return false;
-        
-    }
+    if (this == t) return true;
 
-    /**
-     * Imposes singleton pattern during object de-serialization.
-     */
-    private Object readResolve() throws ObjectStreamException {
+    if (!(t instanceof IBindingSet)) return false;
 
-        return EmptyBindingSet.INSTANCE;
+    final IBindingSet o = (IBindingSet) t;
 
-    }
+    if (o.size() == 0) return true;
 
-    public Iterator<IVariable> vars() {
+    return false;
+  }
 
-        return EmptyIterator.DEFAULT;
-        
-    }
+  /** The hash code of an empty binding set is always zero. */
+  public int hashCode() {
 
-//	public void push(IVariable[] vars) {
-//        throw new UnsupportedOperationException();
-//	}
-//    
-//	public void pop(IVariable[] vars) {
-//        throw new IllegalStateException();
-//	}
+    return 0;
+  }
+
+  public IConstant get(IVariable var) {
+
+    if (var == null) throw new IllegalArgumentException();
+
+    return null;
+  }
+
+  public boolean isBound(IVariable var) {
+
+    if (var == null) throw new IllegalArgumentException();
+
+    return false;
+  }
+
+  /** Imposes singleton pattern during object de-serialization. */
+  private Object readResolve() throws ObjectStreamException {
+
+    return EmptyBindingSet.INSTANCE;
+  }
+
+  public Iterator<IVariable> vars() {
+
+    return EmptyIterator.DEFAULT;
+  }
+
+  //	public void push(IVariable[] vars) {
+  //        throw new UnsupportedOperationException();
+  //	}
+  //
+  //	public void pop(IVariable[] vars) {
+  //        throw new IllegalStateException();
+  //	}
 
 }

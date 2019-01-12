@@ -29,22 +29,21 @@ import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Annotations in common for {@link HTree} based hash joins.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface HTreeHashJoinAnnotations extends HTreeAnnotations,
-        HashJoinAnnotations, JoinAnnotations {
+public interface HTreeHashJoinAnnotations
+    extends HTreeAnnotations, HashJoinAnnotations, JoinAnnotations {
 
-    /**
-     * The namespace of the lexicon relation.
-     * <p>
-     * Note: This is necessary for the ivCache index used to optimize the
-     * serialized representation of the solution {@link IV}s. We need to know
-     * how to serialize and deserialize {@link EmbergraphValue}s from the ivCache.
-     * 
-     * @see Predicate.Annotations#RELATION_NAME
-     */
-    String RELATION_NAME = Predicate.Annotations.RELATION_NAME;
-    
+  /**
+   * The namespace of the lexicon relation.
+   *
+   * <p>Note: This is necessary for the ivCache index used to optimize the serialized representation
+   * of the solution {@link IV}s. We need to know how to serialize and deserialize {@link
+   * EmbergraphValue}s from the ivCache.
+   *
+   * @see Predicate.Annotations#RELATION_NAME
+   */
+  String RELATION_NAME = Predicate.Annotations.RELATION_NAME;
 }

@@ -24,22 +24,19 @@ import org.eclipse.jetty.client.HttpClient;
 
 /**
  * Factory for {@link HttpClient} objects.
- * 
+ *
  * @author bryan
  */
 public interface IHttpClientFactory {
 
-	/**
-	 * Starts an {@link HttpClient}.
-	 * <p>
-	 * Note: The caller MUST use {@link HttpClient#stop()} to terminate the
-	 * returned {@link HttpClient} when they are done with it. Failure to do so
-	 * will leak resources.
-	 * 
-	 * @return The returned object can (and should) be used for multiple
-	 *         connections as long as the same configuration for http
-	 *         communications should be used for those connections.
-	 */
-	HttpClient newInstance();
-	
+  /**
+   * Starts an {@link HttpClient}.
+   *
+   * <p>Note: The caller MUST use {@link HttpClient#stop()} to terminate the returned {@link
+   * HttpClient} when they are done with it. Failure to do so will leak resources.
+   *
+   * @return The returned object can (and should) be used for multiple connections as long as the
+   *     same configuration for http communications should be used for those connections.
+   */
+  HttpClient newInstance();
 }

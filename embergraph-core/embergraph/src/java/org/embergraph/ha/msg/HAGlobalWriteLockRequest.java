@@ -21,66 +21,58 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent
- *      unisolated operations against multiple KBs on the same Journal)
+ * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent unisolated operations
+ *     against multiple KBs on the same Journal)
  */
 @Deprecated
-public class HAGlobalWriteLockRequest implements IHAGlobalWriteLockRequest,
-        Serializable {
+public class HAGlobalWriteLockRequest implements IHAGlobalWriteLockRequest, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final long lockWaitTimeout;
-    private final TimeUnit lockWaitUnits;
-    private final long lockHoldTimeout;
-    private final TimeUnit lockHoldUnits;
+  private final long lockWaitTimeout;
+  private final TimeUnit lockWaitUnits;
+  private final long lockHoldTimeout;
+  private final TimeUnit lockHoldUnits;
 
-    public HAGlobalWriteLockRequest(final long lockWaitTimeout,
-            final TimeUnit lockWaitUnits, final long lockHoldTimeout,
-            final TimeUnit lockHoldUnits) {
+  public HAGlobalWriteLockRequest(
+      final long lockWaitTimeout,
+      final TimeUnit lockWaitUnits,
+      final long lockHoldTimeout,
+      final TimeUnit lockHoldUnits) {
 
-        if (lockWaitTimeout <= 0)
-            throw new IllegalArgumentException();
+    if (lockWaitTimeout <= 0) throw new IllegalArgumentException();
 
-        if (lockHoldTimeout <= 0)
-            throw new IllegalArgumentException();
+    if (lockHoldTimeout <= 0) throw new IllegalArgumentException();
 
-        if (lockWaitUnits == null)
-            throw new IllegalArgumentException();
+    if (lockWaitUnits == null) throw new IllegalArgumentException();
 
-        if (lockHoldUnits == null)
-            throw new IllegalArgumentException();
+    if (lockHoldUnits == null) throw new IllegalArgumentException();
 
-        this.lockWaitTimeout = lockWaitTimeout;
-        this.lockHoldTimeout = lockHoldTimeout;
-        this.lockWaitUnits = lockWaitUnits;
-        this.lockHoldUnits = lockHoldUnits;
+    this.lockWaitTimeout = lockWaitTimeout;
+    this.lockHoldTimeout = lockHoldTimeout;
+    this.lockWaitUnits = lockWaitUnits;
+    this.lockHoldUnits = lockHoldUnits;
+  }
 
-    }
+  @Override
+  public long getLockWaitTimeout() {
+    return lockWaitTimeout;
+  }
 
-    @Override
-    public long getLockWaitTimeout() {
-        return lockWaitTimeout;
-    }
+  @Override
+  public TimeUnit getLockWaitUnits() {
+    return lockWaitUnits;
+  }
 
-    @Override
-    public TimeUnit getLockWaitUnits() {
-        return lockWaitUnits;
-    }
+  @Override
+  public long getLockHoldTimeout() {
+    return lockHoldTimeout;
+  }
 
-    @Override
-    public long getLockHoldTimeout() {
-        return lockHoldTimeout;
-    }
-
-    @Override
-    public TimeUnit getLockHoldUnits() {
-        return lockHoldUnits;
-    }
-
+  @Override
+  public TimeUnit getLockHoldUnits() {
+    return lockHoldUnits;
+  }
 }

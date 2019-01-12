@@ -19,44 +19,42 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import org.embergraph.util.BytesUtil;
 
 public class HADigestResponse implements IHADigestResponse, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final UUID storeUUID;
-    private final byte[] digest;
-    
-    public HADigestResponse(final UUID storeUUID, final byte[] digest) {
+  private final UUID storeUUID;
+  private final byte[] digest;
 
-        this.storeUUID = storeUUID;
-        
-        this.digest = digest;
-        
-    }
-    
-    @Override
-    public UUID getStoreUUID() {
-        
-        return storeUUID;
-        
-    }
+  public HADigestResponse(final UUID storeUUID, final byte[] digest) {
 
-    @Override
-    public byte[] getDigest() {
+    this.storeUUID = storeUUID;
 
-        return digest;
-        
-    }
+    this.digest = digest;
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public UUID getStoreUUID() {
 
-        return super.toString() + "{storeUUID=" + getStoreUUID() + ", digest="
-                + BytesUtil.toHexString(getDigest()) + "}";
+    return storeUUID;
+  }
 
-    }
+  @Override
+  public byte[] getDigest() {
 
+    return digest;
+  }
+
+  @Override
+  public String toString() {
+
+    return super.toString()
+        + "{storeUUID="
+        + getStoreUUID()
+        + ", digest="
+        + BytesUtil.toHexString(getDigest())
+        + "}";
+  }
 }

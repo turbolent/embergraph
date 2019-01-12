@@ -23,50 +23,39 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 6116 2012-03-13 20:39:17Z thompsonbry $
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("Embergraph Graph Engine");
-        
-        /*
-         * Some basic correctness tests against the embergraph backend.
-         * 
-         * FIXME TEST: Extend/override the analytic test suite to also work for
-         * the embergraph backend. This is a bit tricky because the embergraph backend
-         * opererates in IV and ISPO objects that are not automatically resolved
-         * to Value and Statement objects. Maybe we can add a resolution pattern
-         * to the test suites (wrapping the GAS outputs) and get better reuse
-         * out of them?
-         */
-        suite.addTestSuite(TestGather.class);
-        suite.addTestSuite(TestBFS.class);
-        suite.addTestSuite(TestSSSP.class);
-        
-        return suite;
-        
-    }
-    
+    final TestSuite suite = new TestSuite("Embergraph Graph Engine");
+
+    /*
+     * Some basic correctness tests against the embergraph backend.
+     *
+     * FIXME TEST: Extend/override the analytic test suite to also work for
+     * the embergraph backend. This is a bit tricky because the embergraph backend
+     * opererates in IV and ISPO objects that are not automatically resolved
+     * to Value and Statement objects. Maybe we can add a resolution pattern
+     * to the test suites (wrapping the GAS outputs) and get better reuse
+     * out of them?
+     */
+    suite.addTestSuite(TestGather.class);
+    suite.addTestSuite(TestBFS.class);
+    suite.addTestSuite(TestSSSP.class);
+
+    return suite;
+  }
 }

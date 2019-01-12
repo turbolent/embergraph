@@ -27,175 +27,156 @@ import junit.framework.TestCase2;
 
 /**
  * Test suite for the {@link UnsynchronizedArrayBuffer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestUnsynchronizedArrayBuffer extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestUnsynchronizedArrayBuffer() {
-   
-    }
+  /** */
+  public TestUnsynchronizedArrayBuffer() {}
 
-    /**
-     * @param arg0
-     */
-    public TestUnsynchronizedArrayBuffer(String arg0) {
-   
-        super(arg0);
-   
-    }
+  /** @param arg0 */
+  public TestUnsynchronizedArrayBuffer(String arg0) {
 
-    private final int chunkCapacity = 10;
-    
-    private final int chunkOfChunksCapacity = 5;
-    
-    private TestArrayBuffer<String[]> syncBuffer = new TestArrayBuffer<String[]>(
-            chunkOfChunksCapacity);
-    
-    private UnsynchronizedArrayBuffer<String> unsyncBuffer = new UnsynchronizedArrayBuffer<String>(
-            syncBuffer, String.class, chunkCapacity);
+    super(arg0);
+  }
+
+  private final int chunkCapacity = 10;
+
+  private final int chunkOfChunksCapacity = 5;
+
+  private TestArrayBuffer<String[]> syncBuffer =
+      new TestArrayBuffer<String[]>(chunkOfChunksCapacity);
+
+  private UnsynchronizedArrayBuffer<String> unsyncBuffer =
+      new UnsynchronizedArrayBuffer<String>(syncBuffer, String.class, chunkCapacity);
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    syncBuffer = null;
+
+    unsyncBuffer = null;
+
+    super.tearDown();
+  }
+
+  /**
+   * Helper class exposes the backing buffer.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   * @param <E>
+   */
+  private static class TestArrayBuffer<E> extends AbstractArrayBuffer<E> {
+
+    TestArrayBuffer(final int capacity) {
+
+      super(capacity, Object.class, null /* filter */);
+    }
 
     @Override
-    protected void tearDown() throws Exception {
+    protected long flush(final int n, final E[] a) {
 
-        syncBuffer = null;
-        
-        unsyncBuffer = null;
-        
-        super.tearDown();
-        
+      fail("Not expecting the syncBuffer to be flushed by this test");
+
+      return 0;
     }
 
     /**
-     * Helper class exposes the backing buffer.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
-     * @param <E>
+     * Return the chunk by reference at the given index.
+     *
+     * @param index The index into the internal buffer.
+     * @return The chunk at that index.
      */
-    private static class TestArrayBuffer<E> extends AbstractArrayBuffer<E> {
+    public E get(final int index) {
 
-        TestArrayBuffer(final int capacity) {
-            
-            super(capacity, Object.class, null/* filter */);
-            
-        }
+      //            if (index < 0 || index >= size)
+      //                throw new IndexOutOfBoundsException("index=" + index);
 
-        @Override
-        protected long flush(final int n, final E[] a) {
-
-            fail("Not expecting the syncBuffer to be flushed by this test");
-
-            return 0;
-
-        }
-
-        /**
-         * Return the chunk by reference at the given index.
-         * 
-         * @param index
-         *            The index into the internal buffer.
-         *            
-         * @return The chunk at that index.
-         */
-        public E get(final int index) {
-
-//            if (index < 0 || index >= size)
-//                throw new IndexOutOfBoundsException("index=" + index);
-            
-            return buffer[index];
-            
-        }
-        
+      return buffer[index];
     }
+  }
 
-    /**
-     * Test verifies state of both the {@link UnsynchronizedArrayBuffer} and the
-     * target {@link IBuffer} before and after an element is added to the
-     * {@link UnsynchronizedArrayBuffer} and after it is
-     * {@link UnsynchronizedArrayBuffer#flush() flushed} to target
-     * {@link IBuffer}.
-     */
-    public void test_unsynchronizedBuffer1() {
-        
-        assertTrue("isEmpty",unsyncBuffer.isEmpty());
-        
-        assertEquals("size",0,unsyncBuffer.size());
+  /**
+   * Test verifies state of both the {@link UnsynchronizedArrayBuffer} and the target {@link
+   * IBuffer} before and after an element is added to the {@link UnsynchronizedArrayBuffer} and
+   * after it is {@link UnsynchronizedArrayBuffer#flush() flushed} to target {@link IBuffer}.
+   */
+  public void test_unsynchronizedBuffer1() {
 
-        assertTrue("isEmpty",syncBuffer.isEmpty());
-        
-        assertEquals("size",0,syncBuffer.size());
+    assertTrue("isEmpty", unsyncBuffer.isEmpty());
 
-        unsyncBuffer.add("a");
-        
-        assertFalse("isEmpty",unsyncBuffer.isEmpty());
-        
-        assertEquals("size",1,unsyncBuffer.size());
-        
-        assertTrue("isEmpty",syncBuffer.isEmpty());
-        
-        assertEquals("size",0,syncBuffer.size());
+    assertEquals("size", 0, unsyncBuffer.size());
 
-        assertEquals("flush",1,unsyncBuffer.flush());
+    assertTrue("isEmpty", syncBuffer.isEmpty());
 
-        assertTrue("isEmpty",unsyncBuffer.isEmpty());
-        
-        assertEquals("size",0,unsyncBuffer.size());
-        
-        assertFalse("isEmpty",syncBuffer.isEmpty());
-        
-        assertEquals("size",1,syncBuffer.size());
-        
-        final String[] chunk0 = syncBuffer.get(0);
-        
-        assertEquals(new String[] { "a" }, chunk0);
-        
-    }
+    assertEquals("size", 0, syncBuffer.size());
 
-    public void test_unsynchronizedBuffer2() {
+    unsyncBuffer.add("a");
 
-        unsyncBuffer.add("a");
-        unsyncBuffer.add("b");
+    assertFalse("isEmpty", unsyncBuffer.isEmpty());
 
-        assertEquals("size", 2, unsyncBuffer.size());
+    assertEquals("size", 1, unsyncBuffer.size());
 
-        assertEquals("flush", 2, unsyncBuffer.flush());
+    assertTrue("isEmpty", syncBuffer.isEmpty());
 
-        assertEquals("size", 0, unsyncBuffer.size());
+    assertEquals("size", 0, syncBuffer.size());
 
-        assertEquals("size", 1, syncBuffer.size());
+    assertEquals("flush", 1, unsyncBuffer.flush());
 
-        assertEquals(new String[] { "a", "b" }, syncBuffer.get(0));
+    assertTrue("isEmpty", unsyncBuffer.isEmpty());
 
-        unsyncBuffer.add("c");
-        
-        assertEquals("size", 1, unsyncBuffer.size());
+    assertEquals("size", 0, unsyncBuffer.size());
 
-        assertEquals("flush", 2+1, unsyncBuffer.flush());
+    assertFalse("isEmpty", syncBuffer.isEmpty());
 
-        assertEquals("size", 0, unsyncBuffer.size());
+    assertEquals("size", 1, syncBuffer.size());
 
-        assertEquals("size", 2, syncBuffer.size());
+    final String[] chunk0 = syncBuffer.get(0);
 
-        assertEquals(new String[] { "a", "b" }, syncBuffer.get(0));
+    assertEquals(new String[] {"a"}, chunk0);
+  }
 
-        assertEquals(new String[] { "c" }, syncBuffer.get(1));
+  public void test_unsynchronizedBuffer2() {
 
-        // Note: flush does not change anything since buffer is empty.
-        assertEquals("flush", 2+1, unsyncBuffer.flush());
-        
-        assertEquals("size", 0, unsyncBuffer.size());
+    unsyncBuffer.add("a");
+    unsyncBuffer.add("b");
 
-        assertEquals("size", 2, syncBuffer.size());
-        
-        assertEquals(new String[] { "a", "b" }, syncBuffer.get(0));
+    assertEquals("size", 2, unsyncBuffer.size());
 
-        assertEquals(new String[] { "c" }, syncBuffer.get(1));
-        
-    }
+    assertEquals("flush", 2, unsyncBuffer.flush());
 
+    assertEquals("size", 0, unsyncBuffer.size());
+
+    assertEquals("size", 1, syncBuffer.size());
+
+    assertEquals(new String[] {"a", "b"}, syncBuffer.get(0));
+
+    unsyncBuffer.add("c");
+
+    assertEquals("size", 1, unsyncBuffer.size());
+
+    assertEquals("flush", 2 + 1, unsyncBuffer.flush());
+
+    assertEquals("size", 0, unsyncBuffer.size());
+
+    assertEquals("size", 2, syncBuffer.size());
+
+    assertEquals(new String[] {"a", "b"}, syncBuffer.get(0));
+
+    assertEquals(new String[] {"c"}, syncBuffer.get(1));
+
+    // Note: flush does not change anything since buffer is empty.
+    assertEquals("flush", 2 + 1, unsyncBuffer.flush());
+
+    assertEquals("size", 0, unsyncBuffer.size());
+
+    assertEquals("size", 2, syncBuffer.size());
+
+    assertEquals(new String[] {"a", "b"}, syncBuffer.get(0));
+
+    assertEquals(new String[] {"c"}, syncBuffer.get(1));
+  }
 }

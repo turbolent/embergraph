@@ -31,58 +31,45 @@ import junit.framework.TestCase2;
  */
 public class TestKernelVersion extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestKernelVersion() {
+  /** */
+  public TestKernelVersion() {}
+
+  /** @param name */
+  public TestKernelVersion(String name) {
+    super(name);
+  }
+
+  public void test_correctRejection() {
+
+    try {
+      new KernelVersion(null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestKernelVersion(String name) {
-        super(name);
+    try {
+      new KernelVersion("a.b.c");
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+  }
 
-    public void test_correctRejection() {
+  public void test_kernelVersion01() {
 
-        try {
-            new KernelVersion(null);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
+    final KernelVersion t = new KernelVersion("2.6.31");
+    assertEquals(2, t.version);
+    assertEquals(6, t.major);
+    assertEquals(31, t.minor);
+  }
 
-        try {
-            new KernelVersion("a.b.c");
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
+  /** Observed on a fedora 10 build <code>2.6.31-302-rs</code>. */
+  public void test_kernelVersion02() {
 
-    }
-
-    public void test_kernelVersion01() {
-
-        final KernelVersion t = new KernelVersion("2.6.31");
-        assertEquals(2, t.version);
-        assertEquals(6, t.major);
-        assertEquals(31, t.minor);
-
-    }
-
-    /**
-     * Observed on a fedora 10 build <code>2.6.31-302-rs</code>.
-     */
-    public void test_kernelVersion02() {
-
-        final KernelVersion t = new KernelVersion("2.6.31-302-rs");
-        assertEquals(2, t.version);
-        assertEquals(6, t.major);
-        assertEquals(31, t.minor);
-
-    }
-
+    final KernelVersion t = new KernelVersion("2.6.31-302-rs");
+    assertEquals(2, t.version);
+    assertEquals(6, t.major);
+    assertEquals(31, t.minor);
+  }
 }

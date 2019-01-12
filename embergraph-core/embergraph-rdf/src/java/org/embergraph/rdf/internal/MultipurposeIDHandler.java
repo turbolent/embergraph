@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.UUID;
-
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
@@ -26,89 +25,85 @@ import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Inline URI handler for IDs of multiple types.
- */
+/** Inline URI handler for IDs of multiple types. */
 public class MultipurposeIDHandler extends InlineURIHandler {
 
-    /**
-     * Maximum length of string text to inline if the localName cannot be parsed
-     * into a UUID, Numeric, or IPv4 address.
-     */
-    private final int maxTextLen;
-    
-    public MultipurposeIDHandler(final String namespace) {
-        this(namespace, Integer.MAX_VALUE);
+  /**
+   * Maximum length of string text to inline if the localName cannot be parsed into a UUID, Numeric,
+   * or IPv4 address.
+   */
+  private final int maxTextLen;
+
+  public MultipurposeIDHandler(final String namespace) {
+    this(namespace, Integer.MAX_VALUE);
+  }
+
+  /**
+   * Supply the maximum length of string text to inline if the localName cannot be parsed into a
+   * UUID, Numeric, or IPv4 address.
+   */
+  public MultipurposeIDHandler(final String namespace, final int maxTextLen) {
+    super(namespace);
+    this.maxTextLen = maxTextLen;
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(final String localName) {
+
+    try {
+      return new UUIDLiteralIV<>(UUID.fromString(localName));
+    } catch (Exception ex) {
+      // ok, not a uuid
     }
 
-    /**
-     * Supply the maximum length of string text to inline if the localName
-     * cannot be parsed into a UUID, Numeric, or IPv4 address.
-     */
-    public MultipurposeIDHandler(final String namespace, final int maxTextLen) {
-        super(namespace);
-        this.maxTextLen = maxTextLen;
+    try {
+      return new XSDNumericIV(Byte.parseByte(localName));
+    } catch (Exception ex) {
+      // ok, not a byte
     }
 
-    @Override
-    @SuppressWarnings("rawtypes")
-    protected AbstractLiteralIV createInlineIV(final String localName) {
-        
-        try {
-            return new UUIDLiteralIV<>(UUID.fromString(localName));
-        } catch (Exception ex) {
-            // ok, not a uuid
-        }
-        
-        try {
-            return new XSDNumericIV(Byte.parseByte(localName));
-        } catch (Exception ex) {
-            // ok, not a byte
-        }
-        
-        try {
-            return new XSDNumericIV(Short.parseShort(localName));
-        } catch (Exception ex) {
-            // ok, not a short
-        }
-        
-        try {
-            return new XSDNumericIV(Integer.parseInt(localName));
-        } catch (Exception ex) {
-            // ok, not a int
-        }
-        
-        try {
-            return new XSDNumericIV(Long.parseLong(localName));
-        } catch (Exception ex) {
-            // ok, not a long
-        }
-        
-        try {
-            return new XSDNumericIV(Float.parseFloat(localName));
-        } catch (Exception ex) {
-            // ok, not a float
-        }
-
-        try {
-            return new XSDNumericIV(Double.parseDouble(localName));
-        } catch (Exception ex) {
-            // ok, not a double
-        }
-
-        try {
-            return new IPv4AddrIV(localName);
-        } catch (Exception ex) {
-            // ok, not an ip address
-        }
-        
-        if (localName.length() < maxTextLen) {
-            // just use a UTF encoded string, this is expensive
-            return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
-        }
-        
-        return null;
-        
+    try {
+      return new XSDNumericIV(Short.parseShort(localName));
+    } catch (Exception ex) {
+      // ok, not a short
     }
 
+    try {
+      return new XSDNumericIV(Integer.parseInt(localName));
+    } catch (Exception ex) {
+      // ok, not a int
+    }
+
+    try {
+      return new XSDNumericIV(Long.parseLong(localName));
+    } catch (Exception ex) {
+      // ok, not a long
+    }
+
+    try {
+      return new XSDNumericIV(Float.parseFloat(localName));
+    } catch (Exception ex) {
+      // ok, not a float
+    }
+
+    try {
+      return new XSDNumericIV(Double.parseDouble(localName));
+    } catch (Exception ex) {
+      // ok, not a double
+    }
+
+    try {
+      return new IPv4AddrIV(localName);
+    } catch (Exception ex) {
+      // ok, not an ip address
+    }
+
+    if (localName.length() < maxTextLen) {
+      // just use a UTF encoded string, this is expensive
+      return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
+    }
+
+    return null;
+  }
 }

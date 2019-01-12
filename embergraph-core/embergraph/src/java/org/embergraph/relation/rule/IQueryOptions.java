@@ -24,60 +24,52 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.io.Serializable;
-
 import org.embergraph.bop.solutions.ISortOrder;
 import org.embergraph.relation.rule.eval.IStepTask;
 import org.embergraph.striterator.DistinctFilter;
 
 /**
- * A collection of constraints that may be imposed on an {@link IStep} when
- * evaluated as a query.
- * 
+ * A collection of constraints that may be imposed on an {@link IStep} when evaluated as a query.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IQueryOptions extends Serializable {
 
-    /**
-     * <code>true</code> if a {@link DistinctFilter} should be applied when
-     * the query is evaluated.
-     */
-    public boolean isDistinct();
-    
-    /**
-     * An optional array of {@link ISortOrder}s describing the sort order that
-     * will be imposed on the generated solutions when the rule is evaluated as
-     * a <em>query</em>.
-     * 
-     * @return An array of {@link ISortOrder}s -or- <code>null</code> iff
-     *         there is no "order by" constraint.
-     */
-    public ISortOrder[] getOrderBy();
-    
-    /**
-     * An optional {@link ISlice} describing a constraint on the first
-     * solution and the maximum #of solutions to be materialized by a
-     * <em>query</em>.
-     * <p>
-     * Note: Using an {@link ISlice} requires that the solutions are stable
-     * for queries against the same commit point of the database.
-     * 
-     * @return The {@link ISlice} -or- <code>null</code> if there is no
-     *         constraint on the solutions that will be visited.
-     */
-    public ISlice getSlice();
+  /**
+   * <code>true</code> if a {@link DistinctFilter} should be applied when the query is evaluated.
+   */
+  public boolean isDistinct();
 
-    /**
-     * Return <code>true</code> iff query evaluation must be stable. Stable
-     * query evaluation requires that the same query executed against the same
-     * commit point will produce the same solutions in the same order. This
-     * constraint requires that (a) query execution does not use any
-     * parallelism; and (b) all {@link IStepTask} are determinate. Stable
-     * queries may be useful when using an {@link ISlice} to page through a
-     * solution set.
-     * 
-     * @return <code>true</code> if query evaluation must be stable.
-     */
-    public boolean isStable();
-    
+  /**
+   * An optional array of {@link ISortOrder}s describing the sort order that will be imposed on the
+   * generated solutions when the rule is evaluated as a <em>query</em>.
+   *
+   * @return An array of {@link ISortOrder}s -or- <code>null</code> iff there is no "order by"
+   *     constraint.
+   */
+  public ISortOrder[] getOrderBy();
+
+  /**
+   * An optional {@link ISlice} describing a constraint on the first solution and the maximum #of
+   * solutions to be materialized by a <em>query</em>.
+   *
+   * <p>Note: Using an {@link ISlice} requires that the solutions are stable for queries against the
+   * same commit point of the database.
+   *
+   * @return The {@link ISlice} -or- <code>null</code> if there is no constraint on the solutions
+   *     that will be visited.
+   */
+  public ISlice getSlice();
+
+  /**
+   * Return <code>true</code> iff query evaluation must be stable. Stable query evaluation requires
+   * that the same query executed against the same commit point will produce the same solutions in
+   * the same order. This constraint requires that (a) query execution does not use any parallelism;
+   * and (b) all {@link IStepTask} are determinate. Stable queries may be useful when using an
+   * {@link ISlice} to page through a solution set.
+   *
+   * @return <code>true</code> if query evaluation must be stable.
+   */
+  public boolean isStable();
 }

@@ -18,31 +18,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.fts;
 
 /**
- * Exception signalizing problems while executing fulltext search against
- * an external index. Problems that might occur are, for instance, problems
- * connecting the endpoint, misconfiguration via the {@link FTS} magic
- * vocabulary, etc.
- * 
+ * Exception signalizing problems while executing fulltext search against an external index.
+ * Problems that might occur are, for instance, problems connecting the endpoint, misconfiguration
+ * via the {@link FTS} magic vocabulary, etc.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class FulltextSearchException extends RuntimeException {
 
-   private static final long serialVersionUID = 3998203140318128777L;
+  private static final long serialVersionUID = 3998203140318128777L;
 
-   public final static String NO_QUERY_SPECIFIED =
-         "Search string not specified or empty";
+  public static final String NO_QUERY_SPECIFIED = "Search string not specified or empty";
 
-   public final static String NO_ENDPOINT_SPECIFIED = 
-         "Endpoint not specified or empty";
-   
-   public final static String SERVICE_VARIABLE_UNBOUND = 
-         "Service magic variable unbound at runtime";
+  public static final String NO_ENDPOINT_SPECIFIED = "Endpoint not specified or empty";
 
-   public final static String TYPE_CAST_EXCEPTION = 
-         "Casting of result to URI failed";
+  public static final String SERVICE_VARIABLE_UNBOUND = "Service magic variable unbound at runtime";
 
-   public FulltextSearchException(String s) {
-      super(s);
-   }
+  public static final String TYPE_CAST_EXCEPTION = "Casting of result to URI failed";
+
+  public FulltextSearchException(String s) {
+    super(s);
+  }
 }

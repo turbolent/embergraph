@@ -23,11 +23,8 @@ package org.embergraph.search;
 
 /**
  * Interface for an entry in the full text search index.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface ITermDocRecord<V extends Comparable<V>> extends
-        ITermDocKey<V>, ITermDocVal {
-
-}
+public interface ITermDocRecord<V extends Comparable<V>> extends ITermDocKey<V>, ITermDocVal {}

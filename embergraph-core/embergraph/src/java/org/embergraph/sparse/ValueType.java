@@ -23,322 +23,290 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.SerializerUtil;
 
 /**
- * A type safe enumeration of value types. This class also supports encoding
- * and decoding of instances of the enumerated value types and is used for
- * encoding and decoding of column values.
+ * A type safe enumeration of value types. This class also supports encoding and decoding of
+ * instances of the enumerated value types and is used for encoding and decoding of column values.
  */
 public enum ValueType {
 
-    /**
-     * A 32-bit integer.
-     */
-    Integer(1),
-    /**
-     * A 64-bit integer.
-     */
-    Long(2),
-    /**
-     * A single precision floating point value.
-     */
-    Float(3),
-    /**
-     * A double precision floating point value.
-     */
-    Double(4),
-    /**
-     * A Unicode string.
-     */
-    Unicode(5),
-    /**
-     * A date is serialized as a long integer.
-     */
-    Date(6),
-    /**
-     * An uninterpreted byte array.
-     */
-    ByteArray(7),
-    /**
-     * A 32-bit auto-incremental counter.
-     * 
-     * @see AutoIncIntegerCounter
-     */
-    AutoIncInteger(8),
-    /**
-     * A 64-bit auto-incremental counter.
-     * 
-     * @see AutoIncLongCounter
-     */
-    AutoIncLong(9),
-    /**
-     * A Java object that will be serialized using its {@link Serializable} or
-     * {@link Externalizable} interface.
-     */
-    Serializable(10)
-    ;
-    
-    private final int code;
+  /** A 32-bit integer. */
+  Integer(1),
+  /** A 64-bit integer. */
+  Long(2),
+  /** A single precision floating point value. */
+  Float(3),
+  /** A double precision floating point value. */
+  Double(4),
+  /** A Unicode string. */
+  Unicode(5),
+  /** A date is serialized as a long integer. */
+  Date(6),
+  /** An uninterpreted byte array. */
+  ByteArray(7),
+  /**
+   * A 32-bit auto-incremental counter.
+   *
+   * @see AutoIncIntegerCounter
+   */
+  AutoIncInteger(8),
+  /**
+   * A 64-bit auto-incremental counter.
+   *
+   * @see AutoIncLongCounter
+   */
+  AutoIncLong(9),
+  /**
+   * A Java object that will be serialized using its {@link Serializable} or {@link Externalizable}
+   * interface.
+   */
+  Serializable(10);
 
-    ValueType(int code) {
+  private final int code;
 
-        this.code = code;
-        
+  ValueType(int code) {
+
+    this.code = code;
+  }
+
+  /**
+   * An integer that identifies the type safe enumeration value.
+   *
+   * @return
+   */
+  public int intValue() {
+
+    return code;
+  }
+
+  public static ValueType valueOf(int code) {
+
+    switch (code) {
+      case 1:
+        return Integer;
+      case 2:
+        return Long;
+      case 3:
+        return Float;
+      case 4:
+        return Double;
+      case 5:
+        return Unicode;
+      case 6:
+        return Date;
+      case 7:
+        return ByteArray;
+      case 8:
+        return AutoIncInteger;
+      case 9:
+        return AutoIncLong;
+      case 10:
+        return Serializable;
+      default:
+        throw new IllegalArgumentException("Unknown code: " + code);
     }
+  }
 
-    /**
-     * An integer that identifies the type safe enumeration value.
-     * 
-     * @return
-     */
-    public int intValue() {
-        
-        return code;
-        
-    }
+  /** The encoding used to serialize Unicode data. */
+  private static final String UTF8 = "UTF-8";
 
-    public static ValueType valueOf(int code) {
-        
-        switch(code) {
-        case 1: return Integer;
-        case 2: return Long;
-        case 3: return Float;
-        case 4: return Double;
-        case 5: return Unicode;
-        case 6: return Date;
-        case 7: return ByteArray;
-        case 8: return AutoIncInteger;
-        case 9: return AutoIncLong;
-        case 10: return Serializable;
-        default:
-            throw new IllegalArgumentException("Unknown code: "+code);
-        }
-        
-    }
-    
-    /**
-     * The encoding used to serialize Unicode data.
-     */
-    private static final String UTF8 = "UTF-8";
-    
-    /**
-     * Thread local buffer.
-     */
-    private static ThreadLocal buf = new ThreadLocal() {
-        
+  /** Thread local buffer. */
+  private static ThreadLocal buf =
+      new ThreadLocal() {
+
         protected synchronized Object initialValue() {
-        
-            return new DataOutputBuffer();
-            
+
+          return new DataOutputBuffer();
         }
-        
-    };
+      };
 
-    /**
-     * Return a {@link ThreadLocal} buffer that is used to serialize values.
-     */
-    public static DataOutputBuffer getBuffer() {
+  /** Return a {@link ThreadLocal} buffer that is used to serialize values. */
+  public static DataOutputBuffer getBuffer() {
 
-        return (DataOutputBuffer)buf.get();
-        
-    }
+    return (DataOutputBuffer) buf.get();
+  }
 
-    /**
-     * Encode an object that is an instance of a supported class.
-     * 
-     * @param v
-     *            The value.
-     * 
-     * @return The serialized byte[] encoding that value -or- null iff the
-     *         value is null.
-     * 
-     * @exception UnsupportedOperationException
-     *                if the value is not an instance of a supported class.
-     */
-    public static byte[] encode(Object v) {
+  /**
+   * Encode an object that is an instance of a supported class.
+   *
+   * @param v The value.
+   * @return The serialized byte[] encoding that value -or- null iff the value is null.
+   * @exception UnsupportedOperationException if the value is not an instance of a supported class.
+   */
+  public static byte[] encode(Object v) {
 
-        try {
+    try {
 
-            if (v == null) {
+      if (v == null) {
 
-                /*
-                 * A null will be interpreted as a deletion request for a
-                 * column value on insert / update.
-                 */
-                return null;
+        /*
+         * A null will be interpreted as a deletion request for a
+         * column value on insert / update.
+         */
+        return null;
+      }
 
-            }
+      DataOutputBuffer buf = getBuffer();
 
-            DataOutputBuffer buf = getBuffer();
-            
-            buf.reset();
+      buf.reset();
 
-            if (v instanceof byte[]) {
+      if (v instanceof byte[]) {
 
-                buf.writeByte(ValueType.ByteArray.intValue());
+        buf.writeByte(ValueType.ByteArray.intValue());
 
-                // @todo constrain max byte[] length?
-                byte[] bytes = (byte[])v;
-                
-                buf.packLong(bytes.length);
-                
-                buf.write(bytes);
-                
-            } else if (v instanceof Number) {
+        // @todo constrain max byte[] length?
+        byte[] bytes = (byte[]) v;
 
-                if (v instanceof Integer) {
+        buf.packLong(bytes.length);
 
-                    buf.writeByte(ValueType.Integer.intValue());
+        buf.write(bytes);
 
-                    buf.writeInt(((Number) v).intValue());
+      } else if (v instanceof Number) {
 
-                } else if (v instanceof Long) {
+        if (v instanceof Integer) {
 
-                    buf.writeByte(ValueType.Long.intValue());
+          buf.writeByte(ValueType.Integer.intValue());
 
-                    buf.writeLong(((Number) v).longValue());
-                    
-                } else if (v instanceof Float) {
+          buf.writeInt(((Number) v).intValue());
 
-                    buf.writeByte(ValueType.Float.intValue());
+        } else if (v instanceof Long) {
 
-                    buf.writeFloat(((Number) v).floatValue());
-                    
-                } else if (v instanceof Double) {
+          buf.writeByte(ValueType.Long.intValue());
 
-                    buf.writeByte(ValueType.Double.intValue());
+          buf.writeLong(((Number) v).longValue());
 
-                    buf.writeDouble(((Number) v).doubleValue());
-                    
-                } else {
-                    
-                    throw new UnsupportedOperationException();
-                    
-                }
-                
-            } else if (v instanceof Date) {
+        } else if (v instanceof Float) {
 
-                buf.writeByte(ValueType.Date.intValue());
+          buf.writeByte(ValueType.Float.intValue());
 
-                buf.writeLong(((Date)v).getTime());
-                
-            } else if (v instanceof String) {
+          buf.writeFloat(((Number) v).floatValue());
 
-                buf.writeByte(ValueType.Unicode.intValue());
-                
-                // @todo constrain max byte[] length?
-                byte[] bytes = ((String)v).getBytes(UTF8);
-                
-                buf.packLong( bytes.length );
-                
-                buf.write( bytes );
-                
-            } else if( v instanceof AutoIncIntegerCounter ){
+        } else if (v instanceof Double) {
 
-                buf.writeByte(ValueType.AutoIncInteger.intValue());
-                
-            } else if( v instanceof AutoIncLongCounter ){
+          buf.writeByte(ValueType.Double.intValue());
 
-                buf.writeByte(ValueType.AutoIncLong.intValue());
-                
-            } else if( v instanceof Serializable) {
-                
-                buf.writeByte(ValueType.Serializable.intValue());
+          buf.writeDouble(((Number) v).doubleValue());
 
-                final byte[] bytes = SerializerUtil.serialize(v); 
-                
-                buf.packLong( bytes.length );
+        } else {
 
-                buf.write( bytes );
-                
-            } else {
-                
-                throw new UnsupportedOperationException();
-
-            }
-            
-            return buf.toByteArray();
-            
-        } catch (IOException ex) {
-
-            throw new RuntimeException(ex);
-
+          throw new UnsupportedOperationException();
         }
-        
+
+      } else if (v instanceof Date) {
+
+        buf.writeByte(ValueType.Date.intValue());
+
+        buf.writeLong(((Date) v).getTime());
+
+      } else if (v instanceof String) {
+
+        buf.writeByte(ValueType.Unicode.intValue());
+
+        // @todo constrain max byte[] length?
+        byte[] bytes = ((String) v).getBytes(UTF8);
+
+        buf.packLong(bytes.length);
+
+        buf.write(bytes);
+
+      } else if (v instanceof AutoIncIntegerCounter) {
+
+        buf.writeByte(ValueType.AutoIncInteger.intValue());
+
+      } else if (v instanceof AutoIncLongCounter) {
+
+        buf.writeByte(ValueType.AutoIncLong.intValue());
+
+      } else if (v instanceof Serializable) {
+
+        buf.writeByte(ValueType.Serializable.intValue());
+
+        final byte[] bytes = SerializerUtil.serialize(v);
+
+        buf.packLong(bytes.length);
+
+        buf.write(bytes);
+
+      } else {
+
+        throw new UnsupportedOperationException();
+      }
+
+      return buf.toByteArray();
+
+    } catch (IOException ex) {
+
+      throw new RuntimeException(ex);
     }
+  }
 
-    /**
-     * 
-     * @param v
-     * @return
-     */
-    public static Object decode(final byte[] v) {
+  /**
+   * @param v
+   * @return
+   */
+  public static Object decode(final byte[] v) {
 
-        if (v == null)
-            return null;
+    if (v == null) return null;
 
-        if (v.length == 0)
-            throw new IllegalArgumentException("Zero length byte[]");
+    if (v.length == 0) throw new IllegalArgumentException("Zero length byte[]");
 
-        final DataInputBuffer buf = new DataInputBuffer(v, 0, v.length);
+    final DataInputBuffer buf = new DataInputBuffer(v, 0, v.length);
 
-        try {
-            
-            final ValueType type = ValueType.valueOf((int) buf.readByte());
+    try {
 
-            switch (type) {
+      final ValueType type = ValueType.valueOf((int) buf.readByte());
 
-            case Integer:
-                return buf.readInt();
-            case Long:
-                return buf.readLong();
-            case Float:
-                return buf.readFloat();
-            case Double:
-                return buf.readDouble();
-            case Unicode: {
-                final int len = (int)buf.unpackLong();
-                final byte[] bytes = new byte[len];
-                buf.readFully(bytes);
-                String s = new String(bytes,UTF8);
-                return s;
-            }
-            case Date:
-                return new java.util.Date(buf.readLong());
-            case ByteArray: {
-                final int len = (int)buf.unpackLong();
-                final byte[] bytes = new byte[len];
-                buf.readFully(bytes);
-                return bytes;
-            }
-            case AutoIncInteger: {
-                return AutoIncIntegerCounter.INSTANCE;
-            }
-            case AutoIncLong: {
-                return AutoIncLongCounter.INSTANCE;
-            }
-            case Serializable: {
-                final int len = (int)buf.unpackLong();
-                final byte[] bytes = new byte[len];
-                buf.readFully(bytes);
-                return SerializerUtil.deserialize(bytes);
-            }
-            default:
+      switch (type) {
+        case Integer:
+          return buf.readInt();
+        case Long:
+          return buf.readLong();
+        case Float:
+          return buf.readFloat();
+        case Double:
+          return buf.readDouble();
+        case Unicode:
+          {
+            final int len = (int) buf.unpackLong();
+            final byte[] bytes = new byte[len];
+            buf.readFully(bytes);
+            String s = new String(bytes, UTF8);
+            return s;
+          }
+        case Date:
+          return new java.util.Date(buf.readLong());
+        case ByteArray:
+          {
+            final int len = (int) buf.unpackLong();
+            final byte[] bytes = new byte[len];
+            buf.readFully(bytes);
+            return bytes;
+          }
+        case AutoIncInteger:
+          {
+            return AutoIncIntegerCounter.INSTANCE;
+          }
+        case AutoIncLong:
+          {
+            return AutoIncLongCounter.INSTANCE;
+          }
+        case Serializable:
+          {
+            final int len = (int) buf.unpackLong();
+            final byte[] bytes = new byte[len];
+            buf.readFully(bytes);
+            return SerializerUtil.deserialize(bytes);
+          }
+        default:
+          throw new AssertionError("type=" + type);
+      }
 
-                throw new AssertionError("type="+type);
+    } catch (IOException ex) {
 
-            }
-
-        } catch (IOException ex) {
-
-            throw new RuntimeException(ex);
-
-        }
-        
+      throw new RuntimeException(ex);
     }
-    
+  }
 }

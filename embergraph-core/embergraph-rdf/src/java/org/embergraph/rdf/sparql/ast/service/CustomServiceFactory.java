@@ -27,32 +27,25 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Interface for custom services.
- * 
- * @see <a
- *      href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
- *      Federated Query and Custom Services</a>
- * 
+ *
+ * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
+ *     Federated Query and Custom Services</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface CustomServiceFactory extends ServiceFactory {
 
-    /**
-     * Callback is used to notify the {@link ServiceFactory} of connection
-     * starts. If the service wishes to be notified of updates, then it must
-     * return a {@link IChangeLog} implementation here. The listener will be
-     * obtained when the {@link ServiceFactory} is registered.
-     * <p>
-     * Note: This is not invoked unless you are using a
-     * {@link EmbergraphSailConnection}. Updates that are made directly using an
-     * {@link AbstractTripleStore} are not visible to the service.
-     * 
-     * @return The {@link IChangeLog} listener -or- <code>null</code> if the
-     *         service does not want to observe changes.
-     * 
-     *         FIXME Re-think the notification mechanism. Services should see
-     *         ALL updates, not just those made using the
-     *         {@link EmbergraphSailConnection}.
-     */
-    void startConnection(EmbergraphSailConnection conn);
-
+  /**
+   * Callback is used to notify the {@link ServiceFactory} of connection starts. If the service
+   * wishes to be notified of updates, then it must return a {@link IChangeLog} implementation here.
+   * The listener will be obtained when the {@link ServiceFactory} is registered.
+   *
+   * <p>Note: This is not invoked unless you are using a {@link EmbergraphSailConnection}. Updates
+   * that are made directly using an {@link AbstractTripleStore} are not visible to the service.
+   *
+   * @return The {@link IChangeLog} listener -or- <code>null</code> if the service does not want to
+   *     observe changes.
+   *     <p>FIXME Re-think the notification mechanism. Services should see ALL updates, not just
+   *     those made using the {@link EmbergraphSailConnection}.
+   */
+  void startConnection(EmbergraphSailConnection conn);
 }

@@ -22,43 +22,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * The DROP ENTAILMENTS operation removes all entailments from the Graph Store.
- * 
+ *
  * <pre>
  * DROP ENTAILMENTS
  * </pre>
- * 
+ *
  * @see wiki:DROP_ENTAILMENTS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DropEntailments extends GraphUpdate {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1170605083868090964L;
-    
-    public DropEntailments() {
-        super(UpdateType.DropEntailments);
-    }
+  /** */
+  private static final long serialVersionUID = -1170605083868090964L;
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public DropEntailments(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-    }
-    
-    public String toString(final int indent) {
-    	return getClass().getSimpleName();
-    }
+  public DropEntailments() {
+    super(UpdateType.DropEntailments);
+  }
 
+  /**
+   * @param args
+   * @param anns
+   */
+  public DropEntailments(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  public String toString(final int indent) {
+    return getClass().getSimpleName();
+  }
 }

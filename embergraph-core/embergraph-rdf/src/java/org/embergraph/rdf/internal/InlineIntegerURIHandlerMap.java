@@ -22,165 +22,151 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * Utility to provide a map of multiple inline URI handlers for a single
- * namespace.  This is used in conjunction with the {@link InlineLocalNameIntegerURIHandler}. 
- * 
- * Currently, up to 32 different URI handlers are supported for a given namespace.
- * 
- * For an example, see {@see org.embergraph.vocabulary.pubchem.PubChemInlineURIFactory}.
- * 
- * @author beebs
+ * Utility to provide a map of multiple inline URI handlers for a single namespace. This is used in
+ * conjunction with the {@link InlineLocalNameIntegerURIHandler}.
  *
+ * <p>Currently, up to 32 different URI handlers are supported for a given namespace.
+ *
+ * <p>For an example, see {@see org.embergraph.vocabulary.pubchem.PubChemInlineURIFactory}.
+ *
+ * @author beebs
  */
 public class InlineIntegerURIHandlerMap extends InlineLocalNameIntegerURIHandler {
-	
-	private static final Logger log = Logger.getLogger(InlineIntegerURIHandlerMap.class);
-	
-	//Precompile Pattern to pick out the prefix and/or suffix around an integer
-	public static final Pattern descriptorPattern = Pattern.compile("(.*[a-zA-Z])\\d+(_.*)");
 
-	//Map of IDs to Handlers
-	private HashMap<Integer,InlineURIHandler> hMap = new HashMap<Integer,InlineURIHandler>();
-	
-	//Treemap of Namespaces and URIs
-	private final TreeMap<String, InlineURIHandler> handlersByLocalName = new TreeMap<String, InlineURIHandler>();
+  private static final Logger log = Logger.getLogger(InlineIntegerURIHandlerMap.class);
 
-	
-	public InlineIntegerURIHandlerMap(final String namespace) {
-		super(namespace);
-	}
-	
-	public void addHandlerForNS(final int id, final InlineURIHandler handler) {
-		
-		assert(handler != null);
-		
-		final Integer key = new Integer(id);
-		
-		final InlineURIHandler h = hMap.get(key);
-		
-		if(h != null) {
-			log.warn("Handler " + h.getClass().getName()
-					+ " already registered for id: " + id
-					+ ".  Overriding with a new value.");
-		}
-		
-		hMap.put(key,handler);
-		
-		handlersByLocalName.put(getKeyForHandler(handler), handler);
-		
-	}
+  // Precompile Pattern to pick out the prefix and/or suffix around an integer
+  public static final Pattern descriptorPattern = Pattern.compile("(.*[a-zA-Z])\\d+(_.*)");
 
-	 /**
-     * Unpack the inline value into the localName portion of the uri.
-     * 
-     * unpack the ID encoded in the value and select the correct handler to use.
-     * 
-     */
-	public String getLocalNameFromDelegate(final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
-		
-		final String str = delegate.getInlineValue().toString();
+  // Map of IDs to Handlers
+  private HashMap<Integer, InlineURIHandler> hMap = new HashMap<Integer, InlineURIHandler>();
 
-		final Integer key = new Integer(unpackId(str));
-		
-		if(!hMap.containsKey(key)) {
-			
-			throw new RuntimeException(key + " decoded from " + str + " for "
-					+ getNamespace() + " is not registered.");
-			
-		}
-		
-		final InlineURIHandler h = hMap.get(key);
+  // Treemap of Namespaces and URIs
+  private final TreeMap<String, InlineURIHandler> handlersByLocalName =
+      new TreeMap<String, InlineURIHandler>();
 
-    	return h.getLocalNameFromDelegate(delegate);
-    	
+  public InlineIntegerURIHandlerMap(final String namespace) {
+    super(namespace);
+  }
+
+  public void addHandlerForNS(final int id, final InlineURIHandler handler) {
+
+    assert (handler != null);
+
+    final Integer key = new Integer(id);
+
+    final InlineURIHandler h = hMap.get(key);
+
+    if (h != null) {
+      log.warn(
+          "Handler "
+              + h.getClass().getName()
+              + " already registered for id: "
+              + id
+              + ".  Overriding with a new value.");
     }
 
-	/**
-	 * Select the best Integer Handler.  Uses the same logic as {@link InlineURIFactory}.
-	 * 
-	 */
-	@SuppressWarnings("rawtypes")
-	@Override
-	protected AbstractLiteralIV createInlineIV(final String localName) {
+    hMap.put(key, handler);
 
-			Matcher m = descriptorPattern.matcher(localName);
-			
-			String str = "";
-			
-			if(m.matches()) {
-			
-				if(m.end()>1) { //Prefix AND Suffix
+    handlersByLocalName.put(getKeyForHandler(handler), handler);
+  }
 
-					str+=m.group(1) + m.group(2);
+  /**
+   * Unpack the inline value into the localName portion of the uri.
+   *
+   * <p>unpack the ID encoded in the value and select the correct handler to use.
+   */
+  public String getLocalNameFromDelegate(final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
-				} else if(m.end(1) > 0) { //Prefix OR Suffix
+    final String str = delegate.getInlineValue().toString();
 
-					str+=m.group(1);
+    final Integer key = new Integer(unpackId(str));
 
-				} else {
-					log.warn("No localname match found for " + localName);
-				}
-			} 
-			
-			// Find handler with longest prefix match LTE the given URI.
-			final Map.Entry<String, InlineURIHandler> floorEntry = handlersByLocalName.floorEntry(str);
+    if (!hMap.containsKey(key)) {
 
-			if (floorEntry == null) {
+      throw new RuntimeException(
+          key + " decoded from " + str + " for " + getNamespace() + " is not registered.");
+    }
 
-	    		// No potentially suitable handler.
-	    		return null;
-	 
-			}
+    final InlineURIHandler h = hMap.get(key);
 
-			final String prefix = floorEntry.getKey();
-			
-			/*
-			 * Note: the floorEntry is NOT guaranteed to be a prefix. It can also be
-			 * strictly LT the probe key. Therefore we must additionally verify here
-			 * that the prefix under which the URI handler was registered is a
-			 * prefix of the URI before invoking that handler.
-			 */
-			if (str.startsWith(prefix)) {
+    return h.getLocalNameFromDelegate(delegate);
+  }
 
-				final InlineURIHandler handler = floorEntry.getValue();
+  /** Select the best Integer Handler. Uses the same logic as {@link InlineURIFactory}. */
+  @SuppressWarnings("rawtypes")
+  @Override
+  protected AbstractLiteralIV createInlineIV(final String localName) {
 
-				final AbstractLiteralIV iv = handler.createInlineIV(localName);
+    Matcher m = descriptorPattern.matcher(localName);
 
-				if (iv != null) {
+    String str = "";
 
-					return iv;
+    if (m.matches()) {
 
-				}
+      if (m.end() > 1) { // Prefix AND Suffix
 
-			}
+        str += m.group(1) + m.group(2);
 
-			return null;
-			
-			
-	}
-	
-	private String getKeyForHandler(final InlineURIHandler handler) {
-		
-		//TODO: This only handles prefixes, suffixes and combinations.
-		String key = "";
-		
-		if(handler instanceof IPrefixedURIHandler) {
-			key += ((IPrefixedURIHandler)handler).getPrefix();
-		}
-		
-		if(handler instanceof ISuffixedURIHandler) {
-			key += ((ISuffixedURIHandler)handler).getSuffix();
-		}
-		
-		return key;
-		
-	}
+      } else if (m.end(1) > 0) { // Prefix OR Suffix
 
+        str += m.group(1);
+
+      } else {
+        log.warn("No localname match found for " + localName);
+      }
+    }
+
+    // Find handler with longest prefix match LTE the given URI.
+    final Map.Entry<String, InlineURIHandler> floorEntry = handlersByLocalName.floorEntry(str);
+
+    if (floorEntry == null) {
+
+      // No potentially suitable handler.
+      return null;
+    }
+
+    final String prefix = floorEntry.getKey();
+
+    /*
+     * Note: the floorEntry is NOT guaranteed to be a prefix. It can also be
+     * strictly LT the probe key. Therefore we must additionally verify here
+     * that the prefix under which the URI handler was registered is a
+     * prefix of the URI before invoking that handler.
+     */
+    if (str.startsWith(prefix)) {
+
+      final InlineURIHandler handler = floorEntry.getValue();
+
+      final AbstractLiteralIV iv = handler.createInlineIV(localName);
+
+      if (iv != null) {
+
+        return iv;
+      }
+    }
+
+    return null;
+  }
+
+  private String getKeyForHandler(final InlineURIHandler handler) {
+
+    // TODO: This only handles prefixes, suffixes and combinations.
+    String key = "";
+
+    if (handler instanceof IPrefixedURIHandler) {
+      key += ((IPrefixedURIHandler) handler).getPrefix();
+    }
+
+    if (handler instanceof ISuffixedURIHandler) {
+      key += ((ISuffixedURIHandler) handler).getSuffix();
+    }
+
+    return key;
+  }
 }

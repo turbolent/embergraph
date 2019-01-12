@@ -23,61 +23,48 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
 import java.io.StringWriter;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link XMLBuilder}.
- * 
+ *
  * @author martyncutcher
  * @version $Id$
  */
 public class TestXMLBuilder extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestXMLBuilder() {
+  /** */
+  public TestXMLBuilder() {}
 
-    }
+  /** @param name */
+  public TestXMLBuilder(String name) {
 
-    /**
-     * @param name
-     */
-    public TestXMLBuilder(String name) {
+    super(name);
+  }
 
-        super(name);
-        
-    }
+  /** @todo This does not actually test anything. You have to inspect the output. */
+  public void testXMLBuilder() throws IOException {
 
-    /**
-     * @todo This does not actually test anything. You have to inspect the
-     *       output.
-     */
-    public void testXMLBuilder() throws IOException {
+    final StringWriter w = new StringWriter();
 
-    	final StringWriter w = new StringWriter();
-    	
-        final XMLBuilder xml = new XMLBuilder(w);
-        
-        XMLBuilder.Node close = xml.root("data")
+    final XMLBuilder xml = new XMLBuilder(w);
+
+    XMLBuilder.Node close =
+        xml.root("data")
             .attr("id", "TheRoot")
             .attr("name", "Test")
             .node("child", "My Child")
             .node("child")
-                .attr("name", "My Child")
-                .close()
+            .attr("name", "My Child")
+            .close()
             .node("child")
-                .attr("name", "My Child")
-                .text("Content")
-                .close()
+            .attr("name", "My Child")
+            .text("Content")
+            .close()
             .close();
-        
-        assertTrue(close == null);
-        
-        if(log.isInfoEnabled())
-            log.info(w.toString());
 
-    }
+    assertTrue(close == null);
 
+    if (log.isInfoEnabled()) log.info(w.toString());
+  }
 }

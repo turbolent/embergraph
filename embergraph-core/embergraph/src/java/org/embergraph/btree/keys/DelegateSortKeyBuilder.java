@@ -24,47 +24,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.keys;
 
 /**
- * Delegation pattern for {@link ISortKeyBuilder} that is useful when you need
- * to {@link #resolve(Object)} one type to another before applying the delegate
- * to generate the sort key.
- * 
+ * Delegation pattern for {@link ISortKeyBuilder} that is useful when you need to {@link
+ * #resolve(Object)} one type to another before applying the delegate to generate the sort key.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the object to which this builder will be
- *            applied.
- * @param <F>
- *            The generic type of the object whose sort keys the delegate can
- *            generate.
+ * @param <E> The generic type of the object to which this builder will be applied.
+ * @param <F> The generic type of the object whose sort keys the delegate can generate.
  */
-abstract public class DelegateSortKeyBuilder<E, F> implements
-        ISortKeyBuilder<E> {
+public abstract class DelegateSortKeyBuilder<E, F> implements ISortKeyBuilder<E> {
 
-    private final ISortKeyBuilder<F> delegate;
+  private final ISortKeyBuilder<F> delegate;
 
-    public DelegateSortKeyBuilder(final ISortKeyBuilder<F> delegate) {
+  public DelegateSortKeyBuilder(final ISortKeyBuilder<F> delegate) {
 
-        if (delegate == null)
-            throw new IllegalArgumentException();
+    if (delegate == null) throw new IllegalArgumentException();
 
-        this.delegate = delegate;
+    this.delegate = delegate;
+  }
 
-    }
+  /**
+   * Resolve one generic type to another.
+   *
+   * @param e An element.
+   * @return The resolved element.
+   */
+  protected abstract F resolve(E e);
 
-    /**
-     * Resolve one generic type to another.
-     * 
-     * @param e
-     *            An element.
-     *            
-     * @return The resolved element.
-     */
-    abstract protected F resolve(E e);
+  public byte[] getSortKey(E e) {
 
-    public byte[] getSortKey(E e) {
-
-        return delegate.getSortKey(resolve(e));
-
-    }
-
+    return delegate.getSortKey(resolve(e));
+  }
 }

@@ -1,20 +1,18 @@
 /**
+ * Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved. Copyright (C) Embergraph
+ * contributors 2019. All rights reserved.
  *
- * Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
- * Copyright (C) Embergraph contributors 2019. All rights reserved.
+ * <p>This program is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation; version 2 of the
+ * License.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 2 of the License.
+ * <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * <p>You should have received a copy of the GNU General Public License along with this program; if
+ * not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ * 02111-1307 USA
  */
 package org.embergraph.bop.solutions;
 
@@ -30,29 +28,24 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    public TestAll() {
-    }
+  public TestAll() {}
 
-    public TestAll(String name) {
-        super(name);
-    }
+  public TestAll(String name) {
+    super(name);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("BOp solutions");
+
+    /*
+     * Data driven tests.
      */
-    public static Test suite() {
 
-        final TestSuite suite = new TestSuite("BOp solutions");
+    // Aggregation.
+    suite.addTestSuite(TestGroupByOp.class);
 
-        /*
-         * Data driven tests.
-         */
-
-        // Aggregation.
-        suite.addTestSuite(TestGroupByOp.class);
-
-        return suite;
-
-    } // suite()
+    return suite;
+  } // suite()
 } // class TestAll

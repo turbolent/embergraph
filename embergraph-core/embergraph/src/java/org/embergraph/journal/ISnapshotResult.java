@@ -21,28 +21,21 @@ import java.io.File;
 
 /**
  * Interface for the outcome of a snapshot task.,
- * 
+ *
  * @author bryan
- * 
- * @see <a href="http://trac.bigdata.com/ticket/1172"> Online backup for Journal
- *      </a>
+ * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
  */
 public interface ISnapshotResult {
 
-   /**
-    * The current root block for the snapshot. The snapshot will be consistent
-    * as of the commit point associated with this root block.
-    */
-   IRootBlockView getRootBlock();
+  /**
+   * The current root block for the snapshot. The snapshot will be consistent as of the commit point
+   * associated with this root block.
+   */
+  IRootBlockView getRootBlock();
 
-   /**
-    * The file on which the snapshot was written.
-    */
-   File getFile();
+  /** The file on which the snapshot was written. */
+  File getFile();
 
-   /**
-    * <code>true</code> iff the snapshot was compressed.
-    */
-   boolean getCompressed();
-   
+  /** <code>true</code> iff the snapshot was compressed. */
+  boolean getCompressed();
 }

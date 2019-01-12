@@ -1,11 +1,14 @@
 package alex;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -22,139 +25,130 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import org.embergraph.rdf.model.EmbergraphStatement;
-import org.embergraph.rdf.sail.EmbergraphSail;
-import org.embergraph.rdf.sail.EmbergraphSailRepository;
-
-/**
-* @author Alexander De Leon
-*/
+/** @author Alexander De Leon */
 public class LoadPdb {
 
-	private static final Logger LOG = Logger.getLogger(LoadPdb.class);
+  private static final Logger LOG = Logger.getLogger(LoadPdb.class);
 
-	public static void main(String[] args) throws Exception {
-		File file = new File("tmp-1Y26.jnl");
+  public static void main(String[] args) throws Exception {
+    File file = new File("tmp-1Y26.jnl");
 
-		Properties properties = new Properties();
-		properties.setProperty(EmbergraphSail.Options.FILE, file.getAbsolutePath());
+    Properties properties = new Properties();
+    properties.setProperty(EmbergraphSail.Options.FILE, file.getAbsolutePath());
 
-		EmbergraphSail sail = new EmbergraphSail(properties);
-		Repository repo = new EmbergraphSailRepository(sail);
-		repo.initialize();
+    EmbergraphSail sail = new EmbergraphSail(properties);
+    Repository repo = new EmbergraphSailRepository(sail);
+    repo.initialize();
 
-        if(false) {
-        sail.getDatabase().getDataLoader().loadData(
-                "contrib/src/problems/alex/1Y26.rdf",
-                new File("contrib/src/problems/alex/1Y26.rdf").toURI()
-                        .toString(), RDFFormat.RDFXML);
-        sail.getDatabase().commit();
-        }
-        
-//		loadSomeDataFromADocument(repo, "contrib/src/problems/alex/1Y26.rdf");
-		// readSomeData(repo);
-		executeSelectQuery(repo, "SELECT * WHERE { ?s ?p ?o }");
-	}
+    if (false) {
+      sail.getDatabase()
+          .getDataLoader()
+          .loadData(
+              "contrib/src/problems/alex/1Y26.rdf",
+              new File("contrib/src/problems/alex/1Y26.rdf").toURI().toString(),
+              RDFFormat.RDFXML);
+      sail.getDatabase().commit();
+    }
 
-    
-	public static void loadSomeDataFromADocument(Repository repo, String documentPath) throws Exception {
-		int counter = 0;
-		File file = new File(documentPath);
-		StatementCollector collector = new StatementCollector();
-		InputStream in = new FileInputStream(file);
-		try {
-            final RDFParser parser = RDFParserRegistry.getInstance()
-                    .get(RDFFormat.RDFXML).getParser();
-			parser.setRDFHandler(collector);
-			parser.parse(in, file.toURI().toString());
-		} finally {
-			in.close();
-		}
+    //		loadSomeDataFromADocument(repo, "contrib/src/problems/alex/1Y26.rdf");
+    // readSomeData(repo);
+    executeSelectQuery(repo, "SELECT * WHERE { ?s ?p ?o }");
+  }
 
-		RepositoryConnection cxn = repo.getConnection();
-		cxn.setAutoCommit(false);
+  public static void loadSomeDataFromADocument(Repository repo, String documentPath)
+      throws Exception {
+    int counter = 0;
+    File file = new File(documentPath);
+    StatementCollector collector = new StatementCollector();
+    InputStream in = new FileInputStream(file);
+    try {
+      final RDFParser parser = RDFParserRegistry.getInstance().get(RDFFormat.RDFXML).getParser();
+      parser.setRDFHandler(collector);
+      parser.parse(in, file.toURI().toString());
+    } finally {
+      in.close();
+    }
 
-		Statement stmt = null;
-		try {
-			for (Iterator<Statement> i = collector.getStatements().iterator(); i.hasNext();) {
-				stmt = i.next();
-				cxn.add(stmt);
-				counter++;
-			}
-			LOG.info("Loaded " + counter + " triples");
-			cxn.commit();
-		} catch (Exception e) {
-			LOG.error("error inserting statement: " + stmt, e);
-			cxn.rollback();
-		} finally {
-			cxn.close();
-		}
+    RepositoryConnection cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
 
-	}
+    Statement stmt = null;
+    try {
+      for (Iterator<Statement> i = collector.getStatements().iterator(); i.hasNext(); ) {
+        stmt = i.next();
+        cxn.add(stmt);
+        counter++;
+      }
+      LOG.info("Loaded " + counter + " triples");
+      cxn.commit();
+    } catch (Exception e) {
+      LOG.error("error inserting statement: " + stmt, e);
+      cxn.rollback();
+    } finally {
+      cxn.close();
+    }
+  }
 
-	public static void readSomeData(Repository repo) throws Exception {
+  public static void readSomeData(Repository repo) throws Exception {
 
-		RepositoryConnection cxn = repo.getConnection();
-		int counter = 0;
-		try {
+    RepositoryConnection cxn = repo.getConnection();
+    int counter = 0;
+    try {
 
-			RepositoryResult<Statement> stmts = cxn.getStatements(null, null, null, true /*
+      RepositoryResult<Statement> stmts = cxn.getStatements(null, null, null, true /*
 																						* include
 																						* inferred
 																						*/);
-			while (stmts.hasNext()) {
-				Statement stmt = stmts.next();
-				Resource s = stmt.getSubject();
-				URI p = stmt.getPredicate();
-				Value o = stmt.getObject();
-				// do something with the statement
-				LOG.info(stmt);
+      while (stmts.hasNext()) {
+        Statement stmt = stmts.next();
+        Resource s = stmt.getSubject();
+        URI p = stmt.getPredicate();
+        Value o = stmt.getObject();
+        // do something with the statement
+        LOG.info(stmt);
 
-				// cast to EmbergraphStatement to get at additional information
-				EmbergraphStatement bdStmt = (EmbergraphStatement) stmt;
-				if (bdStmt.isExplicit()) {
-					// do one thing
-				} else if (bdStmt.isInferred()) {
-					// do another thing
-				} else { // bdStmt.isAxiom()
-					// do something else
-				}
-				LOG.info(bdStmt.getStatementType());
-				counter++;
-			}
+        // cast to EmbergraphStatement to get at additional information
+        EmbergraphStatement bdStmt = (EmbergraphStatement) stmt;
+        if (bdStmt.isExplicit()) {
+          // do one thing
+        } else if (bdStmt.isInferred()) {
+          // do another thing
+        } else { // bdStmt.isAxiom()
+          // do something else
+        }
+        LOG.info(bdStmt.getStatementType());
+        counter++;
+      }
 
-		} finally {
-			// close the repository connection
-			cxn.close();
+    } finally {
+      // close the repository connection
+      cxn.close();
 
-			LOG.info("Number of Triples: " + counter);
-		}
+      LOG.info("Number of Triples: " + counter);
+    }
+  }
 
-	}
+  public static void executeSelectQuery(Repository repo, String query) throws Exception {
 
-	public static void executeSelectQuery(Repository repo, String query) throws Exception {
+    RepositoryConnection cxn = repo.getConnection();
+    int counter = 0;
+    try {
 
-		RepositoryConnection cxn = repo.getConnection();
-		int counter = 0;
-		try {
+      final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+      tupleQuery.setIncludeInferred(true /* includeInferred */);
+      TupleQueryResult result = tupleQuery.evaluate();
+      // do something with the results
+      while (result.hasNext()) {
+        BindingSet bindingSet = result.next();
+        LOG.info(bindingSet);
+        counter++;
+      }
 
-			final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-			tupleQuery.setIncludeInferred(true /* includeInferred */);
-			TupleQueryResult result = tupleQuery.evaluate();
-			// do something with the results
-			while (result.hasNext()) {
-				BindingSet bindingSet = result.next();
-				LOG.info(bindingSet);
-				counter++;
-			}
-
-		} finally {
-			// close the repository connection
-			cxn.close();
-//			LOG.info
-            System.err.println
-            ("Number of results: " + counter);
-		}
-
-	}
+    } finally {
+      // close the repository connection
+      cxn.close();
+      //			LOG.info
+      System.err.println("Number of results: " + counter);
+    }
+  }
 }

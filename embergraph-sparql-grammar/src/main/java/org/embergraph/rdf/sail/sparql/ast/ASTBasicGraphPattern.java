@@ -4,18 +4,16 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTBasicGraphPattern extends SimpleNode {
 
-	public ASTBasicGraphPattern(int id) {
-		super(id);
-	}
+  public ASTBasicGraphPattern(int id) {
+    super(id);
+  }
 
-	public ASTBasicGraphPattern(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTBasicGraphPattern(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 }

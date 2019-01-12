@@ -22,80 +22,72 @@ package org.embergraph.ha;
 
 import cern.colt.Arrays;
 
-
 /**
  * The 2-phase prepare outcome as coordinated by the leader.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PrepareResponse {
 
-    private final int k;
-    private final int nyes;
-    private final boolean willCommit;
-    private final boolean[] votes;
+  private final int k;
+  private final int nyes;
+  private final boolean willCommit;
+  private final boolean[] votes;
 
-    /**
-     * The replication factor for the quorum.
-     */
-    public int replicationFactor() {
-        return k;
-    }
+  /** The replication factor for the quorum. */
+  public int replicationFactor() {
+    return k;
+  }
 
-    /**
-     * Return the #of services that voted "YES".
-     */
-    public int getYesCount() {
-        return nyes;
-    }
+  /** Return the #of services that voted "YES". */
+  public int getYesCount() {
+    return nyes;
+  }
 
-    /**
-     * Return <code>true</code> iff the transaction will commit based on the
-     * responses to the prepare requests.
-     */
-    public boolean willCommit() {
-        return willCommit;
-    }
+  /**
+   * Return <code>true</code> iff the transaction will commit based on the responses to the prepare
+   * requests.
+   */
+  public boolean willCommit() {
+    return willCommit;
+  }
 
-    public boolean getVote(final int index) {
+  public boolean getVote(final int index) {
 
-        return votes[index];
-        
-    }
-    
-    /**
-     * 
-     * @param k
-     *            The replication factor for the quorum.
-     * @param nyes
-     *            The #of YES votes.
-     * @param willCommit
-     *            <code>true</code> iff the transaction will commit based on the
-     *            responses to the prepare requests.
-     */
-    public PrepareResponse(final int k, final int nyes,
-            final boolean willCommit, final boolean[] votes) {
+    return votes[index];
+  }
 
-        if (k < 1)
-            throw new IllegalArgumentException();
+  /**
+   * @param k The replication factor for the quorum.
+   * @param nyes The #of YES votes.
+   * @param willCommit <code>true</code> iff the transaction will commit based on the responses to
+   *     the prepare requests.
+   */
+  public PrepareResponse(
+      final int k, final int nyes, final boolean willCommit, final boolean[] votes) {
 
-        if (nyes > k)
-            throw new IllegalArgumentException();
+    if (k < 1) throw new IllegalArgumentException();
 
-        this.k = k;
-        this.nyes = nyes;
-        this.willCommit = willCommit;
-        this.votes = votes;
-        
-    }
+    if (nyes > k) throw new IllegalArgumentException();
 
-    @Override
-    public String toString() {
-     
-        return super.toString() + "{k=" + k + ", nyes=" + nyes
-                + ", willCommit=" + willCommit + ", votes="
-                + Arrays.toString(votes) + "}";
-        
-    }
+    this.k = k;
+    this.nyes = nyes;
+    this.willCommit = willCommit;
+    this.votes = votes;
+  }
 
+  @Override
+  public String toString() {
+
+    return super.toString()
+        + "{k="
+        + k
+        + ", nyes="
+        + nyes
+        + ", willCommit="
+        + willCommit
+        + ", votes="
+        + Arrays.toString(votes)
+        + "}";
+  }
 }

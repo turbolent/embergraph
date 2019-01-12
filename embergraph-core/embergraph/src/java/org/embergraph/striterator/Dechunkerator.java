@@ -21,95 +21,78 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 import cutthecrap.utils.striterators.Expander;
 import cutthecrap.utils.striterators.ICloseable;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import cutthecrap.utils.striterators.Striterator;
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
- * Wrap an iterator visiting chunks as an iterator visiting the individual
- * elements in each chunk.
- * 
- * @param <E>
- *            The generic type of the elements in the chunks.
- * 
+ * Wrap an iterator visiting chunks as an iterator visiting the individual elements in each chunk.
+ *
+ * @param <E> The generic type of the elements in the chunks.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @see CloseableChunkedIteratorWrapperConverter
  */
 public class Dechunkerator<E> implements ICloseableIterator<E> {
 
-    /**
-     * The iterator given to the constructor.
-     */
-    private final Iterator<E[]> src;
-    
-    /**
-     * The iterator which visits the unchunked elements.
-     */
-    private final Iterator<E> itr;
+  /** The iterator given to the constructor. */
+  private final Iterator<E[]> src;
 
-    /**
-     * Wrap an iterator visiting chunks as an iterator visiting the individual
-     * elements in each chunk.
-     * 
-     * @param src
-     *            An iterator visiting chunks of type <E>
-     */
-    @SuppressWarnings("unchecked")
-    public Dechunkerator(final Iterator<E[]> src) {
+  /** The iterator which visits the unchunked elements. */
+  private final Iterator<E> itr;
 
-        this.src = src;
-        
-        itr = new Striterator(src).addFilter(new Expander() {
+  /**
+   * Wrap an iterator visiting chunks as an iterator visiting the individual elements in each chunk.
+   *
+   * @param src An iterator visiting chunks of type <E>
+   */
+  @SuppressWarnings("unchecked")
+  public Dechunkerator(final Iterator<E[]> src) {
 
-            private static final long serialVersionUID = 1L;
+    this.src = src;
 
-            @Override
-            protected Iterator<E> expand(final Object e) {
-             
-                return Arrays.asList((E[]) e).iterator();
-                
-            }
+    itr =
+        new Striterator(src)
+            .addFilter(
+                new Expander() {
 
-        });
+                  private static final long serialVersionUID = 1L;
 
+                  @Override
+                  protected Iterator<E> expand(final Object e) {
+
+                    return Arrays.asList((E[]) e).iterator();
+                  }
+                });
+  }
+
+  @Override
+  public boolean hasNext() {
+
+    return itr.hasNext();
+  }
+
+  @Override
+  public E next() {
+
+    return itr.next();
+  }
+
+  @Override
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void close() {
+
+    if (src instanceof ICloseable) {
+
+      ((ICloseable) src).close();
     }
-
-    @Override
-    public boolean hasNext() {
-
-        return itr.hasNext();
-        
-    }
-
-    @Override
-    public E next() {
-     
-        return itr.next();
-        
-    }
-
-    @Override
-    public void remove() {
-
-        throw new UnsupportedOperationException();
-
-    }
-
-    @Override
-    public void close() {
-
-        if (src instanceof ICloseable) {
-
-            ((ICloseable) src).close();
-
-        }
-
-    }
-
+  }
 }

@@ -21,11 +21,10 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Interface used to report whether or not a given feature is supported.
- *  
+ *
  * @author bryan
  */
 public interface IFeatureSupported {
 
-    boolean isSupported(final AbstractTripleStore tripleStore);
-    
+  boolean isSupported(final AbstractTripleStore tripleStore);
 }

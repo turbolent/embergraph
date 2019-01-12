@@ -24,73 +24,58 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import java.util.Properties;
-
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 
 /**
  * Client class for {@link AbstractScaleOutFederation}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <T>
- *            The generic type of the client or service.
+ * @param <T> The generic type of the client or service.
  */
 public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
 
-    /**
-     * @param properties
-     */
-    public AbstractScaleOutClient(final Properties properties) {
-        
-        super(properties);
-        
-    }
+  /** @param properties */
+  public AbstractScaleOutClient(final Properties properties) {
+
+    super(properties);
+  }
+
+  /**
+   * Options understood by the {@link AbstractScaleOutClient}.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  public interface Options extends IEmbergraphClient.Options {
 
     /**
-     * Options understood by the {@link AbstractScaleOutClient}.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
+     * Option selects the policy that will be used to cache {@link PartitionLocator}s from an {@link
+     * IMetadataIndex} on the client.
+     *
+     * <p><strong>Warning: This feature is expected to evolve.</strong>
      */
-    public interface Options extends IEmbergraphClient.Options {
-        
-        /**
-         * Option selects the policy that will be used to cache
-         * {@link PartitionLocator}s from an {@link IMetadataIndex} on the
-         * client.
-         * 
-         * <strong>Warning: This feature is expected to evolve.</strong>
-         */
-        String METADATA_INDEX_CACHE_POLICY = IEmbergraphClient.class.getName()
-                + ".metadataIndex.cachePolicy";
+    String METADATA_INDEX_CACHE_POLICY =
+        IEmbergraphClient.class.getName() + ".metadataIndex.cachePolicy";
 
-        String DEFAULT_METADATA_INDEX_CACHE_POLICY = MetadataIndexCachePolicy.CacheAll
-                .toString();
-        
-    }
+    String DEFAULT_METADATA_INDEX_CACHE_POLICY = MetadataIndexCachePolicy.CacheAll.toString();
+  }
 
-    /**
-     * Policy options for caching {@link PartitionLocator}s for an
-     * {@link IMetadataIndex}.
-     * 
-     * <strong>Warning: This feature is expected to evolve.</strong>
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
-     */
-    public static enum MetadataIndexCachePolicy {
-        
-        /**
-         * Cache the entire {@link IMetadataIndex}.
-         */
-        CacheAll,
-        
-        /**
-         * Do not cache anything.
-         */
-        NoCache;
-        
-    }
-    
+  /**
+   * Policy options for caching {@link PartitionLocator}s for an {@link IMetadataIndex}.
+   *
+   * <p><strong>Warning: This feature is expected to evolve.</strong>
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  public static enum MetadataIndexCachePolicy {
+
+    /** Cache the entire {@link IMetadataIndex}. */
+    CacheAll,
+
+    /** Do not cache anything. */
+    NoCache;
+  }
 }

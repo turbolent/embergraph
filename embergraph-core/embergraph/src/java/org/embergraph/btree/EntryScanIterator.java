@@ -23,48 +23,44 @@ package org.embergraph.btree;
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /**
- * Iterator visits index entries (dereferencing visited tuples to the
- * application objects stored within those tuples).
- * 
+ * Iterator visits index entries (dereferencing visited tuples to the application objects stored
+ * within those tuples).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 @SuppressWarnings("rawtypes")
 public final class EntryScanIterator implements ICloseableIterator {
 
-    private final ITupleIterator src;
+  private final ITupleIterator src;
 
-    public EntryScanIterator(final ITupleIterator src) {
+  public EntryScanIterator(final ITupleIterator src) {
 
-        if (src == null)
-            throw new IllegalArgumentException();
+    if (src == null) throw new IllegalArgumentException();
 
-        this.src = src;
+    this.src = src;
+  }
 
-    }
+  @Override
+  public boolean hasNext() {
+    return src.hasNext();
+  }
 
-    @Override
-    public boolean hasNext() {
-        return src.hasNext();
-    }
+  @Override
+  public Object next() {
 
-    @Override
-    public Object next() {
+    final ITuple t = src.next();
 
-        final ITuple t = src.next();
+    // Resolve to the index entry.
+    return t.getObject();
+  }
 
-        // Resolve to the index entry.
-        return t.getObject();
+  @Override
+  public void remove() {
+    src.remove();
+  }
 
-    }
-
-    @Override
-    public void remove() {
-        src.remove();
-    }
-
-    @Override
-    public void close() {
-        // NOP
-    }
-
+  @Override
+  public void close() {
+    // NOP
+  }
 }

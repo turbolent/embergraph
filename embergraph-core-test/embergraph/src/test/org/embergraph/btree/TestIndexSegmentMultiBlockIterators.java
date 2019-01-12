@@ -24,480 +24,448 @@ package org.embergraph.btree;
 import java.io.File;
 import java.util.Random;
 import java.util.UUID;
-
 import org.embergraph.btree.IndexSegmentBuilder.BuildEnum;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.BytesUtil;
 
 /**
  * Test suite for {@link IndexSegmentMultiBlockIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestIndexSegmentMultiBlockIterators extends
-        AbstractIndexSegmentTestCase {
+public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTestCase {
 
-    /**
-     * 
-     */
-    public TestIndexSegmentMultiBlockIterators() {
+  /** */
+  public TestIndexSegmentMultiBlockIterators() {}
+
+  /** @param name */
+  public TestIndexSegmentMultiBlockIterators(String name) {
+    super(name);
+  }
+
+  protected File outFile;
+
+  //    File tmpDir;
+
+  static final boolean bufferNodes = true;
+
+  @Override
+  public void setUp() throws Exception {
+
+    super.setUp();
+
+    outFile = new File(getName() + ".seg");
+
+    if (outFile.exists() && !outFile.delete()) {
+
+      throw new RuntimeException("Could not delete file: " + outFile);
     }
 
-    /**
-     * @param name
-     */
-    public TestIndexSegmentMultiBlockIterators(String name) {
-        super(name);
+    //        tmpDir = outFile.getAbsoluteFile().getParentFile();
+
+  }
+
+  @Override
+  public void tearDown() throws Exception {
+
+    if (outFile != null && outFile.exists() && !outFile.delete()) {
+
+      log.warn("Could not delete file: " + outFile);
     }
 
-    protected File outFile;
+    super.tearDown();
+  }
 
-//    File tmpDir;
+  public void test_ctor() throws Exception {
 
-    static final boolean bufferNodes = true;
+    final BTree btree = BTree.createTransient(new IndexMetadata(UUID.randomUUID()));
 
-    @Override
-    public void setUp() throws Exception {
+    //        for (int i = 0; i < 10; i++) {
+    //            btree.insert(i, i);
+    //        }
 
-        super.setUp();
-        
-        outFile = new File(getName() + ".seg");
+    final IndexSegmentBuilder builder =
+        TestIndexSegmentBuilderWithLargeTrees.doBuildIndexSegment(
+            getName(), btree, 32 /* m */, BuildEnum.TwoPass, bufferNodes);
 
-        if (outFile.exists() && !outFile.delete()) {
+    final IndexSegment seg = new IndexSegmentStore(builder.outFile).loadIndexSegment();
 
-            throw new RuntimeException("Could not delete file: " + outFile);
+    try {
 
-        }
-        
-//        tmpDir = outFile.getAbsoluteFile().getParentFile();
+      // correct rejection test.
+      try {
+        new IndexSegmentMultiBlockIterator(
+            null /* seg */,
+            DirectBufferPool.INSTANCE,
+            null /* fromKey */,
+            null /* toKey */,
+            IRangeQuery.DEFAULT);
+        fail("Expecting: " + IllegalArgumentException.class);
+      } catch (IllegalArgumentException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
 
+      // correct rejection test.
+      try {
+        new IndexSegmentMultiBlockIterator(
+            seg, null /* pool */, null /* fromKey */, null /* toKey */, IRangeQuery.DEFAULT);
+        fail("Expecting: " + IllegalArgumentException.class);
+      } catch (IllegalArgumentException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
+
+      // correct rejection test.
+      try {
+        new IndexSegmentMultiBlockIterator(
+            seg,
+            DirectBufferPool.INSTANCE,
+            null /* fromKey */,
+            null /* toKey */,
+            IRangeQuery.DEFAULT | IRangeQuery.REMOVEALL);
+        fail("Expecting: " + IllegalArgumentException.class);
+      } catch (IllegalArgumentException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
+
+      // correct rejection test.
+      try {
+        new IndexSegmentMultiBlockIterator(
+            seg,
+            null /* pool */,
+            null /* fromKey */,
+            null /* toKey */,
+            IRangeQuery.DEFAULT | IRangeQuery.CURSOR);
+        fail("Expecting: " + IllegalArgumentException.class);
+      } catch (IllegalArgumentException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
+
+      // correct rejection test.
+      try {
+        new IndexSegmentMultiBlockIterator(
+            seg,
+            null /* pool */,
+            null /* fromKey */,
+            null /* toKey */,
+            IRangeQuery.DEFAULT | IRangeQuery.REVERSE);
+        fail("Expecting: " + IllegalArgumentException.class);
+      } catch (IllegalArgumentException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
+
+    } finally {
+
+      seg.getStore().destroy();
+    }
+  }
+
+  /**
+   * Test build around an {@link IndexSegment} having a branching factor of THREE (3) and three
+   * leaves, which are fully populated.
+   */
+  public void test_simple() throws Exception {
+
+    final BTree btree = BTree.createTransient(new IndexMetadata(UUID.randomUUID()));
+
+    for (int i = 0; i < 9; i++) {
+      btree.insert(i, i);
     }
 
-    @Override
-    public void tearDown() throws Exception {
+    final IndexSegmentBuilder builder =
+        TestIndexSegmentBuilderWithLargeTrees.doBuildIndexSegment(
+            getName(), btree, 3 /* m */, BuildEnum.TwoPass, bufferNodes);
 
-        if (outFile != null && outFile.exists() && !outFile.delete()) {
+    // System.err.println("plan: "+builder.plan);
 
-            log.warn("Could not delete file: " + outFile);
+    // The plan should generate a B+Tree with 3 leaves.
+    assertEquals(3, builder.plan.nleaves);
 
-        }
+    final IndexSegment seg = new IndexSegmentStore(builder.outFile).loadIndexSegment();
 
-        super.tearDown();
-        
+    try {
+
+      // Cursor let's us visit any leaf.
+      final ILeafCursor<?> leafCursor = seg.newLeafCursor(SeekEnum.First);
+
+      // multi-block iterator.
+      final IndexSegmentMultiBlockIterator<?> itr =
+          new IndexSegmentMultiBlockIterator(
+              seg,
+              DirectBufferPool.INSTANCE,
+              null /* fromKey */,
+              null /* toKey */,
+              IRangeQuery.DEFAULT);
+
+      /*
+       * First leaf.
+       */
+
+      // nothing was ready yet.
+      assertNull(itr.getLeaf());
+
+      // hasNext() will force a block into memory.
+      assertTrue(itr.hasNext());
+
+      // verify a leaf is now available (the 1st leaf).
+      assertNotNull(itr.getLeaf());
+
+      // verify we are looking at the same leaf data.
+      assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
+
+      /*
+       * Second leaf.
+       */
+
+      // skip three tuples (to the 2nd leaf).
+      itr.next();
+      itr.next();
+      itr.next();
+
+      // force read of the next leaf.
+      assertTrue(itr.hasNext());
+
+      // the next leaf.
+      leafCursor.next();
+
+      // verify we are looking at the same leaf data.
+      assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
+
+      /*
+       * Third leaf.
+       */
+
+      // skip three tuples (to the 3rd leaf).
+      itr.next();
+      itr.next();
+      itr.next();
+
+      // force read of the next leaf.
+      assertTrue(itr.hasNext());
+
+      // the next leaf.
+      leafCursor.next();
+
+      // verify we are looking at the same leaf data.
+      assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
+
+      /*
+       * Exhausted.
+       */
+
+      // skip three tuples.
+      itr.next();
+      itr.next();
+      itr.next();
+
+      // verify that the iterator is exhausted.
+      assertFalse(itr.hasNext());
+
+      doRandomScanTest(btree, seg, 10 /* ntests */);
+
+    } finally {
+
+      seg.getStore().destroy();
+    }
+  }
+
+  /**
+   * Unit test builds an empty index segment and then verifies the behavior of the {@link
+   * IndexSegmentMultiBlockIterator}.
+   *
+   * @throws Exception
+   */
+  public void test_emptyIndexSegment() throws Exception {
+
+    final BTree btree = BTree.createTransient(new IndexMetadata(UUID.randomUUID()));
+
+    final IndexSegmentBuilder builder =
+        TestIndexSegmentBuilderWithLargeTrees.doBuildIndexSegment(
+            getName(), btree, 32 /* m */, BuildEnum.TwoPass, bufferNodes);
+
+    final IndexSegment seg = new IndexSegmentStore(builder.outFile).loadIndexSegment();
+
+    try {
+
+      final IndexSegmentMultiBlockIterator<?> itr =
+          new IndexSegmentMultiBlockIterator(
+              seg,
+              DirectBufferPool.INSTANCE,
+              null /* fromKey */,
+              null /* toKey */,
+              IRangeQuery.DEFAULT);
+
+      assertFalse(itr.hasNext());
+
+      // verify the data.
+      testMultiBlockIterator(btree, seg);
+
+    } finally {
+
+      seg.getStore().destroy();
+    }
+  }
+
+  /**
+   * Test build around an {@link IndexSegment} having a default branching factor and a bunch of
+   * leaves totally more than 1M in size on the disk.
+   */
+  public void test_moderate() throws Exception {
+
+    final BTree btree = BTree.createTransient(new IndexMetadata(UUID.randomUUID()));
+
+    final int LIMIT = 200000; // this works out to 12 1M blocks of data.
+    //        final int LIMIT = 1000000; // this works out to 60 1M blocks of data.
+
+    // populate the index.
+    for (int i = 0; i < LIMIT; i++) {
+
+      btree.insert(i, i);
     }
 
-    public void test_ctor() throws Exception {
+    final IndexSegmentBuilder builder =
+        TestIndexSegmentBuilderWithLargeTrees.doBuildIndexSegment(
+            getName(), btree, 32 /* m */, BuildEnum.TwoPass, bufferNodes);
 
-        final BTree btree = BTree.createTransient(new IndexMetadata(UUID
-                .randomUUID()));
+    final IndexSegment seg = new IndexSegmentStore(builder.outFile).loadIndexSegment();
 
-//        for (int i = 0; i < 10; i++) {
-//            btree.insert(i, i);
-//        }
+    try {
 
-        final IndexSegmentBuilder builder = TestIndexSegmentBuilderWithLargeTrees
-                .doBuildIndexSegment(getName(), btree, 32/* m */,
-                        BuildEnum.TwoPass, bufferNodes);
+      final DirectBufferPool pool = DirectBufferPool.INSTANCE;
 
-        final IndexSegment seg = new IndexSegmentStore(builder.outFile)
-                .loadIndexSegment();
+      if (seg.getStore().getCheckpoint().maxNodeOrLeafLength > pool.getBufferCapacity()) {
 
-        try {
+        /*
+         * The individual leaves must be less than the buffer size in
+         * order for us to read at least one leaf per block.
+         */
 
-            // correct rejection test.
-            try {
-                new IndexSegmentMultiBlockIterator(null/* seg */,
-                        DirectBufferPool.INSTANCE, null/* fromKey */,
-                        null/* toKey */, IRangeQuery.DEFAULT);
-                fail("Expecting: " + IllegalArgumentException.class);
-            } catch (IllegalArgumentException ex) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + ex);
-            }
+        fail("Run the test with smaller branching factor.");
+      }
 
-            // correct rejection test.
-            try {
-                new IndexSegmentMultiBlockIterator(seg, null/* pool */,
-                        null/* fromKey */, null/* toKey */, IRangeQuery.DEFAULT);
-                fail("Expecting: " + IllegalArgumentException.class);
-            } catch (IllegalArgumentException ex) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + ex);
-            }
+      // The #of blocks we will have to read.
+      final long nblocks = seg.getStore().getCheckpoint().extentLeaves / pool.getBufferCapacity();
 
-            // correct rejection test.
-            try {
-                new IndexSegmentMultiBlockIterator(seg,
-                        DirectBufferPool.INSTANCE, null/* fromKey */,
-                        null/* toKey */, IRangeQuery.DEFAULT
-                                | IRangeQuery.REMOVEALL);
-                fail("Expecting: " + IllegalArgumentException.class);
-            } catch (IllegalArgumentException ex) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + ex);
-            }
+      if (log.isInfoEnabled()) log.info("Will read " + nblocks + " blocks.");
 
-            // correct rejection test.
-            try {
-                new IndexSegmentMultiBlockIterator(seg, null/* pool */,
-                        null/* fromKey */, null/* toKey */, IRangeQuery.DEFAULT
-                                | IRangeQuery.CURSOR);
-                fail("Expecting: " + IllegalArgumentException.class);
-            } catch (IllegalArgumentException ex) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + ex);
-            }
+      if (nblocks < 2) {
 
-            // correct rejection test.
-            try {
-                new IndexSegmentMultiBlockIterator(seg, null/* pool */,
-                        null/* fromKey */, null/* toKey */, IRangeQuery.DEFAULT
-                                | IRangeQuery.REVERSE);
-                fail("Expecting: " + IllegalArgumentException.class);
-            } catch (IllegalArgumentException ex) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + ex);
-            }
+        /*
+         * The leaves extent needs to be larger than the buffer size in
+         * order for us to test with more than one block read from the
+         * backing file.
+         */
 
-        } finally {
-            
-            seg.getStore().destroy();
-            
-        }
+        fail("Run the test with more tuples.");
+      }
 
+      // verify the data.
+      testMultiBlockIterator(btree, seg);
+
+      // random iterator scan tests.
+      doRandomScanTest(btree, seg, 100 /* ntests */);
+
+    } finally {
+
+      seg.getStore().destroy();
+    }
+  }
+
+  /**
+   * Do a bunch of random iterator scans. Each scan will start at a random key and run to a random
+   * key.
+   *
+   * @param groundTruth The ground truth B+Tree.
+   * @param actual The index segment built from that B+Tree.
+   * @param ntests The #of scans to run.
+   */
+  private void doRandomScanTest(
+      final BTree groundTruth, final IndexSegment actual, final int ntests) {
+
+    final DirectBufferPool pool = DirectBufferPool.INSTANCE;
+
+    final Random r = new Random();
+
+    final long n = groundTruth.getEntryCount();
+
+    // point query beyond the last tuple in the index segment.
+    {
+      final long fromIndex = n - 1;
+
+      final byte[] fromKey = groundTruth.keyAt(fromIndex);
+
+      final byte[] toKey = BytesUtil.successor(fromKey.clone());
+
+      final ITupleIterator<?> expectedItr =
+          groundTruth.rangeIterator(
+              fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
+
+      final IndexSegmentMultiBlockIterator<?> actualItr =
+          new IndexSegmentMultiBlockIterator(actual, pool, fromKey, toKey, IRangeQuery.DEFAULT);
+
+      assertSameEntryIterator(expectedItr, actualItr);
     }
 
-    /**
-     * Test build around an {@link IndexSegment} having a branching factor of
-     * THREE (3) and three leaves, which are fully populated.
-     */
-    public void test_simple() throws Exception {
-        
-        final BTree btree = BTree.createTransient(new IndexMetadata(UUID
-                .randomUUID()));
+    // random point queries.
+    for (int i = 0; i < ntests; i++) {
 
-        for (int i = 0; i < 9; i++) {
-            btree.insert(i, i);
-        }
+      final long fromIndex =
+          n > Integer.MAX_VALUE
+              ? Integer.MAX_VALUE + r.nextInt((int) (n - Integer.MAX_VALUE))
+              : r.nextInt((int) (n));
 
-        final IndexSegmentBuilder builder = TestIndexSegmentBuilderWithLargeTrees
-                .doBuildIndexSegment(getName(), btree, 3/* m */,
-                        BuildEnum.TwoPass, bufferNodes);
+      final byte[] fromKey = groundTruth.keyAt(fromIndex);
 
-        // System.err.println("plan: "+builder.plan);
+      final byte[] toKey = BytesUtil.successor(fromKey.clone());
 
-        // The plan should generate a B+Tree with 3 leaves.
-        assertEquals(3, builder.plan.nleaves);
-      
-        final IndexSegment seg = new IndexSegmentStore(builder.outFile)
-                .loadIndexSegment();
+      final ITupleIterator<?> expectedItr =
+          groundTruth.rangeIterator(
+              fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
 
-        try {
+      final IndexSegmentMultiBlockIterator<?> actualItr =
+          new IndexSegmentMultiBlockIterator(actual, pool, fromKey, toKey, IRangeQuery.DEFAULT);
 
-            // Cursor let's us visit any leaf.
-            final ILeafCursor<?> leafCursor = seg.newLeafCursor(SeekEnum.First);
-
-            // multi-block iterator.
-            final IndexSegmentMultiBlockIterator<?> itr = new IndexSegmentMultiBlockIterator(
-                    seg, DirectBufferPool.INSTANCE, null/* fromKey */,
-                    null/* toKey */, IRangeQuery.DEFAULT);
-
-            /*
-             * First leaf.
-             */
-            
-            // nothing was ready yet.
-            assertNull(itr.getLeaf());
-
-            // hasNext() will force a block into memory.
-            assertTrue(itr.hasNext());
-
-            // verify a leaf is now available (the 1st leaf).
-            assertNotNull(itr.getLeaf());
-
-            // verify we are looking at the same leaf data.
-            assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
-
-            /*
-             * Second leaf.
-             */
-            
-            // skip three tuples (to the 2nd leaf).
-            itr.next();
-            itr.next();
-            itr.next();
-
-            // force read of the next leaf.
-            assertTrue(itr.hasNext());
-            
-            // the next leaf.
-            leafCursor.next();
-
-            // verify we are looking at the same leaf data.
-            assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
-
-            /*
-             * Third leaf.
-             */
-            
-            // skip three tuples (to the 3rd leaf).
-            itr.next();
-            itr.next();
-            itr.next();
-            
-            // force read of the next leaf.
-            assertTrue(itr.hasNext());
-            
-            // the next leaf.
-            leafCursor.next();
-
-            // verify we are looking at the same leaf data.
-            assertSameLeafData(leafCursor.leaf(), itr.getLeaf());
-
-            /*
-             * Exhausted.
-             */
-            
-            // skip three tuples.
-            itr.next();
-            itr.next();
-            itr.next();
-            
-            // verify that the iterator is exhausted.
-            assertFalse(itr.hasNext());
-            
-            doRandomScanTest(btree, seg, 10/* ntests */);
-            
-        } finally {
-
-            seg.getStore().destroy();
-
-        }
-
+      assertSameEntryIterator(expectedItr, actualItr);
     }
 
-    /**
-     * Unit test builds an empty index segment and then verifies the behavior of
-     * the {@link IndexSegmentMultiBlockIterator}.
-     * 
-     * @throws Exception 
-     */
-    public void test_emptyIndexSegment() throws Exception {
+    // random range queries with small range of spanned keys (0 to 10).
+    for (int i = 0; i < ntests; i++) {
 
-        final BTree btree = BTree.createTransient(new IndexMetadata(UUID
-                .randomUUID()));
+      final long fromIndex = nextLong(r, n);
 
-        final IndexSegmentBuilder builder = TestIndexSegmentBuilderWithLargeTrees
-                .doBuildIndexSegment(getName(), btree, 32/* m */,
-                        BuildEnum.TwoPass, bufferNodes);
+      final byte[] fromKey = groundTruth.keyAt(fromIndex);
 
-        final IndexSegment seg = new IndexSegmentStore(builder.outFile)
-                .loadIndexSegment();
+      final byte[] toKey = groundTruth.keyAt(Math.min(fromIndex + r.nextInt(10), n - 1));
 
-        try {
+      final ITupleIterator<?> expectedItr =
+          groundTruth.rangeIterator(
+              fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
 
-            final IndexSegmentMultiBlockIterator<?> itr = new IndexSegmentMultiBlockIterator(
-                    seg, DirectBufferPool.INSTANCE, null/* fromKey */,
-                    null/* toKey */, IRangeQuery.DEFAULT);
+      final IndexSegmentMultiBlockIterator<?> actualItr =
+          new IndexSegmentMultiBlockIterator(actual, pool, fromKey, toKey, IRangeQuery.DEFAULT);
 
-            assertFalse(itr.hasNext());
-            
-            // verify the data.
-            testMultiBlockIterator(btree, seg);
-            
-        } finally {
-
-            seg.getStore().destroy();
-
-        }
-
-    }
-    
-    /**
-     * Test build around an {@link IndexSegment} having a default branching
-     * factor and a bunch of leaves totally more than 1M in size on the disk.
-     */
-    public void test_moderate() throws Exception {
-        
-        final BTree btree = BTree.createTransient(new IndexMetadata(UUID
-                .randomUUID()));
-
-        final int LIMIT = 200000; // this works out to 12 1M blocks of data.
-//        final int LIMIT = 1000000; // this works out to 60 1M blocks of data.
-
-        // populate the index.
-        for (int i = 0; i < LIMIT; i++) {
-
-            btree.insert(i, i);
-            
-        }
-
-        final IndexSegmentBuilder builder = TestIndexSegmentBuilderWithLargeTrees
-                .doBuildIndexSegment(getName(), btree, 32/* m */,
-                        BuildEnum.TwoPass, bufferNodes);
-
-        final IndexSegment seg = new IndexSegmentStore(builder.outFile)
-                .loadIndexSegment();
-
-        try {
-
-            final DirectBufferPool pool = DirectBufferPool.INSTANCE;
-
-            if (seg.getStore().getCheckpoint().maxNodeOrLeafLength > pool
-                    .getBufferCapacity()) {
-
-                /*
-                 * The individual leaves must be less than the buffer size in
-                 * order for us to read at least one leaf per block.
-                 */
-                
-                fail("Run the test with smaller branching factor.");
-
-            }
-
-            // The #of blocks we will have to read.
-            final long nblocks = seg.getStore().getCheckpoint().extentLeaves
-                    / pool.getBufferCapacity();
-
-            if (log.isInfoEnabled())
-                log.info("Will read " + nblocks + " blocks.");
-
-            if (nblocks < 2) {
-
-                /*
-                 * The leaves extent needs to be larger than the buffer size in
-                 * order for us to test with more than one block read from the
-                 * backing file.
-                 */
-                
-                fail("Run the test with more tuples.");
-
-            }
-
-            // verify the data.
-            testMultiBlockIterator(btree, seg);
-
-            // random iterator scan tests.
-            doRandomScanTest(btree, seg, 100/* ntests */);
-            
-        } finally {
-
-            seg.getStore().destroy();
-
-        }
-
+      assertSameEntryIterator(expectedItr, actualItr);
     }
 
-    /**
-     * Do a bunch of random iterator scans. Each scan will start at a random key
-     * and run to a random key.
-     * 
-     * @param groundTruth
-     *            The ground truth B+Tree.
-     * @param actual
-     *            The index segment built from that B+Tree.
-     * @param ntests
-     *            The #of scans to run.
-     */
-    private void doRandomScanTest(final BTree groundTruth,
-            final IndexSegment actual, final int ntests) {
+    // random range queries with random #of spanned keys.
+    for (int i = 0; i < ntests; i++) {
 
-    	final DirectBufferPool pool = DirectBufferPool.INSTANCE;
-    	
-        final Random r = new Random();
-        
-        final long n = groundTruth.getEntryCount();
+      final long fromIndex = nextLong(r, n);
 
-        // point query beyond the last tuple in the index segment.
-        {
-            
-            final long fromIndex = n - 1;
+      final long toIndex = fromIndex + nextLong(r, n - fromIndex + 1);
 
-            final byte[] fromKey = groundTruth.keyAt(fromIndex);
+      final byte[] fromKey = groundTruth.keyAt(fromIndex);
 
-            final byte[] toKey = BytesUtil.successor(fromKey.clone());
+      final byte[] toKey = toIndex >= n ? null : groundTruth.keyAt(toIndex);
 
-            final ITupleIterator<?> expectedItr = groundTruth
-                    .rangeIterator(fromKey, toKey, 0/* capacity */,
-                            IRangeQuery.DEFAULT, null/* filter */);
+      final ITupleIterator<?> expectedItr =
+          groundTruth.rangeIterator(
+              fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
 
-            final IndexSegmentMultiBlockIterator<?> actualItr = new IndexSegmentMultiBlockIterator(
-                    actual, pool, fromKey, toKey,
-                    IRangeQuery.DEFAULT);
-            
-            assertSameEntryIterator(expectedItr, actualItr);
+      final IndexSegmentMultiBlockIterator<?> actualItr =
+          new IndexSegmentMultiBlockIterator(actual, pool, fromKey, toKey, IRangeQuery.DEFAULT);
 
-        }
-        
-        // random point queries.
-        for (int i = 0; i < ntests; i++) {
-
-			final long fromIndex = n > Integer.MAX_VALUE ? Integer.MAX_VALUE
-					+ r.nextInt((int)(n - Integer.MAX_VALUE)) : r.nextInt((int) (n));
-
-            final byte[] fromKey = groundTruth.keyAt(fromIndex);
-
-            final byte[] toKey = BytesUtil.successor(fromKey.clone());
-
-            final ITupleIterator<?> expectedItr = groundTruth
-                    .rangeIterator(fromKey, toKey, 0/* capacity */,
-                            IRangeQuery.DEFAULT, null/* filter */);
-
-            final IndexSegmentMultiBlockIterator<?> actualItr = new IndexSegmentMultiBlockIterator(
-                    actual, pool, fromKey, toKey,
-                    IRangeQuery.DEFAULT);
-            
-            assertSameEntryIterator(expectedItr, actualItr);
-
-        }
-        
-        // random range queries with small range of spanned keys (0 to 10).
-        for (int i = 0; i < ntests; i++) {
-
-			final long fromIndex = nextLong(r, n);
-
-            final byte[] fromKey = groundTruth.keyAt(fromIndex);
-
-            final byte[] toKey = groundTruth.keyAt(Math.min(fromIndex
-                    + r.nextInt(10), n - 1));
-
-            final ITupleIterator<?> expectedItr = groundTruth
-                    .rangeIterator(fromKey, toKey, 0/* capacity */,
-                            IRangeQuery.DEFAULT, null/* filter */);
-
-            final IndexSegmentMultiBlockIterator<?> actualItr = new IndexSegmentMultiBlockIterator(
-                    actual, pool, fromKey, toKey,
-                    IRangeQuery.DEFAULT);
-
-            assertSameEntryIterator(expectedItr, actualItr);
-
-        }
-
-        // random range queries with random #of spanned keys.
-        for (int i = 0; i < ntests; i++) {
-
-            final long fromIndex = nextLong(r,n);
-
-			final long toIndex = fromIndex + nextLong(r, n - fromIndex + 1);
-
-            final byte[] fromKey = groundTruth.keyAt(fromIndex);
-
-            final byte[] toKey = toIndex >= n ? null : groundTruth
-                    .keyAt(toIndex);
-
-            final ITupleIterator<?> expectedItr = groundTruth
-                    .rangeIterator(fromKey, toKey, 0/* capacity */,
-                            IRangeQuery.DEFAULT, null/* filter */);
-
-            final IndexSegmentMultiBlockIterator<?> actualItr = new IndexSegmentMultiBlockIterator(
-                    actual, pool, fromKey, toKey,
-                    IRangeQuery.DEFAULT);
-
-            assertSameEntryIterator(expectedItr, actualItr);
-
-        }
-
+      assertSameEntryIterator(expectedItr, actualItr);
     }
-
+  }
 }

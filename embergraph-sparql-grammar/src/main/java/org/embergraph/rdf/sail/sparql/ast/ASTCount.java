@@ -4,33 +4,28 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTCount extends ASTAggregate {
 
-	private boolean wildcard;
+  private boolean wildcard;
 
-	public ASTCount(int id) {
-		super(id);
-	}
+  public ASTCount(int id) {
+    super(id);
+  }
 
-	public ASTCount(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTCount(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	/** Accept the visitor. **/
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	/**
-	 * @param b
-	 */
-	public void setWildcard(boolean b) {
-		wildcard = b;
-	}
+  /** @param b */
+  public void setWildcard(boolean b) {
+    wildcard = b;
+  }
 
-	public boolean isWildcard() {
-		return wildcard;
-
-	}
+  public boolean isWildcard() {
+    return wildcard;
+  }
 }
 /* JavaCC - OriginalChecksum=4565aae057280a44dedd645dc357eba0 (do not edit this line) */

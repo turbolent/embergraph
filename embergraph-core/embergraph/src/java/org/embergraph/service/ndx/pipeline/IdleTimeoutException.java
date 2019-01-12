@@ -24,46 +24,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 /**
- * An instance of this exception is thrown when a sink closes it's input queue
- * due to an idle timeout (nothing has been written on its input queue for a
- * period of timeout which exceeds its idle timeout).
- * 
+ * An instance of this exception is thrown when a sink closes it's input queue due to an idle
+ * timeout (nothing has been written on its input queue for a period of timeout which exceeds its
+ * idle timeout).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class IdleTimeoutException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2028300715526547176L;
+  /** */
+  private static final long serialVersionUID = -2028300715526547176L;
 
-    /**
-     * 
-     */
-    public IdleTimeoutException() {
-    }
+  /** */
+  public IdleTimeoutException() {}
 
-    /**
-     * @param message
-     */
-    public IdleTimeoutException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public IdleTimeoutException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public IdleTimeoutException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public IdleTimeoutException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public IdleTimeoutException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public IdleTimeoutException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

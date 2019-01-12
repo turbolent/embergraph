@@ -27,59 +27,46 @@ import org.embergraph.bop.IValueExpression;
 
 /**
  * Default impl.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SortOrder<E> implements ISortOrder<E> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -669873421670514139L;
+  /** */
+  private static final long serialVersionUID = -669873421670514139L;
 
-    private final IValueExpression<E> expr;
-    private final boolean asc;
+  private final IValueExpression<E> expr;
+  private final boolean asc;
 
-    /**
-     * Either <code>ASC ( expr ) or DESC ( expr )</code>.
-     */
-    @Override
-    public String toString() {
+  /** Either <code>ASC ( expr ) or DESC ( expr )</code>. */
+  @Override
+  public String toString() {
 
-    	return (asc ? "ASC" : "DESC") + "(" + expr + ")";
-    	
-    }
-    
-    /**
-     * 
-     * @param expr
-     *            The value expression.
-     * @param asc
-     *            <code>true</code> for an ascending sort and
-     *            <code>false</code> for a descending sort.
-     */
-    public SortOrder(final IValueExpression<E> expr, final boolean asc) {
+    return (asc ? "ASC" : "DESC") + "(" + expr + ")";
+  }
 
-        if (expr == null)
-            throw new IllegalArgumentException();
+  /**
+   * @param expr The value expression.
+   * @param asc <code>true</code> for an ascending sort and <code>false</code> for a descending
+   *     sort.
+   */
+  public SortOrder(final IValueExpression<E> expr, final boolean asc) {
 
-        this.expr = expr;
-        
-        this.asc = asc;
-        
-    }
+    if (expr == null) throw new IllegalArgumentException();
 
-    public IValueExpression<E> getExpr() {
-        
-        return expr;
-        
-    }
+    this.expr = expr;
 
-    public boolean isAscending() {
-        
-        return asc;
-        
-    }
+    this.asc = asc;
+  }
 
+  public IValueExpression<E> getExpr() {
+
+    return expr;
+  }
+
+  public boolean isAscending() {
+
+    return asc;
+  }
 }

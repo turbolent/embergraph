@@ -22,38 +22,29 @@ import org.embergraph.btree.data.INodeData;
 
 /**
  * Interface for creating nodes or leaves.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface INodeFactory {
 
-    /**
-     * Create a node.
-     * 
-     * @param btree
-     *            The owning B+Tree.
-     * @param addr
-     *            The address from which the node was read.
-     * @param data
-     *            The node data record.
-     *            
-     * @return A node initialized from those data.
-     */
-    public Node allocNode(AbstractBTree btree, long addr, INodeData data);
+  /**
+   * Create a node.
+   *
+   * @param btree The owning B+Tree.
+   * @param addr The address from which the node was read.
+   * @param data The node data record.
+   * @return A node initialized from those data.
+   */
+  public Node allocNode(AbstractBTree btree, long addr, INodeData data);
 
-    /**
-     * Create a leaf.
-     * 
-     * @param btree
-     *            The owning B+Tree.
-     * @param addr
-     *            The address from which the leaf was read.
-     * @param data
-     *            The leaf data record.
-     * 
-     * @return A leaf initialized from those data.
-     */
-    public Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
-
+  /**
+   * Create a leaf.
+   *
+   * @param btree The owning B+Tree.
+   * @param addr The address from which the leaf was read.
+   * @param data The leaf data record.
+   * @return A leaf initialized from those data.
+   */
+  public Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
 }

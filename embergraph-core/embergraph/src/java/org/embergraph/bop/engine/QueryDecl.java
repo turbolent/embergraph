@@ -23,58 +23,49 @@ package org.embergraph.bop.engine;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import org.embergraph.bop.PipelineOp;
 
 /**
  * Default implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QueryDecl implements IQueryDecl, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final UUID queryId;
+  private final UUID queryId;
 
-    private final IQueryClient clientProxy;
+  private final IQueryClient clientProxy;
 
-    private final PipelineOp query;
+  private final PipelineOp query;
 
-    public QueryDecl(final IQueryClient clientProxy, final UUID queryId,
-            final PipelineOp query) {
+  public QueryDecl(final IQueryClient clientProxy, final UUID queryId, final PipelineOp query) {
 
-        if (clientProxy == null)
-            throw new IllegalArgumentException();
+    if (clientProxy == null) throw new IllegalArgumentException();
 
-        if (queryId == null)
-            throw new IllegalArgumentException();
+    if (queryId == null) throw new IllegalArgumentException();
 
-        if (query == null)
-            throw new IllegalArgumentException();
+    if (query == null) throw new IllegalArgumentException();
 
-        this.clientProxy = clientProxy;
+    this.clientProxy = clientProxy;
 
-        this.queryId = queryId;
+    this.queryId = queryId;
 
-        this.query = query;
+    this.query = query;
+  }
 
-    }
+  public PipelineOp getQuery() {
+    return query;
+  }
 
-    public PipelineOp getQuery() {
-        return query;
-    }
+  public IQueryClient getQueryController() {
+    return clientProxy;
+  }
 
-    public IQueryClient getQueryController() {
-        return clientProxy;
-    }
-
-    public UUID getQueryId() {
-        return queryId;
-    }
-
+  public UUID getQueryId() {
+    return queryId;
+  }
 }

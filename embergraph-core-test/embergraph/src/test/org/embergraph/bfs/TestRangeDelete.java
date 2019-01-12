@@ -25,29 +25,22 @@ package org.embergraph.bfs;
 
 /**
  * Test suite for {@link EmbergraphFileSystem#deleteAll(String, String)}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRangeDelete extends AbstractRepositoryTestCase {
 
-    /**
-     * 
-     */
-    public TestRangeDelete() {
-    }
+  /** */
+  public TestRangeDelete() {}
 
-    /**
-     * @param arg0
-     */
-    public TestRangeDelete(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestRangeDelete(String arg0) {
+    super(arg0);
+  }
 
-    public void test_rangeDelete() {
-        
-        fail("write test");
-        
-    }
-    
+  public void test_rangeDelete() {
+
+    fail("write test");
+  }
 }

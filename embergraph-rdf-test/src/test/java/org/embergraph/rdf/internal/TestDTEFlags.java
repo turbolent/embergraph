@@ -25,44 +25,36 @@ import junit.framework.TestCase;
 
 /**
  * Test suite for {@link DTEFlags}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDTEFlags extends TestCase {
 
-    /**
-     * 
-     */
-    public TestDTEFlags() {
-    }
+  /** */
+  public TestDTEFlags() {}
 
-    /**
-     * @param name
-     */
-    public TestDTEFlags(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestDTEFlags(String name) {
+    super(name);
+  }
 
-    /**
-     * The {@link DTEFlags} must be distinct bit combinations.
-     */
-    public void test_DTEFlags() {
-        assertNotSame(DTEFlags.NUMERIC, DTEFlags.NOFLAGS);
-        assertNotSame(DTEFlags.UNSIGNED_NUMERIC, DTEFlags.NOFLAGS);
-        assertNotSame(DTEFlags.UNSIGNED_NUMERIC, DTEFlags.NUMERIC);
-    }
+  /** The {@link DTEFlags} must be distinct bit combinations. */
+  public void test_DTEFlags() {
+    assertNotSame(DTEFlags.NUMERIC, DTEFlags.NOFLAGS);
+    assertNotSame(DTEFlags.UNSIGNED_NUMERIC, DTEFlags.NOFLAGS);
+    assertNotSame(DTEFlags.UNSIGNED_NUMERIC, DTEFlags.NUMERIC);
+  }
 
-    public void test_DTEFlags_NOFLAGS() {
-        assertEquals(0, DTEFlags.NOFLAGS);
-    }
+  public void test_DTEFlags_NOFLAGS() {
+    assertEquals(0, DTEFlags.NOFLAGS);
+  }
 
-    public void test_DTEFlags_NUMERIC() {
-        assertEquals(1, DTEFlags.NUMERIC);
-    }
+  public void test_DTEFlags_NUMERIC() {
+    assertEquals(1, DTEFlags.NUMERIC);
+  }
 
-    public void test_DTEFlags_UNSIGNED() {
-        assertEquals(3, DTEFlags.UNSIGNED_NUMERIC);
-    }
-    
+  public void test_DTEFlags_UNSIGNED() {
+    assertEquals(3, DTEFlags.UNSIGNED_NUMERIC);
+  }
 }

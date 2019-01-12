@@ -25,63 +25,42 @@ package org.embergraph.config;
 
 /**
  * Base impl for {@link Long}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LongValidator implements IValidator<Long> {
 
-    /**
-     * Allows all values.
-     */
-    public static final transient IValidator<Long> DEFAULT = new LongValidator();
+  /** Allows all values. */
+  public static final transient IValidator<Long> DEFAULT = new LongValidator();
 
-    /**
-     * Only allows non-negative values (GTE ZERO).
-     */
-    public static final transient IValidator<Long> GTE_ZERO = new LongValidator() {
-        
-        public void accept(String key, String val, Long arg) {
-            
-            if (arg < 0)
-                throw new ConfigurationException(key, val,
-                        "Must be non-negative");
-            
-        }
-        
-    };
+  /** Only allows non-negative values (GTE ZERO). */
+  public static final transient IValidator<Long> GTE_ZERO =
+      new LongValidator() {
 
-    /**
-     * Only allows positive values (GT ZERO).
-     */
-    public static final transient IValidator<Long> GT_ZERO = new LongValidator() {
-        
         public void accept(String key, String val, Long arg) {
 
-            if (arg <= 0)
-                throw new ConfigurationException(key, val,
-                        "Must be positive");
-            
+          if (arg < 0) throw new ConfigurationException(key, val, "Must be non-negative");
         }
-        
-    };
-    
-    protected LongValidator() {
-        
-    }
+      };
 
-    public Long parse(String key, String val) {
-        
-        return Long.parseLong(val);
-        
-    }
-    
-    /**
-     * Accepts all values by default.
-     */
-    public void accept(String key, String val, Long arg)
-            throws ConfigurationException {
-        
-    }
-    
+  /** Only allows positive values (GT ZERO). */
+  public static final transient IValidator<Long> GT_ZERO =
+      new LongValidator() {
+
+        public void accept(String key, String val, Long arg) {
+
+          if (arg <= 0) throw new ConfigurationException(key, val, "Must be positive");
+        }
+      };
+
+  protected LongValidator() {}
+
+  public Long parse(String key, String val) {
+
+    return Long.parseLong(val);
+  }
+
+  /** Accepts all values by default. */
+  public void accept(String key, String val, Long arg) throws ConfigurationException {}
 }

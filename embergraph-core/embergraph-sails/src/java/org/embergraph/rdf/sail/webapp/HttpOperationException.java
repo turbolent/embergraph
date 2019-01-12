@@ -20,41 +20,40 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 
 /**
- * Well-known exception is used to convey a non-success response from inside of
- * an {@link AbstractRestApiTask} to
- * {@link EmbergraphRDFServlet#launderThrowable(Throwable, javax.servlet.http.HttpServletResponse, String)}
- * .
- * 
+ * Well-known exception is used to convey a non-success response from inside of an {@link
+ * AbstractRestApiTask} to {@link EmbergraphRDFServlet#launderThrowable(Throwable,
+ * javax.servlet.http.HttpServletResponse, String)} .
+ *
  * @author bryan
  */
 public class HttpOperationException extends IOException {
 
-   private static final long serialVersionUID = 1L;
-   
-   public final int status;
-   public final String mimeType;
-   public final String content;
+  private static final long serialVersionUID = 1L;
 
-   /**
-    * 
-    * @param status
-    *           The HTTP status code for the response.
-    * @param mimeType
-    *           The MIME type of the response (required).
-    * @param content
-    *           The content of the response (optional).
-    */
-   HttpOperationException(final int status, final String mimeType,
-         final String content) {
-      this.status = status;
-      this.mimeType = mimeType;
-      this.content = content;
-   }
+  public final int status;
+  public final String mimeType;
+  public final String content;
 
-   @Override
-   public String toString() {
-      return getClass().getName() + "{status=" + status + ", mimeType="
-            + mimeType + ", content=" + content + "}";
-   }
+  /**
+   * @param status The HTTP status code for the response.
+   * @param mimeType The MIME type of the response (required).
+   * @param content The content of the response (optional).
+   */
+  HttpOperationException(final int status, final String mimeType, final String content) {
+    this.status = status;
+    this.mimeType = mimeType;
+    this.content = content;
+  }
 
+  @Override
+  public String toString() {
+    return getClass().getName()
+        + "{status="
+        + status
+        + ", mimeType="
+        + mimeType
+        + ", content="
+        + content
+        + "}";
+  }
 }

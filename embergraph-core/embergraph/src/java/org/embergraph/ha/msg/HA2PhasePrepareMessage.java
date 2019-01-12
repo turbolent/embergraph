@@ -20,7 +20,6 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
-
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.RootBlockView;
@@ -28,125 +27,124 @@ import org.embergraph.util.BytesUtil;
 
 public class HA2PhasePrepareMessage implements IHA2PhasePrepareMessage, Serializable {
 
-    /**
-     * Note: The original {@link #serialVersionUID} was <code>1L</code> - this
-     * version was never release. The {@link #serialVersionUID} was changed to
-     * <code>2L</code> when adding the {@link #consensusReleaseTime} and
-     * {@link #isGatherService} fields. It is not possible to roll forward from
-     * the non-released version without shutting down each service before
-     * allowing another commit.
+  /**
+   * Note: The original {@link #serialVersionUID} was <code>1L</code> - this version was never
+   * release. The {@link #serialVersionUID} was changed to <code>2L</code> when adding the {@link
+   * #consensusReleaseTime} and {@link #isGatherService} fields. It is not possible to roll forward
+   * from the non-released version without shutting down each service before allowing another
+   * commit.
+   */
+  private static final long serialVersionUID = 2L;
+
+  private final IHANotifyReleaseTimeResponse consensusReleaseTime;
+  private final boolean isGatherService;
+  private final boolean isJoinedService;
+  private final boolean isRootBlock0;
+  private final byte[] rootBlock;
+  private final long timeout;
+  private final TimeUnit unit;
+
+  public HA2PhasePrepareMessage(
+      final IHANotifyReleaseTimeResponse consensusReleaseTime,
+      final boolean isGatherService,
+      final boolean isJoinedService,
+      final IRootBlockView rootBlock,
+      final long timeout,
+      final TimeUnit unit) {
+
+    if (consensusReleaseTime == null) throw new IllegalArgumentException();
+
+    if (rootBlock == null) throw new IllegalArgumentException();
+
+    if (timeout < 0L) throw new IllegalArgumentException();
+
+    if (unit == null) throw new IllegalArgumentException();
+
+    this.consensusReleaseTime = consensusReleaseTime;
+
+    this.isGatherService = isGatherService;
+
+    this.isJoinedService = isJoinedService;
+
+    this.isRootBlock0 = rootBlock.isRootBlock0();
+
+    /*
+     * Convert to a byte[].
+     *
+     * Note: This does NOT preserve the isRootBlock0 flag!
      */
-    private static final long serialVersionUID = 2L;
+    this.rootBlock = BytesUtil.getBytes(rootBlock.asReadOnlyBuffer());
 
-    private final IHANotifyReleaseTimeResponse consensusReleaseTime;
-    private final boolean isGatherService;
-    private final boolean isJoinedService;
-    private final boolean isRootBlock0;
-    private final byte[] rootBlock;
-    private final long timeout;
-    private final TimeUnit unit;
+    this.timeout = timeout;
 
-    public HA2PhasePrepareMessage(
-            final IHANotifyReleaseTimeResponse consensusReleaseTime,
-            final boolean isGatherService, final boolean isJoinedService,
-            final IRootBlockView rootBlock, final long timeout,
-            final TimeUnit unit) {
-        
-        if (consensusReleaseTime == null)
-            throw new IllegalArgumentException();
+    this.unit = unit;
+  }
 
-        if (rootBlock == null)
-            throw new IllegalArgumentException();
+  @Override
+  public IHANotifyReleaseTimeResponse getConsensusReleaseTime() {
+    return consensusReleaseTime;
+  }
 
-        if (timeout < 0L)
-            throw new IllegalArgumentException();
+  @Override
+  public boolean isGatherService() {
+    return isGatherService;
+  }
 
-        if (unit == null)
-            throw new IllegalArgumentException();
+  @Override
+  public boolean isJoinedService() {
+    return isJoinedService;
+  }
 
-        this.consensusReleaseTime = consensusReleaseTime;
-        
-        this.isGatherService = isGatherService;
-        
-        this.isJoinedService = isJoinedService;
-        
-        this.isRootBlock0 = rootBlock.isRootBlock0();
-        
-        /*
-         * Convert to a byte[].
-         * 
-         * Note: This does NOT preserve the isRootBlock0 flag!
-         */
-        this.rootBlock = BytesUtil.getBytes(rootBlock.asReadOnlyBuffer());
-        
-        this.timeout = timeout;
-        
-        this.unit = unit;
-        
-    }
+  @Override
+  public boolean isRootBlock0() {
+    return isRootBlock0;
+  }
 
+  @Override
+  public IRootBlockView getRootBlock() {
 
-    @Override
-    public IHANotifyReleaseTimeResponse getConsensusReleaseTime() {
-        return consensusReleaseTime;
-    }
+    return new RootBlockView(isRootBlock0, ByteBuffer.wrap(rootBlock), new ChecksumUtility());
+  }
 
-    @Override
-    public boolean isGatherService() {
-        return isGatherService;
-    }
+  @Override
+  public long getTimeout() {
+    return timeout;
+  }
 
-    @Override
-    public boolean isJoinedService() {
-        return isJoinedService;
-    }
-    
-    @Override
-    public boolean isRootBlock0() {
-        return isRootBlock0;
-    }
+  @Override
+  public TimeUnit getUnit() {
+    return unit;
+  }
 
-    @Override
-    public IRootBlockView getRootBlock() {
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Returns <code>false</code> by default
+   */
+  @Override
+  public boolean voteNo() {
 
-        return new RootBlockView(isRootBlock0, ByteBuffer.wrap(rootBlock),
-                new ChecksumUtility());
+    return false;
+  }
 
-    }
-
-    @Override
-    public long getTimeout() {
-        return timeout;
-    }
-
-    @Override
-    public TimeUnit getUnit() {
-        return unit;
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Returns <code>false</code> by default
-     */
-    @Override
-    public boolean voteNo() {
-
-        return false;
-        
-    }
-    
-    @Override
-    public String toString() {
-        return super.toString()+"{"
-                +"consensusReleaseTime="+getConsensusReleaseTime()
-                +",isGatherService="+isGatherService()
-                +",isPrepareService="+isJoinedService()
-                +",isRootBlock0="+isRootBlock0()
-                +",rootBlock()="+getRootBlock()
-                +",timeout="+getTimeout()
-                +",unit="+getUnit()
-                +"}";
-    }
-    
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{"
+        + "consensusReleaseTime="
+        + getConsensusReleaseTime()
+        + ",isGatherService="
+        + isGatherService()
+        + ",isPrepareService="
+        + isJoinedService()
+        + ",isRootBlock0="
+        + isRootBlock0()
+        + ",rootBlock()="
+        + getRootBlock()
+        + ",timeout="
+        + getTimeout()
+        + ",unit="
+        + getUnit()
+        + "}";
+  }
 }

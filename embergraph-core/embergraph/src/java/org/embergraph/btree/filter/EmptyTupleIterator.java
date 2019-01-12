@@ -22,33 +22,30 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.filter;
 
 import java.util.NoSuchElementException;
-
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
 /**
  * Empty iterator.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyTupleIterator implements ITupleIterator {
 
-    public static final transient ITupleIterator INSTANCE = new EmptyTupleIterator();
+  public static final transient ITupleIterator INSTANCE = new EmptyTupleIterator();
 
-    private EmptyTupleIterator() {
-    }
+  private EmptyTupleIterator() {}
 
-    public boolean hasNext() {
-        return false;
-    }
+  public boolean hasNext() {
+    return false;
+  }
 
-    public ITuple next() {
-        throw new NoSuchElementException();
-    }
+  public ITuple next() {
+    throw new NoSuchElementException();
+  }
 
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
-    
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 }

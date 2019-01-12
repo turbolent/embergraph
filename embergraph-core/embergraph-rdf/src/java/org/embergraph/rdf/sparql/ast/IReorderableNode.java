@@ -23,29 +23,25 @@ package org.embergraph.rdf.sparql.ast;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
-import org.embergraph.rdf.store.ITripleStore;
 
 /**
- * Interface for things which can be re-ordered by the static join
- * optimizer.  Currently limited to StatementPatternNodes and some 
- * instances of ArbitraryLengthPathNodes (those with a single statement pattern
- * inside).
+ * Interface for things which can be re-ordered by the static join optimizer. Currently limited to
+ * StatementPatternNodes and some instances of ArbitraryLengthPathNodes (those with a single
+ * statement pattern inside).
  */
 public interface IReorderableNode extends IGroupMemberNode, IBindingProducerNode, BOp {
 
-	/**
-	 * The decision about whether to re-order can no longer be made simply
-	 * by examining the type - individual instances of a particular type
-	 * may or may not be reorderable.
-	 */
-	boolean isReorderable();
-	
-	/**
-	 * Return the estimated cardinality - either the range count of a 
-	 * statement pattern or some computed estimated cardinality for a join
-	 * group.
-	 * @param opt This optimizer can be used to help work out the estimate
-	 */
-	long getEstimatedCardinality(StaticOptimizer opt);
-	
+  /**
+   * The decision about whether to re-order can no longer be made simply by examining the type -
+   * individual instances of a particular type may or may not be reorderable.
+   */
+  boolean isReorderable();
+
+  /**
+   * Return the estimated cardinality - either the range count of a statement pattern or some
+   * computed estimated cardinality for a join group.
+   *
+   * @param opt This optimizer can be used to help work out the estimate
+   */
+  long getEstimatedCardinality(StaticOptimizer opt);
 }

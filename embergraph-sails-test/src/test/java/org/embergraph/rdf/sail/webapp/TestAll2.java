@@ -26,44 +26,36 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * A version of the test suite that is intended for local debugging and is NOT
- * run in CI. This is intended just to make it easier to run specific proxied
- * test suites.
- * <p>
- * TO USE: Comment in/out those tests suites that you want to run in
- * {@link #suite()} and also in
+ * A version of the test suite that is intended for local debugging and is NOT run in CI. This is
+ * intended just to make it easier to run specific proxied test suites.
+ *
+ * <p>TO USE: Comment in/out those tests suites that you want to run in {@link #suite()} and also in
  * {@link TestNanoSparqlServerWithProxyIndexManager2}.
- * 
+ *
  * @see TestAll
  */
 public class TestAll2 extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll2() {
-        super();
-    }
+  /** */
+  public TestAll2() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestAll2(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll2(String arg0) {
+    super(arg0);
+  }
 
-    public static Test suite() {
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("WebApp (local debugging)");
+    final TestSuite suite = new TestSuite("WebApp (local debugging)");
 
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.triples));
-        
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.sids));
-        
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.quads));
-        
-        return suite;
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.triples));
 
-    }
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.sids));
 
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager2.suite(TestMode.quads));
+
+    return suite;
+  }
 }

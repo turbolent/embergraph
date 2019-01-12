@@ -27,57 +27,44 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("util");
+    final TestSuite suite = new TestSuite("util");
 
-        // test of the millisecond resolution timestamp factory.
-        suite.addTestSuite( TestMillisecondTimestampFactory.class );
-        
-        // test of the nanosecond resolution timestamp factory.
-        suite.addTestSuite( TestNanosecondTimestampFactory.class );
-        
-        // test of the hybrid timestamp factory.
-        // Note: class is not debugged and is marked as deprecated, test is commented out.
-//        suite.addTestSuite( TestHybridTimestampFactory.class );
-        
+    // test of the millisecond resolution timestamp factory.
+    suite.addTestSuite(TestMillisecondTimestampFactory.class);
 
+    // test of the nanosecond resolution timestamp factory.
+    suite.addTestSuite(TestNanosecondTimestampFactory.class);
 
-        // test suite for a pseudo random number generator.
-        suite.addTestSuite( TestPseudoRandom.class );
+    // test of the hybrid timestamp factory.
+    // Note: class is not debugged and is marked as deprecated, test is commented out.
+    //        suite.addTestSuite( TestHybridTimestampFactory.class );
 
-        suite.addTestSuite(TestByteBufferBitVector.class);
+    // test suite for a pseudo random number generator.
+    suite.addTestSuite(TestPseudoRandom.class);
 
-        suite.addTestSuite( TestCSVReader.class );
-        
-        suite.addTestSuite( TestBits.class );
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestByteBufferBitVector.class);
+
+    suite.addTestSuite(TestCSVReader.class);
+
+    suite.addTestSuite(TestBits.class);
+
+    return suite;
+  }
 }

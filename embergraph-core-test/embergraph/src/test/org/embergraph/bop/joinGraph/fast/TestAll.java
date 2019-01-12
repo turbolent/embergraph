@@ -29,36 +29,23 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("static query optimizer");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // static query optimizer test suite.
-        suite.addTestSuite(TestDefaultEvaluationPlan.class);
+    final TestSuite suite = new TestSuite("static query optimizer");
 
-        return suite;
-        
-    }
-    
+    // static query optimizer test suite.
+    suite.addTestSuite(TestDefaultEvaluationPlan.class);
+
+    return suite;
+  }
 }

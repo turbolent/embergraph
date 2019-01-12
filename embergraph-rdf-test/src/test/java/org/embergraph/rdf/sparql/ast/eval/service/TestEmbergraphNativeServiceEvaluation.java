@@ -23,10 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.Var;
@@ -34,180 +30,165 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
 /**
- * Data driven test suite for SPARQL 1.1 Federated Query against an internal,
- * embergraph "aware" service (similar to our integrated full text search
- * facility).
- * 
+ * Data driven test suite for SPARQL 1.1 Federated Query against an internal, embergraph "aware"
+ * service (similar to our integrated full text search facility).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestServiceInternal.java 6053 2012-02-29 18:47:54Z thompsonbry
- *          $
- * 
- *          TODO Write test which uses a variable for the service reference, but
- *          where the service always resolves to a known service. Verify
- *          evaluation with an empty solution in. Maybe write an alternative
- *          test which does the same thing with multiple source solutions in
- *          (e.g., using BINDINGS in the SPARQL query).
+ * @version $Id: TestServiceInternal.java 6053 2012-02-29 18:47:54Z thompsonbry $
+ *     <p>TODO Write test which uses a variable for the service reference, but where the service
+ *     always resolves to a known service. Verify evaluation with an empty solution in. Maybe write
+ *     an alternative test which does the same thing with multiple source solutions in (e.g., using
+ *     BINDINGS in the SPARQL query).
  */
-public class TestEmbergraphNativeServiceEvaluation extends
-        AbstractDataDrivenSPARQLTestCase {
+public class TestEmbergraphNativeServiceEvaluation extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
+  /** */
+  public TestEmbergraphNativeServiceEvaluation() {}
+
+  /** @param name */
+  public TestEmbergraphNativeServiceEvaluation(String name) {
+    super(name);
+  }
+
+  /**
+   * A simple SERVICE query against an INTERNAL service. The service adds in a single solution which
+   * restricts the set of solutions for the overall query.
+   *
+   * <pre>
+   * PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+   * PREFIX :     <http://example.org/book/>
+   * PREFIX ns:   <http://example.org/ns#>
+   *
+   * SELECT ?book ?title ?price
+   * {
+   *    SERVICE <http://www.embergraph.org/mockService/test_service_001> {
+   *        ?book :foo :bar
+   *    }.
+   *    ?book dc:title ?title ;
+   *          ns:price ?price .
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_service_001() throws Exception {
+
+    /*
+     * Note: This IV needs to be resolved in order to join against data that
+     * loaded into the database. Since we have not yet loaded the data, the
+     * RDF Value is being inserted into the store now. That way, when the
+     * data are loaded, the data will use the same IV and the join will
+     * succeed.
      */
-    public TestEmbergraphNativeServiceEvaluation() {
+    final IV<?, ?> book1 =
+        store.addTerm(store.getValueFactory().createURI("http://example.org/book/book1"));
+
+    //        final IV<?,?> fourtyTwo;
+    ////      fourtyTwo = makeIV(store.getValueFactory().createLiteral("42", XSD.INTEGER));
+    //        fourtyTwo = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42));
+
+    final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
+    {
+      final IBindingSet bset = new ListBindingSet();
+      bset.set(Var.var("book"), new Constant<IV>(book1));
+      serviceSolutions.add(bset);
     }
 
-    /**
-     * @param name
+    final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
+
+    ServiceRegistry.getInstance()
+        .add(serviceURI, new EmbergraphNativeMockServiceFactory(serviceSolutions));
+
+    try {
+
+      new TestHelper(
+              "sparql11-service-001", // testURI
+              "sparql11-service-001.rq", // queryFileURL
+              "sparql11-service-001.ttl", // dataFileURL
+              "sparql11-service-001.srx" // resultFileURL
+              )
+          .runTest();
+
+    } finally {
+
+      ServiceRegistry.getInstance().remove(serviceURI);
+    }
+  }
+
+  /**
+   * A simple SERVICE query against an INTERNAL service. The service provides three solutions, two
+   * of which join with the remainder of the query.
+   *
+   * <p>Note: Since the SERVICE is not actually doing joins, we wind up with duplicate solutions.
+   *
+   * <pre>
+   * PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+   * PREFIX :     <http://example.org/book/>
+   * PREFIX ns:   <http://example.org/ns#>
+   *
+   * SELECT ?book ?title ?price
+   * {
+   *    SERVICE <http://www.embergraph.org/mockService/test_service_002> {
+   *        ?book :foo :bar
+   *    }.
+   *    hint:Prior hint:runFirst true .
+   *    ?book dc:title ?title ;
+   *          ns:price ?price .
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_service_002() throws Exception {
+
+    /*
+     * Note: This IV needs to be resolved in order to join against data that
+     * loaded into the database. Since we have not yet loaded the data, the
+     * RDF Value is being inserted into the store now. That way, when the
+     * data are loaded, the data will use the same IV and the join will
+     * succeed.
      */
-    public TestEmbergraphNativeServiceEvaluation(String name) {
-        super(name);
+    final IV<?, ?> book1 =
+        store.addTerm(store.getValueFactory().createURI("http://example.org/book/book1"));
+    final IV<?, ?> book2 =
+        store.addTerm(store.getValueFactory().createURI("http://example.org/book/book2"));
+
+    final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
+    {
+      final IBindingSet bset = new ListBindingSet();
+      bset.set(Var.var("book"), new Constant<IV>(book1));
+      serviceSolutions.add(bset);
+    }
+    {
+      final IBindingSet bset = new ListBindingSet();
+      bset.set(Var.var("book"), new Constant<IV>(book2));
+      serviceSolutions.add(bset);
+    }
+    {
+      final IBindingSet bset = new ListBindingSet();
+      serviceSolutions.add(bset);
     }
 
-    /**
-     * A simple SERVICE query against an INTERNAL service. The service adds in a
-     * single solution which restricts the set of solutions for the overall
-     * query.
-     * 
-     * <pre>
-     * PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-     * PREFIX :     <http://example.org/book/> 
-     * PREFIX ns:   <http://example.org/ns#> 
-     * 
-     * SELECT ?book ?title ?price
-     * {
-     *    SERVICE <http://www.embergraph.org/mockService/test_service_001> {
-     *        ?book :foo :bar
-     *    }.
-     *    ?book dc:title ?title ;
-     *          ns:price ?price .
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_service_001() throws Exception {
-        
-        /*
-         * Note: This IV needs to be resolved in order to join against data that
-         * loaded into the database. Since we have not yet loaded the data, the
-         * RDF Value is being inserted into the store now. That way, when the
-         * data are loaded, the data will use the same IV and the join will
-         * succeed.
-         */
-        final IV<?, ?> book1 = store.addTerm(store.getValueFactory().createURI(
-                "http://example.org/book/book1"));
-        
-//        final IV<?,?> fourtyTwo;
-////      fourtyTwo = makeIV(store.getValueFactory().createLiteral("42", XSD.INTEGER));
-//        fourtyTwo = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42));
+    final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
 
-        final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
-        {
-            final IBindingSet bset = new ListBindingSet();
-            bset.set(Var.var("book"), new Constant<IV>(book1));
-            serviceSolutions.add(bset);
-        }
-   
-        final URI serviceURI = new URIImpl(
-                "http://www.embergraph.org/mockService/" + getName());
+    ServiceRegistry.getInstance()
+        .add(serviceURI, new EmbergraphNativeMockServiceFactory(serviceSolutions));
 
-        ServiceRegistry.getInstance().add(serviceURI,
-                new EmbergraphNativeMockServiceFactory(serviceSolutions));
+    try {
 
-        try {
+      new TestHelper(
+              "sparql11-service-002", // testURI
+              "sparql11-service-002.rq", // queryFileURL
+              "sparql11-service-002.ttl", // dataFileURL
+              "sparql11-service-002.srx" // resultFileURL
+              )
+          .runTest();
 
-            new TestHelper(
-                    "sparql11-service-001", // testURI
-                    "sparql11-service-001.rq",// queryFileURL
-                    "sparql11-service-001.ttl",// dataFileURL
-                    "sparql11-service-001.srx"// resultFileURL
-            ).runTest();
-            
-        } finally {
-            
-            ServiceRegistry.getInstance().remove(serviceURI);
-            
-        }
-        
+    } finally {
+
+      ServiceRegistry.getInstance().remove(serviceURI);
     }
-    
-    /**
-     * A simple SERVICE query against an INTERNAL service. The service provides
-     * three solutions, two of which join with the remainder of the query.
-     * <p>
-     * Note: Since the SERVICE is not actually doing joins, we wind up with
-     * duplicate solutions.
-     * 
-     * <pre>
-     * PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-     * PREFIX :     <http://example.org/book/> 
-     * PREFIX ns:   <http://example.org/ns#> 
-     * 
-     * SELECT ?book ?title ?price
-     * {
-     *    SERVICE <http://www.embergraph.org/mockService/test_service_002> {
-     *        ?book :foo :bar
-     *    }.
-     *    hint:Prior hint:runFirst true .
-     *    ?book dc:title ?title ;
-     *          ns:price ?price .
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_service_002() throws Exception {
-        
-        /*
-         * Note: This IV needs to be resolved in order to join against data that
-         * loaded into the database. Since we have not yet loaded the data, the
-         * RDF Value is being inserted into the store now. That way, when the
-         * data are loaded, the data will use the same IV and the join will
-         * succeed.
-         */
-        final IV<?, ?> book1 = store.addTerm(store.getValueFactory().createURI(
-                "http://example.org/book/book1"));
-        final IV<?, ?> book2 = store.addTerm(store.getValueFactory().createURI(
-                "http://example.org/book/book2"));
-
-        final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
-        {
-            final IBindingSet bset = new ListBindingSet();
-            bset.set(Var.var("book"), new Constant<IV>(book1));
-            serviceSolutions.add(bset);
-        }
-        {
-            final IBindingSet bset = new ListBindingSet();
-            bset.set(Var.var("book"), new Constant<IV>(book2));
-            serviceSolutions.add(bset);
-        }
-        {
-            final IBindingSet bset = new ListBindingSet();
-            serviceSolutions.add(bset);
-        }
-   
-        final URI serviceURI = new URIImpl(
-                "http://www.embergraph.org/mockService/" + getName());
-
-        ServiceRegistry.getInstance().add(serviceURI,
-                new EmbergraphNativeMockServiceFactory(serviceSolutions));
-
-        try {
-
-            new TestHelper(
-                    "sparql11-service-002", // testURI
-                    "sparql11-service-002.rq",// queryFileURL
-                    "sparql11-service-002.ttl",// dataFileURL
-                    "sparql11-service-002.srx"// resultFileURL
-            ).runTest();
-            
-        } finally {
-            
-            ServiceRegistry.getInstance().remove(serviceURI);
-            
-        }
-        
-    }
-    
+  }
 }

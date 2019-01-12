@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.concurrent;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -27,109 +27,106 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import org.junit.Test;
-
 import org.embergraph.concurrent.AccessSemaphore.Access;
 import org.embergraph.util.DaemonThreadFactory;
+import org.junit.Test;
 
 public class TestAccessSemaphore {
 
-	@Test
-	public void testSimpleAccess() throws InterruptedException {
-        final ExecutorService execService = Executors.newFixedThreadPool(10,
-                DaemonThreadFactory.defaultThreadFactory());
-        
-        final AccessSemaphore accessSemaphore = new AccessSemaphore(10/*max shared*/);
-        
-        final Access shared = accessSemaphore.acquireShared();
-        
-        final Future<?> r1 = execService.submit(new Runnable() {
+  @Test
+  public void testSimpleAccess() throws InterruptedException {
+    final ExecutorService execService =
+        Executors.newFixedThreadPool(10, DaemonThreadFactory.defaultThreadFactory());
 
-			@Override
-			public void run() {
-				try {
-					final Access access = accessSemaphore.acquireExclusive();
-					access.release();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-        	
-        });
-        
-        try {
-			r1.get(2, TimeUnit.SECONDS);
-			fail("Should not attain exclusive access");
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// expected
-		}
-        
-        // now release shared access
-        shared.release();
-        
-        try {
- 			r1.get(2, TimeUnit.SECONDS);
- 		} catch (ExecutionException e) {
- 			e.printStackTrace();
- 		} catch (TimeoutException e) {
-			fail("Should attain exclusive access");
- 		}
-        
-	}
+    final AccessSemaphore accessSemaphore = new AccessSemaphore(10 /*max shared*/);
 
+    final Access shared = accessSemaphore.acquireShared();
 
-	@Test
-	public void testStressAccess() throws InterruptedException,
-			ExecutionException {
-		// Run 20 threads with 10 shared
-		final ExecutorService execService = Executors.newFixedThreadPool(20,
-				DaemonThreadFactory.defaultThreadFactory());
+    final Future<?> r1 =
+        execService.submit(
+            new Runnable() {
 
-		try {
-			final AccessSemaphore accessSemaphore = new AccessSemaphore(10/* max shared */);
+              @Override
+              public void run() {
+                try {
+                  final Access access = accessSemaphore.acquireExclusive();
+                  access.release();
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
 
-			final Random r = new Random();
+    try {
+      r1.get(2, TimeUnit.SECONDS);
+      fail("Should not attain exclusive access");
+    } catch (ExecutionException e) {
+      e.printStackTrace();
+    } catch (TimeoutException e) {
+      // expected
+    }
 
-			final int NTASKS = 100;
-			final int NACQUIRES = 10000;
+    // now release shared access
+    shared.release();
 
-			final Future<?>[] futures = new Future<?>[NTASKS];
+    try {
+      r1.get(2, TimeUnit.SECONDS);
+    } catch (ExecutionException e) {
+      e.printStackTrace();
+    } catch (TimeoutException e) {
+      fail("Should attain exclusive access");
+    }
+  }
 
-			for (int t = 0; t < NTASKS; t++) {
-				final Future<?> r1 = execService.submit(new Runnable() {
+  @Test
+  public void testStressAccess() throws InterruptedException, ExecutionException {
+    // Run 20 threads with 10 shared
+    final ExecutorService execService =
+        Executors.newFixedThreadPool(20, DaemonThreadFactory.defaultThreadFactory());
 
-					@Override
-					public void run() {
-						try {
-							for (int i = 0; i < NACQUIRES; i++) {
-								final int v = r.nextInt();
-								final Access access = (v % 20) == 0 ? 
-										accessSemaphore.acquireExclusive() : 
-										accessSemaphore.acquireShared();
-										
-								access.release();
-							}
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
+    try {
+      final AccessSemaphore accessSemaphore = new AccessSemaphore(10 /* max shared */);
 
-				});
-				
-				futures[t] = r1;
-			}
+      final Random r = new Random();
 
-			for (int i = 0; i < NTASKS; i++) {
-				futures[i].get(30, TimeUnit.SECONDS);
-			}
-		} catch (TimeoutException e) {
-			fail("Test may be deadlocked");
-		} finally {
-			execService.shutdown();
-		}
-	}
+      final int NTASKS = 100;
+      final int NACQUIRES = 10000;
 
+      final Future<?>[] futures = new Future<?>[NTASKS];
+
+      for (int t = 0; t < NTASKS; t++) {
+        final Future<?> r1 =
+            execService.submit(
+                new Runnable() {
+
+                  @Override
+                  public void run() {
+                    try {
+                      for (int i = 0; i < NACQUIRES; i++) {
+                        final int v = r.nextInt();
+                        final Access access =
+                            (v % 20) == 0
+                                ? accessSemaphore.acquireExclusive()
+                                : accessSemaphore.acquireShared();
+
+                        access.release();
+                      }
+                    } catch (InterruptedException e) {
+                      e.printStackTrace();
+                    }
+                  }
+                });
+
+        futures[t] = r1;
+      }
+
+      for (int i = 0; i < NTASKS; i++) {
+        futures[i].get(30, TimeUnit.SECONDS);
+      }
+    } catch (TimeoutException e) {
+      fail("Test may be deadlocked");
+    } finally {
+      execService.shutdown();
+    }
+  }
 }

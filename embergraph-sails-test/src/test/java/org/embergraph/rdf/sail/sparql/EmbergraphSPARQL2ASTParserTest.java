@@ -21,361 +21,316 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.sparql;
 
 import org.embergraph.EmbergraphStatics;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.parser.QueryParserUtil;
 
-import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
-
 /**
- * Non-manifest driven versions of the manifest driven test suite to facilitate
- * debugging.
- * 
+ * Non-manifest driven versions of the manifest driven test suite to facilitate debugging.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilderTestCase {
 
-    public EmbergraphSPARQL2ASTParserTest() {
+  public EmbergraphSPARQL2ASTParserTest() {}
+
+  public EmbergraphSPARQL2ASTParserTest(String name) {
+    super(name);
+  }
+
+  /**
+   * PrefixName with backslash-escaped colons.
+   *
+   * <pre>
+   * SELECT * WHERE {
+   *     ?page og:audio\:title ?title
+   * }
+   * </pre>
+   *
+   * @throws MalformedQueryException
+   * @see syntax-query/qname-escape-01.rq
+   */
+  public void test_qname_escape_01() throws MalformedQueryException {
+
+    if (!EmbergraphStatics.runKnownBadTests) {
+      // FIXME See #1076 Negative parser tests
+      return;
     }
 
-    public EmbergraphSPARQL2ASTParserTest(String name) {
-        super(name);
+    final String query =
+        "PREFIX og: <http://ogp.me/ns#>\n"
+            + " SELECT * WHERE {\n"
+            + "    ?page og:audio\\:title ?title\n"
+            + "}";
+
+    parseOperation(query);
+  }
+
+  /** PrefixName with backslash-escaped colon (qname in select). */
+  public void test_qname_escape_01b() throws MalformedQueryException {
+
+    if (!EmbergraphStatics.runKnownBadTests) {
+      // FIXME See #1076 Negative parser tests
+      return;
     }
 
-    /**
-     * PrefixName with backslash-escaped colons.
-     * <pre>
-     * SELECT * WHERE {
-     *     ?page og:audio\:title ?title
-     * }
-     * </pre>
-     * @throws MalformedQueryException 
-     * @see syntax-query/qname-escape-01.rq
-     */
-    public void test_qname_escape_01() throws MalformedQueryException {
-       
-       if (!EmbergraphStatics.runKnownBadTests) {
-          // FIXME See #1076 Negative parser tests
-          return;
-       }
+    final String query =
+        "PREFIX og: <http://ogp.me/ns#>\n"
+            + "SELECT ( og:audio\\:title as ?x )"
+            + "WHERE {?page og:foo ?title}";
 
-        final String query = "PREFIX og: <http://ogp.me/ns#>\n"
-                + " SELECT * WHERE {\n" + "    ?page og:audio\\:title ?title\n"
-                + "}";
+    parseOperation(query);
+  }
 
-        parseOperation(query);
-        
-    }
+  /** PrefixName with hex-encoded colon. */
+  public void test_qname_escape_02() throws MalformedQueryException {
 
-    /**
-     * PrefixName with backslash-escaped colon (qname in select).
-     */
-    public void test_qname_escape_01b() throws MalformedQueryException {
+    final String query =
+        "PREFIX og: <http://ogp.me/ns#>\n" + "SELECT * WHERE { ?page og:audio%3Atitle ?title }";
 
-      if (!EmbergraphStatics.runKnownBadTests) {
-         // FIXME See #1076 Negative parser tests
-         return;
-      }
-       
-        final String query = "PREFIX og: <http://ogp.me/ns#>\n"
-                + "SELECT ( og:audio\\:title as ?x )"
-                + "WHERE {?page og:foo ?title}";
+    parseOperation(query);
+  }
 
-        parseOperation(query);
+  /**
+   * Positive test (originally failed because it was being passed to parseQuery() rather than
+   * parseUpdate()).
+   */
+  public void test_syntax_update_01() throws MalformedQueryException {
 
-    }
+    final String query =
+        "BASE <http://example/base#>\n"
+            + "PREFIX : <http://example/>\n"
+            + "LOAD <http://example.org/faraway>";
 
-    /**
-     * PrefixName with hex-encoded colon.
-     */
-    public void test_qname_escape_02() throws MalformedQueryException {
+    parseOperation(query);
+  }
 
-        final String query = "PREFIX og: <http://ogp.me/ns#>\n"
-                + "SELECT * WHERE { ?page og:audio%3Atitle ?title }";
+  /** grouping by expression, done wrong */
+  public void test_agg08() throws MalformedQueryException {
 
-        parseOperation(query);
+    final String query =
+        "PREFIX : <http://www.example.org/>\n"
+            + "SELECT ((?O1 + ?O2) AS ?O12) (COUNT(?O1) AS ?C)\n"
+            + "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?O1 + ?O2)\n"
+            + "ORDER BY ?O12";
 
-    }
+    negativeTest(query);
+  }
 
-    /**
-     * Positive test (originally failed because it was being passed to
-     * parseQuery() rather than parseUpdate()).
-     */
-    public void test_syntax_update_01() throws MalformedQueryException {
-        
-        final String query="BASE <http://example/base#>\n"+
-            "PREFIX : <http://example/>\n"+
-            "LOAD <http://example.org/faraway>";
-    
-        parseOperation(query);
-        
-    }
+  /** Projection of an ungrouped variable (not appearing in the GROUP BY expression) */
+  public void test_agg09() throws MalformedQueryException {
 
-    /** grouping by expression, done wrong */
-    public void test_agg08() throws MalformedQueryException {
+    final String query =
+        "PREFIX : <http://www.example.org/>\n"
+            + "SELECT ?P (COUNT(?O) AS ?C)\n"
+            + "WHERE { ?S ?P ?O } GROUP BY ?S";
 
-        final String query = "PREFIX : <http://www.example.org/>\n"
-                + "SELECT ((?O1 + ?O2) AS ?O12) (COUNT(?O1) AS ?C)\n"
-                + "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?O1 + ?O2)\n"
-                + "ORDER BY ?O12";
+    negativeTest(query);
+  }
 
-        negativeTest(query);
+  /** Projection of an ungrouped variable (no GROUP BY expression at all) */
+  public void test_agg10() throws MalformedQueryException {
 
-    }
+    final String query =
+        "PREFIX : <http://www.example.org/>\n"
+            + "SELECT ?P (COUNT(?O) AS ?C)\n"
+            + "WHERE { ?S ?P ?O }";
 
-    /**
-     * Projection of an ungrouped variable (not appearing in the GROUP BY
-     * expression)
-     */
-    public void test_agg09() throws MalformedQueryException {
+    negativeTest(query);
+  }
 
-        final String query = "PREFIX : <http://www.example.org/>\n"
-                + "SELECT ?P (COUNT(?O) AS ?C)\n"
-                + "WHERE { ?S ?P ?O } GROUP BY ?S";
-        
-        negativeTest(query);
+  /** Use of an ungrouped variable in a project expression */
+  public void test_agg11() throws MalformedQueryException {
 
-    }
-    
-    /**
-     * Projection of an ungrouped variable (no GROUP BY expression at all)
-     */
-    public void test_agg10() throws MalformedQueryException {
+    final String query =
+        "PREFIX : <http://www.example.org/>\n"
+            + "SELECT ((?O1 + ?O2) AS ?O12) (COUNT(?O1) AS ?C)\n"
+            + "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?S)";
 
-        final String query = "PREFIX : <http://www.example.org/>\n"
-                + "SELECT ?P (COUNT(?O) AS ?C)\n"
-                + "WHERE { ?S ?P ?O }";
+    negativeTest(query);
+  }
 
-        negativeTest(query);
+  /**
+   * Use of an ungrouped variable in a project expression, where the variable appears in a GROUP BY
+   * expression
+   */
+  public void test_agg12() throws MalformedQueryException {
 
-    }
-    
-    /**
-     * Use of an ungrouped variable in a project expression
-     */
-    public void test_agg11() throws MalformedQueryException {
+    final String query =
+        "PREFIX : <http://www.example.org/>\n"
+            + "SELECT ?O1 (COUNT(?O2) AS ?C)\n"
+            + "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?O1 + ?O2)";
 
-        final String query = "PREFIX : <http://www.example.org/>\n"
-                + "SELECT ((?O1 + ?O2) AS ?O12) (COUNT(?O1) AS ?C)\n"
-                + "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?S)";
+    negativeTest(query);
+  }
 
-        negativeTest(query);
+  /** projection of ungrouped variable */
+  public void test_group06() throws MalformedQueryException {
 
-    }
+    final String query =
+        "PREFIX : <http://example/>\n"
+            + "SELECT ?s ?v\n"
+            + "{\n"
+            + "  ?s :p ?v .\n"
+            + "}\n"
+            + "GROUP BY ?s";
 
-    /**
-     * Use of an ungrouped variable in a project expression, where the variable
-     * appears in a GROUP BY expression
-     */
-    public void test_agg12() throws MalformedQueryException {
+    negativeTest(query);
+  }
 
-        final String query = "PREFIX : <http://www.example.org/>\n"+
-                "SELECT ?O1 (COUNT(?O2) AS ?C)\n"+
-                "WHERE { ?S :p ?O1; :q ?O2 } GROUP BY (?O1 + ?O2)";
+  /** projection of ungrouped variable, more complex example than Group-6 */
+  public void test_group07() throws MalformedQueryException {
 
-        negativeTest(query);
+    final String query =
+        "prefix lode: <http://linkedevents.org/ontology/>\n"
+            + "prefix dc: <http://purl.org/dc/elements/1.1/>\n"
+            + "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+            + "select ?event ?eventName ?venue ?photo\n"
+            + "where {\n"
+            + "   ?photo lode:illustrate ?event .\n"
+            + "   {\n"
+            + "   select ?event ?eventName ?venue\n"
+            + "   where {\n"
+            + "         ?event dc:title ?eventName .\n"
+            + "         ?event lode:atPlace ?venue .\n"
+            + "         ?venue rdfs:label \"Live Music Hall\" .\n"
+            + "         }\n"
+            + "   }\n"
+            + "}\n"
+            + "GROUP BY ?event\n";
 
-    }
-    
-    /**
-     * projection of ungrouped variable
-     */
-    public void test_group06() throws MalformedQueryException {
+    negativeTest(query);
+  }
 
-        final String query = "PREFIX : <http://example/>\n"+
-                "SELECT ?s ?v\n"+
-                "{\n"+
-                "  ?s :p ?v .\n"+
-                "}\n"+
-                "GROUP BY ?s";
+  /** Select * Not allowed with GROUP BY */
+  public void test_syn_bad_01() throws MalformedQueryException {
 
-        negativeTest(query);
+    final String query = "SELECT * { ?s ?p ?o } GROUP BY ?s";
 
-    }
-    
-    /**
-     * projection of ungrouped variable, more complex example than Group-6
-     */
-    public void test_group07() throws MalformedQueryException {
+    negativeTest(query);
+  }
 
-        final String query = "prefix lode: <http://linkedevents.org/ontology/>\n"+
-        "prefix dc: <http://purl.org/dc/elements/1.1/>\n"+
-"prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
-"select ?event ?eventName ?venue ?photo\n"+
-"where {\n"+
-"   ?photo lode:illustrate ?event .\n"+
-"   {\n"+
-"   select ?event ?eventName ?venue\n"+
-"   where {\n"+
-"         ?event dc:title ?eventName .\n"+
-"         ?event lode:atPlace ?venue .\n"+
-"         ?venue rdfs:label \"Live Music Hall\" .\n"+
-"         }\n"+
-"   }\n"+
-"}\n"+
-"GROUP BY ?event\n"
-;
+  /** required syntax error : out of scope variable in SELECT from group. */
+  public void test_syn_bad_02() throws MalformedQueryException {
 
-        negativeTest(query);
+    final String query = "SELECT ?o { ?s ?p ?o } GROUP BY ?s";
 
-    }
+    negativeTest(query);
+  }
 
-    /**
-     * Select * Not allowed with GROUP BY
-     */
-    public void test_syn_bad_01() throws MalformedQueryException {
+  /** Same variable can not be projected more than once. */
+  public void test_syn_bad_03() throws MalformedQueryException {
 
-        final String query = "SELECT * { ?s ?p ?o } GROUP BY ?s";
+    final String query = "SELECT (1 AS ?X) (1 AS ?X) {}";
 
-        negativeTest(query);
+    negativeTest(query);
+  }
 
-    }
-    
-    /**
-     * required syntax error : out of scope variable in SELECT from group.
-     */
-    public void test_syn_bad_02() throws MalformedQueryException {
+  /** Empty UPDATE. */
+  public void test_syntax_update_38() throws MalformedQueryException {
 
-        final String query = "SELECT ?o { ?s ?p ?o } GROUP BY ?s";
+    final String query = "# Empty\n";
 
-        negativeTest(query);
+    parseOperation(query);
+  }
 
-    }
+  /** BASE but otherwise empty UPDATE. */
+  public void test_syntax_update_39() throws MalformedQueryException {
 
-    /**
-     * Same variable can not be projected more than once.
-     */
-    public void test_syn_bad_03() throws MalformedQueryException {
+    final String query = "BASE <http://example/>\n# Otherwise empty\n";
 
-        final String query = "SELECT (1 AS ?X) (1 AS ?X) {}";
+    parseOperation(query);
+  }
+  /** PREFIX but otherwise empty UPDATE. */
+  public void test_syntax_update_30() throws MalformedQueryException {
 
-        negativeTest(query);
+    final String query = "PREFIX : <http://example/>\n# Otherwise empty\n";
 
-    }
+    parseOperation(query);
+  }
 
-    /** Empty UPDATE. */
-    public void test_syntax_update_38() throws MalformedQueryException {
+  /** Variable in DELETE DATA's data. */
+  public void test_syntax_update_bad_03() throws MalformedQueryException {
 
-        final String query = "# Empty\n";
+    final String query = "DELETE DATA { ?s <:p> <:o> }";
 
-        parseOperation(query);
+    negativeTest(query);
+  }
 
-    }
+  /** Variable in INSERT DATA's data. */
+  public void test_syntax_update_bad_04() throws MalformedQueryException {
 
-    /** BASE but otherwise empty UPDATE. */
-    public void test_syntax_update_39() throws MalformedQueryException {
+    final String query = "INSERT DATA { GRAPH ?g {<:s> <:p> <:o> } }";
 
-        final String query = "BASE <http://example/>\n# Otherwise empty\n";
+    negativeTest(query);
+  }
 
-        parseOperation(query);
+  /** Too many separators (in UPDATE request) */
+  public void test_syntax_update_bad_08() throws MalformedQueryException {
 
-    }
-    /** PREFIX but otherwise empty UPDATE. */
-    public void test_syntax_update_30() throws MalformedQueryException {
+    final String query = "CREATE GRAPH <:g> ;; LOAD <:remote> into GRAPH <:g>";
 
-        final String query = "PREFIX : <http://example/>\n# Otherwise empty\n";
+    negativeTest(query);
+  }
 
-        parseOperation(query);
+  /** Too many separators (in UPDATE request) */
+  public void test_syntax_update_bad_09() throws MalformedQueryException {
 
-    }
+    final String query = "CREATE GRAPH <:g> ; LOAD <:remote> into GRAPH <:g> ;;";
 
-    /**
-     * Variable in DELETE DATA's data.
-     */
-    public void test_syntax_update_bad_03() throws MalformedQueryException {
+    negativeTest(query);
+  }
 
-        final String query = "DELETE DATA { ?s <:p> <:o> }";
+  /** BNode in DELETE WHERE */
+  public void test_syntax_update_bad_10() throws MalformedQueryException {
 
-        negativeTest(query);
+    final String query = "DELETE WHERE { _:a <:p> <:o> }";
+
+    negativeTest(query);
+  }
+
+  /**
+   * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise use the openrdf
+   * parser.
+   */
+  private static final boolean useEmbergraphParser = true;
+
+  /**
+   * Parse with expectation of failure.
+   *
+   * @param query The query or update request.
+   */
+  private void negativeTest(final String query) {
+
+    try {
+
+      parseOperation(query);
+
+      fail("Negative test - should fail");
+
+    } catch (MalformedQueryException ex) {
+
+      // Ignore expected exception.
 
     }
+  }
 
-    /** Variable in INSERT DATA's data. */
-    public void test_syntax_update_bad_04() throws MalformedQueryException {
+  /**
+   * Parse with expectation of success.
+   *
+   * @param query The query or update request.
+   * @throws MalformedQueryException
+   */
+  private void parseOperation(final String query) throws MalformedQueryException {
 
-        final String query = "INSERT DATA { GRAPH ?g {<:s> <:p> <:o> } }";
+    if (useEmbergraphParser) {
 
-        negativeTest(query);
+      new Embergraph2ASTSPARQLParser().parseOperation(query, baseURI);
 
+    } else {
+
+      QueryParserUtil.parseOperation(QueryLanguage.SPARQL, query, baseURI);
     }
-    
-    /** Too many separators (in UPDATE request) */
-    public void test_syntax_update_bad_08() throws MalformedQueryException {
-
-        final String query = "CREATE GRAPH <:g> ;; LOAD <:remote> into GRAPH <:g>";
-
-        negativeTest(query);
-
-    }
-    
-    /** Too many separators (in UPDATE request) */
-    public void test_syntax_update_bad_09() throws MalformedQueryException {
-
-        final String query = "CREATE GRAPH <:g> ; LOAD <:remote> into GRAPH <:g> ;;";
-
-        negativeTest(query);
-
-    }
-    
-    /** BNode in DELETE WHERE */
-    public void test_syntax_update_bad_10() throws MalformedQueryException {
-
-        final String query = "DELETE WHERE { _:a <:p> <:o> }";
-
-        negativeTest(query);
-
-    }
-    
-    /**
-     * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise
-     * use the openrdf parser.
-     */
-    private static final boolean useEmbergraphParser = true;
-    
-    /**
-     * Parse with expectation of failure.
-     * 
-     * @param query
-     *            The query or update request.
-     */
-    private void negativeTest(final String query) {
-
-        try {
-
-            parseOperation(query);
-
-            fail("Negative test - should fail");
-            
-        } catch (MalformedQueryException ex) {
-            
-            // Ignore expected exception.
-            
-        }
-
-    }
-    
-    /**
-     * Parse with expectation of success.
-     * 
-     * @param query
-     *            The query or update request.
-     *            
-     * @throws MalformedQueryException
-     */
-    private void parseOperation(final String query)
-            throws MalformedQueryException {
-
-        if (useEmbergraphParser) {
-
-            new Embergraph2ASTSPARQLParser().parseOperation(query,
-                    baseURI);
-            
-        } else {
-            
-            QueryParserUtil.parseOperation(QueryLanguage.SPARQL, query, baseURI);
-            
-        }
-
-    }
-
+  }
 }

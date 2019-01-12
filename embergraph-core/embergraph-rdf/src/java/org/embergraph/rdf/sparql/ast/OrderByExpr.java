@@ -18,102 +18,88 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
 
 /**
- * An {@link IValueExpressionNode} paired with a flag to indicating an ascending
- * or descending sort order.
- * 
+ * An {@link IValueExpressionNode} paired with a flag to indicating an ascending or descending sort
+ * order.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class OrderByExpr extends ASTBase implements
-        IValueExpressionNodeContainer {
+public class OrderByExpr extends ASTBase implements IValueExpressionNodeContainer {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    interface Annotations extends ASTBase.Annotations {
-        
-        String ASCENDING = "ascending";
+  interface Annotations extends ASTBase.Annotations {
 
-        boolean DEFAULT_ASCENDING = true;
-        
-    }
-    
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public OrderByExpr(OrderByExpr op) {
-        super(op);
-    }
+    String ASCENDING = "ascending";
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public OrderByExpr(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+    boolean DEFAULT_ASCENDING = true;
+  }
 
-    public OrderByExpr(final IValueExpressionNode ve, final boolean ascending) {
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public OrderByExpr(OrderByExpr op) {
+    super(op);
+  }
 
-        super(new BOp[] { (BOp) ve }, null/* anns */);
+  /** Required shallow copy constructor. */
+  public OrderByExpr(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
 
-        setAscending(ascending);
+  public OrderByExpr(final IValueExpressionNode ve, final boolean ascending) {
 
-    }
+    super(new BOp[] {(BOp) ve}, null /* anns */);
 
-    final public boolean isAscending() {
+    setAscending(ascending);
+  }
 
-        return getProperty(Annotations.ASCENDING, Annotations.DEFAULT_ASCENDING);
+  public final boolean isAscending() {
 
-    }
+    return getProperty(Annotations.ASCENDING, Annotations.DEFAULT_ASCENDING);
+  }
 
-    final public void setAscending(boolean ascending) {
+  public final void setAscending(boolean ascending) {
 
-        setProperty(Annotations.ASCENDING, ascending);
+    setProperty(Annotations.ASCENDING, ascending);
+  }
 
-    }
-   
-    public IValueExpressionNode getValueExpressionNode() {
+  public IValueExpressionNode getValueExpressionNode() {
 
-        return (IValueExpressionNode) get(0);
+    return (IValueExpressionNode) get(0);
+  }
 
-    }
+  public IValueExpression<? extends IV> getValueExpression() {
 
-    public IValueExpression<? extends IV> getValueExpression() {
+    return getValueExpressionNode().getValueExpression();
+  }
 
-        return getValueExpressionNode().getValueExpression();
-
-    }
-
-//    public String toString() {
-//
-//        final StringBuilder sb = new StringBuilder();
-//
-//        final boolean ascending = isAscending();
-//        
-//        if (!ascending) {
-//
-//            sb.append("desc(");
-//            
-//        }
-//
-//        sb.append(getValueExpressionNode().toString());
-//
-//        if (!ascending) {
-//            
-//            sb.append(")");
-//            
-//        }
-//
-//        return sb.toString();
-//
-//    }
+  //    public String toString() {
+  //
+  //        final StringBuilder sb = new StringBuilder();
+  //
+  //        final boolean ascending = isAscending();
+  //
+  //        if (!ascending) {
+  //
+  //            sb.append("desc(");
+  //
+  //        }
+  //
+  //        sb.append(getValueExpressionNode().toString());
+  //
+  //        if (!ascending) {
+  //
+  //            sb.append(")");
+  //
+  //        }
+  //
+  //        return sb.toString();
+  //
+  //    }
 
 }

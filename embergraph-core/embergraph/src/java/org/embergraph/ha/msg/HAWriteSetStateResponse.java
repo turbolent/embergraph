@@ -19,44 +19,45 @@ package org.embergraph.ha.msg;
 
 public class HAWriteSetStateResponse implements IHAWriteSetStateResponse {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final long commitCounter;
-    private final long lastCommitTime;
-    private final long sequence;
+  private final long commitCounter;
+  private final long lastCommitTime;
+  private final long sequence;
 
-    public HAWriteSetStateResponse(final long commitCounter,
-            final long lastCommitTime, final long sequence) {
-        this.commitCounter = commitCounter;
-        this.lastCommitTime = lastCommitTime;
-        this.sequence = sequence;
-    }
+  public HAWriteSetStateResponse(
+      final long commitCounter, final long lastCommitTime, final long sequence) {
+    this.commitCounter = commitCounter;
+    this.lastCommitTime = lastCommitTime;
+    this.sequence = sequence;
+  }
 
-    @Override
-    public long getCommitCounter() {
-        return commitCounter;
-    }
+  @Override
+  public long getCommitCounter() {
+    return commitCounter;
+  }
 
-    @Override
-    public long getLastCommitTime() {
-        return lastCommitTime;
-    }
+  @Override
+  public long getLastCommitTime() {
+    return lastCommitTime;
+  }
 
-    @Override
-    public long getSequence() {
-        return sequence;
-    }
+  @Override
+  public long getSequence() {
+    return sequence;
+  }
 
-    @Override
-    public String toString() {
-        
-        return getClass().getSimpleName() + "{commitCounter=" + commitCounter
-                + ", sequence=" + sequence + ", lastCommitTime="
-                + lastCommitTime + "}";
-        
-    }
-    
+  @Override
+  public String toString() {
+
+    return getClass().getSimpleName()
+        + "{commitCounter="
+        + commitCounter
+        + ", sequence="
+        + sequence
+        + ", lastCommitTime="
+        + lastCommitTime
+        + "}";
+  }
 }

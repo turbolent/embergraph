@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 import java.io.Serializable;
-
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.BOpEvaluationContext;
 import org.embergraph.bop.IBindingSet;
@@ -31,37 +30,26 @@ import org.embergraph.bop.controller.INamedSolutionSetRef;
 
 /**
  * Interface for the factory pattern to create a {@link IHashJoinUtility}.
- * 
- * @see BLZG-1438 (by using such a factory as an annotation of
- *                 {@link HashIndexOpBase} it becomes possible
- *                 to get rid of the two earlier subclasses of
- *                 {@link HashIndexOp} (namely, HTreeHashIndexOp
- *                 and JVMHashIndexOp) which imposed the duplication
- *                 of code) 
  *
+ * @see BLZG-1438 (by using such a factory as an annotation of {@link HashIndexOpBase} it becomes
+ *     possible to get rid of the two earlier subclasses of {@link HashIndexOp} (namely,
+ *     HTreeHashIndexOp and JVMHashIndexOp) which imposed the duplication of code)
  * @author <a href="http://olafhartig.de/">Olaf Hartig</a>
  * @version $Id$
  */
 public interface IHashJoinUtilityFactory extends Serializable {
-    
-    /**
-     * Return an instance of the {@link IHashJoinUtility}.
-     * 
-     * @param context
-     *            The {@link BOpEvaluationContext}
-     * @param namedSetRef
-     *            Metadata to identify the named solution set.
-     * @param op
-     *            The operator whose annotation will inform the construction of
-     *            the hash index. 
-     * @param joinType
-     *            The type of join.
-     */
-    IHashJoinUtility create(
-            final BOpContext<IBindingSet> context,
-            final INamedSolutionSetRef namedSetRef,
-            final PipelineOp op,
-            final JoinTypeEnum joinType
-            );
-    
+
+  /**
+   * Return an instance of the {@link IHashJoinUtility}.
+   *
+   * @param context The {@link BOpEvaluationContext}
+   * @param namedSetRef Metadata to identify the named solution set.
+   * @param op The operator whose annotation will inform the construction of the hash index.
+   * @param joinType The type of join.
+   */
+  IHashJoinUtility create(
+      final BOpContext<IBindingSet> context,
+      final INamedSolutionSetRef namedSetRef,
+      final PipelineOp op,
+      final JoinTypeEnum joinType);
 }

@@ -25,43 +25,34 @@ package org.embergraph.sparse;
 
 /**
  * Filter for a specific column name.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SingleColumnFilter implements INameFilter {
 
-    private static final long serialVersionUID = 3070828654283555268L;
-    
-    final private String name;
+  private static final long serialVersionUID = 3070828654283555268L;
 
-    /**
-     * 
-     * @param name
-     *            The column name that you want.
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>name</i> is <code>null</code>.
-     */
-    public SingleColumnFilter(String name) {
+  private final String name;
 
-        if (name == null)
-            throw new IllegalArgumentException();
+  /**
+   * @param name The column name that you want.
+   * @throws IllegalArgumentException if <i>name</i> is <code>null</code>.
+   */
+  public SingleColumnFilter(String name) {
 
-        this.name = name;
+    if (name == null) throw new IllegalArgumentException();
 
-    }
+    this.name = name;
+  }
 
-    public boolean accept(String name) {
+  public boolean accept(String name) {
 
-        return this.name.equals(name);
+    return this.name.equals(name);
+  }
 
-    }
+  public String toString() {
 
-    public String toString() {
-        
-        return getClass().getName() + "{name=" + name + "}";
-        
-    }
-    
+    return getClass().getName() + "{name=" + name + "}";
+  }
 }

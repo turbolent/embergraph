@@ -11,31 +11,31 @@ import org.openrdf.rio.RDFParser;
 
 /**
  * JUnit test for the N-Triples parser.
- * 
+ *
  * @author Arjohn Kampman
  */
 public class EmbergraphNTriplesParserTest extends EmbergraphNTriplesParserTestCase {
 
-	private EmbergraphValueFactory valueFactory;
-	
-	protected void setUp() throws Exception {
-		super.setUp();
-		valueFactory = EmbergraphValueFactoryImpl.getInstance(getName());
-	}
+  private EmbergraphValueFactory valueFactory;
 
-	protected void tearDown() throws Exception {
-		if (valueFactory != null) {
-			valueFactory.remove();
-			valueFactory = null;
-		}
-		super.tearDown();
-	}
-	
-	@Override
-	protected RDFParser createRDFParser() {
-		/*
-		 * Note: Requires the EmbergraphValueFactory for SIDs support.
-		 */
-		return new EmbergraphNTriplesParser(valueFactory);
-	}
+  protected void setUp() throws Exception {
+    super.setUp();
+    valueFactory = EmbergraphValueFactoryImpl.getInstance(getName());
+  }
+
+  protected void tearDown() throws Exception {
+    if (valueFactory != null) {
+      valueFactory.remove();
+      valueFactory = null;
+    }
+    super.tearDown();
+  }
+
+  @Override
+  protected RDFParser createRDFParser() {
+    /*
+     * Note: Requires the EmbergraphValueFactory for SIDs support.
+     */
+    return new EmbergraphNTriplesParser(valueFactory);
+  }
 }

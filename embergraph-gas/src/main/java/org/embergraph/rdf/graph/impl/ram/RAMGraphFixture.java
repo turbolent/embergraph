@@ -15,54 +15,46 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.impl.ram;
 
-import org.openrdf.sail.Sail;
-import org.openrdf.sail.SailConnection;
-import org.openrdf.sail.SailException;
-import org.openrdf.sail.memory.MemoryStore;
-
 import org.embergraph.rdf.graph.IGASEngine;
 import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import org.embergraph.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
 import org.embergraph.rdf.graph.util.AbstractGraphFixture;
+import org.openrdf.sail.Sail;
+import org.openrdf.sail.SailConnection;
+import org.openrdf.sail.SailException;
 
 public class RAMGraphFixture extends AbstractGraphFixture {
-    
-    private RAMGraph g;
-    
-    public RAMGraphFixture() throws SailException {
-        g = new RAMGraph();
-    }
-    
-    public Sail getSail() {
-        throw new UnsupportedOperationException();
-    }
 
-    /**
-     * Return the {@link RAMGraphFixture}.
-     */
-    public RAMGraph getGraph() {
-        return g;
-    }
-    
-    @Override
-    public void destroy() throws SailException {
-        g = null;
-    }
+  private RAMGraph g;
 
-    @Override
-    public IGASEngine newGASEngine(int nthreads) {
+  public RAMGraphFixture() throws SailException {
+    g = new RAMGraph();
+  }
 
-        return new RAMGASEngine(nthreads);
-        
-    }
+  public Sail getSail() {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public IGraphAccessor newGraphAccessor(SailConnection cxnIsIgnored) {
-        
-//        return new RAMGraphAccessor(cxnIsIgnored);
-        throw new UnsupportedOperationException();
-        
-    }
-    
+  /** Return the {@link RAMGraphFixture}. */
+  public RAMGraph getGraph() {
+    return g;
+  }
+
+  @Override
+  public void destroy() throws SailException {
+    g = null;
+  }
+
+  @Override
+  public IGASEngine newGASEngine(int nthreads) {
+
+    return new RAMGASEngine(nthreads);
+  }
+
+  @Override
+  public IGraphAccessor newGraphAccessor(SailConnection cxnIsIgnored) {
+
+    //        return new RAMGraphAccessor(cxnIsIgnored);
+    throw new UnsupportedOperationException();
+  }
 }

@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Iterator;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.bindingSet.ListBindingSet;
@@ -44,258 +43,238 @@ import org.embergraph.rdf.sparql.ast.SubqueryFunctionNodeBase;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
-/**
- * This makes it easier to sit down and write an optimizer that operates on
- * a group.
- */
+/** This makes it easier to sit down and write an optimizer that operates on a group. */
 public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
 
-	private final boolean childFirst;
-	
-	private final boolean optimizeServiceNodes;
-	
-	public AbstractJoinGroupOptimizer() {
-		this(false, false);
-	}
-	
-	protected AbstractJoinGroupOptimizer(final boolean childFirst, final boolean optimizeServiceNodes) {
-		this.childFirst = childFirst;
-		this.optimizeServiceNodes = optimizeServiceNodes;
-	}
-	
-	/**
-	 * Top-level optimize method.  Will locate the relevant top-level 
-	 * {@link GraphPatternGroup} nodes (where clause, named subqueries) and 
-	 * delegate to the 
-	 * {@link #optimize(AST2BOpContext, StaticAnalysis, GraphPatternGroup)} method.
-	 */
-    @Override
-    public QueryNodeWithBindingSet optimize(
-       final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  private final boolean childFirst;
 
-       final IQueryNode queryNode = input.getQueryNode();
-       final IBindingSet[] bindingSets = input.getBindingSets();
-       
-        if (!(queryNode instanceof QueryRoot))
-           return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  private final boolean optimizeServiceNodes;
 
-        final QueryRoot queryRoot = (QueryRoot) queryNode;
-        
-        final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
+  public AbstractJoinGroupOptimizer() {
+    this(false, false);
+  }
 
-        // Main WHERE clause
-        {
+  protected AbstractJoinGroupOptimizer(
+      final boolean childFirst, final boolean optimizeServiceNodes) {
+    this.childFirst = childFirst;
+    this.optimizeServiceNodes = optimizeServiceNodes;
+  }
 
-            @SuppressWarnings("unchecked")
-			final GraphPatternGroup<IGroupMemberNode> whereClause = 
-            	(GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
+  /**
+   * Top-level optimize method. Will locate the relevant top-level {@link GraphPatternGroup} nodes
+   * (where clause, named subqueries) and delegate to the {@link #optimize(AST2BOpContext,
+   * StaticAnalysis, GraphPatternGroup)} method.
+   */
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-            if (whereClause != null) {
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
-                optimize(context, sa, bindingSets, whereClause);
-                
-            }
+    if (!(queryNode instanceof QueryRoot))
+      return new QueryNodeWithBindingSet(queryNode, bindingSets);
 
-        }
+    final QueryRoot queryRoot = (QueryRoot) queryNode;
 
-        // Named subqueries
-        if (queryRoot.getNamedSubqueries() != null) {
+    final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
 
-            final NamedSubqueriesNode namedSubqueries = queryRoot
-                    .getNamedSubqueries();
+    // Main WHERE clause
+    {
+      @SuppressWarnings("unchecked")
+      final GraphPatternGroup<IGroupMemberNode> whereClause =
+          (GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
 
-            /*
-             * Note: This loop uses the current size() and get(i) to avoid
-             * problems with concurrent modification during visitation.
-             */
-            for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
+      if (whereClause != null) {
 
-                @SuppressWarnings("unchecked")
-				final GraphPatternGroup<IGroupMemberNode> whereClause = 
-                	(GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
-
-                if (whereClause != null) {
-
-                    optimize(context, sa, bindingSets, whereClause);
-
-                }
-
-            }
-
-        }
-
-        // log.error("\nafter rewrite:\n" + queryNode);
-
-        return new QueryNodeWithBindingSet(queryNode, bindingSets);
-
+        optimize(context, sa, bindingSets, whereClause);
+      }
     }
 
-    /**
-     * Optimize a particular {@link GraphPatternGroup}.  If the group happens
-     * to be a {@link JoinGroupNode}, this method will delegate to the
-     * {@link #optimize(AST2BOpContext, StaticAnalysis, JoinGroupNode)}
-     * method, which is the method that subclasses should override to do the
-     * work of actually optimizing a particular join group.  After optimizing
-     * the group, this method will descend into the children and recursively 
-     * optimize any child groups as well.
-     * <p>
-     * I've made this method final, but I could perhaps see cases where
-     * subclasses might want to override.  Maybe revisit.  -mp
-     */
-    private void optimize(final AST2BOpContext ctx, 
-    		final StaticAnalysis sa, final IBindingSet[] bSets, 
-    		final GraphPatternGroup<?> op) {
+    // Named subqueries
+    if (queryRoot.getNamedSubqueries() != null) {
 
-    	if (!childFirst) {
-    	
-	    	if (op instanceof JoinGroupNode) {
-	    		
-	    		final JoinGroupNode joinGroup = (JoinGroupNode) op;
-	
-	    		optimizeJoinGroup(ctx, sa, bSets, joinGroup);
-	    		
-	    	}
-    	
-    	}
-    	
+      final NamedSubqueriesNode namedSubqueries = queryRoot.getNamedSubqueries();
+
+      /*
+       * Note: This loop uses the current size() and get(i) to avoid
+       * problems with concurrent modification during visitation.
+       */
+      for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> whereClause =
+            (GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
+
+        if (whereClause != null) {
+
+          optimize(context, sa, bindingSets, whereClause);
+        }
+      }
+    }
+
+    // log.error("\nafter rewrite:\n" + queryNode);
+
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  }
+
+  /**
+   * Optimize a particular {@link GraphPatternGroup}. If the group happens to be a {@link
+   * JoinGroupNode}, this method will delegate to the {@link #optimize(AST2BOpContext,
+   * StaticAnalysis, JoinGroupNode)} method, which is the method that subclasses should override to
+   * do the work of actually optimizing a particular join group. After optimizing the group, this
+   * method will descend into the children and recursively optimize any child groups as well.
+   *
+   * <p>I've made this method final, but I could perhaps see cases where subclasses might want to
+   * override. Maybe revisit. -mp
+   */
+  private void optimize(
+      final AST2BOpContext ctx,
+      final StaticAnalysis sa,
+      final IBindingSet[] bSets,
+      final GraphPatternGroup<?> op) {
+
+    if (!childFirst) {
+
+      if (op instanceof JoinGroupNode) {
+
+        final JoinGroupNode joinGroup = (JoinGroupNode) op;
+
+        optimizeJoinGroup(ctx, sa, bSets, joinGroup);
+      }
+    }
+
+    /*
+     * Recursion, but only into group nodes (including within subqueries).
+     */
+    for (int i = 0; i < op.arity(); i++) {
+
+      final BOp child = op.get(i);
+
+      if (child instanceof GraphPatternGroup<?>) {
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) child;
+
+        optimize(ctx, sa, bSets, childGroup);
+
+      } else if (child instanceof QueryBase) {
+
+        final QueryBase subquery = (QueryBase) child;
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) subquery.getWhereClause();
+
+        optimize(ctx, sa, bSets, childGroup);
+
+      } else if (child instanceof FilterNode) {
+
+        final FilterNode filter = (FilterNode) child;
+
+        final IValueExpressionNode ve = filter.getValueExpressionNode();
+
+        optimize(ctx, sa, bSets, ve);
+
+      } else if (child instanceof ArbitraryLengthPathNode) {
+
+        final ArbitraryLengthPathNode alpNode = (ArbitraryLengthPathNode) child;
+
+        final IBindingSet bs = new ListBindingSet();
+
+        if (alpNode.left().isConstant()) {
+
+          bs.set(
+              alpNode.tVarLeft().getValueExpression(),
+              ((ConstantNode) alpNode.left()).getValueExpression());
+        }
+
+        if (alpNode.right().isConstant()) {
+
+          bs.set(
+              alpNode.tVarRight().getValueExpression(),
+              ((ConstantNode) alpNode.right()).getValueExpression());
+        }
+
         /*
-         * Recursion, but only into group nodes (including within subqueries).
+         * The transitivity vars are unique to the alpNode, so we don't
+         * need to merge, simple addition will do fine.
          */
-        for (int i = 0; i < op.arity(); i++) {
 
-            final BOp child = op.get(i);
+        final IBindingSet[] bSets2;
 
-            if (child instanceof GraphPatternGroup<?>) {
+        if (bSets == null || bSets.length == 0 || (bSets.length == 1 && bSets[0].isEmpty())) {
 
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) child;
+          bSets2 = new IBindingSet[] {bs};
 
-                optimize(ctx, sa, bSets, childGroup);
-                
-            } else if (child instanceof QueryBase) {
+        } else {
 
-                final QueryBase subquery = (QueryBase) child;
+          bSets2 = new IBindingSet[bSets.length + 1];
 
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) subquery
-                        .getWhereClause();
+          bSets2[0] = bs;
 
-                optimize(ctx, sa, bSets, childGroup);
-
-            } else if (child instanceof FilterNode) {
-            	
-            	final FilterNode filter = (FilterNode) child;
-            	
-            	final IValueExpressionNode ve = filter.getValueExpressionNode();
-
-            	optimize(ctx, sa, bSets, ve);
-            	
-            } else if (child instanceof ArbitraryLengthPathNode) {
-            	
-            	final ArbitraryLengthPathNode alpNode = (ArbitraryLengthPathNode) child;
-            	
-            	final IBindingSet bs = new ListBindingSet();
-            	
-            	if (alpNode.left().isConstant()) {
-            		
-            		bs.set(alpNode.tVarLeft().getValueExpression(), 
-            				((ConstantNode) alpNode.left()).getValueExpression());
-            		
-            	}
-            	
-            	if (alpNode.right().isConstant()) {
-            		
-            		bs.set(alpNode.tVarRight().getValueExpression(), 
-            				((ConstantNode) alpNode.right()).getValueExpression());
-            		
-            	}
-            	
-            	/*
-            	 * The transitivity vars are unique to the alpNode, so we don't
-            	 * need to merge, simple addition will do fine.
-            	 */
-            	
-            	final IBindingSet[] bSets2;
-            	
-            	if (bSets == null || bSets.length == 0 || 
-            			(bSets.length == 1 && bSets[0].isEmpty())) {
-            		
-            		bSets2 = new IBindingSet[] { bs };
-            		
-            	} else {
-            		
-            		bSets2 = new IBindingSet[bSets.length+1];
-            		
-            		bSets2[0] = bs;
-            		
-            		System.arraycopy(bSets, 0, bSets2, 1, bSets.length);
-            		
-            	}
-            	
-            	optimize(ctx, sa, bSets2, alpNode.subgroup());
-            	
-            } else if (child instanceof ServiceNode && optimizeServiceNodes) {
-            	
-            	final ServiceNode serviceNode = (ServiceNode) child;
-
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) serviceNode
-                		.getGraphPattern();
-
-                optimize(ctx, sa, bSets, childGroup);
-            	
-            }
-            
+          System.arraycopy(bSets, 0, bSets2, 1, bSets.length);
         }
-        
-    	if (childFirst) {
-        	
-	    	if (op instanceof JoinGroupNode) {
-	    		
-	    		final JoinGroupNode joinGroup = (JoinGroupNode) op;
-	
-	    		optimizeJoinGroup(ctx, sa, bSets, joinGroup);
-	    		
-	    	}
-    	
-    	}
 
+        optimize(ctx, sa, bSets2, alpNode.subgroup());
+
+      } else if (child instanceof ServiceNode && optimizeServiceNodes) {
+
+        final ServiceNode serviceNode = (ServiceNode) child;
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) serviceNode.getGraphPattern();
+
+        optimize(ctx, sa, bSets, childGroup);
+      }
     }
 
-	private void optimize(final AST2BOpContext ctx, final StaticAnalysis sa,
-			final IBindingSet[] bSets, final IValueExpressionNode ve) {
-		if (ve instanceof SubqueryFunctionNodeBase) {
+    if (childFirst) {
 
-		    final SubqueryFunctionNodeBase subqueryFunction = (SubqueryFunctionNodeBase) ve;
+      if (op instanceof JoinGroupNode) {
 
-		    final GraphPatternGroup<IGroupMemberNode> graphPattern = subqueryFunction
-		            .getGraphPattern();
+        final JoinGroupNode joinGroup = (JoinGroupNode) op;
 
-		    if (graphPattern != null) {
+        optimizeJoinGroup(ctx, sa, bSets, joinGroup);
+      }
+    }
+  }
 
-		    	optimize(ctx, sa, bSets, graphPattern);
-		    	
-		    }
-		    
-		} else {
-			Iterator<BOp> it = ((BOp)ve).argIterator();
-			while (it.hasNext()) {
-				
-				BOp b = it.next();
-				if (b instanceof IValueExpressionNode) {
-					
-					optimize(ctx, sa, bSets, (IValueExpressionNode)b);
-					
-				}
-			}
-		}
-	}
-    
-    /**
-     * Subclasses can do the work of optimizing a join group here.
-     */
-    protected abstract void optimizeJoinGroup(
-    		final AST2BOpContext ctx, final StaticAnalysis sa, 
-    		final IBindingSet[] bSets, final JoinGroupNode op);
-    
+  private void optimize(
+      final AST2BOpContext ctx,
+      final StaticAnalysis sa,
+      final IBindingSet[] bSets,
+      final IValueExpressionNode ve) {
+    if (ve instanceof SubqueryFunctionNodeBase) {
+
+      final SubqueryFunctionNodeBase subqueryFunction = (SubqueryFunctionNodeBase) ve;
+
+      final GraphPatternGroup<IGroupMemberNode> graphPattern = subqueryFunction.getGraphPattern();
+
+      if (graphPattern != null) {
+
+        optimize(ctx, sa, bSets, graphPattern);
+      }
+
+    } else {
+      Iterator<BOp> it = ((BOp) ve).argIterator();
+      while (it.hasNext()) {
+
+        BOp b = it.next();
+        if (b instanceof IValueExpressionNode) {
+
+          optimize(ctx, sa, bSets, (IValueExpressionNode) b);
+        }
+      }
+    }
+  }
+
+  /** Subclasses can do the work of optimizing a join group here. */
+  protected abstract void optimizeJoinGroup(
+      final AST2BOpContext ctx,
+      final StaticAnalysis sa,
+      final IBindingSet[] bSets,
+      final JoinGroupNode op);
 }

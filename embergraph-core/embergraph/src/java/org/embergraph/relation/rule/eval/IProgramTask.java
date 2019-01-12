@@ -24,26 +24,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule.eval;
 
 import java.util.concurrent.Callable;
-
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
  * Interface for a task that executes a (complex) program (vs a single rule).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IProgramTask extends Callable<Object> {
 
-    /**
-     * The return will be either an {@link IChunkedOrderedIterator} (for
-     * {@link ActionEnum#Query}) or a {@link Long} element mutation count (for
-     * {@link ActionEnum#Insert} or {@link ActionEnum#Delete}).
-     * 
-     * @return
-     * 
-     * @throws Exception
-     */
-    public Object call() throws Exception;
-    
+  /**
+   * The return will be either an {@link IChunkedOrderedIterator} (for {@link ActionEnum#Query}) or
+   * a {@link Long} element mutation count (for {@link ActionEnum#Insert} or {@link
+   * ActionEnum#Delete}).
+   *
+   * @return
+   * @throws Exception
+   */
+  public Object call() throws Exception;
 }

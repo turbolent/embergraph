@@ -18,17 +18,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 /**
- * Interface for RMI messages used to communicate metadata about a raw data
- * transfer occurring on a socket channel.
- * 
+ * Interface for RMI messages used to communicate metadata about a raw data transfer occurring on a
+ * socket channel.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAWriteMessageBase extends IHAMessage {
 
-    /** The #of bytes of data to be transfered. */
-    int getSize();
+  /** The #of bytes of data to be transfered. */
+  int getSize();
 
-    /** The Alder32 checksum of the bytes to be transfered. */
-    int getChk();
-
+  /** The Alder32 checksum of the bytes to be transfered. */
+  int getChk();
 }

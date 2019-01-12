@@ -22,27 +22,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rwstore;
 
 /**
- * Exception thrown when a logical address maps onto a physical address which is
- * not currently allocated. The most common cause of this exception is a read on
- * the database using a historical commit point which is not protected by a read
- * lock. You should be using a read-only transaction rather than a bare
- * historical read in order to be protected by a read lock.
- * 
+ * Exception thrown when a logical address maps onto a physical address which is not currently
+ * allocated. The most common cause of this exception is a read on the database using a historical
+ * commit point which is not protected by a read lock. You should be using a read-only transaction
+ * rather than a bare historical read in order to be protected by a read lock.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class PhysicalAddressResolutionException extends
-        IllegalArgumentException {
+public class PhysicalAddressResolutionException extends IllegalArgumentException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public PhysicalAddressResolutionException(final long addr) {
+  public PhysicalAddressResolutionException(final long addr) {
 
-        super("Address did not resolve to physical address: " + addr);
-        
-    }
-    
+    super("Address did not resolve to physical address: " + addr);
+  }
 }

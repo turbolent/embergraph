@@ -25,40 +25,31 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.Future;
-
 import org.embergraph.ha.msg.IHAReadRequest;
 import org.embergraph.ha.msg.IHAReadResponse;
 import org.embergraph.rawstore.IRawStore;
 
 /**
- * A {@link Remote} interface supporting low-level reads against persistent data
- * from a quorum member. This interface is used to handle bad reads, which are
- * identified by a checksum error when reading on the local disk. To handle a
- * bad read, the quorum member reads on a different member of the same quorum.
- * 
+ * A {@link Remote} interface supporting low-level reads against persistent data from a quorum
+ * member. This interface is used to handle bad reads, which are identified by a checksum error when
+ * reading on the local disk. To handle a bad read, the quorum member reads on a different member of
+ * the same quorum.
+ *
  * @see QuorumRead
-
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface HAReadGlue extends Remote {
 
-    /**
-     * Read a record an {@link IRawStore} managed by the service. Services MUST
-     * NOT refer this message to another service. If the read can not be
-     * satisfied, for example because the {@link IRawStore} has been released or
-     * because there is a checksum error when reading on the {@link IRawStore},
-     * then that exception should be thrown back to the caller.
-     * 
-     * @param readMessage
-     *            The {@link IHAReadRequest}.
-     * 
-     * @return The {@link Future} of an operation which evaluated to the desired
-     *         record.
-     * 
-     * @see QuorumRead#readFromQuorum(UUID, long)
-     */
-    public Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage)
-            throws IOException;
-
+  /**
+   * Read a record an {@link IRawStore} managed by the service. Services MUST NOT refer this message
+   * to another service. If the read can not be satisfied, for example because the {@link IRawStore}
+   * has been released or because there is a checksum error when reading on the {@link IRawStore},
+   * then that exception should be thrown back to the caller.
+   *
+   * @param readMessage The {@link IHAReadRequest}.
+   * @return The {@link Future} of an operation which evaluated to the desired record.
+   * @see QuorumRead#readFromQuorum(UUID, long)
+   */
+  public Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage) throws IOException;
 }

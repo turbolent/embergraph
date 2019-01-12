@@ -17,47 +17,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NE;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
- * rdfs11: this variant uses a nested subquery and may be safely used during
- * truth maintenance.
- * 
+ * rdfs11: this variant uses a nested subquery and may be safely used during truth maintenance.
+ *
  * <pre>
  *       triple(?u,rdfs:subClassOf,?x) :-
  *          triple(?u,rdfs:subClassOf,?v),
- *          triple(?v,rdfs:subClassOf,?x). 
+ *          triple(?v,rdfs:subClassOf,?x).
  * </pre>
- * 
+ *
  * @see RuleRdfs11_SelfJoin
  */
 public class RuleRdfs11 extends Rule {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8896684126297662485L;
+  /** */
+  private static final long serialVersionUID = -8896684126297662485L;
 
-    public RuleRdfs11(String relationName, Vocabulary vocab) {
+  public RuleRdfs11(String relationName, Vocabulary vocab) {
 
-        super(  "rdfs11",
-                new SPOPredicate(relationName,var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("x")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("v")),
-                    new SPOPredicate(relationName,var("v"), vocab.getConstant(RDFS.SUBCLASSOF), var("x"))
-                },
-                new IConstraint[] {
-        			Constraint.wrap(new NE(var("u"),var("v"))),
-    				Constraint.wrap(new NE(var("v"),var("x")))
-                });
-
-    }
-    
+    super(
+        "rdfs11",
+        new SPOPredicate(relationName, var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("x")),
+        new SPOPredicate[] {
+          new SPOPredicate(relationName, var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("v")),
+          new SPOPredicate(relationName, var("v"), vocab.getConstant(RDFS.SUBCLASSOF), var("x"))
+        },
+        new IConstraint[] {
+          Constraint.wrap(new NE(var("u"), var("v"))), Constraint.wrap(new NE(var("v"), var("x")))
+        });
+  }
 }

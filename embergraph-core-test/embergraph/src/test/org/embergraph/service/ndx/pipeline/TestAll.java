@@ -27,51 +27,40 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("scale-out index write pipeline");
+    final TestSuite suite = new TestSuite("scale-out index write pipeline");
 
-        suite.addTestSuite(TestDefaultDuplicateRemover.class);
-        
-        suite.addTestSuite(TestMasterTask.class);
+    suite.addTestSuite(TestDefaultDuplicateRemover.class);
 
-        suite.addTestSuite(TestMasterTaskIdleTimeout.class);
-        
-        suite.addTestSuite(TestMasterTaskWithErrors.class);
-        
-        suite.addTestSuite(TestMasterTaskWithRedirect.class);
-        
-        suite.addTestSuite(TestFileSystemScanner.class);
-        
-        // FIXME stress test is not finished yet. 
-//        suite.addTestSuite(TestMasterTaskWithSplits.class);
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestMasterTask.class);
+
+    suite.addTestSuite(TestMasterTaskIdleTimeout.class);
+
+    suite.addTestSuite(TestMasterTaskWithErrors.class);
+
+    suite.addTestSuite(TestMasterTaskWithRedirect.class);
+
+    suite.addTestSuite(TestFileSystemScanner.class);
+
+    // FIXME stress test is not finished yet.
+    //        suite.addTestSuite(TestMasterTaskWithSplits.class);
+
+    return suite;
+  }
 }

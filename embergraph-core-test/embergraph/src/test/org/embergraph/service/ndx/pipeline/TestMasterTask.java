@@ -27,405 +27,368 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
 /**
- * Unit tests for the control logic used by {@link AbstractMasterTask} and
- * friends.
- * 
+ * Unit tests for the control logic used by {@link AbstractMasterTask} and friends.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMasterTask extends AbstractMasterTestCase {
 
-    public TestMasterTask() {
-    }
+  public TestMasterTask() {}
 
-    public TestMasterTask(String name) {
-        super(name);
-    }
-        
-    /**
-     * Test verifies start/stop of the master.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_startStop() throws InterruptedException,
-            ExecutionException {
+  public TestMasterTask(String name) {
+    super(name);
+  }
 
-        final H masterStats = new H();
+  /**
+   * Test verifies start/stop of the master.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_startStop() throws InterruptedException, ExecutionException {
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+    final H masterStats = new H();
 
-        final M master = new M(masterStats, masterBuffer, executorService);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
 
-        // Wrap computation as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
-        
-        // Set Future on BlockingBuffer.
-        masterBuffer.setFuture(ft);
-        
-        // Start the consumer.
-        executorService.submit(ft);
-        
-        masterBuffer.close();
+    final M master = new M(masterStats, masterBuffer, executorService);
 
-        masterBuffer.getFuture().get();
+    // Wrap computation as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
 
-        assertEquals("elementsIn", 0, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 0, masterStats.chunksIn.get());
-        assertEquals("elementsOut", 0, masterStats.elementsOut.get());
-        assertEquals("chunksOut", 0, masterStats.chunksOut.get());
-        assertEquals("partitionCount", 0, masterStats
-                .getMaximumPartitionCount());
+    // Set Future on BlockingBuffer.
+    masterBuffer.setFuture(ft);
 
-    }
+    // Start the consumer.
+    executorService.submit(ft);
 
-    /**
-     * Unit test writes an empty chunk and then stops the master.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_startEmptyWriteStop() throws InterruptedException,
-            ExecutionException {
+    masterBuffer.close();
 
-        final H masterStats = new H();
+    masterBuffer.getFuture().get();
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+    assertEquals("elementsIn", 0, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 0, masterStats.chunksIn.get());
+    assertEquals("elementsOut", 0, masterStats.elementsOut.get());
+    assertEquals("chunksOut", 0, masterStats.chunksOut.get());
+    assertEquals("partitionCount", 0, masterStats.getMaximumPartitionCount());
+  }
 
-        final M master = new M(masterStats, masterBuffer, executorService);
+  /**
+   * Unit test writes an empty chunk and then stops the master.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_startEmptyWriteStop() throws InterruptedException, ExecutionException {
 
-        // Wrap computation as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
-        
-        // Set Future on BlockingBuffer.
-        masterBuffer.setFuture(ft);
+    final H masterStats = new H();
 
-        // Start the consumer.
-        executorService.submit(ft);
-        
-        final KVO<O>[] a = new KVO[0];
-        
-        masterBuffer.add(a);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
 
-        masterBuffer.close();
+    final M master = new M(masterStats, masterBuffer, executorService);
 
-        masterBuffer.getFuture().get();
+    // Wrap computation as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
 
-        assertEquals("elementsIn", 0, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 0, masterStats.chunksIn.get());
-        assertEquals("elementsOut", 0, masterStats.elementsOut.get());
-        assertEquals("chunksOut", 0, masterStats.chunksOut.get());
-        assertEquals("partitionCount", 0, masterStats.getMaximumPartitionCount());
+    // Set Future on BlockingBuffer.
+    masterBuffer.setFuture(ft);
 
-    }
+    // Start the consumer.
+    executorService.submit(ft);
 
-    /**
-     * Unit test writes a chunk and then stops the master.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     * @throws TimeoutException 
-     */
-    public void test_startWriteStop1() throws InterruptedException,
-            ExecutionException, TimeoutException {
+    final KVO<O>[] a = new KVO[0];
 
-        final H masterStats = new H();
+    masterBuffer.add(a);
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+    masterBuffer.close();
 
-        final M master = new M(masterStats, masterBuffer, executorService);
+    masterBuffer.getFuture().get();
 
-        // Wrap computation as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
+    assertEquals("elementsIn", 0, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 0, masterStats.chunksIn.get());
+    assertEquals("elementsOut", 0, masterStats.elementsOut.get());
+    assertEquals("chunksOut", 0, masterStats.chunksOut.get());
+    assertEquals("partitionCount", 0, masterStats.getMaximumPartitionCount());
+  }
 
-        // Set the Future on the BlockingBuffer.
-        masterBuffer.setFuture(ft);
+  /**
+   * Unit test writes a chunk and then stops the master.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   * @throws TimeoutException
+   */
+  public void test_startWriteStop1()
+      throws InterruptedException, ExecutionException, TimeoutException {
 
-        // start the consumer.
-        executorService.submit(ft);
-        
-        final KVO<O>[] a = new KVO[] {
-                new KVO<O>(new byte[]{1},new byte[]{2},null/*val*/),
-                new KVO<O>(new byte[]{1},new byte[]{3},null/*val*/)
+    final H masterStats = new H();
+
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+
+    final M master = new M(masterStats, masterBuffer, executorService);
+
+    // Wrap computation as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
+
+    // Set the Future on the BlockingBuffer.
+    masterBuffer.setFuture(ft);
+
+    // start the consumer.
+    executorService.submit(ft);
+
+    final KVO<O>[] a =
+        new KVO[] {
+          new KVO<O>(new byte[] {1}, new byte[] {2}, null /*val*/),
+          new KVO<O>(new byte[] {1}, new byte[] {3}, null /*val*/)
         };
 
-        masterBuffer.add(a);
+    masterBuffer.add(a);
 
-        masterBuffer.close();
+    masterBuffer.close();
 
-        // Run with timeout (test fails if Future not done before timeout).
-        masterBuffer.getFuture().get(5L, TimeUnit.SECONDS);
+    // Run with timeout (test fails if Future not done before timeout).
+    masterBuffer.getFuture().get(5L, TimeUnit.SECONDS);
 
-        assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 1, masterStats.chunksIn.get());
-        assertEquals("elementsOut", a.length, masterStats.elementsOut.get());
-        assertEquals("chunksOut", 1, masterStats.chunksOut.get());
-        assertEquals("partitionCount", 1, masterStats.getMaximumPartitionCount());
+    assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 1, masterStats.chunksIn.get());
+    assertEquals("elementsOut", a.length, masterStats.elementsOut.get());
+    assertEquals("chunksOut", 1, masterStats.chunksOut.get());
+    assertEquals("partitionCount", 1, masterStats.getMaximumPartitionCount());
 
-        // verify writes on each expected partition.
-        {
-            
-            final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
+    // verify writes on each expected partition.
+    {
+      final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
 
-            assertNotNull(subtaskStats);
-            
-            assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
-            assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
-            
-        }
+      assertNotNull(subtaskStats);
 
-        // make sure that these counters were updated.
-        assertEquals("subtaskStartCount", 1, masterStats.subtaskStartCount.get());
-        assertEquals("subtaskEndCount", 1, masterStats.subtaskEndCount.get());
-
+      assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
+      assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
     }
 
-    /**
-     * Unit test writes a chunk that is split onto two subtasks and then stops
-     * the master.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     * @throws TimeoutException 
-     */
-    public void test_startWriteStop2() throws InterruptedException,
-            ExecutionException, TimeoutException {
+    // make sure that these counters were updated.
+    assertEquals("subtaskStartCount", 1, masterStats.subtaskStartCount.get());
+    assertEquals("subtaskEndCount", 1, masterStats.subtaskEndCount.get());
+  }
 
+  /**
+   * Unit test writes a chunk that is split onto two subtasks and then stops the master.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   * @throws TimeoutException
+   */
+  public void test_startWriteStop2()
+      throws InterruptedException, ExecutionException, TimeoutException {
+
+    doStartWriteStop2Test();
+  }
+
+  /**
+   * Stress test for the atomic termination condition.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   * @todo This test now logs a warning rather than failing pending resolution of
+   *     https://sourceforge.net/apps/trac/bigdata/ticket/147
+   */
+  public void test_stress_startWriteStop2() throws InterruptedException, ExecutionException {
+
+    final int LIMIT = 10000;
+    int nerr = 0;
+    for (int i = 0; i < LIMIT; i++) {
+
+      try {
         doStartWriteStop2Test();
-
+      } catch (Throwable t) {
+        // fail("Pass#=" + i, t);
+        log.warn("Would have failed: pass#=" + i + ", cause=" + t);
+        nerr++;
+      }
     }
 
-    /**
-     * Stress test for the atomic termination condition.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     * 
-     * @todo This test now logs a warning rather than failing pending resolution
-     *       of https://sourceforge.net/apps/trac/bigdata/ticket/147
-     */
-    public void test_stress_startWriteStop2() throws InterruptedException,
-            ExecutionException {
+    if (nerr > 0) {
 
-        final int LIMIT = 10000;
-        int nerr = 0;
-        for (int i = 0; i < LIMIT; i++) {
-
-            try {
-                doStartWriteStop2Test();
-            } catch (Throwable t) {
-                // fail("Pass#=" + i, t);
-                log.warn("Would have failed: pass#=" + i + ", cause=" + t);
-                nerr++;
-            }
-
-        }
-
-        if (nerr > 0) {
-
-            log.error("Test would have failed: nerrs=" + nerr + " out of "
-                    + LIMIT + " trials");
-
-        }
-        
+      log.error("Test would have failed: nerrs=" + nerr + " out of " + LIMIT + " trials");
     }
+  }
 
-    /**
-     * The logic for {@link #test_startWriteWriteStop2()}, which is reused by a
-     * stress test.
-     * <p>
-     * 
-     * @todo There is still one fence post in some of the unit tests. The
-     *       symptom is that the unit test fails due to an unexpected value for
-     *       either masterStats.subtaskStartCount or masterStats.subtaskEndCount
-     *       or for an unexpected value for either subtaskStats.chunksOut or
-     *       subtaskStats.chunksIn. I suspect that the underlying issue is the
-     *       expectation of the tests with respect to when a sink is retired by
-     *       the master and whether or not a new subtaskStats object is
-     *       allocated or an old one reused (e.g., because the subtask was not
-     *       closed by an idle timeout or the like).
-     *       <p>
-     *       This test failures can be cleared up if you uncomment the [tmp]
-     *       list and its use in
-     *       {@link AbstractMasterStats#getSubtaskStats(Object)}. This forces
-     *       the internal map to hold a hard reference to the subtask statistics
-     *       objects. This demonstrates that the problem is not with the
-     *       termination conditions for the {@link AbstractMasterTask}. However,
-     *       the unit test are still broken until I track down the underlying
-     *       assumption within them which is being violated.
-     * 
-     * @throws InterruptedException
-     * @throws TimeoutException 
-     */
-    private void doStartWriteStop2Test() throws InterruptedException,
-            ExecutionException, TimeoutException  {
+  /**
+   * The logic for {@link #test_startWriteWriteStop2()}, which is reused by a stress test.
+   *
+   * <p>
+   *
+   * @todo There is still one fence post in some of the unit tests. The symptom is that the unit
+   *     test fails due to an unexpected value for either masterStats.subtaskStartCount or
+   *     masterStats.subtaskEndCount or for an unexpected value for either subtaskStats.chunksOut or
+   *     subtaskStats.chunksIn. I suspect that the underlying issue is the expectation of the tests
+   *     with respect to when a sink is retired by the master and whether or not a new subtaskStats
+   *     object is allocated or an old one reused (e.g., because the subtask was not closed by an
+   *     idle timeout or the like).
+   *     <p>This test failures can be cleared up if you uncomment the [tmp] list and its use in
+   *     {@link AbstractMasterStats#getSubtaskStats(Object)}. This forces the internal map to hold a
+   *     hard reference to the subtask statistics objects. This demonstrates that the problem is not
+   *     with the termination conditions for the {@link AbstractMasterTask}. However, the unit test
+   *     are still broken until I track down the underlying assumption within them which is being
+   *     violated.
+   * @throws InterruptedException
+   * @throws TimeoutException
+   */
+  private void doStartWriteStop2Test()
+      throws InterruptedException, ExecutionException, TimeoutException {
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
 
-        final H masterStats = new H();
+    final H masterStats = new H();
 
-        final M master = new M(masterStats, masterBuffer, executorService);
+    final M master = new M(masterStats, masterBuffer, executorService);
 
-        // Wrap as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
-        
-        // Set Future on BlockingBuffer.
-        masterBuffer.setFuture(ft);
-        
-        // Start the consumer.
-        executorService.submit(ft);
+    // Wrap as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
 
-        final KVO<O>[] a = new KVO[] {
-                new KVO<O>(new byte[]{1},new byte[]{2},null/*val*/),
-                new KVO<O>(new byte[]{2},new byte[]{3},null/*val*/),
-                new KVO<O>(new byte[]{2},new byte[]{4},null/*val*/)
+    // Set Future on BlockingBuffer.
+    masterBuffer.setFuture(ft);
+
+    // Start the consumer.
+    executorService.submit(ft);
+
+    final KVO<O>[] a =
+        new KVO[] {
+          new KVO<O>(new byte[] {1}, new byte[] {2}, null /*val*/),
+          new KVO<O>(new byte[] {2}, new byte[] {3}, null /*val*/),
+          new KVO<O>(new byte[] {2}, new byte[] {4}, null /*val*/)
         };
 
-        masterBuffer.add(a);
+    masterBuffer.add(a);
 
-        masterBuffer.close();
+    masterBuffer.close();
 
-        // test fails if not done before timeout.
-        masterBuffer.getFuture().get(5L, TimeUnit.SECONDS);
+    // test fails if not done before timeout.
+    masterBuffer.getFuture().get(5L, TimeUnit.SECONDS);
 
-        assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 1, masterStats.chunksIn.get());
-        assertEquals("elementsOut", a.length, masterStats.elementsOut.get());
-        assertEquals("chunksOut", 2, masterStats.chunksOut.get());
-        assertEquals("partitionCount", 2, masterStats.getMaximumPartitionCount());
+    assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 1, masterStats.chunksIn.get());
+    assertEquals("elementsOut", a.length, masterStats.elementsOut.get());
+    assertEquals("chunksOut", 2, masterStats.chunksOut.get());
+    assertEquals("partitionCount", 2, masterStats.getMaximumPartitionCount());
 
-        // verify writes on each expected partition.
-        {
-            
-            final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
+    // verify writes on each expected partition.
+    {
+      final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
 
-            assertNotNull(subtaskStats);
+      assertNotNull(subtaskStats);
 
-            assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
-            assertEquals("elementsOut", 1, subtaskStats.elementsOut.get());
-            
-        }
-        
-        // verify writes on each expected partition.
-        {
-            
-            final HS subtaskStats = masterStats.getSubtaskStats(new L(2));
-
-            assertNotNull(subtaskStats);
-            
-            // @todo this assert fails stochastically.
-            assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
-            assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
-            
-        }
-
-        /*
-         * @todo make sure that these counters were updated? I need to verify
-         * the assumptions behind these asserts. The conditions for start/end of
-         * a subtask may now be subtly different.
-         */
-//        assertEquals("subtaskStartCount", 2, masterStats.subtaskStartCount.get());
-//        assertEquals("subtaskEndCount", 2, masterStats.subtaskEndCount.get());
-
+      assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
+      assertEquals("elementsOut", 1, subtaskStats.elementsOut.get());
     }
 
-    /**
-     * Unit test writes 2 chunks that are each split onto two subtasks and then
-     * stops the master.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
+    // verify writes on each expected partition.
+    {
+      final HS subtaskStats = masterStats.getSubtaskStats(new L(2));
+
+      assertNotNull(subtaskStats);
+
+      // @todo this assert fails stochastically.
+      assertEquals("chunksOut", 1, subtaskStats.chunksOut.get());
+      assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
+    }
+
+    /*
+     * @todo make sure that these counters were updated? I need to verify
+     * the assumptions behind these asserts. The conditions for start/end of
+     * a subtask may now be subtly different.
      */
-    public void test_startWriteWriteStop2() throws InterruptedException,
-            ExecutionException {
+    //        assertEquals("subtaskStartCount", 2, masterStats.subtaskStartCount.get());
+    //        assertEquals("subtaskEndCount", 2, masterStats.subtaskEndCount.get());
 
-        final H masterStats = new H();
+  }
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+  /**
+   * Unit test writes 2 chunks that are each split onto two subtasks and then stops the master.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_startWriteWriteStop2() throws InterruptedException, ExecutionException {
 
-        final M master = new M(masterStats, masterBuffer, executorService);
+    final H masterStats = new H();
 
-        // Wrap computation as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
-        
-        // Set Future on BlockingBuffer.
-        masterBuffer.setFuture(ft);
-        
-        // Start the consumer.
-        executorService.submit(ft);
-        
-        {
-        final KVO<O>[] a = new KVO[] {
-                    new KVO<O>(new byte[] { 1 }, new byte[] { 2 }, null/* val */),
-                    new KVO<O>(new byte[] { 2 }, new byte[] { 3 }, null/* val */),
-                    new KVO<O>(new byte[] { 2 }, new byte[] { 4 }, null/* val */) };
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
 
-            masterBuffer.add(a);
-        }
+    final M master = new M(masterStats, masterBuffer, executorService);
 
-        /*
-         * Sleep until the first two chunks are output (this simplifies the
-         * post-condition tests).
-         */
-        awaitChunksOut(master, 2, 1000, TimeUnit.MILLISECONDS);
+    // Wrap computation as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
 
-        {
-            final KVO<O>[] a = new KVO[] {
-                    new KVO<O>(new byte[] { 1 }, new byte[] { 3 }, null/* val */),
-                    new KVO<O>(new byte[] { 2 }, new byte[] { 5 }, null/* val */) };
+    // Set Future on BlockingBuffer.
+    masterBuffer.setFuture(ft);
 
-            masterBuffer.add(a);
-        }
+    // Start the consumer.
+    executorService.submit(ft);
 
-        masterBuffer.close();
+    {
+      final KVO<O>[] a =
+          new KVO[] {
+            new KVO<O>(new byte[] {1}, new byte[] {2}, null /* val */),
+            new KVO<O>(new byte[] {2}, new byte[] {3}, null /* val */),
+            new KVO<O>(new byte[] {2}, new byte[] {4}, null /* val */)
+          };
 
-        assertTrue(masterStats == masterBuffer.getFuture().get());
-
-        assertEquals("elementsIn", 5, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 2, masterStats.chunksIn.get());
-        assertEquals("elementsOut", 5, masterStats.elementsOut.get());
-        assertEquals("chunksOut", 4, masterStats.chunksOut.get());
-        assertEquals("partitionCount", 2, masterStats
-                .getMaximumPartitionCount());
-
-        // verify writes on each expected partition.
-        {
-            
-            final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
-
-            assertNotNull(subtaskStats);
-            
-            assertEquals("chunksOut", 2, subtaskStats.chunksOut.get());
-            assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
-            
-        }
-        
-        // verify writes on each expected partition.
-        {
-            
-            final HS subtaskStats = masterStats.getSubtaskStats(new L(2));
-
-            assertNotNull(subtaskStats);
-            
-            assertEquals("chunksOut", 2, subtaskStats.chunksOut.get());
-            assertEquals("elementsOut", 3, subtaskStats.elementsOut.get());
-            
-        }
-
-        // verify right #of tasks executed.
-        assertEquals("subtaskStartCount", 2, masterStats.subtaskStartCount.get());
-        assertEquals("subtaskEndCount", 2, masterStats.subtaskEndCount.get());
-
+      masterBuffer.add(a);
     }
 
+    /*
+     * Sleep until the first two chunks are output (this simplifies the
+     * post-condition tests).
+     */
+    awaitChunksOut(master, 2, 1000, TimeUnit.MILLISECONDS);
+
+    {
+      final KVO<O>[] a =
+          new KVO[] {
+            new KVO<O>(new byte[] {1}, new byte[] {3}, null /* val */),
+            new KVO<O>(new byte[] {2}, new byte[] {5}, null /* val */)
+          };
+
+      masterBuffer.add(a);
+    }
+
+    masterBuffer.close();
+
+    assertTrue(masterStats == masterBuffer.getFuture().get());
+
+    assertEquals("elementsIn", 5, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 2, masterStats.chunksIn.get());
+    assertEquals("elementsOut", 5, masterStats.elementsOut.get());
+    assertEquals("chunksOut", 4, masterStats.chunksOut.get());
+    assertEquals("partitionCount", 2, masterStats.getMaximumPartitionCount());
+
+    // verify writes on each expected partition.
+    {
+      final HS subtaskStats = masterStats.getSubtaskStats(new L(1));
+
+      assertNotNull(subtaskStats);
+
+      assertEquals("chunksOut", 2, subtaskStats.chunksOut.get());
+      assertEquals("elementsOut", 2, subtaskStats.elementsOut.get());
+    }
+
+    // verify writes on each expected partition.
+    {
+      final HS subtaskStats = masterStats.getSubtaskStats(new L(2));
+
+      assertNotNull(subtaskStats);
+
+      assertEquals("chunksOut", 2, subtaskStats.chunksOut.get());
+      assertEquals("elementsOut", 3, subtaskStats.elementsOut.get());
+    }
+
+    // verify right #of tasks executed.
+    assertEquals("subtaskStartCount", 2, masterStats.subtaskStartCount.get());
+    assertEquals("subtaskEndCount", 2, masterStats.subtaskEndCount.get());
+  }
 }

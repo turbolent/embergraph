@@ -24,311 +24,295 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
-import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.test.MockTermIdFactory;
 
 /**
  * Test suite for {@link SPOPredicate}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSPOPredicate extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestSPOPredicate() {
-    }
+  /** */
+  public TestSPOPredicate() {}
 
-    /**
-     * @param name
-     */
-    public TestSPOPredicate(String name) {
-        super(name);
-    }
-    
-    private String relation;
+  /** @param name */
+  public TestSPOPredicate(String name) {
+    super(name);
+  }
 
-    private Constant<IV> rdfsSubClassOf;
-    
-    private Constant<IV> rdfsResource;
-    
-    private Constant<IV> rdfType;
-    
-    private Constant<IV> rdfsClass;
-    
-    private Constant<IV> someGraph;
-    
-    private MockTermIdFactory factory;
-    
-    protected void setUp() throws Exception {
+  private String relation;
 
-        super.setUp();
+  private Constant<IV> rdfsSubClassOf;
 
-        factory = new MockTermIdFactory();
+  private Constant<IV> rdfsResource;
 
-        relation = "test";
+  private Constant<IV> rdfType;
 
-        rdfsSubClassOf = new Constant<IV>(factory.newTermId(VTE.URI));
+  private Constant<IV> rdfsClass;
 
-        rdfsResource = new Constant<IV>(factory.newTermId(VTE.URI));
+  private Constant<IV> someGraph;
 
-        rdfType = new Constant<IV>(factory.newTermId(VTE.URI));
+  private MockTermIdFactory factory;
 
-        rdfsClass = new Constant<IV>(factory.newTermId(VTE.URI));
+  protected void setUp() throws Exception {
 
-        someGraph = new Constant<IV>(factory.newTermId(VTE.URI));
+    super.setUp();
 
-    }
-    
-    protected void tearDown() throws Exception {
-    
-        factory = null;
+    factory = new MockTermIdFactory();
 
-        relation = null;
+    relation = "test";
 
-        rdfsSubClassOf = rdfsResource = rdfType = rdfsClass = someGraph = null;
-        
-        super.tearDown();
-        
-    }
-    
-	public void test_ctor_triples_oneVar() {
+    rdfsSubClassOf = new Constant<IV>(factory.newTermId(VTE.URI));
 
-		final Var<IV> u = Var.var("u");
+    rdfsResource = new Constant<IV>(factory.newTermId(VTE.URI));
 
-		final SPOPredicate p1 = new SPOPredicate(new BOp[] { u, rdfsSubClassOf,
-				rdfsResource }, new NV(IPredicate.Annotations.RELATION_NAME,
-				new String[] { relation }));
+    rdfType = new Constant<IV>(factory.newTermId(VTE.URI));
 
-		if (log.isInfoEnabled())
-			log.info(p1.toString());
+    rdfsClass = new Constant<IV>(factory.newTermId(VTE.URI));
 
-		assertEquals("arity", 3, p1.arity());
+    someGraph = new Constant<IV>(factory.newTermId(VTE.URI));
+  }
 
-		assertEquals("variableCount", 1, p1.getVariableCount(SPOKeyOrder.SPO));
+  protected void tearDown() throws Exception {
 
-		assertEquals(u, p1.get(0));
+    factory = null;
 
-		assertEquals(rdfsSubClassOf, p1.get(1));
+    relation = null;
 
-		assertEquals(rdfsResource, p1.get(2));
+    rdfsSubClassOf = rdfsResource = rdfType = rdfsClass = someGraph = null;
 
-	}
+    super.tearDown();
+  }
 
-	public void test_ctor_triples_twoVars() {
+  public void test_ctor_triples_oneVar() {
 
-		final Var<IV> u = Var.var("u");
+    final Var<IV> u = Var.var("u");
 
-		final Var<IV> v = Var.var("v");
+    final SPOPredicate p1 =
+        new SPOPredicate(
+            new BOp[] {u, rdfsSubClassOf, rdfsResource},
+            new NV(IPredicate.Annotations.RELATION_NAME, new String[] {relation}));
 
-		final SPOPredicate p1 = new SPOPredicate(new BOp[] { u, rdfsSubClassOf,
-				v }, new NV(IPredicate.Annotations.RELATION_NAME,
-				new String[] { relation }));
+    if (log.isInfoEnabled()) log.info(p1.toString());
 
-		if (log.isInfoEnabled())
-			log.info(p1.toString());
+    assertEquals("arity", 3, p1.arity());
 
-		assertEquals("arity", 3, p1.arity());
+    assertEquals("variableCount", 1, p1.getVariableCount(SPOKeyOrder.SPO));
 
-		assertEquals("variableCount", 2, p1.getVariableCount(SPOKeyOrder.SPO));
+    assertEquals(u, p1.get(0));
 
-		assertEquals(u, p1.get(0));
+    assertEquals(rdfsSubClassOf, p1.get(1));
 
-		assertEquals(rdfsSubClassOf, p1.get(1));
+    assertEquals(rdfsResource, p1.get(2));
+  }
 
-		assertEquals(v, p1.get(2));
+  public void test_ctor_triples_twoVars() {
 
-	}
+    final Var<IV> u = Var.var("u");
 
-	public void test_ctor_quads_oneVar() {
+    final Var<IV> v = Var.var("v");
 
-		final Var<IV> u = Var.var("u");
+    final SPOPredicate p1 =
+        new SPOPredicate(
+            new BOp[] {u, rdfsSubClassOf, v},
+            new NV(IPredicate.Annotations.RELATION_NAME, new String[] {relation}));
 
-		final SPOPredicate p1 = new SPOPredicate(new BOp[] { u, rdfsSubClassOf,
-				rdfsResource, someGraph },
-				new NV(IPredicate.Annotations.RELATION_NAME,
-						new String[] { relation }));
+    if (log.isInfoEnabled()) log.info(p1.toString());
 
-		if (log.isInfoEnabled())
-			log.info(p1.toString());
+    assertEquals("arity", 3, p1.arity());
 
-		assertEquals("arity", 4, p1.arity());
+    assertEquals("variableCount", 2, p1.getVariableCount(SPOKeyOrder.SPO));
 
-		assertEquals("variableCount", 1, p1.getVariableCount(SPOKeyOrder.SPOC));
+    assertEquals(u, p1.get(0));
 
-		assertEquals(u, p1.get(0));
+    assertEquals(rdfsSubClassOf, p1.get(1));
 
-		assertEquals(rdfsSubClassOf, p1.get(1));
+    assertEquals(v, p1.get(2));
+  }
 
-		assertEquals(rdfsResource, p1.get(2));
+  public void test_ctor_quads_oneVar() {
 
-		assertEquals(someGraph, p1.get(3));
+    final Var<IV> u = Var.var("u");
 
-	}
+    final SPOPredicate p1 =
+        new SPOPredicate(
+            new BOp[] {u, rdfsSubClassOf, rdfsResource, someGraph},
+            new NV(IPredicate.Annotations.RELATION_NAME, new String[] {relation}));
 
-	public void test_ctor_quads_twoVars() {
+    if (log.isInfoEnabled()) log.info(p1.toString());
 
-		final Var<IV> u = Var.var("u");
+    assertEquals("arity", 4, p1.arity());
 
-		final Var<IV> v = Var.var("v");
+    assertEquals("variableCount", 1, p1.getVariableCount(SPOKeyOrder.SPOC));
 
-		final SPOPredicate p1 = new SPOPredicate(new BOp[] { u, rdfsSubClassOf,
-				rdfsResource, v }, new NV(IPredicate.Annotations.RELATION_NAME,
-				new String[] { relation }));
+    assertEquals(u, p1.get(0));
 
-		if (log.isInfoEnabled())
-			log.info(p1.toString());
+    assertEquals(rdfsSubClassOf, p1.get(1));
 
-		assertEquals("arity", 4, p1.arity());
+    assertEquals(rdfsResource, p1.get(2));
 
-		assertEquals("variableCount", 2, p1.getVariableCount(SPOKeyOrder.SPOC));
+    assertEquals(someGraph, p1.get(3));
+  }
 
-		assertEquals(u, p1.get(0));
+  public void test_ctor_quads_twoVars() {
 
-		assertEquals(rdfsSubClassOf, p1.get(1));
+    final Var<IV> u = Var.var("u");
 
-		assertEquals(rdfsResource, p1.get(2));
+    final Var<IV> v = Var.var("v");
 
-		assertEquals(v, p1.get(3));
+    final SPOPredicate p1 =
+        new SPOPredicate(
+            new BOp[] {u, rdfsSubClassOf, rdfsResource, v},
+            new NV(IPredicate.Annotations.RELATION_NAME, new String[] {relation}));
 
-	}
-    
-//    /**
-//     * Verify equality testing with same impl.
-//     */
-//    public void test_equalsSameImpl() {
-//
-//        final Var<IV> u = Var.var("u");
-//
-//        final SPOPredicate p1 = new SPOPredicate(relation,u, rdfsSubClassOf, rdfsResource);
-//
-//        final SPOPredicate p2 = new SPOPredicate(relation,u, rdfType, rdfsClass);
-//
-//        log.info(p1.toString());
-//
-//        log.info(p2.toString());
-//
-//        assertTrue(p1.equals(new SPOPredicate(relation, u, rdfsSubClassOf, rdfsResource)));
-//
-//        assertTrue(p2.equals(new SPOPredicate(relation, u, rdfType, rdfsClass)));
-//        
-//        assertFalse(p1.equals(p2));
-//
-//        assertFalse(p2.equals(p1));
-//        
-//    }
-//    
-//    public void test_equalsDifferentImpl() {
-//        
-//        final Var<IV> u = Var.var("u");
-//
-//        final SPOPredicate p1 = new SPOPredicate(relation, u, rdfType, rdfsClass);
-//
-//        final Predicate p2 = new Predicate(new IVariableOrConstant[] { u,
-//                rdfType, rdfsClass }, new NV(
-//                Predicate.Annotations.RELATION_NAME, new String[] { relation }));
-//
-//        log.info(p1.toString());
-//
-//        log.info(p2.toString());
-//
-//        assertTrue(p1.equals(p2));
-//
-//        assertTrue(p2.equals(p1));
-//
-//    }
-//
-//    /**
-//     * Note: {@link HashMap} support will breaks unless the {@link IPredicate}
-//     * class defines <code>equals(Object o)</code>. If it just defines
-//     * <code>equals(IPredicate)</code> then {@link Object#equals(Object)} will
-//     * be invoked instead!
-//     */
-//    public void test_hashMapSameImpl() {
-//
-//        final Var<IV> u = Var.var("u");
-//
-//        final SPOPredicate p1 = new SPOPredicate(relation, u, rdfsSubClassOf,
-//                rdfsResource);
-//
-//        final Predicate<?> p1b = new Predicate(new IVariableOrConstant[] { u,
-//                rdfsSubClassOf, rdfsResource }, new NV(Predicate.Annotations.RELATION_NAME,
-//                        new String[] { relation }));
-//
-//        final SPOPredicate p2 = new SPOPredicate(relation, u, rdfType,
-//                rdfsClass);
-//
-//        final Predicate<?> p2b = new Predicate(new IVariableOrConstant[] { u,
-//                rdfType, rdfsClass }, new NV(Predicate.Annotations.RELATION_NAME,
-//                        new String[] { relation }));
-//
-//        // p1 and p1b compare as equal.
-//        assertTrue(p1.equals(p1));
-//        assertTrue(p1.equals(p1b));
-//        assertTrue(p1b.equals(p1));
-//        assertTrue(p1b.equals(p1b));
-//        
-//        // {p1,p1b} not equal {p2,p2b}
-//        assertFalse(p1.equals(p2));
-//        assertFalse(p1.equals(p2b));
-//        assertFalse(p1b.equals(p2));
-//        assertFalse(p1b.equals(p2b));
-//
-//        // {p1,p1b} have the same hash code.
-//        assertEquals(p1.hashCode(), p1b.hashCode());
-//
-//        // {p2,p2b} have the same hash code.
-//        assertEquals(p2.hashCode(), p2b.hashCode());
-//        
-//        final HashMap<IPredicate,String> map = new HashMap<IPredicate,String>();
-//        
-//        assertFalse(map.containsKey(p1));
-//        assertFalse(map.containsKey(p2));
-//        assertFalse(map.containsKey(p1b));
-//        assertFalse(map.containsKey(p2b));
-//        
-//        assertEquals(0,map.size());
-//        assertNull(map.put(p1,"p1"));
-//        assertEquals(1,map.size());
-//        assertEquals("p1",map.put(p1,"p1"));
-//        assertEquals(1,map.size());
-//
-//        assertTrue(p1.equals(p1b));
-//        assertTrue(p1b.equals(p1));
-//        assertTrue(p1.hashCode()==p1b.hashCode());
-//        assertEquals("p1",map.put(p1b,"p1"));
-//        assertEquals(1,map.size());
-//        
-//        assertTrue(map.containsKey(p1));
-//        assertTrue(map.containsKey(p1b));
-//        assertFalse(map.containsKey(p2));
-//        assertFalse(map.containsKey(p2b));
-//
-//        assertEquals("p1",map.get(p1));
-//        assertEquals("p1",map.get(p1b));
-//        
-//        map.put(p2,"p2");
-//        
-//        assertTrue(map.containsKey(p1));
-//        assertTrue(map.containsKey(p1b));
-//        assertTrue(map.containsKey(p2));
-//        assertTrue(map.containsKey(p2b));
-//        
-//        assertEquals("p2",map.get(p2));
-//        assertEquals("p2",map.get(p2b));
-//        
-//    }
-    
+    if (log.isInfoEnabled()) log.info(p1.toString());
+
+    assertEquals("arity", 4, p1.arity());
+
+    assertEquals("variableCount", 2, p1.getVariableCount(SPOKeyOrder.SPOC));
+
+    assertEquals(u, p1.get(0));
+
+    assertEquals(rdfsSubClassOf, p1.get(1));
+
+    assertEquals(rdfsResource, p1.get(2));
+
+    assertEquals(v, p1.get(3));
+  }
+
+  //    /**
+  //     * Verify equality testing with same impl.
+  //     */
+  //    public void test_equalsSameImpl() {
+  //
+  //        final Var<IV> u = Var.var("u");
+  //
+  //        final SPOPredicate p1 = new SPOPredicate(relation,u, rdfsSubClassOf, rdfsResource);
+  //
+  //        final SPOPredicate p2 = new SPOPredicate(relation,u, rdfType, rdfsClass);
+  //
+  //        log.info(p1.toString());
+  //
+  //        log.info(p2.toString());
+  //
+  //        assertTrue(p1.equals(new SPOPredicate(relation, u, rdfsSubClassOf, rdfsResource)));
+  //
+  //        assertTrue(p2.equals(new SPOPredicate(relation, u, rdfType, rdfsClass)));
+  //
+  //        assertFalse(p1.equals(p2));
+  //
+  //        assertFalse(p2.equals(p1));
+  //
+  //    }
+  //
+  //    public void test_equalsDifferentImpl() {
+  //
+  //        final Var<IV> u = Var.var("u");
+  //
+  //        final SPOPredicate p1 = new SPOPredicate(relation, u, rdfType, rdfsClass);
+  //
+  //        final Predicate p2 = new Predicate(new IVariableOrConstant[] { u,
+  //                rdfType, rdfsClass }, new NV(
+  //                Predicate.Annotations.RELATION_NAME, new String[] { relation }));
+  //
+  //        log.info(p1.toString());
+  //
+  //        log.info(p2.toString());
+  //
+  //        assertTrue(p1.equals(p2));
+  //
+  //        assertTrue(p2.equals(p1));
+  //
+  //    }
+  //
+  //    /**
+  //     * Note: {@link HashMap} support will breaks unless the {@link IPredicate}
+  //     * class defines <code>equals(Object o)</code>. If it just defines
+  //     * <code>equals(IPredicate)</code> then {@link Object#equals(Object)} will
+  //     * be invoked instead!
+  //     */
+  //    public void test_hashMapSameImpl() {
+  //
+  //        final Var<IV> u = Var.var("u");
+  //
+  //        final SPOPredicate p1 = new SPOPredicate(relation, u, rdfsSubClassOf,
+  //                rdfsResource);
+  //
+  //        final Predicate<?> p1b = new Predicate(new IVariableOrConstant[] { u,
+  //                rdfsSubClassOf, rdfsResource }, new NV(Predicate.Annotations.RELATION_NAME,
+  //                        new String[] { relation }));
+  //
+  //        final SPOPredicate p2 = new SPOPredicate(relation, u, rdfType,
+  //                rdfsClass);
+  //
+  //        final Predicate<?> p2b = new Predicate(new IVariableOrConstant[] { u,
+  //                rdfType, rdfsClass }, new NV(Predicate.Annotations.RELATION_NAME,
+  //                        new String[] { relation }));
+  //
+  //        // p1 and p1b compare as equal.
+  //        assertTrue(p1.equals(p1));
+  //        assertTrue(p1.equals(p1b));
+  //        assertTrue(p1b.equals(p1));
+  //        assertTrue(p1b.equals(p1b));
+  //
+  //        // {p1,p1b} not equal {p2,p2b}
+  //        assertFalse(p1.equals(p2));
+  //        assertFalse(p1.equals(p2b));
+  //        assertFalse(p1b.equals(p2));
+  //        assertFalse(p1b.equals(p2b));
+  //
+  //        // {p1,p1b} have the same hash code.
+  //        assertEquals(p1.hashCode(), p1b.hashCode());
+  //
+  //        // {p2,p2b} have the same hash code.
+  //        assertEquals(p2.hashCode(), p2b.hashCode());
+  //
+  //        final HashMap<IPredicate,String> map = new HashMap<IPredicate,String>();
+  //
+  //        assertFalse(map.containsKey(p1));
+  //        assertFalse(map.containsKey(p2));
+  //        assertFalse(map.containsKey(p1b));
+  //        assertFalse(map.containsKey(p2b));
+  //
+  //        assertEquals(0,map.size());
+  //        assertNull(map.put(p1,"p1"));
+  //        assertEquals(1,map.size());
+  //        assertEquals("p1",map.put(p1,"p1"));
+  //        assertEquals(1,map.size());
+  //
+  //        assertTrue(p1.equals(p1b));
+  //        assertTrue(p1b.equals(p1));
+  //        assertTrue(p1.hashCode()==p1b.hashCode());
+  //        assertEquals("p1",map.put(p1b,"p1"));
+  //        assertEquals(1,map.size());
+  //
+  //        assertTrue(map.containsKey(p1));
+  //        assertTrue(map.containsKey(p1b));
+  //        assertFalse(map.containsKey(p2));
+  //        assertFalse(map.containsKey(p2b));
+  //
+  //        assertEquals("p1",map.get(p1));
+  //        assertEquals("p1",map.get(p1b));
+  //
+  //        map.put(p2,"p2");
+  //
+  //        assertTrue(map.containsKey(p1));
+  //        assertTrue(map.containsKey(p1b));
+  //        assertTrue(map.containsKey(p2));
+  //        assertTrue(map.containsKey(p2b));
+  //
+  //        assertEquals("p2",map.get(p2));
+  //        assertEquals("p2",map.get(p2b));
+  //
+  //    }
+
 }

@@ -23,27 +23,22 @@ package org.embergraph.rdf.internal;
 
 import java.util.Collections;
 import java.util.Iterator;
-
 import org.embergraph.rdf.model.EmbergraphValue;
-
 
 /**
  * A class which does not support any extensions.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NoExtensionFactory implements IExtensionFactory {
 
-    @Override
-    public void init(final IDatatypeURIResolver lex,
-            final ILexiconConfiguration<EmbergraphValue> config) {
+  @Override
+  public void init(
+      final IDatatypeURIResolver lex, final ILexiconConfiguration<EmbergraphValue> config) {}
 
-    }
-
-    @Override
-    public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
-        return Collections.emptyIterator();
-    }
-
+  @Override
+  public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
+    return Collections.emptyIterator();
+  }
 }

@@ -21,75 +21,68 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
  * Utility IV to generate IVs for URIs in the form of http://example.org/value/1234234513STRSUFFIX
- * where the localName of the URI is a string  suffix followed by an integer value with fixed width.
- * 
- * You should extend this class with implementation for specific instances of URIs that follow
- * this form such as:  http://rdf.ncbi.nlm.nih.gov/pubchem/compound/1234234_CID would be
- * created as:
- * 
+ * where the localName of the URI is a string suffix followed by an integer value with fixed width.
+ *
+ * <p>You should extend this class with implementation for specific instances of URIs that follow
+ * this form such as: http://rdf.ncbi.nlm.nih.gov/pubchem/compound/1234234_CID would be created as:
  * <code>
  * InlineSuffixedFixedWidthIntegerURIHandler handler = new InlineSuffixedFixedWidthIntegerURIHandler("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/","_CID", 7);
- * </code>
- * 
- * This has support for overloading on a single namespace {@link InlineLocalNameIntegerURIHandler}. 
- * 
+ * </code> This has support for overloading on a single namespace {@link
+ * InlineLocalNameIntegerURIHandler}.
+ *
  * @author beebs
- * 
  */
+public class InlineSuffixedFixedWidthIntegerURIHandler extends InlineLocalNameIntegerURIHandler
+    implements ISuffixedURIHandler {
 
-public class InlineSuffixedFixedWidthIntegerURIHandler extends
-		InlineLocalNameIntegerURIHandler implements ISuffixedURIHandler {
+  private String suffix = null;
+  private int width = 0;
 
-	private String suffix = null;
-	private int width = 0;
+  public InlineSuffixedFixedWidthIntegerURIHandler(
+      final String namespace, final String suffix, final int width) {
+    super(namespace);
+    this.suffix = suffix;
+    this.width = width;
+  }
 
-	public InlineSuffixedFixedWidthIntegerURIHandler(final String namespace,
-			final String suffix, final int width) {
-		super(namespace);
-		this.suffix = suffix;
-		this.width = width;
-	}
+  public InlineSuffixedFixedWidthIntegerURIHandler(
+      final String namespace, final String suffix, final int width, final int id) {
+    super(namespace);
+    this.suffix = suffix;
+    this.width = width;
+    this.packedId = id;
+  }
 
-	public InlineSuffixedFixedWidthIntegerURIHandler(final String namespace,
-			final String suffix, final int width, final int id) {
-		super(namespace);
-		this.suffix = suffix;
-		this.width = width;
-		this.packedId = id;
-	}
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(String localName) {
+    if (!localName.endsWith(this.suffix)) {
+      return null;
+    }
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	protected AbstractLiteralIV createInlineIV(String localName) {
-		if (!localName.endsWith(this.suffix)) {
-			return null;
-		}
-	
-		final String intValue =localName.substring(0, localName.length() - this.suffix.length());
-		
-		return super.createInlineIV(getPackedValueString(intValue));
-	}
+    final String intValue = localName.substring(0, localName.length() - this.suffix.length());
 
-	@Override
-	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+    return super.createInlineIV(getPackedValueString(intValue));
+  }
 
-		final String intStr = super.getLocalNameFromDelegate(delegate);
+  @Override
+  public String getLocalNameFromDelegate(AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
-		final int intVal = (int) getUnpackedValueFromString(intStr);
+    final String intStr = super.getLocalNameFromDelegate(delegate);
 
-		final String localName = String.format("%0" + width + "d", intVal) + this.suffix;
+    final int intVal = (int) getUnpackedValueFromString(intStr);
 
-		return localName;
-	}
+    final String localName = String.format("%0" + width + "d", intVal) + this.suffix;
 
-	public String getSuffix() {
-		return suffix;
-	}
+    return localName;
+  }
 
-	public void setSuffix(String suffix) {
-		this.suffix = suffix;
-	}
+  public String getSuffix() {
+    return suffix;
+  }
+
+  public void setSuffix(String suffix) {
+    this.suffix = suffix;
+  }
 }

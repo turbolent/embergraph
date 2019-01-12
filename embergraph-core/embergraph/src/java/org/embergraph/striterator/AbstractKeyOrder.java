@@ -30,120 +30,105 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
 /**
- * Abstract base class provides default behavior for generating keys for a given
- * index order.
- * 
+ * Abstract base class provides default behavior for generating keys for a given index order.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class AbstractKeyOrder<E> implements IKeyOrder<E> {
+public abstract class AbstractKeyOrder<E> implements IKeyOrder<E> {
 
-    /**
-     * {@inheritDoc}
-     * 
-     *       FIXME This needs to be reconciled with
-     *       {@link ITupleSerializer#serializeKey(Object)}. For example, this
-     *       does not play well with the {@link DefaultTupleSerializer}.
-     */
-	@Override
-    public byte[] getKey(final IKeyBuilder keyBuilder, final E element) {
-        
-        keyBuilder.reset();
+  /**
+   * {@inheritDoc}
+   *
+   * <p>FIXME This needs to be reconciled with {@link ITupleSerializer#serializeKey(Object)}. For
+   * example, this does not play well with the {@link DefaultTupleSerializer}.
+   */
+  @Override
+  public byte[] getKey(final IKeyBuilder keyBuilder, final E element) {
 
-        final int keyArity = getKeyArity(); // use the key's "arity".
+    keyBuilder.reset();
 
-        for (int i = 0; i < keyArity; i++) {
+    final int keyArity = getKeyArity(); // use the key's "arity".
 
-            /*
-             * Note: If you need to override the default IKeyBuilder behavior do
-             * it in the invoked method.
-             */
-            appendKeyComponent(keyBuilder, i, ((IElement) element)
-                    .get(getKeyOrder(i)));
+    for (int i = 0; i < keyArity; i++) {
 
-        }
-
-        return keyBuilder.getKey();
-        
+      /*
+       * Note: If you need to override the default IKeyBuilder behavior do
+       * it in the invoked method.
+       */
+      appendKeyComponent(keyBuilder, i, ((IElement) element).get(getKeyOrder(i)));
     }
 
-	@Override
-    public byte[] getFromKey(final IKeyBuilder keyBuilder,
-            final IPredicate<E> predicate) {
+    return keyBuilder.getKey();
+  }
 
-        keyBuilder.reset();
+  @Override
+  public byte[] getFromKey(final IKeyBuilder keyBuilder, final IPredicate<E> predicate) {
 
-        final int keyArity = getKeyArity(); // use the key's "arity".
+    keyBuilder.reset();
 
-        boolean noneBound = true;
+    final int keyArity = getKeyArity(); // use the key's "arity".
 
-        for (int i = 0; i < keyArity; i++) {
+    boolean noneBound = true;
 
-            final IVariableOrConstant<?> term = predicate.get(getKeyOrder(i));
+    for (int i = 0; i < keyArity; i++) {
 
-            // Note: term MAY be null for the context position.
-            if (term == null || term.isVar())
-                break;
+      final IVariableOrConstant<?> term = predicate.get(getKeyOrder(i));
 
-            /*
-             * Note: If you need to override the default IKeyBuilder behavior do
-             * it in the invoked method.
-             */
-            appendKeyComponent(keyBuilder, i, term.get());
+      // Note: term MAY be null for the context position.
+      if (term == null || term.isVar()) break;
 
-            noneBound = false;
+      /*
+       * Note: If you need to override the default IKeyBuilder behavior do
+       * it in the invoked method.
+       */
+      appendKeyComponent(keyBuilder, i, term.get());
 
-        }
-
-        final byte[] key = noneBound ? null : keyBuilder.getKey();
-
-        return key;
-        
+      noneBound = false;
     }
 
-	@Override
-    public byte[] getToKey(final IKeyBuilder keyBuilder,
-            final IPredicate<E> predicate) {
+    final byte[] key = noneBound ? null : keyBuilder.getKey();
 
-        keyBuilder.reset();
+    return key;
+  }
 
-        final int keyArity = getKeyArity(); // use the key's "arity".
+  @Override
+  public byte[] getToKey(final IKeyBuilder keyBuilder, final IPredicate<E> predicate) {
 
-        boolean noneBound = true;
+    keyBuilder.reset();
 
-        for (int i = 0; i < keyArity; i++) {
+    final int keyArity = getKeyArity(); // use the key's "arity".
 
-            final IVariableOrConstant<?> term = predicate.get(getKeyOrder(i));
+    boolean noneBound = true;
 
-            // Note: term MAY be null for the context position.
-            if (term == null || term.isVar())
-                break;
+    for (int i = 0; i < keyArity; i++) {
 
-            /*
-             * Note: If you need to override the default IKeyBuilder behavior do
-             * it in the invoked method.
-             */
-            appendKeyComponent(keyBuilder, i, term.get());
+      final IVariableOrConstant<?> term = predicate.get(getKeyOrder(i));
 
-            noneBound = false;
+      // Note: term MAY be null for the context position.
+      if (term == null || term.isVar()) break;
 
-        }
+      /*
+       * Note: If you need to override the default IKeyBuilder behavior do
+       * it in the invoked method.
+       */
+      appendKeyComponent(keyBuilder, i, term.get());
 
-        final byte[] key = noneBound ? null : keyBuilder.getKey();
-
-        return key == null ? null : SuccessorUtil.successor(key);
-
+      noneBound = false;
     }
 
-    /**
-     * Encodes an value into the key. This implementation uses the default
-     * behavior of {@link IKeyBuilder}. If you need to specialize how a value
-     * gets encoded into the key then you can override this method.
-     */
-    protected void appendKeyComponent(final IKeyBuilder keyBuilder,
-            final int index, final Object keyComponent) {
+    final byte[] key = noneBound ? null : keyBuilder.getKey();
 
-        keyBuilder.append(keyComponent);
+    return key == null ? null : SuccessorUtil.successor(key);
+  }
 
-    }
+  /**
+   * Encodes an value into the key. This implementation uses the default behavior of {@link
+   * IKeyBuilder}. If you need to specialize how a value gets encoded into the key then you can
+   * override this method.
+   */
+  protected void appendKeyComponent(
+      final IKeyBuilder keyBuilder, final int index, final Object keyComponent) {
 
+    keyBuilder.append(keyComponent);
+  }
 }

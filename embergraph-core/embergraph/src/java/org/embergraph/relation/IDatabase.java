@@ -24,22 +24,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation;
 
 import java.util.Iterator;
-
 import org.embergraph.relation.locator.ILocatableResource;
 
 /**
- * A collection of relations having a unique namespace. The relations within the
- * container have namespaces within the container's namespace. Relations also
- * know how to find their container.
- * 
+ * A collection of relations having a unique namespace. The relations within the container have
+ * namespaces within the container's namespace. Relations also know how to find their container.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IDatabase<E> extends ILocatableResource<IDatabase<E>> {
 
-    /**
-     * Visits the logically contained {@link IRelation} resources.
-     */
-    Iterator<IRelation> relations();
-    
+  /** Visits the logically contained {@link IRelation} resources. */
+  Iterator<IRelation> relations();
 }

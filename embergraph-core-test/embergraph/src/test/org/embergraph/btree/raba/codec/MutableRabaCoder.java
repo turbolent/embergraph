@@ -31,150 +31,119 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
 /**
- * This "codes" a raba as a {@link MutableKeyBuffer} or
- * {@link MutableValueBuffer} depending on whether it represents B+Tree keys or
- * values. This class is used by some unit tests as a convenience for
- * establishing a baseline for the performance of {@link ICodedRaba}s against
- * the core mutable {@link IRaba} implementations actually used by {@link Node}
- * and {@link Leaf}.
- * 
+ * This "codes" a raba as a {@link MutableKeyBuffer} or {@link MutableValueBuffer} depending on
+ * whether it represents B+Tree keys or values. This class is used by some unit tests as a
+ * convenience for establishing a baseline for the performance of {@link ICodedRaba}s against the
+ * core mutable {@link IRaba} implementations actually used by {@link Node} and {@link Leaf}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class MutableRabaCoder implements IRabaCoder {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -7123556255775810548L;
+  /** */
+  private static final long serialVersionUID = -7123556255775810548L;
 
-    @Override
-    public ICodedRaba decode(final AbstractFixedByteArrayBuffer data) {
-        
-        // Note: an alternative class is used to encode/decode.
-        final IRaba raba = SimpleRabaCoder.INSTANCE.decode(data);
-        
-        if (raba.isKeys()) {
-        
-            return new KeysRabaImpl(raba, data);
-            
-        } else {
-            
-            return new ValuesRabaImpl(raba, data);
-            
-        }
-        
+  @Override
+  public ICodedRaba decode(final AbstractFixedByteArrayBuffer data) {
+
+    // Note: an alternative class is used to encode/decode.
+    final IRaba raba = SimpleRabaCoder.INSTANCE.decode(data);
+
+    if (raba.isKeys()) {
+
+      return new KeysRabaImpl(raba, data);
+
+    } else {
+
+      return new ValuesRabaImpl(raba, data);
+    }
+  }
+
+  @Override
+  public AbstractFixedByteArrayBuffer encode(final IRaba raba, final DataOutputBuffer buf) {
+
+    return encodeLive(raba, buf).data();
+  }
+
+  @Override
+  public ICodedRaba encodeLive(final IRaba raba, final DataOutputBuffer buf) {
+
+    // Note: an alternative class is used to encode/decode.
+    final AbstractFixedByteArrayBuffer data = SimpleRabaCoder.INSTANCE.encode(raba, buf);
+
+    if (raba.isKeys()) {
+
+      return new KeysRabaImpl(raba, data);
+
+    } else {
+
+      return new ValuesRabaImpl(raba, data);
+    }
+  }
+
+  /** Yes. */
+  @Override
+  public final boolean isKeyCoder() {
+
+    return true;
+  }
+
+  /** Yes. */
+  @Override
+  public final boolean isValueCoder() {
+
+    return true;
+  }
+
+  @Override
+  public boolean isDuplicateKeys() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * {@link MutableKeyBuffer} with mock implementation of {@link ICodedRaba} methods.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  private static class KeysRabaImpl extends MutableKeyBuffer implements ICodedRaba {
+
+    private final AbstractFixedByteArrayBuffer data;
+
+    public KeysRabaImpl(final IRaba raba, final AbstractFixedByteArrayBuffer data) {
+
+      super(raba.capacity(), raba);
+
+      this.data = data;
+    }
+
+    public AbstractFixedByteArrayBuffer data() {
+
+      return data;
+    }
+  }
+
+  /**
+   * {@link MutableValueBuffer} with mock implementation of {@link ICodedRaba} methods.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  private static class ValuesRabaImpl extends MutableValueBuffer implements ICodedRaba {
+
+    private final AbstractFixedByteArrayBuffer data;
+
+    public ValuesRabaImpl(final IRaba raba, final AbstractFixedByteArrayBuffer data) {
+
+      super(raba.capacity(), raba);
+
+      this.data = data;
     }
 
     @Override
-    public AbstractFixedByteArrayBuffer encode(final IRaba raba,
-            final DataOutputBuffer buf) {
+    public AbstractFixedByteArrayBuffer data() {
 
-        return encodeLive(raba, buf).data();
-
+      return data;
     }
-
-    @Override
-    public ICodedRaba encodeLive(final IRaba raba, final DataOutputBuffer buf) {
-
-        // Note: an alternative class is used to encode/decode.
-        final AbstractFixedByteArrayBuffer data = SimpleRabaCoder.INSTANCE
-                .encode(raba, buf);
-        
-        if (raba.isKeys()) {
-        
-            return new KeysRabaImpl(raba, data);
-            
-        } else {
-            
-            return new ValuesRabaImpl(raba, data);
-            
-        }
-        
-    }
-
-    /**
-     * Yes.
-     */
-    @Override
-    final public boolean isKeyCoder() {
-        
-        return true;
-        
-    }
-
-    /**
-     * Yes.
-     */
-    @Override
-    final public boolean isValueCoder() {
-        
-        return true;
-        
-    }
-
-    @Override
-    public boolean isDuplicateKeys() {
-
-        throw new UnsupportedOperationException();
-        
-    }
-    
-    /**
-     * {@link MutableKeyBuffer} with mock implementation of {@link ICodedRaba}
-     * methods.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
-     */
-    private static class KeysRabaImpl extends MutableKeyBuffer implements ICodedRaba {
-
-        private final AbstractFixedByteArrayBuffer data;
-
-        public KeysRabaImpl(final IRaba raba,
-                final AbstractFixedByteArrayBuffer data) {
-
-            super(raba.capacity(), raba);
-
-            this.data = data;
-            
-        }
-
-        public AbstractFixedByteArrayBuffer data() {
-            
-            return data;
-            
-        }
-        
-    }
-    
-    /**
-     * {@link MutableValueBuffer} with mock implementation of {@link ICodedRaba}
-     * methods.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
-     *         Thompson</a>
-     */
-    private static class ValuesRabaImpl extends MutableValueBuffer implements
-            ICodedRaba {
-
-        private final AbstractFixedByteArrayBuffer data;
-
-        public ValuesRabaImpl(final IRaba raba,
-                final AbstractFixedByteArrayBuffer data) {
-
-            super(raba.capacity(), raba);
-        
-            this.data = data;
-            
-        }
-
-        @Override
-        public AbstractFixedByteArrayBuffer data() {
-            
-            return data;
-            
-        }
-        
-    }
-
+  }
 }

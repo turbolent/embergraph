@@ -22,83 +22,78 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import org.embergraph.quorum.Quorum;
 
 /**
- * Helper class finds all joined and non-joined services for the quorum
- * client.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ * Helper class finds all joined and non-joined services for the quorum client.
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class JoinedAndNonJoinedServices implements Serializable,
-        IJoinedAndNonJoinedServices {
+public class JoinedAndNonJoinedServices implements Serializable, IJoinedAndNonJoinedServices {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  // The services joined with the met quorum, in their join order.
+  private final UUID[] joinedServiceIds;
+
+  // The services in the write pipeline (in any order).
+  private final Set<UUID> nonJoinedPipelineServiceIds;
+
+  public JoinedAndNonJoinedServices(final Quorum<HAGlue, QuorumService<HAGlue>> quorum) {
 
     // The services joined with the met quorum, in their join order.
-    private final UUID[] joinedServiceIds;
-    
+    joinedServiceIds = quorum.getJoined();
+
+    // The UUID for this service.
+    final UUID serviceId = quorum.getClient().getServiceId();
+
+    if (joinedServiceIds.length == 0 || !joinedServiceIds[0].equals(serviceId)) {
+
+      /*
+       * Sanity check. Verify that the first service in the join order
+       * is *this* service. This is a precondition for the service to
+       * be the leader.
+       */
+
+      throw new RuntimeException(
+          "Not leader: serviceId="
+              + serviceId
+              + ", joinedServiceIds="
+              + Arrays.toString(joinedServiceIds));
+    }
+
     // The services in the write pipeline (in any order).
-    private final Set<UUID> nonJoinedPipelineServiceIds;
+    nonJoinedPipelineServiceIds = new LinkedHashSet<UUID>(Arrays.asList(quorum.getPipeline()));
 
-    public JoinedAndNonJoinedServices(
-            final Quorum<HAGlue, QuorumService<HAGlue>> quorum) {
+    // Remove all services that are joined from this collection.
+    for (UUID joinedServiceId : joinedServiceIds) {
 
-        // The services joined with the met quorum, in their join order.
-        joinedServiceIds = quorum.getJoined();
-
-        // The UUID for this service.
-        final UUID serviceId = quorum.getClient().getServiceId();
-
-        if (joinedServiceIds.length == 0
-                || !joinedServiceIds[0].equals(serviceId)) {
-
-            /*
-             * Sanity check. Verify that the first service in the join order
-             * is *this* service. This is a precondition for the service to
-             * be the leader.
-             */
-
-            throw new RuntimeException("Not leader: serviceId=" + serviceId
-                    + ", joinedServiceIds="
-                    + Arrays.toString(joinedServiceIds));
-
-        }
-
-        // The services in the write pipeline (in any order).
-        nonJoinedPipelineServiceIds = new LinkedHashSet<UUID>(
-                Arrays.asList(quorum.getPipeline()));
-
-        // Remove all services that are joined from this collection.
-        for (UUID joinedServiceId : joinedServiceIds) {
-
-            nonJoinedPipelineServiceIds.remove(joinedServiceId);
-
-        }
-
+      nonJoinedPipelineServiceIds.remove(joinedServiceId);
     }
+  }
 
-    @Override
-    public UUID[] getJoinedServiceIds() {
-        return joinedServiceIds;
-    }
+  @Override
+  public UUID[] getJoinedServiceIds() {
+    return joinedServiceIds;
+  }
 
-    @Override
-    public Set<UUID> getNonJoinedPipelineServiceIds() {
-        return nonJoinedPipelineServiceIds;
-    }
+  @Override
+  public Set<UUID> getNonJoinedPipelineServiceIds() {
+    return nonJoinedPipelineServiceIds;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString() + "{#joined=" + joinedServiceIds.length
-                + ", #nonJoined=" + nonJoinedPipelineServiceIds.size()
-                + ", joinedServices=" + Arrays.toString(joinedServiceIds)
-                + ", nonJoined=" + nonJoinedPipelineServiceIds + "}";
-    }
-
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{#joined="
+        + joinedServiceIds.length
+        + ", #nonJoined="
+        + nonJoinedPipelineServiceIds.size()
+        + ", joinedServices="
+        + Arrays.toString(joinedServiceIds)
+        + ", nonJoined="
+        + nonJoinedPipelineServiceIds
+        + "}";
+  }
 }

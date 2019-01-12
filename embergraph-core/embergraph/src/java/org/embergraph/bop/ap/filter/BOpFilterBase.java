@@ -21,87 +21,76 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.ap.filter;
 
+import cutthecrap.utils.striterators.IFilter;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 
-import cutthecrap.utils.striterators.IFilter;
-
 /**
  * Base class for operators which apply striterator patterns for access paths.
+ *
+ * <p>The striterator pattern is enacted slightly differently here. The filter chain is formed by
+ * stacking {@link BOpFilterBase}s as child operands. Each operand specified to a {@link
+ * BOpFilterBase} must be a {@link BOpFilterBase} and layers on another filter, so you can stack
+ * filters as nested operands or as a sequence of operands.
+ *
  * <p>
- * The striterator pattern is enacted slightly differently here. The filter
- * chain is formed by stacking {@link BOpFilterBase}s as child operands. Each
- * operand specified to a {@link BOpFilterBase} must be a {@link BOpFilterBase} and
- * layers on another filter, so you can stack filters as nested operands or as a
- * sequence of operands.
- * <p>
- * 
+ *
  * @todo state as newState() and/or as annotation?
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class BOpFilterBase extends BOpBase implements IFilter {
+public abstract class BOpFilterBase extends BOpBase implements IFilter {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends BOp.Annotations {
+  public interface Annotations extends BOp.Annotations {}
 
+  /**
+   * Deep copy.
+   *
+   * @param op
+   */
+  public BOpFilterBase(BOpFilterBase op) {
+    super(op);
+  }
+
+  /**
+   * Shallow copy.
+   *
+   * @param args
+   * @param annotations
+   */
+  public BOpFilterBase(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
+
+  public final Iterator filter(Iterator src, final Object context) {
+
+    // wrap source with each additional filter from the filter chain.
+    final Iterator<BOp> itr = argIterator();
+
+    while (itr.hasNext()) {
+
+      final BOp arg = itr.next();
+
+      src = ((BOpFilterBase) arg).filter(src, context);
     }
 
-    /**
-     * Deep copy.
-     * @param op
-     */
-    public BOpFilterBase(BOpFilterBase op) {
-        super(op);
-    }
+    // wrap src with _this_ filter.
+    src = filterOnce(src, context);
 
-    /**
-     * Shallow copy.
-     * @param args
-     * @param annotations
-     */
-    public BOpFilterBase(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+    return src;
+  }
 
-    final public Iterator filter(Iterator src, final Object context) {
-
-        // wrap source with each additional filter from the filter chain.
-    	final Iterator<BOp> itr = argIterator();
-
-    	while(itr.hasNext()) {
-        
-        	final BOp arg = itr.next();
-        	
-            src = ((BOpFilterBase) arg).filter(src, context);
-            
-        }
-
-        // wrap src with _this_ filter.
-        src = filterOnce(src, context);
-        
-        return src;
-        
-    }
-
-    /**
-     * Wrap the source iterator with <i>this</i> filter.
-     * 
-     * @param src
-     *            The source iterator.
-     * @param context
-     *            The iterator evaluation context.
-     * 
-     * @return The wrapped iterator.
-     */
-    abstract protected Iterator filterOnce(Iterator src, final Object context);
-
+  /**
+   * Wrap the source iterator with <i>this</i> filter.
+   *
+   * @param src The source iterator.
+   * @param context The iterator evaluation context.
+   * @return The wrapped iterator.
+   */
+  protected abstract Iterator filterOnce(Iterator src, final Object context);
 }

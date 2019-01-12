@@ -33,47 +33,37 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+
+    super(arg0);
+  }
+
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("org.embergraph.btree.keys");
+
+    /*
+     * test key encoding and comparison support.
      */
-    public TestAll() {
-        
-    }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+    // test methods that compute the successor for various data types.
+    suite.addTestSuite(TestSuccessorUtil.class);
 
-    public static Test suite()
-    {
+    // test key encoding operations.
+    suite.addTestSuite(TestKeyBuilder.class);
 
-        final TestSuite suite = new TestSuite("org.embergraph.btree.keys");
-        
-        /*
-         * test key encoding and comparison support.
-         */
-        
-        // test methods that compute the successor for various data types.
-        suite.addTestSuite(TestSuccessorUtil.class);
+    // tests for Unicode collation keys.
+    suite.addTestSuite(TestJDKUnicodeKeyBuilder.class);
+    suite.addTestSuite(TestICUUnicodeKeyBuilder.class);
 
-        // test key encoding operations.
-        suite.addTestSuite(TestKeyBuilder.class);
-        
-        // tests for Unicode collation keys.
-        suite.addTestSuite(TestJDKUnicodeKeyBuilder.class);
-        suite.addTestSuite(TestICUUnicodeKeyBuilder.class);
+    // ICU portability and version info tests.
+    suite.addTestSuite(TestICUPortabilityBug.class);
+    suite.addTestSuite(TestICUVersionRecord.class);
 
-        // ICU portability and version info tests.
-        suite.addTestSuite(TestICUPortabilityBug.class);
-        suite.addTestSuite(TestICUVersionRecord.class);
-        
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

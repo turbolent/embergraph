@@ -19,98 +19,94 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import junit.framework.Test;
+import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
-import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
-import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
-import org.embergraph.rdf.sparql.ast.QueryHints;
-
-import junit.framework.Test;
-
 
 /**
  * This test checks if constants in projection expressions are properly resolved.
+ *
  * @see https://jira.blazegraph.com/browse/BLZG-2091
  */
 public class Test_Ticket_2091 extends AbstractProtocolTest {
 
-	private String key;
-	private String prevValue;
+  private String key;
+  private String prevValue;
 
-	public Test_Ticket_2091(String name)  {
-		super(name);
-		key = QueryHints.class.getName() + "." + QueryHints.QUERY_ENGINE_CHUNK_HANDLER;
-		prevValue = System.getProperty(key);
-	}
+  public Test_Ticket_2091(String name) {
+    super(name);
+    key = QueryHints.class.getName() + "." + QueryHints.QUERY_ENGINE_CHUNK_HANDLER;
+    prevValue = System.getProperty(key);
+  }
 
-	@Override
-	public void setUp() throws Exception {
-		System.setProperty(key, NativeHeapStandloneChunkHandler.class.getName());
-		super.setUp();
-	}
-	
-	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		if (prevValue != null) {
-			System.setProperty(key, prevValue);
-		} else {
-			System.clearProperty(key);
-		}
-		
-	}
-	
-	static public Test suite() {
+  @Override
+  public void setUp() throws Exception {
+    System.setProperty(key, NativeHeapStandloneChunkHandler.class.getName());
+    super.setUp();
+  }
 
-		return ProxySuiteHelper.suiteWhenStandalone(Test_Ticket_2091.class,"test.*",
-				TestMode.quads,
-				TestMode.sids,
-				TestMode.triples 
-				);
-	}
-	
-	private final static String QUERY = "PREFIX wd: <http://wd/>\n" + 
-			"PREFIX wdt: <http://wdt/>\n" +
-			"SELECT ?s ?host (IF(BOUND(?host), 0, 1) as ?p1)\r\n" + 
-			"{\r\n" + 
-			"	?s wdt:P31 wd:Q3917681\r\n" + 
-			"	OPTIONAL {?s wdt:P17 ?host }\r\n" + 
-			"} ";;
+  @Override
+  public void tearDown() throws Exception {
+    super.tearDown();
+    if (prevValue != null) {
+      System.setProperty(key, prevValue);
+    } else {
+      System.clearProperty(key);
+    }
+  }
 
-	/**
-	 * Execute a query including constants in projection expression.
-	 * The test succeeeds if the query successfully evaluates with 
-	 * QUERY_ENGINE_CHUNK_HANDLER set to NativeHeapStandloneChunkHandler,
-	 * as it requires results to be encoded in respect to namespace of value factory,
-	 * which fails if constant has not been resolved against target DB value factory.
-	 * @throws Exception
-	 */
-	public void test_simple() throws Exception {
+  public static Test suite() {
 
-		setMethodisPostUrlEncodedData();
-		EmbergraphSailRemoteRepositoryConnection conn = m_repo.getEmbergraphSailRemoteRepository().getConnection();
-		conn.prepareUpdate(QueryLanguage.SPARQL, "prefix wd: <http://wd/> \n" + 
-				"prefix wdt: <http://wdt/> " +
-				"INSERT DATA { wd:Q2 wdt:P31 wd:Q3917681 } ").execute();
+    return ProxySuiteHelper.suiteWhenStandalone(
+        Test_Ticket_2091.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
+  }
 
-		final TupleQueryResult result = 
-				conn.prepareTupleQuery(QueryLanguage.SPARQL, QUERY).evaluate();
-		
-		Collection<Value> subjects = new ArrayList<>();
-		try {
-			while(result.hasNext()) {
-				BindingSet bs = result.next();
-				subjects.add(bs.getBinding("s").getValue());
-			}
-		} finally {
-			result.close();
-		}
-		if(log.isInfoEnabled()) log.info(subjects);
-		assertEquals(1, subjects.size());
+  private static final String QUERY =
+      "PREFIX wd: <http://wd/>\n"
+          + "PREFIX wdt: <http://wdt/>\n"
+          + "SELECT ?s ?host (IF(BOUND(?host), 0, 1) as ?p1)\r\n"
+          + "{\r\n"
+          + "	?s wdt:P31 wd:Q3917681\r\n"
+          + "	OPTIONAL {?s wdt:P17 ?host }\r\n"
+          + "} ";;
 
-	}
+  /**
+   * Execute a query including constants in projection expression. The test succeeeds if the query
+   * successfully evaluates with QUERY_ENGINE_CHUNK_HANDLER set to NativeHeapStandloneChunkHandler,
+   * as it requires results to be encoded in respect to namespace of value factory, which fails if
+   * constant has not been resolved against target DB value factory.
+   *
+   * @throws Exception
+   */
+  public void test_simple() throws Exception {
 
+    setMethodisPostUrlEncodedData();
+    EmbergraphSailRemoteRepositoryConnection conn =
+        m_repo.getEmbergraphSailRemoteRepository().getConnection();
+    conn.prepareUpdate(
+            QueryLanguage.SPARQL,
+            "prefix wd: <http://wd/> \n"
+                + "prefix wdt: <http://wdt/> "
+                + "INSERT DATA { wd:Q2 wdt:P31 wd:Q3917681 } ")
+        .execute();
 
+    final TupleQueryResult result = conn.prepareTupleQuery(QueryLanguage.SPARQL, QUERY).evaluate();
+
+    Collection<Value> subjects = new ArrayList<>();
+    try {
+      while (result.hasNext()) {
+        BindingSet bs = result.next();
+        subjects.add(bs.getBinding("s").getValue());
+      }
+    } finally {
+      result.close();
+    }
+    if (log.isInfoEnabled()) log.info(subjects);
+    assertEquals(1, subjects.size());
+  }
 }

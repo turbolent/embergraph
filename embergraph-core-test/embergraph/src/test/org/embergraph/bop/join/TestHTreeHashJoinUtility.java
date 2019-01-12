@@ -28,67 +28,57 @@ import org.embergraph.rwstore.sector.MemoryManager;
 
 /**
  * Test suite for the {@link HTreeHashJoinUtility}.
- * 
- * TODO Write a unit test which verifies that the ivCache is used and that the
- * cached {@link EmbergraphValue}s are correctly restored when the rightSolutions
- * had cached values and the leftSolutions did not have a value cached for the
- * same IVs. For example, this could be done with a cached value on an IV which
- * is not a join variable and which is only present in the rightSolutions.
- * 
+ *
+ * <p>TODO Write a unit test which verifies that the ivCache is used and that the cached {@link
+ * EmbergraphValue}s are correctly restored when the rightSolutions had cached values and the
+ * leftSolutions did not have a value cached for the same IVs. For example, this could be done with
+ * a cached value on an IV which is not a join variable and which is only present in the
+ * rightSolutions.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestHTreeHashJoinUtility.java 5527 2011-11-04 17:41:14Z
- *          thompsonbry $
+ * @version $Id: TestHTreeHashJoinUtility.java 5527 2011-11-04 17:41:14Z thompsonbry $
  */
 public class TestHTreeHashJoinUtility extends AbstractHashJoinUtilityTestCase {
 
-    /**
-     * 
+  /** */
+  public TestHTreeHashJoinUtility() {}
+
+  /** @param name */
+  public TestHTreeHashJoinUtility(String name) {
+    super(name);
+  }
+
+  private MemoryManager mmgr;
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    if (mmgr != null) {
+      mmgr.clear();
+      mmgr = null;
+    }
+
+    super.tearDown();
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+
+    super.setUp();
+
+    /*
+     * This wraps an efficient raw store interface around a
+     * child memory manager created from the IMemoryManager
+     * which is backing the query.
      */
-    public TestHTreeHashJoinUtility() {
-    }
 
-    /**
-     * @param name
-     */
-    public TestHTreeHashJoinUtility(String name) {
-        super(name);
-    }
-    
-    private MemoryManager mmgr;
+    mmgr = new MemoryManager(DirectBufferPool.INSTANCE);
+  }
 
-    @Override
-    protected void tearDown() throws Exception {
+  @Override
+  protected HTreeHashJoinUtility newHashJoinUtility(
+      final PipelineOp op, final JoinTypeEnum joinType) {
 
-        if (mmgr != null) {
-            mmgr.clear();
-            mmgr = null;
-        }
-
-        super.tearDown();
-
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-
-        super.setUp();
-    
-        /*
-         * This wraps an efficient raw store interface around a
-         * child memory manager created from the IMemoryManager
-         * which is backing the query.
-         */
-        
-        mmgr = new MemoryManager(DirectBufferPool.INSTANCE);
-
-    }
-
-    @Override
-    protected HTreeHashJoinUtility newHashJoinUtility(final PipelineOp op,
-            final JoinTypeEnum joinType) {
-
-        return new HTreeHashJoinUtility(mmgr, op, joinType);
-
-    }
-
+    return new HTreeHashJoinUtility(mmgr, op, joinType);
+  }
 }

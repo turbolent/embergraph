@@ -26,62 +26,50 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.MetadataIndex;
 
 /**
- * Some unit tests for the {@link MetadataIndex} as accessed via the
- * {@link IMetadataService}.
- * 
+ * Some unit tests for the {@link MetadataIndex} as accessed via the {@link IMetadataService}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestMetadataIndex extends
-        AbstractEmbeddedFederationTestCase {
+public class TestMetadataIndex extends AbstractEmbeddedFederationTestCase {
 
-    /**
-     * 
-     */
-    public TestMetadataIndex() {
-        super();
+  /** */
+  public TestMetadataIndex() {
+    super();
+  }
+
+  /** @param arg0 */
+  public TestMetadataIndex(String arg0) {
+    super(arg0);
+  }
+
+  /**
+   * Verify that the first index partition is assigned partitionId zero (0) and that subsequent
+   * calls to {@link IMetadataService#nextPartitionId(String)} return strictly increasing partition
+   * identifiers.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_nextPartitionId() throws IOException, InterruptedException, ExecutionException {
+
+    final String name = "test";
+
+    {
+      IndexMetadata indexMetadata = new IndexMetadata(name, UUID.randomUUID());
+
+      indexMetadata.setDeleteMarkers(true);
+
+      fed.registerIndex(indexMetadata);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestMetadataIndex(String arg0) {
-        super(arg0);
-    }
+    assertEquals(1, fed.getMetadataService().nextPartitionId(name));
 
-    /**
-     * Verify that the first index partition is assigned partitionId zero (0)
-     * and that subsequent calls to
-     * {@link IMetadataService#nextPartitionId(String)} return strictly
-     * increasing partition identifiers.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_nextPartitionId() throws IOException, InterruptedException, ExecutionException {
-        
-        final String name = "test";
-        
-        {
-            
-            IndexMetadata indexMetadata = new IndexMetadata(name,UUID.randomUUID());
-        
-            indexMetadata.setDeleteMarkers(true);
-            
-            fed.registerIndex(indexMetadata);
-        
-        }
-        
-        assertEquals(1,fed.getMetadataService().nextPartitionId(name));
-        
-        assertEquals(2,fed.getMetadataService().nextPartitionId(name));
-        
-    }
-    
+    assertEquals(2, fed.getMetadataService().nextPartitionId(name));
+  }
 }

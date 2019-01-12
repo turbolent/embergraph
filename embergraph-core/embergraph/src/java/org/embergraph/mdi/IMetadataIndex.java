@@ -29,63 +29,50 @@ import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.service.IDataService;
 
 /**
- * Interface for a metadata index. The metadata index stores the
- * {@link PartitionLocator}s that specify which {@link IDataService} has data
- * for each index partition in a scale-out index.
- * 
+ * Interface for a metadata index. The metadata index stores the {@link PartitionLocator}s that
+ * specify which {@link IDataService} has data for each index partition in a scale-out index.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IMetadataIndex extends IRangeQuery { //extends IIndex {
+public interface IMetadataIndex extends IRangeQuery { // extends IIndex {
 
-    /**
-     * The metadata for the metadata index itself. Note that the
-     * {@link MetadataIndexMetadata#getManagedIndexMetadata()} returns the
-     * template {@link IndexMetadata} for the scale-out index partitions.
-     * 
-     * @see #getScaleOutIndexMetadata()
-     */
-    public MetadataIndexMetadata getIndexMetadata();
-    
-    /**
-     * The metadata template for the scale-out index managed by this metadata
-     * index.
-     */
-    public IndexMetadata getScaleOutIndexMetadata();
-    
-    /**
-     * The partition with that separator key or <code>null</code> (exact match
-     * on the separator key).
-     * 
-     * @param key
-     *            The separator key (the first key that would go into that
-     *            partition).
-     * 
-     * @return The partition with that separator key or <code>null</code>.
-     */
-    public PartitionLocator get(byte[] key);
+  /**
+   * The metadata for the metadata index itself. Note that the {@link
+   * MetadataIndexMetadata#getManagedIndexMetadata()} returns the template {@link IndexMetadata} for
+   * the scale-out index partitions.
+   *
+   * @see #getScaleOutIndexMetadata()
+   */
+  public MetadataIndexMetadata getIndexMetadata();
 
-    /**
-     * Find and return the partition spanning the given key.
-     * 
-     * @param key
-     *            A key (optional). When <code>null</code> the locator for the
-     *            last index partition will be returned.
-     * 
-     * @return The partition spanning the given key or <code>null</code> if
-     *         there are no partitions defined.
-     */
-    public PartitionLocator find(byte[] key);
+  /** The metadata template for the scale-out index managed by this metadata index. */
+  public IndexMetadata getScaleOutIndexMetadata();
 
-    /**
-     * Notification that a locator is stale. Caching implementations of this
-     * interface will use this notice to update their state from the
-     * authoritative metadata index. Non-caching and authoritative
-     * implementations just ignore this message.
-     * 
-     * @param locator
-     *            The locator.
-     */
-    public void staleLocator(PartitionLocator locator);
-    
+  /**
+   * The partition with that separator key or <code>null</code> (exact match on the separator key).
+   *
+   * @param key The separator key (the first key that would go into that partition).
+   * @return The partition with that separator key or <code>null</code>.
+   */
+  public PartitionLocator get(byte[] key);
+
+  /**
+   * Find and return the partition spanning the given key.
+   *
+   * @param key A key (optional). When <code>null</code> the locator for the last index partition
+   *     will be returned.
+   * @return The partition spanning the given key or <code>null</code> if there are no partitions
+   *     defined.
+   */
+  public PartitionLocator find(byte[] key);
+
+  /**
+   * Notification that a locator is stale. Caching implementations of this interface will use this
+   * notice to update their state from the authoritative metadata index. Non-caching and
+   * authoritative implementations just ignore this message.
+   *
+   * @param locator The locator.
+   */
+  public void staleLocator(PartitionLocator locator);
 }

@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
@@ -29,79 +28,64 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Imposes the constraint <code>isInline(x)</code>.
- */
+/** Imposes the constraint <code>isInline(x)</code>. */
 public class IsInlineBOp extends XSDBooleanIVValueExpression {
 
+  /** */
+  private static final long serialVersionUID = 3125106876006900339L;
+
+  //    private static final transient Logger log = Logger
+  //            .getLogger(IsInlineBOp.class);
+
+  public interface Annotations extends PipelineOp.Annotations {
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3125106876006900339L;
-	
-//    private static final transient Logger log = Logger
-//            .getLogger(IsInlineBOp.class);
-
-    public interface Annotations extends PipelineOp.Annotations {
-
-    	/**
-    	 * If true, only accept variable bindings for {@link #x} that have an 
-    	 * inline internal value {@link IV}. Otherwise only accept variable bindings
-    	 * that are not inline in the statement indices.
-    	 * <p>
-    	 * @see IV#isInline()
-    	 */
-    	String INLINE = IsInlineBOp.class.getName() + ".inline";
-    	
-    }
-
-    public IsInlineBOp(final IVariable<IV> x, final boolean inline) {
-        
-        this(new BOp[] { x }, NV.asMap(Annotations.INLINE, inline));
-        
-    }
-    
-    /**
-     * Required shallow copy constructor.
+     * If true, only accept variable bindings for {@link #x} that have an inline internal value
+     * {@link IV}. Otherwise only accept variable bindings that are not inline in the statement
+     * indices.
+     *
+     * <p>
+     *
+     * @see IV#isInline()
      */
-    public IsInlineBOp(final BOp[] args, final Map<String, Object> anns) {
+    String INLINE = IsInlineBOp.class.getName() + ".inline";
+  }
 
-    	super(args, anns);
-    	
-        if (args.length != 1 || args[0] == null)
-            throw new IllegalArgumentException();
+  public IsInlineBOp(final IVariable<IV> x, final boolean inline) {
 
-		if (getProperty(Annotations.INLINE) == null)
-			throw new IllegalArgumentException();
-		
-    }
+    this(new BOp[] {x}, NV.asMap(Annotations.INLINE, inline));
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public IsInlineBOp(final IsInlineBOp op) {
-        super(op);
-    }
+  /** Required shallow copy constructor. */
+  public IsInlineBOp(final BOp[] args, final Map<String, Object> anns) {
 
-    public boolean accept(final IBindingSet bs) {
-        
-        final boolean inline = 
-        	(Boolean) getRequiredProperty(Annotations.INLINE); 
-        
-        final IV<?,?> iv = get(0).get(bs);
-        
-//        if (log.isDebugEnabled()) {
-//        	log.debug(iv);
-//        	if (iv != null) 
-//        		log.debug("inline?: " + iv.isInline());
-//        }
-       
-        // not yet bound
-        if (iv == null)
-        	throw new SparqlTypeErrorException();
+    super(args, anns);
 
-		return iv.isInline() == inline;
+    if (args.length != 1 || args[0] == null) throw new IllegalArgumentException();
 
-    }
-    
+    if (getProperty(Annotations.INLINE) == null) throw new IllegalArgumentException();
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public IsInlineBOp(final IsInlineBOp op) {
+    super(op);
+  }
+
+  public boolean accept(final IBindingSet bs) {
+
+    final boolean inline = (Boolean) getRequiredProperty(Annotations.INLINE);
+
+    final IV<?, ?> iv = get(0).get(bs);
+
+    //        if (log.isDebugEnabled()) {
+    //        	log.debug(iv);
+    //        	if (iv != null)
+    //        		log.debug("inline?: " + iv.isInline());
+    //        }
+
+    // not yet bound
+    if (iv == null) throw new SparqlTypeErrorException();
+
+    return iv.isInline() == inline;
+  }
 }

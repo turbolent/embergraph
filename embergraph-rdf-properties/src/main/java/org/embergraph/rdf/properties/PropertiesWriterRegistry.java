@@ -54,36 +54,35 @@ package org.embergraph.rdf.properties;
 import info.aduna.lang.service.FileFormatServiceRegistry;
 
 /**
- * A registry that keeps track of the available {@link PropertiesWriterFactory}
- * s.
- * 
+ * A registry that keeps track of the available {@link PropertiesWriterFactory} s.
+ *
  * @author Arjohn Kampman
  * @author Bryan Thompson
  */
-public class PropertiesWriterRegistry extends
-        FileFormatServiceRegistry<PropertiesFormat, PropertiesWriterFactory> {
+public class PropertiesWriterRegistry
+    extends FileFormatServiceRegistry<PropertiesFormat, PropertiesWriterFactory> {
 
-    private static PropertiesWriterRegistry defaultRegistry;
+  private static PropertiesWriterRegistry defaultRegistry;
 
-    /**
-     * Gets the default {@link PropertiesWriterRegistry}.
-     * 
-     * @return The default registry.
-     */
-    public static synchronized PropertiesWriterRegistry getInstance() {
-        if (defaultRegistry == null) {
-            defaultRegistry = new PropertiesWriterRegistry();
-        }
-
-        return defaultRegistry;
+  /**
+   * Gets the default {@link PropertiesWriterRegistry}.
+   *
+   * @return The default registry.
+   */
+  public static synchronized PropertiesWriterRegistry getInstance() {
+    if (defaultRegistry == null) {
+      defaultRegistry = new PropertiesWriterRegistry();
     }
 
-    public PropertiesWriterRegistry() {
-        super(PropertiesWriterFactory.class);
-    }
+    return defaultRegistry;
+  }
 
-    @Override
-    protected PropertiesFormat getKey(final PropertiesWriterFactory factory) {
-        return factory.getRDFFormat();
-    }
+  public PropertiesWriterRegistry() {
+    super(PropertiesWriterFactory.class);
+  }
+
+  @Override
+  protected PropertiesFormat getKey(final PropertiesWriterFactory factory) {
+    return factory.getRDFFormat();
+  }
 }

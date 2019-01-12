@@ -19,57 +19,50 @@ package org.embergraph.ha.msg;
 
 import java.io.IOException;
 import java.util.UUID;
-
 import junit.framework.TestCase;
-
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.journal.StoreTypeEnum;
 import org.embergraph.util.BytesUtil;
 
 public class TestHAWriteMessage extends TestCase {
 
-	/**
-	 * Simple test to verify HAWriteMessage serialization
-	 */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+  /** Simple test to verify HAWriteMessage serialization */
+  public void testSerialization() throws IOException, ClassNotFoundException {
 
-        final IHAWriteMessage msg1 = new HAWriteMessage(
-                UUID.randomUUID(),// store UUID
-                12L,// commitCounter
-                13L,// commitTime
-                14L,// sequence
-                15,// size
-                16,// checksum
-                StoreTypeEnum.RW,
-                17L,// quorumToken
-                18L,// fileExtent
-                19L // firstOffset
-                );
+    final IHAWriteMessage msg1 =
+        new HAWriteMessage(
+            UUID.randomUUID(), // store UUID
+            12L, // commitCounter
+            13L, // commitTime
+            14L, // sequence
+            15, // size
+            16, // checksum
+            StoreTypeEnum.RW,
+            17L, // quorumToken
+            18L, // fileExtent
+            19L // firstOffset
+            );
 
-        final byte[] ser1 = serialized(msg1);
+    final byte[] ser1 = serialized(msg1);
 
-        final IHAWriteMessage msg2 = (IHAWriteMessage) SerializerUtil
-                .deserialize(ser1);
+    final IHAWriteMessage msg2 = (IHAWriteMessage) SerializerUtil.deserialize(ser1);
 
-        assertTrue(msg1.equals(msg2));
+    assertTrue(msg1.equals(msg2));
 
-        // now confirm serialized byte equivalence in case we just messed up
-        // equals
-        final byte[] ser2 = serialized(msg2);
+    // now confirm serialized byte equivalence in case we just messed up
+    // equals
+    final byte[] ser2 = serialized(msg2);
 
-        assertTrue(BytesUtil.bytesEqual(ser1, ser2));
+    assertTrue(BytesUtil.bytesEqual(ser1, ser2));
 
-//        System.err.println("msg1: " + msg1);
-//        System.err.println("msg2: " + msg2);
+    //        System.err.println("msg1: " + msg1);
+    //        System.err.println("msg2: " + msg2);
 
-    }
-	
-	/**
-	 * Utility to return byte[] serialization of the HAWriteMessage
-	 */
-    private byte[] serialized(final IHAWriteMessage msg) {
+  }
 
-	    return SerializerUtil.serialize(msg);
-	}
+  /** Utility to return byte[] serialization of the HAWriteMessage */
+  private byte[] serialized(final IHAWriteMessage msg) {
 
+    return SerializerUtil.serialize(msg);
+  }
 }

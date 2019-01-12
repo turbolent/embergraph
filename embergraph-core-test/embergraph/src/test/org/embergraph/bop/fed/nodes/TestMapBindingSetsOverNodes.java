@@ -25,35 +25,28 @@ import org.embergraph.service.AbstractEmbeddedFederationTestCase;
 import org.embergraph.service.DataService;
 
 /**
- * Unit tests for mapping binding sets over nodes. For the purpose of this test
- * suite there is only a single node, but it runs with 2 {@link DataService}s
- * which is what we mean by "nodes" in this context. Unlike mapping binding sets
- * over shards, we can test this operation at very low data scales.
- * 
+ * Unit tests for mapping binding sets over nodes. For the purpose of this test suite there is only
+ * a single node, but it runs with 2 {@link DataService}s which is what we mean by "nodes" in this
+ * context. Unlike mapping binding sets over shards, we can test this operation at very low data
+ * scales.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestMapBindingSetsOverNodes extends
-        AbstractEmbeddedFederationTestCase {
+public class TestMapBindingSetsOverNodes extends AbstractEmbeddedFederationTestCase {
 
-    /**
-     * 
-     */
-    public TestMapBindingSetsOverNodes() {
-        super();
-    }
+  /** */
+  public TestMapBindingSetsOverNodes() {
+    super();
+  }
 
-    /**
-     * @param name
-     */
-    public TestMapBindingSetsOverNodes(final String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestMapBindingSetsOverNodes(final String name) {
+    super(name);
+  }
 
-    public void test_something() {
-        
-        fail("write tests");
-        
-    }
-    
+  public void test_something() {
+
+    fail("write tests");
+  }
 }

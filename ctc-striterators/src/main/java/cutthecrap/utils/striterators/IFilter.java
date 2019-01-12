@@ -15,35 +15,32 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.Iterator;
 import java.io.Serializable;
-
-
+import java.util.Iterator;
 
 /**
  * Provides the hook interface that allows use by Striterators
- * 
- * TODO The {@link Striterator} protocol does not support a close() method for
- * {@link Filter}s. That method should be invoked by an
- * {@link ICloseableIterator}.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/582">
- *      IStriterator does not support close() protocol for Ifilter </a>
+ *
+ * <p>TODO The {@link Striterator} protocol does not support a close() method for {@link Filter}s.
+ * That method should be invoked by an {@link ICloseableIterator}.
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/582">IStriterator does not support
+ *     close() protocol for Ifilter </a>
  */
 public interface IFilter extends Serializable, IPropertySet {
-	/**
-	 * <p>The filter method is provided to allow the creation of the filtering iterator.</p>
-	 *
-	 * <p>Any implementation should follow the following pattern:</p>
-	 * <pre>
-	 *  public Iterator filter(Iterator src, Object context) {
-	 *		return new Filterator(src, context, this);
-	 *	}
-	 *  </pre>
-	 *  This pattern makes the source iterator, the evaluation context, and the
-	 *  {@link IPropertySet} annotations visible to the runtime striterator
-	 *  implementation.
-	 **/
-	public abstract Iterator filter(Iterator src, Object context);
-	
+  /**
+   * The filter method is provided to allow the creation of the filtering iterator.
+   *
+   * <p>Any implementation should follow the following pattern:
+   *
+   * <pre>
+   *  public Iterator filter(Iterator src, Object context) {
+   * 	return new Filterator(src, context, this);
+   * }
+   *  </pre>
+   *
+   * This pattern makes the source iterator, the evaluation context, and the {@link IPropertySet}
+   * annotations visible to the runtime striterator implementation.
+   */
+  public abstract Iterator filter(Iterator src, Object context);
 }

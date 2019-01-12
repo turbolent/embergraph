@@ -20,36 +20,30 @@ package org.embergraph.rdf.internal;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
 
-/**
- * Inline URI handler for IPv4 host addresses.
- */
+/** Inline URI handler for IPv4 host addresses. */
 public class InlineIPv4URIHandler extends InlineURIHandler {
 
-    /**
-     * Default URI namespace for inline IPv4 addresses.
-     */
-    public static final String NAMESPACE = "urn:ipv4:";
+  /** Default URI namespace for inline IPv4 addresses. */
+  public static final String NAMESPACE = "urn:ipv4:";
 
-    public InlineIPv4URIHandler(final String namespace) {
-        super(namespace);
+  public InlineIPv4URIHandler(final String namespace) {
+    super(namespace);
+  }
+
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(final String localName) {
+
+    if (localName == null) {
+      return null;
     }
 
-    @SuppressWarnings("rawtypes")
-    protected AbstractLiteralIV createInlineIV(final String localName) {
-
-        if (localName == null) {
-            return null;
-        }
-
-        try {
-            return new IPv4AddrIV(localName);
-        } catch (Exception ex) {
-            /*
-             * Could not parse localName into an IPv4.  Fall through to TermIV.
-             */
-            return null;
-        }
-
+    try {
+      return new IPv4AddrIV(localName);
+    } catch (Exception ex) {
+      /*
+       * Could not parse localName into an IPv4.  Fall through to TermIV.
+       */
+      return null;
     }
-
+  }
 }

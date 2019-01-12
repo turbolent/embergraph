@@ -18,95 +18,85 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
 
 /**
  * Test suite for owl:SymmetricProperty processing.
- * 
+ *
  * <pre>
  * (x rdf:type owl:SymmetricProperty), (a x b) -&gt; (b x a)
  * </pre>
- * 
+ *
  * @see RuleOwlSymmetricProperty
- * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
 public class TestRuleOwlSymmetricProperty extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestRuleOwlSymmetricProperty() {
-        super();
+  /** */
+  public TestRuleOwlSymmetricProperty() {
+    super();
+  }
+
+  /** @param name */
+  public TestRuleOwlSymmetricProperty(String name) {
+    super(name);
+  }
+
+  public void test_Rule() throws Exception {
+
+    AbstractTripleStore store = getStore();
+
+    try {
+
+      URI A = new URIImpl("http://www.foo.org/A");
+      URI B = new URIImpl("http://www.foo.org/B");
+      URI X = new URIImpl("http://www.foo.org/X");
+
+      IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
+
+      buffer.add(X, RDF.TYPE, OWL.SYMMETRICPROPERTY);
+      buffer.add(A, X, B);
+
+      // write on the store.
+      buffer.flush();
+
+      // verify statement(s).
+      assertTrue(store.hasStatement(X, RDF.TYPE, OWL.SYMMETRICPROPERTY));
+      assertTrue(store.hasStatement(A, X, B));
+      final long nbefore = store.getStatementCount();
+
+      final Vocabulary vocab = store.getVocabulary();
+
+      final Rule r = new RuleOwlSymmetricProperty(store.getSPORelation().getNamespace(), vocab);
+
+      // apply the rule.
+      applyRule(store, r, -1 /*solutionCount*/, 1 /*mutationCount*/);
+
+      /*
+       * validate the state of the primary store.
+       */
+
+      // told
+      assertTrue(store.hasStatement(X, RDF.TYPE, OWL.SYMMETRICPROPERTY));
+      assertTrue(store.hasStatement(A, X, B));
+
+      // entailed
+      assertTrue(store.hasStatement(B, X, A));
+
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
-
-    /**
-     * @param name
-     */
-    public TestRuleOwlSymmetricProperty(String name) {
-        super(name);
-    }
-
-    public void test_Rule() throws Exception {
-
-        AbstractTripleStore store = getStore();
-
-        try {
-
-            URI A = new URIImpl("http://www.foo.org/A");
-            URI B = new URIImpl("http://www.foo.org/B");
-            URI X = new URIImpl("http://www.foo.org/X");
-
-            IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-            
-            buffer.add(X, RDF.TYPE, OWL.SYMMETRICPROPERTY);
-            buffer.add(A, X, B);
-
-            // write on the store.
-            buffer.flush();
-
-            // verify statement(s).
-            assertTrue(store.hasStatement(X, RDF.TYPE, OWL.SYMMETRICPROPERTY));
-            assertTrue(store.hasStatement(A, X, B));
-            final long nbefore = store.getStatementCount();
-
-            final Vocabulary vocab = store.getVocabulary();
-
-            final Rule r = new RuleOwlSymmetricProperty(store.getSPORelation()
-                    .getNamespace(), vocab);
-
-            // apply the rule.
-            applyRule(store, r, -1/*solutionCount*/,1/*mutationCount*/);
-
-            /*
-             * validate the state of the primary store.
-             */
-
-            // told
-            assertTrue(store.hasStatement(X, RDF.TYPE, OWL.SYMMETRICPROPERTY));
-            assertTrue(store.hasStatement(A, X, B));
-
-            // entailed
-            assertTrue(store.hasStatement(B, X, A));
-
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-        
-    }
-
+  }
 }

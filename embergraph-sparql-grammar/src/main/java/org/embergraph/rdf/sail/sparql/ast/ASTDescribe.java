@@ -4,40 +4,37 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTDescribe extends SimpleNode {
 
-	private boolean wildcard = false;
+  private boolean wildcard = false;
 
-	public ASTDescribe(int id) {
-		super(id);
-	}
+  public ASTDescribe(int id) {
+    super(id);
+  }
 
-	public ASTDescribe(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTDescribe(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public boolean isWildcard() {
-		return wildcard;
-	}
+  public boolean isWildcard() {
+    return wildcard;
+  }
 
-	public void setWildcard(boolean wildcard) {
-		this.wildcard = wildcard;
-	}
+  public void setWildcard(boolean wildcard) {
+    this.wildcard = wildcard;
+  }
 
-	@Override
-	public String toString()
-	{
-		String result = super.toString();
+  @Override
+  public String toString() {
+    String result = super.toString();
 
-		if (wildcard) {
-			result += " (*)";
-		}
+    if (wildcard) {
+      result += " (*)";
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

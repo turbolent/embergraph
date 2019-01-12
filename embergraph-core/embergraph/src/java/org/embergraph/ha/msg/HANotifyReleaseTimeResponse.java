@@ -17,37 +17,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-public class HANotifyReleaseTimeResponse implements
-        IHANotifyReleaseTimeResponse {
+public class HANotifyReleaseTimeResponse implements IHANotifyReleaseTimeResponse {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final long commitTime;
-    private final long commitCounter;
+  private final long commitTime;
+  private final long commitCounter;
 
-    public HANotifyReleaseTimeResponse(final long commitTime,
-            final long commitCounter) {
-        this.commitTime = commitTime;
-        this.commitCounter = commitCounter;
-    }
+  public HANotifyReleaseTimeResponse(final long commitTime, final long commitCounter) {
+    this.commitTime = commitTime;
+    this.commitCounter = commitCounter;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString() + "{commitTime=" + commitTime
-                + ",commitCounter=" + commitCounter + "}";
-    }
+  @Override
+  public String toString() {
+    return super.toString() + "{commitTime=" + commitTime + ",commitCounter=" + commitCounter + "}";
+  }
 
-    @Override
-    public long getCommitTime() {
-        return commitTime;
-    }
+  @Override
+  public long getCommitTime() {
+    return commitTime;
+  }
 
-    @Override
-    public long getCommitCounter() {
-        return commitCounter;
-    }
-
+  @Override
+  public long getCommitCounter() {
+    return commitCounter;
+  }
 }

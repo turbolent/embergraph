@@ -18,29 +18,22 @@ package org.embergraph.rdf.graph;
 import java.util.List;
 
 /**
- * This interface makes it possible to extract bindings for variables from an
- * {@link IGASProgram}.
- * 
- * @param <VS>
- *            The generic type for the per-vertex state. This is scoped to the
- *            computation of the {@link IGASProgram}.
- * @param <ES>
- *            The generic type for the per-edge state. This is scoped to the
- *            computation of the {@link IGASProgram}.
- * @param <ST>
- *            The generic type for the SUM. This is often directly related to
- *            the generic type for the per-edge state, but that is not always
- *            true. The SUM type is scoped to the GATHER + SUM operation (NOT
- *            the computation).
- *            
+ * This interface makes it possible to extract bindings for variables from an {@link IGASProgram}.
+ *
+ * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
+ *     {@link IGASProgram}.
+ * @param <ES> The generic type for the per-edge state. This is scoped to the computation of the
+ *     {@link IGASProgram}.
+ * @param <ST> The generic type for the SUM. This is often directly related to the generic type for
+ *     the per-edge state, but that is not always true. The SUM type is scoped to the GATHER + SUM
+ *     operation (NOT the computation).
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IBindingExtractor<VS, ES, ST> {
 
-    /**
-     * Return a list of interfaces that may be used to extract variable bindings
-     * for the vertices visited by the algorithm.
-     */ 
-    List<IBinder<VS, ES, ST>> getBinderList();
-
+  /**
+   * Return a list of interfaces that may be used to extract variable bindings for the vertices
+   * visited by the algorithm.
+   */
+  List<IBinder<VS, ES, ST>> getBinderList();
 }

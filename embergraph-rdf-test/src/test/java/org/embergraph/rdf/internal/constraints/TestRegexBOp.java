@@ -31,95 +31,78 @@ import org.embergraph.rdf.store.ProxyTestCase;
 
 /**
  * Test suite for {@link RegexBOp}.
- * 
+ *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */
 public class TestRegexBOp extends ProxyTestCase {
 
-//	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
-	
-    /**
-     * 
-     */
-    public TestRegexBOp() {
-        super();
+  //	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
+
+  /** */
+  public TestRegexBOp() {
+    super();
+  }
+
+  /** @param name */
+  public TestRegexBOp(String name) {
+    super(name);
+  }
+
+  //    @Override
+  //    public Properties getProperties() {
+  //    	final Properties props = super.getProperties();
+  //    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+  //    	return props;
+  //    }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_bop() {
+
+    final AbstractTripleStore db = getStore();
+
+    try {
+
+      final EmbergraphValueFactory vf = db.getValueFactory();
+
+      final ListBindingSet emptyBindingSet = new ListBindingSet();
+
+      // regex("Alice", "^ali", "i") -> true
+      {
+        final boolean expected = true;
+
+        final IV var = DummyConstantNode.toDummyIV(vf.createLiteral("Alice"));
+
+        final IV pattern = DummyConstantNode.toDummyIV(vf.createLiteral("^ali"));
+
+        final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
+
+        final boolean actual =
+            new RegexBOp(new Constant<IV>(var), new Constant<IV>(pattern), new Constant<IV>(flags))
+                .accept(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // regex("Bob", "^ali", "i") -> false
+      {
+        final boolean expected = false;
+
+        final IV var = DummyConstantNode.toDummyIV(vf.createLiteral("Bob"));
+
+        final IV pattern = DummyConstantNode.toDummyIV(vf.createLiteral("^ali"));
+
+        final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
+
+        final boolean actual =
+            new RegexBOp(new Constant<IV>(var), new Constant<IV>(pattern), new Constant<IV>(flags))
+                .accept(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+    } finally {
+
+      db.__tearDownUnitTest();
     }
-
-    /**
-     * @param name
-     */
-    public TestRegexBOp(String name) {
-        super(name);
-    }
-    
-//    @Override
-//    public Properties getProperties() {
-//    	final Properties props = super.getProperties();
-//    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
-//    	return props;
-//    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_bop() {
-        
-        final AbstractTripleStore db = getStore();
-
-        try {
-
-            final EmbergraphValueFactory vf = db.getValueFactory();
-            
-            final ListBindingSet emptyBindingSet = new ListBindingSet();
-
-            // regex("Alice", "^ali", "i") -> true
-            {
-                final boolean expected = true;
-
-                final IV var = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("Alice"));
-                
-                final IV pattern = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("^ali"));
-                
-                final IV flags = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("i"));
-                
-                final boolean actual = new RegexBOp(
-                        new Constant<IV>(var),
-                        new Constant<IV>(pattern),
-                        new Constant<IV>(flags)
-                ).accept(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // regex("Bob", "^ali", "i") -> false
-            {
-                final boolean expected = false;
-
-                final IV var = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("Bob"));
-                
-                final IV pattern = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("^ali"));
-                
-                final IV flags = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("i"));
-                
-                final boolean actual = new RegexBOp(
-                        new Constant<IV>(var),
-                        new Constant<IV>(pattern),
-                        new Constant<IV>(flags)
-                ).accept(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-        } finally {
-            
-            db.__tearDownUnitTest();
-            
-        }
-        
-    }
-    
+  }
 }

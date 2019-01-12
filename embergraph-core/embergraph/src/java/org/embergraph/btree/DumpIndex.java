@@ -4,92 +4,78 @@ import org.embergraph.util.BytesUtil;
 
 /**
  * Utility class to dump an index in a variety of ways.
- * 
+ *
  * @author thompsonbry
- * 
- *         FIXME GIST : Generalize this for non-B+Tree indices.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/585"> GIST
- *      </a>
- * */
+ *     <p>FIXME GIST : Generalize this for non-B+Tree indices.
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/585">GIST </a>
+ */
 public class DumpIndex {
 
-	/**
-	 * Utility method using an {@link ITupleIterator} to dump the keys and
-	 * values in an {@link AbstractBTree}.
-	 * 
-	 * @param ndx
-	 *            The index.
-	 * @param showTuples
-	 *            When <code>true</code> the data for the keys and values will
-	 *            be displayed. Otherwise the scan will simply exercise the
-	 *            iterator.
-	 */
-	public static void dumpIndex(final AbstractBTree ndx,
-			final boolean showTuples) {
+  /**
+   * Utility method using an {@link ITupleIterator} to dump the keys and values in an {@link
+   * AbstractBTree}.
+   *
+   * @param ndx The index.
+   * @param showTuples When <code>true</code> the data for the keys and values will be displayed.
+   *     Otherwise the scan will simply exercise the iterator.
+   */
+  public static void dumpIndex(final AbstractBTree ndx, final boolean showTuples) {
 
-		// Note: reused for each tuple to avoid heap churn.
-		final StringBuilder sb = new StringBuilder();
+    // Note: reused for each tuple to avoid heap churn.
+    final StringBuilder sb = new StringBuilder();
 
-		// @todo offer the version metadata also if the index supports
-		// isolation.
-		final ITupleIterator<?> itr = ndx.rangeIterator(null, null);
+    // @todo offer the version metadata also if the index supports
+    // isolation.
+    final ITupleIterator<?> itr = ndx.rangeIterator(null, null);
 
-		final long begin = System.currentTimeMillis();
+    final long begin = System.currentTimeMillis();
 
-		int i = 0;
+    int i = 0;
 
-		while (itr.hasNext()) {
+    while (itr.hasNext()) {
 
-			final ITuple<?> tuple = itr.next();
+      final ITuple<?> tuple = itr.next();
 
-			if (showTuples) {
+      if (showTuples) {
 
-				dumpTuple(i, sb, tuple);
+        dumpTuple(i, sb, tuple);
+      }
 
-			}
+      i++;
+    }
 
-			i++;
+    final long elapsed = System.currentTimeMillis() - begin;
 
-		}
+    System.out.println("Visited " + i + " tuples in " + elapsed + "ms");
+  }
 
-		final long elapsed = System.currentTimeMillis() - begin;
+  private static void dumpTuple(
+      final int recno, final StringBuilder tupleSB, final ITuple<?> tuple) {
 
-		System.out.println("Visited " + i + " tuples in " + elapsed + "ms");
+    final ITupleSerializer<?, ?> tupleSer = tuple.getTupleSerializer();
 
-	}
+    tupleSB.setLength(0); // reset.
 
-	private static void dumpTuple(final int recno, final StringBuilder tupleSB,
-			final ITuple<?> tuple) {
+    tupleSB.append("rec=" + recno);
 
-		final ITupleSerializer<?, ?> tupleSer = tuple.getTupleSerializer();
+    try {
 
-		tupleSB.setLength(0); // reset.
+      tupleSB.append("\nkey=" + tupleSer.deserializeKey(tuple));
 
-		tupleSB.append("rec=" + recno);
+    } catch (Throwable t) {
 
-		try {
+      tupleSB.append("\nkey=" + BytesUtil.toString(tuple.getKey()));
+    }
 
-			tupleSB.append("\nkey=" + tupleSer.deserializeKey(tuple));
+    try {
 
-		} catch (Throwable t) {
+      tupleSB.append("\nval=" + tupleSer.deserialize(tuple));
 
-			tupleSB.append("\nkey=" + BytesUtil.toString(tuple.getKey()));
+    } catch (Throwable t) {
 
-		}
+      tupleSB.append("\nval=" + BytesUtil.toString(tuple.getValue()));
+    }
 
-		try {
-
-			tupleSB.append("\nval=" + tupleSer.deserialize(tuple));
-
-		} catch (Throwable t) {
-
-			tupleSB.append("\nval=" + BytesUtil.toString(tuple.getValue()));
-
-		}
-
-		System.out.println(tupleSB);
-
-	}
-
+    System.out.println(tupleSB);
+  }
 }

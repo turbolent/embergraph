@@ -24,8 +24,9 @@ package org.embergraph.rdf.sail;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
-
+import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -39,127 +40,109 @@ import org.openrdf.query.impl.MapBindingSet;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 /**
- * Test suite for the logic which rewrites a query, replacing {@link Value}
- * constants with {@link EmbergraphValue} constants which have been resolved
- * against the database.
- * 
+ * Test suite for the logic which rewrites a query, replacing {@link Value} constants with {@link
+ * EmbergraphValue} constants which have been resolved against the database.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
 
-    /**
-     * 
-     */
-    public TestEmbergraphValueReplacer() {
-    }
+  /** */
+  public TestEmbergraphValueReplacer() {}
 
-    /**
-     * @param name
-     */
-    public TestEmbergraphValueReplacer(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestEmbergraphValueReplacer(String name) {
+    super(name);
+  }
 
-    @Override
-    public Properties getProperties() {
-        
-//        Logger.getLogger(EmbergraphValueReplacer.class).setLevel(Level.ALL);
-        
-        final Properties props = super.getProperties();
-        
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
-    }
+  @Override
+  public Properties getProperties() {
 
-    /**
-     * Unit test for bindings passed into a query which are not used by the
-     * query.
-     * 
-     * @throws RepositoryException
-     * @throws SailException
-     * @throws MalformedQueryException
-     * @throws QueryEvaluationException
-     * 
-     * @see https://sourceforge.net/apps/trac/bigdata/ticket/271
-     */
-    public void test_dropUnusedBindings() throws RepositoryException,
-            SailException, MalformedQueryException, QueryEvaluationException {
+    //        Logger.getLogger(EmbergraphValueReplacer.class).setLevel(Level.ALL);
 
-        final EmbergraphSail sail = getSail();
+    final Properties props = super.getProperties();
 
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
+
+    return props;
+  }
+
+  /**
+   * Unit test for bindings passed into a query which are not used by the query.
+   *
+   * @throws RepositoryException
+   * @throws SailException
+   * @throws MalformedQueryException
+   * @throws QueryEvaluationException
+   * @see https://sourceforge.net/apps/trac/bigdata/ticket/271
+   */
+  public void test_dropUnusedBindings()
+      throws RepositoryException, SailException, MalformedQueryException, QueryEvaluationException {
+
+    final EmbergraphSail sail = getSail();
+
+    try {
+
+      sail.initialize();
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+      final EmbergraphSailRepositoryConnection cxn =
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
+      try {
+
+        cxn.setAutoCommit(false);
+
+        /*
+         * Add a statement so the query does not get short circuited
+         * because some of the terms in the query are undefined in the
+         * database.
+         */
+        cxn.add(new URIImpl("s:1"), new URIImpl("p:1"), new URIImpl("s:2"));
+
+        final String query = "select ?a ?b WHERE {?a <p:1> ?b}";
+
+        final TupleQuery q = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+
+        /*
+         * Setup some bindings.
+         */
+        // bind to a term in the database.
+        q.setBinding("a", new URIImpl("s:1"));
+        // bind to a term in the database.
+        q.setBinding("b", new URIImpl("s:2"));
+        // bind to a term NOT found in the database.
+        q.setBinding("notused", new LiteralImpl("lit"));
+
+        /*
+         * Evaluate the query and verify that the correct solution
+         * is produced.
+         */
+        final Collection<BindingSet> expected = new LinkedList<BindingSet>();
+        {
+          final MapBindingSet bset = new MapBindingSet();
+          bset.addBinding("a", new URIImpl("s:1"));
+          bset.addBinding("b", new URIImpl("s:2"));
+          expected.add(bset);
+        }
+        final TupleQueryResult result = q.evaluate();
         try {
-
-            sail.initialize();
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-            final EmbergraphSailRepositoryConnection cxn = (EmbergraphSailRepositoryConnection) repo
-                    .getConnection();
-            try {
-
-                cxn.setAutoCommit(false);
-
-                /*
-                 * Add a statement so the query does not get short circuited
-                 * because some of the terms in the query are undefined in the
-                 * database.
-                 */
-                cxn.add(new URIImpl("s:1"), new URIImpl("p:1"), new URIImpl(
-                        "s:2"));
-
-                final String query = "select ?a ?b WHERE {?a <p:1> ?b}";
-
-                final TupleQuery q = cxn.prepareTupleQuery(
-                        QueryLanguage.SPARQL, query);
-                
-                /*
-                 * Setup some bindings.  
-                 */
-                // bind to a term in the database.
-                q.setBinding("a", new URIImpl("s:1"));
-                // bind to a term in the database.
-                q.setBinding("b", new URIImpl("s:2"));
-                // bind to a term NOT found in the database.
-                q.setBinding("notused", new LiteralImpl("lit"));
-                
-                /*
-                 * Evaluate the query and verify that the correct solution
-                 * is produced.
-                 */
-                final Collection<BindingSet> expected = new LinkedList<BindingSet>();
-                {
-                    final MapBindingSet bset = new MapBindingSet();
-                    bset.addBinding("a", new URIImpl("s:1"));
-                    bset.addBinding("b", new URIImpl("s:2"));
-                    expected.add(bset);
-                }
-                final TupleQueryResult result = q.evaluate();
-                try {
-                    compare(result, expected);
-                } finally {
-                    result.close();
-                }
-
-            } finally {
-            
-                cxn.close();
-                
-            }
-
+          compare(result, expected);
         } finally {
-            
-            sail.__tearDownUnitTest();
-
+          result.close();
         }
 
-    }
+      } finally {
 
+        cxn.close();
+      }
+
+    } finally {
+
+      sail.__tearDownUnitTest();
+    }
+  }
 }

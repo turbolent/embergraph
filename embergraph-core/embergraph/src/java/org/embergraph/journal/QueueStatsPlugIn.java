@@ -21,136 +21,111 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 
 /**
- * Plugin for sampling the {@link ExecutorService}. This collects interesting
- * statistics about the thread pool for reporting to the load balancer service.
- * 
+ * Plugin for sampling the {@link ExecutorService}. This collects interesting statistics about the
+ * thread pool for reporting to the load balancer service.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class QueueStatsPlugIn implements
-        IPlugIn<Journal, ThreadPoolExecutorBaseStatisticsTask> {
+public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBaseStatisticsTask> {
 
-    private static final Logger log = Logger.getLogger(QueueStatsPlugIn.class);
+  private static final Logger log = Logger.getLogger(QueueStatsPlugIn.class);
 
-    /**
-     * Performance counters options.
-     */
-    public interface Options {
-        
-        /**
-         * Boolean option for the collection of statistics from the various
-         * queues using to run tasks (default
-         * {@link #DEFAULT_COLLECT_QUEUE_STATISTICS}).
-         */
-        String COLLECT_QUEUE_STATISTICS = Journal.class.getName()
-                + ".collectQueueStatistics";
-
-        String DEFAULT_COLLECT_QUEUE_STATISTICS = "false";
-
-    }
-    
-    /**
-     * Collects interesting statistics on the {@link ExecutorService}.
-     * <p>
-     * Note: Guarded by synchronized(this).
-     * 
-     * @see Options#COLLECT_QUEUE_STATISTICS
-     */
-    private ThreadPoolExecutorBaseStatisticsTask queueSampleTask = null;
+  /** Performance counters options. */
+  public interface Options {
 
     /**
-     * The {@link ScheduledFuture} for the task.
-     * <p>
-     * Note: Guarded by synchronized(this).
+     * Boolean option for the collection of statistics from the various queues using to run tasks
+     * (default {@link #DEFAULT_COLLECT_QUEUE_STATISTICS}).
      */
-    private ScheduledFuture<?> scheduledFuture = null;
-    
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Setup sampling on the client's thread pool.
-     */
-    @Override
-    public void startService(final Journal indexManager) {
-        
-        final boolean collectQueueStatistics = Boolean.valueOf(indexManager
-                .getProperty(Options.COLLECT_QUEUE_STATISTICS,
-                        Options.DEFAULT_COLLECT_QUEUE_STATISTICS));
+    String COLLECT_QUEUE_STATISTICS = Journal.class.getName() + ".collectQueueStatistics";
 
-        if (log.isInfoEnabled())
-            log.info(Options.COLLECT_QUEUE_STATISTICS + "="
-                    + collectQueueStatistics);
+    String DEFAULT_COLLECT_QUEUE_STATISTICS = "false";
+  }
 
-        if (!collectQueueStatistics) {
+  /**
+   * Collects interesting statistics on the {@link ExecutorService}.
+   *
+   * <p>Note: Guarded by synchronized(this).
+   *
+   * @see Options#COLLECT_QUEUE_STATISTICS
+   */
+  private ThreadPoolExecutorBaseStatisticsTask queueSampleTask = null;
 
-            return;
+  /**
+   * The {@link ScheduledFuture} for the task.
+   *
+   * <p>Note: Guarded by synchronized(this).
+   */
+  private ScheduledFuture<?> scheduledFuture = null;
 
-        }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Setup sampling on the client's thread pool.
+   */
+  @Override
+  public void startService(final Journal indexManager) {
 
-        final long initialDelay = 0; // initial delay in ms.
-        final long delay = 1000; // delay in ms.
-        final TimeUnit unit = TimeUnit.MILLISECONDS;
+    final boolean collectQueueStatistics =
+        Boolean.valueOf(
+            indexManager.getProperty(
+                Options.COLLECT_QUEUE_STATISTICS, Options.DEFAULT_COLLECT_QUEUE_STATISTICS));
 
-        synchronized (this) {
+    if (log.isInfoEnabled())
+      log.info(Options.COLLECT_QUEUE_STATISTICS + "=" + collectQueueStatistics);
 
-            queueSampleTask = new ThreadPoolExecutorBaseStatisticsTask(
-                    (ThreadPoolExecutor) indexManager.getExecutorService());
+    if (!collectQueueStatistics) {
 
-            scheduledFuture = indexManager.addScheduledTask(queueSampleTask,
-                    initialDelay, delay, unit);
-
-        }
-
+      return;
     }
 
-    @Override
-    public void stopService(final boolean immediateShutdown) {
+    final long initialDelay = 0; // initial delay in ms.
+    final long delay = 1000; // delay in ms.
+    final TimeUnit unit = TimeUnit.MILLISECONDS;
 
-        synchronized (this) {
+    synchronized (this) {
+      queueSampleTask =
+          new ThreadPoolExecutorBaseStatisticsTask(
+              (ThreadPoolExecutor) indexManager.getExecutorService());
 
-            if (scheduledFuture != null) {
-        
-                scheduledFuture
-                        .cancel(immediateShutdown/* mayInterruptIfRunning */);
-                
-                scheduledFuture = null;
-                
-            }
-
-            queueSampleTask = null;
-
-        }
-        
+      scheduledFuture = indexManager.addScheduledTask(queueSampleTask, initialDelay, delay, unit);
     }
+  }
 
-    @Override
-    public ThreadPoolExecutorBaseStatisticsTask getService() {
+  @Override
+  public void stopService(final boolean immediateShutdown) {
 
-        synchronized(this) {
+    synchronized (this) {
+      if (scheduledFuture != null) {
 
-            return queueSampleTask;
-            
-        }
-        
+        scheduledFuture.cancel(immediateShutdown /* mayInterruptIfRunning */);
+
+        scheduledFuture = null;
+      }
+
+      queueSampleTask = null;
     }
+  }
 
-    @Override
-    public boolean isRunning() {
+  @Override
+  public ThreadPoolExecutorBaseStatisticsTask getService() {
 
-        synchronized (this) {
-        
-            if (scheduledFuture == null || scheduledFuture.isDone())
-                return false;
-            
-            return true;
-            
-        }
-        
+    synchronized (this) {
+      return queueSampleTask;
     }
+  }
 
+  @Override
+  public boolean isRunning() {
+
+    synchronized (this) {
+      if (scheduledFuture == null || scheduledFuture.isDone()) return false;
+
+      return true;
+    }
+  }
 }

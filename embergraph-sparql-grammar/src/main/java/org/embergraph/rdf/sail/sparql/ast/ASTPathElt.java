@@ -2,11 +2,10 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTPathElt extends SimpleNode {
+public class ASTPathElt extends SimpleNode {
   private boolean inverse;
 
-public ASTPathElt(int id) {
+  public ASTPathElt(int id) {
     super(id);
   }
 
@@ -14,30 +13,29 @@ public ASTPathElt(int id) {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
+
   public void setInverse(boolean inverse) {
-	  this.inverse = inverse;
+    this.inverse = inverse;
   }
-  
+
   public boolean isInverse() {
-	  return this.inverse;
+    return this.inverse;
   }
-  
+
   public boolean isNegatedPropertySet() {
-	  return jjtGetChild(0) instanceof ASTPathOneInPropertySet;
+    return jjtGetChild(0) instanceof ASTPathOneInPropertySet;
   }
-  
+
   public boolean isNestedPath() {
-	  return jjtGetChild(0) instanceof ASTPathAlternative;
+    return jjtGetChild(0) instanceof ASTPathAlternative;
   }
-  
+
   public ASTPathMod getPathMod() {
-	  return jjtGetChild(ASTPathMod.class);
+    return jjtGetChild(ASTPathMod.class);
   }
 }
 /* JavaCC - OriginalChecksum=775f2a21c17018fa87a23bafe7b048dd (do not edit this line) */

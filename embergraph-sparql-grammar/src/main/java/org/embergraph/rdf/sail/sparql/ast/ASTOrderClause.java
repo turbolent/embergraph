@@ -4,18 +4,16 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTOrderClause extends SimpleNode {
 
-	public ASTOrderClause(int id) {
-		super(id);
-	}
+  public ASTOrderClause(int id) {
+    super(id);
+  }
 
-	public ASTOrderClause(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTOrderClause(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 }

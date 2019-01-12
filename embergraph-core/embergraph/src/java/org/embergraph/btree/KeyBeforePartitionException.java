@@ -27,30 +27,25 @@ import org.embergraph.mdi.ISeparatorKeys;
 import org.embergraph.util.BytesUtil;
 
 /**
- * Exception thrown when a key is before the start of the half-open range of an
- * index partition.
- * 
+ * Exception thrown when a key is before the start of the half-open range of an index partition.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class KeyBeforePartitionException extends KeyOutOfRangeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6985672103255764765L;
+  /** */
+  private static final long serialVersionUID = 6985672103255764765L;
 
-    /**
-     * @param key
-     * @param allowUpperBound
-     * @param pmd
-     */
-    public KeyBeforePartitionException(final byte[] key,
-            final boolean allowUpperBound, final ISeparatorKeys pmd) {
+  /**
+   * @param key
+   * @param allowUpperBound
+   * @param pmd
+   */
+  public KeyBeforePartitionException(
+      final byte[] key, final boolean allowUpperBound, final ISeparatorKeys pmd) {
 
-        super("key=" + BytesUtil.toString(key) + ", allowUpperBound="
-                + allowUpperBound + ", pmd=" + pmd);
-
-    }
-
+    super(
+        "key=" + BytesUtil.toString(key) + ", allowUpperBound=" + allowUpperBound + ", pmd=" + pmd);
+  }
 }

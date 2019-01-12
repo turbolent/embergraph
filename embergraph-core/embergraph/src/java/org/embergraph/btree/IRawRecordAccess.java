@@ -22,19 +22,14 @@ package org.embergraph.btree;
 
 import java.nio.ByteBuffer;
 
-/**
- * Interface providing access to raw records.
- */
+/** Interface providing access to raw records. */
 public interface IRawRecordAccess {
 
-	/**
-	 * Read the raw record from the backing store.
-	 * 
-	 * @param addr
-	 *            The record address.
-	 * 
-	 * @return The data.
-	 */
-	ByteBuffer readRawRecord(final long addr);
-	
+  /**
+   * Read the raw record from the backing store.
+   *
+   * @param addr The record address.
+   * @return The data.
+   */
+  ByteBuffer readRawRecord(final long addr);
 }

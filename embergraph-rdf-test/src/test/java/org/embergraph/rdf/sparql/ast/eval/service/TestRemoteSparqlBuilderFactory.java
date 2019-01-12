@@ -27,22 +27,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+import org.embergraph.bop.IVariable;
+import org.embergraph.bop.Var;
+import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.BNodeImpl;
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.vocabulary.DC;
-import org.openrdf.query.BindingSet;
-import org.openrdf.query.impl.MapBindingSet;
-
-import org.embergraph.bop.IVariable;
-import org.embergraph.bop.Var;
-import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
@@ -57,941 +48,909 @@ import org.embergraph.rdf.sparql.ast.service.RemoteSparql11QueryBuilder;
 import org.embergraph.rdf.sparql.ast.service.RemoteSparqlBuilderFactory;
 import org.embergraph.rdf.sparql.ast.service.SPARQLVersion;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.openrdf.model.BNode;
+import org.openrdf.model.Value;
+import org.openrdf.model.impl.BNodeImpl;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.model.vocabulary.DC;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.impl.MapBindingSet;
 
 /**
  * Test suite the {@link RemoteSparqlBuilderFactory}
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z
- *          thompsonbry $
+ * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z thompsonbry $
  */
-public class TestRemoteSparqlBuilderFactory extends
-    AbstractEmbergraphExprBuilderTestCase {
+public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilderTestCase {
 
-//    private static final Logger log = Logger
-//            .getLogger(TestRemoteSparqlQueryBuilder.class);
-    
-    /**
-     * 
+  //    private static final Logger log = Logger
+  //            .getLogger(TestRemoteSparqlQueryBuilder.class);
+
+  /** */
+  public TestRemoteSparqlBuilderFactory() {}
+
+  /** @param name */
+  public TestRemoteSparqlBuilderFactory(String name) {
+    super(name);
+  }
+
+  @SuppressWarnings("unchecked")
+  private void addResolveIVs(final EmbergraphValue... values) {
+
+    tripleStore.getLexiconRelation().addTerms(values, values.length, false /* readOnly */);
+
+    /*
+     * Cache value on IVs to align with behavior of the SPARQL parser.
+     *
+     * Note: BatchRDFValueResolver does this, so we have to do it to in
+     * order to have an exact structural match when we parse the generated
+     * SPARQL query and then verify the AST model.
      */
-    public TestRemoteSparqlBuilderFactory() {
+    for (EmbergraphValue v : values) {
+
+      v.getIV().setValue(v);
+    }
+  }
+
+  //    /**
+  //     * Wrap as an {@link IConstant}.
+  //     *
+  //     * @param iv
+  //     *            The {@link IV}.
+  //     *
+  //     * @return The {@link IConstant}.
+  //     */
+  //    private IConstant<?> asConstant(final IV<?,?> iv) {
+  //
+  //        return new Constant<IV<?,?>>(iv);
+  //
+  //    }
+
+  /**
+   * A simple test with nothing bound and NO source solution. This can be handled by either {@link
+   * IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_001() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
     }
 
-    /**
-     * @param name
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+    {
+      prefixDecls.put("foo", "http://www.embergraph.org/foo");
+    }
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A simple test with nothing bound and a single <em>empty</em> source solution. This can be
+   * handled by either {@link IRemoteSparqlQueryBuilder} .
+   */
+  public void test_service_001b() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
+    }
+
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+    {
+      prefixDecls.put("foo", "http://www.embergraph.org/foo");
+    }
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    {
+      bindingSets.add(new MapBindingSet());
+    }
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A test where a single fully bound triple pattern is presented. This can be handled by either
+   * {@link IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_002() throws Exception {
+
+    /*
+     * Resolve IVs that we will use below.
      */
-    public TestRemoteSparqlBuilderFactory(String name) {
-        super(name);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void addResolveIVs(final EmbergraphValue... values) {
+    final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
+    final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
+    final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
+    final EmbergraphURI author1 = valueFactory.createURI("http://example.org/author/author1");
+    final EmbergraphURI author2 = valueFactory.createURI("http://example.org/author/author2");
 
-        tripleStore.getLexiconRelation()
-                .addTerms(values, values.length, false/* readOnly */);
+    addResolveIVs(dcCreator, book1, book2, author1, author2);
 
-        /*
-         * Cache value on IVs to align with behavior of the SPARQL parser.
-         * 
-         * Note: BatchRDFValueResolver does this, so we have to do it to in
-         * order to have an exact structural match when we parse the generated
-         * SPARQL query and then verify the AST model.
-         */
-        for (EmbergraphValue v : values) {
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
-            v.getIV().setValue(v);
-            
-        }
-
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
     }
 
-//    /**
-//     * Wrap as an {@link IConstant}.
-//     * 
-//     * @param iv
-//     *            The {@link IV}.
-//     *            
-//     * @return The {@link IConstant}.
-//     */
-//    private IConstant<?> asConstant(final IV<?,?> iv) {
-//        
-//        return new Constant<IV<?,?>>(iv);
-//        
-//    }
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
-    /**
-     * A simple test with nothing bound and NO source solution. This can be
-     * handled by either {@link IRemoteSparqlQueryBuilder}.
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+    {
+      prefixDecls.put("foo", "http://www.embergraph.org/foo");
+    }
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("s", book1);
+      bset.addBinding("p", DC.CREATOR);
+      bset.addBinding("o", author1);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("s", book2);
+      bset.addBinding("p", DC.CREATOR);
+      bset.addBinding("o", author2);
+      bindingSets.add(bset);
+    }
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A variant test in which there are some BINDINGS to be passed through. The set of bindings
+   * covers the different types of RDF {@link Value} and also exercises the prefix declarations.
+   * This test does NOT use blank nodes in the BINDINGS. This can be handled by either {@link
+   * IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_003() throws Exception {
+
+    /*
+     * Resolve IVs that we will use below.
      */
-    public void test_service_001() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
+    final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
+    final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
+    final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
+    final EmbergraphLiteral book3 = valueFactory.createLiteral("Semantic Web Primer");
+    final EmbergraphLiteral book4 = valueFactory.createLiteral("Semantic Web Primer", "DE");
+    final EmbergraphLiteral book5 = valueFactory.createLiteral("12", XSD.INT);
+    final EmbergraphLiteral book6 = valueFactory.createLiteral("true", XSD.BOOLEAN);
 
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-        {
-            prefixDecls.put("foo", "http://www.embergraph.org/foo");
-        }
+    addResolveIVs(dcCreator, book1, book2, book3, book4, book5, book6);
 
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-        
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("book")));
     }
 
-    /**
-     * A simple test with nothing bound and a single <em>empty</em> source
-     * solution. This can be handled by either {@link IRemoteSparqlQueryBuilder}
-     * .
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?book ?p ?o}";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+    {
+      prefixDecls.put("", "http://example.org/book/");
+    }
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("book"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book1);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book2);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book3);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book4);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book5);
+      bindingSets.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", book6);
+      bindingSets.add(bset);
+    }
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
+   * SERVICE. In this test the blank nodes are not correlated so we do not need to impose a FILTER
+   * on the remote service. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_004() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
+    }
+
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    /*
+     * Note: Blank nodes are not permitting in the BINDINGS clause (per the
+     * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
+     * unbound variable as long as we impose the constraint that all vars
+     * having that blank node for a solution are EQ (same term).
      */
-    public void test_service_001b() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-        {
-            prefixDecls.put("foo", "http://www.embergraph.org/foo");
-        }
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-        
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        {
-            bindingSets.add(new MapBindingSet());
-        }
-        
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("s", new BNodeImpl("abc"));
+      bindingSets.add(bset);
     }
-        
-    /**
-     * A test where a single fully bound triple pattern is presented. This can
-     * be handled by either {@link IRemoteSparqlQueryBuilder}.
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
+   * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
+   * vectored. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_005() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
+    }
+
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    /*
+     * Note: Blank nodes are not permitting in the BINDINGS clause (per the
+     * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
+     * unbound variable as long as we impose the constraint that all vars
+     * having that blank node for a solution are EQ (same term).
+     *
+     * Note: For this query, the *same* blank node is used for ?s and ?book.
+     * That needs to be turned into a FILTER which is attached to the remote
+     * SPARQL query in order to maintain the correlation between those
+     * variables (FILTER ?s = ?book).
      */
-    public void test_service_002() throws Exception {
-
-        /*
-         * Resolve IVs that we will use below.
-         */
-        final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
-        final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
-        final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
-        final EmbergraphURI author1 = valueFactory.createURI("http://example.org/author/author1");
-        final EmbergraphURI author2 = valueFactory.createURI("http://example.org/author/author2");
-
-        addResolveIVs(dcCreator, book1, book2, author1, author2);
-
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-        {
-            prefixDecls.put("foo", "http://www.embergraph.org/foo");
-        }
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("s", book1);
-            bset.addBinding("p", DC.CREATOR);
-            bset.addBinding("o", author1);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("s", book2);
-            bset.addBinding("p", DC.CREATOR);
-            bset.addBinding("o", author2);
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      final BNode tmp = new BNodeImpl("abc");
+      bset.addBinding("s", tmp);
+      bset.addBinding("o", tmp);
+      bindingSets.add(bset);
     }
-        
-    /**
-     * A variant test in which there are some BINDINGS to be passed through. The
-     * set of bindings covers the different types of RDF {@link Value} and also
-     * exercises the prefix declarations. This test does NOT use blank nodes in
-     * the BINDINGS. This can be handled by either
-     * {@link IRemoteSparqlQueryBuilder}.
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
+   * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
+   * vectored so we will impose a FILTER on the remote service to enforce that correlation. This
+   * test differs from the previous test by making more than two variables in the SERVICE clause
+   * correlated through shared blank nodes. We need to use a more complex SERVICE graph pattern to
+   * accomplish this since the predicate can not be a blank node. This can be handled by either
+   * {@link IRemoteSparqlQueryBuilder}.
+   */
+  public void test_service_006() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
+
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o1")));
+    }
+
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o . ?s ?p ?o1 }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+        projectedVars.add(Var.var("o1"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    /*
+     * Note: Blank nodes are not permitting in the BINDINGS clause (per the
+     * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
+     * unbound variable as long as we impose the constraint that all vars
+     * having that blank node for a solution are EQ (same term).
+     *
+     * Note: For this query, the *same* blank node is used for ?s and ?book.
+     * That needs to be turned into a FILTER which is attached to the remote
+     * SPARQL query in order to maintain the correlation between those
+     * variables (FILTER ?s = ?book).
      */
-    public void test_service_003() throws Exception {
-        
-        /*
-         * Resolve IVs that we will use below.
-         */
-        final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
-        final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
-        final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
-        final EmbergraphLiteral book3 = valueFactory.createLiteral("Semantic Web Primer");
-        final EmbergraphLiteral book4 = valueFactory.createLiteral("Semantic Web Primer", "DE");
-        final EmbergraphLiteral book5 = valueFactory.createLiteral("12", XSD.INT);
-        final EmbergraphLiteral book6 = valueFactory.createLiteral("true", XSD.BOOLEAN);
-
-        addResolveIVs(dcCreator, book1, book2, book3, book4, book5, book6);
-
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("book")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?book ?p ?o}";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-        {
-            prefixDecls.put("", "http://example.org/book/");
-        }
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("book"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book1);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book2);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book3);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book4);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book5);
-            bindingSets.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book", book6);
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      final BNode tmp = new BNodeImpl("abc");
+      bset.addBinding("s", tmp);
+      bset.addBinding("o", tmp);
+      bset.addBinding("o1", tmp);
+      bindingSets.add(bset);
     }
 
-    /**
-     * A variant test in there is a blank node in the BINDINGS to be flowed
-     * through to the remote SERVICE.  In this test the blank nodes are not
-     * correlated so we do not need to impose a FILTER on the remote service.
-     * This can be handled by either {@link IRemoteSparqlQueryBuilder}.
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    assertEquals(
+        RemoteSparql11QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    assertEquals(
+        RemoteSparql11DraftQueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
+
+  /**
+   * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
+   * SERVICE. In this test the blank nodes are correlated and there is more than one solution to be
+   * vectored.
+   *
+   * <p>This case is only handled by the {@link RemoteSparql10QueryBuilder}.
+   */
+  public void test_service_007() throws Exception {
+
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
+
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
+    }
+
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    /*
+     * Note: Blank nodes are not permitting in the BINDINGS clause (per the
+     * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
+     * unbound variable as long as we impose the constraint that all vars
+     * having that blank node for a solution are EQ (same term).
+     *
+     * Note: For this query, the *same* blank node is used for ?s and ?book.
+     * That needs to be turned into a FILTER which is attached to the remote
+     * SPARQL query in order to maintain the correlation between those
+     * variables (FILTER ?s = ?book).
      */
-    public void test_service_004() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-        
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        /*
-         * Note: Blank nodes are not permitting in the BINDINGS clause (per the
-         * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
-         * unbound variable as long as we impose the constraint that all vars
-         * having that blank node for a solution are EQ (same term).
-         */
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("s", new BNodeImpl("abc"));
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      final BNode tmp = new BNodeImpl("abc");
+      bset.addBinding("s", tmp);
+      bset.addBinding("o", tmp);
+      bindingSets.add(bset);
+    }
+    { // A 2nd solution is required to force the correlated var/bnode issue.
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("s", new LiteralImpl("Semantic Web Primer"));
+      bindingSets.add(bset);
     }
 
-    /**
-     * A variant test in there is a blank node in the BINDINGS to be flowed
-     * through to the remote SERVICE. In this test the blank nodes are
-     * correlated but there is only one solution to be vectored. This can be
-     * handled by either {@link IRemoteSparqlQueryBuilder}.
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    /*
+     * Still uses the SPARQL 1.0 query builder since it will not rely on the
+     * BINDINGS clause.
      */
-    public void test_service_005() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
 
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
 
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        /*
-         * Note: Blank nodes are not permitting in the BINDINGS clause (per the
-         * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
-         * unbound variable as long as we impose the constraint that all vars
-         * having that blank node for a solution are EQ (same term).
-         * 
-         * Note: For this query, the *same* blank node is used for ?s and ?book.
-         * That needs to be turned into a FILTER which is attached to the remote
-         * SPARQL query in order to maintain the correlation between those
-         * variables (FILTER ?s = ?book).
-         */
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            final BNode tmp = new BNodeImpl("abc");
-            bset.addBinding("s", tmp);
-            bset.addBinding("o", tmp);
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-    }
-
-    /**
-     * A variant test in there is a blank node in the BINDINGS to be flowed
-     * through to the remote SERVICE. In this test the blank nodes are
-     * correlated but there is only one solution to be vectored so we will
-     * impose a FILTER on the remote service to enforce that correlation. This
-     * test differs from the previous test by making more than two variables in
-     * the SERVICE clause correlated through shared blank nodes. We need to use
-     * a more complex SERVICE graph pattern to accomplish this since the
-     * predicate can not be a blank node. This can be handled by either
-     * {@link IRemoteSparqlQueryBuilder}.
+    /*
+     * Still uses the SPARQL 1.0 query builder since it will not rely on the
+     * BINDINGS clause.
      */
-    public void test_service_006() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
 
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
+  /**
+   * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
+   * SERVICE. In this test the blank nodes are correlated so we MUST impose a constraint on the
+   * remote service to enforce that correlation. However, there is another solution in which the two
+   * variables are NOT correlated so that FILTER MUST NOT be imposed across all such solutions.
+   * Therefore the SERVICE class will be vectored by rewriting it into a UNION with different
+   * variable names in each variant of the UNION.
+   *
+   * <p>This case is only handled by the {@link RemoteSparql10QueryBuilder}.
+   */
+  public void test_service_008() throws Exception {
 
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-            
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o1")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o . ?s ?p ?o1 }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-                projectedVars.add(Var.var("o1"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        /*
-         * Note: Blank nodes are not permitting in the BINDINGS clause (per the
-         * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
-         * unbound variable as long as we impose the constraint that all vars
-         * having that blank node for a solution are EQ (same term).
-         * 
-         * Note: For this query, the *same* blank node is used for ?s and ?book.
-         * That needs to be turned into a FILTER which is attached to the remote
-         * SPARQL query in order to maintain the correlation between those
-         * variables (FILTER ?s = ?book).
-         */
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            final BNode tmp = new BNodeImpl("abc");
-            bset.addBinding("s", tmp);
-            bset.addBinding("o", tmp);
-            bset.addBinding("o1", tmp);
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        assertEquals(RemoteSparql11QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        assertEquals(RemoteSparql11DraftQueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
     }
 
-    /**
-     * A variant test in there is a blank node in the BINDINGS to be flowed
-     * through to the remote SERVICE. In this test the blank nodes are
-     * correlated and there is more than one solution to be vectored.
-     * <p>
-     * This case is only handled by the {@link RemoteSparql10QueryBuilder}.
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
+
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
+
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+        projectedVars.add(Var.var("p"));
+        projectedVars.add(Var.var("o"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    /*
+     * Note: Blank nodes are not permitting in the BINDINGS clause (per the
+     * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
+     * unbound variable as long as we impose the constraint that all vars
+     * having that blank node for a solution are EQ (same term).
+     *
+     * Note: For this query, the *same* blank node is used for ?s and ?book.
+     * That needs to be turned into a FILTER which is attached to the remote
+     * SPARQL query in order to maintain the correlation between those
+     * variables (FILTER ?s = ?book).
      */
-    public void test_service_007() throws Exception {
-
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-
-        final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        /*
-         * Note: Blank nodes are not permitting in the BINDINGS clause (per the
-         * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
-         * unbound variable as long as we impose the constraint that all vars
-         * having that blank node for a solution are EQ (same term).
-         * 
-         * Note: For this query, the *same* blank node is used for ?s and ?book.
-         * That needs to be turned into a FILTER which is attached to the remote
-         * SPARQL query in order to maintain the correlation between those
-         * variables (FILTER ?s = ?book).
-         */
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            final BNode tmp = new BNodeImpl("abc");
-            bset.addBinding("s", tmp);
-            bset.addBinding("o", tmp);
-            bindingSets.add(bset);
-        }
-        { // A 2nd solution is required to force the correlated var/bnode issue.
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("s", new LiteralImpl("Semantic Web Primer"));
-            bindingSets.add(bset);
-        }
-
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        /*
-         * Still uses the SPARQL 1.0 query builder since it will not rely on the
-         * BINDINGS clause.
-         */
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        /*
-         * Still uses the SPARQL 1.0 query builder since it will not rely on the
-         * BINDINGS clause.
-         */
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
+    { // Note: Blank nodes ARE correlated for this solution.
+      final MapBindingSet bset = new MapBindingSet();
+      final BNode tmp = new BNodeImpl("abc");
+      bset.addBinding("s", tmp);
+      bset.addBinding("o", tmp);
+      bindingSets.add(bset);
+    }
+    { // Note: Blank nodes are NOT correlated for this solution.
+      final MapBindingSet bset = new MapBindingSet();
+      final BNode tmp1 = new BNodeImpl("foo");
+      final BNode tmp2 = new BNodeImpl("bar");
+      bset.addBinding("s", tmp1);
+      bset.addBinding("o", tmp2);
+      bindingSets.add(bset);
     }
 
-    /**
-     * A variant test in there is a blank node in the BINDINGS to be flowed
-     * through to the remote SERVICE. In this test the blank nodes are
-     * correlated so we MUST impose a constraint on the remote service to
-     * enforce that correlation. However, there is another solution in which the
-     * two variables are NOT correlated so that FILTER MUST NOT be imposed
-     * across all such solutions. Therefore the SERVICE class will be vectored
-     * by rewriting it into a UNION with different variable names in each
-     * variant of the UNION.
-     * <p>
-     * This case is only handled by the {@link RemoteSparql10QueryBuilder}.
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    /*
+     * Still uses the SPARQL 1.0 query builder since it will not rely on the
+     * BINDINGS clause.
      */
-    public void test_service_008() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
 
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
 
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
-                projectedVars.add(Var.var("p"));
-                projectedVars.add(Var.var("o"));
-            }
+    /*
+     * Still uses the SPARQL 1.0 query builder since it will not rely on the
+     * BINDINGS clause.
+     */
+    assertEquals(
+        RemoteSparql10QueryBuilder.class,
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
+  }
 
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
+  public void test_service_009() throws Exception {
 
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-        /*
-         * Note: Blank nodes are not permitting in the BINDINGS clause (per the
-         * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
-         * unbound variable as long as we impose the constraint that all vars
-         * having that blank node for a solution are EQ (same term).
-         * 
-         * Note: For this query, the *same* blank node is used for ?s and ?book.
-         * That needs to be turned into a FILTER which is attached to the remote
-         * SPARQL query in order to maintain the correlation between those
-         * variables (FILTER ?s = ?book).
-         */
-        { // Note: Blank nodes ARE correlated for this solution.
-            final MapBindingSet bset = new MapBindingSet();
-            final BNode tmp = new BNodeImpl("abc");
-            bset.addBinding("s", tmp);
-            bset.addBinding("o", tmp);
-            bindingSets.add(bset);
-        }
-        { // Note: Blank nodes are NOT correlated for this solution.
-            final MapBindingSet bset = new MapBindingSet();
-            final BNode tmp1 = new BNodeImpl("foo");
-            final BNode tmp2 = new BNodeImpl("bar");
-            bset.addBinding("s", tmp1);
-            bset.addBinding("o", tmp2);
-            bindingSets.add(bset);
-        }
+    final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
+    final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
-        final RemoteServiceOptions options = new RemoteServiceOptions();
+    final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
 
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        /*
-         * Still uses the SPARQL 1.0 query builder since it will not rely on the
-         * BINDINGS clause.
-         */
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-        
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-
-        /*
-         * Still uses the SPARQL 1.0 query builder since it will not rely on the
-         * BINDINGS clause.
-         */
-        assertEquals(RemoteSparql10QueryBuilder.class,
-                RemoteSparqlBuilderFactory.get(options, serviceNode, a)
-                        .getClass());
-
-    }
-    
-    public void test_service_009() throws Exception {
-        
-        final EmbergraphURI serviceURI = valueFactory
-                .createURI("http://www.embergraph.org/myService");
-        
-        final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
-        
-        final Map<String,String> prefixDecls = new LinkedHashMap<String, String>();
-        
-        final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
-        {
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o")));
-        }
-        
-
-        final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                makeIV(serviceURI)), groupNode);
-        
-        {
-            final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
-            {
-                projectedVars.add(Var.var("s"));
- 
-            }
-
-            serviceNode.setExprImage(exprImage);
-            serviceNode.setPrefixDecls(prefixDecls);
-            serviceNode.setProjectedVars(projectedVars);
-        }
-
-        final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
-       
-        { 
-        	final MapBindingSet bset = new MapBindingSet();
-            final EmbergraphURI tmp1 = valueFactory.createURI("p:p1");
-            // @see https://jira.blazegraph.com/browse/BLZG-1951 (Strings in federated query not escaped)
-            // this literal tests proper escaping of string literals in prepared SPARQL.
-            final EmbergraphLiteral tmp2 = valueFactory.createLiteral("\"lit1\"");
-            bset.addBinding("p", tmp1);
-            bset.addBinding("o", tmp2);
-            bindingSets.add(bset);
-        }
-        
-        final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets
-                .size()]);
-
-        final RemoteServiceOptions options = new RemoteServiceOptions();        
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
-
-        IRemoteSparqlQueryBuilder queryBuilder = RemoteSparqlBuilderFactory.get(options, serviceNode, a);
-        
-        final String actualQueryStrVersion_10 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
-        
-        final String expectedSparqlVersion_10 = new String("SELECT  ?s " + 
-											        		"WHERE { " +
-											        		"FILTER ( sameTerm( ?p, <p:p1>) ). " +
-											        		"FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). " +
-											        		" ?s ?p ?o " + // 
-											        		"} ").replaceAll("\\s+", " ");
-        
-        assertEquals(expectedSparqlVersion_10, actualQueryStrVersion_10);
-
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
-
-        queryBuilder = RemoteSparqlBuilderFactory.get(options, serviceNode, a);
-        
-        final String actualQueryStrVersion_11 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
-        
-        final String expectedSparqlVersion_11 = new String("SELECT  ?s " +
-											        		"WHERE {" +
-											        		" ?s ?p ?o " + // 
-											        		"} " +
-											        		"VALUES ( ?p ?o) { " +
-											        		"( <p:p1> \"\\\"lit1\\\"\" ) " +
-											        		"} ").replaceAll("\\s+", " ");
-        
-        assertEquals(expectedSparqlVersion_11, actualQueryStrVersion_11);
-    
-        options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
-        
-        queryBuilder = RemoteSparqlBuilderFactory.get(options, serviceNode, a);
-        
-        final String actualQueryStrVersion_11_DRAFT_BINDINGS = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
-        
-        final String expectedSparqlVersion_11_DRAFT_BINDINGS = new String("SELECT  ?s " +
-														        		"WHERE {" +
-														        		" ?s ?p ?o " + // 
-														        		"} " +
-														        		"BINDINGS ?p ?o { " +
-														        		"( <p:p1> \"\\\"lit1\\\"\" ) " +
-														        		"} ").replaceAll("\\s+", " ");
-        
-        assertEquals(actualQueryStrVersion_11_DRAFT_BINDINGS, expectedSparqlVersion_11_DRAFT_BINDINGS);
- 
+    final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
+    {
+      groupNode.addChild(
+          new StatementPatternNode(new VarNode("s"), new VarNode("p"), new VarNode("o")));
     }
 
+    final ServiceNode serviceNode =
+        new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
+
+    {
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      {
+        projectedVars.add(Var.var("s"));
+      }
+
+      serviceNode.setExprImage(exprImage);
+      serviceNode.setPrefixDecls(prefixDecls);
+      serviceNode.setProjectedVars(projectedVars);
+    }
+
+    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      final EmbergraphURI tmp1 = valueFactory.createURI("p:p1");
+      // @see https://jira.blazegraph.com/browse/BLZG-1951 (Strings in federated query not escaped)
+      // this literal tests proper escaping of string literals in prepared SPARQL.
+      final EmbergraphLiteral tmp2 = valueFactory.createLiteral("\"lit1\"");
+      bset.addBinding("p", tmp1);
+      bset.addBinding("o", tmp2);
+      bindingSets.add(bset);
+    }
+
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+
+    final RemoteServiceOptions options = new RemoteServiceOptions();
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_10);
+
+    IRemoteSparqlQueryBuilder queryBuilder =
+        RemoteSparqlBuilderFactory.get(options, serviceNode, a);
+
+    final String actualQueryStrVersion_10 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
+
+    final String expectedSparqlVersion_10 =
+        new String(
+                "SELECT  ?s "
+                    + "WHERE { "
+                    + "FILTER ( sameTerm( ?p, <p:p1>) ). "
+                    + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
+                    + " ?s ?p ?o "
+                    + //
+                    "} ")
+            .replaceAll("\\s+", " ");
+
+    assertEquals(expectedSparqlVersion_10, actualQueryStrVersion_10);
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11);
+
+    queryBuilder = RemoteSparqlBuilderFactory.get(options, serviceNode, a);
+
+    final String actualQueryStrVersion_11 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
+
+    final String expectedSparqlVersion_11 =
+        new String(
+                "SELECT  ?s "
+                    + "WHERE {"
+                    + " ?s ?p ?o "
+                    + //
+                    "} "
+                    + "VALUES ( ?p ?o) { "
+                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                    + "} ")
+            .replaceAll("\\s+", " ");
+
+    assertEquals(expectedSparqlVersion_11, actualQueryStrVersion_11);
+
+    options.setSPARQLVersion(SPARQLVersion.SPARQL_11_DRAFT_BINDINGS);
+
+    queryBuilder = RemoteSparqlBuilderFactory.get(options, serviceNode, a);
+
+    final String actualQueryStrVersion_11_DRAFT_BINDINGS =
+        queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
+
+    final String expectedSparqlVersion_11_DRAFT_BINDINGS =
+        new String(
+                "SELECT  ?s "
+                    + "WHERE {"
+                    + " ?s ?p ?o "
+                    + //
+                    "} "
+                    + "BINDINGS ?p ?o { "
+                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                    + "} ")
+            .replaceAll("\\s+", " ");
+
+    assertEquals(actualQueryStrVersion_11_DRAFT_BINDINGS, expectedSparqlVersion_11_DRAFT_BINDINGS);
+  }
 }

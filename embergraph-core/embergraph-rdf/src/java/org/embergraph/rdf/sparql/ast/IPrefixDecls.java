@@ -25,40 +25,34 @@ import java.util.Map;
 
 /**
  * Interface for prefix declarations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IPrefixDecls {
 
-    public interface Annotations {
-
-        /**
-         * The namespace prefix declaration map. This is a {@link Map} with
-         * {@link String} keys (prefix) and {@link String} values (the uri
-         * associated with that prefix).
-         */
-        String PREFIX_DECLS = "prefixDecls";
-
-    }
-    
-    /**
-     * The namespace prefix declarations map. This is a {@link Map} with
-     * {@link String} keys (prefix) and {@link String} values (the uri
-     * associated with that prefix).
-     * 
-     * @return The namespace prefix declarations map. If this annotation was not
-     *         set, then an empty map will be returned. The returned map is
-     *         immutable to preserve the general contract for notification on
-     *         mutation.
-     */
-    public Map<String, String> getPrefixDecls();
+  public interface Annotations {
 
     /**
-     * Set the namespace prefix declarations map. This is a {@link Map} with
-     * {@link String} keys (prefix) and {@link String} values (the uri
-     * associated with that prefix).
+     * The namespace prefix declaration map. This is a {@link Map} with {@link String} keys (prefix)
+     * and {@link String} values (the uri associated with that prefix).
      */
-    void setPrefixDecls(final Map<String, String> prefixDecls);
-    
+    String PREFIX_DECLS = "prefixDecls";
+  }
+
+  /**
+   * The namespace prefix declarations map. This is a {@link Map} with {@link String} keys (prefix)
+   * and {@link String} values (the uri associated with that prefix).
+   *
+   * @return The namespace prefix declarations map. If this annotation was not set, then an empty
+   *     map will be returned. The returned map is immutable to preserve the general contract for
+   *     notification on mutation.
+   */
+  public Map<String, String> getPrefixDecls();
+
+  /**
+   * Set the namespace prefix declarations map. This is a {@link Map} with {@link String} keys
+   * (prefix) and {@link String} values (the uri associated with that prefix).
+   */
+  void setPrefixDecls(final Map<String, String> prefixDecls);
 }

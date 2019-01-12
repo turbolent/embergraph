@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx;
 
 import java.util.concurrent.TimeUnit;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.resources.StaleLocatorException;
@@ -32,146 +31,145 @@ import org.embergraph.util.concurrent.TaskCounters;
 
 /**
  * Counters used for sync RPC on scale-out indices.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class IndexSyncRPCCounters extends TaskCounters {
 
-    /**
-     * 
-     */
-    public IndexSyncRPCCounters() {
-    }
+  /** */
+  public IndexSyncRPCCounters() {}
 
-    /**
-     * The #of redirects ({@link StaleLocatorException}s) that were handled.
-     */
-    public long redirectCount = 0L;
+  /** The #of redirects ({@link StaleLocatorException}s) that were handled. */
+  public long redirectCount = 0L;
 
-    /**
-     * The #of requests which have been submitted. This counter is incremented
-     * when the task is actually dispatched via RMI to the data service so it
-     * will not reflect tasks which are in the client's queue.
-     */
-    public long requestCount = 0L;
-    
-    /**
-     * The #of elements in a synchronous RPC request. Single point requests are
-     * reported as ONE (1) element out. Key-range requests are NOT reported
-     * under this counter (they correspond to iterators and range counts).
-     * Key-array requests report the #of tuples in the request (they correspond
-     * to batch read and write operations).
-     */
-    public long elementsOut = 0L;
+  /**
+   * The #of requests which have been submitted. This counter is incremented when the task is
+   * actually dispatched via RMI to the data service so it will not reflect tasks which are in the
+   * client's queue.
+   */
+  public long requestCount = 0L;
 
-    /**
-     * #Of point requests issued (a single key).
-     */
-    public long pointRequestCount;
+  /**
+   * The #of elements in a synchronous RPC request. Single point requests are reported as ONE (1)
+   * element out. Key-range requests are NOT reported under this counter (they correspond to
+   * iterators and range counts). Key-array requests report the #of tuples in the request (they
+   * correspond to batch read and write operations).
+   */
+  public long elementsOut = 0L;
 
-    /** #of key-range requests issued (generally these are range counts). */
-    public long keyRangeRequestCount;
+  /** #Of point requests issued (a single key). */
+  public long pointRequestCount;
 
-    /** #of key-array requests issued (batch read or write operations). */
-    public long keyArrayRequestCount;
+  /** #of key-range requests issued (generally these are range counts). */
+  public long keyRangeRequestCount;
 
-    /**
-     * #of read-only requests.
-     */
-    public long readOnlyRequestCount;
-    
-    /**
-     * The average #of nanoseconds per request.
-     */
-    public double getAverageNanosPerRequest() {
+  /** #of key-array requests issued (batch read or write operations). */
+  public long keyArrayRequestCount;
 
-        return (requestCount == 0L ? 0 : serviceNanoTime.get()
-                / (double) requestCount);
+  /** #of read-only requests. */
+  public long readOnlyRequestCount;
 
-    }
+  /** The average #of nanoseconds per request. */
+  public double getAverageNanosPerRequest() {
 
-    /**
-     * The average #of elements (tuples) per request. Because
-     * {@link #elementsOut} and {@link #requestCount} are incremented when the
-     * request is submitted, this reflects both the completed requests and any
-     * requests which might be outstanding.
-     */
-    public double getAverageElementsPerRequest() {
+    return (requestCount == 0L ? 0 : serviceNanoTime.get() / (double) requestCount);
+  }
 
-        return (requestCount == 0L ? 0 : elementsOut / (double) requestCount);
+  /**
+   * The average #of elements (tuples) per request. Because {@link #elementsOut} and {@link
+   * #requestCount} are incremented when the request is submitted, this reflects both the completed
+   * requests and any requests which might be outstanding.
+   */
+  public double getAverageElementsPerRequest() {
 
-    }
+    return (requestCount == 0L ? 0 : elementsOut / (double) requestCount);
+  }
 
-    public CounterSet getCounters() {
-        
-        final CounterSet t = super.getCounters();
-        
-        t.addCounter("redirectCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(redirectCount);
-            }
+  public CounterSet getCounters() {
+
+    final CounterSet t = super.getCounters();
+
+    t.addCounter(
+        "redirectCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(redirectCount);
+          }
         });
 
-        t.addCounter("requestCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(requestCount);
-            }
+    t.addCounter(
+        "requestCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(requestCount);
+          }
         });
 
-        t.addCounter("pointRequestCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(pointRequestCount);
-            }
+    t.addCounter(
+        "pointRequestCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(pointRequestCount);
+          }
         });
-        t.addCounter("keyRangeRequestCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(keyRangeRequestCount);
-            }
-        });
-
-        t.addCounter("keyArrayRequestCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(keyArrayRequestCount);
-            }
+    t.addCounter(
+        "keyRangeRequestCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(keyRangeRequestCount);
+          }
         });
 
-        t.addCounter("readOnlyRequestCount", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(readOnlyRequestCount);
-            }
+    t.addCounter(
+        "keyArrayRequestCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(keyArrayRequestCount);
+          }
         });
 
-        t.addCounter("elementsOut", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(elementsOut);
-            }
+    t.addCounter(
+        "readOnlyRequestCount",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(readOnlyRequestCount);
+          }
         });
 
-        t.addCounter("averageMillisPerRequest", new Instrument<Long>() {
-            @Override
-            protected void sample() {
-                setValue(TimeUnit.NANOSECONDS
-                        .toMillis((long) getAverageNanosPerRequest()));
-            }
+    t.addCounter(
+        "elementsOut",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(elementsOut);
+          }
         });
 
-        t.addCounter("averageElementsPerRequest", new Instrument<Double>() {
-            @Override
-            protected void sample() {
-                setValue(getAverageElementsPerRequest());
-            }
+    t.addCounter(
+        "averageMillisPerRequest",
+        new Instrument<Long>() {
+          @Override
+          protected void sample() {
+            setValue(TimeUnit.NANOSECONDS.toMillis((long) getAverageNanosPerRequest()));
+          }
         });
 
-        return t;
-        
-    }
-    
+    t.addCounter(
+        "averageElementsPerRequest",
+        new Instrument<Double>() {
+          @Override
+          protected void sample() {
+            setValue(getAverageElementsPerRequest());
+          }
+        });
+
+    return t;
+  }
 }

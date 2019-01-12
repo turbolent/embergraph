@@ -22,35 +22,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.embergraph.service.Split;
 
 /**
- * Aggregates the value of an {@link Integer} result, making the sum available
- * as a {@link Long} integer (to help prevent overflow).
- * 
+ * Aggregates the value of an {@link Integer} result, making the sum available as a {@link Long}
+ * integer (to help prevent overflow).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class IntegerAggregator implements IResultHandler<Integer, Long> {
 
-    private final AtomicLong counter = new AtomicLong(0);
+  private final AtomicLong counter = new AtomicLong(0);
 
-    public IntegerAggregator() {
-        
-    }
+  public IntegerAggregator() {}
 
-    @Override
-    public void aggregate(final Integer result, final Split split) {
+  @Override
+  public void aggregate(final Integer result, final Split split) {
 
-        counter.addAndGet(result.intValue());
+    counter.addAndGet(result.intValue());
+  }
 
-    }
+  @Override
+  public Long getResult() {
 
-    @Override
-    public Long getResult() {
-
-        return counter.get();
-
-    }
-
+    return counter.get();
+  }
 }

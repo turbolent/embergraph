@@ -22,44 +22,38 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
- * Base class for abstract services, providing base implementation for
- * getRequiredBound and getDesiredBound methods (which can be overridden
- * by subclasses).
- * 
+ * Base class for abstract services, providing base implementation for getRequiredBound and
+ * getDesiredBound methods (which can be overridden by subclasses).
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public abstract class AbstractServiceFactoryBase implements ServiceFactory {
 
-   /**
-    * Default implementation for method
-    * {@link ServiceFactory#getRequiredBound(ServiceNode)}, allowing for
-    * simple services where all variables used inside the service are
-    * considered "outgoing". As a consequence, when building upon this
-    * default implementation, the Service will be executed *before* the
-    * variables used inside the Service body are bound.
-    */
-   @Override
-   public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
-      return new HashSet<IVariable<?>>();
-   }
+  /**
+   * Default implementation for method {@link ServiceFactory#getRequiredBound(ServiceNode)},
+   * allowing for simple services where all variables used inside the service are considered
+   * "outgoing". As a consequence, when building upon this default implementation, the Service will
+   * be executed *before* the variables used inside the Service body are bound.
+   */
+  @Override
+  public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
+    return new HashSet<IVariable<?>>();
+  }
 
-   /**
-    * Default implementation for method
-    * {@link ServiceFactory#getDesiredBound(ServiceNode)}, allowing for
-    * simple services where all variables used inside the service are
-    * considered "outgoing". As a consequence, when building upon this
-    * default implementation, the Service will be executed *before* the
-    * variables used inside the Service body are bound.
-    */
-   @Override
-   public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode) {
-      return new HashSet<IVariable<?>>();       
-   }    
+  /**
+   * Default implementation for method {@link ServiceFactory#getDesiredBound(ServiceNode)}, allowing
+   * for simple services where all variables used inside the service are considered "outgoing". As a
+   * consequence, when building upon this default implementation, the Service will be executed
+   * *before* the variables used inside the Service body are bound.
+   */
+  @Override
+  public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode) {
+    return new HashSet<IVariable<?>>();
+  }
 }

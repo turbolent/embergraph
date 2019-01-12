@@ -17,19 +17,16 @@ package cutthecrap.utils.striterators;
 
 /**
  * Interface for access to named property values.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPropertySet {
 
-    /**
-     * Return the value of a named property.
-     * 
-     * @param name
-     *            The property name.
-     *            
-     * @return The property value.
-     */
-    Object getProperty(String name);
-
+  /**
+   * Return the value of a named property.
+   *
+   * @param name The property name.
+   * @return The property value.
+   */
+  Object getProperty(String name);
 }

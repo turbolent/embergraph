@@ -22,330 +22,302 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import junit.framework.TestCase2;
-
+import org.embergraph.counters.format.CounterSetFormat;
 import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.counters.format.CounterSetFormat;
-
 /**
  * Test suite for content negotiation helper class.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestConneg extends TestCase2 {
 
-	
-//	static {
-//		
-//		new EmbergraphSPARQLResultsJSONParserFactory();
-//		
-//	}
-	
-    /**
-     * 
-     */
-    public TestConneg() {
-        
+  //	static {
+  //
+  //		new EmbergraphSPARQLResultsJSONParserFactory();
+  //
+  //	}
+
+  /** */
+  public TestConneg() {}
+
+  /** @param name */
+  public TestConneg(final String name) {
+
+    super(name);
+  }
+
+  public void test_conneg_no_Accept_headser() {
+
+    final String acceptStr = null;
+
+    final ConnegUtil util = new ConnegUtil(acceptStr);
+
+    assertNull(util.getRDFFormat());
+
+    assertEquals(RDFFormat.N3, util.getRDFFormat(RDFFormat.N3));
+  }
+
+  public void test_conneg_empty_Accept_headser() {
+
+    final String acceptStr = "";
+
+    final ConnegUtil util = new ConnegUtil(acceptStr);
+
+    assertNull(util.getRDFFormat());
+
+    assertEquals(RDFFormat.N3, util.getRDFFormat(RDFFormat.N3));
+  }
+
+  /*
+   * Tests where the best format is an RDF data interchange format.
+   */
+
+  /** Test the default mime type for each {@link RDFFormat}. */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_conneg_rdf_data_01() {
+
+    for (RDFFormat format : RDFFormat.values()) {
+
+      final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
+
+      assertEquals(format.getName(), format, util.getRDFFormat());
+
+      if (!format.getName().equals("JSON")) {
+
+        assertNull(format.getName(), util.getTupleQueryResultFormat());
+      }
+
+      assertSameArray(
+          new ConnegScore[] {new ConnegScore(1f, format)}, util.getScores(RDFFormat.class));
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestConneg(final String name) {
+  /*
+   * Tests where the best format is a SPARQL result set interchange format.
+   */
 
-        super(name);
-        
+  /** Test the default mime type for each {@link TupleQueryResultFormat}. */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_conneg_sparql_result_set_01() {
+
+    for (TupleQueryResultFormat format : TupleQueryResultFormat.values()) {
+
+      final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
+
+      if (!format.getName().equals("SPARQL/JSON")) {
+
+        assertNull(format.getName(), util.getRDFFormat());
+      }
+
+      assertEquals(format.getName(), format, util.getTupleQueryResultFormat());
+
+      assertSameArray(
+          new ConnegScore[] {new ConnegScore(1f, format)},
+          util.getScores(TupleQueryResultFormat.class));
     }
+  }
 
-    public void test_conneg_no_Accept_headser() {
-    
-        final String acceptStr = null;
+  /** Test with multiple values in the accept header. */
+  public void test_conneg_sparql_result_set_02() {
 
-        final ConnegUtil util = new ConnegUtil(acceptStr);
+    final String acceptStr =
+        "application/x-binary-rdf-results-table;q=1,application/sparql-results+xml;q=1";
 
-        assertNull(util.getRDFFormat());
+    final ConnegUtil util = new ConnegUtil(acceptStr);
 
-        assertEquals(RDFFormat.N3, util.getRDFFormat(RDFFormat.N3));
+    assertNull(util.getRDFFormat());
 
+    assertSameArray(
+        new ConnegScore[] {
+          new ConnegScore(1f, TupleQueryResultFormat.BINARY),
+          new ConnegScore(1f, TupleQueryResultFormat.SPARQL),
+        },
+        util.getScores(TupleQueryResultFormat.class));
+
+    assertEquals(TupleQueryResultFormat.BINARY, util.getTupleQueryResultFormat());
+  }
+
+  public void test_conneg_sparql_result_set_03() {
+
+    final String acceptStr =
+        "text/xhtml,application/x-binary-rdf-results-table;q=.3,application/sparql-results+xml;q=.5";
+
+    final ConnegUtil util = new ConnegUtil(acceptStr);
+
+    assertNull(util.getRDFFormat());
+
+    assertSameArray(
+        new ConnegScore[] {
+          new ConnegScore(.5f, TupleQueryResultFormat.SPARQL),
+          new ConnegScore(.3f, TupleQueryResultFormat.BINARY),
+        },
+        util.getScores(TupleQueryResultFormat.class));
+
+    assertEquals(TupleQueryResultFormat.SPARQL, util.getTupleQueryResultFormat());
+  }
+
+  public void test_conneg_sparql_result_set_03b() {
+
+    final String acceptStr =
+        "text/xhtml,application/x-binary-rdf-results-table;q=.4,application/sparql-results+xml;q=.2";
+
+    final ConnegUtil util = new ConnegUtil(acceptStr);
+
+    assertNull(util.getRDFFormat());
+
+    assertSameArray(
+        new ConnegScore[] {
+          new ConnegScore(.4f, TupleQueryResultFormat.BINARY),
+          new ConnegScore(.2f, TupleQueryResultFormat.SPARQL),
+        },
+        util.getScores(TupleQueryResultFormat.class));
+
+    assertEquals(TupleQueryResultFormat.BINARY, util.getTupleQueryResultFormat());
+  }
+
+  /** Test the default mime type for each {@link BooleanQueryResultFormat}. */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_conneg_sparql_boolean_result_set_01() {
+
+    for (BooleanQueryResultFormat format : BooleanQueryResultFormat.values()) {
+
+      final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
+
+      if (!format.getName().equals("SPARQL/JSON")) {
+
+        assertNull(format.getName(), util.getRDFFormat());
+      }
+
+      assertEquals(format.getName(), format, util.getBooleanQueryResultFormat());
+
+      assertSameArray(
+          new ConnegScore[] {new ConnegScore(1f, format)},
+          util.getScores(BooleanQueryResultFormat.class));
     }
+  }
 
-    public void test_conneg_empty_Accept_headser() {
-        
-        final String acceptStr = "";
+  public void test_conneg_ask_json() {
 
-        final ConnegUtil util = new ConnegUtil(acceptStr);
+    final ConnegUtil util = new ConnegUtil(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
 
-        assertNull(util.getRDFFormat());
+    final BooleanQueryResultFormat format =
+        util.getBooleanQueryResultFormat(BooleanQueryResultFormat.SPARQL);
 
-        assertEquals(RDFFormat.N3, util.getRDFFormat(RDFFormat.N3));
+    assertFalse(format.toString(), format.toString().toLowerCase().contains("xml"));
+  }
 
-    }
+  public void test_conneg_counterSet_application_xml() {
 
-    /*
-     * Tests where the best format is an RDF data interchange format.
-     */
+    final String acceptStr = "application/xml";
 
-    /** Test the default mime type for each {@link RDFFormat}. */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_conneg_rdf_data_01() {
+    final ConnegUtil util = new ConnegUtil(acceptStr);
 
-        for (RDFFormat format : RDFFormat.values()) {
+    final CounterSetFormat format = util.getCounterSetFormat();
 
-            final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
+    assertEquals(CounterSetFormat.XML, format);
+  }
 
-            assertEquals(format.getName(), format, util.getRDFFormat());
+  public void test_conneg_counterSet_text_plain() {
 
-            if (!format.getName().equals("JSON")) {
+    final String acceptStr = "text/plain";
 
-                assertNull(format.getName(), util.getTupleQueryResultFormat());
+    final ConnegUtil util = new ConnegUtil(acceptStr);
 
-            }
+    final CounterSetFormat format = util.getCounterSetFormat();
 
-            assertSameArray(new ConnegScore[] {
-                    new ConnegScore(1f, format) },
-                    util.getScores(RDFFormat.class));
+    assertEquals(CounterSetFormat.TEXT, format);
+  }
 
-        }
+  public void test_conneg_counterSet_text_html() {
 
-    }
+    final String acceptStr = "text/html";
 
-    /*
-     * Tests where the best format is a SPARQL result set interchange format.
-     */
+    final ConnegUtil util = new ConnegUtil(acceptStr);
 
-    /** Test the default mime type for each {@link TupleQueryResultFormat}. */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_conneg_sparql_result_set_01() {
+    final CounterSetFormat format = util.getCounterSetFormat();
 
-        for (TupleQueryResultFormat format : TupleQueryResultFormat.values()) {
+    assertEquals(CounterSetFormat.HTML, format);
+  }
 
-            final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
+  public void test_conneg_counterSet_browser1() {
 
-            if (!format.getName().equals("SPARQL/JSON")) {
-                
-            	assertNull(format.getName(), util.getRDFFormat());
+    final String acceptStr = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,";
 
-            }
-            
-            assertEquals(format.getName(), format,
-                    util.getTupleQueryResultFormat());
+    final ConnegUtil util = new ConnegUtil(acceptStr);
 
-            assertSameArray(new ConnegScore[] {
-                    new ConnegScore(1f, format) },
-                    util.getScores(TupleQueryResultFormat.class));
+    //        System.out.println(Arrays.toString(util.getScores(CounterSetFormat.class)));
 
-        }
+    assertSameArray(
+        new ConnegScore[] {
+          new ConnegScore(1f, CounterSetFormat.HTML), new ConnegScore(.9f, CounterSetFormat.XML),
+        },
+        util.getScores(CounterSetFormat.class));
 
-    }
+    final CounterSetFormat format = util.getCounterSetFormat();
 
-    /**
-     * Test with multiple values in the accept header.
-     */
-    public void test_conneg_sparql_result_set_02() {
+    assertEquals(CounterSetFormat.HTML, format);
+  }
 
-        final String acceptStr = "application/x-binary-rdf-results-table;q=1,application/sparql-results+xml;q=1";
+  public void test_connect_getMimeTypeForQueryParameter2() {
+    final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_JSON_SHORT;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
+    final String acceptHeader = null;
 
-        final ConnegUtil util = new ConnegUtil(acceptStr);
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
 
-        assertNull(util.getRDFFormat());
+  public void test_connect_getMimeTypeForQueryParameter3() {
+    final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
+    final String acceptHeader = null;
 
-        assertSameArray(new ConnegScore[] {
-                new ConnegScore(1f, TupleQueryResultFormat.BINARY),
-                new ConnegScore(1f, TupleQueryResultFormat.SPARQL),
-                },
-                util.getScores(TupleQueryResultFormat.class));
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
 
-        assertEquals(TupleQueryResultFormat.BINARY,
-                util.getTupleQueryResultFormat());
+  public void test_connect_getMimeTypeForQueryParameter4() {
+    final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML_SHORT;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
+    final String acceptHeader = null;
 
-    }
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
 
-    public void test_conneg_sparql_result_set_03() {
+  public void test_connect_getMimeTypeForQueryParameter5() {
+    final String outputFormat = null;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
+    final String acceptHeader = null;
 
-        final String acceptStr = "text/xhtml,application/x-binary-rdf-results-table;q=.3,application/sparql-results+xml;q=.5";
-
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-        assertNull(util.getRDFFormat());
-
-        assertSameArray(new ConnegScore[] {
-                new ConnegScore(.5f, TupleQueryResultFormat.SPARQL),
-                new ConnegScore(.3f, TupleQueryResultFormat.BINARY),
-                },
-                util.getScores(TupleQueryResultFormat.class));
-
-        assertEquals(TupleQueryResultFormat.SPARQL,
-                util.getTupleQueryResultFormat());
-
-    }
-
-    public void test_conneg_sparql_result_set_03b() {
-
-        final String acceptStr = "text/xhtml,application/x-binary-rdf-results-table;q=.4,application/sparql-results+xml;q=.2";
-
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-        assertNull(util.getRDFFormat());
-
-        assertSameArray(new ConnegScore[] {
-                new ConnegScore(.4f, TupleQueryResultFormat.BINARY),
-                new ConnegScore(.2f, TupleQueryResultFormat.SPARQL),
-                },
-                util.getScores(TupleQueryResultFormat.class));
-
-        assertEquals(TupleQueryResultFormat.BINARY,
-                util.getTupleQueryResultFormat());
-
-    }
-
-    /** Test the default mime type for each {@link BooleanQueryResultFormat}. */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_conneg_sparql_boolean_result_set_01() {
-
-        for (BooleanQueryResultFormat format : BooleanQueryResultFormat.values()) {
-
-            final ConnegUtil util = new ConnegUtil(format.getDefaultMIMEType());
-
-            if (!format.getName().equals("SPARQL/JSON")) {
-                
-            	assertNull(format.getName(), util.getRDFFormat());
-            	
-            }
-
-            assertEquals(format.getName(), format,
-                    util.getBooleanQueryResultFormat());
-
-            assertSameArray(new ConnegScore[] {
-                    new ConnegScore(1f, format) },
-                    util.getScores(BooleanQueryResultFormat.class));
-
-        }
-
-    }
-    
-    public void test_conneg_ask_json() {
-
-        final ConnegUtil util = new ConnegUtil(
-                EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
-
-        final BooleanQueryResultFormat format = util
-                .getBooleanQueryResultFormat(BooleanQueryResultFormat.SPARQL);
-
-        assertFalse(format.toString(), format.toString().toLowerCase()
-                .contains("xml"));
-
-    }
-
-    public void test_conneg_counterSet_application_xml() {
-        
-        final String acceptStr = "application/xml";
-
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-        final CounterSetFormat format = util.getCounterSetFormat();
-
-        assertEquals(CounterSetFormat.XML, format);
-
-    }
-    
-    public void test_conneg_counterSet_text_plain() {
-        
-        final String acceptStr = "text/plain";
-
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-        final CounterSetFormat format = util.getCounterSetFormat();
-
-        assertEquals(CounterSetFormat.TEXT, format);
-
-    }
-    
-    public void test_conneg_counterSet_text_html() {
-        
-        final String acceptStr = "text/html";
-
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-        final CounterSetFormat format = util.getCounterSetFormat();
-
-        assertEquals(CounterSetFormat.HTML, format);
-
-    }
-
-    public void test_conneg_counterSet_browser1() {
-
-        final String acceptStr = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,";
-        
-        final ConnegUtil util = new ConnegUtil(acceptStr);
-
-//        System.out.println(Arrays.toString(util.getScores(CounterSetFormat.class)));
-        
-        assertSameArray(new ConnegScore[] {
-                new ConnegScore(1f, CounterSetFormat.HTML),
-                new ConnegScore(.9f, CounterSetFormat.XML),
-                },
-                util.getScores(CounterSetFormat.class));
-
-        final CounterSetFormat format = util.getCounterSetFormat();
-
-        assertEquals(CounterSetFormat.HTML, format);
-
-    }
-    
-	public void test_connect_getMimeTypeForQueryParameter2() {
-		final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_JSON_SHORT;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
-		final String acceptHeader = null;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-	
-	public void test_connect_getMimeTypeForQueryParameter3() {
-		final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
-		final String acceptHeader = null;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-	
-	public void test_connect_getMimeTypeForQueryParameter4() {
-		final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML_SHORT;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
-		final String acceptHeader = null;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-	
-	public void test_connect_getMimeTypeForQueryParameter5() {
-		final String outputFormat = null;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
-		final String acceptHeader = null;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-	
-	public void test_connect_getMimeTypeForQueryParameter6() {
-		final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_JSON;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
-		final String acceptHeader = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-	
-	public void test_connect_getMimeTypeForQueryParameter7() {
-		final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML;
-		final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
-		final String acceptHeader = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
-
-		assertEquals(ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat,
-				acceptHeader), correctResult);
-	}
-    
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
+
+  public void test_connect_getMimeTypeForQueryParameter6() {
+    final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_JSON;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
+    final String acceptHeader = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
+
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
+
+  public void test_connect_getMimeTypeForQueryParameter7() {
+    final String outputFormat = EmbergraphRDFServlet.OUTPUT_FORMAT_XML;
+    final String correctResult = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
+    final String acceptHeader = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
+
+    assertEquals(
+        ConnegUtil.getMimeTypeForQueryParameterQueryRequest(outputFormat, acceptHeader),
+        correctResult);
+  }
 }

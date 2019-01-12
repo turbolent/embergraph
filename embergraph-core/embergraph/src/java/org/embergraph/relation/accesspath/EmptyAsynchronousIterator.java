@@ -25,24 +25,22 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * An empty {@link IAsynchronousIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyAsynchronousIterator<E> extends EmptyCloseableIterator<E>
-        implements IAsynchronousIterator<E> {
+    implements IAsynchronousIterator<E> {
 
-    public boolean isExhausted() {
-        return true;
-    }
+  public boolean isExhausted() {
+    return true;
+  }
 
-    public boolean hasNext(long timeout, TimeUnit unit)
-            throws InterruptedException {
-        return false;
-    }
+  public boolean hasNext(long timeout, TimeUnit unit) throws InterruptedException {
+    return false;
+  }
 
-    public E next(long timeout, TimeUnit unit) throws InterruptedException {
-        return null;
-    }
-
+  public E next(long timeout, TimeUnit unit) throws InterruptedException {
+    return null;
+  }
 }

@@ -23,7 +23,6 @@ package org.embergraph.rdf.internal.encoder;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.Var;
@@ -34,133 +33,116 @@ import org.embergraph.rdf.internal.IV;
 
 /**
  * Test suite for {@link IVSolutionSetEncoder} and {@link IVSolutionSetDecoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestIVSolutionSetEncoder extends AbstractBindingSetEncoderTestCase {
 
-    /**
-     * 
-     */
-    public TestIVSolutionSetEncoder() {
+  /** */
+  public TestIVSolutionSetEncoder() {}
+
+  /** @param name */
+  public TestIVSolutionSetEncoder(String name) {
+    super(name);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+
+    super.setUp();
+
+    // The encoder under test.
+    encoder = new IVSolutionSetEncoder();
+
+    // The decoder under test (same object as the encoder).
+    decoder = new IVSolutionSetDecoder();
+  }
+
+  //    protected void tearDown() throws Exception {
+  //
+  //        super.tearDown();
+  //
+  //        // Clear references.
+  //        encoder.release();
+  //        encoder = null;
+  //        decoder = null;
+  //
+  //    }
+
+  /** Unit test of the stream-oriented API. */
+  @SuppressWarnings("rawtypes")
+  public void test_streamAPI() {
+
+    final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
+
+    {
+      final IBindingSet expected = new ListBindingSet();
+      expected.set(Var.var("x"), new Constant<IV>(termId));
+
+      expectedSolutions.add(expected);
     }
 
-    /**
-     * @param name
-     */
-    public TestIVSolutionSetEncoder(String name) {
-        super(name);
+    {
+      final IBindingSet expected = new ListBindingSet();
+      expected.set(Var.var("x"), new Constant<IV>(termId));
+      expected.set(Var.var("y"), new Constant<IV>(blobIV));
+
+      expectedSolutions.add(expected);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-     
-        super.setUp();
+    doEncodeDecodeTest(expectedSolutions);
+  }
 
-        // The encoder under test.
-        encoder = new IVSolutionSetEncoder();
-        
-        // The decoder under test (same object as the encoder).
-        decoder = new IVSolutionSetDecoder();
-        
+  /** Multiple solutions where an empty solution appears in the middle of the sequence. */
+  @SuppressWarnings("rawtypes")
+  public void test_streamAPI2() {
+
+    final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
+    {
+      final IBindingSet expected = new ListBindingSet();
+      expected.set(Var.var("x"), new Constant<IV>(termId));
+
+      expectedSolutions.add(expected);
     }
 
-//    protected void tearDown() throws Exception {
-//        
-//        super.tearDown();
-//        
-//        // Clear references.
-//        encoder.release();
-//        encoder = null;
-//        decoder = null;
-//        
-//    }
+    {
+      final IBindingSet expected = new ListBindingSet();
 
-    /**
-     * Unit test of the stream-oriented API.
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_streamAPI() {
-        
-        final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
-
-        {
-            final IBindingSet expected = new ListBindingSet();
-            expected.set(Var.var("x"), new Constant<IV>(termId));
-
-            expectedSolutions.add(expected);
-        }
-
-        {
-            final IBindingSet expected = new ListBindingSet();
-            expected.set(Var.var("x"), new Constant<IV>(termId));
-            expected.set(Var.var("y"), new Constant<IV>(blobIV));
-
-            expectedSolutions.add(expected);
-        }
-
-        doEncodeDecodeTest(expectedSolutions);
-
+      expectedSolutions.add(expected);
     }
 
-    /**
-     * Multiple solutions where an empty solution appears in the middle of the
-     * sequence.
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_streamAPI2() {
+    {
+      final IBindingSet expected = new ListBindingSet();
+      expected.set(Var.var("x"), new Constant<IV>(termId));
+      expected.set(Var.var("y"), new Constant<IV>(blobIV));
 
-        final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
-        {
-            final IBindingSet expected = new ListBindingSet();
-            expected.set(Var.var("x"), new Constant<IV>(termId));
-
-            expectedSolutions.add(expected);
-        }
-
-        {
-            final IBindingSet expected = new ListBindingSet();
-
-            expectedSolutions.add(expected);
-        }
-
-        {
-            final IBindingSet expected = new ListBindingSet();
-            expected.set(Var.var("x"), new Constant<IV>(termId));
-            expected.set(Var.var("y"), new Constant<IV>(blobIV));
-
-            expectedSolutions.add(expected);
-        }
-
-        doEncodeDecodeTest(expectedSolutions);
-
+      expectedSolutions.add(expected);
     }
 
-    protected void doEncodeDecodeTest(final List<IBindingSet> expectedSolutions) {
+    doEncodeDecodeTest(expectedSolutions);
+  }
 
-        final int nsolutions = expectedSolutions.size();
-        
-        final DataOutputBuffer out = new DataOutputBuffer();
-        
-        for (IBindingSet bset : expectedSolutions) {
-        
-            ((IVSolutionSetEncoder) encoder).encodeSolution(out, bset);
-            
-        }
-        
-        final DataInputBuffer in = new DataInputBuffer(out.array());
+  protected void doEncodeDecodeTest(final List<IBindingSet> expectedSolutions) {
 
-        for (int i = 0; i < nsolutions; i++) {
+    final int nsolutions = expectedSolutions.size();
 
-            final IBindingSet expected = expectedSolutions.get(i);
-            
-            final IBindingSet actual = ((IVSolutionSetDecoder) decoder)
-                    .decodeSolution(in, true/* resolveCachedValues */);
+    final DataOutputBuffer out = new DataOutputBuffer();
 
-            assertEquals(expected, actual, true/* testCache */);
-            
-        }
-        
+    for (IBindingSet bset : expectedSolutions) {
+
+      ((IVSolutionSetEncoder) encoder).encodeSolution(out, bset);
     }
-    
+
+    final DataInputBuffer in = new DataInputBuffer(out.array());
+
+    for (int i = 0; i < nsolutions; i++) {
+
+      final IBindingSet expected = expectedSolutions.get(i);
+
+      final IBindingSet actual =
+          ((IVSolutionSetDecoder) decoder).decodeSolution(in, true /* resolveCachedValues */);
+
+      assertEquals(expected, actual, true /* testCache */);
+    }
+  }
 }

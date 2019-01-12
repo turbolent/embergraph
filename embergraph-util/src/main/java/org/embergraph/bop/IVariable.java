@@ -25,29 +25,23 @@ package org.embergraph.bop;
 
 /**
  * A variable.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IVariable<E> extends IVariableOrConstant<E> {
 
-    /**
-     * The hash code of the name of the variable as reported by
-     * {@link IVariableOrConstant#getName()}
-     */
-    int hashCode();
+  /**
+   * The hash code of the name of the variable as reported by {@link IVariableOrConstant#getName()}
+   */
+  int hashCode();
 
-    /**
-     * Return <code>true</code> iff this is the special variable <code>*</code>
-     */
-    boolean isWildcard();
+  /** Return <code>true</code> iff this is the special variable <code>*</code> */
+  boolean isWildcard();
 
-	/** An empty {@link IVariable} array. */
-	IVariable<?>[] EMPTY = new IVariable[0];
-	
-	/**
-     * Return <code>true</code> iff this is an anonymous variable.
-	 */
-	boolean isAnonymous();
+  /** An empty {@link IVariable} array. */
+  IVariable<?>[] EMPTY = new IVariable[0];
 
+  /** Return <code>true</code> iff this is an anonymous variable. */
+  boolean isAnonymous();
 }

@@ -29,36 +29,36 @@ import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 
 /**
  * Query hint for disabling the DISTINCT SPO behavior for a CONSTRUCT QUERY.
- * 
+ *
  * @see ASTConstructIterator
  * @see https://jira.blazegraph.com/browse/BLZG-1341 (performance of dumping single graph)
  */
 final class ConstructDistinctSPOHint extends AbstractBooleanQueryHint {
 
-    protected ConstructDistinctSPOHint() {
-        super(QueryHints.CONSTRUCT_DISTINCT_SPO,
-                QueryHints.DEFAULT_CONSTRUCT_DISTINCT_SPO);
-    }
+  protected ConstructDistinctSPOHint() {
+    super(QueryHints.CONSTRUCT_DISTINCT_SPO, QueryHints.DEFAULT_CONSTRUCT_DISTINCT_SPO);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
 
-        if (scope == QueryHintScope.Query) {
+    if (scope == QueryHintScope.Query) {
 
-            context.constructDistinctSPO = value;
+      context.constructDistinctSPO = value;
 
-            return;
+      return;
 
-            // } else {
+      // } else {
 
-            // super.attach(context, scope, op, value);
-
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
+      // super.attach(context, scope, op, value);
 
     }
 
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

@@ -18,49 +18,48 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /**
- * <p>Example usage</p>
+ * Example usage
+ *
  * <pre>
  * Iterator src = new Filterator(old, new Filter(state)) {
- *		boolean isValid(Object object) {
- *			return object == m_state;
- *		}
+ * 	boolean isValid(Object object) {
+ * 		return object == m_state;
+ * 	}
  * } );
  * </pre>
  *
- * <p>The Filterator provide the protocol support to utilize Filter objects.</p>
+ * <p>The Filterator provide the protocol support to utilize Filter objects.
  */
-
 public class Filterator extends Prefetch {
 
-	final private Iterator m_src;
-	
-	final protected Object m_context;
-	final protected Filter m_filter;
+  private final Iterator m_src;
 
-	public Filterator(final Iterator src, final Object context, final Filter filter) {
-		m_src = src;
-		m_context = context;
-		m_filter = filter;
-	}
+  protected final Object m_context;
+  protected final Filter m_filter;
 
+  public Filterator(final Iterator src, final Object context, final Filter filter) {
+    m_src = src;
+    m_context = context;
+    m_filter = filter;
+  }
 
-	//-------------------------------------------------------------
+  // -------------------------------------------------------------
 
-	public void remove() {
-		m_src.remove();
-	}
+  public void remove() {
+    m_src.remove();
+  }
 
-	//-------------------------------------------------------------
+  // -------------------------------------------------------------
 
-	protected Object getNext() {
-		while (m_src.hasNext()) {
-			final Object next = m_src.next();
+  protected Object getNext() {
+    while (m_src.hasNext()) {
+      final Object next = m_src.next();
 
-			if (m_filter.isValid(next)) {
-				return next;
-			}
-		}
+      if (m_filter.isValid(next)) {
+        return next;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

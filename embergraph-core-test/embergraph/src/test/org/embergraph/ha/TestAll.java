@@ -27,45 +27,34 @@ import junit.framework.TestSuite;
 
 /**
  * Runs all tests for all journal implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-//	public static boolean s_includeHA = false;
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  //	public static boolean s_includeHA = false;
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("high availability");
+    final TestSuite suite = new TestSuite("high availability");
 
-        suite.addTest(org.embergraph.ha.msg.TestAll.suite());
-        
-        // Note: This was disabled in the dev branch.  Use HA Version when merging.
-        suite.addTest(org.embergraph.ha.halog.TestAll.suite());
-        
-//        if (s_includeHA)
-        	suite.addTest(org.embergraph.ha.pipeline.TestAll.suite());
-        
-        return suite;
+    suite.addTest(org.embergraph.ha.msg.TestAll.suite());
 
-    }
+    // Note: This was disabled in the dev branch.  Use HA Version when merging.
+    suite.addTest(org.embergraph.ha.halog.TestAll.suite());
 
+    //        if (s_includeHA)
+    suite.addTest(org.embergraph.ha.pipeline.TestAll.suite());
+
+    return suite;
+  }
 }

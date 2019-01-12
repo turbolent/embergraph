@@ -25,68 +25,50 @@ package org.embergraph.rdf.spo;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
 import org.embergraph.relation.accesspath.IBuffer;
 
 /**
- * A buffer for {@link SPO}s. {@link ISPOBuffer}s are used to collect
- * {@link SPO}s into chunks that can be sorted in order to support efficient
- * batch operations on statement indices.
- * 
+ * A buffer for {@link SPO}s. {@link ISPOBuffer}s are used to collect {@link SPO}s into chunks that
+ * can be sorted in order to support efficient batch operations on statement indices.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @deprecated by {@link IBuffer}
  */
 public interface ISPOBuffer {
 
-    final public Logger log = Logger.getLogger(ISPOBuffer.class);
+  public final Logger log = Logger.getLogger(ISPOBuffer.class);
 
-    /**
-     * True iff the {@link #log} level is INFO or less.
-     */
-    final public boolean INFO = log.getEffectiveLevel().toInt() <= Level.INFO
-            .toInt();
+  /** True iff the {@link #log} level is INFO or less. */
+  public final boolean INFO = log.getEffectiveLevel().toInt() <= Level.INFO.toInt();
 
-    /**
-     * True iff the {@link #log} level is DEBUG or less.
-     */
-    final public boolean DEBUG = log.getEffectiveLevel().toInt() <= Level.DEBUG
-            .toInt();
+  /** True iff the {@link #log} level is DEBUG or less. */
+  public final boolean DEBUG = log.getEffectiveLevel().toInt() <= Level.DEBUG.toInt();
 
-    /**
-     * The #of statements currently in the buffer.
-     */
-    public int size();
+  /** The #of statements currently in the buffer. */
+  public int size();
 
-    /**
-     * True iff there are no statements in the buffer.
-     */
-    public boolean isEmpty();
+  /** True iff there are no statements in the buffer. */
+  public boolean isEmpty();
 
-    /**
-     * Adds an {@link ISPO}.
-     * 
-     * @param spo
-     *            The {@link ISPO}.
-     * 
-     * @return true if the buffer will store the statement (i.e., the statement
-     *         is not excluded by the filter).
-     */
-    public boolean add(ISPO spo);
+  /**
+   * Adds an {@link ISPO}.
+   *
+   * @param spo The {@link ISPO}.
+   * @return true if the buffer will store the statement (i.e., the statement is not excluded by the
+   *     filter).
+   */
+  public boolean add(ISPO spo);
 
-    /**
-     * Flush any buffered statements to the backing store.
-     * 
-     * @return The cumulative #of statements that were written on the indices
-     *         since the last time the counter was reset. A statement that was
-     *         previously an axiom or inferred and that is converted to an
-     *         explicit statement by this method will be reported in this count
-     *         as well as any statement that was not pre-existing in the
-     *         database. Statement removal also counts as a "write".
-     * 
-     * @see #flush(boolean)
-     */
-    public int flush();
-    
+  /**
+   * Flush any buffered statements to the backing store.
+   *
+   * @return The cumulative #of statements that were written on the indices since the last time the
+   *     counter was reset. A statement that was previously an axiom or inferred and that is
+   *     converted to an explicit statement by this method will be reported in this count as well as
+   *     any statement that was not pre-existing in the database. Statement removal also counts as a
+   *     "write".
+   * @see #flush(boolean)
+   */
+  public int flush();
 }

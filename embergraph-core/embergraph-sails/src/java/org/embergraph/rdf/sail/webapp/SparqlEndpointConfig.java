@@ -19,91 +19,84 @@ package org.embergraph.rdf.sail.webapp;
 
 /**
  * Configuration object.
- * 
+ *
  * @see ConfigParams
  */
 public class SparqlEndpointConfig {
 
-    /**
-     * The default namespace.
-     * 
-     * @see ConfigParams#NAMESPACE
-     */
-    final public String namespace;
+  /**
+   * The default namespace.
+   *
+   * @see ConfigParams#NAMESPACE
+   */
+  public final String namespace;
 
-    /**
-     * The default timestamp used to query the default namespace. The server
-     * will obtain a read only transaction which reads from the commit point
-     * associated with this timestamp.
-     * <p>
-     * Note: When {@link ConfigParams#READ_LOCK} is specified, the
-     * {@link #timestamp} will actually be a read-only transaction identifier
-     * which is shared by default for each query against the
-     * {@link NanoSparqlServer}.
-     * 
-     * @see ConfigParams#READ_LOCK
-     */
-    final public long timestamp;
+  /**
+   * The default timestamp used to query the default namespace. The server will obtain a read only
+   * transaction which reads from the commit point associated with this timestamp.
+   *
+   * <p>Note: When {@link ConfigParams#READ_LOCK} is specified, the {@link #timestamp} will actually
+   * be a read-only transaction identifier which is shared by default for each query against the
+   * {@link NanoSparqlServer}.
+   *
+   * @see ConfigParams#READ_LOCK
+   */
+  public final long timestamp;
 
-    /**
-     * The #of threads to use to handle SPARQL queries -or- ZERO (0) for an
-     * unbounded pool.
-     * 
-     * @see ConfigParams#QUERY_THREAD_POOL_SIZE
-     */
-    final public int queryThreadPoolSize;
-    
-    /**
-     * When <code>true</code> and the KB instance is in the <code>quads</code>
-     * mode, each named graph will also be described in in the same level of
-     * detail as the default graph. Otherwise only the default graph will be
-     * described.
-     * 
-     * @see ConfigParams#DESCRIBE_EACH_NAMED_GRAPH
-     */
-    final public boolean describeEachNamedGraph;
+  /**
+   * The #of threads to use to handle SPARQL queries -or- ZERO (0) for an unbounded pool.
+   *
+   * @see ConfigParams#QUERY_THREAD_POOL_SIZE
+   */
+  public final int queryThreadPoolSize;
 
-    /**
-     * When <code>true</code>, requests will be refused for mutation operations
-     * on the database made through the REST API. This may be used to help lock
-     * down a public facing interface.
-     * 
-     * @see ConfigParams#READ_ONLY
-     */
-    final public boolean readOnly;
+  /**
+   * When <code>true</code> and the KB instance is in the <code>quads</code> mode, each named graph
+   * will also be described in in the same level of detail as the default graph. Otherwise only the
+   * default graph will be described.
+   *
+   * @see ConfigParams#DESCRIBE_EACH_NAMED_GRAPH
+   */
+  public final boolean describeEachNamedGraph;
 
-    /**
-     * When non-zero, this specifies the timeout (milliseconds) for a query.
-     * This may be used to limit resource consumption on a public facing
-     * interface.
-     * 
-     * @see ConfigParams#QUERY_TIMEOUT
-     */
-    final public long queryTimeout;
-    
-    public SparqlEndpointConfig(final String namespace, final long timestamp,
-            final int queryThreadPoolSize,
-            final boolean describeEachNamedGraph, final boolean readOnly,
-            final long queryTimeout) {
+  /**
+   * When <code>true</code>, requests will be refused for mutation operations on the database made
+   * through the REST API. This may be used to help lock down a public facing interface.
+   *
+   * @see ConfigParams#READ_ONLY
+   */
+  public final boolean readOnly;
 
-        if (namespace == null)
-            throw new IllegalArgumentException();
+  /**
+   * When non-zero, this specifies the timeout (milliseconds) for a query. This may be used to limit
+   * resource consumption on a public facing interface.
+   *
+   * @see ConfigParams#QUERY_TIMEOUT
+   */
+  public final long queryTimeout;
 
-        if (queryTimeout < 0L)
-            throw new IllegalArgumentException();
+  public SparqlEndpointConfig(
+      final String namespace,
+      final long timestamp,
+      final int queryThreadPoolSize,
+      final boolean describeEachNamedGraph,
+      final boolean readOnly,
+      final long queryTimeout) {
 
-        this.namespace = namespace;
+    if (namespace == null) throw new IllegalArgumentException();
 
-        this.timestamp = timestamp;
+    if (queryTimeout < 0L) throw new IllegalArgumentException();
 
-        this.queryThreadPoolSize = queryThreadPoolSize;
+    this.namespace = namespace;
 
-        this.describeEachNamedGraph = describeEachNamedGraph;
-        
-        this.readOnly = readOnly;
-        
-        this.queryTimeout = queryTimeout;
-        
-    }
+    this.timestamp = timestamp;
 
+    this.queryThreadPoolSize = queryThreadPoolSize;
+
+    this.describeEachNamedGraph = describeEachNamedGraph;
+
+    this.readOnly = readOnly;
+
+    this.queryTimeout = queryTimeout;
+  }
 }

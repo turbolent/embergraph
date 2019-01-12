@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval.service;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.List;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
@@ -31,67 +31,57 @@ import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
  * Mock service reports the solutions provided in the constructor.
- * <p>
- * Note: This can not be used to test complex queries because the caller needs
- * to know the order in which the query will be evaluated in order to know the
- * correct response for the mock service.
+ *
+ * <p>Note: This can not be used to test complex queries because the caller needs to know the order
+ * in which the query will be evaluated in order to know the correct response for the mock service.
  */
 public class EmbergraphNativeMockServiceFactory extends AbstractServiceFactoryBase {
 
-    private final OpenrdfNativeServiceOptions serviceOptions = new OpenrdfNativeServiceOptions();
+  private final OpenrdfNativeServiceOptions serviceOptions = new OpenrdfNativeServiceOptions();
 
-    private final List<IBindingSet> serviceSolutions;
+  private final List<IBindingSet> serviceSolutions;
 
-    public EmbergraphNativeMockServiceFactory(final List<IBindingSet> serviceSolutions) {
+  public EmbergraphNativeMockServiceFactory(final List<IBindingSet> serviceSolutions) {
 
-        this.serviceSolutions = serviceSolutions;
+    this.serviceSolutions = serviceSolutions;
+  }
 
-    }
+  @Override
+  public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
+
+    TestEmbergraphNativeServiceEvaluation.assertNotNull(params);
+
+    TestEmbergraphNativeServiceEvaluation.assertNotNull(params.getTripleStore());
+
+    TestEmbergraphNativeServiceEvaluation.assertNotNull(params.getServiceNode());
+
+    return new MockEmbergraphServiceCall();
+  }
+
+  @Override
+  public IServiceOptions getServiceOptions() {
+    return serviceOptions;
+  }
+
+  private class MockEmbergraphServiceCall implements EmbergraphServiceCall {
 
     @Override
-    public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
+    public ICloseableIterator<IBindingSet> call(final IBindingSet[] bindingSets) {
 
-        TestEmbergraphNativeServiceEvaluation.assertNotNull(params);
+      TestEmbergraphNativeServiceEvaluation.assertNotNull(bindingSets);
 
-        TestEmbergraphNativeServiceEvaluation.assertNotNull(params.getTripleStore());
+      // System.err.println("ServiceCall: in="+Arrays.toString(bindingSets));
 
-        TestEmbergraphNativeServiceEvaluation.assertNotNull(params.getServiceNode());
+      // System.err.println("ServiceCall: out="+serviceSolutions);
 
-        return new MockEmbergraphServiceCall();
-
+      return new CloseableIteratorWrapper<IBindingSet>(serviceSolutions.iterator());
     }
 
     @Override
     public IServiceOptions getServiceOptions() {
-        return serviceOptions;
+      return serviceOptions;
     }
-
-    private class MockEmbergraphServiceCall implements EmbergraphServiceCall {
-
-        @Override
-        public ICloseableIterator<IBindingSet> call(
-                final IBindingSet[] bindingSets) {
-
-            TestEmbergraphNativeServiceEvaluation.assertNotNull(bindingSets);
-
-            // System.err.println("ServiceCall: in="+Arrays.toString(bindingSets));
-
-            // System.err.println("ServiceCall: out="+serviceSolutions);
-
-            return new CloseableIteratorWrapper<IBindingSet>(
-                    serviceSolutions.iterator());
-
-        }
-
-        @Override
-        public IServiceOptions getServiceOptions() {
-            return serviceOptions;
-        }
-
-    }
-    
+  }
 }

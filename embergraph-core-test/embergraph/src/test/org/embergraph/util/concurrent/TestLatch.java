@@ -29,229 +29,198 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
-import org.embergraph.util.DaemonThreadFactory;
-
 import junit.framework.TestCase2;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
  * Unit tests for {@link Latch}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestLatch extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestLatch() {
+  /** */
+  public TestLatch() {}
 
+  /** @param name */
+  public TestLatch(String name) {
+    super(name);
+  }
+
+  /** Basic tests of the counter. */
+  public void test1() {
+
+    final Latch latch = new Latch();
+
+    assertEquals(latch.get(), 0);
+
+    assertEquals(latch.inc(), 1);
+
+    assertEquals(latch.inc(), 2);
+
+    assertEquals(latch.dec(), 1);
+
+    assertEquals(latch.dec(), 0);
+
+    try {
+      latch.dec();
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected error: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestLatch(String name) {
-        super(name);
+    assertEquals(latch.get(), 0);
+  }
 
-    }
+  /**
+   * Basic tests releasing blocked threads.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   * @todo should have variants of these where the expectations are violated in order to verify
+   *     correct failure mores. For example, where the timeout is to short in the Callable, where
+   *     the outer thread fails to dec() or where the inner thread fails to inc().
+   */
+  public void test2() throws InterruptedException, ExecutionException {
 
-    /**
-     * Basic tests of the counter.
-     */
-    public void test1() {
+    final Latch latch = new Latch();
 
-        final Latch latch = new Latch();
+    final Callable<?> r =
+        new Callable<Void>() {
 
-        assertEquals(latch.get(), 0);
+          public Void call() throws Exception {
 
-        assertEquals(latch.inc(), 1);
+            latch.inc();
 
-        assertEquals(latch.inc(), 2);
+            if (!latch.await(100, TimeUnit.MILLISECONDS))
+              fail("Expecting latch to decrement to zero.");
 
-        assertEquals(latch.dec(), 1);
-
-        assertEquals(latch.dec(), 0);
-
-        try {
-            latch.dec();
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected error: " + ex);
-        }
-
-        assertEquals(latch.get(), 0);
-
-    }
-
-    /**
-     * Basic tests releasing blocked threads.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
-     * 
-     * @todo should have variants of these where the expectations are violated
-     *       in order to verify correct failure mores. For example, where the
-     *       timeout is to short in the Callable, where the outer thread fails
-     *       to dec() or where the inner thread fails to inc().
-     */
-    public void test2() throws InterruptedException, ExecutionException {
-
-        final Latch latch = new Latch();
-
-        final Callable<?> r = new Callable<Void>() {
-
-            public Void call() throws Exception {
-
-                latch.inc();
-
-                if (!latch.await(100, TimeUnit.MILLISECONDS))
-                    fail("Expecting latch to decrement to zero.");
-
-                return null;
-
-            }
-
+            return null;
+          }
         };
 
-        final ExecutorService service = Executors
-                .newSingleThreadExecutor(DaemonThreadFactory
-                        .defaultThreadFactory());
+    final ExecutorService service =
+        Executors.newSingleThreadExecutor(DaemonThreadFactory.defaultThreadFactory());
 
-        try {
+    try {
 
-            final Future<?> future = service.submit(r);
+      final Future<?> future = service.submit(r);
 
-            Thread.sleep(50);
+      Thread.sleep(50);
 
-            latch.dec();
+      latch.dec();
 
-            // Verify normal return.
-            assertNull(future.get());
+      // Verify normal return.
+      assertNull(future.get());
 
-        } finally {
+    } finally {
 
-            service.shutdownNow();
+      service.shutdownNow();
+    }
+  }
 
-        }
+  /** Verify that dec() does not allow the counter to become negative. */
+  public void test3() {
 
+    final Latch latch = new Latch();
+
+    try {
+
+      latch.dec();
+
+      fail("Counter is negative");
+
+    } catch (IllegalStateException ex) {
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * Verify that dec() does not allow the counter to become negative.
-     */
-    public void test3() {
+    assertEquals(0, latch.get());
 
-        final Latch latch = new Latch();
+    assertEquals(1, latch.inc());
 
-        try {
+    assertEquals(0, latch.dec());
 
-            latch.dec();
-            
-            fail("Counter is negative");
+    try {
 
-        } catch (IllegalStateException ex) {
+      latch.dec();
 
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-            
-        }
-    
-        assertEquals(0, latch.get());
+      fail("Counter is negative: " + latch.get());
 
-        assertEquals(1, latch.inc());
-        
-        assertEquals(0,latch.dec());
-        
-        try {
+    } catch (IllegalStateException ex) {
 
-            latch.dec();
-            
-            fail("Counter is negative: "+latch.get());
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+  }
 
-        } catch (IllegalStateException ex) {
+  /**
+   * Verify that addAndGet() allows the counter to return to zero but does not allow the counter to
+   * become negative.
+   */
+  public void test4() {
 
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-            
-        }
-    
+    final Latch latch = new Latch();
+
+    assertEquals(1, latch.inc());
+
+    assertEquals(0, latch.addAndGet(-1));
+
+    assertEquals(1, latch.inc());
+
+    try {
+
+      latch.addAndGet(-2);
+
+      fail("Counter is negative: " + latch.get());
+
+    } catch (IllegalStateException ex) {
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * Verify that addAndGet() allows the counter to return to zero but does not
-     * allow the counter to become negative.
-     */
-    public void test4() {
+    assertEquals(0, latch.addAndGet(-1));
+  }
 
-        final Latch latch = new Latch();
+  /**
+   * Test of {@link Latch#await(long, TimeUnit)}.
+   *
+   * @throws InterruptedException
+   */
+  public void test5() throws InterruptedException {
 
-        assertEquals(1, latch.inc());
+    final Latch latch = new Latch();
 
-        assertEquals(0, latch.addAndGet(-1));
+    assertEquals(latch.get(), 0);
 
-        assertEquals(1, latch.inc());
+    assertEquals(latch.inc(), 1);
 
-        try {
+    assertEquals(latch.get(), 1);
 
-            latch.addAndGet(-2);
-            
-            fail("Counter is negative: "+latch.get());
-
-        } catch (IllegalStateException ex) {
-
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-            
-        }
-
-        assertEquals(0, latch.addAndGet(-1));
-        
+    {
+      final long timeout = TimeUnit.SECONDS.toNanos(1L);
+      final long begin = System.nanoTime();
+      // await latch to decrement to zero.
+      assertFalse(latch.await(timeout, TimeUnit.NANOSECONDS));
+      final long elapsed = System.nanoTime() - begin;
+      if (elapsed < timeout || (elapsed > (2 * timeout))) {
+        fail("elapsed=" + elapsed + ", timeout=" + timeout);
+      }
     }
 
-    /**
-     * Test of {@link Latch#await(long, TimeUnit)}.
-     * @throws InterruptedException 
-     */
-    public void test5() throws InterruptedException {
+    assertEquals(latch.get(), 1);
 
-        final Latch latch = new Latch();
+    assertEquals(latch.dec(), 0);
 
-        assertEquals(latch.get(), 0);
+    assertTrue(latch.await(1, TimeUnit.SECONDS));
 
-        assertEquals(latch.inc(), 1);
-
-        assertEquals(latch.get(), 1);
-
-        {
-            final long timeout = TimeUnit.SECONDS.toNanos(1L);
-            final long begin = System.nanoTime();
-            // await latch to decrement to zero.
-            assertFalse(latch.await(timeout, TimeUnit.NANOSECONDS));
-            final long elapsed = System.nanoTime() - begin;
-            if (elapsed < timeout || (elapsed > (2 * timeout))) {
-                fail("elapsed=" + elapsed + ", timeout=" + timeout);
-            }
-        }
-
-        assertEquals(latch.get(), 1);
-
-        assertEquals(latch.dec(), 0);
-
-        assertTrue(latch.await(1, TimeUnit.SECONDS));
-
-        try {
-            latch.dec();
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected error: " + ex);
-        }
-
-        assertEquals(latch.get(), 0);
-
+    try {
+      latch.dec();
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected error: " + ex);
     }
-    
+
+    assertEquals(latch.get(), 0);
+  }
 }

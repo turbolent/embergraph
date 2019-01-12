@@ -4,29 +4,27 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTMove extends ASTUpdate {
 
-	private boolean silent;
+  private boolean silent;
 
-	public ASTMove(int id) {
-		super(id);
-	}
+  public ASTMove(int id) {
+    super(id);
+  }
 
-	public ASTMove(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTMove(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	/** Accept the visitor. **/
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public void setSilent(boolean silent) {
-		this.silent = silent;
-	}
+  public void setSilent(boolean silent) {
+    this.silent = silent;
+  }
 
-	public boolean isSilent() {
-		return this.silent;
-	}
+  public boolean isSilent() {
+    return this.silent;
+  }
 }
 /* JavaCC - OriginalChecksum=030050581551b9266ef2430ae51df13f (do not edit this line) */

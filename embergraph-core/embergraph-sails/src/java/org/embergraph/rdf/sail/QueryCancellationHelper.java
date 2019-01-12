@@ -22,200 +22,175 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.UUID;
 import java.util.concurrent.Future;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sail.model.RunningQuery;
 
 /**
+ * This class encapsulate functionality that is common to the REST API and Embedded Graph
+ * deployments.
  *
- * This class encapsulate functionality that is common to the REST API and 
- * Embedded Graph deployments.
- * 
  * @author beebs
- *
  */
 public class QueryCancellationHelper {
-	
-	static private final transient Logger log = Logger
-            .getLogger(QueryCancellationHelper.class);
-	
-	public static void cancelQuery(final UUID queryId,
-			final QueryEngine queryEngine) {
 
-		final Collection<UUID> queryIds = new LinkedList<UUID>();
-		
-		queryIds.add(queryId);
+  private static final transient Logger log = Logger.getLogger(QueryCancellationHelper.class);
 
-		cancelQueries(queryIds, queryEngine);
+  public static void cancelQuery(final UUID queryId, final QueryEngine queryEngine) {
 
-	}
-	
-	public static void cancelQueries(final Collection<UUID> queryIds,
-			final QueryEngine queryEngine) {
+    final Collection<UUID> queryIds = new LinkedList<UUID>();
 
-		for (UUID queryId : queryIds) {
+    queryIds.add(queryId);
 
-			if (!tryCancelQuery(queryEngine, queryId)) {
-				//TODO:  BLZG-1464  Unify Embedded and REST cancellation
-				if (!tryCancelUpdate(queryEngine,queryId,null)) {
-					queryEngine.addPendingCancel(queryId);
-					if (log.isInfoEnabled()) {
-						log.info("No such QUERY or UPDATE: " + queryId);
-					}
-				}
-			}
+    cancelQueries(queryIds, queryEngine);
+  }
 
-		}
-	}
-	
-	
+  public static void cancelQueries(final Collection<UUID> queryIds, final QueryEngine queryEngine) {
 
-	/**
-     * Attempt to cancel a running SPARQL Query
-     * 
-     * @param queryEngine
-     * @param queryId
-     * @return
-     */	
-	public static boolean tryCancelQuery(final QueryEngine queryEngine,
-            final UUID queryId) {
+    for (UUID queryId : queryIds) {
 
-        final IRunningQuery q;
-        try {
-
-            q = queryEngine.getRunningQuery(queryId);
-
-        } catch (RuntimeException ex) {
-
-            /*
-             * Ignore.
-             * 
-             * Either the IRunningQuery has already terminated or this is an
-             * UPDATE rather than a QUERY.
-             */
-
-            return false;
-
+      if (!tryCancelQuery(queryEngine, queryId)) {
+        // TODO:  BLZG-1464  Unify Embedded and REST cancellation
+        if (!tryCancelUpdate(queryEngine, queryId, null)) {
+          queryEngine.addPendingCancel(queryId);
+          if (log.isInfoEnabled()) {
+            log.info("No such QUERY or UPDATE: " + queryId);
+          }
         }
+      }
+    }
+  }
 
-        if (q != null && q.cancel(true/* mayInterruptIfRunning */)) {
+  /**
+   * Attempt to cancel a running SPARQL Query
+   *
+   * @param queryEngine
+   * @param queryId
+   * @return
+   */
+  public static boolean tryCancelQuery(final QueryEngine queryEngine, final UUID queryId) {
 
-            if (log.isInfoEnabled())
-                log.info("Cancelled query: " + queryId);
-            
-            return true;
+    final IRunningQuery q;
+    try {
 
-        }
+      q = queryEngine.getRunningQuery(queryId);
 
-        return false;
+    } catch (RuntimeException ex) {
 
+      /*
+       * Ignore.
+       *
+       * Either the IRunningQuery has already terminated or this is an
+       * UPDATE rather than a QUERY.
+       */
+
+      return false;
     }
 
-    /**
-     * Attempt to cancel a running SPARQL UPDATE request.
-     * @param context
-     * @param queryId
-     * @return
-     */
+    if (q != null && q.cancel(true /* mayInterruptIfRunning */)) {
 
-	//This should not be used for the StatusServlet until the Embedded and REST API are unified.
-	public static boolean tryCancelUpdate(final QueryEngine queryEngine,
-			RunningQuery query) {
+      if (log.isInfoEnabled()) log.info("Cancelled query: " + queryId);
 
-
-		if (query != null) {
-
-			final IRunningQuery q;
-			try {
-
-				q = queryEngine.getRunningQuery(query.getQueryUuid());
-				
-				if(q != null && q.cancel(true /* interrupt when running */)) {
-					return true;
-				}
-
-			} catch (RuntimeException ex) {
-
-				/*
-				 * Ignore.
-				 * 
-				 * Either the IRunningQuery has already terminated or this is an
-				 * UPDATE rather than a QUERY.
-				 */
-
-				return false;
-
-			}
-		}
-        		
-        		
-//
-//            if (query.queryTask instanceof UpdateTask) {
-//
-//                final Future<Void> f = ((UpdateTask) query.queryTask).updateFuture;
-//
-//                if (f != null) {
-//
-//                    if (f.cancel(true/* mayInterruptIfRunning */)) {
-//
-//                        return true;
-//
-//                    }
-//
-//                }
-//
-//            }
-//
-//        }
-//
-        // Either not found or found but not running when cancelled.
-        return false;
-
-   }
-
-    //TODO:  Unify the webapp and embedded
-	//This should not be used for the StatusServlet until the Embedded and REST API are unified.
-	public static boolean tryCancelUpdate(final QueryEngine queryEngine,
-			final UUID queryId, final Future<Void> f) {
-
-		final IRunningQuery q;
-		try {
-
-			q = queryEngine.getRunningQuery(queryId);
-
-			if (q != null && q.cancel(true /* interrupt when running */)) {
-				return true;
-			}
-
-		} catch (RuntimeException ex) {
-
-			/*
-			 * Ignore.
-			 * 
-			 * Either the IRunningQuery has already terminated or this is an
-			 * UPDATE rather than a QUERY.
-			 */
-
-			return false;
-
-		}
-
-		if (f != null) {
-
-			if (f.cancel(true/* mayInterruptIfRunning */)) {
-
-				return true;
-
-			}
-
-		}
-
-
-        // Either not found or found but not running when cancelled.
-        return false;
+      return true;
     }
 
+    return false;
+  }
+
+  /**
+   * Attempt to cancel a running SPARQL UPDATE request.
+   *
+   * @param context
+   * @param queryId
+   * @return
+   */
+
+  // This should not be used for the StatusServlet until the Embedded and REST API are unified.
+  public static boolean tryCancelUpdate(final QueryEngine queryEngine, RunningQuery query) {
+
+    if (query != null) {
+
+      final IRunningQuery q;
+      try {
+
+        q = queryEngine.getRunningQuery(query.getQueryUuid());
+
+        if (q != null && q.cancel(true /* interrupt when running */)) {
+          return true;
+        }
+
+      } catch (RuntimeException ex) {
+
+        /*
+         * Ignore.
+         *
+         * Either the IRunningQuery has already terminated or this is an
+         * UPDATE rather than a QUERY.
+         */
+
+        return false;
+      }
+    }
+
+    //
+    //            if (query.queryTask instanceof UpdateTask) {
+    //
+    //                final Future<Void> f = ((UpdateTask) query.queryTask).updateFuture;
+    //
+    //                if (f != null) {
+    //
+    //                    if (f.cancel(true/* mayInterruptIfRunning */)) {
+    //
+    //                        return true;
+    //
+    //                    }
+    //
+    //                }
+    //
+    //            }
+    //
+    //        }
+    //
+    // Either not found or found but not running when cancelled.
+    return false;
+  }
+
+  // TODO:  Unify the webapp and embedded
+  // This should not be used for the StatusServlet until the Embedded and REST API are unified.
+  public static boolean tryCancelUpdate(
+      final QueryEngine queryEngine, final UUID queryId, final Future<Void> f) {
+
+    final IRunningQuery q;
+    try {
+
+      q = queryEngine.getRunningQuery(queryId);
+
+      if (q != null && q.cancel(true /* interrupt when running */)) {
+        return true;
+      }
+
+    } catch (RuntimeException ex) {
+
+      /*
+       * Ignore.
+       *
+       * Either the IRunningQuery has already terminated or this is an
+       * UPDATE rather than a QUERY.
+       */
+
+      return false;
+    }
+
+    if (f != null) {
+
+      if (f.cancel(true /* mayInterruptIfRunning */)) {
+
+        return true;
+      }
+    }
+
+    // Either not found or found but not running when cancelled.
+    return false;
+  }
 }

@@ -15,38 +15,28 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A factory for registering application metrics dynamically.
- */
+/** A factory for registering application metrics dynamically. */
 public interface IGangliaMetadataFactory {
-	
-	/**
-	 * Factory for new declarations.
-	 * 
-	 * @param hostName
-	 *            The name of this host.
-	 * @param metricName
-	 *            The ganglia metric name (suitably munged if necessary for use
-	 *            by ganglia).
-	 * @param value
-	 *            The metric value (NOT <code>null</code>).
-	 * 
-	 * @return The metric declaration -or- <code>null</code> if this factory
-	 *         does not know how to declare this metric.
-	 */
-	public IGangliaMetadataMessage newDecl(final String hostName,
-			final String metricName, final Object value);
 
-	/**
-	 * Resolve a declaration received over the wire into a declaration with a
-	 * richer object behavior. This allows the application to substitute its own
-	 * versions of an {@link IGangliaMetadataMessage}.
-	 * 
-	 * @param decl
-	 *            A declaration (typically received over the wire).
-	 * 
-	 * @return The declaration to be used.
-	 */
-	public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
+  /**
+   * Factory for new declarations.
+   *
+   * @param hostName The name of this host.
+   * @param metricName The ganglia metric name (suitably munged if necessary for use by ganglia).
+   * @param value The metric value (NOT <code>null</code>).
+   * @return The metric declaration -or- <code>null</code> if this factory does not know how to
+   *     declare this metric.
+   */
+  public IGangliaMetadataMessage newDecl(
+      final String hostName, final String metricName, final Object value);
 
+  /**
+   * Resolve a declaration received over the wire into a declaration with a richer object behavior.
+   * This allows the application to substitute its own versions of an {@link
+   * IGangliaMetadataMessage}.
+   *
+   * @param decl A declaration (typically received over the wire).
+   * @return The declaration to be used.
+   */
+  public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
 }

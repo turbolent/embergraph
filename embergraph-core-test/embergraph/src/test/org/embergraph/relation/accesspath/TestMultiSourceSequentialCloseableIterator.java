@@ -29,354 +29,313 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for the {@link MultiSourceSequentialCloseableIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
-    
-    public TestMultiSourceSequentialCloseableIterator() {
-        
-    }
 
-    public TestMultiSourceSequentialCloseableIterator(String name) {
-        super(name);
-    }
+  public TestMultiSourceSequentialCloseableIterator() {}
 
-    private final ThickAsynchronousIterator<String> emptyIterator() {
-        return new ThickAsynchronousIterator<String>(new String[]{});
-    }
-    
-    private final ThickAsynchronousIterator<String> iterator(final String... a) {
-        return new ThickAsynchronousIterator<String>(a);
-    }
-    
-    public void test1() throws InterruptedException {
-        
-        // empty iterator.
-        final MultiSourceSequentialCloseableIterator<String> itr = new MultiSourceSequentialCloseableIterator<String>(
-                emptyIterator());
-        
-//        // nothing available yet.
-//        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
-//        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
+  public TestMultiSourceSequentialCloseableIterator(String name) {
+    super(name);
+  }
 
-        // add an empty chunk.
-        assertTrue(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] {})));
+  private final ThickAsynchronousIterator<String> emptyIterator() {
+    return new ThickAsynchronousIterator<String>(new String[] {});
+  }
 
-//        // still nothing available yet.
-//        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
-//        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
+  private final ThickAsynchronousIterator<String> iterator(final String... a) {
+    return new ThickAsynchronousIterator<String>(a);
+  }
 
-        // add a non-empty chunk.
-        assertTrue(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "a" })));
+  public void test1() throws InterruptedException {
 
-        // reports data available and visits data.
-        assertTrue(itr.hasNext());
-        assertEquals("a", itr.next());
-//        assertTrue(itr.hasNext(1, TimeUnit.MILLISECONDS));
-//        assertEquals("a", itr.next(1, TimeUnit.MILLISECONDS));
+    // empty iterator.
+    final MultiSourceSequentialCloseableIterator<String> itr =
+        new MultiSourceSequentialCloseableIterator<String>(emptyIterator());
 
-        // add a non-empty chunk.
-        assertTrue(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "b" })));
+    //        // nothing available yet.
+    //        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
+    //        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
 
-        // reports data available and visits data.
-        assertTrue(itr.hasNext());
-        assertEquals("b", itr.next());
+    // add an empty chunk.
+    assertTrue(itr.add(new ThickAsynchronousIterator<String>(new String[] {})));
 
-        // close the iterator.
-        itr.close();
+    //        // still nothing available yet.
+    //        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
+    //        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
 
-        // iterator reports nothing available.
-        assertFalse(itr.hasNext());
-//        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
-//        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
+    // add a non-empty chunk.
+    assertTrue(itr.add(new ThickAsynchronousIterator<String>(new String[] {"a"})));
 
-        // can not add more sources.
-        assertFalse(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "b" })));
+    // reports data available and visits data.
+    assertTrue(itr.hasNext());
+    assertEquals("a", itr.next());
+    //        assertTrue(itr.hasNext(1, TimeUnit.MILLISECONDS));
+    //        assertEquals("a", itr.next(1, TimeUnit.MILLISECONDS));
 
-    }
+    // add a non-empty chunk.
+    assertTrue(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
 
-    public void test2() throws InterruptedException {
+    // reports data available and visits data.
+    assertTrue(itr.hasNext());
+    assertEquals("b", itr.next());
 
-        // empty iterator.
-        final MultiSourceSequentialCloseableIterator<String> itr = new MultiSourceSequentialCloseableIterator<String>(
-                emptyIterator());
+    // close the iterator.
+    itr.close();
 
-        // add a non-empty chunk.
-        assertTrue(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "a" })));
+    // iterator reports nothing available.
+    assertFalse(itr.hasNext());
+    //        assertFalse(itr.hasNext(1, TimeUnit.MILLISECONDS));
+    //        assertNull(itr.next(1, TimeUnit.MILLISECONDS));
 
-        // add a non-empty chunk.
-        assertTrue(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "b" })));
-        
-        // reports data available and visits data.
-        assertTrue(itr.hasNext());
-        assertEquals("a", itr.next());
-        assertTrue(itr.hasNext());
-        assertEquals("b", itr.next());
+    // can not add more sources.
+    assertFalse(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
+  }
 
-        // another read on the iterator causes it to be closed.
-        assertFalse(itr.hasNext());
+  public void test2() throws InterruptedException {
 
-        // can not add more sources.
-        assertFalse(itr.add(new ThickAsynchronousIterator<String>(
-                new String[] { "b" })));
+    // empty iterator.
+    final MultiSourceSequentialCloseableIterator<String> itr =
+        new MultiSourceSequentialCloseableIterator<String>(emptyIterator());
 
-    }
+    // add a non-empty chunk.
+    assertTrue(itr.add(new ThickAsynchronousIterator<String>(new String[] {"a"})));
 
-    /**
-     * Verify that the iterator notices if it is asynchronously closed.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException 
-     */
-    public void test3() throws InterruptedException, ExecutionException {
+    // add a non-empty chunk.
+    assertTrue(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
 
-        // empty iterator.
-        final MultiSourceSequentialCloseableIterator<String> itr = new MultiSourceSequentialCloseableIterator<String>(
-                emptyIterator());
+    // reports data available and visits data.
+    assertTrue(itr.hasNext());
+    assertEquals("a", itr.next());
+    assertTrue(itr.hasNext());
+    assertEquals("b", itr.next());
 
-        final ExecutorService service = Executors.newSingleThreadExecutor();
+    // another read on the iterator causes it to be closed.
+    assertFalse(itr.hasNext());
 
-        try {
+    // can not add more sources.
+    assertFalse(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
+  }
 
-            final FutureTask<Void> ft = new FutureTask<Void>(new Callable<Void>() {
+  /**
+   * Verify that the iterator notices if it is asynchronously closed.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test3() throws InterruptedException, ExecutionException {
+
+    // empty iterator.
+    final MultiSourceSequentialCloseableIterator<String> itr =
+        new MultiSourceSequentialCloseableIterator<String>(emptyIterator());
+
+    final ExecutorService service = Executors.newSingleThreadExecutor();
+
+    try {
+
+      final FutureTask<Void> ft =
+          new FutureTask<Void>(
+              new Callable<Void>() {
 
                 public Void call() throws Exception {
 
-                    log.info("Will wait on iterator.");
+                  log.info("Will wait on iterator.");
 
-                    assertFalse(itr.hasNext());
-//                    if (itr.hasNext(1000, TimeUnit.MILLISECONDS))
-//                        fail("Iterator should not visit anything.");
+                  assertFalse(itr.hasNext());
+                  //                    if (itr.hasNext(1000, TimeUnit.MILLISECONDS))
+                  //                        fail("Iterator should not visit anything.");
 
-                    // Can not add more sources.
-                    assertFalse(itr.add(new ThickAsynchronousIterator<String>(
-                            new String[] { "b" })));
-                    
-                    return null;
-                    
+                  // Can not add more sources.
+                  assertFalse(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
+
+                  return null;
                 }
+              });
 
-            });
+      service.submit(ft);
 
-            service.submit(ft);
-            
-            Thread.sleep(500/*ms*/);
-            
-            log.info("Will close iterator.");
-            itr.close();
+      Thread.sleep(500 /*ms*/);
 
-            // check future.
-            ft.get();
+      log.info("Will close iterator.");
+      itr.close();
 
-        } finally {
-            
-            service.shutdownNow();
+      // check future.
+      ft.get();
 
-        }
+    } finally {
 
+      service.shutdownNow();
     }
-    
+  }
+
+  /**
+   * Verify that the iterator closes all sources iterators when it is closed.
+   *
+   * @throws InterruptedException
+   */
+  public void test4_sources_closed() throws InterruptedException {
+
+    final ThickAsynchronousIterator<String> itr1 = iterator("a", "b", "c");
+
+    // empty iterator.
+    final MultiSourceSequentialCloseableIterator<String> itr =
+        new MultiSourceSequentialCloseableIterator<String>(itr1);
+
+    assertEquals("a", itr.next());
+    //        assertEquals("b", itr.next());
+
+    // more is available from the high level iterator.
+    assertTrue(itr.hasNext());
+
+    // more is available from the underlying iterator.
+    assertTrue(itr1.hasNext());
+
+    log.info("Will close iterator.");
+    itr.close();
+
+    // can not add more sources.
+    assertFalse(itr.add(iterator("d")));
+
+    // underlying iterator was closed.
+    assertFalse(itr1.open);
+    assertFalse(itr1.hasNext());
+
+    // high level iterator was closed.
+    assertFalse(itr.hasNext());
+  }
+
+  /**
+   * Verify that sources are closed when there is more than one source.
+   *
+   * @throws InterruptedException
+   */
+  public void test5_sources_closed() throws InterruptedException {
+
+    final ThickAsynchronousIterator<String> itr1 = iterator("a", "b", "c");
+    final ThickAsynchronousIterator<String> itr2 = iterator("d", "e", "f");
+    final ThickAsynchronousIterator<String> itr3 = iterator("g", "h", "i");
+
+    // empty iterator.
+    final MultiSourceSequentialCloseableIterator<String> itr =
+        new MultiSourceSequentialCloseableIterator<String>(itr1);
+    itr.add(itr2);
+    itr.add(itr3);
+
+    assertEquals("a", itr.next());
+    assertEquals("b", itr.next());
+    assertEquals("c", itr.next());
+
+    // more is available from the high level iterator.
+    assertTrue(itr.hasNext());
+
+    // 1st underlying iterator was closed.
+    assertFalse(itr1.hasNext());
+
+    log.info("Will close iterator.");
+    itr.close();
+
+    // can not add more sources.
+    assertFalse(itr.add(iterator("xxx")));
+
+    // remaining underlying iterators were closed.
+    assertFalse(itr1.open);
+    assertFalse(itr1.hasNext());
+    assertFalse(itr2.open);
+    assertFalse(itr2.hasNext());
+    assertFalse(itr3.open);
+    assertFalse(itr3.hasNext());
+
+    // high level iterator was closed.
+    assertFalse(itr.hasNext());
+  }
+
+  private static class ThickAsynchronousIterator<E>
+      implements IAsynchronousIterator<E>, Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private transient boolean open = true;
+
     /**
-     * Verify that the iterator closes all sources iterators when it is closed.
-     * 
-     * @throws InterruptedException
+     * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
+     * been visited.
      */
-    public void test4_sources_closed() throws InterruptedException {
+    private int lastIndex;
 
-        final ThickAsynchronousIterator<String> itr1 = iterator("a","b","c");
-        
-        // empty iterator.
-        final MultiSourceSequentialCloseableIterator<String> itr = new MultiSourceSequentialCloseableIterator<String>(
-                itr1);
-
-        assertEquals("a", itr.next());
-//        assertEquals("b", itr.next());
-        
-        // more is available from the high level iterator.
-        assertTrue(itr.hasNext());
-
-        // more is available from the underlying iterator.
-        assertTrue(itr1.hasNext());
-
-        log.info("Will close iterator.");
-        itr.close();
-
-        // can not add more sources.
-        assertFalse(itr.add(iterator("d")));
-
-        // underlying iterator was closed.
-        assertFalse(itr1.open);
-        assertFalse(itr1.hasNext());
-        
-        // high level iterator was closed.
-        assertFalse(itr.hasNext());
-        
-    }
+    /** The array of elements to be visited by the iterator. */
+    private final E[] a;
 
     /**
-     * Verify that sources are closed when there is more than one source.
-     * 
-     * @throws InterruptedException
+     * Create a thick iterator.
+     *
+     * @param a The array of elements to be visited by the iterator (may be empty, but may not be
+     *     <code>null</code>).
+     * @throws IllegalArgumentException if <i>a</i> is <code>null</code>.
      */
-    public void test5_sources_closed() throws InterruptedException {
+    public ThickAsynchronousIterator(final E[] a) {
 
-        final ThickAsynchronousIterator<String> itr1 = iterator("a","b","c");
-        final ThickAsynchronousIterator<String> itr2 = iterator("d","e","f");
-        final ThickAsynchronousIterator<String> itr3 = iterator("g","h","i");
-        
-        // empty iterator.
-        final MultiSourceSequentialCloseableIterator<String> itr = new MultiSourceSequentialCloseableIterator<String>(
-                itr1);
-        itr.add(itr2);
-        itr.add(itr3);
+      if (a == null) throw new IllegalArgumentException();
 
-        assertEquals("a", itr.next());
-        assertEquals("b", itr.next());
-        assertEquals("c", itr.next());
-        
-        // more is available from the high level iterator.
-        assertTrue(itr.hasNext());
+      this.a = a;
 
-        // 1st underlying iterator was closed.
-        assertFalse(itr1.hasNext());
-
-        log.info("Will close iterator.");
-        itr.close();
-
-        // can not add more sources.
-        assertFalse(itr.add(iterator("xxx")));
-
-        // remaining underlying iterators were closed.
-        assertFalse(itr1.open);
-        assertFalse(itr1.hasNext());
-        assertFalse(itr2.open);
-        assertFalse(itr2.hasNext());
-        assertFalse(itr3.open);
-        assertFalse(itr3.hasNext());
-        
-        // high level iterator was closed.
-        assertFalse(itr.hasNext());
-        
+      lastIndex = -1;
     }
 
-    private static class ThickAsynchronousIterator<E> implements
-            IAsynchronousIterator<E>, Serializable {
+    public boolean hasNext() {
 
-        private static final long serialVersionUID = 1L;
+      if (open && lastIndex + 1 < a.length) return true;
 
-        private transient boolean open = true;
+      close();
 
-        /**
-         * Index of the last element visited by {@link #next()} and
-         * <code>-1</code> if NO elements have been visited.
-         */
-        private int lastIndex;
-
-        /**
-         * The array of elements to be visited by the iterator.
-         */
-        private final E[] a;
-
-        /**
-         * Create a thick iterator.
-         * 
-         * @param a
-         *            The array of elements to be visited by the iterator (may
-         *            be empty, but may not be <code>null</code>).
-         * 
-         * @throws IllegalArgumentException
-         *             if <i>a</i> is <code>null</code>.
-         */
-        public ThickAsynchronousIterator(final E[] a) {
-
-            if (a == null)
-                throw new IllegalArgumentException();
-
-            this.a = a;
-
-            lastIndex = -1;
-
-        }
-
-        public boolean hasNext() {
-
-            if(open && lastIndex + 1 < a.length)
-                return true;
-            
-            close();
-           
-            return false;
-
-        }
-
-        public E next() {
-
-            if (!hasNext())
-                throw new NoSuchElementException();
-
-            return a[++lastIndex];
-
-        }
-
-        public void remove() {
-
-            throw new UnsupportedOperationException();
-
-        }
-
-        /*
-         * ICloseableIterator.
-         */
-
-        public void close() {
-
-            open = false;
-
-        }
-
-        /*
-         * IAsynchronousIterator.
-         */
-
-        public boolean isExhausted() {
-
-            return !hasNext();
-
-        }
-
-        /**
-         * Delegates to {@link #hasNext()} since all data are local and timeouts
-         * can not occur.
-         */
-        public boolean hasNext(long timeout, TimeUnit unit) {
-
-            return hasNext();
-
-        }
-
-        /**
-         * Delegates to {@link #next()} since all data are local and timeouts
-         * can not occur.
-         */
-        public E next(long timeout, TimeUnit unit) {
-
-            return next();
-
-        }
-
+      return false;
     }
 
+    public E next() {
+
+      if (!hasNext()) throw new NoSuchElementException();
+
+      return a[++lastIndex];
+    }
+
+    public void remove() {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /*
+     * ICloseableIterator.
+     */
+
+    public void close() {
+
+      open = false;
+    }
+
+    /*
+     * IAsynchronousIterator.
+     */
+
+    public boolean isExhausted() {
+
+      return !hasNext();
+    }
+
+    /** Delegates to {@link #hasNext()} since all data are local and timeouts can not occur. */
+    public boolean hasNext(long timeout, TimeUnit unit) {
+
+      return hasNext();
+    }
+
+    /** Delegates to {@link #next()} since all data are local and timeouts can not occur. */
+    public E next(long timeout, TimeUnit unit) {
+
+      return next();
+    }
+  }
 }

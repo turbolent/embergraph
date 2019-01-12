@@ -26,73 +26,76 @@ import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 
 /**
- * Test serializer for WKT literals of the form Point(lat,lon).
- * Note that this is a dummy implementation for tests only,
- * assuming there are no whitespaces contained in the literal, etc.
- * 
+ * Test serializer for WKT literals of the form Point(lat,lon). Note that this is a dummy
+ * implementation for tests only, assuming there are no whitespaces contained in the literal, etc.
+ *
  * @author msc
  */
 public class GeoSpatialDummyLiteralSerializer extends GeoSpatialDefaultLiteralSerializer {
 
-    // we do use the default toComponent() and fromComponent() methods defined in GeoSpatialDefaultLiteralSerializer,
-    // but override all the serialization methods in this class (which is the focus of the test cases)
-    
-    @Override
-    public IV<?,?> serializeLocation(
-        final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
+  // we do use the default toComponent() and fromComponent() methods defined in
+  // GeoSpatialDefaultLiteralSerializer,
+  // but override all the serialization methods in this class (which is the focus of the test cases)
 
-        return DummyConstantNode.toDummyIV(vf.createLiteral("Location(" + concat(latitude, longitude) + ")"));
+  @Override
+  public IV<?, ?> serializeLocation(
+      final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
 
-        
+    return DummyConstantNode.toDummyIV(
+        vf.createLiteral("Location(" + concat(latitude, longitude) + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeLocationAndTime(
+      final EmbergraphValueFactory vf,
+      final Object latitude,
+      final Object longitude,
+      final Object time) {
+
+    return DummyConstantNode.toDummyIV(
+        vf.createLiteral("LocationAndTime(" + concat(latitude, longitude, time) + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
+    return DummyConstantNode.toDummyIV(vf.createLiteral("Time(" + time.toString() + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
+    return DummyConstantNode.toDummyIV(vf.createLiteral("Lat(" + latitude.toString() + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
+    return DummyConstantNode.toDummyIV(vf.createLiteral("Lon(" + longitude.toString() + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeCoordSystem(
+      final EmbergraphValueFactory vf, final Object coordinateSystem) {
+    return DummyConstantNode.toDummyIV(
+        vf.createLiteral("CoordSystem(" + coordinateSystem.toString() + ")"));
+  }
+
+  @Override
+  public IV<?, ?> serializeCustomFields(
+      final EmbergraphValueFactory vf, final Object... customFields) {
+    return DummyConstantNode.toDummyIV(
+        vf.createLiteral("CustomFields(" + concat(customFields) + ")"));
+  }
+
+  protected String concat(final Object... args) {
+
+    final StringBuffer buf = new StringBuffer();
+
+    for (int i = 0; i < args.length; i++) {
+
+      if (i > 0) buf.append("-");
+
+      buf.append(args[i].toString());
     }
 
-    @Override
-    public IV<?,?> serializeLocationAndTime(
-        final EmbergraphValueFactory vf, final Object latitude,
-        final Object longitude, final Object time) {
-
-        return DummyConstantNode.toDummyIV(vf.createLiteral("LocationAndTime(" + concat(latitude, longitude, time) + ")"));
-
-    }
-
-    @Override
-    public IV<?,?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
-        return DummyConstantNode.toDummyIV(vf.createLiteral("Time(" + time.toString() + ")"));
-    }
-
-    @Override
-    public IV<?,?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
-        return DummyConstantNode.toDummyIV(vf.createLiteral("Lat(" + latitude.toString() + ")"));
-    }
-
-    @Override
-    public IV<?,?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
-        return DummyConstantNode.toDummyIV(vf.createLiteral("Lon(" + longitude.toString() + ")"));
-    }
-
-    @Override
-    public IV<?,?> serializeCoordSystem(final EmbergraphValueFactory vf, final Object coordinateSystem) {
-        return DummyConstantNode.toDummyIV(vf.createLiteral("CoordSystem(" + coordinateSystem.toString() + ")"));
-    }
-
-    @Override
-    public IV<?,?> serializeCustomFields(final EmbergraphValueFactory vf, final Object... customFields) {
-        return DummyConstantNode.toDummyIV(vf.createLiteral("CustomFields(" + concat(customFields) + ")"));
-    }
-    
-    protected String concat(final Object... args) {
-      
-        final StringBuffer buf = new StringBuffer();
-        
-        for (int i=0; i<args.length; i++) {
-               
-            if (i>0)
-                buf.append("-");
-               
-            buf.append(args[i].toString());
-        }
-        
-        return buf.toString();
-    }
-    
+    return buf.toString();
+  }
 }

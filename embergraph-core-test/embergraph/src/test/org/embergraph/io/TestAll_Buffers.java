@@ -28,52 +28,41 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll_Buffers extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll_Buffers() {}
+
+  /** @param arg0 */
+  public TestAll_Buffers(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
+
+    /*
+     * test fast DataOutput and DataInput implementations.
      */
-    public TestAll_Buffers() {
-    }
 
-    /**
-     * @param arg0
-     */
-    public TestAll_Buffers(String arg0) {
-        super(arg0);
-    }
+    // test slice of an input stream.
+    suite.addTestSuite(TestSliceInputStream.class);
+    // test use of ByteBuffer as an input/output stream.
+    suite.addTestSuite(TestByteBufferStreams.class);
+    // test fixed-length record w/ absolute access.
+    suite.addTestSuite(TestFixedByteArrayBuffer.class);
+    // test extensible record w/ absolute and relative and stream-based
+    // access.
+    suite.addTestSuite(TestByteArrayBuffer.class);
+    // test extensible record w/ DataOutput API.
+    suite.addTestSuite(TestDataOutputBuffer.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
-
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage()
-                .getName());
-
-        /*
-         * test fast DataOutput and DataInput implementations.
-         */
-
-        // test slice of an input stream.
-        suite.addTestSuite(TestSliceInputStream.class);
-        // test use of ByteBuffer as an input/output stream.
-        suite.addTestSuite(TestByteBufferStreams.class);
-        // test fixed-length record w/ absolute access.
-        suite.addTestSuite(TestFixedByteArrayBuffer.class);
-        // test extensible record w/ absolute and relative and stream-based
-        // access.
-        suite.addTestSuite(TestByteArrayBuffer.class);
-        // test extensible record w/ DataOutput API.
-        suite.addTestSuite(TestDataOutputBuffer.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

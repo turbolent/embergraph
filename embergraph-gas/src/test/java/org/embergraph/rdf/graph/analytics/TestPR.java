@@ -19,26 +19,21 @@ import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 
 /**
  * Test class for Breadth First Search (BFS) traversal.
- * 
+ *
  * @see BFS
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestPR extends AbstractSailGraphTestCase {
 
-    public TestPR() {
-        
-    }
-    
-    public TestPR(String name) {
-        super(name);
-    }
+  public TestPR() {}
 
-    public void testPR() throws Exception {
+  public TestPR(String name) {
+    super(name);
+  }
 
-   	//@TODO:  Write Test
-	assert(true);
-        
-    }
+  public void testPR() throws Exception {
 
+    // @TODO:  Write Test
+    assert (true);
+  }
 }

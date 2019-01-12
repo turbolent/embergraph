@@ -25,228 +25,207 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
-import org.openrdf.sail.SailException;
-
 import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
+import org.openrdf.sail.SailException;
 
 /**
- * Test suite for BLZG-2056 EmbergraphSailConnections not always closed by
- * EmbergraphSail.shutdown()
- * 
+ * Test suite for BLZG-2056 EmbergraphSailConnections not always closed by EmbergraphSail.shutdown()
+ *
  * @see https://jira.blazegraph.com/browse/BLZG-2056
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
 
-    /**
-     * 
-     */
-    public TestCnxnCreate() {
+  /** */
+  public TestCnxnCreate() {}
+
+  /** @param name */
+  public TestCnxnCreate(String name) {
+    super(name);
+  }
+
+  /**
+   * Test whether connections are auto closed when the Sail is shutdown
+   *
+   * @throws SailException
+   * @throws InterruptedException
+   * @throws IOException
+   */
+  public void test_manageConnections() throws SailException, InterruptedException, IOException {
+
+    final Properties properties = getProperties();
+
+    // truth maintenance is not compatible with full transactions.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+
+    properties.setProperty(
+        AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+
+    properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+
+    properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
+
+    properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES, "false");
+
+    final EmbergraphSail sail = new EmbergraphSail(properties);
+
+    try {
+
+      sail.initialize();
+
+      log.info("Sail is initialized.");
+
+      final EmbergraphSailConnection uicnxn = sail.getUnisolatedConnection();
+
+      assertTrue(uicnxn.isOpen());
+
+      final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
+
+      assertTrue(rocnxn.isOpen());
+
+      sail.shutDown();
+
+      log.info("done - sail.shutDown()");
+
+      assertTrue(!uicnxn.isOpen());
+      assertTrue(!rocnxn.isOpen());
+
+    } finally {
+
+      log.info("__tearDownUnitTest");
+      sail.__tearDownUnitTest();
+      log.info("done - __tearDownUnitTest");
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestCnxnCreate(String name) {
-        super(name);
+  /**
+   * Test whether connections are auto closed when the Sail is shutdown
+   *
+   * @throws SailException
+   * @throws InterruptedException
+   * @throws IOException
+   */
+  public void test_manageDefaultConnection()
+      throws SailException, InterruptedException, IOException {
+
+    final Properties properties = getProperties();
+
+    // truth maintenance is not compatible with full transactions.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+
+    properties.setProperty(
+        AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+
+    properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+
+    properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
+
+    properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES, "false");
+
+    final EmbergraphSail sail = new EmbergraphSail(properties);
+
+    try {
+
+      sail.initialize();
+
+      log.info("Sail is initialized.");
+
+      final EmbergraphSailConnection cnxn = sail.getConnection();
+
+      assertTrue(cnxn.isOpen());
+
+      sail.shutDown();
+
+      log.info("done - sail.shutDown()");
+
+      assertTrue(!cnxn.isOpen());
+
+    } finally {
+
+      log.info("__tearDownUnitTest");
+      sail.__tearDownUnitTest();
+      log.info("done - __tearDownUnitTest");
     }
+  }
 
+  public void test_manageThreadConnections()
+      throws SailException, InterruptedException, IOException {
 
-    /**
-     * Test whether connections are auto closed when the Sail is shutdown
-     * 
-     * @throws SailException 
-     * @throws InterruptedException 
-     * @throws IOException 
-     */
-    public void test_manageConnections() throws SailException, InterruptedException, IOException {
+    final Properties properties = getProperties();
 
-        final Properties properties = getProperties();
+    // truth maintenance is not compatible with full transactions.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
-        // truth maintenance is not compatible with full transactions.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
 
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+    properties.setProperty(
+        AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
 
-        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
-                NoVocabulary.class.getName());
+    properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
-        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+    properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
-        properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
+    properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES, "false");
 
-        properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
-                "false");
+    final EmbergraphSail sail = new EmbergraphSail(properties);
 
-        final EmbergraphSail sail = new EmbergraphSail(properties);
-        
-        try {
+    try {
 
-            sail.initialize();
+      sail.initialize();
 
-            log.info("Sail is initialized.");
-                        
-            final EmbergraphSailConnection uicnxn = sail.getUnisolatedConnection();
-            
-            assertTrue(uicnxn.isOpen());
-            
-            final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
-            
-            assertTrue(rocnxn.isOpen());
-            
-            sail.shutDown();
-            
-            log.info("done - sail.shutDown()");
-            
-            assertTrue(!uicnxn.isOpen());
-            assertTrue(!rocnxn.isOpen());
-            
+      log.info("Sail is initialized.");
 
-        } finally {
+      final AtomicReference<EmbergraphSailConnection> uicnxn =
+          new AtomicReference<EmbergraphSailConnection>();
+      final Semaphore c1 = new Semaphore(0);
 
-            log.info("__tearDownUnitTest");
-            sail.__tearDownUnitTest();
-            log.info("done - __tearDownUnitTest");
+      final Thread t =
+          new Thread() {
+            public void run() {
+              System.out.println("Running...");
+              try {
+                uicnxn.set(sail.getUnisolatedConnection());
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
+              System.out.println("Releasing permit");
+              c1.release();
+            }
+          };
 
-        }
+      t.start();
+      c1.acquire();
 
+      assertTrue(uicnxn.get().isOpen());
+
+      final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
+
+      assertTrue(rocnxn.isOpen());
+
+      //            final EmbergraphSailConnection rwcnxn = sail.getReadWriteConnection();
+      //
+      //            assertTrue(rwcnxn.isOpen());
+      //
+      sail.shutDown();
+
+      log.warn("don - sail.shutDown()");
+
+      assertTrue(!uicnxn.get().isOpen());
+      assertTrue(!rocnxn.isOpen());
+      //            assertTrue(!rwcnxn.isOpen());
+
+    } finally {
+
+      log.warn("__tearDownUnitTest");
+      sail.__tearDownUnitTest();
+      log.warn("done - __tearDownUnitTest");
     }
-    
-    /**
-     * Test whether connections are auto closed when the Sail is shutdown
-     * 
-     * @throws SailException 
-     * @throws InterruptedException 
-     * @throws IOException 
-     */
-    public void test_manageDefaultConnection() throws SailException, InterruptedException, IOException {
-
-        final Properties properties = getProperties();
-
-        // truth maintenance is not compatible with full transactions.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
-
-        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
-                NoVocabulary.class.getName());
-
-        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-
-        properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
-
-        properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
-                "false");
-
-        final EmbergraphSail sail = new EmbergraphSail(properties);
-        
-        try {
-
-            sail.initialize();
-
-            log.info("Sail is initialized.");
-            
-            final EmbergraphSailConnection cnxn = sail.getConnection();
-            
-            assertTrue(cnxn.isOpen());
-                        
-            sail.shutDown();
-            
-            log.info("done - sail.shutDown()");
-            
-            assertTrue(!cnxn.isOpen());
-            
-
-        } finally {
-
-            log.info("__tearDownUnitTest");
-            sail.__tearDownUnitTest();
-            log.info("done - __tearDownUnitTest");
-
-        }
-
-    }
-    
-    public void test_manageThreadConnections() throws SailException, InterruptedException, IOException {
-
-        final Properties properties = getProperties();
-
-        // truth maintenance is not compatible with full transactions.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
-
-        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
-                NoVocabulary.class.getName());
-
-        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-
-        properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
-
-        properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
-                "false");
-
-        final EmbergraphSail sail = new EmbergraphSail(properties);
-        
-        try {
-
-            sail.initialize();
-
-            log.info("Sail is initialized.");
-            
-            final AtomicReference<EmbergraphSailConnection> uicnxn = new AtomicReference<EmbergraphSailConnection>();
-            final Semaphore c1 = new Semaphore(0);
-            
-            final Thread t = new Thread() {
-				public void run() {
-					System.out.println("Running...");
-					try {
-						uicnxn.set(sail.getUnisolatedConnection());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					System.out.println("Releasing permit");
-					c1.release();
-				}
-            };
-            
-            t.start();
-            c1.acquire();
-                        
-            assertTrue(uicnxn.get().isOpen());
-            
-            final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
-            
-            assertTrue(rocnxn.isOpen());
-            
-//            final EmbergraphSailConnection rwcnxn = sail.getReadWriteConnection();
-//            
-//            assertTrue(rwcnxn.isOpen());
-//            
-            sail.shutDown();
-            
-            log.warn("don - sail.shutDown()");
-            
-            assertTrue(!uicnxn.get().isOpen());
-            assertTrue(!rocnxn.isOpen());
-//            assertTrue(!rwcnxn.isOpen());
-            
-
-        } finally {
-
-            log.warn("__tearDownUnitTest");
-            sail.__tearDownUnitTest();
-            log.warn("done - __tearDownUnitTest");
-
-        }
-
-    }
+  }
 }

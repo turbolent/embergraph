@@ -28,47 +28,35 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
- * Base class for test suites for inference engine and the magic sets
- * implementation.
- * 
+ * Base class for test suites for inference engine and the magic sets implementation.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractInferenceEngineTestCase extends AbstractTripleStoreTestCase {
 
-    /**
-     * 
-     */
-    public AbstractInferenceEngineTestCase() {
-    }
+  /** */
+  public AbstractInferenceEngineTestCase() {}
 
-    /**
-     * @param name
-     */
-    public AbstractInferenceEngineTestCase(String name) {
-        super(name);
-    }
-    
-    /**
-     * Return the constant bound on the {@link Predicate} associated with the
-     * {@link IAccessPath} at the specified slot index -or- {@link #NULL} iff
-     * the predicate is not bound at that slot index.
-     * 
-     * @param ap
-     *            The {@link IAccessPath}.
-     * @param index
-     *            The slot index on the {@link Predicate}.
-     * 
-     * @return Either the bound value -or- {@link #NULL} iff the index is
-     *         unbound for the predicate for this access path.
-     */
-    @SuppressWarnings("rawtypes")
-    protected static IV getValue(final IAccessPath<?> ap, final int index) {
+  /** @param name */
+  public AbstractInferenceEngineTestCase(String name) {
+    super(name);
+  }
 
-        final IVariableOrConstant<?> t = ap.getPredicate().get(index);
+  /**
+   * Return the constant bound on the {@link Predicate} associated with the {@link IAccessPath} at
+   * the specified slot index -or- {@link #NULL} iff the predicate is not bound at that slot index.
+   *
+   * @param ap The {@link IAccessPath}.
+   * @param index The slot index on the {@link Predicate}.
+   * @return Either the bound value -or- {@link #NULL} iff the index is unbound for the predicate
+   *     for this access path.
+   */
+  @SuppressWarnings("rawtypes")
+  protected static IV getValue(final IAccessPath<?> ap, final int index) {
 
-        return (IV) (t == null || t.isVar() ? null : t.get());
+    final IVariableOrConstant<?> t = ap.getPredicate().get(index);
 
-    }
-
+    return (IV) (t == null || t.isVar() ? null : t.get());
+  }
 }

@@ -22,36 +22,27 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.search;
 
 /**
- * Mutable metadata for the occurrences of a token within a field of some
- * document.
- * 
+ * Mutable metadata for the occurrences of a token within a field of some document.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITermMetadata { // extends ITermDocVal {
 
-//    /**
-//     * The text of the token.
-//     */
-//    String termText();
+  //    /**
+  //     * The text of the token.
+  //     */
+  //    String termText();
 
-    /**
-     * The term (aka token) frequency count.
-     */
-    int termFreq();
+  /** The term (aka token) frequency count. */
+  int termFreq();
 
-    /**
-     * Add an occurrence.
-     */
-    void add();
+  /** Add an occurrence. */
+  void add();
 
-    /**
-     * The local term weight, which may be computed by a variety of methods.
-     */
-    double getLocalTermWeight();
+  /** The local term weight, which may be computed by a variety of methods. */
+  double getLocalTermWeight();
 
-    /**
-     * The local term weight, which may be computed by a variety of methods.
-     */
-    void setLocalTermWeight(double d);
+  /** The local term weight, which may be computed by a variety of methods. */
+  void setLocalTermWeight(double d);
 }

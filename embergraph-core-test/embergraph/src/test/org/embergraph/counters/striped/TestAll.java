@@ -27,38 +27,27 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates tests in dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("striped counters");
-       
-        suite.addTestSuite(TestStripedCounters.class);
+    final TestSuite suite = new TestSuite("striped counters");
 
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestStripedCounters.class);
+
+    return suite;
+  }
 }

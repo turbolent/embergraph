@@ -29,44 +29,31 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("controller operators");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // test UNION
-        suite.addTestSuite(TestUnion.class);
+    final TestSuite suite = new TestSuite("controller operators");
 
-        // @todo test STEPS
-//        suite.addTestSuite(TestSteps.class);
+    // test UNION
+    suite.addTestSuite(TestUnion.class);
 
-        suite.addTestSuite(TestSubqueryOp.class);
+    // @todo test STEPS
+    //        suite.addTestSuite(TestSteps.class);
 
-        // @todo test STAR (transitive closure).
-//        suite.addTestSuite(TestStar.class);
+    suite.addTestSuite(TestSubqueryOp.class);
 
-        return suite;
-        
-    }
-    
+    // @todo test STAR (transitive closure).
+    //        suite.addTestSuite(TestStar.class);
+
+    return suite;
+  }
 }

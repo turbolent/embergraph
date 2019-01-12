@@ -29,47 +29,34 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("join graphs");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        suite.addTestSuite(TestPartitionedJoinGroup.class);
-        
-        // unit tests for allowing joins based on shared variables in preds.
-        suite.addTestSuite(TestPartitionedJoinGroup_canJoin.class);
+    final TestSuite suite = new TestSuite("join graphs");
 
-        // more complex logic for join paths.
-        suite.addTestSuite(TestPartitionedJoinGroup_canJoinUsingConstraints.class);
+    suite.addTestSuite(TestPartitionedJoinGroup.class);
 
-        // static query optimizer test suite.
-        suite.addTest(org.embergraph.bop.joinGraph.fast.TestAll.suite());
+    // unit tests for allowing joins based on shared variables in preds.
+    suite.addTestSuite(TestPartitionedJoinGroup_canJoin.class);
 
-        // runtime query optimizer test suite.
-        suite.addTest(org.embergraph.bop.joinGraph.rto.TestAll.suite());
+    // more complex logic for join paths.
+    suite.addTestSuite(TestPartitionedJoinGroup_canJoinUsingConstraints.class);
 
-        return suite;
-        
-    }
-    
+    // static query optimizer test suite.
+    suite.addTest(org.embergraph.bop.joinGraph.fast.TestAll.suite());
+
+    // runtime query optimizer test suite.
+    suite.addTest(org.embergraph.bop.joinGraph.rto.TestAll.suite());
+
+    return suite;
+  }
 }

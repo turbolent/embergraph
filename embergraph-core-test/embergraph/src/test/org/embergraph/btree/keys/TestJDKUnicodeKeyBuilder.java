@@ -24,54 +24,40 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.keys;
 
 import java.util.Properties;
-
 import org.embergraph.btree.keys.KeyBuilder.Options;
 
 /**
- * 
  * @todo test factory methods for configuring various parameters.
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestJDKUnicodeKeyBuilder extends AbstractUnicodeKeyBuilderTestCase {
 
-    /**
-     * 
-     */
-    public TestJDKUnicodeKeyBuilder() {
-    }
+  /** */
+  public TestJDKUnicodeKeyBuilder() {}
 
-    /**
-     * @param arg0
-     */
-    public TestJDKUnicodeKeyBuilder(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestJDKUnicodeKeyBuilder(String arg0) {
+    super(arg0);
+  }
 
-    public Properties getProperties() {
+  public Properties getProperties() {
 
-        final Properties properties = new Properties(super.getProperties());
+    final Properties properties = new Properties(super.getProperties());
 
-        properties.setProperty(Options.COLLATOR, CollatorEnum.JDK.toString());
+    properties.setProperty(Options.COLLATOR, CollatorEnum.JDK.toString());
 
-        return properties;
+    return properties;
+  }
 
-    }
-    
-    public void test_correctCollator() {
-        
-        final Properties properties = getProperties();
-        
-        if (log.isInfoEnabled())
-            log.info("properties=" + properties);
+  public void test_correctCollator() {
 
-        final KeyBuilder keyBuilder = (KeyBuilder) KeyBuilder
-                .newUnicodeInstance(properties);
+    final Properties properties = getProperties();
 
-        assertEquals(JDKSortKeyGenerator.class, keyBuilder
-                .getSortKeyGenerator().getClass());
-        
-    }
-    
+    if (log.isInfoEnabled()) log.info("properties=" + properties);
+
+    final KeyBuilder keyBuilder = (KeyBuilder) KeyBuilder.newUnicodeInstance(properties);
+
+    assertEquals(JDKSortKeyGenerator.class, keyBuilder.getSortKeyGenerator().getClass());
+  }
 }

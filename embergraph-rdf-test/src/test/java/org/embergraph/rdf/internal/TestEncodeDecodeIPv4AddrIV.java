@@ -27,53 +27,44 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 
 /**
  * Encode/decode unit tests for {@link IPv4AddrIV}.
- * 
+ *
  * @author <a href="mailto:mike@systap.com">Mike Personick</a>
  * @version $Id$
  */
 public class TestEncodeDecodeIPv4AddrIV extends AbstractEncodeDecodeKeysTestCase {
 
-    /**
-     * 
-     */
-    public TestEncodeDecodeIPv4AddrIV() {
-    }
+  /** */
+  public TestEncodeDecodeIPv4AddrIV() {}
 
-    /**
-     * @param name
-     */
-    public TestEncodeDecodeIPv4AddrIV(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestEncodeDecodeIPv4AddrIV(String name) {
+    super(name);
+  }
 
-    /**
-     * Unit test for round-trip of IPv4 literals.
-     */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test01() throws Exception {
+  /** Unit test for round-trip of IPv4 literals. */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test01() throws Exception {
 
-        final AbstractLiteralIV[] ivs = new AbstractLiteralIV[] {
-            // legal IPv4 (inline)
-            new IPv4AddrIV("1.2.3.4"), 
-            new IPv4AddrIV("1.2.3.4/24"),
+    final AbstractLiteralIV[] ivs =
+        new AbstractLiteralIV[] {
+          // legal IPv4 (inline)
+          new IPv4AddrIV("1.2.3.4"), new IPv4AddrIV("1.2.3.4/24"),
         };
 
-        byte vocab = 1;
+    byte vocab = 1;
 
-        final LiteralExtensionIV[] lits = new LiteralExtensionIV[ivs.length];
-        for (int i = 0; i < ivs.length; i++) {
-            lits[i] = new LiteralExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
-        }
-
-        final URIExtensionIV[] uris = new URIExtensionIV[ivs.length];
-        for (int i = 0; i < ivs.length; i++) {
-            uris[i] = new URIExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
-        }
-
-        doEncodeDecodeTest(ivs);
-        doEncodeDecodeTest(lits);
-        doEncodeDecodeTest(uris);
-
+    final LiteralExtensionIV[] lits = new LiteralExtensionIV[ivs.length];
+    for (int i = 0; i < ivs.length; i++) {
+      lits[i] = new LiteralExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
     }
 
+    final URIExtensionIV[] uris = new URIExtensionIV[ivs.length];
+    for (int i = 0; i < ivs.length; i++) {
+      uris[i] = new URIExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
+    }
+
+    doEncodeDecodeTest(ivs);
+    doEncodeDecodeTest(lits);
+    doEncodeDecodeTest(uris);
+  }
 }

@@ -39,621 +39,538 @@ import java.util.LinkedList;
 import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.log4j.Logger;
-import org.xml.sax.SAXException;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.DefaultInstrumentFactory;
 import org.embergraph.counters.History;
+import org.embergraph.counters.History.SampleIterator;
 import org.embergraph.counters.HistoryInstrument;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.ICounterNode;
 import org.embergraph.counters.ICounterSet;
+import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.PeriodEnum;
-import org.embergraph.counters.History.SampleIterator;
-import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.embergraph.counters.httpd.DummyEventReportingService;
 import org.embergraph.journal.ConcurrencyManager.IConcurrencyManagerCounters;
 import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 import org.embergraph.resources.StoreManager.IStoreManagerCounters;
-import org.embergraph.service.Event;
 import org.embergraph.service.DataService.IDataServiceCounters;
+import org.embergraph.service.Event;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
+import org.xml.sax.SAXException;
 
 /**
  * Some static utility methods.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QueryUtil {
 
-    protected static final Logger log = Logger.getLogger(QueryUtil.class);
+  protected static final Logger log = Logger.getLogger(QueryUtil.class);
 
-    /**
-     * Return the data captured by {@link Pattern} from the path of the
-     * specified <i>counter</i>.
-     * <p>
-     * Note: This is used to extract the parts of the {@link Pattern} which are
-     * of interest - presuming that you mark some parts with capturing groups
-     * and other parts that you do not care about with non-capturing groups.
-     * <p>
-     * Note: There is a presumption that {@link Pattern} was used to select the
-     * counters and that <i>counter</i> is one of the selected counters, in
-     * which case {@link Pattern} is KNOWN to match
-     * {@link ICounterNode#getPath()}.
-     * 
-     * @return The captured groups -or- <code>null</code> if there are no
-     *         capturing groups.
-     */
-    static public String[] getCapturedGroups(final Pattern pattern,
-            final ICounter counter) {
-    
-        if (counter == null)
-            throw new IllegalArgumentException();
-        
-        if (pattern == null) {
-    
-            // no pattern, so no captured groups.
-            return null;
-            
-        }
-        
-        final Matcher m = pattern.matcher(counter.getPath());
-        
-        // #of capturing groups in the pattern.
-        final int groupCount = m.groupCount();
-    
-        if(groupCount == 0) {
-            
-            // No capturing groups.
-            return null;
-    
-        }
-    
-        if (!m.matches()) {
-    
-            throw new IllegalArgumentException("No match? counter=" + counter
-                    + ", regex=" + pattern);
-    
-        }
-    
-        /*
-         * Pattern is matched w/ at least one capturing group so assemble a
-         * label from the matched capturing groups.
-         */
-    
-        if (log.isDebugEnabled()) {
-            log.debug("input  : " + counter.getPath());
-            log.debug("pattern: " + pattern);
-            log.debug("matcher: " + m);
-            log.debug("result : " + m.toMatchResult());
-        }
-    
-        final String[] groups = new String[groupCount];
-    
-        for (int i = 1; i <= groupCount; i++) {
-    
-            final String s = m.group(i);
-    
-            if (log.isDebugEnabled())
-                log.debug("group[" + i + "]: " + m.group(i));
-    
-            groups[i - 1] = s;
-    
-        }
-    
-        return groups;
-    
+  /**
+   * Return the data captured by {@link Pattern} from the path of the specified <i>counter</i>.
+   *
+   * <p>Note: This is used to extract the parts of the {@link Pattern} which are of interest -
+   * presuming that you mark some parts with capturing groups and other parts that you do not care
+   * about with non-capturing groups.
+   *
+   * <p>Note: There is a presumption that {@link Pattern} was used to select the counters and that
+   * <i>counter</i> is one of the selected counters, in which case {@link Pattern} is KNOWN to match
+   * {@link ICounterNode#getPath()}.
+   *
+   * @return The captured groups -or- <code>null</code> if there are no capturing groups.
+   */
+  public static String[] getCapturedGroups(final Pattern pattern, final ICounter counter) {
+
+    if (counter == null) throw new IllegalArgumentException();
+
+    if (pattern == null) {
+
+      // no pattern, so no captured groups.
+      return null;
     }
 
-    /**
-     * Generate a {@link Pattern} from the OR of zero or more strings which must
-     * be matched and zero or more regular expressions which must be matched.
-     * 
-     * @param filter
-     *            A list of strings to be matched (may be null).
-     * @param regex
-     *            A list of regular expressions to be matched (may be null).
-     *            
-     * @return The {@link Pattern} -or- <code>null</code> if both collects are
-     *         empty.
+    final Matcher m = pattern.matcher(counter.getPath());
+
+    // #of capturing groups in the pattern.
+    final int groupCount = m.groupCount();
+
+    if (groupCount == 0) {
+
+      // No capturing groups.
+      return null;
+    }
+
+    if (!m.matches()) {
+
+      throw new IllegalArgumentException("No match? counter=" + counter + ", regex=" + pattern);
+    }
+
+    /*
+     * Pattern is matched w/ at least one capturing group so assemble a
+     * label from the matched capturing groups.
      */
-    static public Pattern getPattern(final Collection<String> filter,
-            final Collection<String> regex) {
 
-        final Pattern pattern;
+    if (log.isDebugEnabled()) {
+      log.debug("input  : " + counter.getPath());
+      log.debug("pattern: " + pattern);
+      log.debug("matcher: " + m);
+      log.debug("result : " + m.toMatchResult());
+    }
 
-        // the regex that we build up (if any).
-        final StringBuilder sb = new StringBuilder();
+    final String[] groups = new String[groupCount];
 
-        /*
-         * Joins multiple values for -filter together in OR of quoted patterns.
-         */
+    for (int i = 1; i <= groupCount; i++) {
 
-        if (filter != null) {
+      final String s = m.group(i);
 
-            for (String val : filter) {
+      if (log.isDebugEnabled()) log.debug("group[" + i + "]: " + m.group(i));
 
-                if (log.isInfoEnabled())
-                    log.info("filter" + "=" + val);
+      groups[i - 1] = s;
+    }
 
-                if (sb.length() > 0) {
+    return groups;
+  }
 
-                    // OR of previous pattern and this pattern.
-                    sb.append("|");
+  /**
+   * Generate a {@link Pattern} from the OR of zero or more strings which must be matched and zero
+   * or more regular expressions which must be matched.
+   *
+   * @param filter A list of strings to be matched (may be null).
+   * @param regex A list of regular expressions to be matched (may be null).
+   * @return The {@link Pattern} -or- <code>null</code> if both collects are empty.
+   */
+  public static Pattern getPattern(
+      final Collection<String> filter, final Collection<String> regex) {
 
-                }
+    final Pattern pattern;
 
-                // non-capturing group.
-                sb.append("(?:.*" + Pattern.quote(val) + ".*)");
+    // the regex that we build up (if any).
+    final StringBuilder sb = new StringBuilder();
 
-            }
+    /*
+     * Joins multiple values for -filter together in OR of quoted patterns.
+     */
 
-        }
+    if (filter != null) {
 
-        /*
-         * Joins multiple values for -regex together in OR of patterns.
-         */
+      for (String val : filter) {
 
-        if (regex != null) {
-            for (String val : regex) {
+        if (log.isInfoEnabled()) log.info("filter" + "=" + val);
 
-                if (log.isInfoEnabled())
-                    log.info("regex" + "=" + val);
-
-                if (sb.length() > 0) {
-
-                    // OR of previous pattern and this pattern.
-                    sb.append("|");
-
-                }
-
-                // Non-capturing group.
-                sb.append("(?:" + val + ")");
-
-            }
-
-        }
-        
         if (sb.length() > 0) {
 
-            final String s = sb.toString();
-
-            if (log.isInfoEnabled())
-                log.info("effective regex filter=" + s);
-
-            pattern = Pattern.compile(s);
-
-        } else {
-
-            pattern = null;
-
+          // OR of previous pattern and this pattern.
+          sb.append("|");
         }
 
-        return pattern;
-        
+        // non-capturing group.
+        sb.append("(?:.*" + Pattern.quote(val) + ".*)");
+      }
     }
 
+    /*
+     * Joins multiple values for -regex together in OR of patterns.
+     */
+
+    if (regex != null) {
+      for (String val : regex) {
+
+        if (log.isInfoEnabled()) log.info("regex" + "=" + val);
+
+        if (sb.length() > 0) {
+
+          // OR of previous pattern and this pattern.
+          sb.append("|");
+        }
+
+        // Non-capturing group.
+        sb.append("(?:" + val + ")");
+      }
+    }
+
+    if (sb.length() > 0) {
+
+      final String s = sb.toString();
+
+      if (log.isInfoEnabled()) log.info("effective regex filter=" + s);
+
+      pattern = Pattern.compile(s);
+
+    } else {
+
+      pattern = null;
+    }
+
+    return pattern;
+  }
+
+  /**
+   * Generate a {@link Pattern} from the OR of zero or more regular expressions which must be
+   * matched.
+   *
+   * @param regex A list of regular expressions to be matched (may be null).
+   * @return The {@link Pattern} -or- <code>null</code> if both collects are empty.
+   */
+  public static Pattern getPattern(final Collection<Pattern> regex) {
+
+    final StringBuilder sb = new StringBuilder();
+
+    for (Pattern val : regex) {
+
+      if (log.isInfoEnabled()) log.info("regex" + "=" + val);
+
+      if (sb.length() > 0) {
+
+        // OR of previous pattern and this pattern.
+        sb.append("|");
+      }
+
+      // Non-capturing group.
+      sb.append("(?:" + val + ")");
+    }
+
+    final String s = sb.toString();
+
+    if (log.isInfoEnabled()) log.info("effective regex filter=" + s);
+
+    return Pattern.compile(s);
+  }
+
+  /**
+   * Read counters matching the optional filter from the file into the given {@link CounterSet}.
+   *
+   * @param file The file.
+   * @param counterSet The {@link CounterSet}.
+   * @param filter An optional filter.
+   * @param nslots The #of periods worth of data to be retained. This is used when a counter not
+   *     already present in <i>counterSet</i> is encountered and controls the #of slots to be
+   *     retained by {@link History} allocated for that counter.
+   * @param unit The unit in which the #of slots was expressed.
+   * @throws IOException
+   * @throws SAXException
+   * @throws ParserConfigurationException
+   */
+  public static void readCountersFromFile(
+      final File file,
+      final CounterSet counterSet,
+      final Pattern filter,
+      final int nslots,
+      final PeriodEnum unit)
+      throws IOException, SAXException, ParserConfigurationException {
+
+    /*
+     * @todo does not roll minutes into hours or hours into days until
+     * overflow of the minutes, which is only after N days.
+     *
+     * @todo this can easily run out of memory if you try to read several
+     * hours worth of performance counters without filtering them by a
+     * regex.
+     */
+    final IInstrumentFactory instrumentFactory =
+        new DefaultInstrumentFactory(nslots, unit, false /* overwrite */);
+
+    readCountersFromFile(file, counterSet, filter, instrumentFactory);
+  }
+
+  /**
+   * Read counters matching the optional filter from the file into the given {@link CounterSet}.
+   *
+   * @param file The file.
+   * @param counterSet The {@link CounterSet}.
+   * @param filter An optional filter.
+   * @param instrumentFactory
+   * @throws IOException
+   * @throws SAXException
+   * @throws ParserConfigurationException
+   */
+  public static void readCountersFromFile(
+      final File file,
+      final CounterSet counterSet,
+      final Pattern filter,
+      final IInstrumentFactory instrumentFactory)
+      throws IOException, SAXException, ParserConfigurationException {
+
+    if (log.isInfoEnabled()) log.info("reading file: " + file);
+
+    InputStream is = null;
+
+    try {
+
+      // use large buffers.  these files are 200-300M each!
+      is = new BufferedInputStream(new FileInputStream(file), Bytes.megabyte32 * 1);
+
+      counterSet.readXML(is, instrumentFactory, filter);
+
+      if (log.isInfoEnabled()) {
+
+        int n = 0;
+        long firstTimestamp = 0;
+        long lastTimestamp = 0;
+
+        final Iterator<ICounter> itr = counterSet.getCounters(null /* filter */);
+
+        while (itr.hasNext()) {
+
+          final ICounter c = itr.next();
+
+          n++;
+
+          System.err.println("Retained: " + c);
+
+          if (!(c.getInstrument() instanceof HistoryInstrument)) {
+
+            continue;
+          }
+
+          final History h = ((HistoryInstrument) c.getInstrument()).getHistory();
+
+          final SampleIterator sitr = h.iterator();
+
+          final long firstSampleTime = sitr.getFirstSampleTime();
+
+          final long lastSampleTime = sitr.getLastSampleTime();
+
+          if (firstSampleTime > 0 && (firstSampleTime < firstTimestamp || firstTimestamp == 0)) {
+
+            firstTimestamp = firstSampleTime;
+          }
+
+          if (lastSampleTime > lastTimestamp) {
+
+            lastTimestamp = lastSampleTime;
+          }
+        }
+
+        log.info(
+            "There are now "
+                + n
+                + " counters covering "
+                + new Date(firstTimestamp)
+                + " : "
+                + new Date(lastTimestamp));
+      }
+
+    } finally {
+
+      if (is != null) {
+
+        is.close();
+      }
+    }
+  }
+
+  /**
+   * Task reads counters matching a regular expression into the caller's {@link CounterSet}.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  public static class ReadCounterSetXMLFileTask implements Callable<Void> {
+
+    final File file;
+
+    final CounterSet counterSet;
+
+    final int nsamples;
+
+    final PeriodEnum period;
+
+    final Pattern regex;
+
     /**
-     * Generate a {@link Pattern} from the OR of zero or more regular
-     * expressions which must be matched.
-     * 
+     * @param file
+     * @param counterSet
+     * @param nsamples
+     * @param period
      * @param regex
-     *            A list of regular expressions to be matched (may be null).
-     * 
-     * @return The {@link Pattern} -or- <code>null</code> if both collects are
-     *         empty.
      */
-    static public Pattern getPattern(final Collection<Pattern> regex) {
+    public ReadCounterSetXMLFileTask(
+        final File file,
+        final CounterSet counterSet,
+        final int nsamples,
+        final PeriodEnum period,
+        final Pattern regex) {
 
-        final StringBuilder sb = new StringBuilder();
+      this.file = file;
 
-        for (Pattern val : regex) {
+      this.counterSet = counterSet;
 
-            if (log.isInfoEnabled())
-                log.info("regex" + "=" + val);
+      this.nsamples = nsamples;
 
-            if (sb.length() > 0) {
+      this.period = period;
 
-                // OR of previous pattern and this pattern.
-                sb.append("|");
-
-            }
-
-            // Non-capturing group.
-            sb.append("(?:" + val + ")");
-
-        }
-    
-        final String s = sb.toString();
-
-        if (log.isInfoEnabled())
-            log.info("effective regex filter=" + s);
-
-        return Pattern.compile(s);
-        
+      this.regex = regex;
     }
 
-    /**
-     * Read counters matching the optional filter from the file into the given
-     * {@link CounterSet}.
-     * 
-     * @param file
-     *            The file.
-     * @param counterSet
-     *            The {@link CounterSet}.
-     * @param filter
-     *            An optional filter.
-     * @param nslots
-     *            The #of periods worth of data to be retained. This is used
-     *            when a counter not already present in <i>counterSet</i> is
-     *            encountered and controls the #of slots to be retained by
-     *            {@link History} allocated for that counter.
-     * @param unit
-     *            The unit in which the #of slots was expressed.
-     * 
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     */
-    static public void readCountersFromFile(final File file,
-            final CounterSet counterSet, final Pattern filter,
-            final int nslots, final PeriodEnum unit) throws IOException,
-            SAXException, ParserConfigurationException {
+    public Void call() throws Exception {
 
-        /*
-         * @todo does not roll minutes into hours or hours into days until
-         * overflow of the minutes, which is only after N days.
-         * 
-         * @todo this can easily run out of memory if you try to read several
-         * hours worth of performance counters without filtering them by a
-         * regex.
-         */
-        final IInstrumentFactory instrumentFactory = new DefaultInstrumentFactory(
-                nslots, unit, false/* overwrite */);
-        
-        readCountersFromFile(
-                file,
-                counterSet,
-                filter,
-                instrumentFactory);
-        
+      QueryUtil.readCountersFromFile(file, counterSet, regex, nsamples, period);
+
+      return null;
     }
 
-    /**
-     * Read counters matching the optional filter from the file into the given
-     * {@link CounterSet}.
-     * 
-     * @param file
-     *            The file.
-     * @param counterSet
-     *            The {@link CounterSet}.
-     * @param filter
-     *            An optional filter.
-     * @param instrumentFactory
-     * 
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     */
-    static public void readCountersFromFile(final File file,
-            final CounterSet counterSet, final Pattern filter,
-            final IInstrumentFactory instrumentFactory) throws IOException,
-            SAXException, ParserConfigurationException {
-        
-        if (log.isInfoEnabled())
-            log.info("reading file: " + file);
-        
-        InputStream is = null;
+    public String toString() {
 
-        try {
+      return getClass()
+          + "{ file="
+          + file
+          + ", nsamples="
+          + nsamples
+          + ", period="
+          + period
+          + ", regex="
+          + regex
+          + "}";
+    }
+  }
 
-            // use large buffers.  these files are 200-300M each!
-            is = new BufferedInputStream(new FileInputStream(file),
-                    Bytes.megabyte32 * 1);
+  /**
+   * Read in {@link Event}s logged on a file in a tab-delimited format.
+   *
+   * @param service The events will be added to this service.
+   * @param file The file from which the events will be read.
+   * @throws IOException
+   * @todo support reading the events.jnl, which should be opened in a read-only mode.
+   */
+  public static void readEvents(final DummyEventReportingService service, final File file)
+      throws IOException {
 
-            counterSet.readXML(is, instrumentFactory, filter);
+    System.out.println("reading events file: " + file);
 
-            if(log.isInfoEnabled()) {
-             
-                int n = 0;
-                long firstTimestamp = 0;
-                long lastTimestamp = 0;
+    BufferedReader reader = null;
 
-                final Iterator<ICounter> itr = counterSet
-                        .getCounters(null/* filter */);
+    try {
 
-                while (itr.hasNext()) {
+      reader = new BufferedReader(new FileReader(file));
 
-                    final ICounter c = itr.next();
+      service.readCSV(reader);
 
-                    n++;
+      System.out.println(
+          "read " + service.rangeCount(0L, Long.MAX_VALUE) + " events from file: " + file);
 
-                    System.err.println("Retained: " + c);
-                    
-                    if(!(c.getInstrument() instanceof HistoryInstrument)) {
-                        
-                        continue;
-                        
-                    }
-                    
-                    final History h = ((HistoryInstrument) c.getInstrument())
-                            .getHistory();
+    } finally {
 
-                    final SampleIterator sitr = h.iterator();
+      if (reader != null) {
 
-                    final long firstSampleTime = sitr.getFirstSampleTime();
+        reader.close();
+      }
+    }
+  }
 
-                    final long lastSampleTime = sitr.getLastSampleTime();
+  /**
+   * Return the specified files, substituting recursively spanned files when a given file is a
+   * directory.
+   *
+   * @param in A collection of zero or more files.
+   * @param filter A filter which will select the files to be accepted.
+   * @return A collection of the accepted files.
+   */
+  public static Collection<File> collectFiles(final Collection<File> in, final FileFilter filter) {
 
-                    if (firstSampleTime > 0
-                            && (firstSampleTime < firstTimestamp || firstTimestamp == 0)) {
+    if (in == null) throw new IllegalArgumentException();
 
-                        firstTimestamp = firstSampleTime;
+    if (filter == null) throw new IllegalArgumentException();
 
-                    }
+    final Collection<File> out = new LinkedList<File>();
 
-                    if (lastSampleTime > lastTimestamp) {
+    for (File file : in) {
 
-                        lastTimestamp = lastSampleTime;
+      if (file.isDirectory()) {
 
-                    }
-                    
-                }
+        // recursively process the files in the directory.
 
-                log.info("There are now " + n + " counters covering "
-                        + new Date(firstTimestamp) + " : "
-                        + new Date(lastTimestamp));
+        if (log.isInfoEnabled()) log.info("Reading directory: " + file);
 
-            }
+        final File[] files = file.listFiles(filter);
 
-        } finally {
+        out.addAll(collectFiles(Arrays.asList(files), filter));
 
-            if (is != null) {
+      } else {
 
-                is.close();
+        // the file is not a directory.
+        if (filter.accept(file)) {
 
-            }
-            
+          out.add(file);
         }
-
+      }
     }
 
-    /**
-     * Task reads counters matching a regular expression into the caller's
-     * {@link CounterSet}.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
-     *         Thompson</a>
-     * @version $Id$
-     */
-    public static class ReadCounterSetXMLFileTask implements Callable<Void> {
-        
-        final File file;
+    return out;
+  }
 
-        final CounterSet counterSet;
+  /**
+   * Return a {@link Pattern} which will match the minimum set of performance counters required by
+   * the load balancer to perform its function.
+   */
+  public static Pattern getRequiredPerformanceCountersFilter() {
 
-        final int nsamples;
+    return requiredPerformanceCountersFilter;
+  }
 
-        final PeriodEnum period;
-        
-        final Pattern regex;
+  private static final String[] requiredPerformanceCounterPaths =
+      new String[] {
+        IRequiredHostCounters.Memory_majorFaultsPerSecond,
+        IRequiredHostCounters.LogicalDisk_PercentFreeSpace,
+        IRequiredHostCounters.CPU_PercentProcessorTime,
+        IHostCounters.CPU_PercentIOWait,
+        IDataServiceCounters.concurrencyManager
+            + ICounterSet.pathSeparator
+            + IConcurrencyManagerCounters.writeService
+            + ICounterSet.pathSeparator
+            + IThreadPoolExecutorTaskCounters.AverageQueuingTime,
+        IDataServiceCounters.resourceManager
+            + ICounterSet.pathSeparator
+            + IResourceManagerCounters.StoreManager
+            + ICounterSet.pathSeparator
+            + IStoreManagerCounters.DataDirBytesAvailable,
+        IDataServiceCounters.resourceManager
+            + ICounterSet.pathSeparator
+            + IResourceManagerCounters.StoreManager
+            + ICounterSet.pathSeparator
+            + IStoreManagerCounters.TmpDirBytesAvailable,
+      };
 
-        /**
-         * 
-         * @param file
-         * @param counterSet
-         * @param nsamples
-         * @param period
-         * @param regex
-         */
-        public ReadCounterSetXMLFileTask(final File file, final CounterSet counterSet,
-                final int nsamples, final PeriodEnum period, final Pattern regex) {
+  private static final Pattern requiredPerformanceCountersFilter =
+      QueryUtil.getPattern(
+          Arrays.asList(requiredPerformanceCounterPaths) /* strings */, null /* regex */);
 
-            this.file = file;
+  /**
+   * Utility may be used to read the required performance counters for the load balancer from zero
+   * or more files specified on the command line. The results are written using the XML interchange
+   * format on stdout.
+   *
+   * @param args The file(s).
+   * @throws IOException
+   * @throws SAXException
+   * @throws ParserConfigurationException
+   */
+  public static void main(String[] args)
+      throws IOException, SAXException, ParserConfigurationException {
 
-            this.counterSet = counterSet;
+    final Pattern filter = getRequiredPerformanceCountersFilter();
 
-            this.nsamples = nsamples;
+    System.err.println("required counter pattern: " + filter);
 
-            this.period = period;
+    final CounterSet counterSet = new CounterSet();
 
-            this.regex = regex;
+    for (String s : args) {
 
-        }
+      final File file = new File(s);
 
-        public Void call() throws Exception {
-
-            QueryUtil.readCountersFromFile(file, counterSet, regex, nsamples,
-                    period);
-
-            return null;
-            
-        }
-
-        public String toString() {
-
-            return getClass() + "{ file=" + file + ", nsamples=" + nsamples
-                    + ", period=" + period + ", regex=" + regex + "}";
-            
-        }
-        
-    }
-    
-    /**
-     * Read in {@link Event}s logged on a file in a tab-delimited format.
-     * 
-     * @param service
-     *            The events will be added to this service.
-     * 
-     * @param file
-     *            The file from which the events will be read.
-     * 
-     * @throws IOException
-     * 
-     * @todo support reading the events.jnl, which should be opened in a
-     *       read-only mode.
-     */
-    public static void readEvents(final DummyEventReportingService service,
-            final File file) throws IOException {
-
-        System.out.println("reading events file: " + file);
-
-        BufferedReader reader = null;
-
-        try {
-
-            reader = new BufferedReader(new FileReader(file));
-
-            service.readCSV(reader);
-
-            System.out.println("read " + service.rangeCount(0L, Long.MAX_VALUE)
-                    + " events from file: " + file);
-
-        } finally {
-
-            if (reader != null) {
-
-                reader.close();
-
-            }
-
-        }
-
+      readCountersFromFile(
+          file,
+          counterSet,
+          filter,
+          new DefaultInstrumentFactory(60 /* slots */, PeriodEnum.Minutes, false /* overwrite */));
     }
 
-    /**
-     * Return the specified files, substituting recursively spanned files when a
-     * given file is a directory.
-     * 
-     * @param in
-     *            A collection of zero or more files.
-     * @param filter
-     *            A filter which will select the files to be accepted.
-     *            
-     * @return A collection of the accepted files.
-     */
-    public static Collection<File> collectFiles(final Collection<File> in,
-            final FileFilter filter) {
-        
-        if (in == null)
-            throw new IllegalArgumentException();
-
-        if (filter == null)
-            throw new IllegalArgumentException();
-
-        final Collection<File> out = new LinkedList<File>();
-
-        for (File file : in) {
-
-            if (file.isDirectory()) {
-
-                // recursively process the files in the directory.
-
-                if (log.isInfoEnabled())
-                    log.info("Reading directory: " + file);
-
-                final File[] files = file.listFiles(filter);
-
-                out
-                        .addAll(collectFiles(Arrays.asList(files), filter));
-
-            } else {
-
-                // the file is not a directory.
-                if(filter.accept(file)) {
-
-                    out.add(file);
-                    
-                }
-
-            }
-
-        }
-        
-        return out;
-        
-    }
-
-	/**
-	 * Return a {@link Pattern} which will match the minimum set of performance
-	 * counters required by the load balancer to perform its function.
-	 */
-	public static Pattern getRequiredPerformanceCountersFilter() {
-
-		return requiredPerformanceCountersFilter;
-
-	}
-
-	private static final String[] requiredPerformanceCounterPaths = new String[] {
-
-			IRequiredHostCounters.Memory_majorFaultsPerSecond,
-
-			IRequiredHostCounters.LogicalDisk_PercentFreeSpace,
-
-			IRequiredHostCounters.CPU_PercentProcessorTime,
-
-			IHostCounters.CPU_PercentIOWait,
-
-			IDataServiceCounters.concurrencyManager + ICounterSet.pathSeparator
-					+ IConcurrencyManagerCounters.writeService
-					+ ICounterSet.pathSeparator
-					+ IThreadPoolExecutorTaskCounters.AverageQueuingTime,
-
-			IDataServiceCounters.resourceManager + ICounterSet.pathSeparator
-					+ IResourceManagerCounters.StoreManager
-					+ ICounterSet.pathSeparator
-					+ IStoreManagerCounters.DataDirBytesAvailable,
-
-			IDataServiceCounters.resourceManager + ICounterSet.pathSeparator
-					+ IResourceManagerCounters.StoreManager
-					+ ICounterSet.pathSeparator
-					+ IStoreManagerCounters.TmpDirBytesAvailable, };
-
-	private static final Pattern requiredPerformanceCountersFilter = QueryUtil
-			.getPattern(
-					Arrays.asList(requiredPerformanceCounterPaths)/* strings */,
-					null/* regex */);
-
-	/**
-	 * Utility may be used to read the required performance counters for the
-	 * load balancer from zero or more files specified on the command line. The
-	 * results are written using the XML interchange format on stdout.
-	 * 
-	 * @param args The file(s).
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 */
-	public static void main(String[] args) throws IOException, SAXException,
-			ParserConfigurationException {
-
-		final Pattern filter = getRequiredPerformanceCountersFilter();
-
-		System.err.println("required counter pattern: " + filter);
-
-		final CounterSet counterSet = new CounterSet();
-
-		for (String s : args) {
-
-			final File file = new File(s);
-
-			readCountersFromFile(file, counterSet, filter,
-					new DefaultInstrumentFactory(60/* slots */,
-							PeriodEnum.Minutes, false/* overwrite */));
-
-		}
-
-		System.out.println("counters: " + counterSet.asXML(null/* filter */));
-
-	}
-
+    System.out.println("counters: " + counterSet.asXML(null /* filter */));
+  }
 }

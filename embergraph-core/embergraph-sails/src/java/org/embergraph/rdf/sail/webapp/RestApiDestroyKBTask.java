@@ -19,40 +19,36 @@ package org.embergraph.rdf.sail.webapp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.sail.DestroyKBTask;
 
 /**
  * Destroy a namespace (REST API).
- * 
+ *
  * @author bryan
  */
 class RestApiDestroyKBTask extends AbstractDelegateRestApiTask<Void> {
 
-   public RestApiDestroyKBTask(final HttpServletRequest req,
-         final HttpServletResponse resp, final String namespace) {
+  public RestApiDestroyKBTask(
+      final HttpServletRequest req, final HttpServletResponse resp, final String namespace) {
 
-      super(req, resp, namespace, ITx.UNISOLATED, new DestroyKBTask(namespace));
+    super(req, resp, namespace, ITx.UNISOLATED, new DestroyKBTask(namespace));
+  }
 
-   }
+  @Override
+  public final boolean isReadOnly() {
+    return false;
+  }
 
-   @Override
-   final public boolean isReadOnly() {
-      return false;
-   }
+  @Override
+  public Void call() throws Exception {
 
-   @Override
-   public Void call() throws Exception {
+    // Destroy namespace.
+    super.call();
 
-      // Destroy namespace.
-      super.call();
+    buildResponse(
+        HttpServletResponse.SC_OK, EmbergraphServlet.MIME_TEXT_PLAIN, "DELETED: " + namespace);
 
-      buildResponse(HttpServletResponse.SC_OK,
-            EmbergraphServlet.MIME_TEXT_PLAIN, "DELETED: " + namespace);
-
-      return null;
-
-   }
-
+    return null;
+  }
 }

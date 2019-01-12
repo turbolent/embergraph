@@ -2,50 +2,43 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Iterator;
 import java.util.concurrent.Callable;
-
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Index terms for keyword search.
- */
+/** Index terms for keyword search. */
 class FullTextIndexWriterTask implements Callable<Long> {
 
-//    static private final transient Logger log = Logger
-//            .getLogger(FullTextIndexWriterTask.class);
+  //    static private final transient Logger log = Logger
+  //            .getLogger(FullTextIndexWriterTask.class);
 
-    private final IValueCentricTextIndexer<?> textIndexer;
-    
-    private final int capacity;
-    
-    private final Iterator<EmbergraphValue> itr;
+  private final IValueCentricTextIndexer<?> textIndexer;
 
-    public FullTextIndexWriterTask(final IValueCentricTextIndexer<?> textIndexer,
-            final int capacity, final Iterator<EmbergraphValue> itr) {
+  private final int capacity;
 
-        if (textIndexer == null)
-            throw new IllegalArgumentException();
+  private final Iterator<EmbergraphValue> itr;
 
-        this.textIndexer = textIndexer;
-        
-        this.capacity = capacity;
-        
-        this.itr = itr;
-        
-    }
-    
-    /**
-     * Elapsed time for this operation.
-     */
-    public Long call() throws Exception {
+  public FullTextIndexWriterTask(
+      final IValueCentricTextIndexer<?> textIndexer,
+      final int capacity,
+      final Iterator<EmbergraphValue> itr) {
 
-        final long _begin = System.currentTimeMillis();
+    if (textIndexer == null) throw new IllegalArgumentException();
 
-        textIndexer.index(capacity, itr);
+    this.textIndexer = textIndexer;
 
-        final long elapsed = System.currentTimeMillis() - _begin;
-        
-        return elapsed;
+    this.capacity = capacity;
 
-    }
-    
+    this.itr = itr;
+  }
+
+  /** Elapsed time for this operation. */
+  public Long call() throws Exception {
+
+    final long _begin = System.currentTimeMillis();
+
+    textIndexer.index(capacity, itr);
+
+    final long elapsed = System.currentTimeMillis() - _begin;
+
+    return elapsed;
+  }
 }

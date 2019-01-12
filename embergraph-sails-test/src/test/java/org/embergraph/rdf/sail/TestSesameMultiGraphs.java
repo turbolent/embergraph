@@ -39,120 +39,132 @@ import org.openrdf.sail.memory.MemoryStore;
  */
 public class TestSesameMultiGraphs {
 
-    public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
 
-        final Sail sail;
-        final SailRepository repo;
-        final SailRepositoryConnection cxn;
-        
-        sail = new MemoryStore();
-        repo = new SailRepository(sail);
-        
-        repo.initialize();
-        cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        
-        try {
-    
-            final ValueFactory vf = sail.getValueFactory();
-            
-            final String ns = "http://namespace/";
-            
-            URI a = vf.createURI(ns+"a");
-            URI b = vf.createURI(ns+"b");
-            URI c = vf.createURI(ns+"c");
-            URI g1 = vf.createURI(ns+"graph1");
-            URI g2 = vf.createURI(ns+"graph2");
-/**/
-            cxn.setNamespace("ns", ns);
-            
-            cxn.add(a, b, c, g1, g2);
+    final Sail sail;
+    final SailRepository repo;
+    final SailRepositoryConnection cxn;
 
-            /*
-             * Note: The either flush() or commit() is required to flush the
-             * statement buffers to the database before executing any operations
-             * that go around the sail.
-             */
-            cxn.commit();
-            
-            {
-                
-                String query = 
-                    "PREFIX rdf: <"+RDF.NAMESPACE+"> " +
-                    "PREFIX rdfs: <"+RDFS.NAMESPACE+"> " +
-                    "PREFIX ns: <"+ns+"> " +
-                    
-                    "select ?p ?o " +
-                    "WHERE { " +
-                    "  ns:a ?p ?o . " +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                TupleQueryResult result = tupleQuery.evaluate();
-                
-                System.err.println("no dataset specified, RDF-MERGE, should produce one solution:");
-                while (result.hasNext()) {
-                    System.err.println(result.next());
-                }
- 
-            }
-            
-            {
-                
-                String query = 
-                    "PREFIX rdf: <"+RDF.NAMESPACE+"> " +
-                    "PREFIX rdfs: <"+RDFS.NAMESPACE+"> " +
-                    "PREFIX ns: <"+ns+"> " +
-                    
-                    "select ?p ?o " +
-                    "from <"+g1+">" +
-                    "from <"+g2+">" +
-                    "WHERE { " +
-                    "  ns:a ?p ?o . " +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                TupleQueryResult result = tupleQuery.evaluate();
-                
-                System.err.println("default graph query, RDF-MERGE, should produce one solution:");
-                while (result.hasNext()) {
-                    System.err.println(result.next());
-                }
- 
-            }
-            
-            {
-                
-                String query = 
-                    "PREFIX rdf: <"+RDF.NAMESPACE+"> " +
-                    "PREFIX rdfs: <"+RDFS.NAMESPACE+"> " +
-                    "PREFIX ns: <"+ns+"> " +
-                    
-                    "select ?p ?o " +
-                    "from named <"+g1+">" +
-                    "from named <"+g2+">" +
-                    "WHERE { " +
-                    "  graph ?g { ns:a ?p ?o . } " +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                TupleQueryResult result = tupleQuery.evaluate();
-                
-                System.err.println("named graph query, no RDF-MERGE, should produce two solutions:");
-                while (result.hasNext()) {
-                    System.err.println(result.next());
-                }
- 
-            }
-            
-        } finally {
-            cxn.close();
-            sail.shutDown();
+    sail = new MemoryStore();
+    repo = new SailRepository(sail);
+
+    repo.initialize();
+    cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
+
+    try {
+
+      final ValueFactory vf = sail.getValueFactory();
+
+      final String ns = "http://namespace/";
+
+      URI a = vf.createURI(ns + "a");
+      URI b = vf.createURI(ns + "b");
+      URI c = vf.createURI(ns + "c");
+      URI g1 = vf.createURI(ns + "graph1");
+      URI g2 = vf.createURI(ns + "graph2");
+      /**/
+      cxn.setNamespace("ns", ns);
+
+      cxn.add(a, b, c, g1, g2);
+
+      /*
+       * Note: The either flush() or commit() is required to flush the
+       * statement buffers to the database before executing any operations
+       * that go around the sail.
+       */
+      cxn.commit();
+
+      {
+        String query =
+            "PREFIX rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "PREFIX rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "PREFIX ns: <"
+                + ns
+                + "> "
+                + "select ?p ?o "
+                + "WHERE { "
+                + "  ns:a ?p ?o . "
+                + "}";
+
+        final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        TupleQueryResult result = tupleQuery.evaluate();
+
+        System.err.println("no dataset specified, RDF-MERGE, should produce one solution:");
+        while (result.hasNext()) {
+          System.err.println(result.next());
         }
+      }
 
+      {
+        String query =
+            "PREFIX rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "PREFIX rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "PREFIX ns: <"
+                + ns
+                + "> "
+                + "select ?p ?o "
+                + "from <"
+                + g1
+                + ">"
+                + "from <"
+                + g2
+                + ">"
+                + "WHERE { "
+                + "  ns:a ?p ?o . "
+                + "}";
+
+        final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        TupleQueryResult result = tupleQuery.evaluate();
+
+        System.err.println("default graph query, RDF-MERGE, should produce one solution:");
+        while (result.hasNext()) {
+          System.err.println(result.next());
+        }
+      }
+
+      {
+        String query =
+            "PREFIX rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "PREFIX rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "PREFIX ns: <"
+                + ns
+                + "> "
+                + "select ?p ?o "
+                + "from named <"
+                + g1
+                + ">"
+                + "from named <"
+                + g2
+                + ">"
+                + "WHERE { "
+                + "  graph ?g { ns:a ?p ?o . } "
+                + "}";
+
+        final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        TupleQueryResult result = tupleQuery.evaluate();
+
+        System.err.println("named graph query, no RDF-MERGE, should produce two solutions:");
+        while (result.hasNext()) {
+          System.err.println(result.next());
+        }
+      }
+
+    } finally {
+      cxn.close();
+      sail.shutDown();
     }
-    
+  }
 }

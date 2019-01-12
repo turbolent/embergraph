@@ -24,73 +24,60 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /**
  * A Graph Management operation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class GraphManagement extends Update {
+public abstract class GraphManagement extends Update {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param updateType
-     */
-    public GraphManagement(final UpdateType updateType) {
-        
-        super(updateType);
-        
-    }
+  /** @param updateType */
+  public GraphManagement(final UpdateType updateType) {
 
-    /**
-     * @param op
-     */
-    public GraphManagement(final GraphManagement op) {
-        
-        super(op);
-        
-    }
+    super(updateType);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public GraphManagement(final BOp[] args, final Map<String, Object> anns) {
+  /** @param op */
+  public GraphManagement(final GraphManagement op) {
 
-        super(args, anns);
-        
-    }
+    super(op);
+  }
 
-    @Override
-    final public boolean isSilent() {
+  /**
+   * @param args
+   * @param anns
+   */
+  public GraphManagement(final BOp[] args, final Map<String, Object> anns) {
 
-        return getProperty(Annotations.SILENT, Annotations.DEFAULT_SILENT);
+    super(args, anns);
+  }
 
-    }
+  @Override
+  public final boolean isSilent() {
 
-    @Override
-    final public void setSilent(final boolean silent) {
+    return getProperty(Annotations.SILENT, Annotations.DEFAULT_SILENT);
+  }
 
-        setProperty(Annotations.SILENT, silent);
+  @Override
+  public final void setSilent(final boolean silent) {
 
-    }
+    setProperty(Annotations.SILENT, silent);
+  }
 
-    @Override
-    public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-       return new HashSet<IVariable<?>>();
-    }
+  @Override
+  public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 
-    @Override
-    public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-       return new HashSet<IVariable<?>>();
-    }
-
+  @Override
+  public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 }

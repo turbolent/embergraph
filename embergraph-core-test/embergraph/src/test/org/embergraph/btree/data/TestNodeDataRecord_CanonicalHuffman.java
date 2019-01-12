@@ -25,43 +25,35 @@ package org.embergraph.btree.data;
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 
 /**
- * Test suite using the {@link CanonicalHuffmanRabaCoder} to provide key
- * compression.
- * 
+ * Test suite using the {@link CanonicalHuffmanRabaCoder} to provide key compression.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNodeDataRecord_CanonicalHuffman extends AbstractNodeDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestNodeDataRecord_CanonicalHuffman() {
-    }
+  /** */
+  public TestNodeDataRecord_CanonicalHuffman() {}
 
-    /**
-     * @param name
-     */
-    public TestNodeDataRecord_CanonicalHuffman(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestNodeDataRecord_CanonicalHuffman(String name) {
+    super(name);
+  }
 
-    @Override
-    protected boolean mayGenerateLeaves() {
-        return false;
-    }
+  @Override
+  protected boolean mayGenerateLeaves() {
+    return false;
+  }
 
-    @Override
-    protected boolean mayGenerateNodes() {
-        return true;
-    }
+  @Override
+  protected boolean mayGenerateNodes() {
+    return true;
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  protected void setUp() throws Exception {
 
-        coder = new DefaultNodeCoder(CanonicalHuffmanRabaCoder.INSTANCE);
+    super.setUp();
 
-    }
-
+    coder = new DefaultNodeCoder(CanonicalHuffmanRabaCoder.INSTANCE);
+  }
 }

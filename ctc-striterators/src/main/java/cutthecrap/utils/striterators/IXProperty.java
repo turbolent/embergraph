@@ -15,13 +15,11 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-/** IXProperty.java
- */
-
+/** IXProperty.java */
 public interface IXProperty {
-	/** Returns the key of the property **/
-	public String getKey();
+  /** Returns the key of the property * */
+  public String getKey();
 
-	/** Returns the value of the property **/
-	public Object getValue();
+  /** Returns the value of the property * */
+  public Object getValue();
 }

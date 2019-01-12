@@ -22,62 +22,60 @@ import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
 public class PartialEdge extends PartialElement implements Edge {
-    
-    private String label;
-    
-    private Vertex from;
-    
-    private Vertex to;
-    
-    public PartialEdge(final String id) {
-        super(id);
+
+  private String label;
+
+  private Vertex from;
+
+  private Vertex to;
+
+  public PartialEdge(final String id) {
+    super(id);
+  }
+
+  public PartialEdge(final String id, final String from, final String to) {
+    super(id);
+    setFrom(new PartialVertex(from));
+    setTo(new PartialVertex(to));
+  }
+
+  @Override
+  public String getLabel() {
+    return label;
+  }
+
+  @Override
+  public Vertex getVertex(final Direction dir) throws IllegalArgumentException {
+
+    if (dir == Direction.OUT) {
+      return from;
+    } else if (dir == Direction.IN) {
+      return to;
     }
 
-    public PartialEdge(final String id, final String from, final String to) {
-        super(id);
-        setFrom(new PartialVertex(from));
-        setTo(new PartialVertex(to));
-    }
+    throw new IllegalArgumentException();
+  }
 
-    @Override
-    public String getLabel() {
-        return label;
-    }
+  public void setLabel(final String label) {
+    this.label = label;
+  }
 
-    @Override
-    public Vertex getVertex(final Direction dir) throws IllegalArgumentException {
-        
-        if (dir == Direction.OUT) {
-            return from;
-        } else if (dir == Direction.IN) {
-            return to;
-        }
-        
-        throw new IllegalArgumentException();
-        
-    }
-    
-    public void setLabel(final String label) {
-        this.label = label;
-    }
-    
-    public void setFrom(final Vertex v) {
-        this.from = v;
-    }
-    
-    public void setTo(final Vertex v) {
-        this.to = v;
-    }
-    
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("id: " + super.getId());
-        sb.append(", from: " + from.getId());
-        sb.append(", to: " + to.getId());
-        sb.append(", label: " + label);
-        sb.append(", props: ");
-        super.appendProps(sb);
-        return sb.toString();
-    }
-    
+  public void setFrom(final Vertex v) {
+    this.from = v;
+  }
+
+  public void setTo(final Vertex v) {
+    this.to = v;
+  }
+
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("id: " + super.getId());
+    sb.append(", from: " + from.getId());
+    sb.append(", to: " + to.getId());
+    sb.append(", label: " + label);
+    sb.append(", props: ");
+    super.appendProps(sb);
+    return sb.toString();
+  }
 }

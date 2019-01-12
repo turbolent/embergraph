@@ -30,55 +30,53 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint marks the operator as requiring "atOnce" evaluation. All solutions
- * will be buffered by the {@link QueryEngine} before the operator is evaluated.
- * When it is evaluated, it will receive all solutions in a single invocation of
- * that operator. However, the solutions MAY appear in multiple chunks since the
- * {@link QueryEngine} does not guarantee that the chunk will be merged before
- * the operator is invoked. This query hint is allowed in any scope. The hint is
- * transferred as an annotation onto all query plan operators generated from the
- * annotated scope.
- * <p>
- * Note: The "atOnce" hint is basically turned into <code>NOT(PIPELINED)</code>.
- * 
+ * Query hint marks the operator as requiring "atOnce" evaluation. All solutions will be buffered by
+ * the {@link QueryEngine} before the operator is evaluated. When it is evaluated, it will receive
+ * all solutions in a single invocation of that operator. However, the solutions MAY appear in
+ * multiple chunks since the {@link QueryEngine} does not guarantee that the chunk will be merged
+ * before the operator is invoked. This query hint is allowed in any scope. The hint is transferred
+ * as an annotation onto all query plan operators generated from the annotated scope.
+ *
+ * <p>Note: The "atOnce" hint is basically turned into <code>NOT(PIPELINED)</code>.
+ *
  * @see PipelineOp.Annotations#PIPELINED
  */
 final class AtOnceHint extends AbstractBooleanQueryHint {
 
-    protected AtOnceHint() {
-        
-        super(QueryHints.AT_ONCE, !PipelineOp.Annotations.DEFAULT_PIPELINED);
+  protected AtOnceHint() {
 
+    super(QueryHints.AT_ONCE, !PipelineOp.Annotations.DEFAULT_PIPELINED);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof IQueryNode) {
+
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+
+      _setQueryHint(context, scope, op, PipelineOp.Annotations.PIPELINED, !value);
     }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
+    //        if (QueryHintScope.Query.equals(scope)) {
+    //
+    //            /*
+    //             * Also stuff the query hint on the global context for things
+    //             * which look there.
+    //             */
+    //
+    //            conditionalSetGlobalProperty(context,
+    //                    PipelineOp.Annotations.PIPELINED, !value);
+    //
+    //        }
 
-        if (op instanceof IQueryNode) {
-
-            /*
-             * Note: This is set on the queryHint Properties object and then
-             * transferred to the pipeline operator when it is generated.
-             */
-
-            _setQueryHint(context, scope, op, PipelineOp.Annotations.PIPELINED,
-                    !value);
-
-        }
-
-//        if (QueryHintScope.Query.equals(scope)) {
-//            
-//            /*
-//             * Also stuff the query hint on the global context for things
-//             * which look there.
-//             */
-//
-//            conditionalSetGlobalProperty(context,
-//                    PipelineOp.Annotations.PIPELINED, !value);
-//
-//        }
-
-    }
-
+  }
 }

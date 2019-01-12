@@ -23,33 +23,29 @@ package org.embergraph.rdf.sparql.ast;
 
 /**
  * Interface and annotations for named solution sets.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface INamedSolutionSet {
 
-    public interface Annotations {
+  public interface Annotations {
 
-        /**
-         * The name of solution set.
-         */
-        String NAMED_SET = "namedSet";
+    /** The name of solution set. */
+    String NAMED_SET = "namedSet";
+  }
 
-    }
+  /**
+   * Return the name of the solution set.
+   *
+   * @return The name of the solution set.
+   */
+  String getName();
 
-    /**
-     * Return the name of the solution set.
-     * 
-     * @return The name of the solution set.
-     */
-    String getName();
-
-    /**
-     * Set the name of the solution set.
-     * 
-     * @param name
-     *            The name of the solution set.
-     */
-    void setName(final String name);    
+  /**
+   * Set the name of the solution set.
+   *
+   * @param name The name of the solution set.
+   */
+  void setName(final String name);
 }

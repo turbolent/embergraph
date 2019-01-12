@@ -31,58 +31,48 @@ import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 /**
  * A {@link Vocabulary} covering the ontologies used by LUBM.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LUBMVocabulary extends BaseVocabulary {
 
-    /**
-     * De-serialization ctor.
-     */
-    public LUBMVocabulary() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public LUBMVocabulary(final String namespace) {
+  /** De-serialization ctor. */
+  public LUBMVocabulary() {
 
-        super( namespace );
-        
-    }
+    super();
+  }
 
-    /**
-     * Note: The current revision of this class declares vocabulary items which
-     * are required by the {@link DerivedNumericsExtension}. This version of the
-     * class is NOT compatible with the previous version of the class. This
-     * should not be a problem since the LUBM data is just for benchmark
-     * purposes.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/463">
-     *      NoSuchVocabularyItem with LUBMVocabulary for
-     *      DerivedNumericsExtension </a>
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/456">
-     *      IExtension implementations do point lookups on lexicon </a>
-     */
-    @Override
-    protected void addValues() {
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public LUBMVocabulary(final String namespace) {
 
-        addDecl(new RDFVocabularyDecl());
-        addDecl(new RDFSVocabularyDecl());
-        addDecl(new OWLVocabularyDecl());
-        addDecl(new LUBMVocabularyDecl());
+    super(namespace);
+  }
 
-        // Note: Required by DerivedNumericsExtension.
-        addDecl(new XMLSchemaVocabularyDecl());
+  /**
+   * Note: The current revision of this class declares vocabulary items which are required by the
+   * {@link DerivedNumericsExtension}. This version of the class is NOT compatible with the previous
+   * version of the class. This should not be a problem since the LUBM data is just for benchmark
+   * purposes.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/463">NoSuchVocabularyItem with
+   *     LUBMVocabulary for DerivedNumericsExtension </a>
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/456">IExtension implementations
+   *     do point lookups on lexicon </a>
+   */
+  @Override
+  protected void addValues() {
 
-    }
+    addDecl(new RDFVocabularyDecl());
+    addDecl(new RDFSVocabularyDecl());
+    addDecl(new OWLVocabularyDecl());
+    addDecl(new LUBMVocabularyDecl());
 
+    // Note: Required by DerivedNumericsExtension.
+    addDecl(new XMLSchemaVocabularyDecl());
+  }
 }

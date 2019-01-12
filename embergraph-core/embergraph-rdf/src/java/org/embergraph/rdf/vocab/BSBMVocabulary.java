@@ -30,42 +30,35 @@ import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 /**
  * A {@link Vocabulary} covering the ontologies used by LUBM.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BSBMVocabulary extends BaseVocabulary {
 
-    /**
-     * De-serialization ctor.
-     */
-    public BSBMVocabulary() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public BSBMVocabulary(final String namespace) {
+  /** De-serialization ctor. */
+  public BSBMVocabulary() {
 
-        super( namespace );
-        
-    }
+    super();
+  }
 
-    @Override
-    protected void addValues() {
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public BSBMVocabulary(final String namespace) {
 
-        addDecl(new RDFVocabularyDecl());
-        addDecl(new RDFSVocabularyDecl());
-        addDecl(new DCAllVocabularyDecl());
-        addDecl(new XMLSchemaVocabularyDecl());
-        addDecl(new BSBMVocabularyDecl());
+    super(namespace);
+  }
 
-    }
+  @Override
+  protected void addValues() {
 
+    addDecl(new RDFVocabularyDecl());
+    addDecl(new RDFSVocabularyDecl());
+    addDecl(new DCAllVocabularyDecl());
+    addDecl(new XMLSchemaVocabularyDecl());
+    addDecl(new BSBMVocabularyDecl());
+  }
 }

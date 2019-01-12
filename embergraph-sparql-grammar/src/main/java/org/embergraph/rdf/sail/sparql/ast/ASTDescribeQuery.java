@@ -4,22 +4,20 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTDescribeQuery extends ASTQuery {
 
-	public ASTDescribeQuery(int id) {
-		super(id);
-	}
+  public ASTDescribeQuery(int id) {
+    super(id);
+  }
 
-	public ASTDescribeQuery(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTDescribeQuery(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
-	
-	public ASTDescribe getDescribe() {
-		return jjtGetChild(ASTDescribe.class);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
+
+  public ASTDescribe getDescribe() {
+    return jjtGetChild(ASTDescribe.class);
+  }
 }

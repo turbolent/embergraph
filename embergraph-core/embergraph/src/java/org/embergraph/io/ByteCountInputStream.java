@@ -27,55 +27,45 @@ import java.io.InputStream;
 
 /**
  * Input stream which reports the #of bytes read from the underlying stream.
- * <p>
- * Note: All <em>read</em> methods MUST be overridden if you subclass this
- * filter as it overrides them all for better performance.
- * 
+ *
+ * <p>Note: All <em>read</em> methods MUST be overridden if you subclass this filter as it overrides
+ * them all for better performance.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- *          TODO test suite.
+ *     <p>TODO test suite.
  */
 public class ByteCountInputStream extends FilterInputStream {
 
-    private final InputStream in;
-    private int nread = 0;
+  private final InputStream in;
+  private int nread = 0;
 
-    /**
-     * The #of bytes read from the underlying stream.
-     */
-    public int getNRead() {
-        return nread;
-    }
-    
-    /**
-     * @param in
-     */
-    public ByteCountInputStream(final InputStream in) {
-        super(in);
-        this.in = in;
-    }
+  /** The #of bytes read from the underlying stream. */
+  public int getNRead() {
+    return nread;
+  }
 
-    public int read() throws IOException {
-        final int b = super.read();
-        if (b != -1)
-            nread++;
-        return b;
-    }
+  /** @param in */
+  public ByteCountInputStream(final InputStream in) {
+    super(in);
+    this.in = in;
+  }
 
-    public int read(final byte[] a) throws IOException {
-        final int n = in.read(a); // efficiency!
-        if (n != -1)
-            nread += n;
-        return n;
-    }
+  public int read() throws IOException {
+    final int b = super.read();
+    if (b != -1) nread++;
+    return b;
+  }
 
-    public int read(final byte[] a, final int off, final int len)
-            throws IOException {
-        final int n = in.read(a, off, len); // efficiency!
-        if (n != -1)
-            nread += n;
-        return n;
-    }
+  public int read(final byte[] a) throws IOException {
+    final int n = in.read(a); // efficiency!
+    if (n != -1) nread += n;
+    return n;
+  }
 
+  public int read(final byte[] a, final int off, final int len) throws IOException {
+    final int n = in.read(a, off, len); // efficiency!
+    if (n != -1) nread += n;
+    return n;
+  }
 }

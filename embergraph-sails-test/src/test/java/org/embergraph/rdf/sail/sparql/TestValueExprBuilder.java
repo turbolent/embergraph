@@ -23,14 +23,10 @@ package org.embergraph.rdf.sail.sparql;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.algebra.StatementPattern.Scope;
-
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FunctionNode;
@@ -42,651 +38,571 @@ import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /**
  * Test suite for {@link ValueExprBuilder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestEmbergraphExprBuilder.java 5063 2011-08-21 16:13:03Z
- *          thompsonbry $
+ * @version $Id: TestEmbergraphExprBuilder.java 5063 2011-08-21 16:13:03Z thompsonbry $
  */
 public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase {
 
-//    private static final Logger log = Logger
-//            .getLogger(TestValueExprBuilder.class);
-    
-    public TestValueExprBuilder() {
+  //    private static final Logger log = Logger
+  //            .getLogger(TestValueExprBuilder.class);
+
+  public TestValueExprBuilder() {}
+
+  public TestValueExprBuilder(String name) {
+    super(name);
+  }
+
+  /**
+   * Simple variable rename in select expression.
+   *
+   * <pre>
+   * SELECT (?s as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_bind() throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql = "select (?s as ?x) where {?s ?p ?o}";
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(new AssignmentNode(new VarNode("x"), new VarNode("s")));
+      expected.setProjection(projection);
     }
 
-    public TestValueExprBuilder(String name) {
-        super(name);
+    final QueryRoot actual = parse(sparql, baseURI);
+
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
+
+  /**
+   * SELECT using math expression.
+   *
+   * <pre>
+   * SELECT (?s + ?o as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_math_expr()
+      throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql = "select (?s + ?o as ?x) where {?s ?p ?o}";
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.ADD,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * Simple variable rename in select expression.
-     * 
-     * <pre>
-     * SELECT (?s as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_bind() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (?s as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Select using comparison expression.
+   *
+   * <pre>
+   * SELECT (?s < ?o as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_compare_expr()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new VarNode("s")
-                    ));
-            expected.setProjection(projection);
+    final String sparql = "select (?s < ?o as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.LT,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * SELECT using math expression.
-     * 
-     * <pre>
-     * SELECT (?s + ?o as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_math_expr() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (?s + ?o as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /** Simple unit test for a value expression which is a URI. */
+  public void test_select_uri() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.ADD,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select ( <http://xmlns.com/foaf/0.1/> as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new ConstantNode(makeIV(valueFactory.createURI("http://xmlns.com/foaf/0.1/")))));
+      expected.setProjection(projection);
     }
 
-    /**
-     * Select using comparison expression.
-     * 
-     * <pre>
-     * SELECT (?s < ?o as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_compare_expr() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (?s < ?o as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test with BNode. Should be rewritten as an anonymous variable.
+   *
+   * <p>Note: a bare blank node may not appear in the SELECT expression with (bnode as ?x) so we
+   * have to test this somewhere else in the syntax of the query.
+   */
+  public void test_select_bnode() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.LT,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select ?s where {?s ?p _:a1}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-        
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+
+      final VarNode blankNodeVar = new VarNode("-anon-1");
+      blankNodeVar.setAnonymous(true);
+
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              blankNodeVar,
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
     }
 
-    /**
-     * Simple unit test for a value expression which is a URI.
-     */
-    public void test_select_uri() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ( <http://xmlns.com/foaf/0.1/> as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /** Simple unit test for a value expression which is a plain literal. */
+  public void test_select_literal() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new ConstantNode(makeIV(valueFactory
-                                    .createURI("http://xmlns.com/foaf/0.1/")))));
-            expected.setProjection(projection);
+    final String sparql = "select (\"abc\" as ?x) where {?s ?p ?o}";
 
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"), new ConstantNode(makeIV(valueFactory.createLiteral("abc")))));
+      expected.setProjection(projection);
     }
 
-    /**
-     * Unit test with BNode. Should be rewritten as an anonymous variable.
-     * <p>
-     * Note: a bare blank node may not appear in the SELECT expression with
-     * (bnode as ?x) so we have to test this somewhere else in the syntax of the
-     * query.
-     */
-    public void test_select_bnode() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p _:a1}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /** Simple unit test for a value expression which is a <code>xsd:int</code>. */
+  public void test_select_xsd_int() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql =
+        "select (\"12\"^^<http://www.w3.org/2001/XMLSchema#int> as ?x) where {?s ?p ?o}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-
-            final VarNode blankNodeVar = new VarNode("-anon-1");
-            blankNodeVar.setAnonymous(true);
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), blankNodeVar, null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"), new ConstantNode(makeIV(valueFactory.createLiteral(12)))));
+      expected.setProjection(projection);
     }
 
-    /**
-     * Simple unit test for a value expression which is a plain literal.
-     */
-    public void test_select_literal() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (\"abc\" as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (COUNT(?s) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_count_foo()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new ConstantNode(makeIV(valueFactory
-                                    .createLiteral("abc")))));
-            expected.setProjection(projection);
+    final String sparql = "select (count(?s) as ?x) where {?s ?p ?o}";
 
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.COUNT,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * Simple unit test for a value expression which is a <code>xsd:int</code>.
-     */
-    public void test_select_xsd_int() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (\"12\"^^<http://www.w3.org/2001/XMLSchema#int> as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (COUNT(DISTINCT ?s) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_count_distinct_foo()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new ConstantNode(makeIV(valueFactory
-                                    .createLiteral(12)))));
-            expected.setProjection(projection);
+    final String sparql = "select (count(distinct ?s) as ?x) where {?s ?p ?o}";
 
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.COUNT,
+                  Collections.singletonMap(
+                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
+                  // values.
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (COUNT(?s) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_count_foo() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (count(?s) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (COUNT(*) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_count_star()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.COUNT,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (count(*) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.COUNT,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("*")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (COUNT(DISTINCT ?s) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_count_distinct_foo() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (count(distinct ?s) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (COUNT(DISTINT *) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_count_distinct_star()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.COUNT,
-                                    Collections.singletonMap(
-                                            AggregateBase.Annotations.DISTINCT,
-                                            (Object) Boolean.TRUE), // scalar
-                                                                    // values.
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (count(distinct *) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.COUNT,
+                  Collections.singletonMap(
+                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
+                  // values.
+                  new ValueExpressionNode[] { // args
+                    new VarNode("*")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (COUNT(*) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_count_star() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (count(*) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (FunctionCall(?s) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_function_call()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.COUNT,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("*")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (<" + FunctionRegistry.ADD + ">(?s,?o) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.ADD,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (COUNT(DISTINT *) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_count_distinct_star() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (count(distinct *) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_coalesce() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.COUNT,
-                                    Collections.singletonMap(
-                                            AggregateBase.Annotations.DISTINCT,
-                                            (Object) Boolean.TRUE), // scalar
-                                                                    // values.
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("*")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.COALESCE,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (FunctionCall(?s) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_function_call() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (<" + FunctionRegistry.ADD
-                + ">(?s,?o) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (if(?s,?p,?o) as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_if_then_else()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.ADD,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (if(?s,?p,?o) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.IF,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_coalesce() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (regex(?o, "^ali") as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_regex() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.COALESCE,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("p"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select ( regex(?o,\"^ali\") as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.REGEX,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("o"), new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (if(?s,?p,?o) as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_if_then_else() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (if(?s,?p,?o) as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT (regex(?o, "^ali", "i") as ?x) where {?s ?p ?o}
+   * </pre>
+   */
+  public void test_select_regex_flags()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.IF,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("p"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select ( regex(?o,\"^ali\", \"i\") as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.REGEX,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("o"),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("i"))),
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (regex(?o, "^ali") as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_regex() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ( regex(?o,\"^ali\") as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * IN with empty arg list
+   *
+   * <pre>
+   * SELECT (?s IN() as ?x) where {?s ?p ?o}
+   * </pre>
+   *
+   * @see http://www.openrdf.org/issues/browse/SES-818
+   */
+  public void test_select_foo_IN_none()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.REGEX,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("o"),
-                                    new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (?s IN() as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"),
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * <pre>
-     * SELECT (regex(?o, "^ali", "i") as ?x) where {?s ?p ?o}
-     * </pre>
-     */
-    public void test_select_regex_flags() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ( regex(?o,\"^ali\", \"i\") as ?x) where {?s ?p ?o}";
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * IN with a non-empty arg list
+   *
+   * <pre>
+   * SELECT (?s IN(?p,?o) as ?x) where {?s ?p ?o}
+   * </pre>
+   *
+   * @see http://www.openrdf.org/issues/browse/SES-818
+   */
+  public void test_select_foo_IN_bar()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.REGEX,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("o"),
-                                    new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
-                                    new ConstantNode(makeIV(valueFactory.createLiteral("i"))),
-                                    })
-                            ));
-            expected.setProjection(projection);
+    final String sparql = "select (?s IN(?p,?o) as ?x) where {?s ?p ?o}";
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionExpression(
+          new AssignmentNode(
+              new VarNode("x"),
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
+      expected.setProjection(projection);
     }
 
-    /**
-     * IN with empty arg list
-     * 
-     * <pre>
-     * SELECT (?s IN() as ?x) where {?s ?p ?o}
-     * </pre>
-     * 
-     * @see http://www.openrdf.org/issues/browse/SES-818
-     */
-    public void test_select_foo_IN_none() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select (?s IN() as ?x) where {?s ?p ?o}";
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.IN,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    })
-                            ));
-            expected.setProjection(projection);
-
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
-    }
-
-    /**
-     * IN with a non-empty arg list
-     * 
-     * <pre>
-     * SELECT (?s IN(?p,?o) as ?x) where {?s ?p ?o}
-     * </pre>
-     * 
-     * @see http://www.openrdf.org/issues/browse/SES-818
-     */
-    public void test_select_foo_IN_bar() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-
-        final String sparql = "select (?s IN(?p,?o) as ?x) where {?s ?p ?o}";
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionExpression(
-                    new AssignmentNode(
-                            new VarNode("x"),
-                            new FunctionNode(
-                                    FunctionRegistry.IN,
-                                    null, // scalarValues
-                                    new ValueExpressionNode[] {// args
-                                    new VarNode("s"),
-                                    new VarNode("p"),
-                                    new VarNode("o")
-                                    })
-                            ));
-            expected.setProjection(projection);
-
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected.getProjection(), actual.getProjection());
-
-    }
-
+    assertSameAST(sparql, expected.getProjection(), actual.getProjection());
+  }
 }

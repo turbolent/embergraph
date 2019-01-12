@@ -19,56 +19,50 @@ package org.embergraph.ha.msg;
 
 import java.io.IOException;
 import java.util.UUID;
-
-import org.embergraph.io.SerializerUtil;
-
 import junit.framework.TestCase2;
+import org.embergraph.io.SerializerUtil;
 
 public class TestHASendState extends TestCase2 {
 
-    public TestHASendState() {
-    }
+  public TestHASendState() {}
 
-    public TestHASendState(String name) {
-        super(name);
-    }
+  public TestHASendState(String name) {
+    super(name);
+  }
 
-    public void test_roundTrip() throws IOException {
-        
-        final long messageId = 5;
-        final UUID originalSenderUUID = UUID.randomUUID();
-        final UUID senderId = UUID.randomUUID();
-        final long quorumToken = 12;
-        final int replicationFactor = 3;
+  public void test_roundTrip() throws IOException {
 
-        final HASendState expected = new HASendState(messageId,
-                originalSenderUUID, senderId, quorumToken, replicationFactor);
-        
-        final byte[] b = SerializerUtil.serialize(expected);
-        
-        final HASendState actual = (HASendState) SerializerUtil.deserialize(b);
-        
-        assertEquals(expected, actual);
+    final long messageId = 5;
+    final UUID originalSenderUUID = UUID.randomUUID();
+    final UUID senderId = UUID.randomUUID();
+    final long quorumToken = 12;
+    final int replicationFactor = 3;
 
-    }
+    final HASendState expected =
+        new HASendState(messageId, originalSenderUUID, senderId, quorumToken, replicationFactor);
 
-    public void test_getMarker_decode() throws IOException {
+    final byte[] b = SerializerUtil.serialize(expected);
 
-        final long messageId = 5;
-        final UUID originalSenderUUID = UUID.randomUUID();
-        final UUID senderId = UUID.randomUUID();
-        final long quorumToken = 12;
-        final int replicationFactor = 3;
+    final HASendState actual = (HASendState) SerializerUtil.deserialize(b);
 
-        final HASendState expected = new HASendState(messageId,
-                originalSenderUUID, senderId, quorumToken, replicationFactor);
+    assertEquals(expected, actual);
+  }
 
-        final byte[] b = expected.getMarker();
+  public void test_getMarker_decode() throws IOException {
 
-        final HASendState actual = (HASendState) HASendState.decode(b);
+    final long messageId = 5;
+    final UUID originalSenderUUID = UUID.randomUUID();
+    final UUID senderId = UUID.randomUUID();
+    final long quorumToken = 12;
+    final int replicationFactor = 3;
 
-        assertEquals(expected, actual);
+    final HASendState expected =
+        new HASendState(messageId, originalSenderUUID, senderId, quorumToken, replicationFactor);
 
-    }
+    final byte[] b = expected.getMarker();
 
+    final HASendState actual = (HASendState) HASendState.decode(b);
+
+    assertEquals(expected, actual);
+  }
 }

@@ -22,60 +22,54 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.controller;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.NV;
 
 /**
  * UNION()[maxParallel(default all); subqueries=ops]
- * 
+ *
  * <pre>
  * UNION([],{subqueries=[a,b,c]})
  * </pre>
- * 
- * Will run the subqueries <i>a</i>, <i>b</i>, and <i>c</i> in parallel for each
- * source {@link IBindingSet}. The output of those subqueries will be routed to
- * the UNION operator (their parent).
- * 
+ *
+ * Will run the subqueries <i>a</i>, <i>b</i>, and <i>c</i> in parallel for each source {@link
+ * IBindingSet}. The output of those subqueries will be routed to the UNION operator (their parent).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Union extends AbstractSubqueryOp {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Deep copy constructor.
-     * 
-     * @param op
-     */
-    public Union(final Union op) {
-        super(op);
-    }
+  /**
+   * Deep copy constructor.
+   *
+   * @param op
+   */
+  public Union(final Union op) {
+    super(op);
+  }
 
-    /**
-     * Shallow copy constructor.
-     * 
-     * @param args
-     * @param annotations
-     */
-    public Union(final BOp[] args, final Map<String, Object> annotations) {
+  /**
+   * Shallow copy constructor.
+   *
+   * @param args
+   * @param annotations
+   */
+  public Union(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
+    super(args, annotations);
 
-//        if (args.length < 2)
-//            throw new IllegalArgumentException();
+    //        if (args.length < 2)
+    //            throw new IllegalArgumentException();
 
-    }
+  }
 
-    public Union(final BOp[] args, NV... annotations) {
+  public Union(final BOp[] args, NV... annotations) {
 
-        this(args, NV.asMap(annotations));
-        
-    }
-
+    this(args, NV.asMap(annotations));
+  }
 }

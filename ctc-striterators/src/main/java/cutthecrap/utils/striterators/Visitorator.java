@@ -17,34 +17,36 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/********************************
+/**
+ * ******************************
+ *
  * @author Martyn Cutcher
  */
 public class Visitorator implements Iterator {
 
-    private final Iterator m_iter;
-    protected final Object m_context;
-	private final Visitor m_visitor;
-	
-	public Visitorator(Iterator iter, Object context, Visitor visitor) {
-		m_iter = iter;
-		m_context = context;
-		m_visitor = visitor;
-	}
+  private final Iterator m_iter;
+  protected final Object m_context;
+  private final Visitor m_visitor;
 
-	public boolean hasNext() {
-		return m_iter.hasNext();
-	}
-  
-	public Object next() {
-		Object obj = m_iter.next();
-  	
-		m_visitor.visit(obj);
-  	
-		return obj;
-	}
-  
-	public void remove() {
-		m_iter.remove();
-	}
+  public Visitorator(Iterator iter, Object context, Visitor visitor) {
+    m_iter = iter;
+    m_context = context;
+    m_visitor = visitor;
+  }
+
+  public boolean hasNext() {
+    return m_iter.hasNext();
+  }
+
+  public Object next() {
+    Object obj = m_iter.next();
+
+    m_visitor.visit(obj);
+
+    return obj;
+  }
+
+  public void remove() {
+    m_iter.remove();
+  }
 }

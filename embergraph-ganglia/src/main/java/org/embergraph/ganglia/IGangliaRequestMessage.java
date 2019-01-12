@@ -15,9 +15,5 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A ganglia metadata request message.
- */
-public interface IGangliaRequestMessage extends IGangliaMessage {
-
-}
+/** A ganglia metadata request message. */
+public interface IGangliaRequestMessage extends IGangliaMessage {}

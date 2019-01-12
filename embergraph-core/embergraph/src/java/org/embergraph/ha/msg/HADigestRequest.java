@@ -22,28 +22,24 @@ import java.util.UUID;
 
 public class HADigestRequest implements IHADigestRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final UUID storeUUID;
-    
-    public HADigestRequest(final UUID storeUUID) {
+  private final UUID storeUUID;
 
-        this.storeUUID = storeUUID;
-        
-    }
-    
-    @Override
-    public UUID getStoreUUID() {
-        
-        return storeUUID;
-        
-    }
+  public HADigestRequest(final UUID storeUUID) {
 
-    @Override
-    public String toString() {
+    this.storeUUID = storeUUID;
+  }
 
-        return super.toString() + "{storeUUID=" + getStoreUUID() + "}";
+  @Override
+  public UUID getStoreUUID() {
 
-    }
-    
+    return storeUUID;
+  }
+
+  @Override
+  public String toString() {
+
+    return super.toString() + "{storeUUID=" + getStoreUUID() + "}";
+  }
 }

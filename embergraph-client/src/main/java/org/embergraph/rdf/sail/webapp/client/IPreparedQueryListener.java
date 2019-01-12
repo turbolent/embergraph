@@ -20,20 +20,15 @@ package org.embergraph.rdf.sail.webapp.client;
 
 import java.util.UUID;
 
-/**
- * A listener for IPreparedQuery evaluate objects.
- */
+/** A listener for IPreparedQuery evaluate objects. */
 public interface IPreparedQueryListener {
 
-    /**
-     * Callback method from the query evaluation object (GraphQueryResult,
-     * TupleQueryResult, BooleanQueryResult) notifying that the result object
-     * has been closed and the query has either completed or been 
-     * cancelled.
-     * 
-     * @param uuid
-     *          The query id.
-     */
-    void closed(final UUID queryId);
-    
+  /**
+   * Callback method from the query evaluation object (GraphQueryResult, TupleQueryResult,
+   * BooleanQueryResult) notifying that the result object has been closed and the query has either
+   * completed or been cancelled.
+   *
+   * @param uuid The query id.
+   */
+  void closed(final UUID queryId);
 }

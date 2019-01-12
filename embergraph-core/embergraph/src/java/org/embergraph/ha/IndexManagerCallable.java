@@ -24,26 +24,22 @@ package org.embergraph.ha;
 import org.embergraph.journal.IIndexManager;
 
 @SuppressWarnings("serial")
-public abstract class IndexManagerCallable<T> implements
-      IIndexManagerCallable<T> {
+public abstract class IndexManagerCallable<T> implements IIndexManagerCallable<T> {
 
-   private transient IIndexManager indexManager;
+  private transient IIndexManager indexManager;
 
-   public IndexManagerCallable() {
+  public IndexManagerCallable() {}
 
-   }
+  @Override
+  public void setIndexManager(final IIndexManager indexManager) {
+    this.indexManager = indexManager;
+  }
 
-   @Override
-   public void setIndexManager(final IIndexManager indexManager) {
-      this.indexManager = indexManager;
-   }
+  @Override
+  public IIndexManager getIndexManager() {
+    final IIndexManager tmp = this.indexManager;
+    if (tmp == null) throw new IllegalStateException();
 
-   @Override
-   public IIndexManager getIndexManager() {
-      final IIndexManager tmp = this.indexManager;
-      if (tmp == null)
-         throw new IllegalStateException();
-
-      return tmp;
-   }
+    return tmp;
+  }
 }

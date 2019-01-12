@@ -1,9 +1,9 @@
 package it.unimi.dsi.compression;
 
-/*		 
+/*
  * DSI utilities
  *
- * Copyright (C) 2005-2009 Sebastiano Vigna 
+ * Copyright (C) 2005-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -23,40 +23,42 @@ package it.unimi.dsi.compression;
 
 import it.unimi.dsi.fastutil.booleans.BooleanIterator;
 import it.unimi.dsi.io.OutputBitStream;
-
 import java.io.IOException;
 
 /** Coding methods for a specific compression technique. */
 public interface Coder {
-	/** Encodes a symbol.
-	 * 
-	 * @param symbol a symbol.
-	 * @return a boolean iterator returning the bits coding <code>symbol</code>.
-	 */
-	BooleanIterator encode( int symbol );
+  /**
+   * Encodes a symbol.
+   *
+   * @param symbol a symbol.
+   * @return a boolean iterator returning the bits coding <code>symbol</code>.
+   */
+  BooleanIterator encode(int symbol);
 
-	/** Encodes a symbol.
-	 * 
-	 * @param symbol a symbol.
-	 * @param obs the output bit stream where the encoded symbol will be written.
-	 * @return the number of bits written.
-	 */
-	int encode( int symbol, OutputBitStream obs ) throws IOException;
-	
-	/** Flushes the coder.
-	 * 
-	 * <strong>Warning</strong>: this method will <em>not</em> {@link OutputBitStream#flush() flush} <code>obs</code>.
-	 *  
-	 * @param obs the output bit stream where the flushing bits will be written.
-	 * @return the number of bits written to flush the coder.
-	 */
-	
-	int flush( OutputBitStream obs );
+  /**
+   * Encodes a symbol.
+   *
+   * @param symbol a symbol.
+   * @param obs the output bit stream where the encoded symbol will be written.
+   * @return the number of bits written.
+   */
+  int encode(int symbol, OutputBitStream obs) throws IOException;
 
-	/** Flushes the coder.
-	 * 
-	 * @return a boolean iterator returning the bits used to flush this coder.
-	 */
-	
-	BooleanIterator flush();
+  /**
+   * Flushes the coder.
+   *
+   * <p><strong>Warning</strong>: this method will <em>not</em> {@link OutputBitStream#flush()
+   * flush} <code>obs</code>.
+   *
+   * @param obs the output bit stream where the flushing bits will be written.
+   * @return the number of bits written to flush the coder.
+   */
+  int flush(OutputBitStream obs);
+
+  /**
+   * Flushes the coder.
+   *
+   * @return a boolean iterator returning the bits used to flush this coder.
+   */
+  BooleanIterator flush();
 }

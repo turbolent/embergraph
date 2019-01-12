@@ -23,15 +23,12 @@ package org.embergraph.bop.controller;
 
 /**
  * Common annotations for subquery operators.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface SubqueryAnnotations {
 
-    /**
-     * The subquery to be evaluated.
-     */
-    String SUBQUERY = SubqueryAnnotations.class.getName() + ".subquery";
-
+  /** The subquery to be evaluated. */
+  String SUBQUERY = SubqueryAnnotations.class.getName() + ".subquery";
 }

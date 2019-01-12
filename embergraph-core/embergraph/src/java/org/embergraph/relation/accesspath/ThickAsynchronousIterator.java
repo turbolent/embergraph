@@ -30,135 +30,107 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * An {@link IAsynchronousIterator} that may be serialized and sent to a remote
- * JVM for consumption. Since all data to be visited is supplied to the ctor,
- * the client will be able consume the data without waiting.
- * 
+ * An {@link IAsynchronousIterator} that may be serialized and sent to a remote JVM for consumption.
+ * Since all data to be visited is supplied to the ctor, the client will be able consume the data
+ * without waiting.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class ThickAsynchronousIterator<E> implements IAsynchronousIterator<E>,
-        Serializable {
+public class ThickAsynchronousIterator<E> implements IAsynchronousIterator<E>, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5166933016517242441L;
+  /** */
+  private static final long serialVersionUID = -5166933016517242441L;
 
-    private transient boolean open = true;
+  private transient boolean open = true;
 
-    /**
-     * Index of the last element visited by {@link #next()} and <code>-1</code>
-     * if NO elements have been visited.
-     */
-    private int lastIndex;
-    
-    /**
-     * The array of elements to be visited by the iterator.
-     */
-    private final E[] a;
-    
-    /**
-     * Create a thick iterator.
-     * 
-     * @param a
-     *            The array of elements to be visited by the iterator (may be
-     *            empty, but may not be <code>null</code>).
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>a</i> is <code>null</code>.
-     */
-    public ThickAsynchronousIterator(final E[] a) {
+  /**
+   * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
+   * been visited.
+   */
+  private int lastIndex;
 
-        if (a == null)
-            throw new IllegalArgumentException();
-        
-        this.a = a;
+  /** The array of elements to be visited by the iterator. */
+  private final E[] a;
 
-        lastIndex = -1;
-        
-    }
-    
-//    private final void assertOpen() {
-//        
-//        if (!open)
-//            throw new IllegalStateException();
-//        
-//    }
+  /**
+   * Create a thick iterator.
+   *
+   * @param a The array of elements to be visited by the iterator (may be empty, but may not be
+   *     <code>null</code>).
+   * @throws IllegalArgumentException if <i>a</i> is <code>null</code>.
+   */
+  public ThickAsynchronousIterator(final E[] a) {
 
-    public boolean hasNext() {
-        
-        if(open && lastIndex + 1 < a.length)
-            return true;
-        
-        close();
-        
-        return false;
+    if (a == null) throw new IllegalArgumentException();
 
-    }
+    this.a = a;
 
-    public E next() {
-        
-        if (!hasNext())
-            throw new NoSuchElementException();
-        
-        return a[++lastIndex];
-        
-    }
+    lastIndex = -1;
+  }
 
-    public void remove() {
+  //    private final void assertOpen() {
+  //
+  //        if (!open)
+  //            throw new IllegalStateException();
+  //
+  //    }
 
-        throw new UnsupportedOperationException();
-        
-    }
+  public boolean hasNext() {
 
-    /*
-     * ICloseableIterator.
-     */
+    if (open && lastIndex + 1 < a.length) return true;
 
-    public void close() {
+    close();
 
-        open = false;
-        
-    }
+    return false;
+  }
 
-    /*
-     * IAsynchronousIterator.
-     */
-    
-    public boolean isExhausted() {
+  public E next() {
 
-        return !hasNext();
-        
-    }
+    if (!hasNext()) throw new NoSuchElementException();
 
-    /**
-     * Delegates to {@link #hasNext()} since all data are local and timeouts can
-     * not occur.
-     */
-    public boolean hasNext(long timeout, TimeUnit unit) {
+    return a[++lastIndex];
+  }
 
-        return hasNext();
-        
-    }
+  public void remove() {
 
-    /**
-     * Delegates to {@link #next()} since all data are local and timeouts can
-     * not occur.
-     */
-    public E next(long timeout, TimeUnit unit) {
+    throw new UnsupportedOperationException();
+  }
 
-        return next();
-        
-    }
+  /*
+   * ICloseableIterator.
+   */
 
-    private void readObject(ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
-        
-        in.defaultReadObject();
-        
-        open = true;
-        
-   }
-    
+  public void close() {
+
+    open = false;
+  }
+
+  /*
+   * IAsynchronousIterator.
+   */
+
+  public boolean isExhausted() {
+
+    return !hasNext();
+  }
+
+  /** Delegates to {@link #hasNext()} since all data are local and timeouts can not occur. */
+  public boolean hasNext(long timeout, TimeUnit unit) {
+
+    return hasNext();
+  }
+
+  /** Delegates to {@link #next()} since all data are local and timeouts can not occur. */
+  public E next(long timeout, TimeUnit unit) {
+
+    return next();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+    in.defaultReadObject();
+
+    open = true;
+  }
 }

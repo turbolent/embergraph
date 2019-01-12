@@ -15,65 +15,51 @@
 */
 package org.embergraph.ganglia.util;
 
-/**
- * Utility class
- */
+/** Utility class */
 public class BytesUtil {
 
-	/**
-	 * Formats a key as a series of comma delimited unsigned bytes.
-	 * 
-	 * @param key
-	 *            The key.
-	 * 
-	 * @return The string representation of the array as unsigned bytes.
-	 */
-	final public static String toString(final byte[] key) {
+  /**
+   * Formats a key as a series of comma delimited unsigned bytes.
+   *
+   * @param key The key.
+   * @return The string representation of the array as unsigned bytes.
+   */
+  public static final String toString(final byte[] key) {
 
-		if (key == null)
-			return NULL;
+    if (key == null) return NULL;
 
-		return toString(key, 0, key.length);
+    return toString(key, 0, key.length);
+  }
 
-	}
+  /**
+   * Formats a key as a series of comma delimited unsigned bytes.
+   *
+   * @param key The key.
+   * @param off The index of the first byte that will be visited.
+   * @param len The #of bytes to visit.
+   * @return The string representation of the array as unsigned bytes.
+   */
+  public static final String toString(final byte[] key, final int off, final int len) {
 
-	/**
-	 * Formats a key as a series of comma delimited unsigned bytes.
-	 * 
-	 * @param key
-	 *            The key.
-	 * @param off
-	 *            The index of the first byte that will be visited.
-	 * @param len
-	 *            The #of bytes to visit.
-	 * 
-	 * @return The string representation of the array as unsigned bytes.
-	 */
-	final public static String toString(final byte[] key, final int off, final int len) {
+    if (key == null) return NULL;
 
-		if (key == null)
-			return NULL;
+    final StringBuilder sb = new StringBuilder(len * 4 + 2);
 
-		final StringBuilder sb = new StringBuilder(len * 4 + 2);
+    sb.append("[");
 
-		sb.append("[");
+    for (int i = off; i < off + len; i++) {
 
-		for (int i = off; i < off + len; i++) {
+      if (i > 0) sb.append(", ");
 
-			if (i > 0)
-				sb.append(", ");
+      // as an unsigned integer.
+      // sb.append(Integer.toHexString(key[i] & 0xff));
+      sb.append(Integer.toString(key[i] & 0xff));
+    }
 
-			// as an unsigned integer.
-			// sb.append(Integer.toHexString(key[i] & 0xff));
-			sb.append(Integer.toString(key[i] & 0xff));
+    sb.append("]");
 
-		}
+    return sb.toString();
+  }
 
-		sb.append("]");
-
-		return sb.toString();
-
-	}
-
-	private static transient String NULL = "null";
+  private static transient String NULL = "null";
 }

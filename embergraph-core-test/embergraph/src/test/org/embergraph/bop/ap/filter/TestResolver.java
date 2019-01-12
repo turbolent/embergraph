@@ -25,30 +25,22 @@ import junit.framework.TestCase2;
 
 /**
  * Unit tests for {@link BOpResolver}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestResolver extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestResolver() {
-    }
+  /** */
+  public TestResolver() {}
 
-    /**
-     * @param name
-     */
-    public TestResolver(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestResolver(String name) {
+    super(name);
+  }
 
-    /**
-     * TODO Write tests.
-     */
-    public void test_something() {
-//        fail("write tests");
-    }
-        
+  /** TODO Write tests. */
+  public void test_something() {
+    //        fail("write tests");
+  }
 }

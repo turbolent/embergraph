@@ -23,40 +23,34 @@ package org.embergraph.btree;
 
 /**
  * B+Tree utilization report.
- * <p>
- * Note: The utilization numbers reported by this interface are a bit
- * misleading. They only consider the #of index positions in the node or leaf
- * which is full, but do not take into account the manner in which the
- * persistence store allocates space to the node or leaf. For example, for the
- * WORM we do perfect allocations but retain many versions. For the RWStore, we
- * do best-fit allocations but recycle old versions. The space efficiency of the
- * persistence store is typically the main driver, not the utilization rate as
- * reported here.
- * 
+ *
+ * <p>Note: The utilization numbers reported by this interface are a bit misleading. They only
+ * consider the #of index positions in the node or leaf which is full, but do not take into account
+ * the manner in which the persistence store allocates space to the node or leaf. For example, for
+ * the WORM we do perfect allocations but retain many versions. For the RWStore, we do best-fit
+ * allocations but recycle old versions. The space efficiency of the persistence store is typically
+ * the main driver, not the utilization rate as reported here.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: IBTreeUtilizationReport.java 3713 2010-10-01 15:36:09Z
- *          thompsonbry $
+ * @version $Id: IBTreeUtilizationReport.java 3713 2010-10-01 15:36:09Z thompsonbry $
  */
 public interface IBTreeUtilizationReport {
 
-    /**
-     * The leaf utilization percentage [0:100]. The leaf utilization is computed
-     * as the #of values stored in the tree divided by the #of values that could
-     * be stored in the #of allocated leaves.
-     */
-    int getLeafUtilization();
+  /**
+   * The leaf utilization percentage [0:100]. The leaf utilization is computed as the #of values
+   * stored in the tree divided by the #of values that could be stored in the #of allocated leaves.
+   */
+  int getLeafUtilization();
 
-    /**
-     * The node utilization percentage [0:100]. The node utilization is computed
-     * as the #of non-root nodes divided by the #of non-root nodes that could be
-     * addressed by the tree.
-     */
-    int getNodeUtilization();
+  /**
+   * The node utilization percentage [0:100]. The node utilization is computed as the #of non-root
+   * nodes divided by the #of non-root nodes that could be addressed by the tree.
+   */
+  int getNodeUtilization();
 
-    /**
-     * The total utilization percentage [0:100]. This is the average of the leaf
-     * utilization and the node utilization.
-     */
-    int getTotalUtilization();
-
+  /**
+   * The total utilization percentage [0:100]. This is the average of the leaf utilization and the
+   * node utilization.
+   */
+  int getTotalUtilization();
 }

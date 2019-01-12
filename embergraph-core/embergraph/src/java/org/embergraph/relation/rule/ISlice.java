@@ -24,41 +24,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.io.Serializable;
-
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
- * Indicates the first solution to be returned to the caller (offset) and the
- * #of solutions to be returned (limit).
- * 
+ * Indicates the first solution to be returned to the caller (offset) and the #of solutions to be
+ * returned (limit).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ISlice extends Serializable {
 
-    /**
-     * The first solution to be returned to the caller. A value of ZERO (0)
-     * indicates that all solutions should be returned.
-     */
-    public long getOffset();
-    
-    /**
-     * The maximum #of solutions to be returned to the caller. A value of
-     * {@link Long#MAX_VALUE} indicates that there is no limit.
-     * 
-     * @todo modify to be consistent with
-     *       {@link IAccessPath#iterator(long, long, int)} where a limit of ZERO
-     *       (0L) is interpreted as NO limit and a limit of
-     *       {@link Long#MAX_VALUE} is interpreted as ZERO (0L) (that is, also
-     *       no limit).
-     */
-    public long getLimit();
+  /**
+   * The first solution to be returned to the caller. A value of ZERO (0) indicates that all
+   * solutions should be returned.
+   */
+  public long getOffset();
 
-    /**
-     * The index of the last solution that we will generate (OFFSET + LIMIT). If
-     * OFFSET + LIMIT would be greater than {@link Long#MAX_VALUE}, then use
-     * {@link Long#MAX_VALUE} instead.
-     */
-    public long getLast();
-    
+  /**
+   * The maximum #of solutions to be returned to the caller. A value of {@link Long#MAX_VALUE}
+   * indicates that there is no limit.
+   *
+   * @todo modify to be consistent with {@link IAccessPath#iterator(long, long, int)} where a limit
+   *     of ZERO (0L) is interpreted as NO limit and a limit of {@link Long#MAX_VALUE} is
+   *     interpreted as ZERO (0L) (that is, also no limit).
+   */
+  public long getLimit();
+
+  /**
+   * The index of the last solution that we will generate (OFFSET + LIMIT). If OFFSET + LIMIT would
+   * be greater than {@link Long#MAX_VALUE}, then use {@link Long#MAX_VALUE} instead.
+   */
+  public long getLast();
 }

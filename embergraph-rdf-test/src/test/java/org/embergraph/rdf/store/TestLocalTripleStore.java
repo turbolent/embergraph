@@ -23,147 +23,125 @@ package org.embergraph.rdf.store;
 
 import java.io.File;
 import java.util.Properties;
-
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.journal.Options;
 
 /**
- * Proxy test suite for {@link LocalTripleStore} when the backing indices are
- * {@link BTree}s. This configuration does NOT support transactions since the
- * various indices are NOT isolatable.
- * 
+ * Proxy test suite for {@link LocalTripleStore} when the backing indices are {@link BTree}s. This
+ * configuration does NOT support transactions since the various indices are NOT isolatable.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestLocalTripleStore extends AbstractTestCase {
 
-    /**
-     * 
+  /** */
+  public TestLocalTripleStore() {}
+
+  public TestLocalTripleStore(String name) {
+    super(name);
+  }
+
+  public static Test suite() {
+
+    final TestLocalTripleStore delegate = new TestLocalTripleStore(); // !!!! THIS CLASS !!!!
+
+    /*
+     * Use a proxy test suite and specify the delegate.
      */
-    public TestLocalTripleStore() {
-    }
 
-    public TestLocalTripleStore(String name) {
-        super(name);
-    }
-    
-    public static Test suite() {
+    final ProxyTestSuite suite =
+        new ProxyTestSuite(delegate, "Local Triple Store With Provenance Test Suite");
 
-        final TestLocalTripleStore delegate = new TestLocalTripleStore(); // !!!! THIS CLASS !!!!
-
-        /*
-         * Use a proxy test suite and specify the delegate.
-         */
-
-        final ProxyTestSuite suite = new ProxyTestSuite(delegate,
-                "Local Triple Store With Provenance Test Suite");
-
-        /*
-         * List any non-proxied tests (typically bootstrapping tests).
-         */
-
-        // ...
-//        suite.addTestSuite(TestCompletionScan.class);
-        
-        /*
-         * Proxied test suite for use only with the LocalTripleStore.
-         */
-
-        suite.addTestSuite(TestLocalTripleStoreTransactionSemantics.class);
-        
-        suite.addTestSuite(TestLocalTripleStoreDestroy.class);
-
-        /*
-         * Pickup the basic triple store test suite. This is a proxied test
-         * suite, so all the tests will run with the configuration specified in
-         * this test class and its optional .properties file.
-         */
-
-        // basic test suite.
-        suite.addTest(TestTripleStoreBasics.suite());
-        
-        // rules, inference, and truth maintenance test suite.
-        suite.addTest( org.embergraph.rdf.rules.TestAll.suite() );
-
-        return suite;
-        
-    }
-
-    @Override
-    public Properties getProperties() {
-
-        final Properties properties = super.getProperties();
-
-        // turn on statement identifiers.
-        properties
-                .setProperty(
-                        org.embergraph.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,
-                        "true");
-
-        // triples only.
-        properties.setProperty(
-                org.embergraph.rdf.store.AbstractTripleStore.Options.QUADS,
-                "false");
-
-//        properties.setProperty(
-//                org.embergraph.rdf.store.AbstractTripleStore.Options.NESTED_SUBQUERY,
-//                "true");
-
-        return properties;
-
-    }
-    
-    @Override
-    protected AbstractTripleStore getStore(final Properties properties) {
-        
-        return LocalTripleStore.getInstance( properties );
-        
-    }
- 
-    /**
-     * Re-open the same backing store.
-     * 
-     * @param store
-     *            the existing store.
-     * 
-     * @return A new store.
-     * 
-     * @exception Throwable
-     *                if the existing store is closed, or if the store can not
-     *                be re-opened, e.g., from failure to obtain a file lock,
-     *                etc.
+    /*
+     * List any non-proxied tests (typically bootstrapping tests).
      */
-    @Override
-    protected AbstractTripleStore reopenStore(final AbstractTripleStore store) {
 
-        // close the store.
-        store.close();
+    // ...
+    //        suite.addTestSuite(TestCompletionScan.class);
 
-        if (!store.isStable()) {
+    /*
+     * Proxied test suite for use only with the LocalTripleStore.
+     */
 
-            throw new UnsupportedOperationException(
-                    "The backing store is not stable");
+    suite.addTestSuite(TestLocalTripleStoreTransactionSemantics.class);
 
-        }
+    suite.addTestSuite(TestLocalTripleStoreDestroy.class);
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) getProperties().clone();
+    /*
+     * Pickup the basic triple store test suite. This is a proxied test
+     * suite, so all the tests will run with the configuration specified in
+     * this test class and its optional .properties file.
+     */
 
-        // Turn this off now since we want to re-open the same store.
-        properties.setProperty(Options.CREATE_TEMP_FILE, "false");
+    // basic test suite.
+    suite.addTest(TestTripleStoreBasics.suite());
 
-        // The backing file that we need to re-open.
-        final File file = ((LocalTripleStore) store).getIndexManager().getFile();
+    // rules, inference, and truth maintenance test suite.
+    suite.addTest(org.embergraph.rdf.rules.TestAll.suite());
 
-        assertNotNull(file);
+    return suite;
+  }
 
-        // Set the file property explicitly.
-        properties.setProperty(Options.FILE, file.toString());
+  @Override
+  public Properties getProperties() {
 
-        return LocalTripleStore.getInstance(properties);
+    final Properties properties = super.getProperties();
 
+    // turn on statement identifiers.
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "true");
+
+    // triples only.
+    properties.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.QUADS, "false");
+
+    //        properties.setProperty(
+    //                org.embergraph.rdf.store.AbstractTripleStore.Options.NESTED_SUBQUERY,
+    //                "true");
+
+    return properties;
+  }
+
+  @Override
+  protected AbstractTripleStore getStore(final Properties properties) {
+
+    return LocalTripleStore.getInstance(properties);
+  }
+
+  /**
+   * Re-open the same backing store.
+   *
+   * @param store the existing store.
+   * @return A new store.
+   * @exception Throwable if the existing store is closed, or if the store can not be re-opened,
+   *     e.g., from failure to obtain a file lock, etc.
+   */
+  @Override
+  protected AbstractTripleStore reopenStore(final AbstractTripleStore store) {
+
+    // close the store.
+    store.close();
+
+    if (!store.isStable()) {
+
+      throw new UnsupportedOperationException("The backing store is not stable");
     }
 
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) getProperties().clone();
+
+    // Turn this off now since we want to re-open the same store.
+    properties.setProperty(Options.CREATE_TEMP_FILE, "false");
+
+    // The backing file that we need to re-open.
+    final File file = ((LocalTripleStore) store).getIndexManager().getFile();
+
+    assertNotNull(file);
+
+    // Set the file property explicitly.
+    properties.setProperty(Options.FILE, file.toString());
+
+    return LocalTripleStore.getInstance(properties);
+  }
 }

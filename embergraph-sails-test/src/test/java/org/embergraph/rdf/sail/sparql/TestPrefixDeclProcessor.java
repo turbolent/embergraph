@@ -1,93 +1,84 @@
 package org.embergraph.rdf.sail.sparql;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
 
 /**
- * 
  * Test case for the {@link PrefixDeclProcessor}
- * 
- * @author beebs
  *
+ * @author beebs
  */
 public class TestPrefixDeclProcessor extends TestCase {
 
-	@Test
-	public void testValidAdditionalPrefixes() {
-		final String fileURL = this.getClass().getResource("additional-decls-valid.txt")
-				.getFile();
-		
-		final String decl = "wdref";
-		final String declUri = "http://www.wikidata.org/reference/";
+  @Test
+  public void testValidAdditionalPrefixes() {
+    final String fileURL = this.getClass().getResource("additional-decls-valid.txt").getFile();
 
-		//Since this is static, we need to clean the map;
-		PrefixDeclProcessor.defaultDecls.remove(decl);
-		
-		int cnt = PrefixDeclProcessor.defaultDecls.size();
+    final String decl = "wdref";
+    final String declUri = "http://www.wikidata.org/reference/";
 
-		assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
+    // Since this is static, we need to clean the map;
+    PrefixDeclProcessor.defaultDecls.remove(decl);
 
-		System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
-		
-		PrefixDeclProcessor.processAdditionalDecls();
+    int cnt = PrefixDeclProcessor.defaultDecls.size();
 
-		//Validate the decl is added
-		assertTrue(PrefixDeclProcessor.defaultDecls.containsKey(decl));
+    assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
 
-		//The URI is valid
-		assertTrue(PrefixDeclProcessor.defaultDecls.get(decl).equals(declUri));
-		
-		//Validate we added two decls
-		assertTrue((cnt + 2) == PrefixDeclProcessor.defaultDecls.size());
+    System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
 
-	}
+    PrefixDeclProcessor.processAdditionalDecls();
 
-	@Test
-	public void testInvalidAdditionalPrefixes() {
-		final String fileURL = this.getClass().getResource("additional-decls-invalid.txt")
-				.getFile();
-		
-		final String decl = "wdref";
-	
-		//Since this is static, we need to clean the map;
-		PrefixDeclProcessor.defaultDecls.remove(decl);
+    // Validate the decl is added
+    assertTrue(PrefixDeclProcessor.defaultDecls.containsKey(decl));
 
-		int cnt = PrefixDeclProcessor.defaultDecls.size();
+    // The URI is valid
+    assertTrue(PrefixDeclProcessor.defaultDecls.get(decl).equals(declUri));
 
-		assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
+    // Validate we added two decls
+    assertTrue((cnt + 2) == PrefixDeclProcessor.defaultDecls.size());
+  }
 
-		System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
-		
-		PrefixDeclProcessor.processAdditionalDecls();
+  @Test
+  public void testInvalidAdditionalPrefixes() {
+    final String fileURL = this.getClass().getResource("additional-decls-invalid.txt").getFile();
 
-		//Validate no decls were added
-		assertTrue((cnt) == PrefixDeclProcessor.defaultDecls.size());
-		
+    final String decl = "wdref";
 
-	}
+    // Since this is static, we need to clean the map;
+    PrefixDeclProcessor.defaultDecls.remove(decl);
 
-	@Test
-	public void testFileDoesNotExist() {
-		final String fileURL =  "/no/such/file/exists";
-		
-		final String decl = "wdref";
-	
-		//Since this is static, we need to clean the map;
-		PrefixDeclProcessor.defaultDecls.remove(decl);
+    int cnt = PrefixDeclProcessor.defaultDecls.size();
 
-		int cnt = PrefixDeclProcessor.defaultDecls.size();
+    assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
 
-		assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
+    System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
 
-		System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
-		
-		PrefixDeclProcessor.processAdditionalDecls();
+    PrefixDeclProcessor.processAdditionalDecls();
 
-		assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
-		
-		//Validate no decls were added
-		assertTrue((cnt) == PrefixDeclProcessor.defaultDecls.size());
+    // Validate no decls were added
+    assertTrue((cnt) == PrefixDeclProcessor.defaultDecls.size());
+  }
 
-	}
+  @Test
+  public void testFileDoesNotExist() {
+    final String fileURL = "/no/such/file/exists";
+
+    final String decl = "wdref";
+
+    // Since this is static, we need to clean the map;
+    PrefixDeclProcessor.defaultDecls.remove(decl);
+
+    int cnt = PrefixDeclProcessor.defaultDecls.size();
+
+    assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
+
+    System.setProperty(PrefixDeclProcessor.Options.ADDITIONAL_DECLS_FILE, fileURL);
+
+    PrefixDeclProcessor.processAdditionalDecls();
+
+    assertTrue(!PrefixDeclProcessor.defaultDecls.containsKey(decl));
+
+    // Validate no decls were added
+    assertTrue((cnt) == PrefixDeclProcessor.defaultDecls.size());
+  }
 }

@@ -23,29 +23,21 @@ package org.embergraph.rdf.sparql.ast;
 
 /**
  * An interface for AST nodes which have a {@link GraphPatternGroup} annotation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IGraphPatternContainer {
 
-    public interface Annotations {
+  public interface Annotations {
 
-        /**
-         * The {@link GraphPatternGroup} annotation.
-         */
-        String GRAPH_PATTERN = "graphPattern";
+    /** The {@link GraphPatternGroup} annotation. */
+    String GRAPH_PATTERN = "graphPattern";
+  }
 
-    }
+  /** Return the graph pattern. */
+  GraphPatternGroup<IGroupMemberNode> getGraphPattern();
 
-    /**
-     * Return the graph pattern.
-     */
-    GraphPatternGroup<IGroupMemberNode> getGraphPattern();
-
-    /**
-     * Set the graph pattern.
-     */
-    void setGraphPattern(GraphPatternGroup<IGroupMemberNode> graphPattern);
-
+  /** Set the graph pattern. */
+  void setGraphPattern(GraphPatternGroup<IGroupMemberNode> graphPattern);
 }

@@ -3,201 +3,181 @@ package org.embergraph.rdf.internal;
 import junit.framework.TestCase2;
 
 public class TestInlineLocalNameIntegerURIHandler extends TestCase2 {
-	
-	private MyInlineLocalNameIntegerURIHandler handler = null;
-	
-	private int packedId = 1;
-	
-	public TestInlineLocalNameIntegerURIHandler(final String name) {
-		super(name);
-		handler = new MyInlineLocalNameIntegerURIHandler("http://www.embergraph.org/",packedId);
-	}
-	
 
-	public void test_packValues() {
-		
-		final long testVal = 123456789; 
+  private MyInlineLocalNameIntegerURIHandler handler = null;
 
-		check(handler, testVal, packedId);
-		
-		
-	}
-	
-	public void test_idrange() {
-		
-		final long value = 5555555555L;
-		
-		for(int i = 0; i < 32; i++) {
+  private int packedId = 1;
 
-			final MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", i);
-			
-			check(h, value, i);
-			
-		}
+  public TestInlineLocalNameIntegerURIHandler(final String name) {
+    super(name);
+    handler = new MyInlineLocalNameIntegerURIHandler("http://www.embergraph.org/", packedId);
+  }
 
-		
-	}
-	
-	public void test_maxInteger() {
-		
-		final long tooBig = 576460752303423000L;
-		
-		try {
-			handler.packValue(tooBig);
-		} catch (RuntimeException e) {
-			//This should throw an exception
-			assertTrue(true);
-			return;
-		}
-		
-		fail(tooBig +" exceeds the maximum value.");
-	}
-	
-	public void test_maxId() {
-		
-		try {
-			@SuppressWarnings("unused")
-			MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", 33);
-		} catch (RuntimeException e) {
-			// This should throw an exception
-			assertTrue(true);
-			return;
-		}
+  public void test_packValues() {
 
-		fail(32 + " exceeds the maximum id value.");
-	}
-	
-	/**
-	 *  Test of the maximum int value edge case.
-	 * 
-	 */
-	public void test_edgeCase1() {
-		
-		final long edge = 144115188075856000L - 1;
-		final int id = 16;
+    final long testVal = 123456789;
 
-		MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-				"www.embergraph.org", id);
+    check(handler, testVal, packedId);
+  }
 
-		check(h,edge,id);
-	}
-	
-	
-	public void test_edgeCase2() {
-		
-		final long edge = 144115188075856000L;
-		final int id = 16;
+  public void test_idrange() {
 
-	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", id);
+    final long value = 5555555555L;
 
-		try {
-			@SuppressWarnings("unused")
-			final long packedVal = h.packValue(edge);
-		} catch (RuntimeException e) {
-			//Should fail
-			assertTrue(true);
-			return;
-		}
-		fail();
-		
-	}
-	
-	public void test_edgeCase3() {
-		
-		final long edge = 0;
-		final int id = 16;
+    for (int i = 0; i < 32; i++) {
 
-	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", id);
+      final MyInlineLocalNameIntegerURIHandler h =
+          new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", i);
 
-		try {
-			@SuppressWarnings(value = { "unused" })
-			final long packedVal = h.packValue(edge);
-		} catch (RuntimeException e) {
-			//Should not fail
-			fail();
-		}
+      check(h, value, i);
+    }
+  }
 
-		check(h,edge,id);
-		
-	}	
+  public void test_maxInteger() {
 
-	public void test_edgeCase4() {
-		
-		final long edge = -1;
-		final int id = 16;
+    final long tooBig = 576460752303423000L;
 
-	    MyInlineLocalNameIntegerURIHandler h = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", id);
+    try {
+      handler.packValue(tooBig);
+    } catch (RuntimeException e) {
+      // This should throw an exception
+      assertTrue(true);
+      return;
+    }
 
-		try {
-			@SuppressWarnings(value = { "unused" })
-			final long packedVal = h.packValue(edge);
-		} catch (RuntimeException e) {
-			//Should fail
-			assertTrue(true);
-			return;
-		}
+    fail(tooBig + " exceeds the maximum value.");
+  }
 
-		fail();
-		
-	}	
-	
-	/**
-	 * Test the two different ids with the same integer value are
-	 * different packed values.
-	 */
-	public void test_differentIds() {
-		
-		final long value = 123456789;
-		final int id1 = 4;
-		final int id2 = 31;
-		
-		MyInlineLocalNameIntegerURIHandler h1 = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", id1);
+  public void test_maxId() {
 
-		MyInlineLocalNameIntegerURIHandler h2 = new MyInlineLocalNameIntegerURIHandler(
-					"www.embergraph.org", id2);
-		
-		final long packed1 = h1.packValue(value);
-		final long packed2 = h2.packValue(value);
-	
-		//Different IDs should differ
-		assertTrue(packed1 != packed2);
-		
-		final long unpacked1 = h1.unpackValue(packed1);
-		final long unpacked2 = h2.unpackValue(packed2);
-		
-		//These should be the same value
-		assertTrue(unpacked1 == unpacked2);
-		
-	}
-	
-	private class MyInlineLocalNameIntegerURIHandler extends InlineLocalNameIntegerURIHandler {
+    try {
+      @SuppressWarnings("unused")
+      MyInlineLocalNameIntegerURIHandler h =
+          new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", 33);
+    } catch (RuntimeException e) {
+      // This should throw an exception
+      assertTrue(true);
+      return;
+    }
 
-		public MyInlineLocalNameIntegerURIHandler(String namespace, int packedId) {
-			super(namespace, packedId);
-		}
+    fail(32 + " exceeds the maximum id value.");
+  }
 
-	}
-	
-	private void check(MyInlineLocalNameIntegerURIHandler h, long value, int id) {
+  /** Test of the maximum int value edge case. */
+  public void test_edgeCase1() {
 
-		final long packedVal = h.packValue(value);
-		
-		if(log.isDebugEnabled()) {
-			log.debug("packedVal: " + packedVal);
-			log.debug("test:  " + value + " : " + h.unpackValue(packedVal));
-			log.debug("packedId:  " + id + " : " + h.unpackId(packedVal));
-		}
+    final long edge = 144115188075856000L - 1;
+    final int id = 16;
 
-		assertTrue( value  == h.unpackValue(packedVal) );
-		
-		assertTrue ( id == h.unpackId(packedVal));
+    MyInlineLocalNameIntegerURIHandler h =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id);
 
-	}
+    check(h, edge, id);
+  }
 
+  public void test_edgeCase2() {
+
+    final long edge = 144115188075856000L;
+    final int id = 16;
+
+    MyInlineLocalNameIntegerURIHandler h =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id);
+
+    try {
+      @SuppressWarnings("unused")
+      final long packedVal = h.packValue(edge);
+    } catch (RuntimeException e) {
+      // Should fail
+      assertTrue(true);
+      return;
+    }
+    fail();
+  }
+
+  public void test_edgeCase3() {
+
+    final long edge = 0;
+    final int id = 16;
+
+    MyInlineLocalNameIntegerURIHandler h =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id);
+
+    try {
+      @SuppressWarnings(value = {"unused"})
+      final long packedVal = h.packValue(edge);
+    } catch (RuntimeException e) {
+      // Should not fail
+      fail();
+    }
+
+    check(h, edge, id);
+  }
+
+  public void test_edgeCase4() {
+
+    final long edge = -1;
+    final int id = 16;
+
+    MyInlineLocalNameIntegerURIHandler h =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id);
+
+    try {
+      @SuppressWarnings(value = {"unused"})
+      final long packedVal = h.packValue(edge);
+    } catch (RuntimeException e) {
+      // Should fail
+      assertTrue(true);
+      return;
+    }
+
+    fail();
+  }
+
+  /** Test the two different ids with the same integer value are different packed values. */
+  public void test_differentIds() {
+
+    final long value = 123456789;
+    final int id1 = 4;
+    final int id2 = 31;
+
+    MyInlineLocalNameIntegerURIHandler h1 =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id1);
+
+    MyInlineLocalNameIntegerURIHandler h2 =
+        new MyInlineLocalNameIntegerURIHandler("www.embergraph.org", id2);
+
+    final long packed1 = h1.packValue(value);
+    final long packed2 = h2.packValue(value);
+
+    // Different IDs should differ
+    assertTrue(packed1 != packed2);
+
+    final long unpacked1 = h1.unpackValue(packed1);
+    final long unpacked2 = h2.unpackValue(packed2);
+
+    // These should be the same value
+    assertTrue(unpacked1 == unpacked2);
+  }
+
+  private class MyInlineLocalNameIntegerURIHandler extends InlineLocalNameIntegerURIHandler {
+
+    public MyInlineLocalNameIntegerURIHandler(String namespace, int packedId) {
+      super(namespace, packedId);
+    }
+  }
+
+  private void check(MyInlineLocalNameIntegerURIHandler h, long value, int id) {
+
+    final long packedVal = h.packValue(value);
+
+    if (log.isDebugEnabled()) {
+      log.debug("packedVal: " + packedVal);
+      log.debug("test:  " + value + " : " + h.unpackValue(packedVal));
+      log.debug("packedId:  " + id + " : " + h.unpackId(packedVal));
+    }
+
+    assertTrue(value == h.unpackValue(packedVal));
+
+    assertTrue(id == h.unpackId(packedVal));
+  }
 }

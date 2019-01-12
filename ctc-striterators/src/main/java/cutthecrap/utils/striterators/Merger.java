@@ -15,31 +15,28 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.Iterator;
 import java.util.Comparator;
+import java.util.Iterator;
 
-/**
- * Used with Mergerator by Striterator to merge returned objects.
- */
-
+/** Used with Mergerator by Striterator to merge returned objects. */
 public class Merger extends FilterBase {
-	
-    protected Iterator m_xtra = null; // @todo Non-Serializable.
-	protected Comparator m_comparator = null;
 
-	public Merger()	{}
+  protected Iterator m_xtra = null; // @todo Non-Serializable.
+  protected Comparator m_comparator = null;
 
-	public Merger(Iterator xtra, Comparator comparator) {
-		m_xtra = xtra;
-		m_comparator = comparator;
-	}
-	
-	//-------------------------------------------------------------
+  public Merger() {}
 
-	@Override
-	final public Iterator filterOnce(Iterator src, Object context) {
-		return new Mergerator(src, m_xtra, context, m_comparator);
-	}
+  public Merger(Iterator xtra, Comparator comparator) {
+    m_xtra = xtra;
+    m_comparator = comparator;
+  }
 
-	//-------------------------------------------------------------
+  // -------------------------------------------------------------
+
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
+    return new Mergerator(src, m_xtra, context, m_comparator);
+  }
+
+  // -------------------------------------------------------------
 }

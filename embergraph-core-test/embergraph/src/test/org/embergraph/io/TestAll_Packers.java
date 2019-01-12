@@ -31,42 +31,34 @@ import junit.framework.TestSuite;
  */
 public class TestAll_Packers extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll_Packers() {}
+
+  /** @param name */
+  public TestAll_Packers(String name) {
+    super(name);
+  }
+
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
+
+    /*
+     * TODO Harmonize the DataInputBuffer/ByteArrayBuffer test suites for
+     * the packers and the standalone LongPacker and ShortPacker test suites
+     * and verify interoperability.
      */
-    public TestAll_Packers() {
-    }
 
-    /**
-     * @param name
-     */
-    public TestAll_Packers(String name) {
-        super(name);
-    }
+    // test packed short support.
+    suite.addTestSuite(TestShortPacker.class);
+    // test packed long support.
+    suite.addTestSuite(TestLongPacker.class);
 
-    public static Test suite() {
+    // test packed short support.
+    suite.addTestSuite(ShortPackerTestCase.class);
+    // test packed long support.
+    suite.addTestSuite(LongPackerTestCase.class);
 
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage()
-                .getName());
-
-        /*
-         * TODO Harmonize the DataInputBuffer/ByteArrayBuffer test suites for
-         * the packers and the standalone LongPacker and ShortPacker test suites
-         * and verify interoperability.
-         */
-        
-        // test packed short support.
-        suite.addTestSuite(TestShortPacker.class);
-        // test packed long support.
-        suite.addTestSuite(TestLongPacker.class);
-
-        // test packed short support.
-        suite.addTestSuite(ShortPackerTestCase.class);
-        // test packed long support.
-        suite.addTestSuite(LongPackerTestCase.class);
-
-        return suite;
-
-    }
-    
+    return suite;
+  }
 }

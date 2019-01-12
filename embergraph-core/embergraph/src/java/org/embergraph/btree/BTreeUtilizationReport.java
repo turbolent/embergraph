@@ -25,73 +25,69 @@ import java.io.Serializable;
 
 /**
  * A btree utilization report.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class BTreeUtilizationReport implements IBTreeUtilizationReport,
-        Serializable {
+public class BTreeUtilizationReport implements IBTreeUtilizationReport, Serializable {
 
-    /**
-     * 
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  private final int leafUtilization;
+
+  private final int nodeUtilization;
+
+  private final int totalUtilization;
+
+  public BTreeUtilizationReport(final IBTreeStatistics stats) {
+
+    final long nnodes = stats.getNodeCount();
+
+    final long nleaves = stats.getLeafCount();
+
+    final long nentries = stats.getEntryCount();
+
+    final long numNonRootNodes = nnodes + nleaves - 1;
+
+    final int branchingFactor = stats.getBranchingFactor();
+
+    /*
+     * Note: It is quite possible for the intermediate products in
+     * these formulae to exceed Integer.MAX_VALUE, which is why we
+     * need to cast to long.  The result will always be in [0:100].
      */
-    private static final long serialVersionUID = 1L;
 
-    private final int leafUtilization;
+    nodeUtilization =
+        (int) (nnodes == 0 ? 100 : (100L * numNonRootNodes) / (nnodes * (long) branchingFactor));
 
-    private final int nodeUtilization;
+    leafUtilization =
+        (int) (nleaves == 0 ? 0 : (100L * nentries) / (nleaves * (long) branchingFactor));
 
-    private final int totalUtilization;
+    totalUtilization = (nodeUtilization + leafUtilization) / 2;
+  }
 
-    public BTreeUtilizationReport(final IBTreeStatistics stats) {
+  public int getLeafUtilization() {
+    return leafUtilization;
+  }
 
-        final long nnodes = stats.getNodeCount();
+  public int getNodeUtilization() {
+    return nodeUtilization;
+  }
 
-        final long nleaves = stats.getLeafCount();
+  public int getTotalUtilization() {
+    return totalUtilization;
+  }
 
-        final long nentries = stats.getEntryCount();
-
-        final long numNonRootNodes = nnodes + nleaves - 1;
-
-        final int branchingFactor = stats.getBranchingFactor();
-
-        /*
-         * Note: It is quite possible for the intermediate products in
-         * these formulae to exceed Integer.MAX_VALUE, which is why we
-         * need to cast to long.  The result will always be in [0:100].
-         */
-        
-		nodeUtilization = (int) (nnodes == 0 ? 100 : (100L * numNonRootNodes)
-				/ (nnodes * (long) branchingFactor));
-
-        leafUtilization = (int) (nleaves == 0 ? 0 : (100L * nentries)
-                / (nleaves * (long) branchingFactor));
-
-        totalUtilization = (nodeUtilization + leafUtilization) / 2;
-
-    }
-
-    public int getLeafUtilization() {
-        return leafUtilization;
-    }
-
-    public int getNodeUtilization() {
-        return nodeUtilization;
-    }
-
-    public int getTotalUtilization() {
-        return totalUtilization;
-    }
-
-    /**
-     * Human readable representation.
-     */
-    public String toString() {
-        return super.toString() +
-                "{leafUtil=" + leafUtilization+
-                ",nodeUtil=" + nodeUtilization+
-                ",totalUtil=" + totalUtilization+
-                "}";
-    }
-
+  /** Human readable representation. */
+  public String toString() {
+    return super.toString()
+        + "{leafUtil="
+        + leafUtilization
+        + ",nodeUtil="
+        + nodeUtilization
+        + ",totalUtil="
+        + totalUtilization
+        + "}";
+  }
 }

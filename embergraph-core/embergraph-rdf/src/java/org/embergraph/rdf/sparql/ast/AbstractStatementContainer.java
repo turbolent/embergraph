@@ -24,57 +24,45 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /**
- * Recursive container for ground {@link StatementPatternNode}s. This is used
- * for {@link InsertData} and {@link DeleteData}.
- * 
+ * Recursive container for ground {@link StatementPatternNode}s. This is used for {@link InsertData}
+ * and {@link DeleteData}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class AbstractStatementContainer<E extends IStatementContainer> extends
-        GroupNodeBase<E> {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+public class AbstractStatementContainer<E extends IStatementContainer> extends GroupNodeBase<E> {
 
-    public AbstractStatementContainer() {
-        
-    }
-    
-    /**
-     * @param op
-     */
-    public AbstractStatementContainer(final AbstractStatementContainer<E> op) {
-    
-        super(op);
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    }
+  public AbstractStatementContainer() {}
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public AbstractStatementContainer(final BOp[] args,
-            final Map<String, Object> anns) {
+  /** @param op */
+  public AbstractStatementContainer(final AbstractStatementContainer<E> op) {
 
-        super(args, anns);
+    super(op);
+  }
 
-    }
+  /**
+   * @param args
+   * @param anns
+   */
+  public AbstractStatementContainer(final BOp[] args, final Map<String, Object> anns) {
 
-    @Override
-    public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-        return new HashSet<IVariable<?>>();
-    }
+    super(args, anns);
+  }
 
-    @Override
-    public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-       return new HashSet<IVariable<?>>();
-    }
+  @Override
+  public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 
+  @Override
+  public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 }

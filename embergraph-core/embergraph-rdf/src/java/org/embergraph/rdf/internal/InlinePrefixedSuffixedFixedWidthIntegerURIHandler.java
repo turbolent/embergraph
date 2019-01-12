@@ -21,75 +21,74 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
- * Utility IV to generate IVs for URIs in the form of http://example.org/value/STRPREFIX1234234513STRSUFFIX
- * where the localName of the URI is a string  prefix followed by a fixed width integer  value followed by a string suffix.
- * 
- * You should extend this class with implementation for specific instances of URIs that follow
- * this form such as:  http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID_000234_SUFFIX would be
- * created as
- * 
- * <code> 
+ * Utility IV to generate IVs for URIs in the form of
+ * http://example.org/value/STRPREFIX1234234513STRSUFFIX where the localName of the URI is a string
+ * prefix followed by a fixed width integer value followed by a string suffix.
+ *
+ * <p>You should extend this class with implementation for specific instances of URIs that follow
+ * this form such as: http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID_000234_SUFFIX would be
+ * created as <code>
  * InlinePrefixedSuffixedFixedWidthIntegerURIHandler handler = new InlinePrefixedSuffixedFixedWidthIntegerURIHandler("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/","CID_","_SUFFIX",6)
- * </code> 
- * This has support for overloading on a single namespace {@link InlineLocalNameIntegerURIHandler}. 
- * 
+ * </code> This has support for overloading on a single namespace {@link
+ * InlineLocalNameIntegerURIHandler}.
+ *
  * @author beebs
- * 
  */
+public class InlinePrefixedSuffixedFixedWidthIntegerURIHandler
+    extends InlineLocalNameIntegerURIHandler implements IPrefixedURIHandler, ISuffixedURIHandler {
 
-public class InlinePrefixedSuffixedFixedWidthIntegerURIHandler extends
-		InlineLocalNameIntegerURIHandler implements IPrefixedURIHandler, ISuffixedURIHandler {
+  private String prefix = null;
+  private String suffix = null;
+  private int width = 0;
 
-	private String prefix = null;
-	private String suffix = null;
-	private int width = 0;
+  public InlinePrefixedSuffixedFixedWidthIntegerURIHandler(
+      final String namespace, final String prefix, final String suffix, final int width) {
+    super(namespace);
+    this.prefix = prefix;
+    this.suffix = suffix;
+    this.width = width;
+  }
 
-	public InlinePrefixedSuffixedFixedWidthIntegerURIHandler(final String namespace,
-			final String prefix, final String suffix, final int width) {
-		super(namespace);
-		this.prefix = prefix;
-		this.suffix = suffix;
-		this.width = width;
-	}
+  public InlinePrefixedSuffixedFixedWidthIntegerURIHandler(
+      final String namespace,
+      final String prefix,
+      final String suffix,
+      final int width,
+      final int id) {
+    super(namespace);
+    this.prefix = prefix;
+    this.suffix = suffix;
+    this.width = width;
+    this.packedId = id;
+  }
 
-	public InlinePrefixedSuffixedFixedWidthIntegerURIHandler(final String namespace,
-			final String prefix, final String suffix, final int width, final int id) {
-		super(namespace);
-		this.prefix = prefix;
-		this.suffix = suffix;
-		this.width = width;
-		this.packedId = id;
-	}
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(String localName) {
+    if (!localName.startsWith(this.prefix) || !localName.endsWith(suffix)) {
+      return null;
+    }
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	protected AbstractLiteralIV createInlineIV(String localName) {
-		if (!localName.startsWith(this.prefix) || !localName.endsWith(suffix)) {
-			return null;
-		}
+    final String intValue =
+        localName.substring(this.prefix.length(), localName.length() - this.suffix.length());
 
-		final String intValue = localName.substring(this.prefix.length(),
-				localName.length() - this.suffix.length());
-				
-		return super.createInlineIV(getPackedValueString(intValue));
-	}
+    return super.createInlineIV(getPackedValueString(intValue));
+  }
 
-	@Override
-	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
-		final String intStr = super.getLocalNameFromDelegate(delegate);
+  @Override
+  public String getLocalNameFromDelegate(AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+    final String intStr = super.getLocalNameFromDelegate(delegate);
 
-		final int intVal = (int) getUnpackedValueFromString(intStr);
+    final int intVal = (int) getUnpackedValueFromString(intStr);
 
-		return this.prefix  + String.format("%0" + width + "d", intVal) + suffix;
-	}
+    return this.prefix + String.format("%0" + width + "d", intVal) + suffix;
+  }
 
-	public String getPrefix() {
-		return prefix;
-	}
+  public String getPrefix() {
+    return prefix;
+  }
 
-	public String getSuffix() {
-		return suffix;
-	}
+  public String getSuffix() {
+    return suffix;
+  }
 }

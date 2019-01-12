@@ -19,36 +19,28 @@ package org.embergraph.ha.msg;
 
 public class HALogRootBlocksRequest implements IHALogRootBlocksRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    
-    private final long commitCounter;
-    
-    /**
-     * 
-     * @param commitCounter
-     *            The commit counter used to identify the desired commit point
-     *            (the commit counter of the closing root block).
-     */
-    public HALogRootBlocksRequest(final long commitCounter) {
+  /** */
+  private static final long serialVersionUID = 1L;
 
-        this.commitCounter = commitCounter;
-        
-    }
-    
-    @Override
-    public long getCommitCounter() {
+  private final long commitCounter;
 
-        return commitCounter;
-        
-    }
+  /**
+   * @param commitCounter The commit counter used to identify the desired commit point (the commit
+   *     counter of the closing root block).
+   */
+  public HALogRootBlocksRequest(final long commitCounter) {
 
-    public String toString() {
+    this.commitCounter = commitCounter;
+  }
 
-        return getClass() + "{commitCounter=" + getCommitCounter() + "}";
-        
-    }
+  @Override
+  public long getCommitCounter() {
 
+    return commitCounter;
+  }
+
+  public String toString() {
+
+    return getClass() + "{commitCounter=" + getCommitCounter() + "}";
+  }
 }

@@ -18,53 +18,45 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class StrstartsBOp extends XSDBooleanIVValueExpression implements INeedsMaterialization {
 
-    private static final long serialVersionUID = 7680098071087046784L;
+  private static final long serialVersionUID = 7680098071087046784L;
 
-    @SuppressWarnings("rawtypes")
-    public StrstartsBOp(
-            final IValueExpression<? extends IV> x,
-            final IValueExpression<? extends IV> y
-            ) {
+  @SuppressWarnings("rawtypes")
+  public StrstartsBOp(
+      final IValueExpression<? extends IV> x, final IValueExpression<? extends IV> y) {
 
-        this(new BOp[] { x, y }, BOp.NOANNS);
-        
-    }
+    this(new BOp[] {x, y}, BOp.NOANNS);
+  }
 
-    public StrstartsBOp(final BOp[] args, final Map<String, Object> anns) {
+  public StrstartsBOp(final BOp[] args, final Map<String, Object> anns) {
 
-        super(args, anns);
-        
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
-        
-    }
+    super(args, anns);
 
-    public StrstartsBOp(StrstartsBOp op) {
-        super(op);
-    }
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+  }
 
-    @Override
-    public Requirement getRequirement() {
-        return Requirement.SOMETIMES;
-    }
-    
-    @Override
-    public boolean accept(final IBindingSet bs) throws SparqlTypeErrorException {
+  public StrstartsBOp(StrstartsBOp op) {
+    super(op);
+  }
 
-        final String v = getAndCheckLiteralValue(0, bs).getLabel();
-        final String c = getAndCheckLiteralValue(1, bs).getLabel();
-        return v.startsWith(c);
+  @Override
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
 
-    }
+  @Override
+  public boolean accept(final IBindingSet bs) throws SparqlTypeErrorException {
 
+    final String v = getAndCheckLiteralValue(0, bs).getLabel();
+    final String c = getAndCheckLiteralValue(1, bs).getLabel();
+    return v.startsWith(c);
+  }
 }

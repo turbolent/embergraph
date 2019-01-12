@@ -21,31 +21,30 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-
 /**
  * Additional options for native services.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface INativeServiceOptions extends IServiceOptions {
 
-//    /**
-//     * When <code>true</code>, the {@link ServiceNode} will be lifted into a
-//     * {@link NamedSubqueryRoot}. {@link NamedSubqueryRoot}s are evaluated first
-//     * against a single empty input solution.
-//     * 
-//     * @see QueryHints#RUN_ONCE
-//     */
-//    boolean isRunOnce();
-//
-//    /**
-//     * When <code>true</code>, the {@link ServiceNode} will always be annotated
-//     * as an "at-once" operator. All inputs to the {@link ServiceNode} will be
-//     * materialized and the {@link ServiceNode} will run exactly once against
-//     * those inputs.
-//     * 
-//     * @see QueryHints#AT_ONCE
-//     */
-//    boolean isAtOnce();
+  //    /**
+  //     * When <code>true</code>, the {@link ServiceNode} will be lifted into a
+  //     * {@link NamedSubqueryRoot}. {@link NamedSubqueryRoot}s are evaluated first
+  //     * against a single empty input solution.
+  //     *
+  //     * @see QueryHints#RUN_ONCE
+  //     */
+  //    boolean isRunOnce();
+  //
+  //    /**
+  //     * When <code>true</code>, the {@link ServiceNode} will always be annotated
+  //     * as an "at-once" operator. All inputs to the {@link ServiceNode} will be
+  //     * materialized and the {@link ServiceNode} will run exactly once against
+  //     * those inputs.
+  //     *
+  //     * @see QueryHints#AT_ONCE
+  //     */
+  //    boolean isAtOnce();
 
 }

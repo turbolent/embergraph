@@ -1,46 +1,39 @@
 /**
-
-The Notice below must appear in each file of the Source Code of any
-copy you distribute of the Licensed Product.  Contributors to any
-Modifications may add their own copyright notices to identify their
-own contributions.
-
-License:
-
-The contents of this file are subject to the CognitiveWeb Open Source
-License Version 1.1 (the License).  You may not copy or use this file,
-in either source code or executable form, except in compliance with
-the License.  You may obtain a copy of the License from
-
-  http://www.CognitiveWeb.org/legal/license/
-
-Software distributed under the License is distributed on an AS IS
-basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See
-the License for the specific language governing rights and limitations
-under the License.
-
-Copyrights:
-
-Portions created by or assigned to CognitiveWeb are Copyright
-(c) 2003-2003 CognitiveWeb.  All Rights Reserved.  Contact
-information for CognitiveWeb is available at
-
-  http://www.CognitiveWeb.org
-
-Portions Copyright (c) 2002-2003 Bryan Thompson.
-
-Acknowledgements:
-
-Special thanks to the developers of the Jabber Open Source License 1.0
-(JOSL), from which this License was derived.  This License contains
-terms that differ from JOSL.
-
-Special thanks to the CognitiveWeb Open Source Contributors for their
-suggestions and support of the Cognitive Web.
-
-Modifications:
-
-*/
+ * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+ * Licensed Product. Contributors to any Modifications may add their own copyright notices to
+ * identify their own contributions.
+ *
+ * <p>License:
+ *
+ * <p>The contents of this file are subject to the CognitiveWeb Open Source License Version 1.1 (the
+ * License). You may not copy or use this file, in either source code or executable form, except in
+ * compliance with the License. You may obtain a copy of the License from
+ *
+ * <p>http://www.CognitiveWeb.org/legal/license/
+ *
+ * <p>Software distributed under the License is distributed on an AS IS basis, WITHOUT WARRANTY OF
+ * ANY KIND, either express or implied. See the License for the specific language governing rights
+ * and limitations under the License.
+ *
+ * <p>Copyrights:
+ *
+ * <p>Portions created by or assigned to CognitiveWeb are Copyright (c) 2003-2003 CognitiveWeb. All
+ * Rights Reserved. Contact information for CognitiveWeb is available at
+ *
+ * <p>http://www.CognitiveWeb.org
+ *
+ * <p>Portions Copyright (c) 2002-2003 Bryan Thompson.
+ *
+ * <p>Acknowledgements:
+ *
+ * <p>Special thanks to the developers of the Jabber Open Source License 1.0 (JOSL), from which this
+ * License was derived. This License contains terms that differ from JOSL.
+ *
+ * <p>Special thanks to the CognitiveWeb Open Source Contributors for their suggestions and support
+ * of the Cognitive Web.
+ *
+ * <p>Modifications:
+ */
 /*
  * Created on May 23, 2008
  */
@@ -51,185 +44,154 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
 import org.apache.log4j.Logger;
-import org.openrdf.model.Value;
-
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.striterator.IChunkedIterator;
+import org.openrdf.model.Value;
 
 /**
- * Wraps an iterator that visits term identifiers and exposes each visited term
- * identifier as a {@link EmbergraphValue} (batch API).
- * 
+ * Wraps an iterator that visits term identifiers and exposes each visited term identifier as a
+ * {@link EmbergraphValue} (batch API).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
 
-    final private static Logger log = Logger
-            .getLogger(EmbergraphValueIteratorImpl.class);
+  private static final Logger log = Logger.getLogger(EmbergraphValueIteratorImpl.class);
 
-    /**
-     * The database whose lexicon will be used to resolve term identifiers to
-     * terms.
-     */
-    private final AbstractTripleStore db;
-    
-    /**
-     * The source iterator.
-     */
-    private final IChunkedIterator<IV> src;
-    
-    /**
-     * The index of the last entry returned in the current {@link #chunk} and
-     * <code>-1</code> until the first entry is returned.
-     */
-    private int lastIndex = -1;
-    
-    /**
-     * The current chunk from the source iterator and initially <code>null</code>.
-     */
-    private IV<?,?>[] chunk = null;
+  /** The database whose lexicon will be used to resolve term identifiers to terms. */
+  private final AbstractTripleStore db;
 
-    /**
-     * The map that will be used to resolve term identifiers to terms for the
-     * current {@link #chunk} and initially <code>null</code>.
-     */
-    private Map<IV<?,?>, EmbergraphValue> terms = null;
+  /** The source iterator. */
+  private final IChunkedIterator<IV> src;
 
-    /**
-     * 
-     * @param db
-     *            Used to resolve term identifiers to {@link Value} objects.
-     * @param src
-     *            The source iterator.
-     */
-    public EmbergraphValueIteratorImpl(final AbstractTripleStore db,
-            final IChunkedIterator<IV> src) {
+  /**
+   * The index of the last entry returned in the current {@link #chunk} and <code>-1</code> until
+   * the first entry is returned.
+   */
+  private int lastIndex = -1;
 
-        if (db == null)
-            throw new IllegalArgumentException();
+  /** The current chunk from the source iterator and initially <code>null</code>. */
+  private IV<?, ?>[] chunk = null;
 
-        if (src == null)
-            throw new IllegalArgumentException();
+  /**
+   * The map that will be used to resolve term identifiers to terms for the current {@link #chunk}
+   * and initially <code>null</code>.
+   */
+  private Map<IV<?, ?>, EmbergraphValue> terms = null;
 
-        this.db = db;
-        
-        this.src = src;
+  /**
+   * @param db Used to resolve term identifiers to {@link Value} objects.
+   * @param src The source iterator.
+   */
+  public EmbergraphValueIteratorImpl(final AbstractTripleStore db, final IChunkedIterator<IV> src) {
 
-    }
-    
-    public boolean hasNext() {
+    if (db == null) throw new IllegalArgumentException();
 
-        if (lastIndex != -1 && lastIndex + 1 < chunk.length) {
-            
-            return true;
-            
-        }
-        
-        log.debug("Testing source iterator.");
-        
-        return src.hasNext();
-        
+    if (src == null) throw new IllegalArgumentException();
+
+    this.db = db;
+
+    this.src = src;
+  }
+
+  public boolean hasNext() {
+
+    if (lastIndex != -1 && lastIndex + 1 < chunk.length) {
+
+      return true;
     }
 
-    public EmbergraphValue next() {
+    log.debug("Testing source iterator.");
 
-        if (!hasNext())
-            throw new NoSuchElementException();
+    return src.hasNext();
+  }
 
-        if (lastIndex == -1 || lastIndex + 1 == chunk.length) {
+  public EmbergraphValue next() {
 
-            log.info("Fetching next chunk");
+    if (!hasNext()) throw new NoSuchElementException();
 
-            // fetch the next chunk of SPOs.
-            chunk = src.nextChunk();
+    if (lastIndex == -1 || lastIndex + 1 == chunk.length) {
 
-            if (log.isInfoEnabled())
-                log.info("Fetched chunk: size=" + chunk.length);
+      log.info("Fetching next chunk");
 
-            /*
-             * Create a collection of the distinct IVs used in this chunk.
-             */
+      // fetch the next chunk of SPOs.
+      chunk = src.nextChunk();
 
-            final Collection<IV<?,?>> ivs = new HashSet<IV<?,?>>(chunk.length);
+      if (log.isInfoEnabled()) log.info("Fetched chunk: size=" + chunk.length);
 
-            for (IV<?,?> id : chunk) {
+      /*
+       * Create a collection of the distinct IVs used in this chunk.
+       */
 
-                ivs.add(id);
+      final Collection<IV<?, ?>> ivs = new HashSet<IV<?, ?>>(chunk.length);
 
-            }
+      for (IV<?, ?> id : chunk) {
 
-            if (log.isInfoEnabled())
-                log.info("Resolving " + ivs.size() + " term identifiers");
-            
-            // batch resolve term identifiers to terms.
-            terms = db.getLexiconRelation().getTerms(ivs);
+        ivs.add(id);
+      }
 
-            // reset the index.
-            lastIndex = 0;
-            
-        } else {
-            
-            // index of the next term identifier in this chunk.
-            lastIndex++;
-            
-        }
+      if (log.isInfoEnabled()) log.info("Resolving " + ivs.size() + " term identifiers");
 
-//        if (log.isDebugEnabled()) {
-//
-//            log.debug("lastIndex=" + lastIndex + ", chunk.length="
-//                    + chunk.length);
-//
-//        }
+      // batch resolve term identifiers to terms.
+      terms = db.getLexiconRelation().getTerms(ivs);
 
-        // the current term identifier.
-        final IV<?,?> iv = chunk[lastIndex];
+      // reset the index.
+      lastIndex = 0;
 
-//        if (log.isDebugEnabled())
-//            log.debug("iv=" + iv);
-                
-        /*
-         * Resolve term identifiers to terms using the map populated when we
-         * fetched the current chunk.
-         */
-        final EmbergraphValue val = terms.get(iv);
-        
-        if (val == null) {
+    } else {
 
-            throw new RuntimeException("No value for term identifier: id=" + iv);
-
-        }
-        
-//        if(log.isDebugEnabled())
-//            log.debug("iv=" + iv + ", value=" + val);
-
-        return val;
-        
+      // index of the next term identifier in this chunk.
+      lastIndex++;
     }
 
-    /**
-     * @throws UnsupportedOperationException
-     * 
-     * @todo this could be implemented if we saved the last term identifier
-     *       visited.
+    //        if (log.isDebugEnabled()) {
+    //
+    //            log.debug("lastIndex=" + lastIndex + ", chunk.length="
+    //                    + chunk.length);
+    //
+    //        }
+
+    // the current term identifier.
+    final IV<?, ?> iv = chunk[lastIndex];
+
+    //        if (log.isDebugEnabled())
+    //            log.debug("iv=" + iv);
+
+    /*
+     * Resolve term identifiers to terms using the map populated when we
+     * fetched the current chunk.
      */
-    public void remove() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
-    
-    public void close() {
-    
-        src.close();
+    final EmbergraphValue val = terms.get(iv);
 
-        chunk = null;
-        
-        terms = null;
-        
+    if (val == null) {
+
+      throw new RuntimeException("No value for term identifier: id=" + iv);
     }
 
+    //        if(log.isDebugEnabled())
+    //            log.debug("iv=" + iv + ", value=" + val);
+
+    return val;
+  }
+
+  /**
+   * @throws UnsupportedOperationException
+   * @todo this could be implemented if we saved the last term identifier visited.
+   */
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  public void close() {
+
+    src.close();
+
+    chunk = null;
+
+    terms = null;
+  }
 }

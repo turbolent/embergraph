@@ -22,96 +22,90 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import java.util.concurrent.Future;
-
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 /**
  * Delegation pattern handles the {@link SinkTransitionMetadata}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class OutputStatsBuffer<E> implements IBlockingBuffer<E> {
 
-    private final IBlockingBuffer<E> b;
+  private final IBlockingBuffer<E> b;
 
-    private final BOpStats stats;
+  private final BOpStats stats;
 
-    public OutputStatsBuffer(final IBlockingBuffer<E> b, final BOpStats stats) {
+  public OutputStatsBuffer(final IBlockingBuffer<E> b, final BOpStats stats) {
 
-        this.b = b;
+    this.b = b;
 
-        this.stats = stats;
+    this.stats = stats;
+  }
 
+  public IAsynchronousIterator<E> iterator() {
+    return b.iterator();
+  }
+
+  public void setFuture(final Future future) {
+    b.setFuture(future);
+  }
+
+  public void abort(final Throwable cause) {
+    b.abort(cause);
+  }
+
+  public void close() {
+    b.close();
+  }
+
+  public Future getFuture() {
+    return b.getFuture();
+  }
+
+  public boolean isOpen() {
+    return b.isOpen();
+  }
+
+  public long flush() {
+    return b.flush();
+  }
+
+  /**
+   * Tracks {@link BOpStats#unitsOut} and {@link BOpStats#chunksOut}.
+   *
+   * <p>Note: {@link BOpStats#chunksOut} will report the #of chunks added to this buffer. However,
+   * the buffer MAY combine chunks either on add() or when drained by the iterator so the actual #of
+   * chunks read back from the iterator MAY differ.
+   *
+   * <p>{@inheritDoc}
+   */
+  public void add(final E e) {
+
+    b.add(e);
+
+    if (e.getClass().getComponentType() != null) {
+
+      stats.unitsOut.add(((Object[]) e).length);
+
+    } else {
+
+      stats.unitsOut.increment();
     }
 
-    public IAsynchronousIterator<E> iterator() {
-        return b.iterator();
-    }
+    stats.chunksOut.increment();
+  }
 
-    public void setFuture(final Future future) {
-        b.setFuture(future);
-    }
+  public boolean isEmpty() {
+    return b.isEmpty();
+  }
 
-    public void abort(final Throwable cause) {
-        b.abort(cause);
-    }
+  public void reset() {
+    b.reset();
+  }
 
-    public void close() {
-        b.close();
-    }
-
-    public Future getFuture() {
-        return b.getFuture();
-    }
-
-    public boolean isOpen() {
-        return b.isOpen();
-    }
-
-    public long flush() {
-        return b.flush();
-    }
-
-    /**
-     * Tracks {@link BOpStats#unitsOut} and {@link BOpStats#chunksOut}.
-     * <p>
-     * Note: {@link BOpStats#chunksOut} will report the #of chunks added to this
-     * buffer. However, the buffer MAY combine chunks either on add() or when
-     * drained by the iterator so the actual #of chunks read back from the
-     * iterator MAY differ.
-     * <p>
-     * {@inheritDoc}
-     */
-    public void add(final E e) {
-
-        b.add(e);
-
-        if (e.getClass().getComponentType() != null) {
-
-            stats.unitsOut.add(((Object[]) e).length);
-
-        } else {
-
-            stats.unitsOut.increment();
-
-        }
-
-        stats.chunksOut.increment();
-
-    }
-    
-    public boolean isEmpty() {
-        return b.isEmpty();
-    }
-
-    public void reset() {
-        b.reset();
-    }
-
-    public int size() {
-        return b.size();
-    }
-    
+  public int size() {
+    return b.size();
+  }
 }

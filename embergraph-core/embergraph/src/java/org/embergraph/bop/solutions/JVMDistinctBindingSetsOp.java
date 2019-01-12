@@ -17,11 +17,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.solutions;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.FutureTask;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.ConcurrentHashMapAnnotations;
@@ -37,212 +37,165 @@ import org.embergraph.bop.join.JVMHashJoinUtility;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
  * A pipelined DISTINCT operator based on a hash table.
- * <p>
- * Note: This implementation is a pipelined operator which inspects each chunk
- * of solutions as they arrive and those solutions which are distinct for each
- * chunk are passed on. It uses a {@link ConcurrentMap} and is thread-safe. It
- * is significantly faster than the single-threaded hash index routines in the
- * {@link JVMHashJoinUtility}.
- * 
+ *
+ * <p>Note: This implementation is a pipelined operator which inspects each chunk of solutions as
+ * they arrive and those solutions which are distinct for each chunk are passed on. It uses a {@link
+ * ConcurrentMap} and is thread-safe. It is significantly faster than the single-threaded hash index
+ * routines in the {@link JVMHashJoinUtility}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: DistinctElementFilter.java 3466 2010-08-27 14:28:04Z
- *          thompsonbry $
+ * @version $Id: DistinctElementFilter.java 3466 2010-08-27 14:28:04Z thompsonbry $
  */
 public class JVMDistinctBindingSetsOp extends PipelineOp {
 
-//	private final static transient Logger log = Logger
-//			.getLogger(JVMDistinctBindingSetsOp.class);
-	
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  //	private final static transient Logger log = Logger
+  //			.getLogger(JVMDistinctBindingSetsOp.class);
 
-    public interface Annotations extends PipelineOp.Annotations,
-            ConcurrentHashMapAnnotations, DistinctAnnotations {
+  /** */
+  private static final long serialVersionUID = 1L;
 
+  public interface Annotations
+      extends PipelineOp.Annotations, ConcurrentHashMapAnnotations, DistinctAnnotations {}
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public JVMDistinctBindingSetsOp(final JVMDistinctBindingSetsOp op) {
+    super(op);
+  }
+
+  /** Required shallow copy constructor. */
+  public JVMDistinctBindingSetsOp(final BOp[] args, final Map<String, Object> annotations) {
+
+    super(args, annotations);
+
+    switch (getEvaluationContext()) {
+      case CONTROLLER:
+      case HASHED:
+        break;
+      default:
+        throw new UnsupportedOperationException(
+            Annotations.EVALUATION_CONTEXT + "=" + getEvaluationContext());
     }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public JVMDistinctBindingSetsOp(final JVMDistinctBindingSetsOp op) {
-        super(op);
+    // shared state is used to share the hash table.
+    if (!isSharedState()) {
+      throw new UnsupportedOperationException(Annotations.SHARED_STATE + "=" + isSharedState());
     }
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public JVMDistinctBindingSetsOp(final BOp[] args,
-            final Map<String, Object> annotations) {
+    final IVariable<?>[] vars = (IVariable[]) getProperty(Annotations.VARIABLES);
 
-		super(args, annotations);
+    if (vars == null) throw new IllegalArgumentException();
+  }
 
-		switch (getEvaluationContext()) {
-		case CONTROLLER:
-        case HASHED:
-			break;
-		default:
-			throw new UnsupportedOperationException(
-					Annotations.EVALUATION_CONTEXT + "="
-							+ getEvaluationContext());
-		}
+  public JVMDistinctBindingSetsOp(final BOp[] args, NV... annotations) {
 
-		// shared state is used to share the hash table.
-		if (!isSharedState()) {
-			throw new UnsupportedOperationException(Annotations.SHARED_STATE
-					+ "=" + isSharedState());
-		}
+    this(args, NV.asMap(annotations));
+  }
 
-		final IVariable<?>[] vars = (IVariable[]) getProperty(Annotations.VARIABLES);
+  /** @see Annotations#INITIAL_CAPACITY */
+  public int getInitialCapacity() {
 
-		if (vars == null)
-			throw new IllegalArgumentException();
+    return getProperty(Annotations.INITIAL_CAPACITY, Annotations.DEFAULT_INITIAL_CAPACITY);
+  }
 
-    }
+  /** @see Annotations#LOAD_FACTOR */
+  public float getLoadFactor() {
 
-    public JVMDistinctBindingSetsOp(final BOp[] args, NV... annotations) {
+    return getProperty(Annotations.LOAD_FACTOR, Annotations.DEFAULT_LOAD_FACTOR);
+  }
 
-        this(args, NV.asMap(annotations));
-        
-    }
+  /** @see Annotations#CONCURRENCY_LEVEL */
+  public int getConcurrencyLevel() {
 
-    /**
-     * @see Annotations#INITIAL_CAPACITY
-     */
-    public int getInitialCapacity() {
+    return getProperty(Annotations.CONCURRENCY_LEVEL, Annotations.DEFAULT_CONCURRENCY_LEVEL);
+  }
 
-        return getProperty(Annotations.INITIAL_CAPACITY,
-                Annotations.DEFAULT_INITIAL_CAPACITY);
+  /** @see Annotations#VARIABLES */
+  public IVariable<?>[] getVariables() {
 
-    }
+    return (IVariable<?>[]) getRequiredProperty(Annotations.VARIABLES);
+  }
 
-    /**
-     * @see Annotations#LOAD_FACTOR
-     */
-    public float getLoadFactor() {
+  public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-        return getProperty(Annotations.LOAD_FACTOR,
-                Annotations.DEFAULT_LOAD_FACTOR);
+    return new FutureTask<Void>(new DistinctTask(this, context));
+  }
 
-    }
+  /** Task executing on the node. */
+  private static class DistinctTask implements Callable<Void> {
 
-    /**
-     * @see Annotations#CONCURRENCY_LEVEL
-     */
-    public int getConcurrencyLevel() {
+    private final BOpContext<IBindingSet> context;
 
-        return getProperty(Annotations.CONCURRENCY_LEVEL,
-                Annotations.DEFAULT_CONCURRENCY_LEVEL);
+    private final IDistinctFilter filter;
 
-    }
-    
-    /**
-     * @see Annotations#VARIABLES
-     */
-    public IVariable<?>[] getVariables() {
+    private final int chunkCapacity;
 
-        return (IVariable<?>[]) getRequiredProperty(Annotations.VARIABLES);
-        
-    }
+    DistinctTask(final JVMDistinctBindingSetsOp op, final BOpContext<IBindingSet> context) {
 
-    public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
+      this.context = context;
 
-        return new FutureTask<Void>(new DistinctTask(this, context));
-        
-    }
+      this.chunkCapacity = op.getChunkCapacity();
 
-    /**
-     * Task executing on the node.
-     */
-    static private class DistinctTask implements Callable<Void> {
+      final IVariable<?>[] vars = op.getVariables();
 
-        private final BOpContext<IBindingSet> context;
+      /*
+       * The map is shared state across invocations of this operator task.
+       */
+      {
+        final Integer key = op.getId();
 
-        private final IDistinctFilter filter;
-        
-        private final int chunkCapacity;
-        
-        DistinctTask(final JVMDistinctBindingSetsOp op,
-                final BOpContext<IBindingSet> context) {
+        final IQueryAttributes attribs = context.getRunningQuery().getAttributes();
 
-            this.context = context;
+        IDistinctFilter filter = (IDistinctFilter) attribs.get(key);
 
-            this.chunkCapacity = op.getChunkCapacity();
-            
-            final IVariable<?>[] vars = op.getVariables();
+        if (filter == null) {
 
-            /*
-             * The map is shared state across invocations of this operator task.
-             */
-            {
-                final Integer key = op.getId();
+          filter =
+              new JVMDistinctFilter(
+                  vars, op.getInitialCapacity(), op.getLoadFactor(), op.getConcurrencyLevel());
 
-                final IQueryAttributes attribs = context.getRunningQuery()
-                        .getAttributes();
+          final IDistinctFilter tmp = (IDistinctFilter) attribs.putIfAbsent(key, filter);
 
-                IDistinctFilter filter = (IDistinctFilter) attribs.get(key);
-
-                if (filter == null) {
-
-                    filter = new JVMDistinctFilter(vars,
-                            op.getInitialCapacity(), op.getLoadFactor(),
-                            op.getConcurrencyLevel());
-
-                    final IDistinctFilter tmp = (IDistinctFilter) attribs
-                            .putIfAbsent(key, filter);
-
-                    if (tmp != null)
-                        filter = tmp;
-
-                }
-
-                this.filter = filter;
-
-            }
-
-        }
-        @Override
-        public Void call() throws Exception {
-
-            final BOpStats stats = context.getStats();
-
-            final ICloseableIterator<IBindingSet[]> itr = context.getSource();
-
-            final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
-
-            try {
-
-                final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer = new UnsyncLocalOutputBuffer<IBindingSet>(
-                        chunkCapacity, sink);
-
-                filter.filterSolutions(itr, stats, unsyncBuffer);
-
-                unsyncBuffer.flush();
-
-                sink.flush();
-
-                // done.
-                return null;
-
-            } finally {
-
-                if (context.isLastInvocation()) {
-
-                    filter.release();
-
-                }
-
-                sink.close();
-
-            }
-
+          if (tmp != null) filter = tmp;
         }
 
+        this.filter = filter;
+      }
     }
 
+    @Override
+    public Void call() throws Exception {
+
+      final BOpStats stats = context.getStats();
+
+      final ICloseableIterator<IBindingSet[]> itr = context.getSource();
+
+      final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
+
+      try {
+
+        final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
+            new UnsyncLocalOutputBuffer<IBindingSet>(chunkCapacity, sink);
+
+        filter.filterSolutions(itr, stats, unsyncBuffer);
+
+        unsyncBuffer.flush();
+
+        sink.flush();
+
+        // done.
+        return null;
+
+      } finally {
+
+        if (context.isLastInvocation()) {
+
+          filter.release();
+        }
+
+        sink.close();
+      }
+    }
+  }
 }

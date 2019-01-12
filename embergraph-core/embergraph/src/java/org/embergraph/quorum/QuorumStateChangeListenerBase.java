@@ -25,63 +25,48 @@ import java.util.UUID;
 
 /**
  * {@link QuorumStateChangeListener} provides NOP method implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QuorumStateChangeListenerBase implements QuorumStateChangeListener {
 
-    @Override
-    public void memberAdd() {
-    }
+  @Override
+  public void memberAdd() {}
 
-    @Override
-    public void memberRemove() {
-    }
+  @Override
+  public void memberRemove() {}
 
-    @Override
-    public void pipelineAdd() {
-    }
+  @Override
+  public void pipelineAdd() {}
 
-    @Override
-    public void pipelineRemove() {
-    }
+  @Override
+  public void pipelineRemove() {}
 
-    @Override
-    public void pipelineElectedLeader() {
-    }
-    
-    @Override
-    public void pipelineChange(final UUID oldDownStreamId,
-            final UUID newDownStreamId) {
-    }
+  @Override
+  public void pipelineElectedLeader() {}
 
-    @Override
-    public void pipelineUpstreamChange() {
-    }
+  @Override
+  public void pipelineChange(final UUID oldDownStreamId, final UUID newDownStreamId) {}
 
-    @Override
-    public void consensus(final long lastCommitTime) {
-    }
+  @Override
+  public void pipelineUpstreamChange() {}
 
-    @Override
-    public void lostConsensus() {
-    }
+  @Override
+  public void consensus(final long lastCommitTime) {}
 
-    @Override
-    public void quorumBreak() {
-    }
+  @Override
+  public void lostConsensus() {}
 
-    @Override
-    public void serviceJoin() {
-    }
+  @Override
+  public void quorumBreak() {}
 
-    @Override
-    public void serviceLeave() {
-    }
+  @Override
+  public void serviceJoin() {}
 
-    @Override
-    public void quorumMeet(long token, UUID leaderId) {
-    }
+  @Override
+  public void serviceLeave() {}
 
+  @Override
+  public void quorumMeet(long token, UUID leaderId) {}
 }

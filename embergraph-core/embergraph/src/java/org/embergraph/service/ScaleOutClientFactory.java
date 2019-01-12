@@ -20,41 +20,37 @@ package org.embergraph.service;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.webapp.HAStatusServletUtilProxy;
-
 /**
- * 
  * Convenience class to break out embergraph-jini dependency. See BLZG-1370.
- * 
+ *
  * @author beebs
- * 
  */
 public class ScaleOutClientFactory {
 
-	public static final String DEFAULT_PROVIDER = "org.embergraph.service.jini.JiniClient";
+  public static final String DEFAULT_PROVIDER = "org.embergraph.service.jini.JiniClient";
 
-	public static AbstractScaleOutClient<?> getJiniClient(
-			final String[] propertyFiles) {
-		return getJiniClient(DEFAULT_PROVIDER, propertyFiles);
-	}
+  public static AbstractScaleOutClient<?> getJiniClient(final String[] propertyFiles) {
+    return getJiniClient(DEFAULT_PROVIDER, propertyFiles);
+  }
 
-	public static AbstractScaleOutClient<?> getJiniClient(
-			final String provider, final String[] propertyFiles) {
+  public static AbstractScaleOutClient<?> getJiniClient(
+      final String provider, final String[] propertyFiles) {
 
-		try {
-			final Class<?> c = Class.forName(provider);
-			final Constructor<?> cons = c.getConstructor();
-			final Object object = cons.newInstance(propertyFiles);
-			final AbstractScaleOutClient proxy = (AbstractScaleOutClient) object;
-			return proxy;
-		} catch (ClassNotFoundException | NoSuchMethodException
-				| SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+    try {
+      final Class<?> c = Class.forName(provider);
+      final Constructor<?> cons = c.getConstructor();
+      final Object object = cons.newInstance(propertyFiles);
+      final AbstractScaleOutClient proxy = (AbstractScaleOutClient) object;
+      return proxy;
+    } catch (ClassNotFoundException
+        | NoSuchMethodException
+        | SecurityException
+        | InstantiationException
+        | IllegalAccessException
+        | IllegalArgumentException
+        | InvocationTargetException e) {
 
-			throw new RuntimeException(e);
-		}
-
-	}
+      throw new RuntimeException(e);
+    }
+  }
 }

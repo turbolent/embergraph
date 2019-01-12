@@ -21,124 +21,96 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha;
 
 import java.util.ArrayList;
-
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Response for a 2-phase commit.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CommitResponse {
 
-    /**
-     * The COMMIT message.
-     */
-    private final CommitRequest req;
+  /** The COMMIT message. */
+  private final CommitRequest req;
 
-    /**
-     * An array of the root cause exceptions for any errors encountered when
-     * instructing the services to execute the COMMIT message. The indices into
-     * this collection are correlated with the service join order and the
-     * PREPARE vote order. The leader is always at index zero.
-     */
-    private final ArrayList<Throwable> causes;
-    
-    /**
-     * The number of COMMIT messages that are known to have been processed
-     * successfully.
-     */
-    private final int nok;
-    /**
-     * The number of COMMIT messages that were issued and which failed.
-     */
-    private final int nfail;
+  /**
+   * An array of the root cause exceptions for any errors encountered when instructing the services
+   * to execute the COMMIT message. The indices into this collection are correlated with the service
+   * join order and the PREPARE vote order. The leader is always at index zero.
+   */
+  private final ArrayList<Throwable> causes;
 
-    public CommitResponse(final CommitRequest req,
-            final ArrayList<Throwable> causes) {
+  /** The number of COMMIT messages that are known to have been processed successfully. */
+  private final int nok;
+  /** The number of COMMIT messages that were issued and which failed. */
+  private final int nfail;
 
-        this.req = req;
-        this.causes = causes;
+  public CommitResponse(final CommitRequest req, final ArrayList<Throwable> causes) {
 
-        int nok = 0, nfail = 0;
+    this.req = req;
+    this.causes = causes;
 
-        for (Throwable t : causes) {
+    int nok = 0, nfail = 0;
 
-            if (t == null)
-                nok++; // request issued and was Ok.
-            else
-                nfail++; // request issued and failed.
+    for (Throwable t : causes) {
 
-        }
-
-        this.nok = nok;
-        this.nfail = nfail;
-
+      if (t == null) nok++; // request issued and was Ok.
+      else nfail++; // request issued and failed.
     }
 
-    public boolean isLeaderOk() {
+    this.nok = nok;
+    this.nfail = nfail;
+  }
 
-        return causes.get(0) == null;
+  public boolean isLeaderOk() {
 
+    return causes.get(0) == null;
+  }
+
+  /** Number of COMMIT messages that were generated and succeeded. */
+  public int getNOk() {
+
+    return nok;
+  }
+
+  /** Number of COMMIT messages that were generated and failed. */
+  public int getNFail() {
+
+    return nfail;
+  }
+
+  /**
+   * Return the root cause for the ith service -or- <code>null</code> if the COMMIT did not produce
+   * an exception for that service.
+   */
+  public Throwable getCause(final int i) {
+
+    return causes.get(i);
+  }
+
+  /**
+   * Throw out the exception(s).
+   *
+   * <p>Note: This method is guaranteed to not return normally!
+   *
+   * @throws Exception if one or more services that voted YES failed the COMMIT.
+   * @throws IllegalStateException if all services that voted YES succeeded.
+   */
+  public void throwCauses() throws Exception {
+
+    if (causes.isEmpty()) {
+
+      // There were no errors.
+      throw new IllegalStateException();
     }
 
-    /**
-     * Number of COMMIT messages that were generated and succeeded.
-     */
-    public int getNOk() {
+    // Throw exception back to the leader.
+    if (causes.size() == 1) throw new Exception(causes.get(0));
 
-        return nok;
+    final int k = req.getPrepareResponse().replicationFactor();
 
-    }
-
-    /**
-     * Number of COMMIT messages that were generated and failed.
-     */
-    public int getNFail() {
-
-        return nfail;
-
-    }
-
-    /**
-     * Return the root cause for the ith service -or- <code>null</code> if the
-     * COMMIT did not produce an exception for that service.
-     */
-    public Throwable getCause(final int i) {
-
-        return causes.get(i);
-
-    }
-
-    /**
-     * Throw out the exception(s).
-     * <p>
-     * Note: This method is guaranteed to not return normally!
-     * 
-     * @throws Exception
-     *             if one or more services that voted YES failed the COMMIT.
-     * 
-     * @throws IllegalStateException
-     *             if all services that voted YES succeeded.
-     */
-    public void throwCauses() throws Exception {
-
-        if (causes.isEmpty()) {
-
-            // There were no errors.
-            throw new IllegalStateException();
-
-        }
-
-        // Throw exception back to the leader.
-        if (causes.size() == 1)
-            throw new Exception(causes.get(0));
-
-        final int k = req.getPrepareResponse().replicationFactor();
-
-        throw new Exception("replicationFactor=" + k + ", nok=" + nok
-                + ", nfail=" + nfail, new ExecutionExceptions(causes));
-
-    }
-
+    throw new Exception(
+        "replicationFactor=" + k + ", nok=" + nok + ", nfail=" + nfail,
+        new ExecutionExceptions(causes));
+  }
 }

@@ -19,6 +19,5 @@ package org.embergraph.rwstore;
 
 public interface IWriteCacheManager {
 
-	boolean removeWriteToAddr(long address,int latchedAddr);
-
+  boolean removeWriteToAddr(long address, int latchedAddr);
 }

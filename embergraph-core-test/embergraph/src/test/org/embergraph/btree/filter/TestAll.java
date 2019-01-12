@@ -21,7 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Aggregates test suites into increasing dependency order.
  *
@@ -30,41 +29,30 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("Tuple filters");
+
+    // test iterator semantics.
+    suite.addTestSuite(TestTupleFilters.class);
+    suite.addTestSuite(TestRemoverator.class);
+    suite.addTestSuite(TestReverserator.class);
+
+    /*
+     * tests of various iterators or cursors that provide a facility, such
+     * as the completion scan, on which the core B+Tree has no dependency.
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestPrefixFilter.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
-
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-    	final TestSuite suite = new TestSuite("Tuple filters");
-        
-        // test iterator semantics.
-        suite.addTestSuite(TestTupleFilters.class);
-        suite.addTestSuite(TestRemoverator.class);
-        suite.addTestSuite(TestReverserator.class);
-
-        /*
-         * tests of various iterators or cursors that provide a facility, such
-         * as the completion scan, on which the core B+Tree has no dependency.
-         */
-        suite.addTestSuite( TestPrefixFilter.class );
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

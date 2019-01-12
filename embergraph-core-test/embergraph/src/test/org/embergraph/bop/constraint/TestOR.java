@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -33,63 +32,58 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Unit tests for {@link OR}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestOR extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestOR() {
+  /** */
+  public TestOR() {}
+
+  /** @param name */
+  public TestOR(String name) {
+    super(name);
+  }
+
+  /** Unit test for {@link OR#OR(IConstraint,IConstraint)} */
+  public void testConstructor() {
+    BooleanValueExpression eq = new EQ(Var.var("x"), Var.var("y"));
+    BooleanValueExpression ne = new EQ(Var.var("x"), Var.var("y"));
+
+    try {
+      assertTrue(null != new OR(null, eq));
+      fail("IllegalArgumentException expected, lhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * @param name
-     */
-    public TestOR(String name) {
-        super(name);
+    try {
+      assertTrue(null != new OR(eq, null));
+      fail("IllegalArgumentException expected, rhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link OR#OR(IConstraint,IConstraint)}
-     */
-    public void testConstructor ()
-    {
-        BooleanValueExpression eq = new EQ ( Var.var ( "x" ), Var.var ( "y" ) ) ;
-        BooleanValueExpression ne = new EQ ( Var.var ( "x" ), Var.var ( "y" ) ) ;
+    assertTrue(null != new OR(eq, ne));
+  }
 
-        try { assertTrue ( null != new OR ( null, eq ) ) ; fail ( "IllegalArgumentException expected, lhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
+  /** Unit test for {@link OR#get(IBindingSet)} */
+  public void testAccept() {
+    Var<?> x = Var.var("x");
+    Var<?> y = Var.var("y");
+    Constant<Integer> val1 = new Constant<Integer>(1);
+    Constant<Integer> val2 = new Constant<Integer>(2);
 
-        try { assertTrue ( null != new OR ( eq, null ) ) ; fail ( "IllegalArgumentException expected, rhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
+    BooleanValueExpression eq = new EQ(x, y);
+    BooleanValueExpression eqc = new EQConstant(y, val2);
 
-        assertTrue ( null != new OR ( eq, ne ) ) ;
-    }
+    OR op = new OR(eq, eqc);
 
-    /**
-     * Unit test for {@link OR#get(IBindingSet)}
-     */
-    public void testAccept ()
-    {
-        Var<?> x = Var.var ( "x" ) ;
-        Var<?> y = Var.var ( "y" ) ;
-        Constant<Integer> val1 = new Constant<Integer> ( 1 ) ;
-        Constant<Integer> val2 = new Constant<Integer> ( 2 ) ;
+    IBindingSet eqlhs = new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {val1, val1});
+    IBindingSet eqrhs = new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {val1, val2});
+    IBindingSet ne = new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {val2, val1});
 
-        BooleanValueExpression eq = new EQ ( x, y ) ;
-        BooleanValueExpression eqc = new EQConstant ( y, val2 ) ;
-
-        OR op = new OR ( eq, eqc ) ;
-
-        IBindingSet eqlhs = new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { val1, val1 } ) ;
-        IBindingSet eqrhs = new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { val1, val2 } ) ;
-        IBindingSet ne = new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { val2, val1 } ) ;
-
-        assertTrue ( op.get ( eqlhs ) ) ;
-        assertTrue ( op.get ( eqrhs ) ) ;
-        assertFalse ( op.get ( ne ) ) ;
-    }    
+    assertTrue(op.get(eqlhs));
+    assertTrue(op.get(eqrhs));
+    assertFalse(op.get(ne));
+  }
 }

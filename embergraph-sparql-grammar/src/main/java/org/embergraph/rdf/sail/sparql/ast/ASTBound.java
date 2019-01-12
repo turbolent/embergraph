@@ -4,22 +4,20 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTBound extends SimpleNode {
 
-	public ASTBound(int id) {
-		super(id);
-	}
+  public ASTBound(int id) {
+    super(id);
+  }
 
-	public ASTBound(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTBound(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public ASTVar getArg() {
-		return (ASTVar)jjtGetChild(0);
-	}
+  public ASTVar getArg() {
+    return (ASTVar) jjtGetChild(0);
+  }
 }

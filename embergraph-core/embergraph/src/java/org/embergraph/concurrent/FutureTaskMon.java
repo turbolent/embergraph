@@ -20,65 +20,59 @@ package org.embergraph.concurrent;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
-
 import org.apache.log4j.Logger;
 
-
 /**
- * This is a flyweight utility class to be used as a direct replacement for
- * FutureTask in code where we may need to be able to discover the root cancel
- * request causing an interrupt.
- * 
+ * This is a flyweight utility class to be used as a direct replacement for FutureTask in code where
+ * we may need to be able to discover the root cancel request causing an interrupt.
+ *
  * @author Martyn Cutcher
  */
 public class FutureTaskMon<T> extends FutureTask<T> {
 
-	static private final transient Logger log = Logger
-	.getLogger(FutureTaskMon.class);
+  private static final transient Logger log = Logger.getLogger(FutureTaskMon.class);
 
-	private volatile boolean didStart = false;
-	
-	public FutureTaskMon(final Callable<T> callable) {
-		super(callable);
-	}
+  private volatile boolean didStart = false;
 
-	public FutureTaskMon(final Runnable runnable, final T result) {
-		super(runnable, result);
-	}
+  public FutureTaskMon(final Callable<T> callable) {
+    super(callable);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * Hooked to notice when the task has been started.
-	 */
-	@Override
-	public void run() {
-		didStart = true;
-		super.run();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * Overridden to conditionally log @ DEBUG if the caller caused the task to
-	 * be interrupted. This can be used to search for sources of interrupts.
-	 */
-	@Override
-	public boolean cancel(final boolean mayInterruptIfRunning) {
+  public FutureTaskMon(final Runnable runnable, final T result) {
+    super(runnable, result);
+  }
 
-		final boolean didStart = this.didStart;
-		
-		final boolean ret = super.cancel(mayInterruptIfRunning);
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Hooked to notice when the task has been started.
+   */
+  @Override
+  public void run() {
+    didStart = true;
+    super.run();
+  }
 
-        if (didStart && mayInterruptIfRunning && ret && log.isDebugEnabled()) {
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to conditionally log @ DEBUG if the caller caused the task to be interrupted.
+   * This can be used to search for sources of interrupts.
+   */
+  @Override
+  public boolean cancel(final boolean mayInterruptIfRunning) {
 
-            log.debug("May have interrupted running task",
-                    new RuntimeException("Stack trace of cancel() invocation"));
+    final boolean didStart = this.didStart;
 
-        }
+    final boolean ret = super.cancel(mayInterruptIfRunning);
 
-		return ret;
+    if (didStart && mayInterruptIfRunning && ret && log.isDebugEnabled()) {
 
-	}
+      log.debug(
+          "May have interrupted running task",
+          new RuntimeException("Stack trace of cancel() invocation"));
+    }
 
+    return ret;
+  }
 }

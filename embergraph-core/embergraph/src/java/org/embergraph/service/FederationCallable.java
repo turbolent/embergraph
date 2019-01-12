@@ -27,40 +27,30 @@ import java.util.concurrent.Callable;
 
 /**
  * Base class for {@link IFederationCallable}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class FederationCallable<T> implements IFederationCallable,
-        Callable<T> {
+public abstract class FederationCallable<T> implements IFederationCallable, Callable<T> {
 
-    private transient IEmbergraphFederation<?> fed;
+  private transient IEmbergraphFederation<?> fed;
 
-    /**
-     * Deserialization ctor.
-     */
-    public FederationCallable() {
-    }
+  /** Deserialization ctor. */
+  public FederationCallable() {}
 
-    synchronized public void setFederation(final IEmbergraphFederation<?> fed) {
+  public synchronized void setFederation(final IEmbergraphFederation<?> fed) {
 
-        if (fed == null)
-            throw new IllegalArgumentException();
+    if (fed == null) throw new IllegalArgumentException();
 
-        if (this.fed != null && this.fed != fed)
-            throw new IllegalStateException();
+    if (this.fed != null && this.fed != fed) throw new IllegalStateException();
 
-        this.fed = fed;
+    this.fed = fed;
+  }
 
-    }
+  public IEmbergraphFederation<?> getFederation() {
 
-    public IEmbergraphFederation<?> getFederation() {
+    if (fed == null) throw new IllegalStateException();
 
-        if (fed == null)
-            throw new IllegalStateException();
-
-        return fed;
-
-    }
-    
+    return fed;
+  }
 }

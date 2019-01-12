@@ -24,12 +24,10 @@ package org.embergraph.rdf.vocab;
 import org.embergraph.rdf.internal.InlineURIFactory;
 import org.embergraph.rdf.internal.InlineUnsignedIntegerURIHandler;
 
-
 public class TestUriInlineFactory_BLZG1591 extends InlineURIFactory {
-    
-    public TestUriInlineFactory_BLZG1591() {
-        
-        addHandler(new InlineUnsignedIntegerURIHandler("http://test.com/P"));
-    }
 
+  public TestUriInlineFactory_BLZG1591() {
+
+    addHandler(new InlineUnsignedIntegerURIHandler("http://test.com/P"));
+  }
 }

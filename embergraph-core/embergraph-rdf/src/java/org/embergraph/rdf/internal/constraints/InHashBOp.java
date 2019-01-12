@@ -21,152 +21,132 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
- * A constraint that a value expression which may only take on the bindings
- * enumerated by some set of constants.
- * 
+ * A constraint that a value expression which may only take on the bindings enumerated by some set
+ * of constants.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INHashMap.java 4357 2011-03-31 17:11:26Z thompsonbry $
  */
 public class InHashBOp extends InBOp {
 
-    /**
-	 *
-	 */
-	private static final long serialVersionUID = 8032412126003678642L;
+  /** */
+  private static final long serialVersionUID = 8032412126003678642L;
 
-	/**
-     * The value expression to be computed for each solution (cached).
-     * <p>
-     * Note: This cache is not serialized and is compiled on demand when the
-     * operator is used.
-     */
-    private transient volatile IValueExpression<IV> valueExpr;
+  /**
+   * The value expression to be computed for each solution (cached).
+   *
+   * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
+   */
+  private transient volatile IValueExpression<IV> valueExpr;
 
-    /**
-     * The set of constants to be tested (cached).
-     * <p>
-     * Note: This cache is not serialized and is compiled on demand when the
-     * operator is used.
-     */
-    private transient volatile LinkedHashSet<IV> set;
+  /**
+   * The set of constants to be tested (cached).
+   *
+   * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
+   */
+  private transient volatile LinkedHashSet<IV> set;
 
-    /**
-     * <code>true</code> iff this is NOT IN (cached).
-     * <p>
-     * Note: This cache is not serialized and is compiled on demand when the
-     * operator is used.
-     */
-    private transient boolean not;
+  /**
+   * <code>true</code> iff this is NOT IN (cached).
+   *
+   * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
+   */
+  private transient boolean not;
 
-    /**
-     * Deep copy constructor.
-     */
-    public InHashBOp(final InHashBOp op) {
-        super(op);
-    }
+  /** Deep copy constructor. */
+  public InHashBOp(final InHashBOp op) {
+    super(op);
+  }
 
-    /**
-     * Shallow copy constructor.
-     */
-    public InHashBOp(final BOp[] args, final Map<String, Object> annotations) {
+  /** Shallow copy constructor. */
+  public InHashBOp(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
+    super(args, annotations);
+  }
 
-    }
+  /**
+   * @param x Some variable.
+   * @param set A set of legal term identifiers providing a constraint on the allowable values for
+   *     that variable.
+   */
+  @SuppressWarnings("rawtypes")
+  public InHashBOp(
+      final boolean not,
+      final IValueExpression<? extends IV> var,
+      final IConstant<? extends IV>... set) {
 
-    /**
-     * 
-     * @param x
-     *            Some variable.
-     * @param set
-     *            A set of legal term identifiers providing a constraint on the
-     *            allowable values for that variable.
-     */
-    @SuppressWarnings("rawtypes")
-    public InHashBOp(
-            final boolean not,
-            final IValueExpression<? extends IV> var,
-            final IConstant<? extends IV>... set) {
-     
-        super(not, var, set);
-        
-    }
+    super(not, var, set);
+  }
 
-    /**
-     * Extends {@link org.embergraph.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to reflect args changes in cached IVs set.
-     */
-    @Override
-    public void mutation() {
-    	super.mutation();
-    	if (set != null) {
-            synchronized (this) {
-                if (set != null) {
-                    // clearing cached set is guarded by double-checked locking pattern.
-                    set = null;
-                }
-            }
+  /**
+   * Extends {@link org.embergraph.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to
+   * reflect args changes in cached IVs set.
+   */
+  @Override
+  public void mutation() {
+    super.mutation();
+    if (set != null) {
+      synchronized (this) {
+        if (set != null) {
+          // clearing cached set is guarded by double-checked locking pattern.
+          set = null;
         }
+      }
     }
-    
-    private void init() {
+  }
 
-        valueExpr = getValueExpression();
+  private void init() {
 
-        // populate the cache.
-        final IConstant<IV>[] a = getSet();
+    valueExpr = getValueExpression();
 
-        set = new LinkedHashSet<IV>(a.length);
+    // populate the cache.
+    final IConstant<IV>[] a = getSet();
 
-        for (IConstant<IV> IV : a) {
+    set = new LinkedHashSet<IV>(a.length);
 
-            final IV val = IV.get();
+    for (IConstant<IV> IV : a) {
 
-            set.add(val);
+      final IV val = IV.get();
 
+      set.add(val);
+    }
+
+    not = ((Boolean) getProperty(Annotations.NOT)).booleanValue();
+  }
+
+  public boolean accept(final IBindingSet bindingSet) {
+
+    final Set<IV> _set;
+    if (valueExpr == null || set == null) {
+      synchronized (this) {
+        if (valueExpr == null || set == null) {
+          // init() is guarded by double-checked locking pattern.
+          init();
         }
-
-        not = ((Boolean) getProperty(Annotations.NOT)).booleanValue();
-        
+        // "set" is pulled into a local variable in this double-checked locking pattern
+        // to avoid the possibility that set is resolved to non-null
+        // and then cleared to null before it is used in accept()
+        _set = set;
+      }
+    } else {
+      _set = set;
     }
 
-    public boolean accept(final IBindingSet bindingSet) {
-        
-    	final Set<IV> _set;
-        if (valueExpr == null||set==null) {
-            synchronized (this) {
-                if (valueExpr == null||set==null) {
-                    // init() is guarded by double-checked locking pattern.
-                    init();
-                }
-                // "set" is pulled into a local variable in this double-checked locking pattern
-                // to avoid the possibility that set is resolved to non-null
-                // and then cleared to null before it is used in accept()
-                _set = set;                    
-            }
-        } else {
-        	_set = set;
-        }
+    // get as-bound value of the value expression.
+    final IV v = valueExpr.get(bindingSet);
 
-        // get as-bound value of the value expression.
-        final IV v = valueExpr.get(bindingSet);
+    if (v == null) throw new SparqlTypeErrorException.UnboundVarException();
 
-        if (v == null)
-            throw new SparqlTypeErrorException.UnboundVarException();
+    final boolean found = _set.contains(v);
 
-        final boolean found = _set.contains(v);
-
-        return not ? !found : found;
-
-    }
-
+    return not ? !found : found;
+  }
 }

@@ -1,7 +1,6 @@
 package org.embergraph.relation.accesspath;
 
 import java.util.Collections;
-
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IIndex;
 import org.embergraph.striterator.ChunkedWrappedIterator;
@@ -10,163 +9,146 @@ import org.embergraph.striterator.IKeyOrder;
 
 /**
  * An access path that is known to be empty.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyAccessPath<E> implements IAccessPath<E> {
 
-    private final IPredicate<E> predicate;
+  private final IPredicate<E> predicate;
 
-    private final IKeyOrder<E> keyOrder;
+  private final IKeyOrder<E> keyOrder;
 
-    /**
-     * Ctor variant does not specify the {@link #getPredicate()} or the
-     * {@link #getKeyOrder()} and those methods will throw an
-     * {@link UnsupportedOperationException} if invoked.
-     */
-    public EmptyAccessPath() {
+  /**
+   * Ctor variant does not specify the {@link #getPredicate()} or the {@link #getKeyOrder()} and
+   * those methods will throw an {@link UnsupportedOperationException} if invoked.
+   */
+  public EmptyAccessPath() {
 
-        this(null/* predicate */, null/* keyOrder */);
-        
-    }
-    
-    /**
-     * Note: the {@link #getPredicate()} and {@link #getKeyOrder()} and methods
-     * will throw an {@link UnsupportedOperationException} if the corresponding
-     * argument is null.
-     * 
-     * @param predicate
-     * @param keyOrder
-     */
-    public EmptyAccessPath(IPredicate<E> predicate, IKeyOrder<E> keyOrder) {
+    this(null /* predicate */, null /* keyOrder */);
+  }
 
-//        if (predicate == null)
-//            throw new IllegalArgumentException();
-//
-//        if (keyOrder == null)
-//            throw new IllegalArgumentException();
+  /**
+   * Note: the {@link #getPredicate()} and {@link #getKeyOrder()} and methods will throw an {@link
+   * UnsupportedOperationException} if the corresponding argument is null.
+   *
+   * @param predicate
+   * @param keyOrder
+   */
+  public EmptyAccessPath(IPredicate<E> predicate, IKeyOrder<E> keyOrder) {
 
-        this.predicate = predicate;
-      
-        this.keyOrder = keyOrder;
-        
-    }
-    
-    /**
-     * {@inheritDoc}
-     * @throws UnsupportedOperationException
-     *             unless the caller specified an {@link IPredicate} to the
-     *             ctor.
-     */
-    @Override
-    public IPredicate<E> getPredicate() {
+    //        if (predicate == null)
+    //            throw new IllegalArgumentException();
+    //
+    //        if (keyOrder == null)
+    //            throw new IllegalArgumentException();
 
-        if (predicate == null)
-            throw new UnsupportedOperationException();
+    this.predicate = predicate;
 
-        return predicate;
+    this.keyOrder = keyOrder;
+  }
 
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @throws UnsupportedOperationException unless the caller specified an {@link IPredicate} to the
+   *     ctor.
+   */
+  @Override
+  public IPredicate<E> getPredicate() {
 
-    /**
-     * {@inheritDoc}
-     * @throws UnsupportedOperationException
-     *             unless the caller specified an {@link IKeyOrder} to the ctor.
-     */
-    @Override
-    public IKeyOrder<E> getKeyOrder() {
+    if (predicate == null) throw new UnsupportedOperationException();
 
-        if (keyOrder == null)
-            throw new UnsupportedOperationException();
+    return predicate;
+  }
 
-        return keyOrder;
-        
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @throws UnsupportedOperationException unless the caller specified an {@link IKeyOrder} to the
+   *     ctor.
+   */
+  @Override
+  public IKeyOrder<E> getKeyOrder() {
 
-    /**
-     * {@inheritDoc}
-     * @throws UnsupportedOperationException
-     *             since no index was selected.
-     */
-    @Override
-    public IIndex getIndex() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
-    
-    /**
-     * {@inheritDoc}<p>
-     * Always returns <code>true</code>.
-     */
-    @Override
-    public boolean isEmpty() {
+    if (keyOrder == null) throw new UnsupportedOperationException();
 
-        return true;
+    return keyOrder;
+  }
 
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @throws UnsupportedOperationException since no index was selected.
+   */
+  @Override
+  public IIndex getIndex() {
 
-    /**
-     * {@inheritDoc}<p>Always returns ZERO(0).
-     */
-    @Override
-    public long rangeCount(boolean exact) {
+    throw new UnsupportedOperationException();
+  }
 
-        return 0;
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Always returns <code>true</code>.
+   */
+  @Override
+  public boolean isEmpty() {
 
-    }
+    return true;
+  }
 
-//    /**
-//     * Visits nothing.
-//     */
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public ITupleIterator<E> rangeIterator() {
-//
-//        return EmptyTupleIterator.INSTANCE;
-//        
-//    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Always returns ZERO(0).
+   */
+  @Override
+  public long rangeCount(boolean exact) {
 
-    /**
-     * Visits nothing.
-     */
-    @Override
-    public IChunkedOrderedIterator<E> iterator() {
-        
-        return iterator(0L/* offset */, 0L/* limit */, 0/* capacity */);
-        
-    }
+    return 0;
+  }
 
-//    /**
-//     * Visits nothing.
-//     */
-//    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
-//
-//        return iterator(0L/* offset */, limit, capacity);
-//        
-//    }
+  //    /**
+  //     * Visits nothing.
+  //     */
+  //    @SuppressWarnings("unchecked")
+  //    @Override
+  //    public ITupleIterator<E> rangeIterator() {
+  //
+  //        return EmptyTupleIterator.INSTANCE;
+  //
+  //    }
 
-    /**
-     * Visits nothing.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public IChunkedOrderedIterator<E> iterator(final long offset,
-            final long limit, final int capacity) {
+  /** Visits nothing. */
+  @Override
+  public IChunkedOrderedIterator<E> iterator() {
 
-        return new ChunkedWrappedIterator<E>(Collections.EMPTY_LIST.iterator());
+    return iterator(0L /* offset */, 0L /* limit */, 0 /* capacity */);
+  }
 
-    }
+  //    /**
+  //     * Visits nothing.
+  //     */
+  //    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
+  //
+  //        return iterator(0L/* offset */, limit, capacity);
+  //
+  //    }
 
-    /**
-     * Does nothing and always returns ZERO(0).
-     */
-    @Override
-    public long removeAll() {
+  /** Visits nothing. */
+  @Override
+  @SuppressWarnings("unchecked")
+  public IChunkedOrderedIterator<E> iterator(
+      final long offset, final long limit, final int capacity) {
 
-        return 0L;
+    return new ChunkedWrappedIterator<E>(Collections.EMPTY_LIST.iterator());
+  }
 
-    }
+  /** Does nothing and always returns ZERO(0). */
+  @Override
+  public long removeAll() {
 
+    return 0L;
+  }
 }

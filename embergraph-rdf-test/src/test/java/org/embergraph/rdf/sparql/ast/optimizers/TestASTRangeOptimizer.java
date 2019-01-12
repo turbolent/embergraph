@@ -21,8 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.RangeBOp;
@@ -46,934 +44,857 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
+import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test suite for {@link ASTRangeOptimizer}.
- */
+/** Test suite for {@link ASTRangeOptimizer}. */
 public class TestASTRangeOptimizer extends AbstractASTEvaluationTestCase {
 
-    /**
-     * 
+  /** */
+  public TestASTRangeOptimizer() {}
+
+  /** @param name */
+  public TestASTRangeOptimizer(String name) {
+    super(name);
+  }
+
+  @SuppressWarnings("rawtypes")
+  public void test_SimpleRange() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    public TestASTRangeOptimizer() {
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV p = makeIV(new URIImpl("http://example/p"));
+
+    final IV lower = new XSDNumericIV(25);
+
+    final IV upper = new XSDNumericIV(35);
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      { // lower
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      { // upper
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      where.addChild(sp);
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
-    /**
-     * @param name
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      { // lower
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      { // upper
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      final RangeNode range =
+          new RangeNode(new VarNode("p"), new ConstantNode(lower), new ConstantNode(upper));
+
+      final RangeBOp bop = ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals);
+
+      range.setRangeBOp(bop);
+
+      sp.setRange(range);
+
+      where.addChild(sp);
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  @SuppressWarnings("rawtypes")
+  public void test_SimpleRange_justLower() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    public TestASTRangeOptimizer(String name) {
-        super(name);
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV p = makeIV(new URIImpl("http://example/p"));
+
+    final IV lower = new XSDNumericIV(25);
+
+    //        final IV upper = new XSDNumericIV(35);
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      { // lower
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      //            { // upper
+      //                final FunctionNode f =
+      //                    new FunctionNode(FunctionRegistry.LT, null,
+      //                            new ValueExpressionNode[] {
+      //                                new VarNode("p"),
+      //                                new ConstantNode(upper)
+      //                    });
+      //
+      //                where.addChild(new FilterNode(f));
+      //            }
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      where.addChild(sp);
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
-    @SuppressWarnings("rawtypes")
-    public void test_SimpleRange() {
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
 
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        final IV lower = new XSDNumericIV(25);
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
 
-        final IV upper = new XSDNumericIV(35);
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+      final JoinGroupNode where = new JoinGroupNode();
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+      { // lower
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
 
-            { // lower
-                final FunctionNode f = 
-                        new FunctionNode(FunctionRegistry.GT, null,
-                                new ValueExpressionNode[] {
-                                    new VarNode("p"),
-                                    new ConstantNode(lower)
-                        });
-                
-                where.addChild(new FilterNode(f));
-            }
-            
-            { // upper
-                final FunctionNode f = 
-                    new FunctionNode(FunctionRegistry.LT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(upper)
-                    });
-            
-                where.addChild(new FilterNode(f));
-            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
+        where.addChild(new FilterNode(f));
+      }
 
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+      //            { // upper
+      //                final FunctionNode f =
+      //                    new FunctionNode(FunctionRegistry.LT, null,
+      //                            new ValueExpressionNode[] {
+      //                                new VarNode("p"),
+      //                                new ConstantNode(upper)
+      //                    });
+      //
+      //                where.addChild(new FilterNode(f));
+      //            }
 
-            { // lower
-                final FunctionNode f = 
-                        new FunctionNode(FunctionRegistry.GT, null,
-                                new ValueExpressionNode[] {
-                                    new VarNode("p"),
-                                    new ConstantNode(lower)
-                        });
-                
-                where.addChild(new FilterNode(f));
-            }
-            
-            { // upper
-                final FunctionNode f = 
-                    new FunctionNode(FunctionRegistry.LT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(upper)
-                    });
-            
-                where.addChild(new FilterNode(f));
-            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            final RangeNode range = new RangeNode(
-                    new VarNode("p"),
-                    new ConstantNode(lower),
-                    new ConstantNode(upper)
-                    );
-            
-            final RangeBOp bop = ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals);
-            
-            range.setRangeBOp(bop);
-            
-            sp.setRange(range);
-            
-            where.addChild(sp);
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
 
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+      final RangeNode range = new RangeNode(new VarNode("p"));
+      range.setFrom(new ConstantNode(lower));
 
-        assertSameAST(expected, actual);
+      range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
 
+      sp.setRange(range);
+
+      where.addChild(sp);
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
     }
 
-    @SuppressWarnings("rawtypes")
-    public void test_SimpleRange_justLower() {
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
 
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        final IV lower = new XSDNumericIV(25);
+    assertSameAST(expected, actual);
+  }
 
-//        final IV upper = new XSDNumericIV(35);
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+  @SuppressWarnings("rawtypes")
+  public void test_SimpleRange_justUpper() {
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            { // lower
-                final FunctionNode f = 
-                        new FunctionNode(FunctionRegistry.GT, null,
-                                new ValueExpressionNode[] {
-                                    new VarNode("p"),
-                                    new ConstantNode(lower)
-                        });
-                
-                where.addChild(new FilterNode(f));
-            }
-            
-//            { // upper
-//                final FunctionNode f = 
-//                    new FunctionNode(FunctionRegistry.LT, null,
-//                            new ValueExpressionNode[] {
-//                                new VarNode("p"),
-//                                new ConstantNode(upper)
-//                    });
-//            
-//                where.addChild(new FilterNode(f));
-//            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
-
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            { // lower
-                final FunctionNode f = 
-                        new FunctionNode(FunctionRegistry.GT, null,
-                                new ValueExpressionNode[] {
-                                    new VarNode("p"),
-                                    new ConstantNode(lower)
-                        });
-                
-                where.addChild(new FilterNode(f));
-            }
-            
-//            { // upper
-//                final FunctionNode f = 
-//                    new FunctionNode(FunctionRegistry.LT, null,
-//                            new ValueExpressionNode[] {
-//                                new VarNode("p"),
-//                                new ConstantNode(upper)
-//                    });
-//            
-//                where.addChild(new FilterNode(f));
-//            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            final RangeNode range = new RangeNode(new VarNode("p"));
-            range.setFrom(new ConstantNode(lower));
-            
-            range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
-            
-            sp.setRange(range);
-            
-            where.addChild(sp);
-
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void test_SimpleRange_justUpper() {
-
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
-
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-//        final IV lower = new XSDNumericIV(25);
-
-        final IV upper = new XSDNumericIV(35);
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-//            { // lower
-//                final FunctionNode f = 
-//                        new FunctionNode(FunctionRegistry.GT, null,
-//                                new ValueExpressionNode[] {
-//                                    new VarNode("p"),
-//                                    new ConstantNode(lower)
-//                        });
-//                
-//                where.addChild(new FilterNode(f));
-//            }
-            
-            { // upper
-                final FunctionNode f = 
-                    new FunctionNode(FunctionRegistry.LT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(upper)
-                    });
-            
-                where.addChild(new FilterNode(f));
-            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
-
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-//            { // lower
-//                final FunctionNode f = 
-//                        new FunctionNode(FunctionRegistry.GT, null,
-//                                new ValueExpressionNode[] {
-//                                    new VarNode("p"),
-//                                    new ConstantNode(lower)
-//                        });
-//                
-//                where.addChild(new FilterNode(f));
-//            }
-            
-            { // upper
-                final FunctionNode f = 
-                    new FunctionNode(FunctionRegistry.LT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(upper)
-                    });
-            
-                where.addChild(new FilterNode(f));
-            }
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            final RangeNode range = new RangeNode(new VarNode("p"));
-            range.setTo(new ConstantNode(upper));
-            range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
-            
-            sp.setRange(range);
-            
-            where.addChild(sp);
-
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void test_And() {
-
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
-
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        final IV lower = new XSDNumericIV(25);
-
-        final IV upper = new XSDNumericIV(35);
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            final FunctionNode f1 = 
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(lower)
-                    });
-
-            final FunctionNode f2 = 
-                new FunctionNode(FunctionRegistry.LT, null,
-                        new ValueExpressionNode[] {
-                            new VarNode("p"),
-                            new ConstantNode(upper)
-                });
-            
-            final FunctionNode f = FunctionNode.AND(f1, f2);
-                
-            where.addChild(new FilterNode(f));
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
-
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            final FunctionNode f1 = 
-                new FunctionNode(FunctionRegistry.GT, null,
-                        new ValueExpressionNode[] {
-                            new VarNode("p"),
-                            new ConstantNode(lower)
-                });
-	
-	        final FunctionNode f2 = 
-	            new FunctionNode(FunctionRegistry.LT, null,
-	                    new ValueExpressionNode[] {
-	                        new VarNode("p"),
-	                        new ConstantNode(upper)
-	            });
-	        
-	        final FunctionNode f = FunctionNode.AND(f1, f2);
-	            
-	        where.addChild(new FilterNode(f));
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            final RangeNode range = new RangeNode(
-                    new VarNode("p"),
-                    new ConstantNode(lower),
-                    new ConstantNode(upper)
-                    );
-            range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
-            
-            sp.setRange(range);
-            
-            where.addChild(sp);
-
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void test_And2() {
-
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
-
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        final IV lower = new XSDNumericIV(25);
-
-        final IV upper = new XSDNumericIV(35);
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            final FunctionNode f1 = 
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("p"),
-                                new ConstantNode(lower)
-                    });
-
-            final FunctionNode f2 = 
-                new FunctionNode(FunctionRegistry.GT, null,
-                        new ValueExpressionNode[] {
-                            new ConstantNode(upper),
-                            new VarNode("p")
-                });
-            
-            final FunctionNode f = FunctionNode.AND(f1, f2);
-                
-            where.addChild(new FilterNode(f));
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
-
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            final FunctionNode f1 = 
-                new FunctionNode(FunctionRegistry.GT, null,
-                        new ValueExpressionNode[] {
-                            new VarNode("p"),
-                            new ConstantNode(lower)
-                });
-
-	        final FunctionNode f2 = 
-	            new FunctionNode(FunctionRegistry.GT, null,
-	                    new ValueExpressionNode[] {
-	                        new ConstantNode(upper),
-	                        new VarNode("p")
-	            });
-	        
-	        final FunctionNode f = FunctionNode.AND(f1, f2);
-	            
-	        where.addChild(new FilterNode(f));
-            
-            final StatementPatternNode sp = new StatementPatternNode(
-                    new VarNode("x"), new ConstantNode(p), new VarNode("p"));
-            sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            final RangeNode range = new RangeNode(new VarNode("p"));
-            range.setFrom(new ConstantNode(lower));
-            range.setTo(new ConstantNode(upper));
-            range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
-            
-            sp.setRange(range);
-            
-            where.addChild(sp);
-
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
-    }
-
-    /**
-     * select ?s2
-     * where {
-     *   <s1> <p> ?o1 .
-     *   ?s2  <p> ?o2 .
-     *   filter (?o2 > (?o1 - 10) && ?o2 < (?o1 + 10)) .
-     * }
-     * 
-     * Since the range is not complex, it is not attached as RangeBop.
-     * See https://jira.blazegraph.com/browse/BLZG-1635.
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    @SuppressWarnings("rawtypes")
-    public void test_Complex() {
+    final IBindingSet[] bsets = new IBindingSet[] {};
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+    final IV p = makeIV(new URIImpl("http://example/p"));
 
-        final IV s1 = makeIV(new URIImpl("http://example/s1"));
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        final IV ten = new XSDNumericIV(10);
+    //        final IV lower = new XSDNumericIV(25);
 
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+    final IV upper = new XSDNumericIV(35);
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
 
-            {
-            final FunctionNode f1 = 
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("o2"),
-                                FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten))
-                    });
+      final JoinGroupNode where = new JoinGroupNode();
 
-            final FunctionNode f2 = 
-                new FunctionNode(FunctionRegistry.LT, null,
-                        new ValueExpressionNode[] {
-		                        new VarNode("o2"),
-		                        FunctionNode.add(new VarNode("o1"), new ConstantNode(ten))
-                });
-            
-            final FunctionNode f = FunctionNode.AND(f1, f2);
-                
-            where.addChild(new FilterNode(f));
-            }
-            
-	        {
-	        final StatementPatternNode sp = new StatementPatternNode(
-	                new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
+      //            { // lower
+      //                final FunctionNode f =
+      //                        new FunctionNode(FunctionRegistry.GT, null,
+      //                                new ValueExpressionNode[] {
+      //                                    new VarNode("p"),
+      //                                    new ConstantNode(lower)
+      //                        });
+      //
+      //                where.addChild(new FilterNode(f));
+      //            }
 
-	        where.addChild(sp);
-	        }
-	        
-	        {
-	        final StatementPatternNode sp = new StatementPatternNode(
-	                new VarNode("s"), new ConstantNode(p), new VarNode("o2"));
-        	sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+      { // upper
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
 
-            where.addChild(sp);
-	        }
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
+        where.addChild(new FilterNode(f));
+      }
 
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            expected.setProjection(projection);
-            
-            final JoinGroupNode where = new JoinGroupNode();
-            expected.setWhereClause(where);
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
 
-//            final FunctionNode sub = FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten));
-//            final FunctionNode add = FunctionNode.add(new VarNode("o1"), new ConstantNode(ten));
-            
-            {
-            final FunctionNode f1 = 
-                new FunctionNode(FunctionRegistry.GT, null,
-                        new ValueExpressionNode[] {
-                            new VarNode("o2"),
-                            FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten))
-                });
+      where.addChild(sp);
 
-	        final FunctionNode f2 = 
-	            new FunctionNode(FunctionRegistry.LT, null,
-	                    new ValueExpressionNode[] {
-	                        new VarNode("o2"),
-	                        FunctionNode.add(new VarNode("o1"), new ConstantNode(ten))
-	            });
-	        
-	        final FunctionNode f = FunctionNode.AND(f1, f2);
-	            
-	        where.addChild(new FilterNode(f));
-            }
-            
-	        {
-	        final StatementPatternNode sp = new StatementPatternNode(
-	                new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
-
-	        where.addChild(sp);
-	        }
-	        
-	        {
-	        final StatementPatternNode sp = new StatementPatternNode(
-	                new VarNode("s"), new ConstantNode(p), new VarNode("o2"));
-	        sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-            
-            where.addChild(sp);
-	        }
-
-            
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
-    /**
-     * select ?s2
-     * where {
-     *   <s1> <p> ?o1 .
-     *   <s2> <p> ?o2 .
-     *   <s2> <p> ?o3 .
-     *   ?s <p> ?o .
-     *   filter (?o < ?o1 && ?o < ?o2) .
-     *   filter (?o < "100") .
-     * }
-     * 
-     * Only the constant node is attached as range.
-     * See https://jira.blazegraph.com/browse/BLZG-1635.
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      //            { // lower
+      //                final FunctionNode f =
+      //                        new FunctionNode(FunctionRegistry.GT, null,
+      //                                new ValueExpressionNode[] {
+      //                                    new VarNode("p"),
+      //                                    new ConstantNode(lower)
+      //                        });
+      //
+      //                where.addChild(new FilterNode(f));
+      //            }
+
+      { // upper
+        final FunctionNode f =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
+
+        where.addChild(new FilterNode(f));
+      }
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      final RangeNode range = new RangeNode(new VarNode("p"));
+      range.setTo(new ConstantNode(upper));
+      range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
+
+      sp.setRange(range);
+
+      where.addChild(sp);
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  @SuppressWarnings("rawtypes")
+  public void test_And() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    @SuppressWarnings("rawtypes")
-    public void test_Complex2() {
+    final IBindingSet[] bsets = new IBindingSet[] {};
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+    final IV p = makeIV(new URIImpl("http://example/p"));
 
-        final IV s1 = makeIV(new URIImpl("http://example/s1"));
-        final IV s2 = makeIV(new URIImpl("http://example/s2"));
-        final IV s3 = makeIV(new URIImpl("http://example/s3"));
-        final IV p = makeIV(new URIImpl("http://example/p"));
-        
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+    final IV lower = new XSDNumericIV(25);
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+    final IV upper = new XSDNumericIV(35);
 
-            { // filters
-            	
-	            final FunctionNode f1 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new VarNode("o1")
-	                });
-	
-	            final FunctionNode f2 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new VarNode("o2")
-	                });
-	
-	            final IV upper = new XSDNumericIV(100);
-	            final FunctionNode f3 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new ConstantNode(upper)
-	                });
-	
-	            final FunctionNode and = FunctionNode.AND(f1, f2);
-	                
-	            where.addChild(new FilterNode(and));
-	            where.addChild(new FilterNode(f3));
-            
-            }
-            
-	        { // s1, s2, s3
-	        
-	        	where.addChild(new StatementPatternNode(
-		                new ConstantNode(s1), new ConstantNode(p), new VarNode("o1")));
-	        	where.addChild(new StatementPatternNode(
-		                new ConstantNode(s2), new ConstantNode(p), new VarNode("o2")));
-	        	where.addChild(new StatementPatternNode(
-		                new ConstantNode(s3), new ConstantNode(p), new VarNode("o3")));
-	        
-	        }
-	        
-	        { // s
-	        
-	        	final StatementPatternNode sp = new StatementPatternNode(
-	        			new VarNode("s"), new ConstantNode(p), new VarNode("o"));
-	        	sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-	        	
-	        	where.addChild(sp);
-	        	
-	        }
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
 
-        final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
-        
-        final GlobalAnnotations globals = new GlobalAnnotations(
-        		ctx.getLexiconNamespace(), ctx.getTimestamp());
-        
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            expected.setProjection(projection);
-            
-            final JoinGroupNode where = new JoinGroupNode();
-            expected.setWhereClause(where);
+      final JoinGroupNode where = new JoinGroupNode();
 
-            { // filters
-            	
-	            final FunctionNode f1 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new VarNode("o1")
-	                });
-	
-	            final FunctionNode f2 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new VarNode("o2")
-	                });
-	
-	            final IV upper = new XSDNumericIV(100);
-	            final FunctionNode f3 = 
-	                new FunctionNode(FunctionRegistry.LT, null,
-	                        new ValueExpressionNode[] {
-	                            new VarNode("o"), new ConstantNode(upper)
-	                });
-	
-	            final FunctionNode and = FunctionNode.AND(f1, f2);
-	                
-	            where.addChild(new FilterNode(and));
-	            where.addChild(new FilterNode(f3));
-            
-            }
-            
-        	{ // s1
+      final FunctionNode f1 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
 
-        		final StatementPatternNode sp = new StatementPatternNode(
-		                new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
-        		
-	        	where.addChild(sp);
+      final FunctionNode f2 =
+          new FunctionNode(
+              FunctionRegistry.LT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
 
-        	}
+      final FunctionNode f = FunctionNode.AND(f1, f2);
 
-        	{ // s2
+      where.addChild(new FilterNode(f));
 
-        		final StatementPatternNode sp = new StatementPatternNode(
-		                new ConstantNode(s2), new ConstantNode(p), new VarNode("o2"));
-        		
-	        	where.addChild(sp);
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
 
-        	}
-        	
-        	{ // s3
+      where.addChild(sp);
 
-        		final StatementPatternNode sp = new StatementPatternNode(
-		                new ConstantNode(s3), new ConstantNode(p), new VarNode("o3"));
-        		        		
-	        	where.addChild(sp);
-
-        	}
-	        
-	        { // s
-	        
-	        	final StatementPatternNode sp = new StatementPatternNode(
-	        			new VarNode("s"), new ConstantNode(p), new VarNode("o"));
-	        	sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
-	        	
-
-	        	final IV upper = new XSDNumericIV(100);
-	            final RangeNode range = new RangeNode(new VarNode("o"));
-	            range.setTo(new ConstantNode(upper)); 
-	            range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
-	            
-	            sp.setRange(range);
-	            
-	        	where.addChild(sp);
-	        	
-	        }
-	        
-        }
-        
-        final IASTOptimizer rewriter = new ASTRangeOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(
-        		ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      final FunctionNode f1 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+      final FunctionNode f2 =
+          new FunctionNode(
+              FunctionRegistry.LT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(upper)});
+
+      final FunctionNode f = FunctionNode.AND(f1, f2);
+
+      where.addChild(new FilterNode(f));
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      final RangeNode range =
+          new RangeNode(new VarNode("p"), new ConstantNode(lower), new ConstantNode(upper));
+      range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
+
+      sp.setRange(range);
+
+      where.addChild(sp);
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  @SuppressWarnings("rawtypes")
+  public void test_And2() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
+     */
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV p = makeIV(new URIImpl("http://example/p"));
+
+    final IV lower = new XSDNumericIV(25);
+
+    final IV upper = new XSDNumericIV(35);
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      final FunctionNode f1 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+      final FunctionNode f2 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new ConstantNode(upper), new VarNode("p")});
+
+      final FunctionNode f = FunctionNode.AND(f1, f2);
+
+      where.addChild(new FilterNode(f));
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      where.addChild(sp);
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
+    }
+
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      final FunctionNode f1 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new VarNode("p"), new ConstantNode(lower)});
+
+      final FunctionNode f2 =
+          new FunctionNode(
+              FunctionRegistry.GT,
+              null,
+              new ValueExpressionNode[] {new ConstantNode(upper), new VarNode("p")});
+
+      final FunctionNode f = FunctionNode.AND(f1, f2);
+
+      where.addChild(new FilterNode(f));
+
+      final StatementPatternNode sp =
+          new StatementPatternNode(new VarNode("x"), new ConstantNode(p), new VarNode("p"));
+      sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+      final RangeNode range = new RangeNode(new VarNode("p"));
+      range.setFrom(new ConstantNode(lower));
+      range.setTo(new ConstantNode(upper));
+      range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
+
+      sp.setRange(range);
+
+      where.addChild(sp);
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  /**
+   * select ?s2 where { <s1>
+   *
+   * <p>?o1 . ?s2
+   *
+   * <p>?o2 . filter (?o2 > (?o1 - 10) && ?o2 < (?o1 + 10)) . }
+   *
+   * <p>Since the range is not complex, it is not attached as RangeBop. See
+   * https://jira.blazegraph.com/browse/BLZG-1635.
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_Complex() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
+     */
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV s1 = makeIV(new URIImpl("http://example/s1"));
+    final IV p = makeIV(new URIImpl("http://example/p"));
+
+    final IV ten = new XSDNumericIV(10);
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      {
+        final FunctionNode f1 =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {
+                  new VarNode("o2"), FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten))
+                });
+
+        final FunctionNode f2 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {
+                  new VarNode("o2"), FunctionNode.add(new VarNode("o1"), new ConstantNode(ten))
+                });
+
+        final FunctionNode f = FunctionNode.AND(f1, f2);
+
+        where.addChild(new FilterNode(f));
+      }
+
+      {
+        final StatementPatternNode sp =
+            new StatementPatternNode(new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
+
+        where.addChild(sp);
+      }
+
+      {
+        final StatementPatternNode sp =
+            new StatementPatternNode(new VarNode("s"), new ConstantNode(p), new VarNode("o2"));
+        sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+        where.addChild(sp);
+      }
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
+    }
+
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode where = new JoinGroupNode();
+      expected.setWhereClause(where);
+
+      //            final FunctionNode sub = FunctionNode.subtract(new VarNode("o1"), new
+      // ConstantNode(ten));
+      //            final FunctionNode add = FunctionNode.add(new VarNode("o1"), new
+      // ConstantNode(ten));
+
+      {
+        final FunctionNode f1 =
+            new FunctionNode(
+                FunctionRegistry.GT,
+                null,
+                new ValueExpressionNode[] {
+                  new VarNode("o2"), FunctionNode.subtract(new VarNode("o1"), new ConstantNode(ten))
+                });
+
+        final FunctionNode f2 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {
+                  new VarNode("o2"), FunctionNode.add(new VarNode("o1"), new ConstantNode(ten))
+                });
+
+        final FunctionNode f = FunctionNode.AND(f1, f2);
+
+        where.addChild(new FilterNode(f));
+      }
+
+      {
+        final StatementPatternNode sp =
+            new StatementPatternNode(new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
+
+        where.addChild(sp);
+      }
+
+      {
+        final StatementPatternNode sp =
+            new StatementPatternNode(new VarNode("s"), new ConstantNode(p), new VarNode("o2"));
+        sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+        where.addChild(sp);
+      }
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  /**
+   * select ?s2 where { <s1>
+   *
+   * <p>?o1 . <s2>
+   *
+   * <p>?o2 . <s2>
+   *
+   * <p>?o3 . ?s
+   *
+   * <p>?o . filter (?o < ?o1 && ?o < ?o2) . filter (?o < "100") . }
+   *
+   * <p>Only the constant node is attached as range. See
+   * https://jira.blazegraph.com/browse/BLZG-1635.
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_Complex2() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
+     */
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV s1 = makeIV(new URIImpl("http://example/s1"));
+    final IV s2 = makeIV(new URIImpl("http://example/s2"));
+    final IV s3 = makeIV(new URIImpl("http://example/s3"));
+    final IV p = makeIV(new URIImpl("http://example/p"));
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      { // filters
+        final FunctionNode f1 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new VarNode("o1")});
+
+        final FunctionNode f2 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new VarNode("o2")});
+
+        final IV upper = new XSDNumericIV(100);
+        final FunctionNode f3 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new ConstantNode(upper)});
+
+        final FunctionNode and = FunctionNode.AND(f1, f2);
+
+        where.addChild(new FilterNode(and));
+        where.addChild(new FilterNode(f3));
+      }
+
+      { // s1, s2, s3
+        where.addChild(
+            new StatementPatternNode(new ConstantNode(s1), new ConstantNode(p), new VarNode("o1")));
+        where.addChild(
+            new StatementPatternNode(new ConstantNode(s2), new ConstantNode(p), new VarNode("o2")));
+        where.addChild(
+            new StatementPatternNode(new ConstantNode(s3), new ConstantNode(p), new VarNode("o3")));
+      }
+
+      { // s
+        final StatementPatternNode sp =
+            new StatementPatternNode(new VarNode("s"), new ConstantNode(p), new VarNode("o"));
+        sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+        where.addChild(sp);
+      }
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
+    }
+
+    final AST2BOpContext ctx = new AST2BOpContext(new ASTContainer(given), store);
+
+    final GlobalAnnotations globals =
+        new GlobalAnnotations(ctx.getLexiconNamespace(), ctx.getTimestamp());
+
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode where = new JoinGroupNode();
+      expected.setWhereClause(where);
+
+      { // filters
+        final FunctionNode f1 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new VarNode("o1")});
+
+        final FunctionNode f2 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new VarNode("o2")});
+
+        final IV upper = new XSDNumericIV(100);
+        final FunctionNode f3 =
+            new FunctionNode(
+                FunctionRegistry.LT,
+                null,
+                new ValueExpressionNode[] {new VarNode("o"), new ConstantNode(upper)});
+
+        final FunctionNode and = FunctionNode.AND(f1, f2);
+
+        where.addChild(new FilterNode(and));
+        where.addChild(new FilterNode(f3));
+      }
+
+      { // s1
+        final StatementPatternNode sp =
+            new StatementPatternNode(new ConstantNode(s1), new ConstantNode(p), new VarNode("o1"));
+
+        where.addChild(sp);
+      }
+
+      { // s2
+        final StatementPatternNode sp =
+            new StatementPatternNode(new ConstantNode(s2), new ConstantNode(p), new VarNode("o2"));
+
+        where.addChild(sp);
+      }
+
+      { // s3
+        final StatementPatternNode sp =
+            new StatementPatternNode(new ConstantNode(s3), new ConstantNode(p), new VarNode("o3"));
+
+        where.addChild(sp);
+      }
+
+      { // s
+        final StatementPatternNode sp =
+            new StatementPatternNode(new VarNode("s"), new ConstantNode(p), new VarNode("o"));
+        sp.setQueryHint(QueryHints.RANGE_SAFE, "true");
+
+        final IV upper = new XSDNumericIV(100);
+        final RangeNode range = new RangeNode(new VarNode("o"));
+        range.setTo(new ConstantNode(upper));
+        range.setRangeBOp(ASTRangeOptimizer.toRangeBOp(getBOpContext(), range, globals));
+
+        sp.setRange(range);
+
+        where.addChild(sp);
+      }
+    }
+
+    final IASTOptimizer rewriter = new ASTRangeOptimizer();
+
+    final IQueryNode actual =
+        rewriter.optimize(ctx, new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
 }

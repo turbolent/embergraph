@@ -6,44 +6,41 @@ import org.openrdf.model.URI;
 
 public class ASTNumericLiteral extends ASTRDFValue {
 
-	private String value;
+  private String value;
 
-	private URI datatype;
+  private URI datatype;
 
-	public ASTNumericLiteral(int id) {
-		super(id);
-	}
+  public ASTNumericLiteral(int id) {
+    super(id);
+  }
 
-	public ASTNumericLiteral(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTNumericLiteral(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-	public URI getDatatype() {
-		return datatype;
-	}
+  public URI getDatatype() {
+    return datatype;
+  }
 
-	public void setDatatype(URI datatype) {
-		this.datatype = datatype;
-	}
+  public void setDatatype(URI datatype) {
+    this.datatype = datatype;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (value=" + value + ", datatype=" + datatype + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (value=" + value + ", datatype=" + datatype + ")";
+  }
 }

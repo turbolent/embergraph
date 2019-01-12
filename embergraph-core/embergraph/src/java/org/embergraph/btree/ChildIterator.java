@@ -24,171 +24,145 @@ import java.util.NoSuchElementException;
 
 /**
  * Visits the direct children of a {@link Node} in the external key ordering.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class ChildIterator implements INodeIterator {
 
-    private final Node node;
+  private final Node node;
 
-    private int index = 0;
+  private int index = 0;
 
-    private int lastVisited = -1;
-    
-//    private final byte[] fromKey;
-//    
-//    private final byte[] toKey;
+  private int lastVisited = -1;
 
-    // first index to visit.
-    private final int fromIndex;
+  //    private final byte[] fromKey;
+  //
+  //    private final byte[] toKey;
 
-    // first index to NOT visit.
-    private final int toIndex;
-    
-    public ChildIterator(Node node) {
+  // first index to visit.
+  private final int fromIndex;
 
-        this(node,null,null);
-        
+  // first index to NOT visit.
+  private final int toIndex;
+
+  public ChildIterator(Node node) {
+
+    this(node, null, null);
+  }
+
+  /**
+   * @param node The node whose children will be traversed.
+   * @param fromKey The first key whose child will be visited or <code>null</code> if the lower
+   *     bound on the key traversal is not constrained.
+   * @param toKey The first key whose child will NOT be visited or <code>null</code> if the upper
+   *     bound on the key traversal is not constrained.
+   * @exception IllegalArgumentException if fromKey is given and is greater than toKey.
+   */
+  public ChildIterator(final Node node, final byte[] fromKey, final byte[] toKey) {
+
+    assert node != null;
+
+    this.node = node;
+
+    //        this.fromKey = fromKey; // may be null (no lower bound).
+    //
+    //        this.toKey = toKey; // may be null (no upper bound).
+
+    { // figure out the first index to visit.
+      int fromIndex;
+
+      if (fromKey != null) {
+
+        fromIndex = node.findChild(fromKey);
+
+      } else {
+
+        fromIndex = 0;
+      }
+
+      this.fromIndex = fromIndex;
     }
-    
-    /**
-     * 
-     * @param node
-     *            The node whose children will be traversed.
-     * @param fromKey
-     *            The first key whose child will be visited or <code>null</code>
-     *            if the lower bound on the key traversal is not constrained.
-     * @param toKey
-     *            The first key whose child will NOT be visited or
-     *            <code>null</code> if the upper bound on the key traversal is
-     *            not constrained.
-     * 
-     * @exception IllegalArgumentException
-     *                if fromKey is given and is greater than toKey.
-     */
-    public ChildIterator(final Node node, final byte[] fromKey, final byte[] toKey) {
 
-        assert node != null;
+    {
+        /*
+         * figure out the last index to visit.
+         *
+         * Note: Unlike a leaf, we do visit the child in which the toKey
+         * would be found.  This is necessary in order to ensure that we
+         * visit any keys in leaves spanned by the child that are less
+         * than the toKey.
+         */
+      int toIndex;
 
-        this.node = node;
+      if (toKey != null) {
 
-//        this.fromKey = fromKey; // may be null (no lower bound).
-//        
-//        this.toKey = toKey; // may be null (no upper bound).
+        toIndex = node.findChild(toKey);
 
-        { // figure out the first index to visit.
-
-            int fromIndex;
-
-            if (fromKey != null) {
-
-                fromIndex = node.findChild(fromKey);
-
-            } else {
-
-                fromIndex = 0;
-
-            }
-
-            this.fromIndex = fromIndex;
-
+        if (fromIndex > toIndex) {
+          /*
+           * Note: we test for from/to key out of order _before_
+           * incrementing the toIndex.
+           */
+          throw new IllegalArgumentException("fromKey > toKey");
         }
 
-        {    /*
-             * figure out the last index to visit.
-             * 
-             * Note: Unlike a leaf, we do visit the child in which the toKey
-             * would be found.  This is necessary in order to ensure that we
-             * visit any keys in leaves spanned by the child that are less
-             * than the toKey.
-             */
+        // +1 so that we visit the child in which toKey would be found!
+        toIndex++;
 
-            int toIndex;
+      } else {
 
-            if (toKey != null) {
+        // Note: nchildren == nkeys+1 for a Node.
+        toIndex = node.getKeyCount() + 1;
+      }
 
-                toIndex = node.findChild(toKey);
-
-                if (fromIndex > toIndex) {
-                    /*
-                     * Note: we test for from/to key out of order _before_
-                     * incrementing the toIndex.
-                     */                    
-                    throw new IllegalArgumentException("fromKey > toKey");
-                    
-                }
-                
-                // +1 so that we visit the child in which toKey would be found!
-                toIndex++;
-                
-            } else {
-
-                // Note: nchildren == nkeys+1 for a Node.
-                toIndex = node.getKeyCount() + 1;
-
-            }
-
-            this.toIndex = toIndex;
-
-        }
-
-        // starting index is the lower bound.
-        index = fromIndex;
-
+      this.toIndex = toIndex;
     }
 
-    public boolean hasNext() {
+    // starting index is the lower bound.
+    index = fromIndex;
+  }
 
-        return index >= fromIndex && index < toIndex;
+  public boolean hasNext() {
 
+    return index >= fromIndex && index < toIndex;
+  }
+
+  public AbstractNode next() {
+
+    if (!hasNext()) {
+
+      throw new NoSuchElementException();
     }
 
-    public AbstractNode next() {
+    lastVisited = index++;
 
-        if (!hasNext()) {
+    return node.getChild(lastVisited);
+  }
 
-            throw new NoSuchElementException();
+  public AbstractNode getNode() {
 
-        }
+    if (lastVisited == -1) {
 
-        lastVisited = index++;
-        
-        return node.getChild(lastVisited);
-        
+      throw new IllegalStateException();
     }
 
-    public AbstractNode getNode() {
-    
-        if( lastVisited == -1 ) {
-            
-            throw new IllegalStateException();
-            
-        }
-        
-        return node.getChild(lastVisited);
+    return node.getChild(lastVisited);
+  }
 
+  public Object getKey() {
+
+    if (lastVisited == -1) {
+
+      throw new IllegalStateException();
     }
 
-    public Object getKey() {
+    return node.getKeys().get(lastVisited);
+  }
 
-        if( lastVisited == -1 ) {
-            
-            throw new IllegalStateException();
-            
-        }
-        
-        return node.getKeys().get(lastVisited);
-        
-    }
-    
-    /**
-     * @exception UnsupportedOperationException
-     */
-    public void remove() {
+  /** @exception UnsupportedOperationException */
+  public void remove() {
 
-        throw new UnsupportedOperationException();
-
-    }
-
+    throw new UnsupportedOperationException();
+  }
 }

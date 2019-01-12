@@ -23,13 +23,10 @@ package org.embergraph.util;
 
 import java.util.Comparator;
 
-/**
- * A case-insensitive {@link String} {@link Comparator}.
- */
+/** A case-insensitive {@link String} {@link Comparator}. */
 public class CaseInsensitiveStringComparator implements Comparator<String> {
 
-    public int compare(String o1, String o2) {
-        return ((String) o1).compareToIgnoreCase((String) o2);
-    }
-
+  public int compare(String o1, String o2) {
+    return ((String) o1).compareToIgnoreCase((String) o2);
+  }
 }

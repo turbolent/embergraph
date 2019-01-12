@@ -25,39 +25,34 @@ import org.openrdf.model.Value;
 
 /**
  * An abstract base class for AST objects modeling RDF Values.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class ASTRDFValue extends SimpleNode {
+public abstract class ASTRDFValue extends SimpleNode {
 
-    private Value value;
-    
-    /**
-     * @param id
-     */
-    public ASTRDFValue(int id) {
-        super(id);
-    }
+  private Value value;
 
-    /**
-     * @param parser
-     * @param id
-     */
-    public ASTRDFValue(SyntaxTreeBuilder parser, int id) {
-        super(parser, id);
-    }
+  /** @param id */
+  public ASTRDFValue(int id) {
+    super(id);
+  }
 
-    public Value getRDFValue() {
-        
-        return value;
-        
-    }
+  /**
+   * @param parser
+   * @param id
+   */
+  public ASTRDFValue(SyntaxTreeBuilder parser, int id) {
+    super(parser, id);
+  }
 
-    public void setRDFValue(final Value value) {
-        
-        this.value = value;
-        
-    }
-    
+  public Value getRDFValue() {
+
+    return value;
+  }
+
+  public void setRDFValue(final Value value) {
+
+    this.value = value;
+  }
 }

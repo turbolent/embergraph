@@ -22,90 +22,80 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.rules;
 
 import java.util.Properties;
-
-import org.openrdf.model.URI;
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.URI;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
  * Note: rdfs 5 and 11 use the same base class.
- * 
+ *
  * @see RuleRdfs05
  * @see RuleRdfs11
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRuleRdfs11 extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestRuleRdfs11() {
+  /** */
+  public TestRuleRdfs11() {}
+
+  /** @param name */
+  public TestRuleRdfs11(String name) {
+    super(name);
+  }
+
+  /**
+   * Simple test verifies inference of a subclassof entailment.
+   *
+   * @throws Exception
+   */
+  public void test_rdfs11() throws Exception {
+
+    final Properties properties = super.getProperties();
+
+    // override the default axiom model.
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
+        NoAxioms.class.getName());
+
+    final AbstractTripleStore store = getStore(properties);
+
+    try {
+
+      final EmbergraphValueFactory f = store.getValueFactory();
+
+      final URI A = f.createURI("http://www.foo.org/A");
+      final URI B = f.createURI("http://www.foo.org/B");
+      final URI C = f.createURI("http://www.foo.org/C");
+
+      final URI rdfsSubClassOf = RDFS.SUBCLASSOF;
+
+      store.addStatement(A, rdfsSubClassOf, B);
+      store.addStatement(B, rdfsSubClassOf, C);
+
+      assertTrue(store.hasStatement(A, rdfsSubClassOf, B));
+      assertTrue(store.hasStatement(B, rdfsSubClassOf, C));
+      assertFalse(store.hasStatement(A, rdfsSubClassOf, C));
+      assertEquals(2, store.getStatementCount());
+
+      final Rule r = new RuleRdfs11(store.getSPORelation().getNamespace(), store.getVocabulary());
+
+      applyRule(store, r, -1 /*solutionCount*/, 1 /* mutationCount*/);
+
+      /*
+       * validate the state of the primary store.
+       */
+      assertTrue(store.hasStatement(A, rdfsSubClassOf, B));
+      assertTrue(store.hasStatement(B, rdfsSubClassOf, C));
+      assertTrue(store.hasStatement(A, rdfsSubClassOf, C));
+      assertEquals(3, store.getStatementCount());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
-
-    /**
-     * @param name
-     */
-    public TestRuleRdfs11(String name) {
-        super(name);
-    }
-
-    /**
-     * Simple test verifies inference of a subclassof entailment.
-     * @throws Exception 
-     */
-    public void test_rdfs11() throws Exception {
-
-        final Properties properties = super.getProperties();
-        
-        // override the default axiom model.
-        properties.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        
-        final AbstractTripleStore store = getStore(properties);
-        
-        try {
-        
-            final EmbergraphValueFactory f = store.getValueFactory();
-
-            final URI A = f.createURI("http://www.foo.org/A");
-            final URI B = f.createURI("http://www.foo.org/B");
-            final URI C = f.createURI("http://www.foo.org/C");
-
-            final URI rdfsSubClassOf = RDFS.SUBCLASSOF;
-
-            store.addStatement(A, rdfsSubClassOf, B);
-            store.addStatement(B, rdfsSubClassOf, C);
-
-            assertTrue(store.hasStatement(A, rdfsSubClassOf, B));
-            assertTrue(store.hasStatement(B, rdfsSubClassOf, C));
-            assertFalse(store.hasStatement(A, rdfsSubClassOf, C));
-            assertEquals(2,store.getStatementCount());
-
-            final Rule r = new RuleRdfs11(
-                    store.getSPORelation().getNamespace(), store
-                            .getVocabulary());
-            
-            applyRule(store, r, -1/*solutionCount*/,1/* mutationCount*/);
-
-            /*
-             * validate the state of the primary store.
-             */
-            assertTrue(store.hasStatement(A, rdfsSubClassOf, B));
-            assertTrue(store.hasStatement(B, rdfsSubClassOf, C));
-            assertTrue(store.hasStatement(A, rdfsSubClassOf, C));
-            assertEquals(3,store.getStatementCount());
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-
-    }
-
+  }
 }

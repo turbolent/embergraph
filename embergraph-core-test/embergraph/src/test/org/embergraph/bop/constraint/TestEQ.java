@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -32,91 +31,76 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Test suite for {@link EQ}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestEQ extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestEQ() {
+  /** */
+  public TestEQ() {}
+
+  /** @param name */
+  public TestEQ(String name) {
+    super(name);
+  }
+
+  public void test_ctor() {
+    try {
+      new EQ((IVariable<?>) null /*x*/, (IVariable<?>) null /*y*/);
+      fail("Excepting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
-
-    /**
-     * @param name
-     */
-    public TestEQ(String name) {
-        super(name);
+    try {
+      new EQ(Var.var("x"), null /*y*/);
+      fail("Excepting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
-
-    public void test_ctor() {
-        try {
-            new EQ((IVariable<?>)null/*x*/, (IVariable<?>)null/*y*/);
-            fail("Excepting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        try {
-            new EQ(Var.var("x"), null/*y*/);
-            fail("Excepting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        try {
-            new EQ(Var.var("x"), Var.var("x"));
-            fail("Excepting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        new EQ(Var.var("x"), Var.var("y"));
+    try {
+      new EQ(Var.var("x"), Var.var("x"));
+      fail("Excepting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+    new EQ(Var.var("x"), Var.var("y"));
+  }
 
-    /**
-     * Correct acceptance.
-     */
-    public void test_eval() {
+  /** Correct acceptance. */
+  public void test_eval() {
 
-        final EQ op = new EQ(Var.var("x"), Var.var("y"));
+    final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(
-                new IVariable[] { Var.var("x"), Var.var("y") },
-                new IConstant[] { new Constant<String>("1"),
-                        new Constant<String>("1") });
+    final IBindingSet bs1 =
+        new ListBindingSet(
+            new IVariable[] {Var.var("x"), Var.var("y")},
+            new IConstant[] {new Constant<String>("1"), new Constant<String>("1")});
 
-        assertTrue(op.get(bs1));
-        
-    }
+    assertTrue(op.get(bs1));
+  }
 
-    /**
-     * Correct rejection for when the variables have different bindings.
-     */
-    public void test_eval_correct_rejection() {
+  /** Correct rejection for when the variables have different bindings. */
+  public void test_eval_correct_rejection() {
 
-        final EQ op = new EQ(Var.var("x"), Var.var("y"));
+    final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(
-                new IVariable[] { Var.var("x"), Var.var("y") },
-                new IConstant[] { new Constant<String>("1"),
-                        new Constant<String>("2") });
+    final IBindingSet bs1 =
+        new ListBindingSet(
+            new IVariable[] {Var.var("x"), Var.var("y")},
+            new IConstant[] {new Constant<String>("1"), new Constant<String>("2")});
 
-        assertFalse(op.get(bs1));
-        
-    }
+    assertFalse(op.get(bs1));
+  }
 
-    public void test_eval_correct_unbound() {
+  public void test_eval_correct_unbound() {
 
-        final EQ op = new EQ(Var.var("x"), Var.var("y"));
+    final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(
-                new IVariable[] { Var.var("x") },
-                new IConstant[] { new Constant<String>("1") });
+    final IBindingSet bs1 =
+        new ListBindingSet(
+            new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("1")});
 
-        assertTrue(op.get(bs1));
-        
-    }
+    assertTrue(op.get(bs1));
+  }
 }

@@ -18,23 +18,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.geospatial;
 
 /**
- * Exception signalizing problems while executing geospatial search.
- * an external index. 
- * 
+ * Exception signalizing problems while executing geospatial search. an external index.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class GeoSpatialSearchException extends RuntimeException {
 
-   private static final long serialVersionUID = 3998203140318128777L;
+  private static final long serialVersionUID = 3998203140318128777L;
 
-   public final static String INVALID_PARAMETER_EXCEPTION = 
-           "Invalid input paramater";
-   
-   public final static String SERVICE_VARIABLE_UNBOUND = 
-         "Service magic variable unbound at runtime";
+  public static final String INVALID_PARAMETER_EXCEPTION = "Invalid input paramater";
 
-   public GeoSpatialSearchException(String s) {
-      super(s);
-   }
+  public static final String SERVICE_VARIABLE_UNBOUND = "Service magic variable unbound at runtime";
+
+  public GeoSpatialSearchException(String s) {
+    super(s);
+  }
 }

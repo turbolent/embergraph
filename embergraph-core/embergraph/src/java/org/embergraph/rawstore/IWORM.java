@@ -22,13 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 /**
- * A marker interface for a store that supports Write Once Read Many (eg, an
- * append only store vs a store where storage may be reused as records are
- * logically deleted).
- * 
+ * A marker interface for a store that supports Write Once Read Many (eg, an append only store vs a
+ * store where storage may be reused as records are logically deleted).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IWORM /* extends IRawStore */{
-
-}
+public interface IWORM /* extends IRawStore */ {}

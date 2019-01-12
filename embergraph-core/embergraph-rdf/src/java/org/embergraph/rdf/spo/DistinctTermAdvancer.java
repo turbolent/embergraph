@@ -33,80 +33,74 @@ import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.relation.accesspath.AccessPath;
 
 /**
- * Advances the source {@link ITupleCursor} through the distinct term
- * identifiers for some {@link AccessPath}. Each time a new
- * {@link ITuple} is visited, the term identifier for the first position in
- * that tuple is decoded and its successor is formed. The source
- * {@link ITupleCursor} is then advanced to the key having that term
- * identifier in its first position and {@link IRawTripleStore#NULL} in its
- * 2nd and 3rd position. For example, if the {@link ITupleCursor} visits an
- * {@link ITuple} whose term identifiers are, in the order in which they
- * appear in the key:
- * 
+ * Advances the source {@link ITupleCursor} through the distinct term identifiers for some {@link
+ * AccessPath}. Each time a new {@link ITuple} is visited, the term identifier for the first
+ * position in that tuple is decoded and its successor is formed. The source {@link ITupleCursor} is
+ * then advanced to the key having that term identifier in its first position and {@link
+ * IRawTripleStore#NULL} in its 2nd and 3rd position. For example, if the {@link ITupleCursor}
+ * visits an {@link ITuple} whose term identifiers are, in the order in which they appear in the
+ * key:
+ *
  * <pre>
  * [ 12, 4, 44 ]
  * </pre>
- * 
+ *
  * Then the source {@link ITupleCursor} will be advanced to the key:
- * 
+ *
  * <pre>
  * [ 13, 0, 0 ]
  * </pre>
- * 
- * This is used to efficiently visit the distinct terms actually appearing
- * in the subject, predicate, or object position of {@link SPO}s in the
- * database.
- * 
+ *
+ * This is used to efficiently visit the distinct terms actually appearing in the subject,
+ * predicate, or object position of {@link SPO}s in the database.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class DistinctTermAdvancer extends Advancer<SPO> {
 
-    private static final long serialVersionUID = 2500001864793869957L;
+  private static final long serialVersionUID = 2500001864793869957L;
 
-//    private final int arity;
+  //    private final int arity;
 
-    private transient IKeyBuilder keyBuilder;
+  private transient IKeyBuilder keyBuilder;
 
-    public DistinctTermAdvancer(final int arityIsIgnored) {
-        
-//        this.arity = arity;
-        
+  public DistinctTermAdvancer(final int arityIsIgnored) {
+
+    //        this.arity = arity;
+
+  }
+
+  @Override
+  protected void advance(final ITuple<SPO> tuple) {
+
+    if (keyBuilder == null) {
+
+      /*
+       * Note: It appears that you can not set this either implicitly or
+       * explicitly during ctor initialization if you want it to exist
+       * during de-serialization. Hence it is initialized lazily here.
+       * This is Ok since the iterator pattern is single threaded.
+       */
+
+      //            assert arity == 3 || arity == 4;
+
+      keyBuilder = KeyBuilder.newInstance();
     }
 
-    @Override
-    protected void advance(final ITuple<SPO> tuple) {
+    /*
+     * new approach.
+     */
 
-        if (keyBuilder == null) {
+    final byte[] key = tuple.getKey();
 
-            /*
-             * Note: It appears that you can not set this either implicitly or
-             * explicitly during ctor initialization if you want it to exist
-             * during de-serialization. Hence it is initialized lazily here.
-             * This is Ok since the iterator pattern is single threaded.
-             */
+    keyBuilder.reset();
 
-//            assert arity == 3 || arity == 4;
-            
-            keyBuilder = KeyBuilder.newInstance();
+    IVUtility.decode(key).encode(keyBuilder);
 
-        }
-        
-        /*
-         * new approach.
-         */
-        
-        final byte[] key = tuple.getKey();
-        
-        keyBuilder.reset();
+    final byte[] fromKey = keyBuilder.getKey();
 
-        IVUtility.decode(key).encode(keyBuilder);
-        
-        final byte[] fromKey = keyBuilder.getKey();
-        
-        final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
+    final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
 
-        src.seek(toKey);
-        
-    }
-
+    src.seek(toKey);
+  }
 }

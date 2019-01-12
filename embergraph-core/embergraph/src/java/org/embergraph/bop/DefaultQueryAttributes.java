@@ -26,36 +26,35 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * Default implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DefaultQueryAttributes implements IQueryAttributes {
 
-    private final ConcurrentMap<Object, Object> map = new ConcurrentHashMap<Object, Object>();
+  private final ConcurrentMap<Object, Object> map = new ConcurrentHashMap<Object, Object>();
 
-    public Object get(Object key) {
-        return map.get(key);
-    }
+  public Object get(Object key) {
+    return map.get(key);
+  }
 
-    public Object put(Object key, Object val) {
-        return map.put(key, val);
-    }
+  public Object put(Object key, Object val) {
+    return map.put(key, val);
+  }
 
-    public Object putIfAbsent(Object key, Object val) {
-        return map.putIfAbsent(key, val);
-    }
+  public Object putIfAbsent(Object key, Object val) {
+    return map.putIfAbsent(key, val);
+  }
 
-    public Object remove(Object key) {
-        return map.remove(key);
-    }
+  public Object remove(Object key) {
+    return map.remove(key);
+  }
 
-    public boolean remove(Object key, Object value) {
-        return map.remove(key, value);
-    }
+  public boolean remove(Object key, Object value) {
+    return map.remove(key, value);
+  }
 
-    public String toString() {
-        return super.toString() + map;
-    }
-    
+  public String toString() {
+    return super.toString() + map;
+  }
 }

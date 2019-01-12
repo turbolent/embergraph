@@ -20,25 +20,15 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Message requesting that the leader await the visibility of a join by the
- * specified service.
- */
+/** Message requesting that the leader await the visibility of a join by the specified service. */
 public interface IHAAwaitServiceJoinRequest extends IHAMessage {
 
-    /**
-     * The {@link UUID} of the service whose service join will be awaited.
-     */
-    UUID getServiceUUID();
+  /** The {@link UUID} of the service whose service join will be awaited. */
+  UUID getServiceUUID();
 
-    /**
-     * How long to wait for the service join to become visible.
-     */
-    long getTimeout();
+  /** How long to wait for the service join to become visible. */
+  long getTimeout();
 
-    /**
-     * The unit for the timeout.
-     */
-    TimeUnit getUnit();
-    
+  /** The unit for the timeout. */
+  TimeUnit getUnit();
 }

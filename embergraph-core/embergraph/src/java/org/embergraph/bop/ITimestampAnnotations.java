@@ -23,16 +23,15 @@ package org.embergraph.bop;
 
 /**
  * Annotation for the timestamp of a resource view.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITimestampAnnotations {
 
-    /**
-     * The timestamp (or transaction identifier) used by this operator if it
-     * reads or writes on the database (no default).
-     */
-    String TIMESTAMP = IPredicate.class.getName() + ".timestamp";
-
+  /**
+   * The timestamp (or transaction identifier) used by this operator if it reads or writes on the
+   * database (no default).
+   */
+  String TIMESTAMP = IPredicate.class.getName() + ".timestamp";
 }

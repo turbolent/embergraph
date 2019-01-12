@@ -24,352 +24,325 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.Random;
-
 import org.embergraph.btree.IndexSegmentBuilder;
 import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /**
- * Base class for writing test cases for the different {@link IBufferStrategy}
- * implementations.
- * 
- * @todo write tests for
- *       {@link IBufferStrategy#transferTo(java.io.RandomAccessFile)}. This
- *       code is currently getting "checked" by the {@link IndexSegmentBuilder}.
- * 
+ * Base class for writing test cases for the different {@link IBufferStrategy} implementations.
+ *
+ * @todo write tests for {@link IBufferStrategy#transferTo(java.io.RandomAccessFile)}. This code is
+ *     currently getting "checked" by the {@link IndexSegmentBuilder}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractBufferStrategyTestCase extends AbstractRawStoreTestCase {
+public abstract class AbstractBufferStrategyTestCase extends AbstractRawStoreTestCase {
 
-    public AbstractBufferStrategyTestCase() {
+  public AbstractBufferStrategyTestCase() {}
+
+  public AbstractBufferStrategyTestCase(String name) {
+    super(name);
+  }
+
+  protected abstract BufferMode getBufferMode();
+
+  public Properties getProperties() {
+
+    if (properties == null) {
+
+      properties = super.getProperties();
+
+      properties.setProperty(Options.BUFFER_MODE, getBufferMode().toString());
+
+      /*
+       * Use a temporary file for the test. Such files are always deleted when
+       * the journal is closed or the VM exits.
+       */
+      properties.setProperty(Options.CREATE_TEMP_FILE, "true");
+      properties.setProperty(Options.DELETE_ON_EXIT, "true");
     }
 
-    public AbstractBufferStrategyTestCase(String name) {
-        super(name);
-    }
+    return properties;
+  }
 
-    abstract protected BufferMode getBufferMode();
-    
-    public Properties getProperties() {
+  private Properties properties;
 
-        if (properties == null) {
+  protected IRawStore getStore() {
 
-            properties = super.getProperties();
+    return new Journal(getProperties());
+  }
 
-            properties.setProperty(Options.BUFFER_MODE, getBufferMode()
-                    .toString());
+  //    public void tearDown() throws Exception
+  //    {
+  //
+  //        super.tearDown();
+  //
+  //        if(properties==null) return;
+  //
+  //        String filename = properties.getProperty(Options.FILE);
+  //
+  //        if(filename==null) return;
+  //
+  //        File file = new File(filename);
+  //
+  //        if(file.exists() && !file.delete()) {
+  //
+  //            file.deleteOnExit();
+  //
+  //        }
+  //
+  //    }
 
-            /*
-             * Use a temporary file for the test. Such files are always deleted when
-             * the journal is closed or the VM exits.
-             */
-            properties.setProperty(Options.CREATE_TEMP_FILE,"true");
-            properties.setProperty(Options.DELETE_ON_EXIT,"true");
+  /**
+   * Unit test for {@link AbstractBufferStrategy#overflow(long)}. The test verifies that the extent
+   * and the user extent are correctly updated after an overflow.
+   */
+  public void test_overflow() {
 
-        }
-        
-        return properties;
+    final Journal store = (Journal) getStore();
 
-    }
-    
-    private Properties properties;
+    try {
 
-    protected IRawStore getStore() {
-        
-        return new Journal(getProperties());
-        
-    }
+      if (!(store.getBufferStrategy() instanceof AbstractBufferStrategy)) return;
 
-//    public void tearDown() throws Exception
-//    {
-//
-//        super.tearDown();
-//        
-//        if(properties==null) return;
-//        
-//        String filename = properties.getProperty(Options.FILE);
-//        
-//        if(filename==null) return;
-//        
-//        File file = new File(filename);
-//        
-//        if(file.exists() && !file.delete()) {
-//            
-//            file.deleteOnExit();
-//            
-//        }
-//        
-//    }
-     
-    /**
-     * Unit test for {@link AbstractBufferStrategy#overflow(long)}. The test
-     * verifies that the extent and the user extent are correctly updated after
-     * an overflow.
-     */
-    public void test_overflow() {
-        
-    	final Journal store = (Journal) getStore();
-        
-        try {
-        
-            if (!(store.getBufferStrategy() instanceof AbstractBufferStrategy))
-                return;
-        
-        final AbstractBufferStrategy bufferStrategy = (AbstractBufferStrategy) store
-            .getBufferStrategy();
+      final AbstractBufferStrategy bufferStrategy =
+          (AbstractBufferStrategy) store.getBufferStrategy();
 
-        final long userExtent = bufferStrategy.getUserExtent();
-        
-        final long extent = bufferStrategy.getExtent();
-        
-        final long initialExtent = bufferStrategy.getInitialExtent();
-        
-        final long nextOffset = bufferStrategy.getNextOffset();
-        
-        assertEquals("extent",initialExtent, extent);
-        
-        final long needed = Bytes.kilobyte32;
-        
-        if(bufferStrategy.getBufferMode()==BufferMode.Mapped) {
+      final long userExtent = bufferStrategy.getUserExtent();
 
-            // operation is not supported for mapped files.
-            try {
-                
-                bufferStrategy.overflow(needed);
-                
-                fail("Expecting: " + UnsupportedOperationException.class);
-                
-            } catch (UnsupportedOperationException ex) {
-                
-                System.err.println("Ignoring expected exception: " + ex);
-                
-            }
-            
-        } else {
+      final long extent = bufferStrategy.getExtent();
 
-            assertTrue("overflow()",bufferStrategy.overflow(needed));
-            
-            assertTrue("extent", extent + needed <= bufferStrategy
-                    .getExtent());
-            
-            assertTrue("userExtent", userExtent + needed <= bufferStrategy
-                    .getUserExtent());
-            
-            assertEquals(nextOffset,bufferStrategy.getNextOffset());
+      final long initialExtent = bufferStrategy.getInitialExtent();
 
-        }
+      final long nextOffset = bufferStrategy.getNextOffset();
 
-        } finally {
+      assertEquals("extent", initialExtent, extent);
 
-            store.destroy();
-            
-        }
-        
-    }
+      final long needed = Bytes.kilobyte32;
 
-    /**
-     * Test verifies that a write up to the remaining extent does not trigger
-     * an overflow.
-     */
-    public void test_writeNoExtend() {
+      if (bufferStrategy.getBufferMode() == BufferMode.Mapped) {
 
-        final Journal store = (Journal) getStore();
-
+        // operation is not supported for mapped files.
         try {
 
-            final IBufferStrategy bufferStrategy = store.getBufferStrategy();
+          bufferStrategy.overflow(needed);
 
-            if (bufferStrategy.getBufferMode() == BufferMode.DiskRW) {
-                return;
-            }
+          fail("Expecting: " + UnsupportedOperationException.class);
 
-            final long userExtent = bufferStrategy.getUserExtent();
+        } catch (UnsupportedOperationException ex) {
 
-            final long extent = bufferStrategy.getExtent();
-
-            final long initialExtent = bufferStrategy.getInitialExtent();
-
-            final long nextOffset = bufferStrategy.getNextOffset();
-
-            assertEquals("extent", initialExtent, extent);
-
-            final long remaining = userExtent - nextOffset;
-
-            writeRandomData(store, remaining, bufferStrategy.useChecksums());
-
-            // no change in extent.
-            assertEquals("extent", extent, bufferStrategy.getExtent());
-            
-            // no change in user extent.
-            assertEquals("userExtent", userExtent, bufferStrategy
-                    .getUserExtent());
-
-        } finally {
-
-            store.destroy();
-
+          System.err.println("Ignoring expected exception: " + ex);
         }
 
+      } else {
+
+        assertTrue("overflow()", bufferStrategy.overflow(needed));
+
+        assertTrue("extent", extent + needed <= bufferStrategy.getExtent());
+
+        assertTrue("userExtent", userExtent + needed <= bufferStrategy.getUserExtent());
+
+        assertEquals(nextOffset, bufferStrategy.getNextOffset());
+      }
+
+    } finally {
+
+      store.destroy();
     }
-    
-    /**
-     * Write random bytes on the store.
-     * 
-     * @param store
-     *            The store.
-     * 
-     * @param nbytesToWrite
-     *            The #of bytes to be written. If this is larger than the
-     *            maximum record length then multiple records will be written.
-     * 
-     * @return The address of the last record written.
-     */
-    protected long writeRandomData(final Journal store, final long nbytesToWrite, final boolean allowChecksum) {
+  }
 
-        final int maxRecordSize = store.getMaxRecordSize();
-        
-        final int chkAdjust = allowChecksum ? 4 : 0;
-        
-        assert nbytesToWrite > 0;
-        
-        long addr = 0L;
-        
-        AbstractBufferStrategy bufferStrategy = (AbstractBufferStrategy) store
-                .getBufferStrategy();
-        
-        int n = 0;
+  /** Test verifies that a write up to the remaining extent does not trigger an overflow. */
+  public void test_writeNoExtend() {
 
-        long leftover = nbytesToWrite;
-        
-        while (leftover > 0) {
+    final Journal store = (Journal) getStore();
 
-            // this will be an int since maxRecordSize is an int.
-            final int nbytes = (int) Math.min(maxRecordSize, leftover-chkAdjust);
+    try {
 
-            assert nbytes>0;
-            
-            final byte[] b = new byte[nbytes];
+      final IBufferStrategy bufferStrategy = store.getBufferStrategy();
 
-            final Random r = new Random();
+      if (bufferStrategy.getBufferMode() == BufferMode.DiskRW) {
+        return;
+      }
 
-            r.nextBytes(b);
+      final long userExtent = bufferStrategy.getUserExtent();
 
-            final ByteBuffer tmp = ByteBuffer.wrap(b);
+      final long extent = bufferStrategy.getExtent();
 
-            addr = bufferStrategy.write(tmp);
+      final long initialExtent = bufferStrategy.getInitialExtent();
 
-            n++;
-            
-            leftover -= nbytes+chkAdjust;
-            
-            System.err.println("Wrote record#" + n + " with " + nbytes
-                    + " bytes: addr=" + store.toString(addr) + ", #leftover="
-                    + leftover);
+      final long nextOffset = bufferStrategy.getNextOffset();
 
-        }
+      assertEquals("extent", initialExtent, extent);
 
-        System.err.println("Wrote " + nbytesToWrite + " bytes in " + n
-                + " records: last addr=" + store.toString(addr));
+      final long remaining = userExtent - nextOffset;
 
-        assert addr != 0L;
-        
-        return addr;
+      writeRandomData(store, remaining, bufferStrategy.useChecksums());
 
+      // no change in extent.
+      assertEquals("extent", extent, bufferStrategy.getExtent());
+
+      // no change in user extent.
+      assertEquals("userExtent", userExtent, bufferStrategy.getUserExtent());
+
+    } finally {
+
+      store.destroy();
     }
-    
-    /**
-     * Test verifies that a write over the remaining extent triggers an
-     * overflow. The test also makes sure that the existing data is recoverable
-     * and that the new data is also recoverable (when the buffer is extended it
-     * is typically copied while the length of a file is simply changed).
-     */
-    public void test_writeWithExtend() {
+  }
 
-        final Journal store = (Journal) getStore();
+  /**
+   * Write random bytes on the store.
+   *
+   * @param store The store.
+   * @param nbytesToWrite The #of bytes to be written. If this is larger than the maximum record
+   *     length then multiple records will be written.
+   * @return The address of the last record written.
+   */
+  protected long writeRandomData(
+      final Journal store, final long nbytesToWrite, final boolean allowChecksum) {
 
-        try {
+    final int maxRecordSize = store.getMaxRecordSize();
 
-            final IBufferStrategy bufferStrategy = store.getBufferStrategy();
+    final int chkAdjust = allowChecksum ? 4 : 0;
 
-            final BufferMode bm = bufferStrategy.getBufferMode();
-            
-            if (bm == BufferMode.DiskRW || bm == BufferMode.Mapped) {
-            
-                return;
+    assert nbytesToWrite > 0;
 
-            }
+    long addr = 0L;
 
-            final long userExtent = bufferStrategy.getUserExtent();
+    AbstractBufferStrategy bufferStrategy = (AbstractBufferStrategy) store.getBufferStrategy();
 
-            final long extent = bufferStrategy.getExtent();
+    int n = 0;
 
-            final long initialExtent = bufferStrategy.getInitialExtent();
+    long leftover = nbytesToWrite;
 
-            final long nextOffset = bufferStrategy.getNextOffset();
+    while (leftover > 0) {
 
-            assertEquals("extent", initialExtent, extent);
+      // this will be an int since maxRecordSize is an int.
+      final int nbytes = (int) Math.min(maxRecordSize, leftover - chkAdjust);
 
-            final long remaining = userExtent - nextOffset;
+      assert nbytes > 0;
 
-            final long addr = writeRandomData(store, remaining, bufferStrategy.useChecksums());
+      final byte[] b = new byte[nbytes];
 
-            // no change in extent.
-            assertEquals("extent", extent, bufferStrategy.getExtent());
+      final Random r = new Random();
 
-            // no change in user extent.
-            assertEquals("userExtent", userExtent, bufferStrategy
-                    .getUserExtent());
+      r.nextBytes(b);
 
-            // read back the last record of random data written on the store.
-            final ByteBuffer b = bufferStrategy.read(addr);
+      final ByteBuffer tmp = ByteBuffer.wrap(b);
 
-            /*
-             * now write some more random bytes forcing an extension of the
-             * buffer. we verify both the original write on the buffer and the
-             * new write. this helps to ensure that data was copied correctly
-             * into the extended buffer.
-             */
+      addr = bufferStrategy.write(tmp);
 
-            final byte[] b2 = new byte[Bytes.kilobyte32];
+      n++;
 
-//            new Random().
-            r.nextBytes(b2);
+      leftover -= nbytes + chkAdjust;
 
-            final ByteBuffer tmp2 = ByteBuffer.wrap(b2);
-
-            final long addr2 = store.write(tmp2);
-            // final long addr2 = writeRandomData(store,Bytes.kilobyte32);
-
-            /*
-             * Note: The DiskOnly strategy has a write cache. You have to force
-             * it to disk before the new extent will show up.
-             */
-            bufferStrategy.force(false);
-
-            // verify extension of buffer.
-            assertTrue("extent",
-                    extent + store.getByteCount(addr2) <= bufferStrategy
-                            .getExtent());
-
-            // verify extension of buffer.
-            assertTrue("userExtent",
-                    userExtent + store.getByteCount(addr2) <= bufferStrategy
-                            .getUserExtent());
-
-            // verify data written before we overflowed the buffer.
-            assertEquals(b, bufferStrategy.read(addr));
-
-            // verify data written after we overflowed the buffer.
-            assertEquals(b2, bufferStrategy.read(addr2));
-
-        } finally {
-
-            store.destroy();
-
-        }
-
+      System.err.println(
+          "Wrote record#"
+              + n
+              + " with "
+              + nbytes
+              + " bytes: addr="
+              + store.toString(addr)
+              + ", #leftover="
+              + leftover);
     }
-    
+
+    System.err.println(
+        "Wrote "
+            + nbytesToWrite
+            + " bytes in "
+            + n
+            + " records: last addr="
+            + store.toString(addr));
+
+    assert addr != 0L;
+
+    return addr;
+  }
+
+  /**
+   * Test verifies that a write over the remaining extent triggers an overflow. The test also makes
+   * sure that the existing data is recoverable and that the new data is also recoverable (when the
+   * buffer is extended it is typically copied while the length of a file is simply changed).
+   */
+  public void test_writeWithExtend() {
+
+    final Journal store = (Journal) getStore();
+
+    try {
+
+      final IBufferStrategy bufferStrategy = store.getBufferStrategy();
+
+      final BufferMode bm = bufferStrategy.getBufferMode();
+
+      if (bm == BufferMode.DiskRW || bm == BufferMode.Mapped) {
+
+        return;
+      }
+
+      final long userExtent = bufferStrategy.getUserExtent();
+
+      final long extent = bufferStrategy.getExtent();
+
+      final long initialExtent = bufferStrategy.getInitialExtent();
+
+      final long nextOffset = bufferStrategy.getNextOffset();
+
+      assertEquals("extent", initialExtent, extent);
+
+      final long remaining = userExtent - nextOffset;
+
+      final long addr = writeRandomData(store, remaining, bufferStrategy.useChecksums());
+
+      // no change in extent.
+      assertEquals("extent", extent, bufferStrategy.getExtent());
+
+      // no change in user extent.
+      assertEquals("userExtent", userExtent, bufferStrategy.getUserExtent());
+
+      // read back the last record of random data written on the store.
+      final ByteBuffer b = bufferStrategy.read(addr);
+
+      /*
+       * now write some more random bytes forcing an extension of the
+       * buffer. we verify both the original write on the buffer and the
+       * new write. this helps to ensure that data was copied correctly
+       * into the extended buffer.
+       */
+
+      final byte[] b2 = new byte[Bytes.kilobyte32];
+
+      //            new Random().
+      r.nextBytes(b2);
+
+      final ByteBuffer tmp2 = ByteBuffer.wrap(b2);
+
+      final long addr2 = store.write(tmp2);
+      // final long addr2 = writeRandomData(store,Bytes.kilobyte32);
+
+      /*
+       * Note: The DiskOnly strategy has a write cache. You have to force
+       * it to disk before the new extent will show up.
+       */
+      bufferStrategy.force(false);
+
+      // verify extension of buffer.
+      assertTrue("extent", extent + store.getByteCount(addr2) <= bufferStrategy.getExtent());
+
+      // verify extension of buffer.
+      assertTrue(
+          "userExtent", userExtent + store.getByteCount(addr2) <= bufferStrategy.getUserExtent());
+
+      // verify data written before we overflowed the buffer.
+      assertEquals(b, bufferStrategy.read(addr));
+
+      // verify data written after we overflowed the buffer.
+      assertEquals(b2, bufferStrategy.read(addr2));
+
+    } finally {
+
+      store.destroy();
+    }
+  }
 }

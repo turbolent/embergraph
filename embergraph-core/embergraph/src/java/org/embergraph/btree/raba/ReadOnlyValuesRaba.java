@@ -26,111 +26,81 @@ import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.util.BytesUtil;
 
 /**
- * Immutable implementation allows <code>null</code>s but does not support
- * search.
- * 
+ * Immutable implementation allows <code>null</code>s but does not support search.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ReadOnlyValuesRaba extends AbstractRaba {
 
-    /**
-     * A read-only empty values raba.
-     */
-    public static final transient ReadOnlyValuesRaba EMPTY = new ReadOnlyValuesRaba(
-            BytesUtil.EMPTY2);
+  /** A read-only empty values raba. */
+  public static final transient ReadOnlyValuesRaba EMPTY = new ReadOnlyValuesRaba(BytesUtil.EMPTY2);
 
-    /**
-     * This view is read-only.
-     */
-    final public boolean isReadOnly() {
+  /** This view is read-only. */
+  public final boolean isReadOnly() {
 
-        return true;
+    return true;
+  }
 
-    }
+  /** No. */
+  public final boolean isKeys() {
 
-    /**
-     * No.
-     */
-    final public boolean isKeys() {
-    
-        return false;
-        
-    }
-    
-    /**
-     * Create a view of a byte[][]. All elements in the array are visible in the
-     * view.
-     * 
-     * @param a
-     *            The backing byte[][].
-     */
-    public ReadOnlyValuesRaba(final byte[][] a) {
+    return false;
+  }
 
-        this(0/* fromIndex */, a.length/* toIndex */, a.length/* capacity */, a);
+  /**
+   * Create a view of a byte[][]. All elements in the array are visible in the view.
+   *
+   * @param a The backing byte[][].
+   */
+  public ReadOnlyValuesRaba(final byte[][] a) {
 
-    }
+    this(0 /* fromIndex */, a.length /* toIndex */, a.length /* capacity */, a);
+  }
 
-    /**
-     * Create a view of a byte[][]. All elements in the array are visible in the
-     * view. The elements in the array from index ZERO (0) through index
-     * <code>size-1</code> are assumed to have valid data.
-     * 
-     * @param size
-     *            The #of elements with valid data.
-     * @param a
-     *            The backing byte[][].
-     */
-    public ReadOnlyValuesRaba(final int size, final byte[][] a) {
+  /**
+   * Create a view of a byte[][]. All elements in the array are visible in the view. The elements in
+   * the array from index ZERO (0) through index <code>size-1</code> are assumed to have valid data.
+   *
+   * @param size The #of elements with valid data.
+   * @param a The backing byte[][].
+   */
+  public ReadOnlyValuesRaba(final int size, final byte[][] a) {
 
-        this(0/* fromIndex */, size/* toIndex */, a.length/* capacity */, a);
+    this(0 /* fromIndex */, size /* toIndex */, a.length /* capacity */, a);
+  }
 
-    }
+  /**
+   * Create a view of a <code>byte[][]</code> slice. The slice will include only those elements
+   * between the fromIndex and the toIndex. The capacity will be the #of elements. {@link #isFull()}
+   * will report <code>true</code> .
+   *
+   * <p>Note: This constructor is used when we split an {@link IKeyArrayIndexProcedure} based on a
+   * key-range partitioned index.
+   *
+   * @param fromIndex The index of the first visible in the view (inclusive lower bound).
+   * @param toIndex The index of the first element beyond the view (exclusive upper bound). If
+   *     toIndex == fromIndex then the view is empty.
+   * @param a The backing byte[][].
+   */
+  public ReadOnlyValuesRaba(final int fromIndex, final int toIndex, final byte[][] a) {
 
-    /**
-     * Create a view of a <code>byte[][]</code> slice. The slice will include
-     * only those elements between the fromIndex and the toIndex. The capacity
-     * will be the #of elements. {@link #isFull()} will report <code>true</code>
-     * .
-     * <p>
-     * Note: This constructor is used when we split an
-     * {@link IKeyArrayIndexProcedure} based on a key-range partitioned index.
-     * 
-     * @param fromIndex
-     *            The index of the first visible in the view (inclusive lower
-     *            bound).
-     * @param toIndex
-     *            The index of the first element beyond the view (exclusive
-     *            upper bound). If toIndex == fromIndex then the view is empty.
-     * @param a
-     *            The backing byte[][].
-     */
-    public ReadOnlyValuesRaba(final int fromIndex, final int toIndex,
-            final byte[][] a) {
+    this(fromIndex, toIndex, a.length - fromIndex, a);
+  }
 
-        this(fromIndex, toIndex, a.length - fromIndex, a);
+  /**
+   * Create a view from a slice of a byte[][].
+   *
+   * @param fromIndex The index of the first element in the byte[][] which is visible in the view
+   *     (inclusive lower bound).
+   * @param toIndex The index of the first element in the byte[][] which lies beyond the view
+   *     (exclusive upper bound).
+   * @param capacity The #of elements which may be used in the view.
+   * @param a The backing byte[][].
+   */
+  public ReadOnlyValuesRaba(
+      final int fromIndex, final int toIndex, final int capacity, final byte[][] a) {
 
-    }
-    
-    /**
-     * Create a view from a slice of a byte[][].
-     * 
-     * @param fromIndex
-     *            The index of the first element in the byte[][] which is
-     *            visible in the view (inclusive lower bound).
-     * @param toIndex
-     *            The index of the first element in the byte[][] which lies
-     *            beyond the view (exclusive upper bound).
-     * @param capacity
-     *            The #of elements which may be used in the view.
-     * @param a
-     *            The backing byte[][].
-     */
-    public ReadOnlyValuesRaba(final int fromIndex, final int toIndex,
-            final int capacity, final byte[][] a) {
-
-        super(fromIndex, toIndex, capacity, a);
-
-    }
-
+    super(fromIndex, toIndex, capacity, a);
+  }
 }

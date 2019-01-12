@@ -25,13 +25,12 @@ package org.embergraph.counters;
 
 /**
  * Interface for a sampled counter.
- *       
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <T>
  */
 public interface ICounter<T> extends ICounterNode, IInstrument<T> {
- 
-    public IInstrument<T> getInstrument();
-    
+
+  public IInstrument<T> getInstrument();
 }

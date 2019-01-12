@@ -4,34 +4,31 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTIRI extends ASTRDFValue {
 
-	private String value;
+  private String value;
 
-	public ASTIRI(int id) {
-		super(id);
-	}
+  public ASTIRI(int id) {
+    super(id);
+  }
 
-	public ASTIRI(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTIRI(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + value + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + value + ")";
+  }
 }

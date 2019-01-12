@@ -21,154 +21,152 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.UUID;
-
 import org.embergraph.bop.engine.IChunkAccessor;
 import org.embergraph.bop.engine.IChunkMessage;
 import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
-
 /**
- * An empty {@link IChunkMessage}. This is used to kick off the optional last
- * evaluation phase for an operator.
- * 
+ * An empty {@link IChunkMessage}. This is used to kick off the optional last evaluation phase for
+ * an operator.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    final private IQueryClient queryController;
+  private final IQueryClient queryController;
 
-    final private UUID queryControllerId;
-    
-    final private UUID queryId;
+  private final UUID queryControllerId;
 
-    final private int bopId;
-    
-    final private int partitionId;
+  private final UUID queryId;
 
-    final private boolean lastInvocation;
-    
-    @Override
-    public IQueryClient getQueryController() {
-        return queryController;
+  private final int bopId;
+
+  private final int partitionId;
+
+  private final boolean lastInvocation;
+
+  @Override
+  public IQueryClient getQueryController() {
+    return queryController;
+  }
+
+  @Override
+  public UUID getQueryControllerId() {
+    return queryControllerId;
+  }
+
+  @Override
+  public UUID getQueryId() {
+    return queryId;
+  }
+
+  @Override
+  public int getBOpId() {
+    return bopId;
+  }
+
+  @Override
+  public int getPartitionId() {
+    return partitionId;
+  }
+
+  @Override
+  public boolean isLastInvocation() {
+    return true; // Always.
+  }
+
+  @Override
+  public boolean isMaterialized() {
+    return true;
+  }
+
+  @Override
+  public int getSolutionCount() {
+    return 0;
+  }
+
+  public int getBytesAvailable() {
+    return 0;
+  }
+
+  @Override
+  public String toString() {
+
+    return getClass().getName()
+        + "{queryId="
+        + queryId
+        + ",bopId="
+        + bopId
+        + ",partitionId="
+        + partitionId
+        + ",controller="
+        + queryController
+        + ",lastInvocation="
+        + lastInvocation
+        + "}";
+  }
+
+  /**
+   * @param queryController
+   * @param queryId
+   * @param bopId
+   * @param partitionId
+   */
+  public EmptyChunkMessage(
+      final IQueryClient queryController,
+      final UUID queryId,
+      final int bopId,
+      final int partitionId,
+      final boolean lastInvocation) {
+
+    if (queryController == null) throw new IllegalArgumentException();
+
+    if (queryId == null) throw new IllegalArgumentException();
+
+    this.queryController = queryController;
+    try {
+      this.queryControllerId = queryController.getServiceUUID();
+    } catch (RemoteException e) {
+      throw new RuntimeException(e);
     }
 
-    @Override
-    public UUID getQueryControllerId() {
-        return queryControllerId;
-    }
-    
-    @Override
-    public UUID getQueryId() {
-        return queryId;
-    }
+    this.queryId = queryId;
 
-    @Override
-    public int getBOpId() {
-        return bopId;
-    }
+    this.bopId = bopId;
 
-    @Override
-    public int getPartitionId() {
-        return partitionId;
-    }
-    
-    @Override
-    public boolean isLastInvocation() {
-        return true; // Always.
-    }
-    
-    @Override
-    public boolean isMaterialized() {
-        return true;
-    }
+    this.partitionId = partitionId;
 
-    @Override
-    public int getSolutionCount() {
-        return 0;
-    }
-    
-    public int getBytesAvailable() {
-        return 0;
-    }
+    this.lastInvocation = lastInvocation;
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public void materialize(FederatedRunningQuery runningQuery) {
+    // NOP
+  }
 
-        return getClass().getName() + "{queryId=" + queryId + ",bopId=" + bopId
-                + ",partitionId=" + partitionId + ",controller="
-                + queryController + ",lastInvocation=" + lastInvocation + "}";
+  @Override
+  public void release() {
+    // NOP
+  }
 
-    }
+  @Override
+  public IChunkAccessor<E> getChunkAccessor() {
 
-    /**
-     * 
-     * @param queryController
-     * @param queryId
-     * @param bopId
-     * @param partitionId
-     */
-    public EmptyChunkMessage(final IQueryClient queryController,
-            final UUID queryId, final int bopId, final int partitionId,
-            final boolean lastInvocation) {
+    return new IChunkAccessor<E>() {
 
-        if (queryController == null)
-            throw new IllegalArgumentException();
+      public ICloseableIterator<E[]> iterator() {
 
-        if (queryId == null)
-            throw new IllegalArgumentException();
-
-        this.queryController = queryController;
-        try {
-            this.queryControllerId = queryController.getServiceUUID();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-        
-        this.queryId = queryId;
-
-        this.bopId = bopId;
-
-        this.partitionId = partitionId;
-        
-        this.lastInvocation = lastInvocation;
-
-    }
-
-    @Override
-    public void materialize(FederatedRunningQuery runningQuery) {
-        // NOP
-    }
-
-    @Override
-    public void release() {
-        // NOP
-    }
-
-    @Override
-    public IChunkAccessor<E> getChunkAccessor() {
-
-        return new IChunkAccessor<E>() {
-
-            public ICloseableIterator<E[]> iterator() {
-
-                return new EmptyCloseableIterator<E[]>();
-                
-            }
-            
-        };
-        
-    }
-    
+        return new EmptyCloseableIterator<E[]>();
+      }
+    };
+  }
 }

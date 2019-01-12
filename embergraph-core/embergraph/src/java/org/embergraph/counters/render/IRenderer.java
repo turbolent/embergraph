@@ -5,20 +5,17 @@ import java.io.Writer;
 
 /**
  * Interface for rendering some data.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRenderer {
 
-    /**
-     * Render the data.
-     * 
-     * @param w
-     *            Where to write the data.
-     *            
-     * @throws IOException
-     */
-    public void render(Writer w) throws IOException;
-    
+  /**
+   * Render the data.
+   *
+   * @param w Where to write the data.
+   * @throws IOException
+   */
+  public void render(Writer w) throws IOException;
 }

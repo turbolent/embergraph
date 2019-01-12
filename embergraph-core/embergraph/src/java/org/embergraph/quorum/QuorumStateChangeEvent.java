@@ -19,78 +19,60 @@ package org.embergraph.quorum;
 
 import java.util.UUID;
 
-
 /**
- * Event data equivalent to the {@link QuorumStateChangeListener} API. This
- * interface makes it possible to enqueue these messages and then process them
- * asynchronously.
- * 
+ * Event data equivalent to the {@link QuorumStateChangeListener} API. This interface makes it
+ * possible to enqueue these messages and then process them asynchronously.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
  * @see QuorumStateChangeListener
  */
 public interface QuorumStateChangeEvent {
 
-    /**
-     * The type of event and never <code>null</code>.
-     */
-    QuorumStateChangeEventEnum getEventType();
+  /** The type of event and never <code>null</code>. */
+  QuorumStateChangeEventEnum getEventType();
 
-    /**
-     * Return the old and new downstream {@link UUID}s.
-     * 
-     * @return An array of two elements. [0] is the old downstream service
-     *         {@link UUID}. [1] is the new downstream service {@link UUID}.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #getEventType()} is
-     *             {@link QuorumStateChangeEventEnum#PIPELINE_CHANGE}.
-     * 
-     * @see QuorumStateChangeListener#pipelineChange(UUID, UUID)
-     */
-    UUID[] getDownstreamOldAndNew();
+  /**
+   * Return the old and new downstream {@link UUID}s.
+   *
+   * @return An array of two elements. [0] is the old downstream service {@link UUID}. [1] is the
+   *     new downstream service {@link UUID}.
+   * @throws UnsupportedOperationException unless {@link #getEventType()} is {@link
+   *     QuorumStateChangeEventEnum#PIPELINE_CHANGE}.
+   * @see QuorumStateChangeListener#pipelineChange(UUID, UUID)
+   */
+  UUID[] getDownstreamOldAndNew();
 
-    /**
-     * The last commit time consensus.
-     * 
-     * @return The last commit time consensus value.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #getEventType()} is
-     *             {@link QuorumStateChangeEventEnum#CONSENSUS}.
-     * 
-     * @see QuorumStateChangeListener#consensus(long)
-     */
-    long getLastCommitTimeConsensus();
+  /**
+   * The last commit time consensus.
+   *
+   * @return The last commit time consensus value.
+   * @throws UnsupportedOperationException unless {@link #getEventType()} is {@link
+   *     QuorumStateChangeEventEnum#CONSENSUS}.
+   * @see QuorumStateChangeListener#consensus(long)
+   */
+  long getLastCommitTimeConsensus();
 
-    /*
-     * quorumMeet(token,leaderId)
-     */
+  /*
+   * quorumMeet(token,leaderId)
+   */
 
-    /**
-     * Return the token on which the quorum met.
-     * 
-     * @return The token.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #getEventType()} is
-     *             {@link QuorumStateChangeEventEnum#QUORUM_MEET}.
-     * 
-     * @see QuorumStateChangeListener#quorumMeet(long, UUID)
-     */
-    long getToken();
+  /**
+   * Return the token on which the quorum met.
+   *
+   * @return The token.
+   * @throws UnsupportedOperationException unless {@link #getEventType()} is {@link
+   *     QuorumStateChangeEventEnum#QUORUM_MEET}.
+   * @see QuorumStateChangeListener#quorumMeet(long, UUID)
+   */
+  long getToken();
 
-    /**
-     * Return the {@link UUID} of the quorum leader.
-     * 
-     * @return The {@link UUID} of the quorum leader.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #getEventType()} is
-     *             {@link QuorumStateChangeEventEnum#QUORUM_MEET}.
-     * 
-     * @see QuorumStateChangeListener#quorumMeet(long, UUID)
-     */
-    UUID getLeaderId();
-
+  /**
+   * Return the {@link UUID} of the quorum leader.
+   *
+   * @return The {@link UUID} of the quorum leader.
+   * @throws UnsupportedOperationException unless {@link #getEventType()} is {@link
+   *     QuorumStateChangeEventEnum#QUORUM_MEET}.
+   * @see QuorumStateChangeListener#quorumMeet(long, UUID)
+   */
+  UUID getLeaderId();
 }

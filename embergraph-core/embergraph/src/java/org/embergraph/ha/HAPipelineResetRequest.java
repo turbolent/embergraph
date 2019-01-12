@@ -21,41 +21,44 @@ import java.util.UUID;
 
 public class HAPipelineResetRequest implements IHAPipelineResetRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private long token;
-    private UUID problemServiceId;
-    private long timeoutNanos;
+  private long token;
+  private UUID problemServiceId;
+  private long timeoutNanos;
 
-    public HAPipelineResetRequest(final long token,
-            final UUID problemServiceId, final long timeoutNanos) {
-        this.token = token;
-        this.problemServiceId = problemServiceId;
-        this.timeoutNanos = timeoutNanos;
-    }
+  public HAPipelineResetRequest(
+      final long token, final UUID problemServiceId, final long timeoutNanos) {
+    this.token = token;
+    this.problemServiceId = problemServiceId;
+    this.timeoutNanos = timeoutNanos;
+  }
 
-    @Override
-    public long token() {
-        return token;
-    }
+  @Override
+  public long token() {
+    return token;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString() + "{token=" + token + ", problemServiceId="
-                + problemServiceId + ", timeoutNanos=" + timeoutNanos + "}";
-    }
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{token="
+        + token
+        + ", problemServiceId="
+        + problemServiceId
+        + ", timeoutNanos="
+        + timeoutNanos
+        + "}";
+  }
 
-    @Override
-    public UUID getProblemServiceId() {
-        return problemServiceId;
-    }
+  @Override
+  public UUID getProblemServiceId() {
+    return problemServiceId;
+  }
 
-    @Override
-    public long getTimeoutNanos() {
-        return timeoutNanos;
-    }
-    
+  @Override
+  public long getTimeoutNanos() {
+    return timeoutNanos;
+  }
 }

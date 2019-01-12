@@ -22,9 +22,11 @@ import java.io.StringReader;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
@@ -37,172 +39,146 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-
 /**
  * Test suite for {@link AbstractQuery#setBinding(String, Value)}
- * 
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestSetBinding extends ProxyEmbergraphSailTestCase {
 
-    private static final Logger log = Logger.getLogger(TestSetBinding.class);
+  private static final Logger log = Logger.getLogger(TestSetBinding.class);
 
-    @Override
-    public Properties getProperties() {
-        
-        final Properties props = super.getProperties();
-        
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
-    }
+  @Override
+  public Properties getProperties() {
 
-    /**
-     * 
-     */
-    public TestSetBinding() {
-    }
+    final Properties props = super.getProperties();
 
-    /**
-     * @param arg0
-     */
-    public TestSetBinding(String arg0) {
-        super(arg0);
-    }
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
-    public void testSetBinding() throws Exception {
+    return props;
+  }
 
-        final EmbergraphSail sail = getSail();
+  /** */
+  public TestSetBinding() {}
 
-        try {
+  /** @param arg0 */
+  public TestSetBinding(String arg0) {
+    super(arg0);
+  }
 
-            sail.initialize();
+  public void testSetBinding() throws Exception {
 
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+    final EmbergraphSail sail = getSail();
 
-            final EmbergraphSailRepositoryConnection cxn = (EmbergraphSailRepositoryConnection) repo
-                    .getConnection();
+    try {
 
-            try {
+      sail.initialize();
 
-                cxn.setAutoCommit(false);
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-                final EmbergraphValueFactory vf = cxn.getValueFactory();
+      final EmbergraphSailRepositoryConnection cxn =
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
 
-                // First step, load data.
-                final String data = "@prefix ns:<http://localhost/pets#>. "
-                        + "@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#>. "
-                        + "    ns:snowball rdfs:label \"Snowball\"; "
-                        + "                ns:weight \"10\". "
-                        + "    ns:buffy rdfs:label \"Buffy\"; "
-                        + "                ns:weight \"8\".";
+      try {
 
-                if (log.isInfoEnabled())
-                    log.info("Loading data");
+        cxn.setAutoCommit(false);
 
-                cxn.add(new StringReader(data), "", RDFFormat.TURTLE,
-                        new Resource[0]);
+        final EmbergraphValueFactory vf = cxn.getValueFactory();
 
-                cxn.commit();
+        // First step, load data.
+        final String data =
+            "@prefix ns:<http://localhost/pets#>. "
+                + "@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#>. "
+                + "    ns:snowball rdfs:label \"Snowball\"; "
+                + "                ns:weight \"10\". "
+                + "    ns:buffy rdfs:label \"Buffy\"; "
+                + "                ns:weight \"8\".";
 
-                if (log.isInfoEnabled()) {
-                    
-                    // Dump the database.
-                    
-                    final RepositoryResult<Statement> stmts = cxn
-                            .getStatements(null, null, null, false);
+        if (log.isInfoEnabled()) log.info("Loading data");
 
-                    while (stmts.hasNext()) {
+        cxn.add(new StringReader(data), "", RDFFormat.TURTLE, new Resource[0]);
 
-                        final Statement tmp = stmts.next();
-                        
-                        log.info(tmp);
-                        
-                    }
-                    
-                }
+        cxn.commit();
 
-                // Resolve some Values that we will need below.
-                final EmbergraphLiteral buffy = vf.createLiteral("Buffy");
-                final EmbergraphLiteral snowball = vf.createLiteral("Snowball");
-                final EmbergraphLiteral w1 = vf.createLiteral("8");
-                final EmbergraphLiteral w2 = vf.createLiteral("10");
-                cxn.getTripleStore().addTerms(new EmbergraphValue[]{
-                        buffy,
-                        snowball,
-                        w1,
-                        w2
-                });
-                assertNotNull(buffy.getIV());
-                assertNotNull(snowball.getIV());
-                assertNotNull(w1.getIV());
-                assertNotNull(w2.getIV());
-       
-                // Second step, query data. Load query from resource and
-                // execute.
-                final String query = "PREFIX ns:<http://localhost/pets#> "
-                        + "\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>"
-                        + "\nSELECT ?name ?weight WHERE {"
-                        + "\n?uri rdfs:label ?name."
-                        + "\n?uri ns:weight ?weight." + "\n}";
+        if (log.isInfoEnabled()) {
 
-                if (log.isInfoEnabled())
-                    log.info("Executing query: " + query);
+          // Dump the database.
 
+          final RepositoryResult<Statement> stmts = cxn.getStatements(null, null, null, false);
 
-                // Verify result w/o binding.
-                {
+          while (stmts.hasNext()) {
 
-                    final TupleQuery tupleQuery = cxn.prepareTupleQuery(
-                            QueryLanguage.SPARQL, query);
+            final Statement tmp = stmts.next();
 
-                    final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-
-                    answer.add(createBindingSet(new BindingImpl("name", buffy),
-                            new BindingImpl("weight", w1)));
-                    
-                    answer.add(createBindingSet(new BindingImpl("name",
-                            snowball), new BindingImpl("weight", w2)));
-
-                    final TupleQueryResult result = tupleQuery.evaluate();
-
-                    compare(result, answer);
-                }
-
-                // Verify result w/ binding (one solution is eliminated).
-                {
-
-                    final TupleQuery tupleQuery = cxn.prepareTupleQuery(
-                            QueryLanguage.SPARQL, query);
-
-                    final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-
-                    answer.add(createBindingSet(new BindingImpl("name",
-                            snowball), new BindingImpl("weight", w2)));
-
-                    tupleQuery.setBinding("name", snowball);
-
-                    final TupleQueryResult result = tupleQuery.evaluate();
-
-                    compare(result, answer);
-
-                }
-                
-            } finally {
-                cxn.close();
-            }
-
-        } finally {
-            sail.__tearDownUnitTest();
+            log.info(tmp);
+          }
         }
 
-    }
+        // Resolve some Values that we will need below.
+        final EmbergraphLiteral buffy = vf.createLiteral("Buffy");
+        final EmbergraphLiteral snowball = vf.createLiteral("Snowball");
+        final EmbergraphLiteral w1 = vf.createLiteral("8");
+        final EmbergraphLiteral w2 = vf.createLiteral("10");
+        cxn.getTripleStore().addTerms(new EmbergraphValue[] {buffy, snowball, w1, w2});
+        assertNotNull(buffy.getIV());
+        assertNotNull(snowball.getIV());
+        assertNotNull(w1.getIV());
+        assertNotNull(w2.getIV());
 
+        // Second step, query data. Load query from resource and
+        // execute.
+        final String query =
+            "PREFIX ns:<http://localhost/pets#> "
+                + "\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>"
+                + "\nSELECT ?name ?weight WHERE {"
+                + "\n?uri rdfs:label ?name."
+                + "\n?uri ns:weight ?weight."
+                + "\n}";
+
+        if (log.isInfoEnabled()) log.info("Executing query: " + query);
+
+        // Verify result w/o binding.
+        {
+          final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+
+          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+
+          answer.add(
+              createBindingSet(new BindingImpl("name", buffy), new BindingImpl("weight", w1)));
+
+          answer.add(
+              createBindingSet(new BindingImpl("name", snowball), new BindingImpl("weight", w2)));
+
+          final TupleQueryResult result = tupleQuery.evaluate();
+
+          compare(result, answer);
+        }
+
+        // Verify result w/ binding (one solution is eliminated).
+        {
+          final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+
+          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+
+          answer.add(
+              createBindingSet(new BindingImpl("name", snowball), new BindingImpl("weight", w2)));
+
+          tupleQuery.setBinding("name", snowball);
+
+          final TupleQueryResult result = tupleQuery.evaluate();
+
+          compare(result, answer);
+        }
+
+      } finally {
+        cxn.close();
+      }
+
+    } finally {
+      sail.__tearDownUnitTest();
+    }
+  }
 }

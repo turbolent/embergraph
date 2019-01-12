@@ -4,18 +4,16 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTDatatype extends SimpleNode {
 
-	public ASTDatatype(int id) {
-		super(id);
-	}
+  public ASTDatatype(int id) {
+    super(id);
+  }
 
-	public ASTDatatype(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTDatatype(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 }

@@ -19,39 +19,33 @@ package org.embergraph.rdf.rio;
 
 /**
  * Event generated periodically.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RioLoaderEvent {
 
-    long stmtsProcessed, timeElapsed;
-    
-    public RioLoaderEvent( long stmtsProcessed, long timeElapsed ) {
-        
-        this.stmtsProcessed = stmtsProcessed;
-        
-        this.timeElapsed = timeElapsed;
-        
-    }
-    
-    public long getStatementsProcessed() {
-        
-        return stmtsProcessed;
-        
-    }
-    
-    public long getTimeElapsed() {
-        
-        return timeElapsed;
-        
-    }
-    
-    public long getInsertRate() {
-        
-        return (long) 
-            ( ((double)stmtsProcessed) / ((double)timeElapsed) * 1000d );
-        
-    }
-    
+  long stmtsProcessed, timeElapsed;
+
+  public RioLoaderEvent(long stmtsProcessed, long timeElapsed) {
+
+    this.stmtsProcessed = stmtsProcessed;
+
+    this.timeElapsed = timeElapsed;
+  }
+
+  public long getStatementsProcessed() {
+
+    return stmtsProcessed;
+  }
+
+  public long getTimeElapsed() {
+
+    return timeElapsed;
+  }
+
+  public long getInsertRate() {
+
+    return (long) (((double) stmtsProcessed) / ((double) timeElapsed) * 1000d);
+  }
 }

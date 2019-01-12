@@ -25,21 +25,21 @@ import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Basic boolean query hint.
- */
+/** Basic boolean query hint. */
 public class BasicBooleanQueryHint extends AbstractBooleanQueryHint {
 
-    public BasicBooleanQueryHint(final String name, final Boolean defaultValue) {
-        super(name, defaultValue);
-    }
+  public BasicBooleanQueryHint(final String name, final Boolean defaultValue) {
+    super(name, defaultValue);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
 
-        _setQueryHint(context, scope, op, getName(), value);
-
-    }
-
+    _setQueryHint(context, scope, op, getName(), value);
+  }
 }

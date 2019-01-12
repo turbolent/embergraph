@@ -27,46 +27,39 @@ import java.lang.ref.SoftReference;
 
 /**
  * Base class for the prepare phase which reads on the old journal.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractPrepareTask<T> extends
-        AbstractResourceManagerTask<T> {
-    
-    /**
-     * @param resourceManager
-     * @param timestamp
-     * @param resource
-     */
-    public AbstractPrepareTask(ResourceManager resourceManager, long timestamp,
-            String resource) {
+public abstract class AbstractPrepareTask<T> extends AbstractResourceManagerTask<T> {
 
-        super(resourceManager, timestamp, resource);
+  /**
+   * @param resourceManager
+   * @param timestamp
+   * @param resource
+   */
+  public AbstractPrepareTask(ResourceManager resourceManager, long timestamp, String resource) {
 
-    }
+    super(resourceManager, timestamp, resource);
+  }
 
-    /**
-     * @param resourceManager
-     * @param timestamp
-     * @param resource
-     */
-    public AbstractPrepareTask(ResourceManager resourceManager, long timestamp,
-            String[] resource) {
+  /**
+   * @param resourceManager
+   * @param timestamp
+   * @param resource
+   */
+  public AbstractPrepareTask(ResourceManager resourceManager, long timestamp, String[] resource) {
 
-        super(resourceManager, timestamp, resource);
-        
-    }
+    super(resourceManager, timestamp, resource);
+  }
 
-    /**
-     * Method is responsible for clearing the {@link SoftReference}s held by
-     * {@link ViewMetadata} for the source view(s) on the old journal.
-     * <p>
-     * Note: This method MUST be invoked in order to permit those references to
-     * be cleared more eagerly than the end of the entire asynchronous overflow
-     * operation (which is when the task references would themselves go out of
-     * scope and become available for GC).
-     */
-    abstract protected void clearRefs();
-    
+  /**
+   * Method is responsible for clearing the {@link SoftReference}s held by {@link ViewMetadata} for
+   * the source view(s) on the old journal.
+   *
+   * <p>Note: This method MUST be invoked in order to permit those references to be cleared more
+   * eagerly than the end of the entire asynchronous overflow operation (which is when the task
+   * references would themselves go out of scope and become available for GC).
+   */
+  protected abstract void clearRefs();
 }

@@ -28,35 +28,33 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /**
- * An instance of this exception is thrown when a node or leaf is not a child
- * (or self) for some other node or leaf.
- * 
+ * An instance of this exception is thrown when a node or leaf is not a child (or self) for some
+ * other node or leaf.
+ *
  * @author bryan
  */
 public class NotChildException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public NotChildException() {
-    }
+  public NotChildException() {}
 
-    public NotChildException(String message) {
-        super(message);
-    }
+  public NotChildException(String message) {
+    super(message);
+  }
 
-    public NotChildException(Throwable cause) {
-        super(cause);
-    }
+  public NotChildException(Throwable cause) {
+    super(cause);
+  }
 
-    public NotChildException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public NotChildException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-//    public NotChildException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-//        super(message, cause, enableSuppression, writableStackTrace);
-//    }
+  //    public NotChildException(String message, Throwable cause, boolean enableSuppression, boolean
+  // writableStackTrace) {
+  //        super(message, cause, enableSuppression, writableStackTrace);
+  //    }
 
 }

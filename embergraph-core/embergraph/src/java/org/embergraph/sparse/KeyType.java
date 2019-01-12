@@ -22,111 +22,100 @@ package org.embergraph.sparse;
 import org.embergraph.util.Bytes;
 
 /**
- * A type safe enumeration of key types and the byte values that are used to
- * encode that key type within the encoded {@link Schema} name.
- * 
+ * A type safe enumeration of key types and the byte values that are used to encode that key type
+ * within the encoded {@link Schema} name.
+ *
  * @see Schema#getSchemaBytes()
  */
 public enum KeyType {
+  Integer(0, Bytes.SIZEOF_INT),
 
-    Integer(0, Bytes.SIZEOF_INT),
+  Long(1, Bytes.SIZEOF_LONG),
 
-    Long(1, Bytes.SIZEOF_LONG),
+  Float(2, Bytes.SIZEOF_INT),
 
-    Float(2, Bytes.SIZEOF_INT),
+  Double(3, Bytes.SIZEOF_LONG),
 
-    Double(3, Bytes.SIZEOF_LONG),
+  /** Variable length Unicode string. */
+  Unicode(4, 0 /* variable length */),
 
-    /** Variable length Unicode string. */
-    Unicode(4, 0/* variable length */),
+  /** Variable length ASCII string. */
+  ASCII(5, 0 /* variable length */),
 
-    /** Variable length ASCII string. */
-    ASCII(5, 0/* variable length */),
+  Date(6, Bytes.SIZEOF_LONG),
 
-    Date(6, Bytes.SIZEOF_LONG),
-    
 //    /** Variable length unsigned byte[] (no translation). */
 //    UnsignedBytes(7, 0/* variable length */)
-    ;
+;
 
-    private KeyType(int b, int encodedLength) {
+  private KeyType(int b, int encodedLength) {
 
-        this.b = (byte) b;
+    this.b = (byte) b;
 
-        this.encodedLength = encodedLength;
-        
+    this.encodedLength = encodedLength;
+  }
+
+  /** The unique one byte code for this {@link KeyType}. */
+  private final byte b;
+
+  /**
+   * The #of bytes in which values of that {@link KeyType} are encoded -or- zero (0) iff values are
+   * encoded in a variable number of bytes with a <code>nul</code> terminator for the byte sequence.
+   */
+  private final int encodedLength;
+
+  /** True iff the key type is encoded in a fixed #of bytes. */
+  public boolean isFixedLength() {
+
+    return encodedLength != 0;
+  }
+
+  /**
+   * The #of bytes in which values of that {@link KeyType} are encoded -or- zero (0) iff values are
+   * encoded in a variable number of bytes with a <code>nul</code> terminator for the byte sequence.
+   */
+  public int getEncodedLength() {
+
+    return encodedLength;
+  }
+
+  /**
+   * The byte that indicates this {@link KeyType}.
+   *
+   * @return
+   */
+  public byte getByteCode() {
+
+    return b;
+  }
+
+  /**
+   * Return the {@link KeyType} given its byte code.
+   *
+   * @param b The byte code.
+   * @return The {@link KeyType}.
+   */
+  public static KeyType getKeyType(byte b) {
+
+    switch (b) {
+      case 0:
+        return Integer;
+      case 1:
+        return Long;
+      case 2:
+        return Float;
+      case 3:
+        return Double;
+      case 4:
+        return Unicode;
+      case 5:
+        return ASCII;
+      case 6:
+        return Date;
+        //        case 7:
+        //            return UnsignedBytes;
+      default:
+        throw new IllegalArgumentException("byte=" + b);
     }
-
-    /** The unique one byte code for this {@link KeyType}. */
-    private final byte b;
-    
-    /**
-     * The #of bytes in which values of that {@link KeyType} are encoded -or-
-     * zero (0) iff values are encoded in a variable number of bytes with a
-     * <code>nul</code> terminator for the byte sequence.
-     */
-    private final int encodedLength;
-    
-    /** True iff the key type is encoded in a fixed #of bytes. */
-    public boolean isFixedLength() {
-        
-        return encodedLength != 0;
-        
-    }
-
-    /**
-     * The #of bytes in which values of that {@link KeyType} are encoded -or-
-     * zero (0) iff values are encoded in a variable number of bytes with a
-     * <code>nul</code> terminator for the byte sequence.
-     */
-    public int getEncodedLength() {
-
-        return encodedLength;
-        
-    }
-    
-    /**
-     * The byte that indicates this {@link KeyType}.
-     * 
-     * @return
-     */
-    public byte getByteCode() {
-
-        return b;
-
-    }
-
-    /**
-     * Return the {@link KeyType} given its byte code.
-     * 
-     * @param b
-     *            The byte code.
-     *            
-     * @return The {@link KeyType}.
-     */
-    static public KeyType getKeyType(byte b) {
-
-        switch (b) {
-        case 0:
-            return Integer;
-        case 1:
-            return Long;
-        case 2:
-            return Float;
-        case 3:
-            return Double;
-        case 4:
-            return Unicode;
-        case 5:
-            return ASCII;
-        case 6:
-            return Date;
-//        case 7:
-//            return UnsignedBytes;
-        default:
-            throw new IllegalArgumentException("byte=" + b);
-        }
-
-    }
-
+  }
 }

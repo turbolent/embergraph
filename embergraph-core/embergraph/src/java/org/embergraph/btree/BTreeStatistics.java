@@ -25,74 +25,75 @@ import java.io.Serializable;
 
 /**
  * A snapshot of the B+Tree statistics.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BTreeStatistics implements IBTreeStatistics, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final int m;
+  private final int m;
 
-    private final int height;
+  private final int height;
 
-    private final long nodeCount;
+  private final long nodeCount;
 
-    private final long leafCount;
+  private final long leafCount;
 
-    private final long entryCount;
+  private final long entryCount;
 
-    private final IBTreeUtilizationReport utilReport;
+  private final IBTreeUtilizationReport utilReport;
 
-    public BTreeStatistics(final AbstractBTree btree) {
-        this.m = btree.getBranchingFactor();
-        this.height = btree.getHeight();
-        this.nodeCount = btree.getNodeCount();
-        this.leafCount = btree.getLeafCount();
-        this.entryCount = btree.getEntryCount();
-        this.utilReport = btree.getUtilization();
-    }
+  public BTreeStatistics(final AbstractBTree btree) {
+    this.m = btree.getBranchingFactor();
+    this.height = btree.getHeight();
+    this.nodeCount = btree.getNodeCount();
+    this.leafCount = btree.getLeafCount();
+    this.entryCount = btree.getEntryCount();
+    this.utilReport = btree.getUtilization();
+  }
 
-    public int getBranchingFactor() {
-        return m;
-    }
+  public int getBranchingFactor() {
+    return m;
+  }
 
-    public int getHeight() {
-        return height;
-    }
+  public int getHeight() {
+    return height;
+  }
 
-    public long getNodeCount() {
-        return nodeCount;
-    }
+  public long getNodeCount() {
+    return nodeCount;
+  }
 
-    public long getLeafCount() {
-        return leafCount;
-    }
+  public long getLeafCount() {
+    return leafCount;
+  }
 
-    public long getEntryCount() {
-        return entryCount;
-    }
+  public long getEntryCount() {
+    return entryCount;
+  }
 
-    public IBTreeUtilizationReport getUtilization() {
-        return utilReport;
-    }
+  public IBTreeUtilizationReport getUtilization() {
+    return utilReport;
+  }
 
-    /**
-     * Human readable representation.
-     */
-    public String toString() {
-        return super.toString() +
-                "{m=" + m+
-                ",entryCount=" + entryCount+
-                ",height=" + height+
-                ",leafCount=" + leafCount+
-                ",nodeCount=" + nodeCount+
-                ",utilReport=" + utilReport+
-                "}";
-    }
-
+  /** Human readable representation. */
+  public String toString() {
+    return super.toString()
+        + "{m="
+        + m
+        + ",entryCount="
+        + entryCount
+        + ",height="
+        + height
+        + ",leafCount="
+        + leafCount
+        + ",nodeCount="
+        + nodeCount
+        + ",utilReport="
+        + utilReport
+        + "}";
+  }
 }

@@ -25,23 +25,16 @@ import java.lang.ref.WeakReference;
 
 /**
  * The default factory for {@link WeakReference} cache entries.
- * 
+ *
  * @author thompsonbry
  * @version $Id$
  */
-public class SoftCacheEntryFactory<K,T>
-    implements IWeakRefCacheEntryFactory<K,T>
-{
+public class SoftCacheEntryFactory<K, T> implements IWeakRefCacheEntryFactory<K, T> {
 
-    public SoftCacheEntryFactory()
-    {
-    }
+  public SoftCacheEntryFactory() {}
 
-    public IWeakRefCacheEntry<K,T> newCacheEntry( K key, T obj, ReferenceQueue<T> queue)
-    {
-        
-        return new SoftCacheEntry<K,T>( key, obj, queue );
-        
-    }
+  public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue) {
 
+    return new SoftCacheEntry<K, T>(key, obj, queue);
+  }
 }

@@ -21,69 +21,65 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NE;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
 
 /**
  * owl:InverseFunctionalProperty
- * 
+ *
  * <pre>
- *   (p rdf:type owl:InverseFunctionalProperty), (b p a), (c p a) -&gt; 
+ *   (p rdf:type owl:InverseFunctionalProperty), (b p a), (c p a) -&gt;
  *   (b owl:sameAs c)
  * </pre>
  */
 @SuppressWarnings("rawtypes")
 public class RuleOwlInverseFunctionalProperty extends Rule {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6688762355076324400L;
+  /** */
+  private static final long serialVersionUID = -6688762355076324400L;
 
-	/**
-     * @param vocab
-     */
-    public RuleOwlInverseFunctionalProperty(String relationName, Vocabulary vocab) {
+  /** @param vocab */
+  public RuleOwlInverseFunctionalProperty(String relationName, Vocabulary vocab) {
 
-        super( "owlInverseFunctionalProperty",
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.INVERSEFUNCTIONALPROPERTY)),
-                    new SPOPredicate(relationName,var("b"), var("x"), var("a")),
-                    new SPOPredicate(relationName,var("c"), var("x"), var("a"))
-                },
-                new IConstraint[] {
-					Constraint.wrap(new NE(var("b"),var("c")))
-		        }
-                );
-        
-    }
-    
-//    /**
-//     * If this rule ever becomes consistent in the data then the rule will
-//     * throw a {@link ConstraintViolationException} and the closure operation
-//     * will fail.
-//     */
-//    @Override
-//	public boolean isConsistent(final IBindingSet bset) {
-//
-//		boolean ret = super.isConsistent(bset);
-//
-//		if (ret && isFullyBound(bset)) {
-//
-//			throw new ConstraintViolationException(getName());
-//
-//		}
-//
-//		return ret;
-//
-//	}
+    super(
+        "owlInverseFunctionalProperty",
+        new SPOPredicate(relationName, var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),
+        new SPOPredicate[] {
+          new SPOPredicate(
+              relationName,
+              var("x"),
+              vocab.getConstant(RDF.TYPE),
+              vocab.getConstant(OWL.INVERSEFUNCTIONALPROPERTY)),
+          new SPOPredicate(relationName, var("b"), var("x"), var("a")),
+          new SPOPredicate(relationName, var("c"), var("x"), var("a"))
+        },
+        new IConstraint[] {Constraint.wrap(new NE(var("b"), var("c")))});
+  }
+
+  //    /**
+  //     * If this rule ever becomes consistent in the data then the rule will
+  //     * throw a {@link ConstraintViolationException} and the closure operation
+  //     * will fail.
+  //     */
+  //    @Override
+  //	public boolean isConsistent(final IBindingSet bset) {
+  //
+  //		boolean ret = super.isConsistent(bset);
+  //
+  //		if (ret && isFullyBound(bset)) {
+  //
+  //			throw new ConstraintViolationException(getName());
+  //
+  //		}
+  //
+  //		return ret;
+  //
+  //	}
 
 }

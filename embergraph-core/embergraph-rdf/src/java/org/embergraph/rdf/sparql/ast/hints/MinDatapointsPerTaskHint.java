@@ -30,31 +30,31 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Sets the {@link PipelineOp.Annotations#MIN_DATAPOINTS_PER_TASK} annotation of an operator.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 final class MinDatapointsPerTaskHint extends AbstractIntQueryHint {
 
-   protected MinDatapointsPerTaskHint() {
-       super(Annotations.MIN_DATAPOINTS_PER_TASK,
-               Annotations.DEFAULT_MIN_DATAPOINTS_PER_TASK);
-   }
+  protected MinDatapointsPerTaskHint() {
+    super(Annotations.MIN_DATAPOINTS_PER_TASK, Annotations.DEFAULT_MIN_DATAPOINTS_PER_TASK);
+  }
 
-   @Override
-   public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-           final QueryHintScope scope, final ASTBase op, final Integer value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
 
-       if (op instanceof IQueryNode) {
+    if (op instanceof IQueryNode) {
 
-           /*
-            * Note: This is set on the queryHint Properties object and then
-            * transferred to the pipeline operator when it is generated.
-            */
-           _setQueryHint(context, scope, op, getName(), value);
-
-       }
-
-   }
-
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+      _setQueryHint(context, scope, op, getName(), value);
+    }
+  }
 }

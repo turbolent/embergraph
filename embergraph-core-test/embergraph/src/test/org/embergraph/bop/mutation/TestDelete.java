@@ -25,30 +25,24 @@ import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link DeleteOp}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDelete extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestDelete() {
-    }
+  /** */
+  public TestDelete() {}
 
-    /**
-     * @param name
-     */
-    public TestDelete(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestDelete(String name) {
+    super(name);
+  }
 
-    /** TODO Write tests. */
-    public void test_something() {
+  /** TODO Write tests. */
+  public void test_something() {
 
-//        fail("write tests");
-        
-    }
-    
+    //        fail("write tests");
+
+  }
 }

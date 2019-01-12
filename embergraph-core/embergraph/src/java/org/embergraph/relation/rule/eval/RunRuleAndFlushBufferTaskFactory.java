@@ -4,51 +4,40 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 
 /**
- * Factory class is used for sequential {@link IRule} step execution. It
- * wraps the selected {@link IStepTask} inside of a
- * {@link RunRuleAndFlushBufferTask} to ensure that the {@link IBuffer} on
- * which the {@link IStepTask} wrote its {@link ISolution}s gets
- * {@link IBuffer#flush()}ed after the {@link IStepTask} is executed.
- * 
+ * Factory class is used for sequential {@link IRule} step execution. It wraps the selected {@link
+ * IStepTask} inside of a {@link RunRuleAndFlushBufferTask} to ensure that the {@link IBuffer} on
+ * which the {@link IStepTask} wrote its {@link ISolution}s gets {@link IBuffer#flush()}ed after the
+ * {@link IStepTask} is executed.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @deprecated This is now handled by {@link MutationTask#newMutationTasks(org.embergraph.relation.rule.IStep, IJoinNexus, java.util.Map)}
+ * @deprecated This is now handled by {@link
+ *     MutationTask#newMutationTasks(org.embergraph.relation.rule.IStep, IJoinNexus, java.util.Map)}
  */
 public class RunRuleAndFlushBufferTaskFactory implements IRuleTaskFactory {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1396152962479786103L;
-    
-    private final IRuleTaskFactory delegate;
-    
-    public RunRuleAndFlushBufferTaskFactory(IRuleTaskFactory delegate) {
+  /** */
+  private static final long serialVersionUID = 1396152962479786103L;
 
-        if (delegate == null)
-            throw new IllegalArgumentException();
+  private final IRuleTaskFactory delegate;
 
-        this.delegate = delegate;
-        
-    }
+  public RunRuleAndFlushBufferTaskFactory(IRuleTaskFactory delegate) {
 
-    public IStepTask newTask(IRule rule, IJoinNexus joinNexus,
-            IBuffer<ISolution[]> buffer) {
+    if (delegate == null) throw new IllegalArgumentException();
 
-        if (rule == null)
-            throw new IllegalArgumentException();
+    this.delegate = delegate;
+  }
 
-        if (joinNexus == null)
-            throw new IllegalArgumentException();
+  public IStepTask newTask(IRule rule, IJoinNexus joinNexus, IBuffer<ISolution[]> buffer) {
 
-        if (buffer == null)
-            throw new IllegalArgumentException();
+    if (rule == null) throw new IllegalArgumentException();
 
-        final IStepTask task = delegate.newTask(rule, joinNexus, buffer);
+    if (joinNexus == null) throw new IllegalArgumentException();
 
-        return new RunRuleAndFlushBufferTask(task, buffer);
-        
-    }
-    
+    if (buffer == null) throw new IllegalArgumentException();
+
+    final IStepTask task = delegate.newTask(rule, joinNexus, buffer);
+
+    return new RunRuleAndFlushBufferTask(task, buffer);
+  }
 }

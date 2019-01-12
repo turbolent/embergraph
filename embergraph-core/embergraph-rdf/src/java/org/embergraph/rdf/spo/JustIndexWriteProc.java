@@ -37,118 +37,96 @@ import org.embergraph.rdf.inf.Justification;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 
 /**
- * Procedure for writing {@link Justification}s on an index or index
- * partition.
- * 
+ * Procedure for writing {@link Justification}s on an index or index partition.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class JustIndexWriteProc
-        extends AbstractKeyArrayIndexProcedure<Long>
-        implements IParallelizableIndexProcedure<Long>, IMutableRelationIndexWriteProcedure<Long> {
+public class JustIndexWriteProc extends AbstractKeyArrayIndexProcedure<Long>
+    implements IParallelizableIndexProcedure<Long>, IMutableRelationIndexWriteProcedure<Long> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -7469842097766417950L;
+  /** */
+  private static final long serialVersionUID = -7469842097766417950L;
+
+  @Override
+  public final boolean isReadOnly() {
+
+    return false;
+  }
+
+  /** De-serialization constructor. */
+  public JustIndexWriteProc() {
+
+    super();
+  }
+
+  public JustIndexWriteProc(IRabaCoder keySer, int fromIndex, int toIndex, byte[][] keys) {
+
+    super(keySer, null, fromIndex, toIndex, keys, null /* vals */);
+  }
+
+  public static class WriteJustificationsProcConstructor
+      extends AbstractKeyArrayIndexProcedureConstructor<JustIndexWriteProc> {
+
+    public static WriteJustificationsProcConstructor INSTANCE =
+        new WriteJustificationsProcConstructor();
+
+    /** Values ARE NOT used. */
+    @Override
+    public final boolean sendValues() {
+
+      return false;
+    }
+
+    private WriteJustificationsProcConstructor() {}
 
     @Override
-    public final boolean isReadOnly() {
-        
-        return false;
-        
+    public JustIndexWriteProc newInstance(
+        IRabaCoder keySer,
+        IRabaCoder valSer,
+        int fromIndex,
+        int toIndex,
+        byte[][] keys,
+        byte[][] vals) {
+
+      assert vals == null;
+
+      return new JustIndexWriteProc(keySer, fromIndex, toIndex, keys);
     }
-    
-    /**
-     * De-serialization constructor.
-     *
-     */
-    public JustIndexWriteProc() {
-        
-        super();
+  }
 
-    }
+  /** @return The #of justifications actually written on the index as a {@link Long}. */
+  @Override
+  public Long applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
 
-    public JustIndexWriteProc(IRabaCoder keySer, int fromIndex,
-            int toIndex, byte[][] keys) {
+    long nwritten = 0;
 
-        super(keySer, null, fromIndex, toIndex, keys, null/* vals */);
+    final int n = keys.size();
 
-    }
+    for (int i = 0; i < n; i++) {
 
-    public static class WriteJustificationsProcConstructor extends
-            AbstractKeyArrayIndexProcedureConstructor<JustIndexWriteProc> {
+      final byte[] key = keys.get(i);
 
-        public static WriteJustificationsProcConstructor INSTANCE = new WriteJustificationsProcConstructor();
+      /*
+       * Note: We can not decide nwritten using putIfAbsent() since the
+       * index is storing nulls.
+       *
+       * See BLZG-1539.
+       */
+      if (!ndx.contains(key)) {
 
-        /**
-         * Values ARE NOT used.
-         */
-        @Override
-        public final boolean sendValues() {
-        
-            return false;
-            
-        }
-        
-        private WriteJustificationsProcConstructor() {
-        }
+        ndx.insert(key, null /* no value */);
 
-        @Override
-        public JustIndexWriteProc newInstance(IRabaCoder keySer,
-                IRabaCoder valSer, int fromIndex, int toIndex,
-                byte[][] keys, byte[][] vals) {
-
-            assert vals == null;
-
-            return new JustIndexWriteProc(keySer, fromIndex, toIndex, keys);
-
-        }
-
+        nwritten++;
+      }
     }
 
-    /**
-     * @return The #of justifications actually written on the index as a
-     *         {@link Long}.
-     */
-    @Override
-    public Long applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
+    return Long.valueOf(nwritten);
+  }
 
-        long nwritten = 0;
-        
-        final int n = keys.size();
-        
-        for (int i = 0; i < n; i++) {
+  /** Uses {@link LongAggregator} to combine the mutation counts. */
+  @Override
+  protected IResultHandler<Long, Long> newAggregator() {
 
-            final byte[] key = keys.get( i );
-            
-			/*
-			 * Note: We can not decide nwritten using putIfAbsent() since the
-			 * index is storing nulls.
-			 * 
-			 * See BLZG-1539.
-			 */
-            if (!ndx.contains(key)) {
-
-                ndx.insert(key, null/* no value */);
-
-                nwritten++;
-
-            }
-
-        }
-        
-        return Long.valueOf(nwritten);
-        
-    }
-
-    /**
-     * Uses {@link LongAggregator} to combine the mutation counts.
-     */
-	@Override
-	protected IResultHandler<Long, Long> newAggregator() {
-
-		return new LongAggregator();
-
-	}
-    
+    return new LongAggregator();
+  }
 }

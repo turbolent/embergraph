@@ -18,41 +18,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.util.Properties;
-
 import org.embergraph.rdf.axioms.RdfsAxioms;
 import org.embergraph.rdf.vocab.RDFSVocabulary;
 
 /**
- * Concrete instance of {@link TestRollbacks} which overrides the properties to
- * enable truth maintenance support in the SAIL.
- * 
+ * Concrete instance of {@link TestRollbacks} which overrides the properties to enable truth
+ * maintenance support in the SAIL.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRollbacksTM extends TestRollbacks {
 
-	public TestRollbacksTM() {
-		super();
-	}
-	
-	public TestRollbacksTM(String name) {
-		super(name);
-	}
-	
-	@Override
-    public Properties getProperties() {
-        
-    	final Properties props = super.getProperties();
+  public TestRollbacksTM() {
+    super();
+  }
 
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
-                RdfsAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
-                RDFSVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
-        
-        return props;
+  public TestRollbacksTM(String name) {
+    super(name);
+  }
 
-	}
-	
+  @Override
+  public Properties getProperties() {
+
+    final Properties props = super.getProperties();
+
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, RdfsAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, RDFSVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
+
+    return props;
+  }
 }

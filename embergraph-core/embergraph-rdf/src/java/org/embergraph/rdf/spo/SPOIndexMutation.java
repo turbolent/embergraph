@@ -1,11 +1,9 @@
 package org.embergraph.rdf.spo;
 
 public enum SPOIndexMutation {
+  ADDED,
 
-    ADDED,
-    
-    REMOVED,
-    
-    TYPE_CHANGE
-    
+  REMOVED,
+
+  TYPE_CHANGE
 }

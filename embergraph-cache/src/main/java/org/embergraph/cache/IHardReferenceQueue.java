@@ -27,94 +27,76 @@ package org.embergraph.cache;
 
 /**
  * Interface for a hard reference queue.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <T>
- *            The generic type of the hard references in the queue.
+ * @param <T> The generic type of the hard references in the queue.
  */
 public interface IHardReferenceQueue<T> {
 
-    /**
-     * A reasonable default for the #of references on the head of the queue that
-     * should be tested before a reference is appended to the queue.
-     */
-    int DEFAULT_NSCAN = 10;
+  /**
+   * A reasonable default for the #of references on the head of the queue that should be tested
+   * before a reference is appended to the queue.
+   */
+  int DEFAULT_NSCAN = 10;
 
-    /**
-     * The cache capacity.
-     */
-    int capacity();
+  /** The cache capacity. */
+  int capacity();
 
-    /**
-     * The #of references that are tested on append requests.
-     */
-    int nscan();
+  /** The #of references that are tested on append requests. */
+  int nscan();
 
-    /**
-     * The #of references in the cache.  Note that there is no guarantee that
-     * the references are distinct.
-     */
-    int size();
+  /**
+   * The #of references in the cache. Note that there is no guarantee that the references are
+   * distinct.
+   */
+  int size();
 
-    /**
-     * True iff the cache is empty.
-     */
-    boolean isEmpty();
+  /** True iff the cache is empty. */
+  boolean isEmpty();
 
-    /**
-     * True iff the cache is full.
-     */
-    boolean isFull();
+  /** True iff the cache is full. */
+  boolean isFull();
 
-    /**
-     * Add a reference to the cache. If the reference was recently added to the
-     * cache then this is a NOP. Otherwise the reference is appended to the
-     * cache. If a reference is appended to the cache and then cache is at
-     * capacity, then the LRU reference is first evicted from the cache.
-     * 
-     * @param ref
-     *            The reference to be added.
-     * 
-     * @return True iff the reference was added to the cache and false iff the
-     *         reference was found in a scan of the nscan MRU cache entries.
-     */
-    boolean add(final T ref);
+  /**
+   * Add a reference to the cache. If the reference was recently added to the cache then this is a
+   * NOP. Otherwise the reference is appended to the cache. If a reference is appended to the cache
+   * and then cache is at capacity, then the LRU reference is first evicted from the cache.
+   *
+   * @param ref The reference to be added.
+   * @return True iff the reference was added to the cache and false iff the reference was found in
+   *     a scan of the nscan MRU cache entries.
+   */
+  boolean add(final T ref);
 
-    /**
-     * Evict the LRU reference. This is a NOP iff the cache is empty.
-     * 
-     * @return true iff a reference was evicted.
-     * 
-     * @see HardReferenceQueueEvictionListener
-     */
-    boolean evict();
+  /**
+   * Evict the LRU reference. This is a NOP iff the cache is empty.
+   *
+   * @return true iff a reference was evicted.
+   * @see HardReferenceQueueEvictionListener
+   */
+  boolean evict();
 
-    /**
-     * Clears the cache (sets the head, tail and count to zero) without
-     * generating eviction notices.
-     * 
-     * @param clearRefs
-     *            When <code>true</code> the references are explicitly set to
-     *            <code>null</code> which can facilitate garbage collection.
-     */
-    void clear(final boolean clearRefs);
+  /**
+   * Clears the cache (sets the head, tail and count to zero) without generating eviction notices.
+   *
+   * @param clearRefs When <code>true</code> the references are explicitly set to <code>null</code>
+   *     which can facilitate garbage collection.
+   */
+  void clear(final boolean clearRefs);
 
-    /**
-     * Evict all references, starting with the LRU reference and proceeding to
-     * the MRU reference.
-     * 
-     * @param clearRefs
-     *            When true, the reference are actually cleared from the cache.
-     *            This may be false to force persistence of the references in
-     *            the cache without actually clearing the cache.
-     */
-    void evictAll(boolean clearRefs);
+  /**
+   * Evict all references, starting with the LRU reference and proceeding to the MRU reference.
+   *
+   * @param clearRefs When true, the reference are actually cleared from the cache. This may be
+   *     false to force persistence of the references in the cache without actually clearing the
+   *     cache.
+   */
+  void evictAll(boolean clearRefs);
 
-    /**
-     * The reference at the tail of the queue. This is the next reference that
-     * will be evicted from the queue.
-     */
-    T peek();
-
+  /**
+   * The reference at the tail of the queue. This is the next reference that will be evicted from
+   * the queue.
+   */
+  T peek();
 }

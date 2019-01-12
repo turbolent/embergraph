@@ -23,54 +23,42 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IVCache;
 
 /**
  * A set of interesting statistics on a solution set.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ISolutionSetStats {
 
-    /**
-     * Return the #of solutions.
-     */
-    long getSolutionSetSize();
+  /** Return the #of solutions. */
+  long getSolutionSetSize();
 
-    /**
-     * Return the set of variables which in at least one solution.
-     */
-    Set<IVariable<?>> getUsedVars();
+  /** Return the set of variables which in at least one solution. */
+  Set<IVariable<?>> getUsedVars();
 
-    /**
-     * Return the subset of the variables which are bound in all solutions.
-     */
-    Set<IVariable<?>> getAlwaysBound();
+  /** Return the subset of the variables which are bound in all solutions. */
+  Set<IVariable<?>> getAlwaysBound();
 
-    /**
-     * Return the subset of the variables which are NOT bound in all solutions.
-     */
-    Set<IVariable<?>> getNotAlwaysBound();
+  /** Return the subset of the variables which are NOT bound in all solutions. */
+  Set<IVariable<?>> getNotAlwaysBound();
 
-    /**
-	 * Return the subset of the variables which are materialized in all
-	 * solutions in which they appear (the variables do not have to be bound in
-	 * every solution, but if they are bound then their {@link IVCache}
-	 * association is always set).
-	 */
-    Set<IVariable<?>> getMaterialized();
-    
-    /**
-	 * The set of variables which are effective constants (they are bound in
-	 * every solution and always to the same value) together with their constant
-	 * bindings.
-	 * 
-	 * @return The set of variables which are effective constants.
-	 */
-    Map<IVariable<?>, IConstant<?>> getConstants();
+  /**
+   * Return the subset of the variables which are materialized in all solutions in which they appear
+   * (the variables do not have to be bound in every solution, but if they are bound then their
+   * {@link IVCache} association is always set).
+   */
+  Set<IVariable<?>> getMaterialized();
 
+  /**
+   * The set of variables which are effective constants (they are bound in every solution and always
+   * to the same value) together with their constant bindings.
+   *
+   * @return The set of variables which are effective constants.
+   */
+  Map<IVariable<?>, IConstant<?>> getConstants();
 }

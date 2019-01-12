@@ -23,43 +23,33 @@ package org.embergraph.quorum;
 
 /**
  * An exception related to {@link Quorum} or {@link QuorumManager}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QuorumException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5423642672810528989L;
+  /** */
+  private static final long serialVersionUID = -5423642672810528989L;
 
-    /**
-     * 
-     */
-    public QuorumException() {
-    }
+  /** */
+  public QuorumException() {}
 
-    /**
-     * @param message
-     */
-    public QuorumException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public QuorumException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public QuorumException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public QuorumException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public QuorumException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public QuorumException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

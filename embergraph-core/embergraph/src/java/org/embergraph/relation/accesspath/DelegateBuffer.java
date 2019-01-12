@@ -25,65 +25,62 @@ import java.util.concurrent.Future;
 
 /**
  * A delegation pattern which does not pass on the {@link #close()} method.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DelegateBuffer<E> implements IBlockingBuffer<E> {
 
-    private final IBlockingBuffer<E> delegate; 
+  private final IBlockingBuffer<E> delegate;
 
-    public DelegateBuffer(final IBlockingBuffer<E> delegate) {
+  public DelegateBuffer(final IBlockingBuffer<E> delegate) {
 
-        if (delegate == null)
-            throw new IllegalArgumentException();
-        
-        this.delegate = delegate;
-        
-    }
+    if (delegate == null) throw new IllegalArgumentException();
 
-    public void add(E e) {
-        delegate.add(e);
-    }
+    this.delegate = delegate;
+  }
 
-    public int size() {
-        return delegate.size();
-    }
+  public void add(E e) {
+    delegate.add(e);
+  }
 
-    public boolean isEmpty() {
-        return delegate.isEmpty();
-    }
+  public int size() {
+    return delegate.size();
+  }
 
-    public boolean isOpen() {
-        return delegate.isOpen();
-    }
+  public boolean isEmpty() {
+    return delegate.isEmpty();
+  }
 
-    public void close() {
-        delegate.close();
-    }
+  public boolean isOpen() {
+    return delegate.isOpen();
+  }
 
-    public void abort(Throwable cause) {
-        delegate.abort(cause);
-    }
+  public void close() {
+    delegate.close();
+  }
 
-    public void reset() {
-        delegate.reset();
-    }
+  public void abort(Throwable cause) {
+    delegate.abort(cause);
+  }
 
-    public Future getFuture() {
-        return delegate.getFuture();
-    }
+  public void reset() {
+    delegate.reset();
+  }
 
-    public IAsynchronousIterator<E> iterator() {
-        return delegate.iterator();
-    }
+  public Future getFuture() {
+    return delegate.getFuture();
+  }
 
-    public long flush() {
-        return delegate.flush();
-    }
+  public IAsynchronousIterator<E> iterator() {
+    return delegate.iterator();
+  }
 
-    public void setFuture(Future future) {
-        delegate.setFuture(future);
-    }
+  public long flush() {
+    return delegate.flush();
+  }
 
+  public void setFuture(Future future) {
+    delegate.setFuture(future);
+  }
 }

@@ -24,9 +24,7 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
@@ -37,104 +35,81 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * An executable list of query optimizers.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class ASTOptimizerList extends LinkedList<IASTOptimizer> implements
-        IASTOptimizer {
-    
-    private static final Logger log = Logger.getLogger(ASTOptimizerList.class);
+public class ASTOptimizerList extends LinkedList<IASTOptimizer> implements IASTOptimizer {
 
-    /**
-     * True iff the {@link #log} level is INFO or less.
-     */
-    final static private boolean INFO = log.isInfoEnabled();
+  private static final Logger log = Logger.getLogger(ASTOptimizerList.class);
 
-    /**
-     * True iff the {@link #log} level is DEBUG or less.
-     */
-    final static private boolean DEBUG = log.isDebugEnabled();
+  /** True iff the {@link #log} level is INFO or less. */
+  private static final boolean INFO = log.isInfoEnabled();
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** True iff the {@link #log} level is DEBUG or less. */
+  private static final boolean DEBUG = log.isDebugEnabled();
 
-    public ASTOptimizerList(final Collection<IASTOptimizer> c) {
+  /** */
+  private static final long serialVersionUID = 1L;
 
-        super(c);
-        
+  public ASTOptimizerList(final Collection<IASTOptimizer> c) {
+
+    super(c);
+  }
+
+  public ASTOptimizerList(final IASTOptimizer... optimizers) {
+
+    this(Arrays.asList(optimizers));
+  }
+
+  @Override
+  public boolean add(final IASTOptimizer opt) {
+
+    if (opt == null) throw new IllegalArgumentException();
+
+    if (opt == this) throw new IllegalArgumentException();
+
+    return super.add(opt);
+  }
+
+  /**
+   * Run all the optimizers in the list.
+   *
+   * <p>Note: This makes a deep copy of the AST before applying destructive modifications.
+   */
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+
+    final StaticAnalysisStats saStats = context.getStaticAnalysisStats();
+
+    final long startLoop = System.nanoTime();
+
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
+
+    if (DEBUG) log.debug("Original AST:\n" + queryNode);
+
+    // Avoid side-effects on the original AST!
+    QueryNodeWithBindingSet tmp =
+        new QueryNodeWithBindingSet((IQueryNode) BOpUtility.deepCopy((BOp) queryNode), bindingSets);
+
+    for (IASTOptimizer opt : this) {
+
+      final long startOpt = System.nanoTime();
+
+      if (INFO) log.info("Applying: " + opt);
+
+      tmp = opt.optimize(context, tmp);
+
+      if (queryNode == null) throw new AssertionError("Optimized discarded query: " + opt);
+
+      if (DEBUG) log.debug("Rewritten AST:\n" + tmp.getQueryNode());
+
+      saStats.registerOptimizerCall(opt.getClass().getSimpleName(), System.nanoTime() - startOpt);
     }
 
-    public ASTOptimizerList(final IASTOptimizer... optimizers) {
+    saStats.registerOptimizerLoopCall(System.nanoTime() - startLoop);
 
-        this(Arrays.asList(optimizers));
-        
-    }
-    
-    @Override
-    public boolean add(final IASTOptimizer opt) {
-        
-        if(opt == null)
-            throw new IllegalArgumentException();
-        
-        if(opt == this)
-            throw new IllegalArgumentException();
-        
-        return super.add(opt);
-        
-    }
-
-    /**
-     * Run all the optimizers in the list.
-     * <p>
-     * Note: This makes a deep copy of the AST before applying destructive
-     * modifications.
-     */
-    @Override
-    public QueryNodeWithBindingSet optimize(
-        final AST2BOpContext context, final QueryNodeWithBindingSet input) {
-
-        final StaticAnalysisStats saStats = context.getStaticAnalysisStats();
-        
-        final long startLoop = System.nanoTime();
-
-        final IQueryNode queryNode = input.getQueryNode();
-        final IBindingSet[] bindingSets = input.getBindingSets();    
-
-        if (DEBUG)
-            log.debug("Original AST:\n" + queryNode);
-
-        // Avoid side-effects on the original AST!
-        QueryNodeWithBindingSet tmp = 
-           new QueryNodeWithBindingSet(
-              (IQueryNode) BOpUtility.deepCopy((BOp) queryNode), bindingSets);
-        
-        for (IASTOptimizer opt : this) {
-           
-            final long startOpt = System.nanoTime();
-
-            if (INFO)
-                log.info("Applying: " + opt);
-
-            tmp = opt.optimize(context, tmp);
-            
-            if (queryNode == null)
-                throw new AssertionError("Optimized discarded query: " + opt);
-
-            if (DEBUG)
-                log.debug("Rewritten AST:\n" + tmp.getQueryNode());
-
-            saStats.registerOptimizerCall(
-               opt.getClass().getSimpleName(), 
-               System.nanoTime() - startOpt);
-      
-        }
-
-        saStats.registerOptimizerLoopCall(
-           System.nanoTime() - startLoop);
-
-        return tmp;
-
-    }
+    return tmp;
+  }
 }

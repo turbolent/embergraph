@@ -34,33 +34,31 @@ import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
 /**
  * Mock object.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class MockJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 
-    protected MockJoinNexus(final IJoinNexusFactory joinNexusFactory,
-            final IIndexManager indexManager) {
-     
-        super(joinNexusFactory, indexManager);
-        
-    }
+  protected MockJoinNexus(
+      final IJoinNexusFactory joinNexusFactory, final IIndexManager indexManager) {
 
-    public IConstant fakeBinding(IPredicate predicate, Var var) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    super(joinNexusFactory, indexManager);
+  }
 
-    public ISortKeyBuilder<IBindingSet> newBindingSetSortKeyBuilder(IRule rule) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  public IConstant fakeBinding(IPredicate predicate, Var var) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    protected ISortKeyBuilder<?> newSortKeyBuilder(IPredicate<?> head) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+  public ISortKeyBuilder<IBindingSet> newBindingSetSortKeyBuilder(IRule rule) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected ISortKeyBuilder<?> newSortKeyBuilder(IPredicate<?> head) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

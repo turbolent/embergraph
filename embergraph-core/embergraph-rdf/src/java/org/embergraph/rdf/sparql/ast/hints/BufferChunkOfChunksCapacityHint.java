@@ -28,47 +28,49 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * The maximum #of chunks that can be buffered before an the producer would
- * block (default {@value BufferAnnotations#DEFAULT_CHUNK_OF_CHUNKS_CAPACITY}).
- * Note that partial chunks may be combined into full chunks whose nominal
- * capacity is specified by {@link BufferAnnotations#CHUNK_CAPACITY}.
- * 
+ * The maximum #of chunks that can be buffered before an the producer would block (default {@value
+ * BufferAnnotations#DEFAULT_CHUNK_OF_CHUNKS_CAPACITY}). Note that partial chunks may be combined
+ * into full chunks whose nominal capacity is specified by {@link BufferAnnotations#CHUNK_CAPACITY}.
+ *
  * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
  */
 final class BufferChunkOfChunksCapacityHint extends AbstractIntQueryHint {
 
-    protected BufferChunkOfChunksCapacityHint() {
-        super(BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY,
-                BufferAnnotations.DEFAULT_CHUNK_OF_CHUNKS_CAPACITY);
+  protected BufferChunkOfChunksCapacityHint() {
+    super(
+        BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY,
+        BufferAnnotations.DEFAULT_CHUNK_OF_CHUNKS_CAPACITY);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    if (op instanceof IQueryNode) {
+
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+
+      _setQueryHint(context, scope, op, getName(), value);
     }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Integer value) {
+    //        if (QueryHintScope.Query.equals(scope)) {
+    //
+    //            /*
+    //             * Also stuff the query hint on the global context for things which
+    //             * look there.
+    //             */
+    //
+    //            conditionalSetGlobalProperty(context,
+    //                    BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY, value);
+    //
+    //        }
 
-        if (op instanceof IQueryNode) {
-
-            /*
-             * Note: This is set on the queryHint Properties object and then
-             * transferred to the pipeline operator when it is generated.
-             */
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-        }
-
-//        if (QueryHintScope.Query.equals(scope)) {
-//            
-//            /*
-//             * Also stuff the query hint on the global context for things which
-//             * look there.
-//             */
-//
-//            conditionalSetGlobalProperty(context,
-//                    BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY, value);
-//
-//        }
-
-    }
-
+  }
 }

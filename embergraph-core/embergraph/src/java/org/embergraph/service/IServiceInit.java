@@ -24,17 +24,12 @@ import java.util.concurrent.Callable;
 
 /**
  * Interface for post-constructor initialization.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- * @param <T>
- *            The generic type of the object to which the initialization task
- *            will be evaluated.
+ * @param <T> The generic type of the object to which the initialization task will be evaluated.
  */
 public interface IServiceInit<T> {
 
-    /**
-     * Return a task that must be used to initialize the service.
-     */
-    Callable<T> init();
+  /** Return a task that must be used to initialize the service. */
+  Callable<T> init();
 }

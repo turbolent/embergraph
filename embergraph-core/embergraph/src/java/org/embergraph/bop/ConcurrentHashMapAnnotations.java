@@ -25,21 +25,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Annotations for an operator using an internal concurrent hash map.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ConcurrentHashMapAnnotations extends HashMapAnnotations {
 
-    /**
-     * The concurrency level of the {@link ConcurrentHashMap} used to impose the
-     * distinct constraint.
-     * 
-     * @see #DEFAULT_CONCURRENCY_LEVEL
-     */
-    String CONCURRENCY_LEVEL = ConcurrentHashMapAnnotations.class.getName()
-            + ".concurrencyLevel";
+  /**
+   * The concurrency level of the {@link ConcurrentHashMap} used to impose the distinct constraint.
+   *
+   * @see #DEFAULT_CONCURRENCY_LEVEL
+   */
+  String CONCURRENCY_LEVEL = ConcurrentHashMapAnnotations.class.getName() + ".concurrencyLevel";
 
-    int DEFAULT_CONCURRENCY_LEVEL = 16;
-
+  int DEFAULT_CONCURRENCY_LEVEL = 16;
 }

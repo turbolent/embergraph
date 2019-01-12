@@ -22,23 +22,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.search;
 
 /**
- * Interface for the value associated with an entry in the full text search
- * index.
- * 
+ * Interface for the value associated with an entry in the full text search index.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITermDocVal {
 
-//    /**
-//     * The term-frequency count for the token and document in the associated
-//     * entry of the full text search index.
-//     */
-//    int termFreq();
+  //    /**
+  //     * The term-frequency count for the token and document in the associated
+  //     * entry of the full text search index.
+  //     */
+  //    int termFreq();
 
-//    /**
-//     * The normalized local term weight for the token and document in the
-//     * associated entry of the full text search index.
-//     */
-//    double getLocalTermWeight();
+  //    /**
+  //     * The normalized local term weight for the token and document in the
+  //     * associated entry of the full text search index.
+  //     */
+  //    double getLocalTermWeight();
 }

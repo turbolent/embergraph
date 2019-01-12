@@ -52,18 +52,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.rdf.properties;
 
 /**
- * A {@link PropertiesParserFactory} returns {@link PropertiesParser}s for a
- * specific {@link PropertiesFormat}.
+ * A {@link PropertiesParserFactory} returns {@link PropertiesParser}s for a specific {@link
+ * PropertiesFormat}.
  */
 public interface PropertiesParserFactory {
 
-    /**
-     * Returns the format for this factory.
-     */
-    public PropertiesFormat getFormat();
+  /** Returns the format for this factory. */
+  public PropertiesFormat getFormat();
 
-    /**
-     * Returns a {@link PropertiesParser} instance.
-     */
-    public PropertiesParser getParser();
+  /** Returns a {@link PropertiesParser} instance. */
+  public PropertiesParser getParser();
 }

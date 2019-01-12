@@ -30,7 +30,6 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-
 import org.embergraph.btree.AbstractBTreeTestCase;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
@@ -38,749 +37,674 @@ import org.embergraph.btree.keys.KV;
 import org.embergraph.util.InnerCause;
 
 /**
- * Test suite for
- * {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
- * 
+ * Test suite for {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- * @see <a href="http://trac.bigdata.com/ticket/1172"> Online backup for Journal
- *      </a>
+ * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
  */
 public class TestSnapshotJournal extends ProxyTestCase<Journal> {
 
-    /**
-     * 
-     */
-    public TestSnapshotJournal() {
+  /** */
+  public TestSnapshotJournal() {}
+
+  /** @param name */
+  public TestSnapshotJournal(String name) {
+    super(name);
+  }
+
+  private static class MySnapshotFactory implements ISnapshotFactory {
+
+    private final String testName;
+    private final boolean compressed;
+
+    public MySnapshotFactory(final String testName, final boolean compressed) {
+      this.testName = testName;
+      this.compressed = compressed;
     }
 
-    /**
-     * @param name
-     */
-    public TestSnapshotJournal(String name) {
-        super(name);
+    @Override
+    public File getSnapshotFile(final IRootBlockView rbv) throws IOException {
+      return File.createTempFile(
+          testName + "-snapshot-" + rbv.getCommitCounter(), getCompress() ? "jnl.gz" : ".jnl");
     }
 
-    private static class MySnapshotFactory implements ISnapshotFactory {
+    @Override
+    public boolean getCompress() {
+      return compressed;
+    }
+  };
 
-      private final String testName;
-      private final boolean compressed;
+  /**
+   * Open a journal snapshot.
+   *
+   * <p>Note: If the snapshot was compressed, then it was decompressed in order to open it. In this
+   * case the caller is responsible for deleting the backing file. Typically just call {@link
+   * Journal#destroy()}.
+   *
+   * @param snapshotResult
+   * @return The open snapshot.
+   * @throws IOException
+   */
+  private Journal openSnapshot(final ISnapshotResult snapshotResult) throws IOException {
 
-      public MySnapshotFactory(final String testName, final boolean compressed) {
-         this.testName = testName;
-         this.compressed = compressed;
-      }
-       
-      @Override
-      public File getSnapshotFile(final IRootBlockView rbv) throws IOException {
-         return File.createTempFile(
-               testName + "-snapshot-" + rbv.getCommitCounter(),
-               getCompress() ? "jnl.gz" : ".jnl");
-      }
+    final File snapshotFile = snapshotResult.getFile();
 
-      @Override
-      public boolean getCompress() {
-         return compressed;
-      }
-       
-    };
+    final boolean compressed = snapshotResult.getCompressed();
 
-    /**
-     * Open a journal snapshot.
-     * <p>
-     * Note: If the snapshot was compressed, then it was decompressed in order to
-     * open it. In this case the caller is responsible for deleting the backing
-     * file. Typically just call {@link Journal#destroy()}.
-     * 
-     * @param snapshotResult
-     * 
-     * @return The open snapshot.
-     * @throws IOException
-     */
-    private Journal openSnapshot(final ISnapshotResult snapshotResult)
-          throws IOException {
+    final File journalFile;
 
-       final File snapshotFile = snapshotResult.getFile();
+    if (compressed) {
 
-       final boolean compressed = snapshotResult.getCompressed();
+      /*
+       * Decompress the snapshot.
+       */
 
-       final File journalFile;
+      // source is the snapshot.
+      final File in = snapshotFile;
 
-       if (compressed) {
+      // decompress onto a temporary file.
+      final File out =
+          File.createTempFile(snapshotFile.getName() + "-decompressed", Journal.Options.JNL);
 
-          /*
-           * Decompress the snapshot.
-           */
+      if (log.isInfoEnabled()) log.info("Decompressing " + in + " to " + out);
 
-          // source is the snapshot.
-          final File in = snapshotFile;
+      // Decompress the snapshot.
+      SnapshotTask.decompress(in, out);
 
-          // decompress onto a temporary file.
-          final File out = File.createTempFile(snapshotFile.getName()
-                + "-decompressed", Journal.Options.JNL);
+      journalFile = out;
 
-          if (log.isInfoEnabled())
-             log.info("Decompressing " + in + " to " + out);
+    } else {
 
-          // Decompress the snapshot.
-          SnapshotTask.decompress(in, out);
-
-          journalFile = out;
-
-       } else {
-
-          journalFile = snapshotFile;
-
-       }
-
-       // Open the journal.
-       final Properties properties = getProperties();
-
-       properties.setProperty(Journal.Options.FILE, journalFile.toString());
-
-       properties.setProperty(Journal.Options.CREATE_TEMP_FILE, "false");
-
-       final Journal tmp = new Journal(properties);
-
-       return tmp;
-        
+      journalFile = snapshotFile;
     }
 
-    /**
-     * Verifies exception if there are no commits on the journal (the
-     * lastCommitTime will be zero which does not identify a valid commit
-     * point).
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-   public void test_emptyJournal() throws IOException, InterruptedException,
-         ExecutionException {
+    // Open the journal.
+    final Properties properties = getProperties();
 
-      final File out = File.createTempFile(getName(), Options.JNL);
+    properties.setProperty(Journal.Options.FILE, journalFile.toString());
+
+    properties.setProperty(Journal.Options.CREATE_TEMP_FILE, "false");
+
+    final Journal tmp = new Journal(properties);
+
+    return tmp;
+  }
+
+  /**
+   * Verifies exception if there are no commits on the journal (the lastCommitTime will be zero
+   * which does not identify a valid commit point).
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_emptyJournal() throws IOException, InterruptedException, ExecutionException {
+
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
 
       try {
 
-         final Journal src = getStore(getProperties());
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
 
-         try {
+        final ISnapshotFactory snapshotFactory =
+            new MySnapshotFactory(getName(), false /* compressed */);
 
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
-            }
+        // create and submit task.
+        final Future<ISnapshotResult> f = src.snapshot(snapshotFactory);
 
-            final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                  getName(), false/* compressed */);
+        try {
 
-            // create and submit task.
-            final Future<ISnapshotResult> f = src.snapshot(snapshotFactory);
+          f.get();
 
-            try {
+          fail("Expecting nested " + IllegalStateException.class.getName());
 
-               f.get();
+        } catch (Exception ex) {
 
-               fail("Expecting nested " + IllegalStateException.class.getName());
+          // snapshot of empty journal is not supported.
+          if (!InnerCause.isInnerCause(ex, IllegalStateException.class)) {
 
-            } catch (Exception ex) {
-
-               // snapshot of empty journal is not supported.
-               if (!InnerCause.isInnerCause(ex, IllegalStateException.class)) {
-
-                  fail("Expecting nested "
-                        + IllegalStateException.class.getName(), ex);
-
-               }
-
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
+            fail("Expecting nested " + IllegalStateException.class.getName(), ex);
+          }
+        }
 
       } finally {
 
-         out.delete();
-
+        src.destroy();
       }
 
-   }
-    
-    /**
-     * Verifies exception if there are no commits on the journal (the
-     * lastCommitTime will be zero which does not identify a valid commit
-     * point).
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-   public void test_nonEmptyJournal() throws IOException, InterruptedException,
-         ExecutionException {
+    } finally {
 
-      final File out = File.createTempFile(getName(), Options.JNL);
-
-      try {
-
-         final Journal src = getStore(getProperties());
-
-         try {
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
-            }
-
-            src.write(getRandomData(128));
-            src.commit();
-            try {
-               final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                     getName(), false/* compressed */);
-               // create and submit snapshot task.
-               final Future<ISnapshotResult> f = src
-                     .snapshot(snapshotFactory);
-               // obtain snapshot result.
-               final ISnapshotResult snapshotResult = f.get();
-               final File snapshotFile = snapshotResult.getFile();
-               try {
-                  final Journal tmp = openSnapshot(snapshotResult);
-                  // Verify same root block as source journal.
-                  assertEquals(src.getRootBlockView(), tmp.getRootBlockView());
-                  // destroy new journal if succeeded (clean up).
-                  tmp.destroy();
-               } finally {
-                  if (snapshotFile.exists()) {
-                     snapshotFile.delete();
-                  }
-               }
-            } catch (IllegalArgumentException ex) {
-               // log expected exception.
-               log.info("Ignoring expected exception: " + ex);
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
-     
-      } finally {
-
-         out.delete();
-
-      }
-
-   }
-    
-   /**
-     * Test of a journal on which a single index has been register (and the
-     * journal committed) but no data was written onto the index.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_journal_oneIndexNoData() throws IOException,
-            InterruptedException, ExecutionException {
-
-      final File out = File.createTempFile(getName(), Options.JNL);
-
-      try {
-
-         final Journal src = getStore(getProperties());
-
-         try {
-
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
-            }
-
-            // register an index and commit the journal.
-            final String NAME = "testIndex";
-            src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
-            src.commit();
-
-            final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                  getName(), false/* compressed */);
-
-            final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
-
-            final Journal newJournal = openSnapshot(snapshotResult);
-
-            // verify state
-            try {
-
-               // verify index exists.
-               assertNotNull(newJournal.getIndex(NAME));
-
-               // verify data is the same.
-               AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME),
-                     newJournal.getIndex(NAME));
-
-            } finally {
-
-               newJournal.destroy();
-
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
-
-      } finally {
-
-         out.delete();
-
-      }
-
+      out.delete();
     }
+  }
 
-    /**
-     * Test with a journal on which a single index has been registered with
-     * random data on the index.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_journal_oneIndexRandomData() throws IOException,
-            InterruptedException, ExecutionException {
+  /**
+   * Verifies exception if there are no commits on the journal (the lastCommitTime will be zero
+   * which does not identify a valid commit point).
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_nonEmptyJournal() throws IOException, InterruptedException, ExecutionException {
 
-      final File out = File.createTempFile(getName(), Options.JNL);
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
 
       try {
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
 
-         final Journal src = getStore(getProperties());
-
-         try {
-
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
+        src.write(getRandomData(128));
+        src.commit();
+        try {
+          final ISnapshotFactory snapshotFactory =
+              new MySnapshotFactory(getName(), false /* compressed */);
+          // create and submit snapshot task.
+          final Future<ISnapshotResult> f = src.snapshot(snapshotFactory);
+          // obtain snapshot result.
+          final ISnapshotResult snapshotResult = f.get();
+          final File snapshotFile = snapshotResult.getFile();
+          try {
+            final Journal tmp = openSnapshot(snapshotResult);
+            // Verify same root block as source journal.
+            assertEquals(src.getRootBlockView(), tmp.getRootBlockView());
+            // destroy new journal if succeeded (clean up).
+            tmp.destroy();
+          } finally {
+            if (snapshotFile.exists()) {
+              snapshotFile.delete();
             }
-
-            // register an index and commit the journal.
-            final String NAME = "testIndex";
-            src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
-            {
-               BTree ndx = src.getIndex(NAME);
-               KV[] a = AbstractBTreeTestCase
-                     .getRandomKeyValues(1000/* ntuples */);
-               for (KV kv : a) {
-                  ndx.insert(kv.key, kv.val);
-               }
-            }
-            src.commit();
-
-            final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                  getName(), false/* compressed */);
-
-            final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
-
-            final Journal newJournal = openSnapshot(snapshotResult);
-
-            // verify state
-            try {
-
-               // verify index exists.
-               assertNotNull(newJournal.getIndex(NAME));
-
-               // verify data is the same.
-               AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME),
-                     newJournal.getIndex(NAME));
-
-            } finally {
-               newJournal.destroy();
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
+          }
+        } catch (IllegalArgumentException ex) {
+          // log expected exception.
+          log.info("Ignoring expected exception: " + ex);
+        }
 
       } finally {
 
-         out.delete();
-
+        src.destroy();
       }
 
+    } finally {
+
+      out.delete();
     }
+  }
 
-    /**
-     * Test with a journal on which a single index has been registered with
-     * random data on the index.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_journal_oneIndexRandomData_compressedSnapshot() throws IOException,
-            InterruptedException, ExecutionException {
+  /**
+   * Test of a journal on which a single index has been register (and the journal committed) but no
+   * data was written onto the index.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_journal_oneIndexNoData()
+      throws IOException, InterruptedException, ExecutionException {
 
-      final File out = File.createTempFile(getName(), Options.JNL);
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
 
       try {
 
-         final Journal src = getStore(getProperties());
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
 
-         try {
+        // register an index and commit the journal.
+        final String NAME = "testIndex";
+        src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
+        src.commit();
 
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
-            }
+        final ISnapshotFactory snapshotFactory =
+            new MySnapshotFactory(getName(), false /* compressed */);
 
-            // register an index and commit the journal.
-            final String NAME = "testIndex";
-            src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
-            {
-               BTree ndx = src.getIndex(NAME);
-               KV[] a = AbstractBTreeTestCase
-                     .getRandomKeyValues(1000/* ntuples */);
-               for (KV kv : a) {
-                  ndx.insert(kv.key, kv.val);
-               }
-            }
-            src.commit();
+        final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
 
-            final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                  getName(), true/* compressed */);
+        final Journal newJournal = openSnapshot(snapshotResult);
 
-            final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
+        // verify state
+        try {
 
-            final Journal newJournal = openSnapshot(snapshotResult);
+          // verify index exists.
+          assertNotNull(newJournal.getIndex(NAME));
 
-            // verify state
-            try {
+          // verify data is the same.
+          AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME), newJournal.getIndex(NAME));
 
-               // verify index exists.
-               assertNotNull(newJournal.getIndex(NAME));
+        } finally {
 
-               // verify data is the same.
-               AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME),
-                     newJournal.getIndex(NAME));
-
-            } finally {
-               newJournal.destroy();
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
+          newJournal.destroy();
+        }
 
       } finally {
 
-         out.delete();
-
+        src.destroy();
       }
 
+    } finally {
+
+      out.delete();
     }
+  }
 
-    /**
-     * Test with a journal on which many indices have been registered and
-     * populated with random data.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_journal_manyIndicesRandomData() throws IOException,
-            InterruptedException, ExecutionException {
+  /**
+   * Test with a journal on which a single index has been registered with random data on the index.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_journal_oneIndexRandomData()
+      throws IOException, InterruptedException, ExecutionException {
 
-      final File out = File.createTempFile(getName(), Options.JNL);
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
 
       try {
 
-         final Journal src = getStore(getProperties());
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
 
-         try {
+        // register an index and commit the journal.
+        final String NAME = "testIndex";
+        src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
+        {
+          BTree ndx = src.getIndex(NAME);
+          KV[] a = AbstractBTreeTestCase.getRandomKeyValues(1000 /* ntuples */);
+          for (KV kv : a) {
+            ndx.insert(kv.key, kv.val);
+          }
+        }
+        src.commit();
 
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
+        final ISnapshotFactory snapshotFactory =
+            new MySnapshotFactory(getName(), false /* compressed */);
+
+        final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
+
+        final Journal newJournal = openSnapshot(snapshotResult);
+
+        // verify state
+        try {
+
+          // verify index exists.
+          assertNotNull(newJournal.getIndex(NAME));
+
+          // verify data is the same.
+          AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME), newJournal.getIndex(NAME));
+
+        } finally {
+          newJournal.destroy();
+        }
+
+      } finally {
+
+        src.destroy();
+      }
+
+    } finally {
+
+      out.delete();
+    }
+  }
+
+  /**
+   * Test with a journal on which a single index has been registered with random data on the index.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_journal_oneIndexRandomData_compressedSnapshot()
+      throws IOException, InterruptedException, ExecutionException {
+
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
+
+      try {
+
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
+
+        // register an index and commit the journal.
+        final String NAME = "testIndex";
+        src.registerIndex(new IndexMetadata(NAME, UUID.randomUUID()));
+        {
+          BTree ndx = src.getIndex(NAME);
+          KV[] a = AbstractBTreeTestCase.getRandomKeyValues(1000 /* ntuples */);
+          for (KV kv : a) {
+            ndx.insert(kv.key, kv.val);
+          }
+        }
+        src.commit();
+
+        final ISnapshotFactory snapshotFactory =
+            new MySnapshotFactory(getName(), true /* compressed */);
+
+        final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
+
+        final Journal newJournal = openSnapshot(snapshotResult);
+
+        // verify state
+        try {
+
+          // verify index exists.
+          assertNotNull(newJournal.getIndex(NAME));
+
+          // verify data is the same.
+          AbstractBTreeTestCase.assertSameBTree(src.getIndex(NAME), newJournal.getIndex(NAME));
+
+        } finally {
+          newJournal.destroy();
+        }
+
+      } finally {
+
+        src.destroy();
+      }
+
+    } finally {
+
+      out.delete();
+    }
+  }
+
+  /**
+   * Test with a journal on which many indices have been registered and populated with random data.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_journal_manyIndicesRandomData()
+      throws IOException, InterruptedException, ExecutionException {
+
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
+
+      try {
+
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
+
+        final String PREFIX = "testIndex#";
+        final int NUM_INDICES = 20;
+
+        for (int i = 0; i < NUM_INDICES; i++) {
+
+          // register an index
+          final String name = PREFIX + i;
+
+          src.registerIndex(new IndexMetadata(name, UUID.randomUUID()));
+          {
+
+            // lookup the index.
+            final BTree ndx = src.getIndex(name);
+
+            // #of tuples to write.
+            final int ntuples = r.nextInt(10000);
+
+            // generate random data.
+            final KV[] a = AbstractBTreeTestCase.getRandomKeyValues(ntuples);
+
+            // write tuples (in random order)
+            for (KV kv : a) {
+
+              ndx.insert(kv.key, kv.val);
+
+              if (r.nextInt(100) < 10) {
+
+                // randomly increment the counter (10% of the time).
+                ndx.getCounter().incrementAndGet();
+              }
             }
+          }
+        }
 
-            final String PREFIX = "testIndex#";
-            final int NUM_INDICES = 20;
+        // commit the journal (!)
+        src.commit();
+
+        {
+          final ISnapshotFactory snapshotFactory =
+              new MySnapshotFactory(getName(), false /* compressed */);
+
+          final ISnapshotResult snapshotResult = src.snapshot(snapshotFactory).get();
+
+          final Journal newJournal = openSnapshot(snapshotResult);
+
+          // verify state
+          try {
 
             for (int i = 0; i < NUM_INDICES; i++) {
 
-               // register an index
-               final String name = PREFIX + i;
+              final String name = PREFIX + i;
 
-               src.registerIndex(new IndexMetadata(name, UUID.randomUUID()));
-               {
+              // verify index exists.
+              assertNotNull(newJournal.getIndex(name));
 
-                  // lookup the index.
-                  final BTree ndx = src.getIndex(name);
+              // verify data is the same.
+              AbstractBTreeTestCase.assertSameBTree(src.getIndex(name), newJournal.getIndex(name));
 
-                  // #of tuples to write.
-                  final int ntuples = r.nextInt(10000);
-
-                  // generate random data.
-                  final KV[] a = AbstractBTreeTestCase
-                        .getRandomKeyValues(ntuples);
-
-                  // write tuples (in random order)
-                  for (KV kv : a) {
-
-                     ndx.insert(kv.key, kv.val);
-
-                     if (r.nextInt(100) < 10) {
-
-                        // randomly increment the counter (10% of the time).
-                        ndx.getCounter().incrementAndGet();
-
-                     }
-
-                  }
-
-               }
-
+              // and verify the counter was correctly propagated.
+              assertEquals(
+                  src.getIndex(name).getCounter().get(),
+                  newJournal.getIndex(name).getCounter().get());
             }
 
-            // commit the journal (!)
-            src.commit();
+          } finally {
 
-            {
-
-               final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                     getName(), false/* compressed */);
-
-               final ISnapshotResult snapshotResult = src.snapshot(
-                     snapshotFactory).get();
-
-               final Journal newJournal = openSnapshot(snapshotResult);
-
-               // verify state
-               try {
-
-                  for (int i = 0; i < NUM_INDICES; i++) {
-
-                     final String name = PREFIX + i;
-
-                     // verify index exists.
-                     assertNotNull(newJournal.getIndex(name));
-
-                     // verify data is the same.
-                     AbstractBTreeTestCase.assertSameBTree(src.getIndex(name),
-                           newJournal.getIndex(name));
-
-                     // and verify the counter was correctly propagated.
-                     assertEquals(src.getIndex(name).getCounter().get(),
-                           newJournal.getIndex(name).getCounter().get());
-
-                  }
-
-               } finally {
-
-                  newJournal.destroy();
-
-               }
-
-            }
-
-         } finally {
-
-            src.destroy();
-
-         }
+            newJournal.destroy();
+          }
+        }
 
       } finally {
 
-         out.delete();
-
+        src.destroy();
       }
 
-   }
+    } finally {
 
-    /**
-     * Test with a journal on which many indices have been registered and
-     * populated with random data.
-     * 
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
-    public void test_journal_manyIndicesRandomData_concurrentWriter() throws IOException,
-            InterruptedException, ExecutionException {
+      out.delete();
+    }
+  }
 
-      final File out = File.createTempFile(getName(), Options.JNL);
+  /**
+   * Test with a journal on which many indices have been registered and populated with random data.
+   *
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_journal_manyIndicesRandomData_concurrentWriter()
+      throws IOException, InterruptedException, ExecutionException {
+
+    final File out = File.createTempFile(getName(), Options.JNL);
+
+    try {
+
+      final Journal src = getStore(getProperties());
 
       try {
 
-         final Journal src = getStore(getProperties());
+        if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
+          // Feature is not supported.
+          return;
+        }
 
-         try {
+        final String PREFIX = "testIndex#";
+        final int NUM_INDICES = 20;
 
-            if (!(src.getBufferStrategy() instanceof IHABufferStrategy)) {
-               // Feature is not supported.
-               return;
+        for (int i = 0; i < NUM_INDICES; i++) {
+
+          // register an index
+          final String name = PREFIX + i;
+
+          src.registerIndex(new IndexMetadata(name, UUID.randomUUID()));
+          {
+
+            // lookup the index.
+            final BTree ndx = src.getIndex(name);
+
+            // #of tuples to write.
+            final int ntuples = r.nextInt(10000);
+
+            // generate random data.
+            final KV[] a = AbstractBTreeTestCase.getRandomKeyValues(ntuples);
+
+            // write tuples (in random order)
+            for (KV kv : a) {
+
+              ndx.insert(kv.key, kv.val);
+
+              if (r.nextInt(100) < 10) {
+
+                // randomly increment the counter (10% of the time).
+                ndx.getCounter().incrementAndGet();
+              }
             }
+          }
+        }
 
-            final String PREFIX = "testIndex#";
-            final int NUM_INDICES = 20;
+        // commit the journal (!)
+        src.commit();
 
-            for (int i = 0; i < NUM_INDICES; i++) {
+        /*
+         * Submit task for concurrent writes. Note that this task does not
+         * do a commit, but it does write modifications onto the live
+         * indices. Those changes should not be visible in the snapshot.
+         * Since the task does not do a commit, the snapshot should have
+         * exactly the same data that was in the journal as of the previous
+         * commit point. That commit point is restored (below) when we
+         * discard the write set.
+         */
+        final Future<Void> f =
+            src.getExecutorService()
+                .submit(
+                    new Callable<Void>() {
 
-               // register an index
-               final String name = PREFIX + i;
+                      @Override
+                      public Void call() throws Exception {
 
-               src.registerIndex(new IndexMetadata(name, UUID.randomUUID()));
-               {
+                        for (int i = 0; i < NUM_INDICES; i++) {
 
-                  // lookup the index.
-                  final BTree ndx = src.getIndex(name);
+                          final String name = PREFIX + i;
 
-                  // #of tuples to write.
-                  final int ntuples = r.nextInt(10000);
+                          // lookup the index.
+                          final BTree ndx = src.getIndex(name);
 
-                  // generate random data.
-                  final KV[] a = AbstractBTreeTestCase
-                        .getRandomKeyValues(ntuples);
+                          // #of tuples to write.
+                          final int ntuples = r.nextInt(10000);
 
-                  // write tuples (in random order)
-                  for (KV kv : a) {
+                          // generate random data.
+                          final KV[] a = AbstractBTreeTestCase.getRandomKeyValues(ntuples);
 
-                     ndx.insert(kv.key, kv.val);
+                          // write tuples (in random order)
+                          for (KV kv : a) {
 
-                     if (r.nextInt(100) < 10) {
+                            ndx.insert(kv.key, kv.val);
 
-                        // randomly increment the counter (10% of the time).
-                        ndx.getCounter().incrementAndGet();
+                            if (r.nextInt(100) < 10) {
 
-                     }
-
-                  }
-
-               }
-
-            }
-
-            // commit the journal (!)
-            src.commit();
-
-            /*
-             * Submit task for concurrent writes. Note that this task does not
-             * do a commit, but it does write modifications onto the live
-             * indices. Those changes should not be visible in the snapshot.
-             * Since the task does not do a commit, the snapshot should have
-             * exactly the same data that was in the journal as of the previous
-             * commit point. That commit point is restored (below) when we
-             * discard the write set.
-             */
-            final Future<Void> f = src.getExecutorService().submit(new Callable<Void>() {
-
-               @Override
-               public Void call() throws Exception {
-
-                  for (int i = 0; i < NUM_INDICES; i++) {
-
-                     final String name = PREFIX + i;
-
-                     // lookup the index.
-                     final BTree ndx = src.getIndex(name);
-
-                     // #of tuples to write.
-                     final int ntuples = r.nextInt(10000);
-
-                     // generate random data.
-                     final KV[] a = AbstractBTreeTestCase
-                           .getRandomKeyValues(ntuples);
-
-                     // write tuples (in random order)
-                     for (KV kv : a) {
-
-                        ndx.insert(kv.key, kv.val);
-
-                        if (r.nextInt(100) < 10) {
-
-                           // randomly increment the counter (10% of the time).
-                           ndx.getCounter().incrementAndGet();
-
+                              // randomly increment the counter (10% of the time).
+                              ndx.getCounter().incrementAndGet();
+                            }
+                          }
                         }
+                        // Done.
+                        return null;
+                      }
+                    });
 
-                     }
+        // Take a snapshot while the writer is running.
+        final ISnapshotResult snapshotResult;
+        try {
 
-                  }
-                  // Done.
-                  return null;
-               }});
+          final ISnapshotFactory snapshotFactory =
+              new MySnapshotFactory(getName(), false /* compressed */);
 
-            // Take a snapshot while the writer is running.
-            final ISnapshotResult snapshotResult;
-            try {
+          snapshotResult = src.snapshot(snapshotFactory).get();
 
-               final ISnapshotFactory snapshotFactory = new MySnapshotFactory(
-                     getName(), false/* compressed */);
+          // Await the success of the writer.
+          f.get();
 
-               snapshotResult = src.snapshot(snapshotFactory).get();
+          // Discard the write set.
+          src.abort();
 
-               // Await the success of the writer.
-               f.get();
+        } finally {
 
-               // Discard the write set.
-               src.abort();
+          f.cancel(true /* mayInterruptIfRunning */);
+        }
 
-            } finally {
-               
-               f.cancel(true/* mayInterruptIfRunning */);
-               
-            }
-            
-            // Verify the snapshot.
-            {
-             
-               final Journal newJournal = openSnapshot(snapshotResult);
+        // Verify the snapshot.
+        {
+          final Journal newJournal = openSnapshot(snapshotResult);
 
-               // verify state
-               try {
+          // verify state
+          try {
 
-                  for (int i = 0; i < NUM_INDICES; i++) {
+            for (int i = 0; i < NUM_INDICES; i++) {
 
-                     final String name = PREFIX + i;
+              final String name = PREFIX + i;
 
-                     // verify index exists.
-                     assertNotNull(newJournal.getIndex(name));
+              // verify index exists.
+              assertNotNull(newJournal.getIndex(name));
 
-                     // verify data is the same.
-                     AbstractBTreeTestCase.assertSameBTree(src.getIndex(name),
-                           newJournal.getIndex(name));
+              // verify data is the same.
+              AbstractBTreeTestCase.assertSameBTree(src.getIndex(name), newJournal.getIndex(name));
 
-                     // and verify the counter was correctly propagated.
-                     assertEquals(src.getIndex(name).getCounter().get(),
-                           newJournal.getIndex(name).getCounter().get());
-
-                  }
-
-               } finally {
-
-                  newJournal.destroy();
-
-               }
-
+              // and verify the counter was correctly propagated.
+              assertEquals(
+                  src.getIndex(name).getCounter().get(),
+                  newJournal.getIndex(name).getCounter().get());
             }
 
-         } finally {
+          } finally {
 
-            src.destroy();
-
-         }
+            newJournal.destroy();
+          }
+        }
 
       } finally {
 
-         out.delete();
-
+        src.destroy();
       }
 
-   }
+    } finally {
 
+      out.delete();
+    }
+  }
 }

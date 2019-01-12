@@ -33,112 +33,91 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 
 /**
- * A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock}
- * manages access to a single resource. However, a {@link NamedReadWriteLock}
- * manages access to the members of a set of named resources. This is more
- * efficient when the latency of the operation once the lock is acquired is
- * significant, e.g., an RMI call or a disk IO.
- * <p>
- * The locks are stored in a {@link WeakHashMap} so that they will be garbage
- * collected if there are no threads waiting in the queue for a given named
- * lock.
- * 
+ * A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock} manages access to a
+ * single resource. However, a {@link NamedReadWriteLock} manages access to the members of a set of
+ * named resources. This is more efficient when the latency of the operation once the lock is
+ * acquired is significant, e.g., an RMI call or a disk IO.
+ *
+ * <p>The locks are stored in a {@link WeakHashMap} so that they will be garbage collected if there
+ * are no threads waiting in the queue for a given named lock.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <T>
- *            The generic type for the "name". This MUST implement hashCode()
- *            and equals() since the instances of this type will serve as keys
- *            in a {@link Map}.
+ * @param <T> The generic type for the "name". This MUST implement hashCode() and equals() since the
+ *     instances of this type will serve as keys in a {@link Map}.
  */
 public class NamedReadWriteLock<T> {
 
-    final private Map<T, ReentrantReadWriteLock> locks = new WeakHashMap<T, ReentrantReadWriteLock>();
+  private final Map<T, ReentrantReadWriteLock> locks = new WeakHashMap<T, ReentrantReadWriteLock>();
 
-    /**
-     * Return the canonical instance of the lock for a named resource.
-     * 
-     * @param name
-     *            The name.
-     * 
-     * @return The canonical instance of the lock for that name.
-     */
-    protected ReentrantReadWriteLock lockFactory(T name) {
+  /**
+   * Return the canonical instance of the lock for a named resource.
+   *
+   * @param name The name.
+   * @return The canonical instance of the lock for that name.
+   */
+  protected ReentrantReadWriteLock lockFactory(T name) {
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    if (name == null) throw new IllegalArgumentException();
 
-        ReentrantReadWriteLock lock;
+    ReentrantReadWriteLock lock;
 
-        synchronized (locks) {
+    synchronized (locks) {
+      lock = locks.get(name);
 
-            lock = locks.get(name);
+      if (lock == null) {
 
-            if (lock == null) {
+        lock = new ReentrantReadWriteLock();
 
-                lock = new ReentrantReadWriteLock();
-
-                locks.put(name, lock);
-
-            }
-
-        }
-
-        return lock;
-        
-    }
-    
-    /**
-     * Block until the {@link ReadLock} for the named resource is available,
-     * then {@link Lock#lock()} the {@link Lock} and returns the {@link Lock}.
-     * 
-     * @param name
-     *            The name of the resource whose {@link Lock} is desired.
-     * 
-     * @return The {@link Lock}. It will have already been {@link Lock#lock()}ed.
-     */
-    public Lock acquireReadLock(T name) {
-
-        final Lock lock = lockFactory(name).readLock();
-
-        lock.lock();
-        
-        return lock;
-
+        locks.put(name, lock);
+      }
     }
 
-    public Lock acquireReadLock(T name, long timeout, TimeUnit unit)
-            throws InterruptedException, TimeoutException {
+    return lock;
+  }
 
-        final Lock lock = lockFactory(name).readLock();
+  /**
+   * Block until the {@link ReadLock} for the named resource is available, then {@link Lock#lock()}
+   * the {@link Lock} and returns the {@link Lock}.
+   *
+   * @param name The name of the resource whose {@link Lock} is desired.
+   * @return The {@link Lock}. It will have already been {@link Lock#lock()}ed.
+   */
+  public Lock acquireReadLock(T name) {
 
-        if(!lock.tryLock(timeout, unit))
-            throw new TimeoutException();
+    final Lock lock = lockFactory(name).readLock();
 
-        return lock;
+    lock.lock();
 
-    }
+    return lock;
+  }
 
+  public Lock acquireReadLock(T name, long timeout, TimeUnit unit)
+      throws InterruptedException, TimeoutException {
 
-    public Lock acquireWriteLock(T name) {
+    final Lock lock = lockFactory(name).readLock();
 
-        final Lock lock = lockFactory(name).writeLock();
+    if (!lock.tryLock(timeout, unit)) throw new TimeoutException();
 
-        lock.lock();
-        
-        return lock;
+    return lock;
+  }
 
-    }
+  public Lock acquireWriteLock(T name) {
 
-    public Lock acquireWriteLock(T name, long timeout, TimeUnit unit)
-            throws InterruptedException, TimeoutException {
+    final Lock lock = lockFactory(name).writeLock();
 
-        final Lock lock = lockFactory(name).writeLock();
+    lock.lock();
 
-        if(!lock.tryLock(timeout, unit))
-            throw new TimeoutException();
+    return lock;
+  }
 
-        return lock;
+  public Lock acquireWriteLock(T name, long timeout, TimeUnit unit)
+      throws InterruptedException, TimeoutException {
 
-    }
+    final Lock lock = lockFactory(name).writeLock();
 
+    if (!lock.tryLock(timeout, unit)) throw new TimeoutException();
+
+    return lock;
+  }
 }

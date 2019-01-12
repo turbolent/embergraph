@@ -22,69 +22,57 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.ap;
 
 import java.io.Serializable;
-
 import org.embergraph.bop.IElement;
 
 /**
  * An element for the test {@link R relation}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class E implements IElement, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    final String name;
+  final String name;
 
-    final String value;
+  final String value;
 
-    public E(final String name, final String value) {
+  public E(final String name, final String value) {
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    if (name == null) throw new IllegalArgumentException();
 
-        if (value == null)
-            throw new IllegalArgumentException();
+    if (value == null) throw new IllegalArgumentException();
 
-        this.name = name;
+    this.name = name;
 
-        this.value = value;
+    this.value = value;
+  }
 
+  public String toString() {
+
+    return "E{name=" + name + ",value=" + value + "}";
+  }
+
+  public Object get(final int index) {
+    switch (index) {
+      case 0:
+        return name;
+      case 1:
+        return value;
     }
+    throw new IllegalArgumentException();
+  }
 
-    public String toString() {
-        
-        return "E{name=" + name + ",value=" + value + "}";
-        
-    }
-    
-    public Object get(final int index) {
-        switch (index) {
-        case 0:
-            return name;
-        case 1:
-            return value;
-        }
-        throw new IllegalArgumentException();
-    }
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (!(o instanceof E)) return false;
+    if (!name.equals(((E) o).name)) return false;
+    if (!value.equals(((E) o).value)) return false;
+    return true;
+  }
 
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof E))
-            return false;
-        if (!name.equals(((E) o).name))
-            return false;
-        if (!value.equals(((E) o).value))
-            return false;
-        return true;
-    }
-    
-    public int hashCode() {
-    	return name.hashCode() + value.hashCode();
-    }
-    
+  public int hashCode() {
+    return name.hashCode() + value.hashCode();
+  }
 }

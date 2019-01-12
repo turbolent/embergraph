@@ -27,20 +27,15 @@ import org.embergraph.cache.IHardReferenceQueue;
 
 /**
  * A listener that does nothing.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NOPEvictionListener implements IEvictionListener {
 
-    public static final IEvictionListener INSTANCE = new NOPEvictionListener();
-    
-    private NOPEvictionListener() {
-        
-    }
-    
-    public void evicted(IHardReferenceQueue<PO> cache, PO ref) {
-   
-    }
+  public static final IEvictionListener INSTANCE = new NOPEvictionListener();
 
+  private NOPEvictionListener() {}
+
+  public void evicted(IHardReferenceQueue<PO> cache, PO ref) {}
 }

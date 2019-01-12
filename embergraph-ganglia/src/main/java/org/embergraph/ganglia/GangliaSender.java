@@ -21,78 +21,61 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
-
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
-/**
- * Class for sending metrics to Ganglia.
- */
-public class GangliaSender  {
+/** Class for sending metrics to Ganglia. */
+public class GangliaSender {
 
-	private final InetSocketAddress[] metricsServers;
+  private final InetSocketAddress[] metricsServers;
 
-	protected final XDROutputBuffer xdr;
+  protected final XDROutputBuffer xdr;
 
-	private final DatagramSocket datagramSocket;
-	
-	public GangliaSender(final InetSocketAddress[] metricServers,
-			final int bufferSize) throws SocketException {
+  private final DatagramSocket datagramSocket;
 
-		if (metricServers == null)
-			throw new IllegalArgumentException();
-		
-		this.metricsServers = metricServers;
-		
-		this.xdr = new XDROutputBuffer(bufferSize);
-		
-		this.datagramSocket = new DatagramSocket();
-		
-	}
+  public GangliaSender(final InetSocketAddress[] metricServers, final int bufferSize)
+      throws SocketException {
 
-	/**
-	 * Overridden to close the datagram socket.
-	 */
-	@Override
-	protected void finalize() throws Throwable {
+    if (metricServers == null) throw new IllegalArgumentException();
 
-		close();
-		
-		super.finalize();
-		
-	}
-	
-	/**
-	 * Method to close the datagram socket
-	 */
-	public void close() {
+    this.metricsServers = metricServers;
 
-		if (datagramSocket != null) {
-		
-			datagramSocket.close();
-			
-		}
-		
-	}
+    this.xdr = new XDROutputBuffer(bufferSize);
 
-	/**
-	 * Send an XDR formatted message to the metric server(s).
-	 * 
-	 * @param xdr
-	 *            The XDR formatted message.
-	 *            
-	 * @throws IOException
-	 */
-	public void sendMessage(final XDROutputBuffer xdr) throws IOException {
+    this.datagramSocket = new DatagramSocket();
+  }
 
-		for (SocketAddress socketAddress : metricsServers) {
+  /** Overridden to close the datagram socket. */
+  @Override
+  protected void finalize() throws Throwable {
 
-			final DatagramPacket packet = new DatagramPacket(xdr.getBuffer(),
-					xdr.getLength(), socketAddress);
+    close();
 
-			datagramSocket.send(packet);
+    super.finalize();
+  }
 
-		}
+  /** Method to close the datagram socket */
+  public void close() {
 
-	}
+    if (datagramSocket != null) {
 
+      datagramSocket.close();
+    }
+  }
+
+  /**
+   * Send an XDR formatted message to the metric server(s).
+   *
+   * @param xdr The XDR formatted message.
+   * @throws IOException
+   */
+  public void sendMessage(final XDROutputBuffer xdr) throws IOException {
+
+    for (SocketAddress socketAddress : metricsServers) {
+
+      final DatagramPacket packet =
+          new DatagramPacket(xdr.getBuffer(), xdr.getLength(), socketAddress);
+
+      datagramSocket.send(packet);
+    }
+  }
 }

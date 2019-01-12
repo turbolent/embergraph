@@ -22,56 +22,50 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import java.util.Iterator;
-
 import cutthecrap.utils.striterators.ICloseable;
 import cutthecrap.utils.striterators.ICloseableIterator;
+import java.util.Iterator;
 
 /**
  * Wraps a normal {@link Iterator} as an {@link ICloseableIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <E>
  */
 public class CloseableIteratorWrapper<E> implements ICloseableIterator<E> {
 
-    private final Iterator<E> src;
-    
-    public CloseableIteratorWrapper(final Iterator<E> src) {
-        
-        if (src == null)
-            throw new IllegalArgumentException();
-        
-        this.src = src;
-        
+  private final Iterator<E> src;
+
+  public CloseableIteratorWrapper(final Iterator<E> src) {
+
+    if (src == null) throw new IllegalArgumentException();
+
+    this.src = src;
+  }
+
+  /** Delegate to the source iff the source implements {@link ICloseable}. */
+  @Override
+  public void close() {
+
+    if (src instanceof ICloseable) {
+
+      ((ICloseable) src).close();
     }
+  }
 
-    /** Delegate to the source iff the source implements {@link ICloseable}. */
-    @Override
-    public void close() {
+  @Override
+  public boolean hasNext() {
+    return src.hasNext();
+  }
 
-        if (src instanceof ICloseable) {
+  @Override
+  public E next() {
+    return src.next();
+  }
 
-            ((ICloseable) src).close();
-
-        }
-
-    }
-
-    @Override
-    public boolean hasNext() {
-        return src.hasNext();
-    }
-
-    @Override
-    public E next() {
-        return src.next();
-    }
-
-    @Override
-    public void remove() {
-        src.remove();
-    }
-    
+  @Override
+  public void remove() {
+    src.remove();
+  }
 }

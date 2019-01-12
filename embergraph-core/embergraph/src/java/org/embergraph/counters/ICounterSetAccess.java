@@ -23,14 +23,11 @@ package org.embergraph.counters;
 
 /**
  * Interface for self-reporting performance counters.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ICounterSetAccess {
 
-    /**
-     * Return performance counters.
-     */
-    public CounterSet getCounters();
-    
+  /** Return performance counters. */
+  public CounterSet getCounters();
 }

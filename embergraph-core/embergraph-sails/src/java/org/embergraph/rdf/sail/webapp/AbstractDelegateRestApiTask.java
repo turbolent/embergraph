@@ -23,56 +23,50 @@ package org.embergraph.rdf.sail.webapp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.task.IApiTask;
 
 /**
- * Base class for delegation patterns where the delegate is an {@link IApiTask}.
- * This is necessary in order to pass through the {@link #isGRSRequired()} and
- * {@link #setIndexManager(IIndexManager)} method to both the base class and the
- * delegate.
- * 
+ * Base class for delegation patterns where the delegate is an {@link IApiTask}. This is necessary
+ * in order to pass through the {@link #isGRSRequired()} and {@link #setIndexManager(IIndexManager)}
+ * method to both the base class and the delegate.
+ *
  * @author bryan
- * 
  * @param <T>
  */
-abstract public class AbstractDelegateRestApiTask<T> extends
-      AbstractRestApiTask<T> {
+public abstract class AbstractDelegateRestApiTask<T> extends AbstractRestApiTask<T> {
 
-   private final IApiTask<T> delegate;
+  private final IApiTask<T> delegate;
 
-   public AbstractDelegateRestApiTask(final HttpServletRequest req,
-         final HttpServletResponse resp, final String namespace,
-         final long timestamp, final IApiTask<T> delegate) {
+  public AbstractDelegateRestApiTask(
+      final HttpServletRequest req,
+      final HttpServletResponse resp,
+      final String namespace,
+      final long timestamp,
+      final IApiTask<T> delegate) {
 
-      super(req, resp, namespace, timestamp, delegate.isGRSRequired());
+    super(req, resp, namespace, timestamp, delegate.isGRSRequired());
 
-      this.delegate = delegate;
-      
-   }
+    this.delegate = delegate;
+  }
 
-   @Override
-   public T call() throws Exception {
-      
-      return delegate.call();
-      
-   }
+  @Override
+  public T call() throws Exception {
 
-   @Override
-   public void setIndexManager(final IIndexManager indexManager) {
+    return delegate.call();
+  }
 
-      super.setIndexManager(indexManager);
-      
-      delegate.setIndexManager(indexManager);
-      
-   }
+  @Override
+  public void setIndexManager(final IIndexManager indexManager) {
 
-   @Override
-   public boolean isGRSRequired() {
-      
-      return super.isGRSRequired() || delegate.isGRSRequired();
-      
-   }
-   
+    super.setIndexManager(indexManager);
+
+    delegate.setIndexManager(indexManager);
+  }
+
+  @Override
+  public boolean isGRSRequired() {
+
+    return super.isGRSRequired() || delegate.isGRSRequired();
+  }
 }

@@ -34,8 +34,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.ServiceProviderHook;
+import org.embergraph.rdf.rio.IRDFParserOptions;
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -47,436 +50,385 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import org.embergraph.rdf.ServiceProviderHook;
-import org.embergraph.rdf.rio.IRDFParserOptions;
-import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
- * Utility class scans some RDF data, builds up a distribution over the distinct
- * predicates, and generates a {@link VocabularyDecl} for the source data. This
- * can be used to optimize the data density over source data sources.
- * 
- * TODO This could generate one decl per file and then wrap them into a
- * Vocabulary.
- * 
+ * Utility class scans some RDF data, builds up a distribution over the distinct predicates, and
+ * generates a {@link VocabularyDecl} for the source data. This can be used to optimize the data
+ * density over source data sources.
+ *
+ * <p>TODO This could generate one decl per file and then wrap them into a Vocabulary.
+ *
  * @author bryan
  */
 public class VocabBuilder {
 
-	private static final Logger log = Logger.getLogger(VocabBuilder.class);
-	
-    private final IRDFParserOptions parserOptions;
-	
-    // map reporting predicate frequency
-	private final Map<URI, UriFrequency> preds = new LinkedHashMap<URI, UriFrequency>();
+  private static final Logger log = Logger.getLogger(VocabBuilder.class);
 
-	// map reporting type frequency
-	private final Map<URI, UriFrequency> types = new LinkedHashMap<URI, UriFrequency>();
-	
-	
-	private VocabBuilder() {
+  private final IRDFParserOptions parserOptions;
 
-		parserOptions = new RDFParserOptions();
-		
-		parserOptions.setStopAtFirstError(false);
-		
-		parserOptions.setVerifyData(false);
-		
-	}
-	
-	@SuppressWarnings("deprecation")
-	protected void loadFiles(final int depth, final File file,
-			final String baseURI, final RDFFormat rdfFormat,
-			final FilenameFilter filter) throws IOException {
+  // map reporting predicate frequency
+  private final Map<URI, UriFrequency> preds = new LinkedHashMap<URI, UriFrequency>();
 
-        if (file.isDirectory()) {
+  // map reporting type frequency
+  private final Map<URI, UriFrequency> types = new LinkedHashMap<URI, UriFrequency>();
 
-            if (log.isDebugEnabled())
-                log.debug("loading directory: " + file);
+  private VocabBuilder() {
 
-            final File[] files = (filter != null ? file.listFiles(filter)
-                    : file.listFiles());
+    parserOptions = new RDFParserOptions();
 
-            for (int i = 0; i < files.length; i++) {
+    parserOptions.setStopAtFirstError(false);
 
-                final File f = files[i];
+    parserOptions.setVerifyData(false);
+  }
 
-                loadFiles(depth + 1, f, baseURI, rdfFormat, filter);
-                
-            }
-            
-            return;
-            
-        }
-        
-        final String n = file.getName();
-        
-        RDFFormat fmt = RDFFormat.forFileName(n);
+  @SuppressWarnings("deprecation")
+  protected void loadFiles(
+      final int depth,
+      final File file,
+      final String baseURI,
+      final RDFFormat rdfFormat,
+      final FilenameFilter filter)
+      throws IOException {
 
-        if (fmt == null && n.endsWith(".zip")) {
-            fmt = RDFFormat.forFileName(n.substring(0, n.length() - 4));
-        }
+    if (file.isDirectory()) {
 
-        if (fmt == null && n.endsWith(".gz")) {
-            fmt = RDFFormat.forFileName(n.substring(0, n.length() - 3));
-        }
+      if (log.isDebugEnabled()) log.debug("loading directory: " + file);
 
-        if (fmt == null) // fallback
-            fmt = rdfFormat;
+      final File[] files = (filter != null ? file.listFiles(filter) : file.listFiles());
 
-		final RDFParserFactory rdfParserFactory = RDFParserRegistry
-				.getInstance().get(fmt);
+      for (int i = 0; i < files.length; i++) {
 
-		if (rdfParserFactory == null) {
+        final File f = files[i];
 
-			throw new RuntimeException("Parser factory not found: source="
-					+ file + ", fmt=" + fmt);
+        loadFiles(depth + 1, f, baseURI, rdfFormat, filter);
+      }
 
-		}
-
-		final RDFParser rdfParser = rdfParserFactory.getParser();
-		rdfParser.setVerifyData(parserOptions.getVerifyData());
-		rdfParser.setStopAtFirstError(parserOptions.getStopAtFirstError());
-		rdfParser.setDatatypeHandling(parserOptions.getDatatypeHandling());
-		rdfParser.setPreserveBNodeIDs(parserOptions.getPreserveBNodeIDs());
-
-		rdfParser.setRDFHandler(new AddStatementHandler());
-
-		InputStream is = null;
-
-        try {
-
-
-            is = new FileInputStream(file);
-
-            if (n.endsWith(".gz")) {
-
-                is = new GZIPInputStream(is);
-
-            } else if (n.endsWith(".zip")) {
-
-                is = new ZipInputStream(is);
-
-            }
-
-            /*
-             * Obtain a buffered reader on the input stream.
-             */
-
-			final Reader reader = new BufferedReader(new InputStreamReader(is));
-
-			try {
-
-				// baseURI for this file.
-				final String s = baseURI != null ? baseURI : file.toURI()
-						.toString();
-
-				rdfParser.parse(reader, s);
-
-				return;
-
-            } catch (Exception ex) {
-
-            	log.warn("Could not process file " + file + ": " + ex.getStackTrace());
-
-            } finally {
-
-                reader.close();
-
-            }
-
-        } finally {
-            
-            if (is != null)
-                is.close();
-
-        }
-
+      return;
     }
 
-    private class AddStatementHandler extends RDFHandlerBase {
+    final String n = file.getName();
 
-		public AddStatementHandler() {
-            
+    RDFFormat fmt = RDFFormat.forFileName(n);
+
+    if (fmt == null && n.endsWith(".zip")) {
+      fmt = RDFFormat.forFileName(n.substring(0, n.length() - 4));
+    }
+
+    if (fmt == null && n.endsWith(".gz")) {
+      fmt = RDFFormat.forFileName(n.substring(0, n.length() - 3));
+    }
+
+    if (fmt == null) // fallback
+    fmt = rdfFormat;
+
+    final RDFParserFactory rdfParserFactory = RDFParserRegistry.getInstance().get(fmt);
+
+    if (rdfParserFactory == null) {
+
+      throw new RuntimeException("Parser factory not found: source=" + file + ", fmt=" + fmt);
+    }
+
+    final RDFParser rdfParser = rdfParserFactory.getParser();
+    rdfParser.setVerifyData(parserOptions.getVerifyData());
+    rdfParser.setStopAtFirstError(parserOptions.getStopAtFirstError());
+    rdfParser.setDatatypeHandling(parserOptions.getDatatypeHandling());
+    rdfParser.setPreserveBNodeIDs(parserOptions.getPreserveBNodeIDs());
+
+    rdfParser.setRDFHandler(new AddStatementHandler());
+
+    InputStream is = null;
+
+    try {
+
+      is = new FileInputStream(file);
+
+      if (n.endsWith(".gz")) {
+
+        is = new GZIPInputStream(is);
+
+      } else if (n.endsWith(".zip")) {
+
+        is = new ZipInputStream(is);
+      }
+
+      /*
+       * Obtain a buffered reader on the input stream.
+       */
+
+      final Reader reader = new BufferedReader(new InputStreamReader(is));
+
+      try {
+
+        // baseURI for this file.
+        final String s = baseURI != null ? baseURI : file.toURI().toString();
+
+        rdfParser.parse(reader, s);
+
+        return;
+
+      } catch (Exception ex) {
+
+        log.warn("Could not process file " + file + ": " + ex.getStackTrace());
+
+      } finally {
+
+        reader.close();
+      }
+
+    } finally {
+
+      if (is != null) is.close();
+    }
+  }
+
+  private class AddStatementHandler extends RDFHandlerBase {
+
+    public AddStatementHandler() {}
+
+    public void handleStatement(final Statement stmt) throws RDFHandlerException {
+
+      final URI p = stmt.getPredicate();
+
+      // A. Count number of occurrences for predicate at hand
+      UriFrequency predFrequency = preds.get(p);
+
+      if (predFrequency == null) {
+
+        preds.put(p, predFrequency = new UriFrequency(p));
+
+        if (log.isDebugEnabled()) log.debug("New " + p + " : total=" + preds.size());
+      }
+
+      predFrequency.cnt++;
+
+      // B. For typing statements, also count occurrence of the type
+      if (stmt.getPredicate().equals(RDF.TYPE)) {
+
+        final Value o = stmt.getObject();
+
+        if (o instanceof URI) {
+
+          UriFrequency typeFrequency = types.get((URI) o);
+
+          if (typeFrequency == null) {
+
+            types.put((URI) o, typeFrequency = new UriFrequency((URI) o));
+
+            if (log.isDebugEnabled()) log.debug("New " + (URI) o + " : total=" + types.size());
+          }
+
+          typeFrequency.cnt++;
         }
-        
-        public void handleStatement(final Statement stmt)
-				throws RDFHandlerException {
+      }
+    }
+  }
 
-			final URI p = stmt.getPredicate();
+  /**
+   * @param args The file(s) to read.
+   * @throws IOException
+   */
+  public static void main(final String[] args) {
 
-			// A. Count number of occurrences for predicate at hand
-			UriFrequency predFrequency = preds.get(p);
+    final boolean generate = true;
 
-			if (predFrequency == null) {
+    final int minFreq = 10;
 
-				preds.put(p, predFrequency = new UriFrequency(p));
+    final VocabBuilder v = new VocabBuilder();
 
-				if (log.isDebugEnabled())
-					log.debug("New " + p + " : total=" + preds.size());
+    final String baseURI = null; // unless overridden.
 
-			}
+    final RDFFormat rdfFormat = RDFFormat.RDFXML; // default
 
-			predFrequency.cnt++;
+    for (String file : args) {
 
-			
-			// B. For typing statements, also count occurrence of the type
-			if (stmt.getPredicate().equals(RDF.TYPE)) {
-				
-				final Value o = stmt.getObject();
+      if (log.isInfoEnabled()) log.info("file: " + file);
 
-				if (o instanceof URI) {
-				
-					UriFrequency typeFrequency = types.get((URI)o);
-	
-					if (typeFrequency == null) {
-	
-						types.put((URI)o, typeFrequency = new UriFrequency((URI)o));
-	
-						if (log.isDebugEnabled())
-							log.debug("New " + (URI)o + " : total=" + types.size());
-	
-					}
-					
-					typeFrequency.cnt++;
-				}
-			}
-		}
-	}
+      try {
 
-	/**
-	 * @param args
-	 *            The file(s) to read.
-	 *            
-	 * @throws IOException
-	 */
-	public static void main(final String[] args) {
+        v.loadFiles(0 /* depth */, new File(file), baseURI, rdfFormat, filter);
 
-		final boolean generate = true;
-		
-		final int minFreq = 10;
-		
-		final VocabBuilder v = new VocabBuilder();
+      } catch (IOException ex) {
 
-		final String baseURI = null; // unless overridden.
+        log.error("Could not read: file=" + file, ex);
+      }
+    }
 
-		final RDFFormat rdfFormat = RDFFormat.RDFXML; // default
+    // sort predicates
+    final int predsFrequencySize = v.preds.size();
+    final UriFrequency[] predsFrequency =
+        v.preds.values().toArray(new UriFrequency[predsFrequencySize]);
 
-		for (String file : args) {
+    if (log.isInfoEnabled())
+      log.info(
+          "Sorting " + predsFrequency.length + " predicate items from " + args.length + " files");
 
-			if (log.isInfoEnabled())
-				log.info("file: " + file);
-			
-			try {
+    Arrays.sort(predsFrequency);
 
-				v.loadFiles(0/* depth */, new File(file), baseURI, rdfFormat,
-						filter);
+    // sort types
+    final int typesFrequencySize = v.types.size();
+    final UriFrequency[] typesFrequency =
+        v.types.values().toArray(new UriFrequency[typesFrequencySize]);
 
-			} catch (IOException ex) {
-				
-				log.error("Could not read: file=" + file, ex);
-				
-			}
+    if (log.isInfoEnabled())
+      log.info("Sorting " + typesFrequency.length + " types items from " + args.length + " files");
 
-		}
-		
-		// sort predicates
-		final int predsFrequencySize = v.preds.size();
-		final UriFrequency[] predsFrequency = v.preds.values().toArray(new UriFrequency[predsFrequencySize]);
+    Arrays.sort(typesFrequency);
 
-		if (log.isInfoEnabled())
-			log.info("Sorting " + predsFrequency.length + " predicate items from "
-					+ args.length + " files");
+    if (!generate) {
 
-		Arrays.sort(predsFrequency);
+      // show predicates on the console
+      for (int i = 0; i < predsFrequencySize; i++) {
 
-		// sort types
-		final int typesFrequencySize = v.types.size();
-		final UriFrequency[] typesFrequency = v.types.values().toArray(new UriFrequency[typesFrequencySize]);
+        final UriFrequency prefFrequency = predsFrequency[i];
 
-		if (log.isInfoEnabled())
-			log.info("Sorting " + typesFrequency.length + " types items from " + args.length + " files");
-		
-		Arrays.sort(typesFrequency);
-		
+        if (prefFrequency.cnt < minFreq) break;
 
-		if (!generate) {
-			
-			// show predicates on the console
-			for (int i = 0; i < predsFrequencySize; i++) {
+        System.out.println("" + i + "\t" + prefFrequency.cnt + "\t" + prefFrequency.uri);
+      }
 
-				final UriFrequency prefFrequency = predsFrequency[i];
+      // show types on the console
+      for (int i = 0; i < typesFrequencySize; i++) {
 
-				if (prefFrequency.cnt < minFreq)
-					break;
+        final UriFrequency typeFrequency = typesFrequency[i];
 
-				System.out.println("" + i + "\t" + prefFrequency.cnt + "\t" + prefFrequency.uri);
+        if (typeFrequency.cnt < minFreq) break;
 
-			}
-			
-			// show types on the console
-			for (int i = 0; i < typesFrequencySize; i++) {
+        System.out.println("" + i + "\t" + typeFrequency.cnt + "\t" + typeFrequency.uri);
+      }
 
-				final UriFrequency typeFrequency = typesFrequency[i];
+    } else {
 
-				if (typeFrequency.cnt < minFreq)
-					break;
+      /*
+       * Generate VocabularyDecl file.
+       */
+      final String className = "MyVocabularyDecl";
 
-				System.out.println("" + i + "\t" + typeFrequency.cnt + "\t" + typeFrequency.uri);
+      System.out.println("import java.util.Arrays;");
+      System.out.println("import java.util.Collections;");
+      System.out.println("import java.util.Iterator;");
+      System.out.println("import org.openrdf.model.URI;");
+      System.out.println("import org.openrdf.model.impl.URIImpl;");
+      System.out.println("import org.embergraph.rdf.vocab.VocabularyDecl;");
 
-			}
-			
-		} else {
-			
-			/*
-			 * Generate VocabularyDecl file.
-			 */
-			final String className = "MyVocabularyDecl";
-			
-			System.out.println("import java.util.Arrays;");
-			System.out.println("import java.util.Collections;");
-			System.out.println("import java.util.Iterator;");
-			System.out.println("import org.openrdf.model.URI;");
-			System.out.println("import org.openrdf.model.impl.URIImpl;");
-			System.out.println("import org.embergraph.rdf.vocab.VocabularyDecl;");
+      System.out.println("public class " + className + " implements VocabularyDecl {");
 
-			System.out.println("public class "+className+" implements VocabularyDecl {");
-			
-			System.out.println("static private final URI[] uris = new URI[] {");
-			
-			System.out.println("// frequencies of predicates in dataset");
-			for (int i = 0; i < predsFrequencySize; i++) {
+      System.out.println("static private final URI[] uris = new URI[] {");
 
-				final UriFrequency predFrequency = predsFrequency[i];
+      System.out.println("// frequencies of predicates in dataset");
+      for (int i = 0; i < predsFrequencySize; i++) {
 
-				if (predFrequency.cnt < minFreq)
-					break;
+        final UriFrequency predFrequency = predsFrequency[i];
 
-				System.out.println("new URIImpl(\"" + predFrequency.uri + "\"), // rank="
-						+ i + ", count=" + predFrequency.cnt);
+        if (predFrequency.cnt < minFreq) break;
 
-			}
+        System.out.println(
+            "new URIImpl(\""
+                + predFrequency.uri
+                + "\"), // rank="
+                + i
+                + ", count="
+                + predFrequency.cnt);
+      }
 
-			System.out.println("// frequencies of types in dataset");
-			for (int i = 0; i < typesFrequencySize; i++) {
+      System.out.println("// frequencies of types in dataset");
+      for (int i = 0; i < typesFrequencySize; i++) {
 
-				final UriFrequency typeFrequency = typesFrequency[i];
+        final UriFrequency typeFrequency = typesFrequency[i];
 
-				if (typeFrequency.cnt < minFreq)
-					break;
+        if (typeFrequency.cnt < minFreq) break;
 
-				System.out.println("new URIImpl(\"" + typeFrequency.uri + "\"), // rank="
-						+ i + ", count=" + typeFrequency.cnt);
+        System.out.println(
+            "new URIImpl(\""
+                + typeFrequency.uri
+                + "\"), // rank="
+                + i
+                + ", count="
+                + typeFrequency.cnt);
+      }
 
-			}
+      System.out.println("};"); // end uris.
 
+      System.out.println("public " + className + "() {}");
 
-			System.out.println("};"); // end uris.
+      System.out.println(
+          "public Iterator<URI> values() {\n"
+              + "return Collections.unmodifiableList(Arrays.asList(uris)).iterator();\n"
+              + "}");
 
-			System.out.println("public " + className + "() {}");
+      System.out.println("}"); // end class
+    }
+  }
 
-			System.out
-					.println("public Iterator<URI> values() {\n"
-							+ "return Collections.unmodifiableList(Arrays.asList(uris)).iterator();\n"
-							+ "}");
+  /** A vocabulary item together with its frequency count. */
+  private static class UriFrequency implements Comparable<UriFrequency> {
 
-			System.out.println("}"); // end class
-			
-		}
-		
+    /** The uri. */
+    final URI uri;
 
-	}
+    /** The #of instances of that predicate. */
+    int cnt;
 
-	/**
-	 * A vocabulary item together with its frequency count.
-	 */
-	private static class UriFrequency implements Comparable<UriFrequency> {
-		
-		/**
-		 * The uri.
-		 */
-		final URI uri;
-		
-		/**
-		 * The #of instances of that predicate.
-		 */
-		int cnt;
-		
-		public UriFrequency(final URI uri) {
+    public UriFrequency(final URI uri) {
 
-			this.uri = uri;
-			
-		}
+      this.uri = uri;
+    }
 
-		/**
-		 * Place into descending order by count.
-		 */
-		@Override
-		public int compareTo(final UriFrequency arg0) {
+    /** Place into descending order by count. */
+    @Override
+    public int compareTo(final UriFrequency arg0) {
 
-			return arg0.cnt - cnt;
-			
-		}
-		
-	}
-	
-    /**
-     * Note: The filter is chosen to select RDF data files and to allow the data
-     * files to use owl, ntriples, etc as their file extension.  gzip and zip
-     * extensions are also supported.
-     */
-    final private static FilenameFilter filter = new FilenameFilter() {
+      return arg0.cnt - cnt;
+    }
+  }
+
+  /**
+   * Note: The filter is chosen to select RDF data files and to allow the data files to use owl,
+   * ntriples, etc as their file extension. gzip and zip extensions are also supported.
+   */
+  private static final FilenameFilter filter =
+      new FilenameFilter() {
 
         public boolean accept(final File dir, final String name) {
 
-            if (new File(dir, name).isDirectory()) {
+          if (new File(dir, name).isDirectory()) {
 
-                if(dir.isHidden()) {
-                    
-                    // Skip hidden files.
-                    return false;
-                    
-                }
-                
-//                if(dir.getName().equals(".svn")) {
-//                    
-//                    // Skip .svn files.
-//                    return false;
-//                    
-//                }
-                
-                // visit subdirectories.
-                return true;
-                
+            if (dir.isHidden()) {
+
+              // Skip hidden files.
+              return false;
             }
 
-            // if recognizable as RDF.
-            boolean isRDF = RDFFormat.forFileName(name) != null
-                    || (name.endsWith(".zip") && RDFFormat.forFileName(name
-                            .substring(0, name.length() - 4)) != null)
-                    || (name.endsWith(".gz") && RDFFormat.forFileName(name
-                            .substring(0, name.length() - 3)) != null);
+            //                if(dir.getName().equals(".svn")) {
+            //
+            //                    // Skip .svn files.
+            //                    return false;
+            //
+            //                }
 
-			if (log.isDebugEnabled())
-				log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
+            // visit subdirectories.
+            return true;
+          }
 
-            return isRDF;
+          // if recognizable as RDF.
+          boolean isRDF =
+              RDFFormat.forFileName(name) != null
+                  || (name.endsWith(".zip")
+                      && RDFFormat.forFileName(name.substring(0, name.length() - 4)) != null)
+                  || (name.endsWith(".gz")
+                      && RDFFormat.forFileName(name.substring(0, name.length() - 3)) != null);
 
+          if (log.isDebugEnabled())
+            log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
+
+          return isRDF;
         }
+      };
 
-    };
-
-    /**
-     * Force the load of the various integration/extension classes.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">
-     *      Class loader problems </a>
-     */
-    static {
-
-        ServiceProviderHook.forceLoad();
-        
-    }
-    
+  /**
+   * Force the load of the various integration/extension classes.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">Class loader problems </a>
+   */
+  static {
+    ServiceProviderHook.forceLoad();
+  }
 }

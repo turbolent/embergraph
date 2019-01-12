@@ -22,57 +22,47 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import java.util.Properties;
-
 import org.embergraph.journal.ITx;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class AbstractEmbeddedTripleStoreTestCase extends
-    AbstractEmbeddedEmbergraphFederationTestCase {
+public class AbstractEmbeddedTripleStoreTestCase
+    extends AbstractEmbeddedEmbergraphFederationTestCase {
 
-    /**
-     * 
-     */
-    public AbstractEmbeddedTripleStoreTestCase() {
-        super();
-    }
+  /** */
+  public AbstractEmbeddedTripleStoreTestCase() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public AbstractEmbeddedTripleStoreTestCase(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public AbstractEmbeddedTripleStoreTestCase(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * The triple store under test.
-     */
-    ScaleOutTripleStore store;
+  /** The triple store under test. */
+  ScaleOutTripleStore store;
 
-    protected Properties getProperties() {
-    
-        return new Properties(System.getProperties());
-    
-    }
-    
-    public void setUp() throws Exception {
+  protected Properties getProperties() {
 
-        super.setUp();
+    return new Properties(System.getProperties());
+  }
 
-        // connect to the database.
-        store = new ScaleOutTripleStore(client.getFederation(), "test_",
-                ITx.UNISOLATED, client.getProperties());
-        
-        store.create();
-        
-    }
+  public void setUp() throws Exception {
 
-    public void tearDown() throws Exception {
+    super.setUp();
 
-        super.tearDown();
+    // connect to the database.
+    store =
+        new ScaleOutTripleStore(
+            client.getFederation(), "test_", ITx.UNISOLATED, client.getProperties());
 
-    }
+    store.create();
+  }
 
+  public void tearDown() throws Exception {
+
+    super.tearDown();
+  }
 }

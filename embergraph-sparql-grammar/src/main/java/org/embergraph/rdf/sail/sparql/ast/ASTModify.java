@@ -2,8 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTModify extends ASTUpdate {
+public class ASTModify extends ASTUpdate {
   public ASTModify(int id) {
     super(id);
   }
@@ -12,32 +11,29 @@ class ASTModify extends ASTUpdate {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
+
   public ASTInsertClause getInsertClause() {
-	  return jjtGetChild(ASTInsertClause.class);
+    return jjtGetChild(ASTInsertClause.class);
   }
-  
+
   public ASTDeleteClause getDeleteClause() {
-	  return jjtGetChild(ASTDeleteClause.class);
+    return jjtGetChild(ASTDeleteClause.class);
   }
-  
+
   public ASTIRI getWithClause() {
-	  if (jjtGetChild(0) instanceof ASTIRI) {
-		  return (ASTIRI)jjtGetChild(0);
-	  }
-	  else {
-		  return null;
-	  }
+    if (jjtGetChild(0) instanceof ASTIRI) {
+      return (ASTIRI) jjtGetChild(0);
+    } else {
+      return null;
+    }
   }
-  
+
   public ASTGraphPatternGroup getWhereClause() {
-	  return jjtGetChild(ASTGraphPatternGroup.class);
+    return jjtGetChild(ASTGraphPatternGroup.class);
   }
-  
 }
 /* JavaCC - OriginalChecksum=9460d42e4f84afaf785d4073d7125899 (do not edit this line) */

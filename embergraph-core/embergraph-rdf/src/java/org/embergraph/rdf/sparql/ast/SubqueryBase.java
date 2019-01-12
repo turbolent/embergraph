@@ -24,118 +24,97 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /**
  * AST node for subqueries.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class SubqueryBase extends QueryBase implements
-        IGroupMemberNode {
+public abstract class SubqueryBase extends QueryBase implements IGroupMemberNode {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private IGroupNode<IGroupMemberNode> parent;
+  private IGroupNode<IGroupMemberNode> parent;
 
-    final public IGroupNode<IGroupMemberNode> getParent() {
+  public final IGroupNode<IGroupMemberNode> getParent() {
 
-        return parent;
+    return parent;
+  }
 
+  public final void setParent(final IGroupNode<IGroupMemberNode> parent) {
+
+    this.parent = parent;
+  }
+
+  /** Deep copy constructor. */
+  public SubqueryBase(final SubqueryBase queryBase) {
+
+    super(queryBase);
+  }
+
+  /** Shallow copy constructor. */
+  public SubqueryBase(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  public SubqueryBase(final QueryType queryType) {
+
+    super(queryType);
+  }
+
+  public TermNode getContext() {
+
+    final IQueryNode parent = getParent();
+
+    if (parent instanceof GroupMemberNodeBase<?>) {
+
+      return ((GroupMemberNodeBase<?>) parent).getContext();
     }
 
-    final public void setParent(final IGroupNode<IGroupMemberNode> parent) {
+    return null;
+  }
 
-        this.parent = parent;
+  public JoinGroupNode getParentJoinGroup() {
 
+    IGroupNode<?> parent = getParent();
+
+    while (parent != null) {
+
+      if (parent instanceof JoinGroupNode) return (JoinGroupNode) parent;
+
+      parent = parent.getParent();
     }
 
-    /**
-     * Deep copy constructor.
-     */
-    public SubqueryBase(final SubqueryBase queryBase) {
+    return null;
+  }
 
-        super(queryBase);
+  @SuppressWarnings("unchecked")
+  public GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup() {
 
+    IGroupNode<?> parent = getParent();
+
+    while (parent != null) {
+
+      if (parent instanceof GraphPatternGroup) return (GraphPatternGroup<IGroupMemberNode>) parent;
+
+      parent = parent.getParent();
     }
 
-    /**
-     * Shallow copy constructor.
-     */
-    public SubqueryBase(final BOp[] args, final Map<String, Object> anns) {
+    return null;
+  }
 
-        super(args, anns);
+  @Override
+  public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 
-    }
-
-    public SubqueryBase(final QueryType queryType) {
-
-        super(queryType);
-
-    }
-
-    public TermNode getContext() {
-
-        final IQueryNode parent = getParent();
-
-        if (parent instanceof GroupMemberNodeBase<?>) {
-
-            return ((GroupMemberNodeBase<?>) parent).getContext();
-
-        }
-
-        return null;
-
-    }
-
-    public JoinGroupNode getParentJoinGroup() {
-
-        IGroupNode<?> parent = getParent();
-
-        while (parent != null) {
-
-            if (parent instanceof JoinGroupNode)
-                return (JoinGroupNode) parent;
-
-            parent = parent.getParent();
-
-        }
-
-        return null;
-
-    }
-
-    @SuppressWarnings("unchecked")
-    public GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup() {
-        
-        IGroupNode<?> parent = getParent();
-
-        while (parent != null) {
-
-            if (parent instanceof GraphPatternGroup)
-                return (GraphPatternGroup<IGroupMemberNode>) parent;
-
-            parent = parent.getParent();
-
-        }
-
-        return null;
-        
-    }
-
-    @Override
-    public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-        return new HashSet<IVariable<?>>();
-    }
-
-    @Override
-    public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-        return getProjectedVars(new HashSet<IVariable<?>>());
-    }
+  @Override
+  public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
+    return getProjectedVars(new HashSet<IVariable<?>>());
+  }
 }

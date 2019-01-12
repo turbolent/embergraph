@@ -23,12 +23,11 @@ package org.embergraph.util.concurrent;
 
 /**
  * Something which computes one value from another.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface Computable<A, V> {
 
-    V compute(A arg) throws InterruptedException;
-
+  V compute(A arg) throws InterruptedException;
 }

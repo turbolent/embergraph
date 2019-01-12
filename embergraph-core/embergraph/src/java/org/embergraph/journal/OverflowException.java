@@ -22,45 +22,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /**
- * An instance of this class is thrown if an
- * {@link AbstractBufferStrategy#overflow(long)} request is denied.
- * 
+ * An instance of this class is thrown if an {@link AbstractBufferStrategy#overflow(long)} request
+ * is denied.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class OverflowException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8511505622215579950L;
+  /** */
+  private static final long serialVersionUID = -8511505622215579950L;
 
-    /**
-     * 
-     */
-    public OverflowException() {
-    }
+  /** */
+  public OverflowException() {}
 
-    /**
-     * @param message
-     */
-    public OverflowException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public OverflowException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public OverflowException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public OverflowException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public OverflowException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public OverflowException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -17,45 +17,39 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.lbs;
 
-abstract public class AbstractHostMetrics implements IHostMetrics {
+public abstract class AbstractHostMetrics implements IHostMetrics {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T extends Number> T getNumeric(final String name,
-            final T defaultValue) {
+  @SuppressWarnings("unchecked")
+  @Override
+  public <T extends Number> T getNumeric(final String name, final T defaultValue) {
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    if (name == null) throw new IllegalArgumentException();
 
-        if (defaultValue == null)
-            throw new IllegalArgumentException();
+    if (defaultValue == null) throw new IllegalArgumentException();
 
-        final Number v = getNumeric(name);
+    final Number v = getNumeric(name);
 
-        if (v == null) {
+    if (v == null) {
 
-            // Not found. Return the default.
-            return defaultValue;
-
-        }
-
-        // Found. Coerce to the data type of the default.
-        if (Double.class == defaultValue.getClass()) {
-            return (T) (Double) v.doubleValue();
-        } else if (Float.class == defaultValue.getClass()) {
-            return (T) (Float) v.floatValue();
-        } else if (Long.class == defaultValue.getClass()) {
-            return (T) (Long) v.longValue();
-        } else if (Integer.class == defaultValue.getClass()) {
-            return (T) (Integer) v.intValue();
-        } else if (Short.class == defaultValue.getClass()) {
-            return (T) (Short) v.shortValue();
-        } else if (Byte.class == defaultValue.getClass()) {
-            return (T) (Byte) v.byteValue();
-        } else {
-            throw new UnsupportedOperationException("class="
-                    + defaultValue.getClass().getName());
-        }
+      // Not found. Return the default.
+      return defaultValue;
     }
 
+    // Found. Coerce to the data type of the default.
+    if (Double.class == defaultValue.getClass()) {
+      return (T) (Double) v.doubleValue();
+    } else if (Float.class == defaultValue.getClass()) {
+      return (T) (Float) v.floatValue();
+    } else if (Long.class == defaultValue.getClass()) {
+      return (T) (Long) v.longValue();
+    } else if (Integer.class == defaultValue.getClass()) {
+      return (T) (Integer) v.intValue();
+    } else if (Short.class == defaultValue.getClass()) {
+      return (T) (Short) v.shortValue();
+    } else if (Byte.class == defaultValue.getClass()) {
+      return (T) (Byte) v.byteValue();
+    } else {
+      throw new UnsupportedOperationException("class=" + defaultValue.getClass().getName());
+    }
+  }
 }

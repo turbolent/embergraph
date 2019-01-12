@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.Properties;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -29,171 +28,135 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Data driven test suite for custom serializer, testing basic feasibility 
- * for WKT literals (not strictly following the standard).
- * 
+ * Data driven test suite for custom serializer, testing basic feasibility for WKT literals (not
+ * strictly following the standard).
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestGeoSpatialCustomSerializerWKT() {
-    }
+  /** */
+  public TestGeoSpatialCustomSerializerWKT() {}
 
-    /**
-     * @param name
-     */ 
-    public TestGeoSpatialCustomSerializerWKT(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestGeoSpatialCustomSerializerWKT(String name) {
+    super(name);
+  }
 
+  /** Simple rectangle query looking for WKT-style literals. */
+  public void testWKTLiteral01() throws Exception {
 
-    /**
-     * Simple rectangle query looking for WKT-style literals.
-     */
-    public void testWKTLiteral01() throws Exception {
-       
-       new TestHelper(
-          "geo-wktliteral01",
-          "geo-wktliteral01.rq", 
-          "geo-wktliteral.nt",
-          "geo-wktliteral01.srx").runTest();
-       
-    }
-    
-    /**
-     * Simple rectangle query looking for WKT-style literal, with
-     * custom deserialization of geo:locationValue.
-     */
-    public void testWKTLiteral02() throws Exception {
-        
-        new TestHelper(
-           "geo-wktliteral02",
-           "geo-wktliteral02.rq", 
-           "geo-wktliteral.nt",
-           "geo-wktliteral02.srx").runTest();
-        
-    }
+    new TestHelper(
+            "geo-wktliteral01", "geo-wktliteral01.rq", "geo-wktliteral.nt", "geo-wktliteral01.srx")
+        .runTest();
+  }
 
-    /**
-     * Simple rectangle query looking for WKT-style literals.
-     */
-    public void testWKTLiteral03() throws Exception {
+  /**
+   * Simple rectangle query looking for WKT-style literal, with custom deserialization of
+   * geo:locationValue.
+   */
+  public void testWKTLiteral02() throws Exception {
 
-        new TestHelper(
-            "geo-wktliteral03",
-            "geo-wktliteral03.rq", 
-            "geo-wktliteral.nt",
-            "geo-wktliteral03.srx").runTest();
+    new TestHelper(
+            "geo-wktliteral02", "geo-wktliteral02.rq", "geo-wktliteral.nt", "geo-wktliteral02.srx")
+        .runTest();
+  }
 
-    }
+  /** Simple rectangle query looking for WKT-style literals. */
+  public void testWKTLiteral03() throws Exception {
 
-    /**
-     * Simple circle query looking for WKT-style literal, with
-     * custom deserialization of geo:locationValue.
-     */
-    public void testWKTLiteral04() throws Exception {
+    new TestHelper(
+            "geo-wktliteral03", "geo-wktliteral03.rq", "geo-wktliteral.nt", "geo-wktliteral03.srx")
+        .runTest();
+  }
 
-        new TestHelper(
-            "geo-wktliteral04",
-            "geo-wktliteral04.rq", 
-            "geo-wktliteral.nt",
-            "geo-wktliteral04.srx").runTest();
+  /**
+   * Simple circle query looking for WKT-style literal, with custom deserialization of
+   * geo:locationValue.
+   */
+  public void testWKTLiteral04() throws Exception {
 
-    }
-    
-    /**
-     * Simple circle query looking for WKT-style literal, with
-     * custom deserialization of full literal.
-     */
-    public void testWKTLiteral05() throws Exception {
+    new TestHelper(
+            "geo-wktliteral04", "geo-wktliteral04.rq", "geo-wktliteral.nt", "geo-wktliteral04.srx")
+        .runTest();
+  }
 
-        new TestHelper(
-            "geo-wktliteral05",
-            "geo-wktliteral05.rq", 
-            "geo-wktliteral.nt",
-            "geo-wktliteral05.srx").runTest();
+  /**
+   * Simple circle query looking for WKT-style literal, with custom deserialization of full literal.
+   */
+  public void testWKTLiteral05() throws Exception {
 
-    }
-    
-    /**
-     * Test passing in of WKT point as parameter of geo:spatialCircleCenter.
-     */
-    public void testWKTLiteral06() throws Exception {
+    new TestHelper(
+            "geo-wktliteral05", "geo-wktliteral05.rq", "geo-wktliteral.nt", "geo-wktliteral05.srx")
+        .runTest();
+  }
 
-        new TestHelper(
-            "geo-wktliteral06",
-            "geo-wktliteral06.rq", 
-            "geo-wktliteral.nt",
-            "geo-wktliteral06.srx").runTest();
+  /** Test passing in of WKT point as parameter of geo:spatialCircleCenter. */
+  public void testWKTLiteral06() throws Exception {
 
-    }
+    new TestHelper(
+            "geo-wktliteral06", "geo-wktliteral06.rq", "geo-wktliteral.nt", "geo-wktliteral06.srx")
+        .runTest();
+  }
 
-    /**
-     * Test passing in of WKT point as parameter of geo:spatialRectangleSouthWest
-     * and geo:spatialRectangleNorthEast.
-     */
-    public void testWKTLiteral07() throws Exception {
+  /**
+   * Test passing in of WKT point as parameter of geo:spatialRectangleSouthWest and
+   * geo:spatialRectangleNorthEast.
+   */
+  public void testWKTLiteral07() throws Exception {
 
-        new TestHelper(
-            "geo-wktliteral07",
-            "geo-wktliteral07.rq", 
-            "geo-wktliteral.nt",
-            "geo-wktliteral07.srx").runTest();
+    new TestHelper(
+            "geo-wktliteral07", "geo-wktliteral07.rq", "geo-wktliteral.nt", "geo-wktliteral07.srx")
+        .runTest();
+  }
 
-    }
+  @Override
+  public Properties getProperties() {
 
-    
-    @Override
-    public Properties getProperties() {
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) super.getProperties().clone();
+    // turn on quads.
+    properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
-        // turn on quads.
-        properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
+    // TM not available with quads.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
-        // TM not available with quads.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
+    // turn off axioms.
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
 
-        // turn off axioms.
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+    // no persistence.
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
-        // no persistence.
-        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+    // enable GeoSpatial index
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
-        // enable GeoSpatial index
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+    // set GeoSpatial configuration: use a higher precision and range shifts;
+    // the test accounts for this higher precision (and assert that range shifts
+    // actually do not harm the evaluation process)
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG
+            + ".0",
+        "{\"config\": "
+            + "{ \"uri\": \"http://www.opengis.net/ont/geosparql#wktLiteral\", "
+            + "\"literalSerializer\": \"org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestWKTLiteralSerializer\",  "
+            + "\"fields\": [ "
+            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
+            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" } "
+            + "]}}");
 
-        // set GeoSpatial configuration: use a higher precision and range shifts; 
-        // the test accounts for this higher precision (and assert that range shifts
-        // actually do not harm the evaluation process)
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
-           "{\"config\": "
-           + "{ \"uri\": \"http://www.opengis.net/ont/geosparql#wktLiteral\", "
-           + "\"literalSerializer\": \"org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestWKTLiteralSerializer\",  "
-           + "\"fields\": [ "
-           + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
-           + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" } "
-           + "]}}");
-        
-        // make our dummy WKT datatype default to ease querying
-        properties.setProperty(
-            org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-            "http://www.opengis.net/ont/geosparql#wktLiteral");
-        
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-           "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
-        
-        return properties;
+    // make our dummy WKT datatype default to ease querying
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+        "http://www.opengis.net/ont/geosparql#wktLiteral");
 
-    }
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+        "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+
+    return properties;
+  }
 }

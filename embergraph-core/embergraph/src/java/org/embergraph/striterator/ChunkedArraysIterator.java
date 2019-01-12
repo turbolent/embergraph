@@ -21,293 +21,262 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
  * An iterator that visits the elements in the given iterator of arrays.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: ChunkedArrayIterator.java 2265 2009-10-26 12:51:06Z thompsonbry
- *          $
+ * @version $Id: ChunkedArrayIterator.java 2265 2009-10-26 12:51:06Z thompsonbry $
  */
 public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
 
-    private boolean open = true;
-    
-    /** buffer iterator. */
-    private ICloseableIterator<E[]> bufferIt;
+  private boolean open = true;
 
-    /** current buffer. */
-    private E[] buffer;
+  /** buffer iterator. */
+  private ICloseableIterator<E[]> bufferIt;
 
-    /** The order of the elements in the buffer or <code>null</code> iff not known. */
-    private final IKeyOrder<E> keyOrder;
-    
-    /**
-     * The index of the next entry in {@link #buffer} that will be returned by
-     * {@link #next()}.
-     */
-    private int i = 0;
+  /** current buffer. */
+  private E[] buffer;
 
-//    /**
-//     * The element most recently returned by {@link #next()}.
-//     */
-//    private E current = null;
-    
-//    /**
-//     * The #of elements that this iterator buffered.
-//     */
-//    public int getBufferCount() {
-//
-//        return bufferCount;
-//        
-//    }
+  /** The order of the elements in the buffer or <code>null</code> iff not known. */
+  private final IKeyOrder<E> keyOrder;
 
-    /**
-     * An iterator that visits the elements in the given iterator of arrays.
-     * 
-     * @param a
-     *            The iterator of arrays of elements.
-     */
-    public ChunkedArraysIterator(final ICloseableIterator<E[]> a) {
-    
-        this(a, null);
-        
+  /** The index of the next entry in {@link #buffer} that will be returned by {@link #next()}. */
+  private int i = 0;
+
+  //    /**
+  //     * The element most recently returned by {@link #next()}.
+  //     */
+  //    private E current = null;
+
+  //    /**
+  //     * The #of elements that this iterator buffered.
+  //     */
+  //    public int getBufferCount() {
+  //
+  //        return bufferCount;
+  //
+  //    }
+
+  /**
+   * An iterator that visits the elements in the given iterator of arrays.
+   *
+   * @param a The iterator of arrays of elements.
+   */
+  public ChunkedArraysIterator(final ICloseableIterator<E[]> a) {
+
+    this(a, null);
+  }
+
+  /**
+   * An iterator that visits the elements in the given iterator of arrays.
+   *
+   * @param a The iterator of arrays of elements.
+   * @param keyOrder The order of the elements in the buffer or <code>null</code> iff not known.
+   */
+  public ChunkedArraysIterator(final ICloseableIterator<E[]> a, final IKeyOrder<E> keyOrder) {
+
+    if (a == null) throw new IllegalArgumentException();
+
+    this.bufferIt = a;
+
+    this.keyOrder = keyOrder;
+  }
+
+  @Override
+  public boolean hasNext() {
+
+    if (!open) return false;
+
+    if (buffer == null) {
+
+      return bufferIt.hasNext();
     }
-    
-    /**
-     * An iterator that visits the elements in the given iterator of arrays.
-     * 
-     * @param a
-     *            The iterator of arrays of elements.
-     * @param keyOrder
-     *            The order of the elements in the buffer or <code>null</code>
-     *            iff not known.
-     */
-    public ChunkedArraysIterator(final ICloseableIterator<E[]> a,
-            final IKeyOrder<E> keyOrder) {
-    
-        if (a == null)
-            throw new IllegalArgumentException();
+    //        else {
+    //
+    //            assert i <= buffer.length;
+    //
+    //            if (i == buffer.length) {
+    //
+    //                return false;
+    //
+    //            }
+    //
+    //        }
 
-        this.bufferIt = a;
-        
-        this.keyOrder = keyOrder;
+    return true;
+  }
 
-    }
+  @Override
+  public E next() {
 
-    @Override
-    public boolean hasNext() {
+    if (!hasNext()) {
 
-        if(!open) return false;
-        
-        if (buffer == null) {
-            
-            return bufferIt.hasNext();
-            
-        } 
-//        else {
-//            
-//            assert i <= buffer.length;
-//            
-//            if (i == buffer.length) {
-//    
-//                return false;
-//                
-//            }
-//            
-//        }
-    
-        return true;
-        
+      throw new NoSuchElementException();
     }
 
-    @Override
-    public E next() {
-        
-        if (!hasNext()) {
+    if (buffer == null) {
 
-            throw new NoSuchElementException();
-        
-        }
-        
-        if (buffer == null) {
-            
-            buffer = bufferIt.next();
-            
-        }
-        
-        E e = buffer[i++];
-        
-        if (i == buffer.length) {
-            
-            buffer = null;
-            
-            i = 0;
-            
-        }
-        
-        return e;
-        
-//        current = buffer[i++];
-//        
-//        return current;
-        
+      buffer = bufferIt.next();
     }
 
-    /**
-     * @throws UnsupportedOperationException
-     */
-    @Override
-    public void remove() {
-        
-        throw new UnsupportedOperationException();
-        
+    E e = buffer[i++];
+
+    if (i == buffer.length) {
+
+      buffer = null;
+
+      i = 0;
     }
 
-//    /**
-//     * Return the backing array.
-//     * 
-//     * @see #getBufferCount()
-//     */
-//    public E[] array() {
-//
-//        assertOpen();
-//
-//        return buffer;
-//        
-//    }
+    return e;
 
-    /**
-     * Returns the remaining statements.
-     * 
-     * @throws NoSuchElementException
-     *             if {@link #hasNext()} returns false.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public E[] nextChunk() {
-       
-        if (!hasNext()) {
+    //        current = buffer[i++];
+    //
+    //        return current;
 
-            throw new NoSuchElementException();
-            
-        }
+  }
 
-        final E[] ret;
-        
-        if (buffer == null) {
-            
-            /*
-             * We need to fetch the next buffer from the source iterator, and
-             * then we can just return it directly.
-             */
-            buffer = bufferIt.next();
-            
-            ret = buffer;
-            
-        } else if (i == 0) {
-            
-            /*
-             * Nothing has been returned to the caller by next() so we can just 
-             * return the current buffer in this case.
-             */
-            ret = buffer;
-            
-        } else {
-            
-            /*
-             * We have a buffer but we've already started return elements from
-             * it via next(), so we need to create a new buffer to return.
-             */
-            final int remaining = buffer.length - i;
-            
-            /*
-             * Dynamically instantiation an array of the same component type
-             * as the objects that we are visiting.
-             */
+  /** @throws UnsupportedOperationException */
+  @Override
+  public void remove() {
 
-            ret = (E[]) java.lang.reflect.Array.newInstance(buffer.getClass()
-                    .getComponentType(), remaining);
+    throw new UnsupportedOperationException();
+  }
 
-            
-            System.arraycopy(buffer, i, ret, 0, remaining);
-            
-        }
-        
-        // reset the current buffer
-        
-        buffer = null;
-        
-        i = 0;
-        
-        return ret;
-        
-    }
-    
-    @Override
-    public IKeyOrder<E> getKeyOrder() {
-        
-        return keyOrder;
-        
-    }
-    
-    @Override
-    public E[] nextChunk(final IKeyOrder<E> keyOrder) {
+  //    /**
+  //     * Return the backing array.
+  //     *
+  //     * @see #getBufferCount()
+  //     */
+  //    public E[] array() {
+  //
+  //        assertOpen();
+  //
+  //        return buffer;
+  //
+  //    }
 
-        if (keyOrder == null)
-            throw new IllegalArgumentException();
+  /**
+   * Returns the remaining statements.
+   *
+   * @throws NoSuchElementException if {@link #hasNext()} returns false.
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public E[] nextChunk() {
 
-        final E[] chunk = nextChunk();
+    if (!hasNext()) {
 
-        if (!keyOrder.equals(getKeyOrder())) {
-
-            // sort into the required order.
-
-            Arrays.sort(chunk, 0, chunk.length, keyOrder.getComparator());
-
-        }
-
-        return chunk;
-
-    }
-    
-    /*
-     * Note: Do NOT eagerly close the iterator since the makes it impossible to
-     * implement {@link #remove()}.
-     */
-    @Override
-    public void close() {
-
-        if (!open) {
-            
-            // already closed.
-            
-            return;
-            
-        }
-
-        bufferIt.close();
-        
-        open = false;
-        
-        buffer = null;
-        
-        i = 0;
-        
+      throw new NoSuchElementException();
     }
 
-//    private final void assertOpen() {
-//        
-//        if (!open) {
-//
-//            throw new IllegalStateException();
-//            
-//        }
-//        
-//    }
-    
+    final E[] ret;
+
+    if (buffer == null) {
+
+      /*
+       * We need to fetch the next buffer from the source iterator, and
+       * then we can just return it directly.
+       */
+      buffer = bufferIt.next();
+
+      ret = buffer;
+
+    } else if (i == 0) {
+
+      /*
+       * Nothing has been returned to the caller by next() so we can just
+       * return the current buffer in this case.
+       */
+      ret = buffer;
+
+    } else {
+
+      /*
+       * We have a buffer but we've already started return elements from
+       * it via next(), so we need to create a new buffer to return.
+       */
+      final int remaining = buffer.length - i;
+
+      /*
+       * Dynamically instantiation an array of the same component type
+       * as the objects that we are visiting.
+       */
+
+      ret =
+          (E[])
+              java.lang.reflect.Array.newInstance(buffer.getClass().getComponentType(), remaining);
+
+      System.arraycopy(buffer, i, ret, 0, remaining);
+    }
+
+    // reset the current buffer
+
+    buffer = null;
+
+    i = 0;
+
+    return ret;
+  }
+
+  @Override
+  public IKeyOrder<E> getKeyOrder() {
+
+    return keyOrder;
+  }
+
+  @Override
+  public E[] nextChunk(final IKeyOrder<E> keyOrder) {
+
+    if (keyOrder == null) throw new IllegalArgumentException();
+
+    final E[] chunk = nextChunk();
+
+    if (!keyOrder.equals(getKeyOrder())) {
+
+      // sort into the required order.
+
+      Arrays.sort(chunk, 0, chunk.length, keyOrder.getComparator());
+    }
+
+    return chunk;
+  }
+
+  /*
+   * Note: Do NOT eagerly close the iterator since the makes it impossible to
+   * implement {@link #remove()}.
+   */
+  @Override
+  public void close() {
+
+    if (!open) {
+
+      // already closed.
+
+      return;
+    }
+
+    bufferIt.close();
+
+    open = false;
+
+    buffer = null;
+
+    i = 0;
+  }
+
+  //    private final void assertOpen() {
+  //
+  //        if (!open) {
+  //
+  //            throw new IllegalStateException();
+  //
+  //        }
+  //
+  //    }
+
 }

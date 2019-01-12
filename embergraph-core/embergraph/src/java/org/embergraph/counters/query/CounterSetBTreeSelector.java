@@ -26,7 +26,6 @@ package org.embergraph.counters.query;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Pattern;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.PeriodEnum;
@@ -34,67 +33,61 @@ import org.embergraph.counters.store.CounterSetBTree;
 
 /**
  * Reads the relevant performance counter data from the store.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CounterSetBTreeSelector implements ICounterSelector {
 
-//    private static final Logger log = Logger.getLogger(CounterSetBTreeSelector.class);
-    
-    private final CounterSetBTree btree;
-    
-    /**
-     * 
-     * @param btree
-     *            The {@link CounterSetBTree}.
-     */
-    public CounterSetBTreeSelector(final CounterSetBTree btree) {
-        
-        if (btree == null)
-            throw new IllegalStateException();
+  //    private static final Logger log = Logger.getLogger(CounterSetBTreeSelector.class);
 
-        this.btree = btree;
-        
+  private final CounterSetBTree btree;
+
+  /** @param btree The {@link CounterSetBTree}. */
+  public CounterSetBTreeSelector(final CounterSetBTree btree) {
+
+    if (btree == null) throw new IllegalStateException();
+
+    this.btree = btree;
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  public ICounter[] selectCounters(
+      final int depth,
+      final Pattern pattern,
+      final long fromTime,
+      final long toTime,
+      final PeriodEnum period,
+      final boolean historyRequiredIsIgnored) {
+
+    final CounterSet counterSet =
+        btree.rangeIterator(fromTime, toTime, period.toTimeUnit(), pattern, depth);
+
+    // filter was already applied.
+    final Iterator<ICounter> itr = counterSet.getCounters(null /* filter */);
+
+    final Vector<ICounter> v = new Vector<ICounter>();
+
+    //        int ndistinct = 0;
+
+    while (itr.hasNext()) {
+
+      final ICounter c = itr.next();
+
+      //            if (depth != 0 && c.getDepth() > depth)
+      //                continue;
+      //
+      //            ndistinct++;
+      //
+      //            if (log.isDebugEnabled())
+      //                log.debug("Selected: ndistinct=" + ndistinct + " : " + c);
+
+      v.add(c);
     }
 
-    @Override
-    @SuppressWarnings("rawtypes")
-    public ICounter[] selectCounters(final int depth, final Pattern pattern,
-            final long fromTime, final long toTime, final PeriodEnum period,
-            final boolean historyRequiredIsIgnored) {
+    //        if (log.isInfoEnabled())
+    //            log.info("Selected: ndistinct=" + ndistinct);
 
-        final CounterSet counterSet = btree.rangeIterator(fromTime, toTime,
-                period.toTimeUnit(), pattern, depth);
-
-        // filter was already applied.
-        final Iterator<ICounter> itr = counterSet
-                .getCounters(null/* filter */);
-
-        final Vector<ICounter> v = new Vector<ICounter>();
-
-//        int ndistinct = 0;
-
-        while (itr.hasNext()) {
-
-            final ICounter c = itr.next();
-
-//            if (depth != 0 && c.getDepth() > depth)
-//                continue;
-//
-//            ndistinct++;
-//
-//            if (log.isDebugEnabled())
-//                log.debug("Selected: ndistinct=" + ndistinct + " : " + c);
-
-            v.add(c);
-
-        }
-
-//        if (log.isInfoEnabled())
-//            log.info("Selected: ndistinct=" + ndistinct);
-
-        return v.toArray(new ICounter[v.size()]);
-
-    }
-
+    return v.toArray(new ICounter[v.size()]);
+  }
 }

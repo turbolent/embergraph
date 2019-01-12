@@ -22,28 +22,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /**
- * An interface for a counter. Mutable btrees expose mutable counters while
- * read-only btrees do not. Like the mutable {@link BTree}, the mutable counter
- * is NOT thread-safe. An unpartitioned index exposes a single counter for the
- * entire index. A partitioned index exposes a counter per index partition and
- * the partition identified forms the high int32 for the counter.
- * 
+ * An interface for a counter. Mutable btrees expose mutable counters while read-only btrees do not.
+ * Like the mutable {@link BTree}, the mutable counter is NOT thread-safe. An unpartitioned index
+ * exposes a single counter for the entire index. A partitioned index exposes a counter per index
+ * partition and the partition identified forms the high int32 for the counter.
+ *
  * @see IIndex#getCounter()
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ICounter {
 
-    /**
-     * The current value of the counter (initially zero).
-     */
-    public long get();
-    
-    /**
-     * Increment the current value of the counter and then return its value
-     * (atomic).
-     */
-    public long incrementAndGet();
-    
+  /** The current value of the counter (initially zero). */
+  public long get();
+
+  /** Increment the current value of the counter and then return its value (atomic). */
+  public long incrementAndGet();
 }

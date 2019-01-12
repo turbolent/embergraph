@@ -21,7 +21,9 @@ package org.embergraph.rdf.sail.remote;
 import java.io.File;
 import java.util.Collection;
 import java.util.UUID;
-
+import org.embergraph.rdf.sail.model.RunningQuery;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
@@ -29,16 +31,11 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-import org.embergraph.rdf.sail.model.RunningQuery;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
-
 /**
- * An fully compliant implementation of Sesame's {@link Repository} that wraps
- * the embergraph remote API. Additional functionality is available using the
- * embergraph {@link RemoteRepositoryManager}. The proper incantation to create
- * an instance of this class is:
- * 
+ * An fully compliant implementation of Sesame's {@link Repository} that wraps the embergraph remote
+ * API. Additional functionality is available using the embergraph {@link RemoteRepositoryManager}.
+ * The proper incantation to create an instance of this class is:
+ *
  * <pre>
  * // Create client for the remote service.
  * final RemoteRepositoryManager mgr = new RemoteRepositoryManager(serviceURL);
@@ -56,214 +53,191 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
  *    mgr.close();
  * }
  * </pre>
- * 
+ *
  * This pattern makes it possible to:
+ *
  * <ul>
- * <li>Obtain {@link EmbergraphSailRemoteRepository} objects for different sparql
- * end points on the same embergraph server.</li>
- * <li>Those {@link EmbergraphSailRemoteRepository} objects are flyweight.</li>
- * <li>The {@link RemoteRepositoryManager} can be used to access additional
- * interfaces, including the multi-tenancy API and the transaction API.</li>
+ *   <li>Obtain {@link EmbergraphSailRemoteRepository} objects for different sparql end points on
+ *       the same embergraph server.
+ *   <li>Those {@link EmbergraphSailRemoteRepository} objects are flyweight.
+ *   <li>The {@link RemoteRepositoryManager} can be used to access additional interfaces, including
+ *       the multi-tenancy API and the transaction API.
  * </ul>
- * 
+ *
  * <h2>Transactions</h2>
- * 
- * The database supports read/write transactions since 1.5.2. Transaction
- * manager is at the database layer, not the {@link Repository} or
- * {@link RepositoryConnection}. Therefore a namespace DOES NOT need to be
- * configured for isolatable indices in order to create and manipulate
- * transactions, but it DOES need to be configured with isolatable indices in
- * order for you to WRITE on the namespace using a transaction.
- * 
+ *
+ * The database supports read/write transactions since 1.5.2. Transaction manager is at the database
+ * layer, not the {@link Repository} or {@link RepositoryConnection}. Therefore a namespace DOES NOT
+ * need to be configured for isolatable indices in order to create and manipulate transactions, but
+ * it DOES need to be configured with isolatable indices in order for you to WRITE on the namespace
+ * using a transaction.
+ *
  * @see RemoteTransactionManager
  * @see org.embergraph.rdf.sail.EmbergraphSail.Options#ISOLATABLE_INDICES
  * @see EmbergraphSailRemoteRepositoryConnection
  */
 public class EmbergraphSailRemoteRepository implements Repository {
 
-	/**
-	 * Initially open (aka initialized).
-	 */
-	private volatile boolean open = true;
-	
-   /**
-    * non-<code>null</code> iff the {@link RemoteRepositoryManager} is allocated
-    * by the constructor, in which case it is scoped to the life cycle of this
-    * {@link EmbergraphSailRemoteRepository} instance.
-    */
-   private final RemoteRepositoryManager our_mgr;
-   
-	/**
-	 * Always non-<code>null</code>. This is either an object that we have
-	 * created ourselves or one that was passed in by the caller. If we create
-	 * this object, then we own its life cycle and will close it when this
-	 * object is closed. In this case it will also be a
-	 * {@link RemoteRepositoryManager} rather than just a
-	 * {@link RemoteRepository}.
-	 */
-    private final RemoteRepository remoteRepository;
+  /** Initially open (aka initialized). */
+  private volatile boolean open = true;
 
-    /**
-     * This exists solely for {@link #getValueFactory()} - the value factory
-     * is not used inside of this class.
+  /**
+   * non-<code>null</code> iff the {@link RemoteRepositoryManager} is allocated by the constructor,
+   * in which case it is scoped to the life cycle of this {@link EmbergraphSailRemoteRepository}
+   * instance.
+   */
+  private final RemoteRepositoryManager our_mgr;
+
+  /**
+   * Always non-<code>null</code>. This is either an object that we have created ourselves or one
+   * that was passed in by the caller. If we create this object, then we own its life cycle and will
+   * close it when this object is closed. In this case it will also be a {@link
+   * RemoteRepositoryManager} rather than just a {@link RemoteRepository}.
+   */
+  private final RemoteRepository remoteRepository;
+
+  /**
+   * This exists solely for {@link #getValueFactory()} - the value factory is not used inside of
+   * this class.
+   */
+  private final ValueFactory valueFactory = ValueFactoryImpl.getInstance();
+
+  /** The object used to communicate with that remote repository. */
+  public RemoteRepository getRemoteRepository() {
+
+    return remoteRepository;
+  }
+
+  /**
+   * Constructor that simply specifies an endpoint. This class will internally allocate a {@link
+   * RemoteRepositoryManager} that is scoped to the life cycle of this class. The allocated {@link
+   * RemoteRepositoryManager} will be closed when this {@link EmbergraphSailRemoteRepository} is
+   * closed.
+   *
+   * <p>Note: This constructor pattern is NOT flyweight.
+   *
+   * @param sparqlEndpointURL The SPARQL end point URL
+   */
+  @Deprecated // This is broken because the sparqlEndpointURL is not the serviceURL and that is what
+              // the RRM expects/needs.
+  public EmbergraphSailRemoteRepository(final String sparqlEndpointURL) {
+
+    if (sparqlEndpointURL == null) throw new IllegalArgumentException();
+
+    /*
+     * Allocate a RemoteRepositoryManager. This is NOT a flyweight operation.
+     *
      */
-    private final ValueFactory valueFactory = ValueFactoryImpl.getInstance();
-    
-    /**
-     * The object used to communicate with that remote repository.
-     */
-    public RemoteRepository getRemoteRepository() {
-		
-		return remoteRepository;
-		
-	}
-	
-   /**
-    * Constructor that simply specifies an endpoint. This class will internally
-    * allocate a {@link RemoteRepositoryManager} that is scoped to the life
-    * cycle of this class. The allocated {@link RemoteRepositoryManager} will be
-    * closed when this {@link EmbergraphSailRemoteRepository} is closed.
-    * <p>
-    * Note: This constructor pattern is NOT flyweight.
-    * 
-    * @param sparqlEndpointURL
-    *           The SPARQL end point URL
-    */
-    @Deprecated // This is broken because the sparqlEndpointURL is not the serviceURL and that is what the RRM expects/needs.
-	public EmbergraphSailRemoteRepository(final String sparqlEndpointURL) {
+    this.our_mgr = new RemoteRepositoryManager(sparqlEndpointURL, false /*useLBS*/);
 
-       if (sparqlEndpointURL == null)
-          throw new IllegalArgumentException();
+    this.remoteRepository = our_mgr.getRepositoryForURL(sparqlEndpointURL);
+  }
 
-       /*
-        * Allocate a RemoteRepositoryManager. This is NOT a flyweight operation.
-        * 
-        */
-       this.our_mgr = new RemoteRepositoryManager(sparqlEndpointURL, false/*useLBS*/);
+  /**
+   * Flyweight constructor wraps the embergraph remote client for a SPARQL endpoint as an openrdf
+   * {@link Repository}.
+   *
+   * @see RemoteRepository#getEmbergraphSailRemoteRepository()
+   */
+  public EmbergraphSailRemoteRepository(final RemoteRepository repo) {
 
-       this.remoteRepository = our_mgr.getRepositoryForURL(sparqlEndpointURL);
+    if (repo == null) throw new IllegalArgumentException();
 
-    }
-    
-   /**
-    * Flyweight constructor wraps the embergraph remote client for a SPARQL
-    * endpoint as an openrdf {@link Repository}.
-    * 
-    * @see RemoteRepository#getEmbergraphSailRemoteRepository()
-    */
-	public EmbergraphSailRemoteRepository(final RemoteRepository repo) {
+    // use the manager associated with the provided client.
+    this.our_mgr = null;
 
-		if (repo == null)
-			throw new IllegalArgumentException();
-		
-		// use the manager associated with the provided client.
-		this.our_mgr = null;
-		
-		this.remoteRepository = repo;
-		
-	}
-	
-	@Override
-   synchronized public void shutDown() throws RepositoryException {
+    this.remoteRepository = repo;
+  }
 
-      if (our_mgr != null) {
+  @Override
+  public synchronized void shutDown() throws RepositoryException {
 
-         /*
-          * The RemoteRepositoryManager object was create by our constructor, so
-          * we own its life cycle and will close it down here.
-          */
+    if (our_mgr != null) {
 
-         try {
+      /*
+       * The RemoteRepositoryManager object was create by our constructor, so
+       * we own its life cycle and will close it down here.
+       */
 
-            our_mgr.close();
+      try {
 
-         } catch (Exception e) {
+        our_mgr.close();
 
-            throw new RepositoryException(e);
+      } catch (Exception e) {
 
-         }
-
+        throw new RepositoryException(e);
       }
+    }
 
-      open = false;
+    open = false;
+  }
 
-   }
+  @Override
+  public EmbergraphSailRemoteRepositoryConnection getConnection() throws RepositoryException {
 
-	@Override
-	public EmbergraphSailRemoteRepositoryConnection getConnection()
-	        throws RepositoryException {
-		
-		return new EmbergraphSailRemoteRepositoryConnection(this);
-		
-	}
+    return new EmbergraphSailRemoteRepositoryConnection(this);
+  }
 
-	@Override
-	public void initialize() throws RepositoryException {
-		if (!open)
-			throw new RepositoryException("Can not re-initialize");
-	}
+  @Override
+  public void initialize() throws RepositoryException {
+    if (!open) throw new RepositoryException("Can not re-initialize");
+  }
 
-	@Override
-	public boolean isInitialized() {
-		return open;
-	}
+  @Override
+  public boolean isInitialized() {
+    return open;
+  }
 
-	@Override
-	public boolean isWritable() throws RepositoryException {
-		return open;
-	}
+  @Override
+  public boolean isWritable() throws RepositoryException {
+    return open;
+  }
 
-	/**
-	 * Unsupported operation
-	 * 
-	 * @throws UnsupportedOperationException
-	 */
-	@Override
-	public void setDataDir(File dataDir) {
-		throw new UnsupportedOperationException();
-	}
+  /**
+   * Unsupported operation
+   *
+   * @throws UnsupportedOperationException
+   */
+  @Override
+  public void setDataDir(File dataDir) {
+    throw new UnsupportedOperationException();
+  }
 
-   /**
-    * Unsupported operation
-    * 
-    * @throws UnsupportedOperationException
-    */
-	@Override
-	public File getDataDir() {
-		throw new UnsupportedOperationException();
-	}
+  /**
+   * Unsupported operation
+   *
+   * @throws UnsupportedOperationException
+   */
+  @Override
+  public File getDataDir() {
+    throw new UnsupportedOperationException();
+  }
 
-	/**
-	 * Return a client-only {@link ValueFactory} implementation.
-	 */
-	@Override
-	public ValueFactory getValueFactory() {
-		return valueFactory;
-	}
-	
-	/**
-	 * Cancel the query specified by the UUID. 
-	 * 
-	 * @param queryId
-	 * @throws Exception
-	 */
-	public void cancel(UUID queryId) throws Exception {
-		
-		this.our_mgr.cancel(queryId);
-		
-	}
-	
-	/**
-	 * Return a collection containing Metadata objects about the
-	 * currently running queries. 
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public Collection<RunningQuery> showQueries() throws Exception {
-		
-		return this.our_mgr.showQueries();
-		
-	}
+  /** Return a client-only {@link ValueFactory} implementation. */
+  @Override
+  public ValueFactory getValueFactory() {
+    return valueFactory;
+  }
 
+  /**
+   * Cancel the query specified by the UUID.
+   *
+   * @param queryId
+   * @throws Exception
+   */
+  public void cancel(UUID queryId) throws Exception {
+
+    this.our_mgr.cancel(queryId);
+  }
+
+  /**
+   * Return a collection containing Metadata objects about the currently running queries.
+   *
+   * @return
+   * @throws Exception
+   */
+  public Collection<RunningQuery> showQueries() throws Exception {
+
+    return this.our_mgr.showQueries();
+  }
 }

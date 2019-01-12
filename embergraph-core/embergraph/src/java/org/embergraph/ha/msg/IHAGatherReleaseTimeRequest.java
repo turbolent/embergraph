@@ -20,45 +20,36 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 
 /**
- * Message used to request information about the earliest commit point that is
- * pinned on a follower. This is used by the leader to make a decision about the
- * new release time for the replication cluster. The message causes the follower
- * to send an {@link IHANotifyReleaseTimeRequest} back to the leader. That
- * message is sent from within the thread on the follower that is handling the
- * RMI for the {@link IHAGatherReleaseTimeRequest} in order to synchronize the
- * protocol across the leader and the followers.
- * 
+ * Message used to request information about the earliest commit point that is pinned on a follower.
+ * This is used by the leader to make a decision about the new release time for the replication
+ * cluster. The message causes the follower to send an {@link IHANotifyReleaseTimeRequest} back to
+ * the leader. That message is sent from within the thread on the follower that is handling the RMI
+ * for the {@link IHAGatherReleaseTimeRequest} in order to synchronize the protocol across the
+ * leader and the followers.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAGatherReleaseTimeRequest extends IHAMessage {
 
-    /**
-     * The token for which this request is valid.
-     */
-    public long token();
-    
-    /**
-     * A timestamp on the leader at the start of the protocol used to agree on
-     * the new release time (this can be the commitTime that will be assigned by
-     * the leader to the new commit point). This is used to detect problems
-     * where the clocks are not synchronized on the services.
-     */
-    public long getTimestampOnLeader();
+  /** The token for which this request is valid. */
+  public long token();
 
-    /**
-     * The UUID of the leader. This may be used to discover the service that
-     * is (or was) the leader even if the token has been invalidated.
-     */
-    public UUID getLeaderId();
+  /**
+   * A timestamp on the leader at the start of the protocol used to agree on the new release time
+   * (this can be the commitTime that will be assigned by the leader to the new commit point). This
+   * is used to detect problems where the clocks are not synchronized on the services.
+   */
+  public long getTimestampOnLeader();
 
-    /**
-     * The commit counter that will be assigned to the new commit point.
-     */
-    public long getNewCommitCounter();
+  /**
+   * The UUID of the leader. This may be used to discover the service that is (or was) the leader
+   * even if the token has been invalidated.
+   */
+  public UUID getLeaderId();
 
-    /**
-     * The commit time that will be assigned to the new commit point.
-     */
-    public long getNewCommitTime();
-    
+  /** The commit counter that will be assigned to the new commit point. */
+  public long getNewCommitCounter();
+
+  /** The commit time that will be assigned to the new commit point. */
+  public long getNewCommitTime();
 }

@@ -28,94 +28,91 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test that are run for each {@link ITripleStore} implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestTripleStoreBasics extends TestCase2 {
 
-    /**
-     * Aggregates the test suites into something approximating increasing
-     * dependency. This is designed to run as a <em>proxy test suite</em> in
-     * which all tests are run using a common configuration and a delegation
-     * mechanism. You MUST add the returned {@link Test} into a properly
-     * configured {@link ProxyTestSuite}.
-     * 
-     * @see ProxyTestSuite
+  /**
+   * Aggregates the test suites into something approximating increasing dependency. This is designed
+   * to run as a <em>proxy test suite</em> in which all tests are run using a common configuration
+   * and a delegation mechanism. You MUST add the returned {@link Test} into a properly configured
+   * {@link ProxyTestSuite}.
+   *
+   * @see ProxyTestSuite
+   */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("Triple store basics");
+
+    /*
+     * Bootstrap test suites.
      */
-    public static Test suite() {
 
-        final TestSuite suite = new TestSuite("Triple store basics");
+    // make sure that the db can find the relations and they their container
+    suite.addTestSuite(TestRelationLocator.class);
 
-        /*
-         * Bootstrap test suites.
-         */
-        
-        // make sure that the db can find the relations and they their container
-        suite.addTestSuite(TestRelationLocator.class);
+    // test suite for the LexiconRelation.
+    suite.addTest(org.embergraph.rdf.lexicon.TestAll.suite());
 
-        // test suite for the LexiconRelation.
-        suite.addTest(org.embergraph.rdf.lexicon.TestAll.suite());
+    // test suite for the SPORelation.
+    suite.addTest(org.embergraph.rdf.spo.TestAll.suite());
 
-        // test suite for the SPORelation.
-        suite.addTest(org.embergraph.rdf.spo.TestAll.suite());
+    /*
+     * Tests at the RDF Statement level, requiring use of both the
+     * LexiconRelation and the SPORelation.
+     */
 
-        /*
-         * Tests at the RDF Statement level, requiring use of both the
-         * LexiconRelation and the SPORelation.
-         */
-        
-        // test adding terms and statements.
-        suite.addTestSuite(TestTripleStore.class);
+    // test adding terms and statements.
+    suite.addTestSuite(TestTripleStore.class);
 
-        // test the ISPO#isModified() API (low-level API).
-        suite.addTestSuite(TestIsModified.class);
+    // test the ISPO#isModified() API (low-level API).
+    suite.addTestSuite(TestIsModified.class);
 
-        // test adding terms and statements is restart safe.
-        suite.addTestSuite(TestRestartSafe.class);
+    // test adding terms and statements is restart safe.
+    suite.addTestSuite(TestRestartSafe.class);
 
-        // a stress test based on an issue observed for centos.
-        suite.addTestSuite(StressTestCentos.class);
-        
-        // somewhat dated test of sustained insert rate on synthetic data.
-        suite.addTestSuite(TestInsertRate.class);
+    // a stress test based on an issue observed for centos.
+    suite.addTestSuite(StressTestCentos.class);
 
-        // test of the statement identifier semantics.
-        suite.addTestSuite(TestStatementIdentifiers.class);
+    // somewhat dated test of sustained insert rate on synthetic data.
+    suite.addTestSuite(TestInsertRate.class);
 
-        // test suite for bulk filter of statements absent/present in the kb.
-        suite.addTestSuite(TestBulkFilter.class);
+    // test of the statement identifier semantics.
+    suite.addTestSuite(TestStatementIdentifiers.class);
 
-        // test suite for temp stores sharing the same lexicon.
-        suite.addTestSuite(TestSharedLexiconTempStore.class);
-        
-        /*
-         * test suite for the rio parser and data loading integration, including
-         * support for statement identifiers and handling of blank nodes when
-         * statement identifiers are NOT enabled.
-         */
-        suite.addTest(org.embergraph.rdf.rio.TestAll.suite());
+    // test suite for bulk filter of statements absent/present in the kb.
+    suite.addTestSuite(TestBulkFilter.class);
 
-        // the DataLoader utility.
-        suite.addTestSuite(TestDataLoader.class);
-        
-		/**
-		 * Test suite for configuration of the BLOBS index support.
-		 * 
-		 * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">
-		 *      Disable BLOBS indexing completely for GPU </a>
-		 */ 
-        suite.addTestSuite(TestBlobsConfiguration.class);
-        
-//        // magic sets support (still under development).
-//        suite.addTest(org.embergraph.rdf.magic.TestAll.suite());
+    // test suite for temp stores sharing the same lexicon.
+    suite.addTestSuite(TestSharedLexiconTempStore.class);
 
-        // integration test suite for inline URIs.
-        // See BLZG-1507 (Implement support for DTE extension types for URIs)
-        suite.addTestSuite(org.embergraph.rdf.store.TestInlineURIs.class);
+    /*
+     * test suite for the rio parser and data loading integration, including
+     * support for statement identifiers and handling of blank nodes when
+     * statement identifiers are NOT enabled.
+     */
+    suite.addTest(org.embergraph.rdf.rio.TestAll.suite());
 
-        return suite;
+    // the DataLoader utility.
+    suite.addTestSuite(TestDataLoader.class);
 
-    }
+    /**
+     * Test suite for configuration of the BLOBS index support.
+     *
+     * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">Disable BLOBS indexing
+     *     completely for GPU </a>
+     */
+    suite.addTestSuite(TestBlobsConfiguration.class);
 
+    //        // magic sets support (still under development).
+    //        suite.addTest(org.embergraph.rdf.magic.TestAll.suite());
+
+    // integration test suite for inline URIs.
+    // See BLZG-1507 (Implement support for DTE extension types for URIs)
+    suite.addTestSuite(org.embergraph.rdf.store.TestInlineURIs.class);
+
+    return suite;
+  }
 }

@@ -22,135 +22,120 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
-
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-
 /**
- * Data driven test suite {@link CompressedTimestampExtension}, testing
- * real SPARQL queries including mathematical operations over the extension.
- * 
+ * Data driven test suite {@link CompressedTimestampExtension}, testing real SPARQL queries
+ * including mathematical operations over the extension.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSPARQLTestCase {
 
+  public TestCompressedTimestampExtensionSPARQL() {}
 
-    public TestCompressedTimestampExtensionSPARQL() {
-    }
+  /** @param name */
+  public TestCompressedTimestampExtensionSPARQL(String name) {
+    super(name);
+  }
 
-    /**
-     * @param name
-     */
-    public TestCompressedTimestampExtensionSPARQL(String name) {
-        super(name);
-    }
+  /** Simple SELECT query returning data typed with the given timestamp. */
+  public void test_compressed_timestamp_01a() throws Exception {
 
-    /**
-     * Simple SELECT query returning data typed with the given timestamp.
-     */
-    public void test_compressed_timestamp_01a() throws Exception {
-
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-01a", // testURI,
-            "compressed-timestamp-01a.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-01.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-01a.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * Simple SELECT query returning data typed with the given timestamp,
-     * where we have several FILTERs that should evaluate to true.
-     */
-    public void test_compressed_timestamp_01b() throws Exception {
+  /**
+   * Simple SELECT query returning data typed with the given timestamp, where we have several
+   * FILTERs that should evaluate to true.
+   */
+  public void test_compressed_timestamp_01b() throws Exception {
 
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-01b", // testURI,
-            "compressed-timestamp-01b.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-01.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-01b.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * Simple SELECT query returning data typed with the given timestamp,
-     * where we have several FILTERs that should evaluate to true.
-     */
-    public void test_compressed_timestamp_01c() throws Exception {
+  /**
+   * Simple SELECT query returning data typed with the given timestamp, where we have several
+   * FILTERs that should evaluate to true.
+   */
+  public void test_compressed_timestamp_01c() throws Exception {
 
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-01c", // testURI,
-            "compressed-timestamp-01c.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-01.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-01c.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * Simple SELECT query returning data typed with the given timestamp,
-     * where we have several FILTERs that should evaluate to true.
-     */
-    public void test_compressed_timestamp_01d() throws Exception {
+  /**
+   * Simple SELECT query returning data typed with the given timestamp, where we have several
+   * FILTERs that should evaluate to true.
+   */
+  public void test_compressed_timestamp_01d() throws Exception {
 
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-01d", // testURI,
-            "compressed-timestamp-01d.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-01.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-01d.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
+  /** SELECT query including plus and minus operations on the compressed timestamp datatype */
+  public void test_compressed_timestamp_02a() throws Exception {
 
-    /**
-     * SELECT query including plus and minus operations on the
-     * compressed timestamp datatype
-     */
-    public void test_compressed_timestamp_02a() throws Exception {
-
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-02a", // testURI,
-            "compressed-timestamp-02a.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-02.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-02a.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-02.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * SELECT query including plus and minus operations on the
-     * compressed timestamp datatype plus filters with comparison
-     * and mathematical operations.
-     */
-    public void test_compressed_timestamp_02b() throws Exception {
+  /**
+   * SELECT query including plus and minus operations on the compressed timestamp datatype plus
+   * filters with comparison and mathematical operations.
+   */
+  public void test_compressed_timestamp_02b() throws Exception {
 
-        new TestHelper(
+    new TestHelper(
             "compressed-timestamp-02b", // testURI,
-            "compressed-timestamp-02b.rq",// queryFileURL
-            "compressed-timestamp.ttl",// dataFileURL
-            "compressed-timestamp-02.srx"// resultFileURL
-        ).runTest();
+            "compressed-timestamp-02b.rq", // queryFileURL
+            "compressed-timestamp.ttl", // dataFileURL
+            "compressed-timestamp-02.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * Hook in the compressed timestamp extension factory.
-     */
-    @Override
-    public Properties getProperties() {
+  /** Hook in the compressed timestamp extension factory. */
+  @Override
+  public Properties getProperties() {
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) super.getProperties().clone();
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-        properties.setProperty(
-            AbstractTripleStore.Options.EXTENSION_FACTORY_CLASS, 
-            "org.embergraph.rdf.internal.CompressedTimestampExtensionFactory");
+    properties.setProperty(
+        AbstractTripleStore.Options.EXTENSION_FACTORY_CLASS,
+        "org.embergraph.rdf.internal.CompressedTimestampExtensionFactory");
 
-        return properties;
-
-    }    
+    return properties;
+  }
 }

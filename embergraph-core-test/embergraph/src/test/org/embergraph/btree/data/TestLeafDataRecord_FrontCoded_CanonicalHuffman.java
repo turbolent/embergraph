@@ -26,36 +26,29 @@ import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 
 /**
- * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in
- * place).
- * 
+ * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in place).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestLeafDataRecord_FrontCoded_CanonicalHuffman extends AbstractLeafDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestLeafDataRecord_FrontCoded_CanonicalHuffman() {
-    }
+  /** */
+  public TestLeafDataRecord_FrontCoded_CanonicalHuffman() {}
 
-    /**
-     * @param name
-     */
-    public TestLeafDataRecord_FrontCoded_CanonicalHuffman(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestLeafDataRecord_FrontCoded_CanonicalHuffman(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  protected void setUp() throws Exception {
 
-        coder = new DefaultLeafCoder(
-                new FrontCodedRabaCoder(8/* ratio */),// keys
-                CanonicalHuffmanRabaCoder.INSTANCE // vals
-        );
+    super.setUp();
 
-    }
-
+    coder =
+        new DefaultLeafCoder(
+            new FrontCodedRabaCoder(8 /* ratio */), // keys
+            CanonicalHuffmanRabaCoder.INSTANCE // vals
+            );
+  }
 }

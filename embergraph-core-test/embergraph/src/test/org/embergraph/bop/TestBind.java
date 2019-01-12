@@ -1,72 +1,56 @@
-/**
- * 
- */
+/** */
 package org.embergraph.bop;
 
-import org.embergraph.bop.bindingSet.ListBindingSet;
-
 import junit.framework.TestCase2;
+import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Unit tests for {@link Bind}.
- * 
+ *
  * @author thompsonbry
- * 
- * @todo Write a test where the {@link IValueExpression} given to bind is more
- *       complex than an {@link IVariable} or an {@link IConstant}.
+ * @todo Write a test where the {@link IValueExpression} given to bind is more complex than an
+ *     {@link IVariable} or an {@link IConstant}.
  */
 public class TestBind extends TestCase2 {
 
-	/**
-	 * 
-	 */
-	public TestBind() {
-	}
+  /** */
+  public TestBind() {}
 
-	/**
-	 * @param name
-	 */
-	public TestBind(String name) {
-		super(name);
-	}
+  /** @param name */
+  public TestBind(String name) {
+    super(name);
+  }
 
-	/**
-	 * Unit test of bind(var,constant).
-	 */
-	public void test_bind_constant() {
+  /** Unit test of bind(var,constant). */
+  public void test_bind_constant() {
 
-		final IBindingSet bset = new ListBindingSet();
-		
-		final IVariable<?> y = Var.var("y");
-		
-		// verify bind() returns the value of the constant.
-		assertEquals(Integer.valueOf(12), new Bind(y, new Constant<Integer>(
-				Integer.valueOf(12))).get(bset));
+    final IBindingSet bset = new ListBindingSet();
 
-		// verify side-effect on the binding set.
-		assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+    final IVariable<?> y = Var.var("y");
 
-	}
+    // verify bind() returns the value of the constant.
+    assertEquals(
+        Integer.valueOf(12), new Bind(y, new Constant<Integer>(Integer.valueOf(12))).get(bset));
 
-	/**
-	 * Unit test of bind(var,otherVar).
-	 */
-	public void test_bind_var() {
+    // verify side-effect on the binding set.
+    assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+  }
 
-		final IBindingSet bset = new ListBindingSet();
+  /** Unit test of bind(var,otherVar). */
+  public void test_bind_var() {
 
-		final IVariable<?> x = Var.var("x");
+    final IBindingSet bset = new ListBindingSet();
 
-		final IVariable<?> y = Var.var("y");
+    final IVariable<?> x = Var.var("x");
 
-		bset.set(x, new Constant<Integer>(12));
+    final IVariable<?> y = Var.var("y");
 
-		// verify bind() returns the value of the other variable.
-		assertEquals(Integer.valueOf(12), new Bind(y, x).get(bset));
+    bset.set(x, new Constant<Integer>(12));
 
-		// verify side-effect on the binding set.
-		assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+    // verify bind() returns the value of the other variable.
+    assertEquals(Integer.valueOf(12), new Bind(y, x).get(bset));
 
-	}
-
+    // verify side-effect on the binding set.
+    assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+  }
 }

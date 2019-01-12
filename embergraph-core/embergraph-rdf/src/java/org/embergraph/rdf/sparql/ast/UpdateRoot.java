@@ -25,124 +25,105 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
 /**
  * The top level container for a sequence of UPDATE operations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class UpdateRoot extends GroupNodeBase<Update> implements IPrefixDecls {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends QueryNodeBase.Annotations,
-            IPrefixDecls.Annotations {
+  public interface Annotations extends QueryNodeBase.Annotations, IPrefixDecls.Annotations {}
 
-    }
-    
-    /**
-     * 
-     */
-    public UpdateRoot() {
-    }
+  /** */
+  public UpdateRoot() {}
 
-    /**
-     * @param op
-     */
-    public UpdateRoot(UpdateRoot op) {
-        super(op);
-    }
+  /** @param op */
+  public UpdateRoot(UpdateRoot op) {
+    super(op);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public UpdateRoot(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-    }
+  /**
+   * @param args
+   * @param anns
+   */
+  public UpdateRoot(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+  }
 
-    @SuppressWarnings("unchecked")
-    public Map<String, String> getPrefixDecls() {
+  @SuppressWarnings("unchecked")
+  public Map<String, String> getPrefixDecls() {
 
-        final Map<String, String> prefixDecls = (Map<String, String>) getProperty(Annotations.PREFIX_DECLS);
+    final Map<String, String> prefixDecls =
+        (Map<String, String>) getProperty(Annotations.PREFIX_DECLS);
 
-        if (prefixDecls == null)
-            return Collections.emptyMap();
+    if (prefixDecls == null) return Collections.emptyMap();
 
-        return Collections.unmodifiableMap(prefixDecls);
+    return Collections.unmodifiableMap(prefixDecls);
+  }
 
-    }
+  @Override
+  public void setPrefixDecls(final Map<String, String> prefixDecls) {
 
-    @Override
-    public void setPrefixDecls(final Map<String, String> prefixDecls) {
+    setProperty(Annotations.PREFIX_DECLS, prefixDecls);
+  }
 
-        setProperty(Annotations.PREFIX_DECLS, prefixDecls);
+  @Override
+  public String toString(final int indent) {
 
-    }
+    final String s = indent(indent);
 
-    @Override
-    public String toString(final int indent) {
-        
-        final String s = indent(indent);
-        
-        final StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
 
-        final Map<String/* prefix */, String/* uri */> prefixDecls = getPrefixDecls();
+    final Map<String /* prefix */, String /* uri */> prefixDecls = getPrefixDecls();
 
-//        if (getProperty(Annotations.TIMEOUT) != null) {
-//            sb.append("\n");
-//            sb.append(s);
-//            sb.append("timeout=" + getTimeout());
-//        }
+    //        if (getProperty(Annotations.TIMEOUT) != null) {
+    //            sb.append("\n");
+    //            sb.append(s);
+    //            sb.append("timeout=" + getTimeout());
+    //        }
 
-        if(prefixDecls != null) {
+    if (prefixDecls != null) {
 
-            for (Map.Entry<String, String> e : prefixDecls.entrySet()) {
+      for (Map.Entry<String, String> e : prefixDecls.entrySet()) {
 
-                sb.append("\n");
+        sb.append("\n");
 
-                sb.append(s);
-                
-                sb.append("PREFIX ");
-                
-                sb.append(e.getKey());
-                
-                sb.append(": <");
-                
-                sb.append(e.getValue());
-                
-                sb.append(">");
+        sb.append(s);
 
-            }
+        sb.append("PREFIX ");
 
-        }
+        sb.append(e.getKey());
 
-        for (Update n : this) {
+        sb.append(": <");
 
-            sb.append(n.toString(indent + 1));
+        sb.append(e.getValue());
 
-        }
-
-        return sb.toString();
-
-    }
-    
-
-    @Override
-    public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-       return new HashSet<IVariable<?>>();
+        sb.append(">");
+      }
     }
 
-    @Override
-    public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-       return new HashSet<IVariable<?>>();
+    for (Update n : this) {
+
+      sb.append(n.toString(indent + 1));
     }
 
+    return sb.toString();
+  }
+
+  @Override
+  public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
+
+  @Override
+  public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
+    return new HashSet<IVariable<?>>();
+  }
 }

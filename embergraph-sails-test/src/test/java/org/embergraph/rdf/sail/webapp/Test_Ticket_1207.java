@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.util.Arrays;
-
 import junit.framework.Test;
-
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -34,112 +34,110 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
-
 /**
  * GETSTMTS test suite for includeInferred.
- * 
- * @see <a href="http://jira.blazegraph.com/browse/BLZG-1207" > getStatements()
- *      ignores includeInferred (REST API) </a>
+ *
+ * @see <a href="http://jira.blazegraph.com/browse/BLZG-1207" > getStatements() ignores
+ *     includeInferred (REST API) </a>
  */
-public class Test_Ticket_1207<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+public class Test_Ticket_1207<S extends IIndexManager> extends AbstractTestNanoSparqlClient<S> {
 
-	private final Resource s = new URIImpl("http://test/s");
-	private final URI p = new URIImpl("http://test/p");
-	private final URI p1 = new URIImpl("http://test/p1");
-	private final Value o = new URIImpl("http://test/o");
+  private final Resource s = new URIImpl("http://test/s");
+  private final URI p = new URIImpl("http://test/p");
+  private final URI p1 = new URIImpl("http://test/p1");
+  private final Value o = new URIImpl("http://test/o");
 
-	public Test_Ticket_1207() {
+  public Test_Ticket_1207() {}
 
-	}
+  public Test_Ticket_1207(final String name) {
 
-	public Test_Ticket_1207(final String name) {
+    super(name);
+  }
 
-		super(name);
+  public static Test suite() {
 
-	}
+    return ProxySuiteHelper.suiteWhenStandalone(
+        Test_Ticket_1207.class, "test.*", TestMode.triplesPlusTruthMaintenance);
+  }
 
-	public static Test suite() {
+  /**
+   * Test supposed to check if remote call for getStatements properly handle includeInferred flag
+   */
+  public void test_ticket_1207() throws Exception {
 
-		return ProxySuiteHelper.suiteWhenStandalone(Test_Ticket_1207.class,
-                "test.*", TestMode.triplesPlusTruthMaintenance
-                );
-       
-	}
+    final ValueFactoryImpl vf = ValueFactoryImpl.getInstance();
+    final Statement[] a =
+        new Statement[] {
+          vf.createStatement(s, p, o), vf.createStatement(p, RDFS.SUBPROPERTYOF, p1)
+        };
 
-   /**
-    * Test supposed to check if remote call for getStatements properly handle includeInferred flag
-    */
-   public void test_ticket_1207() throws Exception {
+    final AddOp addOp = new AddOp(Arrays.asList(a));
 
-      final ValueFactoryImpl vf = ValueFactoryImpl.getInstance();
-      final Statement[] a = new Statement[] { 
-			vf.createStatement(s, p, o),
-			vf.createStatement(p, RDFS.SUBPROPERTYOF, p1)
-	  };
+    m_repo.add(addOp);
 
-      final AddOp addOp = new AddOp(Arrays.asList(a));
+    final GraphQueryResult resultIncludeInferred = m_repo.getStatements(s, null, o, true);
+    try {
+      int count = 0;
+      while (resultIncludeInferred.hasNext()) {
+        resultIncludeInferred.next();
+        count++;
+      }
+      assertEquals(2, count);
+    } finally {
+      resultIncludeInferred.close();
+    }
 
-      m_repo.add(addOp);
+    final GraphQueryResult resultDoNotIncludeInferred = m_repo.getStatements(s, null, o, false);
+    try {
+      int count = 0;
+      while (resultDoNotIncludeInferred.hasNext()) {
+        resultDoNotIncludeInferred.next();
+        count++;
+      }
+      assertEquals(1, count);
+    } finally {
+      resultDoNotIncludeInferred.close();
+    }
 
-      final GraphQueryResult resultIncludeInferred = m_repo.getStatements(s, null, o, true);
+    {
+      final TupleQuery tq =
+          m_repo
+              .getEmbergraphSailRemoteRepository()
+              .getConnection()
+              .prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
+      tq.setBinding("s", s);
+      tq.setIncludeInferred(true);
+      final TupleQueryResult tqr = tq.evaluate();
       try {
-         int count = 0;
-         while (resultIncludeInferred.hasNext()) {
-             resultIncludeInferred.next();
-             count++;
-         }
-         assertEquals(2,count);
+        int count = 0;
+        while (tqr.hasNext()) {
+          tqr.next();
+          count++;
+        }
+        assertEquals(2, count);
       } finally {
-         resultIncludeInferred.close();
+        tqr.close();
       }
-
-      final GraphQueryResult resultDoNotIncludeInferred = m_repo.getStatements(s, null, o, false);
+    }
+    {
+      final TupleQuery tq =
+          m_repo
+              .getEmbergraphSailRemoteRepository()
+              .getConnection()
+              .prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
+      tq.setBinding("s", s);
+      tq.setIncludeInferred(false);
+      final TupleQueryResult tqr = tq.evaluate();
       try {
-         int count = 0;
-         while (resultDoNotIncludeInferred.hasNext()) {
-        	 resultDoNotIncludeInferred.next();
-             count++;
-         }
-         assertEquals(1,count);
+        int count = 0;
+        while (tqr.hasNext()) {
+          System.out.println(tqr.next());
+          count++;
+        }
+        assertEquals(1, count);
       } finally {
-    	  resultDoNotIncludeInferred.close();
+        tqr.close();
       }
-
-      {
-          final TupleQuery tq = m_repo.getEmbergraphSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
-          tq.setBinding("s", s);
-          tq.setIncludeInferred(true);
-          final TupleQueryResult tqr = tq.evaluate();
-          try {
-              int count = 0;
-              while (tqr.hasNext()) {
-                  tqr.next();
-                  count++;
-               }
-              assertEquals(2,count);
-          } finally {
-               tqr.close();
-          }
-      }
-      {
-          final TupleQuery tq = m_repo.getEmbergraphSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
-          tq.setBinding("s", s);
-          tq.setIncludeInferred(false);
-          final TupleQueryResult tqr = tq.evaluate();
-          try {
-              int count = 0;
-              while (tqr.hasNext()) {
-                  System.out.println(tqr.next());
-                  count++;
-               }
-              assertEquals(1,count);
-          } finally {
-               tqr.close();
-          }
-      }
-   }
-
+    }
+  }
 }

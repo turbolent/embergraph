@@ -33,42 +33,43 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
  */
 public abstract class AbstractChunkSizeHint extends AbstractIntQueryHint {
 
-    /**
-     * @param name
-     * @param defaultValue
-     */
-    public AbstractChunkSizeHint(final String name, final Integer defaultValue) {
-        super(name, defaultValue);
+  /**
+   * @param name
+   * @param defaultValue
+   */
+  public AbstractChunkSizeHint(final String name, final Integer defaultValue) {
+    super(name, defaultValue);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    if (op instanceof IQueryNode) {
+
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+
+      _setQueryHint(context, scope, op, BufferAnnotations.CHUNK_CAPACITY, value);
     }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Integer value) {
+    //        if (QueryHintScope.Query.equals(scope)) {
+    //
+    //            /*
+    //             * Also stuff the query hint on the global context for things which
+    //             * look there.
+    //             */
+    //
+    //            conditionalSetGlobalProperty(context,
+    //                    BufferAnnotations.CHUNK_CAPACITY, value);
+    //
+    //        }
 
-        if (op instanceof IQueryNode) {
-
-            /*
-             * Note: This is set on the queryHint Properties object and then
-             * transferred to the pipeline operator when it is generated.
-             */
-    
-            _setQueryHint(context, scope, op, BufferAnnotations.CHUNK_CAPACITY,
-                    value);
-
-        }
-
-//        if (QueryHintScope.Query.equals(scope)) {
-// 
-//            /*
-//             * Also stuff the query hint on the global context for things which
-//             * look there.
-//             */
-//
-//            conditionalSetGlobalProperty(context,
-//                    BufferAnnotations.CHUNK_CAPACITY, value);
-//
-//        }
-
-    }
-
+  }
 }

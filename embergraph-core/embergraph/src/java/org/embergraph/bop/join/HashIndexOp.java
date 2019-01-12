@@ -23,7 +23,6 @@ package org.embergraph.bop.join;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.BOpUtility;
@@ -34,163 +33,141 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
 /**
- * Operator builds a hash index from the source solutions. Once all source
- * solutions have been indexed, the source solutions are output on the default
- * sink. The set of variables to be copied to the sink may be restricted by an
- * annotation.
- * <p>
- * The main use case for building a hash index is to execute a sub-group or
- * sub-select. In both cases, the {@link HashIndexOp} is generated before we
- * enter the sub-plan. All solutions from the hash index are then flowed into
- * the sub-plan. Solutions emitted by the sub-plan are then re-integrated into
- * the parent using a {@link SolutionSetHashJoinOp}.
- * <p>
- * There are two concrete implementations of this operator. One for the
- * {@link HTree} and one for the JVM {@link ConcurrentHashMap}. Both hash index
- * build operators have the same general logic, but differ in their specifics.
- * Those differences are mostly encapsulated by the {@link IHashJoinUtility}
- * interface. They also have somewhat different annotations, primarily because
- * the {@link HTree} version needs access to the lexicon to setup its ivCache.
- * <p>
- * This operator is NOT thread-safe. It relies on the query engine to provide
- * synchronization. The operator MUST be run on the query controller.
- * 
+ * Operator builds a hash index from the source solutions. Once all source solutions have been
+ * indexed, the source solutions are output on the default sink. The set of variables to be copied
+ * to the sink may be restricted by an annotation.
+ *
+ * <p>The main use case for building a hash index is to execute a sub-group or sub-select. In both
+ * cases, the {@link HashIndexOp} is generated before we enter the sub-plan. All solutions from the
+ * hash index are then flowed into the sub-plan. Solutions emitted by the sub-plan are then
+ * re-integrated into the parent using a {@link SolutionSetHashJoinOp}.
+ *
+ * <p>There are two concrete implementations of this operator. One for the {@link HTree} and one for
+ * the JVM {@link ConcurrentHashMap}. Both hash index build operators have the same general logic,
+ * but differ in their specifics. Those differences are mostly encapsulated by the {@link
+ * IHashJoinUtility} interface. They also have somewhat different annotations, primarily because the
+ * {@link HTree} version needs access to the lexicon to setup its ivCache.
+ *
+ * <p>This operator is NOT thread-safe. It relies on the query engine to provide synchronization.
+ * The operator MUST be run on the query controller.
+ *
  * @see SolutionSetHashJoinOp
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class HashIndexOp extends HashIndexOpBase {
 
-//    static private final transient Logger log = Logger
-//            .getLogger(HashIndexOp.class);
+  //    static private final transient Logger log = Logger
+  //            .getLogger(HashIndexOp.class);
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends HashIndexOpBase.Annotations {
+  public interface Annotations extends HashIndexOpBase.Annotations {}
 
+  /** Deep copy constructor. */
+  public HashIndexOp(final HashIndexOp op) {
+    super(op);
+  }
+
+  /**
+   * Shallow copy constructor.
+   *
+   * @param args
+   * @param annotations
+   */
+  public HashIndexOp(final BOp[] args, final Map<String, Object> annotations) {
+
+    super(args, annotations);
+  }
+
+  public HashIndexOp(final BOp[] args, final NV... annotations) {
+
+    this(args, NV.asMap(annotations));
+  }
+
+  @Override
+  protected ChunkTaskBase createChunkTask(final BOpContext<IBindingSet> context) {
+
+    return new ChunkTask(this, context);
+  }
+
+  protected static class ChunkTask extends ChunkTaskBase {
+
+    public ChunkTask(final HashIndexOp op, final BOpContext<IBindingSet> context) {
+
+      super(op, context);
     }
-    
-    /**
-     * Deep copy constructor.
-     */
-    public HashIndexOp(final HashIndexOp op) {
-        super(op);
-    }
-    
-    /**
-     * Shallow copy constructor.
-     * 
-     * @param args
-     * @param annotations
-     */
-    public HashIndexOp(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
-
-    }
-
-    public HashIndexOp(final BOp[] args, final NV... annotations) {
-
-        this(args, NV.asMap(annotations));
-        
-    }
-
+    /** Evaluate. */
     @Override
-    protected ChunkTaskBase createChunkTask(final BOpContext<IBindingSet> context) {
+    public Void call() throws Exception {
 
-        return new ChunkTask(this, context);
-        
+      try {
+
+        if (sourceIsPipeline) {
+
+          // Buffer all source solutions.
+          acceptSolutions();
+
+          if (context.isLastInvocation()) {
+
+            // Checkpoint the solution set.
+            checkpointSolutionSet();
+
+            // Output the buffered solutions.
+            outputSolutions();
+          }
+
+        } else {
+
+          if (first) {
+
+            // Accept ALL solutions.
+            acceptSolutions();
+
+            // Checkpoint the generated solution set index.
+            checkpointSolutionSet();
+          }
+
+          // Copy all solutions from the pipeline to the sink.
+          BOpUtility.copy(
+              context.getSource(),
+              context.getSink(),
+              null /* sink2 */,
+              null /* mergeSolution */,
+              null /* selectVars */,
+              null /* constraints */,
+              stats);
+
+          // Flush solutions to the sink.
+          context.getSink().flush();
+        }
+
+        // Done.
+        return null;
+
+      } finally {
+
+        context.getSource().close();
+
+        context.getSink().close();
+      }
     }
-    
-    protected static class ChunkTask extends ChunkTaskBase {
 
-        public ChunkTask(final HashIndexOp op,
-                final BOpContext<IBindingSet> context) {
+    /** Output the buffered solutions. */
+    private void outputSolutions() {
 
-            super(op, context);
+      // default sink
+      final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
-        }
-        
-        /**
-         * Evaluate.
-         */
-        @Override
-        public Void call() throws Exception {
+      final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
+          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
 
-            try {
+      state.outputSolutions(unsyncBuffer);
 
-                if (sourceIsPipeline) {
+      unsyncBuffer.flush();
 
-                    // Buffer all source solutions.
-                    acceptSolutions();
-
-                    if (context.isLastInvocation()) {
-
-                        // Checkpoint the solution set.
-                        checkpointSolutionSet();
-
-                        // Output the buffered solutions.
-                        outputSolutions();
-
-                    }
-
-                } else {
-                    
-                    if(first) {
-                    
-                        // Accept ALL solutions.
-                        acceptSolutions();
-                        
-                        // Checkpoint the generated solution set index.
-                        checkpointSolutionSet();
-                        
-                    }
-
-                    // Copy all solutions from the pipeline to the sink.
-                    BOpUtility.copy(context.getSource(), context.getSink(),
-                            null/* sink2 */, null/* mergeSolution */,
-                            null/* selectVars */, null/* constraints */, stats);
-
-                    // Flush solutions to the sink.
-                    context.getSink().flush();
-
-                }
-
-                // Done.
-                return null;
-
-            } finally {
-                
-                context.getSource().close();
-
-                context.getSink().close();
-
-            }
-            
-        }
-        
-        /**
-         * Output the buffered solutions.
-         */
-        private void outputSolutions() {
-
-            // default sink
-            final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
-
-            final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer = new UnsyncLocalOutputBuffer<IBindingSet>(
-                    op.getChunkCapacity(), sink);
-
-            state.outputSolutions(unsyncBuffer);
-            
-            unsyncBuffer.flush();
-
-            sink.flush();
-
-        }
-
-    } // ControllerTask
-
+      sink.flush();
+    }
+  } // ControllerTask
 }

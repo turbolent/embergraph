@@ -1,194 +1,186 @@
 package org.embergraph.btree;
 
 import java.util.Arrays;
-
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rawstore.IBlock;
 
 /**
  * Test helper for a tuple with static data.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <E>
  */
 public class TestTuple<E> implements ITuple<E> {
 
-    private final int flags;
+  private final int flags;
 
-    private final byte[] key;
+  private final byte[] key;
 
-    private final byte[] val;
+  private final byte[] val;
 
-    private final boolean deleted;
+  private final boolean deleted;
 
-    final private long timestamp;
+  private final long timestamp;
 
-    private final ITupleSerializer tupleSer;
-    
-    public TestTuple(Object key, E value) {
+  private final ITupleSerializer tupleSer;
 
-        this(IRangeQuery.DEFAULT, key, value);
+  public TestTuple(Object key, E value) {
 
-    }
+    this(IRangeQuery.DEFAULT, key, value);
+  }
 
-    public TestTuple(int flags, Object key, E value) {
+  public TestTuple(int flags, Object key, E value) {
 
-        this(flags, key, value, false/* deleted */, 0L/* timestamp */);
+    this(flags, key, value, false /* deleted */, 0L /* timestamp */);
+  }
 
-    }
+  public TestTuple(int flags, Object key, E val, boolean deleted, long timestamp) {
 
-    public TestTuple(int flags, Object key, E val, boolean deleted,
-            long timestamp) {
+    this(flags, DefaultTupleSerializer.newInstance(), key, val, deleted, timestamp);
+  }
 
-        this(flags, DefaultTupleSerializer.newInstance(), key, val, deleted,
-                timestamp);
-        
-    }
-    
-    public TestTuple(int flags, ITupleSerializer<Object, E> tupleSer,
-            Object key, E val, boolean deleted, long timestamp) {
+  public TestTuple(
+      int flags,
+      ITupleSerializer<Object, E> tupleSer,
+      Object key,
+      E val,
+      boolean deleted,
+      long timestamp) {
 
-        this.flags = flags;
+    this.flags = flags;
 
-        this.tupleSer = tupleSer;
-        
-        this.key = tupleSer.serializeKey(key);
+    this.tupleSer = tupleSer;
 
-        this.val = tupleSer.serializeVal(val);
+    this.key = tupleSer.serializeKey(key);
 
-        this.deleted = deleted;
+    this.val = tupleSer.serializeVal(val);
 
-        this.timestamp = timestamp;
+    this.deleted = deleted;
 
-    }
+    this.timestamp = timestamp;
+  }
 
-    public TestTuple(int flags, ITupleSerializer<Object, E> tupleSer,
-            byte[] key, byte[] val, boolean deleted, long timestamp) {
+  public TestTuple(
+      int flags,
+      ITupleSerializer<Object, E> tupleSer,
+      byte[] key,
+      byte[] val,
+      boolean deleted,
+      long timestamp) {
 
-        this.flags = flags;
+    this.flags = flags;
 
-        this.tupleSer = tupleSer;
-        
-        this.key = key;
+    this.tupleSer = tupleSer;
 
-        this.val = val;
+    this.key = key;
 
-        this.deleted = deleted;
+    this.val = val;
 
-        this.timestamp = timestamp;
+    this.deleted = deleted;
 
-    }
+    this.timestamp = timestamp;
+  }
 
-    public String toString() {
-        
-        return super.toString()+
-        "{flags="+AbstractTuple.flagString(flags)+
-        (isDeletedVersion()? ", deleted" : "")+
-        (getVersionTimestamp() == 0L ? "" : ", timestamp="+ getVersionTimestamp())+
-        ", key="+(getKeysRequested()?Arrays.toString(getKey()):"N/A")+
-        ", val="+(getValuesRequested()?(isNull()?"null":Arrays.toString(getValue())):"N/A")+
-        ", obj="+getObject()+
-        "}";
-        
-    }
-    
-    public int flags() {
+  public String toString() {
 
-        return flags;
+    return super.toString()
+        + "{flags="
+        + AbstractTuple.flagString(flags)
+        + (isDeletedVersion() ? ", deleted" : "")
+        + (getVersionTimestamp() == 0L ? "" : ", timestamp=" + getVersionTimestamp())
+        + ", key="
+        + (getKeysRequested() ? Arrays.toString(getKey()) : "N/A")
+        + ", val="
+        + (getValuesRequested() ? (isNull() ? "null" : Arrays.toString(getValue())) : "N/A")
+        + ", obj="
+        + getObject()
+        + "}";
+  }
 
-    }
+  public int flags() {
 
-    public byte[] getKey() {
+    return flags;
+  }
 
-        return key;
+  public byte[] getKey() {
 
-    }
+    return key;
+  }
 
-    public ByteArrayBuffer getKeyBuffer() {
+  public ByteArrayBuffer getKeyBuffer() {
 
-        return new ByteArrayBuffer(0, key.length, key);
+    return new ByteArrayBuffer(0, key.length, key);
+  }
 
-    }
+  public DataInputBuffer getKeyStream() {
 
-    public DataInputBuffer getKeyStream() {
+    return new DataInputBuffer(key);
+  }
 
-        return new DataInputBuffer(key);
+  public boolean getKeysRequested() {
 
-    }
+    return ((flags & IRangeQuery.KEYS) != 0);
+  }
 
-    public boolean getKeysRequested() {
+  @SuppressWarnings("unchecked")
+  public E getObject() {
 
-        return ((flags & IRangeQuery.KEYS) != 0);
+    return (E) tupleSer.deserialize(this);
+  }
 
-    }
+  public int getSourceIndex() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @SuppressWarnings("unchecked")
-    public E getObject() {
+  public byte[] getValue() {
 
-        return (E) tupleSer.deserialize(this);
+    return val;
+  }
 
-    }
+  public ByteArrayBuffer getValueBuffer() {
 
-    public int getSourceIndex() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    if (val == null) throw new UnsupportedOperationException();
 
-    public byte[] getValue() {
-        
-        return val;
-        
-    }
+    return new ByteArrayBuffer(0, val.length, val);
+  }
 
-    public ByteArrayBuffer getValueBuffer() {
+  public DataInputBuffer getValueStream() {
 
-        if (val == null)
-            throw new UnsupportedOperationException();
+    return new DataInputBuffer(val);
+  }
 
-        return new ByteArrayBuffer(0, val.length, val);
+  public boolean getValuesRequested() {
 
-    }
+    return ((flags & IRangeQuery.VALS) != 0);
+  }
 
-    public DataInputBuffer getValueStream() {
+  public long getVersionTimestamp() {
+    return timestamp;
+  }
 
-        return new DataInputBuffer(val);
+  public long getVisitCount() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    }
+  public boolean isDeletedVersion() {
+    return deleted;
+  }
 
-    public boolean getValuesRequested() {
+  public boolean isNull() {
+    return val == null;
+  }
 
-        return ((flags & IRangeQuery.VALS) != 0);
+  public IBlock readBlock(long addr) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    }
+  public ITupleSerializer getTupleSerializer() {
 
-    public long getVersionTimestamp() {
-        return timestamp;
-    }
-
-    public long getVisitCount() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    public boolean isDeletedVersion() {
-        return deleted;
-    }
-
-    public boolean isNull() {
-        return val == null;
-    }
-
-    public IBlock readBlock(long addr) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public ITupleSerializer getTupleSerializer() {
-
-        return tupleSer;
-        
-    }
-
+    return tupleSer;
+  }
 }

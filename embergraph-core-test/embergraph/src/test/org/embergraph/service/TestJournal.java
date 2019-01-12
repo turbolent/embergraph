@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import java.util.Properties;
-
 import org.embergraph.journal.AbstractJournalTestCase;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
@@ -33,62 +32,56 @@ import org.embergraph.journal.Options;
 import org.embergraph.journal.ProxyTestCase;
 
 /**
- * Delegate for {@link ProxyTestCase}s for services running against a
- * {@link Journal}.
- * 
+ * Delegate for {@link ProxyTestCase}s for services running against a {@link Journal}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestJournal extends AbstractJournalTestCase {
 
-    public TestJournal() {
-        super();
-    }
+  public TestJournal() {
+    super();
+  }
 
-    public TestJournal(String name) {
-        super(name);
-    }
+  public TestJournal(String name) {
+    super(name);
+  }
 
-    public Properties getProperties() {
+  public Properties getProperties() {
 
-        final Properties properties = super.getProperties();
+    final Properties properties = super.getProperties();
 
-        properties.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());
+    properties.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());
 
-        properties.setProperty(Options.CREATE_TEMP_FILE,"true");
+    properties.setProperty(Options.CREATE_TEMP_FILE, "true");
 
-        properties.setProperty(Options.DELETE_ON_EXIT,"true");
+    properties.setProperty(Options.DELETE_ON_EXIT, "true");
 
-        properties.setProperty(Options.WRITE_CACHE_ENABLED, ""+writeCacheEnabled);
-        
-        return properties;
+    properties.setProperty(Options.WRITE_CACHE_ENABLED, "" + writeCacheEnabled);
 
-    }
-    
-    /**
-     * Note: Since the write cache is a direct ByteBuffer we have to make it
-     * very small (or disable it entirely) when running the test suite or the
-     * JVM will run out of memory - this is exactly the same (Sun) bug which
-     * motivates us to reuse the same ByteBuffer when we overflow a journal
-     * using a write cache. Since small write caches are disallowed, we wind up
-     * testing with the write cache disabled!
-     */
-    private static final boolean writeCacheEnabled = true; // 512;
+    return properties;
+  }
 
-    /**
-     * Extends the basic behavior to force a commit of the {@link Journal}.
-     * This makes the {@link Journal} appear to have "auto-commit" semantics
-     * from the perspective of the unit tests that are written to the assumption
-     * that the {@link IIndexManager} is an {@link IEmbergraphFederation}.
-     * Otherwise those unit tests tend not to force a commit and hence
-     * restart-safe tests tend to fail for one reason or another.
-     */
-    protected Journal reopenStore(final Journal store) {
+  /**
+   * Note: Since the write cache is a direct ByteBuffer we have to make it very small (or disable it
+   * entirely) when running the test suite or the JVM will run out of memory - this is exactly the
+   * same (Sun) bug which motivates us to reuse the same ByteBuffer when we overflow a journal using
+   * a write cache. Since small write caches are disallowed, we wind up testing with the write cache
+   * disabled!
+   */
+  private static final boolean writeCacheEnabled = true; // 512;
 
-        store.commit();
-        
-        return super.reopenStore(store);
-        
-    }
-    
+  /**
+   * Extends the basic behavior to force a commit of the {@link Journal}. This makes the {@link
+   * Journal} appear to have "auto-commit" semantics from the perspective of the unit tests that are
+   * written to the assumption that the {@link IIndexManager} is an {@link IEmbergraphFederation}.
+   * Otherwise those unit tests tend not to force a commit and hence restart-safe tests tend to fail
+   * for one reason or another.
+   */
+  protected Journal reopenStore(final Journal store) {
+
+    store.commit();
+
+    return super.reopenStore(store);
+  }
 }

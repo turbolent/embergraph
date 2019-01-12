@@ -23,146 +23,145 @@ package org.embergraph.rdf.sail;
 import java.util.Random;
 
 /**
- * TestCase to test single writer/mutiple transaction committed readers with
- * SAIL interface.
- * 
+ * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+ *
  * @author Martyn Cutcher
  */
 public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
 
-    public TestMROWTransactionsNoHistory() {
+  public TestMROWTransactionsNoHistory() {}
+
+  public TestMROWTransactionsNoHistory(final String arg0) {
+    super(arg0);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+    super.tearDown();
+  }
+
+  /**
+   * I do observe problems with the "no-history" version of this test. The RWStore has known issues
+   * and a minimum retention time of zero is not supported at this time.
+   *
+   * <pre>
+   * junit.framework.AssertionFailedError: Test failed: firstCause=java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}, retentionMillis=0, nreaderThreads=19, nwriters=100, nreaders=400, indexManager=org.embergraph.journal.Journal@327556d1
+   *     at junit.framework.TestCase2.fail(TestCase2.java:90)
+   *     at org.embergraph.rdf.sail.TestMROWTransactions.domultiple_csem_transaction2(TestMROWTransactions.java:237)
+   *     at org.embergraph.rdf.sail.TestMROWTransactionsNoHistory.test_multiple_csem_transaction_no_history_stress(TestMROWTransactionsNoHistory.java:66)
+   *     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   *     at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+   *     at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   *     at java.lang.reflect.Method.invoke(Method.java:606)
+   *     at junit.framework.TestCase.runTest(TestCase.java:154)
+   *     at junit.framework.TestCase.runBare(TestCase.java:127)
+   *     at junit.framework.TestResult$1.protect(TestResult.java:106)
+   *     at junit.framework.TestResult.runProtected(TestResult.java:124)
+   *     at junit.framework.TestResult.run(TestResult.java:109)
+   *     at junit.framework.TestCase.run(TestCase.java:118)
+   *     at junit.framework.TestSuite.runTest(TestSuite.java:208)
+   *     at junit.framework.TestSuite.run(TestSuite.java:203)
+   *     at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+   *     at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+   *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+   *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+   *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+   *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+   * Caused by: java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
+   *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1861)
+   *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1722)
+   *     at org.embergraph.rdf.store.AbstractTripleStore.getAccessPath(AbstractTripleStore.java:2868)
+   *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3534)
+   *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3470)
+   *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3433)
+   *     at org.embergraph.rdf.sail.TestMROWTransactions$Reader.call(TestMROWTransactions.java:404)
+   *     at org.embergraph.rdf.sail.TestMROWTransactions$Reader.call(TestMROWTransactions.java:1)
+   *     at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+   *     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+   *     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+   *     at java.lang.Thread.run(Thread.java:745)
+   * Caused by: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
+   *     at org.embergraph.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:756)
+   *     at org.embergraph.journal.AbstractJournal.getIndexWithCheckpointAddr(AbstractJournal.java:5288)
+   *     at org.embergraph.journal.AbstractJournal.getIndexWithCommitRecord(AbstractJournal.java:5135)
+   *     at org.embergraph.journal.AbstractJournal.getIndexLocal(AbstractJournal.java:5005)
+   *     at org.embergraph.journal.AbstractJournal.getIndex(AbstractJournal.java:4897)
+   *     at org.embergraph.journal.Journal.getIndexSources(Journal.java:2656)
+   *     at org.embergraph.journal.Journal.getIndex(Journal.java:2892)
+   *     at org.embergraph.journal.Journal.getIndex(Journal.java:1)
+   *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:238)
+   *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:198)
+   *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:166)
+   *     at org.embergraph.rdf.lexicon.LexiconRelation.getTerm2IdIndex(LexiconRelation.java:984)
+   *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1857)
+   *     ... 11 more
+   * Caused by: java.lang.RuntimeException: addr=-8196 : cause=org.embergraph.util.ChecksumError: offset=852288,nbytes=224,expected=721420255,actual=-1747893185
+   *     at org.embergraph.rwstore.RWStore.getData(RWStore.java:1899)
+   *     at org.embergraph.journal.RWStrategy.readFromLocalStore(RWStrategy.java:727)
+   *     at org.embergraph.journal.RWStrategy.read(RWStrategy.java:154)
+   *     at org.embergraph.journal.AbstractJournal.read(AbstractJournal.java:4043)
+   *     at org.embergraph.btree.Checkpoint.load(Checkpoint.java:575)
+   *     at org.embergraph.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:754)
+   *     ... 23 more
+   * Caused by: org.embergraph.util.ChecksumError: offset=852288,nbytes=224,expected=721420255,actual=-1747893185
+   *     at org.embergraph.io.writecache.WriteCacheService._readFromLocalDiskIntoNewHeapByteBuffer(WriteCacheService.java:3706)
+   *     at org.embergraph.io.writecache.WriteCacheService._getRecord(WriteCacheService.java:3521)
+   *     at org.embergraph.io.writecache.WriteCacheService.access$1(WriteCacheService.java:3493)
+   *     at org.embergraph.io.writecache.WriteCacheService$1.compute(WriteCacheService.java:3358)
+   *     at org.embergraph.io.writecache.WriteCacheService$1.compute(WriteCacheService.java:1)
+   *     at org.embergraph.util.concurrent.Memoizer$1.call(Memoizer.java:77)
+   *     at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+   *     at org.embergraph.util.concurrent.Memoizer.compute(Memoizer.java:92)
+   *     at org.embergraph.io.writecache.WriteCacheService.loadRecord(WriteCacheService.java:3463)
+   *     at org.embergraph.io.writecache.WriteCacheService.read(WriteCacheService.java:3182)
+   *     at org.embergraph.rwstore.RWStore.getData(RWStore.java:1890)
+   *     ... 28 more
+   * </pre>
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
+   *     persistent identity </a>.
+   */
+  // Note: This test is disabled since there are known issues when retentionMillis:=0.
+  public void _test_multiple_csem_transaction_no_history_stress() throws Exception {
+
+    final Random r = new Random();
+
+    for (int i = 0; i < 10; i++) {
+
+      final int nreaderThreads = r.nextInt(19) + 1;
+
+      log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+
+      domultiple_csem_transaction2(
+          0 /* retentionMillis */,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          false /* isolatableIndices */);
     }
+  }
 
-    public TestMROWTransactionsNoHistory(final String arg0) {
-        super(arg0);
+  public void test_multiple_csem_transaction_no_history_stress_readWriteTx() throws Exception {
+
+    final Random r = new Random();
+
+    for (int i = 0; i < 10; i++) {
+
+      final int nreaderThreads = r.nextInt(19) + 1;
+
+      log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+
+      domultiple_csem_transaction2(
+          0 /* retentionMillis */,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          true /* isolatableIndices */);
     }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-        
-    /**
-     * I do observe problems with the "no-history" version of this test. The
-     * RWStore has known issues and a minimum retention time of zero is not
-     * supported at this time.
-     * 
-     * <pre>
-     * junit.framework.AssertionFailedError: Test failed: firstCause=java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}, retentionMillis=0, nreaderThreads=19, nwriters=100, nreaders=400, indexManager=org.embergraph.journal.Journal@327556d1
-     *     at junit.framework.TestCase2.fail(TestCase2.java:90)
-     *     at org.embergraph.rdf.sail.TestMROWTransactions.domultiple_csem_transaction2(TestMROWTransactions.java:237)
-     *     at org.embergraph.rdf.sail.TestMROWTransactionsNoHistory.test_multiple_csem_transaction_no_history_stress(TestMROWTransactionsNoHistory.java:66)
-     *     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-     *     at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-     *     at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-     *     at java.lang.reflect.Method.invoke(Method.java:606)
-     *     at junit.framework.TestCase.runTest(TestCase.java:154)
-     *     at junit.framework.TestCase.runBare(TestCase.java:127)
-     *     at junit.framework.TestResult$1.protect(TestResult.java:106)
-     *     at junit.framework.TestResult.runProtected(TestResult.java:124)
-     *     at junit.framework.TestResult.run(TestResult.java:109)
-     *     at junit.framework.TestCase.run(TestCase.java:118)
-     *     at junit.framework.TestSuite.runTest(TestSuite.java:208)
-     *     at junit.framework.TestSuite.run(TestSuite.java:203)
-     *     at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
-     *     at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-     *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-     *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-     *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-     *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-     * Caused by: java.lang.RuntimeException: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
-     *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1861)
-     *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1722)
-     *     at org.embergraph.rdf.store.AbstractTripleStore.getAccessPath(AbstractTripleStore.java:2868)
-     *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3534)
-     *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3470)
-     *     at org.embergraph.rdf.sail.EmbergraphSail$EmbergraphSailConnection.getStatements(EmbergraphSail.java:3433)
-     *     at org.embergraph.rdf.sail.TestMROWTransactions$Reader.call(TestMROWTransactions.java:404)
-     *     at org.embergraph.rdf.sail.TestMROWTransactions$Reader.call(TestMROWTransactions.java:1)
-     *     at java.util.concurrent.FutureTask.run(FutureTask.java:262)
-     *     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-     *     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-     *     at java.lang.Thread.run(Thread.java:745)
-     * Caused by: java.lang.RuntimeException: Could not load Checkpoint: store=org.embergraph.journal.Journal@327556d1, addrCheckpoint={off=852288,len=220}
-     *     at org.embergraph.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:756)
-     *     at org.embergraph.journal.AbstractJournal.getIndexWithCheckpointAddr(AbstractJournal.java:5288)
-     *     at org.embergraph.journal.AbstractJournal.getIndexWithCommitRecord(AbstractJournal.java:5135)
-     *     at org.embergraph.journal.AbstractJournal.getIndexLocal(AbstractJournal.java:5005)
-     *     at org.embergraph.journal.AbstractJournal.getIndex(AbstractJournal.java:4897)
-     *     at org.embergraph.journal.Journal.getIndexSources(Journal.java:2656)
-     *     at org.embergraph.journal.Journal.getIndex(Journal.java:2892)
-     *     at org.embergraph.journal.Journal.getIndex(Journal.java:1)
-     *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:238)
-     *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:198)
-     *     at org.embergraph.relation.AbstractRelation.getIndex(AbstractRelation.java:166)
-     *     at org.embergraph.rdf.lexicon.LexiconRelation.getTerm2IdIndex(LexiconRelation.java:984)
-     *     at org.embergraph.rdf.lexicon.LexiconRelation.addTerms(LexiconRelation.java:1857)
-     *     ... 11 more
-     * Caused by: java.lang.RuntimeException: addr=-8196 : cause=org.embergraph.util.ChecksumError: offset=852288,nbytes=224,expected=721420255,actual=-1747893185
-     *     at org.embergraph.rwstore.RWStore.getData(RWStore.java:1899)
-     *     at org.embergraph.journal.RWStrategy.readFromLocalStore(RWStrategy.java:727)
-     *     at org.embergraph.journal.RWStrategy.read(RWStrategy.java:154)
-     *     at org.embergraph.journal.AbstractJournal.read(AbstractJournal.java:4043)
-     *     at org.embergraph.btree.Checkpoint.load(Checkpoint.java:575)
-     *     at org.embergraph.btree.Checkpoint.loadFromCheckpoint(Checkpoint.java:754)
-     *     ... 23 more
-     * Caused by: org.embergraph.util.ChecksumError: offset=852288,nbytes=224,expected=721420255,actual=-1747893185
-     *     at org.embergraph.io.writecache.WriteCacheService._readFromLocalDiskIntoNewHeapByteBuffer(WriteCacheService.java:3706)
-     *     at org.embergraph.io.writecache.WriteCacheService._getRecord(WriteCacheService.java:3521)
-     *     at org.embergraph.io.writecache.WriteCacheService.access$1(WriteCacheService.java:3493)
-     *     at org.embergraph.io.writecache.WriteCacheService$1.compute(WriteCacheService.java:3358)
-     *     at org.embergraph.io.writecache.WriteCacheService$1.compute(WriteCacheService.java:1)
-     *     at org.embergraph.util.concurrent.Memoizer$1.call(Memoizer.java:77)
-     *     at java.util.concurrent.FutureTask.run(FutureTask.java:262)
-     *     at org.embergraph.util.concurrent.Memoizer.compute(Memoizer.java:92)
-     *     at org.embergraph.io.writecache.WriteCacheService.loadRecord(WriteCacheService.java:3463)
-     *     at org.embergraph.io.writecache.WriteCacheService.read(WriteCacheService.java:3182)
-     *     at org.embergraph.rwstore.RWStore.getData(RWStore.java:1890)
-     *     ... 28 more
-     * </pre>
-     * 
-     * @see <a href="http://trac.blazegraph.com/ticket/855"> AssertionError: Child
-     *      does not have persistent identity </a>.
-     */
-    // Note: This test is disabled since there are known issues when retentionMillis:=0.
-    public void _test_multiple_csem_transaction_no_history_stress() throws Exception {
-
-        final Random r = new Random();
-        
-        for (int i = 0; i < 10; i++) {
-
-            final int nreaderThreads = r.nextInt(19) + 1;
-            
-            log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
-
-            domultiple_csem_transaction2(0/* retentionMillis */,
-                    nreaderThreads, 100/* nwriters */, 400/* nreaders */, false/* isolatableIndices */);
-
-        }
-        
-    }
-
-    public void test_multiple_csem_transaction_no_history_stress_readWriteTx()
-            throws Exception {
-
-        final Random r = new Random();
-
-        for (int i = 0; i < 10; i++) {
-
-            final int nreaderThreads = r.nextInt(19) + 1;
-
-            log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
-
-            domultiple_csem_transaction2(0/* retentionMillis */,
-                    nreaderThreads, 100/* nwriters */, 400/* nreaders */, true/* isolatableIndices */);
-
-        }
-
-    }
-
+  }
 }

@@ -34,273 +34,229 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 /**
- * Helper utilities for (de-)serialization of {@link Serializable} objects using
- * the Java serialization mechanisms.
- * 
+ * Helper utilities for (de-)serialization of {@link Serializable} objects using the Java
+ * serialization mechanisms.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SerializerUtil {
 
-    /**
-     * An {@link IStreamSerializer} that uses java default serialization.
-     */
-    public static final IStreamSerializer STREAMS = new IStreamSerializer() {
+  /** An {@link IStreamSerializer} that uses java default serialization. */
+  public static final IStreamSerializer STREAMS =
+      new IStreamSerializer() {
 
-        /**
-         * 
-         */
+        /** */
         private static final long serialVersionUID = -2625456835905636703L;
 
         public Object deserialize(ObjectInput in) {
 
-            try {
+          try {
 
-                return in.readObject();
+            return in.readObject();
 
-            } catch (Exception ex) {
+          } catch (Exception ex) {
 
-                throw new RuntimeException(ex);
-
-            }
-
+            throw new RuntimeException(ex);
+          }
         }
 
         public void serialize(ObjectOutput out, Object obj) {
 
-            try {
+          try {
 
-                out.writeObject(obj);
+            out.writeObject(obj);
 
-            } catch (IOException e) {
+          } catch (IOException e) {
 
-                throw new RuntimeException(e);
-
-            }
-
+            throw new RuntimeException(e);
+          }
         }
 
-        /**
-         * Always returns the same reference.
-         */
+        /** Always returns the same reference. */
         private Object readResolve() throws ObjectStreamException {
 
-            return STREAMS;
-
+          return STREAMS;
         }
 
-        private void writeObject(java.io.ObjectOutputStream out)
-                throws IOException {
+        private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
-            // NOP
+          // NOP
 
         }
 
         private void readObject(java.io.ObjectInputStream in)
-                throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
 
-            // NOP
+          // NOP
 
         }
-    };
-    
-    /**
-     * An {@link IRecordSerializer} wrapper for the static methods declared by
-     * the {@link SerializerUtil}.
-     */
-    public static final IRecordSerializer RECORDS = new IRecordSerializer() {
+      };
 
-        /**
-         * 
-         */
+  /**
+   * An {@link IRecordSerializer} wrapper for the static methods declared by the {@link
+   * SerializerUtil}.
+   */
+  public static final IRecordSerializer RECORDS =
+      new IRecordSerializer() {
+
+        /** */
         private static final long serialVersionUID = -2625456835905636703L;
 
         public Object deserialize(byte[] data) {
-            
-            return SerializerUtil.deserialize(data);
-            
+
+          return SerializerUtil.deserialize(data);
         }
 
         public byte[] serialize(Object obj) {
-            
-            return SerializerUtil.serialize(obj);
-            
-        }
-        
-        /**
-         * Always returns the same reference.
-         */
-        private Object readResolve() throws ObjectStreamException {
-            
-            return RECORDS;
-            
-        }
-        
-        private void writeObject(java.io.ObjectOutputStream out)
-                throws IOException {
 
-            // NOP
-            
+          return SerializerUtil.serialize(obj);
+        }
+
+        /** Always returns the same reference. */
+        private Object readResolve() throws ObjectStreamException {
+
+          return RECORDS;
+        }
+
+        private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+
+          // NOP
+
         }
 
         private void readObject(java.io.ObjectInputStream in)
-                throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
 
-            // NOP
-
-        }
-    
-    };
-    
-    /**
-     * Serialize an object using the Java serialization mechanisms.
-     * 
-     * @param obj
-     *            A {@link Serializable} object.
-     * 
-     * @return The serialized object state.
-     */
-    static final public byte[] serialize(final Object obj) {
-
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        try {
-
-            final ObjectOutputStream oos = new ObjectOutputStream(baos);
-
-            oos.writeObject(obj);
-
-            oos.flush();
-
-            oos.close();
-            
-        } catch (Exception ex) {
-
-            throw new RuntimeException(ex);
+          // NOP
 
         }
+      };
 
-        return baos.toByteArray();
+  /**
+   * Serialize an object using the Java serialization mechanisms.
+   *
+   * @param obj A {@link Serializable} object.
+   * @return The serialized object state.
+   */
+  public static final byte[] serialize(final Object obj) {
 
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+    try {
+
+      final ObjectOutputStream oos = new ObjectOutputStream(baos);
+
+      oos.writeObject(obj);
+
+      oos.flush();
+
+      oos.close();
+
+    } catch (Exception ex) {
+
+      throw new RuntimeException(ex);
     }
 
-    /**
-     * De-serialize an object using the Java serialization mechanisms.
-     * 
-     * @param b
-     *            A byte[] containing a serialized object.
-     * 
-     * @return The de-serialized object -or- <code>null</code> iff the byte[]
-     *         reference is <code>null</code>.
-     */
-    static final public Object deserialize(byte[] b) {
+    return baos.toByteArray();
+  }
 
-        if (b == null)
-            return null;
-        
-        return deserialize(b, 0, b.length);
+  /**
+   * De-serialize an object using the Java serialization mechanisms.
+   *
+   * @param b A byte[] containing a serialized object.
+   * @return The de-serialized object -or- <code>null</code> iff the byte[] reference is <code>null
+   *     </code>.
+   */
+  public static final Object deserialize(byte[] b) {
 
+    if (b == null) return null;
+
+    return deserialize(b, 0, b.length);
+  }
+
+  /**
+   * De-serialize an object using the Java serialization mechanisms.
+   *
+   * @param b A byte[] containing a serialized object.
+   * @param off The offset of the first byte to de-serialize.
+   * @param len The #of bytes in the object record.
+   * @return The de-serialized object.
+   */
+  public static final Object deserialize(final byte[] b, final int off, final int len) {
+
+    final ByteArrayInputStream bais = new ByteArrayInputStream(b, off, len);
+
+    try {
+
+      final ObjectInputStream ois = new ObjectInputStream(bais);
+
+      return ois.readObject();
+
+    } catch (Exception ex) {
+
+      /*
+       * Note: an error here is often an attempt to deserialize an empty
+       * byte[].
+       */
+      throw new RuntimeException("off=" + off + ", len=" + len, ex);
+    }
+  }
+
+  /**
+   * De-serialize an object using the Java serialization mechanisms.
+   *
+   * @param is The input stream from which to read the serialized data.
+   * @return The de-serialized object.
+   */
+  public static final Object deserialize(final InputStream is) {
+
+    try {
+
+      final ObjectInputStream ois = new ObjectInputStream(is);
+
+      return ois.readObject();
+
+    } catch (Exception ex) {
+
+      throw new RuntimeException(ex);
+    }
+  }
+
+  /**
+   * De-serialize an object using the Java serialization mechanisms.
+   *
+   * @param buf A buffer containing a serialized object. The bytes from {@link
+   *     ByteBuffer#position()} to {@link ByteBuffer#limit()} will be de-serialized and the position
+   *     will be advanced to the limit.
+   * @return The de-serialized object.
+   */
+  public static final Object deserialize(final ByteBuffer buf) {
+
+    if (true && buf.hasArray()) {
+
+      final int off = buf.arrayOffset() + buf.position();
+
+      final int len = buf.remaining();
+
+      final Object ret = deserialize(buf.array(), off, len);
+
+      buf.position(buf.limit());
+
+      return ret;
     }
 
-    /**
-     * De-serialize an object using the Java serialization mechanisms.
-     * 
-     * @param b
-     *            A byte[] containing a serialized object.
-     * @param off
-     *            The offset of the first byte to de-serialize.
-     * @param len
-     *            The #of bytes in the object record.
-     * 
-     * @return The de-serialized object.
-     */
-    static final public Object deserialize(final byte[] b, final int off, final int len) {
+    final ByteBufferInputStream bais = new ByteBufferInputStream(buf);
 
-        final ByteArrayInputStream bais = new ByteArrayInputStream(b, off, len);
+    try {
 
-        try {
+      final ObjectInputStream ois = new ObjectInputStream(bais);
 
-            final ObjectInputStream ois = new ObjectInputStream(bais);
+      return ois.readObject();
 
-            return ois.readObject();
+    } catch (Exception ex) {
 
-        } catch (Exception ex) {
-
-            /*
-             * Note: an error here is often an attempt to deserialize an empty
-             * byte[].
-             */
-            throw new RuntimeException("off=" + off + ", len=" + len, ex);
-
-        }
-
+      throw new RuntimeException(ex);
     }
-
-    /**
-     * De-serialize an object using the Java serialization mechanisms.
-     * 
-     * @param is
-     *            The input stream from which to read the serialized data.
-     * 
-     * @return The de-serialized object.
-     */
-    static final public Object deserialize(final InputStream is) {
-
-        try {
-
-            final ObjectInputStream ois = new ObjectInputStream(is);
-
-            return ois.readObject();
-
-        } catch (Exception ex) {
-
-            throw new RuntimeException(ex);
-
-        }
-
-    }
-
-    /**
-     * De-serialize an object using the Java serialization mechanisms.
-     * 
-     * @param buf
-     *            A buffer containing a serialized object. The bytes from
-     *            {@link ByteBuffer#position()} to {@link ByteBuffer#limit()}
-     *            will be de-serialized and the position will be advanced to the
-     *            limit.
-     * 
-     * @return The de-serialized object.
-     */
-    static final public Object deserialize(final ByteBuffer buf) {
-
-        if (true && buf.hasArray()) {
-
-            final int off = buf.arrayOffset() + buf.position();
-
-            final int len = buf.remaining();
-
-            final Object ret = deserialize(buf.array(), off, len);
-            
-            buf.position(buf.limit());
-            
-            return ret;
-
-        }
-
-        final ByteBufferInputStream bais = new ByteBufferInputStream(buf);
-
-        try {
-
-            final ObjectInputStream ois = new ObjectInputStream(bais);
-
-            return ois.readObject();
-
-        } catch (Exception ex) {
-
-            throw new RuntimeException(ex);
-
-        }
-
-    }
-
+  }
 }

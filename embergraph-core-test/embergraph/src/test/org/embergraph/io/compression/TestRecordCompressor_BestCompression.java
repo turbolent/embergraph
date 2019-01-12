@@ -25,30 +25,22 @@ import java.util.zip.Deflater;
 
 /**
  * Test suite for {@link RecordCompressor}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestRecordCompressor_BestCompression extends
-        AbstractRecordCompressorTestCase {
+public class TestRecordCompressor_BestCompression extends AbstractRecordCompressorTestCase {
 
-    /**
-     * 
-     */
-    public TestRecordCompressor_BestCompression() {
-    }
+  /** */
+  public TestRecordCompressor_BestCompression() {}
 
-    /**
-     * @param name
-     */
-    public TestRecordCompressor_BestCompression(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestRecordCompressor_BestCompression(String name) {
+    super(name);
+  }
 
-    public IRecordCompressor getInstance() {
+  public IRecordCompressor getInstance() {
 
-        return new RecordCompressor(Deflater.BEST_COMPRESSION);
-
-    }
-
+    return new RecordCompressor(Deflater.BEST_COMPRESSION);
+  }
 }

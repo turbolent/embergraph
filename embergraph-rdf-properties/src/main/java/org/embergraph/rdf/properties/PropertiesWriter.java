@@ -54,20 +54,12 @@ package org.embergraph.rdf.properties;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * An interface for properties document writers.
- */
-public interface PropertiesWriter { 
-    
-    /**
-     * Gets the {@link PropertiesFormat} that this {@link PropertiesWriter}
-     * uses.
-     */
-    public PropertiesFormat getFormat();
+/** An interface for properties document writers. */
+public interface PropertiesWriter {
 
-    /**
-     * Write the properties object.
-     */
-    public void write(Properties properties) throws IOException;
+  /** Gets the {@link PropertiesFormat} that this {@link PropertiesWriter} uses. */
+  public PropertiesFormat getFormat();
 
+  /** Write the properties object. */
+  public void write(Properties properties) throws IOException;
 }

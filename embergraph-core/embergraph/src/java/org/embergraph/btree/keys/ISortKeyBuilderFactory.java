@@ -27,18 +27,13 @@ import java.io.Serializable;
 
 /**
  * A factory for objects that generate unsigned byte[] sort keys.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @param <E>
- *            The generic type of the objects whose sort keys can be generated.
+ * @param <E> The generic type of the objects whose sort keys can be generated.
  */
 public interface ISortKeyBuilderFactory<E> extends Serializable {
 
-    /**
-     * Return a thread-local instance (safe for use by a single thread only).
-     */
-    public ISortKeyBuilder<E> newInstance();
-    
+  /** Return a thread-local instance (safe for use by a single thread only). */
+  public ISortKeyBuilder<E> newInstance();
 }

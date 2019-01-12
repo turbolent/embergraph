@@ -24,46 +24,38 @@ import org.embergraph.service.geospatial.GeoSpatial;
 
 /**
  * Core Embergraph vocabulary.
- *  
- * Note: Do not modify this class.  Create an entirely new vocabulary that
- * extends this one and edit
- * {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
+ *
+ * <p>Note: Do not modify this class. Create an entirely new vocabulary that extends this one and
+ * edit {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
  */
 public class EmbergraphCoreVocabulary_v20160317 extends EmbergraphCoreVocabulary_v20151210 {
 
-    /**
-     * De-serialization ctor.
+  /** De-serialization ctor. */
+  public EmbergraphCoreVocabulary_v20160317() {
+
+    super();
+  }
+
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public EmbergraphCoreVocabulary_v20160317(final String namespace) {
+
+    super(namespace);
+  }
+
+  @Override
+  protected void addValues() {
+
+    super.addValues();
+
+    /*
+     * Some new URIs for graph and RDR management.
      */
-    public EmbergraphCoreVocabulary_v20160317() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public EmbergraphCoreVocabulary_v20160317(final String namespace) {
-
-        super(namespace);
-        
-    }
-
-    @Override
-    protected void addValues() {
-
-        super.addValues();
-
-        /*
-         * Some new URIs for graph and RDR management.
-         */
-		addDecl(new BaseVocabularyDecl(
-				GeoSpatial.DEFAULT_DATATYPE_LAT_LON,
-				GeoSpatial.DEFAULT_DATATYPE_LAT_LON_TIME));
-
-    }
-
+    addDecl(
+        new BaseVocabularyDecl(
+            GeoSpatial.DEFAULT_DATATYPE_LAT_LON, GeoSpatial.DEFAULT_DATATYPE_LAT_LON_TIME));
+  }
 }

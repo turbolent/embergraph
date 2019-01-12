@@ -22,9 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import java.util.Arrays;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -34,94 +32,83 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Unit tests for {@link INHashMap}.
- * 
+ *
  * @author <a href="mailto:dmacgbr@users.sourceforge.net">David MacMillan</a>
  * @version $Id:$
  */
-public abstract class TestINConstraint extends TestCase2
-{
-    /**
-     * 
-     */
-    public TestINConstraint ()
-    {
+public abstract class TestINConstraint extends TestCase2 {
+  /** */
+  public TestINConstraint() {}
+
+  /** @param name */
+  public TestINConstraint(String name) {
+    super(name);
+  }
+
+  /** Unit test for {@link INHashMap#INHashMap(IVariable<T>,IConstant<T>[])} */
+  public void testConstructor() {
+    IVariable<Integer> var = Var.var("x");
+    IConstant<Integer> vals[] = new IConstant[] {new Constant<Integer>(1)};
+
+    try {
+      assertTrue(null != newINConstraint(null, vals));
+      fail("IllegalArgumentException expected, lhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * @param name
-     */
-    public TestINConstraint ( String name )
-    {
-        super ( name ) ;
+    try {
+      assertTrue(null != newINConstraint(var, null));
+      fail("IllegalArgumentException expected, rhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link INHashMap#INHashMap(IVariable<T>,IConstant<T>[])}
-     */
-    public void testConstructor ()
-    {
-        IVariable<Integer> var = Var.var ( "x" ) ;
-        IConstant<Integer> vals [] = new IConstant [] { new Constant<Integer> ( 1 ) } ;
-
-        try { assertTrue ( null != newINConstraint ( null, vals ) ) ; fail ( "IllegalArgumentException expected, lhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != newINConstraint ( var, null ) ) ; fail ( "IllegalArgumentException expected, rhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != newINConstraint ( var, new IConstant [] {} ) ) ; fail ( "IllegalArgumentException expected, set was empty" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        assertTrue ( null != newINConstraint ( var, vals ) ) ;
+    try {
+      assertTrue(null != newINConstraint(var, new IConstant[] {}));
+      fail("IllegalArgumentException expected, set was empty");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link INConstraint#getVariable()}
-     */
-    public void testGetVariable ()
-    {
-        Var<?> x = Var.var ( "x" ) ;
-        IConstant vals [] = new Constant [] { new Constant<Integer> ( 1 ) } ;
+    assertTrue(null != newINConstraint(var, vals));
+  }
 
-        INConstraint op = newINConstraint ( x, vals ) ;
+  /** Unit test for {@link INConstraint#getVariable()} */
+  public void testGetVariable() {
+    Var<?> x = Var.var("x");
+    IConstant vals[] = new Constant[] {new Constant<Integer>(1)};
 
-        assertTrue ( x.equals ( op.getVariable () ) ) ;
-    }
+    INConstraint op = newINConstraint(x, vals);
 
-    /**
-     * Unit test for {@link INConstraint#getSet()}
-     */
-    public void testGetSet ()
-    {
-        Var<?> x = Var.var ( "x" ) ;
-        IConstant vals [] = new Constant [] { new Constant<Integer> ( 1 ) } ;
+    assertTrue(x.equals(op.getVariable()));
+  }
 
-        INConstraint op = newINConstraint ( x, vals ) ;
+  /** Unit test for {@link INConstraint#getSet()} */
+  public void testGetSet() {
+    Var<?> x = Var.var("x");
+    IConstant vals[] = new Constant[] {new Constant<Integer>(1)};
 
-        assertTrue ( Arrays.equals ( vals, op.getSet () ) ) ;
-    }
+    INConstraint op = newINConstraint(x, vals);
 
-    /**
-     * Unit test for {@link INConstraint#accept(IBindingSet)}
-     */
-    public void testAccept ()
-    {
-        Var<?> x = Var.var ( "x" ) ;
-        Constant<Integer> val1 = new Constant<Integer> ( 1 ) ;
-        Constant<Integer> val2 = new Constant<Integer> ( 2 ) ;
-        Constant<Integer> val3 = new Constant<Integer> ( 3 ) ;
+    assertTrue(Arrays.equals(vals, op.getSet()));
+  }
 
-        INConstraint op = newINConstraint ( x, new IConstant [] { val1, val2 } ) ;
+  /** Unit test for {@link INConstraint#accept(IBindingSet)} */
+  public void testAccept() {
+    Var<?> x = Var.var("x");
+    Constant<Integer> val1 = new Constant<Integer>(1);
+    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val3 = new Constant<Integer>(3);
 
-        IBindingSet in = new ListBindingSet ( new IVariable<?> [] { x }, new IConstant [] { val1 } ) ;
-        IBindingSet notin = new ListBindingSet ( new IVariable<?> [] { x }, new IConstant [] { val3 } ) ;
-        IBindingSet nb = new ListBindingSet ( new IVariable<?> [] {}, new IConstant [] {} ) ;
+    INConstraint op = newINConstraint(x, new IConstant[] {val1, val2});
 
-        assertTrue ( op.get ( in ) ) ;
-        assertFalse ( op.get ( notin ) ) ;
-        // FIXME Modify to assertFalse() - unbound variables should fail constraints
-        assertTrue ( op.get ( nb ) ) ;
-    }
+    IBindingSet in = new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {val1});
+    IBindingSet notin = new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {val3});
+    IBindingSet nb = new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {});
 
-    protected abstract INConstraint newINConstraint ( IVariable<?> var, IConstant<?> vals [] ) ;
+    assertTrue(op.get(in));
+    assertFalse(op.get(notin));
+    // FIXME Modify to assertFalse() - unbound variables should fail constraints
+    assertTrue(op.get(nb));
+  }
+
+  protected abstract INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]);
 }

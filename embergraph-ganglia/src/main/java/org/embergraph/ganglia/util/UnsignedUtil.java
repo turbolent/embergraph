@@ -17,42 +17,37 @@ package org.embergraph.ganglia.util;
 
 public class UnsignedUtil {
 
-	/** Maximum unsigned int16 value. */
-	public static final int MAX_UINT16 = 0xffff;//(2 ^ 16) - 1;// aka 65535;
+  /** Maximum unsigned int16 value. */
+  public static final int MAX_UINT16 = 0xffff; // (2 ^ 16) - 1;// aka 65535;
 
-	/** Maximum unsigned int32 value. */
-	public static final long MAX_UINT32 = 0xffffffffL;//(2L ^ 32L) - 1L;
-	
-	public static int encode(int v) {
+  /** Maximum unsigned int32 value. */
+  public static final long MAX_UINT32 = 0xffffffffL; // (2L ^ 32L) - 1L;
 
-		if (v < 0) {
+  public static int encode(int v) {
 
-			v = v - 0x80000000;
+    if (v < 0) {
 
-		} else {
-        
-			v = 0x80000000 + v;
-        
-		}
-		
-		return v;
-		
-	}
-    
-    public static final long encode(long v) {
+      v = v - 0x80000000;
 
-        if (v < 0) {
-            
-            v = v - 0x8000000000000000L;
+    } else {
 
-        } else {
-            
-            v = v + 0x8000000000000000L;
-            
-        }
-
-        return v;
-        
+      v = 0x80000000 + v;
     }
-    
+
+    return v;
+  }
+
+  public static final long encode(long v) {
+
+    if (v < 0) {
+
+      v = v - 0x8000000000000000L;
+
+    } else {
+
+      v = v + 0x8000000000000000L;
+    }
+
+    return v;
+  }
 }

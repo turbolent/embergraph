@@ -23,29 +23,28 @@ import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.VertexQuery;
 
 public class PartialVertex extends PartialElement implements Vertex {
-    
-    public PartialVertex(final String id) {
-        super(id);
-    }
 
-    @Override
-    public Edge addEdge(String arg0, Vertex arg1) {
-        throw new UnsupportedOperationException();
-    }
+  public PartialVertex(final String id) {
+    super(id);
+  }
 
-    @Override
-    public Iterable<Edge> getEdges(Direction arg0, String... arg1) {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public Edge addEdge(String arg0, Vertex arg1) {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public Iterable<Vertex> getVertices(Direction arg0, String... arg1) {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public Iterable<Edge> getEdges(Direction arg0, String... arg1) {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public VertexQuery query() {
-        throw new UnsupportedOperationException();
-    }
-    
+  @Override
+  public Iterable<Vertex> getVertices(Direction arg0, String... arg1) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public VertexQuery query() {
+    throw new UnsupportedOperationException();
+  }
 }

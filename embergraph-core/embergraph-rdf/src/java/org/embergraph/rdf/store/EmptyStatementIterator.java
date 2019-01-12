@@ -22,43 +22,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import java.util.NoSuchElementException;
-
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * Empty iterator.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyStatementIterator implements EmbergraphStatementIterator {
 
-    public static transient final EmbergraphStatementIterator INSTANCE = new EmptyStatementIterator();
-    
-    private EmptyStatementIterator() {
-        
-    }
+  public static final transient EmbergraphStatementIterator INSTANCE = new EmptyStatementIterator();
 
-    public void close() throws RuntimeException {
-        
-    }
+  private EmptyStatementIterator() {}
 
-    public boolean hasNext() throws RuntimeException {
-        
-        return false;
-        
-    }
+  public void close() throws RuntimeException {}
 
-    public EmbergraphStatement next() throws RuntimeException {
-        
-        throw new NoSuchElementException();
-        
-    }
+  public boolean hasNext() throws RuntimeException {
 
-    public void remove() throws RuntimeException {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+    return false;
+  }
 
+  public EmbergraphStatement next() throws RuntimeException {
+
+    throw new NoSuchElementException();
+  }
+
+  public void remove() throws RuntimeException {
+
+    throw new UnsupportedOperationException();
+  }
 }

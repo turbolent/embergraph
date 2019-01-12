@@ -21,23 +21,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-/**
- * Base class for {@link Boolean} query hints.
- */
-abstract public class AbstractBooleanQueryHint extends AbstractQueryHint<Boolean> {
+/** Base class for {@link Boolean} query hints. */
+public abstract class AbstractBooleanQueryHint extends AbstractQueryHint<Boolean> {
 
-    protected AbstractBooleanQueryHint(final String name,
-            final Boolean defaultValue) {
+  protected AbstractBooleanQueryHint(final String name, final Boolean defaultValue) {
 
-        super(name, defaultValue);
+    super(name, defaultValue);
+  }
 
-    }
+  @Override
+  public Boolean validate(final String value) {
 
-    @Override
-    public Boolean validate(final String value) {
-
-        return Boolean.valueOf(value);
-
-    }
-
+    return Boolean.valueOf(value);
+  }
 }

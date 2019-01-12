@@ -17,40 +17,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-
 /**
- * Test suite for an issue where an empty projection causes an
- * {@link IllegalArgumentException}.
- * 
- * @see <a href="http://trac.blazegraph.com/ticket/946"> Empty PROJECTION causes
- *      IllegalArgumentException</a>
+ * Test suite for an issue where an empty projection causes an {@link IllegalArgumentException}.
+ *
+ * @see <a href="http://trac.blazegraph.com/ticket/946">Empty PROJECTION causes
+ *     IllegalArgumentException</a>
  */
 public class TestTicket946 extends AbstractDataDrivenSPARQLTestCase {
 
-    public TestTicket946() {
-    }
+  public TestTicket946() {}
 
-    public TestTicket946(String name) {
-        super(name);
-    }
+  public TestTicket946(String name) {
+    super(name);
+  }
 
-    /**
-	 * <pre>
-	 * SELECT ?x
-	 * { BIND(1 as ?x) 
-	 *   { SELECT * { FILTER (true) } }
-	 * }
-	 * </pre>
-	 */
-    public void test_ticket_946_empty_projection() throws Exception {
-        
-        new TestHelper(
-                "ticket_946", // testURI,
-                "ticket_946.rq",// queryFileURL
-                "ticket_946.trig",// dataFileURL
-                "ticket_946.srx"// resultFileURL
-                ).runTest();
+  /**
+   *
+   *
+   * <pre>
+   * SELECT ?x
+   * { BIND(1 as ?x)
+   *   { SELECT * { FILTER (true) } }
+   * }
+   * </pre>
+   */
+  public void test_ticket_946_empty_projection() throws Exception {
 
-    }
-    
+    new TestHelper(
+            "ticket_946", // testURI,
+            "ticket_946.rq", // queryFileURL
+            "ticket_946.trig", // dataFileURL
+            "ticket_946.srx" // resultFileURL
+            )
+        .runTest();
+  }
 }

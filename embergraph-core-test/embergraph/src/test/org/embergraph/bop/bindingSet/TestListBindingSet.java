@@ -31,86 +31,79 @@ import org.embergraph.bop.Var;
 
 /**
  * Unit tests for {@link ListBindingSet}.
- * 
+ *
  * @author <a href="mailto:dmacgbr@users.sourceforge.net">David MacMillan</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestListBindingSet extends TestIBindingSet
-{
+public class TestListBindingSet extends TestIBindingSet {
 
-    /**
-     * 
-     */
-    public TestListBindingSet () {}
+  /** */
+  public TestListBindingSet() {}
 
-    /**
-     * @param name
-     */
-    public TestListBindingSet ( String name ) { super ( name ) ; }
+  /** @param name */
+  public TestListBindingSet(String name) {
+    super(name);
+  }
 
-    /**
-     * Unit test for {@link ListBindingSet#ListBindingSet()}
-     */
-    public void testConstructorListBindingSet ()
-    {
-        assertTrue ( null != new ListBindingSet () ) ;
+  /** Unit test for {@link ListBindingSet#ListBindingSet()} */
+  public void testConstructorListBindingSet() {
+    assertTrue(null != new ListBindingSet());
+  }
+
+  /** Unit test for {@link ListBindingSet#clone()} */
+  public void testClone() {
+
+    Var<?> var1 = Var.var("a");
+    Var<?> var2 = Var.var("b");
+    Constant<Integer> val1 = new Constant<Integer>(1);
+    Constant<Integer> val2 = new Constant<Integer>(2);
+    IVariable<?> vars[] = new IVariable[] {var1, var2};
+    IConstant<?> vals[] = new IConstant[] {val1, val2};
+
+    assertEqual(new ListBindingSet(vars, vals), vars, vals);
+    assertEqual(new ListBindingSet(vars, vals).clone(), vars, vals);
+  }
+
+  /** Unit test for {@link ListBindingSet#ListBindingSet(IVariable[],IConstant[])} */
+  public void testConstructorVariablesConstants() {
+    Var<?> var1 = Var.var("a");
+    Var<?> var2 = Var.var("b");
+    Constant<Integer> val1 = new Constant<Integer>(1);
+    Constant<Integer> val2 = new Constant<Integer>(2);
+    IVariable<?> vars[] = new IVariable[] {var1, var2};
+    IConstant<?> vals[] = new IConstant[] {val1, val2};
+
+    try {
+      assertTrue(null != new ListBindingSet(null, vals));
+      fail("IllegalArgumentException expected, vars was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link ListBindingSet#clone()}
-     */
-    public void testClone ()
-    {
-
-        Var<?> var1 = Var.var ( "a" ) ;
-        Var<?> var2 = Var.var ( "b" ) ;
-        Constant<Integer> val1 = new Constant<Integer> ( 1 ) ;
-        Constant<Integer> val2 = new Constant<Integer> ( 2 ) ;
-        IVariable<?> vars [] = new IVariable [] { var1, var2 } ;
-        IConstant<?> vals [] = new IConstant [] { val1, val2 } ;
-
-        assertEqual ( new ListBindingSet ( vars, vals ), vars, vals ) ;
-        assertEqual ( new ListBindingSet ( vars, vals ).clone(), vars, vals ) ;
+    try {
+      assertTrue(null != new ListBindingSet(vars, null));
+      fail("IllegalArgumentException expected, vals was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link ListBindingSet#ListBindingSet(IVariable[],IConstant[])}
-     */
-    public void testConstructorVariablesConstants ()
-    {
-        Var<?> var1 = Var.var ( "a" ) ;
-        Var<?> var2 = Var.var ( "b" ) ;
-        Constant<Integer> val1 = new Constant<Integer> ( 1 ) ;
-        Constant<Integer> val2 = new Constant<Integer> ( 2 ) ;
-        IVariable<?> vars [] = new IVariable [] { var1, var2 } ;
-        IConstant<?> vals [] = new IConstant [] { val1, val2 } ;
-
-        try { assertTrue ( null != new ListBindingSet ( null, vals ) ) ; fail ( "IllegalArgumentException expected, vars was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != new ListBindingSet ( vars, null ) ) ; fail ( "IllegalArgumentException expected, vals was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != new ListBindingSet ( vars, new IConstant [] { val1 } ) ) ; fail ( "IllegalArgumentException expected, vars and vals were different sizes" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        assertEqual ( new ListBindingSet ( vars, vals ), vars, vals ) ;
+    try {
+      assertTrue(null != new ListBindingSet(vars, new IConstant[] {val1}));
+      fail("IllegalArgumentException expected, vars and vals were different sizes");
+    } catch (IllegalArgumentException e) {
     }
 
-	@Override
-	protected IBindingSet newBindingSet(IVariable<?> vars[],
-			IConstant<?> vals[]) {
+    assertEqual(new ListBindingSet(vars, vals), vars, vals);
+  }
 
-		return new ListBindingSet(vars, vals);
-	
-	}
+  @Override
+  protected IBindingSet newBindingSet(IVariable<?> vars[], IConstant<?> vals[]) {
 
-	@Override
-	protected IBindingSet newBindingSet(int sizeIsIgnored) {
-	
-		return new ListBindingSet();
-		
-	}
+    return new ListBindingSet(vars, vals);
+  }
 
+  @Override
+  protected IBindingSet newBindingSet(int sizeIsIgnored) {
+
+    return new ListBindingSet();
+  }
 }

@@ -21,91 +21,80 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import org.embergraph.relation.accesspath.IElementFilter;
-
 import cutthecrap.utils.striterators.ICloseable;
 import cutthecrap.utils.striterators.ICloseableIterator;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import org.embergraph.relation.accesspath.IElementFilter;
 
 /**
  * Iterator "chunks" up another iterator, visiting arrays of elements at a time.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Chunkerator<E> implements ICloseableIterator<E[]> {
 
-    private final IChunkedIterator<E> src;
+  private final IChunkedIterator<E> src;
 
-    private boolean open = true;
-    
-    public Chunkerator(final Iterator<E> src) {
+  private boolean open = true;
 
-        this(src, ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE);
+  public Chunkerator(final Iterator<E> src) {
 
+    this(src, ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE);
+  }
+
+  public Chunkerator(final Iterator<E> src, final int chunkSize) {
+
+    this(src, chunkSize, null /* elementClass */);
+  }
+
+  public Chunkerator(final Iterator<E> src, final int chunkSize, Class<? extends E> elementClass) {
+
+    this(src, chunkSize, elementClass, null /* keyOrder */, null /* filter */);
+  }
+
+  public Chunkerator(
+      final Iterator<E> src,
+      final int chunkSize,
+      final Class<? extends E> elementClass,
+      final IKeyOrder<E> keyOrder,
+      final IElementFilter<E> filter) {
+
+    if (src == null) throw new IllegalArgumentException();
+
+    this.src = new ChunkedWrappedIterator<E>(src, chunkSize, elementClass, keyOrder, filter);
+  }
+
+  @Override
+  public boolean hasNext() {
+    if (!open) return false;
+    if (!src.hasNext()) {
+      close();
+      return false;
     }
+    return true;
+  }
 
-    public Chunkerator(final Iterator<E> src, final int chunkSize) {
+  @Override
+  public E[] next() {
+    if (!hasNext()) throw new NoSuchElementException();
+    return src.nextChunk();
+  }
 
-        this(src, chunkSize, null/* elementClass */);
+  /** Unsupported operation. */
+  @Override
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 
+  @Override
+  public void close() {
+    if (open) {
+      open = false;
+      if (src instanceof ICloseable) {
+        ((ICloseable) src).close();
+      }
     }
-
-    public Chunkerator(final Iterator<E> src, final int chunkSize,
-            Class<? extends E> elementClass) {
-
-        this(src, chunkSize, elementClass, null/* keyOrder */, null/* filter */);
-
-    }
-
-    public Chunkerator(final Iterator<E> src, final int chunkSize,
-            final Class<? extends E> elementClass, final IKeyOrder<E> keyOrder,
-            final IElementFilter<E> filter) {
-
-        if (src == null)
-            throw new IllegalArgumentException();
-
-        this.src = new ChunkedWrappedIterator<E>(src, chunkSize, elementClass,
-                keyOrder, filter);
-
-    }
-
-    @Override
-    public boolean hasNext() {
-        if (!open)
-            return false;
-        if (!src.hasNext()) {
-            close();
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public E[] next() {
-        if (!hasNext())
-            throw new NoSuchElementException();
-        return src.nextChunk();
-    }
-
-    /**
-     * Unsupported operation.
-     */
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void close() {
-        if (open) {
-            open = false;
-            if (src instanceof ICloseable) {
-                ((ICloseable) src).close();
-            }
-        }
-    }
-
+  }
 }

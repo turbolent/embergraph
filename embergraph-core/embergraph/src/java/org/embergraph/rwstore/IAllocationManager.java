@@ -21,37 +21,32 @@ import org.embergraph.rawstore.IAllocationContext;
 
 public interface IAllocationManager {
 
-    /**
-	 * Creates a context to be used to isolate updates to within the context until it
-	 * is released to the parent environment.
-	 * 
-	 * @return a new IAlocationContext
-	 */
-	IAllocationContext newAllocationContext(final boolean isolated);
-    
-    /**
-     * Indicates that the allocation context will no longer be used and that the
-     * allocations made within the context should be discarded. The allocations
-     * associated with the context are discarded, as are any deletes made within
-     * the scope of that allocation context. The allocators associated with the
-     * allocation context are return to the global list of available allocators.
-     * 
-     * @param context
-     *            The application object which serves as the allocation context.
-     */
-    void abortContext(IAllocationContext context);
+  /**
+   * Creates a context to be used to isolate updates to within the context until it is released to
+   * the parent environment.
+   *
+   * @return a new IAlocationContext
+   */
+  IAllocationContext newAllocationContext(final boolean isolated);
 
-    /**
-     * Indicates that the allocation context will no longer be used, but that
-     * the allocations made within the context should be preserved. The
-     * allocations associated with the context are propagated to the parent
-     * allocation context. The {@link IStore} is the top-level parent of
-     * allocation contexts. The allocators associated with the allocation
-     * context are return to the global list of available allocators.
-     * 
-     * @param context
-     *            The application object which serves as the allocation context.
-     */
-    void detachContext(IAllocationContext context);
+  /**
+   * Indicates that the allocation context will no longer be used and that the allocations made
+   * within the context should be discarded. The allocations associated with the context are
+   * discarded, as are any deletes made within the scope of that allocation context. The allocators
+   * associated with the allocation context are return to the global list of available allocators.
+   *
+   * @param context The application object which serves as the allocation context.
+   */
+  void abortContext(IAllocationContext context);
 
+  /**
+   * Indicates that the allocation context will no longer be used, but that the allocations made
+   * within the context should be preserved. The allocations associated with the context are
+   * propagated to the parent allocation context. The {@link IStore} is the top-level parent of
+   * allocation contexts. The allocators associated with the allocation context are return to the
+   * global list of available allocators.
+   *
+   * @param context The application object which serves as the allocation context.
+   */
+  void detachContext(IAllocationContext context);
 }

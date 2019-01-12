@@ -24,170 +24,140 @@ import java.lang.ref.Reference;
 import java.util.NoSuchElementException;
 
 /**
- * Visits the direct dirty children of a {@link Node} in the external key
- * ordering. Since dirty nodes are always resident this iterator never forces a
- * child to be loaded from the store.
- * 
+ * Visits the direct dirty children of a {@link Node} in the external key ordering. Since dirty
+ * nodes are always resident this iterator never forces a child to be loaded from the store.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class DirtyChildIterator implements INodeIterator {
 
-    private final Node node;
-    
-    /**
-     * The index of the next child to return.
-     */
-    private int index = 0;
-    
-    /**
-     * The index of the last child that was returned to the caller via
-     * {@link #next()}.
-     */
-    private int lastVisited = -1;
+  private final Node node;
 
-    /**
-     * The next child to return or null if we need to scan for the next child.
-     * We always test to verify that the child is in fact dirty in
-     * {@link #next()} since it may have been written out between
-     * {@link #hasNext()} and {@link #next()}.
+  /** The index of the next child to return. */
+  private int index = 0;
+
+  /** The index of the last child that was returned to the caller via {@link #next()}. */
+  private int lastVisited = -1;
+
+  /**
+   * The next child to return or null if we need to scan for the next child. We always test to
+   * verify that the child is in fact dirty in {@link #next()} since it may have been written out
+   * between {@link #hasNext()} and {@link #next()}.
+   */
+  private AbstractNode<?> child = null;
+
+  /** @param node The node whose direct dirty children will be visited in key order. */
+  public DirtyChildIterator(Node node) {
+
+    assert node != null;
+
+    this.node = node;
+  }
+
+  /**
+   * @return true iff there is a dirty child having a separator key greater than the last visited
+   *     dirty child at the moment that this method was invoked. If this method returns <code>true
+   *     </code> then an immediate invocation of {@link #next()} will succeed. However, that
+   *     guarantee does not hold if intervening code forces the scheduled dirty child to be written
+   *     onto the store.
+   */
+  public boolean hasNext() {
+
+    /*
+     * If we are only visiting dirty children, then we need to test the
+     * current index. If it is not a dirty child, then we need to scan until
+     * we either exhaust the children or find a dirty index.
      */
-    private AbstractNode<?> child = null;
 
-    /**
-     * 
-     * @param node
-     *            The node whose direct dirty children will be visited in key
-     *            order.
-     */
-    public DirtyChildIterator(Node node) {
+    if (child != null && child.isDirty()) {
 
-        assert node != null;
-
-        this.node = node;
-        
+      /*
+       * We have a child reference and it is still dirty.
+       */
+      return true;
     }
 
-    /**
-     * @return true iff there is a dirty child having a separator key greater
-     *         than the last visited dirty child at the moment that this method
-     *         was invoked. If this method returns <code>true</code> then an
-     *         immediate invocation of {@link #next()} will succeed. However,
-     *         that guarantee does not hold if intervening code forces the
-     *         scheduled dirty child to be written onto the store.
-     */
-    public boolean hasNext() {
+    final int nkeys = node.getKeyCount();
 
-        /*
-         * If we are only visiting dirty children, then we need to test the
-         * current index. If it is not a dirty child, then we need to scan until
-         * we either exhaust the children or find a dirty index.
-         */
+    for (; index <= nkeys; index++) {
 
-        if( child != null && child.isDirty() ) {
-        
-            /*
-             * We have a child reference and it is still dirty.
-             */
-            return true;
-            
-        }
-        
-        final int nkeys = node.getKeyCount();
+      final Reference<AbstractNode<?>> childRef = node.getChildRef(index);
 
-        for (; index <= nkeys; index++) {
+      if (childRef == null) continue;
 
-            final Reference<AbstractNode<?>> childRef = node.getChildRef(index);
+      child = childRef.get();
 
-            if (childRef == null)
-                continue;
+      if (child == null) continue;
 
-            child = childRef.get();
+      if (!child.isDirty()) continue;
 
-            if (child == null)
-                continue;
+      /*
+       * Note: We do NOT touch the hard reference queue here since the
+       * DirtyChildrenIterator is used when persisting a node using a
+       * post-order traversal. If a hard reference queue eviction drives
+       * the serialization of a node and we touch the hard reference queue
+       * during the post-order traversal then we break down the semantics
+       * of HardReferenceQueue#append(...) as the eviction does not
+       * necessarily cause the queue to reduce in length.
+       */
+      //            /*
+      //             * Touch the child so that it will not be a candidate for eviction
+      //             * to the store.
+      //             */
+      //            node.btree.touch(node);
 
-            if (!child.isDirty())
-                continue;
-
-            /*
-             * Note: We do NOT touch the hard reference queue here since the
-             * DirtyChildrenIterator is used when persisting a node using a
-             * post-order traversal. If a hard reference queue eviction drives
-             * the serialization of a node and we touch the hard reference queue
-             * during the post-order traversal then we break down the semantics
-             * of HardReferenceQueue#append(...) as the eviction does not
-             * necessarily cause the queue to reduce in length.
-             */
-//            /*
-//             * Touch the child so that it will not be a candidate for eviction
-//             * to the store.
-//             */ 
-//            node.btree.touch(node);
-            
-            break;
-            
-        }
-        
-        return index <= nkeys;
-
+      break;
     }
 
-    public AbstractNode next() {
+    return index <= nkeys;
+  }
 
-        if (!hasNext()) {
+  public AbstractNode next() {
 
-            throw new NoSuchElementException();
+    if (!hasNext()) {
 
-        }
-
-        assert child != null;
-
-        assert child.isDirty();
-
-        final AbstractNode<?> tmp = child;
-
-        // advance the index where the scan will start next() time.
-        lastVisited = index++;
-
-        // clear the reference to force another scan.
-        child = null;
-
-        return tmp;
-
+      throw new NoSuchElementException();
     }
 
-    public AbstractNode getNode() {
-        
-        if( lastVisited == -1 ) {
-            
-            throw new IllegalStateException();
-            
-        }
-        
-        return node.getChild(lastVisited);
+    assert child != null;
 
+    assert child.isDirty();
+
+    final AbstractNode<?> tmp = child;
+
+    // advance the index where the scan will start next() time.
+    lastVisited = index++;
+
+    // clear the reference to force another scan.
+    child = null;
+
+    return tmp;
+  }
+
+  public AbstractNode getNode() {
+
+    if (lastVisited == -1) {
+
+      throw new IllegalStateException();
     }
 
-    public Object getKey() {
+    return node.getChild(lastVisited);
+  }
 
-        if( lastVisited == -1 ) {
-            
-            throw new IllegalStateException();
-            
-        }
-        
-        return node.getKeys().get(lastVisited);
-        
+  public Object getKey() {
+
+    if (lastVisited == -1) {
+
+      throw new IllegalStateException();
     }
 
-    /**
-     * @exception UnsupportedOperationException
-     */
-    public void remove() {
+    return node.getKeys().get(lastVisited);
+  }
 
-        throw new UnsupportedOperationException();
+  /** @exception UnsupportedOperationException */
+  public void remove() {
 
-    }
-
+    throw new UnsupportedOperationException();
+  }
 }

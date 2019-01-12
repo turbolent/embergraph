@@ -27,46 +27,41 @@ import java.io.OutputStream;
 
 /**
  * Output stream which reports the #of bytes read from the underlying stream.
- * <p>
- * Note: All <em>write</em> methods MUST be overridden if you subclass this
- * filter as it overrides them all for better performance.
-
+ *
+ * <p>Note: All <em>write</em> methods MUST be overridden if you subclass this filter as it
+ * overrides them all for better performance.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * TODO test suite.
+ *     <p>TODO test suite.
  */
 public class ByteCountOutputStream extends FilterOutputStream {
 
-    private final OutputStream out;
-    private int nwritten = 0;
+  private final OutputStream out;
+  private int nwritten = 0;
 
-    public int getNWritten() {
-        return nwritten;
-    }
-    
-    /**
-     * @param out
-     */
-    public ByteCountOutputStream(final OutputStream out) {
-        super(out);
-        this.out = out;
-    }
+  public int getNWritten() {
+    return nwritten;
+  }
 
-    public void write(final int b) throws IOException {
-        super.write(b);
-        nwritten++;
-    }
+  /** @param out */
+  public ByteCountOutputStream(final OutputStream out) {
+    super(out);
+    this.out = out;
+  }
 
-    public void write(final byte b[]) throws IOException {
-        out.write(b); // efficiency!
-        nwritten += b.length;
-    }
+  public void write(final int b) throws IOException {
+    super.write(b);
+    nwritten++;
+  }
 
-    public void write(final byte b[], final int off, final int len)
-            throws IOException {
-        out.write(b, off, len); // efficiency!
-        nwritten += len;
-    }
-    
+  public void write(final byte b[]) throws IOException {
+    out.write(b); // efficiency!
+    nwritten += b.length;
+  }
+
+  public void write(final byte b[], final int off, final int len) throws IOException {
+    out.write(b, off, len); // efficiency!
+    nwritten += len;
+  }
 }

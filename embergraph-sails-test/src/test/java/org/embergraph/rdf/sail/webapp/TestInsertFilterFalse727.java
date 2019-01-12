@@ -18,53 +18,37 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp;
 
-
 import junit.framework.Test;
-
 import org.embergraph.journal.IIndexManager;
 
-/**
- * Proxied test suite.
- * We test the behavior reported in trac 727.
- */
-public class TestInsertFilterFalse727<S extends IIndexManager> extends
-        AbstractSimpleInsertTest<S> {
+/** Proxied test suite. We test the behavior reported in trac 727. */
+public class TestInsertFilterFalse727<S extends IIndexManager> extends AbstractSimpleInsertTest<S> {
 
-	static public Test suite() {
-		return ProxySuiteHelper.suiteWhenStandalone(TestInsertFilterFalse727.class,"test.*", TestMode.quads,TestMode.sids,TestMode.triples);
-	}
-    public TestInsertFilterFalse727() {
+  public static Test suite() {
+    return ProxySuiteHelper.suiteWhenStandalone(
+        TestInsertFilterFalse727.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
+  }
 
-    }
+  public TestInsertFilterFalse727() {}
 
-	public TestInsertFilterFalse727(final String name) {
+  public TestInsertFilterFalse727(final String name) {
 
-		super(name);
+    super(name);
+  }
 
-	}
+  public void testInsertWhereTrue() throws Exception {
+    executeInsert("FILTER ( true )", true);
+  }
 
-	public void testInsertWhereTrue()
-            throws Exception
-    {
-        executeInsert("FILTER ( true )", true);
-    }
-	public void testInsertWhereFalse()
-            throws Exception
-    {
-        executeInsert("FILTER ( false )", false);
-    }
-    
+  public void testInsertWhereFalse() throws Exception {
+    executeInsert("FILTER ( false )", false);
+  }
 
-    public void testInsertWhereOptionallyTrue()
-            throws Exception
-    {
-        executeInsert("OPTIONAL { FILTER ( true ) }", true);
-    }
+  public void testInsertWhereOptionallyTrue() throws Exception {
+    executeInsert("OPTIONAL { FILTER ( true ) }", true);
+  }
 
-    public void testInsertWhereOptionallyFalse()
-            throws Exception
-    {
-        executeInsert("OPTIONAL { FILTER ( false ) }", true);
-    }
-
+  public void testInsertWhereOptionallyFalse() throws Exception {
+    executeInsert("OPTIONAL { FILTER ( false ) }", true);
+  }
 }

@@ -19,101 +19,84 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 
 package org.embergraph.rdf.graph.impl.sail;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
+import info.aduna.iteration.CloseableIteration;
 import java.util.NoSuchElementException;
 
-import info.aduna.iteration.CloseableIteration;
-
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * Class aligns a Sesame 2 {@link CloseableIteration} with a embergraph
- * {@link ICloseableIterator}.
- * 
+ * Class aligns a Sesame 2 {@link CloseableIteration} with a embergraph {@link ICloseableIterator}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z
- *          thompsonbry $
- * @param <T>
- *            The generic type of the visited elements.
- * @param <E>
- *            The generic type of the exceptions thrown by the Sesame 2
- *            {@link CloseableIteration}.
+ * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z thompsonbry $
+ * @param <T> The generic type of the visited elements.
+ * @param <E> The generic type of the exceptions thrown by the Sesame 2 {@link CloseableIteration}.
  */
 /*
  * Note: This is a clone of the same-named class in the embergraph-rdf module. The
  * clone exists to have it under the Apache 2 license without going through a
  * large relayering of the dependencies.
  */
-class Sesame2EmbergraphIterator<T, E extends Exception> implements
-        ICloseableIterator<T> {
+class Sesame2EmbergraphIterator<T, E extends Exception> implements ICloseableIterator<T> {
 
-    private final CloseableIteration<? extends T,E> src;
-    
-    private volatile boolean open = true;
-    
-    public Sesame2EmbergraphIterator(final CloseableIteration<? extends T,E> src) {
-        
-        if (src == null)
-            throw new IllegalArgumentException();
-        
-        this.src = src;
-        
+  private final CloseableIteration<? extends T, E> src;
+
+  private volatile boolean open = true;
+
+  public Sesame2EmbergraphIterator(final CloseableIteration<? extends T, E> src) {
+
+    if (src == null) throw new IllegalArgumentException();
+
+    this.src = src;
+  }
+
+  public void close() {
+
+    if (open) {
+      open = false;
+      try {
+        src.close();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
+  public boolean hasNext() {
+
+    try {
+
+      if (open && src.hasNext()) return true;
+
+      close();
+
+      return false;
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public T next() {
+
+    if (!hasNext()) {
+      throw new NoSuchElementException();
     }
 
-    public void close() {
-
-        if (open) {
-            open = false;
-            try {
-                src.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        
+    try {
+      return src.next();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public boolean hasNext() {
+  public void remove() {
 
-        try {
+    if (!open) throw new IllegalStateException();
 
-            if (open && src.hasNext())
-                return true;
-
-            close();
-            
-            return false;
-            
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
+    try {
+      src.remove();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
-
-    public T next() {
-
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-
-        try {
-            return src.next();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-    }
-
-    public void remove() {
-
-        if(!open)
-            throw new IllegalStateException();
-
-        try {
-            src.remove();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-    }
-
+  }
 }

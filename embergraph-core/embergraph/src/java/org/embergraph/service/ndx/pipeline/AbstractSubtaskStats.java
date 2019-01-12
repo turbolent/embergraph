@@ -31,90 +31,85 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class AbstractSubtaskStats {
 
-    /**
-     * The #of elements in the output chunks (not including any eliminated
-     * duplicates).
-     * <p>
-     * Note: The {@link AtomicLong} provides an atomic update guarantee which
-     * some of the unit tests rely on.
-     */
-    public final AtomicLong elementsOut = new AtomicLong(0);
+  /**
+   * The #of elements in the output chunks (not including any eliminated duplicates).
+   *
+   * <p>Note: The {@link AtomicLong} provides an atomic update guarantee which some of the unit
+   * tests rely on.
+   */
+  public final AtomicLong elementsOut = new AtomicLong(0);
 
-    /**
-     * The #of chunks written onto the index partition using RMI.
-     * <p>
-     * Note: The {@link AtomicLong} provides an atomic update guarantee which
-     * some of the unit tests rely on.
-     */
-    public final AtomicLong chunksOut = new AtomicLong();
+  /**
+   * The #of chunks written onto the index partition using RMI.
+   *
+   * <p>Note: The {@link AtomicLong} provides an atomic update guarantee which some of the unit
+   * tests rely on.
+   */
+  public final AtomicLong chunksOut = new AtomicLong();
 
-    /**
-     * Elapsed time waiting for another chunk to be ready so that it can be
-     * written onto the index partition.
-     */
-    public long elapsedChunkWaitingNanos = 0L;
+  /**
+   * Elapsed time waiting for another chunk to be ready so that it can be written onto the index
+   * partition.
+   */
+  public long elapsedChunkWaitingNanos = 0L;
 
-    /**
-     * Elapsed nanoseconds writing chunks on an index partition (RMI request).
-     */
-    public long elapsedChunkWritingNanos = 0L;
+  /** Elapsed nanoseconds writing chunks on an index partition (RMI request). */
+  public long elapsedChunkWritingNanos = 0L;
 
-    /**
-     * The average #of nanoseconds for a chunk to become ready so that it can be
-     * written on the sink (this is an average of the totals to date, not a
-     * moving average).
-     */
-    public double getAverageNanosPerWait() {
+  /**
+   * The average #of nanoseconds for a chunk to become ready so that it can be written on the sink
+   * (this is an average of the totals to date, not a moving average).
+   */
+  public double getAverageNanosPerWait() {
 
-        final long chunksOut = this.chunksOut.get();
-        
-        return (chunksOut == 0L ? 0 : elapsedChunkWaitingNanos
-                / (double) chunksOut);
+    final long chunksOut = this.chunksOut.get();
 
-    }
+    return (chunksOut == 0L ? 0 : elapsedChunkWaitingNanos / (double) chunksOut);
+  }
 
-    /**
-     * The average #of nanoseconds per chunk written on the sink (this is an
-     * average of the totals to date, not a moving average).
-     */
-    public double getAverageNanosPerWrite() {
-        
-        final long chunksOut = this.chunksOut.get();
-        
-        return (chunksOut == 0L ? 0 : elapsedChunkWritingNanos
-                / (double) chunksOut);
+  /**
+   * The average #of nanoseconds per chunk written on the sink (this is an average of the totals to
+   * date, not a moving average).
+   */
+  public double getAverageNanosPerWrite() {
 
-    }
+    final long chunksOut = this.chunksOut.get();
 
-    /**
-     * The average #of elements (tuples) per chunk written on the sink (this is
-     * an average of the totals to date, not a moving average).
-     */
-    public double getAverageElementsPerWrite() {
+    return (chunksOut == 0L ? 0 : elapsedChunkWritingNanos / (double) chunksOut);
+  }
 
-        final long chunksOut = this.chunksOut.get();
+  /**
+   * The average #of elements (tuples) per chunk written on the sink (this is an average of the
+   * totals to date, not a moving average).
+   */
+  public double getAverageElementsPerWrite() {
 
-        final long elementsOut = this.elementsOut.get();
+    final long chunksOut = this.chunksOut.get();
 
-        return (chunksOut == 0L ? 0 : elementsOut / (double) chunksOut);
+    final long elementsOut = this.elementsOut.get();
 
-    }
+    return (chunksOut == 0L ? 0 : elementsOut / (double) chunksOut);
+  }
 
-    public AbstractSubtaskStats() {
+  public AbstractSubtaskStats() {}
 
-    }
+  public String toString() {
 
-    public String toString() {
-
-        return getClass().getName() + "{chunksOut=" + chunksOut
-                + ", elementsOut=" + elementsOut
-                + ", elapsedChunkWaitingNanos=" + elapsedChunkWaitingNanos
-                + ", elapsedChunkWritingNanos=" + elapsedChunkWritingNanos
-                + ", averageNanosPerWait=" + getAverageNanosPerWait()
-                + ", averageNanosPerWrite=" + getAverageNanosPerWrite()
-                + ", averageElementsPerWrite=" + getAverageElementsPerWrite()
-                + "}";
-
-    }
-
+    return getClass().getName()
+        + "{chunksOut="
+        + chunksOut
+        + ", elementsOut="
+        + elementsOut
+        + ", elapsedChunkWaitingNanos="
+        + elapsedChunkWaitingNanos
+        + ", elapsedChunkWritingNanos="
+        + elapsedChunkWritingNanos
+        + ", averageNanosPerWait="
+        + getAverageNanosPerWait()
+        + ", averageNanosPerWrite="
+        + getAverageNanosPerWrite()
+        + ", averageElementsPerWrite="
+        + getAverageElementsPerWrite()
+        + "}";
+  }
 }

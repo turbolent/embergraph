@@ -24,19 +24,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 /**
- * Class exists solely to make it easier to write the unit tests by aligning the
- * various generic types across the master, the subtask, and their statistics
- * objects.
- * 
+ * Class exists solely to make it easier to write the unit tests by aligning the various generic
+ * types across the master, the subtask, and their statistics objects.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MockSubtaskStats extends AbstractSubtaskStats {
 
-    /**
-     * 
-     */
-    public MockSubtaskStats() {
-    }
-
+  /** */
+  public MockSubtaskStats() {}
 }

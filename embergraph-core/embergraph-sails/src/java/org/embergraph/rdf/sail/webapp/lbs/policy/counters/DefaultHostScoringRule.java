@@ -22,50 +22,45 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 
 /**
- * Best effort computation of a workload score based on CPU Utilization and IO
- * Wait defined as follows:
- * 
+ * Best effort computation of a workload score based on CPU Utilization and IO Wait defined as
+ * follows:
+ *
  * <pre>
  * (1d + cpu_wio * 100d) / (1d + cpu_idle)
  * </pre>
- * <p>
- * Note: Not all platforms report all metrics. For example, OSX does not report
- * IO Wait, which is a key metric for the workload of a database. If a metric is
- * not available for a host, then a fallback value is used.
- * 
+ *
+ * <p>Note: Not all platforms report all metrics. For example, OSX does not report IO Wait, which is
+ * a key metric for the workload of a database. If a metric is not available for a host, then a
+ * fallback value is used.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- *      FIXME GC time is a per-JVM metric that should be incorporated into our
- *      default scoring strartegy. It will only get reported by the
- *      ganglia plug in if it is setup to self-report that data. And it
- *      may not report it correctly if there is more than one
- *      {@link HAJournalService} per host. It is also available from the
- *      <code>/embergraph/counters</code> and could be exposed as a JMX MBean.
+ *     <p>FIXME GC time is a per-JVM metric that should be incorporated into our default scoring
+ *     strartegy. It will only get reported by the ganglia plug in if it is setup to self-report
+ *     that data. And it may not report it correctly if there is more than one {@link
+ *     HAJournalService} per host. It is also available from the <code>/embergraph/counters</code>
+ *     and could be exposed as a JMX MBean.
  */
 public class DefaultHostScoringRule implements IHostScoringRule {
 
-    private static final String CPU_NOT_IDLE = IHostCounters.CPU_PercentProcessorTime;
+  private static final String CPU_NOT_IDLE = IHostCounters.CPU_PercentProcessorTime;
 
-    private static final String CPU_WIO = IHostCounters.CPU_PercentIOWait;
+  private static final String CPU_WIO = IHostCounters.CPU_PercentIOWait;
 
-    @Override
-    public String[] getMetricNames() {
+  @Override
+  public String[] getMetricNames() {
 
-        return new String[] { CPU_NOT_IDLE, CPU_WIO };
+    return new String[] {CPU_NOT_IDLE, CPU_WIO};
+  }
 
-    }
+  @Override
+  public double getScore(final IHostMetrics metrics) {
 
-    @Override
-    public double getScore(final IHostMetrics metrics) {
+    final double cpu_idle = 1d - metrics.getNumeric(CPU_NOT_IDLE, .5d);
 
-        final double cpu_idle = 1d - metrics.getNumeric(CPU_NOT_IDLE, .5d);
+    final double cpu_wio = metrics.getNumeric(CPU_WIO, .05d);
 
-        final double cpu_wio = metrics.getNumeric(CPU_WIO, .05d);
+    final double hostScore = (1d + cpu_wio * 100d) / (1d + cpu_idle);
 
-        final double hostScore = (1d + cpu_wio * 100d) / (1d + cpu_idle);
-
-        return hostScore;
-
-    }
-
+    return hostScore;
+  }
 }

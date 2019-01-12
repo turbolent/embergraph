@@ -23,34 +23,28 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 /**
  * Test suite for xsd:unsigned handling.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestUnsigned extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestUnsigned() {
-    }
+  /** */
+  public TestUnsigned() {}
 
-    /**
-     * @param name
-     */
-    public TestUnsigned(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestUnsigned(String name) {
+    super(name);
+  }
 
-    public void test_unsigned_01() throws Exception {
+  public void test_unsigned_01() throws Exception {
 
-        new TestHelper(
-                "unsigned-01", // testURI,
-                "unsigned-01.rq",// queryFileURL
-                "unsigned-01.trig",// dataFileURL
-                "unsigned-01.srx"// resultFileURL
-                ).runTest();
-
-    }
-    
+    new TestHelper(
+            "unsigned-01", // testURI,
+            "unsigned-01.rq", // queryFileURL
+            "unsigned-01.trig", // dataFileURL
+            "unsigned-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 }

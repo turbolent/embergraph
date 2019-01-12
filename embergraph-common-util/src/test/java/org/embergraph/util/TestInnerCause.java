@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 import java.io.IOException;
-
 import junit.framework.TestCase;
 
 /**
@@ -33,148 +32,120 @@ import junit.framework.TestCase;
  */
 public class TestInnerCause extends TestCase {
 
-    /**
-     * 
-     */
-    public TestInnerCause() {
-        super();
+  /** */
+  public TestInnerCause() {
+    super();
+  }
+
+  /** @param arg0 */
+  public TestInnerCause(String arg0) {
+    super(arg0);
+  }
+
+  protected Throwable getInnerCause(Throwable t, Class<? extends Throwable> cls) {
+
+    return InnerCause.getInnerCause(t, cls);
+  }
+
+  public void test_getInnerCause_correctRejection() {
+
+    try {
+      getInnerCause(null, null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestInnerCause(String arg0) {
-        super(arg0);
+    try {
+      getInnerCause(null, RuntimeException.class);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
 
-    protected Throwable getInnerCause(Throwable t, Class<? extends Throwable> cls) {
-        
-        return InnerCause.getInnerCause(t, cls);
-        
+    try {
+      getInnerCause(new RuntimeException(), null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
-    
-    public void test_getInnerCause_correctRejection() {
+  }
 
-        try {
-            getInnerCause(null, null);
-            fail("Expecting: "+IllegalArgumentException.class);
-        } catch(IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: "+ex);
-        }
-        
-        try {
-            getInnerCause(null, RuntimeException.class);
-            fail("Expecting: "+IllegalArgumentException.class);
-        } catch(IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: "+ex);
-        }
-        
-        try {
-            getInnerCause(new RuntimeException(), null);
-            fail("Expecting: "+IllegalArgumentException.class);
-        } catch(IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: "+ex);
-        }
+  /** Finds cause when it is on top of the stack trace and the right type. */
+  public void test_getInnerCause01_find_exact() {
 
-    }
-    
-    /**
-     * Finds cause when it is on top of the stack trace and the right type.
-     */
-    public void test_getInnerCause01_find_exact() {
+    Throwable t = new RuntimeException();
 
-        Throwable t = new RuntimeException();
-         
-        assertTrue(t == getInnerCause(t, RuntimeException.class));
-            
-    }
+    assertTrue(t == getInnerCause(t, RuntimeException.class));
+  }
 
-    /**
-     * Find cause when it is on top of the stack trace and a subclass of the
-     * desired type.
-     */
-    public void test_getInnerCause01_find_subclass() {
+  /** Find cause when it is on top of the stack trace and a subclass of the desired type. */
+  public void test_getInnerCause01_find_subclass() {
 
-        Throwable t = new IOException();
-         
-        assertTrue(t == getInnerCause(t, Exception.class));
-        
-    }
+    Throwable t = new IOException();
 
-    /**
-     * Does not find cause that is a super class of the desired type.
-     */
-    public void test_getInnerCause01_reject_superclass() {
+    assertTrue(t == getInnerCause(t, Exception.class));
+  }
 
-        Throwable t = new Exception();
-         
-        assertNull(getInnerCause(t, IOException.class));
-        
-    }
-    
-    /**
-     * Does not find cause when it is on top of the stack trace and not either
-     * the desired type or a subclass of the desired type.
-     */
-    public void test_getInnerCause01_reject_otherType() {
+  /** Does not find cause that is a super class of the desired type. */
+  public void test_getInnerCause01_reject_superclass() {
 
-        Throwable t = new Throwable();
-         
-        assertNull(getInnerCause(t, Exception.class));
-        
-    }
+    Throwable t = new Exception();
 
-    /**
-     * Finds inner cause that is the exact type.
-     */
-    public void test_getInnerCause02_find_exact() {
+    assertNull(getInnerCause(t, IOException.class));
+  }
 
-        Throwable cause = new Exception();
+  /**
+   * Does not find cause when it is on top of the stack trace and not either the desired type or a
+   * subclass of the desired type.
+   */
+  public void test_getInnerCause01_reject_otherType() {
 
-        Throwable t = new Throwable(cause);
+    Throwable t = new Throwable();
 
-        assertTrue(cause == getInnerCause(t, Exception.class));
+    assertNull(getInnerCause(t, Exception.class));
+  }
 
-    }
+  /** Finds inner cause that is the exact type. */
+  public void test_getInnerCause02_find_exact() {
 
-    /**
-     * Finds inner cause that is a derived type (subclass).
-     */
-    public void test_getInnerCause02_find_subclass() {
+    Throwable cause = new Exception();
 
-        Throwable cause = new IOException();
+    Throwable t = new Throwable(cause);
 
-        Throwable t = new Throwable(cause);
+    assertTrue(cause == getInnerCause(t, Exception.class));
+  }
 
-        assertTrue(cause == getInnerCause(t, Exception.class));
+  /** Finds inner cause that is a derived type (subclass). */
+  public void test_getInnerCause02_find_subclass() {
 
-    }
+    Throwable cause = new IOException();
 
-    /**
-     * Does not find inner cause that is a super class of the desired type.
-     */
-    public void test_getInnerCause02_reject_superclass() {
+    Throwable t = new Throwable(cause);
 
-        Throwable cause = new Exception();
-        
-        Throwable t = new RuntimeException(cause);
-         
-        assertNull( getInnerCause(t, IOException.class));
-        
-    }
-    
-    /**
-     * Does not find an inner cause that is neither the specified type nor a
-     * subtype of the specified type.
-     */
-    public void test_getInnerCause03_reject_otherType() {
+    assertTrue(cause == getInnerCause(t, Exception.class));
+  }
 
-        Throwable cause = new RuntimeException();
+  /** Does not find inner cause that is a super class of the desired type. */
+  public void test_getInnerCause02_reject_superclass() {
 
-        Throwable t = new Exception(cause);
+    Throwable cause = new Exception();
 
-        assertNull( getInnerCause(t, IOException.class) );
+    Throwable t = new RuntimeException(cause);
 
-    }
-    
+    assertNull(getInnerCause(t, IOException.class));
+  }
+
+  /**
+   * Does not find an inner cause that is neither the specified type nor a subtype of the specified
+   * type.
+   */
+  public void test_getInnerCause03_reject_otherType() {
+
+    Throwable cause = new RuntimeException();
+
+    Throwable t = new Exception(cause);
+
+    assertNull(getInnerCause(t, IOException.class));
+  }
 }

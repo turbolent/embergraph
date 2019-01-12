@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.solutions;
 
 import java.util.concurrent.FutureTask;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
@@ -27,15 +26,14 @@ import org.embergraph.bop.PipelineOp;
 
 public class MockQuery extends PipelineOp {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public MockQuery() {
-        super(new BOp[] {}, NV.asMap(new NV[] {}));
-    }
+  public MockQuery() {
+    super(new BOp[] {}, NV.asMap(new NV[] {}));
+  }
 
-    @Override
-    public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
-        return null;
-    }
-
+  @Override
+  public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
+    return null;
+  }
 }

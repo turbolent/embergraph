@@ -15,16 +15,13 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.util;
 
-/**
- * Factory for {@link IGraphFixture}.
- */
+/** Factory for {@link IGraphFixture}. */
 public interface IGraphFixtureFactory {
 
-    /**
-     * Factory method to create a new {@link IGraphFixture}.
-     * 
-     * @throws Exception
-     */
-    IGraphFixture newGraphFixture() throws Exception;
-
+  /**
+   * Factory method to create a new {@link IGraphFixture}.
+   *
+   * @throws Exception
+   */
+  IGraphFixture newGraphFixture() throws Exception;
 }

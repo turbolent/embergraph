@@ -31,89 +31,72 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * A factory for named {@link Lock}s. A simple {@link Lock} manages access to a
- * single resource. However, a {@link NamedLock} manages access to the members
- * of a set of named resources. This is more efficient when the latency of the
- * operation once the lock is acquired is significant, e.g., an RMI call or a
- * disk IO.
- * <p>
- * The locks are stored in a {@link WeakHashMap} so that they will be garbage
- * collected if there are no threads waiting in the queue for a given named
- * lock.
- * 
+ * A factory for named {@link Lock}s. A simple {@link Lock} manages access to a single resource.
+ * However, a {@link NamedLock} manages access to the members of a set of named resources. This is
+ * more efficient when the latency of the operation once the lock is acquired is significant, e.g.,
+ * an RMI call or a disk IO.
+ *
+ * <p>The locks are stored in a {@link WeakHashMap} so that they will be garbage collected if there
+ * are no threads waiting in the queue for a given named lock.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <T>
- *            The generic type for the "name". This MUST implement hashCode()
- *            and equals() since the instances of this type will serve as keys
- *            in a {@link Map}.
+ * @param <T> The generic type for the "name". This MUST implement hashCode() and equals() since the
+ *     instances of this type will serve as keys in a {@link Map}.
  */
 public class NamedLock<T> {
 
-    final private Map<T, ReentrantLock> locks = new WeakHashMap<T, ReentrantLock>();
+  private final Map<T, ReentrantLock> locks = new WeakHashMap<T, ReentrantLock>();
 
-    /**
-     * Return the canonical instance of the lock for a named resource.
-     * 
-     * @param name
-     *            The name.
-     * 
-     * @return The canonical instance of the lock for that name.
-     */
-    protected Lock lockFactory(final T name) {
+  /**
+   * Return the canonical instance of the lock for a named resource.
+   *
+   * @param name The name.
+   * @return The canonical instance of the lock for that name.
+   */
+  protected Lock lockFactory(final T name) {
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    if (name == null) throw new IllegalArgumentException();
 
-        ReentrantLock lock;
-        
-        synchronized (locks) {
+    ReentrantLock lock;
 
-            lock = locks.get(name);
+    synchronized (locks) {
+      lock = locks.get(name);
 
-            if (lock == null) {
+      if (lock == null) {
 
-                lock = new ReentrantLock();
+        lock = new ReentrantLock();
 
-                locks.put(name, lock);
-
-            }
-
-        }
-
-        return lock;
-
-    }
-    
-    /**
-     * Block until the {@link Lock} for the named resource is available, then
-     * {@link Lock#lock()} the {@link Lock} and return the locked {@link Lock}.
-     * 
-     * @param name
-     *            The name of the resource whose {@link Lock} is desired.
-     * 
-     * @return The {@link Lock}. It will have already been {@link Lock#lock()}ed.
-     */
-    public Lock acquireLock(final T name) {
-
-        final Lock lock = lockFactory(name);
-
-        lock.lock();
-
-        return lock;
-
+        locks.put(name, lock);
+      }
     }
 
-    public Lock acquireLock(final T name, final long timeout, final TimeUnit unit)
-            throws InterruptedException, TimeoutException {
+    return lock;
+  }
 
-        final Lock lock = lockFactory(name);
+  /**
+   * Block until the {@link Lock} for the named resource is available, then {@link Lock#lock()} the
+   * {@link Lock} and return the locked {@link Lock}.
+   *
+   * @param name The name of the resource whose {@link Lock} is desired.
+   * @return The {@link Lock}. It will have already been {@link Lock#lock()}ed.
+   */
+  public Lock acquireLock(final T name) {
 
-        if(!lock.tryLock(timeout, unit))
-            throw new TimeoutException();
+    final Lock lock = lockFactory(name);
 
-        return lock;
+    lock.lock();
 
-    }
-    
+    return lock;
+  }
+
+  public Lock acquireLock(final T name, final long timeout, final TimeUnit unit)
+      throws InterruptedException, TimeoutException {
+
+    final Lock lock = lockFactory(name);
+
+    if (!lock.tryLock(timeout, unit)) throw new TimeoutException();
+
+    return lock;
+  }
 }

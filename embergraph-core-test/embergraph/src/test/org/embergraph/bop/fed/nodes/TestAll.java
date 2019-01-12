@@ -29,36 +29,23 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("map binding sets over nodes");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // unit tests for mapping binding sets over nodes.
-        suite.addTestSuite(TestMapBindingSetsOverNodes.class);
+    final TestSuite suite = new TestSuite("map binding sets over nodes");
 
-        return suite;
+    // unit tests for mapping binding sets over nodes.
+    suite.addTestSuite(TestMapBindingSetsOverNodes.class);
 
-    }
-
+    return suite;
+  }
 }

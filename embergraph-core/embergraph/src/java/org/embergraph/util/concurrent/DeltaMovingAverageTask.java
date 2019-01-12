@@ -27,57 +27,49 @@ import java.util.concurrent.Callable;
 
 /**
  * Moving average based on the change in some sampled value.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DeltaMovingAverageTask extends MovingAverageTask {
 
-    /**
-     * @param name
-     * @param sampleTask
-     */
-    public DeltaMovingAverageTask(String name,
-            Callable<? extends Number> sampleTask) {
-        super(name, sampleTask);
+  /**
+   * @param name
+   * @param sampleTask
+   */
+  public DeltaMovingAverageTask(String name, Callable<? extends Number> sampleTask) {
+    super(name, sampleTask);
+  }
+
+  /**
+   * @param name
+   * @param sampleTask
+   * @param w
+   */
+  public DeltaMovingAverageTask(String name, Callable<? extends Number> sampleTask, double w) {
+    super(name, sampleTask, w);
+  }
+
+  /** Note: don't throw anything from here or it will cause the task to no longer be run! */
+  public void run() {
+
+    try {
+
+      final double sample = sampleTask.call().doubleValue();
+
+      final double delta = sample - oldValue;
+
+      oldValue = sample;
+
+      average = getMovingAverage(average, delta, w);
+
+      nsamples++;
+
+    } catch (Exception ex) {
+
+      log.warn(name, ex);
     }
+  }
 
-    /**
-     * @param name
-     * @param sampleTask
-     * @param w
-     */
-    public DeltaMovingAverageTask(String name,
-            Callable<? extends Number> sampleTask, double w) {
-        super(name, sampleTask, w);
-    }
-
-    /**
-     * Note: don't throw anything from here or it will cause the task to no
-     * longer be run!
-     */
-    public void run() {
-
-        try {
-
-            final double sample = sampleTask.call().doubleValue();
-            
-            final double delta = sample - oldValue;
-
-            oldValue = sample;
-
-            average = getMovingAverage(average, delta, w);
-
-            nsamples++;
-
-        } catch (Exception ex) {
-
-            log.warn(name, ex);
-
-        }
-
-    }
-
-    private double oldValue = 0d;
-    
+  private double oldValue = 0d;
 }

@@ -22,67 +22,57 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import java.util.UUID;
-
-import org.embergraph.io.SerializerUtil;
-
 import junit.framework.TestCase2;
+import org.embergraph.io.SerializerUtil;
 
 /**
  * Test suite for {@link StartOpMessage}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestStartOpMessage extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestStartOpMessage() {
-    }
+  /** */
+  public TestStartOpMessage() {}
 
-    /**
-     * @param name
-     */
-    public TestStartOpMessage(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestStartOpMessage(String name) {
+    super(name);
+  }
 
-    public void test_serialization() {
-        
-        final IStartOpMessage expected = new StartOpMessage(
-                UUID.randomUUID()/* queryId */, 12/* opId */,
-                8/* partitionId */, UUID.randomUUID()/* serviceId */, 7/* nmessages */);
-        
-        doSerializationTest(expected);
-        
-    }
-    
-    private static void doSerializationTest(final IStartOpMessage expected) {
+  public void test_serialization() {
 
-        final IStartOpMessage actual = (IStartOpMessage) SerializerUtil
-                .deserialize(SerializerUtil.serialize(expected));
+    final IStartOpMessage expected =
+        new StartOpMessage(
+            UUID.randomUUID() /* queryId */,
+            12 /* opId */,
+            8 /* partitionId */,
+            UUID.randomUUID() /* serviceId */,
+            7 /* nmessages */);
 
-        assertSameOp(expected, actual);
-        
-    }
+    doSerializationTest(expected);
+  }
 
-    private static void assertSameOp(final IStartOpMessage expected,
-            final IStartOpMessage actual) {
+  private static void doSerializationTest(final IStartOpMessage expected) {
 
-        assertEquals("queryId", expected.getQueryId(), actual.getQueryId());
-        
-        assertEquals("serviceId", expected.getServiceId(),
-                actual.getServiceId());
-        
-        assertEquals("bopId", expected.getBOpId(), actual.getBOpId());
-        
-        assertEquals("partitionId", expected.getPartitionId(),
-                actual.getPartitionId());
-        
-        assertEquals("messageReadyCount", expected.getChunkMessageCount(),
-                actual.getChunkMessageCount());
+    final IStartOpMessage actual =
+        (IStartOpMessage) SerializerUtil.deserialize(SerializerUtil.serialize(expected));
 
-    }
+    assertSameOp(expected, actual);
+  }
 
+  private static void assertSameOp(final IStartOpMessage expected, final IStartOpMessage actual) {
+
+    assertEquals("queryId", expected.getQueryId(), actual.getQueryId());
+
+    assertEquals("serviceId", expected.getServiceId(), actual.getServiceId());
+
+    assertEquals("bopId", expected.getBOpId(), actual.getBOpId());
+
+    assertEquals("partitionId", expected.getPartitionId(), actual.getPartitionId());
+
+    assertEquals(
+        "messageReadyCount", expected.getChunkMessageCount(), actual.getChunkMessageCount());
+  }
 }

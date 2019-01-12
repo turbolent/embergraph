@@ -23,219 +23,185 @@ package org.embergraph.btree;
 import java.util.NoSuchElementException;
 
 /**
- * Visits the values of a {@link Leaf} in the external key ordering. There is
- * exactly one value per key for a leaf node.
- * 
+ * Visits the values of a {@link Leaf} in the external key ordering. There is exactly one value per
+ * key for a leaf node.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LeafTupleIterator<E> implements ITupleIterator<E> {
 
-    private final Leaf leaf;
+  private final Leaf leaf;
 
-    private final AbstractTuple<E> tuple;
-    
-    private int index;
+  private final AbstractTuple<E> tuple;
 
-    private int lastVisited = -1;
+  private int index;
 
-//    private final byte[] fromKey;
-//    
-//    private final byte[] toKey;
+  private int lastVisited = -1;
 
-    // first index to visit.
-    private final int fromIndex;
+  //    private final byte[] fromKey;
+  //
+  //    private final byte[] toKey;
 
-    // first index to NOT visit.
-    private final int toIndex;
+  // first index to visit.
+  private final int fromIndex;
 
-    private final boolean hasDeleteMarkers;
-    
-    private final boolean visitDeleted;
-    
-    public LeafTupleIterator(Leaf leaf) {
+  // first index to NOT visit.
+  private final int toIndex;
 
-        this(leaf, new Tuple<E>(leaf.btree, IRangeQuery.DEFAULT), null, null);
+  private final boolean hasDeleteMarkers;
 
-    }
+  private final boolean visitDeleted;
 
-    public LeafTupleIterator(final Leaf leaf, final AbstractTuple<E> tuple) {
+  public LeafTupleIterator(Leaf leaf) {
 
-        this(leaf, tuple, null, null);
+    this(leaf, new Tuple<E>(leaf.btree, IRangeQuery.DEFAULT), null, null);
+  }
 
-    }
+  public LeafTupleIterator(final Leaf leaf, final AbstractTuple<E> tuple) {
 
-    /**
-     * 
-     * @param leaf
-     *            The leaf whose entries will be traversed (required).
-     * @param tuple
-     *            Used to hold the output values (required).
-     * @param fromKey
-     *            The first key whose entry will be visited or <code>null</code>
-     *            if the lower bound on the key traversal is not constrained.
-     * @param toKey
-     *            The first key whose entry will NOT be visited or
-     *            <code>null</code> if the upper bound on the key traversal is
-     *            not constrained.
-     * @param flags
-     *            Flags specifying whether the keys and/or values will be
-     *            materialized.
-     * 
-     * @exception IllegalArgumentException
-     *                if fromKey is given and is greater than toKey.
-     */
-    public LeafTupleIterator(final Leaf leaf, final AbstractTuple<E> tuple,
-            final byte[] fromKey, final byte[] toKey) {
+    this(leaf, tuple, null, null);
+  }
 
-        assert leaf != null;
+  /**
+   * @param leaf The leaf whose entries will be traversed (required).
+   * @param tuple Used to hold the output values (required).
+   * @param fromKey The first key whose entry will be visited or <code>null</code> if the lower
+   *     bound on the key traversal is not constrained.
+   * @param toKey The first key whose entry will NOT be visited or <code>null</code> if the upper
+   *     bound on the key traversal is not constrained.
+   * @param flags Flags specifying whether the keys and/or values will be materialized.
+   * @exception IllegalArgumentException if fromKey is given and is greater than toKey.
+   */
+  public LeafTupleIterator(
+      final Leaf leaf, final AbstractTuple<E> tuple, final byte[] fromKey, final byte[] toKey) {
 
-        assert tuple != null;
+    assert leaf != null;
 
-        this.leaf = leaf;
-        
-        this.tuple = tuple;
+    assert tuple != null;
 
-        this.hasDeleteMarkers = leaf.hasDeleteMarkers();
+    this.leaf = leaf;
 
-        this.visitDeleted = (tuple.flags() & IRangeQuery.DELETED) != 0;
+    this.tuple = tuple;
 
-//        this.fromKey = fromKey; // may be null (no lower bound).
-//        
-//        this.toKey = toKey; // may be null (no upper bound).
-        
-        { // figure out the first index to visit.
+    this.hasDeleteMarkers = leaf.hasDeleteMarkers();
 
-            int fromIndex;
+    this.visitDeleted = (tuple.flags() & IRangeQuery.DELETED) != 0;
 
-            if (fromKey != null) {
+    //        this.fromKey = fromKey; // may be null (no lower bound).
+    //
+    //        this.toKey = toKey; // may be null (no upper bound).
 
-                fromIndex = leaf.getKeys().search(fromKey);
+    { // figure out the first index to visit.
+      int fromIndex;
 
-                if (fromIndex < 0) {
+      if (fromKey != null) {
 
-                    fromIndex = -fromIndex - 1;
+        fromIndex = leaf.getKeys().search(fromKey);
 
-                }
+        if (fromIndex < 0) {
 
-            } else {
-
-                fromIndex = 0;
-
-            }
-
-            this.fromIndex = fromIndex;
-
+          fromIndex = -fromIndex - 1;
         }
 
-        { // figure out the first index to NOT visit.
+      } else {
 
-            int toIndex;
+        fromIndex = 0;
+      }
 
-            if (toKey != null) {
-
-                toIndex = leaf.getKeys().search(toKey);
-
-                if (toIndex < 0) {
-
-                    toIndex = -toIndex - 1;
-
-                }
-
-            } else {
-
-                toIndex = leaf.getKeyCount();
-
-            }
-
-            this.toIndex = toIndex;
-
-        }
-
-        if (fromIndex > toIndex) {
-            
-            throw new IllegalArgumentException("fromKey > toKey");
-            
-        }
-        
-        // starting index is the lower bound.
-        index = fromIndex;
-        
+      this.fromIndex = fromIndex;
     }
 
-    /**
-     * Examines the entry at {@link #index}. If it passes the criteria for an
-     * entry to visit then return true. Otherwise increment the {@link #index}
-     * until either all entries in this leaf have been exhausted -or- the an
-     * entry is identified that passes the various criteria.
-     */
-    public boolean hasNext() {
+    { // figure out the first index to NOT visit.
+      int toIndex;
 
-//        if(filter == null) {
-//            
-//            return index >= fromIndex && index < toIndex;
-//            
-//        }
+      if (toKey != null) {
 
-        for( ; index >= fromIndex && index < toIndex; index++) {
-         
-            /*
-             * Skip deleted entries unless specifically requested.
-             */
-            if (hasDeleteMarkers && !visitDeleted
-                    && leaf.getDeleteMarker(index)) {
+        toIndex = leaf.getKeys().search(toKey);
 
-                // skipping a deleted version.
-                
-                continue;
-                
-            }
+        if (toIndex < 0) {
 
-            // entry @ index is next to visit.
-            
-            return true;
-            
+          toIndex = -toIndex - 1;
         }
 
-        // nothing left to visit in this leaf.
-        
-        return false;
-        
-    }
-    
-    public ITuple<E> next() {
+      } else {
 
-        if (!hasNext()) {
+        toIndex = leaf.getKeyCount();
+      }
 
-            throw new NoSuchElementException();
-
-        }
-
-        lastVisited = index++;
-
-        tuple.copy(lastVisited, leaf);
-        
-        return tuple;
-        
+      this.toIndex = toIndex;
     }
 
-    /**
-     * This operation is not supported.
-     * <p>
-     * Note: There are two ways in which you can achieve the semantics of
-     * {@link #remove()}. One is to use an {@link ITupleCursor}, which
-     * correctly handles traversal with concurrent modification. The other is to
-     * use a {@link AbstractChunkedTupleIterator}, which buffers the tuples
-     * first and then does a "delete" behind in order to avoid concurrent
-     * modification during traversal.
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     */
-    public void remove() {
+    if (fromIndex > toIndex) {
 
-        throw new UnsupportedOperationException();
-
+      throw new IllegalArgumentException("fromKey > toKey");
     }
 
+    // starting index is the lower bound.
+    index = fromIndex;
+  }
+
+  /**
+   * Examines the entry at {@link #index}. If it passes the criteria for an entry to visit then
+   * return true. Otherwise increment the {@link #index} until either all entries in this leaf have
+   * been exhausted -or- the an entry is identified that passes the various criteria.
+   */
+  public boolean hasNext() {
+
+    //        if(filter == null) {
+    //
+    //            return index >= fromIndex && index < toIndex;
+    //
+    //        }
+
+    for (; index >= fromIndex && index < toIndex; index++) {
+
+      /*
+       * Skip deleted entries unless specifically requested.
+       */
+      if (hasDeleteMarkers && !visitDeleted && leaf.getDeleteMarker(index)) {
+
+        // skipping a deleted version.
+
+        continue;
+      }
+
+      // entry @ index is next to visit.
+
+      return true;
+    }
+
+    // nothing left to visit in this leaf.
+
+    return false;
+  }
+
+  public ITuple<E> next() {
+
+    if (!hasNext()) {
+
+      throw new NoSuchElementException();
+    }
+
+    lastVisited = index++;
+
+    tuple.copy(lastVisited, leaf);
+
+    return tuple;
+  }
+
+  /**
+   * This operation is not supported.
+   *
+   * <p>Note: There are two ways in which you can achieve the semantics of {@link #remove()}. One is
+   * to use an {@link ITupleCursor}, which correctly handles traversal with concurrent modification.
+   * The other is to use a {@link AbstractChunkedTupleIterator}, which buffers the tuples first and
+   * then does a "delete" behind in order to avoid concurrent modification during traversal.
+   *
+   * @throws UnsupportedOperationException always.
+   */
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
 }

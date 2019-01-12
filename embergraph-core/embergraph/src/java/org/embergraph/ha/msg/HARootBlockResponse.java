@@ -19,7 +19,6 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
-
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.RootBlockView;
@@ -27,28 +26,23 @@ import org.embergraph.util.BytesUtil;
 
 public class HARootBlockResponse implements IHARootBlockResponse, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    final private boolean isRootBlock0;
-    final private byte[] data;
-    
-    public HARootBlockResponse(final IRootBlockView rootBlock) {
-        
-        if (rootBlock == null)
-            throw new IllegalArgumentException();
-        
-        this.isRootBlock0 = rootBlock.isRootBlock0();
-        
-        this.data = BytesUtil.toArray(rootBlock.asReadOnlyBuffer());
-        
-    }
-    
-    @Override
-    public IRootBlockView getRootBlock() {
+  private final boolean isRootBlock0;
+  private final byte[] data;
 
-        return new RootBlockView(isRootBlock0, ByteBuffer.wrap(data),
-                new ChecksumUtility());
+  public HARootBlockResponse(final IRootBlockView rootBlock) {
 
-    }
+    if (rootBlock == null) throw new IllegalArgumentException();
 
+    this.isRootBlock0 = rootBlock.isRootBlock0();
+
+    this.data = BytesUtil.toArray(rootBlock.asReadOnlyBuffer());
+  }
+
+  @Override
+  public IRootBlockView getRootBlock() {
+
+    return new RootBlockView(isRootBlock0, ByteBuffer.wrap(data), new ChecksumUtility());
+  }
 }

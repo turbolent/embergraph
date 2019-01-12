@@ -31,50 +31,48 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint to enable/disable usage of pipelined hash joins. See
- * {@link PipelinedHashIndexAndSolutionSetJoinOp} and
- * {@link JVMPipelinedHashJoinUtility} for the respective operators.
- * 
+ * Query hint to enable/disable usage of pipelined hash joins. See {@link
+ * PipelinedHashIndexAndSolutionSetJoinOp} and {@link JVMPipelinedHashJoinUtility} for the
+ * respective operators.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
- * @version $Id$ 
+ * @version $Id$
  */
 final class PipelinedHashJoinHint extends AbstractBooleanQueryHint {
 
-    protected PipelinedHashJoinHint() {
+  protected PipelinedHashJoinHint() {
 
-        super(QueryHints.PIPELINED_HASH_JOIN, null/* default */);
+    super(QueryHints.PIPELINED_HASH_JOIN, null /* default */);
+  }
 
-    }
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-       
-       switch (scope) {
-       case Group:
-       case GroupAndSubGroups:
-       case Query:
-       case SubQuery:
-           if (op instanceof JoinGroupNode) {
-               _setAnnotation(context, scope, op, getName(), value);
-           }
-           return;
-       case Prior:
-       {
+    switch (scope) {
+      case Group:
+      case GroupAndSubGroups:
+      case Query:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(context, scope, op, getName(), value);
+        }
+        return;
+      case Prior:
+        {
           if (op instanceof IGroupMemberNode) {
-             _setQueryHint(context, scope, op, getName(), value);          
+            _setQueryHint(context, scope, op, getName(), value);
           }
           return;
-       }
-       default:
-          break;
-       }
-
-      throw new QueryHintException(scope, op, getName(), value);
-
-
+        }
+      default:
+        break;
     }
 
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

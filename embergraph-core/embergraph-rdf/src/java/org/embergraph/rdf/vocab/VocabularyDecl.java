@@ -22,37 +22,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.vocab;
 
 import java.util.Iterator;
-
-import org.openrdf.model.URI;
-
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.store.AbstractTripleStore;
+import org.openrdf.model.URI;
 
 /**
  * A class for declaring a {@link Vocabulary}.
- * <p>
- * Note: Implementations of a {@link VocabularyDecl} MUST be stable across the
- * life cycle of an {@link AbstractTripleStore}. For this reason it is strongly
- * recommended that new versions of a vocabulary are defined in a new class.
- * <p>
- * Each class SHOULD provide a declaration for the namespace(s) used by the
- * vocabulary. It is convention to expose this {@link String} value as a public
- * static field named <code>NAMESPACE</code>. Declaring the namespace used by
- * provides for compact encoding of URIs within that namespace (e.g., using a
- * {@link VocabURIShortIV} for the namespace and a compressed unicode representation
- * of the localName of the URI) even if those URIs were not part of the original
- * vocabulary declaration. Thus, it provides a compact fallback encoding if the
- * vocabulary evolves after the {@link AbstractTripleStore} has been
- * provisioned.
- * 
+ *
+ * <p>Note: Implementations of a {@link VocabularyDecl} MUST be stable across the life cycle of an
+ * {@link AbstractTripleStore}. For this reason it is strongly recommended that new versions of a
+ * vocabulary are defined in a new class.
+ *
+ * <p>Each class SHOULD provide a declaration for the namespace(s) used by the vocabulary. It is
+ * convention to expose this {@link String} value as a public static field named <code>NAMESPACE
+ * </code>. Declaring the namespace used by provides for compact encoding of URIs within that
+ * namespace (e.g., using a {@link VocabURIShortIV} for the namespace and a compressed unicode
+ * representation of the localName of the URI) even if those URIs were not part of the original
+ * vocabulary declaration. Thus, it provides a compact fallback encoding if the vocabulary evolves
+ * after the {@link AbstractTripleStore} has been provisioned.
+ *
  * @version $Id$
  */
 public interface VocabularyDecl {
 
-    /**
-     * Return an iterator which will visit the declared values. The iterator
-     * must not support removal.
-     */
-    public Iterator<URI> values();
-
+  /**
+   * Return an iterator which will visit the declared values. The iterator must not support removal.
+   */
+  public Iterator<URI> values();
 }

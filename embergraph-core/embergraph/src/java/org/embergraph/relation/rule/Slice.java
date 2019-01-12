@@ -29,97 +29,79 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.math.BigInteger;
 
-
 /**
  * Default implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Slice implements ISlice, Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 5396509164843609197L;
+  /** */
+  private static final long serialVersionUID = 5396509164843609197L;
 
-    private long offset;
-    private long limit;
-    private long last;
-    
-    /**
-     * A slice corresponding to all results (offset is zero, limit is
-     * {@link Long#MAX_VALUE}).
-     */
-    public static final transient ISlice ALL = new Slice(0, Long.MAX_VALUE);
-    
-    /**
-     * 
-     * @param offset
-     * @param limit
-     * 
-     * @throws IllegalArgumentException
-     *             if offset is negative.
-     * @throws IllegalArgumentException
-     *             if limit is non-positive.
-     */
-    public Slice(final long offset, final long limit) {
-        
-        if (offset < 0)
-            throw new IllegalArgumentException();
-        
-        if (limit <= 0)
-            throw new IllegalArgumentException();
-        
-        this.offset = offset;
-        
-        this.limit = limit;
+  private long offset;
+  private long limit;
+  private long last;
 
-        // @todo what is a cheaper way to do this?
-        this.last = BigInteger.valueOf(offset).add(BigInteger.valueOf(limit))
-                .min(BigInteger.valueOf(Long.MAX_VALUE)).longValue();
-        
-    }
-    
-    public long getOffset() {
-        
-        return offset;
-        
-    }
+  /** A slice corresponding to all results (offset is zero, limit is {@link Long#MAX_VALUE}). */
+  public static final transient ISlice ALL = new Slice(0, Long.MAX_VALUE);
 
-    public long getLimit() {
-        
-        return limit;
-        
-    }
+  /**
+   * @param offset
+   * @param limit
+   * @throws IllegalArgumentException if offset is negative.
+   * @throws IllegalArgumentException if limit is non-positive.
+   */
+  public Slice(final long offset, final long limit) {
 
-    public long getLast() {
+    if (offset < 0) throw new IllegalArgumentException();
 
-        return last;
-        
-    }
-    
-    public String toString() {
-        
-        return "Slice{offset="+offset+", limit="+limit+", last="+last+"}";
-        
-    }
+    if (limit <= 0) throw new IllegalArgumentException();
 
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
-        
-        offset = in.readLong();
-        limit  = in.readLong();
-        last   = in.readLong();
-        
-    }
+    this.offset = offset;
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+    this.limit = limit;
 
-        out.writeLong(offset);
-        out.writeLong(limit);
-        out.writeLong(last);
-        
-    }
-    
+    // @todo what is a cheaper way to do this?
+    this.last =
+        BigInteger.valueOf(offset)
+            .add(BigInteger.valueOf(limit))
+            .min(BigInteger.valueOf(Long.MAX_VALUE))
+            .longValue();
+  }
+
+  public long getOffset() {
+
+    return offset;
+  }
+
+  public long getLimit() {
+
+    return limit;
+  }
+
+  public long getLast() {
+
+    return last;
+  }
+
+  public String toString() {
+
+    return "Slice{offset=" + offset + ", limit=" + limit + ", last=" + last + "}";
+  }
+
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+
+    offset = in.readLong();
+    limit = in.readLong();
+    last = in.readLong();
+  }
+
+  public void writeExternal(ObjectOutput out) throws IOException {
+
+    out.writeLong(offset);
+    out.writeLong(limit);
+    out.writeLong(last);
+  }
 }

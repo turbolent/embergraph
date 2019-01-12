@@ -27,50 +27,40 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite for dynamic sharding.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll_DynamicSharding extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestAll_DynamicSharding() {
-    }
+  /** */
+  public TestAll_DynamicSharding() {}
 
-    /**
-     * @param name
-     */
-    public TestAll_DynamicSharding(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestAll_DynamicSharding(String name) {
+    super(name);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("dynamic sharding");
+    final TestSuite suite = new TestSuite("dynamic sharding");
 
-        // test basic journal overflow scenario.
-        suite.addTestSuite(TestOverflow.class);
+    // test basic journal overflow scenario.
+    suite.addTestSuite(TestOverflow.class);
 
-        // test suite for GRS overflow.
-        suite.addTestSuite(TestOverflowGRS.class);
+    // test suite for GRS overflow.
+    suite.addTestSuite(TestOverflowGRS.class);
 
-        // test split/join (inserts eventually split; deletes eventually join).
-        suite.addTestSuite(TestSplitJoin.class);
+    // test split/join (inserts eventually split; deletes eventually join).
+    suite.addTestSuite(TestSplitJoin.class);
 
-        // test scatter splits with 2DS.
-        suite.addTestSuite(TestScatterSplit.class);
+    // test scatter splits with 2DS.
+    suite.addTestSuite(TestScatterSplit.class);
 
-        // test journal overflow scenarios (move)
-        suite.addTestSuite(TestMove.class);
+    // test journal overflow scenarios (move)
+    suite.addTestSuite(TestMove.class);
 
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

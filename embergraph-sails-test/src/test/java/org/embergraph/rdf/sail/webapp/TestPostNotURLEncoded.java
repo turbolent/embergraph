@@ -19,60 +19,55 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
-
 import junit.framework.Test;
 
 /**
  * See trac 711 for discussion.
- * 
- * @author jeremycarroll
  *
+ * @author jeremycarroll
  */
-
 public class TestPostNotURLEncoded extends AbstractProtocolTest {
 
+  public static Test suite() {
+    return ProxySuiteHelper.suiteWhenStandalone(
+        TestPostNotURLEncoded.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
+  }
 
-	static public Test suite() {
-		return ProxySuiteHelper.suiteWhenStandalone(TestPostNotURLEncoded.class,"test.*", TestMode.quads,TestMode.sids,TestMode.triples);
-	}
-	public TestPostNotURLEncoded(String name)  {
-		super(name);
-	}
+  public TestPostNotURLEncoded(String name) {
+    super(name);
+  }
 
-	public void testSelectPostXML() throws IOException {
-		setMethodisPost("application/sparql-query",AbstractProtocolTest.SELECT);
-		assertTrue(serviceRequest().contains("</sparql>"));
-		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
-	}
-	
+  public void testSelectPostXML() throws IOException {
+    setMethodisPost("application/sparql-query", AbstractProtocolTest.SELECT);
+    assertTrue(serviceRequest().contains("</sparql>"));
+    assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
+  }
 
-	public void testSelectPostJSON() throws IOException {
-		setAccept(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
-		setMethodisPost("application/sparql-query",AbstractProtocolTest.SELECT);
-		assertTrue(serviceRequest().contains("results"));
-		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
-	}
+  public void testSelectPostJSON() throws IOException {
+    setAccept(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
+    setMethodisPost("application/sparql-query", AbstractProtocolTest.SELECT);
+    assertTrue(serviceRequest().contains("results"));
+    assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
+  }
 
-	public void testAskPostXML() throws IOException {
-		setMethodisPost("application/sparql-query",AbstractProtocolTest.ASK);
-		assertTrue(serviceRequest().contains("</sparql>"));
-		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
-	}
-	
+  public void testAskPostXML() throws IOException {
+    setMethodisPost("application/sparql-query", AbstractProtocolTest.ASK);
+    assertTrue(serviceRequest().contains("</sparql>"));
+    assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
+  }
 
-	public void testAskPostJSON() throws IOException {
-		setAccept(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
-		setMethodisPost("application/sparql-query",AbstractProtocolTest.ASK);
-		String response = serviceRequest("query",AbstractProtocolTest.ASK);
-		assertTrue("Bad response: "+response,response.contains("boolean"));
-		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
-	}
-	
+  public void testAskPostJSON() throws IOException {
+    setAccept(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
+    setMethodisPost("application/sparql-query", AbstractProtocolTest.ASK);
+    String response = serviceRequest("query", AbstractProtocolTest.ASK);
+    assertTrue("Bad response: " + response, response.contains("boolean"));
+    assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
+  }
 
-	public void testUpdatePost() throws IOException {
-		checkUpdate(false);
-		setMethodisPost("application/sparql-update",update);
-		serviceRequest();
-		checkUpdate(true);
-	}
+  public void testUpdatePost() throws IOException {
+    checkUpdate(false);
+    setMethodisPost("application/sparql-update", update);
+    serviceRequest();
+    checkUpdate(true);
+  }
 }

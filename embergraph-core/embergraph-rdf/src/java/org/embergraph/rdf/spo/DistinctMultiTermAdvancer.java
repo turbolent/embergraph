@@ -32,80 +32,70 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
- * This was cloned from the {@link DistinctTermAdvancer}. It supports an
- * efficient scan of the distinct term identifiers that appear in the first
- * position(s) of the keys for the statement index corresponding to the
- * specified {@link IKeyOrder}. For example, using {@link SPOKeyOrder#POS} will
- * give you the term identifiers for the distinct predicates actually in use
+ * This was cloned from the {@link DistinctTermAdvancer}. It supports an efficient scan of the
+ * distinct term identifiers that appear in the first position(s) of the keys for the statement
+ * index corresponding to the specified {@link IKeyOrder}. For example, using {@link
+ * SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually in use
  * within statements in the {@link SPORelation}.
- * <p>
- * Note: This class only offers additional functionality over the
- * {@link DistinctTermAdvancer} for a quad store. For example, consider a triple
- * store with 2-bound on the {@link SPOKeyOrder#SPO} index. Since you are only
- * going to visit the distinct Object values, the advancer will not "advance"
- * over anything and you might as well use a normal {@link IAccessPath} or
- * rangeIterator.
- * 
+ *
+ * <p>Note: This class only offers additional functionality over the {@link DistinctTermAdvancer}
+ * for a quad store. For example, consider a triple store with 2-bound on the {@link
+ * SPOKeyOrder#SPO} index. Since you are only going to visit the distinct Object values, the
+ * advancer will not "advance" over anything and you might as well use a normal {@link IAccessPath}
+ * or rangeIterator.
+ *
  * @see DistinctTermAdvancer
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: DistinctMultiTermAdvancer.java 2886 2010-05-19 19:16:49Z
- *          mroycsi $
- * 
+ * @version $Id: DistinctMultiTermAdvancer.java 2886 2010-05-19 19:16:49Z mroycsi $
  * @todo Unit tests?
  */
 public class DistinctMultiTermAdvancer extends Advancer<SPO> {
 
-//    private static final long    serialVersionUID = 2500001864793869957L;
+  //    private static final long    serialVersionUID = 2500001864793869957L;
 
-    /**
-     * New version for this class, which  
-     */
-    private static final long serialVersionUID = -7326621294779476500L;
-    
-    private final int arity;
-    private final int boundEntries;
+  /** New version for this class, which */
+  private static final long serialVersionUID = -7326621294779476500L;
 
-    private transient IKeyBuilder keyBuilder;
+  private final int arity;
+  private final int boundEntries;
 
-    public DistinctMultiTermAdvancer(final int arity, final int boundEntries) {
+  private transient IKeyBuilder keyBuilder;
 
-        this.arity = arity;
-        this.boundEntries = boundEntries;
+  public DistinctMultiTermAdvancer(final int arity, final int boundEntries) {
+
+    this.arity = arity;
+    this.boundEntries = boundEntries;
+  }
+
+  @Override
+  protected void advance(final ITuple<SPO> tuple) {
+
+    if (keyBuilder == null) {
+
+      /*
+       * Note: It appears that you can not set this either implicitly or
+       * explicitly during ctor initialization if you want it to exist
+       * during de-serialization. Hence it is initialized lazily here.
+       * This is Ok since the iterator pattern is single threaded.
+       */
+
+      keyBuilder = KeyBuilder.newInstance();
     }
 
-    @Override
-    protected void advance(final ITuple<SPO> tuple) {
+    final byte[] key = tuple.getKey();
 
-        if (keyBuilder == null) {
+    final IV[] ivs = IVUtility.decode(key, boundEntries + 1);
 
-            /*
-             * Note: It appears that you can not set this either implicitly or
-             * explicitly during ctor initialization if you want it to exist
-             * during de-serialization. Hence it is initialized lazily here.
-             * This is Ok since the iterator pattern is single threaded.
-             */
+    keyBuilder.reset();
 
-            keyBuilder = KeyBuilder.newInstance();
-
-        }
-
-        final byte[] key = tuple.getKey();
-        
-        final IV[] ivs = IVUtility.decode(key, boundEntries+1);
-        
-        keyBuilder.reset();
-        
-        for (int i = 0; i < ivs.length; i++) {
-            ivs[i].encode(keyBuilder);
-        }
-        
-        final byte[] fromKey = keyBuilder.getKey();
-        
-        final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
-
-        src.seek(toKey);
-
+    for (int i = 0; i < ivs.length; i++) {
+      ivs[i].encode(keyBuilder);
     }
 
+    final byte[] fromKey = keyBuilder.getKey();
+
+    final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
+
+    src.seek(toKey);
+  }
 }

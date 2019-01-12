@@ -19,15 +19,10 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-public class HARemoteRebuildRequest implements IHARemoteRebuildRequest,
-        Serializable {
+public class HARemoteRebuildRequest implements IHARemoteRebuildRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     */
-    public HARemoteRebuildRequest() {
-
-    }
-
+  /** */
+  public HARemoteRebuildRequest() {}
 }

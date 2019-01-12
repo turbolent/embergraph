@@ -27,52 +27,41 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates tests in dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("counters");
-       
-        suite.addTestSuite(TestCounters.class);
+    final TestSuite suite = new TestSuite("counters");
 
-        suite.addTestSuite(TestHistoryInstrument.class);
-        
-        suite.addTest(org.embergraph.counters.store.TestAll.suite());
+    suite.addTestSuite(TestCounters.class);
 
-        suite.addTest(org.embergraph.counters.query.TestAll.suite());
+    suite.addTestSuite(TestHistoryInstrument.class);
 
-        suite.addTest(org.embergraph.counters.linux.TestAll.suite());
+    suite.addTest(org.embergraph.counters.store.TestAll.suite());
 
-        suite.addTest(org.embergraph.counters.osx.TestAll.suite());
+    suite.addTest(org.embergraph.counters.query.TestAll.suite());
 
-        suite.addTest(org.embergraph.counters.striped.TestAll.suite());
+    suite.addTest(org.embergraph.counters.linux.TestAll.suite());
 
-        suite.addTest(org.embergraph.counters.ganglia.TestAll.suite());
+    suite.addTest(org.embergraph.counters.osx.TestAll.suite());
 
-        return suite;
-        
-    }
-    
+    suite.addTest(org.embergraph.counters.striped.TestAll.suite());
+
+    suite.addTest(org.embergraph.counters.ganglia.TestAll.suite());
+
+    return suite;
+  }
 }

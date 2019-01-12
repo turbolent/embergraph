@@ -21,31 +21,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-import java.util.NoSuchElementException;
-
 import cutthecrap.utils.striterators.ICloseableIterator;
+import java.util.NoSuchElementException;
 
 /**
  * An empty {@link ICloseableIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyCloseableIterator<E> implements ICloseableIterator<E> {
 
-    public boolean hasNext() {
-        return false;
-    }
+  public boolean hasNext() {
+    return false;
+  }
 
-    public E next() {
-        throw new NoSuchElementException();
-    }
+  public E next() {
+    throw new NoSuchElementException();
+  }
 
-    public void remove() {
-        throw new IllegalStateException();
-    }
+  public void remove() {
+    throw new IllegalStateException();
+  }
 
-    public void close() {
-    }
-
+  public void close() {}
 }

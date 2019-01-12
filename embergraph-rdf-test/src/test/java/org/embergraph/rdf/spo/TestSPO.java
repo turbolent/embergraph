@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
@@ -33,73 +32,63 @@ import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * Test suite for the {@link SPO} class.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSPO extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestSPO() {
-    }
+  /** */
+  public TestSPO() {}
 
-    /**
-     * @param name
-     */
-    public TestSPO(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestSPO(String name) {
+    super(name);
+  }
 
-    public void test1() {
-    	// TODO: write tests for SPO
-    }
+  public void test1() {
+    // TODO: write tests for SPO
+  }
 
-    public void test_serializable() {
+  public void test_serializable() {
 
-    	final IV<?,?> s = new TermId<EmbergraphURI>(VTE.URI, 1);
-    	final IV<?,?> p = new TermId<EmbergraphURI>(VTE.URI, 2);
-    	final IV<?,?> o = new TermId<EmbergraphURI>(VTE.URI, 3);
-    	
-    	final SPO expected = new SPO(s, p, o);
-    	
-    	doRoundTripTest(expected);
-    	
-    }
-    
-    public void test_serializable_sidIV() {
+    final IV<?, ?> s = new TermId<EmbergraphURI>(VTE.URI, 1);
+    final IV<?, ?> p = new TermId<EmbergraphURI>(VTE.URI, 2);
+    final IV<?, ?> o = new TermId<EmbergraphURI>(VTE.URI, 3);
 
-    	final IV<?,?> s = new TermId<EmbergraphURI>(VTE.URI, 1);
-    	final IV<?,?> p = new TermId<EmbergraphURI>(VTE.URI, 2);
-    	final IV<?,?> o = new TermId<EmbergraphURI>(VTE.URI, 3);
-    	
-    	final SPO expected = new SPO(s, p, o, StatementEnum.Explicit);
-    	
-    	doRoundTripTest(expected);
+    final SPO expected = new SPO(s, p, o);
 
-//    	expected.setStatementIdentifier(true);
-    	
-    	doRoundTripTest(expected);
+    doRoundTripTest(expected);
+  }
 
-    	final IV<?,?> p1 = new TermId<EmbergraphURI>(VTE.URI, 4);
-    	final IV<?,?> o1 = new TermId<EmbergraphURI>(VTE.URI, 5);
-    	
-		final SPO expected2 = new SPO(expected.c(), p1, o1,
-				StatementEnum.Explicit);
+  public void test_serializable_sidIV() {
 
-    	doRoundTripTest(expected2);
+    final IV<?, ?> s = new TermId<EmbergraphURI>(VTE.URI, 1);
+    final IV<?, ?> p = new TermId<EmbergraphURI>(VTE.URI, 2);
+    final IV<?, ?> o = new TermId<EmbergraphURI>(VTE.URI, 3);
 
-    }
-    
-    private void doRoundTripTest(final SPO expected) {
-    	
-    	final byte[] b = SerializerUtil.serialize(expected);
-    	
-    	final SPO actual = (SPO)SerializerUtil.deserialize(b);
+    final SPO expected = new SPO(s, p, o, StatementEnum.Explicit);
 
-		assertEquals(expected, actual);
-    	
-    }
-    
+    doRoundTripTest(expected);
+
+    //    	expected.setStatementIdentifier(true);
+
+    doRoundTripTest(expected);
+
+    final IV<?, ?> p1 = new TermId<EmbergraphURI>(VTE.URI, 4);
+    final IV<?, ?> o1 = new TermId<EmbergraphURI>(VTE.URI, 5);
+
+    final SPO expected2 = new SPO(expected.c(), p1, o1, StatementEnum.Explicit);
+
+    doRoundTripTest(expected2);
+  }
+
+  private void doRoundTripTest(final SPO expected) {
+
+    final byte[] b = SerializerUtil.serialize(expected);
+
+    final SPO actual = (SPO) SerializerUtil.deserialize(b);
+
+    assertEquals(expected, actual);
+  }
 }

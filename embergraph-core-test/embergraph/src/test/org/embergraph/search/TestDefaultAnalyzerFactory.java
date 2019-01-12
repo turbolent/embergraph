@@ -22,39 +22,48 @@ package org.embergraph.search;
 
 public class TestDefaultAnalyzerFactory extends AbstractDefaultAnalyzerFactoryTest {
 
-	public TestDefaultAnalyzerFactory() {
-	}
+  public TestDefaultAnalyzerFactory() {}
 
-	public TestDefaultAnalyzerFactory(String arg0) {
-		super(arg0);
-	}
+  public TestDefaultAnalyzerFactory(String arg0) {
+    super(arg0);
+  }
 
-	@Override
-	String[] getExtraProperties() {
-		return new String[0];
-	}
+  @Override
+  String[] getExtraProperties() {
+    return new String[0];
+  }
 
-	/**
-	 * The DefaultAnalyzerFactory has bizarre behavior concerning
-	 * language specific settings.
-	 * The three letter ISO 639-1 language tags for the languages
-	 * for which Lucene has Analyzers use those Analyzers; whereas the two digit ISO
-	 * language tags, which are the ones recommended by the IETF and the W3C, 
-	 * all use the StandardAnalyzer (English). Also a language tag with a subtag
-	 * uses the StandardAnalyzer, even if it is a recognized three letter ISO code.
-	 */
-	@Override
-	boolean isBroken() {
-		return true;
-	}
+  /**
+   * The DefaultAnalyzerFactory has bizarre behavior concerning language specific settings. The
+   * three letter ISO 639-1 language tags for the languages for which Lucene has Analyzers use those
+   * Analyzers; whereas the two digit ISO language tags, which are the ones recommended by the IETF
+   * and the W3C, all use the StandardAnalyzer (English). Also a language tag with a subtag uses the
+   * StandardAnalyzer, even if it is a recognized three letter ISO code.
+   */
+  @Override
+  boolean isBroken() {
+    return true;
+  }
 
-	/**
-	 * Given legacy concerns, we should preserve the incorrect behavior!
-	 */
-    public void testIsBroken() {
-    	checkConfig(false, "StandardAnalyzer", 
-        		"en", "eng", "", null, "ru",
-        		"pt", "zh", "por-br", "cs", "dut-za", "nl", "de", "gre-at", "el", "th"); 
-    }
-
+  /** Given legacy concerns, we should preserve the incorrect behavior! */
+  public void testIsBroken() {
+    checkConfig(
+        false,
+        "StandardAnalyzer",
+        "en",
+        "eng",
+        "",
+        null,
+        "ru",
+        "pt",
+        "zh",
+        "por-br",
+        "cs",
+        "dut-za",
+        "nl",
+        "de",
+        "gre-at",
+        "el",
+        "th");
+  }
 }

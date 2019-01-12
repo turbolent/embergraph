@@ -29,55 +29,44 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("HTree data records");
+
+    /*
+     * Test w/ all key and value coders suitable for directory pages.
+     *
+     * FIXME Test the DirectoryPage coder class!
      */
-    public TestAll() {
-    }
+    //        suite.addTestSuite(TestNodeDataRecord_Simple.class);
+    //        suite.addTestSuite(TestNodeDataRecord_FrontCoded.class);
+    //        suite.addTestSuite(TestNodeDataRecord_CanonicalHuffman.class);
 
-    /**
-     * @param arg0
+    /*
+     * Test w/ all key and value coders suitable for leaves.
+     *
+     * @todo test the mutable bucket data record
+     *
+     * @todo test w/ linked-leaf (order preserving hash functions).
+     *
+     * @todo test w/ out-of-line tuples (when too large for the page).
+     *
+     * @todo test w/ overflow pages (when all keys are the same and the page
+     * overflows).
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    suite.addTestSuite(TestBucketDataRecord_Simple_Simple.class);
+    //        suite.addTestSuite(TestLeafDataRecord_FrontCoded_CanonicalHuffman.class);
+    //        suite.addTestSuite(TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("HTree data records");
-
-        /*
-         * Test w/ all key and value coders suitable for directory pages.
-         * 
-         * FIXME Test the DirectoryPage coder class!
-         */
-//        suite.addTestSuite(TestNodeDataRecord_Simple.class);
-//        suite.addTestSuite(TestNodeDataRecord_FrontCoded.class);
-//        suite.addTestSuite(TestNodeDataRecord_CanonicalHuffman.class);
-
-		/*
-		 * Test w/ all key and value coders suitable for leaves.
-		 * 
-		 * @todo test the mutable bucket data record
-		 * 
-		 * @todo test w/ linked-leaf (order preserving hash functions).
-		 * 
-		 * @todo test w/ out-of-line tuples (when too large for the page).
-		 * 
-		 * @todo test w/ overflow pages (when all keys are the same and the page
-		 * overflows).
-		 */
-        suite.addTestSuite(TestBucketDataRecord_Simple_Simple.class);
-//        suite.addTestSuite(TestLeafDataRecord_FrontCoded_CanonicalHuffman.class);
-//        suite.addTestSuite(TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman.class);
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

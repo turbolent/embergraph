@@ -28,51 +28,41 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * A mutable {@link IRelation}. The relation must maintain any secondary
- * indices under mutation.
- * <p>
- * The methods declared by this interface return a "mutation count" - the
- * mutation count MUST be exact and MUST NOT count overwrites that do not change
- * the state of the tuple (the same key and value). The mutation counts are used
- * to determine the fixed point for closure of a rule set. If they do not follow
- * this contract then the closure operation will not terminate!
- * <p>
- * If fact, it is MUCH more efficient if an implementation avoids the overwrite
- * of an element with identical data. All index writes (including overwrites)
- * add data to the {@link AbstractJournal} backing the mutable {@link BTree}
- * absorbing writes for an index. An "overwrite" thus incurs more IO and will
- * trigger overflow for the journal earlier than if overwrite were avoided. In
- * contrast, while you have a lock on the mutable index you can test for a
- * pre-existing key and compare the serialized byte[] values with relatively
- * little cost (zero additional IO).
- * 
+ * A mutable {@link IRelation}. The relation must maintain any secondary indices under mutation.
+ *
+ * <p>The methods declared by this interface return a "mutation count" - the mutation count MUST be
+ * exact and MUST NOT count overwrites that do not change the state of the tuple (the same key and
+ * value). The mutation counts are used to determine the fixed point for closure of a rule set. If
+ * they do not follow this contract then the closure operation will not terminate!
+ *
+ * <p>If fact, it is MUCH more efficient if an implementation avoids the overwrite of an element
+ * with identical data. All index writes (including overwrites) add data to the {@link
+ * AbstractJournal} backing the mutable {@link BTree} absorbing writes for an index. An "overwrite"
+ * thus incurs more IO and will trigger overflow for the journal earlier than if overwrite were
+ * avoided. In contrast, while you have a lock on the mutable index you can test for a pre-existing
+ * key and compare the serialized byte[] values with relatively little cost (zero additional IO).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the [E]lements of the relation.
+ * @param <E> The generic type of the [E]lements of the relation.
  */
 public interface IMutableRelation<E> extends IRelation<E>, IMutableResource<IRelation<E>> {
 
-    /**
-     * Write elements on the relation.
-     * 
-     * @param itr
-     *            An iterator visiting the elements to be written.
-     * 
-     * @return The #of elements that were actually written on the relation.
-     */
-    public long insert(IChunkedOrderedIterator<E> itr);
+  /**
+   * Write elements on the relation.
+   *
+   * @param itr An iterator visiting the elements to be written.
+   * @return The #of elements that were actually written on the relation.
+   */
+  public long insert(IChunkedOrderedIterator<E> itr);
 
-    /**
-     * Remove elements from the relation.
-     * 
-     * @param itr
-     *            An iterator visiting the elements to be removed. Existing
-     *            elements in the relation having a key equal to the key formed
-     *            from the visited elements will be removed from the relation.
-     * 
-     * @return The #of elements that were actually removed from the relation.
-     */
-    public long delete(IChunkedOrderedIterator<E> itr);
-
+  /**
+   * Remove elements from the relation.
+   *
+   * @param itr An iterator visiting the elements to be removed. Existing elements in the relation
+   *     having a key equal to the key formed from the visited elements will be removed from the
+   *     relation.
+   * @return The #of elements that were actually removed from the relation.
+   */
+  public long delete(IChunkedOrderedIterator<E> itr);
 }

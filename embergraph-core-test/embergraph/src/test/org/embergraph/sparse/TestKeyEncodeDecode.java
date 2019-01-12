@@ -23,201 +23,176 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.sparse;
 
+import com.ibm.icu.text.CollationKey;
 import java.text.Collator;
 import java.util.Properties;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.btree.keys.CollatorEnum;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
-import com.ibm.icu.text.CollationKey;
 
 /**
- * Test suite for round trip of keys as encoded by
- * {@link Schema#fromKey(org.embergraph.btree.keys.IKeyBuilder, Object)}, by
- * {@link AtomicRowWriteRead}, and as decoded by the {@link KeyDecoder}.
- * <p>
- * Note: Not all information can be fully decoded. In particular, the exact
- * schema name and the value of the primary key for Unicode {@link KeyType}s
- * can not be directly recovered from the key.
- * 
+ * Test suite for round trip of keys as encoded by {@link
+ * Schema#fromKey(org.embergraph.btree.keys.IKeyBuilder, Object)}, by {@link AtomicRowWriteRead},
+ * and as decoded by the {@link KeyDecoder}.
+ *
+ * <p>Note: Not all information can be fully decoded. In particular, the exact schema name and the
+ * value of the primary key for Unicode {@link KeyType}s can not be directly recovered from the key.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestKeyEncodeDecode extends TestCase2 {
 
-    public TestKeyEncodeDecode() {
-        
-    }
-    
-    public TestKeyEncodeDecode(String name) {
-        
-        super(name);
-        
+  public TestKeyEncodeDecode() {}
+
+  public TestKeyEncodeDecode(String name) {
+
+    super(name);
+  }
+
+  /**
+   * Test for primitive data types where we can round trip the primary key value.
+   *
+   * <p>FIXME tests for other primitives
+   *
+   * <p>FIXME tests for Unicode
+   *
+   * <p>FIXME tests for ASCII
+   *
+   * <p>FIXME tests for Date
+   *
+   * <p>FIXME All unit tests in this class should be for all collators (e.g., an abstract base
+   * class).
+   */
+  public void test_primitive_long() {
+
+    final IKeyBuilder keyBuilder = KeyBuilder.newUnicodeInstance();
+
+    final Schema schema = new Schema("Employee", "Id", KeyType.Long);
+
+    final Long primaryKey = 1L;
+
+    final byte[] key = schema.getKey(keyBuilder, primaryKey, "Id", 12L);
+
+    final KeyDecoder decoded = new KeyDecoder(key);
+
+    assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
+
+    assertEquals("Id", decoded.getColumnName());
+
+    assertEquals(12L, decoded.getTimestamp());
+  }
+
+  /**
+   * Unit test verifies that we can correctly locate the start of the column name and decode the key
+   * when using {@link CollatorEnum#ICU}.
+   */
+  public void test_keyDecode_ICU() {
+
+    final Properties props = new Properties();
+    props.put(KeyBuilder.Options.COLLATOR, CollatorEnum.ICU.toString());
+    final IKeyBuilder keyBuilder = new DefaultKeyBuilderFactory(props).getKeyBuilder();
+    assertTrue(keyBuilder.isUnicodeSupported());
+
+    doKeyDecodeTest(keyBuilder);
+    //        final Schema schema = new Schema("Employee", "Id", KeyType.Unicode);
+    //        final String primaryKey = "1L";
+    //        final String column = "Id";
+    //        final long writeTime = 12L;
+    //        final byte[] key = schema.getKey(keyBuilder, primaryKey, column,
+    //                writeTime);
+    //        final KeyDecoder decoded = new KeyDecoder(key);
+    //
+    //        assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
+    //        assertEquals(column, decoded.getColumnName());
+    //        assertEquals(writeTime, decoded.getTimestamp());
+  }
+
+  /**
+   * Unit test verifies that we can correctly locate the start of the column name and decode the key
+   * when using {@link CollatorEnum#ASCII}.
+   */
+  public void test_keyDecode_ASCII() {
+
+    final Properties props = new Properties();
+    props.put(KeyBuilder.Options.COLLATOR, CollatorEnum.ASCII.toString());
+    final IKeyBuilder keyBuilder = new DefaultKeyBuilderFactory(props).getKeyBuilder();
+    assertFalse(keyBuilder.isUnicodeSupported());
+
+    doKeyDecodeTest(keyBuilder);
+  }
+
+  /**
+   * Unit test verifies that we can correctly locate the start of the column name and decode the key
+   * when using {@link CollatorEnum#JDK}.
+   *
+   * <p>Note: The JDK {@link CollationKey} embeds <code>nul</code> bytes in its Unicode sort keys.
+   */
+  public void test_keyDecode_JDK() {
+
+    final Properties props = new Properties();
+    props.put(KeyBuilder.Options.COLLATOR, CollatorEnum.JDK.toString());
+    props.put(KeyBuilder.Options.USER_COUNTRY, "US");
+    props.put(KeyBuilder.Options.USER_LANGUAGE, "en");
+    props.put(KeyBuilder.Options.STRENGTH, Collator.TERTIARY);
+    final IKeyBuilder keyBuilder = new DefaultKeyBuilderFactory(props).getKeyBuilder();
+    assertTrue(keyBuilder.isUnicodeSupported());
+
+    doKeyDecodeTest(keyBuilder);
+  }
+
+  /**
+   * Test helper verifies that we can correctly locate the start of the column name and decode the
+   * key when using a given {@link IKeyBuilder}.
+   */
+  protected void doKeyDecodeTest(final IKeyBuilder keyBuilder) {
+
+    final Schema schema = new MySchema();
+    final String primaryKey = "U100.lex";
+    final String column = "org.embergraph.btree.keys.KeyBuilder.collator";
+    final long writeTime = 1279133923566L;
+
+    final byte[] key = schema.getKey(keyBuilder, primaryKey, column, writeTime);
+
+    final KeyDecoder decoded = new KeyDecoder(key);
+
+    System.err.println("decoded: " + decoded);
+
+    if (SparseRowStore.schemaNameUnicodeClean) {
+
+      assertEquals(schema.getName(), decoded.getSchemaName());
     }
 
-    /**
-     * Test for primitive data types where we can round trip the primary key
-     * value.
-     * 
-     * FIXME tests for other primitives
-     * 
-     * FIXME tests for Unicode
-     * 
-     * FIXME tests for ASCII
-     * 
-     * FIXME tests for Date
-     * 
-     * FIXME All unit tests in this class should be for all collators (e.g., an
-     * abstract base class).
+    assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
+
+    if (SparseRowStore.primaryKeyUnicodeClean) {
+
+      assertEquals(primaryKey, decoded.getPrimaryKey());
+    }
+
+    /*
+     * Note: Historically, this would fail on the column name for the JDK
+     * CollatorEnum option. The problem was that the JDK CollatorEnum option
+     * embeds nul bytes into the primaryKey so we are not able to correctly
+     * locate the start of the column name. This was resolved with the
+     * [primaryKeyUnicodeClean] option.
      */
-    public void test_primitive_long() {
+    assertEquals(column, decoded.getColumnName());
 
-        final IKeyBuilder keyBuilder = KeyBuilder.newUnicodeInstance(); 
-        
-        final Schema schema = new Schema("Employee", "Id", KeyType.Long);
-        
-        final Long primaryKey = 1L;
-        
-        final byte[] key = schema.getKey(keyBuilder, primaryKey, "Id", 12L);
+    assertEquals(writeTime, decoded.getTimestamp());
+  }
 
-        final KeyDecoder decoded = new KeyDecoder(key);
-        
-        assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
+  /** Private schema used by the unit tests. */
+  private static class MySchema extends Schema {
 
-        assertEquals("Id", decoded.getColumnName());
+    /** The primary key. */
+    public static final String NAMESPACE = MySchema.class.getPackage().getName() + ".namespace";
 
-        assertEquals(12L, decoded.getTimestamp());
-        
+    public MySchema() {
+
+      super("my/own-schema_now.10.0", NAMESPACE, KeyType.Unicode);
     }
-
-    /**
-     * Unit test verifies that we can correctly locate the start of the column
-     * name and decode the key when using {@link CollatorEnum#ICU}.
-     */
-    public void test_keyDecode_ICU() {
-
-        final Properties props = new Properties();
-        props.put(KeyBuilder.Options.COLLATOR, CollatorEnum.ICU.toString());
-        final IKeyBuilder keyBuilder = new DefaultKeyBuilderFactory(props)
-                .getKeyBuilder();
-        assertTrue(keyBuilder.isUnicodeSupported());
-
-        doKeyDecodeTest(keyBuilder);
-//        final Schema schema = new Schema("Employee", "Id", KeyType.Unicode);
-//        final String primaryKey = "1L";
-//        final String column = "Id";
-//        final long writeTime = 12L;
-//        final byte[] key = schema.getKey(keyBuilder, primaryKey, column,
-//                writeTime);
-//        final KeyDecoder decoded = new KeyDecoder(key);
-//
-//        assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
-//        assertEquals(column, decoded.getColumnName());
-//        assertEquals(writeTime, decoded.getTimestamp());
-    }
-
-    /**
-     * Unit test verifies that we can correctly locate the start of the column
-     * name and decode the key when using {@link CollatorEnum#ASCII}.
-     */
-    public void test_keyDecode_ASCII() {
-
-        final Properties props = new Properties();
-        props.put(KeyBuilder.Options.COLLATOR,CollatorEnum.ASCII.toString());
-        final IKeyBuilder keyBuilder =
-            new DefaultKeyBuilderFactory(props).getKeyBuilder();
-        assertFalse(keyBuilder.isUnicodeSupported());
-
-        doKeyDecodeTest(keyBuilder);
-    }
-
-    /**
-     * Unit test verifies that we can correctly locate the start of the column
-     * name and decode the key when using {@link CollatorEnum#JDK}.
-     * <p>
-     * Note: The JDK {@link CollationKey} embeds <code>nul</code> bytes in its
-     * Unicode sort keys.
-     */
-    public void test_keyDecode_JDK() {
-
-        final Properties props = new Properties();
-        props.put(KeyBuilder.Options.COLLATOR,CollatorEnum.JDK.toString());
-        props.put(KeyBuilder.Options.USER_COUNTRY, "US");
-        props.put(KeyBuilder.Options.USER_LANGUAGE, "en");
-        props.put(KeyBuilder.Options.STRENGTH,Collator.TERTIARY);
-        final IKeyBuilder keyBuilder =
-            new DefaultKeyBuilderFactory(props).getKeyBuilder();
-        assertTrue(keyBuilder.isUnicodeSupported());
-
-        doKeyDecodeTest(keyBuilder);
-        
-    }
-    
-    /**
-     * Test helper verifies that we can correctly locate the start of the column
-     * name and decode the key when using a given {@link IKeyBuilder}.
-     */
-    protected void doKeyDecodeTest(final IKeyBuilder keyBuilder) {
-
-        final Schema schema = new MySchema();
-        final String primaryKey = "U100.lex";
-        final String column = "org.embergraph.btree.keys.KeyBuilder.collator";
-        final long writeTime = 1279133923566L;
-
-        final byte[] key = schema.getKey(keyBuilder, primaryKey, column, writeTime);
-
-        final KeyDecoder decoded = new KeyDecoder(key);
-
-        System.err.println("decoded: "+decoded);
-        
-        if(SparseRowStore.schemaNameUnicodeClean) {
-            
-            assertEquals(schema.getName(),decoded.getSchemaName());
-            
-        }
-
-        assertEquals(schema.getPrimaryKeyType(), decoded.getPrimaryKeyType());
-        
-        if(SparseRowStore.primaryKeyUnicodeClean) {
-        
-            assertEquals(primaryKey,decoded.getPrimaryKey());
-            
-        }
-
-        /*
-         * Note: Historically, this would fail on the column name for the JDK
-         * CollatorEnum option. The problem was that the JDK CollatorEnum option
-         * embeds nul bytes into the primaryKey so we are not able to correctly
-         * locate the start of the column name. This was resolved with the
-         * [primaryKeyUnicodeClean] option.
-         */
-        assertEquals(column, decoded.getColumnName());
-        
-        assertEquals(writeTime, decoded.getTimestamp());
-
-    }
-
-    /**
-     * Private schema used by the unit tests.
-     */
-    static private class MySchema extends Schema {
-
-        /**
-         * The primary key.
-         */
-        public static final String NAMESPACE = MySchema.class.getPackage()
-                .getName()
-                + ".namespace";
-
-        public MySchema() {
-
-            super("my/own-schema_now.10.0", NAMESPACE, KeyType.Unicode);
-
-        }
-
-    }
-    
+  }
 }

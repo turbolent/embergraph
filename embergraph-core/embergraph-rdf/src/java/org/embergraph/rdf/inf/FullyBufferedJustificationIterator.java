@@ -30,201 +30,180 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Fully buffers and then visits all {@link Justification}s for a given
- * statement.
- * 
+ * Fully buffers and then visits all {@link Justification}s for a given statement.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class FullyBufferedJustificationIterator implements IJustificationIterator {
 
-    /** the database. */
-    private final AbstractTripleStore db;
-    
-    /** the statement whose justifications are being visited. */
-    private final ISPO head;
+  /** the database. */
+  private final AbstractTripleStore db;
 
-    /**
-     * Private key builder.
-     * <p>
-     * Note: This capacity estimate is based on N longs per SPO, one head,
-     * and 2-3 SPOs in the tail. The capacity will be extended automatically
-     * if necessary.
+  /** the statement whose justifications are being visited. */
+  private final ISPO head;
+
+  /**
+   * Private key builder.
+   *
+   * <p>Note: This capacity estimate is based on N longs per SPO, one head, and 2-3 SPOs in the
+   * tail. The capacity will be extended automatically if necessary.
+   */
+  private final IKeyBuilder keyBuilder;
+
+  /** the index in which the justifications are stored. */
+  private final IIndex ndx;
+
+  private final Justification[] justifications;
+  private final int numJustifications;
+
+  private boolean open = true;
+  private int i = 0;
+  private Justification current = null;
+
+  /**
+   * @param db
+   * @param head The statement whose justifications will be materialized.
+   */
+  public FullyBufferedJustificationIterator(final AbstractTripleStore db, final ISPO head) {
+
+    assert db != null;
+
+    assert head != null;
+
+    this.db = db;
+
+    this.head = head;
+
+    this.ndx = db.getSPORelation().getJustificationIndex();
+
+    keyBuilder = KeyBuilder.newInstance();
+
+    head.s().encode(keyBuilder);
+    head.p().encode(keyBuilder);
+    head.o().encode(keyBuilder);
+
+    final byte[] fromKey = keyBuilder.getKey();
+
+    final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
+
+    final long rangeCount = ndx.rangeCount(fromKey, toKey);
+
+    if (rangeCount > 5000000) {
+
+      // Limit at 5M.  See https://sourceforge.net/apps/trac/bigdata/ticket/606 (Array Limits in
+      // Truth Maintenance)
+
+      throw new RuntimeException("Too many justifications to materialize: " + rangeCount);
+    }
+
+    this.justifications = new Justification[(int) rangeCount];
+
+    /*
+     * Materialize the matching justifications.
      */
-    private final IKeyBuilder keyBuilder;
 
-    /** the index in which the justifications are stored. */
-    private final IIndex ndx;
-    private final Justification[] justifications;
-    private final int numJustifications;
-    
-    private boolean open = true;
-    private int i = 0;
-    private Justification current = null;
-    
-    /**
-     * 
-     * @param db
-     * @param head The statement whose justifications will be materialized.
+    final ITupleIterator itr =
+        ndx.rangeIterator(fromKey, toKey, 0 /* capacity */, IRangeQuery.KEYS, null /* filter */);
+
+    int i = 0;
+
+    while (itr.hasNext()) {
+
+      justifications[i++] = (Justification) itr.next().getObject();
+    }
+
+    this.numJustifications = i;
+  }
+
+  public boolean hasNext() {
+
+    if (!open) return false;
+
+    assert i <= numJustifications;
+
+    if (i == numJustifications) {
+
+      return false;
+    }
+
+    return true;
+  }
+
+  public Justification next() {
+
+    if (!hasNext()) {
+
+      throw new NoSuchElementException();
+    }
+
+    current = justifications[i++];
+
+    return current;
+  }
+
+  /** Removes the last {@link Justification} visited from the database (non-batch API). */
+  public void remove() {
+
+    if (!open) throw new IllegalStateException();
+
+    if (current == null) {
+
+      throw new IllegalStateException();
+    }
+
+    /*
+     * Remove the justifications from the store (note that there is no value
+     * stored under the key).
      */
-    public FullyBufferedJustificationIterator(final AbstractTripleStore db,
-            final ISPO head) {
 
-        assert db != null;
-        
-        assert head != null;
-        
-        this.db = db;
-        
-        this.head = head;
-        
-        this.ndx = db.getSPORelation().getJustificationIndex();
-        
-        keyBuilder = KeyBuilder.newInstance();
+    ndx.remove(Justification.getKey(keyBuilder, current));
+  }
 
-        head.s().encode(keyBuilder);
-        head.p().encode(keyBuilder);
-        head.o().encode(keyBuilder);
-        
-        final byte[] fromKey = keyBuilder.getKey();
+  public void close() {
 
-        final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
+    if (!open) return;
 
-        final long rangeCount = ndx.rangeCount(fromKey, toKey);
+    open = false;
+  }
 
-        if (rangeCount > 5000000) {
+  public Justification[] nextChunk() {
 
-            // Limit at 5M.  See https://sourceforge.net/apps/trac/bigdata/ticket/606 (Array Limits in Truth Maintenance)
-            
-            throw new RuntimeException(
-                    "Too many justifications to materialize: " + rangeCount);
+    if (!hasNext()) {
 
-        }
-
-        this.justifications = new Justification[(int) rangeCount ];
-
-        /*
-         * Materialize the matching justifications.
-         */
-        
-        final ITupleIterator itr = ndx.rangeIterator(fromKey, toKey,
-                0/* capacity */, IRangeQuery.KEYS, null/* filter */);
-
-        int i = 0;
-
-        while (itr.hasNext()) {
-
-            justifications[i++] = (Justification) itr.next().getObject();
-            
-        }
-
-        this.numJustifications = i;
-        
-    }
-    
-    public boolean hasNext() {
-
-        if(!open) return false;
-        
-        assert i <= numJustifications;
-        
-        if (i == numJustifications) {
-
-            return false;
-            
-        }
-
-        return true;
-        
+      throw new NoSuchElementException();
     }
 
-    public Justification next() {
-        
-        if (!hasNext()) {
+    final Justification[] ret;
 
-            throw new NoSuchElementException();
-        
-        }
-        
-        current = justifications[i++];
-        
-        return current;
-        
+    if (i == 0 && numJustifications == justifications.length) {
+
+      /*
+       * The SPO[] does not have any unused elements and nothing has been
+       * returned to the caller by next() so we can just return the
+       * backing array in this case.
+       */
+
+      ret = justifications;
+
+    } else {
+
+      /*
+       * Create and return a new SPO[] containing only the statements
+       * remaining in the iterator.
+       */
+
+      final int remaining = numJustifications - i;
+
+      ret = new Justification[remaining];
+
+      System.arraycopy(justifications, i, ret, 0, remaining);
     }
 
-    /**
-     * Removes the last {@link Justification} visited from the database
-     * (non-batch API).
-     */
-    public void remove() {
+    // indicate that all statements have been consumed.
 
-        if (!open)
-            throw new IllegalStateException();
+    i = numJustifications;
 
-        if(current==null) {
-            
-            throw new IllegalStateException();
-            
-        }
-        
-        /*
-         * Remove the justifications from the store (note that there is no value
-         * stored under the key).
-         */
-
-        ndx.remove(Justification.getKey(keyBuilder, current));
-        
-    }
-
-    public void close() {
-
-        if(!open) return;
-        
-        open = false;
-        
-    }
-
-    public Justification[] nextChunk() {
-    
-        if (!hasNext()) {
-
-            throw new NoSuchElementException();
-            
-        }
-
-        final Justification[] ret;
-        
-        if (i == 0 && numJustifications == justifications.length) {
-            
-            /*
-             * The SPO[] does not have any unused elements and nothing has been
-             * returned to the caller by next() so we can just return the
-             * backing array in this case.
-             */
-            
-            ret = justifications;
-            
-        } else {
-
-            /*
-             * Create and return a new SPO[] containing only the statements
-             * remaining in the iterator.
-             */
-            
-            final int remaining = numJustifications - i;
-            
-            ret = new Justification[remaining];
-            
-            System.arraycopy(justifications, i, ret, 0, remaining);
-            
-        }
-        
-        // indicate that all statements have been consumed.
-        
-        i = numJustifications;
-        
-        return ret;
-
-    }
-
+    return ret;
+  }
 }

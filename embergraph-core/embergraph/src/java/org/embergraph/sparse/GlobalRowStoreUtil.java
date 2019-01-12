@@ -26,40 +26,35 @@ import java.util.Properties;
 
 /**
  * Utility method for use with a {@link SparseRowStore}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class GlobalRowStoreUtil {
 
-    /**
-     * Convert the Properties to a Map.
-     */
-    public static Map<String, Object> convert(final Properties properties) {
-        
-        final Map<String, Object> map = new HashMap<String, Object>();
+  /** Convert the Properties to a Map. */
+  public static Map<String, Object> convert(final Properties properties) {
 
-        final Enumeration<? extends Object> e = properties.propertyNames();
+    final Map<String, Object> map = new HashMap<String, Object>();
 
-        while (e.hasMoreElements()) {
+    final Enumeration<? extends Object> e = properties.propertyNames();
 
-            final Object key = e.nextElement();
+    while (e.hasMoreElements()) {
 
-//            if (!(key instanceof String)) {
-//
-//                log.warn("Will not store non-String key: " + key);
-//
-//                continue;
-//
-//            }
+      final Object key = e.nextElement();
 
-            final String name = (String) key;
+      //            if (!(key instanceof String)) {
+      //
+      //                log.warn("Will not store non-String key: " + key);
+      //
+      //                continue;
+      //
+      //            }
 
-            map.put(name, properties.getProperty(name));
+      final String name = (String) key;
 
-        }
-
-        return map;
-        
+      map.put(name, properties.getProperty(name));
     }
 
+    return map;
+  }
 }

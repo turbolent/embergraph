@@ -22,73 +22,58 @@ package org.embergraph.gom.om;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 
 /**
  * Generator for globally unique URIs.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class IDGenerator implements IIDGenerator {
 
-    private final ValueFactory valueFactory;
+  private final ValueFactory valueFactory;
 
-    private final String prefix;
+  private final String prefix;
 
-    private final AtomicInteger nextId = new AtomicInteger(0);
+  private final AtomicInteger nextId = new AtomicInteger(0);
 
-    /**
-     * 
-     * @param endpoint
-     *            The SPARQL endpoint.
-     * @param uuid
-     *            The {@link UUID} for the {@link IObjectManager}. This is used
-     *            to avoid collisions between different {@link IObjectManager}s.
-     * @param valueFactory
-     *            The {@link ValueFactory} that will be used when new
-     *            {@link URI}s are generated.
-     */
-    public IDGenerator(final String endpoint, final UUID uuid,
-            final ValueFactory valueFactory) {
+  /**
+   * @param endpoint The SPARQL endpoint.
+   * @param uuid The {@link UUID} for the {@link IObjectManager}. This is used to avoid collisions
+   *     between different {@link IObjectManager}s.
+   * @param valueFactory The {@link ValueFactory} that will be used when new {@link URI}s are
+   *     generated.
+   */
+  public IDGenerator(final String endpoint, final UUID uuid, final ValueFactory valueFactory) {
 
-        if(endpoint == null)
-            throw new IllegalArgumentException();
+    if (endpoint == null) throw new IllegalArgumentException();
 
-        if(uuid == null)
-            throw new IllegalArgumentException();
+    if (uuid == null) throw new IllegalArgumentException();
 
-        if(valueFactory == null)
-            throw new IllegalArgumentException();
+    if (valueFactory == null) throw new IllegalArgumentException();
 
-        this.valueFactory = valueFactory;
+    this.valueFactory = valueFactory;
 
-        // Setup the prefix that we will reuse for each new URI.
-        this.prefix = endpoint + "/gpo/" + uuid + "/";
+    // Setup the prefix that we will reuse for each new URI.
+    this.prefix = endpoint + "/gpo/" + uuid + "/";
+  }
 
-    }
+  @Override
+  public URI genId() {
 
-    @Override
-    public URI genId() {
+    return valueFactory.createURI(prefix + nextId.incrementAndGet());
+  }
 
-        return valueFactory.createURI(prefix + nextId.incrementAndGet());
+  @Override
+  public URI genId(final String scope) {
 
-    }
+    return valueFactory.createURI(prefix + scope + "/" + nextId.incrementAndGet());
+  }
 
-    @Override
-    public URI genId(final String scope) {
+  @Override
+  public void rollback() {
 
-        return valueFactory.createURI(prefix + scope + "/"
-                + nextId.incrementAndGet());
-
-    }
-
-    @Override
-    public void rollback() {
-
-        nextId.set(0);
-        
-    }
-
+    nextId.set(0);
+  }
 }

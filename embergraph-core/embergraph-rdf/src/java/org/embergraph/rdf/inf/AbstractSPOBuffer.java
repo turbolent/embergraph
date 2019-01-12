@@ -21,224 +21,187 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.inf;
 
-import org.openrdf.model.Value;
-
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.ISPOBuffer;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.AbstractArrayBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
+import org.openrdf.model.Value;
 
 /**
  * Abtract base class for buffering {@link SPO}s for some batch api operation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @deprecated by {@link AbstractArrayBuffer}, but this class is more tightly
- * coupled to the {@link AbstractTripleStore}.
+ * @deprecated by {@link AbstractArrayBuffer}, but this class is more tightly coupled to the {@link
+ *     AbstractTripleStore}.
  */
-abstract public class AbstractSPOBuffer implements ISPOBuffer {
+public abstract class AbstractSPOBuffer implements ISPOBuffer {
 
-    /**
-     * The array in which the statements are stored.
-     */
-    final protected ISPO[] stmts;
-    
-    /**
-     * The #of statements currently in {@link #stmts}
-     */
-    protected int numStmts;
+  /** The array in which the statements are stored. */
+  protected final ISPO[] stmts;
 
-    public int size() {
-        
-        return numStmts;
-        
-    }
-    
-    public boolean isEmpty() {
-        
-        return numStmts == 0;
-        
-    }
-    
-    /**
-     * The {@link SPO} at the given index (used by some unit tests).
-     * 
-     * @param i
-     * 
-     * @return
-     */
-    public ISPO get(int i) {
-        
-        if (i > numStmts) {
+  /** The #of statements currently in {@link #stmts} */
+  protected int numStmts;
 
-            throw new IndexOutOfBoundsException();
-            
-        }
-        
-        return stmts[i];
-        
+  public int size() {
+
+    return numStmts;
+  }
+
+  public boolean isEmpty() {
+
+    return numStmts == 0;
+  }
+
+  /**
+   * The {@link SPO} at the given index (used by some unit tests).
+   *
+   * @param i
+   * @return
+   */
+  public ISPO get(int i) {
+
+    if (i > numStmts) {
+
+      throw new IndexOutOfBoundsException();
     }
 
-    /**
-     * The value provided to the constructor.  This is only used to
-     * resolve term identifers for log messages.
-     */
-    private final AbstractTripleStore _db;
-    
-    /**
-     * The database in which the term identifiers are defined - this is
-     * exposed ONLY for use in logging messages.
-     */
-    protected AbstractTripleStore getTermDatabase() {
-        
-        return _db;
-        
+    return stmts[i];
+  }
+
+  /**
+   * The value provided to the constructor. This is only used to resolve term identifers for log
+   * messages.
+   */
+  private final AbstractTripleStore _db;
+
+  /**
+   * The database in which the term identifiers are defined - this is exposed ONLY for use in
+   * logging messages.
+   */
+  protected AbstractTripleStore getTermDatabase() {
+
+    return _db;
+  }
+
+  /**
+   * An optional filter. When present, statements matched by the filter are NOT retained by the
+   * {@link SPOAssertionBuffer}.
+   */
+  protected final IElementFilter<ISPO> filter;
+
+  /** The buffer capacity. */
+  protected final int capacity;
+
+  /**
+   * Create a buffer.
+   *
+   * @param store The database used to resolve term identifiers in log statements (optional).
+   * @param filter Option filter. When present statements matched by the filter are NOT retained by
+   *     the {@link SPOAssertionBuffer} and will NOT be added to the <i>store</i>.
+   * @param capacity The maximum #of Statements, URIs, Literals, or BNodes that the buffer can hold.
+   */
+  protected AbstractSPOBuffer(
+      AbstractTripleStore store, IElementFilter<ISPO> filter, int capacity) {
+
+    if (capacity <= 0) throw new IllegalArgumentException();
+
+    this._db = store;
+
+    this.filter = filter;
+
+    this.capacity = capacity;
+
+    stmts = new ISPO[capacity];
+  }
+
+  /**
+   * Returns true iff there is no more space remaining in the buffer. Under those conditions adding
+   * another statement to the buffer could cause an overflow.
+   *
+   * @return True if the buffer might overflow if another statement were added.
+   */
+  protected boolean nearCapacity() {
+
+    if (numStmts < capacity) {
+
+      return false;
     }
-    
-    /**
-     * An optional filter. When present, statements matched by the filter are
-     * NOT retained by the {@link SPOAssertionBuffer}.
-     */
-    protected final IElementFilter<ISPO> filter;
-    
-    /**
-     * The buffer capacity.
-     */
-    protected final int capacity;
 
-    /**
-     * Create a buffer.
-     * 
-     * @param store
-     *            The database used to resolve term identifiers in log
-     *            statements (optional).
-     * @param filter
-     *            Option filter. When present statements matched by the filter
-     *            are NOT retained by the {@link SPOAssertionBuffer} and will
-     *            NOT be added to the <i>store</i>.
-     * @param capacity
-     *            The maximum #of Statements, URIs, Literals, or BNodes that the
-     *            buffer can hold.
-     */
-    protected AbstractSPOBuffer(AbstractTripleStore store, IElementFilter<ISPO> filter,
-            int capacity) {
+    // would overflow the statement[].
 
-        if (capacity <= 0)
-            throw new IllegalArgumentException();
-        
-        this._db = store;
+    return true;
+  }
 
-        this.filter = filter;
-        
-        this.capacity = capacity;
+  public String toString() {
 
-        stmts = new ISPO[capacity];
-        
+    return super.toString() + ":#stmts=" + numStmts;
+  }
+
+  public abstract int flush();
+
+  /**
+   * Cumulative counter of the #of statements actually written on the database by {@link #flush()}.
+   * This is reset by {@link #flush(boolean)} when <code>reset := true</code>
+   */
+  private int nwritten = 0;
+
+  public boolean add(final ISPO stmt) {
+
+    assert stmt != null;
+
+    if (filter != null && filter.isValid(stmt)) {
+
+      /*
+       * Note: Do not store statements (or justifications) matched by the
+       * filter.
+       */
+
+      if (DEBUG) {
+
+        log.debug("filter rejects: " + stmt);
+      }
+
+      return false;
     }
-        
-    /**
-     * Returns true iff there is no more space remaining in the buffer. Under
-     * those conditions adding another statement to the buffer could cause an
-     * overflow.
-     * 
-     * @return True if the buffer might overflow if another statement were
-     *         added.
-     */
-    protected boolean nearCapacity() {
-        
-        if (numStmts < capacity) {
 
-            return false;
+    if (nearCapacity()) {
 
-        }
-        
-        // would overflow the statement[].
-            
-        return true;
-        
+      flush();
     }
-    
-    public String toString() {
-        
-        return super.toString()+":#stmts="+numStmts;
-        
+
+    stmts[numStmts++] = stmt;
+
+    if (DEBUG) {
+
+      /*
+       * Note: If [store] is a TempTripleStore then this will NOT be able
+       * to resolve the terms from the ids (since the lexicon is only in
+       * the database).
+       */
+
+      log.debug(stmt.toString(_db));
     }
-    
-    abstract public int flush();
 
-    /**
-     * Cumulative counter of the #of statements actually written on the database
-     * by {@link #flush()}. This is reset by {@link #flush(boolean)} when
-     * <code>reset := true</code>
-     */
-    private int nwritten = 0;
-    
-    public boolean add( final ISPO stmt ) {
-        
-        assert stmt != null;
+    return true;
+  }
 
-        if (filter != null && filter.isValid(stmt)) {
-            
-            /*
-             * Note: Do not store statements (or justifications) matched by the
-             * filter.
-             */
+  /**
+   * Dumps the state of the buffer on {@link System#err}.
+   *
+   * @param store Used to resolve the term identifiers to {@link Value}s.
+   */
+  public void dump(AbstractTripleStore store) {
 
-            if(DEBUG) {
-                
-                log.debug("filter rejects: "+stmt);
-                
-            }
-            
-            return false;
-            
-        }
-                
-        if(nearCapacity()) {
+    System.err.println("capacity=" + capacity + ", numStmts=" + numStmts);
 
-            flush();
-            
-        }
-        
-        stmts[numStmts++] = stmt;
-         
-        if (DEBUG) {
-            
-            /*
-             * Note: If [store] is a TempTripleStore then this will NOT be able
-             * to resolve the terms from the ids (since the lexicon is only in
-             * the database).
-             */
+    for (int i = 0; i < numStmts; i++) {
 
-            log.debug(stmt.toString(_db));
-        
-        }
+      final ISPO stmt = stmts[i];
 
-        return true;
-        
+      System.err.println("#" + (i + 1) + "\t" + stmt.toString(store));
     }
-    
-    /**
-     * Dumps the state of the buffer on {@link System#err}.
-     * 
-     * @param store
-     *            Used to resolve the term identifiers to {@link Value}s.
-     */
-    public void dump(AbstractTripleStore store) {
-        
-        System.err.println("capacity=" + capacity + ", numStmts=" + numStmts);
-                
-        for (int i = 0; i < numStmts; i++) {
-            
-            final ISPO stmt = stmts[i];
-
-            System.err.println("#" + (i+1) + "\t" + stmt.toString(store));
-            
-        }
-        
-    }
-    
+  }
 }

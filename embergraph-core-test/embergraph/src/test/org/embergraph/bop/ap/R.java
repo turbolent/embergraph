@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.ap;
 
+import cutthecrap.utils.striterators.SingleValueIterator;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -29,7 +30,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
@@ -47,243 +47,203 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 
-import cutthecrap.utils.striterators.SingleValueIterator;
-
 /**
  * Test relation composed of {@link E} elements with a single primary index.
- * <p>
- * Note: This has to be public in order to be an {@link ILocatableResource}.
+ *
+ * <p>Note: This has to be public in order to be an {@link ILocatableResource}.
  */
 public class R extends AbstractRelation<E> {
 
-    /**
-     * Metadata about the index orders for this relation.
-     */
-    public static class KeyOrder extends AbstractKeyOrder<E> implements Serializable {
+  /** Metadata about the index orders for this relation. */
+  public static class KeyOrder extends AbstractKeyOrder<E> implements Serializable {
 
-		private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-		public Comparator<E> getComparator() {
-            return new EComparator();
-        }
+    public Comparator<E> getComparator() {
+      return new EComparator();
+    }
 
-        public String getIndexName() {
-            return "primary";
-        }
+    public String getIndexName() {
+      return "primary";
+    }
 
-        /**
-         * There is only one component in the key.
-         */
-        public int getKeyArity() {
-            return 2;
-        }
-
-        /**
-         * The [name] and [value] attributes are used to generate the key.
-         * [name] is at index zero in the key. [value] is at index 1.
-         */
-        public int getKeyOrder(final int keyPos) {
-            if (keyPos < 0 || keyPos > 1)
-                throw new IndexOutOfBoundsException();
-            return keyPos;
-        }
-        
-        public String toString() {
-            return getClass().getName() + "{" + getIndexName() + "}";
-        }
-
+    /** There is only one component in the key. */
+    public int getKeyArity() {
+      return 2;
     }
 
     /**
-     * The only defined index order (the primary key).
+     * The [name] and [value] attributes are used to generate the key. [name] is at index zero in
+     * the key. [value] is at index 1.
      */
-    public static final KeyOrder primaryKeyOrder = new KeyOrder();
-
-    /**
-     * @param indexManager
-     * @param namespace
-     * @param timestamp
-     * @param properties
-     */
-    public R(IIndexManager indexManager, String namespace, Long timestamp,
-            Properties properties) {
-
-        super(indexManager, namespace, timestamp, properties);
-
+    public int getKeyOrder(final int keyPos) {
+      if (keyPos < 0 || keyPos > 1) throw new IndexOutOfBoundsException();
+      return keyPos;
     }
 
-    public Class<E> getElementClass() {
+    public String toString() {
+      return getClass().getName() + "{" + getIndexName() + "}";
+    }
+  }
 
-        return E.class;
+  /** The only defined index order (the primary key). */
+  public static final KeyOrder primaryKeyOrder = new KeyOrder();
 
+  /**
+   * @param indexManager
+   * @param namespace
+   * @param timestamp
+   * @param properties
+   */
+  public R(IIndexManager indexManager, String namespace, Long timestamp, Properties properties) {
+
+    super(indexManager, namespace, timestamp, properties);
+  }
+
+  public Class<E> getElementClass() {
+
+    return E.class;
+  }
+
+  public void create() {
+
+    super.create();
+
+    final IndexMetadata metadata = new IndexMetadata(getFQN(primaryKeyOrder), UUID.randomUUID());
+
+    getIndexManager().registerIndex(metadata);
+  }
+
+  /**
+   * Alternative {@link #create()} method creates the primary index using the specified separator
+   * keys and data services.
+   *
+   * @see AbstractScaleOutFederation#registerIndex(IndexMetadata, byte[][], UUID[])
+   */
+  public void create(final byte[][] separatorKeys, final UUID[] dataServices) {
+
+    super.create();
+
+    final IndexMetadata metadata = new IndexMetadata(getFQN(primaryKeyOrder), UUID.randomUUID());
+
+    ((AbstractScaleOutFederation<?>) getIndexManager())
+        .registerIndex(metadata, separatorKeys, dataServices);
+  }
+
+  public void destroy() {
+
+    // drop indices.
+    for (String name : getIndexNames()) {
+
+      getIndexManager().dropIndex(name);
     }
 
-    public void create() {
+    super.destroy();
+  }
 
-        super.create();
+  //    public E newElement(final IPredicate<E> predicate,
+  //            final IBindingSet bindingSet) {
+  //
+  //        final String name = (String) predicate.asBound(0, bindingSet);
+  //
+  //        final String value = (String) predicate.asBound(1, bindingSet);
+  //
+  //        return new E(name, value);
+  //    }
 
-        final IndexMetadata metadata = new IndexMetadata(
-                getFQN(primaryKeyOrder), UUID.randomUUID());
+  public E newElement(final List<BOp> a, final IBindingSet bindingSet) {
 
-        getIndexManager().registerIndex(metadata);
+    final String name = (String) ((IVariableOrConstant<?>) a.get(0)).get(bindingSet);
 
-    }
+    final String value = (String) ((IVariableOrConstant<?>) a.get(0)).get(bindingSet);
 
-    /**
-     * Alternative {@link #create()} method creates the primary index using the
-     * specified separator keys and data services.
-     * 
-     * @see AbstractScaleOutFederation#registerIndex(IndexMetadata, byte[][],
-     *      UUID[])
-     */
-    public void create(final byte[][] separatorKeys, final UUID[] dataServices) {
+    return new E(name, value);
+  }
 
-        super.create();
+  public Set<String> getIndexNames() {
 
-        final IndexMetadata metadata = new IndexMetadata(
-                getFQN(primaryKeyOrder), UUID.randomUUID());
+    final Set<String> tmp = new HashSet<String>();
 
-        ((AbstractScaleOutFederation<?>) getIndexManager()).registerIndex(
-                metadata, separatorKeys, dataServices);
+    tmp.add(getFQN(primaryKeyOrder));
 
-    }
+    return tmp;
+  }
 
-    public void destroy() {
+  @SuppressWarnings("unchecked")
+  public Iterator<IKeyOrder<E>> getKeyOrders() {
 
-        // drop indices.
-        for (String name : getIndexNames()) {
+    return new SingleValueIterator(primaryKeyOrder);
+  }
 
-            getIndexManager().dropIndex(name);
+  public IKeyOrder<E> getPrimaryKeyOrder() {
 
-        }
+    return primaryKeyOrder;
+  }
 
-        super.destroy();
+  public IKeyOrder<E> getKeyOrder(final IPredicate<E> p) {
 
-    }
+    return primaryKeyOrder;
+  }
 
-//    public E newElement(final IPredicate<E> predicate,
-//            final IBindingSet bindingSet) {
-//
-//        final String name = (String) predicate.asBound(0, bindingSet);
-//
-//        final String value = (String) predicate.asBound(1, bindingSet);
-//
-//        return new E(name, value);
-//    }
+  /** Simple insert procedure works fine for a local journal. */
+  public long insert(final IChunkedOrderedIterator<E> itr) {
 
-    public E newElement(final List<BOp> a, final IBindingSet bindingSet) {
+    long n = 0;
 
-        final String name = (String) ((IVariableOrConstant<?>) a.get(0))
-                .get(bindingSet);
-
-        final String value = (String) ((IVariableOrConstant<?>) a.get(0))
-                .get(bindingSet);
-
-        return new E(name,value);
-        
-    }
-    
-    public Set<String> getIndexNames() {
-
-        final Set<String> tmp = new HashSet<String>();
-
-        tmp.add(getFQN(primaryKeyOrder));
-
-        return tmp;
-
-    }
+    final IIndex ndx = getIndex(primaryKeyOrder);
 
     @SuppressWarnings("unchecked")
-    public Iterator<IKeyOrder<E>> getKeyOrders() {
-        
-        return new SingleValueIterator(primaryKeyOrder);
-        
-    }
-    
-    public IKeyOrder<E> getPrimaryKeyOrder() {
-        
-        return primaryKeyOrder;
-        
-    }
-    
-    public IKeyOrder<E> getKeyOrder(final IPredicate<E> p) {
+    final ITupleSerializer<E, E> tupleSer = ndx.getIndexMetadata().getTupleSerializer();
 
-        return primaryKeyOrder;
-        
-    }
+    final IKeyBuilder keyBuilder = ndx.getIndexMetadata().getKeyBuilder();
 
-    /**
-     * Simple insert procedure works fine for a local journal.
-     */
-    public long insert(final IChunkedOrderedIterator<E> itr) {
+    while (itr.hasNext()) {
 
-        long n = 0;
+      final E e = itr.next();
 
-        final IIndex ndx = getIndex(primaryKeyOrder);
+      final byte[] key = primaryKeyOrder.getKey(keyBuilder, e);
 
-        @SuppressWarnings("unchecked")
-        final ITupleSerializer<E, E> tupleSer = ndx.getIndexMetadata()
-                .getTupleSerializer();
-        
-        final IKeyBuilder keyBuilder = ndx.getIndexMetadata().getKeyBuilder();
-        
-        while (itr.hasNext()) {
+      if (!ndx.contains(key)) {
 
-            final E e = itr.next();
+        /*
+         * Note: The key is formed from both the name and the value.
+         * This makes it possible to have a many-to-many association
+         * pattern.
+         *
+         * Note: The entire record is associated with the key, not just
+         * the value. This makes it possible for us to extract the
+         * record in cases where the key can not be decoded (such as
+         * Unicode key components).
+         */
+        ndx.insert(key, tupleSer.serializeVal(e));
 
-            final byte[] key = primaryKeyOrder.getKey(keyBuilder, e);
+        if (log.isTraceEnabled())
+          log.trace("insert: element=" + e + ", key=" + BytesUtil.toString(key));
 
-            if (!ndx.contains(key)) {
-
-                /*
-                 * Note: The key is formed from both the name and the value.
-                 * This makes it possible to have a many-to-many association
-                 * pattern.
-                 * 
-                 * Note: The entire record is associated with the key, not just
-                 * the value. This makes it possible for us to extract the
-                 * record in cases where the key can not be decoded (such as
-                 * Unicode key components).
-                 */
-                ndx.insert(key, tupleSer.serializeVal(e));
-
-                if (log.isTraceEnabled())
-                    log.trace("insert: element=" + e + ", key="
-                            + BytesUtil.toString(key));
-
-                n++;
-
-            }
-
-        }
-
-        return n;
-
+        n++;
+      }
     }
 
-    /**
-     * Simple delete implementation works fine for a local journal.
-     */
-    public long delete(final IChunkedOrderedIterator<E> itr) {
+    return n;
+  }
 
-        long n = 0;
+  /** Simple delete implementation works fine for a local journal. */
+  public long delete(final IChunkedOrderedIterator<E> itr) {
 
-        final IIndex ndx = getIndex(primaryKeyOrder);
+    long n = 0;
 
-        while (itr.hasNext()) {
+    final IIndex ndx = getIndex(primaryKeyOrder);
 
-            final E e = itr.next();
+    while (itr.hasNext()) {
 
-            if (ndx.remove(e.name) != null) {
+      final E e = itr.next();
 
-                n++;
+      if (ndx.remove(e.name) != null) {
 
-            }
-
-        }
-
-        return n;
-
+        n++;
+      }
     }
 
+    return n;
+  }
 }

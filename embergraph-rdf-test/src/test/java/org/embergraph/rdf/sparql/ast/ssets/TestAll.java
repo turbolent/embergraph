@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.ssets;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,37 +29,26 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("Solution Set Cache");
-        
-        // Test get/put/clear/etc for named solution sets.
-        suite.addTestSuite(TestSolutionSetManager.class);
-        
-        /*
-         * Note: Data-driven unit tests are used for the SPARQL named solution
-         * set cache and the DESCRIBE cache.
-         */
-        return suite;
-        
-    }
-    
+    final TestSuite suite = new TestSuite("Solution Set Cache");
+
+    // Test get/put/clear/etc for named solution sets.
+    suite.addTestSuite(TestSolutionSetManager.class);
+
+    /*
+     * Note: Data-driven unit tests are used for the SPARQL named solution
+     * set cache and the DESCRIBE cache.
+     */
+    return suite;
+  }
 }

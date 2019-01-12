@@ -24,138 +24,135 @@ package org.embergraph.btree;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 
-
 /**
- * Test code that chooses the child to search during recursive traversal of the
- * separator keys to find a leaf in which a key would be found.
+ * Test code that chooses the child to search during recursive traversal of the separator keys to
+ * find a leaf in which a key would be found.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFindChild extends AbstractBTreeTestCase {
 
-    /**
-     * 
+  /** */
+  public TestFindChild() {}
+
+  /** @param name */
+  public TestFindChild(String name) {
+    super(name);
+  }
+
+  /** A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)} with zero offsets. */
+  public void test_node_findChild01() {
+
+    final int m = 4;
+
+    final BTree btree = getBTree(m);
+
+    /*
+     * Create a test node.  We do not both to build this up from scratch
+     * by inserting keys into the tree.
      */
-    public TestFindChild() {
-    }
+    // keys[]  : [ 5  9 12    ]
+    // child[] : [ a  b  c  d ]
 
-    /**
-     * @param name
-     */
-    public TestFindChild(String name) {
-        super(name);
-    }
+    final int m2 = (m + 1) / 2;
+    final int nentries = m2 * 4;
+    final long[] childAddrs = new long[] {1, 2, 3, 4, 0};
+    final long[] childEntryCounts = new long[] {m2, m2, m2, m2, 0};
 
-    /**
-     * A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)}
-     * with zero offsets.
-     */
-    public void test_node_findChild01() {
-     
-        final int m = 4;
-        
-        final BTree btree = getBTree(m);
+    final IRaba keys =
+        new MutableKeyBuffer(
+            3, new byte[][] {new byte[] {5}, new byte[] {9}, new byte[] {12}, null});
 
-        /*
-         * Create a test node.  We do not both to build this up from scratch
-         * by inserting keys into the tree.
-         */
-        // keys[]  : [ 5  9 12    ]
-        // child[] : [ a  b  c  d ]
+    final Node node =
+        new Node(
+            btree,
+            1,
+            new MutableNodeData(
+                nentries,
+                keys,
+                childAddrs,
+                childEntryCounts,
+                false /* versionTimestamps */,
+                0L,
+                0L));
 
-        final int m2 = (m+1)/2;
-        final int nentries = m2*4;
-        final long[] childAddrs = new long[] { 1, 2, 3, 4, 0 };
-        final long[] childEntryCounts = new long[]{m2,m2,m2,m2,0};
-        
-        final IRaba keys = new MutableKeyBuffer(3, new byte[][] {
-                new byte[] { 5 },
-                new byte[] { 9 },
-                new byte[] { 12 },
-                null });
+    assertEquals(0, node.findChild(new byte[] {1}));
+    assertEquals(0, node.findChild(new byte[] {2}));
+    assertEquals(0, node.findChild(new byte[] {3}));
+    assertEquals(0, node.findChild(new byte[] {4}));
+    assertEquals(1, node.findChild(new byte[] {5}));
+    assertEquals(1, node.findChild(new byte[] {6}));
+    assertEquals(1, node.findChild(new byte[] {7}));
+    assertEquals(1, node.findChild(new byte[] {8}));
+    assertEquals(2, node.findChild(new byte[] {9}));
+    assertEquals(2, node.findChild(new byte[] {10}));
+    assertEquals(2, node.findChild(new byte[] {11}));
+    assertEquals(3, node.findChild(new byte[] {12}));
+    assertEquals(3, node.findChild(new byte[] {13}));
+  }
 
-        final Node node = new Node(btree, 1, new MutableNodeData(nentries,
-                keys, childAddrs, childEntryCounts,
-                false/* versionTimestamps */, 0L, 0L));
-
-        assertEquals(0,node.findChild(new byte[]{1}));
-        assertEquals(0,node.findChild(new byte[]{2}));
-        assertEquals(0,node.findChild(new byte[]{3}));
-        assertEquals(0,node.findChild(new byte[]{4}));
-        assertEquals(1,node.findChild(new byte[]{5}));
-        assertEquals(1,node.findChild(new byte[]{6}));
-        assertEquals(1,node.findChild(new byte[]{7}));
-        assertEquals(1,node.findChild(new byte[]{8}));
-        assertEquals(2,node.findChild(new byte[]{9}));
-        assertEquals(2,node.findChild(new byte[]{10}));
-        assertEquals(2,node.findChild(new byte[]{11}));
-        assertEquals(3,node.findChild(new byte[]{12}));
-        assertEquals(3,node.findChild(new byte[]{13}));
-        
-    }
-    
-//    /**
-//     * A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)}
-//     * with non-zero offsets.
-//     */
-//    public void test_node_findChild02() {
-//
-//        int m = 4;
-//
-//        BTree btree = getBTree(m);
-//
-//        /*
-//         * Create a test node. We do not both to build this up from scratch by
-//         * inserting keys into the tree.
-//         */
-//        // keys[]  : [ 5  9 12    ]
-//        // child[] : [ a  b  c  d ]
-//        final int m2 = (m + 1) / 2;
-//        final int nentries = m2 * 4;
-//        final long[] childAddrs = new long[] { 1, 2, 3, 4, 0 };
-//        final int[] childEntryCounts = new int[] { m2, m2, m2, m2, 0 };
-//
-//        IKeyBuffer keys = new MutableKeyBuffer(3, new byte[][] {
-//                new byte[] { 1, 5 },
-//                new byte[] { 1, 5, 9 },
-//                new byte[] { 1, 5, 9, 12 },
-//                null
-//                });
-//
-//        Node node = new Node(btree, 1, m, nentries, keys, childAddrs,
-//                childEntryCounts);
-//
-//        // verify with searchKeyOffset == 0
-//        assertEquals(0, node.findChild(0, new byte[] { 1, 4 }));
-//        assertEquals(0, node.findChild(0, new byte[] { 1, 4, 9 }));
-//        assertEquals(1, node.findChild(0, new byte[] { 1, 5 }));
-//        assertEquals(1, node.findChild(0, new byte[] { 1, 5, 8 }));
-//        assertEquals(2, node.findChild(0, new byte[] { 1, 5, 9 }));
-//        assertEquals(2, node.findChild(0, new byte[] { 1, 5, 9, 11 }));
-//        assertEquals(3, node.findChild(0, new byte[] { 1, 5, 9, 12 }));
-//        assertEquals(3, node.findChild(0, new byte[] { 1, 5, 9, 13 }));
-//
-//        // verify with searchKeyOffset == 1
-//        assertEquals(0, node.findChild(1, new byte[] { 1, 4 }));
-//        assertEquals(0, node.findChild(1, new byte[] { 1, 4, 9 }));
-//        assertEquals(1, node.findChild(1, new byte[] { 1, 5 }));
-//        assertEquals(1, node.findChild(1, new byte[] { 1, 5, 8 }));
-//        assertEquals(2, node.findChild(1, new byte[] { 1, 5, 9 }));
-//        assertEquals(2, node.findChild(1, new byte[] { 1, 5, 9, 11 }));
-//        assertEquals(3, node.findChild(1, new byte[] { 1, 5, 9, 12 }));
-//        assertEquals(3, node.findChild(1, new byte[] { 1, 5, 9, 13 }));
-//
-//        // verify with searchKeyOffset == 2
-////        assertEquals(0, node.findChild(2, new byte[] { 1, 4 }));
-////        assertEquals(0, node.findChild(2, new byte[] { 1, 4, 9 }));
-////        assertEquals(1, node.findChild(2, new byte[] { 1, 5 }));
-//        assertEquals(1, node.findChild(2, new byte[] { 1, 5, 8 }));
-//        assertEquals(2, node.findChild(2, new byte[] { 1, 5, 9 }));
-//        assertEquals(2, node.findChild(2, new byte[] { 1, 5, 9, 11 }));
-//        assertEquals(3, node.findChild(2, new byte[] { 1, 5, 9, 12 }));
-//        assertEquals(3, node.findChild(2, new byte[] { 1, 5, 9, 13 }));
-//        
-//    }
+  //    /**
+  //     * A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)}
+  //     * with non-zero offsets.
+  //     */
+  //    public void test_node_findChild02() {
+  //
+  //        int m = 4;
+  //
+  //        BTree btree = getBTree(m);
+  //
+  //        /*
+  //         * Create a test node. We do not both to build this up from scratch by
+  //         * inserting keys into the tree.
+  //         */
+  //        // keys[]  : [ 5  9 12    ]
+  //        // child[] : [ a  b  c  d ]
+  //        final int m2 = (m + 1) / 2;
+  //        final int nentries = m2 * 4;
+  //        final long[] childAddrs = new long[] { 1, 2, 3, 4, 0 };
+  //        final int[] childEntryCounts = new int[] { m2, m2, m2, m2, 0 };
+  //
+  //        IKeyBuffer keys = new MutableKeyBuffer(3, new byte[][] {
+  //                new byte[] { 1, 5 },
+  //                new byte[] { 1, 5, 9 },
+  //                new byte[] { 1, 5, 9, 12 },
+  //                null
+  //                });
+  //
+  //        Node node = new Node(btree, 1, m, nentries, keys, childAddrs,
+  //                childEntryCounts);
+  //
+  //        // verify with searchKeyOffset == 0
+  //        assertEquals(0, node.findChild(0, new byte[] { 1, 4 }));
+  //        assertEquals(0, node.findChild(0, new byte[] { 1, 4, 9 }));
+  //        assertEquals(1, node.findChild(0, new byte[] { 1, 5 }));
+  //        assertEquals(1, node.findChild(0, new byte[] { 1, 5, 8 }));
+  //        assertEquals(2, node.findChild(0, new byte[] { 1, 5, 9 }));
+  //        assertEquals(2, node.findChild(0, new byte[] { 1, 5, 9, 11 }));
+  //        assertEquals(3, node.findChild(0, new byte[] { 1, 5, 9, 12 }));
+  //        assertEquals(3, node.findChild(0, new byte[] { 1, 5, 9, 13 }));
+  //
+  //        // verify with searchKeyOffset == 1
+  //        assertEquals(0, node.findChild(1, new byte[] { 1, 4 }));
+  //        assertEquals(0, node.findChild(1, new byte[] { 1, 4, 9 }));
+  //        assertEquals(1, node.findChild(1, new byte[] { 1, 5 }));
+  //        assertEquals(1, node.findChild(1, new byte[] { 1, 5, 8 }));
+  //        assertEquals(2, node.findChild(1, new byte[] { 1, 5, 9 }));
+  //        assertEquals(2, node.findChild(1, new byte[] { 1, 5, 9, 11 }));
+  //        assertEquals(3, node.findChild(1, new byte[] { 1, 5, 9, 12 }));
+  //        assertEquals(3, node.findChild(1, new byte[] { 1, 5, 9, 13 }));
+  //
+  //        // verify with searchKeyOffset == 2
+  ////        assertEquals(0, node.findChild(2, new byte[] { 1, 4 }));
+  ////        assertEquals(0, node.findChild(2, new byte[] { 1, 4, 9 }));
+  ////        assertEquals(1, node.findChild(2, new byte[] { 1, 5 }));
+  //        assertEquals(1, node.findChild(2, new byte[] { 1, 5, 8 }));
+  //        assertEquals(2, node.findChild(2, new byte[] { 1, 5, 9 }));
+  //        assertEquals(2, node.findChild(2, new byte[] { 1, 5, 9, 11 }));
+  //        assertEquals(3, node.findChild(2, new byte[] { 1, 5, 9, 12 }));
+  //        assertEquals(3, node.findChild(2, new byte[] { 1, 5, 9, 13 }));
+  //
+  //    }
 
 }

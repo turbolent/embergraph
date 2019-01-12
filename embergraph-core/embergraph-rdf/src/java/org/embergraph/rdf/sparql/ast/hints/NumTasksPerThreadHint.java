@@ -30,32 +30,31 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Sets the {@link PipelineOp.Annotations#NUM_TASKS_PER_THREAD} annotation of an operator.
- * 
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 final class NumTasksPerThreadHint extends AbstractIntQueryHint {
 
-   protected NumTasksPerThreadHint() {
-       super(Annotations.NUM_TASKS_PER_THREAD,
-               Annotations.DEFAULT_NUM_TASKS_PER_THREAD);       
-   }
+  protected NumTasksPerThreadHint() {
+    super(Annotations.NUM_TASKS_PER_THREAD, Annotations.DEFAULT_NUM_TASKS_PER_THREAD);
+  }
 
-   @Override
-   public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-           final QueryHintScope scope, final ASTBase op, final Integer value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
 
-       if (op instanceof IQueryNode) {
+    if (op instanceof IQueryNode) {
 
-           /*
-            * Note: This is set on the queryHint Properties object and then
-            * transferred to the pipeline operator when it is generated.
-            */
-           _setQueryHint(context, scope, op, getName(), value);
-
-       }
-
-   }
-
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+      _setQueryHint(context, scope, op, getName(), value);
+    }
+  }
 }

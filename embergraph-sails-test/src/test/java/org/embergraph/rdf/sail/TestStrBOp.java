@@ -19,8 +19,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.internal.XSD;
+import org.embergraph.rdf.sparql.ast.QueryHints;
+import org.embergraph.rdf.sparql.ast.QueryOptimizerEnum;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -31,421 +36,431 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.sparql.ast.QueryHints;
-import org.embergraph.rdf.sparql.ast.QueryOptimizerEnum;
-import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 public class TestStrBOp extends QuadsTestCase {
 
-    protected static final Logger log = Logger.getLogger(TestStrBOp.class);
+  protected static final Logger log = Logger.getLogger(TestStrBOp.class);
 
-    protected static final boolean INFO = log.isInfoEnabled();
-    
-    @Override
-    public Properties getProperties() {
-        
-        Properties props = super.getProperties();
+  protected static final boolean INFO = log.isInfoEnabled();
 
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
-    }
+  @Override
+  public Properties getProperties() {
 
-    /**
-     * 
-     */
-    public TestStrBOp() {
-    }
+    Properties props = super.getProperties();
 
-    /**
-     * @param arg0
-     */
-    public TestStrBOp(String arg0) {
-        super(arg0);
-    }
-    
-    public void testStr() throws Exception {
-        
-//        final Sail sail = new MemoryStore();
-//        try {
-//        sail.initialize();
-//        final Repository repo = new SailRepository(sail);
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
-        final EmbergraphSail sail = getSail();
-        try {
-        sail.initialize();
-        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-        
-        final RepositoryConnection cxn = repo.getConnection();
-        
-        try {
-            cxn.setAutoCommit(false);
-    
-            final ValueFactory vf = sail.getValueFactory();
+    return props;
+  }
 
-            /*
-             * Create some terms.
-             */
-            final URI X = vf.createURI(BD.NAMESPACE + "X");
-            final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
-//            final Literal _1 = vf.createLiteral("foo");
-            final Literal _2 = vf.createLiteral("foo", XSD.STRING);
-            final Literal _3 = vf.createLiteral("foo", dt);
-            final Literal _4 = vf.createLiteral("foo", "EN");
-            final Literal _5 = vf.createLiteral(true);
-            final Literal _6 = vf.createLiteral(1000l);
-            
-            /*
-             * Create some statements.
-             */
-            cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
-//            cxn.add(X, RDFS.LABEL, _1);
-            cxn.add(X, RDFS.LABEL, _2);
-            cxn.add(X, RDFS.LABEL, _3);
-            cxn.add(X, RDFS.LABEL, _4);
-            cxn.add(X, RDFS.LABEL, _5);
-            cxn.add(X, RDFS.LABEL, _6);
-            
-            /*
-             * Note: The either flush() or commit() is required to flush the
-             * statement buffers to the database before executing any operations
-             * that go around the sail.
-             */
-            cxn.commit();
-            
-            if (log.isInfoEnabled()) {
-                log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
-            }
-            
-            {
-                
-                String query =
-//                    QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
-                    "prefix bd: <"+BD.NAMESPACE+"> " +
-                    "prefix rdf: <"+RDF.NAMESPACE+"> " +
-                    "prefix rdfs: <"+RDFS.NAMESPACE+"> " +
-                    
-                    "select ?p ?o " +
-                    "where { " +
-                    "  hint:Query hint:"+QueryHints.OPTIMIZER+" \""+QueryOptimizerEnum.None+"\"."+
-                    "  ?s rdf:type rdfs:Resource . " +
-//                    "  ?s ?p \"foo\" . " +
-                    "  ?s ?p ?o . " +
-//                    "  filter(str(?o) = \"foo\" && regex(str(?o),\"foo\",\"i\")) " +
-//                    "  filter(?o = \"foo\") " +
-                    "  filter(str(?o) = \"foo\") " +
-                    "  filter(str(?p) = \""+RDFS.LABEL+"\") " +
-                    "}"; 
-    
-                final SailTupleQuery tupleQuery = (SailTupleQuery)
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                tupleQuery.setIncludeInferred(false /* includeInferred */);
-               
-                if (log.isInfoEnabled()) {
-                    
-                    log.info(query);
-                    
-//                    final EmbergraphSailTupleQuery bdTupleQuery =
-//                        (EmbergraphSailTupleQuery) tupleQuery;
-//                    final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
-//                    final Projection p = (Projection) root.getArg();
-//                    final TupleExpr tupleExpr = p.getArg();
-//                    final SOpTreeBuilder stb = new SOpTreeBuilder();
-//                    final SOpTree tree = stb.collectSOps(tupleExpr);
-               
-//                    log.info(tree);
-//                    log.info(query);
+  /** */
+  public TestStrBOp() {}
 
-                    final TupleQueryResult result = tupleQuery.evaluate();
-                    while (result.hasNext()) {
-                        log.info(result.next());
-                    }
-                    
-                }
-                
-//                final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-//                answer.add(createBindingSet(
-//                        new BindingImpl("a", paul),
-//                        new BindingImpl("b", mary)
-//                        ));
-//                answer.add(createBindingSet(
-//                        new BindingImpl("a", brad),
-//                        new BindingImpl("b", john)
-//                        ));
-//
-//                final TupleQueryResult result = tupleQuery.evaluate();
-//                compare(result, answer);
+  /** @param arg0 */
+  public TestStrBOp(String arg0) {
+    super(arg0);
+  }
 
-            }
-            
-        } finally {
-            cxn.close();
-        }
-        } finally {
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
-        }
+  public void testStr() throws Exception {
 
-    }
+    //        final Sail sail = new MemoryStore();
+    //        try {
+    //        sail.initialize();
+    //        final Repository repo = new SailRepository(sail);
 
-    public void testRegex() throws Exception {
-        
-//      final Sail sail = new MemoryStore();
-//      try {
-//      sail.initialize();
-//      final Repository repo = new SailRepository(sail);
-
-      final EmbergraphSail sail = getSail();
-      try {
+    final EmbergraphSail sail = getSail();
+    try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      
+
       final RepositoryConnection cxn = repo.getConnection();
-      
-      try {
-          cxn.setAutoCommit(false);
-  
-          final ValueFactory vf = sail.getValueFactory();
 
-          /*
-           * Create some terms.
-           */
-          final URI X = vf.createURI(BD.NAMESPACE + "X");
-          final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
-//          final Literal _1 = vf.createLiteral("foo");
-          final Literal _2 = vf.createLiteral("foo", XSD.STRING);
-          final Literal _3 = vf.createLiteral("foo", dt);
-          final Literal _4 = vf.createLiteral("foo", "EN");
-          final Literal _5 = vf.createLiteral(true);
-          final Literal _6 = vf.createLiteral(1000l);
-          
-          /*
-           * Create some statements.
-           */
-          cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
-//          cxn.add(X, RDFS.LABEL, _1);
-          cxn.add(X, RDFS.LABEL, _2);
-          cxn.add(X, RDFS.LABEL, _3);
-          cxn.add(X, RDFS.LABEL, _4);
-          cxn.add(X, RDFS.LABEL, _5);
-          cxn.add(X, RDFS.LABEL, _6);
-          
-          /*
-           * Note: The either flush() or commit() is required to flush the
-           * statement buffers to the database before executing any operations
-           * that go around the sail.
-           */
-          cxn.commit();
-          
+      try {
+        cxn.setAutoCommit(false);
+
+        final ValueFactory vf = sail.getValueFactory();
+
+        /*
+         * Create some terms.
+         */
+        final URI X = vf.createURI(BD.NAMESPACE + "X");
+        final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
+        //            final Literal _1 = vf.createLiteral("foo");
+        final Literal _2 = vf.createLiteral("foo", XSD.STRING);
+        final Literal _3 = vf.createLiteral("foo", dt);
+        final Literal _4 = vf.createLiteral("foo", "EN");
+        final Literal _5 = vf.createLiteral(true);
+        final Literal _6 = vf.createLiteral(1000l);
+
+        /*
+         * Create some statements.
+         */
+        cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
+        //            cxn.add(X, RDFS.LABEL, _1);
+        cxn.add(X, RDFS.LABEL, _2);
+        cxn.add(X, RDFS.LABEL, _3);
+        cxn.add(X, RDFS.LABEL, _4);
+        cxn.add(X, RDFS.LABEL, _5);
+        cxn.add(X, RDFS.LABEL, _6);
+
+        /*
+         * Note: The either flush() or commit() is required to flush the
+         * statement buffers to the database before executing any operations
+         * that go around the sail.
+         */
+        cxn.commit();
+
+        if (log.isInfoEnabled()) {
+          log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+        }
+
+        {
+          String query =
+              //                    QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
+              "prefix bd: <"
+                  + BD.NAMESPACE
+                  + "> "
+                  + "prefix rdf: <"
+                  + RDF.NAMESPACE
+                  + "> "
+                  + "prefix rdfs: <"
+                  + RDFS.NAMESPACE
+                  + "> "
+                  + "select ?p ?o "
+                  + "where { "
+                  + "  hint:Query hint:"
+                  + QueryHints.OPTIMIZER
+                  + " \""
+                  + QueryOptimizerEnum.None
+                  + "\"."
+                  + "  ?s rdf:type rdfs:Resource . "
+                  +
+                  //                    "  ?s ?p \"foo\" . " +
+                  "  ?s ?p ?o . "
+                  +
+                  //                    "  filter(str(?o) = \"foo\" && regex(str(?o),\"foo\",\"i\"))
+                  // " +
+                  //                    "  filter(?o = \"foo\") " +
+                  "  filter(str(?o) = \"foo\") "
+                  + "  filter(str(?p) = \""
+                  + RDFS.LABEL
+                  + "\") "
+                  + "}";
+
+          final SailTupleQuery tupleQuery =
+              (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+          tupleQuery.setIncludeInferred(false /* includeInferred */);
+
           if (log.isInfoEnabled()) {
-              log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
-          }
-          
-          {
-              
-              String query =
-//                  QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
-                  "prefix bd: <"+BD.NAMESPACE+"> " +
-                  "prefix rdf: <"+RDF.NAMESPACE+"> " +
-                  "prefix rdfs: <"+RDFS.NAMESPACE+"> " +
-                  
-                  "select ?o " +
-                  "where { " +
-                  "  hint:Query hint:"+QueryHints.OPTIMIZER+" \""+QueryOptimizerEnum.None+"\"."+
-                  "  ?s rdf:type rdfs:Resource . " +
-                  "  ?s ?p ?o . " +
-//                  "  filter(regex(str(?o), \"FOO\")) " +
-                  "  filter(regex(str(?o), \"FOO\", \"i\")) " +
-                  "}"; 
-  
-              final SailTupleQuery tupleQuery = (SailTupleQuery)
-                  cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-              tupleQuery.setIncludeInferred(false /* includeInferred */);
-             
-              if (log.isInfoEnabled()) {
-                  
-                  log.info(query);
-                  
-//                  final EmbergraphSailTupleQuery bdTupleQuery =
-//                      (EmbergraphSailTupleQuery) tupleQuery;
-//                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
-//                  final Projection p = (Projection) root.getArg();
-//                  final TupleExpr tupleExpr = p.getArg();
-//                  final SOpTreeBuilder stb = new SOpTreeBuilder();
-//                  final SOpTree tree = stb.collectSOps(tupleExpr);
-             
-//                  log.info(tree);
-//                  log.info(query);
 
-                  final TupleQueryResult result = tupleQuery.evaluate();
-                  while (result.hasNext()) {
-                      log.info(result.next());
-                  }
-                  
-              }
-              
-//              final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-//              answer.add(createBindingSet(
-//                      new BindingImpl("a", paul),
-//                      new BindingImpl("b", mary)
-//                      ));
-//              answer.add(createBindingSet(
-//                      new BindingImpl("a", brad),
-//                      new BindingImpl("b", john)
-//                      ));
-//
-//              final TupleQueryResult result = tupleQuery.evaluate();
-//              compare(result, answer);
+            log.info(query);
 
+            //                    final EmbergraphSailTupleQuery bdTupleQuery =
+            //                        (EmbergraphSailTupleQuery) tupleQuery;
+            //                    final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
+            //                    final Projection p = (Projection) root.getArg();
+            //                    final TupleExpr tupleExpr = p.getArg();
+            //                    final SOpTreeBuilder stb = new SOpTreeBuilder();
+            //                    final SOpTree tree = stb.collectSOps(tupleExpr);
+
+            //                    log.info(tree);
+            //                    log.info(query);
+
+            final TupleQueryResult result = tupleQuery.evaluate();
+            while (result.hasNext()) {
+              log.info(result.next());
             }
-          
-        } finally {
-            cxn.close();
-        }
-        } finally {
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
+          }
+
+          //                final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          //                answer.add(createBindingSet(
+          //                        new BindingImpl("a", paul),
+          //                        new BindingImpl("b", mary)
+          //                        ));
+          //                answer.add(createBindingSet(
+          //                        new BindingImpl("a", brad),
+          //                        new BindingImpl("b", john)
+          //                        ));
+          //
+          //                final TupleQueryResult result = tupleQuery.evaluate();
+          //                compare(result, answer);
+
         }
 
+      } finally {
+        cxn.close();
+      }
+    } finally {
+      if (sail instanceof EmbergraphSail)
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
-    
-    /*
-     * PREFIX : <http://example.org/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT ?s WHERE {
-    ?s :p ?v .
-    FILTER(datatype(xsd:boolean(?v)) = xsd:boolean) .
-}
-     */
+  }
 
-    public void testCast() throws Exception {
-        
-//      final Sail sail = new MemoryStore();
-//      try {
-//      sail.initialize();
-//      final Repository repo = new SailRepository(sail);
+  public void testRegex() throws Exception {
 
-      final EmbergraphSail sail = getSail();
-      try {
+    //      final Sail sail = new MemoryStore();
+    //      try {
+    //      sail.initialize();
+    //      final Repository repo = new SailRepository(sail);
+
+    final EmbergraphSail sail = getSail();
+    try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      
+
       final RepositoryConnection cxn = repo.getConnection();
-      
+
       try {
-          cxn.setAutoCommit(false);
-  
-          final ValueFactory vf = sail.getValueFactory();
+        cxn.setAutoCommit(false);
 
-          /*
-           * Create some terms.
-           */
-          final URI X = vf.createURI(BD.NAMESPACE + "X");
-          final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
-//          final Literal _1 = vf.createLiteral("foo");
-          final Literal _2 = vf.createLiteral("foo", XSD.STRING);
-          final Literal _3 = vf.createLiteral("foo", dt);
-          final Literal _4 = vf.createLiteral("foo", "EN");
-          final Literal _5 = vf.createLiteral(true);
-          final Literal _6 = vf.createLiteral(1000l);
-          
-          /*
-           * Create some statements.
-           */
-          cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
-//          cxn.add(X, RDFS.LABEL, _1);
-          cxn.add(X, RDFS.LABEL, _2);
-          cxn.add(X, RDFS.LABEL, _3);
-          cxn.add(X, RDFS.LABEL, _4);
-          cxn.add(X, RDFS.LABEL, _5);
-          cxn.add(X, RDFS.LABEL, _6);
-          
-          /*
-           * Note: The either flush() or commit() is required to flush the
-           * statement buffers to the database before executing any operations
-           * that go around the sail.
-           */
-          cxn.commit();
-          
+        final ValueFactory vf = sail.getValueFactory();
+
+        /*
+         * Create some terms.
+         */
+        final URI X = vf.createURI(BD.NAMESPACE + "X");
+        final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
+        //          final Literal _1 = vf.createLiteral("foo");
+        final Literal _2 = vf.createLiteral("foo", XSD.STRING);
+        final Literal _3 = vf.createLiteral("foo", dt);
+        final Literal _4 = vf.createLiteral("foo", "EN");
+        final Literal _5 = vf.createLiteral(true);
+        final Literal _6 = vf.createLiteral(1000l);
+
+        /*
+         * Create some statements.
+         */
+        cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
+        //          cxn.add(X, RDFS.LABEL, _1);
+        cxn.add(X, RDFS.LABEL, _2);
+        cxn.add(X, RDFS.LABEL, _3);
+        cxn.add(X, RDFS.LABEL, _4);
+        cxn.add(X, RDFS.LABEL, _5);
+        cxn.add(X, RDFS.LABEL, _6);
+
+        /*
+         * Note: The either flush() or commit() is required to flush the
+         * statement buffers to the database before executing any operations
+         * that go around the sail.
+         */
+        cxn.commit();
+
+        if (log.isInfoEnabled()) {
+          log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+        }
+
+        {
+          String query =
+              //                  QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
+              "prefix bd: <"
+                  + BD.NAMESPACE
+                  + "> "
+                  + "prefix rdf: <"
+                  + RDF.NAMESPACE
+                  + "> "
+                  + "prefix rdfs: <"
+                  + RDFS.NAMESPACE
+                  + "> "
+                  + "select ?o "
+                  + "where { "
+                  + "  hint:Query hint:"
+                  + QueryHints.OPTIMIZER
+                  + " \""
+                  + QueryOptimizerEnum.None
+                  + "\"."
+                  + "  ?s rdf:type rdfs:Resource . "
+                  + "  ?s ?p ?o . "
+                  +
+                  //                  "  filter(regex(str(?o), \"FOO\")) " +
+                  "  filter(regex(str(?o), \"FOO\", \"i\")) "
+                  + "}";
+
+          final SailTupleQuery tupleQuery =
+              (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+          tupleQuery.setIncludeInferred(false /* includeInferred */);
+
           if (log.isInfoEnabled()) {
-          	log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
-          }
-          
-          {
-              
-              String query =
-//                  QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
-                  "prefix bd: <"+BD.NAMESPACE+"> " +
-                  "prefix rdf: <"+RDF.NAMESPACE+"> " +
-                  "prefix rdfs: <"+RDFS.NAMESPACE+"> " +
-                  "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> " +
-                  
-                  "select ?o " +
-                  "where { " +
-                  "  hint:Query hint:"+QueryHints.OPTIMIZER+" \""+QueryOptimizerEnum.None+"\"."+
-                  "  ?s rdf:type rdfs:Resource . " +
-                  "  ?s ?p ?o . " +
-                  "  FILTER(datatype(xsd:boolean(?o)) = xsd:boolean) . " +
-                  "}"; 
-  
-              final SailTupleQuery tupleQuery = (SailTupleQuery)
-                  cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-              tupleQuery.setIncludeInferred(false /* includeInferred */);
-             
-              if (log.isInfoEnabled()) {
-                  
-                  log.info(query);
-                  
-//                  final EmbergraphSailTupleQuery bdTupleQuery =
-//                      (EmbergraphSailTupleQuery) tupleQuery;
-//                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
-//                  final Projection p = (Projection) root.getArg();
-//                  final TupleExpr tupleExpr = p.getArg();
-//                  final SOpTreeBuilder stb = new SOpTreeBuilder();
-//                  final SOpTree tree = stb.collectSOps(tupleExpr);
-             
-//                  log.info(tree);
-//                  log.info(query);
 
-                  final TupleQueryResult result = tupleQuery.evaluate();
-                  while (result.hasNext()) {
-                      log.info(result.next());
-                  }
-                  
-              }
-              
-//              final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-//              answer.add(createBindingSet(
-//                      new BindingImpl("a", paul),
-//                      new BindingImpl("b", mary)
-//                      ));
-//              answer.add(createBindingSet(
-//                      new BindingImpl("a", brad),
-//                      new BindingImpl("b", john)
-//                      ));
-//
-//              final TupleQueryResult result = tupleQuery.evaluate();
-//              compare(result, answer);
+            log.info(query);
 
+            //                  final EmbergraphSailTupleQuery bdTupleQuery =
+            //                      (EmbergraphSailTupleQuery) tupleQuery;
+            //                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
+            //                  final Projection p = (Projection) root.getArg();
+            //                  final TupleExpr tupleExpr = p.getArg();
+            //                  final SOpTreeBuilder stb = new SOpTreeBuilder();
+            //                  final SOpTree tree = stb.collectSOps(tupleExpr);
+
+            //                  log.info(tree);
+            //                  log.info(query);
+
+            final TupleQueryResult result = tupleQuery.evaluate();
+            while (result.hasNext()) {
+              log.info(result.next());
             }
-          
-        } finally {
-            cxn.close();
-        }
-        } finally {
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
+          }
+
+          //              final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          //              answer.add(createBindingSet(
+          //                      new BindingImpl("a", paul),
+          //                      new BindingImpl("b", mary)
+          //                      ));
+          //              answer.add(createBindingSet(
+          //                      new BindingImpl("a", brad),
+          //                      new BindingImpl("b", john)
+          //                      ));
+          //
+          //              final TupleQueryResult result = tupleQuery.evaluate();
+          //              compare(result, answer);
+
         }
 
+      } finally {
+        cxn.close();
+      }
+    } finally {
+      if (sail instanceof EmbergraphSail)
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
-    
+  }
+
+  /*
+       * PREFIX : <http://example.org/>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?s WHERE {
+      ?s :p ?v .
+      FILTER(datatype(xsd:boolean(?v)) = xsd:boolean) .
+  }
+       */
+
+  public void testCast() throws Exception {
+
+    //      final Sail sail = new MemoryStore();
+    //      try {
+    //      sail.initialize();
+    //      final Repository repo = new SailRepository(sail);
+
+    final EmbergraphSail sail = getSail();
+    try {
+      sail.initialize();
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+
+      final RepositoryConnection cxn = repo.getConnection();
+
+      try {
+        cxn.setAutoCommit(false);
+
+        final ValueFactory vf = sail.getValueFactory();
+
+        /*
+         * Create some terms.
+         */
+        final URI X = vf.createURI(BD.NAMESPACE + "X");
+        final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
+        //          final Literal _1 = vf.createLiteral("foo");
+        final Literal _2 = vf.createLiteral("foo", XSD.STRING);
+        final Literal _3 = vf.createLiteral("foo", dt);
+        final Literal _4 = vf.createLiteral("foo", "EN");
+        final Literal _5 = vf.createLiteral(true);
+        final Literal _6 = vf.createLiteral(1000l);
+
+        /*
+         * Create some statements.
+         */
+        cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
+        //          cxn.add(X, RDFS.LABEL, _1);
+        cxn.add(X, RDFS.LABEL, _2);
+        cxn.add(X, RDFS.LABEL, _3);
+        cxn.add(X, RDFS.LABEL, _4);
+        cxn.add(X, RDFS.LABEL, _5);
+        cxn.add(X, RDFS.LABEL, _6);
+
+        /*
+         * Note: The either flush() or commit() is required to flush the
+         * statement buffers to the database before executing any operations
+         * that go around the sail.
+         */
+        cxn.commit();
+
+        if (log.isInfoEnabled()) {
+          log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+        }
+
+        {
+          String query =
+              //                  QueryOptimizerEnum.queryHint(QueryOptimizerEnum.None) +
+              "prefix bd: <"
+                  + BD.NAMESPACE
+                  + "> "
+                  + "prefix rdf: <"
+                  + RDF.NAMESPACE
+                  + "> "
+                  + "prefix rdfs: <"
+                  + RDFS.NAMESPACE
+                  + "> "
+                  + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> "
+                  + "select ?o "
+                  + "where { "
+                  + "  hint:Query hint:"
+                  + QueryHints.OPTIMIZER
+                  + " \""
+                  + QueryOptimizerEnum.None
+                  + "\"."
+                  + "  ?s rdf:type rdfs:Resource . "
+                  + "  ?s ?p ?o . "
+                  + "  FILTER(datatype(xsd:boolean(?o)) = xsd:boolean) . "
+                  + "}";
+
+          final SailTupleQuery tupleQuery =
+              (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+          tupleQuery.setIncludeInferred(false /* includeInferred */);
+
+          if (log.isInfoEnabled()) {
+
+            log.info(query);
+
+            //                  final EmbergraphSailTupleQuery bdTupleQuery =
+            //                      (EmbergraphSailTupleQuery) tupleQuery;
+            //                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
+            //                  final Projection p = (Projection) root.getArg();
+            //                  final TupleExpr tupleExpr = p.getArg();
+            //                  final SOpTreeBuilder stb = new SOpTreeBuilder();
+            //                  final SOpTree tree = stb.collectSOps(tupleExpr);
+
+            //                  log.info(tree);
+            //                  log.info(query);
+
+            final TupleQueryResult result = tupleQuery.evaluate();
+            while (result.hasNext()) {
+              log.info(result.next());
+            }
+          }
+
+          //              final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          //              answer.add(createBindingSet(
+          //                      new BindingImpl("a", paul),
+          //                      new BindingImpl("b", mary)
+          //                      ));
+          //              answer.add(createBindingSet(
+          //                      new BindingImpl("a", brad),
+          //                      new BindingImpl("b", john)
+          //                      ));
+          //
+          //              final TupleQueryResult result = tupleQuery.evaluate();
+          //              compare(result, answer);
+
+        }
+
+      } finally {
+        cxn.close();
+      }
+    } finally {
+      if (sail instanceof EmbergraphSail)
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+    }
+  }
 }

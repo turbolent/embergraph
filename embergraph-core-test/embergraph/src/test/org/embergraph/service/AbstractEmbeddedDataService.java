@@ -2,37 +2,32 @@ package org.embergraph.service;
 
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.journal.IResourceManager;
 
 /**
  * A local (in process) data service.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractEmbeddedDataService extends DataService {
-    
-    public AbstractEmbeddedDataService(UUID serviceUUID, Properties properties) {
-        
-        super(properties);
+public abstract class AbstractEmbeddedDataService extends DataService {
 
-        setServiceUUID(serviceUUID);
-        
-    }
+  public AbstractEmbeddedDataService(UUID serviceUUID, Properties properties) {
 
-    public void destroy() {
+    super(properties);
 
-        if (log.isInfoEnabled())
-            log.info("");
-        
-        final IResourceManager resourceManager = getResourceManager();
+    setServiceUUID(serviceUUID);
+  }
 
-        shutdownNow();
-        
-        // destroy all resources.
-        resourceManager.deleteResources();
-        
-    }
-    
+  public void destroy() {
+
+    if (log.isInfoEnabled()) log.info("");
+
+    final IResourceManager resourceManager = getResourceManager();
+
+    shutdownNow();
+
+    // destroy all resources.
+    resourceManager.deleteResources();
+  }
 }

@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
-
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.AssertionFailedError;
 import junit.framework.Test;
@@ -30,7 +29,6 @@ import junit.framework.TestCase;
 import junit.framework.TestListener;
 import junit.framework.TestResult;
 import junit.textui.ResultPrinter;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
@@ -45,441 +43,375 @@ import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
 /**
- * A version of the test suite that is intended for local debugging and is NOT
- * run in CI. This is intended just to make it easier to run specific proxied
- * test suites.
- * 
+ * A version of the test suite that is intended for local debugging and is NOT run in CI. This is
+ * intended just to make it easier to run specific proxied test suites.
+ *
  * @see TestNanoSparqlServerWithProxyIndexManager
  */
 public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
-        extends AbstractIndexManagerTestCase<S> {
-	
-	static {
-		ProxySuiteHelper.proxyIndexManagerTestingHasStarted = true;
-	}
+    extends AbstractIndexManagerTestCase<S> {
 
-	/**
-	 * The {@link IIndexManager} for the backing persistence engine (may be a
-	 * {@link Journal} or {@link org.embergraph.service.jini.JiniFederation}).
-	 */
-	private IIndexManager m_indexManager;
+  static {
+    ProxySuiteHelper.proxyIndexManagerTestingHasStarted = true;
+  }
 
-	/**
-	 * The mode in which the test is running.
-	 */
-	private TestMode testMode;
+  /**
+   * The {@link IIndexManager} for the backing persistence engine (may be a {@link Journal} or
+   * {@link org.embergraph.service.jini.JiniFederation}).
+   */
+  private IIndexManager m_indexManager;
 
-	/**
-	 * Run in triples mode on a temporary journal.
-	 */
-	public TestNanoSparqlServerWithProxyIndexManager2() {
+  /** The mode in which the test is running. */
+  private TestMode testMode;
 
-		this(null/* name */, getTemporaryJournal(), TestMode.triples);
+  /** Run in triples mode on a temporary journal. */
+  public TestNanoSparqlServerWithProxyIndexManager2() {
 
-	}
+    this(null /* name */, getTemporaryJournal(), TestMode.triples);
+  }
 
-	/**
-	 * Run in triples mode on a temporary journal.
-	 */
-	public TestNanoSparqlServerWithProxyIndexManager2(String name) {
+  /** Run in triples mode on a temporary journal. */
+  public TestNanoSparqlServerWithProxyIndexManager2(String name) {
 
-		this(name, getTemporaryJournal(), TestMode.triples);
+    this(name, getTemporaryJournal(), TestMode.triples);
+  }
 
-	}
+  private static Journal getTemporaryJournal() {
 
-	static private Journal getTemporaryJournal() {
+    final Properties properties = new Properties();
 
-		final Properties properties = new Properties();
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
-		properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-				BufferMode.Transient.toString());
+    properties.setProperty(
+        org.embergraph.journal.Options.INITIAL_EXTENT, "" + (Bytes.megabyte32 * 1));
 
-		properties.setProperty(org.embergraph.journal.Options.INITIAL_EXTENT, ""
-				+ (Bytes.megabyte32 * 1));
+    return new Journal(properties);
+  }
 
-		return new Journal(properties);
+  /**
+   * Run test suite against an embedded {@link NanoSparqlServer} instance, which is in turn running
+   * against the caller's {@link IIndexManager}.
+   *
+   * @param indexManager The {@link Journal} or {@link org.embergraph.service.jini.JiniFederation}.
+   * @param testMode Identifies what mode the kb instance will be using.
+   */
+  private TestNanoSparqlServerWithProxyIndexManager2(
+      final String name, final IIndexManager indexManager, final TestMode testMode) {
 
-	}
+    super(name == null ? TestNanoSparqlServerWithProxyIndexManager2.class.getName() : name);
 
-	/**
-	 * Run test suite against an embedded {@link NanoSparqlServer} instance,
-	 * which is in turn running against the caller's {@link IIndexManager}.
-	 * 
-	 * @param indexManager
-	 *            The {@link Journal} or {@link org.embergraph.service.jini.JiniFederation}.
-	 * @param testMode
-	 *            Identifies what mode the kb instance will be using.
-	 */
-	private TestNanoSparqlServerWithProxyIndexManager2(final String name,
-			final IIndexManager indexManager, final TestMode testMode) {
+    this.m_indexManager = indexManager;
 
-		super(name == null ? TestNanoSparqlServerWithProxyIndexManager2.class.getName()
-				: name);
+    this.testMode = testMode;
+  }
 
-		this.m_indexManager = indexManager;
-		
-		this.testMode = testMode;
-		
-	}
+  /** Return suite running in triples mode against a temporary journal. */
+  public static Test suite() {
 
-	/**
-	 * Return suite running in triples mode against a temporary journal.
-	 */
-	public static Test suite() {
+    return suite(TestMode.triples);
+  }
 
-		return suite(TestMode.triples);
+  /** Return suite running in the specified mode against a temporary journal. */
+  public static Test suite(final TestMode testMode) {
 
-	}
-	
-	/**
-	 * Return suite running in the specified mode against a temporary journal.
-	 */
-	public static Test suite(final TestMode testMode) {
+    return suite(getTemporaryJournal(), testMode);
+  }
 
-		return suite(getTemporaryJournal(), testMode);
-
-	}
-	
-    /**
-     * The {@link TestMode#triples} test suite.
-     */
-    public static class test_NSS_triples extends TestCase {
-        public static Test suite() {
-            return TestNanoSparqlServerWithProxyIndexManager2.suite(
-                    getTemporaryJournal(), TestMode.triples);
-        }
+  /** The {@link TestMode#triples} test suite. */
+  public static class test_NSS_triples extends TestCase {
+    public static Test suite() {
+      return TestNanoSparqlServerWithProxyIndexManager2.suite(
+          getTemporaryJournal(), TestMode.triples);
     }
-    
-    /**
-     * The {@link TestMode#quads} test suite.
-     */
-    public static class Test_NSS_quads extends TestCase {
-        public static Test suite() {
-            return TestNanoSparqlServerWithProxyIndexManager2.suite(
-                    getTemporaryJournal(), TestMode.quads);
-        }
-    }
-    
-    /**
-     * The {@link TestMode#sids} test suite.
-     */
-    public static class Test_NSS_sids extends TestCase {
-        public static Test suite() {
-            return TestNanoSparqlServerWithProxyIndexManager2.suite(
-                    getTemporaryJournal(), TestMode.sids);
-        }
-    }
-    
-	/**
-	 * Return suite running in the given mode against the given
-	 * {@link IIndexManager}.
-	 */
-	public static Test suite(final IIndexManager indexManager,
-			final TestMode testMode) {
+  }
 
-		final TestNanoSparqlServerWithProxyIndexManager2<?> delegate = new TestNanoSparqlServerWithProxyIndexManager2(
-				null/* name */, indexManager, testMode); // !!!! THIS CLASS !!!!
+  /** The {@link TestMode#quads} test suite. */
+  public static class Test_NSS_quads extends TestCase {
+    public static Test suite() {
+      return TestNanoSparqlServerWithProxyIndexManager2.suite(
+          getTemporaryJournal(), TestMode.quads);
+    }
+  }
+
+  /** The {@link TestMode#sids} test suite. */
+  public static class Test_NSS_sids extends TestCase {
+    public static Test suite() {
+      return TestNanoSparqlServerWithProxyIndexManager2.suite(getTemporaryJournal(), TestMode.sids);
+    }
+  }
+
+  /** Return suite running in the given mode against the given {@link IIndexManager}. */
+  public static Test suite(final IIndexManager indexManager, final TestMode testMode) {
+
+    final TestNanoSparqlServerWithProxyIndexManager2<?> delegate =
+        new TestNanoSparqlServerWithProxyIndexManager2(
+            null /* name */, indexManager, testMode); // !!!! THIS CLASS !!!!
+
+    /*
+     * Use a proxy test suite and specify the delegate.
+     */
+
+    final ProxyTestSuite suite =
+        new ProxyTestSuite(delegate, "NanoSparqlServer Proxied Test Suite");
+
+    /*
+     * List any non-proxied tests (typically bootstrapping tests).
+     */
+
+    // Protocol
+    suite.addTest(TestProtocolAll.suite());
+
+    suite.addTestSuite(TestMultiTenancyAPI.class);
+    suite.addTestSuite(TestDataLoaderServlet.class); // Data Loader Servlet
+
+    return suite;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public S getIndexManager() {
+
+    return (S) m_indexManager;
+  }
+
+  @Override
+  public Properties getProperties() {
+
+    //    	System.err.println("testMode="+testMode);
+
+    final Properties properties = new Properties();
+
+    switch (testMode) {
+      case quads:
+        properties.setProperty(AbstractTripleStore.Options.QUADS_MODE, "true");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        properties.setProperty(
+            AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
+        break;
+      case triples:
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        properties.setProperty(
+            AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
+        break;
+      case sids:
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        properties.setProperty(
+            AbstractTripleStore.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "true");
+        break;
+      default:
+        fail("Unknown mode: " + testMode);
+    }
+    // if (false/* triples w/ truth maintenance */) {
+    // properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,
+    // "false");
+    // }
+    // if (false/* sids w/ truth maintenance */) {
+    // properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,
+    // "true");
+    // }
+
+    return properties;
+  }
+
+  /**
+   * Open the {@link IIndexManager} identified by the property file.
+   *
+   * @param propertyFile The property file (for a standalone embergraph instance) or the jini
+   *     configuration file (for a embergraph federation). The file must end with either
+   *     ".properties" or ".config".
+   * @return The {@link IIndexManager}.
+   */
+  private static IIndexManager openIndexManager(final String propertyFile) {
+
+    final File file = new File(propertyFile);
+
+    if (!file.exists()) {
+
+      throw new RuntimeException("Could not find file: " + file);
+    }
+
+    boolean isJini = false;
+    if (propertyFile.endsWith(".config")) {
+      // scale-out.
+      isJini = true;
+    } else if (propertyFile.endsWith(".properties")) {
+      // local journal.
+      isJini = false;
+    } else {
+      /*
+       * Note: This is a hack, but we are recognizing the jini
+       * configuration file with a .config extension and the journal
+       * properties file with a .properties extension.
+       */
+      throw new RuntimeException("File must have '.config' or '.properties' extension: " + file);
+    }
+
+    final IIndexManager indexManager;
+    try {
+
+      if (isJini) {
 
         /*
-         * Use a proxy test suite and specify the delegate.
+         * A embergraph federation.
          */
 
-        final ProxyTestSuite suite = new ProxyTestSuite(delegate,
-                "NanoSparqlServer Proxied Test Suite");
+        @SuppressWarnings("rawtypes")
+        final AbstractScaleOutClient<?> jiniClient =
+            ScaleOutClientFactory.getJiniClient(new String[] {propertyFile});
+
+        indexManager = jiniClient.connect();
+
+      } else {
 
         /*
-         * List any non-proxied tests (typically bootstrapping tests).
+         * Note: we only need to specify the FILE when re-opening a
+         * journal containing a pre-existing KB.
          */
-        
-		//Protocol
-		suite.addTest(TestProtocolAll.suite());
+        final Properties properties = new Properties();
+        {
+          // Read the properties from the file.
+          final InputStream is = new BufferedInputStream(new FileInputStream(propertyFile));
+          try {
+            properties.load(is);
+          } finally {
+            is.close();
+          }
+          if (System.getProperty(EmbergraphSail.Options.FILE) != null) {
+            // Override/set from the environment.
+            properties.setProperty(
+                EmbergraphSail.Options.FILE, System.getProperty(EmbergraphSail.Options.FILE));
+          }
+          if (properties.getProperty(org.embergraph.journal.Options.FILE) == null) {
+            // Run against a transient journal if no file was
+            // specified.
+            properties.setProperty(
+                org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+            properties.setProperty(
+                org.embergraph.journal.Options.INITIAL_EXTENT, "" + (Bytes.megabyte32 * 1));
+          }
+        }
 
-        suite.addTestSuite(TestMultiTenancyAPI.class);
-        suite.addTestSuite(TestDataLoaderServlet.class); // Data Loader Servlet
-        
-        return suite;
-    
+        indexManager = new Journal(properties);
+      }
+
+    } catch (Exception ex) {
+
+      throw new RuntimeException(ex);
     }
 
-	@Override
-	@SuppressWarnings("unchecked")
-    public S getIndexManager() {
+    return indexManager;
+  }
 
-		return (S) m_indexManager;
+  /**
+   * Runs the test suite against an {@link IEmbergraphFederation} or a {@link Journal}. The
+   * federation must already be up and running. An embedded {@link NanoSparqlServer} instance will
+   * be created for each test run. Each test will run against a distinct KB instance within a unique
+   * embergraph namespace on the same backing {@link IIndexManager}.
+   *
+   * <p>When run for CI, this can be executed as:
+   *
+   * <pre>
+   * ... -Djava.security.policy=policy.all TestNanoSparqlServerWithProxyIndexManager triples /nas/embergraph/benchmark/config/embergraphStandalone.config
+   * </pre>
+   *
+   * @param args <code>
+   * (testMode) (propertyFile|configFile)
+   * </code> where propertyFile is the configuration file for a {@link Journal}. <br>
+   *     where configFile is the configuration file for an {@link IEmbergraphFederation}.<br>
+   *     where <i>triples</i> or <i>sids</i> or <i>quads</i> is the database mode.</br> where
+   *     <i>tm</i> indicates that truth maintenance should be enabled (only valid with triples or
+   *     sids).
+   */
+  public static void main(final String[] args) throws Exception {
 
-	}
-    
-    @Override
-	public Properties getProperties() {
-
-//    	System.err.println("testMode="+testMode);
-    	
-	    final Properties properties = new Properties();
-
-		switch (testMode) {
-		case quads:
-			properties.setProperty(AbstractTripleStore.Options.QUADS_MODE,
-					"true");
-			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
-					"false");
-			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-					NoAxioms.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.VOCABULARY_CLASS,
-					NoVocabulary.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
-			break;
-		case triples:
-			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
-					"false");
-			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-					NoAxioms.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.VOCABULARY_CLASS,
-					NoVocabulary.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
-			break;
-		case sids:
-			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
-					"false");
-			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-					NoAxioms.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.VOCABULARY_CLASS,
-					NoVocabulary.class.getName());
-			properties.setProperty(
-					AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "true");
-			break;
-		default:
-			fail("Unknown mode: " + testMode);
-		}
-		// if (false/* triples w/ truth maintenance */) {
-		// properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,
-		// "false");
-		// }
-		// if (false/* sids w/ truth maintenance */) {
-		// properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,
-		// "true");
-		// }
-
-		return properties;
-	}
-
-    /**
-     * Open the {@link IIndexManager} identified by the property file.
-     * 
-     * @param propertyFile
-     *            The property file (for a standalone embergraph instance) or the
-     *            jini configuration file (for a embergraph federation). The file
-     *            must end with either ".properties" or ".config".
-     *            
-     * @return The {@link IIndexManager}.
-     */
-    static private IIndexManager openIndexManager(final String propertyFile) {
-
-        final File file = new File(propertyFile);
-
-        if (!file.exists()) {
-
-            throw new RuntimeException("Could not find file: " + file);
-
-        }
-
-        boolean isJini = false;
-        if (propertyFile.endsWith(".config")) {
-            // scale-out.
-            isJini = true;
-        } else if (propertyFile.endsWith(".properties")) {
-            // local journal.
-            isJini = false;
-        } else {
-            /*
-             * Note: This is a hack, but we are recognizing the jini
-             * configuration file with a .config extension and the journal
-             * properties file with a .properties extension.
-             */
-            throw new RuntimeException(
-                    "File must have '.config' or '.properties' extension: "
-                            + file);
-        }
-
-        final IIndexManager indexManager;
-        try {
-
-            if (isJini) {
-
-                /*
-                 * A embergraph federation.
-                 */
-
-				@SuppressWarnings("rawtypes")
-				final AbstractScaleOutClient<?> jiniClient = ScaleOutClientFactory
-						.getJiniClient(new String[] { propertyFile });
-
-                indexManager = jiniClient.connect();
-
-            } else {
-
-                /*
-                 * Note: we only need to specify the FILE when re-opening a
-                 * journal containing a pre-existing KB.
-                 */
-                final Properties properties = new Properties();
-                {
-                    // Read the properties from the file.
-                    final InputStream is = new BufferedInputStream(
-                            new FileInputStream(propertyFile));
-                    try {
-                        properties.load(is);
-                    } finally {
-                        is.close();
-                    }
-                    if (System.getProperty(EmbergraphSail.Options.FILE) != null) {
-                        // Override/set from the environment.
-                        properties.setProperty(EmbergraphSail.Options.FILE, System
-                                .getProperty(EmbergraphSail.Options.FILE));
-                    }
-					if (properties
-							.getProperty(org.embergraph.journal.Options.FILE) == null) {
-						// Run against a transient journal if no file was
-						// specified.
-						properties.setProperty(
-								org.embergraph.journal.Options.BUFFER_MODE,
-								BufferMode.Transient.toString());
-						properties.setProperty(
-								org.embergraph.journal.Options.INITIAL_EXTENT, ""
-										+ (Bytes.megabyte32 * 1));
-					}
-
-                }
-
-                indexManager = new Journal(properties);
-
-            }
-
-        } catch (Exception ex) {
-
-            throw new RuntimeException(ex);
-
-        }
-
-        return indexManager;
-        
+    if (args.length < 2) {
+      System.err.println("(triples|sids|quads) (propertyFile|configFile) (tm)?");
+      System.exit(1);
     }
 
-	/**
-	 * Runs the test suite against an {@link IEmbergraphFederation} or a
-	 * {@link Journal}. The federation must already be up and running. An
-	 * embedded {@link NanoSparqlServer} instance will be created for each test
-	 * run. Each test will run against a distinct KB instance within a unique
-	 * embergraph namespace on the same backing {@link IIndexManager}.
-	 * <p>
-	 * When run for CI, this can be executed as:
-	 * <pre>
-	 * ... -Djava.security.policy=policy.all TestNanoSparqlServerWithProxyIndexManager triples /nas/embergraph/benchmark/config/embergraphStandalone.config
-	 * </pre>
-	 * 
-	 * @param args
-	 *            <code>
-	 * (testMode) (propertyFile|configFile)
-	 * </code>
-	 * 
-	 *            where propertyFile is the configuration file for a
-	 *            {@link Journal}. <br/>
-	 *            where configFile is the configuration file for an
-	 *            {@link IEmbergraphFederation}.<br/>
-	 *            where <i>triples</i> or <i>sids</i> or <i>quads</i> is the
-	 *            database mode.</br> where <i>tm</i> indicates that truth
-	 *            maintenance should be enabled (only valid with triples or
-	 *            sids).
-	 */
-    public static void main(final String[] args) throws Exception {
+    final TestMode testMode = TestMode.valueOf(args[0]);
 
-		if (args.length < 2) {
-			System.err
-					.println("(triples|sids|quads) (propertyFile|configFile) (tm)?");
-			System.exit(1);
-		}
+    //		if (testMode != TestMode.triples)
+    //			fail("Unsupported test mode: " + testMode);
 
-		final TestMode testMode = TestMode.valueOf(args[0]);
+    final File propertyFile = new File(args[1]);
 
-//		if (testMode != TestMode.triples)
-//			fail("Unsupported test mode: " + testMode);
-		
-		final File propertyFile = new File(args[1]);
+    if (!propertyFile.exists()) fail("No such file: " + propertyFile);
 
-		if (!propertyFile.exists())
-			fail("No such file: " + propertyFile);
+    // Setup test result.
+    final TestResult result = new TestResult();
 
-    	// Setup test result.
-    	final TestResult result = new TestResult();
-    	
-    	// Setup listener, which will write the result on System.out
-    	result.addListener(new ResultPrinter(System.out));
-    	
-    	result.addListener(new TestListener() {
-			
-    		@Override
-			public void startTest(Test arg0) {
-				log.info(arg0);
-			}
-			
-    		@Override
-			public void endTest(Test arg0) {
-				log.info(arg0);
-			}
-			
-    		@Override
-			public void addFailure(Test arg0, AssertionFailedError arg1) {
-				log.error(arg0,arg1);
-			}
-			
-    		@Override
-			public void addError(Test arg0, Throwable arg1) {
-				log.error(arg0,arg1);
-			}
-		});
-    	
-    	// Open Journal / Connect to the configured federation.
-		final IIndexManager indexManager = openIndexManager(propertyFile
-				.getAbsolutePath());
+    // Setup listener, which will write the result on System.out
+    result.addListener(new ResultPrinter(System.out));
 
-        try {
+    result.addListener(
+        new TestListener() {
 
-        	// Setup test suite
-			final Test test = TestNanoSparqlServerWithProxyIndexManager2.suite(
-					indexManager, testMode);
+          @Override
+          public void startTest(Test arg0) {
+            log.info(arg0);
+          }
 
-        	// Run the test suite.
-        	test.run(result);
-        	
-        } finally {
+          @Override
+          public void endTest(Test arg0) {
+            log.info(arg0);
+          }
 
-        	if (indexManager instanceof AbstractDistributedFederation<?>) {
-				// disconnect
-				((AbstractDistributedFederation<?>) indexManager).shutdownNow();
-			} else {
-				// destroy journal.
-				((Journal) indexManager).destroy();
-			}
+          @Override
+          public void addFailure(Test arg0, AssertionFailedError arg1) {
+            log.error(arg0, arg1);
+          }
 
-        }
+          @Override
+          public void addError(Test arg0, Throwable arg1) {
+            log.error(arg0, arg1);
+          }
+        });
 
-		final String msg = "nerrors=" + result.errorCount() + ", nfailures="
-				+ result.failureCount() + ", nrun=" + result.runCount();
-        
-		if (result.errorCount() > 0 || result.failureCount() > 0) {
+    // Open Journal / Connect to the configured federation.
+    final IIndexManager indexManager = openIndexManager(propertyFile.getAbsolutePath());
 
-			// At least one test failed.
-			fail(msg);
+    try {
 
-		}
+      // Setup test suite
+      final Test test = TestNanoSparqlServerWithProxyIndexManager2.suite(indexManager, testMode);
 
-        // All green.
-		System.out.println(msg);
-        
+      // Run the test suite.
+      test.run(result);
+
+    } finally {
+
+      if (indexManager instanceof AbstractDistributedFederation<?>) {
+        // disconnect
+        ((AbstractDistributedFederation<?>) indexManager).shutdownNow();
+      } else {
+        // destroy journal.
+        ((Journal) indexManager).destroy();
+      }
     }
-    
+
+    final String msg =
+        "nerrors="
+            + result.errorCount()
+            + ", nfailures="
+            + result.failureCount()
+            + ", nrun="
+            + result.runCount();
+
+    if (result.errorCount() > 0 || result.failureCount() > 0) {
+
+      // At least one test failed.
+      fail(msg);
+    }
+
+    // All green.
+    System.out.println(msg);
+  }
 }

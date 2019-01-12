@@ -18,82 +18,63 @@ package org.embergraph.ganglia;
 import java.io.Serializable;
 import java.util.Comparator;
 
-/**
- * Orders {@link IHostReport}s. 
- */
-public class HostReportComparator implements Comparator<IHostReport>,
-        Serializable {
+/** Orders {@link IHostReport}s. */
+public class HostReportComparator implements Comparator<IHostReport>, Serializable {
 
-	/**
-     * 
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  private final String metricName;
+  private final boolean asc;
+
+  /**
+   * @param metricName The name of the metric which is used to impose an order on the {@link
+   *     IHostReport}s.
+   * @param asc <code>true</code> for an ascending sort and <code>false</code> for a descending
+   *     sort.
+   */
+  public HostReportComparator(final String metricName, final boolean asc) {
+
+    if (metricName == null) throw new IllegalArgumentException();
+
+    this.metricName = metricName;
+
+    this.asc = asc;
+  }
+
+  @Override
+  public int compare(final IHostReport o1, final IHostReport o2) {
+
+    final int ret = comp(o1, o2);
+
+    if (asc) return ret;
+
+    return -ret;
+  }
+
+  private int comp(final IHostReport o1, final IHostReport o2) {
+
+    final IGangliaMetricMessage m1 = o1.getMetrics().get(metricName);
+
+    final IGangliaMetricMessage m2 = o2.getMetrics().get(metricName);
+
+    if (m1 == null && m2 == null) return 0;
+    else if (m1 == null) return -1;
+    else if (m2 == null) return -1;
+
+    final double d1 = Double.parseDouble(m1.getStringValue());
+
+    final double d2 = Double.parseDouble(m2.getStringValue());
+
+    if (d1 < d2) return -1;
+    else if (d2 > d1) return 1;
+
+    /*
+     * Order by host name in case of a tie on the metric. This makes the
+     * results more stable. (We could also round the metric a little to
+     * improve stability. But that can be done in a custom comparator.)
      */
-    private static final long serialVersionUID = 1L;
-    
-    private final String metricName;
-	private final boolean asc;
 
-	/**
-	 * 
-	 * @param metricName
-	 *            The name of the metric which is used to impose an order on
-	 *            the {@link IHostReport}s.
-	 * @param asc
-	 *            <code>true</code> for an ascending sort and
-	 *            <code>false</code> for a descending sort.
-	 */
-	public HostReportComparator(final String metricName,final boolean asc) {
-
-		if (metricName == null)
-			throw new IllegalArgumentException();
-
-		this.metricName = metricName;
-		
-		this.asc = asc;
-
-	}
-
-	@Override
-	public int compare(final IHostReport o1, final IHostReport o2) {
-
-		final int ret = comp(o1, o2);
-
-		if (asc)
-			return ret;
-
-		return -ret;
-
-	}
-
-	private int comp(final IHostReport o1, final IHostReport o2) {
-
-		final IGangliaMetricMessage m1 = o1.getMetrics().get(metricName);
-
-		final IGangliaMetricMessage m2 = o2.getMetrics().get(metricName);
-
-		if (m1 == null && m2 == null)
-			return 0;
-		else if (m1 == null)
-			return -1;
-		else if (m2 == null)
-			return -1;
-
-		final double d1 = Double.parseDouble(m1.getStringValue());
-
-		final double d2 = Double.parseDouble(m2.getStringValue());
-
-		if (d1 < d2)
-			return -1;
-		else if (d2 > d1)
-			return 1;
-		
-		/*
-		 * Order by host name in case of a tie on the metric. This makes the
-		 * results more stable. (We could also round the metric a little to
-		 * improve stability. But that can be done in a custom comparator.)
-		 */
-	
-		return o1.getHostName().compareTo(o2.getHostName());
-
-	}
-
+    return o1.getHostName().compareTo(o2.getHostName());
+  }
 }

@@ -23,52 +23,42 @@ package org.embergraph.rawstore;
 
 /**
  * Test suite for {@link SimpleMemoryRawStore}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSimpleMemoryRawStore extends AbstractRawStoreTestCase {
 
-    /**
-     * 
-     */
-    public TestSimpleMemoryRawStore() {
+  /** */
+  public TestSimpleMemoryRawStore() {}
+
+  /** @param name */
+  public TestSimpleMemoryRawStore(String name) {
+    super(name);
+  }
+
+  protected IRawStore getStore() {
+
+    return new SimpleMemoryRawStore();
+  }
+
+  public void test_ctor() {
+
+    new SimpleMemoryRawStore();
+
+    new SimpleMemoryRawStore(0);
+
+    new SimpleMemoryRawStore(10);
+
+    try {
+
+      new SimpleMemoryRawStore(-1);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
-
-    /**
-     * @param name
-     */
-    public TestSimpleMemoryRawStore(String name) {
-        super(name);
-    }
-
-    protected IRawStore getStore() {
-        
-        return new SimpleMemoryRawStore();
-
-    }
-    
-    public void test_ctor() {
-        
-        new SimpleMemoryRawStore();
-
-        new SimpleMemoryRawStore(0);
-        
-        new SimpleMemoryRawStore(10);
-        
-        try {
-
-            new SimpleMemoryRawStore(-1);
-            
-            fail("Expecting: "+IllegalArgumentException.class);
-                
-        } catch(IllegalArgumentException ex) {
-            
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-            
-        }
-        
-    }
-
+  }
 }

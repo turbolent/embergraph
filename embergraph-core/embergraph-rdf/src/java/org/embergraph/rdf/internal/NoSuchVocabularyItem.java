@@ -21,31 +21,24 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
+import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
-import org.embergraph.rdf.vocab.Vocabulary;
-
 /**
- * An exception thrown when a request is made for a {@link URI} which was not
- * declared in the {@link Vocabulary}.
- * 
+ * An exception thrown when a request is made for a {@link URI} which was not declared in the {@link
+ * Vocabulary}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NoSuchVocabularyItem extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param message
-     */
-    public NoSuchVocabularyItem(final String message) {
-        
-        super(message);
-        
-    }
+  /** @param message */
+  public NoSuchVocabularyItem(final String message) {
 
+    super(message);
+  }
 }

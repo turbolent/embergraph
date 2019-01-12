@@ -5,231 +5,191 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Class buffers up to a block of data at a time and flushes blocks using an
- * atomic append operation on the identifier file version.
- * 
- * @todo this would benefit from asynchronous write-behind of the last block
- *       so that caller's do not wait for the RPC that writes the block onto
- *       the data index. use a blocking queue of buffers to be written so
- *       that the caller can not get far ahead of the database. a queue
- *       capacity of 1 or 2 should be sufficient.
- * 
+ * Class buffers up to a block of data at a time and flushes blocks using an atomic append operation
+ * on the identifier file version.
+ *
+ * @todo this would benefit from asynchronous write-behind of the last block so that caller's do not
+ *     wait for the RPC that writes the block onto the data index. use a blocking queue of buffers
+ *     to be written so that the caller can not get far ahead of the database. a queue capacity of 1
+ *     or 2 should be sufficient.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class FileVersionOutputStream extends OutputStream {
 
-    protected final EmbergraphFileSystem repo;
-    protected final String id;
-    protected final int version;
-    
-    /**
-     * The file identifier.
-     */
-    public String getId() {
-        
-        return id;
-        
+  protected final EmbergraphFileSystem repo;
+  protected final String id;
+  protected final int version;
+
+  /** The file identifier. */
+  public String getId() {
+
+    return id;
+  }
+
+  /** The file version identifer. */
+  public int getVersion() {
+
+    return version;
+  }
+
+  /** The buffer in which the current block is being accumulated. */
+  private final byte[] buffer;
+
+  /** The index of the next byte in {@link #buffer} on which a byte would be written. */
+  private int len = 0;
+
+  /** #of bytes written onto this output stream. */
+  private long nwritten;
+
+  /**
+   * #of bytes written onto this output stream.
+   *
+   * @todo handle overflow of long - leave counter at {@link Long#MAX_VALUE}.
+   */
+  public long getByteCount() {
+
+    return nwritten;
+  }
+
+  /** #of blocks written onto the file version. */
+  private long nblocks;
+
+  /** #of blocks written onto the file version. */
+  public long getBlockCount() {
+
+    return nblocks;
+  }
+
+  /**
+   * Create an output stream that will atomically append blocks of data to the specified file
+   * version.
+   *
+   * @param id The file identifier.
+   * @param version The version identifier.
+   */
+  public FileVersionOutputStream(EmbergraphFileSystem repo, String id, int version) {
+
+    if (repo == null) throw new IllegalArgumentException();
+    if (id == null) throw new IllegalArgumentException();
+
+    this.repo = repo;
+
+    this.id = id;
+
+    this.version = version;
+
+    this.buffer = new byte[repo.getBlockSize()];
+  }
+
+  /**
+   * Buffers the byte. If the buffer would overflow then it is flushed.
+   *
+   * @throws IOException
+   */
+  public void write(int b) throws IOException {
+
+    if (len == buffer.length) {
+
+      // buffer would overflow.
+
+      flush();
     }
 
-    /**
-     * The file version identifer.
-     */
-    public int getVersion() {
+    buffer[len++] = (byte) (b & 0xff);
 
-        return version;
-        
+    nwritten++;
+  }
+
+  /**
+   * If there is data data accumulated in the buffer then it is written on the file version using an
+   * atomic append (empty buffers are NOT flushed).
+   *
+   * @throws IOException
+   */
+  public void flush() throws IOException {
+
+    if (len > 0) {
+
+      EmbergraphFileSystem.log.info(
+          "Flushing buffer: id=" + id + ", version=" + version + ", len=" + len);
+
+      repo.appendBlock(id, version, buffer, 0, len);
+
+      len = 0;
+
+      nblocks++;
     }
+  }
 
-    /**
-     * The buffer in which the current block is being accumulated.
-     */
-    private final byte[] buffer;
+  /**
+   * Flushes the buffer.
+   *
+   * @throws IOException
+   */
+  public void close() throws IOException {
 
-    /**
-     * The index of the next byte in {@link #buffer} on which a byte would be
-     * written.
-     */
-    private int len = 0;
+    flush();
+  }
 
-    /**
-     * #of bytes written onto this output stream.
-     */
-    private long nwritten;
-    
-    /**
-     * #of bytes written onto this output stream.
-     * 
-     * @todo handle overflow of long - leave counter at {@link Long#MAX_VALUE}.
-     */
-    public long getByteCount() {
-        
-        return nwritten;
-        
-    }
+  /**
+   * Consumes the input stream, writing blocks onto the file version. The output stream is NOT
+   * flushed.
+   *
+   * @param is The input stream (closed iff it is fully consumed).
+   * @return The #of bytes copied from the input stream.
+   * @throws IOException
+   */
+  public long copyStream(InputStream is) throws IOException {
 
-    /**
-     * #of blocks written onto the file version.
-     */
-    private long nblocks;
-    
-    /**
-     * #of blocks written onto the file version.
-     */
-    public long getBlockCount() {
-       
-        return nblocks;
-        
-    }
-    
-    /**
-     * Create an output stream that will atomically append blocks of data to
-     * the specified file version.
-     * 
-     * @param id
-     *            The file identifier.
-     * @param version
-     *            The version identifier.
-     */
-    public FileVersionOutputStream(EmbergraphFileSystem repo, String id, int version) {
-        
-        if (repo == null)
-            throw new IllegalArgumentException();
-        if (id == null)
-            throw new IllegalArgumentException();
-        
-        this.repo = repo;
-        
-        this.id = id;
-        
-        this.version = version;
+    long ncopied = 0L;
 
-        this.buffer = new byte[repo.getBlockSize()];
-        
-    }
+    while (true) {
 
-    /**
-     * Buffers the byte. If the buffer would overflow then it is flushed.
-     * 
-     * @throws IOException
-     */
-    public void write(int b) throws IOException {
+      if (this.len == buffer.length) {
 
-        if (len == buffer.length) {
+        // flush if the buffer would overflow.
 
-            // buffer would overflow.
-            
-            flush();
-            
-        }
-        
-        buffer[len++] = (byte) (b & 0xff);
-        
-        nwritten++;
-        
-    }
-
-    /**
-     * If there is data data accumulated in the buffer then it is written on
-     * the file version using an atomic append (empty buffers are NOT
-     * flushed).
-     * 
-     * @throws IOException
-     */
-    public void flush() throws IOException {
-        
-        if (len > 0) {
-
-            EmbergraphFileSystem.log.info("Flushing buffer: id="+id+", version="+version+", len="+len);
-            
-            repo.appendBlock(id, version, buffer, 0, len);
-
-            len = 0;
-            
-            nblocks++;
-            
-        }
-        
-    }
-    
-    /**
-     * Flushes the buffer.
-     * 
-     * @throws IOException
-     */
-    public void close() throws IOException {
-       
         flush();
-        
-    }
+      }
 
-    /**
-     * Consumes the input stream, writing blocks onto the file version. The
-     * output stream is NOT flushed.
-     * 
-     * @param is
-     *            The input stream (closed iff it is fully consumed).
-     * 
-     * @return The #of bytes copied from the input stream.
-     * 
-     * @throws IOException
-     */
-    public long copyStream(InputStream is) throws IOException {
+      // next byte to write in the buffer.
+      final int off = this.len;
 
-        long ncopied = 0L;
+      // #of bytes remaining in the buffer.
+      final int remainder = this.buffer.length - off;
 
-        while (true) {
+      // read into the buffer.
+      final int nread = is.read(buffer, off, remainder);
 
-            if (this.len == buffer.length) {
+      if (nread == -1) {
 
-                // flush if the buffer would overflow.
-                
-                flush();
-                
-            }
-            
-            // next byte to write in the buffer.
-            final int off = this.len;
+        // the input stream is exhausted.
 
-            // #of bytes remaining in the buffer.
-            final int remainder = this.buffer.length - off;
+        EmbergraphFileSystem.log.info(
+            "Copied " + ncopied + " bytes: id=" + id + ", version=" + version);
 
-            // read into the buffer.
-            final int nread = is.read(buffer, off, remainder);
+        try {
 
-            if (nread == -1) {
+          is.close();
 
-                // the input stream is exhausted.
-                
-                EmbergraphFileSystem.log.info("Copied " + ncopied + " bytes: id=" + id
-                        + ", version=" + version);
+        } catch (IOException ex) {
 
-                try {
-
-                    is.close();
-                    
-                } catch (IOException ex) {
-                    
-                    EmbergraphFileSystem.log.warn("Problem closing input stream: id=" + id
-                            + ", version=" + version, ex);
-                    
-                }
-
-                return ncopied;
-
-            }
-
-            // update the index of the next byte to write in the buffer.
-            this.len = off + nread;
-
-            // update #of bytes copied.
-            ncopied += nread;
-
-            // update #of bytes written on this output stream.
-            nwritten += nread;
-
+          EmbergraphFileSystem.log.warn(
+              "Problem closing input stream: id=" + id + ", version=" + version, ex);
         }
 
+        return ncopied;
+      }
+
+      // update the index of the next byte to write in the buffer.
+      this.len = off + nread;
+
+      // update #of bytes copied.
+      ncopied += nread;
+
+      // update #of bytes written on this output stream.
+      nwritten += nread;
     }
-    
+  }
 }

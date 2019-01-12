@@ -19,16 +19,15 @@ package org.embergraph.ha.msg;
 
 /**
  * Interface for a response from a failover read on a remote service.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAReadResponse extends IHAMessage {
 
-    /**
-     * The record read from the remote service.
-     * 
-     * @return The record and never <code>null</code>.
-     */
-    byte[] getData();
-    
+  /**
+   * The record read from the remote service.
+   *
+   * @return The record and never <code>null</code>.
+   */
+  byte[] getData();
 }

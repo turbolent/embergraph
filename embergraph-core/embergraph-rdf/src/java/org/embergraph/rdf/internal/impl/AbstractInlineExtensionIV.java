@@ -28,33 +28,30 @@ import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Abstract base class for fully inline {@link IExtensionIV}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractInlineExtensionIV<V extends EmbergraphValue, T>
-        extends AbstractInlineIV<V, T> implements IExtensionIV {
+public abstract class AbstractInlineExtensionIV<V extends EmbergraphValue, T>
+    extends AbstractInlineIV<V, T> implements IExtensionIV {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param vte
-     * @param dte
-     */
-    public AbstractInlineExtensionIV(VTE vte, DTE dte) {
-        super(vte, dte);
-    }
+  /**
+   * @param vte
+   * @param dte
+   */
+  public AbstractInlineExtensionIV(VTE vte, DTE dte) {
+    super(vte, dte);
+  }
 
-    /**
-     * @param vte
-     * @param extension
-     * @param dte
-     */
-    public AbstractInlineExtensionIV(VTE vte, boolean extension, DTE dte) {
-        super(vte, extension, dte);
-    }
-
+  /**
+   * @param vte
+   * @param extension
+   * @param dte
+   */
+  public AbstractInlineExtensionIV(VTE vte, boolean extension, DTE dte) {
+    super(vte, extension, dte);
+  }
 }

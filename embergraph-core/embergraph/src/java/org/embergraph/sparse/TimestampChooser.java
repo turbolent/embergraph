@@ -33,101 +33,89 @@ import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.util.MillisecondTimestampFactory;
 
 /**
- * Utility class for choosing timestamps for the {@link SparseRowStore} on the
- * server.
- * 
+ * Utility class for choosing timestamps for the {@link SparseRowStore} on the server.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TimestampChooser implements IRowStoreConstants {
 
-    /**
-     * Choose the timestamp for {@link TPV} tuples to written on the sparse row
-     * store.
-     * <p>
-     * Note: Revisions written with the same timestamp as a pre-existing column
-     * value will overwrite the existing column value rather than causing new
-     * revisions with their own distinct timestamp to be written. There is
-     * therefore a choice for "auto" vs "auto-unique" for timestamps.
-     * <p>
-     * Note: Timestamps generated locally on the server will be consistent
-     * within a row, and all revisions of column values for the same row will
-     * always be in the same index partition and hence on the same server. This
-     * means that we can use locally assigned timestamp as unique timestamps.
-     * However, time could go backwards if there is a failover to another server
-     * for the partition and the other server has a different clock time. This
-     * is resolved by choosing a timestamp assigned by the global
-     * {@link ITimestampService}.
-     * 
-     * @param timestamp
-     *            When <i>timestamp</> is {@link IRowStoreConstants#AUTO_TIMESTAMP}
-     *            the timestamp is the local system time. When <i>timestamp</i>
-     *            is {@link IRowStoreConstants#AUTO_TIMESTAMP_UNIQUE} a federation
-     *            wide unique timestamp is assigned by the
-     *            {@link ITimestampService}. Otherwise the caller's
-     *            <i>timestamp</i> is returned.
-     */
-    static public long chooseTimestamp(final IIndex ndx, final long timestamp) {
+  /**
+   * Choose the timestamp for {@link TPV} tuples to written on the sparse row store.
+   *
+   * <p>Note: Revisions written with the same timestamp as a pre-existing column value will
+   * overwrite the existing column value rather than causing new revisions with their own distinct
+   * timestamp to be written. There is therefore a choice for "auto" vs "auto-unique" for
+   * timestamps.
+   *
+   * <p>Note: Timestamps generated locally on the server will be consistent within a row, and all
+   * revisions of column values for the same row will always be in the same index partition and
+   * hence on the same server. This means that we can use locally assigned timestamp as unique
+   * timestamps. However, time could go backwards if there is a failover to another server for the
+   * partition and the other server has a different clock time. This is resolved by choosing a
+   * timestamp assigned by the global {@link ITimestampService}.
+   *
+   * @param timestamp When <i>timestamp</> is {@link IRowStoreConstants#AUTO_TIMESTAMP} the
+   *     timestamp is the local system time. When <i>timestamp</i> is {@link
+   *     IRowStoreConstants#AUTO_TIMESTAMP_UNIQUE} a federation wide unique timestamp is assigned by
+   *     the {@link ITimestampService}. Otherwise the caller's <i>timestamp</i> is returned.
+   */
+  public static long chooseTimestamp(final IIndex ndx, final long timestamp) {
 
-        if (timestamp == AUTO_TIMESTAMP) {
+    if (timestamp == AUTO_TIMESTAMP) {
 
-            return System.currentTimeMillis();
+      return System.currentTimeMillis();
 
-        } else if (timestamp == AUTO_TIMESTAMP_UNIQUE) {
+    } else if (timestamp == AUTO_TIMESTAMP_UNIQUE) {
 
-            /*
-             * The BTree that is absorbing writes.
-             */
-            final BTree mutableBTree = ((ILocalBTreeView) ndx)
-                    .getMutableBTree();
+      /*
+       * The BTree that is absorbing writes.
+       */
+      final BTree mutableBTree = ((ILocalBTreeView) ndx).getMutableBTree();
 
-            if(mutableBTree.getStore() instanceof TemporaryRawStore) {
-                
-                /*
-                 * Use a unique timestamp for the local machine since a
-                 * temporary store is not visible outside of that context.
-                 */
+      if (mutableBTree.getStore() instanceof TemporaryRawStore) {
 
-                return MillisecondTimestampFactory.nextMillis();
-                
-            }
+        /*
+         * Use a unique timestamp for the local machine since a
+         * temporary store is not visible outside of that context.
+         */
 
-            /*
-             * The backing store will be some kind of IJournal - a Journal, a
-             * ManagedJournal, an IsolatedActionJournal, etc.
-             */
+        return MillisecondTimestampFactory.nextMillis();
+      }
 
-            final IJournal journal = (IJournal) mutableBTree.getStore();
+      /*
+       * The backing store will be some kind of IJournal - a Journal, a
+       * ManagedJournal, an IsolatedActionJournal, etc.
+       */
 
-            /*
-             * This will be locally unique for a Journal and federation-wide
-             * unique for a ManagedJournal. In the former case the timestamp is
-             * assigned locally. In the latter case it will use a robust method
-             * to discover the timestamp service and obtain a federation-wide
-             * unique timestamp.
-             */
+      final IJournal journal = (IJournal) mutableBTree.getStore();
 
-//            try {
+      /*
+       * This will be locally unique for a Journal and federation-wide
+       * unique for a ManagedJournal. In the former case the timestamp is
+       * assigned locally. In the latter case it will use a robust method
+       * to discover the timestamp service and obtain a federation-wide
+       * unique timestamp.
+       */
 
-                return journal.getLocalTransactionManager().nextTimestamp();
-                
-//            } catch(IOException ex) {
-//                
-//                /*
-//                 * Note: Declared for RMI interoperability.
-//                 */
-//                
-//                throw new RuntimeException(ex);
-//                
-//            }
-            
-        } else {
-    
-            // return the caller's value.
-            return timestamp;
-            
-        }
+      //            try {
 
+      return journal.getLocalTransactionManager().nextTimestamp();
+
+      //            } catch(IOException ex) {
+      //
+      //                /*
+      //                 * Note: Declared for RMI interoperability.
+      //                 */
+      //
+      //                throw new RuntimeException(ex);
+      //
+      //            }
+
+    } else {
+
+      // return the caller's value.
+      return timestamp;
     }
-    
+  }
 }

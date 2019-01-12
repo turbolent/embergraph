@@ -21,65 +21,52 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.ganglia;
 
-import org.embergraph.counters.ganglia.HostMetricsCollector;
-
 import junit.framework.TestCase;
 
 /**
  * Unit tests for {@link HostMetricsCollector}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestHostMetricsCollector extends TestCase {
 
-    public TestHostMetricsCollector() {
+  public TestHostMetricsCollector() {}
 
-    }
-    
-    public TestHostMetricsCollector(final String name) {
-        super(name);
-    }
+  public TestHostMetricsCollector(final String name) {
+    super(name);
+  }
 
-    /**
-     * Unit test verifies that the filter will only pass the per-host metrics.
-     */
-    public void test_filter_host_01() {
+  /** Unit test verifies that the filter will only pass the per-host metrics. */
+  public void test_filter_host_01() {
 
-        doMatchTest("/hostname/CPU/Foo", true);
-    }
+    doMatchTest("/hostname/CPU/Foo", true);
+  }
 
-    public void test_filter_host_02() {
+  public void test_filter_host_02() {
 
-        doMatchTest("/hostname/Memory/Bar", true);
+    doMatchTest("/hostname/Memory/Bar", true);
+  }
 
-    }
+  public void test_filter_host_03() {
 
-    public void test_filter_host_03() {
+    doMatchTest("/192.168.1.10/CPU/% IO Wait", true);
+  }
 
-        doMatchTest("/192.168.1.10/CPU/% IO Wait", true);
+  public void test_filter_host_04() {
 
-    }
+    doMatchTest("/192.168.1.10/PhysicalDisk/Bytes Read Per Second", true);
+  }
 
-    public void test_filter_host_04() {
+  public void test_filter_service_01() {
 
-        doMatchTest("/192.168.1.10/PhysicalDisk/Bytes Read Per Second", true);
+    doMatchTest("/hostname/service/Goo", false);
+  }
 
-    }
+  private void doMatchTest(final String input, final boolean expected) {
 
-    public void test_filter_service_01() {
+    final boolean actual = HostMetricsCollector.filter.matcher(input).matches();
 
-        doMatchTest("/hostname/service/Goo", false);
-
-    }
-
-    private void doMatchTest(final String input, final boolean expected) {
-
-        final boolean actual = HostMetricsCollector.filter.matcher(input)
-                .matches();
-
-        assertEquals("For input=[" + input + "]", expected, actual);
-
-    }
-
+    assertEquals("For input=[" + input + "]", expected, actual);
+  }
 }

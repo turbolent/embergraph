@@ -24,16 +24,14 @@ import org.embergraph.bop.join.HashJoinAnnotations;
 
 /**
  * Annotations for DISTINCT operators.
- * 
+ *
  * @author thompsonbry@users.sourceforge.net
  */
 public interface DistinctAnnotations {
 
-	/**
-	 * The variables on which the distinct constraint will be imposed.
-	 * Binding sets with distinct values for the specified variables will be
-	 * passed on.
-	 */
-	String VARIABLES = HashJoinAnnotations.JOIN_VARS;
-
+  /**
+   * The variables on which the distinct constraint will be imposed. Binding sets with distinct
+   * values for the specified variables will be passed on.
+   */
+  String VARIABLES = HashJoinAnnotations.JOIN_VARS;
 }

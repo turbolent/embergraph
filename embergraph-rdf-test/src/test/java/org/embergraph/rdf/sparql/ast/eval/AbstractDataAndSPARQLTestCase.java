@@ -54,7 +54,12 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.io.IOException;
 import java.io.InputStream;
-
+import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
+import org.embergraph.rdf.model.StatementEnum;
+import org.embergraph.rdf.rio.StatementBuffer;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
+import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -68,177 +73,140 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
-import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
-import org.embergraph.rdf.store.AbstractTripleStore;
-
 public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluationTestCase {
 
-    public AbstractDataAndSPARQLTestCase() {
+  public AbstractDataAndSPARQLTestCase() {}
+
+  public AbstractDataAndSPARQLTestCase(final String name) {
+    super(name);
+  }
+
+  public class AbsHelper {
+
+    protected final String queryStr;
+
+    /** This is the astContainer of the last query executed. */
+    protected ASTContainer astContainer;
+
+    public AbsHelper(final String queryStr) {
+
+      this.queryStr = queryStr;
     }
 
-    public AbstractDataAndSPARQLTestCase(final String name) {
-        super(name);
+    protected AbstractTripleStore getTripleStore() {
+
+      return store;
     }
 
-	public class AbsHelper {
+    protected void compareTupleQueryResults(
+        final TupleQueryResult queryResult,
+        final TupleQueryResult expectedResult,
+        final boolean checkOrder)
+        throws QueryEvaluationException {
 
-		protected final String queryStr;
-		
-		/**
-		 * This is the astContainer of the last query executed.
-		 */
-		protected ASTContainer astContainer;
-		
-		public AbsHelper(final String queryStr) {
+      AbstractQueryEngineTestCase.compareTupleQueryResults(
+          getName(), "", store, astContainer, queryResult, expectedResult, false, checkOrder);
+    }
 
-		    this.queryStr = queryStr;
-		    
-		}
+    /**
+     * Load data from an input stream.
+     *
+     * @param is The stream (required).
+     * @param format The format (required).
+     * @param uri The baseURL (required).
+     * @return The #of triples read from the stream.
+     */
+    long loadData(final InputStream is, final RDFFormat format, final String uri) {
 
-		protected AbstractTripleStore getTripleStore() {
-		    
-		    return store;
-		    
-		}
+      final RDFParser rdfParser = RDFParserRegistry.getInstance().get(format).getParser();
 
-        protected void compareTupleQueryResults(
-                final TupleQueryResult queryResult,
-                final TupleQueryResult expectedResult, final boolean checkOrder)
-                throws QueryEvaluationException {
+      rdfParser.setValueFactory(store.getValueFactory());
 
-            AbstractQueryEngineTestCase.compareTupleQueryResults(getName(), "",
-                    store, astContainer, queryResult, expectedResult, false,
-                    checkOrder);
-            
+      rdfParser.setVerifyData(true);
+
+      rdfParser.setStopAtFirstError(true);
+
+      rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
+
+      final AddStatementHandler handler = new AddStatementHandler();
+
+      if (getTripleStore().isQuads()) {
+
+        // Set the default context.
+        handler.setContext(new URIImpl(uri));
+      }
+
+      rdfParser.setRDFHandler(handler);
+
+      /*
+       * Run the parser, which will cause statements to be inserted.
+       */
+
+      try {
+
+        rdfParser.parse(is, baseURI);
+
+        return handler.close();
+
+      } catch (Exception e) {
+
+        throw new RuntimeException(e);
+
+      } finally {
+
+        try {
+
+          is.close();
+
+        } catch (IOException e) {
+
+          throw new RuntimeException(e);
         }
+      }
+    }
 
-        /**
-         * Load data from an input stream.
-         * 
-         * @param is
-         *            The stream (required).
-         * @param format
-         *            The format (required).
-         * @param uri
-         *            The baseURL (required).
-         * @return The #of triples read from the stream.
-         */
-        long loadData(final InputStream is, final RDFFormat format,
-                final String uri) {
+    /** Helper class adds statements to the sail as they are visited by a parser. */
+    private class AddStatementHandler extends RDFHandlerBase {
 
-            final RDFParser rdfParser = RDFParserRegistry.getInstance()
-                    .get(format).getParser();
+      private final StatementBuffer<Statement> buffer;
 
-            rdfParser.setValueFactory(store.getValueFactory());
+      private Resource context = null;
 
-            rdfParser.setVerifyData(true);
+      private long n = 0L;
 
-            rdfParser.setStopAtFirstError(true);
+      public AddStatementHandler() {
 
-            rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
+        buffer = new StatementBuffer<Statement>(store, 1000 /* capacity */);
+      }
 
-            final AddStatementHandler handler = new AddStatementHandler();
+      public void setContext(final Resource context) {
 
-            if (getTripleStore().isQuads()) {
+        this.context = context;
+      }
 
-                // Set the default context.
-                handler.setContext(new URIImpl(uri));
+      @Override
+      public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
-            }
-            
-            rdfParser.setRDFHandler(handler);
-                        
-            /*
-             * Run the parser, which will cause statements to be inserted.
-             */
+        final Resource s = stmt.getSubject();
+        final URI p = stmt.getPredicate();
+        final Value o = stmt.getObject();
+        final Resource c = stmt.getContext() == null ? this.context : stmt.getContext();
 
+        //                if (log.isDebugEnabled())
+        //                    log.debug("<" + s + "," + p + "," + o + "," + c + ">");
 
-            try {
+        buffer.add(s, p, o, c, StatementEnum.Explicit);
 
-                rdfParser.parse(is, baseURI);
+        n++;
+      }
 
-                return handler.close();
+      /** @return The #of statements visited by the parser. */
+      public long close() {
 
-            } catch (Exception e) {
+        buffer.flush();
 
-                throw new RuntimeException(e);
-
-            } finally {
-
-                try {
-
-                    is.close();
-
-                } catch (IOException e) {
-
-                    throw new RuntimeException(e);
-
-                }
-
-            }
-		}
-
-        /**
-         * Helper class adds statements to the sail as they are visited by a
-         * parser.
-         */
-        private class AddStatementHandler extends RDFHandlerBase {
-
-            private final StatementBuffer<Statement> buffer;
-
-            private Resource context = null;
-            
-            private long n = 0L;
-
-            public AddStatementHandler() {
-
-                buffer = new StatementBuffer<Statement>(store, 1000/* capacity */);
-
-            }
-
-            public void setContext(final Resource context) {
-
-                this.context = context;
-                
-            }
-            
-            @Override
-            public void handleStatement(final Statement stmt)
-                    throws RDFHandlerException {
-
-                final Resource s = stmt.getSubject();
-                final URI p = stmt.getPredicate();
-                final Value o = stmt.getObject();
-                final Resource c = stmt.getContext() == null ? this.context
-                        : stmt.getContext();
-
-//                if (log.isDebugEnabled())
-//                    log.debug("<" + s + "," + p + "," + o + "," + c + ">");
-
-                buffer.add(s, p, o, c, StatementEnum.Explicit);
-
-                n++;
-
-            }
-
-            /**
-             * 
-             * @return The #of statements visited by the parser.
-             */
-            public long close() {
-
-                buffer.flush();
-
-                return n;
-
-            }
-
-        }
-
-	}
-
+        return n;
+      }
+    }
+  }
 }

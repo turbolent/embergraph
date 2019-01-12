@@ -20,32 +20,30 @@ package org.embergraph.rdf.sail;
 import java.util.Properties;
 
 /**
- * Concrete instance of {@link TestRollbacks} which overrides the properties to
- * enable full transaction support in the SAIL.
- * 
+ * Concrete instance of {@link TestRollbacks} which overrides the properties to enable full
+ * transaction support in the SAIL.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRollbacksTx extends TestRollbacks {
 
-	public TestRollbacksTx() {
-		super();
-	}
-	
-	public TestRollbacksTx(String name) {
-		super(name);
-	}
-	
-	@Override
-    public Properties getProperties() {
-        
-    	final Properties props = super.getProperties();
+  public TestRollbacksTx() {
+    super();
+  }
 
-        // transactions are ON in this version of this class.
-        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-        
-        return props;
+  public TestRollbacksTx(String name) {
+    super(name);
+  }
 
-	}
-	
+  @Override
+  public Properties getProperties() {
+
+    final Properties props = super.getProperties();
+
+    // transactions are ON in this version of this class.
+    props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+
+    return props;
+  }
 }

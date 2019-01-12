@@ -55,59 +55,49 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
-
 import org.apache.commons.io.input.ReaderInputStream;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 
 /**
  * An {@link PropertiesParser} for {@link Properties} objects in XML.
- * 
+ *
  * @author Bryan THompson
  */
 public class PropertiesXMLParser implements PropertiesParser {
 
-    /**
-     * Returns {@link PropertiesFormat#XML}.
-     */
-    public PropertiesFormat getFormat() {
+  /** Returns {@link PropertiesFormat#XML}. */
+  public PropertiesFormat getFormat() {
 
-        return PropertiesFormat.XML;
+    return PropertiesFormat.XML;
+  }
 
+  @Override
+  public Properties parse(final InputStream in) throws IOException {
+
+    final Properties p = new Properties();
+
+    p.loadFromXML(in);
+
+    return p;
+  }
+
+  @Override
+  public Properties parse(final Reader reader) throws IOException {
+
+    final InputStream in = new ReaderInputStream(reader, getFormat().getCharset());
+
+    try {
+
+      final Properties p = new Properties();
+
+      p.loadFromXML(in);
+
+      return p;
+
+    } finally {
+
+      in.close();
     }
-
-    @Override
-    public Properties parse(final InputStream in) throws IOException {
-
-        final Properties p = new Properties();
-
-        p.loadFromXML(in);
-
-        return p;
-
-    }
-
-    @Override
-    public Properties parse(final Reader reader) throws IOException {
-
-        final InputStream in = new ReaderInputStream(reader, getFormat()
-                .getCharset());
-
-        try {
-
-            final Properties p = new Properties();
-
-            p.loadFromXML(in);
-
-            return p;
-            
-        } finally {
-            
-            in.close();
-            
-        }
-
-    }
-
+  }
 }

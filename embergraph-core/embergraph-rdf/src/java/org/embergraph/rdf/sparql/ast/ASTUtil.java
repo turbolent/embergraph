@@ -25,50 +25,39 @@ import org.embergraph.bop.IVariable;
 
 /**
  * Some utility methods for AST/IV conversions.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ASTUtil {
 
-    /**
-     * Convert an {@link IVariable}[] into a {@link VarNode}[].
-     */
-    static public VarNode[] convert(final IVariable[] a) {
+  /** Convert an {@link IVariable}[] into a {@link VarNode}[]. */
+  public static VarNode[] convert(final IVariable[] a) {
 
-        if (a == null)
-            return null;
+    if (a == null) return null;
 
-        final VarNode[] b = new VarNode[a.length];
+    final VarNode[] b = new VarNode[a.length];
 
-        for (int i = 0; i < a.length; i++) {
+    for (int i = 0; i < a.length; i++) {
 
-            b[i] = new VarNode(a[i].getName());
-
-        }
-
-        return b;
-
+      b[i] = new VarNode(a[i].getName());
     }
 
-    /**
-     * Convert an {@link VarNode}[] into an {@link IVariable}[].
-     */
-    static public IVariable[] convert(final VarNode[] a) {
+    return b;
+  }
 
-        if (a == null)
-            return null;
+  /** Convert an {@link VarNode}[] into an {@link IVariable}[]. */
+  public static IVariable[] convert(final VarNode[] a) {
 
-        final IVariable[] b = new IVariable[a.length];
+    if (a == null) return null;
 
-        for (int i = 0; i < a.length; i++) {
+    final IVariable[] b = new IVariable[a.length];
 
-            b[i] = a[i].getValueExpression();
+    for (int i = 0; i < a.length; i++) {
 
-        }
-
-        return b;
-
+      b[i] = a[i].getValueExpression();
     }
 
+    return b;
+  }
 }

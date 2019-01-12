@@ -22,34 +22,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-
 /**
  * Test suite for the {@link FrontCodedRabaCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFrontCodedRabaCoderRatio2 extends AbstractFrontCodedRabaCoderTestCase {
 
-    /**
-     * 
-     */
-    public TestFrontCodedRabaCoderRatio2() {
-    }
+  /** */
+  public TestFrontCodedRabaCoderRatio2() {}
 
-    /**
-     * @param name
-     */
-    public TestFrontCodedRabaCoderRatio2(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestFrontCodedRabaCoderRatio2(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
-        
-        rabaCoder = new FrontCodedRabaCoder(2/* ratio */);
-        
-    }
+  protected void setUp() throws Exception {
 
+    super.setUp();
+
+    rabaCoder = new FrontCodedRabaCoder(2 /* ratio */);
+  }
 }

@@ -21,10 +21,7 @@ package org.embergraph.rdf.internal;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.junit.Test;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
@@ -32,130 +29,120 @@ import org.embergraph.rdf.internal.impl.literal.LiteralArrayIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
+import org.junit.Test;
 
 /**
  * Encode/decode unit tests for {@link LiteralArrayIV}.
- * 
+ *
  * @author <a href="mailto:mike@systap.com">Mike Personick</a>
  * @version $Id$
  */
 public class TestEncodeDecodeLiteralArrayIVs extends AbstractEncodeDecodeMixedIVsTest {
 
-    private static final transient Logger log = Logger.getLogger(TestEncodeDecodeLiteralArrayIVs.class);
-    
-    /**
-     * 
-     */
-    public TestEncodeDecodeLiteralArrayIVs() {
-    }
+  private static final transient Logger log =
+      Logger.getLogger(TestEncodeDecodeLiteralArrayIVs.class);
 
-    /**
-     * @param name
-     */
-    public TestEncodeDecodeLiteralArrayIVs(String name) {
-        super(name);
-    }
+  /** */
+  public TestEncodeDecodeLiteralArrayIVs() {}
 
-    /**
-     * Encode/decode unit test for {@link LiteralArrayIV}.
-     */
-    @Test
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void testRoundTripLiteralArrayIV() throws Exception {
+  /** @param name */
+  public TestEncodeDecodeLiteralArrayIVs(String name) {
+    super(name);
+  }
 
-        final List<IV<?,?>> mixed = super.prepareIVs();
-        
-        final List<LiteralArrayIV> arrays = new LinkedList<>();
-        {
-            final int n = 10;
-            InlineLiteralIV[] inlines = new InlineLiteralIV[n];
-            int i = 0;
-            for (IV iv : mixed) {
-                
-                if (!(iv instanceof InlineLiteralIV)) {
-                    continue;
-                }
-                
-                inlines[i++] = (InlineLiteralIV) iv;
-                
-                // reset
-                if (i == n) {
-                    arrays.add(new LiteralArrayIV(inlines));
-                    inlines = new InlineLiteralIV[n];
-                    i = 0;
-                }
-                
-            }
-            
-            if (i > 0) {
-                final InlineLiteralIV[] tmp = new InlineLiteralIV[i];
-                System.arraycopy(inlines, 0, tmp, 0, i);
-                arrays.add(new LiteralArrayIV(tmp));
-            }
-        }
-        
-        final AbstractLiteralIV[] ivs = arrays.toArray(new AbstractLiteralIV[arrays.size()]);
-        
-        byte vocab = 1;
+  /** Encode/decode unit test for {@link LiteralArrayIV}. */
+  @Test
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testRoundTripLiteralArrayIV() throws Exception {
 
-        final LiteralExtensionIV[] lits = new LiteralExtensionIV[ivs.length];
-        for (int i = 0; i < ivs.length; i++) {
-            lits[i] = new LiteralExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
+    final List<IV<?, ?>> mixed = super.prepareIVs();
+
+    final List<LiteralArrayIV> arrays = new LinkedList<>();
+    {
+      final int n = 10;
+      InlineLiteralIV[] inlines = new InlineLiteralIV[n];
+      int i = 0;
+      for (IV iv : mixed) {
+
+        if (!(iv instanceof InlineLiteralIV)) {
+          continue;
         }
 
-        final URIExtensionIV[] uris = new URIExtensionIV[ivs.length];
-        for (int i = 0; i < ivs.length; i++) {
-            uris[i] = new URIExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
+        inlines[i++] = (InlineLiteralIV) iv;
+
+        // reset
+        if (i == n) {
+          arrays.add(new LiteralArrayIV(inlines));
+          inlines = new InlineLiteralIV[n];
+          i = 0;
         }
-        
-        doEncodeDecodeTest(ivs);
-        doEncodeDecodeTest(lits);
-        doEncodeDecodeTest(uris);
-        
-        final LiteralArrayIV arrayOfArrays = new LiteralArrayIV(ivs);
-        doEncodeDecodeTest(new IV[] { arrayOfArrays });
+      }
 
+      if (i > 0) {
+        final InlineLiteralIV[] tmp = new InlineLiteralIV[i];
+        System.arraycopy(inlines, 0, tmp, 0, i);
+        arrays.add(new LiteralArrayIV(tmp));
+      }
     }
 
-    public void testRoundTripAsByte() {
-        
-        testRoundTripAsByte(1);
-        testRoundTripAsByte(10);
-        testRoundTripAsByte(200);
-        testRoundTripAsByte(256);
-        
-        testRoundTripAsByte(-1);
-        testRoundTripAsByte(0);
-        testRoundTripAsByte(257);
-        
-    }
-    
-    private void testRoundTripAsByte(final int i) {
-        // no need to re-test this
+    final AbstractLiteralIV[] ivs = arrays.toArray(new AbstractLiteralIV[arrays.size()]);
 
-        final IKeyBuilder keyBuilder = KeyBuilder.newInstance();
-        
-//        System.out.println(i);
-    
-        // int(1...256) --> byte(0...255)
-        final byte len = (byte) (i-1);
-        keyBuilder.append(len);
-//        System.out.println(len);
-        
-        final byte[] key = keyBuilder.getKey();
-        
-        assertEquals(1, key.length);
-        
-        // byte(0...255) --> int(1...256) 
-        final int n = ((int) key[0] & 0xFF) + 1;
-//        System.out.println(n);
-        
-        if (i >= 1 && i <= 256) {
-            assertEquals(i, n);
-        } else {
-            assertFalse(i == n);
-        }
-        
+    byte vocab = 1;
+
+    final LiteralExtensionIV[] lits = new LiteralExtensionIV[ivs.length];
+    for (int i = 0; i < ivs.length; i++) {
+      lits[i] = new LiteralExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
     }
 
+    final URIExtensionIV[] uris = new URIExtensionIV[ivs.length];
+    for (int i = 0; i < ivs.length; i++) {
+      uris[i] = new URIExtensionIV(ivs[i], new VocabURIByteIV(vocab++));
+    }
+
+    doEncodeDecodeTest(ivs);
+    doEncodeDecodeTest(lits);
+    doEncodeDecodeTest(uris);
+
+    final LiteralArrayIV arrayOfArrays = new LiteralArrayIV(ivs);
+    doEncodeDecodeTest(new IV[] {arrayOfArrays});
+  }
+
+  public void testRoundTripAsByte() {
+
+    testRoundTripAsByte(1);
+    testRoundTripAsByte(10);
+    testRoundTripAsByte(200);
+    testRoundTripAsByte(256);
+
+    testRoundTripAsByte(-1);
+    testRoundTripAsByte(0);
+    testRoundTripAsByte(257);
+  }
+
+  private void testRoundTripAsByte(final int i) {
+    // no need to re-test this
+
+    final IKeyBuilder keyBuilder = KeyBuilder.newInstance();
+
+    //        System.out.println(i);
+
+    // int(1...256) --> byte(0...255)
+    final byte len = (byte) (i - 1);
+    keyBuilder.append(len);
+    //        System.out.println(len);
+
+    final byte[] key = keyBuilder.getKey();
+
+    assertEquals(1, key.length);
+
+    // byte(0...255) --> int(1...256)
+    final int n = ((int) key[0] & 0xFF) + 1;
+    //        System.out.println(n);
+
+    if (i >= 1 && i <= 256) {
+      assertEquals(i, n);
+    } else {
+      assertFalse(i == n);
+    }
+  }
 }

@@ -24,101 +24,92 @@ import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
 import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.io.LongPacker;
 import org.embergraph.util.Bytes;
 
 /**
  * A helper class for (de-)serializing the root addresses.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @todo we could use run length encoding to write only the used roots.
  */
 public class CommitRecordSerializer {
 
-    public static final int VERSION0 = 0x0;
-    
-    public static final transient CommitRecordSerializer INSTANCE = new CommitRecordSerializer();
-    
-    public byte[] serialize(ICommitRecord commitRecord) {
+  public static final int VERSION0 = 0x0;
 
-        final long timestamp = commitRecord.getTimestamp();
+  public static final transient CommitRecordSerializer INSTANCE = new CommitRecordSerializer();
 
-        final long commitCounter = commitRecord.getCommitCounter();
+  public byte[] serialize(ICommitRecord commitRecord) {
 
-        final int n = commitRecord.getRootAddrCount();
-        
-        try {
-            
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(
-                    n * Bytes.SIZEOF_LONG);
-            
-            DataOutputStream dos = new DataOutputStream(baos);
-            
-            dos.writeInt(VERSION0);
+    final long timestamp = commitRecord.getTimestamp();
 
-            dos.writeLong(timestamp);
+    final long commitCounter = commitRecord.getCommitCounter();
 
-            dos.writeLong(commitCounter);
-            
-            LongPacker.packLong((DataOutput)dos, n);
-            
-            for(int i=0; i<n; i++) {
-  
-                dos.writeLong(commitRecord.getRootAddr(i));
-//                LongPacker.packLong(dos, commitRecord.getRootAddr(i));
-                
-            }
-            
-            return baos.toByteArray();
-            
-        } catch (IOException ex) {
+    final int n = commitRecord.getRootAddrCount();
 
-            throw new RuntimeException(ex);
+    try {
 
-        }
-        
+      ByteArrayOutputStream baos = new ByteArrayOutputStream(n * Bytes.SIZEOF_LONG);
+
+      DataOutputStream dos = new DataOutputStream(baos);
+
+      dos.writeInt(VERSION0);
+
+      dos.writeLong(timestamp);
+
+      dos.writeLong(commitCounter);
+
+      LongPacker.packLong((DataOutput) dos, n);
+
+      for (int i = 0; i < n; i++) {
+
+        dos.writeLong(commitRecord.getRootAddr(i));
+        //                LongPacker.packLong(dos, commitRecord.getRootAddr(i));
+
+      }
+
+      return baos.toByteArray();
+
+    } catch (IOException ex) {
+
+      throw new RuntimeException(ex);
     }
-    
-    public ICommitRecord deserialize(final ByteBuffer buf) {
+  }
 
-        try {
+  public ICommitRecord deserialize(final ByteBuffer buf) {
 
-            final ByteBufferInputStream bbis = new ByteBufferInputStream(buf);
+    try {
 
-            final DataInputStream dis = new DataInputStream(bbis);
+      final ByteBufferInputStream bbis = new ByteBufferInputStream(buf);
 
-            final int version = dis.readInt();
+      final DataInputStream dis = new DataInputStream(bbis);
 
-            if (version != VERSION0)
-                throw new RuntimeException("Unknown version: " + version);
+      final int version = dis.readInt();
 
-            final long timestamp = dis.readLong();
-            
-            final long commitCounter = dis.readLong();
-            
-            final int n = (int)LongPacker.unpackLong((DataInput)dis);
+      if (version != VERSION0) throw new RuntimeException("Unknown version: " + version);
 
-            final long[] roots = new long[n];
+      final long timestamp = dis.readLong();
 
-            for (int i = 0; i < n; i++) {
+      final long commitCounter = dis.readLong();
 
-                roots[i] = dis.readLong();
-//                roots[i] = LongPacker.unpackLong(dis);
+      final int n = (int) LongPacker.unpackLong((DataInput) dis);
 
-            }
-            
-            return new CommitRecord(timestamp,commitCounter,roots);
+      final long[] roots = new long[n];
 
-        } catch (IOException ex) {
+      for (int i = 0; i < n; i++) {
 
-            throw new RuntimeException(ex);
+        roots[i] = dis.readLong();
+        //                roots[i] = LongPacker.unpackLong(dis);
 
-        }
+      }
 
+      return new CommitRecord(timestamp, commitCounter, roots);
+
+    } catch (IOException ex) {
+
+      throw new RuntimeException(ex);
     }
-    
+  }
 }

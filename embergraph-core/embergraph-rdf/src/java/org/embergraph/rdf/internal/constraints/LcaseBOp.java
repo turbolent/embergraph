@@ -20,103 +20,94 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Literal;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
 
 /**
+ *
+ *
  * <pre>http://www.w3.org/2005/xpath-functions#lower-case</pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LcaseBOp extends IVValueExpression<IV> implements INeedsMaterialization {
-    
-    private static final long serialVersionUID = -6847688419473046477L;
 
-    public LcaseBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
-        super(x, globals);
+  private static final long serialVersionUID = -6847688419473046477L;
+
+  public LcaseBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
+    super(x, globals);
+  }
+
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args The function arguments (value expressions).
+   * @param anns The function annotations.
+   */
+  public LcaseBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 1 || args[0] == null) {
+
+      /*
+       * There must be exactly one argument for this function.
+       */
+
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public LcaseBOp(final LcaseBOp op) {
+
+    super(op);
+  }
+
+  /**
+   * This is a {@link Requirement#SOMETIMES} because it can operate on inline {@link IV}s without
+   * materialization but requires materialization of non-inline {@link IV}s.
+   */
+  @Override
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
+
+  @Override
+  public IV get(final IBindingSet bs) {
+
+    final Literal in = getAndCheckLiteralValue(0, bs);
+
+    final EmbergraphValueFactory vf = getValueFactory();
+
+    final String label = in.getLabel().toLowerCase();
+
+    final EmbergraphLiteral out;
+
+    if (in.getLanguage() != null) {
+
+      out = vf.createLiteral(label, in.getLanguage());
+
+    } else if (in.getDatatype() != null) {
+
+      out = vf.createLiteral(label, in.getDatatype());
+
+    } else {
+
+      out = vf.createLiteral(label);
     }
 
-    /**
-     * Required shallow copy constructor.
-     * 
-     * @param args
-     *            The function arguments (value expressions).
-     * @param anns
-     *            The function annotations.
-     */
-    public LcaseBOp(final BOp[] args, final Map<String, Object> anns) {
-
-        super(args, anns);
-        
-        if (args.length != 1 || args[0] == null) {
-         
-            /*
-             * There must be exactly one argument for this function.
-             */
-
-            throw new IllegalArgumentException();
-            
-        }
-        
-    }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     * 
-     * @param op
-     */
-    public LcaseBOp(final LcaseBOp op) {
-        
-        super(op);
-        
-    }
-
-    /**
-     * This is a {@link Requirement#SOMETIMES} because it can operate on inline
-     * {@link IV}s without materialization but requires materialization of
-     * non-inline {@link IV}s.
-     */
-    @Override
-    public Requirement getRequirement() {
-        return Requirement.SOMETIMES;
-    }
-
-	@Override
-    public IV get(final IBindingSet bs) {
-
-        final Literal in = getAndCheckLiteralValue(0, bs);
-
-        final EmbergraphValueFactory vf = getValueFactory();
-
-        final String label = in.getLabel().toLowerCase();
-
-        final EmbergraphLiteral out;
-
-        if (in.getLanguage() != null) {
-
-            out = vf.createLiteral(label, in.getLanguage());
-
-        } else if (in.getDatatype() != null) {
-
-            out = vf.createLiteral(label, in.getDatatype());
-
-        } else {
-
-            out = vf.createLiteral(label);
-            
-        }
-
-        return super.asIV(out, bs);
-
-    }
-
+    return super.asIV(out, bs);
+  }
 }

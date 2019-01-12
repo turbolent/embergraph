@@ -21,47 +21,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.quorum;
 
-
 /**
- * An instance of this class is thrown when the caller is awaiting a quorum
- * event and the quorum is asynchronously closed.
- * 
+ * An instance of this class is thrown when the caller is awaiting a quorum event and the quorum is
+ * asynchronously closed.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AsynchronousQuorumCloseException extends QuorumException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 829579638730180109L;
+  /** */
+  private static final long serialVersionUID = 829579638730180109L;
 
-    /**
-     * 
-     */
-    public AsynchronousQuorumCloseException() {
-    }
+  /** */
+  public AsynchronousQuorumCloseException() {}
 
-    /**
-     * @param message
-     */
-    public AsynchronousQuorumCloseException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public AsynchronousQuorumCloseException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public AsynchronousQuorumCloseException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public AsynchronousQuorumCloseException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public AsynchronousQuorumCloseException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public AsynchronousQuorumCloseException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -21,32 +21,26 @@ import java.io.InputStream;
 
 /**
  * Interface for reading and writing streams on a persistence store.
- * 
+ *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/555" > Support
- *      PSOutputStream/InputStream at IRawStore </a>
- *      
+ *     PSOutputStream/InputStream at IRawStore </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IStreamStore {
 
-    /**
-     * Return an output stream which can be used to write on the backing store.
-     * You can recover the address used to read back the data from the
-     * {@link IPSOutputStream}.
-     * 
-     * @return The output stream.
-     */
-    public IPSOutputStream getOutputStream();
+  /**
+   * Return an output stream which can be used to write on the backing store. You can recover the
+   * address used to read back the data from the {@link IPSOutputStream}.
+   *
+   * @return The output stream.
+   */
+  public IPSOutputStream getOutputStream();
 
-    /**
-     * Return an input stream from which a previously written stream may be read
-     * back.
-     * 
-     * @param addr
-     *            The address at which the stream was written.
-     *            
-     * @return an input stream for the data for provided address
-     */
-    public InputStream getInputStream(long addr);
-
+  /**
+   * Return an input stream from which a previously written stream may be read back.
+   *
+   * @param addr The address at which the stream was written.
+   * @return an input stream for the data for provided address
+   */
+  public InputStream getInputStream(long addr);
 }

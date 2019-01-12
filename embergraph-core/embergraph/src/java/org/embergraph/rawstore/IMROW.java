@@ -22,19 +22,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 /**
- * A marker interface for an {@link IRawStore} that declares support for
- * Multiple Readers and One Writer (full read concurrency, but single-threaded
- * writer).
- * <p>
- * Note: this interface ONLY makes a statement about the implementation of the
- * {@link IRawStore} interface, not any other methods that might be declared by
- * the implementation class.
- * 
+ * A marker interface for an {@link IRawStore} that declares support for Multiple Readers and One
+ * Writer (full read concurrency, but single-threaded writer).
+ *
+ * <p>Note: this interface ONLY makes a statement about the implementation of the {@link IRawStore}
+ * interface, not any other methods that might be declared by the implementation class.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @see IMRMW
  */
-public interface IMROW /*extends IRawStore*/ {
-
-}
+public interface IMROW /*extends IRawStore*/ {}

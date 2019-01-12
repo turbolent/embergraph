@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -32,59 +31,54 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Unit tests for {@link EQConstant}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestEQConstant extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestEQConstant() {
+  /** */
+  public TestEQConstant() {}
+
+  /** @param name */
+  public TestEQConstant(String name) {
+    super(name);
+  }
+
+  /** Unit test for {@link EQConstant#EQConstant(IVariable,IConstant)} */
+  public void testConstructor() {
+    try {
+      assertTrue(null != new EQConstant(null, new Constant<String>("1")));
+      fail("IllegalArgumentException expected, lhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * @param name
-     */
-    public TestEQConstant(String name) {
-        super(name);
+    try {
+      assertTrue(null != new EQConstant(Var.var("x"), null));
+      fail("IllegalArgumentException expected, rhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link EQConstant#EQConstant(IVariable,IConstant)}
-     */
-    public void testConstructor ()
-    {
-        try { assertTrue ( null != new EQConstant ( null, new Constant<String> ( "1" ) ) ) ; fail ( "IllegalArgumentException expected, lhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
+    assertTrue(null != new EQConstant(Var.var("x"), new Constant<String>("1")));
+  }
 
-        try { assertTrue ( null != new EQConstant ( Var.var ( "x" ), null ) ) ; fail ( "IllegalArgumentException expected, rhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
+  /** Unit test for {@link EQConstant#accept(IBindingSet)} */
+  public void testAccept() {
+    Var<?> var = Var.var("x");
+    Constant<String> val1 = new Constant<String>("1");
+    Constant<String> val2 = new Constant<String>("2");
+    Constant<Integer> val3 = new Constant<Integer>(1);
 
-        assertTrue ( null != new EQConstant ( Var.var ( "x" ), new Constant<String> ( "1" ) ) ) ;
-    }
+    EQConstant op = new EQConstant(var, val1);
 
-    /**
-     * Unit test for {@link EQConstant#accept(IBindingSet)}
-     */
-    public void testAccept ()
-    {
-        Var<?> var = Var.var ( "x" ) ;
-        Constant<String> val1 = new Constant<String> ( "1" ) ;
-        Constant<String> val2 = new Constant<String> ( "2" ) ;
-        Constant<Integer> val3 = new Constant<Integer> ( 1 ) ;
+    IBindingSet eq = new ListBindingSet(new IVariable<?>[] {var}, new IConstant[] {val1});
+    IBindingSet ne1 = new ListBindingSet(new IVariable<?>[] {var}, new IConstant[] {val2});
+    IBindingSet ne2 = new ListBindingSet(new IVariable<?>[] {var}, new IConstant[] {val3});
+    IBindingSet nb = new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {});
 
-        EQConstant op = new EQConstant ( var, val1 ) ;
-
-        IBindingSet eq = new ListBindingSet ( new IVariable<?> [] { var }, new IConstant [] { val1 } ) ;
-        IBindingSet ne1 = new ListBindingSet ( new IVariable<?> [] { var }, new IConstant [] { val2 } ) ;
-        IBindingSet ne2 = new ListBindingSet ( new IVariable<?> [] { var }, new IConstant [] { val3 } ) ;
-        IBindingSet nb = new ListBindingSet ( new IVariable<?> [] {}, new IConstant [] {} ) ;
-
-        assertTrue ( op.get ( eq ) ) ;
-        assertFalse ( op.get ( ne1 ) ) ;
-        assertFalse ( op.get ( ne2 ) ) ;
-        assertTrue ( op.get ( nb ) ) ;
-    }    
+    assertTrue(op.get(eq));
+    assertFalse(op.get(ne1));
+    assertFalse(op.get(ne2));
+    assertTrue(op.get(nb));
+  }
 }

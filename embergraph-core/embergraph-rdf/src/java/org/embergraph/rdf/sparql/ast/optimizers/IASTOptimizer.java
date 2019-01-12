@@ -25,25 +25,19 @@ import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Interface for AST rewrites. 
- * 
+ * Interface for AST rewrites.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IASTOptimizer {
 
-    /**
-     * Optimize the AST.
-     * 
-     * @param context
-     *            The evaluation context.
-     * @param input
-     *            The input to the optimizer, consisting of a queryNode and
-     *            input binding set.
-     * 
-     * @return An instance of type QueryNodeWithBindingSet.
-     */
-    QueryNodeWithBindingSet optimize(
-        AST2BOpContext context, QueryNodeWithBindingSet input);
-
+  /**
+   * Optimize the AST.
+   *
+   * @param context The evaluation context.
+   * @param input The input to the optimizer, consisting of a queryNode and input binding set.
+   * @return An instance of type QueryNodeWithBindingSet.
+   */
+  QueryNodeWithBindingSet optimize(AST2BOpContext context, QueryNodeWithBindingSet input);
 }

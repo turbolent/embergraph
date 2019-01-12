@@ -25,46 +25,37 @@ package org.embergraph.counters;
 
 /**
  * A view of a sample period for some {@link History}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @param <T>
  */
 public interface IHistoryEntry<T> {
-    
-    /**
-     * The timestamp of the last sample to fall into this period. This timestamp
-     * will always be GTE {@link #getStartOfSamplePeriod()} and LE
-     * {@link #getEndOfSamplePeriod()}.
-     */
-    public long lastModified();
 
-//    /**
-//     * The earliest possible timestamp for which a sample would be reported
-//     * within this {@link IHistoryEntry} (inclusive lower bound).
-//     */
-//    public long getStartOfSamplePeriod();
-//    
-//    /**
-//     * The last possible timestamp for which a sample would be reported within
-//     * this {@link IHistoryEntry} (exclusive upper bound).
-//     */
-//    public long getEndOfSamplePeriod();
-    
-    /**
-     * The average of the samples in this period.
-     */
-    public T getValue();
+  /**
+   * The timestamp of the last sample to fall into this period. This timestamp will always be GTE
+   * {@link #getStartOfSamplePeriod()} and LE {@link #getEndOfSamplePeriod()}.
+   */
+  public long lastModified();
 
-    /**
-     * The #of samples in this period.
-     */
-    public int getCount();
+  //    /**
+  //     * The earliest possible timestamp for which a sample would be reported
+  //     * within this {@link IHistoryEntry} (inclusive lower bound).
+  //     */
+  //    public long getStartOfSamplePeriod();
+  //
+  //    /**
+  //     * The last possible timestamp for which a sample would be reported within
+  //     * this {@link IHistoryEntry} (exclusive upper bound).
+  //     */
+  //    public long getEndOfSamplePeriod();
 
-    /**
-     * The total of the samples in this period.
-     */
-    public T getTotal();
-    
+  /** The average of the samples in this period. */
+  public T getValue();
+
+  /** The #of samples in this period. */
+  public int getCount();
+
+  /** The total of the samples in this period. */
+  public T getTotal();
 }

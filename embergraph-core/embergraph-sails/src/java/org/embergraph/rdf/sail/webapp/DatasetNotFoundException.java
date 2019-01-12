@@ -21,29 +21,25 @@ import org.openrdf.repository.RepositoryException;
 
 /**
  * Exception thrown when a named data set is addressed and does not exist.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class DatasetNotFoundException extends RepositoryException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public DatasetNotFoundException() {
-    }
+  public DatasetNotFoundException() {}
 
-    public DatasetNotFoundException(String message) {
-        super(message);
-    }
+  public DatasetNotFoundException(String message) {
+    super(message);
+  }
 
-    public DatasetNotFoundException(Throwable cause) {
-        super(cause);
-    }
+  public DatasetNotFoundException(Throwable cause) {
+    super(cause);
+  }
 
-    public DatasetNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public DatasetNotFoundException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -24,24 +24,22 @@ import org.openrdf.model.vocabulary.XMLSchema;
 
 /**
  * Collects various XSD URIs as constants.
- * 
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
- * 
  * @see XMLSchema
  */
 public class XSD extends XMLSchema {
-    
-	/**
-	 * @todo This really should not be in the XSD namespace since it is not part
-	 *       of the XML Schema Datatypes specification.
-	 */
-	static public final URI UUID = new URIImpl(NAMESPACE + "uuid");
 
-    /**
-     * Not sure if there is a better solution for this.  Perhaps XSSLT?
-     * 
-     * http://www.codesynthesis.com/projects/xsstl/
-     */
-    static public final URI IPV4 = new URIImpl(NAMESPACE + "IPv4Address");
-    
+  /**
+   * @todo This really should not be in the XSD namespace since it is not part of the XML Schema
+   *     Datatypes specification.
+   */
+  public static final URI UUID = new URIImpl(NAMESPACE + "uuid");
+
+  /**
+   * Not sure if there is a better solution for this. Perhaps XSSLT?
+   *
+   * <p>http://www.codesynthesis.com/projects/xsstl/
+   */
+  public static final URI IPV4 = new URIImpl(NAMESPACE + "IPv4Address");
 }

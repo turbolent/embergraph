@@ -21,60 +21,57 @@ import java.util.UUID;
 
 public class HALogRequest implements IHALogRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final UUID serviceId;
-    private final long commitCounter;
-//    private final boolean incremental;
+  private final UUID serviceId;
+  private final long commitCounter;
+  //    private final boolean incremental;
 
-    /**
-     * @param serviceId
-     *            The {@link UUID} of the service that made the request.
-     * @param commitCounter
-     *            The commit counter used to identify the desired commit point
-     *            (the commit counter of the closing root block).
-     */
-    public HALogRequest(final UUID serviceId, final long commitCounter
-//            , final boolean incremental
-            ) {
+  /**
+   * @param serviceId The {@link UUID} of the service that made the request.
+   * @param commitCounter The commit counter used to identify the desired commit point (the commit
+   *     counter of the closing root block).
+   */
+  public HALogRequest(final UUID serviceId, final long commitCounter
+      //            , final boolean incremental
+      ) {
 
-        this.serviceId = serviceId;
-        this.commitCounter = commitCounter;
-//        this.incremental = incremental;
+    this.serviceId = serviceId;
+    this.commitCounter = commitCounter;
+    //        this.incremental = incremental;
 
-    }
+  }
 
-    @Override
-    public long getCommitCounter() {
+  @Override
+  public long getCommitCounter() {
 
-        return commitCounter;
+    return commitCounter;
+  }
 
-    }
+  @Override
+  public UUID getServiceId() {
 
-    @Override
-    public UUID getServiceId() {
+    return serviceId;
+  }
 
-        return serviceId;
-        
-    }
+  public String toString() {
 
-    public String toString() {
+    return getClass()
+        + "{serviceId="
+        + getServiceId()
+        + ", commitCounter="
+        + getCommitCounter()
+        +
+        //                ", incremental=" + isIncremental() +
+        "}";
+  }
 
-        return getClass() + "{serviceId=" + getServiceId() + ", commitCounter="
-                + getCommitCounter() +
-//                ", incremental=" + isIncremental() +
-                "}";
+  //    @Override
+  //    public boolean isIncremental() {
+  //
+  //        return incremental;
+  //
+  //    }
 
-    }
-
-//    @Override
-//    public boolean isIncremental() {
-//
-//        return incremental;
-//        
-//    }
-    
 }

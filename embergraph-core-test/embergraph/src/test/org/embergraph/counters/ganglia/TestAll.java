@@ -21,48 +21,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters.ganglia;
 
-import org.embergraph.counters.ganglia.TestHostMetricsCollector;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
  * Aggregates tests in dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("counters-ganglia");
-        
-        suite.addTestSuite(TestHostMetricsCollector.class);
+    final TestSuite suite = new TestSuite("counters-ganglia");
 
-//        suite.addTestSuite(TestQueryEngineMetricsCollector.class);
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestHostMetricsCollector.class);
+
+    //        suite.addTestSuite(TestQueryEngineMetricsCollector.class);
+
+    return suite;
+  }
 }

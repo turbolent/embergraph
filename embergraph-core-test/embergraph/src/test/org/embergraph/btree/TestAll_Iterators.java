@@ -28,50 +28,43 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Aggregates the unit tests for the {@link IndexSegment} and its related
- * classes, all of which are in the same package as the {@link BTree}.
- * 
+ * Aggregates the unit tests for the {@link IndexSegment} and its related classes, all of which are
+ * in the same package as the {@link BTree}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll_Iterators extends TestCase {
 
-    public TestAll_Iterators() {
-    }
+  public TestAll_Iterators() {}
 
-    public TestAll_Iterators(String arg0) {
-        super(arg0);
-    }
+  public TestAll_Iterators(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-        
-        final TestSuite suite = new TestSuite("Iterators");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // test leaf traversal cursors.
-        suite.addTestSuite(TestBTreeLeafCursors.class);
+    final TestSuite suite = new TestSuite("Iterators");
 
-        // test suite for B+Tree iterators (vs cursors).
-        suite.addTestSuite(TestIterators.class);
-        
-        // test cursors for a read-only B+Tree.
-        suite.addTestSuite(TestReadOnlyBTreeCursors.class);
-        
-        // test cursors for a read-write B+Tree.
-        suite.addTestSuite(TestMutableBTreeCursors.class);
-        
-        // test stackable tuple filters
-        suite.addTest(org.embergraph.btree.filter.TestAll.suite());
-        
-        // test chunked iterators.
-        suite.addTestSuite(TestChunkedIterators.class);
+    // test leaf traversal cursors.
+    suite.addTestSuite(TestBTreeLeafCursors.class);
 
-        return suite;
+    // test suite for B+Tree iterators (vs cursors).
+    suite.addTestSuite(TestIterators.class);
 
-    }
+    // test cursors for a read-only B+Tree.
+    suite.addTestSuite(TestReadOnlyBTreeCursors.class);
 
+    // test cursors for a read-write B+Tree.
+    suite.addTestSuite(TestMutableBTreeCursors.class);
+
+    // test stackable tuple filters
+    suite.addTest(org.embergraph.btree.filter.TestAll.suite());
+
+    // test chunked iterators.
+    suite.addTestSuite(TestChunkedIterators.class);
+
+    return suite;
+  }
 }

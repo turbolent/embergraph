@@ -18,33 +18,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.joinGraph;
 
 /**
- * Exception thrown when the join graph does not have any solutions in the data
- * (running the cutoff joins to explore the join graph does not produce any
- * solutions such that we can not complete a path through the join graph without
- * a zero cardinality).
+ * Exception thrown when the join graph does not have any solutions in the data (running the cutoff
+ * joins to explore the join graph does not produce any solutions such that we can not complete a
+ * path through the join graph without a zero cardinality).
  */
-public class NoSolutionsException extends RuntimeException
-{
+public class NoSolutionsException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-	public NoSolutionsException() {
-		super();
-	}
+  public NoSolutionsException() {
+    super();
+  }
 
-	public NoSolutionsException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public NoSolutionsException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public NoSolutionsException(String message) {
-		super(message);
-	}
+  public NoSolutionsException(String message) {
+    super(message);
+  }
 
-	public NoSolutionsException(Throwable cause) {
-		super(cause);
-	}
-	
+  public NoSolutionsException(Throwable cause) {
+    super(cause);
+  }
 }

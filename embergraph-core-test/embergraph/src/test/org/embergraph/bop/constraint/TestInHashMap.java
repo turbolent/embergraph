@@ -26,27 +26,21 @@ import org.embergraph.bop.IVariable;
 
 /**
  * Unit tests for {@link INHashMap}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestInHashMap extends TestINConstraint
-{
-    /**
-     * 
-     */
-    public TestInHashMap() {
-    }
+public class TestInHashMap extends TestINConstraint {
+  /** */
+  public TestInHashMap() {}
 
-    /**
-     * @param name
-     */
-    public TestInHashMap(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestInHashMap(String name) {
+    super(name);
+  }
 
-    @Override protected INConstraint newINConstraint ( IVariable<?> var, IConstant<?> vals [] )
-    {
-        return new INHashMap ( var, vals ) ;
-    }
+  @Override
+  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]) {
+    return new INHashMap(var, vals);
+  }
 }

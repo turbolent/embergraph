@@ -5,47 +5,39 @@ import org.embergraph.service.Split;
 
 /**
  * Hands back the object visited for a single index partition.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class IdentityHandler<T> implements IResultHandler<T, T> {
 
-    private int nvisited = 0;
-    private T ret;
-    
-    @Override
-    public void aggregate(final T result, final Split split) {
+  private int nvisited = 0;
+  private T ret;
 
-		synchronized (this) {
-			
-			if (nvisited != 0) {
+  @Override
+  public void aggregate(final T result, final Split split) {
 
-				/*
-				 * You can not use this handler if the procedure is mapped over
-				 * more than one split.
-				 */
+    synchronized (this) {
+      if (nvisited != 0) {
 
-				throw new UnsupportedOperationException();
+        /*
+         * You can not use this handler if the procedure is mapped over
+         * more than one split.
+         */
 
-			}
+        throw new UnsupportedOperationException();
+      }
 
-			this.ret = result;
+      this.ret = result;
 
-			nvisited++;
-
-		}
-        
+      nvisited++;
     }
+  }
 
-    @Override
-    public T getResult() {
+  @Override
+  public T getResult() {
 
-		synchronized (this) {
-			
-			return ret;
-			
-		}
-        
+    synchronized (this) {
+      return ret;
     }
-    
+  }
 }

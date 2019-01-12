@@ -17,99 +17,96 @@ package org.embergraph.rdf.graph.impl;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.embergraph.rdf.graph.IGASStats;
 import org.embergraph.rdf.graph.util.GASUtil;
 
 /**
  * Statistics for GAS algorithms.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class GASStats implements IGASStats {
 
-    private final AtomicLong nrounds = new AtomicLong();
-    private final AtomicLong frontierSize = new AtomicLong();
-    private final AtomicLong nedges = new AtomicLong();
-    private final AtomicLong elapsedNanos = new AtomicLong();
+  private final AtomicLong nrounds = new AtomicLong();
+  private final AtomicLong frontierSize = new AtomicLong();
+  private final AtomicLong nedges = new AtomicLong();
+  private final AtomicLong elapsedNanos = new AtomicLong();
 
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#add(long, long, long)
-     */
-    @Override
-    public void add(final long frontierSize, final long nedges,
-            final long elapsedNanos) {
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#add(long, long, long)
+   */
+  @Override
+  public void add(final long frontierSize, final long nedges, final long elapsedNanos) {
 
-        this.nrounds.incrementAndGet();
-        
-        this.frontierSize.addAndGet(frontierSize);
+    this.nrounds.incrementAndGet();
 
-        this.nedges.addAndGet(nedges);
+    this.frontierSize.addAndGet(frontierSize);
 
-        this.elapsedNanos.addAndGet(elapsedNanos);
+    this.nedges.addAndGet(nedges);
 
-    }
+    this.elapsedNanos.addAndGet(elapsedNanos);
+  }
 
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#add(org.embergraph.rdf.graph.impl.IFOO)
-     */
-    @Override
-    public void add(final IGASStats o) {
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#add(org.embergraph.rdf.graph.impl.IFOO)
+   */
+  @Override
+  public void add(final IGASStats o) {
 
-        nrounds.addAndGet(o.getNRounds());
-        
-        frontierSize.addAndGet(o.getFrontierSize());
-        
-        nedges.addAndGet(o.getNEdges());
+    nrounds.addAndGet(o.getNRounds());
 
-        elapsedNanos.addAndGet(o.getElapsedNanos());
-        
-    }
+    frontierSize.addAndGet(o.getFrontierSize());
 
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#getNRounds()
-     */
-    @Override
-    public long getNRounds() {
-        return nrounds.get();
-    }
-    
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#getFrontierSize()
-     */
-    @Override
-    public long getFrontierSize() {
-        return frontierSize.get();
-    }
+    nedges.addAndGet(o.getNEdges());
 
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#getNEdges()
-     */
-    @Override
-    public long getNEdges() {
-        return nedges.get();
-    }
+    elapsedNanos.addAndGet(o.getElapsedNanos());
+  }
 
-    /* (non-Javadoc)
-     * @see org.embergraph.rdf.graph.impl.IFOO#getElapsedNanos()
-     */
-    @Override
-    public long getElapsedNanos() {
-        return elapsedNanos.get();
-    }
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#getNRounds()
+   */
+  @Override
+  public long getNRounds() {
+    return nrounds.get();
+  }
 
-    /**
-     * Return a useful summary of the collected statistics.
-     */
-    @Override
-    public String toString() {
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#getFrontierSize()
+   */
+  @Override
+  public long getFrontierSize() {
+    return frontierSize.get();
+  }
 
-        return "nrounds=" + getNRounds()
-                + ", fontierSize=" + getFrontierSize()
-                + ", ms=" + TimeUnit.NANOSECONDS.toMillis(getElapsedNanos())
-                + ", edges=" + getNEdges()
-                + ", teps=" + GASUtil.getTEPS(getNEdges(), getElapsedNanos())
-        ;
-    }
-    
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#getNEdges()
+   */
+  @Override
+  public long getNEdges() {
+    return nedges.get();
+  }
+
+  /* (non-Javadoc)
+   * @see org.embergraph.rdf.graph.impl.IFOO#getElapsedNanos()
+   */
+  @Override
+  public long getElapsedNanos() {
+    return elapsedNanos.get();
+  }
+
+  /** Return a useful summary of the collected statistics. */
+  @Override
+  public String toString() {
+
+    return "nrounds="
+        + getNRounds()
+        + ", fontierSize="
+        + getFrontierSize()
+        + ", ms="
+        + TimeUnit.NANOSECONDS.toMillis(getElapsedNanos())
+        + ", edges="
+        + getNEdges()
+        + ", teps="
+        + GASUtil.getTEPS(getNEdges(), getElapsedNanos());
+  }
 }

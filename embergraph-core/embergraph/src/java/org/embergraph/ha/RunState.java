@@ -17,20 +17,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha;
 
-/**
- * Service run state enumeration.
- */
+/** Service run state enumeration. */
 public enum RunState {
+  Start(0),
+  Running(1),
+  ShuttingDown(2),
+  Shutdown(3);
 
-    Start(0), Running(1), ShuttingDown(2), Shutdown(3);
-    
-    private RunState(final int level) {
-    
-        this.level = level;
-        
-    }
+  private RunState(final int level) {
 
-    @SuppressWarnings("unused")
-    private final int level;
-    
+    this.level = level;
+  }
+
+  @SuppressWarnings("unused")
+  private final int level;
 }

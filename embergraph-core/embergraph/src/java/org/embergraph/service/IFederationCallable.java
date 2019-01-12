@@ -27,39 +27,31 @@ import java.io.Serializable;
 import java.util.concurrent.Callable;
 
 /**
- * Interface for {@link Callable}s which require access to the
- * {@link IEmbergraphFederation} when running on an {@link IRemoteExecutor}.
- * 
+ * Interface for {@link Callable}s which require access to the {@link IEmbergraphFederation} when
+ * running on an {@link IRemoteExecutor}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IFederationCallable extends Serializable {
 
-    /**
-     * Invoked before the task is executed to provide a reference to the
-     * {@link IEmbergraphFederation} for the service on which the task is
-     * executing.
-     * 
-     * @param fed
-     *            The federation.
-     * 
-     * @throws IllegalArgumentException
-     *             if the argument is <code>null</code>
-     * @throws IllegalStateException
-     *             if {@link #setFederation(IEmbergraphFederation)} has already
-     *             been invoked and was set with a different value.
-     */
-    void setFederation(IEmbergraphFederation<?> fed);
+  /**
+   * Invoked before the task is executed to provide a reference to the {@link IEmbergraphFederation}
+   * for the service on which the task is executing.
+   *
+   * @param fed The federation.
+   * @throws IllegalArgumentException if the argument is <code>null</code>
+   * @throws IllegalStateException if {@link #setFederation(IEmbergraphFederation)} has already been
+   *     invoked and was set with a different value.
+   */
+  void setFederation(IEmbergraphFederation<?> fed);
 
-    /**
-     * Return the {@link IEmbergraphFederation} reference.
-     * 
-     * @return The federation and never <code>null</code>.
-     * 
-     * @throws IllegalStateException
-     *             if {@link #setFederation(IEmbergraphFederation)} has not been
-     *             invoked.
-     */
-    IEmbergraphFederation<?> getFederation();
-
+  /**
+   * Return the {@link IEmbergraphFederation} reference.
+   *
+   * @return The federation and never <code>null</code>.
+   * @throws IllegalStateException if {@link #setFederation(IEmbergraphFederation)} has not been
+   *     invoked.
+   */
+  IEmbergraphFederation<?> getFederation();
 }

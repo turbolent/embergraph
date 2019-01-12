@@ -28,42 +28,35 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
 /**
- * Implementation that will not re-open the {@link FileChannel} once it has been
- * closed. This is useful for simple things where you still want the reliability
- * guarantees of {@link FileChannelUtility}.
- * 
+ * Implementation that will not re-open the {@link FileChannel} once it has been closed. This is
+ * useful for simple things where you still want the reliability guarantees of {@link
+ * FileChannelUtility}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NOPReopener implements IReopenChannel<FileChannel> {
-    
-    private final FileChannel channel;
-    
-    public NOPReopener(final FileChannel channel) {
 
-        if (channel == null)
-            throw new IllegalArgumentException();
+  private final FileChannel channel;
 
-        this.channel = channel;
-        
-    }
+  public NOPReopener(final FileChannel channel) {
 
-    public NOPReopener(final RandomAccessFile raf) {
+    if (channel == null) throw new IllegalArgumentException();
 
-        if (raf == null)
-            throw new IllegalArgumentException();
+    this.channel = channel;
+  }
 
-        this.channel = raf.getChannel();
-        
-    }
-    
-    public FileChannel reopenChannel() throws IOException {
-    
-        if (!channel.isOpen())
-            throw new IOException("Channel is closed.");
-        
-        return channel;
-    
-    }
+  public NOPReopener(final RandomAccessFile raf) {
 
+    if (raf == null) throw new IllegalArgumentException();
+
+    this.channel = raf.getChannel();
+  }
+
+  public FileChannel reopenChannel() throws IOException {
+
+    if (!channel.isOpen()) throw new IOException("Channel is closed.");
+
+    return channel;
+  }
 }

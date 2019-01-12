@@ -19,31 +19,24 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-public class HASnapshotRequest implements IHASnapshotRequest,
-        Serializable {
+public class HASnapshotRequest implements IHASnapshotRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final int percentLogSize;
+  private final int percentLogSize;
 
-    /**
-     * 
-     * @param percentLogSize
-     *            If the size on the disk of the HALog files is less than this
-     *            percentage of the size on the disk of the journal, then the
-     *            snapshot will not be taken.
-     */
-    public HASnapshotRequest(final int percentLogSize) {
+  /**
+   * @param percentLogSize If the size on the disk of the HALog files is less than this percentage
+   *     of the size on the disk of the journal, then the snapshot will not be taken.
+   */
+  public HASnapshotRequest(final int percentLogSize) {
 
-        this.percentLogSize = percentLogSize;
+    this.percentLogSize = percentLogSize;
+  }
 
-    }
+  @Override
+  public int getPercentLogSize() {
 
-    @Override
-    public int getPercentLogSize() {
-
-        return percentLogSize;
-
-    }
-
+    return percentLogSize;
+  }
 }

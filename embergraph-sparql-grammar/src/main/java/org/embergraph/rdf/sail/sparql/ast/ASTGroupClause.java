@@ -5,8 +5,7 @@ package org.embergraph.rdf.sail.sparql.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public
-class ASTGroupClause extends SimpleNode {
+public class ASTGroupClause extends SimpleNode {
   public ASTGroupClause(int id) {
     super(id);
   }
@@ -15,25 +14,24 @@ class ASTGroupClause extends SimpleNode {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
+
   public List<String> getBindingNames() {
-	  
-	  List<String> bindingNames = new ArrayList<String>();
-	  
-	  for(ASTGroupCondition condition: getGroupConditions()) {
-		  bindingNames.add(condition.getName());
-	  }
-	  
-	  return bindingNames;
+
+    List<String> bindingNames = new ArrayList<String>();
+
+    for (ASTGroupCondition condition : getGroupConditions()) {
+      bindingNames.add(condition.getName());
+    }
+
+    return bindingNames;
   }
-  
+
   public List<ASTGroupCondition> getGroupConditions() {
-	  return jjtGetChildren(ASTGroupCondition.class);
+    return jjtGetChildren(ASTGroupCondition.class);
   }
 }
 /* JavaCC - OriginalChecksum=160933dbaf7175f4d32bb39163c160f5 (do not edit this line) */

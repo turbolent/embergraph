@@ -20,59 +20,53 @@ package org.embergraph.ha.msg;
 import org.embergraph.ha.pipeline.HAReceiveService;
 
 /**
- * Glue class wraps the {@link IHAWriteMessage} and the {@link IHALogRequest}
- * message and exposes the requires {@link IHAMessage} interface to the
- * {@link HAReceiveService}. This class is never persisted. It just let's us
- * handshake with the {@link HAReceiveService} and get back out the original
- * {@link IHAWriteMessage} as well as the optional {@link IHALogRequest}
- * message.
- * 
+ * Glue class wraps the {@link IHAWriteMessage} and the {@link IHALogRequest} message and exposes
+ * the requires {@link IHAMessage} interface to the {@link HAReceiveService}. This class is never
+ * persisted. It just let's us handshake with the {@link HAReceiveService} and get back out the
+ * original {@link IHAWriteMessage} as well as the optional {@link IHALogRequest} message.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class HAMessageWrapper extends HAWriteMessageBase implements
-        IHAMessageWrapper {
+public class HAMessageWrapper extends HAWriteMessageBase implements IHAMessageWrapper {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final IHASyncRequest req;
-    private final IHASendState snd;
-    private final IHAWriteMessageBase msg;
+  private final IHASyncRequest req;
+  private final IHASendState snd;
+  private final IHAWriteMessageBase msg;
 
-    public HAMessageWrapper(final IHASyncRequest req, final IHASendState snd,
-            final IHAWriteMessageBase msg) {
+  public HAMessageWrapper(
+      final IHASyncRequest req, final IHASendState snd, final IHAWriteMessageBase msg) {
 
-        // Use size and checksum from real IHAWriteMessage.
-        super(msg.getSize(), msg.getChk());
+    // Use size and checksum from real IHAWriteMessage.
+    super(msg.getSize(), msg.getChk());
 
-        this.req = req; // MAY be null;
-        this.snd = snd;
-        this.msg = msg;
+    this.req = req; // MAY be null;
+    this.snd = snd;
+    this.msg = msg;
+  }
 
-    }
+  @Override
+  public IHASyncRequest getHASyncRequest() {
+    return req;
+  }
 
-    @Override
-    public IHASyncRequest getHASyncRequest() {
-        return req;
-    }
+  @Override
+  public IHASendState getHASendState() {
+    return snd;
+  }
 
-    @Override
-    public IHASendState getHASendState() {
-        return snd;
-    }
+  @Override
+  public IHAWriteMessageBase getHAWriteMessage() {
+    return msg;
+  }
 
-    @Override
-    public IHAWriteMessageBase getHAWriteMessage() {
-        return msg;
-    }
+  /**
+   * Return the {@link IHASendState#getMarker()} iff there is an associated {@link IHASendState} and
+   * otherwise <code>null</code>.
+   */
+  public byte[] getMarker() {
 
-    /**
-     * Return the {@link IHASendState#getMarker()} iff there is an associated
-     * {@link IHASendState} and otherwise <code>null</code>.
-     */
-    public byte[] getMarker() {
-
-        return snd == null ? null : snd.getMarker();
-        
-    }
-
+    return snd == null ? null : snd.getMarker();
+  }
 }

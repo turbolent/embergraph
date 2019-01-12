@@ -15,20 +15,20 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.*;
+import java.util.Iterator;
 
 /**
  * Mapperator
  *
- * Initialized with a Mapper object, wraps a standard iterator and calls apply on each object as it is iterated
+ * <p>Initialized with a Mapper object, wraps a standard iterator and calls apply on each object as
+ * it is iterated
  */
-
 public class Mapperator implements Iterator {
 
-	final private Iterator m_iter;
-	final protected Object m_context;
-	final private Mapper m_mapper;
-	
+  private final Iterator m_iter;
+  protected final Object m_context;
+  private final Mapper m_mapper;
+
   public Mapperator(Iterator iter, Object context, Mapper mapper) {
     m_iter = iter;
     m_context = context;
@@ -36,18 +36,18 @@ public class Mapperator implements Iterator {
   }
 
   public boolean hasNext() {
-  	return m_iter.hasNext();
+    return m_iter.hasNext();
   }
-  
+
   public Object next() {
-  	Object obj = m_iter.next();
-  	
-  	m_mapper.apply(obj);
-  	
-  	return obj;
+    Object obj = m_iter.next();
+
+    m_mapper.apply(obj);
+
+    return obj;
   }
-  
+
   public void remove() {
-  	m_iter.remove();
+    m_iter.remove();
   }
 }

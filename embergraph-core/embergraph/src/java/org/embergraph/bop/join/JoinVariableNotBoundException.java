@@ -23,44 +23,33 @@ package org.embergraph.bop.join;
 
 /**
  * Exception thrown when there is no binding for a join variable.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class JoinVariableNotBoundException extends Exception {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public JoinVariableNotBoundException() {
-    }
+  /** */
+  public JoinVariableNotBoundException() {}
 
-    /**
-     * @param message
-     */
-    public JoinVariableNotBoundException(final String message) {
-        super(message);
-    }
+  /** @param message */
+  public JoinVariableNotBoundException(final String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public JoinVariableNotBoundException(final Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public JoinVariableNotBoundException(final Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public JoinVariableNotBoundException(final String message,
-            final Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public JoinVariableNotBoundException(final String message, final Throwable cause) {
+    super(message, cause);
+  }
 }

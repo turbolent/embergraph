@@ -24,50 +24,42 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.io.Serializable;
-
 import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
- * An interface for expander patterns for an {@link IPredicate} when it appears
- * in the right-hand position of a JOIN.
- * 
+ * An interface for expander patterns for an {@link IPredicate} when it appears in the right-hand
+ * position of a JOIN.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IAccessPathExpander<E> extends Serializable {
 
-    /**
-     * Return the {@link IAccessPath} that will be used to evaluate the
-     * {@link IPredicate}.
-     * 
-     * @param accessPath
-     *            The {@link IAccessPath} that will be used by default.
-     * 
-     * @return The {@link IAccessPath} that will be used. You can return the
-     *         given <i>accessPath</i> or you can layer additional semantics
-     *         onto or otherwise override the given {@link IAccessPath}.
-     */
-    IAccessPath<E> getAccessPath(IAccessPath<E> accessPath);
+  /**
+   * Return the {@link IAccessPath} that will be used to evaluate the {@link IPredicate}.
+   *
+   * @param accessPath The {@link IAccessPath} that will be used by default.
+   * @return The {@link IAccessPath} that will be used. You can return the given <i>accessPath</i>
+   *     or you can layer additional semantics onto or otherwise override the given {@link
+   *     IAccessPath}.
+   */
+  IAccessPath<E> getAccessPath(IAccessPath<E> accessPath);
 
-    /**
-     * Add the backchainer on top of the expander.
-     * 
-     * @return true if the backchainer should run
-     * 
-     * @deprecated Never <code>true</code>. The backchainer is only run for
-     *             normal predicates in triples mode at this time. If it is to
-     *             be layer, it should be layered as an annotation.  See
-     *             https://sourceforge.net/apps/trac/bigdata/ticket/231.
-     */
-    boolean backchain();
+  /**
+   * Add the backchainer on top of the expander.
+   *
+   * @return true if the backchainer should run
+   * @deprecated Never <code>true</code>. The backchainer is only run for normal predicates in
+   *     triples mode at this time. If it is to be layer, it should be layered as an annotation. See
+   *     https://sourceforge.net/apps/trac/bigdata/ticket/231.
+   */
+  boolean backchain();
 
-    /**
-     * If true, the predicate for this expander will be given priority in the
-     * join order.
-     * 
-     * @return true if the predicate should be run first
-     */
-    boolean runFirst();
-    
+  /**
+   * If true, the predicate for this expander will be given priority in the join order.
+   *
+   * @return true if the predicate should be run first
+   */
+  boolean runFirst();
 }

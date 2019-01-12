@@ -22,42 +22,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * AST node for solution modifiers (SLICE, ORDER BY, GROUP BY)
- *  
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class SolutionModifierBase extends QueryNodeBase {
+public abstract class SolutionModifierBase extends QueryNodeBase {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Deep copy constructor.
-     */
-    public SolutionModifierBase(final SolutionModifierBase op) {
+  /** Deep copy constructor. */
+  public SolutionModifierBase(final SolutionModifierBase op) {
 
-        super(op);
+    super(op);
+  }
 
-    }
+  /** Shallow copy constructor. */
+  public SolutionModifierBase(final BOp[] args, final Map<String, Object> anns) {
 
-    /**
-     * Shallow copy constructor.
-     */
-    public SolutionModifierBase(final BOp[] args,
-            final Map<String, Object> anns) {
+    super(args, anns);
+  }
 
-        super(args, anns);
-
-    }
-
-    public SolutionModifierBase() {
-        super();
-    }
+  public SolutionModifierBase() {
+    super();
+  }
 }

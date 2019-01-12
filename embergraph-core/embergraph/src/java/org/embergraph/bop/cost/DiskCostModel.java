@@ -24,49 +24,39 @@ import java.io.Serializable;
 
 /**
  * A cost model of the disk.
- * 
- * @todo Develop disk models for SAS,SATA,SSD and various RAID configurations,
- *       including the #of spindles in the RAID array.
+ *
+ * @todo Develop disk models for SAS,SATA,SSD and various RAID configurations, including the #of
+ *     spindles in the RAID array.
  * @todo Develop disk models for SAN, NAS, NFS, parallel file systems, etc.
- * @todo Conditionally copy the desired disk model parameters into the fields
- *       above to see the performance estimates for a given configuration.
- * @todo The scattered and sustained write rates can be estimated from the
- *       transfer rate. However, SCSI does much better than SATA when it can
- *       reorder the writes for improved locality.
+ * @todo Conditionally copy the desired disk model parameters into the fields above to see the
+ *     performance estimates for a given configuration.
+ * @todo The scattered and sustained write rates can be estimated from the transfer rate. However,
+ *     SCSI does much better than SATA when it can reorder the writes for improved locality.
  */
 public class DiskCostModel implements Serializable {
 
-	/**
-	 * @todo should be either Externalizable and explicitly managed versioning
-	 *       or Serializable with a public interface for versioning.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
+   *     public interface for versioning.
+   */
+  private static final long serialVersionUID = 1L;
 
-	public static final DiskCostModel DEFAULT = new DiskCostModel(10d, 41943040);
+  public static final DiskCostModel DEFAULT = new DiskCostModel(10d, 41943040);
 
-    /**
-     * The average disk seek time (milliseconds).
-     */
-    final public double seekTime;
+  /** The average disk seek time (milliseconds). */
+  public final double seekTime;
 
-    /**
-     * The average disk transfer rate (megabytes per second).
-     */
-    final public double transferRate;
+  /** The average disk transfer rate (megabytes per second). */
+  public final double transferRate;
 
-    /**
-     * 
-     * @param seekTime
-     *            The average disk seek time (milliseconds).
-     * @param transferRate
-     *            The average disk transfer rate (megabytes per second).
-     */
-    public DiskCostModel(double seekTime, double transferRate) {
+  /**
+   * @param seekTime The average disk seek time (milliseconds).
+   * @param transferRate The average disk transfer rate (megabytes per second).
+   */
+  public DiskCostModel(double seekTime, double transferRate) {
 
-        this.seekTime = seekTime;
+    this.seekTime = seekTime;
 
-        this.transferRate = transferRate;
-
-    }
-
+    this.transferRate = transferRate;
+  }
 }

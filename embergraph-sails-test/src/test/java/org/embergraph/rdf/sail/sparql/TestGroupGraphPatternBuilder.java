@@ -23,16 +23,11 @@ package org.embergraph.rdf.sail.sparql;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.algebra.StatementPattern.Scope;
-
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.constraints.ComputedIN;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
@@ -50,1354 +45,1444 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /**
- * Test suite for translating the openrdf SPARQL AST nodes for
- * <code>GroupGraphPattern</code> into the embergraph AST (join groups, union,
- * etc).
- * 
+ * Test suite for translating the openrdf SPARQL AST nodes for <code>GroupGraphPattern</code> into
+ * the embergraph AST (join groups, union, etc).
+ *
  * @see TestSubqueryPatterns
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestGroupGraphPatternBuilder.java 5064 2011-08-21 22:50:55Z
- *          thompsonbry $
+ * @version $Id: TestGroupGraphPatternBuilder.java 5064 2011-08-21 22:50:55Z thompsonbry $
  */
-public class TestGroupGraphPatternBuilder extends
-    AbstractEmbergraphExprBuilderTestCase {
+public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderTestCase {
 
-    /**
-     * 
-     */
-    public TestGroupGraphPatternBuilder() {
+  /** */
+  public TestGroupGraphPatternBuilder() {}
+
+  /** @param name */
+  public TestGroupGraphPatternBuilder(String name) {
+    super(name);
+  }
+
+  /**
+   * Test empty group. The group pattern:
+   *
+   * <pre>
+   * {}
+   * </pre>
+   *
+   * matches any graph (including the empty graph) with one solution that does not bind any
+   * variables. For example:
+   *
+   * <pre>
+   * SELECT ?x
+   * WHERE {}
+   * </pre>
+   *
+   * matches with one solution in which variable x is not bound.
+   */
+  public void test_empty_group() throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql = "select ?s where { }";
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
+
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
     }
 
-    /**
-     * @param name
-     */
-    public TestGroupGraphPatternBuilder(String name) {
-        super(name);
+    final QueryRoot actual = parse(sparql, baseURI);
+
+    assertSameAST(sparql, expected, actual);
+  }
+
+  /**
+   * Unit test for named graph triple pattern where the graph is a variable.
+   *
+   * <pre>
+   * SELECT ?s where { GRAPH ?src { ?s ?p ?o} }
+   * </pre>
+   */
+  public void test_named_graph_pattern()
+      throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql = "select ?s where {GRAPH ?src {?s ?p ?o}}";
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
+
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+
+      final JoinGroupNode graphGroup = new JoinGroupNode();
+      whereClause.addChild(graphGroup);
+      graphGroup.setContext(new VarNode("src"));
+      graphGroup.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              new VarNode("src"),
+              Scope.NAMED_CONTEXTS));
     }
 
-    /**
-     * Test empty group. The group pattern:
-     * 
-     * <pre>
-     * {}
-     * </pre>
-     * 
-     * matches any graph (including the empty graph) with one solution that does
-     * not bind any variables. For example:
-     * 
-     * <pre>
-     * SELECT ?x
-     * WHERE {}
-     * </pre>
-     * 
-     * matches with one solution in which variable x is not bound.
-     */
-    public void test_empty_group() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where { }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Test for a named graph triple pattern where the graph is a constant.
+   *
+   * <pre>
+   * select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}
+   * </pre>
+   */
+  public void test_named_graph_pattern_graphConstant()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final IV<EmbergraphValue, ?> graphConst =
+        makeIV(valueFactory.createURI("http://www.embergraph.org"));
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-        }
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-        assertSameAST(sparql, expected, actual);
-
-    }
-    
-    /**
-     * Unit test for named graph triple pattern where the graph is a variable.
-     * 
-     * <pre>
-     * SELECT ?s where { GRAPH ?src { ?s ?p ?o} }
-     * </pre>
-     */
-    public void test_named_graph_pattern() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-
-        final String sparql = "select ?s where {GRAPH ?src {?s ?p ?o}}";
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-            
-            final JoinGroupNode graphGroup = new JoinGroupNode();
-            whereClause.addChild(graphGroup);
-            graphGroup.setContext(new VarNode("src"));
-            graphGroup.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), new VarNode("src"),
-                    Scope.NAMED_CONTEXTS));
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      final JoinGroupNode graphGroup = new JoinGroupNode();
+      graphGroup.setContext(new ConstantNode(graphConst));
+      graphGroup.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              new ConstantNode(graphConst),
+              Scope.NAMED_CONTEXTS));
+      whereClause.addChild(graphGroup);
+      expected.setWhereClause(whereClause);
     }
 
-    /**
-     * Test for a named graph triple pattern where the graph is a constant.
-     * <pre>
-     * select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}
-     * </pre>
-     */
-    public void test_named_graph_pattern_graphConstant() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-       
-        final String sparql = "select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}";
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final IV<EmbergraphValue, ?> graphConst = makeIV(valueFactory
-                .createURI("http://www.embergraph.org"));
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for the join of a triple pattern with a join group containing only a single triple
+   * pattern.
+   *
+   * <pre>
+   * select ?s where { ?s ?p ?o . {?o ?p2 ?s}}
+   * </pre>
+   */
+  public void test_triple_pattern_with_simple_join_group()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {?s ?p ?o . { ?o ?p2 ?s } }";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            final JoinGroupNode graphGroup = new JoinGroupNode();
-            graphGroup.setContext(new ConstantNode(graphConst));
-            graphGroup.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), new ConstantNode(
-                            graphConst), Scope.NAMED_CONTEXTS));
-            whereClause.addChild(graphGroup);
-            expected.setWhereClause(whereClause);
-        }
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final JoinGroupNode whereClause = new JoinGroupNode();
 
-        assertSameAST(sparql, expected, actual);
+      expected.setWhereClause(whereClause);
 
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+      {
+        final JoinGroupNode joinGroup = new JoinGroupNode();
+
+        joinGroup.addChild(
+            new StatementPatternNode(
+                new VarNode("o"),
+                new VarNode("p2"),
+                new VarNode("s"),
+                null /* c */,
+                Scope.DEFAULT_CONTEXTS));
+
+        whereClause.addChild(joinGroup);
+      }
     }
 
-    /**
-     * Unit test for the join of a triple pattern with a join group containing
-     * only a single triple pattern.
-     * 
-     * <pre>
-     * select ?s where { ?s ?p ?o . {?o ?p2 ?s}}
-     * </pre>
-     */
-    public void test_triple_pattern_with_simple_join_group()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o . { ?o ?p2 ?s } }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for the join of a triple pattern with a join group containing only a single triple
+   * pattern.
+   *
+   * <pre>
+   * select ?s where { ?s ?p ?o . GRAPH ?src {?o ?p2 ?s}}
+   * </pre>
+   */
+  public void test_triple_pattern_with_named_graph_group()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {?s ?p ?o . GRAPH ?src { ?o ?p2 ?s } }";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            
-            expected.setWhereClause(whereClause);
-            
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            {
-            
-                final JoinGroupNode joinGroup = new JoinGroupNode();
-                
-                joinGroup.addChild(new StatementPatternNode(new VarNode("o"),
-                        new VarNode("p2"), new VarNode("s"), null/* c */,
-                        Scope.DEFAULT_CONTEXTS));
-                
-                whereClause.addChild(joinGroup);
-                
-            }
-            
-        }
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final JoinGroupNode whereClause = new JoinGroupNode();
 
-        assertSameAST(sparql, expected, actual);
+      expected.setWhereClause(whereClause);
 
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+      {
+        final JoinGroupNode joinGroup = new JoinGroupNode();
+
+        joinGroup.setContext(new VarNode("src"));
+
+        joinGroup.addChild(
+            new StatementPatternNode(
+                new VarNode("o"),
+                new VarNode("p2"),
+                new VarNode("s"),
+                new VarNode("src"),
+                Scope.NAMED_CONTEXTS));
+
+        whereClause.addChild(joinGroup);
+      }
     }
 
-    /**
-     * Unit test for the join of a triple pattern with a join group containing
-     * only a single triple pattern.
-     * 
-     * <pre>
-     * select ?s where { ?s ?p ?o . GRAPH ?src {?o ?p2 ?s}}
-     * </pre>
-     */
-    public void test_triple_pattern_with_named_graph_group()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o . GRAPH ?src { ?o ?p2 ?s } }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for two groups, each consisting of one triple pattern.
+   *
+   * <pre>
+   * select ?s where { {?s ?p ?o} . {?o ?p2 ?s}}
+   * </pre>
+   */
+  public void test_two_simple_join_groups()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final String sparql = "select ?s where { { ?s ?p ?o } .  { ?o ?p2 ?s } }";
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            
-            expected.setWhereClause(whereClause);
-            
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            {
-            
-                final JoinGroupNode joinGroup = new JoinGroupNode();
-                
-                joinGroup.setContext(new VarNode("src"));
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-                joinGroup.addChild(new StatementPatternNode(new VarNode("o"),
-                        new VarNode("p2"), new VarNode("s"),
-                        new VarNode("src"), Scope.NAMED_CONTEXTS));
-                
-                whereClause.addChild(joinGroup);
-                
-            }
-            
-        }
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+      final JoinGroupNode group1 = new JoinGroupNode();
+      final JoinGroupNode group2 = new JoinGroupNode();
+      whereClause.addChild(group1);
+      whereClause.addChild(group2);
 
-        assertSameAST(sparql, expected, actual);
+      group1.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
+      group2.addChild(
+          new StatementPatternNode(
+              new VarNode("o"),
+              new VarNode("p2"),
+              new VarNode("s"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
     }
 
-    /**
-     * Unit test for two groups, each consisting of one triple pattern.
-     * 
-     * <pre>
-     * select ?s where { {?s ?p ?o} . {?o ?p2 ?s}}
-     * </pre>
-     */
-    public void test_two_simple_join_groups() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where { { ?s ?p ?o } .  { ?o ?p2 ?s } }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Test union of two groups.
+   *
+   * <pre>
+   * select ?s where { { ?s ?p ?o } UNION  { ?o ?p2 ?s } }
+   * </pre>
+   */
+  public void test_union_two_groups()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql =
+        ""
+            + "select ?s"
+            + " where {"
+            + "   {"
+            + "     ?s ?p ?o"
+            + "   } UNION {"
+            + "     ?o ?p2 ?s"
+            + "   } "
+            + "}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-            final JoinGroupNode group1 = new JoinGroupNode();
-            final JoinGroupNode group2 = new JoinGroupNode();
-            whereClause.addChild(group1);
-            whereClause.addChild(group2);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            group1.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            group2.addChild(new StatementPatternNode(new VarNode("o"),
-                    new VarNode("p2"), new VarNode("s"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final UnionNode union = new UnionNode();
+      whereClause.addChild(union);
 
-        }
+      union.addChild(
+          new JoinGroupNode(
+              new StatementPatternNode(
+                  new VarNode("s"),
+                  new VarNode("p"),
+                  new VarNode("o"),
+                  null /* c */,
+                  Scope.DEFAULT_CONTEXTS)));
 
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      union.addChild(
+          new JoinGroupNode(
+              new StatementPatternNode(
+                  new VarNode("o"),
+                  new VarNode("p2"),
+                  new VarNode("s"),
+                  null /* c */,
+                  Scope.DEFAULT_CONTEXTS)));
     }
 
-    /**
-     * Test union of two groups.
-     * 
-     * <pre>
-     * select ?s where { { ?s ?p ?o } UNION  { ?o ?p2 ?s } }
-     * </pre>
-     */
-    public void test_union_two_groups() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "select ?s" +
-                " where {" +
-                "   {" +
-                "     ?s ?p ?o" +
-                "   } UNION {" +
-                "     ?o ?p2 ?s" +
-                "   } " +
-                "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Test union of three groups.
+   *
+   * <pre>
+   * select ?s where { { ?s ?p1 ?o } UNION  { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } }
+   * </pre>
+   */
+  public void test_union_three_groups()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql =
+        ""
+            + "select ?s"
+            + " where {"
+            + "   {"
+            + "     ?s ?p1 ?o"
+            + "   } UNION {"
+            + "     ?s ?p2 ?o"
+            + "   } UNION {"
+            + "     ?s ?p3 ?o"
+            + "   } "
+            + "}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final VarNode s = new VarNode("s");
+      final VarNode p1 = new VarNode("p1");
+      final VarNode p2 = new VarNode("p2");
+      final VarNode p3 = new VarNode("p3");
+      final VarNode o = new VarNode("o");
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final UnionNode union = new UnionNode();
-            whereClause.addChild(union);
+      {
+        final ProjectionNode projection = new ProjectionNode();
+        projection.addProjectionVar(new VarNode("s"));
+        expected.setProjection(projection);
+      }
 
-            union.addChild(new JoinGroupNode(new StatementPatternNode(
-                    new VarNode("s"), new VarNode("p"), new VarNode("o"),
-                    null/* c */, Scope.DEFAULT_CONTEXTS)));
+      {
+        final JoinGroupNode whereClause = new JoinGroupNode();
+        expected.setWhereClause(whereClause);
 
-            union.addChild(new JoinGroupNode(new StatementPatternNode(
-                    new VarNode("o"), new VarNode("p2"), new VarNode("s"),
-                    null/* c */, Scope.DEFAULT_CONTEXTS)));
+        final UnionNode union1 = new UnionNode();
+        whereClause.addChild(union1);
 
-        }
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p1, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+        //                final UnionNode union2 = new UnionNode();
+        //                union1.addChild(new JoinGroupNode(union2));
 
-        assertSameAST(sparql, expected, actual);
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p2, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p3, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
+      }
     }
 
-    /**
-     * Test union of three groups.
-     * 
-     * <pre>
-     * select ?s where { { ?s ?p1 ?o } UNION  { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } }
-     * </pre>
-     */
-    public void test_union_three_groups() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "select ?s" +
-                " where {" +
-                "   {" +
-                "     ?s ?p1 ?o" +
-                "   } UNION {" +
-                "     ?s ?p2 ?o" +
-                "   } UNION {" +
-                "     ?s ?p3 ?o" +
-                "   } " +
-                "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Test union of four groups.
+   *
+   * <pre>
+   * select ?s where { { ?s ?p1 ?o } UNION  { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } UNION  { ?s ?p4 ?o } }
+   * </pre>
+   */
+  public void test_union_four_groups()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final VarNode s = new VarNode("s");
-            final VarNode p1 = new VarNode("p1");
-            final VarNode p2 = new VarNode("p2");
-            final VarNode p3 = new VarNode("p3");
-            final VarNode o = new VarNode("o");
+    final String sparql =
+        ""
+            + "select ?s"
+            + " where {"
+            + "   {"
+            + "     ?s ?p1 ?o"
+            + "   } UNION {"
+            + "     ?s ?p2 ?o"
+            + "   } UNION {"
+            + "     ?s ?p3 ?o"
+            + "   } UNION {"
+            + "     ?s ?p4 ?o"
+            + "   } "
+            + "}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final VarNode s = new VarNode("s");
+      final VarNode p1 = new VarNode("p1");
+      final VarNode p2 = new VarNode("p2");
+      final VarNode p3 = new VarNode("p3");
+      final VarNode p4 = new VarNode("p4");
+      final VarNode o = new VarNode("o");
 
-            {
-                final ProjectionNode projection = new ProjectionNode();
-                projection.addProjectionVar(new VarNode("s"));
-                expected.setProjection(projection);
-            }
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            {
+      {
+        final ProjectionNode projection = new ProjectionNode();
+        projection.addProjectionVar(new VarNode("s"));
+        expected.setProjection(projection);
+      }
 
-                final JoinGroupNode whereClause = new JoinGroupNode();
-                expected.setWhereClause(whereClause);
+      {
+        final JoinGroupNode whereClause = new JoinGroupNode();
+        expected.setWhereClause(whereClause);
 
-                final UnionNode union1 = new UnionNode();
-                whereClause.addChild(union1);
+        final UnionNode union1 = new UnionNode();
+        whereClause.addChild(union1);
 
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p1, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p1, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-//                final UnionNode union2 = new UnionNode();
-//                union1.addChild(new JoinGroupNode(union2));
-                
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p2, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p3, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-            }
+        //                final UnionNode union2 = new UnionNode();
+        //                union1.addChild(new JoinGroupNode(union2));
 
-        }
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p2, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p3, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-        assertSameAST(sparql, expected, actual);
-
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p4, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
+      }
     }
 
-    /**
-     * Test union of four groups.
-     * 
-     * <pre>
-     * select ?s where { { ?s ?p1 ?o } UNION  { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } UNION  { ?s ?p4 ?o } }
-     * </pre>
-     */
-    public void test_union_four_groups() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "select ?s" +
-                " where {" +
-                "   {" +
-                "     ?s ?p1 ?o" +
-                "   } UNION {" +
-                "     ?s ?p2 ?o" +
-                "   } UNION {" +
-                "     ?s ?p3 ?o" +
-                "   } UNION {" +
-                "     ?s ?p4 ?o" +
-                "   } " +
-                "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Test union of two groups with an embedded union in the third group.
+   *
+   * <pre>
+   * select ?s where { { ?s ?p1 ?o } UNION  { { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } }  }
+   * </pre>
+   */
+  public void test_union_two_groups_with_embedded_union()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final VarNode s = new VarNode("s");
-            final VarNode p1 = new VarNode("p1");
-            final VarNode p2 = new VarNode("p2");
-            final VarNode p3 = new VarNode("p3");
-            final VarNode p4 = new VarNode("p4");
-            final VarNode o = new VarNode("o");
+    final String sparql =
+        ""
+            + "select ?s"
+            + " where {"
+            + "   {"
+            + "     ?s ?p1 ?o"
+            + // group1
+            "   } UNION {"
+            + // union1
+            "       {"
+            + // group4
+            "       ?s ?p2 ?o"
+            + // group2
+            "       } UNION {"
+            + // union2
+            "       ?s ?p3 ?o"
+            + // group3
+            "       }"
+            + "   } "
+            + "}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final VarNode s = new VarNode("s");
+      final VarNode p1 = new VarNode("p1");
+      final VarNode p2 = new VarNode("p2");
+      final VarNode p3 = new VarNode("p3");
+      final VarNode o = new VarNode("o");
 
-            {
-                final ProjectionNode projection = new ProjectionNode();
-                projection.addProjectionVar(new VarNode("s"));
-                expected.setProjection(projection);
-            }
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            {
+      {
+        final ProjectionNode projection = new ProjectionNode();
+        projection.addProjectionVar(new VarNode("s"));
+        expected.setProjection(projection);
+      }
 
-                final JoinGroupNode whereClause = new JoinGroupNode();
-                expected.setWhereClause(whereClause);
+      {
+        final JoinGroupNode whereClause = new JoinGroupNode();
+        expected.setWhereClause(whereClause);
 
-                final UnionNode union1 = new UnionNode();
-                whereClause.addChild(union1);
+        final UnionNode union1 = new UnionNode();
+        final UnionNode union2 = new UnionNode();
 
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p1, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
+        whereClause.addChild(union1);
 
-//                final UnionNode union2 = new UnionNode();
-//                union1.addChild(new JoinGroupNode(union2));
-                
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p2, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p3, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p4, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-            }
+        union1.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p1, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-        }
+        union1.addChild(new JoinGroupNode(union2));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+        union2.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p2, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
 
-        assertSameAST(sparql, expected, actual);
-
+        union2.addChild(
+            new JoinGroupNode(
+                new StatementPatternNode(s, p3, o, null /* c */, Scope.DEFAULT_CONTEXTS)));
+      }
     }
 
-    /**
-     * Test union of two groups with an embedded union in the third group. 
-     * 
-     * <pre>
-     * select ?s where { { ?s ?p1 ?o } UNION  { { ?s ?p2 ?o } UNION  { ?s ?p3 ?o } }  }
-     * </pre>
-     */
-    public void test_union_two_groups_with_embedded_union()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "select ?s" +
-                " where {" +
-                "   {" +
-                "     ?s ?p1 ?o" +   // group1
-                "   } UNION {" +     // union1
-                "       {" +         // group4
-                "       ?s ?p2 ?o" + // group2
-                "       } UNION {" + // union2
-                "       ?s ?p3 ?o" + // group3
-                "       }" +
-                "   } " +
-                "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT ?s
+   * WHERE {
+   *    ?s ?p ?o .
+   *    MINUS {
+   *       ?o ?p2 ?s
+   *    }
+   * }
+   * </pre>
+   */
+  public void test_minus() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            final VarNode s = new VarNode("s");
-            final VarNode p1 = new VarNode("p1");
-            final VarNode p2 = new VarNode("p2");
-            final VarNode p3 = new VarNode("p3");
-            final VarNode o = new VarNode("o");
+    final String sparql = "select ?s where {?s ?p ?o MINUS { ?o ?p2 ?s }}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            {
-                final ProjectionNode projection = new ProjectionNode();
-                projection.addProjectionVar(new VarNode("s"));
-                expected.setProjection(projection);
-            }
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            {
-                final JoinGroupNode whereClause = new JoinGroupNode();
-                expected.setWhereClause(whereClause);
-
-                final UnionNode union1 = new UnionNode();
-                final UnionNode union2 = new UnionNode();
-
-                whereClause.addChild(union1);
-
-                union1.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p1, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-                
-                union1.addChild(new JoinGroupNode(union2));
-
-                union2.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p2, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-
-                union2.addChild(new JoinGroupNode(new StatementPatternNode(s,
-                        p3, o, null/* c */, Scope.DEFAULT_CONTEXTS)));
-
-            }
-
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
-    }
-    
-    /**
-     * <pre>
-     * SELECT ?s
-     * WHERE {
-     *    ?s ?p ?o .
-     *    MINUS {
-     *       ?o ?p2 ?s
-     *    }
-     * }
-     * </pre>
-     */
-    public void test_minus() throws MalformedQueryException, TokenMgrError,
-            ParseException {
-
-        final String sparql = "select ?s where {?s ?p ?o MINUS { ?o ?p2 ?s }}";
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            {
-                final JoinGroupNode joinGroup = new JoinGroupNode();
-                joinGroup.setMinus(true);
-                joinGroup.addChild(new StatementPatternNode(new VarNode("o"),
-                        new VarNode("p2"), new VarNode("s"), null/* c */,
-                        Scope.DEFAULT_CONTEXTS));
-                whereClause.addChild(joinGroup);
-            }
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+      {
+        final JoinGroupNode joinGroup = new JoinGroupNode();
+        joinGroup.setMinus(true);
+        joinGroup.addChild(
+            new StatementPatternNode(
+                new VarNode("o"),
+                new VarNode("p2"),
+                new VarNode("s"),
+                null /* c */,
+                Scope.DEFAULT_CONTEXTS));
+        whereClause.addChild(joinGroup);
+      }
     }
 
-    /**
-     * <pre>
-     * select ?s where {?s ?p ?o OPTIONAL { ?o ?p2 ?s }}
-     * </pre>
-     */
-    public void test_join_with_optional_triple_pattern()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o OPTIONAL { ?o ?p2 ?s }}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   *
+   *
+   * <pre>
+   * select ?s where {?s ?p ?o OPTIONAL { ?o ?p2 ?s }}
+   * </pre>
+   */
+  public void test_join_with_optional_triple_pattern()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final String sparql = "select ?s where {?s ?p ?o OPTIONAL { ?o ?p2 ?s }}";
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            {
-                final JoinGroupNode joinGroup = new JoinGroupNode();
-                joinGroup.setOptional(true);
-                joinGroup.addChild(new StatementPatternNode(new VarNode("o"),
-                        new VarNode("p2"), new VarNode("s"), null/* c */,
-                        Scope.DEFAULT_CONTEXTS));
-                whereClause.addChild(joinGroup);
-            }
-        }
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-        assertSameAST(sparql, expected, actual);
-
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+      {
+        final JoinGroupNode joinGroup = new JoinGroupNode();
+        joinGroup.setOptional(true);
+        joinGroup.addChild(
+            new StatementPatternNode(
+                new VarNode("o"),
+                new VarNode("p2"),
+                new VarNode("s"),
+                null /* c */,
+                Scope.DEFAULT_CONTEXTS));
+        whereClause.addChild(joinGroup);
+      }
     }
 
-    /**
-     * Unit test for simple triple pattern in the default context with a FILTER.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o FILTER ?s = ?o}
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_filter()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o . FILTER (?s = ?o) }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for simple triple pattern in the default context with a FILTER.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o FILTER ?s = ?o}
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_filter()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {?s ?p ?o . FILTER (?s = ?o) }";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            final ValueExpressionNode ve = new FunctionNode(
-                    FunctionRegistry.EQ, null/* scalarValues */,
-                    new ValueExpressionNode[] { new VarNode("s"),
-                            new VarNode("o") });
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(ve));
-           
-        }
+      final ValueExpressionNode ve =
+          new FunctionNode(
+              FunctionRegistry.EQ,
+              null /* scalarValues */,
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(new FilterNode(ve));
     }
 
-    /**
-     * Unit test for empty group in the default context with a FILTER.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o FILTER ?s = ?o}
-     * </pre>
-     */
-    public void test_empty_group_with_filter()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select * where { "+
-                "FILTER (?a >= \"1\"^^xsd:unsignedLong) "+
-                "FILTER (?b >= \"1\"^^xsd:unsignedLong) "+
-                "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for empty group in the default context with a FILTER.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o FILTER ?s = ?o}
+   * </pre>
+   */
+  public void test_empty_group_with_filter()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql =
+        "select * where { "
+            + "FILTER (?a >= \"1\"^^xsd:unsignedLong) "
+            + "FILTER (?b >= \"1\"^^xsd:unsignedLong) "
+            + "}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+      expected.setProjection(projection);
 
-            ILexiconConfiguration<EmbergraphValue> lexiconConfiguration = tripleStore.getLexiconRelation().getLexiconConfiguration();
-            
-            final ValueExpressionNode ve1 = new FunctionNode(
-                    FunctionRegistry.GE, null/* scalarValues */,
-                    new ValueExpressionNode[] { new VarNode("a"),
-                            new ConstantNode(lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))) });
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new FilterNode(ve1));
+      ILexiconConfiguration<EmbergraphValue> lexiconConfiguration =
+          tripleStore.getLexiconRelation().getLexiconConfiguration();
 
-            
-            final ValueExpressionNode ve2 = new FunctionNode(
-                    FunctionRegistry.GE, null/* scalarValues */,
-                    new ValueExpressionNode[] { new VarNode("b"),
-                            new ConstantNode(lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))) });
+      final ValueExpressionNode ve1 =
+          new FunctionNode(
+              FunctionRegistry.GE,
+              null /* scalarValues */,
+              new ValueExpressionNode[] {
+                new VarNode("a"),
+                new ConstantNode(
+                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
+              });
 
-            whereClause.addChild(new FilterNode(ve2));
+      whereClause.addChild(new FilterNode(ve1));
 
-        }
+      final ValueExpressionNode ve2 =
+          new FunctionNode(
+              FunctionRegistry.GE,
+              null /* scalarValues */,
+              new ValueExpressionNode[] {
+                new VarNode("b"),
+                new ConstantNode(
+                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
+              });
 
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(new FilterNode(ve2));
     }
 
-    /**
-     * Unit test for simple triple pattern in the default context with a BIND
-     * and a FILTER.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o BIND(?o AS ?x) FILTER (?s = ?x) }
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_bind_and_filter()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o . BIND(?o AS ?x) FILTER (?s = ?o) }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for simple triple pattern in the default context with a BIND and a FILTER.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o BIND(?o AS ?x) FILTER (?s = ?x) }
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_bind_and_filter()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {?s ?p ?o . BIND(?o AS ?x) FILTER (?s = ?o) }";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new AssignmentNode(new VarNode("x"),
-                    new VarNode("o")));
-            
-            final ValueExpressionNode ve = new FunctionNode(
-                    FunctionRegistry.EQ, null/* scalarValues */,
-                    new ValueExpressionNode[] { new VarNode("s"),
-                            new VarNode("o") });
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(ve));
-           
-        }
+      whereClause.addChild(new AssignmentNode(new VarNode("x"), new VarNode("o")));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final ValueExpressionNode ve =
+          new FunctionNode(
+              FunctionRegistry.EQ,
+              null /* scalarValues */,
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(new FilterNode(ve));
     }
 
-    /**
-     * Unit test for simple triple pattern in the default context with a LET
-     * and a FILTER (LET is an alternative syntax for BIND).
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o LET(?x := ?o) FILTER (?s = ?x) }
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_let_and_filter()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "select ?s where {?s ?p ?o . LET(?x := ?o) FILTER (?s = ?o) }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Unit test for simple triple pattern in the default context with a LET and a FILTER (LET is an
+   * alternative syntax for BIND).
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o LET(?x := ?o) FILTER (?s = ?x) }
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_let_and_filter()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "select ?s where {?s ?p ?o . LET(?x := ?o) FILTER (?s = ?o) }";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new AssignmentNode(new VarNode("x"),
-                    new VarNode("o")));
-            
-            final ValueExpressionNode ve = new FunctionNode(
-                    FunctionRegistry.EQ, null/* scalarValues */,
-                    new ValueExpressionNode[] { new VarNode("s"),
-                            new VarNode("o") });
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(ve));
-           
-        }
+      whereClause.addChild(new AssignmentNode(new VarNode("x"), new VarNode("o")));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final ValueExpressionNode ve =
+          new FunctionNode(
+              FunctionRegistry.EQ,
+              null /* scalarValues */,
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(new FilterNode(ve));
     }
 
-    /**
-     * IN with empty arg list in a FILTER. This should be turned into a FALSE
-     * constraint.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o . FILTER (?s IN()) }
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_IN_filter() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN())}";
+  /**
+   * IN with empty arg list in a FILTER. This should be turned into a FALSE constraint.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o . FILTER (?s IN()) }
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_IN_filter()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN())}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new FilterNode(new FunctionNode(
-                    FunctionRegistry.IN,
-                    null, // scalarValues
-                    new ValueExpressionNode[] {// args
-                    new VarNode("s") })));
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
     }
 
-    /**
-     * IN with an arg list in a FILTER. The arg list has a single value. This
-     * should be turned into a SameTerm constraint.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?o))}
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_IN_filter_singletonSet() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?o))}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * IN with an arg list in a FILTER. The arg list has a single value. This should be turned into a
+   * SameTerm constraint.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?o))}
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_IN_filter_singletonSet()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?o))}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new FilterNode(new FunctionNode(
-                    FunctionRegistry.IN,
-                    null, // scalarValues
-                    new ValueExpressionNode[] {// args
-                    new VarNode("s"), // variable 
-                    new VarNode("o")  // other arg
-                    })));
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), // variable
+                    new VarNode("o") // other arg
+                  })));
     }
 
-    /**
-     * IN with a non-empty arg list in a FILTER. The arguments are expressions
-     * rather than constants. This should be turned into a {@link ComputedIN}.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_IN_filter_variables()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * IN with a non-empty arg list in a FILTER. The arguments are expressions rather than constants.
+   * This should be turned into a {@link ComputedIN}.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_IN_filter_variables()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new FilterNode(new FunctionNode(
-                    FunctionRegistry.IN,
-                    null, // scalarValues
-                    new ValueExpressionNode[] {// args
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      whereClause.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
                     new VarNode("s"), // // variable
-                    new VarNode("p"), new VarNode("o") // other args. 
-                    })));
-
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+                    new VarNode("p"),
+                    new VarNode("o") // other args.
+                  })));
     }
 
-    /**
-     * IN with a non-empty arg list in a FILTER. The arguments are expressions
-     * rather than constants. This should be turned into an optimized IN using a
-     * hash set or binary search.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}
-     * </pre>
-     */
-    public void test_simple_triple_pattern_with_IN_filter_constants()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(1,2))}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * IN with a non-empty arg list in a FILTER. The arguments are expressions rather than constants.
+   * This should be turned into an optimized IN using a hash set or binary search.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}
+   * </pre>
+   */
+  public void test_simple_triple_pattern_with_IN_filter_constants()
+      throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(1,2))}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new FilterNode(new FunctionNode(
-                    FunctionRegistry.IN,
-                    null, // scalarValues
-                    new ValueExpressionNode[] {// args
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      whereClause.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.IN,
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
                     new VarNode("s"), // var
                     // other args to IN()
-                    new ConstantNode(makeIV(valueFactory.createLiteral("1",XSD.INTEGER))),
-                    new ConstantNode(makeIV(valueFactory.createLiteral("2",XSD.INTEGER)))
-                    })));
-
-        }
-        
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
-    }
-    
-    /**
-     * Simple SERVICE graph pattern.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. SERVICE <http://bigdata.com/myService> {?s ?p ?o}}
-     * </pre>
-     */
-    public void test_service_001()
-            throws MalformedQueryException, TokenMgrError, ParseException {
-
-        final String serviceExpr = "SERVICE <http://embergraph.org/myService> {?s ?p ?o}";
-
-        final String sparql = "SELECT ?s where {?s ?p ?o. "+serviceExpr+"}";
-
-        final IV<?, ?> serviceRefIV = makeIV(valueFactory
-                .createURI("http://embergraph.org/myService"));
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            expected.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-
-            final JoinGroupNode groupNode = new JoinGroupNode();
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-
-            final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                    serviceRefIV), groupNode);
-
-            serviceNode.setExprImage(serviceExpr);
-            serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
-
-            whereClause.addArg(serviceNode);
-            
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+                    new ConstantNode(makeIV(valueFactory.createLiteral("1", XSD.INTEGER))),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("2", XSD.INTEGER)))
+                  })));
     }
 
-    /**
-     * Simple SERVICE graph pattern with SILENT keyword.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. SERVICE SILENT <http://bigdata.com/myService> {?s ?p ?o}}
-     * </pre>
-     */
-    public void test_service_002()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String serviceExpr = "SERVICE SILENT <http://embergraph.org/myService> {?s ?p ?o}";
-        
-        final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final IV<?, ?> serviceRefIV = makeIV(valueFactory
-                .createURI("http://embergraph.org/myService"));
-        
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+  /**
+   * Simple SERVICE graph pattern.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. SERVICE <http://bigdata.com/myService> {?s ?p ?o}}
+   * </pre>
+   */
+  public void test_service_001() throws MalformedQueryException, TokenMgrError, ParseException {
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String serviceExpr = "SERVICE <http://embergraph.org/myService> {?s ?p ?o}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+    final IV<?, ?> serviceRefIV = makeIV(valueFactory.createURI("http://embergraph.org/myService"));
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      expected.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
 
-            final JoinGroupNode groupNode = new JoinGroupNode();
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            
-            final ServiceNode serviceNode = new ServiceNode(new ConstantNode(
-                    serviceRefIV), groupNode);
-            
-            serviceNode.setSilent(true);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            serviceNode.setExprImage(serviceExpr);
-            serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addArg(serviceNode);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        }
+      final JoinGroupNode groupNode = new JoinGroupNode();
+      groupNode.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final ServiceNode serviceNode = new ServiceNode(new ConstantNode(serviceRefIV), groupNode);
 
-        assertSameAST(sparql, expected, actual);
+      serviceNode.setExprImage(serviceExpr);
+      serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
 
+      whereClause.addArg(serviceNode);
     }
 
-    /**
-     * Simple SERVICE graph pattern with variable for the URI.
-     * 
-     * <pre>
-     * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
-     * </pre>
-     */
-    public void test_service_003()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
+  /**
+   * Simple SERVICE graph pattern with SILENT keyword.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. SERVICE SILENT <http://bigdata.com/myService> {?s ?p ?o}}
+   * </pre>
+   */
+  public void test_service_002() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+    final String serviceExpr = "SERVICE SILENT <http://embergraph.org/myService> {?s ?p ?o}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final IV<?, ?> serviceRefIV = makeIV(valueFactory.createURI("http://embergraph.org/myService"));
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            final JoinGroupNode groupNode = new JoinGroupNode();
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            
-            final ServiceNode serviceNode = new ServiceNode(new VarNode("o"),
-                    groupNode);
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            serviceNode.setExprImage(serviceExpr);
-            serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addArg(serviceNode);
+      final JoinGroupNode groupNode = new JoinGroupNode();
+      groupNode.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        }
+      final ServiceNode serviceNode = new ServiceNode(new ConstantNode(serviceRefIV), groupNode);
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      serviceNode.setSilent(true);
 
-        assertSameAST(sparql, expected, actual);
+      serviceNode.setExprImage(serviceExpr);
+      serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
 
+      whereClause.addArg(serviceNode);
     }
 
-    /**
-     * Simple SERVICE graph pattern with variable for the URI and prefix
-     * declarations. This verifies that the prefix declarations are harvested
-     * and attached to the {@link ServiceNode}.
-     * 
-     * <pre>
-     * PREFIX : <http://www.embergraph.org/>
-     * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
-     * </pre>
-     */
-    public void test_service_004()
-            throws MalformedQueryException, TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final String sparql = "PREFIX : <http://www.embergraph.org/>\n"
-                + "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
+  /**
+   * Simple SERVICE graph pattern with variable for the URI.
+   *
+   * <pre>
+   * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
+   * </pre>
+   */
+  public void test_service_003() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+    final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
 
-            final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-            {
-                prefixDecls.put("", "http://www.embergraph.org/");
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql = "SELECT ?s where {?s ?p ?o. " + serviceExpr + "}";
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("s"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            final JoinGroupNode groupNode = new JoinGroupNode();
-            groupNode.addChild(new StatementPatternNode(new VarNode("s"),
-                    new VarNode("p"), new VarNode("o"), null/* c */,
-                    Scope.DEFAULT_CONTEXTS));
-            
-            final ServiceNode serviceNode = new ServiceNode(new VarNode("o"),
-                    groupNode);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            serviceNode.setExprImage(serviceExpr);
+      final JoinGroupNode groupNode = new JoinGroupNode();
+      groupNode.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            serviceNode.setPrefixDecls(prefixDecls);
+      final ServiceNode serviceNode = new ServiceNode(new VarNode("o"), groupNode);
 
-            whereClause.addArg(serviceNode);
+      serviceNode.setExprImage(serviceExpr);
+      serviceNode.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
 
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
+      whereClause.addArg(serviceNode);
     }
 
-    /**
-     * A unit test for an OPTIONAL wrapping a SERVICE.
-     */
-    public void test_optional_SERVICE() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String serviceExpr = "service ?s { ?s ?p ?o  }";
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final String sparql = "select ?s where { optional { " + serviceExpr
-                + " } }";
+  /**
+   * Simple SERVICE graph pattern with variable for the URI and prefix declarations. This verifies
+   * that the prefix declarations are harvested and attached to the {@link ServiceNode}.
+   *
+   * <pre>
+   * PREFIX : <http://www.embergraph.org/>
+   * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
+   * </pre>
+   */
+  public void test_service_004() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        final ServiceNode service;
-        {
+    final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final String sparql =
+        "PREFIX : <http://www.embergraph.org/>\n"
+            + "SELECT ?s where {?s ?p ?o. "
+            + serviceExpr
+            + "}";
 
-            {
-                final ProjectionNode projection = new ProjectionNode();
-                projection.addProjectionVar(new VarNode("s"));
-                expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final Map<String, String> prefixDecls =
+          new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+      {
+        prefixDecls.put("", "http://www.embergraph.org/");
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-                final JoinGroupNode whereClause = new JoinGroupNode();
-                expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("s"));
+      expected.setProjection(projection);
 
-                final JoinGroupNode serviceGraph = new JoinGroupNode();
-                serviceGraph.addChild(new StatementPatternNode(
-                        new VarNode("s"), new VarNode("p"), new VarNode("o"),
-                        null/* c */, Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-                service = new ServiceNode(new VarNode("s"), serviceGraph);
-                service.setExprImage(serviceExpr);
-                service.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-                final JoinGroupNode wrapperGroup = new JoinGroupNode(true/* optional */);
-                whereClause.addChild(wrapperGroup);
-                wrapperGroup.addChild(service);
-            }
+      final JoinGroupNode groupNode = new JoinGroupNode();
+      groupNode.addChild(
+          new StatementPatternNode(
+              new VarNode("s"),
+              new VarNode("p"),
+              new VarNode("o"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        }
+      final ServiceNode serviceNode = new ServiceNode(new VarNode("o"), groupNode);
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      serviceNode.setExprImage(serviceExpr);
 
-        assertSameAST(sparql, expected, actual);
+      serviceNode.setPrefixDecls(prefixDecls);
 
+      whereClause.addArg(serviceNode);
     }
 
+    final QueryRoot actual = parse(sparql, baseURI);
+
+    assertSameAST(sparql, expected, actual);
+  }
+
+  /** A unit test for an OPTIONAL wrapping a SERVICE. */
+  public void test_optional_SERVICE()
+      throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String serviceExpr = "service ?s { ?s ?p ?o  }";
+
+    final String sparql = "select ?s where { optional { " + serviceExpr + " } }";
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    final ServiceNode service;
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        expected.setPrefixDecls(prefixDecls);
+      }
+
+      {
+        final ProjectionNode projection = new ProjectionNode();
+        projection.addProjectionVar(new VarNode("s"));
+        expected.setProjection(projection);
+
+        final JoinGroupNode whereClause = new JoinGroupNode();
+        expected.setWhereClause(whereClause);
+
+        final JoinGroupNode serviceGraph = new JoinGroupNode();
+        serviceGraph.addChild(
+            new StatementPatternNode(
+                new VarNode("s"),
+                new VarNode("p"),
+                new VarNode("o"),
+                null /* c */,
+                Scope.DEFAULT_CONTEXTS));
+
+        service = new ServiceNode(new VarNode("s"), serviceGraph);
+        service.setExprImage(serviceExpr);
+        service.setPrefixDecls(PrefixDeclProcessor.defaultDecls);
+
+        final JoinGroupNode wrapperGroup = new JoinGroupNode(true /* optional */);
+        whereClause.addChild(wrapperGroup);
+        wrapperGroup.addChild(service);
+      }
+    }
+
+    final QueryRoot actual = parse(sparql, baseURI);
+
+    assertSameAST(sparql, expected, actual);
+  }
 }

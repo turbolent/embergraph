@@ -20,9 +20,7 @@ package org.embergraph.rdf.sail;
 
 /**
  * Extension API for embergraph queries.
- * 
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
-public interface EmbergraphSailQuery extends EmbergraphSailOperation {
-    
-}
+public interface EmbergraphSailQuery extends EmbergraphSailOperation {}

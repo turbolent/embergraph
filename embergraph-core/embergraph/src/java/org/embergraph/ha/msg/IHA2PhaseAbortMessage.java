@@ -19,13 +19,11 @@ package org.embergraph.ha.msg;
 
 /**
  * Message indicating that a 2-phase abort should be performed.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHA2PhaseAbortMessage extends IHA2PhaseCommitProtocolMessage {
 
-    /**
-     * The token for the quorum for which this request was made.
-     */
-    long getQuorumToken();
+  /** The token for the quorum for which this request was made. */
+  long getQuorumToken();
 }

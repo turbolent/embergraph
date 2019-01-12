@@ -19,16 +19,14 @@ package org.embergraph.ha.msg;
 
 /**
  * Message requesting a snapshot.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHASnapshotRequest extends IHAMessage {
 
-    /**
-     * If the size on the disk of the HALog files is less than this percentage
-     * of the size on the disk of the journal, then the snapshot will not be
-     * taken.
-     */
-    public int getPercentLogSize();
-    
+  /**
+   * If the size on the disk of the HALog files is less than this percentage of the size on the disk
+   * of the journal, then the snapshot will not be taken.
+   */
+  public int getPercentLogSize();
 }

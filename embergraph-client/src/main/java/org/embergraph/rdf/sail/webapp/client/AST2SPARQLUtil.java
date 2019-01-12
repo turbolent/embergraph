@@ -23,148 +23,131 @@ package org.embergraph.rdf.sail.webapp.client;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
-import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.parser.sparql.SPARQLUtil;
 
 /**
  * Utility class for externalizing SPARQL prefix declaration management.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AST2SPARQLUtil {
 
-    /**
-     * The prefix declarations used within the SERVICE clause (from the original
-     * query).
-     */
-    private final Map<String, String> prefixDecls;
+  /** The prefix declarations used within the SERVICE clause (from the original query). */
+  private final Map<String, String> prefixDecls;
 
-    /** Reverse map for {@link #prefixDecls}. */
-    private final Map<String, String> namespaces;
+  /** Reverse map for {@link #prefixDecls}. */
+  private final Map<String, String> namespaces;
 
-    public AST2SPARQLUtil(final Map<String, String> prefixDecls) {
+  public AST2SPARQLUtil(final Map<String, String> prefixDecls) {
 
-        this.prefixDecls = prefixDecls;
-        
-        if (prefixDecls != null) {
+    this.prefixDecls = prefixDecls;
 
-            /*
-             * Build up a reverse map from namespace to prefix.
-             */
-            
-            namespaces = new HashMap<String, String>();
+    if (prefixDecls != null) {
 
-            for (Map.Entry<String, String> e : prefixDecls.entrySet()) {
-   
-                namespaces.put(e.getValue(), e.getKey());
-                
-            }
-            
-        } else {
-            
-            namespaces = null;
-            
-        }
+      /*
+       * Build up a reverse map from namespace to prefix.
+       */
 
+      namespaces = new HashMap<String, String>();
+
+      for (Map.Entry<String, String> e : prefixDecls.entrySet()) {
+
+        namespaces.put(e.getValue(), e.getKey());
+      }
+
+    } else {
+
+      namespaces = null;
     }
-    
-    /**
-     * Return an external form for the {@link Value} suitable for direct
-     * embedding into a SPARQL query.
-     * 
-     * @param val
-     *            The value.
-     * 
-     * @return The external form.
-     */
-    public String toExternal(final Value val) {
-        
-        if (val instanceof URI) {
+  }
 
-            return toExternal((URI) val);
-        
-        } else if (val instanceof Literal) {
-        
-            return toExternal((Literal)val);
-            
-        } else if (val instanceof BNode) {
+  /**
+   * Return an external form for the {@link Value} suitable for direct embedding into a SPARQL
+   * query.
+   *
+   * @param val The value.
+   * @return The external form.
+   */
+  public String toExternal(final Value val) {
 
-            return toExternal((BNode)val);
-            
-        } else {
-            
-            throw new AssertionError();
-            
-        }
+    if (val instanceof URI) {
 
+      return toExternal((URI) val);
+
+    } else if (val instanceof Literal) {
+
+      return toExternal((Literal) val);
+
+    } else if (val instanceof BNode) {
+
+      return toExternal((BNode) val);
+
+    } else {
+
+      throw new AssertionError();
     }
-    
-    public String toExternal(final BNode bnd) {
+  }
 
-        final String id = bnd.stringValue();
+  public String toExternal(final BNode bnd) {
 
-//        final boolean isLetter = Character.isLetter(id.charAt(0));
+    final String id = bnd.stringValue();
 
-//        return "_:" + (isLetter ? "" : "B") + id;
-        return "_:B" + id;
+    //        final boolean isLetter = Character.isLetter(id.charAt(0));
 
+    //        return "_:" + (isLetter ? "" : "B") + id;
+    return "_:B" + id;
+  }
+
+  public String toExternal(final URI uri) {
+
+    if (prefixDecls != null) {
+
+      final String prefix = namespaces.get(uri.getNamespace());
+
+      if (prefix != null) {
+
+        return prefix + ":" + uri.getLocalName();
+      }
     }
-    
-    public String toExternal(final URI uri) {
 
-        if (prefixDecls != null) {
+    return "<" + uri.stringValue() + ">";
+  }
 
-            final String prefix = namespaces.get(uri.getNamespace());
+  public String toExternal(final Literal lit) {
 
-            if (prefix != null) {
+    final String label = lit.getLabel();
 
-                return prefix + ":" + uri.getLocalName();
+    final String languageCode = lit.getLanguage();
 
-            }
+    final URI datatypeURI = lit.getDatatype();
 
-        }
+    final String datatypeStr = datatypeURI == null ? null : toExternal(datatypeURI);
 
-        return "<" + uri.stringValue() + ">";
-
-    }
-    
-    public String toExternal(final Literal lit) {
-
-        final String label = lit.getLabel();
-        
-        final String languageCode = lit.getLanguage();
-        
-        final URI datatypeURI = lit.getDatatype();
-
-        final String datatypeStr = datatypeURI == null ? null
-                : toExternal(datatypeURI);
-
-        final StringBuilder sb = new StringBuilder((label.length() + 2)
+    final StringBuilder sb =
+        new StringBuilder(
+            (label.length() + 2)
                 + (languageCode != null ? (languageCode.length() + 1) : 0)
                 + (datatypeURI != null ? datatypeStr.length() + 2 : 0));
 
-        sb.append('"');
-        sb.append(SPARQLUtil.encodeString(label));
-        sb.append('"');
+    sb.append('"');
+    sb.append(SPARQLUtil.encodeString(label));
+    sb.append('"');
 
-        if (languageCode != null) {
-            sb.append('@');
-            sb.append(languageCode);
-        }
-
-        if (datatypeURI != null) {
-            sb.append("^^");
-            sb.append(datatypeStr);
-        }
-
-        return sb.toString();
-
+    if (languageCode != null) {
+      sb.append('@');
+      sb.append(languageCode);
     }
 
+    if (datatypeURI != null) {
+      sb.append("^^");
+      sb.append(datatypeStr);
+    }
+
+    return sb.toString();
+  }
 }

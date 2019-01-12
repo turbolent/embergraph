@@ -22,33 +22,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 import org.apache.log4j.Logger;
-
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 
 /**
  * Test suite for {@link ASTLiftPreFiltersOptimizer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestASTLiftPreFiltersOptimizer extends
-        AbstractASTEvaluationTestCase {
+public class TestASTLiftPreFiltersOptimizer extends AbstractASTEvaluationTestCase {
 
-    private final static Logger log = Logger
-            .getLogger(TestASTLiftPreFiltersOptimizer.class);
-    
-    public TestASTLiftPreFiltersOptimizer() {
-        super();
-    }
+  private static final Logger log = Logger.getLogger(TestASTLiftPreFiltersOptimizer.class);
 
-    public TestASTLiftPreFiltersOptimizer(final String name) {
-        super(name);
-    }
+  public TestASTLiftPreFiltersOptimizer() {
+    super();
+  }
 
-    /** FIXME Write the optimizer and write this test suite. */
-    public void test_optimizer() {
-//        fail("write test");
-        log.error("write test");
-    }
-    
+  public TestASTLiftPreFiltersOptimizer(final String name) {
+    super(name);
+  }
+
+  /** FIXME Write the optimizer and write this test suite. */
+  public void test_optimizer() {
+    //        fail("write test");
+    log.error("write test");
+  }
 }

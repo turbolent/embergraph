@@ -4,34 +4,31 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTLimit extends SimpleNode {
 
-	private long value;
+  private long value;
 
-	public ASTLimit(int id) {
-		super(id);
-	}
+  public ASTLimit(int id) {
+    super(id);
+  }
 
-	public ASTLimit(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTLimit(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public long getValue() {
-		return value;
-	}
+  public long getValue() {
+    return value;
+  }
 
-	public void setValue(long value) {
-		this.value = value;
-	}
+  public void setValue(long value) {
+    this.value = value;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + value + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + value + ")";
+  }
 }

@@ -28,247 +28,239 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.util.CSVReader.Header;
 
 /**
  * Test suite for {@link CSVReader}.
- * 
- * @todo test "correct" default intepretation of more kinds of formats by
- *       {@link Header#parseValue(String)}.
- * 
+ *
+ * @todo test "correct" default intepretation of more kinds of formats by {@link
+ *     Header#parseValue(String)}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCSVReader extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestCSVReader() {
-        super();
+  /** */
+  public TestCSVReader() {
+    super();
+  }
+
+  /** @param name */
+  public TestCSVReader(String name) {
+    super(name);
+  }
+
+  public void test_ctor_correctRejection() throws IOException {
+
+    try {
+      new CSVReader(null, "UTF-8");
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestCSVReader(String name) {
-        super(name);
+    try {
+      new CSVReader(new ByteArrayInputStream(new byte[] {}), null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      log.info("Ignoring expected exception: " + ex);
     }
+  }
 
-    public void test_ctor_correctRejection() throws IOException {
-        
-        try {
-            new CSVReader(null,"UTF-8");
-            fail("Expecting: "+IllegalArgumentException.class);
-        } catch(IllegalArgumentException ex) {
-            log.info("Ignoring expected exception: "+ex);
-        }
+  /**
+   * Test reads from a tab-delimited file <code>test.csv</code> with headers in the first row and
+   * two rows of data.
+   *
+   * @throws IOException
+   * @throws ParseException
+   */
+  public void test_read_test_csv() throws IOException, ParseException {
 
-        try {
-            new CSVReader(new ByteArrayInputStream(new byte[]{}),null);
-            fail("Expecting: "+IllegalArgumentException.class);
-        } catch(IllegalArgumentException ex) {
-            log.info("Ignoring expected exception: "+ex);
-        }
-
-    }
-    
-    /**
-     * Test reads from a tab-delimited file <code>test.csv</code> with headers
-     * in the first row and two rows of data.
-     * 
-     * @throws IOException
-     * @throws ParseException
-     */
-    public void test_read_test_csv() throws IOException, ParseException {
-        
-        Header[] headers = new Header[] {
-          
-                new Header("Name"),
-                new Header("Id"),
-                new Header("Employer"),
-                new Header("DateOfHire"),
-                new Header("Salary"),
-                
+    Header[] headers =
+        new Header[] {
+          new Header("Name"),
+          new Header("Id"),
+          new Header("Employer"),
+          new Header("DateOfHire"),
+          new Header("Salary"),
         };
-        
-        CSVReader r = new CSVReader(
-                getTestInputStream("org/embergraph/util/test.csv"), "UTF-8");
 
-        /* 
-         * read headers.
-         */
-        assertTrue(r.hasNext());
+    CSVReader r = new CSVReader(getTestInputStream("org/embergraph/util/test.csv"), "UTF-8");
 
-        r.readHeaders();
-        
-        assertEquals(1,r.lineNo());
-
-        assertEquals(headers, r.headers);
-        
-        /*
-         * 1st row of data.
-         */
-        assertTrue(r.hasNext());
-
-        assertSameValues(newMap(headers, new Object[] { "Bryan Thompson",
-                new Long(12), "SAIC",
-                new SimpleDateFormat("MM/dd/yy").parse("4/30/2002"),
-                new Double(12.02)
-        }), r.next() );
-
-        assertEquals(2,r.lineNo());
-
-        
-        /*
-         * 2nd row of data.
-         */
-        assertTrue(r.hasNext());
-
-        assertSameValues( newMap(headers, new Object[]{
-                "Bryan Thompson",
-                new Long(12), "SYSTAP",
-                new SimpleDateFormat("MM/dd/yy").parse("4/30/2005"),
-                new Double(13.03)
-        }), r.next() );
-
-        assertEquals(3,r.lineNo());
-
-        /* 
-         * Verify EOF.
-         */
-        assertFalse(r.hasNext());
-        
-    }
-
-    /**
-     * Test reads from a tab-delimited file <code>test-no-headers.csv</code>
-     * with NO headers and two rows of data.
-     * 
-     * @throws IOException
-     * @throws ParseException
+    /*
+     * read headers.
      */
-    public void test_read_test_no_headers_csv() throws IOException, ParseException {
-        
-        Header[] headers = new Header[] {
-          
-                new Header("1"),
-                new Header("2"),
-                new Header("3"),
-                new Header("4"),
-                new Header("5"),
-                
+    assertTrue(r.hasNext());
+
+    r.readHeaders();
+
+    assertEquals(1, r.lineNo());
+
+    assertEquals(headers, r.headers);
+
+    /*
+     * 1st row of data.
+     */
+    assertTrue(r.hasNext());
+
+    assertSameValues(
+        newMap(
+            headers,
+            new Object[] {
+              "Bryan Thompson",
+              new Long(12),
+              "SAIC",
+              new SimpleDateFormat("MM/dd/yy").parse("4/30/2002"),
+              new Double(12.02)
+            }),
+        r.next());
+
+    assertEquals(2, r.lineNo());
+
+    /*
+     * 2nd row of data.
+     */
+    assertTrue(r.hasNext());
+
+    assertSameValues(
+        newMap(
+            headers,
+            new Object[] {
+              "Bryan Thompson",
+              new Long(12),
+              "SYSTAP",
+              new SimpleDateFormat("MM/dd/yy").parse("4/30/2005"),
+              new Double(13.03)
+            }),
+        r.next());
+
+    assertEquals(3, r.lineNo());
+
+    /*
+     * Verify EOF.
+     */
+    assertFalse(r.hasNext());
+  }
+
+  /**
+   * Test reads from a tab-delimited file <code>test-no-headers.csv</code> with NO headers and two
+   * rows of data.
+   *
+   * @throws IOException
+   * @throws ParseException
+   */
+  public void test_read_test_no_headers_csv() throws IOException, ParseException {
+
+    Header[] headers =
+        new Header[] {
+          new Header("1"), new Header("2"), new Header("3"), new Header("4"), new Header("5"),
         };
-        
-        CSVReader r = new CSVReader(
-                getTestInputStream("org/embergraph/util/test-no-headers.csv"), "UTF-8");
 
-        /*
-         * 1st row of data.
-         */
-        assertTrue(r.hasNext());
+    CSVReader r =
+        new CSVReader(getTestInputStream("org/embergraph/util/test-no-headers.csv"), "UTF-8");
 
-        assertSameValues(newMap(headers, new Object[] { "Bryan Thompson",
-                new Long(12), "SAIC",
-                new SimpleDateFormat("MM/dd/yy").parse("4/30/2002"),
-                new Double(12.02)
-        }), r.next() );
-
-        assertEquals(1,r.lineNo());
-
-        
-        /*
-         * 2nd row of data.
-         */
-        assertTrue(r.hasNext());
-
-        assertSameValues( newMap(headers, new Object[]{
-                "Bryan Thompson",
-                new Long(12), "SYSTAP",
-                new SimpleDateFormat("MM/dd/yy").parse("4/30/2005"),
-                new Double(13.03)
-        }), r.next() );
-
-        assertEquals(2,r.lineNo());
-
-        /* 
-         * Verify EOF.
-         */
-        assertFalse(r.hasNext());
-        
-    }
-
-    protected void assertEquals(Header[] expected, Header[] actual) {
-        
-        assertEquals(expected.length,actual.length);
-        
-        for(int i=0; i<expected.length; i++) {
-            
-            if(!expected[i].equals( actual[i])) {
-                
-                fail("headers["+i+"], expected ["+expected[i]+"]u not ["+actual[i]+"]" );
-                
-            }
-            
-        }
-        
-    }
-    
-    /**
-     * Form data structure modeling an expected (parsed) row.
-     * 
-     * @param headers
-     *            The headers.
-     * @param vals
-     *            The values (one per header and in the same order).
-     *            
-     * @return The map containing the appropriate values.
+    /*
+     * 1st row of data.
      */
-    protected Map<String,Object> newMap(Header[] headers, Object[] vals) {
+    assertTrue(r.hasNext());
 
-        assert headers.length==vals.length;
-        
-        Map<String,Object> map = new TreeMap<String,Object>();
-        
-        for(int i=0; i<headers.length; i++) {
-            
-            map.put(headers[i].getName(),vals[i]);
-            
-        }
-        
-        assert map.size() == headers.length;
-        
-        return map;
-        
+    assertSameValues(
+        newMap(
+            headers,
+            new Object[] {
+              "Bryan Thompson",
+              new Long(12),
+              "SAIC",
+              new SimpleDateFormat("MM/dd/yy").parse("4/30/2002"),
+              new Double(12.02)
+            }),
+        r.next());
+
+    assertEquals(1, r.lineNo());
+
+    /*
+     * 2nd row of data.
+     */
+    assertTrue(r.hasNext());
+
+    assertSameValues(
+        newMap(
+            headers,
+            new Object[] {
+              "Bryan Thompson",
+              new Long(12),
+              "SYSTAP",
+              new SimpleDateFormat("MM/dd/yy").parse("4/30/2005"),
+              new Double(13.03)
+            }),
+        r.next());
+
+    assertEquals(2, r.lineNo());
+
+    /*
+     * Verify EOF.
+     */
+    assertFalse(r.hasNext());
+  }
+
+  protected void assertEquals(Header[] expected, Header[] actual) {
+
+    assertEquals(expected.length, actual.length);
+
+    for (int i = 0; i < expected.length; i++) {
+
+      if (!expected[i].equals(actual[i])) {
+
+        fail("headers[" + i + "], expected [" + expected[i] + "]u not [" + actual[i] + "]");
+      }
     }
-    
-    protected void assertSameValues(Map<String,Object> expected, Map<String,Object> actual) {
-        
-        assertEquals("#of values", expected.size(), actual.size() );
-        
-        Iterator<String> itr = expected.keySet().iterator();
+  }
 
-        while(itr.hasNext()) {
-            
-            String col = itr.next();
-            
-            assertTrue("No value: col=" + col, actual.containsKey(col));
-            
-            Object expectedValue = expected.get(col);
+  /**
+   * Form data structure modeling an expected (parsed) row.
+   *
+   * @param headers The headers.
+   * @param vals The values (one per header and in the same order).
+   * @return The map containing the appropriate values.
+   */
+  protected Map<String, Object> newMap(Header[] headers, Object[] vals) {
 
-            Object actualValue = actual.get(col);
-            
-            assertNotNull("Col="+col+" is null.", actualValue);
-            
-            assertEquals("Col="+col, expectedValue.getClass(), actualValue.getClass());
-            
-            assertEquals("Col="+col, expectedValue, actualValue);
-            
-        }
-        
+    assert headers.length == vals.length;
+
+    Map<String, Object> map = new TreeMap<String, Object>();
+
+    for (int i = 0; i < headers.length; i++) {
+
+      map.put(headers[i].getName(), vals[i]);
     }
-    
+
+    assert map.size() == headers.length;
+
+    return map;
+  }
+
+  protected void assertSameValues(Map<String, Object> expected, Map<String, Object> actual) {
+
+    assertEquals("#of values", expected.size(), actual.size());
+
+    Iterator<String> itr = expected.keySet().iterator();
+
+    while (itr.hasNext()) {
+
+      String col = itr.next();
+
+      assertTrue("No value: col=" + col, actual.containsKey(col));
+
+      Object expectedValue = expected.get(col);
+
+      Object actualValue = actual.get(col);
+
+      assertNotNull("Col=" + col + " is null.", actualValue);
+
+      assertEquals("Col=" + col, expectedValue.getClass(), actualValue.getClass());
+
+      assertEquals("Col=" + col, expectedValue, actualValue);
+    }
+  }
 }

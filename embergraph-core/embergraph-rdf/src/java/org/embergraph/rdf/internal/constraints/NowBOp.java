@@ -21,11 +21,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Map;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.ImmutableBOp;
@@ -33,74 +31,60 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
-/**
- * Implements the now() operator.
- */
-public class NowBOp extends IVValueExpression<IV> implements INeedsMaterialization{
+/** Implements the now() operator. */
+public class NowBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-    /**
-	 *
-	 */
-    private static final long serialVersionUID = 9136864442064392445L;
+  /** */
+  private static final long serialVersionUID = 9136864442064392445L;
 
-    public interface Annotations extends ImmutableBOp.Annotations {
+  public interface Annotations extends ImmutableBOp.Annotations {}
 
+  public NowBOp(final GlobalAnnotations globals) {
+
+    this(BOp.NOARGS, anns(globals));
+  }
+
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args The operands.
+   * @param op The operation.
+   */
+  public NowBOp(final BOp[] args, Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public NowBOp(final NowBOp op) {
+
+    super(op);
+  }
+
+  public final IV get(final IBindingSet bs) {
+
+    final Calendar cal = Calendar.getInstance();
+    final Date now = cal.getTime();
+    final GregorianCalendar c = new GregorianCalendar();
+    c.setTime(now);
+    try {
+      final XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+      return super.asIV(getValueFactory().createLiteral(date), bs);
+    } catch (DatatypeConfigurationException e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public NowBOp(final GlobalAnnotations globals) {
+  public String toString() {
 
-        this(BOp.NOARGS, anns(globals));
+    return "now()";
+  }
 
-    }
-
-    /**
-     * Required shallow copy constructor.
-     *
-     * @param args
-     *            The operands.
-     * @param op
-     *            The operation.
-     */
-    public NowBOp(final BOp[] args, Map<String, Object> anns) {
-
-        super(args, anns);
-
-    }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     *
-     * @param op
-     */
-    public NowBOp(final NowBOp op) {
-
-        super(op);
-
-    }
-
-    final public IV get(final IBindingSet bs) {
-
-        final Calendar cal = Calendar.getInstance();
-        final Date now = cal.getTime();
-        final GregorianCalendar c = new GregorianCalendar();
-        c.setTime(now);
-        try {
-            final XMLGregorianCalendar date = 
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-            return super.asIV(getValueFactory().createLiteral(date), bs);
-        } catch (DatatypeConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String toString() {
-
-        return "now()";
-
-    }
-
-    public Requirement getRequirement() {
-        return Requirement.NEVER;
-    }
-
+  public Requirement getRequirement() {
+    return Requirement.NEVER;
+  }
 }

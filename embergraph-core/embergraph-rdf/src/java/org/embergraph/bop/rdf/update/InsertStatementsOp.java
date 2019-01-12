@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
@@ -36,95 +35,80 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Vectored insert operator for RDF Statements. The solutions flowing through
- * this operator MUST bind the <code>s</code>, <code>p</code>, <code>o</code>,
- * and (depending on the database mode) MAY bind the <code>c</code> variable.
- * Those variables correspond to the Subject, Predicate, Object, and
- * Context/Graph position of an RDF {@link Statement} respectively. On input,
- * the variables must be real {@link IV}s. The {@link IVCache} does NOT need to
- * be set. The output is an empty solution.
- * 
+ * Vectored insert operator for RDF Statements. The solutions flowing through this operator MUST
+ * bind the <code>s</code>, <code>p</code>, <code>o</code>, and (depending on the database mode) MAY
+ * bind the <code>c</code> variable. Those variables correspond to the Subject, Predicate, Object,
+ * and Context/Graph position of an RDF {@link Statement} respectively. On input, the variables must
+ * be real {@link IV}s. The {@link IVCache} does NOT need to be set. The output is an empty
+ * solution.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public final class InsertStatementsOp extends AbstractAddRemoveStatementsOp {
 
-    public InsertStatementsOp(final BOp[] args,
-            final Map<String, Object> annotations) {
+  public InsertStatementsOp(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
+    super(args, annotations);
+  }
 
+  public InsertStatementsOp(final InsertStatementsOp op) {
+    super(op);
+  }
+
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  @Override
+  public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
+
+    return new FutureTask<Void>(new ChunkTask(context, this));
+  }
+
+  private static class ChunkTask implements Callable<Void> {
+
+    private final BOpContext<IBindingSet> context;
+
+    private final AbstractTripleStore tripleStore;
+
+    private final boolean sids;
+
+    private final boolean quads;
+
+    public ChunkTask(final BOpContext<IBindingSet> context, final InsertStatementsOp op) {
+
+      this.context = context;
+
+      final String namespace = ((String[]) op.getRequiredProperty(Annotations.RELATION_NAME))[0];
+
+      final long timestamp = (Long) op.getRequiredProperty(Annotations.TIMESTAMP);
+
+      this.tripleStore = (AbstractTripleStore) context.getResource(namespace, timestamp);
+
+      this.sids = tripleStore.isStatementIdentifiers();
+
+      this.quads = tripleStore.isQuads();
     }
-
-    public InsertStatementsOp(final InsertStatementsOp op) {
-        super(op);
-    }
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
 
     @Override
-    public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
+    public Void call() throws Exception {
 
-        return new FutureTask<Void>(new ChunkTask(context, this));
+      final boolean bindsC = sids | quads;
 
+      // Build set of distinct ISPOs.
+      final Set<ISPO> b = acceptSolutions(context, bindsC);
+
+      // Convert into array.
+      final ISPO[] stmts = b.toArray(new ISPO[b.size()]);
+
+      // Write on the database.
+      final long nmodified = tripleStore.addStatements(stmts, stmts.length);
+
+      // Increment by the #of statements written.
+      context.getStats().mutationCount.add(nmodified);
+
+      // done.
+      return null;
     }
-
-    static private class ChunkTask implements Callable<Void> {
-
-        private final BOpContext<IBindingSet> context;
-
-        private final AbstractTripleStore tripleStore;
-
-        private final boolean sids;
-
-        private final boolean quads;
-
-        public ChunkTask(final BOpContext<IBindingSet> context,
-                final InsertStatementsOp op) {
-
-            this.context = context;
-
-            final String namespace = ((String[]) op
-                    .getRequiredProperty(Annotations.RELATION_NAME))[0];
-
-            final long timestamp = (Long) op
-                    .getRequiredProperty(Annotations.TIMESTAMP);
-
-            this.tripleStore = (AbstractTripleStore) context.getResource(
-                    namespace, timestamp);
-
-            this.sids = tripleStore.isStatementIdentifiers();
-
-            this.quads = tripleStore.isQuads();
-
-        }
-
-        @Override
-        public Void call() throws Exception {
-
-            final boolean bindsC = sids | quads;
-
-            // Build set of distinct ISPOs.
-            final Set<ISPO> b = acceptSolutions(context, bindsC);
-
-            // Convert into array.
-            final ISPO[] stmts = b.toArray(new ISPO[b.size()]);
-
-            // Write on the database.
-            final long nmodified = tripleStore.addStatements(stmts,
-                    stmts.length);
-
-            // Increment by the #of statements written.
-            context.getStats().mutationCount.add(nmodified);
-            
-            // done.
-            return null;
-
-        }
-
-    } // ChunkTask
-
+  } // ChunkTask
 } // InsertStatements

@@ -23,49 +23,39 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-	/**
-	 * Returns a test that will run each of the implementation specific test
-	 * suites in turn.
-	 * 
-	 * @todo The {@link EmbergraphValue} and {@link EmbergraphStatement}
-	 *       implementation and those implementations should be tested for
-	 *       Sesame 2 API compatibility.
-	 */
-    public static Test suite()
-    {
+  /**
+   * Returns a test that will run each of the implementation specific test suites in turn.
+   *
+   * @todo The {@link EmbergraphValue} and {@link EmbergraphStatement} implementation and those
+   *     implementations should be tested for Sesame 2 API compatibility.
+   */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("RDF data model");
+    final TestSuite suite = new TestSuite("RDF data model");
 
-        // value factory test suite.
-        suite.addTestSuite(TestFactory.class);
+    // value factory test suite.
+    suite.addTestSuite(TestFactory.class);
 
-        // test suite for Value.equals()
-        suite.addTestSuite(TestEquals.class);
+    // test suite for Value.equals()
+    suite.addTestSuite(TestEquals.class);
 
-        // test suite for serialization semantics.
-        suite.addTestSuite(TestEmbergraphValueSerialization.class);
+    // test suite for serialization semantics.
+    suite.addTestSuite(TestEmbergraphValueSerialization.class);
 
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

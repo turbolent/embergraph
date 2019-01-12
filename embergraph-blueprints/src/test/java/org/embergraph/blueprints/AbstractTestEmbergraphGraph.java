@@ -17,276 +17,257 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.blueprints;
 
-import java.util.Properties;
-
-import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.Journal;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.EmbergraphSail;
-import org.embergraph.rdf.sail.EmbergraphSail.Options;
-import org.embergraph.rdf.vocab.NoVocabulary;
 import com.tinkerpop.blueprints.EdgeTestSuite;
 import com.tinkerpop.blueprints.GraphQueryTestSuite;
 import com.tinkerpop.blueprints.GraphTestSuite;
 import com.tinkerpop.blueprints.VertexQueryTestSuite;
 import com.tinkerpop.blueprints.VertexTestSuite;
 import com.tinkerpop.blueprints.impls.GraphTest;
-
+import java.util.Properties;
 import junit.framework.TestCase2;
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
+import org.embergraph.rdf.vocab.NoVocabulary;
 
-/**
- */
+/** */
 public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
-    
-    /**
-     * 
+
+  /** */
+  public AbstractTestEmbergraphGraph() {
+    super();
+  }
+
+  /** @param name */
+  public AbstractTestEmbergraphGraph(final String name) {
+    super(name);
+  }
+
+  protected EmbergraphSail getSail() {
+
+    return getSail(getProperties());
+  }
+
+  @Override
+  public Properties getProperties() {
+
+    final Properties props = new Properties();
+
+    props.setProperty(Journal.Options.COLLECT_PLATFORM_STATISTICS, "false");
+
+    props.setProperty(Journal.Options.COLLECT_QUEUE_STATISTICS, "false");
+
+    props.setProperty(Journal.Options.HTTPD_PORT, "-1" /* none */);
+
+    // transient means that there is nothing to delete after the test.
+    //        props.setProperty(Options.BUFFER_MODE,BufferMode.Transient.toString());
+    props.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());
+
+    /*
+     * If an explicit filename is not specified...
      */
-    public AbstractTestEmbergraphGraph() {
-    	super();
+    if (props.get(Options.FILE) == null) {
+
+      /*
+       * Use a temporary file for the test. Such files are always deleted when
+       * the journal is closed or the VM exits.
+       */
+
+      props.setProperty(Options.CREATE_TEMP_FILE, "true");
+
+      props.setProperty(Options.DELETE_ON_EXIT, "true");
     }
 
-    /**
-     * @param name
-     */
-    public AbstractTestEmbergraphGraph(final String name) {
-    	super(name);
-    }
-    
-    protected EmbergraphSail getSail() {
-        
-        return getSail(getProperties());
-        
-    }
-    
-    @Override
-    public Properties getProperties() {
-        
-        final Properties props = new Properties();
-        
-        props.setProperty(Journal.Options.COLLECT_PLATFORM_STATISTICS,
-                "false");
+    // no inference
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
 
-        props.setProperty(Journal.Options.COLLECT_QUEUE_STATISTICS,
-                "false");
+    // no text index
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
-        props.setProperty(Journal.Options.HTTPD_PORT, "-1"/* none */);
-        
-        // transient means that there is nothing to delete after the test.
-//        props.setProperty(Options.BUFFER_MODE,BufferMode.Transient.toString());
-        props.setProperty(Options.BUFFER_MODE,BufferMode.Disk.toString());
+    // triples mode
+    props.setProperty(EmbergraphSail.Options.QUADS, "false");
+    props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
 
-        /*
-         * If an explicit filename is not specified...
-         */
-        if(props.get(Options.FILE)==null) {
+    return props;
+  }
 
-            /*
-             * Use a temporary file for the test. Such files are always deleted when
-             * the journal is closed or the VM exits.
-             */
+  private Properties properties = null;
 
-            props.setProperty(Options.CREATE_TEMP_FILE,"true");
-        
-            props.setProperty(Options.DELETE_ON_EXIT,"true");
-            
-        }
+  @Override
+  protected void tearDown() throws Exception {
 
-        //no inference
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        
-        // no text index
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        // triples mode
-        props.setProperty(EmbergraphSail.Options.QUADS, "false");
-        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
-        
-        return props;
-        
+    properties = null;
+  }
+
+  protected EmbergraphSail getSail(final Properties properties) {
+
+    this.properties = properties;
+
+    return new EmbergraphSail(properties);
+  }
+
+  protected EmbergraphSail reopenSail(final EmbergraphSail sail) {
+
+    //        final Properties properties = sail.getProperties();
+
+    if (sail.isOpen()) {
+
+      try {
+
+        sail.shutDown();
+
+      } catch (Exception ex) {
+
+        throw new RuntimeException(ex);
+      }
     }
 
-    private Properties properties = null;
+    return getSail(properties);
+  }
 
-    @Override
-    protected void tearDown() throws Exception {
+  protected abstract GraphTest newEmbergraphGraphTest() throws Exception;
 
-        properties = null;
-        
-    }
-    
-    protected EmbergraphSail getSail(final Properties properties) {
-        
-        this.properties = properties;
-        
-        return new EmbergraphSail(properties);
-        
-    }
+  public void testVertexTestSuite() throws Exception {
+    final GraphTest test = newEmbergraphGraphTest();
+    test.stopWatch();
+    test.doTestSuite(new VertexTestSuite(test));
+    GraphTest.printTestPerformance("VertexTestSuite", test.stopWatch());
+  }
 
-    protected EmbergraphSail reopenSail(final EmbergraphSail sail) {
+  public void testEdgeSuite() throws Exception {
+    final GraphTest test = newEmbergraphGraphTest();
+    test.stopWatch();
+    test.doTestSuite(new EdgeTestSuite(test));
+    GraphTest.printTestPerformance("EdgeTestSuite", test.stopWatch());
+  }
 
-//        final Properties properties = sail.getProperties();
+  public void testGraphSuite() throws Exception {
+    final GraphTest test = newEmbergraphGraphTest();
+    test.stopWatch();
+    test.doTestSuite(new GraphTestSuite(test));
+    GraphTest.printTestPerformance("GraphTestSuite", test.stopWatch());
+  }
 
-        if (sail.isOpen()) {
+  public void testVertexQueryTestSuite() throws Exception {
+    final GraphTest test = newEmbergraphGraphTest();
+    test.stopWatch();
+    test.doTestSuite(new VertexQueryTestSuite(test));
+    GraphTest.printTestPerformance("VertexQueryTestSuite", test.stopWatch());
+  }
 
-            try {
+  public void testGraphQueryTestSuite() throws Exception {
+    final GraphTest test = newEmbergraphGraphTest();
+    test.stopWatch();
+    test.doTestSuite(new GraphQueryTestSuite(test));
+    GraphTest.printTestPerformance("GraphQueryTestSuite", test.stopWatch());
+  }
 
-                sail.shutDown();
+  //    public void testTransactionalGraphTestSuite() throws Exception {
+  //    	final GraphTest test = newEmbergraphGraphTest();
+  //    	test.stopWatch();
+  //        test.doTestSuite(new TransactionalGraphTestSuite(test));
+  //        GraphTest.printTestPerformance("TransactionalGraphTestSuite", test.stopWatch());
+  //    }
+  //
+  //    public void testGraphQueryForHasOR() throws Exception {
+  //        final EmbergraphGraphTest test = newEmbergraphGraphTest();
+  //        test.stopWatch();
+  //        final EmbergraphTestSuite testSuite = new EmbergraphTestSuite(test);
+  //        try {
+  //            testSuite.testGraphQueryForHasOR();
+  //        } finally {
+  //            test.shutdown();
+  //        }
+  //
+  //    }
 
-            } catch (Exception ex) {
-
-                throw new RuntimeException(ex);
-
-            }
-
-        }
-        
-        return getSail(properties);
-        
-    }
-
-    protected abstract GraphTest newEmbergraphGraphTest() throws Exception;
-    
-
-    public void testVertexTestSuite() throws Exception {
-    	final GraphTest test = newEmbergraphGraphTest();
-    	test.stopWatch();
-        test.doTestSuite(new VertexTestSuite(test));
-        GraphTest.printTestPerformance("VertexTestSuite", test.stopWatch());
-    }
-
-    public void testEdgeSuite() throws Exception {
-    	final GraphTest test = newEmbergraphGraphTest();
-    	test.stopWatch();
-        test.doTestSuite(new EdgeTestSuite(test));
-        GraphTest.printTestPerformance("EdgeTestSuite", test.stopWatch());
-    }
-
-    public void testGraphSuite() throws Exception {
-    	final GraphTest test = newEmbergraphGraphTest();
-    	test.stopWatch();
-        test.doTestSuite(new GraphTestSuite(test));
-        GraphTest.printTestPerformance("GraphTestSuite", test.stopWatch());
-    }
-
-    public void testVertexQueryTestSuite() throws Exception {
-    	final GraphTest test = newEmbergraphGraphTest();
-    	test.stopWatch();
-        test.doTestSuite(new VertexQueryTestSuite(test));
-        GraphTest.printTestPerformance("VertexQueryTestSuite", test.stopWatch());
-    }
-
-    public void testGraphQueryTestSuite() throws Exception {
-    	final GraphTest test = newEmbergraphGraphTest();
-    	test.stopWatch();
-        test.doTestSuite(new GraphQueryTestSuite(test));
-        GraphTest.printTestPerformance("GraphQueryTestSuite", test.stopWatch());
-    }
-
-    
-//    public void testTransactionalGraphTestSuite() throws Exception {
-//    	final GraphTest test = newEmbergraphGraphTest();
-//    	test.stopWatch();
-//        test.doTestSuite(new TransactionalGraphTestSuite(test));
-//        GraphTest.printTestPerformance("TransactionalGraphTestSuite", test.stopWatch());
-//    }
-//
-//    public void testGraphQueryForHasOR() throws Exception {
-//        final EmbergraphGraphTest test = newEmbergraphGraphTest();
-//        test.stopWatch();
-//        final EmbergraphTestSuite testSuite = new EmbergraphTestSuite(test);
-//        try {
-//            testSuite.testGraphQueryForHasOR();
-//        } finally {
-//            test.shutdown();
-//        }
-//        
-//    }
-    
-//    private static class EmbergraphTestSuite extends TestSuite {
-//        
-//        public EmbergraphTestSuite(final GraphTest graphTest) {
-//            super(graphTest);
-//        }
-//
-//    }
-//    
-//    
-//    private class EmbergraphGraphTest extends GraphTest {
-//
-//		@Override
-//		public void doTestSuite(TestSuite testSuite) throws Exception {
-//	        for (Method method : testSuite.getClass().getDeclaredMethods()) {
-//	            if (method.getName().startsWith("test")) {
-//	                System.out.println("Testing " + method.getName() + "...");
-//	                try {
-//		                method.invoke(testSuite);
-//	                } catch (Exception ex) {
-//	                	ex.getCause().printStackTrace();
-//	                	throw ex;
-//	                } finally {
-//		                shutdown();
-//	                }
-//	            }
-//	        }
-//		}
-//		
-//		private Map<String,EmbergraphSail> testSails = new LinkedHashMap<String, EmbergraphSail>();
-//
-//		@Override
-//		public Graph generateGraph(final String key) {
-//			
-//			try {
-//	            if (testSails.containsKey(key) == false) {
-//	                final EmbergraphSail testSail = getSail();
-//	                testSail.initialize();
-//	                testSails.put(key, testSail);
-//	            }
-//	            
-//				final EmbergraphSail sail = testSails.get(key); //testSail; //getSail();
-//				final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-//				final EmbergraphGraph graph = new EmbergraphGraphEmbedded(repo) {
-//	
-//				    /**
-//				     * Test cases have weird semantics for shutdown.
-//				     */
-//					@Override
-//					public void shutdown() {
-//					    try {
-//				            if (cxn != null) {
-//    					        cxn.commit();
-//    					        cxn.close();
-//    					        cxn = null;
-//				            }
-//					    } catch (Exception ex) {
-//					        throw new RuntimeException(ex);
-//					    }
-//					}
-//					
-//				};
-//				return graph;
-//			} catch (Exception ex) {
-//				throw new RuntimeException(ex);
-//			}
-//			
-//		}
-//
-//		@Override
-//		public Graph generateGraph() {
-//			
-//			return generateGraph(null);
-//		}
-//		
-//		public void shutdown() {
-//		    for (EmbergraphSail sail : testSails.values()) {
-//		        sail.__tearDownUnitTest();
-//		    }
-//		    testSails.clear();
-//		}
-//		
-//    	
-//    }
+  //    private static class EmbergraphTestSuite extends TestSuite {
+  //
+  //        public EmbergraphTestSuite(final GraphTest graphTest) {
+  //            super(graphTest);
+  //        }
+  //
+  //    }
+  //
+  //
+  //    private class EmbergraphGraphTest extends GraphTest {
+  //
+  //		@Override
+  //		public void doTestSuite(TestSuite testSuite) throws Exception {
+  //	        for (Method method : testSuite.getClass().getDeclaredMethods()) {
+  //	            if (method.getName().startsWith("test")) {
+  //	                System.out.println("Testing " + method.getName() + "...");
+  //	                try {
+  //		                method.invoke(testSuite);
+  //	                } catch (Exception ex) {
+  //	                	ex.getCause().printStackTrace();
+  //	                	throw ex;
+  //	                } finally {
+  //		                shutdown();
+  //	                }
+  //	            }
+  //	        }
+  //		}
+  //
+  //		private Map<String,EmbergraphSail> testSails = new LinkedHashMap<String, EmbergraphSail>();
+  //
+  //		@Override
+  //		public Graph generateGraph(final String key) {
+  //
+  //			try {
+  //	            if (testSails.containsKey(key) == false) {
+  //	                final EmbergraphSail testSail = getSail();
+  //	                testSail.initialize();
+  //	                testSails.put(key, testSail);
+  //	            }
+  //
+  //				final EmbergraphSail sail = testSails.get(key); //testSail; //getSail();
+  //				final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+  //				final EmbergraphGraph graph = new EmbergraphGraphEmbedded(repo) {
+  //
+  //				    /**
+  //				     * Test cases have weird semantics for shutdown.
+  //				     */
+  //					@Override
+  //					public void shutdown() {
+  //					    try {
+  //				            if (cxn != null) {
+  //    					        cxn.commit();
+  //    					        cxn.close();
+  //    					        cxn = null;
+  //				            }
+  //					    } catch (Exception ex) {
+  //					        throw new RuntimeException(ex);
+  //					    }
+  //					}
+  //
+  //				};
+  //				return graph;
+  //			} catch (Exception ex) {
+  //				throw new RuntimeException(ex);
+  //			}
+  //
+  //		}
+  //
+  //		@Override
+  //		public Graph generateGraph() {
+  //
+  //			return generateGraph(null);
+  //		}
+  //
+  //		public void shutdown() {
+  //		    for (EmbergraphSail sail : testSails.values()) {
+  //		        sail.__tearDownUnitTest();
+  //		    }
+  //		    testSails.clear();
+  //		}
+  //
+  //
+  //    }
 
 }

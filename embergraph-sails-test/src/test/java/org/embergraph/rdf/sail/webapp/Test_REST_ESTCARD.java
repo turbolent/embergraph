@@ -20,10 +20,10 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.Collection;
 import java.util.Properties;
-
 import junit.framework.Test;
-
+import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
 import org.openrdf.model.Resource;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -31,290 +31,265 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
-
 /**
- * Proxied test suite for the ESTCARD method (estimated cardinality aka fast
- * range counts) and related operations at the {@link RepositoryConnection} that
- * tunnel through to the same REST API method (getContexts(), size()).
- * 
- * @param <S>
- * 
- * TODO Should test GET as well as POST (this requires that we configured the
- * client differently).
+ * Proxied test suite for the ESTCARD method (estimated cardinality aka fast range counts) and
+ * related operations at the {@link RepositoryConnection} that tunnel through to the same REST API
+ * method (getContexts(), size()).
+ *
+ * @param <S> TODO Should test GET as well as POST (this requires that we configured the client
+ *     differently).
  */
-public class Test_REST_ESTCARD<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+public class Test_REST_ESTCARD<S extends IIndexManager> extends AbstractTestNanoSparqlClient<S> {
 
-	public Test_REST_ESTCARD() {
+  public Test_REST_ESTCARD() {}
 
-	}
+  public Test_REST_ESTCARD(final String name) {
 
-	public Test_REST_ESTCARD(final String name) {
+    super(name);
+  }
 
-		super(name);
+  public static Test suite() {
 
-	}
+    return ProxySuiteHelper.suiteWhenStandalone(
+        Test_REST_ESTCARD.class, "test.*", TestMode.quads
+        //                , TestMode.sids
+        //                , TestMode.triples
+        );
+  }
 
-	public static Test suite() {
+  /** Test the ESTCARD method (fast range count). */
+  public void test_ESTCARD() throws Exception {
 
-		return ProxySuiteHelper.suiteWhenStandalone(Test_REST_ESTCARD.class,
-                "test.*", TestMode.quads
-//                , TestMode.sids
-//                , TestMode.triples
-                );
-       
-	}
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-	/**
-	 * Test the ESTCARD method (fast range count).
-	 */
-	public void test_ESTCARD() throws Exception {
+    /*
+     * Note: In this case, it should work out that the exact size and the
+     * fast range count are the same. However, we want the FAST RANGE COUNT
+     * here since that is what we are testing.
+     */
+    final long rangeCount = m_repo.size();
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+    assertEquals(7, rangeCount);
+  }
 
-		/*
-		 * Note: In this case, it should work out that the exact size and the
-		 * fast range count are the same. However, we want the FAST RANGE COUNT
-		 * here since that is what we are testing.
-		 */
-		final long rangeCount = m_repo.size();
+  public void test_ESTCARD_s() throws Exception {
 
-		assertEquals(7, rangeCount);
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-	}
+    final long rangeCount =
+        m_repo.rangeCount(
+            new URIImpl("http://www.embergraph.org/Mike"), // s
+            null, // p
+            null // o
+            );
 
-	public void test_ESTCARD_s() throws Exception {
+    assertEquals(3, rangeCount);
+  }
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+  public void test_ESTCARD_p() throws Exception {
 
-		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.embergraph.org/Mike"),// s
-				null,// p
-				null// o
-				);
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-		assertEquals(3, rangeCount);
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s
+            RDF.TYPE, // p
+            null // o
+            // null // c
+            );
+    assertEquals(3, rangeCount);
+  }
 
-	}
+  public void test_ESTCARD_p2() throws Exception {
 
-	public void test_ESTCARD_p() throws Exception {
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s
+            RDFS.LABEL, // p
+            null // o
+            // null // c
+            );
 
-		final long rangeCount = m_repo.rangeCount(null,// s
-				RDF.TYPE,// p
-				null// o
-				// null // c
-				);
-		assertEquals(3, rangeCount);
+    assertEquals(2, rangeCount);
+  }
 
-	}
+  public void test_ESTCARD_o() throws Exception {
 
-	public void test_ESTCARD_p2() throws Exception {
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s
+            null, // p
+            new LiteralImpl("Mike") // o
+            // null // c
+            );
 
-		final long rangeCount = m_repo.rangeCount(null,// s
-				RDFS.LABEL,// p
-				null// o
-				// null // c
-				);
+    assertEquals(1, rangeCount);
+  }
 
-		assertEquals(2, rangeCount);
+  public void test_ESTCARD_so() throws Exception {
 
-	}
+    doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-	public void test_ESTCARD_o() throws Exception {
+    final long rangeCount =
+        m_repo.rangeCount(
+            new URIImpl("http://www.embergraph.org/Mike"), // s,
+            RDF.TYPE, // p
+            null // ,// o
+            // null // c
+            );
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+    assertEquals(1, rangeCount);
+  }
 
-		final long rangeCount = m_repo.rangeCount(null,// s
-				null,// p
-				new LiteralImpl("Mike")// o
-				// null // c
-				);
+  /** Test the ESTCARD method (fast range count). */
+  public void test_ESTCARD_quads_01() throws Exception {
 
-		assertEquals(1, rangeCount);
+    if (TestMode.quads != getTestMode()) return;
 
-	}
+    doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
-	public void test_ESTCARD_so() throws Exception {
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s,
+            null, // p
+            null // o
+            // null // c
+            );
+    assertEquals(7, rangeCount);
+  }
 
-		doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+  public void test_ESTCARD_quads_02() throws Exception {
 
-		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.embergraph.org/Mike"),// s,
-				RDF.TYPE,// p
-				null// ,// o
-				// null // c
-				);
+    if (TestMode.quads != getTestMode()) return;
 
-		assertEquals(1, rangeCount);
+    doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
-	}
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s,
+            null, // p
+            null, // o
+            new URIImpl("http://www.embergraph.org/") // c
+            );
 
-	/**
-	 * Test the ESTCARD method (fast range count).
-	 */
-	public void test_ESTCARD_quads_01() throws Exception {
+    assertEquals(3, rangeCount);
+  }
 
-		if (TestMode.quads != getTestMode())
-			return;
+  public void test_ESTCARD_quads_03() throws Exception {
 
-		doInsertbyURL("POST", packagePath + "test_estcard.trig");
+    if (TestMode.quads != getTestMode()) return;
 
-		final long rangeCount = m_repo.rangeCount(null,// s,
-				null,// p
-				null// o
-				// null // c
-				);
-		assertEquals(7, rangeCount);
+    doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
-	}
+    final long rangeCount =
+        m_repo.rangeCount(
+            null, // s,
+            null, // p
+            null, // o
+            new URIImpl("http://www.embergraph.org/c1") // c
+            );
 
-	public void test_ESTCARD_quads_02() throws Exception {
+    assertEquals(2, rangeCount);
+  }
 
-		if (TestMode.quads != getTestMode())
-			return;
+  public void test_ESTCARD_quads_04() throws Exception {
 
-		doInsertbyURL("POST", packagePath + "test_estcard.trig");
+    if (TestMode.quads != getTestMode()) return;
 
-		final long rangeCount = m_repo.rangeCount(null,// s,
-				null,// p
-				null,// o
-				new URIImpl("http://www.embergraph.org/")// c
-				);
+    doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
-		assertEquals(3, rangeCount);
+    final long rangeCount =
+        m_repo.rangeCount(
+            new URIImpl("http://www.embergraph.org/Mike"), // s,
+            null, // p
+            null, // o
+            new URIImpl("http://www.embergraph.org/c1") // c
+            );
 
-	}
+    assertEquals(1, rangeCount);
+  }
 
-	public void test_ESTCARD_quads_03() throws Exception {
+  /** Test the CONTEXTS method. */
+  public void test_CONTEXTS() throws Exception {
 
-		if (TestMode.quads != getTestMode())
-			return;
+    if (getTestMode() != TestMode.quads) return;
 
-		doInsertbyURL("POST", packagePath + "test_estcard.trig");
+    doInsertbyURL("POST", packagePath + "test_estcard.trig");
 
-		final long rangeCount = m_repo.rangeCount(null,// s,
-				null,// p
-				null,// o
-				new URIImpl("http://www.embergraph.org/c1")// c
-				);
+    final Collection<Resource> contexts = m_repo.getContexts();
 
-		assertEquals(2, rangeCount);
+    assertEquals(3, contexts.size());
+  }
 
-	}
+  /**
+   * @see <a href="http://trac.bigdata.com/ticket/1127">Extend ESTCARD method for exact range counts
+   *     </a>
+   */
+  public static class ReadWriteTx<S extends IIndexManager> extends Test_REST_ESTCARD<S> {
 
-	public void test_ESTCARD_quads_04() throws Exception {
+    public static Test suite() {
 
-		if (TestMode.quads != getTestMode())
-			return;
+      return ProxySuiteHelper.suiteWhenStandalone(
+          Test_REST_ESTCARD.ReadWriteTx.class, "test.*", TestMode.quads
+          //	                , TestMode.sids
+          //	                , TestMode.triples
+          );
+    }
 
-		doInsertbyURL("POST", packagePath + "test_estcard.trig");
+    @Override
+    public Properties getProperties() {
 
-		final long rangeCount = m_repo.rangeCount(new URIImpl(
-				"http://www.embergraph.org/Mike"),// s,
-				null,// p
-				null,// o
-				new URIImpl("http://www.embergraph.org/c1")// c
-				);
+      final Properties p = new Properties(super.getProperties());
 
-		assertEquals(1, rangeCount);
+      p.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
-	}
+      return p;
+    }
 
-	/**
-	 * Test the CONTEXTS method.
-	 */
-	public void test_CONTEXTS() throws Exception {
+    /**
+     * Test the ESTCARD method when statements have been added, committed, and then removed from a
+     * namespace that supports fully isolated read/write transactions.
+     */
+    public void test_ESTCARD_readWriteTx() throws Exception {
 
-		if (getTestMode() != TestMode.quads)
-			return;
+      // Insert statements.
+      doInsertbyURL("POST", packagePath + "test_estcard.ttl");
 
-		doInsertbyURL("POST", packagePath + "test_estcard.trig");
-
-		final Collection<Resource> contexts = m_repo.getContexts();
-
-		assertEquals(3, contexts.size());
-
-	}
-
-	/**
-	 * 
-    * @see <a href="http://trac.bigdata.com/ticket/1127"> Extend ESTCARD method
-    *      for exact range counts </a>
-	 */
-   static public class ReadWriteTx<S extends IIndexManager> extends
-         Test_REST_ESTCARD<S> {
-	 
-	   public static Test suite() {
-
-	      return ProxySuiteHelper.suiteWhenStandalone(Test_REST_ESTCARD.ReadWriteTx.class,
-	                "test.*", TestMode.quads
-//	                , TestMode.sids
-//	                , TestMode.triples
-	                );
-	       
-	   }
-
-	   @Override
-	   public Properties getProperties() {
-	      
-	      final Properties p = new Properties(super.getProperties());
-
-	      p.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-	      
-	      return p;
-	      
-	   }
-
-      /**
-       * Test the ESTCARD method when statements have been added, committed, and
-       * then removed from a namespace that supports fully isolated read/write
-       * transactions.
+      /*
+       * Since we have inserted data and not yet deleted anything, the fast
+       * and exact range counts will be identical.
        */
-	   public void test_ESTCARD_readWriteTx() throws Exception {
+      final long exactRangeCount1 =
+          m_repo.rangeCount(true /* exact */, null /* s */, null /* p */, null /* o */);
+      final long fastRangeCount1 =
+          m_repo.rangeCount(false /* exact */, null /* s */, null /* p */, null /* o */);
 
-	      // Insert statements.
-	      doInsertbyURL("POST", packagePath + "test_estcard.ttl");
+      assertEquals(7, exactRangeCount1);
+      assertEquals(7, fastRangeCount1);
 
-         /*
-          * Since we have inserted data and not yet deleted anything, the fast
-          * and exact range counts will be identical.
-          */
-         final long exactRangeCount1 = m_repo.rangeCount(true/* exact */,
-               null/* s */, null/* p */, null/* o */);
-         final long fastRangeCount1 = m_repo.rangeCount(false/* exact */,
-               null/* s */, null/* p */, null/* o */);
+      /*
+       * Now delete all triples with rdfs:label as the predicate (there are
+       * two). The fast range count should be unchanged since it counts the
+       * deleted tuple in the index. The exact range count should reflect the
+       * removed statement.
+       */
 
-         assertEquals(7, exactRangeCount1);
-         assertEquals(7, fastRangeCount1);
+      final long mutationCount =
+          m_repo.remove(new RemoveOp(null /* s */, RDFS.LABEL /* p */, null /* o */));
 
-         /*
-          * Now delete all triples with rdfs:label as the predicate (there are
-          * two). The fast range count should be unchanged since it counts the
-          * deleted tuple in the index. The exact range count should reflect the
-          * removed statement.
-          */
+      assertEquals(2, mutationCount);
 
-         final long mutationCount = m_repo.remove(new RemoveOp(null/* s */,
-               RDFS.LABEL/* p */, null/* o */));
+      final long exactRangeCount2 =
+          m_repo.rangeCount(true /* exact */, null /* s */, null /* p */, null /* o */);
+      final long fastRangeCount2 =
+          m_repo.rangeCount(false /* exact */, null /* s */, null /* p */, null /* o */);
 
-         assertEquals(2, mutationCount);
-
-         final long exactRangeCount2 = m_repo.rangeCount(true/* exact */,
-               null/* s */, null/* p */, null/* o */);
-         final long fastRangeCount2 = m_repo.rangeCount(false/* exact */,
-               null/* s */, null/* p */, null/* o */);
-
-         assertEquals(5, exactRangeCount2);
-         assertEquals(7, fastRangeCount2);
-
-      }
-
-   }
-
+      assertEquals(5, exactRangeCount2);
+      assertEquals(7, fastRangeCount2);
+    }
+  }
 }

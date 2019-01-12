@@ -27,28 +27,19 @@ package org.embergraph.search;
 
 /**
  * Metadata about a search result.
- * 
- * @param <V>
- *            The generic type of the document identifier.
- *            
+ *
+ * @param <V> The generic type of the document identifier.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IHit<V extends Comparable<V>> {
 
-    /**
-     * The computed relevance score.
-     */
-    public double getCosine();
+  /** The computed relevance score. */
+  public double getCosine();
 
-    /**
-     * The document identifier associated with the search result.
-     */
-    public V getDocId();
+  /** The document identifier associated with the search result. */
+  public V getDocId();
 
-    /**
-     * The rank of this hit within the context of the search.
-     */
-    public int getRank();
-
+  /** The rank of this hit within the context of the search. */
+  public int getRank();
 }

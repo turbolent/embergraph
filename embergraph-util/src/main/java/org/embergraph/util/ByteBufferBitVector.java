@@ -22,141 +22,107 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util;
 
-import it.unimi.dsi.bits.AbstractBitVector;
-
-import java.nio.ByteBuffer;
-
 import cern.colt.bitvector.BitVector;
+import it.unimi.dsi.bits.AbstractBitVector;
+import java.nio.ByteBuffer;
 
 /**
  * Wraps a {@link ByteBuffer} as a read-only {@link BitVector}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ByteBufferBitVector extends AbstractBitVector {
 
-    /**
-     * The {@link ByteBuffer} containing the backing data.
-     */
-    final private ByteBuffer b;
-    
-    /**
-     * The #of bits in the vector. 
-     */
-    private final long len;
-    
-    /**
-     * The bit offset into the {@link ByteBuffer} of the first bit in the
-     * vector.
-     */
-    private final long off;
+  /** The {@link ByteBuffer} containing the backing data. */
+  private final ByteBuffer b;
 
-    final public long length() {
+  /** The #of bits in the vector. */
+  private final long len;
 
-        return len;
+  /** The bit offset into the {@link ByteBuffer} of the first bit in the vector. */
+  private final long off;
 
-    }
+  public final long length() {
 
-    /**
-     * Ctor assumes that all bits in the buffer are used.
-     * 
-     * @param b
-     *            The buffer.
-     */
-    public ByteBufferBitVector(final ByteBuffer b) {
-        
-        this(b, 0/* offset */, b == null ? 0 : b.capacity() * 8/* len */);
+    return len;
+  }
 
-    }
+  /**
+   * Ctor assumes that all bits in the buffer are used.
+   *
+   * @param b The buffer.
+   */
+  public ByteBufferBitVector(final ByteBuffer b) {
 
-    /**
-     * 
-     * @param b
-     *            The buffer.
-     * @param off
-     *            The offset from the start of the buffer for the view.
-     * @param len
-     *            The #of bits which will be included in the view.
-     */
-    public ByteBufferBitVector(final ByteBuffer b, final long off,
-            final long len) {
+    this(b, 0 /* offset */, b == null ? 0 : b.capacity() * 8 /* len */);
+  }
 
-        if (b == null)
-            throw new IllegalArgumentException();
-        
-        if (len < 0)
-            throw new IllegalArgumentException();
+  /**
+   * @param b The buffer.
+   * @param off The offset from the start of the buffer for the view.
+   * @param len The #of bits which will be included in the view.
+   */
+  public ByteBufferBitVector(final ByteBuffer b, final long off, final long len) {
 
-        if (len < 0)
-            throw new IllegalArgumentException();
+    if (b == null) throw new IllegalArgumentException();
 
-        if (off + len > b.capacity() * 8L)
-            throw new IllegalArgumentException();
+    if (len < 0) throw new IllegalArgumentException();
 
-        this.b = b;
-        
-        this.len = len;
+    if (len < 0) throw new IllegalArgumentException();
 
-        this.off = off;
-        
-    }
+    if (off + len > b.capacity() * 8L) throw new IllegalArgumentException();
 
-    /**
-     * Return the index of the byte in which the bit with the given index is
-     * encoded.
-     * 
-     * @param bitIndex
-     *            The bit index.
-     *            
-     * @return The byte index.
-     */
-    final protected int byteIndexForBit(final long bitIndex) {
+    this.b = b;
 
-        return ((int) ((bitIndex + off) / 8));
+    this.len = len;
 
-    }
+    this.off = off;
+  }
 
-    /**
-     * Return the offset within the byte in which the bit is coded of the bit
-     * (this is just the remainder <code>bitIndex % 8</code>).
-     * 
-     * @param bitIndex
-     *            The bit index into the byte[].
-     * 
-     * @return The offset of the bit in the appropriate byte.
-     */
-    final protected int withinByteIndexForBit(final long bitIndex) {
+  /**
+   * Return the index of the byte in which the bit with the given index is encoded.
+   *
+   * @param bitIndex The bit index.
+   * @return The byte index.
+   */
+  protected final int byteIndexForBit(final long bitIndex) {
 
-        return (int) ((bitIndex + off) % 8);
+    return ((int) ((bitIndex + off) / 8));
+  }
 
-    }
+  /**
+   * Return the offset within the byte in which the bit is coded of the bit (this is just the
+   * remainder <code>bitIndex % 8</code>).
+   *
+   * @param bitIndex The bit index into the byte[].
+   * @return The offset of the bit in the appropriate byte.
+   */
+  protected final int withinByteIndexForBit(final long bitIndex) {
 
-    /**
-     * Extract and return a bit coded flag.
-     * 
-     * @param offset
-     *            The offset in the buffer of the start of the byte[] sequence
-     *            in which the bit coded flags are stored.
-     * @param index
-     *            The index of the bit.
-     * 
-     * @return The value of the bit.
-     */
-    public boolean getBoolean(final long index) {
+    return (int) ((bitIndex + off) % 8);
+  }
 
-        if (index < 0 || index >= len)
-            throw new IndexOutOfBoundsException();
-        
-        return (b.get(byteIndexForBit(index)) & (1 << withinByteIndexForBit(index))) != 0;
+  /**
+   * Extract and return a bit coded flag.
+   *
+   * @param offset The offset in the buffer of the start of the byte[] sequence in which the bit
+   *     coded flags are stored.
+   * @param index The index of the bit.
+   * @return The value of the bit.
+   */
+  public boolean getBoolean(final long index) {
 
-    }
+    if (index < 0 || index >= len) throw new IndexOutOfBoundsException();
 
-//    // @todo override for mutation.
-//    public boolean set(final long index, final boolean value) {
-//
-//        throw new UnsupportedOperationException();
-//
-//    }
+    return (b.get(byteIndexForBit(index)) & (1 << withinByteIndexForBit(index))) != 0;
+  }
+
+  //    // @todo override for mutation.
+  //    public boolean set(final long index, final boolean value) {
+  //
+  //        throw new UnsupportedOperationException();
+  //
+  //    }
 
 }

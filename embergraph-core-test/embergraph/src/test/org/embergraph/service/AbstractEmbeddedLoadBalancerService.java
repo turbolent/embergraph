@@ -1,60 +1,55 @@
 package org.embergraph.service;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.util.config.NicUtil;
 
 /**
  * Embedded {@link LoadBalancerService}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractEmbeddedLoadBalancerService extends LoadBalancerService {
+public abstract class AbstractEmbeddedLoadBalancerService extends LoadBalancerService {
 
-//    final private UUID serviceUUID;
-    private String hostname = NicUtil.getIpAddressByLocalHost();//for now, maintain the same failure logic as in constructor
-    
-    public AbstractEmbeddedLoadBalancerService(UUID serviceUUID,
-            Properties properties) {
-        
-        super( properties );
-        
-//        if (serviceUUID == null)
-//            throw new IllegalArgumentException();
+  //    final private UUID serviceUUID;
+  private String hostname =
+      NicUtil
+          .getIpAddressByLocalHost(); // for now, maintain the same failure logic as in constructor
 
-//        this.serviceUUID = serviceUUID;
-        
-        setServiceUUID(serviceUUID);
-        
-        try {
-            this.hostname = NicUtil.getIpAddress("default.nic", "default", false);
-        } catch(Throwable t) {
-            t.printStackTrace();
-        }
+  public AbstractEmbeddedLoadBalancerService(UUID serviceUUID, Properties properties) {
 
+    super(properties);
+
+    //        if (serviceUUID == null)
+    //            throw new IllegalArgumentException();
+
+    //        this.serviceUUID = serviceUUID;
+
+    setServiceUUID(serviceUUID);
+
+    try {
+      this.hostname = NicUtil.getIpAddress("default.nic", "default", false);
+    } catch (Throwable t) {
+      t.printStackTrace();
     }
+  }
 
-//    @Override
-//    public AbstractFederation getFederation() {
-//
-//        return server.getClient().getFederation();
-//        
-//    }
-    
-//    public UUID getServiceUUID() {
-//        
-//        return serviceUUID;
-//        
-//    }
+  //    @Override
+  //    public AbstractFederation getFederation() {
+  //
+  //        return server.getClient().getFederation();
+  //
+  //    }
 
-    protected String getClientHostname() {
+  //    public UUID getServiceUUID() {
+  //
+  //        return serviceUUID;
+  //
+  //    }
 
-        return hostname;
-        
-    }
-    
+  protected String getClientHostname() {
+
+    return hostname;
+  }
 }

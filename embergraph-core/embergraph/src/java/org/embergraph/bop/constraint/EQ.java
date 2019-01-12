@@ -20,66 +20,50 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * Imposes the constraint <code>x == y</code>.
- */
+/** Imposes the constraint <code>x == y</code>. */
 public class EQ extends BOpBase implements BooleanValueExpression {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 9207324734456820516L;
+  /** */
+  private static final long serialVersionUID = 9207324734456820516L;
 
-	public EQ(final IVariable<?> x, final IVariable<?> y) {
+  public EQ(final IVariable<?> x, final IVariable<?> y) {
 
-        this(new BOp[] { x, y }, null/* annotations */);
+    this(new BOp[] {x, y}, null /* annotations */);
+  }
 
-    }
-    
-    /**
-     * Required shallow copy constructor.
-     */
-    public EQ(final BOp[] args, final Map<String, Object> annotations) {
-        super(args, annotations);
+  /** Required shallow copy constructor. */
+  public EQ(final BOp[] args, final Map<String, Object> annotations) {
+    super(args, annotations);
 
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
 
-        if (args[0] == args[1])
-            throw new IllegalArgumentException();
-        
-    }
+    if (args[0] == args[1]) throw new IllegalArgumentException();
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public EQ(final EQ op) {
-        super(op);
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public EQ(final EQ op) {
+    super(op);
+  }
 
-    public Boolean get(final IBindingSet s) {
-        
-        // get binding for "x".
-        final IConstant<?> x = s.get((IVariable<?>) get(0)/* x */);
+  public Boolean get(final IBindingSet s) {
 
-        if (x == null)
-            return true; // not yet bound.
+    // get binding for "x".
+    final IConstant<?> x = s.get((IVariable<?>) get(0) /* x */);
 
-        // get binding for "y".
-        final IConstant<?> y = s.get((IVariable<?>) get(1)/* y */);
+    if (x == null) return true; // not yet bound.
 
-        if (y == null)
-            return true; // not yet bound.
-        
-        return x.equals(y); 
+    // get binding for "y".
+    final IConstant<?> y = s.get((IVariable<?>) get(1) /* y */);
 
-    }
-    
+    if (y == null) return true; // not yet bound.
+
+    return x.equals(y);
+  }
 }

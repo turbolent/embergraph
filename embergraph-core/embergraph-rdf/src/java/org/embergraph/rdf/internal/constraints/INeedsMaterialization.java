@@ -20,38 +20,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 /**
- * Some {@link IVValueExpression} need materialized terms to perform their
- * evaluation. Those that do can implement this interface, and specify which
- * terms they need materialized.
+ * Some {@link IVValueExpression} need materialized terms to perform their evaluation. Those that do
+ * can implement this interface, and specify which terms they need materialized.
  */
 public interface INeedsMaterialization {
 
-	public enum Requirement {
-		
-		/**
-		 * Always needs materialization.
-		 */
-		ALWAYS,
-		
-		/**
-		 * Only needs materialization if inline evaluation fails.
-		 */
-		SOMETIMES,
-		
-		/**
-		 * Never needs materialization.
-		 */
-		NEVER
-	};
-	
-	/**
-	 * Does the bop always need materialized variables, or can it sometimes
-	 * operate on inline terms without materialization?  If sometimes, we'll
-	 * run it before the materialization pipeline steps in an effort to avoid
-	 * unnecessary materialization overhead. If it fails to evaluate for a 
-	 * particular solution, then it will be run again after the materialization
-	 * steps for that solution.
-	 */
-	Requirement getRequirement(); 
+  public enum Requirement {
 
+    /** Always needs materialization. */
+    ALWAYS,
+
+    /** Only needs materialization if inline evaluation fails. */
+    SOMETIMES,
+
+    /** Never needs materialization. */
+    NEVER
+  };
+
+  /**
+   * Does the bop always need materialized variables, or can it sometimes operate on inline terms
+   * without materialization? If sometimes, we'll run it before the materialization pipeline steps
+   * in an effort to avoid unnecessary materialization overhead. If it fails to evaluate for a
+   * particular solution, then it will be run again after the materialization steps for that
+   * solution.
+   */
+  Requirement getRequirement();
 }

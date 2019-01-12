@@ -27,46 +27,36 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite for {@link ResourceService} and friends.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll_ResourceService extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll_ResourceService() {}
+
+  /** @param name */
+  public TestAll_ResourceService(String name) {
+    super(name);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("resource service");
+
+    /*
+     * unit tests for reading files (primarily index segments) using NIO.
      */
-    public TestAll_ResourceService() {
-    }
+    suite.addTestSuite(TestReceiveFile.class);
 
-    /**
-     * @param name
+    /*
+     * test suites for receiving buffers and files from a remote service in
+     * support of distributed query evaluation.
      */
-    public TestAll_ResourceService(String name) {
-        super(name);
-    }
+    suite.addTestSuite(TestReceiveBuffer.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
-
-        final TestSuite suite = new TestSuite("resource service");
-        
-        /*
-         * unit tests for reading files (primarily index segments) using NIO.
-         */
-        suite.addTestSuite(TestReceiveFile.class);
-
-        /*
-         * test suites for receiving buffers and files from a remote service in
-         * support of distributed query evaluation.
-         */
-        suite.addTestSuite(TestReceiveBuffer.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

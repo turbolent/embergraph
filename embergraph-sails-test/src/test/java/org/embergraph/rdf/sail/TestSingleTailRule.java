@@ -21,11 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
+import info.aduna.iteration.CloseableIteration;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -48,291 +51,281 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
-import info.aduna.iteration.CloseableIteration;
-
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
 
-    protected static final Logger log = Logger.getLogger(TestSingleTailRule.class);
-    
-    @Override
-    public Properties getProperties() {
-        
-        Properties props = super.getProperties();
-        
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "true");
-        
-        return props;
-        
+  protected static final Logger log = Logger.getLogger(TestSingleTailRule.class);
+
+  @Override
+  public Properties getProperties() {
+
+    Properties props = super.getProperties();
+
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "true");
+
+    return props;
+  }
+
+  /** */
+  public TestSingleTailRule() {}
+
+  /** @param arg0 */
+  public TestSingleTailRule(String arg0) {
+    super(arg0);
+  }
+
+  public void testSingleTail() throws Exception {
+
+    final EmbergraphSail sail = getSail();
+    final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+    repo.initialize();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
+
+    try {
+
+      final ValueFactory vf = sail.getValueFactory();
+
+      final String ns = BD.NAMESPACE;
+
+      URI mike = vf.createURI(ns + "Mike");
+      URI likes = vf.createURI(ns + "likes");
+      URI rdf = vf.createURI(ns + "RDF");
+      /**/
+      cxn.setNamespace("ns", ns);
+
+      testValueRoundTrip(cxn.getSailConnection(), mike, likes, rdf);
+
+      if (log.isInfoEnabled()) {
+        log.info(cxn.getTripleStore().dumpStore());
+      }
+
+    } finally {
+      cxn.close();
+      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
     }
+  }
 
-    /**
-     * 
-     */
-    public TestSingleTailRule() {
-    }
+  public void testSingleTailSearch() throws Exception {
 
-    /**
-     * @param arg0
-     */
-    public TestSingleTailRule(String arg0) {
-        super(arg0);
-    }
+    final EmbergraphSail sail = getSail();
+    final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+    repo.initialize();
+    final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
 
-    public void testSingleTail() throws Exception {
+    try {
 
-        final EmbergraphSail sail = getSail();
-        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-        repo.initialize();
-        final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        
-        try {
-    
-            final ValueFactory vf = sail.getValueFactory();
-            
-            final String ns = BD.NAMESPACE;
-            
-            URI mike = vf.createURI(ns+"Mike");
-            URI likes = vf.createURI(ns+"likes");
-            URI rdf = vf.createURI(ns+"RDF");
-/**/
-            cxn.setNamespace("ns", ns);
-            
-            testValueRoundTrip(cxn.getSailConnection(), mike, likes, rdf);
-            
-            if (log.isInfoEnabled()) {
-                log.info(cxn.getTripleStore().dumpStore());
-            }
-            
-        } finally {
-            cxn.close();
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();
-        }
+      final ValueFactory vf = sail.getValueFactory();
 
-    }
-    
-    public void testSingleTailSearch() throws Exception {
+      final String ns = BD.NAMESPACE;
 
-        final EmbergraphSail sail = getSail();
-        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-        repo.initialize();
-        final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        
-        try {
-    
-            final ValueFactory vf = sail.getValueFactory();
-            
-            final String ns = BD.NAMESPACE;
-            
-            final URI mike = vf.createURI(ns+"Mike");
-//            URI likes = vf.createURI(ns+"likes");
-//            URI rdf = vf.createURI(ns+"RDF");
-            final Literal l1 = vf.createLiteral("Mike");
-/**/
-            cxn.setNamespace("ns", ns);
+      final URI mike = vf.createURI(ns + "Mike");
+      //            URI likes = vf.createURI(ns+"likes");
+      //            URI rdf = vf.createURI(ns+"RDF");
+      final Literal l1 = vf.createLiteral("Mike");
+      /**/
+      cxn.setNamespace("ns", ns);
 
-            cxn.add(mike, RDFS.LABEL, l1);
-            cxn.commit();
-            
-            if (log.isInfoEnabled()) {
-                log.info(cxn.getTripleStore().dumpStore());
-            }
-            
-            {
-                
-                final String query = 
-                    "PREFIX rdf: <"+RDF.NAMESPACE+"> " +
-                    "PREFIX rdfs: <"+RDFS.NAMESPACE+"> " +
-                    "PREFIX ns: <"+ns+"> " +
-                    
-                    "select ?s ?p ?o " +
-                    "WHERE { " +
-                    "  ?s ?p ?o . " +
-                    "  filter(?p = <"+RDFS.LABEL+">) " +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                final TupleQueryResult result = tupleQuery.evaluate();
-                
-//                while (result.hasNext()) {
-//                    System.err.println(result.next());
-//                }
- 
-                final Collection<BindingSet> solution = new LinkedList<BindingSet>();
-                solution.add(createBindingSet(new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("p", RDFS.LABEL),
-                    new BindingImpl("o", l1),
+      cxn.add(mike, RDFS.LABEL, l1);
+      cxn.commit();
+
+      if (log.isInfoEnabled()) {
+        log.info(cxn.getTripleStore().dumpStore());
+      }
+
+      {
+        final String query =
+            "PREFIX rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "PREFIX rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "PREFIX ns: <"
+                + ns
+                + "> "
+                + "select ?s ?p ?o "
+                + "WHERE { "
+                + "  ?s ?p ?o . "
+                + "  filter(?p = <"
+                + RDFS.LABEL
+                + ">) "
+                + "}";
+
+        final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        final TupleQueryResult result = tupleQuery.evaluate();
+
+        //                while (result.hasNext()) {
+        //                    System.err.println(result.next());
+        //                }
+
+        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        solution.add(
+            createBindingSet(
+                new Binding[] {
+                  new BindingImpl("s", mike),
+                  new BindingImpl("p", RDFS.LABEL),
+                  new BindingImpl("o", l1),
                 }));
-                
-                compare(result, solution);
-                
-            }
-            
-            {
-                
-                final String query = 
-                    "PREFIX rdf: <"+RDF.NAMESPACE+"> " +
-                    "PREFIX rdfs: <"+RDFS.NAMESPACE+"> " +
-                    "PREFIX ns: <"+ns+"> " +
-                    
-                    "select ?s " +
-                    "WHERE { " +
-                    "  ?s ns:search \"Mike\" . " +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                final TupleQueryResult result = tupleQuery.evaluate();
-                
-//                while (result.hasNext()) {
-//                    System.err.println(result.next());
-//                }
- 
-                final Collection<BindingSet> solution = new LinkedList<BindingSet>();
-                solution.add(createBindingSet(new Binding[] {
-                    new BindingImpl("s", l1),
+
+        compare(result, solution);
+      }
+
+      {
+        final String query =
+            "PREFIX rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "PREFIX rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "PREFIX ns: <"
+                + ns
+                + "> "
+                + "select ?s "
+                + "WHERE { "
+                + "  ?s ns:search \"Mike\" . "
+                + "}";
+
+        final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        final TupleQueryResult result = tupleQuery.evaluate();
+
+        //                while (result.hasNext()) {
+        //                    System.err.println(result.next());
+        //                }
+
+        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        solution.add(
+            createBindingSet(
+                new Binding[] {
+                  new BindingImpl("s", l1),
                 }));
-                
-                compare(result, solution);
-                
-            }
-            
-            
-        } finally {
-            cxn.close();
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();
-        }
 
+        compare(result, solution);
+      }
+
+    } finally {
+      cxn.close();
+      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
     }
-    
-    private void testValueRoundTrip(final SailConnection con, 
-            final Resource subj, final URI pred, final Value obj)
-        throws Exception
-    {
-        con.addStatement(subj, pred, obj);
-        con.commit();
-    
-        CloseableIteration<? extends Statement, SailException> stIter = 
-            con.getStatements(null, null, null, false);
-    
-        try {
-            assertTrue(stIter.hasNext());
-    
-            Statement st = stIter.next();
-            assertEquals(subj, st.getSubject());
-            assertEquals(pred, st.getPredicate());
-            assertEquals(obj, st.getObject());
-            assertTrue(!stIter.hasNext());
-        }
-        finally {
-            stIter.close();
-        }
-    
-//        ParsedTupleQuery tupleQuery = QueryParserUtil.parseTupleQuery(QueryLanguage.SERQL,
-//                "SELECT S, P, O FROM {S} P {O} WHERE P = <" + pred.stringValue() + ">", null);
-        ParsedTupleQuery tupleQuery = QueryParserUtil.parseTupleQuery(QueryLanguage.SPARQL,
-                "SELECT ?S ?P ?O " +
-                "WHERE { " +
-                "  ?S ?P ?O . " +
-                "  FILTER( ?P = <" + pred.stringValue() + "> ) " +
-                "}", null);
-    
-        CloseableIteration<? extends BindingSet, QueryEvaluationException> iter;
-        iter = con.evaluate(tupleQuery.getTupleExpr(), null, EmptyBindingSet.getInstance(), false);
-    
-        try {
-            assertTrue(iter.hasNext());
-    
-            BindingSet bindings = iter.next();
-            assertEquals(subj, bindings.getValue("S"));
-            assertEquals(pred, bindings.getValue("P"));
-            assertEquals(obj, bindings.getValue("O"));
-            assertTrue(!iter.hasNext());
-        }
-        finally {
-            iter.close();
-        }
+  }
+
+  private void testValueRoundTrip(
+      final SailConnection con, final Resource subj, final URI pred, final Value obj)
+      throws Exception {
+    con.addStatement(subj, pred, obj);
+    con.commit();
+
+    CloseableIteration<? extends Statement, SailException> stIter =
+        con.getStatements(null, null, null, false);
+
+    try {
+      assertTrue(stIter.hasNext());
+
+      Statement st = stIter.next();
+      assertEquals(subj, st.getSubject());
+      assertEquals(pred, st.getPredicate());
+      assertEquals(obj, st.getObject());
+      assertTrue(!stIter.hasNext());
+    } finally {
+      stIter.close();
     }
 
-    public void testOptionalFilter()
-        throws Exception
-    {
-        final EmbergraphSail sail = getSail();
-        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-//        final Sail sail = new MemoryStore();
-//        final Repository repo = new SailRepository(sail);
-        
-        repo.initialize();
-        final RepositoryConnection cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        
-        try {
-    
-            final ValueFactory vf = sail.getValueFactory();
+    //        ParsedTupleQuery tupleQuery = QueryParserUtil.parseTupleQuery(QueryLanguage.SERQL,
+    //                "SELECT S, P, O FROM {S} P {O} WHERE P = <" + pred.stringValue() + ">", null);
+    ParsedTupleQuery tupleQuery =
+        QueryParserUtil.parseTupleQuery(
+            QueryLanguage.SPARQL,
+            "SELECT ?S ?P ?O "
+                + "WHERE { "
+                + "  ?S ?P ?O . "
+                + "  FILTER( ?P = <"
+                + pred.stringValue()
+                + "> ) "
+                + "}",
+            null);
 
-            URI s = vf.createURI("urn:test:s");
-            URI p1 = vf.createURI("urn:test:p1");
-            URI p2 = vf.createURI("urn:test:p2");
-            Literal v1 = vf.createLiteral(1);
-            Literal v2 = vf.createLiteral(2);
-            Literal v3 = vf.createLiteral(3);
-            cxn.add(s, p1, v1);
-            cxn.add(s, p2, v2);
-            cxn.add(s, p1, v3);
-            cxn.commit();
-            
-            String qry = 
-                "PREFIX :<urn:test:> " +
-                "SELECT ?s ?v1 ?v2 " +
-                "WHERE { " +
-                "  ?s :p1 ?v1 . " +
-                "  OPTIONAL {?s :p2 ?v2 FILTER(?v1 < 3) } " +
-                "}";
-            
-            TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, qry);
-            TupleQueryResult result = query.evaluate();
-            
-//            while (result.hasNext()) {
-//                System.err.println(result.next());
-//            }
-            
-            Collection<BindingSet> solution = new LinkedList<BindingSet>();
-            solution.add(createBindingSet(new Binding[] {
-                new BindingImpl("s", s),
-                new BindingImpl("v1", v1),
-                new BindingImpl("v2", v2),
-            }));
-            solution.add(createBindingSet(new Binding[] {
-                new BindingImpl("s", s),
-                new BindingImpl("v1", v3),
-            }));
-            
-            compare(result, solution);
-            
-        } finally {
-            cxn.close();
-            if (sail instanceof EmbergraphSail)
-                ((EmbergraphSail)sail).__tearDownUnitTest();
-        }
-            
+    CloseableIteration<? extends BindingSet, QueryEvaluationException> iter;
+    iter = con.evaluate(tupleQuery.getTupleExpr(), null, EmptyBindingSet.getInstance(), false);
+
+    try {
+      assertTrue(iter.hasNext());
+
+      BindingSet bindings = iter.next();
+      assertEquals(subj, bindings.getValue("S"));
+      assertEquals(pred, bindings.getValue("P"));
+      assertEquals(obj, bindings.getValue("O"));
+      assertTrue(!iter.hasNext());
+    } finally {
+      iter.close();
     }
+  }
 
-    
+  public void testOptionalFilter() throws Exception {
+    final EmbergraphSail sail = getSail();
+    final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+    //        final Sail sail = new MemoryStore();
+    //        final Repository repo = new SailRepository(sail);
+
+    repo.initialize();
+    final RepositoryConnection cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
+
+    try {
+
+      final ValueFactory vf = sail.getValueFactory();
+
+      URI s = vf.createURI("urn:test:s");
+      URI p1 = vf.createURI("urn:test:p1");
+      URI p2 = vf.createURI("urn:test:p2");
+      Literal v1 = vf.createLiteral(1);
+      Literal v2 = vf.createLiteral(2);
+      Literal v3 = vf.createLiteral(3);
+      cxn.add(s, p1, v1);
+      cxn.add(s, p2, v2);
+      cxn.add(s, p1, v3);
+      cxn.commit();
+
+      String qry =
+          "PREFIX :<urn:test:> "
+              + "SELECT ?s ?v1 ?v2 "
+              + "WHERE { "
+              + "  ?s :p1 ?v1 . "
+              + "  OPTIONAL {?s :p2 ?v2 FILTER(?v1 < 3) } "
+              + "}";
+
+      TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, qry);
+      TupleQueryResult result = query.evaluate();
+
+      //            while (result.hasNext()) {
+      //                System.err.println(result.next());
+      //            }
+
+      Collection<BindingSet> solution = new LinkedList<BindingSet>();
+      solution.add(
+          createBindingSet(
+              new Binding[] {
+                new BindingImpl("s", s), new BindingImpl("v1", v1), new BindingImpl("v2", v2),
+              }));
+      solution.add(
+          createBindingSet(
+              new Binding[] {
+                new BindingImpl("s", s), new BindingImpl("v1", v3),
+              }));
+
+      compare(result, solution);
+
+    } finally {
+      cxn.close();
+      if (sail instanceof EmbergraphSail) ((EmbergraphSail) sail).__tearDownUnitTest();
+    }
+  }
 }

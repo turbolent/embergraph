@@ -25,45 +25,38 @@ package org.embergraph.service.ndx.pipeline;
 
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.service.ndx.pipeline.AbstractKeyRangeMasterTestCase.L;
 
 /**
- * Class exists solely to make it easier to write the unit tests by aligning the
- * various generic types across the master, the subtask, and their statistics
- * objects.
- * 
+ * Class exists solely to make it easier to write the unit tests by aligning the various generic
+ * types across the master, the subtask, and their statistics objects.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class MockSubtask<
-H extends MockMasterStats<L, HS>,
-O extends Object,
-E extends KVO<O>,
-L extends Object,
-S extends MockSubtask,
-HS extends MockSubtaskStats,
-M extends MockMaster<H, O, E, S, L, HS>
-> extends AbstractSubtask<HS, M, E, L> {
+public abstract class MockSubtask<
+        H extends MockMasterStats<L, HS>,
+        O extends Object,
+        E extends KVO<O>,
+        L extends Object,
+        S extends MockSubtask,
+        HS extends MockSubtaskStats,
+        M extends MockMaster<H, O, E, S, L, HS>>
+    extends AbstractSubtask<HS, M, E, L> {
 
-    /**
-     * @param master
-     * @param locator
-     * @param buffer
-     */
-    public MockSubtask(M master, L locator,
-            BlockingBuffer<E[]> buffer) {
+  /**
+   * @param master
+   * @param locator
+   * @param buffer
+   */
+  public MockSubtask(M master, L locator, BlockingBuffer<E[]> buffer) {
 
-        super(master, locator, buffer);
-        
-    }
+    super(master, locator, buffer);
+  }
 
-    /** NOP. */
-    @Override
-    protected void notifyClientOfRedirect(L locator, Throwable cause) {
+  /** NOP. */
+  @Override
+  protected void notifyClientOfRedirect(L locator, Throwable cause) {
 
-        if (log.isInfoEnabled())
-            log.info("locator=" + locator + ", cause=" + cause);
-        
-    }
-
+    if (log.isInfoEnabled()) log.info("locator=" + locator + ", cause=" + cause);
+  }
 }

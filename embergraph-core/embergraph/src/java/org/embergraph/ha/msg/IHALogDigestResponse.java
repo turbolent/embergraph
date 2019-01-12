@@ -18,22 +18,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 /**
- * Message used to communicate the digest of an HALog file associated with
- * a specific commit point.
- * 
+ * Message used to communicate the digest of an HALog file associated with a specific commit point.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHALogDigestResponse extends IHAMessage {
 
-    /**
-     * The commit counter for the closing root block of the requested HALog
-     * file.
-     */
-    long getCommitCounter();
+  /** The commit counter for the closing root block of the requested HALog file. */
+  long getCommitCounter();
 
-    /**
-     * The computed disgest.
-     */
-    byte[] getDigest();
-
+  /** The computed disgest. */
+  byte[] getDigest();
 }

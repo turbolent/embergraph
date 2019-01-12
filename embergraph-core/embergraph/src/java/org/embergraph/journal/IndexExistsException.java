@@ -23,17 +23,11 @@ package org.embergraph.journal;
 
 public class IndexExistsException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2151894480947760726L;
+  /** */
+  private static final long serialVersionUID = -2151894480947760726L;
 
-    /**
-     * @param message The index name.
-     */
-    public IndexExistsException(String message) {
-        super(message);
-    }
-
-
+  /** @param message The index name. */
+  public IndexExistsException(String message) {
+    super(message);
+  }
 }

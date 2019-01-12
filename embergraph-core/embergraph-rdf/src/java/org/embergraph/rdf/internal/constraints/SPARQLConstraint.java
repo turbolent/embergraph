@@ -20,9 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -33,116 +31,92 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.util.InnerCause;
 
 /**
- * BOpConstraint that wraps a {@link EBVBOp}, which itself computes the 
- * effective boolean value of an {@link IValueExpression}.
+ * BOpConstraint that wraps a {@link EBVBOp}, which itself computes the effective boolean value of
+ * an {@link IValueExpression}.
  */
 @SuppressWarnings("rawtypes")
-public class SPARQLConstraint<X extends XSDBooleanIV> extends
-        org.embergraph.bop.constraint.Constraint<X> {
+public class SPARQLConstraint<X extends XSDBooleanIV>
+    extends org.embergraph.bop.constraint.Constraint<X> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5796492538735372727L;
-	
-    private static final transient Logger log = Logger
-            .getLogger(SPARQLConstraint.class);
+  /** */
+  private static final long serialVersionUID = -5796492538735372727L;
 
-	/**
-	 * The operand of this operator must evaluate to a boolean. If the operand
-	 * is not known to evaluate to a boolean, wrap it with an {@link EBVBOp}.
-	 */
-	private static XSDBooleanIVValueExpression wrap(
-			final IValueExpression<? extends IV> ve) {
-		
-        return ve instanceof XSDBooleanIVValueExpression ? 
-        		(XSDBooleanIVValueExpression) ve : new EBVBOp(ve);
+  private static final transient Logger log = Logger.getLogger(SPARQLConstraint.class);
 
-	}
-	
-	/**
-	 * Construct a SPARQL constraint using the specified value expression.
-	 * The value expression will be automatically wrapped inside an
-	 * {@link EBVBOp} if it does not itself evaluate to a boolean.
-	 */
-    public SPARQLConstraint(final IValueExpression<? extends IV> x) {
+  /**
+   * The operand of this operator must evaluate to a boolean. If the operand is not known to
+   * evaluate to a boolean, wrap it with an {@link EBVBOp}.
+   */
+  private static XSDBooleanIVValueExpression wrap(final IValueExpression<? extends IV> ve) {
 
-		this(new BOp[] { wrap(x) }, null/*annocations*/);
-		
+    return ve instanceof XSDBooleanIVValueExpression
+        ? (XSDBooleanIVValueExpression) ve
+        : new EBVBOp(ve);
+  }
+
+  /**
+   * Construct a SPARQL constraint using the specified value expression. The value expression will
+   * be automatically wrapped inside an {@link EBVBOp} if it does not itself evaluate to a boolean.
+   */
+  public SPARQLConstraint(final IValueExpression<? extends IV> x) {
+
+    this(new BOp[] {wrap(x)}, null /*annocations*/);
+  }
+
+  /** Required shallow copy constructor. */
+  public SPARQLConstraint(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 1 || args[0] == null) throw new IllegalArgumentException();
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public SPARQLConstraint(final SPARQLConstraint<X> op) {
+
+    super(op);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public IValueExpression<? extends XSDBooleanIV> get(final int i) {
+
+    return (IValueExpression<? extends XSDBooleanIV>) super.get(i);
+  }
+
+  //    public IValueExpression<X> getValueExpression() {
+  //        return (IValueExpression<X>) get(0);
+  //    }
+
+  @Override
+  public boolean accept(final IBindingSet bs) {
+
+    try {
+
+      // evaluate the EBV operator
+      final XSDBooleanIV iv = get(0).get(bs);
+
+      return iv.booleanValue();
+
+    } catch (Throwable t) {
+
+      if (InnerCause.isInnerCause(t, SparqlTypeErrorException.class)) {
+
+        // trap the type error and filter out the solution
+        if (log.isInfoEnabled())
+          log.info("discarding solution due to type error: " + bs + " : " + t);
+
+        return false;
+      }
+
+      throw new RuntimeException(t);
     }
+  }
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public SPARQLConstraint(final BOp[] args, final Map<String, Object> anns) {
+  /** Overridden to provide a little bit of information about the attached constraint. */
+  @Override
+  public String toShortString() {
 
-        super(args, anns);
-
-        if (args.length != 1 || args[0] == null)
-            throw new IllegalArgumentException();
-        
-    }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public SPARQLConstraint(final SPARQLConstraint<X> op) {
-
-        super(op);
-
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public IValueExpression<? extends XSDBooleanIV> get(final int i) {
-
-        return (IValueExpression<? extends XSDBooleanIV>) super.get(i);
-        
-    }
-    
-//    public IValueExpression<X> getValueExpression() {
-//        return (IValueExpression<X>) get(0);
-//    }
-    	
-    @Override
-	public boolean accept(final IBindingSet bs) {
-
-		try {
-
-			// evaluate the EBV operator
-            final XSDBooleanIV iv = get(0).get(bs);
-			
-			return iv.booleanValue();
-
-		} catch (Throwable t) {
-
-			if (InnerCause.isInnerCause(t, SparqlTypeErrorException.class)) {
-
-				// trap the type error and filter out the solution
-				if (log.isInfoEnabled())
-					log.info("discarding solution due to type error: " + bs
-							+ " : " + t);
-
-				return false;
-
-			}
-
-			throw new RuntimeException(t);
-
-		}
-
-	}
-
-    /**
-     * Overridden to provide a little bit of information about the attached
-     * constraint.
-     */
-    @Override
-    public String toShortString() {
-
-        return super.toShortString() + "{condition="
-                + getValueExpression().toShortString() + "}";
-
-    }
-
+    return super.toShortString() + "{condition=" + getValueExpression().toShortString() + "}";
+  }
 }

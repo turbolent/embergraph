@@ -18,9 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.util.Collections;
-
 import junit.framework.Test;
-
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
@@ -30,82 +28,75 @@ import org.embergraph.rwstore.RWStore;
 
 /**
  * Tests that are RWStore specific.
- * 
- * @author bryan
  *
+ * @author bryan
  * @param <S>
  */
-public class TestRWStoreTxBehaviors<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+public class TestRWStoreTxBehaviors<S extends IIndexManager>
+    extends AbstractTestNanoSparqlClient<S> {
 
-	public TestRWStoreTxBehaviors() {
+  public TestRWStoreTxBehaviors() {}
 
-	}
+  public TestRWStoreTxBehaviors(final String name) {
 
-	public TestRWStoreTxBehaviors(final String name) {
+    super(name);
+  }
 
-		super(name);
+  public static Test suite() {
+    return ProxySuiteHelper.suiteWhenStandalone(
+        TestRWStoreTxBehaviors.class,
+        "test.*",
+        Collections.singleton(BufferMode.DiskRW),
+        TestMode.triples);
+  }
 
-	}
+  /**
+   * Unit test verifies that the native journal transaction counter for the RWStore is properly
+   * closed for SPARQL UPDATE. This bug was introduced when addressing <a
+   * href="http://trac.blazegraph.com/ticket/1026>SPARQL UPDATE with runtime errors causes problems
+   * with lexicon indices </a>.
+   *
+   * <p>Note: This test will fail if group commit is enabled and the servlet commits the http
+   * response before the group commit.
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/1036">Journal file growth reported with 1.3.3
+   *     </a>
+   */
+  public void test_SPARQL_UPDATE_Tx_Properly_Closed() throws Exception {
 
-	static public Test suite() {
-		return ProxySuiteHelper.suiteWhenStandalone(TestRWStoreTxBehaviors.class,
-				"test.*", Collections.singleton(BufferMode.DiskRW), TestMode.triples
-				);
-	}
+    RWStore rwstore = null;
 
-   /**
-    * Unit test verifies that the native journal transaction counter for the
-    * RWStore is properly closed for SPARQL UPDATE. This bug was introduced when
-    * addressing <a href="http://trac.blazegraph.com/ticket/1026> SPARQL UPDATE
-    * with runtime errors causes problems with lexicon indices </a>.
-    * <p>
-    * Note: This test will fail if group commit is enabled and the servlet
-    * commits the http response before the group commit.
-    * 
-    * @see <a href="http://trac.blazegraph.com/ticket/1036"> Journal file growth
-    *      reported with 1.3.3 </a>
-    */
-    public void test_SPARQL_UPDATE_Tx_Properly_Closed() throws Exception {
-    	
-		RWStore rwstore = null;
+    if (getIndexManager() instanceof AbstractJournal
+        && ((AbstractJournal) getIndexManager()).getBufferStrategy() instanceof RWStrategy) {
 
-		if (getIndexManager() instanceof AbstractJournal
-				&& ((AbstractJournal) getIndexManager()).getBufferStrategy() instanceof RWStrategy) {
+      rwstore = ((RWStrategy) ((AbstractJournal) getIndexManager()).getBufferStrategy()).getStore();
 
-			rwstore = ((RWStrategy) ((AbstractJournal) getIndexManager())
-					.getBufferStrategy()).getStore();
+    } else {
 
-		} else {
-			
-			fail("RWStore is not in use");
-			
-		}
-
-      final int activeTxBefore = rwstore.getActiveTxCount();
-      if (log.isInfoEnabled())
-         log.info("activeTxBefore=" + activeTxBefore);
-
-		final IPreparedSparqlUpdate preparedUpdate = m_repo.prepareUpdate("PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
-+"INSERT DATA\n"
-+"{\n"
-+"  <http://example/book1> dc:title \"A new book\" ; \n"
-+"                          dc:creator \"A.N.Other\" .\n"
-+"}\n"
-);
-		preparedUpdate.evaluate();
-		
-      final int activeTxAfter = rwstore.getActiveTxCount();
-      if (log.isInfoEnabled())
-         log.info("activeTxAfter=" + activeTxAfter);
-
-		/*
-		 * This value should be unchanged across the SPARQL UPDATE request (it
-		 * will be incremented during the processing of the request and then
-		 * decremented again during the commit or abort protocol).
-		 */
-		assertEquals(activeTxBefore, activeTxAfter);
-
+      fail("RWStore is not in use");
     }
-    
+
+    final int activeTxBefore = rwstore.getActiveTxCount();
+    if (log.isInfoEnabled()) log.info("activeTxBefore=" + activeTxBefore);
+
+    final IPreparedSparqlUpdate preparedUpdate =
+        m_repo.prepareUpdate(
+            "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
+                + "INSERT DATA\n"
+                + "{\n"
+                + "  <http://example/book1> dc:title \"A new book\" ; \n"
+                + "                          dc:creator \"A.N.Other\" .\n"
+                + "}\n");
+    preparedUpdate.evaluate();
+
+    final int activeTxAfter = rwstore.getActiveTxCount();
+    if (log.isInfoEnabled()) log.info("activeTxAfter=" + activeTxAfter);
+
+    /*
+     * This value should be unchanged across the SPARQL UPDATE request (it
+     * will be incremented during the processing of the request and then
+     * decremented again during the commit or abort protocol).
+     */
+    assertEquals(activeTxBefore, activeTxAfter);
+  }
 }

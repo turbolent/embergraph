@@ -29,91 +29,72 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 
-
 /**
  * Factory for instances that do NOT support Unicode.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class ASCIIKeyBuilderFactory implements IKeyBuilderFactory, Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8823261532997841046L;
-    
-    private int initialCapacity;
-    
-    public int getInitialCapacity() {
-        
-        return initialCapacity;
-        
-    }
+  /** */
+  private static final long serialVersionUID = -8823261532997841046L;
 
-    /**
-     * Representation includes all aspects of the {@link Serializable} state.
-     */
-    @Override
-    public String toString() {
-        
-        StringBuilder sb = new StringBuilder(getClass().getName());
-        
-        sb.append("{ initialCapacity=" + initialCapacity);
-        
-        sb.append("}");
-        
-        return sb.toString();
-        
-    }
-    
-    /**
-     * De-serialization ctor.
-     */
-    public ASCIIKeyBuilderFactory() {
-        
-    }
-    
-    public ASCIIKeyBuilderFactory(int initialCapacity) {
-    
-        if (initialCapacity < 0)
-            throw new IllegalArgumentException();
-        
-        this.initialCapacity = initialCapacity;
-        
-    }
-    
-    @Override
-    public IKeyBuilder getKeyBuilder() {
+  private int initialCapacity;
 
-        return KeyBuilder.newInstance(initialCapacity);
-        
-    }
+  public int getInitialCapacity() {
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Note: The PRIMARY is identical to the as-configured {@link IKeyBuilder}
-     * for ASCII.
-     */
-    @Override
-    public IKeyBuilder getPrimaryKeyBuilder() {
+    return initialCapacity;
+  }
 
-        return getKeyBuilder();
-        
-    }
+  /** Representation includes all aspects of the {@link Serializable} state. */
+  @Override
+  public String toString() {
 
-    @Override
-    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    StringBuilder sb = new StringBuilder(getClass().getName());
 
-        initialCapacity = in.readInt();
-        
-    }
+    sb.append("{ initialCapacity=" + initialCapacity);
 
-    @Override
-    public void writeExternal(final ObjectOutput out) throws IOException {
-       
-        out.writeInt(initialCapacity);
-        
-    }
+    sb.append("}");
 
+    return sb.toString();
+  }
+
+  /** De-serialization ctor. */
+  public ASCIIKeyBuilderFactory() {}
+
+  public ASCIIKeyBuilderFactory(int initialCapacity) {
+
+    if (initialCapacity < 0) throw new IllegalArgumentException();
+
+    this.initialCapacity = initialCapacity;
+  }
+
+  @Override
+  public IKeyBuilder getKeyBuilder() {
+
+    return KeyBuilder.newInstance(initialCapacity);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Note: The PRIMARY is identical to the as-configured {@link IKeyBuilder} for ASCII.
+   */
+  @Override
+  public IKeyBuilder getPrimaryKeyBuilder() {
+
+    return getKeyBuilder();
+  }
+
+  @Override
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+
+    initialCapacity = in.readInt();
+  }
+
+  @Override
+  public void writeExternal(final ObjectOutput out) throws IOException {
+
+    out.writeInt(initialCapacity);
+  }
 }

@@ -18,25 +18,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Interface is used to delegate to servlets provided features that are resolved
- * at runtime. Additional objects can be communicated as request attributes using
- * standard servlet techniques.
- * 
+ * Interface is used to delegate to servlets provided features that are resolved at runtime.
+ * Additional objects can be communicated as request attributes using standard servlet techniques.
+ *
  * @author bryan
  */
 public interface IServletDelegate {
 
-    void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException;
-
+  void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

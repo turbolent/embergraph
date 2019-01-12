@@ -22,42 +22,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * A Graph Update operation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class GraphUpdate extends Update {
+public abstract class GraphUpdate extends Update {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param updateType
-     */
-    public GraphUpdate(UpdateType updateType) {
-        super(updateType);
-    }
+  /** @param updateType */
+  public GraphUpdate(UpdateType updateType) {
+    super(updateType);
+  }
 
-    /**
-     * @param op
-     */
-    public GraphUpdate(GraphUpdate op) {
-        super(op);
-    }
+  /** @param op */
+  public GraphUpdate(GraphUpdate op) {
+    super(op);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public GraphUpdate(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-    }
-
+  /**
+   * @param args
+   * @param anns
+   */
+  public GraphUpdate(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+  }
 }

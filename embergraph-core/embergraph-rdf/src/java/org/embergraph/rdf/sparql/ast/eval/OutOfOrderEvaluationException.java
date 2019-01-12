@@ -21,34 +21,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 /**
- * An instance of this exception is thrown if out of order evaluation of
- * solutions is observed in an evaluation context which does not permit this
- * (the RTO).
- * 
+ * An instance of this exception is thrown if out of order evaluation of solutions is observed in an
+ * evaluation context which does not permit this (the RTO).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class OutOfOrderEvaluationException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public OutOfOrderEvaluationException() {
-    }
+  public OutOfOrderEvaluationException() {}
 
-    public OutOfOrderEvaluationException(String message) {
-        super(message);
-    }
+  public OutOfOrderEvaluationException(String message) {
+    super(message);
+  }
 
-    public OutOfOrderEvaluationException(Throwable cause) {
-        super(cause);
-    }
+  public OutOfOrderEvaluationException(Throwable cause) {
+    super(cause);
+  }
 
-    public OutOfOrderEvaluationException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public OutOfOrderEvaluationException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-//    public OutOfOrderEvaluationException(String message, Throwable cause,
-//            boolean enableSuppression, boolean writableStackTrace) {
-//        super(message, cause, enableSuppression, writableStackTrace);
-//    }
+  //    public OutOfOrderEvaluationException(String message, Throwable cause,
+  //            boolean enableSuppression, boolean writableStackTrace) {
+  //        super(message, cause, enableSuppression, writableStackTrace);
+  //    }
 
 }

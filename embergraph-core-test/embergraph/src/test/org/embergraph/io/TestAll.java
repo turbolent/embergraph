@@ -27,68 +27,56 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage()
-                .getName());
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
 
-        // test suite for the direct buffer pool.
-        //Disabled See BLZG-1417
-        //suite.addTestSuite(TestDirectBufferPool.class);
-        
-        // test suite for allocations made against direct buffers.
-        suite.addTestSuite(TestDirectBufferPoolAllocator.class);
-        
-        // test suite for FileChannel IO utility class.
-        suite.addTestSuite(TestFileChannelUtility.class);
+    // test suite for the direct buffer pool.
+    // Disabled See BLZG-1417
+    // suite.addTestSuite(TestDirectBufferPool.class);
 
-        // test suite for FileLock and advisory locking class.
-        suite.addTestSuite(TestFileLockUtility.class);
-        
-        // test suite for locating journal files.
-        suite.addTestSuite(TestNameAndExtensionFilter.class);
+    // test suite for allocations made against direct buffers.
+    suite.addTestSuite(TestDirectBufferPoolAllocator.class);
 
-        suite.addTest(TestAll_Buffers.suite());
-        
-        suite.addTest(TestAll_Packers.suite());
-        
-        suite.addTest(org.embergraph.io.compression.TestAll.suite());
-        
-        // test checksum computations (used by serialization).
-        suite.addTestSuite( TestChecksumUtility.class );
+    // test suite for FileChannel IO utility class.
+    suite.addTestSuite(TestFileChannelUtility.class);
 
-//        /*
-//         * Note: This is added into the test suite at a different location since
-//         * there is a dependency on the org.embergraph.quorum package.
-//         */
-//        suite.addTest(org.embergraph.io.writecache.TestAll.suite());
+    // test suite for FileLock and advisory locking class.
+    suite.addTestSuite(TestFileLockUtility.class);
 
-        return suite;
-        
-    }
-    
+    // test suite for locating journal files.
+    suite.addTestSuite(TestNameAndExtensionFilter.class);
+
+    suite.addTest(TestAll_Buffers.suite());
+
+    suite.addTest(TestAll_Packers.suite());
+
+    suite.addTest(org.embergraph.io.compression.TestAll.suite());
+
+    // test checksum computations (used by serialization).
+    suite.addTestSuite(TestChecksumUtility.class);
+
+    //        /*
+    //         * Note: This is added into the test suite at a different location since
+    //         * there is a dependency on the org.embergraph.quorum package.
+    //         */
+    //        suite.addTest(org.embergraph.io.writecache.TestAll.suite());
+
+    return suite;
+  }
 }

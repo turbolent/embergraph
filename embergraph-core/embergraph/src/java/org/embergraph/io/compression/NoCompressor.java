@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.io.compression;
 
 import it.unimi.dsi.lang.MutableString;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,116 +29,106 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.nio.charset.Charset;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.io.ByteCountInputStream;
 import org.embergraph.io.ByteCountOutputStream;
 
 /**
  * No compression version.
- * 
+ *
  * @see http://userguide.icu-project.org/conversion/compression
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: BOCU1Compressor.java 4582 2011-05-31 19:12:53Z thompsonbry $
  */
 public class NoCompressor implements IUnicodeCompressor, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private static final transient Logger log = Logger
-            .getLogger(NoCompressor.class);
+  private static final transient Logger log = Logger.getLogger(NoCompressor.class);
 
-    // @todo factor out lookup? (static)
-    private final transient Charset cs = Charset.forName("UTF-8");
+  // @todo factor out lookup? (static)
+  private final transient Charset cs = Charset.forName("UTF-8");
 
-//    public void encode(final CharSequence s, final IManagedByteArray out) {
-//
-//        // Wrap caller's buffer as OutputStream
-//        final ManagedByteArrayOutputStream mbaos = new ManagedByteArrayOutputStream(
-//                out);
-//        
-//        encode(s, mbaos);
-//        
-//    }
+  //    public void encode(final CharSequence s, final IManagedByteArray out) {
+  //
+  //        // Wrap caller's buffer as OutputStream
+  //        final ManagedByteArrayOutputStream mbaos = new ManagedByteArrayOutputStream(
+  //                out);
+  //
+  //        encode(s, mbaos);
+  //
+  //    }
 
-    public int encode(final CharSequence s, final OutputStream os) {
+  public int encode(final CharSequence s, final OutputStream os) {
 
-        final ByteCountOutputStream bcos = new ByteCountOutputStream(os); 
-        
-        // Wrap with Writer using encoder.
-        final OutputStreamWriter w = new OutputStreamWriter(bcos, cs);
+    final ByteCountOutputStream bcos = new ByteCountOutputStream(os);
 
-        try {
+    // Wrap with Writer using encoder.
+    final OutputStreamWriter w = new OutputStreamWriter(bcos, cs);
 
-            if (s instanceof MutableString) {
-                // Efficient: tunnels to the backing char[].
-                final MutableString t = (MutableString) s;
-                w.write(t.array(), 0, t.length());
-            } else if (s instanceof String) {
-                w.write((String) s);
-            } else {
-                // TODO optimize for CharBuffer, StringBuilder
-                w.write(s.toString());
-            }
+    try {
 
-            w.flush();
+      if (s instanceof MutableString) {
+        // Efficient: tunnels to the backing char[].
+        final MutableString t = (MutableString) s;
+        w.write(t.array(), 0, t.length());
+      } else if (s instanceof String) {
+        w.write((String) s);
+      } else {
+        // TODO optimize for CharBuffer, StringBuilder
+        w.write(s.toString());
+      }
 
-            w.close();
-            
-            return bcos.getNWritten();
+      w.flush();
 
-        } catch (IOException ex) {
+      w.close();
 
-            throw new RuntimeException(ex);
+      return bcos.getNWritten();
 
-        }
+    } catch (IOException ex) {
 
+      throw new RuntimeException(ex);
     }
+  }
 
-//    public void decode(final IByteArraySlice in, final Appendable sb) {
-//
-//        final DataInputBuffer dib = new DataInputBuffer(in.array(), in.off(),
-//                in.len());
-//
-//        decode(dib, sb);
-//
-//    }
+  //    public void decode(final IByteArraySlice in, final Appendable sb) {
+  //
+  //        final DataInputBuffer dib = new DataInputBuffer(in.array(), in.off(),
+  //                in.len());
+  //
+  //        decode(dib, sb);
+  //
+  //    }
 
-    public int decode(final InputStream in, final Appendable sb) {
+  public int decode(final InputStream in, final Appendable sb) {
 
-        final ByteCountInputStream bcis = new ByteCountInputStream(in);
-        
-        // Wrap with decoder.
-        final InputStreamReader r = new InputStreamReader(bcis, cs);
+    final ByteCountInputStream bcis = new ByteCountInputStream(in);
 
-        try {
+    // Wrap with decoder.
+    final InputStreamReader r = new InputStreamReader(bcis, cs);
 
-            // decode
-            int ch;
-            while ((ch = r.read()) != -1) {
+    try {
 
-                sb.append((char) ch);
+      // decode
+      int ch;
+      while ((ch = r.read()) != -1) {
 
-            }
+        sb.append((char) ch);
+      }
 
-            return bcis.getNRead();
-            
-        } catch (IOException ex) {
+      return bcis.getNRead();
 
-            throw new RuntimeException(ex);
+    } catch (IOException ex) {
 
-        } finally {
+      throw new RuntimeException(ex);
 
-            try {
-                r.close();
-            } catch (IOException e) {
-                log.error(e, e);
-            }
+    } finally {
 
-        }
-
+      try {
+        r.close();
+      } catch (IOException e) {
+        log.error(e, e);
+      }
     }
-
+  }
 }

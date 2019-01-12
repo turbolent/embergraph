@@ -19,83 +19,68 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-
 import org.embergraph.util.StackInfoReport;
 
 /**
- * A {@link HttpClient} that supports the {@link AutoCloseable} protocol and
- * which will be transparently closed by the
- * {@link RemoteRepositoryManager} if
- * {@link RemoteRepositoryManager#close()} is invoked.
- * <p>
- * Note: Do NOT use an instance of this class if you wish to share the same
- * {@link HttpClient} across multiple {@link RemoteRepositoryManager}
- * instances.
- * 
+ * A {@link HttpClient} that supports the {@link AutoCloseable} protocol and which will be
+ * transparently closed by the {@link RemoteRepositoryManager} if {@link
+ * RemoteRepositoryManager#close()} is invoked.
+ *
+ * <p>Note: Do NOT use an instance of this class if you wish to share the same {@link HttpClient}
+ * across multiple {@link RemoteRepositoryManager} instances.
+ *
  * @author Martyn Cutcher
  */
 public class AutoCloseHttpClient extends HttpClient implements AutoCloseable {
-	
-//    private static final transient Logger log = Logger
-//            .getLogger(AutoCloseHttpClient.class);
-    
-    /**
-     * The #of running instances of the {@link AutoCloseHttpClient} - debug only.
-     */
-	private final static AtomicInteger s_active = new AtomicInteger();
-	
-	/**
-	 * The stack trace of the caller when the {@link AutoCloseHttpClient} is
-	 * stopped.
-	 */
-	@SuppressWarnings("unused")
-	private volatile StackInfoReport m_stopped = null;
-	
-	public AutoCloseHttpClient(final SslContextFactory sslFactory) {
-		
-		super(sslFactory); 
 
-	}
+  //    private static final transient Logger log = Logger
+  //            .getLogger(AutoCloseHttpClient.class);
 
-	@Override
-	protected void doStart() throws Exception {
+  /** The #of running instances of the {@link AutoCloseHttpClient} - debug only. */
+  private static final AtomicInteger s_active = new AtomicInteger();
 
-		super.doStart();
-		
-		s_active.incrementAndGet();
-		
-	}
-	
-	@Override
-	protected void doStop() throws Exception {
+  /** The stack trace of the caller when the {@link AutoCloseHttpClient} is stopped. */
+  @SuppressWarnings("unused")
+  private volatile StackInfoReport m_stopped = null;
 
-		super.doStop();
+  public AutoCloseHttpClient(final SslContextFactory sslFactory) {
 
-		// for debug
-		m_stopped = new StackInfoReport();
+    super(sslFactory);
+  }
 
-		s_active.decrementAndGet();
+  @Override
+  protected void doStart() throws Exception {
 
-	}
+    super.doStart();
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * Called from {@link RemoteRepositoryManager} when it is closed.
-	 * 
-	 * @throws Exception
-	 */
-	@Override
-	public void close() throws Exception {
+    s_active.incrementAndGet();
+  }
 
-		if (isStopping() || isStopped())
-			return;
+  @Override
+  protected void doStop() throws Exception {
 
-		stop();
+    super.doStop();
 
-	}
+    // for debug
+    m_stopped = new StackInfoReport();
 
+    s_active.decrementAndGet();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Called from {@link RemoteRepositoryManager} when it is closed.
+   *
+   * @throws Exception
+   */
+  @Override
+  public void close() throws Exception {
+
+    if (isStopping() || isStopped()) return;
+
+    stop();
+  }
 }

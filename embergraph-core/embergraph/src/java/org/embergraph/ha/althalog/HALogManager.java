@@ -23,9 +23,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
@@ -34,371 +32,329 @@ import org.embergraph.journal.StoreTypeEnum;
 
 /**
  * Provides the top level control
- * 
- * @author Martyn Cutcher
  *
+ * @author Martyn Cutcher
  */
 public class HALogManager {
-	/**
-	 * Logger for HA events.
-	 */
-	private static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
+  /** Logger for HA events. */
+  private static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
 
-	private final File m_halogdir;
-	
-	private final Lock m_currentLock = new ReentrantLock();
-	
-	// protected by m_curretnLock
-	private HALogFile m_current = null;
-	
-	/**
-	 * Ensures private communication from created log files
-	 */
-	interface IHALogManagerCallback {
-		File getHALogDir();
-		void release(HALogFile logfile);
-	}
-	
-	/*
-	 * This callback is passed to HALogFiles when they are created.
-	 * 
-	 * A 
-	 */
-	private IHALogManagerCallback m_callback = new IHALogManagerCallback() {
+  private final File m_halogdir;
 
-		@Override
-		public void release(final HALogFile logfile) {
-			HALogManager.this.closeLog(logfile);
-		}
+  private final Lock m_currentLock = new ReentrantLock();
 
-		@Override
-		public File getHALogDir() {
-			return HALogManager.this.getHALogDir();
-		}
-		
-	};
-	
-	public HALogManager(final File halogdir) {
-		m_halogdir = halogdir;
-		
-		if (!m_halogdir.exists())
-			throw new IllegalArgumentException();
-		
-		if (haLog.isInfoEnabled())
-			haLog.info("HALogManager initialized");
-	}
-	
-	public HALogFile createLog(final IRootBlockView rbv) throws IOException {
-		
-		if (haLog.isInfoEnabled())
-			haLog.info("Creating log for commit " + rbv.getCommitCounter());
+  // protected by m_curretnLock
+  private HALogFile m_current = null;
 
-		m_currentLock.lock();
-		try {
-			if (m_current != null)
-				throw new IllegalStateException();
-			
-			final HALogFile ret = new HALogFile(rbv, m_callback);
-			
-			m_current = ret;
-			
-			return ret;
-		} finally {
-			m_currentLock.unlock();
-		}
-	}
-	
-	/*
-	 * Called by the logWriter via the callback when the
-	 * closing rootblock is written
-	 */
-	private void closeLog(final HALogFile current) {
+  /** Ensures private communication from created log files */
+  interface IHALogManagerCallback {
+    File getHALogDir();
 
-		m_currentLock.lock();
-		try {
-			if (m_current != current)
-				throw new IllegalStateException();
-			
-			m_current = null;
-		} finally {
-			m_currentLock.unlock();
-		}
-	}
-	
-	/**
-	 * 
-	 * @return the the open HALogFile
-	 */
-	public HALogFile getOpenLogFile() {
-		m_currentLock.lock();
-		try {
-			return m_current;
-		} finally {
-			m_currentLock.unlock();
-		}
-	}
-	
-	/**
-	 * Utility to retrieve a File reference to the current open file
-	 * 
-	 * @return
-	 */
-	public File getCurrentFile() {
-		final HALogFile file = getOpenLogFile();
-		
-		return file == null ? null : file.getFile();
-	}
+    void release(HALogFile logfile);
+  }
 
-	/**
-	 * 
-	 * @return the directory used to store the log files
-	 */
-	public File getHALogDir() {
-		return m_halogdir;
-	}
-	
+  /*
+   * This callback is passed to HALogFiles when they are created.
+   *
+   * A
+   */
+  private IHALogManagerCallback m_callback =
+      new IHALogManagerCallback() {
 
-	
-	public IHALogReader getReader(final long commitCounter) throws IOException {
-		m_currentLock.lock();
-		try {
-			if (m_current != null && m_current.getCommitCounter() == commitCounter)
-				return m_current.getReader();
-		} finally {
-			m_currentLock.unlock();
-		}
-		
-		final File file = HALogFile.getHALogFileName(m_halogdir, commitCounter);
-		final HALogFile halog = new HALogFile(file);
-		
-		return halog.getReader();
-	}
-	
-	/**
-	 * Returns the HALogFile for the commitCounter if it exists.
-	 * It will return either the current or an historical file
-	 * 
-	 * @param commitCounter
-	 * @return the HALogFile for this commit counter
-	 * @throws FileNotFoundException
-	 */
-	public HALogFile getHALogFile(final long commitCounter) throws FileNotFoundException {
-		/*
-		 * Check the file exists first
-		 */
-		final File file = HALogFile.getHALogFileName(m_halogdir, commitCounter);
-		if (!file.exists())
-			throw new FileNotFoundException();
-		
-		m_currentLock.lock();
-		try {
-			if (m_current != null && m_current.getCommitCounter() == commitCounter)
-				return m_current;
-		} finally {
-			m_currentLock.unlock();
-		}
-		
-		/*
-		 * If the file existed before we checked for current open file, then it must now
-		 * be a read only log
-		 */		
-		return new HALogFile(file);
-	}
+        @Override
+        public void release(final HALogFile logfile) {
+          HALogManager.this.closeLog(logfile);
+        }
 
+        @Override
+        public File getHALogDir() {
+          return HALogManager.this.getHALogDir();
+        }
+      };
 
-	/**
-	 * Closes and removes the current writer
-	 * @throws IOException 
-	 */
-	public void disable() throws IOException {
-		m_currentLock.lock();
-		try {
-			if (m_current != null)
-				m_current.disable();
-			
-			m_current = null;
-		} finally {
-			m_currentLock.unlock();
-		}
-	}
+  public HALogManager(final File halogdir) {
+    m_halogdir = halogdir;
 
-	/*
-	 * This logic is handled by the HAJournalServer, which is also aware
-	 * of the backup integration through zookeeper.
-	 */
-//	/**
-//	 * Disables any current log file, then removes all log files
-//	 * from the directory
-//	 * 
-//	 * @throws IOException
-//	 */
-//	public void removeAllLogFiles() {
-//		m_currentLock.lock();
-//		try {
-//			// No longer disables the current log file
-//			
-//			removeAllLogFiles(m_halogdir, getCurrentFile());
-//		} finally {
-//			m_currentLock.unlock();
-//		}
-//	}
-//
-//	/**
-//	 * Recursively removes all log files from the provided directory
-//	 * @param dir
-//	 */
-//	private void removeAllLogFiles(final File dir, final File preserve) {
-//		final File[] files = logFiles(dir);
-//		for (File f : files) {
-//			try {
-//				if (f.isDirectory()) {
-//					removeAllLogFiles(f, preserve);
-//					
-//					// FIXME: should we remove the directory?
-//					// Probably not
-//					// f.delete();
-//				} else if (f != preserve) {
-//					f.delete();
-//				}
-//			} catch (final SecurityException se) {
-//				haLog.warn("Unabel to delete file " + f.getAbsolutePath(), se);
-//			}
-//		}
-//	}
-	
-	/**
-	 * Utility program will dump log files (or directories containing log files)
-	 * provided as arguments.
-	 * 
-	 * @param args
-	 *            Zero or more files or directories.
-	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	public static void main(final String[] args) throws IOException,
-			InterruptedException {
+    if (!m_halogdir.exists()) throw new IllegalArgumentException();
 
-		final IBufferAccess buf = DirectBufferPool.INSTANCE.acquire();
+    if (haLog.isInfoEnabled()) haLog.info("HALogManager initialized");
+  }
 
-		try {
+  public HALogFile createLog(final IRootBlockView rbv) throws IOException {
 
-			for (String arg : args) {
+    if (haLog.isInfoEnabled()) haLog.info("Creating log for commit " + rbv.getCommitCounter());
 
-				final File file = new File(arg);
+    m_currentLock.lock();
+    try {
+      if (m_current != null) throw new IllegalStateException();
 
-				if (!file.exists()) {
+      final HALogFile ret = new HALogFile(rbv, m_callback);
 
-					System.err.println("No such file: " + file);
+      m_current = ret;
 
-					continue;
+      return ret;
+    } finally {
+      m_currentLock.unlock();
+    }
+  }
 
-				}
+  /*
+   * Called by the logWriter via the callback when the
+   * closing rootblock is written
+   */
+  private void closeLog(final HALogFile current) {
 
-				if (file.isDirectory()) {
+    m_currentLock.lock();
+    try {
+      if (m_current != current) throw new IllegalStateException();
 
-					doDirectory(file, buf);
+      m_current = null;
+    } finally {
+      m_currentLock.unlock();
+    }
+  }
 
-				} else {
+  /** @return the the open HALogFile */
+  public HALogFile getOpenLogFile() {
+    m_currentLock.lock();
+    try {
+      return m_current;
+    } finally {
+      m_currentLock.unlock();
+    }
+  }
 
-					doFile(file, buf);
+  /**
+   * Utility to retrieve a File reference to the current open file
+   *
+   * @return
+   */
+  public File getCurrentFile() {
+    final HALogFile file = getOpenLogFile();
 
-				}
+    return file == null ? null : file.getFile();
+  }
 
-			}
+  /** @return the directory used to store the log files */
+  public File getHALogDir() {
+    return m_halogdir;
+  }
 
-		} finally {
+  public IHALogReader getReader(final long commitCounter) throws IOException {
+    m_currentLock.lock();
+    try {
+      if (m_current != null && m_current.getCommitCounter() == commitCounter)
+        return m_current.getReader();
+    } finally {
+      m_currentLock.unlock();
+    }
 
-			buf.release();
+    final File file = HALogFile.getHALogFileName(m_halogdir, commitCounter);
+    final HALogFile halog = new HALogFile(file);
 
-		}
+    return halog.getReader();
+  }
 
-	}
-	
-	private static File[] logFiles(final File dir) {
-		return dir.listFiles(new FilenameFilter() {
+  /**
+   * Returns the HALogFile for the commitCounter if it exists. It will return either the current or
+   * an historical file
+   *
+   * @param commitCounter
+   * @return the HALogFile for this commit counter
+   * @throws FileNotFoundException
+   */
+  public HALogFile getHALogFile(final long commitCounter) throws FileNotFoundException {
+    /*
+     * Check the file exists first
+     */
+    final File file = HALogFile.getHALogFileName(m_halogdir, commitCounter);
+    if (!file.exists()) throw new FileNotFoundException();
 
-			@Override
-			public boolean accept(File dir, String name) {
+    m_currentLock.lock();
+    try {
+      if (m_current != null && m_current.getCommitCounter() == commitCounter) return m_current;
+    } finally {
+      m_currentLock.unlock();
+    }
 
-				if (new File(dir, name).isDirectory()) {
+    /*
+     * If the file existed before we checked for current open file, then it must now
+     * be a read only log
+     */
+    return new HALogFile(file);
+  }
 
-					// Allow recursion through directories.
-					return true;
+  /**
+   * Closes and removes the current writer
+   *
+   * @throws IOException
+   */
+  public void disable() throws IOException {
+    m_currentLock.lock();
+    try {
+      if (m_current != null) m_current.disable();
 
-				}
+      m_current = null;
+    } finally {
+      m_currentLock.unlock();
+    }
+  }
 
-				return name.endsWith(IHALogReader.HA_LOG_EXT);
+  /*
+   * This logic is handled by the HAJournalServer, which is also aware
+   * of the backup integration through zookeeper.
+   */
+  //	/**
+  //	 * Disables any current log file, then removes all log files
+  //	 * from the directory
+  //	 *
+  //	 * @throws IOException
+  //	 */
+  //	public void removeAllLogFiles() {
+  //		m_currentLock.lock();
+  //		try {
+  //			// No longer disables the current log file
+  //
+  //			removeAllLogFiles(m_halogdir, getCurrentFile());
+  //		} finally {
+  //			m_currentLock.unlock();
+  //		}
+  //	}
+  //
+  //	/**
+  //	 * Recursively removes all log files from the provided directory
+  //	 * @param dir
+  //	 */
+  //	private void removeAllLogFiles(final File dir, final File preserve) {
+  //		final File[] files = logFiles(dir);
+  //		for (File f : files) {
+  //			try {
+  //				if (f.isDirectory()) {
+  //					removeAllLogFiles(f, preserve);
+  //
+  //					// FIXME: should we remove the directory?
+  //					// Probably not
+  //					// f.delete();
+  //				} else if (f != preserve) {
+  //					f.delete();
+  //				}
+  //			} catch (final SecurityException se) {
+  //				haLog.warn("Unabel to delete file " + f.getAbsolutePath(), se);
+  //			}
+  //		}
+  //	}
 
-			}
-		});
-	}
+  /**
+   * Utility program will dump log files (or directories containing log files) provided as
+   * arguments.
+   *
+   * @param args Zero or more files or directories.
+   * @throws IOException
+   * @throws InterruptedException
+   */
+  public static void main(final String[] args) throws IOException, InterruptedException {
 
-	private static void doDirectory(final File dir, final IBufferAccess buf)
-			throws IOException {
+    final IBufferAccess buf = DirectBufferPool.INSTANCE.acquire();
 
-		final File[] files = logFiles(dir);
+    try {
 
-		for (File file : files) {
+      for (String arg : args) {
 
-			if (file.isDirectory()) {
+        final File file = new File(arg);
 
-				doDirectory(file, buf);
+        if (!file.exists()) {
 
-			} else {
+          System.err.println("No such file: " + file);
 
-				doFile(file, buf);
+          continue;
+        }
 
-			}
+        if (file.isDirectory()) {
 
-		}
+          doDirectory(file, buf);
 
-	}
+        } else {
 
-	private static void doFile(final File file, final IBufferAccess buf)
-			throws IOException {
+          doFile(file, buf);
+        }
+      }
 
-		final HALogFile f = new HALogFile(file);
-		final IHALogReader r = f.getReader();
+    } finally {
 
-		try {
+      buf.release();
+    }
+  }
 
-			final IRootBlockView openingRootBlock = r.getOpeningRootBlock();
+  private static File[] logFiles(final File dir) {
+    return dir.listFiles(
+        new FilenameFilter() {
 
-			final IRootBlockView closingRootBlock = r.getClosingRootBlock();
+          @Override
+          public boolean accept(File dir, String name) {
 
-			final boolean isWORM = openingRootBlock.getStoreType() == StoreTypeEnum.WORM;
+            if (new File(dir, name).isDirectory()) {
 
-			if (openingRootBlock.getCommitCounter() == closingRootBlock
-					.getCommitCounter()) {
+              // Allow recursion through directories.
+              return true;
+            }
 
-				System.err.println("EMPTY LOG: " + file);
+            return name.endsWith(IHALogReader.HA_LOG_EXT);
+          }
+        });
+  }
 
-			}
+  private static void doDirectory(final File dir, final IBufferAccess buf) throws IOException {
 
-			System.out.println("----------begin----------");
-			System.out.println("file=" + file);
-			System.out.println("openingRootBlock=" + openingRootBlock);
-			System.out.println("closingRootBlock=" + closingRootBlock);
-			
+    final File[] files = logFiles(dir);
 
-			while (r.hasMoreBuffers()) {
+    for (File file : files) {
 
-				// don't pass buffer in if WORM, just validate the messages
-				final IHAWriteMessage msg = r.processNextBuffer(isWORM ? null
-						: buf.buffer());
+      if (file.isDirectory()) {
 
-				System.out.println(msg.toString());
+        doDirectory(file, buf);
 
-			}
-			System.out.println("-----------end-----------");
+      } else {
 
-		} finally {
+        doFile(file, buf);
+      }
+    }
+  }
 
-			r.close();
+  private static void doFile(final File file, final IBufferAccess buf) throws IOException {
 
-		}
+    final HALogFile f = new HALogFile(file);
+    final IHALogReader r = f.getReader();
 
-	}
+    try {
 
+      final IRootBlockView openingRootBlock = r.getOpeningRootBlock();
+
+      final IRootBlockView closingRootBlock = r.getClosingRootBlock();
+
+      final boolean isWORM = openingRootBlock.getStoreType() == StoreTypeEnum.WORM;
+
+      if (openingRootBlock.getCommitCounter() == closingRootBlock.getCommitCounter()) {
+
+        System.err.println("EMPTY LOG: " + file);
+      }
+
+      System.out.println("----------begin----------");
+      System.out.println("file=" + file);
+      System.out.println("openingRootBlock=" + openingRootBlock);
+      System.out.println("closingRootBlock=" + closingRootBlock);
+
+      while (r.hasMoreBuffers()) {
+
+        // don't pass buffer in if WORM, just validate the messages
+        final IHAWriteMessage msg = r.processNextBuffer(isWORM ? null : buf.buffer());
+
+        System.out.println(msg.toString());
+      }
+      System.out.println("-----------end-----------");
+
+    } finally {
+
+      r.close();
+    }
+  }
 }

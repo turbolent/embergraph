@@ -27,78 +27,70 @@ import org.embergraph.btree.IIndex;
 
 /**
  * A thread-local implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class ThreadLocalKeyBuilderFactory implements IKeyBuilderFactory {
 
-    private final IKeyBuilderFactory delegate;
-    
-    public ThreadLocalKeyBuilderFactory(final IKeyBuilderFactory delegate) {
-        
-        if (delegate == null)
-            throw new IllegalArgumentException();
-        
-        this.delegate = delegate;
-        
-    }
+  private final IKeyBuilderFactory delegate;
 
-    /**
-     * A {@link ThreadLocal} variable providing access to thread-specific
-     * instances of a {@link IKeyBuilder} as configured by the delegate
-     * {@link IKeyBuilderFactory}.
-     * <p>
-     * Note: this {@link ThreadLocal} is not static since we need configuration
-     * properties from the constructor - those properties can be different for
-     * different {@link IIndex}s on the same machine.
-     */
-    private ThreadLocal<IKeyBuilder> threadLocalKeyBuilder = new ThreadLocal<IKeyBuilder>() {
+  public ThreadLocalKeyBuilderFactory(final IKeyBuilderFactory delegate) {
+
+    if (delegate == null) throw new IllegalArgumentException();
+
+    this.delegate = delegate;
+  }
+
+  /**
+   * A {@link ThreadLocal} variable providing access to thread-specific instances of a {@link
+   * IKeyBuilder} as configured by the delegate {@link IKeyBuilderFactory}.
+   *
+   * <p>Note: this {@link ThreadLocal} is not static since we need configuration properties from the
+   * constructor - those properties can be different for different {@link IIndex}s on the same
+   * machine.
+   */
+  private ThreadLocal<IKeyBuilder> threadLocalKeyBuilder =
+      new ThreadLocal<IKeyBuilder>() {
 
         @Override
         protected synchronized IKeyBuilder initialValue() {
 
-            return delegate.getKeyBuilder();
-
+          return delegate.getKeyBuilder();
         }
+      };
 
-    };
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured using the {@link
+   * IKeyBuilderFactory} specified to the ctor.
+   */
+  @Override
+  public IKeyBuilder getKeyBuilder() {
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured
-     * using the {@link IKeyBuilderFactory} specified to the ctor.
-     */
-    @Override
-    public IKeyBuilder getKeyBuilder() {
-        
-        return threadLocalKeyBuilder.get();
-        
-    }
+    return threadLocalKeyBuilder.get();
+  }
 
-    private ThreadLocal<IKeyBuilder> threadLocalPrimaryKeyBuilder = new ThreadLocal<IKeyBuilder>() {
+  private ThreadLocal<IKeyBuilder> threadLocalPrimaryKeyBuilder =
+      new ThreadLocal<IKeyBuilder>() {
 
         @Override
         protected synchronized IKeyBuilder initialValue() {
 
-            return delegate.getPrimaryKeyBuilder();
-
+          return delegate.getPrimaryKeyBuilder();
         }
+      };
 
-    };
-        
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured
-     * using the {@link IKeyBuilderFactory} specified to the ctor but with the
-     * {@link StrengthEnum} overriden as {@link StrengthEnum#Primary}.
-     */
-    @Override
-    public IKeyBuilder getPrimaryKeyBuilder() {
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured using the {@link
+   * IKeyBuilderFactory} specified to the ctor but with the {@link StrengthEnum} overriden as {@link
+   * StrengthEnum#Primary}.
+   */
+  @Override
+  public IKeyBuilder getPrimaryKeyBuilder() {
 
-        return threadLocalPrimaryKeyBuilder.get();
-        
-    }
-
+    return threadLocalPrimaryKeyBuilder.get();
+  }
 }

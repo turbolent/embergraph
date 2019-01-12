@@ -20,177 +20,162 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
-import org.openrdf.model.Literal;
-
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.openrdf.model.Literal;
 
 /** Implementation for inline <code>xsd:decimal</code>. */
-public class XSDDecimalIV<V extends EmbergraphLiteral> extends
-        NumericIV<V, BigDecimal> implements Literal {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7549521965119949938L;
-	
-	private final BigDecimal value;
-	
-    private transient int byteLength;
+public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigDecimal>
+    implements Literal {
 
-    public IV<V, BigDecimal> clone(final boolean clearCache) {
+  /** */
+  private static final long serialVersionUID = -7549521965119949938L;
 
-        final XSDDecimalIV<V> tmp = new XSDDecimalIV<V>(value);
+  private final BigDecimal value;
 
-        // propagate transient state if available.
-        tmp.byteLength = byteLength;
+  private transient int byteLength;
 
-        if (!clearCache) {
+  public IV<V, BigDecimal> clone(final boolean clearCache) {
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    final XSDDecimalIV<V> tmp = new XSDDecimalIV<V>(value);
 
+    // propagate transient state if available.
+    tmp.byteLength = byteLength;
+
+    if (!clearCache) {
+
+      tmp.setValue(getValueCache());
     }
 
-    public XSDDecimalIV(final BigDecimal value) {
-        
-        super(DTE.XSDDecimal);
+    return tmp;
+  }
 
-        if (value == null)
-            throw new IllegalArgumentException();
-        
-        this.value = value;
-        
+  public XSDDecimalIV(final BigDecimal value) {
+
+    super(DTE.XSDDecimal);
+
+    if (value == null) throw new IllegalArgumentException();
+
+    this.value = value;
+  }
+
+  public final BigDecimal getInlineValue() {
+
+    return value;
+  }
+
+  /**
+   * Use toPlainString to avoid expression with exponent value that would imply xsd:double rather
+   * than xsd:decimal
+   */
+  @Override
+  public String getLabel() {
+    return value.toPlainString();
+  }
+
+  @Override
+  public boolean booleanValue() {
+    return value.equals(BigDecimal.ZERO) ? false : true;
+  }
+
+  @Override
+  public byte byteValue() {
+    return value.byteValue();
+  }
+
+  @Override
+  public short shortValue() {
+    return value.shortValue();
+  }
+
+  @Override
+  public int intValue() {
+    return value.intValue();
+  }
+
+  @Override
+  public final long longValue() {
+    return value.longValue();
+  }
+
+  @Override
+  public float floatValue() {
+    return value.floatValue();
+  }
+
+  @Override
+  public double doubleValue() {
+    return value.doubleValue();
+  }
+
+  @Override
+  public BigInteger integerValue() {
+    return value.toBigInteger();
+  }
+
+  @Override
+  public BigDecimal decimalValue() {
+    return value;
+  }
+
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+    V v = getValueCache();
+    if (v == null) {
+      final EmbergraphValueFactory f = lex.getValueFactory();
+      v = (V) f.createLiteral(value.toPlainString(), DTE.XSDDecimal.getDatatypeURI());
+      v.setIV(this);
+      setValue(v);
+    }
+    return v;
+  }
+
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof XSDDecimalIV<?>) {
+      // Note: This handles values which differ in precision.
+      return this.value.compareTo(((XSDDecimalIV<?>) o).value) == 0;
+      //            return this.value.equals(((XSDDecimalIV<?>) o).value);
+    }
+    return false;
+  }
+
+  /**
+   * Return the hash code of the value returned by {@link BigDecimal#stripTrailingZeros()}.
+   *
+   * <p>Note: normalization is necessary to have a stable hash code when encoding and decoding for
+   * much the same reason that we have to use {@link BigDecimal#compareTo(BigDecimal)} in {@link
+   * #equals(Object)}.
+   */
+  public int hashCode() {
+    if (hash == 0) {
+      hash = value.stripTrailingZeros().hashCode();
+    }
+    return hash;
+  }
+
+  private int hash = 0;
+
+  public int byteLength() {
+
+    if (byteLength == 0) {
+
+      /*
+       * Cache the byteLength if not yet set.
+       */
+      byteLength = 1 /* flags */ + KeyBuilder.byteLength(value);
     }
 
-    final public BigDecimal getInlineValue() {
+    return byteLength;
+  }
 
-        return value;
-        
-    }
+  @Override
+  public int _compareTo(IV o) {
 
-    /**
-     * Use toPlainString to avoid expression with exponent value that 
-     * would imply xsd:double rather than xsd:decimal
-     */
-    @Override
-    public String getLabel() {
-        return value.toPlainString();
-    }
-
-    @Override
-    public boolean booleanValue() {
-        return value.equals(BigDecimal.ZERO) ? false : true;
-    }
-
-    @Override
-    public byte byteValue() {
-        return value.byteValue();
-    }
-
-    @Override
-    public short shortValue() {
-        return value.shortValue();
-    }
-    
-    @Override
-    public int intValue() {
-        return value.intValue();
-    }
-
-    @Override
-    final public long longValue() {
-        return value.longValue();
-    }
-
-    @Override
-    public float floatValue() {
-        return value.floatValue();
-    }
-
-    @Override
-    public double doubleValue() {
-        return value.doubleValue();
-    }
-
-    @Override
-    public BigInteger integerValue() {
-        return value.toBigInteger();
-    }
-
-    @Override
-    public BigDecimal decimalValue() {
-        return value;
-    }
-
-    @SuppressWarnings("unchecked")
-    public V asValue(final LexiconRelation lex) {
-		V v = getValueCache();
-		if (v == null) {
-			final EmbergraphValueFactory f = lex.getValueFactory();
-			v = (V) f.createLiteral(
-					value.toPlainString(), DTE.XSDDecimal.getDatatypeURI());
-			v.setIV(this);
-			setValue(v);
-		}
-		return v;
-    }
-
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof XSDDecimalIV<?>) {
-            // Note: This handles values which differ in precision.
-            return this.value.compareTo(((XSDDecimalIV<?>) o).value) == 0;
-//            return this.value.equals(((XSDDecimalIV<?>) o).value);
-        }
-        return false;
-    }
-
-    /**
-     * Return the hash code of the value returned by
-     * {@link BigDecimal#stripTrailingZeros()}.
-     * <p>
-     * Note: normalization is necessary to have a stable hash code when encoding
-     * and decoding for much the same reason that we have to use
-     * {@link BigDecimal#compareTo(BigDecimal)} in {@link #equals(Object)}.
-     */
-    public int hashCode() {
-        if (hash == 0) {
-            hash = value.stripTrailingZeros().hashCode();
-        }
-        return hash;
-    }
-    private int hash = 0;
-
-    public int byteLength() {
-        
-        if (byteLength == 0) {
-
-            /*
-             * Cache the byteLength if not yet set.
-             */
-            byteLength = 1 /* flags */ + KeyBuilder.byteLength(value);
-
-        }
-
-        return byteLength;
-        
-    }
-        
-    @Override
-    public int _compareTo(IV o) {
-        
-        return value.compareTo(((XSDDecimalIV) o).value);
-        
-    }
-
+    return value.compareTo(((XSDDecimalIV) o).value);
+  }
 }

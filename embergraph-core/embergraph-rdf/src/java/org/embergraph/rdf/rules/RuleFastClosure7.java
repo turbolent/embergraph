@@ -21,28 +21,25 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.rdf.vocab.Vocabulary;
+import org.openrdf.model.vocabulary.RDFS;
 
 public class RuleFastClosure7 extends AbstractRuleFastClosure_5_6_7_9 {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4263414863195213769L;
+  /** */
+  private static final long serialVersionUID = 4263414863195213769L;
 
-    public RuleFastClosure7(String database, String focusStore,
-            Vocabulary vocab) {
-            // Set<Long> C
-        
-        super("fastClosure7", database, focusStore,
-                vocab.getConstant(RDFS.SUBPROPERTYOF),
-                vocab.getConstant(RDFS.SUBCLASSOF)
-                );
-        
-        // , C);
+  public RuleFastClosure7(String database, String focusStore, Vocabulary vocab) {
+    // Set<Long> C
 
-    }
-    
+    super(
+        "fastClosure7",
+        database,
+        focusStore,
+        vocab.getConstant(RDFS.SUBPROPERTYOF),
+        vocab.getConstant(RDFS.SUBCLASSOF));
+
+    // , C);
+
+  }
 }

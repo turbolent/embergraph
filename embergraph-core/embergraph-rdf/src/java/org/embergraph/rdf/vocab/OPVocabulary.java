@@ -9,36 +9,29 @@ import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
 public class OPVocabulary extends BaseVocabulary {
 
-    /**
-     * De-serialization ctor.
-     */
-    public OPVocabulary() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public OPVocabulary(final String namespace) {
+  /** De-serialization ctor. */
+  public OPVocabulary() {
 
-        super( namespace );
-        
-    }
+    super();
+  }
 
-    @Override
-    protected void addValues() {
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public OPVocabulary(final String namespace) {
 
-        addDecl(new RDFVocabularyDecl());
-        addDecl(new RDFSVocabularyDecl());
-        addDecl(new DCAllVocabularyDecl());
-        addDecl(new XMLSchemaVocabularyDecl());
-        addDecl(new OPVocabularyDecl());
+    super(namespace);
+  }
 
-    }
-    
+  @Override
+  protected void addValues() {
+
+    addDecl(new RDFVocabularyDecl());
+    addDecl(new RDFSVocabularyDecl());
+    addDecl(new DCAllVocabularyDecl());
+    addDecl(new XMLSchemaVocabularyDecl());
+    addDecl(new OPVocabularyDecl());
+  }
 }

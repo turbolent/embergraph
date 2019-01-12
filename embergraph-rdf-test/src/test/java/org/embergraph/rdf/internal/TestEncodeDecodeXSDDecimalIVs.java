@@ -25,7 +25,6 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
@@ -33,299 +32,278 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Unit tests for {@link XSDDecimalIV}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestEncodeDecodeXSDDecimalIVs extends
-        AbstractEncodeDecodeKeysTestCase {
+public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestCase {
 
-    /**
-     * 
-     */
-    public TestEncodeDecodeXSDDecimalIVs() {
+  /** */
+  public TestEncodeDecodeXSDDecimalIVs() {}
+
+  /** @param name */
+  public TestEncodeDecodeXSDDecimalIVs(String name) {
+    super(name);
+  }
+
+  /**
+   * Unit test of {@link XSDDecimalIV} with positive and negative {@link BigDecimal}s having varying
+   * digits after the decimals.
+   */
+  public void test_encodeDecode_XSDDecimal_pos_and_neg_varying_digits() {
+
+    final BigDecimal p1 = new BigDecimal("1.5");
+    final BigDecimal p2 = new BigDecimal("1.51");
+    final BigDecimal m1 = new BigDecimal("-1.5");
+    final BigDecimal m2 = new BigDecimal("-1.51");
+
+    final IV<?, ?>[] e =
+        new IV[] {
+          new XSDDecimalIV<EmbergraphLiteral>(p1),
+          new XSDDecimalIV<EmbergraphLiteral>(p2),
+          new XSDDecimalIV<EmbergraphLiteral>(m1),
+          new XSDDecimalIV<EmbergraphLiteral>(m2),
+        };
+
+    doEncodeDecodeTest(e);
+
+    doComparatorTest(e);
+  }
+
+  /**
+   * Unit test of {@link XSDDecimalIV} with trailing zeros. The encoded and decoded values are
+   * consistent, but trailing zeros are removed by the {@link XSDDecimalIV} encoding.
+   */
+  public void test_encodeDecode_XSDDecimal_trailingZeros() {
+
+    final BigDecimal p1 = new BigDecimal("1.50");
+    final BigDecimal p2 = new BigDecimal("1.500");
+
+    final IV<?, ?>[] e =
+        new IV[] {
+          new XSDDecimalIV<EmbergraphLiteral>(p1), new XSDDecimalIV<EmbergraphLiteral>(p2),
+        };
+
+    //        for(IV t : e) {
+    //            System.err.println(t.toString()+" : "+((XSDDecimalIV) t).getLabel());
+    //        }
+
+    final IV<?, ?>[] a = doEncodeDecodeTest(e);
+
+    //        for(IV t : a) {
+    //            System.err.println(t.toString()+" : "+((XSDDecimalIV) t).getLabel());
+    //        }
+
+    doComparatorTest(e);
+
+    doComparatorTest(a);
+
+    final IV<?, ?>[] b = new IV[] {e[0], e[1], a[0], a[1]};
+
+    doComparatorTest(b);
+  }
+
+  /**
+   * Unit test demonstrates that precision is not preserved by the encoding. Thus, ZEROs are encoded
+   * in the same manner regardless of their precision (this is true of other values with trailing
+   * zeros after the decimal point as well).
+   */
+  public void test_BigDecimal_zeroPrecisionNotPreserved() {
+
+    final IKeyBuilder keyBuilder = new KeyBuilder();
+
+    // Three ZEROs with different precision.
+    final BigDecimal z0 = new BigDecimal("0");
+    final BigDecimal z1 = new BigDecimal("0.0");
+    final BigDecimal z2 = new BigDecimal("0.00");
+
+    final IV<?, ?> v0 = new XSDDecimalIV<EmbergraphLiteral>(z0);
+    final IV<?, ?> v1 = new XSDDecimalIV<EmbergraphLiteral>(z1);
+    final IV<?, ?> v2 = new XSDDecimalIV<EmbergraphLiteral>(z2);
+
+    // Encode each of those BigDecimal values.
+    final byte[] b0 = IVUtility.encode(keyBuilder.reset(), v0).getKey();
+    final byte[] b1 = IVUtility.encode(keyBuilder.reset(), v1).getKey();
+    final byte[] b2 = IVUtility.encode(keyBuilder.reset(), v2).getKey();
+
+    // The encoded representations are the same.
+    assertEquals(b0, b1);
+    assertEquals(b0, b2);
+  }
+
+  public void test_BigDecimal_500() {
+
+    final IKeyBuilder keyBuilder = new KeyBuilder();
+
+    //        final BigDecimal v = new BigDecimal("500"); // NB: Decodes as 5E+2!
+    final BigDecimal v = new BigDecimal("5E+2");
+
+    final IV<?, ?> iv = new XSDDecimalIV<EmbergraphLiteral>(v);
+
+    final byte[] b0 = IVUtility.encode(keyBuilder.reset(), iv).getKey();
+
+    final IV<?, ?> iv2 = IVUtility.decode(b0);
+
+    final byte[] b2 = IVUtility.encode(keyBuilder.reset(), iv2).getKey();
+
+    // The decoded IV compares as equals()
+    assertEquals(iv, iv2);
+
+    // The encoded representations are the same.
+    assertEquals(b0, b2);
+  }
+
+  /** Unit tests using xsd:decimal. */
+  public void test_encodeDecode_XSDDecimal() {
+
+    final BigDecimal z1 = new BigDecimal("0");
+    //        final BigDecimal z1 = new BigDecimal("0.0"); // NB: Will decode as "0"
+    //        final BigDecimal negz1 = new BigDecimal("-0.0"); // NB: Will decode as "0".
+    //        final BigDecimal z2 = new BigDecimal("0.00"); // NB: Will decode as "0".
+    final BigDecimal p1 = new BigDecimal("0.01");
+    final BigDecimal negp1 = new BigDecimal("-0.01");
+    //        final BigDecimal z3 = new BigDecimal("0000.00"); // NB: Will decode as "0".
+    final BigDecimal m1 = new BigDecimal("1.5");
+    final BigDecimal m2 = new BigDecimal("-1.51");
+    final BigDecimal m5 = new BigDecimal("5");
+    //        final BigDecimal m53 = new BigDecimal("5.000"); // NB: Will decode as "5".
+    final BigDecimal m500 = new BigDecimal("5E+2"); //
+    //        final BigDecimal m500 = new BigDecimal("500"); // NB: Will decode as "5E+2"!
+    //        final BigDecimal m500x = new BigDecimal("00500"); // NB: Will decode as "500".
+    //        final BigDecimal m5003 = new BigDecimal("500.000"); // NB: Will decode as "500".
+    final BigDecimal v1 = new BigDecimal("383.00000000000001");
+    final BigDecimal v2 = new BigDecimal("383.00000000000002");
+
+    final IV<?, ?>[] e =
+        new IV[] {
+          new XSDDecimalIV<EmbergraphLiteral>(z1),
+          //                new XSDDecimalIV<EmbergraphLiteral>(negz1),
+          //                new XSDDecimalIV<EmbergraphLiteral>(z2),
+          new XSDDecimalIV<EmbergraphLiteral>(p1),
+          new XSDDecimalIV<EmbergraphLiteral>(negp1),
+          //                new XSDDecimalIV<EmbergraphLiteral>(z3),
+          new XSDDecimalIV<EmbergraphLiteral>(m1),
+          new XSDDecimalIV<EmbergraphLiteral>(m2),
+          new XSDDecimalIV<EmbergraphLiteral>(m5),
+          //                new XSDDecimalIV<EmbergraphLiteral>(m53),
+          new XSDDecimalIV<EmbergraphLiteral>(m500),
+          //                new XSDDecimalIV<EmbergraphLiteral>(m5003),
+          new XSDDecimalIV<EmbergraphLiteral>(v1),
+          new XSDDecimalIV<EmbergraphLiteral>(v2),
+        };
+
+    doEncodeDecodeTest(e);
+
+    doComparatorTest(e);
+  }
+
+  //    /**
+  //     * Unit test for {@link XSDDecimalIV}.
+  //     */
+  //    public void test_encodeDecode_XSDDecimal_2() {
+  //
+  //        final IV<?,?>[] e = new IV[] {
+  //
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0)),
+  //
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-123450)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-99)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-9)),
+  //
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(8.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(255.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(256.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(512.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1028.001)),
+  //
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-8.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-255.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-256.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-512.0001)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1028.001)),
+  //
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),
+  //            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),
+  //            };
+  //
+  //        doEncodeDecodeTest(e);
+  //
+  //        doComparatorTest(e);
+  //
+  //    }
+
+  /** Unit test for {@link XSDDecimalIV}. */
+  public void test_encodeDecode_XSDDecimal_3() {
+
+    final IV<?, ?>[] e =
+        new IV[] {
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(2.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-2.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(10.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(11.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(258.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(3.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.01)),
+          new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.02)),
+        };
+
+    doEncodeDecodeTest(e);
+
+    doComparatorTest(e);
+  }
+
+  /** Stress test for {@link XSDDecimalIV}. */
+  public void test_encodeDecode_XSDDecimal_stressTest() {
+
+    final Random r = new Random();
+
+    final List<IV<?, ?>> a = new LinkedList<IV<?, ?>>();
+
+    for (int i = 0; i < 100; i++) {
+
+      final BigDecimal t1 = BigDecimal.valueOf(r.nextDouble());
+
+      final BigDecimal v2 = BigDecimal.valueOf(Math.abs(r.nextDouble()));
+
+      final BigDecimal v4 = BigDecimal.valueOf(r.nextDouble());
+
+      // x LT t1
+      final BigDecimal t2 = t1.subtract(v2);
+      final BigDecimal t4 = t1.subtract(BigDecimal.valueOf(5));
+      final BigDecimal t5 = t1.subtract(BigDecimal.valueOf(9));
+
+      // t1 LT x
+      final BigDecimal t3 = t1.add(v2);
+      final BigDecimal t6 = t1.add(BigDecimal.valueOf(5));
+      final BigDecimal t7 = t1.add(BigDecimal.valueOf(9));
+
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t1));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(v2));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(v4));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t2));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t4));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t5));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t3));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t6));
+      a.add(new XSDDecimalIV<EmbergraphLiteral>(t7));
     }
 
-    /**
-     * @param name
-     */
-    public TestEncodeDecodeXSDDecimalIVs(String name) {
-        super(name);
-    }
+    final IV<?, ?>[] e = a.toArray(new IV[0]);
 
-    /**
-     * Unit test of {@link XSDDecimalIV} with positive and negative
-     * {@link BigDecimal}s having varying digits after the decimals.
-     */
-    public void test_encodeDecode_XSDDecimal_pos_and_neg_varying_digits() {
+    doEncodeDecodeTest(e);
 
-        final BigDecimal p1 = new BigDecimal("1.5");
-        final BigDecimal p2 = new BigDecimal("1.51");
-        final BigDecimal m1 = new BigDecimal("-1.5");
-        final BigDecimal m2 = new BigDecimal("-1.51");
-
-        final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<EmbergraphLiteral>(p1),
-                new XSDDecimalIV<EmbergraphLiteral>(p2),
-                new XSDDecimalIV<EmbergraphLiteral>(m1),
-                new XSDDecimalIV<EmbergraphLiteral>(m2),
-                };
-
-        doEncodeDecodeTest(e);
-        
-        doComparatorTest(e);
-
-    }
-
-
-    /**
-     * Unit test of {@link XSDDecimalIV} with trailing zeros. The encoded and
-     * decoded values are consistent, but trailing zeros are removed by the
-     * {@link XSDDecimalIV} encoding.
-     */
-    public void test_encodeDecode_XSDDecimal_trailingZeros() {
-
-        final BigDecimal p1 = new BigDecimal("1.50");
-        final BigDecimal p2 = new BigDecimal("1.500");
-
-        final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<EmbergraphLiteral>(p1),
-                new XSDDecimalIV<EmbergraphLiteral>(p2),
-                };
-
-//        for(IV t : e) {
-//            System.err.println(t.toString()+" : "+((XSDDecimalIV) t).getLabel());
-//        }
-        
-        final IV<?,?>[] a = doEncodeDecodeTest(e);
-
-//        for(IV t : a) {
-//            System.err.println(t.toString()+" : "+((XSDDecimalIV) t).getLabel());
-//        }
-
-        doComparatorTest(e);
-
-        doComparatorTest(a);
-
-        final IV<?, ?>[] b = new IV[] { e[0], e[1], a[0], a[1] };
-
-        doComparatorTest(b);
-
-    }
-
-    /**
-     * Unit test demonstrates that precision is not preserved by the encoding.
-     * Thus, ZEROs are encoded in the same manner regardless of their precision
-     * (this is true of other values with trailing zeros after the decimal point
-     * as well).
-     */
-    public void test_BigDecimal_zeroPrecisionNotPreserved() {
-
-        final IKeyBuilder keyBuilder = new KeyBuilder();
-
-        // Three ZEROs with different precision.
-        final BigDecimal z0 = new BigDecimal("0");
-        final BigDecimal z1 = new BigDecimal("0.0");
-        final BigDecimal z2 = new BigDecimal("0.00");
-        
-        final IV<?,?> v0 = new XSDDecimalIV<EmbergraphLiteral>(z0);
-        final IV<?,?> v1 = new XSDDecimalIV<EmbergraphLiteral>(z1);
-        final IV<?,?> v2 = new XSDDecimalIV<EmbergraphLiteral>(z2);
-
-        // Encode each of those BigDecimal values.
-        final byte[] b0 = IVUtility.encode(keyBuilder.reset(), v0).getKey();
-        final byte[] b1 = IVUtility.encode(keyBuilder.reset(), v1).getKey();
-        final byte[] b2 = IVUtility.encode(keyBuilder.reset(), v2).getKey();
-
-        // The encoded representations are the same.
-        assertEquals(b0, b1);
-        assertEquals(b0, b2);
-        
-    }
-
-    public void test_BigDecimal_500() {
-
-        final IKeyBuilder keyBuilder = new KeyBuilder();
-
-//        final BigDecimal v = new BigDecimal("500"); // NB: Decodes as 5E+2!
-        final BigDecimal v = new BigDecimal("5E+2");
-        
-        final IV<?,?> iv = new XSDDecimalIV<EmbergraphLiteral>(v);
-
-        final byte[] b0 = IVUtility.encode(keyBuilder.reset(), iv).getKey();
-
-        final IV<?,?> iv2 = IVUtility.decode(b0);
-
-        final byte[] b2 = IVUtility.encode(keyBuilder.reset(), iv2).getKey();
-
-        // The decoded IV compares as equals()
-        assertEquals(iv, iv2);
-
-        // The encoded representations are the same.
-        assertEquals(b0, b2);
-
-    }
-
-    /**
-     * Unit tests using xsd:decimal.
-     */
-    public void test_encodeDecode_XSDDecimal() {
-
-        final BigDecimal z1 = new BigDecimal("0");
-//        final BigDecimal z1 = new BigDecimal("0.0"); // NB: Will decode as "0"
-//        final BigDecimal negz1 = new BigDecimal("-0.0"); // NB: Will decode as "0". 
-//        final BigDecimal z2 = new BigDecimal("0.00"); // NB: Will decode as "0".
-        final BigDecimal p1 = new BigDecimal("0.01");
-        final BigDecimal negp1 = new BigDecimal("-0.01");
-//        final BigDecimal z3 = new BigDecimal("0000.00"); // NB: Will decode as "0".
-        final BigDecimal m1 = new BigDecimal("1.5");
-        final BigDecimal m2 = new BigDecimal("-1.51");
-        final BigDecimal m5 = new BigDecimal("5");
-//        final BigDecimal m53 = new BigDecimal("5.000"); // NB: Will decode as "5".
-        final BigDecimal m500 = new BigDecimal("5E+2"); // 
-//        final BigDecimal m500 = new BigDecimal("500"); // NB: Will decode as "5E+2"!
-//        final BigDecimal m500x = new BigDecimal("00500"); // NB: Will decode as "500".
-//        final BigDecimal m5003 = new BigDecimal("500.000"); // NB: Will decode as "500".
-        final BigDecimal v1 = new BigDecimal("383.00000000000001");
-        final BigDecimal v2 = new BigDecimal("383.00000000000002");
-
-        final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<EmbergraphLiteral>(z1),
-//                new XSDDecimalIV<EmbergraphLiteral>(negz1),
-//                new XSDDecimalIV<EmbergraphLiteral>(z2),
-                new XSDDecimalIV<EmbergraphLiteral>(p1),
-                new XSDDecimalIV<EmbergraphLiteral>(negp1),
-//                new XSDDecimalIV<EmbergraphLiteral>(z3),
-                new XSDDecimalIV<EmbergraphLiteral>(m1),
-                new XSDDecimalIV<EmbergraphLiteral>(m2),
-                new XSDDecimalIV<EmbergraphLiteral>(m5),
-//                new XSDDecimalIV<EmbergraphLiteral>(m53),
-                new XSDDecimalIV<EmbergraphLiteral>(m500),
-//                new XSDDecimalIV<EmbergraphLiteral>(m5003),
-                new XSDDecimalIV<EmbergraphLiteral>(v1),
-                new XSDDecimalIV<EmbergraphLiteral>(v2),
-                };
-
-        doEncodeDecodeTest(e);
-        
-        doComparatorTest(e);
-
-    }
-
-//    /**
-//     * Unit test for {@link XSDDecimalIV}.
-//     */
-//    public void test_encodeDecode_XSDDecimal_2() {
-//
-//        final IV<?,?>[] e = new IV[] {
-//            
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0)),
-//            
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-123450)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-99)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-9)),
-//            
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(8.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(255.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(256.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(512.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1028.001)),
-//
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-8.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-255.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-256.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-512.0001)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1028.001)),
-//
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),
-//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),
-//            };
-//
-//        doEncodeDecodeTest(e);
-//        
-//        doComparatorTest(e);
-//
-//    }
-    
-    /**
-     * Unit test for {@link XSDDecimalIV}.
-     */
-    public void test_encodeDecode_XSDDecimal_3() {
-
-      final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(2.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-2.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(10.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(11.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(258.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(3.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.01)),
-                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.02)),
-      };
-
-        doEncodeDecodeTest(e);
-
-        doComparatorTest(e);
-
-    }
-
-    /**
-     * Stress test for {@link XSDDecimalIV}.
-     */
-    public void test_encodeDecode_XSDDecimal_stressTest() {
-
-        final Random r = new Random();
-
-        final List<IV<?,?>> a = new LinkedList<IV<?,?>>();
-        
-        for (int i = 0; i < 100; i++) {
-            
-            final BigDecimal t1 = BigDecimal.valueOf(r.nextDouble());
-            
-            final BigDecimal v2 = BigDecimal.valueOf(Math.abs(r.nextDouble()));
-            
-            final BigDecimal v4 = BigDecimal.valueOf(r.nextDouble());
-            
-            // x LT t1
-            final BigDecimal t2 = t1.subtract(v2);
-            final BigDecimal t4 = t1.subtract(BigDecimal.valueOf(5));
-            final BigDecimal t5 = t1.subtract(BigDecimal.valueOf(9));
-
-            // t1 LT x
-            final BigDecimal t3 = t1.add(v2);
-            final BigDecimal t6 = t1.add(BigDecimal.valueOf(5));
-            final BigDecimal t7 = t1.add(BigDecimal.valueOf(9));
-
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t1));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(v2));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(v4));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t2));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t4));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t5));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t3));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t6));
-            a.add(new XSDDecimalIV<EmbergraphLiteral>(t7));
-            
-        }
-        
-        final IV<?, ?>[] e = a.toArray(new IV[0]);
-
-        doEncodeDecodeTest(e);
-
-        doComparatorTest(e);
-
-    }
-
+    doComparatorTest(e);
+  }
 }

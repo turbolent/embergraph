@@ -18,106 +18,87 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.impl.literal;
 
 import java.util.UUID;
-
-import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.openrdf.model.Literal;
-import org.openrdf.model.ValueFactory;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.Bytes;
+import org.openrdf.model.Literal;
+import org.openrdf.model.ValueFactory;
 
-/**
- * Implementation for inline {@link UUID}s (there is no corresponding XML
- * Schema Datatype).
- */
-public class UUIDLiteralIV<V extends EmbergraphLiteral> extends
-        AbstractLiteralIV<V, UUID> implements Literal {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6411134650187983925L;
-		
-	private final UUID value;
+/** Implementation for inline {@link UUID}s (there is no corresponding XML Schema Datatype). */
+public class UUIDLiteralIV<V extends EmbergraphLiteral> extends AbstractLiteralIV<V, UUID>
+    implements Literal {
 
-    public IV<V, UUID> clone(final boolean clearCache) {
+  /** */
+  private static final long serialVersionUID = 6411134650187983925L;
 
-        final UUIDLiteralIV<V> tmp = new UUIDLiteralIV<V>(value);
+  private final UUID value;
 
-        if (!clearCache) {
+  public IV<V, UUID> clone(final boolean clearCache) {
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    final UUIDLiteralIV<V> tmp = new UUIDLiteralIV<V>(value);
 
-    }
-    
-    public UUIDLiteralIV(final UUID value) {
-        
-        super(DTE.UUID);
+    if (!clearCache) {
 
-        if (value == null)
-            throw new IllegalArgumentException();
-        
-        this.value = value;
-        
+      tmp.setValue(getValueCache());
     }
 
-    final public UUID getInlineValue() {
-        return value;
+    return tmp;
+  }
+
+  public UUIDLiteralIV(final UUID value) {
+
+    super(DTE.UUID);
+
+    if (value == null) throw new IllegalArgumentException();
+
+    this.value = value;
+  }
+
+  public final UUID getInlineValue() {
+    return value;
+  }
+
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+
+    V v = getValueCache();
+
+    if (v == null) {
+
+      final ValueFactory f = lex.getValueFactory();
+
+      v = (V) f.createLiteral(value.toString(), DTE.UUID.getDatatypeURI());
+
+      v.setIV(this);
+
+      setValue(v);
     }
 
-	@SuppressWarnings("unchecked")
-	public V asValue(final LexiconRelation lex) {
-	
-		V v = getValueCache();
-		
-		if (v == null) {
-			
-			final ValueFactory f = lex.getValueFactory();
-			
-			v = (V) f.createLiteral(value.toString(), DTE.UUID.getDatatypeURI());
-			
-			v.setIV(this);
-			
-			setValue(v);
-			
-		}
+    return v;
+  }
 
-		return v;
-		
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof UUIDLiteralIV<?>) {
+      return this.value.equals(((UUIDLiteralIV<?>) o).value);
     }
+    return false;
+  }
 
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof UUIDLiteralIV<?>) {
-            return this.value.equals(((UUIDLiteralIV<?>) o).value);
-        }
-        return false;
-    }
-    
-    /**
-     * Return the hash code of the {@link UUID}.
-     */
-    public int hashCode() {
-        return value.hashCode();
-    }
+  /** Return the hash code of the {@link UUID}. */
+  public int hashCode() {
+    return value.hashCode();
+  }
 
-    public int byteLength() {
-        return 1 + Bytes.SIZEOF_UUID;
-    }
+  public int byteLength() {
+    return 1 + Bytes.SIZEOF_UUID;
+  }
 
-    @Override
-    public int _compareTo(IV o) {
-         
-        return value.compareTo(((UUIDLiteralIV) o).value);
-        
-    }
-    
-    
+  @Override
+  public int _compareTo(IV o) {
+
+    return value.compareTo(((UUIDLiteralIV) o).value);
+  }
 }

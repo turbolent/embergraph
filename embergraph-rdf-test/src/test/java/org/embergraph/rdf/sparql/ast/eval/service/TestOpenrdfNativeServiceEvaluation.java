@@ -23,154 +23,137 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.LinkedList;
 import java.util.List;
-
+import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
-import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
-
 /**
- * Data driven test suite for SPARQL 1.1 Federated Query against an openrdf
- * aware SERVICE implementation running in the same JVM.
- * 
+ * Data driven test suite for SPARQL 1.1 Federated Query against an openrdf aware SERVICE
+ * implementation running in the same JVM.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestOpenrdfNativeServiceEvaluation extends
-        AbstractDataDrivenSPARQLTestCase {
+public class TestOpenrdfNativeServiceEvaluation extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestOpenrdfNativeServiceEvaluation() {
+  /** */
+  public TestOpenrdfNativeServiceEvaluation() {}
+
+  /** @param name */
+  public TestOpenrdfNativeServiceEvaluation(String name) {
+    super(name);
+  }
+
+  /**
+   * A simple SERVICE query. The service adds in a single solution which restricts the set of
+   * solutions for the overall query.
+   *
+   * <pre>
+   * PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+   * PREFIX :     <http://example.org/book/>
+   * PREFIX ns:   <http://example.org/ns#>
+   *
+   * SELECT ?book ?title ?price
+   * {
+   *    SERVICE <http://www.embergraph.org/mockService/test_service_001> {
+   *        ?book :foo :bar
+   *    }.
+   *    ?book dc:title ?title ;
+   *          ns:price ?price .
+   * }
+   * </pre>
+   */
+  public void test_service_001() throws Exception {
+
+    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", new URIImpl("http://example.org/book/book1"));
+      serviceSolutions.add(bset);
     }
 
-    /**
-     * @param name
-     */
-    public TestOpenrdfNativeServiceEvaluation(String name) {
-        super(name);
+    final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
+
+    ServiceRegistry.getInstance()
+        .add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));
+
+    try {
+
+      new TestHelper(
+              "sparql11-service-001", // testURI
+              "sparql11-service-001.rq", // queryFileURL
+              "sparql11-service-001.ttl", // dataFileURL
+              "sparql11-service-001.srx" // resultFileURL
+              )
+          .runTest();
+
+    } finally {
+
+      ServiceRegistry.getInstance().remove(serviceURI);
+    }
+  }
+
+  /**
+   * A simple SERVICE query. The service provides three solutions, two of which join with the
+   * remainder of the query.
+   *
+   * <p>Note: Since the SERVICE is not actually doing joins, we wind up with duplicate solutions.
+   *
+   * <pre>
+   * PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+   * PREFIX :     <http://example.org/book/>
+   * PREFIX ns:   <http://example.org/ns#>
+   *
+   * SELECT ?book ?title ?price
+   * {
+   *    SERVICE <http://www.embergraph.org/mockService/test_service_002> {
+   *        ?book :foo :bar
+   *    }.
+   *    hint:Prior hint:runFirst true .
+   *    ?book dc:title ?title ;
+   *          ns:price ?price .
+   * }
+   * </pre>
+   */
+  public void test_service_002() throws Exception {
+
+    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", new URIImpl("http://example.org/book/book1"));
+      serviceSolutions.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      bset.addBinding("book", new URIImpl("http://example.org/book/book2"));
+      serviceSolutions.add(bset);
+    }
+    {
+      final MapBindingSet bset = new MapBindingSet();
+      serviceSolutions.add(bset);
     }
 
-    /**
-     * A simple SERVICE query. The service adds in a single solution which
-     * restricts the set of solutions for the overall query.
-     * 
-     * <pre>
-     * PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-     * PREFIX :     <http://example.org/book/> 
-     * PREFIX ns:   <http://example.org/ns#> 
-     * 
-     * SELECT ?book ?title ?price
-     * {
-     *    SERVICE <http://www.embergraph.org/mockService/test_service_001> {
-     *        ?book :foo :bar
-     *    }.
-     *    ?book dc:title ?title ;
-     *          ns:price ?price .
-     * }
-     * </pre>
-     */
-    public void test_service_001() throws Exception {
- 
-        final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book",
-                    new URIImpl("http://example.org/book/book1"));
-            serviceSolutions.add(bset);
-        }
-   
-        final URI serviceURI = new URIImpl(
-                "http://www.embergraph.org/mockService/" + getName());
+    final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
 
-        ServiceRegistry.getInstance().add(serviceURI,
-                new OpenrdfNativeMockServiceFactory(serviceSolutions));
+    ServiceRegistry.getInstance()
+        .add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));
 
-        try {
+    try {
 
-            new TestHelper(
-                    "sparql11-service-001", // testURI
-                    "sparql11-service-001.rq",// queryFileURL
-                    "sparql11-service-001.ttl",// dataFileURL
-                    "sparql11-service-001.srx"// resultFileURL
-            ).runTest();
-            
-        } finally {
-            
-            ServiceRegistry.getInstance().remove(serviceURI);
-            
-        }
-        
+      new TestHelper(
+              "sparql11-service-002", // testURI
+              "sparql11-service-002.rq", // queryFileURL
+              "sparql11-service-002.ttl", // dataFileURL
+              "sparql11-service-002.srx" // resultFileURL
+              )
+          .runTest();
+
+    } finally {
+
+      ServiceRegistry.getInstance().remove(serviceURI);
     }
-    
-    /**
-     * A simple SERVICE query. The service provides three solutions, two of
-     * which join with the remainder of the query.
-     * <p>
-     * Note: Since the SERVICE is not actually doing joins, we wind up with
-     * duplicate solutions.
-     * 
-     * <pre>
-     * PREFIX dc:   <http://purl.org/dc/elements/1.1/> 
-     * PREFIX :     <http://example.org/book/> 
-     * PREFIX ns:   <http://example.org/ns#> 
-     * 
-     * SELECT ?book ?title ?price
-     * {
-     *    SERVICE <http://www.embergraph.org/mockService/test_service_002> {
-     *        ?book :foo :bar
-     *    }.
-     *    hint:Prior hint:runFirst true .
-     *    ?book dc:title ?title ;
-     *          ns:price ?price .
-     * }
-     * </pre>
-     */
-    public void test_service_002() throws Exception {
- 
-        final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book",
-                    new URIImpl("http://example.org/book/book1"));
-            serviceSolutions.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            bset.addBinding("book",
-                    new URIImpl("http://example.org/book/book2"));
-            serviceSolutions.add(bset);
-        }
-        {
-            final MapBindingSet bset = new MapBindingSet();
-            serviceSolutions.add(bset);
-        }
-   
-        final URI serviceURI = new URIImpl(
-                "http://www.embergraph.org/mockService/" + getName());
-
-        ServiceRegistry.getInstance().add(serviceURI,
-                new OpenrdfNativeMockServiceFactory(serviceSolutions));
-
-        try {
-
-            new TestHelper(
-                    "sparql11-service-002", // testURI
-                    "sparql11-service-002.rq",// queryFileURL
-                    "sparql11-service-002.ttl",// dataFileURL
-                    "sparql11-service-002.srx"// resultFileURL
-            ).runTest();
-            
-        } finally {
-            
-            ServiceRegistry.getInstance().remove(serviceURI);
-            
-        }
-        
-    }
-    
+  }
 }

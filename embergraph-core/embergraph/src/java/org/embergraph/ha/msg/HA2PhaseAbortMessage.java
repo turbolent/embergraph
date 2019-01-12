@@ -19,22 +19,19 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-
 public class HA2PhaseAbortMessage implements IHA2PhaseAbortMessage, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final long quorumToken;
-    
-    public HA2PhaseAbortMessage(final long quorumToken) {
+  private final long quorumToken;
 
-        this.quorumToken = quorumToken;
-        
-    }
-    
-    @Override
-    public long getQuorumToken() {
-        return quorumToken;
-    }
+  public HA2PhaseAbortMessage(final long quorumToken) {
 
+    this.quorumToken = quorumToken;
+  }
+
+  @Override
+  public long getQuorumToken() {
+    return quorumToken;
+  }
 }

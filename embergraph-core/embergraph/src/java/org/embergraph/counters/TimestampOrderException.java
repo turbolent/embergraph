@@ -25,43 +25,33 @@ package org.embergraph.counters;
 
 /**
  * Used to reject samples that arrive way out of timestamp order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TimestampOrderException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -3662587569554614991L;
+  /** */
+  private static final long serialVersionUID = -3662587569554614991L;
 
-    /**
-     * 
-     */
-    public TimestampOrderException() {
-    }
+  /** */
+  public TimestampOrderException() {}
 
-    /**
-     * @param arg0
-     */
-    public TimestampOrderException(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TimestampOrderException(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * @param arg0
-     */
-    public TimestampOrderException(Throwable arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TimestampOrderException(Throwable arg0) {
+    super(arg0);
+  }
 
-    /**
-     * @param arg0
-     * @param arg1
-     */
-    public TimestampOrderException(String arg0, Throwable arg1) {
-        super(arg0, arg1);
-    }
-
+  /**
+   * @param arg0
+   * @param arg1
+   */
+  public TimestampOrderException(String arg0, Throwable arg1) {
+    super(arg0, arg1);
+  }
 }

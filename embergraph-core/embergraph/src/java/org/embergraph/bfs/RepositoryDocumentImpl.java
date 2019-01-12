@@ -6,301 +6,271 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.embergraph.sparse.IRowStoreConstants;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
 /**
- * A read-only view of a {@link Document} that has been read from a
- * {@link EmbergraphFileSystem}.
- * 
+ * A read-only view of a {@link Document} that has been read from a {@link EmbergraphFileSystem}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class RepositoryDocumentImpl implements DocumentHeader, Document 
-{
-    
-    final private EmbergraphFileSystem repo;
-    
-    final private String id;
-    
-    /**
-     * The result of the atomic read on the file's metadata. This
-     * representation is significantly richer than the current set of
-     * property values.
-     */
-    final ITPS tps;
+public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
-    /**
-     * The current version identifer -or- <code>-1</code> iff there is no
-     * current version for the file (including when there is no record of
-     * any version for the file).
-     */
-    final int version;
-    
-    /**
-     * The property set for the current file version.
-     */
-    final private Map<String,Object> metadata;
+  private final EmbergraphFileSystem repo;
 
-    /**
-     * Read the metadata for the current version of the file from the
-     * repository.
-     * 
-     * @param id
-     *            The file identifier.
-     * @param tps
-     *            The logical row describing the metadata for some file in
-     *            the repository.
-     */
-    public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id,
-            final ITPS tps) {
-        
-        if (repo == null)
-            throw new IllegalArgumentException();
+  private final String id;
 
-        if (id == null)
-            throw new IllegalArgumentException();
-        
-        this.repo = repo;
-        
-        this.id = id;
-        
-        this.tps = tps;
-        
-        if (tps != null) {
+  /**
+   * The result of the atomic read on the file's metadata. This representation is significantly
+   * richer than the current set of property values.
+   */
+  final ITPS tps;
 
-            ITPV tmp = tps.get(FileMetadataSchema.VERSION);
-            
-            if (tmp.getValue() != null) {
+  /**
+   * The current version identifer -or- <code>-1</code> iff there is no current version for the file
+   * (including when there is no record of any version for the file).
+   */
+  final int version;
 
-                /*
-                 * Note the current version identifer.
-                 */
-                
-                this.version = (Integer) tmp.getValue();
+  /** The property set for the current file version. */
+  private final Map<String, Object> metadata;
 
-                /*
-                 * Save a simplifed view of the propery set for the current
-                 * version.
-                 */
-                
-                this.metadata = tps.asMap();
+  /**
+   * Read the metadata for the current version of the file from the repository.
+   *
+   * @param id The file identifier.
+   * @param tps The logical row describing the metadata for some file in the repository.
+   */
+  public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id, final ITPS tps) {
 
-                EmbergraphFileSystem.log.info("id="+id+", current version="+version);
+    if (repo == null) throw new IllegalArgumentException();
 
-            } else {
-                
-                /*
-                 * No current version.
-                 */
-                
-                this.version = -1;
+    if (id == null) throw new IllegalArgumentException();
 
-                this.metadata = null;
-                
-                EmbergraphFileSystem.log.warn("id="+id+" : no current version");
+    this.repo = repo;
 
-            }
+    this.id = id;
 
-        } else {
-            
-            /*
-             * Nothing on record for that file identifier.
-             */
-            
-            this.version = -1;
-            
-            this.metadata = null;
-            
-            EmbergraphFileSystem.log.warn("id="+id+" : no record of any version(s)");
+    this.tps = tps;
 
-        }
-        
-        if (EmbergraphFileSystem.DEBUG && metadata != null) {
+    if (tps != null) {
 
-            Iterator<Map.Entry<String,Object>> itr = metadata.entrySet().iterator();
-            
-            while(itr.hasNext()) {
-                
-                Map.Entry<String, Object> entry = itr.next();
-                
-                EmbergraphFileSystem.log.debug("id=" + id + ", version=" + getVersion() + ", ["
-                        + entry.getKey() + "]=[" + entry.getValue() + "]");
-                
-            }
+      ITPV tmp = tps.get(FileMetadataSchema.VERSION);
 
-        }
+      if (tmp.getValue() != null) {
 
+        /*
+         * Note the current version identifer.
+         */
+
+        this.version = (Integer) tmp.getValue();
+
+        /*
+         * Save a simplifed view of the propery set for the current
+         * version.
+         */
+
+        this.metadata = tps.asMap();
+
+        EmbergraphFileSystem.log.info("id=" + id + ", current version=" + version);
+
+      } else {
+
+        /*
+         * No current version.
+         */
+
+        this.version = -1;
+
+        this.metadata = null;
+
+        EmbergraphFileSystem.log.warn("id=" + id + " : no current version");
+      }
+
+    } else {
+
+      /*
+       * Nothing on record for that file identifier.
+       */
+
+      this.version = -1;
+
+      this.metadata = null;
+
+      EmbergraphFileSystem.log.warn("id=" + id + " : no record of any version(s)");
     }
-    
-    /**
-     * Read the metadata for the current version of the file from the
-     * repository.
-     * 
-     * @param id
-     *            The file identifier.
-     */
-    public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id) {
 
-        this(repo, id, repo.getFileMetadataIndex().read(
-                EmbergraphFileSystem.metadataSchema, id,
+    if (EmbergraphFileSystem.DEBUG && metadata != null) {
+
+      Iterator<Map.Entry<String, Object>> itr = metadata.entrySet().iterator();
+
+      while (itr.hasNext()) {
+
+        Map.Entry<String, Object> entry = itr.next();
+
+        EmbergraphFileSystem.log.debug(
+            "id="
+                + id
+                + ", version="
+                + getVersion()
+                + ", ["
+                + entry.getKey()
+                + "]=["
+                + entry.getValue()
+                + "]");
+      }
+    }
+  }
+
+  /**
+   * Read the metadata for the current version of the file from the repository.
+   *
+   * @param id The file identifier.
+   */
+  public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id) {
+
+    this(
+        repo,
+        id,
+        repo.getFileMetadataIndex()
+            .read(
+                EmbergraphFileSystem.metadataSchema,
+                id,
                 IRowStoreConstants.MIN_TIMESTAMP,
-                IRowStoreConstants.CURRENT_ROW, null/* filter */));
+                IRowStoreConstants.CURRENT_ROW,
+                null /* filter */));
+  }
 
+  /**
+   * Assert that a version of the file existed when this view was constructed.
+   *
+   * @throws IllegalStateException unless a version of the file existed at the time that this view
+   *     was constructed.
+   */
+  protected final void assertExists() {
+
+    if (version == -1) {
+
+      throw new IllegalStateException("No current version: id=" + id);
+    }
+  }
+
+  public final boolean exists() {
+
+    return version != -1;
+  }
+
+  public final int getVersion() {
+
+    assertExists();
+
+    return (Integer) metadata.get(FileMetadataSchema.VERSION);
+  }
+
+  /**
+   * Note: This is obtained from the earliest available timestamp of the {@link
+   * FileMetadataSchema#ID} property.
+   */
+  public final long getEarliestVersionCreateTime() {
+
+    assertExists();
+
+    Iterator<ITPV> itr = tps.iterator();
+
+    while (itr.hasNext()) {
+
+      ITPV tpv = itr.next();
+
+      if (tpv.getName().equals(FileMetadataSchema.ID)) {
+
+        return tpv.getTimestamp();
+      }
     }
 
-    /**
-     * Assert that a version of the file existed when this view was constructed.
-     * 
-     * @throws IllegalStateException
-     *             unless a version of the file existed at the time that this
-     *             view was constructed.
+    throw new AssertionError();
+  }
+
+  public final long getVersionCreateTime() {
+
+    assertExists();
+
+    /*
+     * The timestamp for the most recent value of the VERSION property.
      */
-    final protected void assertExists() {
 
-        if (version == -1) {
+    final long createTime = tps.get(FileMetadataSchema.VERSION).getTimestamp();
 
-            throw new IllegalStateException("No current version: id="+id);
-            
-        }
-        
-    }
-    
-    final public boolean exists() {
-        
-        return version != -1;
-        
-    }
-    
-    final public int getVersion() {
+    return createTime;
+  }
 
-        assertExists();
+  public final long getMetadataUpdateTime() {
 
-        return (Integer)metadata.get(FileMetadataSchema.VERSION);
+    assertExists();
 
-    }
-
-    /**
-     * Note: This is obtained from the earliest available timestamp of the
-     * {@link FileMetadataSchema#ID} property.
+    /*
+     * The timestamp for the most recent value of the ID property.
      */
-    final public long getEarliestVersionCreateTime() {
-        
-        assertExists();
-        
-        Iterator<ITPV> itr = tps.iterator();
-        
-        while(itr.hasNext()) {
-            
-            ITPV tpv = itr.next();
-            
-            if(tpv.getName().equals(FileMetadataSchema.ID)) {
-                
-                return tpv.getTimestamp();
-                
-            }
-            
-        }
-        
-        throw new AssertionError();
-        
-    }
 
-    final public long getVersionCreateTime() {
+    final long metadataUpdateTime = tps.get(FileMetadataSchema.ID).getTimestamp();
 
-        assertExists();
-        
-        /*
-         * The timestamp for the most recent value of the VERSION property.
-         */
-        
-        final long createTime = tps.get(FileMetadataSchema.VERSION)
-                .getTimestamp();
-        
-        return createTime;
-        
-    }
+    return metadataUpdateTime;
+  }
 
-    final public long getMetadataUpdateTime() {
-        
-        assertExists();
-        
-        /*
-         * The timestamp for the most recent value of the ID property.
-         */
-        
-        final long metadataUpdateTime = tps.get(FileMetadataSchema.ID)
-                .getTimestamp();
-        
-        return metadataUpdateTime;
+  /**
+   * Return an array containing all non-eradicated values of the {@link FileMetadataSchema#VERSION}
+   * property for this file as of the time that this view was constructed.
+   *
+   * @see EmbergraphFileSystem#getAllVersionInfo(String)
+   */
+  public final ITPV[] getAllVersionInfo() {
 
-    }
+    return repo.getAllVersionInfo(id);
+  }
 
-    /**
-     * Return an array containing all non-eradicated values of the
-     * {@link FileMetadataSchema#VERSION} property for this file as of the time
-     * that this view was constructed.
-     * 
-     * @see EmbergraphFileSystem#getAllVersionInfo(String)
-     */
-    final public ITPV[] getAllVersionInfo() {
-        
-        return repo.getAllVersionInfo(id);
-        
-    }
-    
-    final public InputStream getInputStream() {
+  public final InputStream getInputStream() {
 
-        assertExists();
-        
-        return repo.inputStream(id,getVersion());
-        
-    }
-    
-    final public Reader getReader() throws UnsupportedEncodingException {
+    assertExists();
 
-        assertExists();
+    return repo.inputStream(id, getVersion());
+  }
 
-        return repo.reader(id, getVersion(), getContentEncoding());
+  public final Reader getReader() throws UnsupportedEncodingException {
 
-    }
+    assertExists();
 
-    final public String getContentEncoding() {
+    return repo.reader(id, getVersion(), getContentEncoding());
+  }
 
-        assertExists();
-        
-        return (String)metadata.get(FileMetadataSchema.CONTENT_ENCODING);
-        
-    }
+  public final String getContentEncoding() {
 
-    final public String getContentType() {
-     
-        assertExists();
+    assertExists();
 
-        return (String)metadata.get(FileMetadataSchema.CONTENT_TYPE);
-        
-    }
+    return (String) metadata.get(FileMetadataSchema.CONTENT_ENCODING);
+  }
 
-    final public String getId() {
+  public final String getContentType() {
 
-        return id;
-        
-    }
-    
-    final public Object getProperty(String name) {
-        
-        return metadata.get(name);
-        
-    }
-    
-    final public Map<String,Object> asMap() {
-        
-        assertExists();
+    assertExists();
 
-        return Collections.unmodifiableMap( metadata );
-        
-    }
+    return (String) metadata.get(FileMetadataSchema.CONTENT_TYPE);
+  }
 
+  public final String getId() {
+
+    return id;
+  }
+
+  public final Object getProperty(String name) {
+
+    return metadata.get(name);
+  }
+
+  public final Map<String, Object> asMap() {
+
+    assertExists();
+
+    return Collections.unmodifiableMap(metadata);
+  }
 }

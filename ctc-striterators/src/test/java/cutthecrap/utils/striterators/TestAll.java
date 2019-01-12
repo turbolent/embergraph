@@ -26,62 +26,52 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Aggregates the tests in increasing dependency order. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("striterators");
+
+    suite.addTestSuite(TestFilterBase.class);
+
+    /*
+     * @todo test Appender
+     *
+     * @todo test Contractor
+     *
+     * @todo test ExclusionFilter
+     *
+     * @todo test Expander
+     *
+     * @todo test Mapper
+     *
+     * @todo Test Merger
+     *
+     * @todo Test Resolver
+     *
+     * @todo Test Sorter
+     *
+     * @todo Test UniquenessFilter
+     *
+     * @todo Test Visitor
+     *
+     * @todo Test XProperty
+     *
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestFilter.class);
+    suite.addTestSuite(TestCloseable.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    // @todo test Striterator
 
-    /**
-     * Aggregates the tests in increasing dependency order.
-     */
-    public static Test suite()
- {
+    suite.addTestSuite(TestArrayIterator.class);
 
-        final TestSuite suite = new TestSuite("striterators");
-
-        suite.addTestSuite(TestFilterBase.class);
-
-        /*
-         * @todo test Appender
-         * 
-         * @todo test Contractor
-         * 
-         * @todo test ExclusionFilter
-         * 
-         * @todo test Expander
-         * 
-         * @todo test Mapper
-         * 
-         * @todo Test Merger
-         * 
-         * @todo Test Resolver
-         * 
-         * @todo Test Sorter
-         * 
-         * @todo Test UniquenessFilter
-         * 
-         * @todo Test Visitor
-         * 
-         * @todo Test XProperty
-         * 
-         */
-        suite.addTestSuite(TestFilter.class);
-        suite.addTestSuite(TestCloseable.class);
-
-        // @todo test Striterator
-
-        suite.addTestSuite(TestArrayIterator.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

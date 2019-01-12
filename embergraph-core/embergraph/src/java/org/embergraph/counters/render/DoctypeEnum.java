@@ -27,118 +27,103 @@ import java.io.IOException;
 import java.io.Writer;
 
 public enum DoctypeEnum {
+  html_4_01_strict("-//W3C//DTD HTML 4.01//EN", "http://www.w3.org/TR/html4/strict.dtd", false),
 
-    html_4_01_strict("-//W3C//DTD HTML 4.01//EN",
-            "http://www.w3.org/TR/html4/strict.dtd", false),
+  html_4_01_transitional(
+      "-//W3C//DTD HTML 4.01 Transitional//EN", "http://www.w3.org/TR/html4/loose.dtd", false),
 
-    html_4_01_transitional("-//W3C//DTD HTML 4.01 Transitional//EN",
-            "http://www.w3.org/TR/html4/loose.dtd", false),
+  xhtml_1_0_strict(
+      "-//W3C//DTD XHTML 1.0 Strict//EN",
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd",
+      true);
 
-    xhtml_1_0_strict("-//W3C//DTD XHTML 1.0 Strict//EN",
-            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", true);
+  private DoctypeEnum(String publicId, String systemId, boolean xml) {
 
-    private DoctypeEnum(String publicId, String systemId, boolean xml) {
-        
-        this.publicId = publicId;
-        
-        this.systemId = systemId;
-        
-        this.xml = xml;
-        
+    this.publicId = publicId;
+
+    this.systemId = systemId;
+
+    this.xml = xml;
+  }
+
+  private final String publicId;
+  private final String systemId;
+  private final boolean xml;
+
+  public String publicId() {
+
+    return publicId;
+  }
+
+  public String systemId() {
+
+    return systemId;
+  }
+
+  public boolean isXML() {
+
+    return xml;
+  }
+
+  /**
+   * Writes the W3C "valid" icon into the page for the {@link DoctypeEnum}.
+   *
+   * @param w
+   * @throws IOException
+   */
+  public void writeValid(Writer w) throws IOException {
+
+    switch (this) {
+      case html_4_01_strict:
+        writeValidHTML401Strict(w);
+
+        break;
+
+      case html_4_01_transitional:
+        writeValidHTML401Transitional(w);
+
+        break;
+
+      case xhtml_1_0_strict:
+        writeValidXHTML(w);
+
+        break;
+
+      default:
+        throw new UnsupportedOperationException(this.toString());
     }
-    
-    private final String publicId;
-    private final String systemId;
-    private final boolean xml;
-    
-    public String publicId() {
+  }
 
-        return publicId;
-        
-    }
+  private void writeValidXHTML(Writer w) throws IOException {
 
-    public String systemId() {
-        
-        return systemId;
-        
-    }
+    w.write("<p>");
+    w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
+    w.write("<img"); // Note: no "border" attribute - use CSS.
+    w.write(" src=\"http://www.w3.org/Icons/valid-xhtml10\"");
+    w.write(" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\"/>");
+    w.write("</a>");
+    w.write("</p>");
+  }
 
-    public boolean isXML() {
-        
-        return xml;
-        
-    }
+  private void writeValidHTML401Strict(Writer w) throws IOException {
 
-    /**
-     * Writes the W3C "valid" icon into the page for the {@link DoctypeEnum}.
-     * 
-     * @param w
-     * 
-     * @throws IOException
-     */
-    public void writeValid(Writer w) throws IOException {
-       
-        switch(this) {
-        case html_4_01_strict:
-            
-            writeValidHTML401Strict(w);
-            
-            break;
-            
-        case html_4_01_transitional:
-            
-            writeValidHTML401Transitional(w);
-            
-            break;
-            
-        case xhtml_1_0_strict:
-            
-            writeValidXHTML(w);
-            
-            break;
-            
-        default:
-            
-            throw new UnsupportedOperationException(this.toString());
-        
-        }
-        
-    }
-    
-    private void writeValidXHTML(Writer w) throws IOException {
-        
-        w.write("<p>");
-        w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
-        w.write("<img"); // Note: no "border" attribute - use CSS.
-        w.write(" src=\"http://www.w3.org/Icons/valid-xhtml10\"");
-        w.write(" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\"/>");
-        w.write("</a>");
-        w.write("</p>");
+    w.write("<p>");
+    w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
+    w.write("<img"); // Note: no "border" attribute - use CSS.
+    w.write(" src=\"http://www.w3.org/Icons/valid-html401\"");
+    w.write(" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\">");
+    w.write("</a>");
+    w.write("</p>");
+  }
 
-    }
-    
-    private void writeValidHTML401Strict(Writer w) throws IOException {
-    
-        w.write("<p>");
-        w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
-        w.write("<img"); // Note: no "border" attribute - use CSS.
-        w.write(" src=\"http://www.w3.org/Icons/valid-html401\"");
-        w.write(" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\">");
-        w.write("</a>");
-        w.write("</p>");
+  private void writeValidHTML401Transitional(Writer w) throws IOException {
 
-    }
-
-    private void writeValidHTML401Transitional(Writer w) throws IOException {
-        
-        w.write("<p>");
-        w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
-        w.write("<img border=\"0\"");
-        w.write(" src=\"http://www.w3.org/Icons/valid-html401\"");
-        w.write(" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\">");
-        w.write("</a>");
-        w.write("</p>");
-
-    }
- 
+    w.write("<p>");
+    w.write("<a href=\"http://validator.w3.org/check?uri=referer\">");
+    w.write("<img border=\"0\"");
+    w.write(" src=\"http://www.w3.org/Icons/valid-html401\"");
+    w.write(" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\">");
+    w.write("</a>");
+    w.write("</p>");
+  }
 }

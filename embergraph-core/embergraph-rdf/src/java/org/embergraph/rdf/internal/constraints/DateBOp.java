@@ -22,15 +22,7 @@ import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-
 import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
-import org.openrdf.query.algebra.evaluation.function.datetime.Timezone;
-import org.openrdf.query.algebra.evaluation.function.datetime.Tz;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -43,202 +35,195 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
+import org.openrdf.query.algebra.evaluation.function.datetime.Timezone;
+import org.openrdf.query.algebra.evaluation.function.datetime.Tz;
 
 /**
- * A date expression involving a left IValueExpression operand. The operation to be applied to the operands is specified by the {@link Annotations#OP}
- * annotation.
+ * A date expression involving a left IValueExpression operand. The operation to be applied to the
+ * operands is specified by the {@link Annotations#OP} annotation.
  */
-public class DateBOp extends IVValueExpression<IV> implements INeedsMaterialization{
+public class DateBOp extends IVValueExpression<IV> implements INeedsMaterialization {
+
+  /** */
+  private static final long serialVersionUID = 9136864442064392445L;
+
+  public interface Annotations extends ImmutableBOp.Annotations {
 
     /**
-	 *
-	 */
-    private static final long serialVersionUID = 9136864442064392445L;
-
-    public interface Annotations extends ImmutableBOp.Annotations {
-
-        /**
-         * The operation to be applied to the left operands (required). The value of this annotation is a {@link DateOp}, such as {@link DateOp#YEAR}.
-         *
-         * @see DateOp
-         */
-        String OP = (DateBOp.class.getName() + ".op").intern();
-
-    }
-
-    public enum DateOp {
-        YEAR, MONTH, DAY, HOURS, MINUTES, SECONDS, TZ, TIMEZONE, DATE
-
-    }
-
-    @Override
-    protected boolean areGlobalsRequired() {
-     
-        return true;
-        
-    }
-    
-    /**
+     * The operation to be applied to the left operands (required). The value of this annotation is
+     * a {@link DateOp}, such as {@link DateOp#YEAR}.
      *
-     * @param left
-     *            The left operand.
-     * @param right
-     *            The right operand.
-     * @param op
-     *            The annotation specifying the operation to be performed on those operands.
+     * @see DateOp
      */
-    public DateBOp(final IValueExpression<? extends IV> left, 
-    		final DateOp op, final GlobalAnnotations globals) {
+    String OP = (DateBOp.class.getName() + ".op").intern();
+  }
 
-        this(new BOp[] { left }, anns(globals, new NV(Annotations.OP, op)));
+  public enum DateOp {
+    YEAR,
+    MONTH,
+    DAY,
+    HOURS,
+    MINUTES,
+    SECONDS,
+    TZ,
+    TIMEZONE,
+    DATE
+  }
 
+  @Override
+  protected boolean areGlobalsRequired() {
+
+    return true;
+  }
+
+  /**
+   * @param left The left operand.
+   * @param right The right operand.
+   * @param op The annotation specifying the operation to be performed on those operands.
+   */
+  public DateBOp(
+      final IValueExpression<? extends IV> left, final DateOp op, final GlobalAnnotations globals) {
+
+    this(new BOp[] {left}, anns(globals, new NV(Annotations.OP, op)));
+  }
+
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args The operands.
+   * @param op The operation.
+   */
+  public DateBOp(final BOp[] args, Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 1 || args[0] == null || getProperty(Annotations.OP) == null) {
+
+      throw new IllegalArgumentException();
     }
+  }
 
-    /**
-     * Required shallow copy constructor.
-     *
-     * @param args
-     *            The operands.
-     * @param op
-     *            The operation.
-     */
-    public DateBOp(final BOp[] args, Map<String, Object> anns) {
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public DateBOp(final DateBOp op) {
 
-        super(args, anns);
+    super(op);
+  }
 
-        if (args.length != 1 || args[0] == null || getProperty(Annotations.OP) == null) {
+  public final IV get(final IBindingSet bs) {
 
-            throw new IllegalArgumentException();
+    final IV left = left().get(bs);
 
+    // not yet bound?
+    if (left == null) throw new SparqlTypeErrorException.UnboundVarException();
+
+    if (left.isLiteral()) {
+      if (!left.hasValue()) {
+        throw new NotMaterializedException();
+      }
+
+      EmbergraphLiteral bl = (EmbergraphLiteral) left.getValue();
+      if (XSD.DATETIME.equals(bl.getDatatype())
+          || XSD.DATE.equals(bl.getDatatype())
+          || XSD.TIME.equals(bl.getDatatype())) {
+        XMLGregorianCalendar cal = bl.calendarValue();
+        switch (op()) {
+          case DAY:
+            return new XSDIntegerIV(BigInteger.valueOf(cal.getDay()));
+          case MONTH:
+            return new XSDIntegerIV(BigInteger.valueOf(cal.getMonth()));
+          case YEAR:
+            return new XSDIntegerIV(BigInteger.valueOf(cal.getYear()));
+          case HOURS:
+            return new XSDIntegerIV(BigInteger.valueOf(cal.getHour()));
+          case SECONDS:
+            return new XSDDecimalIV(BigDecimal.valueOf(cal.getSecond()));
+          case MINUTES:
+            return new XSDIntegerIV(BigInteger.valueOf(cal.getMinute()));
+          case TZ:
+            return tz(bl);
+          case TIMEZONE:
+            return timezone(bl);
+          case DATE:
+            /*
+             * @see https://jira.blazegraph.com/browse/BLZG-1388
+             * FullyInlineTypedLiteralIV is used to keep exact string representation of newDate in literal,
+             * that results in different internal representation in contrast to xsd:dateTime values,
+             * which represented as LiteralExtensionIV with delegate of XSDLong
+             */
+            Date d = cal.toGregorianCalendar().getTime();
+            String newDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
+            return new FullyInlineTypedLiteralIV<>(newDate, null, XSD.DATE);
+          default:
+            throw new UnsupportedOperationException();
         }
-
+      }
     }
+    throw new SparqlTypeErrorException();
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     *
-     * @param op
-     */
-    public DateBOp(final DateBOp op) {
+  public IValueExpression<? extends IV> left() {
+    return get(0);
+  }
 
-        super(op);
+  public DateOp op() {
+    return (DateOp) getRequiredProperty(Annotations.OP);
+  }
 
+  public String toString() {
+
+    final StringBuilder sb = new StringBuilder();
+    sb.append(op());
+    sb.append("(").append(left()).append(")");
+    return sb.toString();
+  }
+
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
+
+  protected IV tz(final EmbergraphLiteral l) {
+
+    final Tz func = new Tz();
+
+    final EmbergraphValueFactory vf = super.getValueFactory();
+
+    try {
+
+      final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
+
+      return DummyConstantNode.toDummyIV(l2);
+
+    } catch (ValueExprEvaluationException e) {
+
+      throw new SparqlTypeErrorException();
     }
+  }
 
-    final public IV get(final IBindingSet bs) {
+  protected IV timezone(final EmbergraphLiteral l) {
 
-        final IV left = left().get(bs);
+    final Timezone func = new Timezone();
 
-        // not yet bound?
-        if (left == null)
-            throw new SparqlTypeErrorException.UnboundVarException();
+    final EmbergraphValueFactory vf = super.getValueFactory();
 
+    try {
 
-        if (left.isLiteral()) {
-            if(!left.hasValue()){
-                throw new NotMaterializedException();
-            }
+      final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
 
-            EmbergraphLiteral bl = (EmbergraphLiteral) left.getValue();
-            if (XSD.DATETIME.equals(bl.getDatatype())||XSD.DATE.equals(bl.getDatatype())||XSD.TIME.equals(bl.getDatatype())) {
-                XMLGregorianCalendar cal=bl.calendarValue();
-                switch (op()) {
-                case DAY:
-                    return new XSDIntegerIV(BigInteger.valueOf(cal.getDay()));
-                case MONTH:
-                    return new XSDIntegerIV(BigInteger.valueOf(cal.getMonth()));
-                case YEAR:
-                    return new XSDIntegerIV(BigInteger.valueOf(cal.getYear()));
-                case HOURS:
-                    return new XSDIntegerIV(BigInteger.valueOf(cal.getHour()));
-                case SECONDS:
-                    return new XSDDecimalIV(BigDecimal.valueOf(cal.getSecond()));
-                case MINUTES:
-                    return new XSDIntegerIV(BigInteger.valueOf(cal.getMinute()));
-                case TZ:
-                    return tz(bl);
-                case TIMEZONE:
-                    return timezone(bl);
-                case DATE:
-                	/*
-                	 * @see https://jira.blazegraph.com/browse/BLZG-1388
-                	 * FullyInlineTypedLiteralIV is used to keep exact string representation of newDate in literal,
-                	 * that results in different internal representation in contrast to xsd:dateTime values,
-                	 * which represented as LiteralExtensionIV with delegate of XSDLong 
-                	 */
-                	Date d = cal.toGregorianCalendar().getTime();
-                	String newDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
-                    return new FullyInlineTypedLiteralIV<>(newDate, null, XSD.DATE);
-                default:
-                    throw new UnsupportedOperationException();
-                }
-            }
-        }
-        throw new SparqlTypeErrorException();
+      return DummyConstantNode.toDummyIV(l2);
+
+    } catch (ValueExprEvaluationException e) {
+
+      throw new SparqlTypeErrorException();
     }
-
-    public IValueExpression<? extends IV> left() {
-        return get(0);
-    }
-
-    public DateOp op() {
-        return (DateOp) getRequiredProperty(Annotations.OP);
-    }
-
-    public String toString() {
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(op());
-        sb.append("(").append(left()).append(")");
-        return sb.toString();
-
-    }
-
-    public Requirement getRequirement() {
-        return Requirement.SOMETIMES;
-    }
-    
-    protected IV tz(final EmbergraphLiteral l) {
-     
-        final Tz func = new Tz();
-        
-        final EmbergraphValueFactory vf = super.getValueFactory();
-        
-        try {
-            
-            final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
-            
-            return DummyConstantNode.toDummyIV(l2);
-            
-        } catch (ValueExprEvaluationException e) {
-            
-            throw new SparqlTypeErrorException();
-            
-        }
-        
-    }
-
-    protected IV timezone(final EmbergraphLiteral l) {
-        
-        final Timezone func = new Timezone();
-        
-        final EmbergraphValueFactory vf = super.getValueFactory();
-        
-        try {
-            
-            final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
-            
-            return DummyConstantNode.toDummyIV(l2);
-            
-        } catch (ValueExprEvaluationException e) {
-            
-            throw new SparqlTypeErrorException();
-            
-        }
-        
-    }
-    
+  }
 }

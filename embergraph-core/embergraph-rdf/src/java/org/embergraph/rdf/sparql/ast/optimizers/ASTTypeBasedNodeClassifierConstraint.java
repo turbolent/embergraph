@@ -24,11 +24,10 @@ import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
 /**
  * Additional constraint associated with an {@link ASTTypeBasedNodeClassifier}.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
 abstract class ASTTypeBasedNodeClassifierConstraint {
-   
-   abstract boolean appliesTo(IGroupMemberNode node);
 
+  abstract boolean appliesTo(IGroupMemberNode node);
 }

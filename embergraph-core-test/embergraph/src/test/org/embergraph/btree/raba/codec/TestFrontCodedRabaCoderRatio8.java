@@ -24,31 +24,24 @@ package org.embergraph.btree.raba.codec;
 
 /**
  * Test suite for the {@link FrontCodedRabaCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFrontCodedRabaCoderRatio8 extends AbstractFrontCodedRabaCoderTestCase {
 
-    /**
-     * 
-     */
-    public TestFrontCodedRabaCoderRatio8() {
-    }
+  /** */
+  public TestFrontCodedRabaCoderRatio8() {}
 
-    /**
-     * @param name
-     */
-    public TestFrontCodedRabaCoderRatio8(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestFrontCodedRabaCoderRatio8(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
-        
-        rabaCoder = new FrontCodedRabaCoder(8/* ratio */);
-        
-    }
+  protected void setUp() throws Exception {
 
+    super.setUp();
+
+    rabaCoder = new FrontCodedRabaCoder(8 /* ratio */);
+  }
 }

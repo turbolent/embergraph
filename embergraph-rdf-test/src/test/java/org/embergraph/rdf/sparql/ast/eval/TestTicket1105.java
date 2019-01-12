@@ -18,588 +18,503 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Test suite asserting that queries containint quads constructs (named graphs)
- * are rejected in triples mode (at parsing phase), but go through in quads
- * mode.
- * 
- * 
- * @see <a href="http://trac.blazegraph.com/ticket/1105">
- * SPARQL UPDATE should have nice error messages when namespace 
- * does not support named graphs</a>
- * 
+ * Test suite asserting that queries containint quads constructs (named graphs) are rejected in
+ * triples mode (at parsing phase), but go through in quads mode.
+ *
+ * @see <a href="http://trac.blazegraph.com/ticket/1105">SPARQL UPDATE should have nice error
+ *     messages when namespace does not support named graphs</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
 public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
 
-   public TestTicket1105() {
-   }
+  public TestTicket1105() {}
 
-   public TestTicket1105(String name) {
-      super(name);
-   }
-   
-   public static Test suite() {
+  public TestTicket1105(String name) {
+    super(name);
+  }
 
-      final TestSuite suite = new TestSuite(
-            AbstractDataDrivenSPARQLTestCase.class.getSimpleName());
+  public static Test suite() {
 
-      suite.addTestSuite(TestTriplesModeAPs.class);
-      suite.addTestSuite(TestQuadsModeAPs.class);
+    final TestSuite suite = new TestSuite(AbstractDataDrivenSPARQLTestCase.class.getSimpleName());
 
-      return suite;
-   }
+    suite.addTestSuite(TestTriplesModeAPs.class);
+    suite.addTestSuite(TestQuadsModeAPs.class);
 
-   
-   /**
-    * Triples mode test suite.
-    */
-   public static class TestTriplesModeAPs extends TestTicket1105 {
+    return suite;
+  }
 
-      @Override
-      public Properties getProperties() {
+  /** Triples mode test suite. */
+  public static class TestTriplesModeAPs extends TestTicket1105 {
 
-         final Properties properties = new Properties(super.getProperties());
+    @Override
+    public Properties getProperties() {
 
-         // turn off quads.
-         properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
+      final Properties properties = new Properties(super.getProperties());
 
-         // turn on triples
-         properties.setProperty(AbstractTripleStore.Options.TRIPLES_MODE,
-               "true");
+      // turn off quads.
+      properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
-         return properties;
+      // turn on triples
+      properties.setProperty(AbstractTripleStore.Options.TRIPLES_MODE, "true");
 
-      }
-      
-      /**
-       * Query: 
-          <code>
-            INSERT DATA
-            { 
-               GRAPH <http://example/c> 
-               { <http://example/s>  <http://example/p> <http://example/o> } 
-            }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update1() throws Exception {
+      return properties;
+    }
 
-         try {
-         
-            new UpdateTestHelper("ticket_1105_triples_update1", // testURI,
-                  "ticket_1105_update1.rq",// queryFileURL
-                  "ticket_1105.trig" // dataFileURL
-            );
-         
-         } catch (QuadsOperationInTriplesModeException e) {
-            
-            return; // expected
+    /**
+     * Query: <code>
+     * INSERT DATA
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update1() throws Exception {
 
-         }
+      try {
 
-         throw new RuntimeException("Exception expected, but not encountered");
-
-      }
-      
-      /**
-       * Query: 
-          <code>
-            INSERT 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH <http://example/c> 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update2() throws Exception {
-
-         try {
-            
-            new UpdateTestHelper("ticket_1105_triples_update2", // testURI,
-                  "ticket_1105_update2.rq",// queryFileURL
-                  "ticket_1105.trig"// dataFileURL
-            );
-            
-         } catch (QuadsOperationInTriplesModeException e) {
-
-            return; // expected
-
-         }
-
-         throw new RuntimeException("Exception expected, but not encountered");
-
-      }
-      
-      
-      
-      /**
-       * Query: 
-          <code>
-            INSERT 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH ?g 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update3() throws Exception {
-
-         try {
-            
-            new UpdateTestHelper("ticket_1105_triples_update3", // testURI,
-                  "ticket_1105_update3.rq",// queryFileURL
-                  "ticket_1105.trig"// dataFileURL
-            );
-            
-         } catch (QuadsOperationInTriplesModeException e) {
-
-            return; // expected
-
-         }
-
-         throw new RuntimeException("Exception expected, but not encountered");
-
-      }
-      
-      
-      /**
-       * Query: 
-          <code>
-            DELETE 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH <http://example/c> 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update4() throws Exception {
-
-         try {
-            
-            new UpdateTestHelper("ticket_1105_triples_update4", // testURI,
-                  "ticket_1105_update4.rq",// queryFileURL
-                  "ticket_1105.trig"// dataFileURL
+        new UpdateTestHelper(
+            "ticket_1105_triples_update1", // testURI,
+            "ticket_1105_update1.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
             );
 
-            
-         } catch (QuadsOperationInTriplesModeException e) {
+      } catch (QuadsOperationInTriplesModeException e) {
 
-            return; // expected
+        return; // expected
+      }
 
-         }
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
 
-         throw new RuntimeException("Exception expected, but not encountered");
+    /**
+     * Query: <code>
+     * INSERT
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update2() throws Exception {
 
-      }  
+      try {
 
-      /**
-       * Query: 
-          <code>
-            DELETE 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH ?g 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update5() throws Exception {
-
-         try {
-            
-            new UpdateTestHelper("ticket_1105_triples_update5", // testURI,
-                  "ticket_1105_update5.rq",// queryFileURL
-                  "ticket_1105.trig"// dataFileURL
+        new UpdateTestHelper(
+            "ticket_1105_triples_update2", // testURI,
+            "ticket_1105_update2.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
             );
-            
-         } catch (QuadsOperationInTriplesModeException e) {
 
-            return; // expected
+      } catch (QuadsOperationInTriplesModeException e) {
 
-         }
+        return; // expected
+      }
 
-         throw new RuntimeException("Exception expected, but not encountered");
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
 
-      }       
-      
-      
-      /**
-       * Query: 
-          <code>
-            INSERT { <http://example/s>  <http://example/p> <http://example/o> }
-            USING <http://example/c> 
-            WHERE { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_update6() throws Exception {
+    /**
+     * Query: <code>
+     * INSERT
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH ?g
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update3() throws Exception {
 
-         try {
+      try {
 
-            new UpdateTestHelper("ticket_1105_triples_update6", // testURI,
-                  "ticket_1105_update6.rq",// queryFileURL
-                  "ticket_1105.trig"// dataFileURL
+        new UpdateTestHelper(
+            "ticket_1105_triples_update3", // testURI,
+            "ticket_1105_update3.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
             );
-            
-         } catch (QuadsOperationInTriplesModeException e) {
 
-            return; // expected
+      } catch (QuadsOperationInTriplesModeException e) {
 
-         }
-
-         throw new RuntimeException("Exception expected, but not encountered");
-
-            
-      }   
-      
-      
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            FROM NAMED <http://example/c>
-            WHERE { ?s ?p ?o }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_select1() throws Exception {
-   
-         try {
-         
-            new TestHelper("ticket_1105_triples_select1", // testURI,
-                  "ticket_1105_select1.rq",// queryFileURL
-                  "ticket_1105.trig",// dataFileURL
-                  "ticket_1105.srx"// resultFileURL
-            ).runTest();
-
-         } catch (QuadsOperationInTriplesModeException e) {
-
-            return; // expected
-            
-         }
-         
-         throw new RuntimeException("Exception expected, but not encountered");
-      }   
-         
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_select2() throws Exception {
-   
-         try {
-            new TestHelper("ticket_1105_triples_select2", // testURI,
-                  "ticket_1105_select2.rq",// queryFileURL
-                  "ticket_1105.trig",// dataFileURL
-                  "ticket_1105.srx"// resultFileURL
-            ).runTest();
-         } catch (QuadsOperationInTriplesModeException e) {
-            
-            return; // expected
-                  
-         }
-         
-         throw new RuntimeException("Exception expected, but not encountered");
-         
-      }
-   
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            WHERE { GRAPH ?g { ?s ?p ?o } }
-          </code>
-       * 
-       * throws an {@link QuadsOperationInTriplesModeException} in triples mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_triples_select3() throws Exception {
-   
-         try {
-            
-            new TestHelper("ticket_1105_triples_select3", // testURI,
-                  "ticket_1105_select3.rq",// queryFileURL
-                  "ticket_1105.trig",// dataFileURL
-                  "ticket_1105.srx"// resultFileURL
-            ).runTest();
-
-         } catch (QuadsOperationInTriplesModeException e) {
-         
-            return; // expected
-         
-         }
-         
-         throw new RuntimeException("Exception expected, but not encountered");
-   
-      }
-   }
-   
-   /**
-    * Quads mode test suite.
-    */
-   public static class TestQuadsModeAPs extends TestTicket1105 {
-      
-      /**
-       * Query: 
-          <code>
-            INSERT DATA
-            { 
-               GRAPH <http://example/c> 
-               { <http://example/s>  <http://example/p> <http://example/o> } 
-            }
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update1() throws Exception {
-
-         new UpdateTestHelper("ticket_1105_quads_update1", // testURI,
-               "ticket_1105_update1.rq",// queryFileURL
-               "ticket_1105.trig" // dataFileURL
-         );
- 
+        return; // expected
       }
 
-      
-      /**
-       * Query: 
-          <code>
-            INSERT 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH <http://example/c> 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update2() throws Exception {
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
 
-         new UpdateTestHelper("ticket_1105_quads_update2", // testURI,
-               "ticket_1105_update2.rq",// queryFileURL
-               "ticket_1105.trig"// dataFileURL
-         );
+    /**
+     * Query: <code>
+     * DELETE
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update4() throws Exception {
 
+      try {
+
+        new UpdateTestHelper(
+            "ticket_1105_triples_update4", // testURI,
+            "ticket_1105_update4.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
+            );
+
+      } catch (QuadsOperationInTriplesModeException e) {
+
+        return; // expected
       }
-      
-      
-      
-      /**
-       * Query: 
-          <code>
-            INSERT 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH ?g 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update3() throws Exception {
 
-         new UpdateTestHelper("ticket_1105_quads_update3", // testURI,
-               "ticket_1105_update3.rq",// queryFileURL
-               "ticket_1105.trig"// dataFileURL
-         );
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
 
+    /**
+     * Query: <code>
+     * DELETE
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH ?g
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update5() throws Exception {
+
+      try {
+
+        new UpdateTestHelper(
+            "ticket_1105_triples_update5", // testURI,
+            "ticket_1105_update5.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
+            );
+
+      } catch (QuadsOperationInTriplesModeException e) {
+
+        return; // expected
       }
-      
-      
-      /**
-       * Query: 
-          <code>
-            DELETE 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH <http://example/c> 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update4() throws Exception {
 
-         new UpdateTestHelper("ticket_1105_quads_update4", // testURI,
-               "ticket_1105_update4.rq",// queryFileURL
-               "ticket_1105.trig"// dataFileURL
-         );
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
 
-      }  
-      
+    /**
+     * Query: <code>
+     * INSERT { <http://example/s>  <http://example/p> <http://example/o> }
+     * USING <http://example/c>
+     * WHERE { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_update6() throws Exception {
 
-      /**
-       * Query: 
-          <code>
-            DELETE 
-            { <http://example/s>  <http://example/p> <http://example/o> }
-            WHERE
-            {
-               GRAPH ?g 
-               { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-            }
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update5() throws Exception {
+      try {
 
-         new UpdateTestHelper("ticket_1105_quads_update5", // testURI,
-               "ticket_1105_update5.rq",// queryFileURL
-               "ticket_1105.trig"// dataFileURL
-         );
+        new UpdateTestHelper(
+            "ticket_1105_triples_update6", // testURI,
+            "ticket_1105_update6.rq", // queryFileURL
+            "ticket_1105.trig" // dataFileURL
+            );
 
-      }       
-      
-      
-      /**
-       * Query: 
-          <code>
-            INSERT { <http://example/s>  <http://example/p> <http://example/o> }
-            USING <http://example/c> 
-            WHERE { <http://example/s1>  <http://example/p1> <http://example/o1> } 
-          </code>
-       * 
-       * is parsed successfully in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_update6() throws Exception {
+      } catch (QuadsOperationInTriplesModeException e) {
 
-         new UpdateTestHelper("ticket_1105_quads_update6", // testURI,
-               "ticket_1105_update6.rq",// queryFileURL
-               "ticket_1105.trig"// dataFileURL
-         );
-
-      }   
-      
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            FROM NAMED <http://example/c>
-            WHERE { ?s ?p ?o }
-          </code>
-       * 
-       * runs fine in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_select1() throws Exception {
-
-            new TestHelper("ticket_1105_quads_select1", // testURI,
-                  "ticket_1105_select1.rq",// queryFileURL
-                  "ticket_1105.trig",// dataFileURL
-                  "ticket_1105.srx"// resultFileURL
-            ).runTest();
-
-      }   
-         
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
-          </code>
-       * 
-       * runs fine in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_select2() throws Exception {
-   
-         new TestHelper("ticket_1105_quads_select2", // testURI,
-               "ticket_1105_select2.rq",// queryFileURL
-               "ticket_1105.trig",// dataFileURL
-               "ticket_1105.srx"// resultFileURL
-         ).runTest();
-   
+        return; // expected
       }
-   
-      /**
-       * Query: 
-          <code>
-            SELECT ?s ?p ?o
-            WHERE { GRAPH ?g { ?s ?p ?o } }
-          </code>
-       * 
-       * runs fine in quads mode.
-       * 
-       * @throws Exception
-       */
-      public void test_ticket_1105_quads_select3() throws Exception {
-   
-         new TestHelper("ticket_1105_quads_select3", // testURI,
-               "ticket_1105_select3.rq",// queryFileURL
-               "ticket_1105.trig",// dataFileURL
-               "ticket_1105.srx"// resultFileURL
-         ).runTest();
-   
-      }      
-   }
 
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * FROM NAMED <http://example/c>
+     * WHERE { ?s ?p ?o }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_select1() throws Exception {
+
+      try {
+
+        new TestHelper(
+                "ticket_1105_triples_select1", // testURI,
+                "ticket_1105_select1.rq", // queryFileURL
+                "ticket_1105.trig", // dataFileURL
+                "ticket_1105.srx" // resultFileURL
+                )
+            .runTest();
+
+      } catch (QuadsOperationInTriplesModeException e) {
+
+        return; // expected
+      }
+
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_select2() throws Exception {
+
+      try {
+        new TestHelper(
+                "ticket_1105_triples_select2", // testURI,
+                "ticket_1105_select2.rq", // queryFileURL
+                "ticket_1105.trig", // dataFileURL
+                "ticket_1105.srx" // resultFileURL
+                )
+            .runTest();
+      } catch (QuadsOperationInTriplesModeException e) {
+
+        return; // expected
+      }
+
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * WHERE { GRAPH ?g { ?s ?p ?o } }
+     * </code> throws an {@link QuadsOperationInTriplesModeException} in triples mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_triples_select3() throws Exception {
+
+      try {
+
+        new TestHelper(
+                "ticket_1105_triples_select3", // testURI,
+                "ticket_1105_select3.rq", // queryFileURL
+                "ticket_1105.trig", // dataFileURL
+                "ticket_1105.srx" // resultFileURL
+                )
+            .runTest();
+
+      } catch (QuadsOperationInTriplesModeException e) {
+
+        return; // expected
+      }
+
+      throw new RuntimeException("Exception expected, but not encountered");
+    }
+  }
+
+  /** Quads mode test suite. */
+  public static class TestQuadsModeAPs extends TestTicket1105 {
+
+    /**
+     * Query: <code>
+     * INSERT DATA
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update1() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update1", // testURI,
+          "ticket_1105_update1.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * INSERT
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update2() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update2", // testURI,
+          "ticket_1105_update2.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * INSERT
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH ?g
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update3() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update3", // testURI,
+          "ticket_1105_update3.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * DELETE
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH <http://example/c>
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update4() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update4", // testURI,
+          "ticket_1105_update4.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * DELETE
+     * { <http://example/s>  <http://example/p> <http://example/o> }
+     * WHERE
+     * {
+     * GRAPH ?g
+     * { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update5() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update5", // testURI,
+          "ticket_1105_update5.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * INSERT { <http://example/s>  <http://example/p> <http://example/o> }
+     * USING <http://example/c>
+     * WHERE { <http://example/s1>  <http://example/p1> <http://example/o1> }
+     * </code> is parsed successfully in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_update6() throws Exception {
+
+      new UpdateTestHelper(
+          "ticket_1105_quads_update6", // testURI,
+          "ticket_1105_update6.rq", // queryFileURL
+          "ticket_1105.trig" // dataFileURL
+          );
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * FROM NAMED <http://example/c>
+     * WHERE { ?s ?p ?o }
+     * </code> runs fine in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_select1() throws Exception {
+
+      new TestHelper(
+              "ticket_1105_quads_select1", // testURI,
+              "ticket_1105_select1.rq", // queryFileURL
+              "ticket_1105.trig", // dataFileURL
+              "ticket_1105.srx" // resultFileURL
+              )
+          .runTest();
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
+     * </code> runs fine in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_select2() throws Exception {
+
+      new TestHelper(
+              "ticket_1105_quads_select2", // testURI,
+              "ticket_1105_select2.rq", // queryFileURL
+              "ticket_1105.trig", // dataFileURL
+              "ticket_1105.srx" // resultFileURL
+              )
+          .runTest();
+    }
+
+    /**
+     * Query: <code>
+     * SELECT ?s ?p ?o
+     * WHERE { GRAPH ?g { ?s ?p ?o } }
+     * </code> runs fine in quads mode.
+     *
+     * @throws Exception
+     */
+    public void test_ticket_1105_quads_select3() throws Exception {
+
+      new TestHelper(
+              "ticket_1105_quads_select3", // testURI,
+              "ticket_1105_select3.rq", // queryFileURL
+              "ticket_1105.trig", // dataFileURL
+              "ticket_1105.srx" // resultFileURL
+              )
+          .runTest();
+    }
+  }
 }

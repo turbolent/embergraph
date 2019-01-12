@@ -28,7 +28,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.ICheckpointProtocol;
@@ -46,331 +45,329 @@ import org.embergraph.sparse.SparseRowStore;
 
 /**
  * {@link IJournal} delegation pattern.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class JournalDelegate implements IJournal {
-	
-	private final AbstractJournal delegate;
-	
-	public JournalDelegate(final AbstractJournal source) {
-		this.delegate = source;
-	}
-	
-	@Override
-	public boolean isHAJournal() {
-		return false;
-	}
 
-	@Override
-	public Properties getProperties() {
-		return delegate.getProperties();
-	}
+  private final AbstractJournal delegate;
 
-   @Override
-	public void shutdown() {
-		delegate.shutdown();	
-	}
+  public JournalDelegate(final AbstractJournal source) {
+    this.delegate = source;
+  }
 
-   @Override
-	public void shutdownNow() {
-		delegate.shutdownNow();		
-	}
+  @Override
+  public boolean isHAJournal() {
+    return false;
+  }
 
-   @Override
-	public void abort() {
-		delegate.abort();
-	}
+  @Override
+  public Properties getProperties() {
+    return delegate.getProperties();
+  }
 
-   @Override
-	public long commit() {
-		return delegate.commit();
-	}
+  @Override
+  public void shutdown() {
+    delegate.shutdown();
+  }
 
-   @Override
-	public ICommitRecord getCommitRecord(long timestamp) {
-		return delegate.getCommitRecord(timestamp);
-	}
+  @Override
+  public void shutdownNow() {
+    delegate.shutdownNow();
+  }
 
-   @Override
-	public long getRootAddr(int index) {
-		return delegate.getRootAddr(index);
-	}
+  @Override
+  public void abort() {
+    delegate.abort();
+  }
 
-   @Override
-	public IRootBlockView getRootBlockView() {
-		return delegate.getRootBlockView();
-	}
+  @Override
+  public long commit() {
+    return delegate.commit();
+  }
 
-//    public IRootBlockView getRootBlock(long commitTime) {
-//        return delegate.getRootBlock(commitTime);
-//    }
-//
-//	public Iterator<IRootBlockView> getRootBlocks(long startTime) {
-//		return delegate.getRootBlocks(startTime);
-//	}
+  @Override
+  public ICommitRecord getCommitRecord(long timestamp) {
+    return delegate.getCommitRecord(timestamp);
+  }
 
-   @Override
-	public void setCommitter(int index, ICommitter committer) {
-		delegate.setCommitter(index, committer);
-	}
+  @Override
+  public long getRootAddr(int index) {
+    return delegate.getRootAddr(index);
+  }
 
-   @Override
-	public void close() {
-		delegate.close();
-	}
+  @Override
+  public IRootBlockView getRootBlockView() {
+    return delegate.getRootBlockView();
+  }
 
-   @Override
-	public void delete(long addr) {
-		delegate.delete(addr);
-	}
+  //    public IRootBlockView getRootBlock(long commitTime) {
+  //        return delegate.getRootBlock(commitTime);
+  //    }
+  //
+  //	public Iterator<IRootBlockView> getRootBlocks(long startTime) {
+  //		return delegate.getRootBlocks(startTime);
+  //	}
 
-   @Override
-	public void deleteResources() {
-		delegate.deleteResources();
-	}
+  @Override
+  public void setCommitter(int index, ICommitter committer) {
+    delegate.setCommitter(index, committer);
+  }
 
-   @Override
-	public void destroy() {
-		delegate.destroy();
-	}
+  @Override
+  public void close() {
+    delegate.close();
+  }
 
-   @Override
-	public void force(boolean metadata) {
-		delegate.force(metadata);
-	}
+  @Override
+  public void delete(long addr) {
+    delegate.delete(addr);
+  }
 
-   @Override
-	public CounterSet getCounters() {
-		return delegate.getCounters();
-	}
+  @Override
+  public void deleteResources() {
+    delegate.deleteResources();
+  }
 
-   @Override
-	public File getFile() {
-		return delegate.getFile();
-	}
+  @Override
+  public void destroy() {
+    delegate.destroy();
+  }
 
-   @Override
-	public IResourceMetadata getResourceMetadata() {
-		return delegate.getResourceMetadata();
-	}
+  @Override
+  public void force(boolean metadata) {
+    delegate.force(metadata);
+  }
 
-   @Override
-	public UUID getUUID() {
-		return delegate.getUUID();
-	}
+  @Override
+  public CounterSet getCounters() {
+    return delegate.getCounters();
+  }
 
-   @Override
-	public boolean isFullyBuffered() {
-		return delegate.isFullyBuffered();
-	}
+  @Override
+  public File getFile() {
+    return delegate.getFile();
+  }
 
-   @Override
-	public boolean isOpen() {
-		return delegate.isOpen();
-	}
+  @Override
+  public IResourceMetadata getResourceMetadata() {
+    return delegate.getResourceMetadata();
+  }
 
-   @Override
-	public boolean isReadOnly() {
-		return delegate.isOpen();
-	}
+  @Override
+  public UUID getUUID() {
+    return delegate.getUUID();
+  }
 
-   @Override
-	public boolean isStable() {
-		return delegate.isStable();
-	}
+  @Override
+  public boolean isFullyBuffered() {
+    return delegate.isFullyBuffered();
+  }
 
-   @Override
-	public ByteBuffer read(long addr) {
-		return delegate.read(addr);
-	}
+  @Override
+  public boolean isOpen() {
+    return delegate.isOpen();
+  }
 
-   @Override
-	public long size() {
-		return delegate.size();
-	}
+  @Override
+  public boolean isReadOnly() {
+    return delegate.isOpen();
+  }
 
-   @Override
-	public long write(ByteBuffer data) {
-		return delegate.write(data);
-	}
+  @Override
+  public boolean isStable() {
+    return delegate.isStable();
+  }
 
-//	@Override
-//	public long write(ByteBuffer data, long oldAddr) {
-//		return delegate.write(data, oldAddr);
-//	}
+  @Override
+  public ByteBuffer read(long addr) {
+    return delegate.read(addr);
+  }
 
-   @Override
-	public int getByteCount(long addr) {
-		return delegate.getByteCount(addr);
-	}
+  @Override
+  public long size() {
+    return delegate.size();
+  }
 
-   @Override
-	public long getOffset(long addr) {
-		return delegate.getOffset(addr);
-	}
+  @Override
+  public long write(ByteBuffer data) {
+    return delegate.write(data);
+  }
 
-   @Override
-    public long getPhysicalAddress(final long addr) {
-        return delegate.getPhysicalAddress(addr);
-    }
-    
-    @Override
-	public long toAddr(int nbytes, long offset) {
-		return delegate.toAddr(nbytes, offset);
-	}
+  //	@Override
+  //	public long write(ByteBuffer data, long oldAddr) {
+  //		return delegate.write(data, oldAddr);
+  //	}
 
-   @Override
-	public String toString(long addr) {
-		return delegate.toString(addr);
-	}
+  @Override
+  public int getByteCount(long addr) {
+    return delegate.getByteCount(addr);
+  }
 
-   @Override
-	public IIndex getIndex(String name) {
-		return delegate.getIndex(name);
-	}
+  @Override
+  public long getOffset(long addr) {
+    return delegate.getOffset(addr);
+  }
 
-   @Override
-	public IIndex registerIndex(String name, BTree btree) {
-		return delegate.registerIndex(name, btree);
-	}
+  @Override
+  public long getPhysicalAddress(final long addr) {
+    return delegate.getPhysicalAddress(addr);
+  }
 
-   @Override
-	public IIndex registerIndex(String name, IndexMetadata indexMetadata) {
-		return delegate.registerIndex(name, indexMetadata);
-	}
+  @Override
+  public long toAddr(int nbytes, long offset) {
+    return delegate.toAddr(nbytes, offset);
+  }
 
-   @Override
-	public void dropIndex(String name) {
-		delegate.dropIndex(name);
-	}
+  @Override
+  public String toString(long addr) {
+    return delegate.toString(addr);
+  }
 
-   @Override
-	public void registerIndex(IndexMetadata indexMetadata) {
-		delegate.registerIndex(indexMetadata);
-	}
+  @Override
+  public IIndex getIndex(String name) {
+    return delegate.getIndex(name);
+  }
 
-   @Override
-	public ExecutorService getExecutorService() {
-		return delegate.getExecutorService();
-	}
+  @Override
+  public IIndex registerIndex(String name, BTree btree) {
+    return delegate.registerIndex(name, btree);
+  }
 
-   @Override
-	public EmbergraphFileSystem getGlobalFileSystem() {
-		return delegate.getGlobalFileSystem();
-	}
+  @Override
+  public IIndex registerIndex(String name, IndexMetadata indexMetadata) {
+    return delegate.registerIndex(name, indexMetadata);
+  }
 
-   @Override
-    public SparseRowStore getGlobalRowStore() {
-        return delegate.getGlobalRowStore();
-    }
+  @Override
+  public void dropIndex(String name) {
+    delegate.dropIndex(name);
+  }
 
-    @Override
-    public SparseRowStore getGlobalRowStore(final long timestamp) {
-        return delegate.getGlobalRowStore(timestamp);
-    }
+  @Override
+  public void registerIndex(IndexMetadata indexMetadata) {
+    delegate.registerIndex(indexMetadata);
+  }
 
-    @Override
-	public IIndex getIndex(String name, long timestamp) {
-		return delegate.getIndex(name, timestamp);
-	}
+  @Override
+  public ExecutorService getExecutorService() {
+    return delegate.getExecutorService();
+  }
 
-   @Override
-	public long getLastCommitTime() {
-		return delegate.getLastCommitTime();
-	}
+  @Override
+  public EmbergraphFileSystem getGlobalFileSystem() {
+    return delegate.getGlobalFileSystem();
+  }
 
-   @Override
-	public IResourceLocator getResourceLocator() {
-		return delegate.getResourceLocator();
-	}
+  @Override
+  public SparseRowStore getGlobalRowStore() {
+    return delegate.getGlobalRowStore();
+  }
 
-   @Override
-    public ILocalTransactionManager getLocalTransactionManager() {
-        return delegate.getLocalTransactionManager();
-    }
+  @Override
+  public SparseRowStore getGlobalRowStore(final long timestamp) {
+    return delegate.getGlobalRowStore(timestamp);
+  }
 
-    @Override
-    public IResourceLockService getResourceLockService() {
-		return delegate.getResourceLockService();
-	}
+  @Override
+  public IIndex getIndex(String name, long timestamp) {
+    return delegate.getIndex(name, timestamp);
+  }
 
-    @Override
-    public TemporaryStore getTempStore() {
-		return delegate.getTempStore();
-	}
-	
-   @Override
-	public ScheduledFuture<?> addScheduledTask(Runnable task,
-			long initialDelay, long delay, TimeUnit unit) {
-		return delegate.addScheduledTask(task, initialDelay, delay, unit);
-	}
+  @Override
+  public long getLastCommitTime() {
+    return delegate.getLastCommitTime();
+  }
 
-   @Override
-	public boolean getCollectPlatformStatistics() {
-		return delegate.getCollectPlatformStatistics();
-	}
+  @Override
+  public IResourceLocator getResourceLocator() {
+    return delegate.getResourceLocator();
+  }
 
-   @Override
-	public boolean getCollectQueueStatistics() {
-		return delegate.getCollectQueueStatistics();
-	}
+  @Override
+  public ILocalTransactionManager getLocalTransactionManager() {
+    return delegate.getLocalTransactionManager();
+  }
 
-   @Override
-	public int getHttpdPort() {
-		return delegate.getHttpdPort();
-	}
+  @Override
+  public IResourceLockService getResourceLockService() {
+    return delegate.getResourceLockService();
+  }
 
-    @Override
-    public Iterator<String> indexNameScan(String prefix, long timestamp) {
-        return delegate.indexNameScan(prefix, timestamp);
-    }
+  @Override
+  public TemporaryStore getTempStore() {
+    return delegate.getTempStore();
+  }
 
-	@Override
-	public IPSOutputStream getOutputStream() {
-		return delegate.getOutputStream();
-	}
+  @Override
+  public ScheduledFuture<?> addScheduledTask(
+      Runnable task, long initialDelay, long delay, TimeUnit unit) {
+    return delegate.addScheduledTask(task, initialDelay, delay, unit);
+  }
 
-	@Override
-	public InputStream getInputStream(long addr) {
-		return delegate.getInputStream(addr);
-	}
+  @Override
+  public boolean getCollectPlatformStatistics() {
+    return delegate.getCollectPlatformStatistics();
+  }
 
-   @Override
-   public boolean isDirty() {
-      return delegate.isDirty();
-   }
+  @Override
+  public boolean getCollectQueueStatistics() {
+    return delegate.getCollectQueueStatistics();
+  }
 
-   @Override
-   public boolean isGroupCommit() {
-      return delegate.isGroupCommit();
-   }
+  @Override
+  public int getHttpdPort() {
+    return delegate.getHttpdPort();
+  }
 
-    @Override
-    public ICheckpointProtocol register(String name, IndexMetadata metadata) {
-        return delegate.register(name, metadata);
-    }
+  @Override
+  public Iterator<String> indexNameScan(String prefix, long timestamp) {
+    return delegate.indexNameScan(prefix, timestamp);
+  }
 
-    @Override
-    public ICheckpointProtocol getIndexLocal(String name, long commitTime) {
-        return delegate.getIndexLocal(name, commitTime);
-    }
+  @Override
+  public IPSOutputStream getOutputStream() {
+    return delegate.getOutputStream();
+  }
 
-    @Override
-    public ICheckpointProtocol getUnisolatedIndex(String name) {
-        return delegate.getUnisolatedIndex(name);
-    }
+  @Override
+  public InputStream getInputStream(long addr) {
+    return delegate.getInputStream(addr);
+  }
 
-   @Override
-   public Quorum<HAGlue, QuorumService<HAGlue>> getQuorum() {
-      return delegate.getQuorum();
-   }
+  @Override
+  public boolean isDirty() {
+    return delegate.isDirty();
+  }
 
-   @Override
-   final public long awaitHAReady(final long timeout, final TimeUnit units)
-           throws InterruptedException, TimeoutException,
-           AsynchronousQuorumCloseException {
-      return delegate.awaitHAReady(timeout, units);
-   }
-   
+  @Override
+  public boolean isGroupCommit() {
+    return delegate.isGroupCommit();
+  }
+
+  @Override
+  public ICheckpointProtocol register(String name, IndexMetadata metadata) {
+    return delegate.register(name, metadata);
+  }
+
+  @Override
+  public ICheckpointProtocol getIndexLocal(String name, long commitTime) {
+    return delegate.getIndexLocal(name, commitTime);
+  }
+
+  @Override
+  public ICheckpointProtocol getUnisolatedIndex(String name) {
+    return delegate.getUnisolatedIndex(name);
+  }
+
+  @Override
+  public Quorum<HAGlue, QuorumService<HAGlue>> getQuorum() {
+    return delegate.getQuorum();
+  }
+
+  @Override
+  public final long awaitHAReady(final long timeout, final TimeUnit units)
+      throws InterruptedException, TimeoutException, AsynchronousQuorumCloseException {
+    return delegate.awaitHAReady(timeout, units);
+  }
 }

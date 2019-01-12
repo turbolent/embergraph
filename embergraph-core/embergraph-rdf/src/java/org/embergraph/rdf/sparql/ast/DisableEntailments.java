@@ -22,42 +22,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * The DISABLE ENTAILMENTS operation disable incremental truth maintenance.
- * 
+ *
  * <pre>
  * DISABLE ENTAILMENTS
  * </pre>
- * 
+ *
  * @see wiki:DISABLE_ENTAILMENTS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DisableEntailments extends GraphUpdate {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1170605083868090964L;
-    
-    public DisableEntailments() {
-        super(UpdateType.DisableEntailments);
-    }
+  /** */
+  private static final long serialVersionUID = -1170605083868090964L;
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public DisableEntailments(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-    }
+  public DisableEntailments() {
+    super(UpdateType.DisableEntailments);
+  }
 
-    public String toString(final int indent) {
-    	return getClass().getSimpleName();
-    }
+  /**
+   * @param args
+   * @param anns
+   */
+  public DisableEntailments(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  public String toString(final int indent) {
+    return getClass().getSimpleName();
+  }
 }

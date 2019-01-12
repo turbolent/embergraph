@@ -18,35 +18,30 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /**
- * An instance of this exception is thrown when the storage layer must go
- * through an abort before new writes may be applied or committed.
- * 
+ * An instance of this exception is thrown when the storage layer must go through an abort before
+ * new writes may be applied or committed.
+ *
  * @author bryan
- * @see http://jira.blazegraph.com/browse/BLZG-181 (Add critical section
- *      protection to AbstractJournal.abort() and
- *      EmbergraphSailConnection.rollback())
+ * @see http://jira.blazegraph.com/browse/BLZG-181 (Add critical section protection to
+ *     AbstractJournal.abort() and EmbergraphSailConnection.rollback())
  * @see http://jira.blazegraph.com/browse/BLZG-1236 (Recycler error in 1.5.1)
  */
 public class AbortRequiredException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public AbortRequiredException() {
-    }
+  public AbortRequiredException() {}
 
-    public AbortRequiredException(final String s) {
-        super(s);
-    }
+  public AbortRequiredException(final String s) {
+    super(s);
+  }
 
-    public AbortRequiredException(final Throwable cause) {
-        super(cause);
-    }
+  public AbortRequiredException(final Throwable cause) {
+    super(cause);
+  }
 
-    public AbortRequiredException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
+  public AbortRequiredException(final String message, final Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -26,41 +26,34 @@ import org.embergraph.btree.raba.codec.SimpleRabaCoder;
 
 /**
  * Test suite without key compression.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNodeDataRecord_Simple extends AbstractNodeDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestNodeDataRecord_Simple() {
-    }
+  /** */
+  public TestNodeDataRecord_Simple() {}
 
-    /**
-     * @param name
-     */
-    public TestNodeDataRecord_Simple(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestNodeDataRecord_Simple(String name) {
+    super(name);
+  }
 
-    @Override
-    protected boolean mayGenerateLeaves() {
-        return false;
-    }
+  @Override
+  protected boolean mayGenerateLeaves() {
+    return false;
+  }
 
-    @Override
-    protected boolean mayGenerateNodes() {
-        return true;
-    }
+  @Override
+  protected boolean mayGenerateNodes() {
+    return true;
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  protected void setUp() throws Exception {
 
-        coder = new DefaultNodeCoder(SimpleRabaCoder.INSTANCE);
-        
-    }
+    super.setUp();
 
+    coder = new DefaultNodeCoder(SimpleRabaCoder.INSTANCE);
+  }
 }

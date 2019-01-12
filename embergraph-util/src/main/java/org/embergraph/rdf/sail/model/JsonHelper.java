@@ -17,11 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Writer;
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -30,40 +25,42 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import java.util.List;
 
 /**
- * Helper class for Json Serialization of Model Objects 
- * 
- * @author beebs
+ * Helper class for Json Serialization of Model Objects
  *
+ * @author beebs
  */
 public class JsonHelper {
-	
-	public static void writeRunningQueryList(Writer w,
-			List<RunningQuery> rQueries) throws JsonGenerationException,
-			JsonMappingException, IOException {
-		final ObjectMapper mapper = new ObjectMapper();
-		final TypeFactory typeFactory = mapper.getTypeFactory();
-		final ObjectWriter writer = mapper.writerWithType(typeFactory
-				.constructCollectionType(List.class,
-						org.embergraph.rdf.sail.model.RunningQuery.class));
 
-		writer.writeValue(w, rQueries);
-	}
-	
-	public static List<RunningQuery> readRunningQueryList(InputStream is)
-			throws JsonProcessingException, IOException {
+  public static void writeRunningQueryList(Writer w, List<RunningQuery> rQueries)
+      throws JsonGenerationException, JsonMappingException, IOException {
+    final ObjectMapper mapper = new ObjectMapper();
+    final TypeFactory typeFactory = mapper.getTypeFactory();
+    final ObjectWriter writer =
+        mapper.writerWithType(
+            typeFactory.constructCollectionType(
+                List.class, org.embergraph.rdf.sail.model.RunningQuery.class));
 
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		final TypeFactory typeFactory = mapper.getTypeFactory();
-		final ObjectReader reader = mapper.reader(typeFactory
-				.constructCollectionType(List.class,
-						org.embergraph.rdf.sail.model.RunningQuery.class));
+    writer.writeValue(w, rQueries);
+  }
 
-		// TODO: Change this when upgrading to a newer Jackson version
-		return (List<RunningQuery>) reader.readValue(is);
+  public static List<RunningQuery> readRunningQueryList(InputStream is)
+      throws JsonProcessingException, IOException {
 
-	}
+    final ObjectMapper mapper = new ObjectMapper();
+    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    final TypeFactory typeFactory = mapper.getTypeFactory();
+    final ObjectReader reader =
+        mapper.reader(
+            typeFactory.constructCollectionType(
+                List.class, org.embergraph.rdf.sail.model.RunningQuery.class));
 
+    // TODO: Change this when upgrading to a newer Jackson version
+    return (List<RunningQuery>) reader.readValue(is);
+  }
 }

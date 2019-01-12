@@ -21,127 +21,113 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.joinGraph;
 
+import junit.framework.TestCase2;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
-import org.embergraph.bop.joinGraph.PartitionedJoinGroup;
-
-import junit.framework.TestCase2;
 
 /**
  * Unit tests for {@link PartitionedJoinGroup#canJoin(IPredicate, IPredicate)}
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestPartitionedJoinGroup_canJoin extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestPartitionedJoinGroup_canJoin() {
+  /** */
+  public TestPartitionedJoinGroup_canJoin() {}
+
+  /** @param name */
+  public TestPartitionedJoinGroup_canJoin(String name) {
+    super(name);
+  }
+
+  /**
+   * Correct rejection tests.
+   *
+   * @see BOpUtility#canJoin(IPredicate, IPredicate).
+   */
+  @SuppressWarnings("unchecked")
+  public void test_canJoin_correctRejection() {
+
+    final IVariable<?> x = Var.var("x");
+    final IVariable<?> y = Var.var("y");
+    final IVariable<?> z = Var.var("z");
+
+    final IPredicate<?> p1 = new Predicate(new BOp[] {x, y});
+    final IPredicate<?> p2 = new Predicate(new BOp[] {y, z});
+
+    // correct rejection w/ null arg.
+    try {
+      PartitionedJoinGroup.canJoin(null, p2);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestPartitionedJoinGroup_canJoin(String name) {
-        super(name);
+    // correct rejection w/ null arg.
+    try {
+      PartitionedJoinGroup.canJoin(p1, null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+  }
 
+  /**
+   * Semantics tests focused on shared variables in the operands.
+   *
+   * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)
+   */
+  @SuppressWarnings("unchecked")
+  public void test_canJoin() {
 
-    /**
-     * Correct rejection tests.
-     * 
-     * @see BOpUtility#canJoin(IPredicate, IPredicate).
-     */
-    @SuppressWarnings("unchecked")
-    public void test_canJoin_correctRejection() {
-        
-        final IVariable<?> x = Var.var("x");
-        final IVariable<?> y = Var.var("y");
-        final IVariable<?> z = Var.var("z");
-        
-        final IPredicate<?> p1 = new Predicate(new BOp[]{x,y});
-        final IPredicate<?> p2 = new Predicate(new BOp[]{y,z});
-        
-        // correct rejection w/ null arg.
-        try {
-            PartitionedJoinGroup.canJoin(null,p2);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        
-        // correct rejection w/ null arg.
-        try {
-            PartitionedJoinGroup.canJoin(p1,null);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        
-    }
+    final IVariable<?> u = Var.var("u");
+    final IVariable<?> x = Var.var("x");
+    final IVariable<?> y = Var.var("y");
+    final IVariable<?> z = Var.var("z");
 
-    /**
-     * Semantics tests focused on shared variables in the operands.
-     * 
-     * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)
-     */
-    @SuppressWarnings("unchecked")
-    public void test_canJoin() {
-        
-        final IVariable<?> u = Var.var("u");
-        final IVariable<?> x = Var.var("x");
-        final IVariable<?> y = Var.var("y");
-        final IVariable<?> z = Var.var("z");
+    final IPredicate<?> p1 = new Predicate(new BOp[] {x, y});
+    final IPredicate<?> p2 = new Predicate(new BOp[] {y, z});
+    final IPredicate<?> p3 = new Predicate(new BOp[] {u, z});
 
-        final IPredicate<?> p1 = new Predicate(new BOp[] { x, y });
-        final IPredicate<?> p2 = new Predicate(new BOp[] { y, z });
-        final IPredicate<?> p3 = new Predicate(new BOp[] { u, z });
+    // share y
+    assertTrue(PartitionedJoinGroup.canJoin(p1, p2));
 
-        // share y
-        assertTrue(PartitionedJoinGroup.canJoin(p1, p2));
-        
-        // share z
-        assertTrue(PartitionedJoinGroup.canJoin(p2, p3));
-        
-        // share z
-        assertFalse(PartitionedJoinGroup.canJoin(p1, p3));
+    // share z
+    assertTrue(PartitionedJoinGroup.canJoin(p2, p3));
 
-        // shares (x,y) with self.
-        assertTrue(PartitionedJoinGroup.canJoin(p1, p1));
+    // share z
+    assertFalse(PartitionedJoinGroup.canJoin(p1, p3));
 
-    }
+    // shares (x,y) with self.
+    assertTrue(PartitionedJoinGroup.canJoin(p1, p1));
+  }
 
-    /**
-     * Verify that joins are not permitted when the variables are
-     * only shared via an annotation.
-     * 
-     * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)
-     */
-    @SuppressWarnings("unchecked")
-    public void test_canJoin_annotationsAreIngored() {
-        
-        final IVariable<?> x = Var.var("x");
-        final IVariable<?> y = Var.var("y");
-        final IVariable<?> z = Var.var("z");
+  /**
+   * Verify that joins are not permitted when the variables are only shared via an annotation.
+   *
+   * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)
+   */
+  @SuppressWarnings("unchecked")
+  public void test_canJoin_annotationsAreIngored() {
 
-        final IPredicate<?> p1 = new Predicate(new BOp[] { x, },
-                new NV("foo", y)
-                );
-        final IPredicate<?> p2 = new Predicate(new BOp[] { z },
-                new NV("foo", y)
-                );
+    final IVariable<?> x = Var.var("x");
+    final IVariable<?> y = Var.var("y");
+    final IVariable<?> z = Var.var("z");
 
-        // verify that the variables in the annotations are ignored.
-        assertFalse(PartitionedJoinGroup.canJoin(p1, p2));
+    final IPredicate<?> p1 =
+        new Predicate(
+            new BOp[] {
+              x,
+            },
+            new NV("foo", y));
+    final IPredicate<?> p2 = new Predicate(new BOp[] {z}, new NV("foo", y));
 
-    }
-
+    // verify that the variables in the annotations are ignored.
+    assertFalse(PartitionedJoinGroup.canJoin(p1, p2));
+  }
 }

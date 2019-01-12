@@ -26,64 +26,58 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.Future;
-
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
- * {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating
- * methods through to the {@link IRunnableBuffer} on the remote service while
- * masquerading {@link IOException}s so that we can implement the
- * {@link IRunnableBuffer} API.
- * 
+ * {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating methods through to the
+ * {@link IRunnableBuffer} on the remote service while masquerading {@link IOException}s so that we
+ * can implement the {@link IRunnableBuffer} API.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class ClientRunnableBuffer<E, V> extends ClientBuffer<E> implements
-        IRunnableBuffer<E/*, V*/> {
+public class ClientRunnableBuffer<E, V> extends ClientBuffer<E>
+    implements IRunnableBuffer<E /*, V*/> {
 
-    private final RemoteRunnableBuffer<E, V> buffer;
-    
-    /**
-     * @param buffer
-     */
-    public ClientRunnableBuffer(final RemoteRunnableBuffer<E, V> buffer) {
+  private final RemoteRunnableBuffer<E, V> buffer;
 
-        super(buffer);
+  /** @param buffer */
+  public ClientRunnableBuffer(final RemoteRunnableBuffer<E, V> buffer) {
 
-        this.buffer = buffer;
-        
+    super(buffer);
+
+    this.buffer = buffer;
+  }
+
+  public boolean isOpen() {
+    try {
+      return buffer.isOpen();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public boolean isOpen() {
-        try {
-            return buffer.isOpen();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public void abort(Throwable cause) {
+    try {
+      buffer.abort(cause);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public void abort(Throwable cause) {
-        try {
-            buffer.abort(cause);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public void close() {
+    try {
+      buffer.close();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public void close() {
-        try {
-            buffer.close();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public Future<V> getFuture() {
+    try {
+      return buffer.getFuture();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
-
-    public Future<V> getFuture() {
-        try {
-            return buffer.getFuture();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
+  }
 }

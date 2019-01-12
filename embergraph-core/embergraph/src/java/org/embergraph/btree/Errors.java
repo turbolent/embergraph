@@ -23,21 +23,19 @@ package org.embergraph.btree;
 
 /**
  * Error messages for the B+Tree package.
- * 
+ *
  * @todo add error codes; localize.
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class Errors {
 
-    public static final transient String ERR_FROM_INDEX = "fromIndex is invalid";
+  public static final transient String ERR_FROM_INDEX = "fromIndex is invalid";
 
-    public static final transient String ERR_TO_INDEX = "toIndex is invalid";
+  public static final transient String ERR_TO_INDEX = "toIndex is invalid";
 
-    public static final transient String ERR_KEYS_NULL = "keys is null";
+  public static final transient String ERR_KEYS_NULL = "keys is null";
 
-    public static final transient String ERR_VALS_NULL = "values is null";
+  public static final transient String ERR_VALS_NULL = "values is null";
 
-    public static final transient String ERR_VALS_NOT_NULL = "values must be null";
-
+  public static final transient String ERR_VALS_NOT_NULL = "values must be null";
 }

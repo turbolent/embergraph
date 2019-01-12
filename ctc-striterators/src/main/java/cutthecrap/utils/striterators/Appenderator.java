@@ -15,66 +15,62 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.*;
-
 import cutthecrap.utils.striterators.IStriterator.ITailOp;
+import java.util.Iterator;
 
-/**
- * Appenderator
- **/
-
+/** Appenderator */
 public class Appenderator extends Prefetch implements ITailOp {
 
-	private final Iterator m_src;
-	protected final Object m_ctx;
-	private final Iterator m_xtra;
+  private final Iterator m_src;
+  protected final Object m_ctx;
+  private final Iterator m_xtra;
 
-	private Iterator m_current;
-	private boolean m_isxtra = false;
+  private Iterator m_current;
+  private boolean m_isxtra = false;
 
-	public Appenderator(Iterator src, Object ctx, Iterator xtra) {
-		m_src = src;
-		m_ctx = ctx;
-		m_xtra = xtra;
+  public Appenderator(Iterator src, Object ctx, Iterator xtra) {
+    m_src = src;
+    m_ctx = ctx;
+    m_xtra = xtra;
 
-		m_current = m_src;
-	}
+    m_current = m_src;
+  }
 
-	// -------------------------------------------------------------
+  // -------------------------------------------------------------
 
-	protected Object getNext() {
-		Object ret = null;
-		if (m_current.hasNext()) {
-			ret = m_current.next();
-		} else if (m_isxtra) { // no need to call twice
-			return null;
-		} else {		
-			m_current = m_xtra;
-			m_isxtra = true;
-	
-			if (m_current.hasNext()) {
-				ret = m_current.next();
-			}
-		}
-		// experimental tail optimisation
-		if (m_current instanceof ITailOp) {
-			m_current = ((ITailOp) m_current).availableTailOp();
-		}
-		
-		return ret;
-	}
+  protected Object getNext() {
+    Object ret = null;
+    if (m_current.hasNext()) {
+      ret = m_current.next();
+    } else if (m_isxtra) { // no need to call twice
+      return null;
+    } else {
+      m_current = m_xtra;
+      m_isxtra = true;
 
-	public Iterator availableTailOp() {
-		if (m_isxtra) {
-			return m_current;
-		} else {
-			return this;
-		}
-	}
+      if (m_current.hasNext()) {
+        ret = m_current.next();
+      }
+    }
+    // experimental tail optimisation
+    if (m_current instanceof ITailOp) {
+      m_current = ((ITailOp) m_current).availableTailOp();
+    }
 
-	// -------------------------------------------------------------
+    return ret;
+  }
 
-	public void remove() {
-		m_current.remove();
-	}
+  public Iterator availableTailOp() {
+    if (m_isxtra) {
+      return m_current;
+    } else {
+      return this;
+    }
+  }
+
+  // -------------------------------------------------------------
+
+  public void remove() {
+    m_current.remove();
+  }
 }

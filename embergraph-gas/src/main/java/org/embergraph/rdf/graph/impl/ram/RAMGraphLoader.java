@@ -15,57 +15,52 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.impl.ram;
 
+import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
+import org.embergraph.rdf.graph.util.GraphLoader;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFHandlerException;
 
-import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import org.embergraph.rdf.graph.util.GraphLoader;
-
 /**
- * TODO Blank nodes have global scope. We should have a bnode resolution scope
- * to the source document to be consistent with RDF semantics. This could be
- * imposed through the {@link RAMStatementHandler}.
- * 
- * TODO It is not possible to parallelize the load since the mutation operations
- * on the {@link RAMGraph} assume a single writer (there is no built in
- * synchronization). This makes load performance quite slow.
- * 
+ * TODO Blank nodes have global scope. We should have a bnode resolution scope to the source
+ * document to be consistent with RDF semantics. This could be imposed through the {@link
+ * RAMStatementHandler}.
+ *
+ * <p>TODO It is not possible to parallelize the load since the mutation operations on the {@link
+ * RAMGraph} assume a single writer (there is no built in synchronization). This makes load
+ * performance quite slow.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class RAMGraphLoader extends GraphLoader {
 
-    private final RAMGraph g;
+  private final RAMGraph g;
 
-    public RAMGraphLoader(final RAMGraph g) {
-        if (g == null)
-            throw new IllegalArgumentException();
-        this.g = g;
-    }
+  public RAMGraphLoader(final RAMGraph g) {
+    if (g == null) throw new IllegalArgumentException();
+    this.g = g;
+  }
 
-    @Override
-    protected AddStatementHandler newStatementHandler() {
-        return new RAMStatementHandler();
-    }
+  @Override
+  protected AddStatementHandler newStatementHandler() {
+    return new RAMStatementHandler();
+  }
 
-    private class RAMStatementHandler extends AddStatementHandler {
-
-        @Override
-        protected void addStatement(final Statement stmt, final Resource[] c)
-                throws RDFHandlerException {
-
-            g.add(stmt);
-
-            ntriples++;
-
-        }
-
-    }
+  private class RAMStatementHandler extends AddStatementHandler {
 
     @Override
-    protected ValueFactory getValueFactory() {
-        return g.getValueFactory();
+    protected void addStatement(final Statement stmt, final Resource[] c)
+        throws RDFHandlerException {
+
+      g.add(stmt);
+
+      ntriples++;
     }
-    
+  }
+
+  @Override
+  protected ValueFactory getValueFactory() {
+    return g.getValueFactory();
+  }
 }

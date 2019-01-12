@@ -22,8 +22,7 @@ package org.embergraph.bop.engine;
 
 public class NativeHeapStandloneChunkHandler extends StandaloneChunkHandler {
 
-    public NativeHeapStandloneChunkHandler() {
-        super(true/*nativeHeap*/);
-    }
-    
+  public NativeHeapStandloneChunkHandler() {
+    super(true /*nativeHeap*/);
+  }
 }

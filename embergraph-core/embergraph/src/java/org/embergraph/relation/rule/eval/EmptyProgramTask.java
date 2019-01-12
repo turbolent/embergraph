@@ -4,61 +4,49 @@ import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.striterator.EmptyChunkedIterator;
 
-
 /**
  * Provides execution for an "empty" program.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyProgramTask implements IProgramTask {
 
-    final ActionEnum action;
+  final ActionEnum action;
 
-    final IStep program;
+  final IStep program;
 
-    /**
-     * 
-     * @param action
-     * @param step
-     * 
-     * @throws IllegalArgumentException
-     *             if any argument is <code>null</code>.
-     * @throws IllegalArgumentException
-     *             unless the <i>step</i> is an empty {@link IProgram}.
-     */
-    public EmptyProgramTask(ActionEnum action, IStep step) {
+  /**
+   * @param action
+   * @param step
+   * @throws IllegalArgumentException if any argument is <code>null</code>.
+   * @throws IllegalArgumentException unless the <i>step</i> is an empty {@link IProgram}.
+   */
+  public EmptyProgramTask(ActionEnum action, IStep step) {
 
-        if (action == null)
-            throw new IllegalArgumentException();
+    if (action == null) throw new IllegalArgumentException();
 
-        if (step == null)
-            throw new IllegalArgumentException();
+    if (step == null) throw new IllegalArgumentException();
 
-        if (step.isRule() || ((IProgram)step).stepCount() != 0) {
+    if (step.isRule() || ((IProgram) step).stepCount() != 0) {
 
-            throw new IllegalArgumentException();
-
-        }
-
-        this.action = action;
-
-        this.program = step;
-
+      throw new IllegalArgumentException();
     }
 
-    public Object call() {
+    this.action = action;
 
-        if (action.isMutation()) {
+    this.program = step;
+  }
 
-            return Long.valueOf(0L);
+  public Object call() {
 
-        } else {
+    if (action.isMutation()) {
 
-            return new EmptyChunkedIterator<ISolution>(null/* keyOrder */);
+      return Long.valueOf(0L);
 
-        }
+    } else {
 
+      return new EmptyChunkedIterator<ISolution>(null /* keyOrder */);
     }
-
+  }
 }

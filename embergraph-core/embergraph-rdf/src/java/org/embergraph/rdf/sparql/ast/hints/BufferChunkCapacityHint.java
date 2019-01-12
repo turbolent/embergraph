@@ -25,18 +25,15 @@ import org.embergraph.bop.BufferAnnotations;
 import org.embergraph.bop.IBindingSet;
 
 /**
- * Sets the capacity of the {@link IBindingSet}[]s used to accumulate a chunk of
- * {@link IBindingSet}s (default
- * {@value BufferAnnotations#DEFAULT_CHUNK_CAPACITY}). Partial chunks may be
+ * Sets the capacity of the {@link IBindingSet}[]s used to accumulate a chunk of {@link
+ * IBindingSet}s (default {@value BufferAnnotations#DEFAULT_CHUNK_CAPACITY}). Partial chunks may be
  * automatically combined into full chunks.
- * 
+ *
  * @see BufferAnnotations#CHUNK_CAPACITY
  */
 final class BufferChunkCapacityHint extends AbstractChunkSizeHint {
 
-    protected BufferChunkCapacityHint() {
-        super(BufferAnnotations.CHUNK_CAPACITY,
-                BufferAnnotations.DEFAULT_CHUNK_CAPACITY);
-    }
-
+  protected BufferChunkCapacityHint() {
+    super(BufferAnnotations.CHUNK_CAPACITY, BufferAnnotations.DEFAULT_CHUNK_CAPACITY);
+  }
 }

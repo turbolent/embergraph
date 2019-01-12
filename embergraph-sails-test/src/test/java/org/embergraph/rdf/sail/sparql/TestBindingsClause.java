@@ -25,12 +25,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.algebra.StatementPattern.Scope;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
@@ -40,6 +35,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
@@ -49,683 +45,698 @@ import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.util.InnerCause;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /**
  * Test suite for the BINDINGS clause.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z
- *          thompsonbry $
+ * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z thompsonbry $
  */
 public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
 
-    private static final Logger log = Logger
-            .getLogger(TestBindingsClause.class);
-    
-    public TestBindingsClause() {
+  private static final Logger log = Logger.getLogger(TestBindingsClause.class);
+
+  public TestBindingsClause() {}
+
+  public TestBindingsClause(String name) {
+    super(name);
+  }
+
+  /**
+   * Unit test for the SPARQL 1.1 BINDINGS clause with one binding set having one binding.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book {
+   *  (:book1)
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_bindings_001() throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book {\n"
+            + "  (:book1)\n"
+            + "}";
+
+    final IV<?, ?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
+    final IV<?, ?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
+    final IV<?, ?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        prefixDecls.put("", "http://example.org/book/");
+        expected.setPrefixDecls(prefixDecls);
+      }
+
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("title"));
+      projection.addProjectionVar(new VarNode("price"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(title)),
+              new VarNode("title"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(price)),
+              new VarNode("price"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      declaredVars.add(Var.var("book"));
+
+      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      {
+        final IBindingSet bset = new ListBindingSet();
+        bset.set(Var.var("book"), new Constant<IV>(book1));
+        bindings.add(bset);
+      }
+
+      final BindingsClause bindingsClause = new BindingsClause(declaredVars, bindings);
+
+      expected.setBindingsClause(bindingsClause);
     }
 
-    public TestBindingsClause(String name) {
-        super(name);
+    final QueryRoot actual = parse(sparql, baseURI);
+
+    assertSameAST(sparql, expected, actual);
+  }
+
+  /**
+   * Unit test for the SPARQL 1.1 BINDINGS clause with an UNDEF binding.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book {
+   *  (UNDEF)
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_bindings_002() throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book {\n"
+            + "  (UNDEF)\n"
+            + "}";
+
+    final IV<?, ?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
+    final IV<?, ?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
+    //        final IV<?,?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        prefixDecls.put("", "http://example.org/book/");
+        expected.setPrefixDecls(prefixDecls);
+      }
+
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("title"));
+      projection.addProjectionVar(new VarNode("price"));
+      expected.setProjection(projection);
+
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
+
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(title)),
+              new VarNode("title"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(price)),
+              new VarNode("price"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
+
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      declaredVars.add(Var.var("book"));
+
+      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      {
+        final IBindingSet bset = new ListBindingSet();
+        //                bset.set(Var.var("book"), new Constant<IV>(book1));
+        bindings.add(bset);
+      }
+
+      final BindingsClause bindingsClause = new BindingsClause(declaredVars, bindings);
+
+      expected.setBindingsClause(bindingsClause);
     }
 
-    /**
-     * Unit test for the SPARQL 1.1 BINDINGS clause with one binding set having
-     * one binding.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book {
-     *  (:book1)
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_bindings_001() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book {\n" +
-                "  (:book1)\n" +
-                "}"
-                ;
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
-        final IV<?,?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
-        final IV<?,?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+  /**
+   * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one of which has no bound
+   * values.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book {
+   *  (:book1)
+   *  (UNDEF)
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_bindings_003() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book {\n"
+            + "  (:book1)\n"
+            + "  (UNDEF)\n"
+            + "}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                prefixDecls.put("", "http://example.org/book/");
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final IV<?, ?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
+    final IV<?, ?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
+    final IV<?, ?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("title"));
-            projection.addProjectionVar(new VarNode("price"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        prefixDecls.put("", "http://example.org/book/");
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("title"));
+      projection.addProjectionVar(new VarNode("price"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(title)),
-                    new VarNode("title"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(price)),
-                    new VarNode("price"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(title)),
+              new VarNode("title"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
-            declaredVars.add(Var.var("book"));
-            
-            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
-            {
-                final IBindingSet bset = new ListBindingSet();
-                bset.set(Var.var("book"), new Constant<IV>(book1));
-                bindings.add(bset);
-            }
-            
-            final BindingsClause bindingsClause = new BindingsClause(
-                    declaredVars, bindings);
-            
-            expected.setBindingsClause(bindingsClause);
-            
-        }
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(price)),
+              new VarNode("price"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      declaredVars.add(Var.var("book"));
 
-        assertSameAST(sparql, expected, actual);
+      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      {
+        final IBindingSet bset = new ListBindingSet();
+        bset.set(Var.var("book"), new Constant<IV>(book1));
+        bindings.add(bset);
+      }
+      {
+        final IBindingSet bset = new ListBindingSet();
+        bindings.add(bset);
+      }
 
+      final BindingsClause bindingsClause = new BindingsClause(declaredVars, bindings);
+
+      expected.setBindingsClause(bindingsClause);
     }
 
-    /**
-     * Unit test for the SPARQL 1.1 BINDINGS clause with an UNDEF binding.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book {
-     *  (UNDEF)
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_bindings_002() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book {\n" +
-                "  (UNDEF)\n" +
-                "}"
-                ;
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
-        final IV<?,?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
-//        final IV<?,?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+  /**
+   * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one of which does not bind
+   * all variables.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book ?title {
+   *  (:book1 :title1)
+   *  (:book2   UNDEF)
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_bindings_004() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book ?title {\n"
+            + "  (:book1 :title1)\n"
+            + "  (:book2   UNDEF)\n"
+            + "}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                prefixDecls.put("", "http://example.org/book/");
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final IV<?, ?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
+    final IV<?, ?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
+    final IV<?, ?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+    final IV<?, ?> book2 = makeIV(valueFactory.createURI("http://example.org/book/book2"));
+    final IV<?, ?> title1 = makeIV(valueFactory.createURI("http://example.org/book/title1"));
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("title"));
-            projection.addProjectionVar(new VarNode("price"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        prefixDecls.put("", "http://example.org/book/");
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("title"));
+      projection.addProjectionVar(new VarNode("price"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(title)),
-                    new VarNode("title"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(price)),
-                    new VarNode("price"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(title)),
+              new VarNode("title"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
-            declaredVars.add(Var.var("book"));
-            
-            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
-            {
-                final IBindingSet bset = new ListBindingSet();
-//                bset.set(Var.var("book"), new Constant<IV>(book1));
-                bindings.add(bset);
-            }
-            
-            final BindingsClause bindingsClause = new BindingsClause(
-                    declaredVars, bindings);
-            
-            expected.setBindingsClause(bindingsClause);
-            
-        }
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(price)),
+              new VarNode("price"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        final QueryRoot actual = parse(sparql, baseURI);
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      declaredVars.add(Var.var("book"));
+      declaredVars.add(Var.var("title"));
 
-        assertSameAST(sparql, expected, actual);
+      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      {
+        final IBindingSet bset = new ListBindingSet();
+        bset.set(Var.var("book"), new Constant<IV>(book1));
+        bset.set(Var.var("title"), new Constant<IV>(title1));
+        bindings.add(bset);
+      }
+      {
+        final IBindingSet bset = new ListBindingSet();
+        bset.set(Var.var("book"), new Constant<IV>(book2));
+        //                bset.set(Var.var("title"), new Constant<IV>(title1));
+        bindings.add(bset);
+      }
 
+      final BindingsClause bindingsClause = new BindingsClause(declaredVars, bindings);
+
+      expected.setBindingsClause(bindingsClause);
     }
 
-    /**
-     * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one
-     * of which has no bound values.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book {
-     *  (:book1)
-     *  (UNDEF)
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_bindings_003() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book {\n" +
-                "  (:book1)\n" +
-                "  (UNDEF)\n" +
-                "}"
-                ;
+    assertSameAST(sparql, expected, actual);
+  }
 
-        final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
-        final IV<?,?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
-        final IV<?,?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
+  /**
+   * Unit test for the SPARQL 1.1 BINDINGS clause with NO variables and NO binding sets (the spec
+   * allows this).
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS {
+   * }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_bindings_005() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS {\n"
+            + "}";
 
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                prefixDecls.put("", "http://example.org/book/");
-                expected.setPrefixDecls(prefixDecls);
-            }
+    final IV<?, ?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
+    final IV<?, ?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("title"));
-            projection.addProjectionVar(new VarNode("price"));
-            expected.setProjection(projection);
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      {
+        final Map<String, String> prefixDecls =
+            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        prefixDecls.put("", "http://example.org/book/");
+        expected.setPrefixDecls(prefixDecls);
+      }
 
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("title"));
+      projection.addProjectionVar(new VarNode("price"));
+      expected.setProjection(projection);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(title)),
-                    new VarNode("title"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      final JoinGroupNode whereClause = new JoinGroupNode();
+      expected.setWhereClause(whereClause);
 
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(price)),
-                    new VarNode("price"), null/* c */, Scope.DEFAULT_CONTEXTS));
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(title)),
+              new VarNode("title"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-            final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
-            declaredVars.add(Var.var("book"));
-            
-            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
-            {
-                final IBindingSet bset = new ListBindingSet();
-                bset.set(Var.var("book"), new Constant<IV>(book1));
-                bindings.add(bset);
-            }
-            {
-                final IBindingSet bset = new ListBindingSet();
-                bindings.add(bset);
-            }
-            
-            final BindingsClause bindingsClause = new BindingsClause(
-                    declaredVars, bindings);
-            
-            expected.setBindingsClause(bindingsClause);
-            
-        }
+      whereClause.addChild(
+          new StatementPatternNode(
+              new VarNode("book"),
+              new ConstantNode(new Constant<IV>(price)),
+              new VarNode("price"),
+              null /* c */,
+              Scope.DEFAULT_CONTEXTS));
 
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
-    }
-
-    /**
-     * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one
-     * of which does not bind all variables.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book ?title {
-     *  (:book1 :title1)
-     *  (:book2   UNDEF)
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_bindings_004() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book ?title {\n" +
-                "  (:book1 :title1)\n" +
-                "  (:book2   UNDEF)\n" +
-                "}"
-                ;
-
-        final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
-        final IV<?,?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
-        final IV<?,?> book1 = makeIV(valueFactory.createURI("http://example.org/book/book1"));
-        final IV<?,?> book2 = makeIV(valueFactory.createURI("http://example.org/book/book2"));
-        final IV<?,?> title1 = makeIV(valueFactory.createURI("http://example.org/book/title1"));
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                prefixDecls.put("", "http://example.org/book/");
-                expected.setPrefixDecls(prefixDecls);
-            }
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("title"));
-            projection.addProjectionVar(new VarNode("price"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(title)),
-                    new VarNode("title"), null/* c */, Scope.DEFAULT_CONTEXTS));
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(price)),
-                    new VarNode("price"), null/* c */, Scope.DEFAULT_CONTEXTS));
-
-            final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
-            declaredVars.add(Var.var("book"));
-            declaredVars.add(Var.var("title"));
-            
-            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
-            {
-                final IBindingSet bset = new ListBindingSet();
-                bset.set(Var.var("book"), new Constant<IV>(book1));
-                bset.set(Var.var("title"), new Constant<IV>(title1));
-                bindings.add(bset);
-            }
-            {
-                final IBindingSet bset = new ListBindingSet();
-                bset.set(Var.var("book"), new Constant<IV>(book2));
-//                bset.set(Var.var("title"), new Constant<IV>(title1));
-                bindings.add(bset);
-            }
-            
-            final BindingsClause bindingsClause = new BindingsClause(
-                    declaredVars, bindings);
-            
-            expected.setBindingsClause(bindingsClause);
-            
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
-    }
-
-    /**
-     * Unit test for the SPARQL 1.1 BINDINGS clause with NO variables and NO
-     * binding sets (the spec allows this).
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS {
-     * }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_bindings_005() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS {\n" +
-                "}"
-                ;
-
-        final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
-        final IV<?,?> price = makeIV(valueFactory.createURI("http://example.org/book/price"));
-
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-
-            {
-                final Map<String, String> prefixDecls = new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
-                prefixDecls.put("", "http://example.org/book/");
-                expected.setPrefixDecls(prefixDecls);
-            }
-
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("title"));
-            projection.addProjectionVar(new VarNode("price"));
-            expected.setProjection(projection);
-
-            final JoinGroupNode whereClause = new JoinGroupNode();
-            expected.setWhereClause(whereClause);
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(title)),
-                    new VarNode("title"), null/* c */, Scope.DEFAULT_CONTEXTS));
-
-            whereClause.addChild(new StatementPatternNode(new VarNode("book"),
-                    new ConstantNode(new Constant<IV>(price)),
-                    new VarNode("price"), null/* c */, Scope.DEFAULT_CONTEXTS));
-
-            /*
-             * Note: The BINDINGS clause is omitted from the AST by the visitor
-             * when there are no binding sets.
-             */
-//            final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
-//            
-//            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
-//            
-//            final BindingsClause bindingsClause = new BindingsClause(
-//                    declaredVars, bindings);
-//            
-//            expected.setBindingsClause(bindingsClause);
-            
-        }
-
-        final QueryRoot actual = parse(sparql, baseURI);
-
-        assertSameAST(sparql, expected, actual);
-
-    }
-
-    /**
-     * Correct rejection test for the SPARQL 1.1 BINDINGS clause with no
-     * variables and a non-empty binding set.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS {
-     *  (:book1)
-     * }
-     * </pre>
-     */
-    public void test_bindings_006() throws MalformedQueryException,
-            TokenMgrError, ParseException {
-
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS {\n" +
-                "  (:book1)\n" +
-                "}"
-                ;
-
-        try {
-            parse(sparql, baseURI);
-            fail("Expecting: " + VisitorException.class);
-        } catch (Throwable t) {
-            if (InnerCause.isInnerCause(t, VisitorException.class)) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + t, t);
-                return;
-            }
-            fail("Expecting: " + VisitorException.class);
-        }
+      /*
+       * Note: The BINDINGS clause is omitted from the AST by the visitor
+       * when there are no binding sets.
+       */
+      //            final LinkedHashSet<IVariable<?>> declaredVars = new
+      // LinkedHashSet<IVariable<?>>();
+      //
+      //            final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      //
+      //            final BindingsClause bindingsClause = new BindingsClause(
+      //                    declaredVars, bindings);
+      //
+      //            expected.setBindingsClause(bindingsClause);
 
     }
 
-    /**
-     * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate
-     * variables and a non-empty set of binding sets.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book ?book {
-     *  (:book1 :book2)
-     * }
-     * </pre>
-     */
-    public void test_bindings_007() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+    final QueryRoot actual = parse(sparql, baseURI);
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book ?book {\n" +
-                "  (:book1 :book2)\n" +
-                "}"
-                ;
+    assertSameAST(sparql, expected, actual);
+  }
 
-        try {
-            parse(sparql, baseURI);
-            fail("Expecting: " + VisitorException.class);
-        } catch (Throwable t) {
-            if (InnerCause.isInnerCause(t, VisitorException.class)) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + t, t);
-                return;
-            }
-            fail("Expecting: " + VisitorException.class);
-        }
+  /**
+   * Correct rejection test for the SPARQL 1.1 BINDINGS clause with no variables and a non-empty
+   * binding set.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS {
+   *  (:book1)
+   * }
+   * </pre>
+   */
+  public void test_bindings_006() throws MalformedQueryException, TokenMgrError, ParseException {
 
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS {\n"
+            + "  (:book1)\n"
+            + "}";
+
+    try {
+      parse(sparql, baseURI);
+      fail("Expecting: " + VisitorException.class);
+    } catch (Throwable t) {
+      if (InnerCause.isInnerCause(t, VisitorException.class)) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t, t);
+        return;
+      }
+      fail("Expecting: " + VisitorException.class);
     }
+  }
 
-    /**
-     * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate
-     * variables and an empty set of binding sets.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book ?book {
-     * }
-     * </pre>
-     */
-    public void test_bindings_008() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+  /**
+   * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate variables and a
+   * non-empty set of binding sets.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book ?book {
+   *  (:book1 :book2)
+   * }
+   * </pre>
+   */
+  public void test_bindings_007() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book ?book {\n" +
-                "}"
-                ;
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book ?book {\n"
+            + "  (:book1 :book2)\n"
+            + "}";
 
-        try {
-            parse(sparql, baseURI);
-            fail("Expecting: " + VisitorException.class);
-        } catch (Throwable t) {
-            if (InnerCause.isInnerCause(t, VisitorException.class)) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + t, t);
-                return;
-            }
-            fail("Expecting: " + VisitorException.class);
-        }
-
+    try {
+      parse(sparql, baseURI);
+      fail("Expecting: " + VisitorException.class);
+    } catch (Throwable t) {
+      if (InnerCause.isInnerCause(t, VisitorException.class)) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t, t);
+        return;
+      }
+      fail("Expecting: " + VisitorException.class);
     }
+  }
 
-    /**
-     * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too many
-     * bindings in one binding set.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book {
-     *   (:book1)
-     *   (:book1 :book2)
-     * }
-     * </pre>
-     */
-    public void test_bindings_009() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+  /**
+   * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate variables and an empty
+   * set of binding sets.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book ?book {
+   * }
+   * </pre>
+   */
+  public void test_bindings_008() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book {\n" +
-                " (:book1) \n"+
-                " (:book1 :book2) \n"+
-                "}"
-                ;
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book ?book {\n"
+            + "}";
 
-        try {
-            parse(sparql, baseURI);
-            fail("Expecting: " + VisitorException.class);
-        } catch (Throwable t) {
-            if (InnerCause.isInnerCause(t, VisitorException.class)) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + t, t);
-                return;
-            }
-            fail("Expecting: " + VisitorException.class);
-        }
-
+    try {
+      parse(sparql, baseURI);
+      fail("Expecting: " + VisitorException.class);
+    } catch (Throwable t) {
+      if (InnerCause.isInnerCause(t, VisitorException.class)) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t, t);
+        return;
+      }
+      fail("Expecting: " + VisitorException.class);
     }
+  }
 
-    /**
-     * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too few
-     * bindings in one binding set.
-     * 
-     * <pre>
-     * PREFIX :     <http://example.org/book/> 
-     * SELECT ?title ?price
-     * {
-     *    ?book :title ?title ;
-     *          :price ?price .
-     * }
-     * BINDINGS ?book ?title {
-     *   (:book1 :title1)
-     *   (:book1)
-     * }
-     * </pre>
-     */
-    public void test_bindings_010() throws MalformedQueryException,
-            TokenMgrError, ParseException {
+  /**
+   * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too many bindings in one binding
+   * set.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book {
+   *   (:book1)
+   *   (:book1 :book2)
+   * }
+   * </pre>
+   */
+  public void test_bindings_009() throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql = "" +
-                "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" +
-                "{\n" +
-                "    ?book :title ?title ; \n" +
-                "          :price ?price . \n" +
-                "}\n" +
-                "BINDINGS ?book ?title {\n" +
-                " (:book1 :title1) \n"+
-                " (:book1) \n"+
-                "}"
-                ;
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book {\n"
+            + " (:book1) \n"
+            + " (:book1 :book2) \n"
+            + "}";
 
-        try {
-            parse(sparql, baseURI);
-            fail("Expecting: " + VisitorException.class);
-        } catch (Throwable t) {
-            if (InnerCause.isInnerCause(t, VisitorException.class)) {
-                if (log.isInfoEnabled())
-                    log.info("Ignoring expected exception: " + t, t);
-                return;
-            }
-            fail("Expecting: " + VisitorException.class);
-        }
-
+    try {
+      parse(sparql, baseURI);
+      fail("Expecting: " + VisitorException.class);
+    } catch (Throwable t) {
+      if (InnerCause.isInnerCause(t, VisitorException.class)) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t, t);
+        return;
+      }
+      fail("Expecting: " + VisitorException.class);
     }
+  }
 
+  /**
+   * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too few bindings in one binding
+   * set.
+   *
+   * <pre>
+   * PREFIX :     <http://example.org/book/>
+   * SELECT ?title ?price
+   * {
+   *    ?book :title ?title ;
+   *          :price ?price .
+   * }
+   * BINDINGS ?book ?title {
+   *   (:book1 :title1)
+   *   (:book1)
+   * }
+   * </pre>
+   */
+  public void test_bindings_010() throws MalformedQueryException, TokenMgrError, ParseException {
+
+    final String sparql =
+        ""
+            + "PREFIX :     <http://example.org/book/>\n"
+            + //
+            "SELECT ?title ?price\n"
+            + "{\n"
+            + "    ?book :title ?title ; \n"
+            + "          :price ?price . \n"
+            + "}\n"
+            + "BINDINGS ?book ?title {\n"
+            + " (:book1 :title1) \n"
+            + " (:book1) \n"
+            + "}";
+
+    try {
+      parse(sparql, baseURI);
+      fail("Expecting: " + VisitorException.class);
+    } catch (Throwable t) {
+      if (InnerCause.isInnerCause(t, VisitorException.class)) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t, t);
+        return;
+      }
+      fail("Expecting: " + VisitorException.class);
+    }
+  }
 }

@@ -3,123 +3,100 @@ package org.embergraph.resources;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.journal.IResourceManager;
 import org.embergraph.resources.ResourceManager.Options;
 
 /**
- * The default implementation accepts directories under the configured
- * {@link IResourceManager#getDataDir()} and files with either
- * {@link org.embergraph.journal.Options#JNL} or
- * {@link org.embergraph.journal.Options#SEG} file extensions.
- * <p> *
- * <P>
- * If you define additional files that are stored within the
- * {@link ResourceManager#getDataDir()} then you SHOULD subclass
- * {@link ResourceFileFilter} to recognize those files and override
- * {@link ResourceManager#newFileFilter()} method to return your
- * {@link ResourceFileFilter} subclass.
- * 
+ * The default implementation accepts directories under the configured {@link
+ * IResourceManager#getDataDir()} and files with either {@link org.embergraph.journal.Options#JNL}
+ * or {@link org.embergraph.journal.Options#SEG} file extensions.
+ *
+ * <p>*
+ *
+ * <p>If you define additional files that are stored within the {@link ResourceManager#getDataDir()}
+ * then you SHOULD subclass {@link ResourceFileFilter} to recognize those files and override {@link
+ * ResourceManager#newFileFilter()} method to return your {@link ResourceFileFilter} subclass.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ResourceFileFilter implements FileFilter {
 
-    /**
-     * 
-     */
-    private final StoreManager resourceManager;
+  /** */
+  private final StoreManager resourceManager;
 
-    protected static final Logger log = Logger.getLogger(ResourceFileFilter.class);
-    
-    /**
-     * @param resourceManager
-     */
-    public ResourceFileFilter(StoreManager resourceManager) {
+  protected static final Logger log = Logger.getLogger(ResourceFileFilter.class);
 
-        if (resourceManager == null)
-            throw new IllegalArgumentException();
-        
-        this.resourceManager = resourceManager;
-        
+  /** @param resourceManager */
+  public ResourceFileFilter(StoreManager resourceManager) {
+
+    if (resourceManager == null) throw new IllegalArgumentException();
+
+    this.resourceManager = resourceManager;
+  }
+
+  /**
+   * Override this method to extend the filter.
+   *
+   * @param f A file passed to {@link #accept(File)}
+   * @return <code>true</code> iff the file should be accepted by the filter.
+   */
+  protected boolean accept2(File f) {
+
+    return false;
+  }
+
+  public final boolean accept(File f) {
+
+    if (f.isDirectory()) {
+
+      //                // Either f iff it is a directory or the directory containing f.
+      //                final File dir = f.isDirectory() ? f : f.getParentFile();
+
+      final File dir = f;
+
+      // get the canonical form of the directory.
+      final String fc;
+      try {
+
+        fc = dir.getCanonicalPath();
+
+      } catch (IOException ex) {
+
+        throw new RuntimeException(ex);
+      }
+
+      if (!fc.startsWith(resourceManager.getDataDir().getPath())) {
+
+        throw new RuntimeException(
+            "File not in data directory: file=" + f + ", dataDir=" + resourceManager.dataDir);
+      }
+
+      // directory inside of the data directory.
+      return true;
     }
 
-    /**
-     * Override this method to extend the filter.
-     * 
-     * @param f
-     *            A file passed to {@link #accept(File)}
-     *            
-     * @return <code>true</code> iff the file should be accepted by the
-     *         filter.
-     */
-    protected boolean accept2(File f) {
+    if (f.getName().endsWith(Options.JNL)) {
 
-        return false;
-
+      // journal file.
+      return true;
     }
 
-    final public boolean accept(File f) {
-        
-        if (f.isDirectory()) {
+    if (f.getName().endsWith(Options.SEG)) {
 
-            //                // Either f iff it is a directory or the directory containing f.
-            //                final File dir = f.isDirectory() ? f : f.getParentFile();
-
-            final File dir = f;
-
-            // get the canonical form of the directory.
-            final String fc;
-            try {
-
-                fc = dir.getCanonicalPath();
-
-            } catch (IOException ex) {
-
-                throw new RuntimeException(ex);
-
-            }
-
-            if (!fc.startsWith(resourceManager.getDataDir().getPath())) {
-
-                throw new RuntimeException("File not in data directory: file="
-                        + f + ", dataDir=" + resourceManager.dataDir);
-
-            }
-
-            // directory inside of the data directory.
-            return true;
-
-        }
-
-        if (f.getName().endsWith(Options.JNL)) {
-
-            // journal file.
-            return true;
-
-        }
-
-        if (f.getName().endsWith(Options.SEG)) {
-
-            // index segment file.
-            return true;
-
-        }
-
-        if (accept2(f)) {
-
-            // accepted by subclass.
-            return true;
-
-        }
-
-        if (log.isInfoEnabled())
-            log.info("Unknown file: " + f);
-
-        return false;
-
+      // index segment file.
+      return true;
     }
 
+    if (accept2(f)) {
+
+      // accepted by subclass.
+      return true;
+    }
+
+    if (log.isInfoEnabled()) log.info("Unknown file: " + f);
+
+    return false;
+  }
 }

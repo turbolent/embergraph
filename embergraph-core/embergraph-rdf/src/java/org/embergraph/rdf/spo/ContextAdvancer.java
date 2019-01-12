@@ -32,67 +32,61 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /**
- * Advancer for a quads index whose last key component is the "context position
- * (such as SPOC or SOPC). The advancer will skip to first possible key for the
- * next distinct triple for each quad which it visits. This is a cheap way to
- * impose a "DISTINCT" filter using an index scan and works well for both local
- * and scale-out indices.
- * <p>
- * You have to use {@link IRangeQuery#CURSOR} to request an {@link ITupleCursor}
- * when using an {@link Advancer} pattern.
- * 
+ * Advancer for a quads index whose last key component is the "context position (such as SPOC or
+ * SOPC). The advancer will skip to first possible key for the next distinct triple for each quad
+ * which it visits. This is a cheap way to impose a "DISTINCT" filter using an index scan and works
+ * well for both local and scale-out indices.
+ *
+ * <p>You have to use {@link IRangeQuery#CURSOR} to request an {@link ITupleCursor} when using an
+ * {@link Advancer} pattern.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ContextAdvancer extends Advancer<SPO> {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private transient IKeyBuilder keyBuilder;
+  private transient IKeyBuilder keyBuilder;
 
-    public ContextAdvancer() {
-        
+  public ContextAdvancer() {}
+
+  @Override
+  protected void advance(final ITuple<SPO> tuple) {
+
+    if (keyBuilder == null) {
+
+      /*
+       * Note: It appears that you can not set this either implicitly or
+       * explicitly during ctor initialization if you want it to exist
+       * during de-serialization. Hence it is initialized lazily here.
+       * This is Ok since the iterator pattern is single threaded.
+       */
+
+      keyBuilder = KeyBuilder.newInstance();
     }
 
-    @Override
-    protected void advance(final ITuple<SPO> tuple) {
+    // extract the key.
+    final byte[] key = tuple.getKey();
 
-        if (keyBuilder == null) {
+    // decode the first three components of the key.
+    final IV[] terms = IVUtility.decode(key, 3 /*nterms*/);
 
-            /*
-             * Note: It appears that you can not set this either implicitly or
-             * explicitly during ctor initialization if you want it to exist
-             * during de-serialization. Hence it is initialized lazily here.
-             * This is Ok since the iterator pattern is single threaded.
-             */
+    // reset the buffer.
+    keyBuilder.reset();
 
-            keyBuilder = KeyBuilder.newInstance();
+    // encode the first three components of the key.
+    IVUtility.encode(keyBuilder, terms[0]);
+    IVUtility.encode(keyBuilder, terms[1]);
+    IVUtility.encode(keyBuilder, terms[2]);
 
-        }
+    // obtain the key.
+    final byte[] fromKey = keyBuilder.getKey();
 
-        // extract the key.
-        final byte[] key = tuple.getKey();
-        
-        // decode the first three components of the key.
-        final IV[] terms = IVUtility.decode(key, 3/*nterms*/);
-        
-        // reset the buffer.
-        keyBuilder.reset();
+    // obtain the successor of the key.
+    final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
 
-        // encode the first three components of the key.
-        IVUtility.encode(keyBuilder,terms[0]);
-        IVUtility.encode(keyBuilder,terms[1]);
-        IVUtility.encode(keyBuilder,terms[2]);
-        
-        // obtain the key.
-        final byte[] fromKey = keyBuilder.getKey();
-        
-        // obtain the successor of the key.
-        final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
-
-        // seek to that successor.
-        src.seek(toKey);
-        
-    }
-
+    // seek to that successor.
+    src.seek(toKey);
+  }
 }

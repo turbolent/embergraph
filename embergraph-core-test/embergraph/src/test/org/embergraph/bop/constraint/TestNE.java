@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
@@ -32,59 +31,62 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 
 /**
  * Unit tests for {@link NE}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNE extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestNE() {
+  /** */
+  public TestNE() {}
+
+  /** @param name */
+  public TestNE(String name) {
+    super(name);
+  }
+
+  /** Unit test for {@link NE#NE(IVariable,IVariable)} */
+  public void testConstructor() {
+    try {
+      assertTrue(null != new NE(null, Var.var("y")));
+      fail("IllegalArgumentException expected, lhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * @param name
-     */
-    public TestNE(String name) {
-        super(name);
+    try {
+      assertTrue(null != new NE(Var.var("x"), null));
+      fail("IllegalArgumentException expected, rhs was null");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link NE#NE(IVariable,IVariable)}
-     */
-    public void testConstructor ()
-    {
-        try { assertTrue ( null != new NE ( null, Var.var ( "y" ) ) ) ; fail ( "IllegalArgumentException expected, lhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != new NE ( Var.var ( "x" ), null ) ) ; fail ( "IllegalArgumentException expected, rhs was null" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        try { assertTrue ( null != new NE ( Var.var ( "x" ), Var.var ( "x" ) ) ) ; fail ( "IllegalArgumentException expected, lhs identical to rhs" ) ; }
-        catch ( IllegalArgumentException e ) {}
-
-        assertTrue ( null != new NE ( Var.var ( "x" ), Var.var ( "y" ) ) ) ;
+    try {
+      assertTrue(null != new NE(Var.var("x"), Var.var("x")));
+      fail("IllegalArgumentException expected, lhs identical to rhs");
+    } catch (IllegalArgumentException e) {
     }
 
-    /**
-     * Unit test for {@link NE#get(IBindingSet)}
-     */
-    public void testGet ()
-    {
-        final Var<?> x = Var.var ( "x" ) ;
-        final Var<?> y = Var.var ( "y" ) ;
-        final Var<?> vars [] = new Var<?> [] { x, y } ;
+    assertTrue(null != new NE(Var.var("x"), Var.var("y")));
+  }
 
-        final NE op = new NE ( x, y ) ;
+  /** Unit test for {@link NE#get(IBindingSet)} */
+  public void testGet() {
+    final Var<?> x = Var.var("x");
+    final Var<?> y = Var.var("y");
+    final Var<?> vars[] = new Var<?>[] {x, y};
 
-        final IBindingSet eq = new ListBindingSet ( vars, new IConstant [] { new Constant<String> ( "1" ), new Constant<String> ( "1" ) } ) ;
-        final IBindingSet ne = new ListBindingSet ( vars, new IConstant [] { new Constant<String> ( "1" ), new Constant<String> ( "2" ) } ) ;
-        final IBindingSet nb = new ListBindingSet ( new IVariable<?> [] { x }, new IConstant [] { new Constant<String> ( "1" ) } ) ;
+    final NE op = new NE(x, y);
 
-        assertTrue ( op.get ( ne ) ) ;
-        assertFalse ( op.get ( eq ) ) ;
-        assertTrue ( op.get ( nb ) ) ;
-    }
+    final IBindingSet eq =
+        new ListBindingSet(
+            vars, new IConstant[] {new Constant<String>("1"), new Constant<String>("1")});
+    final IBindingSet ne =
+        new ListBindingSet(
+            vars, new IConstant[] {new Constant<String>("1"), new Constant<String>("2")});
+    final IBindingSet nb =
+        new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {new Constant<String>("1")});
+
+    assertTrue(op.get(ne));
+    assertFalse(op.get(eq));
+    assertTrue(op.get(nb));
+  }
 }

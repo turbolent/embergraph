@@ -26,37 +26,32 @@ import java.io.OutputStream;
 
 /**
  * An {@link OutputStream} which discards anything written on it.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NullOutputStream extends OutputStream {
 
-    private boolean open = true;
+  private boolean open = true;
 
-    public NullOutputStream() {
-    }
+  public NullOutputStream() {}
 
-    @Override
-    final public void write(int b) throws IOException {
-        if (!open)
-            throw new IOException();
-    }
+  @Override
+  public final void write(int b) throws IOException {
+    if (!open) throw new IOException();
+  }
 
-    @Override
-    final public void write(byte[] b) throws IOException {
-        if (!open)
-            throw new IOException();
-    }
+  @Override
+  public final void write(byte[] b) throws IOException {
+    if (!open) throw new IOException();
+  }
 
-    @Override
-    final public void write(byte[] b, int len, int off) throws IOException {
-        if (!open)
-            throw new IOException();
-    }
+  @Override
+  public final void write(byte[] b, int len, int off) throws IOException {
+    if (!open) throw new IOException();
+  }
 
-    final public void close() {
-        open = false;
-    }
-
+  public final void close() {
+    open = false;
+  }
 }

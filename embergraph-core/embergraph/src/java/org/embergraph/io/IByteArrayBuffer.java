@@ -25,61 +25,48 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.io;
 
+import it.unimi.dsi.fastutil.io.RepositionableStream;
 import java.nio.ByteBuffer;
 
-import it.unimi.dsi.fastutil.io.RepositionableStream;
-
 /**
- * An interface for reading from and accessing a managed byte[] with access
- * methods similar to those of {@link ByteBuffer}.
- * 
+ * An interface for reading from and accessing a managed byte[] with access methods similar to those
+ * of {@link ByteBuffer}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @todo raise mark(), etc. into this interface?
  */
 public interface IByteArrayBuffer extends IDataRecord, IManagedByteArray {
 
-    /**
-     * The backing byte[] WILL be transparently replaced if the buffer capacity
-     * is extended. {@inheritDoc}
-     */
-    byte[] array();
+  /**
+   * The backing byte[] WILL be transparently replaced if the buffer capacity is extended.
+   * {@inheritDoc}
+   */
+  byte[] array();
 
-    /**
-     * The offset of the slice into the backing byte[] is always zero.
-     * {@inheritDoc}
-     */
-    int off();
+  /** The offset of the slice into the backing byte[] is always zero. {@inheritDoc} */
+  int off();
 
-    /**
-     * The length of the slice is always the capacity of the backing byte[].
-     * {@inheritDoc}
-     */
-    int len();
-    
-    /**
-     * The capacity of the buffer.
-     */
-    int capacity();
+  /** The length of the slice is always the capacity of the backing byte[]. {@inheritDoc} */
+  int len();
 
-    /**
-     * The current position in the buffer.
-     * <p>
-     * Note: The method name was choose to avoid a collision with
-     * {@link RepositionableStream#position()}.
-     */
-    int pos();
+  /** The capacity of the buffer. */
+  int capacity();
 
-    /**
-     * The read limit (there is no write limit on the buffer since the capacity
-     * will be automatically extended on overflow).
-     */
-    int limit();
+  /**
+   * The current position in the buffer.
+   *
+   * <p>Note: The method name was choose to avoid a collision with {@link
+   * RepositionableStream#position()}.
+   */
+  int pos();
 
-    /**
-     * The #of bytes remaining in the buffer before it would overflow.
-     */
-    int remaining();
+  /**
+   * The read limit (there is no write limit on the buffer since the capacity will be automatically
+   * extended on overflow).
+   */
+  int limit();
 
+  /** The #of bytes remaining in the buffer before it would overflow. */
+  int remaining();
 }

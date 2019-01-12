@@ -16,53 +16,45 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph.impl.scheduler;
 
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.openrdf.model.Value;
-
 import org.embergraph.rdf.graph.IGASSchedulerImpl;
 import org.embergraph.rdf.graph.IStaticFrontier;
 import org.embergraph.rdf.graph.impl.GASEngine;
+import org.openrdf.model.Value;
 
 /**
  * A simple scheduler based on a {@link ConcurrentHashMap}.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CHMScheduler implements IGASSchedulerImpl {
 
-    private final ConcurrentHashMap<Value,Value> vertices;
+  private final ConcurrentHashMap<Value, Value> vertices;
 
-    private final boolean sortFrontier;
-    
-    public CHMScheduler(final GASEngine gasEngine) {
+  private final boolean sortFrontier;
 
-        vertices = new ConcurrentHashMap<Value, Value>(gasEngine.getNThreads());
+  public CHMScheduler(final GASEngine gasEngine) {
 
-        sortFrontier = gasEngine.getSortFrontier();
-        
-    }
+    vertices = new ConcurrentHashMap<Value, Value>(gasEngine.getNThreads());
 
-    @Override
-    public void schedule(final Value v) {
+    sortFrontier = gasEngine.getSortFrontier();
+  }
 
-        vertices.putIfAbsent(v,v);
+  @Override
+  public void schedule(final Value v) {
 
-    }
+    vertices.putIfAbsent(v, v);
+  }
 
-    @Override
-    public void clear() {
-        
-        vertices.clear();
-        
-    }
+  @Override
+  public void clear() {
 
-    @Override
-    public void compactFrontier(final IStaticFrontier frontier) {
+    vertices.clear();
+  }
 
-        frontier.resetFrontier(vertices.size()/* minCapacity */, sortFrontier,
-                vertices.keySet().iterator());
+  @Override
+  public void compactFrontier(final IStaticFrontier frontier) {
 
-    }
-
+    frontier.resetFrontier(
+        vertices.size() /* minCapacity */, sortFrontier, vertices.keySet().iterator());
+  }
 } // CHMScheduler

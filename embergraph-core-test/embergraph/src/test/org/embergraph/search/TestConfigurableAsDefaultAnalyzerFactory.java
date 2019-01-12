@@ -22,23 +22,24 @@ package org.embergraph.search;
 
 public class TestConfigurableAsDefaultAnalyzerFactory extends AbstractDefaultAnalyzerFactoryTest {
 
-	public TestConfigurableAsDefaultAnalyzerFactory() {
-	}
+  public TestConfigurableAsDefaultAnalyzerFactory() {}
 
-	public TestConfigurableAsDefaultAnalyzerFactory(String arg0) {
-		super(arg0);
-	}
+  public TestConfigurableAsDefaultAnalyzerFactory(String arg0) {
+    super(arg0);
+  }
 
-	@Override
-	String[] getExtraProperties() {
-		return new String[]{FullTextIndex.Options.ANALYZER_FACTORY_CLASS, ConfigurableAnalyzerFactory.class.getName(),
-				ConfigurableAnalyzerFactory.Options.NATURAL_LANGUAGE_SUPPORT, "true"
-		};
-	}
+  @Override
+  String[] getExtraProperties() {
+    return new String[] {
+      FullTextIndex.Options.ANALYZER_FACTORY_CLASS,
+      ConfigurableAnalyzerFactory.class.getName(),
+      ConfigurableAnalyzerFactory.Options.NATURAL_LANGUAGE_SUPPORT,
+      "true"
+    };
+  }
 
-	@Override
-	boolean isBroken() {
-		return false;
-	}
-
+  @Override
+  boolean isBroken() {
+    return false;
+  }
 }

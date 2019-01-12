@@ -25,21 +25,21 @@ import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Basic double query hint.
- */
+/** Basic double query hint. */
 public class BasicDoubleQueryHint extends AbstractDoubleQueryHint {
 
-    public BasicDoubleQueryHint(final String name, final Double defaultValue) {
-        super(name, defaultValue);
-    }
+  public BasicDoubleQueryHint(final String name, final Double defaultValue) {
+    super(name, defaultValue);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Double value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Double value) {
 
-        _setQueryHint(context, scope, op, getName(), value);
-
-    }
-
+    _setQueryHint(context, scope, op, getName(), value);
+  }
 }

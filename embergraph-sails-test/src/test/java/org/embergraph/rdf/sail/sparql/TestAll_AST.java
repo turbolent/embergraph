@@ -27,90 +27,82 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll_AST extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll_AST() {
+    super();
+  }
+
+  /** @param arg0 */
+  public TestAll_AST(String arg0) {
+    super(arg0);
+  }
+
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("SPARQL to AST translation");
+
+    // Test suite for building up value expressions.
+    suite.addTestSuite(TestValueExprBuilder.class);
+
+    /*
+     * Test suite for building up triple patterns, including those which are
+     * covered by the property paths extension in SPARQL 1.1 (a triple
+     * pattern which a constant in the predicate position is treated by the
+     * Sesame SPARQL grammar as a degenerate case of a property path.)
      */
-    public TestAll_AST() {
-        super();
-    }
+    suite.addTestSuite(TestTriplePatternBuilder.class);
 
     /**
-     * @param arg0
+     * Test suite for the proposed standardization of "reification done right".
+     *
+     * @see <a href="http://trac.bigdata.com/ticket/526">Reification done right </a>
+     * @see <a href="http://trac.bigdata.com/ticket/1138" > Why is RDR parser test suite disabled?
+     *     </a>
      */
-    public TestAll_AST(String arg0) {
-        super(arg0);
-    }
+    suite.addTestSuite(TestReificationDoneRightParser.class);
 
-    public static Test suite() {
+    /*
+     * Test suite for group graph patterns (join groups, unions, optional,
+     * etc.) and filters in those graph patterns. Subquery is tested in a
+     * separate test suite.
+     */
+    suite.addTestSuite(TestGroupGraphPatternBuilder.class);
 
-        final TestSuite suite = new TestSuite("SPARQL to AST translation");
+    /*
+     * Test suite for various kinds of subquery patterns.
+     */
+    suite.addTestSuite(TestSubqueryPatterns.class);
 
-        // Test suite for building up value expressions.
-        suite.addTestSuite(TestValueExprBuilder.class);
+    // Test suite for the BINDINGs clause.
+    suite.addTestSuite(TestBindingsClause.class);
 
-        /*
-		 * Test suite for building up triple patterns, including those which are
-		 * covered by the property paths extension in SPARQL 1.1 (a triple
-		 * pattern which a constant in the predicate position is treated by the
-		 * Sesame SPARQL grammar as a degenerate case of a property path.)
-		 */
-		suite.addTestSuite(TestTriplePatternBuilder.class);
+    /*
+     * Test suite for basic query types (SELECT|ASK|DESCRIBE|CONSTRUCT),
+     * including DISTINCT/REDUCED, GROUP BY, HAVING, ORDER BY, and
+     * LIMIT/OFFSET.
+     */
+    suite.addTestSuite(TestEmbergraphExprBuilder.class);
 
-      /**
-       * Test suite for the proposed standardization of
-       * "reification done right".
-       * 
-       * @see <a href="http://trac.bigdata.com/ticket/526"> Reification done
-       *      right </a>
-       * @see <a href="http://trac.bigdata.com/ticket/1138" > Why is RDR parser
-       *      test suite disabled? </a>
-       */
-		suite.addTestSuite(TestReificationDoneRightParser.class);
+    // Test suite for the VIRTUAL GRAPHS extension.
+    suite.addTestSuite(TestVirtualGraphs.class);
 
-        /*
-         * Test suite for group graph patterns (join groups, unions, optional,
-         * etc.) and filters in those graph patterns. Subquery is tested in a
-         * separate test suite.
-         */
-        suite.addTestSuite(TestGroupGraphPatternBuilder.class);
+    // TODO Test suite for property paths.
 
-        /*
-         * Test suite for various kinds of subquery patterns.
-         */
-        suite.addTestSuite(TestSubqueryPatterns.class);
+    /*
+     * Test suite for SPARQL UPDATE expressions.
+     */
+    suite.addTestSuite(TestUpdateExprBuilder.class);
 
-        // Test suite for the BINDINGs clause.
-        suite.addTestSuite(TestBindingsClause.class);
+    /*
+     * Test suite for embergraph extensions to SPARQL UPDATE.
+     */
+    suite.addTestSuite(TestUpdateExprBuilder2.class);
 
-        /*
-         * Test suite for basic query types (SELECT|ASK|DESCRIBE|CONSTRUCT),
-         * including DISTINCT/REDUCED, GROUP BY, HAVING, ORDER BY, and
-         * LIMIT/OFFSET.
-         */
-        suite.addTestSuite(TestEmbergraphExprBuilder.class);
-
-        // Test suite for the VIRTUAL GRAPHS extension.
-        suite.addTestSuite(TestVirtualGraphs.class);
-
-        // TODO Test suite for property paths.
-
-        /*
-         * Test suite for SPARQL UPDATE expressions.
-         */
-        suite.addTestSuite(TestUpdateExprBuilder.class);
-
-        /*
-         * Test suite for embergraph extensions to SPARQL UPDATE.
-         */
-        suite.addTestSuite(TestUpdateExprBuilder2.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

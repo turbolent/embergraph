@@ -22,9 +22,6 @@ package org.embergraph.service.geospatial;
 
 import java.util.List;
 import java.util.Map;
-
-import org.openrdf.model.URI;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
@@ -32,207 +29,145 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.service.geospatial.GeoSpatial.GeoFunction;
 import org.embergraph.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
+import org.openrdf.model.URI;
 
 /**
  * Interface representing (the configuration of) a geospatial query.
- * 
- * See also {@link GeoSpatial} for the vocabulary that can be used
- * to define such a query as SERVICE (or inline).
- * 
+ *
+ * <p>See also {@link GeoSpatial} for the vocabulary that can be used to define such a query as
+ * SERVICE (or inline).
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public interface IGeoSpatialQuery {
 
-    /**
-     * @return the search function underlying the query
-     */
-    public GeoFunction getSearchFunction();
+  /** @return the search function underlying the query */
+  public GeoFunction getSearchFunction();
 
-    /**
-     * @return the datatype of literals we're searching for
-     */
-    public URI getSearchDatatype();
-    
-    /**
-     * @return the constant representing the search subject
-     */
-    public IConstant<?> getSubject();
+  /** @return the datatype of literals we're searching for */
+  public URI getSearchDatatype();
 
-    /**
-     * @return the term node representing the search predicate
-     */
-    public TermNode getPredicate();
+  /** @return the constant representing the search subject */
+  public IConstant<?> getSubject();
 
-    /**
-     * @return the term node representing the search context (named graph)
-     */
-    public TermNode getContext();
+  /** @return the term node representing the search predicate */
+  public TermNode getPredicate();
 
-    /**
-     * @return the spatial circle center, in case this 
-     *          is a {@link GeoFunction#IN_CIRCLE} query
-     */
-    public PointLatLon getSpatialCircleCenter();
+  /** @return the term node representing the search context (named graph) */
+  public TermNode getContext();
 
-    /**
-     * @return the spatial circle radius, in case this 
-     *          is a {@link GeoFunction#IN_CIRCLE} query
-     */
-    public Double getSpatialCircleRadius();
+  /** @return the spatial circle center, in case this is a {@link GeoFunction#IN_CIRCLE} query */
+  public PointLatLon getSpatialCircleCenter();
 
-    /**
-     * @return the boundary box'es south-west border point.
-     */
-    public PointLatLon getSpatialRectangleSouthWest();
+  /** @return the spatial circle radius, in case this is a {@link GeoFunction#IN_CIRCLE} query */
+  public Double getSpatialCircleRadius();
 
-    /**
-     * @return the boundary box'es north-east border point.
-     */
-    public PointLatLon getSpatialRectangleNorthEast();
+  /** @return the boundary box'es south-west border point. */
+  public PointLatLon getSpatialRectangleSouthWest();
 
-    /**
-     * @return the spatial unit underlying the query
-     */
-    public UNITS getSpatialUnit();
+  /** @return the boundary box'es north-east border point. */
+  public PointLatLon getSpatialRectangleNorthEast();
 
-    /**
-     * @return the start timestamp
-     */
-    public Long getTimeStart();
+  /** @return the spatial unit underlying the query */
+  public UNITS getSpatialUnit();
 
-    /**
-     * @return the end timestamp
-     */
-    public Long getTimeEnd();
+  /** @return the start timestamp */
+  public Long getTimeStart();
 
-    /**
-     * @return the coordinate system ID
-     */
-    public Long getCoordSystem();
-    
-    
-    /**
-     * @return the custom fields
-     */
-    public Map<String, LowerAndUpperValue> getCustomFieldsConstraints();
-    
-    
-    /**
-     * @return the variable to which the location will be bound (if defined)
-     */
-    public IVariable<?> getLocationVar();
+  /** @return the end timestamp */
+  public Long getTimeEnd();
 
-    /**
-     * @return the variable to which the time will be bound (if defined)
-     */
-    public IVariable<?> getTimeVar();
-    
-    /**
-     * @return the variable to which the latitude will be bound (if defined)
-     */
-    public IVariable<?> getLatVar();
+  /** @return the coordinate system ID */
+  public Long getCoordSystem();
 
-    /**
-     * @return the variable to which the longitude will be bound (if defined)
-     */
-    public IVariable<?> getLonVar();
-    
-    /**
-     * @return the variable to which the coordinate system component will be bound (if defined)
-     */
-    public IVariable<?> getCoordSystemVar();
-    
-    /**
-     * @return the variable to which the custom fields will be bound (if defined)
-     */
-    public IVariable<?> getCustomFieldsVar();
+  /** @return the custom fields */
+  public Map<String, LowerAndUpperValue> getCustomFieldsConstraints();
 
-    /**
-     * @return the variable to which the location+time will be bound (if defined)
-     */
-    public IVariable<?> getLocationAndTimeVar();
+  /** @return the variable to which the location will be bound (if defined) */
+  public IVariable<?> getLocationVar();
 
-    /**
-     * @return the variable to which the literal value will be bound
-     */
-    public IVariable<?> getLiteralVar();
-    
-    /**
-     * @return the variable to which the distance value will be bound
-     */
-    public IVariable<?> getDistanceVar();
-    
-    /**
-     * @return the incoming bindings to join with
-     */
-    public IBindingSet getIncomingBindings();
+  /** @return the variable to which the time will be bound (if defined) */
+  public IVariable<?> getTimeVar();
 
+  /** @return the variable to which the latitude will be bound (if defined) */
+  public IVariable<?> getLatVar();
 
-    /**
-     * @return a structure containing the lower and upper bound component object defined by this query
-     */
-    public LowerAndUpperBound getLowerAndUpperBound();
+  /** @return the variable to which the longitude will be bound (if defined) */
+  public IVariable<?> getLonVar();
 
-    
-    /**
-     * Normalizes a GeoSpatial query by converting it into an list of GeoSpatial
-     * queries that are normalized, see isNormalized(). The list of queries may
-     * be empty if the given query contains unsatisfiable range restrictions
-     * (e.g., a timestamp or longitude range from [9;8]. However, note that a
-     * latitude range from [10;0] will be interpreted as "everything not in the
-     * interval ]0;10[.
-     */
-    public List<IGeoSpatialQuery> normalize();
+  /** @return the variable to which the coordinate system component will be bound (if defined) */
+  public IVariable<?> getCoordSystemVar();
 
-    /**
-     * @return true if the query is normalized. See
-     */
-    public boolean isNormalized();
+  /** @return the variable to which the custom fields will be bound (if defined) */
+  public IVariable<?> getCustomFieldsVar();
 
-    /**
-     * @return true if the query is satisfiable
-     */
-    public boolean isSatisfiable();
+  /** @return the variable to which the location+time will be bound (if defined) */
+  public IVariable<?> getLocationAndTimeVar();
 
-    /**
-     * @return the datatype configuration associated with the query
-     */
-    public GeoSpatialDatatypeConfiguration getDatatypeConfig();
-    
-    /**
-     * Helper class encapsulating both the lower and upper bound as implied
-     * by the query, for the given datatype configuration.
-     * 
-     * @author msc
-     */
-    public static class LowerAndUpperBound {
-        private final Object[] lowerBound;
-        private final Object[] upperBound;        
-        
-        
-        public LowerAndUpperBound(final Object[] lowerBound, final Object[] upperBound) {
-            this.lowerBound = lowerBound;
-            this.upperBound = upperBound;
-        }
+  /** @return the variable to which the literal value will be bound */
+  public IVariable<?> getLiteralVar();
 
-        public Object[] getLowerBound() {
-            return lowerBound;
-        }
+  /** @return the variable to which the distance value will be bound */
+  public IVariable<?> getDistanceVar();
 
-        public Object[] getUpperBound() {
-            return upperBound;
-        }
-        
+  /** @return the incoming bindings to join with */
+  public IBindingSet getIncomingBindings();
+
+  /**
+   * @return a structure containing the lower and upper bound component object defined by this query
+   */
+  public LowerAndUpperBound getLowerAndUpperBound();
+
+  /**
+   * Normalizes a GeoSpatial query by converting it into an list of GeoSpatial queries that are
+   * normalized, see isNormalized(). The list of queries may be empty if the given query contains
+   * unsatisfiable range restrictions (e.g., a timestamp or longitude range from [9;8]. However,
+   * note that a latitude range from [10;0] will be interpreted as "everything not in the interval
+   * ]0;10[.
+   */
+  public List<IGeoSpatialQuery> normalize();
+
+  /** @return true if the query is normalized. See */
+  public boolean isNormalized();
+
+  /** @return true if the query is satisfiable */
+  public boolean isSatisfiable();
+
+  /** @return the datatype configuration associated with the query */
+  public GeoSpatialDatatypeConfiguration getDatatypeConfig();
+
+  /**
+   * Helper class encapsulating both the lower and upper bound as implied by the query, for the
+   * given datatype configuration.
+   *
+   * @author msc
+   */
+  public static class LowerAndUpperBound {
+    private final Object[] lowerBound;
+    private final Object[] upperBound;
+
+    public LowerAndUpperBound(final Object[] lowerBound, final Object[] upperBound) {
+      this.lowerBound = lowerBound;
+      this.upperBound = upperBound;
     }
 
-    public static class LowerAndUpperValue {
-        final public Object lowerValue;
-        final public Object upperValue;
-        
-        public  LowerAndUpperValue(final Object lowerValue, final Object upperValue) {
-            this.lowerValue = lowerValue;
-            this.upperValue = upperValue;
-        }
+    public Object[] getLowerBound() {
+      return lowerBound;
     }
+
+    public Object[] getUpperBound() {
+      return upperBound;
+    }
+  }
+
+  public static class LowerAndUpperValue {
+    public final Object lowerValue;
+    public final Object upperValue;
+
+    public LowerAndUpperValue(final Object lowerValue, final Object upperValue) {
+      this.lowerValue = lowerValue;
+      this.upperValue = upperValue;
+    }
+  }
 }

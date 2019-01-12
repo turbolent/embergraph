@@ -19,7 +19,6 @@ package org.embergraph.ha.pipeline;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
-
 import org.embergraph.ha.msg.HAMessageWrapper;
 import org.embergraph.ha.msg.HASendState;
 import org.embergraph.ha.msg.HAWriteMessageBase;
@@ -31,56 +30,50 @@ import org.embergraph.io.TestCase3;
 
 public class AbstractHASendAndReceiveTestCase extends TestCase3 {
 
-    public AbstractHASendAndReceiveTestCase() {
-    }
+  public AbstractHASendAndReceiveTestCase() {}
 
-    public AbstractHASendAndReceiveTestCase(final String name) {
-        super(name);
-    }
+  public AbstractHASendAndReceiveTestCase(final String name) {
+    super(name);
+  }
 
-    protected ChecksumUtility chk;
+  protected ChecksumUtility chk;
 
-    @Override
-    protected void setUp() throws Exception {
+  @Override
+  protected void setUp() throws Exception {
 
-        super.setUp();
+    super.setUp();
 
-        chk = new ChecksumUtility();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
+    chk = new ChecksumUtility();
+  }
 
-        super.tearDown();
-        
-        chk = null;
-        
-    }
-    
-    protected HAMessageWrapper newHAWriteMessage(final int sze,
-            final ByteBuffer tst) {
+  @Override
+  protected void tearDown() throws Exception {
 
-        return newHAWriteMessage(sze, chk.checksum(tst));
+    super.tearDown();
 
-    }
+    chk = null;
+  }
 
-    protected HAMessageWrapper newHAWriteMessage(final int sze, final int chksum) {
+  protected HAMessageWrapper newHAWriteMessage(final int sze, final ByteBuffer tst) {
 
-        final IHASyncRequest req = null;
+    return newHAWriteMessage(sze, chk.checksum(tst));
+  }
 
-        final IHASendState snd = new HASendState(messageId++, originalSenderId,
-                senderId, token, replicationFactor);
+  protected HAMessageWrapper newHAWriteMessage(final int sze, final int chksum) {
 
-        final IHAWriteMessageBase msg = new HAWriteMessageBase(sze, chksum);
+    final IHASyncRequest req = null;
 
-        return new HAMessageWrapper(req, snd, msg);
+    final IHASendState snd =
+        new HASendState(messageId++, originalSenderId, senderId, token, replicationFactor);
 
-    }
+    final IHAWriteMessageBase msg = new HAWriteMessageBase(sze, chksum);
 
-    private long messageId = 1;
-    private UUID originalSenderId = UUID.randomUUID();
-    private UUID senderId = UUID.randomUUID();
-    private long token = 1;
-    private int replicationFactor = 3;
-    
+    return new HAMessageWrapper(req, snd, msg);
+  }
+
+  private long messageId = 1;
+  private UUID originalSenderId = UUID.randomUUID();
+  private UUID senderId = UUID.randomUUID();
+  private long token = 1;
+  private int replicationFactor = 3;
 }

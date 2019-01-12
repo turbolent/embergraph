@@ -21,24 +21,23 @@ import java.util.Iterator;
 /**
  * Appender
  *
- * Used with Appenderator by Striterator to filter returned objects.
+ * <p>Used with Appenderator by Striterator to filter returned objects.
  */
-
 public class Appender extends FilterBase {
-	protected Iterator m_xtra = null;
+  protected Iterator m_xtra = null;
 
-	public Appender()	{}
+  public Appender() {}
 
-	public Appender(Iterator xtra) {
-		m_xtra = xtra;
-	}
-	
-	//-------------------------------------------------------------
+  public Appender(Iterator xtra) {
+    m_xtra = xtra;
+  }
 
-	@Override
-    final public Iterator filterOnce(Iterator src, Object context) {
-        return new Appenderator(src, context, (Iterator) m_xtra);
-	}
+  // -------------------------------------------------------------
 
-	//-------------------------------------------------------------
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
+    return new Appenderator(src, context, (Iterator) m_xtra);
+  }
+
+  // -------------------------------------------------------------
 }

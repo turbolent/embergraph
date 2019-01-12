@@ -26,91 +26,72 @@ import org.embergraph.util.BytesUtil;
 
 /**
  * Utility class to verify that a key lies within a key range.
- * <p>
- * Note: In order to be a useful check on the mapping of predicates across
- * shards, the check needs to verify that the as-bound predicate either lies
- * within or spans the shard, i.e., that the interaction of the as-bound
- * predicate and the shard is not empty.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/461">
- *      KeyAfterPartitionException </a>
- * 
+ *
+ * <p>Note: In order to be a useful check on the mapping of predicates across shards, the check
+ * needs to verify that the as-bound predicate either lies within or spans the shard, i.e., that the
+ * interaction of the as-bound predicate and the shard is not empty.
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/461">KeyAfterPartitionException
+ *     </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RangeCheckUtil {
 
-    /**
-     * Verify that the key lies within the key range of an index partition.
-     * 
-     * @param key
-     *            The key.
-     * 
-     * @param allowUpperBound
-     *            <code>true</code> iff the <i>key</i> represents an inclusive
-     *            upper bound and thus must be allowed to be LTE to the right
-     *            separator key for the index partition. For example, this would
-     *            be <code>true</code> for the <i>toKey</i> parameter on
-     *            rangeCount or rangeIterator methods.
-     * 
-     * @return <code>true</code> always.
-     * 
-     * @throws IllegalArgumentException
-     *             if the key is <code>null</code>
-     * @throws KeyOutOfRangeException
-     *             if the key does not lie within the index partition.
-     * 
-     * @see BytesUtil#rangeCheck(byte[], byte[], byte[])
-     */
-    static public boolean rangeCheck(final ISeparatorKeys pmd,
-            final byte[] key, final boolean allowUpperBound) {
+  /**
+   * Verify that the key lies within the key range of an index partition.
+   *
+   * @param key The key.
+   * @param allowUpperBound <code>true</code> iff the <i>key</i> represents an inclusive upper bound
+   *     and thus must be allowed to be LTE to the right separator key for the index partition. For
+   *     example, this would be <code>true</code> for the <i>toKey</i> parameter on rangeCount or
+   *     rangeIterator methods.
+   * @return <code>true</code> always.
+   * @throws IllegalArgumentException if the key is <code>null</code>
+   * @throws KeyOutOfRangeException if the key does not lie within the index partition.
+   * @see BytesUtil#rangeCheck(byte[], byte[], byte[])
+   */
+  public static boolean rangeCheck(
+      final ISeparatorKeys pmd, final byte[] key, final boolean allowUpperBound) {
 
-        final byte[] leftSeparatorKey = pmd.getLeftSeparatorKey();
+    final byte[] leftSeparatorKey = pmd.getLeftSeparatorKey();
 
-        final byte[] rightSeparatorKey = pmd.getRightSeparatorKey();
+    final byte[] rightSeparatorKey = pmd.getRightSeparatorKey();
 
-        if (BytesUtil.compareBytes(key, leftSeparatorKey) < 0) {
+    if (BytesUtil.compareBytes(key, leftSeparatorKey) < 0) {
 
-            throw new KeyBeforePartitionException(key, allowUpperBound, pmd);
-
-        }
-
-        if (rightSeparatorKey != null) {
-
-            final int ret = BytesUtil.compareBytes(key, rightSeparatorKey);
-
-            if (allowUpperBound) {
-
-                if (ret <= 0) {
-
-                    // key less than or equal to the exclusive upper bound.
-
-                } else {
-
-                    throw new KeyAfterPartitionException(key, allowUpperBound,
-                            pmd);
-                }
-
-            } else {
-
-                if (ret < 0) {
-
-                    // key strictly less than the exclusive upper bound.
-
-                } else {
-
-                    throw new KeyAfterPartitionException(key, allowUpperBound,
-                            pmd);
-
-                }
-
-            }
-
-        }
-    
-        // key lies within the index partition.
-        return true;
-
+      throw new KeyBeforePartitionException(key, allowUpperBound, pmd);
     }
 
+    if (rightSeparatorKey != null) {
+
+      final int ret = BytesUtil.compareBytes(key, rightSeparatorKey);
+
+      if (allowUpperBound) {
+
+        if (ret <= 0) {
+
+          // key less than or equal to the exclusive upper bound.
+
+        } else {
+
+          throw new KeyAfterPartitionException(key, allowUpperBound, pmd);
+        }
+
+      } else {
+
+        if (ret < 0) {
+
+          // key strictly less than the exclusive upper bound.
+
+        } else {
+
+          throw new KeyAfterPartitionException(key, allowUpperBound, pmd);
+        }
+      }
+    }
+
+    // key lies within the index partition.
+    return true;
+  }
 }

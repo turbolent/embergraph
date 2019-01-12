@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.ILocalBTreeView;
@@ -54,749 +53,693 @@ import org.embergraph.util.Bytes;
 
 /**
  * Bootstrap test suite for the {@link ResourceManager}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstrapTestCase {
 
-    /**
-     * 
-     */
-    public TestResourceManagerBootstrap() {
+  /** */
+  public TestResourceManagerBootstrap() {}
+
+  /** @param name */
+  public TestResourceManagerBootstrap(String name) {
+    super(name);
+  }
+
+  private final boolean bufferNodes = true;
+
+  /** Removes the per-test data directory. */
+  public void tearDown() throws Exception {
+
+    if (dataDir != null) {
+
+      recursiveDelete(dataDir);
     }
 
-    /**
-     * @param name
-     */
-    public TestResourceManagerBootstrap(String name) {
-        super(name);
+    super.tearDown();
+  }
+
+  /**
+   * Recursively removes any files and subdirectories and then removes the file (or directory)
+   * itself.
+   *
+   * @param f A file or directory.
+   */
+  private void recursiveDelete(File f) {
+
+    if (f.isDirectory()) {
+
+      final File[] children = f.listFiles();
+
+      for (int i = 0; i < children.length; i++) {
+
+        recursiveDelete(children[i]);
+      }
     }
 
-    private final boolean bufferNodes = true;
-    
-    /**
-     * Removes the per-test data directory.
-     */
-    public void tearDown() throws Exception {
-        
-        if (dataDir != null) {
+    if (log.isInfoEnabled()) log.info("Removing: " + f);
 
-            recursiveDelete(dataDir);
-            
-        }
-        
-        super.tearDown();
-        
+    if (!f.delete()) {
+
+      log.warn("Could not remove: " + f);
     }
-    
-    /**
-     * Recursively removes any files and subdirectories and then removes the
-     * file (or directory) itself.
-     * 
-     * @param f
-     *            A file or directory.
+  }
+
+  /**
+   * Test creation of a new {@link ResourceManager}. This verifies the correct creation of the data
+   * directory, the various subdirectories, and the initial journal in the appropriate subdirectory.
+   *
+   * @throws IOException
+   */
+  public void test_create() throws IOException {
+
+    /*
+     * Setup the resource manager.
      */
-    private void recursiveDelete(File f) {
-        
-        if(f.isDirectory()) {
-            
-            final File[] children = f.listFiles();
 
-            for (int i = 0; i < children.length; i++) {
+    final Properties properties = getProperties();
 
-                recursiveDelete(children[i]);
+    final ResourceManager resourceManager = new MyResourceManager(properties);
 
-            }
+    final AbstractTransactionService txService = new MockTransactionService(properties).start();
 
-        }
+    final AbstractLocalTransactionManager localTransactionManager =
+        new MockLocalTransactionManager(txService);
 
-        if(log.isInfoEnabled())
-            log.info("Removing: " + f);
+    final ConcurrencyManager concurrencyManager =
+        new ConcurrencyManager(properties, localTransactionManager, resourceManager);
 
-        if (!f.delete()) {
+    try {
 
-            log.warn("Could not remove: " + f);
+      resourceManager.setConcurrencyManager(concurrencyManager);
 
-        }
+      assertTrue(resourceManager.awaitRunning());
 
+      /*
+       * Do tests.
+       */
+
+      assertTrue(dataDir.exists());
+      assertTrue(dataDir.isDirectory());
+      assertTrue(journalsDir.isDirectory());
+      assertTrue(segmentsDir.isDirectory());
+
+      // fetch the live journal.
+      AbstractJournal journal = resourceManager.getLiveJournal();
+
+      assertNotNull(journal);
+
+      // verify journal created in correct subdirectory.
+      assertTrue(new File(journalsDir, journal.getFile().getName()).exists());
+
+    } finally {
+
+      // shutdown
+      resourceManager.shutdownNow();
+      concurrencyManager.shutdownNow();
+      localTransactionManager.shutdownNow();
+      txService.destroy();
     }
-    
-    /**
-     * Test creation of a new {@link ResourceManager}. This verifies the
-     * correct creation of the data directory, the various subdirectories, and
-     * the initial journal in the appropriate subdirectory.
-     * 
-     * @throws IOException
-     */
-    public void test_create() throws IOException {
+  }
 
-        /*
-         * Setup the resource manager.
-         */
-        
-        final Properties properties = getProperties();
+  /**
+   * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
+   * with two {@link Journal}s. The {@link ResourceManager} is started and we verify that it locates
+   * the various resources and opens the correct {@link Journal} as its "live" journal.
+   *
+   * @throws IOException
+   */
+  public void test_restartWithTwoJournals() throws IOException {
 
-        final ResourceManager resourceManager = new MyResourceManager(
-                properties);
+    // create the data directory.
+    assertTrue(dataDir.mkdirs());
+    assertTrue(journalsDir.mkdirs());
+    assertTrue(segmentsDir.mkdirs());
 
-        final AbstractTransactionService txService = new MockTransactionService(
-                properties).start();
+    final IResourceMetadata journalMetadata1;
+    {
+      final File file = File.createTempFile("journal", Options.JNL, journalsDir);
 
-        final AbstractLocalTransactionManager localTransactionManager = new MockLocalTransactionManager(
-                txService);
+      file.delete(); // remove temp file - will be re-created below.
 
-        final ConcurrencyManager concurrencyManager = new ConcurrencyManager(
-                properties, localTransactionManager, resourceManager);
+      final Properties properties = new Properties();
 
-        try {
+      properties.setProperty(Options.FILE, file.toString());
 
-            resourceManager.setConcurrencyManager(concurrencyManager);
+      final Journal journal = new Journal(properties);
 
-            assertTrue(resourceManager.awaitRunning());
+      // wait for at least one distinct timestamp to go by.
+      journal.nextTimestamp();
 
-            /*
-             * Do tests.
-             */
+      journalMetadata1 = journal.getResourceMetadata();
 
-            assertTrue(dataDir.exists());
-            assertTrue(dataDir.isDirectory());
-            assertTrue(journalsDir.isDirectory());
-            assertTrue(segmentsDir.isDirectory());
+      // required to set the initial commitRecord before we can close out the journal for further
+      // writes.
+      final long lastCommitTime = journal.commit();
 
-            // fetch the live journal.
-            AbstractJournal journal = resourceManager.getLiveJournal();
+      // close out for further writes.
+      final long closeTime = journal.nextTimestamp();
+      journal.closeForWrites(closeTime);
 
-            assertNotNull(journal);
+      assertTrue(journalMetadata1.getCreateTime() > 0L);
 
-            // verify journal created in correct subdirectory.
-            assertTrue(new File(journalsDir, journal.getFile().getName())
-                    .exists());
-        
-        } finally {
+      // and close the journal.
+      journal.close();
 
-            // shutdown
-            resourceManager.shutdownNow();
-            concurrencyManager.shutdownNow();
-            localTransactionManager.shutdownNow();
-            txService.destroy();
+      // verify that we can re-open the journal.
+      {
+        properties.setProperty(Journal.Options.READ_ONLY, "true");
 
-        }
-        
+        final Journal tmp = new Journal(properties);
+
+        // should be read only.
+        assertTrue(tmp.isReadOnly());
+
+        // verify last commit time.
+        assertEquals(lastCommitTime, tmp.getLastCommitTime());
+
+        // verify journal closed for writes time.
+        assertEquals(closeTime, tmp.getRootBlockView().getCloseTime());
+
+        tmp.close();
+      }
     }
 
-    /**
-     * A test for restart of the {@link ResourceManager}. A directory is
-     * created and pre-populated with two {@link Journal}s. The
-     * {@link ResourceManager} is started and we verify that it locates the
-     * various resources and opens the correct {@link Journal} as its "live"
-     * journal.
-     * 
-     * @throws IOException
+    /*
+     * Create the 2nd journal.
      */
-    public void test_restartWithTwoJournals() throws IOException {
-        
-        // create the data directory.
-        assertTrue(dataDir.mkdirs());
-        assertTrue(journalsDir.mkdirs());
-        assertTrue(segmentsDir.mkdirs());
-        
-        final IResourceMetadata journalMetadata1;
-        {
+    final IResourceMetadata journalMetadata2;
+    {
+      final File file = File.createTempFile("journal", Options.JNL, journalsDir);
 
-            final File file = File.createTempFile("journal", Options.JNL,
-                    journalsDir);
+      file.delete(); // remove temp file - will be re-created below.
 
-            file.delete(); // remove temp file - will be re-created below.
-            
-            final Properties properties = new Properties();
+      final Properties properties = new Properties();
 
-            properties.setProperty(Options.FILE, file.toString());
-         
-            final Journal journal = new Journal(properties);
+      properties.setProperty(Options.FILE, file.toString());
 
-            // wait for at least one distinct timestamp to go by.
-            journal.nextTimestamp();
+      final Journal journal = new Journal(properties);
 
-            journalMetadata1 = journal.getResourceMetadata();
+      /*
+       * Commit the journal - this causes the commitRecordIndex to become
+       * restart safe and makes it possible to re-open the resulting
+       * journal in read-only mode.
+       */
 
-            // required to set the initial commitRecord before we can close out the journal for further writes.
-            final long lastCommitTime = journal.commit();
-            
-            // close out for further writes.
-            final long closeTime = journal.nextTimestamp();
-            journal.closeForWrites(closeTime);
-            
-            assertTrue(journalMetadata1.getCreateTime() > 0L);
-            
-            // and close the journal.
-            journal.close();
-         
-            // verify that we can re-open the journal.
-            {
-                
-                properties.setProperty(Journal.Options.READ_ONLY,"true");
-                
-                final Journal tmp = new Journal(properties);
+      final long lastCommitTime = journal.commit();
 
-                // should be read only.
-                assertTrue(tmp.isReadOnly());
-                
-                // verify last commit time. 
-                assertEquals(lastCommitTime, tmp.getLastCommitTime());
-                
-                // verify journal closed for writes time.
-                assertEquals(closeTime, tmp.getRootBlockView().getCloseTime());
-                
-                tmp.close();
-                
-            }
-            
-        }
+      journalMetadata2 = journal.getResourceMetadata();
 
-        /*
-         * Create the 2nd journal.
-         */
-        final IResourceMetadata journalMetadata2;
-        {
+      journal.shutdownNow();
 
-            final File file = File.createTempFile("journal", Options.JNL,
-                    journalsDir);
+      assertTrue(journalMetadata1.getCreateTime() < journalMetadata2.getCreateTime());
 
-            file.delete(); // remove temp file - will be re-created below.
+      // verify that we can re-open the journal.
+      {
+        final Journal tmp = new Journal(properties);
 
-            final Properties properties = new Properties();
+        // verify last commit time.
+        assertEquals(lastCommitTime, tmp.getLastCommitTime());
 
-            properties.setProperty(Options.FILE, file.toString());
-         
-            final Journal journal = new Journal(properties);
-            
-            /*
-             * Commit the journal - this causes the commitRecordIndex to become
-             * restart safe and makes it possible to re-open the resulting
-             * journal in read-only mode.
-             */
-
-            final long lastCommitTime = journal.commit();
-
-            journalMetadata2 = journal.getResourceMetadata();
-            
-            journal.shutdownNow();
-            
-            assertTrue(journalMetadata1.getCreateTime() < journalMetadata2
-                    .getCreateTime());
-            
-            // verify that we can re-open the journal.
-            {
-                
-                final Journal tmp = new Journal(properties);
-                
-                // verify last commit time. 
-                assertEquals(lastCommitTime, tmp.getLastCommitTime());
-                
-                tmp.close();
-                
-            }
-            
-        }
-
-        /*
-         * Setup the resource manager.
-         */
-        
-        final Properties properties = getProperties();
-
-        // disable so that our resources are not automatically purged.
-        properties.setProperty(StoreManager.Options.PURGE_OLD_RESOURCES_DURING_STARTUP,"false");
-        
-        final ResourceManager resourceManager = new MyResourceManager(properties);
-
-        final AbstractTransactionService txService = new MockTransactionService(
-                properties).start();
-
-        final AbstractLocalTransactionManager localTransactionManager = new MockLocalTransactionManager(
-                txService);
-
-        final ConcurrencyManager concurrencyManager = new ConcurrencyManager(
-                properties, localTransactionManager, resourceManager);
-
-        try {
-        
-        resourceManager.setConcurrencyManager(concurrencyManager);
-        
-        assertTrue( resourceManager.awaitRunning() );
-        
-        /*
-         * Do tests.
-         */
-        
-        // verify live journal was opened.
-        assertNotNull(resourceManager.getLiveJournal());
-        
-        // verify same reference each time we request the live journal. 
-        assertTrue(resourceManager.getLiveJournal()==resourceManager.getLiveJournal());
-        
-        // verify #of journals discovered.
-        assertEquals(2,resourceManager.getManagedJournalCount());
-
-        // verify no index segments discovered.
-        assertEquals(0,resourceManager.getManagedSegmentCount());
-        
-        // open one journal.
-        assertNotNull(resourceManager.openStore(journalMetadata1.getUUID()));
-
-        // open the other journal.
-        assertNotNull(resourceManager.openStore(journalMetadata2.getUUID()));
-        
-        // verify correct journal has same reference as the live journal.
-        assertTrue(resourceManager.getLiveJournal()==resourceManager.openStore(journalMetadata2.getUUID()));
-        
-        } finally {
-        
-        // shutdown
-        concurrencyManager.shutdownNow();
-        localTransactionManager.shutdownNow();
-        resourceManager.shutdownNow();
-        txService.destroy();
-        }
-        
+        tmp.close();
+      }
     }
-    
-    /**
-     * A test for restart of the {@link ResourceManager}. A directory is
-     * created and pre-populated with a {@link Journal} and some
-     * {@link IndexSegment}s are constructed from data on that {@link Journal}.
-     * The {@link ResourceManager} is started and we verify that it locates the
-     * various resources and opens the correct {@link Journal} as its "live"
-     * journal.
-     * 
-     * @throws IOException
+
+    /*
+     * Setup the resource manager.
      */
-    public void test_restartWithIndexSegments() throws Exception {
-        
-        // create the data directory.
-        assertTrue(dataDir.mkdirs());
-        assertTrue(journalsDir.mkdirs());
-        assertTrue(segmentsDir.mkdirs());
-        
-        final int nsegments = 3;
-        final IResourceMetadata journalMetadata;
-        final UUID[] segmentUUIDs = new UUID[nsegments];
-        {
 
-            final File file = File.createTempFile("journal", Options.JNL,
-                    journalsDir);
+    final Properties properties = getProperties();
 
-            file.delete(); // remove temp file - will be re-created below.
-            
-            Properties properties = new Properties();
+    // disable so that our resources are not automatically purged.
+    properties.setProperty(StoreManager.Options.PURGE_OLD_RESOURCES_DURING_STARTUP, "false");
 
-            properties.setProperty(Options.FILE, file.toString());
-         
-            Journal journal = new Journal(properties);
-            
-//            // commit the journal to assign [firstCommitTime].
-//            journal.commit();
+    final ResourceManager resourceManager = new MyResourceManager(properties);
 
-            // wait for at one distinct timestamp to go by.
-            journal.nextTimestamp();
+    final AbstractTransactionService txService = new MockTransactionService(properties).start();
 
-            journalMetadata = journal.getResourceMetadata();
-            
-            /*
-             * Create some index segments.
-             */
-            {
+    final AbstractLocalTransactionManager localTransactionManager =
+        new MockLocalTransactionManager(txService);
 
-                for (int i = 0; i < nsegments; i++) {
+    final ConcurrencyManager concurrencyManager =
+        new ConcurrencyManager(properties, localTransactionManager, resourceManager);
 
-                    // create btree.
-                    BTree ndx = BTree.create(journal, new IndexMetadata("ndx#" + i, UUID.randomUUID()));
+    try {
 
-                    // populate with some data.
-                    for (int j = 0; j < 100; j++) {
+      resourceManager.setConcurrencyManager(concurrencyManager);
 
-                        ndx.insert(TestKeyBuilder.asSortKey(j), SerializerUtil
-                                .serialize(new Integer(j)));
+      assertTrue(resourceManager.awaitRunning());
 
-                    }
+      /*
+       * Do tests.
+       */
 
-                    // commit data on the journal.
-                    final long commitTime = journal.commit();
+      // verify live journal was opened.
+      assertNotNull(resourceManager.getLiveJournal());
 
-                    final File outFile = new File(segmentsDir, "ndx" + i
-                            + Options.SEG);
+      // verify same reference each time we request the live journal.
+      assertTrue(resourceManager.getLiveJournal() == resourceManager.getLiveJournal());
 
-                    final int branchingFactor = 20;
+      // verify #of journals discovered.
+      assertEquals(2, resourceManager.getManagedJournalCount());
 
-                    final IndexSegmentBuilder builder = IndexSegmentBuilder
-                            .newInstance(outFile, tmpDir, ndx.getEntryCount(),
-                                    ndx.rangeIterator(), branchingFactor, ndx
-                                            .getIndexMetadata(), commitTime,
-                                    true/* compactingMerge */, bufferNodes);
+      // verify no index segments discovered.
+      assertEquals(0, resourceManager.getManagedSegmentCount());
 
-                    builder.call();
+      // open one journal.
+      assertNotNull(resourceManager.openStore(journalMetadata1.getUUID()));
 
-                    segmentUUIDs[i] = builder.segmentUUID;
-                    
-                }
+      // open the other journal.
+      assertNotNull(resourceManager.openStore(journalMetadata2.getUUID()));
 
-            }
-            
-            journal.shutdownNow();
-            
-            assertTrue(journalMetadata.getCreateTime() > 0L);
-            
-        }
+      // verify correct journal has same reference as the live journal.
+      assertTrue(
+          resourceManager.getLiveJournal()
+              == resourceManager.openStore(journalMetadata2.getUUID()));
 
-        /*
-         * Setup the resource manager.
-         */
-        
-        final Properties properties = getProperties();
+    } finally {
 
-        // disable so that our resources are not automatically purged.
-        properties.setProperty(StoreManager.Options.PURGE_OLD_RESOURCES_DURING_STARTUP,"false");
-
-        final ResourceManager resourceManager = new MyResourceManager(properties);
-
-        final AbstractTransactionService txService = new MockTransactionService(properties).start();
-        
-        final AbstractLocalTransactionManager localTransactionManager = new MockLocalTransactionManager(txService);
-
-        final ConcurrencyManager concurrencyManager = new ConcurrencyManager(
-                properties, localTransactionManager, resourceManager);
-        
-        try {
-
-        resourceManager.setConcurrencyManager(concurrencyManager);
-        
-        assertTrue( resourceManager.awaitRunning() );
-
-        /*
-         * Do tests.
-         */
-        
-        // verify #of journals discovered.
-        assertEquals(1, resourceManager.getManagedJournalCount());
-
-        // #of index segments discovered.
-        assertEquals(nsegments, resourceManager.getManagedSegmentCount());
-
-        // verify index segments discovered.
-        for(int i=0; i<nsegments; i++) {
-            
-            IndexSegmentStore segStore = (IndexSegmentStore) resourceManager
-                    .openStore(segmentUUIDs[i]);
-
-            // verify opened.
-            assertNotNull(segStore);
-            
-            // verify same reference.
-            assertTrue(segStore == resourceManager.openStore(segmentUUIDs[i]));
-            
-        }
-        
-        } finally {
-        
-        // shutdown
-        concurrencyManager.shutdownNow();
-        localTransactionManager.shutdownNow();
-        resourceManager.shutdownNow();
-        txService.destroy();
-        
-        }
-        
+      // shutdown
+      concurrencyManager.shutdownNow();
+      localTransactionManager.shutdownNow();
+      resourceManager.shutdownNow();
+      txService.destroy();
     }
-    
-    /**
-     * A test for restart of the {@link ResourceManager}. A directory is
-     * created and pre-populated with a {@link Journal}. An index is registered
-     * on the journal and some data is written on the index. An
-     * {@link IndexSegment} constructed from data on that index. The
-     * {@link ResourceManager} is started and we verify that it locates the
-     * various resources and opens the correct {@link Journal} as its "live"
-     * journal.
-     * 
-     * @throws IOException
-     */
-    public void test_openIndexPartition() throws Exception {
-        
-        // create the data directory.
-        assertTrue(dataDir.mkdirs());
-        assertTrue(journalsDir.mkdirs());
-        assertTrue(segmentsDir.mkdirs());
-        
-        final String indexName = "ndx";
-        final int nentries = 100;
-        final IResourceMetadata journalMetadata;
-        final UUID indexUUID = UUID.randomUUID();
-        final UUID segmentUUID;
-        final IResourceMetadata segmentMetadata;
-        {
+  }
 
-            final File file = File.createTempFile("journal", Options.JNL,
-                    journalsDir);
+  /**
+   * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
+   * with a {@link Journal} and some {@link IndexSegment}s are constructed from data on that {@link
+   * Journal}. The {@link ResourceManager} is started and we verify that it locates the various
+   * resources and opens the correct {@link Journal} as its "live" journal.
+   *
+   * @throws IOException
+   */
+  public void test_restartWithIndexSegments() throws Exception {
 
-            file.delete(); // remove temp file - will be re-created below.
-            
-            Properties properties = new Properties();
+    // create the data directory.
+    assertTrue(dataDir.mkdirs());
+    assertTrue(journalsDir.mkdirs());
+    assertTrue(segmentsDir.mkdirs());
 
-            properties.setProperty(Options.FILE, file.toString());
-         
-            Journal journal = new Journal(properties);
-            
-//            // commit the journal to assign [firstCommitTime].
-//            journal.commit();
+    final int nsegments = 3;
+    final IResourceMetadata journalMetadata;
+    final UUID[] segmentUUIDs = new UUID[nsegments];
+    {
+      final File file = File.createTempFile("journal", Options.JNL, journalsDir);
 
-            // wait for at one distinct timestamp to go by.
-            journal.nextTimestamp();
+      file.delete(); // remove temp file - will be re-created below.
 
-            journalMetadata = journal.getResourceMetadata();
-            
-            /*
-             * Create an index partition.
-             */
-            {
+      Properties properties = new Properties();
 
-                IndexMetadata indexMetadata = new IndexMetadata(indexName,
-                        indexUUID);
-                
-                // required for scale-out indices.
-                indexMetadata.setDeleteMarkers(true);
+      properties.setProperty(Options.FILE, file.toString());
 
-                // create index and register on the journal.
-                ILocalBTreeView ndx = journal.registerIndex(indexName, BTree.create(journal, indexMetadata));
-                
-//                // commit journal so that it will notice when the index gets dirty. 
-//                journal.commit();
-                
-                DataOutputBuffer buf = new DataOutputBuffer(Bytes.SIZEOF_INT);
-                
-                // populate with some data.
-                for (int j = 0; j < nentries; j++) {
+      Journal journal = new Journal(properties);
 
-//                    ndx.insert(KeyBuilder.asSortKey(j), SerializerUtil
-//                            .serialize(new Integer(j)));
+      //            // commit the journal to assign [firstCommitTime].
+      //            journal.commit();
 
-                    // format the value.
-                    buf.reset().putInt(j);
-                    
-                    ndx.insert(TestKeyBuilder.asSortKey(j), buf.toByteArray());
+      // wait for at one distinct timestamp to go by.
+      journal.nextTimestamp();
 
-                }
+      journalMetadata = journal.getResourceMetadata();
 
-                // commit data on the journal - this is the commitTime for the indexSegment!
-                final long commitTime = journal.commit();
+      /*
+       * Create some index segments.
+       */
+      {
+        for (int i = 0; i < nsegments; i++) {
 
-                // create index segment from btree on journal.
-                final int partitionId = 0;
-                {
+          // create btree.
+          BTree ndx = BTree.create(journal, new IndexMetadata("ndx#" + i, UUID.randomUUID()));
 
-                    // name the output file.
-                    final File outFile = File.createTempFile(
-                            indexMetadata.getName()+"_"+partitionId, // prefix 
-                            Options.SEG, // suffix
-                            segmentsDir // directory
-                            );
+          // populate with some data.
+          for (int j = 0; j < 100; j++) {
 
-                    final int branchingFactor = 20;
+            ndx.insert(TestKeyBuilder.asSortKey(j), SerializerUtil.serialize(new Integer(j)));
+          }
 
-                    final IndexSegmentBuilder builder = IndexSegmentBuilder
-                            .newInstance(outFile, tmpDir, (int) ndx.rangeCount(
-                                    null, null), ndx.rangeIterator(null, null),
-                                    branchingFactor, ndx.getIndexMetadata(),
-                                    commitTime, true/* compactingMerge */,
-                                    bufferNodes);
+          // commit data on the journal.
+          final long commitTime = journal.commit();
 
-                    builder.call();
+          final File outFile = new File(segmentsDir, "ndx" + i + Options.SEG);
 
-                    // assigned UUID for the index segment resource.
-                    segmentUUID = builder.segmentUUID;
+          final int branchingFactor = 20;
 
-                    // the segment resource description.
-                    segmentMetadata = builder.getSegmentMetadata();
-                    
-                }
+          final IndexSegmentBuilder builder =
+              IndexSegmentBuilder.newInstance(
+                  outFile,
+                  tmpDir,
+                  ndx.getEntryCount(),
+                  ndx.rangeIterator(),
+                  branchingFactor,
+                  ndx.getIndexMetadata(),
+                  commitTime,
+                  true /* compactingMerge */,
+                  bufferNodes);
 
-                // clone before we start to modify the index metadata.
-                indexMetadata = indexMetadata.clone();
-                
-                // describe the index partition.
-                indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(
-                        partitionId,
-                        -1, // not a move.
-                        new byte[]{}, // left separator (first valid key)
-                        null,         // right separator (no upper bound)
-                        /*
-                         * Note: The journal gets listed first since it can
-                         * continue to receive writes and therefore logically
-                         * comes before the index segment in the resource
-                         * ordering since any writes on the live index on the
-                         * journal will be more recent than the data on the
-                         * index segment.
-                         */
-                        new IResourceMetadata[]{// resource metadata[].
-                                journal.getResourceMetadata(),
-                                segmentMetadata
-                        },
-                        /*
-                         * Note: using fake data here since the resource manager
-                         * has not been instantiated yet.
-                         */
-                        new IndexPartitionCause(
-                                        IndexPartitionCause.CauseEnum.Register,
-                                        0/*overflowCounter*/, System
-                                                .currentTimeMillis()/*lastCommitTime*/)
-//                        ,"bootstrap() "// history
-                        ));
+          builder.call();
 
-                /*
-                 * Drop the index that we used to build up the data for the
-                 * index segment.
-                 */
-                journal.dropIndex(indexMetadata.getName());
-                
-//                // commit changes on the journal.
-//                journal.commit();
-
-                /*
-                 * Register a new (and empty) index with the same name but with
-                 * an index partition definition that includes the index
-                 * segment.
-                 */
-                journal.registerIndex(indexMetadata.getName(), BTree.create(
-                        journal, indexMetadata));
-
-                // commit changes on the journal.
-                journal.commit();
-            
-            }
-            
-            journal.shutdownNow();
-            
-            assertTrue(journalMetadata.getCreateTime() > 0L);
-            
+          segmentUUIDs[i] = builder.segmentUUID;
         }
+      }
 
-        /*
-         * Setup the resource manager.
-         */
-        
-        final Properties properties = getProperties();
+      journal.shutdownNow();
 
-        final ResourceManager resourceManager = new MyResourceManager(properties);
-        
-        final AbstractTransactionService txService = new MockTransactionService(properties).start();
-        
-        final AbstractLocalTransactionManager localTransactionManager = new MockLocalTransactionManager(txService);
-        
-        final ConcurrencyManager concurrencyManager = new ConcurrencyManager(
-                properties, localTransactionManager, resourceManager);
+      assertTrue(journalMetadata.getCreateTime() > 0L);
+    }
 
-        try {
-        
-        resourceManager.setConcurrencyManager(concurrencyManager);
-        
-        assertTrue( resourceManager.awaitRunning() );
+    /*
+     * Setup the resource manager.
+     */
 
-        /*
-         * Do tests.
-         */
-        
-        // verify journal discovered.
-        assertEquals(1, resourceManager.getManagedJournalCount());
-        
-        // open the journal.
-        IJournal journal = resourceManager.getLiveJournal();
+    final Properties properties = getProperties();
 
-        // verify index exists on that journal.
-        assertNotNull(journal.getIndex(indexName));
+    // disable so that our resources are not automatically purged.
+    properties.setProperty(StoreManager.Options.PURGE_OLD_RESOURCES_DURING_STARTUP, "false");
 
-        // verify resource manager returns the same index object.
-        assertEquals(journal.getIndex(indexName), resourceManager.getIndexOnStore(indexName,
-                0L/* timestamp */, journal));
+    final ResourceManager resourceManager = new MyResourceManager(properties);
 
-        // an index segment was found.
-        assertEquals(1, resourceManager.getManagedSegmentCount());
+    final AbstractTransactionService txService = new MockTransactionService(properties).start();
 
-        // verify index segment discovered.
-        IndexSegmentStore segStore = (IndexSegmentStore) resourceManager
-                .openStore(segmentUUID);
+    final AbstractLocalTransactionManager localTransactionManager =
+        new MockLocalTransactionManager(txService);
+
+    final ConcurrencyManager concurrencyManager =
+        new ConcurrencyManager(properties, localTransactionManager, resourceManager);
+
+    try {
+
+      resourceManager.setConcurrencyManager(concurrencyManager);
+
+      assertTrue(resourceManager.awaitRunning());
+
+      /*
+       * Do tests.
+       */
+
+      // verify #of journals discovered.
+      assertEquals(1, resourceManager.getManagedJournalCount());
+
+      // #of index segments discovered.
+      assertEquals(nsegments, resourceManager.getManagedSegmentCount());
+
+      // verify index segments discovered.
+      for (int i = 0; i < nsegments; i++) {
+
+        IndexSegmentStore segStore = (IndexSegmentStore) resourceManager.openStore(segmentUUIDs[i]);
 
         // verify opened.
         assertNotNull(segStore);
 
         // verify same reference.
-        assertTrue(segStore == resourceManager.openStore(segmentUUID));
-        
-        /*
-         * @todo verify does not double-open an index segement from its store
-         * file!
-         */
+        assertTrue(segStore == resourceManager.openStore(segmentUUIDs[i]));
+      }
+
+    } finally {
+
+      // shutdown
+      concurrencyManager.shutdownNow();
+      localTransactionManager.shutdownNow();
+      resourceManager.shutdownNow();
+      txService.destroy();
+    }
+  }
+
+  /**
+   * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
+   * with a {@link Journal}. An index is registered on the journal and some data is written on the
+   * index. An {@link IndexSegment} constructed from data on that index. The {@link ResourceManager}
+   * is started and we verify that it locates the various resources and opens the correct {@link
+   * Journal} as its "live" journal.
+   *
+   * @throws IOException
+   */
+  public void test_openIndexPartition() throws Exception {
+
+    // create the data directory.
+    assertTrue(dataDir.mkdirs());
+    assertTrue(journalsDir.mkdirs());
+    assertTrue(segmentsDir.mkdirs());
+
+    final String indexName = "ndx";
+    final int nentries = 100;
+    final IResourceMetadata journalMetadata;
+    final UUID indexUUID = UUID.randomUUID();
+    final UUID segmentUUID;
+    final IResourceMetadata segmentMetadata;
+    {
+      final File file = File.createTempFile("journal", Options.JNL, journalsDir);
+
+      file.delete(); // remove temp file - will be re-created below.
+
+      Properties properties = new Properties();
+
+      properties.setProperty(Options.FILE, file.toString());
+
+      Journal journal = new Journal(properties);
+
+      //            // commit the journal to assign [firstCommitTime].
+      //            journal.commit();
+
+      // wait for at one distinct timestamp to go by.
+      journal.nextTimestamp();
+
+      journalMetadata = journal.getResourceMetadata();
+
+      /*
+       * Create an index partition.
+       */
+      {
+        IndexMetadata indexMetadata = new IndexMetadata(indexName, indexUUID);
+
+        // required for scale-out indices.
+        indexMetadata.setDeleteMarkers(true);
+
+        // create index and register on the journal.
+        ILocalBTreeView ndx =
+            journal.registerIndex(indexName, BTree.create(journal, indexMetadata));
+
+        //                // commit journal so that it will notice when the index gets dirty.
+        //                journal.commit();
+
+        DataOutputBuffer buf = new DataOutputBuffer(Bytes.SIZEOF_INT);
+
+        // populate with some data.
+        for (int j = 0; j < nentries; j++) {
+
+          //                    ndx.insert(KeyBuilder.asSortKey(j), SerializerUtil
+          //                            .serialize(new Integer(j)));
+
+          // format the value.
+          buf.reset().putInt(j);
+
+          ndx.insert(TestKeyBuilder.asSortKey(j), buf.toByteArray());
+        }
+
+        // commit data on the journal - this is the commitTime for the indexSegment!
+        final long commitTime = journal.commit();
+
+        // create index segment from btree on journal.
+        final int partitionId = 0;
         {
-          
-            AbstractBTree[] sources = resourceManager
-                    .getIndexSources(indexName, 0L/* timestamp */);
 
-            assertNotNull("sources", sources);
+          // name the output file.
+          final File outFile =
+              File.createTempFile(
+                  indexMetadata.getName() + "_" + partitionId, // prefix
+                  Options.SEG, // suffix
+                  segmentsDir // directory
+                  );
 
-            assertEquals("#sources", 2, sources.length);
+          final int branchingFactor = 20;
 
-            // mutable btree on journal is empty.
-            assertTrue(sources[0] instanceof BTree);
-            assertEquals(0, sources[0].getEntryCount());
+          final IndexSegmentBuilder builder =
+              IndexSegmentBuilder.newInstance(
+                  outFile,
+                  tmpDir,
+                  (int) ndx.rangeCount(null, null),
+                  ndx.rangeIterator(null, null),
+                  branchingFactor,
+                  ndx.getIndexMetadata(),
+                  commitTime,
+                  true /* compactingMerge */,
+                  bufferNodes);
 
-            // immutable index segment holds all of the data.
-            assertTrue(sources[1] instanceof IndexSegment);
-            assertEquals(nentries, sources[1].getEntryCount());
+          builder.call();
 
+          // assigned UUID for the index segment resource.
+          segmentUUID = builder.segmentUUID;
+
+          // the segment resource description.
+          segmentMetadata = builder.getSegmentMetadata();
         }
-        
-        } finally {
 
-        // shutdown
-        concurrencyManager.shutdownNow();
-        localTransactionManager.shutdownNow();
-        resourceManager.shutdownNow();
-        txService.destroy();
-        
-        }
+        // clone before we start to modify the index metadata.
+        indexMetadata = indexMetadata.clone();
 
+        // describe the index partition.
+        indexMetadata.setPartitionMetadata(
+            new LocalPartitionMetadata(
+                partitionId,
+                -1, // not a move.
+                new byte[] {}, // left separator (first valid key)
+                null, // right separator (no upper bound)
+                /*
+                 * Note: The journal gets listed first since it can
+                 * continue to receive writes and therefore logically
+                 * comes before the index segment in the resource
+                 * ordering since any writes on the live index on the
+                 * journal will be more recent than the data on the
+                 * index segment.
+                 */
+                new IResourceMetadata[] { // resource metadata[].
+                  journal.getResourceMetadata(), segmentMetadata
+                },
+                /*
+                 * Note: using fake data here since the resource manager
+                 * has not been instantiated yet.
+                 */
+                new IndexPartitionCause(
+                    IndexPartitionCause.CauseEnum.Register,
+                    0 /*overflowCounter*/,
+                    System.currentTimeMillis() /*lastCommitTime*/)
+                //                        ,"bootstrap() "// history
+                ));
+
+        /*
+         * Drop the index that we used to build up the data for the
+         * index segment.
+         */
+        journal.dropIndex(indexMetadata.getName());
+
+        //                // commit changes on the journal.
+        //                journal.commit();
+
+        /*
+         * Register a new (and empty) index with the same name but with
+         * an index partition definition that includes the index
+         * segment.
+         */
+        journal.registerIndex(indexMetadata.getName(), BTree.create(journal, indexMetadata));
+
+        // commit changes on the journal.
+        journal.commit();
+      }
+
+      journal.shutdownNow();
+
+      assertTrue(journalMetadata.getCreateTime() > 0L);
     }
 
-    protected static class MyResourceManager extends ResourceManager {
+    /*
+     * Setup the resource manager.
+     */
 
-        public MyResourceManager(Properties properties) {
+    final Properties properties = getProperties();
 
-            super(properties);
+    final ResourceManager resourceManager = new MyResourceManager(properties);
 
-        }
+    final AbstractTransactionService txService = new MockTransactionService(properties).start();
 
-        public UUID getDataServiceUUID() {
+    final AbstractLocalTransactionManager localTransactionManager =
+        new MockLocalTransactionManager(txService);
 
-            throw new UnsupportedOperationException();
+    final ConcurrencyManager concurrencyManager =
+        new ConcurrencyManager(properties, localTransactionManager, resourceManager);
 
-        }
+    try {
 
-        public UUID[] getDataServiceUUIDs() {
+      resourceManager.setConcurrencyManager(concurrencyManager);
 
-            throw new UnsupportedOperationException();
-            
-        }
+      assertTrue(resourceManager.awaitRunning());
 
-        public IEmbergraphFederation getFederation() {
+      /*
+       * Do tests.
+       */
 
-            throw new UnsupportedOperationException();
+      // verify journal discovered.
+      assertEquals(1, resourceManager.getManagedJournalCount());
 
-        }
+      // open the journal.
+      IJournal journal = resourceManager.getLiveJournal();
 
-        public DataService getDataService() {
+      // verify index exists on that journal.
+      assertNotNull(journal.getIndex(indexName));
 
-            throw new UnsupportedOperationException();
+      // verify resource manager returns the same index object.
+      assertEquals(
+          journal.getIndex(indexName),
+          resourceManager.getIndexOnStore(indexName, 0L /* timestamp */, journal));
 
-        }
+      // an index segment was found.
+      assertEquals(1, resourceManager.getManagedSegmentCount());
 
+      // verify index segment discovered.
+      IndexSegmentStore segStore = (IndexSegmentStore) resourceManager.openStore(segmentUUID);
+
+      // verify opened.
+      assertNotNull(segStore);
+
+      // verify same reference.
+      assertTrue(segStore == resourceManager.openStore(segmentUUID));
+
+      /*
+       * @todo verify does not double-open an index segement from its store
+       * file!
+       */
+      {
+        AbstractBTree[] sources = resourceManager.getIndexSources(indexName, 0L /* timestamp */);
+
+        assertNotNull("sources", sources);
+
+        assertEquals("#sources", 2, sources.length);
+
+        // mutable btree on journal is empty.
+        assertTrue(sources[0] instanceof BTree);
+        assertEquals(0, sources[0].getEntryCount());
+
+        // immutable index segment holds all of the data.
+        assertTrue(sources[1] instanceof IndexSegment);
+        assertEquals(nentries, sources[1].getEntryCount());
+      }
+
+    } finally {
+
+      // shutdown
+      concurrencyManager.shutdownNow();
+      localTransactionManager.shutdownNow();
+      resourceManager.shutdownNow();
+      txService.destroy();
+    }
+  }
+
+  protected static class MyResourceManager extends ResourceManager {
+
+    public MyResourceManager(Properties properties) {
+
+      super(properties);
     }
 
+    public UUID getDataServiceUUID() {
+
+      throw new UnsupportedOperationException();
+    }
+
+    public UUID[] getDataServiceUUIDs() {
+
+      throw new UnsupportedOperationException();
+    }
+
+    public IEmbergraphFederation getFederation() {
+
+      throw new UnsupportedOperationException();
+    }
+
+    public DataService getDataService() {
+
+      throw new UnsupportedOperationException();
+    }
+  }
 }

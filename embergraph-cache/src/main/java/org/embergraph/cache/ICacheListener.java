@@ -22,23 +22,18 @@ package org.embergraph.cache;
 
 /**
  * Interface receives notice of cache eviction events.
- * 
+ *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see ICachePolicy
  */
+public interface ICacheListener<K, T> {
 
-public interface ICacheListener<K,T> {
-
-    /**
-     * The object was evicted from the cache.
-     * 
-     * @param entry
-     *            The cache entry for the object that is being evicted. The
-     *            entry is no longer valid once this method returns and MAY be
-     *            reused by the {@link ICachePolicy} implementation.
-     */
-    
-    public void objectEvicted( ICacheEntry<K,T> entry );
-    
+  /**
+   * The object was evicted from the cache.
+   *
+   * @param entry The cache entry for the object that is being evicted. The entry is no longer valid
+   *     once this method returns and MAY be reused by the {@link ICachePolicy} implementation.
+   */
+  public void objectEvicted(ICacheEntry<K, T> entry);
 }

@@ -41,207 +41,181 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 /**
- * This optimizer simply puts each type of {@link IGroupMemberNode} within a
- * {@link JoinGroupNode} in the right order w.r.t. to the other types.
- * <p>
- * Basically the ASTRunFirstRunLastOptimizer will look for IJoinNodes that have
- * a query hint of QueryHints.RUN_FIRST=true or RUN_LAST=true. If it finds more
- * than one "run first" or "run last" it will throw an exception. If it finds an
- * optional marked as "run first" it will throw an exception. It will then scan
- * the group and identify the first and last indices for IJoinNodes, and place
- * the run first and run last IJoinNodes at those indices. The static optimizer
- * will also look for a "run first" IJoinNode in a group and make sure that it
- * gets run first in the group (of the statement patterns). 
+ * This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
+ * in the right order w.r.t. to the other types.
+ *
+ * <p>Basically the ASTRunFirstRunLastOptimizer will look for IJoinNodes that have a query hint of
+ * QueryHints.RUN_FIRST=true or RUN_LAST=true. If it finds more than one "run first" or "run last"
+ * it will throw an exception. If it finds an optional marked as "run first" it will throw an
+ * exception. It will then scan the group and identify the first and last indices for IJoinNodes,
+ * and place the run first and run last IJoinNodes at those indices. The static optimizer will also
+ * look for a "run first" IJoinNode in a group and make sure that it gets run first in the group (of
+ * the statement patterns).
  */
 public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
 
-//    private static final Logger log = Logger
-//            .getLogger(ASTRunFirstRunLastOptimizer.class);
+  //    private static final Logger log = Logger
+  //            .getLogger(ASTRunFirstRunLastOptimizer.class);
 
-    @Override
-    public QueryNodeWithBindingSet optimize(
-        final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-        final IQueryNode queryNode = input.getQueryNode();
-        final IBindingSet[] bindingSets = input.getBindingSets();     
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
-        if (!(queryNode instanceof QueryRoot))
-           return new QueryNodeWithBindingSet(queryNode, bindingSets);
+    if (!(queryNode instanceof QueryRoot))
+      return new QueryNodeWithBindingSet(queryNode, bindingSets);
 
-        final QueryRoot queryRoot = (QueryRoot) queryNode;
-        
-        final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
+    final QueryRoot queryRoot = (QueryRoot) queryNode;
 
-        // Main WHERE clause
-        {
+    final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
 
-            @SuppressWarnings("unchecked")
-			final GraphPatternGroup<IGroupMemberNode> whereClause = 
-            	(GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
+    // Main WHERE clause
+    {
+      @SuppressWarnings("unchecked")
+      final GraphPatternGroup<IGroupMemberNode> whereClause =
+          (GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
 
-            if (whereClause != null) {
+      if (whereClause != null) {
 
-                optimize(context, sa, whereClause);
-                
-            }
-
-        }
-
-        // Named subqueries
-        if (queryRoot.getNamedSubqueries() != null) {
-
-            final NamedSubqueriesNode namedSubqueries = queryRoot
-                    .getNamedSubqueries();
-
-            /*
-             * Note: This loop uses the current size() and get(i) to avoid
-             * problems with concurrent modification during visitation.
-             */
-            for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
-
-                @SuppressWarnings("unchecked")
-				final GraphPatternGroup<IGroupMemberNode> whereClause = 
-                	(GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
-
-                if (whereClause != null) {
-
-                    optimize(context, sa, whereClause);
-
-                }
-
-            }
-
-        }
-
-        // log.error("\nafter rewrite:\n" + queryNode);
-
-        return new QueryNodeWithBindingSet(queryNode, bindingSets);
-
+        optimize(context, sa, whereClause);
+      }
     }
 
-	/**
-	 * 1. Look for multiple run first or run last joins and throw an exception.
-	 * <p>
-	 * 2. Find the run first join if it exists. Make sure it is not optional.
-	 * Put it first.
-	 * <p> 
-	 * 3. Find the run last optimizer if it exists. Put it last.
-	 */
-    private void optimize(final IEvaluationContext ctx, final StaticAnalysis sa,
-    		final GraphPatternGroup<?> op) {
+    // Named subqueries
+    if (queryRoot.getNamedSubqueries() != null) {
 
-    	if (op instanceof JoinGroupNode) {
-    		
-    		final JoinGroupNode joinGroup = (JoinGroupNode) op;
-    	
-    		IGroupMemberNode first = null;
-    		IGroupMemberNode last = null;
-    		
-            for (IGroupMemberNode child : joinGroup) {
-            
-            	if (child instanceof IBindingProducerNode) {
-            		
-            		final ASTBase join = (ASTBase) child;
-            		
-            		if (join.getProperty(QueryHints.RUN_FIRST, false)) {
-            			
-            			if (first != null) {
-            				
-            				throw new RuntimeException(
-            						"there can be only one \"run first\" join in any group");
-            				
-            			}
-            			
-            			if (((IJoinNode) join).isOptional()) {
-            				
-            				throw new RuntimeException(
-            						"\"run first\" cannot be attached to optional joins");
-            				
-            			}
-            			
-            			first = child;
-            			
-            		}
-            		
-            		if (join.getProperty(QueryHints.RUN_LAST, false)) {
-            			
-            			if (last != null) {
-            				
-            				throw new RuntimeException(
-            						"there can be only one \"run last\" join in any group");
-            				
-            			}
-            			
-            			last = child;
-            			
-            		}
-            		
-            	}
-            	
-            }
-        
+      final NamedSubqueriesNode namedSubqueries = queryRoot.getNamedSubqueries();
+
+      /*
+       * Note: This loop uses the current size() and get(i) to avoid
+       * problems with concurrent modification during visitation.
+       */
+      for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> whereClause =
+            (GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
+
+        if (whereClause != null) {
+
+          optimize(context, sa, whereClause);
+        }
+      }
+    }
+
+    // log.error("\nafter rewrite:\n" + queryNode);
+
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  }
+
+  /**
+   * 1. Look for multiple run first or run last joins and throw an exception.
+   *
+   * <p>2. Find the run first join if it exists. Make sure it is not optional. Put it first.
+   *
+   * <p>3. Find the run last optimizer if it exists. Put it last.
+   */
+  private void optimize(
+      final IEvaluationContext ctx, final StaticAnalysis sa, final GraphPatternGroup<?> op) {
+
+    if (op instanceof JoinGroupNode) {
+
+      final JoinGroupNode joinGroup = (JoinGroupNode) op;
+
+      IGroupMemberNode first = null;
+      IGroupMemberNode last = null;
+
+      for (IGroupMemberNode child : joinGroup) {
+
+        if (child instanceof IBindingProducerNode) {
+
+          final ASTBase join = (ASTBase) child;
+
+          if (join.getProperty(QueryHints.RUN_FIRST, false)) {
+
             if (first != null) {
-            	
-                int firstJoinIndex = 0;
-                for (int i = 0; i < joinGroup.arity(); i++) {
-                	if (joinGroup.get(i) instanceof IBindingProducerNode) {
-                		firstJoinIndex = i;
-                		break;
-                	}
-                }
-                
-		        joinGroup.removeChild(first);
-		        
-		        joinGroup.addArg(firstJoinIndex, (BOp) first);
-		        
+
+              throw new RuntimeException("there can be only one \"run first\" join in any group");
             }
-            
+
+            if (((IJoinNode) join).isOptional()) {
+
+              throw new RuntimeException("\"run first\" cannot be attached to optional joins");
+            }
+
+            first = child;
+          }
+
+          if (join.getProperty(QueryHints.RUN_LAST, false)) {
+
             if (last != null) {
-            	
-                int lastJoinIndex = 0;
-                for (int i = joinGroup.size()-1; i >= 0; i--) {
-                	if (joinGroup.get(i) instanceof IBindingProducerNode) {
-                		lastJoinIndex = i;
-                		break;
-                	}
-                }
-                
-		        joinGroup.removeChild(last);
-		        
-		        joinGroup.addArg(lastJoinIndex, (BOp) last);
-            	
+
+              throw new RuntimeException("there can be only one \"run last\" join in any group");
             }
-    		
-    	}
-    	
-        /*
-         * Recursion, but only into group nodes (including within subqueries).
-         */
-        for (int i = 0; i < op.arity(); i++) {
 
-            final BOp child = op.get(i);
+            last = child;
+          }
+        }
+      }
 
-            if (child instanceof GraphPatternGroup<?>) {
+      if (first != null) {
 
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) child;
-
-                optimize(ctx, sa, childGroup);
-                
-            } else if (child instanceof QueryBase) {
-
-                final QueryBase subquery = (QueryBase) child;
-
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) subquery
-                        .getWhereClause();
-
-                optimize(ctx, sa, childGroup);
-
-            }
-            
+        int firstJoinIndex = 0;
+        for (int i = 0; i < joinGroup.arity(); i++) {
+          if (joinGroup.get(i) instanceof IBindingProducerNode) {
+            firstJoinIndex = i;
+            break;
+          }
         }
 
+        joinGroup.removeChild(first);
+
+        joinGroup.addArg(firstJoinIndex, (BOp) first);
+      }
+
+      if (last != null) {
+
+        int lastJoinIndex = 0;
+        for (int i = joinGroup.size() - 1; i >= 0; i--) {
+          if (joinGroup.get(i) instanceof IBindingProducerNode) {
+            lastJoinIndex = i;
+            break;
+          }
+        }
+
+        joinGroup.removeChild(last);
+
+        joinGroup.addArg(lastJoinIndex, (BOp) last);
+      }
     }
-    
+
+    /*
+     * Recursion, but only into group nodes (including within subqueries).
+     */
+    for (int i = 0; i < op.arity(); i++) {
+
+      final BOp child = op.get(i);
+
+      if (child instanceof GraphPatternGroup<?>) {
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) child;
+
+        optimize(ctx, sa, childGroup);
+
+      } else if (child instanceof QueryBase) {
+
+        final QueryBase subquery = (QueryBase) child;
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) subquery.getWhereClause();
+
+        optimize(ctx, sa, childGroup);
+      }
+    }
+  }
 }

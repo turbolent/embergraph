@@ -2,8 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTAvg extends ASTAggregate {
+public class ASTAvg extends ASTAggregate {
   public ASTAvg(int id) {
     super(id);
   }
@@ -12,8 +11,7 @@ class ASTAvg extends ASTAggregate {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }

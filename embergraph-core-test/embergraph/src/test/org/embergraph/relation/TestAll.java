@@ -29,51 +29,38 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("relations");
+
+    // data declaration layer.
+    suite.addTest(org.embergraph.relation.ddl.TestAll.suite());
+
+    // test suite for rules, but not rule execution.
+    suite.addTest(org.embergraph.relation.rule.TestAll.suite());
+
+    // test suite for access paths.
+    suite.addTest(org.embergraph.relation.accesspath.TestAll.suite());
+
+    // test suite for locating resources.
+    suite.addTest(org.embergraph.relation.locator.TestAll.suite());
+
+    /*
+     * Note: The relation impls, access path impls, and rule execution are
+     * currently tested in the context of the RDF DB.
      */
-    public TestAll() {
-        
-    }
+    //        suite.addTest(org.embergraph.relation.rdf.TestAll.suite());
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
-
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("relations");
-
-        // data declaration layer.
-        suite.addTest(org.embergraph.relation.ddl.TestAll.suite());
-        
-        // test suite for rules, but not rule execution.
-        suite.addTest(org.embergraph.relation.rule.TestAll.suite());
-        
-        // test suite for access paths.
-        suite.addTest(org.embergraph.relation.accesspath.TestAll.suite());
-
-        // test suite for locating resources.
-        suite.addTest(org.embergraph.relation.locator.TestAll.suite());
-        
-        /*
-         * Note: The relation impls, access path impls, and rule execution are
-         * currently tested in the context of the RDF DB.
-         */
-//        suite.addTest(org.embergraph.relation.rdf.TestAll.suite());
-        
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

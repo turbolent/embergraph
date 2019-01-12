@@ -16,59 +16,45 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 import java.util.List;
-
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IVariable;
-
 /**
- * An interface that may be used to extract variable bindings for the
- * vertices visited by the algorithm.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ * An interface that may be used to extract variable bindings for the vertices visited by the
+ * algorithm.
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IBinder<VS, ES, ST> {
 
-    /**
-     * The ordinal index of the variable that is bound by this
-     * {@link IBinder}. By convention, index ZERO is the vertex. Indices
-     * greater than ZERO are typically aspects of the state of the vertex.
-     */
-    int getIndex();
+  /**
+   * The ordinal index of the variable that is bound by this {@link IBinder}. By convention, index
+   * ZERO is the vertex. Indices greater than ZERO are typically aspects of the state of the vertex.
+   */
+  int getIndex();
 
-    /**
-     * New multi-binding strategy allows binders to bind multiple values to
-     * a given output variable (multiplying the number of solutions by the
-     * number of bindings).
-     * 
-     * @param vf
-     *            The {@link ValueFactory} used to create the return
-     *            {@link Value}.
-     *            
-     * @param state
-     * 			  The {@link IGASState}.
-     * 	
-     * @param u
-     * 			  The vertex.
-     * 
-     * @param outVars
-     * 			  The array of output variables.
-     * 
-     * @param bs
-     *            The current binding set. Can be used to conditionally bind
-     *            values based on the current solution.
-     *            
-     * @return The {@link Value} for that ordinal variable or
-     *         <code>null</code> if there is no binding for that ordinal
-     *         variable.
-     */
-    List<Value> bind(ValueFactory vf, IGASState<VS, ES, ST> state, 
-    		Value u, IVariable<?>[] outVars, IBindingSet bs);
+  /**
+   * New multi-binding strategy allows binders to bind multiple values to a given output variable
+   * (multiplying the number of solutions by the number of bindings).
+   *
+   * @param vf The {@link ValueFactory} used to create the return {@link Value}.
+   * @param state The {@link IGASState}.
+   * @param u The vertex.
+   * @param outVars The array of output variables.
+   * @param bs The current binding set. Can be used to conditionally bind values based on the
+   *     current solution.
+   * @return The {@link Value} for that ordinal variable or <code>null</code> if there is no binding
+   *     for that ordinal variable.
+   */
+  List<Value> bind(
+      ValueFactory vf,
+      IGASState<VS, ES, ST> state,
+      Value u,
+      IVariable<?>[] outVars,
+      IBindingSet bs);
 
-//    Value bind(ValueFactory vf, final IGASState<VS, ES, ST> state, Value u);
-    
+  //    Value bind(ValueFactory vf, final IGASState<VS, ES, ST> state, Value u);
+
 }
-

@@ -26,45 +26,33 @@ import org.embergraph.relation.rule.IQueryOptions;
 
 /**
  * Unit tests for {@link IQueryOptions#getOrderBy()}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestOrderBy extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestOrderBy() {
-    }
+  /** */
+  public TestOrderBy() {}
 
-    /**
-     * @param name
-     */
-    public TestOrderBy(String name) {
-        super(name);
-    }
-    
-    /**
-     * @todo write unit tests for "orderBy".
-     * 
-     * @todo unit test where empty result set.
-     * 
-     * @todo unit test where duplicate records exit and verify that duplicates
-     *       are retained.
-     * 
-     * @todo unit test for various ascending and descending key combinations,
-     *       including keys with unicode values. verify that the ascending and
-     *       descending orders are being computed correctly (basically, verify
-     *       that we are generating the descending order by a correct
-     *       perturbation of the generated sort key).
-     * 
-     * @todo native order by support has not been implemented yet.
-     */
-    public void test_orderBy() {
-        
-//        fail("write tests");
-        
-    }
-    
+  /** @param name */
+  public TestOrderBy(String name) {
+    super(name);
+  }
+
+  /**
+   * @todo write unit tests for "orderBy".
+   * @todo unit test where empty result set.
+   * @todo unit test where duplicate records exit and verify that duplicates are retained.
+   * @todo unit test for various ascending and descending key combinations, including keys with
+   *     unicode values. verify that the ascending and descending orders are being computed
+   *     correctly (basically, verify that we are generating the descending order by a correct
+   *     perturbation of the generated sort key).
+   * @todo native order by support has not been implemented yet.
+   */
+  public void test_orderBy() {
+
+    //        fail("write tests");
+
+  }
 }

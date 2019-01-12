@@ -23,121 +23,102 @@ package org.embergraph.journal;
 
 /**
  * A read-only view of an {@link ICommitRecord}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CommitRecord implements ICommitRecord {
 
-    private final long timestamp;
-    private final long commitCounter;
-    private final long[] roots;
+  private final long timestamp;
+  private final long commitCounter;
+  private final long[] roots;
 
-    /**
-     * @todo this may not be the correct commit counter unless this method is
-     *       synchronized with the writeService.
-     * 
-     * @todo are commit counters global or local?
-     */
-    public CommitRecord() {
+  /**
+   * @todo this may not be the correct commit counter unless this method is synchronized with the
+   *     writeService.
+   * @todo are commit counters global or local?
+   */
+  public CommitRecord() {
 
-        this(0L/* timestamp */, 0L/* commitCounter */,
-                new long[ICommitRecord.MAX_ROOT_ADDRS]);
-        
+    this(0L /* timestamp */, 0L /* commitCounter */, new long[ICommitRecord.MAX_ROOT_ADDRS]);
+  }
+
+  public CommitRecord(final long timestamp, final long commitCounter, final long[] roots) {
+
+    //        assert timestamp != 0L; // @todo what constraint?
+
+    assert roots != null;
+
+    assert roots.length == ICommitRecord.MAX_ROOT_ADDRS
+        : "roots.length=" + roots.length + ", but expecting: " + ICommitRecord.MAX_ROOT_ADDRS;
+
+    this.timestamp = timestamp;
+
+    this.commitCounter = commitCounter;
+
+    this.roots = roots;
+  }
+
+  @Override
+  public final long getTimestamp() {
+
+    return timestamp;
+  }
+
+  @Override
+  public final long getCommitCounter() {
+
+    return commitCounter;
+  }
+
+  @Override
+  public final int getRootAddrCount() {
+
+    return roots.length;
+  }
+
+  @Override
+  public final long getRootAddr(int index) {
+
+    return roots[index];
+  }
+
+  @Override
+  public String toString() {
+
+    StringBuffer sb = new StringBuffer();
+
+    sb.append("CommitRecord");
+
+    sb.append("{timestamp=" + timestamp);
+
+    sb.append(", commitCounter=" + commitCounter);
+
+    sb.append(", roots=[");
+
+    for (int i = 0; i < roots.length; i++) {
+
+      if (i > 0) sb.append(", ");
+
+      //            sb.append(Addr.toString(roots[i]));
+      sb.append(roots[i]);
     }
 
-    public CommitRecord(final long timestamp, final long commitCounter,
-            final long[] roots) {
+    sb.append("]}");
 
-//        assert timestamp != 0L; // @todo what constraint?
-        
-        assert roots != null;
-        
-        assert roots.length == ICommitRecord.MAX_ROOT_ADDRS : "roots.length="
-                + roots.length + ", but expecting: "
-                + ICommitRecord.MAX_ROOT_ADDRS;
-        
-        this.timestamp = timestamp;
-        
-        this.commitCounter = commitCounter;
-        
-        this.roots = roots;
-        
-    }
+    return sb.toString();
+  }
 
-    @Override
-    final public long getTimestamp() {
-        
-        return timestamp;
-        
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ICommitRecord)) return false;
+    final ICommitRecord t = (ICommitRecord) o;
+    if (timestamp != t.getTimestamp()) return false;
+    if (commitCounter != t.getCommitCounter()) return false;
+    if (roots.length != t.getRootAddrCount()) return false;
+    for (int i = 0; i < roots.length; i++) {
+      if (roots[i] != t.getRootAddr(i)) return false;
     }
-
-    @Override
-    final public long getCommitCounter() {
-        
-        return commitCounter;
-        
-    }
-    
-    @Override
-    final public int getRootAddrCount() {
-        
-        return roots.length;
-        
-    }
-    
-    @Override
-    final public long getRootAddr(int index) {
-        
-        return roots[index];
-        
-    }
-
-    @Override
-    public String toString() {
-        
-        StringBuffer sb = new StringBuffer();
-        
-        sb.append("CommitRecord");
-        
-        sb.append("{timestamp="+timestamp);
-        
-        sb.append(", commitCounter="+commitCounter);
-        
-        sb.append(", roots=[");
-        
-        for( int i=0; i< roots.length; i++) {
-            
-            if(i>0) sb.append(", ");
-            
-//            sb.append(Addr.toString(roots[i]));
-            sb.append(roots[i]);
-            
-        }
-        
-        sb.append("]}");
-        
-        return sb.toString();
-        
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof ICommitRecord))
-            return false;
-        final ICommitRecord t = (ICommitRecord) o;
-        if (timestamp != t.getTimestamp())
-            return false;
-        if (commitCounter != t.getCommitCounter())
-            return false;
-        if (roots.length != t.getRootAddrCount())
-            return false;
-        for (int i = 0; i < roots.length; i++) {
-            if (roots[i] != t.getRootAddr(i))
-                return false;
-        }
-        return true;
-    }
-    
+    return true;
+  }
 }

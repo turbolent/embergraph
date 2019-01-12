@@ -24,24 +24,22 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for {@link OWL}.
- * 
+ *
  * @see http://www.w3.org/2002/07/owl#
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class OWLVocabularyDecl implements VocabularyDecl {
 
-    static private final URI[] uris = new URI[]{
+  private static final URI[] uris =
+      new URI[] {
         new URIImpl(OWL.NAMESPACE),
         OWL.ALLDIFFERENT,
         OWL.ALLVALUESFROM,
@@ -81,15 +79,12 @@ public class OWLVocabularyDecl implements VocabularyDecl {
         OWL.TRANSITIVEPROPERTY,
         OWL.UNIONOF,
         OWL.VERSIONINFO,
-    };
+      };
 
-    public OWLVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public OWLVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

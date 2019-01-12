@@ -33,56 +33,47 @@ import junit.framework.TestSuite;
  */
 public class TestTransactionSupport extends ProxyTestCase {
 
-    /**
-     * Aggregates the test suites into something approximating increasing
-     * dependency. This is designed to run as a <em>proxy test suite</em> in
-     * which all tests are run using a common configuration and a delegatation
-     * mechanism. You MUST add the returned {@link Test} into a properly
-     * configured {@link ProxyTestSuite}.
-     * 
-     * @see ProxyTestSuite
+  /**
+   * Aggregates the test suites into something approximating increasing dependency. This is designed
+   * to run as a <em>proxy test suite</em> in which all tests are run using a common configuration
+   * and a delegatation mechanism. You MUST add the returned {@link Test} into a properly configured
+   * {@link ProxyTestSuite}.
+   *
+   * @see ProxyTestSuite
+   */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("Transactions");
+
+    // test of the RunState class.
+    suite.addTestSuite(TestRunState.class);
+
+    /*
+     * Test suite for the transaction service using a mock client.
      */
-    public static Test suite()
-    {
-        
-        final TestSuite suite = new TestSuite("Transactions");
+    suite.addTestSuite(TestTransactionService.class);
 
-        // test of the RunState class.
-        suite.addTestSuite(TestRunState.class);
-        
-        /*
-         * Test suite for the transaction service using a mock client.
-         */
-        suite.addTestSuite(TestTransactionService.class);
-
-        /*
-         * Isolation tests with a standalone database (Journal).
-         */
-
-        // tests of read-write transactions and isolation.
-        suite.addTestSuite(TestTx.class);
-
-        // tests of read-only transactions.
-        suite.addTestSuite(TestReadOnlyTx.class);
-
-        // tests of transactions starting from the last committed state.
-        suite.addTestSuite(TestReadCommittedTx.class);
-
-        return suite;
-        
-    }
-    
-    /**
-     * 
+    /*
+     * Isolation tests with a standalone database (Journal).
      */
-    public TestTransactionSupport() {
-    }
 
-    /**
-     * @param name
-     */
-    public TestTransactionSupport(String name) {
-        super(name);
-    }
+    // tests of read-write transactions and isolation.
+    suite.addTestSuite(TestTx.class);
 
+    // tests of read-only transactions.
+    suite.addTestSuite(TestReadOnlyTx.class);
+
+    // tests of transactions starting from the last committed state.
+    suite.addTestSuite(TestReadCommittedTx.class);
+
+    return suite;
+  }
+
+  /** */
+  public TestTransactionSupport() {}
+
+  /** @param name */
+  public TestTransactionSupport(String name) {
+    super(name);
+  }
 }

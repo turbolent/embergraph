@@ -17,71 +17,56 @@ package org.embergraph.rdf.graph.impl.scheduler;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import org.openrdf.model.Value;
-
 import org.embergraph.rdf.graph.IGASSchedulerImpl;
 import org.embergraph.rdf.graph.IStaticFrontier;
 import org.embergraph.rdf.graph.impl.GASEngine;
+import org.openrdf.model.Value;
 
 /**
  * A scheduler suitable for a single thread.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class STScheduler implements IGASSchedulerImpl {
 
-    /**
-     * The scheduled vertices.
-     */
-    private final Set<Value> vertices;
-    private final boolean sortFrontier;
-    
-    public STScheduler(final GASEngine gasEngine) {
+  /** The scheduled vertices. */
+  private final Set<Value> vertices;
 
-        this.vertices = new LinkedHashSet<Value>();
-        this.sortFrontier = gasEngine.getSortFrontier();
-    
-    }
-    
-    /**
-     * The #of vertices in the frontier.
-     */
-    public int size() {
+  private final boolean sortFrontier;
 
-        return vertices.size();
-        
-    }
+  public STScheduler(final GASEngine gasEngine) {
 
-    /**
-     * The backing collection.
-     */
-    public Set<Value> getVertices() {
-        
-        return vertices;
-        
-    }
-    
-    @Override
-    public void schedule(final Value v) {
-    
-        vertices.add(v);
-        
-    }
+    this.vertices = new LinkedHashSet<Value>();
+    this.sortFrontier = gasEngine.getSortFrontier();
+  }
 
-    @Override
-    public void compactFrontier(final IStaticFrontier frontier) {
+  /** The #of vertices in the frontier. */
+  public int size() {
 
-        frontier.resetFrontier(vertices.size()/* minCapacity */, sortFrontier,
-                vertices.iterator());
+    return vertices.size();
+  }
 
-    }
+  /** The backing collection. */
+  public Set<Value> getVertices() {
 
-    @Override
-    public void clear() {
-        
-        vertices.clear();
-        
-    }
-    
+    return vertices;
+  }
+
+  @Override
+  public void schedule(final Value v) {
+
+    vertices.add(v);
+  }
+
+  @Override
+  public void compactFrontier(final IStaticFrontier frontier) {
+
+    frontier.resetFrontier(vertices.size() /* minCapacity */, sortFrontier, vertices.iterator());
+  }
+
+  @Override
+  public void clear() {
+
+    vertices.clear();
+  }
 }

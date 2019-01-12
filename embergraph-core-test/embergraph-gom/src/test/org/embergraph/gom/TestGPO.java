@@ -19,348 +19,331 @@ package org.embergraph.gom;
 
 import java.net.URL;
 import java.util.Iterator;
-
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.ILinkSet;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.gom.gpo.IGPO;
-import org.embergraph.gom.gpo.ILinkSet;
-
 public class TestGPO extends ProxyGOMTest {
 
-    protected void checkLinkSet(final ILinkSet ls, int size) {
-    	assertTrue(ls.size() == size);
-    	Iterator<IGPO> values = ls.iterator();
-    	int count = 0;
-    	while (values.hasNext()) {
-    		count++;
-    		values.next();
-    	}
-    	assertTrue(count == size);
+  protected void checkLinkSet(final ILinkSet ls, int size) {
+    assertTrue(ls.size() == size);
+    Iterator<IGPO> values = ls.iterator();
+    int count = 0;
+    while (values.hasNext()) {
+      count++;
+      values.next();
+    }
+    assertTrue(count == size);
+  }
+
+  /** The initial state rdf store is defined in the testgom.n3 file */
+  protected void doLoadData() {
+    final URL n3 = TestGOM.class.getResource("testgom.n3");
+
+    try {
+      ((IGOMProxy) m_delegate).load(n3, RDFFormat.N3);
+    } catch (Exception e) {
+      fail("Unable to load test data");
+    }
+  }
+
+  public TestGPO() {}
+
+  public TestGPO(String testName) {
+    super(testName);
+  }
+
+  public void testHashCode() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI clssuri = vf.createURI("gpo:#1");
+    IGPO clssgpo = om.getGPO(clssuri);
+
+    assertTrue(clssgpo.hashCode() == clssgpo.getId().hashCode());
+    assertTrue(clssgpo.hashCode() == clssuri.hashCode());
+  }
+
+  public void testLinkSetsIn() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI clssuri = vf.createURI("gpo:#1");
+    IGPO clssgpo = om.getGPO(clssuri);
+
+    final URI linkURI = vf.createURI("attr:/type");
+    ILinkSet ls = clssgpo.getLinksIn(linkURI);
+
+    assertTrue(ls.getOwner() == clssgpo);
+    assertTrue(ls.isLinkSetIn());
+    assertTrue(ls.getLinkProperty().equals(linkURI));
+
+    checkLinkSet(ls, 2);
+  }
+
+  /** Checks consistency with added and removed values */
+  public void testLinkSetsOut() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    ILinkSet ls = workergpo.getLinksOut(worksFor);
+
+    assertTrue(ls.getOwner() == workergpo);
+    assertFalse(ls.isLinkSetIn());
+    assertTrue(ls.getLinkProperty().equals(worksFor));
+
+    checkLinkSet(ls, 2);
+
+    final URI gpo678uri = vf.createURI("gpo:#678");
+    workergpo.addValue(worksFor, gpo678uri);
+
+    checkLinkSet(ls, 3);
+
+    workergpo.removeValue(worksFor, gpo678uri);
+
+    checkLinkSet(ls, 2);
+
+    workergpo.removeValues(worksFor);
+
+    checkLinkSet(ls, 0);
+  }
+
+  /** Checks linkSet membership */
+  public void testMembership() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    ILinkSet ls = workergpo.getLinksOut(worksFor);
+
+    checkLinkSet(ls, 2);
+
+    final URI companyuri = vf.createURI("gpo:#456");
+    IGPO companygpo = om.getGPO(companyuri);
+
+    assertTrue(companygpo.isMemberOf(ls));
+  }
+
+  public void testValues() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final URI notWorksFor = vf.createURI("attr:/employee#notWorksFor");
+
+    assertTrue(workergpo.getValues(worksFor).size() > 0);
+
+    assertTrue(workergpo.getValues(notWorksFor).isEmpty());
+  }
+
+  public void testStatements() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+
+    assertTrue(workergpo.getStatements().size() == 6);
+
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    workergpo.removeValues(worksFor);
+
+    assertTrue(workergpo.getStatements().size() == 4);
+  }
+
+  public void testBound() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final URI notWorksFor = vf.createURI("attr:/employee#notWorksFor");
+
+    assertTrue(workergpo.isBound(worksFor));
+
+    assertFalse(workergpo.isBound(notWorksFor));
+  }
+
+  public void testRemoveValues() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+
+    assertFalse(workergpo.getLinksOut(worksFor).isEmpty());
+    assertFalse(workergpo.getValues(worksFor).isEmpty());
+    workergpo.removeValues(worksFor);
+    assertTrue(workergpo.getValues(worksFor).isEmpty());
+    assertTrue(workergpo.getLinksOut(worksFor).isEmpty());
+  }
+
+  public void testRemoveValue() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+
+    assertFalse(workergpo.getValues(worksFor).isEmpty());
+    Value old = workergpo.getValue(worksFor);
+    while (old != null) {
+      workergpo.removeValue(worksFor, old);
+      old = workergpo.getValue(worksFor);
+    }
+    assertTrue(workergpo.getValues(worksFor).isEmpty());
+  }
+
+  public void testRemove() {
+    doLoadData();
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final ILinkSet ls = workergpo.getLinksOut(worksFor);
+
+    assertTrue(ls.size() > 0);
+
+    final IGPO employer = ls.iterator().next();
+    final int lssize = employer.getLinksIn(worksFor).size();
+
+    assertTrue(lssize > 0);
+
+    workergpo.remove();
+
+    checkLinkSet(employer.getLinksIn(worksFor), lssize - 1);
+
+    try {
+      ls.size();
+      fail("Expected exception after removing GPO");
+    } catch (IllegalStateException ise) {
+      // expected
     }
 
-    /**
-	 * The initial state rdf store is defined in the testgom.n3 file
-	 */
-	protected void doLoadData() {
-		final URL n3 = TestGOM.class.getResource("testgom.n3");
+    try {
+      workergpo.getLinksOut(worksFor);
+      fail("Expected exception after removing GPO");
+    } catch (IllegalStateException ise) {
+      // expected
+    }
+  }
 
-		try {
-			((IGOMProxy) m_delegate).load(n3, RDFFormat.N3);
-		} catch (Exception e) {
-			fail("Unable to load test data");
-		}
-	}
+  /** Checks for reverse linkset referential integrity when property removed */
+  public void testLinkSetConsistency1() {
+    doLoadData();
 
-	public TestGPO() {
-		
-	}
-	
-	public TestGPO(String testName) {
-		super(testName);
-	}
-	
-	public void testHashCode() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final ValueFactory vf = om.getValueFactory();
 
-	    final URI clssuri = vf.createURI("gpo:#1");
-	    IGPO clssgpo = om.getGPO(clssuri);
-		
-	    assertTrue(clssgpo.hashCode() == clssgpo.getId().hashCode());
-	    assertTrue(clssgpo.hashCode() == clssuri.hashCode());
-	}
-	
-	public void testLinkSetsIn() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final ILinkSet ls = workergpo.getLinksOut(worksFor);
 
-	    final URI clssuri = vf.createURI("gpo:#1");
-	    IGPO clssgpo = om.getGPO(clssuri);
-		
-	    final URI linkURI = vf.createURI("attr:/type");
-	    ILinkSet ls = clssgpo.getLinksIn(linkURI);
-	    
-	    assertTrue(ls.getOwner() == clssgpo);
-	    assertTrue(ls.isLinkSetIn());
-	    assertTrue(ls.getLinkProperty().equals(linkURI));
-	    
-	    checkLinkSet(ls, 2);
-	}
+    assertTrue(ls.size() > 0);
 
-	/**
-	 * Checks consistency with added and removed values
-	 */
-	public void testLinkSetsOut() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final IGPO employer = ls.iterator().next();
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-		
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    ILinkSet ls = workergpo.getLinksOut(worksFor);
-	    
-	    assertTrue(ls.getOwner() == workergpo);
-	    assertFalse(ls.isLinkSetIn());
-	    assertTrue(ls.getLinkProperty().equals(worksFor));
-	    
-	    checkLinkSet(ls, 2);
-	    
-	    final URI gpo678uri = vf.createURI("gpo:#678");
-	    workergpo.addValue(worksFor, gpo678uri);
-	    
-	    checkLinkSet(ls, 3);
-	    
-	    workergpo.removeValue(worksFor, gpo678uri);
+    final ILinkSet employees = employer.getLinksIn(worksFor);
+    assertTrue(employees.contains(workergpo));
 
-	    checkLinkSet(ls, 2);
-	    
-	    workergpo.removeValues(worksFor);
-	    
-	    checkLinkSet(ls, 0);
-	}
-	
-	/**
-	 * Checks linkSet membership
-	 */
-	public void testMembership() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    workergpo.removeValue(worksFor, employer.getId());
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-		
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    ILinkSet ls = workergpo.getLinksOut(worksFor);
-	    
-	    checkLinkSet(ls, 2);
+    assertFalse(employees.contains(workergpo));
+  }
 
-	    final URI companyuri = vf.createURI("gpo:#456");
-	    IGPO companygpo = om.getGPO(companyuri);
-	    
-	    assertTrue(companygpo.isMemberOf(ls));
+  /** Checks for reverse linkset referential integrity when property replaced */
+  public void testLinkSetConsistency2() {
+    doLoadData();
 
-	}
+    final ValueFactory vf = om.getValueFactory();
 
-	public void testValues() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final URI workeruri = vf.createURI("gpo:#123");
+    IGPO workergpo = om.getGPO(workeruri);
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final ILinkSet ls = workergpo.getLinksOut(worksFor);
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    final URI notWorksFor = vf.createURI("attr:/employee#notWorksFor");
-		
-	    assertTrue(workergpo.getValues(worksFor).size() > 0);
-	    
-	    assertTrue(workergpo.getValues(notWorksFor).isEmpty());
-		
-	}
+    assertTrue(ls.size() > 0);
 
-	public void testStatements() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final IGPO employer = ls.iterator().next();
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    
-	    assertTrue(workergpo.getStatements().size() == 6);
-	    
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    workergpo.removeValues(worksFor);
+    final ILinkSet employees = employer.getLinksIn(worksFor);
+    assertTrue(employees.contains(workergpo));
 
-	    assertTrue(workergpo.getStatements().size() == 4);
-}
+    // set property to new URI
+    final URI newuri = vf.createURI("gpo:#999");
+    workergpo.setValue(worksFor, newuri);
 
-	public void testBound() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    assertFalse(employees.contains(workergpo));
+    assertTrue(om.getGPO(newuri).getLinksIn(worksFor).contains(workergpo));
+  }
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    final URI notWorksFor = vf.createURI("attr:/employee#notWorksFor");
-		
-	    assertTrue(workergpo.isBound(worksFor));
-	    
-	    assertFalse(workergpo.isBound(notWorksFor));
-	}
-	
-	public void testRemoveValues() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+  /**
+   * Checks for consistency as link set is created and modified
+   *
+   * <p>Dependent: setValue, getValue, removeValue, getLinksIn
+   */
+  public void testLinkSetConsistency3() {
+    doLoadData();
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-		
-	    assertFalse(workergpo.getLinksOut(worksFor).isEmpty());
-	    assertFalse(workergpo.getValues(worksFor).isEmpty());
-	    workergpo.removeValues(worksFor);
-	    assertTrue(workergpo.getValues(worksFor).isEmpty());
-	    assertTrue(workergpo.getLinksOut(worksFor).isEmpty());
-	}
-	
-	public void testRemoveValue() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final ValueFactory vf = om.getValueFactory();
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-		
-	    assertFalse(workergpo.getValues(worksFor).isEmpty());
-	    Value old = workergpo.getValue(worksFor);
-	    while (old != null) {
-	    	workergpo.removeValue(worksFor, old);
-	    	old = workergpo.getValue(worksFor);
-	    }
-	    assertTrue(workergpo.getValues(worksFor).isEmpty());
-	}
-	
-	public void testRemove() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final IGPO worker1 = om.getGPO(vf.createURI("gpo:#1000"));
+    final IGPO worker2 = om.getGPO(vf.createURI("gpo:#1001"));
+    final IGPO worker3 = om.getGPO(vf.createURI("gpo:#1002"));
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    final ILinkSet ls = workergpo.getLinksOut(worksFor);
-	    
-	    assertTrue(ls.size() > 0);
-	    
-	    final IGPO employer = ls.iterator().next();
-	    final int lssize = employer.getLinksIn(worksFor).size();
-	    
-	    assertTrue(lssize > 0);
-	    
-	    workergpo.remove();
-	    
-	    checkLinkSet(employer.getLinksIn(worksFor), lssize - 1);
-	    
-	    try {
-	    	ls.size();
-	    	fail("Expected exception after removing GPO");
-	    } catch (IllegalStateException ise) {
-	    	// expected
-	    }
-	    
-	    try {
-	    	workergpo.getLinksOut(worksFor);
-	    	fail("Expected exception after removing GPO");
-	    } catch (IllegalStateException ise) {
-	    	// expected
-	    }
-	}
-	
-	/**
-	 * Checks for reverse linkset referential integrity when property removed
-	 */
-	public void testLinkSetConsistency1() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final IGPO employer = om.getGPO(vf.createURI("gpo:#1003"));
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    final ILinkSet ls = workergpo.getLinksOut(worksFor);
-	    
-	    assertTrue(ls.size() > 0);
-	    
-	    final IGPO employer = ls.iterator().next();
-	    
-	    final ILinkSet employees = employer.getLinksIn(worksFor);
-	    assertTrue(employees.contains(workergpo));
-	    
-	    workergpo.removeValue(worksFor, employer.getId());
-	    
-	    assertFalse(employees.contains(workergpo));
-	}
-	
-	/**
-	 * Checks for reverse linkset referential integrity when property replaced
-	 */
-	public void testLinkSetConsistency2() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    final ILinkSet ls = employer.getLinksIn(worksFor);
 
-	    final URI workeruri = vf.createURI("gpo:#123");
-	    IGPO workergpo = om.getGPO(workeruri);
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    final ILinkSet ls = workergpo.getLinksOut(worksFor);
-	    
-	    assertTrue(ls.size() > 0);
-	    
-	    final IGPO employer = ls.iterator().next();
-	    
-	    final ILinkSet employees = employer.getLinksIn(worksFor);
-	    assertTrue(employees.contains(workergpo));
-	    
-	    // set property to new URI
-	    final URI newuri = vf.createURI("gpo:#999");
-	    workergpo.setValue(worksFor, newuri);
-	    
-	    assertFalse(employees.contains(workergpo));
-	    assertTrue(om.getGPO(newuri).getLinksIn(worksFor).contains(workergpo));
-	}
-	
-	/**
-	 * Checks for consistency as link set is created and modified
-	 * 
-	 * Dependent: setValue, getValue, removeValue, getLinksIn
-	 */
-	public void testLinkSetConsistency3() {
-		doLoadData();
-		
-		final ValueFactory vf = om.getValueFactory();
+    checkLinkSet(ls, 0);
 
-	    final IGPO worker1 = om.getGPO(vf.createURI("gpo:#1000"));
-	    final IGPO worker2 = om.getGPO(vf.createURI("gpo:#1001"));
-	    final IGPO worker3 = om.getGPO(vf.createURI("gpo:#1002"));
+    worker1.setValue(worksFor, employer.getId());
+    checkLinkSet(ls, 1);
 
-	    final IGPO employer = om.getGPO(vf.createURI("gpo:#1003"));
-	    final URI worksFor = vf.createURI("attr:/employee#worksFor");
-	    
-	    final ILinkSet ls = employer.getLinksIn(worksFor);
-	    
-	    checkLinkSet(ls, 0);
-	    
-	    worker1.setValue(worksFor, employer.getId());
-	    checkLinkSet(ls, 1);
-	    
-	    // repeat - should be void
-	    worker1.setValue(worksFor, employer.getId());
-	    assertTrue(worker1.getValue(worksFor).equals(employer.getId()));
-	    checkLinkSet(ls, 1);
+    // repeat - should be void
+    worker1.setValue(worksFor, employer.getId());
+    assertTrue(worker1.getValue(worksFor).equals(employer.getId()));
+    checkLinkSet(ls, 1);
 
-	    worker2.setValue(worksFor, employer.getId());
-	    checkLinkSet(ls, 2);
+    worker2.setValue(worksFor, employer.getId());
+    checkLinkSet(ls, 2);
 
-	    worker3.setValue(worksFor, employer.getId());
-	    checkLinkSet(ls, 3);
-	    
-	    // now check on removal
-	    worker2.removeValue(worksFor, employer.getId());
-	    assertTrue(worker2.getValue(worksFor) == null);
-	    checkLinkSet(ls, 2);
-	    
-	    // assertTrue(om.getDirtyObjectCount() == 3);
+    worker3.setValue(worksFor, employer.getId());
+    checkLinkSet(ls, 3);
 
-	}
+    // now check on removal
+    worker2.removeValue(worksFor, employer.getId());
+    assertTrue(worker2.getValue(worksFor) == null);
+    checkLinkSet(ls, 2);
 
+    // assertTrue(om.getDirtyObjectCount() == 3);
+
+  }
 }

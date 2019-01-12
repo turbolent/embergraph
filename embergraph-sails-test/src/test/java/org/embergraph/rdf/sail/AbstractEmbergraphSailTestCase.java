@@ -22,249 +22,214 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.util.Properties;
-
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TestHelper;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
- * <p>
- * Abstract harness for testing under a variety of configurations. In order to
- * test a specific configuration, create a concrete instance of this class. The
- * configuration can be described using a mixture of a <code>.properties</code>
- * file of the same name as the test class and custom code.
- * </p>
- * <p>
- * When debugging from an IDE, it is very helpful to be able to run a single
- * test case. You can do this, but you MUST define the property
- * <code>testClass</code> as the name test class that has the logic required
- * to instantiate and configure an appropriate object manager instance for the
+ * Abstract harness for testing under a variety of configurations. In order to test a specific
+ * configuration, create a concrete instance of this class. The configuration can be described using
+ * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
+ *
+ * <p>When debugging from an IDE, it is very helpful to be able to run a single test case. You can
+ * do this, but you MUST define the property <code>testClass</code> as the name test class that has
+ * the logic required to instantiate and configure an appropriate object manager instance for the
  * test.
- * </p>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractEmbergraphSailTestCase extends TestCase2 {
+public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
 
+  // Constructors.
 
-    // Constructors.
+  /** */
+  public AbstractEmbergraphSailTestCase() {}
 
-    
-    /**
-     * 
-     */
-    public AbstractEmbergraphSailTestCase() {
+  /** @param name */
+  public AbstractEmbergraphSailTestCase(String name) {
+    super(name);
+  }
+
+  // ************************************************************
+  // ************************************************************
+  // ************************************************************
+
+  /** Invoked from {@link TestCase#setUp()} for each test in the suite. */
+  protected void setUp(ProxyEmbergraphSailTestCase testCase) throws Exception {
+
+    begin = System.currentTimeMillis();
+
+    if (log.isInfoEnabled())
+      log.info("\n\n================:BEGIN:" + testCase.getName() + ":BEGIN:====================");
+  }
+
+  /** Invoked from {@link TestCase#tearDown()} for each test in the suite. */
+  protected void tearDown(ProxyEmbergraphSailTestCase testCase) throws Exception {
+
+    final long elapsed = System.currentTimeMillis() - begin;
+
+    if (log.isInfoEnabled())
+      log.info(
+          "\n================:END:"
+              + testCase.getName()
+              + " ("
+              + elapsed
+              + "ms):END:====================\n");
+
+    TestHelper.checkJournalsClosed(testCase, this);
+  }
+
+  private long begin;
+
+  // Properties
+
+  private Properties m_properties;
+
+  /**
+   * Returns properties read from a hierarchy of sources. The underlying properties read from those
+   * sources are cached, but a new properties object is returned on each invocation (to prevent side
+   * effects by the caller).
+   *
+   * <p>In general, a test configuration critically relies on both the properties returned by this
+   * method and the appropriate properties must be provided either through the command line or in a
+   * properties file.
+   *
+   * @return A new properties object.
+   */
+  @Override
+  public Properties getProperties() {
+
+    if (m_properties == null) {
+
+      /*
+       * Read properties from a hierarchy of sources and cache a
+       * reference.
+       */
+      m_properties = new Properties(super.getProperties());
+
+      m_properties.setProperty(Journal.Options.COLLECT_PLATFORM_STATISTICS, "false");
+
+      m_properties.setProperty(Journal.Options.COLLECT_QUEUE_STATISTICS, "false");
+
+      m_properties.setProperty(Journal.Options.HTTPD_PORT, "-1" /* none */);
+
+      // transient means that there is nothing to delete after the test.
+      //            m_properties.setProperty(Options.BUFFER_MODE,BufferMode.Transient.toString());
+      m_properties.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());
+
+      /*
+       * If an explicit filename is not specified...
+       */
+      if (m_properties.get(Options.FILE) == null) {
+
+        /*
+         * Use a temporary file for the test. Such files are always deleted when
+         * the journal is closed or the VM exits.
+         */
+
+        m_properties.setProperty(Options.CREATE_TEMP_FILE, "true");
+
+        m_properties.setProperty(Options.DELETE_ON_EXIT, "true");
+      }
     }
 
-    /**
-     * @param name
-     */
-    public AbstractEmbergraphSailTestCase(String name) {
-        super(name);
+    return new Properties(m_properties);
+  }
+
+  /**
+   * This method is invoked from methods that MUST be proxied to this class. {@link
+   * GenericProxyTestCase} extends this class, as do the concrete classes that drive the test suite
+   * for specific GOM integration test configuration. Many method on this class must be proxied from
+   * {@link GenericProxyTestCase} to the delegate. Invoking this method from the implementations of
+   * those methods in this class provides a means of catching omissions where the corresponding
+   * method is NOT being delegated. Failure to delegate these methods means that you are not able to
+   * share properties or object manager instances across tests, which means that you can not do
+   * configuration-based testing of integrations and can also wind up with mutually inconsistent
+   * test fixtures between the delegate and each proxy test.
+   */
+  protected void checkIfProxy() {
+
+    if (this instanceof ProxyEmbergraphSailTestCase) {
+
+      throw new AssertionError();
     }
+  }
 
-    //************************************************************
-    //************************************************************
-    //************************************************************
-    
-    /**
-     * Invoked from {@link TestCase#setUp()} for each test in the suite.
-     */
-    protected void setUp(ProxyEmbergraphSailTestCase testCase) throws Exception {
+  // ************************************************************
+  // ************************************************************
+  // ************************************************************
 
-        begin = System.currentTimeMillis();
-        
-        if (log.isInfoEnabled())
-            log.info("\n\n================:BEGIN:" + testCase.getName()
-                    + ":BEGIN:====================");
+  // Test helpers.
 
-    }
+  //    protected static final long N = IRawTripleStore.N;
 
-    /**
-     * Invoked from {@link TestCase#tearDown()} for each test in the suite.
-     */
-    protected void tearDown(ProxyEmbergraphSailTestCase testCase) throws Exception {
+  //    protected static final long NULL = IRawTripleStore.NULL;
 
-        final long elapsed = System.currentTimeMillis() - begin;
-        
-        if (log.isInfoEnabled())
-            log.info("\n================:END:" + testCase.getName() + " ("
-                    + elapsed + "ms):END:====================\n");
+  /*
+   * test fixtures
+   */
 
-        TestHelper.checkJournalsClosed(testCase, this);
+  //    private EmbergraphSail sail;
 
-    }
-    
-    private long begin;
+  //    protected void setUp(ProxyEmbergraphSailTestCase testCase) throws Exception {
+  //
+  //        sail = new EmbergraphSail(getProperties());
+  //
+  ////        sail.database.create();
+  //
+  //    }
+  //
+  //    protected void tearDown(ProxyEmbergraphSailTestCase testCase) throws Exception {
+  //
+  //        if (sail != null) {
+  //
+  //            sail.shutDown();
+  //
+  //        }
+  //
+  //    }
 
+  protected abstract EmbergraphSail getSail(Properties properties);
 
-    // Properties
+  protected abstract EmbergraphSail reopenSail(EmbergraphSail sail);
 
-    
-    private Properties m_properties;
-    
-    /**
-     * <p>
-     * Returns properties read from a hierarchy of sources. The underlying
-     * properties read from those sources are cached, but a new properties
-     * object is returned on each invocation (to prevent side effects by the
-     * caller).
-     * </p>
-     * <p>
-     * In general, a test configuration critically relies on both the properties
-     * returned by this method and the appropriate properties must be provided
-     * either through the command line or in a properties file.
-     * </p>
-     * 
-     * @return A new properties object.
-     */
-    @Override
-    public Properties getProperties() {
-        
-        if( m_properties == null ) {
-            
-            /*
-             * Read properties from a hierarchy of sources and cache a
-             * reference.
-             */
-            m_properties = new Properties(super.getProperties());
+  //    /**
+  //     * Recursively removes any files and subdirectories and then removes the
+  //     * file (or directory) itself.
+  //     *
+  //     * @param f
+  //     *            A file or directory.
+  //     */
+  //    protected void recursiveDelete(File f) {
+  //
+  //        if(f.isDirectory()) {
+  //
+  //            File[] children = f.listFiles();
+  //
+  //            for(int i=0; i<children.length; i++) {
+  //
+  //                recursiveDelete( children[i] );
+  //
+  //            }
+  //
+  //        }
+  //
+  //        if (f.exists()) {
+  //
+  //            log.warn("Removing: " + f);
+  //
+  //            if (!f.delete()) {
+  //
+  //                throw new RuntimeException("Could not remove: " + f);
+  //
+  //            }
+  //
+  //        }
+  //
+  //    }
 
-            m_properties.setProperty(Journal.Options.COLLECT_PLATFORM_STATISTICS,
-                    "false");
-
-            m_properties.setProperty(Journal.Options.COLLECT_QUEUE_STATISTICS,
-                    "false");
-
-            m_properties.setProperty(Journal.Options.HTTPD_PORT, "-1"/* none */);
-            
-            // transient means that there is nothing to delete after the test.
-//            m_properties.setProperty(Options.BUFFER_MODE,BufferMode.Transient.toString());
-            m_properties.setProperty(Options.BUFFER_MODE,BufferMode.Disk.toString());
-
-            /*
-             * If an explicit filename is not specified...
-             */
-            if(m_properties.get(Options.FILE)==null) {
-
-                /*
-                 * Use a temporary file for the test. Such files are always deleted when
-                 * the journal is closed or the VM exits.
-                 */
-
-                m_properties.setProperty(Options.CREATE_TEMP_FILE,"true");
-            
-                m_properties.setProperty(Options.DELETE_ON_EXIT,"true");
-                
-            }
-            
-        }        
-        
-        return new Properties(m_properties);
-        
-    }
-
-    /**
-     * This method is invoked from methods that MUST be proxied to this class.
-     * {@link GenericProxyTestCase} extends this class, as do the concrete
-     * classes that drive the test suite for specific GOM integration test
-     * configuration. Many method on this class must be proxied from
-     * {@link GenericProxyTestCase} to the delegate. Invoking this method from
-     * the implementations of those methods in this class provides a means of
-     * catching omissions where the corresponding method is NOT being delegated.
-     * Failure to delegate these methods means that you are not able to share
-     * properties or object manager instances across tests, which means that you
-     * can not do configuration-based testing of integrations and can also wind
-     * up with mutually inconsistent test fixtures between the delegate and each
-     * proxy test.
-     */
-    
-    protected void checkIfProxy() {
-        
-        if( this instanceof ProxyEmbergraphSailTestCase) {
-            
-            throw new AssertionError();
-            
-        }
-        
-    }
-
-    //************************************************************
-    //************************************************************
-    //************************************************************
-
-    // Test helpers.
-
-
-//    protected static final long N = IRawTripleStore.N;
-
-//    protected static final long NULL = IRawTripleStore.NULL;
-    
-    /*
-     * test fixtures
-     */
-    
-//    private EmbergraphSail sail;
-    
-//    protected void setUp(ProxyEmbergraphSailTestCase testCase) throws Exception {
-//     
-//        sail = new EmbergraphSail(getProperties());
-//        
-////        sail.database.create();
-//        
-//    }
-//    
-//    protected void tearDown(ProxyEmbergraphSailTestCase testCase) throws Exception {
-//        
-//        if (sail != null) {
-//
-//            sail.shutDown();
-//            
-//        }
-//                
-//    }
-    
-    abstract protected EmbergraphSail getSail(Properties properties);
-
-    abstract protected EmbergraphSail reopenSail(EmbergraphSail sail);
-
-//    /**
-//     * Recursively removes any files and subdirectories and then removes the
-//     * file (or directory) itself.
-//     * 
-//     * @param f
-//     *            A file or directory.
-//     */
-//    protected void recursiveDelete(File f) {
-//        
-//        if(f.isDirectory()) {
-//            
-//            File[] children = f.listFiles();
-//            
-//            for(int i=0; i<children.length; i++) {
-//                
-//                recursiveDelete( children[i] );
-//                
-//            }
-//            
-//        }
-//        
-//        if (f.exists()) {
-//
-//            log.warn("Removing: " + f);
-//
-//            if (!f.delete()) {
-//
-//                throw new RuntimeException("Could not remove: " + f);
-//
-//            }
-//
-//        }
-//
-//    }
-    
 }

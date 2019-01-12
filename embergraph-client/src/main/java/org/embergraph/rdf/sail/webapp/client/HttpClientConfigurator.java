@@ -25,70 +25,64 @@ import org.eclipse.jetty.client.HttpClient;
 
 /**
  * Factory for {@link HttpClient}.
- * 
+ *
  * @see Options
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class HttpClientConfigurator {
 
-	public interface Options {
+  public interface Options {
 
-		/**
-		 * This is the name of an optional System property that may be used to
-		 * override the {@link IHttpClientFactory} implementation class (default
-		 * {@value #DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS}).
-		 */
-		final static public String CONNECTION_MANAGER_FACTORY_CLASS = HttpClientConfigurator.class
-				.getName();
+    /**
+     * This is the name of an optional System property that may be used to override the {@link
+     * IHttpClientFactory} implementation class (default {@value
+     * #DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS}).
+     */
+    public static final String CONNECTION_MANAGER_FACTORY_CLASS =
+        HttpClientConfigurator.class.getName();
 
-		/**
-		 * The name of the default {@link IHttpClientFactory} implementation
-		 * class.
-		 */
-		final static public String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS = DefaultHttpClientFactory.class
-				.getName();
+    /** The name of the default {@link IHttpClientFactory} implementation class. */
+    public static final String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
+        DefaultHttpClientFactory.class.getName();
+  }
 
-	}
-	
-	/**
-	 * Allow a user configurable factory to allow the override of the
-	 * HttpClient(s) it will return.
-	 * 
-	 * @see #CONNECTION_MANAGER_FACTORY_CLASS
-	 */
-	public static IHttpClientFactory getInstance() {
+  /**
+   * Allow a user configurable factory to allow the override of the HttpClient(s) it will return.
+   *
+   * @see #CONNECTION_MANAGER_FACTORY_CLASS
+   */
+  public static IHttpClientFactory getInstance() {
 
-		final String configuredFactory = System.getProperty(
-				Options.CONNECTION_MANAGER_FACTORY_CLASS,
-				Options.DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS);
+    final String configuredFactory =
+        System.getProperty(
+            Options.CONNECTION_MANAGER_FACTORY_CLASS,
+            Options.DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS);
 
-		try {
+    try {
 
-			@SuppressWarnings("unchecked")
-			final Class<IHttpClientFactory> factoryClass = (Class<IHttpClientFactory>) Class
-					.forName(configuredFactory);
+      @SuppressWarnings("unchecked")
+      final Class<IHttpClientFactory> factoryClass =
+          (Class<IHttpClientFactory>) Class.forName(configuredFactory);
 
-			if (!IHttpClientFactory.class.isAssignableFrom(factoryClass)) {
+      if (!IHttpClientFactory.class.isAssignableFrom(factoryClass)) {
 
-				throw new RuntimeException("Invalid option: "
-						+ Options.CONNECTION_MANAGER_FACTORY_CLASS + "="
-						+ factoryClass + ":: Class does not extend "
-						+ IHttpClientFactory.class);
+        throw new RuntimeException(
+            "Invalid option: "
+                + Options.CONNECTION_MANAGER_FACTORY_CLASS
+                + "="
+                + factoryClass
+                + ":: Class does not extend "
+                + IHttpClientFactory.class);
+      }
 
-			}
+      final IHttpClientFactory factory = factoryClass.newInstance();
 
-			final IHttpClientFactory factory = factoryClass.newInstance();
+      return factory;
 
-			return factory;
+    } catch (Exception e) {
 
-		} catch (Exception e) {
-
-			throw new RuntimeException("Could not create "
-					+ IHttpClientFactory.class.getSimpleName() + ": " + e, e);
-
-		}
-
-	}
-
+      throw new RuntimeException(
+          "Could not create " + IHttpClientFactory.class.getSimpleName() + ": " + e, e);
+    }
+  }
 }

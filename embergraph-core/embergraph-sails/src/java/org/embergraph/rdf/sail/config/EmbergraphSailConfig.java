@@ -1,4 +1,3 @@
-
 package org.embergraph.rdf.sail.config;
 
 import java.io.File;
@@ -16,76 +15,72 @@ import org.openrdf.sail.config.SailImplConfigBase;
 
 public class EmbergraphSailConfig extends SailImplConfigBase {
 
-	/*-----------*
-	 * Variables *
-	 *-----------*/
+  /*-----------*
+   * Variables *
+   *-----------*/
 
-	private String propertiesFile;
+  private String propertiesFile;
 
-	/*--------------*
-	 * Constructors *
-	 *--------------*/
+  /*--------------*
+   * Constructors *
+   *--------------*/
 
-	public EmbergraphSailConfig(final String type) {
-		super(type);
-	}
-	
-	/*---------*
-	 * Methods *
-	 *---------*/
+  public EmbergraphSailConfig(final String type) {
+    super(type);
+  }
 
-	public String getPropertiesFile() {
-		return propertiesFile;
-	}
+  /*---------*
+   * Methods *
+   *---------*/
 
-	public void setPropertiesFile(String propertiesFile) {
-		this.propertiesFile = propertiesFile;
-	}
+  public String getPropertiesFile() {
+    return propertiesFile;
+  }
 
-    public Properties getProperties() 
-            throws FileNotFoundException, IOException {
-        
-        if (propertiesFile == null) {
-            return new Properties();
-        }
-        
-        FileInputStream is = new FileInputStream(new File(propertiesFile));
-        Properties props = new Properties();
-        props.load(is);
-        return props;
-        
+  public void setPropertiesFile(String propertiesFile) {
+    this.propertiesFile = propertiesFile;
+  }
+
+  public Properties getProperties() throws FileNotFoundException, IOException {
+
+    if (propertiesFile == null) {
+      return new Properties();
     }
-    
-	@Override
-	public Resource export(Graph graph)
-	{
-		Resource implNode = super.export(graph);
 
-		if (propertiesFile != null) {
-			graph.add(implNode, EmbergraphConfigSchema.PROPERTIES,
-                    graph.getValueFactory().createLiteral(propertiesFile));
-		}
+    FileInputStream is = new FileInputStream(new File(propertiesFile));
+    Properties props = new Properties();
+    props.load(is);
+    return props;
+  }
 
-		return implNode;
-	}
+  @Override
+  public Resource export(Graph graph) {
+    Resource implNode = super.export(graph);
 
-	@Override
-	public void parse(Graph graph, Resource implNode)
-		throws SailConfigException
-	{
-		super.parse(graph, implNode);
+    if (propertiesFile != null) {
+      graph.add(
+          implNode,
+          EmbergraphConfigSchema.PROPERTIES,
+          graph.getValueFactory().createLiteral(propertiesFile));
+    }
 
-		try {
-			Literal propertiesLit = GraphUtil.getOptionalObjectLiteral(
-                    graph, implNode, EmbergraphConfigSchema.PROPERTIES);
-			if (propertiesLit != null) {
-				setPropertiesFile((propertiesLit).getLabel());
-			} else {
-                throw new SailConfigException("Properties file required");
-            }
-		}
-		catch (GraphUtilException e) {
-			throw new SailConfigException(e.getMessage(), e);
-		}
-	}
+    return implNode;
+  }
+
+  @Override
+  public void parse(Graph graph, Resource implNode) throws SailConfigException {
+    super.parse(graph, implNode);
+
+    try {
+      Literal propertiesLit =
+          GraphUtil.getOptionalObjectLiteral(graph, implNode, EmbergraphConfigSchema.PROPERTIES);
+      if (propertiesLit != null) {
+        setPropertiesFile((propertiesLit).getLabel());
+      } else {
+        throw new SailConfigException("Properties file required");
+      }
+    } catch (GraphUtilException e) {
+      throw new SailConfigException(e.getMessage(), e);
+    }
+  }
 }

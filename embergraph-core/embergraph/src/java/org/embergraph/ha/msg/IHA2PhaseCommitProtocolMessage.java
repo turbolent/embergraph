@@ -19,9 +19,7 @@ package org.embergraph.ha.msg;
 
 /**
  * Message for one of the 2-phase commit protocol operations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface IHA2PhaseCommitProtocolMessage extends IHAMessage {
-
-}
+public interface IHA2PhaseCommitProtocolMessage extends IHAMessage {}

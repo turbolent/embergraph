@@ -19,18 +19,15 @@ package org.embergraph.journal;
 
 /**
  * Typed exception thrown when a transaction identifier can not be resolved.
- * 
+ *
  * @author bryan
  */
 public class TransactionNotFoundException extends IllegalStateException {
 
-   /**
-    * 
-    */
-   private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-   public TransactionNotFoundException(final long txId) {
-      super("txId=" + txId);
-   }
-
+  public TransactionNotFoundException(final long txId) {
+    super("txId=" + txId);
+  }
 }

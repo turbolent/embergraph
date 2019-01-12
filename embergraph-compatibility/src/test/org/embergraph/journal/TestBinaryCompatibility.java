@@ -26,246 +26,199 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.Banner;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
 /**
- * Test suite for binary compatibility, portability, and forward compatibility
- * or automated migration of persistent stores and persistence or serialization
- * capable objects across different embergraph releases. The tests in this suite
- * rely on artifacts which are archived within SVN.
- * 
- * @todo create w/ small extent and truncate (RW store does not support
- *       truncate).
- * 
- * @todo test binary migration and forward compatibility.
- * 
- * @todo stubs to create and organize artifacts,etc.
+ * Test suite for binary compatibility, portability, and forward compatibility or automated
+ * migration of persistent stores and persistence or serialization capable objects across different
+ * embergraph releases. The tests in this suite rely on artifacts which are archived within SVN.
  *
+ * @todo create w/ small extent and truncate (RW store does not support truncate).
+ * @todo test binary migration and forward compatibility.
+ * @todo stubs to create and organize artifacts,etc.
  * @todo data driven test suite?
- * 
- * @todo create artifact for each release, name the artifacts systematically,
- *       e.g., test.release.(RW|WORM).jnl or test.release.seg. Collect a list of
- *       the created artifacts and run each test against each of the versions of
- *       the artifact.
- * 
+ * @todo create artifact for each release, name the artifacts systematically, e.g.,
+ *     test.release.(RW|WORM).jnl or test.release.seg. Collect a list of the created artifacts and
+ *     run each test against each of the versions of the artifact.
  * @todo Force artifact file name case for file system compatibility?
- * 
- * @todo test journal (WORM and RW), btree, index segment, row store, persistent
- *       data structures (checkpoints, index metadata, tuple serializers, etc.),
- *       RDF layer, RMI message formats, etc.
- * 
+ * @todo test journal (WORM and RW), btree, index segment, row store, persistent data structures
+ *     (checkpoints, index metadata, tuple serializers, etc.), RDF layer, RMI message formats, etc.
  * @todo Specific tests for
- *       <p>
- *       Name2Addr and DefaultKeyBuilderFactory portability problem. See
- *       https://sourceforge.net/apps/trac/bigdata/ticket/193
- *       <p>
- *       WORM global row store resolution problem introduced in the
- *       JOURNAL_HA_BRANCH. See
- *       https://sourceforge.net/apps/trac/bigdata/ticket/171#comment:5
- *       <p>
- *       Sparse row store JDK encoding problem:
- *       https://sourceforge.net/apps/trac/bigdata/ticket/107
+ *     <p>Name2Addr and DefaultKeyBuilderFactory portability problem. See
+ *     https://sourceforge.net/apps/trac/bigdata/ticket/193
+ *     <p>WORM global row store resolution problem introduced in the JOURNAL_HA_BRANCH. See
+ *     https://sourceforge.net/apps/trac/bigdata/ticket/171#comment:5
+ *     <p>Sparse row store JDK encoding problem:
+ *     https://sourceforge.net/apps/trac/bigdata/ticket/107
  */
 public class TestBinaryCompatibility extends TestCase2 {
-	
-	/**
-	 * 
-	 */
-	public TestBinaryCompatibility() {
-	}
 
-	/**
-	 * @param name
-	 */
-	public TestBinaryCompatibility(String name) {
-		super(name);
-	}
+  /** */
+  public TestBinaryCompatibility() {}
 
-	/**
-	 * @todo munge the release version into a name that is compatibility with
-	 *       the file system ("." to "_"). Store artifacts at each release? At
-	 *       each release in which an incompatibility is introduced? At each
-	 *       release in which a persistence capable data structure or change is
-	 *       introduced?
-	 */
-	static protected final File artifactDir = new File(
-			"embergraph-compatibility/src/resources/artifacts");
-	
-	protected static class Version  {
-		private final String version;
-		private final String revision;
-		public Version(String version,String revision) {
-			this.version = version;
-			this.revision = revision;
-		}
+  /** @param name */
+  public TestBinaryCompatibility(String name) {
+    super(name);
+  }
 
-		/**
-		 * The embergraph version number associated with the release. This is in
-		 * the form <code>xx.yy.zz</code>
-		 */
-		public String getVersion() {
-			return version;
-		}
+  /**
+   * @todo munge the release version into a name that is compatibility with the file system ("." to
+   *     "_"). Store artifacts at each release? At each release in which an incompatibility is
+   *     introduced? At each release in which a persistence capable data structure or change is
+   *     introduced?
+   */
+  protected static final File artifactDir =
+      new File("embergraph-compatibility/src/resources/artifacts");
 
-		/**
-		 * The SVN repository revision associated with the release. This is in
-		 * the form <code>####</code>.
-		 */
-		public String getRevision() {
-			return revision;
-		}
-	}
+  protected static class Version {
+    private final String version;
+    private final String revision;
 
-	/**
-	 * Known release versions.
-	 */
-	protected static Version V_0_83_2 = new Version("0.83.2", "3349");
+    public Version(String version, String revision) {
+      this.version = version;
+      this.revision = revision;
+    }
 
-	/**
-	 * Tested Versions.
-	 */
-	protected Version[] versions = new Version[] {
-			V_0_83_2
-	};
-	
-	protected void setUp() throws Exception {
+    /**
+     * The embergraph version number associated with the release. This is in the form <code>xx.yy.zz
+     * </code>
+     */
+    public String getVersion() {
+      return version;
+    }
 
-		Banner.banner();
-		
-		super.setUp();
-		
-		if (!artifactDir.exists()) {
+    /**
+     * The SVN repository revision associated with the release. This is in the form <code>####
+     * </code>.
+     */
+    public String getRevision() {
+      return revision;
+    }
+  }
 
-			if (!artifactDir.mkdirs()) {
-			
-				throw new IOException("Could not create: " + artifactDir);
-				
-			}
+  /** Known release versions. */
+  protected static Version V_0_83_2 = new Version("0.83.2", "3349");
 
-		}
-		
-		for (Version version : versions) {
+  /** Tested Versions. */
+  protected Version[] versions = new Version[] {V_0_83_2};
 
-			final File versionDir = new File(artifactDir, version.getVersion());
-			
-			if (!versionDir.exists()) {
+  protected void setUp() throws Exception {
 
-				if (!versionDir.mkdirs()) {
+    Banner.banner();
 
-					throw new IOException("Could not create: " + versionDir);
+    super.setUp();
 
-				}
+    if (!artifactDir.exists()) {
 
-			}
+      if (!artifactDir.mkdirs()) {
 
-		}
-		
-	}
+        throw new IOException("Could not create: " + artifactDir);
+      }
+    }
 
-	protected void tearDown() throws Exception {
+    for (Version version : versions) {
 
-		super.tearDown();
-		
-	}
+      final File versionDir = new File(artifactDir, version.getVersion());
 
-	/**
-	 * @throws Throwable 
-	 * 
-	 * @todo Each 'test' should run an instance of a class which knows how to
-	 *       create the appropriate artifacts and how to test them.
-	 */
-	public void test_WORM_compatibility_with_JOURNAL_HA_BRANCH()
-			throws Throwable {
+      if (!versionDir.exists()) {
 
-		final Version version = V_0_83_2;
+        if (!versionDir.mkdirs()) {
 
-		final File versionDir = new File(artifactDir, version.getVersion());
+          throw new IOException("Could not create: " + versionDir);
+        }
+      }
+    }
+  }
 
-		final File artifactFile = new File(versionDir, getName()
-				+ BufferMode.DiskWORM + Journal.Options.JNL);
+  protected void tearDown() throws Exception {
 
-		if (!artifactFile.exists()) {
+    super.tearDown();
+  }
 
-			createArtifact(artifactFile);
+  /**
+   * @throws Throwable
+   * @todo Each 'test' should run an instance of a class which knows how to create the appropriate
+   *     artifacts and how to test them.
+   */
+  public void test_WORM_compatibility_with_JOURNAL_HA_BRANCH() throws Throwable {
 
-		}
+    final Version version = V_0_83_2;
 
-		verifyArtifact(artifactFile);
+    final File versionDir = new File(artifactDir, version.getVersion());
 
-	}
+    final File artifactFile =
+        new File(versionDir, getName() + BufferMode.DiskWORM + Journal.Options.JNL);
 
-	protected void createArtifact(final File artifactFile) throws Throwable {
+    if (!artifactFile.exists()) {
 
-		if (log.isInfoEnabled())
-			log.info("Creating: " + artifactFile);
+      createArtifact(artifactFile);
+    }
 
-		final Properties properties = new Properties();
+    verifyArtifact(artifactFile);
+  }
 
-		properties.setProperty(Journal.Options.FILE, artifactFile.toString());
+  protected void createArtifact(final File artifactFile) throws Throwable {
 
-		properties.setProperty(Journal.Options.INITIAL_EXTENT, ""
-				+ Journal.Options.minimumInitialExtent);
+    if (log.isInfoEnabled()) log.info("Creating: " + artifactFile);
 
-		final Journal journal = new Journal(properties);
+    final Properties properties = new Properties();
 
-		try {
+    properties.setProperty(Journal.Options.FILE, artifactFile.toString());
 
-			final IndexMetadata md = new IndexMetadata(UUID.randomUUID());
-			
-			final IIndex ndx = journal.registerIndex("kb.spo.SPO", md);
-			
-			ndx.insert(1,1);
-			
-			journal.commit();
-			
-			// reduce to minimum footprint.
-			journal.truncate();
+    properties.setProperty(
+        Journal.Options.INITIAL_EXTENT, "" + Journal.Options.minimumInitialExtent);
 
-		} catch (Throwable t) {
+    final Journal journal = new Journal(properties);
 
-			journal.destroy();
-			
-			throw new RuntimeException(t);
-			
-		} finally {
-			
-			if (journal.isOpen())
-				journal.close();
-			
-		}
+    try {
 
-	}
+      final IndexMetadata md = new IndexMetadata(UUID.randomUUID());
 
-	protected void verifyArtifact(final File artifactFile) throws Throwable {
+      final IIndex ndx = journal.registerIndex("kb.spo.SPO", md);
 
-		if (log.isInfoEnabled())
-			log.info("Verifying: " + artifactFile);
+      ndx.insert(1, 1);
 
-		final Properties properties = new Properties();
+      journal.commit();
 
-		properties.setProperty(Journal.Options.FILE, artifactFile.toString());
+      // reduce to minimum footprint.
+      journal.truncate();
 
-		final Journal journal = new Journal(properties);
+    } catch (Throwable t) {
 
-		try {
+      journal.destroy();
 
-			final IIndex ndx = journal.getIndex("kb.spo.SPO");
-			
-			assertNotNull(ndx);
-			
-			assertEquals(1,ndx.lookup(1));
-			
-		} finally {
+      throw new RuntimeException(t);
 
-			journal.close();
-			
-		}
+    } finally {
 
-	}
+      if (journal.isOpen()) journal.close();
+    }
+  }
 
+  protected void verifyArtifact(final File artifactFile) throws Throwable {
+
+    if (log.isInfoEnabled()) log.info("Verifying: " + artifactFile);
+
+    final Properties properties = new Properties();
+
+    properties.setProperty(Journal.Options.FILE, artifactFile.toString());
+
+    final Journal journal = new Journal(properties);
+
+    try {
+
+      final IIndex ndx = journal.getIndex("kb.spo.SPO");
+
+      assertNotNull(ndx);
+
+      assertEquals(1, ndx.lookup(1));
+
+    } finally {
+
+      journal.close();
+    }
+  }
 }

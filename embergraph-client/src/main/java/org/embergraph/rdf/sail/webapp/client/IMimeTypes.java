@@ -17,37 +17,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Common MIME types for dynamic content.
- */
+/** Common MIME types for dynamic content. */
 public interface IMimeTypes {
 
-    public String
-        MIME_TEXT_PLAIN = "text/plain",
-        MIME_TEXT_HTML = "text/html",
-//      MIME_TEXT_XML = "text/xml",
-        /**
-         * General purpose binary <code>application/octet-stream</code>.
-         */
-        MIME_DEFAULT_BINARY = "application/octet-stream",
-		/**
-		 * Used for NSS mutation operation responses.
-		 */
-        MIME_APPLICATION_XML = "application/xml",
-	    /**
-	     * Used to interchange {@link Properties} objects.
-	     */
-        MIME_PROPERTIES_XML = "application/xml",
-        MIME_TEXT_JAVASCRIPT = "text/javascript",
-	    /**
-	     * Used to interchange GraphML (blueprints).
-	     */
-	    MIME_GRAPH_ML = "application/graphml+xml",        	    
-        MIME_APPLICATION_JSON = "application/json",
-        /**
-         * The traditional encoding of URL query parameters within a POST
-         * message body.
-         */
-        MIME_APPLICATION_URL_ENCODED = "application/x-www-form-urlencoded";
-
+  public String MIME_TEXT_PLAIN = "text/plain",
+      MIME_TEXT_HTML = "text/html",
+      //      MIME_TEXT_XML = "text/xml",
+      /** General purpose binary <code>application/octet-stream</code>. */
+      MIME_DEFAULT_BINARY = "application/octet-stream",
+      /** Used for NSS mutation operation responses. */
+      MIME_APPLICATION_XML = "application/xml",
+      /** Used to interchange {@link Properties} objects. */
+      MIME_PROPERTIES_XML = "application/xml",
+      MIME_TEXT_JAVASCRIPT = "text/javascript",
+      /** Used to interchange GraphML (blueprints). */
+      MIME_GRAPH_ML = "application/graphml+xml",
+      MIME_APPLICATION_JSON = "application/json",
+      /** The traditional encoding of URL query parameters within a POST message body. */
+      MIME_APPLICATION_URL_ENCODED = "application/x-www-form-urlencoded";
 }

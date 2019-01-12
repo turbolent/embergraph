@@ -18,102 +18,99 @@ package org.embergraph.ganglia;
 import java.util.Collections;
 import java.util.Map;
 
-/**
- * Default factory will always produce an {@link IGangliaMetadataMessage} for
- * a metric.
- */
+/** Default factory will always produce an {@link IGangliaMetadataMessage} for a metric. */
 public class DefaultMetadataFactory implements IGangliaMetadataFactory {
 
-	private final String defaultUnits;
-	private final GangliaSlopeEnum defaultSlope;
-	private final int defaultTMax;
-	private final int defaultDMax;
+  private final String defaultUnits;
+  private final GangliaSlopeEnum defaultSlope;
+  private final int defaultTMax;
+  private final int defaultDMax;
 
-	public DefaultMetadataFactory(final String defaultUnits,
-			final GangliaSlopeEnum defaultSlope, final int defaultTMax,
-			final int defaultDMax) {
-		
-		if (defaultUnits == null)
-			throw new IllegalArgumentException();
-		if (defaultSlope == null)
-			throw new IllegalArgumentException();
-		if (defaultTMax < 0)
-			throw new IllegalArgumentException();
-		if (defaultDMax < 0)
-			throw new IllegalArgumentException();
+  public DefaultMetadataFactory(
+      final String defaultUnits,
+      final GangliaSlopeEnum defaultSlope,
+      final int defaultTMax,
+      final int defaultDMax) {
 
-		this.defaultUnits = defaultUnits;
+    if (defaultUnits == null) throw new IllegalArgumentException();
+    if (defaultSlope == null) throw new IllegalArgumentException();
+    if (defaultTMax < 0) throw new IllegalArgumentException();
+    if (defaultDMax < 0) throw new IllegalArgumentException();
 
-		this.defaultSlope = defaultSlope;
-		
-		this.defaultTMax = defaultTMax;
-		
-		this.defaultDMax = defaultDMax;
+    this.defaultUnits = defaultUnits;
 
-	}
-	
-	/**
-	 * Note: If the metric name contains a <code>.</code> then the metric will
-	 * be placed into a group named by everything in the metricName up to that
-	 * <code>.</code> character.
-	 */
-	public IGangliaMetadataMessage newDecl(final String hostName,
-			final String metricName, final Object value) {
+    this.defaultSlope = defaultSlope;
 
-		final int lastIndexOf = metricName.lastIndexOf('.');
-		
-		final String groupName;
-		
-		if(lastIndexOf == -1) {
-			
-			groupName = null;
-			
-		} else {
-			
-			groupName = metricName.substring(0, lastIndexOf);
-			
-		}
-		
-		/*
-		 * Setup a metric declaration based on some defaults and the type of the
-		 * observed value (gtype).
-		 */
+    this.defaultTMax = defaultTMax;
 
-		final String units = defaultUnits;
-		final GangliaSlopeEnum slope = defaultSlope;
-		final int tmax = defaultTMax;
-		final int dmax = defaultDMax;
+    this.defaultDMax = defaultDMax;
+  }
 
-		/*
-		 * The group(s) in the web UI with which this metric will be associated.
-		 */
-		@SuppressWarnings("unchecked")
-		final Map<String, String[]> extraValues = (Map<String, String[]>) (groupName == null ? Collections
-				.emptyMap() : Collections.singletonMap(
-				IGangliaAttributes.ATTR_GROUP, new String[] { groupName }));
+  /**
+   * Note: If the metric name contains a <code>.</code> then the metric will be placed into a group
+   * named by everything in the metricName up to that <code>.</code> character.
+   */
+  public IGangliaMetadataMessage newDecl(
+      final String hostName, final String metricName, final Object value) {
 
-		/*
-		 * Figure out the best match ganglia data type to use for the metric
-		 * declaration.
-		 */
-		final GangliaMessageTypeEnum metricType = GangliaMessageTypeEnum
-				.forJavaValue(value);
+    final int lastIndexOf = metricName.lastIndexOf('.');
 
-		// Return the metric declaration.
-		return new GangliaMetadataMessage(hostName, metricName,
-				false/* spoof */, metricType, metricName, units, slope, tmax,
-				dmax, extraValues);
+    final String groupName;
 
-	}
+    if (lastIndexOf == -1) {
 
-	/**
-	 * Always returns the caller's argument.
-	 */
-	@Override
-	public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl) {
+      groupName = null;
 
-		return decl;
+    } else {
 
-	}
+      groupName = metricName.substring(0, lastIndexOf);
+    }
 
+    /*
+     * Setup a metric declaration based on some defaults and the type of the
+     * observed value (gtype).
+     */
+
+    final String units = defaultUnits;
+    final GangliaSlopeEnum slope = defaultSlope;
+    final int tmax = defaultTMax;
+    final int dmax = defaultDMax;
+
+    /*
+     * The group(s) in the web UI with which this metric will be associated.
+     */
+    @SuppressWarnings("unchecked")
+    final Map<String, String[]> extraValues =
+        (Map<String, String[]>)
+            (groupName == null
+                ? Collections.emptyMap()
+                : Collections.singletonMap(
+                    IGangliaAttributes.ATTR_GROUP, new String[] {groupName}));
+
+    /*
+     * Figure out the best match ganglia data type to use for the metric
+     * declaration.
+     */
+    final GangliaMessageTypeEnum metricType = GangliaMessageTypeEnum.forJavaValue(value);
+
+    // Return the metric declaration.
+    return new GangliaMetadataMessage(
+        hostName,
+        metricName,
+        false /* spoof */,
+        metricType,
+        metricName,
+        units,
+        slope,
+        tmax,
+        dmax,
+        extraValues);
+  }
+
+  /** Always returns the caller's argument. */
+  @Override
+  public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl) {
+
+    return decl;
+  }
 }

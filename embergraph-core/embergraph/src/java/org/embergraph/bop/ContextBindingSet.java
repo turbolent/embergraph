@@ -25,118 +25,104 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 /**
- * Wraps an {@link IBindingSet} to provide access to the {@link BOpContext}. The
- * {@link BOpContext} information is <em>transient</em> and will not cross the
- * wire.
- * 
+ * Wraps an {@link IBindingSet} to provide access to the {@link BOpContext}. The {@link BOpContext}
+ * information is <em>transient</em> and will not cross the wire.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/513"> Expose
- *      the LexiconConfiguration to function BOPs </a>
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/513">Expose the
+ *     LexiconConfiguration to function BOPs </a>
  */
-@SuppressWarnings("rawtypes") 
+@SuppressWarnings("rawtypes")
 public class ContextBindingSet implements IBindingSet {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private transient BOpContextBase context;
+  private transient BOpContextBase context;
 
-    private final IBindingSet delegate;
+  private final IBindingSet delegate;
 
-    public BOpContextBase getBOpContext() {
+  public BOpContextBase getBOpContext() {
 
-        return context;
+    return context;
+  }
 
-    }
+  public ContextBindingSet(final BOpContextBase context, final IBindingSet delegate) {
 
-    public ContextBindingSet(final BOpContextBase context,
-            final IBindingSet delegate) {
+    this.context = context;
 
-        this.context = context;
+    this.delegate = delegate;
+  }
 
-        this.delegate = delegate;
+  public boolean isBound(final IVariable var) {
+    return delegate.isBound(var);
+  }
 
-    }
+  public void set(final IVariable var, final IConstant val) {
+    delegate.set(var, val);
+  }
 
-    public boolean isBound(final IVariable var) {
-        return delegate.isBound(var);
-    }
+  public IConstant get(final IVariable var) {
+    return delegate.get(var);
+  }
 
-    public void set(final IVariable var, final IConstant val) {
-        delegate.set(var, val);
-    }
+  public void clear(IVariable var) {
+    delegate.clear(var);
+  }
 
-    public IConstant get(final IVariable var) {
-        return delegate.get(var);
-    }
+  public void clearAll() {
+    delegate.clearAll();
+  }
 
-    public void clear(IVariable var) {
-        delegate.clear(var);
-    }
+  public boolean isEmpty() {
+    return delegate.isEmpty();
+  }
 
-    public void clearAll() {
-        delegate.clearAll();
-    }
+  public int size() {
+    return delegate.size();
+  }
 
-    public boolean isEmpty() {
-        return delegate.isEmpty();
-    }
+  public Iterator<Entry<IVariable, IConstant>> iterator() {
+    return delegate.iterator();
+  }
 
-    public int size() {
-        return delegate.size();
-    }
+  public Iterator<IVariable> vars() {
+    return delegate.vars();
+  }
 
-    public Iterator<Entry<IVariable, IConstant>> iterator() {
-        return delegate.iterator();
-    }
+  public IBindingSet clone() {
 
-    public Iterator<IVariable> vars() {
-        return delegate.vars();
-    }
+    // Note: Keep wrapped when we clone().
+    return new ContextBindingSet(context, delegate.clone());
+  }
 
-    public IBindingSet clone() {
+  public IBindingSet copy(final IVariable[] variablesToKeep) {
 
-        // Note: Keep wrapped when we clone().
-        return new ContextBindingSet(context, delegate.clone());
-        
-    }
+    // Note: Keep wrapped when copy() does a clone.
+    return new ContextBindingSet(context, delegate.copy(variablesToKeep));
+  }
 
-    public IBindingSet copy(final IVariable[] variablesToKeep) {
-        
-        // Note: Keep wrapped when copy() does a clone.
-        return new ContextBindingSet(context, delegate.copy(variablesToKeep));
-        
-    }
-   
-    
-    @Override
-    @SuppressWarnings("rawtypes")
-    public IBindingSet copyMinusErrors(final IVariable[] variablesToKeep) {
-        return new ContextBindingSet(context,
-                delegate.copyMinusErrors(variablesToKeep));
-    }
-    
-       
-    /** 
-     * @return true if this IBindingSet contains an assignment of an error value
-     */
-    @Override
-    public final boolean containsErrorValues() {  
-        return delegate.containsErrorValues();
-    }
-        
-    public boolean equals(final Object o) {
-        return delegate.equals(o);
-    }
+  @Override
+  @SuppressWarnings("rawtypes")
+  public IBindingSet copyMinusErrors(final IVariable[] variablesToKeep) {
+    return new ContextBindingSet(context, delegate.copyMinusErrors(variablesToKeep));
+  }
 
-    public int hashCode() {
-        return delegate.hashCode();
-    }
+  /** @return true if this IBindingSet contains an assignment of an error value */
+  @Override
+  public final boolean containsErrorValues() {
+    return delegate.containsErrorValues();
+  }
 
-    public String toString() {
-        return delegate.toString();
-    }
-    
+  public boolean equals(final Object o) {
+    return delegate.equals(o);
+  }
+
+  public int hashCode() {
+    return delegate.hashCode();
+  }
+
+  public String toString() {
+    return delegate.toString();
+  }
 }

@@ -25,44 +25,34 @@ import java.nio.ByteBuffer;
 
 /**
  * Test suite for {@link CommitRecordSerializer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCommitRecordSerializer extends AbstractCommitRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestCommitRecordSerializer() {
+  /** */
+  public TestCommitRecordSerializer() {}
+
+  /** @param arg0 */
+  public TestCommitRecordSerializer(String arg0) {
+    super(arg0);
+  }
+
+  public void test_stress() {
+
+    final int ntrials = 1000;
+
+    for (int trial = 0; trial < ntrials; trial++) {
+
+      doRoundTripTest(getRandomCommitRecord());
     }
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestCommitRecordSerializer(String arg0) {
-        super(arg0);
-    }
-    
-    public void test_stress() {
+  public void doRoundTripTest(ICommitRecord roots) {
 
-        final int ntrials = 1000;
-        
-        for(int trial=0;trial<ntrials; trial++) {
-            
-            doRoundTripTest(getRandomCommitRecord());
-            
-        }
-        
-    }
-    
-    public void doRoundTripTest(ICommitRecord roots) {
-        
-        CommitRecordSerializer ser = CommitRecordSerializer.INSTANCE;
+    CommitRecordSerializer ser = CommitRecordSerializer.INSTANCE;
 
-        assertEquals(roots, ser.deserialize(ByteBuffer.wrap(ser
-                .serialize(roots))));
-
-    }
-
+    assertEquals(roots, ser.deserialize(ByteBuffer.wrap(ser.serialize(roots))));
+  }
 }

@@ -23,19 +23,22 @@ package org.embergraph.rdf.sparql.ast.hints;
 
 import org.embergraph.rdf.sparql.ast.ASTBase;
 
-/**
- * Exception thrown when a query hint is invalid/illegal.
- */
+/** Exception thrown when a query hint is invalid/illegal. */
 public final class QueryHintException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public QueryHintException(final QueryHintScope scope, final ASTBase op,
-            final String name, final Object value) {
+  public QueryHintException(
+      final QueryHintScope scope, final ASTBase op, final String name, final Object value) {
 
-        super("scope=" + scope + ", name=" + name + ", value=" + value
-                + ", op=" + op.getClass().getSimpleName());
-
-    }
-
+    super(
+        "scope="
+            + scope
+            + ", name="
+            + name
+            + ", value="
+            + value
+            + ", op="
+            + op.getClass().getSimpleName());
+  }
 }

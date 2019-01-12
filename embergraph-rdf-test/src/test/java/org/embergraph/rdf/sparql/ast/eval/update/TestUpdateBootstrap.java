@@ -25,14 +25,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
@@ -49,6 +42,8 @@ import org.embergraph.bop.rdf.update.ParseOp;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
@@ -60,494 +55,468 @@ import org.embergraph.rdf.sparql.ast.UpdateRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
- * Bootstrapped test suite for core UPDATE functionality based on BOP
- * evaluation.
- * <p>
- * Note: We are not using BOP evaluation for SPARQL UPDATE at this time, so this
- * test is NOT being run in CI.
- * 
+ * Bootstrapped test suite for core UPDATE functionality based on BOP evaluation.
+ *
+ * <p>Note: We are not using BOP evaluation for SPARQL UPDATE at this time, so this test is NOT
+ * being run in CI.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestUpdateBootstrap.java 6167 2012-03-20 17:47:30Z thompsonbry
- *          $
+ * @version $Id: TestUpdateBootstrap.java 6167 2012-03-20 17:47:30Z thompsonbry $
  */
 public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
 
-    private static final Logger log = Logger
-            .getLogger(TestUpdateBootstrap.class);
-    
-    /**
-     * 
-     */
-    public TestUpdateBootstrap() {
+  private static final Logger log = Logger.getLogger(TestUpdateBootstrap.class);
+
+  /** */
+  public TestUpdateBootstrap() {}
+
+  /** @param name */
+  public TestUpdateBootstrap(String name) {
+    super(name);
+  }
+
+  /**
+   * Unit test for inserting ground triples or quads.
+   *
+   * <pre>
+   * @prefix : <http://www.embergraph.org/> .
+   * @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+   * @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+   * @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+   * INSERT DATA
+   * {
+   *   GRAPH :g1 {
+   *     :Mike rdf:type foaf:Person .
+   *     :Bryan rdf:type foaf:Person .
+   *     :Mike rdfs:label "Mike" .
+   *     :Bryan rdfs:label "Bryan" .
+   *     :DC rdfs:label "DC" .
+   *   }
+   * }
+   * </pre>
+   */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_insert_data() throws Exception {
+
+    final UpdateRoot updateRoot = new UpdateRoot();
+    final ISPO[] data;
+    {
+      final InsertData op = new InsertData();
+
+      updateRoot.addChild(op);
+
+      final IV g1 = makeIV(valueFactory.createURI("http://www.embergraph.org/g1"));
+      final IV mike = makeIV(valueFactory.createURI("http://www.embergraph.org/Mike"));
+      final IV bryan = makeIV(valueFactory.createURI("http://www.embergraph.org/Bryan"));
+      final IV dc = makeIV(valueFactory.createURI("http://www.embergraph.org/DC"));
+      final IV rdfType = makeIV(valueFactory.asValue(RDF.TYPE));
+      final IV rdfsLabel = makeIV(valueFactory.asValue(RDFS.LABEL));
+      final IV foafPerson = makeIV(valueFactory.createURI("http://xmlns.com/foaf/0.1/Person"));
+      final IV mikeL = makeIV(valueFactory.createLiteral("Mike"));
+      final IV bryanL = makeIV(valueFactory.createLiteral("Bryan"));
+      final IV dcL = makeIV(valueFactory.createLiteral("DC"));
+
+      data =
+          new ISPO[] {
+            new SPO(mike, rdfType, foafPerson, g1, StatementEnum.Explicit),
+            new SPO(bryan, rdfType, foafPerson, g1, StatementEnum.Explicit),
+            new SPO(mike, rdfsLabel, mikeL, g1, StatementEnum.Explicit),
+            new SPO(bryan, rdfsLabel, bryanL, g1, StatementEnum.Explicit),
+            new SPO(dc, rdfsLabel, dcL, g1, StatementEnum.Explicit),
+          };
+
+      /*
+       * FIXME Finish this test up (again). It is running into a conflict
+       * with the Value to IV resolution.  It seems that it should be using
+       * EmbergraphValues here since the lexicon add/resolve step has not yet
+       * been executed (it runs below). Note that this code is old. It was
+       * a mock up for the evaluation of SPARQL UPDATE on the query engine.
+       * We do not evaluate SPARQL update that way, so this class could just
+       * go away.
+       *
+       * @see <a
+       * href="https://sourceforge.net/apps/trac/bigdata/ticket/573">
+       * NullPointerException when attempting to INSERT DATA containing a
+       * blank node </a>
+       */
+      // op.setData(data);
+      fail("Finish test");
     }
 
-    /**
-     * @param name
+    /*
+     * Turn that AST Update operation into a pipeline bop to add the terms
+     * and write the statements. This will be done by AST2BOpUtility, but I
+     * can mock the translation target up first.
      */
-    public TestUpdateBootstrap(String name) {
-        super(name);
-    }
 
-    /**
-     * Unit test for inserting ground triples or quads.
-     * 
-     * <pre>
-     * @prefix : <http://www.embergraph.org/> .
-     * @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-     * @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-     * @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-     * INSERT DATA
-     * { 
-     *   GRAPH :g1 {
-     *     :Mike rdf:type foaf:Person .
-     *     :Bryan rdf:type foaf:Person .
-     *     :Mike rdfs:label "Mike" .
-     *     :Bryan rdfs:label "Bryan" .
-     *     :DC rdfs:label "DC" .
-     *   }
-     * }
-     * </pre>
+    final ASTContainer astContainer = new ASTContainer(updateRoot);
+
+    final AST2BOpContext context = new AST2BOpContext(astContainer, store);
+
+    final long txId = ITx.UNISOLATED;
+    int bopId = 1;
+    final int resolutionId = bopId++;
+    final int insertStatementsId = bopId++;
+    final int commitId = bopId++;
+    PipelineOp left = null;
+
+    /*
+     * Resolve/add terms against the lexicon.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_insert_data() throws Exception {
-
-        final UpdateRoot updateRoot = new UpdateRoot();
-        final ISPO[] data;
-        {
-
-            final InsertData op = new InsertData();
-
-            updateRoot.addChild(op);
-
-            final IV g1 = makeIV(valueFactory.createURI("http://www.embergraph.org/g1"));
-            final IV mike = makeIV(valueFactory.createURI("http://www.embergraph.org/Mike"));
-            final IV bryan = makeIV(valueFactory.createURI("http://www.embergraph.org/Bryan"));
-            final IV dc = makeIV(valueFactory.createURI("http://www.embergraph.org/DC"));
-            final IV rdfType = makeIV(valueFactory.asValue(RDF.TYPE));
-            final IV rdfsLabel = makeIV(valueFactory.asValue(RDFS.LABEL));
-            final IV foafPerson = makeIV(valueFactory.createURI("http://xmlns.com/foaf/0.1/Person"));
-            final IV mikeL = makeIV(valueFactory.createLiteral("Mike"));
-            final IV bryanL = makeIV(valueFactory.createLiteral("Bryan"));
-            final IV dcL = makeIV(valueFactory.createLiteral("DC"));
-
-            data = new ISPO[] {
-                    new SPO(mike, rdfType, foafPerson, g1, StatementEnum.Explicit),
-                    new SPO(bryan, rdfType, foafPerson, g1, StatementEnum.Explicit),
-                    new SPO(mike, rdfsLabel, mikeL, g1, StatementEnum.Explicit),
-                    new SPO(bryan, rdfsLabel, bryanL, g1, StatementEnum.Explicit),
-                    new SPO(dc, rdfsLabel, dcL, g1, StatementEnum.Explicit),
-            };
-            
-            /*
-             * FIXME Finish this test up (again). It is running into a conflict
-             * with the Value to IV resolution.  It seems that it should be using
-             * EmbergraphValues here since the lexicon add/resolve step has not yet
-             * been executed (it runs below). Note that this code is old. It was
-             * a mock up for the evaluation of SPARQL UPDATE on the query engine.
-             * We do not evaluate SPARQL update that way, so this class could just
-             * go away.
-             * 
-             * @see <a
-             * href="https://sourceforge.net/apps/trac/bigdata/ticket/573">
-             * NullPointerException when attempting to INSERT DATA containing a
-             * blank node </a>
-             */
-            //op.setData(data);
-            fail("Finish test");
-            
-        }
-
-        /*
-         * Turn that AST Update operation into a pipeline bop to add the terms
-         * and write the statements. This will be done by AST2BOpUtility, but I
-         * can mock the translation target up first.
-         */
- 
-        final ASTContainer astContainer = new ASTContainer(updateRoot);
-        
-        final AST2BOpContext context = new AST2BOpContext(astContainer, store);
-
-        final long txId = ITx.UNISOLATED;
-        int bopId = 1;
-        final int resolutionId = bopId++;
-        final int insertStatementsId = bopId++;
-        final int commitId = bopId++;
-        PipelineOp left = null;
-        
-        /*
-         * Resolve/add terms against the lexicon.
-         */
-        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(
+    left =
+        new ChunkedResolutionOp(
+            leftOrEmpty(left),
+            NV.asMap(
                 new NV(BOp.Annotations.BOP_ID, resolutionId),
                 new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
-                new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getLexiconNamespace() })
-                ));
+                new NV(
+                    ChunkedResolutionOp.Annotations.RELATION_NAME,
+                    new String[] {context.getLexiconNamespace()})));
 
-        /*
-         * Insert statements.
-         * 
-         * Note: namespace is the triple store, not the spo relation. This is
-         * because insert is currently on the triple store for historical SIDs
-         * support.
-         * 
-         * Note: This already does TM for SIDs mode.
-         */
-        left = new InsertStatementsOp(leftOrEmpty(left), NV.asMap(new NV(
-                BOp.Annotations.BOP_ID, insertStatementsId),
+    /*
+     * Insert statements.
+     *
+     * Note: namespace is the triple store, not the spo relation. This is
+     * because insert is currently on the triple store for historical SIDs
+     * support.
+     *
+     * Note: This already does TM for SIDs mode.
+     */
+    left =
+        new InsertStatementsOp(
+            leftOrEmpty(left),
+            NV.asMap(
+                new NV(BOp.Annotations.BOP_ID, insertStatementsId),
                 new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
-                new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getNamespace() })
-                ));
-        
-        /*
-         * Commit.
-         */
-        left = new CommitOp(leftOrEmpty(left), NV.asMap(
+                new NV(
+                    ChunkedResolutionOp.Annotations.RELATION_NAME,
+                    new String[] {context.getNamespace()})));
+
+    /*
+     * Commit.
+     */
+    left =
+        new CommitOp(
+            leftOrEmpty(left),
+            NV.asMap(
                 new NV(BOp.Annotations.BOP_ID, commitId),
                 new NV(CommitOp.Annotations.TIMESTAMP, txId),
-                new NV(CommitOp.Annotations.PIPELINED, false)
-                ));
+                new NV(CommitOp.Annotations.PIPELINED, false)));
 
-        /*
-         * Populate the source solutions with the statements to be asserted.
-         */
-        final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
-        {
-
-            final Var<?> s = Var.var("s"), p = Var.var("p"), o = Var
-                    .var("o"), c = Var.var("c");
-
-            for(ISPO spo : data) {
-
-                final ListBindingSet bset = new ListBindingSet();
-                
-                bset.set(s, new Constant(spo.s()));
-                
-                bset.set(p, new Constant(spo.p()));
-                
-                bset.set(o, new Constant(spo.o()));
-                
-                if (spo.c() != null)
-                    bset.set(c, new Constant(spo.c()));
-                
-                bsets.add(bset);
-                
-            }
-
-        }
-        
-        // Run the update.
-        final IRunningQuery future = context.queryEngine.eval(left,
-                bsets.toArray(new IBindingSet[bsets.size()]));
-        
-        // Look for errors.
-        future.get();
-
-        if (log.isInfoEnabled())
-            log.info(store.dumpStore());
-        
-        {
-            final EmbergraphValueFactory f = store.getValueFactory();
-            final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
-            final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
-            final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
-            final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
-            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
-            final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
-            final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
-            final EmbergraphLiteral mikeL = f.createLiteral("Mike");
-            final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
-            final EmbergraphLiteral DCL = f.createLiteral("DC");
-
-            final EmbergraphValue[] values = new EmbergraphValue[] { mike, bryan, dc,
-                    g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL };
-
-            // Batch resolve (read-only).
-            store.getLexiconRelation()
-                    .addTerms(values, values.length, true/* readOnly */);
-            
-            // Verify IV assignment.
-            for (EmbergraphValue v : values) {
-
-                final IV<?, ?> iv = v.getIV();
-
-                // a real IV.
-                assertFalse(iv.isNullIV());
-                
-            }
-
-            /*
-             * Verify statements in the store.
-             */
-            assertTrue(store.hasStatement(mike, rdfType, foafPerson, g1));
-            assertTrue(store.hasStatement(bryan, rdfType, foafPerson, g1));
-            assertTrue(store.hasStatement(mike, rdfsLabel, mikeL, g1));
-            assertTrue(store.hasStatement(bryan, rdfsLabel, bryanL, g1));
-            assertTrue(store.hasStatement(dc, rdfsLabel, DCL, g1));
-
-            /*
-             * Check the mutation counters for the lexicon.
-             */
-            {
-
-                final BOpStats stats = future.getStats().get(resolutionId);
-
-                /*
-                 * Note: This assumes that rdf:type and rdfs:label are not
-                 * defined by the vocabulary.  We have to subtract out each
-                 * Value which was declared by the vocabulary or is otherwise
-                 * represented as a fully inline IV.
-                 */
-                
-                long expectedCount = values.length;
-
-                for (int i = 0; i < values.length; i++) {
-
-                    if (values[i].getIV().isInline())
-                        expectedCount--;
-
-                }
-
-                assertEquals("mutationCount", expectedCount,
-                        stats.mutationCount.get());
-            
-            }
-            
-            /*
-             * Check the mutation counters for the statements relation.
-             */
-            {
-
-                final BOpStats stats = future.getStats()
-                        .get(insertStatementsId);
-
-                final long expectedCount = 5;
-
-                assertEquals("mutationCount", expectedCount,
-                        stats.mutationCount.get());
-
-            }
-
-        }
-        
-    }
-    
-    /**
-     * Unit test for LOAD with quads.
+    /*
+     * Populate the source solutions with the statements to be asserted.
      */
-    public void test_load_data() throws Exception {
-        
-        final UpdateRoot updateRoot = new UpdateRoot();
-        final LoadGraph op;
-        {
+    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    {
+      final Var<?> s = Var.var("s"), p = Var.var("p"), o = Var.var("o"), c = Var.var("c");
 
-            op = new LoadGraph();
+      for (ISPO spo : data) {
 
-            updateRoot.addChild(op);
+        final ListBindingSet bset = new ListBindingSet();
 
-            op.setSourceGraph(new ConstantNode(
-                    makeIV(new URIImpl(
-                            "file:src/test/java/org/embergraph/rdf/sparql/ast/eval/update/load_01.trig"))));
+        bset.set(s, new Constant(spo.s()));
 
-            /*
-             * Note: This is loading into an unspecified graph since the target
-             * was not set.
-             */
-            
+        bset.set(p, new Constant(spo.p()));
+
+        bset.set(o, new Constant(spo.o()));
+
+        if (spo.c() != null) bset.set(c, new Constant(spo.c()));
+
+        bsets.add(bset);
+      }
+    }
+
+    // Run the update.
+    final IRunningQuery future =
+        context.queryEngine.eval(left, bsets.toArray(new IBindingSet[bsets.size()]));
+
+    // Look for errors.
+    future.get();
+
+    if (log.isInfoEnabled()) log.info(store.dumpStore());
+
+    {
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+      final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+      final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
+      final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
+      final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+      final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
+      final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
+      final EmbergraphLiteral mikeL = f.createLiteral("Mike");
+      final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
+      final EmbergraphLiteral DCL = f.createLiteral("DC");
+
+      final EmbergraphValue[] values =
+          new EmbergraphValue[] {
+            mike, bryan, dc, g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL
+          };
+
+      // Batch resolve (read-only).
+      store.getLexiconRelation().addTerms(values, values.length, true /* readOnly */);
+
+      // Verify IV assignment.
+      for (EmbergraphValue v : values) {
+
+        final IV<?, ?> iv = v.getIV();
+
+        // a real IV.
+        assertFalse(iv.isNullIV());
+      }
+
+      /*
+       * Verify statements in the store.
+       */
+      assertTrue(store.hasStatement(mike, rdfType, foafPerson, g1));
+      assertTrue(store.hasStatement(bryan, rdfType, foafPerson, g1));
+      assertTrue(store.hasStatement(mike, rdfsLabel, mikeL, g1));
+      assertTrue(store.hasStatement(bryan, rdfsLabel, bryanL, g1));
+      assertTrue(store.hasStatement(dc, rdfsLabel, DCL, g1));
+
+      /*
+       * Check the mutation counters for the lexicon.
+       */
+      {
+        final BOpStats stats = future.getStats().get(resolutionId);
+
+        /*
+         * Note: This assumes that rdf:type and rdfs:label are not
+         * defined by the vocabulary.  We have to subtract out each
+         * Value which was declared by the vocabulary or is otherwise
+         * represented as a fully inline IV.
+         */
+
+        long expectedCount = values.length;
+
+        for (int i = 0; i < values.length; i++) {
+
+          if (values[i].getIV().isInline()) expectedCount--;
         }
 
-        /*
-         * Turn that AST Update operation into a pipeline bop to add the terms
-         * and write the statements. This will be done by AST2BOpUtility, but I
-         * can mock the translation target up first.
-         */
- 
-        final ASTContainer astContainer = new ASTContainer(updateRoot);
+        assertEquals("mutationCount", expectedCount, stats.mutationCount.get());
+      }
 
-        final AST2BOpContext context = new AST2BOpContext(astContainer, store);
+      /*
+       * Check the mutation counters for the statements relation.
+       */
+      {
+        final BOpStats stats = future.getStats().get(insertStatementsId);
 
-        final long txId = ITx.UNISOLATED;
-        int bopId = 1;
-        final int parseId = bopId++;
-        final int resolutionId = bopId++;
-        final int insertStatementsId = bopId++;
-        final int commitId = bopId++;
-        PipelineOp left = null;
+        final long expectedCount = 5;
 
-        /*
-         * Parse the file.
-         * 
-         * Note: After the parse step, the remainder of the steps are just like
-         * INSERT DATA.
-         */
-        {
-            final Map<String, Object> anns = new HashMap<String, Object>();
+        assertEquals("mutationCount", expectedCount, stats.mutationCount.get());
+      }
+    }
+  }
 
-            anns.put(BOp.Annotations.BOP_ID, parseId);
+  /** Unit test for LOAD with quads. */
+  public void test_load_data() throws Exception {
 
-            // required.
-            anns.put(ParseOp.Annotations.SOURCE_URI, op.getSourceGraph()
-                    .getValue());
+    final UpdateRoot updateRoot = new UpdateRoot();
+    final LoadGraph op;
+    {
+      op = new LoadGraph();
 
-            // optional.
-            if (op.getTargetGraph() != null)
-                anns.put(ParseOp.Annotations.TARGET_URI, op.getTargetGraph());
+      updateRoot.addChild(op);
 
-            // required.
-            anns.put(ParseOp.Annotations.TIMESTAMP, txId);
-            anns.put(ParseOp.Annotations.RELATION_NAME,
-                    new String[] { context.getNamespace() });
+      op.setSourceGraph(
+          new ConstantNode(
+              makeIV(
+                  new URIImpl(
+                      "file:src/test/java/org/embergraph/rdf/sparql/ast/eval/update/load_01.trig"))));
 
-            /*
-             * Note: 100k is the historical default for the data loader. We
-             * generally want to parse a lot of data at once and vector it in
-             * big chunks.
-             */
-            anns.put(ParseOp.Annotations.CHUNK_CAPACITY, 100000);
-            
-            left = new ParseOp(leftOrEmpty(left), anns);
+      /*
+       * Note: This is loading into an unspecified graph since the target
+       * was not set.
+       */
 
-        }
+    }
 
-        /*
-         * Resolve/add terms against the lexicon.
-         */
-        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(
+    /*
+     * Turn that AST Update operation into a pipeline bop to add the terms
+     * and write the statements. This will be done by AST2BOpUtility, but I
+     * can mock the translation target up first.
+     */
+
+    final ASTContainer astContainer = new ASTContainer(updateRoot);
+
+    final AST2BOpContext context = new AST2BOpContext(astContainer, store);
+
+    final long txId = ITx.UNISOLATED;
+    int bopId = 1;
+    final int parseId = bopId++;
+    final int resolutionId = bopId++;
+    final int insertStatementsId = bopId++;
+    final int commitId = bopId++;
+    PipelineOp left = null;
+
+    /*
+     * Parse the file.
+     *
+     * Note: After the parse step, the remainder of the steps are just like
+     * INSERT DATA.
+     */
+    {
+      final Map<String, Object> anns = new HashMap<String, Object>();
+
+      anns.put(BOp.Annotations.BOP_ID, parseId);
+
+      // required.
+      anns.put(ParseOp.Annotations.SOURCE_URI, op.getSourceGraph().getValue());
+
+      // optional.
+      if (op.getTargetGraph() != null)
+        anns.put(ParseOp.Annotations.TARGET_URI, op.getTargetGraph());
+
+      // required.
+      anns.put(ParseOp.Annotations.TIMESTAMP, txId);
+      anns.put(ParseOp.Annotations.RELATION_NAME, new String[] {context.getNamespace()});
+
+      /*
+       * Note: 100k is the historical default for the data loader. We
+       * generally want to parse a lot of data at once and vector it in
+       * big chunks.
+       */
+      anns.put(ParseOp.Annotations.CHUNK_CAPACITY, 100000);
+
+      left = new ParseOp(leftOrEmpty(left), anns);
+    }
+
+    /*
+     * Resolve/add terms against the lexicon.
+     */
+    left =
+        new ChunkedResolutionOp(
+            leftOrEmpty(left),
+            NV.asMap(
                 new NV(ChunkedResolutionOp.Annotations.BOP_ID, resolutionId),
                 new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
-                new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getLexiconNamespace() })
-                ));
+                new NV(
+                    ChunkedResolutionOp.Annotations.RELATION_NAME,
+                    new String[] {context.getLexiconNamespace()})));
 
-        /*
-         * Insert statements.
-         */
-        left = new InsertStatementsOp(leftOrEmpty(left), NV.asMap(new NV(
-                BOp.Annotations.BOP_ID, insertStatementsId),
+    /*
+     * Insert statements.
+     */
+    left =
+        new InsertStatementsOp(
+            leftOrEmpty(left),
+            NV.asMap(
+                new NV(BOp.Annotations.BOP_ID, insertStatementsId),
                 new NV(InsertStatementsOp.Annotations.TIMESTAMP, txId),
-                new NV(InsertStatementsOp.Annotations.RELATION_NAME,
-                        new String[] { context.getNamespace() })
-                ));
-        
-        /*
-         * Commit.
-         */
-        left = new CommitOp(leftOrEmpty(left), NV.asMap(
+                new NV(
+                    InsertStatementsOp.Annotations.RELATION_NAME,
+                    new String[] {context.getNamespace()})));
+
+    /*
+     * Commit.
+     */
+    left =
+        new CommitOp(
+            leftOrEmpty(left),
+            NV.asMap(
                 new NV(BOp.Annotations.BOP_ID, commitId),
                 new NV(CommitOp.Annotations.TIMESTAMP, txId),
-                new NV(CommitOp.Annotations.PIPELINED, false)
-                ));
-        
-        // Run the update.
-        final IRunningQuery future = context.queryEngine.eval(left);
-        
-        // Look for errors.
-        future.get();
+                new NV(CommitOp.Annotations.PIPELINED, false)));
 
-        if (log.isInfoEnabled())
-            log.info(store.dumpStore());
-        
-        {
-            final EmbergraphValueFactory f = store.getValueFactory();
-            final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
-            final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
-            final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
-            final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
-            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
-            final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
-            final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
-            final EmbergraphLiteral mikeL = f.createLiteral("Mike");
-            final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
-            final EmbergraphLiteral DCL = f.createLiteral("DC");
+    // Run the update.
+    final IRunningQuery future = context.queryEngine.eval(left);
 
-            final EmbergraphValue[] values = new EmbergraphValue[] { mike, bryan, dc,
-                    g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL };
+    // Look for errors.
+    future.get();
 
-            // Batch resolve (read-only).
-            store.getLexiconRelation()
-                    .addTerms(values, values.length, true/* readOnly */);
-            
-            // Verify IV assignment.
-            for (EmbergraphValue v : values) {
+    if (log.isInfoEnabled()) log.info(store.dumpStore());
 
-                final IV<?, ?> iv = v.getIV();
+    {
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+      final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+      final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
+      final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
+      final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+      final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
+      final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
+      final EmbergraphLiteral mikeL = f.createLiteral("Mike");
+      final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
+      final EmbergraphLiteral DCL = f.createLiteral("DC");
 
-                // a real IV.
-                assertFalse(iv.isNullIV());
-                
-            }
+      final EmbergraphValue[] values =
+          new EmbergraphValue[] {
+            mike, bryan, dc, g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL
+          };
 
-            /*
-             * Verify statements in the store.
-             */
-            assertTrue(store.hasStatement(mike, rdfType, foafPerson, g1));
-            assertTrue(store.hasStatement(bryan, rdfType, foafPerson, g1));
-            assertTrue(store.hasStatement(mike, rdfsLabel, mikeL, g1));
-            assertTrue(store.hasStatement(bryan, rdfsLabel, bryanL, g1));
-            assertTrue(store.hasStatement(dc, rdfsLabel, DCL, g1));
+      // Batch resolve (read-only).
+      store.getLexiconRelation().addTerms(values, values.length, true /* readOnly */);
 
-            /*
-             * Check the mutation counters for the lexicon.
-             */
-            {
+      // Verify IV assignment.
+      for (EmbergraphValue v : values) {
 
-                final BOpStats stats = future.getStats().get(resolutionId);
+        final IV<?, ?> iv = v.getIV();
 
-                /*
-                 * Note: This assumes that rdf:type and rdfs:label are not
-                 * defined by the vocabulary.  We have to subtract out each
-                 * Value which was declared by the vocabulary or is otherwise
-                 * represented as a fully inline IV.
-                 */
-                
-                long expectedCount = values.length;
+        // a real IV.
+        assertFalse(iv.isNullIV());
+      }
 
-                for (int i = 0; i < values.length; i++) {
+      /*
+       * Verify statements in the store.
+       */
+      assertTrue(store.hasStatement(mike, rdfType, foafPerson, g1));
+      assertTrue(store.hasStatement(bryan, rdfType, foafPerson, g1));
+      assertTrue(store.hasStatement(mike, rdfsLabel, mikeL, g1));
+      assertTrue(store.hasStatement(bryan, rdfsLabel, bryanL, g1));
+      assertTrue(store.hasStatement(dc, rdfsLabel, DCL, g1));
 
-                    if (values[i].getIV().isInline())
-                        expectedCount--;
+      /*
+       * Check the mutation counters for the lexicon.
+       */
+      {
+        final BOpStats stats = future.getStats().get(resolutionId);
 
-                }
+        /*
+         * Note: This assumes that rdf:type and rdfs:label are not
+         * defined by the vocabulary.  We have to subtract out each
+         * Value which was declared by the vocabulary or is otherwise
+         * represented as a fully inline IV.
+         */
 
-                assertEquals("mutationCount", expectedCount,
-                        stats.mutationCount.get());
-            
-            }
-            
-            /*
-             * Check the mutation counters for the statements relation.
-             */
-            {
+        long expectedCount = values.length;
 
-                final BOpStats stats = future.getStats()
-                        .get(insertStatementsId);
+        for (int i = 0; i < values.length; i++) {
 
-                final long expectedCount = 5;
-
-                assertEquals("mutationCount", expectedCount,
-                        stats.mutationCount.get());
-
-            }
-
+          if (values[i].getIV().isInline()) expectedCount--;
         }
-        
+
+        assertEquals("mutationCount", expectedCount, stats.mutationCount.get());
+      }
+
+      /*
+       * Check the mutation counters for the statements relation.
+       */
+      {
+        final BOpStats stats = future.getStats().get(insertStatementsId);
+
+        final long expectedCount = 5;
+
+        assertEquals("mutationCount", expectedCount, stats.mutationCount.get());
+      }
     }
+  }
 
-    /**
-     * Return either <i>left</i> wrapped as the sole member of an array or
-     * {@link BOp#NOARGS} iff <i>left</i> is <code>null</code>.
-     * 
-     * @param left
-     *            The prior operator in the pipeline (optional).
-     * @return The array.
-     */
-    static protected BOp[] leftOrEmpty(final PipelineOp left) {
+  /**
+   * Return either <i>left</i> wrapped as the sole member of an array or {@link BOp#NOARGS} iff
+   * <i>left</i> is <code>null</code>.
+   *
+   * @param left The prior operator in the pipeline (optional).
+   * @return The array.
+   */
+  protected static BOp[] leftOrEmpty(final PipelineOp left) {
 
-        return left == null ? BOp.NOARGS : new BOp[] { left };
-
-    }
-
+    return left == null ? BOp.NOARGS : new BOp[] {left};
+  }
 }

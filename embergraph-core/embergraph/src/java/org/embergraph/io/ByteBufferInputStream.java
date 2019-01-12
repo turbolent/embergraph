@@ -22,91 +22,76 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
- * Reads bytes from a {@link ByteBuffer}. This class IS NOT thread-safe.
- * Caller's MUST {@link ByteBuffer#duplicate()} the {@link ByteBuffer} before
- * creating an instance of this class if they wish to avoid side-effects on the
- * position and limit of the original {@link ByteBuffer}.
- * 
+ * Reads bytes from a {@link ByteBuffer}. This class IS NOT thread-safe. Caller's MUST {@link
+ * ByteBuffer#duplicate()} the {@link ByteBuffer} before creating an instance of this class if they
+ * wish to avoid side-effects on the position and limit of the original {@link ByteBuffer}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @todo document that this reads the remaining() bytes and has a side effect on
- *       the position. if that is not the desired behavior then either modify
- *       this class or invoke {@link ByteBuffer#asReadOnlyBuffer()} and pass the
- *       result into the constructor instead.
- * 
- * @todo dsiutils now defines its own implementation of this but does not define
- *       a ByteBufferOutputStream class. if it did, then we might just use its
- *       implementations instead.
+ * @todo document that this reads the remaining() bytes and has a side effect on the position. if
+ *     that is not the desired behavior then either modify this class or invoke {@link
+ *     ByteBuffer#asReadOnlyBuffer()} and pass the result into the constructor instead.
+ * @todo dsiutils now defines its own implementation of this but does not define a
+ *     ByteBufferOutputStream class. if it did, then we might just use its implementations instead.
  */
 public class ByteBufferInputStream extends InputStream {
 
-    private final ByteBuffer buf;
+  private final ByteBuffer buf;
 
-    public ByteBufferInputStream(final ByteBuffer buf) {
+  public ByteBufferInputStream(final ByteBuffer buf) {
 
-        if (buf == null)
-            throw new IllegalArgumentException();
+    if (buf == null) throw new IllegalArgumentException();
 
-        this.buf = buf;
+    this.buf = buf;
+  }
 
+  /**
+   * Read the next byte from the buffer.
+   *
+   * @return The byte as a value in [0:255].
+   */
+  public synchronized int read() throws IOException {
+
+    if (buf.remaining() == 0) {
+
+      return -1;
     }
 
-    /**
-     * Read the next byte from the buffer.
-     * 
-     * @return The byte as a value in [0:255].
-     */
-    synchronized
-    public int read() throws IOException {
+    // A byte whose value is in [-128:127].
+    final byte b = buf.get();
 
-        if (buf.remaining() == 0) {
+    return (0xff & b);
+    //            return ((int) b) + 128;
+    //            int v = ((int)b) + 128;
+    //            assert v>=0 && v<=255;
+    //            return v;
+    //            return b;
 
-            return -1;
+  }
 
-        }
+  public synchronized int read(final byte[] a, final int off, final int len) throws IOException {
 
-        // A byte whose value is in [-128:127].
-        final byte b = buf.get();
+    if (len == 0) return 0;
 
-        return (0xff & b);
-        //            return ((int) b) + 128;
-        //            int v = ((int)b) + 128;
-        //            assert v>=0 && v<=255;
-        //            return v;
-        //            return b;
+    final int remaining = buf.remaining();
 
-    }
+    if (remaining == 0) return -1;
 
-    synchronized
-    public int read(final byte[] a, final int off, final int len)
-            throws IOException {
+    final int readLength = Math.min(remaining, len);
 
-        if (len == 0)
-            return 0;
-        
-        final int remaining = buf.remaining();
-        
-        if (remaining == 0)
-            return -1;
-        
-        final int readLength = Math.min(remaining, len);
-        
-        // current limit.
-        final int climit = buf.limit();
+    // current limit.
+    final int climit = buf.limit();
 
-        // new limit.
-        buf.limit(buf.position() + readLength);
-        
-        // bulk copy.
-        buf.get(a, off, readLength);
+    // new limit.
+    buf.limit(buf.position() + readLength);
 
-        // restore the limit (position was updated as a side effect).
-        buf.limit(climit);
+    // bulk copy.
+    buf.get(a, off, readLength);
 
-        // #of bytes transferred.
-        return readLength;
+    // restore the limit (position was updated as a side effect).
+    buf.limit(climit);
 
-    }
-
+    // #of bytes transferred.
+    return readLength;
+  }
 }

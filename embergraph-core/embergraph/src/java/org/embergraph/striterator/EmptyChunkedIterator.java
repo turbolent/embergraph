@@ -27,65 +27,53 @@ import java.util.NoSuchElementException;
 
 /**
  * An empty iterator.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyChunkedIterator<E> implements IChunkedOrderedIterator<E> {
 
-    private final IKeyOrder<E> keyOrder;
-    
-    /**
-     * 
-     * @param keyOrder
-     *            The natural sort order (MAY be <code>null</code>).
-     */
-    public EmptyChunkedIterator(IKeyOrder<E> keyOrder) {
-        
-        this.keyOrder = keyOrder;
-        
-    }
+  private final IKeyOrder<E> keyOrder;
 
-    public IKeyOrder<E> getKeyOrder() {
+  /** @param keyOrder The natural sort order (MAY be <code>null</code>). */
+  public EmptyChunkedIterator(IKeyOrder<E> keyOrder) {
 
-        return keyOrder;
-        
-    }
+    this.keyOrder = keyOrder;
+  }
 
-    public E[] nextChunk(IKeyOrder<E> keyOrder) {
-        
-        throw new NoSuchElementException();
-        
-    }
+  public IKeyOrder<E> getKeyOrder() {
 
-    public E next() {
-    
-        throw new NoSuchElementException();
-        
-    }
+    return keyOrder;
+  }
 
-    public E[] nextChunk() {
+  public E[] nextChunk(IKeyOrder<E> keyOrder) {
 
-        throw new NoSuchElementException();
+    throw new NoSuchElementException();
+  }
 
-    }
+  public E next() {
 
-    public void remove() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+    throw new NoSuchElementException();
+  }
 
-    public void close() {
-        
-        // NOP
-        
-    }
+  public E[] nextChunk() {
 
-    public boolean hasNext() {
-        
-        return false;
-        
-    }
-    
+    throw new NoSuchElementException();
+  }
+
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  public void close() {
+
+    // NOP
+
+  }
+
+  public boolean hasNext() {
+
+    return false;
+  }
 }

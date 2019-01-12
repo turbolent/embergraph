@@ -27,69 +27,47 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Interface for declaring query hints.
- * 
- * @param <T>
- *            The generic type of the value space for the query hint.
- * 
+ *
+ * @param <T> The generic type of the value space for the query hint.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IQueryHint<T> {
 
-    /**
-     * The name of the query hint.
-     */
-    String getName();
+  /** The name of the query hint. */
+  String getName();
 
-    /**
-     * The default value for this query hint (many query hints provide overrides
-     * of defaults).
-     */
-    T getDefault();
+  /** The default value for this query hint (many query hints provide overrides of defaults). */
+  T getDefault();
 
-    /**
-     * Validate the value, returning an object of the appropriate type.
-     * 
-     * @param value
-     *            The value.
-     * 
-     * @return The validated value.
-     * 
-     * @throws RuntimeException
-     *             if the value can not be validated.
-     */
-    T validate(String value);
+  /**
+   * Validate the value, returning an object of the appropriate type.
+   *
+   * @param value The value.
+   * @return The validated value.
+   * @throws RuntimeException if the value can not be validated.
+   */
+  T validate(String value);
 
-    /**
-     * Handle the query hint.
-     * <p>
-     * Note: The name of the query hint is no longer strongly coupled to the
-     * name of the annotation. This method may be used to attach zero or more
-     * annotations as appropriate to the AST structure. It may also be used to
-     * change defaults in the {@link AST2BOpContext} or take similar actions.
-     * <p>
-     * Note: When <code>scope</code> EQ {@link QueryHintScope#Query}, the
-     * implementation SHOULD also act on {@link AST2BOpContext#queryHints},
-     * setting the value in the global scope.
-     * 
-     * @param ctx
-     *            The query evaluation context.
-     * @param queryRoot
-     *            The root of the query. This is required to resolve the parent
-     *            of a query hint inside of a FILTER.
-     * @param scope
-     *            The {@link QueryHintScope} specified for the query hint.
-     * @param op
-     *            An AST node to which the hint should bind.
-     * @param value
-     *            The value specified for the query hint.
-     * 
-     * @see <a href="http://trac.blazegraph.com/ticket/988"> bad performance for
-     *      FILTER EXISTS </a>
-     * @see <a href="http://trac.blazegraph.com/ticket/990"> Query hint not
-     *      recognized in FILTER</a>
-     */
-    void handle(AST2BOpContext ctx, QueryRoot queryRoot, QueryHintScope scope,
-            ASTBase op, T value);
-
+  /**
+   * Handle the query hint.
+   *
+   * <p>Note: The name of the query hint is no longer strongly coupled to the name of the
+   * annotation. This method may be used to attach zero or more annotations as appropriate to the
+   * AST structure. It may also be used to change defaults in the {@link AST2BOpContext} or take
+   * similar actions.
+   *
+   * <p>Note: When <code>scope</code> EQ {@link QueryHintScope#Query}, the implementation SHOULD
+   * also act on {@link AST2BOpContext#queryHints}, setting the value in the global scope.
+   *
+   * @param ctx The query evaluation context.
+   * @param queryRoot The root of the query. This is required to resolve the parent of a query hint
+   *     inside of a FILTER.
+   * @param scope The {@link QueryHintScope} specified for the query hint.
+   * @param op An AST node to which the hint should bind.
+   * @param value The value specified for the query hint.
+   * @see <a href="http://trac.blazegraph.com/ticket/988">bad performance for FILTER EXISTS </a>
+   * @see <a href="http://trac.blazegraph.com/ticket/990">Query hint not recognized in FILTER</a>
+   */
+  void handle(AST2BOpContext ctx, QueryRoot queryRoot, QueryHintScope scope, ASTBase op, T value);
 }

@@ -17,8 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.constraints;
 
-import org.embergraph.rdf.sparql.ast.eval.TestInlineConstraints;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -31,36 +29,25 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("IV Constraints and Functions");
+    final TestSuite suite = new TestSuite("IV Constraints and Functions");
 
-        suite.addTestSuite(TestSubstrBOp.class);
-        suite.addTestSuite(TestStrBeforeBOp.class);
-        suite.addTestSuite(TestStrAfterBOp.class);
-        suite.addTestSuite(TestReplaceBOp.class);
-        suite.addTestSuite(TestRegexBOp.class);
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestSubstrBOp.class);
+    suite.addTestSuite(TestStrBeforeBOp.class);
+    suite.addTestSuite(TestStrAfterBOp.class);
+    suite.addTestSuite(TestReplaceBOp.class);
+    suite.addTestSuite(TestRegexBOp.class);
+
+    return suite;
+  }
 }

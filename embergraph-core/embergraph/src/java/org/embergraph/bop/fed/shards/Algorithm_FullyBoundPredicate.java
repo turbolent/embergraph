@@ -1,9 +1,7 @@
 package org.embergraph.bop.fed.shards;
 
 import java.util.LinkedList;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.IBuffer;
@@ -13,95 +11,83 @@ import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
- * When the asBound predicates are known to be fully bound, then the
- * {@link AbstractSplitter} can be used. This approach is quite efficient.
+ * When the asBound predicates are known to be fully bound, then the {@link AbstractSplitter} can be
+ * used. This approach is quite efficient.
  */
-class Algorithm_FullyBoundPredicate<E extends IBindingSet, F> implements
-        IShardMapper<E, F> {
+class Algorithm_FullyBoundPredicate<E extends IBindingSet, F> implements IShardMapper<E, F> {
 
-    static transient private final Logger log = Logger
-            .getLogger(Algorithm_FullyBoundPredicate.class);
+  private static final transient Logger log = Logger.getLogger(Algorithm_FullyBoundPredicate.class);
 
-    private final MapBindingSetsOverShardsBuffer<E, F> op;
+  private final MapBindingSetsOverShardsBuffer<E, F> op;
 
-    private final IKeyOrder keyOrder;
-    
-    private final ISplitter splitter;
+  private final IKeyOrder keyOrder;
 
-    /**
-     * 
-     * @param op
-     * @param keyOrder
-     *            The key order which will be used for the predicate when it is
-     *            fully bound.
+  private final ISplitter splitter;
+
+  /**
+   * @param op
+   * @param keyOrder The key order which will be used for the predicate when it is fully bound.
+   */
+  public Algorithm_FullyBoundPredicate(
+      final MapBindingSetsOverShardsBuffer<E, F> op, final IKeyOrder<F> keyOrder) {
+
+    this.op = op;
+
+    this.keyOrder = keyOrder;
+
+    this.splitter = new Splitter(op.getMetadataIndex(keyOrder));
+  }
+
+  public void mapOverShards(final Bundle<F>[] bundles) {
+
+    /*
+     * Construct a byte[][] out of the sorted fromKeys and then generate
+     * slices (Splits) which group the binding sets based on the target
+     * shard.
      */
-    public Algorithm_FullyBoundPredicate(
-            final MapBindingSetsOverShardsBuffer<E, F> op,
-            final IKeyOrder<F> keyOrder) {
+    final LinkedList<Split> splits;
+    {
+      final byte[][] keys = new byte[bundles.length][];
 
-        this.op = op;
+      for (int i = 0; i < bundles.length; i++) {
 
-        this.keyOrder = keyOrder;
-        
-        this.splitter = new Splitter(op.getMetadataIndex(keyOrder));
+        keys[i] = bundles[i].fromKey;
+      }
 
+      splits =
+          splitter.splitKeys(op.timestamp, 0 /* fromIndex */, bundles.length /* toIndex */, keys);
     }
 
-    public void mapOverShards(final Bundle<F>[] bundles) {
+    if (log.isTraceEnabled()) log.trace("nsplits=" + splits.size() + ", pred=" + op.pred);
 
-        /*
-         * Construct a byte[][] out of the sorted fromKeys and then generate
-         * slices (Splits) which group the binding sets based on the target
-         * shard.
-         */
-        final LinkedList<Split> splits;
-        {
+    /*
+     * For each split, write the binding sets in that split onto the
+     * corresponding buffer.
+     */
+    for (Split split : splits) {
 
-            final byte[][] keys = new byte[bundles.length][];
+      // Note: pmd is a PartitionLocator, so this cast is valid.
+      final IBuffer<IBindingSet[]> sink = op.getBuffer((PartitionLocator) split.pmd);
 
-            for (int i = 0; i < bundles.length; i++) {
+      final IBindingSet[] slice = new IBindingSet[split.ntuples];
 
-                keys[i] = bundles[i].fromKey;
+      for (int j = 0, i = split.fromIndex; i < split.toIndex; i++, j++) {
 
-            }
+        final IBindingSet bset = bundles[i].bindingSet;
 
-            splits = splitter.splitKeys(op.timestamp, 0/* fromIndex */,
-                    bundles.length/* toIndex */, keys);
-
-        }
+        slice[j] = bset;
 
         if (log.isTraceEnabled())
-            log.trace("nsplits=" + splits.size() + ", pred=" + op.pred);
+          log.trace(
+              "Mapping: keyOrder="
+                  + keyOrder
+                  + ", bset="
+                  + bset
+                  + " onto partitionId="
+                  + split.pmd.getPartitionId());
+      }
 
-        /*
-         * For each split, write the binding sets in that split onto the
-         * corresponding buffer.
-         */
-        for (Split split : splits) {
-
-            // Note: pmd is a PartitionLocator, so this cast is valid.
-            final IBuffer<IBindingSet[]> sink = op
-                    .getBuffer((PartitionLocator) split.pmd);
-
-            final IBindingSet[] slice = new IBindingSet[split.ntuples];
-
-            for (int j = 0, i = split.fromIndex; i < split.toIndex; i++, j++) {
-
-                final IBindingSet bset = bundles[i].bindingSet;
-
-                slice[j] = bset;
-
-                if (log.isTraceEnabled())
-                    log.trace("Mapping: keyOrder=" + keyOrder + ", bset="
-                            + bset + " onto partitionId="
-                            + split.pmd.getPartitionId());
-
-            }
-
-            sink.add(slice);
-
-        }
-
+      sink.add(slice);
     }
-
+  }
 }

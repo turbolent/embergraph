@@ -20,15 +20,11 @@ package org.embergraph.ha.msg;
 import org.embergraph.ha.HAGlue;
 
 /**
- * Message requesting disaster recovery of the service from the quorum
- * leader. This message is sent to the service that must be recovered.
- * The service will then message the leader to send its backing state.
- * 
+ * Message requesting disaster recovery of the service from the quorum leader. This message is sent
+ * to the service that must be recovered. The service will then message the leader to send its
+ * backing state.
+ *
  * @see HAGlue#rebuildFromLeader()
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface IHARemoteRebuildRequest extends IHAMessage {
-
-    
-}
+public interface IHARemoteRebuildRequest extends IHAMessage {}

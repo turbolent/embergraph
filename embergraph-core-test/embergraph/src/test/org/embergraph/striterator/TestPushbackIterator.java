@@ -24,73 +24,62 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import java.util.Arrays;
-
-import org.embergraph.striterator.PushbackIterator;
-
 import junit.framework.TestCase2;
-
 
 /**
  * Unit test for {@link PushbackIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestPushbackIterator extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestPushbackIterator() {
+  /** */
+  public TestPushbackIterator() {}
+
+  /** @param arg0 */
+  public TestPushbackIterator(String arg0) {
+    super(arg0);
+  }
+
+  public void test_filter() {
+
+    final PushbackIterator<Long> actual =
+        new PushbackIterator<Long>(Arrays.asList(new Long[] {1L, 5L, 2L}).iterator());
+
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(1L), actual.next());
+
+    actual.pushback();
+
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(1L), actual.next());
+
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(5L), actual.next());
+
+    actual.pushback();
+
+    try {
+      actual.pushback();
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestPushbackIterator(String arg0) {
-        super(arg0);
-    }
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(5L), actual.next());
 
-    public void test_filter() {
-        
-        final PushbackIterator<Long> actual = new PushbackIterator<Long>(Arrays
-                .asList(new Long[] { 1L, 5L, 2L }).iterator());
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(2L), actual.next());
 
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(1L),actual.next());
+    assertFalse(actual.hasNext());
 
-        actual.pushback();
-        
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(1L),actual.next());
+    actual.pushback();
 
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(5L), actual.next());
+    assertTrue(actual.hasNext());
+    assertEquals(Long.valueOf(2L), actual.next());
 
-        actual.pushback();
-
-        try {
-            actual.pushback();
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            log.info("Ignoring expected exception: " + ex);
-        }
-
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(5L),actual.next());
-
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(2L),actual.next());
-
-        assertFalse(actual.hasNext());
-        
-        actual.pushback();
-
-        assertTrue(actual.hasNext());
-        assertEquals(Long.valueOf(2L),actual.next());
-
-        assertFalse(actual.hasNext());
-
-    }
-
+    assertFalse(actual.hasNext());
+  }
 }

@@ -25,22 +25,20 @@ import org.embergraph.htree.HTree;
 
 /**
  * Annotations for an operator using an {@link HTree}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ConcurrentHashMapAnnotations.java 3665 2010-09-28 16:53:22Z thompsonbry $
  */
 public interface HTreeAnnotations extends IndexAnnotations {
 
-	/**
-	 * The number of address bits to use (default {@link #DEFAULT_ADDRESS_BITS}
-	 * ). The fan-out of the {@link HTree} will be <code>2^addressBits</code>. A
-	 * value of <code>10</code> will have a fan-out of <code>1024</code> and the
-	 * resulting page size will be in 4 ~ 8k.
-	 * 
-	 * @see #DEFAULT_ADDRESS_BITS
-	 */
-	String ADDRESS_BITS = HTreeAnnotations.class.getName() + ".addressBits";
+  /**
+   * The number of address bits to use (default {@link #DEFAULT_ADDRESS_BITS} ). The fan-out of the
+   * {@link HTree} will be <code>2^addressBits</code>. A value of <code>10</code> will have a
+   * fan-out of <code>1024</code> and the resulting page size will be in 4 ~ 8k.
+   *
+   * @see #DEFAULT_ADDRESS_BITS
+   */
+  String ADDRESS_BITS = HTreeAnnotations.class.getName() + ".addressBits";
 
-	int DEFAULT_ADDRESS_BITS = 10;
-
+  int DEFAULT_ADDRESS_BITS = 10;
 }

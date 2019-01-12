@@ -25,31 +25,27 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Annotations for an operator using an internal hash map.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface HashMapAnnotations {
 
-    /**
-     * The initial capacity of the {@link ConcurrentHashMap} used to impose the
-     * distinct constraint.
-     * 
-     * @see #DEFAULT_INITIAL_CAPACITY
-     */
-    String INITIAL_CAPACITY = HashMapAnnotations.class.getName()
-            + ".initialCapacity";
+  /**
+   * The initial capacity of the {@link ConcurrentHashMap} used to impose the distinct constraint.
+   *
+   * @see #DEFAULT_INITIAL_CAPACITY
+   */
+  String INITIAL_CAPACITY = HashMapAnnotations.class.getName() + ".initialCapacity";
 
-    int DEFAULT_INITIAL_CAPACITY = 16;
+  int DEFAULT_INITIAL_CAPACITY = 16;
 
-    /**
-     * The load factor of the {@link ConcurrentHashMap} used to impose the
-     * distinct constraint.
-     * 
-     * @see #DEFAULT_LOAD_FACTOR
-     */
-    String LOAD_FACTOR = HashMapAnnotations.class.getName() + ".loadFactor";
+  /**
+   * The load factor of the {@link ConcurrentHashMap} used to impose the distinct constraint.
+   *
+   * @see #DEFAULT_LOAD_FACTOR
+   */
+  String LOAD_FACTOR = HashMapAnnotations.class.getName() + ".loadFactor";
 
-    float DEFAULT_LOAD_FACTOR = .75f;
-
+  float DEFAULT_LOAD_FACTOR = .75f;
 }

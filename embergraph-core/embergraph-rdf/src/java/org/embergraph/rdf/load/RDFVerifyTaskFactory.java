@@ -1,71 +1,77 @@
 package org.embergraph.rdf.load;
 
+import org.embergraph.rdf.rio.RDFParserOptions;
+import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.store.AbstractTripleStore;
-
 /**
  * Factory for tasks for verifying a database against RDF resources.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class RDFVerifyTaskFactory<S extends Statement,T extends Runnable> extends
-        AbstractRDFTaskFactory<S,T> {
+public class RDFVerifyTaskFactory<S extends Statement, T extends Runnable>
+    extends AbstractRDFTaskFactory<S, T> {
 
-    public RDFVerifyTaskFactory(AbstractTripleStore db, int bufferCapacity,
-            RDFParserOptions parserOptions, boolean deleteAfter, RDFFormat fallback) {
+  public RDFVerifyTaskFactory(
+      AbstractTripleStore db,
+      int bufferCapacity,
+      RDFParserOptions parserOptions,
+      boolean deleteAfter,
+      RDFFormat fallback) {
 
-        super(db, parserOptions, deleteAfter, fallback, new VerifyStatementBufferFactory(
-                db, bufferCapacity));
+    super(
+        db,
+        parserOptions,
+        deleteAfter,
+        fallback,
+        new VerifyStatementBufferFactory(db, bufferCapacity));
+  }
 
-    }
+  public long getTermCount() {
 
-    public long getTermCount() {
-        
-        return ((VerifyStatementBufferFactory)bufferFactory).nterms.get();
-        
-    }
-    
-    public long getTermNotFoundCount() {
-        
-        return ((VerifyStatementBufferFactory)bufferFactory).ntermsNotFound.get();
-        
-    }
-    
-    public long getTripleCount() {
-        
-        return ((VerifyStatementBufferFactory)bufferFactory).ntriples.get();
-        
-    }
-    
-    public long getTripleNotFoundCount() {
-        
-        return ((VerifyStatementBufferFactory)bufferFactory).ntriplesNotFound.get();
-        
-    }
-    
-    /**
-     * Report on #terms and #stmts not found as well as #triples processed
-     * and found.
-     */
-    public String reportTotals() {
+    return ((VerifyStatementBufferFactory) bufferFactory).nterms.get();
+  }
 
-        // total run time.
-        final long elapsed = elapsed();
+  public long getTermNotFoundCount() {
 
-        final long tripleCount = getTripleCount();
+    return ((VerifyStatementBufferFactory) bufferFactory).ntermsNotFound.get();
+  }
 
-        final double tps = (long) (((double) tripleCount) / ((double) elapsed) * 1000d);
+  public long getTripleCount() {
 
-        return "Processed: #terms=" + getTermCount() + " ("
-                + getTermNotFoundCount() + " not found), #stmts="
-                + tripleCount + " (" + getTripleNotFoundCount()
-                + " not found)" + ", rate=" + tps + " in " + elapsed
-                + " ms.";
-            
-    }
-    
+    return ((VerifyStatementBufferFactory) bufferFactory).ntriples.get();
+  }
+
+  public long getTripleNotFoundCount() {
+
+    return ((VerifyStatementBufferFactory) bufferFactory).ntriplesNotFound.get();
+  }
+
+  /** Report on #terms and #stmts not found as well as #triples processed and found. */
+  public String reportTotals() {
+
+    // total run time.
+    final long elapsed = elapsed();
+
+    final long tripleCount = getTripleCount();
+
+    final double tps = (long) (((double) tripleCount) / ((double) elapsed) * 1000d);
+
+    return "Processed: #terms="
+        + getTermCount()
+        + " ("
+        + getTermNotFoundCount()
+        + " not found), #stmts="
+        + tripleCount
+        + " ("
+        + getTripleNotFoundCount()
+        + " not found)"
+        + ", rate="
+        + tps
+        + " in "
+        + elapsed
+        + " ms.";
+  }
 }

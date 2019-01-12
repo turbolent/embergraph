@@ -55,60 +55,47 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Properties;
-
 import org.apache.commons.io.output.WriterOutputStream;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 
 /**
  * {@link PropertiesFormat} XML writer.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PropertiesXMLWriter implements PropertiesWriter {
 
-    private final OutputStream os;
-    
-    /**
-     * Creates a new {@link PropertiesXMLWriter} that will write to the supplied
-     * {@link OutputStream}.
-     * 
-     * @param out
-     *            The OutputStream to write the {@link Properties} document to.
-     */
-    public PropertiesXMLWriter(final OutputStream out) {
+  private final OutputStream os;
 
-        this.os = out;
-        
-    }
+  /**
+   * Creates a new {@link PropertiesXMLWriter} that will write to the supplied {@link OutputStream}.
+   *
+   * @param out The OutputStream to write the {@link Properties} document to.
+   */
+  public PropertiesXMLWriter(final OutputStream out) {
 
-    /**
-     * Creates a new {@link PropertiesXMLWriter} that will write to the supplied
-     * {@link Writer}.
-     * 
-     * @param writer
-     *            The {@link Writer} to write the {@link Properties} document
-     *            to.
-     */
-    public PropertiesXMLWriter(final Writer writer) {
+    this.os = out;
+  }
 
-        this.os = new WriterOutputStream(writer,
-                PropertiesFormat.XML.getCharset());
+  /**
+   * Creates a new {@link PropertiesXMLWriter} that will write to the supplied {@link Writer}.
+   *
+   * @param writer The {@link Writer} to write the {@link Properties} document to.
+   */
+  public PropertiesXMLWriter(final Writer writer) {
 
-    }
-    
-    public PropertiesFormat getFormat() {
+    this.os = new WriterOutputStream(writer, PropertiesFormat.XML.getCharset());
+  }
 
-        return PropertiesFormat.XML;
-        
-    }
+  public PropertiesFormat getFormat() {
 
-    @Override
-    public void write(final Properties properties) throws IOException {
-        
-        properties.storeToXML(os, null/*comment*/);
-        
-    }
+    return PropertiesFormat.XML;
+  }
 
+  @Override
+  public void write(final Properties properties) throws IOException {
+
+    properties.storeToXML(os, null /*comment*/);
+  }
 }

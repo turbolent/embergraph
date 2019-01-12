@@ -28,47 +28,49 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * For pipelined operators, this is the capacity of the input queue for that
- * operator. Producers will block if the input queue for the target operator is
- * at its capacity. This provides an important limit on the amount of data which
- * can be buffered on the JVM heap during pipelined query evaluation.
- * 
+ * For pipelined operators, this is the capacity of the input queue for that operator. Producers
+ * will block if the input queue for the target operator is at its capacity. This provides an
+ * important limit on the amount of data which can be buffered on the JVM heap during pipelined
+ * query evaluation.
+ *
  * @see PipelineOp.Annotations#PIPELINE_QUEUE_CAPACITY
  */
 final class PipelineQueueCapacityHint extends AbstractIntQueryHint {
 
-    protected PipelineQueueCapacityHint() {
-        super(PipelineOp.Annotations.PIPELINE_QUEUE_CAPACITY,
-                PipelineOp.Annotations.DEFAULT_PIPELINE_QUEUE_CAPACITY);
+  protected PipelineQueueCapacityHint() {
+    super(
+        PipelineOp.Annotations.PIPELINE_QUEUE_CAPACITY,
+        PipelineOp.Annotations.DEFAULT_PIPELINE_QUEUE_CAPACITY);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    if (op instanceof IQueryNode) {
+
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+
+      _setQueryHint(context, scope, op, getName(), value);
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Integer value) {
+    //        if (QueryHintScope.Query.equals(scope)) {
+    //
+    //            /*
+    //             * Also stuff the query hint on the global context for things which
+    //             * look there.
+    //             */
+    //
+    //            conditionalSetGlobalProperty(context, getName(), value);
+    //
+    //        }
 
-        if (op instanceof IQueryNode) {
-
-            /*
-             * Note: This is set on the queryHint Properties object and then
-             * transferred to the pipeline operator when it is generated.
-             */
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-        }
-
-//        if (QueryHintScope.Query.equals(scope)) {
-//
-//            /*
-//             * Also stuff the query hint on the global context for things which
-//             * look there.
-//             */
-//
-//            conditionalSetGlobalProperty(context, getName(), value);
-//
-//        }
-
-    }
-
+  }
 }

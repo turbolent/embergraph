@@ -25,45 +25,33 @@ import org.embergraph.bop.IBindingSet;
 
 /**
  * Test suite for {@link SolutionSetStats}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry
- *          $
+ * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry $
  */
 public class TestSolutionSetStats extends AbstractSolutionSetStatsTestCase {
 
-	/**
-     * 
-     */
-	public TestSolutionSetStats() {
-	}
+  /** */
+  public TestSolutionSetStats() {}
 
-	/**
-	 * @param name
-	 */
-	public TestSolutionSetStats(String name) {
-		super(name);
-	}
+  /** @param name */
+  public TestSolutionSetStats(String name) {
+    super(name);
+  }
 
-	protected ISolutionSetStats newFixture(final IBindingSet[] bindingSets) {
+  protected ISolutionSetStats newFixture(final IBindingSet[] bindingSets) {
 
-		return new SolutionSetStats(bindingSets);
+    return new SolutionSetStats(bindingSets);
+  }
 
-	}
+  /** Correct rejection test for the constructor. */
+  public void test_001() {
 
-	/**
-	 * Correct rejection test for the constructor.
-	 */
-    public void test_001() {
-        
-        try {
-            new SolutionSetStats((IBindingSet[])null/* bindingSets */);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
+    try {
+      new SolutionSetStats((IBindingSet[]) null /* bindingSets */);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
-
+  }
 }

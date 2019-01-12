@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITupleIterator;
@@ -17,148 +15,138 @@ import org.embergraph.rdf.inf.Justification;
 import org.embergraph.util.Bytes;
 
 /**
- * Class writes on the justification index, removing all {@link Justification}s
- * for each statement specified by the caller.
- * <p>
- * Note: There is only one index for {@link Justification}s. The keys all use
- * the {s,p,o} of the entailed statement as their prefix, so given a statement
- * it is trivial to do a range scan for its justifications.
- * 
- * @todo Since this task accepts a "chunk" of statements, it should flood range
- *       delete requests for each of the statements to the justifications index
- *       using the {@link ExecutorService} , but only if the triple store
- *       provides concurrency control for writers on the same index.
- * 
+ * Class writes on the justification index, removing all {@link Justification}s for each statement
+ * specified by the caller.
+ *
+ * <p>Note: There is only one index for {@link Justification}s. The keys all use the {s,p,o} of the
+ * entailed statement as their prefix, so given a statement it is trivial to do a range scan for its
+ * justifications.
+ *
+ * @todo Since this task accepts a "chunk" of statements, it should flood range delete requests for
+ *     each of the statements to the justifications index using the {@link ExecutorService} , but
+ *     only if the triple store provides concurrency control for writers on the same index.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class JustificationRemover implements Callable<Long> {
 
-    protected static final Logger log = Logger
-            .getLogger(JustificationRemover.class);
+  protected static final Logger log = Logger.getLogger(JustificationRemover.class);
 
-    /**
-     * True iff the {@link #log} level is INFO or less.
-     */
-    final static protected boolean INFO = log.isInfoEnabled();
+  /** True iff the {@link #log} level is INFO or less. */
+  protected static final boolean INFO = log.isInfoEnabled();
 
-    /**
-     * True iff the {@link #log} level is DEBUG or less.
-     */
-    final static protected boolean DEBUG = log.isDebugEnabled();
+  /** True iff the {@link #log} level is DEBUG or less. */
+  protected static final boolean DEBUG = log.isDebugEnabled();
 
-    final SPORelation db;
+  final SPORelation db;
 
-    final ISPO[] a;
+  final ISPO[] a;
 
-    final int numStmts;
+  final int numStmts;
 
-    final AtomicLong sortTime;
+  final AtomicLong sortTime;
 
-    final AtomicLong writeTime;
+  final AtomicLong writeTime;
 
-    public JustificationRemover(SPORelation db, ISPO[] stmts, int numStmts,
-            boolean clone, AtomicLong sortTime, AtomicLong writeTime) {
+  public JustificationRemover(
+      SPORelation db,
+      ISPO[] stmts,
+      int numStmts,
+      boolean clone,
+      AtomicLong sortTime,
+      AtomicLong writeTime) {
 
-        if (db == null)
-            throw new IllegalArgumentException();
+    if (db == null) throw new IllegalArgumentException();
 
-        this.db = db;
+    this.db = db;
 
-        if (clone) {
+    if (clone) {
 
-            this.a = new ISPO[numStmts];
+      this.a = new ISPO[numStmts];
 
-            System.arraycopy(stmts, 0, a, 0, numStmts);
+      System.arraycopy(stmts, 0, a, 0, numStmts);
 
-        } else {
+    } else {
 
-            this.a = stmts;
-
-        }
-
-        this.numStmts = numStmts;
-
-        this.sortTime = sortTime;
-
-        this.writeTime = writeTime;
-
+      this.a = stmts;
     }
 
-    public Long call() throws Exception {
+    this.numStmts = numStmts;
 
-        final long begin = System.currentTimeMillis();
+    this.sortTime = sortTime;
 
-        final IIndex ndx = db.getJustificationIndex();
+    this.writeTime = writeTime;
+  }
 
-        /*
-         * Place statements in index order (SPO since all justifications begin
-         * with the SPO of the entailed statement.
-         */
-        Arrays.sort(a, 0, numStmts, SPOKeyOrder.SPO.getComparator());
+  public Long call() throws Exception {
 
-        final long beginWrite = System.currentTimeMillis();
+    final long begin = System.currentTimeMillis();
 
-        sortTime.addAndGet(beginWrite - begin);
+    final IIndex ndx = db.getJustificationIndex();
 
-        // thread-local key builder.
-        final IKeyBuilder keyBuilder = KeyBuilder.newInstance(db.getKeyArity()*Bytes.SIZEOF_LONG);
+    /*
+     * Place statements in index order (SPO since all justifications begin
+     * with the SPO of the entailed statement.
+     */
+    Arrays.sort(a, 0, numStmts, SPOKeyOrder.SPO.getComparator());
 
-        // remove statements from the index.
-        for (int i = 0; i < numStmts; i++) {
+    final long beginWrite = System.currentTimeMillis();
 
-            final ISPO spo = a[i];
+    sortTime.addAndGet(beginWrite - begin);
 
-            keyBuilder.reset();
-            spo.s().encode(keyBuilder);
-            spo.p().encode(keyBuilder);
-            spo.o().encode(keyBuilder);
-            
-            /*
-             * Form an iterator that will range scan the justifications having
-             * that statement as their 'head'. The iterator uses the REMOVEALL
-             * flag to have the justifications deleted on the server and does
-             * not actually send back the keys or vals to the client.
-             */
+    // thread-local key builder.
+    final IKeyBuilder keyBuilder = KeyBuilder.newInstance(db.getKeyArity() * Bytes.SIZEOF_LONG);
 
-            final byte[] fromKey = keyBuilder.getKey();
+    // remove statements from the index.
+    for (int i = 0; i < numStmts; i++) {
 
-            final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
+      final ISPO spo = a[i];
 
-            final ITupleIterator itr = ndx.rangeIterator(fromKey, toKey,
-                    0/* capacity */, IRangeQuery.REMOVEALL, null/* filter */);
+      keyBuilder.reset();
+      spo.s().encode(keyBuilder);
+      spo.p().encode(keyBuilder);
+      spo.o().encode(keyBuilder);
 
-            // FullyBufferedJustificationIterator itr = new
-            // FullyBufferedJustificationIterator(
-            // db, spo);
+      /*
+       * Form an iterator that will range scan the justifications having
+       * that statement as their 'head'. The iterator uses the REMOVEALL
+       * flag to have the justifications deleted on the server and does
+       * not actually send back the keys or vals to the client.
+       */
 
-            long n = 0;
+      final byte[] fromKey = keyBuilder.getKey();
 
-            while (itr.hasNext()) {
+      final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
 
-                itr.next();
+      final ITupleIterator itr =
+          ndx.rangeIterator(
+              fromKey, toKey, 0 /* capacity */, IRangeQuery.REMOVEALL, null /* filter */);
 
-                // itr.remove();
+      // FullyBufferedJustificationIterator itr = new
+      // FullyBufferedJustificationIterator(
+      // db, spo);
 
-                n++;
+      long n = 0;
 
-            }
+      while (itr.hasNext()) {
 
-            if (DEBUG) {
+        itr.next();
 
-                log.debug("Removed " + n + " justifications for "
-                        + spo.toString(/* db */));
+        // itr.remove();
 
-            }
+        n++;
+      }
 
-        }
+      if (DEBUG) {
 
-        final long endWrite = System.currentTimeMillis();
-
-        writeTime.addAndGet(endWrite - beginWrite);
-
-        return endWrite - begin;
-
+        log.debug("Removed " + n + " justifications for " + spo.toString(/* db */ ));
+      }
     }
 
+    final long endWrite = System.currentTimeMillis();
+
+    writeTime.addAndGet(endWrite - beginWrite);
+
+    return endWrite - begin;
+  }
 }

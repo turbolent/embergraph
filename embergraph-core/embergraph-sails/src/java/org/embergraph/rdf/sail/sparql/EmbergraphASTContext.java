@@ -28,108 +28,89 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.sparql;
 
 import java.util.Map;
-
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.openrdf.model.Value;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
+import org.openrdf.model.Value;
+import org.openrdf.model.vocabulary.RDF;
 
 /**
- * Object provides context required in various stages of parsing queries or
- * updates.
- * 
+ * Object provides context required in various stages of parsing queries or updates.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
  */
 public class EmbergraphASTContext {
 
-    protected final EmbergraphValueFactory valueFactory;
+  protected final EmbergraphValueFactory valueFactory;
 
-    /**
-     * A mapping of parsed RDF Values and well known vocabulary items used when
-     * generating the AST to resolved {@link EmbergraphValue}s. This includes
-     * everything which was parsed plus certain well-known items such as
-     * {@link RDF#FIRST}, {@link RDF#REST}, and {@link RDF#NIL} which are only
-     * used when handling syntactic sugar constructions.
-     */
-    protected final Map<Value, EmbergraphValue> vocab;
-    
-    /**
-     * Counter used to generate unique (within query) variable names.
-     */
-    private int constantVarID = 1;
+  /**
+   * A mapping of parsed RDF Values and well known vocabulary items used when generating the AST to
+   * resolved {@link EmbergraphValue}s. This includes everything which was parsed plus certain
+   * well-known items such as {@link RDF#FIRST}, {@link RDF#REST}, and {@link RDF#NIL} which are
+   * only used when handling syntactic sugar constructions.
+   */
+  protected final Map<Value, EmbergraphValue> vocab;
 
-	/**
-	 * 
-	 * @param values
-	 *            A map from the distinct RDF {@link Value} objects in the QUERY
-	 *            or UPDATE request to the corresponding {@link EmbergraphValue}
-	 *            objects that will be used to process the request.
-	 */
-    public EmbergraphASTContext(final Map<Value, EmbergraphValue> values) {
+  /** Counter used to generate unique (within query) variable names. */
+  private int constantVarID = 1;
 
-    	this.valueFactory = EmbergraphValueFactoryImpl.getInstance("");
-        
-    	this.vocab = values;
+  /**
+   * @param values A map from the distinct RDF {@link Value} objects in the QUERY or UPDATE request
+   *     to the corresponding {@link EmbergraphValue} objects that will be used to process the
+   *     request.
+   */
+  public EmbergraphASTContext(final Map<Value, EmbergraphValue> values) {
 
-    }
+    this.valueFactory = EmbergraphValueFactoryImpl.getInstance("");
 
-    /**
-     * Create an anonymous variable. The variable name will be unique (within
-     * the scope of the query parser) and {@link VarNode#isAnonymous()} will
-     * return <code>true</code>.
-     * 
-     * @param varName
-     *            The prefix of the name of an anonymous variable. This should
-     *            have the pattern <code>-foo-</code>. An unique (within query)
-     *            variable identifier will be appended to the prefix.
-     * 
-     * @return The anonymous variable.
-     */
-    protected VarNode createAnonVar(final String varName) {
+    this.vocab = values;
+  }
 
-        final VarNode var = new VarNode(varName + constantVarID++);
-        
-        var.setAnonymous(true);
-        
-        return var;
-        
-    }
+  /**
+   * Create an anonymous variable. The variable name will be unique (within the scope of the query
+   * parser) and {@link VarNode#isAnonymous()} will return <code>true</code>.
+   *
+   * @param varName The prefix of the name of an anonymous variable. This should have the pattern
+   *     <code>-foo-</code>. An unique (within query) variable identifier will be appended to the
+   *     prefix.
+   * @return The anonymous variable.
+   */
+  protected VarNode createAnonVar(final String varName) {
 
-    /**
-     * Return a constant for a pre-defined vocabulary item.
-     * 
-     * @throws VisitorException
-     */
-    protected ConstantNode createConstVar(final Value value)
-            throws VisitorException {
+    final VarNode var = new VarNode(varName + constantVarID++);
 
-        final EmbergraphValue v = vocab.get(value);
+    var.setAnonymous(true);
 
-        if (v == null)
-            throw new VisitorException("Undefined vocabulary: " + value);
+    return var;
+  }
 
-        return new ConstantNode(v.getIV());
+  /**
+   * Return a constant for a pre-defined vocabulary item.
+   *
+   * @throws VisitorException
+   */
+  protected ConstantNode createConstVar(final Value value) throws VisitorException {
 
-    }
+    final EmbergraphValue v = vocab.get(value);
 
-    /**
-	 * Return a new variable for a SID (Statement Identifier)
-	 * 
-	 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/526">
-	 *      Reification Done Right</a>
-	 */
-    protected VarNode createSidVar() {
-    	
-    		final VarNode var = new VarNode("-sid-" + constantVarID++);
-        
-        return var;
-    	
-    }
-    
+    if (v == null) throw new VisitorException("Undefined vocabulary: " + value);
+
+    return new ConstantNode(v.getIV());
+  }
+
+  /**
+   * Return a new variable for a SID (Statement Identifier)
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/526">Reification Done Right</a>
+   */
+  protected VarNode createSidVar() {
+
+    final VarNode var = new VarNode("-sid-" + constantVarID++);
+
+    return var;
+  }
 }

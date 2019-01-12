@@ -24,34 +24,32 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.rdf.spo;
 
 import org.embergraph.rdf.inf.Justification;
-import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.AbstractElementBuffer.InsertBuffer;
+import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.Rule;
-import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
+import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * A buffer that is written on by {@link Rule}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @depreated by {@link InsertBuffer} and {@link InsertSolutionBuffer}
  */
 public interface ISPOAssertionBuffer extends ISPOBuffer {
 
-    /**
-     * The #of justifications currently in the buffer.
-     * 
-     * @deprecated not used.
-     */
-    public int getJustificationCount();
+  /**
+   * The #of justifications currently in the buffer.
+   *
+   * @deprecated not used.
+   */
+  public int getJustificationCount();
 
-    /**
-     * Add a statement and an optional justification to the buffer.
-     * 
-     * @deprecated by {@link ISolution}s in an {@link IBuffer}.
-     */
-    public boolean add(SPO stmt, Justification justification);
-
+  /**
+   * Add a statement and an optional justification to the buffer.
+   *
+   * @deprecated by {@link ISolution}s in an {@link IBuffer}.
+   */
+  public boolean add(SPO stmt, Justification justification);
 }

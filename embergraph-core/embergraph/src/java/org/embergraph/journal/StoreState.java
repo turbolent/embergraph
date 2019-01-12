@@ -20,9 +20,7 @@ package org.embergraph.journal;
 import java.io.Serializable;
 
 /**
- * Contains critical transient data that can be used to determine
- * state consistency between HA services.
+ * Contains critical transient data that can be used to determine state consistency between HA
+ * services.
  */
-public interface StoreState extends Serializable {
-
-}
+public interface StoreState extends Serializable {}

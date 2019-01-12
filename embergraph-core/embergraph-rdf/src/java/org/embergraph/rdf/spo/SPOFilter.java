@@ -18,17 +18,13 @@ package org.embergraph.rdf.spo;
 import org.embergraph.relation.accesspath.IElementFilter;
 
 public abstract class SPOFilter<E extends ISPO> implements IElementFilter<E> {
-        
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
 
-    @Override
-    public boolean canAccept(final Object o) {
-        
-        return o instanceof ISPO;
-        
-    }
-    
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  @Override
+  public boolean canAccept(final Object o) {
+
+    return o instanceof ISPO;
+  }
 }

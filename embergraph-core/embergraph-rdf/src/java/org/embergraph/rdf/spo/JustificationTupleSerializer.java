@@ -26,167 +26,134 @@ package org.embergraph.rdf.spo;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
-import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.raba.codec.EmptyRabaValueCoder;
-import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.util.Bytes;
 
 /**
  * (De-)serializes {@link Justification}s.
- * <p>
- * Note: the encoded key for a {@link Justification} is formed from the 64-bit
- * <code>long</code> term identifier for the head of the rule (the entailment)
- * followed by the term identifier bindings for the tail(s) of the rule. The
- * bindings are represented as a long[] and indexing into the bindings is by
- * position. Bindings in the tail of a rule MAY be ZERO (0L) in which case they
+ *
+ * <p>Note: the encoded key for a {@link Justification} is formed from the 64-bit <code>long</code>
+ * term identifier for the head of the rule (the entailment) followed by the term identifier
+ * bindings for the tail(s) of the rule. The bindings are represented as a long[] and indexing into
+ * the bindings is by position. Bindings in the tail of a rule MAY be ZERO (0L) in which case they
  * are interpreted as wildcards.
- * <p>
- * Note: No values are stored for this index - all the information is in the
- * keys.
- * <p>
- * Note: While the static methods used to decode an existing key are safe for
- * concurrent readers, concurrent readers also form keys using
- * {@link Justification#getKey(IKeyBuilder, Justification)} and therefore
- * require a thread-local {@link IKeyBuilder}.
- * 
+ *
+ * <p>Note: No values are stored for this index - all the information is in the keys.
+ *
+ * <p>Note: While the static methods used to decode an existing key are safe for concurrent readers,
+ * concurrent readers also form keys using {@link Justification#getKey(IKeyBuilder, Justification)}
+ * and therefore require a thread-local {@link IKeyBuilder}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class JustificationTupleSerializer extends
-        DefaultTupleSerializer<Justification, Justification> {
+public class JustificationTupleSerializer
+    extends DefaultTupleSerializer<Justification, Justification> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -3930463865005938874L;
+  /** */
+  private static final long serialVersionUID = -3930463865005938874L;
 
-    private int N;
+  private int N;
 
-//    private transient IKeyBuilderFactory keyBuilderFactory;
-//
-//    public IKeyBuilder getKeyBuilder() {
-//      
-//        return keyBuilderFactory.getKeyBuilder();
-//        
-//    };
-    
-    /**
-     * De-serialization constructor.
-     */
-    public JustificationTupleSerializer() {
+  //    private transient IKeyBuilderFactory keyBuilderFactory;
+  //
+  //    public IKeyBuilder getKeyBuilder() {
+  //
+  //        return keyBuilderFactory.getKeyBuilder();
+  //
+  //    };
 
-    }
+  /** De-serialization constructor. */
+  public JustificationTupleSerializer() {}
 
-    /**
-     * 
-     * @param N The #of slots in a statement (3 or 4).
-     */
-    public JustificationTupleSerializer(int N) {
-        
-        super(new ASCIIKeyBuilderFactory(),
-                getDefaultLeafKeysCoder(),
-                EmptyRabaValueCoder.INSTANCE // no values
+  /** @param N The #of slots in a statement (3 or 4). */
+  public JustificationTupleSerializer(int N) {
+
+    super(
+        new ASCIIKeyBuilderFactory(),
+        getDefaultLeafKeysCoder(),
+        EmptyRabaValueCoder.INSTANCE // no values
         );
 
-        if (N != 3 && N != 4)
-            throw new IllegalArgumentException();
-        
-        this.N = N;
+    if (N != 3 && N != 4) throw new IllegalArgumentException();
 
-//        this.keyBuilderFactory = new ThreadLocalKeyBuilderFactory(
-//                new ASCIIKeyBuilderFactory(N * Bytes.SIZEOF_LONG));
+    this.N = N;
 
+    //        this.keyBuilderFactory = new ThreadLocalKeyBuilderFactory(
+    //                new ASCIIKeyBuilderFactory(N * Bytes.SIZEOF_LONG));
+
+  }
+
+  public Justification deserialize(final ITuple tuple) {
+
+    if (tuple == null) throw new IllegalArgumentException();
+
+    final IV[] ivs = IVUtility.decodeAll(tuple.getKey());
+
+    return new Justification(N, ivs);
+  }
+
+  public Justification deserializeKey(final ITuple tuple) {
+
+    // just de-serialize the whole tuple.
+    return deserialize(tuple);
+  }
+
+  public byte[] serializeKey(final Object obj) {
+
+    if (obj == null) throw new IllegalArgumentException();
+
+    if (obj instanceof Justification)
+      return Justification.getKey(getKeyBuilder(), (Justification) obj);
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * There is no value for the justifications index. All data is in the key.
+   *
+   * @throws UnsupportedOperationException always
+   */
+  @Override
+  public byte[] serializeVal(Justification jst) {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /** The initial version. */
+  private static final transient byte VERSION0 = 0;
+
+  /** The current version. */
+  private static final transient byte VERSION = VERSION0;
+
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+
+    super.readExternal(in);
+
+    final byte version = in.readByte();
+
+    switch (version) {
+      case VERSION0:
+        break;
+      default:
+        throw new UnsupportedOperationException("Unknown version: " + version);
     }
 
-    public Justification deserialize(final ITuple tuple) {
+    N = in.readByte();
+  }
 
-        if (tuple == null)
-            throw new IllegalArgumentException();
+  public void writeExternal(ObjectOutput out) throws IOException {
 
-        final IV[] ivs = IVUtility.decodeAll(tuple.getKey());
-        
-        return new Justification(N,ivs);
-        
-    }
+    super.writeExternal(out);
 
-    public Justification deserializeKey(final ITuple tuple) {
-        
-        // just de-serialize the whole tuple.
-        return deserialize(tuple);
-        
-    }
+    out.writeByte(VERSION);
 
-    public byte[] serializeKey(final Object obj) {
-
-        if (obj == null)
-            throw new IllegalArgumentException();
-        
-        if (obj instanceof Justification)
-            return Justification.getKey(getKeyBuilder(), (Justification) obj);
-
-        throw new UnsupportedOperationException();
-        
-    }
-
-    /**
-     * There is no value for the justifications index. All data is in the key.
-     * 
-     * @throws UnsupportedOperationException
-     *             always
-     */
-    @Override
-    public byte[] serializeVal(Justification jst) {
-
-        throw new UnsupportedOperationException();
-        
-    }
-
-    /**
-     * The initial version.
-     */
-    private final static transient byte VERSION0 = 0;
-
-    /**
-     * The current version.
-     */
-    private final static transient byte VERSION = VERSION0;
-
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
-
-        super.readExternal(in);
-        
-        final byte version = in.readByte();
-        
-        switch (version) {
-        case VERSION0:
-            break;
-        default:
-            throw new UnsupportedOperationException("Unknown version: "
-                    + version);
-        }
-
-        N = in.readByte();
-
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException {
-
-        super.writeExternal(out);
-        
-        out.writeByte(VERSION);
-
-        out.writeByte(N);
-
-    }
-
+    out.writeByte(N);
+  }
 }

@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.io.IOException;
-
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -41,96 +40,100 @@ import org.openrdf.sail.memory.MemoryStore;
 
 /**
  * Unit test template for use in submission of bugs.
- * <p>
- * This test case will delegate to an underlying backing store. You can specify
- * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
- * <p>
- * There are three possible configurations for the testClass:
+ *
+ * <p>This test case will delegate to an underlying backing store. You can specify this store via a
+ * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
+ * </code>
+ *
+ * <p>There are three possible configurations for the testClass:
+ *
  * <ul>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)
  * </ul>
- * <p>
- * The default for triples and SIDs mode is for inference with truth maintenance
- * to be on. If you would like to turn off inference, make sure to do so in
- * {@link #getProperties()}.
- * 
+ *
+ * <p>The default for triples and SIDs mode is for inference with truth maintenance to be on. If you
+ * would like to turn off inference, make sure to do so in {@link #getProperties()}.
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/348
  */
 public class TestTicket348 extends QuadsTestCase {
 
-	public TestTicket348() {
-	}
+  public TestTicket348() {}
 
-	public TestTicket348(String arg0) {
-		super(arg0);
-	}
+  public TestTicket348(String arg0) {
+    super(arg0);
+  }
 
-	public void testBug() throws Exception {
-		// try with Sesame MemoryStore:
-		executeTest(new SailRepository(new MemoryStore()));
+  public void testBug() throws Exception {
+    // try with Sesame MemoryStore:
+    executeTest(new SailRepository(new MemoryStore()));
 
-		// try with Embergraph:
-		try {
-			executeTest(new EmbergraphSailRepository(getSail()));
-		} finally {
-			getSail().__tearDownUnitTest();
-		}
-	}
-
-	private void executeTest(final SailRepository repo)
-			throws RepositoryException, MalformedQueryException,
-			QueryEvaluationException, RDFParseException, RDFHandlerException,
-			IOException {
-		try {
-			repo.initialize();
-			final RepositoryConnection conn = repo.getConnection();
-			try {
-				conn.setAutoCommit(false);
-				final ValueFactory vf = conn.getValueFactory();
-		        final URI uri = vf.createURI("os:/elem/example");
-		        // run a query which looks for a statement and then adds it if it is not found.
-		        addDuringQueryExec(conn, uri, RDF.TYPE, vf.createURI("os:class/Clazz"));
-		        // now try to export the statements.
-	        	final RepositoryResult<Statement> stats = conn.getStatements(null, null, null, false);
-		        try {
-		        	// materialize the newly added statement.
-		        	stats.next();
-		        } catch (RuntimeException e) {
-		        	fail(e.getLocalizedMessage(), e); // With Embergraph this fails
-		        } finally {
-		        	stats.close();
-		        }
-		        conn.rollback(); // discard the result (or commit, but do something to avoid a logged warning from Sesame).
-			} finally {
-				conn.close();
-			}
-		} finally {
-			repo.shutDown();
-		}
-	}
-	
-	private void addDuringQueryExec(final RepositoryConnection conn,
-			final Resource subj, final URI pred, final Value obj,
-			final Resource... ctx) throws RepositoryException,
-			MalformedQueryException, QueryEvaluationException {
-		final TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
-        		"select distinct ?s ?p ?o where{?s ?p ?t . ?t <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o }"
-        		);
-        tq.setBinding("s", subj);
-        tq.setBinding("p", pred);
-        tq.setBinding("o", obj);
-        final TupleQueryResult tqr = tq.evaluate();
-        try {
-            if (!tqr.hasNext()) {
-                conn.add(subj, pred, obj, ctx);
-            }
-        } finally {
-            tqr.close();
-        }
+    // try with Embergraph:
+    try {
+      executeTest(new EmbergraphSailRepository(getSail()));
+    } finally {
+      getSail().__tearDownUnitTest();
     }
+  }
+
+  private void executeTest(final SailRepository repo)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+          RDFParseException, RDFHandlerException, IOException {
+    try {
+      repo.initialize();
+      final RepositoryConnection conn = repo.getConnection();
+      try {
+        conn.setAutoCommit(false);
+        final ValueFactory vf = conn.getValueFactory();
+        final URI uri = vf.createURI("os:/elem/example");
+        // run a query which looks for a statement and then adds it if it is not found.
+        addDuringQueryExec(conn, uri, RDF.TYPE, vf.createURI("os:class/Clazz"));
+        // now try to export the statements.
+        final RepositoryResult<Statement> stats = conn.getStatements(null, null, null, false);
+        try {
+          // materialize the newly added statement.
+          stats.next();
+        } catch (RuntimeException e) {
+          fail(e.getLocalizedMessage(), e); // With Embergraph this fails
+        } finally {
+          stats.close();
+        }
+        conn
+            .rollback(); // discard the result (or commit, but do something to avoid a logged
+                         // warning from Sesame).
+      } finally {
+        conn.close();
+      }
+    } finally {
+      repo.shutDown();
+    }
+  }
+
+  private void addDuringQueryExec(
+      final RepositoryConnection conn,
+      final Resource subj,
+      final URI pred,
+      final Value obj,
+      final Resource... ctx)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+    final TupleQuery tq =
+        conn.prepareTupleQuery(
+            QueryLanguage.SPARQL,
+            "select distinct ?s ?p ?o where{?s ?p ?t . ?t <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o }");
+    tq.setBinding("s", subj);
+    tq.setBinding("p", pred);
+    tq.setBinding("o", obj);
+    final TupleQueryResult tqr = tq.evaluate();
+    try {
+      if (!tqr.hasNext()) {
+        conn.add(subj, pred, obj, ctx);
+      }
+    } finally {
+      tqr.close();
+    }
+  }
 }

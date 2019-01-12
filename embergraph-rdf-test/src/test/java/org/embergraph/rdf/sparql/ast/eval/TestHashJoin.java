@@ -22,10 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Iterator;
-
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.PipelineOp;
@@ -36,155 +32,140 @@ import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
- * Test suite for queries designed to exercise a hash join against an access
- * path.
- * 
+ * Test suite for queries designed to exercise a hash join against an access path.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestHashJoin extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
+  /** */
+  public TestHashJoin() {}
+
+  /** @param name */
+  public TestHashJoin(String name) {
+    super(name);
+  }
+
+  /**
+   *
+   *
+   * <pre>
+   * SELECT ?x ?o
+   * WHERE {
+   *
+   *   # Turn off the query optimizer for this query so we can control the order
+   *   # in which the BGPs will be evaluated.
+   *
+   *   hint:Query hint:optimizer "None" .
+   *
+   *   # Force the use of the JVM hash joins.
+   *   hint:Query hint:nativeHashJoins "false" .
+   *
+   *   ?x rdf:type foaf:Person .
+   *
+   *   ?x rdfs:label ?o .
+   *
+   *   # Request a hash join for the rdfs:label BGP.
+   *   hint:Prior hint:hashJoin "true" .
+   *
+   * }
+   * </pre>
+   *
+   * A simple SELECT query with a query hint which should force the choice of a hash join for one of
+   * the predicates.
+   */
+  public void test_hash_join_1() throws Exception {
+
+    final ASTContainer astContainer = new TestHelper("hash-join-1").runTest();
+
+    final PipelineOp queryPlan = astContainer.getQueryPlan();
+
+    if (!BOpUtility.visitAll(queryPlan, JVMHashJoinOp.class).hasNext()) {
+
+      fail("Expecting a JVM-based hash join in the query plan: " + astContainer.toString());
+    }
+  }
+
+  /** Variant on {@link #test_hash_join_1()} where we force the use of the {@link HTree}. */
+  public void test_hash_join_1b() throws Exception {
+
+    final ASTContainer astContainer = new TestHelper("hash-join-1b").runTest();
+
+    final PipelineOp queryPlan = astContainer.getQueryPlan();
+
+    if (!BOpUtility.visitAll(queryPlan, HTreeHashJoinOp.class).hasNext()) {
+
+      fail("Expecting an HTree-based hash join in the query plan: " + astContainer.toString());
+    }
+  }
+
+  /**
+   *
+   *
+   * <pre>
+   * SELECT ?x ?o
+   * WHERE {
+   *
+   *   # Turn off the query optimizer for this query so we can control the order
+   *   # in which the BGPs will be evaluated.
+   *
+   *   hint:Query hint:optimizer "None" .
+   *
+   *   ?x rdf:type foaf:Person .
+   *
+   *   ?x rdfs:label ?o .
+   *
+   *   # Request a hash join for the rdfs:label BGP.
+   *   hint:Prior hint:hashJoin "true" .
+   *   hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # default is POCS
+   * }
+   * </pre>
+   *
+   * A variant of {@link #test_hash_join_1()} where a hint is used to override the {@link
+   * SPOKeyOrder} for the hash join.
+   */
+  public void test_hash_join_2() throws Exception {
+
+    final ASTContainer astContainer = new TestHelper("hash-join-2").runTest();
+
+    final PipelineOp queryPlan = astContainer.getQueryPlan();
+
+    // There are two predicates.
+    final Iterator<Predicate> itr = BOpUtility.visitAll(queryPlan, Predicate.class);
+
+    /*
+     * Find the rdfs:label predicate.  That is the one with the hash join.
      */
-    public TestHashJoin() {
+    Predicate pred;
+    IV p;
+
+    pred = itr.next();
+    p = (IV) pred.get(1 /* p */).get();
+
+    if (p.getValue().equals(RDF.TYPE)) {
+      pred = itr.next();
+      p = (IV) pred.get(1 /* p */).get();
     }
 
-    /**
-     * @param name
-     */
-    public TestHashJoin(String name) {
-        super(name);
-    }
+    assertEquals(RDFS.LABEL, p.getValue());
 
-    /**
-     * <pre>
-     * SELECT ?x ?o
-     * WHERE {
-     * 
-     *   # Turn off the query optimizer for this query so we can control the order
-     *   # in which the BGPs will be evaluated.
-     *   
-     *   hint:Query hint:optimizer "None" .
-     * 
-     *   # Force the use of the JVM hash joins.
-     *   hint:Query hint:nativeHashJoins "false" .
-     *   
-     *   ?x rdf:type foaf:Person .
-     * 
-     *   ?x rdfs:label ?o .
-     * 
-     *   # Request a hash join for the rdfs:label BGP.  
-     *   hint:Prior hint:hashJoin "true" .
-     * 
-     * }
-     * </pre>
-     * 
-     * A simple SELECT query with a query hint which should force the choice of
-     * a hash join for one of the predicates.
-     */
-    public void test_hash_join_1() throws Exception {
+    // Verify the key order override.
+    assertEquals(SPOKeyOrder.PCSO, pred.getKeyOrder());
 
-        final ASTContainer astContainer = new TestHelper("hash-join-1")
-                .runTest();
+    // Verify the key order override will be used.
+    assertEquals(SPOKeyOrder.PCSO, SPOKeyOrder.getKeyOrder(pred, 4 /*keyArity*/));
 
-        final PipelineOp queryPlan = astContainer.getQueryPlan();
+    // Clear the override.
+    pred = (Predicate) pred.clearProperty(IPredicate.Annotations.KEY_ORDER);
 
-        if (!BOpUtility.visitAll(queryPlan, JVMHashJoinOp.class).hasNext()) {
+    assertEquals(null, pred.getKeyOrder());
 
-            fail("Expecting a JVM-based hash join in the query plan: "
-                    + astContainer.toString());
-            
-        }
-
-    }
-    
-    /**
-     * Variant on {@link #test_hash_join_1()} where we force the use of the
-     * {@link HTree}.
-     */
-    public void test_hash_join_1b() throws Exception {
-
-        final ASTContainer astContainer = new TestHelper("hash-join-1b")
-                .runTest();
-
-        final PipelineOp queryPlan = astContainer.getQueryPlan();
-
-        if (!BOpUtility.visitAll(queryPlan, HTreeHashJoinOp.class).hasNext()) {
-
-            fail("Expecting an HTree-based hash join in the query plan: "
-                    + astContainer.toString());
-
-        }
-
-    }
-    
-    /**
-     * <pre>
-     * SELECT ?x ?o
-     * WHERE {
-     * 
-     *   # Turn off the query optimizer for this query so we can control the order
-     *   # in which the BGPs will be evaluated.
-     *   
-     *   hint:Query hint:optimizer "None" .
-     * 
-     *   ?x rdf:type foaf:Person .
-     * 
-     *   ?x rdfs:label ?o .
-     * 
-     *   # Request a hash join for the rdfs:label BGP.  
-     *   hint:Prior hint:hashJoin "true" .
-     *   hint:Prior hint:org.embergraph.bop.IPredicate.keyOrder "PCSO" . # default is POCS
-     * }
-     * </pre>
-     * 
-     * A variant of {@link #test_hash_join_1()} where a hint is used to override
-     * the {@link SPOKeyOrder} for the hash join.
-     */
-    public void test_hash_join_2() throws Exception {
-
-        final ASTContainer astContainer = new TestHelper("hash-join-2")
-                .runTest();
-        
-        final PipelineOp queryPlan = astContainer.getQueryPlan();
-
-        // There are two predicates.
-        final Iterator<Predicate> itr = BOpUtility.visitAll(queryPlan,
-                Predicate.class);
-
-        /*
-         * Find the rdfs:label predicate.  That is the one with the hash join.
-         */
-        Predicate pred;
-        IV p;
-
-        pred = itr.next();
-        p = (IV) pred.get(1/* p */).get();
-
-        if (p.getValue().equals(RDF.TYPE)) {
-            pred = itr.next();
-            p = (IV) pred.get(1/* p */).get();
-        }
-
-        assertEquals(RDFS.LABEL, p.getValue());
-
-        // Verify the key order override.
-        assertEquals(SPOKeyOrder.PCSO, pred.getKeyOrder());
-
-        // Verify the key order override will be used.
-        assertEquals(SPOKeyOrder.PCSO, SPOKeyOrder.getKeyOrder(pred, 4/*keyArity*/));
-        
-        // Clear the override.
-        pred = (Predicate) pred.clearProperty(IPredicate.Annotations.KEY_ORDER);
-
-        assertEquals(null, pred.getKeyOrder());
-
-        // Verify the default key order
-        assertEquals(SPOKeyOrder.POCS, SPOKeyOrder.getKeyOrder(pred, 4/*keyArity*/));
-        
-    }
-
+    // Verify the default key order
+    assertEquals(SPOKeyOrder.POCS, SPOKeyOrder.getKeyOrder(pred, 4 /*keyArity*/));
+  }
 }

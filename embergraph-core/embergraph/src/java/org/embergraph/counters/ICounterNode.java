@@ -25,73 +25,52 @@ package org.embergraph.counters;
 
 /**
  * Shared abstraction layer for both {@link ICounterSet} and {@link ICounter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ICounterNode {
 
-    /**
-     * The immediate parent in the hierarchy -or- <code>null</code> iff this
-     * is the root of the hierarchy.
-     */
-    public ICounterSet getParent();
+  /**
+   * The immediate parent in the hierarchy -or- <code>null</code> iff this is the root of the
+   * hierarchy.
+   */
+  public ICounterSet getParent();
 
-    /**
-     * The local name (does not include the path from the root).
-     */
-    public String getName();
-    
-    /**
-     * Complete path from the root inclusive of the local name.
-     */
-    public String getPath();
-    
-    /**
-     * Depth of this node in the hierarchy, where the depth of the root is ZERO
-     * (0).
-     */
-    public int getDepth();
-    
-    /**
-     * The root of the hierarchy.
-     */
-    public ICounterSet getRoot();
-    
-    /**
-     * <code>true</code> iff this is the root of the hierarchy.
-     */
-    public boolean isRoot();
+  /** The local name (does not include the path from the root). */
+  public String getName();
 
-    /**
-     * <code>true</code> iff this is a collection of counters.
-     */
-    public boolean isCounterSet();
-    
-    /**
-     * <code>true</code> iff this is a counter.
-     */
-    public boolean isCounter();
-    
-    /**
-     * Return the directly attached object by name.
-     * 
-     * @param name
-     *            The counter name.
-     *            
-     * @return The object.
-     */
-    public ICounterNode getChild(String name);
+  /** Complete path from the root inclusive of the local name. */
+  public String getPath();
 
-    /**
-     * Return the object described by the path.
-     * 
-     * @param path
-     *            The path.
-     *            
-     * @return The object or <code>null</code> if nothing exists for that
-     *         path.
-     */
-    public ICounterNode getPath(String path);
-    
+  /** Depth of this node in the hierarchy, where the depth of the root is ZERO (0). */
+  public int getDepth();
+
+  /** The root of the hierarchy. */
+  public ICounterSet getRoot();
+
+  /** <code>true</code> iff this is the root of the hierarchy. */
+  public boolean isRoot();
+
+  /** <code>true</code> iff this is a collection of counters. */
+  public boolean isCounterSet();
+
+  /** <code>true</code> iff this is a counter. */
+  public boolean isCounter();
+
+  /**
+   * Return the directly attached object by name.
+   *
+   * @param name The counter name.
+   * @return The object.
+   */
+  public ICounterNode getChild(String name);
+
+  /**
+   * Return the object described by the path.
+   *
+   * @param path The path.
+   * @return The object or <code>null</code> if nothing exists for that path.
+   */
+  public ICounterNode getPath(String path);
 }

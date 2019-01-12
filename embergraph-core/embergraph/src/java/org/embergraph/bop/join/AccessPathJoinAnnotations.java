@@ -25,23 +25,20 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
- * Interface declares additional annotations for joins against an
- * {@link IAccessPath} (versus a subquery or temporary solution set).
- * 
+ * Interface declares additional annotations for joins against an {@link IAccessPath} (versus a
+ * subquery or temporary solution set).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface AccessPathJoinAnnotations extends JoinAnnotations {
 
-    /**
-     * The {@link IPredicate} which is used to generate the {@link IAccessPath}s
-     * during the join.
-     * <p>
-     * Note: Scale-out relies on this annotation when mapping intermediate
-     * results across the shards on a cluster so they can be joined on the nodes
-     * which have the data for the shards on which the {@link IAccessPath} must
-     * read.
-     */
-    String PREDICATE = AccessPathJoinAnnotations.class.getName() + ".predicate";
-
+  /**
+   * The {@link IPredicate} which is used to generate the {@link IAccessPath}s during the join.
+   *
+   * <p>Note: Scale-out relies on this annotation when mapping intermediate results across the
+   * shards on a cluster so they can be joined on the nodes which have the data for the shards on
+   * which the {@link IAccessPath} must read.
+   */
+  String PREDICATE = AccessPathJoinAnnotations.class.getName() + ".predicate";
 }

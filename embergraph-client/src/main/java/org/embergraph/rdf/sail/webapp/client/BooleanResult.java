@@ -21,24 +21,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Class representing the a boolean result of some operation against
- * the REST API.
- */
+/** Class representing the a boolean result of some operation against the REST API. */
 class BooleanResult {
 
-    /** The result. */
-    public final boolean result;
+  /** The result. */
+  public final boolean result;
 
-    /** The elapsed time for the operation. */
-    public final long elapsedMillis;
+  /** The elapsed time for the operation. */
+  public final long elapsedMillis;
 
-    public BooleanResult(final boolean result, final long elapsedMillis) {
-        
-        this.result = result;
-        
-        this.elapsedMillis = elapsedMillis;
-        
-    }
+  public BooleanResult(final boolean result, final long elapsedMillis) {
 
+    this.result = result;
+
+    this.elapsedMillis = elapsedMillis;
+  }
 }

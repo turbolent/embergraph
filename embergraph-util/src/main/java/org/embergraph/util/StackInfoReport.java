@@ -20,44 +20,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 /**
- * An exception class whose sole purpose is to provide information during
- * debugging concerning the context in which some method is invoked. Instances
- * of this exception ARE NOT errors. They are only informative and are used in
- * patterns such as:
+ * An exception class whose sole purpose is to provide information during debugging concerning the
+ * context in which some method is invoked. Instances of this exception ARE NOT errors. They are
+ * only informative and are used in patterns such as:
+ *
  * <pre>
  * if(log.isInfoEnabled())
  *    log.info(new StackInfoReport())
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class StackInfoReport extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public StackInfoReport() {
-        super();
-    }
+  public StackInfoReport() {
+    super();
+  }
 
-    // Note: This constructor is not available in JDK 1.6.
-//    public StackInfoReport(String message, Throwable cause,
-//            boolean enableSuppression, boolean writableStackTrace) {
-//        super(message, cause, enableSuppression, writableStackTrace);
-//    }
+  // Note: This constructor is not available in JDK 1.6.
+  //    public StackInfoReport(String message, Throwable cause,
+  //            boolean enableSuppression, boolean writableStackTrace) {
+  //        super(message, cause, enableSuppression, writableStackTrace);
+  //    }
 
-    public StackInfoReport(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public StackInfoReport(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public StackInfoReport(String message) {
-        super(message);
-    }
+  public StackInfoReport(String message) {
+    super(message);
+  }
 
-    public StackInfoReport(Throwable cause) {
-        super(cause);
-    }
-
+  public StackInfoReport(Throwable cause) {
+    super(cause);
+  }
 }

@@ -27,15 +27,12 @@ import java.util.Map;
 
 /**
  * An interface designed to expose select fields for {@link Event} reporting.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface Params {
 
-    /**
-     * Return the fields of interest as an set of (name,value) pairs.
-     */
-    public Map<String, Object> getParams();
-
+  /** Return the fields of interest as an set of (name,value) pairs. */
+  public Map<String, Object> getParams();
 }

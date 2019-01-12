@@ -22,162 +22,147 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.concurrent.atomic.AtomicLong;
-
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.journal.ITx;
+import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.store.BD;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.journal.ITx;
-import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.sail.EmbergraphSail;
-import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.store.BD;
-
 /**
  * Extended to expose the connection used to execute the SPARQL UPDATE request.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AST2BOpUpdateContext extends AST2BOpContext {
 
-    public final EmbergraphSail sail;
-    
-    public final EmbergraphValueFactory f;
+  public final EmbergraphSail sail;
 
-    public final EmbergraphSailRepositoryConnection conn;
-    
-    private boolean includeInferred;
-    
-    private QueryBindingSet qbs;
-    
-    private IBindingSet[] bindingSets;
+  public final EmbergraphValueFactory f;
 
-    private Dataset dataset;
+  public final EmbergraphSailRepositoryConnection conn;
 
-    /**
-     * The timestamp associated with the commit point for the update and
-     * <code>-1</code> until there is a commit.
-     */
-    private AtomicLong commitTime = new AtomicLong(-1);
+  private boolean includeInferred;
 
-    public final boolean isIncludeInferred() {
-        
-        return includeInferred;
-        
-    }
-    
-    public final void setIncludeInferred(final boolean includeInferred) {
-        
-        this.includeInferred = includeInferred;
-        
-    }
-    
-    /**
-     * The timestamp associated with the commit point for the update and
-     * <code>-1</code> if until there is a commit.
-     */
-    public long getCommitTime() {
-        
-        return commitTime.get();
-        
-    }
+  private QueryBindingSet qbs;
 
-    public void setCommitTime(final long commitTime) {
+  private IBindingSet[] bindingSets;
 
-        this.commitTime.set(commitTime);
+  private Dataset dataset;
 
-    }
-    
-    /**
-     * @param astContainer
-     * @param db
-     * 
-     * @throws SailException
-     */
-    public AST2BOpUpdateContext(final ASTContainer astContainer,
-            final EmbergraphSailRepositoryConnection conn) throws SailException {
+  /**
+   * The timestamp associated with the commit point for the update and <code>-1</code> until there
+   * is a commit.
+   */
+  private AtomicLong commitTime = new AtomicLong(-1);
 
-        super(astContainer, conn.getTripleStore());
+  public final boolean isIncludeInferred() {
 
-        this.conn = conn;
-        
-        this.sail = conn.getSailConnection().getEmbergraphSail();
-       
-        this.f = (EmbergraphValueFactory) sail.getValueFactory();
-        
-    }
+    return includeInferred;
+  }
 
-    /**
-     * The timestamp associated with the update operation (either a read/write
-     * transaction or {@link ITx#UNISOLATED}.
-     */
-    @Override
-    public long getTimestamp() {
+  public final void setIncludeInferred(final boolean includeInferred) {
 
-        return conn.getTripleStore().getTimestamp();
+    this.includeInferred = includeInferred;
+  }
 
-    }
+  /**
+   * The timestamp associated with the commit point for the update and <code>-1</code> if until
+   * there is a commit.
+   */
+  public long getCommitTime() {
 
-    /**
-     * Return the {@link BD#NULL_GRAPH} with the {@link IVCache} resolved and
-     * set.
-     * 
-     * FIXME This should always be part of the Vocabulary and the IVCache should
-     * be set (which is always true for the vocabulary).
-     */
-    @SuppressWarnings("unchecked")
-    public EmbergraphURI getNullGraph() {
+    return commitTime.get();
+  }
 
-        if (nullGraph == null) {
+  public void setCommitTime(final long commitTime) {
 
-            nullGraph = db.getValueFactory().asValue(BD.NULL_GRAPH);
-            
-            db.addTerm(nullGraph);
-            
-            nullGraph.getIV().setValue(nullGraph);
-            
-        }
+    this.commitTime.set(commitTime);
+  }
 
-        return nullGraph;
-        
-    }
-    
-    public IBindingSet[] getBindings() {
-        
-        return bindingSets;
-        
+  /**
+   * @param astContainer
+   * @param db
+   * @throws SailException
+   */
+  public AST2BOpUpdateContext(
+      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection conn)
+      throws SailException {
+
+    super(astContainer, conn.getTripleStore());
+
+    this.conn = conn;
+
+    this.sail = conn.getSailConnection().getEmbergraphSail();
+
+    this.f = (EmbergraphValueFactory) sail.getValueFactory();
+  }
+
+  /**
+   * The timestamp associated with the update operation (either a read/write transaction or {@link
+   * ITx#UNISOLATED}.
+   */
+  @Override
+  public long getTimestamp() {
+
+    return conn.getTripleStore().getTimestamp();
+  }
+
+  /**
+   * Return the {@link BD#NULL_GRAPH} with the {@link IVCache} resolved and set.
+   *
+   * <p>FIXME This should always be part of the Vocabulary and the IVCache should be set (which is
+   * always true for the vocabulary).
+   */
+  @SuppressWarnings("unchecked")
+  public EmbergraphURI getNullGraph() {
+
+    if (nullGraph == null) {
+
+      nullGraph = db.getValueFactory().asValue(BD.NULL_GRAPH);
+
+      db.addTerm(nullGraph);
+
+      nullGraph.getIV().setValue(nullGraph);
     }
 
-    public void setBindings(final IBindingSet[] bindingSets) {
-        
-        this.bindingSets = bindingSets;
-        
-    }
+    return nullGraph;
+  }
 
-    public QueryBindingSet getQueryBindingSet() {
-        
-        return qbs;
-        
-    }
+  public IBindingSet[] getBindings() {
 
-    public void setQueryBindingSet(final QueryBindingSet qbs) {
-        
-        this.qbs = qbs;
-        
-    }
+    return bindingSets;
+  }
 
-    private EmbergraphURI nullGraph = null;
+  public void setBindings(final IBindingSet[] bindingSets) {
 
-    public void setDataset(Dataset dataset) {
-        this.dataset = dataset;
-    }
+    this.bindingSets = bindingSets;
+  }
 
-    public Dataset getDataset() {
-        return dataset;
-    }
+  public QueryBindingSet getQueryBindingSet() {
+
+    return qbs;
+  }
+
+  public void setQueryBindingSet(final QueryBindingSet qbs) {
+
+    this.qbs = qbs;
+  }
+
+  private EmbergraphURI nullGraph = null;
+
+  public void setDataset(Dataset dataset) {
+    this.dataset = dataset;
+  }
+
+  public Dataset getDataset() {
+    return dataset;
+  }
 }

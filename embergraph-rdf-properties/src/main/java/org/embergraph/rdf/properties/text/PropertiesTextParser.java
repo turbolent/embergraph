@@ -55,47 +55,39 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 
 /**
- * An {@link PropertiesParser} for {@link Properties} objects in the text
- * listing format.
- * 
+ * An {@link PropertiesParser} for {@link Properties} objects in the text listing format.
+ *
  * @author Bryan THompson
  */
 public class PropertiesTextParser implements PropertiesParser {
 
-    /**
-     * Returns {@link PropertiesFormat#TEXT}.
-     */
-    public PropertiesFormat getFormat() {
+  /** Returns {@link PropertiesFormat#TEXT}. */
+  public PropertiesFormat getFormat() {
 
-        return PropertiesFormat.TEXT;
+    return PropertiesFormat.TEXT;
+  }
 
-    }
+  @Override
+  public Properties parse(final InputStream in) throws IOException {
 
-    @Override
-    public Properties parse(final InputStream in) throws IOException {
+    final Properties p = new Properties();
 
-        final Properties p = new Properties();
+    p.load(in);
 
-        p.load(in);
+    return p;
+  }
 
-        return p;
+  @Override
+  public Properties parse(final Reader reader) throws IOException {
 
-    }
+    final Properties p = new Properties();
 
-    @Override
-    public Properties parse(final Reader reader) throws IOException {
+    p.load(reader);
 
-        final Properties p = new Properties();
-
-        p.load(reader);
-
-        return p;
-
-    }
-
+    return p;
+  }
 }

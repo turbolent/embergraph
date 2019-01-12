@@ -24,103 +24,86 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.joinGraph;
 
 import java.util.Arrays;
-
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
- * A factory for {@link IEvaluationPlan}s that uses a caller specified
- * evaluation order.
- * 
+ * A factory for {@link IEvaluationPlan}s that uses a caller specified evaluation order.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class FixedEvaluationPlanFactory implements IEvaluationPlanFactory {
 
-    /**
-     * 
+  /** */
+  private static final long serialVersionUID = 4374802847795489346L;
+
+  /** the evaluation order as specified to the ctor. */
+  private final int[] order;
+
+  public FixedEvaluationPlanFactory(final int[] order) {
+
+    if (order == null) throw new IllegalArgumentException();
+
+    /*
+     * verify that the evaluation order uses each predicate in the tail of
+     * the rule exactly once (e.g., it is a permutation of the sequence
+     * [0,1,2...,tailCount-1].
      */
-    private static final long serialVersionUID = 4374802847795489346L;
-    
-    /** the evaluation order as specified to the ctor. */
-    private final int[] order;
-    
-    public FixedEvaluationPlanFactory(final int[] order) {
+    for (int i = 0; i < order.length; i++) {
 
-        if (order == null)
-            throw new IllegalArgumentException();
+      int nfound = 0;
 
-        /*
-         * verify that the evaluation order uses each predicate in the tail of
-         * the rule exactly once (e.g., it is a permutation of the sequence
-         * [0,1,2...,tailCount-1].
-         */
-        for (int i = 0; i < order.length; i++) {
+      for (int j = 0; j < order.length; j++) {
 
-            int nfound = 0;
+        if (order[j] == i) nfound++;
+      }
 
-            for (int j = 0; j < order.length; j++) {
-
-                if (order[j] == i)
-                    nfound++;
-
-            }
-
-            if (nfound == 0)
-                throw new IllegalArgumentException("tailIndex=" + i
-                        + " is not in the evaluation order: "
-                        + Arrays.toString(order));
-            if (nfound > 1)
-                throw new IllegalArgumentException("tailIndex=" + i
-                        + " occurs more than once in the evaluation order: "
-                        + Arrays.toString(order));
-            
-        }
-        
-        this.order = order;
-        
-    }
-    
-    public IEvaluationPlan newPlan(final IJoinNexus joinNexus, final IRule rule) {
-   
-        final int tailCount = rule.getTailCount();
-
-        if (order.length != tailCount) {
-
-            throw new IllegalArgumentException("tailCount=" + tailCount
-                    + ", but have order[] of length=" + order.length);
-            
-        }
-        
-        return new IEvaluationPlan() {
-
-            public int[] getOrder() {
-                
-                return order;
-                
-            }
-
-            public boolean isEmpty() {
-                
-                return false;
-                
-            }
-
-            public long rangeCount(int tailIndex) {
-
-                return joinNexus.getRangeCountFactory().rangeCount(
-                        rule.getTail(tailIndex));
-                
-            }
-            
-            public String toString() {
-                
-                return "order="+Arrays.toString(order);
-                
-            }
-            
-        };
-        
+      if (nfound == 0)
+        throw new IllegalArgumentException(
+            "tailIndex=" + i + " is not in the evaluation order: " + Arrays.toString(order));
+      if (nfound > 1)
+        throw new IllegalArgumentException(
+            "tailIndex="
+                + i
+                + " occurs more than once in the evaluation order: "
+                + Arrays.toString(order));
     }
 
+    this.order = order;
+  }
+
+  public IEvaluationPlan newPlan(final IJoinNexus joinNexus, final IRule rule) {
+
+    final int tailCount = rule.getTailCount();
+
+    if (order.length != tailCount) {
+
+      throw new IllegalArgumentException(
+          "tailCount=" + tailCount + ", but have order[] of length=" + order.length);
+    }
+
+    return new IEvaluationPlan() {
+
+      public int[] getOrder() {
+
+        return order;
+      }
+
+      public boolean isEmpty() {
+
+        return false;
+      }
+
+      public long rangeCount(int tailIndex) {
+
+        return joinNexus.getRangeCountFactory().rangeCount(rule.getTail(tailIndex));
+      }
+
+      public String toString() {
+
+        return "order=" + Arrays.toString(order);
+      }
+    };
+  }
 }

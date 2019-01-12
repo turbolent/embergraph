@@ -25,89 +25,79 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.solutions.SolutionSetStream;
 
 /**
- * Implementation supports a standalone database. Depending on the specific
- * instance used, either the generated chunk is left on the Java heap or it is
- * migrated onto the native heap using a {@link SolutionSetStream}. Either way,
- * it is then handed off synchronously using
- * {@link QueryEngine#acceptChunk(IChunkMessage)}. That method will queue the
- * chunk for asynchronous processing.
- * 
+ * Implementation supports a standalone database. Depending on the specific instance used, either
+ * the generated chunk is left on the Java heap or it is migrated onto the native heap using a
+ * {@link SolutionSetStream}. Either way, it is then handed off synchronously using {@link
+ * QueryEngine#acceptChunk(IChunkMessage)}. That method will queue the chunk for asynchronous
+ * processing.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class StandaloneChunkHandler implements IChunkHandler {
 
-    /**
-     * Instance puts all chunks onto the native heap.
-     * 
-     * @see BLZG-533 Vector query engine on native heap.
-     */
-    public static final IChunkHandler NATIVE_HEAP_INSTANCE = new NativeHeapStandloneChunkHandler();
-    
-    /**
-     * Instance puts all chunks onto the managed object heap.
-     */
-    public static final IChunkHandler MANAGED_HEAP_INSTANCE = new ManagedHeapStandloneChunkHandler();
+  /**
+   * Instance puts all chunks onto the native heap.
+   *
+   * @see BLZG-533 Vector query engine on native heap.
+   */
+  public static final IChunkHandler NATIVE_HEAP_INSTANCE = new NativeHeapStandloneChunkHandler();
 
-    /**
-     * This instance is explicitly used for several unit tests in the query
-     * engine package that are not written to the RDF data model (the native
-     * heap version assumes an RDF data model).
-     */
-    public static final IChunkHandler TEST_INSTANCE = new ManagedHeapStandloneChunkHandler();
+  /** Instance puts all chunks onto the managed object heap. */
+  public static final IChunkHandler MANAGED_HEAP_INSTANCE = new ManagedHeapStandloneChunkHandler();
 
-    private final boolean nativeHeap;
+  /**
+   * This instance is explicitly used for several unit tests in the query engine package that are
+   * not written to the RDF data model (the native heap version assumes an RDF data model).
+   */
+  public static final IChunkHandler TEST_INSTANCE = new ManagedHeapStandloneChunkHandler();
 
-    protected StandaloneChunkHandler(final boolean nativeHeap) {
+  private final boolean nativeHeap;
 
-        this.nativeHeap = nativeHeap;
-        
+  protected StandaloneChunkHandler(final boolean nativeHeap) {
+
+    this.nativeHeap = nativeHeap;
+  }
+
+  @Override
+  public int handleChunk(
+      final IRunningQuery query, final int bopId, final int sinkId, final IBindingSet[] chunk) {
+
+    if (query == null) throw new IllegalArgumentException();
+
+    if (chunk == null) throw new IllegalArgumentException();
+
+    if (chunk.length == 0) return 0;
+
+    final IChunkMessage<IBindingSet> msg;
+
+    if (nativeHeap) {
+
+      // See BLZG-533: Vector the query engine on the native heap.
+      msg =
+          new LocalNativeChunkMessage(
+              query.getQueryController(),
+              query.getQueryId(),
+              sinkId, // bopId
+              -1, // partitionId
+              query, // runningQuery,
+              chunk);
+
+    } else {
+
+      // Store the chunk on the managed object heap.
+      msg =
+          new LocalChunkMessage(
+              query.getQueryController(),
+              query.getQueryId(), //
+              sinkId, // bopId
+              -1, // partitionId
+              chunk);
     }
-    
-    @Override
-    public int handleChunk(final IRunningQuery query, final int bopId,
-            final int sinkId, final IBindingSet[] chunk) {
 
-        if (query == null)
-            throw new IllegalArgumentException();
+    final QueryEngine queryEngine = query.getQueryEngine();
 
-        if (chunk == null)
-            throw new IllegalArgumentException();
+    queryEngine.acceptChunk(msg);
 
-        if (chunk.length == 0)
-            return 0;
-
-        final IChunkMessage<IBindingSet> msg;
-        
-        if (nativeHeap) {
-
-            // See BLZG-533: Vector the query engine on the native heap.
-            msg = new LocalNativeChunkMessage(
-                    query.getQueryController(),
-                    query.getQueryId(),
-                    sinkId, // bopId
-                    -1, // partitionId
-                    query, // runningQuery,
-                    chunk
-                    );
-
-        } else {
-
-            // Store the chunk on the managed object heap.
-            msg = new LocalChunkMessage(
-                query.getQueryController(),
-                query.getQueryId(),// 
-                sinkId,// bopId
-                -1, // partitionId
-                chunk);
-
-        }
-        
-        final QueryEngine queryEngine = query.getQueryEngine();
-
-        queryEngine.acceptChunk(msg);
-
-        return 1;
-
-    }
-    
+    return 1;
+  }
 }

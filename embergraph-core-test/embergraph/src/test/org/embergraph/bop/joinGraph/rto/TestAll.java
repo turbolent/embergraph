@@ -29,40 +29,27 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(final String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(final String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("runtime query optimizer");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // runtime query optimizer operator.
-        suite.addTestSuite(TestJoinGraph.class);
+    final TestSuite suite = new TestSuite("runtime query optimizer");
 
-        // runtime query optimizer behavior.
-        // FIXME This test suite is empty. Either test at the AST eval level or add tests here.
-//        suite.addTestSuite(TestJGraph.class);
+    // runtime query optimizer operator.
+    suite.addTestSuite(TestJoinGraph.class);
 
-        return suite;
-        
-    }
-    
+    // runtime query optimizer behavior.
+    // FIXME This test suite is empty. Either test at the AST eval level or add tests here.
+    //        suite.addTestSuite(TestJGraph.class);
+
+    return suite;
+  }
 }

@@ -19,56 +19,57 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-public class HA2PhaseCommitMessage implements IHA2PhaseCommitMessage,
-        Serializable {
+public class HA2PhaseCommitMessage implements IHA2PhaseCommitMessage, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final boolean isJoinedService;
-    private final long commitTime;
-    private final boolean didAllServicesPrepare;
+  private final boolean isJoinedService;
+  private final long commitTime;
+  private final boolean didAllServicesPrepare;
 
-    public HA2PhaseCommitMessage(final boolean isJoinedService,
-            final long commitTime, final boolean didAllServicesPrepare) {
+  public HA2PhaseCommitMessage(
+      final boolean isJoinedService, final long commitTime, final boolean didAllServicesPrepare) {
 
-        this.isJoinedService = isJoinedService;
-        this.commitTime = commitTime;
-        this.didAllServicesPrepare = didAllServicesPrepare;
+    this.isJoinedService = isJoinedService;
+    this.commitTime = commitTime;
+    this.didAllServicesPrepare = didAllServicesPrepare;
+  }
 
-    }
+  @Override
+  public boolean isJoinedService() {
+    return isJoinedService;
+  }
 
-    @Override
-    public boolean isJoinedService() {
-        return isJoinedService;
-    }
+  @Override
+  public long getCommitTime() {
+    return commitTime;
+  }
 
-    @Override
-    public long getCommitTime() {
-        return commitTime;
-    }
+  @Override
+  public boolean didAllServicesPrepare() {
+    return didAllServicesPrepare;
+  }
 
-    @Override
-    public boolean didAllServicesPrepare() {
-        return didAllServicesPrepare;
-    }
+  @Override
+  public String toString() {
 
-    @Override
-    public String toString() {
+    return super.toString()
+        + "{isJoinedService="
+        + isJoinedService
+        + ",commitTime="
+        + commitTime
+        + ",didAllServicesPrepare="
+        + didAllServicesPrepare
+        + "}";
+  }
 
-        return super.toString() + "{isJoinedService=" + isJoinedService
-                + ",commitTime=" + commitTime + ",didAllServicesPrepare="
-                + didAllServicesPrepare + "}";
+  @Override
+  public boolean failCommit_beforeWritingRootBlockOnJournal() {
+    return false;
+  }
 
-    }
-
-    @Override
-    public boolean failCommit_beforeWritingRootBlockOnJournal() {
-        return false;
-    }
-
-    @Override
-    public boolean failCommit_beforeClosingHALog() {
-        return false;
-    }
-    
+  @Override
+  public boolean failCommit_beforeClosingHALog() {
+    return false;
+  }
 }

@@ -25,128 +25,114 @@ package org.embergraph.bfs;
 
 import java.io.IOException;
 
-
 /**
- * Tests some specifics of the {@link FileVersionOutputStream}. These behaviors
- * are only observable to callers that cast
- * {@link EmbergraphFileSystem#outputStream(String, int)} to a
- * {@link FileVersionOutputStream}.
- * 
+ * Tests some specifics of the {@link FileVersionOutputStream}. These behaviors are only observable
+ * to callers that cast {@link EmbergraphFileSystem#outputStream(String, int)} to a {@link
+ * FileVersionOutputStream}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFileVersionOutputStream extends AbstractRepositoryTestCase {
 
-    /**
-     * 
-     */
-    public TestFileVersionOutputStream() {
-    }
+  /** */
+  public TestFileVersionOutputStream() {}
 
-    /**
-     * @param arg0
-     */
-    public TestFileVersionOutputStream(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestFileVersionOutputStream(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * A test of the flush semantics (writes a partial block, but never an empty
-     * block) and of the counters exposed by the {@link FileVersionOutputStream}.
-     * @throws IOException 
-     */
-    public void test_flushAndCounters() throws IOException {
-        
-        final String id = "test";
-        
-        final int version = 0;
-        
-        final FileVersionOutputStream os = (FileVersionOutputStream) repo
-                .outputStream(id, version);
-        
-        assertEquals("byteCount",0L,os.getByteCount());
+  /**
+   * A test of the flush semantics (writes a partial block, but never an empty block) and of the
+   * counters exposed by the {@link FileVersionOutputStream}.
+   *
+   * @throws IOException
+   */
+  public void test_flushAndCounters() throws IOException {
 
-        assertEquals("blockCount",0L,os.getBlockCount());
-        
-        // write an empty byte[].
-        os.write(new byte[]{});
+    final String id = "test";
 
-        assertEquals("byteCount",0L,os.getByteCount());
+    final int version = 0;
 
-        assertEquals("blockCount",0L,os.getBlockCount());
+    final FileVersionOutputStream os = (FileVersionOutputStream) repo.outputStream(id, version);
 
-        // flush - NOP since buffer is empty.
-        os.flush();
-        
-        assertEquals("byteCount",0L,os.getByteCount());
+    assertEquals("byteCount", 0L, os.getByteCount());
 
-        assertEquals("blockCount",0L,os.getBlockCount());
+    assertEquals("blockCount", 0L, os.getBlockCount());
 
-        // write a byte[].
-        os.write(new byte[]{1,2,3});
+    // write an empty byte[].
+    os.write(new byte[] {});
 
-        assertEquals("byteCount",3L,os.getByteCount());
+    assertEquals("byteCount", 0L, os.getByteCount());
 
-        assertEquals("blockCount",0L,os.getBlockCount());
+    assertEquals("blockCount", 0L, os.getBlockCount());
 
-        // write another byte[].
-        os.write(new byte[]{4,5,6});
+    // flush - NOP since buffer is empty.
+    os.flush();
 
-        assertEquals("byteCount",6L,os.getByteCount());
+    assertEquals("byteCount", 0L, os.getByteCount());
 
-        assertEquals("blockCount",0L,os.getBlockCount());
+    assertEquals("blockCount", 0L, os.getBlockCount());
 
-        assertEquals("blockCount",0L,repo.getBlockCount(id, version));
+    // write a byte[].
+    os.write(new byte[] {1, 2, 3});
 
-        assertSameIterator("block identifiers", new Long[] {}, repo.blocks(id,
-                version));
+    assertEquals("byteCount", 3L, os.getByteCount());
 
-        // Note: input stream is null until 1st block is written.
-        assertEquals("inputStream", null, repo.inputStream(id, version));
+    assertEquals("blockCount", 0L, os.getBlockCount());
 
-        // flush - writes one block with 6 bytes.
-        os.flush();
-        
-        assertEquals("byteCount",6L,os.getByteCount());
+    // write another byte[].
+    os.write(new byte[] {4, 5, 6});
 
-        assertEquals("blockCount",1L,os.getBlockCount());
+    assertEquals("byteCount", 6L, os.getByteCount());
 
-        assertEquals("blockCount",1L,repo.getBlockCount(id, version));
-        
-        assertSameIterator("block identifiers", new Long[] {0L}, repo.blocks(id,
-                version));
+    assertEquals("blockCount", 0L, os.getBlockCount());
 
-        assertEquals("inputStream", new byte[] { 1, 2, 3, 4, 5, 6 }, read(repo
-                .inputStream(id, version)));
-        
-        // write another byte[].
-        os.write(new byte[]{7,8,9});
+    assertEquals("blockCount", 0L, repo.getBlockCount(id, version));
 
-        assertEquals("byteCount",9L,os.getByteCount());
+    assertSameIterator("block identifiers", new Long[] {}, repo.blocks(id, version));
 
-        assertEquals("blockCount",1L,os.getBlockCount());
+    // Note: input stream is null until 1st block is written.
+    assertEquals("inputStream", null, repo.inputStream(id, version));
 
-        assertEquals("blockCount",1L,repo.getBlockCount(id, version));
+    // flush - writes one block with 6 bytes.
+    os.flush();
 
-        // read back is unchanged since buffer was not flushed.
-        assertEquals("inputStream", new byte[] { 1, 2, 3, 4, 5, 6 }, read(repo
-                .inputStream(id, version)));
+    assertEquals("byteCount", 6L, os.getByteCount());
 
-        // flush - writes 2nd block with 3 bytes.
-        os.flush();
-        
-        assertEquals("byteCount",9L,os.getByteCount());
+    assertEquals("blockCount", 1L, os.getBlockCount());
 
-        assertEquals("blockCount",2L,os.getBlockCount());
+    assertEquals("blockCount", 1L, repo.getBlockCount(id, version));
 
-        assertEquals("blockCount",2L,repo.getBlockCount(id, version));
-        
-        assertSameIterator("block identifiers", new Long[] { 0L, 1L }, repo.blocks(
-                id, version));
+    assertSameIterator("block identifiers", new Long[] {0L}, repo.blocks(id, version));
 
-        assertEquals("inputStream", new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, read(repo
-                .inputStream(id, version)));
+    assertEquals("inputStream", new byte[] {1, 2, 3, 4, 5, 6}, read(repo.inputStream(id, version)));
 
-    }
-    
+    // write another byte[].
+    os.write(new byte[] {7, 8, 9});
+
+    assertEquals("byteCount", 9L, os.getByteCount());
+
+    assertEquals("blockCount", 1L, os.getBlockCount());
+
+    assertEquals("blockCount", 1L, repo.getBlockCount(id, version));
+
+    // read back is unchanged since buffer was not flushed.
+    assertEquals("inputStream", new byte[] {1, 2, 3, 4, 5, 6}, read(repo.inputStream(id, version)));
+
+    // flush - writes 2nd block with 3 bytes.
+    os.flush();
+
+    assertEquals("byteCount", 9L, os.getByteCount());
+
+    assertEquals("blockCount", 2L, os.getBlockCount());
+
+    assertEquals("blockCount", 2L, repo.getBlockCount(id, version));
+
+    assertSameIterator("block identifiers", new Long[] {0L, 1L}, repo.blocks(id, version));
+
+    assertEquals(
+        "inputStream", new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, read(repo.inputStream(id, version)));
+  }
 }

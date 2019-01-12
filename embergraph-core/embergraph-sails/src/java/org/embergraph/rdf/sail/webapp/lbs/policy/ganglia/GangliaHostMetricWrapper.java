@@ -22,54 +22,45 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 
 /**
  * Wraps an {@link IHostReport} as an {@link IHostMetrics} object.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class GangliaHostMetricWrapper extends AbstractHostMetrics {
 
-    private final IHostReport hostReport;
-    
-    @Override
-    public String toString() {
+  private final IHostReport hostReport;
 
-        return getClass().getName() + "{hostReport=" + hostReport.toString()
-                + "}";
+  @Override
+  public String toString() {
 
-    }
-    
-    public GangliaHostMetricWrapper(final IHostReport hostReport) {
+    return getClass().getName() + "{hostReport=" + hostReport.toString() + "}";
+  }
 
-        if (hostReport == null)
-            throw new IllegalArgumentException();
-        
-        this.hostReport = hostReport;
-        
-    }
+  public GangliaHostMetricWrapper(final IHostReport hostReport) {
 
-    @Override
-    public String[] getMetricNames() {
+    if (hostReport == null) throw new IllegalArgumentException();
 
-        return hostReport.getMetrics().keySet().toArray(new String[] {});
+    this.hostReport = hostReport;
+  }
 
-    }
+  @Override
+  public String[] getMetricNames() {
 
-    @Override
-    public Number getNumeric(final String name) {
+    return hostReport.getMetrics().keySet().toArray(new String[] {});
+  }
 
-        if(name == null)
-            throw new IllegalArgumentException();
+  @Override
+  public Number getNumeric(final String name) {
 
-        final IGangliaMetricMessage msg = hostReport.getMetrics().get(name);
+    if (name == null) throw new IllegalArgumentException();
 
-        if (msg == null) {
+    final IGangliaMetricMessage msg = hostReport.getMetrics().get(name);
 
-            // Not found.
-            return null;
+    if (msg == null) {
 
-        }
-
-        return msg.getNumericValue();
-
+      // Not found.
+      return null;
     }
 
+    return msg.getNumericValue();
+  }
 }

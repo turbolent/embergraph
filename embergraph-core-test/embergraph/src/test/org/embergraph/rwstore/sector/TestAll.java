@@ -27,43 +27,33 @@ import junit.framework.TestSuite;
 
 /**
  * Runs all tests for all journal implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 4069 2011-01-09 20:58:02Z thompsonbry $
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
-    	
-        final TestSuite suite = new TestSuite("memory manager");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        suite.addTestSuite(TestMemoryManager.class);
+    final TestSuite suite = new TestSuite("memory manager");
 
-        suite.addTestSuite(TestMemoryManager2.class);
-        
-        suite.addTestSuite(TestMemoryManagerStreams.class);
+    suite.addTestSuite(TestMemoryManager.class);
 
-        suite.addTest(TestMemStore.suite());
+    suite.addTestSuite(TestMemoryManager2.class);
 
-        return suite;
+    suite.addTestSuite(TestMemoryManagerStreams.class);
 
-    }
+    suite.addTest(TestMemStore.suite());
 
+    return suite;
+  }
 }

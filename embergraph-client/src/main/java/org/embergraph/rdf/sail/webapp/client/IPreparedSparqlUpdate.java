@@ -21,22 +21,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- */
+/** @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a> */
 public interface IPreparedSparqlUpdate extends IPreparedOperation {
 
-    void evaluate() throws Exception;
-    
-    /**
-     * Evaluate and notify the specified listener when complete.
-     * 
-     * @param listener
-     *          The query listener.
-     *          
-     * @throws Exception
-     */
-    void evaluate(IPreparedQueryListener listener) throws Exception;
+  void evaluate() throws Exception;
 
+  /**
+   * Evaluate and notify the specified listener when complete.
+   *
+   * @param listener The query listener.
+   * @throws Exception
+   */
+  void evaluate(IPreparedQueryListener listener) throws Exception;
 }

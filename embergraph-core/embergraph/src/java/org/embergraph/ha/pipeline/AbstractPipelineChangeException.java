@@ -22,29 +22,25 @@ package org.embergraph.ha.pipeline;
 
 /**
  * A quorum related exception dealing with the write replication pipeline.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class AbstractPipelineChangeException extends AbstractPipelineException {
+public abstract class AbstractPipelineChangeException extends AbstractPipelineException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public AbstractPipelineChangeException() {
-    }
+  public AbstractPipelineChangeException() {}
 
-    public AbstractPipelineChangeException(String message) {
-        super(message);
-    }
+  public AbstractPipelineChangeException(String message) {
+    super(message);
+  }
 
-    public AbstractPipelineChangeException(Throwable cause) {
-        super(cause);
-    }
+  public AbstractPipelineChangeException(Throwable cause) {
+    super(cause);
+  }
 
-    public AbstractPipelineChangeException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public AbstractPipelineChangeException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

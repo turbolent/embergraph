@@ -23,181 +23,150 @@ package org.embergraph.service;
 
 import java.nio.ByteBuffer;
 import java.util.Random;
-
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
 /**
- * Base class for some <code>assertEquals</code> methods not covered by
- * {@link TestCase} or {@link TestCase2}.
- * 
+ * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+ * TestCase2}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @deprecated This is currently duplicating a class by the same name in
- *             org.embergraph.io in the JOURNAL_HA_BRANCH. Those classes should be
- *             reconciled.
- *             <p>
- *             I have added {@link #fillBufferWithRandomData(ByteBuffer)} to
- *             this version of the class. That method should make it into the
- *             original version of this class when they are reconciled.
+ * @deprecated This is currently duplicating a class by the same name in org.embergraph.io in the
+ *     JOURNAL_HA_BRANCH. Those classes should be reconciled.
+ *     <p>I have added {@link #fillBufferWithRandomData(ByteBuffer)} to this version of the class.
+ *     That method should make it into the original version of this class when they are reconciled.
  */
 public class TestCase3 extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestCase3() {
-     
+  /** */
+  public TestCase3() {}
+
+  /** @param name */
+  public TestCase3(String name) {
+    super(name);
+  }
+
+  /**
+   * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
+   * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
+   * effects on the position, mark or limit properties of the buffer.
+   *
+   * @param expected Non-null byte[].
+   * @param actual Buffer.
+   */
+  public static void assertEquals(ByteBuffer expectedBuffer, final ByteBuffer actual) {
+
+    if (expectedBuffer == null) throw new IllegalArgumentException();
+
+    if (actual == null) fail("actual is null");
+
+    if (expectedBuffer.hasArray()
+        && expectedBuffer.arrayOffset() == 0
+        && expectedBuffer.position() == 0
+        && expectedBuffer.limit() == expectedBuffer.capacity()) {
+
+      // evaluate byte[] against actual.
+      assertEquals(expectedBuffer.array(), actual);
+
+      return;
     }
 
-    /**
-     * @param name
+    /*
+     * Copy the expected data into a byte[] using a read-only view on the
+     * buffer so that we do not mess with its position, mark, or limit.
      */
-    public TestCase3(String name) {
-        super(name);
-     
+    final byte[] expected;
+    {
+      expectedBuffer = expectedBuffer.asReadOnlyBuffer();
+
+      final int len = expectedBuffer.remaining();
+
+      expected = new byte[len];
+
+      expectedBuffer.get(expected);
     }
 
-    /**
-     * Helper method verifies that the contents of <i>actual</i> from
-     * position() to limit() are consistent with the expected byte[]. A
-     * read-only view of <i>actual</i> is used to avoid side effects on the
-     * position, mark or limit properties of the buffer.
-     * 
-     * @param expected
-     *            Non-null byte[].
-     * @param actual
-     *            Buffer.
-     */
-    public static void assertEquals(ByteBuffer expectedBuffer,
-            final ByteBuffer actual) {
+    // evaluate byte[] against actual.
+    assertEquals(expected, actual);
+  }
 
-        if (expectedBuffer == null)
-            throw new IllegalArgumentException();
+  /**
+   * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
+   * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
+   * effects on the position, mark or limit properties of the buffer.
+   *
+   * @param expected Non-null byte[].
+   * @param actual Buffer.
+   */
+  public static void assertEquals(final byte[] expected, ByteBuffer actual) {
 
-        if (actual == null)
-            fail("actual is null");
+    if (expected == null) throw new IllegalArgumentException();
 
-        if (expectedBuffer.hasArray() && expectedBuffer.arrayOffset() == 0
-                && expectedBuffer.position() == 0
-                && expectedBuffer.limit() == expectedBuffer.capacity()) {
+    if (actual == null) fail("actual is null");
 
-            // evaluate byte[] against actual.
-            assertEquals(expectedBuffer.array(), actual);
+    if (actual.hasArray()
+        && actual.arrayOffset() == 0
+        && actual.position() == 0
+        && actual.limit() == actual.capacity()) {
 
-            return;
+      assertEquals(expected, actual.array());
 
-        }
-        
-        /*
-         * Copy the expected data into a byte[] using a read-only view on the
-         * buffer so that we do not mess with its position, mark, or limit.
-         */
-        final byte[] expected;
-        {
-
-            expectedBuffer = expectedBuffer.asReadOnlyBuffer();
-
-            final int len = expectedBuffer.remaining();
-
-            expected = new byte[len];
-
-            expectedBuffer.get(expected);
-
-        }
-
-        // evaluate byte[] against actual.
-        assertEquals(expected, actual);
-
+      return;
     }
 
-    /**
-     * Helper method verifies that the contents of <i>actual</i> from
-     * position() to limit() are consistent with the expected byte[]. A
-     * read-only view of <i>actual</i> is used to avoid side effects on the
-     * position, mark or limit properties of the buffer.
-     * 
-     * @param expected
-     *            Non-null byte[].
-     * @param actual
-     *            Buffer.
+    /*
+     * Create a read-only view on the buffer so that we do not mess with its
+     * position, mark, or limit.
      */
-    public static void assertEquals(final byte[] expected, ByteBuffer actual) {
+    actual = actual.asReadOnlyBuffer();
 
-        if (expected == null)
-            throw new IllegalArgumentException();
+    final int len = actual.remaining();
 
-        if (actual == null)
-            fail("actual is null");
+    final byte[] actual2 = new byte[len];
 
-        if (actual.hasArray() && actual.arrayOffset() == 0
-                && actual.position() == 0
-                && actual.limit() == actual.capacity()) {
+    actual.get(actual2);
 
-            assertEquals(expected, actual.array());
+    // compare byte[]s.
+    assertEquals(expected, actual2);
+  }
 
-            return;
+  /**
+   * Fill the buffer with a random run length of random data starting at a random offset.
+   *
+   * @param b The buffer.
+   */
+  protected void fillBufferWithRandomData(final ByteBuffer b) {
 
-        }
+    final int capacity = b.capacity();
 
-        /*
-         * Create a read-only view on the buffer so that we do not mess with its
-         * position, mark, or limit.
-         */
-        actual = actual.asReadOnlyBuffer();
+    b.clear();
 
-        final int len = actual.remaining();
+    // starting offset.
+    final int off = r.nextInt(capacity / 2);
 
-        final byte[] actual2 = new byte[len];
+    // run length (may be zero).
+    final int len = r.nextInt(capacity - off + 1) - 1;
 
-        actual.get(actual2);
+    if (log.isInfoEnabled())
+      log.info(
+          "off=" + off + ", len=" + len + ", off+len=" + (off + len) + ", capacity=" + capacity);
 
-        // compare byte[]s.
-        assertEquals(expected, actual2);
+    final byte[] a = new byte[len];
 
-    }
+    // random byte[] of that length.
+    r.nextBytes(a);
 
-    /**
-     * Fill the buffer with a random run length of random data starting at a
-     * random offset.
-     * 
-     * @param b
-     *            The buffer.
-     */
-    protected void fillBufferWithRandomData(final ByteBuffer b) {
-    
-        final int capacity = b.capacity();
+    // setup the view of the slice on the buffer.
+    b.limit(off + len);
+    b.position(off);
 
-        b.clear();
-        
-        // starting offset.
-        final int off = r.nextInt(capacity / 2);
-        
-        // run length (may be zero).
-        final int len = r.nextInt(capacity - off + 1) - 1;
-        
-        if (log.isInfoEnabled())
-            log.info("off=" + off + ", len=" + len + ", off+len=" + (off + len)
-                    + ", capacity=" + capacity);
+    // copy random byte[] into the buffer.
+    b.put(a);
 
-        final byte[] a = new byte[len];
-        
-        // random byte[] of that length.
-        r.nextBytes(a);
-        
-        // setup the view of the slice on the buffer.
-        b.limit(off + len);
-        b.position(off);
-        
-        // copy random byte[] into the buffer.
-        b.put(a);
-        
-        // prepare the buffer for reading.
-        b.flip();
-        
-    }
-    
-    private final Random r = new Random();
-    
+    // prepare the buffer for reading.
+    b.flip();
+  }
+
+  private final Random r = new Random();
 }

@@ -3,204 +3,171 @@ package org.embergraph.resources;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.embergraph.journal.CommitRecordIndex;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.service.Params;
 
 /**
- * A class that captures the results of
- * {@link StoreManager#purgeOldResources()}.
- * 
+ * A class that captures the results of {@link StoreManager#purgeOldResources()}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class PurgeResult implements Serializable, Params {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8729447753321005132L;
+  /** */
+  private static final long serialVersionUID = -8729447753321005132L;
 
-    /**
-     * The earliest commit time on any of the managed journals.
-     */
-    final public long firstCommitTime;
-    
-    /**
-     * Last commit time on the live journal at the start of the operation.
-     */
-    final public long lastCommitTime;
+  /** The earliest commit time on any of the managed journals. */
+  public final long firstCommitTime;
 
-    /**
-     * The release time as reported by the {@link ITransactionService}.
-     */
-    final public long givenReleaseTime;
+  /** Last commit time on the live journal at the start of the operation. */
+  public final long lastCommitTime;
 
-    /**
-     * The earliest timestamp that MUST be retained for the read-historical
-     * indices in the cache and {@link Long#MAX_VALUE} if there are NO
-     * read-historical indices in the cache.
-     */
-    final public long indexRetentionTime;
+  /** The release time as reported by the {@link ITransactionService}. */
+  public final long givenReleaseTime;
 
-    /**
-     * The chosen release time.
-     */
-    final public long choosenReleaseTime;
-    
-    /**
-     * The earliest commit time that was preserved by the purge operation
-     * (you can still read on this commit point after the purge).
-     */
-    final public long commitTimeToPreserve;
-    
-    /**
-     * The #of resources (journals and index segments) that are dependencies
-     * for index views from the {@link #commitTimeToPreserve} until the
-     * {@link #lastCommitTime}.
-     */
-    final public long resourcesInUseCount;
+  /**
+   * The earliest timestamp that MUST be retained for the read-historical indices in the cache and
+   * {@link Long#MAX_VALUE} if there are NO read-historical indices in the cache.
+   */
+  public final long indexRetentionTime;
 
-    /**
-     * The #of journals before the purge.
-     */
-    final public long journalBeforeCount;
+  /** The chosen release time. */
+  public final long choosenReleaseTime;
 
-    /**
-     * The #of journals after the purge.
-     */
-    final public long journalAfterCount;
+  /**
+   * The earliest commit time that was preserved by the purge operation (you can still read on this
+   * commit point after the purge).
+   */
+  public final long commitTimeToPreserve;
 
-    /**
-     * The #of index segments before the purge.
-     */
-    final public long segmentBeforeCount;
+  /**
+   * The #of resources (journals and index segments) that are dependencies for index views from the
+   * {@link #commitTimeToPreserve} until the {@link #lastCommitTime}.
+   */
+  public final long resourcesInUseCount;
 
-    /**
-     * The #of index segments after the purge.
-     */
-    final public long segmentAfterCount;
-    
-    /**
-     * The #of bytes under management before the purge.
-     */
-    final public long bytesBeforeCount;
-    
-    /**
-     * The #of bytes under management after the purge.
-     */
-    final public long bytesAfterCount;
+  /** The #of journals before the purge. */
+  public final long journalBeforeCount;
 
-    /**
-     * Elapsed time in milliseconds required to scan the
-     * {@link CommitRecordIndex} for each historical journal in order to
-     * identify the set of resources "in use" resources.
-     */
-    final long elapsedScanCommitIndicesTime;
+  /** The #of journals after the purge. */
+  public final long journalAfterCount;
 
-    /**
-     * Elapsed time in milliseconds required to delete the resources which have
-     * been identified as being no longer required.
-     */
-    final long elapsedDeleteResourcesTime;
+  /** The #of index segments before the purge. */
+  public final long segmentBeforeCount;
 
-    /**
-     * Total elapsed time in milliseconds for the purge resources operation.
-     * This includes both the {@link #elapsedScanCommitIndicesTime} and the
-     * {@link #elapsedDeleteResourcesTime}.
-     */
-    final long elapsedPurgeResourcesTime;
+  /** The #of index segments after the purge. */
+  public final long segmentAfterCount;
 
-    public PurgeResult(
-            final long firstCommitTime,
-            final long lastCommitTime,
-            final long givenReleaseTime,
-            final long indexRetentionTime,
-            final long choosenReleaseTime,
-            final long commitTimeToPreserve,
-            final long resourcesInUseCount,
-            final long journalBeforeCount,
-            final long journalAfterCount,
-            final long segmentBeforeCount,
-            final long segmentAfterCount,
-            final long bytesBeforeCount,
-            final long bytesAfterCount,
-            final long elapsedScanCommitIndicesTime,
-            final long elapsedDeleteResourcesTime,
-            final long elapsedPurgeResourcesTime
-            ) {
+  /** The #of bytes under management before the purge. */
+  public final long bytesBeforeCount;
 
-        this.firstCommitTime = firstCommitTime;
-        this.lastCommitTime = lastCommitTime;
-        this.givenReleaseTime = givenReleaseTime;
-        this.indexRetentionTime = indexRetentionTime;
-        this.choosenReleaseTime = choosenReleaseTime;
-        this.commitTimeToPreserve = commitTimeToPreserve;
-        this.resourcesInUseCount = resourcesInUseCount;
-        this.journalBeforeCount = journalBeforeCount;
-        this.journalAfterCount = journalAfterCount;
-        this.segmentBeforeCount = segmentBeforeCount;
-        this.segmentAfterCount = segmentAfterCount;
-        this.bytesBeforeCount = bytesBeforeCount;
-        this.bytesAfterCount = bytesAfterCount;
-        this.elapsedScanCommitIndicesTime = elapsedScanCommitIndicesTime;
-        this.elapsedDeleteResourcesTime = elapsedDeleteResourcesTime;
-        this.elapsedPurgeResourcesTime = elapsedPurgeResourcesTime;
-        
-    }
-    
-    public String toString() {
+  /** The #of bytes under management after the purge. */
+  public final long bytesAfterCount;
 
-        final StringBuilder sb = new StringBuilder();
-        
-        sb.append(getClass().getSimpleName());
-        
-        sb.append("{firstCommitTime=" + firstCommitTime);
-        sb.append(",lastCommitTime=" + lastCommitTime);
-        sb.append(",givenReleaseTime=" + givenReleaseTime);
-        sb.append(",indexRetentionTime=" + indexRetentionTime);
-        sb.append(",choosenReleaseTime=" + choosenReleaseTime);
-        sb.append(",commitTimeToPreserve=" + commitTimeToPreserve);
-        sb.append(",resourcesInUseCount=" + resourcesInUseCount);
-        sb.append(",journalBeforeCount=" + journalBeforeCount);
-        sb.append(",journalAfterCount=" + journalAfterCount);
-        sb.append(",segmentBeforeCount=" + segmentBeforeCount);
-        sb.append(",segmentAfterCount=" + segmentAfterCount);
-        sb.append(",bytesBeforeCount=" + bytesBeforeCount);
-        sb.append(",bytesAfterCount=" + bytesAfterCount);
-        sb.append(",elapsedScanCommitIndicesTime=" + elapsedScanCommitIndicesTime);
-        sb.append(",elapsedDeleteResourcesTime=" + elapsedDeleteResourcesTime);
-        sb.append(",elapsedPurgeResourcesTime=" + elapsedPurgeResourcesTime);
-        sb.append("}");
+  /**
+   * Elapsed time in milliseconds required to scan the {@link CommitRecordIndex} for each historical
+   * journal in order to identify the set of resources "in use" resources.
+   */
+  final long elapsedScanCommitIndicesTime;
 
-        return sb.toString();
-            
-    }
+  /**
+   * Elapsed time in milliseconds required to delete the resources which have been identified as
+   * being no longer required.
+   */
+  final long elapsedDeleteResourcesTime;
 
-    public Map<String,Object> getParams() {
+  /**
+   * Total elapsed time in milliseconds for the purge resources operation. This includes both the
+   * {@link #elapsedScanCommitIndicesTime} and the {@link #elapsedDeleteResourcesTime}.
+   */
+  final long elapsedPurgeResourcesTime;
 
-        final Map<String, Object> v = new HashMap<String, Object>();
+  public PurgeResult(
+      final long firstCommitTime,
+      final long lastCommitTime,
+      final long givenReleaseTime,
+      final long indexRetentionTime,
+      final long choosenReleaseTime,
+      final long commitTimeToPreserve,
+      final long resourcesInUseCount,
+      final long journalBeforeCount,
+      final long journalAfterCount,
+      final long segmentBeforeCount,
+      final long segmentAfterCount,
+      final long bytesBeforeCount,
+      final long bytesAfterCount,
+      final long elapsedScanCommitIndicesTime,
+      final long elapsedDeleteResourcesTime,
+      final long elapsedPurgeResourcesTime) {
 
-        v.put("firstCommitTime", firstCommitTime);
-        v.put("lastCommitTime", lastCommitTime);
-        v.put("givenReleaseTime", givenReleaseTime);
-        v.put("indexRetentionTime", indexRetentionTime);
-        v.put("choosenReleaseTime", choosenReleaseTime);
-        v.put("commitTimeToPreserve", commitTimeToPreserve);
-        v.put("resourcesInUseCount", resourcesInUseCount);
-        v.put("journalBeforeCount", journalBeforeCount);
-        v.put("journalAfterCount", journalAfterCount);
-        v.put("segmentBeforeCount", segmentBeforeCount);
-        v.put("segmentAfterCount", segmentAfterCount);
-        v.put("bytesBeforeCount", bytesBeforeCount);
-        v.put("bytesAfterCount", bytesAfterCount);
-        v.put("elapsedScanCommitIndicesTime", elapsedScanCommitIndicesTime);
-        v.put("elapsedDeleteResourcesTime", elapsedDeleteResourcesTime);
-        v.put("elapsedPurgeResourcesTime", elapsedPurgeResourcesTime);
+    this.firstCommitTime = firstCommitTime;
+    this.lastCommitTime = lastCommitTime;
+    this.givenReleaseTime = givenReleaseTime;
+    this.indexRetentionTime = indexRetentionTime;
+    this.choosenReleaseTime = choosenReleaseTime;
+    this.commitTimeToPreserve = commitTimeToPreserve;
+    this.resourcesInUseCount = resourcesInUseCount;
+    this.journalBeforeCount = journalBeforeCount;
+    this.journalAfterCount = journalAfterCount;
+    this.segmentBeforeCount = segmentBeforeCount;
+    this.segmentAfterCount = segmentAfterCount;
+    this.bytesBeforeCount = bytesBeforeCount;
+    this.bytesAfterCount = bytesAfterCount;
+    this.elapsedScanCommitIndicesTime = elapsedScanCommitIndicesTime;
+    this.elapsedDeleteResourcesTime = elapsedDeleteResourcesTime;
+    this.elapsedPurgeResourcesTime = elapsedPurgeResourcesTime;
+  }
 
-        return v;
+  public String toString() {
 
-    }
+    final StringBuilder sb = new StringBuilder();
 
+    sb.append(getClass().getSimpleName());
+
+    sb.append("{firstCommitTime=" + firstCommitTime);
+    sb.append(",lastCommitTime=" + lastCommitTime);
+    sb.append(",givenReleaseTime=" + givenReleaseTime);
+    sb.append(",indexRetentionTime=" + indexRetentionTime);
+    sb.append(",choosenReleaseTime=" + choosenReleaseTime);
+    sb.append(",commitTimeToPreserve=" + commitTimeToPreserve);
+    sb.append(",resourcesInUseCount=" + resourcesInUseCount);
+    sb.append(",journalBeforeCount=" + journalBeforeCount);
+    sb.append(",journalAfterCount=" + journalAfterCount);
+    sb.append(",segmentBeforeCount=" + segmentBeforeCount);
+    sb.append(",segmentAfterCount=" + segmentAfterCount);
+    sb.append(",bytesBeforeCount=" + bytesBeforeCount);
+    sb.append(",bytesAfterCount=" + bytesAfterCount);
+    sb.append(",elapsedScanCommitIndicesTime=" + elapsedScanCommitIndicesTime);
+    sb.append(",elapsedDeleteResourcesTime=" + elapsedDeleteResourcesTime);
+    sb.append(",elapsedPurgeResourcesTime=" + elapsedPurgeResourcesTime);
+    sb.append("}");
+
+    return sb.toString();
+  }
+
+  public Map<String, Object> getParams() {
+
+    final Map<String, Object> v = new HashMap<String, Object>();
+
+    v.put("firstCommitTime", firstCommitTime);
+    v.put("lastCommitTime", lastCommitTime);
+    v.put("givenReleaseTime", givenReleaseTime);
+    v.put("indexRetentionTime", indexRetentionTime);
+    v.put("choosenReleaseTime", choosenReleaseTime);
+    v.put("commitTimeToPreserve", commitTimeToPreserve);
+    v.put("resourcesInUseCount", resourcesInUseCount);
+    v.put("journalBeforeCount", journalBeforeCount);
+    v.put("journalAfterCount", journalAfterCount);
+    v.put("segmentBeforeCount", segmentBeforeCount);
+    v.put("segmentAfterCount", segmentAfterCount);
+    v.put("bytesBeforeCount", bytesBeforeCount);
+    v.put("bytesAfterCount", bytesAfterCount);
+    v.put("elapsedScanCommitIndicesTime", elapsedScanCommitIndicesTime);
+    v.put("elapsedDeleteResourcesTime", elapsedDeleteResourcesTime);
+    v.put("elapsedPurgeResourcesTime", elapsedPurgeResourcesTime);
+
+    return v;
+  }
 }

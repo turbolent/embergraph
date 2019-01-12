@@ -1,73 +1,56 @@
 package org.embergraph.resources;
 
 import org.embergraph.btree.IndexMetadata;
-import org.embergraph.btree.IndexSegment;
 import org.embergraph.service.DataService;
 
 /**
- * Abstract base class for results when post-processing a named index
- * partition on the old journal after an overflow operation.
- * 
+ * Abstract base class for results when post-processing a named index partition on the old journal
+ * after an overflow operation.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractResult {
 
-    /**
-     * Hash code is based on the {@link #name}.
-     */
-    public int hashCode() {
-       
-        return name.hashCode();
-        
-    }
+  /** Hash code is based on the {@link #name}. */
+  public int hashCode() {
 
-    /**
-     * Equal iff the same instance.
-     */
-    public boolean equals(Object o) {
-        
-        return this == o;
-        
-    }
-    
-    /**
-     * The source index partition for the operation.
-     * 
-     * @see DataService#getIndexPartitionName(String, int)
-     */
-    public final String name;
+    return name.hashCode();
+  }
 
-    /**
-     * The index metadata object for the source index partition.
-     */
-    public final IndexMetadata indexMetadata;
+  /** Equal iff the same instance. */
+  public boolean equals(Object o) {
 
-    /**
-     * 
-     * @param name
-     *            The name of the source index partition.
-     * @param indexMetadata
-     *            The index metadata object for the source index partition.
-     */
-    public AbstractResult(final String name, final IndexMetadata indexMetadata) {
+    return this == o;
+  }
 
-        if (name == null)
-            throw new IllegalArgumentException();
+  /**
+   * The source index partition for the operation.
+   *
+   * @see DataService#getIndexPartitionName(String, int)
+   */
+  public final String name;
 
-        if (indexMetadata == null)
-            throw new IllegalArgumentException();
-        
-        this.name = name;
-        
-        this.indexMetadata = indexMetadata;
+  /** The index metadata object for the source index partition. */
+  public final IndexMetadata indexMetadata;
 
-    }
-    
-    public String toString() {
-        
-        return super.toString()+"{name="+name+"}";
-        
-    }
+  /**
+   * @param name The name of the source index partition.
+   * @param indexMetadata The index metadata object for the source index partition.
+   */
+  public AbstractResult(final String name, final IndexMetadata indexMetadata) {
 
+    if (name == null) throw new IllegalArgumentException();
+
+    if (indexMetadata == null) throw new IllegalArgumentException();
+
+    this.name = name;
+
+    this.indexMetadata = indexMetadata;
+  }
+
+  public String toString() {
+
+    return super.toString() + "{name=" + name + "}";
+  }
 }

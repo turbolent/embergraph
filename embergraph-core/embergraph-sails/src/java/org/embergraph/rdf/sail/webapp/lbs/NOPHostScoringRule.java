@@ -19,23 +19,20 @@ package org.embergraph.rdf.sail.webapp.lbs;
 
 /**
  * Returns ONE for each host (all hosts appear to have an equal workload).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NOPHostScoringRule implements IHostScoringRule {
 
-    @Override
-    public String[] getMetricNames() {
-     
-        return new String[]{};
-        
-    }
-    
-    @Override
-    public double getScore(final IHostMetrics metrics) {
+  @Override
+  public String[] getMetricNames() {
 
-        return 1d;
+    return new String[] {};
+  }
 
-    }
+  @Override
+  public double getScore(final IHostMetrics metrics) {
 
+    return 1d;
+  }
 }

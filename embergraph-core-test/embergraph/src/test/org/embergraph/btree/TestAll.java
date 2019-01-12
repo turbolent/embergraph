@@ -29,71 +29,59 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
+
+    // test low level variable length byte[] operations.
+    suite.addTestSuite(TestBytesUtil.class);
+    suite.addTestSuite(TestGetBitsFromByteArray.class);
+    suite.addTestSuite(TestGetBitsFromInt32.class);
+
+    // unsigned byte[] key encoding and decoding.
+    suite.addTest(org.embergraph.btree.keys.TestAll.suite());
+
+    // test rabas implementations, including key search and coded data.
+    suite.addTest(org.embergraph.btree.raba.TestAll.suite());
+
+    // test suite for the B+Tree node and leaf data records.
+    suite.addTest(org.embergraph.btree.data.TestAll.suite());
+
+    // core B+Tree API tests, including w/ and w/o persistence.
+    suite.addTest(TestAll_BTreeBasics.suite());
+
+    // pick up the index segment test suites.
+    suite.addTest(TestAll_IndexSegment.suite());
+
+    /*
+     * Test the Map and Set implementations.
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestEmbergraphMap.class);
+    suite.addTestSuite(TestEmbergraphSet.class);
 
-    /**
-     * @param arg0
+    /*
+     * Test fused views, including iterators for the fused view.
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    suite.addTest(org.embergraph.btree.view.TestAll.suite());
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
+    /*
+     * Test transactional isolation support, including iterators and
+     * iterator#remove() for the isolated index.
      */
-    public static Test suite()
-    {
+    suite.addTest(org.embergraph.btree.isolation.TestAll.suite());
 
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage()
-                .getName());
+    // test index procedures.
+    suite.addTest(org.embergraph.btree.proc.TestAll.suite());
 
-        // test low level variable length byte[] operations.
-        suite.addTestSuite(TestBytesUtil.class);
-        suite.addTestSuite(TestGetBitsFromByteArray.class);
-        suite.addTestSuite(TestGetBitsFromInt32.class);
-
-        // unsigned byte[] key encoding and decoding.
-        suite.addTest(org.embergraph.btree.keys.TestAll.suite());
-
-        // test rabas implementations, including key search and coded data.
-        suite.addTest(org.embergraph.btree.raba.TestAll.suite());
-        
-        // test suite for the B+Tree node and leaf data records.
-        suite.addTest(org.embergraph.btree.data.TestAll.suite());
-
-        // core B+Tree API tests, including w/ and w/o persistence.
-        suite.addTest(TestAll_BTreeBasics.suite());
-
-        // pick up the index segment test suites.
-        suite.addTest(TestAll_IndexSegment.suite());
-
-        /*
-         * Test the Map and Set implementations.
-         */
-        suite.addTestSuite(TestEmbergraphMap.class);
-        suite.addTestSuite(TestEmbergraphSet.class);
-
-        /*
-         * Test fused views, including iterators for the fused view.
-         */
-        suite.addTest(org.embergraph.btree.view.TestAll.suite());
-
-        /*
-         * Test transactional isolation support, including iterators and
-         * iterator#remove() for the isolated index.
-         */
-        suite.addTest(org.embergraph.btree.isolation.TestAll.suite());
-
-        // test index procedures.
-        suite.addTest(org.embergraph.btree.proc.TestAll.suite());
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

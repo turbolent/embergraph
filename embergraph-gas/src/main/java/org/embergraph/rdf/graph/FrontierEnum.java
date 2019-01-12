@@ -16,26 +16,19 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 /**
- * Type-safe enumeration characterizing the assumptions of an algorithm
- * concerning its initial frontier.
- * 
+ * Type-safe enumeration characterizing the assumptions of an algorithm concerning its initial
+ * frontier.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public enum FrontierEnum {
 
-    /**
-     * The initial frontier is a single vertex.
-     */
-    SingleVertex,
-    
-    /**
-     * The initial frontier is all vertices.
-     */
-    AllVertices,
+  /** The initial frontier is a single vertex. */
+  SingleVertex,
 
-    /**
-     * The initial frontier is an unweighted sample over all of the vertices
-     */
-    SampledVertices;
-    
+  /** The initial frontier is all vertices. */
+  AllVertices,
+
+  /** The initial frontier is an unweighted sample over all of the vertices */
+  SampledVertices;
 }

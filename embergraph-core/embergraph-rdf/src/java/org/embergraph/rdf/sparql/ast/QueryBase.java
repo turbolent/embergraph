@@ -19,14 +19,12 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.sparql.ast.QueryRoot.Annotations;
 
 /**
  * Contains the projection clause, where clause, and solution modified clauses.
- * 
+ *
  * @see IGroupNode
  * @see ProjectionNode
  * @see GroupByNode
@@ -34,530 +32,422 @@ import org.embergraph.rdf.sparql.ast.QueryRoot.Annotations;
  * @see OrderByNode
  * @see SliceNode
  */
-abstract public class QueryBase extends QueryNodeBase implements
-        IBindingProducerNode, IGraphPatternContainer, IProjectionDecl {
+public abstract class QueryBase extends QueryNodeBase
+    implements IBindingProducerNode, IGraphPatternContainer, IProjectionDecl {
+
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  public interface Annotations
+      extends QueryNodeBase.Annotations,
+          IGraphPatternContainer.Annotations,
+          IProjectionDecl.Annotations {
+
+    /** The {@link QueryType}. */
+    String QUERY_TYPE = "queryType";
+
+    /** The {@link ConstructNode} (optional). */
+    String CONSTRUCT = "construct";
+
+    //        /**
+    //         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
+    //         * queries to capture the list of variables and IRIs which are then used
+    //         * to rewrite the DESCRIBE query into what amounts to a CONSTRUCT query.
+    //         * The resulting CONSTRUCT query will have a different
+    //         * {@link ProjectionNode} suitable for use with the generated
+    //         * {@link ConstructNode}.
+    //         */
+    //        String PROJECTION = "projection";
+
+    /** The {@link GroupByNode} (optional). */
+    String GROUP_BY = "groupBy";
+
+    /** The {@link HavingNode} (optional). */
+    String HAVING = "having";
+
+    /** The {@link OrderByNode} (optional). */
+    String ORDER_BY = "orderBy";
+
+    /** The {@link SliceNode} (optional). */
+    String SLICE = "slice";
 
     /**
-     * 
+     * When <code>true</code> inferred statements will not be stripped from the access paths
+     * (default {@value #DEFAULT_INCLUDE_INFERRED}).
      */
-    private static final long serialVersionUID = 1L;
+    String INCLUDE_INFERRED = "includeInferred";
 
-    public interface Annotations extends QueryNodeBase.Annotations,
-            IGraphPatternContainer.Annotations, IProjectionDecl.Annotations {
+    boolean DEFAULT_INCLUDE_INFERRED = true;
 
-        /**
-         * The {@link QueryType}.
-         */
-        String QUERY_TYPE = "queryType";
+    /** The {@link Long} value giving the time limit for the query (milliseconds). */
+    String TIMEOUT = "timeout";
 
-        /**
-         * The {@link ConstructNode} (optional).
-         */
-        String CONSTRUCT = "construct";
+    long DEFAULT_TIMEOUT = Long.MAX_VALUE;
 
-//        /**
-//         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
-//         * queries to capture the list of variables and IRIs which are then used
-//         * to rewrite the DESCRIBE query into what amounts to a CONSTRUCT query.
-//         * The resulting CONSTRUCT query will have a different
-//         * {@link ProjectionNode} suitable for use with the generated
-//         * {@link ConstructNode}.
-//         */
-//        String PROJECTION = "projection";
+    /** The BINDINGS clause (optional). */
+    String BINDINGS_CLAUSE = "bindingsClause";
+  }
 
-        /**
-         * The {@link GroupByNode} (optional).
-         */
-        String GROUP_BY = "groupBy";
+  /** Constructor is hidden to force people to declare the {@link QueryType}. */
+  @SuppressWarnings("unused")
+  private QueryBase() {}
 
-        /**
-         * The {@link HavingNode} (optional).
-         */
-        String HAVING = "having";
+  /** Deep copy constructor. */
+  public QueryBase(final QueryBase queryBase) {
 
-        /**
-         * The {@link OrderByNode} (optional).
-         */
-        String ORDER_BY = "orderBy";
+    super(queryBase);
+  }
 
-        /**
-         * The {@link SliceNode} (optional).
-         */
-        String SLICE = "slice";
-        
-        /**
-         * When <code>true</code> inferred statements will not be stripped from
-         * the access paths (default {@value #DEFAULT_INCLUDE_INFERRED}).
-         */
-        String INCLUDE_INFERRED = "includeInferred";
-        
-        boolean DEFAULT_INCLUDE_INFERRED = true;
+  /** Shallow copy constructor. */
+  public QueryBase(final BOp[] args, final Map<String, Object> anns) {
 
-        /**
-         * The {@link Long} value giving the time limit for the query
-         * (milliseconds).
-         */
-        String TIMEOUT = "timeout";
+    super(args, anns);
+  }
 
-        long DEFAULT_TIMEOUT = Long.MAX_VALUE;
+  public QueryBase(final QueryType queryType) {
 
-        /**
-         * The BINDINGS clause (optional).
-         */
-        String BINDINGS_CLAUSE = "bindingsClause";
-        
+    setQueryType(queryType);
+  }
+
+  /**
+   * Return the type of query. This provides access to information which may otherwise be difficult
+   * to determine by inspecting the generated AST or query plan.
+   */
+  public QueryType getQueryType() {
+
+    return (QueryType) getProperty(Annotations.QUERY_TYPE);
+  }
+
+  /** Set the type of query. */
+  public void setQueryType(final QueryType queryType) {
+
+    setProperty(Annotations.QUERY_TYPE, queryType);
+  }
+
+  /** Return the construction -or- <code>null</code> if there is no construction. */
+  public ConstructNode getConstruct() {
+
+    return (ConstructNode) getProperty(Annotations.CONSTRUCT);
+  }
+
+  /**
+   * Set or clear the construction.
+   *
+   * @param construction The construction (may be <code>null</code>).
+   */
+  public void setConstruct(final ConstructNode construct) {
+
+    setProperty(Annotations.CONSTRUCT, construct);
+
+    if (construct != null) {
+
+      setQueryType(QueryType.CONSTRUCT);
+    }
+  }
+
+  @Override
+  public void setProjection(final ProjectionNode projection) {
+
+    setProperty(Annotations.PROJECTION, projection);
+  }
+
+  @Override
+  public ProjectionNode getProjection() {
+
+    return (ProjectionNode) getProperty(Annotations.PROJECTION);
+  }
+
+  @Override
+  public Set<IVariable<?>> getProjectedVars(final Set<IVariable<?>> vars) {
+
+    final ProjectionNode tmp = getProjection();
+
+    if (tmp != null) {
+
+      tmp.getProjectionVars(vars);
     }
 
-    /**
-     * Constructor is hidden to force people to declare the {@link QueryType}.
+    return vars;
+  }
+
+  /**
+   * Return the set of variables on which the {@link ProjectionNode} for this query depends (this is
+   * a NOP if there is no {@link ProjectionNode} for the query, which can happen for an ASK query).
+   * This DOES NOT report the variables which are projected OUT of the query, just those used by the
+   * SELECT expressions.
+   *
+   * @param vars The variables used by the select expressions are added to this set.
+   * @return The caller's set.
+   */
+  public Set<IVariable<?>> getSelectExprVars(final Set<IVariable<?>> vars) {
+
+    final ProjectionNode tmp = getProjection();
+
+    if (tmp != null) {
+
+      tmp.getSelectExprVars(vars);
+    }
+
+    return vars;
+  }
+
+  /**
+   * Return the {@link GraphPatternGroup} for the WHERE clause.
+   *
+   * @return The WHERE clause -or- <code>null</code>.
+   */
+  @SuppressWarnings({"rawtypes"})
+  public GraphPatternGroup getWhereClause() {
+
+    // Note: Synonym for getGraphPattern.
+    return getGraphPattern();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public GraphPatternGroup<IGroupMemberNode> getGraphPattern() {
+
+    return (GraphPatternGroup<IGroupMemberNode>) getProperty(Annotations.GRAPH_PATTERN);
+  }
+
+  @Override
+  public void setGraphPattern(final GraphPatternGroup<IGroupMemberNode> graphPattern) {
+
+    /*
+     * Clear the parent reference on the new where clause.
+     *
+     * Note: This handles cases where a join group is lifted into a named
+     * subquery. If we do not clear the parent reference on the lifted join
+     * group it will still point back to its parent in the original join
+     * group.
      */
-    @SuppressWarnings("unused")
-    private QueryBase() {
-        
-    }
+    graphPattern.setParent(null);
 
-    /**
-     * Deep copy constructor.
-     */
-    public QueryBase(final QueryBase queryBase) {
-    
-        super(queryBase);
-        
-    }
-    
-    /**
-     * Shallow copy constructor.
-     */
-    public QueryBase(final BOp[] args, final Map<String, Object> anns) {
+    super.setProperty(Annotations.GRAPH_PATTERN, graphPattern);
+  }
 
-        super(args, anns);
-        
-    }
+  /**
+   * Set the {@link GraphPatternGroup} for the WHERE clause.
+   *
+   * @param whereClause The "WHERE" clause.
+   */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void setWhereClause(final GraphPatternGroup whereClause) {
 
-    public QueryBase(final QueryType queryType) {
-	    
-        setQueryType(queryType);
-	    
-	}
+    // Note: synonym for setGraphPattern.
+    setGraphPattern(whereClause);
+  }
 
-    /**
-     * Return the type of query. This provides access to information which may
-     * otherwise be difficult to determine by inspecting the generated AST or
-     * query plan.
-     */
-	public QueryType getQueryType() {
-	    
-        return (QueryType) getProperty(Annotations.QUERY_TYPE);
+  /** Return true if this query has a WHERE clause, false if not. */
+  public boolean hasWhereClause() {
 
-	}
+    return getProperty(Annotations.GRAPH_PATTERN) != null;
+  }
 
-    /**
-     * Set the type of query.
-     */
-	public void setQueryType(final QueryType queryType) {
-	    
-        setProperty(Annotations.QUERY_TYPE, queryType);
-	    
-	}
-	
-    /**
-     * Return the construction -or- <code>null</code> if there is no construction.
-     */
-    public ConstructNode getConstruct() {
+  /** Return the {@link GroupByNode} -or- <code>null</code> if there is none. */
+  public GroupByNode getGroupBy() {
 
-        return (ConstructNode) getProperty(Annotations.CONSTRUCT);
-        
-    }
-    
-    /**
-     * Set or clear the construction.
-     * 
-     * @param construction
-     *            The construction (may be <code>null</code>).
-     */
-    public void setConstruct(final ConstructNode construct) {
+    return (GroupByNode) getProperty(Annotations.GROUP_BY);
+  }
 
-        setProperty(Annotations.CONSTRUCT, construct);
-        
-        if (construct != null) {
-        	
-		   setQueryType(QueryType.CONSTRUCT);
-		   
-        }
-        
-    }
-    
-    @Override
-    public void setProjection(final ProjectionNode projection) {
+  /**
+   * Set or clear the {@link GroupByNode}.
+   *
+   * @param groupBy The new value (may be <code>null</code>).
+   */
+  public void setGroupBy(final GroupByNode groupBy) {
 
-        setProperty(Annotations.PROJECTION, projection);
+    setProperty(Annotations.GROUP_BY, groupBy);
+  }
 
-    }
+  /** Return the {@link HavingNode} -or- <code>null</code> if there is none. */
+  public HavingNode getHaving() {
 
-    @Override
-    public ProjectionNode getProjection() {
+    return (HavingNode) getProperty(Annotations.HAVING);
+  }
 
-        return (ProjectionNode) getProperty(Annotations.PROJECTION);
+  /**
+   * Set or clear the {@link HavingNode}.
+   *
+   * @param having The new value (may be <code>null</code>).
+   */
+  public void setHaving(final HavingNode having) {
 
-    }
-    
-    @Override
-    public Set<IVariable<?>> getProjectedVars(final Set<IVariable<?>> vars) {
-        
-        final ProjectionNode tmp = getProjection();
-        
-        if(tmp != null) {
-            
-            tmp.getProjectionVars(vars);
-            
-        }
-        
-        return vars;
-        
-    }
+    setProperty(Annotations.HAVING, having);
+  }
 
-    /**
-     * Return the set of variables on which the {@link ProjectionNode} for this
-     * query depends (this is a NOP if there is no {@link ProjectionNode} for
-     * the query, which can happen for an ASK query). This DOES NOT report the
-     * variables which are projected OUT of the query, just those used by the
-     * SELECT expressions.
-     * 
-     * @param vars
-     *            The variables used by the select expressions are added to this
-     *            set.
-     * 
-     * @return The caller's set.
-     */
-    public Set<IVariable<?>> getSelectExprVars(final Set<IVariable<?>> vars) {
-        
-        final ProjectionNode tmp = getProjection();
-        
-        if(tmp != null) {
-            
-            tmp.getSelectExprVars(vars);
-            
-        }
-        
-        return vars;
-        
-    }
+  /** Return the slice -or- <code>null</code> if there is no slice. */
+  public SliceNode getSlice() {
 
-    /**
-     * Return the {@link GraphPatternGroup} for the WHERE clause.
-     * 
-     * @return The WHERE clause -or- <code>null</code>.
-     */
-    @SuppressWarnings({ "rawtypes" })
-    public GraphPatternGroup getWhereClause() {
+    return (SliceNode) getProperty(Annotations.SLICE);
+  }
 
-        // Note: Synonym for getGraphPattern.
-        return getGraphPattern();
+  /**
+   * Set or clear the slice.
+   *
+   * @param slice The slice (may be <code>null</code>).
+   */
+  public void setSlice(final SliceNode slice) {
 
-    }
+    setProperty(Annotations.SLICE, slice);
+  }
 
-    @Override
+  /**
+   * Return <code>true</code> iff there is a {@link SliceNode} and either the LIMIT and/or OFFSET
+   * has been specified with a non-default value.
+   */
+  public boolean hasSlice() {
+
+    final SliceNode slice = getSlice();
+
+    if (slice == null) return false;
+
+    if (slice.getLimit() != SliceNode.Annotations.DEFAULT_LIMIT) return true;
+
+    if (slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET) return true;
+
+    // The SLICE does not specify either LIMIT or OFFSET.
+    return false;
+  }
+
+  /** Return the order by clause -or- <code>null</code> if there is no order by. */
+  public OrderByNode getOrderBy() {
+
+    return (OrderByNode) getProperty(Annotations.ORDER_BY);
+  }
+
+  /**
+   * Set or clear the {@link OrderByNode}.
+   *
+   * @param orderBy The order by (may be <code>null</code>).
+   */
+  public void setOrderBy(final OrderByNode orderBy) {
+
+    setProperty(Annotations.ORDER_BY, orderBy);
+  }
+
+  /** @see Annotations#INCLUDE_INFERRED */
+  public boolean getIncludeInferred() {
+    return getProperty(Annotations.INCLUDE_INFERRED, Annotations.DEFAULT_INCLUDE_INFERRED);
+  }
+
+  /** @see Annotations#INCLUDE_INFERRED */
+  public void setIncludeInferred(boolean includeInferred) {
+    setProperty(Annotations.INCLUDE_INFERRED, includeInferred);
+  }
+
+  /** @see Annotations#TIMEOUT */
+  public long getTimeout() {
+    return getProperty(Annotations.TIMEOUT, Annotations.DEFAULT_TIMEOUT);
+  }
+
+  /**
+   * Set the timeout (milliseconds) for the query.
+   *
+   * @see Annotations#TIMEOUT
+   */
+  public void setTimeout(long timeout) {
+    setProperty(Annotations.TIMEOUT, timeout);
+  }
+
+  /**
+   * Set the BINDINGS.
+   *
+   * @param bindings
+   */
+  public void setBindingsClause(final BindingsClause bindings) {
+
+    setProperty(Annotations.BINDINGS_CLAUSE, bindings);
+  }
+
+  /** Return the BINDINGS. */
+  public BindingsClause getBindingsClause() {
+
+    return (BindingsClause) getProperty(Annotations.BINDINGS_CLAUSE);
+  }
+
+  @Override
+  public String toString(final int indent) {
+
+    final String s = indent(indent);
+
+    final StringBuilder sb = new StringBuilder();
+
+    final ConstructNode construct = getConstruct();
+    final ProjectionNode projection = getProjection();
     @SuppressWarnings("unchecked")
-    public GraphPatternGroup<IGroupMemberNode> getGraphPattern() {
-     
-        return (GraphPatternGroup<IGroupMemberNode>) getProperty(Annotations.GRAPH_PATTERN);
-        
+    final IGroupNode<IGroupMemberNode> whereClause = getWhereClause();
+    final GroupByNode groupBy = getGroupBy();
+    final HavingNode having = getHaving();
+    final OrderByNode orderBy = getOrderBy();
+    final SliceNode slice = getSlice();
+    final BindingsClause bindings = getBindingsClause();
+
+    if (getQueryType() != null) {
+
+      sb.append("\n").append(s).append("QueryType: ").append(getQueryType().toString());
     }
 
-    @Override
-    public void setGraphPattern(
-            final GraphPatternGroup<IGroupMemberNode> graphPattern) {
-
-        /*
-         * Clear the parent reference on the new where clause.
-         * 
-         * Note: This handles cases where a join group is lifted into a named
-         * subquery. If we do not clear the parent reference on the lifted join
-         * group it will still point back to its parent in the original join
-         * group.
-         */
-        graphPattern.setParent(null);
-        
-        super.setProperty(Annotations.GRAPH_PATTERN, graphPattern);
-
+    if (getProperty(Annotations.INCLUDE_INFERRED) != null) {
+      sb.append("\n");
+      sb.append(s);
+      sb.append("includeInferred=" + getIncludeInferred());
     }
 
-    /**
-     * Set the {@link GraphPatternGroup} for the WHERE clause.
-     * 
-     * @param whereClause
-     *            The "WHERE" clause.
-     */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void setWhereClause(final GraphPatternGroup whereClause) {
-
-        // Note: synonym for setGraphPattern.
-        setGraphPattern(whereClause);
-
-    }
-    
-    /**
-     * Return true if this query has a WHERE clause, false if not.
-     */
-    public boolean hasWhereClause() {
-    	
-    	return getProperty(Annotations.GRAPH_PATTERN) != null;
-    	
-    }
-    
-    /**
-     * Return the {@link GroupByNode} -or- <code>null</code> if there is none.
-     */
-    public GroupByNode getGroupBy() {
-        
-        return (GroupByNode) getProperty(Annotations.GROUP_BY);
-        
+    if (getProperty(Annotations.TIMEOUT) != null) {
+      sb.append("\n");
+      sb.append(s);
+      sb.append("timeout=" + getTimeout());
     }
 
-    /**
-     * Set or clear the {@link GroupByNode}.
-     * 
-     * @param groupBy
-     *            The new value (may be <code>null</code>).
-     */
-    public void setGroupBy(final GroupByNode groupBy) {
+    if (construct != null && !construct.isEmpty()) {
 
-        setProperty(Annotations.GROUP_BY, groupBy);
-        
-    }
-    
-    /**
-     * Return the {@link HavingNode} -or- <code>null</code> if there is none.
-     */
-    public HavingNode getHaving() {
-        
-        return (HavingNode) getProperty(Annotations.HAVING);
-        
+      sb.append(construct.toString(indent));
     }
 
-    /**
-     * Set or clear the {@link HavingNode}.
-     * 
-     * @param having
-     *            The new value (may be <code>null</code>).
-     */
-    public void setHaving(final HavingNode having) {
+    if (projection != null && !projection.isEmpty()) {
 
-        setProperty(Annotations.HAVING, having);
-        
+      sb.append(projection.toString(indent));
     }
 
-	/**
-	 * Return the slice -or- <code>null</code> if there is no slice.
-	 */
-	public SliceNode getSlice() {
-        
-        return (SliceNode) getProperty(Annotations.SLICE);
-	    
+    if (whereClause != null) {
+
+      sb.append(whereClause.toString(indent + 1));
     }
 
-    /**
-     * Set or clear the slice.
-     * 
-     * @param slice
-     *            The slice (may be <code>null</code>).
-     */
-    public void setSlice(final SliceNode slice) {
+    if (groupBy != null && !groupBy.isEmpty()) {
 
-        setProperty(Annotations.SLICE, slice);
-        
+      sb.append(groupBy.toString(indent));
     }
 
+    if (having != null && !having.isEmpty()) {
 
-    /**
-     * Return <code>true</code> iff there is a {@link SliceNode} and either the
-     * LIMIT and/or OFFSET has been specified with a non-default value.
-     */
-    public boolean hasSlice() {
-
-        final SliceNode slice = getSlice();
-
-        if (slice == null)
-            return false;
-
-        if (slice.getLimit() != SliceNode.Annotations.DEFAULT_LIMIT)
-            return true;
-
-        if (slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET)
-            return true;
-
-        // The SLICE does not specify either LIMIT or OFFSET.
-        return false;
-
+      sb.append(having.toString(indent));
     }
 
-    /**
-     * Return the order by clause -or- <code>null</code> if there is no order
-     * by.
-     */
-    public OrderByNode getOrderBy() {
-     
-        return (OrderByNode) getProperty(Annotations.ORDER_BY);
+    if (orderBy != null && !orderBy.isEmpty()) {
 
+      sb.append(orderBy.toString(indent));
     }
 
-    /**
-     * Set or clear the {@link OrderByNode}.
-     * 
-     * @param orderBy
-     *            The order by (may be <code>null</code>).
-     */
-    public void setOrderBy(final OrderByNode orderBy) {
-    
-        setProperty(Annotations.ORDER_BY, orderBy);
-        
+    if (slice != null) {
+
+      sb.append(slice.toString(indent));
     }
 
-    /**
-     * @see Annotations#INCLUDE_INFERRED
-     */
-    public boolean getIncludeInferred() {
-        return getProperty(Annotations.INCLUDE_INFERRED,
-                Annotations.DEFAULT_INCLUDE_INFERRED);
+    if (getQueryHints() != null && !getQueryHints().isEmpty()) {
+      sb.append("\n");
+      sb.append(indent(indent));
+      sb.append(Annotations.QUERY_HINTS);
+      sb.append("=");
+      sb.append(getQueryHints().toString());
     }
 
-    /**
-     * @see Annotations#INCLUDE_INFERRED
-     */
-    public void setIncludeInferred(boolean includeInferred) {
-        setProperty(Annotations.INCLUDE_INFERRED, includeInferred);
+    if (bindings != null) {
+
+      sb.append(bindings.toString(indent + 1));
     }
 
-    /**
-     * @see Annotations#TIMEOUT
-     */
-    public long getTimeout() {
-        return getProperty(Annotations.TIMEOUT, Annotations.DEFAULT_TIMEOUT);
-    }
-
-    /**
-     * Set the timeout (milliseconds) for the query.
-     * 
-     * @see Annotations#TIMEOUT
-     */
-    public void setTimeout(long timeout) {
-        setProperty(Annotations.TIMEOUT, timeout);
-    }
-
-    /**
-     * Set the BINDINGS.
-     * 
-     * @param bindings
-     */
-    public void setBindingsClause(final BindingsClause bindings) {
-
-        setProperty(Annotations.BINDINGS_CLAUSE, bindings);
-
-    }
-
-    /**
-     * Return the BINDINGS.
-     */
-    public BindingsClause getBindingsClause() {
-
-        return (BindingsClause) getProperty(Annotations.BINDINGS_CLAUSE);
-
-    }
-    
-    @Override
-	public String toString(final int indent) {
-		
-	    final String s = indent(indent);
-	    
-		final StringBuilder sb = new StringBuilder();
-
-        final ConstructNode construct = getConstruct();
-        final ProjectionNode projection = getProjection();
-        @SuppressWarnings("unchecked")
-        final IGroupNode<IGroupMemberNode> whereClause = getWhereClause();
-        final GroupByNode groupBy = getGroupBy();
-        final HavingNode having = getHaving();
-        final OrderByNode orderBy = getOrderBy();
-        final SliceNode slice = getSlice();
-        final BindingsClause bindings = getBindingsClause();
-
-        if (getQueryType() != null) {
-
-            sb.append("\n").append(s).append("QueryType: ")
-                    .append(getQueryType().toString());
-
-        }
-
-        if (getProperty(Annotations.INCLUDE_INFERRED) != null) {
-            sb.append("\n");
-            sb.append(s);
-            sb.append("includeInferred=" + getIncludeInferred());
-        }
-
-        if (getProperty(Annotations.TIMEOUT) != null) {
-            sb.append("\n");
-            sb.append(s);
-            sb.append("timeout=" + getTimeout());
-        }
-
-        if (construct != null && !construct.isEmpty()) {
-
-            sb.append(construct.toString(indent));
-            
-        }
-
-        if (projection != null && !projection.isEmpty()) {
-
-		    sb.append(projection.toString(indent));
-		    
-		}
-
-        if (whereClause != null) {
-
-            sb.append(whereClause.toString(indent + 1));
-
-        }
-
-        if (groupBy != null && !groupBy.isEmpty()) {
-
-            sb.append(groupBy.toString(indent));
-
-        }
-
-        if (having != null && !having.isEmpty()) {
-
-            sb.append(having.toString(indent));
-
-        }
-
-        if (orderBy != null && !orderBy.isEmpty()) {
-
-            sb.append(orderBy.toString(indent));
-
-        }
-
-        if (slice != null) {
-
-            sb.append(slice.toString(indent));
-
-        }
-
-        if (getQueryHints() != null && !getQueryHints().isEmpty()) {
-            sb.append("\n");
-            sb.append(indent(indent));
-            sb.append(Annotations.QUERY_HINTS);
-            sb.append("=");
-            sb.append(getQueryHints().toString());
-        }
-        
-        if (bindings != null) {
-
-            sb.append(bindings.toString(indent + 1));
-
-        }
-
-        return sb.toString();
-
-    }
-
+    return sb.toString();
+  }
 }

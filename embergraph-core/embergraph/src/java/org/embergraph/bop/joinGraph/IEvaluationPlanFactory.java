@@ -24,28 +24,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.joinGraph;
 
 import java.io.Serializable;
-
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
  * A factory for evaluation plans.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IEvaluationPlanFactory extends Serializable {
 
-    /**
-     * Return a plan for the rule.
-     * 
-     * @param joinNexus
-     *            The join nexus.
-     * @param rule
-     *            The rule.
-     *            
-     * @return The evaluation plan.
-     */
-    public IEvaluationPlan newPlan(IJoinNexus joinNexus, IRule rule);
-    
+  /**
+   * Return a plan for the rule.
+   *
+   * @param joinNexus The join nexus.
+   * @param rule The rule.
+   * @return The evaluation plan.
+   */
+  public IEvaluationPlan newPlan(IJoinNexus joinNexus, IRule rule);
 }

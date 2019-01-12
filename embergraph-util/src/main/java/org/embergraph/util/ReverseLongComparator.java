@@ -28,35 +28,30 @@ import java.util.Comparator;
 
 /**
  * Places {@link Long} values into descending order.
- *  
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ReverseLongComparator implements Comparator<Long>, Serializable {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -234224494051463945L;
 
-    public int compare(final Long o1, final Long o2) {
+  /** */
+  private static final long serialVersionUID = -234224494051463945L;
 
-        final long l1 = o1.longValue();
+  public int compare(final Long o1, final Long o2) {
 
-        final long l2 = o2.longValue();
+    final long l1 = o1.longValue();
 
-        if (l1 < l2) {
+    final long l2 = o2.longValue();
 
-            return 1;
+    if (l1 < l2) {
 
-        } else if (l1 > l2) {
-            
-            return -1;
-            
-        }
-        
-        return 0;
-        
+      return 1;
+
+    } else if (l1 > l2) {
+
+      return -1;
     }
 
+    return 0;
+  }
 }

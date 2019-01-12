@@ -20,148 +20,134 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.explainhints;
 
+import cutthecrap.utils.striterators.Expander;
+import cutthecrap.utils.striterators.Filter;
+import cutthecrap.utils.striterators.SingleValueIterator;
+import cutthecrap.utils.striterators.Striterator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTBase.Annotations;
 
-import cutthecrap.utils.striterators.Expander;
-import cutthecrap.utils.striterators.Filter;
-import cutthecrap.utils.striterators.SingleValueIterator;
-import cutthecrap.utils.striterators.Striterator;
-
 /**
- * A list of {@link IExplainHint}s, to be attached as an annotation to an
- * {@link ASTBase} node. See {@link IExplainHint} interface for description
- * of explain hints. This class is merely a wrapper allowing to add a set
- * of explain hints to a single node.
- * 
+ * A list of {@link IExplainHint}s, to be attached as an annotation to an {@link ASTBase} node. See
+ * {@link IExplainHint} interface for description of explain hints. This class is merely a wrapper
+ * allowing to add a set of explain hints to a single node.
+ *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class ExplainHints implements Iterable<IExplainHint> {
 
-   private final Set<IExplainHint> explainHints;
-   
-   /**
-    * Constructor, setting up an explain hints object containing
-    * a single {@link IExplainHint}.
-    */
-   public ExplainHints(final IExplainHint explainHint) {
-      explainHints = new HashSet<IExplainHint>();
-      explainHints.add(explainHint);
-   }
+  private final Set<IExplainHint> explainHints;
 
-   /**
-    * Add an explain hint to the set of hints.
-    */
-   public void addExplainHint(final IExplainHint explainHint) {
-      explainHints.add(explainHint);
-   }
-   
+  /** Constructor, setting up an explain hints object containing a single {@link IExplainHint}. */
+  public ExplainHints(final IExplainHint explainHint) {
+    explainHints = new HashSet<IExplainHint>();
+    explainHints.add(explainHint);
+  }
 
-   /**
-    * Utility function to remove explain hint annotations from a BOp. For
-    * use in test case to ease comparison. Be careful, since this modifies
-    * the argument.
-    * 
-    * @param astBase
-    */
-   public static void removeExplainHintAnnotationsFromBOp(final BOp bop) {
+  /** Add an explain hint to the set of hints. */
+  public void addExplainHint(final IExplainHint explainHint) {
+    explainHints.add(explainHint);
+  }
 
-      final Iterator<BOp> explainHintAnnotatedBOps = 
-         ExplainHints.explainHintAnnotatedBOpIterator(bop);
-      
-      // collect explain hint nodesWithExplainHints nodes
-      final List<BOp> nodesWithExplainHints = new ArrayList<BOp>();
-      while (explainHintAnnotatedBOps.hasNext()) {
-         nodesWithExplainHints.add(explainHintAnnotatedBOps.next());
-      }
-      
-      for (final BOp nodeWithExplainHint : nodesWithExplainHints) {
-         nodeWithExplainHint.setProperty(Annotations.EXPLAIN_HINTS, null);
-      }
-   }
+  /**
+   * Utility function to remove explain hint annotations from a BOp. For use in test case to ease
+   * comparison. Be careful, since this modifies the argument.
+   *
+   * @param astBase
+   */
+  public static void removeExplainHintAnnotationsFromBOp(final BOp bop) {
 
-   /**
-    * Returns all {@link BOp}s that are annotated with {@link ExplainHints}.
-    * 
-    * @param op An operator.
-    * 
-    * @return The respective iterator.
-    */
-   @SuppressWarnings({ "unchecked" })
-   public static Iterator<BOp> explainHintAnnotatedBOpIterator(final BOp astBase) {
-      
-      return new Striterator(
-         
-         BOpUtility.preOrderIterator(astBase)).addFilter(new Expander() {
+    final Iterator<BOp> explainHintAnnotatedBOps =
+        ExplainHints.explainHintAnnotatedBOpIterator(bop);
 
-            private static final long serialVersionUID = 1L;
-   
-            @SuppressWarnings("rawtypes")
-            @Override
-            protected Iterator expand(final Object arg0) {
-   
-               final BOp op = (BOp)arg0;
-   
-               // visit the node.
-               final Striterator itr = 
-                  new Striterator(new SingleValueIterator(op));
-   
-               // visit the node's operator annotations.
-               final Striterator itr2 = new Striterator(
-                  BOpUtility.annotationOpIterator(op));
-   
-               // expand each operator annotation with a pre-order traversal.
-               itr2.addFilter(new Expander() {
-                  private static final long serialVersionUID = 1L;
-   
-                  @Override
-                  protected Iterator expand(final Object ann) {
-                     return explainHintAnnotatedBOpIterator((BOp) ann);
-                  }
-                    
-               });
-                
-               // append the pre-order traversal of each annotation.
-               itr.append(itr2);
-   
-               return itr;
-            }
-            
-         }).addFilter(new Filter() {
-         
-            private static final long serialVersionUID = -6488014508516304898L;
+    // collect explain hint nodesWithExplainHints nodes
+    final List<BOp> nodesWithExplainHints = new ArrayList<BOp>();
+    while (explainHintAnnotatedBOps.hasNext()) {
+      nodesWithExplainHints.add(explainHintAnnotatedBOps.next());
+    }
 
-            @Override
-            public boolean isValid(Object obj) {
-               
-               if (obj instanceof BOp) {
-                  final BOp bop = (BOp)obj;
-                  return bop.getProperty(Annotations.EXPLAIN_HINTS)!=null;
-               }
-               
-               return false;
-            }
-         
-      });
-   }
+    for (final BOp nodeWithExplainHint : nodesWithExplainHints) {
+      nodeWithExplainHint.setProperty(Annotations.EXPLAIN_HINTS, null);
+    }
+  }
 
-   @Override
-   public String toString() {
-      return explainHints.toString();
-   }
-   
-   @Override
-   public Iterator<IExplainHint> iterator() {
-      return explainHints.iterator();
-   }
-   
+  /**
+   * Returns all {@link BOp}s that are annotated with {@link ExplainHints}.
+   *
+   * @param op An operator.
+   * @return The respective iterator.
+   */
+  @SuppressWarnings({"unchecked"})
+  public static Iterator<BOp> explainHintAnnotatedBOpIterator(final BOp astBase) {
+
+    return new Striterator(BOpUtility.preOrderIterator(astBase))
+        .addFilter(
+            new Expander() {
+
+              private static final long serialVersionUID = 1L;
+
+              @SuppressWarnings("rawtypes")
+              @Override
+              protected Iterator expand(final Object arg0) {
+
+                final BOp op = (BOp) arg0;
+
+                // visit the node.
+                final Striterator itr = new Striterator(new SingleValueIterator(op));
+
+                // visit the node's operator annotations.
+                final Striterator itr2 = new Striterator(BOpUtility.annotationOpIterator(op));
+
+                // expand each operator annotation with a pre-order traversal.
+                itr2.addFilter(
+                    new Expander() {
+                      private static final long serialVersionUID = 1L;
+
+                      @Override
+                      protected Iterator expand(final Object ann) {
+                        return explainHintAnnotatedBOpIterator((BOp) ann);
+                      }
+                    });
+
+                // append the pre-order traversal of each annotation.
+                itr.append(itr2);
+
+                return itr;
+              }
+            })
+        .addFilter(
+            new Filter() {
+
+              private static final long serialVersionUID = -6488014508516304898L;
+
+              @Override
+              public boolean isValid(Object obj) {
+
+                if (obj instanceof BOp) {
+                  final BOp bop = (BOp) obj;
+                  return bop.getProperty(Annotations.EXPLAIN_HINTS) != null;
+                }
+
+                return false;
+              }
+            });
+  }
+
+  @Override
+  public String toString() {
+    return explainHints.toString();
+  }
+
+  @Override
+  public Iterator<IExplainHint> iterator() {
+    return explainHints.iterator();
+  }
 }

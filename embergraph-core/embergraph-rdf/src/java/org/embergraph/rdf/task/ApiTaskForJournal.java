@@ -26,57 +26,53 @@ import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.Journal;
 
 /**
- * Wrapper for a task to be executed on the {@link IConcurrencyManager} of a
- * {@link Journal}.
- * 
+ * Wrapper for a task to be executed on the {@link IConcurrencyManager} of a {@link Journal}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>
- * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/753" > HA
- *      doLocalAbort() should interrupt NSS requests and AbstractTasks </a>
- * @see <a href="- http://sourceforge.net/apps/trac/bigdata/ticket/566" >
- *      Concurrent unisolated operations against multiple KBs </a>
+ * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/753" > HA doLocalAbort() should
+ *     interrupt NSS requests and AbstractTasks </a>
+ * @see <a href="- http://sourceforge.net/apps/trac/bigdata/ticket/566" > Concurrent unisolated
+ *     operations against multiple KBs </a>
  */
 public class ApiTaskForJournal<T> extends AbstractTask<T> {
 
-   private final IApiTask<T> delegate;
+  private final IApiTask<T> delegate;
 
-   @Override
-   public String toString() {
+  @Override
+  public String toString() {
 
-      return super.toString() + "::{delegate=" + delegate + "}";
+    return super.toString() + "::{delegate=" + delegate + "}";
+  }
 
-   }
+  public ApiTaskForJournal(
+      final IConcurrencyManager concurrencyManager,
+      final long timestamp,
+      final String[] resource,
+      final IApiTask<T> delegate) {
 
-   public ApiTaskForJournal(final IConcurrencyManager concurrencyManager,
-         final long timestamp, final String[] resource,
-         final IApiTask<T> delegate) {
+    super(concurrencyManager, timestamp, resource);
 
-      super(concurrencyManager, timestamp, resource);
+    this.delegate = delegate;
+  }
 
-      this.delegate = delegate;
+  @Override
+  protected T doTask() throws Exception {
 
-   }
+    // Set reference to Journal on the delegate.
+    delegate.setIndexManager(getJournal());
 
-   @Override
-   protected T doTask() throws Exception {
+    try {
 
-      // Set reference to Journal on the delegate.
-      delegate.setIndexManager(getJournal());
+      // Run the delegate task.
+      final T ret = delegate.call();
 
-      try {
+      return ret;
 
-         // Run the delegate task.
-         final T ret = delegate.call();
+    } finally {
 
-         return ret;
-
-      } finally {
-
-         // Clear reference to the Journal from the delegate.
-         delegate.setIndexManager(null);
-
-      }
-
-   }
-
+      // Clear reference to the Journal from the delegate.
+      delegate.setIndexManager(null);
+    }
+  }
 }

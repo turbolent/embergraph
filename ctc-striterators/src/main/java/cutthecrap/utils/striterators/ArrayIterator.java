@@ -19,54 +19,47 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Supports standard iteration over an object Array, allowing this to be used as
- * a source for a <code>Striterator</code>.
+ * Supports standard iteration over an object Array, allowing this to be used as a source for a
+ * <code>Striterator</code>.
  */
 public class ArrayIterator<T> implements Iterator<T> {
 
-    /** Source array. */
-    private final T[] m_src;
-    
-    /** Current index (next to be visited). */
-	private int m_index;
-	
-	/** Exclusive upper bound. */
-	private final int m_last;
+  /** Source array. */
+  private final T[] m_src;
 
-    /** Constructor takes source object array **/
-    public ArrayIterator(final T[] src) {
-        this(src, 0, src.length);
-    }
+  /** Current index (next to be visited). */
+  private int m_index;
 
-    /** Constructor takes source object array **/
-    public ArrayIterator(final T[] src, final int off, final int len) {
-        if (src == null)
-            throw new NullPointerException();
-        if (off < 0)
-            throw new IllegalArgumentException();
-        if (len < 0)
-            throw new IllegalArgumentException();
-        if (off + len > src.length)
-            throw new IllegalArgumentException();
-        m_src = src;
-        m_index = off;
-        m_last = off + len;
-    }
+  /** Exclusive upper bound. */
+  private final int m_last;
 
-	/** checks with current index and array size **/
-	public boolean hasNext() {
-		return m_last > m_index;
-	}
+  /** Constructor takes source object array * */
+  public ArrayIterator(final T[] src) {
+    this(src, 0, src.length);
+  }
 
-    /** @return current index from array **/
-    public T next() {
-        if (m_index < m_last)
-            return m_src[m_index++];
-        else
-            throw new NoSuchElementException();
-    }
+  /** Constructor takes source object array * */
+  public ArrayIterator(final T[] src, final int off, final int len) {
+    if (src == null) throw new NullPointerException();
+    if (off < 0) throw new IllegalArgumentException();
+    if (len < 0) throw new IllegalArgumentException();
+    if (off + len > src.length) throw new IllegalArgumentException();
+    m_src = src;
+    m_index = off;
+    m_last = off + len;
+  }
 
-    /** void .. does nothing **/
-    public void remove() {
-    }
+  /** checks with current index and array size * */
+  public boolean hasNext() {
+    return m_last > m_index;
+  }
+
+  /** @return current index from array * */
+  public T next() {
+    if (m_index < m_last) return m_src[m_index++];
+    else throw new NoSuchElementException();
+  }
+
+  /** void .. does nothing * */
+  public void remove() {}
 }

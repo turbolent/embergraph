@@ -25,10 +25,7 @@ import org.embergraph.bop.join.JoinAnnotations;
 
 /**
  * Annotations for joins against a subquery.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface SubqueryJoinAnnotations extends JoinAnnotations,
-        SubqueryAnnotations {
-
-}
+public interface SubqueryJoinAnnotations extends JoinAnnotations, SubqueryAnnotations {}

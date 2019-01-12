@@ -21,24 +21,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.keys;
 
 /**
- * An instance of this class is thrown where there is no successor
- * to a value within its value space.
+ * An instance of this class is thrown where there is no successor to a value within its value
+ * space.
  */
-public class NoSuccessorException extends RuntimeException
-{
+public class NoSuccessorException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2290043197024119560L;
+  /** */
+  private static final long serialVersionUID = -2290043197024119560L;
 
-    public NoSuccessorException() {
-    }
+  public NoSuccessorException() {}
 
-    public NoSuccessorException(String msg) {
+  public NoSuccessorException(String msg) {
 
-        super(msg);
-
-    }
-
+    super(msg);
+  }
 }

@@ -26,47 +26,39 @@ import org.embergraph.rdf.vocab.DefaultEmbergraphVocabulary;
 
 /**
  * Core Embergraph vocabulary.
- *  
- * Note: Do not modify this class.  Create an entirely new vocabulary that
- * extends this one and edit
- * {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
+ *
+ * <p>Note: Do not modify this class. Create an entirely new vocabulary that extends this one and
+ * edit {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
  */
 public class EmbergraphCoreVocabulary_v20151106 extends DefaultEmbergraphVocabulary {
 
-    /**
-     * De-serialization ctor.
+  /** De-serialization ctor. */
+  public EmbergraphCoreVocabulary_v20151106() {
+
+    super();
+  }
+
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public EmbergraphCoreVocabulary_v20151106(final String namespace) {
+
+    super(namespace);
+  }
+
+  @Override
+  protected void addValues() {
+
+    super.addValues();
+
+    /*
+     * Some new URIs for inline URI handling.
      */
-    public EmbergraphCoreVocabulary_v20151106() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public EmbergraphCoreVocabulary_v20151106(final String namespace) {
-
-        super(namespace);
-        
-    }
-
-    @Override
-    protected void addValues() {
-
-        super.addValues();
-        
-        /*
-         * Some new URIs for inline URI handling.
-         */
-        addDecl(new BaseVocabularyDecl(
-                PackedLongIV.PACKED_LONG, // supported range: [0;72057594037927935L].
-                CompressedTimestampExtension.COMPRESSED_TIMESTAMP                
-                ));
-
-    }
-
+    addDecl(
+        new BaseVocabularyDecl(
+            PackedLongIV.PACKED_LONG, // supported range: [0;72057594037927935L].
+            CompressedTimestampExtension.COMPRESSED_TIMESTAMP));
+  }
 }

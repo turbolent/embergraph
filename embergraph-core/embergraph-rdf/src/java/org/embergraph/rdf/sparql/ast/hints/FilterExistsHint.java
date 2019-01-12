@@ -34,64 +34,55 @@ import org.embergraph.rdf.sparql.ast.SubqueryFunctionNodeBase;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic
- * plans: vectored sub-plan and subquery with LIMIT ONE. Each plan has its
- * advantages.
- * 
+ * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
+ * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
+ *
  * @see FilterExistsModeEnum
- * @see <a href="http://trac.blazegraph.com/ticket/988"> bad performance for FILTER
- *      EXISTS </a>
+ * @see <a href="http://trac.blazegraph.com/ticket/988">bad performance for FILTER EXISTS </a>
  */
 final class FilterExistsHint extends AbstractQueryHint<FilterExistsModeEnum> {
 
-    protected FilterExistsHint() {
-        super(QueryHints.FILTER_EXISTS,
-                QueryHints.DEFAULT_FILTER_EXISTS);
-    }
+  protected FilterExistsHint() {
+    super(QueryHints.FILTER_EXISTS, QueryHints.DEFAULT_FILTER_EXISTS);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final FilterExistsModeEnum value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final FilterExistsModeEnum value) {
 
-        if (op instanceof JoinGroupNode
-                && ((JoinGroupNode) op).getParent() == null) {
-            /*
-             * This is the top-level join group inside of the FILTER. It does
-             * not have a direct parent. We resolve the parent ExistsNode or
-             * NotExistsNode by searching from the top-level query root.
-             */
+    if (op instanceof JoinGroupNode && ((JoinGroupNode) op).getParent() == null) {
+      /*
+       * This is the top-level join group inside of the FILTER. It does
+       * not have a direct parent. We resolve the parent ExistsNode or
+       * NotExistsNode by searching from the top-level query root.
+       */
 
-            final JoinGroupNode filterGroup = (JoinGroupNode) op;
+      final JoinGroupNode filterGroup = (JoinGroupNode) op;
 
-            final IQueryNode p = StaticAnalysis.findParent(queryRoot,
-                    filterGroup);
+      final IQueryNode p = StaticAnalysis.findParent(queryRoot, filterGroup);
 
-            if (p instanceof FilterNode) {
+      if (p instanceof FilterNode) {
 
-                final IValueExpressionNode n = ((FilterNode) p)
-                        .getValueExpressionNode();
+        final IValueExpressionNode n = ((FilterNode) p).getValueExpressionNode();
 
-                if (n instanceof SubqueryFunctionNodeBase) {
+        if (n instanceof SubqueryFunctionNodeBase) {
 
-                    ((SubqueryFunctionNodeBase) n).setFilterExistsMode(value);
-
-                }
-
-            }
-            
-//            _setAnnotation(context, scope, op, getName(), value);
-
+          ((SubqueryFunctionNodeBase) n).setFilterExistsMode(value);
         }
+      }
+
+      //            _setAnnotation(context, scope, op, getName(), value);
 
     }
+  }
 
-    @Override
-    public FilterExistsModeEnum validate(final String value) {
-        
-        return FilterExistsModeEnum.valueOf(value);
-        
-    }
+  @Override
+  public FilterExistsModeEnum validate(final String value) {
 
+    return FilterExistsModeEnum.valueOf(value);
+  }
 }

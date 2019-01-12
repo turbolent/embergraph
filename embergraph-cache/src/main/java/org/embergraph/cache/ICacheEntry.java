@@ -21,39 +21,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.cache;
 
 /**
- * <p>
- * Interface for hard reference cache entries exposes a <i>dirty</i> flag in
- * addition to the object identifier and object reference.
- * </p>
- * 
+ * Interface for hard reference cache entries exposes a <i>dirty</i> flag in addition to the object
+ * identifier and object reference.
+ *
  * @author thompsonbry
  * @version $Id$
- * 
- * @todo Support clearing updated objects for hot cache between transactions.
- *       Add metadata boolean that indicates whether the object was modified
- *       since the cache was last cleared regardless of whether the object has
- *       since been installed on the persistence layer and marked as clean. The
- *       purpose of this is to support clearing of modified objects from the
- *       object cache when a transaction is aborted. Such objects must be
- *       cleared if they have been modified since they were installed in the
- *       cache regardless of whether they are currently dirty or not. Supporting
- *       this feature will probably require a hard reference Set containing the
- *       object identifier of each object that was marked as dirty in the cache
- *       since the cache was last cleared.
+ * @todo Support clearing updated objects for hot cache between transactions. Add metadata boolean
+ *     that indicates whether the object was modified since the cache was last cleared regardless of
+ *     whether the object has since been installed on the persistence layer and marked as clean. The
+ *     purpose of this is to support clearing of modified objects from the object cache when a
+ *     transaction is aborted. Such objects must be cleared if they have been modified since they
+ *     were installed in the cache regardless of whether they are currently dirty or not. Supporting
+ *     this feature will probably require a hard reference Set containing the object identifier of
+ *     each object that was marked as dirty in the cache since the cache was last cleared.
  */
-public interface ICacheEntry<K,T> extends IWeakRefCacheEntry<K,T> {
+public interface ICacheEntry<K, T> extends IWeakRefCacheEntry<K, T> {
 
-    /**
-     * Return true iff the object associated with this entry is dirty.
-     */
-    public boolean isDirty();
+  /** Return true iff the object associated with this entry is dirty. */
+  public boolean isDirty();
 
-    /**
-     * Set the dirty flag.
-     * 
-     * @param dirty
-     *            true iff the object associated with this entry is dirty.
-     */
-    public void setDirty(boolean dirty);
-
+  /**
+   * Set the dirty flag.
+   *
+   * @param dirty true iff the object associated with this entry is dirty.
+   */
+  public void setDirty(boolean dirty);
 }

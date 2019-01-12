@@ -29,123 +29,91 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-
 import org.apache.log4j.Logger;
-
 
 /**
  * A compressor that copies bytes without compression them.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NOPRecordCompressor implements IRecordCompressor, Externalizable {
-	
-    protected static final Logger log = Logger.getLogger(CompressorRegistry.class);
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 7525025093457384099L;
-    
-    public static final transient NOPRecordCompressor INSTANCE = new NOPRecordCompressor();
+  protected static final Logger log = Logger.getLogger(CompressorRegistry.class);
 
-    /**
-     * (De-)serialization ctor.
-     */
-    public NOPRecordCompressor() {
-        
-    }
-    
-	public void compress(ByteBuffer bin, ByteBuffer out) {
-		out.put(bin);
-	}
+  /** */
+  private static final long serialVersionUID = 7525025093457384099L;
 
-	public ByteBuffer compress(ByteBuffer bin) {
-		
-		if (log.isTraceEnabled())
-			log.trace("NOP compression " + bin.limit());
-		
-		return bin;
-	}
+  public static final transient NOPRecordCompressor INSTANCE = new NOPRecordCompressor();
 
-    /**
-     * Writes the buffer on the output stream.
-     */
-    public void compress(final ByteBuffer buf, final OutputStream os) {
+  /** (De-)serialization ctor. */
+  public NOPRecordCompressor() {}
 
-        if (true && buf.hasArray()) {
+  public void compress(ByteBuffer bin, ByteBuffer out) {
+    out.put(bin);
+  }
 
-            final int off = buf.arrayOffset() + buf.position();
+  public ByteBuffer compress(ByteBuffer bin) {
 
-            final int len = buf.remaining();
+    if (log.isTraceEnabled()) log.trace("NOP compression " + bin.limit());
 
-            compress(buf.array(), off, len, os);
-            
-            buf.position(buf.limit());
+    return bin;
+  }
 
-            return;
-            
-        }
-        
-        // FIXME handle direct buffer and read-only buffer cases.
-        throw new UnsupportedOperationException();
-        
+  /** Writes the buffer on the output stream. */
+  public void compress(final ByteBuffer buf, final OutputStream os) {
+
+    if (true && buf.hasArray()) {
+
+      final int off = buf.arrayOffset() + buf.position();
+
+      final int len = buf.remaining();
+
+      compress(buf.array(), off, len, os);
+
+      buf.position(buf.limit());
+
+      return;
     }
 
-    /**
-     * Writes the bytes on the output stream.
-     */
-    public void compress(byte[] bytes, OutputStream os) {
+    // FIXME handle direct buffer and read-only buffer cases.
+    throw new UnsupportedOperationException();
+  }
 
-        compress(bytes, os);
-        
+  /** Writes the bytes on the output stream. */
+  public void compress(byte[] bytes, OutputStream os) {
+
+    compress(bytes, os);
+  }
+
+  /** Writes the bytes on the output stream. */
+  public void compress(byte[] bytes, int off, int len, OutputStream os) {
+
+    try {
+
+      os.write(bytes, off, len);
+
+    } catch (IOException e) {
+
+      throw new RuntimeException(e);
     }
+  }
 
-    /**
-     * Writes the bytes on the output stream.
-     */
-    public void compress(byte[] bytes, int off, int len, OutputStream os) {
+  /** Returns the argument. */
+  public ByteBuffer decompress(ByteBuffer bin) {
 
-        try {
+    return bin;
+  }
 
-            os.write(bytes, off, len);
-           
-        } catch (IOException e) {
+  /** Returns the argument wrapped as a {@link ByteBuffer}. */
+  public ByteBuffer decompress(byte[] bin) {
 
-            throw new RuntimeException(e);
+    return ByteBuffer.wrap(bin);
+  }
 
-        }
+  /** NOP */
+  public void readExternal(ObjectInput arg0) throws IOException, ClassNotFoundException {}
 
-    }
-
-    /**
-     * Returns the argument.
-     */
-    public ByteBuffer decompress(ByteBuffer bin) {
-        
-        return bin;
-        
-    }
-
-    /**
-     * Returns the argument wrapped as a {@link ByteBuffer}.
-     */
-    public ByteBuffer decompress(byte[] bin) {
-
-        return ByteBuffer.wrap(bin);
-
-    }
-
-    /** NOP */
-    public void readExternal(ObjectInput arg0) throws IOException,
-            ClassNotFoundException {
-        
-    }
-
-    /** NOP */
-    public void writeExternal(ObjectOutput arg0) throws IOException {
-        
-    }
-
+  /** NOP */
+  public void writeExternal(ObjectOutput arg0) throws IOException {}
 }

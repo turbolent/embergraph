@@ -21,7 +21,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
@@ -51,219 +50,181 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
- * This compulsory AST transformation (not an optional optimizer!) enforces the
- * correct treatment of aggregates in ORDER BY clauses, according to the SPARQL
- * semantic, under the assumption that {@link org.embergraph.bop.solutions.MemorySortOp}
- * does not have to deal with aggregates. In a nutshell, this is done by introducing
- * aliases for the aggregate expressions and thus pushing the computation of the
- * aggregates to where they can already be processed.
- * 
- * Simple example.
- * 
- * Consider this query (sparql11-order-02.rq):
- * 
- * SELECT ?type WHERE { ?subj a ?type } GROUP BY ?type ORDER BY (count(?subj))
- * 
- * It contains aggregate count(?subj) in ORDER BY. The idea is to rewrite it
- * into this query:
- * 
- * SELECT ?type (count(?subj) as ?cnt)[excludeFromProjection] WHERE { ?subj a
- * ?type } GROUP BY ?type ORDER BY ?cnt
- * 
- * Here ?cnt is an auxiliary alias, i.e, a fresh variable (UUIDs are used as
- * fresh variable names in the implementation). This query can be computed even
- * if the sorting does not support aggregates.
- * 
- * Note that the rewritten query is not completely equivalent to the original
- * one: it will assign ?cnt, which does not occur in the original query. To
- * rectify this, some variables in a projection are designated as excluded from
- * the projection outputs: see the label "[excludeFromProjection]" by ?cnt in
- * the rewritten query (pseudo-SPARQL).
- * 
+ * This compulsory AST transformation (not an optional optimizer!) enforces the correct treatment of
+ * aggregates in ORDER BY clauses, according to the SPARQL semantic, under the assumption that
+ * {@link org.embergraph.bop.solutions.MemorySortOp} does not have to deal with aggregates. In a
+ * nutshell, this is done by introducing aliases for the aggregate expressions and thus pushing the
+ * computation of the aggregates to where they can already be processed.
  *
- * More complex example.
- * 
- * The original query is:
- * 
- * PREFIX ex: <http://example.org/>
- * SELECT ?x ?y WHERE { ?x ex:r ?y . ?y ex:q ?z } GROUP BY ?x ?y ORDER BY
- * DESC(max(?z)) ?x (count(?z)) DESC(?y)
- * 
+ * <p>Simple example.
  *
- * The rewritten query is:
- * 
+ * <p>Consider this query (sparql11-order-02.rq):
  *
- * PREFIX ex: <http://example.org/>
- * SELECT ?x ?y (max(?z) AS ?maxz)[excludeFromProjection] (count(?z) AS
- * ?cntz)[excludeFromProjection] WHERE { ?x ex:r ?y . ?y ex:q ?z } GROUP BY ?x
- * ?y ORDER BY DESC(?maxz) ?x ?cntz DESC(?y)
- * 
- * Here ?maxz and ?cntz are the introduced auxiliary aliases for the aggregates.
+ * <p>SELECT ?type WHERE { ?subj a ?type } GROUP BY ?type ORDER BY (count(?subj))
+ *
+ * <p>It contains aggregate count(?subj) in ORDER BY. The idea is to rewrite it into this query:
+ *
+ * <p>SELECT ?type (count(?subj) as ?cnt)[excludeFromProjection] WHERE { ?subj a ?type } GROUP BY
+ * ?type ORDER BY ?cnt
+ *
+ * <p>Here ?cnt is an auxiliary alias, i.e, a fresh variable (UUIDs are used as fresh variable names
+ * in the implementation). This query can be computed even if the sorting does not support
+ * aggregates.
+ *
+ * <p>Note that the rewritten query is not completely equivalent to the original one: it will assign
+ * ?cnt, which does not occur in the original query. To rectify this, some variables in a projection
+ * are designated as excluded from the projection outputs: see the label "[excludeFromProjection]"
+ * by ?cnt in the rewritten query (pseudo-SPARQL).
+ *
+ * <p>More complex example.
+ *
+ * <p>The original query is:
+ *
+ * <p>PREFIX ex: <http://example.org/> SELECT ?x ?y WHERE { ?x ex:r ?y . ?y ex:q ?z } GROUP BY ?x ?y
+ * ORDER BY DESC(max(?z)) ?x (count(?z)) DESC(?y)
+ *
+ * <p>The rewritten query is:
+ *
+ * <p>PREFIX ex: <http://example.org/> SELECT ?x ?y (max(?z) AS ?maxz)[excludeFromProjection]
+ * (count(?z) AS ?cntz)[excludeFromProjection] WHERE { ?x ex:r ?y . ?y ex:q ?z } GROUP BY ?x ?y
+ * ORDER BY DESC(?maxz) ?x ?cntz DESC(?y)
+ *
+ * <p>Here ?maxz and ?cntz are the introduced auxiliary aliases for the aggregates.
  *
  * @author <a href="mailto:ariazanov@blazegraph.com">Alexandre Riazanov</a>
  */
 public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
 
-    @Override
-    public QueryNodeWithBindingSet optimize(
-            final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-        final IQueryNode queryNode = input.getQueryNode();
-        final IBindingSet[] bindingSets = input.getBindingSets();
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
+    final QueryRoot queryRoot = (QueryRoot) queryNode;
 
-        final QueryRoot queryRoot = (QueryRoot) queryNode;
+    // First, process any pre-existing named subqueries.
+    {
+      final NamedSubqueriesNode namedSubqueries = queryRoot.getNamedSubqueries();
 
+      if (namedSubqueries != null) {
 
-        // First, process any pre-existing named subqueries.
-        {
+        // Note: works around concurrent modification error.
+        final List<NamedSubqueryRoot> list =
+            BOpUtility.toList(namedSubqueries, NamedSubqueryRoot.class);
 
-            final NamedSubqueriesNode namedSubqueries = queryRoot
-                    .getNamedSubqueries();
+        for (NamedSubqueryRoot namedSubquery : list) {
 
-            if (namedSubqueries != null) {
-
-                // Note: works around concurrent modification error.
-                final List<NamedSubqueryRoot> list = BOpUtility.toList(
-                        namedSubqueries, NamedSubqueryRoot.class);
-
-                for (NamedSubqueryRoot namedSubquery : list) {
-
-                    // Rewrite the named sub-select
-                    doSelectQuery(context, namedSubquery);
-
-                }
-
-            }
-
+          // Rewrite the named sub-select
+          doSelectQuery(context, namedSubquery);
         }
+      }
+    }
 
-        // rewrite the top-level select
-        doSelectQuery(context, (QueryRoot) queryNode);
+    // rewrite the top-level select
+    doSelectQuery(context, (QueryRoot) queryNode);
 
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  } // optimize(final AST2BOpContext context,..)
 
+  private void doSelectQuery(final AST2BOpContext context, final QueryBase queryBase) {
 
-        return new QueryNodeWithBindingSet(queryNode, bindingSets);
+    // recursion first.
+    doRecursiveRewrite(context, queryBase.getWhereClause());
 
-    } // optimize(final AST2BOpContext context,..)
+    if (queryBase.getQueryType() != QueryType.SELECT) {
+      return;
+    }
 
-    private void doSelectQuery(final AST2BOpContext context,
-            final QueryBase queryBase) {
+    final ProjectionNode projection = queryBase.getProjection();
 
-        // recursion first.
-        doRecursiveRewrite(context, queryBase.getWhereClause());
-        
-        if (queryBase.getQueryType() != QueryType.SELECT) {
-            return;
-        }
+    final OrderByNode orderBy = queryBase.getOrderBy();
 
+    final OrderByNode newOrderBy = new OrderByNode();
 
-        final ProjectionNode projection = queryBase.getProjection();
+    boolean aggregatesPresent = false;
 
-        final OrderByNode orderBy = queryBase.getOrderBy();
+    if (orderBy == null) {
+      // The transformation is not applicable here.
+      return;
+    }
 
+    final Set<IVariable<?>> varsToExcludeFromProjection = new HashSet<IVariable<?>>();
 
-        final OrderByNode newOrderBy = new OrderByNode();
+    for (OrderByExpr orderByExpr : orderBy) {
+      IValueExpression<? extends IV> ve = orderByExpr.getValueExpression();
+      IValueExpressionNode ven = orderByExpr.getValueExpressionNode();
 
+      if (ve instanceof AggregateBase) {
 
-        boolean aggregatesPresent = false;
+        aggregatesPresent = true;
 
+        final Var freshVar = Var.var();
 
+        final IValueExpressionNode newVEN = new VarNode(freshVar);
 
-        if (orderBy == null) {
-            // The transformation is not applicable here.
-            return;
-        }
-        
-        final Set<IVariable<?>> varsToExcludeFromProjection = 
-                new HashSet<IVariable<?>>();
-        
-        for (OrderByExpr orderByExpr : orderBy) {
-            IValueExpression<? extends IV> ve = orderByExpr.getValueExpression();
-            IValueExpressionNode ven = orderByExpr.getValueExpressionNode();
+        final OrderByExpr newOrderByExpr = new OrderByExpr(newVEN, orderByExpr.isAscending());
 
-            if (ve instanceof AggregateBase) {
+        newOrderBy.addExpr(newOrderByExpr);
 
-                aggregatesPresent = true;
+        // E.g., COUNT(?subj) AS ?cnt
+        // or    MAX(?obj) AS ?mx
+        final AssignmentNode replacementAlias = new AssignmentNode((VarNode) newVEN, ven);
+        projection.addProjectionExpression(replacementAlias);
+        varsToExcludeFromProjection.add(freshVar);
 
-                final Var freshVar = Var.var();
+      } else {
+        newOrderBy.addExpr(orderByExpr);
+      }
+    } // for (OrderByExpr orderByExpr : orderBy)
 
-                
-                final IValueExpressionNode newVEN = new VarNode(freshVar);
+    projection.setVarsToExcludeFromProjection(varsToExcludeFromProjection);
 
-                
-                
-                final OrderByExpr newOrderByExpr =
-                        new OrderByExpr(newVEN, orderByExpr.isAscending());
+    if (!aggregatesPresent) {
+      // The transformation is not applicable here.
+      return;
+    }
 
-                newOrderBy.addExpr(newOrderByExpr);
-                
-                
-                // E.g., COUNT(?subj) AS ?cnt 
-                // or    MAX(?obj) AS ?mx
-                final AssignmentNode replacementAlias = 
-                        new AssignmentNode((VarNode) newVEN,ven);
-                projection.addProjectionExpression(replacementAlias);
-                varsToExcludeFromProjection.add(freshVar);
-                
-            } else {
-                newOrderBy.addExpr(orderByExpr);
-            }
+    queryBase.setOrderBy(newOrderBy);
+  } // doSelectQuery(final AST2BOpContext context, final QueryBase queryBase)
 
-        } // for (OrderByExpr orderByExpr : orderBy)
+  /**
+   * @param context
+   * @param group possibly null, eg, when the enclosing query is a DESCRIBE
+   */
+  private void doRecursiveRewrite(
+      final AST2BOpContext context, final GraphPatternGroup<IGroupMemberNode> group) {
 
-        projection.setVarsToExcludeFromProjection(varsToExcludeFromProjection);
+    if (group == null) {
+      return;
+    }
 
-        if (!aggregatesPresent) {
-            // The transformation is not applicable here.
-            return;
-        }
+    final int arity = group.arity();
 
-        queryBase.setOrderBy(newOrderBy);
+    for (int i = 0; i < arity; i++) {
 
-    } // doSelectQuery(final AST2BOpContext context, final QueryBase queryBase)
+      final BOp child = (BOp) group.get(i);
 
-    
-    /**
-     * @param context
-     * @param group possibly null, eg, when the enclosing query is a DESCRIBE
-     */
-    private void doRecursiveRewrite(final AST2BOpContext context,
-            final GraphPatternGroup<IGroupMemberNode> group) {
+      if (child instanceof GraphPatternGroup<?>) {
 
-        if (group == null) {
-            return;
-        }
-        
-        final int arity = group.arity();
+        // Recursion into groups.
+        doRecursiveRewrite(context, ((GraphPatternGroup<IGroupMemberNode>) child));
 
-        for (int i = 0; i < arity; i++) {
+      } else if (child instanceof SubqueryRoot) {
 
-            final BOp child = (BOp) group.get(i);
+        // Recursion into subqueries.
+        final SubqueryRoot subqueryRoot = (SubqueryRoot) child;
+        doRecursiveRewrite(context, subqueryRoot.getWhereClause());
 
-            if (child instanceof GraphPatternGroup<?>) {
+        // rewrite the sub-select
+        doSelectQuery(context, (SubqueryBase) child);
 
-                // Recursion into groups.
-                doRecursiveRewrite(context,
-                        ((GraphPatternGroup<IGroupMemberNode>) child));
+      } else if (child instanceof ServiceNode) {
 
-            } else if (child instanceof SubqueryRoot) {
-
-                // Recursion into subqueries.
-                final SubqueryRoot subqueryRoot = (SubqueryRoot) child;
-                doRecursiveRewrite(context, subqueryRoot.getWhereClause());
-
-                // rewrite the sub-select
-                doSelectQuery(context, (SubqueryBase) child);
-
-            } else if (child instanceof ServiceNode) {
-
-                // Do not rewrite things inside of a SERVICE node.
-                continue;
-
-            }
-
-        }
-
-    } // doRecursiveRewrite(final AST2BOpContext context,..
+        // Do not rewrite things inside of a SERVICE node.
+        continue;
+      }
+    }
+  } // doRecursiveRewrite(final AST2BOpContext context,..
 } // class ASTDummyOptimizer

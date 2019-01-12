@@ -22,32 +22,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /**
- * This exception is throw when a bop which is required to have a bopId does not
- * have its bopId property defined. All {@link PipelineOp}s are required to have
- * bopIds since the bopId will be used for routing decisions and is also used to
- * detect loops in the bop plan.
- * 
+ * This exception is throw when a bop which is required to have a bopId does not have its bopId
+ * property defined. All {@link PipelineOp}s are required to have bopIds since the bopId will be
+ * used for routing decisions and is also used to detect loops in the bop plan.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NoBOpIdException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public NoBOpIdException() {
-    }
+  /** */
+  public NoBOpIdException() {}
 
-    /**
-     * @param message
-     */
-    public NoBOpIdException(String message) {
-        super(message);
-    }
-
+  /** @param message */
+  public NoBOpIdException(String message) {
+    super(message);
+  }
 }

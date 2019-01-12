@@ -29,44 +29,42 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint used to indicate the {@link DescribeMode} that will be used to
- * evaluate a DESCRIBE query.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578"> Concise
- *      Bounded Description </a>
- * 
+ * Query hint used to indicate the {@link DescribeMode} that will be used to evaluate a DESCRIBE
+ * query.
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description
+ *     </a>
  * @see QueryHints#DESCRIBE_MODE
  */
 final class DescribeModeHint extends AbstractQueryHint<DescribeModeEnum> {
 
-    protected DescribeModeHint() {
-        super(QueryHints.DESCRIBE_MODE, QueryHints.DEFAULT_DESCRIBE_MODE);
+  protected DescribeModeHint() {
+    super(QueryHints.DESCRIBE_MODE, QueryHints.DEFAULT_DESCRIBE_MODE);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final DescribeModeEnum value) {
+
+    if (op instanceof ProjectionNode) {
+
+      // _setQueryHint(context, scope, op, getName(), value);
+      ((ProjectionNode) op).setDescribeMode(value);
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final DescribeModeEnum value) {
+    // throw new QueryHintException(scope, op, getName(), value);
 
-        if (op instanceof ProjectionNode) {
+  }
 
-            //_setQueryHint(context, scope, op, getName(), value);
-            ((ProjectionNode) op).setDescribeMode(value);
+  @Override
+  public DescribeModeEnum validate(String value) {
 
-            return;
-
-        }
-
-        // throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
-    @Override
-    public DescribeModeEnum validate(String value) {
-
-        return DescribeModeEnum.valueOf(value);
-        
-    }
-
+    return DescribeModeEnum.valueOf(value);
+  }
 }

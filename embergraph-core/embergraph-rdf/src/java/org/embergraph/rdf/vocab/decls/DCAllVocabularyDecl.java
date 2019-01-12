@@ -21,41 +21,33 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab.decls;
 
-import java.util.Iterator;
-
-import org.openrdf.model.URI;
-
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.Striterator;
+import java.util.Iterator;
+import org.embergraph.rdf.vocab.VocabularyDecl;
+import org.openrdf.model.URI;
 
 /**
  * Vocabulary and namespace for Dublin Core, including:
+ *
  * <ul>
- * <li>{@link DCTermsVocabularyDecl}</li>
- * <li>{@link DCElementsVocabularyDecl}</li>
+ *   <li>{@link DCTermsVocabularyDecl}
+ *   <li>{@link DCElementsVocabularyDecl}
  * </ul>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: SesameVocabularyDecl.java 4628 2011-06-04 22:01:57Z thompsonbry
- *          $
- * 
+ * @version $Id: SesameVocabularyDecl.java 4628 2011-06-04 22:01:57Z thompsonbry $
  * @see DCTermsVocabularyDecl
  * @see DCElementsVocabularyDecl
  */
 public class DCAllVocabularyDecl implements VocabularyDecl {
 
-    public DCAllVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public DCAllVocabularyDecl() {}
 
-        return new Striterator(new EmptyIterator())
-            .append(new DCTermsVocabularyDecl().values())
-            .append(new DCElementsVocabularyDecl().values())
-            ;
+  public Iterator<URI> values() {
 
-    }
-
+    return new Striterator(new EmptyIterator())
+        .append(new DCTermsVocabularyDecl().values())
+        .append(new DCElementsVocabularyDecl().values());
+  }
 }

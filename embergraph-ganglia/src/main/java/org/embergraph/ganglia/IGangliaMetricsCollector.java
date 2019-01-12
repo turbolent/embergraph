@@ -15,17 +15,13 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * Interface for collecting metrics from a local (embedded) process.
- */
+/** Interface for collecting metrics from a local (embedded) process. */
 public interface IGangliaMetricsCollector {
 
-	/**
-	 * Collect and report metric values.
-	 * 
-	 * @param reporter
-	 *            Where to report the collected metric values.
-	 */
-	public void collect(final IGangliaMetricsReporter reporter);
-	
+  /**
+   * Collect and report metric values.
+   *
+   * @param reporter Where to report the collected metric values.
+   */
+  public void collect(final IGangliaMetricsReporter reporter);
 }

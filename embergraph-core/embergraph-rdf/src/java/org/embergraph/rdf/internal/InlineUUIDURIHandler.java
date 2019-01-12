@@ -18,40 +18,33 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.UUID;
-
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 
-/**
- * Inline URI handler for UUIDs.
- */
+/** Inline URI handler for UUIDs. */
 public class InlineUUIDURIHandler extends InlineURIHandler {
 
-    /**
-     * Default URI namespace for inline UUIDs.
-     */
-    public static final String NAMESPACE = "urn:uuid:";
+  /** Default URI namespace for inline UUIDs. */
+  public static final String NAMESPACE = "urn:uuid:";
 
-    public InlineUUIDURIHandler(final String namespace) {
-        super(namespace);
+  public InlineUUIDURIHandler(final String namespace) {
+    super(namespace);
+  }
+
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(final String localName) {
+
+    if (localName == null) {
+      return null;
     }
-    
-    @SuppressWarnings("rawtypes")
-    protected AbstractLiteralIV createInlineIV(final String localName) {
-        
-        if (localName == null) {
-            return null;
-        }
-        
-        try {
-            return new UUIDLiteralIV(UUID.fromString(localName));
-        } catch (IllegalArgumentException ex) {
-            /*
-             * Could not parse localName into a UUID.  Fall through to TermIV.
-             */
-            return null;
-        }
-        
+
+    try {
+      return new UUIDLiteralIV(UUID.fromString(localName));
+    } catch (IllegalArgumentException ex) {
+      /*
+       * Could not parse localName into a UUID.  Fall through to TermIV.
+       */
+      return null;
     }
-    
+  }
 }

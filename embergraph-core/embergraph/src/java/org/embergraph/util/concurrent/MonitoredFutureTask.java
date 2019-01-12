@@ -20,52 +20,49 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
 import org.apache.log4j.Logger;
 
 /**
  * Helper task for monitoring the results of otherwise unwatched tasks.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>
  */
 public class MonitoredFutureTask<T> extends FutureTask<T> {
 
-    private static final Logger log = Logger
-            .getLogger(MonitoredFutureTask.class);
-    
-    public MonitoredFutureTask(final Callable<T> callable) {
-        super(callable);
-    }
+  private static final Logger log = Logger.getLogger(MonitoredFutureTask.class);
 
-    public MonitoredFutureTask(final Runnable runnable, final T result) {
-        super(runnable, result);
-    }
+  public MonitoredFutureTask(final Callable<T> callable) {
+    super(callable);
+  }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Hooked to notice when the task is done.
-     */
-    @Override
-    public void run() {
-        try {
-            super.run();
-        } finally {
-            doCheck();
-        }
-    }
+  public MonitoredFutureTask(final Runnable runnable, final T result) {
+    super(runnable, result);
+  }
 
-    private void doCheck() {
-        if (super.isDone()) {
-            try {
-                super.get();
-            } catch (InterruptedException e) {
-                log.warn("Interrupted: " + e);
-            } catch (ExecutionException e) {
-                log.error(e, e);
-            }
-        }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Hooked to notice when the task is done.
+   */
+  @Override
+  public void run() {
+    try {
+      super.run();
+    } finally {
+      doCheck();
     }
+  }
 
+  private void doCheck() {
+    if (super.isDone()) {
+      try {
+        super.get();
+      } catch (InterruptedException e) {
+        log.warn("Interrupted: " + e);
+      } catch (ExecutionException e) {
+        log.error(e, e);
+      }
+    }
+  }
 }

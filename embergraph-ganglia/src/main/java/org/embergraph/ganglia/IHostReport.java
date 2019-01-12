@@ -17,17 +17,11 @@ package org.embergraph.ganglia;
 
 import java.util.Map;
 
-/**
- * Interface for a snapshot of metrics for a given host.
- */
+/** Interface for a snapshot of metrics for a given host. */
 public interface IHostReport {
-	/**
-	 * The name of the host.
-	 */
-	public String getHostName();
+  /** The name of the host. */
+  public String getHostName();
 
-	/**
-	 * A snapshot of metric values for the host.
-	 */
-	public Map<String,IGangliaMetricMessage> getMetrics(); 
+  /** A snapshot of metric values for the host. */
+  public Map<String, IGangliaMetricMessage> getMetrics();
 }

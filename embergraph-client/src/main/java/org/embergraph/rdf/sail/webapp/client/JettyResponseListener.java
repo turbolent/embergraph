@@ -26,7 +26,6 @@ import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.api.Response;
@@ -34,267 +33,231 @@ import org.eclipse.jetty.client.util.InputStreamResponseListener;
 import org.eclipse.jetty.http.HttpFields;
 import org.eclipse.jetty.http.HttpHeader;
 
-/**
- * Class handles the jetty {@link Response} input stream.
- */
+/** Class handles the jetty {@link Response} input stream. */
 public class JettyResponseListener extends InputStreamResponseListener {
-	
-    private static final transient Logger log = Logger
-            .getLogger(JettyResponseListener.class);
-    
-    private final long queryTimeoutMillis;
-    private volatile Request m_request;
-    private volatile Response m_response;
-	private volatile InputStream m_cachedStream = null;
 
-	/**
-	 * Note: This is the default content encoding for <code>text/*</code> per
-	 * Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1
-	 * specification.
-	 */
-	private static final String ISO_8859_1 = "ISO-8859-1";
-	
-	/**
-	 * 
-	 * @param request
-	 * @param queryTimeoutMillis
-	 *            the timeout in milliseconds (if non-positive, then an infinite
-	 *            timeout is used).
-	 */
-	public JettyResponseListener(final Request request,
-			long queryTimeoutMillis) {
-		if (request == null)
-			throw new IllegalArgumentException();
-		m_request = request;
-		this.queryTimeoutMillis = queryTimeoutMillis <= 0L ? Long.MAX_VALUE
-				: queryTimeoutMillis;
-	}
+  private static final transient Logger log = Logger.getLogger(JettyResponseListener.class);
 
-	/**
-	 * Blocks (up to a timeout) for the response to arrive (http status code,
-	 * etc.)
-	 * 
-	 * @throws IOException if there is a problem, if there is a timeout, etc.
-	 */
-	private void ensureResponse() throws IOException {
-		if (m_response == null) {
-			try {
-				final boolean traceEnabled = log.isTraceEnabled();
+  private final long queryTimeoutMillis;
+  private volatile Request m_request;
+  private volatile Response m_response;
+  private volatile InputStream m_cachedStream = null;
 
-				final long start = traceEnabled ? System.currentTimeMillis()
-						: 0;
+  /**
+   * Note: This is the default content encoding for <code>text/*</code> per Section 3.7.1
+   * Canonicalization and Text Defaults of the HTTP 1.1 specification.
+   */
+  private static final String ISO_8859_1 = "ISO-8859-1";
 
-				m_response = get(queryTimeoutMillis, TimeUnit.MILLISECONDS);
+  /**
+   * @param request
+   * @param queryTimeoutMillis the timeout in milliseconds (if non-positive, then an infinite
+   *     timeout is used).
+   */
+  public JettyResponseListener(final Request request, long queryTimeoutMillis) {
+    if (request == null) throw new IllegalArgumentException();
+    m_request = request;
+    this.queryTimeoutMillis = queryTimeoutMillis <= 0L ? Long.MAX_VALUE : queryTimeoutMillis;
+  }
 
-				if (traceEnabled)
-					log.trace("Response in "
-							+ (System.currentTimeMillis() - start) + "ms");
+  /**
+   * Blocks (up to a timeout) for the response to arrive (http status code, etc.)
+   *
+   * @throws IOException if there is a problem, if there is a timeout, etc.
+   */
+  private void ensureResponse() throws IOException {
+    if (m_response == null) {
+      try {
+        final boolean traceEnabled = log.isTraceEnabled();
 
-			} catch (InterruptedException | TimeoutException
-					| ExecutionException e) {
-				throw new IOException(e);
-			}
-		}		
-	}
+        final long start = traceEnabled ? System.currentTimeMillis() : 0;
 
-	/**
-	 * Return the value of the <code>Content-Type</code> header.
-	 * @return
-	 * @throws IOException
-	 */
-	public String getContentType() throws IOException {
-		ensureResponse();
-		
-		final HttpFields headers = m_response.getHeaders();
-		
-		return headers.get(HttpHeader.CONTENT_TYPE);
-	}
+        m_response = get(queryTimeoutMillis, TimeUnit.MILLISECONDS);
 
-	/**
-	 * Return the content encoding specified by the <code>charset</code> MIME
-	 * parameter for the <code>Content-Type</code> header and <code>null</code>
-	 * if that MIME type parameter was not specified.
-	 * <p>
-	 * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP
-	 * 1.1 specification:
-	 * <ul>
-	 * <li>
-	 * The "charset" parameter is used with some media types to define the
-	 * character set (section 3.4) of the data. When no explicit charset
-	 * parameter is provided by the sender, media subtypes of the "text" type
-	 * are defined to have a default charset value of "ISO-8859-1" when received
-	 * via HTTP. Data in character sets other than "ISO-8859-1" or its subsets
-	 * MUST be labeled with an appropriate charset value. See section 3.4.1 for
-	 * compatibility problems.</li>
-	 * </ul>
-	 * 
-	 * @return The content encoding if the <code>charset</code> parameter was
-	 *         specified and otherwise <code>null</code>.
-	 * 
-	 * @throws IOException
-	 */
-	public String getContentEncoding() throws IOException {
-		ensureResponse();
-				
-		final HttpFields headers = m_response.getHeaders();
-		
-      final String contentType = headers.get(HttpHeader.CONTENT_TYPE);
+        if (traceEnabled) log.trace("Response in " + (System.currentTimeMillis() - start) + "ms");
 
-      if (contentType == null)
-         return null;
+      } catch (InterruptedException | TimeoutException | ExecutionException e) {
+        throw new IOException(e);
+      }
+    }
+  }
 
-      final MiniMime mimeType = new MiniMime(contentType);
-		
-		return mimeType.getContentEncoding();
-	}
+  /**
+   * Return the value of the <code>Content-Type</code> header.
+   *
+   * @return
+   * @throws IOException
+   */
+  public String getContentType() throws IOException {
+    ensureResponse();
 
-	/**
-	 * The http status code.
-	 */
-	public int getStatus() throws IOException {
-		ensureResponse();
-		
-		return m_response.getStatus();
-	}
+    final HttpFields headers = m_response.getHeaders();
 
-	/**
-	 * The http reason line.
-	 */
-	public String getReason() throws IOException {
-		ensureResponse();
-		
-		return m_response.getReason();
-	}
+    return headers.get(HttpHeader.CONTENT_TYPE);
+  }
 
-	/** The http headers. */
-	public HttpFields getHeaders() throws IOException {
-		ensureResponse();
-		
-		return m_response.getHeaders();
-	}
+  /**
+   * Return the content encoding specified by the <code>charset</code> MIME parameter for the <code>
+   * Content-Type</code> header and <code>null</code> if that MIME type parameter was not specified.
+   *
+   * <p>Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
+   *
+   * <ul>
+   *   <li>The "charset" parameter is used with some media types to define the character set
+   *       (section 3.4) of the data. When no explicit charset parameter is provided by the sender,
+   *       media subtypes of the "text" type are defined to have a default charset value of
+   *       "ISO-8859-1" when received via HTTP. Data in character sets other than "ISO-8859-1" or
+   *       its subsets MUST be labeled with an appropriate charset value. See section 3.4.1 for
+   *       compatibility problems.
+   * </ul>
+   *
+   * @return The content encoding if the <code>charset</code> parameter was specified and otherwise
+   *     <code>null</code>.
+   * @throws IOException
+   */
+  public String getContentEncoding() throws IOException {
+    ensureResponse();
 
-	/**
-	 * Return the response body as a string.
-	 */
-	public String getResponseBody() throws IOException {
+    final HttpFields headers = m_response.getHeaders();
 
-		final Reader r;
-		{
-			final String contentEncoding = getContentEncoding();
-			if (contentEncoding != null ) {
-				/*
-				 * Explicit content encoding. 
-				 */
-				r = new InputStreamReader(getInputStream(), contentEncoding);
-			} else if (getContentType()!=null && getContentType().startsWith("text/")) {
-				/**
-				 * Note: Per Section 3.7.1 Canonicalization and Text Defaults of
-				 * the HTTP 1.1 specification:
-				 * <p>
-				 * The "charset" parameter is used with some media types to
-				 * define the character set (section 3.4) of the data. When no
-				 * explicit charset parameter is provided by the sender, media
-				 * subtypes of the "text" type are defined to have a default
-				 * charset value of "ISO-8859-1" when received via HTTP. Data in
-				 * character sets other than "ISO-8859-1" or its subsets MUST be
-				 * labeled with an appropriate charset value. See section 3.4.1
-				 * for compatibility problems.
-				 */
-				r = new InputStreamReader(getInputStream(),ISO_8859_1);
-			} else {
-				/*
-				 * Also per that section, no default otherwise.
-				 */
-				r = new InputStreamReader(getInputStream());
-			}		
-		}
+    final String contentType = headers.get(HttpHeader.CONTENT_TYPE);
 
-        try {
+    if (contentType == null) return null;
 
-            final StringWriter w = new StringWriter();
+    final MiniMime mimeType = new MiniMime(contentType);
 
-    		final char[] buf = new char[1024];
+    return mimeType.getContentEncoding();
+  }
 
-    		int rdlen = 0;
-            
-    		while ((rdlen = r.read(buf)) != -1) {
-    		
-    			w.write(buf, 0, rdlen);
-    			
-            }
+  /** The http status code. */
+  public int getStatus() throws IOException {
+    ensureResponse();
 
-            return w.toString();
+    return m_response.getStatus();
+  }
 
-        } finally {
+  /** The http reason line. */
+  public String getReason() throws IOException {
+    ensureResponse();
 
-            r.close();
+    return m_response.getReason();
+  }
 
-        }
-        
-	}
+  /** The http headers. */
+  public HttpFields getHeaders() throws IOException {
+    ensureResponse();
 
-	@Override
-	public InputStream getInputStream() {
-		if (m_cachedStream != null) {
-			/*
-			 * This preserves the semantics of the method on the base class
-			 * since Jetty will return a closed input stream if you invoke this
-			 * method more than once.
-			 */
-			return super.getInputStream(); 
-		}
+    return m_response.getHeaders();
+  }
 
-		// await a response up to a timeout.
-		try {
-			ensureResponse();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		
-		// request the input stream.
-		m_cachedStream = super.getInputStream();
-		
-		return m_cachedStream;
-	}
+  /** Return the response body as a string. */
+  public String getResponseBody() throws IOException {
 
-	/**
-	 * Abort the request/response. The request is associated with the http
-	 * request/response is aborted. If we already have the response, then it's
-	 * {@link InputStream} is closed.
-	 */
-	public void abort() {
+    final Reader r;
+    {
+      final String contentEncoding = getContentEncoding();
+      if (contentEncoding != null) {
+        /*
+         * Explicit content encoding.
+         */
+        r = new InputStreamReader(getInputStream(), contentEncoding);
+      } else if (getContentType() != null && getContentType().startsWith("text/")) {
+        /**
+         * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
+         *
+         * <p>The "charset" parameter is used with some media types to define the character set
+         * (section 3.4) of the data. When no explicit charset parameter is provided by the sender,
+         * media subtypes of the "text" type are defined to have a default charset value of
+         * "ISO-8859-1" when received via HTTP. Data in character sets other than "ISO-8859-1" or
+         * its subsets MUST be labeled with an appropriate charset value. See section 3.4.1 for
+         * compatibility problems.
+         */
+        r = new InputStreamReader(getInputStream(), ISO_8859_1);
+      } else {
+        /*
+         * Also per that section, no default otherwise.
+         */
+        r = new InputStreamReader(getInputStream());
+      }
+    }
 
-		// Note: jetty requires a cause for request.abort(Throwable).
-		abort(new IOException());
-		
-	}
+    try {
 
-	/**
-	 * Abort the request/response. The request is associated with the http
-	 * request/response is aborted. If we already have the response, then it's
-	 * {@link InputStream} is closed.
-	 * 
-	 * @param cause
-	 *            The cause (required).
-	 */
-	public void abort(final Throwable cause) {
+      final StringWriter w = new StringWriter();
 
-		final InputStream is = m_cachedStream;
-		if (is != null) {
-			m_cachedStream = null;
-			try {
-				is.close();
-			} catch (IOException ex) {
-				log.warn(ex);
-			}
-		}
+      final char[] buf = new char[1024];
 
-		final Request r = m_request;
-		if (r != null) {
-			m_request = null;
-			r.abort(cause);
-		}
+      int rdlen = 0;
 
-	}
+      while ((rdlen = r.read(buf)) != -1) {
 
+        w.write(buf, 0, rdlen);
+      }
+
+      return w.toString();
+
+    } finally {
+
+      r.close();
+    }
+  }
+
+  @Override
+  public InputStream getInputStream() {
+    if (m_cachedStream != null) {
+      /*
+       * This preserves the semantics of the method on the base class
+       * since Jetty will return a closed input stream if you invoke this
+       * method more than once.
+       */
+      return super.getInputStream();
+    }
+
+    // await a response up to a timeout.
+    try {
+      ensureResponse();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    // request the input stream.
+    m_cachedStream = super.getInputStream();
+
+    return m_cachedStream;
+  }
+
+  /**
+   * Abort the request/response. The request is associated with the http request/response is
+   * aborted. If we already have the response, then it's {@link InputStream} is closed.
+   */
+  public void abort() {
+
+    // Note: jetty requires a cause for request.abort(Throwable).
+    abort(new IOException());
+  }
+
+  /**
+   * Abort the request/response. The request is associated with the http request/response is
+   * aborted. If we already have the response, then it's {@link InputStream} is closed.
+   *
+   * @param cause The cause (required).
+   */
+  public void abort(final Throwable cause) {
+
+    final InputStream is = m_cachedStream;
+    if (is != null) {
+      m_cachedStream = null;
+      try {
+        is.close();
+      } catch (IOException ex) {
+        log.warn(ex);
+      }
+    }
+
+    final Request r = m_request;
+    if (r != null) {
+      m_request = null;
+      r.abort(cause);
+    }
+  }
 }

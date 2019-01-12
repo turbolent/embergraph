@@ -33,130 +33,113 @@ import org.embergraph.rdf.store.ProxyTestCase;
 
 /**
  * Test suite for {@link ReplaceBOp}.
- * 
+ *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */
 public class TestReplaceBOp extends ProxyTestCase {
 
-//	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
-	
-    /**
-     * 
-     */
-    public TestReplaceBOp() {
-        super();
+  //	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
+
+  /** */
+  public TestReplaceBOp() {
+    super();
+  }
+
+  /** @param name */
+  public TestReplaceBOp(String name) {
+    super(name);
+  }
+
+  //    @Override
+  //    public Properties getProperties() {
+  //    	final Properties props = super.getProperties();
+  //    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+  //    	return props;
+  //    }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_bop() {
+
+    final AbstractTripleStore db = getStore();
+
+    try {
+
+      final EmbergraphValueFactory vf = db.getValueFactory();
+
+      final ListBindingSet emptyBindingSet = new ListBindingSet();
+
+      // replace("abcd", "b", "Z") -> "aZcd"
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("aZcd"));
+
+        final IV var = DummyConstantNode.toDummyIV(vf.createLiteral("abcd"));
+
+        final IV pattern = DummyConstantNode.toDummyIV(vf.createLiteral("b"));
+
+        final IV replacement = DummyConstantNode.toDummyIV(vf.createLiteral("Z"));
+
+        final IV actual =
+            new ReplaceBOp(
+                    new Constant<IV>(var),
+                    new Constant<IV>(pattern),
+                    new Constant<IV>(replacement),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // replace("abab", "B", "Z","i") -> "aZaZ"
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("aZaZ"));
+
+        final IV var = DummyConstantNode.toDummyIV(vf.createLiteral("abab"));
+
+        final IV pattern = DummyConstantNode.toDummyIV(vf.createLiteral("B"));
+
+        final IV replacement = DummyConstantNode.toDummyIV(vf.createLiteral("Z"));
+
+        final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
+
+        final IV actual =
+            new ReplaceBOp(
+                    new Constant<IV>(var),
+                    new Constant<IV>(pattern),
+                    new Constant<IV>(replacement),
+                    new Constant<IV>(flags),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // replace("abab", "B.", "Z","i") -> "aZb"
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("aZb"));
+
+        final IV var = DummyConstantNode.toDummyIV(vf.createLiteral("abab"));
+
+        final IV pattern = DummyConstantNode.toDummyIV(vf.createLiteral("B."));
+
+        final IV replacement = DummyConstantNode.toDummyIV(vf.createLiteral("Z"));
+
+        final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
+
+        final IV actual =
+            new ReplaceBOp(
+                    new Constant<IV>(var),
+                    new Constant<IV>(pattern),
+                    new Constant<IV>(replacement),
+                    new Constant<IV>(flags),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+    } finally {
+
+      db.__tearDownUnitTest();
     }
-
-    /**
-     * @param name
-     */
-    public TestReplaceBOp(String name) {
-        super(name);
-    }
-    
-//    @Override
-//    public Properties getProperties() {
-//    	final Properties props = super.getProperties();
-//    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
-//    	return props;
-//    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_bop() {
-        
-        final AbstractTripleStore db = getStore();
-
-        try {
-
-            final EmbergraphValueFactory vf = db.getValueFactory();
-            
-            final ListBindingSet emptyBindingSet = new ListBindingSet();
-
-            // replace("abcd", "b", "Z") -> "aZcd"
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("aZcd"));
-
-                final IV var = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abcd"));
-                
-                final IV pattern = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("b"));
-                
-                final IV replacement = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("Z"));
-                
-                final IV actual = new ReplaceBOp(
-                        new Constant<IV>(var),
-                        new Constant<IV>(pattern),
-                        new Constant<IV>(replacement),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // replace("abab", "B", "Z","i") -> "aZaZ"
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("aZaZ"));
-
-                final IV var = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abab"));
-                
-                final IV pattern = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("B"));
-                
-                final IV replacement = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("Z"));
-                
-                final IV flags = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("i"));
-                
-                final IV actual = new ReplaceBOp(
-                        new Constant<IV>(var),
-                        new Constant<IV>(pattern),
-                        new Constant<IV>(replacement),
-                        new Constant<IV>(flags),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // replace("abab", "B.", "Z","i") -> "aZb"
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("aZb"));
-
-                final IV var = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abab"));
-                
-                final IV pattern = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("B."));
-                
-                final IV replacement = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("Z"));
-                
-                final IV flags = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("i"));
-                
-                final IV actual = new ReplaceBOp(
-                        new Constant<IV>(var),
-                        new Constant<IV>(pattern),
-                        new Constant<IV>(replacement),
-                        new Constant<IV>(flags),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-        } finally {
-            
-            db.__tearDownUnitTest();
-            
-        }
-        
-    }
+  }
 }

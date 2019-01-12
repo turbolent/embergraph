@@ -24,30 +24,24 @@ package org.embergraph.btree;
 import java.util.Iterator;
 
 /**
- * Interface for iterators that visit nodes and leaves rather than entries in
- * leaves.
- * 
+ * Interface for iterators that visit nodes and leaves rather than entries in leaves.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface INodeIterator extends Iterator<AbstractNode> {
 
-    /**
-     * The value of the key for the last entry visited by
-     * {@link Iterator#next()}.
-     * 
-     * @exception IllegalStateException
-     *                if no entries have been visited.
-     */
-    public Object getKey();
-    
-    /**
-     * The value associated with the last node or leaf visited by
-     * {@link Iterator#next()}.
-     * 
-     * @exception IllegalStateException
-     *                if no entries have been visited.
-     */
-    public AbstractNode getNode();
-    
+  /**
+   * The value of the key for the last entry visited by {@link Iterator#next()}.
+   *
+   * @exception IllegalStateException if no entries have been visited.
+   */
+  public Object getKey();
+
+  /**
+   * The value associated with the last node or leaf visited by {@link Iterator#next()}.
+   *
+   * @exception IllegalStateException if no entries have been visited.
+   */
+  public AbstractNode getNode();
 }

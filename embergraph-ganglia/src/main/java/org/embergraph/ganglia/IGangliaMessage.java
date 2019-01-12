@@ -15,55 +15,48 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A ganglia message.
- */
+/** A ganglia message. */
 public interface IGangliaMessage {
 
-	/** The code for the type of message. */
-	public GangliaMessageTypeEnum getRecordType();
+  /** The code for the type of message. */
+  public GangliaMessageTypeEnum getRecordType();
 
-	/**
-	 * The name of the host for which the metric was reported.
-	 * <p>
-	 * Note: When {@link #isSpoof()} reports <code>true</code> this will be
-	 * <code>ip:host</code>.
-	 */
-	public String getHostName();
+  /**
+   * The name of the host for which the metric was reported.
+   *
+   * <p>Note: When {@link #isSpoof()} reports <code>true</code> this will be <code>ip:host</code>.
+   */
+  public String getHostName();
 
-	/**
-	 * The name of the metric (this needs to be clean for use in a file system
-	 * so the application name of the metric needs to be munged before it is
-	 * saved here).
-	 */
-	public String getMetricName();
+  /**
+   * The name of the metric (this needs to be clean for use in a file system so the application name
+   * of the metric needs to be munged before it is saved here).
+   */
+  public String getMetricName();
 
-	/**
-	 * Return <code>true</code> iff this message contains the metadata for a
-	 * metric (the metric declaration).
-	 * 
-	 * @see GangliaMessageTypeEnum#METADATA
-	 */
-	public boolean isMetricMetadata();
+  /**
+   * Return <code>true</code> iff this message contains the metadata for a metric (the metric
+   * declaration).
+   *
+   * @see GangliaMessageTypeEnum#METADATA
+   */
+  public boolean isMetricMetadata();
 
-	/**
-	 * Return <code>true</code> iff this message is a request for a metric.
-	 * 
-	 * @see GangliaMessageTypeEnum#REQUEST
-	 */
-	public boolean isMetricRequest();
+  /**
+   * Return <code>true</code> iff this message is a request for a metric.
+   *
+   * @see GangliaMessageTypeEnum#REQUEST
+   */
+  public boolean isMetricRequest();
 
-	/** Return <code>true</code> if this message represents a metric value. */
-	public boolean isMetricValue();
-	
-	/**
-	 * <code>true</code> iff this is a spoofed message.
-	 * <p>
-	 * Note: Spoof messages format {@link #getHostName()} as
-	 * <code>ip:host</code> and provide a means to fake metrics for a host which
-	 * is down (or which is not running ganglia).
-	 * </p>
-	 */
-	public boolean isSpoof();
+  /** Return <code>true</code> if this message represents a metric value. */
+  public boolean isMetricValue();
 
+  /**
+   * <code>true</code> iff this is a spoofed message.
+   *
+   * <p>Note: Spoof messages format {@link #getHostName()} as <code>ip:host</code> and provide a
+   * means to fake metrics for a host which is down (or which is not running ganglia).
+   */
+  public boolean isSpoof();
 }

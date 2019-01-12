@@ -26,64 +26,51 @@ import org.embergraph.io.IDataRecordAccess;
 
 /**
  * Interface for low-level data access.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IAbstractNodeData extends IDataRecordAccess {
 
-    /**
-     * True iff this is a leaf node.
-     */
-    boolean isLeaf();
+  /** True iff this is a leaf node. */
+  boolean isLeaf();
 
-    /**
-     * True iff this is an immutable data structure.
-     */
-    boolean isReadOnly();
+  /** True iff this is an immutable data structure. */
+  boolean isReadOnly();
 
-    /**
-     * <code>true</code> iff this is a coded data structure.
-     */
-    boolean isCoded();
+  /** <code>true</code> iff this is a coded data structure. */
+  boolean isCoded();
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #isCoded()} returns <code>true</code>.
-     */
-    @Override
-    AbstractFixedByteArrayBuffer data();
-    
-    /**
-     * Return <code>true</code> iff the leaves maintain tuple revision
-     * timestamps. When <code>true</code>, the minimum and maximum tuple
-     * revision timestamp for a node or leaf are available from
-     * {@link #getMinimumVersionTimestamp()} and
-     * {@link #getMaximumVersionTimestamp()}.
-     */
-    boolean hasVersionTimestamps();
+  /**
+   * {@inheritDoc}
+   *
+   * @throws UnsupportedOperationException unless {@link #isCoded()} returns <code>true</code>.
+   */
+  @Override
+  AbstractFixedByteArrayBuffer data();
 
-    /**
-     * The earliest tuple revision timestamp associated with any tuple spanned
-     * by this node or leaf. If there are NO tuples for the leaf, then this MUST
-     * return {@link Long#MAX_VALUE} since the initial value of the minimum
-     * version timestamp is always the largest possible long integer.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless tuple revision timestamps are being maintained.
-     */
-    long getMinimumVersionTimestamp();
+  /**
+   * Return <code>true</code> iff the leaves maintain tuple revision timestamps. When <code>true
+   * </code>, the minimum and maximum tuple revision timestamp for a node or leaf are available from
+   * {@link #getMinimumVersionTimestamp()} and {@link #getMaximumVersionTimestamp()}.
+   */
+  boolean hasVersionTimestamps();
 
-    /**
-     * The most recent tuple revision timestamp associated with any tuple
-     * spanned by this node or leaf. If there are NO tuples for the leaf, then
-     * this MUST return {@link Long#MIN_VALUE} since the initial value of the
-     * maximum version timestamp is always the smallest possible long integer.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless tuple revision timestamps are being maintained.
-     */
-    long getMaximumVersionTimestamp();
-    
+  /**
+   * The earliest tuple revision timestamp associated with any tuple spanned by this node or leaf.
+   * If there are NO tuples for the leaf, then this MUST return {@link Long#MAX_VALUE} since the
+   * initial value of the minimum version timestamp is always the largest possible long integer.
+   *
+   * @throws UnsupportedOperationException unless tuple revision timestamps are being maintained.
+   */
+  long getMinimumVersionTimestamp();
+
+  /**
+   * The most recent tuple revision timestamp associated with any tuple spanned by this node or
+   * leaf. If there are NO tuples for the leaf, then this MUST return {@link Long#MIN_VALUE} since
+   * the initial value of the maximum version timestamp is always the smallest possible long
+   * integer.
+   *
+   * @throws UnsupportedOperationException unless tuple revision timestamps are being maintained.
+   */
+  long getMaximumVersionTimestamp();
 }

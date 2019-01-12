@@ -22,52 +22,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
- * The MOVE operation is a shortcut for moving all data from an input graph into
- * a destination graph. The input graph is removed after insertion and data from
- * the destination graph, if any, is removed before insertion.
- * 
+ * The MOVE operation is a shortcut for moving all data from an input graph into a destination
+ * graph. The input graph is removed after insertion and data from the destination graph, if any, is
+ * removed before insertion.
+ *
  * <pre>
  * MOVE (SILENT)? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT)
  * </pre>
- * 
+ *
  * @see http://www.w3.org/TR/sparql11-update/#move
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MoveGraph extends AbstractFromToGraphManagement {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public MoveGraph() {
-        
-        super(UpdateType.Move);
-        
-    }
+  public MoveGraph() {
 
-    /**
-     * @param op
-     */
-    public MoveGraph(final MoveGraph op) {
-     
-        super(op);
-        
-    }
+    super(UpdateType.Move);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public MoveGraph(final BOp[] args, final Map<String, Object> anns) {
+  /** @param op */
+  public MoveGraph(final MoveGraph op) {
 
-        super(args, anns);
-        
-    }
+    super(op);
+  }
 
+  /**
+   * @param args
+   * @param anns
+   */
+  public MoveGraph(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
 }

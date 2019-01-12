@@ -55,60 +55,48 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Properties;
-
 import org.apache.commons.io.output.WriterOutputStream;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 
 /**
  * {@link PropertiesFormat#TEXT} writer.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PropertiesTextWriter implements PropertiesWriter {
 
-    private final OutputStream os;
-    
-    /**
-     * Creates a new {@link PropertiesTextWriter} that will write to the
-     * supplied {@link OutputStream}.
-     * 
-     * @param out
-     *            The OutputStream to write the {@link Properties} document to.
-     */
-    public PropertiesTextWriter(final OutputStream out) {
+  private final OutputStream os;
 
-        this.os = out;
-        
-    }
+  /**
+   * Creates a new {@link PropertiesTextWriter} that will write to the supplied {@link
+   * OutputStream}.
+   *
+   * @param out The OutputStream to write the {@link Properties} document to.
+   */
+  public PropertiesTextWriter(final OutputStream out) {
 
-    /**
-     * Creates a new {@link PropertiesTextWriter} that will write to the supplied
-     * {@link Writer}.
-     * 
-     * @param writer
-     *            The {@link Writer} to write the {@link Properties} document
-     *            to.
-     */
-    public PropertiesTextWriter(final Writer writer) {
+    this.os = out;
+  }
 
-        this.os = new WriterOutputStream(writer,
-                PropertiesFormat.TEXT.getCharset());
+  /**
+   * Creates a new {@link PropertiesTextWriter} that will write to the supplied {@link Writer}.
+   *
+   * @param writer The {@link Writer} to write the {@link Properties} document to.
+   */
+  public PropertiesTextWriter(final Writer writer) {
 
-    }
-    
-    public PropertiesFormat getFormat() {
+    this.os = new WriterOutputStream(writer, PropertiesFormat.TEXT.getCharset());
+  }
 
-        return PropertiesFormat.TEXT;
-        
-    }
+  public PropertiesFormat getFormat() {
 
-    @Override
-    public void write(final Properties properties) throws IOException {
-        
-        properties.store(os, null/*comment*/);
-        
-    }
+    return PropertiesFormat.TEXT;
+  }
 
+  @Override
+  public void write(final Properties properties) throws IOException {
+
+    properties.store(os, null /*comment*/);
+  }
 }

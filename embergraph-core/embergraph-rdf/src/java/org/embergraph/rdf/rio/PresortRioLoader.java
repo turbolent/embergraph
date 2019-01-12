@@ -25,166 +25,135 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
 /**
- * Statement handler for the RIO RDF Parser that writes on a
- * {@link StatementBuffer}.
- * 
+ * Statement handler for the RIO RDF Parser that writes on a {@link StatementBuffer}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class PresortRioLoader extends BasicRioLoader implements RDFHandler
-{
+public class PresortRioLoader extends BasicRioLoader implements RDFHandler {
 
-    /**
-     * Used to buffer RDF {@link Value}s and {@link Statement}s emitted by
-     * the RDF parser (the value is supplied by the ctor). 
-     */
-    final protected IStatementBuffer<?> buffer;
+  /**
+   * Used to buffer RDF {@link Value}s and {@link Statement}s emitted by the RDF parser (the value
+   * is supplied by the ctor).
+   */
+  protected final IStatementBuffer<?> buffer;
 
-	/**
-	 * When true, the <i>buffer</i> will be flushed when the end of the input is
-	 * reached.
-	 * 
-	 * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of
-	 *      StatementBuffer)
-	 */
-    private final boolean flush;
+  /**
+   * When true, the <i>buffer</i> will be flushed when the end of the input is reached.
+   *
+   * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of StatementBuffer)
+   */
+  private final boolean flush;
 
-    /**
-     * The value that will be used for the graph/context co-ordinate when
-     * loading data represented in a triple format into a quad store.
-     */
-    private EmbergraphURI defaultGraphURI = null ;
+  /**
+   * The value that will be used for the graph/context co-ordinate when loading data represented in
+   * a triple format into a quad store.
+   */
+  private EmbergraphURI defaultGraphURI = null;
 
-    /**
-     * Sets up parser to load RDF.
-     * 
-     * @param buffer
-     *            The buffer used to collect, sort, and write statements onto
-     *            the database.
-     */
-    public PresortRioLoader(final IStatementBuffer<?> buffer) {
-		
-    	this(buffer, true/* flush */);
-		
+  /**
+   * Sets up parser to load RDF.
+   *
+   * @param buffer The buffer used to collect, sort, and write statements onto the database.
+   */
+  public PresortRioLoader(final IStatementBuffer<?> buffer) {
+
+    this(buffer, true /* flush */);
+  }
+
+  /**
+   * @param buffer The buffer onto which the parsed statements will be written.
+   * @param flush When true, the <i>buffer</i> will be flushed when the end of the input is reached.
+   * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of StatementBuffer)
+   */
+  public PresortRioLoader(final IStatementBuffer<?> buffer, final boolean flush) {
+
+    super(buffer.getDatabase().getValueFactory());
+
+    this.buffer = buffer;
+
+    this.flush = flush;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>bulk insert the buffered data into the store iff <code>flush:=true</code>
+   */
+  @Override
+  protected void success() {
+
+    if (buffer != null && flush) {
+
+      buffer.flush();
     }
-    
-    /**
-	 * 
-	 * @param buffer
-	 *            The buffer onto which the parsed statements will be written.
-	 * @param flush
-	 *            When true, the <i>buffer</i> will be flushed when the end of
-	 *            the input is reached.
-	 *            
-	 * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of
-	 *      StatementBuffer)
-	 */
-    public PresortRioLoader(final IStatementBuffer<?> buffer, final boolean flush) {
+  }
 
-        super(buffer.getDatabase().getValueFactory());
+  @Override
+  protected void error(final Exception ex) {
 
-        this.buffer = buffer;
-        
-        this.flush = flush;
-        
-    }
+    if (buffer != null) {
 
-    /**
-	 * {@inheritDoc}
-	 * <p>
-	 * bulk insert the buffered data into the store iff <code>flush:=true</code>
-	 */
-    @Override
-    protected void success() {
-
-		if (buffer != null && flush) {
-
-            buffer.flush();
-            
-        }
-
+      // discard all buffered data.
+      buffer.reset();
     }
 
-    @Override
-    protected void error(final Exception ex) {
-        
-        if(buffer != null) {
-            
-            // discard all buffered data.
-            buffer.reset();
-            
-        }
+    super.error(ex);
+  }
 
-        super.error( ex );
-        
-    }
-    
-    @Override
-    public RDFHandler newRDFHandler() {
-        
-        defaultGraphURI = null != defaultGraph && buffer.getDatabase().isQuads()
-        	              ? buffer.getDatabase ().getValueFactory ().createURI ( defaultGraph )
-        			      : null
-        			      ;
+  @Override
+  public RDFHandler newRDFHandler() {
 
-        return this;
-        
+    defaultGraphURI =
+        null != defaultGraph && buffer.getDatabase().isQuads()
+            ? buffer.getDatabase().getValueFactory().createURI(defaultGraph)
+            : null;
+
+    return this;
+  }
+
+  @Override
+  public void handleStatement(final Statement stmt) {
+
+    if (log.isDebugEnabled()) {
+
+      log.debug(stmt);
     }
 
-    @Override
-    public void handleStatement(final Statement stmt) {
+    Resource graph = stmt.getContext();
 
-        if (log.isDebugEnabled()) {
+    if (null == graph && null != defaultGraphURI) {
 
-            log.debug(stmt);
-            
-        }
+      /*
+       * Only true when we know we are loading a quad store.
+       */
 
-        Resource graph = stmt.getContext() ;
-        
-        if (null == graph && null != defaultGraphURI) {
-            
-            /*
-             * Only true when we know we are loading a quad store.
-             */
-
-            graph = defaultGraphURI;
-            
-        }
-
-        // buffer the write (handles overflow).
-        buffer.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject(),
-                graph);
-
-        stmtsAdded++;
-        
-        if ( stmtsAdded % 100000 == 0 ) {
-            
-            notifyListeners();
-            
-        }
-        
+      graph = defaultGraphURI;
     }
 
-    @Override
-    public void endRDF() throws RDFHandlerException {
-        
-        // @todo why not invoke buffer#force()?
-        
-    }
+    // buffer the write (handles overflow).
+    buffer.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject(), graph);
 
-    @Override
-    public void handleComment(String arg0) throws RDFHandlerException {
-        
-    }
+    stmtsAdded++;
 
-    @Override
-    public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {
-        
-    }
+    if (stmtsAdded % 100000 == 0) {
 
-    @Override
-    public void startRDF() throws RDFHandlerException {
-        
+      notifyListeners();
     }
-    
+  }
+
+  @Override
+  public void endRDF() throws RDFHandlerException {
+
+    // @todo why not invoke buffer#force()?
+
+  }
+
+  @Override
+  public void handleComment(String arg0) throws RDFHandlerException {}
+
+  @Override
+  public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {}
+
+  @Override
+  public void startRDF() throws RDFHandlerException {}
 }

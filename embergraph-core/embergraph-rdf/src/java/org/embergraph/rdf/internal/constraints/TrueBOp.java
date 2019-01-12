@@ -20,48 +20,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 
-/**
- * Always evaluates to true.
- */
+/** Always evaluates to true. */
 public class TrueBOp extends XSDBooleanIVValueExpression {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6166507977125961015L;
-	
-	public static final TrueBOp INSTANCE = new TrueBOp();
+  /** */
+  private static final long serialVersionUID = -6166507977125961015L;
 
-	private TrueBOp() {
-		
-		this(BOp.NOARGS, BOp.NOANNS);
-		
-	}
-	
-    /**
-     * Required shallow copy constructor.
-     */
-    public TrueBOp(final BOp[] args, final Map<String, Object> anns) {
-    	
-        super(args, anns);
-        
-    }
+  public static final TrueBOp INSTANCE = new TrueBOp();
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public TrueBOp(final TrueBOp op) {
-        super(op);
-    }
+  private TrueBOp() {
 
-    public boolean accept(final IBindingSet bs) {
+    this(BOp.NOARGS, BOp.NOANNS);
+  }
 
-    	return true;
+  /** Required shallow copy constructor. */
+  public TrueBOp(final BOp[] args, final Map<String, Object> anns) {
 
-    }
-    
+    super(args, anns);
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public TrueBOp(final TrueBOp op) {
+    super(op);
+  }
+
+  public boolean accept(final IBindingSet bs) {
+
+    return true;
+  }
 }

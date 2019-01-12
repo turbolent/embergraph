@@ -17,9 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.fed.shards;
 
-
-import org.embergraph.bop.fed.shards.TestMapBindingSetsOverShards;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -32,36 +29,23 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("map binding sets over shards");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // unit tests for mapping binding sets over shards.
-        suite.addTestSuite(TestMapBindingSetsOverShards.class);
+    final TestSuite suite = new TestSuite("map binding sets over shards");
 
-        return suite;
+    // unit tests for mapping binding sets over shards.
+    suite.addTestSuite(TestMapBindingSetsOverShards.class);
 
-    }
-
+    return suite;
+  }
 }

@@ -22,96 +22,79 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
+import info.aduna.iteration.CloseableIteration;
 import java.util.NoSuchElementException;
 
-import info.aduna.iteration.CloseableIteration;
-
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * Class aligns a Sesame 2 {@link CloseableIteration} with a Embergraph
- * {@link ICloseableIterator}.
- * 
+ * Class aligns a Sesame 2 {@link CloseableIteration} with a Embergraph {@link ICloseableIterator}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z
- *          thompsonbry $
- * @param <T>
- *            The generic type of the visited elements.
- * @param <E>
- *            The generic type of the exceptions thrown by the Sesame 2
- *            {@link CloseableIteration}.
+ * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z thompsonbry $
+ * @param <T> The generic type of the visited elements.
+ * @param <E> The generic type of the exceptions thrown by the Sesame 2 {@link CloseableIteration}.
  */
-public class Sesame2EmbergraphIterator<T, E extends Exception> implements
-        ICloseableIterator<T> {
+public class Sesame2EmbergraphIterator<T, E extends Exception> implements ICloseableIterator<T> {
 
-    private final CloseableIteration<? extends T,E> src;
-    
-    private volatile boolean open = true;
-    
-    public Sesame2EmbergraphIterator(final CloseableIteration<? extends T,E> src) {
-        
-        if (src == null)
-            throw new IllegalArgumentException();
-        
-        this.src = src;
-        
+  private final CloseableIteration<? extends T, E> src;
+
+  private volatile boolean open = true;
+
+  public Sesame2EmbergraphIterator(final CloseableIteration<? extends T, E> src) {
+
+    if (src == null) throw new IllegalArgumentException();
+
+    this.src = src;
+  }
+
+  public void close() {
+
+    if (open) {
+      open = false;
+      try {
+        src.close();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
+  public boolean hasNext() {
+
+    try {
+
+      if (open && src.hasNext()) return true;
+
+      close();
+
+      return false;
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public T next() {
+
+    if (!hasNext()) {
+      throw new NoSuchElementException();
     }
 
-    public void close() {
-
-        if (open) {
-            open = false;
-            try {
-                src.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        
+    try {
+      return src.next();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public boolean hasNext() {
+  public void remove() {
 
-        try {
+    if (!open) throw new IllegalStateException();
 
-            if (open && src.hasNext())
-                return true;
-
-            close();
-            
-            return false;
-            
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
+    try {
+      src.remove();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
-
-    public T next() {
-
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-
-        try {
-            return src.next();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-    }
-
-    public void remove() {
-
-        if(!open)
-            throw new IllegalStateException();
-
-        try {
-            src.remove();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-    }
-
+  }
 }

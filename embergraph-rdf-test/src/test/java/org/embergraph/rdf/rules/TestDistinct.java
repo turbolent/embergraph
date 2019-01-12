@@ -26,39 +26,29 @@ import org.embergraph.relation.rule.IQueryOptions;
 
 /**
  * Unit tests for {@link IQueryOptions#isDistinct()}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDistinct extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestDistinct() {
+  /** */
+  public TestDistinct() {}
 
-    }
+  /** @param name */
+  public TestDistinct(String name) {
 
-    /**
-     * @param name
-     */
-    public TestDistinct(String name) {
+    super(name);
+  }
 
-        super(name);
-     
-    }
+  /**
+   * @todo write unit tests for "distinct".
+   * @todo Unit test where there are no results.
+   * @todo Unit test where duplicates are correctly dropped.
+   */
+  public void test_distinct() {
 
-    /**
-     * @todo write unit tests for "distinct".
-     * 
-     * @todo Unit test where there are no results.
-     * 
-     * @todo Unit test where duplicates are correctly dropped.
-     */
-    public void test_distinct() {
-        
-//        fail("write tests");
-        
-    }
-    
+    //        fail("write tests");
+
+  }
 }

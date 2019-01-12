@@ -23,39 +23,33 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.striterator;
 
-import java.util.NoSuchElementException;
-
 import cutthecrap.utils.striterators.ICloseableIterator;
-
+import java.util.NoSuchElementException;
 
 /**
  * A closable iterator that visits nothing.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ClosableEmptyIterator<E> implements ICloseableIterator<E> {
 
-    public void close() {
-        // NOP
-    }
+  public void close() {
+    // NOP
+  }
 
-    public boolean hasNext() {
-        
-        return false;
-        
-    }
+  public boolean hasNext() {
 
-    public E next() {
-        
-        throw new NoSuchElementException();
-        
-    }
+    return false;
+  }
 
-    public void remove() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+  public E next() {
 
+    throw new NoSuchElementException();
+  }
+
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
 }

@@ -22,40 +22,34 @@ import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Context object provides access to the {@link IIndexManager}.
- * 
+ *
  * @author Martyn Cutcher
  */
 public class EmbergraphBaseContext {
 
-//	static private final Logger log = Logger.getLogger(EmbergraphBaseContext.class);
+  //	static private final Logger log = Logger.getLogger(EmbergraphBaseContext.class);
 
-	private final IIndexManager m_indexManager;
-	
-    public EmbergraphBaseContext(final IIndexManager indexManager) {
+  private final IIndexManager m_indexManager;
 
-		if (indexManager == null)
-			throw new IllegalArgumentException();
+  public EmbergraphBaseContext(final IIndexManager indexManager) {
 
-		m_indexManager = indexManager;
+    if (indexManager == null) throw new IllegalArgumentException();
 
-	}
+    m_indexManager = indexManager;
+  }
 
-	public IIndexManager getIndexManager() {
+  public IIndexManager getIndexManager() {
 
-	    return m_indexManager;
-	    
-	}
+    return m_indexManager;
+  }
 
-    /**
-     * Return <code>true</code> iff the {@link IIndexManager} is an
-     * {@link IEmbergraphFederation} and {@link IEmbergraphFederation#isScaleOut()}
-     * reports <code>true</code>.
-     */
-    public boolean isScaleOut() {
+  /**
+   * Return <code>true</code> iff the {@link IIndexManager} is an {@link IEmbergraphFederation} and
+   * {@link IEmbergraphFederation#isScaleOut()} reports <code>true</code>.
+   */
+  public boolean isScaleOut() {
 
-        return m_indexManager instanceof IEmbergraphFederation
-                && ((IEmbergraphFederation<?>) m_indexManager).isScaleOut();
-	    
-	}
-
+    return m_indexManager instanceof IEmbergraphFederation
+        && ((IEmbergraphFederation<?>) m_indexManager).isScaleOut();
+  }
 }

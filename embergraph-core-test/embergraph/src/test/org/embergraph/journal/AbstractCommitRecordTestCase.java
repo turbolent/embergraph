@@ -22,70 +22,62 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.util.Random;
-
 import junit.framework.TestCase;
 
 /**
  * Defines some helper methods for testing {@link ICommitRecord}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractCommitRecordTestCase extends TestCase {
+public abstract class AbstractCommitRecordTestCase extends TestCase {
 
-    public AbstractCommitRecordTestCase() {
+  public AbstractCommitRecordTestCase() {}
+
+  public AbstractCommitRecordTestCase(String name) {
+    super(name);
+  }
+
+  Random r = new Random();
+
+  /**
+   * Compare two {@link ICommitRecord}s for equality in their data.
+   *
+   * @param expected
+   * @param actual
+   */
+  public void assertEquals(ICommitRecord expected, ICommitRecord actual) {
+
+    assertEquals("timestamp", expected.getTimestamp(), actual.getTimestamp());
+
+    assertEquals("#roots", expected.getRootAddrCount(), actual.getRootAddrCount());
+
+    final int n = expected.getRootAddrCount();
+
+    for (int i = 0; i < n; i++) {
+
+      assertEquals("rootAddrs", expected.getRootAddr(i), actual.getRootAddr(i));
+    }
+  }
+
+  public ICommitRecord getRandomCommitRecord() {
+
+    final long timestamp = System.currentTimeMillis();
+
+    // using the clock for this as well so that it is an ascending value.
+    final long commitCounter = System.currentTimeMillis();
+
+    final int n = ICommitRecord.MAX_ROOT_ADDRS;
+
+    long[] roots = new long[n];
+
+    for (int i = 0; i < n; i++) {
+
+      boolean empty = r.nextInt(100) < 30;
+
+      roots[i] = empty ? 0L : r.nextInt(Integer.MAX_VALUE);
     }
 
-    public AbstractCommitRecordTestCase(String name) {
-        super(name);
-    }
-
-    Random r = new Random();
-
-    /**
-     * Compare two {@link ICommitRecord}s for equality in their data.
-     * 
-     * @param expected
-     * @param actual
-     */
-    public void assertEquals(ICommitRecord expected, ICommitRecord actual) {
-        
-        assertEquals("timestamp", expected.getTimestamp(), actual.getTimestamp());
-
-        assertEquals("#roots", expected.getRootAddrCount(), actual.getRootAddrCount());
-        
-        final int n = expected.getRootAddrCount();
-        
-        for(int i=0; i<n; i++) {
-        
-            assertEquals("rootAddrs", expected.getRootAddr(i), actual.getRootAddr(i));
-            
-        }
-        
-    }
-
-    public ICommitRecord getRandomCommitRecord() {
-
-        final long timestamp = System.currentTimeMillis();
-
-        // using the clock for this as well so that it is an ascending value.
-        final long commitCounter = System.currentTimeMillis();
-
-        final int n = ICommitRecord.MAX_ROOT_ADDRS;
-        
-        long[] roots = new long[n];
-        
-        for(int i=0; i<n; i++) {
-
-            boolean empty = r.nextInt(100)<30;
-        
-            roots[i] = empty ? 0L : r.nextInt(Integer.MAX_VALUE);
-            
-        }
-
-        return new CommitRecord(timestamp,commitCounter,roots);
-        
-    }
-    
-
+    return new CommitRecord(timestamp, commitCounter, roots);
+  }
 }

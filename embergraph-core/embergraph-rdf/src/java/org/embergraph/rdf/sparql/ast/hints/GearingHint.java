@@ -28,45 +28,42 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint to enable users choose the gearing used for evaluating
- * recursive property paths. Generally speaking, the problem with recursive
- * property path queries is that it is inherently hard to choose the gearing.
- * This hint allows the user to take control over the gearing.
- * 
+ * Query hint to enable users choose the gearing used for evaluating recursive property paths.
+ * Generally speaking, the problem with recursive property path queries is that it is inherently
+ * hard to choose the gearing. This hint allows the user to take control over the gearing.
+ *
  * @author <a href="mailto:ms@blazegraph.com">Michael Schmidt</a>
  */
 final class GearingHint extends AbstractStringQueryHint {
 
-    protected GearingHint() {
+  protected GearingHint() {
 
-        super(QueryHints.GEARING, null/* default */);
+    super(QueryHints.GEARING, null /* default */);
+  }
 
-    }
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final String value) {
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final String value) {
-
-       
-       switch (scope) {
-       case Prior:
-       {
+    switch (scope) {
+      case Prior:
+        {
           if (op instanceof PropertyPathNode) {
-             _setQueryHint(context, scope, op, getName(), value);          
-             return;
+            _setQueryHint(context, scope, op, getName(), value);
+            return;
           }
-          
+
           // fall through
-       }
-       default:
-          break;
-       }
-
-       // query hint does not make sense in other situations
-       throw new QueryHintException(scope, op, getName(), value);
-
-
+        }
+      default:
+        break;
     }
 
+    // query hint does not make sense in other situations
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

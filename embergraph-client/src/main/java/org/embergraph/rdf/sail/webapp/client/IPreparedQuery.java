@@ -23,11 +23,10 @@ package org.embergraph.rdf.sail.webapp.client;
 
 /**
  * A prepared query against the {@link RemoteRepository}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPreparedQuery extends IPreparedOperation {
 
-	public void addRequestParam(String name, String... val);
-
+  public void addRequestParam(String name, String... val);
 }

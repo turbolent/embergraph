@@ -25,10 +25,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Properties;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
+import org.embergraph.journal.BufferMode;
+import org.embergraph.journal.ITx;
+import org.embergraph.journal.Journal;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.AbstractTripleStore;
+import org.embergraph.rdf.store.LocalTripleStore;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.parser.ParsedOperation;
@@ -36,197 +40,177 @@ import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11SyntaxTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLSyntaxTest;
 
-import org.embergraph.journal.BufferMode;
-import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.LocalTripleStore;
-
 /**
- * Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a
- * manifest driven test suite for both correct acceptance and correct rejection
- * tests of the SPARQL parser.  There is also an Earl report for this test suite
- * which provides a W3C markup for the test results. The Earl report is part of
- * the Sesame compliance packages.
- * 
+ * Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a manifest driven
+ * test suite for both correct acceptance and correct rejection tests of the SPARQL parser. There is
+ * also an Earl report for this test suite which provides a W3C markup for the test results. The
+ * Earl report is part of the Sesame compliance packages.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
 
-    /**
-     * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise
-     * use the openrdf parser.
-     */
-    private static final boolean useEmbergraphParser = true;
-    
-    /**
-     * @param testURI
-     * @param name
-     * @param queryFileURL
-     * @param positiveTest
-     */
-    public Embergraph2ASTSPARQL11SyntaxTest(String testURI, String name,
-            String queryFileURL, boolean positiveTest) {
+  /**
+   * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise use the openrdf
+   * parser.
+   */
+  private static final boolean useEmbergraphParser = true;
 
-        super(testURI, name, queryFileURL, positiveTest);
-        
+  /**
+   * @param testURI
+   * @param name
+   * @param queryFileURL
+   * @param positiveTest
+   */
+  public Embergraph2ASTSPARQL11SyntaxTest(
+      String testURI, String name, String queryFileURL, boolean positiveTest) {
+
+    super(testURI, name, queryFileURL, positiveTest);
+  }
+
+  private AbstractTripleStore tripleStore;
+
+  protected Properties getProperties() {
+
+    final Properties properties = new Properties();
+
+    // turn on quads.
+    properties.setProperty(AbstractTripleStore.Options.QUADS, "true");
+
+    //        // override the default vocabulary.
+    //        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
+    //                NoVocabulary.class.getName());
+
+    // turn off axioms.
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+
+    // Note: No persistence.
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    return properties;
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+
+    super.setUp();
+
+    tripleStore = getStore(getProperties());
+  }
+
+  protected AbstractTripleStore getStore(final Properties properties) {
+
+    final String namespace = "kb";
+
+    // create/re-open journal.
+    final Journal journal = new Journal(properties);
+
+    final LocalTripleStore lts =
+        new LocalTripleStore(journal, namespace, ITx.UNISOLATED, properties);
+
+    lts.create();
+
+    return lts;
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    if (tripleStore != null) {
+
+      tripleStore.__tearDownUnitTest();
+
+      tripleStore = null;
     }
 
-    private AbstractTripleStore tripleStore;
-    
-    protected Properties getProperties() {
+    super.tearDown();
+  }
 
-        final Properties properties = new Properties();
+  /**
+   * {@inheritDoc}
+   *
+   * <p>This uses the {@link Embergraph2ASTSPARQLParser}.
+   *
+   * @return
+   */
+  @Override
+  protected ParsedOperation parseOperation(final String query, final String queryFileURL)
+      throws MalformedQueryException {
 
-        // turn on quads.
-        properties.setProperty(AbstractTripleStore.Options.QUADS, "true");
+    try {
 
-//        // override the default vocabulary.
-//        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
-//                NoVocabulary.class.getName());
+      if (useEmbergraphParser) {
+        // embergraph parser.
+        return new Embergraph2ASTSPARQLParser().parseOperation(query, queryFileURL);
 
-        // turn off axioms.
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+      } else {
+        // openrdf parser.
+        return QueryParserUtil.parseOperation(QueryLanguage.SPARQL, query, queryFileURL);
+      }
 
-        // Note: No persistence.
-        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
-        
-        return properties;
+    } catch (MalformedQueryException ex) {
 
+      throw new MalformedQueryException(
+          ex + ": query=" + query + ", queryFileURL=" + queryFileURL, ex);
     }
+  }
 
-    @Override
-    protected void setUp() throws Exception {
+  public static Test suite() throws Exception {
 
-        super.setUp();
-        
-        tripleStore = getStore(getProperties());
+    final SPARQL11SyntaxTest.Factory factory =
+        new SPARQL11SyntaxTest.Factory() {
 
-    }
-    
-    protected AbstractTripleStore getStore(final Properties properties) {
+          @Override
+          public SPARQL11SyntaxTest createSPARQLSyntaxTest(
+              String testURI, String testName, String testAction, boolean positiveTest) {
 
-        final String namespace = "kb";
-
-        // create/re-open journal.
-        final Journal journal = new Journal(properties);
-
-        final LocalTripleStore lts = new LocalTripleStore(journal, namespace,
-                ITx.UNISOLATED, properties);
-
-        lts.create();
-
-        return lts;
-
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        
-        if (tripleStore != null) {
-            
-            tripleStore.__tearDownUnitTest();
-            
-            tripleStore = null;
-            
-        }
-
-        super.tearDown();
-        
-    }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * This uses the {@link Embergraph2ASTSPARQLParser}.
-     * @return 
-     */
-    @Override
-    protected ParsedOperation parseOperation(final String query, final String queryFileURL)
-            throws MalformedQueryException {
-
-        try {
-
-            if (useEmbergraphParser) {
-                // embergraph parser.
-                return new Embergraph2ASTSPARQLParser().parseOperation(query,
-                        queryFileURL);
-                
-            } else {
-                // openrdf parser.
-                return QueryParserUtil
-                        .parseOperation(QueryLanguage.SPARQL, query, queryFileURL);
-            }
-            
-        } catch (MalformedQueryException ex) {
-            
-            throw new MalformedQueryException(ex + ": query=" + query
-                    + ", queryFileURL=" + queryFileURL, ex);
-            
-        }
-
-    }
-
-    public static Test suite() throws Exception {
-
-        final SPARQL11SyntaxTest.Factory factory = new SPARQL11SyntaxTest.Factory() {
-
-            @Override
-            public SPARQL11SyntaxTest createSPARQLSyntaxTest(String testURI,
-                    String testName, String testAction, boolean positiveTest) {
-
-                return new Embergraph2ASTSPARQL11SyntaxTest(testURI, testName, testAction,
-                        positiveTest);
-                
-            }
-            
+            return new Embergraph2ASTSPARQL11SyntaxTest(
+                testURI, testName, testAction, positiveTest);
+          }
         };
 
-        /**
-         * Filter out known bad tests.
-         * 
-         * See #1076 Negative parser tests
-         */
-        TestSuite suite = new TestSuite();
-
-        suite.addTest(SPARQL11SyntaxTest.suite(factory, false));
-
-        suite = filterOutTests(suite, knownBadTests);
-
-        return suite;
-
-    }
-
-    static TestSuite filterOutTests(final TestSuite suite1, final Collection<String> testURIs) {
-
-        final TestSuite suite2 = new TestSuite(suite1.getName());
-        final Enumeration<Test> e = suite1.tests();
-        while (e.hasMoreElements()) {
-            final Test aTest = e.nextElement();
-            if (aTest instanceof TestSuite) {
-                final TestSuite aTestSuite = (TestSuite) aTest;
-                suite2.addTest(filterOutTests(aTestSuite, testURIs));
-            } else if (aTest instanceof Embergraph2ASTSPARQL11SyntaxTest) {
-                final Embergraph2ASTSPARQL11SyntaxTest test = (Embergraph2ASTSPARQL11SyntaxTest) aTest;
-                if (!testURIs.contains(test.testURI)) {
-                    suite2.addTest(test);
-                }
-            }
-
-        }
-        return suite2;
-       
-    }
-
     /**
-     * Tests that are known to fail.
-     * 
-     * @see See #1076 Negative parser tests
+     * Filter out known bad tests.
+     *
+     * <p>See #1076 Negative parser tests
      */
-    static final private Collection<String> knownBadTests = Arrays.asList(new String[] {
+    TestSuite suite = new TestSuite();
+
+    suite.addTest(SPARQL11SyntaxTest.suite(factory, false));
+
+    suite = filterOutTests(suite, knownBadTests);
+
+    return suite;
+  }
+
+  static TestSuite filterOutTests(final TestSuite suite1, final Collection<String> testURIs) {
+
+    final TestSuite suite2 = new TestSuite(suite1.getName());
+    final Enumeration<Test> e = suite1.tests();
+    while (e.hasMoreElements()) {
+      final Test aTest = e.nextElement();
+      if (aTest instanceof TestSuite) {
+        final TestSuite aTestSuite = (TestSuite) aTest;
+        suite2.addTest(filterOutTests(aTestSuite, testURIs));
+      } else if (aTest instanceof Embergraph2ASTSPARQL11SyntaxTest) {
+        final Embergraph2ASTSPARQL11SyntaxTest test = (Embergraph2ASTSPARQL11SyntaxTest) aTest;
+        if (!testURIs.contains(test.testURI)) {
+          suite2.addTest(test);
+        }
+      }
+    }
+    return suite2;
+  }
+
+  /**
+   * Tests that are known to fail.
+   *
+   * @see See #1076 Negative parser tests
+   */
+  private static final Collection<String> knownBadTests =
+      Arrays.asList(
+          new String[] {
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_60", // syntax-BINDscope6.rq
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_61a", // syntax-BINDscope7.rq
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_62a", // syntax-BINDscope8.rq
@@ -234,6 +218,5 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_25", // syntax-update-25.ru
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_31", // syntax-update-31.ru
             "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54", // syntax-update-54.ru
-    });
-    
+          });
 }

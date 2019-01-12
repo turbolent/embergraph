@@ -24,24 +24,22 @@ package org.embergraph.rdf.internal;
 import junit.framework.TestCase2;
 
 /**
- * Test suite for xsd:nonPositiveInteger, xsd:negativeInteger,
- * xsd:nonNegativeInteger, and xsd:positiveInteger.
- * 
+ * Test suite for xsd:nonPositiveInteger, xsd:negativeInteger, xsd:nonNegativeInteger, and
+ * xsd:positiveInteger.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestUnsignedIntegerIVs extends TestCase2 {
 
-    public TestUnsignedIntegerIVs() {
-    }
+  public TestUnsignedIntegerIVs() {}
 
-    public TestUnsignedIntegerIVs(final String name) {
-        super(name);
-    }
-    
-    public void test_xsd_nonPositiveInteger() {
-//        fail("write tests");
-    	// these are well covered in other test suites now
-    }
+  public TestUnsignedIntegerIVs(final String name) {
+    super(name);
+  }
 
+  public void test_xsd_nonPositiveInteger() {
+    //        fail("write tests");
+    // these are well covered in other test suites now
+  }
 }

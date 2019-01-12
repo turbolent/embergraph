@@ -24,48 +24,37 @@ package org.embergraph.quorum;
 import java.util.UUID;
 
 /**
- * An interface for informational quorum events. These events are intended for
- * clients interested in quorum state changes. Services that are HA aware use a
- * more intimate API to handle the state changes.
- * 
+ * An interface for informational quorum events. These events are intended for clients interested in
+ * quorum state changes. Services that are HA aware use a more intimate API to handle the state
+ * changes.
+ *
  * @see QuorumListener
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface QuorumEvent {
 
-    /**
-     * The type of event and never <code>null</code>.
-     */
-    QuorumEventEnum getEventType();
+  /** The type of event and never <code>null</code>. */
+  QuorumEventEnum getEventType();
 
-    /**
-     * The lastValid token at the time of the event.
-     */
-    long lastValidToken();
+  /** The lastValid token at the time of the event. */
+  long lastValidToken();
 
-    /**
-     * The current quorum token at the time the event was generated.
-     */
-    long token();
+  /** The current quorum token at the time the event was generated. */
+  long token();
 
-    /**
-     * The service identifier associated with the event, if any. For example,
-     * when a service joins or leaves the quorum, this will be the {@link UUID}
-     * of that service.
-     */
-    UUID getServiceId();
+  /**
+   * The service identifier associated with the event, if any. For example, when a service joins or
+   * leaves the quorum, this will be the {@link UUID} of that service.
+   */
+  UUID getServiceId();
 
-    /**
-     * The lastCommitTime for which a vote was cast.
-     * 
-     * @return The lastCommitTime for which the vote was cast.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link #getEventType()} returns
-     *             {@link QuorumEventEnum#CAST_VOTE}
-     */
-    long lastCommitTime();
-    
+  /**
+   * The lastCommitTime for which a vote was cast.
+   *
+   * @return The lastCommitTime for which the vote was cast.
+   * @throws UnsupportedOperationException unless {@link #getEventType()} returns {@link
+   *     QuorumEventEnum#CAST_VOTE}
+   */
+  long lastCommitTime();
 }

@@ -24,86 +24,69 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import java.util.Iterator;
-
 import org.embergraph.btree.ITupleIterator;
-//import org.embergraph.btree.filter.IFilter;
+// import org.embergraph.btree.filter.IFilter;
 
 /**
  * Chunked streaming iterator.
- * 
- * @todo Like the {@link ITupleIterator}, the {@link IChunkedIterator}s can be
- *       executed on the server and them stream results back to the client. We
- *       really need to introduce custom compression for chunk-at-a-time results
- *       streamed back from the server. If the filters are to be specified on
- *       the client and applied on the server, then an
- *       {@link IFilter} will be needed to construct the filter stack
- *       on the server.
- *       
+ *
+ * @todo Like the {@link ITupleIterator}, the {@link IChunkedIterator}s can be executed on the
+ *     server and them stream results back to the client. We really need to introduce custom
+ *     compression for chunk-at-a-time results streamed back from the server. If the filters are to
+ *     be specified on the client and applied on the server, then an {@link IFilter} will be needed
+ *     to construct the filter stack on the server.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class ChunkedStriterator<I extends IChunkedIterator<E>, E> extends
-        Striterator<I, E> implements IChunkedStriterator<I, E> {
+public class ChunkedStriterator<I extends IChunkedIterator<E>, E> extends Striterator<I, E>
+    implements IChunkedStriterator<I, E> {
 
-    public ChunkedStriterator(final I src) {
+  public ChunkedStriterator(final I src) {
 
-        super(src);
+    super(src);
 
-        this.src = src;
+    this.src = src;
+  }
 
-    }
-    
-    /**
-     * Wraps the source iterator as a chunked iterator using a default chunk
-     * size.
-     * 
-     * @param src
-     *            The source iterator.
-     */
-    public ChunkedStriterator(final Iterator<E> src) {
-     
-        this(IChunkedIterator.DEFAULT_CHUNK_SIZE, src);
-        
-    }
+  /**
+   * Wraps the source iterator as a chunked iterator using a default chunk size.
+   *
+   * @param src The source iterator.
+   */
+  public ChunkedStriterator(final Iterator<E> src) {
 
-    /**
-     * Wraps the source iterator as a chunked iterator.
-     * 
-     * @param chunkSize
-     *            The chunk size.
-     * @param src
-     *            The source iterator.
-     */
-    @SuppressWarnings("unchecked")
-    public ChunkedStriterator(final int chunkSize, final Iterator<E> src) {
+    this(IChunkedIterator.DEFAULT_CHUNK_SIZE, src);
+  }
 
-        this((I) new ChunkedWrappedIterator<E>(src, chunkSize,
-                null/* keyOrder */, null/* filter */));
+  /**
+   * Wraps the source iterator as a chunked iterator.
+   *
+   * @param chunkSize The chunk size.
+   * @param src The source iterator.
+   */
+  @SuppressWarnings("unchecked")
+  public ChunkedStriterator(final int chunkSize, final Iterator<E> src) {
 
-    }
+    this((I) new ChunkedWrappedIterator<E>(src, chunkSize, null /* keyOrder */, null /* filter */));
+  }
 
-    @Override
-    final public E[] nextChunk() {
+  @Override
+  public final E[] nextChunk() {
 
-        return src.nextChunk();
+    return src.nextChunk();
+  }
 
-    }
+  //    @Override
+  //    final public void close() {
+  //
+  //        ((ICloseableIterator<?>) src).close();
+  //
+  //    }
 
-//    @Override
-//    final public void close() {
-//
-//        ((ICloseableIterator<?>) src).close();
-//
-//    }
+  /** Strengthened return type. */
+  @Override
+  public IChunkedStriterator<I, E> addFilter(final IFilter<I, ?, E> filter) {
 
-    /**
-     * Strengthened return type.
-     */
-    @Override
-    public IChunkedStriterator<I, E> addFilter(final IFilter<I, ?, E> filter) {
-
-        return (IChunkedStriterator<I, E>) super.addFilter(filter);
-
-    }
-
+    return (IChunkedStriterator<I, E>) super.addFilter(filter);
+  }
 }

@@ -26,38 +26,30 @@ import java.io.OutputStream;
 
 /**
  * Unicode compression / decompression api.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IUnicodeCompressor {
 
-    /**
-     * Encode a Unicode character sequence. The run length of the encoded
-     * sequence is NOT marked in the output.
-     * 
-     * @param in
-     *            The Unicode data.
-     * @param out
-     *            Where to write the encoded data.
-     * 
-     * @return The #of bytes written onto the output stream
-     */
-    public int encode(CharSequence in, OutputStream out);
+  /**
+   * Encode a Unicode character sequence. The run length of the encoded sequence is NOT marked in
+   * the output.
+   *
+   * @param in The Unicode data.
+   * @param out Where to write the encoded data.
+   * @return The #of bytes written onto the output stream
+   */
+  public int encode(CharSequence in, OutputStream out);
 
-    /**
-     * Decode a Unicode character sequence from the input stream. The run length
-     * of the encoded sequence is NOT marked in the input, so the caller must
-     * provide a view consisting of exactly the bytes to be decoded.
-     * 
-     * @param in
-     *            The encoded data.
-     * @param out
-     *            The decoded data (Unicode characters) are appended to this
-     *            object.
-     * 
-     * @return The #of bytes that were consumed.
-     */
-    public int decode(InputStream in, Appendable out);
-
+  /**
+   * Decode a Unicode character sequence from the input stream. The run length of the encoded
+   * sequence is NOT marked in the input, so the caller must provide a view consisting of exactly
+   * the bytes to be decoded.
+   *
+   * @param in The encoded data.
+   * @param out The decoded data (Unicode characters) are appended to this object.
+   * @return The #of bytes that were consumed.
+   */
+  public int decode(InputStream in, Appendable out);
 }

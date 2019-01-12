@@ -22,242 +22,197 @@ package org.embergraph.rdf.internal.impl.literal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
-import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.io.LongPacker;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.openrdf.model.Literal;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
 /**
- * Internal value representing a packed long in the range [0;72057594037927935L].
- * Note that this is not the full range of long (negative values are not
- * supported and positive long values in [72057594037927936L;Long.MAX]
- * are not supported), the reason being that the compression technique
+ * Internal value representing a packed long in the range [0;72057594037927935L]. Note that this is
+ * not the full range of long (negative values are not supported and positive long values in
+ * [72057594037927936L;Long.MAX] are not supported), the reason being that the compression technique
  * we're using is order preserving only for the valid range.
-*/
-public class PackedLongIV<V extends EmbergraphLiteral>
-        extends AbstractLiteralIV<V, Long>
-            implements Serializable, Literal {
+ */
+public class PackedLongIV<V extends EmbergraphLiteral> extends AbstractLiteralIV<V, Long>
+    implements Serializable, Literal {
 
-    private static final long serialVersionUID = 925868533758851987L;
+  private static final long serialVersionUID = 925868533758851987L;
 
-//  private static final transient Logger log = Logger.getLogger(CompressedTimestampIV.class);
+  //  private static final transient Logger log = Logger.getLogger(CompressedTimestampIV.class);
 
-    public static final URI PACKED_LONG = new URIImpl("http://www.embergraph.org/rdf/datatype#packedLong");
+  public static final URI PACKED_LONG =
+      new URIImpl("http://www.embergraph.org/rdf/datatype#packedLong");
 
+  /**
+   * The {@link PackedLongIV} uses the {@link LongPacker} to compress values. {@link
+   * LongPacker#packLong(long, byte[], org.embergraph.io.LongPacker.IByteBuffer)} is order
+   * preserving whenever the first byte is 0. Since the IV relies on an order preserving encoding,
+   * we restrict the supported range to values in [0;MAX_POS_LONG_WITH_LEADING_ZERO_BYTE], where
+   * MAX_POS_LONG_WITH_LEADING_ZERO_BYTE corresponds to the 64bit string 00000000111111111111111...,
+   * which equals 72057594037927935L. The value was (statically) verified as follows: <code>
+   * long v1 = 72057594037927935L;
+   * long v2 = 72057594037927936L;
+   * System.out.println(( ( v1 >> 56 ) != 0 )); // condition used in LongPacker
+   * System.out.println(( ( v2 >> 56 ) != 0 )); // condition used in LongPacker
+   * </code> outputs "false" followed by "true".
+   */
+  public static final long MAX_POS_LONG_WITH_LEADING_ZERO_BYTE = 72057594037927935L;
 
-    /**
-     *  The {@link PackedLongIV} uses the {@link LongPacker} to compress values.
-     *  {@link LongPacker#packLong(long, byte[], org.embergraph.io.LongPacker.IByteBuffer)}
-     *  is order preserving whenever the first byte is 0. Since the IV relies on an
-     *  order preserving encoding, we restrict the supported range to values in
-     *  [0;MAX_POS_LONG_WITH_LEADING_ZERO_BYTE], where MAX_POS_LONG_WITH_LEADING_ZERO_BYTE
-     *  corresponds to the 64bit string 00000000111111111111111..., which equals
-     *  72057594037927935L. The value was (statically) verified as follows:
-     *  <code>
-          long v1 = 72057594037927935L;
-          long v2 = 72057594037927936L;
-          System.out.println(( ( v1 >> 56 ) != 0 )); // condition used in LongPacker
-          System.out.println(( ( v2 >> 56 ) != 0 )); // condition used in LongPacker
-       </code>
-     * outputs "false" followed by "true".
-     */
-    public static final long MAX_POS_LONG_WITH_LEADING_ZERO_BYTE = 72057594037927935L;
-    
-    /**
-     * The represented value
-     */
-    private final long value;
+  /** The represented value */
+  private final long value;
 
-    /**
-     * The cached materialized EmbergraphValue for this InetAddress.
-     */
-    private transient V literal;
-    
-    @Override
-    public IV<V, Long> clone(final boolean clearCache) {
+  /** The cached materialized EmbergraphValue for this InetAddress. */
+  private transient V literal;
 
-        final PackedLongIV<V> tmp = new PackedLongIV<V>(value);
-        
-        if (!clearCache) {
+  @Override
+  public IV<V, Long> clone(final boolean clearCache) {
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    final PackedLongIV<V> tmp = new PackedLongIV<V>(value);
 
-    }
-    
-    /**
-     * Ctor with string value specified.
-     */
-    public PackedLongIV(final String value) {
+    if (!clearCache) {
 
-        this(Long.valueOf(value));
-        
+      tmp.setValue(getValueCache());
     }
 
-    /**
-     * Ctor with internal value specified.
-     */
-    public PackedLongIV(final long value) {
+    return tmp;
+  }
 
-        super(DTE.Extension);
+  /** Ctor with string value specified. */
+  public PackedLongIV(final String value) {
 
-        if (value<0 || value>MAX_POS_LONG_WITH_LEADING_ZERO_BYTE) {
-            throw new IllegalArgumentException("long value out of range: " + value);
-        }
-        this.value = value;
-        
+    this(Long.valueOf(value));
+  }
+
+  /** Ctor with internal value specified. */
+  public PackedLongIV(final long value) {
+
+    super(DTE.Extension);
+
+    if (value < 0 || value > MAX_POS_LONG_WITH_LEADING_ZERO_BYTE) {
+      throw new IllegalArgumentException("long value out of range: " + value);
     }
+    this.value = value;
+  }
 
-    /**
-     * Returns the inline value.
-     */
-    @Override
-    public Long getInlineValue() throws UnsupportedOperationException {
-        return value;
+  /** Returns the inline value. */
+  @Override
+  public Long getInlineValue() throws UnsupportedOperationException {
+    return value;
+  }
+
+  /** Returns the Literal representation of this IV. */
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+    if (literal == null) {
+      literal = (V) lex.getValueFactory().createLiteral(getLabel(), PACKED_LONG);
+      literal.setIV(this);
     }
+    return literal;
+  }
 
-    /**
-     * Returns the Literal representation of this IV.
-     */
-    @SuppressWarnings("unchecked")
-    public V asValue(final LexiconRelation lex) {
-        if (literal == null) {
-            literal = (V) lex.getValueFactory().createLiteral(getLabel(), PACKED_LONG);
-            literal.setIV(this);
-        }
-        return literal;
+  /**
+   * Return the byte length for the byte[] encoded representation of this internal value. Depends on
+   * the byte length of the encoded inline value.
+   */
+  @Override
+  public int byteLength() {
+    return 1 /* flags */ + 1 /* DTEExtension */ + LongPacker.getByteLength(value);
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
+
+  @Override
+  public int hashCode() {
+    return (int) value;
+  }
+
+  @Override
+  public String getLabel() {
+    return String.valueOf(value);
+  }
+
+  /** Two {@link PackedLongIV} are equal if their InetAddresses are equal. */
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof PackedLongIV) {
+      return value == ((PackedLongIV<?>) o).value;
     }
+    return false;
+  }
 
-    /**
-     * Return the byte length for the byte[] encoded representation of this
-     * internal value.  Depends on the byte length of the encoded inline value.
-     */
-    @Override
-    public int byteLength() {
-        return 1 /* flags */ + 1 /* DTEExtension */ + LongPacker.getByteLength(value);
+  @Override
+  @SuppressWarnings("rawtypes")
+  public int _compareTo(IV o) {
+
+    if (value < ((PackedLongIV<?>) o).value) {
+      return -1;
+    } else if (value > ((PackedLongIV<?>) o).value) {
+      return 1;
+    } else {
+      return 0;
     }
+  }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-    
-    @Override
-    public int hashCode() {
-        return (int)value;
-    }
+  @Override
+  public DTEExtension getDTEX() {
 
-    @Override
-    public String getLabel() {
-        return String.valueOf(value);
-    }
-    
-    /**
-     * Two {@link PackedLongIV} are equal if their InetAddresses are equal.
-     */
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof PackedLongIV) {
-            return value==((PackedLongIV<?>) o).value;
-        }
-        return false;
-    }
+    return DTEExtension.PACKED_LONG;
+  }
 
-    @Override
-    @SuppressWarnings("rawtypes")
-    public int _compareTo(IV o) {
+  /** Implement {@link Literal#booleanValue()}. */
+  @Override
+  public boolean booleanValue() {
+    return value > 0;
+  }
 
-        if (value < ((PackedLongIV<?>)o).value) {
-            return -1;
-        } else if (value>((PackedLongIV<?>)o).value) {
-            return 1;
-        } else {
-            return 0;
-        }
+  /** Implement {@link Literal#shortValue()}. */
+  @Override
+  public short shortValue() {
+    return (short) value;
+  }
 
-    }
+  /** Implement {@link Literal#intValue()}. */
+  @Override
+  public int intValue() {
+    return (int) value;
+  }
 
-    @Override
-    public DTEExtension getDTEX() {
+  /** Implement {@link Literal#longValue()}. */
+  @Override
+  public long longValue() {
+    return value;
+  }
 
-        return DTEExtension.PACKED_LONG;
+  /** Implement {@link Literal#floatValue()}. */
+  @Override
+  public float floatValue() {
+    return (float) value;
+  }
 
-    }
-    
-    /**
-     * Implement {@link Literal#booleanValue()}.
-     */
-    @Override
-    public boolean booleanValue() {
-        return value>0;
-    }
+  /** Implement {@link Literal#doubleValue()}. */
+  @Override
+  public double doubleValue() {
+    return (double) value;
+  }
 
-    /**
-     * Implement {@link Literal#shortValue()}.
-     */
-    @Override
-    public short shortValue() {
-        return (short)value;
-    }
+  /** Implement {@link Literal#integerValue()}. */
+  @Override
+  public BigInteger integerValue() {
+    return BigInteger.valueOf(value);
+  }
 
-    /**
-     * Implement {@link Literal#intValue()}.
-     */
-    @Override
-    public int intValue() {
-        return (int)value;
-    }
-
-    /**
-     * Implement {@link Literal#longValue()}.
-     */
-    @Override
-    public long longValue() {
-        return value;
-    }
-
-    /**
-     * Implement {@link Literal#floatValue()}.
-     */
-    @Override
-    public float floatValue() {
-        return (float)value;
-    }
-
-    /**
-     * Implement {@link Literal#doubleValue()}.
-     */
-    @Override
-    public double doubleValue() {
-        return (double)value;
-    }
-
-    /**
-     * Implement {@link Literal#integerValue()}.
-     */
-    @Override
-    public BigInteger integerValue() {
-        return BigInteger.valueOf(value);
-    }
-
-    /**
-     * Implement {@link Literal#decimalValue()}.
-     */
-    @Override
-    public BigDecimal decimalValue() {
-        return BigDecimal.valueOf(value);
-    }
-
+  /** Implement {@link Literal#decimalValue()}. */
+  @Override
+  public BigDecimal decimalValue() {
+    return BigDecimal.valueOf(value);
+  }
 }

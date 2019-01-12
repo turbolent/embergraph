@@ -28,37 +28,34 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Mark a statement pattern as "range safe", which in effect means it 
- * uses only one datatype in it value space (for bindings for O) and
- * that the filters in the query are respecting that datatype.
+ * Mark a statement pattern as "range safe", which in effect means it uses only one datatype in it
+ * value space (for bindings for O) and that the filters in the query are respecting that datatype.
  */
 final class RangeHint extends AbstractQueryHint<Boolean> {
 
-    protected RangeHint() {
-        super(QueryHints.RANGE_SAFE, false);
+  protected RangeHint() {
+    super(QueryHints.RANGE_SAFE, false);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setQueryHint(context, scope, op, getName(), value);
+
+      return;
     }
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final Boolean value) {
+  @Override
+  public Boolean validate(String value) {
 
-        if (op instanceof StatementPatternNode) {
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-            return;
-
-        }
-
-    }
-
-    @Override
-    public Boolean validate(String value) {
-
-        return Boolean.valueOf(value);
-        
-    }
-
+    return Boolean.valueOf(value);
+  }
 }

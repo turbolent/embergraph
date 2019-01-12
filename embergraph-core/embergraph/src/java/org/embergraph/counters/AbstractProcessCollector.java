@@ -23,91 +23,76 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-import org.apache.log4j.Logger;
-
 import java.util.List;
 import java.util.Map;
-
+import org.apache.log4j.Logger;
 
 /**
  * Base class for collection of performance counters as reported by a native process.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractProcessCollector implements IStatisticsCollector {
+public abstract class AbstractProcessCollector implements IStatisticsCollector {
 
-    protected static final Logger log = Logger.getLogger(AbstractProcessCollector.class);
-    
-    final private int interval;
+  protected static final Logger log = Logger.getLogger(AbstractProcessCollector.class);
 
-    public int getInterval() {
-        
-        return interval;
-        
+  private final int interval;
+
+  public int getInterval() {
+
+    return interval;
+  }
+
+  protected ActiveProcess activeProcess;
+
+  /**
+   * @param interval The interval at which the performance counters will be read in milliseconds.
+   */
+  public AbstractProcessCollector(final int interval) {
+
+    if (interval == 0) throw new IllegalArgumentException();
+
+    this.interval = interval;
+  }
+
+  /** Override if you want to impose settings on environment variables. */
+  protected void setEnvironment(Map<String, String> env) {
+    // Fixed numbers format for sysstat commands
+    env.put("LC_NUMERIC", "C");
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Creates the {@link ActiveProcess} and the {@link
+   * ActiveProcess#start(AbstractProcessReader)}s it passing in the value returned by the {@link
+   * #getProcessReader()}
+   */
+  @Override
+  public void start() {
+
+    log.info("");
+
+    activeProcess = new ActiveProcess(getCommand(), this);
+
+    activeProcess.start(getProcessReader());
+  }
+
+  @Override
+  public void stop() {
+
+    log.info("");
+
+    if (activeProcess != null) {
+
+      activeProcess.stop();
+
+      activeProcess = null;
     }
-    
-    protected ActiveProcess activeProcess;
+  }
 
-    /**
-     * 
-     * @param interval
-     *            The interval at which the performance counters will be
-     *            read in milliseconds.
-     */
-    public AbstractProcessCollector(final int interval) {
+  public abstract List<String> getCommand();
 
-        if (interval == 0)
-            throw new IllegalArgumentException();
-        
-        this.interval = interval;
-        
-    }
-
-    /**
-     * Override if you want to impose settings on environment variables.
-     */
-    protected void setEnvironment(Map<String,String> env) {
-        // Fixed numbers format for sysstat commands
-        env.put("LC_NUMERIC", "C");
-        
-    }
-    
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Creates the {@link ActiveProcess} and the
-     * {@link ActiveProcess#start(AbstractProcessReader)}s it passing in the
-     * value returned by the {@link #getProcessReader()}
-     */
-    @Override
-    public void start() {
-
-        log.info("");
-        
-        activeProcess = new ActiveProcess(getCommand(), this);
-        
-        activeProcess.start(getProcessReader());
-
-    }
-
-    @Override
-    public void stop() {
-
-        log.info("");
-
-        if (activeProcess != null) {
-
-            activeProcess.stop();
-
-            activeProcess = null;
-
-        }
-
-    }
-
-    abstract public List<String> getCommand();
-
-    abstract public AbstractProcessReader getProcessReader();
-
+  public abstract AbstractProcessReader getProcessReader();
 }

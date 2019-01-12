@@ -25,10 +25,8 @@ import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Interface for chunked {@link Justification} iterators.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IJustificationIterator extends IChunkedIterator<Justification> {
-
-}
+public interface IJustificationIterator extends IChunkedIterator<Justification> {}

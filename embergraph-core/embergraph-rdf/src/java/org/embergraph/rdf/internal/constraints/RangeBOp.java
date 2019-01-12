@@ -19,7 +19,6 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
@@ -33,290 +32,276 @@ import org.embergraph.rdf.internal.IV;
 
 /**
  * Operator used to impose a key-range constraint on a variable on access path.
- * 
- * @see https://sourceforge.net/apps/trac/bigdata/ticket/238 (Lift range
- *      constraints onto AP).
- *      
+ *
+ * @see https://sourceforge.net/apps/trac/bigdata/ticket/238 (Lift range constraints onto AP).
  * @author mrpersonick
  */
 @SuppressWarnings("rawtypes")
-final public class RangeBOp extends ModifiableBOpBase { // implements IVariable<Range> {
+public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<Range> {
 
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 3368581489737593349L;
+  /** */
+  private static final long serialVersionUID = 3368581489737593349L;
 
-//	private static final Logger log = Logger.getLogger(RangeBOp.class);
-	
-    public interface Annotations extends ImmutableBOp.Annotations {
+  //	private static final Logger log = Logger.getLogger(RangeBOp.class);
 
-//        /**
-//         * The variable whose range is restricted by the associated
-//         * {@link #FROM} and/or {@link #TO} filters.
-//         */
-//		String VAR = RangeBOp.class.getName() + ".var";
+  public interface Annotations extends ImmutableBOp.Annotations {
 
-		/** The inclusive lower bound. */
-		String FROM = RangeBOp.class.getName() + ".from";
-		
-		/** The exclusive upper bound. */
-		String TO = RangeBOp.class.getName() + ".to";
-		
-    }
-    
-//    /** Cached to/from lookups. */
-//    private transient volatile IValueExpression<IV> to, from;
+    //        /**
+    //         * The variable whose range is restricted by the associated
+    //         * {@link #FROM} and/or {@link #TO} filters.
+    //         */
+    //		String VAR = RangeBOp.class.getName() + ".var";
 
-    public RangeBOp() {
-    	
-        this(BOp.NOARGS, new LinkedHashMap<String,Object>());
-        
-    }
-    
-//    public RangeBOp(final IVariable<? extends IV> var) {
-//    	
-//        this(BOp.NOARGS, NV.asMap(new NV(Annotations.VAR, var)));
-//        
-//    }
-    
-    public RangeBOp(//final IVariable<? extends IV> var,
-    		final IValueExpression<? extends IV> from, 
-    		final IValueExpression<? extends IV> to) {
+    /** The inclusive lower bound. */
+    String FROM = RangeBOp.class.getName() + ".from";
 
-        this(BOp.NOARGS, NV.asMap(
-//    			new NV(Annotations.VAR, var),
-			    new NV(Annotations.FROM, from),
-				new NV(Annotations.TO, to)));
+    /** The exclusive upper bound. */
+    String TO = RangeBOp.class.getName() + ".to";
+  }
 
-    }
+  //    /** Cached to/from lookups. */
+  //    private transient volatile IValueExpression<IV> to, from;
 
-	/**
-	 * Required shallow copy constructor.
-	 */
-    public RangeBOp(final BOp[] args, final Map<String,Object> anns) {
-        super(args,anns);
-    }
+  public RangeBOp() {
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+    this(BOp.NOARGS, new LinkedHashMap<String, Object>());
+  }
+
+  //    public RangeBOp(final IVariable<? extends IV> var) {
+  //
+  //        this(BOp.NOARGS, NV.asMap(new NV(Annotations.VAR, var)));
+  //
+  //    }
+
+  public RangeBOp( // final IVariable<? extends IV> var,
+      final IValueExpression<? extends IV> from, final IValueExpression<? extends IV> to) {
+
+    this(
+        BOp.NOARGS,
+        NV.asMap(
+            //    			new NV(Annotations.VAR, var),
+            new NV(Annotations.FROM, from), new NV(Annotations.TO, to)));
+  }
+
+  /** Required shallow copy constructor. */
+  public RangeBOp(final BOp[] args, final Map<String, Object> anns) {
+    super(args, anns);
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public RangeBOp(final RangeBOp op) {
+    super(op);
+  }
+
+  //    @SuppressWarnings("unchecked")
+  //    public IVariable<? extends IV> var() {
+  //    	return (IVariable<? extends IV>) getProperty(Annotations.VAR);
+  //    }
+
+  @SuppressWarnings("unchecked")
+  public IValueExpression<? extends IV> from() {
+    return (IValueExpression<? extends IV>) getProperty(Annotations.FROM);
+  }
+
+  @SuppressWarnings("unchecked")
+  public IValueExpression<? extends IV> to() {
+    return (IValueExpression<? extends IV>) getProperty(Annotations.TO);
+  }
+
+  public void setFrom(final IValueExpression<? extends IV> from) {
+    setProperty(Annotations.FROM, from);
+  }
+
+  public void setTo(final IValueExpression<? extends IV> to) {
+    setProperty(Annotations.TO, to);
+  }
+
+  //    final public Range get(final IBindingSet bs) {
+  //
+  ////    	log.debug("getting the asBound value");
+  //
+  //    	final IV from = from().get(bs);
+  //
+  ////    	log.debug("from: " + from);
+  //
+  //    	// sort of like Var.get(), which returns null when the variable
+  //    	// is not yet bound
+  //		if (from == null)
+  //			return null;
+  //
+  //    	final IV to = to().get(bs);
+  //
+  ////    	log.debug("to: " + to);
+  //
+  //    	// sort of like Var.get(), which returns null when the variable
+  //    	// is not yet bound
+  //		if (to == null)
+  //			return null;
+  //
+  //    	try {
+  //    	    /*
+  //    	     * FIXME Should handle from/to (non-)exclusive boundaries using a
+  //    	     * successor pattern.
+  //    	     */
+  //    		// let Range ctor() do the type checks and valid range checks
+  //    		return new Range(from, to);
+  //    	} catch (IllegalArgumentException ex) {
+  //    		// log the reason the range is invalid
+  ////    		if (log.isInfoEnabled())
+  ////    			log.info("dropping solution: " + ex.getMessage());
+  //    		// drop the solution
+  //    		throw new SparqlTypeErrorException();
+  //    	}
+  //
+  //    }
+  //
+  public final RangeBOp asBound(final IBindingSet bs) {
+
+    /*
+     * Only care if we change from a non-null, non-Constant to a ground IV.
      */
-    public RangeBOp(final RangeBOp op) {
-        super(op);
+    final IValueExpression<? extends IV> origFrom = from();
+    final IValueExpression<? extends IV> origTo = to();
+
+    IValueExpression<? extends IV> asBoundFrom;
+    {
+      if (origFrom == null) {
+        asBoundFrom = null;
+      } else if (origFrom instanceof IConstant) {
+        asBoundFrom = origFrom;
+      } else {
+        try {
+          final IV iv = origFrom.get(bs);
+          asBoundFrom = new Constant<IV>(iv);
+        } catch (SparqlTypeErrorException ex) {
+          asBoundFrom = origFrom;
+        }
+      }
     }
 
-//    @SuppressWarnings("unchecked")
-//    public IVariable<? extends IV> var() {
-//    	return (IVariable<? extends IV>) getProperty(Annotations.VAR);
-//    }
-    
-    @SuppressWarnings("unchecked")
-	public IValueExpression<? extends IV> from() {
-		return (IValueExpression<? extends IV>) getProperty(Annotations.FROM);
-	}
-    
-    @SuppressWarnings("unchecked")
-	public IValueExpression<? extends IV> to() {
-		return (IValueExpression<? extends IV>) getProperty(Annotations.TO);
-    }
-    
-    public void setFrom(final IValueExpression<? extends IV> from) {
-    	setProperty(Annotations.FROM, from);
+    IValueExpression<? extends IV> asBoundTo;
+    {
+      if (origTo == null) {
+        asBoundTo = null;
+      } else if (origTo instanceof IConstant) {
+        asBoundTo = origTo;
+      } else {
+        try {
+          final IV iv = origTo.get(bs);
+          asBoundTo = new Constant<IV>(iv);
+        } catch (SparqlTypeErrorException ex) {
+          asBoundTo = origTo;
+        }
+      }
     }
 
-    public void setTo(final IValueExpression<? extends IV> to) {
-    	setProperty(Annotations.TO, to);
+    /*
+     * Null means no value expression, constant value expression, or not
+     * able to evaluate at this time.  Non-null means the asBound is
+     * different from the original.
+     */
+    if (asBoundFrom == origFrom && asBoundTo == origTo) {
+      return this;
     }
 
-//    final public Range get(final IBindingSet bs) {
-//        
-////    	log.debug("getting the asBound value");
-//    	
-//    	final IV from = from().get(bs);
-//    	
-////    	log.debug("from: " + from);
-//    	
-//    	// sort of like Var.get(), which returns null when the variable
-//    	// is not yet bound
-//		if (from == null)
-//			return null;
-//    	
-//    	final IV to = to().get(bs);
-//    	
-////    	log.debug("to: " + to);
-//    	
-//    	// sort of like Var.get(), which returns null when the variable
-//    	// is not yet bound
-//		if (to == null)
-//			return null;
-//
-//    	try {
-//    	    /*
-//    	     * FIXME Should handle from/to (non-)exclusive boundaries using a
-//    	     * successor pattern.
-//    	     */
-//    		// let Range ctor() do the type checks and valid range checks
-//    		return new Range(from, to);
-//    	} catch (IllegalArgumentException ex) {
-//    		// log the reason the range is invalid
-////    		if (log.isInfoEnabled())
-////    			log.info("dropping solution: " + ex.getMessage());
-//    		// drop the solution
-//    		throw new SparqlTypeErrorException();
-//    	}
-//    	
-//    }
-//    
-    final public RangeBOp asBound(final IBindingSet bs) {
+    final RangeBOp asBound = new RangeBOp();
+    if (asBoundFrom != null) asBound.setFrom(asBoundFrom);
+    if (asBoundTo != null) asBound.setTo(asBoundTo);
 
-    	/*
-    	 * Only care if we change from a non-null, non-Constant to a ground IV.
-    	 */
-    	final IValueExpression<? extends IV> origFrom = from();
-    	final IValueExpression<? extends IV> origTo = to();
-    	
-		IValueExpression<? extends IV> asBoundFrom;
-		{
-			if (origFrom == null) {
-				asBoundFrom = null;
-			} else if (origFrom instanceof IConstant) {
-				asBoundFrom = origFrom;
-			} else {
-				try {
-					final IV iv = origFrom.get(bs);
-					asBoundFrom = new Constant<IV>(iv);
-				} catch (SparqlTypeErrorException ex) {
-					asBoundFrom = origFrom;
-				}
-			}
-		}
-		
-		IValueExpression<? extends IV> asBoundTo;
-		{
-			if (origTo == null) {
-				asBoundTo = null;
-			} else if (origTo instanceof IConstant) {
-				asBoundTo = origTo;
-			} else {
-				try {
-					final IV iv = origTo.get(bs);
-					asBoundTo = new Constant<IV>(iv);
-				} catch (SparqlTypeErrorException ex) {
-					asBoundTo = origTo;
-				}
-			}
-		}
-		
-		/*
-		 * Null means no value expression, constant value expression, or not
-		 * able to evaluate at this time.  Non-null means the asBound is 
-		 * different from the original.
-		 */
-		if (asBoundFrom == origFrom && asBoundTo == origTo) {
-			return this;
-		}
-		
-		final RangeBOp asBound = new RangeBOp();
-		if (asBoundFrom != null)
-			asBound.setFrom(asBoundFrom);
-		if (asBoundTo != null)
-			asBound.setTo(asBoundTo);
-		
-		return asBound;
-		
-	}
-    
-//    final public boolean isFullyBound() {
-//    	
-//    	return (from() == null || from() instanceof IConstant) && 
-//    		   (to() == null || to() instanceof IConstant);
-//    	
-//    }
-    
-    final public boolean isFromBound() {
-    	return from() instanceof IConstant;
-    }
-    
-    final public boolean isToBound() {
-    	return to() instanceof IConstant;
-    }
-    
-//
-////	@Override
-//	public boolean isVar() {
-//		return true;
-//	}
-//
-////	@Override
-//	public boolean isConstant() {
-//		return false;
-//	}
-//
-////	@Override
-//	public Range get() {
-////		log.debug("somebody tried to get me");
-//		
-//		return null;
-//	}
-//
-////	@Override
-//	public String getName() {
-//		return var().getName();
-//	}
-//
-////	@Override
-//	public boolean isWildcard() {
-//		return false;
-//	}
-//
-//
-//	/*
-//	 * TODO The default BOp equals() and hashCode() should be fine.
-//	 */
-//	
-//	// TODO This looks dangerous. It is only considering the variable!
-//    final public boolean equals(final IVariableOrConstant op) {
-//
-//    	if (op == null)
-//    		return false;
-//    	
-//    	if (this == op) 
-//    		return true;
-//
-//        if (op instanceof IVariable<?>) {
-//
-//            return var().getName().equals(((IVariable<?>) op).getName());
-//
-//        }
-//        
-//        return false;
-//    	
-//    }
-//    
-////    final private boolean _equals(final RangeBOp op) {
-////    	
-////    	return var().equals(op.var())
-////    		&& from().equals(op.from())
-////    		&& to().equals(op.to());
-//
-////    }
-//    
-//	/**
-//	 * Caches the hash code.
-//	 */
-////	private int hash = 0;
-//	public int hashCode() {
-////		
-////		int h = hash;
-////		if (h == 0) {
-////			h = 31 * h + var().hashCode();
-////			h = 31 * h + from().hashCode();
-////			h = 31 * h + to().hashCode();
-////			hash = h;
-////		}
-////		return h;
-//
-//		return var().hashCode();
-//	}
+    return asBound;
+  }
+
+  //    final public boolean isFullyBound() {
+  //
+  //    	return (from() == null || from() instanceof IConstant) &&
+  //    		   (to() == null || to() instanceof IConstant);
+  //
+  //    }
+
+  public final boolean isFromBound() {
+    return from() instanceof IConstant;
+  }
+
+  public final boolean isToBound() {
+    return to() instanceof IConstant;
+  }
+
+  //
+  ////	@Override
+  //	public boolean isVar() {
+  //		return true;
+  //	}
+  //
+  ////	@Override
+  //	public boolean isConstant() {
+  //		return false;
+  //	}
+  //
+  ////	@Override
+  //	public Range get() {
+  ////		log.debug("somebody tried to get me");
+  //
+  //		return null;
+  //	}
+  //
+  ////	@Override
+  //	public String getName() {
+  //		return var().getName();
+  //	}
+  //
+  ////	@Override
+  //	public boolean isWildcard() {
+  //		return false;
+  //	}
+  //
+  //
+  //	/*
+  //	 * TODO The default BOp equals() and hashCode() should be fine.
+  //	 */
+  //
+  //	// TODO This looks dangerous. It is only considering the variable!
+  //    final public boolean equals(final IVariableOrConstant op) {
+  //
+  //    	if (op == null)
+  //    		return false;
+  //
+  //    	if (this == op)
+  //    		return true;
+  //
+  //        if (op instanceof IVariable<?>) {
+  //
+  //            return var().getName().equals(((IVariable<?>) op).getName());
+  //
+  //        }
+  //
+  //        return false;
+  //
+  //    }
+  //
+  ////    final private boolean _equals(final RangeBOp op) {
+  ////
+  ////    	return var().equals(op.var())
+  ////    		&& from().equals(op.from())
+  ////    		&& to().equals(op.to());
+  //
+  ////    }
+  //
+  //	/**
+  //	 * Caches the hash code.
+  //	 */
+  ////	private int hash = 0;
+  //	public int hashCode() {
+  ////
+  ////		int h = hash;
+  ////		if (h == 0) {
+  ////			h = 31 * h + var().hashCode();
+  ////			h = 31 * h + from().hashCode();
+  ////			h = 31 * h + to().hashCode();
+  ////			hash = h;
+  ////		}
+  ////		return h;
+  //
+  //		return var().hashCode();
+  //	}
 
 }

@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.Properties;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -30,136 +29,125 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
 /**
- * Data driven test suite testing configurability of GeoSpatial service.
- * The query set is a subset of queries from {@link TestGeoSpatialServiceEvaluation},
- * with possible modifications to account for the changed configuration.
- * 
+ * Data driven test suite testing configurability of GeoSpatial service. The query set is a subset
+ * of queries from {@link TestGeoSpatialServiceEvaluation}, with possible modifications to account
+ * for the changed configuration.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestGeoSpatialDisableBuiltinDatatypes() {
-    }
+  /** */
+  public TestGeoSpatialDisableBuiltinDatatypes() {}
 
-    /**
-     * @param name
-     */ 
-    public TestGeoSpatialDisableBuiltinDatatypes(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestGeoSpatialDisableBuiltinDatatypes(String name) {
+    super(name);
+  }
 
-    /**
-     * Verify that built-in lat+lon datatype is disabled
-     */    
-    public void testDisableBuiltin01() throws Exception {
-       
-       try {
-           
-           new TestHelper(
+  /** Verify that built-in lat+lon datatype is disabled */
+  public void testDisableBuiltin01() throws Exception {
+
+    try {
+
+      new TestHelper(
               "geo-disable-builtin01",
-              "geo-disable-builtin01.rq", 
+              "geo-disable-builtin01.rq",
               "geo-disable-builtin.nt",
-              "geo-disable-builtin01.srx").runTest();
-           
+              "geo-disable-builtin01.srx")
+          .runTest();
 
-       } catch (Throwable e) {
-           
-           // check for wrapped exception
-           assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
-           
-           return; // expected
-       }
-       
-       throw new RuntimeException("Expected to run into exception");
+    } catch (Throwable e) {
+
+      // check for wrapped exception
+      assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
+
+      return; // expected
     }
-    
-    /**
-     * Verify that built-in lat+lon+time datatype is disabled
-     */    
-    public void testDisableBuiltin02() throws Exception {
-       
-       try {
-           
-           new TestHelper(
+
+    throw new RuntimeException("Expected to run into exception");
+  }
+
+  /** Verify that built-in lat+lon+time datatype is disabled */
+  public void testDisableBuiltin02() throws Exception {
+
+    try {
+
+      new TestHelper(
               "geo-disable-builtin02",
-              "geo-disable-builtin02.rq", 
+              "geo-disable-builtin02.rq",
               "geo-disable-builtin.nt",
-              "geo-disable-builtin02.srx").runTest();
-           
+              "geo-disable-builtin02.srx")
+          .runTest();
 
-       } catch (Throwable e) {
-           
-           // check for wrapped exception
-           assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
-           
-           return; // expected
-       }
-       
-       throw new RuntimeException("Expected to run into exception");
+    } catch (Throwable e) {
+
+      // check for wrapped exception
+      assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
+
+      return; // expected
     }
-    
-    /**
-     * Verify that specifically registered datatypes is working properly.
-     */    
-    public void testDisableBuiltin03() throws Exception {
-       
-       new TestHelper(
-          "geo-disable-builtin03",
-          "geo-disable-builtin03.rq", 
-          "geo-disable-builtin.nt",
-          "geo-disable-builtin03.srx").runTest();
-       
-    }
-    
-    @Override
-    public Properties getProperties() {
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) super.getProperties().clone();
+    throw new RuntimeException("Expected to run into exception");
+  }
 
-        // turn on quads.
-        properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
+  /** Verify that specifically registered datatypes is working properly. */
+  public void testDisableBuiltin03() throws Exception {
 
-        // TM not available with quads.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
+    new TestHelper(
+            "geo-disable-builtin03",
+            "geo-disable-builtin03.rq",
+            "geo-disable-builtin.nt",
+            "geo-disable-builtin03.srx")
+        .runTest();
+  }
 
-        // turn off axioms.
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+  @Override
+  public Properties getProperties() {
 
-        // no persistence.
-        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-        // enable GeoSpatial index
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+    // turn on quads.
+    properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
-           "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral");
+    // TM not available with quads.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
-        // NOTE: this is the crux of the test: we disable the built-in datatypes
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_INCLUDE_BUILTIN_DATATYPES,
-           "false");
+    // turn off axioms.
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
 
-        // instead, we register a single, non built-in datatype
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
-           "{\"config\": "
-           + "{ \"uri\": \"http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral\", "
-           + "\"fields\": [ "
-           + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
-           + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "
-           + "{ \"valueType\": \"LONG\", \"minVal\" : \"0\", \"multiplier\": \"1\", \"serviceMapping\" : \"TIME\"  } "
-           + "]}}");
+    // no persistence.
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
-        return properties;
+    // enable GeoSpatial index
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
 
-    }
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DEFAULT_DATATYPE,
+        "http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral");
+
+    // NOTE: this is the crux of the test: we disable the built-in datatypes
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options
+            .GEO_SPATIAL_INCLUDE_BUILTIN_DATATYPES,
+        "false");
+
+    // instead, we register a single, non built-in datatype
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG
+            + ".0",
+        "{\"config\": "
+            + "{ \"uri\": \"http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral\", "
+            + "\"fields\": [ "
+            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"1000000\", \"serviceMapping\": \"LATITUDE\" }, "
+            + "{ \"valueType\": \"DOUBLE\", \"minVal\" : \"0\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "
+            + "{ \"valueType\": \"LONG\", \"minVal\" : \"0\", \"multiplier\": \"1\", \"serviceMapping\" : \"TIME\"  } "
+            + "]}}");
+
+    return properties;
+  }
 }

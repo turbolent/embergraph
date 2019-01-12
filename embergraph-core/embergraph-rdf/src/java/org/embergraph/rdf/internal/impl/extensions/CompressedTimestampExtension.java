@@ -21,82 +21,73 @@ package org.embergraph.rdf.internal.impl.extensions;
 
 import java.util.Collections;
 import java.util.Set;
-
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.rdf.internal.IDatatypeURIResolver;
 import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.openrdf.model.Literal;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
+import org.openrdf.model.impl.URIImpl;
 
 /**
- * Effective, packed representation of timestamps typed as
- * <code><http://www.embergraph.org/rdf/datatype#compressedTimestamp></code>.
- * Builds on the {@link PackedLongIV} datatype for representing timestamps,
- * thus supporting the range [0;72057594037927935L].
- * 
- * The datatype is recommended for use with timestamps specified in seconds
- * and milliseconds; you should not run into any range issues there at all. 
- * 
- * Using the datatype for timestamps in microseconds or smaller is discouraged: 
- * in the microseconds case the value 72057594037927935 corresponds to Fri, 
- * 04 May 2198 23:50:03 GMT, so you couldn't represent dates beyond that time.
+ * Effective, packed representation of timestamps typed as <code>
+ * <http://www.embergraph.org/rdf/datatype#compressedTimestamp></code>. Builds on the {@link
+ * PackedLongIV} datatype for representing timestamps, thus supporting the range
+ * [0;72057594037927935L].
+ *
+ * <p>The datatype is recommended for use with timestamps specified in seconds and milliseconds; you
+ * should not run into any range issues there at all.
+ *
+ * <p>Using the datatype for timestamps in microseconds or smaller is discouraged: in the
+ * microseconds case the value 72057594037927935 corresponds to Fri, 04 May 2198 23:50:03 GMT, so
+ * you couldn't represent dates beyond that time.
  */
 @SuppressWarnings("rawtypes")
 public class CompressedTimestampExtension<V extends EmbergraphValue> implements IExtension<V> {
 
-    private final EmbergraphURI datatype;
-    
-    public static final URI COMPRESSED_TIMESTAMP = 
-        new URIImpl("http://www.embergraph.org/rdf/datatype#compressedTimestamp");
+  private final EmbergraphURI datatype;
 
-    
-    public CompressedTimestampExtension(final IDatatypeURIResolver resolver) {
-        datatype = resolver.resolve(COMPRESSED_TIMESTAMP);
-    }
-    
-    public Set<EmbergraphURI> getDatatypes() {
-        
-        return Collections.singleton(datatype);
-        
-    }
-    
-    /**
-     * Convert the supplied value into an internal representation as PackedLongIV.
-     */
-    @SuppressWarnings("unchecked")
-    public LiteralExtensionIV createIV(final Value value) {
-        
-        if (value instanceof Literal == false)
-            throw new IllegalArgumentException();
-        
-        final Literal lit = (Literal) value;
-        
-        final AbstractLiteralIV delegate = new PackedLongIV(Long.parseLong(lit.getLabel()));
-        return new LiteralExtensionIV(delegate, datatype.getIV());
+  public static final URI COMPRESSED_TIMESTAMP =
+      new URIImpl("http://www.embergraph.org/rdf/datatype#compressedTimestamp");
 
-    }
-    
-    
-    @SuppressWarnings("unchecked")
-    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
-        
-        AbstractLiteralIV delegate = iv.getDelegate();
-        if (delegate==null || !(delegate instanceof PackedLongIV)) {
-            throw new IllegalArgumentException();
-        }
-        
-        final PackedLongIV pIv = (PackedLongIV)delegate;
-        return (V) vf.createLiteral(
-            String.valueOf(pIv.getInlineValue()), CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
+  public CompressedTimestampExtension(final IDatatypeURIResolver resolver) {
+    datatype = resolver.resolve(COMPRESSED_TIMESTAMP);
+  }
 
+  public Set<EmbergraphURI> getDatatypes() {
+
+    return Collections.singleton(datatype);
+  }
+
+  /** Convert the supplied value into an internal representation as PackedLongIV. */
+  @SuppressWarnings("unchecked")
+  public LiteralExtensionIV createIV(final Value value) {
+
+    if (value instanceof Literal == false) throw new IllegalArgumentException();
+
+    final Literal lit = (Literal) value;
+
+    final AbstractLiteralIV delegate = new PackedLongIV(Long.parseLong(lit.getLabel()));
+    return new LiteralExtensionIV(delegate, datatype.getIV());
+  }
+
+  @SuppressWarnings("unchecked")
+  public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
+
+    AbstractLiteralIV delegate = iv.getDelegate();
+    if (delegate == null || !(delegate instanceof PackedLongIV)) {
+      throw new IllegalArgumentException();
     }
 
+    final PackedLongIV pIv = (PackedLongIV) delegate;
+    return (V)
+        vf.createLiteral(
+            String.valueOf(pIv.getInlineValue()),
+            CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
+  }
 }

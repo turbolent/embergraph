@@ -26,110 +26,94 @@ package org.embergraph.relation.rule;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-
 /**
  * Implementation of a binding.
- * 
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
 public class Binding implements IBinding {
 
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * The variable.
-     */
-    protected final IVariable var;
-    
-    /**
-     * The value;
-     */
-    protected final IConstant val;
-    
-    
-    /**
-     * Construct a binding instance.
-     */
-    public Binding(final IVariable var, final IConstant val) {
-        
-        if (var == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        if (val == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        this.var = var;
-        this.val = val;
-        
+  private static final long serialVersionUID = 1L;
+
+  /** The variable. */
+  protected final IVariable var;
+
+  /** The value; */
+  protected final IConstant val;
+
+  /** Construct a binding instance. */
+  public Binding(final IVariable var, final IConstant val) {
+
+    if (var == null) {
+      throw new IllegalArgumentException();
     }
-    
-    /**
-     * Get the variable.
-     * 
-     * @return the variable
-     */
-    public IVariable getVar() {
-        
-        return var;
-        
+
+    if (val == null) {
+      throw new IllegalArgumentException();
     }
-    
-    /**
-     * Get the value.
-     * 
-     * @return the value
-     */
-    public IConstant getVal() {
-        
-        return val;
-        
+
+    this.var = var;
+    this.val = val;
+  }
+
+  /**
+   * Get the variable.
+   *
+   * @return the variable
+   */
+  public IVariable getVar() {
+
+    return var;
+  }
+
+  /**
+   * Get the value.
+   *
+   * @return the value
+   */
+  public IConstant getVal() {
+
+    return val;
+  }
+
+  /**
+   * True iff the variable and its bound value is the same for the two bindings.
+   *
+   * @param o Another binding.
+   */
+  public boolean equals(IBinding o) {
+
+    if (o == this) {
+      return true;
     }
-    
-    /**
-     * True iff the variable and its bound value is the same
-     * for the two bindings.
-     * 
-     * @param o
-     *            Another binding.
-     */
-    public boolean equals(IBinding o) {
-        
-        if (o == this) {
-            return true;
-        }
-        
-        if (o instanceof IBinding) {
-            IBinding b = (IBinding) o;
-            // variables ok for reference testing
-            return var == b.getVar() && val.equals(b.getVal());
-        }
-        
-        return false;
-        
+
+    if (o instanceof IBinding) {
+      IBinding b = (IBinding) o;
+      // variables ok for reference testing
+      return var == b.getVar() && val.equals(b.getVal());
     }
-    
-    private int hashCode = 0;
-    public int hashCode() {
-        
-        if (hashCode == 0) {
-            hashCode = toString().hashCode();
-        }
-        
-        return hashCode;
-        
+
+    return false;
+  }
+
+  private int hashCode = 0;
+
+  public int hashCode() {
+
+    if (hashCode == 0) {
+      hashCode = toString().hashCode();
     }
-    
-    public String toString() {
-        
-        StringBuilder sb = new StringBuilder();
-        sb.append(var.toString());
-        sb.append('=');
-        sb.append(val.toString());
-        
-        return sb.toString();
-        
-    }
-    
+
+    return hashCode;
+  }
+
+  public String toString() {
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(var.toString());
+    sb.append('=');
+    sb.append(val.toString());
+
+    return sb.toString();
+  }
 }

@@ -4,34 +4,31 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTBlankNodePropertyList extends SimpleNode {
 
-	private String varName;
+  private String varName;
 
-	public ASTBlankNodePropertyList(int id) {
-		super(id);
-	}
+  public ASTBlankNodePropertyList(int id) {
+    super(id);
+  }
 
-	public ASTBlankNodePropertyList(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTBlankNodePropertyList(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getVarName() {
-		return varName;
-	}
+  public String getVarName() {
+    return varName;
+  }
 
-	public void setVarName(String varName) {
-		this.varName = varName;
-	}
+  public void setVarName(String varName) {
+    this.varName = varName;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + varName + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + varName + ")";
+  }
 }

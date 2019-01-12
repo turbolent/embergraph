@@ -31,32 +31,21 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param name
-     */
-    public TestAll(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestAll(String name) {
+    super(name);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("org.embergraph.rdf.vocab");
+    final TestSuite suite = new TestSuite("org.embergraph.rdf.vocab");
 
-        suite.addTestSuite(TestVocabulary.class);
-        
-        return suite;
-        
-    }
+    suite.addTestSuite(TestVocabulary.class);
 
+    return suite;
+  }
 }

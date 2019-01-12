@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.filter;
 
 import java.util.UUID;
-
 import org.embergraph.btree.AbstractBTree;
+import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
 import org.embergraph.btree.AbstractTupleCursorTestCase;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.ITuple;
@@ -34,88 +34,82 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.TestTuple;
 import org.embergraph.btree.Tuple;
-import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test suite for the {@link Removerator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRemoverator extends AbstractTupleCursorTestCase {
 
-    /**
-     * 
-     */
-    public TestRemoverator() {
-    }
+  /** */
+  public TestRemoverator() {}
 
-    /**
-     * @param name
-     */
-    public TestRemoverator(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestRemoverator(String name) {
+    super(name);
+  }
 
-    /**
-     * Test verifies that we can remove each tuple as we visit it and that the
-     * tuple returned to the caller is not invalidated by that remove().
-     */
-    public void test() {
-    
-        final BTree btree = BTree.create(new SimpleMemoryRawStore(),
-                new IndexMetadata(UUID.randomUUID()));
+  /**
+   * Test verifies that we can remove each tuple as we visit it and that the tuple returned to the
+   * caller is not invalidated by that remove().
+   */
+  public void test() {
 
-        btree.insert(10, "Bryan");
-        btree.insert(20, "Mike");
-        btree.insert(30, "James");
+    final BTree btree =
+        BTree.create(new SimpleMemoryRawStore(), new IndexMetadata(UUID.randomUUID()));
 
-        final ITupleIterator<String> itr = new TupleRemover<String>() {
-            private static final long serialVersionUID = 1L;
-            @Override
-            protected boolean remove(ITuple<String> e) {
-                // all visited tuples will be removed.
-                return true;
-            }
-        }.filterOnce(newCursor(btree), null/* context */);
-        
-        assertTrue(itr.hasNext());
+    btree.insert(10, "Bryan");
+    btree.insert(20, "Mike");
+    btree.insert(30, "James");
 
-        assertTrue(btree.contains(10));
+    final ITupleIterator<String> itr =
+        new TupleRemover<String>() {
+          private static final long serialVersionUID = 1L;
 
-        assertEquals(new TestTuple<String>(10,"Bryan"),itr.next());
-        
-        assertFalse(btree.contains(10));
-        
-        assertTrue(itr.hasNext());
+          @Override
+          protected boolean remove(ITuple<String> e) {
+            // all visited tuples will be removed.
+            return true;
+          }
+        }.filterOnce(newCursor(btree), null /* context */);
 
-        assertTrue(btree.contains(20));
+    assertTrue(itr.hasNext());
 
-        assertEquals(new TestTuple<String>(20,"Mike"),itr.next());
+    assertTrue(btree.contains(10));
 
-        assertFalse(btree.contains(20));
+    assertEquals(new TestTuple<String>(10, "Bryan"), itr.next());
 
-        assertTrue(itr.hasNext());
+    assertFalse(btree.contains(10));
 
-        assertTrue(btree.contains(30));
+    assertTrue(itr.hasNext());
 
-        assertEquals(new TestTuple<String>(30,"James"),itr.next());
+    assertTrue(btree.contains(20));
 
-        assertFalse(itr.hasNext());
+    assertEquals(new TestTuple<String>(20, "Mike"), itr.next());
 
-        assertFalse(btree.contains(30));
+    assertFalse(btree.contains(20));
 
-        assertEquals(0,btree.getEntryCount());
-        
-    }
+    assertTrue(itr.hasNext());
 
-    @Override
-    protected ITupleCursor2<String> newCursor(AbstractBTree btree, int flags, byte[] fromKey, byte[] toKey) {
-    
-        return new MutableBTreeTupleCursor<String>((BTree) btree,
-                new Tuple<String>(btree, flags), fromKey, toKey);
+    assertTrue(btree.contains(30));
 
-    }
-    
+    assertEquals(new TestTuple<String>(30, "James"), itr.next());
+
+    assertFalse(itr.hasNext());
+
+    assertFalse(btree.contains(30));
+
+    assertEquals(0, btree.getEntryCount());
+  }
+
+  @Override
+  protected ITupleCursor2<String> newCursor(
+      AbstractBTree btree, int flags, byte[] fromKey, byte[] toKey) {
+
+    return new MutableBTreeTupleCursor<String>(
+        (BTree) btree, new Tuple<String>(btree, flags), fromKey, toKey);
+  }
 }

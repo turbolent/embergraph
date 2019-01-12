@@ -29,65 +29,54 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     * <p>
-     * Note: Much of the testing of the {@link SPORelation} is performed by
-     * the tests in the org.embergraph.rdf.store package.
-     * 
-     * @todo SPO (compareTo, equals, hashCode)
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("SPORelation");
+  /**
+   * Returns a test that will run each of the implementation specific test suites in turn.
+   *
+   * <p>Note: Much of the testing of the {@link SPORelation} is performed by the tests in the
+   * org.embergraph.rdf.store package.
+   *
+   * @todo SPO (compareTo, equals, hashCode)
+   */
+  public static Test suite() {
 
-        suite.addTestSuite(TestSPO.class);
-        
-        // test predicate impls.
-        suite.addTestSuite(TestSPOPredicate.class);
-        
-        // test {inferred, explicit, axiom} enum class.
-        suite.addTestSuite(TestStatementEnum.class);
+    final TestSuite suite = new TestSuite("SPORelation");
 
-        // @todo test IKeyOrder impl (comparators).
-        suite.addTestSuite(TestSPOKeyOrder.class);
+    suite.addTestSuite(TestSPO.class);
 
-        // key/value coders
-        suite.addTestSuite(TestSPOKeyCoders.class);
-        suite.addTestSuite(TestSPOValueCoders.class);
+    // test predicate impls.
+    suite.addTestSuite(TestSPOPredicate.class);
 
-        // key and value (de-)serialization of SPO tuples for B+Tree.
-        suite.addTestSuite(TestSPOTupleSerializer.class);
-        
-        // test suite for the access path api.
-        suite.addTestSuite(TestSPOAccessPath.class);
+    // test {inferred, explicit, axiom} enum class.
+    suite.addTestSuite(TestStatementEnum.class);
 
-        // star joins
-//        suite.addTestSuite(TestSPOStarJoin.class);
+    // @todo test IKeyOrder impl (comparators).
+    suite.addTestSuite(TestSPOKeyOrder.class);
 
-        // test for shard split handler for the xxxC indices.
-        suite.addTestSuite(TestXXXCShardSplitHandler.class);
-        
-        return suite;
-        
-    }
-    
+    // key/value coders
+    suite.addTestSuite(TestSPOKeyCoders.class);
+    suite.addTestSuite(TestSPOValueCoders.class);
+
+    // key and value (de-)serialization of SPO tuples for B+Tree.
+    suite.addTestSuite(TestSPOTupleSerializer.class);
+
+    // test suite for the access path api.
+    suite.addTestSuite(TestSPOAccessPath.class);
+
+    // star joins
+    //        suite.addTestSuite(TestSPOStarJoin.class);
+
+    // test for shard split handler for the xxxC indices.
+    suite.addTestSuite(TestXXXCShardSplitHandler.class);
+
+    return suite;
+  }
 }

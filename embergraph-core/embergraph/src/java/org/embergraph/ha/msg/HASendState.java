@@ -9,287 +9,266 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.UUID;
-
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 
 public class HASendState implements IHASendState, Externalizable {
 
-//    private static final Logger log = Logger.getLogger(HASendState.class);
+  //    private static final Logger log = Logger.getLogger(HASendState.class);
 
-    private static final long serialVersionUID = 1;
+  private static final long serialVersionUID = 1;
 
-    private long messageId;
-    private UUID originalSenderId;
-    private UUID senderId;
-    private long token;
-    private int replicationFactor;
+  private long messageId;
+  private UUID originalSenderId;
+  private UUID senderId;
+  private long token;
+  private int replicationFactor;
 
-    /**
-     * De-serialization constructor.
-     */
-    public HASendState() {
+  /** De-serialization constructor. */
+  public HASendState() {}
 
+  public HASendState(
+      final long messageId,
+      final UUID originalSenderId,
+      final UUID senderId,
+      final long token,
+      final int replicationFactor) {
+
+    if (originalSenderId == null) throw new IllegalArgumentException();
+
+    if (senderId == null) throw new IllegalArgumentException();
+
+    if (replicationFactor <= 0) throw new IllegalArgumentException();
+
+    this.messageId = messageId;
+    this.originalSenderId = originalSenderId;
+    this.senderId = senderId;
+    this.token = token;
+    this.replicationFactor = replicationFactor;
+  }
+
+  @Override
+  public long getMessageId() {
+
+    return messageId;
+  }
+
+  @Override
+  public UUID getOriginalSenderId() {
+
+    return originalSenderId;
+  }
+
+  @Override
+  public UUID getSenderId() {
+
+    return senderId;
+  }
+
+  @Override
+  public long getQuorumToken() {
+
+    return token;
+  }
+
+  @Override
+  public int getReplicationFactor() {
+
+    return replicationFactor;
+  }
+
+  @Override
+  public byte[] getMarker() {
+
+    final int len = MAGIC_SIZE + currentVersionLen;
+
+    //        final ByteArrayOutputStream baos = new ByteArrayOutputStream(len);
+    //
+    //        final DataOutputStream dob = new DataOutputStream(baos);
+    final byte[] a = new byte[len];
+
+    final DataOutputBuffer dob = new DataOutputBuffer(0 /* len */, a);
+
+    try {
+
+      dob.writeLong(MAGIC);
+
+      writeExternal2(dob);
+
+      dob.flush();
+
+      //            return baos.toByteArray();
+      return a;
+
+    } catch (IOException e) {
+
+      throw new RuntimeException(e);
     }
+  }
 
-    public HASendState(final long messageId, final UUID originalSenderId,
-            final UUID senderId, final long token, final int replicationFactor) {
+  @Override
+  public String toString() {
 
-        if (originalSenderId == null)
-            throw new IllegalArgumentException();
+    return super.toString()
+        + "{messageId="
+        + messageId
+        + ",originalSenderId="
+        + originalSenderId
+        + ",senderId="
+        + senderId
+        + ",token="
+        + token
+        + ",replicationFactor="
+        + replicationFactor
+        + "}";
+  }
 
-        if (senderId == null)
-            throw new IllegalArgumentException();
+  @Override
+  public boolean equals(final Object obj) {
 
-        if (replicationFactor <= 0)
-            throw new IllegalArgumentException();
+    if (this == obj) return true;
 
-        this.messageId = messageId;
-        this.originalSenderId = originalSenderId;
-        this.senderId = senderId;
-        this.token = token;
-        this.replicationFactor = replicationFactor;
+    if (!(obj instanceof IHASendState)) return false;
 
-    }
+    final IHASendState t = (IHASendState) obj;
 
-    @Override
-    public long getMessageId() {
+    return messageId == t.getMessageId()
+        && originalSenderId.equals(t.getOriginalSenderId())
+        && senderId.equals(t.getSenderId())
+        && token == t.getQuorumToken()
+        && replicationFactor == t.getReplicationFactor();
+  }
 
-        return messageId;
+  @Override
+  public int hashCode() {
 
-    }
+    // based on the messageId and the hashCode of the senderId
+    return ((int) (messageId ^ (messageId >>> 32))) + senderId.hashCode();
+  }
 
-    @Override
-    public UUID getOriginalSenderId() {
+  /** Magic data only included in the marker. */
+  private static final long MAGIC = 0x13759f98e8363caeL;
 
-        return originalSenderId;
-    }
+  private static final int MAGIC_SIZE = Bytes.SIZEOF_LONG;
 
-    @Override
-    public UUID getSenderId() {
+  private static final transient short VERSION0 = 0x0;
+  private static final transient int VERSION0_LEN =
+      Bytes.SIZEOF_SHORT
+          + // version
+          Bytes.SIZEOF_LONG
+          + // messageId
+          Bytes.SIZEOF_UUID
+          + // originalSenderId
+          Bytes.SIZEOF_UUID
+          + // senderId
+          Bytes.SIZEOF_LONG
+          + // token
+          Bytes.SIZEOF_INT // replicationFactor
+      ;
 
-        return senderId;
-    }
+  private static final transient short currentVersion = VERSION0;
+  private static final transient int currentVersionLen = VERSION0_LEN;
 
-    @Override
-    public long getQuorumToken() {
+  @Override
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
 
-        return token;
+    readExternal2(in);
+  }
 
-    }
+  private void readExternal2(final DataInput in) throws IOException {
 
-    @Override
-    public int getReplicationFactor() {
+    final short version = in.readShort();
 
-        return replicationFactor;
+    if (version != VERSION0) throw new RuntimeException("Bad version for serialization");
 
-    }
+    messageId = in.readLong();
 
-    @Override
-    public byte[] getMarker() {
+    originalSenderId = new UUID(in.readLong(), /* MSB */ in.readLong() /* LSB */);
 
-        final int len = MAGIC_SIZE + currentVersionLen;
+    senderId = new UUID(in.readLong(), /* MSB */ in.readLong() /* LSB */);
 
-//        final ByteArrayOutputStream baos = new ByteArrayOutputStream(len);
-//
-//        final DataOutputStream dob = new DataOutputStream(baos);
-        final byte[] a = new byte[len];
+    token = in.readLong();
 
-        final DataOutputBuffer dob = new DataOutputBuffer(0/* len */, a);
+    replicationFactor = in.readInt();
+  }
 
-        try {
+  /**
+   * Decode the value returned by {@link #getMarker()}. This has the magic followed by {@link
+   * #writeExternal2(DataOutput)}. It does not have the object serialization metadata.
+   *
+   * @param a The encoded marker.
+   * @return The decoded marker -or- <code>null</code> iff the argument is <code>null</code>.
+   */
+  public static IHASendState decode(final byte[] a) throws IOException {
 
-            dob.writeLong(MAGIC);
-            
-            writeExternal2(dob);
+    if (a == null) return null;
 
-            dob.flush();
+    final HASendState tmp = new HASendState();
 
-//            return baos.toByteArray();
-            return a;
-            
-        } catch (IOException e) {
+    final DataInputStream dis = new DataInputStream(new ByteArrayInputStream(a));
 
-            throw new RuntimeException(e);
+    final long magic = dis.readLong();
 
-        }
+    if (magic != MAGIC) throw new IOException("Bad magic: expected=" + MAGIC + ", actual=" + magic);
 
-    }
+    tmp.readExternal2(dis);
 
-    @Override
-    public String toString() {
+    return tmp;
+  }
 
-        return super.toString() + "{messageId=" + messageId
-                + ",originalSenderId=" + originalSenderId + ",senderId="
-                + senderId + ",token=" + token + ",replicationFactor="
-                + replicationFactor + "}";
+  @Override
+  public void writeExternal(final ObjectOutput out) throws IOException {
 
-    }
+    writeExternal2(out);
+  }
 
-    @Override
-    public boolean equals(final Object obj) {
+  private void writeExternal2(final DataOutput out) throws IOException {
 
-        if (this == obj)
-            return true;
+    out.writeShort(currentVersion);
 
-        if (!(obj instanceof IHASendState))
-            return false;
+    out.writeLong(messageId);
 
-        final IHASendState t = (IHASendState) obj;
-
-        return messageId == t.getMessageId()
-                && originalSenderId.equals(t.getOriginalSenderId())
-                && senderId.equals(t.getSenderId()) && token == t.getQuorumToken()
-                && replicationFactor == t.getReplicationFactor();
+    out.writeLong(originalSenderId.getMostSignificantBits());
+    out.writeLong(originalSenderId.getLeastSignificantBits());
 
-    }
+    out.writeLong(senderId.getMostSignificantBits());
+    out.writeLong(senderId.getLeastSignificantBits());
 
-    @Override
-    public int hashCode() {
+    out.writeLong(token);
 
-        // based on the messageId and the hashCode of the senderId
-        return ((int) (messageId ^ (messageId >>> 32))) + senderId.hashCode();
-    }
+    out.writeInt(replicationFactor);
+  }
 
-    /**
-     * Magic data only included in the marker.
-     */
-    private static final long MAGIC = 0x13759f98e8363caeL;
-    private static final int MAGIC_SIZE = Bytes.SIZEOF_LONG;
-    
-    private static final transient short VERSION0 = 0x0;
-    private static final transient int VERSION0_LEN =
-            Bytes.SIZEOF_SHORT + // version
-            Bytes.SIZEOF_LONG + // messageId
-            Bytes.SIZEOF_UUID + // originalSenderId
-            Bytes.SIZEOF_UUID + // senderId
-            Bytes.SIZEOF_LONG + // token
-            Bytes.SIZEOF_INT // replicationFactor
-    ;
+  // static final private int MARKER_SIZE = 8;
 
-    private static final transient short currentVersion = VERSION0;
-    private static final transient int currentVersionLen = VERSION0_LEN;
+  // /**
+  // * Unique marker generation with JVM wide random number generator.
+  // *
+  // * @return A "pretty unique" marker.
+  // */
+  // private byte[] genMarker() {
 
-    @Override
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
+  // final byte[] token = new byte[MARKER_SIZE];
 
-        readExternal2(in);
+  // while (!unique1(token)) {
+  // r.nextBytes(token);
+  // }
 
-    }
+  // return token;
+  // }
 
-    private void readExternal2(final DataInput in) throws IOException {
-        
-        final short version = in.readShort();
+  // /**
+  // * Checks that the first byte is not repeated in the remaining bytes, this
+  // * simplifies search for the token in the input stream.
+  // */
+  // static private boolean unique1(final byte[] bytes) {
+  // final byte b = bytes[0];
+  // for (int t = 1; t < bytes.length; t++) {
+  // if (bytes[t] == b)
+  // return false;
+  // }
 
-        if (version != VERSION0)
-            throw new RuntimeException("Bad version for serialization");
-
-        messageId = in.readLong();
-
-        originalSenderId = new UUID(
-                in.readLong(), /* MSB */
-                in.readLong() /* LSB */
-        );
-
-        senderId = new UUID(
-                in.readLong(), /* MSB */
-                in.readLong() /* LSB */
-        );
-
-        token = in.readLong();
-
-        replicationFactor = in.readInt();
-
-    }
-
-    /**
-     * Decode the value returned by {@link #getMarker()}. This has the magic
-     * followed by {@link #writeExternal2(DataOutput)}. It does not have the
-     * object serialization metadata.
-     * 
-     * @param a
-     *            The encoded marker.
-     * 
-     * @return The decoded marker -or- <code>null</code> iff the argument is
-     *         <code>null</code>.
-     */
-    static public IHASendState decode(final byte[] a) throws IOException {
-        
-        if (a == null)
-            return null;
-        
-        final HASendState tmp = new HASendState();
-
-        final DataInputStream dis = new DataInputStream(new ByteArrayInputStream(a));
-
-        final long magic = dis.readLong();
-
-        if (magic != MAGIC)
-            throw new IOException("Bad magic: expected=" + MAGIC + ", actual="
-                    + magic);
-
-        tmp.readExternal2(dis);
-
-        return tmp;
-
-    }
-    
-    @Override
-    public void writeExternal(final ObjectOutput out) throws IOException {
-
-        writeExternal2(out);
-
-    }
-
-    private void writeExternal2(final DataOutput out) throws IOException {
-
-        out.writeShort(currentVersion);
-
-        out.writeLong(messageId);
-
-        out.writeLong(originalSenderId.getMostSignificantBits());
-        out.writeLong(originalSenderId.getLeastSignificantBits());
-
-        out.writeLong(senderId.getMostSignificantBits());
-        out.writeLong(senderId.getLeastSignificantBits());
-
-        out.writeLong(token);
-
-        out.writeInt(replicationFactor);
-
-    }
-
-    // static final private int MARKER_SIZE = 8;
-
-    // /**
-    // * Unique marker generation with JVM wide random number generator.
-    // *
-    // * @return A "pretty unique" marker.
-    // */
-    // private byte[] genMarker() {
-
-    // final byte[] token = new byte[MARKER_SIZE];
-
-    // while (!unique1(token)) {
-    // r.nextBytes(token);
-    // }
-
-    // return token;
-    // }
-
-    // /**
-    // * Checks that the first byte is not repeated in the remaining bytes, this
-    // * simplifies search for the token in the input stream.
-    // */
-    // static private boolean unique1(final byte[] bytes) {
-    // final byte b = bytes[0];
-    // for (int t = 1; t < bytes.length; t++) {
-    // if (bytes[t] == b)
-    // return false;
-    // }
-
-    // return true;
-    // }
+  // return true;
+  // }
 
 }

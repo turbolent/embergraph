@@ -25,30 +25,22 @@ import junit.framework.TestCase2;
 
 /**
  * Unit tests for {@link BOpFilter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFilter extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestFilter() {
-    }
+  /** */
+  public TestFilter() {}
 
-    /**
-     * @param name
-     */
-    public TestFilter(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestFilter(String name) {
+    super(name);
+  }
 
-    /**
-     * TODO Write tests.
-     */
-    public void test_something() {
-//        fail("write tests");
-    }
-        
+  /** TODO Write tests. */
+  public void test_something() {
+    //        fail("write tests");
+  }
 }

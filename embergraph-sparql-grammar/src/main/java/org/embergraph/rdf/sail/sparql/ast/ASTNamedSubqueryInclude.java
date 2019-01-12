@@ -2,9 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-
-public
-class ASTNamedSubqueryInclude extends SimpleNode {
+public class ASTNamedSubqueryInclude extends SimpleNode {
   public ASTNamedSubqueryInclude(int id) {
     super(id);
   }
@@ -13,42 +11,38 @@ class ASTNamedSubqueryInclude extends SimpleNode {
     super(p, id);
   }
 
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
-    private String name;
 
-//    private boolean queryHint;
+  private String name;
 
-    /**
-     * Set the name of the named solution set.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+  //    private boolean queryHint;
 
-    /**
-     * Return the name of the named solution set.
-     */
-    public String getName() {
-        return name;
-    }
+  /** Set the name of the named solution set. */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-//    /**
-//     * Set flag indicating the join variable query hint.
-//     */
-//    public void setQueryHint(boolean queryHint) {
-//        this.queryHint = queryHint;
-//    }
-//
-//    /**
-//     * Return query hint flag.
-//     */
-//    public boolean isQueryHint() {
-//        return queryHint;
-//    }
+  /** Return the name of the named solution set. */
+  public String getName() {
+    return name;
+  }
+
+  //    /**
+  //     * Set flag indicating the join variable query hint.
+  //     */
+  //    public void setQueryHint(boolean queryHint) {
+  //        this.queryHint = queryHint;
+  //    }
+  //
+  //    /**
+  //     * Return query hint flag.
+  //     */
+  //    public boolean isQueryHint() {
+  //        return queryHint;
+  //    }
 
 }
 /* JavaCC - OriginalChecksum=3c3697c969e7c8627c4e939334b4599f (do not edit this line) */

@@ -24,8 +24,10 @@ package org.embergraph.rdf.sail;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.store.BD;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -38,118 +40,107 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 public class TestSesameFilters extends ProxyEmbergraphSailTestCase {
 
-    protected static final Logger log = Logger.getLogger(TestSesameFilters.class);
+  protected static final Logger log = Logger.getLogger(TestSesameFilters.class);
 
-    protected static final boolean INFO = log.isInfoEnabled();
-    
-    @Override
-    public Properties getProperties() {
-        
-        Properties props = super.getProperties();
+  protected static final boolean INFO = log.isInfoEnabled();
 
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
+  @Override
+  public Properties getProperties() {
+
+    Properties props = super.getProperties();
+
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
+
+    return props;
+  }
+
+  /** */
+  public TestSesameFilters() {}
+
+  /** @param arg0 */
+  public TestSesameFilters(String arg0) {
+    super(arg0);
+  }
+
+  public void testRegex() throws Exception {
+
+    //        final Sail sail = new MemoryStore();
+    //        sail.initialize();
+    //        final Repository repo = new SailRepository(sail);
+
+    final EmbergraphSail sail = getSail();
+    sail.initialize();
+    final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+
+    final RepositoryConnection cxn = repo.getConnection();
+    cxn.setAutoCommit(false);
+
+    try {
+
+      final ValueFactory vf = sail.getValueFactory();
+
+      /*
+       * Create some terms.
+       */
+      final URI mike = vf.createURI(BD.NAMESPACE + "mike");
+      final URI bryan = vf.createURI(BD.NAMESPACE + "bryan");
+      final URI person = vf.createURI(BD.NAMESPACE + "Person");
+      final Literal l1 = vf.createLiteral("mike personick");
+      final Literal l2 = vf.createLiteral("bryan thompson");
+
+      /*
+       * Create some statements.
+       */
+      cxn.add(mike, RDF.TYPE, person);
+      cxn.add(mike, RDFS.LABEL, l1);
+      cxn.add(bryan, RDF.TYPE, person);
+      cxn.add(bryan, RDFS.LABEL, l2);
+
+      /*
+       * Note: The either flush() or commit() is required to flush the
+       * statement buffers to the database before executing any operations
+       * that go around the sail.
+       */
+      cxn.commit();
+
+      {
+        String query =
+            "prefix bd: <"
+                + BD.NAMESPACE
+                + "> "
+                + "prefix rdf: <"
+                + RDF.NAMESPACE
+                + "> "
+                + "prefix rdfs: <"
+                + RDFS.NAMESPACE
+                + "> "
+                + "select * "
+                + "where { "
+                + "  ?s rdf:type bd:Person . "
+                + "  ?s rdfs:label ?label . "
+                + "  FILTER regex(?label, \"mike\") . "
+                + "}";
+
+        final SailTupleQuery tupleQuery =
+            (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        tupleQuery.setIncludeInferred(false /* includeInferred */);
+
+        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        answer.add(createBindingSet(new BindingImpl("s", mike), new BindingImpl("label", l1)));
+
+        final TupleQueryResult result = tupleQuery.evaluate();
+        compare(result, answer);
+      }
+
+    } finally {
+      cxn.close();
+      sail.shutDown();
     }
-
-    /**
-     * 
-     */
-    public TestSesameFilters() {
-    }
-
-    /**
-     * @param arg0
-     */
-    public TestSesameFilters(String arg0) {
-        super(arg0);
-    }
-    
-    public void testRegex() throws Exception {
-    	
-//        final Sail sail = new MemoryStore();
-//        sail.initialize();
-//        final Repository repo = new SailRepository(sail);
-
-    	final EmbergraphSail sail = getSail();
-    	sail.initialize();
-    	final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-    	
-    	final RepositoryConnection cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        
-        try {
-    
-            final ValueFactory vf = sail.getValueFactory();
-
-            /*
-             * Create some terms.
-             */
-            final URI mike = vf.createURI(BD.NAMESPACE + "mike");
-            final URI bryan = vf.createURI(BD.NAMESPACE + "bryan");
-            final URI person = vf.createURI(BD.NAMESPACE + "Person");
-            final Literal l1 = vf.createLiteral("mike personick");
-            final Literal l2 = vf.createLiteral("bryan thompson");
-
-            /*
-             * Create some statements.
-             */
-            cxn.add(mike, RDF.TYPE, person);
-            cxn.add(mike, RDFS.LABEL, l1);
-            cxn.add(bryan, RDF.TYPE, person);
-            cxn.add(bryan, RDFS.LABEL, l2);
-
-            /*
-             * Note: The either flush() or commit() is required to flush the
-             * statement buffers to the database before executing any operations
-             * that go around the sail.
-             */
-            cxn.commit();
-            
-            {
-            	
-	            String query =
-	            	"prefix bd: <"+BD.NAMESPACE+"> " +
-	            	"prefix rdf: <"+RDF.NAMESPACE+"> " +
-	            	"prefix rdfs: <"+RDFS.NAMESPACE+"> " +
-	                "select * " +
-	                "where { " +
-	                "  ?s rdf:type bd:Person . " +
-	                "  ?s rdfs:label ?label . " +
-	                "  FILTER regex(?label, \"mike\") . " +
-	                "}"; 
-	
-	            final SailTupleQuery tupleQuery = (SailTupleQuery)
-	                cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-	            tupleQuery.setIncludeInferred(false /* includeInferred */);
-	           
-	            final Collection<BindingSet> answer = new LinkedList<BindingSet>();
-	            answer.add(createBindingSet(
-	            		new BindingImpl("s", mike),
-	            		new BindingImpl("label", l1)
-	            		));
-
-	            final TupleQueryResult result = tupleQuery.evaluate();
-                compare(result, answer);
-
-            }
-            
-        } finally {
-            cxn.close();
-            sail.shutDown();
-        }
-
-    }
-
+  }
 }

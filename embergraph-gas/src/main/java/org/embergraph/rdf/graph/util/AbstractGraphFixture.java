@@ -17,35 +17,29 @@ package org.embergraph.rdf.graph.util;
 
 import org.openrdf.sail.SailConnection;
 
+public abstract class AbstractGraphFixture implements IGraphFixture {
 
-abstract public class AbstractGraphFixture implements
-        IGraphFixture {
+  @Override
+  public void loadGraph(final String... resources) throws Exception {
 
-    @Override
-    public void loadGraph(final String... resources) throws Exception {
-
-        boolean ok = false;
-        SailConnection cxn = null;
-        try {
-            cxn = getSail().getConnection();
-            cxn.begin();
-            newSailGraphLoader(cxn).loadGraph(null/* fallback */, resources);
-            cxn.commit();
-            ok = true;
-        } finally {
-            if (cxn != null) {
-                if (!ok)
-                    cxn.rollback();
-                cxn.close();
-            }
-        }
-
+    boolean ok = false;
+    SailConnection cxn = null;
+    try {
+      cxn = getSail().getConnection();
+      cxn.begin();
+      newSailGraphLoader(cxn).loadGraph(null /* fallback */, resources);
+      cxn.commit();
+      ok = true;
+    } finally {
+      if (cxn != null) {
+        if (!ok) cxn.rollback();
+        cxn.close();
+      }
     }
+  }
 
-    protected SailGraphLoader newSailGraphLoader(SailConnection cxn) {
+  protected SailGraphLoader newSailGraphLoader(SailConnection cxn) {
 
-        return new SailGraphLoader(cxn);
-
-    }
-
+    return new SailGraphLoader(cxn);
+  }
 }

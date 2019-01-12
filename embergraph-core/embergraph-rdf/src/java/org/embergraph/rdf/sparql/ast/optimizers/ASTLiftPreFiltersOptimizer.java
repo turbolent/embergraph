@@ -29,30 +29,25 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Lift FILTERs which can be evaluated based solely on the bindings in the
- * parent group out of a child group. This helps because we will issue the
- * subquery for the child group less often (assuming that the filter rejects any
- * solutions). This optimizer is based on
- * {@link StaticAnalysis#getPreFilters(JoinGroupNode)}. Anything reported by
- * that method can be lifted out of the child group.
- * 
+ * Lift FILTERs which can be evaluated based solely on the bindings in the parent group out of a
+ * child group. This helps because we will issue the subquery for the child group less often
+ * (assuming that the filter rejects any solutions). This optimizer is based on {@link
+ * StaticAnalysis#getPreFilters(JoinGroupNode)}. Anything reported by that method can be lifted out
+ * of the child group.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: ASTLiftPreFiltersOptimizer.java 5193 2011-09-15 14:18:56Z
- *          thompsonbry $
- * 
- *          FIXME Implement.
+ * @version $Id: ASTLiftPreFiltersOptimizer.java 5193 2011-09-15 14:18:56Z thompsonbry $
+ *     <p>FIXME Implement.
  */
 public class ASTLiftPreFiltersOptimizer implements IASTOptimizer {
 
-    @Override
-    public QueryNodeWithBindingSet optimize(
-       final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-       final IQueryNode queryNode = input.getQueryNode();
-       final IBindingSet[] bindingSets = input.getBindingSets();     
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
-       return new QueryNodeWithBindingSet(queryNode, bindingSets);
-        
-    }
-
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  }
 }

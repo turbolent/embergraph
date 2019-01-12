@@ -17,41 +17,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NE;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
  * rdfs9:
+ *
  * <pre>
  *       triple(?v,rdf:type,?x) :-
  *          triple(?u,rdfs:subClassOf,?x),
- *          triple(?v,rdf:type,?u). 
+ *          triple(?v,rdf:type,?u).
  * </pre>
  */
 public class RuleRdfs09 extends Rule {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6301379050758674236L;
+  /** */
+  private static final long serialVersionUID = 6301379050758674236L;
 
-    public RuleRdfs09( String relationName, Vocabulary vocab) {
+  public RuleRdfs09(String relationName, Vocabulary vocab) {
 
-        super( "rdfs09", new SPOPredicate(relationName,var("v"), vocab.getConstant(RDF.TYPE), var("x")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("x")),
-                    new SPOPredicate(relationName,var("v"), vocab.getConstant(RDF.TYPE), var("u"))
-                },
-                new IConstraint[] {
-        			Constraint.wrap(new NE(var("u"),var("x")))
-                });
-    }
-
+    super(
+        "rdfs09",
+        new SPOPredicate(relationName, var("v"), vocab.getConstant(RDF.TYPE), var("x")),
+        new SPOPredicate[] {
+          new SPOPredicate(relationName, var("u"), vocab.getConstant(RDFS.SUBCLASSOF), var("x")),
+          new SPOPredicate(relationName, var("v"), vocab.getConstant(RDF.TYPE), var("u"))
+        },
+        new IConstraint[] {Constraint.wrap(new NE(var("u"), var("x")))});
+  }
 }

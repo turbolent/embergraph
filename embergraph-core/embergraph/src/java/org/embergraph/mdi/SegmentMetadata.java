@@ -19,54 +19,41 @@ package org.embergraph.mdi;
 
 import java.io.File;
 import java.util.UUID;
-
 import org.embergraph.btree.IndexSegment;
 
 /**
  * Metadata for a single {@link IndexSegment}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SegmentMetadata extends AbstractResourceMetadata {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -7296761796029541465L;
 
-    public final boolean isIndexSegment() {
-        
-        return true;
-        
-    }
-    
-    public final boolean isJournal() {
-        
-        return false;
-        
-    }
+  /** */
+  private static final long serialVersionUID = -7296761796029541465L;
 
-    /**
-     * De-serialization constructor.
-     */
-    public SegmentMetadata() {
+  public final boolean isIndexSegment() {
 
-    }
+    return true;
+  }
 
-    public SegmentMetadata(final File file, /* long nbytes, */final UUID uuid,
-            final long commitTime) {
+  public final boolean isJournal() {
 
-        this(file.getName(),/* nbytes, */uuid, commitTime);
+    return false;
+  }
 
-    }
+  /** De-serialization constructor. */
+  public SegmentMetadata() {}
 
-    SegmentMetadata(final String filename, /* long nbytes, */final UUID uuid,
-            final long commitTime) {
+  public SegmentMetadata(
+      final File file, /* long nbytes, */ final UUID uuid, final long commitTime) {
 
-        super(filename, /* nbytes, */uuid, commitTime/* createTime */,
-                commitTime/* commitTime */);
+    this(file.getName(), /* nbytes, */ uuid, commitTime);
+  }
 
-    }
+  SegmentMetadata(
+      final String filename, /* long nbytes, */ final UUID uuid, final long commitTime) {
 
+    super(filename, /* nbytes, */ uuid, commitTime /* createTime */, commitTime /* commitTime */);
+  }
 }

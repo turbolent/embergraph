@@ -21,10 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval.service;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.List;
-
-import org.openrdf.query.BindingSet;
-
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 import org.embergraph.rdf.sparql.ast.service.ExternalServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
@@ -32,69 +30,59 @@ import org.embergraph.rdf.sparql.ast.service.OpenrdfNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.striterator.CloseableIteratorWrapper;
-
-import cutthecrap.utils.striterators.ICloseableIterator;
+import org.openrdf.query.BindingSet;
 
 /**
  * Mock service reports the solutions provided in the constructor.
- * <p>
- * Note: This can not be used to test complex queries because the caller needs
- * to know the order in which the query will be evaluated in order to know the
- * correct response for the mock service.
+ *
+ * <p>Note: This can not be used to test complex queries because the caller needs to know the order
+ * in which the query will be evaluated in order to know the correct response for the mock service.
  */
 public class OpenrdfNativeMockServiceFactory extends AbstractServiceFactoryBase {
 
-    private final OpenrdfNativeServiceOptions serviceOptions = new OpenrdfNativeServiceOptions();
+  private final OpenrdfNativeServiceOptions serviceOptions = new OpenrdfNativeServiceOptions();
 
-    private final List<BindingSet> serviceSolutions;
+  private final List<BindingSet> serviceSolutions;
 
-    public OpenrdfNativeMockServiceFactory(
-            final List<BindingSet> serviceSolutions) {
+  public OpenrdfNativeMockServiceFactory(final List<BindingSet> serviceSolutions) {
 
-        this.serviceSolutions = serviceSolutions;
+    this.serviceSolutions = serviceSolutions;
+  }
 
-    }
+  @Override
+  public ServiceCall<?> create(final ServiceCallCreateParams params) {
+
+    TestOpenrdfNativeServiceEvaluation.assertNotNull(params);
+
+    TestOpenrdfNativeServiceEvaluation.assertNotNull(params.getTripleStore());
+
+    TestOpenrdfNativeServiceEvaluation.assertNotNull(params.getServiceNode());
+
+    return new MockExternalServiceCall();
+  }
+
+  @Override
+  public IServiceOptions getServiceOptions() {
+    return serviceOptions;
+  }
+
+  private class MockExternalServiceCall implements ExternalServiceCall {
 
     @Override
-    public ServiceCall<?> create(final ServiceCallCreateParams params) {
+    public ICloseableIterator<BindingSet> call(final BindingSet[] bindingSets) {
 
-        TestOpenrdfNativeServiceEvaluation.assertNotNull(params);
-        
-        TestOpenrdfNativeServiceEvaluation.assertNotNull(params.getTripleStore());
+      TestOpenrdfNativeServiceEvaluation.assertNotNull(bindingSets);
 
-        TestOpenrdfNativeServiceEvaluation.assertNotNull(params.getServiceNode());
+      // System.err.println("ServiceCall: in="+Arrays.toString(bindingSets));
 
-        return new MockExternalServiceCall();
+      // System.err.println("ServiceCall: out="+serviceSolutions);
 
+      return new CloseableIteratorWrapper<BindingSet>(serviceSolutions.iterator());
     }
 
     @Override
     public IServiceOptions getServiceOptions() {
-        return serviceOptions;
+      return serviceOptions;
     }
-
-    private class MockExternalServiceCall implements ExternalServiceCall {
-
-        @Override
-        public ICloseableIterator<BindingSet> call(
-                final BindingSet[] bindingSets) {
-
-            TestOpenrdfNativeServiceEvaluation.assertNotNull(bindingSets);
-
-            // System.err.println("ServiceCall: in="+Arrays.toString(bindingSets));
-
-            // System.err.println("ServiceCall: out="+serviceSolutions);
-
-            return new CloseableIteratorWrapper<BindingSet>(
-                    serviceSolutions.iterator());
-
-        }
-
-        @Override
-        public IServiceOptions getServiceOptions() {
-            return serviceOptions;
-        }
-
-    }
-
+  }
 }

@@ -18,9 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.impl.uri;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IInlineUnicode;
 import org.embergraph.rdf.internal.IV;
@@ -30,183 +27,154 @@ import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
 
 /**
- * Implementation for inline {@link URI}s. All information is inlined. This
- * class is mainly targeted at inlining at fully inlining URIs in scale-out
- * (which can be an attractive option).
+ * Implementation for inline {@link URI}s. All information is inlined. This class is mainly targeted
+ * at inlining at fully inlining URIs in scale-out (which can be an attractive option).
  */
 public class FullyInlineURIIV<V extends EmbergraphURI> extends AbstractInlineIV<V, URI>
-        implements IInlineUnicode, URI {
+    implements IInlineUnicode, URI {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    
-    private final URI uri;
-    
-    /** The cached byte length of this {@link IV}. */
-    private transient int byteLength = 0;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public IV<V, URI> clone(final boolean clearCache) {
+  private final URI uri;
 
-        final FullyInlineURIIV<V> tmp = new FullyInlineURIIV<V>(uri);
-        
-        // propagate transient state if available.
-        tmp.byteLength = byteLength;
+  /** The cached byte length of this {@link IV}. */
+  private transient int byteLength = 0;
 
-        if (!clearCache) {
+  public IV<V, URI> clone(final boolean clearCache) {
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    final FullyInlineURIIV<V> tmp = new FullyInlineURIIV<V>(uri);
 
-    }
-    
-    public FullyInlineURIIV(final URI uri) {
+    // propagate transient state if available.
+    tmp.byteLength = byteLength;
 
-        this(uri, 0/* byteLength */);
+    if (!clearCache) {
 
-    }
-    
-    public FullyInlineURIIV(final URI uri, final int byteLength) {
-
-        super(VTE.URI, DTE.XSDString);
-
-        if (uri == null)
-            throw new IllegalArgumentException();
-
-        this.uri = uri;
-
-        this.byteLength = byteLength;
-        
+      tmp.setValue(getValueCache());
     }
 
-    final public URI getInlineValue() {
+    return tmp;
+  }
 
-        return uri;
-        
+  public FullyInlineURIIV(final URI uri) {
+
+    this(uri, 0 /* byteLength */);
+  }
+
+  public FullyInlineURIIV(final URI uri, final int byteLength) {
+
+    super(VTE.URI, DTE.XSDString);
+
+    if (uri == null) throw new IllegalArgumentException();
+
+    this.uri = uri;
+
+    this.byteLength = byteLength;
+  }
+
+  public final URI getInlineValue() {
+
+    return uri;
+  }
+
+  public final String toString() {
+
+    return uri.stringValue();
+  }
+
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+    V v = getValueCache();
+    if (v == null) {
+      final EmbergraphValueFactory f = lex.getValueFactory();
+      v = (V) f.createURI(uri.stringValue());
+      v.setIV(this);
+      setValue(v);
+    }
+    return v;
+  }
+
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof FullyInlineURIIV<?>) {
+      return uri.stringValue().equals(((FullyInlineURIIV<?>) o).stringValue());
+    }
+    return false;
+  }
+
+  /** Return the hash code of the {@link URI}'s string value (per the openrdf API). */
+  public int hashCode() {
+
+    return uri.stringValue().hashCode();
+  }
+
+  public int byteLength() {
+
+    if (byteLength == 0) {
+
+      // Cache the byteLength if not yet set.
+
+      byteLength =
+          1 // flags
+              + IVUnicode.byteLengthUnicode(uri.stringValue());
     }
 
-    final public String toString() {
+    return byteLength;
+  }
 
-        return uri.stringValue();
-        
-    }
- 
-    @SuppressWarnings("unchecked")
-    public V asValue(final LexiconRelation lex) {
-		V v = getValueCache();
-		if (v == null) {
-            final EmbergraphValueFactory f = lex.getValueFactory();
-            v = (V) f.createURI(uri.stringValue());
-            v.setIV(this);
-			setValue(v);
-		}
-		return v;
-    }
+  public final void setByteLength(final int byteLength) {
 
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof FullyInlineURIIV<?>) {
-            return uri.stringValue().equals(((FullyInlineURIIV<?>) o).stringValue());
-        }
-        return false;
-    }
+    if (byteLength < 0) throw new IllegalArgumentException();
 
-    /**
-     * Return the hash code of the {@link URI}'s string value (per the openrdf
-     * API).
-     */
-    public int hashCode() {
+    if (this.byteLength != 0 && this.byteLength != byteLength) throw new IllegalStateException();
 
-        return uri.stringValue().hashCode();
-        
-    }
+    this.byteLength = byteLength;
+  }
 
-    public int byteLength() {
-        
-        if (byteLength == 0) {
+  @Override
+  public int _compareTo(final IV o) {
 
-            // Cache the byteLength if not yet set.
+    final FullyInlineURIIV<?> t = (FullyInlineURIIV<?>) o;
 
-            byteLength = 1 // flags
-                    + IVUnicode.byteLengthUnicode(uri.stringValue())
-                    ;
-        }
+    return IVUnicode.IVUnicodeComparator.INSTANCE.compare(uri.stringValue(), t.uri.stringValue());
 
-        return byteLength;
-        
-    }
+    //        return uri.stringValue().compareTo(id2);
+    //        return id == id2 ? 0 : id < id2 ? -1 : 1;
 
-    final public void setByteLength(final int byteLength) {
+  }
 
-        if (byteLength < 0)
-            throw new IllegalArgumentException();
-        
-        if (this.byteLength != 0 && this.byteLength != byteLength)
-            throw new IllegalStateException();
-        
-        this.byteLength = byteLength;
-        
-    }
+  /**
+   * Because we this is a fully inlined URI, we do not need the materialized URI to answer the URI
+   * interface methods.
+   */
+  @Override
+  public boolean needsMaterialization() {
 
-    @Override
-    public int _compareTo(final IV o) {
+    return false;
+  }
 
-        final FullyInlineURIIV<?> t = (FullyInlineURIIV<?>) o;
+  /** Implements {@link Value#stringValue()}. */
+  @Override
+  public String stringValue() {
 
-        return IVUnicode.IVUnicodeComparator.INSTANCE.compare(
-                uri.stringValue(), t.uri.stringValue());
-        
-//        return uri.stringValue().compareTo(id2);
-//        return id == id2 ? 0 : id < id2 ? -1 : 1;
-        
-    }
-    
-	/**
-	 * Because we this is a fully inlined URI, we do not need the
-	 * materialized URI to answer the URI interface methods.
-	 */
-	@Override
-	public boolean needsMaterialization() {
-		
-		return false;
-		
-	}
+    return uri.stringValue();
+  }
 
-	/**
-	 * Implements {@link Value#stringValue()}.
-	 */
-	@Override
-	public String stringValue() {
-		
-		return uri.stringValue();
-		
-	}
+  /** Implements {@link URI#getLocalName()}. */
+  @Override
+  public String getLocalName() {
 
-	/**
-	 * Implements {@link URI#getLocalName()}.
-	 */
-	@Override
-	public String getLocalName() {
-		
-		return uri.getLocalName();
-		
-	}
+    return uri.getLocalName();
+  }
 
-	/**
-	 * Implements {@link URI#getNamespace()}.
-	 */
-	@Override
-	public String getNamespace() {
-		
-		return uri.getNamespace();
-		
-	}
+  /** Implements {@link URI#getNamespace()}. */
+  @Override
+  public String getNamespace() {
 
+    return uri.getNamespace();
+  }
 }

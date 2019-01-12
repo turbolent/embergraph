@@ -22,22 +22,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 import java.util.Collection;
-
 import org.openrdf.model.Resource;
 
-/**
- * Class representing the result of a get contexts operation against 
- * the REST API.
- */
+/** Class representing the result of a get contexts operation against the REST API. */
 class ContextsResult {
 
-    /** The contexts. */
-    public final Collection<Resource> contexts;
+  /** The contexts. */
+  public final Collection<Resource> contexts;
 
-    public ContextsResult(final Collection<Resource> contexts) {
-        
-        this.contexts = contexts;
-        
-    }
+  public ContextsResult(final Collection<Resource> contexts) {
 
+    this.contexts = contexts;
+  }
 }

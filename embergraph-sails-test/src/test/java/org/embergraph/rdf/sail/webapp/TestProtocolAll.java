@@ -21,17 +21,16 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * A collection of proxied tests for the SPARQL 1.1 protocol.
- */
-public class TestProtocolAll  extends TestCase  {
-    public static Test suite() {
-        final TestSuite suite = ProxySuiteHelper.suiteWithOptionalProxy("SPARQL 1.1 Protocol",TestMode.quads,TestMode.triples, TestMode.sids);
-        suite.addTestSuite(ExampleProtocolTest.class);
-        suite.addTestSuite(TestRelease123Protocol.class);
-        suite.addTestSuite(TestPostNotURLEncoded.class);
-        suite.addTestSuite(TestAskJsonTrac704.class);
-        return suite;
-    }
-
+/** A collection of proxied tests for the SPARQL 1.1 protocol. */
+public class TestProtocolAll extends TestCase {
+  public static Test suite() {
+    final TestSuite suite =
+        ProxySuiteHelper.suiteWithOptionalProxy(
+            "SPARQL 1.1 Protocol", TestMode.quads, TestMode.triples, TestMode.sids);
+    suite.addTestSuite(ExampleProtocolTest.class);
+    suite.addTestSuite(TestRelease123Protocol.class);
+    suite.addTestSuite(TestPostNotURLEncoded.class);
+    suite.addTestSuite(TestAskJsonTrac704.class);
+    return suite;
+  }
 }

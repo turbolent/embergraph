@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.Properties;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -29,154 +28,136 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Data driven test suite asserting that the examples in the geospatial
- * documentation are running through properly.
- * 
+ * Data driven test suite asserting that the examples in the geospatial documentation are running
+ * through properly.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestGeoSpatialExamplesFromDocumentation extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestGeoSpatialExamplesFromDocumentation() {
-    }
+  /** */
+  public TestGeoSpatialExamplesFromDocumentation() {}
 
-    /**
-     * @param name
-     */ 
-    public TestGeoSpatialExamplesFromDocumentation(String name) {
-        super(name);
-    }
-    
-    /**
-     * Built-in datatype example
-     */
-    public void testDocumentationBuiltin01() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-builtin01",
-           "geo-documentation-builtin01.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-builtin01.srx").runTest();
-        
-    }
+  /** @param name */
+  public TestGeoSpatialExamplesFromDocumentation(String name) {
+    super(name);
+  }
 
-    /**
-     * Built-in datatype example
-     */
-    public void testDocumentationBuiltin02() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-builtin02",
-           "geo-documentation-builtin02.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-builtin02.srx").runTest();
-        
-    }
+  /** Built-in datatype example */
+  public void testDocumentationBuiltin01() throws Exception {
 
-    /**
-     * Built-in datatype example
-     */
-    public void testDocumentationBuiltin03() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-builtin03",
-           "geo-documentation-builtin03.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-builtin03.srx").runTest();
-        
-    }
+    new TestHelper(
+            "geo-documentation-builtin01",
+            "geo-documentation-builtin01.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-builtin01.srx")
+        .runTest();
+  }
 
-    /**
-     * Built-in datatype example
-     */
-    public void testDocumentationBuiltin04() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-builtin04",
-           "geo-documentation-builtin04.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-builtin04.srx").runTest();
-        
-    }
+  /** Built-in datatype example */
+  public void testDocumentationBuiltin02() throws Exception {
 
-    /**
-     * latitude-longitude-starttime-endtime example from documentation
-     */
-    public void testDocumentationCustomLLTT01() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-custom-lltt01",
-           "geo-documentation-custom-lltt01.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-custom-lltt01.srx").runTest();
-        
-    }
+    new TestHelper(
+            "geo-documentation-builtin02",
+            "geo-documentation-builtin02.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-builtin02.srx")
+        .runTest();
+  }
 
-    /**
-     * width-height-length datatype example from documentation
-     */
-    public void testDocumentationCustomWHL01() throws Exception {
-        
-        new TestHelper(
-           "geo-documentation-custom-whl01",
-           "geo-documentation-custom-whl01.rq", 
-           "geo-documentation.ttl",
-           "geo-documentation-custom-whl01.srx").runTest();
-        
-    }
+  /** Built-in datatype example */
+  public void testDocumentationBuiltin03() throws Exception {
 
-    
-    @Override
-    public Properties getProperties() {
+    new TestHelper(
+            "geo-documentation-builtin03",
+            "geo-documentation-builtin03.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-builtin03.srx")
+        .runTest();
+  }
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) super.getProperties().clone();
+  /** Built-in datatype example */
+  public void testDocumentationBuiltin04() throws Exception {
 
-        // turn on quads.
-        properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
+    new TestHelper(
+            "geo-documentation-builtin04",
+            "geo-documentation-builtin04.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-builtin04.srx")
+        .runTest();
+  }
 
-        // TM not available with quads.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
+  /** latitude-longitude-starttime-endtime example from documentation */
+  public void testDocumentationCustomLLTT01() throws Exception {
 
-        // turn off axioms.
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+    new TestHelper(
+            "geo-documentation-custom-lltt01",
+            "geo-documentation-custom-lltt01.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-custom-lltt01.srx")
+        .runTest();
+  }
 
-        // no persistence.
-        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+  /** width-height-length datatype example from documentation */
+  public void testDocumentationCustomWHL01() throws Exception {
 
-        // enable GeoSpatial index
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
-        
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".0",
-           "{ \"config\": "
-           + "{ \"uri\": \"http://my-lat-lon-starttime-endtime-dt\", "
-           + "\"fields\": [ "
-           + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LATITUDE\" },"
-           + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "
-           + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"starttime\" }, "
-           + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"endtime\" } ] } }");
+    new TestHelper(
+            "geo-documentation-custom-whl01",
+            "geo-documentation-custom-whl01.rq",
+            "geo-documentation.ttl",
+            "geo-documentation-custom-whl01.srx")
+        .runTest();
+  }
 
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG + ".1",
-           "{ \"config\": { "
-           + "\"uri\": \"http://width-height-length-dt\", "
-           + "\"fields\": [ "
-           + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"width\" }, "
-           + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"height\" }, "
-           + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"length\" } ] } }");
+  @Override
+  public Properties getProperties() {
 
-        properties.setProperty(
-                org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
-                "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-        return properties;
+    // turn on quads.
+    properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
-    }
+    // TM not available with quads.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+
+    // turn off axioms.
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+
+    // no persistence.
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    // enable GeoSpatial index
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "true");
+
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG
+            + ".0",
+        "{ \"config\": "
+            + "{ \"uri\": \"http://my-lat-lon-starttime-endtime-dt\", "
+            + "\"fields\": [ "
+            + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LATITUDE\" },"
+            + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" }, "
+            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"starttime\" }, "
+            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"endtime\" } ] } }");
+
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG
+            + ".1",
+        "{ \"config\": { "
+            + "\"uri\": \"http://width-height-length-dt\", "
+            + "\"fields\": [ "
+            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"width\" }, "
+            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"height\" }, "
+            + "{ \"valueType\": \"LONG\", \"serviceMapping\": \"length\" } ] } }");
+
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.VOCABULARY_CLASS,
+        "org.embergraph.rdf.sparql.ast.eval.service.GeoSpatialTestVocabulary");
+
+    return properties;
+  }
 }

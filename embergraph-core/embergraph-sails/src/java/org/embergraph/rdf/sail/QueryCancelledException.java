@@ -21,37 +21,33 @@ package org.embergraph.rdf.sail;
 import java.util.UUID;
 
 /**
- * Exception thrown when a query is explicitly cancelled.   Used to
- * support the embedded graph cancellation.
- * 
- * @author beebs
+ * Exception thrown when a query is explicitly cancelled. Used to support the embedded graph
+ * cancellation.
  *
+ * @author beebs
  */
 public class QueryCancelledException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3851292073962629025L;
-	
-	private UUID queryId;
-	
-	public QueryCancelledException(String string) {
-		super(string);
-	}
-	
-	public QueryCancelledException(String string, UUID queryId) {
-		super(string);
+  /** */
+  private static final long serialVersionUID = -3851292073962629025L;
 
-		this.queryId = queryId;
+  private UUID queryId;
 
-	}
+  public QueryCancelledException(String string) {
+    super(string);
+  }
 
-	public UUID getQueryId() {
-		return queryId;
-	}
+  public QueryCancelledException(String string, UUID queryId) {
+    super(string);
 
-	public void setQueryId(UUID queryId) {
-		this.queryId = queryId;
-	}
+    this.queryId = queryId;
+  }
+
+  public UUID getQueryId() {
+    return queryId;
+  }
+
+  public void setQueryId(UUID queryId) {
+    this.queryId = queryId;
+  }
 }

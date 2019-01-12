@@ -26,38 +26,32 @@ package org.embergraph.btree.proc;
 import org.embergraph.service.Split;
 
 /**
- * Combines together boolean values using a logical <code>OR</code>. The
- * {@link #getResult() result} will be <code>true</code> if any of the
- * component results was <code>true</code>.
- * 
+ * Combines together boolean values using a logical <code>OR</code>. The {@link #getResult() result}
+ * will be <code>true</code> if any of the component results was <code>true</code>.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class BooleanORAggregator implements IResultHandler<Boolean, Boolean> {
 
-    /**
-     * Note: The public methods are synchronized so that changes to this field
-     * state will be visible.
-     */
-    private boolean flag;
+  /**
+   * Note: The public methods are synchronized so that changes to this field state will be visible.
+   */
+  private boolean flag;
 
-    public BooleanORAggregator() {
-        
-        flag = false;
-        
-    }
-    
-	@Override
-	synchronized public void aggregate(final Boolean result, final Split split) {
+  public BooleanORAggregator() {
 
-        flag |= result.booleanValue();
+    flag = false;
+  }
 
-    }
+  @Override
+  public synchronized void aggregate(final Boolean result, final Split split) {
 
-	@Override
-    synchronized public Boolean getResult() {
+    flag |= result.booleanValue();
+  }
 
-        return flag;
+  @Override
+  public synchronized Boolean getResult() {
 
-    }
-
+    return flag;
+  }
 }

@@ -29,26 +29,22 @@ import junit.framework.TestSuite;
  * @version $Id$
  */
 public class TestAll extends TestCase {
-    /**
-     * 
-     */
-    public TestAll() {
-        super();
-    }
+  /** */
+  public TestAll() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite(TestAll.class.getName());
-        suite.addTestSuite(TestCoordinateUtility.class);
-        suite.addTestSuite(TestCoordinateDMS.class);
-        suite.addTestSuite(TestCoordinateDDM.class);
-        suite.addTestSuite(TestCoordinateDD.class);
-        return suite;
-    }
+  public static Test suite() {
+    TestSuite suite = new TestSuite(TestAll.class.getName());
+    suite.addTestSuite(TestCoordinateUtility.class);
+    suite.addTestSuite(TestCoordinateDMS.class);
+    suite.addTestSuite(TestCoordinateDDM.class);
+    suite.addTestSuite(TestCoordinateDD.class);
+    return suite;
+  }
 }

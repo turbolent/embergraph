@@ -21,35 +21,34 @@ import java.util.Iterator;
 /**
  * Mapper
  *
- * Used with Mapperator by Striterator to map instance methods against member objects.
+ * <p>Used with Mapperator by Striterator to map instance methods against member objects.
  */
-
 public class Mapper extends FilterBase {
-	protected Object m_client = null;
-	protected Method m_method = null; // @todo Not serializable. Defer reflection?
-	protected Object[] m_args = {null};
-	
-	public Mapper(Object client, Method method) {
-		m_client = client;
-		m_method = method;
-	}
-	
-	//-------------------------------------------------------------
+  protected Object m_client = null;
+  protected Method m_method = null; // @todo Not serializable. Defer reflection?
+  protected Object[] m_args = {null};
 
-	@Override
-    final public Iterator filterOnce(Iterator src, Object context) {
-        return new Mapperator(src, context, this);
+  public Mapper(Object client, Method method) {
+    m_client = client;
+    m_method = method;
+  }
+
+  // -------------------------------------------------------------
+
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
+    return new Mapperator(src, context, this);
+  }
+
+  // -------------------------------------------------------------
+
+  protected void apply(Object obj) {
+    try {
+      m_args[0] = obj;
+
+      m_method.invoke(m_client, m_args);
+    } catch (Exception e) {
+      throw new RuntimeException("Error on mapping method", e);
     }
-
-	//-------------------------------------------------------------
-
-	protected void apply(Object obj) {
-		try {
-			m_args[0] = obj;
-			
-			m_method.invoke(m_client, m_args);
-		} catch (Exception e) {
-			throw new RuntimeException("Error on mapping method", e);
-		}
-	}
+  }
 }

@@ -24,12 +24,10 @@ package org.embergraph.rdf.sparql.ast.service;
 import org.openrdf.query.BindingSet;
 
 /**
- * Service invocation interface for an REMOTE SPARQL service. Data interchange
- * with the remote service SPARQL query and consumes SPARQL result sets.
- * 
+ * Service invocation interface for an REMOTE SPARQL service. Data interchange with the remote
+ * service SPARQL query and consumes SPARQL result sets.
+ *
  * @see ServiceRegistry
  * @see ServiceFactory
  */
-public interface RemoteServiceCall extends ServiceCall<BindingSet> { 
-
-}
+public interface RemoteServiceCall extends ServiceCall<BindingSet> {}

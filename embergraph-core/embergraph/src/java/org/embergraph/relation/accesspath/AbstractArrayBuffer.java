@@ -23,240 +23,198 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-
 /**
- * A thread-safe buffer backed by a fixed capacity array. Concrete
- * implementations must empty the buffer in {@link #flush(int, Object[])}.
- * 
+ * A thread-safe buffer backed by a fixed capacity array. Concrete implementations must empty the
+ * buffer in {@link #flush(int, Object[])}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractArrayBuffer<E> implements IBuffer<E> {
+public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
 
-//    protected static final Logger log = Logger.getLogger(AbstractArrayBuffer.class);
-//    
-//    protected static final boolean INFO = log.isInfoEnabled();
-//
-//    protected static final boolean DEBUG = log.isDebugEnabled();
+  //    protected static final Logger log = Logger.getLogger(AbstractArrayBuffer.class);
+  //
+  //    protected static final boolean INFO = log.isInfoEnabled();
+  //
+  //    protected static final boolean DEBUG = log.isDebugEnabled();
 
-    /**
-     * The capacity of the backing buffer.
-     */
-    protected final int capacity;
-    
-    /**
-     * The component type of the backing byte, used when a new instance is
-     * allocated.
-     */
-    protected final Class cls;
-    
-    /**
-     * An optional filter for keeping elements out of the buffer.
-     */
-    protected final IElementFilter<E> filter;
-    
-    protected int size;
-    protected E[] buffer;
+  /** The capacity of the backing buffer. */
+  protected final int capacity;
 
-    /**
-     * @param capacity
-     *            The capacity of the backing buffer.
-     * @param cls
-     *            Array instances of this component type will be allocated.
-     * @param filter
-     *            An optional filter for keeping elements out of the buffer.
-     */
-    protected AbstractArrayBuffer(final int capacity, final Class cls,
-            final IElementFilter<E> filter) {
-        
-        if (capacity <= 0)
-            throw new IllegalArgumentException();
+  /** The component type of the backing byte, used when a new instance is allocated. */
+  protected final Class cls;
 
-        if (cls == null)
-            throw new IllegalArgumentException();
-        
-        this.capacity = capacity;
+  /** An optional filter for keeping elements out of the buffer. */
+  protected final IElementFilter<E> filter;
 
-        this.cls = cls;
-        
-        this.filter = filter;
+  protected int size;
+  protected E[] buffer;
 
-    }
-    
-    /**
-     * If {@link #size()} reports zero(0).
-     */
-    public boolean isEmpty() {
+  /**
+   * @param capacity The capacity of the backing buffer.
+   * @param cls Array instances of this component type will be allocated.
+   * @param filter An optional filter for keeping elements out of the buffer.
+   */
+  protected AbstractArrayBuffer(
+      final int capacity, final Class cls, final IElementFilter<E> filter) {
 
-        return size == 0;
-        
-    }
+    if (capacity <= 0) throw new IllegalArgumentException();
 
-    /**
-     * The approximate #of elements in the buffer.
-     */
-    public int size() {
+    if (cls == null) throw new IllegalArgumentException();
 
-        return size;
-        
-    }
+    this.capacity = capacity;
 
-    /**
-     * Filters elements allowed into the buffer.
-     * 
-     * @param e
-     *            Some element.
-     * 
-     * @return <code>true</code> iff the buffer accepts the element.
-     */
-    protected boolean accept(final E e) {
+    this.cls = cls;
 
-        if (filter != null) {
+    this.filter = filter;
+  }
 
-            if(!filter.isValid(e)) {
-                
-                // rejected by the filter.
-                
-//                if(DEBUG) {
-//                    
-//                    log.debug("rejected: element="+e+", filter="+filter);
-//                    
-//                }
+  /** If {@link #size()} reports zero(0). */
+  public boolean isEmpty() {
 
-                return false;
+    return size == 0;
+  }
 
-            }
-            
-        }
-        
-        return true;
+  /** The approximate #of elements in the buffer. */
+  public int size() {
 
+    return size;
+  }
+
+  /**
+   * Filters elements allowed into the buffer.
+   *
+   * @param e Some element.
+   * @return <code>true</code> iff the buffer accepts the element.
+   */
+  protected boolean accept(final E e) {
+
+    if (filter != null) {
+
+      if (!filter.isValid(e)) {
+
+        // rejected by the filter.
+
+        //                if(DEBUG) {
+        //
+        //                    log.debug("rejected: element="+e+", filter="+filter);
+        //
+        //                }
+
+        return false;
+      }
     }
 
-    @SuppressWarnings("unchecked")
-    public void add(final E e) {
+    return true;
+  }
 
-        if (e == null)
-            throw new IllegalArgumentException();
+  @SuppressWarnings("unchecked")
+  public void add(final E e) {
 
-//        if(DEBUG) {
-//            
-//            log.debug("element="+e);
-//            
-//        }
-        
-        if (accept(e)) {
+    if (e == null) throw new IllegalArgumentException();
 
-            synchronized (this) {
+    //        if(DEBUG) {
+    //
+    //            log.debug("element="+e);
+    //
+    //        }
 
-                if (buffer == null) {
+    if (accept(e)) {
 
-                    buffer = (E[]) java.lang.reflect.Array.newInstance(cls,
-                            capacity);
+      synchronized (this) {
+        if (buffer == null) {
 
-                } else if (size == buffer.length) {
+          buffer = (E[]) java.lang.reflect.Array.newInstance(cls, capacity);
 
-                    flush();
+        } else if (size == buffer.length) {
 
-                }
-
-//                try {
-                    buffer[size++] = e;
-//                } catch (ArrayStoreException ex) {
-//                    throw new RuntimeException("bufferClass="
-//                            + buffer.getClass()
-//                            + "["
-//                            + buffer.getClass().getComponentType()
-//                            + "]"
-//                            + ", e.class="
-//                            + e.getClass()
-//                            + (e.getClass().getComponentType() != null ? "["
-//                                    + e.getClass().getComponentType() + "]"
-//                                    : ""));
-//                }
-
-            }
-
+          flush();
         }
 
+        //                try {
+        buffer[size++] = e;
+        //                } catch (ArrayStoreException ex) {
+        //                    throw new RuntimeException("bufferClass="
+        //                            + buffer.getClass()
+        //                            + "["
+        //                            + buffer.getClass().getComponentType()
+        //                            + "]"
+        //                            + ", e.class="
+        //                            + e.getClass()
+        //                            + (e.getClass().getComponentType() != null ? "["
+        //                                    + e.getClass().getComponentType() + "]"
+        //                                    : ""));
+        //                }
+
+      }
+    }
+  }
+
+  public synchronized long flush() {
+
+    if (size > 0) {
+
+      //            if (INFO) {
+      //
+      //                log.info("flushing buffer with " + size + " elements");
+      //
+      //            }
+
+      final long nwritten = flush(size, buffer);
+
+      counter += nwritten;
+
+      //            if (INFO) {
+      //
+      //                log.info("wrote " + nwritten + " elements, cumulative total="
+      //                        + counter);
+      //
+      //            }
+
+      clearBuffer();
     }
 
-    synchronized public long flush() {
+    return counter;
+  }
 
-        if (size > 0) {
+  private long counter = 0L;
 
-//            if (INFO) {
-//
-//                log.info("flushing buffer with " + size + " elements");
-//                
-//            }
-            
-            final long nwritten = flush(size, buffer);
-            
-            counter += nwritten;
-            
-//            if (INFO) {
-//
-//                log.info("wrote " + nwritten + " elements, cumulative total="
-//                        + counter);
-//                
-//            }
-            
-            clearBuffer();
-            
-        }
-        
-        return counter;
-    
-    }
-    
-    private long counter = 0L;
-    
-    synchronized public void reset() {
-        
-//        if(INFO) {
-//            
-//            log.info("Resetting buffer state and counter.");
-//            
-//        }
-        
-        clearBuffer();
-        
-        counter = 0L;
-        
-    }
-    
-    /** Clear hard references from the buffer for better GC. */
-    private void clearBuffer() {
+  public synchronized void reset() {
 
-        for (int i = 0; i < size; i++) {
-            
-            buffer[i] = null;
-            
-        }
+    //        if(INFO) {
+    //
+    //            log.info("Resetting buffer state and counter.");
+    //
+    //        }
 
-        // the buffer is now empty.
-        size = 0;
+    clearBuffer();
 
+    counter = 0L;
+  }
+
+  /** Clear hard references from the buffer for better GC. */
+  private void clearBuffer() {
+
+    for (int i = 0; i < size; i++) {
+
+      buffer[i] = null;
     }
 
-    /**
-     * This method is automatically invoked if the buffer is flushed and it is
-     * non-empty. The implementation is required to dispose of the contents of
-     * the buffer. The caller is already synchronized on <i>this</i> so no
-     * further synchronization is necessary. It is assumed that the contents of
-     * the buffer have been safely disposed of when this method returns.
-     * 
-     * @param n
-     *            The #of elements in the array.
-     * @param a
-     *            The array of elements.
-     * 
-     * @return The #of elements that were modified in the backing relation when
-     *         the buffer was flushed (unlike {@link #flush()}, this is not a
-     *         cumulative counter, but the #of modified elements in the relation
-     *         for this operation only).
-     */
-    abstract protected long flush(int n, E[] a);
-    
+    // the buffer is now empty.
+    size = 0;
+  }
+
+  /**
+   * This method is automatically invoked if the buffer is flushed and it is non-empty. The
+   * implementation is required to dispose of the contents of the buffer. The caller is already
+   * synchronized on <i>this</i> so no further synchronization is necessary. It is assumed that the
+   * contents of the buffer have been safely disposed of when this method returns.
+   *
+   * @param n The #of elements in the array.
+   * @param a The array of elements.
+   * @return The #of elements that were modified in the backing relation when the buffer was flushed
+   *     (unlike {@link #flush()}, this is not a cumulative counter, but the #of modified elements
+   *     in the relation for this operation only).
+   */
+  protected abstract long flush(int n, E[] a);
 }

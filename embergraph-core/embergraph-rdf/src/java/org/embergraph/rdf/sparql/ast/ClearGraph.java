@@ -22,54 +22,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
- * The CLEAR operation removes all the triples in the specified graph(s) in the
- * Graph Store.
- * 
+ * The CLEAR operation removes all the triples in the specified graph(s) in the Graph Store.
+ *
  * <pre>
  * CLEAR ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)
  * </pre>
- * 
- * Note: Embergraph does not support empty graphs, so DROP and CLEAR have identical
- * semantics.
- * 
+ *
+ * Note: Embergraph does not support empty graphs, so DROP and CLEAR have identical semantics.
+ *
  * @see http://www.w3.org/TR/sparql11-update/#clear
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ClearGraph extends DropGraph {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public ClearGraph() {
-        
-        super(UpdateType.Clear);
-        
-    }
+  public ClearGraph() {
 
-    /**
-     * @param op
-     */
-    public ClearGraph(final ClearGraph op) {
-        
-        super(op);
-        
-    }
+    super(UpdateType.Clear);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public ClearGraph(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-    }
+  /** @param op */
+  public ClearGraph(final ClearGraph op) {
 
+    super(op);
+  }
+
+  /**
+   * @param args
+   * @param anns
+   */
+  public ClearGraph(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
 }

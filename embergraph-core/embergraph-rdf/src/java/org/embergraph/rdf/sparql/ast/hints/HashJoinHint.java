@@ -28,30 +28,31 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint used to indicate that a hash join agaist an access path should be
- * used for a given statement pattern node.
+ * Query hint used to indicate that a hash join agaist an access path should be used for a given
+ * statement pattern node.
  */
 final class HashJoinHint extends AbstractBooleanQueryHint {
 
-    protected HashJoinHint() {
-        super(QueryHints.HASH_JOIN, Boolean.FALSE);
+  protected HashJoinHint() {
+    super(QueryHints.HASH_JOIN, Boolean.FALSE);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setQueryHint(context, scope, op, getName(), value);
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
+    //        throw new QueryHintException(scope, op, getName(), value);
 
-        if (op instanceof StatementPatternNode) {
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-            return;
-
-        }
-
-//        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+  }
 }

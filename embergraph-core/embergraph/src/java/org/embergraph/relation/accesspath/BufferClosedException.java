@@ -25,43 +25,33 @@ package org.embergraph.relation.accesspath;
 
 /**
  * Exception thrown by {@link IBlockingBuffer#add()} if the buffer is closed.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BufferClosedException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1292146085922650442L;
+  /** */
+  private static final long serialVersionUID = 1292146085922650442L;
 
-    /**
-     * 
-     */
-    public BufferClosedException() {
-    }
+  /** */
+  public BufferClosedException() {}
 
-    /**
-     * @param s
-     */
-    public BufferClosedException(String s) {
-        super(s);
-    }
+  /** @param s */
+  public BufferClosedException(String s) {
+    super(s);
+  }
 
-    /**
-     * @param cause
-     */
-    public BufferClosedException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public BufferClosedException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public BufferClosedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public BufferClosedException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

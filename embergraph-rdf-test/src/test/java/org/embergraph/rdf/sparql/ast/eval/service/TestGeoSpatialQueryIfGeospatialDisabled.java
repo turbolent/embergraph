@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import java.util.Properties;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
@@ -30,72 +29,66 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
 /**
- * Test case asserting that geospatial SERVICE query fails with proper
- * exception if geospatial submodue is turned off.
- * 
+ * Test case asserting that geospatial SERVICE query fails with proper exception if geospatial
+ * submodue is turned off.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestGeoSpatialQueryIfGeospatialDisabled extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestGeoSpatialQueryIfGeospatialDisabled() {
+  /** */
+  public TestGeoSpatialQueryIfGeospatialDisabled() {}
+
+  /** @param name */
+  public TestGeoSpatialQueryIfGeospatialDisabled(String name) {
+    super(name);
+  }
+
+  /**
+   * Submit a query and make sure it fails with proper exception if geospatial SERVCIE is not
+   * enabled.
+   */
+  public void testDocumentationBuiltin01() throws Exception {
+
+    try {
+      new TestHelper(
+              "geo-documentation-builtin01",
+              "geo-documentation-builtin01.rq",
+              "geo-documentation.ttl",
+              "geo-documentation-builtin01.srx")
+          .runTest();
+    } catch (Exception e) {
+      assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
+      return; // expected
     }
 
-    /**
-     * @param name
-     */ 
-    public TestGeoSpatialQueryIfGeospatialDisabled(String name) {
-        super(name);
-    }
-    
-    /**
-     * Submit a query and make sure it fails with proper exception if
-     * geospatial SERVCIE is not enabled.
-     */
-    public void testDocumentationBuiltin01() throws Exception {
-        
-        try {
-            new TestHelper(
-               "geo-documentation-builtin01",
-               "geo-documentation-builtin01.rq", 
-               "geo-documentation.ttl",
-               "geo-documentation-builtin01.srx").runTest();
-        } catch (Exception e) {
-            assertTrue(e.toString().contains(GeoSpatialSearchException.class.getName()));
-            return; // expected
-        }
-        
-        throw new RuntimeException("Expected to run into exception.");
-    }
-    
-    @Override
-    public Properties getProperties() {
+    throw new RuntimeException("Expected to run into exception.");
+  }
 
-        // Note: clone to avoid modifying!!!
-        final Properties properties = (Properties) super.getProperties().clone();
+  @Override
+  public Properties getProperties() {
 
-        // turn on quads.
-        properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-        // TM not available with quads.
-        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
+    // turn on quads.
+    properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
-        // turn off axioms.
-        properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
+    // TM not available with quads.
+    properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
-        // no persistence.
-        properties.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+    // turn off axioms.
+    properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS, NoAxioms.class.getName());
 
-        // enable GeoSpatial index
-        properties.setProperty(
-           org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "false");
+    // no persistence.
+    properties.setProperty(
+        org.embergraph.journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
 
-        return properties;
+    // enable GeoSpatial index
+    properties.setProperty(
+        org.embergraph.rdf.store.AbstractLocalTripleStore.Options.GEO_SPATIAL, "false");
 
-    }
+    return properties;
+  }
 }

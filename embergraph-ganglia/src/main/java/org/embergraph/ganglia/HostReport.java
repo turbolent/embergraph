@@ -17,48 +17,38 @@ package org.embergraph.ganglia;
 
 import java.util.Map;
 
-/**
- * A host report.
- */
+/** A host report. */
 public class HostReport implements IHostReport {
 
-	private final String hostName;
-	private final Map<String, IGangliaMetricMessage> metrics;
+  private final String hostName;
+  private final Map<String, IGangliaMetricMessage> metrics;
 
-    public HostReport(final String hostName,
-            final Map<String, IGangliaMetricMessage> metrics) {
+  public HostReport(final String hostName, final Map<String, IGangliaMetricMessage> metrics) {
 
-		if(hostName == null)
-			throw new IllegalArgumentException();
+    if (hostName == null) throw new IllegalArgumentException();
 
-		if(metrics == null)
-			throw new IllegalArgumentException();
-		
-		this.hostName = hostName;
-		
-		this.metrics = metrics;
-		
-	}
-	
-	@Override
-	public String getHostName() {
+    if (metrics == null) throw new IllegalArgumentException();
 
-		return hostName;
-		
-	}
+    this.hostName = hostName;
 
-	@Override
-	public Map<String, IGangliaMetricMessage> getMetrics() {
+    this.metrics = metrics;
+  }
 
-		return metrics;
-		
-	}
+  @Override
+  public String getHostName() {
 
-	@Override
-	public String toString() {
-	    
-        return getClass().getName() + "{hostName=" + hostName + ", metrics="
-                + metrics + "}";
+    return hostName;
+  }
 
-	}
+  @Override
+  public Map<String, IGangliaMetricMessage> getMetrics() {
+
+    return metrics;
+  }
+
+  @Override
+  public String toString() {
+
+    return getClass().getName() + "{hostName=" + hostName + ", metrics=" + metrics + "}";
+  }
 }

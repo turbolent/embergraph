@@ -21,46 +21,42 @@ import org.embergraph.btree.PageStats;
 
 public class HTreePageStats extends PageStats {
 
-    public HTreePageStats() {
-    }
+  public HTreePageStats() {}
 
-    public void visit(final AbstractHTree htree, final AbstractPage node) {
+  public void visit(final AbstractHTree htree, final AbstractPage node) {
 
-        if (m == 0) {
+    if (m == 0) {
 
-            // Make a note of the configured address bits.
-            m = htree.getAddressBits();
+      // Make a note of the configured address bits.
+      m = htree.getAddressBits();
 
-            ntuples = htree.getEntryCount();
+      ntuples = htree.getEntryCount();
 
-            // Note: must be computed dynamically since not a balanced tree.
-            // height = tmp.getHeight();
-
-        }
-
-        /*
-         * Note: Must be computed dynamically since the HTree is not a balanced
-         * tree.
-         */
-
-        height = Math.max(((AbstractPage) node).getLevel(), height);
-
-        super.visit(htree, node);
+      // Note: must be computed dynamically since not a balanced tree.
+      // height = tmp.getHeight();
 
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * TODO This method always returns the current value of [addressBits]. It
-     * should be modified to compute a target value for [addressBits] based on
-     * the same criteria that are used for the B+Tree.
+    /*
+     * Note: Must be computed dynamically since the HTree is not a balanced
+     * tree.
      */
-    @Override
-    public int getRecommendedBranchingFactor() {
 
-        return m;
+    height = Math.max(((AbstractPage) node).getLevel(), height);
 
-    }
+    super.visit(htree, node);
+  }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>TODO This method always returns the current value of [addressBits]. It should be modified to
+   * compute a target value for [addressBits] based on the same criteria that are used for the
+   * B+Tree.
+   */
+  @Override
+  public int getRecommendedBranchingFactor() {
+
+    return m;
+  }
 }

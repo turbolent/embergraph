@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IConstant;
@@ -33,87 +32,67 @@ import org.embergraph.rdf.spo.InGraphHashSetFilter;
 
 /**
  * Abstract base class for "IN" {@link IConstraint} implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- *          FIXME Reconcile this with {@link InGraphBinarySearchFilter} and
- *          {@link InGraphHashSetFilter} and also with the use of an in-memory
- *          join against the incoming binding sets to handle SPARQL data sets.
+ *     <p>FIXME Reconcile this with {@link InGraphBinarySearchFilter} and {@link
+ *     InGraphHashSetFilter} and also with the use of an in-memory join against the incoming binding
+ *     sets to handle SPARQL data sets.
  */
-abstract public class INConstraint<T> extends BOpBase 
-		implements BooleanValueExpression {
+public abstract class INConstraint<T> extends BOpBase implements BooleanValueExpression {
+
+  /** */
+  private static final long serialVersionUID = -774833617971700165L;
+
+  public interface Annotations extends BOpBase.Annotations {
+
+    /** The variable against which the constraint is applied. */
+    String VARIABLE = (INConstraint.class.getName() + ".variable").intern();
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -774833617971700165L;
-
-	public interface Annotations extends BOpBase.Annotations {
-
-        /**
-         * The variable against which the constraint is applied.
-         */
-        String VARIABLE = (INConstraint.class.getName() + ".variable").intern();
-
-        /**
-         * The set of allowed values for that variable.
-         * 
-         * @todo allow large sets to be specified by reference to a resource
-         *       which is then materialized on demand during evaluation.
-         */
-        String SET = (INConstraint.class.getName() + ".set").intern();
-        
-    }
-    
-    /**
-     * @param op
+     * The set of allowed values for that variable.
+     *
+     * @todo allow large sets to be specified by reference to a resource which is then materialized
+     *     on demand during evaluation.
      */
-    public INConstraint(final INConstraint<T> op) {
-        super(op);
-    }
+    String SET = (INConstraint.class.getName() + ".set").intern();
+  }
 
-    /**
-     * @param args
-     * @param annotations
-     */
-    public INConstraint(BOp[] args, Map<String, Object> annotations) {
+  /** @param op */
+  public INConstraint(final INConstraint<T> op) {
+    super(op);
+  }
 
-        super(args, annotations);
+  /**
+   * @param args
+   * @param annotations
+   */
+  public INConstraint(BOp[] args, Map<String, Object> annotations) {
 
-        final IVariable<T> var = getVariable();
+    super(args, annotations);
 
-        if (var == null)
-            throw new IllegalArgumentException();
+    final IVariable<T> var = getVariable();
 
-        final IConstant<T>[] set = getSet();
+    if (var == null) throw new IllegalArgumentException();
 
-        if (set == null)
-            throw new IllegalArgumentException();
+    final IConstant<T>[] set = getSet();
 
-        if (set.length == 0)
-            throw new IllegalArgumentException();
+    if (set == null) throw new IllegalArgumentException();
 
-    }
+    if (set.length == 0) throw new IllegalArgumentException();
+  }
 
-    /**
-     * @see Annotations#VARIABLE
-     */
-    @SuppressWarnings("unchecked")
-    public IVariable<T> getVariable() {
-        
-        return (IVariable<T>) getProperty(Annotations.VARIABLE);
-        
-    }
+  /** @see Annotations#VARIABLE */
+  @SuppressWarnings("unchecked")
+  public IVariable<T> getVariable() {
 
-    /**
-     * @see Annotations#SET
-     */
-    @SuppressWarnings("unchecked")
-    public IConstant<T>[] getSet() {
-        
-        return (IConstant<T>[]) getProperty(Annotations.SET);
-        
-    }
+    return (IVariable<T>) getProperty(Annotations.VARIABLE);
+  }
 
+  /** @see Annotations#SET */
+  @SuppressWarnings("unchecked")
+  public IConstant<T>[] getSet() {
+
+    return (IConstant<T>[]) getProperty(Annotations.SET);
+  }
 }

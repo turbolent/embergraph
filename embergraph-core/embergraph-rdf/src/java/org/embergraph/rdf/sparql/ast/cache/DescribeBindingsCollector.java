@@ -21,134 +21,107 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.cache;
 
 import info.aduna.iteration.CloseableIteration;
-
 import java.util.Set;
-
 import org.apache.log4j.Logger;
+import org.embergraph.bop.IVariable;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 
-import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.model.EmbergraphValue;
-
 /**
  * Collects and reports the distinct bindings observed on some set of variables.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class DescribeBindingsCollector implements
-        CloseableIteration<BindingSet, QueryEvaluationException> {
+public class DescribeBindingsCollector
+    implements CloseableIteration<BindingSet, QueryEvaluationException> {
 
-    private static final transient Logger log = Logger
-            .getLogger(DescribeBindingsCollector.class);
-    
-    private final IVariable<?>[] originalVars;
-    private final Set<EmbergraphValue> describedResources;
-    private final CloseableIteration<BindingSet, QueryEvaluationException> src;
-    private boolean open = true;
+  private static final transient Logger log = Logger.getLogger(DescribeBindingsCollector.class);
 
-    /**
-     * 
-     * @param originalVars
-     *            The set of variables whose distinct bound values will be
-     *            reported.
-     * @param describedResources
-     *            The set of distinct bound values for those variables (a high
-     *            concurrency, thread-safe set).
-     * @param src
-     *            The source iterator.
-     */
-    public DescribeBindingsCollector(final Set<IVariable<?>> originalVars,
-            final Set<EmbergraphValue> describedResources,
-            final CloseableIteration<BindingSet, QueryEvaluationException> src) {
+  private final IVariable<?>[] originalVars;
+  private final Set<EmbergraphValue> describedResources;
+  private final CloseableIteration<BindingSet, QueryEvaluationException> src;
+  private boolean open = true;
 
-        if (originalVars == null)
-            throw new IllegalArgumentException();
+  /**
+   * @param originalVars The set of variables whose distinct bound values will be reported.
+   * @param describedResources The set of distinct bound values for those variables (a high
+   *     concurrency, thread-safe set).
+   * @param src The source iterator.
+   */
+  public DescribeBindingsCollector(
+      final Set<IVariable<?>> originalVars,
+      final Set<EmbergraphValue> describedResources,
+      final CloseableIteration<BindingSet, QueryEvaluationException> src) {
 
-        if (originalVars.isEmpty())
-            throw new IllegalArgumentException();
+    if (originalVars == null) throw new IllegalArgumentException();
 
-        if (describedResources == null)
-            throw new IllegalArgumentException();
+    if (originalVars.isEmpty()) throw new IllegalArgumentException();
 
-        if (src == null)
-            throw new IllegalArgumentException();
+    if (describedResources == null) throw new IllegalArgumentException();
 
-        this.originalVars = originalVars.toArray(new IVariable[originalVars
-                .size()]);
+    if (src == null) throw new IllegalArgumentException();
 
-        this.describedResources = describedResources;
+    this.originalVars = originalVars.toArray(new IVariable[originalVars.size()]);
 
-        this.src = src;
+    this.describedResources = describedResources;
 
+    this.src = src;
+  }
+
+  @Override
+  public void close() throws QueryEvaluationException {
+
+    open = false;
+  }
+
+  @Override
+  public boolean hasNext() throws QueryEvaluationException {
+
+    if (!src.hasNext()) {
+
+      close();
+
+      return false;
     }
 
-    @Override
-    public void close() throws QueryEvaluationException {
+    return true;
+  }
 
-        open = false;
-        
-    }
+  @Override
+  public BindingSet next() throws QueryEvaluationException {
 
-    @Override
-    public boolean hasNext() throws QueryEvaluationException {
+    if (!open) throw new QueryEvaluationException("Closed");
 
-        if (!src.hasNext()) {
-        
-            close();
-            
-            return false;
-            
+    final BindingSet bs = src.next();
+
+    for (IVariable<?> var : originalVars) {
+
+      final Binding binding = bs.getBinding(var.getName());
+
+      if (binding == null) continue;
+
+      final EmbergraphValue boundValue = (EmbergraphValue) binding.getValue();
+
+      if (boundValue != null) {
+
+        if (describedResources.add(boundValue)) {
+
+          if (log.isInfoEnabled()) {
+
+            log.info("Will describe: var=" + var + ",boundValue=" + boundValue);
+          }
         }
-
-        return true;
-        
+      }
     }
 
-    @Override
-    public BindingSet next() throws QueryEvaluationException {
+    return bs;
+  }
 
-        if (!open)
-            throw new QueryEvaluationException("Closed");
+  @Override
+  public void remove() throws QueryEvaluationException {
 
-        final BindingSet bs = src.next();
-
-        for (IVariable<?> var : originalVars) {
-
-            final Binding binding = bs.getBinding(var.getName());
-
-            if (binding == null)
-                continue;
-
-            final EmbergraphValue boundValue = (EmbergraphValue) binding.getValue();
-
-            if (boundValue != null) {
-
-                if(describedResources.add(boundValue)) {
-                    
-                    if(log.isInfoEnabled()) {
-                        
-                        log.info("Will describe: var=" + var + ",boundValue="
-                                + boundValue);
-                        
-                    }
-                    
-                }
-
-            }
-
-        }
-
-        return bs;
-
-    }
-
-    @Override
-    public void remove() throws QueryEvaluationException {
- 
-        throw new UnsupportedOperationException();
-        
-    }
-
+    throw new UnsupportedOperationException();
+  }
 }

@@ -27,30 +27,21 @@ import java.nio.channels.FileChannel;
 
 /**
  * An interface for implementations backed by a file on disk.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IDiskBasedStrategy extends IBufferStrategy {
 
-    /**
-     * The size of the file header in bytes.
-     */
-    public int getHeaderSize();
-    
-    /**
-     * The backing file.
-     */
-    public File getFile();
-    
-    /**
-     * The object used to read and write on that file.
-     */
-    public RandomAccessFile getRandomAccessFile();
+  /** The size of the file header in bytes. */
+  public int getHeaderSize();
 
-    /**
-     * The channel used to read and write on the file.
-     */
-    public FileChannel getChannel();
-    
+  /** The backing file. */
+  public File getFile();
+
+  /** The object used to read and write on that file. */
+  public RandomAccessFile getRandomAccessFile();
+
+  /** The channel used to read and write on the file. */
+  public FileChannel getChannel();
 }

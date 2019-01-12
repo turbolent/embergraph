@@ -22,53 +22,45 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
- * The DELETE DATA operation removes some triples, given inline in the request,
- * if the respective graphs in the Graph Store contain those:
- * 
+ * The DELETE DATA operation removes some triples, given inline in the request, if the respective
+ * graphs in the Graph Store contain those:
+ *
  * <pre>
  * DELETE DATA  QuadData
  * </pre>
- * 
+ *
  * @see http://www.w3.org/TR/sparql11-update/#deleteData
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class DeleteData extends AbstractGraphDataUpdate {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public DeleteData() {
-        super(UpdateType.DeleteData);
-    }
+  public DeleteData() {
+    super(UpdateType.DeleteData);
+  }
 
-    /**
-     * @param op
-     */
-    public DeleteData(DeleteData op) {
-        super(op);
-    }
+  /** @param op */
+  public DeleteData(DeleteData op) {
+    super(op);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public DeleteData(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-    }
+  /**
+   * @param args
+   * @param anns
+   */
+  public DeleteData(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+  }
 
-    @Override
-    public void setData(final EmbergraphStatement[] data) {
+  @Override
+  public void setData(final EmbergraphStatement[] data) {
 
-      setProperty(Annotations.DATA, data);
-
-   }
-    
+    setProperty(Annotations.DATA, data);
+  }
 }

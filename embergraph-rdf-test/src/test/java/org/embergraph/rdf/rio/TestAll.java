@@ -29,62 +29,52 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("RIO Integration");
+
+    // basic tests for StatementBuffer.
+    suite.addTestSuite(TestStatementBuffer.class);
+
+    /*
+     * Correctness tests for loading RDF data using DataLoader and
+     * StatementBuffer. Verification is by re-parsing the RDF data and
+     * checking that all statements found in the data exist in the database
+     * for each access path.
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestLoadAndVerify.class);
 
-    /**
-     * @param arg0
+    //        /*
+    //         * Correctness tests when SIDs are enabled and for blank node handling
+    //         * using StatementBuffer and explicitly inserting specific triples (no
+    //         * parsing). The RDF/XML interchange tests serialize the hand loaded
+    //         * data and verify that it can be parsed and that the same graph is
+    //         * obtained.
+    //         */
+    //        suite.addTestSuite(TestRDFXMLInterchangeWithStatementIdentifiers.class);
+
+    /*
+     * Test suite for "SIDS" support for NTRIPLES data. This test targets a
+     * hybrid capability in which the old SIDS mode is extended to consume
+     * NTRIPLES.
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    suite.addTestSuite(TestNTriplesWithSids.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
+    /*
+     * Correctness tests for the asynchronous bulk data loader. This
+     * requires the scale-out architecture. SIDs are not supported yet.
      */
-    public static Test suite() {
+    suite.addTestSuite(TestAsynchronousStatementBufferFactory.class);
 
-        final TestSuite suite = new TestSuite("RIO Integration");
-
-        // basic tests for StatementBuffer.
-        suite.addTestSuite(TestStatementBuffer.class);
-
-        /*
-         * Correctness tests for loading RDF data using DataLoader and
-         * StatementBuffer. Verification is by re-parsing the RDF data and
-         * checking that all statements found in the data exist in the database
-         * for each access path.
-         */
-        suite.addTestSuite(TestLoadAndVerify.class);
-
-//        /*
-//         * Correctness tests when SIDs are enabled and for blank node handling
-//         * using StatementBuffer and explicitly inserting specific triples (no
-//         * parsing). The RDF/XML interchange tests serialize the hand loaded
-//         * data and verify that it can be parsed and that the same graph is
-//         * obtained.
-//         */
-//        suite.addTestSuite(TestRDFXMLInterchangeWithStatementIdentifiers.class);
-        
-        /*
-		 * Test suite for "SIDS" support for NTRIPLES data. This test targets a
-		 * hybrid capability in which the old SIDS mode is extended to consume
-		 * NTRIPLES. 
-		 */
-        suite.addTestSuite(TestNTriplesWithSids.class);
-
-        /*
-         * Correctness tests for the asynchronous bulk data loader. This
-         * requires the scale-out architecture. SIDs are not supported yet.
-         */
-        suite.addTestSuite(TestAsynchronousStatementBufferFactory.class);
-
-        return suite;
-        
-    }
-
+    return suite;
+  }
 }

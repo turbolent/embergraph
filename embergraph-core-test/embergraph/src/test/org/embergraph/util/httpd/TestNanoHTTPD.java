@@ -42,945 +42,835 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.util.Bytes;
 import org.embergraph.util.config.NicUtil;
 
 /**
  * Test suite for {@link NanoHTTPD}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNanoHTTPD extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestNanoHTTPD() {
+  /** */
+  public TestNanoHTTPD() {}
+
+  /** @param name */
+  public TestNanoHTTPD(String name) {
+    super(name);
+  }
+
+  public void test_startShutdownNow() throws IOException {
+
+    final NanoHTTPD fixture = new NanoHTTPD(0 /* port */);
+
+    try {
+
+      assertNotSame("port", 0, fixture.getPort());
+
+      assertTrue("open", fixture.isOpen());
+
+    } finally {
+
+      fixture.shutdownNow();
     }
 
-    /**
-     * @param name
-     */
-    public TestNanoHTTPD(String name) {
-        super(name);
-    }
+    assertFalse("open", fixture.isOpen());
+  }
 
-    public void test_startShutdownNow() throws IOException {
+  public void test_startShutdown()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
 
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */);
+    final NanoHTTPD fixture = new NanoHTTPD(0 /* port */);
 
-        try {
+    try {
 
-            assertNotSame("port", 0, fixture.getPort());
+      final ExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
-            assertTrue("open", fixture.isOpen());
+      try {
 
-        } finally {
+        assertNotSame("port", 0, fixture.getPort());
 
-            fixture.shutdownNow();
+        assertTrue("open", fixture.isOpen());
 
-        }
+        final FutureTask<Void> ft =
+            new FutureTask<Void>(
+                new Runnable() {
+                  public void run() {
+                    fixture.shutdown();
+                  }
+                },
+                null /* Void */);
+
+        executor.submit(ft);
+
+        // wait up to a timeout for the service to terminate.
+        ft.get(1000L, TimeUnit.MILLISECONDS);
 
         assertFalse("open", fixture.isOpen());
 
+      } finally {
+
+        executor.shutdownNow();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
     }
 
-    public void test_startShutdown() throws IOException, InterruptedException,
-            ExecutionException, TimeoutException {
+    assertFalse("open", fixture.isOpen());
+  }
 
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */);
+  /*
+   * GET
+   */
 
-        try {
+  public void test_get() throws IOException {
 
-            final ExecutorService executor = Executors
-                    .newSingleThreadScheduledExecutor();
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
 
-            try {
+          @Override
+          public Response serve(final Request req) {
 
-                assertNotSame("port", 0, fixture.getPort());
+            if (GET.equalsIgnoreCase(req.method)) {
 
-                assertTrue("open", fixture.isOpen());
-
-                final FutureTask<Void> ft = new FutureTask<Void>(
-                        new Runnable() {
-                            public void run() {
-                                fixture.shutdown();
-                            }
-                        }, null/* Void */);
-
-                executor.submit(ft);
-
-                // wait up to a timeout for the service to terminate.
-                ft.get(1000L, TimeUnit.MILLISECONDS);
-
-                assertFalse("open", fixture.isOpen());
-
-            } finally {
-
-                executor.shutdownNow();
-
+              // One signal for GET .
+              return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
             }
 
-        } finally {
-
-            fixture.shutdownNow();
-
-        }
-
-        assertFalse("open", fixture.isOpen());
-
-    }
-
-    /*
-     * GET
-     */
-    
-    public void test_get() throws IOException {
-
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
-
-            @Override
-            public Response serve(final Request req) {
-
-                if (GET.equalsIgnoreCase(req.method)) {
-
-                    // One signal for GET .
-                    return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
-
-                }
-
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
-
-            }
-
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
         };
 
-        try {
+    try {
 
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-            // final int timeout = 0;// timeout (ms).
-            final int timeout = 1000;// timeout (ms).
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      // final int timeout = 0;// timeout (ms).
+      final int timeout = 1000; // timeout (ms).
 
-            final int port = fixture.getPort();
+      final int port = fixture.getPort();
 
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 
-            final URL url = new URL("http", hostAddr, port, ""/* file */);
+      final URL url = new URL("http", hostAddr, port, "" /* file */);
 
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
+      if (log.isInfoEnabled()) log.info("url: " + url);
 
-            HttpURLConnection conn = null;
-            try {
+      HttpURLConnection conn = null;
+      try {
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
 
-                // connect.
-                conn.connect();
+        // connect.
+        conn.connect();
 
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
-
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Write out the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
-    }
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
 
-    /**
-     * Unit test for URL query parameter decode for GET.
-     */
-    public void test_getDecodeParams() throws IOException {
-
-        final LinkedHashMap<String, Vector<String>> expected = new LinkedHashMap<String, Vector<String>>();
+        /*
+         * Write out the response body
+         */
         {
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("1");
-                v.add("2");
-                v.add("3");
-                expected.put("a", v);
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
             }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("a b c");
-                v.add("d e");
-                v.add("f");
-                expected.put("blue", v);
-            }
-        }
-        
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
-            
-            @Override
-            public Response serve(final Request req) {
-
-                if (GET.equalsIgnoreCase(req.method)) {
-
-                    assertEquals("size", expected.size(), req.params.size());
-
-                    for (Map.Entry<String, Vector<String>> e : expected
-                            .entrySet()) {
-                    
-                        assertEquals(e.getKey(), expected.get(e.getKey()),
-                                req.params.get(e.getKey()));
-                        
-                    }
-                    
-                    // One signal for GET .
-                    return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
-
-                }
-
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
-
-            }
-
-        };
-
-        try {
-
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-            // final int timeout = 0;// timeout (ms).
-            final int timeout = 1000;// timeout (ms).
-
-            final int port = fixture.getPort();
-
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
-
-            final StringBuilder queryParms = NanoHTTPD.encodeParams(expected);
-
-            final URL url = new URL("http", hostAddr, port, "/?" + queryParms);
-
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
-
-            HttpURLConnection conn = null;
-            try {
-
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
-
-                // connect.
-                conn.connect();
-
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
-
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Write out the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+          } finally {
+            r.close();
+          }
         }
 
+        // final long elapsed = System.nanoTime() - begin;
+
+      } finally {
+
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
+    }
+  }
+
+  /** Unit test for URL query parameter decode for GET. */
+  public void test_getDecodeParams() throws IOException {
+
+    final LinkedHashMap<String, Vector<String>> expected =
+        new LinkedHashMap<String, Vector<String>>();
+    {
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("1");
+        v.add("2");
+        v.add("3");
+        expected.put("a", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("a b c");
+        v.add("d e");
+        v.add("f");
+        expected.put("blue", v);
+      }
     }
 
-    public void test_getStream() throws IOException {
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
 
-        final byte[] data = new byte[Bytes.kilobyte32 * 8];
+          @Override
+          public Response serve(final Request req) {
+
+            if (GET.equalsIgnoreCase(req.method)) {
+
+              assertEquals("size", expected.size(), req.params.size());
+
+              for (Map.Entry<String, Vector<String>> e : expected.entrySet()) {
+
+                assertEquals(e.getKey(), expected.get(e.getKey()), req.params.get(e.getKey()));
+              }
+
+              // One signal for GET .
+              return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
+            }
+
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
+        };
+
+    try {
+
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      // final int timeout = 0;// timeout (ms).
+      final int timeout = 1000; // timeout (ms).
+
+      final int port = fixture.getPort();
+
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
+
+      final StringBuilder queryParms = NanoHTTPD.encodeParams(expected);
+
+      final URL url = new URL("http", hostAddr, port, "/?" + queryParms);
+
+      if (log.isInfoEnabled()) log.info("url: " + url);
+
+      HttpURLConnection conn = null;
+      try {
+
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
+
+        // connect.
+        conn.connect();
+
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
+        }
+
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
+
+        /*
+         * Write out the response body
+         */
         {
-        
-            final Random r = new Random();
-
-            r.nextBytes(data);
-            
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
+            }
+          } finally {
+            r.close();
+          }
         }
 
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
-            
-            @Override
-            public Response serve(final Request req) {
+        // final long elapsed = System.nanoTime() - begin;
 
-                if (GET.equalsIgnoreCase(req.method)) {
+      } finally {
 
-                    // One signal for GET .
-                    return new Response(HTTP_OK, MIME_DEFAULT_BINARY,
-                            new ByteArrayInputStream(data));
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
 
-                }
+    } finally {
 
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
+      fixture.shutdownNow();
+    }
+  }
 
-            }
+  public void test_getStream() throws IOException {
 
-        };
+    final byte[] data = new byte[Bytes.kilobyte32 * 8];
+    {
+      final Random r = new Random();
 
-        try {
-
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-            // final int timeout = 0;// timeout (ms).
-            final int timeout = 1000;// timeout (ms).
-
-            final int port = fixture.getPort();
-
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
-
-            final URL url = new URL("http", hostAddr, port, ""/* file */);
-
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
-
-            HttpURLConnection conn = null;
-            try {
-
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
-
-                // connect.
-                conn.connect();
-
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
-
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Read the response body and compare it with the expected data.
-                 */
-                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                {
-
-                    final InputStream is = conn.getInputStream();
-
-                    try {
-                        int b;
-                        while ((b = is.read()) != -1) {
-                            baos.write(b);
-                        }
-                    } finally {
-                        is.close();
-                    }
-
-                    baos.flush();
-                }
-
-                assertEquals(data.length, baos.size());
-                assertEquals(data, baos.toByteArray());
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
-        }
-
+      r.nextBytes(data);
     }
 
-    /*
-     * POST
-     */
-    
-    /**
-     * Post with an empty request body.
-     */
-    public void test_post_emptyBody() throws IOException {
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
 
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
+          @Override
+          public Response serve(final Request req) {
 
-            @Override
-            public Response serve(final Request req) {
+            if (GET.equalsIgnoreCase(req.method)) {
 
-                if (POST.equalsIgnoreCase(req.method)) {
-
-                    // One signal for POST.
-                    return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
-
-                }
-
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
-
+              // One signal for GET .
+              return new Response(HTTP_OK, MIME_DEFAULT_BINARY, new ByteArrayInputStream(data));
             }
 
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
         };
 
-        try {
+    try {
 
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-             final int timeout = 0;// timeout (ms).
-//            final int timeout = 1000;// timeout (ms).
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      // final int timeout = 0;// timeout (ms).
+      final int timeout = 1000; // timeout (ms).
 
-            final int port = fixture.getPort();
+      final int port = fixture.getPort();
 
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 
-            final URL url = new URL("http", hostAddr, port, ""/* file */);
+      final URL url = new URL("http", hostAddr, port, "" /* file */);
 
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
+      if (log.isInfoEnabled()) log.info("url: " + url);
 
-            HttpURLConnection conn = null;
-            try {
+      HttpURLConnection conn = null;
+      try {
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
 
-                // connect.
-                conn.connect();
-                
-                // send an empty POST body.
-                conn.getOutputStream().close();
-                
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
+        // connect.
+        conn.connect();
 
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Read the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
-    }
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
 
-    /**
-     * Post with <code>application/x-www-form-urlencoded</code> parameters in a
-     * request body.
-     */
-    public void test_post_application_x_www_form_urlencoded() throws IOException {
-
-        final LinkedHashMap<String, Vector<String>> expected = new LinkedHashMap<String, Vector<String>>();
+        /*
+         * Read the response body and compare it with the expected data.
+         */
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         {
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("1");
-                v.add("2");
-                v.add("3");
-                expected.put("a", v);
+          final InputStream is = conn.getInputStream();
+
+          try {
+            int b;
+            while ((b = is.read()) != -1) {
+              baos.write(b);
             }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("a b c");
-                v.add("d e");
-                v.add("f");
-                expected.put("blue", v);
-            }
+          } finally {
+            is.close();
+          }
+
+          baos.flush();
         }
 
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
+        assertEquals(data.length, baos.size());
+        assertEquals(data, baos.toByteArray());
 
-            @Override
-            public Response serve(final Request req) {
+      } finally {
 
-                if (POST.equalsIgnoreCase(req.method)) {
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
 
-                    assertEquals("size", expected.size(), req.params.size());
+    } finally {
 
-                    for (Map.Entry<String, Vector<String>> e : expected
-                            .entrySet()) {
-                    
-                        assertEquals(e.getKey(), expected.get(e.getKey()),
-                                req.params.get(e.getKey()));
-                        
-                    }
-                    
-                    // One signal for POST.
-                    return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
+      fixture.shutdownNow();
+    }
+  }
 
-                }
+  /*
+   * POST
+   */
 
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
+  /** Post with an empty request body. */
+  public void test_post_emptyBody() throws IOException {
 
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
+
+          @Override
+          public Response serve(final Request req) {
+
+            if (POST.equalsIgnoreCase(req.method)) {
+
+              // One signal for POST.
+              return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
             }
 
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
         };
 
-        try {
+    try {
 
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-             final int timeout = 0;// timeout (ms).
-//            final int timeout = 1000;// timeout (ms).
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      final int timeout = 0; // timeout (ms).
+      //            final int timeout = 1000;// timeout (ms).
 
-            final int port = fixture.getPort();
+      final int port = fixture.getPort();
 
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 
-            final StringBuilder queryParms = NanoHTTPD.encodeParams(expected);
+      final URL url = new URL("http", hostAddr, port, "" /* file */);
 
-            final URL url = new URL("http", hostAddr, port, "/?" + queryParms);
+      if (log.isInfoEnabled()) log.info("url: " + url);
 
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
+      HttpURLConnection conn = null;
+      try {
 
-            HttpURLConnection conn = null;
-            try {
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(false);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
+        // connect.
+        conn.connect();
 
-                // connect.
-                conn.connect();
-                
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
+        // send an empty POST body.
+        conn.getOutputStream().close();
 
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Read the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
+
+        /*
+         * Read the response body
+         */
+        {
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
+            }
+          } finally {
+            r.close();
+          }
+        }
+
+        // final long elapsed = System.nanoTime() - begin;
+
+      } finally {
+
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
+    }
+  }
+
+  /** Post with <code>application/x-www-form-urlencoded</code> parameters in a request body. */
+  public void test_post_application_x_www_form_urlencoded() throws IOException {
+
+    final LinkedHashMap<String, Vector<String>> expected =
+        new LinkedHashMap<String, Vector<String>>();
+    {
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("1");
+        v.add("2");
+        v.add("3");
+        expected.put("a", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("a b c");
+        v.add("d e");
+        v.add("f");
+        expected.put("blue", v);
+      }
     }
 
-    /**
-     * Post with a non-empty request body using
-     * <code>application/octet-stream</code>. The request body is written using
-     * the raw {@link OutputStream}.
-     */
-    public void test_post_application_octet_stream_usingOutputStream()
-            throws IOException {
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
 
-        final byte[] expected = "Hello World!".getBytes();
-        
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
+          @Override
+          public Response serve(final Request req) {
 
-            @Override
-            public Response serve(final Request req) {
+            if (POST.equalsIgnoreCase(req.method)) {
 
-                if (POST.equalsIgnoreCase(req.method)) {
+              assertEquals("size", expected.size(), req.params.size());
 
-                    try {
+              for (Map.Entry<String, Vector<String>> e : expected.entrySet()) {
 
-                        final byte[] actual = req.getBinaryContent();
-                        
-                        assertEquals(expected, actual);
-                        
-                        // One signal for POST.
-                        return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
-                        
-                    } catch (IOException e) {
-                        
-                        throw new RuntimeException(e);
+                assertEquals(e.getKey(), expected.get(e.getKey()), req.params.get(e.getKey()));
+              }
 
-                    }
-                    
-                }
-
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
-
+              // One signal for POST.
+              return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
             }
 
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
         };
 
-        try {
+    try {
 
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-//             final int timeout = 0;// timeout (ms).
-            final int timeout = 1000;// timeout (ms).
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      final int timeout = 0; // timeout (ms).
+      //            final int timeout = 1000;// timeout (ms).
 
-            final int port = fixture.getPort();
+      final int port = fixture.getPort();
 
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 
-            final URL url = new URL("http", hostAddr, port, ""/* file */);
+      final StringBuilder queryParms = NanoHTTPD.encodeParams(expected);
 
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
+      final URL url = new URL("http", hostAddr, port, "/?" + queryParms);
 
-            HttpURLConnection conn = null;
-            try {
+      if (log.isInfoEnabled()) log.info("url: " + url);
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
+      HttpURLConnection conn = null;
+      try {
 
-                // send an POST body.
-                {
-                    conn.addRequestProperty("Content-Type",
-                            NanoHTTPD.MIME_DEFAULT_BINARY);
-                    final OutputStream os = conn.getOutputStream();
-                    os.write(expected);
-                    os.flush();
-                    os.close();
-                }
-                // connect.
-                conn.connect();
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(false);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
 
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
+        // connect.
+        conn.connect();
 
-                /*
-                 * Read the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
+
+        /*
+         * Read the response body
+         */
+        {
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
+            }
+          } finally {
+            r.close();
+          }
+        }
+
+        // final long elapsed = System.nanoTime() - begin;
+
+      } finally {
+
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
     }
+  }
 
-    /**
-     * Post with a non-empty request body using
-     * <code>application/octet-stream</code>. The request body is written using
-     * a {@link Writer}.
-     * 
-     * @throws IOException
-     */
-    public void test_post_application_octet_stream_usingWriter() throws IOException {
+  /**
+   * Post with a non-empty request body using <code>application/octet-stream</code>. The request
+   * body is written using the raw {@link OutputStream}.
+   */
+  public void test_post_application_octet_stream_usingOutputStream() throws IOException {
 
-        final String expected = "Hello World!";
-        
-        final NanoHTTPD fixture = new NanoHTTPD(0/* port */) {
+    final byte[] expected = "Hello World!".getBytes();
 
-            @Override
-            public Response serve(final Request req) {
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
 
-                if (POST.equalsIgnoreCase(req.method)) {
+          @Override
+          public Response serve(final Request req) {
 
-                    try {
+            if (POST.equalsIgnoreCase(req.method)) {
 
-                        final String actual = req.getStringContent();
-                        
-                        assertEquals(expected, actual);
-                        
-                        // One signal for POST.
-                        return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
-                        
-                    } catch (IOException e) {
-                        
-                        throw new RuntimeException(e);
+              try {
 
-                    }
-                    
-                }
+                final byte[] actual = req.getBinaryContent();
 
-                // Another for any other method or resource.
-                return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, 
-                        req.method);
+                assertEquals(expected, actual);
 
+                // One signal for POST.
+                return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
+
+              } catch (IOException e) {
+
+                throw new RuntimeException(e);
+              }
             }
 
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
         };
 
-        try {
+    try {
 
-            // Note: Use ZERO (0) for an infinite timeout to debug.
-             final int timeout = 0;// timeout (ms).
-//            final int timeout = 1000;// timeout (ms).
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      //             final int timeout = 0;// timeout (ms).
+      final int timeout = 1000; // timeout (ms).
 
-            final int port = fixture.getPort();
+      final int port = fixture.getPort();
 
-            final String hostAddr = NicUtil.getIpAddress("default.nic",
-                    "default", true/* loopbackOk */);
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 
-            final URL url = new URL("http", hostAddr, port, ""/* file */);
+      final URL url = new URL("http", hostAddr, port, "" /* file */);
 
-            if (log.isInfoEnabled())
-                log.info("url: " + url);
+      if (log.isInfoEnabled()) log.info("url: " + url);
 
-            HttpURLConnection conn = null;
-            try {
+      HttpURLConnection conn = null;
+      try {
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                conn.setReadTimeout(timeout);
-                // conn.setRequestProperty("Accept", MIME_RDF_XML);
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
 
-                // send an POST body.
-                {
-                    conn.addRequestProperty("Content-Type",
-                            NanoHTTPD.MIME_TEXT_PLAIN);
-                    final OutputStream os = conn.getOutputStream();
-                    final Writer w = new OutputStreamWriter(os);
-                    w.write(expected);
-                    w.flush();
-                    w.close();
-                    os.flush();
-                    os.close();
-                }
-                // connect.
-                conn.connect();
+        // send an POST body.
+        {
+          conn.addRequestProperty("Content-Type", NanoHTTPD.MIME_DEFAULT_BINARY);
+          final OutputStream os = conn.getOutputStream();
+          os.write(expected);
+          os.flush();
+          os.close();
+        }
+        // connect.
+        conn.connect();
 
-                final int rc = conn.getResponseCode();
-                if (rc < 200 || rc >= 300) {
-                    throw new IOException(rc + " : "
-                            + conn.getResponseMessage() + " : " + url);
-                }
-
-                // if (log.isInfoEnabled())
-                // log.info("Status Line: " + conn.getResponseMessage());
-
-                /*
-                 * Read the response body
-                 */
-                {
-
-                    final LineNumberReader r = new LineNumberReader(
-                            new InputStreamReader(
-                                    conn.getInputStream(),
-                                    conn.getContentEncoding() == null ? "ISO-8859-1"
-                                            : conn.getContentEncoding()));
-                    try {
-                        String s;
-                        while ((s = r.readLine()) != null) {
-                            if (log.isInfoEnabled())
-                                log.info(s);
-                        }
-                    } finally {
-                        r.close();
-                    }
-
-                }
-
-                // final long elapsed = System.nanoTime() - begin;
-
-            } finally {
-
-                // clean up the connection resources
-                if (conn != null)
-                    conn.disconnect();
-
-            }
-
-        } finally {
-
-            fixture.shutdownNow();
-
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
-    }
+        /*
+         * Read the response body
+         */
+        {
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
+            }
+          } finally {
+            r.close();
+          }
+        }
 
+        // final long elapsed = System.nanoTime() - begin;
+
+      } finally {
+
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
+    }
+  }
+
+  /**
+   * Post with a non-empty request body using <code>application/octet-stream</code>. The request
+   * body is written using a {@link Writer}.
+   *
+   * @throws IOException
+   */
+  public void test_post_application_octet_stream_usingWriter() throws IOException {
+
+    final String expected = "Hello World!";
+
+    final NanoHTTPD fixture =
+        new NanoHTTPD(0 /* port */) {
+
+          @Override
+          public Response serve(final Request req) {
+
+            if (POST.equalsIgnoreCase(req.method)) {
+
+              try {
+
+                final String actual = req.getStringContent();
+
+                assertEquals(expected, actual);
+
+                // One signal for POST.
+                return new Response(HTTP_OK, MIME_TEXT_PLAIN, "");
+
+              } catch (IOException e) {
+
+                throw new RuntimeException(e);
+              }
+            }
+
+            // Another for any other method or resource.
+            return new Response(HTTP_INTERNALERROR, MIME_TEXT_PLAIN, req.method);
+          }
+        };
+
+    try {
+
+      // Note: Use ZERO (0) for an infinite timeout to debug.
+      final int timeout = 0; // timeout (ms).
+      //            final int timeout = 1000;// timeout (ms).
+
+      final int port = fixture.getPort();
+
+      final String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
+
+      final URL url = new URL("http", hostAddr, port, "" /* file */);
+
+      if (log.isInfoEnabled()) log.info("url: " + url);
+
+      HttpURLConnection conn = null;
+      try {
+
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setUseCaches(false);
+        conn.setReadTimeout(timeout);
+        // conn.setRequestProperty("Accept", MIME_RDF_XML);
+
+        // send an POST body.
+        {
+          conn.addRequestProperty("Content-Type", NanoHTTPD.MIME_TEXT_PLAIN);
+          final OutputStream os = conn.getOutputStream();
+          final Writer w = new OutputStreamWriter(os);
+          w.write(expected);
+          w.flush();
+          w.close();
+          os.flush();
+          os.close();
+        }
+        // connect.
+        conn.connect();
+
+        final int rc = conn.getResponseCode();
+        if (rc < 200 || rc >= 300) {
+          throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
+        }
+
+        // if (log.isInfoEnabled())
+        // log.info("Status Line: " + conn.getResponseMessage());
+
+        /*
+         * Read the response body
+         */
+        {
+          final LineNumberReader r =
+              new LineNumberReader(
+                  new InputStreamReader(
+                      conn.getInputStream(),
+                      conn.getContentEncoding() == null
+                          ? "ISO-8859-1"
+                          : conn.getContentEncoding()));
+          try {
+            String s;
+            while ((s = r.readLine()) != null) {
+              if (log.isInfoEnabled()) log.info(s);
+            }
+          } finally {
+            r.close();
+          }
+        }
+
+        // final long elapsed = System.nanoTime() - begin;
+
+      } finally {
+
+        // clean up the connection resources
+        if (conn != null) conn.disconnect();
+      }
+
+    } finally {
+
+      fixture.shutdownNow();
+    }
+  }
 }

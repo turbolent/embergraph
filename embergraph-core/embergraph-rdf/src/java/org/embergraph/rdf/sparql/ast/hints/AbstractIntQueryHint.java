@@ -21,22 +21,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-/**
- * Base class for {@link Integer} query hints.
- */
+/** Base class for {@link Integer} query hints. */
 abstract class AbstractIntQueryHint extends AbstractQueryHint<Integer> {
 
-    protected AbstractIntQueryHint(final String name, final Integer defaultValue) {
+  protected AbstractIntQueryHint(final String name, final Integer defaultValue) {
 
-        super(name, defaultValue);
+    super(name, defaultValue);
+  }
 
-    }
+  @Override
+  public Integer validate(final String value) {
 
-    @Override
-    public Integer validate(final String value) {
-
-        return Integer.valueOf(value);
-
-    }
-
+    return Integer.valueOf(value);
+  }
 }

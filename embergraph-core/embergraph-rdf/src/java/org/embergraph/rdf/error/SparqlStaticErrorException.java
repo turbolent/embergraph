@@ -23,31 +23,24 @@ package org.embergraph.rdf.error;
 
 /**
  * A SPARQL error detected by static analysis.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SparqlStaticErrorException extends W3CQueryLanguageException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param errorCode
-     *            The four digit error code.
-     */
-    public SparqlStaticErrorException(final int errorCode) {
+  /** @param errorCode The four digit error code. */
+  public SparqlStaticErrorException(final int errorCode) {
 
-        super(LanguageFamily.SP, ErrorCategory.ST, errorCode, (String) null/* msg */);
+    super(LanguageFamily.SP, ErrorCategory.ST, errorCode, (String) null /* msg */);
+  }
 
-    }
+  protected static String toURI(final int errorCode) {
 
-    static protected String toURI(final int errorCode) {
-
-        return W3CQueryLanguageException.toURI(LanguageFamily.SP,
-                ErrorCategory.ST, errorCode, null/* params */);
-
-    }
+    return W3CQueryLanguageException.toURI(
+        LanguageFamily.SP, ErrorCategory.ST, errorCode, null /* params */);
+  }
 }

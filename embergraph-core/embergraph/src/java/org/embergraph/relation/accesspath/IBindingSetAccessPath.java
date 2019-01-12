@@ -21,41 +21,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IElement;
 import org.embergraph.bop.join.BaseJoinStats;
 import org.embergraph.relation.IRelation;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * An interface for access paths which visit solutions (versus {@link IElement}
- * s).
- * 
- * @param <R>
- *            The generic type of the [R]elation elements of the
- *            {@link IRelation}.
- * 
+ * An interface for access paths which visit solutions (versus {@link IElement} s).
+ *
+ * @param <R> The generic type of the [R]elation elements of the {@link IRelation}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IBindingSetAccessPath<R> extends IAbstractAccessPath<R> {
-    
-    /**
-     * Return an iterator which will visit the solutions drawn from the access
-     * path with a limit on the number of solutions drawn.
-     * 
-     * @param limit
-     *            The maximum #of solutions to visit.
-     * @param stats
-     *            Some statistics are updated as solutions are visited.
-     * 
-     * @return The iterator.
-     * 
-     * @see https://sourceforge.net/apps/trac/bigdata/ticket/209 (Access path
-     *      should visit solutions for high level query).
-     */
-    ICloseableIterator<IBindingSet[]> solutions(BOpContext context, long limit, BaseJoinStats stats);
-    
+
+  /**
+   * Return an iterator which will visit the solutions drawn from the access path with a limit on
+   * the number of solutions drawn.
+   *
+   * @param limit The maximum #of solutions to visit.
+   * @param stats Some statistics are updated as solutions are visited.
+   * @return The iterator.
+   * @see https://sourceforge.net/apps/trac/bigdata/ticket/209 (Access path should visit solutions
+   *     for high level query).
+   */
+  ICloseableIterator<IBindingSet[]> solutions(BOpContext context, long limit, BaseJoinStats stats);
 }

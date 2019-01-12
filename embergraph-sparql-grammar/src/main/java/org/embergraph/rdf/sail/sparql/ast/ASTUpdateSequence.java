@@ -6,41 +6,39 @@ import java.util.List;
 
 public class ASTUpdateSequence extends SimpleNode {
 
-    private String source;
+  private String source;
 
-    public ASTUpdateSequence(int id) {
-        super(id);
+  public ASTUpdateSequence(int id) {
+    super(id);
+  }
+
+  public ASTUpdateSequence(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
+
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
+
+  public void setSourceString(String source) {
+    this.source = source;
+  }
+
+  public String getSourceString() {
+    return source;
+  }
+
+  public List<ASTUpdateContainer> getUpdateContainers() {
+
+    final List<ASTUpdateContainer> result = jjtGetChildren(ASTUpdateContainer.class);
+    final ASTUpdateSequence seq = jjtGetChild(ASTUpdateSequence.class);
+
+    if (seq != null) {
+      result.addAll(seq.getUpdateContainers());
     }
 
-    public ASTUpdateSequence(SyntaxTreeBuilder p, int id) {
-        super(p, id);
-    }
-
-    /** Accept the visitor. **/
-    public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-        throws VisitorException
-    {
-        return visitor.visit(this, data);
-    }
-
-    public void setSourceString(String source) {
-        this.source = source;
-    }
-    
-    public String getSourceString() {
-        return source;
-    }
-    
-    public List<ASTUpdateContainer> getUpdateContainers() {
-        
-        final List<ASTUpdateContainer> result = jjtGetChildren(ASTUpdateContainer.class);
-        final ASTUpdateSequence seq = jjtGetChild(ASTUpdateSequence.class);
-        
-        if (seq != null) {
-            result.addAll(seq.getUpdateContainers());
-        }
-        
-        return result;
-    }
+    return result;
+  }
 }
 /* JavaCC - OriginalChecksum=e4b13eef2d0d6dbe36d25df3ab1d11da (do not edit this line) */

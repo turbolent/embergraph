@@ -26,9 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IQueryAttributes;
@@ -40,195 +38,192 @@ import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Mock object.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MockRunningQuery implements IRunningQuery {
 
-    private static final Logger log = Logger.getLogger(MockRunningQuery.class);
-    
-    private final IEmbergraphFederation<?> fed;
+  private static final Logger log = Logger.getLogger(MockRunningQuery.class);
 
-    private final IIndexManager indexManager;
+  private final IEmbergraphFederation<?> fed;
 
-    private final IQueryContext queryContext;
-    
-    /**
-     * Note: This constructor DOES NOT check its arguments so unit tests may be
-     * written with the minimum dependencies
-     * 
-     * @param fed
-     * @param indexManager
-     * @param readTimestamp
-     * @param writeTimestamp
-     */
-    public MockRunningQuery(final IEmbergraphFederation<?> fed,
-            final IIndexManager indexManager) {
-        this(fed, indexManager, null/* queryContext */);
-    }
+  private final IIndexManager indexManager;
 
-    public MockRunningQuery(final IEmbergraphFederation<?> fed,
-            final IIndexManager indexManager, final IQueryContext queryContext) {
+  private final IQueryContext queryContext;
 
-        this.fed = fed;
-        this.indexManager = indexManager;
-        this.queryContext = queryContext;
+  /**
+   * Note: This constructor DOES NOT check its arguments so unit tests may be written with the
+   * minimum dependencies
+   *
+   * @param fed
+   * @param indexManager
+   * @param readTimestamp
+   * @param writeTimestamp
+   */
+  public MockRunningQuery(final IEmbergraphFederation<?> fed, final IIndexManager indexManager) {
+    this(fed, indexManager, null /* queryContext */);
+  }
 
-    }
+  public MockRunningQuery(
+      final IEmbergraphFederation<?> fed,
+      final IIndexManager indexManager,
+      final IQueryContext queryContext) {
 
-    @Override
-    public IEmbergraphFederation<?> getFederation() {
-        return fed;
-    }
+    this.fed = fed;
+    this.indexManager = indexManager;
+    this.queryContext = queryContext;
+  }
 
-    @Override
-    public IIndexManager getLocalIndexManager() {
-        return indexManager;
-    }
+  @Override
+  public IEmbergraphFederation<?> getFederation() {
+    return fed;
+  }
 
-    @Override
-	public void halt(Void v) {
-        log.warn("Mock object does not implement halt(Void)");
-	}
+  @Override
+  public IIndexManager getLocalIndexManager() {
+    return indexManager;
+  }
 
-    @Override
-	public <T extends Throwable> T halt(T cause) {
-        log.warn("Mock object does not implement halt(Throwable)");
-        return cause;
-	}
+  @Override
+  public void halt(Void v) {
+    log.warn("Mock object does not implement halt(Void)");
+  }
 
-    @Override
-    public QueryEngine getQueryEngine() {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public <T extends Throwable> T halt(T cause) {
+    log.warn("Mock object does not implement halt(Throwable)");
+    return cause;
+  }
 
-    @Override
-	public Map<Integer, BOp> getBOpIndex() {
-		return null;
-	}
+  @Override
+  public QueryEngine getQueryEngine() {
+    throw new UnsupportedOperationException();
+  }
 
-//	public boolean isLastInvocation(final int bopId,final int nconsumed) {
-//		throw new UnsupportedOperationException();
-//	}
-	
-    @Override
-	public Map<Integer, BOpStats> getStats() {
-		return null;
-	}
+  @Override
+  public Map<Integer, BOp> getBOpIndex() {
+    return null;
+  }
 
-    @Override
-	public long getDeadline() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  //	public boolean isLastInvocation(final int bopId,final int nconsumed) {
+  //		throw new UnsupportedOperationException();
+  //	}
 
-    @Override
-	public long getDoneTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  @Override
+  public Map<Integer, BOpStats> getStats() {
+    return null;
+  }
 
-    @Override
-	public long getElapsed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  @Override
+  public long getDeadline() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-	public long getStartTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  @Override
+  public long getDoneTime() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    public Throwable getCause() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public long getElapsed() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    public Throwable getAsThrownCause() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public long getStartTime() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-	public BOp getQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  @Override
+  public Throwable getCause() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-	public UUID getQueryId() {
-		return queryContext.getQueryId();
-	}
+  @Override
+  public Throwable getAsThrownCause() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    public IAsynchronousIterator<IBindingSet[]> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public BOp getQuery() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    public boolean cancel(boolean mayInterruptIfRunning) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+  @Override
+  public UUID getQueryId() {
+    return queryContext.getQueryId();
+  }
 
-    @Override
-    public Void get() throws InterruptedException, ExecutionException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public IAsynchronousIterator<IBindingSet[]> iterator() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    public Void get(long timeout, TimeUnit unit) throws InterruptedException,
-            ExecutionException, TimeoutException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public boolean cancel(boolean mayInterruptIfRunning) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 
-    @Override
-    public boolean isCancelled() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+  @Override
+  public Void get() throws InterruptedException, ExecutionException {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    public boolean isDone() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+  @Override
+  public Void get(long timeout, TimeUnit unit)
+      throws InterruptedException, ExecutionException, TimeoutException {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    @Override
-    public IQueryClient getQueryController() {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public boolean isCancelled() {
+    // TODO Auto-generated method stub
+    return false;
+  }
 
-    @Override
-    public IMemoryManager getMemoryManager() {
-        
-        return queryContext.getMemoryManager();
-        
-    }
+  @Override
+  public boolean isDone() {
+    // TODO Auto-generated method stub
+    return false;
+  }
 
-    @Override
-    public IQueryAttributes getAttributes() {
+  @Override
+  public IQueryClient getQueryController() {
+    throw new UnsupportedOperationException();
+  }
 
-        return queryContext.getAttributes();
-        
-    }
+  @Override
+  public IMemoryManager getMemoryManager() {
 
-   @Override
-   public void setStaticAnalysisStats(StaticAnalysisStats saStats) {
-      // not supported by mock query
-   }
+    return queryContext.getMemoryManager();
+  }
 
-   @Override
-   public StaticAnalysisStats getStaticAnalysisStats() {
-      // not supported by mock query
-      return null;
-   }
+  @Override
+  public IQueryAttributes getAttributes() {
 
+    return queryContext.getAttributes();
+  }
+
+  @Override
+  public void setStaticAnalysisStats(StaticAnalysisStats saStats) {
+    // not supported by mock query
+  }
+
+  @Override
+  public StaticAnalysisStats getStaticAnalysisStats() {
+    // not supported by mock query
+    return null;
+  }
 }

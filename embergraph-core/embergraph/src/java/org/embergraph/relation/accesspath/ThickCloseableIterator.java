@@ -23,139 +23,109 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * An {@link ICloseableIterator} that may be serialized and sent to a remote
- * JVM for consumption.
- * 
+ * An {@link ICloseableIterator} that may be serialized and sent to a remote JVM for consumption.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class ThickCloseableIterator<E> implements ICloseableIterator<E>,
-        Serializable {
+public class ThickCloseableIterator<E> implements ICloseableIterator<E>, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private transient boolean open = true;
+  private transient boolean open = true;
 
-    /**
-     * Index of the last element visited by {@link #next()} and <code>-1</code>
-     * if NO elements have been visited.
-     */
-    private int lastIndex;
-    
-    /**
-     * The array of elements to be visited by the iterator.
-     */
-    private final E[] a;
-    
-    /**
-     * The number of elements to be visited by the iterator.
-     */
-    private final int len;
-    
-    /**
-     * Create a thick iterator.
-     * 
-     * @param a
-     *            The array of elements to be visited by the iterator (may be
-     *            empty, but may not be <code>null</code>).
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>a</i> is <code>null</code>.
-     */
-    public ThickCloseableIterator(final E[] a) {
+  /**
+   * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
+   * been visited.
+   */
+  private int lastIndex;
 
-        if (a == null)
-            throw new IllegalArgumentException();
-        
-        this.a = a;
-        this.len = a.length;
+  /** The array of elements to be visited by the iterator. */
+  private final E[] a;
 
-        lastIndex = -1;
-        
-    }
+  /** The number of elements to be visited by the iterator. */
+  private final int len;
 
-    /**
-     * Create a thick iterator.
-     * 
-     * @param a
-     *            The array of elements to be visited by the iterator (may be
-     *            empty, but may not be <code>null</code>).
-     * @param len
-     *            The number of elements to be visited by the iterator. Must be
-     *            less than the length of the array.
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>a</i> is <code>null</code>.
-     */
-    public ThickCloseableIterator(final E[] a, final int len) {
+  /**
+   * Create a thick iterator.
+   *
+   * @param a The array of elements to be visited by the iterator (may be empty, but may not be
+   *     <code>null</code>).
+   * @throws IllegalArgumentException if <i>a</i> is <code>null</code>.
+   */
+  public ThickCloseableIterator(final E[] a) {
 
-        if (a == null)
-            throw new IllegalArgumentException();
-        
-        if (len > a.length)
-        	throw new IllegalArgumentException();
-        
-        this.a = a;
-        this.len = len;
+    if (a == null) throw new IllegalArgumentException();
 
-        lastIndex = -1;
-        
-    }
+    this.a = a;
+    this.len = a.length;
 
-    public boolean hasNext() {
-        
-        if(open && lastIndex + 1 < len)
-            return true;
-        
-        close();
-        
-        return false;
+    lastIndex = -1;
+  }
 
-    }
+  /**
+   * Create a thick iterator.
+   *
+   * @param a The array of elements to be visited by the iterator (may be empty, but may not be
+   *     <code>null</code>).
+   * @param len The number of elements to be visited by the iterator. Must be less than the length
+   *     of the array.
+   * @throws IllegalArgumentException if <i>a</i> is <code>null</code>.
+   */
+  public ThickCloseableIterator(final E[] a, final int len) {
 
-    public E next() {
-        
-        if (!hasNext())
-            throw new NoSuchElementException();
-        
-        return a[++lastIndex];
-        
-    }
+    if (a == null) throw new IllegalArgumentException();
 
-    public void remove() {
+    if (len > a.length) throw new IllegalArgumentException();
 
-        throw new UnsupportedOperationException();
-        
-    }
+    this.a = a;
+    this.len = len;
 
-    /*
-     * ICloseableIterator.
-     */
+    lastIndex = -1;
+  }
 
-    public void close() {
+  public boolean hasNext() {
 
-        open = false;
-        
-    }
+    if (open && lastIndex + 1 < len) return true;
 
-    private void readObject(ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
-        
-        in.defaultReadObject();
-        
-        open = true;
-        
-   }
-    
+    close();
+
+    return false;
+  }
+
+  public E next() {
+
+    if (!hasNext()) throw new NoSuchElementException();
+
+    return a[++lastIndex];
+  }
+
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /*
+   * ICloseableIterator.
+   */
+
+  public void close() {
+
+    open = false;
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+    in.defaultReadObject();
+
+    open = true;
+  }
 }

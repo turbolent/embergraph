@@ -29,43 +29,40 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Query hint used to indicate optional statement limit for a DESCRIBE query.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578"> Concise
- *      Bounded Description </a>
- *      
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description
+ *     </a>
  * @see QueryHints#DESCRIBE_STATEMENT_LIMIT
  */
 final class DescribeStatementLimitHint extends AbstractIntQueryHint {
 
-    protected DescribeStatementLimitHint() {
-        super(QueryHints.DESCRIBE_STATEMENT_LIMIT,
-                QueryHints.DEFAULT_DESCRIBE_STATEMENT_LIMIT);
+  protected DescribeStatementLimitHint() {
+    super(QueryHints.DESCRIBE_STATEMENT_LIMIT, QueryHints.DEFAULT_DESCRIBE_STATEMENT_LIMIT);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    if (op instanceof ProjectionNode) {
+
+      // _setQueryHint(context, scope, op, getName(), value);
+      ((ProjectionNode) op).setDescribeStatementLimit(value);
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final Integer value) {
+    // throw new QueryHintException(scope, op, getName(), value);
 
-        if (op instanceof ProjectionNode) {
+  }
 
-            //_setQueryHint(context, scope, op, getName(), value);
-            ((ProjectionNode) op).setDescribeStatementLimit(value);
+  @Override
+  public Integer validate(final String value) {
 
-            return;
-
-        }
-
-        // throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
-    @Override
-    public Integer validate(final String value) {
-
-        return Integer.valueOf(value);
-        
-    }
-
+    return Integer.valueOf(value);
+  }
 }

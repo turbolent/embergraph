@@ -19,63 +19,69 @@ package org.embergraph.ha.msg;
 
 import java.util.UUID;
 
-public class HAGatherReleaseTimeRequest implements
-        IHAGatherReleaseTimeRequest {
+public class HAGatherReleaseTimeRequest implements IHAGatherReleaseTimeRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final long token;
-    private final long timestampOnLeader;
-    private final UUID leaderId;
-    private final long newCommitCounter;
-    private final long newCommitTime;
+  private final long token;
+  private final long timestampOnLeader;
+  private final UUID leaderId;
+  private final long newCommitCounter;
+  private final long newCommitTime;
 
-    public HAGatherReleaseTimeRequest(final long token,
-            final long timestampOnLeader, final UUID leaderId,
-            final long newCommitCounter, final long newCommitTime) {
-        if (leaderId == null)
-            throw new IllegalArgumentException();
-        this.token = token;
-        this.timestampOnLeader = timestampOnLeader;
-        this.leaderId = leaderId;
-        this.newCommitCounter = newCommitCounter;
-        this.newCommitTime = newCommitTime;
-    }
+  public HAGatherReleaseTimeRequest(
+      final long token,
+      final long timestampOnLeader,
+      final UUID leaderId,
+      final long newCommitCounter,
+      final long newCommitTime) {
+    if (leaderId == null) throw new IllegalArgumentException();
+    this.token = token;
+    this.timestampOnLeader = timestampOnLeader;
+    this.leaderId = leaderId;
+    this.newCommitCounter = newCommitCounter;
+    this.newCommitTime = newCommitTime;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString() + "{token=" + token + ",timestampOnLeader="
-                + timestampOnLeader + ", leaderId=" + leaderId
-                + ", newCommitCounter=" + newCommitCounter + ", newCommitTime="
-                + newCommitTime + "}";
-    }
-    
-    @Override
-    public long token() {
-        return token;
-    }
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{token="
+        + token
+        + ",timestampOnLeader="
+        + timestampOnLeader
+        + ", leaderId="
+        + leaderId
+        + ", newCommitCounter="
+        + newCommitCounter
+        + ", newCommitTime="
+        + newCommitTime
+        + "}";
+  }
 
-    @Override
-    public long getTimestampOnLeader() {
-        return timestampOnLeader;
-    }
-    
-    @Override
-    public UUID getLeaderId() {
-        return leaderId;
-    }
+  @Override
+  public long token() {
+    return token;
+  }
 
-    @Override
-    public long getNewCommitCounter() {
-        return newCommitCounter;
-    }
+  @Override
+  public long getTimestampOnLeader() {
+    return timestampOnLeader;
+  }
 
-    @Override
-    public long getNewCommitTime() {
-        return newCommitTime;
-    }
+  @Override
+  public UUID getLeaderId() {
+    return leaderId;
+  }
 
+  @Override
+  public long getNewCommitCounter() {
+    return newCommitCounter;
+  }
+
+  @Override
+  public long getNewCommitTime() {
+    return newCommitTime;
+  }
 }

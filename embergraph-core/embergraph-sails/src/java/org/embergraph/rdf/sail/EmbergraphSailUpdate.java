@@ -18,147 +18,134 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
+import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
+import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.query.parser.ParsedUpdate;
 import org.openrdf.repository.sail.SailUpdate;
 
-import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
-import org.embergraph.rdf.store.AbstractTripleStore;
-
 /**
  * Extension API for embergraph.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class EmbergraphSailUpdate extends SailUpdate implements
-    EmbergraphSailOperation {
+public class EmbergraphSailUpdate extends SailUpdate implements EmbergraphSailOperation {
 
-    private final ASTContainer astContainer;
+  private final ASTContainer astContainer;
 
-    @Override
-    public ASTContainer getASTContainer() {
-        
-        return astContainer;
-        
-    }
+  @Override
+  public ASTContainer getASTContainer() {
 
-    public EmbergraphSailUpdate(final ASTContainer astContainer,
-            final EmbergraphSailRepositoryConnection con) {
+    return astContainer;
+  }
 
-        super(null/* tupleQuery */, con);
+  public EmbergraphSailUpdate(
+      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection con) {
 
-        if (astContainer == null)
-            throw new IllegalArgumentException();
+    super(null /* tupleQuery */, con);
 
-        this.astContainer = astContainer;
+    if (astContainer == null) throw new IllegalArgumentException();
 
-    }
+    this.astContainer = astContainer;
+  }
 
-    @Override
-    public ParsedUpdate getParsedUpdate() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+  @Override
+  public ParsedUpdate getParsedUpdate() {
 
-    @Override
-    public String toString() {
+    throw new UnsupportedOperationException();
+  }
 
-        return astContainer.toString();
-        
-    }
+  @Override
+  public String toString() {
 
-    @Override
-    public AbstractTripleStore getTripleStore() {
+    return astContainer.toString();
+  }
 
-        return ((EmbergraphSailRepositoryConnection) getConnection())
-                .getTripleStore();
+  @Override
+  public AbstractTripleStore getTripleStore() {
 
-    }
+    return ((EmbergraphSailRepositoryConnection) getConnection()).getTripleStore();
+  }
 
-//    /**
-//     * {@inheritDoc}
-//     * <p>
-//     * The openrdf API here is somewhat at odds with the current LCWD for SPARQL
-//     * UPDATE. In order to align them, setting the {@link Dataset} here causes
-//     * it to be applied to each {@link DeleteInsertGraph} operation in the
-//     * {@link UpdateRoot}. Note that the {@link Dataset} has no effect exception
-//     * for the {@link DeleteInsertGraph} operation in SPARQL 1.1 UPDATE (that is
-//     * the only operation which has a WHERE clause and which implements the
-//     * {@link IDataSetNode} interface).
-//     * 
-//     * @see <a href="http://www.openrdf.org/issues/browse/SES-963"> Dataset
-//     *      assignment in update sequences not properly scoped </a>
-//     * 
-//     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/593">
-//     *      Upgrade to Sesame 2.6.9 </a>
-//     */
-//    // @Override
-//    @Deprecated // Remove once we upgrade to Sesame 2.6.9
-//    public void setDataset(final Dataset dataset) {
-//
-//        this.dataset = dataset;
-//
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     * 
-//     * @see <a href="http://www.openrdf.org/issues/browse/SES-963"> Dataset
-//     *      assignment in update sequences not properly scoped </a>
-//     * 
-//     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/593">
-//     *      Upgrade to Sesame 2.6.9 </a>
-//     */
-////    @Override
-//    @Deprecated // Remove once we upgrade to Sesame 2.6.9
-//    public Dataset getActiveDataset() {
-//
-//        return dataset;
-//        
-//    }
+  //    /**
+  //     * {@inheritDoc}
+  //     * <p>
+  //     * The openrdf API here is somewhat at odds with the current LCWD for SPARQL
+  //     * UPDATE. In order to align them, setting the {@link Dataset} here causes
+  //     * it to be applied to each {@link DeleteInsertGraph} operation in the
+  //     * {@link UpdateRoot}. Note that the {@link Dataset} has no effect exception
+  //     * for the {@link DeleteInsertGraph} operation in SPARQL 1.1 UPDATE (that is
+  //     * the only operation which has a WHERE clause and which implements the
+  //     * {@link IDataSetNode} interface).
+  //     *
+  //     * @see <a href="http://www.openrdf.org/issues/browse/SES-963"> Dataset
+  //     *      assignment in update sequences not properly scoped </a>
+  //     *
+  //     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/593">
+  //     *      Upgrade to Sesame 2.6.9 </a>
+  //     */
+  //    // @Override
+  //    @Deprecated // Remove once we upgrade to Sesame 2.6.9
+  //    public void setDataset(final Dataset dataset) {
+  //
+  //        this.dataset = dataset;
+  //
+  //    }
+  //
+  //    /**
+  //     * {@inheritDoc}
+  //     *
+  //     * @see <a href="http://www.openrdf.org/issues/browse/SES-963"> Dataset
+  //     *      assignment in update sequences not properly scoped </a>
+  //     *
+  //     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/593">
+  //     *      Upgrade to Sesame 2.6.9 </a>
+  //     */
+  ////    @Override
+  //    @Deprecated // Remove once we upgrade to Sesame 2.6.9
+  //    public Dataset getActiveDataset() {
+  //
+  //        return dataset;
+  //
+  //    }
 
-    @Override
-    public void execute() throws UpdateExecutionException {
-        
-        execute2();
-        
-    }
+  @Override
+  public void execute() throws UpdateExecutionException {
 
-    /**
-     * Execute a SPARQL UPDATE request.
-     * 
-     * @return The timestamp of the commit point for that UPDATE.
-     * 
-     * @throws UpdateExecutionException
-     */
-    public long execute2() throws UpdateExecutionException {
+    execute2();
+  }
 
-//        final QueryRoot originalQuery = astContainer.getOriginalAST();
-//
-////        if (getMaxQueryTime() > 0)
-////            originalQuery.setTimeout(TimeUnit.SECONDS
-////                    .toMillis(getMaxQueryTime()));
-//
-//        originalQuery.setIncludeInferred(getIncludeInferred());
+  /**
+   * Execute a SPARQL UPDATE request.
+   *
+   * @return The timestamp of the commit point for that UPDATE.
+   * @throws UpdateExecutionException
+   */
+  public long execute2() throws UpdateExecutionException {
 
-        return ASTEvalHelper.executeUpdate(
-                ((EmbergraphSailRepositoryConnection) getConnection()),
-                astContainer,
-                dataset,
-                getIncludeInferred(),
-                new QueryBindingSet(getBindings())
-                );
+    //        final QueryRoot originalQuery = astContainer.getOriginalAST();
+    //
+    ////        if (getMaxQueryTime() > 0)
+    ////            originalQuery.setTimeout(TimeUnit.SECONDS
+    ////                    .toMillis(getMaxQueryTime()));
+    //
+    //        originalQuery.setIncludeInferred(getIncludeInferred());
 
-    }
+    return ASTEvalHelper.executeUpdate(
+        ((EmbergraphSailRepositoryConnection) getConnection()),
+        astContainer,
+        dataset,
+        getIncludeInferred(),
+        new QueryBindingSet(getBindings()));
+  }
 
-//    @Override
-//    public BindingSet getBindings() {
-//
-//    	return super.getBindings();
-//    	
-//    }
+  //    @Override
+  //    public BindingSet getBindings() {
+  //
+  //    	return super.getBindings();
+  //
+  //    }
 
 }

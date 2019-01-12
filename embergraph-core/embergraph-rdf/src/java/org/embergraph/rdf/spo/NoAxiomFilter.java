@@ -23,77 +23,58 @@ package org.embergraph.rdf.spo;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
-
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.relation.rule.eval.ISolution;
 
 /**
- * A filter that matches explicit or inferred statements but not those whose
- * {@link StatementEnum} is {@link StatementEnum#Axiom}.
- * 
+ * A filter that matches explicit or inferred statements but not those whose {@link StatementEnum}
+ * is {@link StatementEnum#Axiom}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NoAxiomFilter<E extends ISPO> extends SPOFilter<E> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6979067019748992496L;
-    
-    /**
-     * Shared instance.
-     */
-    static public final transient NoAxiomFilter<ISPO> INSTANCE = new NoAxiomFilter<ISPO>();
-    
-    /**
-     * De-serialization ctor.
-     */
-    private NoAxiomFilter() {
-        
-    }
-    
-    public boolean isValid(Object o) {
-        
-        if (!canAccept(o)) {
-            
-            return true;
-            
-        }
-        
-        return accept((ISPO) o);
-        
+  /** */
+  private static final long serialVersionUID = 6979067019748992496L;
+
+  /** Shared instance. */
+  public static final transient NoAxiomFilter<ISPO> INSTANCE = new NoAxiomFilter<ISPO>();
+
+  /** De-serialization ctor. */
+  private NoAxiomFilter() {}
+
+  public boolean isValid(Object o) {
+
+    if (!canAccept(o)) {
+
+      return true;
     }
 
-    private boolean accept(final ISPO o) {
-        
-        final ISPO spo = (ISPO) o;
-        
-        return spo.getStatementType() != StatementEnum.Axiom;
-        
-    }
+    return accept((ISPO) o);
+  }
 
+  private boolean accept(final ISPO o) {
 
-    /**
-     * Imposes the canonicalizing mapping during object de-serialization.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        
-        return INSTANCE;
-        
-    }
+    final ISPO spo = (ISPO) o;
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    return spo.getStatementType() != StatementEnum.Axiom;
+  }
 
-        // NOP - stateless.
-        
-    }
+  /** Imposes the canonicalizing mapping during object de-serialization. */
+  private Object readResolve() throws ObjectStreamException {
 
-    private void readObject(java.io.ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
+    return INSTANCE;
+  }
 
-        // NOP - stateless.
+  private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
-    }
+    // NOP - stateless.
 
+  }
+
+  private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+    // NOP - stateless.
+
+  }
 }

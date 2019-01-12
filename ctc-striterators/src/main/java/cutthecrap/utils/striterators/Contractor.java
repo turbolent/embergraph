@@ -19,36 +19,33 @@ import java.util.Iterator;
 
 /**
  * Used with a Contractorator to contract an Expanded iterator
- * 
- * The Contractorator will call contract on this object
- * 
+ *
+ * <p>The Contractorator will call contract on this object
+ *
  * @author Martyn Cutcher
- * 
- * @todo CONTRACTOR annotation and allow it to be set as an argument, moving
- *       contract() onto the contractorator.
- * 
- * @todo CONTRACTOR should be able to break an iterator into many chunks, not
- *       just one.  Maybe the API should return an Iterator from an Iterator
- *       in which the chunkiness is changed?
+ * @todo CONTRACTOR annotation and allow it to be set as an argument, moving contract() onto the
+ *     contractorator.
+ * @todo CONTRACTOR should be able to break an iterator into many chunks, not just one. Maybe the
+ *     API should return an Iterator from an Iterator in which the chunkiness is changed?
  */
 public abstract class Contractor extends FilterBase {
 
-	protected Object m_state = null;
+  protected Object m_state = null;
 
-	public Contractor()	{	}
+  public Contractor() {}
 
-	public Contractor(Object state) {
-		m_state = state;
-	}
-	
-	//-------------------------------------------------------------
+  public Contractor(Object state) {
+    m_state = state;
+  }
 
-	@Override
-    public Iterator filterOnce(Iterator src, Object context) {
-        return new Contractorator(src, context, this);
-	}
+  // -------------------------------------------------------------
 
-	//-------------------------------------------------------------
+  @Override
+  public Iterator filterOnce(Iterator src, Object context) {
+    return new Contractorator(src, context, this);
+  }
 
-	protected abstract Object contract(Iterator src);
+  // -------------------------------------------------------------
+
+  protected abstract Object contract(Iterator src);
 }

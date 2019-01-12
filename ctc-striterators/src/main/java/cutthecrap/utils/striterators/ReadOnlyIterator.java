@@ -19,36 +19,33 @@ import java.util.Iterator;
 
 /**
  * An iterator wrapper which does not support {@link #remove()}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ReadOnlyIterator<E> implements Iterator<E> {
 
-    private final Iterator<E> src;
+  private final Iterator<E> src;
 
-    public ReadOnlyIterator(final Iterator<E> src) {
+  public ReadOnlyIterator(final Iterator<E> src) {
 
-        if (src == null)
-            throw new IllegalArgumentException();
+    if (src == null) throw new IllegalArgumentException();
 
-        this.src = src;
+    this.src = src;
+  }
 
-    }
+  @Override
+  public boolean hasNext() {
+    return src.hasNext();
+  }
 
-    @Override
-    public boolean hasNext() {
-        return src.hasNext();
-    }
+  @Override
+  public E next() {
+    return src.next();
+  }
 
-    @Override
-    public E next() {
-        return src.next();
-    }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
-
+  @Override
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 }

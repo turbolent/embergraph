@@ -26,26 +26,24 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates tests in dependency order.
- * 
+ *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-
 public class TestAll extends TestCase {
 
-    public TestAll() {}
-    
-    public TestAll(String name) {super(name);}
-    
-    public static Test suite()
-    {
+  public TestAll() {}
 
-        TestSuite suite = new TestSuite(TestAll.class.getName());
+  public TestAll(String name) {
+    super(name);
+  }
 
-        suite.addTestSuite( TestPageServer.class );
+  public static Test suite() {
 
-        return suite;
-        
-    }
-    
+    TestSuite suite = new TestSuite(TestAll.class.getName());
+
+    suite.addTestSuite(TestPageServer.class);
+
+    return suite;
+  }
 }

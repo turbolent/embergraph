@@ -21,9 +21,7 @@ import java.io.Serializable;
 
 /**
  * Base interface for HA messages.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface IHAMessage extends Serializable {
-
-}
+public interface IHAMessage extends Serializable {}

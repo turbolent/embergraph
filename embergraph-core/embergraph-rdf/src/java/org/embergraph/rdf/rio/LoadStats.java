@@ -24,97 +24,84 @@ import org.embergraph.rdf.inf.ClosureStats;
 
 /**
  * Used to report statistics when loading data.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class LoadStats {
 
-    public final CAT toldTriples = new CAT();
-    public final CAT loadTime = new CAT();
-    public final CAT commitTime = new CAT();
-    public final CAT totalTime = new CAT();
-    
-    private transient volatile long lastReportTime = 0l;
+  public final CAT toldTriples = new CAT();
+  public final CAT loadTime = new CAT();
+  public final CAT commitTime = new CAT();
+  public final CAT totalTime = new CAT();
 
-    /**
-     * The internal with which this class will log on {@link System#out} in
-     * milliseconds (it is set to every 10 minutes). This helps to track progress
-     * on very large data loads.
-     */
-    protected static transient long REPORT_INTERVAL = 10 * 60 * 1000; 
-    
-    /**
-     * Used iff the closure is computed as the data are loaded.
-     */
-    public final ClosureStats closureStats = new ClosureStats();
+  private transient volatile long lastReportTime = 0l;
 
-    public long triplesPerSecond() {
+  /**
+   * The internal with which this class will log on {@link System#out} in milliseconds (it is set to
+   * every 10 minutes). This helps to track progress on very large data loads.
+   */
+  protected static transient long REPORT_INTERVAL = 10 * 60 * 1000;
 
-        return ((long) (((double) toldTriples.estimate_get()) / ((double) totalTime.estimate_get()) * 1000d));
+  /** Used iff the closure is computed as the data are loaded. */
+  public final ClosureStats closureStats = new ClosureStats();
 
+  public long triplesPerSecond() {
+
+    return ((long)
+        (((double) toldTriples.estimate_get()) / ((double) totalTime.estimate_get()) * 1000d));
+  }
+
+  public void add(final LoadStats stats) {
+
+    toldTriples.add(stats.toldTriples.get());
+
+    loadTime.add(stats.loadTime.get());
+
+    commitTime.add(stats.commitTime.get());
+
+    totalTime.add(stats.totalTime.get());
+
+    if (stats.closureStats != null) {
+
+      closureStats.add(stats.closureStats);
     }
 
-    public void add(final LoadStats stats) {
-
-        toldTriples.add(stats.toldTriples.get());
-
-        loadTime.add(stats.loadTime.get());
-
-        commitTime.add(stats.commitTime.get());
-
-        totalTime.add(stats.totalTime.get());
-
-        if (stats.closureStats != null) {
-
-            closureStats.add(stats.closureStats);
-
-        }
-
-        /*
-         * Handle incremental reporting for large data loads.
-         */
-        final long now = System.currentTimeMillis();
-
-        if (lastReportTime == 0L) {
-
-            if (loadTime.estimate_get() >= REPORT_INTERVAL) {
-
-                System.out.println("loading: " + toString());
-
-                lastReportTime = now;
-
-            }
-
-        } else {
-
-            if ((now - lastReportTime) >= REPORT_INTERVAL) {
-
-                System.out.println("loading: " + toString());
-
-                lastReportTime = now;
-
-            }
-
-        }
-
-    }
-    
-    /**
-     * Human readable representation.
+    /*
+     * Handle incremental reporting for large data loads.
      */
-    public String toString() {
+    final long now = System.currentTimeMillis();
 
-        return toldTriples
-                + " stmts added in "
-                + ((double) loadTime.estimate_get())
-                / 1000d
-                + " secs, rate= "
-                + triplesPerSecond()
-                + ", commitLatency="
-                + commitTime.estimate_get()
-                + "ms"
-                + (closureStats.elapsed.estimate_get()!=0L? "\n"+closureStats.toString() : "");
+    if (lastReportTime == 0L) {
 
+      if (loadTime.estimate_get() >= REPORT_INTERVAL) {
+
+        System.out.println("loading: " + toString());
+
+        lastReportTime = now;
+      }
+
+    } else {
+
+      if ((now - lastReportTime) >= REPORT_INTERVAL) {
+
+        System.out.println("loading: " + toString());
+
+        lastReportTime = now;
+      }
     }
-    
+  }
+
+  /** Human readable representation. */
+  public String toString() {
+
+    return toldTriples
+        + " stmts added in "
+        + ((double) loadTime.estimate_get()) / 1000d
+        + " secs, rate= "
+        + triplesPerSecond()
+        + ", commitLatency="
+        + commitTime.estimate_get()
+        + "ms"
+        + (closureStats.elapsed.estimate_get() != 0L ? "\n" + closureStats.toString() : "");
+  }
 }

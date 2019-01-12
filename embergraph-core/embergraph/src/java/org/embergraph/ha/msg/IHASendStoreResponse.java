@@ -20,37 +20,31 @@ package org.embergraph.ha.msg;
 import org.embergraph.journal.IRootBlockView;
 
 /**
- * Interface for a response for a request to send the backing file in 
- * support of a disaster rebuild.
- * 
+ * Interface for a response for a request to send the backing file in support of a disaster rebuild.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHASendStoreResponse extends IHAMessage {
 
-    /**
-     * Root block ZERO (0) for the service whose backing store was sent
-     * down the write pipeline in response to the request.  
-     * 
-     * @return The root block and never <code>null</code>.
-     */
-    IRootBlockView getRootBlock0();
+  /**
+   * Root block ZERO (0) for the service whose backing store was sent down the write pipeline in
+   * response to the request.
+   *
+   * @return The root block and never <code>null</code>.
+   */
+  IRootBlockView getRootBlock0();
 
-    /**
-     * Root block ONE (1) for the service whose backing store was sent
-     * down the write pipeline in response to the request.
-     * 
-     * @return The root block and never <code>null</code>.
-     */
-    IRootBlockView getRootBlock1();
+  /**
+   * Root block ONE (1) for the service whose backing store was sent down the write pipeline in
+   * response to the request.
+   *
+   * @return The root block and never <code>null</code>.
+   */
+  IRootBlockView getRootBlock1();
 
-    /**
-     * The #of bytes that were sent in fulfillment of the request.
-     */
-    long getByteCount();
+  /** The #of bytes that were sent in fulfillment of the request. */
+  long getByteCount();
 
-    /**
-     * The #of write cache blocks that were sent in fulfillment of the request.
-     */
-    long getBlockCount();
-
+  /** The #of write cache blocks that were sent in fulfillment of the request. */
+  long getBlockCount();
 }

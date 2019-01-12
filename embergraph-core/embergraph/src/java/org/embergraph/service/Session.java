@@ -24,71 +24,60 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.log4j.Logger;
 
 /**
  * A (transient) property set associated with some kinds of services.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Session {
 
-    protected static final Logger log = Logger.getLogger(Session.class);
+  protected static final Logger log = Logger.getLogger(Session.class);
 
-    private ConcurrentHashMap<String, Object> session = new ConcurrentHashMap<String, Object>();
+  private ConcurrentHashMap<String, Object> session = new ConcurrentHashMap<String, Object>();
 
-    public Object get(String name) {
+  public Object get(String name) {
 
-        return session.get(name);
+    return session.get(name);
+  }
 
-    }
+  public Object putIfAbsent(String name, Object value) {
 
-    public Object putIfAbsent(String name, Object value) {
+    final Object ret = session.putIfAbsent(name, value);
 
-        final Object ret = session.putIfAbsent(name, value);
+    if (log.isInfoEnabled()) log.info("name=" + name + ", size=" + session.size());
 
-        if (log.isInfoEnabled())
-            log.info("name=" + name + ", size=" + session.size());
+    return ret;
+  }
 
-        return ret;
+  public Object put(String name, Object value) {
 
-    }
+    final Object ret = session.put(name, value);
 
-    public Object put(String name, Object value) {
+    if (log.isInfoEnabled()) log.info("name=" + name + ", size=" + session.size());
 
-        final Object ret = session.put(name, value);
+    return ret;
+  }
 
-        if (log.isInfoEnabled())
-            log.info("name=" + name + ", size=" + session.size());
+  public Object remove(String name) {
 
-        return ret;
+    final Object ret = session.remove(name);
 
-    }
+    if (log.isInfoEnabled())
+      log.info("name=" + name + ", size=" + session.size() + ", removed=" + (ret != null));
 
-    public Object remove(String name) {
+    return ret;
+  }
 
-        final Object ret = session.remove(name);
+  public Object remove(String name, Object expectedValue) {
 
-        if (log.isInfoEnabled())
-            log.info("name=" + name + ", size=" + session.size() + ", removed="
-                    + (ret != null));
+    final Object ret = session.remove(name, expectedValue);
 
-        return ret;
+    if (log.isInfoEnabled())
+      log.info("name=" + name + ", size=" + session.size() + ", removed=" + (ret != null));
 
-    }
-
-    public Object remove(String name, Object expectedValue) {
-
-        final Object ret = session.remove(name, expectedValue);
-
-        if (log.isInfoEnabled())
-            log.info("name=" + name + ", size=" + session.size() + ", removed="
-                    + (ret != null));
-
-        return ret;
-
-    }
-
+    return ret;
+  }
 }

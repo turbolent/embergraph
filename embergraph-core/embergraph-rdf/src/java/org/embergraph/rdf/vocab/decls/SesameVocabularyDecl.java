@@ -24,37 +24,32 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.SESAME;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for {@link Sesame}.
- * 
+ *
  * @see Sesame
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SesameVocabularyDecl implements VocabularyDecl {
 
-    static private final URI[] uris = new URI[]{
+  private static final URI[] uris =
+      new URI[] {
         new URIImpl(SESAME.NAMESPACE),
         SESAME.DIRECTSUBCLASSOF,
         SESAME.DIRECTSUBPROPERTYOF,
         SESAME.DIRECTTYPE,
-    };
+      };
 
-    public SesameVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public SesameVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

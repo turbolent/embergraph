@@ -18,32 +18,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.pipeline;
 
 /**
- * An exception that is used to wrap and rethrow a cause whose root cause is
- * another {@link AbstractPipelineException}.
- * 
+ * An exception that is used to wrap and rethrow a cause whose root cause is another {@link
+ * AbstractPipelineException}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NestedPipelineException extends AbstractPipelineException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public NestedPipelineException() {
-        super();
-    }
+  public NestedPipelineException() {
+    super();
+  }
 
-    public NestedPipelineException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public NestedPipelineException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public NestedPipelineException(String message) {
-        super(message);
-    }
+  public NestedPipelineException(String message) {
+    super(message);
+  }
 
-    public NestedPipelineException(Throwable cause) {
-        super(cause);
-    }
-
+  public NestedPipelineException(Throwable cause) {
+    super(cause);
+  }
 }

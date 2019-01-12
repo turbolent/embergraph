@@ -27,35 +27,28 @@ import org.embergraph.btree.raba.codec.SimpleRabaCoder;
 
 /**
  * Test with simple coding for keys and values (no compression).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestBucketDataRecord_Simple_Simple extends
-		AbstractHashBucketDataRecordTestCase {
+public class TestBucketDataRecord_Simple_Simple extends AbstractHashBucketDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestBucketDataRecord_Simple_Simple() {
-    }
+  /** */
+  public TestBucketDataRecord_Simple_Simple() {}
 
-    /**
-     * @param name
-     */
-    public TestBucketDataRecord_Simple_Simple(String name) {
-        super(name);
-    }
-    
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  /** @param name */
+  public TestBucketDataRecord_Simple_Simple(String name) {
+    super(name);
+  }
 
-        coder = new DefaultLeafCoder(
-                SimpleRabaCoder.INSTANCE,// keys
-                SimpleRabaCoder.INSTANCE // vals
-        );
-        
-    }
+  protected void setUp() throws Exception {
 
+    super.setUp();
+
+    coder =
+        new DefaultLeafCoder(
+            SimpleRabaCoder.INSTANCE, // keys
+            SimpleRabaCoder.INSTANCE // vals
+            );
+  }
 }

@@ -18,56 +18,45 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-
-/**
- * Tests concerning "SELECT GRAPH XXXX {}" with XXXX and the dataset varying.
- *
- */
+/** Tests concerning "SELECT GRAPH XXXX {}" with XXXX and the dataset varying. */
 public class TestGraphEmptyPattern709_429 extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     *
-     */
-    public TestGraphEmptyPattern709_429() {
-    }
+  /** */
+  public TestGraphEmptyPattern709_429() {}
 
-    /**
-     * @param name
-     */
-    public TestGraphEmptyPattern709_429(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestGraphEmptyPattern709_429(String name) {
+    super(name);
+  }
 
-    public void test_graph_var() throws Exception {
+  public void test_graph_var() throws Exception {
 
-        new TestHelper("trac709").runTest();
+    new TestHelper("trac709").runTest();
+  }
 
-    }
+  public void test_empty_graph_does_not_match() throws Exception {
 
-    public void test_empty_graph_does_not_match() throws Exception {
+    new TestHelper("trac709empty").runTest();
+  }
 
-        new TestHelper("trac709empty").runTest();
+  public void test_graph_uri() throws Exception {
 
-    }
-    public void test_graph_uri() throws Exception {
+    new TestHelper("trac429").runTest();
+  }
 
-        new TestHelper("trac429").runTest();
+  public void test_notgraph_uri() throws Exception {
 
-    }
-    public void test_notgraph_uri() throws Exception {
+    new TestHelper("trac429neg").runTest();
+  }
 
-        new TestHelper("trac429neg").runTest();
+  public void test_empty_graph_does_not_match_by_uri() throws Exception {
 
-    }
-    public void test_empty_graph_does_not_match_by_uri() throws Exception {
+    new TestHelper("trac429empty", "trac429.rq", "trac429empty.trig", "trac429empty.srx").runTest();
+  }
 
-        new TestHelper("trac429empty", "trac429.rq", "trac429empty.trig", "trac429empty.srx").runTest();
+  public void test_work_around_graph_var() throws Exception {
 
-    }
-    public void test_work_around_graph_var() throws Exception {
-
-        new TestHelper("trac709workaround", "trac709workaround.rq", "trac709.trig", "trac709.srx").runTest();
-
-    }
-
+    new TestHelper("trac709workaround", "trac709workaround.rq", "trac709.trig", "trac709.srx")
+        .runTest();
+  }
 }

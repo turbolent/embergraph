@@ -21,13 +21,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.rmi.RemoteException;
 import java.util.UUID;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.engine.IChunkAccessor;
 import org.embergraph.bop.engine.IChunkMessage;
@@ -43,286 +43,264 @@ import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
 import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * A thick version of this interface in which the chunk is sent inline with the
- * RMI message.
- * <p>
- * Note: The encoding is {@link IV} specific and supports the {@link IVCache}
- * associations. However, it CAN NOT be used with non-{@link IV} data. This is
- * fine in the deployed system but it makes the class properly dependent on the
- * RDF layer.
- * 
+ * A thick version of this interface in which the chunk is sent inline with the RMI message.
+ *
+ * <p>Note: The encoding is {@link IV} specific and supports the {@link IVCache} associations.
+ * However, it CAN NOT be used with non-{@link IV} data. This is fine in the deployed system but it
+ * makes the class properly dependent on the RDF layer.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class ThickChunkMessage<E> implements IChunkMessage<E>, Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private IQueryClient queryController;
+  private IQueryClient queryController;
 
-    private UUID queryControllerId;
-    
-    private UUID queryId;
+  private UUID queryControllerId;
 
-    private int bopId;
-    
-    private int partitionId;
+  private UUID queryId;
 
-    private int solutionCount;
-    
-    private byte[] data;
+  private int bopId;
 
-    @Override
-    public IQueryClient getQueryController() {
-        return queryController;
-    }
-    
-    @Override
-    public UUID getQueryControllerId() {
-        return queryControllerId;
-    }
+  private int partitionId;
 
-    @Override
-    public UUID getQueryId() {
-        return queryId;
-    }
+  private int solutionCount;
 
-    @Override
-    public int getBOpId() {
-        return bopId;
-    }
+  private byte[] data;
 
-    @Override
-    public int getPartitionId() {
-        return partitionId;
-    }
-    
-    @Override
-    public boolean isLastInvocation() {
-        return false; // Never.
-    }
+  @Override
+  public IQueryClient getQueryController() {
+    return queryController;
+  }
 
-    @Override
-    public boolean isMaterialized() {
-        return true;
-    }
+  @Override
+  public UUID getQueryControllerId() {
+    return queryControllerId;
+  }
 
-    @Override
-    public int getSolutionCount() {
-        return solutionCount;
-    }
-    
-    public int getBytesAvailable() {
-        return data.length;
-    }
+  @Override
+  public UUID getQueryId() {
+    return queryId;
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public int getBOpId() {
+    return bopId;
+  }
 
-        return getClass().getName() + "{queryId=" + queryId + ",bopId=" + bopId
-                + ",partitionId=" + partitionId + ",controller="
-                + queryController + ", solutionCount=" + solutionCount
-                + ", bytesAvailable=" + data.length + "}";
+  @Override
+  public int getPartitionId() {
+    return partitionId;
+  }
 
-    }
+  @Override
+  public boolean isLastInvocation() {
+    return false; // Never.
+  }
 
-    /**
-     * De-serialization constructor.
-     */
-    public ThickChunkMessage() {
-        
-    }
-    
-    public ThickChunkMessage(final IQueryClient queryController,
-            final UUID queryId, final int bopId, final int partitionId,
-            final IBindingSet[] source) {
+  @Override
+  public boolean isMaterialized() {
+    return true;
+  }
 
-        if (queryController == null)
-            throw new IllegalArgumentException();
+  @Override
+  public int getSolutionCount() {
+    return solutionCount;
+  }
 
-        if (queryId == null)
-            throw new IllegalArgumentException();
+  public int getBytesAvailable() {
+    return data.length;
+  }
 
-        if (source == null)
-            throw new IllegalArgumentException();
+  @Override
+  public String toString() {
 
-        // do not send empty chunks
-        if (source.length == 0)
-            throw new IllegalArgumentException();
+    return getClass().getName()
+        + "{queryId="
+        + queryId
+        + ",bopId="
+        + bopId
+        + ",partitionId="
+        + partitionId
+        + ",controller="
+        + queryController
+        + ", solutionCount="
+        + solutionCount
+        + ", bytesAvailable="
+        + data.length
+        + "}";
+  }
 
-        this.queryController = queryController;
-        try {
-            this.queryControllerId = queryController.getServiceUUID();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-        
-        this.queryId = queryId;
+  /** De-serialization constructor. */
+  public ThickChunkMessage() {}
 
-        this.bopId = bopId;
+  public ThickChunkMessage(
+      final IQueryClient queryController,
+      final UUID queryId,
+      final int bopId,
+      final int partitionId,
+      final IBindingSet[] source) {
 
-        this.partitionId = partitionId;
+    if (queryController == null) throw new IllegalArgumentException();
 
-        this.solutionCount = source.length;
-        
-        if (solutionCount == 0) {
-            
-            this.data = null;
-            
-        } else {
+    if (queryId == null) throw new IllegalArgumentException();
 
-            /*
-             * Encode the solutions.
-             */
+    if (source == null) throw new IllegalArgumentException();
 
-            // SWAG.
-            final int initialCapacity = solutionCount * 24;
+    // do not send empty chunks
+    if (source.length == 0) throw new IllegalArgumentException();
 
-            final DataOutputBuffer out = new DataOutputBuffer(initialCapacity);
-            
-            final IVSolutionSetEncoder encoder = new IVSolutionSetEncoder();
-            
-            for (int i = 0; i < source.length; i++) {
-            
-                encoder.encodeSolution(out, source[i]);
-                
-            }
-
-            this.data = out.toByteArray();
-            
-        }
-
+    this.queryController = queryController;
+    try {
+      this.queryControllerId = queryController.getServiceUUID();
+    } catch (RemoteException e) {
+      throw new RuntimeException(e);
     }
 
-    @Override
-    public void materialize(final FederatedRunningQuery runningQuery) {
-        // NOP
+    this.queryId = queryId;
+
+    this.bopId = bopId;
+
+    this.partitionId = partitionId;
+
+    this.solutionCount = source.length;
+
+    if (solutionCount == 0) {
+
+      this.data = null;
+
+    } else {
+
+      /*
+       * Encode the solutions.
+       */
+
+      // SWAG.
+      final int initialCapacity = solutionCount * 24;
+
+      final DataOutputBuffer out = new DataOutputBuffer(initialCapacity);
+
+      final IVSolutionSetEncoder encoder = new IVSolutionSetEncoder();
+
+      for (int i = 0; i < source.length; i++) {
+
+        encoder.encodeSolution(out, source[i]);
+      }
+
+      this.data = out.toByteArray();
     }
+  }
 
-    @Override
-    public void release() {
-        if (chunkAccessor != null)
-            chunkAccessor.close();
-    }
+  @Override
+  public void materialize(final FederatedRunningQuery runningQuery) {
+    // NOP
+  }
 
-    private transient volatile ChunkAccessor chunkAccessor = null;
+  @Override
+  public void release() {
+    if (chunkAccessor != null) chunkAccessor.close();
+  }
 
-    @Override
-    public IChunkAccessor<E> getChunkAccessor() {
+  private transient volatile ChunkAccessor chunkAccessor = null;
 
-        return new ChunkAccessor();
-        
-    }
+  @Override
+  public IChunkAccessor<E> getChunkAccessor() {
 
-    /**
-     * Deserialization of the binding sets.
-     * <p>
-     * Note: Both very small chunks (1-5 solutions) and large chunks (100-1000+)
-     * are common on a cluster. The observed chunk size is a function of the
-     * selectivity of the access path together with the chunk capacity (e.g., as
-     * set by a query hint).
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/395">HTree
-     *      performance tuning</a>
-     */
-    private class ChunkAccessor implements IChunkAccessor<E> {
+    return new ChunkAccessor();
+  }
 
-        private final ICloseableIterator<E[]> source;
+  /**
+   * Deserialization of the binding sets.
+   *
+   * <p>Note: Both very small chunks (1-5 solutions) and large chunks (100-1000+) are common on a
+   * cluster. The observed chunk size is a function of the selectivity of the access path together
+   * with the chunk capacity (e.g., as set by a query hint).
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/395">HTree performance
+   *     tuning</a>
+   */
+  private class ChunkAccessor implements IChunkAccessor<E> {
 
-        @SuppressWarnings("unchecked")
-        public ChunkAccessor() {
+    private final ICloseableIterator<E[]> source;
 
-            if (solutionCount == 0) {
-                
-                source = new EmptyCloseableIterator<E[]>();
-                
-                return;
-                
-            }
+    @SuppressWarnings("unchecked")
+    public ChunkAccessor() {
 
-            final IVSolutionSetDecoder decoder = new IVSolutionSetDecoder();
+      if (solutionCount == 0) {
 
-            final IBindingSet[] a = new IBindingSet[solutionCount];
+        source = new EmptyCloseableIterator<E[]>();
 
-            // Note: close() is NOT required for DataInputBuffer.
-            final DataInputBuffer in = new DataInputBuffer(data, 0/* off */,
-                    data.length);
+        return;
+      }
 
-            for (int i = 0; i < solutionCount; i++) {
+      final IVSolutionSetDecoder decoder = new IVSolutionSetDecoder();
 
-                a[i] = decoder
-                        .decodeSolution(in, true/* resolveCachedValues */);
+      final IBindingSet[] a = new IBindingSet[solutionCount];
 
-            }
+      // Note: close() is NOT required for DataInputBuffer.
+      final DataInputBuffer in = new DataInputBuffer(data, 0 /* off */, data.length);
 
-            source = new ThickCloseableIterator<E[]>(
-                    ((E[][]) new IBindingSet[][] { a }));
+      for (int i = 0; i < solutionCount; i++) {
 
-        }
+        a[i] = decoder.decodeSolution(in, true /* resolveCachedValues */);
+      }
 
-        @Override
-        public ICloseableIterator<E[]> iterator() {
-
-            return source;
-
-        }
-
-        public void close() {
-
-            source.close();
-
-        }
-
+      source = new ThickCloseableIterator<E[]>(((E[][]) new IBindingSet[][] {a}));
     }
 
     @Override
-    public void writeExternal(final ObjectOutput out) throws IOException {
-        ShortPacker.packShort(out, currentVersion);
-        out.writeObject(queryController);
-        out.writeLong(queryControllerId.getMostSignificantBits());
-        out.writeLong(queryControllerId.getLeastSignificantBits());
-        out.writeLong(queryId.getMostSignificantBits());
-        out.writeLong(queryId.getLeastSignificantBits());
-        out.writeInt(bopId);
-        out.writeInt(partitionId);// Note: 32-bit clean.
-        LongPacker.packLong(out, solutionCount); // non-negative
-        if (solutionCount > 0) {
-            LongPacker.packLong(out, data.length);
-            out.write(data);
-        }
+    public ICloseableIterator<E[]> iterator() {
+
+      return source;
     }
 
-    @Override
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
-        final short version = ShortPacker.unpackShort(in);
-        if (version != VERSION0) {
-            throw new IOException("Unknown version: " + version);
-        }
-        queryController = (IQueryClient) in.readObject();
-        queryControllerId = new UUID(in.readLong()/* MSB */, in.readLong()/* LSB */);
-        queryId = new UUID(in.readLong()/* MSB */, in.readLong()/* LSB */);
-        bopId = in.readInt();
-        partitionId = in.readInt();
-        solutionCount = LongPacker.unpackInt(in);
-        if (solutionCount > 0) {
-            final int len = LongPacker.unpackInt(in);
-            data = new byte[len];
-            in.readFully(data);
-        }
+    public void close() {
 
+      source.close();
     }
+  }
 
-    /**
-     * The original version.
-     */
-    private static final transient short VERSION0 = 0x0;
+  @Override
+  public void writeExternal(final ObjectOutput out) throws IOException {
+    ShortPacker.packShort(out, currentVersion);
+    out.writeObject(queryController);
+    out.writeLong(queryControllerId.getMostSignificantBits());
+    out.writeLong(queryControllerId.getLeastSignificantBits());
+    out.writeLong(queryId.getMostSignificantBits());
+    out.writeLong(queryId.getLeastSignificantBits());
+    out.writeInt(bopId);
+    out.writeInt(partitionId); // Note: 32-bit clean.
+    LongPacker.packLong(out, solutionCount); // non-negative
+    if (solutionCount > 0) {
+      LongPacker.packLong(out, data.length);
+      out.write(data);
+    }
+  }
 
-    private static final transient short currentVersion = VERSION0;
+  @Override
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    final short version = ShortPacker.unpackShort(in);
+    if (version != VERSION0) {
+      throw new IOException("Unknown version: " + version);
+    }
+    queryController = (IQueryClient) in.readObject();
+    queryControllerId = new UUID(in.readLong() /* MSB */, in.readLong() /* LSB */);
+    queryId = new UUID(in.readLong() /* MSB */, in.readLong() /* LSB */);
+    bopId = in.readInt();
+    partitionId = in.readInt();
+    solutionCount = LongPacker.unpackInt(in);
+    if (solutionCount > 0) {
+      final int len = LongPacker.unpackInt(in);
+      data = new byte[len];
+      in.readFully(data);
+    }
+  }
 
+  /** The original version. */
+  private static final transient short VERSION0 = 0x0;
+
+  private static final transient short currentVersion = VERSION0;
 }

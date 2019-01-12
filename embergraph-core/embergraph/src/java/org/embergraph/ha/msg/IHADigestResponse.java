@@ -18,28 +18,24 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 import java.util.UUID;
-
 import org.embergraph.rawstore.IRawStore;
 
 /**
  * Message used to communicate the digest of a backing store.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHADigestResponse extends IHAMessage {
 
-    /**
-     * The {@link UUID} identifying the {@link IRawStore} for which the record
-     * was requested (optional, defaults to the current Journal).
-     * <p>
-     * Note: This parameter is intended for scale-out if there is a need to
-     * fetch the root block of a historical journal (versus the live journal).
-     */
-    UUID getStoreUUID();
+  /**
+   * The {@link UUID} identifying the {@link IRawStore} for which the record was requested
+   * (optional, defaults to the current Journal).
+   *
+   * <p>Note: This parameter is intended for scale-out if there is a need to fetch the root block of
+   * a historical journal (versus the live journal).
+   */
+  UUID getStoreUUID();
 
-    /**
-     * The computed disgest.
-     */
-    byte[] getDigest();
-
+  /** The computed disgest. */
+  byte[] getDigest();
 }

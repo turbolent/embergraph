@@ -1,9 +1,9 @@
 package it.unimi.dsi.io;
 
-/*		 
+/*
  * DSI utilities
  *
- * Copyright (C) 2003-2009 Sebastiano Vigna 
+ * Copyright (C) 2003-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -21,31 +21,30 @@ package it.unimi.dsi.io;
  *
  */
 
-
-/** Throw-it-away output stream.
+/**
+ * Throw-it-away output stream.
  *
- * <P>This stream discards whatever is written into it. Its usefulness is in
- * previewing the length of some coding by wrapping it in an {@link
- * OutputBitStream} (it is a good idea, in this case, {@linkplain
- * OutputBitStream#OutputBitStream(java.io.OutputStream,int) to specify a 0-length buffer}).
+ * <p>This stream discards whatever is written into it. Its usefulness is in previewing the length
+ * of some coding by wrapping it in an {@link OutputBitStream} (it is a good idea, in this case,
+ * {@linkplain OutputBitStream#OutputBitStream(java.io.OutputStream,int) to specify a 0-length
+ * buffer}).
  *
- * <P>This class is a singleton. You cannot create a null output stream,
- * but you can obtain an instance of this class using {@link #getInstance()}.
+ * <p>This class is a singleton. You cannot create a null output stream, but you can obtain an
+ * instance of this class using {@link #getInstance()}.
  *
  * @author Sebastiano Vigna
  * @since 0.6
  */
-
 public class NullOutputStream extends java.io.OutputStream {
 
-	private final static NullOutputStream SINGLETON = new NullOutputStream();
+  private static final NullOutputStream SINGLETON = new NullOutputStream();
 
-	private NullOutputStream() {}
-	 
-	public void write( final int discarded ) {}
+  private NullOutputStream() {}
 
-	/** Returns the only instance of this class. */
-	public static NullOutputStream getInstance() {
-		return SINGLETON;
-	}
+  public void write(final int discarded) {}
+
+  /** Returns the only instance of this class. */
+  public static NullOutputStream getInstance() {
+    return SINGLETON;
+  }
 }

@@ -3,105 +3,88 @@ package org.embergraph.util;
 import java.io.Serializable;
 
 /**
- * The name of an {@link org.embergraph.btree.IIndex} or an {@link org.embergraph.relation.IRelation} and a timestamp. This
- * is used as a key for a {@link org.embergraph.cache.WeakValueCache} to provide a canonicalizing
- * mapping for index views or relation views.
- * 
+ * The name of an {@link org.embergraph.btree.IIndex} or an {@link
+ * org.embergraph.relation.IRelation} and a timestamp. This is used as a key for a {@link
+ * org.embergraph.cache.WeakValueCache} to provide a canonicalizing mapping for index views or
+ * relation views.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NT implements Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2447755655295770390L;
+  /** */
+  private static final long serialVersionUID = -2447755655295770390L;
 
-    private final String name;
+  private final String name;
 
-    private final long timestamp;
+  private final long timestamp;
 
-    private final int hashCode;
+  private final int hashCode;
 
-    final public String getName() {
-        
-        return name;
-        
-    }
-    
-    final public long getTimestamp() {
-        
-        return timestamp;
-        
-    }
-    
-    /**
-     * 
-     * @param name
-     *            The name of an {@link org.embergraph.btree.IIndex} or an {@link org.embergraph.relation.IRelation}.
-     * @param timestamp
-     *            The timestamp associated with the view.
-     */
-    public NT(final String name, final long timestamp) {
+  public final String getName() {
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    return name;
+  }
 
-        this.name = name;
+  public final long getTimestamp() {
 
-        this.timestamp = timestamp;
+    return timestamp;
+  }
 
-        this.hashCode = name.hashCode() << 32 + (Long.valueOf(timestamp)
-                .hashCode() >>> 32);
+  /**
+   * @param name The name of an {@link org.embergraph.btree.IIndex} or an {@link
+   *     org.embergraph.relation.IRelation}.
+   * @param timestamp The timestamp associated with the view.
+   */
+  public NT(final String name, final long timestamp) {
 
-    }
+    if (name == null) throw new IllegalArgumentException();
 
-    @Override
-    public int hashCode() {
+    this.name = name;
 
-        return hashCode;
+    this.timestamp = timestamp;
 
-    }
+    this.hashCode = name.hashCode() << 32 + (Long.valueOf(timestamp).hashCode() >>> 32);
+  }
 
-    @Override
-    public boolean equals(final Object o) {
+  @Override
+  public int hashCode() {
 
-        return equals((NT) o);
+    return hashCode;
+  }
 
-    }
+  @Override
+  public boolean equals(final Object o) {
 
-    public boolean equals(final NT o) {
+    return equals((NT) o);
+  }
 
-        if (o == null) {
+  public boolean equals(final NT o) {
 
-            /*
-             * Note: This handles a case where the other instance was a key in a
-             * WeakHashMap and the reference for the key was cleared. This
-             * arises with the NamedLock class.
-             */
-            
-            return false;
-            
-        }
-        
-        if (this == o)
-            return true;
+    if (o == null) {
 
-        if (this.timestamp != o.timestamp)
-            return false;
+      /*
+       * Note: This handles a case where the other instance was a key in a
+       * WeakHashMap and the reference for the key was cleared. This
+       * arises with the NamedLock class.
+       */
 
-        if (!this.name.equals(o.name))
-            return false;
-
-        return true;
-
+      return false;
     }
 
-    @Override
-    public String toString() {
+    if (this == o) return true;
 
-        return "NT{name=" + name + ",timestamp=" + timestamp + "}";
+    if (this.timestamp != o.timestamp) return false;
 
-    }
+    if (!this.name.equals(o.name)) return false;
 
+    return true;
+  }
+
+  @Override
+  public String toString() {
+
+    return "NT{name=" + name + ",timestamp=" + timestamp + "}";
+  }
 }

@@ -35,170 +35,153 @@ import org.embergraph.rdf.store.ProxyTestCase;
 
 /**
  * Test suite for {@link StrBeforeBOp}.
- * 
+ *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */
 public class TestStrBeforeBOp extends ProxyTestCase {
 
-//	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
-	
-    /**
-     * 
-     */
-    public TestStrBeforeBOp() {
-        super();
-    }
+  //	private static final Logger log = Logger.getLogger(TestSubstrBOp.class);
 
-    /**
-     * @param name
-     */
-    public TestStrBeforeBOp(String name) {
-        super(name);
-    }
-    
-//    @Override
-//    public Properties getProperties() {
-//    	final Properties props = super.getProperties();
-//    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
-//    	return props;
-//    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void test_bop() {
-        
-        final AbstractTripleStore db = getStore();
+  /** */
+  public TestStrBeforeBOp() {
+    super();
+  }
+
+  /** @param name */
+  public TestStrBeforeBOp(String name) {
+    super(name);
+  }
+
+  //    @Override
+  //    public Properties getProperties() {
+  //    	final Properties props = super.getProperties();
+  //    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+  //    	return props;
+  //    }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void test_bop() {
+
+    final AbstractTripleStore db = getStore();
+
+    try {
+
+      final EmbergraphValueFactory vf = db.getValueFactory();
+
+      final ListBindingSet emptyBindingSet = new ListBindingSet();
+
+      // strbefore("abc","b") -> "a"
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("a"));
+
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc"));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral("b"));
+
+        final IV actual =
+            new StrBeforeBOp(
+                    new Constant<IV>(arg1),
+                    new Constant<IV>(arg2),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // strbefore("abc"@en,"bc") -> "a"@en
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("a", "en"));
+
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc", "en"));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral("bc"));
+
+        final IV actual =
+            new StrBeforeBOp(
+                    new Constant<IV>(arg1),
+                    new Constant<IV>(arg2),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // strbefore("abc"@en,"b"@cy) -> error
+      {
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc", "en"));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral("b", "cy"));
 
         try {
+          final IV actual =
+              new StrBeforeBOp(
+                      new Constant<IV>(arg1),
+                      new Constant<IV>(arg2),
+                      new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                  .get(emptyBindingSet);
 
-            final EmbergraphValueFactory vf = db.getValueFactory();
-            
-            final ListBindingSet emptyBindingSet = new ListBindingSet();
-
-            // strbefore("abc","b") -> "a"
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("a"));
-
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc"));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("b"));
-                
-                final IV actual = new StrBeforeBOp(
-                        new Constant<IV>(arg1),
-                        new Constant<IV>(arg2),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // strbefore("abc"@en,"bc") -> "a"@en
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("a", "en"));
-
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc", "en"));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("bc"));
-                
-                final IV actual = new StrBeforeBOp(
-                        new Constant<IV>(arg1),
-                        new Constant<IV>(arg2),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // strbefore("abc"@en,"b"@cy) -> error
-            {
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc", "en"));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("b", "cy"));
-                
-                try {
-	                final IV actual = new StrBeforeBOp(
-	                        new Constant<IV>(arg1),
-	                        new Constant<IV>(arg2),
-	                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-	                ).get(emptyBindingSet);
-	                
-	                fail("should be a type error");
-                } catch (SparqlTypeErrorException ex) { }
-
-            }
-            
-            // strbefore("abc"^^xsd:string,"") -> ""^^xsd:string
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("", XSD.STRING));
-
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc", XSD.STRING));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral(""));
-                
-                final IV actual = new StrBeforeBOp(
-                        new Constant<IV>(arg1),
-                        new Constant<IV>(arg2),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // strbefore("abc","xyz") -> ""
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral(""));
-
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc"));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("xyz"));
-                
-                final IV actual = new StrBeforeBOp(
-                        new Constant<IV>(arg1),
-                        new Constant<IV>(arg2),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-            // strbefore("abc","ab") -> ""
-            {
-                final IV expected = DummyConstantNode.toDummyIV(vf
-                        .createLiteral(""));
-
-                final IV arg1 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("abc"));
-                
-                final IV arg2 = DummyConstantNode.toDummyIV(vf
-                        .createLiteral("ab"));
-                
-                final IV actual = new StrBeforeBOp(
-                        new Constant<IV>(arg1),
-                        new Constant<IV>(arg2),
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
-                ).get(emptyBindingSet);
-
-                assertEquals(expected, actual);
-            }
-
-        } finally {
-            
-            db.__tearDownUnitTest();
-            
+          fail("should be a type error");
+        } catch (SparqlTypeErrorException ex) {
         }
-        
+      }
+
+      // strbefore("abc"^^xsd:string,"") -> ""^^xsd:string
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral("", XSD.STRING));
+
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc", XSD.STRING));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral(""));
+
+        final IV actual =
+            new StrBeforeBOp(
+                    new Constant<IV>(arg1),
+                    new Constant<IV>(arg2),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // strbefore("abc","xyz") -> ""
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral(""));
+
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc"));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral("xyz"));
+
+        final IV actual =
+            new StrBeforeBOp(
+                    new Constant<IV>(arg1),
+                    new Constant<IV>(arg2),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+      // strbefore("abc","ab") -> ""
+      {
+        final IV expected = DummyConstantNode.toDummyIV(vf.createLiteral(""));
+
+        final IV arg1 = DummyConstantNode.toDummyIV(vf.createLiteral("abc"));
+
+        final IV arg2 = DummyConstantNode.toDummyIV(vf.createLiteral("ab"));
+
+        final IV actual =
+            new StrBeforeBOp(
+                    new Constant<IV>(arg1),
+                    new Constant<IV>(arg2),
+                    new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
+                .get(emptyBindingSet);
+
+        assertEquals(expected, actual);
+      }
+
+    } finally {
+
+      db.__tearDownUnitTest();
     }
+  }
 }

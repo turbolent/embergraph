@@ -21,228 +21,199 @@ import java.io.Serializable;
 import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.openrdf.model.Literal;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
 import org.embergraph.rdf.internal.IPv4Address;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.lexicon.LexiconRelation;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.BytesUtil;
+import org.openrdf.model.Literal;
 
 /**
- * Internal value representing an inline IP address. Uses the IPv4Address class
- * to represent the IP address and perform the translation to and from a
- * <code>byte[]</code>, which is then used directly in the IV key (after the
- * flags).
- * <p>
- * {@inheritDoc}
- * <p>
- * Note: Binary compatibility for this class was broken by BLZG-1507.
- * 
+ * Internal value representing an inline IP address. Uses the IPv4Address class to represent the IP
+ * address and perform the translation to and from a <code>byte[]</code>, which is then used
+ * directly in the IV key (after the flags).
+ *
+ * <p>{@inheritDoc}
+ *
+ * <p>Note: Binary compatibility for this class was broken by BLZG-1507.
+ *
  * @see BLZG-1507 (Implement support for DTE extension types for URIs)
  */
-public class IPv4AddrIV<V extends EmbergraphLiteral>
-        extends AbstractLiteralIV<V, IPv4Address>
-            implements Serializable, Literal {
+public class IPv4AddrIV<V extends EmbergraphLiteral> extends AbstractLiteralIV<V, IPv4Address>
+    implements Serializable, Literal {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 685148537376856907L;
-	
-	private static final transient Logger log = Logger.getLogger(IPv4AddrIV.class);
+  /** */
+  private static final long serialVersionUID = 685148537376856907L;
 
-	/**
-	 * The inline IP address.
-	 */
-	private final IPv4Address value;
-	
-	/**
-	 * The cached string representation of this IP.
-	 */
-	private transient String hostAddress;
-	
-	/**
-	 * The cached materialized EmbergraphValue for this InetAddress.
-	 */
-	private transient V uri;
+  private static final transient Logger log = Logger.getLogger(IPv4AddrIV.class);
 
-	@Override
-    public IV<V, IPv4Address> clone(final boolean clearCache) {
+  /** The inline IP address. */
+  private final IPv4Address value;
 
-        final IPv4AddrIV<V> tmp = new IPv4AddrIV<V>(value);
+  /** The cached string representation of this IP. */
+  private transient String hostAddress;
 
-        // Propagate the cached EmbergraphValue.
-        tmp.uri = uri;
-        
-        if (!clearCache) {
+  /** The cached materialized EmbergraphValue for this InetAddress. */
+  private transient V uri;
 
-            tmp.setValue(getValueCache());
-            
+  @Override
+  public IV<V, IPv4Address> clone(final boolean clearCache) {
+
+    final IPv4AddrIV<V> tmp = new IPv4AddrIV<V>(value);
+
+    // Propagate the cached EmbergraphValue.
+    tmp.uri = uri;
+
+    if (!clearCache) {
+
+      tmp.setValue(getValueCache());
+    }
+
+    return tmp;
+  }
+
+  /** Ctor with internal value specified. */
+  public IPv4AddrIV(final IPv4Address value) {
+
+    super(DTE.Extension);
+
+    this.value = value;
+  }
+
+  /** Regex pattern for IPv4 Address with optional CIDR */
+  private static final transient String IPv4_OPTIONAL_CIDR_PATTERN =
+      "((([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5]))(\\/([012]?\\d|3[012]))?";
+
+  // "((?:[0-9]{1,3}\\.){3}[0-9]{1,3})((\\/)(([0-9]{1,2})))?
+
+  private static final transient Pattern pattern = Pattern.compile(IPv4_OPTIONAL_CIDR_PATTERN);
+
+  /**
+   * Ctor with host address specified.
+   *
+   * @throws UnknownHostException if not parsable as an IPv4 address.
+   */
+  public IPv4AddrIV(final String hostAddress) throws UnknownHostException {
+
+    super(DTE.Extension);
+
+    this.hostAddress = hostAddress;
+
+    final Matcher matcher = pattern.matcher(hostAddress);
+
+    final boolean matches = matcher.matches();
+
+    if (matches) {
+
+      final String ip = matcher.group(1);
+
+      if (log.isDebugEnabled()) log.debug(ip);
+
+      final String suffix = matcher.group(6);
+
+      if (log.isDebugEnabled()) log.debug(suffix);
+
+      final String[] s;
+      if (suffix != null) {
+
+        s = new String[5];
+        System.arraycopy(ip.split("\\.", -1), 0, s, 0, 4);
+        s[4] = suffix;
+
+      } else {
+
+        s = ip.split("\\.", -1);
+      }
+
+      this.value = IPv4Address.IPv4Factory(s);
+
+      if (value == null) {
+        if (log.isDebugEnabled()) {
+          log.debug("not a valid IP: " + hostAddress);
         }
-        
-        return tmp;
+        throw new UnknownHostException("not a valid IP: " + hostAddress);
+      }
 
+      if (log.isDebugEnabled()) {
+        log.debug(value);
+        log.debug(byteLength());
+        log.debug(BytesUtil.toString(value.getBytes()));
+      }
+
+    } else {
+
+      if (log.isDebugEnabled()) {
+        log.debug("not a valid IP: " + hostAddress);
+      }
+      throw new UnknownHostException("Did not match REGEX - not a valid IP: " + hostAddress);
     }
+  }
 
-    /**
-	 * Ctor with internal value specified.
-	 */
-	public IPv4AddrIV(final IPv4Address value) {
+  @Override
+  public DTEExtension getDTEX() {
+    return DTEExtension.IPV4;
+  }
 
-        super(DTE.Extension);
-        
-        this.value = value;
-        
+  @Override
+  public IPv4Address getInlineValue() throws UnsupportedOperationException {
+    return value;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+    if (uri == null) {
+      uri = (V) lex.getValueFactory().createLiteral(getLabel(), XSD.IPV4);
+      uri.setIV(this);
     }
+    return uri;
+  }
 
-	/**
-	 * Regex pattern for IPv4 Address with optional CIDR
-	 */
-	private static transient final String IPv4_OPTIONAL_CIDR_PATTERN = "((([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5]))(\\/([012]?\\d|3[012]))?";
-	
-	// "((?:[0-9]{1,3}\\.){3}[0-9]{1,3})((\\/)(([0-9]{1,2})))?
+  @Override
+  public int byteLength() {
+    return 1 /* flags */ + 1 /* DTEExtension */ + value.getBytes().length;
+  }
 
-	private static transient final Pattern pattern = 
-			Pattern.compile(IPv4_OPTIONAL_CIDR_PATTERN);
-	
-    /**
-	 * Ctor with host address specified.
-	 * 
-	 * @throws UnknownHostException
-	 *             if not parsable as an IPv4 address.
-	 */
-	public IPv4AddrIV(final String hostAddress) throws UnknownHostException {
+  @Override
+  public String toString() {
+    return "IPv4(" + getLabel() + ")";
+  }
 
-        super(DTE.Extension);
-        
-        this.hostAddress = hostAddress;
-        
-		final Matcher matcher = pattern.matcher(hostAddress);
-		
-		final boolean matches = matcher.matches();
-		
-		if (matches) {
-		
-			final String ip = matcher.group(1);
-			
-			if (log.isDebugEnabled())
-			    log.debug(ip);
-			
-			final String suffix = matcher.group(6);
-			
-            if (log.isDebugEnabled())
-                log.debug(suffix);
+  @Override
+  public int hashCode() {
+    return value.hashCode();
+  }
 
-			final String[] s;
-			if (suffix != null) {
-				
-				s = new String[5];
-				System.arraycopy(ip.split("\\.", -1), 0, s, 0, 4);
-				s[4] = suffix;
-				
-			} else {
-				
-				s = ip.split("\\.", -1);
-
-			}
-			
-			this.value = IPv4Address.IPv4Factory(s);
-			
-			if (value == null) {
-			    if (log.isDebugEnabled()) {
-			        log.debug("not a valid IP: " + hostAddress);
-			    }
-	            throw new UnknownHostException("not a valid IP: " + hostAddress);
-			}
-			
-	        if (log.isDebugEnabled()) {
-                log.debug(value);
-                log.debug(byteLength());
-                log.debug(BytesUtil.toString(value.getBytes()));
-    		}
-	        
-		} else {
-			
-            if (log.isDebugEnabled()) {
-                log.debug("not a valid IP: " + hostAddress);
-            }
-			throw new UnknownHostException("Did not match REGEX - not a valid IP: " + hostAddress);
-			
-		}
-        
+  @Override
+  public String getLabel() {
+    if (hostAddress == null) {
+      hostAddress = value.toString();
     }
+    return hostAddress;
+  }
 
-	@Override
-    public DTEExtension getDTEX() {
-        return DTEExtension.IPV4;
+  /** Two {@link IPv4AddrIV} are equal if their InetAddresses are equal. */
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof IPv4AddrIV) {
+      final IPv4Address value2 = ((IPv4AddrIV<?>) o).value;
+      return value.equals(value2);
     }
-    
-    @Override
-	public IPv4Address getInlineValue() throws UnsupportedOperationException {
-		return value;
-	}
+    return false;
+  }
 
-	@Override
-    @SuppressWarnings("unchecked")
-    public V asValue(final LexiconRelation lex) {
-    	if (uri == null) {
-	        uri = (V) lex.getValueFactory().createLiteral(getLabel(), XSD.IPV4);
-	        uri.setIV(this);
-    	}
-        return uri;
-    }
+  @Override
+  @SuppressWarnings("rawtypes")
+  public int _compareTo(final IV o) {
+    return value.compareTo(((IPv4AddrIV) o).value);
+  }
 
-	@Override
-	public int byteLength() {
-        return 1 /* flags */ + 1 /* DTEExtension */ + value.getBytes().length;
-	}
-
-	@Override
-	public String toString() {
-		return "IPv4(" + getLabel() + ")";
-	}
-	
-	@Override
-	public int hashCode() {
-		return value.hashCode();
-	}
-
-    @Override
-    public String getLabel() {
-        if (hostAddress == null) {
-            hostAddress = value.toString();
-        }
-        return hostAddress;
-    }
-    
-	/**
-	 * Two {@link IPv4AddrIV} are equal if their InetAddresses are equal.
-	 */
-    @Override
-	public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof IPv4AddrIV) {
-        		final IPv4Address value2 = ((IPv4AddrIV<?>) o).value;
-        		return value.equals(value2);
-        }
-        return false;
-	}
-
-        @Override
-	@SuppressWarnings("rawtypes")
-	public int _compareTo(final IV o) {
-        return value.compareTo(((IPv4AddrIV) o).value);
-    }
-    
-    public static Matcher getIPv4Matcher(String addr) {
-    	return IPv4AddrIV.pattern.matcher(addr);
-    }
-
+  public static Matcher getIPv4Matcher(String addr) {
+    return IPv4AddrIV.pattern.matcher(addr);
+  }
 }

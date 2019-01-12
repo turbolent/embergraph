@@ -29,24 +29,20 @@ import org.embergraph.relation.rule.IStep;
 
 /**
  * A factory for rule statistics objects.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRuleStatisticsFactory {
 
-    /**
-     * Used for aggregations of more than one {@link IRule}.
-     */
-    RuleStats newInstance(IStep step);
-    
-    /**
-     * Used for the execution of a single {@link IRule}.
-     * 
-     * @param ruleState
-     *            Metadata about the {@link IRule} execution state that is
-     *            derived once the {@link IEvaluationPlan} has been selected.
-     */
-    RuleStats newInstance(IRuleState ruleState);
-    
+  /** Used for aggregations of more than one {@link IRule}. */
+  RuleStats newInstance(IStep step);
+
+  /**
+   * Used for the execution of a single {@link IRule}.
+   *
+   * @param ruleState Metadata about the {@link IRule} execution state that is derived once the
+   *     {@link IEvaluationPlan} has been selected.
+   */
+  RuleStats newInstance(IRuleState ruleState);
 }

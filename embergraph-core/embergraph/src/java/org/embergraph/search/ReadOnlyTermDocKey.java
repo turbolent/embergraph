@@ -2,50 +2,44 @@ package org.embergraph.search;
 
 /**
  * Read-only {@link ITermDocKey}.
- *  
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class ReadOnlyTermDocKey<V extends Comparable<V>>
-        implements ITermDocKey<V> {
+public class ReadOnlyTermDocKey<V extends Comparable<V>> implements ITermDocKey<V> {
 
-    private final V docId;
-    
-    private final Integer fieldId;
+  private final V docId;
 
-    private final double termWeight;
+  private final Integer fieldId;
 
-    public ReadOnlyTermDocKey(final V docId, final int fieldId, final double termWeight) {
+  private final double termWeight;
 
-        if (docId == null)
-            throw new IllegalArgumentException();
+  public ReadOnlyTermDocKey(final V docId, final int fieldId, final double termWeight) {
 
-        this.docId = docId;
-        
-        this.fieldId = fieldId;
+    if (docId == null) throw new IllegalArgumentException();
 
-        this.termWeight = termWeight;
+    this.docId = docId;
 
-    }
+    this.fieldId = fieldId;
 
-    public String getToken() {
-        throw new UnsupportedOperationException();
-    }
+    this.termWeight = termWeight;
+  }
 
-    public V getDocId() {
-        return docId;
-    }
-    
-    public int getFieldId() throws UnsupportedOperationException {
+  public String getToken() {
+    throw new UnsupportedOperationException();
+  }
 
-        if (fieldId == Integer.MIN_VALUE)
-            throw new UnsupportedOperationException();
+  public V getDocId() {
+    return docId;
+  }
 
-        return fieldId;
+  public int getFieldId() throws UnsupportedOperationException {
 
-    }
-    
-    public double getLocalTermWeight() {
-    	return termWeight;
-    }
+    if (fieldId == Integer.MIN_VALUE) throw new UnsupportedOperationException();
 
+    return fieldId;
+  }
+
+  public double getLocalTermWeight() {
+    return termWeight;
+  }
 }

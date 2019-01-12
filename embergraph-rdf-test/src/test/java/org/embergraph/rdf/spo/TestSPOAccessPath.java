@@ -21,9 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.openrdf.model.Statement;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IPredicate;
@@ -31,6 +28,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
@@ -40,6 +38,7 @@ import org.embergraph.rdf.store.TestTripleStore;
 import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.test.MockTermIdFactory;
+import org.openrdf.model.Statement;
 
 /**
  * Test suite for {@link SPOAccessPath}.

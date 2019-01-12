@@ -15,61 +15,57 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
-/**
- * Initialized with a Sorter object, wraps a standard iterator and resolves each
- * returned object
- */
-
+/** Initialized with a Sorter object, wraps a standard iterator and resolves each returned object */
 public class Sorterator implements Iterator {
 
-	private final Iterator m_src;
-	private Iterator m_iter;
-	private final Sorter m_sorter;
-	protected final Object m_context;
-	private boolean m_doneSort = false;
+  private final Iterator m_src;
+  private Iterator m_iter;
+  private final Sorter m_sorter;
+  protected final Object m_context;
+  private boolean m_doneSort = false;
 
-	public Sorterator(Iterator iter, Object context, Sorter sorter) {
+  public Sorterator(Iterator iter, Object context, Sorter sorter) {
 
-		m_context = context;
-		m_src = iter;
-		m_sorter = sorter;
+    m_context = context;
+    m_src = iter;
+    m_sorter = sorter;
+  }
 
-	}
+  private void sort() {
+    if (!m_doneSort) {
+      // materialize the objects to be sorted.
+      LinkedList tmp = new LinkedList();
 
-	private void sort() {
-		if (!m_doneSort) {
-			// materialize the objects to be sorted.
-			LinkedList tmp = new LinkedList();
+      while (m_src.hasNext()) {
+        tmp.add(m_src.next());
+      }
 
-			while (m_src.hasNext()) {
-				tmp.add(m_src.next());
-			}
+      Object[] a = tmp.toArray();
 
-			Object[] a = tmp.toArray();
+      Arrays.sort(a, m_sorter /* .getComparator() */);
 
-			Arrays.sort(a, m_sorter/* .getComparator() */);
+      m_iter = Arrays.asList(a).iterator();
+      m_doneSort = true;
+    }
+  }
 
-			m_iter = Arrays.asList(a).iterator();
-			m_doneSort = true;
-		}
-	}
+  public boolean hasNext() {
+    sort();
 
-	public boolean hasNext() {
-		sort();
-		
-		return m_iter.hasNext();
-	}
+    return m_iter.hasNext();
+  }
 
-	public Object next() {
-		if (hasNext())
-			return m_iter.next();
-		else
-			throw new NoSuchElementException();
-	}
+  public Object next() {
+    if (hasNext()) return m_iter.next();
+    else throw new NoSuchElementException();
+  }
 
-	public void remove() {
-		m_iter.remove();
-	}
+  public void remove() {
+    m_iter.remove();
+  }
 }

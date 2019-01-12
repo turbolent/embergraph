@@ -23,8 +23,9 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.relation.accesspath;
 
+import cutthecrap.utils.striterators.Resolver;
+import cutthecrap.utils.striterators.Striterator;
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IIndex;
@@ -37,272 +38,234 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-import cutthecrap.utils.striterators.Resolver;
-import cutthecrap.utils.striterators.Striterator;
-
 /**
- * A read-only fused view of two access paths obtained for the same
- * {@link IPredicate} constraint in two different databases (this is used for
- * truth maintenance when reading on the union of a focus store and the
- * database).
- * 
- * FIXME review impl and write tests.
- * 
- * FIXME Does not support {@link IPredicate.Annotations#ACCESS_PATH_FILTER}
- * 
+ * A read-only fused view of two access paths obtained for the same {@link IPredicate} constraint in
+ * two different databases (this is used for truth maintenance when reading on the union of a focus
+ * store and the database).
+ *
+ * <p>FIXME review impl and write tests.
+ *
+ * <p>FIXME Does not support {@link IPredicate.Annotations#ACCESS_PATH_FILTER}
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @deprecated by {@link BOp}s using the UNION of JOINs. However, also note that
- *             this is only used for TM and that the focus store is always local
- *             for TM.
+ * @deprecated by {@link BOp}s using the UNION of JOINs. However, also note that this is only used
+ *     for TM and that the focus store is always local for TM.
  */
 public class AccessPathFusedView<E> implements IAccessPath<E> {
 
-    protected static final Logger log = Logger.getLogger(IAccessPath.class);
+  protected static final Logger log = Logger.getLogger(IAccessPath.class);
 
-    private final AccessPath<E> path1;
+  private final AccessPath<E> path1;
 
-    private final AccessPath<E> path2;
+  private final AccessPath<E> path2;
 
-    /**
-     * 
+  /** */
+  public AccessPathFusedView(AccessPath<E> path1, AccessPath<E> path2) {
+
+    if (path1 == null) throw new IllegalArgumentException();
+
+    if (path2 == null) throw new IllegalArgumentException();
+
+    if (path1 == path2) throw new IllegalArgumentException();
+
+    final IPredicate<E> p1 = path1.getPredicate();
+
+    final IPredicate<E> p2 = path2.getPredicate();
+
+    if (p1.arity() != p2.arity()) throw new IllegalArgumentException();
+
+    final int arity = p1.arity();
+
+    for (int i = 0; i < arity; i++) {
+
+      if (!p1.get(i).equals(p2.get(i))) {
+
+        throw new IllegalArgumentException();
+      }
+    }
+
+    this.path1 = path1;
+
+    this.path2 = path2;
+
+    // // assume the flags from the first access path.
+    // this.flags = path1.flags;
+
+  }
+
+  @Override
+  public IPredicate<E> getPredicate() {
+
+    return path1.getPredicate();
+  }
+
+  @Override
+  public boolean isEmpty() {
+
+    return path1.isEmpty() && path2.isEmpty();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Note: You can not get an exact range count for a view.
+   *
+   * @throws UnsupportedOperationException if <code>exact == true</code>.
+   * @todo an exact range count for a view could be written. It would have to use two iterators
+   *     (like a {@link FusedView}) that progressed in sync so that duplicates could be detected.
+   *     This means a full key range scan for both source access paths.
+   */
+  @Override
+  public long rangeCount(boolean exact) {
+
+    if (exact) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    // @todo check for overflow on Long#Max_value
+
+    return path1.rangeCount(exact) + path2.rangeCount(exact);
+  }
+
+  // final private int flags;
+
+  /**
+   * {@inheritDoc}
+   *
+   * @throws UnsupportedOperationException always.
+   * @todo this could be implemented with a variant (or relaxed form) of {@link FusedView}.
+   */
+  @Override
+  public IIndex getIndex() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  //    @Override
+  //    public ITupleIterator<E> rangeIterator() {
+  //
+  //        return rangeIterator(0/* capacity */);
+  //
+  //    }
+
+  private ITupleIterator<E> rangeIterator(final int capacity) {
+
+    /*
+     * assume the flags from the first access path.
      */
-    public AccessPathFusedView(AccessPath<E> path1,
-            AccessPath<E> path2) {
+    return new FusedTupleIterator<ITupleIterator<E>, E>(
+        path1.flags,
+        false, // we do not want to see the deleted tuples.
+        new ITupleIterator[] {
+          path1.rangeIterator(capacity, path1.flags, path1.indexLocalFilter),
+          path2.rangeIterator(capacity, path2.flags, path2.indexLocalFilter)
+        });
+  }
 
-        if (path1 == null)
-            throw new IllegalArgumentException();
+  @Override
+  public IChunkedOrderedIterator<E> iterator() {
 
-        if (path2 == null)
-            throw new IllegalArgumentException();
+    return iterator(0L /* offset */, 0L /* limit */, 0 /* capacity */);
+  }
 
-        if (path1 == path2)
-            throw new IllegalArgumentException();
+  //    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
+  //
+  //        return iterator(0L/* offset */, limit, capacity);
+  //
+  //    }
 
-        final IPredicate<E> p1 = path1.getPredicate();
+  /**
+   * FIXME write tests for optimizations for point tests and small limits. See
+   * {@link AccessPath#iterator(long, long, int) for impl details.
+   *
+   * FIXME handle non-zero offset.
+   */
+  @Override
+  public IChunkedOrderedIterator<E> iterator(final long offset, long limit, int capacity) {
 
-        final IPredicate<E> p2 = path2.getPredicate();
+    if (offset > 0L) throw new UnsupportedOperationException();
 
-        if (p1.arity() != p2.arity())
-            throw new IllegalArgumentException();
+    if (limit == Long.MAX_VALUE) {
 
-        final int arity = p1.arity();
-
-        for (int i = 0; i < arity; i++) {
-
-            if (!p1.get(i).equals(p2.get(i))) {
-
-                throw new IllegalArgumentException();
-
-            }
-
-        }
-
-        this.path1 = path1;
-
-        this.path2 = path2;
-
-        // // assume the flags from the first access path.
-        // this.flags = path1.flags;
-
+      limit = 0L;
     }
 
-    @Override
-    public IPredicate<E> getPredicate() {
+    if (limit > AccessPath.MAX_FULLY_BUFFERED_READ_LIMIT) {
 
-        return path1.getPredicate();
-
+      throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isEmpty() {
-
-        return path1.isEmpty() && path2.isEmpty();
-
-    }
-
-    /**
-     * {@inheritDoc}
-     * <P>
-     * Note: You can not get an exact range count for a view.
-     * 
-     * @throws UnsupportedOperationException
-     *             if <code>exact == true</code>.
-     * 
-     * @todo an exact range count for a view could be written. It would have to
-     *       use two iterators (like a {@link FusedView}) that progressed in
-     *       sync so that duplicates could be detected. This means a full key
-     *       range scan for both source access paths.
+    /*
+     * @todo replace with ChunkedOrderedStriterator.
      */
-    @Override
-    public long rangeCount(boolean exact) {
 
-        if (exact) {
+    if (path1.predicate.isFullyBound(path1.getKeyOrder())) {
 
-            throw new UnsupportedOperationException();
+      if (log.isDebugEnabled()) log.debug("Predicate is fully bound.");
 
-        }
+      /*
+       * If the predicate is fully bound then there can be at most one
+       * element matched so we constrain the limit and capacity
+       * accordingly.
+       */
 
-        // @todo check for overflow on Long#Max_value
+      capacity = 1;
+      limit = 1L;
 
-        return path1.rangeCount(exact) + path2.rangeCount(exact);
+    } else if (limit > 0) {
 
+      /*
+       * A [limit] was specified.
+       *
+       * NOTE: When the [limit] is specified (GT ZERO) we MUST NOT let the
+       * DataService layer iterator read more than [limit] elements at a
+       * time.
+       *
+       * This is part of the contract for REMOVEALL - when you set the
+       * [limit] and specify REMOVEALL you are only removing the 1st
+       * [limit] elements in the traversal order.
+       *
+       * This is also part of the atomic queue operations contract - the
+       * head and tail queue operations function by specifying [limit :=
+       * 1] (tail also specifies the REVERSE traversal option).
+       */
+
+      capacity = (int) limit;
     }
 
-    // final private int flags;
+    final int chunkSize = (capacity == 0 ? IChunkedIterator.DEFAULT_CHUNK_SIZE : capacity);
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     * 
-     * @todo this could be implemented with a variant (or relaxed form) of
-     *       {@link FusedView}.
-     */
-    @Override
-    public IIndex getIndex() {
+    return new ChunkedWrappedIterator<E>(
+        new Striterator(rangeIterator(capacity))
+            .addFilter(
+                new Resolver() {
 
-        throw new UnsupportedOperationException();
+                  private static final long serialVersionUID = 0L;
 
-    }
+                  @Override
+                  protected Object resolve(Object arg0) {
 
-//    @Override
-//    public ITupleIterator<E> rangeIterator() {
-//
-//        return rangeIterator(0/* capacity */);
-//
-//    }
+                    final ITuple tuple = (ITuple) arg0;
 
-    private ITupleIterator<E> rangeIterator(final int capacity) {
+                    return tuple.getObject();
+                  }
+                }),
+        chunkSize,
+        path1.keyOrder,
+        null /* filter */);
+  }
 
-        /*
-         * assume the flags from the first access path.
-         */
-        return new FusedTupleIterator<ITupleIterator<E>, E>(path1.flags,
-                false, // we do not want to see the deleted tuples.
-                new ITupleIterator[] {
-                        path1
-                                .rangeIterator(capacity, path1.flags,
-                                        path1.indexLocalFilter),
-                        path2
-                                .rangeIterator(capacity, path2.flags,
-                                        path2.indexLocalFilter)
-                });
+  @Override
+  public long removeAll() {
 
-    }
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public IChunkedOrderedIterator<E> iterator() {
+  @Override
+  public IKeyOrder<E> getKeyOrder() {
 
-        return iterator(0L/* offset */, 0L/* limit */, 0/* capacity */);
-
-    }
-
-//    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
-//        
-//        return iterator(0L/* offset */, limit, capacity);
-//        
-//    }
-    
-    /**
-     * FIXME write tests for optimizations for point tests and small limits. See
-     * {@link AccessPath#iterator(long, long, int) for impl details.
-     * 
-     * FIXME handle non-zero offset.
-     */
-    @Override
-    public IChunkedOrderedIterator<E> iterator(final long offset, long limit,
-            int capacity) {
-
-        if (offset > 0L)
-            throw new UnsupportedOperationException();
-        
-        if (limit == Long.MAX_VALUE) {
-            
-            limit = 0L;
-            
-        }
-        
-        if (limit > AccessPath.MAX_FULLY_BUFFERED_READ_LIMIT) {
-
-            throw new UnsupportedOperationException();
-            
-        }
-        
-        /*
-         * @todo replace with ChunkedOrderedStriterator.
-         */
-
-        if (path1.predicate.isFullyBound(path1.getKeyOrder())) {
-
-            if(log.isDebugEnabled())
-                log.debug("Predicate is fully bound.");
-            
-            /*
-             * If the predicate is fully bound then there can be at most one
-             * element matched so we constrain the limit and capacity
-             * accordingly.
-             */
-
-            capacity = 1;
-            limit = 1L;
-
-        } else if (limit > 0) {
-
-            /*
-             * A [limit] was specified.
-             * 
-             * NOTE: When the [limit] is specified (GT ZERO) we MUST NOT let the
-             * DataService layer iterator read more than [limit] elements at a
-             * time.
-             * 
-             * This is part of the contract for REMOVEALL - when you set the
-             * [limit] and specify REMOVEALL you are only removing the 1st
-             * [limit] elements in the traversal order.
-             * 
-             * This is also part of the atomic queue operations contract - the
-             * head and tail queue operations function by specifying [limit :=
-             * 1] (tail also specifies the REVERSE traversal option).
-             */
-
-            capacity = (int) limit;
-
-        }
-
-        final int chunkSize = (capacity == 0 ? IChunkedIterator.DEFAULT_CHUNK_SIZE
-                : capacity);
-        
-        return new ChunkedWrappedIterator<E>(new Striterator(
-                rangeIterator(capacity)).addFilter(new Resolver() {
-
-            private static final long serialVersionUID = 0L;
-
-            @Override
-            protected Object resolve(Object arg0) {
-
-                final ITuple tuple = (ITuple) arg0;
-
-                return tuple.getObject();
-
-            }
-        }), chunkSize, path1.keyOrder, null/* filter */);
-
-    }
-
-    @Override
-    public long removeAll() {
-
-        throw new UnsupportedOperationException();
-
-    }
-
-    @Override
-    public IKeyOrder<E> getKeyOrder() {
-
-        return path1.getKeyOrder();
-
-    }
-
+    return path1.getKeyOrder();
+  }
 }

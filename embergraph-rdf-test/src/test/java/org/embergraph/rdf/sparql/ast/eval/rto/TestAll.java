@@ -29,51 +29,40 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("RTO");
+
+    /*
+     * Data driven tests.
      */
-    public TestAll() {
-    }
 
-    /**
-     * @param arg0
+    // LUBM test suite.
+    suite.addTestSuite(TestRTO_LUBM.class);
+
+    // BSBM test suite: TODO Add BSBM BI tests.
+    suite.addTestSuite(TestRTO_BSBM.class);
+
+    // 'barData' test suite (quads mode).
+    suite.addTestSuite(TestRTO_BAR.class);
+
+    /*
+     * FOAF test suite (quads mode).
+     *
+     * TODO This test suite is disabled since queries are not complex enough
+     * to run the RTO (we need at least required joins).
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    //        suite.addTestSuite(TestRTO_FOAF.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("RTO");
-
-        /*
-         * Data driven tests.
-         */
-        
-        // LUBM test suite.
-        suite.addTestSuite(TestRTO_LUBM.class);
-
-        // BSBM test suite: TODO Add BSBM BI tests.
-        suite.addTestSuite(TestRTO_BSBM.class);
-        
-        // 'barData' test suite (quads mode).
-        suite.addTestSuite(TestRTO_BAR.class);
-
-        /*
-         * FOAF test suite (quads mode).
-         * 
-         * TODO This test suite is disabled since queries are not complex enough
-         * to run the RTO (we need at least required joins).
-         */
-//        suite.addTestSuite(TestRTO_FOAF.class);
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

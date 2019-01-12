@@ -24,50 +24,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.concurrent;
 
 /**
- * Thrown if a request would exceed the configured multi-programming capacity of
- * the {@link TxDag}.
- * 
+ * Thrown if a request would exceed the configured multi-programming capacity of the {@link TxDag}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class MultiprogrammingCapacityExceededException extends
-        IllegalStateException {
+public class MultiprogrammingCapacityExceededException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -274491013741163628L;
+  /** */
+  private static final long serialVersionUID = -274491013741163628L;
 
-    /**
-     * 
-     */
-    public MultiprogrammingCapacityExceededException() {
-     
-    }
+  /** */
+  public MultiprogrammingCapacityExceededException() {}
 
-    /**
-     * @param arg0
-     */
-    public MultiprogrammingCapacityExceededException(String arg0) {
-        super(arg0);
-     
-    }
+  /** @param arg0 */
+  public MultiprogrammingCapacityExceededException(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * @param arg0
-     */
-    public MultiprogrammingCapacityExceededException(Throwable arg0) {
-        super(arg0);
-     
-    }
+  /** @param arg0 */
+  public MultiprogrammingCapacityExceededException(Throwable arg0) {
+    super(arg0);
+  }
 
-    /**
-     * @param arg0
-     * @param arg1
-     */
-    public MultiprogrammingCapacityExceededException(String arg0, Throwable arg1) {
-        super(arg0, arg1);
-     
-    }
-
+  /**
+   * @param arg0
+   * @param arg1
+   */
+  public MultiprogrammingCapacityExceededException(String arg0, Throwable arg1) {
+    super(arg0, arg1);
+  }
 }

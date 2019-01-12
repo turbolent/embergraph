@@ -16,90 +16,78 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 /**
- * 
- * This servlet implements a proxy pattern to allow for separation of the 
- * embergraph-gpu package.
- * 
+ * This servlet implements a proxy pattern to allow for separation of the embergraph-gpu package.
  */
 package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.util.ClassPathUtil;
 
 public class MapgraphServletProxy extends EmbergraphRDFServlet {
-	
-	private static final String DEFAULT_PROVIDER = "org.embergraph.gpu.webapp.MapgraphServlet";
-	
-    static private final transient Logger log = Logger.getLogger(MapgraphServletProxy.class);
 
-	/**
-	 * Flag to signify a mapgraph operation.
-	 */
-	public static final transient String ATTR_MAPGRAPH = "mapgraph";
+  private static final String DEFAULT_PROVIDER = "org.embergraph.gpu.webapp.MapgraphServlet";
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+  private static final transient Logger log = Logger.getLogger(MapgraphServletProxy.class);
 
-	public void doPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		resp.sendError(HTTP_NOTIMPLEMENTED /* not implemented */);
-	}
-	
-	public static String getDefaultProvider() {
-		return DEFAULT_PROVIDER;
-	}
-	
-	/**
-     * Factory pattern for a servlet that is discovered at runtime. Either the
-     * real servlet or its base class (the proxy servlet) will be returned by
-     * the factory. This is used by the {@link RESTServlet} to discover,
-     * initialize, delegate, and destroy such servlets using a runtime discovery
-     * pattern.
-     * 
-     * @author beebs
-     * @author bryan
-     */
-	public static class MapgraphServletFactory {
-		
-		public MapgraphServletProxy getInstance() {
-			return getInstance(DEFAULT_PROVIDER);
-		}
-		
-		public MapgraphServletProxy getInstance(final String provider) {
+  /** Flag to signify a mapgraph operation. */
+  public static final transient String ATTR_MAPGRAPH = "mapgraph";
 
-		    return ClassPathUtil.classForName(
-		                provider, // preferredClassName,
-		                MapgraphServletProxy.class, // defaultClass,
-		                MapgraphServletProxy.class, // sharedInterface,
-		                getClass().getClassLoader() // classLoader
-		        );
+  /** */
+  private static final long serialVersionUID = 1L;
 
-//			try {
-//				final Class<?> c = Class.forName(provider);
-//				final Constructor<?> cons = c.getConstructor();
-//				final Object object = cons.newInstance();
-//				final MapgraphServletProxy proxy = (MapgraphServletProxy) object;
-//				return proxy;
-//			} catch (ClassNotFoundException | NoSuchMethodException
-//					| SecurityException | InstantiationException
-//					| IllegalAccessException | IllegalArgumentException
-//					| InvocationTargetException e) {
-//				if (log.isDebugEnabled()) {
-//					log.debug(e.toString());
-//				}
-//				//If we're running without the mapgraph package, just return a proxy.
-//				return new MapgraphServletProxy();
-//				
-//			}
+  public void doPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    resp.sendError(HTTP_NOTIMPLEMENTED /* not implemented */);
+  }
 
-		}
-	}
+  public static String getDefaultProvider() {
+    return DEFAULT_PROVIDER;
+  }
 
+  /**
+   * Factory pattern for a servlet that is discovered at runtime. Either the real servlet or its
+   * base class (the proxy servlet) will be returned by the factory. This is used by the {@link
+   * RESTServlet} to discover, initialize, delegate, and destroy such servlets using a runtime
+   * discovery pattern.
+   *
+   * @author beebs
+   * @author bryan
+   */
+  public static class MapgraphServletFactory {
+
+    public MapgraphServletProxy getInstance() {
+      return getInstance(DEFAULT_PROVIDER);
+    }
+
+    public MapgraphServletProxy getInstance(final String provider) {
+
+      return ClassPathUtil.classForName(
+          provider, // preferredClassName,
+          MapgraphServletProxy.class, // defaultClass,
+          MapgraphServletProxy.class, // sharedInterface,
+          getClass().getClassLoader() // classLoader
+          );
+
+      //			try {
+      //				final Class<?> c = Class.forName(provider);
+      //				final Constructor<?> cons = c.getConstructor();
+      //				final Object object = cons.newInstance();
+      //				final MapgraphServletProxy proxy = (MapgraphServletProxy) object;
+      //				return proxy;
+      //			} catch (ClassNotFoundException | NoSuchMethodException
+      //					| SecurityException | InstantiationException
+      //					| IllegalAccessException | IllegalArgumentException
+      //					| InvocationTargetException e) {
+      //				if (log.isDebugEnabled()) {
+      //					log.debug(e.toString());
+      //				}
+      //				//If we're running without the mapgraph package, just return a proxy.
+      //				return new MapgraphServletProxy();
+      //
+      //			}
+
+    }
+  }
 }

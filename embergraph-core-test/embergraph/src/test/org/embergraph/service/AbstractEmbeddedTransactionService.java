@@ -28,23 +28,17 @@ import java.util.UUID;
 
 /**
  * Concrete implementation for an {@link EmbeddedFederation}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractEmbeddedTransactionService extends
-        DistributedTransactionService {
+public abstract class AbstractEmbeddedTransactionService extends DistributedTransactionService {
 
-    /**
-     * @param properties
-     */
-    public AbstractEmbeddedTransactionService(UUID serviceUUID,
-            Properties properties) {
+  /** @param properties */
+  public AbstractEmbeddedTransactionService(UUID serviceUUID, Properties properties) {
 
-        super(properties);
+    super(properties);
 
-        setServiceUUID(serviceUUID);
-
-    }
-
+    setServiceUUID(serviceUUID);
+  }
 }

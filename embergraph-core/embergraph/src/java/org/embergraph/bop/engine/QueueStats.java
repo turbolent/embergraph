@@ -26,34 +26,29 @@ import java.util.Set;
 
 /**
  * Statistics summary for a work queue feeding a specific operator for a query.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class QueueStats {
 
-    /**
-     * The set of shard identifiers for which there are queued
-     * {@link IChunkMessage}s. The size of this set is also the #of work queues
-     * for the operator). The shard identifier will be <code>-1</code> unless
-     * the operator is sharded and running on a cluster.
-     */
-    public final Set<Integer> shardSet;
+  /**
+   * The set of shard identifiers for which there are queued {@link IChunkMessage}s. The size of
+   * this set is also the #of work queues for the operator). The shard identifier will be <code>-1
+   * </code> unless the operator is sharded and running on a cluster.
+   */
+  public final Set<Integer> shardSet;
 
-    /**
-     * The #of {@link IChunkMessage}s which are queued the operator across the
-     * shards for which that operator has work queued.
-     */
-    public int chunkCount;
+  /**
+   * The #of {@link IChunkMessage}s which are queued the operator across the shards for which that
+   * operator has work queued.
+   */
+  public int chunkCount;
 
-    /**
-     * The #of solutions in those queued chunks.
-     */
-    public int solutionCount;
+  /** The #of solutions in those queued chunks. */
+  public int solutionCount;
 
-    public QueueStats() {
+  public QueueStats() {
 
-        this.shardSet = new HashSet<Integer>();
-        
-    }
-
+    this.shardSet = new HashSet<Integer>();
+  }
 }

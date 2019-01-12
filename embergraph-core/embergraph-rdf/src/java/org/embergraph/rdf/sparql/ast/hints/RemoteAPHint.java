@@ -27,31 +27,30 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint for turning the enabling/disabling the use of remote access paths
- * on a cluster.
- * 
- * TODO Should be allowed on a BGP basis, but only supported right now as a
- * query-wide hint.
+ * Query hint for turning the enabling/disabling the use of remote access paths on a cluster.
+ *
+ * <p>TODO Should be allowed on a BGP basis, but only supported right now as a query-wide hint.
  */
 final class RemoteAPHint extends AbstractBooleanQueryHint {
 
-    protected RemoteAPHint() {
-        super(QueryHints.REMOTE_APS, QueryHints.DEFAULT_REMOTE_APS);
+  protected RemoteAPHint() {
+    super(QueryHints.REMOTE_APS, QueryHints.DEFAULT_REMOTE_APS);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    switch (scope) {
+      case Query:
+        context.remoteAPs = value;
+        return;
+      default:
+        throw new QueryHintException(scope, op, getName(), value);
     }
-
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        switch (scope) {
-        case Query:
-            context.remoteAPs = value;
-            return;
-        default:
-            throw new QueryHintException(scope, op, getName(), value);
-        }
-
-    }
-
+  }
 }

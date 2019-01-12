@@ -27,37 +27,27 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite for RIO extensions but NOT the integration tests.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll_RIO extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll_RIO() {
-    }
+  /** */
+  public TestAll_RIO() {}
 
-    /**
-     * @param name
-     */
-    public TestAll_RIO(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestAll_RIO(String name) {
+    super(name);
+  }
 
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
+    final TestSuite suite = new TestSuite("RIO Extensions");
 
-        final TestSuite suite = new TestSuite("RIO Extensions");
+    suite.addTest(org.embergraph.rdf.rio.ntriples.TestAll.suite());
 
-        suite.addTest(org.embergraph.rdf.rio.ntriples.TestAll.suite());
-
-        return suite;
-    }
-
+    return suite;
+  }
 }

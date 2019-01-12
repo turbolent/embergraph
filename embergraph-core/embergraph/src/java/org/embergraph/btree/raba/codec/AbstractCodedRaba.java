@@ -26,95 +26,77 @@ import java.io.DataInput;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import org.embergraph.btree.raba.AbstractRaba;
 
 /**
- * Abstract implementation throws {@link UnsupportedOperationException} for all
- * mutation operations.
- * 
+ * Abstract implementation throws {@link UnsupportedOperationException} for all mutation operations.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class AbstractCodedRaba implements ICodedRaba {
+public abstract class AbstractCodedRaba implements ICodedRaba {
 
-    protected AbstractCodedRaba() {
-        
-    }
+  protected AbstractCodedRaba() {}
 
-    /**
-     * Implementation is read-only.
-     */
-    @Override
-    final public boolean isReadOnly() {
+  /** Implementation is read-only. */
+  @Override
+  public final boolean isReadOnly() {
 
-        return true;
+    return true;
+  }
 
-    }
+  @Override
+  public final int add(byte[] a) {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    final public int add(byte[] a) {
+  @Override
+  public final int add(byte[] value, int off, int len) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public final int add(DataInput in, int len) throws IOException {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public final void set(int index, byte[] a) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public final String toString() {
+
+    return AbstractRaba.toString(this);
+  }
+
+  /** Basic implementation may be overridden if a faster implementation is available. */
+  @Override
+  public Iterator<byte[]> iterator() {
+
+    return new Iterator<byte[]>() {
+
+      int i = 0;
+
+      @Override
+      public boolean hasNext() {
+
+        return i < size();
+      }
+
+      @Override
+      public byte[] next() {
+
+        if (!hasNext()) throw new NoSuchElementException();
+
+        return get(i++);
+      }
+
+      @Override
+      public void remove() {
+
         throw new UnsupportedOperationException();
-    }
-
-    @Override
-    final public int add(byte[] value, int off, int len) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    final public int add(DataInput in, int len) throws IOException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    final public void set(int index, byte[] a) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    final public String toString() {
-
-        return AbstractRaba.toString(this);
-
-    }
-
-    /**
-     * Basic implementation may be overridden if a faster implementation is
-     * available.
-     */
-    @Override
-    public Iterator<byte[]> iterator() {
-
-        return new Iterator<byte[]>() {
-
-            int i = 0;
-
-            @Override
-            public boolean hasNext() {
-
-                return i < size();
-
-            }
-
-            @Override
-            public byte[] next() {
-
-                if (!hasNext())
-                    throw new NoSuchElementException();
-
-                return get(i++);
-
-            }
-
-            @Override
-            public void remove() {
-
-                throw new UnsupportedOperationException();
-
-            }
-
-        };
-
-    }
-
+      }
+    };
+  }
 }

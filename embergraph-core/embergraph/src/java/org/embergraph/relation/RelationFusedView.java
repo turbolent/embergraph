@@ -1,11 +1,11 @@
 package org.embergraph.relation;
 
+import cutthecrap.utils.striterators.Striterator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
@@ -17,236 +17,202 @@ import org.embergraph.relation.accesspath.AccessPathFusedView;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IKeyOrder;
 
-import cutthecrap.utils.striterators.Striterator;
-
 /**
  * A factory for fused views reading from both of the source {@link IRelation}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <E>
- * 
- * @deprecated by {@link BOp}s using the UNION of JOINs. However, also note that
- *             this is only used for TM and that the focus store is always local
- *             for TM.
+ * @deprecated by {@link BOp}s using the UNION of JOINs. However, also note that this is only used
+ *     for TM and that the focus store is always local for TM.
  */
 public class RelationFusedView<E> implements IRelation<E> {
-    
-	final private IRelation<E> relation1;
-    final private IRelation<E> relation2;
-    
-    public IRelation<E> getRelation1() {
-        
-        return relation1;
-        
-    }
-    
-    public IRelation<E> getRelation2() {
-        
-        return relation2;
-        
-    }
-    
-	// NOP
-    public RelationFusedView<E> init() {
 
-    	return this;
-    	
-    }
-    
-    /**
-     * 
-     * @param relation1
-     * @param relation2
-     */
-    public RelationFusedView(final IRelation<E> relation1,
-            final IRelation<E> relation2) {
+  private final IRelation<E> relation1;
+  private final IRelation<E> relation2;
 
-        if (relation1 == null)
-            throw new IllegalArgumentException();
-        
-        if (relation2 == null)
-            throw new IllegalArgumentException();
+  public IRelation<E> getRelation1() {
 
-        if (relation1 == relation2)
-            throw new IllegalArgumentException("same relation: " + relation1);
-        
-        this.relation1 = relation1;
-        
-        this.relation2 = relation2;
-        
-    }
-    
-//    /**
-//     * Note: You can not compute the exact element count for a fused view since
-//     * there may be duplicate elements in the two source {@link IRelation}s
-//     * (well, you could merge the data in the views into a temporary view but
-//     * that is hardly efficient).
-//     * 
-//     * @throws UnsupportedOperationException
-//     *             if <code>exact == true</code>.
-//     */
-//    public long getElementCount(boolean exact) {
-//
-//        if (exact) {
-//
-//            throw new UnsupportedOperationException();
-//            
-//        }
-//        
-//        return relation1.getElementCount(exact)
-//                + relation2.getElementCount(exact);
-//        
-//    }
+    return relation1;
+  }
 
-    public Set<String> getIndexNames() {
-        
-        final Set<String> set = new HashSet<String>();
-        
-        set.addAll(relation1.getIndexNames());
+  public IRelation<E> getRelation2() {
 
-        set.addAll(relation2.getIndexNames());
-        
-        return set;
-    
-    }
+    return relation2;
+  }
 
-    /**
-     * The value for the first relation in the view.
-     */
-    public IKeyOrder<E> getPrimaryKeyOrder() {
-        
-        return relation1.getPrimaryKeyOrder();
-        
-    }
-    
-    @SuppressWarnings("unchecked")
-    public Iterator<IKeyOrder<E>> getKeyOrders() {
-        
-        return new Striterator(relation1.getKeyOrders()).append(relation2
-                .getKeyOrders());
-        
-    }
+  // NOP
+  public RelationFusedView<E> init() {
 
-    public ExecutorService getExecutorService() {
-        
-        return relation1.getExecutorService();
-        
-    }
-    
-//    public E newElement(final IPredicate<E> predicate,
-//            final IBindingSet bindingSet) {
-//
-//        return relation1.newElement(predicate, bindingSet);
-//
-//    }
-    
-    public E newElement(final List<BOp> a, final IBindingSet bindingSet) {
+    return this;
+  }
 
-        return relation1.newElement(a, bindingSet);
+  /**
+   * @param relation1
+   * @param relation2
+   */
+  public RelationFusedView(final IRelation<E> relation1, final IRelation<E> relation2) {
 
-    }
-    
-    public Class<E> getElementClass() {
-        
-        // @todo could choose the common ancestor Class.  If so, do that in the ctor and validate that one exists.
-        return relation1.getElementClass();
-        
-    }
+    if (relation1 == null) throw new IllegalArgumentException();
 
-    /**
-     * The {@link IIndexManager} for the first relation in the view.
-     */
-    public IIndexManager getIndexManager() {
+    if (relation2 == null) throw new IllegalArgumentException();
 
-        return relation1.getIndexManager();
+    if (relation1 == relation2) throw new IllegalArgumentException("same relation: " + relation1);
 
-    }
+    this.relation1 = relation1;
 
-    /*
-     * Note: These methods can not be implemented for the fused view.
-     */
+    this.relation2 = relation2;
+  }
 
-    /**
-     * Not implemented for a fused view. (The elements of the view can have
-     * different timestamps - this is especially true when one is a
-     * {@link TemporaryStore}.)
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     */
-    public long getTimestamp() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+  //    /**
+  //     * Note: You can not compute the exact element count for a fused view since
+  //     * there may be duplicate elements in the two source {@link IRelation}s
+  //     * (well, you could merge the data in the views into a temporary view but
+  //     * that is hardly efficient).
+  //     *
+  //     * @throws UnsupportedOperationException
+  //     *             if <code>exact == true</code>.
+  //     */
+  //    public long getElementCount(boolean exact) {
+  //
+  //        if (exact) {
+  //
+  //            throw new UnsupportedOperationException();
+  //
+  //        }
+  //
+  //        return relation1.getElementCount(exact)
+  //                + relation2.getElementCount(exact);
+  //
+  //    }
 
-    /**
-     * Not implemented for a fused view.
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     */
-    public String getNamespace() {
+  public Set<String> getIndexNames() {
 
-        throw new UnsupportedOperationException();
+    final Set<String> set = new HashSet<String>();
 
-    }
+    set.addAll(relation1.getIndexNames());
 
-    /**
-     * Not implemented for a fused view.
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     */
-    public String getContainerNamespace() {
-    
-        throw new UnsupportedOperationException();
-        
-    }
+    set.addAll(relation2.getIndexNames());
 
-    public String getFQN(IKeyOrder<? extends E> keyOrder) {
-        throw new UnsupportedOperationException();
-    }
+    return set;
+  }
 
-    public IIndex getIndex(IKeyOrder<? extends E> keyOrder) {
-        throw new UnsupportedOperationException();
-    }
+  /** The value for the first relation in the view. */
+  public IKeyOrder<E> getPrimaryKeyOrder() {
 
-    public IKeyOrder<E> getKeyOrder(IPredicate<E> predicate) {
-        // @todo I am not sure that we really need to cross check this.
-        final IKeyOrder<E> keyOrder1 = relation1.getKeyOrder(predicate);
-        final IKeyOrder<E> keyOrder2 = relation2.getKeyOrder(predicate);
-        if (keyOrder1 == null || keyOrder2 == null)
-            throw new UnsupportedOperationException();
-        if(!keyOrder1.equals(keyOrder2))
-            throw new UnsupportedOperationException();
-        return keyOrder1;
-    }
+    return relation1.getPrimaryKeyOrder();
+  }
 
-    public IAccessPath<E> getAccessPath(final IPredicate<E> predicate) {
+  @SuppressWarnings("unchecked")
+  public Iterator<IKeyOrder<E>> getKeyOrders() {
 
-        return new AccessPathFusedView<E>(
-                (AccessPath<E>)relation1.getAccessPath(predicate),
-                (AccessPath<E>)relation2.getAccessPath(predicate)
-        );
-        
-    }
+    return new Striterator(relation1.getKeyOrders()).append(relation2.getKeyOrders());
+  }
 
-    public IAccessPath<E> getAccessPath(IKeyOrder<E> keyOrderIsIgnored,
-            IPredicate<E> predicate) {
-        return getAccessPath(predicate);
-//        return getAccessPath(null/*localIndexManager*/,keyOrder,predicate);
-    }
+  public ExecutorService getExecutorService() {
 
-    public IAccessPath<E> getAccessPath(IIndexManager localIndexManagerIsIgnored,
-            IKeyOrder<E> keyOrderisIgnored, IPredicate<E> predicate) {
-        return getAccessPath(predicate);
-    }
+    return relation1.getExecutorService();
+  }
 
-//    public IAccessPath<E> getAccessPathForIndexPartition(
-//            IIndexManager indexManager, IPredicate<E> predicate) {
-//        throw new UnsupportedOperationException();        
-//    }
+  //    public E newElement(final IPredicate<E> predicate,
+  //            final IBindingSet bindingSet) {
+  //
+  //        return relation1.newElement(predicate, bindingSet);
+  //
+  //    }
+
+  public E newElement(final List<BOp> a, final IBindingSet bindingSet) {
+
+    return relation1.newElement(a, bindingSet);
+  }
+
+  public Class<E> getElementClass() {
+
+    // @todo could choose the common ancestor Class.  If so, do that in the ctor and validate that
+    // one exists.
+    return relation1.getElementClass();
+  }
+
+  /** The {@link IIndexManager} for the first relation in the view. */
+  public IIndexManager getIndexManager() {
+
+    return relation1.getIndexManager();
+  }
+
+  /*
+   * Note: These methods can not be implemented for the fused view.
+   */
+
+  /**
+   * Not implemented for a fused view. (The elements of the view can have different timestamps -
+   * this is especially true when one is a {@link TemporaryStore}.)
+   *
+   * @throws UnsupportedOperationException always.
+   */
+  public long getTimestamp() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * Not implemented for a fused view.
+   *
+   * @throws UnsupportedOperationException always.
+   */
+  public String getNamespace() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * Not implemented for a fused view.
+   *
+   * @throws UnsupportedOperationException always.
+   */
+  public String getContainerNamespace() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  public String getFQN(IKeyOrder<? extends E> keyOrder) {
+    throw new UnsupportedOperationException();
+  }
+
+  public IIndex getIndex(IKeyOrder<? extends E> keyOrder) {
+    throw new UnsupportedOperationException();
+  }
+
+  public IKeyOrder<E> getKeyOrder(IPredicate<E> predicate) {
+    // @todo I am not sure that we really need to cross check this.
+    final IKeyOrder<E> keyOrder1 = relation1.getKeyOrder(predicate);
+    final IKeyOrder<E> keyOrder2 = relation2.getKeyOrder(predicate);
+    if (keyOrder1 == null || keyOrder2 == null) throw new UnsupportedOperationException();
+    if (!keyOrder1.equals(keyOrder2)) throw new UnsupportedOperationException();
+    return keyOrder1;
+  }
+
+  public IAccessPath<E> getAccessPath(final IPredicate<E> predicate) {
+
+    return new AccessPathFusedView<E>(
+        (AccessPath<E>) relation1.getAccessPath(predicate),
+        (AccessPath<E>) relation2.getAccessPath(predicate));
+  }
+
+  public IAccessPath<E> getAccessPath(IKeyOrder<E> keyOrderIsIgnored, IPredicate<E> predicate) {
+    return getAccessPath(predicate);
+    //        return getAccessPath(null/*localIndexManager*/,keyOrder,predicate);
+  }
+
+  public IAccessPath<E> getAccessPath(
+      IIndexManager localIndexManagerIsIgnored,
+      IKeyOrder<E> keyOrderisIgnored,
+      IPredicate<E> predicate) {
+    return getAccessPath(predicate);
+  }
+
+  //    public IAccessPath<E> getAccessPathForIndexPartition(
+  //            IIndexManager indexManager, IPredicate<E> predicate) {
+  //        throw new UnsupportedOperationException();
+  //    }
 
 }

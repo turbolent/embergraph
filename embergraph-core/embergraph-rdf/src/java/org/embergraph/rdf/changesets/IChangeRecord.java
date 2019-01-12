@@ -20,40 +20,37 @@ package org.embergraph.rdf.changesets;
 import org.embergraph.rdf.spo.ISPO;
 
 /**
- * Provides detailed information on changes made to statements in the database.
- * Change records are generated for any statements that are used in
- * addStatement() or removeStatements() operations on the SAIL connection, as 
- * well as any inferred statements that are added or removed as a result of 
+ * Provides detailed information on changes made to statements in the database. Change records are
+ * generated for any statements that are used in addStatement() or removeStatements() operations on
+ * the SAIL connection, as well as any inferred statements that are added or removed as a result of
  * truth maintenance when the database has inference enabled.
- * <p>
- * See {@link IChangeLog}.
+ *
+ * <p>See {@link IChangeLog}.
  */
 public interface IChangeRecord {
 
-    /**
-     * Return the ISPO that is the focus of this change record.
-     * 
-     * @return
-     *          the {@link ISPO}
-     */
-    ISPO getStatement();
-    
-    /**
-     * Return the change action for this change record.
-     * 
-     * @return
-     *          the {@link ChangeAction}
-     */
-    ChangeAction getChangeAction();
-    
-//    /**
-//     * If the change action is {@link ChangeAction#TYPE_CHANGE}, this method
-//     * will return the old statement type of the focus statement.  The
-//     * new statement type is available on the focus statement itself.
-//     * 
-//     * @return
-//     *          the old statement type of the focus statement
-//     */
-//    StatementEnum getOldStatementType();
-    
+  /**
+   * Return the ISPO that is the focus of this change record.
+   *
+   * @return the {@link ISPO}
+   */
+  ISPO getStatement();
+
+  /**
+   * Return the change action for this change record.
+   *
+   * @return the {@link ChangeAction}
+   */
+  ChangeAction getChangeAction();
+
+  //    /**
+  //     * If the change action is {@link ChangeAction#TYPE_CHANGE}, this method
+  //     * will return the old statement type of the focus statement.  The
+  //     * new statement type is available on the focus statement itself.
+  //     *
+  //     * @return
+  //     *          the old statement type of the focus statement
+  //     */
+  //    StatementEnum getOldStatementType();
+
 }

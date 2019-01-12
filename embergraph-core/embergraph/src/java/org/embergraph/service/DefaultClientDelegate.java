@@ -2,154 +2,123 @@ package org.embergraph.service;
 
 import java.io.IOException;
 import java.util.UUID;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
- * Default {@link IFederationDelegate} implementation used by a standard client.
- * This may be extended or replaced using
- * {@link AbstractClient#setDelegate(IFederationDelegate)}.
- * 
+ * Default {@link IFederationDelegate} implementation used by a standard client. This may be
+ * extended or replaced using {@link AbstractClient#setDelegate(IFederationDelegate)}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DefaultClientDelegate<T> implements IFederationDelegate<T> {
 
-    private static final Logger log = Logger.getLogger(DefaultClientDelegate.class);
-    
-    private final UUID uuid = UUID.randomUUID();
+  private static final Logger log = Logger.getLogger(DefaultClientDelegate.class);
 
-    private final IEmbergraphClient<?> client;
+  private final UUID uuid = UUID.randomUUID();
 
-    private final T clientOrService;
+  private final IEmbergraphClient<?> client;
 
-    /**
-     * 
-     * @param client
-     *            The client (before it connects to the federation).
-     * @param clientOrService
-     *            The client or service connected to the federation. This MAY be
-     *            <code>null</code> but then {@link #getService()} will also
-     *            return <code>null</code>.
-     */
-    public DefaultClientDelegate(final IEmbergraphClient<?> client,
-            final T clientOrService) {
+  private final T clientOrService;
 
-        if (client == null)
-            throw new IllegalArgumentException();
+  /**
+   * @param client The client (before it connects to the federation).
+   * @param clientOrService The client or service connected to the federation. This MAY be <code>
+   *     null</code> but then {@link #getService()} will also return <code>null</code>.
+   */
+  public DefaultClientDelegate(final IEmbergraphClient<?> client, final T clientOrService) {
 
-        if (clientOrService == null)
-            log.warn("Client or service not specified: " + this);
+    if (client == null) throw new IllegalArgumentException();
 
-        this.client = client;
+    if (clientOrService == null) log.warn("Client or service not specified: " + this);
 
-        this.clientOrService = clientOrService;
+    this.client = client;
 
-    }
+    this.clientOrService = clientOrService;
+  }
 
-    public T getService() {
+  public T getService() {
 
-        return clientOrService;
-        
-    }
-    
-    /**
-     * Returns a stable but randomly assigned {@link UUID}.
-     */
-    public UUID getServiceUUID() {
+    return clientOrService;
+  }
 
-        return uuid;
+  /** Returns a stable but randomly assigned {@link UUID}. */
+  public UUID getServiceUUID() {
 
-    }
+    return uuid;
+  }
 
-    /**
-     * Return a stable identifier for this client based on the name of the
-     * implementation class, the hostname, and the hash code of the client
-     * (readable and likely to be unique, but uniqueness is not guaranteed).
-     */
-    public String getServiceName() {
-        
-        return client.getClass().getName() + "@"
-                + AbstractStatisticsCollector.fullyQualifiedHostName + "#"
-                + client.hashCode();
-    
-    }
-    
-    public Class getServiceIface() {
+  /**
+   * Return a stable identifier for this client based on the name of the implementation class, the
+   * hostname, and the hash code of the client (readable and likely to be unique, but uniqueness is
+   * not guaranteed).
+   */
+  public String getServiceName() {
 
-        return client.getClass();
+    return client.getClass().getName()
+        + "@"
+        + AbstractStatisticsCollector.fullyQualifiedHostName
+        + "#"
+        + client.hashCode();
+  }
 
-    }
+  public Class getServiceIface() {
 
-    /**
-     * NOP.
-     */
-    public void reattachDynamicCounters() {
+    return client.getClass();
+  }
 
-    }
+  /** NOP. */
+  public void reattachDynamicCounters() {}
 
-    /**
-     * Returns <code>true</code>.
-     */
-    public boolean isServiceReady() {
+  /** Returns <code>true</code>. */
+  public boolean isServiceReady() {
 
-        return true;
+    return true;
+  }
 
-    }
+  /** NOP */
+  public void didStart() {}
 
-    /**
-     * NOP
-     */
-    public void didStart() {
-        
-    }
+  /** NOP */
+  public void serviceJoin(IService service, UUID serviceUUID) {}
 
-    /** NOP */
-    public void serviceJoin(IService service, UUID serviceUUID) {
+  /** NOP */
+  public void serviceLeave(UUID serviceUUID) {}
 
-    }
+  public AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
+      throws IOException {
 
-    /** NOP */
-    public void serviceLeave(UUID serviceUUID) {
+    return new CounterSetHTTPD(httpdPort, access);
+    //        {
+    //
+    //            public Response doGet(String uri, String method, Properties header,
+    //                    LinkedHashMap<String, Vector<String>> parms)
+    //                    throws Exception {
+    //
+    //                try {
+    //
+    //                    reattachDynamicCounters();
+    //
+    //                } catch (Exception ex) {
+    //
+    //                    /*
+    //                     * Typically this is because the live journal has been
+    //                     * concurrently closed during the request.
+    //                     */
+    //
+    //                    log.warn("Could not re-attach dynamic counters: " + ex, ex);
+    //
+    //                }
+    //
+    //                return super.doGet(uri, method, header, parms);
+    //
+    //            }
+    //
+    //        };
 
-    }
-
-    public AbstractHTTPD newHttpd(final int httpdPort,
-            final ICounterSetAccess access) throws IOException {
-        
-        return new CounterSetHTTPD(httpdPort, access);
-//        {
-//
-//            public Response doGet(String uri, String method, Properties header,
-//                    LinkedHashMap<String, Vector<String>> parms)
-//                    throws Exception {
-//
-//                try {
-//
-//                    reattachDynamicCounters();
-//
-//                } catch (Exception ex) {
-//
-//                    /*
-//                     * Typically this is because the live journal has been
-//                     * concurrently closed during the request.
-//                     */
-//
-//                    log.warn("Could not re-attach dynamic counters: " + ex, ex);
-//
-//                }
-//
-//                return super.doGet(uri, method, header, parms);
-//
-//            }
-//
-//        };
-
-    }
-
+  }
 }

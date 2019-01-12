@@ -30,9 +30,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.service.master.AbstractResourceScanner;
 import org.embergraph.service.master.FileSystemScanner;
@@ -44,97 +42,86 @@ import org.embergraph.util.DaemonThreadFactory;
  */
 public class TestFileSystemScanner extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestFileSystemScanner() {
-    }
+  /** */
+  public TestFileSystemScanner() {}
 
-    public TestFileSystemScanner(String a) {
-        super(a);
-    }
-    
-    public void test_runScanner() throws Exception {
-        
-        final BlockingBuffer<File[]> buffer = new BlockingBuffer<File[]>();
-        
-        final AbstractResourceScanner<File> scanner = FileSystemScanner.newFactory(
-                new File("embergraph/src/java/org/embergraph/service/ndx/pipeline"), new FilenameFilter() {
+  public TestFileSystemScanner(String a) {
+    super(a);
+  }
 
-                    public boolean accept(File dir, String name) {
-                                if (log.isInfoEnabled())
-                                    log.info("Considering: " + dir
-                                            + File.separator + name);
-                        return name.endsWith(".java");
-                    }
+  public void test_runScanner() throws Exception {
 
-                }).newScanner(buffer);
+    final BlockingBuffer<File[]> buffer = new BlockingBuffer<File[]>();
 
-        /*
-         * Drains buffer, verifying chunks are well formed.
-         */
-        class DrainBuffer implements Callable<Long> {
-            
-            public Long call() {
-                
-                long n = 0L;
-                
-                final Iterator<File[]> itr = buffer.iterator();
-                
-                while(itr.hasNext()) {
-                    
-                    final File[] files = itr.next();
-                    
-                    assertNotNull(files);
-                    assertTrue(files.length!=0);
-                    for(File file : files) {
-                        assertNotNull(file);
-                    }
-                    
+    final AbstractResourceScanner<File> scanner =
+        FileSystemScanner.newFactory(
+                new File("embergraph/src/java/org/embergraph/service/ndx/pipeline"),
+                new FilenameFilter() {
+
+                  public boolean accept(File dir, String name) {
                     if (log.isInfoEnabled())
-                        log.info(Arrays.toString(files));
+                      log.info("Considering: " + dir + File.separator + name);
+                    return name.endsWith(".java");
+                  }
+                })
+            .newScanner(buffer);
 
-                    n += files.length;
-                    
-                }
-                
-                return Long.valueOf(n);
-            
-            }
-            
+    /*
+     * Drains buffer, verifying chunks are well formed.
+     */
+    class DrainBuffer implements Callable<Long> {
+
+      public Long call() {
+
+        long n = 0L;
+
+        final Iterator<File[]> itr = buffer.iterator();
+
+        while (itr.hasNext()) {
+
+          final File[] files = itr.next();
+
+          assertNotNull(files);
+          assertTrue(files.length != 0);
+          for (File file : files) {
+            assertNotNull(file);
+          }
+
+          if (log.isInfoEnabled()) log.info(Arrays.toString(files));
+
+          n += files.length;
         }
-        
-        final ExecutorService service = Executors
-                .newSingleThreadExecutor(DaemonThreadFactory
-                        .defaultThreadFactory());
-        try {
 
-            // Wrap computation as FutureTask.
-            final FutureTask<Long> ft = new FutureTask<Long>(new DrainBuffer());
-
-            // buffer will be abort()ed if task fails.
-            buffer.setFuture(ft);
-
-            // start computation
-            service.submit(ft);
-
-            final Long acceptCount = scanner.call();
-            
-            if (log.isInfoEnabled())
-                log.info("Scanner accepted: " + acceptCount + " files");
-
-            // close buffer so task draining the buffer will terminate.
-            buffer.close();
-            
-            // compare the accept count with the drain task count.
-            assertEquals(acceptCount, ft.get());
-            
-        } finally {
-         
-            service.shutdownNow();
-        
-        }
-        
+        return Long.valueOf(n);
+      }
     }
 
+    final ExecutorService service =
+        Executors.newSingleThreadExecutor(DaemonThreadFactory.defaultThreadFactory());
+    try {
+
+      // Wrap computation as FutureTask.
+      final FutureTask<Long> ft = new FutureTask<Long>(new DrainBuffer());
+
+      // buffer will be abort()ed if task fails.
+      buffer.setFuture(ft);
+
+      // start computation
+      service.submit(ft);
+
+      final Long acceptCount = scanner.call();
+
+      if (log.isInfoEnabled()) log.info("Scanner accepted: " + acceptCount + " files");
+
+      // close buffer so task draining the buffer will terminate.
+      buffer.close();
+
+      // compare the accept count with the drain task count.
+      assertEquals(acceptCount, ft.get());
+
+    } finally {
+
+      service.shutdownNow();
+    }
+  }
 }

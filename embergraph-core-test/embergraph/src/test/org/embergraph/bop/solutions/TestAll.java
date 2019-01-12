@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.solutions;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,79 +29,66 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("solution modifier operators");
+
+    /*
+     * Slice
      */
-    public TestAll() {
-        
-    }
 
-    /**
-     * @param arg0
+    // test slice(offset,limit) operator.
+    suite.addTestSuite(TestSliceOp.class);
+
+    /*
+     * Distinct
      */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
+    // test distinct operator for binding sets using ConcurrentHashMap
+    suite.addTestSuite(TestJVMDistinctBindingSets.class);
+
+    // test distinct operator for binding sets using HTree.
+    suite.addTestSuite(TestHTreeDistinctBindingSets.class);
+
+    /*
+     * Sorting
      */
-    public static Test suite()
-    {
 
-        final TestSuite suite = new TestSuite("solution modifier operators");
-        
-        /*
-         * Slice
-         */
-        
-        // test slice(offset,limit) operator.
-        suite.addTestSuite(TestSliceOp.class);
+    // Test suite for comparator for IVs used in ORDER BY implementations.
+    suite.addTestSuite(TestIVComparator.class);
 
-        /*
-         * Distinct
-         */
-        
-        // test distinct operator for binding sets using ConcurrentHashMap
-        suite.addTestSuite(TestJVMDistinctBindingSets.class);
+    // in-memory sort operator.
+    suite.addTestSuite(TestMemorySortOp.class);
 
-        // test distinct operator for binding sets using HTree.
-        suite.addTestSuite(TestHTreeDistinctBindingSets.class);
+    /*
+     * Aggregation
+     */
 
-        /*
-         * Sorting
-         */
-        
-        // Test suite for comparator for IVs used in ORDER BY implementations.
-        suite.addTestSuite(TestIVComparator.class);
-        
-        // in-memory sort operator.
-        suite.addTestSuite(TestMemorySortOp.class);
+    // Validation logic for aggregation operators.
+    suite.addTestSuite(TestGroupByState.class);
 
-        /*
-         * Aggregation
-         */
-        
-        // Validation logic for aggregation operators.
-        suite.addTestSuite(TestGroupByState.class);
-        
-        // Test suite for rewrites of the SELECT and HAVING clauses.
-        suite.addTestSuite(TestGroupByRewriter.class);
-        
-        // In-memory generalized aggregation operator
-        suite.addTestSuite(TestMemoryGroupByOp.class);
+    // Test suite for rewrites of the SELECT and HAVING clauses.
+    suite.addTestSuite(TestGroupByRewriter.class);
 
-        // FIXME Enable test for Native memory generalized aggregation operator
-//        suite.addTestSuite(TestHTreeGroupByOp.class);
+    // In-memory generalized aggregation operator
+    suite.addTestSuite(TestMemoryGroupByOp.class);
 
-        // Pipelined aggregation operator.
-        suite.addTestSuite(TestPipelinedAggregationOp.class);
+    // FIXME Enable test for Native memory generalized aggregation operator
+    //        suite.addTestSuite(TestHTreeGroupByOp.class);
 
-        return suite;
-        
-    }
-    
+    // Pipelined aggregation operator.
+    suite.addTestSuite(TestPipelinedAggregationOp.class);
+
+    return suite;
+  }
 }

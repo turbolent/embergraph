@@ -27,8 +27,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.log4j.Logger;
+import org.embergraph.gom.gpo.BasicSkin;
+import org.embergraph.gom.gpo.GPO;
+import org.embergraph.gom.gpo.IGPO;
+import org.embergraph.gom.gpo.ILinkSet;
+import org.embergraph.gom.om.ObjectMgrModel;
+import org.embergraph.gom.skin.GenericSkinRegistry;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -36,419 +41,380 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.gom.gpo.BasicSkin;
-import org.embergraph.gom.gpo.GPO;
-import org.embergraph.gom.gpo.IGPO;
-import org.embergraph.gom.gpo.ILinkSet;
-import org.embergraph.gom.om.ObjectMgrModel;
-import org.embergraph.gom.skin.GenericSkinRegistry;
-
 /**
  * Base test suite for the embedded (local) GOM.
- * 
+ *
  * @author Martyn Cutcher
  */
 public class TestGOM extends ProxyGOMTest {
 
-    private static final Logger log = Logger.getLogger(TestGOM.class);
+  private static final Logger log = Logger.getLogger(TestGOM.class);
 
-    /**
-	 * Simple test loads data from a file and navigates around
-	 */
-	public void testSimpleDirectData() throws IOException, RDFParseException, RepositoryException {
+  /** Simple test loads data from a file and navigates around */
+  public void testSimpleDirectData() throws IOException, RDFParseException, RepositoryException {
 
-        final URL n3 = TestGOM.class.getResource("testgom.n3");
+    final URL n3 = TestGOM.class.getResource("testgom.n3");
 
-        // print(n3);
-		((IGOMProxy) m_delegate).load(n3, RDFFormat.N3);
+    // print(n3);
+    ((IGOMProxy) m_delegate).load(n3, RDFFormat.N3);
 
-        final ValueFactory vf = om.getValueFactory();
+    final ValueFactory vf = om.getValueFactory();
 
-        final URI s = vf.createURI("gpo:#root");
+    final URI s = vf.createURI("gpo:#root");
 
-        final URI rootAttr = vf.createURI("attr:/root");
-        om.getGPO(s).getValue(rootAttr);
-        final URI rootId = (URI) om.getGPO(s).getValue(rootAttr);
+    final URI rootAttr = vf.createURI("attr:/root");
+    om.getGPO(s).getValue(rootAttr);
+    final URI rootId = (URI) om.getGPO(s).getValue(rootAttr);
 
-        final IGPO rootGPO = om.getGPO(rootId);
+    final IGPO rootGPO = om.getGPO(rootId);
 
-        if (log.isInfoEnabled()) {
-            log.info("--------\n" + rootGPO.pp() + "\n"
-                    + rootGPO.getType().pp() + "\n"
-                    + rootGPO.getType().getStatements());
-        }
-
-        final URI typeName = vf.createURI("attr:/type#name");
-
-        assertTrue("Company".equals(rootGPO.getType().getValue(typeName)
-                .stringValue()));
-
-        // find set of workers for the Company
-        final URI worksFor = vf.createURI("attr:/employee#worksFor");
-        final ILinkSet linksIn = rootGPO.getLinksIn(worksFor);
-        final Iterator<IGPO> workers = linksIn.iterator();
-        while (workers.hasNext()) {
-            final IGPO tmp = workers.next();
-            if (log.isInfoEnabled())
-                log.info("Returned: " + tmp.pp());
-        }
-
+    if (log.isInfoEnabled()) {
+      log.info(
+          "--------\n"
+              + rootGPO.pp()
+              + "\n"
+              + rootGPO.getType().pp()
+              + "\n"
+              + rootGPO.getType().getStatements());
     }
 
-    /**
-     * Creates a simple GPO within a transaction. Commits and and checks
-     * materialization
-     */
-    public void testSimpleCreate() throws RepositoryException, IOException {
+    final URI typeName = vf.createURI("attr:/type#name");
 
-        final ValueFactory vf = om.getValueFactory();
+    assertTrue("Company".equals(rootGPO.getType().getValue(typeName).stringValue()));
 
-        final URI keyname = vf.createURI("attr:/test#name");
-        final Resource id = vf.createURI("gpo:test#1");
-//        om.checkValue(id); // ensure is imported!
-
-        final int transCounter = om.beginNativeTransaction();
-        try {
-            final IGPO gpo = om.getGPO(id);
-
-            gpo.setValue(keyname, vf.createLiteral("Martyn"));
-
-            om.commitNativeTransaction(transCounter);
-        } catch (Throwable t) {
-            om.rollbackNativeTransaction();
-
-            throw new RuntimeException(t);
-        }
-
-        // clear cached data
-        ((ObjectMgrModel) om).clearCache();
-
-        // reads from backing journal
-        final IGPO gpo = om.getGPO(vf.createURI("gpo:test#1"));
-
-        assertTrue("Martyn".equals(gpo.getValue(keyname).stringValue()));
-
+    // find set of workers for the Company
+    final URI worksFor = vf.createURI("attr:/employee#worksFor");
+    final ILinkSet linksIn = rootGPO.getLinksIn(worksFor);
+    final Iterator<IGPO> workers = linksIn.iterator();
+    while (workers.hasNext()) {
+      final IGPO tmp = workers.next();
+      if (log.isInfoEnabled()) log.info("Returned: " + tmp.pp());
     }
-	
-	/**
-	 * Checks getPropertyURIs of committed  GPO
-	 */
-	public void testSimpleProperties() throws RepositoryException, IOException {
+  }
 
-        final ValueFactory vf = om.getValueFactory();
+  /** Creates a simple GPO within a transaction. Commits and and checks materialization */
+  public void testSimpleCreate() throws RepositoryException, IOException {
 
-        final URI keyname = vf.createURI("attr:/test#name");
-        final URI keyage = vf.createURI("attr:/test#age");
-        final URI keyfriend = vf.createURI("attr:/test#friend");
-        final Resource id = vf.createURI("gpo:test#1");
-        final Resource id2 = vf.createURI("gpo:test#2");
-//        om.checkValue(id); // ensure is imported!
-//        om.checkValue(id2); // ensure is imported!
+    final ValueFactory vf = om.getValueFactory();
 
-        final int transCounter = om.beginNativeTransaction();
-        try {
-            final IGPO gpo = om.getGPO(id);
+    final URI keyname = vf.createURI("attr:/test#name");
+    final Resource id = vf.createURI("gpo:test#1");
+    //        om.checkValue(id); // ensure is imported!
 
-            gpo.setValue(keyname, vf.createLiteral("Martyn"));
-            gpo.setValue(keyage, vf.createLiteral(53));
+    final int transCounter = om.beginNativeTransaction();
+    try {
+      final IGPO gpo = om.getGPO(id);
 
-            Iterator<URI> uris = ((GPO) gpo).getPropertyURIs();
-            // should be two
-            uris.next();
-            uris.next();
-            // .. and no more
-            assertFalse(uris.hasNext());
+      gpo.setValue(keyname, vf.createLiteral("Martyn"));
 
-            // add simple reverse link
-            om.getGPO(id2).setValue(keyfriend, id);
+      om.commitNativeTransaction(transCounter);
+    } catch (Throwable t) {
+      om.rollbackNativeTransaction();
 
-            om.commitNativeTransaction(transCounter);
-
-            uris = ((GPO) gpo).getPropertyURIs();
-            // should be two
-            uris.next();
-            uris.next();
-            // .. and no more
-            assertFalse(uris.hasNext());
-        } catch (Throwable t) {
-            om.rollbackNativeTransaction();
-
-            throw new RuntimeException(t);
-        }
-
-        // clear cached data
-        ((ObjectMgrModel) om).clearCache();
-
-        {
-            // reads from backing journal
-            final IGPO gpo = om.getGPO(vf.createURI("gpo:test#1"));
-            final Iterator<URI> uris = ((GPO) gpo).getPropertyURIs();
-            // should be two
-            uris.next();
-            uris.next();
-            // .. and no more
-            assertFalse(uris.hasNext());
-        }
-
+      throw new RuntimeException(t);
     }
 
-    public void testSimpleReverseLinkProperties() throws RepositoryException,
-            IOException {
+    // clear cached data
+    ((ObjectMgrModel) om).clearCache();
 
-        final ValueFactory vf = om.getValueFactory();
+    // reads from backing journal
+    final IGPO gpo = om.getGPO(vf.createURI("gpo:test#1"));
 
-        final URI keyname = vf.createURI("attr:/test#name");
-        final URI keyage = vf.createURI("attr:/test#age");
-        final URI parent = vf.createURI("attr:/test#parent");
-        final URI parent2 = vf.createURI("attr:/test#parent2");
-        final URI nme = vf.createURI("gpo:ROOT");
+    assertTrue("Martyn".equals(gpo.getValue(keyname).stringValue()));
+  }
 
-        final int transCounter = om.beginNativeTransaction();
-        try {
-            IGPO gpo = om.createGPO();
+  /** Checks getPropertyURIs of committed GPO */
+  public void testSimpleProperties() throws RepositoryException, IOException {
 
-            gpo.setValue(keyname, vf.createLiteral("Martyn"));
-            gpo.setValue(keyage, vf.createLiteral(53));
+    final ValueFactory vf = om.getValueFactory();
 
-            om.save(nme, gpo.getId());
+    final URI keyname = vf.createURI("attr:/test#name");
+    final URI keyage = vf.createURI("attr:/test#age");
+    final URI keyfriend = vf.createURI("attr:/test#friend");
+    final Resource id = vf.createURI("gpo:test#1");
+    final Resource id2 = vf.createURI("gpo:test#2");
+    //        om.checkValue(id); // ensure is imported!
+    //        om.checkValue(id2); // ensure is imported!
 
-            om.createGPO().setValue(parent, gpo.getId());
-            om.createGPO().setValue(parent, gpo.getId());
-            om.createGPO().setValue(parent, gpo.getId());
-            om.createGPO().setValue(parent2, gpo.getId());
-            om.createGPO().setValue(parent2, gpo.getId());
-            om.createGPO().setValue(parent2, gpo.getId());
+    final int transCounter = om.beginNativeTransaction();
+    try {
+      final IGPO gpo = om.getGPO(id);
 
-            om.commitNativeTransaction(transCounter);
-        } catch (Throwable t) {
-            om.rollbackNativeTransaction();
+      gpo.setValue(keyname, vf.createLiteral("Martyn"));
+      gpo.setValue(keyage, vf.createLiteral(53));
 
-            throw new RuntimeException(t);
-        }
+      Iterator<URI> uris = ((GPO) gpo).getPropertyURIs();
+      // should be two
+      uris.next();
+      uris.next();
+      // .. and no more
+      assertFalse(uris.hasNext());
 
-        // clear cached data
-        ((ObjectMgrModel) om).clearCache();
+      // add simple reverse link
+      om.getGPO(id2).setValue(keyfriend, id);
 
-        IGPO gpo = om.getGPO((Resource) om.recall(nme)); // reads from
-                                                         // backing journal
+      om.commitNativeTransaction(transCounter);
 
-        Map<URI, Long> map = gpo.getReverseLinkProperties();
+      uris = ((GPO) gpo).getPropertyURIs();
+      // should be two
+      uris.next();
+      uris.next();
+      // .. and no more
+      assertFalse(uris.hasNext());
+    } catch (Throwable t) {
+      om.rollbackNativeTransaction();
 
-        // there should be 3 - the two parent properties plus the name
-        // manager
-        assertTrue(map.size() == 3);
-
-    }
-    
-    /**
-     * SimpleClassObjects tests navigation around a constructed network of GPOs.
-     * First some class objects are created, with superclass and metaclass data.
-     * Then instances of the classes are written. The purpose of this test is
-     * two fold: 1) To exercise the developing system and 2) To explore and
-     * develop utilities around the GPO usage.
-     * 
-     * Class: Person Class: Employee Class: Manager Class: Company
-     */
-    public void testSimpleClassObjects() throws RepositoryException,
-            IOException {
-
-        final ValueFactory vf = om.getValueFactory();
-
-        // This is the only required root!
-        final URI clssclssName = vf.createURI("attr:/classClass");
-        final URI descr = vf.createURI("attr:/classClass#description");
-
-        final URI superClss = vf.createURI("attr:/class#super");
-        final URI className = vf.createURI("attr:/class#name");
-
-        final URI gpoType = vf.createURI("attr:/gpo#type");
-
-        final int transCounter = om.beginNativeTransaction();
-        try {
-            // Object ClassClass provides hook into class hierarchy and
-            // thence
-            // into associated instances
-
-            final IGPO clssclss = om.createGPO();
-
-            om.save(clssclssName, clssclss.getId()); // remember the
-                                                     // ClassClass
-
-            clssclss.setValue(descr,
-                    vf.createLiteral("The class of all classes"));
-
-            final IGPO clssPerson = om.createGPO();
-            clssPerson.setValue(gpoType, clssclss.getId());
-            clssPerson.setValue(className, vf.createLiteral("Person"));
-
-            final IGPO clssEmployee = om.createGPO();
-            clssEmployee.setValue(gpoType, clssclss.getId());
-            clssEmployee.setValue(superClss, clssPerson.getId());
-            clssEmployee.setValue(className, vf.createLiteral("Employee"));
-
-            om.commitNativeTransaction(transCounter);
-        } catch (Throwable t) {
-            om.rollbackNativeTransaction();
-
-            throw new RuntimeException(t);
-        }
-
-        // check state post commit : TODO Tests what? Just iterating...
-        {
-            final IGPO clssclss = om.recallAsGPO(clssclssName);
-            final Iterator<IGPO> classes = clssclss.getLinksIn(gpoType)
-                    .iterator();
-            while (classes.hasNext()) {
-                final IGPO cls = classes.next();
-                if (log.isInfoEnabled())
-                    log.info("Class: " + cls.pp());
-            }
-        }
-
-        // clear cached data and run again rebuilding
-        ((ObjectMgrModel) om).clearCache();
-        {
-            final IGPO clssclss = om.recallAsGPO(clssclssName);
-            final Iterator<IGPO> classes = clssclss.getLinksIn(gpoType)
-                    .iterator();
-            while (classes.hasNext()) {
-                final IGPO clss = classes.next();
-                if (log.isInfoEnabled())
-                    log.info("Class: " + clss.pp());
-            }
-        }
-
+      throw new RuntimeException(t);
     }
 
-    /**
-     * This tests both the usability and functionality of the Skinning mechanism
-     */
-    public void testBasicSkin() {
+    // clear cached data
+    ((ObjectMgrModel) om).clearCache();
 
-        GenericSkinRegistry.registerClass(BasicSkin.class);
+    {
+      // reads from backing journal
+      final IGPO gpo = om.getGPO(vf.createURI("gpo:test#1"));
+      final Iterator<URI> uris = ((GPO) gpo).getPropertyURIs();
+      // should be two
+      uris.next();
+      uris.next();
+      // .. and no more
+      assertFalse(uris.hasNext());
+    }
+  }
 
-        final GPO gpo = (GPO) om.createGPO();
+  public void testSimpleReverseLinkProperties() throws RepositoryException, IOException {
 
-        final BasicSkin skin = (BasicSkin) gpo.getSkin(BasicSkin.class);
+    final ValueFactory vf = om.getValueFactory();
 
-        assertTrue(skin == gpo.getSkin(BasicSkin.class)); // check identity
+    final URI keyname = vf.createURI("attr:/test#name");
+    final URI keyage = vf.createURI("attr:/test#age");
+    final URI parent = vf.createURI("attr:/test#parent");
+    final URI parent2 = vf.createURI("attr:/test#parent2");
+    final URI nme = vf.createURI("gpo:ROOT");
 
-        skin.setValue("attr:#name", "Martyn");
+    final int transCounter = om.beginNativeTransaction();
+    try {
+      IGPO gpo = om.createGPO();
 
+      gpo.setValue(keyname, vf.createLiteral("Martyn"));
+      gpo.setValue(keyage, vf.createLiteral(53));
+
+      om.save(nme, gpo.getId());
+
+      om.createGPO().setValue(parent, gpo.getId());
+      om.createGPO().setValue(parent, gpo.getId());
+      om.createGPO().setValue(parent, gpo.getId());
+      om.createGPO().setValue(parent2, gpo.getId());
+      om.createGPO().setValue(parent2, gpo.getId());
+      om.createGPO().setValue(parent2, gpo.getId());
+
+      om.commitNativeTransaction(transCounter);
+    } catch (Throwable t) {
+      om.rollbackNativeTransaction();
+
+      throw new RuntimeException(t);
     }
 
-    /**
-     * Throughput test for updates.
-     */
-    public void testUpdateThroughput() throws RepositoryException, IOException {
+    // clear cached data
+    ((ObjectMgrModel) om).clearCache();
 
-        final ValueFactory vf = om.getValueFactory();
+    IGPO gpo = om.getGPO((Resource) om.recall(nme)); // reads from
+    // backing journal
 
-        final int transCounter = om.beginNativeTransaction();
-        final URI name = vf.createURI("attr:/test#name");
-        final URI ni = vf.createURI("attr:/test#ni");
-        final URI age = vf.createURI("attr:/test#age");
-        final URI mob = vf.createURI("attr:/test#mobile");
-        final URI gender = vf.createURI("attr:/test#mail");
-        try {
-            // warmup
-            for (int i = 0; i < 10000; i++) {
-                final IGPO tst = om.createGPO();
-                tst.setValue(name, vf.createLiteral("Test" + i));
-            }
+    Map<URI, Long> map = gpo.getReverseLinkProperties();
 
-            // go for it
-            final long start = System.currentTimeMillis();
+    // there should be 3 - the two parent properties plus the name
+    // manager
+    assertTrue(map.size() == 3);
+  }
 
-            // The LocalGOMTestcase can handle much larger tests if
-            //	incremental updating is enabled
-            final int creates = 50000;
-            for (int i = 0; i < creates; i++) {
-                final IGPO tst = om.createGPO();
-                tst.setValue(name, vf.createLiteral("Name" + i));
-                tst.setValue(ni, vf.createLiteral("NI" + i));
-                tst.setValue(age, vf.createLiteral(i));
-                tst.setValue(mob, vf.createLiteral("0123-" + i));
-                tst.setValue(gender, vf.createLiteral(1 % 3 == 0));
-            }
+  /**
+   * SimpleClassObjects tests navigation around a constructed network of GPOs. First some class
+   * objects are created, with superclass and metaclass data. Then instances of the classes are
+   * written. The purpose of this test is two fold: 1) To exercise the developing system and 2) To
+   * explore and develop utilities around the GPO usage.
+   *
+   * <p>Class: Person Class: Employee Class: Manager Class: Company
+   */
+  public void testSimpleClassObjects() throws RepositoryException, IOException {
 
-            om.commitNativeTransaction(transCounter);
+    final ValueFactory vf = om.getValueFactory();
 
-            final long duration = (System.currentTimeMillis() - start);
-            
-            final long objectsPS = creates * 1000 / duration;
-            final long statementsPS = objectsPS * 5;
+    // This is the only required root!
+    final URI clssclssName = vf.createURI("attr:/classClass");
+    final URI descr = vf.createURI("attr:/classClass#description");
 
-            /*
-             * Note that this is a conservative estimate for statements per
-             * second since there is only one per object, requiring the object
-             * URI and the Value to be added.
-             */
-            if (log.isInfoEnabled()) {
+    final URI superClss = vf.createURI("attr:/class#super");
+    final URI className = vf.createURI("attr:/class#name");
 
-                log.info("Creation rate of " + objectsPS
-                        + " objects per second");
+    final URI gpoType = vf.createURI("attr:/gpo#type");
 
-                log.info("Creation rate of " + statementsPS
-                        + " statements per second");
+    final int transCounter = om.beginNativeTransaction();
+    try {
+      // Object ClassClass provides hook into class hierarchy and
+      // thence
+      // into associated instances
 
-            }
-            
-            // Anything less than 5000 statements per second is a failure
-            assertTrue(statementsPS > 5000);
-        } catch (Throwable t) {
-            // t.printStackTrace();
+      final IGPO clssclss = om.createGPO();
 
-            om.rollbackNativeTransaction();
+      om.save(clssclssName, clssclss.getId()); // remember the
+      // ClassClass
 
-            throw new RuntimeException(t);
+      clssclss.setValue(descr, vf.createLiteral("The class of all classes"));
+
+      final IGPO clssPerson = om.createGPO();
+      clssPerson.setValue(gpoType, clssclss.getId());
+      clssPerson.setValue(className, vf.createLiteral("Person"));
+
+      final IGPO clssEmployee = om.createGPO();
+      clssEmployee.setValue(gpoType, clssclss.getId());
+      clssEmployee.setValue(superClss, clssPerson.getId());
+      clssEmployee.setValue(className, vf.createLiteral("Employee"));
+
+      om.commitNativeTransaction(transCounter);
+    } catch (Throwable t) {
+      om.rollbackNativeTransaction();
+
+      throw new RuntimeException(t);
+    }
+
+    // check state post commit : TODO Tests what? Just iterating...
+    {
+      final IGPO clssclss = om.recallAsGPO(clssclssName);
+      final Iterator<IGPO> classes = clssclss.getLinksIn(gpoType).iterator();
+      while (classes.hasNext()) {
+        final IGPO cls = classes.next();
+        if (log.isInfoEnabled()) log.info("Class: " + cls.pp());
+      }
+    }
+
+    // clear cached data and run again rebuilding
+    ((ObjectMgrModel) om).clearCache();
+    {
+      final IGPO clssclss = om.recallAsGPO(clssclssName);
+      final Iterator<IGPO> classes = clssclss.getLinksIn(gpoType).iterator();
+      while (classes.hasNext()) {
+        final IGPO clss = classes.next();
+        if (log.isInfoEnabled()) log.info("Class: " + clss.pp());
+      }
+    }
+  }
+
+  /** This tests both the usability and functionality of the Skinning mechanism */
+  public void testBasicSkin() {
+
+    GenericSkinRegistry.registerClass(BasicSkin.class);
+
+    final GPO gpo = (GPO) om.createGPO();
+
+    final BasicSkin skin = (BasicSkin) gpo.getSkin(BasicSkin.class);
+
+    assertTrue(skin == gpo.getSkin(BasicSkin.class)); // check identity
+
+    skin.setValue("attr:#name", "Martyn");
+  }
+
+  /** Throughput test for updates. */
+  public void testUpdateThroughput() throws RepositoryException, IOException {
+
+    final ValueFactory vf = om.getValueFactory();
+
+    final int transCounter = om.beginNativeTransaction();
+    final URI name = vf.createURI("attr:/test#name");
+    final URI ni = vf.createURI("attr:/test#ni");
+    final URI age = vf.createURI("attr:/test#age");
+    final URI mob = vf.createURI("attr:/test#mobile");
+    final URI gender = vf.createURI("attr:/test#mail");
+    try {
+      // warmup
+      for (int i = 0; i < 10000; i++) {
+        final IGPO tst = om.createGPO();
+        tst.setValue(name, vf.createLiteral("Test" + i));
+      }
+
+      // go for it
+      final long start = System.currentTimeMillis();
+
+      // The LocalGOMTestcase can handle much larger tests if
+      //	incremental updating is enabled
+      final int creates = 50000;
+      for (int i = 0; i < creates; i++) {
+        final IGPO tst = om.createGPO();
+        tst.setValue(name, vf.createLiteral("Name" + i));
+        tst.setValue(ni, vf.createLiteral("NI" + i));
+        tst.setValue(age, vf.createLiteral(i));
+        tst.setValue(mob, vf.createLiteral("0123-" + i));
+        tst.setValue(gender, vf.createLiteral(1 % 3 == 0));
+      }
+
+      om.commitNativeTransaction(transCounter);
+
+      final long duration = (System.currentTimeMillis() - start);
+
+      final long objectsPS = creates * 1000 / duration;
+      final long statementsPS = objectsPS * 5;
+
+      /*
+       * Note that this is a conservative estimate for statements per
+       * second since there is only one per object, requiring the object
+       * URI and the Value to be added.
+       */
+      if (log.isInfoEnabled()) {
+
+        log.info("Creation rate of " + objectsPS + " objects per second");
+
+        log.info("Creation rate of " + statementsPS + " statements per second");
+      }
+
+      // Anything less than 5000 statements per second is a failure
+      assertTrue(statementsPS > 5000);
+    } catch (Throwable t) {
+      // t.printStackTrace();
+
+      om.rollbackNativeTransaction();
+
+      throw new RuntimeException(t);
+    }
+  }
+
+  /**
+   * A simple test to compare native String interns with own-rolled ConcurrentHashMap based
+   * dictionary. Figures suggest that the ConcurrentHashMap is a little slower building the table
+   * but then around 10 times faster processing the lookup.
+   *
+   * <p>The intention is to store such an "interned" String reference in the GPOs and to perform a
+   * sequential search for property keys rather than use a map. This will minimise memory overhead
+   * and object creation times.
+   */
+  public void notestPerfStringIntern() {
+    final Random r = new Random();
+    final int limit = 10000;
+    final ArrayList<String> strs = new ArrayList<String>(limit);
+    for (int i = 0; i < limit; i++) {
+      strs.add("url://this/is/a/long/string/" + (987654 + r.nextInt(1000000)));
+    }
+    for (int i = 0; i < 20; i++) {
+      final long start = System.nanoTime();
+      final Iterator<String> striter = strs.iterator();
+      while (striter.hasNext()) {
+        assertTrue(striter.next().intern() != null); // just to keep find bugs happy
+      }
+      final long end = System.nanoTime();
+      if (log.isInfoEnabled()) log.info("Interns#" + i + ":" + (end - start));
+    }
+    final ConcurrentHashMap<String, String> dict = new ConcurrentHashMap<String, String>();
+    for (int i = 0; i < 20; i++) {
+      final long start = System.nanoTime();
+      final Iterator<String> striter = strs.iterator();
+      while (striter.hasNext()) {
+        final String str = striter.next();
+        final String ret = dict.get(str);
+        if (ret == null) {
+          dict.put(str, str);
         }
-
-	}
-	
-	/**
-	 * A simple test to compare native String interns with own-rolled ConcurrentHashMap based
-	 * dictionary.  Figures suggest that the ConcurrentHashMap is a little slower building the
-	 * table but then around 10 times faster processing the lookup.
-	 * 
-	 * The intention is to store such an "interned" String reference in the GPOs and to perform
-	 * a sequential search for property keys rather than use a map.  This will minimise memory
-	 * overhead and object creation times.
-	 */
-	public void notestPerfStringIntern() {
-		final Random r = new Random();
-		final int limit = 10000;
-		final ArrayList<String> strs = new ArrayList<String>(limit);
-        for (int i = 0; i < limit; i++) {
-            strs.add("url://this/is/a/long/string/"
-                    + (987654 + r.nextInt(1000000)));
-        }
-		for (int i = 0; i < 20; i++) {
-			final long start = System.nanoTime();
-			final Iterator<String> striter = strs.iterator();
-			while (striter.hasNext()) {
-				assertTrue(striter.next().intern() != null); // just to keep find bugs happy
-			}
-            final long end = System.nanoTime();
-            if (log.isInfoEnabled())
-                log.info("Interns#" + i + ":" + (end - start));
-        }
-		final ConcurrentHashMap<String, String> dict = new ConcurrentHashMap<String, String>();
-		for (int i = 0; i < 20; i++) {
-			final long start = System.nanoTime();
-			final Iterator<String> striter = strs.iterator();
-			while (striter.hasNext()) {
-				final String str = striter.next();
-				final String ret = dict.get(str);
-				if (ret == null) {
-					dict.put(str, str);		
-				}
-			}
-            final long end = System.nanoTime();
-            if (log.isInfoEnabled())
-                log.info("HashMap#" + i + ":" + (end - start));
-        }
-		
-	}
-
+      }
+      final long end = System.nanoTime();
+      if (log.isInfoEnabled()) log.info("HashMap#" + i + ":" + (end - start));
+    }
+  }
 }

@@ -2,40 +2,31 @@ package org.embergraph.bop.fed;
 
 import java.util.UUID;
 
-/**
- * An allocation context which is shared by all operators running in the
- * same query.
- */
+/** An allocation context which is shared by all operators running in the same query. */
 class QueryContext extends AllocationContextKey {
 
-    private final UUID queryId;
+  private final UUID queryId;
 
-    QueryContext(final UUID queryId) {
-        
-        if (queryId == null)
-            throw new IllegalArgumentException();
+  QueryContext(final UUID queryId) {
 
-        this.queryId = queryId;
-        
-    }
+    if (queryId == null) throw new IllegalArgumentException();
 
-    public int hashCode() {
-        return queryId.hashCode();
-    }
+    this.queryId = queryId;
+  }
 
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof QueryContext))
-            return false;
-        if (!queryId.equals(((QueryContext) o).queryId))
-            return false;
-        return true;
-    }
+  public int hashCode() {
+    return queryId.hashCode();
+  }
 
-    @Override
-    public boolean hasOperatorScope(int bopId) {
-        return false;
-    }
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (!(o instanceof QueryContext)) return false;
+    if (!queryId.equals(((QueryContext) o).queryId)) return false;
+    return true;
+  }
 
+  @Override
+  public boolean hasOperatorScope(int bopId) {
+    return false;
+  }
 }

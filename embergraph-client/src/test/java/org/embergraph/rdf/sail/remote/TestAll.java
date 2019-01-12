@@ -23,38 +23,27 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite.
- * 
+ *
  * @author <a href="mailto:beebs@users.sourceforge.net">Brad Bebee</a>
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
 
-        suite.addTestSuite(EmbergraphSailFactoryTest.class);
-        suite.addTestSuite(EmbergraphSailRemoteRepositoryConnectionTest.class);
-        
-        return suite;
+    suite.addTestSuite(EmbergraphSailFactoryTest.class);
+    suite.addTestSuite(EmbergraphSailRemoteRepositoryConnectionTest.class);
 
-    }
-
+    return suite;
+  }
 }

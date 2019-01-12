@@ -8,57 +8,47 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * A helper object that provides the API of {@link Future} but whose methods
- * throw {@link IOException} and are therefore compatible with
- * {@link Remote} and {@link Exporter}.
- * 
+ * A helper object that provides the API of {@link Future} but whose methods throw {@link
+ * IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <T>
  */
 public class RemoteFutureImpl<T> implements RemoteFuture<T> {
 
-    private final Future<T> future;
+  private final Future<T> future;
 
-    public RemoteFutureImpl(final Future<T> future) {
+  public RemoteFutureImpl(final Future<T> future) {
 
-        if (future == null)
-            throw new IllegalArgumentException();
+    if (future == null) throw new IllegalArgumentException();
 
-        this.future = future;
+    this.future = future;
+  }
 
-    }
+  public boolean cancel(boolean mayInterruptIfRunning) throws IOException {
 
-    public boolean cancel(boolean mayInterruptIfRunning) throws IOException {
-        
-        return future.cancel(mayInterruptIfRunning);
-        
-    }
+    return future.cancel(mayInterruptIfRunning);
+  }
 
-    public T get() throws InterruptedException, ExecutionException,
-            IOException {
-        
-        return future.get();
-        
-    }
+  public T get() throws InterruptedException, ExecutionException, IOException {
 
-    public T get(long timeout, TimeUnit unit) throws InterruptedException,
-            ExecutionException, TimeoutException, IOException {
-        
-        return future.get(timeout, unit);
-        
-    }
+    return future.get();
+  }
 
-    public boolean isCancelled() throws IOException {
-        
-        return future.isCancelled();
-        
-    }
+  public T get(long timeout, TimeUnit unit)
+      throws InterruptedException, ExecutionException, TimeoutException, IOException {
 
-    public boolean isDone() throws IOException {
-        
-        return future.isDone();
-        
-    }
+    return future.get(timeout, unit);
+  }
 
+  public boolean isCancelled() throws IOException {
+
+    return future.isCancelled();
+  }
+
+  public boolean isDone() throws IOException {
+
+    return future.isDone();
+  }
 }

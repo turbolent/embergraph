@@ -23,86 +23,68 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Iterator;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * Base class for AST nodes which model an ordered list of children.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class QueryNodeListBaseNode<E extends IQueryNode>
-        extends QueryNodeBase implements Iterable<E> {
+public abstract class QueryNodeListBaseNode<E extends IQueryNode> extends QueryNodeBase
+    implements Iterable<E> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public QueryNodeListBaseNode() {
-        super();
-    }
-    
-    /**
-     * Deep copy constructor.
-     */
-    public QueryNodeListBaseNode(final QueryNodeListBaseNode<E> op) {
+  public QueryNodeListBaseNode() {
+    super();
+  }
 
-        super(op);
+  /** Deep copy constructor. */
+  public QueryNodeListBaseNode(final QueryNodeListBaseNode<E> op) {
 
-    }
+    super(op);
+  }
 
-    /**
-     * Shallow copy constructor.
-     */
-    public QueryNodeListBaseNode(final BOp[] args,
-            final Map<String, Object> anns) {
+  /** Shallow copy constructor. */
+  public QueryNodeListBaseNode(final BOp[] args, final Map<String, Object> anns) {
 
-        super(args, anns);
+    super(args, anns);
+  }
 
-    }
+  public void add(final E e) {
 
-    public void add(final E e) {
+    if (e == null) throw new IllegalArgumentException();
 
-        if (e == null)
-            throw new IllegalArgumentException();
-        
-        addArg((BOp) e);
+    addArg((BOp) e);
+  }
 
-    }
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public Iterator<E> iterator() {
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public Iterator<E> iterator() {
+    return (Iterator) argIterator();
+  }
 
-        return (Iterator) argIterator();
+  public int size() {
 
-    }
+    return arity();
+  }
 
-    public int size() {
+  public boolean isEmpty() {
 
-        return arity();
-        
-    }
+    return size() == 0;
+  }
 
-    public boolean isEmpty() {
-        
-        return size() == 0;
+  public String toString(final int indent) {
 
+    final StringBuilder sb = new StringBuilder();
+
+    for (IQueryNode node : this) {
+
+      sb.append(node.toString(indent + 1));
     }
 
-    public String toString(final int indent) {
-
-        final StringBuilder sb = new StringBuilder();
-
-        for (IQueryNode node : this) {
-
-            sb.append(node.toString(indent + 1));
-
-        }
-
-        return sb.toString();
-
-    }
-
+    return sb.toString();
+  }
 }

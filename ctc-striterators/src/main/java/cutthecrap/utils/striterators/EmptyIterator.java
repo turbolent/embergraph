@@ -15,26 +15,25 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.*;
+import java.util.Iterator;
 
-/***************************************************************************
- * <p>Need to return an iterator to indicate that there's nothing there?  Here's
- *  one ready made.</p>
+/**
+ * *************************************************************************
  *
- * <p>It allows calls to be made without needing to check for a null iterator.</p>
+ * <p>Need to return an iterator to indicate that there's nothing there? Here's one ready made.
+ *
+ * <p>It allows calls to be made without needing to check for a null iterator.
  */
-
 public final class EmptyIterator<T> implements Iterator<T> {
   public boolean hasNext() {
     return false;
   }
-  
+
   public T next() {
     return null;
   }
-  
-  public void remove() {}
-  
-  final static public EmptyIterator DEFAULT = new EmptyIterator();
-}
 
+  public void remove() {}
+
+  public static final EmptyIterator DEFAULT = new EmptyIterator();
+}

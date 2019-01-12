@@ -34,38 +34,38 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Query hint for turning analytic query on/off.
- * <p>
- * TODO Allow this to be specified for each hash index build rather than just
- * globally for the query execution context. The primary consumer of hash
- * indices is the {@link SolutionSetHashJoinOp}. That operator implementation
- * identical for both JVM and {@link HTree} based hash joins. Therefore, we
- * could make the decision about whether to use the {@link JVMHashJoinUtility}
- * or the {@link HTreeHashJoinUtility} when building the hash index by
- * annotating that operator and then let the {@link SolutionSetHashJoinOp}
- * handle the hash join by delegating to the appropriate
- * {@link IHashJoinUtility} implementation.
+ *
+ * <p>TODO Allow this to be specified for each hash index build rather than just globally for the
+ * query execution context. The primary consumer of hash indices is the {@link
+ * SolutionSetHashJoinOp}. That operator implementation identical for both JVM and {@link HTree}
+ * based hash joins. Therefore, we could make the decision about whether to use the {@link
+ * JVMHashJoinUtility} or the {@link HTreeHashJoinUtility} when building the hash index by
+ * annotating that operator and then let the {@link SolutionSetHashJoinOp} handle the hash join by
+ * delegating to the appropriate {@link IHashJoinUtility} implementation.
  */
 final class AnalyticQueryHint extends AbstractBooleanQueryHint {
 
-    protected AnalyticQueryHint() {
-        super(QueryHints.ANALYTIC, QueryHints.DEFAULT_ANALYTIC);
+  protected AnalyticQueryHint() {
+    super(QueryHints.ANALYTIC, QueryHints.DEFAULT_ANALYTIC);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    switch (scope) {
+      case Query:
+        context.nativeHashJoins = value;
+        context.nativeDistinctSolutions = value;
+        context.nativeDistinctSPO = value;
+        context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.NATIVE_HEAP_INSTANCE;
+        return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        switch (scope) {
-        case Query:
-            context.nativeHashJoins = value;
-            context.nativeDistinctSolutions = value;
-            context.nativeDistinctSPO = value;
-            context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.NATIVE_HEAP_INSTANCE;
-            return;
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

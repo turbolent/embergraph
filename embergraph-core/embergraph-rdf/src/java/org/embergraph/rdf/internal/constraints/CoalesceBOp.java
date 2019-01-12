@@ -20,9 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -32,57 +30,51 @@ import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
- * Coalesce BOp The COALESCE function form returns the RDF term value of the first expression that evaluates without error. In
- * SPARQL, evaluating an unbound variable raises an error.
+ * Coalesce BOp The COALESCE function form returns the RDF term value of the first expression that
+ * evaluates without error. In SPARQL, evaluating an unbound variable raises an error.
  */
 public class CoalesceBOp extends IVValueExpression<IV> implements IPassesMaterialization {
 
-    private static final long             serialVersionUID = 7391999162162545704L;
+  private static final long serialVersionUID = 7391999162162545704L;
 
-    private static final transient Logger log              = Logger.getLogger(CoalesceBOp.class);
+  private static final transient Logger log = Logger.getLogger(CoalesceBOp.class);
 
-    public CoalesceBOp(final GlobalAnnotations globals, final IValueExpression<? extends IV>... expressions) {
+  public CoalesceBOp(
+      final GlobalAnnotations globals, final IValueExpression<? extends IV>... expressions) {
 
-        this(expressions, anns(globals));
+    this(expressions, anns(globals));
+  }
 
+  /** Required shallow copy constructor. */
+  public CoalesceBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+    if (args.length <= 0) throw new IllegalArgumentException();
+    for (BOp b : args) {
+      if (b == null) {
+        throw new IllegalArgumentException();
+      }
     }
+  }
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public CoalesceBOp(final BOp[] args, final Map<String, Object> anns) {
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public CoalesceBOp(final CoalesceBOp op) {
+    super(op);
+  }
 
-        super(args, anns);
-        if (args.length <= 0)
-            throw new IllegalArgumentException();
-        for (BOp b : args) {
-            if (b == null) {
-                throw new IllegalArgumentException();
-            }
+  public IV get(final IBindingSet bs) {
+    for (int i = 0; i < arity(); i++) {
+      try {
+        IV result = get(i).get(bs);
+        if (result != null) {
+          return result;
         }
+      } catch (NotMaterializedException nme) {
+        throw nme;
+      } catch (Throwable t) {
+
+      }
     }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public CoalesceBOp(final CoalesceBOp op) {
-        super(op);
-    }
-
-    public IV get(final IBindingSet bs) {
-        for (int i = 0; i < arity(); i++) {
-            try {
-                IV result = get(i).get(bs);
-                if(result!=null){
-                    return result;
-                }
-            } catch (NotMaterializedException nme) {
-                throw nme;
-            } catch (Throwable t) {
-
-            }
-        }
-        throw new SparqlTypeErrorException();
-    }
-
+    throw new SparqlTypeErrorException();
+  }
 }

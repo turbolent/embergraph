@@ -28,190 +28,162 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
-
 import org.apache.log4j.Logger;
-
 
 /**
  * The default implementation used when scores are available.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractServiceLoadHelperWithScores extends
-        AbstractServiceLoadHelper {
+public abstract class AbstractServiceLoadHelperWithScores extends AbstractServiceLoadHelper {
 
-    protected static final Logger log = Logger
-            .getLogger(AbstractServiceLoadHelperWithScores.class);
+  protected static final Logger log = Logger.getLogger(AbstractServiceLoadHelperWithScores.class);
 
-    protected static final boolean INFO = log.isInfoEnabled();
+  protected static final boolean INFO = log.isInfoEnabled();
 
-    // protected static final boolean DEBUG = log.isDebugEnabled();
+  // protected static final boolean DEBUG = log.isDebugEnabled();
 
-    final protected UUID knownGood;
+  protected final UUID knownGood;
 
-    final protected ServiceScore[] scores;
+  protected final ServiceScore[] scores;
 
-    /**
-     * @param joinTimeout
-     *            The maximum time in milliseconds
-     * @param knownGood
-     *            A service that is known to be active and NOT excluded from the
-     *            request to be posed.
-     * @param scores
-     *            Scores for the services in ascending order (least utilized to
-     *            most utilized).
-     */
-    protected AbstractServiceLoadHelperWithScores(final long joinTimeout,
-            final UUID knownGood, final ServiceScore[] scores) {
+  /**
+   * @param joinTimeout The maximum time in milliseconds
+   * @param knownGood A service that is known to be active and NOT excluded from the request to be
+   *     posed.
+   * @param scores Scores for the services in ascending order (least utilized to most utilized).
+   */
+  protected AbstractServiceLoadHelperWithScores(
+      final long joinTimeout, final UUID knownGood, final ServiceScore[] scores) {
 
-        super(joinTimeout);
+    super(joinTimeout);
 
-        if (knownGood == null)
-            throw new IllegalArgumentException();
+    if (knownGood == null) throw new IllegalArgumentException();
 
-        if (scores == null)
-            throw new IllegalArgumentException();
+    if (scores == null) throw new IllegalArgumentException();
 
-        if (scores.length == 0)
-            throw new IllegalArgumentException();
+    if (scores.length == 0) throw new IllegalArgumentException();
 
-        this.knownGood = knownGood;
+    this.knownGood = knownGood;
 
-        this.scores = scores;
+    this.scores = scores;
+  }
 
+  /**
+   * Handles the case when we have per-service scores.
+   *
+   * <p>Note: Pre-condition: the service scores must exist and there must be at least one active
+   * service with a score that is not excluded (the {@link #knownGood} service).
+   *
+   * @param minCount
+   * @param maxCount
+   * @param exclude
+   * @return
+   * @throws TimeoutException
+   * @throws InterruptedException
+   */
+  public UUID[] getUnderUtilizedDataServices(
+      final int minCount, final int maxCount, final UUID exclude)
+      throws TimeoutException, InterruptedException {
+
+    if (exclude != null && knownGood.equals(exclude)) {
+
+      throw new IllegalArgumentException();
     }
 
-    /**
-     * Handles the case when we have per-service scores.
-     * <p>
-     * Note: Pre-condition: the service scores must exist and there must be at
-     * least one active service with a score that is not excluded (the
-     * {@link #knownGood} service).
-     * 
-     * @param minCount
-     * @param maxCount
-     * @param exclude
-     * @return
-     * 
-     * @throws TimeoutException
-     * @throws InterruptedException
+    /*
+     * Decide on the set of active services that we consider to be
+     * under-utilized based on their scores. When maxCount is non-zero, this
+     * set will be no larger than maxCount. When maxCount is zero the set
+     * will contain all services that satisify the "under-utilized"
+     * criteria.
      */
-    public UUID[] getUnderUtilizedDataServices(final int minCount,
-            final int maxCount, final UUID exclude) throws TimeoutException,
-            InterruptedException {
+    final List<UUID> underUtilized =
+        new ArrayList<UUID>(Math.max(scores.length, Math.max(minCount, maxCount)));
 
-        if (exclude != null && knownGood.equals(exclude)) {
+    int nok = 0;
+    for (int i = 0; i < scores.length; i++) {
 
-            throw new IllegalArgumentException();
+      final ServiceScore score = scores[i];
 
-        }
+      // excluded?
+      if (score.serviceUUID.equals(exclude)) continue;
 
-        /*
-         * Decide on the set of active services that we consider to be
-         * under-utilized based on their scores. When maxCount is non-zero, this
-         * set will be no larger than maxCount. When maxCount is zero the set
-         * will contain all services that satisify the "under-utilized"
-         * criteria.
-         */
-        final List<UUID> underUtilized = new ArrayList<UUID>(Math.max(
-                scores.length, Math.max(minCount, maxCount)));
+      // not active?
+      if (!isActiveDataService(score.serviceUUID)) continue;
 
-        int nok = 0;
-        for (int i = 0; i < scores.length; i++) {
+      if (isUnderUtilizedDataService(score, scores)) {
 
-            final ServiceScore score = scores[i];
+        underUtilized.add(score.serviceUUID);
 
-            // excluded?
-            if (score.serviceUUID.equals(exclude))
-                continue;
+        nok++;
+      }
 
-            // not active?
-            if (!isActiveDataService(score.serviceUUID))
-                continue;
+      if (maxCount > 0 && nok >= maxCount) {
 
-            if (isUnderUtilizedDataService(score, scores)) {
+        if (INFO) log.info("Satisifed maxCount=" + maxCount);
 
-                underUtilized.add(score.serviceUUID);
+        break;
+      }
 
-                nok++;
+      if (minCount > 0 && maxCount == 0 && nok >= minCount) {
 
-            }
+        if (INFO) log.info("Satisifed minCount=" + minCount);
 
-            if (maxCount > 0 && nok >= maxCount) {
-
-                if (INFO)
-                    log.info("Satisifed maxCount=" + maxCount);
-
-                break;
-
-            }
-
-            if (minCount > 0 && maxCount == 0 && nok >= minCount) {
-
-                if (INFO)
-                    log.info("Satisifed minCount=" + minCount);
-
-                break;
-
-            }
-
-        }
-
-        if (INFO)
-            log.info("Found " + underUtilized.size()
-                    + " under-utilized and non-excluded services");
-
-        if (minCount > 0 && underUtilized.isEmpty()) {
-
-            /*
-             * Since we did not find anything we default to the one service that
-             * provided as our fallback. This service might not be
-             * under-utilized and it might no longer be active, but it is the
-             * service that we are going to return.
-             */
-
-            assert knownGood != null;
-
-            log.warn("Will report fallback service: " + knownGood);
-
-            underUtilized.add(knownGood);
-
-        }
-
-        /*
-         * Populate the return array, choosing at least minCount services and
-         * repeating services if necessary.
-         * 
-         * Note: We return at least minCount UUIDs, even if we have to return
-         * the same UUID in each slot.
-         */
-
-        final UUID[] uuids = new UUID[Math.max(minCount, nok)];
-
-        int n = 0, i = 0;
-
-        while (n < uuids.length) {
-
-            final UUID tmp = underUtilized.get(i++ % nok);
-            
-            if (tmp == null)
-                throw new AssertionError();
-            
-            if (exclude != null && tmp.equals(exclude))
-                throw new AssertionError();
-            
-            uuids[n++] = tmp;
-
-        }
-
-        if (INFO)
-            log.info("Reporting " + uuids.length
-                    + " under-utilized and non-excluded services: "
-                    + Arrays.toString(uuids));
-        
-        return uuids;
-
+        break;
+      }
     }
 
+    if (INFO)
+      log.info("Found " + underUtilized.size() + " under-utilized and non-excluded services");
+
+    if (minCount > 0 && underUtilized.isEmpty()) {
+
+      /*
+       * Since we did not find anything we default to the one service that
+       * provided as our fallback. This service might not be
+       * under-utilized and it might no longer be active, but it is the
+       * service that we are going to return.
+       */
+
+      assert knownGood != null;
+
+      log.warn("Will report fallback service: " + knownGood);
+
+      underUtilized.add(knownGood);
+    }
+
+    /*
+     * Populate the return array, choosing at least minCount services and
+     * repeating services if necessary.
+     *
+     * Note: We return at least minCount UUIDs, even if we have to return
+     * the same UUID in each slot.
+     */
+
+    final UUID[] uuids = new UUID[Math.max(minCount, nok)];
+
+    int n = 0, i = 0;
+
+    while (n < uuids.length) {
+
+      final UUID tmp = underUtilized.get(i++ % nok);
+
+      if (tmp == null) throw new AssertionError();
+
+      if (exclude != null && tmp.equals(exclude)) throw new AssertionError();
+
+      uuids[n++] = tmp;
+    }
+
+    if (INFO)
+      log.info(
+          "Reporting "
+              + uuids.length
+              + " under-utilized and non-excluded services: "
+              + Arrays.toString(uuids));
+
+    return uuids;
+  }
 }

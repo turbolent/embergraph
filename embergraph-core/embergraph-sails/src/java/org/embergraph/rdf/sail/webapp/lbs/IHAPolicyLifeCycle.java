@@ -19,24 +19,18 @@ package org.embergraph.rdf.sail.webapp.lbs;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-
 import org.embergraph.journal.IIndexManager;
 
 public interface IHAPolicyLifeCycle {
 
-    /**
-     * Initialize the policy.
-     * 
-     * @param servletConfig
-     * @param indexManager
-     */
-    void init(ServletConfig servletConfig, IIndexManager indexManager)
-            throws ServletException;
+  /**
+   * Initialize the policy.
+   *
+   * @param servletConfig
+   * @param indexManager
+   */
+  void init(ServletConfig servletConfig, IIndexManager indexManager) throws ServletException;
 
-    /**
-     * Destroy the policy (stop any asynchronous processing, release any
-     * resources).
-     */
-    void destroy();
-
+  /** Destroy the policy (stop any asynchronous processing, release any resources). */
+  void destroy();
 }

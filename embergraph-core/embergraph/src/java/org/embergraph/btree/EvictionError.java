@@ -21,40 +21,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /**
- * Error marks an mutable index as in an inconsistent state arising from an
- * exception during eviction of a dirty node or leaf from a mutable index. The
- * index MUST be reloaded from the current checkpoint record.
- * 
+ * Error marks an mutable index as in an inconsistent state arising from an exception during
+ * eviction of a dirty node or leaf from a mutable index. The index MUST be reloaded from the
+ * current checkpoint record.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- * @see <a href="http://trac.blazegraph.com/ticket/1005"> Invalidate BTree objects
- *      if error occurs during eviction </a>
+ * @see <a href="http://trac.blazegraph.com/ticket/1005">Invalidate BTree objects if error occurs
+ *     during eviction </a>
  */
 public class EvictionError extends IndexInconsistentError {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public EvictionError() {
-    }
+  public EvictionError() {}
 
-    public EvictionError(String message) {
-        super(message);
-    }
+  public EvictionError(String message) {
+    super(message);
+  }
 
-    public EvictionError(Throwable cause) {
-        super(cause);
-    }
+  public EvictionError(Throwable cause) {
+    super(cause);
+  }
 
-    public EvictionError(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public EvictionError(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public EvictionError(String message, Throwable cause,
-            boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
-
+  public EvictionError(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 }

@@ -2,14 +2,13 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTGraphRefAll extends SimpleNode {
+public class ASTGraphRefAll extends SimpleNode {
   private boolean _default;
-private boolean named;
-private boolean allGraphs;
-private boolean allSolutions;
+  private boolean named;
+  private boolean allGraphs;
+  private boolean allSolutions;
 
-public ASTGraphRefAll(int id) {
+  public ASTGraphRefAll(int id) {
     super(id);
   }
 
@@ -17,61 +16,47 @@ public ASTGraphRefAll(int id) {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
-	/**
-	 * @param _default The default to set.
-	 */
-	public void setDefault(boolean _default) {
-		this._default = _default;
-	}
 
-	/**
-	 * @return Returns the default.
-	 */
-	public boolean isDefault() {
-		return _default;
-	}
+  /** @param _default The default to set. */
+  public void setDefault(boolean _default) {
+    this._default = _default;
+  }
 
-	/**
-	 * @param named The named to set.
-	 */
-	public void setNamed(boolean named) {
-		this.named = named;
-	}
+  /** @return Returns the default. */
+  public boolean isDefault() {
+    return _default;
+  }
 
-	/**
-	 * @return Returns the named.
-	 */
-	public boolean isNamed() {
-		return named;
-	}
-	
-    /**
-     * Return <code>true</code> iff ALL graphs should be dropped.
-     */
-    public boolean isAllGraphs() {
-        return allGraphs;
-    }
+  /** @param named The named to set. */
+  public void setNamed(boolean named) {
+    this.named = named;
+  }
 
-    public void setAllGraphs(boolean allGraphs) {
-        this.allGraphs= allGraphs;
-    }
+  /** @return Returns the named. */
+  public boolean isNamed() {
+    return named;
+  }
 
-    /**
-     * Return <code>true</code> iff ALL named solution sets should be dropped.
-     */
-    public boolean isAllSolutions() {
-        return allSolutions;
-    }
+  /** Return <code>true</code> iff ALL graphs should be dropped. */
+  public boolean isAllGraphs() {
+    return allGraphs;
+  }
 
-    public void setAllSolutions(boolean allSolutions) {
-        this.allSolutions = allSolutions;
-    }
+  public void setAllGraphs(boolean allGraphs) {
+    this.allGraphs = allGraphs;
+  }
 
+  /** Return <code>true</code> iff ALL named solution sets should be dropped. */
+  public boolean isAllSolutions() {
+    return allSolutions;
+  }
+
+  public void setAllSolutions(boolean allSolutions) {
+    this.allSolutions = allSolutions;
+  }
 }
 /* JavaCC - OriginalChecksum=76b459b84d8a145884f6d9f597fa6072 (do not edit this line) */

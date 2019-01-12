@@ -6,34 +6,31 @@ import org.openrdf.query.algebra.MathExpr.MathOp;
 
 public class ASTMath extends SimpleNode {
 
-	private MathOp operator;
+  private MathOp operator;
 
-	public ASTMath(int id) {
-		super(id);
-	}
+  public ASTMath(int id) {
+    super(id);
+  }
 
-	public ASTMath(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTMath(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public MathOp getOperator() {
-		return operator;
-	}
+  public MathOp getOperator() {
+    return operator;
+  }
 
-	public void setOperator(MathOp operator) {
-		this.operator = operator;
-	}
+  public void setOperator(MathOp operator) {
+    this.operator = operator;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + operator + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + operator + ")";
+  }
 }

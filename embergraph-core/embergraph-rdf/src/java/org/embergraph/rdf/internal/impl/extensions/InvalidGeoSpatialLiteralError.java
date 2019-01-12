@@ -21,17 +21,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.impl.extensions;
 
 /**
- * Error signalizing that an invalid geospatial literal (i.e., not coherent with
- * the geospatial datatype's definition) was encountered.
- * 
+ * Error signalizing that an invalid geospatial literal (i.e., not coherent with the geospatial
+ * datatype's definition) was encountered.
+ *
  * @author msc
  */
 public class InvalidGeoSpatialLiteralError extends Error {
-    
-    private static final long serialVersionUID = 1L;
 
-    public InvalidGeoSpatialLiteralError(final String msg) {
-        super(msg);
-    }
+  private static final long serialVersionUID = 1L;
 
+  public InvalidGeoSpatialLiteralError(final String msg) {
+    super(msg);
+  }
 }

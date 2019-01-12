@@ -22,46 +22,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
 /**
  * Abstract base class for MERGE JOIN implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractMergeJoin extends PipelineOp {
+public abstract class AbstractMergeJoin extends PipelineOp {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param args
-     * @param annotations
-     */
-    public AbstractMergeJoin(BOp[] args, Map<String, Object> annotations) {
-        
-        super(args, annotations);
-    }
+  /**
+   * @param args
+   * @param annotations
+   */
+  public AbstractMergeJoin(BOp[] args, Map<String, Object> annotations) {
 
-    /**
-     * @param op
-     */
-    public AbstractMergeJoin(AbstractMergeJoin op) {
+    super(args, annotations);
+  }
 
-        super(op);
-        
-    }
+  /** @param op */
+  public AbstractMergeJoin(AbstractMergeJoin op) {
 
-    public AbstractMergeJoin(final BOp[] args, NV... annotations) {
+    super(op);
+  }
 
-        this(args, NV.asMap(annotations));
-        
-    }
+  public AbstractMergeJoin(final BOp[] args, NV... annotations) {
 
+    this(args, NV.asMap(annotations));
+  }
 }

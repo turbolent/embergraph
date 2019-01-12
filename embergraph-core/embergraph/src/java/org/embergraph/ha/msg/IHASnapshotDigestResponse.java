@@ -18,21 +18,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 /**
- * Message used to communicate the digest of an snapshot file associated with a
- * specific commit point.
- * 
+ * Message used to communicate the digest of an snapshot file associated with a specific commit
+ * point.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHASnapshotDigestResponse extends IHAMessage {
 
-    /**
-     * The commit counter for snapshot
-     */
-    long getCommitCounter();
+  /** The commit counter for snapshot */
+  long getCommitCounter();
 
-    /**
-     * The computed disgest.
-     */
-    byte[] getDigest();
-
+  /** The computed disgest. */
+  byte[] getDigest();
 }

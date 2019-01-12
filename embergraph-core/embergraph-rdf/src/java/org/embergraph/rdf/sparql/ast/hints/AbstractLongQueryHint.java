@@ -21,22 +21,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-/**
- * Base class for {@link Long} query hints.
- */
+/** Base class for {@link Long} query hints. */
 abstract class AbstractLongQueryHint extends AbstractQueryHint<Long> {
 
-    protected AbstractLongQueryHint(final String name, final Long defaultValue) {
+  protected AbstractLongQueryHint(final String name, final Long defaultValue) {
 
-        super(name, defaultValue);
+    super(name, defaultValue);
+  }
 
-    }
+  @Override
+  public Long validate(final String value) {
 
-    @Override
-    public Long validate(final String value) {
-
-        return Long.valueOf(value);
-
-    }
-
+    return Long.valueOf(value);
+  }
 }

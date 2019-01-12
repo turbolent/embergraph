@@ -21,78 +21,70 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.sparql.ast.FunctionRegistry;
-
 import junit.framework.TestCase2;
+import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 
 /**
  * Test suite for various xpath numeric functions.
- * 
- * <strong>The xpath functions are very picky. Check the specs when you work on
- * this test suite!</strong>
- * 
+ *
+ * <p><strong>The xpath functions are very picky. Check the specs when you work on this test
+ * suite!</strong>
+ *
  * @see http://www.w3.org/TR/xpath-functions/
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestXPathFunctions extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestXPathFunctions() {
-    }
+  /** */
+  public TestXPathFunctions() {}
 
-    /**
-     * @param name
-     */
-    public TestXPathFunctions(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestXPathFunctions(String name) {
+    super(name);
+  }
 
-    /**
-     * Unit test for {@link FunctionRegistry#ABS}. 
-     * 
-     * @see http://www.w3.org/TR/xpath-functions/#func-abs
-     * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
-     */
-    public void test_xpath_abs_01() {
-//        fail("write test");
-    	// covered in TCK
-    }
-    
-    /**
-     * Unit test for {@link FunctionRegistry#CEIL}. 
-     * 
-     * @see http://www.w3.org/TR/xpath-functions/#func-ceiling
-     * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
-     */
-    public void test_xpath_ceiling_01() {
-//        fail("write test");
-    	// covered in TCK
-    }
+  /**
+   * Unit test for {@link FunctionRegistry#ABS}.
+   *
+   * @see http://www.w3.org/TR/xpath-functions/#func-abs
+   * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
+   */
+  public void test_xpath_abs_01() {
+    //        fail("write test");
+    // covered in TCK
+  }
 
-    /**
-     * Unit test for {@link FunctionRegistry#FLOOR}. 
-     * 
-     * @see http://www.w3.org/TR/xpath-functions/#func-floor
-     * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
-     */
-    public void test_xpath_floor_01() {
-//        fail("write test");
-    	// covered in TCK
-    }
+  /**
+   * Unit test for {@link FunctionRegistry#CEIL}.
+   *
+   * @see http://www.w3.org/TR/xpath-functions/#func-ceiling
+   * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
+   */
+  public void test_xpath_ceiling_01() {
+    //        fail("write test");
+    // covered in TCK
+  }
 
-    /**
-     * Unit test for {@link FunctionRegistry#round}. 
-     * 
-     * @see http://www.w3.org/TR/xpath-functions/#func-round
-     * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
-     */
-    public void test_xpath_round_01() {
-//        fail("write test");
-    	// covered in TCK
-    }
+  /**
+   * Unit test for {@link FunctionRegistry#FLOOR}.
+   *
+   * @see http://www.w3.org/TR/xpath-functions/#func-floor
+   * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
+   */
+  public void test_xpath_floor_01() {
+    //        fail("write test");
+    // covered in TCK
+  }
 
+  /**
+   * Unit test for {@link FunctionRegistry#round}.
+   *
+   * @see http://www.w3.org/TR/xpath-functions/#func-round
+   * @see http://www.w3.org/TR/xquery-semantics/#sec_fn_abs_ceil_floor_round
+   */
+  public void test_xpath_round_01() {
+    //        fail("write test");
+    // covered in TCK
+  }
 }

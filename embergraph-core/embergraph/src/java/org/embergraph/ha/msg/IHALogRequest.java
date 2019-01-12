@@ -17,15 +17,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Message requesting the root blocks and other metadata for an HA Log file.
- */
+/** Message requesting the root blocks and other metadata for an HA Log file. */
 public interface IHALogRequest extends IHASyncRequest {
 
-    /**
-     * The commit counter is used to identify the desired commit point (the
-     * commit counter of the closing root block).
-     */
-    long getCommitCounter();
-
+  /**
+   * The commit counter is used to identify the desired commit point (the commit counter of the
+   * closing root block).
+   */
+  long getCommitCounter();
 }

@@ -1,114 +1,96 @@
 package org.embergraph.rdf.sail;
 
 import java.util.concurrent.TimeUnit;
-
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.query.algebra.evaluation.QueryBindingSet;
-import org.openrdf.repository.sail.SailTupleQuery;
-
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
 import org.embergraph.rdf.store.AbstractTripleStore;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.TupleQueryResult;
+import org.openrdf.query.algebra.evaluation.QueryBindingSet;
+import org.openrdf.repository.sail.SailTupleQuery;
 
-public class EmbergraphSailTupleQuery extends SailTupleQuery
-        implements EmbergraphSailQuery {
+public class EmbergraphSailTupleQuery extends SailTupleQuery implements EmbergraphSailQuery {
 
-//    private static final Logger log = Logger.getLogger(EmbergraphSailTupleQuery.class);
-    
-    private final ASTContainer astContainer;
-    
-    public ASTContainer getASTContainer() {
-        
-        return astContainer;
-        
-    }
+  //    private static final Logger log = Logger.getLogger(EmbergraphSailTupleQuery.class);
 
-    @Override
-    public String toString() {
+  private final ASTContainer astContainer;
 
-        return astContainer.toString();
-        
-    }
-    
-    public AbstractTripleStore getTripleStore() {
+  public ASTContainer getASTContainer() {
 
-        return ((EmbergraphSailRepositoryConnection) getConnection())
-                .getTripleStore();
+    return astContainer;
+  }
 
-    }
+  @Override
+  public String toString() {
 
-    public EmbergraphSailTupleQuery(final ASTContainer astContainer,
-            final EmbergraphSailRepositoryConnection con) {
+    return astContainer.toString();
+  }
 
-        super(null/* tupleQuery */, con);
+  public AbstractTripleStore getTripleStore() {
 
-        if (astContainer == null)
-            throw new IllegalArgumentException();
+    return ((EmbergraphSailRepositoryConnection) getConnection()).getTripleStore();
+  }
 
-        this.astContainer = astContainer;
+  public EmbergraphSailTupleQuery(
+      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection con) {
 
-    }
+    super(null /* tupleQuery */, con);
 
-    @Override
-    public TupleQueryResult evaluate() throws QueryEvaluationException {
+    if (astContainer == null) throw new IllegalArgumentException();
 
-        return evaluate((BindingsClause) null);
+    this.astContainer = astContainer;
+  }
 
-    }
+  @Override
+  public TupleQueryResult evaluate() throws QueryEvaluationException {
 
-    public TupleQueryResult evaluate(final BindingsClause bc) 
-    		throws QueryEvaluationException {
+    return evaluate((BindingsClause) null);
+  }
 
-        final QueryRoot originalQuery = astContainer.getOriginalAST();
+  public TupleQueryResult evaluate(final BindingsClause bc) throws QueryEvaluationException {
 
-        if (bc != null)
-        	originalQuery.setBindingsClause(bc);
+    final QueryRoot originalQuery = astContainer.getOriginalAST();
 
-        if (getMaxQueryTime() > 0)
-            originalQuery.setTimeout(TimeUnit.SECONDS
-                    .toMillis(getMaxQueryTime()));
+    if (bc != null) originalQuery.setBindingsClause(bc);
 
-        originalQuery.setIncludeInferred(getIncludeInferred());
+    if (getMaxQueryTime() > 0)
+      originalQuery.setTimeout(TimeUnit.SECONDS.toMillis(getMaxQueryTime()));
 
-        final TupleQueryResult queryResult = ASTEvalHelper.evaluateTupleQuery(
-                getTripleStore(), astContainer, new QueryBindingSet(
-                        getBindings()), getDataset());
+    originalQuery.setIncludeInferred(getIncludeInferred());
 
-        return queryResult;
+    final TupleQueryResult queryResult =
+        ASTEvalHelper.evaluateTupleQuery(
+            getTripleStore(), astContainer, new QueryBindingSet(getBindings()), getDataset());
 
-    }
-    
-    public QueryRoot optimize() throws QueryEvaluationException {
+    return queryResult;
+  }
 
-        return optimize((BindingsClause) null);
+  public QueryRoot optimize() throws QueryEvaluationException {
 
-    }
+    return optimize((BindingsClause) null);
+  }
 
-    public QueryRoot optimize(final BindingsClause bc) 
-            throws QueryEvaluationException {
+  public QueryRoot optimize(final BindingsClause bc) throws QueryEvaluationException {
 
-        final QueryRoot originalQuery = astContainer.getOriginalAST();
+    final QueryRoot originalQuery = astContainer.getOriginalAST();
 
-        if (bc != null)
-            originalQuery.setBindingsClause(bc);
+    if (bc != null) originalQuery.setBindingsClause(bc);
 
-        if (getMaxQueryTime() > 0)
-            originalQuery.setTimeout(TimeUnit.SECONDS
-                    .toMillis(getMaxQueryTime()));
+    if (getMaxQueryTime() > 0)
+      originalQuery.setTimeout(TimeUnit.SECONDS.toMillis(getMaxQueryTime()));
 
-        originalQuery.setIncludeInferred(getIncludeInferred());
+    originalQuery.setIncludeInferred(getIncludeInferred());
 
-        final QueryRoot optimized = ASTEvalHelper.optimizeQuery(
-                astContainer,
-                new AST2BOpContext(astContainer, getTripleStore()),
-                new QueryBindingSet(getBindings()), getDataset());
+    final QueryRoot optimized =
+        ASTEvalHelper.optimizeQuery(
+            astContainer,
+            new AST2BOpContext(astContainer, getTripleStore()),
+            new QueryBindingSet(getBindings()),
+            getDataset());
 
-        return optimized;
-        
-    }
-
+    return optimized;
+  }
 }

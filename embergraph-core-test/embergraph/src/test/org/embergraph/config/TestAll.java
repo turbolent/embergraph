@@ -25,34 +25,28 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates unit tests into dependency order.
- * 
+ *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        super();
-    }
+  /** */
+  public TestAll() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    public static junit.framework.Test suite() {
-        
-        TestSuite retval = new TestSuite("config");
-        
-        retval.addTestSuite( TestConfiguration.class );
+  public static junit.framework.Test suite() {
 
-        return retval;
-    }
+    TestSuite retval = new TestSuite("config");
 
+    retval.addTestSuite(TestConfiguration.class);
+
+    return retval;
+  }
 }

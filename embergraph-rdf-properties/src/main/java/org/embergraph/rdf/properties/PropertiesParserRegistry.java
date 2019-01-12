@@ -52,38 +52,37 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.rdf.properties;
 
 import info.aduna.lang.service.FileFormatServiceRegistry;
-
 import org.openrdf.rio.RDFParserFactory;
 
 /**
  * A registry that keeps track of the available {@link RDFParserFactory}s.
- * 
+ *
  * @author Bryan Thompson
  */
-public class PropertiesParserRegistry extends
-        FileFormatServiceRegistry<PropertiesFormat, PropertiesParserFactory> {
+public class PropertiesParserRegistry
+    extends FileFormatServiceRegistry<PropertiesFormat, PropertiesParserFactory> {
 
-    private static PropertiesParserRegistry defaultRegistry;
+  private static PropertiesParserRegistry defaultRegistry;
 
-    /**
-     * Gets the default {@link PropertiesParserRegistry}.
-     * 
-     * @return The default registry.
-     */
-    public static synchronized PropertiesParserRegistry getInstance() {
-        if (defaultRegistry == null) {
-            defaultRegistry = new PropertiesParserRegistry();
-        }
-
-        return defaultRegistry;
+  /**
+   * Gets the default {@link PropertiesParserRegistry}.
+   *
+   * @return The default registry.
+   */
+  public static synchronized PropertiesParserRegistry getInstance() {
+    if (defaultRegistry == null) {
+      defaultRegistry = new PropertiesParserRegistry();
     }
 
-    public PropertiesParserRegistry() {
-        super(PropertiesParserFactory.class);
-    }
+    return defaultRegistry;
+  }
 
-    @Override
-    protected PropertiesFormat getKey(PropertiesParserFactory factory) {
-        return factory.getFormat();
-    }
+  public PropertiesParserRegistry() {
+    super(PropertiesParserFactory.class);
+  }
+
+  @Override
+  protected PropertiesFormat getKey(PropertiesParserFactory factory) {
+    return factory.getFormat();
+  }
 }

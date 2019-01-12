@@ -21,30 +21,22 @@ package org.embergraph.io.writecache;
 import java.nio.ByteBuffer;
 
 /**
- * A backing reader can be provided to a WriteCacheService which can
- * use the readRaw callback method as part of an encapsulated caching
- * strategy.
- * 
- * @author Martyn Cutcher
+ * A backing reader can be provided to a WriteCacheService which can use the readRaw callback method
+ * as part of an encapsulated caching strategy.
  *
+ * @author Martyn Cutcher
  */
 public interface IBackingReader {
 
-    /**
-     * Read on the backing file, installing the record into the caller's buffer.
-     * {@link ByteBuffer#remaining()} bytes will be read into the caller's
-     * buffer, starting at the specified offset in the backing file.
-     * 
-     * @param fileOffset
-     *            The offset of the first byte to be read (absolute offset on
-     *            the backing file).
-     * @param dst
-     *            Where to put the data. Bytes will be written at position until
-     *            limit.
-     * 
-     * @return The caller's buffer, prepared for reading back the installed
-     *         record.
-     */
-	public ByteBuffer readRaw(long fileOffset, ByteBuffer dst);
-	
+  /**
+   * Read on the backing file, installing the record into the caller's buffer. {@link
+   * ByteBuffer#remaining()} bytes will be read into the caller's buffer, starting at the specified
+   * offset in the backing file.
+   *
+   * @param fileOffset The offset of the first byte to be read (absolute offset on the backing
+   *     file).
+   * @param dst Where to put the data. Bytes will be written at position until limit.
+   * @return The caller's buffer, prepared for reading back the installed record.
+   */
+  public ByteBuffer readRaw(long fileOffset, ByteBuffer dst);
 }

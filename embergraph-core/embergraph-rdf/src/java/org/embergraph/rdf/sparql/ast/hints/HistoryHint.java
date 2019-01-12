@@ -28,37 +28,35 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Mark a statement pattern to include history or not.  When history is enabled
- * statements are not deleted - they are simply marked as history using
- * StatementEnum.History.  By default these SPOs are hidden from view.
+ * Mark a statement pattern to include history or not. When history is enabled statements are not
+ * deleted - they are simply marked as history using StatementEnum.History. By default these SPOs
+ * are hidden from view.
  */
 final class HistoryHint extends AbstractQueryHint<Boolean> {
 
-    protected HistoryHint() {
-        super(QueryHints.HISTORY, false);
+  protected HistoryHint() {
+    super(QueryHints.HISTORY, false);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setQueryHint(context, scope, op, getName(), value);
+
+      return;
     }
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final Boolean value) {
+  @Override
+  public Boolean validate(final String value) {
 
-        if (op instanceof StatementPatternNode) {
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-            return;
-
-        }
-
-    }
-
-    @Override
-    public Boolean validate(final String value) {
-
-        return Boolean.valueOf(value);
-        
-    }
-
+    return Boolean.valueOf(value);
+  }
 }

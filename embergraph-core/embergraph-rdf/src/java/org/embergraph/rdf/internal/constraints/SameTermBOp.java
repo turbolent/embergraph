@@ -19,173 +19,143 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.query.algebra.Compare.CompareOp;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
+import org.openrdf.model.Literal;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
+import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * Compare two terms for exact equality. 
- */
-public class SameTermBOp extends XSDBooleanIVValueExpression 
-		implements INeedsMaterialization {
+/** Compare two terms for exact equality. */
+public class SameTermBOp extends XSDBooleanIVValueExpression implements INeedsMaterialization {
+
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
     /**
-     * 
+     * The compare operator, which is a {@link CompareOp} enum value. Must be either {@link
+     * CompareOp#EQ} or {@link CompareOp#NE}.
      */
-    private static final long serialVersionUID = 1L;
-    
-    public interface Annotations extends
-            XSDBooleanIVValueExpression.Annotations {
+    String OP = CompareBOp.Annotations.OP;
+  }
 
-        /**
-         * The compare operator, which is a {@link CompareOp} enum value. Must
-         * be either {@link CompareOp#EQ} or {@link CompareOp#NE}.
-         */
-        String OP = CompareBOp.Annotations.OP;
+  /** Constructor for sameTerm using {@link CompareOp#EQ}. */
+  @SuppressWarnings("rawtypes")
+  public SameTermBOp(
+      final IValueExpression<? extends IV> left, final IValueExpression<? extends IV> right) {
 
-    }
-    
-    /**
-     * Constructor for sameTerm using {@link CompareOp#EQ}.
-     */
+    this(left, right, CompareOp.EQ);
+  }
+
+  /**
+   * Constructor for sameTerm using either {@link CompareOp#EQ} or {@link CompareOp#NE}.
+   *
+   * @param left
+   * @param right
+   * @param op
+   */
+  @SuppressWarnings("rawtypes")
+  public SameTermBOp(
+      final IValueExpression<? extends IV> left,
+      final IValueExpression<? extends IV> right,
+      final CompareOp op) {
+
+    this(new BOp[] {left, right}, NV.asMap(Annotations.OP, op));
+  }
+
+  /** Required shallow copy constructor. */
+  public SameTermBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+
+    final CompareOp op = (CompareOp) getRequiredProperty(Annotations.OP);
+
+    if (!(op == CompareOp.EQ || op == CompareOp.NE)) throw new IllegalArgumentException();
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public SameTermBOp(final SameTermBOp op) {
+    super(op);
+  }
+
+  @Override
+  public INeedsMaterialization.Requirement getRequirement() {
+
+    return INeedsMaterialization.Requirement.SOMETIMES;
+  }
+
+  public boolean accept(final IBindingSet bs) {
+
     @SuppressWarnings("rawtypes")
-    public SameTermBOp(
-    		final IValueExpression<? extends IV> left,
-            final IValueExpression<? extends IV> right) {
+    final IV left = get(0).get(bs);
 
-        this(left, right, CompareOp.EQ);
+    // not yet bound
+    if (left == null) throw new SparqlTypeErrorException();
 
-    }
-    
-    /**
-     * Constructor for sameTerm using either {@link CompareOp#EQ} or
-     * {@link CompareOp#NE}.
-     * 
-     * @param left
-     * @param right
-     * @param op
-     */
     @SuppressWarnings("rawtypes")
-    public SameTermBOp(final IValueExpression<? extends IV> left,
-            final IValueExpression<? extends IV> right, final CompareOp op) {
+    final IV right = get(1).get(bs);
 
-        this(new BOp[] { left, right }, NV.asMap(Annotations.OP, op));
+    // not yet bound
+    if (right == null) throw new SparqlTypeErrorException();
 
+    final CompareOp op = (CompareOp) getRequiredProperty(Annotations.OP);
+
+    switch (op) {
+      case EQ:
+        return compare(left, right);
+      default:
+        return !compare(left, right);
     }
-    
-    /**
-     * Required shallow copy constructor.
-     */
-    public SameTermBOp(final BOp[] args, final Map<String, Object> anns) {
+  }
 
-    	super(args, anns);
-    	
-        if (args.length != 2 || args[0] == null || args[1] == null)
-			throw new IllegalArgumentException();
+  private static boolean compare(final IV iv1, final IV iv2) {
 
-        final CompareOp op = (CompareOp) getRequiredProperty(Annotations.OP);
-        
-        if (!(op == CompareOp.EQ || op == CompareOp.NE))
-			throw new IllegalArgumentException();
-        
+    if (iv1.isNullIV() || iv2.isNullIV()) {
+
+      final Value val1 = asValue(iv1);
+
+      final Value val2 = asValue(iv2);
+
+      if (val1 instanceof URI && val2 instanceof URI) {
+
+        return val1.stringValue().equals(val2.stringValue());
+
+      } else if (val1 instanceof Literal && val2 instanceof Literal) {
+
+        final Literal lit1 = (Literal) val1;
+
+        final Literal lit2 = (Literal) val2;
+
+        return equals(lit1.getLabel(), lit2.getLabel())
+            && equals(lit1.getDatatype(), lit2.getDatatype())
+            && equals(lit1.getLanguage(), lit2.getLanguage());
+
+      } else {
+
+        return false;
+      }
+
+    } else {
+
+      return iv1.equals(iv2);
     }
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public SameTermBOp(final SameTermBOp op) {
-        super(op);
-    }
-    
-    @Override
-    public INeedsMaterialization.Requirement getRequirement() {
-    	
-    	return INeedsMaterialization.Requirement.SOMETIMES;
-    	
-    }
+  private static boolean equals(final Object o1, final Object o2) {
 
-    public boolean accept(final IBindingSet bs) {
-        
-    	@SuppressWarnings("rawtypes")
-        final IV left = get(0).get(bs);
+    if (o1 == null && o2 == null) return true;
 
-        // not yet bound
-        if (left == null)
-            throw new SparqlTypeErrorException(); 
+    if (o1 == null || o2 == null) return false;
 
-        @SuppressWarnings("rawtypes")
-        final IV right = get(1).get(bs);
-
-    	// not yet bound
-        if (right == null)
-            throw new SparqlTypeErrorException();
-
-        final CompareOp op = (CompareOp) getRequiredProperty(Annotations.OP);
-
-        switch (op) {
-        case EQ:
-            return compare(left, right);
-        default:
-            return !compare(left, right);
-        }
-
-    }
-    
-    private static boolean compare(final IV iv1, final IV iv2) {
-    	
-    	if (iv1.isNullIV() || iv2.isNullIV()) {
-    	
-    		final Value val1 = asValue(iv1);
-    		
-    		final Value val2 = asValue(iv2);
-    		
-    		if (val1 instanceof URI && val2 instanceof URI) {
-    			
-    			return val1.stringValue().equals(val2.stringValue());
-    			
-    		} else if (val1 instanceof Literal && val2 instanceof Literal) {
-    			
-    			final Literal lit1 = (Literal) val1;
-    			
-    			final Literal lit2 = (Literal) val2;
-    			
-    			return equals(lit1.getLabel(), lit2.getLabel()) &&
-	    			   equals(lit1.getDatatype(), lit2.getDatatype()) &&
-	    			   equals(lit1.getLanguage(), lit2.getLanguage());
-    			
-    		} else {
-    			
-    			return false;
-    			
-    		}
-    		
-    	} else {
-    		
-    		return iv1.equals(iv2);
-    		
-    	}
-    	
-    }
-    
-    private static boolean equals(final Object o1, final Object o2) {
-    	
-    	if (o1 == null && o2 == null)
-    		return true;
-    	
-    	if (o1 == null || o2 == null)
-    		return false;
-    	
-    	return o1.equals(o2);
-    	
-    }
-    
+    return o1.equals(o2);
+  }
 }

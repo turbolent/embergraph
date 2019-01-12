@@ -26,35 +26,31 @@ import org.embergraph.counters.CAT;
 
 /**
  * Extends {@link BOpStats} to report RDF parser specific statistics.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ParserStats extends BOpStats {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public final CAT toldTriples = new CAT();
+  public final CAT toldTriples = new CAT();
 
-    @Override
-    public void add(final BOpStats o) {
+  @Override
+  public void add(final BOpStats o) {
 
-        super.add(o);
+    super.add(o);
 
-        if (o instanceof ParserStats) {
+    if (o instanceof ParserStats) {
 
-            final ParserStats t = (ParserStats) o;
+      final ParserStats t = (ParserStats) o;
 
-            toldTriples.add(t.toldTriples.get());
-
-        }
-
+      toldTriples.add(t.toldTriples.get());
     }
+  }
 
-    @Override
-    protected void toString(final StringBuilder sb) {
-        sb.append(",toldTriples=" + toldTriples.get());
-    }
-
+  @Override
+  protected void toString(final StringBuilder sb) {
+    sb.append(",toldTriples=" + toldTriples.get());
+  }
 }

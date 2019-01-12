@@ -23,59 +23,46 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-
 /**
  * Base class for {@link IDataServiceCallable}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class DataServiceCallable<T> extends FederationCallable<T>
-        implements IDataServiceCallable {
+public abstract class DataServiceCallable<T> extends FederationCallable<T>
+    implements IDataServiceCallable {
 
-    private transient DataService dataService;
+  private transient DataService dataService;
 
-    /**
-     * Deserialization ctor.
-     */
-    public DataServiceCallable() {
-    }
+  /** Deserialization ctor. */
+  public DataServiceCallable() {}
 
-    /**
-     * Sets the {@link DataService} reference and the {@link IEmbergraphFederation}
-     * reference (if not already set).
-     */
-    synchronized public void setDataService(final DataService dataService) {
+  /**
+   * Sets the {@link DataService} reference and the {@link IEmbergraphFederation} reference (if not
+   * already set).
+   */
+  public synchronized void setDataService(final DataService dataService) {
 
-        if (dataService == null)
-            throw new IllegalArgumentException();
+    if (dataService == null) throw new IllegalArgumentException();
 
-        if (this.dataService != null && this.dataService != dataService)
-            throw new IllegalStateException();
+    if (this.dataService != null && this.dataService != dataService)
+      throw new IllegalStateException();
 
-        this.dataService = dataService;
+    this.dataService = dataService;
 
-        setFederation(dataService.getFederation());
-        
-    }
+    setFederation(dataService.getFederation());
+  }
 
-    public DataService getDataService() {
+  public DataService getDataService() {
 
-        if (dataService == null)
-            throw new IllegalStateException();
+    if (dataService == null) throw new IllegalStateException();
 
-        return dataService;
+    return dataService;
+  }
 
-    }
-    
-    /**
-     * Return <code>true</code> iff the {@link DataService} reference has been
-     * set.
-     */
-    public boolean isDataService() {
-        
-        return dataService != null;
-        
-    }
+  /** Return <code>true</code> iff the {@link DataService} reference has been set. */
+  public boolean isDataService() {
 
+    return dataService != null;
+  }
 }

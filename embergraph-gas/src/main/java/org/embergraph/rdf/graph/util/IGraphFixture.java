@@ -15,53 +15,36 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.util;
 
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 
-import org.embergraph.rdf.graph.IGASEngine;
-import org.embergraph.rdf.graph.IGraphAccessor;
-
-/**
- * A fixture for a graph.
- */
+/** A fixture for a graph. */
 public interface IGraphFixture {
 
-    /**
-     * Return the provisioned {@link Sail}.
-     */
-    Sail getSail();
+  /** Return the provisioned {@link Sail}. */
+  Sail getSail();
 
-    /**
-     * Destroy the provisioned {@link Sail}.
-     */
-    void destroy() throws Exception;
+  /** Destroy the provisioned {@link Sail}. */
+  void destroy() throws Exception;
 
-    /**
-     * Load a graph into the test harness.
-     * 
-     * @param resource
-     *            Zero or more resources to be loaded.
-     * 
-     * @throws Exception
-     * 
-     */
-    void loadGraph(String... resource) throws Exception;
+  /**
+   * Load a graph into the test harness.
+   *
+   * @param resource Zero or more resources to be loaded.
+   * @throws Exception
+   */
+  void loadGraph(String... resource) throws Exception;
 
-    IGASEngine newGASEngine(int nthreads);
+  IGASEngine newGASEngine(int nthreads);
 
-    /**
-     * 
-     * @param cxn
-     *            A connection that will be used to read on the graph.
-     * @return
-     * 
-     *         TODO DYNAMIC GRAPHS: This does not support dynamic graph patterns
-     *         because the view is determined by the connection that is
-     *         supplied. For embergraph, dynamic graphs are achieved by providing
-     *         the means to identify the graph of interest and then advancing
-     *         the commit time view of the graph before each GAS evaluation
-     *         round.
-     */
-    IGraphAccessor newGraphAccessor(SailConnection cxn);
-
+  /**
+   * @param cxn A connection that will be used to read on the graph.
+   * @return TODO DYNAMIC GRAPHS: This does not support dynamic graph patterns because the view is
+   *     determined by the connection that is supplied. For embergraph, dynamic graphs are achieved
+   *     by providing the means to identify the graph of interest and then advancing the commit time
+   *     view of the graph before each GAS evaluation round.
+   */
+  IGraphAccessor newGraphAccessor(SailConnection cxn);
 }

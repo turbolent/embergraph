@@ -21,39 +21,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
+import org.embergraph.rdf.spo.SPOPredicate;
+import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import org.embergraph.rdf.spo.SPOPredicate;
-import org.embergraph.rdf.vocab.Vocabulary;
-
 /**
  * rdfs4a:
- * 
+ *
  * <pre>
  * (?u ?a ?x) -&gt; (?u rdf:type rdfs:Resource)
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RuleRdfs04a extends AbstractRuleDistinctTermScan {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6070683089054966426L;
+  /** */
+  private static final long serialVersionUID = 6070683089054966426L;
 
-    public RuleRdfs04a(String relationName,Vocabulary vocab) {
+  public RuleRdfs04a(String relationName, Vocabulary vocab) {
 
-            super(  "rdfs04a",
-                    new SPOPredicate(relationName,var("u"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.RESOURCE)),
-                    new SPOPredicate[] {
-                        new SPOPredicate(relationName,var("u"), var("a"), var("x"))
-                    },
-                    null // constraints
-                    );
-
-        }
-
+    super(
+        "rdfs04a",
+        new SPOPredicate(
+            relationName, var("u"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.RESOURCE)),
+        new SPOPredicate[] {new SPOPredicate(relationName, var("u"), var("a"), var("x"))},
+        null // constraints
+        );
+  }
 }

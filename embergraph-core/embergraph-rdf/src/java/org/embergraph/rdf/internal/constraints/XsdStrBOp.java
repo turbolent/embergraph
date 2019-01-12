@@ -20,12 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -35,128 +30,113 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
 
-/**
- * Convert the {@link IV} to a <code>xsd:string</code>.
- */
-public class XsdStrBOp extends IVValueExpression<IV>
-		implements INeedsMaterialization {
+/** Convert the {@link IV} to a <code>xsd:string</code>. */
+public class XsdStrBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-    /**
-	 *
-	 */
-    private static final long serialVersionUID = 3125106876006900339L;
+  /** */
+  private static final long serialVersionUID = 3125106876006900339L;
 
-    private static final transient Logger log = Logger.getLogger(XsdStrBOp.class);
+  private static final transient Logger log = Logger.getLogger(XsdStrBOp.class);
 
-    public XsdStrBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
+  public XsdStrBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
 
-        this(new BOp[] { x }, anns(globals));
+    this(new BOp[] {x}, anns(globals));
+  }
 
+  /** Required shallow copy constructor. */
+  public XsdStrBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 1 || args[0] == null) throw new IllegalArgumentException();
+
+    if (getProperty(Annotations.NAMESPACE) == null) throw new IllegalArgumentException();
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public XsdStrBOp(final XsdStrBOp op) {
+    super(op);
+  }
+
+  public IV get(final IBindingSet bs) {
+
+    final IV iv = getAndCheckBound(0, bs);
+
+    if (log.isDebugEnabled()) {
+      log.debug(iv);
     }
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public XsdStrBOp(final BOp[] args, final Map<String, Object> anns) {
+    final Value val = asValue(iv);
 
-        super(args, anns);
-
-        if (args.length != 1 || args[0] == null)
-            throw new IllegalArgumentException();
-
-        if (getProperty(Annotations.NAMESPACE) == null)
-            throw new IllegalArgumentException();
-
+    if (log.isDebugEnabled()) {
+      log.debug(val);
     }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public XsdStrBOp(final XsdStrBOp op) {
-        super(op);
+    // use to create my simple literals
+    final EmbergraphValueFactory vf = getValueFactory();
+
+    if (val instanceof Literal) {
+      final Literal lit = (Literal) val;
+      if (lit.getDatatype() != null && lit.getDatatype().equals(XSD.STRING)) {
+        // if xsd:string literal return it
+        return iv;
+      } else {
+        // else return new xsd:string literal using Literal.getLabel
+        final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
+        return super.asIV(str, bs);
+      }
+    } else if (val instanceof URI) {
+      // return new simple literal using URI label
+      final EmbergraphLiteral str = vf.createLiteral(val.stringValue(), XSD.STRING);
+      return super.asIV(str, bs);
+    } else {
+      throw new SparqlTypeErrorException();
     }
 
-    public IV get(final IBindingSet bs) {
+    //        final IV iv = getAndCheckBound(0, bs);
+    //
+    //        // use to create my simple literals
+    //        final EmbergraphValueFactory vf = getValueFactory();
+    //
+    //        if (iv.isInline() && !iv.isExtension()) {
+    //            if(iv.isLiteral()){
+    //                return super.asIV(vf.createLiteral(
+    //                        ((AbstractLiteralIV)iv).getLabel(), XSD.STRING), bs);
+    //            }else{
+    //                return super.asIV(vf.createLiteral(iv
+    //                        .getInlineValue().toString(), XSD.STRING), bs);
+    //            }
+    //        }
+    //
+    //        if (iv.isURI()) {
+    //            // return new xsd:string literal using URI label
+    //            final URI uri = (URI) iv.getValue();
+    //            final EmbergraphLiteral str = vf.createLiteral(uri.toString(), XSD.STRING);
+    //            return super.asIV(str, bs);
+    //        } else if (iv.isLiteral()) {
+    //            final EmbergraphLiteral lit = (EmbergraphLiteral) iv.getValue();
+    //            if (lit.getDatatype() != null && lit.getDatatype().equals(XSD.STRING)) {
+    //                // if xsd:string literal return it
+    //                return iv;
+    //        	}
+    //        	else {
+    //                // else return new xsd:string literal using Literal.getLabel
+    //                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
+    //                return super.asIV(str, bs);
+    //            }
+    //        } else {
+    //            throw new SparqlTypeErrorException();
+    //        }
 
-        final IV iv = getAndCheckBound(0, bs);
-        
-        if (log.isDebugEnabled()) {
-        	log.debug(iv);
-        }
-        
-        final Value val = asValue(iv);
+  }
 
-        if (log.isDebugEnabled()) {
-        	log.debug(val);
-        }
-        
-        // use to create my simple literals
-        final EmbergraphValueFactory vf = getValueFactory();
+  /** This bop can only work with materialized terms. */
+  public Requirement getRequirement() {
 
-        if (val instanceof Literal) {
-        	final Literal lit = (Literal) val;
-            if (lit.getDatatype() != null && lit.getDatatype().equals(XSD.STRING)) {
-                // if xsd:string literal return it
-                return iv;
-        	}
-        	else {
-                // else return new xsd:string literal using Literal.getLabel
-                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
-                return super.asIV(str, bs);
-            }
-        } else if (val instanceof URI) {
-            // return new simple literal using URI label
-            final EmbergraphLiteral str = vf.createLiteral(val.stringValue(), XSD.STRING);
-            return super.asIV(str, bs);
-        } else {
-            throw new SparqlTypeErrorException();
-        }
-        
-//        final IV iv = getAndCheckBound(0, bs);
-//
-//        // use to create my simple literals
-//        final EmbergraphValueFactory vf = getValueFactory();
-//
-//        if (iv.isInline() && !iv.isExtension()) {
-//            if(iv.isLiteral()){
-//                return super.asIV(vf.createLiteral(
-//                        ((AbstractLiteralIV)iv).getLabel(), XSD.STRING), bs);
-//            }else{
-//                return super.asIV(vf.createLiteral(iv
-//                        .getInlineValue().toString(), XSD.STRING), bs);
-//            }
-//        }
-//
-//        if (iv.isURI()) {
-//            // return new xsd:string literal using URI label
-//            final URI uri = (URI) iv.getValue();
-//            final EmbergraphLiteral str = vf.createLiteral(uri.toString(), XSD.STRING);
-//            return super.asIV(str, bs);
-//        } else if (iv.isLiteral()) {
-//            final EmbergraphLiteral lit = (EmbergraphLiteral) iv.getValue();
-//            if (lit.getDatatype() != null && lit.getDatatype().equals(XSD.STRING)) {
-//                // if xsd:string literal return it
-//                return iv;
-//        	}
-//        	else {
-//                // else return new xsd:string literal using Literal.getLabel
-//                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
-//                return super.asIV(str, bs);
-//            }
-//        } else {
-//            throw new SparqlTypeErrorException();
-//        }
-
-    }
-
-    /**
-     * This bop can only work with materialized terms.
-     */
-    public Requirement getRequirement() {
-
-        return INeedsMaterialization.Requirement.SOMETIMES;
-
-    }
-
+    return INeedsMaterialization.Requirement.SOMETIMES;
+  }
 }

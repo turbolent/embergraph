@@ -17,25 +17,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sail.webapp.client;
 
-
 /**
- * Exception thrown if a transaction is not active in a context where it needs
- * to be active for some operation to take place.
- * 
+ * Exception thrown if a transaction is not active in a context where it needs to be active for some
+ * operation to take place.
+ *
  * @author bryan
  */
 public class RemoteTransactionNotFoundException extends RuntimeException {
 
-   /**
-    * 
-    */
-   private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-   public RemoteTransactionNotFoundException(final long txId,
-         final String serviceURL) {
+  public RemoteTransactionNotFoundException(final long txId, final String serviceURL) {
 
-      super("txId=" + txId + ", serviceURL=" + serviceURL);
-
-   }
-
+    super("txId=" + txId + ", serviceURL=" + serviceURL);
+  }
 }

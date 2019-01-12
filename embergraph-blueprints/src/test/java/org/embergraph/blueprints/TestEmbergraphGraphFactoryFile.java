@@ -18,26 +18,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.blueprints;
 
 /**
- * Class to test EmbergraphGraphFactory against file creation for client test
- * suite coverage.
- * 
- * @author beebs
+ * Class to test EmbergraphGraphFactory against file creation for client test suite coverage.
  *
+ * @author beebs
  */
 public class TestEmbergraphGraphFactoryFile extends AbstractTestEmbergraphGraphFactory {
 
-	@Override
-	protected EmbergraphGraph getNewGraph(String file) throws Exception {
+  @Override
+  protected EmbergraphGraph getNewGraph(String file) throws Exception {
 
-		return EmbergraphGraphFactory.create(file);
+    return EmbergraphGraphFactory.create(file);
+  }
 
-	}
+  @Override
+  protected EmbergraphGraph loadGraph(String file) throws Exception {
 
-	@Override
-	protected EmbergraphGraph loadGraph(String file) throws Exception {
-		
-		return EmbergraphGraphFactory.open(file, false);
-		
-	}
-
+    return EmbergraphGraphFactory.open(file, false);
+  }
 }

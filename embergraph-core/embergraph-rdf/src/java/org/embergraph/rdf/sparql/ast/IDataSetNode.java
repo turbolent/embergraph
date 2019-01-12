@@ -23,31 +23,25 @@ package org.embergraph.rdf.sparql.ast;
 
 /**
  * Interface for data set declarations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IDataSetNode {
 
-    public interface Annotations {
+  public interface Annotations {
 
-        /**
-         * The {@link DatasetNode}.
-         */
-        String DATASET = "dataset";
+    /** The {@link DatasetNode}. */
+    String DATASET = "dataset";
+  }
 
-    }
+  /**
+   * Set the dataset.
+   *
+   * @param dataset
+   */
+  public void setDataset(final DatasetNode dataset);
 
-    /**
-     * Set the dataset.
-     * 
-     * @param dataset
-     */
-    public void setDataset(final DatasetNode dataset);
-
-    /**
-     * Return the dataset.
-     */
-    public DatasetNode getDataset();
-
+  /** Return the dataset. */
+  public DatasetNode getDataset();
 }

@@ -15,30 +15,27 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.Iterator;
 import java.util.Enumeration;
+import java.util.Iterator;
 
-/**
- * Wrapper for Enumeration objects to produce an Iterator.
- */
-
+/** Wrapper for Enumeration objects to produce an Iterator. */
 public class EnumIterator implements Iterator {
 
-	protected Enumeration m_enum = null;
+  protected Enumeration m_enum = null;
 
-	public EnumIterator(Enumeration p_enum)	{
-		m_enum = p_enum;
-	}
+  public EnumIterator(Enumeration p_enum) {
+    m_enum = p_enum;
+  }
 
-	public boolean hasNext() {
-		return m_enum.hasMoreElements();
-	}
+  public boolean hasNext() {
+    return m_enum.hasMoreElements();
+  }
 
-	public Object next() {
-		return m_enum.nextElement();
-	}
+  public Object next() {
+    return m_enum.nextElement();
+  }
 
-	public void remove() {
-		throw new UnsupportedOperationException("Remove Not Supported by underlying Enumeration");
-	}
+  public void remove() {
+    throw new UnsupportedOperationException("Remove Not Supported by underlying Enumeration");
+  }
 }

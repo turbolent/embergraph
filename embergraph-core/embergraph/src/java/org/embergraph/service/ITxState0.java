@@ -19,45 +19,36 @@ package org.embergraph.service;
 
 /**
  * Immutable state for a transaction.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITxState0 {
 
-    /**
-     * The start time for the transaction as assigned by a centralized
-     * transaction manager service. Transaction start times are unique and also
-     * serve as transaction identifiers. Note that this is NOT the time at which
-     * a transaction begins executing on a specific journal as the same
-     * transaction may start at different moments on different journals and
-     * typically will only start on some journals rather than all.
-     * 
-     * @return The transaction start time.
-     * 
-     * @see #getReadsOnCommitTime()
-     * 
-     *      TODO Rename since the sign indicates read-only vs read-write and
-     *      hence it can not be directly interpreted as a commitTime? (e.g.,
-     *      getTxId()).
-     */
-    long getStartTimestamp();
+  /**
+   * The start time for the transaction as assigned by a centralized transaction manager service.
+   * Transaction start times are unique and also serve as transaction identifiers. Note that this is
+   * NOT the time at which a transaction begins executing on a specific journal as the same
+   * transaction may start at different moments on different journals and typically will only start
+   * on some journals rather than all.
+   *
+   * @return The transaction start time.
+   * @see #getReadsOnCommitTime()
+   *     <p>TODO Rename since the sign indicates read-only vs read-write and hence it can not be
+   *     directly interpreted as a commitTime? (e.g., getTxId()).
+   */
+  long getStartTimestamp();
 
-    /**
-     * The timestamp of the commit point against which this transaction is
-     * reading.
-     * <p>
-     * Note: This is not currently available on a cluster. In that context, we
-     * wind up with the same timestamp for {@link #startTime} and
-     * {@link #readsOnCommitTime} which causes cache pollution for things which
-     * cache based on {@link #readsOnCommitTime}.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/266">
-     *      Refactor native long tx id to thin object</a>
-     * 
-     * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/546" > Add
-     *      cache for access to historical index views on the Journal by name
-     *      and commitTime. </a>
-     */
-    long getReadsOnCommitTime();
-    
- }
+  /**
+   * The timestamp of the commit point against which this transaction is reading.
+   *
+   * <p>Note: This is not currently available on a cluster. In that context, we wind up with the
+   * same timestamp for {@link #startTime} and {@link #readsOnCommitTime} which causes cache
+   * pollution for things which cache based on {@link #readsOnCommitTime}.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/266">Refactor native long tx id
+   *     to thin object</a>
+   * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/546" > Add cache for access to
+   *     historical index views on the Journal by name and commitTime. </a>
+   */
+  long getReadsOnCommitTime();
+}

@@ -19,48 +19,40 @@ package org.embergraph.rdf.spo;
 
 import java.util.Comparator;
 
-
 /**
  * Imposes o:s:p ordering based on termIds only.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class OSPComparator implements Comparator<ISPO> {
 
-    public static final transient Comparator<ISPO> INSTANCE = new OSPComparator();
+  public static final transient Comparator<ISPO> INSTANCE = new OSPComparator();
 
-    private OSPComparator() {
-        
+  private OSPComparator() {}
+
+  public int compare(final ISPO stmt1, final ISPO stmt2) {
+
+    if (stmt1 == stmt2) return 0;
+
+    /*
+     * Note: logic avoids possible overflow of [long] by not computing the
+     * difference between two longs.
+     */
+    int ret;
+
+    ret = stmt1.o().compareTo(stmt2.o());
+
+    if (ret == 0) {
+
+      ret = stmt1.s().compareTo(stmt2.s());
+
+      if (ret == 0) {
+
+        ret = stmt1.p().compareTo(stmt2.p());
+      }
     }
 
-    public int compare(final ISPO stmt1, final ISPO stmt2) {
-
-        if (stmt1 == stmt2)
-            return 0;
-        
-        /*
-         * Note: logic avoids possible overflow of [long] by not computing the
-         * difference between two longs.
-         */
-        int ret;
-        
-        ret = stmt1.o().compareTo(stmt2.o());
-        
-        if( ret == 0 ) {
-        
-            ret = stmt1.s().compareTo(stmt2.s());
-            
-            if( ret == 0 ) {
-                
-                ret = stmt1.p().compareTo(stmt2.p());
-                
-            }
-            
-        }
-
-        return ret;
-        
-    }
-       
+    return ret;
+  }
 }

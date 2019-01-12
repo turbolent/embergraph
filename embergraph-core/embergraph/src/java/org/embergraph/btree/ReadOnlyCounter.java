@@ -21,32 +21,28 @@ package org.embergraph.btree;
 
 /**
  * A read-only view of an {@link ICounter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ReadOnlyCounter implements ICounter {
 
-    private ICounter src;
+  private ICounter src;
 
-    public ReadOnlyCounter(ICounter src) {
+  public ReadOnlyCounter(ICounter src) {
 
-        assert src != null;
+    assert src != null;
 
-        this.src = src;
+    this.src = src;
+  }
 
-    }
+  public long get() {
 
-    public long get() {
+    return src.get();
+  }
 
-        return src.get();
+  public long incrementAndGet() {
 
-    }
-
-    public long incrementAndGet() {
-
-        throw new UnsupportedOperationException();
-
-    }
-
+    throw new UnsupportedOperationException();
+  }
 }

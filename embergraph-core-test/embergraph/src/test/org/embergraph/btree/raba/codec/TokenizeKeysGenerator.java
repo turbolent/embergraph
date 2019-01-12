@@ -34,195 +34,174 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.util.BytesUtil;
 
 /**
- * Tokenize an input file, collect the set of distinct keywords, and encode
- * those keywords as unsigned byte[]s.
- * 
+ * Tokenize an input file, collect the set of distinct keywords, and encode those keywords as
+ * unsigned byte[]s.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TokenizeKeysGenerator implements IRabaGenerator {
 
-    protected static final Logger log = Logger
-            .getLogger(TokenizeKeysGenerator.class);
-    
-    /**
-     * The encoding used to serialize the term (the value of each tuple).
-     */
-    public static final transient String charset = "UTF-8";
+  protected static final Logger log = Logger.getLogger(TokenizeKeysGenerator.class);
 
-    public TokenizeKeysGenerator(String fileOrResource) {
-        
-        final Reader r;
-        if(new File(fileOrResource).exists()) {
-        
-            try {
-                r = new BufferedReader(new FileReader(fileOrResource));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException("Could not open file: "
-                        + fileOrResource);
-            }
-            
-        } else {
-            
-            final InputStream is = getClass().getResourceAsStream(
-                    fileOrResource);
+  /** The encoding used to serialize the term (the value of each tuple). */
+  public static final transient String charset = "UTF-8";
 
-            if (is == null) {
+  public TokenizeKeysGenerator(String fileOrResource) {
 
-                throw new RuntimeException("No such resource: "+fileOrResource);
-                
-            }
-            
-            r = new BufferedReader(new InputStreamReader(is));
-            
-        }
-        
-        // tokenize.
-        final Set<String> tokens;
-        try {
-            tokens = tokenize(fileOrResource, r);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-        // encode.
-        data = new byte[tokens.size()][];
-        int i = 0;
-        for(String s : tokens) {
-            try {
-                data[i++] = s.getBytes(charset);
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException("Could not encode: " + s
-                        + ", charset=" + charset + " : " + e, e);
-            }
-        }
-        
-    }
-    final byte[][] data;
-    
-    // @todo bias is for the keys which are earliest in the lexical order.
-    public byte[][] generateKeys(final int size) {
+    final Reader r;
+    if (new File(fileOrResource).exists()) {
 
-        // clone so we don't disturb the order when we sort the data.
-        final byte[][] a = data.clone();
+      try {
+        r = new BufferedReader(new FileReader(fileOrResource));
+      } catch (FileNotFoundException e) {
+        throw new RuntimeException("Could not open file: " + fileOrResource);
+      }
 
-        // Place the keys into sorted order.
-        Arrays.sort(a, BytesUtil.UnsignedByteArrayComparator.INSTANCE);
+    } else {
 
-        // clear unused keys.
-        for (int i = size; i < a.length; i++) {
+      final InputStream is = getClass().getResourceAsStream(fileOrResource);
 
-            a[i] = null;
+      if (is == null) {
 
-        }
-        
-        return a;
-        
+        throw new RuntimeException("No such resource: " + fileOrResource);
+      }
+
+      r = new BufferedReader(new InputStreamReader(is));
     }
 
-    public byte[][] generateValues(final int size) {
-
-        // clone so we don't disturb the order when we clear unused entries.
-        final byte[][] a = data.clone();
-
-        // @todo could also set some percentage of the values to null.
-        
-        // clear unused values.
-        for (int i = size; i < a.length; i++) {
-
-            a[i] = null;
-
-        }
-        
-        return a;
-        
+    // tokenize.
+    final Set<String> tokens;
+    try {
+      tokens = tokenize(fileOrResource, r);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
 
-    /**
-     * Yes.
-     */
-    public boolean isKeysGenerator() {
-        return true;
+    // encode.
+    data = new byte[tokens.size()][];
+    int i = 0;
+    for (String s : tokens) {
+      try {
+        data[i++] = s.getBytes(charset);
+      } catch (UnsupportedEncodingException e) {
+        throw new RuntimeException(
+            "Could not encode: " + s + ", charset=" + charset + " : " + e, e);
+      }
+    }
+  }
+
+  final byte[][] data;
+
+  // @todo bias is for the keys which are earliest in the lexical order.
+  public byte[][] generateKeys(final int size) {
+
+    // clone so we don't disturb the order when we sort the data.
+    final byte[][] a = data.clone();
+
+    // Place the keys into sorted order.
+    Arrays.sort(a, BytesUtil.UnsignedByteArrayComparator.INSTANCE);
+
+    // clear unused keys.
+    for (int i = size; i < a.length; i++) {
+
+      a[i] = null;
     }
 
-    /**
-     * Yes.
-     */
-    public boolean isValuesGenerator() {
-        return true;
+    return a;
+  }
+
+  public byte[][] generateValues(final int size) {
+
+    // clone so we don't disturb the order when we clear unused entries.
+    final byte[][] a = data.clone();
+
+    // @todo could also set some percentage of the values to null.
+
+    // clear unused values.
+    for (int i = size; i < a.length; i++) {
+
+      a[i] = null;
     }
 
-//    Reader r = new BufferedReader(new InputStreamReader(is));
+    return a;
+  }
 
-    public Set<String> tokenize(final String fileOrResource, final Reader r)
-            throws Exception {
+  /** Yes. */
+  public boolean isKeysGenerator() {
+    return true;
+  }
 
-        // the distinct terms.
-        final Set<String> terms = new HashSet<String>(10000);
+  /** Yes. */
+  public boolean isValuesGenerator() {
+    return true;
+  }
 
-        // the tokenizer.
-        final StreamTokenizer tok = new StreamTokenizer(r);
+  //    Reader r = new BufferedReader(new InputStreamReader(is));
 
-        // #of tokens processed.
-        int count = 0;
+  public Set<String> tokenize(final String fileOrResource, final Reader r) throws Exception {
 
-        boolean done = false;
+    // the distinct terms.
+    final Set<String> terms = new HashSet<String>(10000);
 
-        while (!done) {
+    // the tokenizer.
+    final StreamTokenizer tok = new StreamTokenizer(r);
 
-            final int ttype = tok.nextToken();
+    // #of tokens processed.
+    int count = 0;
 
-            switch (ttype) {
+    boolean done = false;
 
-            case StreamTokenizer.TT_EOF:
+    while (!done) {
 
-                done = true;
+      final int ttype = tok.nextToken();
 
-                break;
+      switch (ttype) {
+        case StreamTokenizer.TT_EOF:
+          done = true;
 
-            case StreamTokenizer.TT_NUMBER: {
+          break;
 
-                double d = tok.nval;
+        case StreamTokenizer.TT_NUMBER:
+          {
+            double d = tok.nval;
 
-                String s = Double.toString(d);
+            String s = Double.toString(d);
 
-                terms.add(s);
+            terms.add(s);
 
-                count++;
+            count++;
 
-                break;
+            break;
+          }
 
-            }
+        case StreamTokenizer.TT_WORD:
+          {
+            final String s = tok.sval;
 
-            case StreamTokenizer.TT_WORD: {
+            terms.add(s);
 
-                final String s = tok.sval;
+            count++;
 
-                terms.add(s);
-
-                count++;
-
-                break;
-
-            }
-
-            }
-
-        }
-
-        if (log.isInfoEnabled()) {
-            log.info("Tokenized: " + count + " tokens with " + terms.size()
-                    + " distinct terms : src=" + fileOrResource);
-        }
-
-        return terms;
-
+            break;
+          }
+      }
     }
 
+    if (log.isInfoEnabled()) {
+      log.info(
+          "Tokenized: "
+              + count
+              + " tokens with "
+              + terms.size()
+              + " distinct terms : src="
+              + fileOrResource);
+    }
+
+    return terms;
+  }
 }

@@ -22,41 +22,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.List;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
- * Test of encode/decode and especially <em>comparator</em> semantics for mixed
- * {@link IV}s.
- * 
+ * Test of encode/decode and especially <em>comparator</em> semantics for mixed {@link IV}s.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestEncodeDecodeMixedIVs extends AbstractEncodeDecodeMixedIVsTest {
 
-    /**
-     * 
-     */
-    public TestEncodeDecodeMixedIVs() {
-    }
+  /** */
+  public TestEncodeDecodeMixedIVs() {}
 
-    /**
-     * @param name
-     */
-    public TestEncodeDecodeMixedIVs(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestEncodeDecodeMixedIVs(String name) {
+    super(name);
+  }
 
-    public void test_encodeDecode_comparator() throws DatatypeConfigurationException {
+  public void test_encodeDecode_comparator() throws DatatypeConfigurationException {
 
-        final List<IV<?,?>> ivs = prepareIVs();
-                     
-        final IV<?, ?>[] e = ivs.toArray(new IV[0]);
+    final List<IV<?, ?>> ivs = prepareIVs();
 
-        AbstractEncodeDecodeKeysTestCase.doEncodeDecodeTest(e);
+    final IV<?, ?>[] e = ivs.toArray(new IV[0]);
 
-        AbstractEncodeDecodeKeysTestCase.doComparatorTest(e);
+    AbstractEncodeDecodeKeysTestCase.doEncodeDecodeTest(e);
 
-    }
-
+    AbstractEncodeDecodeKeysTestCase.doComparatorTest(e);
+  }
 }

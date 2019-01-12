@@ -23,95 +23,109 @@ package org.embergraph.rdf.sail;
 import java.util.Random;
 
 /**
- * TestCase to test single writer/mutiple transaction committed readers with
- * SAIL interface.
- * 
+ * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+ *
  * @author Martyn Cutcher
  */
 public class TestMROWTransactionsWithHistory extends TestMROWTransactions {
 
-    public TestMROWTransactionsWithHistory() {
+  public TestMROWTransactionsWithHistory() {}
+
+  public TestMROWTransactionsWithHistory(final String arg0) {
+    super(arg0);
+  }
+
+  public void test_multiple_csem_transaction_1ms_history_stress() throws Exception {
+
+    final Random r = new Random();
+
+    for (int i = 0; i < 10; i++) {
+
+      final int nreaderThreads = r.nextInt(19) + 1;
+
+      log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+
+      domultiple_csem_transaction2(
+          1 /* retentionMillis */,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          false /* isolatableIndices */);
     }
+  }
 
-    public TestMROWTransactionsWithHistory(final String arg0) {
-        super(arg0);
+  public void test_multiple_csem_transaction_1ms_history_stress_readWriteTx() throws Exception {
+
+    final Random r = new Random();
+
+    for (int i = 0; i < 10; i++) {
+
+      final int nreaderThreads = r.nextInt(19) + 1;
+
+      log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+
+      domultiple_csem_transaction2(
+          1 /* retentionMillis */,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          true /* isolatableIndices */);
     }
+  }
 
-    public void test_multiple_csem_transaction_1ms_history_stress() throws Exception {
+  // Random history period GTE 1
+  public void test_multiple_csem_transaction_withHistory_stress() throws Exception {
 
-        final Random r = new Random();
-        
-        for (int i = 0; i < 10; i++) {
+    final Random r = new Random();
 
-            final int nreaderThreads = r.nextInt(19) + 1;
-            
-            log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+    for (int i = 0; i < 10; i++) {
 
-            domultiple_csem_transaction2(1/* retentionMillis */,
-                    nreaderThreads, 100/* nwriters */, 400/* nreaders */, false/* isolatableIndices */);
+      final int retentionMillis = (r.nextInt(10) * 10) + 1;
 
-        }
-        
+      final int nreaderThreads = r.nextInt(19) + 1;
+
+      log.warn(
+          "Trial: "
+              + i
+              + ", retentionMillis="
+              + retentionMillis
+              + ", nreaderThreads="
+              + nreaderThreads);
+
+      domultiple_csem_transaction2(
+          retentionMillis,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          false /* isolatableIndices */);
     }
+  }
 
-    public void test_multiple_csem_transaction_1ms_history_stress_readWriteTx()
-            throws Exception {
+  // Random history period GTE 1
+  public void test_multiple_csem_transaction_withHistory_stress_withReadWriteTx() throws Exception {
 
-        final Random r = new Random();
+    final Random r = new Random();
 
-        for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
 
-            final int nreaderThreads = r.nextInt(19) + 1;
+      final int retentionMillis = (r.nextInt(10) * 10) + 1;
 
-            log.warn("Trial: " + i + ", nreaderThreads=" + nreaderThreads);
+      final int nreaderThreads = r.nextInt(19) + 1;
 
-            domultiple_csem_transaction2(1/* retentionMillis */,
-                    nreaderThreads, 100/* nwriters */, 400/* nreaders */, true/* isolatableIndices */);
+      log.warn(
+          "Trial: "
+              + i
+              + ", retentionMillis="
+              + retentionMillis
+              + ", nreaderThreads="
+              + nreaderThreads);
 
-        }
-
+      domultiple_csem_transaction2(
+          retentionMillis,
+          nreaderThreads,
+          100 /* nwriters */,
+          400 /* nreaders */,
+          true /* isolatableIndices */);
     }
-
-    // Random history period GTE 1
-    public void test_multiple_csem_transaction_withHistory_stress() throws Exception {
-
-        final Random r = new Random();
-        
-        for (int i = 0; i < 10; i++) {
-
-            final int retentionMillis = (r.nextInt(10) * 10) + 1;
-            
-            final int nreaderThreads = r.nextInt(19) + 1;
-            
-            log.warn("Trial: " + i + ", retentionMillis=" + retentionMillis
-                    + ", nreaderThreads=" + nreaderThreads);
-
-            domultiple_csem_transaction2(retentionMillis, nreaderThreads,
-                    100/* nwriters */, 400/* nreaders */, false/* isolatableIndices */);
-
-        }
-        
-    }
-    
-    // Random history period GTE 1
-    public void test_multiple_csem_transaction_withHistory_stress_withReadWriteTx() throws Exception {
-
-        final Random r = new Random();
-        
-        for (int i = 0; i < 10; i++) {
-
-            final int retentionMillis = (r.nextInt(10) * 10) + 1;
-            
-            final int nreaderThreads = r.nextInt(19) + 1;
-            
-            log.warn("Trial: " + i + ", retentionMillis=" + retentionMillis
-                    + ", nreaderThreads=" + nreaderThreads);
-
-            domultiple_csem_transaction2(retentionMillis, nreaderThreads,
-                    100/* nwriters */, 400/* nreaders */, true/* isolatableIndices */);
-
-        }
-        
-    }
-    
+  }
 }

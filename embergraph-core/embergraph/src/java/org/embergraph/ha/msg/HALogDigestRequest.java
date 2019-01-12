@@ -21,28 +21,24 @@ import java.io.Serializable;
 
 public class HALogDigestRequest implements IHALogDigestRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final long commitCounter;
+  private final long commitCounter;
 
-    public HALogDigestRequest(final long commitCounter) {
+  public HALogDigestRequest(final long commitCounter) {
 
-        this.commitCounter = commitCounter;
+    this.commitCounter = commitCounter;
+  }
 
-    }
+  @Override
+  public long getCommitCounter() {
 
-    @Override
-    public long getCommitCounter() {
+    return commitCounter;
+  }
 
-        return commitCounter;
+  @Override
+  public String toString() {
 
-    }
-
-    @Override
-    public String toString() {
-
-        return super.toString() + "{commitCounter=" + getCommitCounter() + "}";
-
-    }
-
+    return super.toString() + "{commitCounter=" + getCommitCounter() + "}";
+  }
 }

@@ -26,41 +26,34 @@ import org.embergraph.btree.raba.codec.FrontCodedRabaCoder;
 
 /**
  * Test suite using the {@link FrontCodedRabaCoder} to provide key compression.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNodeDataRecord_FrontCoded extends AbstractNodeDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestNodeDataRecord_FrontCoded() {
-    }
+  /** */
+  public TestNodeDataRecord_FrontCoded() {}
 
-    /**
-     * @param name
-     */
-    public TestNodeDataRecord_FrontCoded(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestNodeDataRecord_FrontCoded(String name) {
+    super(name);
+  }
 
-    @Override
-    protected boolean mayGenerateLeaves() {
-        return false;
-    }
+  @Override
+  protected boolean mayGenerateLeaves() {
+    return false;
+  }
 
-    @Override
-    protected boolean mayGenerateNodes() {
-        return true;
-    }
+  @Override
+  protected boolean mayGenerateNodes() {
+    return true;
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  protected void setUp() throws Exception {
 
-        coder = new DefaultNodeCoder(new FrontCodedRabaCoder(8/*ratio*/));
+    super.setUp();
 
-    }
-    
+    coder = new DefaultNodeCoder(new FrontCodedRabaCoder(8 /*ratio*/));
+  }
 }

@@ -25,53 +25,45 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /**
+   * Returns a test that will run each of the implementation specific test suites in turn.
+   *
+   * <p>TODO There should be a test suite for the XDR package. It is implicitly tested by testing
+   * the ganglia message encode/decode logic.
+   */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("Ganglia");
+
+    suite.addTestSuite(TestGangliaMunge.class);
+
+    /*
+     * 3.1 wire format test.
+     *
+     * TODO Same test for pre-3.1 wire format?
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestGangliaMessageEncodeDecode31.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    // Test suite verifies correct listener shutdown.
+    suite.addTestSuite(TestGangliaListenerShutdown.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     * 
-     * TODO There should be a test suite for the XDR package.  It is implicitly
-     * tested by testing the ganglia message encode/decode logic.
-     */
-	public static Test suite() {
+    // Test suite verifies correct service shutdown.
+    suite.addTestSuite(TestGangliaServiceShutdown.class);
 
-		final TestSuite suite = new TestSuite("Ganglia");
-
-		suite.addTestSuite(TestGangliaMunge.class);
-
-		/*
-		 * 3.1 wire format test.
-		 * 
-		 * TODO Same test for pre-3.1 wire format?
-		 */
-		suite.addTestSuite(TestGangliaMessageEncodeDecode31.class);
-
-		// Test suite verifies correct listener shutdown.
-		suite.addTestSuite(TestGangliaListenerShutdown.class);
-		
-		// Test suite verifies correct service shutdown.
-		suite.addTestSuite(TestGangliaServiceShutdown.class);
-		
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

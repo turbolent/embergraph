@@ -26,38 +26,34 @@ import org.embergraph.counters.CAT;
 
 /**
  * Adds reporting for the size of the named solution set.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NamedSolutionSetStats extends BOpStats {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public final CAT solutionSetSize = new CAT();
+  public final CAT solutionSetSize = new CAT();
 
-    @Override
-    public void add(final BOpStats o) {
+  @Override
+  public void add(final BOpStats o) {
 
-        super.add(o);
+    super.add(o);
 
-        if (o instanceof NamedSolutionSetStats) {
+    if (o instanceof NamedSolutionSetStats) {
 
-            final NamedSolutionSetStats t = (NamedSolutionSetStats) o;
+      final NamedSolutionSetStats t = (NamedSolutionSetStats) o;
 
-            solutionSetSize.add(t.solutionSetSize.get());
-
-        }
-
+      solutionSetSize.add(t.solutionSetSize.get());
     }
+  }
 
-    @Override
-    protected void toString(final StringBuilder sb) {
-        
-        super.toString(sb);
+  @Override
+  protected void toString(final StringBuilder sb) {
 
-        sb.append(",solutionSetSize=" + solutionSetSize.get());
-        
-    }
+    super.toString(sb);
 
+    sb.append(",solutionSetSize=" + solutionSetSize.get());
+  }
 }

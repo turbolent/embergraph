@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
@@ -40,147 +39,123 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Flatten nested (non-optional,non-minus) JoinGroupNodes whenever possible.
- * 
- *   JoinGroupNode {
- *     JoinGroupNode [context=VarNode(sid)] {
- *       StatementPatternNode(VarNode(a), VarNode(b), VarNode(c), VarNode(sid)) [scope=NAMED_CONTEXTS]
- *     }
- *     StatementPatternNode(VarNode(sid), ConstantNode(TermId(6U)[http://example.com/source]), VarNode(src)) [scope=DEFAULT_CONTEXTS]
- *   }
- *   
- *   ==>
- *   
- *   JoinGroupNode {
- *     StatementPatternNode(VarNode(a), VarNode(b), VarNode(c), VarNode(sid)) [scope=NAMED_CONTEXTS]
- *     StatementPatternNode(VarNode(sid), ConstantNode(TermId(6U)[http://example.com/source]), VarNode(src)) [scope=DEFAULT_CONTEXTS]
- *   }
+ *
+ * <p>JoinGroupNode { JoinGroupNode [context=VarNode(sid)] { StatementPatternNode(VarNode(a),
+ * VarNode(b), VarNode(c), VarNode(sid)) [scope=NAMED_CONTEXTS] } StatementPatternNode(VarNode(sid),
+ * ConstantNode(TermId(6U)[http://example.com/source]), VarNode(src)) [scope=DEFAULT_CONTEXTS] }
+ *
+ * <p>==>
+ *
+ * <p>JoinGroupNode { StatementPatternNode(VarNode(a), VarNode(b), VarNode(c), VarNode(sid))
+ * [scope=NAMED_CONTEXTS] StatementPatternNode(VarNode(sid),
+ * ConstantNode(TermId(6U)[http://example.com/source]), VarNode(src)) [scope=DEFAULT_CONTEXTS] }
  */
 public class ASTFlattenJoinGroupsOptimizer implements IASTOptimizer {
 
-//    private static final Logger log = Logger
-//            .getLogger(ASTFlattenUnionsOptimizer.class);
-//    
-    @Override
-    public QueryNodeWithBindingSet optimize(
-        final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  //    private static final Logger log = Logger
+  //            .getLogger(ASTFlattenUnionsOptimizer.class);
+  //
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-        final IQueryNode queryNode = input.getQueryNode();
-        final IBindingSet[] bindingSets = input.getBindingSets();     
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
-        if (!(queryNode instanceof QueryRoot))
-           return new QueryNodeWithBindingSet(queryNode, bindingSets);
+    if (!(queryNode instanceof QueryRoot))
+      return new QueryNodeWithBindingSet(queryNode, bindingSets);
 
-        final QueryRoot queryRoot = (QueryRoot) queryNode;
+    final QueryRoot queryRoot = (QueryRoot) queryNode;
 
-        // Main WHERE clause
-        {
+    // Main WHERE clause
+    {
+      final GroupNodeBase<?> whereClause = (GroupNodeBase<?>) queryRoot.getWhereClause();
 
-            final GroupNodeBase<?> whereClause = (GroupNodeBase<?>) queryRoot
-                    .getWhereClause();
+      if (whereClause != null) {
 
-            if (whereClause != null) {
-
-                flattenGroups(whereClause);
-                
-            }
-
-        }
-
-        // Named subqueries
-        if (queryRoot.getNamedSubqueries() != null) {
-
-            final NamedSubqueriesNode namedSubqueries = queryRoot
-                    .getNamedSubqueries();
-
-            /*
-             * Note: This loop uses the current size() and get(i) to avoid
-             * problems with concurrent modification during visitation.
-             */
-            for (int i = 0; i < namedSubqueries.size(); i++) {
-
-                final NamedSubqueryRoot namedSubquery = (NamedSubqueryRoot) namedSubqueries
-                        .get(i);
-
-                final GroupNodeBase<?> whereClause = (GroupNodeBase<?>) namedSubquery
-                        .getWhereClause();
-
-                if (whereClause != null) {
-
-                    flattenGroups(whereClause);
-                    
-                }
-
-            }
-
-        }
-
-        // log.error("\nafter rewrite:\n" + queryNode);
-
-        return new QueryNodeWithBindingSet(queryNode, bindingSets);
-
+        flattenGroups(whereClause);
+      }
     }
 
-    /**
-     * 
-     * 
-     * @param op
+    // Named subqueries
+    if (queryRoot.getNamedSubqueries() != null) {
+
+      final NamedSubqueriesNode namedSubqueries = queryRoot.getNamedSubqueries();
+
+      /*
+       * Note: This loop uses the current size() and get(i) to avoid
+       * problems with concurrent modification during visitation.
+       */
+      for (int i = 0; i < namedSubqueries.size(); i++) {
+
+        final NamedSubqueryRoot namedSubquery = (NamedSubqueryRoot) namedSubqueries.get(i);
+
+        final GroupNodeBase<?> whereClause = (GroupNodeBase<?>) namedSubquery.getWhereClause();
+
+        if (whereClause != null) {
+
+          flattenGroups(whereClause);
+        }
+      }
+    }
+
+    // log.error("\nafter rewrite:\n" + queryNode);
+
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  }
+
+  /** @param op */
+  private static void flattenGroups(final GroupNodeBase<?> op) {
+
+    /*
+     * Recursion first, but only into group nodes (including within subqueries).
      */
-    private static void flattenGroups(final GroupNodeBase<?> op) {
+    for (int i = 0; i < op.arity(); i++) {
 
-        /*
-         * Recursion first, but only into group nodes (including within subqueries).
-         */
-        for (int i = 0; i < op.arity(); i++) {
+      final BOp child = op.get(i);
 
-            final BOp child = op.get(i);
+      if (child instanceof GroupNodeBase<?>) {
 
-            if (child instanceof GroupNodeBase<?>) {
+        final GroupNodeBase<?> childGroup = (GroupNodeBase<?>) child;
 
-                final GroupNodeBase<?> childGroup = (GroupNodeBase<?>) child;
+        flattenGroups(childGroup);
 
-                flattenGroups(childGroup);
-                
-            } else if (child instanceof QueryBase) {
+      } else if (child instanceof QueryBase) {
 
-                final QueryBase subquery = (QueryBase) child;
+        final QueryBase subquery = (QueryBase) child;
 
-                final GroupNodeBase<IGroupMemberNode> childGroup = (GroupNodeBase<IGroupMemberNode>) subquery
-                        .getWhereClause();
+        final GroupNodeBase<IGroupMemberNode> childGroup =
+            (GroupNodeBase<IGroupMemberNode>) subquery.getWhereClause();
 
-                flattenGroups(childGroup);
-
-            }
-
-        }
-
-        final IGroupNode<?> parent = op.getParent();
-        
-        if (op instanceof JoinGroupNode && 
-        		!((JoinGroupNode) op).isOptional() &&
-        		!((JoinGroupNode) op).isMinus() &&
-        		parent != null && parent instanceof JoinGroupNode) {
-            
-        	final JoinGroupNode thisJoinGroup = (JoinGroupNode) op;
-        	
-            final JoinGroupNode parentJoinGroup = (JoinGroupNode) parent;
-            
-            int pos = parentJoinGroup.indexOf(thisJoinGroup);
-
-            final List<IGroupMemberNode> children = 
-            		new LinkedList<IGroupMemberNode>(thisJoinGroup.getChildren());
-
-            for (IGroupMemberNode child : children) {
-            	
-            	thisJoinGroup.removeChild(child);
-            	
-            	parentJoinGroup.addArg(pos++, child);
-            	
-            }
-            
-            parentJoinGroup.removeChild(thisJoinGroup);
-            
-        }
-
+        flattenGroups(childGroup);
+      }
     }
 
+    final IGroupNode<?> parent = op.getParent();
+
+    if (op instanceof JoinGroupNode
+        && !((JoinGroupNode) op).isOptional()
+        && !((JoinGroupNode) op).isMinus()
+        && parent != null
+        && parent instanceof JoinGroupNode) {
+
+      final JoinGroupNode thisJoinGroup = (JoinGroupNode) op;
+
+      final JoinGroupNode parentJoinGroup = (JoinGroupNode) parent;
+
+      int pos = parentJoinGroup.indexOf(thisJoinGroup);
+
+      final List<IGroupMemberNode> children =
+          new LinkedList<IGroupMemberNode>(thisJoinGroup.getChildren());
+
+      for (IGroupMemberNode child : children) {
+
+        thisJoinGroup.removeChild(child);
+
+        parentJoinGroup.addArg(pos++, child);
+      }
+
+      parentJoinGroup.removeChild(thisJoinGroup);
+    }
+  }
 }

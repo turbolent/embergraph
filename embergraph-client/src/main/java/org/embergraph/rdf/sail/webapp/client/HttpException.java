@@ -20,46 +20,37 @@ package org.embergraph.rdf.sail.webapp.client;
 import java.io.IOException;
 
 /**
- * Extends {@link IOException} to reveal the HTTP Status Code associated with
- * the response.
- * 
+ * Extends {@link IOException} to reveal the HTTP Status Code associated with the response.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class HttpException extends IOException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final int statusCode;
+  private final int statusCode;
 
-    /**
-     * The HTTP Status code associated with the response.
-     */
-    public int getStatusCode() {
+  /** The HTTP Status code associated with the response. */
+  public int getStatusCode() {
 
-        return statusCode;
+    return statusCode;
+  }
 
-    }
+  public HttpException(final int statusCode, final String message) {
 
-    public HttpException(final int statusCode, final String message) {
+    super(message);
 
-        super(message);
+    this.statusCode = statusCode;
+  }
 
-        this.statusCode = statusCode;
+  /**
+   * Variant for wrap and throw provides improved traces.
+   *
+   * @param cause
+   */
+  public HttpException(final HttpException cause) {
 
-    }
-    
-    /**
-     * Variant for wrap and throw provides improved traces.
-     * 
-     * @param cause
-     */
-    public HttpException(final HttpException cause) {
-
-        this(cause.statusCode, cause.getMessage());
-        
-    }
-
+    this(cause.statusCode, cause.getMessage());
+  }
 }

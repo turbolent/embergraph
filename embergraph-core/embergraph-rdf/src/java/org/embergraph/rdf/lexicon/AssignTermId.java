@@ -29,40 +29,35 @@ import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
 /**
- * Assigns the term identifier to duplicate {@link EmbergraphValue} for a single
- * write operation when an {@link IDuplicateRemover} was applied.
- * 
- * @todo this should be more transparent. One way to do that is to get rid of
- *       {@link KVOList#map(org.embergraph.service.ndx.pipeline.KVOList.Op)} and
- *       {@link KVOList.Op} and provide a TERM2ID index write specific interface
- *       extending KVO. When the term identifier is assigned, we then invoke the
- *       method on that interface to set the term identifier on the original and
- *       any duplicates. The method would have to know about {@link KVOList}
- *       however, and that means that we would really need to different
- *       implementations depending on whether {@link KVOC} was being extended or
- *       not. This is possibly even more messy.
- * 
+ * Assigns the term identifier to duplicate {@link EmbergraphValue} for a single write operation
+ * when an {@link IDuplicateRemover} was applied.
+ *
+ * @todo this should be more transparent. One way to do that is to get rid of {@link
+ *     KVOList#map(org.embergraph.service.ndx.pipeline.KVOList.Op)} and {@link KVOList.Op} and
+ *     provide a TERM2ID index write specific interface extending KVO. When the term identifier is
+ *     assigned, we then invoke the method on that interface to set the term identifier on the
+ *     original and any duplicates. The method would have to know about {@link KVOList} however, and
+ *     that means that we would really need to different implementations depending on whether {@link
+ *     KVOC} was being extended or not. This is possibly even more messy.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AssignTermId implements KVOList.Op<EmbergraphValue> {
 
-    @SuppressWarnings("rawtypes")
-    private final IV iv;
+  @SuppressWarnings("rawtypes")
+  private final IV iv;
 
-    @SuppressWarnings("rawtypes")
-    public AssignTermId(final IV iv) {
+  @SuppressWarnings("rawtypes")
+  public AssignTermId(final IV iv) {
 
-        this.iv = iv;
+    this.iv = iv;
+  }
 
-    }
+  public void apply(final KVO<EmbergraphValue> t) {
 
-    public void apply(final KVO<EmbergraphValue> t) {
+    t.obj.setIV(iv);
 
-        t.obj.setIV(iv);
+    // System.err.println("Assigned term identifier to duplicate: "+tid+" : "+t.obj);
 
-        // System.err.println("Assigned term identifier to duplicate: "+tid+" : "+t.obj);
-
-    }
-
+  }
 }

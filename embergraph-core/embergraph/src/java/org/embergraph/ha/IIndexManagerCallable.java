@@ -19,40 +19,31 @@ package org.embergraph.ha;
 
 import java.io.Serializable;
 import java.util.concurrent.Callable;
-
 import org.embergraph.journal.IIndexManager;
 
 /**
- * Interface allows arbitrary tasks to be submitted to an {@link HAGlue} service
- * for evaluation.
- * 
+ * Interface allows arbitrary tasks to be submitted to an {@link HAGlue} service for evaluation.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>
  */
 public interface IIndexManagerCallable<T> extends Serializable, Callable<T> {
 
-    /**
-     * Invoked before the task is executed to provide a reference to the
-     * {@link IIndexManager} on which it is executing.
-     * 
-     * @param indexManager
-     *            The index manager on the service.
-     * 
-     * @throws IllegalArgumentException
-     *             if the argument is <code>null</code>
-     * @throws IllegalStateException
-     *             if {@link #setIndexManager(IIndexManager)} has already set.
-     */
-    void setIndexManager(IIndexManager indexManager);
+  /**
+   * Invoked before the task is executed to provide a reference to the {@link IIndexManager} on
+   * which it is executing.
+   *
+   * @param indexManager The index manager on the service.
+   * @throws IllegalArgumentException if the argument is <code>null</code>
+   * @throws IllegalStateException if {@link #setIndexManager(IIndexManager)} has already set.
+   */
+  void setIndexManager(IIndexManager indexManager);
 
-    /**
-     * Return the {@link IIndexManager}.
-     * 
-     * @return The index manager and never <code>null</code>.
-     * 
-     * @throws IllegalStateException
-     *             if index manager reference is not set.
-     */
-    IIndexManager getIndexManager();
-
+  /**
+   * Return the {@link IIndexManager}.
+   *
+   * @return The index manager and never <code>null</code>.
+   * @throws IllegalStateException if index manager reference is not set.
+   */
+  IIndexManager getIndexManager();
 }

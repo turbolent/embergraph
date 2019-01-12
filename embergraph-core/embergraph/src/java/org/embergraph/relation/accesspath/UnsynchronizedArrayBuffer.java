@@ -24,66 +24,52 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 /**
- * An unsynchronized buffer backed by a fixed capacity array that migrates
- * references onto the caller's buffer (which is normally thread-safe) using
- * {@link IBuffer#add(int)}.
- * <p>
- * <strong>This implementation is NOT thread-safe.</strong>
- * 
+ * An unsynchronized buffer backed by a fixed capacity array that migrates references onto the
+ * caller's buffer (which is normally thread-safe) using {@link IBuffer#add(int)}.
+ *
+ * <p><strong>This implementation is NOT thread-safe.</strong>
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class UnsynchronizedArrayBuffer<E> extends
-        AbstractUnsynchronizedArrayBuffer<E> {
+public class UnsynchronizedArrayBuffer<E> extends AbstractUnsynchronizedArrayBuffer<E> {
 
-    /**
-     * The buffer onto which chunks are evicted by {@link #overflow()}.
-     */
-    private final IBuffer<E[]> target;
+  /** The buffer onto which chunks are evicted by {@link #overflow()}. */
+  private final IBuffer<E[]> target;
 
-    /**
-     * @param target
-     *            The target buffer onto which the elements will be flushed.
-     * @param cls
-     *            The component type of the backing array.
-     * @param capacity
-     *            The capacity of the backing buffer.
-     */
-    public UnsynchronizedArrayBuffer(final IBuffer<E[]> target,
-            final Class<? extends E> cls, final int capacity) {
+  /**
+   * @param target The target buffer onto which the elements will be flushed.
+   * @param cls The component type of the backing array.
+   * @param capacity The capacity of the backing buffer.
+   */
+  public UnsynchronizedArrayBuffer(
+      final IBuffer<E[]> target, final Class<? extends E> cls, final int capacity) {
 
-        this(target, capacity, cls, null/* filter */);
+    this(target, capacity, cls, null /* filter */);
+  }
 
-    }
+  /**
+   * @param target The target buffer onto which chunks of elements will be flushed.
+   * @param cls The component type of the backing array.
+   * @param capacity The capacity of the backing buffer.
+   * @param filter Filter to keep elements out of the buffer (optional).
+   */
+  public UnsynchronizedArrayBuffer(
+      final IBuffer<E[]> target,
+      final int capacity,
+      final Class<? extends E> cls,
+      final IElementFilter<E> filter) {
 
-    /**
-     * @param target
-     *            The target buffer onto which chunks of elements will be
-     *            flushed.
-     * @param cls
-     *            The component type of the backing array.
-     * @param capacity
-     *            The capacity of the backing buffer.
-     * @param filter
-     *            Filter to keep elements out of the buffer (optional).
-     */
-    public UnsynchronizedArrayBuffer(final IBuffer<E[]> target,
-            final int capacity, final Class<? extends E> cls,
-            final IElementFilter<E> filter) {
+    super(capacity, cls, filter);
 
-        super(capacity, cls, filter);
+    if (target == null) throw new IllegalArgumentException();
 
-        if (target == null)
-            throw new IllegalArgumentException();
+    this.target = target;
+  }
 
-        this.target = target;
-    }
+  /** Add the chunk to the target buffer. */
+  protected final void handleChunk(final E[] chunk) {
 
-    /** Add the chunk to the target buffer. */
-    final protected void handleChunk(final E[] chunk) {
-
-        target.add(chunk);
-
-    }
-
+    target.add(chunk);
+  }
 }

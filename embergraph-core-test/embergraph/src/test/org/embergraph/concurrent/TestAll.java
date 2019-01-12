@@ -27,48 +27,37 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates tests in dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("concurrent");
-       
-        // Test suite for deadlock detection.
-        suite.addTestSuite(TestTxDag.class);
-        
-        // Test suite for the lock manager.
-        suite.addTestSuite(TestLockManager.class);
+    final TestSuite suite = new TestSuite("concurrent");
 
-        // Test suite for the non-blocking lock manager.
-        suite.addTestSuite(TestNonBlockingLockManager.class);
-        suite.addTestSuite(TestNonBlockingLockManagerWithNewDesign.class);
-        suite.addTestSuite(StressTestNonBlockingLockManagerWithTxDag.class);
-        suite.addTestSuite(StressTestNonBlockingLockManagerWithPredeclaredLocks.class);
+    // Test suite for deadlock detection.
+    suite.addTestSuite(TestTxDag.class);
 
-        return suite;
-        
-    }
-    
+    // Test suite for the lock manager.
+    suite.addTestSuite(TestLockManager.class);
+
+    // Test suite for the non-blocking lock manager.
+    suite.addTestSuite(TestNonBlockingLockManager.class);
+    suite.addTestSuite(TestNonBlockingLockManagerWithNewDesign.class);
+    suite.addTestSuite(StressTestNonBlockingLockManagerWithTxDag.class);
+    suite.addTestSuite(StressTestNonBlockingLockManagerWithPredeclaredLocks.class);
+
+    return suite;
+  }
 }

@@ -29,17 +29,11 @@ import junit.framework.TestCase2;
  */
 public class AbstractKeyBufferTestCase extends TestCase2 {
 
-    /**
-     * 
-     */
-    public AbstractKeyBufferTestCase() {
-    }
+  /** */
+  public AbstractKeyBufferTestCase() {}
 
-    /**
-     * @param name
-     */
-    public AbstractKeyBufferTestCase(String name) {
-        super(name);
-    }
-
+  /** @param name */
+  public AbstractKeyBufferTestCase(String name) {
+    super(name);
+  }
 }

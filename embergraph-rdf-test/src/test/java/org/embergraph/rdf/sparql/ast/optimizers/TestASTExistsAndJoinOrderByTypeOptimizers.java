@@ -27,140 +27,187 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /**
  * Test suite for {@link ASTUnionFiltersOptimizer}.
- * 
+ *
  * @author Jeremy Carroll
  */
 public class TestASTExistsAndJoinOrderByTypeOptimizers extends AbstractOptimizerTestCase {
 
-    /**
-     * 
-     */
-    public TestASTExistsAndJoinOrderByTypeOptimizers() {
-    }
+  /** */
+  public TestASTExistsAndJoinOrderByTypeOptimizers() {}
 
-    /**
-     * @param name
-     */
-    public TestASTExistsAndJoinOrderByTypeOptimizers(String name) {
-        super(name);
-    }
-	@Override
-	IASTOptimizer newOptimizer() {
-		return new ASTOptimizerList(new ASTExistsOptimizer(), 
-				new ASTJoinOrderByTypeOptimizer());
-	}
-	
-	public void testSimpleExists() {
-		new Helper(){{
-			given = select( varNode(w), 
-					where ( joinGroupNode(
-							    filter(
-							    	exists(varNode(y), joinGroupNode(
-							    			statementPatternNode(constantNode(a),constantNode(b),varNode(w))))
-							    )
-							) ) );
-			
-			final SubqueryRoot askQuery;
-			expected = select( varNode(w), 
-					where (joinGroupNode(
-								askQuery=ask(varNode(y),
-										joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(b),varNode(w))
-											 ) ),
-								filter(exists(varNode(y), joinGroupNode(
-						    			statementPatternNode(constantNode(a),constantNode(b),varNode(w))))
-						    ) )
-							) );
-			askQuery.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
-		}}.test();
-		
-	}
-	public void testOrExists() {
-		new Helper(){{
-			given = select( varNode(w), 
-					where ( joinGroupNode(
-							    filter(
-							    	or (
-							    	    exists(varNode(y), joinGroupNode(
-							    			statementPatternNode(constantNode(a),constantNode(b),varNode(w)))),
-								    	exists(varNode(z), joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(c),varNode(w)))))
-							    )
-							) ) );
-			
-			final SubqueryRoot askQuery1, askQuery2;
-			expected = select( varNode(w), 
-					where (joinGroupNode(
-								askQuery1=ask(varNode(y),
-										joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(b),varNode(w))
-											 ) ),
-								askQuery2=ask(varNode(z),
-										joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(c),varNode(w))
-											) ),
-							    filter(
-								    	or (
-								    	    exists(varNode(y), joinGroupNode(
-								    			statementPatternNode(constantNode(a),constantNode(b),varNode(w)))),
-									    	exists(varNode(z), joinGroupNode(
-												statementPatternNode(constantNode(a),constantNode(c),varNode(w)))))
-								    )
-						    ) )
-							);
-            askQuery1.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
-            askQuery2.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
-		}}.test();
-		
-	}
-	public void testOrWithPropertyPath() {
-		new Helper(){{
-			given = select( varNode(w), 
-					where ( joinGroupNode(
-							    filter(
-							    	or (
-							    	    exists(varNode(y), joinGroupNode(
-							    			arbitartyLengthPropertyPath(varNode(w), constantNode(b), HelperFlag.ONE_OR_MORE,
-													joinGroupNode( statementPatternNode(leftVar(), constantNode(b),  rightVar()) ) )
+  /** @param name */
+  public TestASTExistsAndJoinOrderByTypeOptimizers(String name) {
+    super(name);
+  }
 
-							    			)),
-								    	exists(varNode(z), joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(c),varNode(w)))))
-							    )
-							) ) );
+  @Override
+  IASTOptimizer newOptimizer() {
+    return new ASTOptimizerList(new ASTExistsOptimizer(), new ASTJoinOrderByTypeOptimizer());
+  }
 
-    		varCount = 0;
-			final ArbitraryLengthPathNode alpp1 = arbitartyLengthPropertyPath(varNode(w), constantNode(b), HelperFlag.ONE_OR_MORE,
-					joinGroupNode( statementPatternNode(leftVar(), constantNode(b),  rightVar()), HelperFlag.SUBGROUP_OF_ALP ) );
-    		varCount = 0;
-			final ArbitraryLengthPathNode alpp2 = arbitartyLengthPropertyPath(varNode(w), constantNode(b), HelperFlag.ONE_OR_MORE,
-					joinGroupNode( statementPatternNode(leftVar(), constantNode(b),  rightVar()), HelperFlag.SUBGROUP_OF_ALP ) );
-            final SubqueryRoot askQuery1, askQuery2;
-			expected = select( varNode(w), 
-					where (joinGroupNode(
-					            askQuery1=ask(varNode(y),
-										joinGroupNode(
-							    			alpp1
-											 ) ),
-								askQuery2=ask(varNode(z),
-										joinGroupNode(
-											statementPatternNode(constantNode(a),constantNode(c),varNode(w))
-											) ),
-							    filter(
-								    	or (
-								    	    exists(varNode(y), joinGroupNode(
-									    			alpp2
+  public void testSimpleExists() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        filter(
+                            exists(
+                                varNode(y),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(b), varNode(w))))))));
 
-									    			)),
-									    	exists(varNode(z), joinGroupNode(
-												statementPatternNode(constantNode(a),constantNode(c),varNode(w)))))
-								    )
-						    ) )
-							);
-            askQuery1.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
-            askQuery2.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+        final SubqueryRoot askQuery;
+        expected =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        askQuery =
+                            ask(
+                                varNode(y),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(b), varNode(w)))),
+                        filter(
+                            exists(
+                                varNode(y),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(b), varNode(w))))))));
+        askQuery.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+      }
+    }.test();
+  }
 
-		}}.test();
-	}
+  public void testOrExists() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        filter(
+                            or(
+                                exists(
+                                    varNode(y),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(b), varNode(w)))),
+                                exists(
+                                    varNode(z),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(c), varNode(w)))))))));
 
+        final SubqueryRoot askQuery1, askQuery2;
+        expected =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        askQuery1 =
+                            ask(
+                                varNode(y),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(b), varNode(w)))),
+                        askQuery2 =
+                            ask(
+                                varNode(z),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(c), varNode(w)))),
+                        filter(
+                            or(
+                                exists(
+                                    varNode(y),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(b), varNode(w)))),
+                                exists(
+                                    varNode(z),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(c), varNode(w)))))))));
+        askQuery1.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+        askQuery2.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+      }
+    }.test();
+  }
+
+  public void testOrWithPropertyPath() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        filter(
+                            or(
+                                exists(
+                                    varNode(y),
+                                    joinGroupNode(
+                                        arbitartyLengthPropertyPath(
+                                            varNode(w),
+                                            constantNode(b),
+                                            HelperFlag.ONE_OR_MORE,
+                                            joinGroupNode(
+                                                statementPatternNode(
+                                                    leftVar(), constantNode(b), rightVar()))))),
+                                exists(
+                                    varNode(z),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(c), varNode(w)))))))));
+
+        varCount = 0;
+        final ArbitraryLengthPathNode alpp1 =
+            arbitartyLengthPropertyPath(
+                varNode(w),
+                constantNode(b),
+                HelperFlag.ONE_OR_MORE,
+                joinGroupNode(
+                    statementPatternNode(leftVar(), constantNode(b), rightVar()),
+                    HelperFlag.SUBGROUP_OF_ALP));
+        varCount = 0;
+        final ArbitraryLengthPathNode alpp2 =
+            arbitartyLengthPropertyPath(
+                varNode(w),
+                constantNode(b),
+                HelperFlag.ONE_OR_MORE,
+                joinGroupNode(
+                    statementPatternNode(leftVar(), constantNode(b), rightVar()),
+                    HelperFlag.SUBGROUP_OF_ALP));
+        final SubqueryRoot askQuery1, askQuery2;
+        expected =
+            select(
+                varNode(w),
+                where(
+                    joinGroupNode(
+                        askQuery1 = ask(varNode(y), joinGroupNode(alpp1)),
+                        askQuery2 =
+                            ask(
+                                varNode(z),
+                                joinGroupNode(
+                                    statementPatternNode(
+                                        constantNode(a), constantNode(c), varNode(w)))),
+                        filter(
+                            or(
+                                exists(varNode(y), joinGroupNode(alpp2)),
+                                exists(
+                                    varNode(z),
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            constantNode(a), constantNode(c), varNode(w)))))))));
+        askQuery1.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+        askQuery2.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
+      }
+    }.test();
+  }
 }

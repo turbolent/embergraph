@@ -1,50 +1,53 @@
 package org.embergraph.blueprints;
 
-
 public class EmbergraphGraphEdit {
-    
-    public enum Action {
-        ADD, REMOVE
-    }
 
-    private final Action action;
+  public enum Action {
+    ADD,
+    REMOVE
+  }
 
-    private final EmbergraphGraphAtom atom;
-    
-    private final long timestamp;
-    
-    public EmbergraphGraphEdit(final Action action, final EmbergraphGraphAtom atom) {
-        this(action, atom, 0L);
-    }
+  private final Action action;
 
-    public EmbergraphGraphEdit(final Action action, final EmbergraphGraphAtom atom,
-            final long timestamp) {
-        this.action = action;
-        this.atom = atom;
-        this.timestamp = timestamp;
-    }
+  private final EmbergraphGraphAtom atom;
 
-    public Action getAction() {
-        return action;
-    }
+  private final long timestamp;
 
-    public EmbergraphGraphAtom getAtom() {
-        return atom;
-    }
-    
-    public long getTimestamp() {
-        return timestamp;
-    }
-    
-    public String getId() {
-        return atom.getId();
-    }
+  public EmbergraphGraphEdit(final Action action, final EmbergraphGraphAtom atom) {
+    this(action, atom, 0L);
+  }
 
-    @Override
-    public String toString() {
-        return "EmbergraphGraphEdit [action=" + action + ", atom=" + atom
-                + ", timestamp=" + timestamp + "]";
-    }
+  public EmbergraphGraphEdit(
+      final Action action, final EmbergraphGraphAtom atom, final long timestamp) {
+    this.action = action;
+    this.atom = atom;
+    this.timestamp = timestamp;
+  }
 
+  public Action getAction() {
+    return action;
+  }
+
+  public EmbergraphGraphAtom getAtom() {
+    return atom;
+  }
+
+  public long getTimestamp() {
+    return timestamp;
+  }
+
+  public String getId() {
+    return atom.getId();
+  }
+
+  @Override
+  public String toString() {
+    return "EmbergraphGraphEdit [action="
+        + action
+        + ", atom="
+        + atom
+        + ", timestamp="
+        + timestamp
+        + "]";
+  }
 }
-

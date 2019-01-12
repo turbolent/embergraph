@@ -26,112 +26,118 @@ import static org.embergraph.rdf.sparql.ast.optimizers.AbstractOptimizerTestCase
 
 /**
  * Test suite for {@link ASTUnionFiltersOptimizer}.
- * 
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
- * @version $Id: TestASTEmptyGroupOptimizer.java 5302 2011-10-07 14:28:03Z
- *          thompsonbry $
+ * @version $Id: TestASTEmptyGroupOptimizer.java 5302 2011-10-07 14:28:03Z thompsonbry $
  */
 public class TestASTPropertyPathOptimizer extends AbstractOptimizerTestCase {
 
-    /**
-     * 
-     */
-    public TestASTPropertyPathOptimizer() {
-    }
+  /** */
+  public TestASTPropertyPathOptimizer() {}
 
-    /**
-     * @param name
-     */
-    public TestASTPropertyPathOptimizer(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestASTPropertyPathOptimizer(String name) {
+    super(name);
+  }
 
-  
-	@Override
-	IASTOptimizer newOptimizer() {
-		return new ASTPropertyPathOptimizerInTest();
-	}
-	
-	/**
-	 * This is (nearly) the same as {@link TestALPPinTrac773#testSimpleALPP()
-	 */
-	public void test_basic_star() {
-		new Helper(){{
+  @Override
+  IASTOptimizer newOptimizer() {
+    return new ASTPropertyPathOptimizerInTest();
+  }
 
-    		given = select( varNode(x), 
-    				where (
-    						joinGroupNode( 
-    								propertyPathNode(varNode(x),"c*", constantNode(b))
-    							)
-    				) );
-    		
-    		
-    		expected = select( varNode(x), 
-    				where (
-    					joinGroupNode( 
-    						arbitartyLengthPropertyPath(varNode(x), constantNode(b), ZERO_OR_MORE,
-    										joinGroupNode( 
-    												statementPatternNode(leftVar(), constantNode(c),  rightVar()),
-    												SUBGROUP_OF_ALP
-    												) ) )
-    				) );
-		}}.test();
-	}
+  /**
+   * This is (nearly) the same as {@link TestALPPinTrac773#testSimpleALPP()
+   */
+  public void test_basic_star() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(x),
+                where(joinGroupNode(propertyPathNode(varNode(x), "c*", constantNode(b)))));
 
-	public void test_filter_star() {
-		new Helper(){{
+        expected =
+            select(
+                varNode(x),
+                where(
+                    joinGroupNode(
+                        arbitartyLengthPropertyPath(
+                            varNode(x),
+                            constantNode(b),
+                            ZERO_OR_MORE,
+                            joinGroupNode(
+                                statementPatternNode(leftVar(), constantNode(c), rightVar()),
+                                SUBGROUP_OF_ALP)))));
+      }
+    }.test();
+  }
 
-    		given = select( varNode(x), 
-    				where (
-					  filter(
-						exists(varNode(y),
-    						joinGroupNode( 
-    								propertyPathNode(varNode(x),"c*", constantNode(b))
-    							) ) )
-    				) );
-    		
-    		expected = select( varNode(x), 
-    				where (
-    				  filter(
-    					exists(varNode(y),
-    					  joinGroupNode( 
-    						arbitartyLengthPropertyPath(varNode(x), constantNode(b), ZERO_OR_MORE,
-    										joinGroupNode( 
-    												statementPatternNode(leftVar(), constantNode(c),  rightVar()),
-    												SUBGROUP_OF_ALP
-    												) ) ) ) )
-    				) );
-		}}.test();
-	}
-	public void test_filter_or_star() {
-		new Helper(){{
+  public void test_filter_star() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(x),
+                where(
+                    filter(
+                        exists(
+                            varNode(y),
+                            joinGroupNode(propertyPathNode(varNode(x), "c*", constantNode(b)))))));
 
-    		given = select( varNode(x), 
-    				where (
-					  filter(
-						    	or (
-						    			constantNode(a),
-						exists(varNode(y),
-    						joinGroupNode( 
-    								propertyPathNode(varNode(x),"c*", constantNode(b))
-    							) ) )
-    							)
-    				) );
-    		
-    		expected = select( varNode(x), 
-    				where (
-    				  filter(
-						    	or (
-						    			constantNode(a),
-    					exists(varNode(y),
-    					  joinGroupNode( 
-    						arbitartyLengthPropertyPath(varNode(x), constantNode(b), ZERO_OR_MORE,
-    										joinGroupNode( 
-    												statementPatternNode(leftVar(), constantNode(c),  rightVar()),
-    												SUBGROUP_OF_ALP
-    												) ) ) ) ) )
-    				) );
-		}}.test();
-	}
+        expected =
+            select(
+                varNode(x),
+                where(
+                    filter(
+                        exists(
+                            varNode(y),
+                            joinGroupNode(
+                                arbitartyLengthPropertyPath(
+                                    varNode(x),
+                                    constantNode(b),
+                                    ZERO_OR_MORE,
+                                    joinGroupNode(
+                                        statementPatternNode(
+                                            leftVar(), constantNode(c), rightVar()),
+                                        SUBGROUP_OF_ALP)))))));
+      }
+    }.test();
+  }
 
+  public void test_filter_or_star() {
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(x),
+                where(
+                    filter(
+                        or(
+                            constantNode(a),
+                            exists(
+                                varNode(y),
+                                joinGroupNode(
+                                    propertyPathNode(varNode(x), "c*", constantNode(b))))))));
+
+        expected =
+            select(
+                varNode(x),
+                where(
+                    filter(
+                        or(
+                            constantNode(a),
+                            exists(
+                                varNode(y),
+                                joinGroupNode(
+                                    arbitartyLengthPropertyPath(
+                                        varNode(x),
+                                        constantNode(b),
+                                        ZERO_OR_MORE,
+                                        joinGroupNode(
+                                            statementPatternNode(
+                                                leftVar(), constantNode(c), rightVar()),
+                                            SUBGROUP_OF_ALP))))))));
+      }
+    }.test();
+  }
 }

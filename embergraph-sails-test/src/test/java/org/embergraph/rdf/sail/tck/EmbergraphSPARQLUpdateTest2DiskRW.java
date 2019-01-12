@@ -23,46 +23,37 @@ package org.embergraph.rdf.sail.tck;
 
 import java.io.File;
 import java.util.Properties;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
  * A variant of the test suite using {@link BufferMode#DiskRW}.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531"> SPARQL
- *      UPDATE Extensions (Trac) </a>
- * 
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
+ *     (Trac) </a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/555" > Support
- *      PSOutputStream/InputStream at IRawStore </a>
- * 
+ *     PSOutputStream/InputStream at IRawStore </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: EmbergraphSPARQLUpdateTxTest2.java 7168 2013-05-28 21:30:38Z
- *          thompsonbry $
+ * @version $Id: EmbergraphSPARQLUpdateTxTest2.java 7168 2013-05-28 21:30:38Z thompsonbry $
  */
 public class EmbergraphSPARQLUpdateTest2DiskRW extends EmbergraphSPARQLUpdateTest2 {
 
-    /**
-     * 
-     */
-    public EmbergraphSPARQLUpdateTest2DiskRW() {
-    }
+  /** */
+  public EmbergraphSPARQLUpdateTest2DiskRW() {}
 
-    @Override
-    public Properties getProperties() {
+  @Override
+  public Properties getProperties() {
 
-        final Properties props = new Properties(super.getProperties());
+    final Properties props = new Properties(super.getProperties());
 
-        final File journal = EmbergraphStoreTest.createTempFile();
-        
-        props.setProperty(EmbergraphSail.Options.FILE, journal.getAbsolutePath());
+    final File journal = EmbergraphStoreTest.createTempFile();
 
-        props.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW.toString());
-//        props.setProperty(Options.BUFFER_MODE, BufferMode.DiskWORM.toString());
+    props.setProperty(EmbergraphSail.Options.FILE, journal.getAbsolutePath());
 
-        return props;
+    props.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW.toString());
+    //        props.setProperty(Options.BUFFER_MODE, BufferMode.DiskWORM.toString());
 
-    }
-
+    return props;
+  }
 }

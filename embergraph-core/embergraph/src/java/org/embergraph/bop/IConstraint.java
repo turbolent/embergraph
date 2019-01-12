@@ -26,30 +26,24 @@ package org.embergraph.bop;
 import java.io.Serializable;
 
 /**
- * An interface for specifying constraints on the allowable states of an
- * {@link IBindingSet}. For example, you can impose the constraint that two
- * variables must have distinct bindings the constraint that a binding must be
- * (or must not be) a particular value type, or that the binding must take on
- * one of a set of enumerated values.
- * 
+ * An interface for specifying constraints on the allowable states of an {@link IBindingSet}. For
+ * example, you can impose the constraint that two variables must have distinct bindings the
+ * constraint that a binding must be (or must not be) a particular value type, or that the binding
+ * must take on one of a set of enumerated values.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IConstraint extends BOp, Serializable {
 
-    /**
-     * Return <code>true</code> if the binding set satisfies the constraint.
-     * 
-     * @param bindingSet
-     *            The binding set.
-     * 
-     * @todo rename as eval(IBindingSet)?
-     */
-    public boolean accept(IBindingSet bindingSet);
+  /**
+   * Return <code>true</code> if the binding set satisfies the constraint.
+   *
+   * @param bindingSet The binding set.
+   * @todo rename as eval(IBindingSet)?
+   */
+  public boolean accept(IBindingSet bindingSet);
 
-    /**
-     * A zero length empty {@link IConstraint} array.
-     */
-    public IConstraint[] EMPTY = new IConstraint[0];
-    
+  /** A zero length empty {@link IConstraint} array. */
+  public IConstraint[] EMPTY = new IConstraint[0];
 }

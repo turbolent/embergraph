@@ -26,7 +26,6 @@ package org.embergraph.rdf.sparql.ast.service.history;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
 import org.embergraph.btree.DefaultTupleSerializer;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
@@ -45,249 +44,214 @@ import org.embergraph.util.Bytes;
 
 /**
  * (De-)serializes {@link IChangeRecord}s for the history index.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607"> History
- *      Service</a>
- *      
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: SPOTupleSerializer.java 5281 2011-10-03 14:00:39Z thompsonbry $
  */
-public class HistoryIndexTupleSerializer extends
-        DefaultTupleSerializer<HistoryChangeRecord, HistoryChangeRecord> {
+public class HistoryIndexTupleSerializer
+    extends DefaultTupleSerializer<HistoryChangeRecord, HistoryChangeRecord> {
 
-    private static final long serialVersionUID = -1L;
-    
-    /**
-     * The natural order for the {@link ISPO} data in the index (this is not a
-     * total key order since the key has a revision timestamp prefix).
-     */
-    private SPOKeyOrder keyOrder;
-    
-    /**
-     * If true, explicit SPOs decoded from index tuples will have a sid
-     * attached.
-     */
-    private boolean sids;
-    
-    /**
-     * De-serialization constructor.
-     */
-    public HistoryIndexTupleSerializer() {
-        
-    }
+  private static final long serialVersionUID = -1L;
 
-    /**
-     * Create an {@link ITupleSerializer} for the indicated access path.
-     * 
-     * @param keyOrder
-     *            The key order for the (s,p,o[,c]) component of the key.
-     */
-    public HistoryIndexTupleSerializer(final SPOKeyOrder keyOrder, final boolean sids) {
+  /**
+   * The natural order for the {@link ISPO} data in the index (this is not a total key order since
+   * the key has a revision timestamp prefix).
+   */
+  private SPOKeyOrder keyOrder;
 
-        this(keyOrder, sids, getDefaultLeafKeysCoder(), getDefaultValuesCoder());
+  /** If true, explicit SPOs decoded from index tuples will have a sid attached. */
+  private boolean sids;
 
-    }
-    
-    /**
-     * Create an {@link ITupleSerializer} for the indicated access path.
-     * 
-     * @param keyOrder
-     *            The access path.
-     * @param sids
-     *            If true, attach sids to decoded SPOs where appropriate.
-     * @param leafKeySer
-     * @param leafValSer
-     */
-    public HistoryIndexTupleSerializer(final SPOKeyOrder keyOrder,
-            final boolean sids, final IRabaCoder leafKeySer,
-            final IRabaCoder leafValSer) {
+  /** De-serialization constructor. */
+  public HistoryIndexTupleSerializer() {}
 
-        super(new ASCIIKeyBuilderFactory(), leafKeySer, leafValSer);
+  /**
+   * Create an {@link ITupleSerializer} for the indicated access path.
+   *
+   * @param keyOrder The key order for the (s,p,o[,c]) component of the key.
+   */
+  public HistoryIndexTupleSerializer(final SPOKeyOrder keyOrder, final boolean sids) {
 
-        this.keyOrder = keyOrder;
+    this(keyOrder, sids, getDefaultLeafKeysCoder(), getDefaultValuesCoder());
+  }
 
-        this.sids = sids;
+  /**
+   * Create an {@link ITupleSerializer} for the indicated access path.
+   *
+   * @param keyOrder The access path.
+   * @param sids If true, attach sids to decoded SPOs where appropriate.
+   * @param leafKeySer
+   * @param leafValSer
+   */
+  public HistoryIndexTupleSerializer(
+      final SPOKeyOrder keyOrder,
+      final boolean sids,
+      final IRabaCoder leafKeySer,
+      final IRabaCoder leafValSer) {
 
-    }
+    super(new ASCIIKeyBuilderFactory(), leafKeySer, leafValSer);
 
-    @Override
-    public byte[] serializeKey(final Object obj) {
+    this.keyOrder = keyOrder;
 
-        if (obj == null)
-            throw new IllegalArgumentException();
-        
-        if (obj instanceof HistoryChangeRecord)
-            return serializeKey((HistoryChangeRecord) obj);
+    this.sids = sids;
+  }
 
-        throw new UnsupportedOperationException();
-        
-    }
+  @Override
+  public byte[] serializeKey(final Object obj) {
 
-    public byte[] serializeKey(final HistoryChangeRecord changeRecord) {
+    if (obj == null) throw new IllegalArgumentException();
 
-        final IKeyBuilder keyBuilder = getKeyBuilder().reset();
+    if (obj instanceof HistoryChangeRecord) return serializeKey((HistoryChangeRecord) obj);
 
-        // append the revision time.
-        keyBuilder.append(changeRecord.getRevisionTime());
+    throw new UnsupportedOperationException();
+  }
 
-        // append the statement (encoded IVs).
-        keyOrder.appendKey(keyBuilder, changeRecord.getStatement());
+  public byte[] serializeKey(final HistoryChangeRecord changeRecord) {
 
-        final byte[] key = keyBuilder.getKey();
+    final IKeyBuilder keyBuilder = getKeyBuilder().reset();
 
-        return key;
-        
-    }
+    // append the revision time.
+    keyBuilder.append(changeRecord.getRevisionTime());
 
-    @Override
-    public byte[] serializeVal(final HistoryChangeRecord changeRecord) {
+    // append the statement (encoded IVs).
+    keyOrder.appendKey(keyBuilder, changeRecord.getStatement());
 
-        if (changeRecord == null)
-            throw new IllegalArgumentException();
+    final byte[] key = keyBuilder.getKey();
 
-        final ISPO spo = changeRecord.getStatement();
+    return key;
+  }
 
-        final boolean override = spo.isOverride();
+  @Override
+  public byte[] serializeVal(final HistoryChangeRecord changeRecord) {
 
-        final boolean userFlag = spo.getUserFlag();
+    if (changeRecord == null) throw new IllegalArgumentException();
 
-        final StatementEnum type = spo.getStatementType();
+    final ISPO spo = changeRecord.getStatement();
 
-        // optionally set the override and user flag bits on the value.
-        final byte lowNibble = (byte)
-            (type.code()// statement type
+    final boolean override = spo.isOverride();
+
+    final boolean userFlag = spo.getUserFlag();
+
+    final StatementEnum type = spo.getStatementType();
+
+    // optionally set the override and user flag bits on the value.
+    final byte lowNibble =
+        (byte)
+            (type.code() // statement type
                 | (override ? StatementEnum.MASK_OVERRIDE : 0x0)
-                | (userFlag ? StatementEnum.MASK_USER_FLAG : 0x0)
-                );
-                
-        final byte highNibble = (byte) changeRecord.getChangeAction().ordinal();
+                | (userFlag ? StatementEnum.MASK_USER_FLAG : 0x0));
 
-        final byte b = (byte) (0xff & (highNibble << 4 | lowNibble));
+    final byte highNibble = (byte) changeRecord.getChangeAction().ordinal();
 
-        return new byte[] { b };
+    final byte b = (byte) (0xff & (highNibble << 4 | lowNibble));
 
-	}
+    return new byte[] {b};
+  }
 
-    public HistoryChangeRecord deserializeKey(final ITuple tuple) {
-        
-        // just de-serialize the whole tuple.
-        return deserialize(tuple);
-        
-    }
+  public HistoryChangeRecord deserializeKey(final ITuple tuple) {
 
-	public HistoryChangeRecord deserialize(final ITuple tuple) {
+    // just de-serialize the whole tuple.
+    return deserialize(tuple);
+  }
 
-        if (tuple == null)
-            throw new IllegalArgumentException();
-        
-        // copy of the key in a reused buffer.
-        final byte[] key = tuple.getKeyBuffer().array();
+  public HistoryChangeRecord deserialize(final ITuple tuple) {
 
-        // Decode the revision timestamp.
-        final long revisionTimestamp = KeyBuilder.decodeLong(key, 0/* off */);
+    if (tuple == null) throw new IllegalArgumentException();
 
-        // Decode statement, starting after the revision timestamp.
-        final SPO spo = keyOrder.decodeKey(key, Bytes.SIZEOF_LONG/* off */);
+    // copy of the key in a reused buffer.
+    final byte[] key = tuple.getKeyBuffer().array();
 
-        final ChangeAction changeAction;
-        if ((tuple.flags() & IRangeQuery.VALS) != 0) {
+    // Decode the revision timestamp.
+    final long revisionTimestamp = KeyBuilder.decodeLong(key, 0 /* off */);
 
-            /*
-             * Decode the statement type, bit flags, and optional sid based on
-             * the tuple value.
-             */
+    // Decode statement, starting after the revision timestamp.
+    final SPO spo = keyOrder.decodeKey(key, Bytes.SIZEOF_LONG /* off */);
 
-            final byte b = tuple.getValueBuffer().array()[0];
+    final ChangeAction changeAction;
+    if ((tuple.flags() & IRangeQuery.VALS) != 0) {
 
-            // Just the low nibble. 
-            final byte lowNibble = (byte) (0xff & (b & 0x0f));
+      /*
+       * Decode the statement type, bit flags, and optional sid based on
+       * the tuple value.
+       */
 
-            // Just the high nibble. 
-            final byte highNibble = (byte) (0xff & (b >> 4));
+      final byte b = tuple.getValueBuffer().array()[0];
 
-            {
-                
-                final byte code = lowNibble;
+      // Just the low nibble.
+      final byte lowNibble = (byte) (0xff & (b & 0x0f));
 
-                final StatementEnum type = StatementEnum.decode(code);
+      // Just the high nibble.
+      final byte highNibble = (byte) (0xff & (b >> 4));
 
-                spo.setStatementType(type);
+      {
+        final byte code = lowNibble;
 
-                spo.setOverride(StatementEnum.isOverride(code));
+        final StatementEnum type = StatementEnum.decode(code);
 
-                spo.setUserFlag(StatementEnum.isUserFlag(code));
+        spo.setStatementType(type);
 
-                if (sids) {
+        spo.setOverride(StatementEnum.isOverride(code));
 
-                    // SIDs only valid for triples.
-                    assert keyOrder.getKeyArity() == 3;
+        spo.setUserFlag(StatementEnum.isUserFlag(code));
 
-                    if (spo.isExplicit()) {
+        if (sids) {
 
-//                        spo.setStatementIdentifier(true);
+          // SIDs only valid for triples.
+          assert keyOrder.getKeyArity() == 3;
 
-                    }
+          if (spo.isExplicit()) {
 
-                }
-            
-            }
+            //                        spo.setStatementIdentifier(true);
 
-            changeAction = ChangeAction.values()[highNibble];
-
-        } else {
-            
-            // Not available unless VALS are read.
-            changeAction = null;
-            
+          }
         }
+      }
 
-        final HistoryChangeRecord changeRecord = new HistoryChangeRecord(spo,
-                changeAction, revisionTimestamp);
+      changeAction = ChangeAction.values()[highNibble];
 
-        return changeRecord;
+    } else {
 
+      // Not available unless VALS are read.
+      changeAction = null;
     }
 
-    /**
-     * The initial version.
-     */
-    private final static transient byte VERSION0 = 0;
+    final HistoryChangeRecord changeRecord =
+        new HistoryChangeRecord(spo, changeAction, revisionTimestamp);
 
-    /**
-     * The current version.
-     */
-    private final static transient byte VERSION = VERSION0;
+    return changeRecord;
+  }
 
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
+  /** The initial version. */
+  private static final transient byte VERSION0 = 0;
 
-        super.readExternal(in);
-        
-        final byte version = in.readByte();
-        
-        switch (version) {
-        case VERSION0:
-            keyOrder = SPOKeyOrder.valueOf(in.readByte());
-            sids = in.readByte() > 0;
-            break;
-        default:
-            throw new UnsupportedOperationException("Unknown version: "
-                    + version);
-        }
+  /** The current version. */
+  private static final transient byte VERSION = VERSION0;
 
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
 
+    super.readExternal(in);
+
+    final byte version = in.readByte();
+
+    switch (version) {
+      case VERSION0:
+        keyOrder = SPOKeyOrder.valueOf(in.readByte());
+        sids = in.readByte() > 0;
+        break;
+      default:
+        throw new UnsupportedOperationException("Unknown version: " + version);
     }
+  }
 
-    public void writeExternal(final ObjectOutput out) throws IOException {
+  public void writeExternal(final ObjectOutput out) throws IOException {
 
-        super.writeExternal(out);
+    super.writeExternal(out);
 
-        out.writeByte(VERSION);
+    out.writeByte(VERSION);
 
-        out.writeByte(keyOrder.index());
-        
-        out.writeByte(sids ? 1 : 0);
+    out.writeByte(keyOrder.index());
 
-    }
-
+    out.writeByte(sids ? 1 : 0);
+  }
 }

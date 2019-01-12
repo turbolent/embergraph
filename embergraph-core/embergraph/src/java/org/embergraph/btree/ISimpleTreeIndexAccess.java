@@ -24,52 +24,41 @@ import org.embergraph.htree.HTree;
 
 /**
  * Extended interface for tree-structured indices.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ISimpleTreeIndexAccess extends ISimpleIndexAccess {
 
-    /**
-     * The #of non-leaf nodes in the tree.
-     */
-    long getNodeCount();
+  /** The #of non-leaf nodes in the tree. */
+  long getNodeCount();
 
-    /**
-     * The #of leaf nodes in the tree.
-     */
-    long getLeafCount();
+  /** The #of leaf nodes in the tree. */
+  long getLeafCount();
 
-    /**
-     * The #of tuples in the tree.
-     */
-    long getEntryCount();
+  /** The #of tuples in the tree. */
+  long getEntryCount();
 
-    /**
-     * Return <code>true</code> iff the tree is balanced.
-     * <p>
-     * Note: Not all tree-structured indices are balanced. For example, the
-     * {@link BTree} is balanced, but the {@link HTree} is not balanced. The
-     * height of an unbalanced tree must be discovered through a traversal of
-     * the tree.
-     */
-    boolean isBalanced();
-    
-    /**
-     * The height of the tree. The height is the #of levels minus one. A tree
-     * with only a root leaf has <code>height := 0</code>. A tree with a root
-     * node and one level of leaves under it has <code>height := 1</code>.
-     * <p>
-     * Note that all leaves of a balanced tree (such as a B+Tree) are at the
-     * same height (this is what is means to be "balanced"). Also note that the
-     * height only changes when we split or join the root node (a B+Tree
-     * maintains balance by growing and shrinking in levels from the top rather
-     * than the leaves).
-     * 
-     * @throws UnsupportedOperationException
-     *             if the tree is not a balanced tree.
-     * 
-     * @see #isBalanced()
-     */
-    int getHeight();
+  /**
+   * Return <code>true</code> iff the tree is balanced.
+   *
+   * <p>Note: Not all tree-structured indices are balanced. For example, the {@link BTree} is
+   * balanced, but the {@link HTree} is not balanced. The height of an unbalanced tree must be
+   * discovered through a traversal of the tree.
+   */
+  boolean isBalanced();
 
+  /**
+   * The height of the tree. The height is the #of levels minus one. A tree with only a root leaf
+   * has <code>height := 0</code>. A tree with a root node and one level of leaves under it has
+   * <code>height := 1</code>.
+   *
+   * <p>Note that all leaves of a balanced tree (such as a B+Tree) are at the same height (this is
+   * what is means to be "balanced"). Also note that the height only changes when we split or join
+   * the root node (a B+Tree maintains balance by growing and shrinking in levels from the top
+   * rather than the leaves).
+   *
+   * @throws UnsupportedOperationException if the tree is not a balanced tree.
+   * @see #isBalanced()
+   */
+  int getHeight();
 }

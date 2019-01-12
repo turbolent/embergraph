@@ -25,36 +25,30 @@ package org.embergraph.btree.data;
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 
 /**
- * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in
- * place).
- * 
+ * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in place).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman extends AbstractLeafDataRecordTestCase {
+public class TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman
+    extends AbstractLeafDataRecordTestCase {
 
-    /**
-     * 
-     */
-    public TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman() {
-    }
+  /** */
+  public TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman() {}
 
-    /**
-     * @param name
-     */
-    public TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestLeafDataRecord_CanonicalHuffman_CanonicalHuffman(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
+  protected void setUp() throws Exception {
 
-        coder = new DefaultLeafCoder(
-                CanonicalHuffmanRabaCoder.INSTANCE,// keys
-                CanonicalHuffmanRabaCoder.INSTANCE // vals
-        );
-        
-    }
+    super.setUp();
 
+    coder =
+        new DefaultLeafCoder(
+            CanonicalHuffmanRabaCoder.INSTANCE, // keys
+            CanonicalHuffmanRabaCoder.INSTANCE // vals
+            );
+  }
 }

@@ -19,22 +19,20 @@ package org.embergraph.ha.msg;
 
 /**
  * Message communicates the state of the current write set on the quorum leader.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAWriteSetStateResponse extends IHAMessage {
 
-    /** The commit counter for the then current commit point. */
-    long getCommitCounter();
+  /** The commit counter for the then current commit point. */
+  long getCommitCounter();
 
-    /** The last commit time associated with the then current commit point. */
-    long getLastCommitTime();
+  /** The last commit time associated with the then current commit point. */
+  long getLastCommitTime();
 
-    /**
-     * The write cache buffer sequence number (reset to ZERO (0) for the first
-     * message after each commit and incremented for each buffer sent by the
-     * leader).
-     */
-    long getSequence();
-
+  /**
+   * The write cache buffer sequence number (reset to ZERO (0) for the first message after each
+   * commit and incremented for each buffer sent by the leader).
+   */
+  long getSequence();
 }

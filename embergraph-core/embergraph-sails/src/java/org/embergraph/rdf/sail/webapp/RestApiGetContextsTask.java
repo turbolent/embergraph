@@ -18,83 +18,74 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.io.StringWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
 import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryResult;
 
-import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
-import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
-
 /**
  * Task to report the contexts used by a QUADS mode KB instance.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 class RestApiGetContextsTask extends AbstractRestApiTask<Void> {
 
-   public RestApiGetContextsTask(final HttpServletRequest req,
-         final HttpServletResponse resp, final String namespace,
-         final long timestamp) {
+  public RestApiGetContextsTask(
+      final HttpServletRequest req,
+      final HttpServletResponse resp,
+      final String namespace,
+      final long timestamp) {
 
-      super(req, resp, namespace, timestamp);
+    super(req, resp, namespace, timestamp);
+  }
 
-   }
+  @Override
+  public boolean isReadOnly() {
+    return true;
+  }
 
-   @Override
-   public boolean isReadOnly() {
-      return true;
-   }
+  @Override
+  public Void call() throws Exception {
 
-   @Override
-   public Void call() throws Exception {
+    EmbergraphSailRepositoryConnection conn = null;
+    try {
 
-      EmbergraphSailRepositoryConnection conn = null;
+      conn = getQueryConnection();
+
+      final StringWriter w = new StringWriter();
+
+      final RepositoryResult<Resource> it = conn.getContextIDs();
+
       try {
 
-         conn = getQueryConnection();
+        final XMLBuilder t = new XMLBuilder(w);
 
-         final StringWriter w = new StringWriter();
+        final Node root = t.root("contexts");
 
-         final RepositoryResult<Resource> it = conn.getContextIDs();
+        while (it.hasNext()) {
 
-         try {
+          root.node("context").attr("uri", it.next()).close();
+        }
 
-            final XMLBuilder t = new XMLBuilder(w);
-
-            final Node root = t.root("contexts");
-
-            while (it.hasNext()) {
-
-               root.node("context").attr("uri", it.next()).close();
-
-            }
-
-            root.close();
-
-         } finally {
-
-            it.close();
-
-         }
-
-         buildResponse(QueryServlet.HTTP_OK, QueryServlet.MIME_APPLICATION_XML,
-               w.toString());
-
-         return null;
+        root.close();
 
       } finally {
 
-         if (conn != null) {
-
-            conn.close();
-
-         }
-
+        it.close();
       }
 
-   }
+      buildResponse(QueryServlet.HTTP_OK, QueryServlet.MIME_APPLICATION_XML, w.toString());
 
+      return null;
+
+    } finally {
+
+      if (conn != null) {
+
+        conn.close();
+      }
+    }
+  }
 }

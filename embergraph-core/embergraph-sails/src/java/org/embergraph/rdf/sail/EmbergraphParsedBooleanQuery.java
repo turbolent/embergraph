@@ -25,40 +25,37 @@ import org.openrdf.query.algebra.TupleExpr;
 import org.openrdf.query.parser.ParsedBooleanQuery;
 
 /**
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmbergraphParsedBooleanQuery extends ParsedBooleanQuery {
 
-//    private final QueryType queryType;
-//    private final Properties queryHints;
+  //    private final QueryType queryType;
+  //    private final Properties queryHints;
 
-    /**
-     * @param tupleExpr
-     */
-    public EmbergraphParsedBooleanQuery(final TupleExpr tupleExpr
-//            , final QueryType queryType//, final Properties queryHints
-            ) {
+  /** @param tupleExpr */
+  public EmbergraphParsedBooleanQuery(final TupleExpr tupleExpr
+      //            , final QueryType queryType//, final Properties queryHints
+      ) {
 
-        super(tupleExpr);
-        
-//        this.queryType = queryType;
-        
-//        this.queryHints = queryHints;
-        
-    }
+    super(tupleExpr);
 
-//    public QueryType getQueryType() {
-//        
-//        return queryType;
-//        
-//    }
-    
-//    public Properties getQueryHints() {
-//
-//        return queryHints;
-//        
-//    }
+    //        this.queryType = queryType;
+
+    //        this.queryHints = queryHints;
+
+  }
+
+  //    public QueryType getQueryType() {
+  //
+  //        return queryType;
+  //
+  //    }
+
+  //    public Properties getQueryHints() {
+  //
+  //        return queryHints;
+  //
+  //    }
 
 }

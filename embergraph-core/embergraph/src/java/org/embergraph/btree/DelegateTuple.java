@@ -28,92 +28,90 @@ import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rawstore.IBlock;
 
 /**
- * An {@link ITuple} wrapping a delegate that may be used to override some of
- * the methods on the delegate object.
- * 
+ * An {@link ITuple} wrapping a delegate that may be used to override some of the methods on the
+ * delegate object.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DelegateTuple<E> implements ITuple<E> {
-    
-    protected final ITuple<E> delegate;
-    
-    public DelegateTuple(ITuple<E> delegate) {
-        
-        this.delegate = delegate;
-        
-    }
 
-    public int getSourceIndex() {
-        return delegate.getSourceIndex();
-    }
-    
-    public int flags() {
-        return delegate.flags();
-    }
-   
-    public byte[] getKey() {
-        return delegate.getKey();
-    }
+  protected final ITuple<E> delegate;
 
-    public ByteArrayBuffer getKeyBuffer() {
-        return delegate.getKeyBuffer();
-    }
+  public DelegateTuple(ITuple<E> delegate) {
 
-    public boolean getKeysRequested() {
-        return delegate.getKeysRequested();
-    }
+    this.delegate = delegate;
+  }
 
-    public DataInputBuffer getKeyStream() {
-        return delegate.getKeyStream();
-    }
+  public int getSourceIndex() {
+    return delegate.getSourceIndex();
+  }
 
-    public byte[] getValue() {
-        return delegate.getValue();
-    }
+  public int flags() {
+    return delegate.flags();
+  }
 
-    public boolean isNull() {
-        return delegate.isNull();
-    }
-    
-    public ByteArrayBuffer getValueBuffer() {
-        return delegate.getValueBuffer();
-    }
+  public byte[] getKey() {
+    return delegate.getKey();
+  }
 
-    public boolean getValuesRequested() {
-        return delegate.getValuesRequested();
-    }
+  public ByteArrayBuffer getKeyBuffer() {
+    return delegate.getKeyBuffer();
+  }
 
-    public DataInputBuffer getValueStream() {
-        return delegate.getValueStream();
-    }
+  public boolean getKeysRequested() {
+    return delegate.getKeysRequested();
+  }
 
-    public long getVersionTimestamp() {
-        return delegate.getVersionTimestamp();
-    }
+  public DataInputBuffer getKeyStream() {
+    return delegate.getKeyStream();
+  }
 
-    public long getVisitCount() {
-        return delegate.getVisitCount();
-    }
+  public byte[] getValue() {
+    return delegate.getValue();
+  }
 
-    public boolean isDeletedVersion() {
-        return delegate.isDeletedVersion();
-    }
+  public boolean isNull() {
+    return delegate.isNull();
+  }
 
-    public String toString() {
-        return delegate.toString();
-    }
+  public ByteArrayBuffer getValueBuffer() {
+    return delegate.getValueBuffer();
+  }
 
-    public IBlock readBlock(long addr) {
-        return delegate.readBlock(addr);
-    }
-    
-    public E getObject() {
-        return delegate.getObject();
-    }
+  public boolean getValuesRequested() {
+    return delegate.getValuesRequested();
+  }
 
-    public ITupleSerializer getTupleSerializer() {
-        return delegate.getTupleSerializer();
-    }
+  public DataInputBuffer getValueStream() {
+    return delegate.getValueStream();
+  }
 
+  public long getVersionTimestamp() {
+    return delegate.getVersionTimestamp();
+  }
+
+  public long getVisitCount() {
+    return delegate.getVisitCount();
+  }
+
+  public boolean isDeletedVersion() {
+    return delegate.isDeletedVersion();
+  }
+
+  public String toString() {
+    return delegate.toString();
+  }
+
+  public IBlock readBlock(long addr) {
+    return delegate.readBlock(addr);
+  }
+
+  public E getObject() {
+    return delegate.getObject();
+  }
+
+  public ITupleSerializer getTupleSerializer() {
+    return delegate.getTupleSerializer();
+  }
 }

@@ -20,90 +20,84 @@ package org.embergraph.service.fts;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
-
 /**
  * Metadata about a search result against an external fulltext index.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
-public class FulltextSearchHit<V extends Comparable<V>> implements IFulltextSearchHit<V>,
-        Comparable<FulltextSearchHit<V>> {
+public class FulltextSearchHit<V extends Comparable<V>>
+    implements IFulltextSearchHit<V>, Comparable<FulltextSearchHit<V>> {
 
-   protected final String res;
-   protected final Double score;
-   protected final String snippet;
-   protected final IBindingSet incomingBindings;
-   protected final SearchResultType searchResultType;
+  protected final String res;
+  protected final Double score;
+  protected final String snippet;
+  protected final IBindingSet incomingBindings;
+  protected final SearchResultType searchResultType;
 
-   
-   
-   public FulltextSearchHit(
-         final String res, final Double score, final String snippet,
-         final IBindingSet incomingBindings, 
-         final SearchResultType searchResultType) {
-      this.res = res;
-      this.score = score;
-      this.snippet = snippet;
-      this.incomingBindings = incomingBindings;
-      this.searchResultType = searchResultType;
-   }
+  public FulltextSearchHit(
+      final String res,
+      final Double score,
+      final String snippet,
+      final IBindingSet incomingBindings,
+      final SearchResultType searchResultType) {
+    this.res = res;
+    this.score = score;
+    this.snippet = snippet;
+    this.incomingBindings = incomingBindings;
+    this.searchResultType = searchResultType;
+  }
 
-   public String toString() {
+  public String toString() {
 
-      return "FulltextSearchHit{res=" + res + ",score=" + score + ",snippet=" + snippet + "}";
+    return "FulltextSearchHit{res=" + res + ",score=" + score + ",snippet=" + snippet + "}";
+  }
 
-   }
+  /**
+   * Sorts {@link FulltextSearchHit}s into decreasing cosine order with ties broken by the the
+   * <code>docId</code>.
+   */
+  public int compareTo(final FulltextSearchHit<V> o) {
 
-   /**
-    * Sorts {@link FulltextSearchHit}s into decreasing cosine order with ties broken
-    * by the the <code>docId</code>.
-    */
-   public int compareTo(final FulltextSearchHit<V> o) {
-
-      if (score==null) {
-         if (o.score==null) {
-            return 0;
-         } else {
-            return 1;
-         }
-      } else if (o.score==null) {
-         
-         return -1;
+    if (score == null) {
+      if (o.score == null) {
+        return 0;
+      } else {
+        return 1;
       }
-      
-      if (score < o.score)
-         return 1;
-      else if (score > o.score)
-         return -1;
-      
-      return res.compareTo(o.res);
+    } else if (o.score == null) {
 
-   }
-   
-   @Override
-   public String getRes() {
-      return res;
-   }
+      return -1;
+    }
 
-   @Override
-   public Double getScore() {
-      return score;
-   }
+    if (score < o.score) return 1;
+    else if (score > o.score) return -1;
 
-   @Override
-   public String getSnippet() {
-      return snippet;
-   }
+    return res.compareTo(o.res);
+  }
 
-   @Override
-   public IBindingSet getIncomingBindings() {
-      return incomingBindings;
-   }
-   
-   @Override
-   public SearchResultType getSearchResultType() {
-      return searchResultType;
-   }
+  @Override
+  public String getRes() {
+    return res;
+  }
 
+  @Override
+  public Double getScore() {
+    return score;
+  }
+
+  @Override
+  public String getSnippet() {
+    return snippet;
+  }
+
+  @Override
+  public IBindingSet getIncomingBindings() {
+    return incomingBindings;
+  }
+
+  @Override
+  public SearchResultType getSearchResultType() {
+    return searchResultType;
+  }
 }

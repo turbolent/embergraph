@@ -26,56 +26,48 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.task;
 
 import java.util.concurrent.Callable;
-
 import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.service.IEmbergraphFederation;
 
 /**
- * Wrapper for a task to be executed in a stand-off fashion. This can be used
- * for the {@link IEmbergraphFederation} since it provides access to the global
- * view of a scale-out index. It can also be used for a {@link Journal} if are
- * not relying on the {@link IConcurrencyManager} to guard the resources
- * declared by the task.
- * <p>
- * Note: Global locks are NOT used in scale-out and operations will be only
- * shard-wise ACID.
- * 
+ * Wrapper for a task to be executed in a stand-off fashion. This can be used for the {@link
+ * IEmbergraphFederation} since it provides access to the global view of a scale-out index. It can
+ * also be used for a {@link Journal} if are not relying on the {@link IConcurrencyManager} to guard
+ * the resources declared by the task.
+ *
+ * <p>Note: Global locks are NOT used in scale-out and operations will be only shard-wise ACID.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>
  */
 public class ApiTaskForIndexManager<T> implements Callable<T> {
 
-   private final IIndexManager indexManager;
-   private final IApiTask<T> delegate;
+  private final IIndexManager indexManager;
+  private final IApiTask<T> delegate;
 
-   public ApiTaskForIndexManager(final IIndexManager indexManager,
-         final IApiTask<T> delegate) {
+  public ApiTaskForIndexManager(final IIndexManager indexManager, final IApiTask<T> delegate) {
 
-      this.indexManager = indexManager;
-      this.delegate = delegate;
+    this.indexManager = indexManager;
+    this.delegate = delegate;
+  }
 
-   }
+  @Override
+  public T call() throws Exception {
 
-   @Override
-   public T call() throws Exception {
+    delegate.setIndexManager(indexManager);
 
-      delegate.setIndexManager(indexManager);
+    try {
 
-      try {
+      // Run the delegate task.
+      final T ret = delegate.call();
 
-         // Run the delegate task.
-         final T ret = delegate.call();
+      return ret;
 
-         return ret;
+    } finally {
 
-      } finally {
-
-         delegate.setIndexManager(null);
-
-      }
-
-   }
-
+      delegate.setIndexManager(null);
+    }
+  }
 }

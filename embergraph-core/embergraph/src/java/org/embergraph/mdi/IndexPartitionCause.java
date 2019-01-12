@@ -4,232 +4,189 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
 import org.embergraph.resources.ResourceManager;
 
 /**
- * Encapsulate the reason why an index partition was created and the
- * synchronous overflow counter of the data service on which the index
- * partition was created as of that action. This information may be used to
- * support heuristics which refuse to move an index partition which was
- * recently moved or to join an index partition which was recently split,
- * etc.
- * 
+ * Encapsulate the reason why an index partition was created and the synchronous overflow counter of
+ * the data service on which the index partition was created as of that action. This information may
+ * be used to support heuristics which refuse to move an index partition which was recently moved or
+ * to join an index partition which was recently split, etc.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class IndexPartitionCause implements Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4643434468430418713L;
+  /** */
+  private static final long serialVersionUID = 4643434468430418713L;
 
-    /**
-     * Typesafe enumeration of reasons why an index partition was created.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
-     *         Thompson</a>
-     * @version $Id$
-     */
-    static public enum CauseEnum {
+  /**
+   * Typesafe enumeration of reasons why an index partition was created.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  public static enum CauseEnum {
 
-        /**
-         * The initial registration of a scale-out index.
-         */
-        Register((byte) 0),
+    /** The initial registration of a scale-out index. */
+    Register((byte) 0),
 
-        /** An index partition was split. */
-        Split((byte) 1),
+    /** An index partition was split. */
+    Split((byte) 1),
 
-        /** Two or more index partitions were joined. */
-        Join((byte) 2),
+    /** Two or more index partitions were joined. */
+    Join((byte) 2),
 
-        /** An index partition was moved to another data service. */
-        Move((byte) 3);
+    /** An index partition was moved to another data service. */
+    Move((byte) 3);
 
-        private CauseEnum(final byte code) {
-            this.code = code;
-        }
-
-        private final byte code;
-
-        static IndexPartitionCause.CauseEnum valueOf(final byte code) {
-            switch (code) {
-            case 0:
-                return Register;
-            case 1:
-                return Split;
-            case 2:
-                return Join;
-            case 3:
-                return Move;
-            default:
-                throw new IllegalArgumentException("code=" + code);
-            }
-        }
-
+    private CauseEnum(final byte code) {
+      this.code = code;
     }
 
-    private IndexPartitionCause.CauseEnum cause;
+    private final byte code;
 
-    private long synchronousOverflowCounter;
-
-    private long lastCommitTime;
-
-    /**
-     * The underlying cause.
-     */
-    public IndexPartitionCause.CauseEnum getCause() {
-        return cause;
+    static IndexPartitionCause.CauseEnum valueOf(final byte code) {
+      switch (code) {
+        case 0:
+          return Register;
+        case 1:
+          return Split;
+        case 2:
+          return Join;
+        case 3:
+          return Move;
+        default:
+          throw new IllegalArgumentException("code=" + code);
+      }
     }
+  }
 
-    /**
-     * The value of the synchronous overflow counter at the time that the
-     * index partition was created.
-     */
-    public long getSynchronousOverflowCounter() {
-        return synchronousOverflowCounter;
-    }
+  private IndexPartitionCause.CauseEnum cause;
 
-    /**
-     * The lastCommitTime for the live journal. Note that this will be 0L if no
-     * commits have been performed on the journal. This makes the "time" less
-     * robust than the overflow counter.
-     */
-    public long getLastCommitTime() {
-        return lastCommitTime;
-    }
+  private long synchronousOverflowCounter;
 
-    /**
-     * Factory for {@link CauseEnum#Register}.
-     */
-    static public IndexPartitionCause register(ResourceManager resourceManager) {
+  private long lastCommitTime;
 
-        return new IndexPartitionCause(
-                IndexPartitionCause.CauseEnum.Register,
-                resourceManager.getSynchronousOverflowCount(),
-                resourceManager.getLiveJournal()
-                        .getLastCommitTime());
+  /** The underlying cause. */
+  public IndexPartitionCause.CauseEnum getCause() {
+    return cause;
+  }
 
-    }
-    
-    /**
-     * Factory for {@link CauseEnum#Split}.
-     */
-    static public IndexPartitionCause split(ResourceManager resourceManager) {
+  /**
+   * The value of the synchronous overflow counter at the time that the index partition was created.
+   */
+  public long getSynchronousOverflowCounter() {
+    return synchronousOverflowCounter;
+  }
 
-        return new IndexPartitionCause(
-                IndexPartitionCause.CauseEnum.Split,
-                resourceManager.getSynchronousOverflowCount(),
-                resourceManager.getLiveJournal()
-                        .getLastCommitTime());
+  /**
+   * The lastCommitTime for the live journal. Note that this will be 0L if no commits have been
+   * performed on the journal. This makes the "time" less robust than the overflow counter.
+   */
+  public long getLastCommitTime() {
+    return lastCommitTime;
+  }
 
-    }
+  /** Factory for {@link CauseEnum#Register}. */
+  public static IndexPartitionCause register(ResourceManager resourceManager) {
 
-    /**
-     * Factory for {@link CauseEnum#Join}.
-     */
-    static public IndexPartitionCause join(ResourceManager resourceManager) {
+    return new IndexPartitionCause(
+        IndexPartitionCause.CauseEnum.Register,
+        resourceManager.getSynchronousOverflowCount(),
+        resourceManager.getLiveJournal().getLastCommitTime());
+  }
 
-        return new IndexPartitionCause(
-                IndexPartitionCause.CauseEnum.Join,
-                resourceManager.getSynchronousOverflowCount(),
-                resourceManager.getLiveJournal()
-                        .getLastCommitTime());
+  /** Factory for {@link CauseEnum#Split}. */
+  public static IndexPartitionCause split(ResourceManager resourceManager) {
 
-    }
+    return new IndexPartitionCause(
+        IndexPartitionCause.CauseEnum.Split,
+        resourceManager.getSynchronousOverflowCount(),
+        resourceManager.getLiveJournal().getLastCommitTime());
+  }
 
-    /**
-     * Factory for {@link CauseEnum#Move}.
-     */
-    static public IndexPartitionCause move(ResourceManager resourceManager) {
+  /** Factory for {@link CauseEnum#Join}. */
+  public static IndexPartitionCause join(ResourceManager resourceManager) {
 
-        return new IndexPartitionCause(
-                IndexPartitionCause.CauseEnum.Move,
-                resourceManager.getSynchronousOverflowCount(),
-                resourceManager.getLiveJournal()
-                        .getLastCommitTime());
+    return new IndexPartitionCause(
+        IndexPartitionCause.CauseEnum.Join,
+        resourceManager.getSynchronousOverflowCount(),
+        resourceManager.getLiveJournal().getLastCommitTime());
+  }
 
-    }
-    
-    /**
-     * De-serialization ctor.
-     */
-    public IndexPartitionCause() {
-        
-    }
-    
-    /**
-     * 
-     * @param cause
-     *            The reason why the index partition was created.
-     * @param synchronousOverflowCounter
-     *            The value of the counter at the time that the index partition
-     *            was created.
-     * @param lastCommitTime
-     *            The lastCommitTime for the live journal. Note that this will
-     *            be 0L if no commits have been performed on the journal. This
-     *            makes the "time" less robust than the overflow counter.
-     */
-    public IndexPartitionCause(final IndexPartitionCause.CauseEnum cause,
-            final long synchronousOverflowCounter, final long lastCommitTime) {
+  /** Factory for {@link CauseEnum#Move}. */
+  public static IndexPartitionCause move(ResourceManager resourceManager) {
 
-        if (cause == null)
-            throw new IllegalArgumentException();
+    return new IndexPartitionCause(
+        IndexPartitionCause.CauseEnum.Move,
+        resourceManager.getSynchronousOverflowCount(),
+        resourceManager.getLiveJournal().getLastCommitTime());
+  }
 
-        if (synchronousOverflowCounter < 0)
-            throw new IllegalArgumentException();
+  /** De-serialization ctor. */
+  public IndexPartitionCause() {}
 
-        this.cause = cause;
+  /**
+   * @param cause The reason why the index partition was created.
+   * @param synchronousOverflowCounter The value of the counter at the time that the index partition
+   *     was created.
+   * @param lastCommitTime The lastCommitTime for the live journal. Note that this will be 0L if no
+   *     commits have been performed on the journal. This makes the "time" less robust than the
+   *     overflow counter.
+   */
+  public IndexPartitionCause(
+      final IndexPartitionCause.CauseEnum cause,
+      final long synchronousOverflowCounter,
+      final long lastCommitTime) {
 
-        this.synchronousOverflowCounter = synchronousOverflowCounter;
+    if (cause == null) throw new IllegalArgumentException();
 
-        this.lastCommitTime = lastCommitTime;
+    if (synchronousOverflowCounter < 0) throw new IllegalArgumentException();
 
-    }
+    this.cause = cause;
 
-    /**
-     * The initial version.
-     */
-    private static final transient byte VERSION0 = 0;
+    this.synchronousOverflowCounter = synchronousOverflowCounter;
 
-    /**
-     * The current version.
-     */
-    private static final transient byte VERSION = VERSION0;
+    this.lastCommitTime = lastCommitTime;
+  }
 
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
+  /** The initial version. */
+  private static final transient byte VERSION0 = 0;
 
-        final byte version = in.readByte();
-        
-        if (version != VERSION0)
-            throw new UnsupportedOperationException("version=" + version);
+  /** The current version. */
+  private static final transient byte VERSION = VERSION0;
 
-        cause = CauseEnum.valueOf(in.readByte());
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
-        synchronousOverflowCounter = in.readLong();
+    final byte version = in.readByte();
 
-        lastCommitTime = in.readLong();
+    if (version != VERSION0) throw new UnsupportedOperationException("version=" + version);
 
-    }
+    cause = CauseEnum.valueOf(in.readByte());
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+    synchronousOverflowCounter = in.readLong();
 
-        out.writeByte(VERSION);
-        out.writeByte(cause.code);
-        out.writeLong(synchronousOverflowCounter);
-        out.writeLong(lastCommitTime);
+    lastCommitTime = in.readLong();
+  }
 
-    }
+  public void writeExternal(ObjectOutput out) throws IOException {
 
-    public String toString() {
-        
-        return getClass().getName() + "{" + cause + ",overflowCounter="
-                + synchronousOverflowCounter + ",timestamp=" + lastCommitTime
-                + "}";
+    out.writeByte(VERSION);
+    out.writeByte(cause.code);
+    out.writeLong(synchronousOverflowCounter);
+    out.writeLong(lastCommitTime);
+  }
 
-    }
+  public String toString() {
 
+    return getClass().getName()
+        + "{"
+        + cause
+        + ",overflowCounter="
+        + synchronousOverflowCounter
+        + ",timestamp="
+        + lastCommitTime
+        + "}";
+  }
 }

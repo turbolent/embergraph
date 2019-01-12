@@ -22,29 +22,25 @@ package org.embergraph.btree.data;
 
 /**
  * Interface for data access to children of an index node.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IChildData {
 
-    /**
-     * The #of children of this node. Either all children will be nodes or all
-     * children will be leaves. The #of children of a node MUST be
-     * <code>{@link IAbstractNodeData#getKeyCount()}+1</code>
-     * 
-     * @return The #of children of this node.
-     */
-    public int getChildCount();
+  /**
+   * The #of children of this node. Either all children will be nodes or all children will be
+   * leaves. The #of children of a node MUST be <code>{@link IAbstractNodeData#getKeyCount()}+1
+   * </code>
+   *
+   * @return The #of children of this node.
+   */
+  public int getChildCount();
 
-    /**
-     * Return the persistent addresses of the specified child node.
-     * 
-     * @param index
-     *            The index of the child in [0:nkeys].
-     * 
-     * @return The persistent child address -or- zero(0L) if the child is not
-     *         persistent.
-     */
-    public long getChildAddr(int index);
-
+  /**
+   * Return the persistent addresses of the specified child node.
+   *
+   * @param index The index of the child in [0:nkeys].
+   * @return The persistent child address -or- zero(0L) if the child is not persistent.
+   */
+  public long getChildAddr(int index);
 }

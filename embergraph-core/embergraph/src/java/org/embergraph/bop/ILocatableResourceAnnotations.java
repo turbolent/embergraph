@@ -23,21 +23,20 @@ package org.embergraph.bop;
 
 /**
  * Annotations to locate a resource.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ILocatableResourceAnnotations extends ITimestampAnnotations {
 
-    /**
-     * The name of the relation on which the predicate will read.
-     * 
-     * FIXME Change this to be a scalar value. It is currently an array for
-     * backwards compatibility.
-     * 
-     * @see https://sourceforge.net/apps/trac/bigdata/ticket/180 (Migrate the
-     *      RDFS inference and truth maintenance logic to BOPs)
-     */
-    String RELATION_NAME = IPredicate.class.getName() + ".relationName";
-
+  /**
+   * The name of the relation on which the predicate will read.
+   *
+   * <p>FIXME Change this to be a scalar value. It is currently an array for backwards
+   * compatibility.
+   *
+   * @see https://sourceforge.net/apps/trac/bigdata/ticket/180 (Migrate the RDFS inference and truth
+   *     maintenance logic to BOPs)
+   */
+  String RELATION_NAME = IPredicate.class.getName() + ".relationName";
 }

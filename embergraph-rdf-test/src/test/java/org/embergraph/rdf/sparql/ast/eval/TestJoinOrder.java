@@ -21,90 +21,82 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-
-
-
 /**
  * Data driven test suite for SPARQL 1.1 BIND & VALUES clause.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a> * 
+ * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a> *
  * @version $Id$
  */
 public class TestJoinOrder extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestJoinOrder() {
-    }
+  /** */
+  public TestJoinOrder() {}
 
-    /**
-     * @param name
-     */
-    public TestJoinOrder(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestJoinOrder(String name) {
+    super(name);
+  }
 
-    /**
-     * Query
-     * 
-     * <pre>
-     * SELECT * WHERE {
-     *   <http://s> <http://p1> ?a
-     *   OPTIONAL { <http://s> <http://p1> ?b }
-     *   <http://s> <http://p2> ?b             
-     * }
-     * </pre>
-     * 
-     * with data
-     * 
-     * <pre>
-     * <http://s> <http://p1> 1 .
-     * <http://s> <http://p2> 2 .
-     * </pre>
-     * 
-     * must yield the empty result (i.e., the OPTIONAL is evaluated prior to
-     * the last triple pattern).
-     */
-    public void testJoinOrderOptional01() throws Exception {
+  /**
+   * Query
+   *
+   * <pre>
+   * SELECT * WHERE {
+   *   <http://s> <http://p1> ?a
+   *   OPTIONAL { <http://s> <http://p1> ?b }
+   *   <http://s> <http://p2> ?b
+   * }
+   * </pre>
+   *
+   * with data
+   *
+   * <pre>
+   * <http://s> <http://p1> 1 .
+   * <http://s> <http://p2> 2 .
+   * </pre>
+   *
+   * must yield the empty result (i.e., the OPTIONAL is evaluated prior to the last triple pattern).
+   */
+  public void testJoinOrderOptional01() throws Exception {
 
-        new TestHelper("join-order-optional-01", // testURI,
-                "join-order-optional-01.rq",// queryFileURL
-                "join-order-optional-01.ttl",// dataFileURL
-                "join-order-optional-01.srx"// resultFileURL
-        ).runTest();
+    new TestHelper(
+            "join-order-optional-01", // testURI,
+            "join-order-optional-01.rq", // queryFileURL
+            "join-order-optional-01.ttl", // dataFileURL
+            "join-order-optional-01.srx" // resultFileURL
+            )
+        .runTest();
+  }
 
-    }
-    
-    /**
-     * Query
-     * 
-     * <pre>
-     * SELECT * WHERE {
-     *   <http://s> <http://p2> ?b             
-     *   OPTIONAL { <http://s> <http://p1> ?b }
-     *   <http://s> <http://p1> ?a
-     * }
-     * </pre>
-     * 
-     * with data
-     * 
-     * <pre>
-     * <http://s> <http://p1> 1 .
-     * <http://s> <http://p2> 2 .
-     * </pre>
-     * 
-     * must yield the result { ?a -> 1, b -> 2 }
-     */
-    public void testJoinOrderOptional02() throws Exception {
+  /**
+   * Query
+   *
+   * <pre>
+   * SELECT * WHERE {
+   *   <http://s> <http://p2> ?b
+   *   OPTIONAL { <http://s> <http://p1> ?b }
+   *   <http://s> <http://p1> ?a
+   * }
+   * </pre>
+   *
+   * with data
+   *
+   * <pre>
+   * <http://s> <http://p1> 1 .
+   * <http://s> <http://p2> 2 .
+   * </pre>
+   *
+   * must yield the result { ?a -> 1, b -> 2 }
+   */
+  public void testJoinOrderOptional02() throws Exception {
 
-        new TestHelper("join-order-optional-02", // testURI,
-                "join-order-optional-02.rq",// queryFileURL
-                "join-order-optional-02.ttl",// dataFileURL
-                "join-order-optional-02.srx"// resultFileURL
-        ).runTest();
-
-    }
-    
+    new TestHelper(
+            "join-order-optional-02", // testURI,
+            "join-order-optional-02.rq", // queryFileURL
+            "join-order-optional-02.ttl", // dataFileURL
+            "join-order-optional-02.srx" // resultFileURL
+            )
+        .runTest();
+  }
 }

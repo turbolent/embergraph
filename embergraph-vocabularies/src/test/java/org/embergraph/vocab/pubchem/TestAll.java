@@ -25,48 +25,37 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.embergraph.rdf.store.ITripleStore;
 import org.embergraph.rdf.store.TestLocalTripleStore;
 
 /**
  * Runs tests for each {@link ITripleStore} implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("PubChemVocabulary");
+    final TestSuite suite = new TestSuite("PubChemVocabulary");
 
-        final ProxyTestSuite proxySuite = new ProxyTestSuite(new TestLocalTripleStore(),
-                "Local Triple Store With Provenance Test Suite"); 
-        
-        proxySuite.addTest(TestPubchemVocabInlineUris.suite());
-        
-        suite.addTest( proxySuite);
+    final ProxyTestSuite proxySuite =
+        new ProxyTestSuite(
+            new TestLocalTripleStore(), "Local Triple Store With Provenance Test Suite");
 
-        return suite;
-        
-    }
-    
+    proxySuite.addTest(TestPubchemVocabInlineUris.suite());
+
+    suite.addTest(proxySuite);
+
+    return suite;
+  }
 }

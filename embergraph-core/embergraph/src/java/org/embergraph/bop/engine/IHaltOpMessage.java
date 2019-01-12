@@ -22,58 +22,49 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 /**
- * A message sent to the {@link IQueryClient} when an operator is done executing
- * for some chunk of inputs.
- * 
+ * A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
+ * inputs.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IHaltOpMessage extends IOpLifeCycleMessage {
 
-    /**
-     * The cause and <code>null</code> if the operator halted normally.
-     */
-    Throwable getCause();
+  /** The cause and <code>null</code> if the operator halted normally. */
+  Throwable getCause();
 
-//    /**
-//     * The operator identifier for the primary sink -or- <code>null</code> if
-//     * there is no primary sink (for example, if this is the last operator in
-//     * the pipeline).
-//     */
-//    Integer getSinkId();
+  //    /**
+  //     * The operator identifier for the primary sink -or- <code>null</code> if
+  //     * there is no primary sink (for example, if this is the last operator in
+  //     * the pipeline).
+  //     */
+  //    Integer getSinkId();
 
-    /**
-     * The number of the {@link IChunkMessage}s that were output for the primary
-     * sink. (This information is used for the atomic termination decision.)
-     * <p>
-     * For a given downstream operator this is ONE (1) for scale-up. For
-     * scale-out, this is one per index partition over which the intermediate
-     * results were mapped.
-     */
-    int getSinkMessagesOut();
+  /**
+   * The number of the {@link IChunkMessage}s that were output for the primary sink. (This
+   * information is used for the atomic termination decision.)
+   *
+   * <p>For a given downstream operator this is ONE (1) for scale-up. For scale-out, this is one per
+   * index partition over which the intermediate results were mapped.
+   */
+  int getSinkMessagesOut();
 
-//    /**
-//     * The operator identifier for the alternative sink -or- <code>null</code>
-//     * if there is no alternative sink.
-//     */
-//    Integer getAltSinkId();
+  //    /**
+  //     * The operator identifier for the alternative sink -or- <code>null</code>
+  //     * if there is no alternative sink.
+  //     */
+  //    Integer getAltSinkId();
 
-    /**
-     * The number of the {@link IChunkMessage}s that were output for the
-     * alternative sink. (This information is used for the atomic termination
-     * decision.)
-     * <p>
-     * For a given downstream operator this is ONE (1) for scale-up. For
-     * scale-out, this is one per index partition over which the intermediate
-     * results were mapped. It is zero if there was no alternative sink for the
-     * operator.
-     */
-    int getAltSinkMessagesOut();
+  /**
+   * The number of the {@link IChunkMessage}s that were output for the alternative sink. (This
+   * information is used for the atomic termination decision.)
+   *
+   * <p>For a given downstream operator this is ONE (1) for scale-up. For scale-out, this is one per
+   * index partition over which the intermediate results were mapped. It is zero if there was no
+   * alternative sink for the operator.
+   */
+  int getAltSinkMessagesOut();
 
-    /**
-     * The statistics for the execution of the bop against the partition on the
-     * service.
-     */
-    BOpStats getStats();
-
+  /** The statistics for the execution of the bop against the partition on the service. */
+  BOpStats getStats();
 }

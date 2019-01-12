@@ -10,123 +10,106 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 
 /**
- * Implementation used to write on the {@link JoinTask#getSolutionBuffer()}
- * for the last join dimension. The solution buffer is either an
- * {@link IBlockingBuffer} (for query) or a buffer that writes on the head
- * relation for the rule (for mutation).
- * 
+ * Implementation used to write on the {@link JoinTask#getSolutionBuffer()} for the last join
+ * dimension. The solution buffer is either an {@link IBlockingBuffer} (for query) or a buffer that
+ * writes on the head relation for the rule (for mutation).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <E>
  */
-class UnsynchronizedSolutionBuffer<E extends IBindingSet> extends
-        UnsynchronizedOutputBuffer<E> {
+class UnsynchronizedSolutionBuffer<E extends IBindingSet> extends UnsynchronizedOutputBuffer<E> {
 
-    private final IJoinNexus joinNexus;
-    /**
-     * An optional filter on the generated {@link ISolution}s. This filter
-     * is obtained from {@link IJoinNexus#getSolutionFilter()}. When non-<code>null</code>,
-     * {@link #handleChunk(IBindingSet[])} applies the filter to keep
-     * {@link ISolution}s licensed by the {@link IBindingSet}s that do not
-     * meet constraint imposed by that filter. (For RDF, this is used to
-     * keep literals out of the subject position, keep axioms from being
-     * written into the DB by inference, etc.)
-     */
-    private final IElementFilter<ISolution> solutionFilter;
-    
-    public UnsynchronizedSolutionBuffer(final JoinTask joinTask,
-            final IJoinNexus joinNexus, final int capacity) {
+  private final IJoinNexus joinNexus;
+  /**
+   * An optional filter on the generated {@link ISolution}s. This filter is obtained from {@link
+   * IJoinNexus#getSolutionFilter()}. When non-<code>null</code>, {@link
+   * #handleChunk(IBindingSet[])} applies the filter to keep {@link ISolution}s licensed by the
+   * {@link IBindingSet}s that do not meet constraint imposed by that filter. (For RDF, this is used
+   * to keep literals out of the subject position, keep axioms from being written into the DB by
+   * inference, etc.)
+   */
+  private final IElementFilter<ISolution> solutionFilter;
 
-        super(joinTask, capacity);
+  public UnsynchronizedSolutionBuffer(
+      final JoinTask joinTask, final IJoinNexus joinNexus, final int capacity) {
 
-        this.joinNexus = joinNexus;
-        
-        // Note: MAY be null.
-        this.solutionFilter = joinNexus.getSolutionFilter();
-        
-    }
-    
-    /**
-     * Generate a chunk of {@link ISolution}s for the accepted
-     * {@link IBindingSet}s and add those those {@link ISolution}s to the
-     * {@link JoinTask#getSolutionBuffer()}. For query, that will be a
-     * (proxy for) the {@link IJoinNexus#newQueryBuffer()} created by the
-     * {@link JoinMasterTask}. For mutation, that will be a buffer created
-     * for the {@link JoinTask} instance (this avoids have all data for
-     * mutation flow through the master).
-     * 
-     * @throws BufferClosedException
-     *             If the {@link IBuffer} returned by
-     *             {@link JoinTask#getSolutionBuffer()} is an
-     *             {@link IBlockingBuffer} which has been closed. This will
-     *             occur for query if the query specifies a SLICE and the
-     *             SLICE has been satisified. Under these conditions the
-     *             {@link IBlockingBuffer} will be closed asynchronously by
-     *             the query consumer and {@link BufferClosedException} will
-     *             be thown by {@link IBlockingBuffer#add(Object)}.
-     */
-    protected void handleChunk(final E[] chunk) {
+    super(joinTask, capacity);
 
-        final IBuffer<ISolution[]> solutionBuffer = joinTask
-                .getSolutionBuffer();
+    this.joinNexus = joinNexus;
 
-        final IRule rule = joinTask.rule;
-        
-        ISolution[] a = new ISolution[chunk.length];
+    // Note: MAY be null.
+    this.solutionFilter = joinNexus.getSolutionFilter();
+  }
 
-        int naccepted = 0;
+  /**
+   * Generate a chunk of {@link ISolution}s for the accepted {@link IBindingSet}s and add those
+   * those {@link ISolution}s to the {@link JoinTask#getSolutionBuffer()}. For query, that will be a
+   * (proxy for) the {@link IJoinNexus#newQueryBuffer()} created by the {@link JoinMasterTask}. For
+   * mutation, that will be a buffer created for the {@link JoinTask} instance (this avoids have all
+   * data for mutation flow through the master).
+   *
+   * @throws BufferClosedException If the {@link IBuffer} returned by {@link
+   *     JoinTask#getSolutionBuffer()} is an {@link IBlockingBuffer} which has been closed. This
+   *     will occur for query if the query specifies a SLICE and the SLICE has been satisified.
+   *     Under these conditions the {@link IBlockingBuffer} will be closed asynchronously by the
+   *     query consumer and {@link BufferClosedException} will be thown by {@link
+   *     IBlockingBuffer#add(Object)}.
+   */
+  protected void handleChunk(final E[] chunk) {
 
-        for (int i = 0; i < chunk.length; i++) {
+    final IBuffer<ISolution[]> solutionBuffer = joinTask.getSolutionBuffer();
 
-            // an accepted binding set.
-            final IBindingSet bindingSet = chunk[i];
+    final IRule rule = joinTask.rule;
 
-            /*
-             * Note: The [joinNexus] MUST have access to the global and
-             * mutable index views. For the federation, this means that it
-             * is not the same instance that you are using to read on the
-             * access path!
-             */
-            final ISolution solution = joinNexus.newSolution(rule,
-                    bindingSet);
+    ISolution[] a = new ISolution[chunk.length];
 
-            if (solutionFilter == null || solutionFilter.isValid(solution)) {
+    int naccepted = 0;
 
-                a[naccepted++] = solution;
+    for (int i = 0; i < chunk.length; i++) {
 
-            }
+      // an accepted binding set.
+      final IBindingSet bindingSet = chunk[i];
 
-        }
+      /*
+       * Note: The [joinNexus] MUST have access to the global and
+       * mutable index views. For the federation, this means that it
+       * is not the same instance that you are using to read on the
+       * access path!
+       */
+      final ISolution solution = joinNexus.newSolution(rule, bindingSet);
 
-        if (naccepted == 0)
-            return;
-        
-        if (naccepted < chunk.length) {
+      if (solutionFilter == null || solutionFilter.isValid(solution)) {
 
-            // Make the array dense and snug.
-            
-            final ISolution[] b = new ISolution[naccepted];
-            
-            System.arraycopy(a, 0, b, 0, naccepted);
-            
-            a = b;
-            
-        }
-        
-        /*
-         * Add the chunk to the [solutionBuffer].
-         * 
-         * Note: This can throw a BufferClosedException. In particular, this
-         * exception will be thrown if the [solutionBuffer] is a query
-         * buffer and a SLICE been satisified causing the [solutionBuffer]
-         * to be asynchronously closed by the query consumer.
-         */
-
-        solutionBuffer.add(a);
-
-        joinTask.stats.bindingSetChunksOut++;
-        joinTask.stats.bindingSetsOut += naccepted;
-
+        a[naccepted++] = solution;
+      }
     }
 
+    if (naccepted == 0) return;
+
+    if (naccepted < chunk.length) {
+
+      // Make the array dense and snug.
+
+      final ISolution[] b = new ISolution[naccepted];
+
+      System.arraycopy(a, 0, b, 0, naccepted);
+
+      a = b;
+    }
+
+    /*
+     * Add the chunk to the [solutionBuffer].
+     *
+     * Note: This can throw a BufferClosedException. In particular, this
+     * exception will be thrown if the [solutionBuffer] is a query
+     * buffer and a SLICE been satisified causing the [solutionBuffer]
+     * to be asynchronously closed by the query consumer.
+     */
+
+    solutionBuffer.add(a);
+
+    joinTask.stats.bindingSetChunksOut++;
+    joinTask.stats.bindingSetsOut += naccepted;
+  }
 }

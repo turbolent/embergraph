@@ -26,36 +26,30 @@ package org.embergraph.striterator;
 import java.util.Iterator;
 
 /**
- * Chunked ordered streaming iterator class that supresses generic types.
- * Striterator patterns are often used to convert the type of the elements
- * visited by the underlying iterator. That and the covarying generics combine
- * to make code using generics and striterators rather ugly.
- * 
+ * Chunked ordered streaming iterator class that supresses generic types. Striterator patterns are
+ * often used to convert the type of the elements visited by the underlying iterator. That and the
+ * covarying generics combine to make code using generics and striterators rather ugly.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class GenericChunkedOrderedStriterator<E> extends
-        ChunkedOrderedStriterator<IChunkedOrderedIterator<E>, E> {
+public class GenericChunkedOrderedStriterator<E>
+    extends ChunkedOrderedStriterator<IChunkedOrderedIterator<E>, E> {
 
-    /**
-     * @param src
-     */
-    @SuppressWarnings("unchecked")
-    public GenericChunkedOrderedStriterator(IChunkedOrderedIterator<E> src) {
+  /** @param src */
+  @SuppressWarnings("unchecked")
+  public GenericChunkedOrderedStriterator(IChunkedOrderedIterator<E> src) {
 
-        super(src);
-        
-    }
+    super(src);
+  }
 
-    /**
-     * @param chunkSize
-     * @param src
-     */
-    @SuppressWarnings("unchecked")
-    public GenericChunkedOrderedStriterator(int chunkSize, Iterator<E> src) {
-        
-        super(chunkSize, src);
-        
-    }
+  /**
+   * @param chunkSize
+   * @param src
+   */
+  @SuppressWarnings("unchecked")
+  public GenericChunkedOrderedStriterator(int chunkSize, Iterator<E> src) {
 
+    super(chunkSize, src);
+  }
 }

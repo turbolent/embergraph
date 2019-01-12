@@ -22,258 +22,206 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.error;
 
 import java.util.Formatter;
-
 import org.embergraph.util.NV;
 
 /**
- * Exception Base class for errors defined by the W3C for XQuery, XPath, and
- * SPARQL.
- * 
+ * Exception Base class for errors defined by the W3C for XQuery, XPath, and SPARQL.
+ *
  * @see http://www.w3.org/TR/xquery/#errors
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class W3CQueryLanguageException extends RuntimeException {
 
-    /**
-     * Namespace for the error URIs.
-     */
-    protected static final transient String err = "http://www.w3.org/2005/xqt-errors";
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** Namespace for the error URIs. */
+  protected static final transient String err = "http://www.w3.org/2005/xqt-errors";
 
-    /** Language family for errors. */
-    public static enum LanguageFamily {
-        /**
-         * XQuery
-         */
-        XQ,
-        /**
-         * XPath
-         */
-        XP,
-        /**
-         * SPARQL
-         */
-        SP
-    }
-    
-    /** Error category. */
-    public static enum ErrorCategory {
-        /** Static analysis error. */
-        ST,
-        /** Dynamic (runtime) error. */
-        DY,
-        /** Type error. */
-        TY
-    };
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * The {@link LanguageFamily}.
-     */
-    public final LanguageFamily languageFamily;
+  /** Language family for errors. */
+  public static enum LanguageFamily {
+    /** XQuery */
+    XQ,
+    /** XPath */
+    XP,
+    /** SPARQL */
+    SP
+  }
 
-    /**
-     * The {@link ErrorCategory}.
-     */
-    public final ErrorCategory errorCategory;
+  /** Error category. */
+  public static enum ErrorCategory {
+    /** Static analysis error. */
+    ST,
+    /** Dynamic (runtime) error. */
+    DY,
+    /** Type error. */
+    TY
+  };
 
-    /**
-     * The four digit error code.
-     */
-    public final int errorCode;
+  /** The {@link LanguageFamily}. */
+  public final LanguageFamily languageFamily;
 
-    /**
-     * 
-     * @param languageFamily
-     *            The {@link LanguageFamily}.
-     * @param errorCategory
-     *            The {@link ErrorCategory}.
-     * @param errorCode
-     *            The four digit error code.
-     */
-    protected W3CQueryLanguageException(final LanguageFamily languageFamily,
-            final ErrorCategory errorCategory, final int errorCode) {
+  /** The {@link ErrorCategory}. */
+  public final ErrorCategory errorCategory;
 
-        super(toURI(languageFamily, errorCategory, errorCode, null/* params */));
-        
-        this.languageFamily = languageFamily;
-        
-        this.errorCategory = errorCategory;
-        
-        this.errorCode = errorCode;
-        
-    }
+  /** The four digit error code. */
+  public final int errorCode;
 
-    /**
-     * 
-     * @param languageFamily
-     *            The {@link LanguageFamily}.
-     * @param errorCategory
-     *            The {@link ErrorCategory}.
-     * @param errorCode
-     *            The four digit error code.
-     * @param msg
-     *            The <em>URI</em> corresponding to the error. Frequently used
-     *            errors should use
-     *            {@link #toURI(LanguageFamily, ErrorCategory, int)} to define
-     *            the URI statically to avoid heap churn.
-     */
-    protected W3CQueryLanguageException(final LanguageFamily languageFamily,
-            final ErrorCategory errorCategory, final int errorCode,
-            final String msg) {
+  /**
+   * @param languageFamily The {@link LanguageFamily}.
+   * @param errorCategory The {@link ErrorCategory}.
+   * @param errorCode The four digit error code.
+   */
+  protected W3CQueryLanguageException(
+      final LanguageFamily languageFamily, final ErrorCategory errorCategory, final int errorCode) {
 
-        super(msg == null ? toURI(languageFamily, errorCategory, errorCode,
-                null/* params */) : msg);
-        
-        this.languageFamily = languageFamily;
-        
-        this.errorCategory = errorCategory;
-        
-        this.errorCode = errorCode;
-        
-    }
+    super(toURI(languageFamily, errorCategory, errorCode, null /* params */));
 
-    /**
-     * 
-     @param languageFamily
-     *            The {@link LanguageFamily}.
-     * @param errorCategory
-     *            The {@link ErrorCategory}.
-     * @param errorCode
-     *            The four digit error code.
-     * @param params
-     *            Additional parameters for the error message (optional and may
-     *            be <code>null</code>). When non-<code>null</code> and
-     *            non-empty, the parameters are appended to the constructed URI
-     *            as query parameters.
-     */
-    protected W3CQueryLanguageException(final LanguageFamily languageFamily,
-            final ErrorCategory errorCategory, final int errorCode,
-            final NV[] params) {
-        
-        super(toURI(languageFamily, errorCategory, errorCode, params));
-        
-        this.languageFamily = languageFamily;
-        
-        this.errorCategory = errorCategory;
-        
-        this.errorCode = errorCode;
-        
-    }
-    
-    /**
-     * Return the URI for the given error. This is used to avoid the runtime
-     * creation of strings for frequently thrown errors, such as type errors.
-     * Various subclasses use this method to declare concrete URIs which are
-     * then passed into their constructors for specific kinds of errors.
-     * 
-     * @param languageFamily
-     *            The {@link LanguageFamily}.
-     * @param errorCategory
-     *            The {@link ErrorCategory}.
-     * @param errorCode
-     *            The four digit error code.
-     * @param params
-     *            Additional parameters for the error message (optional and may
-     *            be <code>null</code>). When non-<code>null</code> and
-     *            non-empty, the parameters are appended to the constructed URI
-     *            as query parameters.
-     * 
-     * @return The URI.
-     */
-    static protected String toURI(final LanguageFamily languageFamily,
-            final ErrorCategory errorCategory, final int errorCode,
-            final NV[] params) {
+    this.languageFamily = languageFamily;
 
-        if (errorCode >= 10000 || errorCode < 0)
-            throw new IllegalArgumentException();
+    this.errorCategory = errorCategory;
 
-        final String uri;
-        {
-            
-            final StringBuffer sb = new StringBuffer(4);
+    this.errorCode = errorCode;
+  }
 
-            final Formatter f = new Formatter(sb);
+  /**
+   * @param languageFamily The {@link LanguageFamily}.
+   * @param errorCategory The {@link ErrorCategory}.
+   * @param errorCode The four digit error code.
+   * @param msg The <em>URI</em> corresponding to the error. Frequently used errors should use
+   *     {@link #toURI(LanguageFamily, ErrorCategory, int)} to define the URI statically to avoid
+   *     heap churn.
+   */
+  protected W3CQueryLanguageException(
+      final LanguageFamily languageFamily,
+      final ErrorCategory errorCategory,
+      final int errorCode,
+      final String msg) {
 
-            f.format("%04d", errorCode);
+    super(msg == null ? toURI(languageFamily, errorCategory, errorCode, null /* params */) : msg);
 
-            uri = err + languageFamily + errorCategory + sb.toString();
-            
-        }
+    this.languageFamily = languageFamily;
 
-        if (params == null || params.length == 0) {
+    this.errorCategory = errorCategory;
 
-            return uri;
-            
-        }
+    this.errorCode = errorCode;
+  }
 
-        // Add query parameters.
-        {
+  /**
+   * @param languageFamily The {@link LanguageFamily}.
+   * @param errorCategory The {@link ErrorCategory}.
+   * @param errorCode The four digit error code.
+   * @param params Additional parameters for the error message (optional and may be <code>null
+   *     </code>). When non-<code>null</code> and non-empty, the parameters are appended to the
+   *     constructed URI as query parameters.
+   */
+  protected W3CQueryLanguageException(
+      final LanguageFamily languageFamily,
+      final ErrorCategory errorCategory,
+      final int errorCode,
+      final NV[] params) {
 
-            final StringBuilder sb = new StringBuilder();
+    super(toURI(languageFamily, errorCategory, errorCode, params));
 
-            sb.append(uri);
+    this.languageFamily = languageFamily;
 
-            for (int i = 0; i < params.length; i++) {
+    this.errorCategory = errorCategory;
 
-                final NV nv = params[i];
-                
-                sb.append(i == 0 ? '?' : '&');
+    this.errorCode = errorCode;
+  }
 
-                sb.append(encode(nv.getName()));
+  /**
+   * Return the URI for the given error. This is used to avoid the runtime creation of strings for
+   * frequently thrown errors, such as type errors. Various subclasses use this method to declare
+   * concrete URIs which are then passed into their constructors for specific kinds of errors.
+   *
+   * @param languageFamily The {@link LanguageFamily}.
+   * @param errorCategory The {@link ErrorCategory}.
+   * @param errorCode The four digit error code.
+   * @param params Additional parameters for the error message (optional and may be <code>null
+   *     </code>). When non-<code>null</code> and non-empty, the parameters are appended to the
+   *     constructed URI as query parameters.
+   * @return The URI.
+   */
+  protected static String toURI(
+      final LanguageFamily languageFamily,
+      final ErrorCategory errorCategory,
+      final int errorCode,
+      final NV[] params) {
 
-                sb.append('=');
-                
-                sb.append(encode(nv.getValue()));
+    if (errorCode >= 10000 || errorCode < 0) throw new IllegalArgumentException();
 
-            }
-            
-            return sb.toString();
-            
-        }
+    final String uri;
+    {
+      final StringBuffer sb = new StringBuffer(4);
 
+      final Formatter f = new Formatter(sb);
+
+      f.format("%04d", errorCode);
+
+      uri = err + languageFamily + errorCategory + sb.toString();
     }
 
-    /**
-     * Safe UTF-8 encoder (handles the highly unlikely exception that can be
-     * thrown as well as a <code>null</code> value).
-     * 
-     * @param s
-     *            The string.
-     * 
-     * @return The encoded string.
-     */
-    private static String encode(final String s) {
-        
-        if (s == null)
-            return encode("null");
-        
-//        try {
-//
-//            return URLEncoder.encode(s, "UTF-8");
-//            
-//        } catch (UnsupportedEncodingException ex) {
-//            
-//            return s;
-//            
-//        }
-        /*
-         * I prefer the plain text of the string as this is really a QName and
-         * not a navigable URI.
-         */
-        return s;
+    if (params == null || params.length == 0) {
 
+      return uri;
     }
-    
-    // public static void main(String[] x) {
 
-    // System.err.println(toURI(LanguageFamily.SP,ErrorCategory.TY,120));
-    //        
-    // }
+    // Add query parameters.
+    {
+      final StringBuilder sb = new StringBuilder();
+
+      sb.append(uri);
+
+      for (int i = 0; i < params.length; i++) {
+
+        final NV nv = params[i];
+
+        sb.append(i == 0 ? '?' : '&');
+
+        sb.append(encode(nv.getName()));
+
+        sb.append('=');
+
+        sb.append(encode(nv.getValue()));
+      }
+
+      return sb.toString();
+    }
+  }
+
+  /**
+   * Safe UTF-8 encoder (handles the highly unlikely exception that can be thrown as well as a
+   * <code>null</code> value).
+   *
+   * @param s The string.
+   * @return The encoded string.
+   */
+  private static String encode(final String s) {
+
+    if (s == null) return encode("null");
+
+    //        try {
+    //
+    //            return URLEncoder.encode(s, "UTF-8");
+    //
+    //        } catch (UnsupportedEncodingException ex) {
+    //
+    //            return s;
+    //
+    //        }
+    /*
+     * I prefer the plain text of the string as this is really a QName and
+     * not a navigable URI.
+     */
+    return s;
+  }
+
+  // public static void main(String[] x) {
+
+  // System.err.println(toURI(LanguageFamily.SP,ErrorCategory.TY,120));
+  //
+  // }
 
 }

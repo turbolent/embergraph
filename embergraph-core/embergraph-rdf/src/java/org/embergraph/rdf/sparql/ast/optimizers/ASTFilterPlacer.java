@@ -21,101 +21,85 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.List;
-
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
 /**
- * Class allowing for precise placement of FILTER expressions within
- * join group.
- * 
+ * Class allowing for precise placement of FILTER expressions within join group.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 class ASTFilterPlacer {
-   
-   final ASTJoinGroupFilterExistsInfo fExInfo;
-   
-   final ASTTypeBasedNodeClassifier filterNodeClassifier;
-   
-   public ASTFilterPlacer(
-      final Iterable<IGroupMemberNode> nodeList, 
-      final ASTJoinGroupFilterExistsInfo fExInfo) {
-      
-      this.fExInfo = fExInfo;
 
-      /**
-       * Filter out the filter nodes from the join group, they will receive
-       * special handling in the end. Note that this includes ASK subqueries
-       * which belong to FILTER expressions.
-       */
-      filterNodeClassifier = 
-         new ASTTypeBasedNodeClassifier(
-            new Class<?>[]{ FilterNode.class, SubqueryRoot.class });
-      
-      /**
-       * We're interested in the ASK subquery roots associated with some
-       * EXISTS or NOT EXISTS filter, as recoreded in the fExInfo map.
-       */
-      filterNodeClassifier.addConstraintForType(SubqueryRoot.class, 
-         new ASTTypeBasedNodeClassifierConstraint() {
-         
-            @Override
-            boolean appliesTo(final IGroupMemberNode node) {
-                  
-               if (node instanceof SubqueryRoot) {
-                  return fExInfo.containsSubqueryRoot((SubqueryRoot)node);
-               }
-                  
-               // as a fallback return false
-               return false; 
-                  
+  final ASTJoinGroupFilterExistsInfo fExInfo;
+
+  final ASTTypeBasedNodeClassifier filterNodeClassifier;
+
+  public ASTFilterPlacer(
+      final Iterable<IGroupMemberNode> nodeList, final ASTJoinGroupFilterExistsInfo fExInfo) {
+
+    this.fExInfo = fExInfo;
+
+    /**
+     * Filter out the filter nodes from the join group, they will receive special handling in the
+     * end. Note that this includes ASK subqueries which belong to FILTER expressions.
+     */
+    filterNodeClassifier =
+        new ASTTypeBasedNodeClassifier(new Class<?>[] {FilterNode.class, SubqueryRoot.class});
+
+    /**
+     * We're interested in the ASK subquery roots associated with some EXISTS or NOT EXISTS filter,
+     * as recoreded in the fExInfo map.
+     */
+    filterNodeClassifier.addConstraintForType(
+        SubqueryRoot.class,
+        new ASTTypeBasedNodeClassifierConstraint() {
+
+          @Override
+          boolean appliesTo(final IGroupMemberNode node) {
+
+            if (node instanceof SubqueryRoot) {
+              return fExInfo.containsSubqueryRoot((SubqueryRoot) node);
             }
-         });       
-      
-      filterNodeClassifier.registerNodes(nodeList);
 
-   }
-   
-   /**
-    * @return the non filter nodes in the group
-    */
-   public List<IGroupMemberNode> getNonFilterNodes() {
-      return filterNodeClassifier.getUnclassifiedNodes();
-   }
+            // as a fallback return false
+            return false;
+          }
+        });
 
-   /**
-    * Places the FILTERs of this {@link ASTFilterPlacer} in the given
-    * partitions object.
-    */
-   public void placeFiltersInPartitions(
-      final ASTJoinGroupPartitions partitions) {
+    filterNodeClassifier.registerNodes(nodeList);
+  }
 
-      final List<FilterNode> filterNodes =
-         filterNodeClassifier.get(FilterNode.class);
-      final List<SubqueryRoot> askSubqueries =
-         filterNodeClassifier.get(SubqueryRoot.class);
+  /** @return the non filter nodes in the group */
+  public List<IGroupMemberNode> getNonFilterNodes() {
+    return filterNodeClassifier.getUnclassifiedNodes();
+  }
 
-      // first, place the ASK subqueries
-      for (final IGroupMemberNode askSubquery : askSubqueries) {
-         partitions.placeAtFirstPossiblePosition(askSubquery);
+  /** Places the FILTERs of this {@link ASTFilterPlacer} in the given partitions object. */
+  public void placeFiltersInPartitions(final ASTJoinGroupPartitions partitions) {
+
+    final List<FilterNode> filterNodes = filterNodeClassifier.get(FilterNode.class);
+    final List<SubqueryRoot> askSubqueries = filterNodeClassifier.get(SubqueryRoot.class);
+
+    // first, place the ASK subqueries
+    for (final IGroupMemberNode askSubquery : askSubqueries) {
+      partitions.placeAtFirstPossiblePosition(askSubquery);
+    }
+
+    // second, place the (non-related) simple filters
+    for (final IGroupMemberNode filerNode : filterNodes) {
+      if (!fExInfo.containsFilter((FilterNode) filerNode)) {
+        partitions.placeAtFirstPossiblePosition(filerNode);
       }
-      
-      // second, place the (non-related) simple filters
-      for (final IGroupMemberNode filerNode : filterNodes) {
-         if (!fExInfo.containsFilter((FilterNode)filerNode)) {
-            partitions.placeAtFirstPossiblePosition(filerNode);
-         }
-      }
-      
-      // third, place the FILTERs associated with the ASK subqueries, to
-      // make sure that these FILTERs are directly following the ASK subqueries
-      // (in order to avoid interaction with other FILTERs)
-      for (final IGroupMemberNode askSubquery : askSubqueries) {
-         partitions.placeAtFirstPossiblePosition(
-            fExInfo.filterMap.get(askSubquery));
-      }
-   }
+    }
 
+    // third, place the FILTERs associated with the ASK subqueries, to
+    // make sure that these FILTERs are directly following the ASK subqueries
+    // (in order to avoid interaction with other FILTERs)
+    for (final IGroupMemberNode askSubquery : askSubqueries) {
+      partitions.placeAtFirstPossiblePosition(fExInfo.filterMap.get(askSubquery));
+    }
+  }
 }

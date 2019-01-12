@@ -22,9 +22,7 @@ package org.embergraph.btree.data;
 
 /**
  * Common interface for non-leaf "nodes" in a tree data structure.
- * 
+ *
  * @author thompsonbry@users.sourceforge.net
  */
-public interface ITreeNodeData extends IAbstractNodeData, IChildData {
-
-}
+public interface ITreeNodeData extends IAbstractNodeData, IChildData {}

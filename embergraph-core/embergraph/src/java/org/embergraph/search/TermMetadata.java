@@ -1,64 +1,56 @@
 package org.embergraph.search;
 
 /**
- * Mutable metadata for the occurrences of a term within a field of some
- * document.
- * 
+ * Mutable metadata for the occurrences of a term within a field of some document.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TermMetadata implements ITermMetadata {
 
-//    /**
-//     * The token.
-//     */
-//    private final String token;
-    
-    /**
-     * The local term weight, which may be computed by a variety of methods.
-     */
-    private double localTermWeight;
-    private int noccurrences;
+  //    /**
+  //     * The token.
+  //     */
+  //    private final String token;
 
-//    public TermMetadata(final String token) {
-//        
-//        this.token = token;
-//    }
-//    
-//    public String termText() {
-//        
-//        return token;
-//        
-//    }
-    
-    public int termFreq() {
-    
-        return noccurrences;
-        
-    }
-    
-    final public double getLocalTermWeight() {
+  /** The local term weight, which may be computed by a variety of methods. */
+  private double localTermWeight;
 
-        return localTermWeight;
-        
-    }
+  private int noccurrences;
 
-    final public void setLocalTermWeight(final double d) {
-        
-        localTermWeight = d;
-        
-    }
-    
-    public void add() {
+  //    public TermMetadata(final String token) {
+  //
+  //        this.token = token;
+  //    }
+  //
+  //    public String termText() {
+  //
+  //        return token;
+  //
+  //    }
 
-        noccurrences++;
-        
-    }
+  public int termFreq() {
 
-    public String toString() {
+    return noccurrences;
+  }
 
-        return "{noccur=" + noccurrences + ",weight=" + localTermWeight + "}";
+  public final double getLocalTermWeight() {
 
-    }
-    
+    return localTermWeight;
+  }
+
+  public final void setLocalTermWeight(final double d) {
+
+    localTermWeight = d;
+  }
+
+  public void add() {
+
+    noccurrences++;
+  }
+
+  public String toString() {
+
+    return "{noccur=" + noccurrences + ",weight=" + localTermWeight + "}";
+  }
 }

@@ -25,50 +25,49 @@ import org.embergraph.rdf.internal.constraints.XsdLongBOp;
 import org.embergraph.rdf.internal.constraints.XsdUnsignedLongBOp;
 
 /**
- * Test suite for standard type cast function such as {@link XsdLongBOp} and
- * {@link XsdUnsignedLongBOp}.
- * 
+ * Test suite for standard type cast function such as {@link XsdLongBOp} and {@link
+ * XsdUnsignedLongBOp}.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestCustomTypeCasts extends AbstractDataDrivenSPARQLTestCase {
-    
-    public TestCustomTypeCasts() {
-    }
 
-    public TestCustomTypeCasts(String name) {
-        super(name);
-    }
+  public TestCustomTypeCasts() {}
 
-    /**
-     * Casting to xsd:long (non-standard extension).
-     * 
-     * @throws Exception
-     */
-    public void test_type_casts_long() throws Exception {
+  public TestCustomTypeCasts(String name) {
+    super(name);
+  }
 
-        new TestHelper(
-            "type_cast_long",// testURI
+  /**
+   * Casting to xsd:long (non-standard extension).
+   *
+   * @throws Exception
+   */
+  public void test_type_casts_long() throws Exception {
+
+    new TestHelper(
+            "type_cast_long", // testURI
             "type_cast_long.rq", // queryURI
             "empty.trig", // dataURI
             "type_cast_long.srx" // resultURI
-        ).runTest();
-        
-    }
+            )
+        .runTest();
+  }
 
-    /**
-     * Casting to xsd:unsignedLong (non-standard extension).
-     * 
-     * @throws Exception
-     */
-    public void test_type_casts_unsigned_long() throws Exception {
+  /**
+   * Casting to xsd:unsignedLong (non-standard extension).
+   *
+   * @throws Exception
+   */
+  public void test_type_casts_unsigned_long() throws Exception {
 
-        new TestHelper(
-            "type_cast_unsigned_long",// testURI
+    new TestHelper(
+            "type_cast_unsigned_long", // testURI
             "type_cast_unsigned_long.rq", // queryURI
             "empty.trig", // dataURI
             "type_cast_unsigned_long.srx" // resultURI
-        ).runTest();
-        
-    }
+            )
+        .runTest();
+  }
 }

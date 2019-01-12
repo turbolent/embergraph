@@ -23,33 +23,32 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 import org.embergraph.bop.BOp;
 
 /**
- * Explain hint indicating a MINUS expression that is unsatisfiable, i.e. does
- * not have any effect at all. This happens if the left- and right-hand side
- * of the minus have no variables in common. In such cases, the minus is
- * optimized away, and there's most likely a problem in the query.
- * 
+ * Explain hint indicating a MINUS expression that is unsatisfiable, i.e. does not have any effect
+ * at all. This happens if the left- and right-hand side of the minus have no variables in common.
+ * In such cases, the minus is optimized away, and there's most likely a problem in the query.
+ *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class UnsatisfiableMinusExplainHint extends ExplainHint {
 
-   private static final String EXPLAIN_HINT_TYPE = "Unsatisfiable Minus";
-   
-   private static final String EXPLAIN_HINT_DESCRIPTION =
-      "The referenced AST node has been eliminated, because the MINUS " +
-      "expression that it represents has no effect. The reason is that " +
-      "the left-hand side expressiona and the minus expression have no " +
-      "shared variables. You may consider using FILTER NOT EXISTS as an " +
-      "alternative, see section http://www.w3.org/TR/2013/REC-sparql11-query-"
-      + "20130321/#neg-notexists-minus in the SPARQL 1.1 standard.";
-   
-   public UnsatisfiableMinusExplainHint(final BOp explainHintASTBase) {
-         
-      super(
-         EXPLAIN_HINT_DESCRIPTION, 
-         EXPLAIN_HINT_TYPE, 
-         ExplainHintCategory.CORRECTNESS,
-         ExplainHintSeverity.MODERATE,
-         explainHintASTBase);
-   }
+  private static final String EXPLAIN_HINT_TYPE = "Unsatisfiable Minus";
+
+  private static final String EXPLAIN_HINT_DESCRIPTION =
+      "The referenced AST node has been eliminated, because the MINUS "
+          + "expression that it represents has no effect. The reason is that "
+          + "the left-hand side expressiona and the minus expression have no "
+          + "shared variables. You may consider using FILTER NOT EXISTS as an "
+          + "alternative, see section http://www.w3.org/TR/2013/REC-sparql11-query-"
+          + "20130321/#neg-notexists-minus in the SPARQL 1.1 standard.";
+
+  public UnsatisfiableMinusExplainHint(final BOp explainHintASTBase) {
+
+    super(
+        EXPLAIN_HINT_DESCRIPTION,
+        EXPLAIN_HINT_TYPE,
+        ExplainHintCategory.CORRECTNESS,
+        ExplainHintSeverity.MODERATE,
+        explainHintASTBase);
+  }
 }

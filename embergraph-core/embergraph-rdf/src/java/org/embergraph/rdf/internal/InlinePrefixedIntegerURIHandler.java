@@ -21,58 +21,57 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
+ *
  * Utility IV to generate IVs for URIs in the form of http://example.org/value/STRPREFIX1234234513
  * where the localName of the URI is a string  prefix followed by an integer  value.
- * 
+ *
  * You should extend this class with implementation for specific instances of URIs that follow
  * this form such as:  http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID_1234234 would be
  * created as
- * <code> 
+ * <code>
  * InlinePrefixedIntegerURIHandler handler = new InlinePrefixedIntegerURIHandler("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/","CID_");
- * <code> 
- * This has support for overloading on a single namespace {@link InlineLocalNameIntegerURIHandler}. 
- * 
+ * <code>
+ * This has support for overloading on a single namespace {@link InlineLocalNameIntegerURIHandler}.
+ *
  * @author beebs
  */
+public class InlinePrefixedIntegerURIHandler extends InlineLocalNameIntegerURIHandler
+    implements IPrefixedURIHandler {
 
-public class InlinePrefixedIntegerURIHandler extends
-		InlineLocalNameIntegerURIHandler implements IPrefixedURIHandler {
+  private String prefix = null;
 
-	private String prefix = null;
+  public InlinePrefixedIntegerURIHandler(final String namespace, final String prefix) {
 
-	public InlinePrefixedIntegerURIHandler(final String namespace, final String prefix) {
-		
-		super(namespace);
-		this.prefix = prefix;
-	}
+    super(namespace);
+    this.prefix = prefix;
+  }
 
-	public InlinePrefixedIntegerURIHandler(final String namespace, final String prefix, final int id) {
-		super(namespace);
-		this.prefix = prefix;
-		this.packedId = id;
-	}
+  public InlinePrefixedIntegerURIHandler(
+      final String namespace, final String prefix, final int id) {
+    super(namespace);
+    this.prefix = prefix;
+    this.packedId = id;
+  }
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	protected AbstractLiteralIV createInlineIV(String localName) {
-		if (!localName.startsWith(this.prefix)) {
-			return null;
-		}
-		
-		final String intValue = getPackedValueString(localName.substring(this.prefix.length(), localName.length()));
-				
-		return super.createInlineIV(intValue);
-	}
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(String localName) {
+    if (!localName.startsWith(this.prefix)) {
+      return null;
+    }
 
-	@Override
-	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
-		return this.prefix + getUnpackedValueFromString(super.getLocalNameFromDelegate(delegate));
-	}
+    final String intValue =
+        getPackedValueString(localName.substring(this.prefix.length(), localName.length()));
 
-	public String getPrefix() {
-		return prefix;
-	}
+    return super.createInlineIV(intValue);
+  }
 
+  @Override
+  public String getLocalNameFromDelegate(AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+    return this.prefix + getUnpackedValueFromString(super.getLocalNameFromDelegate(delegate));
+  }
+
+  public String getPrefix() {
+    return prefix;
+  }
 }

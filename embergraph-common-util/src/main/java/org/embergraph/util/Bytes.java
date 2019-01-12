@@ -23,33 +23,32 @@ package org.embergraph.util;
 
 /**
  * Constants.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Bytes {
 
-    public static final int SIZEOF_BYTE   = 1;
-    public static final int SIZEOF_SHORT  = 2;
-    public static final int SIZEOF_INT    = 4;
-    public static final int SIZEOF_LONG   = 8;
-    public static final int SIZEOF_FLOAT  = 4;
-    public static final int SIZEOF_DOUBLE = 8;
-    public static final int SIZEOF_UUID   = 16;
-    
-    /*
-     * int32 constants.
-     */
-    public static final int kilobyte32 = 1024;
-    public static final int megabyte32 = 1048576;
-    public static final int gigabyte32 = 1073741824; 
+  public static final int SIZEOF_BYTE = 1;
+  public static final int SIZEOF_SHORT = 2;
+  public static final int SIZEOF_INT = 4;
+  public static final int SIZEOF_LONG = 8;
+  public static final int SIZEOF_FLOAT = 4;
+  public static final int SIZEOF_DOUBLE = 8;
+  public static final int SIZEOF_UUID = 16;
 
-    /*
-     * int64 constants.
-     */
-    public static final long kilobyte = 1024;
-    public static final long megabyte = 1048576;
-    public static final long gigabyte = 1073741824; 
-    public static final long terabyte = 1099511627776L;
+  /*
+   * int32 constants.
+   */
+  public static final int kilobyte32 = 1024;
+  public static final int megabyte32 = 1048576;
+  public static final int gigabyte32 = 1073741824;
 
+  /*
+   * int64 constants.
+   */
+  public static final long kilobyte = 1024;
+  public static final long megabyte = 1048576;
+  public static final long gigabyte = 1073741824;
+  public static final long terabyte = 1099511627776L;
 }

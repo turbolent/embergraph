@@ -25,49 +25,36 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.embergraph.ha.althalog.TestAltHALogWriter;
-
 /**
  * Runs all tests for all journal implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 4069 2011-01-09 20:58:02Z thompsonbry $
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("HA Log Reader/Writer");
+
+    // Test of HALogWriter and HALogReader.
+    suite.addTestSuite(TestHALogWriter.class);
+
+    /*
+     * Disabled. I appear to have broken something in the altha package
+     * around r7118 in the READ CACHE branch. BBT. May 8, 2013.
      */
-    public TestAll() {
-    }
+    //        suite.addTestSuite(TestAltHALogWriter.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
-
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("HA Log Reader/Writer");
-
-        // Test of HALogWriter and HALogReader.
-        suite.addTestSuite(TestHALogWriter.class);
-
-        /*
-         * Disabled. I appear to have broken something in the altha package
-         * around r7118 in the READ CACHE branch. BBT. May 8, 2013.
-         */
-//        suite.addTestSuite(TestAltHALogWriter.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

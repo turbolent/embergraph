@@ -18,38 +18,39 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rwstore;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class FixedOutputStream extends OutputStream {
-	private final byte m_buf[];
-	private int m_count = 0;
-	
-	public FixedOutputStream(final byte buf[]) {
-		m_buf = buf;
-	}
+  private final byte m_buf[];
+  private int m_count = 0;
 
-	/****************************************************************
-	 * write a single 4 byte integer
-	 **/
+  public FixedOutputStream(final byte buf[]) {
+    m_buf = buf;
+  }
+
+  /**
+   * ************************************************************** write a single 4 byte integer
+   */
   public void writeInt(final int b) {
-  	m_buf[m_count++] = (byte) ((b >>> 24) & 0xFF);
-  	m_buf[m_count++] = (byte) ((b >>> 16) & 0xFF);
-  	m_buf[m_count++] = (byte) ((b >>> 8) & 0xFF);
-  	m_buf[m_count++] = (byte) ((b >>> 0) & 0xFF);
+    m_buf[m_count++] = (byte) ((b >>> 24) & 0xFF);
+    m_buf[m_count++] = (byte) ((b >>> 16) & 0xFF);
+    m_buf[m_count++] = (byte) ((b >>> 8) & 0xFF);
+    m_buf[m_count++] = (byte) ((b >>> 0) & 0xFF);
   }
 
   public void write(final int b) throws IOException {
-  	m_buf[m_count++] = (byte) b;
-  }
-  
-  public void write(final byte b[], final int off, final int len) throws IOException {
-		System.arraycopy(b, off, m_buf, m_count, len);
-		
-		m_count += len;
+    m_buf[m_count++] = (byte) b;
   }
 
-	public void writeLong(final long txReleaseTime) {
-		writeInt((int) (txReleaseTime >> 32));
-		writeInt((int) txReleaseTime & 0xFFFFFFFF);
-	}
+  public void write(final byte b[], final int off, final int len) throws IOException {
+    System.arraycopy(b, off, m_buf, m_count, len);
+
+    m_count += len;
+  }
+
+  public void writeLong(final long txReleaseTime) {
+    writeInt((int) (txReleaseTime >> 32));
+    writeInt((int) txReleaseTime & 0xFFFFFFFF);
+  }
 }

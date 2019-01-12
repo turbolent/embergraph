@@ -24,51 +24,51 @@ package org.embergraph.rdf.model;
 import java.util.Objects;
 
 /**
- * This class wraps a {@link EmbergraphStatement} and provides {@link #hashCode()}
- * and {@link #equals(Object)} respecting all four fields rather than SPO as per
- * the {@link org.openrdf.model.Statement} contract.
- * 
+ * This class wraps a {@link EmbergraphStatement} and provides {@link #hashCode()} and {@link
+ * #equals(Object)} respecting all four fields rather than SPO as per the {@link
+ * org.openrdf.model.Statement} contract.
+ *
  * @author jeremycarroll
  */
 public class EmbergraphQuadWrapper {
-	
-	private final EmbergraphStatement delegate;
 
-	public EmbergraphQuadWrapper(final EmbergraphStatement cspo) {
-		delegate = cspo;
-	}
+  private final EmbergraphStatement delegate;
 
-	@Override
-	public int hashCode() {
-        if (hash == 0) {
-        	
-        	if ( delegate.getContext() == null ) {
-        		hash = delegate.hashCode();
-        	} else {
-               hash = delegate.getContext().hashCode() + 31 * delegate.hashCode();
-        	}
-        }
-        
-        return hash;
-	}
-    private int hash = 0;
-    
-    @Override 
-    public boolean equals(final Object o) {
-        if(this == o) return true;
-    	if (! (o instanceof EmbergraphQuadWrapper)) {
-    		return false;
-    	}
-    	final EmbergraphStatement oo = ((EmbergraphQuadWrapper)o).delegate;
-    	return delegate.equals(oo) && equals(delegate.getContext(),oo.getContext());
+  public EmbergraphQuadWrapper(final EmbergraphStatement cspo) {
+    delegate = cspo;
+  }
+
+  @Override
+  public int hashCode() {
+    if (hash == 0) {
+
+      if (delegate.getContext() == null) {
+        hash = delegate.hashCode();
+      } else {
+        hash = delegate.getContext().hashCode() + 31 * delegate.hashCode();
+      }
     }
 
-    private boolean equals(final EmbergraphResource a, final EmbergraphResource b) {
-		  return Objects.equals(a, b);
-	  }
+    return hash;
+  }
 
-    public EmbergraphStatement statement() {
-    	return delegate;
+  private int hash = 0;
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (!(o instanceof EmbergraphQuadWrapper)) {
+      return false;
     }
+    final EmbergraphStatement oo = ((EmbergraphQuadWrapper) o).delegate;
+    return delegate.equals(oo) && equals(delegate.getContext(), oo.getContext());
+  }
 
+  private boolean equals(final EmbergraphResource a, final EmbergraphResource b) {
+    return Objects.equals(a, b);
+  }
+
+  public EmbergraphStatement statement() {
+    return delegate;
+  }
 }

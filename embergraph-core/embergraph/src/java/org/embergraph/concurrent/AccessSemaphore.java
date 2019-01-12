@@ -23,102 +23,102 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * The AccessSemaphore implements an idiom of exclusive and shared access.
- * <p>
- * A typical use-case for exclusive/shared access might be single writer/multiple readers
- * <p>
- * Since this access mechanism builds on a simple semaphore, it is straightforward to bound
- * the number of shares permitted.  By default this is set to MAXINT, but it need not be,
- * and a constructor is provided to define this limit.
- * <p>
- * It is NOT re-entrant.
+ *
+ * <p>A typical use-case for exclusive/shared access might be single writer/multiple readers
+ *
+ * <p>Since this access mechanism builds on a simple semaphore, it is straightforward to bound the
+ * number of shares permitted. By default this is set to MAXINT, but it need not be, and a
+ * constructor is provided to define this limit.
+ *
+ * <p>It is NOT re-entrant.
  *
  * @author Martyn Cutcher
- *
  */
 public class AccessSemaphore {
-	
-	final int maxShares;
-	final private Semaphore semaphore;
-	
-	volatile Thread exclusiveOwner = null;
-	
-	public AccessSemaphore() {
-		this(Integer.MAX_VALUE);
-	}
-	
-	public AccessSemaphore(final int maxShares) {
-		this.maxShares = maxShares;
-		this.semaphore = new Semaphore(maxShares, true/*fair*/);		
-	}
 
-	public abstract class Access {
-		boolean released = false;
+  final int maxShares;
+  private final Semaphore semaphore;
 
-		final public void release() {
-			if (released) {
-				throw new IllegalStateException();
-			}
-			doRelease();
-			released = true;
-		}
+  volatile Thread exclusiveOwner = null;
 
-		protected abstract void doRelease();
-	}
+  public AccessSemaphore() {
+    this(Integer.MAX_VALUE);
+  }
 
-	public class ExclusiveAccess extends Access {
-		protected void doRelease() {
-			releaseExclusive();
-		}
-	}
+  public AccessSemaphore(final int maxShares) {
+    this.maxShares = maxShares;
+    this.semaphore = new Semaphore(maxShares, true /*fair*/);
+  }
 
-	public class SharedAccess extends Access {
-		protected void doRelease() {
-			releaseShared();
-		}
-	}
-	
-	public final static class AccessSemaphoreNotReentrantException extends IllegalStateException {
+  public abstract class Access {
+    boolean released = false;
 
-		private static final long serialVersionUID = -234560202749194378L;
-		
-	};
+    public final void release() {
+      if (released) {
+        throw new IllegalStateException();
+      }
+      doRelease();
+      released = true;
+    }
 
-	final public Access acquireExclusive() throws InterruptedException {
-		
-		if (exclusiveOwner != null && exclusiveOwner == Thread.currentThread()) {
-			throw new AccessSemaphoreNotReentrantException();
-		}
-		semaphore.acquire(maxShares);
-		
-		exclusiveOwner = Thread.currentThread();
+    protected abstract void doRelease();
+  }
 
-		return new ExclusiveAccess();
-	}
+  public class ExclusiveAccess extends Access {
+    protected void doRelease() {
+      releaseExclusive();
+    }
+  }
 
-	final public Access tryAcquireExclusive(final long timeout, final TimeUnit unit) throws InterruptedException {
-		semaphore.tryAcquire(maxShares, timeout, unit);
+  public class SharedAccess extends Access {
+    protected void doRelease() {
+      releaseShared();
+    }
+  }
 
-		return new ExclusiveAccess();
-	}
+  public static final class AccessSemaphoreNotReentrantException extends IllegalStateException {
 
-	final private void releaseExclusive() {
-		exclusiveOwner = null;
-		semaphore.release(maxShares);
-	}
+    private static final long serialVersionUID = -234560202749194378L;
+  };
 
-	final public Access acquireShared() throws InterruptedException {
-		semaphore.acquire();
+  public final Access acquireExclusive() throws InterruptedException {
 
-		return new SharedAccess();
-	}
+    if (exclusiveOwner != null && exclusiveOwner == Thread.currentThread()) {
+      throw new AccessSemaphoreNotReentrantException();
+    }
+    semaphore.acquire(maxShares);
 
-	final public Access tryAcquireShared(final long timeout, final TimeUnit unit) throws InterruptedException {
-		semaphore.tryAcquire(timeout, unit);
+    exclusiveOwner = Thread.currentThread();
 
-		return new SharedAccess();
-	}
+    return new ExclusiveAccess();
+  }
 
-	final private void releaseShared() {
-		semaphore.release();
-	}
+  public final Access tryAcquireExclusive(final long timeout, final TimeUnit unit)
+      throws InterruptedException {
+    semaphore.tryAcquire(maxShares, timeout, unit);
+
+    return new ExclusiveAccess();
+  }
+
+  private final void releaseExclusive() {
+    exclusiveOwner = null;
+    semaphore.release(maxShares);
+  }
+
+  public final Access acquireShared() throws InterruptedException {
+    semaphore.acquire();
+
+    return new SharedAccess();
+  }
+
+  public final Access tryAcquireShared(final long timeout, final TimeUnit unit)
+      throws InterruptedException {
+    semaphore.tryAcquire(timeout, unit);
+
+    return new SharedAccess();
+  }
+
+  private final void releaseShared() {
+    semaphore.release();
+  }
 }

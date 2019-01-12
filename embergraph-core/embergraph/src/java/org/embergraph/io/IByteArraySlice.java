@@ -26,42 +26,37 @@ import org.embergraph.btree.keys.KeyBuilder;
 
 /**
  * Interface for a slice of a backing byte[].
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IByteArraySlice {
 
-    /**
-     * The backing byte[]. This method DOES NOT guarantee that the backing array
-     * reference will remain constant. Some implementations use an extensible
-     * backing byte[] and will replace the reference when the backing buffer is
-     * extended.
-     */
-    public byte[] array();
+  /**
+   * The backing byte[]. This method DOES NOT guarantee that the backing array reference will remain
+   * constant. Some implementations use an extensible backing byte[] and will replace the reference
+   * when the backing buffer is extended.
+   */
+  public byte[] array();
 
-    /**
-     * The start of the slice in the {@link #array()}.
-     */
-    public int off();
+  /** The start of the slice in the {@link #array()}. */
+  public int off();
 
-    /**
-     * The length of the slice in the {@link #array()}.
-     * 
-     * Note: {@link IByteArraySlice#len()} has different semantics for some
-     * concrete implementations. {@link ByteArrayBuffer#len()} always returns
-     * the capacity of the backing byte[] while {@link ByteArrayBuffer#pos()}
-     * returns the #of bytes written onto the backing buffer. In contrast,
-     * {@link KeyBuilder#len()} is always the #of bytes written onto the backing
-     * buffer.
-     */
-    public int len();
+  /**
+   * The length of the slice in the {@link #array()}.
+   *
+   * <p>Note: {@link IByteArraySlice#len()} has different semantics for some concrete
+   * implementations. {@link ByteArrayBuffer#len()} always returns the capacity of the backing
+   * byte[] while {@link ByteArrayBuffer#pos()} returns the #of bytes written onto the backing
+   * buffer. In contrast, {@link KeyBuilder#len()} is always the #of bytes written onto the backing
+   * buffer.
+   */
+  public int len();
 
-    /**
-     * Return a copy of the data in the slice.
-     * 
-     * @return A new array containing data in the slice.
-     */
-    byte[] toByteArray();
-    
+  /**
+   * Return a copy of the data in the slice.
+   *
+   * @return A new array containing data in the slice.
+   */
+  byte[] toByteArray();
 }

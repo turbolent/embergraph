@@ -18,58 +18,45 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.lbs;
 
 /**
- * Generic interface exposes an abstract model of the performance metrics
- * for a given host.
- * 
+ * Generic interface exposes an abstract model of the performance metrics for a given host.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHostMetrics {
 
-//    /**
-//     * Return a textual representation of the named metric.
-//     * 
-//     * @param name
-//     *            The metric.
-//     *            
-//     * @return The textual representation of that metric -or- <code>null</code>
-//     *         if there is no such metric available.
-//     */
-//    String getText(String name);
+  //    /**
+  //     * Return a textual representation of the named metric.
+  //     *
+  //     * @param name
+  //     *            The metric.
+  //     *
+  //     * @return The textual representation of that metric -or- <code>null</code>
+  //     *         if there is no such metric available.
+  //     */
+  //    String getText(String name);
 
-    /**
-     * Return a numeric representation of the named metric.
-     * 
-     * @param name
-     *            The metric.
-     * 
-     * @return The numeric representation of that metric -or- <code>null</code>
-     *         if there is no such metric available.
-     * 
-     * @throws IllegalArgumentException
-     *             if the <code>name</code> is <code>null</code>.
-     */
-    Number getNumeric(String name);
+  /**
+   * Return a numeric representation of the named metric.
+   *
+   * @param name The metric.
+   * @return The numeric representation of that metric -or- <code>null</code> if there is no such
+   *     metric available.
+   * @throws IllegalArgumentException if the <code>name</code> is <code>null</code>.
+   */
+  Number getNumeric(String name);
 
-    /**
-     * Return a numeric representation of the named metric.
-     * 
-     * @param name
-     *            The metric.
-     * @param defaultValue
-     *            The default value.
-     * 
-     * @return The numeric representation of that metric -or- the
-     *         <code>defaultValue</code> if there is no such metric available.
-     * @throws IllegalArgumentException
-     *             if the <code>name</code> is <code>null</code>.
-     * @throws IllegalArgumentException
-     *             if the <code>defaultValue</code> is <code>null</code>.
-     */
-    <T extends Number> T getNumeric(String name, T defaultValue);
+  /**
+   * Return a numeric representation of the named metric.
+   *
+   * @param name The metric.
+   * @param defaultValue The default value.
+   * @return The numeric representation of that metric -or- the <code>defaultValue</code> if there
+   *     is no such metric available.
+   * @throws IllegalArgumentException if the <code>name</code> is <code>null</code>.
+   * @throws IllegalArgumentException if the <code>defaultValue</code> is <code>null</code>.
+   */
+  <T extends Number> T getNumeric(String name, T defaultValue);
 
-    /**
-     * Return the names of all known metrics.
-     */
-    String[] getMetricNames();
-
+  /** Return the names of all known metrics. */
+  String[] getMetricNames();
 }

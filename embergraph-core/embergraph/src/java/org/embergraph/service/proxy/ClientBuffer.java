@@ -24,78 +24,68 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.io.Serializable;
-
 import org.embergraph.relation.accesspath.IBuffer;
 
 /**
- * {@link Serializable} class wraps a {@link RemoteBuffer} delegating methods
- * through to the {@link IBuffer} on the remote service while masquerading
- * {@link IOException}s so that we can implement the {@link IBuffer} API.
- * 
+ * {@link Serializable} class wraps a {@link RemoteBuffer} delegating methods through to the {@link
+ * IBuffer} on the remote service while masquerading {@link IOException}s so that we can implement
+ * the {@link IBuffer} API.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ClientBuffer<E> implements IBuffer<E>, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3820783912360132819L;
-    
-    private final RemoteBuffer<E> buffer;
+  /** */
+  private static final long serialVersionUID = 3820783912360132819L;
 
-    /**
-     * 
-     * @param buffer
-     *            A proxy for the {@link RemoteBuffer}.
-     */
-    public ClientBuffer(final RemoteBuffer<E> buffer) {
+  private final RemoteBuffer<E> buffer;
 
-        if (buffer == null)
-            throw new IllegalArgumentException();
+  /** @param buffer A proxy for the {@link RemoteBuffer}. */
+  public ClientBuffer(final RemoteBuffer<E> buffer) {
 
-        this.buffer = buffer;
+    if (buffer == null) throw new IllegalArgumentException();
 
+    this.buffer = buffer;
+  }
+
+  public void add(E e) {
+    try {
+      buffer.add(e);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
-    
-    public void add(E e) {
-        try {
-            buffer.add(e);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+  }
 
-    public long flush() {
-        try {
-            return buffer.flush();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public long flush() {
+    try {
+      return buffer.flush();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public boolean isEmpty() {
-        try {
-            return buffer.isEmpty();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public boolean isEmpty() {
+    try {
+      return buffer.isEmpty();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public void reset() {
-        try {
-            buffer.reset();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public void reset() {
+    try {
+      buffer.reset();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    public int size() {
-        try {
-            return buffer.size();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+  public int size() {
+    try {
+      return buffer.size();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
-
+  }
 }

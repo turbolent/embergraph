@@ -21,29 +21,25 @@ import org.embergraph.quorum.QuorumException;
 
 /**
  * A quorum related exception dealing with the write replication pipeline.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class AbstractPipelineException extends QuorumException {
+public abstract class AbstractPipelineException extends QuorumException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public AbstractPipelineException() {
-    }
+  public AbstractPipelineException() {}
 
-    public AbstractPipelineException(String message) {
-        super(message);
-    }
+  public AbstractPipelineException(String message) {
+    super(message);
+  }
 
-    public AbstractPipelineException(Throwable cause) {
-        super(cause);
-    }
+  public AbstractPipelineException(Throwable cause) {
+    super(cause);
+  }
 
-    public AbstractPipelineException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public AbstractPipelineException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

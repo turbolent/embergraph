@@ -21,21 +21,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimpleIdFactory implements IdFactory {
 
-    /**
-     * Note: The ids are assigned using {@link AtomicInteger#incrementAndGet()}
-     * so ONE (1) is the first id that will be assigned when we pass in ZERO (0)
-     * as the initial state of the {@link AtomicInteger}.
-     */
-    private final AtomicInteger nextId = new AtomicInteger(0);
+  /**
+   * Note: The ids are assigned using {@link AtomicInteger#incrementAndGet()} so ONE (1) is the
+   * first id that will be assigned when we pass in ZERO (0) as the initial state of the {@link
+   * AtomicInteger}.
+   */
+  private final AtomicInteger nextId = new AtomicInteger(0);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int nextId() {
+  /** {@inheritDoc} */
+  @Override
+  public int nextId() {
 
-        return nextId.incrementAndGet();
-        
-    }
-
+    return nextId.incrementAndGet();
+  }
 }

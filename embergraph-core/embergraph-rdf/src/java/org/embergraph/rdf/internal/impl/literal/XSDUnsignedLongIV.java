@@ -20,7 +20,6 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
@@ -29,170 +28,151 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.util.Bytes;
 
 /** Implementation for inline <code>xsd:unsignedLong</code>. */
-public class XSDUnsignedLongIV<V extends EmbergraphLiteral> extends
-        AbstractLiteralIV<V, BigInteger> {
+public class XSDUnsignedLongIV<V extends EmbergraphLiteral>
+    extends AbstractLiteralIV<V, BigInteger> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * The unsigned long value.
-     */
-    private final long value;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * The unsigned long value.
-     */
-    public long rawValue() {
+  /** The unsigned long value. */
+  private final long value;
 
-        return value;
-        
+  /** The unsigned long value. */
+  public long rawValue() {
+
+    return value;
+  }
+
+  public IV<V, BigInteger> clone(final boolean clearCache) {
+
+    final XSDUnsignedLongIV<V> tmp = new XSDUnsignedLongIV<V>(value);
+
+    if (!clearCache) {
+
+      tmp.setValue(getValueCache());
     }
 
-    public IV<V, BigInteger> clone(final boolean clearCache) {
+    return tmp;
+  }
 
-        final XSDUnsignedLongIV<V> tmp = new XSDUnsignedLongIV<V>(value);
+  public XSDUnsignedLongIV(final long value) {
 
-        if (!clearCache) {
+    super(DTE.XSDUnsignedLong);
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    this.value = value;
+  }
 
+  /** Promote the <code>unsigned long</code> into a signed {@link BigInteger}. */
+  public final BigInteger promote() {
+
+    return promote(value);
+  }
+
+  public static BigInteger promote(final long value) {
+
+    return BigInteger.valueOf(value).subtract(BigInteger.valueOf(Long.MIN_VALUE));
+  }
+
+  public final BigInteger getInlineValue() {
+    return promote();
+  }
+
+  @SuppressWarnings("unchecked")
+  public V asValue(final LexiconRelation lex) {
+    V v = getValueCache();
+    if (v == null) {
+      final EmbergraphValueFactory f = lex.getValueFactory();
+      v = (V) f.createLiteral(value, true);
+      v.setIV(this);
+      setValue(v);
     }
+    return v;
+  }
 
-    public XSDUnsignedLongIV(final long value) {
-        
-        super(DTE.XSDUnsignedLong);
-        
-        this.value = value;
-        
-    }
+  @Override
+  public final long longValue() {
+    return promote().longValue();
+  }
 
-    /**
-     * Promote the <code>unsigned long</code> into a signed {@link BigInteger}.
-     */
-    public final BigInteger promote() {
-
-        return promote(value);
-        
-    }
-
-    public static BigInteger promote(final long value) {
-
-        return BigInteger.valueOf(value).subtract(BigInteger.valueOf(Long.MIN_VALUE));
-        
-    }
-
-    final public BigInteger getInlineValue() {
-        return promote();
-    }
-
-	@SuppressWarnings("unchecked")
-	public V asValue(final LexiconRelation lex) {
-		V v = getValueCache();
-		if (v == null) {
-			final EmbergraphValueFactory f = lex.getValueFactory();
-			v = (V) f.createLiteral(value, true);
-			v.setIV(this);
-			setValue(v);
-		}
-		return v;
-    }
-
-    @Override
-    final public long longValue() {
-        return promote().longValue();
-    }
-
+  /*
+   * From the spec: If the argument is a numeric type or a typed literal with
+   * a datatype derived from a numeric type, the EBV is false if the operand
+   * value is NaN or is numerically equal to zero; otherwise the EBV is true.
+   */
+  @Override
+  public boolean booleanValue() {
     /*
-     * From the spec: If the argument is a numeric type or a typed literal with
-     * a datatype derived from a numeric type, the EBV is false if the operand
-     * value is NaN or is numerically equal to zero; otherwise the EBV is true.
+     * TODO This can be optimized using the known signed representation of
+     * the unsigned ZERO (this is true for all of the xsd:unsigned classes).
      */
-    @Override
-    public boolean booleanValue() {
-        /*
-         * TODO This can be optimized using the known signed representation of
-         * the unsigned ZERO (this is true for all of the xsd:unsigned classes).
-         */
-        return value != UNSIGNED_ZERO ? true : false;
-    }
+    return value != UNSIGNED_ZERO ? true : false;
+  }
 
-    static private final long UNSIGNED_ZERO = 0x8000000000000000L;
+  private static final long UNSIGNED_ZERO = 0x8000000000000000L;
 
-    @Override
-    public byte byteValue() {
-        return (byte) promote().byteValue();
-    }
+  @Override
+  public byte byteValue() {
+    return (byte) promote().byteValue();
+  }
 
-    @Override
-    public double doubleValue() {
-        return (double) promote().doubleValue();
-    }
+  @Override
+  public double doubleValue() {
+    return (double) promote().doubleValue();
+  }
 
-    @Override
-    public float floatValue() {
-        return (float) promote().floatValue();
-    }
+  @Override
+  public float floatValue() {
+    return (float) promote().floatValue();
+  }
 
-    @Override
-    public int intValue() {
-        return (int) promote().intValue();
-    }
+  @Override
+  public int intValue() {
+    return (int) promote().intValue();
+  }
 
-    @Override
-    public short shortValue() {
-        return (short) promote().shortValue();
-    }
-    
-    @Override
-    public String stringValue() {
-        return promote().toString();
-    }
+  @Override
+  public short shortValue() {
+    return (short) promote().shortValue();
+  }
 
-    @Override
-    public BigDecimal decimalValue() {
-        return new BigDecimal(promote());
-    }
+  @Override
+  public String stringValue() {
+    return promote().toString();
+  }
 
-    @Override
-    public BigInteger integerValue() {
-        return promote();
-    }
+  @Override
+  public BigDecimal decimalValue() {
+    return new BigDecimal(promote());
+  }
 
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof XSDUnsignedLongIV<?>) {
-            return this.value == ((XSDUnsignedLongIV<?>) o).value;
-        }
-        return false;
-    }
+  @Override
+  public BigInteger integerValue() {
+    return promote();
+  }
 
-    /**
-     * Return the hash code of the long value.
-     */
-    public int hashCode() {
-        return (int) (value ^ (value >>> 32));
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof XSDUnsignedLongIV<?>) {
+      return this.value == ((XSDUnsignedLongIV<?>) o).value;
     }
+    return false;
+  }
 
-    public int byteLength() {
-        return 1 + Bytes.SIZEOF_LONG;
-    }
-    
-    @SuppressWarnings("rawtypes")
-    @Override
-    public int _compareTo(final IV o) {
- 
-        final XSDUnsignedLongIV<?> t = (XSDUnsignedLongIV<?>) o;
-        
-        return value == t.value ? 0 : value < t.value ? -1 : 1;
-        
-    }
-    
+  /** Return the hash code of the long value. */
+  public int hashCode() {
+    return (int) (value ^ (value >>> 32));
+  }
+
+  public int byteLength() {
+    return 1 + Bytes.SIZEOF_LONG;
+  }
+
+  @SuppressWarnings("rawtypes")
+  @Override
+  public int _compareTo(final IV o) {
+
+    final XSDUnsignedLongIV<?> t = (XSDUnsignedLongIV<?>) o;
+
+    return value == t.value ? 0 : value < t.value ? -1 : 1;
+  }
 }

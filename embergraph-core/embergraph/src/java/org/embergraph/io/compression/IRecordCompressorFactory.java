@@ -25,15 +25,12 @@ package org.embergraph.io.compression;
 
 /**
  * A factory for {@link IRecordCompressor}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRecordCompressorFactory<A extends IRecordCompressor> {
 
-    /**
-     * Return an {@link IRecordCompressor} instance.
-     */
-    public A getInstance();
-
+  /** Return an {@link IRecordCompressor} instance. */
+  public A getInstance();
 }

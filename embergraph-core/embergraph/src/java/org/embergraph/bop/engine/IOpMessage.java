@@ -25,21 +25,19 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * Common metadata for operator evaluation messages. Messages are
- * {@link Serializable} since they are sent on the wire in the clustered
- * database.
- * 
+ * Common metadata for operator evaluation messages. Messages are {@link Serializable} since they
+ * are sent on the wire in the clustered database.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IOpMessage extends Serializable {
 
-    /** Return the query identifier. */
-    UUID getQueryId();
+  /** Return the query identifier. */
+  UUID getQueryId();
 
-    /** Return the operator identifier. */
-    int getBOpId();
+  /** Return the operator identifier. */
+  int getBOpId();
 
-    /** Return the index partition identifier. */
-    int getPartitionId();
-
+  /** Return the index partition identifier. */
+  int getPartitionId();
 }

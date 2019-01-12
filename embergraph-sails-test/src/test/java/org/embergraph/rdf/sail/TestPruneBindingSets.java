@@ -24,6 +24,8 @@ package org.embergraph.rdf.sail;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.Binding;
@@ -32,8 +34,6 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
@@ -41,110 +41,107 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  */
 public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
 
-    @Override
-    public Properties getProperties() {
-        
-        Properties props = super.getProperties();
-        
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
-    }
+  @Override
+  public Properties getProperties() {
 
-    /**
-     * 
-     */
-    public TestPruneBindingSets() {
-    }
+    Properties props = super.getProperties();
 
-    /**
-     * @param arg0
-     */
-    public TestPruneBindingSets(String arg0) {
-        super(arg0);
-    }
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
-    /**
-     * Tests adding query hints in SPARQL.
-     * 
-     * @throws Exception 
-     */
-    public void testPruneBindingSets() throws Exception {
+    return props;
+  }
 
-        final EmbergraphSail sail = getSail();
-        
-        try {
-    
-            sail.initialize();
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-            final EmbergraphSailRepositoryConnection cxn =
-                (EmbergraphSailRepositoryConnection) repo.getConnection();
-            try {
-            cxn.setAutoCommit(false);
+  /** */
+  public TestPruneBindingSets() {}
 
-            URI x = new URIImpl("_:X");
-            URI a = new URIImpl("_:A");
-            URI b = new URIImpl("_:B");
-            URI c = new URIImpl("_:C");
-            URI d = new URIImpl("_:D");
-            URI e = new URIImpl("_:E");
-/**/
-            cxn.add(a, x, b);
-            cxn.add(b, x, c);
-            cxn.add(c, x, d);
-            cxn.add(d, x, e);
-/**/
+  /** @param arg0 */
+  public TestPruneBindingSets(String arg0) {
+    super(arg0);
+  }
 
-            /*
-             * Note: The either flush() or commit() is required to flush the
-             * statement buffers to the database before executing any operations
-             * that go around the sail.
-             */
-//            cxn.flush();//commit();
-            cxn.commit();
-            
-/**/            
-            if (log.isInfoEnabled()) {
-                log.info(cxn.getTripleStore().dumpStore());
-            }
+  /**
+   * Tests adding query hints in SPARQL.
+   *
+   * @throws Exception
+   */
+  public void testPruneBindingSets() throws Exception {
 
-            {
-                
-                String query = 
-                    "select ?a " +
-                    "WHERE { " +
-                    "  ?a <"+x+"> ?b ." +
-                    "  ?b <"+x+"> ?c ." +
-                    "  ?c <"+x+"> ?d ." +
-                    "  ?d <"+x+"> <"+e+"> ." +
-                    "}";
-                
-                final TupleQuery tupleQuery = 
-                    cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                TupleQueryResult result = tupleQuery.evaluate();
- 
-                Collection<BindingSet> solution = new LinkedList<BindingSet>();
-                solution.add(createBindingSet(new Binding[] {
-                    new BindingImpl("a", a)
-                }));
-                
-                compare(result, solution);
-                
-            }
-            } finally {
-                
-                cxn.close();
-            }
-            
-        } finally {
-            sail.__tearDownUnitTest();
+    final EmbergraphSail sail = getSail();
+
+    try {
+
+      sail.initialize();
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+      final EmbergraphSailRepositoryConnection cxn =
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
+      try {
+        cxn.setAutoCommit(false);
+
+        URI x = new URIImpl("_:X");
+        URI a = new URIImpl("_:A");
+        URI b = new URIImpl("_:B");
+        URI c = new URIImpl("_:C");
+        URI d = new URIImpl("_:D");
+        URI e = new URIImpl("_:E");
+        /**/
+        cxn.add(a, x, b);
+        cxn.add(b, x, c);
+        cxn.add(c, x, d);
+        cxn.add(d, x, e);
+        /**/
+
+        /*
+         * Note: The either flush() or commit() is required to flush the
+         * statement buffers to the database before executing any operations
+         * that go around the sail.
+         */
+        //            cxn.flush();//commit();
+        cxn.commit();
+
+        /**/
+        if (log.isInfoEnabled()) {
+          log.info(cxn.getTripleStore().dumpStore());
         }
 
+        {
+          String query =
+              "select ?a "
+                  + "WHERE { "
+                  + "  ?a <"
+                  + x
+                  + "> ?b ."
+                  + "  ?b <"
+                  + x
+                  + "> ?c ."
+                  + "  ?c <"
+                  + x
+                  + "> ?d ."
+                  + "  ?d <"
+                  + x
+                  + "> <"
+                  + e
+                  + "> ."
+                  + "}";
+
+          final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+          TupleQueryResult result = tupleQuery.evaluate();
+
+          Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          solution.add(createBindingSet(new Binding[] {new BindingImpl("a", a)}));
+
+          compare(result, solution);
+        }
+      } finally {
+
+        cxn.close();
+      }
+
+    } finally {
+      sail.__tearDownUnitTest();
     }
-    
+  }
 }

@@ -53,41 +53,28 @@ package org.embergraph.rdf.properties.xml;
 
 import java.io.OutputStream;
 import java.io.Writer;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 import org.embergraph.rdf.properties.PropertiesWriterFactory;
 
-/**
- * An {@link PropertiesWriterFactory} for text writers.
- */
+/** An {@link PropertiesWriterFactory} for text writers. */
 public class PropertiesXMLWriterFactory implements PropertiesWriterFactory {
 
-    /**
-     * Returns {@link PropertiesFormat#XML}.
-     */
-    public PropertiesFormat getRDFFormat() {
+  /** Returns {@link PropertiesFormat#XML}. */
+  public PropertiesFormat getRDFFormat() {
 
-        return PropertiesFormat.XML;
-        
-    }
+    return PropertiesFormat.XML;
+  }
 
-    /**
-     * Returns a new instance of {@link PropertiesXMLWriter}.
-     */
-    public PropertiesWriter getWriter(final OutputStream out) {
-        
-        return new PropertiesXMLWriter(out);
-        
-    }
+  /** Returns a new instance of {@link PropertiesXMLWriter}. */
+  public PropertiesWriter getWriter(final OutputStream out) {
 
-    /**
-     * Returns a new instance of {@link PropertiesXMLWriter}.
-     */
-    public PropertiesWriter getWriter(final Writer writer) {
+    return new PropertiesXMLWriter(out);
+  }
 
-        return new PropertiesXMLWriter(writer);
-        
-    }
+  /** Returns a new instance of {@link PropertiesXMLWriter}. */
+  public PropertiesWriter getWriter(final Writer writer) {
 
+    return new PropertiesXMLWriter(writer);
+  }
 }

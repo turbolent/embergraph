@@ -20,7 +20,6 @@ package org.embergraph.rdf.sparql.ast.cache;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
@@ -31,44 +30,32 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("Describe/Sparql Cache");
+
+    if (QueryHints.CACHE_ENABLED) {
+
+      suite.addTestSuite(TestCacheConnectionFactory.class);
     }
 
-    /**
-     * @param arg0
+    /*
+     * Note: Data-driven unit tests are used for the SPARQL named solution
+     * set cache and the DESCRIBE cache.
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    //        // DESCRIBE cache.
+    //        suite.addTestSuite(TestDescribeCache.class);
 
-        final TestSuite suite = new TestSuite("Describe/Sparql Cache");
-
-        if (QueryHints.CACHE_ENABLED) {
-
-            suite.addTestSuite(TestCacheConnectionFactory.class);
-
-        }
-                
-        /*
-         * Note: Data-driven unit tests are used for the SPARQL named solution
-         * set cache and the DESCRIBE cache.
-         */
-        
-//        // DESCRIBE cache.
-//        suite.addTestSuite(TestDescribeCache.class);
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

@@ -10,19 +10,17 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * SailBase is an abstract Sail implementation that takes care of common sail
- * tasks, including proper closing of active connections and a grace period for
- * active connections during shutdown of the store.
- * 
+ * SailBase is an abstract Sail implementation that takes care of common sail tasks, including
+ * proper closing of active connections and a grace period for active connections during shutdown of
+ * the store.
+ *
  * @author Herko ter Horst
  * @author jeen
  * @author Arjohn Kampman
@@ -30,278 +28,248 @@ import org.openrdf.sail.SailException;
  */
 public abstract class SailBase implements Sail {
 
-	/*-----------*
-	 * Constants *
-	 *-----------*/
+  /*-----------*
+   * Constants *
+   *-----------*/
 
-    public final static String CONNECTION_TIMEOUT = 
-            SailBase.class.getName() + ".connectionTimeout";
-    
-	/**
-	 * Default connection timeout on shutdown: 20,000 milliseconds.
-	 */
-	protected final static long DEFAULT_CONNECTION_TIMEOUT = 
-	        Long.valueOf(System.getProperty(CONNECTION_TIMEOUT, "20000"));
+  public static final String CONNECTION_TIMEOUT = SailBase.class.getName() + ".connectionTimeout";
 
-	// Note: the following variable and method are package protected so that they
-	// can be removed when open connections no longer block other connections and
-	// they can be closed silently (just like in JDBC).
-	static final String DEBUG_PROP = "org.openrdf.repository.debug";
+  /** Default connection timeout on shutdown: 20,000 milliseconds. */
+  protected static final long DEFAULT_CONNECTION_TIMEOUT =
+      Long.valueOf(System.getProperty(CONNECTION_TIMEOUT, "20000"));
 
-	protected static boolean debugEnabled() {
-		try {
-			String value = System.getProperty(DEBUG_PROP);
-			return value != null && !value.equals("false");
-		}
-		catch (SecurityException e) {
-			// Thrown when not allowed to read system properties, for example when
-			// running in applets
-			return false;
-		}
-	}
+  // Note: the following variable and method are package protected so that they
+  // can be removed when open connections no longer block other connections and
+  // they can be closed silently (just like in JDBC).
+  static final String DEBUG_PROP = "org.openrdf.repository.debug";
 
-	/*-----------*
-	 * Variables *
-	 *-----------*/
+  protected static boolean debugEnabled() {
+    try {
+      String value = System.getProperty(DEBUG_PROP);
+      return value != null && !value.equals("false");
+    } catch (SecurityException e) {
+      // Thrown when not allowed to read system properties, for example when
+      // running in applets
+      return false;
+    }
+  }
 
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+  /*-----------*
+   * Variables *
+   *-----------*/
 
-	/**
-	 * Directory to store information related to this sail in (if any).
-	 */
-	private volatile File dataDir;
+  protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * Flag indicating whether the Sail has been initialized. Sails are
-	 * initialized from {@link #initialize() initialization} until
-	 * {@link #shutDown() shutdown}.
-	 */
-	private volatile boolean initialized = false;
+  /** Directory to store information related to this sail in (if any). */
+  private volatile File dataDir;
 
-	/**
-	 * Lock used to synchronize the initialization state of a sail.
-	 * <ul>
-	 * <li>write lock: initialize(), shutDown()
-	 * <li>read lock: getConnection()
-	 * </ul>
-	 */
-	protected final ReentrantReadWriteLock initializationLock = new ReentrantReadWriteLock();
+  /**
+   * Flag indicating whether the Sail has been initialized. Sails are initialized from {@link
+   * #initialize() initialization} until {@link #shutDown() shutdown}.
+   */
+  private volatile boolean initialized = false;
 
-	/**
-	 * Connection timeout on shutdown (in ms). Defaults to
-	 * {@link #DEFAULT_CONNECTION_TIMEOUT}.
-	 */
-	protected volatile long connectionTimeOut = DEFAULT_CONNECTION_TIMEOUT;
+  /**
+   * Lock used to synchronize the initialization state of a sail.
+   *
+   * <ul>
+   *   <li>write lock: initialize(), shutDown()
+   *   <li>read lock: getConnection()
+   * </ul>
+   */
+  protected final ReentrantReadWriteLock initializationLock = new ReentrantReadWriteLock();
 
-	static class ConnectionContext {
-//		final Thread thread;
-		final Throwable trace;
-		
-		ConnectionContext(/*Thread thread,*/Throwable trace) {
-//			this.thread = thread;
-			this.trace = trace;
-		}
-	}
-	
-	/**
-	 * Map used to track active connections and where these were acquired. The
-	 * Throwable value may be null in case debugging was disable at the time the
-	 * connection was acquired.
-	 */
-	private final Map<SailConnection, ConnectionContext> activeConnections = new IdentityHashMap<SailConnection, ConnectionContext>();
-	
-	protected void manageConnection(final SailConnection cnxn) {
-		synchronized (activeConnections) {
-			if (activeConnections.containsKey(cnxn)) {
-				throw new IllegalStateException("Connection already managed");
-			}
-			
-			final Throwable stackTrace = debugEnabled() ? new Throwable() : null;
-			activeConnections.put(cnxn, new ConnectionContext(/*Thread.currentThread(),*/ stackTrace));
-		}
-	}
+  /** Connection timeout on shutdown (in ms). Defaults to {@link #DEFAULT_CONNECTION_TIMEOUT}. */
+  protected volatile long connectionTimeOut = DEFAULT_CONNECTION_TIMEOUT;
 
-	/*---------*
-	 * Methods *
-	 *---------*/
+  static class ConnectionContext {
+    //		final Thread thread;
+    final Throwable trace;
 
-	public void setDataDir(File dataDir) {
-		if (isInitialized()) {
-			throw new IllegalStateException("sail has already been initialized");
-		}
+    ConnectionContext(/*Thread thread,*/ Throwable trace) {
+      //			this.thread = thread;
+      this.trace = trace;
+    }
+  }
 
-		this.dataDir = dataDir;
-	}
+  /**
+   * Map used to track active connections and where these were acquired. The Throwable value may be
+   * null in case debugging was disable at the time the connection was acquired.
+   */
+  private final Map<SailConnection, ConnectionContext> activeConnections =
+      new IdentityHashMap<SailConnection, ConnectionContext>();
 
-	public File getDataDir() {
-		return dataDir;
-	}
+  protected void manageConnection(final SailConnection cnxn) {
+    synchronized (activeConnections) {
+      if (activeConnections.containsKey(cnxn)) {
+        throw new IllegalStateException("Connection already managed");
+      }
 
-	@Override
-	public String toString() {
-		if (dataDir == null) {
-			return super.toString();
-		}
-		else {
-			return dataDir.toString();
-		}
-	}
+      final Throwable stackTrace = debugEnabled() ? new Throwable() : null;
+      activeConnections.put(cnxn, new ConnectionContext(/*Thread.currentThread(),*/ stackTrace));
+    }
+  }
 
-	/**
-	 * Checks whether the Sail has been initialized. Sails are initialized from
-	 * {@link #initialize() initialization} until {@link #shutDown() shutdown}.
-	 * 
-	 * @return <tt>true</tt> if the Sail has been initialized, <tt>false</tt>
-	 *         otherwise.
-	 */
-	protected boolean isInitialized() {
-		return initialized;
-	}
+  /*---------*
+   * Methods *
+   *---------*/
 
-	public void initialize()
-		throws SailException
-	{
-		initializationLock.writeLock().lock();
-		try {
-			if (isInitialized()) {
-				throw new IllegalStateException("sail has already been intialized");
-			}
+  public void setDataDir(File dataDir) {
+    if (isInitialized()) {
+      throw new IllegalStateException("sail has already been initialized");
+    }
 
-			initializeInternal();
+    this.dataDir = dataDir;
+  }
 
-			initialized = true;
-		}
-		finally {
-			initializationLock.writeLock().unlock();
-		}
-	}
+  public File getDataDir() {
+    return dataDir;
+  }
 
-	/**
-	 * Do store-specific operations to initialize the store. The default
-	 * implementation of this method does nothing.
-	 */
-	protected void initializeInternal()
-		throws SailException
-	{
-	}
+  @Override
+  public String toString() {
+    if (dataDir == null) {
+      return super.toString();
+    } else {
+      return dataDir.toString();
+    }
+  }
 
-	public void shutDown()
-		throws SailException
-	{
-		initializationLock.writeLock().lock();
-		try {
-			if (!isInitialized()) {
-				return;
-			}
+  /**
+   * Checks whether the Sail has been initialized. Sails are initialized from {@link #initialize()
+   * initialization} until {@link #shutDown() shutdown}.
+   *
+   * @return <tt>true</tt> if the Sail has been initialized, <tt>false</tt> otherwise.
+   */
+  protected boolean isInitialized() {
+    return initialized;
+  }
 
-			synchronized (activeConnections) {
-				// Check if any active connections exist. If so, wait for a grace
-				// period for them to finish.
-				if (!activeConnections.isEmpty()) {
-					logger.debug("Waiting for active connections to close before shutting down...");
-					try {
-						activeConnections.wait(DEFAULT_CONNECTION_TIMEOUT);
-					}
-					catch (InterruptedException e) {
-						// ignore and continue
-					}
-				}
+  public void initialize() throws SailException {
+    initializationLock.writeLock().lock();
+    try {
+      if (isInitialized()) {
+        throw new IllegalStateException("sail has already been intialized");
+      }
 
-				// Forcefully close any connections that are still open
-				Iterator<Map.Entry<SailConnection, ConnectionContext>> iter = activeConnections.entrySet().iterator();
-				while (iter.hasNext()) {
-					Map.Entry<SailConnection, ConnectionContext> entry = iter.next();
-					SailConnection con = entry.getKey();
-					ConnectionContext context = entry.getValue();
+      initializeInternal();
 
-					iter.remove();
+      initialized = true;
+    } finally {
+      initializationLock.writeLock().unlock();
+    }
+  }
 
-					if (context.trace == null) {
-						logger.warn(
-								"Closing active connection due to shut down; consider setting the {} system property",
-								DEBUG_PROP);
-					}
-					else {
-						logger.warn("Closing active connection due to shut down, connection was acquired in",
-								context.trace);
-					}
+  /**
+   * Do store-specific operations to initialize the store. The default implementation of this method
+   * does nothing.
+   */
+  protected void initializeInternal() throws SailException {}
 
-					try {
-						con.close();
-					}
-					catch (SailException e) {
-						logger.error("Failed to close connection", e);
-					}
-				}
-			}
+  public void shutDown() throws SailException {
+    initializationLock.writeLock().lock();
+    try {
+      if (!isInitialized()) {
+        return;
+      }
 
-			shutDownInternal();
-		}
-		finally {
-			initialized = false;
-			initializationLock.writeLock().unlock();
-		}
-	}
+      synchronized (activeConnections) {
+        // Check if any active connections exist. If so, wait for a grace
+        // period for them to finish.
+        if (!activeConnections.isEmpty()) {
+          logger.debug("Waiting for active connections to close before shutting down...");
+          try {
+            activeConnections.wait(DEFAULT_CONNECTION_TIMEOUT);
+          } catch (InterruptedException e) {
+            // ignore and continue
+          }
+        }
 
-	/**
-	 * Do store-specific operations to ensure proper shutdown of the store.
-	 */
-	protected abstract void shutDownInternal()
-		throws SailException;
+        // Forcefully close any connections that are still open
+        Iterator<Map.Entry<SailConnection, ConnectionContext>> iter =
+            activeConnections.entrySet().iterator();
+        while (iter.hasNext()) {
+          Map.Entry<SailConnection, ConnectionContext> entry = iter.next();
+          SailConnection con = entry.getKey();
+          ConnectionContext context = entry.getValue();
 
-	public SailConnection getConnection()
-		throws SailException
-	{
-		initializationLock.readLock().lock();
-		try {
-			if (!isInitialized()) {
-				throw new IllegalStateException("Sail is not initialized or has been shut down");
-			}
+          iter.remove();
 
-			final SailConnection connection = getConnectionInternal();
+          if (context.trace == null) {
+            logger.warn(
+                "Closing active connection due to shut down; consider setting the {} system property",
+                DEBUG_PROP);
+          } else {
+            logger.warn(
+                "Closing active connection due to shut down, connection was acquired in",
+                context.trace);
+          }
 
-			synchronized (activeConnections) {
-				if (!activeConnections.containsKey(connection)) {
-					throw new IllegalStateException("Connection is not managed");
-				}
-			}
+          try {
+            con.close();
+          } catch (SailException e) {
+            logger.error("Failed to close connection", e);
+          }
+        }
+      }
 
-			return connection;
-		}
-		finally {
-			initializationLock.readLock().unlock();
-		}
-	}
+      shutDownInternal();
+    } finally {
+      initialized = false;
+      initializationLock.writeLock().unlock();
+    }
+  }
 
-	/**
-	 * Returns a store-specific SailConnection object.
-	 * 
-	 * @return A connection to the store.
-	 */
-	protected abstract SailConnection getConnectionInternal()
-		throws SailException;
+  /** Do store-specific operations to ensure proper shutdown of the store. */
+  protected abstract void shutDownInternal() throws SailException;
 
-	/**
-	 * Signals to the store that the supplied connection has been closed; called
-	 * by {@link SailConnectionBase#close()}.
-	 * 
-	 * @param connection
-	 *        The connection that has been closed.
-	 */
-	protected void connectionClosed(SailConnection connection) {
-		synchronized (activeConnections) {
-			if (activeConnections.containsKey(connection)) {
-				activeConnections.remove(connection);
+  public SailConnection getConnection() throws SailException {
+    initializationLock.readLock().lock();
+    try {
+      if (!isInitialized()) {
+        throw new IllegalStateException("Sail is not initialized or has been shut down");
+      }
 
-				if (activeConnections.isEmpty()) {
-					// only notify waiting threads if all active connections have
-					// been closed.
-					activeConnections.notifyAll();
-				}
-			}
-			else {
-				// logger.warn("tried to remove unknown connection object from store.");
-			}
-		}
-	}
+      final SailConnection connection = getConnectionInternal();
+
+      synchronized (activeConnections) {
+        if (!activeConnections.containsKey(connection)) {
+          throw new IllegalStateException("Connection is not managed");
+        }
+      }
+
+      return connection;
+    } finally {
+      initializationLock.readLock().unlock();
+    }
+  }
+
+  /**
+   * Returns a store-specific SailConnection object.
+   *
+   * @return A connection to the store.
+   */
+  protected abstract SailConnection getConnectionInternal() throws SailException;
+
+  /**
+   * Signals to the store that the supplied connection has been closed; called by {@link
+   * SailConnectionBase#close()}.
+   *
+   * @param connection The connection that has been closed.
+   */
+  protected void connectionClosed(SailConnection connection) {
+    synchronized (activeConnections) {
+      if (activeConnections.containsKey(connection)) {
+        activeConnections.remove(connection);
+
+        if (activeConnections.isEmpty()) {
+          // only notify waiting threads if all active connections have
+          // been closed.
+          activeConnections.notifyAll();
+        }
+      } else {
+        // logger.warn("tried to remove unknown connection object from store.");
+      }
+    }
+  }
 }

@@ -16,60 +16,46 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.graph;
 
 import java.util.Iterator;
-
 import org.openrdf.model.Value;
 
 /**
- * Interface abstracts the fixed frontier as known on entry into a new
- * round.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ * Interface abstracts the fixed frontier as known on entry into a new round.
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IStaticFrontier extends Iterable<Value> {
 
-    /**
-     * The number of vertices in the frontier.
-     * 
-     * TODO Long? Or just do not allow in scale-out?
-     */
-    int size();
+  /**
+   * The number of vertices in the frontier.
+   *
+   * <p>TODO Long? Or just do not allow in scale-out?
+   */
+  int size();
 
-    /**
-     * Return <code>true</code> if the frontier is known to be empty.
-     */
-    boolean isEmpty();
-    
-    /**
-     * Return <code>true</code> iff the frontier is known to be compact (no
-     * duplicate vertices).
-     * <p>
-     * Note: If the frontier is not compact, then the {@link IGASEngine} may
-     * optionally elect to eliminate duplicate work when it schedules the
-     * vertices in the frontier.
-     * <p>
-     * Note: A non-compact frontier can arise when the {@link IGASScheduler}
-     * chooses a per-thread approach and then copies the per-thread segments
-     * onto the shared backing array in parallel. This can reduce the time
-     * between rounds, which can speed up the overall execution of the algorithm
-     * significantly.
-     */
-    boolean isCompact();
+  /** Return <code>true</code> if the frontier is known to be empty. */
+  boolean isEmpty();
 
-    /**
-     * Reset the frontier from the supplied vertices.
-     * 
-     * @param minCapacity
-     *            The minimum capacity of the new frontier. (A minimum capacity
-     *            is specified since many techniques to compact the frontier can
-     *            only estimate the required capacity.)
-     * @param ordered
-     *            <code>true</code> iff the vertices are not known to be ordered
-     *            and SHOULD be ordered (some backends do not benefit from
-     *            ordering the vertices).
-     * @param vertices
-     *            The vertices in the new frontier.
-     */
-    void resetFrontier(int minCapacity, boolean sort, Iterator<Value> vertices);
+  /**
+   * Return <code>true</code> iff the frontier is known to be compact (no duplicate vertices).
+   *
+   * <p>Note: If the frontier is not compact, then the {@link IGASEngine} may optionally elect to
+   * eliminate duplicate work when it schedules the vertices in the frontier.
+   *
+   * <p>Note: A non-compact frontier can arise when the {@link IGASScheduler} chooses a per-thread
+   * approach and then copies the per-thread segments onto the shared backing array in parallel.
+   * This can reduce the time between rounds, which can speed up the overall execution of the
+   * algorithm significantly.
+   */
+  boolean isCompact();
 
+  /**
+   * Reset the frontier from the supplied vertices.
+   *
+   * @param minCapacity The minimum capacity of the new frontier. (A minimum capacity is specified
+   *     since many techniques to compact the frontier can only estimate the required capacity.)
+   * @param ordered <code>true</code> iff the vertices are not known to be ordered and SHOULD be
+   *     ordered (some backends do not benefit from ordering the vertices).
+   * @param vertices The vertices in the new frontier.
+   */
+  void resetFrontier(int minCapacity, boolean sort, Iterator<Value> vertices);
 }

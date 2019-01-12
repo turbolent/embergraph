@@ -23,206 +23,174 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-import org.embergraph.util.DaemonThreadFactory;
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import org.apache.log4j.Logger;
+import org.embergraph.util.DaemonThreadFactory;
 
 /**
- * Command manages the execution and termination of a native process and an
- * object reading the output of that process.
- * 
+ * Command manages the execution and termination of a native process and an object reading the
+ * output of that process.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ActiveProcess {
-    
-    static protected final Logger log = Logger.getLogger(ActiveProcess.class);
 
-    /**
-     * Used to read {@link #is} and aggregate the performance data reported
-     * by the {@link #process}.
-     */
-    protected final ExecutorService readService = Executors
-            .newSingleThreadExecutor(new DaemonThreadFactory(getClass()
-                    .getName()
-                    + ".readService"));
-    
-    protected Process process = null;
+  protected static final Logger log = Logger.getLogger(ActiveProcess.class);
 
-    protected InputStream is = null;
+  /**
+   * Used to read {@link #is} and aggregate the performance data reported by the {@link #process}.
+   */
+  protected final ExecutorService readService =
+      Executors.newSingleThreadExecutor(
+          new DaemonThreadFactory(getClass().getName() + ".readService"));
 
-    protected volatile Future readerFuture;
+  protected Process process = null;
 
-    // This is used in tests
-    protected ActiveProcess() {
+  protected InputStream is = null;
 
+  protected volatile Future readerFuture;
+
+  // This is used in tests
+  protected ActiveProcess() {}
+
+  /**
+   * @param command The command to be executed. See {@link ProcessBuilder#command(List)}.
+   * @param collector
+   */
+  public ActiveProcess(List<String> command, AbstractProcessCollector collector) {
+
+    if (command == null) throw new IllegalArgumentException();
+
+    if (command.isEmpty()) throw new IllegalArgumentException();
+
+    if (collector == null) throw new IllegalArgumentException();
+
+    // log the command that will be run.
+    {
+      StringBuilder sb = new StringBuilder();
+
+      for (String s : command) {
+
+        sb.append(s + " ");
+      }
+
+      if (log.isInfoEnabled()) log.info("command:\n" + sb);
     }
 
-    /**
-     * 
-     * @param command
-     *            The command to be executed. See
-     *            {@link ProcessBuilder#command(List)}.
-     * @param collector
-     */
-    public ActiveProcess(List<String> command,
-            AbstractProcessCollector collector) {
+    try {
 
-        if (command == null)
-            throw new IllegalArgumentException();
+      ProcessBuilder tmp = new ProcessBuilder(command);
 
-        if (command.isEmpty())
-            throw new IllegalArgumentException();
+      collector.setEnvironment(tmp.environment());
 
-        if (collector == null)
-            throw new IllegalArgumentException();
+      process = tmp.start();
 
-        // log the command that will be run.
-        {
-            
-            StringBuilder sb = new StringBuilder();
+    } catch (IOException e) {
 
-            for (String s : command) {
-
-                sb.append( s +" ");
-
-            }
-
-            if (log.isInfoEnabled())
-                log.info("command:\n" + sb);
-
-        }
-                    
-        try {
-
-            ProcessBuilder tmp = new ProcessBuilder(command);
-
-            collector.setEnvironment(tmp.environment());
-            
-            process = tmp.start();
-
-        } catch (IOException e) {
-
-            throw new RuntimeException(e);
-
-        }
-
-        /*
-         * Note: Process is running but the reader on the process output has
-         * not been started yet!
-         */
-        
+      throw new RuntimeException(e);
     }
 
-    /**
-     * Attaches the reader to the process, which was started by the ctor and
-     * is already running.
-     * 
-     * @param processReader
-     *            The reader.
+    /*
+     * Note: Process is running but the reader on the process output has
+     * not been started yet!
      */
-    public void start(AbstractProcessReader processReader) {
-        
-        log.info("");
 
-        if (processReader == null)
-            throw new IllegalArgumentException();
+  }
 
-        if (readerFuture != null)
-            throw new IllegalStateException();
+  /**
+   * Attaches the reader to the process, which was started by the ctor and is already running.
+   *
+   * @param processReader The reader.
+   */
+  public void start(AbstractProcessReader processReader) {
 
-        is = process.getInputStream();
+    log.info("");
 
-        assert is != null;
-        
-        /*
-         * @todo restart processes if it dies before we shut it down, but no
-         * more than some #of tries. if the process dies then we will not have
-         * any data for this host.
-         * 
-         * @todo this code for monitoring processes is a mess and should
-         * probably be re-written from scratch. the processReader task
-         * references the readerFuture via isAlive() but the readerFuture is not
-         * even assigned until after we submit the processReader task, which
-         * means that it can be running before the readerFuture is set! The
-         * concrete implementations of ProcessReaderHelper all poll isAlive()
-         * until the readerFuture becomes available.
-         */
+    if (processReader == null) throw new IllegalArgumentException();
 
-        if (log.isInfoEnabled())
-            log.info("starting process reader: " + processReader);
+    if (readerFuture != null) throw new IllegalStateException();
 
-        processReader.start(is);
+    is = process.getInputStream();
 
-        if (log.isInfoEnabled())
-            log.info("submitting process reader task: "+processReader);
+    assert is != null;
 
-        readerFuture = readService.submit(processReader);
+    /*
+     * @todo restart processes if it dies before we shut it down, but no
+     * more than some #of tries. if the process dies then we will not have
+     * any data for this host.
+     *
+     * @todo this code for monitoring processes is a mess and should
+     * probably be re-written from scratch. the processReader task
+     * references the readerFuture via isAlive() but the readerFuture is not
+     * even assigned until after we submit the processReader task, which
+     * means that it can be running before the readerFuture is set! The
+     * concrete implementations of ProcessReaderHelper all poll isAlive()
+     * until the readerFuture becomes available.
+     */
 
-        if (log.isInfoEnabled())
-            log.info("readerFuture: done="+readerFuture.isDone());
+    if (log.isInfoEnabled()) log.info("starting process reader: " + processReader);
 
+    processReader.start(is);
+
+    if (log.isInfoEnabled()) log.info("submitting process reader task: " + processReader);
+
+    readerFuture = readService.submit(processReader);
+
+    if (log.isInfoEnabled()) log.info("readerFuture: done=" + readerFuture.isDone());
+  }
+
+  /** Stops the process */
+  public void stop() {
+
+    if (readerFuture == null) {
+
+      // not running.
+      return;
     }
 
-    /**
-     * Stops the process
-     */
-    public void stop() {
+    // attempt to cancel the reader.
+    readerFuture.cancel(true /* mayInterruptIfRunning */);
 
-        if (readerFuture == null) {
-         
-            // not running.
-            return;
-            
-        }
+    // shutdown the thread running the reader.
+    readService.shutdownNow();
 
-        // attempt to cancel the reader.
-        readerFuture.cancel(true/* mayInterruptIfRunning */);
+    if (process != null) {
 
-        // shutdown the thread running the reader.
-        readService.shutdownNow();
+      // destroy the running process.
+      process.destroy();
 
-        if (process != null) {
+      process = null;
 
-            // destroy the running process.
-            process.destroy();
-
-            process = null;
-
-            is = null;
-
-        }
-
-        readerFuture = null;
-
+      is = null;
     }
-    
-    /**
-     * Return <code>true</code> unless the process is known to be dead.
-     */
-    public boolean isAlive() {
-        
-        if(readerFuture==null || readerFuture.isDone() || process == null || is == null) {
-            
-            if (log.isInfoEnabled())
-                log.info("Not alive: readerFuture="
-                        + readerFuture
-                        + (readerFuture != null ? "done="
-                                + readerFuture.isDone() : "") + ", process="
-                        + process + ", is=" + is);
-            
-            return false;
-            
-        }
-        
-        return true;
-        
+
+    readerFuture = null;
+  }
+
+  /** Return <code>true</code> unless the process is known to be dead. */
+  public boolean isAlive() {
+
+    if (readerFuture == null || readerFuture.isDone() || process == null || is == null) {
+
+      if (log.isInfoEnabled())
+        log.info(
+            "Not alive: readerFuture="
+                + readerFuture
+                + (readerFuture != null ? "done=" + readerFuture.isDone() : "")
+                + ", process="
+                + process
+                + ", is="
+                + is);
+
+      return false;
     }
-    
+
+    return true;
+  }
 }

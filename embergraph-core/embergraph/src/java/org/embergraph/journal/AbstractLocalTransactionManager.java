@@ -2,327 +2,270 @@ package org.embergraph.journal;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.resources.StoreManager;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ITxState;
 
 /**
- * Manages the client side of a transaction either for a standalone
- * {@link Journal} or for an {@link IDataService} in an
- * {@link IEmbergraphFederation}.
- * 
+ * Manages the client side of a transaction either for a standalone {@link Journal} or for an {@link
+ * IDataService} in an {@link IEmbergraphFederation}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class AbstractLocalTransactionManager implements
-        ILocalTransactionManager {
+public abstract class AbstractLocalTransactionManager implements ILocalTransactionManager {
 
-    /**
-     * Logger.
-     */
-	private static final Logger log = Logger
-			.getLogger(AbstractLocalTransactionManager.class);
+  /** Logger. */
+  private static final Logger log = Logger.getLogger(AbstractLocalTransactionManager.class);
 
-    public AbstractLocalTransactionManager() {
+  public AbstractLocalTransactionManager() {}
 
+  /*
+   * ILocalTransactionManager
+   */
+
+  /**
+   * A hash map containing all active transactions. A transaction that is preparing will remain in
+   * this collection until it has either successfully prepared or aborted.
+   *
+   * <p>TODO Configure the initial capacity and concurrency. For example, this should be sized to
+   * the #of client connections for both the initialCapacity and the concurrency level.
+   */
+  private final ConcurrentHashMap<Long, Tx> activeTx = new ConcurrentHashMap<Long, Tx>();
+
+  @Override
+  public ITxState[] getActiveTx() {
+
+    return activeTx.values().toArray(new ITxState[] {});
+  }
+
+  /**
+   * Notify the journal that a new transaction is being activated (starting on the journal).
+   *
+   * @param localState The transaction.
+   * @throws IllegalStateException
+   */
+  public void activateTx(final Tx localState) throws IllegalStateException {
+
+    if (localState == null) throw new IllegalArgumentException();
+
+    localState.lock.lock();
+
+    try {
+
+      if (activeTx.putIfAbsent(localState.getStartTimestamp(), localState) != null) {
+
+        throw new IllegalStateException("Already in local table: tx=" + localState);
+      }
+
+    } finally {
+
+      localState.lock.unlock();
     }
+  }
 
-    /*
-     * ILocalTransactionManager
-     */
+  /**
+   * Removes the transaction from the local tables.
+   *
+   * @param localState The transaction.
+   */
+  protected void deactivateTx(final Tx localState) throws IllegalStateException {
 
-    /**
-     * A hash map containing all active transactions. A transaction that is
-     * preparing will remain in this collection until it has either successfully
-     * prepared or aborted.
-     * 
-     * TODO Configure the initial capacity and concurrency. For example, this
-     * should be sized to the #of client connections for both the
-     * initialCapacity and the concurrency level.
-     */
-    final private ConcurrentHashMap<Long, Tx> activeTx = new ConcurrentHashMap<Long, Tx>();
+    if (localState == null) throw new IllegalArgumentException();
 
-    @Override
-    public ITxState[] getActiveTx() {
-       
-      return activeTx.values().toArray(new ITxState[] {});
-       
+    localState.lock.lock();
+
+    try {
+
+      if (!localState.isReadOnly() && !localState.isComplete())
+        throw new IllegalStateException("Not complete: " + localState);
+
+      // release any local resources.
+      localState.releaseResources();
+
+      if (activeTx.remove(localState.getStartTimestamp()) == null) {
+
+        throw new IllegalStateException("Not in local tables: tx=" + localState);
+      }
+
+    } finally {
+
+      localState.lock.unlock();
     }
-    
-    /**
-     * Notify the journal that a new transaction is being activated (starting on
-     * the journal).
-     * 
-     * @param localState
-     *            The transaction.
-     * 
-     * @throws IllegalStateException
-     */
-    public void activateTx(final Tx localState) throws IllegalStateException {
+  }
 
-        if (localState == null)
-            throw new IllegalArgumentException();
+  /**
+   * Return the local state for a transaction.
+   *
+   * @param tx The transaction identifier.
+   * @return The local state for the identified transaction -or- <code>null</code> if the start time
+   *     is not mapped to either an active or prepared transaction.
+   */
+  public Tx getTx(final long tx) {
 
-        localState.lock.lock();
+    return activeTx.get(tx);
+  }
 
-        try {
+  public boolean isOpen() {
 
-            if (activeTx
-                    .putIfAbsent(localState.getStartTimestamp(), localState) != null) {
+    return open;
+  }
 
-                throw new IllegalStateException("Already in local table: tx="
-                        + localState);
+  private volatile boolean open = true;
 
-            }
+  public synchronized void shutdown() {
 
-        } finally {
+    if (!open) return;
 
-            localState.lock.unlock();
+    open = false;
+  }
 
+  public synchronized void shutdownNow() {
+
+    // Note: currently a NOP.
+
+    if (!open) return;
+
+    open = false;
+  }
+
+  /** Delay between attempts reach the remote service (ms). */
+  final long delay = 10L;
+
+  /**
+   * #of attempts to reach the remote service.
+   *
+   * <p>Note: delay*maxtries == 1000ms of trying before we give up, plus however long we are willing
+   * to wait for service discovery if the problem is locating the {@link ITransactionService}.
+   *
+   * <p>If this is not enough, then consider adding an optional parameter giving the time the caller
+   * will wait and letting the {@link StoreManager} wait longer during startup to discover the
+   * timestamp service.
+   */
+  final int maxtries = 100;
+
+  /**
+   * Note: The reason for all this retry logic is to work around race conditions during service
+   * startup (and possibly during service failover) when the {@link ITimestampService} has not been
+   * discovered yet.
+   */
+  public long nextTimestamp() {
+
+    final long begin = System.currentTimeMillis();
+
+    IOException cause = null;
+
+    int ntries;
+
+    for (ntries = 1; ntries <= maxtries; ntries++) {
+
+      try {
+
+        final ITransactionService transactionService = getTransactionService();
+
+        if (transactionService == null) {
+
+          log.warn("Service not discovered yet?");
+
+          try {
+
+            Thread.sleep(delay /* ms */);
+
+            continue;
+
+          } catch (InterruptedException e2) {
+
+            throw new RuntimeException("Interrupted awaiting timestamp service discovery: " + e2);
+          }
         }
 
+        return transactionService.nextTimestamp();
+
+      } catch (IOException e) {
+
+        log.warn("Problem with timestamp service? : ntries=" + ntries + ", " + e, e);
+
+        cause = e;
+      }
     }
 
-    /**
-     * Removes the transaction from the local tables.
-     * 
-     * @param localState
-     *            The transaction.
-     */
-    protected void deactivateTx(final Tx localState)
-            throws IllegalStateException {
+    final long elapsed = System.currentTimeMillis() - begin;
 
-        if (localState == null)
-            throw new IllegalArgumentException();
+    final String msg = "Could not get timestamp after " + ntries + " tries and " + elapsed + "ms";
 
-        localState.lock.lock();
+    log.error(msg, cause);
 
-        try {
+    throw new RuntimeException(msg, cause);
+  }
 
-            if (!localState.isReadOnly() && !localState.isComplete())
-                throw new IllegalStateException("Not complete: "+localState);
+  public void notifyCommit(final long commitTime) {
 
-            // release any local resources.
-            localState.releaseResources();
+    final long begin = System.currentTimeMillis();
 
-            if (activeTx.remove(localState.getStartTimestamp()) == null) {
+    IOException cause = null;
 
-                throw new IllegalStateException("Not in local tables: tx="
-                        + localState);
+    int ntries;
 
-            }
-            
-        } finally {
+    for (ntries = 1; ntries <= maxtries; ntries++) {
 
-            localState.lock.unlock();
-            
+      try {
+
+        final ITransactionService transactionService = getTransactionService();
+
+        if (transactionService == null) {
+
+          log.warn("Service not discovered?");
+
+          try {
+
+            Thread.sleep(delay /* ms */);
+
+          } catch (InterruptedException e2) {
+
+            throw new RuntimeException("Interrupted awaiting timestamp service discovery: " + e2);
+          }
+
+          continue;
         }
 
+        transactionService.notifyCommit(commitTime);
+
+        return;
+
+      } catch (IOException e) {
+
+        log.warn("Problem with timestamp service? : ntries=" + ntries + ", " + e, e);
+
+        cause = e;
+      }
     }
 
-    /**
-     * Return the local state for a transaction.
-     * 
-     * @param tx
-     *            The transaction identifier.
-     * 
-     * @return The local state for the identified transaction -or-
-     *         <code>null</code> if the start time is not mapped to either an
-     *         active or prepared transaction.
-     */
-    public Tx getTx(final long tx) {
+    final long elapsed = System.currentTimeMillis() - begin;
 
-        return activeTx.get(tx);
+    final String msg =
+        "Could not notify timestamp service after " + ntries + " tries and " + elapsed + "ms";
 
-    }
+    log.error(msg, cause);
 
-    public boolean isOpen() {
-        
-        return open;
-        
-    }
-    
-    private volatile boolean open = true;
-    
-    synchronized public void shutdown() {
-        
-        if(!open) return;
-        
-        open = false;
-        
-    }
+    throw new RuntimeException(msg, cause);
+  }
 
-    synchronized public void shutdownNow() {
+  /** Return interesting statistics about the transaction manager. */
+  public CounterSet getCounters() {
 
-        // Note: currently a NOP.
-        
-        if(!open) return;
-        
-        open = false;
-        
-    }
+    final CounterSet countersRoot = new CounterSet();
 
-    /**
-     * Delay between attempts reach the remote service (ms).
-     */
-    final long delay = 10L;
+    countersRoot.addCounter(
+        "#active",
+        new Instrument<Integer>() {
+          protected void sample() {
+            setValue(activeTx.size());
+          }
+        });
 
-	/**
-	 * #of attempts to reach the remote service.
-	 * <p>
-	 * Note: delay*maxtries == 1000ms of trying before we give up, plus however
-	 * long we are willing to wait for service discovery if the problem is
-	 * locating the {@link ITransactionService}.
-	 * <p>
-	 * If this is not enough, then consider adding an optional parameter giving
-	 * the time the caller will wait and letting the {@link StoreManager} wait
-	 * longer during startup to discover the timestamp service.
-	 */
-    final int maxtries = 100; 
-    
-    /**
-     * Note: The reason for all this retry logic is to work around race
-     * conditions during service startup (and possibly during service failover)
-     * when the {@link ITimestampService} has not been discovered yet.
-     */
-    public long nextTimestamp() {
-
-        final long begin = System.currentTimeMillis();
-        
-        IOException cause = null;
-
-        int ntries;
-
-        for (ntries = 1; ntries <= maxtries; ntries++) {
-
-            try {
-
-                final ITransactionService transactionService = getTransactionService();
-
-                if (transactionService == null) {
-
-                    log.warn("Service not discovered yet?");
-
-                    try {
-
-                        Thread.sleep(delay/* ms */);
-
-                        continue;
-                        
-                    } catch (InterruptedException e2) {
-
-                        throw new RuntimeException(
-                                "Interrupted awaiting timestamp service discovery: "
-                                        + e2);
-
-                    }
-
-                }
-
-                return transactionService.nextTimestamp();
-                
-            } catch (IOException e) {
-
-                log.warn("Problem with timestamp service? : ntries=" + ntries
-                        + ", " + e, e);
-
-                cause = e;
-
-            }
-
-        }
-
-        final long elapsed = System.currentTimeMillis() - begin;
-
-        final String msg = "Could not get timestamp after " + ntries
-                + " tries and " + elapsed + "ms";
-
-        log.error(msg, cause);
-
-        throw new RuntimeException(msg, cause);
-        
-    }
-
-    public void notifyCommit(final long commitTime) {
-        
-        final long begin = System.currentTimeMillis();
-        
-        IOException cause = null;
-
-        int ntries;
-
-        for (ntries = 1; ntries <= maxtries; ntries++) {
-
-            try {
-
-                final ITransactionService transactionService = getTransactionService();
-
-                if (transactionService == null) {
-
-                    log.warn("Service not discovered?");
-
-                    try {
-
-                        Thread.sleep(delay/* ms */);
-
-                    } catch (InterruptedException e2) {
-
-                        throw new RuntimeException(
-                                "Interrupted awaiting timestamp service discovery: "
-                                        + e2);
-
-                    }
-
-                    continue;
-
-                }
-
-                transactionService.notifyCommit(commitTime);
-
-                return;
-
-            } catch (IOException e) {
-
-                log.warn("Problem with timestamp service? : ntries=" + ntries
-                        + ", " + e, e);
-
-                cause = e;
-
-            }
-
-        }
-
-        final long elapsed = System.currentTimeMillis() - begin;
-
-        final String msg = "Could not notify timestamp service after " + ntries
-                + " tries and " + elapsed + "ms";
-
-        log.error(msg, cause);
-
-        throw new RuntimeException(msg, cause);
-        
-    }
-
-	/**
-	 * Return interesting statistics about the transaction manager.
-	 */
-	public CounterSet getCounters() {
-
-		final CounterSet countersRoot = new CounterSet();
-
-		countersRoot.addCounter("#active", new Instrument<Integer>() {
-			protected void sample() {
-				setValue(activeTx.size());
-			}
-		});
-
-		return countersRoot;
-
-	}
-
+    return countersRoot;
+  }
 }

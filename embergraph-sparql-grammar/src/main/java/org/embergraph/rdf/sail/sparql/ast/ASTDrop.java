@@ -4,29 +4,27 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTDrop extends ASTUpdate {
 
-	private boolean silent;
+  private boolean silent;
 
-	public ASTDrop(int id) {
-		super(id);
-	}
+  public ASTDrop(int id) {
+    super(id);
+  }
 
-	public ASTDrop(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTDrop(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	/** Accept the visitor. **/
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public void setSilent(boolean silent) {
-		this.silent = silent;
-	}
+  public void setSilent(boolean silent) {
+    this.silent = silent;
+  }
 
-	public boolean isSilent() {
-		return this.silent;
-	}
+  public boolean isSilent() {
+    return this.silent;
+  }
 }
 /* JavaCC - OriginalChecksum=785173cfd9ce4b259a0772df86b8f7a8 (do not edit this line) */

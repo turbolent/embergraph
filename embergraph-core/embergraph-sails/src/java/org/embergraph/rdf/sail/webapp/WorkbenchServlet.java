@@ -18,11 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import org.openrdf.model.Graph;
 import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.ValueFactoryImpl;
@@ -32,137 +31,120 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import org.embergraph.rdf.sail.webapp.client.MiniMime;
-
-/**
- * Helper servlet for workbench requests.
- */
+/** Helper servlet for workbench requests. */
 public class WorkbenchServlet extends EmbergraphRDFServlet {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    
-    static private final transient Logger log = Logger.getLogger(WorkbenchServlet.class); 
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  private static final transient Logger log = Logger.getLogger(WorkbenchServlet.class);
+
+  /** Flag to signify a workbench operation. */
+  static final transient String ATTR_WORKBENCH = "workbench";
+
+  /**
+   * Flag to signify a convert operation. POST an RDF document with a content type and an accept
+   * header for what it should be converted to.
+   */
+  static final transient String ATTR_CONVERT = "convert";
+
+  public WorkbenchServlet() {}
+
+  @Override
+  protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
+      throws IOException {
+
+    if (req.getParameter(ATTR_CONVERT) != null) {
+
+      // Convert from one format to another
+      doConvert(req, resp);
+    }
+  }
+
+  /** Convert RDF data from one format to another. */
+  private void doConvert(final HttpServletRequest req, final HttpServletResponse resp)
+      throws IOException {
+
+    final String baseURI = req.getRequestURL().toString();
+
+    // The content type of the request.
+    final String contentType = req.getContentType();
+
+    if (log.isInfoEnabled()) log.info("Request body: " + contentType);
 
     /**
-     * Flag to signify a workbench operation.
+     * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to parse
+     * MIMEType when doing conneg. </a>
      */
-    static final transient String ATTR_WORKBENCH = "workbench";
+    final RDFFormat requestBodyFormat =
+        RDFFormat.forMIMEType(new MiniMime(contentType).getMimeType());
 
-    /**
-     * Flag to signify a convert operation.  POST an RDF document with a 
-     * content type and an accept header for what it should be converted to.
-     */
-    static final transient String ATTR_CONVERT = "convert";
+    if (requestBodyFormat == null) {
 
-    
-    public WorkbenchServlet() {
+      buildAndCommitResponse(
+          resp,
+          HTTP_BADREQUEST,
+          MIME_TEXT_PLAIN,
+          "Content-Type not recognized as RDF: " + contentType);
 
+      return;
     }
 
-    @Override
-    protected void doPost(final HttpServletRequest req,
-            final HttpServletResponse resp) throws IOException {
+    final RDFParserFactory rdfParserFactory =
+        RDFParserRegistry.getInstance().get(requestBodyFormat);
 
+    if (rdfParserFactory == null) {
 
-        if (req.getParameter(ATTR_CONVERT) != null) {
-            
-            // Convert from one format to another
-            doConvert(req, resp);
-            
-        }
+      buildAndCommitResponse(
+          resp,
+          HTTP_INTERNALERROR,
+          MIME_TEXT_PLAIN,
+          "Parser factory not found: Content-Type="
+              + contentType
+              + ", format="
+              + requestBodyFormat);
 
+      return;
     }
 
-    /**
-     * Convert RDF data from one format to another.
-     */
-    private void doConvert(final HttpServletRequest req,
-            final HttpServletResponse resp) throws IOException {
-        
-    	final String baseURI = req.getRequestURL().toString();
-    	
-    	// The content type of the request.
-        final String contentType = req.getContentType();
+    //        final String s= IOUtil.readString(req.getInputStream());
+    //        System.err.println(s);
 
-        if (log.isInfoEnabled())
-            log.info("Request body: " + contentType);
+    final Graph g = new LinkedHashModel();
 
-        /**
-         * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">
-         * UpdateServlet fails to parse MIMEType when doing conneg. </a>
-         */
+    try {
 
-        final RDFFormat requestBodyFormat = RDFFormat.forMIMEType(new MiniMime(
-                contentType).getMimeType());
+      /*
+       * There is a request body, so let's try and parse it.
+       */
 
-        if (requestBodyFormat == null) {
+      final RDFParser rdfParser = rdfParserFactory.getParser();
 
-            buildAndCommitResponse(resp, HTTP_BADREQUEST, MIME_TEXT_PLAIN,
-                    "Content-Type not recognized as RDF: " + contentType);
+      rdfParser.setValueFactory(new ValueFactoryImpl());
 
-            return;
+      rdfParser.setVerifyData(true);
 
-        }
+      rdfParser.setStopAtFirstError(true);
 
-        final RDFParserFactory rdfParserFactory = RDFParserRegistry
-                .getInstance().get(requestBodyFormat);
+      rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
 
-        if (rdfParserFactory == null) {
+      rdfParser.setRDFHandler(new StatementCollector(g));
 
-            buildAndCommitResponse(resp, HTTP_INTERNALERROR, MIME_TEXT_PLAIN,
-                    "Parser factory not found: Content-Type="
-                            + contentType + ", format=" + requestBodyFormat);
-            
-            return;
+      /*
+       * Run the parser, which will cause statements to be
+       * inserted.
+       */
+      rdfParser.parse(req.getInputStream(), baseURI);
 
-        }
+      /*
+       * Send back the graph using CONNEG to decide the MIME Type of the
+       * response.
+       */
+      sendGraph(req, resp, g);
 
-//        final String s= IOUtil.readString(req.getInputStream());
-//        System.err.println(s);
-        
-        final Graph g = new LinkedHashModel();
-        
-        try {
-        
-	        /*
-	         * There is a request body, so let's try and parse it.
-	         */
-	
-	        final RDFParser rdfParser = rdfParserFactory
-	                .getParser();
-	
-	        rdfParser.setValueFactory(new ValueFactoryImpl());
-	
-	        rdfParser.setVerifyData(true);
-	
-	        rdfParser.setStopAtFirstError(true);
-	
-	        rdfParser
-	                .setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
-	
-	        rdfParser.setRDFHandler(new StatementCollector(g));
-	
-	        /*
-	         * Run the parser, which will cause statements to be
-	         * inserted.
-	         */
-	        rdfParser.parse(req.getInputStream(), baseURI);
-	
-	        /*
-			 * Send back the graph using CONNEG to decide the MIME Type of the
-			 * response.
-			 */
-	        sendGraph(req, resp, g);
-	        
-        } catch (Throwable t) {
+    } catch (Throwable t) {
 
-            EmbergraphRDFServlet.launderThrowable(t, resp, null);
-
-        }
-
+      EmbergraphRDFServlet.launderThrowable(t, resp, null);
     }
-
+  }
 }

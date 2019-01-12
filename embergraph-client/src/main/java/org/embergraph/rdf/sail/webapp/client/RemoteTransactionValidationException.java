@@ -18,23 +18,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 /**
- * Exception thrown if an active transaction known to the server could not be
- * validated in response to a PREPARE or COMMIT request.
- * 
+ * Exception thrown if an active transaction known to the server could not be validated in response
+ * to a PREPARE or COMMIT request.
+ *
  * @author bryan
  */
 public class RemoteTransactionValidationException extends RuntimeException {
 
-   /**
-    * 
-    */
-   private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-   public RemoteTransactionValidationException(final long txId,
-         final String serviceURL) {
+  public RemoteTransactionValidationException(final long txId, final String serviceURL) {
 
-      super("txId=" + txId + ", serviceURL=" + serviceURL);
-
-   }
-
+    super("txId=" + txId + ", serviceURL=" + serviceURL);
+  }
 }

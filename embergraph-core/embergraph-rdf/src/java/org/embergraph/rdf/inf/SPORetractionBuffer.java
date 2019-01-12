@@ -31,101 +31,87 @@ import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.DeleteSolutionBu
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
- * A buffer for {@link SPO}s which causes the corresponding statements (and
- * their {@link Justification}s) be retracted from the database when it is
- * {@link #flush()}ed.
- * 
+ * A buffer for {@link SPO}s which causes the corresponding statements (and their {@link
+ * Justification}s) be retracted from the database when it is {@link #flush()}ed.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @deprecated by {@link DeleteBuffer} and {@link DeleteSolutionBuffer} and the
- *             changes to how truth maintenance is handled (rule rewrites).
+ * @deprecated by {@link DeleteBuffer} and {@link DeleteSolutionBuffer} and the changes to how truth
+ *     maintenance is handled (rule rewrites).
  */
 public class SPORetractionBuffer extends AbstractSPOBuffer {
 
-    private final AbstractTripleStore store;
-    private final boolean computeClosureForStatementIdentifiers;
+  private final AbstractTripleStore store;
+  private final boolean computeClosureForStatementIdentifiers;
 
-    /**
-     * Optional change log for change notification.
-     */
-    protected final IChangeLog changeLog;
-    
-    /**
-     * @param store
-     *            The database from which the statement will be removed when the
-     *            buffer is {@link #flush()}ed.
-     * @param capacity
-     *            The capacity of the retraction buffer.
-     * @param computeClosureForStatementIdentifiers
-     *            See
-     *            {@link AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
-     */
-    public SPORetractionBuffer(AbstractTripleStore store, int capacity,
-            boolean computeClosureForStatementIdentifiers) {
-        
-        this(store, capacity, computeClosureForStatementIdentifiers,
-                null/* changeLog */);
-        
-    }
-        
-    /**
-     * @param store
-     *            The database from which the statement will be removed when the
-     *            buffer is {@link #flush()}ed.
-     * @param capacity
-     *            The capacity of the retraction buffer.
-     * @param computeClosureForStatementIdentifiers
-     *            See
-     *            {@link AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
-     * @param changeLog
-     *            optional change log for change notification
-     */
-    public SPORetractionBuffer(AbstractTripleStore store, int capacity,
-            boolean computeClosureForStatementIdentifiers,
-            final IChangeLog changeLog) {
-        
-        super(store, null/*filter*/, capacity);
-        
-        if (store == null)
-            throw new IllegalArgumentException();
+  /** Optional change log for change notification. */
+  protected final IChangeLog changeLog;
 
-        this.store = store;
-        
-        this.computeClosureForStatementIdentifiers = computeClosureForStatementIdentifiers;
-        
-        this.changeLog = changeLog;
-        
-    }
+  /**
+   * @param store The database from which the statement will be removed when the buffer is {@link
+   *     #flush()}ed.
+   * @param capacity The capacity of the retraction buffer.
+   * @param computeClosureForStatementIdentifiers See {@link
+   *     AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
+   */
+  public SPORetractionBuffer(
+      AbstractTripleStore store, int capacity, boolean computeClosureForStatementIdentifiers) {
 
-    public int flush() {
+    this(store, capacity, computeClosureForStatementIdentifiers, null /* changeLog */);
+  }
 
-        if (isEmpty()) return 0;
-        
-        final long n;
-        
-        if (changeLog == null) {
+  /**
+   * @param store The database from which the statement will be removed when the buffer is {@link
+   *     #flush()}ed.
+   * @param capacity The capacity of the retraction buffer.
+   * @param computeClosureForStatementIdentifiers See {@link
+   *     AbstractTripleStore#removeStatements(org.embergraph.rdf.spo.ISPOIterator, boolean)}
+   * @param changeLog optional change log for change notification
+   */
+  public SPORetractionBuffer(
+      AbstractTripleStore store,
+      int capacity,
+      boolean computeClosureForStatementIdentifiers,
+      final IChangeLog changeLog) {
 
-            n = store.removeStatements(new ChunkedArrayIterator<ISPO>(numStmts,stmts,
-                null/*keyOrder*/), computeClosureForStatementIdentifiers);
-            
-        } else {
-            
-            n = StatementWriter.removeStatements(
-                    store, 
-                    new ChunkedArrayIterator<ISPO>(
-                            numStmts,stmts,null/*keyOrder*/),
-                    computeClosureForStatementIdentifiers,
-                    changeLog);
-            
-        }
+    super(store, null /*filter*/, capacity);
 
-        // reset the counter.
-        numStmts = 0;
+    if (store == null) throw new IllegalArgumentException();
 
-        // FIXME Note: being truncated to int, but whole class is deprecated.
-        return (int) Math.min(Integer.MAX_VALUE, n);
+    this.store = store;
 
+    this.computeClosureForStatementIdentifiers = computeClosureForStatementIdentifiers;
+
+    this.changeLog = changeLog;
+  }
+
+  public int flush() {
+
+    if (isEmpty()) return 0;
+
+    final long n;
+
+    if (changeLog == null) {
+
+      n =
+          store.removeStatements(
+              new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+              computeClosureForStatementIdentifiers);
+
+    } else {
+
+      n =
+          StatementWriter.removeStatements(
+              store,
+              new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+              computeClosureForStatementIdentifiers,
+              changeLog);
     }
 
+    // reset the counter.
+    numStmts = 0;
+
+    // FIXME Note: being truncated to int, but whole class is deprecated.
+    return (int) Math.min(Integer.MAX_VALUE, n);
+  }
 }

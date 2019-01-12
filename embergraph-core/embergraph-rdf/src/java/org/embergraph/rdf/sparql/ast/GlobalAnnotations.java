@@ -22,73 +22,53 @@ package org.embergraph.rdf.sparql.ast;
 import java.io.Serializable;
 
 /**
- * A glue class for reporting the namespace of the lexicon relation and the
- * timestamp of the view of the lexicon relation through the function bops.
- * 
+ * A glue class for reporting the namespace of the lexicon relation and the timestamp of the view of
+ * the lexicon relation through the function bops.
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class GlobalAnnotations implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6220818059592500418L;
+  /** */
+  private static final long serialVersionUID = -6220818059592500418L;
 
-	/**
-	 * The namespace of the lexicon relation.
-	 */
-	public final String lex;
-	
-	/**
-	 * The timestamp of the view of the lexicon relation.
-	 */
-	public final long timestamp;
+  /** The namespace of the lexicon relation. */
+  public final String lex;
 
-    /**
-     * 
-     * @param lex
-     *            The namespace of the lexicon relation.
-     * @param timestamp
-     *            The timestamp of the view of the lexicon relation.
-     */
-	public GlobalAnnotations(final String lex, final long timestamp) {
-		this.lex = lex;
-		this.timestamp = timestamp;
-	}
+  /** The timestamp of the view of the lexicon relation. */
+  public final long timestamp;
 
-	/**
-	 * Automatically generated.
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((lex == null) ? 0 : lex.hashCode());
-		result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
-		return result;
-	}
+  /**
+   * @param lex The namespace of the lexicon relation.
+   * @param timestamp The timestamp of the view of the lexicon relation.
+   */
+  public GlobalAnnotations(final String lex, final long timestamp) {
+    this.lex = lex;
+    this.timestamp = timestamp;
+  }
 
-	/**
-	 * Automatically generated.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GlobalAnnotations other = (GlobalAnnotations) obj;
-		if (lex == null) {
-			if (other.lex != null)
-				return false;
-		} else if (!lex.equals(other.lex))
-			return false;
-		if (timestamp != other.timestamp)
-			return false;
-		return true;
-	}
-	
+  /** Automatically generated. */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((lex == null) ? 0 : lex.hashCode());
+    result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
+    return result;
+  }
+
+  /** Automatically generated. */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    GlobalAnnotations other = (GlobalAnnotations) obj;
+    if (lex == null) {
+      if (other.lex != null) return false;
+    } else if (!lex.equals(other.lex)) return false;
+    if (timestamp != other.timestamp) return false;
+    return true;
+  }
 }

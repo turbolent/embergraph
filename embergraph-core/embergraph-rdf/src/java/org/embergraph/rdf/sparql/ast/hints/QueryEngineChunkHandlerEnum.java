@@ -25,48 +25,38 @@ import org.embergraph.bop.engine.ManagedHeapStandloneChunkHandler;
 import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
 
 /**
- * Type safe enumeration of known {@link IChunkHandler} implementations in 
- * support of the {@link QueryEngineChunkHandlerQueryHint}.
- * 
- * @author bryan
+ * Type safe enumeration of known {@link IChunkHandler} implementations in support of the {@link
+ * QueryEngineChunkHandlerQueryHint}.
  *
+ * @author bryan
  * @see BLZG-533 (Vector query engine on the native heap)
  */
 public enum QueryEngineChunkHandlerEnum {
 
-    /**
-     * Use the managed object heap (this is the historical behavior).
-     */
-    Managed,
-    /**
-     * Use the native heap.
-     */
-    Native;
+  /** Use the managed object heap (this is the historical behavior). */
+  Managed,
+  /** Use the native heap. */
+  Native;
 
-    /**
-     * Return the type safe enumeration corresponding to a specific
-     * implementation class.
-     * 
-     * @param cls
-     *            The {@link IChunkHandler} implementation class.
-     *            
-     * @return The corresponding type safe enum value.
-     */
-    public static QueryEngineChunkHandlerEnum valueOf(Class<? extends IChunkHandler> cls) {
-        
-        if (NativeHeapStandloneChunkHandler.class.getName().equals(cls.getName())) {
+  /**
+   * Return the type safe enumeration corresponding to a specific implementation class.
+   *
+   * @param cls The {@link IChunkHandler} implementation class.
+   * @return The corresponding type safe enum value.
+   */
+  public static QueryEngineChunkHandlerEnum valueOf(Class<? extends IChunkHandler> cls) {
 
-            return QueryEngineChunkHandlerEnum.Native;
-            
-        } else if (ManagedHeapStandloneChunkHandler.class.getName().equals(cls.getName())) {
-            
-            return QueryEngineChunkHandlerEnum.Managed;
-            
-        } else {
-            
-            throw new IllegalArgumentException(cls.getName());
-            
-        }
-        
+    if (NativeHeapStandloneChunkHandler.class.getName().equals(cls.getName())) {
+
+      return QueryEngineChunkHandlerEnum.Native;
+
+    } else if (ManagedHeapStandloneChunkHandler.class.getName().equals(cls.getName())) {
+
+      return QueryEngineChunkHandlerEnum.Managed;
+
+    } else {
+
+      throw new IllegalArgumentException(cls.getName());
     }
+  }
 }

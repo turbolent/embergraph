@@ -22,46 +22,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.spo;
 
 import junit.framework.TestCase;
-
-import org.embergraph.io.ByteArrayBuffer;
-import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rdf.model.StatementEnum;
 
 /**
  * Test suite for {@link StatementEnum}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestStatementEnum extends TestCase {
 
-    /**
-     * 
-     */
-    public TestStatementEnum() {
-    }
+  /** */
+  public TestStatementEnum() {}
 
-    /**
-     * @param arg0
-     */
-    public TestStatementEnum(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestStatementEnum(String arg0) {
+    super(arg0);
+  }
 
-    public void test_max() {
-        
-        assertEquals(StatementEnum.Explicit, StatementEnum.max(
-                StatementEnum.Axiom, StatementEnum.Explicit));
+  public void test_max() {
 
-        assertEquals(StatementEnum.Explicit, StatementEnum.max(
-                StatementEnum.Inferred, StatementEnum.Explicit));
+    assertEquals(
+        StatementEnum.Explicit, StatementEnum.max(StatementEnum.Axiom, StatementEnum.Explicit));
 
-        assertEquals(StatementEnum.Axiom, StatementEnum.max(
-                StatementEnum.Inferred, StatementEnum.Axiom));
+    assertEquals(
+        StatementEnum.Explicit, StatementEnum.max(StatementEnum.Inferred, StatementEnum.Explicit));
 
-        assertEquals(StatementEnum.Inferred, StatementEnum.max(
-                StatementEnum.Inferred, StatementEnum.Inferred));
-        
-    }
+    assertEquals(
+        StatementEnum.Axiom, StatementEnum.max(StatementEnum.Inferred, StatementEnum.Axiom));
 
+    assertEquals(
+        StatementEnum.Inferred, StatementEnum.max(StatementEnum.Inferred, StatementEnum.Inferred));
+  }
 }

@@ -22,79 +22,62 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
- * This operation creates a graph in the Graph Store (this operation is a NOP
- * for embergraph).
- * 
+ * This operation creates a graph in the Graph Store (this operation is a NOP for embergraph).
+ *
  * <pre>
  * CREATE ( SILENT )? GRAPH IRIref
  * </pre>
- * 
+ *
  * @see http://www.w3.org/TR/sparql11-update/#create
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class CreateGraph extends AbstractOneGraphManagement {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends AbstractOneGraphManagement.Annotations {
-        
-        /**
-         * The {@link EmbergraphStatement}[] which provides the provisioning
-         * information for the named solution set (optional, even when creating
-         * a named solution set).
-         */
-        String PARAMS = "params";
-        
-    }
-    
-    public CreateGraph() {
-
-        super(UpdateType.Create);
-        
-    }
+  public interface Annotations extends AbstractOneGraphManagement.Annotations {
 
     /**
-     * @param op
+     * The {@link EmbergraphStatement}[] which provides the provisioning information for the named
+     * solution set (optional, even when creating a named solution set).
      */
-    public CreateGraph(final CreateGraph op) {
-        
-        super(op);
-        
-    }
+    String PARAMS = "params";
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public CreateGraph(final BOp[] args, final Map<String, Object> anns) {
+  public CreateGraph() {
 
-        super(args, anns);
-        
-    }
+    super(UpdateType.Create);
+  }
 
-    /**
-     * Return the parameters used to provision a named solution set.
-     */
-    public EmbergraphStatement[] getParams() {
+  /** @param op */
+  public CreateGraph(final CreateGraph op) {
 
-        return (EmbergraphStatement[]) getProperty(Annotations.PARAMS);
+    super(op);
+  }
 
-    }
+  /**
+   * @param args
+   * @param anns
+   */
+  public CreateGraph(final BOp[] args, final Map<String, Object> anns) {
 
-    public void setParams(final EmbergraphStatement[] params) {
+    super(args, anns);
+  }
 
-        setProperty(Annotations.PARAMS, params);
+  /** Return the parameters used to provision a named solution set. */
+  public EmbergraphStatement[] getParams() {
 
-    }
+    return (EmbergraphStatement[]) getProperty(Annotations.PARAMS);
+  }
 
+  public void setParams(final EmbergraphStatement[] params) {
+
+    setProperty(Annotations.PARAMS, params);
+  }
 }

@@ -22,51 +22,42 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
-
-
 /**
- * Map from nodes to their respective {@link GroupNodeVarBindingInfo} object,
- * including setup method.
- * 
+ * Map from nodes to their respective {@link GroupNodeVarBindingInfo} object, including setup
+ * method.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class GroupNodeVarBindingInfoMap {
-   
-   final private Map<IGroupMemberNode, GroupNodeVarBindingInfo> bindingInfo;
-   
-   
-   /**
-    * Constructor, setting up an object given a list of {@link IGroupMemberNode}
-    * objects and the associated {@link StaticAnalysis} object as input.
-    * 
-    * @param nodes
-    */
-   public GroupNodeVarBindingInfoMap(
-      final Iterable<IGroupMemberNode> nodes, 
+
+  private final Map<IGroupMemberNode, GroupNodeVarBindingInfo> bindingInfo;
+
+  /**
+   * Constructor, setting up an object given a list of {@link IGroupMemberNode} objects and the
+   * associated {@link StaticAnalysis} object as input.
+   *
+   * @param nodes
+   */
+  public GroupNodeVarBindingInfoMap(
+      final Iterable<IGroupMemberNode> nodes,
       final StaticAnalysis sa,
       final ASTJoinGroupFilterExistsInfo fExInfo) {
 
-      bindingInfo = new HashMap<IGroupMemberNode, GroupNodeVarBindingInfo>();
-      for (IGroupMemberNode node : nodes) {
-         
-         final GroupNodeVarBindingInfo vbc = 
-            new GroupNodeVarBindingInfo(node, sa, fExInfo);
-         bindingInfo.put(node,vbc); 
-         
-      }
-      
-            
-   }
-   /**
-    * Get the {@link GroupNodeVarBindingInfo} for the given node. Returns null
-    * if the node is not registered.
-    */
-   public GroupNodeVarBindingInfo get(IGroupMemberNode node) {
-      return bindingInfo.get(node);
-   }
-   
+    bindingInfo = new HashMap<IGroupMemberNode, GroupNodeVarBindingInfo>();
+    for (IGroupMemberNode node : nodes) {
+
+      final GroupNodeVarBindingInfo vbc = new GroupNodeVarBindingInfo(node, sa, fExInfo);
+      bindingInfo.put(node, vbc);
+    }
+  }
+  /**
+   * Get the {@link GroupNodeVarBindingInfo} for the given node. Returns null if the node is not
+   * registered.
+   */
+  public GroupNodeVarBindingInfo get(IGroupMemberNode node) {
+    return bindingInfo.get(node);
+  }
 }

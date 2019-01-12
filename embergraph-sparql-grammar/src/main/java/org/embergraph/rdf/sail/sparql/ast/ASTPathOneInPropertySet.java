@@ -2,11 +2,10 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTPathOneInPropertySet extends SimpleNode {
+public class ASTPathOneInPropertySet extends SimpleNode {
   private boolean inverse;
 
-public ASTPathOneInPropertySet(int id) {
+  public ASTPathOneInPropertySet(int id) {
     super(id);
   }
 
@@ -14,16 +13,15 @@ public ASTPathOneInPropertySet(int id) {
     super(p, id);
   }
 
-  
   public void setInverse(boolean inverse) {
-		this.inverse = inverse;
-  }
-  
-  public boolean isInverse() {
-	  return this.inverse;
+    this.inverse = inverse;
   }
 
-  /** Accept the visitor. **/
+  public boolean isInverse() {
+    return this.inverse;
+  }
+
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }

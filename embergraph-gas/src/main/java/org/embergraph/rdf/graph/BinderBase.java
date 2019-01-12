@@ -18,53 +18,44 @@ package org.embergraph.rdf.graph;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.bop.IVariable;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IVariable;
-
-/**
- * A base class for IBinders.
- */
+/** A base class for IBinders. */
 public abstract class BinderBase<VS, ES, ST> implements IBinder<VS, ES, ST> {
 
-    /**
-     * The ordinal index of the variable that is bound by this
-     * {@link BinderBase}. By convention, index ZERO is the vertex. Indices
-     * greater than ZERO are typically aspects of the state of the vertex.
-     */
-    @Override
-    public abstract int getIndex();
+  /**
+   * The ordinal index of the variable that is bound by this {@link BinderBase}. By convention,
+   * index ZERO is the vertex. Indices greater than ZERO are typically aspects of the state of the
+   * vertex.
+   */
+  @Override
+  public abstract int getIndex();
 
-    /**
-     * Subclasses can implement this method if they follow the old single
-     * bind paradigm.
-     */
-    public abstract Value bind(ValueFactory vf, final IGASState<VS, ES, ST> state, Value v);
-    
-    /**
-     * Call {@link #bind(ValueFactory, IGASState, Value)}.
-     */
-	@Override
-    @SuppressWarnings("unchecked")
-    public List<Value> bind(final ValueFactory vf, final IGASState<VS, ES, ST> state, 
-    		final Value u, final IVariable<?>[] outVars, final IBindingSet bs) {
-    	
-    	final Value val = bind(vf, state, u);
-    	
-    	if (val == null) {
-    		
-    		return Collections.EMPTY_LIST;
-    		
-    	} else {
-    	
-    		return Arrays.asList(new Value[] { val });
-    		
-    	}
-    	
+  /** Subclasses can implement this method if they follow the old single bind paradigm. */
+  public abstract Value bind(ValueFactory vf, final IGASState<VS, ES, ST> state, Value v);
+
+  /** Call {@link #bind(ValueFactory, IGASState, Value)}. */
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<Value> bind(
+      final ValueFactory vf,
+      final IGASState<VS, ES, ST> state,
+      final Value u,
+      final IVariable<?>[] outVars,
+      final IBindingSet bs) {
+
+    final Value val = bind(vf, state, u);
+
+    if (val == null) {
+
+      return Collections.EMPTY_LIST;
+
+    } else {
+
+      return Arrays.asList(new Value[] {val});
     }
-
+  }
 }
-

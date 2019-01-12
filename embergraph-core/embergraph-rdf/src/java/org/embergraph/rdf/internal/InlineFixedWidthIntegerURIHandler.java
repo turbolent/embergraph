@@ -21,54 +21,47 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
- * Utility IV to generate IVs for URIs in the form of http://example.org/value/0000513
- * where the localName is in integer printed with fixed width padding.
- * 
- * You should extend this class with implementation for specific instances of URIs that follow
- * this form such as:  http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID_000234 would be
- * created as:
+ * Utility IV to generate IVs for URIs in the form of http://example.org/value/0000513 where the
+ * localName is in integer printed with fixed width padding.
+ *
+ * <p>You should extend this class with implementation for specific instances of URIs that follow
+ * this form such as: http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID_000234 would be created as:
  * <code>
  * InlineFixedWidthIntegerURIHandler handler = new InlineFixedWidthIntegerURIHandler("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/",6);
- * </code> 
- * 
+ * </code>
+ *
  * @author beebs
  */
+public class InlineFixedWidthIntegerURIHandler extends InlineSignedIntegerURIHandler {
 
+  private int fixedWidth = 0;
 
-public class InlineFixedWidthIntegerURIHandler extends
-		InlineSignedIntegerURIHandler {
+  public InlineFixedWidthIntegerURIHandler(final String namespace, final int fixedWidth) {
+    super(namespace);
+    this.fixedWidth = fixedWidth;
+  }
 
-	private int fixedWidth = 0;
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(String localName) {
+    if (localName == null) {
+      return null;
+    }
 
-	public InlineFixedWidthIntegerURIHandler(final String namespace, final int fixedWidth) {
-		super(namespace);
-		this.fixedWidth = fixedWidth;
-	}
+    final String intValue = localName;
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	protected AbstractLiteralIV createInlineIV(String localName) {
-		if (localName == null) {
-			return null;
-		}
-	
-		final String intValue = localName;
-				
-		return super.createInlineIV(intValue);
-	}
+    return super.createInlineIV(intValue);
+  }
 
-	@Override
-	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+  @Override
+  public String getLocalNameFromDelegate(AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
-		final String intStr = super.getLocalNameFromDelegate(delegate);
+    final String intStr = super.getLocalNameFromDelegate(delegate);
 
-		final int intVal = Integer.parseInt(intStr);
+    final int intVal = Integer.parseInt(intStr);
 
-		final String localName = String.format("%0" + fixedWidth + "d", intVal);
-		
-		return localName;
-		
-	}
+    final String localName = String.format("%0" + fixedWidth + "d", intVal);
+
+    return localName;
+  }
 }

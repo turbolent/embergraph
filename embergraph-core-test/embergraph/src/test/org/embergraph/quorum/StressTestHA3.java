@@ -27,45 +27,36 @@ import junit.framework.TestSuite;
 
 /**
  * Stress test suite for {@link TestHA3QuorumSemantics}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class StressTestHA3 extends TestCase {
 
-    /**
-     * 
-     */
-    public StressTestHA3() {
+  /** */
+  public StressTestHA3() {}
+
+  /** @param name */
+  public StressTestHA3(String name) {
+    super(name);
+  }
+
+  /**
+   * Return a test suite which will run each of the unit tests for
+   * TestIndexSegmentBuilderWithSmallTrees a number of times. This will exercise some random
+   * perturbations in things like whether or not rawRecords are enabled or whether or not we are
+   * fully buffering the nodes when building the index segment.
+   */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("HA3Quorums");
+
+    for (int i = 0; i < 20; i++) {
+
+      final TestSuite suite2 = new TestSuite(TestHA3QuorumSemantics.class);
+
+      suite.addTest(suite2);
     }
 
-    /**
-     * @param name
-     */
-    public StressTestHA3(String name) {
-        super(name);
-    }
-
-    /**
-     * Return a test suite which will run each of the unit tests for
-     * TestIndexSegmentBuilderWithSmallTrees a number of times. This will
-     * exercise some random perturbations in things like whether or not
-     * rawRecords are enabled or whether or not we are fully buffering the nodes
-     * when building the index segment.
-     */
-    public static Test suite() {
-
-        final TestSuite suite = new TestSuite("HA3Quorums");
-
-        for (int i = 0; i < 20; i++) {
-
-            final TestSuite suite2 = new TestSuite(TestHA3QuorumSemantics.class);
-
-            suite.addTest(suite2);
-
-        }
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

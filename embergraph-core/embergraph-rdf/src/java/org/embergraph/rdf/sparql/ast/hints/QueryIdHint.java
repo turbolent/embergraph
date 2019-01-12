@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.hints;
 
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
@@ -33,39 +32,39 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 
 /**
- * This just strips the {@link QueryHints#QUERYID} out of the AST. The
- * {@link Embergraph2ASTSPARQLParser} is responsible for traversing the AST and, if
- * it finds the {@link QueryHints#QUERYID}, attaching it to the
- * {@link ASTContainer}'s query hints {@link Properties} object.
- * <P>
- * Note: The timing for interpreting this query hint is critical, which is why
- * it is handled by the {@link Embergraph2ASTSPARQLParser}. We need to know if the
- * QueryID was set long before the {@link ASTQueryHintOptimizer} runs.
+ * This just strips the {@link QueryHints#QUERYID} out of the AST. The {@link
+ * Embergraph2ASTSPARQLParser} is responsible for traversing the AST and, if it finds the {@link
+ * QueryHints#QUERYID}, attaching it to the {@link ASTContainer}'s query hints {@link Properties}
+ * object.
+ *
+ * <p>Note: The timing for interpreting this query hint is critical, which is why it is handled by
+ * the {@link Embergraph2ASTSPARQLParser}. We need to know if the QueryID was set long before the
+ * {@link ASTQueryHintOptimizer} runs.
  */
 final class QueryIdHint extends AbstractQueryHint<UUID> {
 
-    protected QueryIdHint() {
+  protected QueryIdHint() {
 
-        super(QueryHints.QUERYID, null/* defaultValue */);
+    super(QueryHints.QUERYID, null /* defaultValue */);
+  }
 
-    }
+  @Override
+  public UUID validate(final String value) {
 
-    @Override
-    public UUID validate(final String value) {
+    return UUID.fromString(value);
+  }
 
-        return UUID.fromString(value);
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final UUID value) {
 
-    }
+    /*
+     * NOP.
+     */
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final UUID value) {
-
-        /*
-         * NOP.
-         */
- 
-    }
-
+  }
 }

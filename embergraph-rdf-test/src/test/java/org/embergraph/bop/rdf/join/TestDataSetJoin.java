@@ -25,31 +25,23 @@ import junit.framework.TestCase2;
 
 /**
  * Test {@link DataSetJoin}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDataSetJoin extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestDataSetJoin() {
-    }
+  /** */
+  public TestDataSetJoin() {}
 
-    /**
-     * @param name
-     */
-    public TestDataSetJoin(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestDataSetJoin(String name) {
+    super(name);
+  }
 
-    /**
-     * FIXME Write tests for the {@link DataSetJoin}.
-     */
-    public void test_something() {
-        log.error("write tests");
-//        fail("write tests");
-    }
-    
+  /** FIXME Write tests for the {@link DataSetJoin}. */
+  public void test_something() {
+    log.error("write tests");
+    //        fail("write tests");
+  }
 }

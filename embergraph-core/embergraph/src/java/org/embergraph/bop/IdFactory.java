@@ -17,14 +17,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.bop;
 
-/**
- * An interface for a bop identifier factory.
- */
+/** An interface for a bop identifier factory. */
 public interface IdFactory {
 
-    /**
-     * Issue the next bop identifier.
-     */
-	public int nextId();
-	
+  /** Issue the next bop identifier. */
+  public int nextId();
 }

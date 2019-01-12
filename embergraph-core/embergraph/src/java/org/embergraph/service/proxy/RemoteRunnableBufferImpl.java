@@ -26,65 +26,55 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
-
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
- * A helper object that provides the API of {@link IBlockingBuffer} but whose
- * methods throw {@link IOException} and are therefore compatible with
- * {@link Remote} and Exporter.
- * 
+ * A helper object that provides the API of {@link IBlockingBuffer} but whose methods throw {@link
+ * IOException} and are therefore compatible with {@link Remote} and Exporter.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the elements in the buffer.
- * @param <V>
- *            The generic type of the result of the method call.
+ * @param <E> The generic type of the elements in the buffer.
+ * @param <V> The generic type of the result of the method call.
  */
-public class RemoteRunnableBufferImpl<E,V> extends RemoteBufferImpl<E> implements
-        RemoteRunnableBuffer<E,V> {
+public class RemoteRunnableBufferImpl<E, V> extends RemoteBufferImpl<E>
+    implements RemoteRunnableBuffer<E, V> {
 
-    private final IRunnableBuffer<E> localBuffer;
-    private final Future<V> futureProxy;
+  private final IRunnableBuffer<E> localBuffer;
+  private final Future<V> futureProxy;
 
-    /**
-     * @param localBuffer
-     * @param futureProxy
-     */
-    public RemoteRunnableBufferImpl(final IRunnableBuffer<E> localBuffer,
-            final Future<V> futureProxy) {
-        
-        super(localBuffer);
-        
-        this.localBuffer = localBuffer;
-        
-        this.futureProxy = futureProxy;
-        
-    }
+  /**
+   * @param localBuffer
+   * @param futureProxy
+   */
+  public RemoteRunnableBufferImpl(
+      final IRunnableBuffer<E> localBuffer, final Future<V> futureProxy) {
 
-    public void abort(Throwable cause) throws IOException {
+    super(localBuffer);
 
-        localBuffer.abort(cause);
-        
-    }
+    this.localBuffer = localBuffer;
 
-    public void close() throws IOException {
+    this.futureProxy = futureProxy;
+  }
 
-        localBuffer.close();
-        
-    }
+  public void abort(Throwable cause) throws IOException {
 
-    public boolean isOpen() throws IOException {
-        
-        return localBuffer.isOpen();
-        
-    }
+    localBuffer.abort(cause);
+  }
 
-    public Future<V> getFuture() throws IOException {
+  public void close() throws IOException {
 
-        return futureProxy;
-        
-    }
+    localBuffer.close();
+  }
 
+  public boolean isOpen() throws IOException {
+
+    return localBuffer.isOpen();
+  }
+
+  public Future<V> getFuture() throws IOException {
+
+    return futureProxy;
+  }
 }

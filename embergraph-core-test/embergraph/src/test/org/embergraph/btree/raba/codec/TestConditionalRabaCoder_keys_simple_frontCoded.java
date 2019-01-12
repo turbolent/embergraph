@@ -26,36 +26,27 @@ import org.embergraph.btree.raba.ConditionalRabaCoder;
 
 /**
  * Test suite for the {@link ConditionalRabaCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestConditionalRabaCoder_keys_simple_frontCoded extends
-        AbstractRabaCoderTestCase {
+public class TestConditionalRabaCoder_keys_simple_frontCoded extends AbstractRabaCoderTestCase {
 
-    /**
-     * 
-     */
-    public TestConditionalRabaCoder_keys_simple_frontCoded() {
-    }
+  /** */
+  public TestConditionalRabaCoder_keys_simple_frontCoded() {}
 
-    /**
-     * @param name
-     */
-    public TestConditionalRabaCoder_keys_simple_frontCoded(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestConditionalRabaCoder_keys_simple_frontCoded(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
+  protected void setUp() throws Exception {
 
-        super.setUp();
+    super.setUp();
 
-        rabaCoder = new ConditionalRabaCoder(
-                SimpleRabaCoder.INSTANCE,
-                new FrontCodedRabaCoder(8/* ratio */),
-                32 // bigsize
-        );
-
-    }
-
+    rabaCoder =
+        new ConditionalRabaCoder(
+            SimpleRabaCoder.INSTANCE, new FrontCodedRabaCoder(8 /* ratio */), 32 // bigsize
+            );
+  }
 }

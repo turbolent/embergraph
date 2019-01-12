@@ -21,24 +21,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Class representing the result of a mutation operation against the REST
- * API.
- */
+/** Class representing the result of a mutation operation against the REST API. */
 class MutationResult {
 
-    /** The mutation count. */
-    public final long mutationCount;
+  /** The mutation count. */
+  public final long mutationCount;
 
-    /** The elapsed time for the operation. */
-    public final long elapsedMillis;
+  /** The elapsed time for the operation. */
+  public final long elapsedMillis;
 
-    public MutationResult(final long mutationCount, final long elapsedMillis) {
+  public MutationResult(final long mutationCount, final long elapsedMillis) {
 
-        this.mutationCount = mutationCount;
+    this.mutationCount = mutationCount;
 
-        this.elapsedMillis = elapsedMillis;
-        
-    }
-
+    this.elapsedMillis = elapsedMillis;
+  }
 }

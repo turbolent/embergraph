@@ -18,112 +18,88 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.impl.bnode;
 
 import java.util.UUID;
-
-import org.embergraph.rdf.model.EmbergraphBNode;
-import org.openrdf.model.BNode;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
+import org.openrdf.model.BNode;
 
 /**
- * Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in
- * order to be lined.
- * <p>
- * {@inheritDoc}
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
- * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z
- *          thompsonbry $
- * 
+ * Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in order to be lined.
+ *
+ * <p>{@inheritDoc}
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z thompsonbry $
  * @see AbstractTripleStore.Options
  */
-public class UUIDBNodeIV<V extends EmbergraphBNode> extends
-        AbstractBNodeIV<V, UUID> {
+public class UUIDBNodeIV<V extends EmbergraphBNode> extends AbstractBNodeIV<V, UUID> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4560216387427028030L;
-    
-    private final UUID id;
-    
-    public IV<V, UUID> clone(final boolean clearCache) {
+  /** */
+  private static final long serialVersionUID = -4560216387427028030L;
 
-        final UUIDBNodeIV<V> tmp = new UUIDBNodeIV<V>(id);
+  private final UUID id;
 
-        if (!clearCache) {
+  public IV<V, UUID> clone(final boolean clearCache) {
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+    final UUIDBNodeIV<V> tmp = new UUIDBNodeIV<V>(id);
 
-    }
-    
-    public UUIDBNodeIV(final UUID id) {
+    if (!clearCache) {
 
-        super(DTE.UUID);
-
-        if (id == null)
-            throw new IllegalArgumentException();
-
-        this.id = id;
-
+      tmp.setValue(getValueCache());
     }
 
-    final public UUID getInlineValue() {
-     
-        return id;
-        
-    }
+    return tmp;
+  }
 
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof UUIDBNodeIV<?>) {
-            return this.id.equals(((UUIDBNodeIV<?>) o).id);
-        }
-        return false;
-    }
+  public UUIDBNodeIV(final UUID id) {
 
-    @Override
-    public int _compareTo(IV o) {
-         
-        return id.compareTo(((UUIDBNodeIV) o).id);
-        
-    }
-    
-    public int hashCode() {
-        return id.hashCode();
-    }
- 
-    public int byteLength() {
-        return 1 + Bytes.SIZEOF_UUID;
-    }
-    
-    /**
-     * Implements {@link BNode#getID()}.
-     */
-    @Override
-    public String getID() {
-        
-        return 'u' + String.valueOf(id);
+    super(DTE.UUID);
 
+    if (id == null) throw new IllegalArgumentException();
+
+    this.id = id;
+  }
+
+  public final UUID getInlineValue() {
+
+    return id;
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o instanceof UUIDBNodeIV<?>) {
+      return this.id.equals(((UUIDBNodeIV<?>) o).id);
     }
+    return false;
+  }
 
-    /**
-     * Does not need materialization to answer BNode interface methods.
-     */
-	@Override
-	public boolean needsMaterialization() {
-		
-		return false;
-		
-	}
+  @Override
+  public int _compareTo(IV o) {
 
-    
+    return id.compareTo(((UUIDBNodeIV) o).id);
+  }
+
+  public int hashCode() {
+    return id.hashCode();
+  }
+
+  public int byteLength() {
+    return 1 + Bytes.SIZEOF_UUID;
+  }
+
+  /** Implements {@link BNode#getID()}. */
+  @Override
+  public String getID() {
+
+    return 'u' + String.valueOf(id);
+  }
+
+  /** Does not need materialization to answer BNode interface methods. */
+  @Override
+  public boolean needsMaterialization() {
+
+    return false;
+  }
 }

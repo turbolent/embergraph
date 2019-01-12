@@ -19,66 +19,58 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.nio.ByteBuffer;
-
 import org.embergraph.btree.IndexInconsistentError;
 
 /**
- * Provides the callback to save the previous root block and store the address
- * with the current CommitRecord.  This enables access to historical root blocks
- * since the next CommitRecord is accessible from the CommitRecordIndex.  This
- * is effective if slightly circuitous.
- *  
- * @author Martyn Cutcher
+ * Provides the callback to save the previous root block and store the address with the current
+ * CommitRecord. This enables access to historical root blocks since the next CommitRecord is
+ * accessible from the CommitRecordIndex. This is effective if slightly circuitous.
  *
+ * @author Martyn Cutcher
  */
 public class RootBlockCommitter implements ICommitter {
-    
-	final private AbstractJournal journal;
-	private volatile Throwable error = null;
 
-	public RootBlockCommitter(final AbstractJournal journal) {
-		this.journal = journal;
-	}
-	
-	/**
-	 * Write the current root block to the Journal and return its address
-	 * to be stored in the CommitRecord.
-	 */
-	@Override
-	public long handleCommit(final long commitTime) {
-		
-        if (error != null)
-            throw new IndexInconsistentError(error);
+  private final AbstractJournal journal;
+  private volatile Throwable error = null;
 
-	    final IRootBlockView view = journal.getRootBlockView();
-		
-		final ByteBuffer rbv = view.asReadOnlyBuffer();
-		/*
-		 * FIXME There is an API issue with the RWStore which does not allow
-		 * us to pass in a read-only buffer.  Write unit tests for this on
-		 * the core IRawStore test suite and fix the RWStore.  Also write
-		 * unit tests when the array backing the ByteBuffer can be accessed
-		 * but has a non-zero array offset (a mutable slice of a ByteBuffer).
-		 */
-//		return journal.write(rbv);
-		final ByteBuffer bb = ByteBuffer.allocate(rbv.capacity());
-		for (int i = 0; i < rbv.capacity(); i++) {
-			bb.put(rbv.get());
-		}
-		bb.flip();
-		
-		return journal.write(bb);
-	}
+  public RootBlockCommitter(final AbstractJournal journal) {
+    this.journal = journal;
+  }
 
-    @Override
-    public void invalidate(final Throwable t) {
+  /**
+   * Write the current root block to the Journal and return its address to be stored in the
+   * CommitRecord.
+   */
+  @Override
+  public long handleCommit(final long commitTime) {
 
-        if (t == null)
-            throw new IllegalArgumentException();
+    if (error != null) throw new IndexInconsistentError(error);
 
-        if (error == null)
-            error = t;
+    final IRootBlockView view = journal.getRootBlockView();
 
+    final ByteBuffer rbv = view.asReadOnlyBuffer();
+    /*
+     * FIXME There is an API issue with the RWStore which does not allow
+     * us to pass in a read-only buffer.  Write unit tests for this on
+     * the core IRawStore test suite and fix the RWStore.  Also write
+     * unit tests when the array backing the ByteBuffer can be accessed
+     * but has a non-zero array offset (a mutable slice of a ByteBuffer).
+     */
+    //		return journal.write(rbv);
+    final ByteBuffer bb = ByteBuffer.allocate(rbv.capacity());
+    for (int i = 0; i < rbv.capacity(); i++) {
+      bb.put(rbv.get());
     }
-    
+    bb.flip();
+
+    return journal.write(bb);
+  }
+
+  @Override
+  public void invalidate(final Throwable t) {
+
+    if (t == null) throw new IllegalArgumentException();
+
+    if (error == null) error = t;
+  }
 }

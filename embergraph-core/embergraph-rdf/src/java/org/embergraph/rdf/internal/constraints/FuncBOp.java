@@ -20,13 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.openrdf.model.Value;
-import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
-import org.openrdf.query.algebra.evaluation.function.Function;
-import org.openrdf.query.algebra.evaluation.function.FunctionRegistry;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -35,128 +29,111 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Value;
+import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
+import org.openrdf.query.algebra.evaluation.function.Function;
+import org.openrdf.query.algebra.evaluation.function.FunctionRegistry;
 
-/**
- * Call one of the Sesame casting functions.
- */
-public class FuncBOp extends IVValueExpression<IV> implements
-        INeedsMaterialization {
+/** Call one of the Sesame casting functions. */
+public class FuncBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2587499644967260639L;
-	
-	private static final transient Logger log = Logger.getLogger(FuncBOp.class);
+  /** */
+  private static final long serialVersionUID = 2587499644967260639L;
 
-	public interface Annotations extends IVValueExpression.Annotations {
+  private static final transient Logger log = Logger.getLogger(FuncBOp.class);
 
-		String FUNCTION = FuncBOp.class.getName() + ".function";
+  public interface Annotations extends IVValueExpression.Annotations {
 
-    }
-	
-    @SuppressWarnings("rawtypes")
-    public FuncBOp(final IValueExpression<? extends IV>[] args, 
-    		final String func, final GlobalAnnotations globals) {
-        
-        this(args, anns(globals, new NV(Annotations.FUNCTION, func)));
-        
-    }
-    
-    /**
-     * Required shallow copy constructor.
-     */
-    public FuncBOp(final BOp[] args, final Map<String, Object> anns) {
+    String FUNCTION = FuncBOp.class.getName() + ".function";
+  }
 
-    	super(args, anns);
-    	
-		if (getProperty(Annotations.NAMESPACE) == null)
-			throw new IllegalArgumentException();
-		
-		if (getProperty(Annotations.FUNCTION) == null)
-			throw new IllegalArgumentException();
-		
-    }
+  @SuppressWarnings("rawtypes")
+  public FuncBOp(
+      final IValueExpression<? extends IV>[] args,
+      final String func,
+      final GlobalAnnotations globals) {
 
-    private Function getFunc() {
+    this(args, anns(globals, new NV(Annotations.FUNCTION, func)));
+  }
 
-        if (funct == null) {
+  /** Required shallow copy constructor. */
+  public FuncBOp(final BOp[] args, final Map<String, Object> anns) {
 
-            final String funcName = (String) getRequiredProperty(Annotations.FUNCTION);
+    super(args, anns);
 
-            funct = FunctionRegistry.getInstance().get(funcName);
+    if (getProperty(Annotations.NAMESPACE) == null) throw new IllegalArgumentException();
 
-            if (funct == null) {
-                throw new RuntimeException("Unknown function '" + funcName
-                        + "'");
-            }
+    if (getProperty(Annotations.FUNCTION) == null) throw new IllegalArgumentException();
+  }
 
-        }
+  private Function getFunc() {
 
-        return funct;
+    if (funct == null) {
 
-    }
-    private transient volatile Function funct;
+      final String funcName = (String) getRequiredProperty(Annotations.FUNCTION);
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public FuncBOp(final FuncBOp op) {
-        super(op);
+      funct = FunctionRegistry.getInstance().get(funcName);
+
+      if (funct == null) {
+        throw new RuntimeException("Unknown function '" + funcName + "'");
+      }
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public IV get(final IBindingSet bs) {
-        
-    	final Value[] vals = new Value[arity()];
-    	
-    	for (int i = 0; i < vals.length; i++) {
+    return funct;
+  }
 
-    		final IV<?,?> iv = getAndCheckBound(i, bs);
-    		
-            final Value val = asValue(iv);
-            
-    		if (log.isDebugEnabled()) {
-	            log.debug("iv: " + iv + ", class="+iv.getClass());
-	            log.debug("val: " + val + ", class="+val.getClass());
-    		}
-            
-            vals[i] = val;
-            
-    	}
-    	
-    	final Function func = getFunc();
+  private transient volatile Function funct;
 
-	    final EmbergraphValueFactory vf = getValueFactory();
-    
-	    try {
-	    
-	    	final Value val = func.evaluate(vf, vals);
-	    	
-    		final IV iv = asIV(val, bs);
-    		
-    		if (log.isDebugEnabled()) {
-	            log.debug("val: " + val + ", class="+val.getClass());
-	            log.debug("iv: " + iv + ", class="+iv.getClass());
-    		}
-            
-            return iv;
-	    	
-	    } catch (ValueExprEvaluationException ex) {
-	    	
-	    	throw new SparqlTypeErrorException();
-	    	
-	    }
-        
-    }   
-    
-    /**
-     * This bop can only work with materialized terms.  
-     */
-    public Requirement getRequirement() {
-    	
-    	return INeedsMaterialization.Requirement.SOMETIMES;
-    	
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public FuncBOp(final FuncBOp op) {
+    super(op);
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public IV get(final IBindingSet bs) {
+
+    final Value[] vals = new Value[arity()];
+
+    for (int i = 0; i < vals.length; i++) {
+
+      final IV<?, ?> iv = getAndCheckBound(i, bs);
+
+      final Value val = asValue(iv);
+
+      if (log.isDebugEnabled()) {
+        log.debug("iv: " + iv + ", class=" + iv.getClass());
+        log.debug("val: " + val + ", class=" + val.getClass());
+      }
+
+      vals[i] = val;
     }
-        
+
+    final Function func = getFunc();
+
+    final EmbergraphValueFactory vf = getValueFactory();
+
+    try {
+
+      final Value val = func.evaluate(vf, vals);
+
+      final IV iv = asIV(val, bs);
+
+      if (log.isDebugEnabled()) {
+        log.debug("val: " + val + ", class=" + val.getClass());
+        log.debug("iv: " + iv + ", class=" + iv.getClass());
+      }
+
+      return iv;
+
+    } catch (ValueExprEvaluationException ex) {
+
+      throw new SparqlTypeErrorException();
+    }
+  }
+
+  /** This bop can only work with materialized terms. */
+  public Requirement getRequirement() {
+
+    return INeedsMaterialization.Requirement.SOMETIMES;
+  }
 }

@@ -24,9 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.sparse;
 
 import java.util.UUID;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
@@ -36,195 +34,174 @@ import org.embergraph.relation.AbstractRelation;
 
 /**
  * Helper class.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class GlobalRowStoreHelper {
 
-    static final public transient String GLOBAL_ROW_STORE_INDEX = "__globalRowStore";
+  public static final transient String GLOBAL_ROW_STORE_INDEX = "__globalRowStore";
 
-   /**
-    * Note: It is important that this reference is not exposed since that can
-    * break isolation when using group commit by allowing the GRS index to be 
-    * registered from within a task .
-    * 
-    * @see <a href="http://trac.blazegraph.com/ticket/1132"> GlobalRowStoreHelper
-    *      can hold hard reference to GSR index (GROUP COMMIT) </a>
-    */
-    private final IIndexManager indexManager;
-    
-    protected static final transient Logger log = Logger.getLogger(GlobalRowStoreHelper.class);
-    
-//    protected static final boolean INFO = log.isInfoEnabled();
-    
-    public GlobalRowStoreHelper(final IIndexManager indexManager) {
-        
-        if (indexManager == null)
-            throw new IllegalArgumentException();
+  /**
+   * Note: It is important that this reference is not exposed since that can break isolation when
+   * using group commit by allowing the GRS index to be registered from within a task .
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/1132">GlobalRowStoreHelper can hold hard
+   *     reference to GSR index (GROUP COMMIT) </a>
+   */
+  private final IIndexManager indexManager;
 
-        this.indexManager = indexManager;
-        
-    }
-    
-    /**
-    * @return The unisolated view of the GRS index
-    * 
-    * @see <a href="http://trac.blazegraph.com/ticket/867"> NSS concurrency problem
-    *      with list namespaces and create namespace </a>
-    * @see <a href="http://trac.blazegraph.com/ticket/1132"> GlobalRowStoreHelper
-    *      can hold hard reference to GSR index (GROUP COMMIT) </a>
-    */
-    synchronized public SparseRowStore getGlobalRowStore() {
+  protected static final transient Logger log = Logger.getLogger(GlobalRowStoreHelper.class);
 
-        if (log.isInfoEnabled())
-            log.info("");
+  //    protected static final boolean INFO = log.isInfoEnabled();
 
-        final SparseRowStore globalRowStore;
-//        if (globalRowStore == null) 
-        {
+  public GlobalRowStoreHelper(final IIndexManager indexManager) {
 
-            /**
-             * The GRS view needs to be protected by an
-             * UnisolatedReadWriteIndex.
-             * 
-             * @see <a href="http://trac.blazegraph.com/ticket/867"> NSS
-             *      concurrency problem with list namespaces and create
-             *      namespace </a>
-             */
-            IIndex ndx = AbstractRelation.getIndex(indexManager,
-                    GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
-            
-            if (ndx == null) {
+    if (indexManager == null) throw new IllegalArgumentException();
 
-                if (log.isInfoEnabled())
-                    log.info("Global row store does not exist - will try to register now");
-                
-                try {
+    this.indexManager = indexManager;
+  }
 
-                    /*
-                     * Note: This specifies an split handler that keeps the
-                     * logical row together. This is a hard requirement. The
-                     * atomic read/update guarantee depends on this.
-                     * 
-                     * @todo The global row store does not get properties so
-                     * only system defaults are used when it is registered.
-                     */
-                    
-                    final IndexMetadata indexMetadata = new IndexMetadata(
-                            GLOBAL_ROW_STORE_INDEX, UUID.randomUUID());
+  /**
+   * @return The unisolated view of the GRS index
+   * @see <a href="http://trac.blazegraph.com/ticket/867">NSS concurrency problem with list
+   *     namespaces and create namespace </a>
+   * @see <a href="http://trac.blazegraph.com/ticket/1132">GlobalRowStoreHelper can hold hard
+   *     reference to GSR index (GROUP COMMIT) </a>
+   */
+  public synchronized SparseRowStore getGlobalRowStore() {
 
-                    // Ensure that splits do not break logical rows.
-                    indexMetadata
-                            .setSplitHandler(LogicalRowSplitHandler.INSTANCE);
-/*
- * This is now handled by using the UTF8 encoding of the primary key regardless
- * of the collator mode chosen (this fixes the problem with embedded nuls).
- */
-//                    if (CollatorEnum.JDK.toString().equals(
-//                            System.getProperty(KeyBuilder.Options.COLLATOR))) {
-//                        /*
-//                         * The JDK RulesBasedCollator embeds nul bytes in the
-//                         * Unicode sort keys. This makes them unsuitable for the
-//                         * SparseRowStore, which can not locate the start of the
-//                         * column name if there are embedded nuls in a Unicode
-//                         * primary key. As a work around, this forces an ASCII
-//                         * collation sequence if the JDK collator is the
-//                         * default. This is not ideal since non-ascii
-//                         * distinctions will be lost, but it is better than
-//                         * being unable to decode the column names.
-//                         */
-//                        log.warn("Forcing ASCII collator.");
-//                        indexMetadata
-//                                .setTupleSerializer(new DefaultTupleSerializer(
-//                                        new ASCIIKeyBuilderFactory()));
-//                    }
-                    
-                    // Register the index.
-                    indexManager.registerIndex(indexMetadata);
+    if (log.isInfoEnabled()) log.info("");
 
-                } catch (Exception ex) {
+    final SparseRowStore globalRowStore;
+    //        if (globalRowStore == null)
+    {
 
-                    throw new RuntimeException(ex);
+      /**
+       * The GRS view needs to be protected by an UnisolatedReadWriteIndex.
+       *
+       * @see <a href="http://trac.blazegraph.com/ticket/867">NSS concurrency problem with list
+       *     namespaces and create namespace </a>
+       */
+      IIndex ndx = AbstractRelation.getIndex(indexManager, GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
 
-                }
-
-                /**
-                 * The live view of the global row store must be wrapped by an
-                 * UnisolatedReadWriteIndex on a Journal.
-                 * 
-                 * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row
-                 *      store read/update not isolated on Journal)
-                 */
-                ndx = AbstractRelation.getIndex(indexManager,
-                        GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
-//                ndx = indexManager.getIndex(GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
-
-                if (ndx == null) {
-
-                    throw new RuntimeException("Could not find index?");
-
-                }
-
-            }
-
-            // row store is flyweight wrapper around index.
-            globalRowStore = new SparseRowStore(ndx);
-
-        }
-        
-        return globalRowStore;
-
-    }
-
-   /**
-    * Note: The hard reference to the unisolated view of the GSR is no longer
-    * cached.
-    * 
-    * @see <a href="http://trac.blazegraph.com/ticket/1132"> GlobalRowStoreHelper
-    *      can hold hard reference to GSR index (GROUP COMMIT) </a>
-    */
-//    private transient SparseRowStore globalRowStore;
-
-    /**
-     * Return a view of the global row store as of the specified timestamp IFF
-     * the backing index exists as of that timestamp.
-     */
-    public SparseRowStore get(final long timestamp) {
+      if (ndx == null) {
 
         if (log.isInfoEnabled())
-            log.info(TimestampUtility.toString(timestamp));
+          log.info("Global row store does not exist - will try to register now");
 
-        if (timestamp == ITx.UNISOLATED) {
+        try {
 
-            /* This version does an implicit create if the GRS does not exist. */
-            return getGlobalRowStore();
+          /*
+           * Note: This specifies an split handler that keeps the
+           * logical row together. This is a hard requirement. The
+           * atomic read/update guarantee depends on this.
+           *
+           * @todo The global row store does not get properties so
+           * only system defaults are used when it is registered.
+           */
 
+          final IndexMetadata indexMetadata =
+              new IndexMetadata(GLOBAL_ROW_STORE_INDEX, UUID.randomUUID());
+
+          // Ensure that splits do not break logical rows.
+          indexMetadata.setSplitHandler(LogicalRowSplitHandler.INSTANCE);
+          /*
+           * This is now handled by using the UTF8 encoding of the primary key regardless
+           * of the collator mode chosen (this fixes the problem with embedded nuls).
+           */
+          //                    if (CollatorEnum.JDK.toString().equals(
+          //                            System.getProperty(KeyBuilder.Options.COLLATOR))) {
+          //                        /*
+          //                         * The JDK RulesBasedCollator embeds nul bytes in the
+          //                         * Unicode sort keys. This makes them unsuitable for the
+          //                         * SparseRowStore, which can not locate the start of the
+          //                         * column name if there are embedded nuls in a Unicode
+          //                         * primary key. As a work around, this forces an ASCII
+          //                         * collation sequence if the JDK collator is the
+          //                         * default. This is not ideal since non-ascii
+          //                         * distinctions will be lost, but it is better than
+          //                         * being unable to decode the column names.
+          //                         */
+          //                        log.warn("Forcing ASCII collator.");
+          //                        indexMetadata
+          //                                .setTupleSerializer(new DefaultTupleSerializer(
+          //                                        new ASCIIKeyBuilderFactory()));
+          //                    }
+
+          // Register the index.
+          indexManager.registerIndex(indexMetadata);
+
+        } catch (Exception ex) {
+
+          throw new RuntimeException(ex);
         }
-        
-        final IIndex ndx;
-        
+
         /**
-         * The live view of the global row store must be wrapped by an
-         * UnisolatedReadWriteIndex on a Journal.
-         * 
-         * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row store
-         *      read/update not isolated on Journal)
+         * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
+         * Journal.
+         *
+         * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row store read/update not
+         *     isolated on Journal)
          */
-        ndx = AbstractRelation.getIndex(indexManager, GLOBAL_ROW_STORE_INDEX,
-                TimestampUtility.asHistoricalRead(timestamp));
-        
-//        ndx = indexManager.getIndex(GLOBAL_ROW_STORE_INDEX,
-//                TimestampUtility.asHistoricalRead(timestamp));
+        ndx = AbstractRelation.getIndex(indexManager, GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
+        //                ndx = indexManager.getIndex(GLOBAL_ROW_STORE_INDEX, ITx.UNISOLATED);
 
         if (ndx == null) {
 
-            return null;
-
+          throw new RuntimeException("Could not find index?");
         }
+      }
 
-        return new SparseRowStore(ndx);
-
+      // row store is flyweight wrapper around index.
+      globalRowStore = new SparseRowStore(ndx);
     }
-    
+
+    return globalRowStore;
+  }
+
+  /**
+   * Note: The hard reference to the unisolated view of the GSR is no longer cached.
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/1132">GlobalRowStoreHelper can hold hard
+   *     reference to GSR index (GROUP COMMIT) </a>
+   */
+  //    private transient SparseRowStore globalRowStore;
+
+  /**
+   * Return a view of the global row store as of the specified timestamp IFF the backing index
+   * exists as of that timestamp.
+   */
+  public SparseRowStore get(final long timestamp) {
+
+    if (log.isInfoEnabled()) log.info(TimestampUtility.toString(timestamp));
+
+    if (timestamp == ITx.UNISOLATED) {
+
+      /* This version does an implicit create if the GRS does not exist. */
+      return getGlobalRowStore();
+    }
+
+    final IIndex ndx;
+
+    /**
+     * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
+     * Journal.
+     *
+     * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row store read/update not isolated
+     *     on Journal)
+     */
+    ndx =
+        AbstractRelation.getIndex(
+            indexManager, GLOBAL_ROW_STORE_INDEX, TimestampUtility.asHistoricalRead(timestamp));
+
+    //        ndx = indexManager.getIndex(GLOBAL_ROW_STORE_INDEX,
+    //                TimestampUtility.asHistoricalRead(timestamp));
+
+    if (ndx == null) {
+
+      return null;
+    }
+
+    return new SparseRowStore(ndx);
+  }
 }

@@ -17,37 +17,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-
 /**
  * Problems with negated path expressions.
- * 
+ *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-5590">Negated path produces exception</a>
  */
 public class TestTicket5590 extends AbstractDataDrivenSPARQLTestCase {
 
-   public TestTicket5590() {
-   }
+  public TestTicket5590() {}
 
-   public TestTicket5590(String name) {
-      super(name);
-   }
+  public TestTicket5590(String name) {
+    super(name);
+  }
 
-   /**
-    * ORIGINAL QUERY:
-    * 
-    * SELECT * WHERE {
-    *     ?item <http://test/p1>/<http://test/p2>/<http://test/p3> ?x .
-    *     ?x (!<http://test/p4>)* <http://test/target> .
-    * } LIMIT 10
-    * 
-    **/
+  /**
+   * ORIGINAL QUERY:
+   *
+   * <p>SELECT * WHERE { ?item <http://test/p1>/<http://test/p2>/<http://test/p3> ?x . ?x
+   * (!<http://test/p4>)* <http://test/target> . } LIMIT 10
+   */
   public void test_ticket_5590a() throws Exception {
-     new TestHelper("ticket-5590a",// testURI,
-           "ticket-5590a.rq",// queryFileURL
-           "ticket-5590a.trig",// dataFileURL
-           "ticket-5590a.srx",// resultFileURL
-           false
-     ).runTest();
-  }   
-
+    new TestHelper(
+            "ticket-5590a", // testURI,
+            "ticket-5590a.rq", // queryFileURL
+            "ticket-5590a.trig", // dataFileURL
+            "ticket-5590a.srx", // resultFileURL
+            false)
+        .runTest();
+  }
 }

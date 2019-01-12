@@ -23,124 +23,105 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule;
 
-
 import junit.framework.TestCase2;
 
 /**
  * Unit tests for {@link Slice}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSlice extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestSlice() {
+  /** */
+  public TestSlice() {}
+
+  /** @param arg0 */
+  public TestSlice(String arg0) {
+    super(arg0);
+  }
+
+  /**
+   * Tests some fence posts for the {@link Slice} ctor, verifies the computation of {@link
+   * ISlice#getLast()}, and the reporting of the properties specified to the ctor.
+   */
+  public void test_slice_ctor() {
+
+    {
+      final ISlice slice = new Slice(0L, 1L);
+
+      assertEquals(slice.getOffset(), 0L);
+
+      assertEquals(slice.getLimit(), 1L);
+
+      assertEquals(slice.getLast(), 1L);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestSlice(String arg0) {
-        super(arg0);
+    {
+      final ISlice slice = new Slice(1L, 1L);
+
+      assertEquals(slice.getOffset(), 1L);
+
+      assertEquals(slice.getLimit(), 1L);
+
+      assertEquals(slice.getLast(), 2L);
     }
 
-    /**
-     * Tests some fence posts for the {@link Slice} ctor, verifies the
-     * computation of {@link ISlice#getLast()}, and the reporting of the
-     * properties specified to the ctor.
-     */
-    public void test_slice_ctor() {
-        
-        {
-            final ISlice slice = new Slice(0L, 1L);
-            
-            assertEquals(slice.getOffset(), 0L);
-            
-            assertEquals(slice.getLimit(), 1L);
-            
-            assertEquals(slice.getLast(), 1L);
-            
-        }
-        
-        {
-            final ISlice slice = new Slice(1L, 1L);
-            
-            assertEquals(slice.getOffset(), 1L);
-            
-            assertEquals(slice.getLimit(), 1L);
-            
-            assertEquals(slice.getLast(), 2L);
-            
-        }
-        
-        {
-            
-            final ISlice slice = new Slice(0L, Long.MAX_VALUE);
-            
-            assertEquals(slice.getOffset(), 0L);
-            
-            assertEquals(slice.getLimit(), Long.MAX_VALUE);
-            
-            assertEquals(slice.getLast(), Long.MAX_VALUE);
-            
-        }
+    {
+      final ISlice slice = new Slice(0L, Long.MAX_VALUE);
 
-        // verify that last does not overflow.
-        {
-            
-            final ISlice slice = new Slice(2L, Long.MAX_VALUE);
-            
-            assertEquals(slice.getOffset(), 2L);
-            
-            assertEquals(slice.getLimit(), Long.MAX_VALUE);
-            
-            assertEquals(slice.getLast(), Long.MAX_VALUE);
-            
-        }
-        
-    }
-    
-    public void test_slice_ctor_correctRejection() {
+      assertEquals(slice.getOffset(), 0L);
 
-        try {
+      assertEquals(slice.getLimit(), Long.MAX_VALUE);
 
-            new Slice(-1L, 100L);
-            
-            fail("Expecting: " + IllegalArgumentException.class);
-            
-        } catch (IllegalArgumentException ex) {
-            
-            log.info("ignoring expected exception");
-            
-        }
-
-        try {
-
-            new Slice(12L, 0L);
-            
-            fail("Expecting: " + IllegalArgumentException.class);
-            
-        } catch (IllegalArgumentException ex) {
-            
-            log.info("ignoring expected exception");
-            
-        }
-
-        try {
-
-            new Slice(1L, -1L);
-            
-            fail("Expecting: " + IllegalArgumentException.class);
-            
-        } catch (IllegalArgumentException ex) {
-            
-            log.info("ignoring expected exception");
-            
-        }
-
+      assertEquals(slice.getLast(), Long.MAX_VALUE);
     }
 
+    // verify that last does not overflow.
+    {
+      final ISlice slice = new Slice(2L, Long.MAX_VALUE);
+
+      assertEquals(slice.getOffset(), 2L);
+
+      assertEquals(slice.getLimit(), Long.MAX_VALUE);
+
+      assertEquals(slice.getLast(), Long.MAX_VALUE);
+    }
+  }
+
+  public void test_slice_ctor_correctRejection() {
+
+    try {
+
+      new Slice(-1L, 100L);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      log.info("ignoring expected exception");
+    }
+
+    try {
+
+      new Slice(12L, 0L);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      log.info("ignoring expected exception");
+    }
+
+    try {
+
+      new Slice(1L, -1L);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      log.info("ignoring expected exception");
+    }
+  }
 }

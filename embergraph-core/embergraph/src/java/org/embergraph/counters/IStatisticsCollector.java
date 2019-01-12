@@ -27,30 +27,23 @@ package org.embergraph.counters;
 
 /**
  * Interface for collecting performance counters for a host or a process.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IStatisticsCollector extends ICounterSetAccess {
 
-    /**
-     * The interval in seconds at which the counter values are sampled.
-     */
-    public int getInterval();
+  /** The interval in seconds at which the counter values are sampled. */
+  public int getInterval();
 
-//    /**
-//     * Return the counter hierarchy.
-//     */
-//    public CounterSet getCounters();
+  //    /**
+  //     * Return the counter hierarchy.
+  //     */
+  //    public CounterSet getCounters();
 
-    /**
-     * Start collecting performance data.
-     */
-    public void start();
+  /** Start collecting performance data. */
+  public void start();
 
-    /**
-     * Stop collecting performance data.
-     */
-    public void stop();
-
+  /** Stop collecting performance data. */
+  public void stop();
 }

@@ -16,84 +16,65 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 package org.embergraph.rdf.spo;
 
 import java.util.HashSet;
-
 import org.embergraph.rdf.internal.IV;
 
 /**
- * "IN" filter for the context position based on a native long hash set
- * containing the acceptable graph identifiers. While evaluation of the access
- * path will be ordered, the filter does not maintain evolving state so a hash
- * set will likely beat a binary search.
- * 
+ * "IN" filter for the context position based on a native long hash set containing the acceptable
+ * graph identifiers. While evaluation of the access path will be ordered, the filter does not
+ * maintain evolving state so a hash set will likely beat a binary search.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: InGraphHashSetFilter.java 3694 2010-09-30 14:54:59Z mrpersonick
- *          $
- * 
+ * @version $Id: InGraphHashSetFilter.java 3694 2010-09-30 14:54:59Z mrpersonick $
  * @see InGraphBinarySearchFilter
  */
 @SuppressWarnings("rawtypes")
 public final class InGraphHashSetFilter<E extends ISPO> extends SPOFilter<E> {
 
-    /**
-     * 
+  /** */
+  private static final long serialVersionUID = -6059009162692785772L;
+
+  private final HashSet<IV> contextSet;
+
+  /** @param graphs The set of acceptable graph identifiers. */
+  public InGraphHashSetFilter(final int initialCapacity, final Iterable<IV> graphs) {
+
+    /*
+     * Create a sorted array of term identifiers for the set of contexts
+     * we will accept.
      */
-    private static final long serialVersionUID = -6059009162692785772L;
 
-    private final HashSet<IV> contextSet;
-    
-    /**
-     * 
-     * @param graphs
-     *            The set of acceptable graph identifiers.
-     */
-    public InGraphHashSetFilter(final int initialCapacity,
-            final Iterable<IV> graphs) {
+    contextSet = new HashSet<IV>(initialCapacity);
 
-        /*
-         * Create a sorted array of term identifiers for the set of contexts
-         * we will accept.
-         */
+    for (IV termId : graphs) {
 
-        contextSet = new HashSet<IV>(initialCapacity);
-        
-        for (IV termId : graphs) {
-        
-            if (termId != null) {
+      if (termId != null) {
 
-                contextSet.add(termId);
-                
-            }
-            
-        }
-        
+        contextSet.add(termId);
+      }
+    }
+  }
+
+  @Override
+  public boolean isValid(final Object o) {
+
+    if (!canAccept(o)) {
+
+      return true;
     }
 
-    @Override
-    public boolean isValid(final Object o) {
-        
-        if (!canAccept(o)) {
-            
-            return true;
-            
-        }
-        
-        return accept((ISPO) o);
-        
-    }
+    return accept((ISPO) o);
+  }
 
-    private boolean accept(final ISPO o) {
-        
-        final ISPO spo = (ISPO) o;
-        
-        return contextSet.contains(spo.c());
-        
-    }
+  private boolean accept(final ISPO o) {
 
-    @Override
-    public String toString() {
+    final ISPO spo = (ISPO) o;
 
-        return getClass().getName() + "{size=" + contextSet.size() + "}";
-        
-    }
+    return contextSet.contains(spo.c());
+  }
 
+  @Override
+  public String toString() {
+
+    return getClass().getName() + "{size=" + contextSet.size() + "}";
+  }
 }

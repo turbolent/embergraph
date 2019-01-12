@@ -22,31 +22,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.io.IOException;
-
 import org.embergraph.service.IService;
 
 /**
  * A service for unique timestamps.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITimestampService extends IService {
 
-    /**
-     * Return the next unique timestamp. Timestamps must be strictly increasing.
-     * <p>
-     * Note: This method MUST return strictly increasing values, even when it is
-     * invoked by concurrent threads. While other implementations are possible
-     * and may be more efficient, one way to insure thread safety is to
-     * synchronize on some object such that the implementaiton exhibits a FIFO
-     * behavior.
-     * 
-     * @throws IOException
-     *             if there is an RMI problem.
-     * 
-     * @see TimestampServiceUtil#nextTimestamp(ITimestampService)
-     */
-    public long nextTimestamp() throws IOException;
-
+  /**
+   * Return the next unique timestamp. Timestamps must be strictly increasing.
+   *
+   * <p>Note: This method MUST return strictly increasing values, even when it is invoked by
+   * concurrent threads. While other implementations are possible and may be more efficient, one way
+   * to insure thread safety is to synchronize on some object such that the implementaiton exhibits
+   * a FIFO behavior.
+   *
+   * @throws IOException if there is an RMI problem.
+   * @see TimestampServiceUtil#nextTimestamp(ITimestampService)
+   */
+  public long nextTimestamp() throws IOException;
 }

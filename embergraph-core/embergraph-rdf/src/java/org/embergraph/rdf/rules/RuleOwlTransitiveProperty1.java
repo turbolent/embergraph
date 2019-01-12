@@ -21,52 +21,49 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NE;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
 
 /**
  * owl:TransitiveProperty1
- * 
+ *
  * <pre>
  * (a rdf:type owl:TransitiveProperty), (x a y), (y a z) -&gt; (x a z)
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class RuleOwlTransitiveProperty1 extends Rule
-{
+public class RuleOwlTransitiveProperty1 extends Rule {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param vocab
-     */
-    public RuleOwlTransitiveProperty1(String relationName, Vocabulary vocab) {
+  /** @param vocab */
+  public RuleOwlTransitiveProperty1(String relationName, Vocabulary vocab) {
 
-        super(  "owlTransitiveProperty1",
-                new SPOPredicate(relationName,var("x"), var("a"), var("z")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.TRANSITIVEPROPERTY)),
-                    new SPOPredicate(relationName,var("x"), var("a"), var("y")),
-                    new SPOPredicate(relationName,var("y"), var("a"), var("z"))
-                }, new IConstraint[] {
-        			Constraint.wrap(new NE(var("x"),var("y"))),
-        			Constraint.wrap(new NE(var("y"),var("z"))),
-					Constraint.wrap(new NE(var("x"),var("z"))),
-                    }
-                );
-        
-    }
-
+    super(
+        "owlTransitiveProperty1",
+        new SPOPredicate(relationName, var("x"), var("a"), var("z")),
+        new SPOPredicate[] {
+          new SPOPredicate(
+              relationName,
+              var("a"),
+              vocab.getConstant(RDF.TYPE),
+              vocab.getConstant(OWL.TRANSITIVEPROPERTY)),
+          new SPOPredicate(relationName, var("x"), var("a"), var("y")),
+          new SPOPredicate(relationName, var("y"), var("a"), var("z"))
+        },
+        new IConstraint[] {
+          Constraint.wrap(new NE(var("x"), var("y"))),
+          Constraint.wrap(new NE(var("y"), var("z"))),
+          Constraint.wrap(new NE(var("x"), var("z"))),
+        });
+  }
 }

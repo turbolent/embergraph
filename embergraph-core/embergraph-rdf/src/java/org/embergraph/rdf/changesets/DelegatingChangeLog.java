@@ -18,129 +18,104 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.changesets;
 
 import java.util.concurrent.CopyOnWriteArraySet;
-
 import org.apache.log4j.Logger;
 
 /**
- * This delegating change log allows change events to be propagated to multiple
- * delegates through a listener pattern.
- * 
+ * This delegating change log allows change events to be propagated to multiple delegates through a
+ * listener pattern.
+ *
  * @author mike
  */
 public class DelegatingChangeLog implements IChangeLog {
 
-    private static transient final Logger log = Logger
-            .getLogger(DelegatingChangeLog.class);
+  private static final transient Logger log = Logger.getLogger(DelegatingChangeLog.class);
 
-    private final CopyOnWriteArraySet<IChangeLog> delegates;
+  private final CopyOnWriteArraySet<IChangeLog> delegates;
 
-    public DelegatingChangeLog() {
-        
-        this.delegates = new CopyOnWriteArraySet<IChangeLog>();
-        
+  public DelegatingChangeLog() {
+
+    this.delegates = new CopyOnWriteArraySet<IChangeLog>();
+  }
+
+  @Override
+  public String toString() {
+
+    return getClass().getName() + "{delegates=" + delegates.toString() + "}";
+  }
+
+  public void addDelegate(final IChangeLog delegate) {
+
+    this.delegates.add(delegate);
+  }
+
+  public void removeDelegate(final IChangeLog delegate) {
+
+    this.delegates.remove(delegate);
+  }
+
+  @Override
+  public void changeEvent(final IChangeRecord record) {
+
+    if (log.isInfoEnabled()) log.info(record);
+
+    for (IChangeLog delegate : delegates) {
+
+      delegate.changeEvent(record);
     }
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public void transactionBegin() {
 
-       return getClass().getName() + "{delegates=" + delegates.toString() + "}";
-       
+    if (log.isInfoEnabled()) log.info("");
+
+    for (IChangeLog delegate : delegates) {
+
+      delegate.transactionBegin();
     }
-    
-    public void addDelegate(final IChangeLog delegate) {
-        
-        this.delegates.add(delegate);
-        
+  }
+
+  @Override
+  public void transactionPrepare() {
+
+    if (log.isInfoEnabled()) log.info("");
+
+    for (IChangeLog delegate : delegates) {
+
+      delegate.transactionPrepare();
     }
+  }
 
-    public void removeDelegate(final IChangeLog delegate) {
+  @Override
+  public void transactionCommited(final long commitTime) {
 
-        this.delegates.remove(delegate);
-        
+    if (log.isInfoEnabled()) log.info("transaction committed");
+
+    for (IChangeLog delegate : delegates) {
+
+      delegate.transactionCommited(commitTime);
     }
+  }
 
-    @Override
-    public void changeEvent(final IChangeRecord record) {
+  @Override
+  public void transactionAborted() {
 
-        if (log.isInfoEnabled())
-            log.info(record);
+    if (log.isInfoEnabled()) log.info("transaction aborted");
 
-        for (IChangeLog delegate : delegates) {
+    for (IChangeLog delegate : delegates) {
 
-            delegate.changeEvent(record);
-
-        }
-
+      delegate.transactionAborted();
     }
+  }
 
-    @Override
-    public void transactionBegin() {
+  @Override
+  public void close() {
 
-        if (log.isInfoEnabled())
-            log.info("");
+    if (log.isInfoEnabled()) log.info("close");
 
-        for (IChangeLog delegate : delegates) {
+    for (IChangeLog delegate : delegates) {
 
-            delegate.transactionBegin();
-
-        }
-
+      delegate.close();
     }
-    
-    @Override
-    public void transactionPrepare() {
-
-        if (log.isInfoEnabled())
-            log.info("");
-
-        for (IChangeLog delegate : delegates) {
-
-            delegate.transactionPrepare();
-
-        }
-
-    }
-    
-    @Override
-    public void transactionCommited(final long commitTime) {
-
-        if (log.isInfoEnabled())
-            log.info("transaction committed");
-
-        for (IChangeLog delegate : delegates) {
-
-            delegate.transactionCommited(commitTime);
-
-        }
-
-    }
-
-    @Override
-    public void transactionAborted() {
-
-        if (log.isInfoEnabled())
-            log.info("transaction aborted");
-
-        for (IChangeLog delegate : delegates) {
-
-            delegate.transactionAborted();
-
-        }
-
-    }
-
-    @Override
-    public void close() {
-
-        if (log.isInfoEnabled())
-            log.info("close");
-
-        for (IChangeLog delegate : delegates) {
-
-            delegate.close();
-
-        }
-
-    }
-
+  }
 }

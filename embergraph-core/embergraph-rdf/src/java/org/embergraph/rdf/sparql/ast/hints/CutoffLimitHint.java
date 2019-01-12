@@ -28,28 +28,28 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Limit the input into joins by limiting the number of elements read
- * from an access path.  Not exactly a cutoff join, which limits output
- * from the join rather than input into it.
+ * Limit the input into joins by limiting the number of elements read from an access path. Not
+ * exactly a cutoff join, which limits output from the join rather than input into it.
  */
 final class CutoffLimitHint extends AbstractLongQueryHint {
 
-    protected CutoffLimitHint() {
-        super(QueryHints.CUTOFF_LIMIT, Long.MAX_VALUE);
+  protected CutoffLimitHint() {
+    super(QueryHints.CUTOFF_LIMIT, Long.MAX_VALUE);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Long value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setQueryHint(context, scope, op, getName(), value);
+
+      return;
     }
-
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Long value) {
-
-        if (op instanceof StatementPatternNode) {
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-            return;
-
-        }
-
-    }
-
+  }
 }

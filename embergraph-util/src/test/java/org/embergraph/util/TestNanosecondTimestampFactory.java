@@ -25,98 +25,87 @@ import junit.framework.TestCase;
 
 /**
  * Test suite for {@link NanosecondTimestampFactory}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNanosecondTimestampFactory extends TestCase {
 
-    public TestNanosecondTimestampFactory() {
-        
+  public TestNanosecondTimestampFactory() {}
+
+  public TestNanosecondTimestampFactory(String arg0) {
+
+    super(arg0);
+  }
+
+  /**
+   * Test determines whether nano times are always distinct from the last generated nanos time (as
+   * assigned by {@link System#nanoTime()}.
+   *
+   * <p>Note: This test is NOT designed to pass/fail but simply to test determine a characteristic
+   * of the platform on which it is executing.
+   */
+  public void test_nextNanoTime() {
+
+    final int limit = 1000000;
+
+    long lastNanoTime = System.nanoTime();
+    long nanoTime;
+    long minDiff = Long.MAX_VALUE;
+
+    for (int i = 0; i < limit; i++) {
+
+      nanoTime = System.nanoTime();
+
+      if (nanoTime == lastNanoTime) {
+
+        System.err.println(
+            "This platform can generate identical timestamps with nanosecond resolution");
+
+        return;
+      }
+
+      long diff = nanoTime - lastNanoTime;
+
+      if (diff < 0) diff = -diff;
+
+      if (diff < minDiff) minDiff = diff;
+
+      lastNanoTime = nanoTime;
     }
 
-    public TestNanosecondTimestampFactory(String arg0) {
+    System.err.println("Nano times appear to be distinct on this platorm.");
 
-        super(arg0);
-        
+    System.err.println("Minimum difference in nanos is " + minDiff + " over " + limit + " trials");
+  }
+
+  /**
+   * Test verifies that nano times are always distinct from the last generated nanos time (as
+   * assigned by {@link NanosecondTimestampFactory#nextNanoTime()}.
+   */
+  public void test_nextNanoTime2() {
+
+    final int limit = 1000000;
+
+    long lastNanoTime = System.nanoTime() - 1;
+    long nanoTime;
+    long minDiff = Long.MAX_VALUE;
+
+    for (int i = 0; i < limit; i++) {
+
+      nanoTime = NanosecondTimestampFactory.nextNanoTime();
+
+      if (nanoTime == lastNanoTime) fail("Same nano time?");
+
+      long diff = nanoTime - lastNanoTime;
+
+      if (diff < 0) diff = -diff;
+
+      if (diff < minDiff) minDiff = diff;
+
+      lastNanoTime = nanoTime;
     }
 
-    /**
-     * Test determines whether nano times are always distinct from the last
-     * generated nanos time (as assigned by {@link System#nanoTime()}.
-     * <p>
-     * Note: This test is NOT designed to pass/fail but simply to test determine
-     * a characteristic of the platform on which it is executing.
-     */
-    public void test_nextNanoTime() {
-
-        final int limit = 1000000;
-        
-        long lastNanoTime = System.nanoTime();
-        long nanoTime;
-        long minDiff = Long.MAX_VALUE;
-        
-        for( int i=0; i<limit; i++ ) {
-
-            nanoTime = System.nanoTime();
-            
-            if (nanoTime == lastNanoTime) {
-
-                System.err
-                        .println("This platform can generate identical timestamps with nanosecond resolution");
-            
-                return;
-                
-            }
-
-            long diff = nanoTime - lastNanoTime;
-            
-            if( diff < 0 ) diff = -diff;
-            
-            if( diff < minDiff ) minDiff = diff;
-            
-            lastNanoTime = nanoTime;
-            
-        }
-
-        System.err.println("Nano times appear to be distinct on this platorm.");
-
-        System.err.println("Minimum difference in nanos is " + minDiff
-                + " over " + limit + " trials");
-        
-    }
-    
-    /**
-     * Test verifies that nano times are always distinct from the last generated
-     * nanos time (as assigned by {@link NanosecondTimestampFactory#nextNanoTime()}.
-     */
-    public void test_nextNanoTime2() {
-
-        final int limit = 1000000;
-        
-        long lastNanoTime = System.nanoTime() - 1;
-        long nanoTime;
-        long minDiff = Long.MAX_VALUE;
-        
-        for( int i=0; i<limit; i++ ) {
-
-            nanoTime = NanosecondTimestampFactory.nextNanoTime();
-            
-            if( nanoTime == lastNanoTime ) fail("Same nano time?");
-
-            long diff = nanoTime - lastNanoTime;
-            
-            if( diff < 0 ) diff = -diff;
-            
-            if( diff < minDiff ) minDiff = diff;
-            
-            lastNanoTime = nanoTime;
-            
-        }
-        
-        System.err.println("Minimum difference in nanos is " + minDiff
-                + " over " + limit + " trials");
-        
-    }
-    
+    System.err.println("Minimum difference in nanos is " + minDiff + " over " + limit + " trials");
+  }
 }

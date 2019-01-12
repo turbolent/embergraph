@@ -25,48 +25,37 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 
 /**
- * Service options base class for embergraph aware services. Such services are
- * expected to interchange {@link IBindingSet}s containing {@link IV}s. The
- * {@link IV}s are NOT guaranteed to be materialized.
- * 
+ * Service options base class for embergraph aware services. Such services are expected to
+ * interchange {@link IBindingSet}s containing {@link IV}s. The {@link IV}s are NOT guaranteed to be
+ * materialized.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: EmbergraphServiceOptions.java 6077 2012-03-06 20:58:36Z
- *          thompsonbry $
+ * @version $Id: EmbergraphServiceOptions.java 6077 2012-03-06 20:58:36Z thompsonbry $
  */
-public class EmbergraphNativeServiceOptions extends ServiceOptionsBase implements
-        INativeServiceOptions {
+public class EmbergraphNativeServiceOptions extends ServiceOptionsBase
+    implements INativeServiceOptions {
 
-    /**
-     * Always returns <code>true</code>.
-     */
-    @Override
-    final public boolean isEmbergraphNativeService() {
-        return true;
-    }
+  /** Always returns <code>true</code>. */
+  @Override
+  public final boolean isEmbergraphNativeService() {
+    return true;
+  }
 
-    /**
-     * Always returns <code>false</code>.
-     */
-    @Override
-    final public boolean isRemoteService() {
-        return false;
-    }
+  /** Always returns <code>false</code>. */
+  @Override
+  public final boolean isRemoteService() {
+    return false;
+  }
 
-    /**
-     * Always returns <code>false</code> (response is ignored).
-     * 
-     */
-    @Override
-    final public boolean isSparql10() {
-        return false;
-    }
-    
-    /**
-     * Always returns <code>null</code> (response is ignored).
-     */
-	@Override
-	final public SPARQLVersion getSPARQLVersion() {
-		return null;
-	}
+  /** Always returns <code>false</code> (response is ignored). */
+  @Override
+  public final boolean isSparql10() {
+    return false;
+  }
 
+  /** Always returns <code>null</code> (response is ignored). */
+  @Override
+  public final SPARQLVersion getSPARQLVersion() {
+    return null;
+  }
 }

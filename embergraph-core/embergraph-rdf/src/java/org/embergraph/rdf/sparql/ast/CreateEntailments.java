@@ -22,43 +22,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * The CREATE ENTAILMENTS operation compute entailments in the Graph Store.
- * 
+ *
  * <pre>
  * CREATE ENTAILMENTS
  * </pre>
- * 
+ *
  * @see wiki:CREATE_ENTAILMENTS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class CreateEntailments extends GraphUpdate {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1170605083868090964L;
-    
-    public CreateEntailments() {
-        super(UpdateType.CreateEntailments);
-    }
+  /** */
+  private static final long serialVersionUID = -1170605083868090964L;
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public CreateEntailments(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-    }
-    
-    public String toString(final int indent) {
-    	return getClass().getSimpleName();
-    }
+  public CreateEntailments() {
+    super(UpdateType.CreateEntailments);
+  }
 
+  /**
+   * @param args
+   * @param anns
+   */
+  public CreateEntailments(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  public String toString(final int indent) {
+    return getClass().getSimpleName();
+  }
 }

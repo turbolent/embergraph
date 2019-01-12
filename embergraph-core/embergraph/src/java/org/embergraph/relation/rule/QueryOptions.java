@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.rule;
 
 import java.util.Arrays;
-
 import org.embergraph.bop.solutions.ISortOrder;
 
 /**
@@ -33,99 +32,93 @@ import org.embergraph.bop.solutions.ISortOrder;
  */
 public class QueryOptions implements IQueryOptions {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4926866732224421937L;
+  /** */
+  private static final long serialVersionUID = -4926866732224421937L;
 
-    private final boolean distinct;
+  private final boolean distinct;
 
-    private final boolean stable;
+  private final boolean stable;
 
-    private final ISortOrder[] orderBy;
+  private final ISortOrder[] orderBy;
 
-    private final ISlice slice;
+  private final ISlice slice;
 
-    /**
-     * An instance specifying NONE of the constraints declared by
-     * {@link IQueryOptions}.
-     */
-    public static final transient IQueryOptions NONE = new QueryOptions(
-            false/* distinct */, false/* stable */, null/* orderBy */, null/* Slice */);
+  /** An instance specifying NONE of the constraints declared by {@link IQueryOptions}. */
+  public static final transient IQueryOptions NONE =
+      new QueryOptions(
+          false /* distinct */, false /* stable */, null /* orderBy */, null /* Slice */);
 
-    /**
-     * An instance specifying <code>distinct := true</code> but none of the
-     * other {@link IQueryOptions}.
-     */
-    public static final transient IQueryOptions DISTINCT = new QueryOptions(
-            true/* distinct */, false/* stable */, null/* orderBy */, null/* querySlice */);
-    
-    /**
-     * @param distinct
-     * @param stable
-     * @param orderBy
-     * @param slice
-     * @throws IllegalArgumentException
-     *             if a <i>stable</i> is <code>false</code> and a slice is
-     *             specified with a non-zero offset and/or a non-{@link Long#MAX_VALUE}
-     *             limit
-     */
-    public QueryOptions(final boolean distinct, final boolean stable,
-            final ISortOrder[] orderBy, final ISlice slice) {
+  /**
+   * An instance specifying <code>distinct := true</code> but none of the other {@link
+   * IQueryOptions}.
+   */
+  public static final transient IQueryOptions DISTINCT =
+      new QueryOptions(
+          true /* distinct */, false /* stable */, null /* orderBy */, null /* querySlice */);
 
-        this.distinct = distinct;
+  /**
+   * @param distinct
+   * @param stable
+   * @param orderBy
+   * @param slice
+   * @throws IllegalArgumentException if a <i>stable</i> is <code>false</code> and a slice is
+   *     specified with a non-zero offset and/or a non-{@link Long#MAX_VALUE} limit
+   */
+  public QueryOptions(
+      final boolean distinct,
+      final boolean stable,
+      final ISortOrder[] orderBy,
+      final ISlice slice) {
 
-        this.stable = stable;
-        
-        // MAY be null.  @todo check elements not null when orderBy not null.
-        this.orderBy = orderBy;
-        
-        // MAY be null.
-        this.slice = slice;
+    this.distinct = distinct;
 
-        if (!stable
-                && slice != null
-                && (slice.getOffset() != 0L || slice.getLimit() != Long.MAX_VALUE)) {
+    this.stable = stable;
 
-            throw new IllegalArgumentException("slices must be stable");
-            
-        }
-        
+    // MAY be null.  @todo check elements not null when orderBy not null.
+    this.orderBy = orderBy;
+
+    // MAY be null.
+    this.slice = slice;
+
+    if (!stable
+        && slice != null
+        && (slice.getOffset() != 0L || slice.getLimit() != Long.MAX_VALUE)) {
+
+      throw new IllegalArgumentException("slices must be stable");
     }
+  }
 
-    final public boolean isDistinct() {
-        
-        return distinct;
-        
-    }
+  public final boolean isDistinct() {
 
-    final public boolean isStable() {
-        
-        return stable;
-        
-    }
+    return distinct;
+  }
 
-    final public ISortOrder[] getOrderBy() {
-        
-        return orderBy;
-        
-    }
+  public final boolean isStable() {
 
-    final public ISlice getSlice() {
+    return stable;
+  }
 
-        return slice;
-        
-    }
+  public final ISortOrder[] getOrderBy() {
 
-    public String toString() {
+    return orderBy;
+  }
 
-        return "QueryOptions" +
-            "{ distinct=" + distinct +
-            ", stable=" + stable +
-            ", orderBy=" + (orderBy == null ? "N/A" : Arrays.toString(orderBy)) +
-            ", slice=" + slice +
-            "}";
+  public final ISlice getSlice() {
 
-    }
-    
+    return slice;
+  }
+
+  public String toString() {
+
+    return "QueryOptions"
+        + "{ distinct="
+        + distinct
+        + ", stable="
+        + stable
+        + ", orderBy="
+        + (orderBy == null ? "N/A" : Arrays.toString(orderBy))
+        + ", slice="
+        + slice
+        + "}";
+  }
 }

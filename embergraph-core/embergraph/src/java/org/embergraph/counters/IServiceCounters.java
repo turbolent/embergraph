@@ -25,16 +25,15 @@ package org.embergraph.counters;
 
 /**
  * Various counter names, paths, in common use by some services.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IServiceCounters extends ICounterHierarchy {
 
-    /**
-     * The counter whose value is the URL of an httpd service that exposes the
-     * {@link ICounterSet} of a service.
-     */
-    String LOCAL_HTTPD = "Local httpd"; 
-    
+  /**
+   * The counter whose value is the URL of an httpd service that exposes the {@link ICounterSet} of
+   * a service.
+   */
+  String LOCAL_HTTPD = "Local httpd";
 }

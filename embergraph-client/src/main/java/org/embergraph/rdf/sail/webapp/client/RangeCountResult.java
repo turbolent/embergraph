@@ -21,24 +21,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Class representing the result of a fast range count operation against 
- * the REST API.
- */
+/** Class representing the result of a fast range count operation against the REST API. */
 class RangeCountResult {
 
-    /** The range count. */
-    public final long rangeCount;
+  /** The range count. */
+  public final long rangeCount;
 
-    /** The elapsed time for the operation. */
-    public final long elapsedMillis;
+  /** The elapsed time for the operation. */
+  public final long elapsedMillis;
 
-    public RangeCountResult(final long rangeCount, final long elapsedMillis) {
-        
-        this.rangeCount = rangeCount;
-        
-        this.elapsedMillis = elapsedMillis;
-        
-    }
+  public RangeCountResult(final long rangeCount, final long elapsedMillis) {
 
+    this.rangeCount = rangeCount;
+
+    this.elapsedMillis = elapsedMillis;
+  }
 }

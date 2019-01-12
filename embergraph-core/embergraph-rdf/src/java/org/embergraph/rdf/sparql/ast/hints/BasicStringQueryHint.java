@@ -25,21 +25,21 @@ import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Basic string query hint.
- */
+/** Basic string query hint. */
 public class BasicStringQueryHint extends AbstractStringQueryHint {
 
-    public BasicStringQueryHint(final String name, final String defaultValue) {
-        super(name, defaultValue);
-    }
+  public BasicStringQueryHint(final String name, final String defaultValue) {
+    super(name, defaultValue);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final String value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final String value) {
 
-        _setQueryHint(context, scope, op, getName(), value);
-
-    }
-
+    _setQueryHint(context, scope, op, getName(), value);
+  }
 }

@@ -30,44 +30,48 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * Query hint deciding on the {@link IChunkHandler} to be used.
- * 
+ *
  * @see BLZG-533 (Vector query engine on the native heap)
  */
-final class QueryEngineChunkHandlerQueryHint extends AbstractQueryHint<QueryEngineChunkHandlerEnum> {
+final class QueryEngineChunkHandlerQueryHint
+    extends AbstractQueryHint<QueryEngineChunkHandlerEnum> {
 
-    protected QueryEngineChunkHandlerQueryHint() {
-        super(QueryHints.QUERY_ENGINE_CHUNK_HANDLER,
-                QueryEngineChunkHandlerEnum.valueOf(QueryHints.DEFAULT_QUERY_ENGINE_CHUNK_HANDLER.getClass()));
-    }
+  protected QueryEngineChunkHandlerQueryHint() {
+    super(
+        QueryHints.QUERY_ENGINE_CHUNK_HANDLER,
+        QueryEngineChunkHandlerEnum.valueOf(
+            QueryHints.DEFAULT_QUERY_ENGINE_CHUNK_HANDLER.getClass()));
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final QueryEngineChunkHandlerEnum value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final QueryEngineChunkHandlerEnum value) {
 
-        switch (scope) {
-        case Query:
-            switch(value) {
-            case Managed:
-                context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.MANAGED_HEAP_INSTANCE;
-                break;
-            case Native:
-                context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.NATIVE_HEAP_INSTANCE;
-                break;
-            default:
-                throw new UnsupportedOperationException();
-            }
-            return;
+    switch (scope) {
+      case Query:
+        switch (value) {
+          case Managed:
+            context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.MANAGED_HEAP_INSTANCE;
+            break;
+          case Native:
+            context.queryEngineChunkHandler = NativeHeapStandloneChunkHandler.NATIVE_HEAP_INSTANCE;
+            break;
+          default:
+            throw new UnsupportedOperationException();
         }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
+        return;
     }
 
-    @Override
-    public QueryEngineChunkHandlerEnum validate(final String value) {
-        
-        return QueryEngineChunkHandlerEnum.valueOf(value);
-        
-    }
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 
+  @Override
+  public QueryEngineChunkHandlerEnum validate(final String value) {
+
+    return QueryEngineChunkHandlerEnum.valueOf(value);
+  }
 }

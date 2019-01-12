@@ -23,25 +23,18 @@ package org.embergraph.rdf.store;
 
 /**
  * Base class for test suites for inference engine
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @todo This currently adds nothing and could be removed.
  */
-abstract public class AbstractTripleStoreTestCase extends ProxyTestCase {
+public abstract class AbstractTripleStoreTestCase extends ProxyTestCase {
 
-    /**
-     * 
-     */
-    public AbstractTripleStoreTestCase() {
-    }
+  /** */
+  public AbstractTripleStoreTestCase() {}
 
-    /**
-     * @param name
-     */
-    public AbstractTripleStoreTestCase(String name) {
-        super(name);
-    }
-
+  /** @param name */
+  public AbstractTripleStoreTestCase(String name) {
+    super(name);
+  }
 }

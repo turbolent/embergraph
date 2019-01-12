@@ -21,34 +21,29 @@ import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
 /**
- * NOP aggregator does nothing and returns <code>null</code>. This is used for
- * parallelizing operations that require a result handler to stripe them against
- * the index.
- * 
- * @author bryan
+ * NOP aggregator does nothing and returns <code>null</code>. This is used for parallelizing
+ * operations that require a result handler to stripe them against the index.
  *
+ * @author bryan
  * @param <R>
  * @param <A>
- * 
  * @see BLZG-1537 (Schedule more IOs when loading data)
  */
 public class NopAggregator<R, A> implements IResultHandler<R, A> {
 
-	@SuppressWarnings("rawtypes")
-	public static final IResultHandler INSTANCE = new NopAggregator();
+  @SuppressWarnings("rawtypes")
+  public static final IResultHandler INSTANCE = new NopAggregator();
 
-	public NopAggregator() {
-	}
+  public NopAggregator() {}
 
-	@Override
-	public void aggregate(final R result, final Split split) {
-		// NOP
-	}
+  @Override
+  public void aggregate(final R result, final Split split) {
+    // NOP
+  }
 
-	@Override
-	public A getResult() {
-		// NOP
-		return null;
-	}
-
+  @Override
+  public A getResult() {
+    // NOP
+    return null;
+  }
 }

@@ -4,34 +4,31 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTBlankNode extends ASTRDFValue {
 
-	private String id;
+  private String id;
 
-	public ASTBlankNode(int id) {
-		super(id);
-	}
+  public ASTBlankNode(int id) {
+    super(id);
+  }
 
-	public ASTBlankNode(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTBlankNode(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getID() {
-		return id;
-	}
+  public String getID() {
+    return id;
+  }
 
-	public void setID(String id) {
-		this.id = id;
-	}
+  public void setID(String id) {
+    this.id = id;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + id + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + id + ")";
+  }
 }

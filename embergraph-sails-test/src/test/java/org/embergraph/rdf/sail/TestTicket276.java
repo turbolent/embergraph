@@ -21,7 +21,8 @@ package org.embergraph.rdf.sail;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
-
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
@@ -41,145 +42,127 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.memory.MemoryStore;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 /**
  * Unit test template for use in submission of bugs.
- * <p>
- * This test case will delegate to an underlying backing store. You can specify
- * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
- * <p>
- * There are three possible configurations for the testClass:
+ *
+ * <p>This test case will delegate to an underlying backing store. You can specify this store via a
+ * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
+ * </code>
+ *
+ * <p>There are three possible configurations for the testClass:
+ *
  * <ul>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)
  * </ul>
- * <p>
- * The default for triples and SIDs mode is for inference with truth maintenance
- * to be on. If you would like to turn off inference, make sure to do so in
- * {@link #getProperties()}.
- * 
+ *
+ * <p>The default for triples and SIDs mode is for inference with truth maintenance to be on. If you
+ * would like to turn off inference, make sure to do so in {@link #getProperties()}.
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
- * 
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/276
  */
 public class TestTicket276 extends QuadsTestCase {
 
-    public TestTicket276() {
-	}
+  public TestTicket276() {}
 
-	public TestTicket276(String arg0) {
-		super(arg0);
-	}
+  public TestTicket276(String arg0) {
+    super(arg0);
+  }
 
-	/**
-	 * Please set your database properties here, except for your journal file,
-	 * please DO NOT SPECIFY A JOURNAL FILE.
-	 */
-	@Override
-	public Properties getProperties() {
+  /**
+   * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
+   * JOURNAL FILE.
+   */
+  @Override
+  public Properties getProperties() {
 
-		final Properties props = super.getProperties();
+    final Properties props = super.getProperties();
 
-		/*
-		 * For example, here is a set of five properties that turns off
-		 * inference, truth maintenance, and the free text index.
-		 */
-		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
-				NoAxioms.class.getName());
-		props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
-				NoVocabulary.class.getName());
-		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
-		props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-		props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
-//		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
-//				"false");
-		props.setProperty(
-				EmbergraphSail.Options.STATEMENT_IDENTIFIERS,
-				"false");
+    /*
+     * For example, here is a set of five properties that turns off
+     * inference, truth maintenance, and the free text index.
+     */
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+    props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+    props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
+    //		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
+    //				"false");
+    props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
 
-		return props;
+    return props;
+  }
 
-	}
+  public void testBug() throws Exception {
 
-	public void testBug() throws Exception {
+    // try with Sesame MemoryStore:
+    executeQuery(new SailRepository(new MemoryStore()));
 
-	    // try with Sesame MemoryStore:
-		executeQuery(new SailRepository(new MemoryStore()));
+    final EmbergraphSail sail = getSail();
+    try {
+      // fails with UnsupportedOperationException
+      executeQuery(new EmbergraphSailRepository(sail));
+    } finally {
+      sail.__tearDownUnitTest();
+    }
+  }
 
-		final EmbergraphSail sail = getSail();
-		try {
-	        // fails with UnsupportedOperationException
-			executeQuery(new EmbergraphSailRepository(sail));
-		} finally {
-			sail.__tearDownUnitTest();
-		}
-		
-	}
+  private void executeQuery(final SailRepository repo)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+          RDFParseException, IOException, RDFHandlerException {
+    try {
+      repo.initialize();
+      final RepositoryConnection conn = repo.getConnection();
+      conn.setAutoCommit(false);
+      try {
+        final ValueFactory vf = conn.getValueFactory();
+        addData(conn);
+        conn.commit();
 
-	private void executeQuery(final SailRepository repo)
-			throws RepositoryException, MalformedQueryException,
-			QueryEvaluationException, RDFParseException, IOException,
-			RDFHandlerException {
-		try {
-			repo.initialize();
-			final RepositoryConnection conn = repo.getConnection();
-			conn.setAutoCommit(false);
-			try {
-	            final ValueFactory vf = conn.getValueFactory();
-				addData(conn);
-				conn.commit();
+        final String query = "SELECT ?x { ?x ?a ?t . ?x ?lookup ?l }";
+        final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        q.setBinding("a", vf.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
+        q.setBinding("t", vf.createURI("os:class/Location"));
+        q.setBinding("lookup", vf.createURI("os:prop/lookupName"));
+        q.setBinding("l", vf.createLiteral("amsterdam"));
+        final TupleQueryResult tqr = q.evaluate();
+        while (tqr.hasNext()) {
+          final Set<String> bindingNames = tqr.next().getBindingNames();
+          if (log.isInfoEnabled()) log.info("bindingNames=" + bindingNames);
+        }
+        tqr.close();
+      } finally {
+        conn.close();
+      }
+    } finally {
+      repo.shutDown();
+    }
+  }
 
-				final String query = "SELECT ?x { ?x ?a ?t . ?x ?lookup ?l }";
-				final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL,
-						query);
-				q.setBinding(
-						"a",
-						vf.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"));
-				q.setBinding("t", vf.createURI("os:class/Location"));
-				q.setBinding("lookup", vf.createURI("os:prop/lookupName"));
-				q.setBinding("l", vf.createLiteral("amsterdam"));
-				final TupleQueryResult tqr = q.evaluate();
-                while (tqr.hasNext()) {
-                    final Set<String> bindingNames = tqr.next()
-                            .getBindingNames();
-                    if (log.isInfoEnabled())
-                        log.info("bindingNames=" + bindingNames);
-				}
-				tqr.close();
-			} finally {
-				conn.close();
-			}
-		} finally {
-			repo.shutDown();
-		}
-	}
+  private void addData(final RepositoryConnection conn)
+      throws IOException, RDFParseException, RepositoryException, RDFHandlerException {
 
-	private void addData(final RepositoryConnection conn) throws IOException,
-			RDFParseException, RepositoryException, RDFHandlerException {
-
-	    final RDFParser rdfParser = Rio.createParser(RDFFormat.NTRIPLES,
-				conn.getValueFactory());
-		rdfParser.setVerifyData(true);
-		rdfParser.setStopAtFirstError(true);
-		rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
-		rdfParser.setRDFHandler(new RDFHandlerBase() {
-			@Override
-			public void handleStatement(Statement st)
-					throws RDFHandlerException {
-				try {
-					conn.add(st);
-				} catch (OpenRDFException e) {
-					throw new RDFHandlerException(e);
-				}
-			}
-		});
-		rdfParser.parse(getClass().getResourceAsStream("TestTicket276.n3"), "");
-	}
+    final RDFParser rdfParser = Rio.createParser(RDFFormat.NTRIPLES, conn.getValueFactory());
+    rdfParser.setVerifyData(true);
+    rdfParser.setStopAtFirstError(true);
+    rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
+    rdfParser.setRDFHandler(
+        new RDFHandlerBase() {
+          @Override
+          public void handleStatement(Statement st) throws RDFHandlerException {
+            try {
+              conn.add(st);
+            } catch (OpenRDFException e) {
+              throw new RDFHandlerException(e);
+            }
+          }
+        });
+    rdfParser.parse(getClass().getResourceAsStream("TestTicket276.n3"), "");
+  }
 }

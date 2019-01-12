@@ -23,9 +23,7 @@ package org.embergraph.rdf.sparql.ast.cache;
 
 import java.lang.ref.WeakReference;
 import java.util.Properties;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.journal.BufferMode;
@@ -33,183 +31,155 @@ import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 
 /**
- * Stress test for correct shutdown of the {@link ICacheConnection} as allocated
- * by the {@link CacheConnectionFactory}.
- * 
+ * Stress test for correct shutdown of the {@link ICacheConnection} as allocated by the {@link
+ * CacheConnectionFactory}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestQueryEngineFactory.java 4585 2011-06-01 13:42:56Z
- *          thompsonbry $
+ * @version $Id: TestQueryEngineFactory.java 4585 2011-06-01 13:42:56Z thompsonbry $
  */
 public class TestCacheConnectionFactory extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestCacheConnectionFactory() {
+  /** */
+  public TestCacheConnectionFactory() {}
+
+  /** @param name */
+  public TestCacheConnectionFactory(String name) {
+    super(name);
+  }
+
+  public void test_basics() {
+
+    final Properties properties = new Properties();
+
+    properties.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    properties.setProperty(Journal.Options.INITIAL_EXTENT, "" + Bytes.megabyte * 10);
+
+    QueryEngine queryEngine = null;
+
+    final Journal jnl = new Journal(properties);
+
+    try {
+
+      // Get the query controller for that Journal.
+      queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl);
+
+      assertNotNull(queryEngine);
+
+      // does not exist yet.
+      assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
+
+      // was not created.
+      assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
+
+      final ICacheConnection cache = CacheConnectionFactory.getCacheConnection(queryEngine);
+
+      // still exists and is the same reference.
+      assertTrue(cache == CacheConnectionFactory.getExistingCacheConnection(queryEngine));
+
+    } finally {
+
+      if (queryEngine != null) {
+
+        queryEngine.shutdownNow();
+      }
+
+      jnl.destroy();
     }
+  }
 
-    /**
-     * @param name
+  /**
+   * Look for a memory leak in the {@link CacheConnectionFactory}.
+   *
+   * @throws InterruptedException
+   */
+  public void test_memoryLeak() throws InterruptedException {
+
+    final int limit = 200;
+
+    final Properties properties = new Properties();
+
+    properties.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    properties.setProperty(Journal.Options.INITIAL_EXTENT, "" + Bytes.megabyte * 10);
+
+    int ncreated = 0;
+
+    /*
+     * An array of weak references to the journals. These references will
+     * not cause the journals to be retained. However, since we can not
+     * force a major GC, the non-cleared references are used to ensure that
+     * all journals are destroyed by the end of this test.
      */
-    public TestCacheConnectionFactory(String name) {
-        super(name);
-    }
-    
-    public void test_basics() {
+    @SuppressWarnings("unchecked")
+    final WeakReference<Journal>[] refs = new WeakReference[limit];
+    @SuppressWarnings("unchecked")
+    final WeakReference<QueryEngine>[] refs2 = new WeakReference[limit];
 
-        final Properties properties = new Properties();
+    try {
 
-        properties.setProperty(Journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+      try {
 
-        properties.setProperty(Journal.Options.INITIAL_EXTENT, ""
-                + Bytes.megabyte * 10);
+        for (int i = 0; i < limit; i++) {
 
-        QueryEngine queryEngine = null;
+          final Journal jnl = new Journal(properties);
 
-        final Journal jnl = new Journal(properties);
+          refs[i] = new WeakReference<Journal>(jnl);
 
-        try {
+          final QueryEngine queryEngine;
 
-            // Get the query controller for that Journal.
-            queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl);
+          refs2[i] =
+              new WeakReference<QueryEngine>(
+                  queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl));
 
-            assertNotNull(queryEngine);
-            
-            // does not exist yet.
-            assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
+          // does not exist yet.
+          assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
 
-            // was not created.
-            assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
+          // was not created.
+          assertNull(CacheConnectionFactory.getExistingCacheConnection(queryEngine));
 
-            final ICacheConnection cache = CacheConnectionFactory
-                    .getCacheConnection(queryEngine);
+          final ICacheConnection cache = CacheConnectionFactory.getCacheConnection(queryEngine);
 
-            // still exists and is the same reference.
-            assertTrue(cache == CacheConnectionFactory
-                    .getExistingCacheConnection(queryEngine));
+          // still exists and is the same reference.
+          assertTrue(cache == CacheConnectionFactory.getExistingCacheConnection(queryEngine));
 
-        } finally {
-
-            if (queryEngine != null) {
-
-                queryEngine.shutdownNow();
-
-            }
-
-            jnl.destroy();
-
+          ncreated++;
         }
 
-    }
+      } catch (OutOfMemoryError err) {
 
-    /**
-     * Look for a memory leak in the {@link CacheConnectionFactory}.
-     * 
-     * @throws InterruptedException
-     */
-    public void test_memoryLeak() throws InterruptedException {
+        log.error("Out of memory after creating " + ncreated + " instances.");
+      }
 
-        final int limit = 200;
+      // Demand a GC.
+      System.gc();
 
-        final Properties properties = new Properties();
+      // Wait for it.
+      Thread.sleep(1000 /* ms */);
 
-        properties.setProperty(Journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+      if (log.isInfoEnabled()) log.info("Created " + ncreated + " instances.");
 
-        properties.setProperty(Journal.Options.INITIAL_EXTENT, ""
-                + Bytes.megabyte * 10);
+      final int nalive = CacheConnectionFactory.getCacheCount();
 
-        int ncreated = 0;
+      if (log.isInfoEnabled())
+        log.info("There are " + nalive + " instances which are still alive.");
 
-        /*
-         * An array of weak references to the journals. These references will
-         * not cause the journals to be retained. However, since we can not
-         * force a major GC, the non-cleared references are used to ensure that
-         * all journals are destroyed by the end of this test.
-         */
-        @SuppressWarnings("unchecked")
-        final WeakReference<Journal>[] refs = new WeakReference[limit];
-        @SuppressWarnings("unchecked")
-        final WeakReference<QueryEngine>[] refs2 = new WeakReference[limit];
+      if (nalive == ncreated) {
 
-        try {
+        fail("No instances were finalized.");
+      }
 
-            try {
+    } finally {
 
-                for (int i = 0; i < limit; i++) {
-
-                    final Journal jnl = new Journal(properties);
-
-                    refs[i] = new WeakReference<Journal>(jnl);
-
-                    final QueryEngine queryEngine;
-
-                    refs2[i] = new WeakReference<QueryEngine>(
-                            queryEngine = QueryEngineFactory.getInstance()
-                                    .getQueryController(jnl));
-
-                    // does not exist yet.
-                    assertNull(CacheConnectionFactory
-                            .getExistingCacheConnection(queryEngine));
-
-                    // was not created.
-                    assertNull(CacheConnectionFactory
-                            .getExistingCacheConnection(queryEngine));
-
-                    final ICacheConnection cache = CacheConnectionFactory
-                            .getCacheConnection(queryEngine);
-
-                    // still exists and is the same reference.
-                    assertTrue(cache == CacheConnectionFactory
-                            .getExistingCacheConnection(queryEngine));
-
-                    ncreated++;
-
-                }
-
-            } catch (OutOfMemoryError err) {
-
-                log.error("Out of memory after creating " + ncreated
-                        + " instances.");
-
-            }
-
-            // Demand a GC.
-            System.gc();
-
-            // Wait for it.
-            Thread.sleep(1000/* ms */);
-
-            if (log.isInfoEnabled())
-                log.info("Created " + ncreated + " instances.");
-
-            final int nalive = CacheConnectionFactory.getCacheCount();
-
-            if (log.isInfoEnabled())
-                log.info("There are " + nalive
-                        + " instances which are still alive.");
-
-            if (nalive == ncreated) {
-
-                fail("No instances were finalized.");
-
-            }
-
-        } finally {
-
-            /*
-             * Ensure that all journals are destroyed by the end of the test.
-             */
-            for (int i = 0; i < refs.length; i++) {
-                final Journal jnl = refs[i] == null ? null : refs[i].get();
-                if (jnl != null) {
-                    jnl.destroy();
-                }
-            }
-
+      /*
+       * Ensure that all journals are destroyed by the end of the test.
+       */
+      for (int i = 0; i < refs.length; i++) {
+        final Journal jnl = refs[i] == null ? null : refs[i].get();
+        if (jnl != null) {
+          jnl.destroy();
         }
-
+      }
     }
-
+  }
 }

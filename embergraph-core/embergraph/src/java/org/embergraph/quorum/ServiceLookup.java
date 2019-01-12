@@ -25,21 +25,13 @@ import java.util.UUID;
 
 public interface ServiceLookup<S extends Remote> {
 
-    /**
-     * Return the remote interface used to perform HA operations on a member of
-     * quorum.
-     * 
-     * @param serviceId
-     *            The {@link UUID} associated with the service.
-     * 
-     * @return The remote interface for that quorum member.
-     * 
-     * @throws IllegalArgumentException
-     *             if the argument is <code>null</code>
-     * @throws QuorumException
-     *             if there is no {@link Quorum} member with that
-     *             <i>serviceId</i>.
-     */
-    S getService(UUID serviceId);
-
+  /**
+   * Return the remote interface used to perform HA operations on a member of quorum.
+   *
+   * @param serviceId The {@link UUID} associated with the service.
+   * @return The remote interface for that quorum member.
+   * @throws IllegalArgumentException if the argument is <code>null</code>
+   * @throws QuorumException if there is no {@link Quorum} member with that <i>serviceId</i>.
+   */
+  S getService(UUID serviceId);
 }

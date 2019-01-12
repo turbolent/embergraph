@@ -24,60 +24,51 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.io.IOException;
-
 import org.apache.log4j.Logger;
 
 /**
  * Robust request for a timestamp from an {@link ITimestampService}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TimestampServiceUtil {
 
-    protected static Logger log = Logger.getLogger(TimestampServiceUtil.class);
-    
-    /**
-     * Utility method retries several times if there is a problem before
-     * throwing a {@link RuntimeException}.
-     * 
-     * @param service
-     *            The timestamp service.
-     * 
-     * @return The timestamp.
-     */
-    static public long nextTimestamp(final ITimestampService service) {
+  protected static Logger log = Logger.getLogger(TimestampServiceUtil.class);
 
-        if (service == null)
-            throw new IllegalArgumentException();
+  /**
+   * Utility method retries several times if there is a problem before throwing a {@link
+   * RuntimeException}.
+   *
+   * @param service The timestamp service.
+   * @return The timestamp.
+   */
+  public static long nextTimestamp(final ITimestampService service) {
 
-        final int maxtries = 3;
+    if (service == null) throw new IllegalArgumentException();
 
-        IOException cause = null;
+    final int maxtries = 3;
 
-        int ntries;
+    IOException cause = null;
 
-        for (ntries = 0; ntries < maxtries; ntries++) {
+    int ntries;
 
-            try {
+    for (ntries = 0; ntries < maxtries; ntries++) {
 
-                return service.nextTimestamp();
+      try {
 
-            } catch (IOException e) {
+        return service.nextTimestamp();
 
-                log.warn("Could not get timestamp: " + e, e);
+      } catch (IOException e) {
 
-                cause = e;
+        log.warn("Could not get timestamp: " + e, e);
 
-            }
-
-        }
-
-        log.error("Could not get timestamp after: " + ntries, cause);
-
-        throw new RuntimeException("Could not get timestamp after " + ntries,
-                cause);
-
+        cause = e;
+      }
     }
 
+    log.error("Could not get timestamp after: " + ntries, cause);
+
+    throw new RuntimeException("Could not get timestamp after " + ntries, cause);
+  }
 }

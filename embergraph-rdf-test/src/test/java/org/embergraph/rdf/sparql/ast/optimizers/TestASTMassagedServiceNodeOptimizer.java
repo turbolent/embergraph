@@ -17,82 +17,83 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /**
- * Trac 794 concerns interactions between BIND and SERVICE going to a remote
- * SPARQL end-point. The service call must be done last.
+ * Trac 794 concerns interactions between BIND and SERVICE going to a remote SPARQL end-point. The
+ * service call must be done last.
  */
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-
-
-
 public class TestASTMassagedServiceNodeOptimizer extends AbstractOptimizerTestCase {
 
-	public TestASTMassagedServiceNodeOptimizer(String name) {
-		super(name);
-	}
+  public TestASTMassagedServiceNodeOptimizer(String name) {
+    super(name);
+  }
 
-	public TestASTMassagedServiceNodeOptimizer() {
-	}
-	@Override
-	IASTOptimizer newOptimizer() {
-		return new ASTJoinOrderByTypeOptimizer();
-	}
+  public TestASTMassagedServiceNodeOptimizer() {}
 
-	public void testLeaveBindBeforeService() {
+  @Override
+  IASTOptimizer newOptimizer() {
+    return new ASTJoinOrderByTypeOptimizer();
+  }
 
-    	new Helper(){{
+  public void testLeaveBindBeforeService() {
 
-    		given = select( varNode(z), 
-    				where (
-    						joinGroupNode( 
-    						    statementPatternNode(varNode(x), constantNode(c),  constantNode(d)),
-    						    bind(functionNode("eg:foo", varNode(x)), varNode(y) ),
-    						    service( constantNode(a), 
-                                    joinGroupNode( statementPatternNode(varNode(z), constantNode(f), varNode(y)) ) )
-                            )
-    				) );
-    		
-    		
-    		expected = select( varNode(z), 
-    				where (
-    						joinGroupNode( 
-    						    statementPatternNode(varNode(x), constantNode(c),  constantNode(d)),
-    						    bind(functionNode("eg:foo", varNode(x)), varNode(y) ),
-    						    service( constantNode(a), 
-                                    joinGroupNode( statementPatternNode(varNode(z), constantNode(f), varNode(y)) ) )
-                            )
-    				) );
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(z),
+                where(
+                    joinGroupNode(
+                        statementPatternNode(varNode(x), constantNode(c), constantNode(d)),
+                        bind(functionNode("eg:foo", varNode(x)), varNode(y)),
+                        service(
+                            constantNode(a),
+                            joinGroupNode(
+                                statementPatternNode(varNode(z), constantNode(f), varNode(y)))))));
 
-    		
-    	}}.test();
-	}
-	public void testPutBindBeforeService() {
+        expected =
+            select(
+                varNode(z),
+                where(
+                    joinGroupNode(
+                        statementPatternNode(varNode(x), constantNode(c), constantNode(d)),
+                        bind(functionNode("eg:foo", varNode(x)), varNode(y)),
+                        service(
+                            constantNode(a),
+                            joinGroupNode(
+                                statementPatternNode(varNode(z), constantNode(f), varNode(y)))))));
+      }
+    }.test();
+  }
 
-    	new Helper(){{
+  public void testPutBindBeforeService() {
 
-    		given = select( varNode(z), 
-    				where (
-    						joinGroupNode( 
-        						    service( constantNode(a), 
-                                            joinGroupNode( statementPatternNode(varNode(z), constantNode(f), varNode(y)) ) ),
-    						    statementPatternNode(varNode(x), constantNode(c),  constantNode(d)),
-    						    bind(functionNode("eg:foo", varNode(x)), varNode(y) )
-                            )
-    				) );
-    		
-    		
-    		expected = select( varNode(z), 
-    				where (
-    						joinGroupNode( 
-    						    statementPatternNode(varNode(x), constantNode(c),  constantNode(d)),
-    						    bind(functionNode("eg:foo", varNode(x)), varNode(y) ),
-    						    service( constantNode(a), 
-                                    joinGroupNode( statementPatternNode(varNode(z), constantNode(f), varNode(y)) ) )
-                            )
-    				) );
+    new Helper() {
+      {
+        given =
+            select(
+                varNode(z),
+                where(
+                    joinGroupNode(
+                        service(
+                            constantNode(a),
+                            joinGroupNode(
+                                statementPatternNode(varNode(z), constantNode(f), varNode(y)))),
+                        statementPatternNode(varNode(x), constantNode(c), constantNode(d)),
+                        bind(functionNode("eg:foo", varNode(x)), varNode(y)))));
 
-    		
-    	}}.test();
-	}
-
+        expected =
+            select(
+                varNode(z),
+                where(
+                    joinGroupNode(
+                        statementPatternNode(varNode(x), constantNode(c), constantNode(d)),
+                        bind(functionNode("eg:foo", varNode(x)), varNode(y)),
+                        service(
+                            constantNode(a),
+                            joinGroupNode(
+                                statementPatternNode(varNode(z), constantNode(f), varNode(y)))))));
+      }
+    }.test();
+  }
 }

@@ -29,39 +29,35 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
- * Abstract base class for non-inline {@link IV}s which use the extension bit
- * and distinguish themselves by an {@link #getExtensionByte() extension byte}
- * following the flags byte.
- * 
+ * Abstract base class for non-inline {@link IV}s which use the extension bit and distinguish
+ * themselves by an {@link #getExtensionByte() extension byte} following the flags byte.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractNonInlineExtensionIV<V extends EmbergraphValue, T>
-        extends AbstractNonInlineIV<V, T> implements IExtensionIV {
+public abstract class AbstractNonInlineExtensionIV<V extends EmbergraphValue, T>
+    extends AbstractNonInlineIV<V, T> implements IExtensionIV {
 
-    private static final long serialVersionUID = 1L;
-    
-    protected AbstractNonInlineExtensionIV(final byte flags) {
+  private static final long serialVersionUID = 1L;
 
-        super(flags);
+  protected AbstractNonInlineExtensionIV(final byte flags) {
 
-    }
+    super(flags);
+  }
 
-    /**
-     * @param vte
-     * @param dte
-     */
-    public AbstractNonInlineExtensionIV(VTE vte, DTE dte) {
+  /**
+   * @param vte
+   * @param dte
+   */
+  public AbstractNonInlineExtensionIV(VTE vte, DTE dte) {
 
-        super(vte, true/* extension */, dte);
+    super(vte, true /* extension */, dte);
+  }
 
-    }
-
-    /**
-     * Return the extension byte for this type of non-inline IV.
-     * 
-     * @see INonInlineExtensionCodes
-     */
-    abstract public byte getExtensionByte();
-    
+  /**
+   * Return the extension byte for this type of non-inline IV.
+   *
+   * @see INonInlineExtensionCodes
+   */
+  public abstract byte getExtensionByte();
 }

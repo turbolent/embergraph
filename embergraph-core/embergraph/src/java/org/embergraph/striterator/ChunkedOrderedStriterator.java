@@ -27,61 +27,50 @@ import java.util.Iterator;
 
 /**
  * Chunked ordered streaming iterator.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ChunkedOrderedStriterator<I extends IChunkedOrderedIterator<E>, E>
-        extends ChunkedStriterator<I, E> implements
-        IChunkedOrderedStriterator<I, E> {
+    extends ChunkedStriterator<I, E> implements IChunkedOrderedStriterator<I, E> {
 
-    public ChunkedOrderedStriterator(final I src) {
+  public ChunkedOrderedStriterator(final I src) {
 
-        super(src);
-        
-    }
+    super(src);
+  }
 
-    /**
-     * Wraps the source iterator as a chunked ordered iterator.
-     * 
-     * @param chunkSize
-     *            The chunk size.
-     * @param src
-     *            The source iterator.
-     */
-    @SuppressWarnings("unchecked")
-    public ChunkedOrderedStriterator(final int chunkSize, final Iterator<E> src) {
+  /**
+   * Wraps the source iterator as a chunked ordered iterator.
+   *
+   * @param chunkSize The chunk size.
+   * @param src The source iterator.
+   */
+  @SuppressWarnings("unchecked")
+  public ChunkedOrderedStriterator(final int chunkSize, final Iterator<E> src) {
 
-        this((I) new ChunkedWrappedIterator<E>(src, chunkSize,
-                null/* keyOrder */, null/*filter*/));
-        
-    }
-    
-    @Override
-    final public IKeyOrder<E> getKeyOrder() {
+    this((I) new ChunkedWrappedIterator<E>(src, chunkSize, null /* keyOrder */, null /*filter*/));
+  }
 
-        return src.getKeyOrder();
-        
-    }
+  @Override
+  public final IKeyOrder<E> getKeyOrder() {
 
-    @Override
-    final public E[] nextChunk(final IKeyOrder<E> keyOrder) {
-        
-        return src.nextChunk(keyOrder);
-        
-    }
+    return src.getKeyOrder();
+  }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Strengthened return type.
-     */
-    @Override
-    public IChunkedOrderedStriterator<I, E> addFilter(
-            final IFilter<I, ?, E> filter) {
+  @Override
+  public final E[] nextChunk(final IKeyOrder<E> keyOrder) {
 
-        return (IChunkedOrderedStriterator<I, E>) super.addFilter(filter);
+    return src.nextChunk(keyOrder);
+  }
 
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Strengthened return type.
+   */
+  @Override
+  public IChunkedOrderedStriterator<I, E> addFilter(final IFilter<I, ?, E> filter) {
 
+    return (IChunkedOrderedStriterator<I, E>) super.addFilter(filter);
+  }
 }

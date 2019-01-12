@@ -22,21 +22,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 /**
- * An interface for {@link PipelineOp}s which are mapped across
- * shards.
- * 
- * @param <E>
- *            The generic type of the elements in the relation on which the
- *            predicate will read or write.
- * 
+ * An interface for {@link PipelineOp}s which are mapped across shards.
+ *
+ * @param <E> The generic type of the elements in the relation on which the predicate will read or
+ *     write.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IShardwisePipelineOp<E> {
 
-    /**
-     * The predicate which reads or writes on the shard.
-     */
-    IPredicate<E> getPredicate();
-    
+  /** The predicate which reads or writes on the shard. */
+  IPredicate<E> getPredicate();
 }

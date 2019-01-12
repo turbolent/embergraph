@@ -25,19 +25,18 @@ import org.embergraph.btree.BTree;
 
 /**
  * Annotations for an operator using an {@link BTree}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface BTreeAnnotations extends IndexAnnotations {
 
-	/**
-	 * The branching factor.
-	 * 
-	 * @see #DEFAULT_BRANCHING_FACTOR
-	 */
-	String BRANCHING_FACTOR = BTreeAnnotations.class.getName() + ".branchingFactor";
+  /**
+   * The branching factor.
+   *
+   * @see #DEFAULT_BRANCHING_FACTOR
+   */
+  String BRANCHING_FACTOR = BTreeAnnotations.class.getName() + ".branchingFactor";
 
-	int DEFAULT_BRANCHING_FACTOR = 512;
-	
+  int DEFAULT_BRANCHING_FACTOR = 512;
 }

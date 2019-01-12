@@ -22,115 +22,86 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba.codec;
 
-
 import junit.framework.TestCase2;
-
 import org.embergraph.btree.AbstractBTreeTestCase;
 import org.embergraph.btree.raba.EmptyRaba;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyValuesRaba;
 import org.embergraph.io.DataOutputBuffer;
 
-
 /**
  * Unit tests for the {@link EmptyRabaValueCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestEmptyRabaCoder extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestEmptyRabaCoder() {
+  /** */
+  public TestEmptyRabaCoder() {}
+
+  /** @param name */
+  public TestEmptyRabaCoder(String name) {
+    super(name);
+  }
+
+  /** Verify will not code keys. */
+  public void test_emptyRabaCoder_keysNotAllowed() {
+
+    final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
+
+    // not permitted for keys since keys are not optional.
+    assertFalse(rabaCoder.isKeyCoder());
+
+    // does support values.
+    assertTrue(rabaCoder.isValueCoder());
+
+    // verify will not accept keys.
+    try {
+      assertTrue(EmptyRaba.KEYS.isKeys());
+      rabaCoder.encode(EmptyRaba.KEYS, new DataOutputBuffer());
+      fail("Expecting: " + UnsupportedOperationException.class);
+    } catch (UnsupportedOperationException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestEmptyRabaCoder(String name) {
-        super(name);
-    }
+  /** Unit test with an empty byte[][]. */
+  public void test_emptyRabaCoder() {
 
-    /**
-     * Verify will not code keys. 
-     */
-    public void test_emptyRabaCoder_keysNotAllowed() {
+    final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
 
-        final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
+    final IRaba expected = new ReadOnlyValuesRaba(0 /* size */, new byte[2][]);
 
-        // not permitted for keys since keys are not optional.
-        assertFalse(rabaCoder.isKeyCoder());
+    // empty raba.
+    AbstractRabaCoderTestCase.doRoundTripTest(rabaCoder, expected);
+  }
 
-        // does support values.
-        assertTrue(rabaCoder.isValueCoder());
+  /** Verify discards data with the {@link IRaba} is non-empty but all <code>null</code>s. */
+  public void test_emptyRabaCoder_nonZeroSize() {
 
-        // verify will not accept keys.
-        try {
-            assertTrue(EmptyRaba.KEYS.isKeys());
-            rabaCoder.encode(EmptyRaba.KEYS, new DataOutputBuffer());
-            fail("Expecting: "+UnsupportedOperationException.class);
-        } catch(UnsupportedOperationException ex) {
-            if(log.isInfoEnabled())
-                log.info("Ignoring expected exception: "+ex);
-        }
-        
-    }
-    
-    /**
-     * Unit test with an empty byte[][].
-     */
-    public void test_emptyRabaCoder() {
-        
-        final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
+    final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
 
-        final IRaba expected = new ReadOnlyValuesRaba(0/* size */,
-                new byte[2][]);
+    final IRaba expected = new ReadOnlyValuesRaba(2 /* size */, new byte[2][]);
 
-        // empty raba.
-        AbstractRabaCoderTestCase.doRoundTripTest(rabaCoder, expected);
+    final IRaba actual = rabaCoder.decode(rabaCoder.encode(expected, new DataOutputBuffer()));
 
-    }
+    AbstractBTreeTestCase.assertSameRaba(expected, actual);
+  }
 
-    /**
-     * Verify discards data with the {@link IRaba} is non-empty but all
-     * <code>null</code>s.
-     */
-    public void test_emptyRabaCoder_nonZeroSize() {
+  /** Verify discards data with the {@link IRaba} is non-empty but all non-<code>null</code>s. */
+  public void test_emptyRabaCoder_discardsData() {
 
-        final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
+    final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
 
-        final IRaba expected = new ReadOnlyValuesRaba(2/* size */,
-                new byte[2][]);
+    final IRaba expected = new ReadOnlyValuesRaba(2 /* size */, new byte[2][]);
 
-        final IRaba actual = rabaCoder.decode(rabaCoder.encode(expected,
-                new DataOutputBuffer()));
+    final byte[][] a = new byte[2][];
+    a[0] = new byte[] {1, 2, 3};
+    a[1] = new byte[] {2};
 
-        AbstractBTreeTestCase.assertSameRaba(expected, actual);
+    final IRaba actual = rabaCoder.decode(rabaCoder.encode(expected, new DataOutputBuffer()));
 
-    }
-
-    /**
-     * Verify discards data with the {@link IRaba} is non-empty but all
-     * non-<code>null</code>s.
-     */
-    public void test_emptyRabaCoder_discardsData() {
-        
-        final IRabaCoder rabaCoder = EmptyRabaValueCoder.INSTANCE;
-
-        final IRaba expected = new ReadOnlyValuesRaba(2/* size */,
-                new byte[2][]);
-
-        final byte[][] a = new byte[2][];
-        a[0] = new byte[] { 1, 2, 3 };
-        a[1] = new byte[] { 2 };
-
-        final IRaba actual = rabaCoder.decode(rabaCoder.encode(expected,
-                new DataOutputBuffer()));
-
-        AbstractBTreeTestCase.assertSameRaba(expected, actual);
-
-    }
-
+    AbstractBTreeTestCase.assertSameRaba(expected, actual);
+  }
 }

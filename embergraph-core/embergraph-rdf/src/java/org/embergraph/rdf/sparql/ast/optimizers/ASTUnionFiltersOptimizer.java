@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Collection;
 import java.util.LinkedList;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
@@ -44,175 +43,154 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
 public class ASTUnionFiltersOptimizer implements IASTOptimizer {
 
-    @Override
-    public QueryNodeWithBindingSet optimize(
-        final AST2BOpContext context, final QueryNodeWithBindingSet input) {
+  @Override
+  public QueryNodeWithBindingSet optimize(
+      final AST2BOpContext context, final QueryNodeWithBindingSet input) {
 
-        final IQueryNode queryNode = input.getQueryNode();
-        final IBindingSet[] bindingSets = input.getBindingSets();     
+    final IQueryNode queryNode = input.getQueryNode();
+    final IBindingSet[] bindingSets = input.getBindingSets();
 
-        if (!(queryNode instanceof QueryRoot))
-           return new QueryNodeWithBindingSet(queryNode, bindingSets);
+    if (!(queryNode instanceof QueryRoot))
+      return new QueryNodeWithBindingSet(queryNode, bindingSets);
 
-        final QueryRoot queryRoot = (QueryRoot) queryNode;
-        
-        final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
+    final QueryRoot queryRoot = (QueryRoot) queryNode;
 
-        // Main WHERE clause
-        {
+    final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
 
-            @SuppressWarnings("unchecked")
-			final GraphPatternGroup<IGroupMemberNode> whereClause = 
-            	(GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
+    // Main WHERE clause
+    {
+      @SuppressWarnings("unchecked")
+      final GraphPatternGroup<IGroupMemberNode> whereClause =
+          (GraphPatternGroup<IGroupMemberNode>) queryRoot.getWhereClause();
 
-            if (whereClause != null) {
+      if (whereClause != null) {
 
-                optimize(context, sa, whereClause);
-                
-            }
-
-        }
-
-        // Named subqueries
-        if (queryRoot.getNamedSubqueries() != null) {
-
-            final NamedSubqueriesNode namedSubqueries = queryRoot
-                    .getNamedSubqueries();
-
-            /*
-             * Note: This loop uses the current size() and get(i) to avoid
-             * problems with concurrent modification during visitation.
-             */
-            for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
-
-                @SuppressWarnings("unchecked")
-				final GraphPatternGroup<IGroupMemberNode> whereClause = 
-                	(GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
-
-                if (whereClause != null) {
-
-                    optimize(context, sa, whereClause);
-
-                }
-
-            }
-
-        }
-
-        // log.error("\nafter rewrite:\n" + queryNode);
-
-        return new QueryNodeWithBindingSet(queryNode, bindingSets);
-
+        optimize(context, sa, whereClause);
+      }
     }
 
-	/**
-	 * Look for a join group that has only one union and some filters.  Lift
-	 * the filters into all children of the union and remove the filters from
-	 * the group.
-	 */
-    private void optimize(final IEvaluationContext ctx, final StaticAnalysis sa,
-    		final GraphPatternGroup<?> op) {
+    // Named subqueries
+    if (queryRoot.getNamedSubqueries() != null) {
 
-    	if (op instanceof JoinGroupNode) {
-    		
-    		final JoinGroupNode joinGroup = (JoinGroupNode) op;
+      final NamedSubqueriesNode namedSubqueries = queryRoot.getNamedSubqueries();
 
-    		UnionNode union = null;
-    		
-    		Collection<FilterNode> filters = null;
-    		
-    		boolean canOptimize = false;
-    		
-            for (IGroupMemberNode child : joinGroup) {
-            
-            	if (child instanceof UnionNode) {
-            		
-            		// more than one union
-            		if (union != null) {
-            			
-            			canOptimize = false;
-            			
-            			break;
-            			
-            		} else {
-            			
-            			union = (UnionNode) child;
-            			
-            			canOptimize = true;
-            			
-            		}
-            		
-            	} else if (child instanceof FilterNode) {
-            		
-            		if (filters == null) {
-            			
-            			filters = new LinkedList<FilterNode>();
-            			
-            		}
-            		
-            		filters.add((FilterNode) child);
-            		
-            	} else {
-            		
-            		// something else in the group other than a union and filters
-            		canOptimize = false;
-            		
-            		break;
-            		
-            	}
-            	
-            }
-            
-            if (canOptimize && filters != null) {
-            	
-            	for (JoinGroupNode child : union) {
-            		
-            		for (FilterNode filter : filters) {
-            			
-                		child.addChild(BOpUtility.deepCopy(filter));
-                		
-            		}
-            		
-            	}
-            	
-            	for (FilterNode filter : filters) {
-            		
-            		joinGroup.removeChild(filter);
-            		
-            	}
-            	
-            }
-        
-    	}
-    	
-        /*
-         * Recursion, but only into group nodes (including within subqueries).
-         */
-        for (int i = 0; i < op.arity(); i++) {
+      /*
+       * Note: This loop uses the current size() and get(i) to avoid
+       * problems with concurrent modification during visitation.
+       */
+      for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
 
-            final BOp child = op.get(i);
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> whereClause =
+            (GraphPatternGroup<IGroupMemberNode>) namedSubquery.getWhereClause();
 
-            if (child instanceof GraphPatternGroup<?>) {
+        if (whereClause != null) {
 
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) child;
+          optimize(context, sa, whereClause);
+        }
+      }
+    }
 
-                optimize(ctx, sa, childGroup);
-                
-            } else if (child instanceof QueryBase) {
+    // log.error("\nafter rewrite:\n" + queryNode);
 
-                final QueryBase subquery = (QueryBase) child;
+    return new QueryNodeWithBindingSet(queryNode, bindingSets);
+  }
 
-                @SuppressWarnings("unchecked")
-                final GraphPatternGroup<IGroupMemberNode> childGroup = (GraphPatternGroup<IGroupMemberNode>) subquery
-                        .getWhereClause();
+  /**
+   * Look for a join group that has only one union and some filters. Lift the filters into all
+   * children of the union and remove the filters from the group.
+   */
+  private void optimize(
+      final IEvaluationContext ctx, final StaticAnalysis sa, final GraphPatternGroup<?> op) {
 
-                optimize(ctx, sa, childGroup);
+    if (op instanceof JoinGroupNode) {
 
-            }
-            
+      final JoinGroupNode joinGroup = (JoinGroupNode) op;
+
+      UnionNode union = null;
+
+      Collection<FilterNode> filters = null;
+
+      boolean canOptimize = false;
+
+      for (IGroupMemberNode child : joinGroup) {
+
+        if (child instanceof UnionNode) {
+
+          // more than one union
+          if (union != null) {
+
+            canOptimize = false;
+
+            break;
+
+          } else {
+
+            union = (UnionNode) child;
+
+            canOptimize = true;
+          }
+
+        } else if (child instanceof FilterNode) {
+
+          if (filters == null) {
+
+            filters = new LinkedList<FilterNode>();
+          }
+
+          filters.add((FilterNode) child);
+
+        } else {
+
+          // something else in the group other than a union and filters
+          canOptimize = false;
+
+          break;
+        }
+      }
+
+      if (canOptimize && filters != null) {
+
+        for (JoinGroupNode child : union) {
+
+          for (FilterNode filter : filters) {
+
+            child.addChild(BOpUtility.deepCopy(filter));
+          }
         }
 
+        for (FilterNode filter : filters) {
+
+          joinGroup.removeChild(filter);
+        }
+      }
     }
-    
+
+    /*
+     * Recursion, but only into group nodes (including within subqueries).
+     */
+    for (int i = 0; i < op.arity(); i++) {
+
+      final BOp child = op.get(i);
+
+      if (child instanceof GraphPatternGroup<?>) {
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) child;
+
+        optimize(ctx, sa, childGroup);
+
+      } else if (child instanceof QueryBase) {
+
+        final QueryBase subquery = (QueryBase) child;
+
+        @SuppressWarnings("unchecked")
+        final GraphPatternGroup<IGroupMemberNode> childGroup =
+            (GraphPatternGroup<IGroupMemberNode>) subquery.getWhereClause();
+
+        optimize(ctx, sa, childGroup);
+      }
+    }
+  }
 }

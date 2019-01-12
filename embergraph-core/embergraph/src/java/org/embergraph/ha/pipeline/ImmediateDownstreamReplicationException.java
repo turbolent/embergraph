@@ -19,40 +19,33 @@ package org.embergraph.ha.pipeline;
 
 import java.io.IOException;
 
-
 /**
- * An exception thrown by the {@link HAReceiveService} when replication to the
- * downstream service fails. The root cause can be an RMI error (can not connect
- * or connection lost), a socket channel write error (can not connect,
- * connection lost, etc.), or even a transitive error from further down the
- * write pipeline. This exception DOES NOT decisively indicate the problem is
- * with the immediate downstream service. The caller must inspect the root cause
- * to make this determination. However, this exception DOES indicate that the
- * problem is with downstream replication rather than with the receipt or
- * handling of the payload on this service.
- * 
+ * An exception thrown by the {@link HAReceiveService} when replication to the downstream service
+ * fails. The root cause can be an RMI error (can not connect or connection lost), a socket channel
+ * write error (can not connect, connection lost, etc.), or even a transitive error from further
+ * down the write pipeline. This exception DOES NOT decisively indicate the problem is with the
+ * immediate downstream service. The caller must inspect the root cause to make this determination.
+ * However, this exception DOES indicate that the problem is with downstream replication rather than
+ * with the receipt or handling of the payload on this service.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class ImmediateDownstreamReplicationException extends IOException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public ImmediateDownstreamReplicationException() {
-    }
+  public ImmediateDownstreamReplicationException() {}
 
-    public ImmediateDownstreamReplicationException(String message) {
-        super(message);
-    }
+  public ImmediateDownstreamReplicationException(String message) {
+    super(message);
+  }
 
-    public ImmediateDownstreamReplicationException(Throwable cause) {
-        super(cause);
-    }
+  public ImmediateDownstreamReplicationException(Throwable cause) {
+    super(cause);
+  }
 
-    public ImmediateDownstreamReplicationException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public ImmediateDownstreamReplicationException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

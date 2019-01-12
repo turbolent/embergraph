@@ -25,38 +25,28 @@ import java.lang.ref.SoftReference;
 
 /**
  * Implementation based on {@link SoftReference}.
- * 
+ *
  * @author thompsonbry
  * @version $Id$
  */
-public class SoftCacheEntry<K,T>
-	extends SoftReference<T>
-	implements IWeakRefCacheEntry<K,T>
-{
-    
-    final private K _oid;
-    
-    public SoftCacheEntry( K key, T obj, ReferenceQueue<T> queue )
-    {
-        
-        super( obj, queue );
-        
-        _oid = key;
-        
-    }
-    
-    public K getKey()
-    {
-        
-        return _oid;
-        
-    }
-    
-    public T getObject()
-    {
-        
-        return get();
-        
-    }
-    
+public class SoftCacheEntry<K, T> extends SoftReference<T> implements IWeakRefCacheEntry<K, T> {
+
+  private final K _oid;
+
+  public SoftCacheEntry(K key, T obj, ReferenceQueue<T> queue) {
+
+    super(obj, queue);
+
+    _oid = key;
+  }
+
+  public K getKey() {
+
+    return _oid;
+  }
+
+  public T getObject() {
+
+    return get();
+  }
 }

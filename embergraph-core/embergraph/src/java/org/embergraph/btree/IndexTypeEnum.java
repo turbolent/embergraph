@@ -20,45 +20,40 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-/**
- * Type safe enumeration of index types.
- */
+/** Type safe enumeration of index types. */
 public enum IndexTypeEnum {
 
-    /** BTree. */
-    BTree((short) 0),
+  /** BTree. */
+  BTree((short) 0),
 
-    /** Extendible hash tree. */
-    HTree((short) 1),
+  /** Extendible hash tree. */
+  HTree((short) 1),
 
-    /** Stream. */
-    Stream((short) 2);
+  /** Stream. */
+  Stream((short) 2);
 
-	private IndexTypeEnum(final short code) {
+  private IndexTypeEnum(final short code) {
 
-		this.code = code;
+    this.code = code;
+  }
 
-	}
+  private final short code;
 
-	private final short code;
+  public short getCode() {
 
-	public short getCode() {
+    return code;
+  }
 
-		return code;
-
-	}
-
-	static public IndexTypeEnum valueOf(final short code) {
-		switch (code) {
-		case 0:
-			return BTree;
-        case 1:
-            return HTree;
-        case 2:
-            return Stream;
-		default:
-			throw new IllegalArgumentException("code=" + code);
-		}
-	}
-
+  public static IndexTypeEnum valueOf(final short code) {
+    switch (code) {
+      case 0:
+        return BTree;
+      case 1:
+        return HTree;
+      case 2:
+        return Stream;
+      default:
+        throw new IllegalArgumentException("code=" + code);
+    }
+  }
 }

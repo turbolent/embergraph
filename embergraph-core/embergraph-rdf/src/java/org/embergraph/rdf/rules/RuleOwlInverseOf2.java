@@ -21,42 +21,37 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.OWL;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.OWL;
 
 /**
  * owl:inverseOf2
- * 
+ *
  * <pre>
  *   owl:inverseOf2 : (a owl:inverseOf b), (x a z) -&gt; (z b x).
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RuleOwlInverseOf2 extends Rule {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param vocab
-     */
-    public RuleOwlInverseOf2(String relationName, Vocabulary vocab) {
+  /** @param vocab */
+  public RuleOwlInverseOf2(String relationName, Vocabulary vocab) {
 
-        super( "owlInverseOf2",
-                new SPOPredicate(relationName,var("v"), var("b"), var("u")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.INVERSEOF), var("b")),
-                    new SPOPredicate(relationName,var("u"), var("a"), var("v"))
-                },
-                null // constraints
-                );
-        
-    }
-
+    super(
+        "owlInverseOf2",
+        new SPOPredicate(relationName, var("v"), var("b"), var("u")),
+        new SPOPredicate[] {
+          new SPOPredicate(relationName, var("a"), vocab.getConstant(OWL.INVERSEOF), var("b")),
+          new SPOPredicate(relationName, var("u"), var("a"), var("v"))
+        },
+        null // constraints
+        );
+  }
 }

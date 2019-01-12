@@ -23,27 +23,21 @@ package org.embergraph.btree;
 import org.embergraph.cache.IHardReferenceQueue;
 
 /**
- * Hard reference cache eviction listener for leaves always throws an
- * exception. This is used for some unit tests to ensure that cache
- * evictions are not occurring and that copy on write situations are
- * therefore never triggered (except that they will of course be triggered
- * following a commit).
- * 
+ * Hard reference cache eviction listener for leaves always throws an exception. This is used for
+ * some unit tests to ensure that cache evictions are not occurring and that copy on write
+ * situations are therefore never triggered (except that they will of course be triggered following
+ * a commit).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class NoEvictionListener implements
-        IEvictionListener {
+public class NoEvictionListener implements IEvictionListener {
 
-    public void evicted(final IHardReferenceQueue<PO> cache, final PO ref) {
-        
-        if ( ref.isDirty() && !ref.isDeleted()) {
+  public void evicted(final IHardReferenceQueue<PO> cache, final PO ref) {
 
-            throw new UnsupportedOperationException(
-	                    "Eviction is disabled: ref=" + ref);
-            
-        }
+    if (ref.isDirty() && !ref.isDeleted()) {
 
+      throw new UnsupportedOperationException("Eviction is disabled: ref=" + ref);
     }
-
+  }
 }

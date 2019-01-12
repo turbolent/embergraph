@@ -28,30 +28,25 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.search.FullTextIndex;
 
 /**
- * Implementation provides for the use of {@link IV}s in the
- * {@link FullTextIndex}.
- * 
+ * Implementation provides for the use of {@link IV}s in the {@link FullTextIndex}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class IVDocIdExtension implements IKeyBuilderExtension<IV> {
 
-    public int byteLength(final IV obj) {
+  public int byteLength(final IV obj) {
 
-        return obj.byteLength();
-        
-    }
+    return obj.byteLength();
+  }
 
-    public IV decode(final byte[] key, final int off) {
-        
-        return IVUtility.decodeFromOffset(key, off);
-        
-    }
+  public IV decode(final byte[] key, final int off) {
 
-    public void encode(final IKeyBuilder keyBuilder, final IV obj) {
-        
-        IVUtility.encode(keyBuilder, obj);
-        
-    }
+    return IVUtility.decodeFromOffset(key, off);
+  }
 
+  public void encode(final IKeyBuilder keyBuilder, final IV obj) {
+
+    IVUtility.encode(keyBuilder, obj);
+  }
 }

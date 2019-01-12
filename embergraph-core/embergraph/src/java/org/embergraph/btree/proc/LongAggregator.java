@@ -24,38 +24,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.embergraph.service.Split;
 
 /**
  * Aggregates the value of an {@link Long} result.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class LongAggregator implements IResultHandler<Long, Long> {
 
-    private final AtomicLong counter = new AtomicLong(0);
+  private final AtomicLong counter = new AtomicLong(0);
 
-    public LongAggregator() {
-        
-    }
-    
-    /**
-     * 
-     * @todo watch for overflow of {@link Long#MAX_VALUE}
-     */
-    @Override
-    public void aggregate(final Long result, final Split split) {
+  public LongAggregator() {}
 
-        counter.addAndGet(result.longValue());
+  /** @todo watch for overflow of {@link Long#MAX_VALUE} */
+  @Override
+  public void aggregate(final Long result, final Split split) {
 
-    }
+    counter.addAndGet(result.longValue());
+  }
 
-    @Override
-    public Long getResult() {
+  @Override
+  public Long getResult() {
 
-        return counter.get();
-
-    }
-
+    return counter.get();
+  }
 }

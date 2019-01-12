@@ -23,40 +23,34 @@ package org.embergraph.search;
 
 /**
  * Interface for the key associated with an entry in the full text index.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITermDocKey<V extends Comparable<V>> {
 
-    /**
-     * The token text.
-     * 
-     * @throws UnsupportedOperationException
-     *             The sort key for the token text is not decodable. Therefore,
-     *             this operation is not supported when reading on the full text
-     *             index.
-     */
-    String getToken() throws UnsupportedOperationException;
-    
-    /**
-     * The normalized local term weight for the token and document in the
-     * associated entry of the full text search index.
-     */
-    double getLocalTermWeight();
-    
-    /**
-     * The document identifier.
-     */
-    V getDocId();
+  /**
+   * The token text.
+   *
+   * @throws UnsupportedOperationException The sort key for the token text is not decodable.
+   *     Therefore, this operation is not supported when reading on the full text index.
+   */
+  String getToken() throws UnsupportedOperationException;
 
-    /**
-     * The field identifier.
-     * 
-     * @return The field identifier.
-     * 
-     * @throws UnsupportedOperationException
-     *             if the full text index is not storing field identifiers.
-     */
-    int getFieldId() throws UnsupportedOperationException;
+  /**
+   * The normalized local term weight for the token and document in the associated entry of the full
+   * text search index.
+   */
+  double getLocalTermWeight();
+
+  /** The document identifier. */
+  V getDocId();
+
+  /**
+   * The field identifier.
+   *
+   * @return The field identifier.
+   * @throws UnsupportedOperationException if the full text index is not storing field identifiers.
+   */
+  int getFieldId() throws UnsupportedOperationException;
 }

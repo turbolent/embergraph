@@ -28,48 +28,36 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * An abstract {@link ServiceFactory} that deals with service parameters (magic
- * predicates that configure the service) in a standardized manner using the
- * {@link ServiceParams} helper class.
+ * An abstract {@link ServiceFactory} that deals with service parameters (magic predicates that
+ * configure the service) in a standardized manner using the {@link ServiceParams} helper class.
  */
 public abstract class AbstractServiceFactory extends AbstractServiceFactoryBase {
 
-    public AbstractServiceFactory() {
-    
-    }
+  public AbstractServiceFactory() {}
 
-    /**
-     * Create a {@link EmbergraphServiceCall}.  Does the work of collecting
-     * the service parameter triples and then delegates to 
-     * {@link #create(ServiceCallCreateParams, ServiceParams)}.
-     */
-    @Override
-    final public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
+  /**
+   * Create a {@link EmbergraphServiceCall}. Does the work of collecting the service parameter
+   * triples and then delegates to {@link #create(ServiceCallCreateParams, ServiceParams)}.
+   */
+  @Override
+  public final EmbergraphServiceCall create(final ServiceCallCreateParams params) {
 
-        if (params == null)
-            throw new IllegalArgumentException();
+    if (params == null) throw new IllegalArgumentException();
 
-        final AbstractTripleStore store = params.getTripleStore();
+    final AbstractTripleStore store = params.getTripleStore();
 
-        if (store == null)
-            throw new IllegalArgumentException();
+    if (store == null) throw new IllegalArgumentException();
 
-        final ServiceNode serviceNode = params.getServiceNode();
+    final ServiceNode serviceNode = params.getServiceNode();
 
-        if (serviceNode == null)
-            throw new IllegalArgumentException();
+    if (serviceNode == null) throw new IllegalArgumentException();
 
-        final ServiceParams serviceParams = ServiceParams.gatherServiceParams(params);
-        
-        return create(params, serviceParams);
-        
-    }
-    
-    /**
-     * Implemented by subclasses - verify the group and create the service call.
-     */
-    public abstract EmbergraphServiceCall create(
-    		final ServiceCallCreateParams params,
-    		final ServiceParams serviceParams);
-    
+    final ServiceParams serviceParams = ServiceParams.gatherServiceParams(params);
+
+    return create(params, serviceParams);
+  }
+
+  /** Implemented by subclasses - verify the group and create the service call. */
+  public abstract EmbergraphServiceCall create(
+      final ServiceCallCreateParams params, final ServiceParams serviceParams);
 }

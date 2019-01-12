@@ -21,95 +21,89 @@ package org.embergraph.io;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
-
 import org.embergraph.io.compression.IRecordCompressor;
 
 /**
  * Utility class to handle Compression and Checksums on a ByteArraySlice
- * 
- * The idea is that it would be used as a "state-aware" buffer that could be
- * saved/restored to/from an IDiskStrategy.
- * 
- * @author Martyn Cutcher
  *
+ * <p>The idea is that it would be used as a "state-aware" buffer that could be saved/restored
+ * to/from an IDiskStrategy.
+ *
+ * @author Martyn Cutcher
  */
 public class AllocationData {
-	IByteArraySlice slice;
-	boolean compressed;
-	boolean checksummed;
-	int chk;
-	
-	public AllocationData(IByteArraySlice slice) {
-		this.slice = slice;
-	}
-	
-	public AllocationData compress(IRecordCompressor compressor) {
-		if (compressed) {
-			return this;
-		} else {
-			ByteArrayOutputStream outstr = new ByteArrayOutputStream();
-			compressor.compress(slice.array(), outstr);
-			
-			return new AllocationData(new SimpleSlice(outstr.toByteArray()));
-			
-		}
-	}
-	
-	public AllocationData decompress(IRecordCompressor compressor) {
-		if (!compressed) {
-			return new AllocationData(new SimpleSlice(compressor.decompress(slice.array())));
-		} else {
-			return null;
-		}
-	}
-	
-	public int checksum() {
-		if (!checksummed) {
-			chk = ChecksumUtility.getCHK().checksum(slice);
-		}
-		
-		return chk;
-	}
-	
-	public void write(Channel channel) {
-	}
-	
-	static public AllocationData read(Channel channel) {
-		return null;
-	}
-	
-	private static class SimpleSlice implements IByteArraySlice {
-		
-	    final private byte[] buf;
-		
-		SimpleSlice(ByteBuffer bb) {
-			buf = bb.array();
-		}
+  IByteArraySlice slice;
+  boolean compressed;
+  boolean checksummed;
+  int chk;
 
-		SimpleSlice(byte[] bb) {
-			buf = bb;
-		}
+  public AllocationData(IByteArraySlice slice) {
+    this.slice = slice;
+  }
 
-//		@Override
-		public byte[] array() {
-			return buf;
-		}
+  public AllocationData compress(IRecordCompressor compressor) {
+    if (compressed) {
+      return this;
+    } else {
+      ByteArrayOutputStream outstr = new ByteArrayOutputStream();
+      compressor.compress(slice.array(), outstr);
 
-//		@Override
-		public int len() {
-			return buf.length;
-		}
+      return new AllocationData(new SimpleSlice(outstr.toByteArray()));
+    }
+  }
 
-//		@Override
-		public int off() {
-			return 0;
-		}
-		
-		public byte[] toByteArray() {
+  public AllocationData decompress(IRecordCompressor compressor) {
+    if (!compressed) {
+      return new AllocationData(new SimpleSlice(compressor.decompress(slice.array())));
+    } else {
+      return null;
+    }
+  }
 
-		    return buf.clone();
+  public int checksum() {
+    if (!checksummed) {
+      chk = ChecksumUtility.getCHK().checksum(slice);
+    }
 
-		}
-		
-	}
+    return chk;
+  }
+
+  public void write(Channel channel) {}
+
+  public static AllocationData read(Channel channel) {
+    return null;
+  }
+
+  private static class SimpleSlice implements IByteArraySlice {
+
+    private final byte[] buf;
+
+    SimpleSlice(ByteBuffer bb) {
+      buf = bb.array();
+    }
+
+    SimpleSlice(byte[] bb) {
+      buf = bb;
+    }
+
+    //		@Override
+    public byte[] array() {
+      return buf;
+    }
+
+    //		@Override
+    public int len() {
+      return buf.length;
+    }
+
+    //		@Override
+    public int off() {
+      return 0;
+    }
+
+    public byte[] toByteArray() {
+
+      return buf.clone();
+    }
+  }
 }

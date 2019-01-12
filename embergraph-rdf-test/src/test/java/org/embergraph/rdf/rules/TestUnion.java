@@ -26,47 +26,34 @@ import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 
 /**
- * Unit test for processing of queries consisting of {@link IProgram}s
- * comprised of more than one {@link IRule}.
- * 
+ * Unit test for processing of queries consisting of {@link IProgram}s comprised of more than one
+ * {@link IRule}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestUnion extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestUnion() {
-    }
+  /** */
+  public TestUnion() {}
 
-    /**
-     * @param name
-     */
-    public TestUnion(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestUnion(String name) {
+    super(name);
+  }
 
-    /**
-     * @todo write unit tests for "union".
-     * 
-     * @todo write test for union of two rules with parallel execution.
-     * 
-     * @todo write test for union of two rules with stable execution (serialize
-     *       the program and serialize subquery in joins).
-     * 
-     * @todo write test for SLICE with UNION (requires stable execution of the
-     *       union).
-     * 
-     * @todo write test for ORDER_BY with UNION (requires order imposed on the
-     *       aggregate program results).
-     * 
-     * @todo write test for DISTINCT with UNION (requires order imposed on the
-     *       aggregate program results).
-     */
-    public void test_union() {
-        
-        log.error("write test"); // FIXME Write tests.
-        
-    }
-    
+  /**
+   * @todo write unit tests for "union".
+   * @todo write test for union of two rules with parallel execution.
+   * @todo write test for union of two rules with stable execution (serialize the program and
+   *     serialize subquery in joins).
+   * @todo write test for SLICE with UNION (requires stable execution of the union).
+   * @todo write test for ORDER_BY with UNION (requires order imposed on the aggregate program
+   *     results).
+   * @todo write test for DISTINCT with UNION (requires order imposed on the aggregate program
+   *     results).
+   */
+  public void test_union() {
+
+    log.error("write test"); // FIXME Write tests.
+  }
 }

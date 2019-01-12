@@ -1,9 +1,9 @@
 package it.unimi.dsi.parser;
 
-/*		 
+/*
  * DSI utilities
  *
- * Copyright (C) 2005-2009 Sebastiano Vigna 
+ * Copyright (C) 2005-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -24,29 +24,30 @@ package it.unimi.dsi.parser;
 import it.unimi.dsi.lang.MutableString;
 
 /** An SGML character entity. */
-
 public final class Entity {
 
-    /** The name of this entity. */
-	public final CharSequence name;
-	/** The Unicode character corresponding to this entity. */
-	public final char character;
+  /** The name of this entity. */
+  public final CharSequence name;
+  /** The Unicode character corresponding to this entity. */
+  public final char character;
 
-	/** Creates a new entity with the specified name and character.
-	 *
-	 * @param name the name of the new entity.
-	 * @param character its character value.
-	 */
-	public Entity( final CharSequence name, final char character ) {
-		this.name = new MutableString( name );
-		this.character = character;
-	}
+  /**
+   * Creates a new entity with the specified name and character.
+   *
+   * @param name the name of the new entity.
+   * @param character its character value.
+   */
+  public Entity(final CharSequence name, final char character) {
+    this.name = new MutableString(name);
+    this.character = character;
+  }
 
-	/** Returns the name of this entity.
-	 * @return the name of this entity.
-	 */
-	
-	public String toString() {
-		return name.toString();
-	}
+  /**
+   * Returns the name of this entity.
+   *
+   * @return the name of this entity.
+   */
+  public String toString() {
+    return name.toString();
+  }
 }

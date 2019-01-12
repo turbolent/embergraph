@@ -26,74 +26,73 @@ import org.openrdf.repository.RepositoryException;
 
 /**
  * Test suite for an issue where IV resolution of RDR statements was not completed
- * 
- * @see <a href="https://jira.blazegraph.com/browse/BLZG-1875">
- * Insert problem using subqueries and having clause
+ *
+ * @see <a href="https://jira.blazegraph.com/browse/BLZG-1875">Insert problem using subqueries and
+ *     having clause
  */
 public class TestTicket1875 extends QuadsTestCase {
-	
-    public TestTicket1875() {
-	}
 
-	public TestTicket1875(String arg0) {
-		super(arg0);
-	}
+  public TestTicket1875() {}
 
-	/**
-	 * Test succeeds if all updates executed without any exceptions
-	 * @throws Exception
-	 */
-	public void testBug() throws Exception {
+  public TestTicket1875(String arg0) {
+    super(arg0);
+  }
 
-		final EmbergraphSail sail = getSail();
-		try {
-			final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-			
-			try {
-				
-				repo.initialize();
-				String update1 =
-						"insert data {  \r\n" + 
-						"  <x:s>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ft.com/ontology/thing/Thing> .\r\n" + 
-						"  <<<x:s>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ft.com/ontology/thing/Thing>  >> <http://www.ft.com/ontology/event/prov> <http://x>  \r\n" + 
-						"}";
-				executeUpdate(repo, update1);
-	
-				String update2 =
-						"prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \r\n" + 
-						"insert data {  \r\n" + 
-						"  <x:s>	rdf:type <http://x/o> .\r\n" + 
-						"  <<<x:s>	rdf:type <http://x/o>  >> <http://x/pr> <http://x/or>  \r\n" + 
-						"}";
-				executeUpdate(new EmbergraphSailRepository(sail), update2);
-	
-				String update3 =
-						"prefix bbb: <http://x/> \r\n" + 
-						"insert data {   \r\n" + 
-						"  <x:a> rdf:type bbb:B .\r\n" + 
-						"  << <x:a> rdf:type bbb:B >><x:pr> <x:pr> .\r\n" + 
-						"}";
-				executeUpdate(new EmbergraphSailRepository(sail), update3);
+  /**
+   * Test succeeds if all updates executed without any exceptions
+   *
+   * @throws Exception
+   */
+  public void testBug() throws Exception {
 
-			} finally {
-				repo.shutDown();
-			}
-			
-		} finally {
-			sail.__tearDownUnitTest();
-		}
-	}
+    final EmbergraphSail sail = getSail();
+    try {
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-	private void executeUpdate(final EmbergraphSailRepository repo, final String update)
-			throws UpdateExecutionException, RepositoryException, MalformedQueryException {
-		final EmbergraphSailRepositoryConnection conn = repo.getConnection();
-		try {
-			Update preparedUpdate = conn.prepareUpdate(QueryLanguage.SPARQL, update);
-			preparedUpdate.execute();
-			// no exception should occur on execution, overwise test will fail
-		} finally {
-			conn.close();
-		}
-	}
+      try {
 
+        repo.initialize();
+        String update1 =
+            "insert data {  \r\n"
+                + "  <x:s>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ft.com/ontology/thing/Thing> .\r\n"
+                + "  <<<x:s>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ft.com/ontology/thing/Thing>  >> <http://www.ft.com/ontology/event/prov> <http://x>  \r\n"
+                + "}";
+        executeUpdate(repo, update1);
+
+        String update2 =
+            "prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \r\n"
+                + "insert data {  \r\n"
+                + "  <x:s>	rdf:type <http://x/o> .\r\n"
+                + "  <<<x:s>	rdf:type <http://x/o>  >> <http://x/pr> <http://x/or>  \r\n"
+                + "}";
+        executeUpdate(new EmbergraphSailRepository(sail), update2);
+
+        String update3 =
+            "prefix bbb: <http://x/> \r\n"
+                + "insert data {   \r\n"
+                + "  <x:a> rdf:type bbb:B .\r\n"
+                + "  << <x:a> rdf:type bbb:B >><x:pr> <x:pr> .\r\n"
+                + "}";
+        executeUpdate(new EmbergraphSailRepository(sail), update3);
+
+      } finally {
+        repo.shutDown();
+      }
+
+    } finally {
+      sail.__tearDownUnitTest();
+    }
+  }
+
+  private void executeUpdate(final EmbergraphSailRepository repo, final String update)
+      throws UpdateExecutionException, RepositoryException, MalformedQueryException {
+    final EmbergraphSailRepositoryConnection conn = repo.getConnection();
+    try {
+      Update preparedUpdate = conn.prepareUpdate(QueryLanguage.SPARQL, update);
+      preparedUpdate.execute();
+      // no exception should occur on execution, overwise test will fail
+    } finally {
+      conn.close();
+    }
+  }
 }

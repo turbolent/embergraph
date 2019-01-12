@@ -24,12 +24,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.math.BigInteger;
-
-import org.embergraph.rdf.model.EmbergraphResource;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.LongPacker;
@@ -42,344 +36,296 @@ import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOComparator;
 import org.embergraph.rdf.spo.SPOKeyOrder;
+import org.openrdf.model.BNode;
+import org.openrdf.model.Value;
 
 /**
- * Internal value representing an inline statement identifier. Uses the
- * {@link ISPO} supplied in the ctor as the inline value. The
- * {@link #asValue(EmbergraphValueFactory, ILexiconConfiguration)} method returns a
- * {@link EmbergraphBNode} that is used to represent the sid in serialization
- * formats (such as the custom RDF/XML extension for sids). The bnode is
- * guaranteed to always have the same bnode id for a given inlined SPO. This is
- * accomplished using the byte[] key encoding for the spo along with the
- * BigInteger class.
- * <p>
- * This internal value has a {@link VTE} of {@link VTE#STATEMENT}. It is encoded
- * into the statement indices by directly encoding the spo using
- * {@link SPOKeyOrder#encodeKey(IKeyBuilder, ISPO)} via the
- * {@link SPOKeyOrder#SPO} key order. Thus when decoded from the statement
- * indices, the spo associated with this sid is materialized directly from the
- * sid itself. See {@link IVUtility#decode(byte[])}. The spo decoded from the
- * sid IV will be marked as explicit (only explicit statements have sids) and
- * this SidIV will be attached to it. This completely eliminates the need for a
- * reverse index from sid->spo, as the spo is encoded inline into the SidIV
- * itself.  This replaces the TermId model for representing sids.
- * <p>
- * {@inheritDoc}
+ * Internal value representing an inline statement identifier. Uses the {@link ISPO} supplied in the
+ * ctor as the inline value. The {@link #asValue(EmbergraphValueFactory, ILexiconConfiguration)}
+ * method returns a {@link EmbergraphBNode} that is used to represent the sid in serialization
+ * formats (such as the custom RDF/XML extension for sids). The bnode is guaranteed to always have
+ * the same bnode id for a given inlined SPO. This is accomplished using the byte[] key encoding for
+ * the spo along with the BigInteger class.
+ *
+ * <p>This internal value has a {@link VTE} of {@link VTE#STATEMENT}. It is encoded into the
+ * statement indices by directly encoding the spo using {@link SPOKeyOrder#encodeKey(IKeyBuilder,
+ * ISPO)} via the {@link SPOKeyOrder#SPO} key order. Thus when decoded from the statement indices,
+ * the spo associated with this sid is materialized directly from the sid itself. See {@link
+ * IVUtility#decode(byte[])}. The spo decoded from the sid IV will be marked as explicit (only
+ * explicit statements have sids) and this SidIV will be attached to it. This completely eliminates
+ * the need for a reverse index from sid->spo, as the spo is encoded inline into the SidIV itself.
+ * This replaces the TermId model for representing sids.
+ *
+ * <p>{@inheritDoc}
  */
 public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
-        implements Serializable, BNode {
+    implements Serializable, BNode {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 685148537376856907L;
-	
-//	private static final transient Logger log = Logger.getLogger(SidIV.class);
+  /** */
+  private static final long serialVersionUID = 685148537376856907L;
 
-	/**
-	 * The inline spo.
-	 */
-	private final ISPO spo;
-	
-	/**
-	 * The cached byte[] key for the encoding of this IV.
-	 */
-	private transient byte[] key;
-	
-	/**
-	 * The cached materialized EmbergraphValue for this sid.
-	 */
-	private transient V bnode;
+  //	private static final transient Logger log = Logger.getLogger(SidIV.class);
 
-	@Override
-    public IV<V, ISPO> clone(final boolean clearCache) {
+  /** The inline spo. */
+  private final ISPO spo;
 
-        final SidIV<V> tmp = new SidIV<V>(spo);
+  /** The cached byte[] key for the encoding of this IV. */
+  private transient byte[] key;
 
-        // Propagate the cached byte[] key.
-        tmp.key = key;
-        
-        // Propagate the cached EmbergraphValue.
-        tmp.bnode = bnode;
-        
-        if (!clearCache) {
+  /** The cached materialized EmbergraphValue for this sid. */
+  private transient V bnode;
 
-            tmp.setValue(getValueCache());
-            
-        }
-        
-        return tmp;
+  @Override
+  public IV<V, ISPO> clone(final boolean clearCache) {
 
+    final SidIV<V> tmp = new SidIV<V>(spo);
+
+    // Propagate the cached byte[] key.
+    tmp.key = key;
+
+    // Propagate the cached EmbergraphValue.
+    tmp.bnode = bnode;
+
+    if (!clearCache) {
+
+      tmp.setValue(getValueCache());
     }
 
-    /**
-	 * Ctor with internal value spo specified.
-	 */
-	public SidIV(final ISPO spo) {
+    return tmp;
+  }
 
-        /*
-         * Note: XSDBoolean happens to be assigned the code value of 0, which is
-         * the value we we want when the data type enumeration will be ignored.
-         */
-        super(VTE.STATEMENT, DTE.XSDBoolean);
-        
-        this.spo = spo;
-        
-    }
+  /** Ctor with internal value spo specified. */
+  public SidIV(final ISPO spo) {
 
-
-    /**
-     * Return the <code>flags</code> byte for a {@link SidIV}. 
+    /*
+     * Note: XSDBoolean happens to be assigned the code value of 0, which is
+     * the value we we want when the data type enumeration will be ignored.
      */
-    public static final byte toFlags() {
-        /*
-         * Note: XSDBoolean happens to be assigned the code value of 0, which is
-         * the value we want when the data type enumeration will be ignored.
-         */
-        return AbstractIV.toFlags(VTE.STATEMENT, true/* inline */,
-                false/* extension */, DTE.XSDBoolean);
+    super(VTE.STATEMENT, DTE.XSDBoolean);
+
+    this.spo = spo;
+  }
+
+  /** Return the <code>flags</code> byte for a {@link SidIV}. */
+  public static final byte toFlags() {
+    /*
+     * Note: XSDBoolean happens to be assigned the code value of 0, which is
+     * the value we want when the data type enumeration will be ignored.
+     */
+    return AbstractIV.toFlags(
+        VTE.STATEMENT, true /* inline */, false /* extension */, DTE.XSDBoolean);
+  }
+
+  /** Returns the inline spo. */
+  @Override
+  public ISPO getInlineValue() throws UnsupportedOperationException {
+    return spo;
+  }
+
+  /**
+   * Returns the bnode representation of this IV, useful for serialization formats such as RDF/XML.
+   * See {@link #bnodeId()}.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public V asValue(final LexiconRelation lex) {
+    if (bnode == null) {
+      bnode = (V) lex.getValueFactory().createBNode(getID());
+      bnode.setIV(this);
+      bnode.setStatementIdentifier(true);
+
+      final EmbergraphResource c =
+          spo.c() != null ? (EmbergraphResource) spo.c().asValue(lex) : null;
+
+      bnode.setStatement(
+          lex.getValueFactory()
+              .createStatement(
+                  (EmbergraphResource) spo.s().asValue(lex),
+                  (EmbergraphURI) spo.p().asValue(lex),
+                  (EmbergraphValue) spo.o().asValue(lex),
+                  c));
+    }
+    return bnode;
+  }
+
+  /**
+   * Return the byte length for the byte[] encoded representation of this internal value. Depends on
+   * the byte length of the encoded inline spo.
+   */
+  @Override
+  public int byteLength() {
+    return 1 + key().length;
+  }
+
+  @Override
+  public String toString() {
+    return "Sid(" + toString(spo) + ")";
+  }
+
+  /** Pretty print the inline spo. Calling SPO.toString() results in an infinite loop. */
+  private static String toString(final ISPO spo) {
+    return (SPO.toString(spo.s()) + ":" + SPO.toString(spo.p()) + ":" + SPO.toString(spo.o()));
+  }
+
+  @Override
+  public int hashCode() {
+    return spo.hashCode();
+  }
+
+  /**
+   * Implements {@link BNode#getID()}.
+   *
+   * <p>This implementation uses the {@link BigInteger} class to create a unique blank node ID based
+   * on the <code>unsigned byte[]</code> key of the inline {@link SPO}.
+   */
+  @Override
+  public String getID() {
+    //		// just use the hash code.  can result in collisions
+    //		return String.valueOf(hashCode());
+
+    // create a big integer using the spo key.  should result in unique ids
+    final byte[] key = key();
+    final int signum = key.length > 0 ? 1 : 0;
+    final BigInteger bi = new BigInteger(signum, key);
+    return 's' + bi.toString();
+    //		return toString();
+  }
+
+  /** Two {@link SidIV} are equal if their (s,p,o) IVs are equal. */
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o instanceof SidIV) {
+      final ISPO stmt2 = ((SidIV<?>) o).spo;
+      return IVUtility.equals(spo.s(), stmt2.s())
+          && IVUtility.equals(spo.p(), stmt2.p())
+          && IVUtility.equals(spo.o(), stmt2.o());
+      //            return spo.equals(spo2);
+    }
+    return false;
+  }
+
+  public int _compareTo(final IV o) {
+
+    /*
+     * Note: This works, but it might be more expensive.
+     */
+    //	    return UnsignedByteArrayComparator.INSTANCE.compare(key(), ((SidIV)o).key());
+
+    /*
+     * This should work as soon as we fix the other IV Comparable
+     * implementations.
+     */
+    final ISPO spo2 = ((SidIV) o).spo;
+
+    return SPOComparator.INSTANCE.compare(spo, spo2);
+  }
+
+  /**
+   * Encode this internal value into the supplied key builder. Emits the flags, following by the
+   * encoded byte[] representing the spo, in SPO key order.
+   *
+   * <p>{@inheritDoc}
+   */
+  @Override
+  public IKeyBuilder encode(final IKeyBuilder keyBuilder) {
+
+    // First emit the flags byte.
+    keyBuilder.appendSigned(flags());
+
+    // Then append the SPO's key in SPOKeyOrder.SPO
+    keyBuilder.append(key());
+
+    return keyBuilder;
+  }
+
+  private byte[] key() {
+
+    if (key == null) {
+
+      /*
+       * Build the SPO's key in SPOKeyOrder.SPO.
+       */
+
+      final IKeyBuilder keyBuilder = new KeyBuilder(64 /* initialCapacity */);
+
+      key = SPOKeyOrder.SPO.encodeKey(keyBuilder, spo);
     }
 
-    /**
-	 * Returns the inline spo.
-	 */
-	@Override
-	public ISPO getInlineValue() throws UnsupportedOperationException {
-		return spo;
-	}
+    return key;
+  }
 
-	/**
-	 * Returns the bnode representation of this IV, useful for serialization
-	 * formats such as RDF/XML.  See {@link #bnodeId()}.
-	 */
-    @SuppressWarnings("unchecked")
+  /**
+   * Object provides serialization for {@link SidIV} via the write-replace and read-replace pattern.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  private static class SidIVState implements Externalizable {
+
+    private static final long serialVersionUID = -1L;
+
+    //        private byte flags;
+    private byte[] key;
+
+    /** De-serialization constructor. */
+    public SidIVState() {}
+
+    private SidIVState(final SidIV iv) {
+      //            this.flags = flags;
+      this.key = iv.key();
+    }
+
     @Override
-    public V asValue(final LexiconRelation lex) {
-        if (bnode == null) {
-	        bnode = (V) lex.getValueFactory().createBNode(getID());
-	        bnode.setIV(this);
-	        bnode.setStatementIdentifier(true);
-	        
-	        final EmbergraphResource c = spo.c() != null ?
-	        		(EmbergraphResource) spo.c().asValue(lex) : null;
-	        		
-	        bnode.setStatement(lex.getValueFactory().createStatement(
-	        		(EmbergraphResource) spo.s().asValue(lex),
-	        		(EmbergraphURI) spo.p().asValue(lex),
-	        		(EmbergraphValue) spo.o().asValue(lex),
-	        		c));
-        }
-        return bnode;
+    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+      //            flags = in.readByte();
+      final int nbytes = LongPacker.unpackInt(in);
+      key = new byte[nbytes];
+      in.readFully(key);
     }
-
-    /**
-     * Return the byte length for the byte[] encoded representation of this
-     * internal value.  Depends on the byte length of the encoded inline spo.
-     */
-    @Override
-	public int byteLength() {
-		return 1 + key().length;
-	}
-
-	@Override
-	public String toString() {
-		return "Sid("+toString(spo)+")";
-	}
-	
-	/**
-	 * Pretty print the inline spo.  Calling SPO.toString() results in an
-	 * infinite loop.
-	 */
-	private static String toString(final ISPO spo) {
-        return (SPO.toString(spo.s()) + ":" + 
-        		SPO.toString(spo.p()) + ":" + 
-        		SPO.toString(spo.o()));
-	}
 
     @Override
-	public int hashCode() {
-		return spo.hashCode();
-	}
-
-    /**
-     * Implements {@link BNode#getID()}.
-     * <p>
-     * This implementation uses the {@link BigInteger} class to create a unique
-     * blank node ID based on the <code>unsigned byte[]</code> key of the inline
-     * {@link SPO}.
-     */
-	@Override
-	public String getID() {
-//		// just use the hash code.  can result in collisions
-//		return String.valueOf(hashCode());
-		
-		// create a big integer using the spo key.  should result in unique ids
-		final byte[] key = key();
-		final int signum = key.length > 0 ? 1 : 0;
-		final BigInteger bi = new BigInteger(signum, key);
-		return 's' + bi.toString();
-//		return toString();
-	}
-
-	/**
-	 * Two {@link SidIV} are equal if their (s,p,o) IVs are equal.
-	 */
-    @Override
-	public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o instanceof SidIV) {
-        		final ISPO stmt2 = ((SidIV<?>) o).spo;
-        		return
-                        IVUtility.equals(spo.s(), stmt2.s()) &&
-                        IVUtility.equals(spo.p(), stmt2.p()) &&
-                        IVUtility.equals(spo.o(), stmt2.o())
-                        ;
-//            return spo.equals(spo2);
-        }
-        return false;
-	}
-
-	public int _compareTo(final IV o) {
-
-	    /*
-	     * Note: This works, but it might be more expensive.
-	     */
-//	    return UnsignedByteArrayComparator.INSTANCE.compare(key(), ((SidIV)o).key());
-
-        /*
-         * This should work as soon as we fix the other IV Comparable
-         * implementations.
-         */
-        final ISPO spo2 = ((SidIV) o).spo;
-        
-        return SPOComparator.INSTANCE.compare(spo, spo2);
-        
-	}
-	
-    /**
-     * Encode this internal value into the supplied key builder.  Emits the
-     * flags, following by the encoded byte[] representing the spo, in SPO
-     * key order.
-     * <p>
-     * {@inheritDoc}
-     */
-	@Override
-    public IKeyBuilder encode(final IKeyBuilder keyBuilder) {
-
-        // First emit the flags byte.
-        keyBuilder.appendSigned(flags());
-		
-		// Then append the SPO's key in SPOKeyOrder.SPO
-        keyBuilder.append(key());
-        
-        return keyBuilder;
-            
-    }
-    
-    private byte[] key() {
-
-        if (key == null) {
-        
-            /*
-             * Build the SPO's key in SPOKeyOrder.SPO.
-             */
-            
-            final IKeyBuilder keyBuilder = new KeyBuilder(64/* initialCapacity */);
-            
-            key = SPOKeyOrder.SPO.encodeKey(keyBuilder, spo);
-            
-        }
-
-        return key;
-        
+    public void writeExternal(final ObjectOutput out) throws IOException {
+      //            out.writeByte(flags);
+      LongPacker.packLong(out, key.length);
+      out.write(key);
     }
 
-    /**
-     * Object provides serialization for {@link SidIV} via the write-replace
-     * and read-replace pattern.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    private static class SidIVState implements Externalizable {
+    private Object readResolve() throws ObjectStreamException {
 
-        private static final long serialVersionUID = -1L;
+      final ISPO spo = SPOKeyOrder.SPO.decodeKey(key);
 
-//        private byte flags;
-        private byte[] key;
-        
-        /**
-         * De-serialization constructor.
-         */
-        public SidIVState() {
-            
-        }
-        
-        private SidIVState(final SidIV iv) {
-//            this.flags = flags;
-            this.key = iv.key();
-        }
-        
-        @Override
-        public void readExternal(final ObjectInput in) throws IOException,
-                ClassNotFoundException {
-//            flags = in.readByte();
-            final int nbytes = LongPacker.unpackInt(in);
-            key = new byte[nbytes];
-            in.readFully(key);
-        }
+      // SIDs are always explicit statements.
+      spo.setStatementType(StatementEnum.Explicit);
 
-        @Override
-        public void writeExternal(final ObjectOutput out) throws IOException {
-//            out.writeByte(flags);
-            LongPacker.packLong(out, key.length);
-            out.write(key);
-        }
-        
-        private Object readResolve() throws ObjectStreamException {
-
-            final ISPO spo = SPOKeyOrder.SPO.decodeKey(key);
-            
-            // SIDs are always explicit statements.
-            spo.setStatementType(StatementEnum.Explicit);
-            
-            return new SidIV(spo);
-            
-        }
-
+      return new SidIV(spo);
     }
-    
-    private Object writeReplace() throws ObjectStreamException {
-        
-        return new SidIVState(this);
-        
-    }
-    
-    /**
-     * Implements {@link Value#stringValue()}.
-     */
-    @Override
-    public String stringValue() {
-        
-        return getID();
+  }
 
-    }
+  private Object writeReplace() throws ObjectStreamException {
 
-    /**
-     * Does not need materialization to answer BNode interface methods.
-     */
-	@Override
-	public boolean needsMaterialization() {
-		
-		return false;
-		
-	}
+    return new SidIVState(this);
+  }
 
+  /** Implements {@link Value#stringValue()}. */
+  @Override
+  public String stringValue() {
+
+    return getID();
+  }
+
+  /** Does not need materialization to answer BNode interface methods. */
+  @Override
+  public boolean needsMaterialization() {
+
+    return false;
+  }
 }

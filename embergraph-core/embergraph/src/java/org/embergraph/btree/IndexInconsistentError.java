@@ -21,41 +21,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /**
- * Error marks an mutable index as in an inconsistent state. The index MUST be
- * reloaded from the current checkpoint record.
- * 
+ * Error marks an mutable index as in an inconsistent state. The index MUST be reloaded from the
+ * current checkpoint record.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- * @see <a href="http://trac.blazegraph.com/ticket/1005"> Invalidate BTree objects
- *      if error occurs during eviction </a>
+ * @see <a href="http://trac.blazegraph.com/ticket/1005">Invalidate BTree objects if error occurs
+ *     during eviction </a>
  */
 public class IndexInconsistentError extends Error {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public IndexInconsistentError() {
-    }
+  public IndexInconsistentError() {}
 
-    public IndexInconsistentError(String message) {
-        super(message);
-    }
+  public IndexInconsistentError(String message) {
+    super(message);
+  }
 
-    public IndexInconsistentError(Throwable cause) {
-        super(cause);
-    }
+  public IndexInconsistentError(Throwable cause) {
+    super(cause);
+  }
 
-    public IndexInconsistentError(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public IndexInconsistentError(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public IndexInconsistentError(String message, Throwable cause,
-            boolean enableSuppression, boolean writableStackTrace) {
+  public IndexInconsistentError(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 
-        super(message, cause, enableSuppression, writableStackTrace);
-        
-    }
-
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 }

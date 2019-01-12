@@ -26,9 +26,7 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.rdf.rules;
 
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.axioms.Axioms;
@@ -42,90 +40,85 @@ import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Factory for {@link RDFJoinNexus} objects.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RDFJoinNexusFactory extends AbstractJoinNexusFactory {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    protected static final transient Logger log = Logger.getLogger(RDFJoinNexusFactory.class);
+  protected static final transient Logger log = Logger.getLogger(RDFJoinNexusFactory.class);
 
-    final RuleContextEnum ruleContext;
-    final boolean justify;
-    final boolean backchain;
-    final boolean isOwlSameAsUsed;
+  final RuleContextEnum ruleContext;
+  final boolean justify;
+  final boolean backchain;
+  final boolean isOwlSameAsUsed;
 
-    @Override
-    protected void toString(final StringBuilder sb) {
+  @Override
+  protected void toString(final StringBuilder sb) {
 
-        sb.append("{ ruleContext=" + ruleContext);
+    sb.append("{ ruleContext=" + ruleContext);
 
-        sb.append(", justify=" + justify);
+    sb.append(", justify=" + justify);
 
-        sb.append(", backchain=" + backchain);
+    sb.append(", backchain=" + backchain);
 
-        sb.append(", isOwlSameAsUsed=" + isOwlSameAsUsed);
+    sb.append(", isOwlSameAsUsed=" + isOwlSameAsUsed);
+  }
 
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @param justify if justifications are required.
+   * @param backchain Normally <code>true</code> for high level query and <code>false</code> for
+   *     database-at-once-closure and Truth Maintenance. When <code>true</code>, query time
+   *     inferences are included when reading on an {@link IAccessPath} for the {@link SPORelation}
+   *     using the {@link InferenceEngine} to "backchain" any necessary entailments.
+   * @param isOwlSameAsUsed <code>true</code> iff {@link Axioms#isOwlSameAs()} AND <code>
+   *     (x owl:sameAs y)</code> is not empty in the data.
+   */
+  public RDFJoinNexusFactory(
+      final ActionEnum action,
+      final long writeTimestamp,
+      final long readTimestamp,
+      final Properties properties,
+      final int solutionFlags,
+      final IElementFilter<?> filter,
+      final IEvaluationPlanFactory planFactory,
+      final IRuleTaskFactory defaultRuleTaskFactory,
+      // RDF specific parameters.
+      final RuleContextEnum ruleContext,
+      final boolean justify,
+      final boolean backchain,
+      final boolean isOwlSameAsUsed //
+      ) {
 
-	/**
-     * {@inheritDoc}
-     * 
-     * @param justify
-     *            if justifications are required.
-     * @param backchain
-     *            Normally <code>true</code> for high level query and
-     *            <code>false</code> for database-at-once-closure and Truth
-     *            Maintenance. When <code>true</code>, query time inferences
-     *            are included when reading on an {@link IAccessPath} for the
-     *            {@link SPORelation} using the {@link InferenceEngine} to
-     *            "backchain" any necessary entailments.
-     * @param isOwlSameAsUsed
-     *            <code>true</code> iff {@link Axioms#isOwlSameAs()} AND
-     *            <code>(x owl:sameAs y)</code> is not empty in the data.
-     */
-	public RDFJoinNexusFactory(
-	        final ActionEnum action,
-            final long writeTimestamp,
-            final long readTimestamp,
-            final Properties properties,
-            final int solutionFlags,
-            final IElementFilter<?> filter,
-            final IEvaluationPlanFactory planFactory,
-            final IRuleTaskFactory defaultRuleTaskFactory,
-            // RDF specific parameters.
-            final RuleContextEnum ruleContext,
-            final boolean justify,
-            final boolean backchain,
-            final boolean isOwlSameAsUsed// 
-            ) {
+    super(
+        action,
+        writeTimestamp,
+        readTimestamp,
+        properties,
+        solutionFlags,
+        filter,
+        planFactory,
+        defaultRuleTaskFactory);
 
-        super(action, writeTimestamp, readTimestamp, properties, solutionFlags,
-                filter, planFactory, defaultRuleTaskFactory);
-	    
-       if (ruleContext == null)
-            throw new IllegalArgumentException();
+    if (ruleContext == null) throw new IllegalArgumentException();
 
-        this.ruleContext = ruleContext;
+    this.ruleContext = ruleContext;
 
-        this.justify = justify;
+    this.justify = justify;
 
-        this.backchain = backchain;
+    this.backchain = backchain;
 
-        this.isOwlSameAsUsed = isOwlSameAsUsed;
+    this.isOwlSameAsUsed = isOwlSameAsUsed;
+  }
 
-    }
+  @Override
+  protected IJoinNexus newJoinNexus(final IIndexManager indexManager) {
 
-    @Override
-    protected IJoinNexus newJoinNexus(final IIndexManager indexManager) {
-
-        return new RDFJoinNexus(this, indexManager);
-
-    }
-
+    return new RDFJoinNexus(this, indexManager);
+  }
 }

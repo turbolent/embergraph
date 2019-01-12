@@ -4,44 +4,41 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTVar extends SimpleNode {
 
-	private String name;
+  private String name;
 
-	private boolean anonymous;
+  private boolean anonymous;
 
-	public ASTVar(int id) {
-		super(id);
-	}
+  public ASTVar(int id) {
+    super(id);
+  }
 
-	public ASTVar(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTVar(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public boolean isAnonymous() {
-		return anonymous;
-	}
+  public boolean isAnonymous() {
+    return anonymous;
+  }
 
-	public void setAnonymous(boolean anonymous) {
-		this.anonymous = anonymous;
-	}
+  public void setAnonymous(boolean anonymous) {
+    this.anonymous = anonymous;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + " (" + name + ")";
-	}
+  @Override
+  public String toString() {
+    return super.toString() + " (" + name + ")";
+  }
 }

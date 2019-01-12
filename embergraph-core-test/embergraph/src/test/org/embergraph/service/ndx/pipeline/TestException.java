@@ -1,39 +1,31 @@
 package org.embergraph.service.ndx.pipeline;
 
 /**
- * Instances of this class are thrown from within the fixture under test in
- * order to provoke various kinds of error handling.
- * 
+ * Instances of this class are thrown from within the fixture under test in order to provoke various
+ * kinds of error handling.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class TestException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public TestException() {
+  public TestException() {}
 
-    }
+  public TestException(String msg) {
 
-    public TestException(String msg) {
+    super(msg);
+  }
 
-        super(msg);
+  public TestException(Throwable cause) {
 
-    }
+    super(cause);
+  }
 
-    public TestException(Throwable cause) {
+  public TestException(String msg, Throwable cause) {
 
-        super(cause);
-
-    }
-
-    public TestException(String msg, Throwable cause) {
-
-        super(msg, cause);
-
-    }
-
+    super(msg, cause);
+  }
 }

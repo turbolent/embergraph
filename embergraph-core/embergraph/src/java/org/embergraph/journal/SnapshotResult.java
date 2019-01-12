@@ -21,37 +21,34 @@ import java.io.File;
 
 /**
  * Default {@link ISnapshotResult} implementation.
- * 
+ *
  * @author bryan
- * 
- * @see <a href="http://trac.bigdata.com/ticket/1172"> Online backup for Journal
- *      </a>
+ * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
  */
 class SnapshotResult implements ISnapshotResult {
 
-   private final File file;
-   private final boolean compressed;
-   private final IRootBlockView rootBlock;
+  private final File file;
+  private final boolean compressed;
+  private final IRootBlockView rootBlock;
 
-   public SnapshotResult(final File file, final boolean compressed, final IRootBlockView rootBlock) {
-      this.file = file;
-      this.compressed = compressed;
-      this.rootBlock = rootBlock;
-   }
+  public SnapshotResult(final File file, final boolean compressed, final IRootBlockView rootBlock) {
+    this.file = file;
+    this.compressed = compressed;
+    this.rootBlock = rootBlock;
+  }
 
-   @Override
-   public File getFile() {
-      return file;
-   }
+  @Override
+  public File getFile() {
+    return file;
+  }
 
-   @Override
-   public IRootBlockView getRootBlock() {
-      return rootBlock;
-   }
+  @Override
+  public IRootBlockView getRootBlock() {
+    return rootBlock;
+  }
 
-   @Override
-   public boolean getCompressed() {
-      return compressed;
-   }
-
+  @Override
+  public boolean getCompressed() {
+    return compressed;
+  }
 }

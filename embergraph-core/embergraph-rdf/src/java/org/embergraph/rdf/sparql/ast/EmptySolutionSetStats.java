@@ -24,54 +24,50 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
 /**
- * An object which mocks the statistics for a single empty solution set. This is
- * used to make some of the unit tests happy which were written before the
- * {@link ISolutionSetStats} interface was introduced.
- * 
+ * An object which mocks the statistics for a single empty solution set. This is used to make some
+ * of the unit tests happy which were written before the {@link ISolutionSetStats} interface was
+ * introduced.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptySolutionSetStats implements ISolutionSetStats {
 
-    public static final ISolutionSetStats INSTANCE = new EmptySolutionSetStats();
-    
-    private EmptySolutionSetStats() {
+  public static final ISolutionSetStats INSTANCE = new EmptySolutionSetStats();
 
-    }
-    
-    @Override
-    public long getSolutionSetSize() {
-        return 1;
-    }
+  private EmptySolutionSetStats() {}
 
-    @Override
-    public Set<IVariable<?>> getUsedVars() {
-        return Collections.emptySet();
-    }
+  @Override
+  public long getSolutionSetSize() {
+    return 1;
+  }
 
-    @Override
-    public Set<IVariable<?>> getAlwaysBound() {
-        return Collections.emptySet();
-    }
+  @Override
+  public Set<IVariable<?>> getUsedVars() {
+    return Collections.emptySet();
+  }
 
-    @Override
-    public Set<IVariable<?>> getNotAlwaysBound() {
-        return Collections.emptySet();
-    }
+  @Override
+  public Set<IVariable<?>> getAlwaysBound() {
+    return Collections.emptySet();
+  }
 
-    @Override
-    public Set<IVariable<?>> getMaterialized() {
-        return Collections.emptySet();
-    }
+  @Override
+  public Set<IVariable<?>> getNotAlwaysBound() {
+    return Collections.emptySet();
+  }
 
-    @Override
-    public Map<IVariable<?>, IConstant<?>> getConstants() {
-        return Collections.emptyMap();
-    }
+  @Override
+  public Set<IVariable<?>> getMaterialized() {
+    return Collections.emptySet();
+  }
 
+  @Override
+  public Map<IVariable<?>, IConstant<?>> getConstants() {
+    return Collections.emptyMap();
+  }
 }

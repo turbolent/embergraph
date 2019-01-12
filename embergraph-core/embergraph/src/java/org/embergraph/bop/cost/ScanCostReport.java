@@ -2,89 +2,69 @@ package org.embergraph.bop.cost;
 
 import java.io.Serializable;
 
-
 /**
  * A report on the expected cost of an index key range scan.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ScanCostReport implements Serializable {
 
-	/**
-	 * @todo should be either Externalizable and explicitly managed versioning
-	 *       or Serializable with a public interface for versioning.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
+   *     public interface for versioning.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-     * The fast range count.
-     */
-    public final long rangeCount;
-    
-    /**
-     * The #of index partitions in the scan.
-     */
-    public final long shardCount;
+  /** The fast range count. */
+  public final long rangeCount;
 
-    /**
-     * The expected cost of the scan (milliseconds).
-     */
-    public final double cost;
+  /** The #of index partitions in the scan. */
+  public final long shardCount;
 
-    /**
-     * 
-     * @param rangeCount
-     *            The fast range count.
-     * @param cost
-     *            The expected cost for the scan (milliseconds).
-     */
-    public ScanCostReport(final long rangeCount, final double cost) {
+  /** The expected cost of the scan (milliseconds). */
+  public final double cost;
 
-        if (rangeCount < 0)
-            throw new IllegalArgumentException();
+  /**
+   * @param rangeCount The fast range count.
+   * @param cost The expected cost for the scan (milliseconds).
+   */
+  public ScanCostReport(final long rangeCount, final double cost) {
 
-        if (cost < 0)
-            throw new IllegalArgumentException();
-        
-        this.rangeCount = rangeCount;
+    if (rangeCount < 0) throw new IllegalArgumentException();
 
-        this.shardCount = 1;
-        
-        this.cost = cost;
+    if (cost < 0) throw new IllegalArgumentException();
 
-    }
+    this.rangeCount = rangeCount;
 
-    /**
-     * 
-     * @param rangeCount
-     *            The fast range count.
-     * @param shardCount
-     *            The #of index partitions in the scan.
-     * @param cost
-     *            The expected cost for the scan (milliseconds).
-     */
-    public ScanCostReport(final long rangeCount, final long shardCount,
-            final double cost) {
+    this.shardCount = 1;
 
-        this.rangeCount = rangeCount;
+    this.cost = cost;
+  }
 
-        this.shardCount = shardCount;
+  /**
+   * @param rangeCount The fast range count.
+   * @param shardCount The #of index partitions in the scan.
+   * @param cost The expected cost for the scan (milliseconds).
+   */
+  public ScanCostReport(final long rangeCount, final long shardCount, final double cost) {
 
-        this.cost = cost;
+    this.rangeCount = rangeCount;
 
-    }
+    this.shardCount = shardCount;
 
-    /**
-     * Human readable representation.
-     */
-    public String toString() {
-        return super.toString() +
-                "{rangeCount=" + rangeCount +
-                ",shardCount=" + shardCount +
-                ",cost=" + cost +
-                "}";
-    }
+    this.cost = cost;
+  }
 
+  /** Human readable representation. */
+  public String toString() {
+    return super.toString()
+        + "{rangeCount="
+        + rangeCount
+        + ",shardCount="
+        + shardCount
+        + ",cost="
+        + cost
+        + "}";
+  }
 }

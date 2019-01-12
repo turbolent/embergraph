@@ -21,22 +21,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.hints;
 
-/**
- * Base class for {@link Double} query hints.
- */
+/** Base class for {@link Double} query hints. */
 abstract class AbstractDoubleQueryHint extends AbstractQueryHint<Double> {
 
-    protected AbstractDoubleQueryHint(final String name, final Double defaultValue) {
+  protected AbstractDoubleQueryHint(final String name, final Double defaultValue) {
 
-        super(name, defaultValue);
+    super(name, defaultValue);
+  }
 
-    }
+  @Override
+  public Double validate(final String value) {
 
-    @Override
-    public Double validate(final String value) {
-
-        return Double.valueOf(value);
-
-    }
-
+    return Double.valueOf(value);
+  }
 }

@@ -18,34 +18,32 @@ package cutthecrap.utils.striterators;
 import java.util.HashSet;
 import java.util.Set;
 
-/******************************************************************************
- * UniquenessFilter
- * 
- * Derived from Filter, and ensures no duplication, not to be used with large
- * sets!
- * 
- * @todo Side effects can occur via {@link #m_members} across invocations with
- *       this filter.
+/**
+ * **************************************************************************** UniquenessFilter
+ *
+ * <p>Derived from Filter, and ensures no duplication, not to be used with large sets!
+ *
+ * @todo Side effects can occur via {@link #m_members} across invocations with this filter.
  */
 public class UniquenessFilter extends Filter {
 
-    private static final long serialVersionUID = 424197241022124358L;
-//    ArrayList m_members = new ArrayList();
-    private final Set<Object> m_members = new HashSet<Object>();
-	
-  public UniquenessFilter() {
-  }
-  
-	/***********************************************************************
-	 * Just make sure that the current object has not already been returned
-	 **/
+  private static final long serialVersionUID = 424197241022124358L;
+  //    ArrayList m_members = new ArrayList();
+  private final Set<Object> m_members = new HashSet<Object>();
+
+  public UniquenessFilter() {}
+
+  /**
+   * ********************************************************************* Just make sure that the
+   * current object has not already been returned
+   */
   public boolean isValid(Object obj) {
-      return m_members.add(obj);
-//  	if (m_members.contains(obj)) {
-//  		return false;
-//  	}
-//  	m_members.add(obj);
-//  	
-//  	return true;
+    return m_members.add(obj);
+    //  	if (m_members.contains(obj)) {
+    //  		return false;
+    //  	}
+    //  	m_members.add(obj);
+    //
+    //  	return true;
   }
 }

@@ -17,46 +17,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.joinGraph.rto;
 
-/**
- * Type safe enumeration describes the edge condition (if any) for a cardinality
- * estimate.
- */
+/** Type safe enumeration describes the edge condition (if any) for a cardinality estimate. */
 public enum EstimateEnum {
-    /**
-     * An estimate, but not any of the edge conditions.
-     */
-    Normal(" "),
-    /**
-     * The cardinality estimate is exact.
-     */
-    Exact("E"),
-    /**
-     * The cardinality estimation is a lower bound (the actual cardinality may
-     * be higher than the estimated value).
-     * <p>
-     * Note: The estimated cardinality reported for a {@link #LowerBound} is the
-     * sum of the fast range counts for the sampled access paths. See the logic
-     * which handles cutoff join sampling for details on this.
-     */
-    LowerBound("L"),
-    /**
-     * Flag is set when the cardinality estimate underflowed (false zero (0)).
-     */
-    Underflow("U"),
-    ;
+  /** An estimate, but not any of the edge conditions. */
+  Normal(" "),
+  /** The cardinality estimate is exact. */
+  Exact("E"),
+  /**
+   * The cardinality estimation is a lower bound (the actual cardinality may be higher than the
+   * estimated value).
+   *
+   * <p>Note: The estimated cardinality reported for a {@link #LowerBound} is the sum of the fast
+   * range counts for the sampled access paths. See the logic which handles cutoff join sampling for
+   * details on this.
+   */
+  LowerBound("L"),
+  /** Flag is set when the cardinality estimate underflowed (false zero (0)). */
+  Underflow("U"),
+  ;
 
-    private EstimateEnum(final String code) {
+  private EstimateEnum(final String code) {
 
-        this.code = code;
+    this.code = code;
+  }
 
-    }
+  private final String code;
 
-    private final String code;
+  public String getCode() {
 
-    public String getCode() {
-
-        return code;
-
-    }
-
+    return code;
+  }
 }

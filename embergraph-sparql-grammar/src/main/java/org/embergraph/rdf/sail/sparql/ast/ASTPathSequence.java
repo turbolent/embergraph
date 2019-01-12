@@ -4,8 +4,7 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 import java.util.List;
 
-public
-class ASTPathSequence extends SimpleNode {
+public class ASTPathSequence extends SimpleNode {
   public ASTPathSequence(int id) {
     super(id);
   }
@@ -14,14 +13,13 @@ class ASTPathSequence extends SimpleNode {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
+
   public List<ASTPathElt> getPathElements() {
-	  return jjtGetChildren(ASTPathElt.class);
+    return jjtGetChildren(ASTPathElt.class);
   }
 }
 /* JavaCC - OriginalChecksum=291cd072e3d6ff6cb5758dc9b7f155ac (do not edit this line) */

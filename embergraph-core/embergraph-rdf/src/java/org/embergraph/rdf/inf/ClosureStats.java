@@ -23,62 +23,56 @@ import org.embergraph.counters.CAT;
 
 /**
  * Statistics collected when performing inference.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ClosureStats {
-    
-    /**
-     * The #of entailments that were added to the database (this includes axioms
-     * and statements entailed given the data). This reports only the actual
-     * change in the #of statements in the database across the closure
-     * operation.
-     */
-    public final CAT mutationCount = new CAT();
 
-    /**
-     * Time to compute the entailments and store them within the database
-     * (milliseconds).
-     */
-    public final CAT elapsed = new CAT();
+  /**
+   * The #of entailments that were added to the database (this includes axioms and statements
+   * entailed given the data). This reports only the actual change in the #of statements in the
+   * database across the closure operation.
+   */
+  public final CAT mutationCount = new CAT();
 
-    public ClosureStats() {
-        
-    }
-    
-    /**
-     * 
-     * @param mutationCount
-     * @param elapsed
-     */
-    public ClosureStats(final long mutationCount,final long elapsed) {
-        
-        this.mutationCount.set(mutationCount);
-        
-        this.elapsed.set( elapsed);
-        
-    }
-    
-    public void add(final ClosureStats o) {
-        
-        this.mutationCount.add( o.mutationCount.get());
-        
-        this.elapsed.add(o.elapsed.get());
-        
-    }
-    
-    public long triplesPerSecond() {
+  /** Time to compute the entailments and store them within the database (milliseconds). */
+  public final CAT elapsed = new CAT();
 
-        return ((long) (((double) mutationCount.get()) / ((double) elapsed.get()) * 1000d));
+  public ClosureStats() {}
 
-    }
+  /**
+   * @param mutationCount
+   * @param elapsed
+   */
+  public ClosureStats(final long mutationCount, final long elapsed) {
 
-    public String toString() {
+    this.mutationCount.set(mutationCount);
 
-        return getClass().getSimpleName() + "{mutationCount=" + mutationCount.estimate_get()
-                + ", elapsed=" + elapsed.estimate_get() + "ms, rate="+triplesPerSecond()+"}";
-        
-    }
-    
+    this.elapsed.set(elapsed);
+  }
+
+  public void add(final ClosureStats o) {
+
+    this.mutationCount.add(o.mutationCount.get());
+
+    this.elapsed.add(o.elapsed.get());
+  }
+
+  public long triplesPerSecond() {
+
+    return ((long) (((double) mutationCount.get()) / ((double) elapsed.get()) * 1000d));
+  }
+
+  public String toString() {
+
+    return getClass().getSimpleName()
+        + "{mutationCount="
+        + mutationCount.estimate_get()
+        + ", elapsed="
+        + elapsed.estimate_get()
+        + "ms, rate="
+        + triplesPerSecond()
+        + "}";
+  }
 }

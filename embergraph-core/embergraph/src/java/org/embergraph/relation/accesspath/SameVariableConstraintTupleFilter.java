@@ -22,37 +22,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 import java.io.Serializable;
-
 import org.embergraph.bop.ap.filter.SameVariableConstraint;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.filter.TupleFilter;
 
 /**
  * {@link TupleFilter} class wrapping the {@link SameVariableConstraint}.
- * <p>
- * Note: This filter can execute local to the index shard in scale-out.
- * Therefore it MUST NOT have a reference to the {@link AccessPath} in order to
- * be {@link Serializable}. This used to be an "inline" class in
- * {@link AccessPath}. It was promoted to a top-level class for this reason.
+ *
+ * <p>Note: This filter can execute local to the index shard in scale-out. Therefore it MUST NOT
+ * have a reference to the {@link AccessPath} in order to be {@link Serializable}. This used to be
+ * an "inline" class in {@link AccessPath}. It was promoted to a top-level class for this reason.
  */
 public class SameVariableConstraintTupleFilter<E> extends TupleFilter<E> {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final SameVariableConstraint<E> sameVariableConstraint;
+  private final SameVariableConstraint<E> sameVariableConstraint;
 
-    SameVariableConstraintTupleFilter(
-            final SameVariableConstraint<E> sameVariableConstraint) {
+  SameVariableConstraintTupleFilter(final SameVariableConstraint<E> sameVariableConstraint) {
 
-        this.sameVariableConstraint = sameVariableConstraint;
+    this.sameVariableConstraint = sameVariableConstraint;
+  }
 
-    }
+  @Override
+  protected boolean isValid(final ITuple tuple) {
 
-    @Override
-    protected boolean isValid(final ITuple tuple) {
-
-        return sameVariableConstraint.isValid(tuple.getObject());
-
-    }
-
+    return sameVariableConstraint.isValid(tuple.getObject());
+  }
 }

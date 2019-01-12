@@ -17,54 +17,50 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-
 /**
- * Test suite for a heisenbug involving BIND. Unlike the other issues this
- * sometimes happens, and is sometimes OK, so we run the test in a loop 20
- * times.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/708">
- *      Heisenbug </a>
+ * Test suite for a heisenbug involving BIND. Unlike the other issues this sometimes happens, and is
+ * sometimes OK, so we run the test in a loop 20 times.
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/708">Heisenbug </a>
  */
 public class TestTicket887 extends AbstractDataDrivenSPARQLTestCase {
 
-    public TestTicket887() {
-    }
+  public TestTicket887() {}
 
-    public TestTicket887(String name) {
-        super(name);
-    }
+  public TestTicket887(String name) {
+    super(name);
+  }
 
-    /**
-     * <pre>
-     * SELECT *
-     * WHERE {
-     * 
-     *     GRAPH ?g {
-     * 
-     *         BIND( "hello" as ?hello ) .
-     *         BIND( CONCAT(?hello, " world") as ?helloWorld ) .
-     * 
-     *     ?member a ?class .
-     * 
-     *     }
-     * 
-     * }
-     * LIMIT 1
-     * </pre>
-     * 
-     * @see <a href="http://trac.blazegraph.com/ticket/887" > BIND is leaving a
-     *      variable unbound </a>
-     */
-    public void test_ticket_887_bind() throws Exception {
-        
-        new TestHelper(
-                "ticket_887_bind", // testURI,
-                "ticket_887_bind.rq",// queryFileURL
-                "ticket_887_bind.trig",// dataFileURL
-                "ticket_887_bind.srx"// resultFileURL
-                ).runTest();
+  /**
+   *
+   *
+   * <pre>
+   * SELECT *
+   * WHERE {
+   *
+   *     GRAPH ?g {
+   *
+   *         BIND( "hello" as ?hello ) .
+   *         BIND( CONCAT(?hello, " world") as ?helloWorld ) .
+   *
+   *     ?member a ?class .
+   *
+   *     }
+   *
+   * }
+   * LIMIT 1
+   * </pre>
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/887" > BIND is leaving a variable unbound </a>
+   */
+  public void test_ticket_887_bind() throws Exception {
 
-    }
-    
+    new TestHelper(
+            "ticket_887_bind", // testURI,
+            "ticket_887_bind.rq", // queryFileURL
+            "ticket_887_bind.trig", // dataFileURL
+            "ticket_887_bind.srx" // resultFileURL
+            )
+        .runTest();
+  }
 }

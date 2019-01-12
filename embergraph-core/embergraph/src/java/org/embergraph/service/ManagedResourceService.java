@@ -25,94 +25,77 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.UUID;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.DirectBufferPoolAllocator;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 
 /**
- * This class manages a pool of direct {@link ByteBuffer}s. The application can
- * create which are exposed for retrieval by remote services.
- * 
+ * This class manages a pool of direct {@link ByteBuffer}s. The application can create which are
+ * exposed for retrieval by remote services.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: ManagedResourceService.java 3515 2010-09-08 13:16:30Z
- *          thompsonbry $
- * 
- * @todo Harmonize the constructors with the base class (and perhaps simplify)
- *       and add a constructor argument for the maximum #of buffers which may be
- *       allocated from the pool or leave this to the annotated {@link BOp}s or
- *       to logic managing resource utilization during query evaluation? E.g.,
- *       breaking a query if it would demand too many resources given the
- *       concurrent query demand or forcing the query to block until sufficient
- *       resources are available?
+ * @version $Id: ManagedResourceService.java 3515 2010-09-08 13:16:30Z thompsonbry $
+ * @todo Harmonize the constructors with the base class (and perhaps simplify) and add a constructor
+ *     argument for the maximum #of buffers which may be allocated from the pool or leave this to
+ *     the annotated {@link BOp}s or to logic managing resource utilization during query evaluation?
+ *     E.g., breaking a query if it would demand too many resources given the concurrent query
+ *     demand or forcing the query to block until sufficient resources are available?
  */
-abstract public class ManagedResourceService extends ResourceService {
+public abstract class ManagedResourceService extends ResourceService {
 
-    private final DirectBufferPoolAllocator allocator;
+  private final DirectBufferPoolAllocator allocator;
 
-    /**
-     * The object used to make, resolve, and release allocations against a
-     * {@link DirectBufferPool}.
-     */
-    public DirectBufferPoolAllocator getAllocator() {
-       
-        return allocator;
-        
-    }
-    
-    /**
-     * Create and start the service.
-     * 
-     * @param addr
-     *            The IP address and port at which the service will accept
-     *            connections. The port MAY be zero to use an ephemeral port.
-     * @param requestServicePoolSize
-     *            The size of the thread pool that will handle requests. When
-     *            ZERO (0) a cached thread pool will be used with no specific
-     *            size limit.
-     * 
-     * @throws IOException
-     */
-    public ManagedResourceService(final InetSocketAddress addr,
-            final int requestServicePoolSize) throws IOException {
+  /**
+   * The object used to make, resolve, and release allocations against a {@link DirectBufferPool}.
+   */
+  public DirectBufferPoolAllocator getAllocator() {
 
-        super(addr, requestServicePoolSize);
+    return allocator;
+  }
 
-        this.allocator = new DirectBufferPoolAllocator(
-                DirectBufferPool.INSTANCE);
+  /**
+   * Create and start the service.
+   *
+   * @param addr The IP address and port at which the service will accept connections. The port MAY
+   *     be zero to use an ephemeral port.
+   * @param requestServicePoolSize The size of the thread pool that will handle requests. When ZERO
+   *     (0) a cached thread pool will be used with no specific size limit.
+   * @throws IOException
+   */
+  public ManagedResourceService(final InetSocketAddress addr, final int requestServicePoolSize)
+      throws IOException {
 
-    }
-    
-    @Override
-    synchronized public void shutdown() {
-        super.shutdown();
-        allocator.close();
-    }
+    super(addr, requestServicePoolSize);
 
-    @Override
-    synchronized public void shutdownNow() {
-        super.shutdownNow();
-        allocator.close();
-    }
+    this.allocator = new DirectBufferPoolAllocator(DirectBufferPool.INSTANCE);
+  }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @todo An allocation can be concurrently released if a query terminates.
-     *       Make sure that we interrupt any transfer in progress for the
-     *       allocation when the allocation is released since there is nothing
-     *       to prevent the same direct {@link ByteBuffer} from being assigned
-     *       to a new allocation context and new allocations made against it
-     *       concurrent with any ongoing attempt to read the data from that
-     *       allocation.
-     */
-    @Override
-    protected ByteBuffer getBuffer(final UUID uuid) throws Exception {
-        final IAllocation allocation = allocator.getAllocation(uuid);
-        if (allocation == null)
-            return null;
-        return allocation.getSlice();
-    }
+  @Override
+  public synchronized void shutdown() {
+    super.shutdown();
+    allocator.close();
+  }
 
+  @Override
+  public synchronized void shutdownNow() {
+    super.shutdownNow();
+    allocator.close();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @todo An allocation can be concurrently released if a query terminates. Make sure that we
+   *     interrupt any transfer in progress for the allocation when the allocation is released since
+   *     there is nothing to prevent the same direct {@link ByteBuffer} from being assigned to a new
+   *     allocation context and new allocations made against it concurrent with any ongoing attempt
+   *     to read the data from that allocation.
+   */
+  @Override
+  protected ByteBuffer getBuffer(final UUID uuid) throws Exception {
+    final IAllocation allocation = allocator.getAllocation(uuid);
+    if (allocation == null) return null;
+    return allocation.getSlice();
+  }
 }

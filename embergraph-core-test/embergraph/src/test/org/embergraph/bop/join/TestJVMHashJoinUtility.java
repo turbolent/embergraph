@@ -25,32 +25,24 @@ import org.embergraph.bop.PipelineOp;
 
 /**
  * Test suite for the {@link JVMHashJoinUtility}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestJVMHashJoinUtility.java 5343 2011-10-17 15:29:02Z
- *          thompsonbry $
+ * @version $Id: TestJVMHashJoinUtility.java 5343 2011-10-17 15:29:02Z thompsonbry $
  */
 public class TestJVMHashJoinUtility extends AbstractHashJoinUtilityTestCase {
 
-    /**
-     * 
-     */
-    public TestJVMHashJoinUtility() {
-    }
+  /** */
+  public TestJVMHashJoinUtility() {}
 
-    /**
-     * @param name
-     */
-    public TestJVMHashJoinUtility(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestJVMHashJoinUtility(String name) {
+    super(name);
+  }
 
-    @Override
-    protected JVMHashJoinUtility newHashJoinUtility(final PipelineOp op,
-            final JoinTypeEnum joinType) {
-        
-        return new JVMHashJoinUtility(op, joinType);
-        
-    }
-    
+  @Override
+  protected JVMHashJoinUtility newHashJoinUtility(
+      final PipelineOp op, final JoinTypeEnum joinType) {
+
+    return new JVMHashJoinUtility(op, joinType);
+  }
 }

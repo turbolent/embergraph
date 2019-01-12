@@ -21,108 +21,83 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rwstore.sector;
 
+import junit.framework.TestCase2;
 import org.embergraph.io.DirectBufferPool;
 
-import junit.framework.TestCase2;
-
 /**
- * Some additional tests for the {@link MemoryManager} which look at the effect
- * of the #of buffers it is allowed to allocate.
- * 
+ * Some additional tests for the {@link MemoryManager} which look at the effect of the #of buffers
+ * it is allowed to allocate.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMemoryManager2 extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestMemoryManager2() {
+  /** */
+  public TestMemoryManager2() {}
+
+  /** @param name */
+  public TestMemoryManager2(String name) {
+    super(name);
+  }
+
+  /** Verify that nsectors must be positive. */
+  public void test_maxBuffers0() {
+
+    MemoryManager mmgr = null;
+    try {
+
+      mmgr = new MemoryManager(DirectBufferPool.INSTANCE, 0 /* nsectors */);
+
+      fail("Expecting : " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+
+    } finally {
+
+      if (mmgr != null) mmgr.clear();
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestMemoryManager2(String name) {
-        super(name);
+  /** Verify that nsectors must be positive. */
+  public void test_maxBuffersNegative() {
+
+    MemoryManager mmgr = null;
+    try {
+
+      mmgr = new MemoryManager(DirectBufferPool.INSTANCE, -1 /* nsectors */);
+
+      fail("Expecting : " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+
+    } finally {
+
+      if (mmgr != null) mmgr.clear();
     }
+  }
 
-    /**
-     * Verify that nsectors must be positive.
-     */
-    public void test_maxBuffers0() {
+  /** Verify that pool must not be <code>null</code>. */
+  public void test_pool_is_null() {
 
-        MemoryManager mmgr = null;
-        try {
+    MemoryManager mmgr = null;
+    try {
 
-            mmgr = new MemoryManager(DirectBufferPool.INSTANCE, 0/* nsectors */);
+      mmgr = new MemoryManager(null /* pool */, 1 /* nsectors */);
 
-            fail("Expecting : " + IllegalArgumentException.class);
+      fail("Expecting : " + IllegalArgumentException.class);
 
-        } catch (IllegalArgumentException ex) {
+    } catch (IllegalArgumentException ex) {
 
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
 
-        } finally {
+    } finally {
 
-            if (mmgr != null)
-                mmgr.clear();
-
-        }
-
+      if (mmgr != null) mmgr.clear();
     }
-    
-    /**
-     * Verify that nsectors must be positive.
-     */
-    public void test_maxBuffersNegative() {
-        
-        MemoryManager mmgr = null;
-        try {
-
-            mmgr = new MemoryManager(DirectBufferPool.INSTANCE, -1/* nsectors */);
-
-            fail("Expecting : " + IllegalArgumentException.class);
-
-        } catch (IllegalArgumentException ex) {
-
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-
-        } finally {
-
-            if (mmgr != null)
-                mmgr.clear();
-
-        }
-        
-    }
- 
-    /**
-     * Verify that pool must not be <code>null</code>.
-     */
-    public void test_pool_is_null() {
-
-        MemoryManager mmgr = null;
-        try {
-
-            mmgr = new MemoryManager(null/* pool */, 1/* nsectors */);
-
-            fail("Expecting : " + IllegalArgumentException.class);
-
-        } catch (IllegalArgumentException ex) {
-
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-
-        } finally {
-
-            if (mmgr != null)
-                mmgr.clear();
-
-        }
-
-    }
-    
+  }
 }

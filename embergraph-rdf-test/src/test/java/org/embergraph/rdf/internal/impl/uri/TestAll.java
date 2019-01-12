@@ -22,38 +22,26 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * 
  * @author <a href="mailto:beebs@users.sourceforge.net">Brad Bebee</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("RDF Internal URI Impl Tests");
+    final TestSuite suite = new TestSuite("RDF Internal URI Impl Tests");
 
-        suite.addTestSuite(IPv4AddrIVTest.class);
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(IPv4AddrIVTest.class);
+
+    return suite;
+  }
 }

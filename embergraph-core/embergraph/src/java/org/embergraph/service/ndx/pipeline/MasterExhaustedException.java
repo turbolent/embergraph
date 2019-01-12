@@ -24,47 +24,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 /**
- * An instance of this exception is thrown when a sink closes it's input queue
- * due to the master being exhausted. Since redirects of outstanding writes can
- * cause the master to (re-)process redirected chunks, this is treated as a
- * conditional close and the sink MAY be re-opened.
- * 
+ * An instance of this exception is thrown when a sink closes it's input queue due to the master
+ * being exhausted. Since redirects of outstanding writes can cause the master to (re-)process
+ * redirected chunks, this is treated as a conditional close and the sink MAY be re-opened.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MasterExhaustedException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2401944642147662964L;
+  /** */
+  private static final long serialVersionUID = -2401944642147662964L;
 
-    /**
-     * 
-     */
-    public MasterExhaustedException() {
-    }
+  /** */
+  public MasterExhaustedException() {}
 
-    /**
-     * @param message
-     */
-    public MasterExhaustedException(final String message) {
-        super(message);
-    }
+  /** @param message */
+  public MasterExhaustedException(final String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public MasterExhaustedException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public MasterExhaustedException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public MasterExhaustedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public MasterExhaustedException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

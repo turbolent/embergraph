@@ -22,44 +22,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.solutions;
 
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.engine.BOpStats;
 
 /**
  * A utility class for logging type errors.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TypeErrorLog {
 
-    private final static transient Logger log = Logger
-            .getLogger(TypeErrorLog.class);
+  private static final transient Logger log = Logger.getLogger(TypeErrorLog.class);
 
-    /**
-     * Logs a type error.
-     * 
-     * @param t
-     *            The cause.
-     * @param expr
-     *            The expression which resulted in a type error.
-     * @param stats
-     *            Used to report the type errors as a side-effect on
-     *            {@link BOpStats#typeErrors}.
-     */
-    static public void handleTypeError(
-            // final Logger log,
-            final Throwable t,
-            final IValueExpression<?> expr,
-            final BOpStats stats
-            ) {
+  /**
+   * Logs a type error.
+   *
+   * @param t The cause.
+   * @param expr The expression which resulted in a type error.
+   * @param stats Used to report the type errors as a side-effect on {@link BOpStats#typeErrors}.
+   */
+  public static void handleTypeError(
+      // final Logger log,
+      final Throwable t,
+      final IValueExpression<?> expr,
+      final BOpStats stats) {
 
-        stats.typeErrors.increment();
-        
-        if (log.isInfoEnabled())
-            log.info("Type error: expr=" + expr + ", cause=" + t);
+    stats.typeErrors.increment();
 
-    }
-
+    if (log.isInfoEnabled()) log.info("Type error: expr=" + expr + ", cause=" + t);
+  }
 }

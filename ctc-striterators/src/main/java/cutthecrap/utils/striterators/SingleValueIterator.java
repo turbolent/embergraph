@@ -15,42 +15,40 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-
-
-/***************************************************************************
- * SingleValueIterator
+/**
+ * ************************************************************************* SingleValueIterator
  *
- * Only one value but need to return an iterator?  This makes it easy.
+ * <p>Only one value but need to return an iterator? This makes it easy.
  */
+public class SingleValueIterator<E> implements ICloseableIterator<E> {
+  private E m_value;
+  private boolean m_hasNext = true;
 
- public class SingleValueIterator<E> implements ICloseableIterator<E> {
-	private E m_value;
-	private boolean m_hasNext = true;
-	
-	public SingleValueIterator(final E value) {
-		m_value = value;
-	}
-	public boolean hasNext() {
-		return m_hasNext;
-	}
-	public E next() {
+  public SingleValueIterator(final E value) {
+    m_value = value;
+  }
+
+  public boolean hasNext() {
+    return m_hasNext;
+  }
+
+  public E next() {
     if (!m_hasNext) {
       m_value = null;
     } else {
-		  m_hasNext = false;
+      m_hasNext = false;
     }
-	
-		return m_value;
-	}
-	public void remove() {
-		m_hasNext = false;
-		m_value = null;
-	}
 
-	@Override
-    public void close() {
-	    m_hasNext = false;
-    }
+    return m_value;
+  }
+
+  public void remove() {
+    m_hasNext = false;
+    m_value = null;
+  }
+
+  @Override
+  public void close() {
+    m_hasNext = false;
+  }
 }
-
-

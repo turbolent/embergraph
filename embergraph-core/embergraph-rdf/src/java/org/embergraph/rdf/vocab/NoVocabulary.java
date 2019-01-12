@@ -24,44 +24,31 @@ package org.embergraph.rdf.vocab;
 
 /**
  * An empty {@link Vocabulary}.
- * <p>
- * Note: The use of this class is no longer recommended. It was used
- * historically when the lexicon should be empty (no pre-declared terms).
- * However, the {@link Vocabulary} now provides a mechanism for fast and compact
- * inlining of URIs into the statement indices. Using an empty
- * {@link Vocabulary} therefore simply robs you of the opportunity to have more
- * compact encodings of those URIs.
- * 
+ *
+ * <p>Note: The use of this class is no longer recommended. It was used historically when the
+ * lexicon should be empty (no pre-declared terms). However, the {@link Vocabulary} now provides a
+ * mechanism for fast and compact inlining of URIs into the statement indices. Using an empty {@link
+ * Vocabulary} therefore simply robs you of the opportunity to have more compact encodings of those
+ * URIs.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NoVocabulary extends BaseVocabulary {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5023634139839648847L;
+  /** */
+  private static final long serialVersionUID = -5023634139839648847L;
 
-    /**
-     * De-serialization ctor.
-     */
-    public NoVocabulary() {
-    }
+  /** De-serialization ctor. */
+  public NoVocabulary() {}
 
-    /**
-     * @param Namespace
-     */
-    public NoVocabulary(final String namespace) {
+  /** @param Namespace */
+  public NoVocabulary(final String namespace) {
 
-        super(namespace);
-        
-    }
+    super(namespace);
+  }
 
-    /**
-     * NOP.
-     */
-    @Override
-    protected void addValues() {
-    }
-
+  /** NOP. */
+  @Override
+  protected void addValues() {}
 }

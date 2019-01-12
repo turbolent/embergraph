@@ -30,52 +30,52 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * The query hint governing the initial sample size for the RTO optimizer.
- * 
+ *
  * @see JGraph
  * @see QueryHints#RTO_LIMIT
  */
 final class RTOLimitQueryHint extends AbstractIntQueryHint {
 
-    public RTOLimitQueryHint() {
-        super(QueryHints.RTO_LIMIT, QueryHints.DEFAULT_RTO_LIMIT);
+  public RTOLimitQueryHint() {
+    super(QueryHints.RTO_LIMIT, QueryHints.DEFAULT_RTO_LIMIT);
+  }
+
+  @Override
+  public Integer validate(final String value) {
+
+    final int i;
+    try {
+      i = Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException(
+          "Not an integer value: hint=" + getName() + ", value=" + value);
     }
 
-    @Override
-    public Integer validate(final String value) {
+    if (i <= 0)
+      throw new IllegalArgumentException(
+          "Must be positive: hint=" + getName() + ", value=" + value);
 
-        final int i;
-        try {
-            i = Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Not an integer value: hint=" + getName() + ", value=" + value);
+    return i;
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext ctx,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    switch (scope) {
+      case Group:
+      case GroupAndSubGroups:
+      case Query:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(ctx, scope, op, getName(), value);
         }
-
-        if (i <= 0)
-            throw new IllegalArgumentException("Must be positive: hint="
-                    + getName() + ", value=" + value);
-
-        return i;
-        
+        return;
     }
-
-    @Override
-    public void handle(final AST2BOpContext ctx,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope,
-            final ASTBase op, final Integer value) {
-
-        switch (scope) {
-        case Group:
-        case GroupAndSubGroups:
-        case Query:
-        case SubQuery:
-            if (op instanceof JoinGroupNode) {
-                _setAnnotation(ctx, scope, op, getName(), value);
-            }
-            return;
-        }
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

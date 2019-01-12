@@ -23,52 +23,47 @@ package org.embergraph.bop.ap.filter;
 
 import java.util.Iterator;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
- * A filter which does nothing. This may be used to stack existing
- * {@link BOpFilterBase} operators.
- * 
+ * A filter which does nothing. This may be used to stack existing {@link BOpFilterBase} operators.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BOpFilterNOP extends BOpFilterBase {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-//    /**
-//     * Deserialization.
-//     */
-//    public BOpFilterNOP() {
-//        super();
-//    }
-    
-    /**
-     * Deep copy.
-     * 
-     * @param op
-     */
-    public BOpFilterNOP(BOpFilterNOP op) {
-        super(op);
-    }
+  //    /**
+  //     * Deserialization.
+  //     */
+  //    public BOpFilterNOP() {
+  //        super();
+  //    }
 
-    /**
-     * Shallow copy.
-     * 
-     * @param args
-     * @param annotations
-     */
-    public BOpFilterNOP(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+  /**
+   * Deep copy.
+   *
+   * @param op
+   */
+  public BOpFilterNOP(BOpFilterNOP op) {
+    super(op);
+  }
 
-    @Override
-    final protected Iterator filterOnce(Iterator src, Object context) {
-        return src;
-    }
+  /**
+   * Shallow copy.
+   *
+   * @param args
+   * @param annotations
+   */
+  public BOpFilterNOP(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
 
+  @Override
+  protected final Iterator filterOnce(Iterator src, Object context) {
+    return src;
+  }
 }

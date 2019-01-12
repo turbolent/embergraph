@@ -24,117 +24,92 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.counters;
 
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 
 /**
- * Abstract class for reporting instrumented values supporting some useful
- * conversions.
- * 
+ * Abstract class for reporting instrumented values supporting some useful conversions.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class Instrument<T> implements IInstrument<T> {
+public abstract class Instrument<T> implements IInstrument<T> {
 
-    protected static Logger log = Logger.getLogger(Instrument.class);
-    
-    /** <code>N/A</code> */
-    protected static final transient String NA = "N/A";
-    
-    /**
-     * Converts an event count whose durations were measured in elapsed
-     * nanoseconds to an event rate per second.
-     * 
-     * @param counter
-     *            The event count.
-     * @param nanos
-     *            The elapsed nanoseconds for the events.
-     * 
-     * @return Either {@value #NA} if <i>nanos</i> is ZERO (0) or the rate per
-     *         second for the event.
-     * 
-     * @todo move to a util class? deprecate and remove in favor of Double counters?
-     */
-    public final String nanosToPerSec(long counter, long nanos) {
+  protected static Logger log = Logger.getLogger(Instrument.class);
 
-        long secs = TimeUnit.SECONDS.convert(nanos, TimeUnit.NANOSECONDS);
+  /** <code>N/A</code> */
+  protected static final transient String NA = "N/A";
 
-        if (secs == 0L)
-            return NA;
+  /**
+   * Converts an event count whose durations were measured in elapsed nanoseconds to an event rate
+   * per second.
+   *
+   * @param counter The event count.
+   * @param nanos The elapsed nanoseconds for the events.
+   * @return Either {@value #NA} if <i>nanos</i> is ZERO (0) or the rate per second for the event.
+   * @todo move to a util class? deprecate and remove in favor of Double counters?
+   */
+  public final String nanosToPerSec(long counter, long nanos) {
 
-        return "" + counter / secs;
+    long secs = TimeUnit.SECONDS.convert(nanos, TimeUnit.NANOSECONDS);
 
-    }
+    if (secs == 0L) return NA;
 
-    /**
-     * Take a sample, setting the current value and timestamp using either
-     * {@link #setValue(Object)} or {@link #setValue(Object, long)}.
-     */
-    abstract protected void sample();    
+    return "" + counter / secs;
+  }
 
-    /**
-     * Set the value.
-     * 
-     * @param value
-     *            The value, which will be associated with the current time as
-     *            reported by {@link System#currentTimeMillis()}.
-     */
-    final public void setValue(T value) {
-        
-        setValue(value, System.currentTimeMillis());
-        
-    }
+  /**
+   * Take a sample, setting the current value and timestamp using either {@link #setValue(Object)}
+   * or {@link #setValue(Object, long)}.
+   */
+  protected abstract void sample();
 
-    /**
-     * Set the value.
-     * 
-     * @param value
-     *            The value.
-     * @param timestamp
-     *            The timestamp for that value.
-     */
-    final public void setValue(T value,long timestamp) {
+  /**
+   * Set the value.
+   *
+   * @param value The value, which will be associated with the current time as reported by {@link
+   *     System#currentTimeMillis()}.
+   */
+  public final void setValue(T value) {
 
-        if(log.isInfoEnabled())
-            log.info("value="+value+", timestamp="+timestamp);
-        
-        this.value = value;
-        
-        this.lastModified = timestamp;
-        
-    }
-    
-    final public T getValue() {
-        
-        sample();
-        
-        return value;
-        
-    }
-    
-    /**
-     * Return the current value without taking another {@link #sample()}
-     */
-    public T getCurrentValue() {
-        
-        return value;
-        
-    }
-    
-    final public long lastModified() {
-        
-        return lastModified;
-        
-    }
-    
-    /**
-     * The current value -or- <code>null</code> if there is no current value.
-     */
-    protected T value;
-    
-    /**
-     * The timestamp associated with {@link #value}.
-     */
-    protected long lastModified;
+    setValue(value, System.currentTimeMillis());
+  }
 
+  /**
+   * Set the value.
+   *
+   * @param value The value.
+   * @param timestamp The timestamp for that value.
+   */
+  public final void setValue(T value, long timestamp) {
+
+    if (log.isInfoEnabled()) log.info("value=" + value + ", timestamp=" + timestamp);
+
+    this.value = value;
+
+    this.lastModified = timestamp;
+  }
+
+  public final T getValue() {
+
+    sample();
+
+    return value;
+  }
+
+  /** Return the current value without taking another {@link #sample()} */
+  public T getCurrentValue() {
+
+    return value;
+  }
+
+  public final long lastModified() {
+
+    return lastModified;
+  }
+
+  /** The current value -or- <code>null</code> if there is no current value. */
+  protected T value;
+
+  /** The timestamp associated with {@link #value}. */
+  protected long lastModified;
 }

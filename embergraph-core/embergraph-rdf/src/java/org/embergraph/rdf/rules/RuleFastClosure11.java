@@ -19,51 +19,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-
 import org.embergraph.bop.IConstraint;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NE;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
 
 /**
  * Rule for step 11 of {@link InferenceEngine#fastForwardClosure()}.
- * 
+ *
  * <pre>
  * (?x, rdf:type, ?b) :-
  *     (?x, ?y, ?z),
  *     (?y, rdfs:subPropertyOf, ?a),
  *     (?a, rdfs:domain, ?b).
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RuleFastClosure11 extends AbstractRuleFastClosure_11_13 {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 7370736449328735275L;
+  /** */
+  private static final long serialVersionUID = 7370736449328735275L;
 
-    /**
-     * @param vocab
-     */
-    public RuleFastClosure11(String relationName, Vocabulary vocab) {
-        
-        super(  "fastClosure11",
-                new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), var("b")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("x"), var("y"), var("z")),
-                    new SPOPredicate(relationName,var("y"), vocab.getConstant(RDFS.SUBPROPERTYOF), var("a")),
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDFS.DOMAIN), var("b"))
-                },
-                new IConstraint[] {
-        			Constraint.wrap(new NE(var("y"),var("a")))
-        });
-        
-    }
+  /** @param vocab */
+  public RuleFastClosure11(String relationName, Vocabulary vocab) {
 
+    super(
+        "fastClosure11",
+        new SPOPredicate(relationName, var("x"), vocab.getConstant(RDF.TYPE), var("b")),
+        new SPOPredicate[] {
+          new SPOPredicate(relationName, var("x"), var("y"), var("z")),
+          new SPOPredicate(relationName, var("y"), vocab.getConstant(RDFS.SUBPROPERTYOF), var("a")),
+          new SPOPredicate(relationName, var("a"), vocab.getConstant(RDFS.DOMAIN), var("b"))
+        },
+        new IConstraint[] {Constraint.wrap(new NE(var("y"), var("a")))});
+  }
 }

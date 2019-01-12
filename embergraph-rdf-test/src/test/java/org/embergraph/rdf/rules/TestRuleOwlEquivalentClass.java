@@ -21,93 +21,85 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.OWL;
-
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.OWL;
 
 /**
  * Test suite for {@link RuleOwlEquivalentClass}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRuleOwlEquivalentClass extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestRuleOwlEquivalentClass() {
-        super();
+  /** */
+  public TestRuleOwlEquivalentClass() {
+    super();
+  }
+
+  /** @param name */
+  public TestRuleOwlEquivalentClass(String name) {
+    super(name);
+  }
+
+  /**
+   * Test where the data satisifies the rule exactly once.
+   *
+   * <pre>
+   *  (a owl:equivalentClass b) -&gt; (b owl:equivalentClass a)
+   * </pre>
+   *
+   * @throws Exception
+   */
+  public void test_owlEquivalentClass() throws Exception {
+
+    AbstractTripleStore store = getStore();
+
+    try {
+
+      URI A = new URIImpl("http://www.foo.org/A");
+      URI B = new URIImpl("http://www.foo.org/B");
+
+      IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
+
+      buffer.add(A, OWL.EQUIVALENTCLASS, B);
+
+      // write on the store.
+      buffer.flush();
+
+      // verify statement(s).
+      assertTrue(store.hasStatement(A, OWL.EQUIVALENTCLASS, B));
+      final long nbefore = store.getStatementCount();
+
+      final Vocabulary vocab = store.getVocabulary();
+
+      final Rule r = new RuleOwlEquivalentClass(store.getSPORelation().getNamespace(), vocab);
+
+      // apply the rule.
+      applyRule(store, r, -1 /*solutionCount*/, 1 /*mutationCount*/);
+
+      /*
+       * validate the state of the primary store.
+       */
+
+      // told
+      assertTrue(store.hasStatement(A, OWL.EQUIVALENTCLASS, B));
+
+      // entailed
+      assertTrue(store.hasStatement(B, OWL.EQUIVALENTCLASS, A));
+
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
-
-    /**
-     * @param name
-     */
-    public TestRuleOwlEquivalentClass(String name) {
-        super(name);
-    }
-
-    /**
-     * Test where the data satisifies the rule exactly once.
-     * 
-     * <pre>
-     *  (a owl:equivalentClass b) -&gt; (b owl:equivalentClass a) 
-     * </pre>
-     * @throws Exception 
-     */
-    public void test_owlEquivalentClass() throws Exception {
-
-        AbstractTripleStore store = getStore();
-
-        try {
-
-            URI A = new URIImpl("http://www.foo.org/A");
-            URI B = new URIImpl("http://www.foo.org/B");
-
-            IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-            
-            buffer.add(A, OWL.EQUIVALENTCLASS, B);
-
-            // write on the store.
-            buffer.flush();
-
-            // verify statement(s).
-            assertTrue(store.hasStatement(A, OWL.EQUIVALENTCLASS, B));
-            final long nbefore = store.getStatementCount();
-
-            final Vocabulary vocab = store.getVocabulary();
-
-            final Rule r = new RuleOwlEquivalentClass(store.getSPORelation()
-                    .getNamespace(), vocab);
-            
-            // apply the rule.
-            applyRule(store,r, -1/*solutionCount*/,1/*mutationCount*/);
-
-            /*
-             * validate the state of the primary store.
-             */
-
-            // told
-            assertTrue(store.hasStatement(A, OWL.EQUIVALENTCLASS, B));
-
-            // entailed
-            assertTrue(store.hasStatement(B, OWL.EQUIVALENTCLASS, A));
-
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-        
-    }
-    
+  }
 }

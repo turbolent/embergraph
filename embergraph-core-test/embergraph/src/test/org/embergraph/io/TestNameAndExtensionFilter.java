@@ -25,175 +25,145 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
-
 import junit.framework.TestCase;
 
 /**
  * Test suite for {@link NameAndExtensionFilter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestNameAndExtensionFilter extends TestCase
-{
+public class TestNameAndExtensionFilter extends TestCase {
 
-    /**
-     * 
-     */
-    public TestNameAndExtensionFilter() {
-        super();
+  /** */
+  public TestNameAndExtensionFilter() {
+    super();
+  }
+
+  /** @param name */
+  public TestNameAndExtensionFilter(final String name) {
+    super(name);
+  }
+
+  /**
+   * Verifies that the same files are present in each {@link File}[]. The order in which the files
+   * are listed does not matter.
+   *
+   * @param expected
+   * @param actual
+   */
+  private void assertSameFiles(final File[] expected, final File[] actual) {
+
+    if (expected == null) {
+
+      throw new AssertionError("expected is null.");
     }
 
-    /**
-     * @param name
-     */
-    public TestNameAndExtensionFilter(final String name) {
-        super(name);
+    if (actual == null) {
+
+      fail("actual is null.");
     }
 
-    /**
-     * Verifies that the same files are present in each {@link File}[]. The
-     * order in which the files are listed does not matter.
-     * 
-     * @param expected
-     * @param actual
-     */
-    private void assertSameFiles(final File[] expected, final File[] actual) {
+    assertEquals("#of files", expected.length, actual.length);
 
-        if (expected == null) {
+    // Insert the expected files into a set.
+    final Set<String> expectedSet = new HashSet<String>();
 
-            throw new AssertionError("expected is null.");
+    for (int i = 0; i < expected.length; i++) {
 
-        }
+      final File expectedFile = expected[i];
 
-        if (actual == null) {
+      if (expectedFile == null) {
 
-            fail("actual is null.");
+        throw new AssertionError("expected file is null at index=" + i);
+      }
 
-        }
+      if (!expectedSet.add(expectedFile.toString())) {
 
-        assertEquals("#of files", expected.length, actual.length);
-
-        // Insert the expected files into a set.
-        final Set<String> expectedSet = new HashSet<String>();
-
-        for (int i = 0; i < expected.length; i++) {
-
-            final File expectedFile = expected[i];
-
-            if (expectedFile == null) {
-
-                throw new AssertionError("expected file is null at index=" + i);
-
-            }
-
-            if (!expectedSet.add(expectedFile.toString())) {
-
-                throw new AssertionError(
-                        "expected File[] contains duplicate: expected[" + i
-                                + "]=" + expectedFile);
-
-            }
-
-        }
-
-        /*
-         * Verify that each actual file occurs in the expectedSet using a
-         * selection without replacement policy.
-         */
-
-        for (int i = 0; i < actual.length; i++) {
-
-            final File actualFile = actual[i];
-
-            if (actualFile == null) {
-
-                fail("actual file is null at index=" + i);
-
-            }
-
-            if (!expectedSet.remove(actual[i].toString())) {
-
-                fail("actual file=" + actualFile + " at index=" + i
-                        + " was not found in expected files.");
-
-            }
-
-        }
-
+        throw new AssertionError(
+            "expected File[] contains duplicate: expected[" + i + "]=" + expectedFile);
+      }
     }
 
-    /**
-     * Test verifies that no files are found using a guarenteed unique basename.
+    /*
+     * Verify that each actual file occurs in the expectedSet using a
+     * selection without replacement policy.
      */
-    public void test_filter_001() throws IOException {
 
-        final File basefile = File.createTempFile(getName(), "-test");
+    for (int i = 0; i < actual.length; i++) {
 
-        try {
+      final File actualFile = actual[i];
 
-            final String basename = basefile.toString();
+      if (actualFile == null) {
 
-            final NameAndExtensionFilter logFilter = new NameAndExtensionFilter(
-                    basename, ".log");
+        fail("actual file is null at index=" + i);
+      }
 
-            assertSameFiles(new File[] {}, logFilter.getFiles());
+      if (!expectedSet.remove(actual[i].toString())) {
 
-        } finally {
-
-            basefile.delete();
-
-        }
-
+        fail("actual file=" + actualFile + " at index=" + i + " was not found in expected files.");
+      }
     }
+  }
 
-    /**
-     * Test verifies that N files are found using a guarenteed unique basename.
-     */
-    public void test_filter_002() throws IOException {
+  /** Test verifies that no files are found using a guarenteed unique basename. */
+  public void test_filter_001() throws IOException {
 
-        final int N = 100;
+    final File basefile = File.createTempFile(getName(), "-test");
 
-        final Vector<File> v = new Vector<File>(N);
+    try {
 
-        final File logBaseFile = File.createTempFile(getName(), "-test");
-        // logBaseFile.deleteOnExit();
+      final String basename = basefile.toString();
 
-        try {
+      final NameAndExtensionFilter logFilter = new NameAndExtensionFilter(basename, ".log");
 
-            final String basename = logBaseFile.toString();
-            // System.err.println( "basename="+basename );
+      assertSameFiles(new File[] {}, logFilter.getFiles());
 
-            final NameAndExtensionFilter logFilter = new NameAndExtensionFilter(
-                    basename, ".log");
+    } finally {
 
-            for (int i = 0; i < N; i++) {
-
-                final File logFile = new File(basename + "." + i + ".log");
-                // logFile.deleteOnExit();
-                logFile.createNewFile();
-                // System.err.println( "logFile="+logFile );
-
-                v.add(logFile);
-
-            }
-
-            final File[] expectedFiles = (File[]) v.toArray(new File[] {});
-
-            assertSameFiles(expectedFiles, logFilter.getFiles());
-
-        } finally {
-
-            logBaseFile.delete();
-
-            for (File f : v) {
-
-                f.delete();
-
-            }
-
-        }
-        
+      basefile.delete();
     }
+  }
 
+  /** Test verifies that N files are found using a guarenteed unique basename. */
+  public void test_filter_002() throws IOException {
+
+    final int N = 100;
+
+    final Vector<File> v = new Vector<File>(N);
+
+    final File logBaseFile = File.createTempFile(getName(), "-test");
+    // logBaseFile.deleteOnExit();
+
+    try {
+
+      final String basename = logBaseFile.toString();
+      // System.err.println( "basename="+basename );
+
+      final NameAndExtensionFilter logFilter = new NameAndExtensionFilter(basename, ".log");
+
+      for (int i = 0; i < N; i++) {
+
+        final File logFile = new File(basename + "." + i + ".log");
+        // logFile.deleteOnExit();
+        logFile.createNewFile();
+        // System.err.println( "logFile="+logFile );
+
+        v.add(logFile);
+      }
+
+      final File[] expectedFiles = (File[]) v.toArray(new File[] {});
+
+      assertSameFiles(expectedFiles, logFilter.getFiles());
+
+    } finally {
+
+      logBaseFile.delete();
+
+      for (File f : v) {
+
+        f.delete();
+      }
+    }
+  }
 }

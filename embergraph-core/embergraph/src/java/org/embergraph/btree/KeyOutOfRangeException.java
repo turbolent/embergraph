@@ -24,23 +24,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 /**
- * An exception thrown when the key is outside of the half-open range constraint
- * for a {@link ITupleCursor} or an index partition.
- * 
+ * An exception thrown when the key is outside of the half-open range constraint for a {@link
+ * ITupleCursor} or an index partition.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class KeyOutOfRangeException extends IllegalArgumentException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -261275967781245769L;
+  /** */
+  private static final long serialVersionUID = -261275967781245769L;
 
-    public KeyOutOfRangeException(String msg) {
+  public KeyOutOfRangeException(String msg) {
 
-        super(msg);
-
-    }
-
+    super(msg);
+  }
 }

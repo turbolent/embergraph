@@ -25,7 +25,6 @@ import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.join.AbstractHashJoinUtilityTestCase;
 import org.embergraph.bop.join.AbstractMergeJoin;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
-import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestHelper;
 
 /**
  * Data driven test suite.
@@ -35,138 +34,122 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase.TestH
  */
 public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     *
-     */
-    public TestMergeJoin() {
-    }
+  /** */
+  public TestMergeJoin() {}
 
-    /**
-     * @param name
-     */
-    public TestMergeJoin(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestMergeJoin(String name) {
+    super(name);
+  }
 
-    /**
-     * Test of a required merge-join against a query which has the right "shape"
-     * to be recognized as a merge join without a dependency on structural
-     * rewrites of the query.
-     * <p>
-     * Note: This test is against the same data that we use to test the low
-     * level merge join code. If there is a problem with the merge join
-     * operator, then debug it against its test suite rather than this test.
-     * <p>
-     * Note: You can verify that the test has the correct expected behavior by
-     * running the same test with the merge join optimization explicitly
-     * disabled.
-     * <p>
-     * The original query is:
-     * 
-     * <pre>
-     * PREFIX : <http://www.embergraph.org/>
-     * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-     * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-     * SELECT ?a ?x ?y
-     * WITH {
-     *   SELECT ?a ?x {?a :x ?x}
-     * } as %set1
-     * WITH {
-     *   SELECT ?a ?y {?a :x ?y}
-     * } as %set2
-     * WHERE {
-     *    INCLUDE %set1
-     *    INCLUDE %set2
-     * }
-     * </pre>
-     * 
-     * <pre>
-     * (?a,     ?x)   (?a,     ?y)
-     * (john, mary)   (john, brad)   // many-to-many join
-     * (john, leon)   (john, fred) 
-     *                (john, leon) 
-     * (mary, john)   (mary, brad)   // 1-1 join.
-     * (fred, brad)                  // does not join (would join if OPTIONAL).   
-     *                (brad, fred)   // does not join.
-     * (leon, john)   (leon, brad)   // many-1 join.
-     * (leon, mary)                  // 
-     * (paul, leon)   (paul, leon)   // 1-many join.
-     *                (paul, brad)
-     * </pre>
-     * 
-     * @see AbstractHashJoinUtilityTestCase#test_mergeJoin01()
-     */
-    public void test_merge_join_01() throws Exception {
+  /**
+   * Test of a required merge-join against a query which has the right "shape" to be recognized as a
+   * merge join without a dependency on structural rewrites of the query.
+   *
+   * <p>Note: This test is against the same data that we use to test the low level merge join code.
+   * If there is a problem with the merge join operator, then debug it against its test suite rather
+   * than this test.
+   *
+   * <p>Note: You can verify that the test has the correct expected behavior by running the same
+   * test with the merge join optimization explicitly disabled.
+   *
+   * <p>The original query is:
+   *
+   * <pre>
+   * PREFIX : <http://www.embergraph.org/>
+   * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+   * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   * SELECT ?a ?x ?y
+   * WITH {
+   *   SELECT ?a ?x {?a :x ?x}
+   * } as %set1
+   * WITH {
+   *   SELECT ?a ?y {?a :x ?y}
+   * } as %set2
+   * WHERE {
+   *    INCLUDE %set1
+   *    INCLUDE %set2
+   * }
+   * </pre>
+   *
+   * <pre>
+   * (?a,     ?x)   (?a,     ?y)
+   * (john, mary)   (john, brad)   // many-to-many join
+   * (john, leon)   (john, fred)
+   *                (john, leon)
+   * (mary, john)   (mary, brad)   // 1-1 join.
+   * (fred, brad)                  // does not join (would join if OPTIONAL).
+   *                (brad, fred)   // does not join.
+   * (leon, john)   (leon, brad)   // many-1 join.
+   * (leon, mary)                  //
+   * (paul, leon)   (paul, leon)   // 1-many join.
+   *                (paul, brad)
+   * </pre>
+   *
+   * @see AbstractHashJoinUtilityTestCase#test_mergeJoin01()
+   */
+  public void test_merge_join_01() throws Exception {
 
-        final ASTContainer astContainer = new TestHelper("merge-join-01")
-                .runTest();
+    final ASTContainer astContainer = new TestHelper("merge-join-01").runTest();
 
-        // Verify that a MERGE JOIN operator was used.
-        assertTrue(
-                "No merge join?",
-                BOpUtility.visitAll(astContainer.getQueryPlan(),
-                        AbstractMergeJoin.class).hasNext());
+    // Verify that a MERGE JOIN operator was used.
+    assertTrue(
+        "No merge join?",
+        BOpUtility.visitAll(astContainer.getQueryPlan(), AbstractMergeJoin.class).hasNext());
+  }
 
-    }
+  /**
+   * Variant of the test above in which we disable the merge join with a query hint and verify that
+   * the merge join operator was NOT used in the query plan.
+   */
+  public void test_merge_join_01a() throws Exception {
 
-    /**
-     * Variant of the test above in which we disable the merge join with a query
-     * hint and verify that the merge join operator was NOT used in the query
-     * plan.
-     */
-    public void test_merge_join_01a() throws Exception {
-
-        final ASTContainer astContainer = new TestHelper(
+    final ASTContainer astContainer =
+        new TestHelper(
                 "merge-join-01a", // testURI,
-                "merge-join-01a.rq",// queryFileURL
-                "merge-join-01.trig",// dataFileURL
-                "merge-join-01.srx"// resultFileURL
-        ).runTest();
+                "merge-join-01a.rq", // queryFileURL
+                "merge-join-01.trig", // dataFileURL
+                "merge-join-01.srx" // resultFileURL
+                )
+            .runTest();
 
-        // Verify that a MERGE JOIN operator was used.
-        assertFalse(
-                "Merge join should have been suppressed",
-                BOpUtility.visitAll(astContainer.getQueryPlan(),
-                        AbstractMergeJoin.class).hasNext());
+    // Verify that a MERGE JOIN operator was used.
+    assertFalse(
+        "Merge join should have been suppressed",
+        BOpUtility.visitAll(astContainer.getQueryPlan(), AbstractMergeJoin.class).hasNext());
+  }
 
-    }
+  /**
+   * Test of an optional merge-join.
+   *
+   * <p>Note: This test is against the same data that we use to test the low level merge join code.
+   *
+   * <pre>
+   * prefix : <http://www.embergraph.org/>
+   * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+   * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   * SELECT ?a ?x ?y
+   * WITH {
+   *   SELECT ?a ?x {?a :x ?x}
+   * } as %set1
+   * WITH {
+   *   SELECT ?a ?y {?a :y ?y}
+   * } as %set2
+   * WHERE {
+   *    INCLUDE %set1.
+   *    OPTIONAL {INCLUDE %set2}.
+   * }
+   * </pre>
+   *
+   * @see AbstractHashJoinUtilityTestCase#test_mergeJoin01()
+   */
+  public void test_merge_join_02() throws Exception {
 
-    /**
-     * Test of an optional merge-join.
-     * <p>
-     * Note: This test is against the same data that we use to test the low
-     * level merge join code.
-     * 
-     * <pre>
-     * prefix : <http://www.embergraph.org/>
-     * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-     * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-     * SELECT ?a ?x ?y
-     * WITH {
-     *   SELECT ?a ?x {?a :x ?x}
-     * } as %set1
-     * WITH {
-     *   SELECT ?a ?y {?a :y ?y}
-     * } as %set2
-     * WHERE {
-     *    INCLUDE %set1.
-     *    OPTIONAL {INCLUDE %set2}.
-     * }
-     * </pre>
-     * 
-     * @see AbstractHashJoinUtilityTestCase#test_mergeJoin01()
-     */
-    public void test_merge_join_02() throws Exception {
+    final ASTContainer astContainer = new TestHelper("merge-join-02").runTest();
 
-        final ASTContainer astContainer = new TestHelper("merge-join-02")
-                .runTest();
-
-        // Verify that a MERGE JOIN operator was used.
-        assertTrue(
-                "No merge join?",
-                BOpUtility.visitAll(astContainer.getQueryPlan(),
-                        AbstractMergeJoin.class).hasNext());
-
-    }
-
+    // Verify that a MERGE JOIN operator was used.
+    assertTrue(
+        "No merge join?",
+        BOpUtility.visitAll(astContainer.getQueryPlan(), AbstractMergeJoin.class).hasNext());
+  }
 }

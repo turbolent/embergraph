@@ -23,11 +23,8 @@ package org.embergraph.btree.data;
 
 /**
  * Interface for low-level data access for the non-leaf nodes of a B+-Tree.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface INodeData extends ITreeNodeData, IKeysData,
-		ISpannedTupleCountData {
-
-}
+public interface INodeData extends ITreeNodeData, IKeysData, ISpannedTupleCountData {}

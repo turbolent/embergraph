@@ -21,79 +21,85 @@ import java.util.UUID;
 
 public class HANotifyReleaseTimeRequest implements IHANotifyReleaseTimeRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final UUID serviceUUID;
-    private final long pinnedCommitTime;
-    private final long pinnedCommitCounter;
-    private final long timestamp;
-    private final boolean isMock;
-    private final long newCommitCounter;
-    private final long newCommitTime;
+  private final UUID serviceUUID;
+  private final long pinnedCommitTime;
+  private final long pinnedCommitCounter;
+  private final long timestamp;
+  private final boolean isMock;
+  private final long newCommitCounter;
+  private final long newCommitTime;
 
-    public HANotifyReleaseTimeRequest(final UUID serviceUUID,
-            final long pinnedCommitTime, final long pinnedCommitCounter,
-            final long timestamp, final boolean isMock,
-            final long newCommitCounter, final long newCommitTime) {
-        if (serviceUUID == null)
-            throw new IllegalArgumentException();
-        if (pinnedCommitTime < 0)
-            throw new IllegalArgumentException();
-        if (pinnedCommitCounter < 0)
-            throw new IllegalArgumentException();
-        this.serviceUUID = serviceUUID;
-        this.pinnedCommitTime = pinnedCommitTime;
-        this.pinnedCommitCounter = pinnedCommitCounter;
-        this.timestamp = timestamp;
-        this.isMock = isMock;
-        this.newCommitCounter = newCommitCounter;
-        this.newCommitTime = newCommitTime;
-    }
+  public HANotifyReleaseTimeRequest(
+      final UUID serviceUUID,
+      final long pinnedCommitTime,
+      final long pinnedCommitCounter,
+      final long timestamp,
+      final boolean isMock,
+      final long newCommitCounter,
+      final long newCommitTime) {
+    if (serviceUUID == null) throw new IllegalArgumentException();
+    if (pinnedCommitTime < 0) throw new IllegalArgumentException();
+    if (pinnedCommitCounter < 0) throw new IllegalArgumentException();
+    this.serviceUUID = serviceUUID;
+    this.pinnedCommitTime = pinnedCommitTime;
+    this.pinnedCommitCounter = pinnedCommitCounter;
+    this.timestamp = timestamp;
+    this.isMock = isMock;
+    this.newCommitCounter = newCommitCounter;
+    this.newCommitTime = newCommitTime;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString() + "{serviceUUID=" + serviceUUID
-                + ",pinnedCommitTime=" + pinnedCommitTime
-                + ",pinnedCommitCounter=" + pinnedCommitCounter + ",timestamp="
-                + timestamp + ", isMock=" + isMock + "}";
-    }
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{serviceUUID="
+        + serviceUUID
+        + ",pinnedCommitTime="
+        + pinnedCommitTime
+        + ",pinnedCommitCounter="
+        + pinnedCommitCounter
+        + ",timestamp="
+        + timestamp
+        + ", isMock="
+        + isMock
+        + "}";
+  }
 
-    @Override
-    public UUID getServiceUUID() {
-        return serviceUUID;
-    }
+  @Override
+  public UUID getServiceUUID() {
+    return serviceUUID;
+  }
 
-    @Override
-    public long getPinnedCommitTime() {
-        return pinnedCommitTime;
-    }
+  @Override
+  public long getPinnedCommitTime() {
+    return pinnedCommitTime;
+  }
 
-    @Override
-    public long getPinnedCommitCounter() {
-        return pinnedCommitCounter;
-    }
+  @Override
+  public long getPinnedCommitCounter() {
+    return pinnedCommitCounter;
+  }
 
-    @Override
-    public long getTimestamp() {
-        return timestamp;
-    }
+  @Override
+  public long getTimestamp() {
+    return timestamp;
+  }
 
-    @Override
-    public boolean isMock() {
-        return isMock;
-    }
-    
-    @Override
-    public long getNewCommitCounter() {
-        return newCommitCounter;
-    }
+  @Override
+  public boolean isMock() {
+    return isMock;
+  }
 
-    @Override
-    public long getNewCommitTime() {
-        return newCommitTime;
-    }
+  @Override
+  public long getNewCommitCounter() {
+    return newCommitCounter;
+  }
 
+  @Override
+  public long getNewCommitTime() {
+    return newCommitTime;
+  }
 }

@@ -24,53 +24,60 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for the Dublin Core "elements".
- * 
+ *
  * @see http://purl.org/dc/elements/1.1/
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DCElementsVocabularyDecl implements VocabularyDecl {
 
-    public static final String NAMESPACE = "http://purl.org/dc/elements/1.1/";
-    public static final URI title = new URIImpl(NAMESPACE + "title");
-    public static final URI creator = new URIImpl(NAMESPACE + "creator");
-    public static final URI subject = new URIImpl(NAMESPACE + "subject");
-    public static final URI description = new URIImpl(NAMESPACE + "description");
-    public static final URI publisher = new URIImpl(NAMESPACE + "publisher");
-    public static final URI contributor = new URIImpl(NAMESPACE + "contributor");
-    public static final URI date = new URIImpl(NAMESPACE + "date");
-    public static final URI type = new URIImpl(NAMESPACE + "type");
-    public static final URI format = new URIImpl(NAMESPACE + "format");
-    public static final URI identifier = new URIImpl(NAMESPACE + "identifier");
-    public static final URI source = new URIImpl(NAMESPACE + "source");
-    public static final URI language = new URIImpl(NAMESPACE + "language");
-    public static final URI relation = new URIImpl(NAMESPACE + "relation");
-    public static final URI coverage = new URIImpl(NAMESPACE + "coverage");
-    public static final URI rights = new URIImpl(NAMESPACE + "rights");
-        
-    static private final URI[] uris = new URI[]{
-            new URIImpl(NAMESPACE),
-            title, creator, subject, description, publisher, contributor, date,
-            type, format, identifier, source, language, relation, coverage,
-            rights
-    };
+  public static final String NAMESPACE = "http://purl.org/dc/elements/1.1/";
+  public static final URI title = new URIImpl(NAMESPACE + "title");
+  public static final URI creator = new URIImpl(NAMESPACE + "creator");
+  public static final URI subject = new URIImpl(NAMESPACE + "subject");
+  public static final URI description = new URIImpl(NAMESPACE + "description");
+  public static final URI publisher = new URIImpl(NAMESPACE + "publisher");
+  public static final URI contributor = new URIImpl(NAMESPACE + "contributor");
+  public static final URI date = new URIImpl(NAMESPACE + "date");
+  public static final URI type = new URIImpl(NAMESPACE + "type");
+  public static final URI format = new URIImpl(NAMESPACE + "format");
+  public static final URI identifier = new URIImpl(NAMESPACE + "identifier");
+  public static final URI source = new URIImpl(NAMESPACE + "source");
+  public static final URI language = new URIImpl(NAMESPACE + "language");
+  public static final URI relation = new URIImpl(NAMESPACE + "relation");
+  public static final URI coverage = new URIImpl(NAMESPACE + "coverage");
+  public static final URI rights = new URIImpl(NAMESPACE + "rights");
 
-    public DCElementsVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  private static final URI[] uris =
+      new URI[] {
+        new URIImpl(NAMESPACE),
+        title,
+        creator,
+        subject,
+        description,
+        publisher,
+        contributor,
+        date,
+        type,
+        format,
+        identifier,
+        source,
+        language,
+        relation,
+        coverage,
+        rights
+      };
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public DCElementsVocabularyDecl() {}
 
+  public Iterator<URI> values() {
+
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

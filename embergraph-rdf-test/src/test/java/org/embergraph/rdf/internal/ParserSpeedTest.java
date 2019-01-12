@@ -12,8 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.GZIPInputStream;
-
 import org.apache.log4j.Logger;
+import org.embergraph.Banner;
 import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
@@ -25,305 +25,259 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-import org.embergraph.Banner;
-
 /**
  * Utility to measure the raw speed of the RDF parser.
- * <p>
- * Note: The RIO ntriples parser appears to do about 68k tps flat out on BSBM
- * 200M.
- * 
+ *
+ * <p>Note: The RIO ntriples parser appears to do about 68k tps flat out on BSBM 200M.
+ *
  * @author thompsonbry
  */
 public class ParserSpeedTest {
 
-	private final static Logger log = Logger.getLogger(ParserSpeedTest.class);
-	
-	/**
-	 * Thread pool used to run the parser.
-	 */
-	private final ExecutorService parserService;
+  private static final Logger log = Logger.getLogger(ParserSpeedTest.class);
 
-	private final int fileBufSize = 1024 * 8;// default 8k
+  /** Thread pool used to run the parser. */
+  private final ExecutorService parserService;
 
-	private final ValueFactory vf;
+  private final int fileBufSize = 1024 * 8; // default 8k
 
-	final long begin = System.currentTimeMillis();
+  private final ValueFactory vf;
 
-	/**
-	 * #of statements visited.
-	 */
-	private final AtomicLong nstmts = new AtomicLong();
+  final long begin = System.currentTimeMillis();
 
-	public ParserSpeedTest() {
-		
-		// It is possible to run multiple parsers.
-		this.parserService = Executors.newCachedThreadPool();
+  /** #of statements visited. */
+  private final AtomicLong nstmts = new AtomicLong();
 
-		// TODO compare w/ openrdf default value factory....
-//		this.vf = EmbergraphValueFactoryImpl.getInstance("test");
-		this.vf = new ValueFactoryImpl();
-		
-	}
+  public ParserSpeedTest() {
 
-	public void shutdown() {
+    // It is possible to run multiple parsers.
+    this.parserService = Executors.newCachedThreadPool();
 
-		parserService.shutdown();
-		
-	}
-	
-	private void parseFileOrDirectory(final File fileOrDir)
-			throws Exception {
+    // TODO compare w/ openrdf default value factory....
+    //		this.vf = EmbergraphValueFactoryImpl.getInstance("test");
+    this.vf = new ValueFactoryImpl();
+  }
 
-		if (fileOrDir.isDirectory()) {
+  public void shutdown() {
 
-			final File[] files = fileOrDir.listFiles();
+    parserService.shutdown();
+  }
 
-			for (int i = 0; i < files.length; i++) {
+  private void parseFileOrDirectory(final File fileOrDir) throws Exception {
 
-				final File f = files[i];
+    if (fileOrDir.isDirectory()) {
 
-				parseFileOrDirectory(f);
+      final File[] files = fileOrDir.listFiles();
 
-			}
+      for (int i = 0; i < files.length; i++) {
 
-			return;
+        final File f = files[i];
 
-		}
+        parseFileOrDirectory(f);
+      }
 
-		final File f = fileOrDir;
+      return;
+    }
 
-		final String n = f.getName();
+    final File f = fileOrDir;
 
-		RDFFormat fmt = RDFFormat.forFileName(n);
+    final String n = f.getName();
 
-		if (fmt == null && n.endsWith(".zip")) {
-			fmt = RDFFormat.forFileName(n.substring(0, n.length() - 4));
-		}
+    RDFFormat fmt = RDFFormat.forFileName(n);
 
-		if (fmt == null && n.endsWith(".gz")) {
-			fmt = RDFFormat.forFileName(n.substring(0, n.length() - 3));
-		}
+    if (fmt == null && n.endsWith(".zip")) {
+      fmt = RDFFormat.forFileName(n.substring(0, n.length() - 4));
+    }
 
-		if (fmt == null) {
-			log.warn("Ignoring: " + f);
-			return;
-		}
+    if (fmt == null && n.endsWith(".gz")) {
+      fmt = RDFFormat.forFileName(n.substring(0, n.length() - 3));
+    }
 
-		final StatementHandler stmtHandler = new StatementHandler();
+    if (fmt == null) {
+      log.warn("Ignoring: " + f);
+      return;
+    }
 
-		final FutureTask<Void> ft = new FutureTask<Void>(new ParseFileTask(f,
-				fileBufSize, vf, stmtHandler));
+    final StatementHandler stmtHandler = new StatementHandler();
 
-		// run the parser
-		parserService.submit(ft);
+    final FutureTask<Void> ft =
+        new FutureTask<Void>(new ParseFileTask(f, fileBufSize, vf, stmtHandler));
 
-		/*
-		 * Await the future.
-		 * 
-		 * TODO We could run the parsers asynchronously and on a pool with
-		 * limited parallelism. We would have to change how we monitor for
-		 * errors and the shutdown logic (to wait until all submitted parser
-		 * tasks are done).
-		 */
-		ft.get();
+    // run the parser
+    parserService.submit(ft);
 
-		if (log.isInfoEnabled())
-			log.info("Finished parsing: " + f);
+    /*
+     * Await the future.
+     *
+     * TODO We could run the parsers asynchronously and on a pool with
+     * limited parallelism. We would have to change how we monitor for
+     * errors and the shutdown logic (to wait until all submitted parser
+     * tasks are done).
+     */
+    ft.get();
 
-	}
+    if (log.isInfoEnabled()) log.info("Finished parsing: " + f);
+  }
 
-	/**
-	 * Task parses a single file.
-	 * 
-	 * @author thompsonbry
-	 */
-	private static class ParseFileTask implements Callable<Void> {
+  /**
+   * Task parses a single file.
+   *
+   * @author thompsonbry
+   */
+  private static class ParseFileTask implements Callable<Void> {
 
-		private final File file;
-		private final int fileBufSize;
-		private final ValueFactory vf;
-		private final StatementHandler stmtHandler;
+    private final File file;
+    private final int fileBufSize;
+    private final ValueFactory vf;
+    private final StatementHandler stmtHandler;
 
-		public ParseFileTask(final File file, final int fileBufSize,
-				final ValueFactory vf, final StatementHandler stmtHandler) {
+    public ParseFileTask(
+        final File file,
+        final int fileBufSize,
+        final ValueFactory vf,
+        final StatementHandler stmtHandler) {
 
-			if (file == null)
-				throw new IllegalArgumentException();
+      if (file == null) throw new IllegalArgumentException();
 
-			if (stmtHandler == null)
-				throw new IllegalArgumentException();
+      if (stmtHandler == null) throw new IllegalArgumentException();
 
-			this.file = file;
+      this.file = file;
 
-			this.fileBufSize = fileBufSize;
+      this.fileBufSize = fileBufSize;
 
-			this.vf = vf;
+      this.vf = vf;
 
-			this.stmtHandler = stmtHandler;
+      this.stmtHandler = stmtHandler;
+    }
 
-		}
+    public Void call() throws Exception {
 
-		public Void call() throws Exception {
+      parseFile(file);
 
-			parseFile(file);
+      return (Void) null;
+    }
 
-			return (Void) null;
+    private void parseFile(final File file)
+        throws IOException, RDFParseException, RDFHandlerException, NoSuchAlgorithmException,
+            InterruptedException {
 
-		}
+      if (!file.exists()) throw new RuntimeException("Not found: " + file);
 
-		private void parseFile(final File file) throws IOException,
-				RDFParseException, RDFHandlerException,
-				NoSuchAlgorithmException, InterruptedException {
+      final RDFFormat format = RDFFormat.forFileName(file.getName());
 
-			if (!file.exists())
-				throw new RuntimeException("Not found: " + file);
+      if (format == null) throw new RuntimeException("Unknown format: " + file);
 
-			final RDFFormat format = RDFFormat.forFileName(file.getName());
+      if (log.isDebugEnabled()) log.debug("RDFFormat=" + format);
 
-			if (format == null)
-				throw new RuntimeException("Unknown format: " + file);
+      final RDFParserFactory rdfParserFactory = RDFParserRegistry.getInstance().get(format);
 
-			if (log.isDebugEnabled())
-				log.debug("RDFFormat=" + format);
+      if (rdfParserFactory == null) throw new RuntimeException("No parser for format: " + format);
 
-			final RDFParserFactory rdfParserFactory = RDFParserRegistry
-					.getInstance().get(format);
+      final RDFParser rdfParser = rdfParserFactory.getParser();
 
-			if (rdfParserFactory == null)
-				throw new RuntimeException("No parser for format: " + format);
+      rdfParser.setValueFactory(vf);
 
-			final RDFParser rdfParser = rdfParserFactory.getParser();
+      rdfParser.setVerifyData(false);
 
-			rdfParser.setValueFactory(vf);
+      rdfParser.setStopAtFirstError(false);
 
-			rdfParser.setVerifyData(false);
+      rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
 
-			rdfParser.setStopAtFirstError(false);
+      rdfParser.setRDFHandler(stmtHandler);
 
-			rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
+      /*
+       * Run the parser, which will cause statements to be inserted.
+       */
 
-			rdfParser.setRDFHandler(stmtHandler);
+      if (log.isInfoEnabled()) log.info("Parsing: " + file);
 
-			/*
-			 * Run the parser, which will cause statements to be inserted.
-			 */
+      InputStream is = new FileInputStream(file);
 
-			if (log.isInfoEnabled())
-				log.info("Parsing: " + file);
+      try {
 
-			InputStream is = new FileInputStream(file);
+        is = new BufferedInputStream(is, fileBufSize);
 
-			try {
+        final boolean gzip = file.getName().endsWith(".gz");
 
-				is = new BufferedInputStream(is, fileBufSize);
+        if (gzip) is = new GZIPInputStream(is);
 
-				final boolean gzip = file.getName().endsWith(".gz");
+        final String baseURI = file.toURI().toString();
 
-				if (gzip)
-					is = new GZIPInputStream(is);
+        // parse the file
+        rdfParser.parse(is, baseURI);
 
-				final String baseURI = file.toURI().toString();
+      } finally {
 
-				// parse the file
-				rdfParser.parse(is, baseURI);
+        is.close();
+      }
+    }
+  }
 
-			} finally {
+  /** Helper class adds statements to the sail as they are visited by a parser. */
+  private class StatementHandler extends RDFHandlerBase {
 
-				is.close();
+    public StatementHandler() {}
 
-			}
+    public void endRDF() {
 
-		}
+      if (log.isInfoEnabled()) log.info("End of source.");
+    }
 
-	}
+    public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
-	/**
-	 * Helper class adds statements to the sail as they are visited by a parser.
-	 */
-	private class StatementHandler extends RDFHandlerBase {
+      final long n = nstmts.incrementAndGet();
 
-		public StatementHandler() {
+      if (n % 10000L == 0) {
 
-		}
+        System.out.println("nstmts=" + n + ", tps=" + triplesPerSecond());
+      }
+    }
+  } // class StatementHandler
 
-		public void endRDF() {
+  private long triplesPerSecond() {
 
-			if (log.isInfoEnabled())
-				log.info("End of source.");
+    final long elapsed = System.currentTimeMillis() - begin;
 
-		}
+    return ((long) (((double) nstmts.get()) / ((double) elapsed) * 1000d));
+  }
 
-		public void handleStatement(final Statement stmt)
-				throws RDFHandlerException {
+  /**
+   * Parse some data.
+   *
+   * @param args The file(s) or directory(s) containing the data to be parsed.
+   * @throws Exception
+   */
+  public static void main(String[] args) throws Exception {
 
-			final long n = nstmts.incrementAndGet();
+    Banner.banner();
 
-			if (n % 10000L == 0) {
+    // check args.
+    {
+      for (String filename : args) {
 
-				System.out.println("nstmts=" + n + ", tps="
-						+ triplesPerSecond());
+        final File file = new File(filename);
 
-			}
+        if (!file.exists()) throw new RuntimeException("Not found: " + file);
+      }
+    }
 
-		}
+    final ParserSpeedTest u = new ParserSpeedTest();
 
-	} // class StatementHandler
+    try {
 
-	private long triplesPerSecond() {
+      for (String filename : args) {
 
-		final long elapsed = System.currentTimeMillis() - begin;
+        u.parseFileOrDirectory(new File(filename));
+      }
 
-		return ((long) (((double) nstmts.get()) / ((double) elapsed) * 1000d));
+    } finally {
 
-	}
+      u.shutdown();
 
-	/**
-	 * Parse some data.
-	 * 
-	 * @param args
-	 *            The file(s) or directory(s) containing the data to be parsed.
-	 * @throws Exception
-	 */
-	public static void main(String[] args) throws Exception {
+      final long elapsed = System.currentTimeMillis() - u.begin;
 
-		Banner.banner();
-
-		// check args.
-		{
-
-			for (String filename : args) {
-
-				final File file = new File(filename);
-
-				if (!file.exists())
-					throw new RuntimeException("Not found: " + file);
-
-			}
-
-		}
-
-		final ParserSpeedTest u = new ParserSpeedTest();
-		
-		try {
-
-			for (String filename : args) {
-
-				u.parseFileOrDirectory(new File(filename));
-
-			}
-
-		} finally {
-
-			u.shutdown();
-
-			final long elapsed = System.currentTimeMillis() - u.begin;
-
-			System.out.println("nstmts=" + u.nstmts + ", tps="
-					+ u.triplesPerSecond() + ", elapsed=" + elapsed);
-
-		}
-
-	}
-
+      System.out.println(
+          "nstmts=" + u.nstmts + ", tps=" + u.triplesPerSecond() + ", elapsed=" + elapsed);
+    }
+  }
 }

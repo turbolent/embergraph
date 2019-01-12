@@ -21,37 +21,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
+/** @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a> */
+public abstract class ServiceOptionsBase implements IServiceOptions {
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- */
-abstract public class ServiceOptionsBase implements IServiceOptions {
+  /**
+   * The location of the propertyFile for setting service properties. This to allow overriding the
+   * default value via passing a Java Property at the command line.
+   */
+  private boolean isRunFirst = false;
 
-   /**
-    * The location of the propertyFile for setting service properties. This
-    * to allow overriding the default value via passing a Java Property at
-    * the command line.
-    */
-   
-   
-    private boolean isRunFirst = false;
-    private boolean useLBS = false;
+  private boolean useLBS = false;
 
-    @Override
-    public boolean isRunFirst() {
-        return isRunFirst;
-    }
+  @Override
+  public boolean isRunFirst() {
+    return isRunFirst;
+  }
 
-    public void setRunFirst(final boolean newValue) {
-        this.isRunFirst = newValue;
-    }
+  public void setRunFirst(final boolean newValue) {
+    this.isRunFirst = newValue;
+  }
 
-    @Override
-    public boolean isEmbergraphLBS() {
-        return useLBS;
-    }
+  @Override
+  public boolean isEmbergraphLBS() {
+    return useLBS;
+  }
 
-    public void setEmbergraphLBS(final boolean newValue) {
-        this.useLBS = newValue;
-    }
+  public void setEmbergraphLBS(final boolean newValue) {
+    this.useLBS = newValue;
+  }
 }

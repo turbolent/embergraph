@@ -26,12 +26,10 @@ package org.embergraph.service;
 import java.util.concurrent.Callable;
 
 /**
- * A service for distributing client {@link Callable}s across the resources of
- * an {@link IEmbergraphFederation}.
- * 
+ * A service for distributing client {@link Callable}s across the resources of an {@link
+ * IEmbergraphFederation}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IClientService extends IService, IRemoteExecutor {
-
-}
+public interface IClientService extends IService, IRemoteExecutor {}

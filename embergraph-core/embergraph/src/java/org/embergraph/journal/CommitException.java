@@ -21,36 +21,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 /**
- * Exception thrown when there is a commit failure, especially for the group
- * commit mechanisms.
- * 
+ * Exception thrown when there is a commit failure, especially for the group commit mechanisms.
+ *
  * @author bryan
  */
 public class CommitException extends RuntimeException {
 
-   /**
-    * 
-    */
-   private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-   public CommitException() {
-   }
+  public CommitException() {}
 
-   public CommitException(String message) {
-      super(message);
-   }
+  public CommitException(String message) {
+    super(message);
+  }
 
-   public CommitException(Throwable cause) {
-      super(cause);
-   }
+  public CommitException(Throwable cause) {
+    super(cause);
+  }
 
-   public CommitException(String message, Throwable cause) {
-      super(message, cause);
-   }
+  public CommitException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-   public CommitException(String message, Throwable cause,
-         boolean enableSuppression, boolean writableStackTrace) {
-      super(message, cause, enableSuppression, writableStackTrace);
-   }
-
+  public CommitException(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 }

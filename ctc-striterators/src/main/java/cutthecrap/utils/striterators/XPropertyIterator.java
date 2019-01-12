@@ -17,16 +17,13 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * XPropertyIterator
- **/
-
+/** XPropertyIterator */
 public class XPropertyIterator extends Striterator implements IXPropertyIterator {
-	public XPropertyIterator(Iterator src) {
-		super(src);
-	}
+  public XPropertyIterator(Iterator src) {
+    super(src);
+  }
 
-	public IXProperty nextProperty() {
-		return (IXProperty) next();
-	}
+  public IXProperty nextProperty() {
+    return (IXProperty) next();
+  }
 }

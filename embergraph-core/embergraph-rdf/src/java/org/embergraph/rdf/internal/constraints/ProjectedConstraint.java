@@ -21,59 +21,58 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 
-
 /**
- * This class implements 'AS' in a projection as found in both 
- * subselects and bind, e.g.
+ * This class implements 'AS' in a projection as found in both subselects and bind, e.g.
+ *
  * <pre>
  *    { SUBSELECT (Foo(?x) AS ?y) ...
  *      {  ...
  *      }
  *    }
  * </pre>
- * or
- * <pre>
- *    BIND (Bar(?x) AS ?y) 
- * </pre>
- * The bind fails if the expression evaluates to some value that is different from
- * a pre-existing binding for the target variable.
- * If the expr (Foo or Bar above) has an error then the specification is that no binding is done,
- * but the unbound value is a success.
- * 
- * The specification for this operation is found as 
- * <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#defn_extend">Extend</a>.
  *
+ * or
+ *
+ * <pre>
+ *    BIND (Bar(?x) AS ?y)
+ * </pre>
+ *
+ * The bind fails if the expression evaluates to some value that is different from a pre-existing
+ * binding for the target variable. If the expr (Foo or Bar above) has an error then the
+ * specification is that no binding is done, but the unbound value is a success.
+ *
+ * <p>The specification for this operation is found as <a
+ * href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#defn_extend">Extend</a>.
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class ProjectedConstraint extends org.embergraph.bop.constraint.Constraint {
 
-    private static final long serialVersionUID = 1L;
-    
-    public ProjectedConstraint(final BOp[] args, final Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+  private static final long serialVersionUID = 1L;
 
-    public ProjectedConstraint(final ProjectedConstraint op) {
-        super(op);
-    }
+  public ProjectedConstraint(final BOp[] args, final Map<String, Object> annotations) {
+    super(args, annotations);
+  }
 
-    public ProjectedConstraint(ConditionalBind bind) {
-        super(new BOp[] { bind }, null);
-    }
+  public ProjectedConstraint(final ProjectedConstraint op) {
+    super(op);
+  }
 
-    @Override
-    public boolean accept(IBindingSet bindingSet) {
-        try {
-            Object result = ((ConditionalBind) get(0)).get(bindingSet);
-            return  result != null;
-        } catch (SparqlTypeErrorException stee) {
-        	// Extend(mu, var, expr) = mu if var not in dom(mu) and expr(mu) is an error (from the spec)
-            return true;
-        }
+  public ProjectedConstraint(ConditionalBind bind) {
+    super(new BOp[] {bind}, null);
+  }
+
+  @Override
+  public boolean accept(IBindingSet bindingSet) {
+    try {
+      Object result = ((ConditionalBind) get(0)).get(bindingSet);
+      return result != null;
+    } catch (SparqlTypeErrorException stee) {
+      // Extend(mu, var, expr) = mu if var not in dom(mu) and expr(mu) is an error (from the spec)
+      return true;
     }
+  }
 }

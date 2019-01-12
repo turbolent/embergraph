@@ -1,9 +1,9 @@
 package it.unimi.dsi.util;
 
-/*		 
+/*
  * MG4J: Managing Gigabytes for Java
  *
- * Copyright (C) 2007-2009 Sebastiano Vigna 
+ * Copyright (C) 2007-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -25,10 +25,7 @@ import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.io.InputBitStream;
 import it.unimi.dsi.io.OutputBitStream;
-import it.unimi.dsi.util.SemiExternalGammaList;
-
 import java.io.IOException;
-
 import junit.framework.TestCase;
 
 /**
@@ -37,57 +34,55 @@ import junit.framework.TestCase;
  */
 public class SemiExternalGammaListTest extends TestCase {
 
-	private static InputBitStream buildInputStream( LongList longs ) throws IOException {
-		byte[] array = new byte[ longs.size() * 4 ];
-		OutputBitStream streamer = new OutputBitStream( array );
-		for ( int i = 0; i < longs.size(); i++ ) streamer.writeLongGamma( longs.getLong( i ) );
-		int size = (int)( streamer.writtenBits() / 8 ) + ( ( streamer.writtenBits() % 8 ) == 0 ? 0 : 1 );
-		byte[] smaller = new byte[ size ];
-		System.arraycopy( array, 0, smaller, 0, size );
+  private static InputBitStream buildInputStream(LongList longs) throws IOException {
+    byte[] array = new byte[longs.size() * 4];
+    OutputBitStream streamer = new OutputBitStream(array);
+    for (int i = 0; i < longs.size(); i++) streamer.writeLongGamma(longs.getLong(i));
+    int size = (int) (streamer.writtenBits() / 8) + ((streamer.writtenBits() % 8) == 0 ? 0 : 1);
+    byte[] smaller = new byte[size];
+    System.arraycopy(array, 0, smaller, 0, size);
 
-		return new InputBitStream( smaller );
+    return new InputBitStream(smaller);
+  }
 
-	}
+  public void testSemiExternalGammaListGammaCoding() throws IOException {
 
-	
-    public void testSemiExternalGammaListGammaCoding() throws IOException {
+    long[] longs = {10, 300, 450, 650, 1000, 1290, 1699};
+    LongList listLongs = new LongArrayList(longs);
 
-		long[] longs = { 10, 300, 450, 650, 1000, 1290, 1699 };
-		LongList listLongs = new LongArrayList( longs );
-
-		SemiExternalGammaList list = new SemiExternalGammaList( buildInputStream( listLongs ), 1, listLongs.size() );
-		for ( int i = 0; i < longs.length; ++i ) {
-			assertEquals( ( "test failed for index: " + i ), longs[ i ], list.getLong( i ) );
-		}
-
-		list = new SemiExternalGammaList( buildInputStream( listLongs ), 2, listLongs.size() );
-		for ( int i = 0; i < longs.length; ++i ) {
-			assertEquals( ( "test failed for index: " + i ), longs[ i ], list.getLong( i ) );
-		}
-
-		list = new SemiExternalGammaList( buildInputStream( listLongs ), 4, listLongs.size() );
-		for ( int i = 0; i < longs.length; ++i ) {
-			assertEquals( ( "test failed for index: " + i ), longs[ i ], list.getLong( i ) );
-		}
-
-		list = new SemiExternalGammaList( buildInputStream( listLongs ), 7, listLongs.size() );
-		for ( int i = 0; i < longs.length; ++i ) {
-			assertEquals( ( "test failed for index: " + i ), longs[ i ], list.getLong( i ) );
-		}
-		
-		list = new SemiExternalGammaList( buildInputStream( listLongs ), 8, listLongs.size() );
-		for ( int i = 0; i < longs.length; ++i ) {
-			assertEquals( ( "test failed for index: " + i ), longs[ i ], list.getLong( i ) );
-		}
+    SemiExternalGammaList list =
+        new SemiExternalGammaList(buildInputStream(listLongs), 1, listLongs.size());
+    for (int i = 0; i < longs.length; ++i) {
+      assertEquals(("test failed for index: " + i), longs[i], list.getLong(i));
     }
 
-    public void testEmptySemiExternalGammaListGammaCoding() throws IOException {
-
-		long[] longs = {  };
-		LongList listOffsets = new LongArrayList( longs );
-
-		new SemiExternalGammaList( buildInputStream( listOffsets ), 1, listOffsets.size() );
-		assertTrue( true );
+    list = new SemiExternalGammaList(buildInputStream(listLongs), 2, listLongs.size());
+    for (int i = 0; i < longs.length; ++i) {
+      assertEquals(("test failed for index: " + i), longs[i], list.getLong(i));
     }
 
+    list = new SemiExternalGammaList(buildInputStream(listLongs), 4, listLongs.size());
+    for (int i = 0; i < longs.length; ++i) {
+      assertEquals(("test failed for index: " + i), longs[i], list.getLong(i));
+    }
+
+    list = new SemiExternalGammaList(buildInputStream(listLongs), 7, listLongs.size());
+    for (int i = 0; i < longs.length; ++i) {
+      assertEquals(("test failed for index: " + i), longs[i], list.getLong(i));
+    }
+
+    list = new SemiExternalGammaList(buildInputStream(listLongs), 8, listLongs.size());
+    for (int i = 0; i < longs.length; ++i) {
+      assertEquals(("test failed for index: " + i), longs[i], list.getLong(i));
+    }
+  }
+
+  public void testEmptySemiExternalGammaListGammaCoding() throws IOException {
+
+    long[] longs = {};
+    LongList listOffsets = new LongArrayList(longs);
+
+    new SemiExternalGammaList(buildInputStream(listOffsets), 1, listOffsets.size());
+    assertTrue(true);
+  }
 }

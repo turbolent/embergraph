@@ -23,44 +23,35 @@ package org.embergraph.btree.proc;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.embergraph.service.Split;
 
 /**
  * Aggregates result into a list of results.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <R>
  * @param <A>
  */
-public class ListResultAggregator<R, A extends List<R>> implements
-        IResultHandler<R, A> {
+public class ListResultAggregator<R, A extends List<R>> implements IResultHandler<R, A> {
 
-    public ListResultAggregator() {
-        
+  public ListResultAggregator() {}
+
+  @SuppressWarnings("unchecked")
+  private final A results = (A) new LinkedList<R>();
+
+  @Override
+  public void aggregate(final R result, final Split split) {
+
+    synchronized (results) {
+      results.add(result);
     }
+  }
 
-    @SuppressWarnings("unchecked")
-    private final A results = (A) new LinkedList<R>();
+  @Override
+  public A getResult() {
 
-    @Override
-    public void aggregate(final R result, final Split split) {
-
-        synchronized(results) {
-        
-            results.add(result);
-            
-        }
-
+    synchronized (results) {
+      return results;
     }
-
-    @Override
-    public A getResult() {
-
-		synchronized (results) {
-			return results;
-		}
-
-    }
-
+  }
 }

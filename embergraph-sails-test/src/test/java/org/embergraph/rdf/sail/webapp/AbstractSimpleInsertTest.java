@@ -49,6 +49,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.embergraph.rdf.sail.webapp;
 
+import org.embergraph.journal.IIndexManager;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -61,84 +62,82 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.repository.RepositoryException;
 
-import org.embergraph.journal.IIndexManager;
+public class AbstractSimpleInsertTest<S extends IIndexManager>
+    extends AbstractTestNanoSparqlClient<S> {
 
-public class AbstractSimpleInsertTest<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+  private static final String EX_NS = "http://example.org/";
+  private ValueFactory f = new ValueFactoryImpl();
+  private URI bob;
 
-	private static final String EX_NS = "http://example.org/";
-	private ValueFactory f = new ValueFactoryImpl();
-	private URI bob;
+  public AbstractSimpleInsertTest() {}
 
-	public AbstractSimpleInsertTest() {
-	}
+  public AbstractSimpleInsertTest(String name) {
+    super(name);
+  }
 
-	public AbstractSimpleInsertTest(String name) {
-		super(name);
-	}
+  @Override
+  public void setUp() throws Exception {
 
-	@Override
-	public void setUp() throws Exception {
-	    
-	    super.setUp();
-	
-	    bob = f.createURI(EX_NS, "bob");
-	}
+    super.setUp();
 
-	public void tearDown() throws Exception {
-	    
-	    bob = null;
-	    
-	    f = null;
-	    
-	    super.tearDown();
-	    
-	}
+    bob = f.createURI(EX_NS, "bob");
+  }
 
-	/**
-	 * Get a set of useful namespace prefix declarations.
-	 * 
-	 * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
-	 */
-	protected String getNamespaceDeclarations() {
-	    final StringBuilder declarations = new StringBuilder();
-	    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
-	    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
-	    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
-	    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-	    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
-	    declarations.append("PREFIX xsd: <" +  XMLSchema.NAMESPACE + "> \n");
-	    declarations.append("\n");
-	
-	    return declarations.toString();
-	}
+  public void tearDown() throws Exception {
 
-	protected boolean hasStatement(final Resource subj, final URI pred, final Value obj, final boolean includeInferred, final Resource... contexts)
-			throws RepositoryException {
-			
-			    try {
-			
-			        return m_repo.getStatements(subj, pred, obj, includeInferred,
-			                contexts).hasNext();
-			        
-			    } catch (Exception e) {
-			        
-			        throw new RepositoryException(e);
-			        
-			    }
-			
-			}
+    bob = null;
 
-	protected void executeInsert(String where, boolean expected) throws RepositoryException, Exception {
-		final StringBuilder update = new StringBuilder();
-	    update.append(getNamespaceDeclarations());
-		update.append("INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where +" }");
-	
-	    assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
-	
-	    m_repo.prepareUpdate(update.toString()).evaluate();
-	
-	    assertEquals(expected, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
-	}
+    f = null;
 
+    super.tearDown();
+  }
+
+  /**
+   * Get a set of useful namespace prefix declarations.
+   *
+   * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
+   */
+  protected String getNamespaceDeclarations() {
+    final StringBuilder declarations = new StringBuilder();
+    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
+    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
+    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
+    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
+    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
+    declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
+    declarations.append("\n");
+
+    return declarations.toString();
+  }
+
+  protected boolean hasStatement(
+      final Resource subj,
+      final URI pred,
+      final Value obj,
+      final boolean includeInferred,
+      final Resource... contexts)
+      throws RepositoryException {
+
+    try {
+
+      return m_repo.getStatements(subj, pred, obj, includeInferred, contexts).hasNext();
+
+    } catch (Exception e) {
+
+      throw new RepositoryException(e);
+    }
+  }
+
+  protected void executeInsert(String where, boolean expected)
+      throws RepositoryException, Exception {
+    final StringBuilder update = new StringBuilder();
+    update.append(getNamespaceDeclarations());
+    update.append("INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where + " }");
+
+    assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
+
+    m_repo.prepareUpdate(update.toString()).evaluate();
+
+    assertEquals(expected, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
+  }
 }

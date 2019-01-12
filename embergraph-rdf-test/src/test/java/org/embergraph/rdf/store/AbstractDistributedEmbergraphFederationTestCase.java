@@ -22,52 +22,49 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.service.AbstractScaleOutClient;
 
 /**
- * An abstract test harness that sets up (and tears down) the metadata and data
- * services required for a embergraph federation using JINI to handle service
- * discovery.
- * <p>
- * Note: The configuration options for the (meta)data services are set in their
- * respective <code>properties</code> files NOT by the System properties!
- * 
+ * An abstract test harness that sets up (and tears down) the metadata and data services required
+ * for a embergraph federation using JINI to handle service discovery.
+ *
+ * <p>Note: The configuration options for the (meta)data services are set in their respective <code>
+ * properties</code> files NOT by the System properties!
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractDistributedEmbergraphFederationTestCase extends TestCase2 {
+public abstract class AbstractDistributedEmbergraphFederationTestCase extends TestCase2 {
 
-    public AbstractDistributedEmbergraphFederationTestCase() {
-        super();
-    }
-    
-    public AbstractDistributedEmbergraphFederationTestCase(String name) {
-        super(name);
-    }
+  public AbstractDistributedEmbergraphFederationTestCase() {
+    super();
+  }
 
-//BLZG-1370 removing unused test classes for embergraph-jini
-    //private JiniServicesHelper helper = new JiniServicesHelper();
-    
-    protected AbstractScaleOutClient client;
-    
-    protected void setUp() throws Exception {
-        
-        // start services.
-//BLZG-1370 removing unused test classes for embergraph-jini
-//        helper.start();
-        
-        // expose to subclasses.
-//BLZG-1370 removing unused test classes for embergraph-jini
-//        client = helper.client;
-        
-    }
+  public AbstractDistributedEmbergraphFederationTestCase(String name) {
+    super(name);
+  }
 
-    protected void tearDown() throws Exception {
-        
-//BLZG-1370 removing unused test classes for embergraph-jini
-//        helper.destroy();
-        
-    }
-    
+  // BLZG-1370 removing unused test classes for embergraph-jini
+  // private JiniServicesHelper helper = new JiniServicesHelper();
+
+  protected AbstractScaleOutClient client;
+
+  protected void setUp() throws Exception {
+
+    // start services.
+    // BLZG-1370 removing unused test classes for embergraph-jini
+    //        helper.start();
+
+    // expose to subclasses.
+    // BLZG-1370 removing unused test classes for embergraph-jini
+    //        client = helper.client;
+
+  }
+
+  protected void tearDown() throws Exception {
+
+    // BLZG-1370 removing unused test classes for embergraph-jini
+    //        helper.destroy();
+
+  }
 }

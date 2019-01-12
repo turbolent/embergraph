@@ -32,75 +32,63 @@ import org.embergraph.rdf.internal.IV;
 
 /**
  * Builds unsigned byte[] sort keys from {@link IBindingSet}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BindingSetSortKeyBuilder implements ISortKeyBuilder<IBindingSet> {
 
-    private final IKeyBuilder keyBuilder;
-    private final IVariable[] vars;
-    
-    /**
-     * 
-     * @param keyBuilder
-     *            Used to generate the unsigned byte[] key for each bound
-     *            variable. In particular, the configuration for the
-     *            {@link IKeyBuilder} governs how Unicode fields are handled.
-     * @param vars
-     *            An array of {@link IVariable}s, all of which MUST be bound.
-     */
-    public BindingSetSortKeyBuilder(final IKeyBuilder keyBuilder,
-            final IVariable[] vars) {
+  private final IKeyBuilder keyBuilder;
+  private final IVariable[] vars;
 
-        if (keyBuilder == null)
-            throw new IllegalArgumentException();
+  /**
+   * @param keyBuilder Used to generate the unsigned byte[] key for each bound variable. In
+   *     particular, the configuration for the {@link IKeyBuilder} governs how Unicode fields are
+   *     handled.
+   * @param vars An array of {@link IVariable}s, all of which MUST be bound.
+   */
+  public BindingSetSortKeyBuilder(final IKeyBuilder keyBuilder, final IVariable[] vars) {
 
-        if (vars == null || vars.length == 0)
-            throw new IllegalArgumentException();
+    if (keyBuilder == null) throw new IllegalArgumentException();
 
-        this.keyBuilder = keyBuilder;
+    if (vars == null || vars.length == 0) throw new IllegalArgumentException();
 
-        this.vars = vars;
-        
-    }
-    
-    /**
-     * @todo This has RDF specific handling of the IVs and treatment of unbound
-     *       variables as 0L term identifiers.  This needs to be abstracted out
-     *       in order to run against generic relations.
-     */
-    public byte[] getSortKey(final IBindingSet bindingSet) {
-        
-        keyBuilder.reset();
-        
-        for (int i = 0; i < vars.length; i++) {
-            
-            final IVariable<?> var = vars[i];
-            
-            Object val = bindingSet.get(var);
-            if (val == null) {
-                val = Long.valueOf(0);
-            } else if (val instanceof Constant<?>) {
-                val = ((Constant<?>) val).get();
-            }
+    this.keyBuilder = keyBuilder;
 
-            if (val instanceof IV) {
-            
-                final IV iv = (IV) val;
-            
-                iv.encode(keyBuilder);
+    this.vars = vars;
+  }
 
-            } else {
-                
-                keyBuilder.append(val);
-                
-            }
-            
-        }
+  /**
+   * @todo This has RDF specific handling of the IVs and treatment of unbound variables as 0L term
+   *     identifiers. This needs to be abstracted out in order to run against generic relations.
+   */
+  public byte[] getSortKey(final IBindingSet bindingSet) {
 
-        return keyBuilder.getKey();
+    keyBuilder.reset();
 
+    for (int i = 0; i < vars.length; i++) {
+
+      final IVariable<?> var = vars[i];
+
+      Object val = bindingSet.get(var);
+      if (val == null) {
+        val = Long.valueOf(0);
+      } else if (val instanceof Constant<?>) {
+        val = ((Constant<?>) val).get();
+      }
+
+      if (val instanceof IV) {
+
+        final IV iv = (IV) val;
+
+        iv.encode(keyBuilder);
+
+      } else {
+
+        keyBuilder.append(val);
+      }
     }
 
+    return keyBuilder.getKey();
+  }
 }

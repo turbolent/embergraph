@@ -23,210 +23,183 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.raba.codec;
 
 import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 
 /**
  * Test suite for the {@link FrontCodedRabaCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCase {
 
-    /**
-     * 
-     */
-    public AbstractFrontCodedRabaCoderTestCase() {
+  /** */
+  public AbstractFrontCodedRabaCoderTestCase() {}
+
+  /** @param name */
+  public AbstractFrontCodedRabaCoderTestCase(String name) {
+    super(name);
+  }
+
+  /**
+   * Unit test demonstrates and verifies front coding of a well known example with a ratio of 4.
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_example_ratio4() throws UnsupportedEncodingException {
+
+    final byte[][] a = new byte[4][];
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
+
+    final IRaba expected = new ReadOnlyKeysRaba(a);
+
+    // front-code the list.
+    final int ratio = 4;
+    final CustomByteArrayFrontCodedList frontCodedList =
+        new CustomByteArrayFrontCodedList(expected.iterator(), ratio);
+
+    {
+      final byte[] t = frontCodedList.getBackingBuffer().toArray();
+
+      System.out.println("coded: " + Arrays.toString(t));
     }
 
-    /**
-     * @param name
-     */
-    public AbstractFrontCodedRabaCoderTestCase(String name) {
-        super(name);
+    for (int i = 0; i < a.length; i++) {
+
+      assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
+
+      assertEquals("length(" + i + ")", a[i].length, frontCodedList.arrayLength(i));
     }
 
-    /**
-     * Unit test demonstrates and verifies front coding of a well known example
-     * with a ratio of 4.
-     * 
-     * @throws UnsupportedEncodingException
-     */
-    public void test_example_ratio4() throws UnsupportedEncodingException {
-        
-        final byte[][] a = new byte[4][];
-        a[0] = "foo".getBytes("US-ASCII");
-        a[1] = "foobar".getBytes("US-ASCII");
-        a[2] = "fool".getBytes("US-ASCII");
-        a[3] = "football".getBytes("US-ASCII");
-        
-        final IRaba expected = new ReadOnlyKeysRaba(a);
-       
-        // front-code the list.
-        final int ratio = 4;
-        final CustomByteArrayFrontCodedList frontCodedList = new CustomByteArrayFrontCodedList(
-                expected.iterator(), ratio);
-        
-        {
-            final byte[] t = frontCodedList.getBackingBuffer().toArray();
+    for (int i = 0; i < a.length; i++) {
 
-            System.out.println("coded: " + Arrays.toString(t));
-        }
+      assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    }
+  }
 
-        for (int i = 0; i < a.length; i++) {
+  /**
+   * Unit test demonstrates and verifies front coding of a well known example with a ratio of 3.
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_example_ratio3() throws UnsupportedEncodingException {
 
-            assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
+    final byte[][] a = new byte[4][];
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
-            assertEquals("length(" + i + ")", a[i].length, frontCodedList
-                    .arrayLength(i));
-            
-        }
+    final IRaba expected = new ReadOnlyKeysRaba(a);
 
-        for (int i = 0; i < a.length; i++) {
+    // front-code the list.
+    final int ratio = 3;
+    final CustomByteArrayFrontCodedList frontCodedList =
+        new CustomByteArrayFrontCodedList(expected.iterator(), ratio);
 
-            assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    {
+      final byte[] t = frontCodedList.getBackingBuffer().toArray();
 
-        }
-        
+      System.out.println("coded: " + Arrays.toString(t));
     }
 
-    /**
-     * Unit test demonstrates and verifies front coding of a well known example
-     * with a ratio of 3.
-     * 
-     * @throws UnsupportedEncodingException
-     */
-    public void test_example_ratio3() throws UnsupportedEncodingException {
-        
-        final byte[][] a = new byte[4][];
-        a[0] = "foo".getBytes("US-ASCII");
-        a[1] = "foobar".getBytes("US-ASCII");
-        a[2] = "fool".getBytes("US-ASCII");
-        a[3] = "football".getBytes("US-ASCII");
-        
-        final IRaba expected = new ReadOnlyKeysRaba(a);
-       
-        // front-code the list.
-        final int ratio = 3;
-        final CustomByteArrayFrontCodedList frontCodedList = new CustomByteArrayFrontCodedList(
-                expected.iterator(), ratio);
-        
-        {
-            final byte[] t = frontCodedList.getBackingBuffer().toArray();
+    for (int i = 0; i < a.length; i++) {
 
-            System.out.println("coded: " + Arrays.toString(t));
-        }
+      assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
 
-        for (int i = 0; i < a.length; i++) {
-
-            assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
-
-            assertEquals("length(" + i + ")", a[i].length, frontCodedList
-                    .arrayLength(i));
-
-        }
-
-        assertEquals("search(" + 2 + ")", 2, frontCodedList.search(a[2]));
-
-        for (int i = 0; i < a.length; i++) {
-
-            assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
-
-        }
-
+      assertEquals("length(" + i + ")", a[i].length, frontCodedList.arrayLength(i));
     }
 
-    /**
-     * Unit test demonstrates and verifies front coding of a well known example
-     * using a ratio of 2.
-     * 
-     * @throws UnsupportedEncodingException
-     */
-    public void test_example1_ratio2() throws UnsupportedEncodingException {
-        
-        final byte[][] a = new byte[4][];
-        a[0] = "foo".getBytes("US-ASCII");
-        a[1] = "foobar".getBytes("US-ASCII");
-        a[2] = "fool".getBytes("US-ASCII");
-        a[3] = "football".getBytes("US-ASCII");
-        
-        final IRaba expected = new ReadOnlyKeysRaba(a);
-       
-        // front-code the list.
-        final int ratio = 2;
-        final CustomByteArrayFrontCodedList frontCodedList = new CustomByteArrayFrontCodedList(
-                expected.iterator(), ratio);
-        
-        {
-            final byte[] t = frontCodedList.getBackingBuffer().toArray();
+    assertEquals("search(" + 2 + ")", 2, frontCodedList.search(a[2]));
 
-            System.out.println("coded: " + Arrays.toString(t));
-        }
+    for (int i = 0; i < a.length; i++) {
 
-        for (int i = 0; i < a.length; i++) {
+      assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    }
+  }
 
-            assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
+  /**
+   * Unit test demonstrates and verifies front coding of a well known example using a ratio of 2.
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_example1_ratio2() throws UnsupportedEncodingException {
 
-            assertEquals("length(" + i + ")", a[i].length, frontCodedList
-                    .arrayLength(i));
+    final byte[][] a = new byte[4][];
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
-        }
-        
-        for (int i = 0; i < a.length; i++) {
+    final IRaba expected = new ReadOnlyKeysRaba(a);
 
-            assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    // front-code the list.
+    final int ratio = 2;
+    final CustomByteArrayFrontCodedList frontCodedList =
+        new CustomByteArrayFrontCodedList(expected.iterator(), ratio);
 
-        }
+    {
+      final byte[] t = frontCodedList.getBackingBuffer().toArray();
 
+      System.out.println("coded: " + Arrays.toString(t));
     }
 
-    /**
-     * Unit test demonstrates and verifies front coding of a well known example
-     * using a ratio of 1 (no compression).
-     * 
-     * @throws UnsupportedEncodingException
-     */
-    public void test_example1_ratio1() throws UnsupportedEncodingException {
-        
-        final byte[][] a = new byte[4][];
-        a[0] = "foo".getBytes("US-ASCII");
-        a[1] = "foobar".getBytes("US-ASCII");
-        a[2] = "fool".getBytes("US-ASCII");
-        a[3] = "football".getBytes("US-ASCII");
-        
-        final IRaba expected = new ReadOnlyKeysRaba(a);
-       
-        // front-code the list.
-        final int ratio = 1;
-        final CustomByteArrayFrontCodedList frontCodedList = new CustomByteArrayFrontCodedList(
-                expected.iterator(), ratio);
-        
-        {
-            final byte[] t = frontCodedList.getBackingBuffer().toArray();
+    for (int i = 0; i < a.length; i++) {
 
-            System.out.println("coded: " + Arrays.toString(t));
-        }
+      assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
 
-        for (int i = 0; i < a.length; i++) {
-
-            assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
-
-            assertEquals("length(" + i + ")", a[i].length, frontCodedList
-                    .arrayLength(i));
-
-        }
-        
-        for (int i = 0; i < a.length; i++) {
-
-            assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
-
-        }
-
+      assertEquals("length(" + i + ")", a[i].length, frontCodedList.arrayLength(i));
     }
 
+    for (int i = 0; i < a.length; i++) {
+
+      assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    }
+  }
+
+  /**
+   * Unit test demonstrates and verifies front coding of a well known example using a ratio of 1 (no
+   * compression).
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_example1_ratio1() throws UnsupportedEncodingException {
+
+    final byte[][] a = new byte[4][];
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
+
+    final IRaba expected = new ReadOnlyKeysRaba(a);
+
+    // front-code the list.
+    final int ratio = 1;
+    final CustomByteArrayFrontCodedList frontCodedList =
+        new CustomByteArrayFrontCodedList(expected.iterator(), ratio);
+
+    {
+      final byte[] t = frontCodedList.getBackingBuffer().toArray();
+
+      System.out.println("coded: " + Arrays.toString(t));
+    }
+
+    for (int i = 0; i < a.length; i++) {
+
+      assertEquals("get(" + i + ")", a[i], frontCodedList.get(i));
+
+      assertEquals("length(" + i + ")", a[i].length, frontCodedList.arrayLength(i));
+    }
+
+    for (int i = 0; i < a.length; i++) {
+
+      assertEquals("search(" + i + ")", i, frontCodedList.search(a[i]));
+    }
+  }
 }

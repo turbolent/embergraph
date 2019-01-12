@@ -22,57 +22,46 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
- * Abstract base class for inline RDF values (literals, blank nodes, and
- * statement identifiers can be inlined).
- * <p>
- * {@inheritDoc}
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
- * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z
- *          thompsonbry $
+ * Abstract base class for inline RDF values (literals, blank nodes, and statement identifiers can
+ * be inlined).
+ *
+ * <p>{@inheritDoc}
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z thompsonbry $
  */
-abstract public class AbstractInlineIV<V extends EmbergraphValue, T>
-        extends AbstractIV<V, T> {
+public abstract class AbstractInlineIV<V extends EmbergraphValue, T> extends AbstractIV<V, T> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -2847844163772097836L;
+  /** */
+  private static final long serialVersionUID = -2847844163772097836L;
 
-    protected AbstractInlineIV(final VTE vte, final DTE dte) {
+  protected AbstractInlineIV(final VTE vte, final DTE dte) {
 
-        super(vte, true/* inline */, false/* extension */, dte);
+    super(vte, true /* inline */, false /* extension */, dte);
+  }
 
-    }
+  protected AbstractInlineIV(final VTE vte, final boolean extension, final DTE dte) {
 
-    protected AbstractInlineIV(final VTE vte, final boolean extension,
-            final DTE dte) {
+    super(vte, true /*inline*/, extension, dte);
+  }
 
-        super(vte, true/*inline*/, extension, dte);
+  /** Always returns <code>true</code> since the value is inline. */
+  @Override
+  public final boolean isInline() {
+    return true;
+  }
 
-    }
+  //	/**
+  //	 * Returns a human interpretable string value of the {@link IV} object. When
+  //	 * possible, returns either a Literal's label, a URI's URI or a BNode's ID.
+  //	 */
+  //    abstract public String stringValue();
 
-    /**
-     * Always returns <code>true</code> since the value is inline.
-     */
-    @Override
-    final public boolean isInline() {
-        return true;
-    }
+  //    /**
+  //     * No term identifier for an inline IV - throws an exception.
+  //     */
+  //    final public long getTermId() {
+  //        throw new UnsupportedOperationException();
+  //    }
 
-//	/**
-//	 * Returns a human interpretable string value of the {@link IV} object. When
-//	 * possible, returns either a Literal's label, a URI's URI or a BNode's ID.
-//	 */
-//    abstract public String stringValue();
-
-//    /**
-//     * No term identifier for an inline IV - throws an exception.
-//     */
-//    final public long getTermId() {
-//        throw new UnsupportedOperationException();
-//    }
-
-    
 }

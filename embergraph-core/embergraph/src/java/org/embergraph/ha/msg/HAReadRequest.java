@@ -19,52 +19,44 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import org.embergraph.rawstore.IRawStore;
 
-public class HAReadRequest implements IHAReadRequest,
-        Serializable {
+public class HAReadRequest implements IHAReadRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final long quorumToken;
-    private final UUID storeUUID;
-    private final long addr;
+  private final long quorumToken;
+  private final UUID storeUUID;
+  private final long addr;
 
-    public HAReadRequest(final long quorumToken, final UUID storeUUID, final long addr) {
+  public HAReadRequest(final long quorumToken, final UUID storeUUID, final long addr) {
 
-        // Note: Optional.
-//        if (storeUUID == null)
-//            throw new IllegalArgumentException();
-        
-        if (addr == IRawStore.NULL)
-            throw new IllegalArgumentException();
-        
-        this.quorumToken = quorumToken;
-        this.storeUUID = storeUUID;
-        this.addr = addr;
-        
-    }
+    // Note: Optional.
+    //        if (storeUUID == null)
+    //            throw new IllegalArgumentException();
 
-    @Override
-    public long getQuorumToken() {
+    if (addr == IRawStore.NULL) throw new IllegalArgumentException();
 
-        return quorumToken;
-        
-    }
+    this.quorumToken = quorumToken;
+    this.storeUUID = storeUUID;
+    this.addr = addr;
+  }
 
-    @Override
-    public UUID getStoreUUID() {
+  @Override
+  public long getQuorumToken() {
 
-        return storeUUID;
-        
-    }
+    return quorumToken;
+  }
 
-    @Override
-    public long getAddr() {
+  @Override
+  public UUID getStoreUUID() {
 
-        return addr;
-        
-    }
+    return storeUUID;
+  }
 
+  @Override
+  public long getAddr() {
+
+    return addr;
+  }
 }

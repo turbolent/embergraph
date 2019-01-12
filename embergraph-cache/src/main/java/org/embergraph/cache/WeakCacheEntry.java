@@ -25,42 +25,32 @@ import java.lang.ref.WeakReference;
 
 /**
  * Implementation based on {@link WeakReference}.
- * 
+ *
  * @version $Id$
  * @author thompsonbry
  */
-public class WeakCacheEntry<K,T>
-	extends WeakReference<T>
-	implements IWeakRefCacheEntry<K,T>
-{
-    
-    final private K oid;
-    
-    public WeakCacheEntry( K key, T obj, ReferenceQueue<T> queue )
-    {
-        
-        super( obj, queue );
-        
-        this.oid = key;
-        
-    }
-    
-    public K getKey()
-    {
-        
-        return oid;
-        
-    }
-    
-    public T getObject()
-    {
-        
-        return get();
-        
-    }
+public class WeakCacheEntry<K, T> extends WeakReference<T> implements IWeakRefCacheEntry<K, T> {
 
-    public String toString() {
-    	return "Entry(oid="+oid+")";
-    }
-    
+  private final K oid;
+
+  public WeakCacheEntry(K key, T obj, ReferenceQueue<T> queue) {
+
+    super(obj, queue);
+
+    this.oid = key;
+  }
+
+  public K getKey() {
+
+    return oid;
+  }
+
+  public T getObject() {
+
+    return get();
+  }
+
+  public String toString() {
+    return "Entry(oid=" + oid + ")";
+  }
 }

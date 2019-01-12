@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.resources;
 
 import java.util.UUID;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.IndexMetadata;
@@ -32,111 +31,88 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
 /**
- * {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to
- * {@link IResourceMetadata} records. The keys are the long integers
- * (commitTimes) followed by the index segment UUID to break ties (this is not
- * the scale-out index UUID, but the UUID of the specific index segment). The
+ * {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to {@link IResourceMetadata}
+ * records. The keys are the long integers (commitTimes) followed by the index segment UUID to break
+ * ties (this is not the scale-out index UUID, but the UUID of the specific index segment). The
  * values are {@link IResourceMetadata} objects.
- * <p>
- * Note: Access to this object MUST be synchronized.
- * <p>
- * Note: This is used as a transient data structure that is populated from the
- * file system by the {@link ResourceManager}.
+ *
+ * <p>Note: Access to this object MUST be synchronized.
+ *
+ * <p>Note: This is used as a transient data structure that is populated from the file system by the
+ * {@link ResourceManager}.
  */
 public class IndexSegmentIndex extends BTree {
 
-    /**
-     * Instance used to encode the timestamp into the key.
-     */
-    final private IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG
-            + Bytes.SIZEOF_UUID);
+  /** Instance used to encode the timestamp into the key. */
+  private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG + Bytes.SIZEOF_UUID);
 
-    /**
-     * Create a transient instance.
-     * 
-     * @return The new instance.
-     */
-    static public IndexSegmentIndex createTransient() {
-        
-        final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+  /**
+   * Create a transient instance.
+   *
+   * @return The new instance.
+   */
+  public static IndexSegmentIndex createTransient() {
 
-        metadata.setBTreeClassName(IndexSegmentIndex.class.getName());
+    final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
 
-        return (IndexSegmentIndex) BTree.createTransient(metadata);
-        
+    metadata.setBTreeClassName(IndexSegmentIndex.class.getName());
+
+    return (IndexSegmentIndex) BTree.createTransient(metadata);
+  }
+
+  /**
+   * Load from the store.
+   *
+   * @param store The backing store.
+   * @param checkpoint The {@link Checkpoint} record.
+   * @param metadata The metadata record for the index.
+   */
+  public IndexSegmentIndex(
+      IRawStore store, Checkpoint checkpoint, IndexMetadata metadata, boolean readOnly) {
+
+    super(store, checkpoint, metadata, readOnly);
+  }
+
+  /**
+   * Encodes the commit time into a key.
+   *
+   * @param commitTime The commit time.
+   * @param The UUID of the resource.
+   * @return The corresponding key.
+   */
+  protected byte[] getKey(long commitTime, UUID uuid) {
+
+    return keyBuilder.reset().append(commitTime).append(uuid).getKey();
+  }
+
+  /**
+   * Add an entry under the commitTime and resource UUID associated with the {@link
+   * IResourceMetadata} record.
+   *
+   * @param resourceMetadata The {@link IResourceMetadata} record.
+   * @exception IllegalArgumentException if <i>commitTime</i> is <code>0L</code>.
+   * @exception IllegalArgumentException if <i>resourceMetadata</i> is <code>null</code>.
+   * @exception IllegalArgumentException if there is already an entry registered under for the given
+   *     timestamp.
+   */
+  public synchronized void add(final SegmentMetadata resourceMetadata) {
+
+    if (resourceMetadata == null) throw new IllegalArgumentException();
+
+    assert resourceMetadata.isIndexSegment();
+
+    final long createTime = resourceMetadata.getCreateTime();
+
+    if (createTime == 0L) throw new IllegalArgumentException();
+
+    final byte[] key = getKey(createTime, resourceMetadata.getUUID());
+
+    if (super.contains(key)) {
+
+      throw new IllegalArgumentException("entry exists: timestamp=" + createTime);
     }
 
-    /**
-     * Load from the store.
-     * 
-     * @param store
-     *            The backing store.
-     * @param checkpoint
-     *            The {@link Checkpoint} record.
-     * @param metadata
-     *            The metadata record for the index.
-     */
-    public IndexSegmentIndex(IRawStore store, Checkpoint checkpoint, IndexMetadata metadata, boolean readOnly) {
-
-        super(store, checkpoint, metadata, readOnly);
-
-    }
-    
-    /**
-     * Encodes the commit time into a key.
-     * 
-     * @param commitTime
-     *            The commit time.
-     * @param The
-     *            UUID of the resource.
-     * 
-     * @return The corresponding key.
-     */
-    protected byte[] getKey(long commitTime,UUID uuid) {
-
-        return keyBuilder.reset().append(commitTime).append(uuid).getKey();
-
-    }
-        
-    /**
-     * Add an entry under the commitTime and resource UUID associated with the
-     * {@link IResourceMetadata} record.
-     * 
-     * @param resourceMetadata
-     *            The {@link IResourceMetadata} record.
-     * 
-     * @exception IllegalArgumentException
-     *                if <i>commitTime</i> is <code>0L</code>.
-     * @exception IllegalArgumentException
-     *                if <i>resourceMetadata</i> is <code>null</code>.
-     * @exception IllegalArgumentException
-     *                if there is already an entry registered under for the
-     *                given timestamp.
-     */
-    synchronized public void add(final SegmentMetadata resourceMetadata) {
-
-        if (resourceMetadata == null)
-            throw new IllegalArgumentException();
-
-        assert resourceMetadata.isIndexSegment();
-
-        final long createTime = resourceMetadata.getCreateTime();
-
-        if (createTime == 0L)
-            throw new IllegalArgumentException();
-
-        final byte[] key = getKey(createTime,resourceMetadata.getUUID());
-        
-        if(super.contains(key)) {
-            
-            throw new IllegalArgumentException("entry exists: timestamp="
-                    + createTime);
-            
-        }
-        
-        // add a serialized entry to the persistent index.
-        super.insert(key, SerializerUtil.serialize(resourceMetadata));
-        
-    }
-        
+    // add a serialized entry to the persistent index.
+    super.insert(key, SerializerUtil.serialize(resourceMetadata));
+  }
 }

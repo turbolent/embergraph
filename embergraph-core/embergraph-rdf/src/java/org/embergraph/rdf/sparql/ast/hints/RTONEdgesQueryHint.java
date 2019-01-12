@@ -29,54 +29,54 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * The query hint governing the choice of the number of initial edges for the
- * exploration of join paths in the join graph.
- * 
+ * The query hint governing the choice of the number of initial edges for the exploration of join
+ * paths in the join graph.
+ *
  * @see JGraph
  * @see QueryHints#RTO_NEDGES
  */
 final class RTONEdgesQueryHint extends AbstractIntQueryHint {
 
-    public RTONEdgesQueryHint() {
-        super(QueryHints.RTO_NEDGES, QueryHints.DEFAULT_RTO_NEDGES);
+  public RTONEdgesQueryHint() {
+    super(QueryHints.RTO_NEDGES, QueryHints.DEFAULT_RTO_NEDGES);
+  }
+
+  @Override
+  public Integer validate(final String value) {
+
+    final int i;
+    try {
+      i = Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException(
+          "Not an integer value: hint=" + getName() + ", value=" + value);
     }
 
-    @Override
-    public Integer validate(final String value) {
-        
-        final int i;
-        try {
-            i = Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Not an integer value: hint=" + getName() + ", value=" + value);
+    if (i <= 0)
+      throw new IllegalArgumentException(
+          "Must be positive: hint=" + getName() + ", value=" + value);
+
+    return i;
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext ctx,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    switch (scope) {
+      case Group:
+      case GroupAndSubGroups:
+      case Query:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(ctx, scope, op, getName(), value);
         }
-        
-        if (i <= 0)
-            throw new IllegalArgumentException("Must be positive: hint="
-                    + getName() + ", value=" + value);
-        
-        return i;
-
+        return;
     }
-
-    @Override
-    public void handle(final AST2BOpContext ctx,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope,
-            final ASTBase op, final Integer value) {
-
-        switch (scope) {
-        case Group:
-        case GroupAndSubGroups:
-        case Query:
-        case SubQuery:
-            if (op instanceof JoinGroupNode) {
-                _setAnnotation(ctx, scope, op, getName(), value);
-            }
-            return;
-        }
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

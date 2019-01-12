@@ -19,109 +19,89 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import junit.framework.Test;
-
-import org.openrdf.query.resultio.BooleanQueryResultFormat;
-
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
+import org.openrdf.query.resultio.BooleanQueryResultFormat;
 
 /**
  * Proxied test suite.
  *
- * @param <S>
- * 
- * TODO Should test GET as well as POST (this requires that we configured the
- * client differently).
+ * @param <S> TODO Should test GET as well as POST (this requires that we configured the client
+ *     differently).
  */
-public class Test_REST_ASK<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+public class Test_REST_ASK<S extends IIndexManager> extends AbstractTestNanoSparqlClient<S> {
 
-	public Test_REST_ASK() {
+  public Test_REST_ASK() {}
 
-	}
+  public Test_REST_ASK(final String name) {
 
-	public Test_REST_ASK(final String name) {
+    super(name);
+  }
 
-		super(name);
+  public static Test suite() {
 
-	}
+    return ProxySuiteHelper.suiteWhenStandalone(
+        Test_REST_ASK.class, "test.*", TestMode.quads
+        //                , TestMode.sids
+        //                , TestMode.triples
+        );
+  }
 
-	public static Test suite() {
+  /** "ASK" query with an empty KB and CONNEG for various known/accepted MIME Types. */
+  public void test_ASK() throws Exception {
 
-		return ProxySuiteHelper.suiteWhenStandalone(Test_REST_ASK.class,
-                "test.*", TestMode.quads
-//                , TestMode.sids
-//                , TestMode.triples
-                );
-       
-	}
+    final String queryStr = "ASK where {?s ?p ?o}";
 
-	/**
-	 * "ASK" query with an empty KB and CONNEG for various known/accepted MIME
-	 * Types.
-	 */
-	public void test_ASK() throws Exception {
+    // final RemoteRepository repo = new RemoteRepository(m_serviceURL);
+    {
+      final IPreparedBooleanQuery query = m_repo.prepareBooleanQuery(queryStr);
+      assertEquals(false, query.evaluate());
+    }
+    {
+      final IPreparedBooleanQuery query = m_repo.prepareBooleanQuery(queryStr);
+      query.setHeader("Accept", BooleanQueryResultFormat.SPARQL.getDefaultMIMEType());
+      assertEquals(false, query.evaluate());
+    }
+    {
+      final IPreparedBooleanQuery query = m_repo.prepareBooleanQuery(queryStr);
+      query.setHeader("Accept", BooleanQueryResultFormat.TEXT.getDefaultMIMEType());
+      assertEquals(false, query.evaluate());
+    }
 
-		final String queryStr = "ASK where {?s ?p ?o}";
+    /**
+     * Uncommented to test CONNEG for JSON (available with openrdf 2.7).
+     *
+     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/588" > JSON-LD </a>
+     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/714" > Migrate to openrdf 2.7
+     *     </a>
+     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/704" > ask does not return
+     *     json </a>
+     */
+    {
+      final IPreparedBooleanQuery query = m_repo.prepareBooleanQuery(queryStr);
+      query.setHeader("Accept", "application/sparql-results+json");
+      assertEquals(false, query.evaluate());
+    }
+  }
 
-		// final RemoteRepository repo = new RemoteRepository(m_serviceURL);
-		{
-			final IPreparedBooleanQuery query = m_repo
-					.prepareBooleanQuery(queryStr);
-			assertEquals(false, query.evaluate());
-		}
-		{
-			final IPreparedBooleanQuery query = m_repo
-					.prepareBooleanQuery(queryStr);
-			query.setHeader("Accept",
-					BooleanQueryResultFormat.SPARQL.getDefaultMIMEType());
-			assertEquals(false, query.evaluate());
-		}
-		{
-			final IPreparedBooleanQuery query = m_repo
-					.prepareBooleanQuery(queryStr);
-			query.setHeader("Accept",
-					BooleanQueryResultFormat.TEXT.getDefaultMIMEType());
-			assertEquals(false, query.evaluate());
-		}
+  // /**
+  // * "ASK" query using POST with an empty KB.
+  // */
+  // public void test_POST_ASK() throws Exception {
 
-		/**
-       * Uncommented to test CONNEG for JSON (available with openrdf 2.7).
-		 * 
-		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/588" >
-		 *      JSON-LD </a>
-		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/714" >
-		 *      Migrate to openrdf 2.7 </a>
-		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/704" >
-		 *      ask does not return json </a>
-		 */
-		{
-			final IPreparedBooleanQuery query = m_repo
-					.prepareBooleanQuery(queryStr);
-			query.setHeader("Accept", "application/sparql-results+json");
-			assertEquals(false, query.evaluate());
-		}
+  // final String queryStr = "ASK where {?s ?p ?o}";
 
-	}
+  // final QueryOptions opts = new QueryOptions();
+  // opts.serviceURL = m_serviceURL;
+  // opts.queryStr = queryStr;
+  // opts.method = "POST";
 
-	// /**
-	// * "ASK" query using POST with an empty KB.
-	// */
-	// public void test_POST_ASK() throws Exception {
+  // opts.acceptHeader = BooleanQueryResultFormat.SPARQL.getDefaultMIMEType();
+  // assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
 
-	// final String queryStr = "ASK where {?s ?p ?o}";
+  // opts.acceptHeader = BooleanQueryResultFormat.TEXT.getDefaultMIMEType();
+  // assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
 
-	// final QueryOptions opts = new QueryOptions();
-	// opts.serviceURL = m_serviceURL;
-	// opts.queryStr = queryStr;
-	// opts.method = "POST";
-
-	// opts.acceptHeader = BooleanQueryResultFormat.SPARQL.getDefaultMIMEType();
-	// assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
-
-	// opts.acceptHeader = BooleanQueryResultFormat.TEXT.getDefaultMIMEType();
-	// assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
-
-	// }
+  // }
 
 }

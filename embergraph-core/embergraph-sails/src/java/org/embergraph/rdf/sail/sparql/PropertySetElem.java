@@ -7,43 +7,33 @@ package org.embergraph.rdf.sail.sparql;
 
 import org.openrdf.query.algebra.ValueConstant;
 
-
 /**
- *
  * @author Jeen
  * @openrdf
  */
 public class PropertySetElem {
 
-	private boolean inverse;
+  private boolean inverse;
 
-	private ValueConstant predicate;
-	
-	/**
-	 * @param inverse The inverse to set.
-	 */
-	public void setInverse(boolean inverse) {
-		this.inverse = inverse;
-	}
+  private ValueConstant predicate;
 
-	/**
-	 * @return Returns the inverse.
-	 */
-	public boolean isInverse() {
-		return inverse;
-	}
+  /** @param inverse The inverse to set. */
+  public void setInverse(boolean inverse) {
+    this.inverse = inverse;
+  }
 
-	/**
-	 * @param predicate The predicate to set.
-	 */
-	public void setPredicate(ValueConstant predicate) {
-		this.predicate = predicate;
-	}
+  /** @return Returns the inverse. */
+  public boolean isInverse() {
+    return inverse;
+  }
 
-	/**
-	 * @return Returns the predicate.
-	 */
-	public ValueConstant getPredicate() {
-		return predicate;
-	}
+  /** @param predicate The predicate to set. */
+  public void setPredicate(ValueConstant predicate) {
+    this.predicate = predicate;
+  }
+
+  /** @return Returns the predicate. */
+  public ValueConstant getPredicate() {
+    return predicate;
+  }
 }

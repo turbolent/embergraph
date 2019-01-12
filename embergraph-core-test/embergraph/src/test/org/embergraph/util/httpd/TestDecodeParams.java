@@ -25,159 +25,151 @@ import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDecodeParams extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestDecodeParams() {
+  /** */
+  public TestDecodeParams() {}
+
+  /** @param name */
+  public TestDecodeParams(String name) {
+    super(name);
+  }
+
+  private void assertSameParams(
+      final LinkedHashMap<String, Vector<String>> expected,
+      final LinkedHashMap<String, Vector<String>> actual) {
+
+    assertEquals("size", expected.size(), actual.size());
+
+    for (Map.Entry<String, Vector<String>> e : expected.entrySet()) {
+
+      final String k = e.getKey();
+
+      final Vector<String> ev = e.getValue();
+
+      final Vector<String> av = actual.get(k);
+
+      assertEquals("sizeOf(" + k + ")", ev.size(), av.size());
+
+      for (int i = 0; i < ev.size(); i++) {
+
+        assertEquals(k + "[" + i + "]", ev.get(i), av.get(i));
+      }
+    }
+  }
+
+  /**
+   * Unit test for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}.
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_decodeParams() throws UnsupportedEncodingException {
+
+    final LinkedHashMap<String, Vector<String>> expected =
+        new LinkedHashMap<String, Vector<String>>();
+    {
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("1");
+        v.add("2");
+        v.add("3");
+        expected.put("a", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("a b c");
+        v.add("d e");
+        v.add("f");
+        expected.put("blue", v);
+      }
     }
 
-    /**
-     * @param name
-     */
-    public TestDecodeParams(String name) {
-        super(name);
-    }
-    
-    private void assertSameParams(
-            final LinkedHashMap<String, Vector<String>> expected,
-            final LinkedHashMap<String, Vector<String>> actual) {
+    final String uri = NanoHTTPD.encodeParams(expected).toString();
 
-        assertEquals("size", expected.size(), actual.size());
+    if (log.isInfoEnabled()) log.info("encoded=" + uri);
 
-        for (Map.Entry<String, Vector<String>> e : expected.entrySet()) {
+    final LinkedHashMap<String, Vector<String>> actual =
+        new LinkedHashMap<String, Vector<String>>();
 
-            final String k = e.getKey();
+    NanoHTTPD.decodeParams(uri, actual);
 
-            final Vector<String> ev = e.getValue();
+    assertSameParams(expected, actual);
+  }
 
-            final Vector<String> av = actual.get(k);
+  public void test_paramHasEmptyStringValue() throws UnsupportedEncodingException {
 
-            assertEquals("sizeOf(" + k + ")", ev.size(), av.size());
-
-            for (int i = 0; i < ev.size(); i++) {
-
-                assertEquals(k + "[" + i + "]", ev.get(i), av.get(i));
-
-            }
-
-        }
-
-    }
-
-    /**
-     * Unit test for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}.
-     * 
-     * @throws UnsupportedEncodingException
-     */
-    public void test_decodeParams() throws UnsupportedEncodingException {
-
-        final LinkedHashMap<String, Vector<String>> expected = new LinkedHashMap<String, Vector<String>>();
-        {
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("1");
-                v.add("2");
-                v.add("3");
-                expected.put("a", v);
-            }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("a b c");
-                v.add("d e");
-                v.add("f");
-                expected.put("blue", v);
-            }
-        }
-
-        final String uri = NanoHTTPD.encodeParams(expected).toString();
-
-        if (log.isInfoEnabled())
-            log.info("encoded=" + uri);
-
-        final LinkedHashMap<String, Vector<String>> actual = new LinkedHashMap<String, Vector<String>>();
-
-        NanoHTTPD.decodeParams(uri, actual);
-
-        assertSameParams(expected, actual);
-
+    final LinkedHashMap<String, Vector<String>> expected =
+        new LinkedHashMap<String, Vector<String>>();
+    {
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add("1"); // non-empty value.
+        expected.put("a", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add(""); // empty value.
+        expected.put("b", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        // no value.
+        expected.put("c", v);
+      }
     }
 
-    public void test_paramHasEmptyStringValue() throws UnsupportedEncodingException {
-        
-        final LinkedHashMap<String, Vector<String>> expected = new LinkedHashMap<String, Vector<String>>();
-        {
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("1"); // non-empty value.
-                expected.put("a", v);
-            }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add("");// empty value.
-                expected.put("b", v);
-            }
-            {
-                final Vector<String> v = new Vector<String>();
-                // no value.
-                expected.put("c", v);
-            }
-        }
+    final String uri = "a=1&b=&c";
 
-        final String uri = "a=1&b=&c";
-        
-        final LinkedHashMap<String, Vector<String>> actual = new LinkedHashMap<String, Vector<String>>();
+    final LinkedHashMap<String, Vector<String>> actual =
+        new LinkedHashMap<String, Vector<String>>();
 
-        NanoHTTPD.decodeParams(uri, actual);
+    NanoHTTPD.decodeParams(uri, actual);
 
-        assertSameParams(expected,actual);
-        
-    }
-    
-    /**
-     * Examines behavior with leading/trailing whitespace.
-     * 
-     * @throws UnsupportedEncodingException 
-     */
-    public void test_decodeParams_with_whitespace() throws UnsupportedEncodingException {
+    assertSameParams(expected, actual);
+  }
 
-        final LinkedHashMap<String, Vector<String>> expected = new LinkedHashMap<String, Vector<String>>();
-        {
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add(" 1 ");
-                expected.put("a", v);
-            }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add(" 2");
-                expected.put("b", v);
-            }
-            {
-                final Vector<String> v = new Vector<String>();
-                v.add(" ");
-                expected.put("c", v);
-            }
-        }
+  /**
+   * Examines behavior with leading/trailing whitespace.
+   *
+   * @throws UnsupportedEncodingException
+   */
+  public void test_decodeParams_with_whitespace() throws UnsupportedEncodingException {
 
-        final String uri = "a= 1 &b= 2&c= ";
-
-        final LinkedHashMap<String, Vector<String>> actual = new LinkedHashMap<String, Vector<String>>();
-
-        NanoHTTPD.decodeParams(uri, actual);
-
-        assertSameParams(expected, actual);
-
+    final LinkedHashMap<String, Vector<String>> expected =
+        new LinkedHashMap<String, Vector<String>>();
+    {
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add(" 1 ");
+        expected.put("a", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add(" 2");
+        expected.put("b", v);
+      }
+      {
+        final Vector<String> v = new Vector<String>();
+        v.add(" ");
+        expected.put("c", v);
+      }
     }
 
+    final String uri = "a= 1 &b= 2&c= ";
+
+    final LinkedHashMap<String, Vector<String>> actual =
+        new LinkedHashMap<String, Vector<String>>();
+
+    NanoHTTPD.decodeParams(uri, actual);
+
+    assertSameParams(expected, actual);
+  }
 }

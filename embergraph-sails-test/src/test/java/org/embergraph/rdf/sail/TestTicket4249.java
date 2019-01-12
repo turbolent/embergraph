@@ -20,7 +20,7 @@ package org.embergraph.rdf.sail;
 
 import java.io.IOException;
 import java.util.Properties;
-
+import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.openrdf.model.Literal;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.XMLSchema;
@@ -35,151 +35,169 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.sail.sparql.ast.VisitorException;
-
 /**
  * Unit test template for use in submission of bugs.
- * <p>
- * This test case will delegate to an underlying backing store. You can specify
- * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
- * <p>
- * There are three possible configurations for the testClass:
+ *
+ * <p>This test case will delegate to an underlying backing store. You can specify this store via a
+ * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
+ * </code>
+ *
+ * <p>There are three possible configurations for the testClass:
+ *
  * <ul>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)
  * </ul>
- * <p>
- * The default for triples and SIDs mode is for inference with truth maintenance
- * to be on. If you would like to turn off inference, make sure to do so in
- * {@link #getProperties()}.
- * 
+ *
+ * <p>The default for triples and SIDs mode is for inference with truth maintenance to be on. If you
+ * would like to turn off inference, make sure to do so in {@link #getProperties()}.
+ *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
- * 
- * 
  * @author Igor Kim
- * @see https://jira.blazegraph.com/browse/BLZG-4249
- * SUBSTR with starting location less than 1
+ * @see https://jira.blazegraph.com/browse/BLZG-4249 SUBSTR with starting location less than 1
  */
 public class TestTicket4249 extends QuadsTestCase {
-	
-    public TestTicket4249() {
-	}
 
-	public TestTicket4249(String arg0) {
-		super(arg0);
-	}
-	
-	@Override
-	public Properties getProperties() {
-		Properties properties = super.getProperties();
+  public TestTicket4249() {}
 
-		return properties;
-	}
+  public TestTicket4249(String arg0) {
+    super(arg0);
+  }
 
-	public void testBug() throws Exception {
+  @Override
+  public Properties getProperties() {
+    Properties properties = super.getProperties();
 
-		final EmbergraphSail sail = getSail();
-		try {
-			EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-			try {
-				repo.initialize();
-				final RepositoryConnection conn = repo.getConnection();
-				conn.setAutoCommit(false);
-				ValueFactory vf = conn.getValueFactory();
-				try {
-					conn.add(getClass().getResourceAsStream("TestTicket2043.n3"), "",
-							RDFFormat.TURTLE);
-					conn.commit();
-					executeQuery(conn, "123", -1, 2, "");
-					executeQuery(conn, "123", 0, 2, "1");
-					executeQuery(conn, "123", 1, 2, "12");
-					executeQuery(conn, "123", 1, 2, "12");
-					executeQuery(conn, "123", 100, 1, "");
-					executeQuery(conn, "12345", 1.5, 2.6, "234");
-					executeQuery(conn, "12345", 0, 3, "12");
-					executeQuery(conn, "12345", 0d/0d, 3, "");
-					executeQuery(conn, "12345", 1, 0d/0d, "");
-					executeQuery(conn, "12345", -42, 1d/0d, "12345");
-					executeQuery(conn, "12345", -1d/0d, 2d/0d, "");
-					executeQuery(conn, vf.createLiteral("foobar"), 4, vf.createLiteral("bar"));
-					executeQuery(conn, vf.createLiteral("foobar","en"), 4, vf.createLiteral("bar", "en"));
-					executeQuery(conn, vf.createLiteral("foobar", XMLSchema.STRING), 4, vf.createLiteral("bar", XMLSchema.STRING));
-					executeQuery(conn, vf.createLiteral("foobar"), 4, 1, vf.createLiteral("b"));
-					executeQuery(conn, vf.createLiteral("foobar", "en"), 4, 1, vf.createLiteral("b", "en"));
-					executeQuery(conn, vf.createLiteral("foobar", XMLSchema.STRING), 4, 1, vf.createLiteral("b", XMLSchema.STRING));
-				} finally {
-					conn.close();
-				}
-			} finally {
-				repo.shutDown();
-			}
-		} finally {
-			sail.__tearDownUnitTest();
-		}
-	}
+    return properties;
+  }
 
-	private void executeQuery(final RepositoryConnection conn, final String string, final double start, final double length, final String expected)
-			throws RepositoryException, MalformedQueryException,
-			QueryEvaluationException, RDFParseException, IOException, VisitorException {
+  public void testBug() throws Exception {
 
-		final ValueFactory vf = conn.getValueFactory();
-		final String query = "select ?substring WHERE { BIND ( SUBSTR(?string, ?start, ?length) as ?substring ) . }";
-		final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-		q.setBinding("string", vf.createLiteral(string));
-		q.setBinding("start", vf.createLiteral(start));
-		q.setBinding("length", vf.createLiteral(length));
-		final TupleQueryResult tqr = q.evaluate();
-		try {
-			while (tqr.hasNext()) {
-				final BindingSet bindings = tqr.next();
-				// assert expected value
-				assertEquals(expected, bindings.getBinding("substring").getValue().stringValue());
-			}
-		} finally {
-			tqr.close();
-		}
-	}
+    final EmbergraphSail sail = getSail();
+    try {
+      EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+      try {
+        repo.initialize();
+        final RepositoryConnection conn = repo.getConnection();
+        conn.setAutoCommit(false);
+        ValueFactory vf = conn.getValueFactory();
+        try {
+          conn.add(getClass().getResourceAsStream("TestTicket2043.n3"), "", RDFFormat.TURTLE);
+          conn.commit();
+          executeQuery(conn, "123", -1, 2, "");
+          executeQuery(conn, "123", 0, 2, "1");
+          executeQuery(conn, "123", 1, 2, "12");
+          executeQuery(conn, "123", 1, 2, "12");
+          executeQuery(conn, "123", 100, 1, "");
+          executeQuery(conn, "12345", 1.5, 2.6, "234");
+          executeQuery(conn, "12345", 0, 3, "12");
+          executeQuery(conn, "12345", 0d / 0d, 3, "");
+          executeQuery(conn, "12345", 1, 0d / 0d, "");
+          executeQuery(conn, "12345", -42, 1d / 0d, "12345");
+          executeQuery(conn, "12345", -1d / 0d, 2d / 0d, "");
+          executeQuery(conn, vf.createLiteral("foobar"), 4, vf.createLiteral("bar"));
+          executeQuery(conn, vf.createLiteral("foobar", "en"), 4, vf.createLiteral("bar", "en"));
+          executeQuery(
+              conn,
+              vf.createLiteral("foobar", XMLSchema.STRING),
+              4,
+              vf.createLiteral("bar", XMLSchema.STRING));
+          executeQuery(conn, vf.createLiteral("foobar"), 4, 1, vf.createLiteral("b"));
+          executeQuery(conn, vf.createLiteral("foobar", "en"), 4, 1, vf.createLiteral("b", "en"));
+          executeQuery(
+              conn,
+              vf.createLiteral("foobar", XMLSchema.STRING),
+              4,
+              1,
+              vf.createLiteral("b", XMLSchema.STRING));
+        } finally {
+          conn.close();
+        }
+      } finally {
+        repo.shutDown();
+      }
+    } finally {
+      sail.__tearDownUnitTest();
+    }
+  }
 
-	private void executeQuery(final RepositoryConnection conn, final Literal string, final int start, final Literal expected)
-			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-		final ValueFactory vf = conn.getValueFactory();
-		final String query = "select ?substring WHERE { BIND ( SUBSTR(?string, ?start) as ?substring ) . }";
-		final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-		q.setBinding("string", string);
-		q.setBinding("start", vf.createLiteral(start));
-		final TupleQueryResult tqr = q.evaluate();
-		try {
-			while (tqr.hasNext()) {
-				final BindingSet bindings = tqr.next();
-				// assert expected value
-				assertEquals(expected, bindings.getBinding("substring").getValue());
-			}
-		} finally {
-			tqr.close();
-		}
-	}
+  private void executeQuery(
+      final RepositoryConnection conn,
+      final String string,
+      final double start,
+      final double length,
+      final String expected)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+          RDFParseException, IOException, VisitorException {
 
-	private void executeQuery(final RepositoryConnection conn, final Literal string, final int start, final int length, final Literal expected)
-			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-		final ValueFactory vf = conn.getValueFactory();
-		final String query = "select ?substring WHERE { BIND ( SUBSTR(?string, ?start, ?length) as ?substring ) . }";
-		final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-		q.setBinding("string", string);
-		q.setBinding("start", vf.createLiteral(start));
-		q.setBinding("length", vf.createLiteral(length));
-		final TupleQueryResult tqr = q.evaluate();
-		try {
-			while (tqr.hasNext()) {
-				final BindingSet bindings = tqr.next();
-				// assert expected value
-				assertEquals(expected, bindings.getBinding("substring").getValue());
-			}
-		} finally {
-			tqr.close();
-		}
-	}
+    final ValueFactory vf = conn.getValueFactory();
+    final String query =
+        "select ?substring WHERE { BIND ( SUBSTR(?string, ?start, ?length) as ?substring ) . }";
+    final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+    q.setBinding("string", vf.createLiteral(string));
+    q.setBinding("start", vf.createLiteral(start));
+    q.setBinding("length", vf.createLiteral(length));
+    final TupleQueryResult tqr = q.evaluate();
+    try {
+      while (tqr.hasNext()) {
+        final BindingSet bindings = tqr.next();
+        // assert expected value
+        assertEquals(expected, bindings.getBinding("substring").getValue().stringValue());
+      }
+    } finally {
+      tqr.close();
+    }
+  }
 
+  private void executeQuery(
+      final RepositoryConnection conn,
+      final Literal string,
+      final int start,
+      final Literal expected)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+    final ValueFactory vf = conn.getValueFactory();
+    final String query =
+        "select ?substring WHERE { BIND ( SUBSTR(?string, ?start) as ?substring ) . }";
+    final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+    q.setBinding("string", string);
+    q.setBinding("start", vf.createLiteral(start));
+    final TupleQueryResult tqr = q.evaluate();
+    try {
+      while (tqr.hasNext()) {
+        final BindingSet bindings = tqr.next();
+        // assert expected value
+        assertEquals(expected, bindings.getBinding("substring").getValue());
+      }
+    } finally {
+      tqr.close();
+    }
+  }
+
+  private void executeQuery(
+      final RepositoryConnection conn,
+      final Literal string,
+      final int start,
+      final int length,
+      final Literal expected)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+    final ValueFactory vf = conn.getValueFactory();
+    final String query =
+        "select ?substring WHERE { BIND ( SUBSTR(?string, ?start, ?length) as ?substring ) . }";
+    final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+    q.setBinding("string", string);
+    q.setBinding("start", vf.createLiteral(start));
+    q.setBinding("length", vf.createLiteral(length));
+    final TupleQueryResult tqr = q.evaluate();
+    try {
+      while (tqr.hasNext()) {
+        final BindingSet bindings = tqr.next();
+        // assert expected value
+        assertEquals(expected, bindings.getBinding("substring").getValue());
+      }
+    } finally {
+      tqr.close();
+    }
+  }
 }

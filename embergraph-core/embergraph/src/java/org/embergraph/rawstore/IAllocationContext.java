@@ -19,16 +19,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rawstore;
 
 /**
- * An {@link IAllocationContext} defines a shadow environment which may be
- * associated with allocations made during a transaction.
- * 
+ * An {@link IAllocationContext} defines a shadow environment which may be associated with
+ * allocations made during a transaction.
+ *
  * @author Martyn Cutcher
  */
 public interface IAllocationContext {
-	
-	public void release();
 
-	public void checkActive();
+  public void release();
 
-	public boolean isIsolated();
+  public void checkActive();
+
+  public boolean isIsolated();
 }

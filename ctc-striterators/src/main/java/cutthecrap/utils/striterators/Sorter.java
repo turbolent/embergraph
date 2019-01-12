@@ -19,49 +19,45 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * <p>Used with Sorterator by Striterator to sort iterations.</p>
+ * Used with Sorterator by Striterator to sort iterations.
  *
- * <p>Cannot be instantiated directly since an implementation of the compare method is required.</p>
+ * <p>Cannot be instantiated directly since an implementation of the compare method is required.
  *
- * <p>It should be noted, that the resulting sorting iterator cannot be produced incrementally
- *	since it must access all objects to complete the sort.  For this reason care should be taken
- *	for sets that may be very large.</p>
+ * <p>It should be noted, that the resulting sorting iterator cannot be produced incrementally since
+ * it must access all objects to complete the sort. For this reason care should be taken for sets
+ * that may be very large.
  */
+public abstract class Sorter extends FilterBase implements Comparator {
 
-abstract public class Sorter extends FilterBase implements Comparator {
- 
-//    /**
-//     * Annotation giving the {@link Comparator} to be applied.
-//     */
-//    static final public String COMPARATOR = Sorter.class.getName()
-//            + ".comparator";
+  //    /**
+  //     * Annotation giving the {@link Comparator} to be applied.
+  //     */
+  //    static final public String COMPARATOR = Sorter.class.getName()
+  //            + ".comparator";
 
-    public Sorter() {
-    }
+  public Sorter() {}
 
-//    public Sorter(Comparator c) {
-//        
-//        setProperty(COMPARATOR, c);
-//        
-//    }
+  //    public Sorter(Comparator c) {
+  //
+  //        setProperty(COMPARATOR, c);
+  //
+  //    }
 
-    // -------------------------------------------------------------
+  // -------------------------------------------------------------
 
-    @Override
-    final public Iterator filterOnce(Iterator src, Object context) {
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
 
-        return new Sorterator(src, context, this);
-        
-    }
+    return new Sorterator(src, context, this);
+  }
 
-    // -------------------------------------------------------------
+  // -------------------------------------------------------------
 
-//    public Comparator getComparator() {
-//    
-//        return (Comparator) getRequiredProperty(COMPARATOR);
-//        
-//    }
-    
-    public abstract int compare(Object o1, Object o2);
+  //    public Comparator getComparator() {
+  //
+  //        return (Comparator) getRequiredProperty(COMPARATOR);
+  //
+  //    }
 
+  public abstract int compare(Object o1, Object o2);
 }

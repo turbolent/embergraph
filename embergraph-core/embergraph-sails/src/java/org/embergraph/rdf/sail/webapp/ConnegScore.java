@@ -23,80 +23,62 @@ package org.embergraph.rdf.sail.webapp;
 
 /**
  * Helper class used to rank content types based on their quality scores.
- * 
+ *
  * @param <E>
  */
 public class ConnegScore<E> implements Comparable<ConnegScore<E>> {
 
-    /**
-     * The quality score.
-     */
-    final public float q;
+  /** The quality score. */
+  public final float q;
 
-    /**
-     * The type of format.
-     */
-    final public E format;
+  /** The type of format. */
+  public final E format;
 
-    public ConnegScore(final float q, final E format) {
+  public ConnegScore(final float q, final E format) {
 
-        if (format == null)
-            throw new IllegalArgumentException();
+    if (format == null) throw new IllegalArgumentException();
 
-        this.q = q;
+    this.q = q;
 
-        this.format = format;
+    this.format = format;
+  }
 
-    }
+  /**
+   * The higher the <code>q</code> score the better the match with the user agent's preference. A
+   * mime type without an explicit <code>q</code> score has an implicit score of <code>1</code>.
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/920" > Content negotiation orders accept header
+   *     scores in reverse </a>
+   */
+  @Override
+  public int compareTo(final ConnegScore<E> o) {
 
-    /**
-     * The higher the <code>q</code> score the better the match with the user
-     * agent's preference. A mime type without an explicit <code>q</code> score
-     * has an implicit score of <code>1</code>.
-     * 
-     * @see <a href="http://trac.blazegraph.com/ticket/920" > Content negotiation
-     *      orders accept header scores in reverse </a>
-     */
-    @Override
-    public int compareTo(final ConnegScore<E> o) {
+    if (q < o.q) return 1;
 
-        if (q < o.q)
-            return 1;
+    if (q > o.q) return -1;
 
-        if (q > o.q)
-            return -1;
+    return 0;
+  }
 
-        return 0;
+  @Override
+  public String toString() {
 
-    }
+    return getClass().getSimpleName() + "{q=" + q + ", format=" + format + "}";
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public boolean equals(final Object o) {
 
-        return getClass().getSimpleName() + "{q=" + q + ", format=" + format
-                + "}";
+    if (this == o) return true;
 
-    }
+    if (!(o instanceof ConnegScore)) return false;
 
-    @Override
-    public boolean equals(final Object o) {
+    final ConnegScore<?> t = (ConnegScore<?>) o;
 
-        if (this == o)
-            return true;
+    if (this.format != t.format) return false;
 
-        if (!(o instanceof ConnegScore))
-            return false;
+    if (this.q != t.q) return false;
 
-        final ConnegScore<?> t = (ConnegScore<?>) o;
-
-        if (this.format != t.format)
-            return false;
-
-        if (this.q != t.q)
-            return false;
-
-        return true;
-
-    }
-
+    return true;
+  }
 }

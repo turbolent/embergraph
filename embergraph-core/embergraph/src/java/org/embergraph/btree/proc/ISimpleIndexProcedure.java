@@ -21,9 +21,5 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
  */
 package org.embergraph.btree.proc;
 
-/**
- * Interface for procedures that operation on a single index or index partition
- */
-public interface ISimpleIndexProcedure<T> extends IIndexProcedure<T> {
-    
-}
+/** Interface for procedures that operation on a single index or index partition */
+public interface ISimpleIndexProcedure<T> extends IIndexProcedure<T> {}

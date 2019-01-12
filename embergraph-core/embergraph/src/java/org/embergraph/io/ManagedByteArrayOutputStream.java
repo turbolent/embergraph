@@ -26,47 +26,37 @@ import java.io.OutputStream;
 
 /**
  * Wraps an {@link IManagedByteArray} as an {@link OutputStream}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ManagedByteArrayOutputStream extends OutputStream {
 
-    private final IManagedByteArray buf;
-    
-    /**
-     * @param buf
-     *            The data written onto the stream will be appended to the
-     *            caller's buffer.
-     */
-    public ManagedByteArrayOutputStream(final IManagedByteArray buf) {
-        
-        if(buf == null)
-            throw new IllegalArgumentException();
-        
-        this.buf = buf;
-        
-    }
+  private final IManagedByteArray buf;
 
-    @Override
-    public void write(int b) throws IOException {
-        
-        buf.append((byte) (b & 0xff));
-        
-    }
+  /** @param buf The data written onto the stream will be appended to the caller's buffer. */
+  public ManagedByteArrayOutputStream(final IManagedByteArray buf) {
 
-    @Override
-    public void write(final byte[] b) {
-        
-        write(b, 0/* off */, b.length);
-        
-    }
+    if (buf == null) throw new IllegalArgumentException();
 
-    @Override
-    public void write(final byte[] b,final int off, final int len) {
+    this.buf = buf;
+  }
 
-        buf.append(b, off, len);
-        
-    }
+  @Override
+  public void write(int b) throws IOException {
 
+    buf.append((byte) (b & 0xff));
+  }
+
+  @Override
+  public void write(final byte[] b) {
+
+    write(b, 0 /* off */, b.length);
+  }
+
+  @Override
+  public void write(final byte[] b, final int off, final int len) {
+
+    buf.append(b, off, len);
+  }
 }

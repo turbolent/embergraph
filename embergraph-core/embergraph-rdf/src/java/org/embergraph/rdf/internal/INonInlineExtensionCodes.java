@@ -26,31 +26,23 @@ import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 
 /**
- * An interface declaring the one byte extension code for non-inline {@link IV}
- * s.
- * <p>
- * Note: Negative codes are used for extension types for which an extension
- * {@link IV} follows the extension byte. Positive codes are used for extension
- * types where the data immediately follows the extension byte.
- * 
+ * An interface declaring the one byte extension code for non-inline {@link IV} s.
+ *
+ * <p>Note: Negative codes are used for extension types for which an extension {@link IV} follows
+ * the extension byte. Positive codes are used for extension types where the data immediately
+ * follows the extension byte.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface INonInlineExtensionCodes {
-    
-    /**
-     * @see BlobIV
-     */
-    final byte BlobIV = 0;
 
-    /**
-     * @see PartlyInlineURIIV
-     */
-    final byte URINamespaceIV = -1;
+  /** @see BlobIV */
+  final byte BlobIV = 0;
 
-    /**
-     * @see PartlyInlineTypedLiteralIV
-     */
-    final byte LiteralDatatypeIV = -2;
+  /** @see PartlyInlineURIIV */
+  final byte URINamespaceIV = -1;
 
+  /** @see PartlyInlineTypedLiteralIV */
+  final byte LiteralDatatypeIV = -2;
 }

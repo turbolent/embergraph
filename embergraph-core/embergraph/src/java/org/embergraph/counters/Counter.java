@@ -25,172 +25,133 @@ package org.embergraph.counters;
 
 /**
  * A named counter.
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @param <T>
- *            The data type for the counter value.
+ * @param <T> The data type for the counter value.
  */
 final class Counter<T> implements ICounter {
-    
-    ICounterSet parent;
-    
-    private final String name;
-    
-    private final IInstrument<T> instrument;
-    
-    Counter(ICounterSet parent, String name, IInstrument<T> instrument) {
-        
-        if (parent == null)
-            throw new IllegalArgumentException();
-        
-        if (name == null)
-            throw new IllegalArgumentException();
-        
-        if (instrument == null)
-            throw new IllegalArgumentException();
-        
-        this.parent = parent;
-        
-        this.name = name;
-        
-        this.instrument = instrument;
-        
+
+  ICounterSet parent;
+
+  private final String name;
+
+  private final IInstrument<T> instrument;
+
+  Counter(ICounterSet parent, String name, IInstrument<T> instrument) {
+
+    if (parent == null) throw new IllegalArgumentException();
+
+    if (name == null) throw new IllegalArgumentException();
+
+    if (instrument == null) throw new IllegalArgumentException();
+
+    this.parent = parent;
+
+    this.name = name;
+
+    this.instrument = instrument;
+  }
+
+  public ICounterSet getParent() {
+
+    return parent;
+  }
+
+  public String getName() {
+
+    return name;
+  }
+
+  public String getPath() {
+
+    if (parent.isRoot()) {
+
+      /*
+       * Handles: "/foo", where "foo" is this counter.
+       */
+      return parent.getPath() + name;
     }
 
-    public ICounterSet getParent() {
-        
-        return parent;
-        
-    }
-    
-    public String getName() {
-        
-        return name;
-        
-    }
-    
-    public String getPath() {
-        
-        if(parent.isRoot()) {
-            
-            /*
-             * Handles: "/foo", where "foo" is this counter.
-             */
-            return parent.getPath()+name;
-            
-        }
-        
-        // Handles all other cases.
-        return parent.getPath() + ICounterSet.pathSeparator + name;
-        
-    }
-    
-    public int getDepth() {
-        
-        int depth = 0;
-        
-        ICounterNode t = this;
-        
-        while(!t.isRoot()) {
-            
-            t = t.getParent();
-            
-            depth++;
-            
-        }
-        
-        return depth;
-        
-    }
-    
-    public String toString() {
-        
-        return getPath();
-        
+    // Handles all other cases.
+    return parent.getPath() + ICounterSet.pathSeparator + name;
+  }
+
+  public int getDepth() {
+
+    int depth = 0;
+
+    ICounterNode t = this;
+
+    while (!t.isRoot()) {
+
+      t = t.getParent();
+
+      depth++;
     }
 
-    public ICounterSet getRoot() {
+    return depth;
+  }
 
-        return parent.getRoot();
-        
-    }
+  public String toString() {
 
-    public boolean isRoot() {
+    return getPath();
+  }
 
-        return false;
-        
-    }
+  public ICounterSet getRoot() {
 
-    /**
-     * Invokes {@link Instrument#getValue()}
-     */
-    public T getValue() {
-        
-        return instrument.getValue();
-        
-    }
-    
-    /**
-     * Invokes {@link Instrument#setValue(Object, long)}.
-     */
-    public void setValue(Object value, long timestamp) {
-        
-        instrument.setValue((T)value, timestamp);
-        
-    }
-    
-    /**
-     * Invokes {@link Instrument#lastModified()}
-     */
-    public long lastModified() {
-        
-        return instrument.lastModified();
-        
-    }
-    
-    /**
-     * Returns <code>false</code>.
-     */
-    final public boolean isCounterSet() {
-        
-        return false;
-        
-    }
+    return parent.getRoot();
+  }
 
-    /**
-     * Returns <code>true</code>
-     */
-    final public boolean isCounter() {
-        
-        return true;
-        
-    }
+  public boolean isRoot() {
 
-    /**
-     * Always returns <code>null</code> since there are no children.
-     */
-    public ICounterNode getChild(String name) {
-        
-        return null;
-        
-    }
+    return false;
+  }
 
-    /**
-     * Always returns <code>null</code> since there are no children.
-     */
-    public ICounterNode getPath(String path) {
+  /** Invokes {@link Instrument#getValue()} */
+  public T getValue() {
 
-        return null;
-        
-    }
-    
-    public IInstrument<T> getInstrument() {
-        
-        return instrument;
-        
-    }
-    
+    return instrument.getValue();
+  }
+
+  /** Invokes {@link Instrument#setValue(Object, long)}. */
+  public void setValue(Object value, long timestamp) {
+
+    instrument.setValue((T) value, timestamp);
+  }
+
+  /** Invokes {@link Instrument#lastModified()} */
+  public long lastModified() {
+
+    return instrument.lastModified();
+  }
+
+  /** Returns <code>false</code>. */
+  public final boolean isCounterSet() {
+
+    return false;
+  }
+
+  /** Returns <code>true</code> */
+  public final boolean isCounter() {
+
+    return true;
+  }
+
+  /** Always returns <code>null</code> since there are no children. */
+  public ICounterNode getChild(String name) {
+
+    return null;
+  }
+
+  /** Always returns <code>null</code> since there are no children. */
+  public ICounterNode getPath(String path) {
+
+    return null;
+  }
+
+  public IInstrument<T> getInstrument() {
+
+    return instrument;
+  }
 }

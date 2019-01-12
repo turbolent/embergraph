@@ -24,70 +24,56 @@ package org.embergraph.rawstore;
 import java.io.File;
 import java.io.IOException;
 
-
 /**
  * Test suite for {@link SimpleFileRawStore}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSimpleFileRawStore extends AbstractRawStoreTestCase {
 
-    /**
-     * 
-     */
-    public TestSimpleFileRawStore() {
+  /** */
+  public TestSimpleFileRawStore() {}
+
+  /** @param name */
+  public TestSimpleFileRawStore(String name) {
+    super(name);
+  }
+
+  private boolean firstTime = true;
+  private SimpleFileRawStore store;
+
+  protected IRawStore getStore() {
+
+    File file = new File(getName() + ".raw2");
+
+    if (firstTime && file.exists() && !file.delete()) {
+
+      throw new RuntimeException("Could not delete existing file: " + file.getAbsoluteFile());
     }
 
-    /**
-     * @param name
-     */
-    public TestSimpleFileRawStore(String name) {
-        super(name);
+    firstTime = false;
+
+    try {
+
+      store = new SimpleFileRawStore(file, "rw");
+
+      return store;
+
+    } catch (IOException ex) {
+
+      throw new RuntimeException(ex);
     }
+  }
 
-    private boolean firstTime = true;
-    private SimpleFileRawStore store;
-    
-    protected IRawStore getStore() {
+  public void tearDown() throws Exception {
 
-        File file = new File(getName()+".raw2");
+    super.tearDown();
 
-        if(firstTime && file.exists() && !file.delete()) {
+    if (store != null && store.isOpen()) {
 
-            throw new RuntimeException("Could not delete existing file: "
-                    + file.getAbsoluteFile());
-            
-        }
-                
-        firstTime = false;
-        
-        try {
-        
-            store = new SimpleFileRawStore(file,"rw");
-            
-            return store;
-            
-        }
-        catch(IOException ex) {
-            
-            throw new RuntimeException(ex);
-            
-        }
-        
+      // force release of any file handle.
+      store.raf.close();
     }
-    
-    public void tearDown() throws Exception {
-        
-        super.tearDown();
-        
-        if(store != null && store.isOpen()) {
-            
-            // force release of any file handle.
-            store.raf.close();
-            
-        }
-        
-    }
-
+  }
 }

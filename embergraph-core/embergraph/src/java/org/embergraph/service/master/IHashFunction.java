@@ -26,23 +26,18 @@ import java.io.Serializable;
 
 /**
  * A hash function.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @param <V>
- *            The generic type of the value whose hash code will be returned.
+ * @param <V> The generic type of the value whose hash code will be returned.
  */
 public interface IHashFunction<V> extends Serializable {
 
-    /**
-     * Return the hash code of the value.
-     * 
-     * @param value
-     *            The value.
-     * 
-     * @return The hash code.
-     */
-    public int hashFunction(V value);
-    
+  /**
+   * Return the hash code of the value.
+   *
+   * @param value The value.
+   * @return The hash code.
+   */
+  public int hashFunction(V value);
 }

@@ -21,41 +21,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.pipeline;
 
 import java.util.concurrent.CancellationException;
-
 import org.embergraph.ha.QuorumPipelineImpl;
-import org.embergraph.quorum.QuorumException;
 
 /**
- * Exception thrown when the downstream service is changed by a pipeline
- * reconfiguration. This exception was introduced so retrySend() in
- * {@link QuorumPipelineImpl} could differentiate between normal termination of
- * a service (which will interrupt the {@link HAReceiveService} and thus
- * propagate a {@link CancellationException} to the upstream service) and a
- * pipeline change which requires retrySend() to retransmit the message and
- * payload from the leader along the reconfigured write pipeline.
- * 
+ * Exception thrown when the downstream service is changed by a pipeline reconfiguration. This
+ * exception was introduced so retrySend() in {@link QuorumPipelineImpl} could differentiate between
+ * normal termination of a service (which will interrupt the {@link HAReceiveService} and thus
+ * propagate a {@link CancellationException} to the upstream service) and a pipeline change which
+ * requires retrySend() to retransmit the message and payload from the leader along the reconfigured
+ * write pipeline.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PipelineDownstreamChange extends AbstractPipelineChangeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public PipelineDownstreamChange() {
-    }
+  public PipelineDownstreamChange() {}
 
-    public PipelineDownstreamChange(String message) {
-        super(message);
-    }
+  public PipelineDownstreamChange(String message) {
+    super(message);
+  }
 
-    public PipelineDownstreamChange(Throwable cause) {
-        super(cause);
-    }
+  public PipelineDownstreamChange(Throwable cause) {
+    super(cause);
+  }
 
-    public PipelineDownstreamChange(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public PipelineDownstreamChange(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -26,20 +26,15 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Extension API for high level operations (Query and Update) against the Sail.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface EmbergraphSailOperation {
 
-    /**
-     * Return the AST model.
-     */
-    ASTContainer getASTContainer();
-    
-    /**
-     * The backing database view.
-     */
-    AbstractTripleStore getTripleStore();
+  /** Return the AST model. */
+  ASTContainer getASTContainer();
 
+  /** The backing database view. */
+  AbstractTripleStore getTripleStore();
 }

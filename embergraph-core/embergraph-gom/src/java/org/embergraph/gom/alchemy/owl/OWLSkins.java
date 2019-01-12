@@ -21,14 +21,14 @@ import org.embergraph.gom.skin.GenericSkinRegistry;
 
 /**
  * This is just a hook class to register the OWL GPO skins.
- * @author Martyn Cutcher
  *
+ * @author Martyn Cutcher
  */
 public class OWLSkins {
 
-	static public void register() {
-		GenericSkinRegistry.registerClass(OWLOntologySkin.class);
-		GenericSkinRegistry.registerClass(OWLClassSkin.class);
-		GenericSkinRegistry.registerClass(OWLPropertySkin.class);
-	}
+  public static void register() {
+    GenericSkinRegistry.registerClass(OWLOntologySkin.class);
+    GenericSkinRegistry.registerClass(OWLClassSkin.class);
+    GenericSkinRegistry.registerClass(OWLPropertySkin.class);
+  }
 }

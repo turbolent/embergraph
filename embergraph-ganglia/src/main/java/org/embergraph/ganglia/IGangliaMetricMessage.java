@@ -15,38 +15,28 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A ganglia message representing a metric value.
- */
+/** A ganglia message representing a metric value. */
 public interface IGangliaMetricMessage extends IGangliaMessage {
 
-	/**
-	 * The printf format string associated with the metric value.
-	 */
-	public String getFormat();
+  /** The printf format string associated with the metric value. */
+  public String getFormat();
 
-	/**
-	 * Return <code>true</code> if the metric value is a numeric, in which case
-	 * it can be cast to a {@link Number}.
-	 */
-	public boolean isNumeric();
+  /**
+   * Return <code>true</code> if the metric value is a numeric, in which case it can be cast to a
+   * {@link Number}.
+   */
+  public boolean isNumeric();
 
-	/**
-	 * Return the metric value (non-<code>null</code>).
-	 */
-	public Object getValue();
+  /** Return the metric value (non-<code>null</code>). */
+  public Object getValue();
 
-	/**
-	 * Return a String representation of the metric value (always succeeds).
-	 */
-	public String getStringValue();
+  /** Return a String representation of the metric value (always succeeds). */
+  public String getStringValue();
 
-	/**
-	 * Return the {@link Number} for the metric value.
-	 * 
-	 * @throws UnsupportedOperationException
-	 *             if the metric value is not numeric.
-	 */
-	public Number getNumericValue();
-
+  /**
+   * Return the {@link Number} for the metric value.
+   *
+   * @throws UnsupportedOperationException if the metric value is not numeric.
+   */
+  public Number getNumericValue();
 }

@@ -20,43 +20,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.concurrent;
 
 /**
- * An instance of this exception is thrown when the lock requests of two or more
- * transactions form a deadlock. The exeception is thrown in the thread of each
- * transaction which is aborted to prevent deadlock.
- * 
+ * An instance of this exception is thrown when the lock requests of two or more transactions form a
+ * deadlock. The exeception is thrown in the thread of each transaction which is aborted to prevent
+ * deadlock.
+ *
  * @author thompsonbry
  */
 public class DeadlockException extends RuntimeException {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7698816681497973630L;
+  /** */
+  private static final long serialVersionUID = 7698816681497973630L;
 
-	private DeadlockException() {
-        throw new UnsupportedOperationException();
-    }
+  private DeadlockException() {
+    throw new UnsupportedOperationException();
+  }
 
-    /**
-     * @param message
-     */
-    public DeadlockException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public DeadlockException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public DeadlockException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  /**
+   * @param message
+   * @param cause
+   */
+  public DeadlockException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    /**
-     * @param cause
-     */
-    public DeadlockException(Throwable cause) {
-        super(cause);
-    }
-
+  /** @param cause */
+  public DeadlockException(Throwable cause) {
+    super(cause);
+  }
 }

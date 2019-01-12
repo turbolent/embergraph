@@ -17,26 +17,22 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * Used with Filterator by Striterator to filter returned objects.
- */
+/** Used with Filterator by Striterator to filter returned objects. */
 public abstract class Filter extends FilterBase implements IFilterTest {
 
-	/**
-     * 
-     */
-    private static final long serialVersionUID = 7584586850408369853L;
-    
-	public Filter()	{}
+  /** */
+  private static final long serialVersionUID = 7584586850408369853L;
 
-	//-------------------------------------------------------------
+  public Filter() {}
 
-	@Override
-    protected Iterator filterOnce(Iterator src, final Object context) {
-        return new Filterator(src, context, this);
-    }
+  // -------------------------------------------------------------
 
-    // -------------------------------------------------------------
+  @Override
+  protected Iterator filterOnce(Iterator src, final Object context) {
+    return new Filterator(src, context, this);
+  }
 
-    public abstract boolean isValid(Object obj);
+  // -------------------------------------------------------------
+
+  public abstract boolean isValid(Object obj);
 }

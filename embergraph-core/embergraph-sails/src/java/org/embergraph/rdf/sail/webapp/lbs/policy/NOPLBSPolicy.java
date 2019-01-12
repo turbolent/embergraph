@@ -18,62 +18,51 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.lbs.policy;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractLBSPolicy;
 
 /**
- * This policy proxies all requests for update operations to the leader but
- * forwards read requests to the local service. Thus, it DOES NOT provide a load
- * balancing strategy, but it DOES allow update requests to be directed to any
- * service in an non-HA aware manner. This policy can be combined with an
- * external round-robin strategy to load balance the read-requests over the
+ * This policy proxies all requests for update operations to the leader but forwards read requests
+ * to the local service. Thus, it DOES NOT provide a load balancing strategy, but it DOES allow
+ * update requests to be directed to any service in an non-HA aware manner. This policy can be
+ * combined with an external round-robin strategy to load balance the read-requests over the
  * cluster.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NOPLBSPolicy extends AbstractLBSPolicy {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    @Override
-    public boolean service(
-            final boolean isLeaderRequest,
-            final HALoadBalancerServlet servlet,
-            final HttpServletRequest request,
-            final HttpServletResponse response
-    ) throws IOException, ServletException {
+  @Override
+  public boolean service(
+      final boolean isLeaderRequest,
+      final HALoadBalancerServlet servlet,
+      final HttpServletRequest request,
+      final HttpServletResponse response)
+      throws IOException, ServletException {
 
-        if (!isLeaderRequest) {
+    if (!isLeaderRequest) {
 
-            // Always handle read requests locally.
-            servlet.forwardToLocalService(isLeaderRequest, request, response);
+      // Always handle read requests locally.
+      servlet.forwardToLocalService(isLeaderRequest, request, response);
 
-            // Request was handled.
-            return true;
-
-        }
-
-        // Proxy update requests to the quorum leader.
-        return super.service(isLeaderRequest, servlet, request, response);
-
+      // Request was handled.
+      return true;
     }
 
-    /**
-     * Note: This method is not invoked.
-     */
-    @Override
-    public String getReaderURI(final HttpServletRequest req) {
+    // Proxy update requests to the quorum leader.
+    return super.service(isLeaderRequest, servlet, request, response);
+  }
 
-        throw new UnsupportedOperationException();
+  /** Note: This method is not invoked. */
+  @Override
+  public String getReaderURI(final HttpServletRequest req) {
 
-    }
-
+    throw new UnsupportedOperationException();
+  }
 }

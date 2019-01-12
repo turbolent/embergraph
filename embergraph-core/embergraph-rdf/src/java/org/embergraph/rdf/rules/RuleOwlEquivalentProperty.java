@@ -21,41 +21,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.vocabulary.OWL;
-
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.vocabulary.OWL;
 
 /**
  * owl:equivalentProperty
+ *
  * <pre>
  *  (a owl:equivalentProperty b) -&gt; (b owl:equivalentProperty a)
  * </pre>
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RuleOwlEquivalentProperty extends Rule {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 689296584050064929L;
+  /** */
+  private static final long serialVersionUID = 689296584050064929L;
 
-    /**
-     * @param vocab
-     */
-    public RuleOwlEquivalentProperty(String relationName, Vocabulary vocab) {
+  /** @param vocab */
+  public RuleOwlEquivalentProperty(String relationName, Vocabulary vocab) {
 
-        super(  "owl:equivalentProperty",
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("a")),
-                new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("b"))
-                },
-                null//constraints
-                );
-        
-    }
-
+    super(
+        "owl:equivalentProperty",
+        new SPOPredicate(
+            relationName, var("b"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("a")),
+        new SPOPredicate[] {
+          new SPOPredicate(
+              relationName, var("a"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("b"))
+        },
+        null // constraints
+        );
+  }
 }

@@ -27,41 +27,30 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites in increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("org.embergraph.util.concurrent");
+    final TestSuite suite = new TestSuite("org.embergraph.util.concurrent");
 
-        suite.addTestSuite( TestLatch.class );
+    suite.addTestSuite(TestLatch.class);
 
-        // test suite for a non-Callable/Runnable Future.
-        suite.addTestSuite(TestHaltable.class);
+    // test suite for a non-Callable/Runnable Future.
+    suite.addTestSuite(TestHaltable.class);
 
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

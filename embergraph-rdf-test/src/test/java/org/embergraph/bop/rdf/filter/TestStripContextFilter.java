@@ -25,28 +25,22 @@ import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link StripContextFilter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestStripContextFilter extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestStripContextFilter() {
-    }
+  /** */
+  public TestStripContextFilter() {}
 
-    /**
-     * @param name
-     */
-    public TestStripContextFilter(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestStripContextFilter(String name) {
+    super(name);
+  }
 
-    /** TODO Write tests for the {@link StringContextFilter}. */
-    public void test_something() {
-//        fail("write tests");
-    }
-    
+  /** TODO Write tests for the {@link StringContextFilter}. */
+  public void test_something() {
+    //        fail("write tests");
+  }
 }

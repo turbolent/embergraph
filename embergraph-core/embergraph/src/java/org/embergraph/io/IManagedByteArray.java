@@ -22,81 +22,71 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.io;
 
 /**
- * An interface for a managed byte[]. Implementations of this interface may
- * permit transparent extension of the managed byte[].
- * 
+ * An interface for a managed byte[]. Implementations of this interface may permit transparent
+ * extension of the managed byte[].
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IManagedByteArray extends IByteArraySlice {
 
-    /**
-     * Reset the buffer length to zero.
-     * 
-     * @return <i>this</i>.
-     */
-    IManagedByteArray reset();
+  /**
+   * Reset the buffer length to zero.
+   *
+   * @return <i>this</i>.
+   */
+  IManagedByteArray reset();
 
-    /**
-     * Append a byte into the managed byte[]. The backing buffer will be
-     * automatically extended if necessary.
-     * 
-     * @param b
-     *            The byte.
-     */
-    IManagedByteArray append(byte b);
-    
-    /**
-     * Append data into the managed byte[]. The backing buffer will be
-     * automatically extended if necessary.
-     * 
-     * @param a
-     *            The source data.
-     */
-    IManagedByteArray append(byte[] a);
-    
-    /**
-     * Append data into the managed byte[]. The backing buffer will be
-     * automatically extended if necessary.
-     * 
-     * @param a
-     *            The source data.
-     * @param off
-     *            The offset of the first byte to be copied.
-     * @param len
-     *            The #of bytes to be copied.
-     */
-    IManagedByteArray append(byte[] a,int off, int len);
+  /**
+   * Append a byte into the managed byte[]. The backing buffer will be automatically extended if
+   * necessary.
+   *
+   * @param b The byte.
+   */
+  IManagedByteArray append(byte b);
 
-    /**
-     * Return the capacity of the backing buffer.
-     */
-    int capacity();
+  /**
+   * Append data into the managed byte[]. The backing buffer will be automatically extended if
+   * necessary.
+   *
+   * @param a The source data.
+   */
+  IManagedByteArray append(byte[] a);
 
-    /**
-     * Ensure that at least <i>len</i> bytes are free in the buffer. The buffer
-     * may be grown by this operation but it will not be truncated.
-     * <p>
-     * This operation is equivalent to
-     * 
-     * <pre>
-     * ensureCapacity(len() + len)
-     * </pre>
-     * 
-     * and the latter is often used as an optimization.
-     * 
-     * @param len
-     *            The minimum #of free bytes.
-     */
-    void ensureFree(int len);
+  /**
+   * Append data into the managed byte[]. The backing buffer will be automatically extended if
+   * necessary.
+   *
+   * @param a The source data.
+   * @param off The offset of the first byte to be copied.
+   * @param len The #of bytes to be copied.
+   */
+  IManagedByteArray append(byte[] a, int off, int len);
 
-    /**
-     * Ensure that the buffer capacity is a least <i>capacity</i> total bytes.
-     * The buffer may be grown by this operation but it will not be truncated.
-     * 
-     * @param capacity
-     *            The minimum #of bytes in the buffer.
-     */
-    void ensureCapacity(int capacity);
-    
+  /** Return the capacity of the backing buffer. */
+  int capacity();
+
+  /**
+   * Ensure that at least <i>len</i> bytes are free in the buffer. The buffer may be grown by this
+   * operation but it will not be truncated.
+   *
+   * <p>This operation is equivalent to
+   *
+   * <pre>
+   * ensureCapacity(len() + len)
+   * </pre>
+   *
+   * and the latter is often used as an optimization.
+   *
+   * @param len The minimum #of free bytes.
+   */
+  void ensureFree(int len);
+
+  /**
+   * Ensure that the buffer capacity is a least <i>capacity</i> total bytes. The buffer may be grown
+   * by this operation but it will not be truncated.
+   *
+   * @param capacity The minimum #of bytes in the buffer.
+   */
+  void ensureCapacity(int capacity);
 }

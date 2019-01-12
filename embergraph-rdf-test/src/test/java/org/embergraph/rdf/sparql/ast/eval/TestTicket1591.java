@@ -18,62 +18,57 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.Properties;
-
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-
 /**
- * Test case for https://jira.blazegraph.com/browse/BLZG-1591:
- * {@link NotMaterializedException} with ORDER BY clause (for InlineURIIvs).
- * 
+ * Test case for https://jira.blazegraph.com/browse/BLZG-1591: {@link NotMaterializedException} with
+ * ORDER BY clause (for InlineURIIvs).
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
 public class TestTicket1591 extends AbstractDataDrivenSPARQLTestCase {
 
-   public TestTicket1591() {
-   }
+  public TestTicket1591() {}
 
-   public TestTicket1591(String name) {
-      super(name);
-   }
-  
+  public TestTicket1591(String name) {
+    super(name);
+  }
 
   public void test_ticket_1591a() throws Exception {
-     new TestHelper("ticket-1591a",// testURI,
-           "ticket_1591a.rq",// queryFileURL
-           "ticket_1591.nt",// dataFileURL
-           "ticket_1591.srx",// resultFileURL
-           false /* checkOrder */
-     ).runTest();
-  }   
-  
+    new TestHelper(
+            "ticket-1591a", // testURI,
+            "ticket_1591a.rq", // queryFileURL
+            "ticket_1591.nt", // dataFileURL
+            "ticket_1591.srx", // resultFileURL
+            false /* checkOrder */)
+        .runTest();
+  }
 
   public void test_ticket_1591b() throws Exception {
-      new TestHelper("ticket-1591b",// testURI,
-            "ticket_1591b.rq",// queryFileURL
-            "ticket_1591.nt",// dataFileURL
-            "ticket_1591.srx",// resultFileURL
-            true /* checkOrder */
-      ).runTest();
-   }   
+    new TestHelper(
+            "ticket-1591b", // testURI,
+            "ticket_1591b.rq", // queryFileURL
+            "ticket_1591.nt", // dataFileURL
+            "ticket_1591.srx", // resultFileURL
+            true /* checkOrder */)
+        .runTest();
+  }
 
   @Override
   public Properties getProperties() {
 
-      // Note: clone to avoid modifying!!!
-      final Properties properties = (Properties) super.getProperties().clone();
+    // Note: clone to avoid modifying!!!
+    final Properties properties = (Properties) super.getProperties().clone();
 
-      properties.setProperty(
-          AbstractTripleStore.Options.VOCABULARY_CLASS, 
-          "org.embergraph.rdf.vocab.TestVocabulary_BLZG1591");
+    properties.setProperty(
+        AbstractTripleStore.Options.VOCABULARY_CLASS,
+        "org.embergraph.rdf.vocab.TestVocabulary_BLZG1591");
 
-      properties.setProperty(
-          AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS, 
-          "org.embergraph.rdf.vocab.TestUriInlineFactory_BLZG1591");
+    properties.setProperty(
+        AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS,
+        "org.embergraph.rdf.vocab.TestUriInlineFactory_BLZG1591");
 
-      return properties;
-
+    return properties;
   }
-  
 }

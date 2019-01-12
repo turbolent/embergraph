@@ -19,24 +19,20 @@ package org.embergraph.rdf.sail.webapp.client;
 
 public interface IRemoteTxState0 {
 
-   /**
-    * The transaction identifier. Negative values are read/write transaction
-    * identifiers. Positive values are read-only transaction identifiers.
-    * 
-    * @see org.embergraph.journal.ITx
-    * @see org.embergraph.journal.TimestampUtility
-    */
-   long getTxId();
-   
-   /**
-    * The commit point on which the transaction is reading.
-    */
-   long getReadsOnCommitTime();
+  /**
+   * The transaction identifier. Negative values are read/write transaction identifiers. Positive
+   * values are read-only transaction identifiers.
+   *
+   * @see org.embergraph.journal.ITx
+   * @see org.embergraph.journal.TimestampUtility
+   */
+  long getTxId();
 
-   /**
-    * Return <code>true</code> if the transaction is read-only (does not
-    * permit mutation operations).
-    */
-   boolean isReadOnly();
-   
+  /** The commit point on which the transaction is reading. */
+  long getReadsOnCommitTime();
+
+  /**
+   * Return <code>true</code> if the transaction is read-only (does not permit mutation operations).
+   */
+  boolean isReadOnly();
 }

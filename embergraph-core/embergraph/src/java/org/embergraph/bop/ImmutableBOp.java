@@ -24,47 +24,41 @@ package org.embergraph.bop;
 import java.util.Map;
 
 /**
- * Base class for immutable operators such as {@link Var} and {@link Constant}.
- * These operators do not deep copy their data and do not permit decoration with
- * annotations.
- * 
+ * Base class for immutable operators such as {@link Var} and {@link Constant}. These operators do
+ * not deep copy their data and do not permit decoration with annotations.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class ImmutableBOp extends BOpBase {
+public abstract class ImmutableBOp extends BOpBase {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param op
-     */
-    public ImmutableBOp(ImmutableBOp op) {
-        super(op);
-    }
+  /** @param op */
+  public ImmutableBOp(ImmutableBOp op) {
+    super(op);
+  }
 
-    /**
-     * @param args
-     * @param annotations
-     */
-    public ImmutableBOp(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
-    
-    /*
-     * Overrides for the copy-on-write mutation API. 
-     */
+  /**
+   * @param args
+   * @param annotations
+   */
+  public ImmutableBOp(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
 
-    @Override
-    final protected Object _setProperty(String name,Object value) {
-        throw new UnsupportedOperationException();
-    }
-    
-    @Override
-    final protected void _clearProperty(String name) {
-        throw new UnsupportedOperationException();
-    }
+  /*
+   * Overrides for the copy-on-write mutation API.
+   */
 
+  @Override
+  protected final Object _setProperty(String name, Object value) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  protected final void _clearProperty(String name) {
+    throw new UnsupportedOperationException();
+  }
 }

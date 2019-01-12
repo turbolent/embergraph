@@ -20,57 +20,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * Imposes the constraint <code>var != constant</code>.
- */
+/** Imposes the constraint <code>var != constant</code>. */
 public class NEConstant extends BOpBase implements BooleanValueExpression {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7260967777291997075L;
+  /** */
+  private static final long serialVersionUID = 7260967777291997075L;
 
-	public NEConstant(final IVariable<?> x, final IConstant<?> y) {
+  public NEConstant(final IVariable<?> x, final IConstant<?> y) {
 
-        this(new BOp[] { x, y }, null/* annotations */);
+    this(new BOp[] {x, y}, null /* annotations */);
+  }
 
-    }
-    
-    /**
-     * Required shallow copy constructor.
-     */
-    public NEConstant(final BOp[] args, final Map<String, Object> annotations) {
-        super(args, annotations);
+  /** Required shallow copy constructor. */
+  public NEConstant(final BOp[] args, final Map<String, Object> annotations) {
+    super(args, annotations);
 
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+  }
 
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public NEConstant(final NEConstant op) {
+    super(op);
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public NEConstant(final NEConstant op) {
-        super(op);
-    }
-    
-    public Boolean get(final IBindingSet s) {
-        
-        // get binding for the variable.
-        final IConstant<?> tmp = s.get((IVariable<?>) get(0)/* var */);
-    
-        if (tmp == null)
-            return true; // not yet bound.
-    
-        return !tmp.equals(get(1)/* val */);
+  public Boolean get(final IBindingSet s) {
 
-   }
+    // get binding for the variable.
+    final IConstant<?> tmp = s.get((IVariable<?>) get(0) /* var */);
 
+    if (tmp == null) return true; // not yet bound.
+
+    return !tmp.equals(get(1) /* val */);
+  }
 }

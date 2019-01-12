@@ -52,157 +52,124 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.counters.format;
 
 import info.aduna.lang.FileFormat;
-
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
-
 import org.embergraph.counters.ICounterSet;
 
 /**
  * Formats for {@link ICounterSet}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CounterSetFormat extends FileFormat implements Iterable<CounterSetFormat> {
 
-    /**
-     * All known/registered formats for this class.
-     */
-    private static final CopyOnWriteArraySet<CounterSetFormat> formats = new CopyOnWriteArraySet<CounterSetFormat>();
+  /** All known/registered formats for this class. */
+  private static final CopyOnWriteArraySet<CounterSetFormat> formats =
+      new CopyOnWriteArraySet<CounterSetFormat>();
 
-    /**
-     * A thread-safe iterator that will visit all known formats (declared by
-     * {@link Iterable}).
-     */
-    @Override
-    public Iterator<CounterSetFormat> iterator() {
-        
-        return formats.iterator();
-        
-    }
+  /** A thread-safe iterator that will visit all known formats (declared by {@link Iterable}). */
+  @Override
+  public Iterator<CounterSetFormat> iterator() {
 
-    /**
-     * Alternative static method signature.
-     */
-    static public Iterator<CounterSetFormat> getFormats() {
-        
-        return formats.iterator();
-        
-    }
-    
-    /**
-     * Text properties file using <code>text/plain</code> and
-     * <code>UTF-8</code>.
-     */
-    public static final CounterSetFormat TEXT = new CounterSetFormat(
-            "text/plain",
-            Arrays.asList("text/plain"),
-            Charset.forName("UTF-8"),
-            Arrays.asList("counterSet")
-            );
+    return formats.iterator();
+  }
 
-    /**
-     * XML properties file using <code>application/xml</code> and
-     * <code>UTF-8</code>.
-     */
-    public static final CounterSetFormat XML = new CounterSetFormat(
-            "application/xml",
-            Arrays.asList("application/xml"),
-            Charset.forName("UTF-8"),// charset
-            Arrays.asList("xml")// known-file-extensions
-    );
+  /** Alternative static method signature. */
+  public static Iterator<CounterSetFormat> getFormats() {
 
-    /**
-     * XML properties file using <code>text/html</code> and <code>UTF-8</code>.
-     */
-   public static final CounterSetFormat HTML = new CounterSetFormat(
-           "text/html",
-           Arrays.asList("text/html"),
-           Charset.forName("UTF-8"),// charset
-           Arrays.asList("html")// known-file-extensions
-   );
+    return formats.iterator();
+  }
 
-    /**
-     * Registers the specified format.
-     */
-    public static void register(final CounterSetFormat format) {
-    
-        formats.add(format);
-        
-    }
+  /** Text properties file using <code>text/plain</code> and <code>UTF-8</code>. */
+  public static final CounterSetFormat TEXT =
+      new CounterSetFormat(
+          "text/plain",
+          Arrays.asList("text/plain"),
+          Charset.forName("UTF-8"),
+          Arrays.asList("counterSet"));
 
-    static {
-        
-        register(HTML);
-        register(TEXT);
-        register(XML);
-        
-    }
-    
-    /**
-     * Creates a new RDFFormat object.
-     * 
-     * @param name
-     *            The name of the RDF file format, e.g. "RDF/XML".
-     * @param mimeTypes
-     *            The MIME types of the RDF file format, e.g.
-     *            <tt>application/rdf+xml</tt> for the RDF/XML file format.
-     *            The first item in the list is interpreted as the default
-     *            MIME type for the format.
-     * @param charset
-     *            The default character encoding of the RDF file format.
-     *            Specify <tt>null</tt> if not applicable.
-     * @param fileExtensions
-     *            The RDF format's file extensions, e.g. <tt>rdf</tt> for
-     *            RDF/XML files. The first item in the list is interpreted
-     *            as the default file extension for the format.
-     */
-    public CounterSetFormat(final String name,
-            final Collection<String> mimeTypes, final Charset charset,
-            final Collection<String> fileExtensions) {
+  /** XML properties file using <code>application/xml</code> and <code>UTF-8</code>. */
+  public static final CounterSetFormat XML =
+      new CounterSetFormat(
+          "application/xml",
+          Arrays.asList("application/xml"),
+          Charset.forName("UTF-8"), // charset
+          Arrays.asList("xml") // known-file-extensions
+          );
 
-        super(name, mimeTypes, charset, fileExtensions);
-        
-    }
+  /** XML properties file using <code>text/html</code> and <code>UTF-8</code>. */
+  public static final CounterSetFormat HTML =
+      new CounterSetFormat(
+          "text/html",
+          Arrays.asList("text/html"),
+          Charset.forName("UTF-8"), // charset
+          Arrays.asList("html") // known-file-extensions
+          );
 
-    /**
-     * Tries to determine the appropriate file format based on the a MIME type
-     * that describes the content type.
-     * 
-     * @param mimeType
-     *            A MIME type, e.g. "text/html".
-     * @return An {@link CounterSetFormat} object if the MIME type was
-     *         recognized, or <tt>null</tt> otherwise.
-     * @see #forMIMEType(String,PropertiesFormat)
-     * @see #getMIMETypes()
-     */
-    public static CounterSetFormat forMIMEType(final String mimeType) {
+  /** Registers the specified format. */
+  public static void register(final CounterSetFormat format) {
 
-        return forMIMEType(mimeType, null);
+    formats.add(format);
+  }
 
-    }
+  static {
+    register(HTML);
+    register(TEXT);
+    register(XML);
+  }
 
-    /**
-     * Tries to determine the appropriate file format based on the a MIME type
-     * that describes the content type. The supplied fallback format will be
-     * returned when the MIME type was not recognized.
-     * 
-     * @param mimeType
-     *            A file name.
-     * @return An {@link CounterSetFormat} that matches the MIME type, or the
-     *         fallback format if the extension was not recognized.
-     * @see #forMIMEType(String)
-     * @see #getMIMETypes()
-     */
-    public static CounterSetFormat forMIMEType(String mimeType,
-            CounterSetFormat fallback) {
+  /**
+   * Creates a new RDFFormat object.
+   *
+   * @param name The name of the RDF file format, e.g. "RDF/XML".
+   * @param mimeTypes The MIME types of the RDF file format, e.g. <tt>application/rdf+xml</tt> for
+   *     the RDF/XML file format. The first item in the list is interpreted as the default MIME type
+   *     for the format.
+   * @param charset The default character encoding of the RDF file format. Specify <tt>null</tt> if
+   *     not applicable.
+   * @param fileExtensions The RDF format's file extensions, e.g. <tt>rdf</tt> for RDF/XML files.
+   *     The first item in the list is interpreted as the default file extension for the format.
+   */
+  public CounterSetFormat(
+      final String name,
+      final Collection<String> mimeTypes,
+      final Charset charset,
+      final Collection<String> fileExtensions) {
 
-        return matchMIMEType(mimeType, formats/* Iterable<FileFormat> */,
-                fallback);
-        
-    }
+    super(name, mimeTypes, charset, fileExtensions);
+  }
 
+  /**
+   * Tries to determine the appropriate file format based on the a MIME type that describes the
+   * content type.
+   *
+   * @param mimeType A MIME type, e.g. "text/html".
+   * @return An {@link CounterSetFormat} object if the MIME type was recognized, or <tt>null</tt>
+   *     otherwise.
+   * @see #forMIMEType(String,PropertiesFormat)
+   * @see #getMIMETypes()
+   */
+  public static CounterSetFormat forMIMEType(final String mimeType) {
+
+    return forMIMEType(mimeType, null);
+  }
+
+  /**
+   * Tries to determine the appropriate file format based on the a MIME type that describes the
+   * content type. The supplied fallback format will be returned when the MIME type was not
+   * recognized.
+   *
+   * @param mimeType A file name.
+   * @return An {@link CounterSetFormat} that matches the MIME type, or the fallback format if the
+   *     extension was not recognized.
+   * @see #forMIMEType(String)
+   * @see #getMIMETypes()
+   */
+  public static CounterSetFormat forMIMEType(String mimeType, CounterSetFormat fallback) {
+
+    return matchMIMEType(mimeType, formats /* Iterable<FileFormat> */, fallback);
+  }
 }

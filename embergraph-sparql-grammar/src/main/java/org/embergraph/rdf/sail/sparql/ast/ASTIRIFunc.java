@@ -3,35 +3,29 @@
 package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTIRIFunc extends SimpleNode {
-    private String baseURI;
+  private String baseURI;
 
-    public ASTIRIFunc(int id) {
-        super(id);
-    }
+  public ASTIRIFunc(int id) {
+    super(id);
+  }
 
-    public ASTIRIFunc(SyntaxTreeBuilder p, int id) {
-        super(p, id);
-    }
+  public ASTIRIFunc(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-    /** Accept the visitor. **/
-    public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-            throws VisitorException {
-        return visitor.visit(this, data);
-    }
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-    /**
-     * @param baseURI
-     *            The baseURI to set.
-     */
-    public void setBaseURI(String baseURI) {
-        this.baseURI = baseURI;
-    }
+  /** @param baseURI The baseURI to set. */
+  public void setBaseURI(String baseURI) {
+    this.baseURI = baseURI;
+  }
 
-    /**
-     * @return Returns the baseURI.
-     */
-    public String getBaseURI() {
-        return baseURI;
-    }
+  /** @return Returns the baseURI. */
+  public String getBaseURI() {
+    return baseURI;
+  }
 }
 /* JavaCC - OriginalChecksum=24686ad25db647184bbe120af4ee3c5c (do not edit this line) */

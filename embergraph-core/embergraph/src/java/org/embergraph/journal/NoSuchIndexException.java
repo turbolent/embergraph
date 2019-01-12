@@ -23,16 +23,11 @@ package org.embergraph.journal;
 
 public class NoSuchIndexException extends IllegalStateException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6124193775040326194L;
+  /** */
+  private static final long serialVersionUID = 6124193775040326194L;
 
-    /**
-     * @param name The index name.
-     */
-    public NoSuchIndexException(String name) {
-        super(name);
-    }
-
+  /** @param name The index name. */
+  public NoSuchIndexException(String name) {
+    super(name);
+  }
 }

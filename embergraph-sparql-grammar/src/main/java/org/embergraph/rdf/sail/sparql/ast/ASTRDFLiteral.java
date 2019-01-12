@@ -4,51 +4,48 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTRDFLiteral extends ASTRDFValue {
 
-	private String lang;
+  private String lang;
 
-	public ASTRDFLiteral(int id) {
-		super(id);
-	}
+  public ASTRDFLiteral(int id) {
+    super(id);
+  }
 
-	public ASTRDFLiteral(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTRDFLiteral(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public String getLang() {
-		return lang;
-	}
+  public String getLang() {
+    return lang;
+  }
 
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
-	public ASTString getLabel() {
-		return (ASTString)children.get(0);
-	}
+  public ASTString getLabel() {
+    return (ASTString) children.get(0);
+  }
 
-	public ASTIRI getDatatype() {
-		if (children.size() >= 2) {
-			return (ASTIRI)children.get(1);
-		}
-		return null;
-	}
+  public ASTIRI getDatatype() {
+    if (children.size() >= 2) {
+      return (ASTIRI) children.get(1);
+    }
+    return null;
+  }
 
-	@Override
-	public String toString()
-	{
-		String result = super.toString();
+  @Override
+  public String toString() {
+    String result = super.toString();
 
-		if (lang != null) {
-			result += " (lang=" + lang + ")";
-		}
+    if (lang != null) {
+      result += " (lang=" + lang + ")";
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

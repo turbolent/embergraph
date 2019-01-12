@@ -24,101 +24,87 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.TimeUnit;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.io.SerializerUtil;
 
 /**
  * Unit tests for {@link ThickAsynchronousIterator}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestThickAsynchronousIterator extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestThickAsynchronousIterator() {
+  /** */
+  public TestThickAsynchronousIterator() {}
+
+  /** @param arg0 */
+  public TestThickAsynchronousIterator(String arg0) {
+    super(arg0);
+  }
+
+  public void test_emptyIterator() {
+
+    final String[] expected = new String[] {};
+
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+
+    doRoundTripTest(expected, itr);
+  }
+
+  public void test_singleValueIterator() {
+
+    final String[] expected = new String[] {"a"};
+
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+
+    doRoundTripTest(expected, itr);
+  }
+
+  public void test_multipleValueIterator() {
+
+    final String[] expected = new String[] {"a", "b", "c"};
+
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+
+    doRoundTripTest(expected, itr);
+  }
+
+  protected void doRoundTripTest(final String[] expected, final IAsynchronousIterator<String> itr) {
+
+    @SuppressWarnings("unchecked")
+    final IAsynchronousIterator<String> itr2 =
+        (IAsynchronousIterator<String>) SerializerUtil.deserialize(SerializerUtil.serialize(itr));
+
+    assertSameIterator(expected, itr);
+
+    assertSameIterator(expected, itr2);
+  }
+
+  protected void assertSameIterator(
+      final String[] expected, final IAsynchronousIterator<String> actual) {
+
+    for (int i = 0; i < expected.length; i++) {
+
+      assertTrue(actual.hasNext());
+
+      try {
+        assertTrue(actual.hasNext(1L, TimeUnit.MILLISECONDS));
+      } catch (InterruptedException e) {
+        fail("Interrupted", e);
+      }
+
+      final String val = actual.next();
+
+      assertEquals(expected[i], val);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestThickAsynchronousIterator(String arg0) {
-        super(arg0);
+    assertFalse(actual.hasNext());
+
+    try {
+      assertFalse(actual.hasNext(1L, TimeUnit.MILLISECONDS));
+    } catch (InterruptedException e) {
+      fail("Interrupted", e);
     }
-
-    public void test_emptyIterator() {
-    
-        final String[] expected = new String[]{};
-        
-        final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
-        
-        doRoundTripTest(expected, itr);
-        
-    }
-    
-    public void test_singleValueIterator() {
-
-        final String[] expected = new String[]{"a"};
-        
-        final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
-        
-        doRoundTripTest(expected, itr);
-
-    }
-    
-    public void test_multipleValueIterator() {
-        
-        final String[] expected = new String[]{"a","b","c"};
-        
-        final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
-        
-        doRoundTripTest(expected, itr);
-
-    }
-
-    protected void doRoundTripTest(final String[] expected,
-            final IAsynchronousIterator<String> itr) {
-
-        @SuppressWarnings("unchecked")
-        final IAsynchronousIterator<String> itr2 = (IAsynchronousIterator<String>) SerializerUtil
-                .deserialize(SerializerUtil.serialize(itr));
-
-        assertSameIterator(expected, itr);
-
-        assertSameIterator(expected, itr2);
-        
-    }
-
-    protected void assertSameIterator(final String[] expected, final IAsynchronousIterator<String> actual) {
-
-        for (int i = 0; i < expected.length; i++) {
-
-            assertTrue(actual.hasNext());
-
-            try {
-                assertTrue(actual.hasNext(1L, TimeUnit.MILLISECONDS));
-            } catch (InterruptedException e) {
-                fail("Interrupted", e);
-            }
-
-            final String val = actual.next();
-            
-            assertEquals(expected[i],val);
-            
-        }
-        
-        assertFalse(actual.hasNext());
-
-        try {
-            assertFalse(actual.hasNext(1L,TimeUnit.MILLISECONDS));
-        } catch (InterruptedException e) {
-            fail("Interrupted", e);
-        }
-    
-    }
-    
+  }
 }

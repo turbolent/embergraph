@@ -19,111 +19,97 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.remote;
 
 import junit.framework.TestCase;
-
+import org.embergraph.util.httpd.Config;
 import org.junit.Test;
 
-import org.embergraph.util.httpd.Config;
-
-/**
- * Test suite for the {@link EmbergraphSailFactory}.
- */
+/** Test suite for the {@link EmbergraphSailFactory}. */
 public class EmbergraphSailFactoryTest extends TestCase {
 
-	//The correctly normalized value for the remote repository
-	protected static final String remoteRepositoryUrl = Config.DEFAULT_ENDPOINT;
-	
-	//The correctly normalized value for the remote repository
-	protected static final String remoteRepositoryNamespaceUrl = Config.DEFAULT_ENDPOINT
-			+ "/namespace/NAMESPACE";
+  // The correctly normalized value for the remote repository
+  protected static final String remoteRepositoryUrl = Config.DEFAULT_ENDPOINT;
 
-	@Test
-	public void testWithSparql() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/sparql";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+  // The correctly normalized value for the remote repository
+  protected static final String remoteRepositoryNamespaceUrl =
+      Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE";
 
-		assertEquals(remoteRepositoryUrl,normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithoutSparql() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+  @Test
+  public void testWithSparql() {
 
-		assertEquals(remoteRepositoryUrl,normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithoutSparqlAndNoTrailingSlash() {
-		
-		String serviceEndpoint =  Config.DEFAULT_ENDPOINT;
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/sparql";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
 
-		assertEquals(remoteRepositoryUrl,normalizedServiceURL);
-	}
-	
-	@Test
-	public void testHostOnly() {
-		
-		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT + "/";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+    assertEquals(remoteRepositoryUrl, normalizedServiceURL);
+  }
 
-		assertEquals(remoteRepositoryUrl,normalizedServiceURL);
-	}
-	
-	@Test
-	public void testHostOnlyNoTrailingSlash() {
-		
-		String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT;
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+  @Test
+  public void testWithoutSparql() {
 
-		assertEquals(remoteRepositoryUrl,normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithNamespaceNoSparql() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
 
-		assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithNamespaceNoSparqlWithTrailingSlash() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+    assertEquals(remoteRepositoryUrl, normalizedServiceURL);
+  }
 
-		assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithNamespaceSparql() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/sparql";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+  @Test
+  public void testWithoutSparqlAndNoTrailingSlash() {
 
-		assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
-	}
-	
-	@Test
-	public void testWithNamespaceSparqlTrailingSlash() {
-		
-		String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/sparql/";
-		String normalizedServiceURL = 
-				EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT;
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
 
-		assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
-	}
+    assertEquals(remoteRepositoryUrl, normalizedServiceURL);
+  }
 
+  @Test
+  public void testHostOnly() {
+
+    String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT + "/";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryUrl, normalizedServiceURL);
+  }
+
+  @Test
+  public void testHostOnlyNoTrailingSlash() {
+
+    String serviceEndpoint = "http://" + Config.DEFAULT_HOST + ":" + Config.HTTP_PORT;
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryUrl, normalizedServiceURL);
+  }
+
+  @Test
+  public void testWithNamespaceNoSparql() {
+
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
+  }
+
+  @Test
+  public void testWithNamespaceNoSparqlWithTrailingSlash() {
+
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
+  }
+
+  @Test
+  public void testWithNamespaceSparql() {
+
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/sparql";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
+  }
+
+  @Test
+  public void testWithNamespaceSparqlTrailingSlash() {
+
+    String serviceEndpoint = Config.DEFAULT_ENDPOINT + "/namespace/NAMESPACE/sparql/";
+    String normalizedServiceURL = EmbergraphSailFactory.testServiceEndpointUrl(serviceEndpoint);
+
+    assertEquals(remoteRepositoryNamespaceUrl, normalizedServiceURL);
+  }
 }

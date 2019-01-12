@@ -19,7 +19,6 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 import java.util.UUID;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.ImmutableBOp;
@@ -32,89 +31,74 @@ import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
-/**
- * Implements the now() operator.
- */
-public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterialization{
+/** Implements the now() operator. */
+public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-    /**
-	 *
-	 */
-    private static final long serialVersionUID = 9136864442064392445L;
+  /** */
+  private static final long serialVersionUID = 9136864442064392445L;
 
-    public interface Annotations extends ImmutableBOp.Annotations {
+  public interface Annotations extends ImmutableBOp.Annotations {
 
-        String STR = UUIDBOp.class.getName() + ".str";
-        
+    String STR = UUIDBOp.class.getName() + ".str";
+  }
+
+  public UUIDBOp(final GlobalAnnotations globals, final boolean str) {
+
+    this(BOp.NOARGS, anns(globals, new NV(Annotations.STR, str)));
+  }
+
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args The operands.
+   * @param op The operation.
+   */
+  public UUIDBOp(final BOp[] args, Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public UUIDBOp(final UUIDBOp op) {
+
+    super(op);
+  }
+
+  public final IV get(final IBindingSet bs) {
+
+    final EmbergraphValueFactory vf = super.getValueFactory();
+
+    final UUID uuid = UUID.randomUUID();
+
+    if (str()) {
+
+      final EmbergraphLiteral l = vf.createLiteral(uuid.toString());
+
+      return DummyConstantNode.toDummyIV(l);
+
+    } else {
+
+      final EmbergraphURI uri = vf.createURI("urn:uuid:" + uuid.toString());
+
+      return DummyConstantNode.toDummyIV(uri);
     }
+  }
 
-    public UUIDBOp(final GlobalAnnotations globals, final boolean str) {
+  public boolean str() {
 
-        this(BOp.NOARGS, anns(globals, new NV(Annotations.STR, str)));
+    return (boolean) getProperty(Annotations.STR);
+  }
 
-    }
+  public String toString() {
 
-    /**
-     * Required shallow copy constructor.
-     *
-     * @param args
-     *            The operands.
-     * @param op
-     *            The operation.
-     */
-    public UUIDBOp(final BOp[] args, Map<String, Object> anns) {
+    return str() ? "struuid()" : "uuid()";
+  }
 
-        super(args, anns);
-
-    }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     *
-     * @param op
-     */
-    public UUIDBOp(final UUIDBOp op) {
-
-        super(op);
-
-    }
-
-    final public IV get(final IBindingSet bs) {
-
-        final EmbergraphValueFactory vf = super.getValueFactory();
-        
-        final UUID uuid = UUID.randomUUID();
-        
-        if (str()) {
-            
-            final EmbergraphLiteral l = vf.createLiteral(uuid.toString());
-            
-            return DummyConstantNode.toDummyIV(l);
-            
-        } else {
-            
-            final EmbergraphURI uri = vf.createURI("urn:uuid:" + uuid.toString());
-            
-            return DummyConstantNode.toDummyIV(uri);
-            
-        }
-        
-    }
-
-    public boolean str() {
-        
-        return (boolean) getProperty(Annotations.STR);
-        
-    }
-    
-    public String toString() {
-
-        return str() ? "struuid()" : "uuid()";
-
-    }
-
-    public Requirement getRequirement() {
-        return Requirement.NEVER;
-    }
-
+  public Requirement getRequirement() {
+    return Requirement.NEVER;
+  }
 }

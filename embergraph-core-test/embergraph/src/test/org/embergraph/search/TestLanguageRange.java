@@ -22,43 +22,35 @@ package org.embergraph.search;
 
 import junit.framework.TestCase2;
 
-import org.embergraph.search.LanguageRange;
-
 public class TestLanguageRange extends TestCase2 {
 
-	public TestLanguageRange() {
-	}
-	
+  public TestLanguageRange() {}
 
-	public TestLanguageRange(String name) {
-		super(name);
-	}
-	
-	private void match(String range, String lang) {
-		LanguageRange lr = new LanguageRange(range.toLowerCase());
-		assertTrue(lr.extendedFilterMatch(lang));
-	}
+  public TestLanguageRange(String name) {
+    super(name);
+  }
 
-	private void nomatch(String range, String lang) {
-		LanguageRange lr = new LanguageRange(range.toLowerCase());
-		assertFalse(lr.extendedFilterMatch(lang));
-	}
-	
+  private void match(String range, String lang) {
+    LanguageRange lr = new LanguageRange(range.toLowerCase());
+    assertTrue(lr.extendedFilterMatch(lang));
+  }
 
-	public void testRFC4647() {
-		for (String range: new String[]{"de-DE", "de-*-DE"}) {
-			match(range, "de-DE");
-			match(range, "de-Latn-DE");
-			match(range, "de-Latf-DE");
-			match(range, "de-DE-x-goethe");
-			match(range, "de-Latn-DE-1996");
-			match(range, "de-Deva-DE-1996");
-			nomatch(range, "de");
-			nomatch(range, "de-x-DE");
-			nomatch(range, "de-Deva");
-		}
-		
-	}
-	
+  private void nomatch(String range, String lang) {
+    LanguageRange lr = new LanguageRange(range.toLowerCase());
+    assertFalse(lr.extendedFilterMatch(lang));
+  }
 
+  public void testRFC4647() {
+    for (String range : new String[] {"de-DE", "de-*-DE"}) {
+      match(range, "de-DE");
+      match(range, "de-Latn-DE");
+      match(range, "de-Latf-DE");
+      match(range, "de-DE-x-goethe");
+      match(range, "de-Latn-DE-1996");
+      match(range, "de-Deva-DE-1996");
+      nomatch(range, "de");
+      nomatch(range, "de-x-DE");
+      nomatch(range, "de-Deva");
+    }
+  }
 }

@@ -24,37 +24,37 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for BSBM.
- * <p>
- * Note: the benchmark also makes use of some dublin core vocabulary, including:
+ *
+ * <p>Note: the benchmark also makes use of some dublin core vocabulary, including:
+ *
  * <ul>
- * <li>http://purl.org/stuff/rev#text</li>
- * <li>http://purl.org/stuff/rev#reviewer</li>
- * <li>http://purl.org/stuff/rev#Review</li>
+ *   <li>http://purl.org/stuff/rev#text
+ *   <li>http://purl.org/stuff/rev#reviewer
+ *   <li>http://purl.org/stuff/rev#Review
  * </ul>
- * 
+ *
  * @see http://www4.wiwiss.fu-berlin.de/bizer/BerlinSPARQLBenchmark/
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: SesameVocabularyDecl.java 4628 2011-06-04 22:01:57Z thompsonbry
- *          $
+ * @version $Id: SesameVocabularyDecl.java 4628 2011-06-04 22:01:57Z thompsonbry $
  */
 public class BSBMVocabularyDecl implements VocabularyDecl {
 
-    public static final String VOCABULARY = "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/";
+  public static final String VOCABULARY =
+      "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/";
 
-    public static final String INSTANCES = "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/";
+  public static final String INSTANCES =
+      "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/";
 
-    public static final URI USD = new URIImpl(VOCABULARY + "USD");
-    
-    static private final URI[] uris = new URI[]{
+  public static final URI USD = new URIImpl(VOCABULARY + "USD");
+
+  private static final URI[] uris =
+      new URI[] {
         // namespace for instance data.
         new URIImpl(INSTANCES),
         // namespace for vocabulary
@@ -67,15 +67,12 @@ public class BSBMVocabularyDecl implements VocabularyDecl {
         new URIImpl(VOCABULARY + "rating3"),
         new URIImpl(VOCABULARY + "rating4"),
         USD,
-    };
+      };
 
-    public BSBMVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public BSBMVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

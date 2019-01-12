@@ -29,38 +29,27 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        TestSuite suite = new TestSuite("mdi");
+    TestSuite suite = new TestSuite("mdi");
 
-        // @todo test metdata index methods.
-        
-        // @todo test ability to upate the mdi and notify clients.
-        
-//        suite.addTestSuite(TestMetadataIndex.class);
-//        suite.addTestSuite(TestPartitionedIndex.class);
-//        suite.addTestSuite(TestPartitionedJournal.class);
-       
-        return suite;
-        
-    }
-    
+    // @todo test metdata index methods.
+
+    // @todo test ability to upate the mdi and notify clients.
+
+    //        suite.addTestSuite(TestMetadataIndex.class);
+    //        suite.addTestSuite(TestPartitionedIndex.class);
+    //        suite.addTestSuite(TestPartitionedJournal.class);
+
+    return suite;
+  }
 }

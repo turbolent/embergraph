@@ -26,65 +26,54 @@ package org.embergraph.sparse;
 import org.apache.log4j.Logger;
 
 /**
- * {@link IPrecondition} succeeds iff there are no property values for the
- * logical row (it recognizes a <code>null</code>, indicating no property
- * values, and an empty logical row, indicating that an {@link INameFilter} was
- * applied and that there were no property values which satisified that filter,
- * and a deleted property value for the primary key, which is often used as a
- * shorthand for deleting the logical row).
- * 
+ * {@link IPrecondition} succeeds iff there are no property values for the logical row (it
+ * recognizes a <code>null</code>, indicating no property values, and an empty logical row,
+ * indicating that an {@link INameFilter} was applied and that there were no property values which
+ * satisified that filter, and a deleted property value for the primary key, which is often used as
+ * a shorthand for deleting the logical row).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyRowPrecondition implements IPrecondition {
 
-    protected static final transient Logger log = Logger.getLogger(EmptyRowPrecondition.class);
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -1397012918552028222L;
+  protected static final transient Logger log = Logger.getLogger(EmptyRowPrecondition.class);
 
-    public boolean accept(ITPS logicalRow) {
+  /** */
+  private static final long serialVersionUID = -1397012918552028222L;
 
-        if (logicalRow == null) {
-        
-            if(log.isInfoEnabled()) {
-                
-                log.info("No property values for row: (null)");
-                
-            }
-            
-            return true;
-            
-        }
-        
-        if(logicalRow.size() == 0) {
+  public boolean accept(ITPS logicalRow) {
 
-            if(log.isInfoEnabled()) {
-                
-                log.info("Logical row size is zero: "+logicalRow);
-                
-            }
+    if (logicalRow == null) {
 
-            return true;
-            
-        }
-        
-        if(logicalRow.getPrimaryKey() == null) {
+      if (log.isInfoEnabled()) {
 
-            if(log.isInfoEnabled()) {
-                
-                log.info("Primary key row is deleted: "+logicalRow);
-                
-            }
-            
-            return true;
+        log.info("No property values for row: (null)");
+      }
 
-        }
-
-        return false;
-        
+      return true;
     }
 
+    if (logicalRow.size() == 0) {
+
+      if (log.isInfoEnabled()) {
+
+        log.info("Logical row size is zero: " + logicalRow);
+      }
+
+      return true;
+    }
+
+    if (logicalRow.getPrimaryKey() == null) {
+
+      if (log.isInfoEnabled()) {
+
+        log.info("Primary key row is deleted: " + logicalRow);
+      }
+
+      return true;
+    }
+
+    return false;
+  }
 }

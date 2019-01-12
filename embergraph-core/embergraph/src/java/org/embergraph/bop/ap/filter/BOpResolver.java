@@ -21,67 +21,57 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.ap.filter;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import org.embergraph.bop.BOp;
-
 import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Resolverator;
+import java.util.Iterator;
+import java.util.Map;
+import org.embergraph.bop.BOp;
 
 /**
  * Striterator resolver pattern.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class BOpResolver extends BOpFilterBase {
+public abstract class BOpResolver extends BOpFilterBase {
 
-    /**
-     * 
-     */
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  /** @param op */
+  public BOpResolver(BOpFilterBase op) {
+    super(op);
+  }
+
+  /**
+   * @param args
+   * @param annotations
+   */
+  public BOpResolver(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
+
+  @Override
+  protected final Iterator filterOnce(Iterator src, Object context) {
+
+    return new Resolverator(src, context, new ResolverImpl());
+  }
+
+  /**
+   * Resolve the object.
+   *
+   * @param obj The object.
+   * @return The resolved object.
+   */
+  protected abstract Object resolve(Object obj);
+
+  private class ResolverImpl extends Resolver {
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @param op
-     */
-    public BOpResolver(BOpFilterBase op) {
-        super(op);
-    }
-
-    /**
-     * @param args
-     * @param annotations
-     */
-    public BOpResolver(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
-
     @Override
-    final protected Iterator filterOnce(Iterator src, Object context) {
-
-        return new Resolverator(src, context, new ResolverImpl());
-
+    protected Object resolve(Object obj) {
+      return BOpResolver.this.resolve(obj);
     }
-
-    /**
-     * Resolve the object.
-     * 
-     * @param obj
-     *            The object.
-     * @return The resolved object.
-     */
-    abstract protected Object resolve(Object obj);
-
-    private class ResolverImpl extends Resolver {
-
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        protected Object resolve(Object obj) {
-            return BOpResolver.this.resolve(obj);
-        }
-
-    }
-
+  }
 }

@@ -4,39 +4,36 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTProjectionElem extends SimpleNode {
 
-	public ASTProjectionElem(int id) {
-		super(id);
-	}
+  public ASTProjectionElem(int id) {
+    super(id);
+  }
 
-	public ASTProjectionElem(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTProjectionElem(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	/** Accept the visitor. **/
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public boolean hasAlias() {
-		return getAlias() != null;
-	}
+  public boolean hasAlias() {
+    return getAlias() != null;
+  }
 
-	public String getAlias() {
-		if (children.size() >= 2) {
-		    // @see http://www.openrdf.org/issues/browse/SES-818
-			Node aliasNode = children.get(children.size()-1);
+  public String getAlias() {
+    if (children.size() >= 2) {
+      // @see http://www.openrdf.org/issues/browse/SES-818
+      Node aliasNode = children.get(children.size() - 1);
 
-			if (aliasNode instanceof ASTString) {
-				return ((ASTString)aliasNode).getValue();
-			}
-			else if (aliasNode instanceof ASTVar) {
-				return ((ASTVar)aliasNode).getName();
-			}
-		}
+      if (aliasNode instanceof ASTString) {
+        return ((ASTString) aliasNode).getValue();
+      } else if (aliasNode instanceof ASTVar) {
+        return ((ASTVar) aliasNode).getName();
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 }
 /* JavaCC - OriginalChecksum=ed67c3c7a74ebd8df6304268b81f702d (do not edit this line) */

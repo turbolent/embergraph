@@ -20,113 +20,107 @@ package org.embergraph.rdf.sail.model;
 import java.util.UUID;
 
 /**
- * Metadata about running {@link org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask}s (this includes both
+ * Metadata about running {@link
+ * org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask}s (this includes both
  * queries and update requests).
- * 
- * Used to serialize the results for the REST interface in JSON, XML, etc.
+ *
+ * <p>Used to serialize the results for the REST interface in JSON, XML, etc.
  */
 public class RunningQuery {
 
+  /**
+   * The unique identifier for this query as assigned by the Embedded Graph implementation end point
+   * (rather than the {@link org.embergraph.bop.engine.QueryEngine}).
+   */
+  private String extQueryId;
 
-	/**
-	 * The unique identifier for this query as assigned by the Embedded
-	 * Graph implementation end point (rather than the {@link org.embergraph.bop.engine.QueryEngine}).
-	 */
-	private String extQueryId;
+  /**
+   * The unique identifier for this query for the {@link org.embergraph.bop.engine.QueryEngine}
+   * (non-<code>null</code>).
+   *
+   * @see org.embergraph.bop.engine.QueryEngine#getRunningQuery(UUID)
+   */
+  private UUID queryUuid;
 
-	/**
-	 * The unique identifier for this query for the {@link org.embergraph.bop.engine.QueryEngine}
-	 * (non-<code>null</code>).
-	 * 
-	 * @see org.embergraph.bop.engine.QueryEngine#getRunningQuery(UUID)
-	 */
-	private UUID queryUuid;
+  /** The timestamp when the query was accepted (ns). */
+  private long begin;
 
-	/** The timestamp when the query was accepted (ns). */
-	private long begin;
-	
-	/**
-	 * Is the query an update query.
-	 */
-	private boolean isUpdateQuery;
-	
-	/**
-	 * Was the query cancelled.
-	 */
-	protected boolean isCancelled = false;
-	
-	public RunningQuery(final String extQueryId, final UUID queryUuid,
-			final long begin, final boolean isUpdateQuery) {
+  /** Is the query an update query. */
+  private boolean isUpdateQuery;
 
-		if (queryUuid == null)
-			throw new IllegalArgumentException();
+  /** Was the query cancelled. */
+  protected boolean isCancelled = false;
 
-		this.extQueryId = extQueryId;
+  public RunningQuery(
+      final String extQueryId,
+      final UUID queryUuid,
+      final long begin,
+      final boolean isUpdateQuery) {
 
-		this.queryUuid = queryUuid;
+    if (queryUuid == null) throw new IllegalArgumentException();
 
-		this.begin = begin;
-		
-		this.isUpdateQuery = isUpdateQuery;
-		
-		this.setCancelled(false);
+    this.extQueryId = extQueryId;
 
-	}
-	
-	/**
-	 * Constructor used for serialization
-	 */
-	public RunningQuery() {
-		
-		this(null, UUID.randomUUID(), -1, false);
-	}
-	
-	public void setElapsedTimeNS() {
-		//Do nothing.  This is for JSON Serialization
-	}
-	
-	public long getElapsedTimeNS() {
-		return (System.nanoTime() - this.begin);
-	}
-	
-	public String getExtQueryId() {
-		return extQueryId;
-	}
-	
-	public UUID getQueryUuid() {
-		return queryUuid;
-	}
+    this.queryUuid = queryUuid;
 
-	public long getBegin() {
-		return begin;
-	}
-	
-	public boolean getIsUpdateQuery() {
-		return isUpdateQuery;
-	}
+    this.begin = begin;
 
-	public boolean isCancelled() {
-		return isCancelled;
-	}
+    this.isUpdateQuery = isUpdateQuery;
 
-	public void setCancelled(boolean isCancelled) {
-		this.isCancelled = isCancelled;
-		
-	}
+    this.setCancelled(false);
+  }
 
-	public void setExtQueryId(String extQueryId) {
-		this.extQueryId = extQueryId;
-	}
+  /** Constructor used for serialization */
+  public RunningQuery() {
 
-	public void setQueryUuid(UUID queryUuid) {
-		this.queryUuid = queryUuid;
-	}
+    this(null, UUID.randomUUID(), -1, false);
+  }
 
-	public void setBegin(long begin) {
-		this.begin = begin;
-	}
+  public void setElapsedTimeNS() {
+    // Do nothing.  This is for JSON Serialization
+  }
 
-	public void setUpdateQuery(boolean isUpdateQuery) {
-		this.isUpdateQuery = isUpdateQuery;
-	}
+  public long getElapsedTimeNS() {
+    return (System.nanoTime() - this.begin);
+  }
+
+  public String getExtQueryId() {
+    return extQueryId;
+  }
+
+  public UUID getQueryUuid() {
+    return queryUuid;
+  }
+
+  public long getBegin() {
+    return begin;
+  }
+
+  public boolean getIsUpdateQuery() {
+    return isUpdateQuery;
+  }
+
+  public boolean isCancelled() {
+    return isCancelled;
+  }
+
+  public void setCancelled(boolean isCancelled) {
+    this.isCancelled = isCancelled;
+  }
+
+  public void setExtQueryId(String extQueryId) {
+    this.extQueryId = extQueryId;
+  }
+
+  public void setQueryUuid(UUID queryUuid) {
+    this.queryUuid = queryUuid;
+  }
+
+  public void setBegin(long begin) {
+    this.begin = begin;
+  }
+
+  public void setUpdateQuery(boolean isUpdateQuery) {
+    this.isUpdateQuery = isUpdateQuery;
+  }
 }

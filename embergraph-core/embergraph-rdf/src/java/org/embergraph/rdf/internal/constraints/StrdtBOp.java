@@ -18,69 +18,64 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
-import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.openrdf.model.Literal;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
 
 public class StrdtBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-    private static final long serialVersionUID = -6571446625816081957L;
+  private static final long serialVersionUID = -6571446625816081957L;
 
-    public StrdtBOp(IValueExpression<? extends IV> x, IValueExpression<? extends IV> dt, 
-    		final GlobalAnnotations globals) {
-    	
-        this(new BOp[] { x, dt }, anns(globals));
-        
+  public StrdtBOp(
+      IValueExpression<? extends IV> x,
+      IValueExpression<? extends IV> dt,
+      final GlobalAnnotations globals) {
+
+    this(new BOp[] {x, dt}, anns(globals));
+  }
+
+  public StrdtBOp(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+  }
+
+  public StrdtBOp(StrdtBOp op) {
+    super(op);
+  }
+
+  @Override
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
+
+  @Override
+  public IV get(final IBindingSet bs) throws SparqlTypeErrorException {
+
+    final IV iv = getAndCheckLiteral(0, bs);
+
+    final IV datatype = getAndCheckBound(1, bs);
+
+    if (!datatype.isURI()) throw new SparqlTypeErrorException();
+
+    final EmbergraphURI dt = (EmbergraphURI) asValue(datatype);
+
+    final Literal lit = asLiteral(iv);
+
+    if (lit.getDatatype() != null || lit.getLanguage() != null) {
+      throw new SparqlTypeErrorException();
     }
 
-    public StrdtBOp(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
+    final String label = lit.getLabel();
 
-    }
+    final EmbergraphLiteral str = getValueFactory().createLiteral(label, dt);
 
-    public StrdtBOp(StrdtBOp op) {
-        super(op);
-    }
-
-	@Override
-	public Requirement getRequirement() {
-		return Requirement.SOMETIMES;
-	}
-
-	@Override
-    public IV get(final IBindingSet bs) throws SparqlTypeErrorException {
-        
-        final IV iv = getAndCheckLiteral(0, bs);
-
-        final IV datatype = getAndCheckBound(1, bs);
-        
-        if (!datatype.isURI())
-            throw new SparqlTypeErrorException();
-
-        final EmbergraphURI dt = (EmbergraphURI) asValue(datatype);
-
-        final Literal lit = asLiteral(iv);
-        
-        if (lit.getDatatype() != null || lit.getLanguage() != null) {
-            throw new SparqlTypeErrorException();
-        }
-        
-        final String label = lit.getLabel();
-        
-        final EmbergraphLiteral str = getValueFactory().createLiteral(label, dt);
-        
-        return super.asIV(str, bs);
-
-    }
-
+    return super.asIV(str, bs);
+  }
 }

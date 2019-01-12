@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.journal.ITx;
@@ -21,521 +20,449 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
+import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
-import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.proxy.RemoteBuffer;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
  * Implementation for distributed join execution.
- * <p>
- * Note: For query, this object MUST be executed locally on the client. This
- * ensures that all data flows back to the client directly. For mutation, it
- * is possible to submit this object to any service in the federation and
- * each {@link DistributedJoinTask} will write directly on the scale-out
- * view of the target {@link IMutableRelation}.
- * 
+ *
+ * <p>Note: For query, this object MUST be executed locally on the client. This ensures that all
+ * data flows back to the client directly. For mutation, it is possible to submit this object to any
+ * service in the federation and each {@link DistributedJoinTask} will write directly on the
+ * scale-out view of the target {@link IMutableRelation}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class DistributedJoinMasterTask extends JoinMasterTask implements
-        Serializable {
+public class DistributedJoinMasterTask extends JoinMasterTask implements Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 7096223893807015958L;
+  /** */
+  private static final long serialVersionUID = 7096223893807015958L;
 
-    /**
-     * The proxy for this {@link DistributedJoinMasterTask}.
-     */
-    private final IJoinMaster masterProxy;
+  /** The proxy for this {@link DistributedJoinMasterTask}. */
+  private final IJoinMaster masterProxy;
 
-    /**
-     * The proxy for the solution buffer (query only).
-     * <p>
-     * Note: The query buffer is always an {@link IBlockingBuffer}. The
-     * client has the {@link IAsynchronousIterator} that drains the
-     * {@link BlockingBuffer}. The master is local to the client so that
-     * data from the distributed join tasks flows directly to the client.
-     * <p>
-     * Note: The reason why we do not use a {@link RemoteBuffer} for
-     * mutation is that it would cause all data to flow through the master!
-     * Instead each {@link JoinTask} for the last join dimension uses its
-     * own buffer to aggregate and write on the target
-     * {@link IMutableRelation}.
-     */
-    private final IBuffer<ISolution[]> solutionBufferProxy;
+  /**
+   * The proxy for the solution buffer (query only).
+   *
+   * <p>Note: The query buffer is always an {@link IBlockingBuffer}. The client has the {@link
+   * IAsynchronousIterator} that drains the {@link BlockingBuffer}. The master is local to the
+   * client so that data from the distributed join tasks flows directly to the client.
+   *
+   * <p>Note: The reason why we do not use a {@link RemoteBuffer} for mutation is that it would
+   * cause all data to flow through the master! Instead each {@link JoinTask} for the last join
+   * dimension uses its own buffer to aggregate and write on the target {@link IMutableRelation}.
+   */
+  private final IBuffer<ISolution[]> solutionBufferProxy;
 
-    /**
-     * For queries, the master MUST execute locally to the client. If the
-     * master were to be executed on a remote {@link DataService} then that
-     * would cause the {@link #getSolutionBuffer()} to be created on the
-     * remote service and all query results would be forced through that
-     * remote JVM before being streamed back to the client.
-     * <p>
-     * This is not a problem when the rule is a mutation operation since
-     * the individual join tasks will each allocate their own buffer that
-     * writes on the target {@link IMutableRelation}.
-     * 
-     * @throws UnsupportedOperationException
-     *             if the operation is a query.
-     */
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+  /**
+   * For queries, the master MUST execute locally to the client. If the master were to be executed
+   * on a remote {@link DataService} then that would cause the {@link #getSolutionBuffer()} to be
+   * created on the remote service and all query results would be forced through that remote JVM
+   * before being streamed back to the client.
+   *
+   * <p>This is not a problem when the rule is a mutation operation since the individual join tasks
+   * will each allocate their own buffer that writes on the target {@link IMutableRelation}.
+   *
+   * @throws UnsupportedOperationException if the operation is a query.
+   */
+  private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
-        if (!joinNexus.getAction().isMutation()) {
+    if (!joinNexus.getAction().isMutation()) {
 
-            throw new UnsupportedOperationException(
-                    "Join master may not be executed remotely for query.");
-
-        }
-
-        out.defaultWriteObject();
-
+      throw new UnsupportedOperationException(
+          "Join master may not be executed remotely for query.");
     }
 
-    /**
-     * @param rule
-     * @param joinNexus
-     * @param buffer
-     *            The buffer on which the last {@link DistributedJoinTask}
-     *            will write query {@link ISolution}s. However, it is
-     *            ignored for mutation operations as each
-     *            {@link DistributedJoinTask} for the last join dimension
-     *            (there can be more than one if the index partition has
-     *            more than one partition) will obtain and write on its own
-     *            solution buffer in order to avoid moving all data through
-     *            the master.
-     * 
-     * @throws UnsupportedOperationException
-     *             unless {@link IJoinNexus#getIndexManager()} reports an
-     *             {@link AbstractScaleOutFederation}.
-     */
-    public DistributedJoinMasterTask(final IRule rule, final IJoinNexus joinNexus,
-            final IBuffer<ISolution[]> buffer) {
+    out.defaultWriteObject();
+  }
 
-        super(rule, joinNexus, buffer);
+  /**
+   * @param rule
+   * @param joinNexus
+   * @param buffer The buffer on which the last {@link DistributedJoinTask} will write query {@link
+   *     ISolution}s. However, it is ignored for mutation operations as each {@link
+   *     DistributedJoinTask} for the last join dimension (there can be more than one if the index
+   *     partition has more than one partition) will obtain and write on its own solution buffer in
+   *     order to avoid moving all data through the master.
+   * @throws UnsupportedOperationException unless {@link IJoinNexus#getIndexManager()} reports an
+   *     {@link AbstractScaleOutFederation}.
+   */
+  public DistributedJoinMasterTask(
+      final IRule rule, final IJoinNexus joinNexus, final IBuffer<ISolution[]> buffer) {
 
-        if (!(joinNexus.getIndexManager() instanceof IEmbergraphFederation)
-                || !(((IEmbergraphFederation) joinNexus.getIndexManager())
-                        .isScaleOut())) {
+    super(rule, joinNexus, buffer);
 
-            /*
-             * Either not running in a scale-out deployment or executed in a
-             * context (such as within the ConcurrencyManager) where the
-             * joinNexus will not report the federation as the index manager
-             * object.
-             */
+    if (!(joinNexus.getIndexManager() instanceof IEmbergraphFederation)
+        || !(((IEmbergraphFederation) joinNexus.getIndexManager()).isScaleOut())) {
 
-            throw new UnsupportedOperationException();
+      /*
+       * Either not running in a scale-out deployment or executed in a
+       * context (such as within the ConcurrencyManager) where the
+       * joinNexus will not report the federation as the index manager
+       * object.
+       */
 
-        }
-
-        if (joinNexus.getAction().isMutation()) {
-
-            /*
-             * Check constraints on executing mutation operations.
-             * 
-             * Note: These constraints arise from (a) the need to flush
-             * solutions onto relations that may also be in the body of the
-             * rule; and (b) the need to avoid stale locators when writing
-             * on those relations.
-             */
-
-            if (!TimestampUtility
-                    .isReadOnly(joinNexus.getReadTimestamp())) {
-
-                /*
-                 * Must use a read-consistent view and advance the
-                 * readTimestamp before each mutation operation.
-                 */
-
-                throw new UnsupportedOperationException();
-
-            }
-
-        } else {
-
-            if (joinNexus.getReadTimestamp() == ITx.UNISOLATED) {
-
-                /*
-                 * Note: While you probably can run a query against the
-                 * unisolated indices it will prevent overflow processing
-                 * since there will exclusive locks and is a bad idea.
-                 */
-
-                log.warn("Unisolated scale-out query");
-
-            }
-
-        }
-
-        /*
-         * Export proxies?
-         * 
-         * Note: We need proxies if the federation is really distributed and
-         * using RMI to communicate.
-         * 
-         * @todo do we need distributed garbage collection for these
-         * proxies?
-         */
-        if (joinNexus.getIndexManager() instanceof AbstractDistributedFederation) {
-
-            final AbstractDistributedFederation fed = (AbstractDistributedFederation) joinNexus
-                    .getIndexManager();
-
-            masterProxy = (IJoinMaster) fed
-                    .getProxy(this, true/* enableDGC */);
-
-            if (joinNexus.getAction().isMutation()) {
-
-                // mutation.
-                solutionBufferProxy = null;
-
-            } else {
-
-                // query - export proxy for the solution buffer.
-                solutionBufferProxy = fed.getProxy(solutionBuffer);
-
-            }
-
-        } else {
-
-            /*
-             * Not really distributed, so just use the actual reference.
-             */
-
-            masterProxy = this;
-
-            solutionBufferProxy = solutionBuffer;
-
-        }
-
+      throw new UnsupportedOperationException();
     }
 
-    @Override
-    public IBuffer<ISolution[]> getSolutionBuffer() throws IOException {
+    if (joinNexus.getAction().isMutation()) {
 
-        if (joinNexus.getAction().isMutation()) {
+      /*
+       * Check constraints on executing mutation operations.
+       *
+       * Note: These constraints arise from (a) the need to flush
+       * solutions onto relations that may also be in the body of the
+       * rule; and (b) the need to avoid stale locators when writing
+       * on those relations.
+       */
 
-            /*
-             * Note: access is not permitted for mutation to keep data from
-             * distributed join tasks from flowing through the master.
-             */
+      if (!TimestampUtility.isReadOnly(joinNexus.getReadTimestamp())) {
 
-            throw new UnsupportedOperationException();
+        /*
+         * Must use a read-consistent view and advance the
+         * readTimestamp before each mutation operation.
+         */
 
-        }
+        throw new UnsupportedOperationException();
+      }
 
-        return solutionBufferProxy;
+    } else {
 
+      if (joinNexus.getReadTimestamp() == ITx.UNISOLATED) {
+
+        /*
+         * Note: While you probably can run a query against the
+         * unisolated indices it will prevent overflow processing
+         * since there will exclusive locks and is a bad idea.
+         */
+
+        log.warn("Unisolated scale-out query");
+      }
     }
 
-    /**
-     * Create and run the {@link JoinTask}(s) that will evaluate the first
-     * join dimension.
-     * <p>
-     * A {@link JoinTask} is created on the {@link DataService} for each
-     * index partition that is spanned by the {@link IAccessPath} for the
-     * first {@link IPredicate} in the evaluation order. Those
-     * {@link JoinTask} are run in parallel, so the actual parallelism for
-     * the first {@link IPredicate} is the #of index partitions spanned by
-     * its {@link IAccessPath}.
-     * 
-     * @return The {@link Future} for each {@link DistributedJoinTask}
-     *         created for the first join dimension (one per index
-     *         partitions spanned by the predicate that is first in the
-     *         evaluation order given the initial bindingSet for the rule).
+    /*
+     * Export proxies?
+     *
+     * Note: We need proxies if the federation is really distributed and
+     * using RMI to communicate.
+     *
+     * @todo do we need distributed garbage collection for these
+     * proxies?
      */
-    @Override
-    final protected List<Future<Void>> start() throws Exception {
+    if (joinNexus.getIndexManager() instanceof AbstractDistributedFederation) {
 
-        /*
-         * The initial bindingSet.
-         * 
-         * Note: This bindingSet might not be empty since constants can be
-         * bound before the rule is evaluated.
-         */
-        final IBindingSet initialBindingSet = joinNexus.newBindingSet(rule);
+      final AbstractDistributedFederation fed =
+          (AbstractDistributedFederation) joinNexus.getIndexManager();
 
-        /*
-         * Map the initial binding set across all index partitions on which the
-         * asBound() predicate would read for the first join dimension.
-         */
-        final List<Future> factoryTaskFutures = mapBindingSet(initialBindingSet);
+      masterProxy = (IJoinMaster) fed.getProxy(this, true /* enableDGC */);
 
-        // await futures for the factory tasks.
-        final List<Future<Void>> joinTaskFutures = awaitFactoryFutures(factoryTaskFutures);
+      if (joinNexus.getAction().isMutation()) {
 
-        return joinTaskFutures;
+        // mutation.
+        solutionBufferProxy = null;
 
+      } else {
+
+        // query - export proxy for the solution buffer.
+        solutionBufferProxy = fed.getProxy(solutionBuffer);
+      }
+
+    } else {
+
+      /*
+       * Not really distributed, so just use the actual reference.
+       */
+
+      masterProxy = this;
+
+      solutionBufferProxy = solutionBuffer;
+    }
+  }
+
+  @Override
+  public IBuffer<ISolution[]> getSolutionBuffer() throws IOException {
+
+    if (joinNexus.getAction().isMutation()) {
+
+      /*
+       * Note: access is not permitted for mutation to keep data from
+       * distributed join tasks from flowing through the master.
+       */
+
+      throw new UnsupportedOperationException();
     }
 
-    /**
-     * Map the given {@link IBindingSet} over the {@link JoinTask}(s) for
-     * the index partition(s) the span the {@link IAccessPath} for that
-     * {@link IBindingSet} in parallel.
-     * 
-     * @param bindingSet
-     *            The binding set.
-     * 
-     * @return A list of {@link Future}s for the
-     *         {@link JoinTaskFactoryTask} that will create the
-     *         {@link DistributedJoinTask}s for the first join dimension.
-     * 
-     * @throws Exception
-     * 
-     * FIXME If a predicate defines an {@link IAccessPathExpander} then we DO
-     * NOT map the predicate. Instead, we use
-     * {@link IJoinNexus#getTailAccessPath(IPredicate)} and evaluate the
-     * {@link IAccessPath} with the layered {@link IAccessPathExpander} in
-     * process. If the {@link IAccessPathExpander} touches the index, it will
-     * be using an {@link IClientIndex}. While the {@link IClientIndex} is
-     * not nearly as efficient as using a local index partition, it will
-     * provide a view of the total key-range partitioned index.
-     * <p>
-     * do this for each join dimension for which an
-     * {@link IAccessPathExpander} is defined, including not only the first N
-     * join dimensions (handles free text search) but also an intermediate
-     * join dimension (requires that all source join tasks target a join
-     * task having a view of the scale-out index rather than mapping the
-     * task across the index partitions).
-     * 
-     * FIXME The initial binding set should not be mapped across the index
-     * partitions for the first join dimension if {@link IQueryOptions#isStable()}
-     * is <code>true</code> (any parallel evaluation violates the stable
-     * constraint).
+    return solutionBufferProxy;
+  }
+
+  /**
+   * Create and run the {@link JoinTask}(s) that will evaluate the first join dimension.
+   *
+   * <p>A {@link JoinTask} is created on the {@link DataService} for each index partition that is
+   * spanned by the {@link IAccessPath} for the first {@link IPredicate} in the evaluation order.
+   * Those {@link JoinTask} are run in parallel, so the actual parallelism for the first {@link
+   * IPredicate} is the #of index partitions spanned by its {@link IAccessPath}.
+   *
+   * @return The {@link Future} for each {@link DistributedJoinTask} created for the first join
+   *     dimension (one per index partitions spanned by the predicate that is first in the
+   *     evaluation order given the initial bindingSet for the rule).
+   */
+  @Override
+  protected final List<Future<Void>> start() throws Exception {
+
+    /*
+     * The initial bindingSet.
+     *
+     * Note: This bindingSet might not be empty since constants can be
+     * bound before the rule is evaluated.
      */
-    protected List<Future> mapBindingSet(final IBindingSet bindingSet)
-            throws Exception {
+    final IBindingSet initialBindingSet = joinNexus.newBindingSet(rule);
 
-        /*
-         * The first predicate in the evaluation order with the initial
-         * bindings applied.
-         */
-        final IPredicate<?> predicate = rule.getTail(order[0]).asBound(bindingSet);
+    /*
+     * Map the initial binding set across all index partitions on which the
+     * asBound() predicate would read for the first join dimension.
+     */
+    final List<Future> factoryTaskFutures = mapBindingSet(initialBindingSet);
 
-        // scale-out index manager.
-        final AbstractScaleOutFederation<?> fed = (AbstractScaleOutFederation<?>) joinNexus
-                .getIndexManager();
+    // await futures for the factory tasks.
+    final List<Future<Void>> joinTaskFutures = awaitFactoryFutures(factoryTaskFutures);
 
-        // the scale out index on which this predicate must read (logging only).
-        final String scaleOutIndexName = predicate.getOnlyRelationName()+"."
-                + ruleState.getKeyOrder()[order[0]];
+    return joinTaskFutures;
+  }
 
-        final Iterator<PartitionLocator> itr = joinNexus.locatorScan(fed,
-                predicate);
+  /**
+   * Map the given {@link IBindingSet} over the {@link JoinTask}(s) for the index partition(s) the
+   * span the {@link IAccessPath} for that {@link IBindingSet} in parallel.
+   *
+   * @param bindingSet The binding set.
+   * @return A list of {@link Future}s for the {@link JoinTaskFactoryTask} that will create the
+   *     {@link DistributedJoinTask}s for the first join dimension.
+   * @throws Exception
+   *     <p>FIXME If a predicate defines an {@link IAccessPathExpander} then we DO NOT map the
+   *     predicate. Instead, we use {@link IJoinNexus#getTailAccessPath(IPredicate)} and evaluate
+   *     the {@link IAccessPath} with the layered {@link IAccessPathExpander} in process. If the
+   *     {@link IAccessPathExpander} touches the index, it will be using an {@link IClientIndex}.
+   *     While the {@link IClientIndex} is not nearly as efficient as using a local index partition,
+   *     it will provide a view of the total key-range partitioned index.
+   *     <p>do this for each join dimension for which an {@link IAccessPathExpander} is defined,
+   *     including not only the first N join dimensions (handles free text search) but also an
+   *     intermediate join dimension (requires that all source join tasks target a join task having
+   *     a view of the scale-out index rather than mapping the task across the index partitions).
+   *     <p>FIXME The initial binding set should not be mapped across the index partitions for the
+   *     first join dimension if {@link IQueryOptions#isStable()} is <code>true</code> (any parallel
+   *     evaluation violates the stable constraint).
+   */
+  protected List<Future> mapBindingSet(final IBindingSet bindingSet) throws Exception {
 
-        final List<Future> futures = new LinkedList<Future>();
+    /*
+     * The first predicate in the evaluation order with the initial
+     * bindings applied.
+     */
+    final IPredicate<?> predicate = rule.getTail(order[0]).asBound(bindingSet);
 
-        while (itr.hasNext()) {
+    // scale-out index manager.
+    final AbstractScaleOutFederation<?> fed =
+        (AbstractScaleOutFederation<?>) joinNexus.getIndexManager();
 
-            final PartitionLocator locator = itr.next();
+    // the scale out index on which this predicate must read (logging only).
+    final String scaleOutIndexName =
+        predicate.getOnlyRelationName() + "." + ruleState.getKeyOrder()[order[0]];
 
-            final int partitionId = locator.getPartitionId();
+    final Iterator<PartitionLocator> itr = joinNexus.locatorScan(fed, predicate);
 
-            if (log.isDebugEnabled())
-                log.debug("Will submit JoinTask: partitionId="
-                        + partitionId);
+    final List<Future> futures = new LinkedList<Future>();
 
-            /*
-             * Note: Since there is only a single binding set, we send a
-             * serializable thick iterator to the client.
-             */
-            final ThickAsynchronousIterator<IBindingSet[]> sourceItr = newBindingSetIterator(bindingSet);
+    while (itr.hasNext()) {
 
-            final JoinTaskFactoryTask factoryTask = new JoinTaskFactoryTask(
-                    scaleOutIndexName, rule, joinNexusFactory, order,
-                    0/* orderIndex */, partitionId, masterProxy, masterUUID,
-                    sourceItr, ruleState.getKeyOrder(), 
-                    ruleState.getRequiredVars());
+      final PartitionLocator locator = itr.next();
 
-            final IDataService dataService = fed.getDataService(locator
-                    .getDataServiceUUID());
+      final int partitionId = locator.getPartitionId();
 
-            /*
-             * Submit the JoinTask. It will begin to execute when it is
-             * scheduled by the ConcurrencyManager. When it executes it will
-             * consume the [initialBindingSet].
-             */
-            final Future f;
+      if (log.isDebugEnabled()) log.debug("Will submit JoinTask: partitionId=" + partitionId);
 
-            try {
+      /*
+       * Note: Since there is only a single binding set, we send a
+       * serializable thick iterator to the client.
+       */
+      final ThickAsynchronousIterator<IBindingSet[]> sourceItr = newBindingSetIterator(bindingSet);
 
-                f = dataService.submit(factoryTask);
+      final JoinTaskFactoryTask factoryTask =
+          new JoinTaskFactoryTask(
+              scaleOutIndexName,
+              rule,
+              joinNexusFactory,
+              order,
+              0 /* orderIndex */,
+              partitionId,
+              masterProxy,
+              masterUUID,
+              sourceItr,
+              ruleState.getKeyOrder(),
+              ruleState.getRequiredVars());
 
-            } catch (Exception ex) {
+      final IDataService dataService = fed.getDataService(locator.getDataServiceUUID());
 
-                throw new ExecutionException("Could not submit: task="
-                        + factoryTask, ex);
+      /*
+       * Submit the JoinTask. It will begin to execute when it is
+       * scheduled by the ConcurrencyManager. When it executes it will
+       * consume the [initialBindingSet].
+       */
+      final Future f;
 
-            }
+      try {
 
-            /*
-             * Add to the list of futures that we need to await.
-             */
-            futures.add(f);
+        f = dataService.submit(factoryTask);
 
-        }
+      } catch (Exception ex) {
 
-        return futures;
+        throw new ExecutionException("Could not submit: task=" + factoryTask, ex);
+      }
 
+      /*
+       * Add to the list of futures that we need to await.
+       */
+      futures.add(f);
     }
 
-    /**
-     * Await the {@link JoinTaskFactoryTask} {@link Future}s.
-     * <p>
-     * Note: the result for a {@link JoinTaskFactoryTask} {@link Future} is
-     * a {@link DistributedJoinTask} {@link Future}.
-     * 
-     * @param factoryTaskFutures
-     *            A list of {@link Future}s, with one {@link Future} for
-     *            each index partition that is spanned by the
-     *            {@link IAccessPath} for the first {@link IPredicate} in
-     *            the evaluation order.
-     * 
-     * @return A list of {@link DistributedJoinTask} {@link Future}s. There
-     *         will be one element in the list for each
-     *         {@link JoinTaskFactoryTask} {@link Future} in the caller's
-     *         list. The elements will be in the same order.
-     * 
-     * @throws InterruptedException
-     *             if the master itself was interrupted.
-     * @throws ExecutionExceptions
-     *             if any of the factory tasks fail.
+    return futures;
+  }
+
+  /**
+   * Await the {@link JoinTaskFactoryTask} {@link Future}s.
+   *
+   * <p>Note: the result for a {@link JoinTaskFactoryTask} {@link Future} is a {@link
+   * DistributedJoinTask} {@link Future}.
+   *
+   * @param factoryTaskFutures A list of {@link Future}s, with one {@link Future} for each index
+   *     partition that is spanned by the {@link IAccessPath} for the first {@link IPredicate} in
+   *     the evaluation order.
+   * @return A list of {@link DistributedJoinTask} {@link Future}s. There will be one element in the
+   *     list for each {@link JoinTaskFactoryTask} {@link Future} in the caller's list. The elements
+   *     will be in the same order.
+   * @throws InterruptedException if the master itself was interrupted.
+   * @throws ExecutionExceptions if any of the factory tasks fail.
+   */
+  protected List<Future<Void>> awaitFactoryFutures(final List<Future> factoryTaskFutures)
+      throws InterruptedException, ExecutionExceptions {
+
+    final int size = factoryTaskFutures.size();
+
+    if (log.isDebugEnabled()) log.debug("#futures=" + size);
+
+    int ndone = 0;
+
+    /*
+     * A list containing any join tasks that were successfully created.
+     * Since we process the factory task futures in order the list will
+     * be in the same order as the factory task futures.
      */
-    protected List<Future<Void>> awaitFactoryFutures(
-            final List<Future> factoryTaskFutures) throws InterruptedException,
-            ExecutionExceptions {
+    final List<Future<Void>> joinTaskFutures = new ArrayList<Future<Void>>(size);
 
-        final int size = factoryTaskFutures.size();
+    final Iterator<Future> itr = factoryTaskFutures.iterator();
 
-        if (log.isDebugEnabled())
-            log.debug("#futures=" + size);
+    /*
+     * Initially empty. Populated with an errors encountered when trying
+     * to execute the _factory_ tasks.
+     */
+    final List<ExecutionException> causes = new LinkedList<ExecutionException>();
 
-        int ndone = 0;
+    /*
+     * Process all factory tasks.
+     *
+     * Note: if an error occurs for any factory task, then we cancel the
+     * remaining factory tasks and also cancel any join task that was
+     * already started.
+     */
+    while (itr.hasNext()) {
 
-        /*
-         * A list containing any join tasks that were successfully created.
-         * Since we process the factory task futures in order the list will
-         * be in the same order as the factory task futures.
-         */
-        final List<Future<Void>> joinTaskFutures = new ArrayList<Future<Void>>(
-                size);
+      /*
+       * Note: The Future of the JoinFactoryTask returns the Future of
+       * the JoinTask.
+       */
 
-        final Iterator<Future> itr = factoryTaskFutures.iterator();
+      // future for the JoinTaskFactoryTask.
+      final Future factoryTaskFuture = itr.next();
 
-        /*
-         * Initially empty. Populated with an errors encountered when trying
-         * to execute the _factory_ tasks.
-         */
-        final List<ExecutionException> causes = new LinkedList<ExecutionException>();
+      if (log.isDebugEnabled()) log.debug("Waiting for factoryTask");
 
-        /*
-         * Process all factory tasks.
-         * 
-         * Note: if an error occurs for any factory task, then we cancel the
-         * remaining factory tasks and also cancel any join task that was
-         * already started.
-         */
-        while (itr.hasNext()) {
+      // wait for the JoinTaskFactoryTask to finish.
+      final Future<Void> joinTaskFuture;
 
-            /*
-             * Note: The Future of the JoinFactoryTask returns the Future of
-             * the JoinTask.
-             */
-
-            // future for the JoinTaskFactoryTask.
-            final Future factoryTaskFuture = itr.next();
-
-            if (log.isDebugEnabled())
-                log.debug("Waiting for factoryTask");
-
-            // wait for the JoinTaskFactoryTask to finish.
-            final Future<Void> joinTaskFuture;
-
-            try {
-
-                if (!causes.isEmpty()) {
-
-                    /*
-                     * We have to abort, so cancel the factory task in case
-                     * it is still running but fall through and try to get
-                     * its future in case it has already created the join
-                     * task.
-                     */
-
-                    factoryTaskFuture.cancel(true/* mayInterruptIfRunning */);
-
-                }
-
-                // log.fatal("\nWaiting on factoryTaskFuture: "+factoryTaskFuture);
-                joinTaskFuture = (Future<Void>) factoryTaskFuture.get();
-                // log.fatal("\nHave joinTaskFuture: "+joinTaskFuture);
-
-            } catch (ExecutionException ex) {
-
-                causes.add(ex);
-
-                /*
-                 * Note: This is here because the ExecutionExceptions that
-                 * we throw does not print out all of its stack traces.
-                 * 
-                 * @todo log iff unexpected exception class or get all
-                 * traces from ExecutionExceptions class.
-                 */
-                log.error(ex, ex);
-
-                continue;
-
-            }
-
-            if (causes.isEmpty()) {
-
-                // no errors yet, so remember the future for the join task.
-                joinTaskFutures.add(joinTaskFuture);
-
-            } else {
-
-                // cancel the join task since we have to abort anyway.
-                joinTaskFuture.cancel(true/* mayInterruptIfRunning */);
-
-            }
-
-            ndone++;
-
-            if (log.isDebugEnabled())
-                log.debug("ndone=" + ndone + " of " + size);
-
-        }
+      try {
 
         if (!causes.isEmpty()) {
 
-            for (Future<Void> f : joinTaskFutures) {
+          /*
+           * We have to abort, so cancel the factory task in case
+           * it is still running but fall through and try to get
+           * its future in case it has already created the join
+           * task.
+           */
 
-                // cancel since we have to abort anyway.
-                f.cancel(true/* mayInterruptIfRunning */);
-
-            }
-
-            throw new ExecutionExceptions(causes);
-
+          factoryTaskFuture.cancel(true /* mayInterruptIfRunning */);
         }
 
-        if (log.isDebugEnabled())
-            log.debug("All factory tasks done: #futures=" + size);
+        // log.fatal("\nWaiting on factoryTaskFuture: "+factoryTaskFuture);
+        joinTaskFuture = (Future<Void>) factoryTaskFuture.get();
+        // log.fatal("\nHave joinTaskFuture: "+joinTaskFuture);
 
-        return joinTaskFutures;
+      } catch (ExecutionException ex) {
 
+        causes.add(ex);
+
+        /*
+         * Note: This is here because the ExecutionExceptions that
+         * we throw does not print out all of its stack traces.
+         *
+         * @todo log iff unexpected exception class or get all
+         * traces from ExecutionExceptions class.
+         */
+        log.error(ex, ex);
+
+        continue;
+      }
+
+      if (causes.isEmpty()) {
+
+        // no errors yet, so remember the future for the join task.
+        joinTaskFutures.add(joinTaskFuture);
+
+      } else {
+
+        // cancel the join task since we have to abort anyway.
+        joinTaskFuture.cancel(true /* mayInterruptIfRunning */);
+      }
+
+      ndone++;
+
+      if (log.isDebugEnabled()) log.debug("ndone=" + ndone + " of " + size);
     }
 
+    if (!causes.isEmpty()) {
+
+      for (Future<Void> f : joinTaskFutures) {
+
+        // cancel since we have to abort anyway.
+        f.cancel(true /* mayInterruptIfRunning */);
+      }
+
+      throw new ExecutionExceptions(causes);
+    }
+
+    if (log.isDebugEnabled()) log.debug("All factory tasks done: #futures=" + size);
+
+    return joinTaskFutures;
+  }
 }

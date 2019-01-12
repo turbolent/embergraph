@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.solutions;
 
 import java.util.UUID;
-
 import org.embergraph.bop.DefaultQueryAttributes;
 import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.IQueryContext;
@@ -35,48 +34,43 @@ import org.embergraph.rwstore.sector.MemoryManager;
  * @version $Id$
  */
 public class MockQueryContext implements IQueryContext {
-    
-    private final UUID queryId;
 
-    private volatile IMemoryManager memoryManager;
+  private final UUID queryId;
 
-    private final IQueryAttributes queryAttributes = new DefaultQueryAttributes();
+  private volatile IMemoryManager memoryManager;
 
-    public MockQueryContext(final UUID queryId) {
+  private final IQueryAttributes queryAttributes = new DefaultQueryAttributes();
 
-        this.queryId = queryId;
+  public MockQueryContext(final UUID queryId) {
 
-        this.memoryManager = new MemoryManager(DirectBufferPool.INSTANCE);
+    this.queryId = queryId;
 
-    }
+    this.memoryManager = new MemoryManager(DirectBufferPool.INSTANCE);
+  }
 
-    public UUID getQueryId() {
-        return queryId;
-    }
+  public UUID getQueryId() {
+    return queryId;
+  }
 
-    public IMemoryManager getMemoryManager() {
-        return memoryManager;
-    }
+  public IMemoryManager getMemoryManager() {
+    return memoryManager;
+  }
 
-    public IQueryAttributes getAttributes() {
-        return queryAttributes;
-    }
-    
-    synchronized public void close() {
+  public IQueryAttributes getAttributes() {
+    return queryAttributes;
+  }
 
-        final IMemoryManager memoryManager = this.memoryManager;
-        
-        if (memoryManager != null)
-            memoryManager.clear();
-        
-        this.memoryManager = null;
+  public synchronized void close() {
 
-    }
-    
-    protected void finalize() throws Throwable {
-        
-        close();
-        
-    }
+    final IMemoryManager memoryManager = this.memoryManager;
 
+    if (memoryManager != null) memoryManager.clear();
+
+    this.memoryManager = null;
+  }
+
+  protected void finalize() throws Throwable {
+
+    close();
+  }
 }

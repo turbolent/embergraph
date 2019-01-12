@@ -21,79 +21,62 @@ package org.embergraph.blueprints;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
  * Aggregates test suites in increase dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll extends TestCase {
-    
-    /**
-     * Static flags to HA and/or Quorum to be excluded, preventing hangs in CI
-     */
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** Static flags to HA and/or Quorum to be excluded, preventing hangs in CI */
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * Aggregates the tests in increasing dependency order.
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Aggregates the tests in increasing dependency order. */
+  public static Test suite() {
+
+    /*
+     * log4j defaults to DEBUG which will produce simply huge amounts of
+     * logging information when running the unit tests. Therefore we
+     * explicitly set the default logging level to WARN. If you are using a
+     * log4j configuration file then this is unlikely to interact with your
+     * configuration, and in any case you can override specific loggers.
      */
-    public static Test suite()
     {
+      final Logger log = Logger.getRootLogger();
 
-        /*
-         * log4j defaults to DEBUG which will produce simply huge amounts of
-         * logging information when running the unit tests. Therefore we
-         * explicitly set the default logging level to WARN. If you are using a
-         * log4j configuration file then this is unlikely to interact with your
-         * configuration, and in any case you can override specific loggers.
-         */
-        {
+      if (log.getLevel().equals(Level.DEBUG)) {
 
-            final Logger log = Logger.getRootLogger();
+        log.setLevel(Level.WARN);
 
-            if (log.getLevel().equals(Level.DEBUG)) {
-
-                log.setLevel(Level.WARN);
-
-                log.warn("Defaulting debugging level to WARN for the unit tests");
-
-            }
-            
-        }
-        
-        final TestSuite suite = new TestSuite("blueprints");
-
-        
-        //Factory and client configuration test cases.
-        suite.addTestSuite(TestEmbergraphGraphClientNSS.class);
-        suite.addTestSuite(TestEmbergraphGraphFactoryNSS.class);
-        suite.addTestSuite(TestEmbergraphGraphFactoryFile.class);
-        suite.addTestSuite(TestEmbergraphGraphEmbeddedRepository.class);
-
-        //Blueprints related test cases
-        //See BLZG-1415 
-        //suite.addTestSuite(org.embergraph.blueprints.TestEmbergraphGraphEmbeddedTransactional.class);
-        suite.addTestSuite(TestEmbergraphGraphClientInMemorySail.class);
-        //See BLZG-1415 
-        suite.addTestSuite(org.embergraph.blueprints.TestPathConstraints.class);
-        
-        return suite;
-        
+        log.warn("Defaulting debugging level to WARN for the unit tests");
+      }
     }
-    
+
+    final TestSuite suite = new TestSuite("blueprints");
+
+    // Factory and client configuration test cases.
+    suite.addTestSuite(TestEmbergraphGraphClientNSS.class);
+    suite.addTestSuite(TestEmbergraphGraphFactoryNSS.class);
+    suite.addTestSuite(TestEmbergraphGraphFactoryFile.class);
+    suite.addTestSuite(TestEmbergraphGraphEmbeddedRepository.class);
+
+    // Blueprints related test cases
+    // See BLZG-1415
+    // suite.addTestSuite(org.embergraph.blueprints.TestEmbergraphGraphEmbeddedTransactional.class);
+    suite.addTestSuite(TestEmbergraphGraphClientInMemorySail.class);
+    // See BLZG-1415
+    suite.addTestSuite(org.embergraph.blueprints.TestPathConstraints.class);
+
+    return suite;
+  }
 }

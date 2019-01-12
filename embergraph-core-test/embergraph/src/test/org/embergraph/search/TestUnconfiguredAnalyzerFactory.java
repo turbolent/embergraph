@@ -22,23 +22,50 @@ package org.embergraph.search;
 
 public class TestUnconfiguredAnalyzerFactory extends AbstractAnalyzerFactoryTest {
 
-	public TestUnconfiguredAnalyzerFactory() {
-	}
+  public TestUnconfiguredAnalyzerFactory() {}
 
-	public TestUnconfiguredAnalyzerFactory(String arg0) {
-		super(arg0);
-	}
+  public TestUnconfiguredAnalyzerFactory(String arg0) {
+    super(arg0);
+  }
 
-	@Override
-	String[] getExtraProperties() {
-		return new String[]{
-			FullTextIndex.Options.ANALYZER_FACTORY_CLASS, ConfigurableAnalyzerFactory.class.getName(),
-		};
-	}
-	
-    public void testConfiguredLanguages() {
-    	checkConfig("StandardAnalyzer", "por", "pt", "zho", "chi", "zh", "jpn", "ja", "kor", "ko", "ces", "cze", "cs", "dut", "nld", "nl", 
-    			"deu", "ger", "de", "gre", "ell", "el", "rus", "ru", "th", "tha", "en", "eng", "", null);
-    }
+  @Override
+  String[] getExtraProperties() {
+    return new String[] {
+      FullTextIndex.Options.ANALYZER_FACTORY_CLASS, ConfigurableAnalyzerFactory.class.getName(),
+    };
+  }
 
+  public void testConfiguredLanguages() {
+    checkConfig(
+        "StandardAnalyzer",
+        "por",
+        "pt",
+        "zho",
+        "chi",
+        "zh",
+        "jpn",
+        "ja",
+        "kor",
+        "ko",
+        "ces",
+        "cze",
+        "cs",
+        "dut",
+        "nld",
+        "nl",
+        "deu",
+        "ger",
+        "de",
+        "gre",
+        "ell",
+        "el",
+        "rus",
+        "ru",
+        "th",
+        "tha",
+        "en",
+        "eng",
+        "",
+        null);
+  }
 }

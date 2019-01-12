@@ -22,51 +22,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 /**
- * An instance of this exception is thrown when a graph context is not well
- * formed. For example, the following is illegal:
- * 
+ * An instance of this exception is thrown when a graph context is not well formed. For example, the
+ * following is illegal:
+ *
  * <pre>
  * GRAPH uri1 { GRAPH uri2 ... }
  * </pre>
- * 
+ *
  * where uri1 != uri2.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class InvalidGraphContextException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public InvalidGraphContextException() {
-    }
+  /** */
+  public InvalidGraphContextException() {}
 
-    /**
-     * @param message
-     */
-    public InvalidGraphContextException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public InvalidGraphContextException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public InvalidGraphContextException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public InvalidGraphContextException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public InvalidGraphContextException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public InvalidGraphContextException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

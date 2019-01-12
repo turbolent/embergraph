@@ -24,24 +24,22 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for RDFS.
- * 
+ *
  * @see http://www.w3.org/2000/01/rdf-schema#
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RDFSVocabularyDecl implements VocabularyDecl {
 
-    static private final URI[] uris = new URI[]{
+  private static final URI[] uris =
+      new URI[] {
         new URIImpl(RDFS.NAMESPACE),
         RDFS.CLASS,
         RDFS.COMMENT,
@@ -58,15 +56,12 @@ public class RDFSVocabularyDecl implements VocabularyDecl {
         RDFS.SEEALSO,
         RDFS.SUBCLASSOF,
         RDFS.SUBPROPERTYOF,
-    };
+      };
 
-    public RDFSVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public RDFSVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

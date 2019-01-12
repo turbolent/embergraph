@@ -15,20 +15,21 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Resolverator
  *
- * Initialized with a Resolver object, wraps a standard iterator and resolves each returned object
+ * <p>Initialized with a Resolver object, wraps a standard iterator and resolves each returned
+ * object
  */
-
 public class Resolverator implements Iterator {
 
-	private final Iterator m_iter;
-	protected final Object m_context;
-	private final Resolver m_resolver;
-	
+  private final Iterator m_iter;
+  protected final Object m_context;
+  private final Resolver m_resolver;
+
   public Resolverator(Iterator iter, Object context, Resolver resolver) {
     m_iter = iter;
     m_context = context;
@@ -36,17 +37,15 @@ public class Resolverator implements Iterator {
   }
 
   public boolean hasNext() {
-  	return m_iter.hasNext();
+    return m_iter.hasNext();
   }
-  
+
   public Object next() {
-	  if (hasNext())
-		  return m_resolver.resolve(m_iter.next());
-	  else
-		  throw new NoSuchElementException("Resolverator");
+    if (hasNext()) return m_resolver.resolve(m_iter.next());
+    else throw new NoSuchElementException("Resolverator");
   }
-  
+
   public void remove() {
-  	m_iter.remove();
+    m_iter.remove();
   }
 }

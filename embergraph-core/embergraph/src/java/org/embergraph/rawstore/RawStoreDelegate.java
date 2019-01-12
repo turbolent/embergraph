@@ -21,136 +21,134 @@ import java.io.File;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.UUID;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.mdi.IResourceMetadata;
 
 /**
  * Simple delegation pattern.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class RawStoreDelegate implements IRawStore {
 
-    protected final IRawStore delegate;
-    
-    public RawStoreDelegate(final IRawStore delegate) {
-        this.delegate = delegate;
-    }
+  protected final IRawStore delegate;
 
-    @Override
-    public void close() {
-        delegate.close();
-    }
+  public RawStoreDelegate(final IRawStore delegate) {
+    this.delegate = delegate;
+  }
 
-    @Override
-    public void delete(long addr) {
-        delegate.delete(addr);
-    }
+  @Override
+  public void close() {
+    delegate.close();
+  }
 
-    @Override
-    public void deleteResources() {
-        delegate.deleteResources();
-    }
+  @Override
+  public void delete(long addr) {
+    delegate.delete(addr);
+  }
 
-    @Override
-    public void destroy() {
-        delegate.destroy();
-    }
+  @Override
+  public void deleteResources() {
+    delegate.deleteResources();
+  }
 
-    @Override
-    public void force(boolean metadata) {
-        delegate.force(metadata);
-    }
+  @Override
+  public void destroy() {
+    delegate.destroy();
+  }
 
-    @Override
-    public int getByteCount(long addr) {
-        return delegate.getByteCount(addr);
-    }
+  @Override
+  public void force(boolean metadata) {
+    delegate.force(metadata);
+  }
 
-    @Override
-    public CounterSet getCounters() {
-        return delegate.getCounters();
-    }
+  @Override
+  public int getByteCount(long addr) {
+    return delegate.getByteCount(addr);
+  }
 
-    @Override
-    public File getFile() {
-        return delegate.getFile();
-    }
+  @Override
+  public CounterSet getCounters() {
+    return delegate.getCounters();
+  }
 
-    @Override
-    public long getOffset(long addr) {
-        return delegate.getOffset(addr);
-    }
+  @Override
+  public File getFile() {
+    return delegate.getFile();
+  }
 
-    @Override
-    public long getPhysicalAddress(final long addr) {
-        return delegate.getPhysicalAddress(addr);
-    }
+  @Override
+  public long getOffset(long addr) {
+    return delegate.getOffset(addr);
+  }
 
-    @Override
-    public IResourceMetadata getResourceMetadata() {
-        return delegate.getResourceMetadata();
-    }
+  @Override
+  public long getPhysicalAddress(final long addr) {
+    return delegate.getPhysicalAddress(addr);
+  }
 
-    @Override
-    public UUID getUUID() {
-        return delegate.getUUID();
-    }
+  @Override
+  public IResourceMetadata getResourceMetadata() {
+    return delegate.getResourceMetadata();
+  }
 
-    @Override
-    public boolean isFullyBuffered() {
-        return delegate.isFullyBuffered();
-    }
+  @Override
+  public UUID getUUID() {
+    return delegate.getUUID();
+  }
 
-    @Override
-    public boolean isOpen() {
-        return delegate.isOpen();
-    }
+  @Override
+  public boolean isFullyBuffered() {
+    return delegate.isFullyBuffered();
+  }
 
-    @Override
-    public boolean isReadOnly() {
-        return delegate.isReadOnly();
-    }
+  @Override
+  public boolean isOpen() {
+    return delegate.isOpen();
+  }
 
-    @Override
-    public boolean isStable() {
-        return delegate.isStable();
-    }
+  @Override
+  public boolean isReadOnly() {
+    return delegate.isReadOnly();
+  }
 
-    @Override
-    public ByteBuffer read(long addr) {
-        return delegate.read(addr);
-    }
+  @Override
+  public boolean isStable() {
+    return delegate.isStable();
+  }
 
-    @Override
-    public long size() {
-        return delegate.size();
-    }
+  @Override
+  public ByteBuffer read(long addr) {
+    return delegate.read(addr);
+  }
 
-    @Override
-    public long toAddr(int nbytes, long offset) {
-        return delegate.toAddr(nbytes, offset);
-    }
+  @Override
+  public long size() {
+    return delegate.size();
+  }
 
-    @Override
-    public String toString(long addr) {
-        return delegate.toString(addr);
-    }
+  @Override
+  public long toAddr(int nbytes, long offset) {
+    return delegate.toAddr(nbytes, offset);
+  }
 
-    @Override
-    public long write(ByteBuffer data) {
-        return delegate.write(data);
-    }
+  @Override
+  public String toString(long addr) {
+    return delegate.toString(addr);
+  }
 
-    @Override
-    public IPSOutputStream getOutputStream() {
-        return delegate.getOutputStream();
-    }
+  @Override
+  public long write(ByteBuffer data) {
+    return delegate.write(data);
+  }
 
-    @Override
-    public InputStream getInputStream(long addr) {
-        return delegate.getInputStream(addr);
-    }
+  @Override
+  public IPSOutputStream getOutputStream() {
+    return delegate.getOutputStream();
+  }
 
+  @Override
+  public InputStream getInputStream(long addr) {
+    return delegate.getInputStream(addr);
+  }
 }

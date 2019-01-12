@@ -25,43 +25,32 @@ package org.embergraph.striterator;
 
 /**
  * An iterator that will visit a single value.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SingleValueChunkedIterator<E> extends ChunkedArrayIterator<E> {
 
-    /**
-     * @param e
-     *            The value to be visited.
-     */
-    public SingleValueChunkedIterator(final E e) {
+  /** @param e The value to be visited. */
+  public SingleValueChunkedIterator(final E e) {
 
-        this(e, null/* keyOrder */);
+    this(e, null /* keyOrder */);
+  }
 
-    }
+  /**
+   * @param e The value to be visited (MAY not be <code>null</code>).
+   * @param keyOrder The natural sort order (MAY be <code>null</code>).
+   */
+  public SingleValueChunkedIterator(final E e, final IKeyOrder<E> keyOrder) {
 
-    /**
-     * @param e
-     *            The value to be visited (MAY not be <code>null</code>).
-     * @param keyOrder
-     *            The natural sort order (MAY be <code>null</code>).
-     */
-    public SingleValueChunkedIterator(final E e, final IKeyOrder<E> keyOrder) {
+    super(1, alloc(e), keyOrder);
+  }
 
-        super( 1, alloc(e), keyOrder);
-        
-    }
-    
-    @SuppressWarnings("unchecked")
-    static private <E> E[] alloc(final E e) {
-        
-        if (e == null)
-            throw new IllegalArgumentException();
-        
-        return (E[]) java.lang.reflect.Array.newInstance(e.getClass()
-                .getComponentType(), 1);
-        
-    }
-    
+  @SuppressWarnings("unchecked")
+  private static <E> E[] alloc(final E e) {
+
+    if (e == null) throw new IllegalArgumentException();
+
+    return (E[]) java.lang.reflect.Array.newInstance(e.getClass().getComponentType(), 1);
+  }
 }

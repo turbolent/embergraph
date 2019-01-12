@@ -15,28 +15,25 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-/**
- * A property key/value pair
- */
-
+/** A property key/value pair */
 public class XProperty implements IXProperty {
-	private String m_key;
-	private Object m_value;
+  private String m_key;
+  private Object m_value;
 
-	public XProperty(String key, Object value) {
-		m_key = key;
-		m_value = value;
-	}
+  public XProperty(String key, Object value) {
+    m_key = key;
+    m_value = value;
+  }
 
-	//------------------------------------------------------------------------
+  // ------------------------------------------------------------------------
 
-	public String getKey() {
-		return m_key;
-	}
+  public String getKey() {
+    return m_key;
+  }
 
-	//------------------------------------------------------------------------
+  // ------------------------------------------------------------------------
 
-	public Object getValue() {
-		return m_value;
-	}
+  public Object getValue() {
+    return m_value;
+  }
 }

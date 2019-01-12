@@ -29,69 +29,59 @@ import org.embergraph.counters.query.URLQueryModel;
 import org.embergraph.util.httpd.NanoHTTPD;
 
 /**
- * Factory for {@link IRenderer} objects based on a MIME type. For known MIME
- * types, the factory returns an instance of an {@link IRenderer} capable of
- * rendering for that MIME type. The instance will then decide whether or not it
- * can render the requested {@link ReportEnum} as not all report types can be
- * rendered for all MIME types. For example, a request for a graph of the event
- * data will fail if the MIME type is <code>text/plain</code>.
- * 
+ * Factory for {@link IRenderer} objects based on a MIME type. For known MIME types, the factory
+ * returns an instance of an {@link IRenderer} capable of rendering for that MIME type. The instance
+ * will then decide whether or not it can render the requested {@link ReportEnum} as not all report
+ * types can be rendered for all MIME types. For example, a request for a graph of the event data
+ * will fail if the MIME type is <code>text/plain</code>.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RendererFactory {
 
-    /**
-     * @param model
-     *            Describes the state of the controller (e.g., as parsed from
-     *            the URL query parameters).
-     * @param counterSelector
-     *            Selects the counters to be rendered.
-     * @param defaultMimeType
-     *            The negotiated or default MIME type.  This can be overridden
-     *            using {@value URLQueryModel#MIMETYPE}.
-     * 
-     * @return An {@link IRenderer} for that MIME type.
-     */
-    static public IRenderer get(final URLQueryModel model,
-            final ICounterSelector counterSelector, final String defaultMimeType) {
+  /**
+   * @param model Describes the state of the controller (e.g., as parsed from the URL query
+   *     parameters).
+   * @param counterSelector Selects the counters to be rendered.
+   * @param defaultMimeType The negotiated or default MIME type. This can be overridden using
+   *     {@value URLQueryModel#MIMETYPE}.
+   * @return An {@link IRenderer} for that MIME type.
+   */
+  public static IRenderer get(
+      final URLQueryModel model,
+      final ICounterSelector counterSelector,
+      final String defaultMimeType) {
 
-        if (model == null)
-            throw new IllegalArgumentException();
+    if (model == null) throw new IllegalArgumentException();
 
-        if (counterSelector == null)
-            throw new IllegalArgumentException();
+    if (counterSelector == null) throw new IllegalArgumentException();
 
-        if (defaultMimeType == null)
-            throw new IllegalArgumentException();
+    if (defaultMimeType == null) throw new IllegalArgumentException();
 
-        final String mimeType = (model.mimeType == null ? defaultMimeType
-                : model.mimeType);
+    final String mimeType = (model.mimeType == null ? defaultMimeType : model.mimeType);
 
-        if (mimeType.startsWith(NanoHTTPD.MIME_TEXT_PLAIN)) {
+    if (mimeType.startsWith(NanoHTTPD.MIME_TEXT_PLAIN)) {
 
-            return new TextRenderer(model, counterSelector);
+      return new TextRenderer(model, counterSelector);
 
-        } else if (mimeType.startsWith(NanoHTTPD.MIME_TEXT_HTML)) {
+    } else if (mimeType.startsWith(NanoHTTPD.MIME_TEXT_HTML)) {
 
-            return new XHTMLRenderer(model, counterSelector);
+      return new XHTMLRenderer(model, counterSelector);
 
-        } else if (mimeType.startsWith(NanoHTTPD.MIME_APPLICATION_XML)) {
+    } else if (mimeType.startsWith(NanoHTTPD.MIME_APPLICATION_XML)) {
 
-            /*
-             * @todo should be the charset specified with the MIME type and
-             * default per the HTTP RFC when none was specified.
-             */
-            final String charset = "UTF-8";
+      /*
+       * @todo should be the charset specified with the MIME type and
+       * default per the HTTP RFC when none was specified.
+       */
+      final String charset = "UTF-8";
 
-            return new XMLRenderer(model, counterSelector, charset);
+      return new XMLRenderer(model, counterSelector, charset);
 
-        } else {
+    } else {
 
-            throw new UnsupportedOperationException("mimeType=" + mimeType);
-
-        }
-        
+      throw new UnsupportedOperationException("mimeType=" + mimeType);
     }
-    
+  }
 }

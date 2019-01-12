@@ -26,42 +26,32 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.util.concurrent.Latch;
 
 /**
- * A synchronization aid that allows one or more threads to await asynchronous
- * writes on one or more scale-out indices. Once the counter reaches zero, all
- * waiting threads are released. The counter is decremented automatically once a
- * {@link KVOC} has been successfully written onto an index by an asynchronous
- * write operation. This class may also be used as a synchronization aid
- * independent of a {@link KVOC}
- * <p>
- * Since it is possible that the counter could be transiently zero as chunks are
- * being added and drained concurrently, you MUST {@link #inc() increment} the
- * counter before adding the first chunk and {@link #dec() decrement} the
- * counter after adding the last chunk. Threads may invoke {@link #await()} any
- * time after the counter has been incremented. They will not be released until
- * the counter is zero. If you have protected against transient zeros by
- * pre-incrementing the counter, the threads will not be released until the
- * asynchronous write operations are successfully completed.
- * <p>
- * The notification is based on {@link KVOC}, which associates an atomic counter
- * and a user-defined key with each tuple. Notices are generated when the atomic
- * counter is zero on decrement. Notices are aligned with the appropriate scope
- * by creating an instance of the {@link KVOScope} with that scope and then
- * pairing it with each {@link KVOC}.
- * 
+ * A synchronization aid that allows one or more threads to await asynchronous writes on one or more
+ * scale-out indices. Once the counter reaches zero, all waiting threads are released. The counter
+ * is decremented automatically once a {@link KVOC} has been successfully written onto an index by
+ * an asynchronous write operation. This class may also be used as a synchronization aid independent
+ * of a {@link KVOC}
+ *
+ * <p>Since it is possible that the counter could be transiently zero as chunks are being added and
+ * drained concurrently, you MUST {@link #inc() increment} the counter before adding the first chunk
+ * and {@link #dec() decrement} the counter after adding the last chunk. Threads may invoke {@link
+ * #await()} any time after the counter has been incremented. They will not be released until the
+ * counter is zero. If you have protected against transient zeros by pre-incrementing the counter,
+ * the threads will not be released until the asynchronous write operations are successfully
+ * completed.
+ *
+ * <p>The notification is based on {@link KVOC}, which associates an atomic counter and a
+ * user-defined key with each tuple. Notices are generated when the atomic counter is zero on
+ * decrement. Notices are aligned with the appropriate scope by creating an instance of the {@link
+ * KVOScope} with that scope and then pairing it with each {@link KVOC}.
+ *
  * @see KVOC
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <K>
- *            The generic type of the user-defined key.
- * 
- * @see IndexPartitionWriteTask, which is responsible for invoking
- *      {@link #dec()}.
+ * @param <K> The generic type of the user-defined key.
+ * @see IndexPartitionWriteTask, which is responsible for invoking {@link #dec()}.
  */
 public class KVOLatch extends Latch {
 
-    public KVOLatch() {
-
-    }
-
+  public KVOLatch() {}
 }

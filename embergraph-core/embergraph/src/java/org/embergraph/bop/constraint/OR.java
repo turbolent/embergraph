@@ -20,54 +20,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.constraint;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IBindingSet;
 
-/**
- * Imposes the constraint <code>x OR y</code>.
- */
+/** Imposes the constraint <code>x OR y</code>. */
 public class OR extends BOpBase implements BooleanValueExpression {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5066076800100837774L;
+  /** */
+  private static final long serialVersionUID = 5066076800100837774L;
 
-	public OR(final BooleanValueExpression x, final BooleanValueExpression y) {
+  public OR(final BooleanValueExpression x, final BooleanValueExpression y) {
 
-        this(new BOp[] { x, y }, null/*annocations*/);
+    this(new BOp[] {x, y}, null /*annocations*/);
+  }
 
-    }
+  /** Shallow copy constructor (required). */
+  public OR(final BOp[] args, final Map<String, Object> anns) {
+    super(args, anns);
 
-	/**
-     * Shallow copy constructor (required).
-     */
-    public OR(final BOp[] args, final Map<String, Object> anns) {
-    	super(args, anns);
-        
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+  }
 
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public OR(final OR op) {
+    super(op);
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public OR(final OR op) {
-        super(op);
-    }
+  @Override
+  public BooleanValueExpression get(final int i) {
+    return (BooleanValueExpression) super.get(i);
+  }
 
-    @Override
-    public BooleanValueExpression get(final int i) {
-    	return (BooleanValueExpression) super.get(i);
-    }
-    
-    public Boolean get(final IBindingSet s) {
+  public Boolean get(final IBindingSet s) {
 
-        return get(0).get(s) || get(1).get(s);
-
-    }
-    
+    return get(0).get(s) || get(1).get(s);
+  }
 }

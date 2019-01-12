@@ -17,94 +17,90 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.blueprints;
 
-
 /**
- * Class to test the EmbergraphGraphFactory against an embedded NSS to validate
- * client connection options and provide test suite coverage.
- * 
- * @author beebs
+ * Class to test the EmbergraphGraphFactory against an embedded NSS to validate client connection
+ * options and provide test suite coverage.
  *
+ * @author beebs
  */
-public class TestEmbergraphGraphFactoryNSS extends  AbstractTestNSSBlueprintsClient  {
+public class TestEmbergraphGraphFactoryNSS extends AbstractTestNSSBlueprintsClient {
 
-	public TestEmbergraphGraphFactoryNSS() {
-		super();
-	}
+  public TestEmbergraphGraphFactoryNSS() {
+    super();
+  }
 
-	public void setUp() throws Exception {
-		super.setUp();
-	}
+  public void setUp() throws Exception {
+    super.setUp();
+  }
 
-	public void testEmbergraphGraphConnectServiceURL() {
+  public void testEmbergraphGraphConnectServiceURL() {
 
-		final String testURL = getServiceURL() + "/";
+    final String testURL = getServiceURL() + "/";
 
-		testPrint("Connecting to Remote Repository at " + testURL);
+    testPrint("Connecting to Remote Repository at " + testURL);
 
-		EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
+    EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
 
-		boolean hadException = false;
+    boolean hadException = false;
 
-		try {
-			testEmbergraphGraph(testGraph);
-		} catch (Exception e) {
-			hadException = true;
-		}
+    try {
+      testEmbergraphGraph(testGraph);
+    } catch (Exception e) {
+      hadException = true;
+    }
 
-		if (!hadException)
-			fail("This test should not work.");
-	}
+    if (!hadException) fail("This test should not work.");
+  }
 
-	public void testEmbergraphGraphConnectSparqlEndpoint() {
+  public void testEmbergraphGraphConnectSparqlEndpoint() {
 
-		final String testURL = getServiceURL() + "/sparql";
+    final String testURL = getServiceURL() + "/sparql";
 
-		testPrint("Connecting to Remote Repository at " + testURL);
+    testPrint("Connecting to Remote Repository at " + testURL);
 
-		EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
+    EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
 
-		try {
-			testEmbergraphGraph(testGraph);
-		} catch (Exception e) {
-			fail(e.toString());
-		}
-	}
+    try {
+      testEmbergraphGraph(testGraph);
+    } catch (Exception e) {
+      fail(e.toString());
+    }
+  }
 
-	public void testEmbergraphGraphConnectSparqlEndpointWithNamespace() {
+  public void testEmbergraphGraphConnectSparqlEndpointWithNamespace() {
 
-		final String testURL = getServiceURL() + "/namespace/" + super.getNamespace() + "/sparql";
+    final String testURL = getServiceURL() + "/namespace/" + super.getNamespace() + "/sparql";
 
-		testPrint("Connecting to Remote Repository at " + testURL);
+    testPrint("Connecting to Remote Repository at " + testURL);
 
-		EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
+    EmbergraphGraph testGraph = EmbergraphGraphFactory.connect(testURL);
 
-		try {
-			testEmbergraphGraph(testGraph);
-		} catch (Exception e) {
+    try {
+      testEmbergraphGraph(testGraph);
+    } catch (Exception e) {
 
-			fail(e.toString());
-		}
-	}
+      fail(e.toString());
+    }
+  }
 
-	public void testEmbergraphGraphConnectHostPort() {
+  public void testEmbergraphGraphConnectHostPort() {
 
-		EmbergraphGraph testGraph = EmbergraphGraphFactory.connect("localhost", super.getPort());
+    EmbergraphGraph testGraph = EmbergraphGraphFactory.connect("localhost", super.getPort());
 
-		try {
-			testEmbergraphGraph(testGraph);
-		} catch (Exception e) {
-			fail(e.toString());
-		}
-	}
+    try {
+      testEmbergraphGraph(testGraph);
+    } catch (Exception e) {
+      fail(e.toString());
+    }
+  }
 
-	@Override
-	protected EmbergraphGraph getNewGraph(String file) throws Exception {
-		
-		final String testURL = getServiceURL() + "/sparql";
+  @Override
+  protected EmbergraphGraph getNewGraph(String file) throws Exception {
 
-		testPrint("Connecting to Remote Repository at " + testURL);
+    final String testURL = getServiceURL() + "/sparql";
 
-		return new EmbergraphGraphClient(testURL);
-	}
+    testPrint("Connecting to Remote Repository at " + testURL);
 
+    return new EmbergraphGraphClient(testURL);
+  }
 }

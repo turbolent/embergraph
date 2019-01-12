@@ -25,45 +25,37 @@ package org.embergraph.btree;
 
 /**
  * Iterator disallows {@link #remove()}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ReadOnlyEntryIterator<E> implements ITupleIterator<E> {
 
-    private final ITupleIterator<E> src;
-    
-    /**
-     * 
-     */
-    public ReadOnlyEntryIterator(final ITupleIterator<E> src) {
-        
-        this.src = src;
-        
-    }
+  private final ITupleIterator<E> src;
 
-    public ITuple<E> next() {
-        
-        return src.next();
-        
-    }
+  /** */
+  public ReadOnlyEntryIterator(final ITupleIterator<E> src) {
 
-    public boolean hasNext() {
-        
-        return src.hasNext();
-        
-    }
+    this.src = src;
+  }
 
-    /**
-     * Disallowed.
-     * 
-     * @throws UnsupportedOperationException
-     *             always
-     */
-    public void remove() {
-        
-        throw new UnsupportedOperationException();
-        
-    }
+  public ITuple<E> next() {
 
+    return src.next();
+  }
+
+  public boolean hasNext() {
+
+    return src.hasNext();
+  }
+
+  /**
+   * Disallowed.
+   *
+   * @throws UnsupportedOperationException always
+   */
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
 }

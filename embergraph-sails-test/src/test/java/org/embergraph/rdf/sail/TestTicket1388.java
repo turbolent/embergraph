@@ -29,7 +29,8 @@ import java.io.Reader;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
-
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
@@ -41,119 +42,108 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
-/**
- * Test suite for ticket #1388: xsd:date function
- */
+/** Test suite for ticket #1388: xsd:date function */
 public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
 
-    public Properties getTriplesNoInference() {
-        
-        Properties props = super.getProperties();
-        
-        // triples with sids
-        props.setProperty(EmbergraphSail.Options.QUADS, "false");
-        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
-        
-        // no inference
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
-        
-        return props;
-        
-    }
-    
-    /**
-     * 
-     */
-    public TestTicket1388() {
-    }
+  public Properties getTriplesNoInference() {
 
-    /**
-     * @param arg0
-     */
-    public TestTicket1388(String arg0) {
-        super(arg0);
-    }
-    
-    /**
-     * When loading quads into a triple store, the context is striped away by
-     * default.
-     */
-    public void testDateFunction() throws Exception {
+    Properties props = super.getProperties();
 
-        EmbergraphSailRepositoryConnection cxn = null;
+    // triples with sids
+    props.setProperty(EmbergraphSail.Options.QUADS, "false");
+    props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
 
-        final EmbergraphSail sail = getSail(getTriplesNoInference());
+    // no inference
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
+    return props;
+  }
+
+  /** */
+  public TestTicket1388() {}
+
+  /** @param arg0 */
+  public TestTicket1388(String arg0) {
+    super(arg0);
+  }
+
+  /** When loading quads into a triple store, the context is striped away by default. */
+  public void testDateFunction() throws Exception {
+
+    EmbergraphSailRepositoryConnection cxn = null;
+
+    final EmbergraphSail sail = getSail(getTriplesNoInference());
+
+    try {
+
+      sail.initialize();
+
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+
+      cxn.begin();
+
+      try {
+        InputStream is = TestTicket1388.class.getResourceAsStream("testTicket1388.n3");
+        if (is == null) {
+          throw new IOException("Could not locate resource: " + "testTicket1388.n3");
+        }
+        Reader reader = new InputStreamReader(new BufferedInputStream(is));
         try {
+          cxn.add(reader, "", RDFFormat.N3);
+        } finally {
+          reader.close();
+        }
+        cxn.commit();
+      } catch (OpenRDFException ex) {
+        cxn.rollback();
+        throw ex;
+      }
+      cxn.commit();
 
-            sail.initialize();
-            
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-            
-            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
-            
-            cxn.begin();
-           
-            try {
-				InputStream is = TestTicket1388.class.getResourceAsStream("testTicket1388.n3");
-				if (is == null) {
-					throw new IOException("Could not locate resource: " + "testTicket1388.n3");
-				}
-				Reader reader = new InputStreamReader(new BufferedInputStream(is));
-				try {
-					cxn.add(reader, "", RDFFormat.N3);
-				} finally {
-					reader.close();
-				}
-				cxn.commit();
-			} catch (OpenRDFException ex) {
-				cxn.rollback();
-				throw ex;
-			}
-            cxn.commit();
+      final String query =
+          "SELECT ?myDate (count(?doc) as ?countDoc) \n "
+              + //
+              "{ ?doc rdf:type <http://www.example.com/Document> . \n "
+              + " ?doc <http://www.example.com/created> ?date . \n "
+              + " filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) >= \"2014-04-11\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n "
+              + " filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) < \"2014-05-30\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n "
+              + " bind((<http://www.w3.org/2001/XMLSchema#date>(?date)) as ?myDate) .\n "
+              + //
+              "} group by ?myDate";
 
-           final String query = "SELECT ?myDate (count(?doc) as ?countDoc) \n " + // 
-       			"{ ?doc rdf:type <http://www.example.com/Document> . \n " +
-    			" ?doc <http://www.example.com/created> ?date . \n " +
-    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) >= \"2014-04-11\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " +
-    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) < \"2014-05-30\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " +
-    			" bind((<http://www.w3.org/2001/XMLSchema#date>(?date)) as ?myDate) .\n " + // 
-    			"} group by ?myDate";
-            
+      final TupleQuery q = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 
-            final TupleQuery q = cxn.prepareTupleQuery(QueryLanguage.SPARQL,
-						query);
-			
-			final TupleQueryResult tqr = q.evaluate();
-			
-			final Collection<BindingSet> solution = new LinkedList<BindingSet>();
-			//[myDate="2014-04-11"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="3"^^<http://www.w3.org/2001/XMLSchema#integer>]
-			//[myDate="2014-05-29"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
-            solution.add(createBindingSet(new Binding[] {
+      final TupleQueryResult tqr = q.evaluate();
+
+      final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+      // [myDate="2014-04-11"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="3"^^<http://www.w3.org/2001/XMLSchema#integer>]
+      // [myDate="2014-05-29"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
+      solution.add(
+          createBindingSet(
+              new Binding[] {
                 new BindingImpl("myDate", new LiteralImpl("2014-04-11", XMLSchema.DATE)),
                 new BindingImpl("countDoc", new LiteralImpl(Integer.toString(3), XMLSchema.INTEGER))
-            }));
-            solution.add(createBindingSet(new Binding[] {
+              }));
+      solution.add(
+          createBindingSet(
+              new Binding[] {
                 new BindingImpl("myDate", new LiteralImpl("2014-05-29", XMLSchema.DATE)),
                 new BindingImpl("countDoc", new LiteralImpl(Integer.toString(2), XMLSchema.INTEGER))
-            }));
-                       
-            compare(tqr, solution);
-            
-			tqr.close();
-			
-        } finally {
-            if (cxn != null)
-                cxn.close();
-            sail.__tearDownUnitTest();
-        }
-    }
+              }));
 
+      compare(tqr, solution);
+
+      tqr.close();
+
+    } finally {
+      if (cxn != null) cxn.close();
+      sail.__tearDownUnitTest();
+    }
+  }
 }

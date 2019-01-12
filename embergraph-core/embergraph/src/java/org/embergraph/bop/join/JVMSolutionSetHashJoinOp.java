@@ -22,54 +22,42 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 
 /**
  * {@inheritDoc}
- * <p>
- * JVM Specific version.
- * 
+ *
+ * <p>JVM Specific version.
+ *
  * @see JVMHashJoinUtility
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: NamedSubqueryIncludeOp.java 5178 2011-09-12 19:09:23Z
- *          thompsonbry $
+ * @version $Id: NamedSubqueryIncludeOp.java 5178 2011-09-12 19:09:23Z thompsonbry $
  */
 public class JVMSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Deep copy constructor.
-     */
-    public JVMSolutionSetHashJoinOp(JVMSolutionSetHashJoinOp op) {
+  /** Deep copy constructor. */
+  public JVMSolutionSetHashJoinOp(JVMSolutionSetHashJoinOp op) {
 
-        super(op);
-        
-    }
+    super(op);
+  }
 
-    /**
-     * Shallow copy constructor.
-     * 
-     * @param args
-     * @param annotations
-     */
-    public JVMSolutionSetHashJoinOp(final BOp[] args,
-            final Map<String, Object> annotations) {
+  /**
+   * Shallow copy constructor.
+   *
+   * @param args
+   * @param annotations
+   */
+  public JVMSolutionSetHashJoinOp(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
-        
-    }
+    super(args, annotations);
+  }
 
-    public JVMSolutionSetHashJoinOp(final BOp[] args, NV... annotations) {
+  public JVMSolutionSetHashJoinOp(final BOp[] args, NV... annotations) {
 
-        this(args, NV.asMap(annotations));
-        
-    }
-
+    this(args, NV.asMap(annotations));
+  }
 }

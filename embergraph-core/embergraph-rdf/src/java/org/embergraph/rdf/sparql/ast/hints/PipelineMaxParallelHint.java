@@ -29,55 +29,51 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Sets the maximum #of operator evaluation tasks which can execute
- * concurrently.
- * <p>
- * Note: "maxParallel" is a general property of the query engine. This query
- * hint does not change the structure of the query plan, but simply serves as a
- * directive to the query engine that it should not allow more than the
- * indicated number of parallel instances of the operator to execute
- * concurrently. This query hint is allowed in any scope. The hint is
- * transferred as an annotation onto all query plan operators generated from the
- * annotated scope.
- * 
+ * Sets the maximum #of operator evaluation tasks which can execute concurrently.
+ *
+ * <p>Note: "maxParallel" is a general property of the query engine. This query hint does not change
+ * the structure of the query plan, but simply serves as a directive to the query engine that it
+ * should not allow more than the indicated number of parallel instances of the operator to execute
+ * concurrently. This query hint is allowed in any scope. The hint is transferred as an annotation
+ * onto all query plan operators generated from the annotated scope.
+ *
  * @see PipelineOp.Annotations#MAX_PARALLEL
  */
 final class PipelineMaxParallelHint extends AbstractIntQueryHint {
 
-    protected PipelineMaxParallelHint() {
-        super(QueryHints.MAX_PARALLEL,
-                PipelineOp.Annotations.DEFAULT_MAX_PARALLEL);
+  protected PipelineMaxParallelHint() {
+    super(QueryHints.MAX_PARALLEL, PipelineOp.Annotations.DEFAULT_MAX_PARALLEL);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Integer value) {
+
+    if (op instanceof IJoinNode) {
+
+      /*
+       * Note: This is set on the queryHint Properties object and then
+       * transferred to the pipeline operator when it is generated.
+       */
+
+      _setQueryHint(context, scope, op, PipelineOp.Annotations.MAX_PARALLEL, value);
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Integer value) {
+    //        if (QueryHintScope.Query.equals(scope)) {
+    //
+    //            /*
+    //             * Also stuff the query hint on the global context for things which
+    //             * look there.
+    //             */
+    //
+    //            conditionalSetGlobalProperty(context,
+    //                    PipelineOp.Annotations.MAX_PARALLEL, value);
+    //
+    //        }
 
-        if (op instanceof IJoinNode) {
-
-            /*
-             * Note: This is set on the queryHint Properties object and then
-             * transferred to the pipeline operator when it is generated.
-             */
-
-            _setQueryHint(context, scope, op,
-                    PipelineOp.Annotations.MAX_PARALLEL, value);
-
-        }
-
-//        if (QueryHintScope.Query.equals(scope)) {
-//
-//            /*
-//             * Also stuff the query hint on the global context for things which
-//             * look there.
-//             */
-//
-//            conditionalSetGlobalProperty(context,
-//                    PipelineOp.Annotations.MAX_PARALLEL, value);
-//
-//        }
-
-    }
-
+  }
 }

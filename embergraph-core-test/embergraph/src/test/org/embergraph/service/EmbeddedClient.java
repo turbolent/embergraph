@@ -23,130 +23,99 @@ package org.embergraph.service;
 
 import java.util.Properties;
 
-
 /**
- * A client for an embedded federation (the client and the data services all run
- * in the same process).
- * 
+ * A client for an embedded federation (the client and the data services all run in the same
+ * process).
+ *
  * @see EmbeddedFederation
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
 
-    /**
-     * 
-     * @param properties
-     *            See {@link EmbeddedFederation.Options}.
-     */
-    public EmbeddedClient(final Properties properties) {
+  /** @param properties See {@link EmbeddedFederation.Options}. */
+  public EmbeddedClient(final Properties properties) {
 
-        super(properties);
-        
-    }
-    
-    /**
-     * The federation and <code>null</code> iff not connected.
-     */
-    private EmbeddedFederation<T> fed = null;
+    super(properties);
+  }
 
-    synchronized public boolean isConnected() {
-        
-        return fed != null;
-        
-    }
-    
-    synchronized public void disconnect(final boolean immediateShutdown) {
-        
-        if (fed != null) {
+  /** The federation and <code>null</code> iff not connected. */
+  private EmbeddedFederation<T> fed = null;
 
-            if(immediateShutdown) {
-                
-                fed.shutdownNow();
-                
-            } else {
-                
-                fed.shutdown();
-                
-            }
-            
-        }
-        
-        fed = null;
+  public synchronized boolean isConnected() {
 
-    }
-    
-    synchronized public IEmbergraphFederation<T> getFederation() {
+    return fed != null;
+  }
 
-        if (fed == null) {
+  public synchronized void disconnect(final boolean immediateShutdown) {
 
-            throw new IllegalStateException();
+    if (fed != null) {
 
-        }
+      if (immediateShutdown) {
 
-        return fed;
+        fed.shutdownNow();
 
+      } else {
+
+        fed.shutdown();
+      }
     }
 
-    synchronized public EmbeddedFederation<T> connect() {
+    fed = null;
+  }
 
-        if (fed == null) {
+  public synchronized IEmbergraphFederation<T> getFederation() {
 
-            fed = new EmbeddedFederation<T>(this);
+    if (fed == null) {
 
-        }
-
-        return fed;
-
+      throw new IllegalStateException();
     }
+
+    return fed;
+  }
+
+  public synchronized EmbeddedFederation<T> connect() {
+
+    if (fed == null) {
+
+      fed = new EmbeddedFederation<T>(this);
+    }
+
+    return fed;
+  }
+
+  /**
+   * Options for the embedded (in process) federation. Service instances will share the same
+   * configuration properties except for the name of the backing store file.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   */
+  public static interface Options extends IEmbergraphClient.Options, MetadataService.Options {
 
     /**
-     * Options for the embedded (in process) federation. Service instances will
-     * share the same configuration properties except for the name of the
-     * backing store file.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
+     * The name of the optional property whose value is the #of data services that will be
+     * (re-)started.
      */
-    public static interface Options extends IEmbergraphClient.Options,
-            MetadataService.Options {
+    public static String NDATA_SERVICES = EmbeddedFederation.class.getName() + ".ndataServices";
 
-        /**
-         * The name of the optional property whose value is the #of data
-         * services that will be (re-)started.
-         */
-        public static String NDATA_SERVICES = EmbeddedFederation.class
-                .getName()
-                + ".ndataServices";
+    /** The default is two (2). */
+    public static String DEFAULT_NDATA_SERVICES = "2";
 
-        /**
-         * The default is two (2).
-         */
-        public static String DEFAULT_NDATA_SERVICES = "2";
-
-        /**
-         * The name of the required property whose value is the name of the
-         * directory under which each metadata and data service will store their
-         * state (their journals and index segments).
-         * <p>
-         * Note: A set of subdirectories will be created under the specified
-         * data directory. Those subdirectories will be named by the UUID of the
-         * corresponding metadata or data service. In addition, the subdirectory
-         * corresponding to the metadata service will have a file named ".mds"
-         * to differentiate it from the data service directories. The presence
-         * of that ".mds" file is used to re-start the service as a metadata
-         * service rather than a data service.
-         * <p>
-         * Since a set of subdirectories will be created for the embedded
-         * federation, it is important to give each embedded federation its own
-         * data directory. Otherwise a new federation starting up with another
-         * federation's data directory will attempt to re-start that federation.
-         */
-        public static final String DATA_DIR = EmbeddedFederation.class
-                .getName()
-                + ".dataDir";
-
-    }
-
+    /**
+     * The name of the required property whose value is the name of the directory under which each
+     * metadata and data service will store their state (their journals and index segments).
+     *
+     * <p>Note: A set of subdirectories will be created under the specified data directory. Those
+     * subdirectories will be named by the UUID of the corresponding metadata or data service. In
+     * addition, the subdirectory corresponding to the metadata service will have a file named
+     * ".mds" to differentiate it from the data service directories. The presence of that ".mds"
+     * file is used to re-start the service as a metadata service rather than a data service.
+     *
+     * <p>Since a set of subdirectories will be created for the embedded federation, it is important
+     * to give each embedded federation its own data directory. Otherwise a new federation starting
+     * up with another federation's data directory will attempt to re-start that federation.
+     */
+    public static final String DATA_DIR = EmbeddedFederation.class.getName() + ".dataDir";
+  }
 }

@@ -25,22 +25,20 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
- * Reduced interface for the {@link LexiconRelation}'s term cache. This
- * interface was added because the term cache reference is actually passed into
- * some helper classes. The interface makes it clear when we are operating on
- * the term cache rather than some other concurrent map.
- * 
+ * Reduced interface for the {@link LexiconRelation}'s term cache. This interface was added because
+ * the term cache reference is actually passed into some helper classes. The interface makes it
+ * clear when we are operating on the term cache rather than some other concurrent map.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITermCache<K extends IV<?, ?>, V extends EmbergraphValue> {
 
-    int size();
-    
-    V get(K k);
+  int size();
 
-    V putIfAbsent(K k, V v);
+  V get(K k);
 
-    void clear();
-    
+  V putIfAbsent(K k, V v);
+
+  void clear();
 }

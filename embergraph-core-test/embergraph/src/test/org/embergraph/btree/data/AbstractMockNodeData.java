@@ -1,59 +1,50 @@
 package org.embergraph.btree.data;
 
 import java.io.OutputStream;
-
 import org.embergraph.btree.raba.IRaba;
 
 /**
- * Abstract base class for mock node and leaf data implementations for unit
- * tests.
- * 
+ * Abstract base class for mock node and leaf data implementations for unit tests.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 abstract class AbstractMockNodeData implements IAbstractNodeData {
 
-    // mutable.
-    final private IRaba keys;
+  // mutable.
+  private final IRaba keys;
 
-    final public int getKeyCount() {
+  public final int getKeyCount() {
 
-        return keys.size();
+    return keys.size();
+  }
 
-    }
+  public final IRaba getKeys() {
 
-    final public IRaba getKeys() {
+    return keys;
+  }
 
-        return keys;
+  public final byte[] getKey(final int index) {
 
-    }
+    return keys.get(index);
+  }
 
-    public final byte[] getKey(final int index) {
+  public final void copyKey(final int index, final OutputStream os) {
 
-        return keys.get(index);
+    keys.copy(index, os);
+  }
 
-    }
+  protected AbstractMockNodeData(final IRaba keys) {
 
-    final public void copyKey(final int index, final OutputStream os) {
+    if (keys == null) throw new IllegalArgumentException();
 
-        keys.copy(index, os);
+    //        Note: The HTree IRaba for keys does NOT report true for isKeys() since
+    //        it does not obey any of the contract for the B+Tree keys (unordered,
+    //        sparse, allows duplicates and nulls, not searchable).
+    //
+    //        if (!keys.isKeys())
+    //            throw new IllegalArgumentException();
 
-    }
-
-    protected AbstractMockNodeData(final IRaba keys) {
-
-        if (keys == null)
-            throw new IllegalArgumentException();
-
-//        Note: The HTree IRaba for keys does NOT report true for isKeys() since
-//        it does not obey any of the contract for the B+Tree keys (unordered,
-//        sparse, allows duplicates and nulls, not searchable).
-//        
-//        if (!keys.isKeys())
-//            throw new IllegalArgumentException();
-
-        this.keys = keys;
-
-    }
-
+    this.keys = keys;
+  }
 }

@@ -25,37 +25,26 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
- * Interface supports choice of either weak or soft references for cache
- * entries and makes it possible for the application to extend the metadata
- * associated with and entry in the {@link WeakValueCache}.
- * 
+ * Interface supports choice of either weak or soft references for cache entries and makes it
+ * possible for the application to extend the metadata associated with and entry in the {@link
+ * WeakValueCache}.
+ *
  * @author thompsonbry
  * @version $Id$
  */
-public interface IWeakRefCacheEntryFactory<K,T>
-{
+public interface IWeakRefCacheEntryFactory<K, T> {
 
-    /**
-     * Creates a weak reference object to serve as the value in the cache for
-     * the given application object.
-     * 
-     * @param key
-     *            The object identifier.
-     * 
-     * @param obj
-     *            The application object.
-     * 
-     * @param queue
-     *            The weak or soft reference object must be created such that it
-     *            will appear on this queue when the reference is cleared by the
-     *            garbage collector.
-     * 
-     * @return The new cache entry for that application object.
-     * 
-     * @see WeakReference
-     * @see SoftReference
-     */
-    
-    public IWeakRefCacheEntry<K,T> newCacheEntry( K key, T obj, ReferenceQueue<T> queue );
-    
+  /**
+   * Creates a weak reference object to serve as the value in the cache for the given application
+   * object.
+   *
+   * @param key The object identifier.
+   * @param obj The application object.
+   * @param queue The weak or soft reference object must be created such that it will appear on this
+   *     queue when the reference is cleared by the garbage collector.
+   * @return The new cache entry for that application object.
+   * @see WeakReference
+   * @see SoftReference
+   */
+  public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue);
 }

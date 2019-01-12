@@ -4,29 +4,27 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTAdd extends ASTUpdate {
 
-	private boolean silent;
+  private boolean silent;
 
-	public ASTAdd(int id) {
-		super(id);
-	}
+  public ASTAdd(int id) {
+    super(id);
+  }
 
-	public ASTAdd(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTAdd(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	/** Accept the visitor. **/
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
-	public void setSilent(boolean silent) {
-		this.silent = silent;
-	}
+  public void setSilent(boolean silent) {
+    this.silent = silent;
+  }
 
-	public boolean isSilent() {
-		return this.silent;
-	}
+  public boolean isSilent() {
+    return this.silent;
+  }
 }
 /* JavaCC - OriginalChecksum=0beafdd82b983011c7a68f5d763b3d15 (do not edit this line) */

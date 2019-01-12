@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.bop.join;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstraint;
@@ -27,32 +28,31 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * Special interface for pipelines hash join implementations, offering a method that
- * combines acceptance and outputting of solutions.
- * 
+ * Special interface for pipelines hash join implementations, offering a method that combines
+ * acceptance and outputting of solutions.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public interface PipelinedHashJoinUtility {
-    
-    /**
-     * AcceptAndOutputSolutions is a special method for building the hash index
-     * of the {@link JVMPipelinedHashIndex}, which accepts and immediately
-     * forwards relevant solutions (non-blocking index).
-     */
-    public long acceptAndOutputSolutions(
-            final UnsyncLocalOutputBuffer<IBindingSet> out,
-            final ICloseableIterator<IBindingSet[]> itr, final NamedSolutionSetStats stats,
-            final IConstraint[] joinConstraints, final PipelineOp subquery,
-            final IBindingSet[] bsFromBindingsSetSource, 
-            final IVariable<?>[] projectInVars, final IVariable<?> askVar,
-            final boolean isLastInvocation,
-            final int distinctProjectionBufferThreshold,
-            final int incomingBindingsBufferThreshold,
-            final BOpContext<IBindingSet> context);
 
-
+  /**
+   * AcceptAndOutputSolutions is a special method for building the hash index of the {@link
+   * JVMPipelinedHashIndex}, which accepts and immediately forwards relevant solutions (non-blocking
+   * index).
+   */
+  public long acceptAndOutputSolutions(
+      final UnsyncLocalOutputBuffer<IBindingSet> out,
+      final ICloseableIterator<IBindingSet[]> itr,
+      final NamedSolutionSetStats stats,
+      final IConstraint[] joinConstraints,
+      final PipelineOp subquery,
+      final IBindingSet[] bsFromBindingsSetSource,
+      final IVariable<?>[] projectInVars,
+      final IVariable<?> askVar,
+      final boolean isLastInvocation,
+      final int distinctProjectionBufferThreshold,
+      final int incomingBindingsBufferThreshold,
+      final BOpContext<IBindingSet> context);
 }

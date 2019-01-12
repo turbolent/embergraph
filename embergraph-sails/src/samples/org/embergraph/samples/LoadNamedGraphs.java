@@ -36,342 +36,332 @@ import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.rio.RDFFormat;
-
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.load.RDFFilenameFilter;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.store.DataLoader;
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.rio.RDFFormat;
 
 /**
- * Sample code for loading RDF data using the {@link EmbergraphSail} and the
- * openrdf API.
- * 
+ * Sample code for loading RDF data using the {@link EmbergraphSail} and the openrdf API.
+ *
  * @see DataLoader
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LoadNamedGraphs extends SampleCode {
 
-    /**
-     * Load all data from some directory.
-     * 
-     * @param dir
-     * 
-     * @throws Exception
+  /**
+   * Load all data from some directory.
+   *
+   * @param dir
+   * @throws Exception
+   */
+  public void loadAll(final Properties properties, final File file) throws Exception {
+
+    /*
+     * We are going to use the "quads" mode. Right now, the quads mode does
+     * not do inference AT ALL.
      */
-    public void loadAll(final Properties properties, final File file) throws Exception {
+    //		final File propertyFile = new File(
+    //				"c:/embergraph-data-sets/LoadNamedGraphs.properties");
 
-		/*
-		 * We are going to use the "quads" mode. Right now, the quads mode does
-		 * not do inference AT ALL.
-		 */
-//		final File propertyFile = new File(
-//				"c:/embergraph-data-sets/LoadNamedGraphs.properties");
-    	
-//        // create a backing file
-//        final File journalFile = new File("c:/embergraph.jnl");
-////        final File journalFile = File.createTempFile("embergraph", ".jnl");
-////        journalFile.deleteOnExit();
-//        properties.setProperty(EmbergraphSail.Options.FILE, journalFile
-//                .getAbsolutePath());
+    //        // create a backing file
+    //        final File journalFile = new File("c:/embergraph.jnl");
+    ////        final File journalFile = File.createTempFile("embergraph", ".jnl");
+    ////        journalFile.deleteOnExit();
+    //        properties.setProperty(EmbergraphSail.Options.FILE, journalFile
+    //                .getAbsolutePath());
 
-        // You can do the overrides in the property file.
-//        /*
-//         * Override the write retention queue (default is 500).
-//         * 
-//         * This makes a BIG difference in the journal size and throughput if you
-//         * are bulk loading data and have enough RAM.
-//         */
-//        properties.setProperty(
-//                IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY, "8000");
-//
-//        properties.setProperty(IndexMetadata.Options.BTREE_BRANCHING_FACTOR,
-//                "64");
+    // You can do the overrides in the property file.
+    //        /*
+    //         * Override the write retention queue (default is 500).
+    //         *
+    //         * This makes a BIG difference in the journal size and throughput if you
+    //         * are bulk loading data and have enough RAM.
+    //         */
+    //        properties.setProperty(
+    //                IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY, "8000");
+    //
+    //        properties.setProperty(IndexMetadata.Options.BTREE_BRANCHING_FACTOR,
+    //                "64");
 
-        // instantiate a sail
-        final EmbergraphSail sail = new EmbergraphSail(properties);
-        try {
-        final Repository repo = new EmbergraphSailRepository(sail);
-        repo.initialize();
+    // instantiate a sail
+    final EmbergraphSail sail = new EmbergraphSail(properties);
+    try {
+      final Repository repo = new EmbergraphSailRepository(sail);
+      repo.initialize();
 
-        final RepositoryConnection cxn = repo.getConnection();
-        cxn.setAutoCommit(false);
-        try {
-            final long stmtsBefore =
+      final RepositoryConnection cxn = repo.getConnection();
+      cxn.setAutoCommit(false);
+      try {
+        final long stmtsBefore =
+            // fast range count!
+            sail.getDatabase().getStatementCount();
+        //                cxn.size();
+        final long start = System.currentTimeMillis();
+
+        if (file.getName().endsWith(".zip") || file.getName().endsWith(".ZIP")) {
+
+          // then process the sample data files one at a time
+          final InputStream is = new FileInputStream(file);
+          try {
+            final ZipInputStream zis = new ZipInputStream(new BufferedInputStream(is));
+            try {
+              ZipEntry ze = null;
+              while ((ze = zis.getNextEntry()) != null) {
+                if (ze.isDirectory()) {
+                  continue;
+                }
+                final String name = ze.getName();
+                if (log.isInfoEnabled()) log.info(name);
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                final byte[] bytes = new byte[4096];
+                int count;
+                while ((count = zis.read(bytes, 0, 4096)) != -1) {
+                  baos.write(bytes, 0, count);
+                }
+                baos.close();
+                final Reader reader =
+                    new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
+                final String baseIRI = file.toURI() + "/" + name;
+
+                cxn.add(reader, baseIRI, RDFFormat.forFileName(name));
+
+                // note: due to buffering, this reports stmts flush to the
+                // db
+                // not stmts added to the cxn.
+                final long elapsed = System.currentTimeMillis() - start;
                 // fast range count!
-                sail.getDatabase().getStatementCount();
-//                cxn.size();
-            final long start = System.currentTimeMillis();
+                final long stmtsAfter = sail.getDatabase().getStatementCount();
+                //					long stmtsAfter = cxn.size();
+                final long stmtsAdded = stmtsAfter - stmtsBefore;
+                final int throughput = (int) ((double) stmtsAdded / (double) elapsed * 1000d);
+                System.err.println(
+                    "loaded: "
+                        + name
+                        + " : "
+                        + stmtsAdded
+                        + " stmts in "
+                        + elapsed
+                        + " millis: "
+                        + throughput
+                        + " stmts/sec");
+                logCounters(sail);
+              }
+            } finally {
+              zis.close();
+            }
+          } finally {
+            is.close();
+          }
 
-            if (file.getName().endsWith(".zip")
-					|| file.getName().endsWith(".ZIP")) {
+        } else if (file.isDirectory()) {
 
-				// then process the sample data files one at a time
-				final InputStream is = new FileInputStream(file);
-				try {
-				final ZipInputStream zis = new ZipInputStream(
-						new BufferedInputStream(is));
-				try {
-				ZipEntry ze = null;
-				while ((ze = zis.getNextEntry()) != null) {
-					if (ze.isDirectory()) {
-						continue;
-					}
-					final String name = ze.getName();
-					if (log.isInfoEnabled())
-						log.info(name);
-					final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					final byte[] bytes = new byte[4096];
-					int count;
-					while ((count = zis.read(bytes, 0, 4096)) != -1) {
-						baos.write(bytes, 0, count);
-					}
-					baos.close();
-					final Reader reader = new InputStreamReader(
-							new ByteArrayInputStream(baos.toByteArray()));
-					final String baseIRI = file.toURI() + "/" + name;
+          final File[] files = file.listFiles(new RDFFilenameFilter());
 
-					cxn.add(reader, baseIRI, RDFFormat.forFileName(name));
+          if (files != null) {
 
-					// note: due to buffering, this reports stmts flush to the
-					// db
-					// not stmts added to the cxn.
-					final long elapsed = System.currentTimeMillis() - start;
-	                // fast range count!
-	                final long stmtsAfter = sail.getDatabase().getStatementCount();
-//					long stmtsAfter = cxn.size();
-					final long stmtsAdded = stmtsAfter - stmtsBefore;
-					final int throughput = (int) ((double) stmtsAdded
-							/ (double) elapsed * 1000d);
-					System.err.println("loaded: " + name + " : " + stmtsAdded
-							+ " stmts in " + elapsed + " millis: " + throughput
-							+ " stmts/sec");
-					logCounters(sail);
-				}
-				} finally {
-				zis.close();
-				}
-				} finally {
-					is.close();
-				}
-				
-			} else if(file.isDirectory()) {
-				
-				final File[] files = file.listFiles(new RDFFilenameFilter());
-				
-				if (files != null) {
+            int nloaded = 0;
 
-				    int nloaded = 0;
-				    
-					for (File f : files) {
+            for (File f : files) {
 
-//						System.err.println("Reading: " + f);
-						
-						final Reader reader = new InputStreamReader(
-								(f.getName().endsWith(".gz")
-										|| f.getName().endsWith(".GZ") ? new GZIPInputStream(
-										new FileInputStream(f))
-										: new FileInputStream(f)));
+              //						System.err.println("Reading: " + f);
 
-						try {
-						
-						final String baseIRI = file.toURI().toString();
+              final Reader reader =
+                  new InputStreamReader(
+                      (f.getName().endsWith(".gz") || f.getName().endsWith(".GZ")
+                          ? new GZIPInputStream(new FileInputStream(f))
+                          : new FileInputStream(f)));
 
-						cxn.add(reader, baseIRI, RDFFormat.forFileName(f
-								.getName()));
+              try {
 
-                        /*
-                         * Note: due to buffering, this reports stmts flushed to
-                         * the db not stmts added to the cxn.
-                         * 
-                         * Note: cxn.size() will do a FULL SCAN of the statement
-                         * index for many cases in order to report an exact
-                         * range count.  This is an issue with the Sesame API
-                         * semantics (exact range count reporting) and with
-                         * delete markers in the embergraph indices.  Fast range
-                         * counts are available with two key probes but do not
-                         * satisfy the Sesame semantics.  You can get the fast
-                         * range count from the embergraph APIs.
-                         */
-						final long elapsed = System.currentTimeMillis() - start;
-		                // fast range count!
-						final long stmtsAfter = sail.getDatabase().getStatementCount();
-//						long stmtsAfter = cxn.size();
-						final long stmtsAdded = stmtsAfter - stmtsBefore;
-						final int throughput = (int) ((double) stmtsAdded
-								/ (double) elapsed * 1000d);
+                final String baseIRI = file.toURI().toString();
 
-                        nloaded++;
+                cxn.add(reader, baseIRI, RDFFormat.forFileName(f.getName()));
 
-						System.err.println("loaded: " + f 
-						        + " : " + stmtsAdded + " stmts"
-						        +" in " + elapsed + " millis" + 
-						        " : "+ throughput + " stmts/sec"+
-								", nloaded="+nloaded);
-						logCounters(sail);
+                /*
+                 * Note: due to buffering, this reports stmts flushed to
+                 * the db not stmts added to the cxn.
+                 *
+                 * Note: cxn.size() will do a FULL SCAN of the statement
+                 * index for many cases in order to report an exact
+                 * range count.  This is an issue with the Sesame API
+                 * semantics (exact range count reporting) and with
+                 * delete markers in the embergraph indices.  Fast range
+                 * counts are available with two key probes but do not
+                 * satisfy the Sesame semantics.  You can get the fast
+                 * range count from the embergraph APIs.
+                 */
+                final long elapsed = System.currentTimeMillis() - start;
+                // fast range count!
+                final long stmtsAfter = sail.getDatabase().getStatementCount();
+                //						long stmtsAfter = cxn.size();
+                final long stmtsAdded = stmtsAfter - stmtsBefore;
+                final int throughput = (int) ((double) stmtsAdded / (double) elapsed * 1000d);
 
-						} finally {
-						reader.close();
-						}
-						
-					}
-					
-				}
-				
-			} else if(file.isFile()) {
-				
-				final Reader reader = new InputStreamReader(
-						new FileInputStream(file));
-				try {
-				final String baseIRI = file.toURI().toString();
+                nloaded++;
 
-				cxn.add(reader, baseIRI, RDFFormat.forFileName(file
-						.getName()));
+                System.err.println(
+                    "loaded: "
+                        + f
+                        + " : "
+                        + stmtsAdded
+                        + " stmts"
+                        + " in "
+                        + elapsed
+                        + " millis"
+                        + " : "
+                        + throughput
+                        + " stmts/sec"
+                        + ", nloaded="
+                        + nloaded);
+                logCounters(sail);
 
-				// note: due to buffering, this reports stmts flush to the
-				// db not stmts added to the cxn.
-				final long elapsed = System.currentTimeMillis() - start;
-//				long stmtsAfter = cxn.size();
-				final long stmtsAfter = sail.getDatabase().getStatementCount();
-				final long stmtsAdded = stmtsAfter - stmtsBefore;
-				final int throughput = (int) ((double) stmtsAdded
-						/ (double) elapsed * 1000d);
+              } finally {
+                reader.close();
+              }
+            }
+          }
 
-				System.err.println("loaded: " + file + " : " + stmtsAdded
-						+ " stmts in " + elapsed + " millis: " + throughput
-						+ " stmts/sec");
-	            logCounters(sail);
-				} finally {
-				reader.close();
-				}
-				
-			} else {
-				
-				System.err.println("Can not load: "+file);
-				
-			}
-            
-            // autocommit is false, we need to commit our SAIL "transaction"
-            cxn.commit();
+        } else if (file.isFile()) {
 
-            // gather statistics
+          final Reader reader = new InputStreamReader(new FileInputStream(file));
+          try {
+            final String baseIRI = file.toURI().toString();
+
+            cxn.add(reader, baseIRI, RDFFormat.forFileName(file.getName()));
+
+            // note: due to buffering, this reports stmts flush to the
+            // db not stmts added to the cxn.
             final long elapsed = System.currentTimeMillis() - start;
-//            long stmtsAfter = cxn.size();
+            //				long stmtsAfter = cxn.size();
             final long stmtsAfter = sail.getDatabase().getStatementCount();
             final long stmtsAdded = stmtsAfter - stmtsBefore;
             final int throughput = (int) ((double) stmtsAdded / (double) elapsed * 1000d);
-            System.err.println("statements after: " + stmtsAfter);
-            System.err.println("loaded: " + stmtsAdded + " in " + elapsed + " millis: "
-                    + throughput + " stmts/sec");
+
+            System.err.println(
+                "loaded: "
+                    + file
+                    + " : "
+                    + stmtsAdded
+                    + " stmts in "
+                    + elapsed
+                    + " millis: "
+                    + throughput
+                    + " stmts/sec");
             logCounters(sail);
+          } finally {
+            reader.close();
+          }
 
-        } catch (Exception ex) {
-            cxn.rollback();
-            throw ex;
-        } finally {
-            // close the repository connection
-            cxn.close();
-        }
-        } finally {
-            sail.shutDown();
+        } else {
+
+          System.err.println("Can not load: " + file);
         }
 
+        // autocommit is false, we need to commit our SAIL "transaction"
+        cxn.commit();
+
+        // gather statistics
+        final long elapsed = System.currentTimeMillis() - start;
+        //            long stmtsAfter = cxn.size();
+        final long stmtsAfter = sail.getDatabase().getStatementCount();
+        final long stmtsAdded = stmtsAfter - stmtsBefore;
+        final int throughput = (int) ((double) stmtsAdded / (double) elapsed * 1000d);
+        System.err.println("statements after: " + stmtsAfter);
+        System.err.println(
+            "loaded: " + stmtsAdded + " in " + elapsed + " millis: " + throughput + " stmts/sec");
+        logCounters(sail);
+
+      } catch (Exception ex) {
+        cxn.rollback();
+        throw ex;
+      } finally {
+        // close the repository connection
+        cxn.close();
+      }
+    } finally {
+      sail.shutDown();
+    }
+  }
+
+  private void logCounters(final EmbergraphSail sail) {
+
+    if (!(sail.getDatabase().getIndexManager() instanceof Journal)) return;
+
+    if (!(((Journal) sail.getDatabase().getIndexManager()).getBufferStrategy()
+        instanceof RWStrategy)) return;
+
+    final StringBuilder sb = new StringBuilder();
+
+    ((RWStrategy) ((Journal) sail.getDatabase().getIndexManager()).getBufferStrategy())
+        .getStore()
+        .showAllocators(sb);
+
+    System.err.println(sb.toString());
+  }
+
+  /**
+   * Loads a bunch of data from a file, zip file, or directory (non-recursive). You can use <code>
+   * quad.properties</code> as the properties file or anything else that you like.
+   *
+   * @param args The name of the property and the name of the file or directory to load.
+   * @throws Exception
+   */
+  public static void main(final String[] args) {
+
+    if (args.length < 2) {
+
+      System.out.println("usage: properties fileOrDirectoryOrZip");
+
+      System.exit(1);
     }
 
-    private void logCounters(final EmbergraphSail sail) {
+    final Properties properties;
+    try {
 
-    	if (!(sail.getDatabase().getIndexManager() instanceof Journal))
-			return;
-		
-    	if (!(((Journal) sail.getDatabase().getIndexManager())
-				.getBufferStrategy() instanceof RWStrategy))
-			return;
-		
-    	final StringBuilder sb = new StringBuilder();
-    	
-    	((RWStrategy) ((Journal) sail.getDatabase()
-				.getIndexManager()).getBufferStrategy()).getStore()
-				.showAllocators(sb);
-    	
-    	System.err.println(sb.toString());
+      final File propertyFile = new File(args[0]);
 
-	}
-    
-	/**
-	 * Loads a bunch of data from a file, zip file, or directory
-	 * (non-recursive). You can use <code>quad.properties</code> as the
-	 * properties file or anything else that you like.
-	 * 
-	 * @param args
-	 *            The name of the property and the name of the file or directory
-	 *            to load.
-	 * 
-	 * @throws Exception
-	 */
-    public static void main(final String[] args) {
+      if (!propertyFile.exists()) {
 
-        if (args.length < 2 ) {
+        throw new FileNotFoundException(propertyFile.toString());
+      }
 
-            System.out.println("usage: properties fileOrDirectoryOrZip");
+      properties = new Properties();
 
-            System.exit(1);
+      final InputStream is = new BufferedInputStream(new FileInputStream(propertyFile));
 
-        }
+      try {
 
-		final Properties properties;
-		try {
+        properties.load(is);
 
-			final File propertyFile = new File(args[0]);
+      } finally {
 
-			if (!propertyFile.exists()) {
+        is.close();
+      }
 
-				throw new FileNotFoundException(propertyFile.toString());
-				
-			}
+    } catch (IOException ex) {
 
-			properties = new Properties();
-			
-			final InputStream is = new BufferedInputStream(new FileInputStream(
-					propertyFile));
-			
-			try {
-		
-				properties.load(is);
-				
-			} finally {
-				
-				is.close();
-				
-			}
-
-		} catch(IOException ex) {
-			
-			throw new RuntimeException(ex);
-			
-		}
-    	
-        try {
-       
-        	final File dataFileOrDirectory = new File(args[1]);
-        	
-        	if (!dataFileOrDirectory.exists())
-				throw new FileNotFoundException(dataFileOrDirectory.toString());
-        	
-            new LoadNamedGraphs().loadAll(properties, dataFileOrDirectory);
-            
-        } catch (Exception ex) {
-            
-            ex.printStackTrace(System.err);
-            
-        }
-
+      throw new RuntimeException(ex);
     }
 
+    try {
+
+      final File dataFileOrDirectory = new File(args[1]);
+
+      if (!dataFileOrDirectory.exists())
+        throw new FileNotFoundException(dataFileOrDirectory.toString());
+
+      new LoadNamedGraphs().loadAll(properties, dataFileOrDirectory);
+
+    } catch (Exception ex) {
+
+      ex.printStackTrace(System.err);
+    }
+  }
 }

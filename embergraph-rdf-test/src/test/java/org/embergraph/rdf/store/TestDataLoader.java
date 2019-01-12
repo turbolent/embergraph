@@ -23,459 +23,410 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Properties;
-
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
-
 import org.embergraph.rdf.store.DataLoader.ClosureEnum;
 import org.embergraph.rdf.store.DataLoader.CommitEnum;
 import org.embergraph.util.InnerCause;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.RDFParseException;
 
 /**
  * Test suite for the {@link DataLoader}.
  *
  * @author bryan
- * 
- *         TODO Tests to verify that data was actually loaded.... (read back
- *         from last commit point and verify statements found). Do this for each
- *         of the public {@link DataLoader} methods.
- * 
- *         TODO Test to verify that end-of-batch handling is correct (no
- *         additional commits).
+ *     <p>TODO Tests to verify that data was actually loaded.... (read back from last commit point
+ *     and verify statements found). Do this for each of the public {@link DataLoader} methods.
+ *     <p>TODO Test to verify that end-of-batch handling is correct (no additional commits).
  */
 public class TestDataLoader extends AbstractTripleStoreTestCase {
 
-	public TestDataLoader() {
-	}
+  public TestDataLoader() {}
 
-	public TestDataLoader(final String name) {
-		super(name);
-	}
+  public TestDataLoader(final String name) {
+    super(name);
+  }
 
-	/**
-	 * Simple test of ability to load a resource (from the classpath).
-	 */
-	public void test_DataLoader_loadResource01() throws IOException {
+  /** Simple test of ability to load a resource (from the classpath). */
+  public void test_DataLoader_loadResource01() throws IOException {
 
-		final AbstractTripleStore store = getStore();
+    final AbstractTripleStore store = getStore();
 
-		try {
+    try {
 
-			final DataLoader dataLoader = new DataLoader(store);
+      final DataLoader dataLoader = new DataLoader(store);
 
-			final String resource = "org/embergraph/rdf/store/sample-data.ttl";
+      final String resource = "org/embergraph/rdf/store/sample-data.ttl";
 
-			final String baseURL = new File(resource).toURI().toString();
+      final String baseURL = new File(resource).toURI().toString();
 
-			dataLoader.loadData(new String[] { resource }, new String[] { baseURL },
-					new RDFFormat[] { RDFFormat.TURTLE });
+      dataLoader.loadData(
+          new String[] {resource}, new String[] {baseURL}, new RDFFormat[] {RDFFormat.TURTLE});
 
-		} finally {
+    } finally {
 
-			store.__tearDownUnitTest();
+      store.__tearDownUnitTest();
+    }
+  }
 
-		}
+  /**
+   * Test where an error in a source file SHOULD NOT be ignored because we have NOT specified {@link
+   * DataLoader.Options#IGNORE_INVALID_FILES}.
+   *
+   * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
+   *     fatal exception)
+   */
+  public void test_DataLoader_ignoreFailures01() throws IOException {
 
-	}
+    boolean ok = false;
 
-	/**
-	 * Test where an error in a source file SHOULD NOT be ignored because we
-	 * have NOT specified {@link DataLoader.Options#IGNORE_INVALID_FILES}.
-	 * 
-	 * @see BLZG-1531 (Add option to make the DataLoader robust to files that
-	 *      cause rio to throw a fatal exception)
-	 */
-	public void test_DataLoader_ignoreFailures01() throws IOException {
+    final String resource = "org/embergraph/rdf/store/sample-data-bad.ttl";
 
-		boolean ok = false;
-		
-		final String resource = "org/embergraph/rdf/store/sample-data-bad.ttl";
+    final AbstractTripleStore store = getStore();
 
-		final AbstractTripleStore store = getStore();
+    try {
 
-		try {
+      final DataLoader dataLoader = new DataLoader(store);
 
-			final DataLoader dataLoader = new DataLoader(store);
+      final String baseURL = new File(resource).toURI().toString();
 
-			final String baseURL = new File(resource).toURI().toString();
+      dataLoader.loadData(
+          new String[] {resource}, new String[] {baseURL}, new RDFFormat[] {RDFFormat.TURTLE});
 
-			dataLoader.loadData(new String[] { resource }, new String[] { baseURL },
-					new RDFFormat[] { RDFFormat.TURTLE });
+      ok = true;
 
-			ok = true;
+    } catch (Throwable t) {
 
-		} catch (Throwable t) {
+      if (!InnerCause.isInnerCause(t, RDFParseException.class)) {
 
-			if (!InnerCause.isInnerCause(t, RDFParseException.class)) {
+        fail("Expected inner cause " + RDFParseException.class + " not found in " + t, t);
+      }
 
-				fail("Expected inner cause " + RDFParseException.class + " not found in " + t, t);
+    } finally {
 
-			}
+      store.__tearDownUnitTest();
+    }
 
-		} finally {
+    if (ok) fail("Error should have been reported for " + resource);
+  }
 
-			store.__tearDownUnitTest();
+  /**
+   * Test where an error in a source file SHOULD be ignored because we have specified {@link
+   * DataLoader.Options#IGNORE_INVALID_FILES}.
+   *
+   * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
+   *     fatal exception)
+   */
+  public void test_DataLoader_ignoreFailures02() throws IOException {
 
-		}
+    final AbstractTripleStore store = getStore();
 
-		if (ok)
-			fail("Error should have been reported for " + resource);
-	
-	}
+    try {
 
-	/**
-	 * Test where an error in a source file SHOULD be ignored because we have
-	 * specified {@link DataLoader.Options#IGNORE_INVALID_FILES}.
-	 * 
-	 * @see BLZG-1531 (Add option to make the DataLoader robust to files that
-	 *      cause rio to throw a fatal exception)
-	 */
-	public void test_DataLoader_ignoreFailures02() throws IOException {
+      final Properties properties = new Properties(store.getProperties());
 
-		final AbstractTripleStore store = getStore();
+      properties.setProperty(DataLoader.Options.IGNORE_INVALID_FILES, "true");
 
-		try {
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-			final Properties properties = new Properties(store.getProperties());
-			
-			properties.setProperty(DataLoader.Options.IGNORE_INVALID_FILES, "true");
-			
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      final String resource = "org/embergraph/rdf/store/sample-data-bad.ttl";
 
-			final String resource = "org/embergraph/rdf/store/sample-data-bad.ttl";
+      final String baseURL = new File(resource).toURI().toString();
 
-			final String baseURL = new File(resource).toURI().toString();
+      dataLoader.loadData(
+          new String[] {resource}, new String[] {baseURL}, new RDFFormat[] {RDFFormat.TURTLE});
 
-			dataLoader.loadData(new String[] { resource }, new String[] { baseURL },
-					new RDFFormat[] { RDFFormat.TURTLE });
+    } finally {
 
-		} finally {
+      store.__tearDownUnitTest();
+    }
+  }
 
-			store.__tearDownUnitTest();
+  /**
+   * Test where the load should fail even though we specified {@link
+   * DataLoader.Options#IGNORE_INVALID_FILES} because it error was a "resource not found" problem
+   * rather than a parser error.
+   *
+   * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
+   *     fatal exception)
+   */
+  public void test_DataLoader_ignoreFailures03() throws IOException {
 
-		}
+    final AbstractTripleStore store = getStore();
 
-	}
+    try {
 
-	/**
-	 * Test where the load should fail even though we specified
-	 * {@link DataLoader.Options#IGNORE_INVALID_FILES} because it error was a
-	 * "resource not found" problem rather than a parser error.
-	 * 
-	 * @see BLZG-1531 (Add option to make the DataLoader robust to files that
-	 *      cause rio to throw a fatal exception)
-	 */
-	public void test_DataLoader_ignoreFailures03() throws IOException {
+      final Properties properties = new Properties(store.getProperties());
 
-		final AbstractTripleStore store = getStore();
+      properties.setProperty(DataLoader.Options.IGNORE_INVALID_FILES, "true");
 
-		try {
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-			final Properties properties = new Properties(store.getProperties());
-			
-			properties.setProperty(DataLoader.Options.IGNORE_INVALID_FILES, "true");
-			
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      final String resource = "org/embergraph/rdf/store/sample-data-DOES-NOT-EXIST.ttl";
 
-			final String resource = "org/embergraph/rdf/store/sample-data-DOES-NOT-EXIST.ttl";
+      final String baseURL = new File(resource).toURI().toString();
 
-			final String baseURL = new File(resource).toURI().toString();
+      try {
 
-			try {
+        dataLoader.loadData(
+            new String[] {resource}, new String[] {baseURL}, new RDFFormat[] {RDFFormat.TURTLE});
 
-				dataLoader.loadData(new String[] { resource }, new String[] { baseURL },
-						new RDFFormat[] { RDFFormat.TURTLE });
-				
-				fail();
-				
-			} catch (IOException ex) {
-				
-				if (log.isInfoEnabled())
-					log.info("Ignoring expected exception: " + ex);
-				
-			}
-			
-		} finally {
+        fail();
 
-			store.__tearDownUnitTest();
+      } catch (IOException ex) {
 
-		}
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
 
-	}
+    } finally {
 
-	/**
-	 * Test durable queues using {@link CommitEnum#Incremental} and {@link ClosureEnum#None}
-	 */
-	public void test_durableQueues01_incrementalCommit_noClosure() throws IOException {
+      store.__tearDownUnitTest();
+    }
+  }
 
-		final AbstractTripleStore store = getStore();
+  /** Test durable queues using {@link CommitEnum#Incremental} and {@link ClosureEnum#None} */
+  public void test_durableQueues01_incrementalCommit_noClosure() throws IOException {
 
-		try {
+    final AbstractTripleStore store = getStore();
 
-			final Properties properties = new Properties(store.getProperties());
+    try {
 
-			// enable durable queues.
-			properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
+      final Properties properties = new Properties(store.getProperties());
 
-			// Incremental commit.
-			properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Incremental.name());
+      // enable durable queues.
+      properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
 
-			properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.name());
+      // Incremental commit.
+      properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Incremental.name());
 
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.name());
 
-			doDurableQueueTest(dataLoader);
-			
-		} finally {
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-			store.__tearDownUnitTest();
-		}
+      doDurableQueueTest(dataLoader);
 
-	}
-	
-	/**
-	 * Test durable queues using {@link CommitEnum#Incremental} and {@link ClosureEnum#Batch}
-	 */
-	public void test_durableQueues01_incrementalCommit_batchClosure() throws IOException {
+    } finally {
 
-		final AbstractTripleStore store = getStore();
+      store.__tearDownUnitTest();
+    }
+  }
 
-		try {
+  /** Test durable queues using {@link CommitEnum#Incremental} and {@link ClosureEnum#Batch} */
+  public void test_durableQueues01_incrementalCommit_batchClosure() throws IOException {
 
-			final Properties properties = new Properties(store.getProperties());
+    final AbstractTripleStore store = getStore();
 
-			// enable durable queues.
-			properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
+    try {
 
-			// Incremental commit.
-			properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Incremental.name());
+      final Properties properties = new Properties(store.getProperties());
 
-			properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Batch.name());
+      // enable durable queues.
+      properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
 
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      // Incremental commit.
+      properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Incremental.name());
 
-			doDurableQueueTest(dataLoader);
-			
-		} finally {
+      properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Batch.name());
 
-			store.__tearDownUnitTest();
-		}
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-	}
-	
-	/**
-	 * Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#Batch}
-	 */
-	public void test_durableQueues02_batchCommit_batchClosure() throws IOException {
+      doDurableQueueTest(dataLoader);
 
-		final AbstractTripleStore store = getStore();
+    } finally {
 
-		try {
+      store.__tearDownUnitTest();
+    }
+  }
 
-			final Properties properties = new Properties(store.getProperties());
+  /** Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#Batch} */
+  public void test_durableQueues02_batchCommit_batchClosure() throws IOException {
 
-			// enable durable queues.
-			properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
+    final AbstractTripleStore store = getStore();
 
-			// Batch commit.
-			properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
+    try {
 
-			properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Batch.name());
+      final Properties properties = new Properties(store.getProperties());
 
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      // enable durable queues.
+      properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
 
-			doDurableQueueTest(dataLoader);
-			
-		} finally {
+      // Batch commit.
+      properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
 
-			store.__tearDownUnitTest();
-		}
+      properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Batch.name());
 
-	}
-	
-	/**
-	 * Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#None}
-	 */
-	public void test_durableQueues02_batchCommit_noClosure() throws IOException {
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-		final AbstractTripleStore store = getStore();
+      doDurableQueueTest(dataLoader);
 
-		try {
+    } finally {
 
-			final Properties properties = new Properties(store.getProperties());
+      store.__tearDownUnitTest();
+    }
+  }
 
-			// enable durable queues.
-			properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
+  /** Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#None} */
+  public void test_durableQueues02_batchCommit_noClosure() throws IOException {
 
-			// Batch commit.
-			properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
+    final AbstractTripleStore store = getStore();
 
-			properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.name());
+    try {
 
-			final DataLoader dataLoader = new DataLoader(properties, store);
+      final Properties properties = new Properties(store.getProperties());
 
-			doDurableQueueTest(dataLoader);
-			
-		} finally {
+      // enable durable queues.
+      properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
 
-			store.__tearDownUnitTest();
-		}
+      // Batch commit.
+      properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
 
-	}
-	
-	/**
-	 * Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#Incremental}
-	 */
-	public void test_durableQueues02_batchCommit_incrementalClosure() throws IOException {
+      properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.name());
 
-		final AbstractTripleStore store = getStore();
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-		try {
+      doDurableQueueTest(dataLoader);
 
-			final Properties properties = new Properties(store.getProperties());
+    } finally {
 
-			// enable durable queues.
-			properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
+      store.__tearDownUnitTest();
+    }
+  }
 
-			// Batch commit.
-			properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
+  /** Test durable queues using {@link CommitEnum#Batch} and {@link ClosureEnum#Incremental} */
+  public void test_durableQueues02_batchCommit_incrementalClosure() throws IOException {
 
-			properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Incremental.name());
+    final AbstractTripleStore store = getStore();
 
-			final DataLoader dataLoader = new DataLoader(properties, store);
+    try {
 
-			doDurableQueueTest(dataLoader);
-			
-		} finally {
+      final Properties properties = new Properties(store.getProperties());
 
-			store.__tearDownUnitTest();
-		}
+      // enable durable queues.
+      properties.setProperty(DataLoader.Options.DURABLE_QUEUES, "true");
 
-	}
-	
-	private void doDurableQueueTest(final DataLoader dataLoader) throws IOException {
-		
-		// temporary directory where we setup the test.
-		final File tmpDir = File.createTempFile(getClass().getName(), ".tmp");
-		try {
-			
-			tmpDir.delete(); // delete random file name.
-			tmpDir.mkdir(); // recreate it as a directory.
-		
-			// Setup directory with files.
-			final File goodFile = new File(tmpDir, "good.ttl");
-			final File failFile = new File(tmpDir, "fail.ttl");
-			{
+      // Batch commit.
+      properties.setProperty(DataLoader.Options.COMMIT, CommitEnum.Batch.name());
 
-				final String goodData = ""+
-				"@prefix bd: <http://www.embergraph.org/> .\n"+
-				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+
-				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+
-				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+
-				"bd:Mike rdf:type foaf:Person .\n"+
-				"bd:Bryan rdf:type foaf:Person .\n"+
-				"bd:Martyn rdf:type foaf:Person .\n"+
-				"bd:Mike rdfs:label \"Mike\" .\n"+
-				"bd:Bryan rdfs:label \"Bryan\" .\n"+
-				"bd:DC rdfs:label \"DC\" .\n"+
-				"bd:Mike foaf:knows bd:Bryan .\n"+
-				"bd:Bryan foaf:knows bd:Mike .\n"+
-				"bd:Bryan foaf:knows bd:Martyn .\n"+
-				"bd:Martyn foaf:knows bd:Bryan .\n"+
-				"";
+      properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.Incremental.name());
 
-				writeOnFile(goodFile, goodData);
-				
-				// Note: has a Literal in the Subject position.
-				final String failData = ""+
-				"@prefix bd: <http://www.embergraph.org/> .\n"+
-				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+
-				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+
-				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+
-				"\"Mike\" rdf:type foaf:Person .\n"+
-				"bd:Bryan rdf:type foaf:Person .\n"+
-				"bd:Martyn rdf:type foaf:Person .\n"+
-				"bd:Mike rdfs:label \"Mike\" .\n"+
-				"bd:Bryan rdfs:label \"Bryan\" .\n"+
-				"bd:DC rdfs:label \"DC\" .\n"+
-				"bd:Mike foaf:knows bd:Bryan .\n"+
-				"bd:Bryan foaf:knows bd:Mike .\n"+
-				"bd:Bryan foaf:knows bd:Martyn .\n"+
-				"bd:Martyn foaf:knows bd:Bryan .\n"+
-				"";
+      final DataLoader dataLoader = new DataLoader(properties, store);
 
-				writeOnFile(failFile, failData);
+      doDurableQueueTest(dataLoader);
 
-			}
+    } finally {
 
-			// Run loader.
-			{
+      store.__tearDownUnitTest();
+    }
+  }
 
-				dataLoader.loadFiles(tmpDir, null/* baseURI */, RDFFormat.TURTLE, null/* defaultGraph */,
-						new FilenameFilter() {
-							@Override
-							public boolean accept(File dir, String name) {
-								return name.endsWith(".ttl");
-							}
-						});
+  private void doDurableQueueTest(final DataLoader dataLoader) throws IOException {
 
-			}
-			
-			// Verify post-conditions in the tmp directory.
-			{
-				
-				if (goodFile.exists())
-					fail("File was not renamed: " + goodFile);
-				
-				if (failFile.exists())
-					fail("File was not renamed: " + failFile);
+    // temporary directory where we setup the test.
+    final File tmpDir = File.createTempFile(getClass().getName(), ".tmp");
+    try {
 
-				{
-					
-					final File tmp = new File(goodFile.getPath() + ".good");
+      tmpDir.delete(); // delete random file name.
+      tmpDir.mkdir(); // recreate it as a directory.
 
-					if (!tmp.exists())
-						fail("File not found: " + tmp);
+      // Setup directory with files.
+      final File goodFile = new File(tmpDir, "good.ttl");
+      final File failFile = new File(tmpDir, "fail.ttl");
+      {
+        final String goodData =
+            ""
+                + "@prefix bd: <http://www.embergraph.org/> .\n"
+                + "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"
+                + "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+                + "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"
+                + "bd:Mike rdf:type foaf:Person .\n"
+                + "bd:Bryan rdf:type foaf:Person .\n"
+                + "bd:Martyn rdf:type foaf:Person .\n"
+                + "bd:Mike rdfs:label \"Mike\" .\n"
+                + "bd:Bryan rdfs:label \"Bryan\" .\n"
+                + "bd:DC rdfs:label \"DC\" .\n"
+                + "bd:Mike foaf:knows bd:Bryan .\n"
+                + "bd:Bryan foaf:knows bd:Mike .\n"
+                + "bd:Bryan foaf:knows bd:Martyn .\n"
+                + "bd:Martyn foaf:knows bd:Bryan .\n"
+                + "";
 
-				}
-				
-				{
-			
-					final File tmp = new File(failFile.getPath() + ".fail");
+        writeOnFile(goodFile, goodData);
 
-					if (!tmp.exists())
-						fail("File not found: " + tmp);
-					
-				}
+        // Note: has a Literal in the Subject position.
+        final String failData =
+            ""
+                + "@prefix bd: <http://www.embergraph.org/> .\n"
+                + "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"
+                + "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
+                + "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"
+                + "\"Mike\" rdf:type foaf:Person .\n"
+                + "bd:Bryan rdf:type foaf:Person .\n"
+                + "bd:Martyn rdf:type foaf:Person .\n"
+                + "bd:Mike rdfs:label \"Mike\" .\n"
+                + "bd:Bryan rdfs:label \"Bryan\" .\n"
+                + "bd:DC rdfs:label \"DC\" .\n"
+                + "bd:Mike foaf:knows bd:Bryan .\n"
+                + "bd:Bryan foaf:knows bd:Mike .\n"
+                + "bd:Bryan foaf:knows bd:Martyn .\n"
+                + "bd:Martyn foaf:knows bd:Bryan .\n"
+                + "";
 
-			}
+        writeOnFile(failFile, failData);
+      }
 
-		} finally {
+      // Run loader.
+      {
+        dataLoader.loadFiles(
+            tmpDir,
+            null /* baseURI */,
+            RDFFormat.TURTLE,
+            null /* defaultGraph */,
+            new FilenameFilter() {
+              @Override
+              public boolean accept(File dir, String name) {
+                return name.endsWith(".ttl");
+              }
+            });
+      }
 
-			// destroy the temporary directory.
-			recursiveDelete(tmpDir);
-//			System.err.println("tmpDir=" + tmpDir);
-			
-		}
+      // Verify post-conditions in the tmp directory.
+      {
+        if (goodFile.exists()) fail("File was not renamed: " + goodFile);
 
-	}
+        if (failFile.exists()) fail("File was not renamed: " + failFile);
 
-	private void writeOnFile(final File file, final String data) throws IOException {
-		
-		file.createNewFile();
-		
-		try (final FileWriter fileWriter = new FileWriter(file)) {
+        {
+          final File tmp = new File(goodFile.getPath() + ".good");
 
-			try (final BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+          if (!tmp.exists()) fail("File not found: " + tmp);
+        }
 
-				bufferedWriter.write(data);
+        {
+          final File tmp = new File(failFile.getPath() + ".fail");
 
-				bufferedWriter.flush();
+          if (!tmp.exists()) fail("File not found: " + tmp);
+        }
+      }
 
-			}
+    } finally {
 
-		}
+      // destroy the temporary directory.
+      recursiveDelete(tmpDir);
+      //			System.err.println("tmpDir=" + tmpDir);
 
-	}
+    }
+  }
 
+  private void writeOnFile(final File file, final String data) throws IOException {
+
+    file.createNewFile();
+
+    try (final FileWriter fileWriter = new FileWriter(file)) {
+
+      try (final BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+
+        bufferedWriter.write(data);
+
+        bufferedWriter.flush();
+      }
+    }
+  }
 }

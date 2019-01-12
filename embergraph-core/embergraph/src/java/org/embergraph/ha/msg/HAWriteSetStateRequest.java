@@ -19,12 +19,8 @@ package org.embergraph.ha.msg;
 
 public class HAWriteSetStateRequest implements IHAWriteSetStateRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public HAWriteSetStateRequest() {
-    }
-
+  public HAWriteSetStateRequest() {}
 }

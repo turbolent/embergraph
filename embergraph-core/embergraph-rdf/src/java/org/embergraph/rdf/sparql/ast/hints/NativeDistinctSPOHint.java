@@ -27,35 +27,33 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the {@link NativeDistinctFilter} on/off.
- */
+/** Query hint for turning the {@link NativeDistinctFilter} on/off. */
 final class NativeDistinctSPOHint extends AbstractBooleanQueryHint {
 
-    protected NativeDistinctSPOHint() {
-        super(QueryHints.NATIVE_DISTINCT_SPO,
-                QueryHints.DEFAULT_NATIVE_DISTINCT_SPO);
-    }
+  protected NativeDistinctSPOHint() {
+    super(QueryHints.NATIVE_DISTINCT_SPO, QueryHints.DEFAULT_NATIVE_DISTINCT_SPO);
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
 
-        if (scope == QueryHintScope.Query) {
+    if (scope == QueryHintScope.Query) {
 
-            context.nativeDistinctSPO = value;
+      context.nativeDistinctSPO = value;
 
-            return;
+      return;
 
-            // } else {
+      // } else {
 
-            // super.attach(context, scope, op, value);
-
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
+      // super.attach(context, scope, op, value);
 
     }
 
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

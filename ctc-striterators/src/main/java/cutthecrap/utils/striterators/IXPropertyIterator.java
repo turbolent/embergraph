@@ -18,9 +18,8 @@ package cutthecrap.utils.striterators;
 /**
  * IXPropertyIterator
  *
- * A standard iterator, extended to provide a nextProperty method returning IXProperty objects
- **/
-
+ * <p>A standard iterator, extended to provide a nextProperty method returning IXProperty objects
+ */
 public interface IXPropertyIterator extends IStriterator {
-	public IXProperty nextProperty();
+  public IXProperty nextProperty();
 }

@@ -22,95 +22,76 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import org.apache.log4j.Logger;
-import org.openrdf.query.QueryLanguage;
-
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
+import org.openrdf.query.QueryLanguage;
 
-/**
- */
+/** */
 public class TestSparqlUpdateCommit extends ProxyEmbergraphSailTestCase {
 
-    private static final Logger log = Logger.getLogger(TestSparqlUpdateCommit.class);
-    
-    /**
-     * 
-     */
-    public TestSparqlUpdateCommit() {
+  private static final Logger log = Logger.getLogger(TestSparqlUpdateCommit.class);
+
+  /** */
+  public TestSparqlUpdateCommit() {}
+
+  /** @param arg0 */
+  public TestSparqlUpdateCommit(String arg0) {
+    super(arg0);
+  }
+
+  /** Test whether sparql update results in auto-commit. */
+  public void testCountCommits() throws Exception {
+
+    EmbergraphSailRepositoryConnection cxn = null;
+
+    final EmbergraphSail sail = getSail(getProperties());
+
+    try {
+
+      sail.initialize();
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+
+      final CommitCounter counter = new CommitCounter();
+      cxn.addChangeLog(counter);
+
+      cxn.prepareUpdate(QueryLanguage.SPARQL, "insert data { <x:s> <x:p> \"foo\" . }").execute();
+
+      cxn.prepareUpdate(QueryLanguage.SPARQL, "insert data { <x:s> <x:p> \"bar\" . }").execute();
+
+      cxn.commit();
+
+      assertTrue(counter.n == 1);
+
+    } finally {
+      if (cxn != null) cxn.close();
+
+      sail.__tearDownUnitTest();
+    }
+  }
+
+  public static class CommitCounter implements IChangeLog {
+
+    int n = 0;
+
+    @Override
+    public void transactionCommited(long commitTime) {
+      n++;
     }
 
-    /**
-     * @param arg0
-     */
-    public TestSparqlUpdateCommit(String arg0) {
-        super(arg0);
-    }
+    @Override
+    public void transactionPrepare() {}
 
-    
-    /**
-     * Test whether sparql update results in auto-commit.
-     */
-    public void testCountCommits() throws Exception {
+    @Override
+    public void transactionBegin() {}
 
-        EmbergraphSailRepositoryConnection cxn = null;
+    @Override
+    public void transactionAborted() {}
 
-        final EmbergraphSail sail = getSail(getProperties());
+    @Override
+    public void close() {}
 
-        try {
-
-            sail.initialize();
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
-
-            final CommitCounter counter = new CommitCounter();
-            cxn.addChangeLog(counter);
-
-            cxn.prepareUpdate(QueryLanguage.SPARQL, 
-                    "insert data { <x:s> <x:p> \"foo\" . }").execute();
-            
-            cxn.prepareUpdate(QueryLanguage.SPARQL, 
-                    "insert data { <x:s> <x:p> \"bar\" . }").execute();
-
-            cxn.commit();
-            
-            assertTrue(counter.n == 1);
-            
-        } finally {
-            if (cxn != null)
-                cxn.close();
-            
-            sail.__tearDownUnitTest();
-        }
-    }
-    
-    public static class CommitCounter implements IChangeLog {
-        
-        int n = 0;
-        
-        @Override
-        public void transactionCommited(long commitTime) {
-            n++;
-        }
-        
-        @Override
-        public void transactionPrepare() {
-        }
-        
-        @Override
-        public void transactionBegin() {
-        }
-        
-        @Override
-        public void transactionAborted() {
-        }
-        
-        @Override
-        public void close() {
-        }
-        
-        @Override
-        public void changeEvent(IChangeRecord record) {
-        }
-    } 
-
+    @Override
+    public void changeEvent(IChangeRecord record) {}
+  }
 }

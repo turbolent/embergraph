@@ -23,76 +23,58 @@ package org.embergraph.rdf.spo;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
-
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.accesspath.IElementFilter;
-import org.embergraph.relation.rule.eval.ISolution;
 
 /**
  * Filter matches only {@link StatementEnum#Explicit} {@link ISPO}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-final public class ExplicitSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
+public final class ExplicitSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 2123102826207595688L;
-    
-    /**
-     * Shared instance.
-     */
-    static public final transient IElementFilter<ISPO> INSTANCE = new ExplicitSPOFilter<ISPO>();
-    
-    /**
-     * De-serialization constructor.
-     */
-    private ExplicitSPOFilter() {
-        
-    }
-    
-    public boolean isValid(Object o) {
-        
-        if (!canAccept(o)) {
-            
-            return true;
-            
-        }
-        
-        return accept((ISPO) o);
-        
+  /** */
+  private static final long serialVersionUID = 2123102826207595688L;
+
+  /** Shared instance. */
+  public static final transient IElementFilter<ISPO> INSTANCE = new ExplicitSPOFilter<ISPO>();
+
+  /** De-serialization constructor. */
+  private ExplicitSPOFilter() {}
+
+  public boolean isValid(Object o) {
+
+    if (!canAccept(o)) {
+
+      return true;
     }
 
-    private boolean accept(final ISPO o) {
-        
-        final ISPO spo = (ISPO) o;
-        
-        return spo.getStatementType() == StatementEnum.Explicit;
-        
-    }
+    return accept((ISPO) o);
+  }
 
-    /**
-     * Imposes the canonicalizing mapping during object de-serialization.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        
-        return INSTANCE;
-        
-    }
+  private boolean accept(final ISPO o) {
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    final ISPO spo = (ISPO) o;
 
-        // NOP - stateless.
-        
-    }
+    return spo.getStatementType() == StatementEnum.Explicit;
+  }
 
-    private void readObject(java.io.ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
+  /** Imposes the canonicalizing mapping during object de-serialization. */
+  private Object readResolve() throws ObjectStreamException {
 
-        // NOP - stateless.
+    return INSTANCE;
+  }
 
-    }
-    
+  private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+
+    // NOP - stateless.
+
+  }
+
+  private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+    // NOP - stateless.
+
+  }
 }

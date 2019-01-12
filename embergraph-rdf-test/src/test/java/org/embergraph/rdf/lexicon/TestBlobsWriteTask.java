@@ -22,15 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import junit.framework.TestCase2;
-
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.BNodeImpl;
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -39,372 +30,338 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.openrdf.model.Value;
+import org.openrdf.model.impl.BNodeImpl;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.RDF;
 
 /**
  * Test suite for the {@link BlobsWriteTask}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestBlobsWriteTask extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestBlobsWriteTask() {
-    }
+  /** */
+  public TestBlobsWriteTask() {}
 
-    /**
-     * @param name
-     */
-    public TestBlobsWriteTask(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestBlobsWriteTask(String name) {
+    super(name);
+  }
 
-    public void test_add_abc() {
+  public void test_add_abc() {
 
-        // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {
-          
-                new LiteralImpl("abc")
-                
+    // The values that we will be testing with.
+    final Value[] valuesIn = new Value[] {new LiteralImpl("abc")};
+
+    doAddTermsTest(valuesIn, false /* toldBNodes */);
+  }
+
+  public void test_add_emptyLiteral() {
+
+    // The values that we will be testing with.
+    final Value[] valuesIn = new Value[] {new LiteralImpl("")};
+
+    doAddTermsTest(valuesIn, false /* toldBNodes */);
+  }
+
+  public void test_add_various_toldBNodes() {
+
+    // The values that we will be testing with.
+    final Value[] valuesIn =
+        new Value[] {
+          new LiteralImpl("abc"),
+          RDF.TYPE,
+          RDF.PROPERTY,
+          new LiteralImpl("test"),
+          new LiteralImpl("test", "en"),
+          new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
+          new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new BNodeImpl("a"),
+          new BNodeImpl("12"),
         };
 
-        doAddTermsTest(valuesIn, false/* toldBNodes */);
-        
-    }
-    
-    public void test_add_emptyLiteral() {
+    doAddTermsTest(valuesIn, true /* toldBNodes */);
+  }
 
-        // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {
-          
-                new LiteralImpl("")
-                
-        };
+  /**
+   * Note: Blank nodes are NOT included in this test since the test helper is not smart enough to
+   * verify the blank nodes will not be unified when using standard bnode semantics. However, {@link
+   * TestBlobsIndex} does verify both standard and told bnode semantics.
+   */
+  public void test_add_various_standardBNodes() {
 
-        doAddTermsTest(valuesIn, false/* toldBNodes */);
-        
-    }
-    
-    public void test_add_various_toldBNodes() {
-
-        // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {
-          
-                new LiteralImpl("abc"),
-                RDF.TYPE,
-                RDF.PROPERTY,
-                new LiteralImpl("test"),
-                new LiteralImpl("test", "en"),
-                new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
-                new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new BNodeImpl("a"),
-                new BNodeImpl("12"),
-        };
-
-        doAddTermsTest(valuesIn, true/* toldBNodes */);
-        
-    }
-
-    /**
-     * Note: Blank nodes are NOT included in this test since the test helper is
-     * not smart enough to verify the blank nodes will not be unified when using
-     * standard bnode semantics. However, {@link TestBlobsIndex} does verify
-     * both standard and told bnode semantics.
+    /* The values that we will be testing with.
      */
-    public void test_add_various_standardBNodes() {
+    final Value[] valuesIn =
+        new Value[] {
+          new LiteralImpl("abc"),
+          RDF.TYPE,
+          RDF.PROPERTY,
+          new LiteralImpl("test"),
+          new LiteralImpl("test", "en"),
+          new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
+          new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
+          //                new BNodeImpl("a"),
+          //                new BNodeImpl("12"),
+        };
 
-        /* The values that we will be testing with.
+    doAddTermsTest(valuesIn, false /* toldBNodes */);
+  }
+
+  private void doAddTermsTest(final Value[] valuesIn, final boolean toldBNodes) {
+
+    for (int i = 0; i < valuesIn.length; i++) {
+
+      final Value v = valuesIn[i];
+
+      if (v == null) fail("Not expecting null inputs.");
+
+      if (v instanceof EmbergraphValue) fail("Not expecting EmbergraphValue inputs.");
+    }
+
+    final BlobsIndexHelper h = new BlobsIndexHelper();
+
+    final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance(getName());
+
+    final IRawStore store = new SimpleMemoryRawStore();
+
+    try {
+
+      final BTree ndx = TestBlobsIndex.createTermsIndex(store, getName());
+
+      /*
+       * Point test the TERMS index for each Value. It should not be
+       * found.
+       */
+      {
+        for (int i = 0; i < valuesIn.length; i++) {
+
+          final IV iv = getTermIV(valuesIn[i], h, vf, ndx);
+
+          assertNull(iv);
+        }
+      }
+
+      /*
+       * Batch test the TERMS index for each value. It should not be
+       * found.
+       */
+      {
+
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
+         * side-effect by the TermsWriteTask.
          */
-        final Value[] valuesIn = new Value[] {
-          
-                new LiteralImpl("abc"),
-                RDF.TYPE,
-                RDF.PROPERTY,
-                new LiteralImpl("test"),
-                new LiteralImpl("test", "en"),
-                new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
-                new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-//                new BNodeImpl("a"),
-//                new BNodeImpl("12"),
-        };
+        final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
 
-        doAddTermsTest(valuesIn, false/* toldBNodes */);
-        
-    }
-    
-    private void doAddTermsTest(final Value[] valuesIn, final boolean toldBNodes) {
+        for (int i = 0; i < valuesIn.length; i++) {
 
-        for(int i=0; i<valuesIn.length; i++) {
-         
-            final Value v = valuesIn[i];
-            
-            if(v == null)
-                fail("Not expecting null inputs.");
-
-            if(v instanceof EmbergraphValue)
-                fail("Not expecting EmbergraphValue inputs.");
-            
-        }
-        
-        final BlobsIndexHelper h = new BlobsIndexHelper();
-
-        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
-                .getInstance(getName());
-
-        final IRawStore store = new SimpleMemoryRawStore();
-
-        try {
-
-            final BTree ndx = TestBlobsIndex.createTermsIndex(store, getName());
-
-            /*
-             * Point test the TERMS index for each Value. It should not be
-             * found.
-             */
-            {
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    final IV iv = getTermIV(valuesIn[i], h, vf, ndx);
-
-                    assertNull(iv);
-
-                }
-
-            }
-
-            /*
-             * Batch test the TERMS index for each value. It should not be
-             * found.
-             */
-            {
-
-                /*
-                 * Convert to EmbergraphValues so IVs will be assigned as a
-                 * side-effect by the TermsWriteTask.
-                 */
-                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    values[i] = vf.asValue(valuesIn[i]);
-
-                }
-
-                /*
-                 * Invoke the task in a read-only mode to unify with the
-                 * existing entries in the TERMS index.
-                 */
-                final WriteTaskStats stats = addValues(vf, ndx,
-                        true/* readOnly */, toldBNodes, values);
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    final EmbergraphValue value = values[i];
-
-                    final IV iv = value.getIV();
-
-                    if (iv != null)
-                        fail("Not expecting IV for " + value);
-
-                }
-
-            }
-
-            // Write the Value on the TERMS index, noting the assigned IVs.
-            final IV[] expectedIVs = new IV[valuesIn.length];
-            {
-
-                /*
-                 * Convert to EmbergraphValues so IVs will be assigned as a
-                 * side-effect by the TermsWriteTask.
-                 */
-                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    values[i] = vf.asValue(valuesIn[i]);
-
-                }
-
-                /*
-                 * Write on the TERMS index, unifying with the existing values
-                 * in the index and assigning IVs to new values.
-                 */
-                final WriteTaskStats stats = addValues(vf, ndx,
-                        false/* readOnly */, toldBNodes, values);
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    final EmbergraphValue value = values[i];
-
-                    final IV iv = value.getIV();
-
-                    assertNotNull(iv);
-
-                    if (iv.isNullIV())
-                        fail("Not expecting NullIV for " + value);
-
-                    expectedIVs[i] = iv;
-
-                }
-
-            }
-
-            /*
-             * Batch test the TERMS index for each value. It should now be
-             * found.
-             */
-            {
-
-                /*
-                 * Convert to EmbergraphValues so IVs will be assigned as a
-                 * side-effect by the TermsWriteTask.
-                 */
-                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    values[i] = vf.asValue(valuesIn[i]);
-
-                }
-
-                /*
-                 * Invoke the task in a read-only mode to unify with the
-                 * existing entries in the TERMS index.
-                 */
-                final WriteTaskStats stats = addValues(vf, ndx,
-                        true/* readOnly */, toldBNodes, values);
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    final EmbergraphValue value = values[i];
-
-                    final IV expectedIV = expectedIVs[i];
-
-                    final IV actualIV = value.getIV();
-
-                    if (!expectedIV.equals(actualIV))
-                        fail("Value=" + value + ": expected=" + expectedIV
-                                + ", but actual=" + actualIV);
-
-                }
-
-            }
-
-            /*
-             * Point test the TERMS index for each Value. It should now be
-             * found.
-             */
-            {
-
-                for (int i = 0; i < valuesIn.length; i++) {
-
-                    final Value value = valuesIn[i];
-                    
-                    final IV expectedIV = expectedIVs[i];
-
-                    final IV actualIV = getTermIV(valuesIn[i], h, vf, ndx);
-
-                    if (!expectedIV.equals(actualIV))
-                        fail("Value=" + value + ": expected=" + expectedIV
-                                + ", but actual=" + actualIV);
-
-                }
-
-            }
-
-        } finally {
-
-            store.destroy();
-
+          values[i] = vf.asValue(valuesIn[i]);
         }
 
-    }
+        /*
+         * Invoke the task in a read-only mode to unify with the
+         * existing entries in the TERMS index.
+         */
+        final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);
 
-    /**
-     * Test helper similar to {@link LexiconRelation#getIV(Value)} (point
-     * lookup).
-     * 
-     * @param value
-     * @param h
-     * @param vf
-     * @param ndx
-     * @return
-     */
-    private IV getTermIV(final Value value, final BlobsIndexHelper h,
-            final EmbergraphValueFactory vf, final IIndex ndx) {
+        for (int i = 0; i < valuesIn.length; i++) {
 
-        final IKeyBuilder keyBuilder = h.newKeyBuilder();
+          final EmbergraphValue value = values[i];
 
-        final EmbergraphValue asValue = vf.asValue(value);
+          final IV iv = value.getIV();
 
-        final byte[] baseKey = h.makePrefixKey(keyBuilder.reset(), asValue);
+          if (iv != null) fail("Not expecting IV for " + value);
+        }
+      }
 
-        final byte[] val = vf.getValueSerializer().serialize(asValue);
+      // Write the Value on the TERMS index, noting the assigned IVs.
+      final IV[] expectedIVs = new IV[valuesIn.length];
+      {
 
-        final int counter = h.resolveOrAddValue(ndx, true/* readOnly */,
-                keyBuilder, baseKey, val, null/* tmp */, null/* bucketSize */);
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
+         * side-effect by the TermsWriteTask.
+         */
+        final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
 
-        if (counter == BlobsIndexHelper.NOT_FOUND) {
+        for (int i = 0; i < valuesIn.length; i++) {
 
-            // Not found.
-            return null;
-
+          values[i] = vf.asValue(valuesIn[i]);
         }
 
-//        final TermId<?> iv = (TermId<?>) IVUtility.decode(key);
+        /*
+         * Write on the TERMS index, unifying with the existing values
+         * in the index and assigning IVs to new values.
+         */
+        final WriteTaskStats stats = addValues(vf, ndx, false /* readOnly */, toldBNodes, values);
 
-		final BlobIV<?> iv = new BlobIV<EmbergraphValue>(VTE.valueOf(asValue),
-				asValue.hashCode(), (short) counter);
+        for (int i = 0; i < valuesIn.length; i++) {
 
-        return iv;
+          final EmbergraphValue value = values[i];
 
-    }
+          final IV iv = value.getIV();
 
-    /**
-     * Thin wrapper for the {@link BlobsWriteTask} as invoked by the
-     * {@link LexiconRelation}. This can be used to unify the {@link IV}s for
-     * the caller's {@link EmbergraphValue} with those in the TERMS index and
-     * (optionally) to assign new {@link IV}s (when read-only is
-     * <code>false</code>).
-     * 
-     * @param vf
-     * @param ndx
-     * @param readOnly
-     * @param toldBNodes
-     * @param values
-     * @return
-     */
-    private WriteTaskStats addValues(final EmbergraphValueFactory vf,
-            final IIndex ndx, final boolean readOnly, final boolean toldBNodes,
-            final EmbergraphValue[] values) {
+          assertNotNull(iv);
 
-        final WriteTaskStats stats = new WriteTaskStats();
+          if (iv.isNullIV()) fail("Not expecting NullIV for " + value);
 
-        final BlobsWriteTask task = new BlobsWriteTask(ndx, vf, readOnly,
-                toldBNodes, values.length, values, stats);
+          expectedIVs[i] = iv;
+        }
+      }
 
-        try {
-            task.call();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+      /*
+       * Batch test the TERMS index for each value. It should now be
+       * found.
+       */
+      {
+
+        /*
+         * Convert to EmbergraphValues so IVs will be assigned as a
+         * side-effect by the TermsWriteTask.
+         */
+        final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
+
+        for (int i = 0; i < valuesIn.length; i++) {
+
+          values[i] = vf.asValue(valuesIn[i]);
         }
 
-        if(log.isInfoEnabled())
-        	log.info(stats);
-        
-        return stats;
+        /*
+         * Invoke the task in a read-only mode to unify with the
+         * existing entries in the TERMS index.
+         */
+        final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);
 
+        for (int i = 0; i < valuesIn.length; i++) {
+
+          final EmbergraphValue value = values[i];
+
+          final IV expectedIV = expectedIVs[i];
+
+          final IV actualIV = value.getIV();
+
+          if (!expectedIV.equals(actualIV))
+            fail("Value=" + value + ": expected=" + expectedIV + ", but actual=" + actualIV);
+        }
+      }
+
+      /*
+       * Point test the TERMS index for each Value. It should now be
+       * found.
+       */
+      {
+        for (int i = 0; i < valuesIn.length; i++) {
+
+          final Value value = valuesIn[i];
+
+          final IV expectedIV = expectedIVs[i];
+
+          final IV actualIV = getTermIV(valuesIn[i], h, vf, ndx);
+
+          if (!expectedIV.equals(actualIV))
+            fail("Value=" + value + ": expected=" + expectedIV + ", but actual=" + actualIV);
+        }
+      }
+
+    } finally {
+
+      store.destroy();
+    }
+  }
+
+  /**
+   * Test helper similar to {@link LexiconRelation#getIV(Value)} (point lookup).
+   *
+   * @param value
+   * @param h
+   * @param vf
+   * @param ndx
+   * @return
+   */
+  private IV getTermIV(
+      final Value value,
+      final BlobsIndexHelper h,
+      final EmbergraphValueFactory vf,
+      final IIndex ndx) {
+
+    final IKeyBuilder keyBuilder = h.newKeyBuilder();
+
+    final EmbergraphValue asValue = vf.asValue(value);
+
+    final byte[] baseKey = h.makePrefixKey(keyBuilder.reset(), asValue);
+
+    final byte[] val = vf.getValueSerializer().serialize(asValue);
+
+    final int counter =
+        h.resolveOrAddValue(
+            ndx,
+            true /* readOnly */,
+            keyBuilder,
+            baseKey,
+            val,
+            null /* tmp */,
+            null /* bucketSize */);
+
+    if (counter == BlobsIndexHelper.NOT_FOUND) {
+
+      // Not found.
+      return null;
     }
 
+    //        final TermId<?> iv = (TermId<?>) IVUtility.decode(key);
+
+    final BlobIV<?> iv =
+        new BlobIV<EmbergraphValue>(VTE.valueOf(asValue), asValue.hashCode(), (short) counter);
+
+    return iv;
+  }
+
+  /**
+   * Thin wrapper for the {@link BlobsWriteTask} as invoked by the {@link LexiconRelation}. This can
+   * be used to unify the {@link IV}s for the caller's {@link EmbergraphValue} with those in the
+   * TERMS index and (optionally) to assign new {@link IV}s (when read-only is <code>false</code>).
+   *
+   * @param vf
+   * @param ndx
+   * @param readOnly
+   * @param toldBNodes
+   * @param values
+   * @return
+   */
+  private WriteTaskStats addValues(
+      final EmbergraphValueFactory vf,
+      final IIndex ndx,
+      final boolean readOnly,
+      final boolean toldBNodes,
+      final EmbergraphValue[] values) {
+
+    final WriteTaskStats stats = new WriteTaskStats();
+
+    final BlobsWriteTask task =
+        new BlobsWriteTask(ndx, vf, readOnly, toldBNodes, values.length, values, stats);
+
+    try {
+      task.call();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
+    if (log.isInfoEnabled()) log.info(stats);
+
+    return stats;
+  }
 }

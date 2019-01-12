@@ -20,23 +20,22 @@ import java.util.Iterator;
 /**
  * Resolver
  *
- * Used with Resolverator by Striterator to resolve returned objects.
+ * <p>Used with Resolverator by Striterator to resolve returned objects.
  *
- * Cannot be instantiated directly since an implementation of the resolve method is required.
+ * <p>Cannot be instantiated directly since an implementation of the resolve method is required.
  */
-
 public abstract class Resolver extends FilterBase {
-	
-	public Resolver()	{}
 
-	//-------------------------------------------------------------
+  public Resolver() {}
 
-	@Override
-    final public Iterator filterOnce(Iterator src, Object context) {
-        return new Resolverator(src, context, this);
-	}
+  // -------------------------------------------------------------
 
-	//-------------------------------------------------------------
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
+    return new Resolverator(src, context, this);
+  }
 
-	protected abstract Object resolve(Object obj);
+  // -------------------------------------------------------------
+
+  protected abstract Object resolve(Object obj);
 }

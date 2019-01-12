@@ -24,94 +24,81 @@ package org.embergraph.io;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link SliceInputStream}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSliceInputStream extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestSliceInputStream() {
+  /** */
+  public TestSliceInputStream() {}
+
+  /** @param name */
+  public TestSliceInputStream(String name) {
+    super(name);
+  }
+
+  public void test_ctor_null_arg() {
+    try {
+      new SliceInputStream(null, 10);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestSliceInputStream(String name) {
-        super(name);
+  public void test_ctor_negative_limit() {
+    try {
+      new SliceInputStream(new ByteArrayInputStream(new byte[10]), -1);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
+  }
 
-    public void test_ctor_null_arg() {
-        try {
-            new SliceInputStream(null, 10);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-    }
+  /*
+   * TODO read(byte[])
+   *
+   * TODO read(byte[],off,len)
+   */
+  public void test_slice_read() throws IOException {
 
-    public void test_ctor_negative_limit() {
-        try {
-            new SliceInputStream(new ByteArrayInputStream(new byte[10]), -1);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-    }
+    final byte[] b = new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    /*
-     * TODO read(byte[])
-     * 
-     * TODO read(byte[],off,len)
-     */
-    public void test_slice_read() throws IOException {
+    final InputStream is = new SliceInputStream(new ByteArrayInputStream(b), 3 /* limit */);
 
-        final byte[] b = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    assertEquals(0, is.read());
+    assertEquals(1, is.read());
+    assertEquals(2, is.read());
+    assertEquals(-1, is.read());
+  }
 
-        final InputStream is = new SliceInputStream(
-                new ByteArrayInputStream(b), 3/* limit */);
+  public void test_slice_read_byteArray() throws IOException {
 
-        assertEquals(0, is.read());
-        assertEquals(1, is.read());
-        assertEquals(2, is.read());
-        assertEquals(-1, is.read());
-        
-    }
-    
-    public void test_slice_read_byteArray() throws IOException {
+    final byte[] b = new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        final byte[] b = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        
-        final SliceInputStream is = new SliceInputStream(
-                new ByteArrayInputStream(b), 3/* limit */);
+    final SliceInputStream is = new SliceInputStream(new ByteArrayInputStream(b), 3 /* limit */);
 
-        final byte[] a = new byte[3];
+    final byte[] a = new byte[3];
 
-        // empty read is allowed and reads nothing.
-        assertEquals(0, is.read(a, 0, 0));
+    // empty read is allowed and reads nothing.
+    assertEquals(0, is.read(a, 0, 0));
 
-        // read 3 bytes is allowed.
-        assertEquals(3, is.read(a)); // TODO validate args.
-        assertEquals(new byte[] { 0, 1, 2 }, a);// verify data.
+    // read 3 bytes is allowed.
+    assertEquals(3, is.read(a)); // TODO validate args.
+    assertEquals(new byte[] {0, 1, 2}, a); // verify data.
 
-        // next byte is not allowed.
-        assertEquals(-1, is.read());
+    // next byte is not allowed.
+    assertEquals(-1, is.read());
 
-        // empty read is still allowed.
-        assertEquals(0, is.read(a, 0, 0));
+    // empty read is still allowed.
+    assertEquals(0, is.read(a, 0, 0));
 
-        // non-empty read is not allowed.
-        assertEquals(-1, is.read(a, 0, 1));
-
-    }
-    
+    // non-empty read is not allowed.
+    assertEquals(-1, is.read(a, 0, 1));
+  }
 }

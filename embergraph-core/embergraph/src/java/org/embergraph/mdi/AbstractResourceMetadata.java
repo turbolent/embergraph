@@ -28,9 +28,7 @@ import java.io.ObjectOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.io.ShortPacker;
@@ -40,246 +38,216 @@ import org.embergraph.service.Params;
 
 /**
  * Base class for {@link IResourceMetadata} implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractResourceMetadata implements IResourceMetadata,
-        Externalizable, Params {
+public abstract class AbstractResourceMetadata
+    implements IResourceMetadata, Externalizable, Params {
 
-    static final protected Logger log = Logger
-            .getLogger(AbstractResourceMetadata.class);
-    
-    /**
-     * The name of the resource file.
-     */
-    private String filename;
-    
-//    /**
-//     * The size of that file in bytes.
-//     */
-//    private long nbytes;
+  protected static final Logger log = Logger.getLogger(AbstractResourceMetadata.class);
 
-    /**
-     * The unique identifier for the resource.
-     */
-    private UUID uuid;
-    
-    /**
-     * The commit time associated with the described index. When the index is an
-     * {@link IndexSegment} this is the commit time of the view from which that
-     * {@link IndexSegment} was generated. When the index is a {@link BTree} on
-     * a {@link Journal}, the commit time is the commit time associated with
-     * the {@link BTree} revision of interest.
-     */
-    private long createTime;
+  /** The name of the resource file. */
+  private String filename;
 
-    /**
-     * @see #VERSION1
-     */
-    private long commitTime;
+  //    /**
+  //     * The size of that file in bytes.
+  //     */
+  //    private long nbytes;
 
-    public Map<String, Object> getParams() {
+  /** The unique identifier for the resource. */
+  private UUID uuid;
 
-        final Map<String, Object> v = new HashMap<String, Object>();
+  /**
+   * The commit time associated with the described index. When the index is an {@link IndexSegment}
+   * this is the commit time of the view from which that {@link IndexSegment} was generated. When
+   * the index is a {@link BTree} on a {@link Journal}, the commit time is the commit time
+   * associated with the {@link BTree} revision of interest.
+   */
+  private long createTime;
 
-        v.put("UUID", uuid);
+  /** @see #VERSION1 */
+  private long commitTime;
 
-        v.put("filename", filename);
+  public Map<String, Object> getParams() {
 
-        v.put("createTime", createTime);
+    final Map<String, Object> v = new HashMap<String, Object>();
 
-        return v;
-            
-    }
-    
-    /**
-     * De-serialization constructor.
-     */
-    public AbstractResourceMetadata() {
-        
-    }
+    v.put("UUID", uuid);
 
-    protected AbstractResourceMetadata(final String filename, //long nbytes,
-            final UUID uuid, final long createTime, final long commitTime) {
+    v.put("filename", filename);
 
-        if (filename == null || uuid == null)
-            throw new IllegalArgumentException();
+    v.put("createTime", createTime);
 
-//        if (nbytes <= 0)
-//            throw new IllegalArgumentException(
-//                    "Store file size is non-positive");
+    return v;
+  }
 
-        this.filename = filename;
-        
-//        this.nbytes = nbytes;
-        
-        this.uuid = uuid;
+  /** De-serialization constructor. */
+  public AbstractResourceMetadata() {}
 
-        this.createTime = createTime;
-        
-        if (createTime == 0L) {
-          
-            throw new IllegalArgumentException("Create time is zero? : " + this);
-          
-        }
-        
-        this.commitTime = commitTime;
-      
+  protected AbstractResourceMetadata(
+      final String filename, // long nbytes,
+      final UUID uuid,
+      final long createTime,
+      final long commitTime) {
+
+    if (filename == null || uuid == null) throw new IllegalArgumentException();
+
+    //        if (nbytes <= 0)
+    //            throw new IllegalArgumentException(
+    //                    "Store file size is non-positive");
+
+    this.filename = filename;
+
+    //        this.nbytes = nbytes;
+
+    this.uuid = uuid;
+
+    this.createTime = createTime;
+
+    if (createTime == 0L) {
+
+      throw new IllegalArgumentException("Create time is zero? : " + this);
     }
 
-    final public int hashCode() {
-        
-        return uuid.hashCode();
-        
-    }
-    
-    /**
-     * Note: The JDK {@link HashMap} implementation requires that we define this
-     * method in order for {@link HashMap#get(Object)} to work correctly!
-     */
-    final public boolean equals(final Object o) {
-        
-        return equals((IResourceMetadata)o);
-        
-    }
-    
-    /**
-     * Compares two resource metadata objects for consistent state.
-     */
-    final public boolean equals(final IResourceMetadata o) {
-        
-        if (this == o)
-            return true;
-        
-        // Note: compares UUIDs first.
+    this.commitTime = commitTime;
+  }
 
-        if (uuid.equals(o.getUUID()) && filename.equals(o.getFile())
-//                && nbytes == o.size() 
-                && createTime == o.getCreateTime()) {
+  public final int hashCode() {
 
-            return true;
-            
-        }
-        
-        return false;
-        
+    return uuid.hashCode();
+  }
+
+  /**
+   * Note: The JDK {@link HashMap} implementation requires that we define this method in order for
+   * {@link HashMap#get(Object)} to work correctly!
+   */
+  public final boolean equals(final Object o) {
+
+    return equals((IResourceMetadata) o);
+  }
+
+  /** Compares two resource metadata objects for consistent state. */
+  public final boolean equals(final IResourceMetadata o) {
+
+    if (this == o) return true;
+
+    // Note: compares UUIDs first.
+
+    if (uuid.equals(o.getUUID())
+        && filename.equals(o.getFile())
+        //                && nbytes == o.size()
+        && createTime == o.getCreateTime()) {
+
+      return true;
     }
 
-    final public String getFile() {
-        
-        return filename;
-        
+    return false;
+  }
+
+  public final String getFile() {
+
+    return filename;
+  }
+
+  //    public final long size() {
+  //
+  //        return nbytes;
+  //
+  //    }
+
+  public final UUID getUUID() {
+
+    return uuid;
+  }
+
+  public final long getCreateTime() {
+
+    return createTime;
+  }
+
+  public final long getCommitTime() {
+
+    return commitTime;
+  }
+
+  /** The original version. */
+  private static final transient short VERSION0 = 0x0;
+
+  /**
+   * This version supports a commitTime field. That field is used when a view must be defined which
+   * reads on a specific commit record in a journal. For VERSION0, this field was not defined. Prior
+   * to version1, all references to a historical journal were interpreted as references to the
+   * lastCommitTime in the journal by the {@link IndexManager}.
+   */
+  private static final transient short VERSION1 = 0x1;
+
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+
+    final short version = ShortPacker.unpackShort(in);
+
+    switch (version) {
+      case VERSION0:
+      case VERSION1:
+        break;
+      default:
+        throw new IOException("Unknown version: " + version);
     }
 
-//    public final long size() {
-//        
-//        return nbytes;
-//        
-//    }
+    //        nbytes = LongPacker.unpackLong(in);
 
-    final public UUID getUUID() {
-        
-        return uuid;
-        
+    uuid = new UUID(in.readLong(), in.readLong());
+
+    createTime = in.readLong();
+
+    if (version >= VERSION1) {
+
+      // the specified value.
+      commitTime = in.readLong();
+
+    } else if (this instanceof SegmentMetadata) {
+
+      // these are the always the same for an index segment.
+      commitTime = createTime;
+
+    } else {
+
+      // no value was specified.
+      commitTime = 0L;
     }
 
-    final public long getCreateTime() {
-        
-        return createTime;
-        
-    }
+    filename = in.readUTF();
+  }
 
-    final public long getCommitTime() {
-        
-        return commitTime;
-        
-    }
-    
-    /**
-     * The original version.
-     */
-    private static final transient short VERSION0 = 0x0;
+  public void writeExternal(final ObjectOutput out) throws IOException {
 
-    /**
-     * This version supports a commitTime field. That field is used when a view
-     * must be defined which reads on a specific commit record in a journal. For
-     * VERSION0, this field was not defined. Prior to version1, all references to
-     * a historical journal were interpreted as references to the lastCommitTime
-     * in the journal by the {@link IndexManager}.
-     */
-    private static final transient short VERSION1 = 0x1;
-    
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
+    ShortPacker.packShort(out, VERSION1);
 
-        final short version = ShortPacker.unpackShort(in);
+    //        LongPacker.packLong(out, nbytes);
 
-        switch (version) {
-        case VERSION0:
-        case VERSION1:
-            break;
-        default:
-            throw new IOException("Unknown version: " + version);
-        }
+    out.writeLong(uuid.getMostSignificantBits());
 
-//        nbytes = LongPacker.unpackLong(in);
-        
-        uuid = new UUID(in.readLong(),in.readLong());
-        
-        createTime = in.readLong();
-        
-        if (version >= VERSION1) {
+    out.writeLong(uuid.getLeastSignificantBits());
 
-            // the specified value.
-            commitTime = in.readLong();
-            
-        } else if(this instanceof SegmentMetadata) {
-            
-            // these are the always the same for an index segment.
-            commitTime = createTime;
-            
-        } else {
-            
-            // no value was specified.
-            commitTime = 0L;
-            
-        }
-        
-        filename = in.readUTF();
+    out.writeLong(createTime);
 
-    }
+    out.writeLong(commitTime);
 
-    public void writeExternal(final ObjectOutput out) throws IOException {
+    out.writeUTF(filename);
+  }
 
-        ShortPacker.packShort(out, VERSION1);
-        
-//        LongPacker.packLong(out, nbytes);
-        
-        out.writeLong(uuid.getMostSignificantBits());
+  /** A human readable representation of the resource metadata. */
+  public String toString() {
 
-        out.writeLong(uuid.getLeastSignificantBits());
-
-        out.writeLong(createTime);
-        
-        out.writeLong(commitTime);
-        
-        out.writeUTF(filename);
-        
-    }
-
-    /**
-     * A human readable representation of the resource metadata.
-     */
-    public String toString() {
-        
-        return getClass().getSimpleName()+
-        "{filename="+getFile()+
-        ",uuid="+getUUID()+
-        ",createTime="+getCreateTime()+
-        ",commitTime="+getCommitTime()+
-        "}";
-        
-    }
-    
+    return getClass().getSimpleName()
+        + "{filename="
+        + getFile()
+        + ",uuid="
+        + getUUID()
+        + ",createTime="
+        + getCreateTime()
+        + ",commitTime="
+        + getCommitTime()
+        + "}";
+  }
 }

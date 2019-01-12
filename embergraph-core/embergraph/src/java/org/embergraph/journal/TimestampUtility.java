@@ -25,139 +25,111 @@ package org.embergraph.journal;
 
 /**
  * Some static helper methods for timestamps.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TimestampUtility {
 
-    /**
-     * Formats the timestamp as a String.
-     * 
-     * @param timestamp
-     * 
-     * @return
+  /**
+   * Formats the timestamp as a String.
+   *
+   * @param timestamp
+   * @return
+   */
+  public static String toString(final long timestamp) {
+
+    if (timestamp == ITx.UNISOLATED) return "unisolated";
+
+    if (timestamp == ITx.READ_COMMITTED) return "read-committed";
+
+    if (isReadWriteTx(timestamp)) return "readWriteTX(" + timestamp + ")";
+
+    return "readOnly(" + timestamp + ")";
+  }
+
+  /**
+   * True iff the timestamp is a possible commit time (GT ZERO).
+   *
+   * <p>Note: Both read-only transactions are commit times are positive. The transition identifier
+   * for a read-only transaction is chosen from among those distinct timestamps available between
+   * the effective commit time requested for the read-only transaction and the next commit time on
+   * the database.
+   *
+   * @param timestamp The timestamp.
+   * @return <code>true</code> for a possible commit time or a read-only tx.
+   */
+  public static boolean isCommitTime(final long timestamp) {
+
+    return timestamp > 0;
+  }
+
+  /**
+   * True iff the timestamp is a possible commit time (GT ZERO) -OR- a {@link ITx#READ_COMMITTED}
+   * request.
+   *
+   * @param timestamp The timestamp.
+   * @return <code>true</code> for a possible commit time, a read-only tx, or a {@link
+   *     ITx#READ_COMMITTED} request.
+   */
+  public static boolean isReadOnly(final long timestamp) {
+
+    //        return timestamp < ITx.READ_COMMITTED;
+    return timestamp > 0 || timestamp == ITx.READ_COMMITTED;
+  }
+
+  /**
+   * Return <code>true</code> iff the timestamp is a possible read-write transaction identifier (LT
+   * ZERO).
+   *
+   * @param timestamp The timestamp.
+   * @return <code>true</code> iff the timestamp is a possible read-write transaction identifier.
+   */
+  public static boolean isReadWriteTx(final long timestamp) {
+
+    //        return timestamp > 0;
+
+    /*
+     * Note: timestamp != ITx.UNISOLATED is a redundant test since
+     *
+     * READ_COMMITTED == -1
+     *
+     * and
+     *
+     * UNISOLATED == 0
      */
-    static public String toString(final long timestamp) {
+    return timestamp < ITx.READ_COMMITTED;
+  }
 
-        if (timestamp == ITx.UNISOLATED)
-            return "unisolated";
+  public static boolean isReadCommittedOrUnisolated(final long timestamp) {
 
-        if (timestamp == ITx.READ_COMMITTED)
-            return "read-committed";
+    return timestamp == ITx.READ_COMMITTED || timestamp == ITx.UNISOLATED;
+  }
 
-        if (isReadWriteTx(timestamp))
-            return "readWriteTX(" + timestamp + ")";
+  public static boolean isReadCommitted(final long timestamp) {
 
-        return "readOnly(" + timestamp + ")";
+    return timestamp == ITx.READ_COMMITTED;
+  }
 
-    }
+  public static boolean isUnisolated(final long timestamp) {
 
-    /**
-     * True iff the timestamp is a possible commit time (GT ZERO).
-     * <p>
-     * Note: Both read-only transactions are commit times are positive. The
-     * transition identifier for a read-only transaction is chosen from among
-     * those distinct timestamps available between the effective commit time
-     * requested for the read-only transaction and the next commit time on the
-     * database.
-     * 
-     * @param timestamp
-     *            The timestamp.
-     *            
-     * @return <code>true</code> for a possible commit time or a read-only tx.
-     */
-    static public boolean isCommitTime(final long timestamp) {
-        
-        return timestamp > 0;
-        
-    }
+    return timestamp == ITx.UNISOLATED;
+  }
 
-    /**
-     * True iff the timestamp is a possible commit time (GT ZERO) -OR- a
-     * {@link ITx#READ_COMMITTED} request.
-     * 
-     * @param timestamp
-     *            The timestamp.
-     * 
-     * @return <code>true</code> for a possible commit time, a read-only tx, or
-     *         a {@link ITx#READ_COMMITTED} request.
-     */
-    static public boolean isReadOnly(final long timestamp) {
-        
-//        return timestamp < ITx.READ_COMMITTED;
-        return timestamp > 0 || timestamp == ITx.READ_COMMITTED;
-        
-    }
+  /**
+   * Accepts a commitTime and returns a timestamp that will be interpreted as a historical read
+   * (this is a NOP).
+   *
+   * @param commitTime The commit time from {@link IIndexStore#getLastCommitTime()}, etc.
+   * @return The corresponding timestamp that will be interpreted as a historical read against the
+   *     state of the database having that commit time.
+   * @throws IllegalArgumentException if <i>commitTime</i> is negative (zero is permitted for some
+   *     edge cases).
+   */
+  public static long asHistoricalRead(final long commitTime) {
 
-    /**
-     * Return <code>true</code> iff the timestamp is a possible read-write
-     * transaction identifier (LT ZERO).
-     * 
-     * @param timestamp
-     *            The timestamp.
-     * 
-     * @return <code>true</code> iff the timestamp is a possible read-write
-     *         transaction identifier.
-     */
-    static public boolean isReadWriteTx(final long timestamp) {
-        
-//        return timestamp > 0;
+    if (commitTime < 0) throw new IllegalArgumentException("commitTime: " + commitTime);
 
-        /*
-         * Note: timestamp != ITx.UNISOLATED is a redundant test since
-         * 
-         * READ_COMMITTED == -1
-         * 
-         * and
-         * 
-         * UNISOLATED == 0
-         */
-        return timestamp < ITx.READ_COMMITTED;
-
-    }
-    
-    static public boolean isReadCommittedOrUnisolated(final long timestamp) {
-        
-        return timestamp == ITx.READ_COMMITTED || timestamp == ITx.UNISOLATED;
-        
-    }
-
-    static public boolean isReadCommitted(final long timestamp) {
-        
-        return timestamp == ITx.READ_COMMITTED;
-        
-    }
-
-    static public boolean isUnisolated(final long timestamp) {
-        
-        return timestamp == ITx.UNISOLATED;
-        
-    }
-
-    /**
-     * Accepts a commitTime and returns a timestamp that will be interpreted as
-     * a historical read (this is a NOP).
-     * 
-     * @param commitTime
-     *            The commit time from {@link IIndexStore#getLastCommitTime()},
-     *            etc.
-     *            
-     * @return The corresponding timestamp that will be interpreted as a
-     *         historical read against the state of the database having that
-     *         commit time.
-     *         
-     * @throws IllegalArgumentException
-     *             if <i>commitTime</i> is negative (zero is permitted for some
-     *             edge cases).
-     */
-    static public long asHistoricalRead(final long commitTime) {
-    
-        if (commitTime < 0)
-            throw new IllegalArgumentException("commitTime: " + commitTime);
-        
-//        return -commitTime;
-        return commitTime;
-        
-    }
-    
+    //        return -commitTime;
+    return commitTime;
+  }
 }

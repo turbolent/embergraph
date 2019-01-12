@@ -22,88 +22,73 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOComparator;
 
 public class ChangeRecord implements IChangeRecord {
-    
-    private final ISPO stmt;
-    
-    private final ChangeAction action;
-    
-    public ChangeRecord(final ISPO stmt, final ChangeAction action) {
-        
-        this.stmt = stmt;
-        this.action = action;
-        
-    }
-    
-    public ChangeAction getChangeAction() {
-        
-        return action;
-        
+
+  private final ISPO stmt;
+
+  private final ChangeAction action;
+
+  public ChangeRecord(final ISPO stmt, final ChangeAction action) {
+
+    this.stmt = stmt;
+    this.action = action;
+  }
+
+  public ChangeAction getChangeAction() {
+
+    return action;
+  }
+
+  public ISPO getStatement() {
+
+    return stmt;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return stmt.hashCode();
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+
+    if (o == this) return true;
+
+    if (o == null || o instanceof IChangeRecord == false) return false;
+
+    final IChangeRecord rec = (IChangeRecord) o;
+
+    final ISPO stmt2 = rec.getStatement();
+
+    // statements are equal
+    if (stmt == stmt2 || (stmt != null && stmt2 != null && stmt.equals(stmt2))) {
+
+      // actions are equal
+      return action == rec.getChangeAction();
     }
 
-    public ISPO getStatement() {
-        
-        return stmt;
-        
-    }
-   
-    @Override
-    public int hashCode() {
+    return false;
+  }
 
-        return stmt.hashCode();
-        
-    }
-    
-    @Override
-    public boolean equals(final Object o) {
-        
-        if (o == this)
-            return true;
-        
-        if (o == null || o instanceof IChangeRecord == false)
-            return false;
-        
-        final IChangeRecord rec = (IChangeRecord) o;
-        
-        final ISPO stmt2 = rec.getStatement();
-        
-        // statements are equal
-        if (stmt == stmt2 || 
-                (stmt != null && stmt2 != null && stmt.equals(stmt2))) {
-            
-            // actions are equal
-            return action == rec.getChangeAction();
-            
-        }
-        
-        return false;
-        
-    }
-    
-    public String toString() {
-        
-        final StringBuilder sb = new StringBuilder();
-        
-        sb.append(action).append(": ").append(stmt);
-        
-        return sb.toString();
-        
-    }
+  public String toString() {
 
-    /**
-     * Comparator imposes an {@link ISPO} order.
-     */
-    public static final Comparator<IChangeRecord> COMPARATOR = 
-        new Comparator<IChangeRecord>() {
-        
+    final StringBuilder sb = new StringBuilder();
+
+    sb.append(action).append(": ").append(stmt);
+
+    return sb.toString();
+  }
+
+  /** Comparator imposes an {@link ISPO} order. */
+  public static final Comparator<IChangeRecord> COMPARATOR =
+      new Comparator<IChangeRecord>() {
+
         public int compare(final IChangeRecord r1, final IChangeRecord r2) {
-            
-            final ISPO spo1 = r1.getStatement();
-            final ISPO spo2 = r2.getStatement();
-            
-            return SPOComparator.INSTANCE.compare(spo1, spo2);
-            
+
+          final ISPO spo1 = r1.getStatement();
+          final ISPO spo2 = r2.getStatement();
+
+          return SPOComparator.INSTANCE.compare(spo1, spo2);
         }
-        
-    };
-    
+      };
 }

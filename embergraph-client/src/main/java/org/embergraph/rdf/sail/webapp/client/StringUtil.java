@@ -23,45 +23,40 @@
  */
 package org.embergraph.rdf.sail.webapp.client;
 
-/** Fast String Utilities.
-*
-* These string utilities provide both convenience methods and
-* performance improvements over most standard library versions. The
-* main aim of the optimizations is to avoid object creation unless
-* absolutely required.
-*/
+/**
+ * Fast String Utilities.
+ *
+ * <p>These string utilities provide both convenience methods and performance improvements over most
+ * standard library versions. The main aim of the optimizations is to avoid object creation unless
+ * absolutely required.
+ */
 public class StringUtil {
 
-    /**
-     * Convert String to an long. Parses up to the first non-numeric character.
-     * If no number is found an IllegalArgumentException is thrown
-     * 
-     * @param string
-     *            A String containing an integer.
-     * @return an int
-     */
-    public static long toLong(final String string) {
-        long val = 0;
-        boolean started = false;
-        boolean minus = false;
+  /**
+   * Convert String to an long. Parses up to the first non-numeric character. If no number is found
+   * an IllegalArgumentException is thrown
+   *
+   * @param string A String containing an integer.
+   * @return an int
+   */
+  public static long toLong(final String string) {
+    long val = 0;
+    boolean started = false;
+    boolean minus = false;
 
-        for (int i = 0; i < string.length(); i++) {
-            char b = string.charAt(i);
-            if (b <= ' ') {
-                if (started)
-                    break;
-            } else if (b >= '0' && b <= '9') {
-                val = val * 10L + (b - '0');
-                started = true;
-            } else if (b == '-' && !started) {
-                minus = true;
-            } else
-                break;
-        }
-
-        if (started)
-            return minus ? (-val) : val;
-        throw new NumberFormatException(string);
+    for (int i = 0; i < string.length(); i++) {
+      char b = string.charAt(i);
+      if (b <= ' ') {
+        if (started) break;
+      } else if (b >= '0' && b <= '9') {
+        val = val * 10L + (b - '0');
+        started = true;
+      } else if (b == '-' && !started) {
+        minus = true;
+      } else break;
     }
 
+    if (started) return minus ? (-val) : val;
+    throw new NumberFormatException(string);
+  }
 }

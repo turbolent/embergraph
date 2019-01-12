@@ -19,80 +19,71 @@ package org.embergraph.rdf.internal;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
-
 import javax.xml.bind.DatatypeConverter;
-
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
  * Inline URI Handler to handle URI's in the form of a Hex UUID such as:
- * 
- *  <pre>
+ *
+ * <pre>
  *   http://blazegraph.com/element/010072F0000038090100000000D56C9E
  *  </pre>
- *  
- *  {@link https://jira.blazegraph.com/browse/BLZG-1936}
- * 
- * @author beebs
  *
+ * {@link https://jira.blazegraph.com/browse/BLZG-1936}
+ *
+ * @author beebs
  */
 public class InlineHexUUIDURIHandler extends InlineURIHandler {
 
-    /**
-     * Default URI namespace for inline UUIDs.
-     */
-    public static final String NAMESPACE = "urn:hex:uuid:";
+  /** Default URI namespace for inline UUIDs. */
+  public static final String NAMESPACE = "urn:hex:uuid:";
 
-    public InlineHexUUIDURIHandler(final String namespace) {
-        super(namespace);
+  public InlineHexUUIDURIHandler(final String namespace) {
+    super(namespace);
+  }
+
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(final String localName) {
+
+    if (localName == null) {
+      return null;
     }
-    
-    @SuppressWarnings("rawtypes")
-    protected AbstractLiteralIV createInlineIV(final String localName) {
-        
-        if (localName == null) {
-            return null;
-        }
-        
-        try {
-        	final byte uuid[] = DatatypeConverter.parseHexBinary(localName);
-            return new UUIDLiteralIV(asUuid(uuid));
-        } catch (IllegalArgumentException ex) {
-            /*
-             * Could not parse localName into a UUID.  Fall through to TermIV.
-             */
-            return null;
-        }
-        
+
+    try {
+      final byte uuid[] = DatatypeConverter.parseHexBinary(localName);
+      return new UUIDLiteralIV(asUuid(uuid));
+    } catch (IllegalArgumentException ex) {
+      /*
+       * Could not parse localName into a UUID.  Fall through to TermIV.
+       */
+      return null;
     }
-    
-    @SuppressWarnings("rawtypes")
-	@Override
-	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+  }
 
-    	final UUID uuid = ((UUIDLiteralIV) delegate).getInlineValue();
+  @SuppressWarnings("rawtypes")
+  @Override
+  public String getLocalNameFromDelegate(AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
-		final String localName = DatatypeConverter.printHexBinary(asBytes(uuid));
-    	
-		return localName;
-	}
-    
-	public static UUID asUuid(byte[] bytes) {
-		ByteBuffer bb = ByteBuffer.wrap(bytes);
-		long firstLong = bb.getLong();
-		long secondLong = bb.getLong();
-		return new UUID(firstLong, secondLong);
-	}
+    final UUID uuid = ((UUIDLiteralIV) delegate).getInlineValue();
 
-	public static byte[] asBytes(UUID uuid) {
-		ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
-		bb.putLong(uuid.getMostSignificantBits());
-		bb.putLong(uuid.getLeastSignificantBits());
-		return bb.array();
-	}
-    
+    final String localName = DatatypeConverter.printHexBinary(asBytes(uuid));
+
+    return localName;
+  }
+
+  public static UUID asUuid(byte[] bytes) {
+    ByteBuffer bb = ByteBuffer.wrap(bytes);
+    long firstLong = bb.getLong();
+    long secondLong = bb.getLong();
+    return new UUID(firstLong, secondLong);
+  }
+
+  public static byte[] asBytes(UUID uuid) {
+    ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
+    bb.putLong(uuid.getMostSignificantBits());
+    bb.putLong(uuid.getLeastSignificantBits());
+    return bb.array();
+  }
 }

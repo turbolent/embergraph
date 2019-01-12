@@ -25,10 +25,8 @@ package org.embergraph.sparse;
 
 /**
  * Marker interface for auto-incremental types.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IAutoIncrementCounter {
-
-}
+public interface IAutoIncrementCounter {}

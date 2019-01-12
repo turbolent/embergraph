@@ -32,41 +32,41 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
  * {@link https://jira.blazegraph.com/browse/BLZG-1780}
- * 
- * {@see https://www.w3.org/TR/sparql11-query/#func-regex}  
- * 
- * {@see https://www.w3.org/TR/sparql11-query/#restrictString}
- * 
- * By default, regex is only applied to Literal String values.   Enabling this
- * query hint will attempt to autoconvert non-String literals into their
- * string value.  This is the equivalent of always using the str(...) function.
- * 
+ *
+ * <p>{@see https://www.w3.org/TR/sparql11-query/#func-regex}
+ *
+ * <p>{@see https://www.w3.org/TR/sparql11-query/#restrictString}
+ *
+ * <p>By default, regex is only applied to Literal String values. Enabling this query hint will
+ * attempt to autoconvert non-String literals into their string value. This is the equivalent of
+ * always using the str(...) function.
  */
 final class RegexMatchNonStringHint extends AbstractBooleanQueryHint {
 
-    protected RegexMatchNonStringHint() {
-        super(QueryHints.REGEX_MATCH_NON_STRING, QueryHints.DEFAULT_REGEX_MATCH_NON_STRING);
+  protected RegexMatchNonStringHint() {
+    super(QueryHints.REGEX_MATCH_NON_STRING, QueryHints.DEFAULT_REGEX_MATCH_NON_STRING);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof FilterNode) {
+
+      final IValueExpressionNode n = ((FilterNode) op).getValueExpressionNode();
+
+      assert (n != null);
+
+      @SuppressWarnings("rawtypes")
+      final IValueExpression n2 = n.getValueExpression();
+
+      if (n2 != null && n2 instanceof RegexBOp) {
+        ((RegexBOp) n2).setMatchNonString(value);
+      }
     }
-
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-    	
-		if (op instanceof FilterNode) {
-
-			final IValueExpressionNode n = ((FilterNode) op)
-					.getValueExpressionNode();
-
-			assert(n != null);
-
-			@SuppressWarnings("rawtypes")
-			final IValueExpression n2 = n.getValueExpression();
-
-			if (n2 != null && n2 instanceof RegexBOp) {
-				((RegexBOp)n2).setMatchNonString(value);
-			}
-		}
-
-    }
-
+  }
 }

@@ -18,59 +18,54 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.gom.alchemy.owl;
 
 import java.util.Iterator;
-
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-
 import org.embergraph.gom.gpo.BasicSkin;
 import org.embergraph.gom.gpo.GPO;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.IGenericSkin;
 import org.embergraph.gom.om.IObjectManager;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
 
 public class OWLOntologySkin extends BasicSkin implements IGenericSkin {
 
-	public OWLOntologySkin(IGPO gpo) {
-		super(gpo);
-	}
+  public OWLOntologySkin(IGPO gpo) {
+    super(gpo);
+  }
 
-	
-	static public OWLOntologySkin getOntology(IObjectManager om) {
-		final IGPO owl = om.getGPO(OWL.ONTOLOGY);
+  public static OWLOntologySkin getOntology(IObjectManager om) {
+    final IGPO owl = om.getGPO(OWL.ONTOLOGY);
 
-		return (OWLOntologySkin) ((GPO) owl).getSkin(OWLOntologySkin.class);
-	}
+    return (OWLOntologySkin) ((GPO) owl).getSkin(OWLOntologySkin.class);
+  }
 
-	/**
-	 * Returns a list of defined OWLClasses.  The classes do not
-	 * in fact have any reference to the Ontology instance, but the
-	 * skin supports the fiction.
-	 */
-	public Iterator<OWLClassSkin> getClasses() {
-		final IObjectManager om = m_gpo.getObjectManager();
-		
-		final IGPO classClass = om.getGPO(OWL.CLASS);
-		
-		final Iterator<IGPO> owlClasses = classClass.getLinksIn(RDF.TYPE).iterator();
-		
-		return new Iterator<OWLClassSkin>() {
+  /**
+   * Returns a list of defined OWLClasses. The classes do not in fact have any reference to the
+   * Ontology instance, but the skin supports the fiction.
+   */
+  public Iterator<OWLClassSkin> getClasses() {
+    final IObjectManager om = m_gpo.getObjectManager();
 
-			@Override
-			public boolean hasNext() {
-				return owlClasses.hasNext();
-			}
+    final IGPO classClass = om.getGPO(OWL.CLASS);
 
-			@Override
-			public OWLClassSkin next() {
-				IGPO nxt = owlClasses.next();
-				return (OWLClassSkin) ((GPO) nxt).getSkin(OWLClassSkin.class);
-			}
+    final Iterator<IGPO> owlClasses = classClass.getLinksIn(RDF.TYPE).iterator();
 
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-			
-		};		
-	}
+    return new Iterator<OWLClassSkin>() {
+
+      @Override
+      public boolean hasNext() {
+        return owlClasses.hasNext();
+      }
+
+      @Override
+      public OWLClassSkin next() {
+        IGPO nxt = owlClasses.next();
+        return (OWLClassSkin) ((GPO) nxt).getSkin(OWLClassSkin.class);
+      }
+
+      @Override
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
+  }
 }

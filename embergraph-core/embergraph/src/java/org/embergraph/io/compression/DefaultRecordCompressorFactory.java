@@ -31,61 +31,48 @@ import java.util.zip.Deflater;
 
 /**
  * A serializable compression provider based on {@link RecordCompressor}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class DefaultRecordCompressorFactory implements
-        IRecordCompressorFactory<RecordCompressor>, Externalizable {
+public class DefaultRecordCompressorFactory
+    implements IRecordCompressorFactory<RecordCompressor>, Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6440561103264583846L;
+  /** */
+  private static final long serialVersionUID = 6440561103264583846L;
 
-    private int level;
+  private int level;
 
-    /**
-     * Instance configured for {@link Deflater#BEST_SPEED}.
-     */
-    public IRecordCompressorFactory<RecordCompressor> BEST_SPEED = new DefaultRecordCompressorFactory(
-            Deflater.BEST_SPEED);
+  /** Instance configured for {@link Deflater#BEST_SPEED}. */
+  public IRecordCompressorFactory<RecordCompressor> BEST_SPEED =
+      new DefaultRecordCompressorFactory(Deflater.BEST_SPEED);
 
-    /**
-     * Instance configured for {@link Deflater#BEST_COMPRESSION}.
-     */
-    public IRecordCompressorFactory<RecordCompressor> BEST_COMPRESSION = new DefaultRecordCompressorFactory(
-            Deflater.BEST_COMPRESSION);
+  /** Instance configured for {@link Deflater#BEST_COMPRESSION}. */
+  public IRecordCompressorFactory<RecordCompressor> BEST_COMPRESSION =
+      new DefaultRecordCompressorFactory(Deflater.BEST_COMPRESSION);
 
-    public String toString() {
-        
-        return getClass().getName() + "{level=" + level + "}";
-        
-    }
+  public String toString() {
 
-    private DefaultRecordCompressorFactory(final int level) {
+    return getClass().getName() + "{level=" + level + "}";
+  }
 
-        this.level = level;
+  private DefaultRecordCompressorFactory(final int level) {
 
-    }
+    this.level = level;
+  }
 
-    public RecordCompressor getInstance() {
+  public RecordCompressor getInstance() {
 
-        return new RecordCompressor(level);
+    return new RecordCompressor(level);
+  }
 
-    }
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
 
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
+    level = in.readInt();
+  }
 
-        level = in.readInt();
+  public void writeExternal(final ObjectOutput out) throws IOException {
 
-    }
-
-    public void writeExternal(final ObjectOutput out) throws IOException {
-
-        out.writeInt(level);
-
-    }
-
+    out.writeInt(level);
+  }
 }

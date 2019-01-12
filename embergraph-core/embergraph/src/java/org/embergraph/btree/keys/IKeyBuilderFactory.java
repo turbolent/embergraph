@@ -25,25 +25,22 @@ package org.embergraph.btree.keys;
 
 /**
  * A factory for pre-configured {@link IKeyBuilder} instances.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IKeyBuilderFactory {
 
-    /**
-     * Return an instance of the configured {@link IKeyBuilder}.
-     */
-    public IKeyBuilder getKeyBuilder();
-    
-    /**
-     * Return an instance of the configured {@link IKeyBuilder} that has been
-     * overridden to have {@link StrengthEnum#Primary} collation strength. This
-     * may be used to form successors for Unicode prefix scans without having
-     * the secondary sort ordering characteristics mucking things up.
-     * 
-     * @see <a href="http://trac.blazegraph.com/ticket/974" >
-     *      Name2Addr.indexNameScan(prefix) uses scan + filter </a>
-     */
-    public IKeyBuilder getPrimaryKeyBuilder();
-    
+  /** Return an instance of the configured {@link IKeyBuilder}. */
+  public IKeyBuilder getKeyBuilder();
+
+  /**
+   * Return an instance of the configured {@link IKeyBuilder} that has been overridden to have
+   * {@link StrengthEnum#Primary} collation strength. This may be used to form successors for
+   * Unicode prefix scans without having the secondary sort ordering characteristics mucking things
+   * up.
+   *
+   * @see <a href="http://trac.blazegraph.com/ticket/974" > Name2Addr.indexNameScan(prefix) uses
+   *     scan + filter </a>
+   */
+  public IKeyBuilder getPrimaryKeyBuilder();
 }

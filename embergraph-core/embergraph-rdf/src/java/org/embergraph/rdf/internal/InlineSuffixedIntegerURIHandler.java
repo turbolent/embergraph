@@ -21,63 +21,55 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
- * 
- * Utility IV to generate IVs for URIs in the form of
- * http://example.org/value/STRPREFIX1234234513 where the localName of the URI
- * is a string prefix followed by an integer value.
- * 
- * You should extend this class with implementation for specific instances of
- * URIs that follow this form such as:
- * http://rdf.ncbi.nlm.nih.gov/pubchem/compound/1234234_CID would be created as
- * 
+ * Utility IV to generate IVs for URIs in the form of http://example.org/value/STRPREFIX1234234513
+ * where the localName of the URI is a string prefix followed by an integer value.
+ *
+ * <p>You should extend this class with implementation for specific instances of URIs that follow
+ * this form such as: http://rdf.ncbi.nlm.nih.gov/pubchem/compound/1234234_CID would be created as
  * <code>
  * InlineSuffixedIntegerURIHandler handler = new InlineSuffixedIntegerURIHandler( "http://rdf.ncbi.nlm.nih.gov/pubchem/compound/","_CID");
- * </code>
- * 
- * This has support for overloading on a single namespace {@link InlineLocalNameIntegerURIHandler}. 
- * 
+ * </code> This has support for overloading on a single namespace {@link
+ * InlineLocalNameIntegerURIHandler}.
+ *
  * @author beebs
  */
+public class InlineSuffixedIntegerURIHandler extends InlineLocalNameIntegerURIHandler
+    implements ISuffixedURIHandler {
 
-public class InlineSuffixedIntegerURIHandler extends
-		InlineLocalNameIntegerURIHandler implements ISuffixedURIHandler {
+  private String suffix = null;
 
-	private String suffix = null;
+  public InlineSuffixedIntegerURIHandler(final String namespace, final String suffix) {
+    super(namespace);
+    this.suffix = suffix;
+  }
 
-	public InlineSuffixedIntegerURIHandler(final String namespace, final String suffix) {
-		super(namespace);
-		this.suffix = suffix;
-	}
+  public InlineSuffixedIntegerURIHandler(
+      final String namespace, final String suffix, final int id) {
+    super(namespace);
+    this.suffix = suffix;
+    this.packedId = id;
+  }
 
-	public InlineSuffixedIntegerURIHandler(final String namespace,
-			final String suffix, final int id) {
-		super(namespace);
-		this.suffix = suffix;
-		this.packedId = id;
-	}
+  @Override
+  @SuppressWarnings("rawtypes")
+  protected AbstractLiteralIV createInlineIV(final String localName) {
+    if (!localName.endsWith(this.suffix)) {
+      return null;
+    }
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	protected AbstractLiteralIV createInlineIV(final String localName) {
-		if (!localName.endsWith(this.suffix)) {
-			return null;
-		}
-		
-		final String intVal = getPackedValueString(localName.substring(0, localName.length()
-				- this.suffix.length()));
-		
-		return super.createInlineIV(intVal);
-	}
+    final String intVal =
+        getPackedValueString(localName.substring(0, localName.length() - this.suffix.length()));
 
-	@Override
-	public String getLocalNameFromDelegate(
-			final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
+    return super.createInlineIV(intVal);
+  }
 
-		return getUnpackedValueFromString(super
-				.getLocalNameFromDelegate(delegate)) + this.suffix;
-	}
+  @Override
+  public String getLocalNameFromDelegate(final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
-	public String getSuffix() {
-		return suffix;
-	}
+    return getUnpackedValueFromString(super.getLocalNameFromDelegate(delegate)) + this.suffix;
+  }
+
+  public String getSuffix() {
+    return suffix;
+  }
 }

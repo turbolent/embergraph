@@ -28,46 +28,42 @@ import org.embergraph.rdf.sparql.ast.QueryOptimizerEnum;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * The query hint governing the choice of the join order optimizer.
- */
-public final class OptimizerQueryHint extends
-        AbstractQueryHint<QueryOptimizerEnum> {
+/** The query hint governing the choice of the join order optimizer. */
+public final class OptimizerQueryHint extends AbstractQueryHint<QueryOptimizerEnum> {
 
-    public OptimizerQueryHint() {
-        super(QueryHints.OPTIMIZER, QueryOptimizerEnum.Static);
-    }
+  public OptimizerQueryHint() {
+    super(QueryHints.OPTIMIZER, QueryOptimizerEnum.Static);
+  }
 
-    @Override
-    public QueryOptimizerEnum validate(final String value) {
+  @Override
+  public QueryOptimizerEnum validate(final String value) {
 
-        return QueryOptimizerEnum.valueOf(value);
+    return QueryOptimizerEnum.valueOf(value);
+  }
 
-    }
+  @Override
+  public void handle(
+      final AST2BOpContext ctx,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final QueryOptimizerEnum value) {
 
-    @Override
-    public void handle(final AST2BOpContext ctx, 
-            final QueryRoot queryRoot,
-            final QueryHintScope scope,
-            final ASTBase op, final QueryOptimizerEnum value) {
-
-        switch (scope) {
-        case Query:
-//            /*
-//             * Also stuff the query hint on the global context for things which
-//             * look there.
-//             */
-//            conditionalSetGlobalProperty(ctx, getName(), value);
-        case Group:
-        case GroupAndSubGroups:
-        case SubQuery:
-            if (op instanceof JoinGroupNode) {
-                _setAnnotation(ctx, scope, op, getName(), value);
-            }
-            return;
+    switch (scope) {
+      case Query:
+        //            /*
+        //             * Also stuff the query hint on the global context for things which
+        //             * look there.
+        //             */
+        //            conditionalSetGlobalProperty(ctx, getName(), value);
+      case Group:
+      case GroupAndSubGroups:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(ctx, scope, op, getName(), value);
         }
-        throw new QueryHintException(scope, op, getName(), value);
-
+        return;
     }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

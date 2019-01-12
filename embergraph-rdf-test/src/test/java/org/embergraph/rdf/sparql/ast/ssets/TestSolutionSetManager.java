@@ -21,15 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.ssets;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
@@ -57,740 +56,658 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 import org.embergraph.striterator.Dechunkerator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
  * Test suite for managing named solution sets.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSolutionSetManager extends TestCase2 {
 
-    public TestSolutionSetManager() {
+  public TestSolutionSetManager() {}
+
+  public TestSolutionSetManager(final String name) {
+    super(name);
+  }
+
+  protected Journal journal;
+  protected QueryEngine queryEngine;
+  //    protected ICacheConnection cacheConn;
+  protected ISolutionSetManager solutionSetsManager;
+
+  /** Note: Not used yet by the {@link CacheConnectionImpl}. */
+  protected IEvaluationContext ctx = null;
+
+  /** The namespace for the {@link EmbergraphValueFactory}. */
+  protected String namespace = getName();
+
+  /** The value factory for that namespace. */
+  protected EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
+
+  /** A {@link TermId} whose {@link IVCache} is set. */
+  protected TermId<EmbergraphLiteral> termId;
+
+  /** A {@link TermId} whose {@link IVCache} is set. */
+  protected TermId<EmbergraphLiteral> termId2;
+
+  /** A {@link BlobIV} whose {@link IVCache} is set. */
+  protected BlobIV<EmbergraphLiteral> blobIV;
+
+  /** A "mockIV". */
+  protected TermId<EmbergraphValue> mockIV1;
+
+  /** A "mockIV". */
+  protected TermId<EmbergraphValue> mockIV2;
+
+  /** A "mockIV". */
+  protected TermId<EmbergraphValue> mockIV3;
+
+  /** An inline IV whose {@link IVCache} is set. */
+  protected XSDIntegerIV<EmbergraphLiteral> inlineIV;
+
+  /** An inline IV whose {@link IVCache} is NOT set. */
+  protected IV<?, ?> inlineIV2;
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+
+    // Setup the backing Journal.
+    {
+      final Properties properties = new Properties();
+      properties.put(Journal.Options.BUFFER_MODE, BufferMode.MemStore.toString());
+      properties.put(Journal.Options.CREATE_TEMP_FILE, "true");
+      properties.put(Journal.Options.INITIAL_EXTENT, "" + Journal.Options.minimumInitialExtent);
+      journal = new Journal(properties);
     }
 
-    public TestSolutionSetManager(final String name) {
-        super(name);
+    // Setup the QueryEngine.
+    queryEngine = QueryEngineFactory.getInstance().getQueryController(journal);
+
+    //        // Setup the solution set cache.
+    //        cacheConn = CacheConnectionFactory.getCacheConnection(queryEngine);
+
+    // TODO MVCC VIEWS: This is ONLY using the UNISOLATED VIEW.  Test MVCC semantics.
+    solutionSetsManager = new SolutionSetManager(journal, namespace, ITx.UNISOLATED);
+
+    /*
+     * Declare some IVs.
+     */
+    termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, 12 /* termId */);
+    termId.setValue(valueFactory.createLiteral("abc"));
+
+    termId2 = new TermId<EmbergraphLiteral>(VTE.LITERAL, 36 /* termId */);
+    termId2.setValue(valueFactory.createLiteral("xyz"));
+
+    blobIV =
+        new BlobIV<EmbergraphLiteral>(
+            VTE.LITERAL, 912 /* hash */, (short) 0 /* collisionCounter */);
+    blobIV.setValue(valueFactory.createLiteral("bigfoo"));
+
+    mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
+    mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
+
+    mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
+    mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
+
+    mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
+    mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
+
+    inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
+    inlineIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("100", XSD.INTEGER));
+
+    inlineIV2 = XSDBooleanIV.valueOf(true);
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    if (solutionSetsManager != null) {
+      solutionSetsManager.close();
+      solutionSetsManager = null;
     }
 
-    protected Journal journal;
-    protected QueryEngine queryEngine;
-//    protected ICacheConnection cacheConn;
-    protected ISolutionSetManager solutionSetsManager;
-    
-    /**
-     * Note: Not used yet by the {@link CacheConnectionImpl}.
+    //        if (cacheConn != null) {
+    //            cacheConn.close();
+    //            cacheConn = null;
+    //        }
+
+    if (queryEngine != null) {
+      queryEngine.shutdownNow();
+      queryEngine = null;
+    }
+
+    if (journal != null) {
+      journal.destroy();
+      journal = null;
+    }
+
+    // Clear references.
+    valueFactory.remove();
+    valueFactory = null;
+    namespace = null;
+    termId = termId2 = null;
+    blobIV = null;
+    mockIV1 = mockIV2 = mockIV3 = null;
+    inlineIV = null;
+    inlineIV2 = null;
+
+    super.tearDown();
+  }
+
+  /** Unit test for saving an empty named solution set and then reading it back. */
+  public void test_putGet() {
+
+    /*
+     * Setup the source solution set chunks.
      */
-    protected IEvaluationContext ctx = null;
+    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    {
+      final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-    /**
-     * The namespace for the {@link EmbergraphValueFactory}.
-     * 
+      // An empty binding set.
+      t.add(new ListBindingSet());
+
+      in.add(t.toArray(new IBindingSet[0]));
+    }
+
+    final String solutionSet = getName();
+
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+
+    assertFalse(solutionSetsManager.existsSolutions(solutionSet));
+
+    solutionSetsManager.putSolutions(
+        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+
+    assertTrue(solutionSetsManager.existsSolutions(solutionSet));
+
+    final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
+
+    assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
+  }
+
+  /**
+   * Unit test for saving a two empty solutions into a named solution set and then reading it back.
+   */
+  public void test_putGet2() {
+
+    /*
+     * Setup the source solution set chunks.
      */
-    protected String namespace = getName();
+    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    {
+      final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-    /**
-     * The value factory for that namespace.
+      // An empty binding set.
+      {
+        final ListBindingSet b = new ListBindingSet();
+        t.add(b);
+      }
+
+      // Another empty binding set.
+      {
+        final ListBindingSet b = new ListBindingSet();
+        t.add(b);
+      }
+
+      in.add(t.toArray(new IBindingSet[0]));
+    }
+
+    final String solutionSet = getName();
+
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+
+    solutionSetsManager.putSolutions(
+        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+
+    final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
+
+    assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
+  }
+
+  /**
+   * Unit test for saving some non-empty solutions into a named solution set and then reading it
+   * back.
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_putGet3() {
+
+    /*
+     * Setup the source solution set chunks.
      */
-    protected EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
-            .getInstance(namespace);
+    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    {
+      final IVariable<?> x = Var.var("x");
+      final IVariable<?> y = Var.var("y");
+      final IVariable<?> z = Var.var("z");
 
-    /**
-     * A {@link TermId} whose {@link IVCache} is set.
-     */
-    protected TermId<EmbergraphLiteral> termId;
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-    /**
-     * A {@link TermId} whose {@link IVCache} is set.
-     */
-    protected TermId<EmbergraphLiteral> termId2;
-
-    /**
-     * A {@link BlobIV} whose {@link IVCache} is set.
-     */
-    protected BlobIV<EmbergraphLiteral> blobIV;
-
-    /** A "mockIV". */
-    protected TermId<EmbergraphValue> mockIV1;
-
-    /** A "mockIV". */
-    protected TermId<EmbergraphValue> mockIV2;
-
-    /** A "mockIV". */
-    protected TermId<EmbergraphValue> mockIV3;
-    
-    /** An inline IV whose {@link IVCache} is set. */
-    protected XSDIntegerIV<EmbergraphLiteral> inlineIV;
-
-    /** An inline IV whose {@link IVCache} is NOT set. */
-    protected IV<?,?> inlineIV2;
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        // Setup the backing Journal.
         {
-            final Properties properties = new Properties();
-            properties.put(Journal.Options.BUFFER_MODE,
-                    BufferMode.MemStore.toString());
-            properties.put(Journal.Options.CREATE_TEMP_FILE, "true");
-            properties.put(Journal.Options.INITIAL_EXTENT, ""
-                    + Journal.Options.minimumInitialExtent);
-            journal = new Journal(properties);
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId));
+          b.set(y, new Constant<IV>(termId2));
+          t.add(b);
         }
-        
-        // Setup the QueryEngine.
-        queryEngine = QueryEngineFactory.getInstance().getQueryController(journal);
-        
-//        // Setup the solution set cache.
-//        cacheConn = CacheConnectionFactory.getCacheConnection(queryEngine);
 
-        // TODO MVCC VIEWS: This is ONLY using the UNISOLATED VIEW.  Test MVCC semantics.
-        solutionSetsManager = new SolutionSetManager(journal, namespace,
-                ITx.UNISOLATED);
+        {
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId2));
+          b.set(y, new Constant<IV>(inlineIV));
+          b.set(z, new Constant<IV>(blobIV));
+          t.add(b);
+        }
 
-        /*
-         * Declare some IVs.
-         */
-        termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, 12/* termId */);
-        termId.setValue(valueFactory.createLiteral("abc"));
-
-        termId2 = new TermId<EmbergraphLiteral>(VTE.LITERAL, 36/* termId */);
-        termId2.setValue(valueFactory.createLiteral("xyz"));
-
-        blobIV = new BlobIV<EmbergraphLiteral>(VTE.LITERAL, 912/* hash */,
-                (short) 0/* collisionCounter */);
-        blobIV.setValue(valueFactory.createLiteral("bigfoo"));
-        
-        mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
-
-        mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
-
-        mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
-
-        inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
-        inlineIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("100",
-                XSD.INTEGER));
-        
-        inlineIV2 = XSDBooleanIV.valueOf(true);
+        in.add(t.toArray(new IBindingSet[0]));
+      }
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    final String solutionSet = getName();
 
-        if (solutionSetsManager != null) {
-            solutionSetsManager.close();
-            solutionSetsManager = null;
-        }
-        
-//        if (cacheConn != null) {
-//            cacheConn.close();
-//            cacheConn = null;
-//        }
-        
-        if (queryEngine != null) {
-            queryEngine.shutdownNow();
-            queryEngine = null;
-        }
-        
-        if (journal != null) {
-            journal.destroy();
-            journal = null;
-        }
-
-        // Clear references.
-        valueFactory.remove();
-        valueFactory = null;
-        namespace = null;
-        termId = termId2 = null;
-        blobIV = null;
-        mockIV1 = mockIV2 = mockIV3 = null;
-        inlineIV = null;
-        inlineIV2 = null;
-        
-        super.tearDown();
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
-    
-    /**
-     * Unit test for saving an empty named solution set and then reading it
-     * back.
+
+    solutionSetsManager.putSolutions(
+        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+
+    final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
+
+    assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
+  }
+
+  /**
+   * Unit test for saving some non-empty solutions in multiple chunks into a named solution set and
+   * then reading it back.
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_putGet4() {
+
+    /*
+     * Setup the source solution set chunks.
      */
-    public void test_putGet() {
+    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    {
+      final IVariable<?> x = Var.var("x");
+      final IVariable<?> y = Var.var("y");
+      final IVariable<?> z = Var.var("z");
 
-        /*
-         * Setup the source solution set chunks.
-         */
-        final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+
         {
-            
-            final List<IBindingSet> t = new LinkedList<IBindingSet>();
-            
-            // An empty binding set.
-            t.add(new ListBindingSet());
-            
-            in.add(t.toArray(new IBindingSet[0]));
-            
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId2));
+          b.set(y, new Constant<IV>(inlineIV));
+          b.set(z, new Constant<IV>(blobIV));
+          t.add(b);
         }
 
-        final String solutionSet = getName();
+        in.add(t.toArray(new IBindingSet[0]));
+      }
 
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+
+        {
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId));
+          b.set(y, new Constant<IV>(termId2));
+          t.add(b);
         }
 
-        assertFalse(solutionSetsManager.existsSolutions(solutionSet));
-        
-        solutionSetsManager.putSolutions(solutionSet,
-                new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        in.add(t.toArray(new IBindingSet[0]));
+      }
 
-        assertTrue(solutionSetsManager.existsSolutions(solutionSet));
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-        final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                solutionSet);
+        {
+          final ListBindingSet b = new ListBindingSet();
+          t.add(b);
+        }
 
-        assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
-
+        in.add(t.toArray(new IBindingSet[0]));
+      }
     }
 
-    /**
-     * Unit test for saving a two empty solutions into a named solution set and
-     * then reading it back.
+    final String solutionSet = getName();
+
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+
+    solutionSetsManager.putSolutions(
+        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+
+    final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
+
+    assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
+  }
+
+  /** Unit test for clearing a named solution set. */
+  @SuppressWarnings("rawtypes")
+  public void test_clearSolutionSet() {
+
+    /*
+     * Setup the source solution set chunks.
      */
-    public void test_putGet2() {
+    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    {
+      final IVariable<?> x = Var.var("x");
+      final IVariable<?> y = Var.var("y");
+      final IVariable<?> z = Var.var("z");
 
-        /*
-         * Setup the source solution set chunks.
-         */
-        final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+
         {
-            final List<IBindingSet> t = new LinkedList<IBindingSet>();
-            
-            // An empty binding set.
-            {
-                final ListBindingSet b = new ListBindingSet();
-                t.add(b);
-            }
-            
-            // Another empty binding set.
-            {
-                final ListBindingSet b = new ListBindingSet();
-                t.add(b);
-            }
-
-            in.add(t.toArray(new IBindingSet[0]));
-            
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId2));
+          b.set(y, new Constant<IV>(inlineIV));
+          b.set(z, new Constant<IV>(blobIV));
+          t.add(b);
         }
 
-        final String solutionSet = getName();
+        in.add(t.toArray(new IBindingSet[0]));
+      }
 
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+
+        {
+          final ListBindingSet b = new ListBindingSet();
+          b.set(x, new Constant<IV>(termId));
+          b.set(y, new Constant<IV>(termId2));
+          t.add(b);
         }
 
-        solutionSetsManager.putSolutions(solutionSet,
-                new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        in.add(t.toArray(new IBindingSet[0]));
+      }
 
-        final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                solutionSet);
+      {
+        final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-        assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
+        {
+          final ListBindingSet b = new ListBindingSet();
+          t.add(b);
+        }
 
+        in.add(t.toArray(new IBindingSet[0]));
+      }
     }
 
-    /**
-     * Unit test for saving some non-empty solutions into a named solution set
-     * and then reading it back.
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_putGet3() {
+    final String solutionSet = getName();
 
-        /*
-         * Setup the source solution set chunks.
-         */
-        final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
-        {
-            final IVariable<?> x = Var.var("x");
-            final IVariable<?> y = Var.var("y");
-            final IVariable<?> z = Var.var("z");
-
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId));
-                    b.set(y, new Constant<IV>(termId2));
-                    t.add(b);
-                }
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId2));
-                    b.set(y, new Constant<IV>(inlineIV));
-                    b.set(z, new Constant<IV>(blobIV));
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-            
-        }
-
-        final String solutionSet = getName();
-
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        solutionSetsManager.putSolutions(solutionSet,
-                new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
-
-        final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                solutionSet);
-
-        assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
-
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * Unit test for saving some non-empty solutions in multiple chunks into a
-     * named solution set and then reading it back.
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_putGet4() {
+    // write the solution set.
+    solutionSetsManager.putSolutions(
+        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
 
-        /*
-         * Setup the source solution set chunks.
-         */
-        final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
-        {
-            final IVariable<?> x = Var.var("x");
-            final IVariable<?> y = Var.var("y");
-            final IVariable<?> z = Var.var("z");
+    // read them back
+    {
+      final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
 
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId2));
-                    b.set(y, new Constant<IV>(inlineIV));
-                    b.set(z, new Constant<IV>(blobIV));
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-            
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId));
-                    b.set(y, new Constant<IV>(termId2));
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-            
-        }
-
-        final String solutionSet = getName();
-
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        solutionSetsManager.putSolutions(solutionSet,
-                new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
-
-        final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                solutionSet);
-
-        assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
-
+      assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
     }
 
-    /**
-     * Unit test for clearing a named solution set.
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_clearSolutionSet() {
+    // read them back again.
+    {
+      final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
 
-        /*
-         * Setup the source solution set chunks.
-         */
-        final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
-        {
-            final IVariable<?> x = Var.var("x");
-            final IVariable<?> y = Var.var("y");
-            final IVariable<?> z = Var.var("z");
-
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId2));
-                    b.set(y, new Constant<IV>(inlineIV));
-                    b.set(z, new Constant<IV>(blobIV));
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-            
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    b.set(x, new Constant<IV>(termId));
-                    b.set(y, new Constant<IV>(termId2));
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-
-            {
-                final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-                {
-                    final ListBindingSet b = new ListBindingSet();
-                    t.add(b);
-                }
-
-                in.add(t.toArray(new IBindingSet[0]));
-            }
-            
-        }
-
-        final String solutionSet = getName();
-
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        // write the solution set.
-        solutionSetsManager.putSolutions(solutionSet,
-                new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
-
-        // read them back
-        {
-            final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                    solutionSet);
-
-            assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
-        }
-
-        // read them back again.
-        {
-            final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(
-                    solutionSet);
-
-            assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
-        }
-        
-        // Clear the solution set.
-        solutionSetsManager.clearSolutions(solutionSet);
-
-        // Verify gone.
-        try {
-            solutionSetsManager.getSolutions(solutionSet);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
+      assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
     }
 
+    // Clear the solution set.
+    solutionSetsManager.clearSolutions(solutionSet);
 
-    /**
-     * Unit test for clearing all named solution sets.
-     */
-    public void test_clearAllSolutionSets() {
+    // Verify gone.
+    try {
+      solutionSetsManager.getSolutions(solutionSet);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+  }
 
-        final List<IBindingSet[]> in1 = new LinkedList<IBindingSet[]>();
-        {
+  /** Unit test for clearing all named solution sets. */
+  public void test_clearAllSolutionSets() {
 
-            final List<IBindingSet> t = new LinkedList<IBindingSet>();
+    final List<IBindingSet[]> in1 = new LinkedList<IBindingSet[]>();
+    {
+      final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-            {
-                final ListBindingSet b = new ListBindingSet();
-                t.add(b);
-            }
+      {
+        final ListBindingSet b = new ListBindingSet();
+        t.add(b);
+      }
 
-            in1.add(t.toArray(new IBindingSet[0]));
-        }
-
-        final List<IBindingSet[]> in2 = new LinkedList<IBindingSet[]>();
-        {
-
-            final List<IBindingSet> t = new LinkedList<IBindingSet>();
-
-            {
-                final ListBindingSet b = new ListBindingSet();
-                t.add(b);
-            }
-
-            {
-                final ListBindingSet b = new ListBindingSet();
-                t.add(b);
-            }
-
-            in1.add(t.toArray(new IBindingSet[0]));
-        }
-
-        final String solutionSet1 = getName() + 1;
-        final String solutionSet2 = getName() + 2;
-
-        try {
-            solutionSetsManager.getSolutions(solutionSet1);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        try {
-            solutionSetsManager.getSolutions(solutionSet2);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        // write the solution sets.
-        solutionSetsManager.putSolutions(solutionSet1,
-                new CloseableIteratorWrapper<IBindingSet[]>(in1.iterator()));
-        solutionSetsManager.putSolutions(solutionSet2,
-                new CloseableIteratorWrapper<IBindingSet[]>(in2.iterator()));
-
-        // read them back
-        assertSameSolutionsAnyOrder(flatten(in1.iterator()),
-                solutionSetsManager.getSolutions(solutionSet1));
-        assertSameSolutionsAnyOrder(flatten(in2.iterator()),
-                solutionSetsManager.getSolutions(solutionSet2));
-
-        // Clear all named solution set.
-        solutionSetsManager.clearAllSolutions();
-
-//        ((CacheConnectionImpl)cacheConn).getStore().commit();
-        
-        // Verify gone.
-        try {
-            final ICloseableIterator<IBindingSet[]> itr = solutionSetsManager.getSolutions(solutionSet1);
-            try {
-                assertFalse(itr.hasNext());
-            }finally {
-                itr.close();
-            }
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        assertFalse(solutionSetsManager.existsSolutions(solutionSet1));
-
-        // Verify gone.
-        try {
-            solutionSetsManager.getSolutions(solutionSet2);
-            fail("Expecting: " + IllegalStateException.class);
-        } catch (IllegalStateException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-        assertFalse(solutionSetsManager.existsSolutions(solutionSet2));
-
+      in1.add(t.toArray(new IBindingSet[0]));
     }
 
-    /**
-     * Flatten out the iterator into a single chunk.
-     * 
-     * @param itr
-     *            An iterator visiting solution chunks.
-     *            
-     * @return A flat chunk of solutions.
-     */
-    static protected IBindingSet[] flatten(final Iterator<IBindingSet[]> itr) {
+    final List<IBindingSet[]> in2 = new LinkedList<IBindingSet[]>();
+    {
+      final List<IBindingSet> t = new LinkedList<IBindingSet>();
 
-        try {
+      {
+        final ListBindingSet b = new ListBindingSet();
+        t.add(b);
+      }
 
-            final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      {
+        final ListBindingSet b = new ListBindingSet();
+        t.add(b);
+      }
 
-            while (itr.hasNext()) {
+      in1.add(t.toArray(new IBindingSet[0]));
+    }
 
-                final IBindingSet[] a = itr.next();
-                
-                for(IBindingSet b : a) {
-                    
-                    t.add(b);
-                    
-                }
-                
-            }
+    final String solutionSet1 = getName() + 1;
+    final String solutionSet2 = getName() + 2;
 
-            return t.toArray(new IBindingSet[t.size()]);
+    try {
+      solutionSetsManager.getSolutions(solutionSet1);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
 
-        } finally {
-            
-            if (itr instanceof ICloseableIterator) {
-            
-                ((ICloseableIterator<?>) itr).close();
-                
-            }
-            
+    try {
+      solutionSetsManager.getSolutions(solutionSet2);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+
+    // write the solution sets.
+    solutionSetsManager.putSolutions(
+        solutionSet1, new CloseableIteratorWrapper<IBindingSet[]>(in1.iterator()));
+    solutionSetsManager.putSolutions(
+        solutionSet2, new CloseableIteratorWrapper<IBindingSet[]>(in2.iterator()));
+
+    // read them back
+    assertSameSolutionsAnyOrder(
+        flatten(in1.iterator()), solutionSetsManager.getSolutions(solutionSet1));
+    assertSameSolutionsAnyOrder(
+        flatten(in2.iterator()), solutionSetsManager.getSolutions(solutionSet2));
+
+    // Clear all named solution set.
+    solutionSetsManager.clearAllSolutions();
+
+    //        ((CacheConnectionImpl)cacheConn).getStore().commit();
+
+    // Verify gone.
+    try {
+      final ICloseableIterator<IBindingSet[]> itr = solutionSetsManager.getSolutions(solutionSet1);
+      try {
+        assertFalse(itr.hasNext());
+      } finally {
+        itr.close();
+      }
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+    assertFalse(solutionSetsManager.existsSolutions(solutionSet1));
+
+    // Verify gone.
+    try {
+      solutionSetsManager.getSolutions(solutionSet2);
+      fail("Expecting: " + IllegalStateException.class);
+    } catch (IllegalStateException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+    }
+    assertFalse(solutionSetsManager.existsSolutions(solutionSet2));
+  }
+
+  /**
+   * Flatten out the iterator into a single chunk.
+   *
+   * @param itr An iterator visiting solution chunks.
+   * @return A flat chunk of solutions.
+   */
+  protected static IBindingSet[] flatten(final Iterator<IBindingSet[]> itr) {
+
+    try {
+
+      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+
+      while (itr.hasNext()) {
+
+        final IBindingSet[] a = itr.next();
+
+        for (IBindingSet b : a) {
+
+          t.add(b);
+        }
+      }
+
+      return t.toArray(new IBindingSet[t.size()]);
+
+    } finally {
+
+      if (itr instanceof ICloseableIterator) {
+
+        ((ICloseableIterator<?>) itr).close();
+      }
+    }
+  }
+
+  protected static void assertSameSolutionsAnyOrder(
+      final IBindingSet[] expected, final ICloseableIterator<IBindingSet[]> itr) {
+
+    assertSameSolutionsAnyOrder("", expected, itr);
+  }
+
+  protected static void assertSameSolutionsAnyOrder(
+      final String msg, final IBindingSet[] expected, final ICloseableIterator<IBindingSet[]> itr) {
+
+    try {
+
+      final Iterator<IBindingSet> actual = new Dechunkerator<IBindingSet>(itr);
+
+      /*
+       * Populate a map that we will use to realize the match and
+       * selection without replacement logic. The map uses counters to
+       * handle duplicate keys. This makes it possible to write tests in
+       * which two or more binding sets which are "equal" appear.
+       */
+
+      final int nrange = expected.length;
+
+      final java.util.Map<IBindingSet, AtomicInteger> range =
+          new java.util.LinkedHashMap<IBindingSet, AtomicInteger>();
+
+      for (int j = 0; j < nrange; j++) {
+
+        AtomicInteger count = range.get(expected[j]);
+
+        if (count == null) {
+
+          count = new AtomicInteger();
         }
 
-    }
+        range.put(expected[j], count);
 
-    static protected void assertSameSolutionsAnyOrder(
-            final IBindingSet[] expected,
-            final ICloseableIterator<IBindingSet[]> itr) {
-    
-        assertSameSolutionsAnyOrder("", expected, itr);
-        
-    }
-    
-    static protected void assertSameSolutionsAnyOrder(final String msg,
-            final IBindingSet[] expected,
-            final ICloseableIterator<IBindingSet[]> itr) {
-    
-        try {
-    
-            final Iterator<IBindingSet> actual = new Dechunkerator<IBindingSet>(
-                    itr);
-    
-            /*
-             * Populate a map that we will use to realize the match and
-             * selection without replacement logic. The map uses counters to
-             * handle duplicate keys. This makes it possible to write tests in
-             * which two or more binding sets which are "equal" appear.
-             */
-    
-            final int nrange = expected.length;
-    
-            final java.util.Map<IBindingSet, AtomicInteger> range = new java.util.LinkedHashMap<IBindingSet, AtomicInteger>();
-    
-            for (int j = 0; j < nrange; j++) {
-    
-                AtomicInteger count = range.get(expected[j]);
-    
-                if (count == null) {
-    
-                    count = new AtomicInteger();
-    
-                }
-    
-                range.put(expected[j], count);
-    
-                count.incrementAndGet();
-                
-            }
-    
-            // Do selection without replacement for the objects visited by
-            // iterator.
-    
-            for (int j = 0; j < nrange; j++) {
-    
-                if (!actual.hasNext()) {
-    
-//                    if(runningQuery.isDone()) runningQuery.get();
-                    
-                    fail(msg
-                            + ": Iterator exhausted while expecting more object(s)"
-                            + ": index=" + j);
-    
-                }
-    
-//                if(runningQuery.isDone()) runningQuery.get();
-    
-                final IBindingSet actualObject = actual.next();
-    
-//                if(runningQuery.isDone()) runningQuery.get();
-    
-                if (log.isInfoEnabled())
-                    log.info("visting: " + actualObject);
-    
-                final AtomicInteger counter = range.get(actualObject);
-    
-                if (counter == null || counter.get() == 0) {
-    
-                    fail("Object not expected" + ": index=" + j + ", object="
-                            + actualObject);
-    
-                }
-    
-                counter.decrementAndGet();
-                
-            }
-    
-            if (actual.hasNext()) {
-    
-                fail("Iterator will deliver too many objects.");
-    
-            }
-            
-//            // The query should be done. Check its Future.
-//            runningQuery.get();
-//    
-//        } catch (InterruptedException ex) {
-//            
-//            throw new RuntimeException("Query evaluation was interrupted: "
-//                    + ex, ex);
-//            
-//        } catch(ExecutionException ex) {
-//        
-//            throw new RuntimeException("Error during query evaluation: " + ex,
-//                    ex);
-    
-        } finally {
-    
-            itr.close();
-            
+        count.incrementAndGet();
+      }
+
+      // Do selection without replacement for the objects visited by
+      // iterator.
+
+      for (int j = 0; j < nrange; j++) {
+
+        if (!actual.hasNext()) {
+
+          //                    if(runningQuery.isDone()) runningQuery.get();
+
+          fail(msg + ": Iterator exhausted while expecting more object(s)" + ": index=" + j);
         }
-    
-    }
 
+        //                if(runningQuery.isDone()) runningQuery.get();
+
+        final IBindingSet actualObject = actual.next();
+
+        //                if(runningQuery.isDone()) runningQuery.get();
+
+        if (log.isInfoEnabled()) log.info("visting: " + actualObject);
+
+        final AtomicInteger counter = range.get(actualObject);
+
+        if (counter == null || counter.get() == 0) {
+
+          fail("Object not expected" + ": index=" + j + ", object=" + actualObject);
+        }
+
+        counter.decrementAndGet();
+      }
+
+      if (actual.hasNext()) {
+
+        fail("Iterator will deliver too many objects.");
+      }
+
+      //            // The query should be done. Check its Future.
+      //            runningQuery.get();
+      //
+      //        } catch (InterruptedException ex) {
+      //
+      //            throw new RuntimeException("Query evaluation was interrupted: "
+      //                    + ex, ex);
+      //
+      //        } catch(ExecutionException ex) {
+      //
+      //            throw new RuntimeException("Error during query evaluation: " + ex,
+      //                    ex);
+
+    } finally {
+
+      itr.close();
+    }
+  }
 }

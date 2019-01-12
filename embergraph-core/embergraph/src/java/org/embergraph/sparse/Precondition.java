@@ -25,70 +25,54 @@ package org.embergraph.sparse;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 
 /**
- * Base class may be used for combining {@link IPrecondition}. The base class
- * by itself always succeeds, but you can add additional preconditions to be
- * tested.
- * 
+ * Base class may be used for combining {@link IPrecondition}. The base class by itself always
+ * succeeds, but you can add additional preconditions to be tested.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class Precondition implements IPrecondition {
 
-    protected static final transient Logger log = Logger.getLogger(Precondition.class);
+  protected static final transient Logger log = Logger.getLogger(Precondition.class);
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5628116520592503669L;
+  /** */
+  private static final long serialVersionUID = -5628116520592503669L;
 
-    private final List<IPrecondition> conditions = new LinkedList<IPrecondition>();
-    
-    /**
-     * De-serializator ctor.
-     */
-    public Precondition() {
-        
-    }
+  private final List<IPrecondition> conditions = new LinkedList<IPrecondition>();
 
-    public Precondition(IPrecondition c) {
-        
-        add(c);
-        
-    }
+  /** De-serializator ctor. */
+  public Precondition() {}
 
-    public void add(IPrecondition c) {
-        
-        if (c == null)
-            throw new IllegalArgumentException();
-        
-        conditions.add( c );
-        
-    }
-    
-    public boolean accept(ITPS logicalRow) {
-        
-        for(IPrecondition c : conditions) {
-        
-            if(!c.accept(logicalRow)) {
-                
-                if(log.isInfoEnabled()) {
-                    
-                    log.info("Failed: condition="+c+", logicalRow="+logicalRow);
-                    
-                }
-                
-                return false;
-                
-            }
-            
+  public Precondition(IPrecondition c) {
+
+    add(c);
+  }
+
+  public void add(IPrecondition c) {
+
+    if (c == null) throw new IllegalArgumentException();
+
+    conditions.add(c);
+  }
+
+  public boolean accept(ITPS logicalRow) {
+
+    for (IPrecondition c : conditions) {
+
+      if (!c.accept(logicalRow)) {
+
+        if (log.isInfoEnabled()) {
+
+          log.info("Failed: condition=" + c + ", logicalRow=" + logicalRow);
         }
-        
-        return true;
-        
+
+        return false;
+      }
     }
 
+    return true;
+  }
 }

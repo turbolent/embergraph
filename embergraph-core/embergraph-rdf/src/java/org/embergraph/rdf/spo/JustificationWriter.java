@@ -2,70 +2,58 @@ package org.embergraph.rdf.spo;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.IChunkedIterator;
 
 /**
  * Writes {@link Justification}s on the justification index.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class JustificationWriter implements Callable<Long>{
+public class JustificationWriter implements Callable<Long> {
 
-    /**
-     * The database on which to write the justifications.
-     */
-    private final AbstractTripleStore dst;
+  /** The database on which to write the justifications. */
+  private final AbstractTripleStore dst;
 
-    /**
-     * The source iterator.
-     */
-    private final IChunkedIterator<Justification> src;
+  /** The source iterator. */
+  private final IChunkedIterator<Justification> src;
 
-    /**
-     * The #of justifications that were written on the justifications index.
-     */
-    private final AtomicLong nwritten;
-    
-    /**
-     * 
-     * @param dst
-     *            The database on which the statements will be written.
-     * @param src
-     *            The source iterator.
-     * @param nwritten
-     *            Incremented as a side-effect for each justification
-     *            actually written on the justification index.
-     */
-    public JustificationWriter(final AbstractTripleStore dst,
-            final IChunkedIterator<Justification> src, final AtomicLong nwritten) {
+  /** The #of justifications that were written on the justifications index. */
+  private final AtomicLong nwritten;
 
-        this.dst = dst;
+  /**
+   * @param dst The database on which the statements will be written.
+   * @param src The source iterator.
+   * @param nwritten Incremented as a side-effect for each justification actually written on the
+   *     justification index.
+   */
+  public JustificationWriter(
+      final AbstractTripleStore dst,
+      final IChunkedIterator<Justification> src,
+      final AtomicLong nwritten) {
 
-        this.src = src;
+    this.dst = dst;
 
-        this.nwritten = nwritten;
+    this.src = src;
 
-    }
+    this.nwritten = nwritten;
+  }
 
-    /**
-     * Write justifications on the justifications index.
-     * 
-     * @return The elapsed time.
-     */
-    public Long call() throws Exception {
+  /**
+   * Write justifications on the justifications index.
+   *
+   * @return The elapsed time.
+   */
+  public Long call() throws Exception {
 
-        final long begin = System.currentTimeMillis();
+    final long begin = System.currentTimeMillis();
 
-        nwritten.addAndGet(dst.getSPORelation().addJustifications(src));
-        
-        final long elapsed = System.currentTimeMillis() - begin;
-        
-        return elapsed;
+    nwritten.addAndGet(dst.getSPORelation().addJustifications(src));
 
-    }
-    
+    final long elapsed = System.currentTimeMillis() - begin;
+
+    return elapsed;
+  }
 }

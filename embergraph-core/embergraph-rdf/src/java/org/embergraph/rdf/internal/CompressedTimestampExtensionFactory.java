@@ -20,27 +20,25 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import java.util.Collection;
-
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Extension factory that adds a compressed timestamp literal datatype, namely
- * <http://www.embergraph.org/rdf/datatype#compressedTimestamp>. Integers typed with
- * this datatype should be literals, which are compactly stored in the database.
- * 
+ * <http://www.embergraph.org/rdf/datatype#compressedTimestamp>. Integers typed with this datatype
+ * should be literals, which are compactly stored in the database.
+ *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>
  */
 public class CompressedTimestampExtensionFactory extends DefaultExtensionFactory {
 
-    @Override
-    protected void _init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<EmbergraphValue> lex,
-            final Collection<IExtension<? extends EmbergraphValue>> extensions) {
+  @Override
+  protected void _init(
+      final IDatatypeURIResolver resolver,
+      final ILexiconConfiguration<EmbergraphValue> lex,
+      final Collection<IExtension<? extends EmbergraphValue>> extensions) {
 
-        extensions.add(new CompressedTimestampExtension<EmbergraphLiteral>(resolver));
-
-    }
-    
+    extensions.add(new CompressedTimestampExtension<EmbergraphLiteral>(resolver));
+  }
 }

@@ -26,125 +26,103 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.service.TestEventReceiver.MyEvent;
 
 /**
  * Unit tests for parsing {@link Event}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestEventParser extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestEventParser() {
+  /** */
+  public TestEventParser() {}
+
+  /** @param arg0 */
+  public TestEventParser(String arg0) {
+    super(arg0);
+  }
+
+  private static class MockEventReceivingService implements IEventReceivingService {
+
+    public void notifyEvent(Event e) throws IOException {}
+  }
+
+  public void test_parser() throws ClassNotFoundException {
+
+    final Event e =
+        new MyEvent(
+            new TestEventReceiver.MockFederation(new MockEventReceivingService()),
+            new EventResource("testIndex"),
+            "testEventType");
+
+    assertSameEvent(e, Event.fromString(e.toString()));
+  }
+
+  static void assertSameEvent(Event expected, Event actual) {
+
+    if (expected == null) {
+
+      assertNull(actual);
+
+      return;
     }
 
-    /**
-     * @param arg0
-     */
-    public TestEventParser(String arg0) {
-        super(arg0);
+    assertNotNull(actual);
+
+    assertEquals(expected.eventUUID, actual.eventUUID);
+    assertEquals(expected.hostname, actual.hostname);
+    assertEquals(expected.serviceIface, actual.serviceIface);
+    assertEquals(expected.serviceName, actual.serviceName);
+    assertEquals(expected.serviceUUID, actual.serviceUUID);
+    assertSameEventResource(expected.resource, actual.resource);
+    assertEquals(expected.majorEventType, actual.majorEventType);
+    assertEquals(expected.minorEventType, actual.minorEventType);
+
+    if (expected.getDetails() == null) {
+
+      if (actual.getDetails() != null && !actual.getDetails().isEmpty()) {
+
+        fail("Actual has details.");
+      }
+
+    } else {
+
+      final Iterator<Map.Entry<String, Object>> itr = expected.getDetails().entrySet().iterator();
+
+      while (itr.hasNext()) {
+
+        final Map.Entry<String, Object> entry = itr.next();
+
+        final String key = entry.getKey();
+
+        assertTrue(actual.getDetails().containsKey(key));
+
+        // compare the string representations.
+        assertEquals(entry.getValue().toString(), actual.getDetails().get(key).toString());
+      }
+
+      assertEquals(expected.getDetails().size(), actual.getDetails().size());
+    }
+  }
+
+  static void assertSameEventResource(EventResource expected, EventResource actual) {
+
+    if (expected == null) {
+
+      assertNull(actual);
+
+      return;
     }
 
-    private static class MockEventReceivingService implements
-            IEventReceivingService {
+    assertNotNull(actual);
 
-        public void notifyEvent(Event e) throws IOException {
+    assertEquals(expected.indexName, actual.indexName);
 
-        }
+    assertEquals(expected.partitionId, actual.partitionId);
 
-    }
-    
-    public void test_parser() throws ClassNotFoundException {
-
-        final Event e = new MyEvent(new TestEventReceiver.MockFederation(
-                new MockEventReceivingService()),
-                new EventResource("testIndex"), "testEventType");
-
-        assertSameEvent(e, Event.fromString(e.toString()));
-        
-    }
-
-    static void assertSameEvent(Event expected, Event actual) {
-        
-        if (expected == null) {
-
-            assertNull(actual);
-        
-            return;
-            
-        }
-
-        assertNotNull(actual);
-        
-        assertEquals(expected.eventUUID, actual.eventUUID);
-        assertEquals(expected.hostname, actual.hostname);
-        assertEquals(expected.serviceIface, actual.serviceIface);
-        assertEquals(expected.serviceName, actual.serviceName);
-        assertEquals(expected.serviceUUID, actual.serviceUUID);
-        assertSameEventResource(expected.resource, actual.resource);
-        assertEquals(expected.majorEventType, actual.majorEventType);
-        assertEquals(expected.minorEventType, actual.minorEventType);
-        
-        if (expected.getDetails() == null) {
-         
-            if (actual.getDetails() != null && !actual.getDetails().isEmpty()) {
-
-                fail("Actual has details.");
-                
-            }
-            
-        } else {
-            
-            final Iterator<Map.Entry<String, Object>> itr = expected
-                    .getDetails().entrySet().iterator();
-            
-            while(itr.hasNext()) {
-                
-                final Map.Entry<String,Object> entry = itr.next();
-                
-                final String key = entry.getKey();
-
-                assertTrue(actual.getDetails().containsKey(key));
-                
-                // compare the string representations.
-                assertEquals(entry.getValue().toString(), actual.getDetails()
-                        .get(key).toString());
-                
-            }
-
-            assertEquals(expected.getDetails().size(), actual.getDetails()
-                    .size());
-            
-        }
-        
-    }
-
-    static void assertSameEventResource(EventResource expected,
-            EventResource actual) {
-        
-        if (expected == null) {
-
-            assertNull(actual);
-        
-            return;
-            
-        }
-        
-        assertNotNull(actual);
-
-        assertEquals(expected.indexName, actual.indexName);
-
-        assertEquals(expected.partitionId, actual.partitionId);
-
-        assertEquals(expected.file, actual.file);
-        
-    }
-    
+    assertEquals(expected.file, actual.file);
+  }
 }

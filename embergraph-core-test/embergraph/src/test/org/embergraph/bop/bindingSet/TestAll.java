@@ -29,39 +29,26 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("binding sets");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // @todo test EmptyBindingSet
-        
-        // test binding set impls.
-        suite.addTestSuite(TestHashBindingSet.class);
-        suite.addTestSuite(TestListBindingSet.class);
+    final TestSuite suite = new TestSuite("binding sets");
 
-        return suite;
-        
-    }
-    
+    // @todo test EmptyBindingSet
+
+    // test binding set impls.
+    suite.addTestSuite(TestHashBindingSet.class);
+    suite.addTestSuite(TestListBindingSet.class);
+
+    return suite;
+  }
 }

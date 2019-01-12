@@ -23,134 +23,105 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
-
 import org.embergraph.striterator.IChunkedIterator;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
- * An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a
- * {@link ICloseableIterator}.
- * 
- * @param E
- *            The generic type of the visited chunks.
- * @param F
- *            The generic type of the source elements.
- * 
+ * An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a {@link
+ * ICloseableIterator}.
+ *
+ * @param E The generic type of the visited chunks.
+ * @param F The generic type of the source elements.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: ThickAsynchronousIterator.java 2265 2009-10-26 12:51:06Z
- *          thompsonbry $
+ * @version $Id: ThickAsynchronousIterator.java 2265 2009-10-26 12:51:06Z thompsonbry $
  */
-public class WrappedAsynchronousIterator<E,F> implements IAsynchronousIterator<E> {
+public class WrappedAsynchronousIterator<E, F> implements IAsynchronousIterator<E> {
 
-//    private static final Logger log = Logger.getLogger(WrappedAsynchronousIterator.class);
-    
-    private transient volatile boolean open = true;
+  //    private static final Logger log = Logger.getLogger(WrappedAsynchronousIterator.class);
 
-    private final IChunkedIterator<F> src;
-    
-    /**
-     * 
-     * @param src
-     *            The source.
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>src</i> is <code>null</code>.
-     */
-    public WrappedAsynchronousIterator(final IChunkedIterator<F> src) {
+  private transient volatile boolean open = true;
 
-        if (src == null)
-            throw new IllegalArgumentException();
-        
-        this.src = src;
-        
-    }
+  private final IChunkedIterator<F> src;
 
-//    private final void assertOpen() {
-//        
-//        if (!open)
-//            throw new IllegalStateException();
-//        
-//    }
+  /**
+   * @param src The source.
+   * @throws IllegalArgumentException if <i>src</i> is <code>null</code>.
+   */
+  public WrappedAsynchronousIterator(final IChunkedIterator<F> src) {
 
-    public boolean hasNext() {
+    if (src == null) throw new IllegalArgumentException();
 
-        if(open && src.hasNext())
-            return true;
+    this.src = src;
+  }
 
-        /*
-         * Explicit close so we close the source as well when this is exhausted.
-         * 
-         * @see https://sourceforge.net/apps/trac/bigdata/ticket/361
-         */
-        close();
-        
-        return false;
+  //    private final void assertOpen() {
+  //
+  //        if (!open)
+  //            throw new IllegalStateException();
+  //
+  //    }
 
-    }
+  public boolean hasNext() {
 
-    @SuppressWarnings("unchecked")
-    public E next() {
-        
-        if (!hasNext())
-            throw new NoSuchElementException();
-
-        return (E) src.nextChunk();
-
-    }
-
-    public void remove() {
-
-        src.remove();
-        
-    }
+    if (open && src.hasNext()) return true;
 
     /*
-     * ICloseableIterator.
+     * Explicit close so we close the source as well when this is exhausted.
+     *
+     * @see https://sourceforge.net/apps/trac/bigdata/ticket/361
      */
+    close();
 
-    public void close() {
+    return false;
+  }
 
-        if (open) {
+  @SuppressWarnings("unchecked")
+  public E next() {
 
-            open = false;
-            
-            src.close();
-            
-        }
-        
+    if (!hasNext()) throw new NoSuchElementException();
+
+    return (E) src.nextChunk();
+  }
+
+  public void remove() {
+
+    src.remove();
+  }
+
+  /*
+   * ICloseableIterator.
+   */
+
+  public void close() {
+
+    if (open) {
+
+      open = false;
+
+      src.close();
     }
+  }
 
-    /*
-     * IAsynchronousIterator.
-     */
-    
-    public boolean isExhausted() {
+  /*
+   * IAsynchronousIterator.
+   */
 
-        return !hasNext();
-        
-    }
+  public boolean isExhausted() {
 
-    /**
-     * Delegates to {@link #hasNext()} since all data are local and timeouts can
-     * not occur.
-     */
-    public boolean hasNext(long timeout, TimeUnit unit) {
+    return !hasNext();
+  }
 
-        return hasNext();
-        
-    }
+  /** Delegates to {@link #hasNext()} since all data are local and timeouts can not occur. */
+  public boolean hasNext(long timeout, TimeUnit unit) {
 
-    /**
-     * Delegates to {@link #next()} since all data are local and timeouts can
-     * not occur.
-     */
-    public E next(long timeout, TimeUnit unit) {
+    return hasNext();
+  }
 
-        return next();
-        
-    }
+  /** Delegates to {@link #next()} since all data are local and timeouts can not occur. */
+  public E next(long timeout, TimeUnit unit) {
 
+    return next();
+  }
 }

@@ -23,7 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
-
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
+import org.embergraph.rdf.sparql.ast.eval.service.OpenrdfNativeMockServiceFactory;
+import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.URIImpl;
@@ -39,73 +41,71 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.sail.EmbergraphSail.Options;
-import org.embergraph.rdf.sparql.ast.eval.service.OpenrdfNativeMockServiceFactory;
-import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
-
 /**
- * Test for an error that occurs when a SERVICE (OpenRdf Service) call uses
- * variables that are assigned as input bindings to the query that holds the
- * SERVICE call.
- * <p>
- * To run this test case, specify the following JVM property:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
+ * Test for an error that occurs when a SERVICE (OpenRdf Service) call uses variables that are
+ * assigned as input bindings to the query that holds the SERVICE call.
+ *
+ * <p>To run this test case, specify the following JVM property: <code>
+ * -DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  */
 public class TestTicket632 extends QuadsTestCase {
 
-    public TestTicket632() {
-    }
+  public TestTicket632() {}
 
-    public TestTicket632(String arg0) {
-        super(arg0);
-    }
+  public TestTicket632(String arg0) {
+    super(arg0);
+  }
 
-    public void testServiceWithBindingArg() throws Exception {
-        final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
-        //the service solutions don't matter cause the error is from before computing the service solutions
-        final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
-        ServiceRegistry.getInstance().add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));
-        final EmbergraphSail sail = getSail();
+  public void testServiceWithBindingArg() throws Exception {
+    final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService/" + getName());
+    // the service solutions don't matter cause the error is from before computing the service
+    // solutions
+    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    ServiceRegistry.getInstance()
+        .add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));
+    final EmbergraphSail sail = getSail();
+    try {
+      executeQuery(serviceURI, new EmbergraphSailRepository(sail));
+    } finally {
+      ServiceRegistry.getInstance().remove(serviceURI);
+      sail.__tearDownUnitTest();
+    }
+  }
+
+  private void executeQuery(final URI serviceUri, final SailRepository repo)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+          RDFParseException, IOException, RDFHandlerException {
+    try {
+      repo.initialize();
+      final RepositoryConnection conn = repo.getConnection();
+      final ValueFactory vf = conn.getValueFactory();
+      conn.setAutoCommit(false);
+      try {
+        final String query =
+            "SELECT ?x { SERVICE <" + serviceUri.stringValue() + "> { ?x <u:1> ?bool1 } }";
+        final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        q.setBinding("bool1", vf.createLiteral(true));
+        final TupleQueryResult tqr = q.evaluate();
         try {
-            executeQuery(serviceURI, new EmbergraphSailRepository(sail));
-        } finally {            
-            ServiceRegistry.getInstance().remove(serviceURI);
-            sail.__tearDownUnitTest();
-        }
-    }
-
-    private void executeQuery(final URI serviceUri, final SailRepository repo) throws RepositoryException, MalformedQueryException, QueryEvaluationException, RDFParseException, IOException, RDFHandlerException {
-        try {
-            repo.initialize();
-            final RepositoryConnection conn = repo.getConnection();
-            final ValueFactory vf = conn.getValueFactory();
-            conn.setAutoCommit(false);
-            try {
-                final String query = "SELECT ?x { SERVICE <" + serviceUri.stringValue() + "> { ?x <u:1> ?bool1 } }";
-                final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                q.setBinding("bool1", vf.createLiteral(true));
-                final TupleQueryResult tqr = q.evaluate();
-                try {
-                    tqr.hasNext();
-                } finally {
-                    tqr.close();
-                }
-            } finally {
-                conn.close();
-            }
+          tqr.hasNext();
         } finally {
-            repo.shutDown();
+          tqr.close();
         }
+      } finally {
+        conn.close();
+      }
+    } finally {
+      repo.shutDown();
     }
-    
-    @Override
-    public Properties getProperties() {
-        
-        final Properties properties = getOurDelegate().getProperties();
-        
-        properties.setProperty(Options.NAMESPACE, "freshNamespace-"+UUID.randomUUID());
-        
-        return properties;
-    }
+  }
 
+  @Override
+  public Properties getProperties() {
+
+    final Properties properties = getOurDelegate().getProperties();
+
+    properties.setProperty(Options.NAMESPACE, "freshNamespace-" + UUID.randomUUID());
+
+    return properties;
+  }
 }

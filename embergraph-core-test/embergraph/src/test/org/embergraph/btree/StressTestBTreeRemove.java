@@ -22,11 +22,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.UUID;
-
 import junit.framework.TestCase2;
-
 import org.apache.log4j.Level;
-
 import org.embergraph.Banner;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.DirectBufferPool;
@@ -34,376 +31,351 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rwstore.sector.MemStore;
 
-public class StressTestBTreeRemove extends TestCase2 { //AbstractBTreeTestCase {
+public class StressTestBTreeRemove extends TestCase2 { // AbstractBTreeTestCase {
 
-	public StressTestBTreeRemove() {
-	}
+  public StressTestBTreeRemove() {}
 
-	public StressTestBTreeRemove(String name) {
-		super(name);
-	}
+  public StressTestBTreeRemove(String name) {
+    super(name);
+  }
 
-    private Random r;
-    private IRawStore store;
-    private boolean useRawRecords;
-    
-    @Override
-	protected void setUp() throws Exception {
-		
-		super.setUp();
-		
-		r = new Random();
-		
-		store = new MemStore(DirectBufferPool.INSTANCE);
-		
-		useRawRecords = r.nextBoolean();
-		
-	}
-    
-    @Override
-	protected void tearDown() throws Exception {
+  private Random r;
+  private IRawStore store;
+  private boolean useRawRecords;
 
-		if (store != null) {
+  @Override
+  protected void setUp() throws Exception {
 
-			store.close();
+    super.setUp();
 
-			store = null;
+    r = new Random();
 
-		}
+    store = new MemStore(DirectBufferPool.INSTANCE);
 
-		r = null;
-		
-		super.tearDown();
-    	
+    useRawRecords = r.nextBoolean();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    if (store != null) {
+
+      store.close();
+
+      store = null;
     }
 
-    private boolean useRawRecords() {
-    	
-    		return useRawRecords;
-    	
-    }
-    
-//    @Override
-    private BTree getBTree(final int branchingFactor) {
-        
-        return getBTree(branchingFactor , DefaultTupleSerializer.newInstance());
-        
-    }
+    r = null;
 
-//    @Override
-    private BTree getBTree(final int branchingFactor,
-            final ITupleSerializer tupleSer) {
+    super.tearDown();
+  }
 
-        final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+  private boolean useRawRecords() {
 
-		if (useRawRecords()) {
-			/*
-			 * Randomly test with raw records enabled, using a small value for
-			 * the maximum record length to force heavy use of raw records when
-			 * they are chosen.
-			 * 
-			 * TODO Rather than doing this randomly, it would be better to do
-			 * this systematically. This will make any problems reported by CI
-			 * easier to interpret.
-			 */
-			metadata.setRawRecords(true);
-			metadata.setMaxRecLen(8);
-			
-			// Set large retention queue
-			metadata.setWriteRetentionQueueCapacity(6000);
-		}
-        
-        metadata.setBranchingFactor(branchingFactor);
+    return useRawRecords;
+  }
 
-        metadata.setTupleSerializer(tupleSer);
+  //    @Override
+  private BTree getBTree(final int branchingFactor) {
 
-        return BTree.create(store, metadata);
-        
+    return getBTree(branchingFactor, DefaultTupleSerializer.newInstance());
+  }
+
+  //    @Override
+  private BTree getBTree(final int branchingFactor, final ITupleSerializer tupleSer) {
+
+    final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+
+    if (useRawRecords()) {
+      /*
+       * Randomly test with raw records enabled, using a small value for
+       * the maximum record length to force heavy use of raw records when
+       * they are chosen.
+       *
+       * TODO Rather than doing this randomly, it would be better to do
+       * this systematically. This will make any problems reported by CI
+       * easier to interpret.
+       */
+      metadata.setRawRecords(true);
+      metadata.setMaxRecLen(8);
+
+      // Set large retention queue
+      metadata.setWriteRetentionQueueCapacity(6000);
     }
 
-    /**
-	 * Stress test of insert, removal and lookup of keys in the tree (allows
-	 * splitting of the root leaf).
-	 * 
-	 * TODO Alternative insert/remove patterns which remove many things at once
-	 * and then insert many things. The insert/removes should be in a region of
-	 * the index, but need not be perfectly dense (though that might make it
-	 * more interesting).
-	 * 
-	 * TODO Multi-threaded insert/remove pattern using the Unisolated read-write
-	 * index. Might be difficult to track ground truth. Just look for errors in
-	 * the index.  Might need to do occasional checkpoints/commits also.
-	 */
-    /*
-     * Note: passes with ntrials=100k, mtuples=10M @ m={3,4,5,16} against
-     * memstore.  Runs for 1745s on Mac AirBook.
-     */
-    public void test_insertLookupRemoveKeyTreeStressTest() {
+    metadata.setBranchingFactor(branchingFactor);
 
-		Banner.banner();
+    metadata.setTupleSerializer(tupleSer);
 
-		final int ntrials = 5;
+    return BTree.create(store, metadata);
+  }
 
-		final int mtuples = 10000;
+  /**
+   * Stress test of insert, removal and lookup of keys in the tree (allows splitting of the root
+   * leaf).
+   *
+   * <p>TODO Alternative insert/remove patterns which remove many things at once and then insert
+   * many things. The insert/removes should be in a region of the index, but need not be perfectly
+   * dense (though that might make it more interesting).
+   *
+   * <p>TODO Multi-threaded insert/remove pattern using the Unisolated read-write index. Might be
+   * difficult to track ground truth. Just look for errors in the index. Might need to do occasional
+   * checkpoints/commits also.
+   */
+  /*
+   * Note: passes with ntrials=100k, mtuples=10M @ m={3,4,5,16} against
+   * memstore.  Runs for 1745s on Mac AirBook.
+   */
+  public void test_insertLookupRemoveKeyTreeStressTest() {
 
-		doInsertLookupRemoveStressTestMGC(4, mtuples, ntrials);
-		doInsertLookupRemoveStressTestMGC(5, mtuples, ntrials);
-		doInsertLookupRemoveStressTestMGC(16, mtuples, ntrials);
-		doInsertLookupRemoveStressTestMGC(3, mtuples, ntrials);
+    Banner.banner();
 
-		doInsertLookupRemoveStressTest(3, mtuples, ntrials);
-		doInsertLookupRemoveStressTest(4, mtuples, ntrials);
-		doInsertLookupRemoveStressTest(5, mtuples, ntrials);
-		doInsertLookupRemoveStressTest(16, mtuples, ntrials);
+    final int ntrials = 5;
 
-	}
-    
-    /**
-     * MGC variant that populates, removes at random and then re-inserts in reverse order.
-     * 
-     * The idea is to try to force a problem where a deleted leaf (and its parent) have not
-     * been ejected and then re-referenced for an insert,
-     * 
-     * @param m
-     *            The branching factor
-     * @param nkeys
-     *            The #of distinct keys.
-     * @param ntrials
-     *            The #of trials.
-     */
-	// @Override
-	private void doInsertLookupRemoveStressTestMGC(final int m, final int nkeys,
-			final int ntrials) {
+    final int mtuples = 10000;
 
-//        if (log.isInfoEnabled())
-//            log.info
-            System.out.println("m=" + m + ", nkeys=" + nkeys + ", ntrials=" + ntrials);
+    doInsertLookupRemoveStressTestMGC(4, mtuples, ntrials);
+    doInsertLookupRemoveStressTestMGC(5, mtuples, ntrials);
+    doInsertLookupRemoveStressTestMGC(16, mtuples, ntrials);
+    doInsertLookupRemoveStressTestMGC(3, mtuples, ntrials);
 
-        // Fixture under test.
-		final BTree btree = getBTree(m);
+    doInsertLookupRemoveStressTest(3, mtuples, ntrials);
+    doInsertLookupRemoveStressTest(4, mtuples, ntrials);
+    doInsertLookupRemoveStressTest(5, mtuples, ntrials);
+    doInsertLookupRemoveStressTest(16, mtuples, ntrials);
+  }
 
-		// Ground truth.
-		// final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
+  /**
+   * MGC variant that populates, removes at random and then re-inserts in reverse order.
+   *
+   * <p>The idea is to try to force a problem where a deleted leaf (and its parent) have not been
+   * ejected and then re-referenced for an insert,
+   *
+   * @param m The branching factor
+   * @param nkeys The #of distinct keys.
+   * @param ntrials The #of trials.
+   */
+  // @Override
+  private void doInsertLookupRemoveStressTestMGC(final int m, final int nkeys, final int ntrials) {
 
-		// All possible keys.
-        final Integer[] keys = new Integer[nkeys];
+    //        if (log.isInfoEnabled())
+    //            log.info
+    System.out.println("m=" + m + ", nkeys=" + nkeys + ", ntrials=" + ntrials);
 
-        // All possible values.
-        final SimpleEntry[] vals = new SimpleEntry[nkeys];
+    // Fixture under test.
+    final BTree btree = getBTree(m);
 
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < nkeys; i++) {
+    // Ground truth.
+    // final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
 
-			// Generate random keys.
-			keys[i] = r.nextInt();
+    // All possible keys.
+    final Integer[] keys = new Integer[nkeys];
 
-            vals[i] = new SimpleEntry();
+    // All possible values.
+    final SimpleEntry[] vals = new SimpleEntry[nkeys];
 
-			btree.insert(keys[i], vals[i]);
+    long start = System.currentTimeMillis();
+    for (int i = 0; i < nkeys; i++) {
+
+      // Generate random keys.
+      keys[i] = r.nextInt();
+
+      vals[i] = new SimpleEntry();
+
+      btree.insert(keys[i], vals[i]);
+    }
+    log.trace(
+        "First insert took "
+            + (System.currentTimeMillis() - start)
+            + "ms for "
+            + nkeys
+            + " inserts");
+    try {
+
+      /*
+       * Run test.
+       */
+      for (int trial = 0; trial < ntrials; trial++) {
+        final int mod = 3 * (trial + 1); // ratio of keys unreplaced
+        log.trace("Start trial " + trial + " leaf count: " + btree.getLeafCount());
+        for (int i = nkeys - 1; i >= 0; i--) {
+          if (i % mod != 0) // exclude 1/4
+          btree.remove(keys[i]);
         }
-        log.trace("First insert took " + (System.currentTimeMillis()-start) + "ms for " + nkeys + " inserts");
-		try {
-
-			/*
-			 * Run test.
-			 */
-			for (int trial = 0; trial < ntrials; trial++) {
-				final int mod = 3 * (trial + 1); // ratio of keys unreplaced
-				log.trace("Start trial " + trial + " leaf count: " + btree.getLeafCount());
-				for (int i = nkeys-1; i >= 0; i--) {
-					if (i % mod != 0) // exclude 1/4
-						btree.remove(keys[i]);
-				}
-				log.trace("After removes %" + mod + ", leaf count: " + btree.getLeafCount());
-				for (int i = mod; i < nkeys; i++) {
-					if (i % mod != 0) // exclude 1/4
-						btree.insert(keys[i], vals[i]);
-				}
-			}
-
-			assertTrue(btree.dump(System.err));
-
-			if (log.isInfoEnabled())
-				log.info(btree.getBtreeCounters().toString());
-
-			btree.removeAll();
-
-		} finally {
-
-			btree.close();
-    	
+        log.trace("After removes %" + mod + ", leaf count: " + btree.getLeafCount());
+        for (int i = mod; i < nkeys; i++) {
+          if (i % mod != 0) // exclude 1/4
+          btree.insert(keys[i], vals[i]);
         }
+      }
 
+      assertTrue(btree.dump(System.err));
+
+      if (log.isInfoEnabled()) log.info(btree.getBtreeCounters().toString());
+
+      btree.removeAll();
+
+    } finally {
+
+      btree.close();
     }
-	/**
-     * Stress test helper performs random inserts, removal and lookup operations
-     * and compares the behavior of the {@link BTree} against ground truth as
-     * tracked by a {@link TreeMap}.
-     * 
-     * Note: This test uses dense keys, but that is not a requirement.
-     * 
-     * @param m
-     *            The branching factor
-     * @param nkeys
-     *            The #of distinct keys.
-     * @param ntrials
-     *            The #of trials.
-     */
-	// @Override
-	private void doInsertLookupRemoveStressTest(final int m, final int nkeys,
-			final int ntrials) {
+  }
+  /**
+   * Stress test helper performs random inserts, removal and lookup operations and compares the
+   * behavior of the {@link BTree} against ground truth as tracked by a {@link TreeMap}.
+   *
+   * <p>Note: This test uses dense keys, but that is not a requirement.
+   *
+   * @param m The branching factor
+   * @param nkeys The #of distinct keys.
+   * @param ntrials The #of trials.
+   */
+  // @Override
+  private void doInsertLookupRemoveStressTest(final int m, final int nkeys, final int ntrials) {
 
-//        if (log.isInfoEnabled())
-//            log.info
-            System.out.println("m=" + m + ", nkeys=" + nkeys + ", ntrials=" + ntrials);
+    //        if (log.isInfoEnabled())
+    //            log.info
+    System.out.println("m=" + m + ", nkeys=" + nkeys + ", ntrials=" + ntrials);
 
-        // Fixture under test.
-		final BTree btree = getBTree(m);
+    // Fixture under test.
+    final BTree btree = getBTree(m);
 
-		// Ground truth.
-		final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
+    // Ground truth.
+    final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
 
-		// All possible keys.
-        final Integer[] keys = new Integer[nkeys];
+    // All possible keys.
+    final Integer[] keys = new Integer[nkeys];
 
-        // All possible values.
-        final SimpleEntry[] vals = new SimpleEntry[nkeys];
+    // All possible values.
+    final SimpleEntry[] vals = new SimpleEntry[nkeys];
 
-        for (int i = 0; i < nkeys; i++) {
+    for (int i = 0; i < nkeys; i++) {
 
-			// Note: this produces dense keys with origin (1).
-			keys[i] = i + 1;
+      // Note: this produces dense keys with origin (1).
+      keys[i] = i + 1;
 
-            vals[i] = new SimpleEntry();
+      vals[i] = new SimpleEntry();
 
-			if (i % 4 == 0) {
+      if (i % 4 == 0) {
 
-				/*
-				 * Populate every Nth tuple for the starting condition.
-				 */
+        /*
+         * Populate every Nth tuple for the starting condition.
+         */
 
-				expected.put(keys[i], vals[i]);
+        expected.put(keys[i], vals[i]);
 
-				btree.insert(keys[i], vals[i]);
+        btree.insert(keys[i], vals[i]);
+      }
+    }
 
-			}
+    try {
 
-        }
-        
-		try {
+      /*
+       * Run test.
+       */
+      for (int trial = 0; trial < ntrials; trial++) {
 
-			/*
-			 * Run test.
-			 */
-			for (int trial = 0; trial < ntrials; trial++) {
+        final boolean insert = r.nextBoolean();
 
-				final boolean insert = r.nextBoolean();
+        /*
+         * Choose the starting index at random, leaving at least one
+         * index before the end of the original range.
+         */
 
-				/*
-				 * Choose the starting index at random, leaving at least one
-				 * index before the end of the original range.
-				 */
-				
-				final int fromIndex = r.nextInt(nkeys - 2);
+        final int fromIndex = r.nextInt(nkeys - 2);
 
-				/*
-				 * Choose final index from the remaining range.
-				 */
-                final int toIndex = fromIndex
-                        + ((nkeys - fromIndex) / (r.nextInt(1000) + 1));
+        /*
+         * Choose final index from the remaining range.
+         */
+        final int toIndex = fromIndex + ((nkeys - fromIndex) / (r.nextInt(1000) + 1));
 
-				// The #of possible integer positions in that range.
-				final int range = toIndex - fromIndex;
+        // The #of possible integer positions in that range.
+        final int range = toIndex - fromIndex;
 
-				// The #of actual tuples in that range.
-				final long rangeCount = btree.rangeCount(fromIndex, toIndex);
+        // The #of actual tuples in that range.
+        final long rangeCount = btree.rangeCount(fromIndex, toIndex);
 
-				if(log.isTraceEnabled()) log.trace("trial=" + trial + ", "
-						+ (insert ? "insert" : "remove") + ", fromIndex="
-						+ fromIndex + ", toIndex=" + toIndex + ", range="
-						+ range + ", rangeCount=" + rangeCount);
+        if (log.isTraceEnabled())
+          log.trace(
+              "trial="
+                  + trial
+                  + ", "
+                  + (insert ? "insert" : "remove")
+                  + ", fromIndex="
+                  + fromIndex
+                  + ", toIndex="
+                  + toIndex
+                  + ", range="
+                  + range
+                  + ", rangeCount="
+                  + rangeCount);
 
-				for (int j = fromIndex; j < toIndex; j++) {
-					
-					final Integer ikey = keys[j];
+        for (int j = fromIndex; j < toIndex; j++) {
 
-					final SimpleEntry val = vals[j];
+          final Integer ikey = keys[j];
 
-					final byte[] key = TestKeyBuilder.asSortKey(ikey);
+          final SimpleEntry val = vals[j];
 
-					if (insert) {
+          final byte[] key = TestKeyBuilder.asSortKey(ikey);
 
-						// System.err.println("insert("+ikey+", "+val+")");
-						final SimpleEntry old = expected.put(ikey, val);
+          if (insert) {
 
-						final SimpleEntry old2 = (SimpleEntry) btree.insert(
-								key, val);
+            // System.err.println("insert("+ikey+", "+val+")");
+            final SimpleEntry old = expected.put(ikey, val);
 
-						assertEquals(old, old2);
+            final SimpleEntry old2 = (SimpleEntry) btree.insert(key, val);
 
-					} else {
+            assertEquals(old, old2);
 
-						// System.err.println("remove("+ikey+")");
-						final SimpleEntry old = expected.remove(ikey);
+          } else {
 
-						final SimpleEntry old2 = (SimpleEntry) SerializerUtil
-								.deserialize(btree.remove(key));
+            // System.err.println("remove("+ikey+")");
+            final SimpleEntry old = expected.remove(ikey);
 
-						assertEquals(old, old2);
+            final SimpleEntry old2 = (SimpleEntry) SerializerUtil.deserialize(btree.remove(key));
 
-					}
-					
-				}
-
-				if (trial % 100 == 0) {
-
-					/*
-					 * Validate the keys and entries.
-					 */
-
-					assertEquals("#entries", expected.size(),
-							btree.getEntryCount());
-
-					final Iterator<Map.Entry<Integer, SimpleEntry>> itr = expected
-							.entrySet().iterator();
-
-					while (itr.hasNext()) {
-
-						final Map.Entry<Integer, SimpleEntry> entry = itr.next();
-
-						final byte[] tmp = TestKeyBuilder.asSortKey(entry
-								.getKey());
-
-						assertEquals("lookup(" + entry.getKey() + ")",
-								entry.getValue(), btree.lookup(tmp));
-
-					}
-
-					assertTrue(btree.dump(Level.ERROR, System.err));
-
-				}
-
-			}
-
-			assertTrue(btree.dump(System.err));
-
-			if (log.isInfoEnabled())
-				log.info(btree.getBtreeCounters().toString());
-
-			btree.removeAll();
-
-			/*
-			 * TODO try more insert/removes after removeAll (or removeAll in
-			 * some key range).  Clear the same keys out of the groundTruth
-			 * map and revalidate.
-			 */
-			
-		} finally {
-
-			btree.close();
-    	
+            assertEquals(old, old2);
+          }
         }
 
+        if (trial % 100 == 0) {
+
+          /*
+           * Validate the keys and entries.
+           */
+
+          assertEquals("#entries", expected.size(), btree.getEntryCount());
+
+          final Iterator<Map.Entry<Integer, SimpleEntry>> itr = expected.entrySet().iterator();
+
+          while (itr.hasNext()) {
+
+            final Map.Entry<Integer, SimpleEntry> entry = itr.next();
+
+            final byte[] tmp = TestKeyBuilder.asSortKey(entry.getKey());
+
+            assertEquals("lookup(" + entry.getKey() + ")", entry.getValue(), btree.lookup(tmp));
+          }
+
+          assertTrue(btree.dump(Level.ERROR, System.err));
+        }
+      }
+
+      assertTrue(btree.dump(System.err));
+
+      if (log.isInfoEnabled()) log.info(btree.getBtreeCounters().toString());
+
+      btree.removeAll();
+
+      /*
+       * TODO try more insert/removes after removeAll (or removeAll in
+       * some key range).  Clear the same keys out of the groundTruth
+       * map and revalidate.
+       */
+
+    } finally {
+
+      btree.close();
     }
-    
+  }
 }

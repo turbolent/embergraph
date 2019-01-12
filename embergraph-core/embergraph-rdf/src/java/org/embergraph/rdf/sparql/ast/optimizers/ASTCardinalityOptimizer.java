@@ -19,9 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
 import org.embergraph.rdf.sparql.ast.IBindingProducerNode;
@@ -34,128 +32,114 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotatio
 
 /**
  * Calculate the estimated cardinality of a join group.
- * 
- * TODO Calculate estimated cardinality of other things like subqueries and
- * unions.
- * 
- * @author mikepersonick
  *
+ * <p>TODO Calculate estimated cardinality of other things like subqueries and unions.
+ *
+ * @author mikepersonick
  */
-public class ASTCardinalityOptimizer extends AbstractJoinGroupOptimizer
-		implements IASTOptimizer {
+public class ASTCardinalityOptimizer extends AbstractJoinGroupOptimizer implements IASTOptimizer {
 
-    private static final transient Logger log = Logger.getLogger(ASTCardinalityOptimizer.class);
-    
-	public ASTCardinalityOptimizer() {
-		/*
-		 * The cardinality of a join group can only be calculated if all of its
-		 * {@link IBindingProducerNode} children have a known cardinality.
-		 * Thus we must go depth first. 
-		 */
-		super(true /* childFirst */, false /* optimizeServiceNodes */);
-	}
-	
-    /**
-     * Calculate the estimated cardinality of a join group.
-     * 
-     * We will do this by first dividing the group into subgroups that share
-     * variables.  For each subgroup, we will calculate the estimated cardinality
-     * of that subgroup.  Then we will multiple those cardinalities together
-     * to get an estimate of cardinality for the whole group.
-     * 
-     * The estimated cardinality of a subgroup will be calculated using the
-     * same logic contained in the ASTStaticJoinOptimizer.
+  private static final transient Logger log = Logger.getLogger(ASTCardinalityOptimizer.class);
+
+  public ASTCardinalityOptimizer() {
+    /*
+     * The cardinality of a join group can only be calculated if all of its
+     * {@link IBindingProducerNode} children have a known cardinality.
+     * Thus we must go depth first.
      */
-	protected void optimizeJoinGroup(final AST2BOpContext ctx, 
-    		final StaticAnalysis sa, final IBindingSet[] bSets,
-    		final JoinGroupNode group) {
+    super(true /* childFirst */, false /* optimizeServiceNodes */);
+  }
 
-//		final long cardinality = Long.MAX_VALUE;
-		
-	    for (IGroupMemberNode child : group.getChildren()) {
-	        
-	        if (child instanceof UnionNode) {
-	            
-	            final UnionNode union = (UnionNode) child;
+  /**
+   * Calculate the estimated cardinality of a join group.
+   *
+   * <p>We will do this by first dividing the group into subgroups that share variables. For each
+   * subgroup, we will calculate the estimated cardinality of that subgroup. Then we will multiple
+   * those cardinalities together to get an estimate of cardinality for the whole group.
+   *
+   * <p>The estimated cardinality of a subgroup will be calculated using the same logic contained in
+   * the ASTStaticJoinOptimizer.
+   */
+  protected void optimizeJoinGroup(
+      final AST2BOpContext ctx,
+      final StaticAnalysis sa,
+      final IBindingSet[] bSets,
+      final JoinGroupNode group) {
 
-	            boolean canEstimate = true;
-	            
-	            for (JoinGroupNode join : union.getChildren()) {
-	                
-	                /*
-	                 * We can only attach an estimate to the union if we
-	                 * get an estimate for all of its children.
-	                 */
-	                canEstimate &= 
-	                        join.getProperty(Annotations.ESTIMATED_CARDINALITY) != null;
-	                
-	            }
+    //		final long cardinality = Long.MAX_VALUE;
 
-	            if (canEstimate) {
-	                
-	                long cardinality = 0;
-	                
-	                for (JoinGroupNode join : union.getChildren()) {
+    for (IGroupMemberNode child : group.getChildren()) {
 
-	                    cardinality += (long) 
-	                            join.getProperty(Annotations.ESTIMATED_CARDINALITY);
-	                    
-	                }
-	                
-	                if (log.isDebugEnabled()) {
-	                    log.debug("able to estimate the cardinality for a union: " + cardinality);
-	                }
-	                
-	                union.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
-	                
-	            }
-	            
-	        } else if (child instanceof ArbitraryLengthPathNode) {
-	            
-	            final ArbitraryLengthPathNode alp = 
-	                    (ArbitraryLengthPathNode) child; 
-	            
-	            final long cardinality = alp.getEstimatedCardinality(null);
-	            
-	            if (cardinality < Long.MAX_VALUE) {
-	                alp.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
-	            }
-	            
-	        }
-	        
-	    }
-	    
-		final List<IBindingProducerNode> nodes = 
-				group.getChildren(IBindingProducerNode.class);
-		
-		if (nodes.size() == 1) {
-		    
-		    final IBindingProducerNode node = nodes.get(0);
-		    
-		    if (node.getProperty(Annotations.ESTIMATED_CARDINALITY) != null) {
-		        
-		        final long cardinality = (long)
-		                node.getProperty(Annotations.ESTIMATED_CARDINALITY);
-		        
-		        if (log.isDebugEnabled()) {
-		            log.debug("setting cardinality on a singleton group: " + cardinality);
-		        }
-		        
-		        group.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
-		        
-		    }
-		    
-		} else {
-		    
-		    /*
-		     * TODO Calculate estimated cardinality according to logic in
-		     * ASTStaticJoinOptimizer.
-		     */
-		    
-		}
-		
-//		group.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
-        
+      if (child instanceof UnionNode) {
+
+        final UnionNode union = (UnionNode) child;
+
+        boolean canEstimate = true;
+
+        for (JoinGroupNode join : union.getChildren()) {
+
+          /*
+           * We can only attach an estimate to the union if we
+           * get an estimate for all of its children.
+           */
+          canEstimate &= join.getProperty(Annotations.ESTIMATED_CARDINALITY) != null;
+        }
+
+        if (canEstimate) {
+
+          long cardinality = 0;
+
+          for (JoinGroupNode join : union.getChildren()) {
+
+            cardinality += (long) join.getProperty(Annotations.ESTIMATED_CARDINALITY);
+          }
+
+          if (log.isDebugEnabled()) {
+            log.debug("able to estimate the cardinality for a union: " + cardinality);
+          }
+
+          union.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
+        }
+
+      } else if (child instanceof ArbitraryLengthPathNode) {
+
+        final ArbitraryLengthPathNode alp = (ArbitraryLengthPathNode) child;
+
+        final long cardinality = alp.getEstimatedCardinality(null);
+
+        if (cardinality < Long.MAX_VALUE) {
+          alp.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
+        }
+      }
     }
-	
+
+    final List<IBindingProducerNode> nodes = group.getChildren(IBindingProducerNode.class);
+
+    if (nodes.size() == 1) {
+
+      final IBindingProducerNode node = nodes.get(0);
+
+      if (node.getProperty(Annotations.ESTIMATED_CARDINALITY) != null) {
+
+        final long cardinality = (long) node.getProperty(Annotations.ESTIMATED_CARDINALITY);
+
+        if (log.isDebugEnabled()) {
+          log.debug("setting cardinality on a singleton group: " + cardinality);
+        }
+
+        group.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
+      }
+
+    } else {
+
+      /*
+       * TODO Calculate estimated cardinality according to logic in
+       * ASTStaticJoinOptimizer.
+       */
+
+    }
+
+    //		group.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
+
+  }
 }

@@ -17,17 +17,15 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * @author Martyn Cutcher
- */
+/** @author Martyn Cutcher */
 public abstract class Visitor extends FilterBase {
 
-	//-------------------------------------------------------------
+  // -------------------------------------------------------------
 
-    @Override
-    final public Iterator filterOnce(Iterator src, Object context) {
-        return new Visitorator(src, context, this);
-	}
+  @Override
+  public final Iterator filterOnce(Iterator src, Object context) {
+    return new Visitorator(src, context, this);
+  }
 
-	protected abstract void visit(Object obj);
+  protected abstract void visit(Object obj);
 }

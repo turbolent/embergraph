@@ -24,43 +24,47 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 /**
  * Dublin Core terms.
- * 
+ *
  * @see http://purl.org/dc/terms/
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DCTermsVocabularyDecl {
 
-    public static final String NAMESPACE = "http://purl.org/dc/terms/";
-    public static final URI description = new URIImpl(NAMESPACE + "description");
-    public static final URI hasVersion = new URIImpl(NAMESPACE + "hasVersion");
-    public static final URI issued = new URIImpl(NAMESPACE + "issued");
-    public static final URI modified = new URIImpl(NAMESPACE + "modified");
-    public static final URI publisher = new URIImpl(NAMESPACE + "publisher");
-    public static final URI reviewer = new URIImpl(NAMESPACE + "reviewer");
-    public static final URI Review = new URIImpl(NAMESPACE + "Review");
-    public static final URI text = new URIImpl(NAMESPACE + "text");
-    public static final URI title = new URIImpl(NAMESPACE + "title");
+  public static final String NAMESPACE = "http://purl.org/dc/terms/";
+  public static final URI description = new URIImpl(NAMESPACE + "description");
+  public static final URI hasVersion = new URIImpl(NAMESPACE + "hasVersion");
+  public static final URI issued = new URIImpl(NAMESPACE + "issued");
+  public static final URI modified = new URIImpl(NAMESPACE + "modified");
+  public static final URI publisher = new URIImpl(NAMESPACE + "publisher");
+  public static final URI reviewer = new URIImpl(NAMESPACE + "reviewer");
+  public static final URI Review = new URIImpl(NAMESPACE + "Review");
+  public static final URI text = new URIImpl(NAMESPACE + "text");
+  public static final URI title = new URIImpl(NAMESPACE + "title");
 
-    static private final URI[] uris = new URI[]{
-            new URIImpl(NAMESPACE),
-            description, hasVersion, issued, modified, publisher, reviewer,
-            Review, text, title, };
+  private static final URI[] uris =
+      new URI[] {
+        new URIImpl(NAMESPACE),
+        description,
+        hasVersion,
+        issued,
+        modified,
+        publisher,
+        reviewer,
+        Review,
+        text,
+        title,
+      };
 
-    public DCTermsVocabularyDecl() {
-    }
+  public DCTermsVocabularyDecl() {}
 
-    public Iterator<URI> values() {
+  public Iterator<URI> values() {
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-
-    }
-
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

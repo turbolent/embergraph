@@ -24,30 +24,24 @@ package org.embergraph.bop;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
- * An interface for exposing the data in an object view of a tuple by index
- * position. This facilitates binding values elements read from an access path
- * onto binding sets during join processing.
- * 
+ * An interface for exposing the data in an object view of a tuple by index position. This
+ * facilitates binding values elements read from an access path onto binding sets during join
+ * processing.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @see IPredicate#get(Object, int)
  * @see IJoinNexus#bind(IPredicate, IConstraint, Object, IBindingSet)
  */
 public interface IElement {
 
-    /**
-     * Return the value at the specified index.
-     * 
-     * @param index
-     *            The index.
-     * 
-     * @return The value at the specified index.
-     * 
-     * @throws IllegalArgumentException
-     *             if the index is less than zero or GTE the #of fields defined
-     *             for the element.
-     */
-    public Object get(int index);
-
+  /**
+   * Return the value at the specified index.
+   *
+   * @param index The index.
+   * @return The value at the specified index.
+   * @throws IllegalArgumentException if the index is less than zero or GTE the #of fields defined
+   *     for the element.
+   */
+  public Object get(int index);
 }

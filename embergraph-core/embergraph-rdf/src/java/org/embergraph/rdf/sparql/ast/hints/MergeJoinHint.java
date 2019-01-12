@@ -26,30 +26,28 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the enabling/disabling merge joins.
- */
+/** Query hint for turning the enabling/disabling merge joins. */
 final class MergeJoinHint extends AbstractBooleanQueryHint {
 
-    protected MergeJoinHint() {
-        super(QueryHints.MERGE_JOIN, QueryHints.DEFAULT_MERGE_JOIN);
+  protected MergeJoinHint() {
+    super(QueryHints.MERGE_JOIN, QueryHints.DEFAULT_MERGE_JOIN);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (scope == QueryHintScope.Query) {
+
+      context.mergeJoin = value;
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        if (scope == QueryHintScope.Query) {
-
-            context.mergeJoin = value;
-
-            return;
-
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

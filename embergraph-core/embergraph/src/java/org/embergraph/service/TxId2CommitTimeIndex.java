@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.UUID;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.DefaultTupleSerializer;
@@ -36,403 +35,336 @@ import org.embergraph.service.AbstractTransactionService.TxState;
 import org.embergraph.util.Bytes;
 
 /**
- * {@link BTree} whose keys are the absolute value of the txIds and whose values
- * are {@link ITxState0} tuples for the transaction.
- * 
+ * {@link BTree} whose keys are the absolute value of the txIds and whose values are {@link
+ * ITxState0} tuples for the transaction.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TxId2CommitTimeIndex.java 5948 2012-02-02 20:16:05Z thompsonbry
- *          $
+ * @version $Id: TxId2CommitTimeIndex.java 5948 2012-02-02 20:16:05Z thompsonbry $
  */
 public class TxId2CommitTimeIndex extends BTree {
 
-    /**
-     * Instance used to encode the timestamp into the key.
+  /** Instance used to encode the timestamp into the key. */
+  private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
+
+  /**
+   * Create a transient instance.
+   *
+   * @return The new instance.
+   */
+  public static TxId2CommitTimeIndex createTransient() {
+
+    final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+
+    metadata.setBTreeClassName(TxId2CommitTimeIndex.class.getName());
+
+    metadata.setTupleSerializer(
+        new TupleSerializer(new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG * 2)));
+
+    return (TxId2CommitTimeIndex) BTree.createTransient(/* store, */ metadata);
+  }
+
+  /**
+   * Load from the store.
+   *
+   * @param store The backing store.
+   * @param checkpoint The {@link Checkpoint} record.
+   * @param metadata The metadata record for the index.
+   */
+  public TxId2CommitTimeIndex(
+      final IRawStore store,
+      final Checkpoint checkpoint,
+      final IndexMetadata metadata,
+      boolean readOnly) {
+
+    super(store, checkpoint, metadata, readOnly);
+  }
+
+  /**
+   * Encodes the txId into a key.
+   *
+   * @param txId The transaction start time (may be negative).
+   * @return The corresponding key.
+   */
+  private byte[] encodeKey(final long startTime) {
+
+    // Note: absolute value of the start time!
+    final long tmp = Math.abs(startTime);
+
+    return keyBuilder.reset().append(tmp).getKey();
+  }
+
+  private static final long decodeKey(final byte[] key) {
+
+    return KeyBuilder.decodeLong(key, 0);
+  }
+
+  private static class MyTxState implements ITxState0 {
+
+    private final long txId;
+    private final long readsOnCommitTime;
+
+    private MyTxState(final long txId, final long readsOnCommitTime) {
+
+      this.txId = txId;
+
+      this.readsOnCommitTime = readsOnCommitTime;
+    }
+
+    @Override
+    public final long getStartTimestamp() {
+
+      return txId;
+    }
+
+    @Override
+    public final long getReadsOnCommitTime() {
+
+      return readsOnCommitTime;
+    }
+  }
+
+  /**
+   * Return the largest key that is less than or equal to the given timestamp. This is used
+   * primarily to locate the commit point that will serve as the ground state for a transaction
+   * having <i>timestamp</i> as its start time. In this context the LTE search identifies the most
+   * recent commit point that not later than the start time of the transaction.
+   *
+   * @param timestamp The given timestamp.
+   * @return The timestamp -or- <code>-1L</code> iff there is no entry in the index which satisifies
+   *     the probe.
+   * @throws IllegalArgumentException if <i>timestamp</i> is less than or equals to ZERO (0L).
+   */
+  public synchronized long find(final long timestamp) {
+
+    if (timestamp <= 0L) throw new IllegalArgumentException();
+
+    // find (first less than or equal to).
+    final long index = findIndexOf(timestamp);
+
+    if (index == -1) {
+
+      // No match.
+
+      return -1L;
+    }
+
+    return decodeKey(keyAt(index));
+  }
+
+  /**
+   * Find the first commit time strictly greater than the timestamp.
+   *
+   * @param timestamp The timestamp. A value of ZERO (0) may be used to find the first commit time.
+   * @return The commit time -or- <code>-1L</code> if there is no commit record whose timestamp is
+   *     strictly greater than <i>timestamp</i>.
+   */
+  public synchronized long findNext(final long timestamp) {
+
+    /*
+     * Note: can also be written using rangeIterator().next().
      */
-    final private IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-    /**
-     * Create a transient instance.
-     * 
-     * @return The new instance.
-     */
-    static public TxId2CommitTimeIndex createTransient() {
+    if (timestamp < 0L) throw new IllegalArgumentException();
 
-        final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+    // find first strictly greater than.
+    final long index = findIndexOf(Math.abs(timestamp)) + 1;
 
-        metadata.setBTreeClassName(TxId2CommitTimeIndex.class.getName());
+    if (index == nentries) {
 
-        metadata.setTupleSerializer(new TupleSerializer(
-                new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG * 2)));
+      // No match.
 
-        return (TxId2CommitTimeIndex) BTree.createTransient(/* store, */metadata);
+      return -1L;
+    }
 
+    return decodeKey(keyAt(index));
+  }
+
+  /**
+   * Find the index having the largest timestamp that is less than or equal to the given timestamp.
+   *
+   * @return The index having the largest timestamp that is less than or equal to the given
+   *     timestamp -or- <code>-1</code> iff there are no index entries.
+   */
+  public synchronized long findIndexOf(final long timestamp) {
+
+    long pos = super.indexOf(encodeKey(timestamp));
+
+    if (pos < 0) {
+
+      /*
+       * the key lies between the entries in the index, or possible before
+       * the first entry in the index. [pos] represents the insert
+       * position. we convert it to an entry index and subtract one to get
+       * the index of the first commit record less than the given
+       * timestamp.
+       */
+
+      pos = -(pos + 1);
+
+      if (pos == 0) {
+
+        // No entry is less than or equal to this timestamp.
+        return -1;
+      }
+
+      pos--;
+
+      return pos;
+
+    } else {
+
+      /*
+       * exact hit on an entry.
+       */
+
+      return pos;
+    }
+  }
+
+  /**
+   * Add an entry.
+   *
+   * @param txState The transaction object.
+   * @exception IllegalArgumentException if <i>txState</i> is <code>null</code>.
+   */
+  //    * @exception IllegalArgumentException
+  //    *                if there is already an entry registered under for the
+  //    *                given timestamp.
+  public void add(final TxState txState) {
+
+    //        if (txId == 0L)
+    //            throw new IllegalArgumentException();
+
+    if (txState == null) throw new IllegalArgumentException();
+
+    if (txState.tx == 0L) throw new IllegalArgumentException();
+
+    if (txState.getReadsOnCommitTime() < 0L) throw new IllegalArgumentException();
+
+    final TupleSerializer tupleSer = (TupleSerializer) getIndexMetadata().getTupleSerializer();
+
+    final byte[] key = tupleSer.serializeKey(txState);
+
+    if (super.contains(key)) {
+
+      throw new IllegalArgumentException("entry exists: key=" + key + ", newValue=" + txState);
+    }
+
+    final byte[] val = tupleSer.serializeVal(txState);
+
+    super.insert(key, val);
+  }
+
+  /**
+   * Encapsulates key and value formation.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  protected static class TupleSerializer extends DefaultTupleSerializer<Long, ITxState0> {
+
+    /** */
+    private static final long serialVersionUID = -2851852959439807542L;
+
+    /** De-serialization ctor. */
+    public TupleSerializer() {
+
+      super();
     }
 
     /**
-     * Load from the store.
-     * 
-     * @param store
-     *            The backing store.
-     * @param checkpoint
-     *            The {@link Checkpoint} record.
-     * @param metadata
-     *            The metadata record for the index.
+     * Ctor when creating a new instance.
+     *
+     * @param keyBuilderFactory
      */
-    public TxId2CommitTimeIndex(final IRawStore store, final Checkpoint checkpoint,
-            final IndexMetadata metadata, boolean readOnly) {
+    public TupleSerializer(final IKeyBuilderFactory keyBuilderFactory) {
 
-        super(store, checkpoint, metadata, readOnly);
-
-    }
-    
-    /**
-     * Encodes the txId into a key.
-     * 
-     * @param txId
-     *            The transaction start time (may be negative).
-     * 
-     * @return The corresponding key.
-     */
-    private byte[] encodeKey(final long startTime) {
-
-        // Note: absolute value of the start time!
-        final long tmp = Math.abs(startTime);
-
-        return keyBuilder.reset().append(tmp).getKey();
-
+      super(keyBuilderFactory);
     }
 
-    final static private long decodeKey(final byte[] key) {
+    @Override
+    public byte[] serializeKey(final Object obj) {
 
-        return KeyBuilder.decodeLong(key, 0);
+      final long txId;
 
+      if (obj instanceof ITxState0) {
+
+        txId = ((ITxState) obj).getStartTimestamp();
+
+      } else if (obj instanceof Long) {
+
+        txId = ((Long) obj).longValue();
+
+      } else {
+
+        throw new IllegalArgumentException("class=" + obj.getClass());
+      }
+
+      // Note: absolute value of the start time!
+      final long tmp = Math.abs(txId);
+
+      return getKeyBuilder().reset().append(tmp).getKey();
     }
 
-    private static class MyTxState implements ITxState0 {
+    /** Decodes the key as a transaction identifier. */
+    @Override
+    @SuppressWarnings("rawtypes")
+    public Long deserializeKey(final ITuple tuple) {
 
-        private final long txId;
-        private final long readsOnCommitTime;
-        
-        private MyTxState(final long txId, final long readsOnCommitTime) {
-            
-            this.txId = txId;
-            
-            
-            this.readsOnCommitTime = readsOnCommitTime;
-            
-        }
-        
-        @Override
-        final public long getStartTimestamp() {
+      final byte[] key = tuple.getKeyBuffer().array();
 
-            return txId;
-            
-        }
+      final long id = KeyBuilder.decodeLong(key, 0);
 
-        @Override
-        final public long getReadsOnCommitTime() {
-
-            return readsOnCommitTime;
-            
-        }
-        
-    }
-    
-    /**
-     * Return the largest key that is less than or equal to the given timestamp.
-     * This is used primarily to locate the commit point that will serve as the
-     * ground state for a transaction having <i>timestamp</i> as its start time.
-     * In this context the LTE search identifies the most recent commit point
-     * that not later than the start time of the transaction.
-     * 
-     * @param timestamp
-     *            The given timestamp.
-     * 
-     * @return The timestamp -or- <code>-1L</code> iff there is no entry in the
-     *         index which satisifies the probe.
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>timestamp</i> is less than or equals to ZERO (0L).
-     */
-    synchronized public long find(final long timestamp) {
-
-        if (timestamp <= 0L)
-            throw new IllegalArgumentException();
-        
-        // find (first less than or equal to).
-        final long index = findIndexOf(timestamp);
-        
-        if(index == -1) {
-            
-            // No match.
-            
-            return -1L;
-            
-        }
-
-        return decodeKey(keyAt(index));
-        
+      return id;
     }
 
-    /**
-     * Find the first commit time strictly greater than the timestamp.
-     * 
-     * @param timestamp
-     *            The timestamp. A value of ZERO (0) may be used to find the
-     *            first commit time.
-     * 
-     * @return The commit time -or- <code>-1L</code> if there is no commit
-     *         record whose timestamp is strictly greater than <i>timestamp</i>.
-     */
-    synchronized public long findNext(final long timestamp) {
+    /** Decodes the value as a commit time. */
+    @SuppressWarnings("rawtypes")
+    public ITxState0 deserialize(final ITuple tuple) {
 
-        /*
-         * Note: can also be written using rangeIterator().next().
-         */
-        
-        if (timestamp < 0L)
-            throw new IllegalArgumentException();
-        
-        // find first strictly greater than.
-        final long index = findIndexOf(Math.abs(timestamp)) + 1;
-        
-        if (index == nentries) {
+      final byte[] val = tuple.getValueBuffer().array();
 
-            // No match.
+      final long txId = KeyBuilder.decodeLong(val, 0 /*off*/);
 
-            return -1L;
-            
-        }
-        
-        return decodeKey(keyAt(index));
+      final long readsOnCommitTime = KeyBuilder.decodeLong(val, Bytes.SIZEOF_LONG /* off */);
 
+      return new MyTxState(txId, readsOnCommitTime);
     }
 
-    /**
-     * Find the index having the largest timestamp that is less than or
-     * equal to the given timestamp.
-     * 
-     * @return The index having the largest timestamp that is less than or
-     *         equal to the given timestamp -or- <code>-1</code> iff there
-     *         are no index entries.
-     */
-    synchronized public long findIndexOf(final long timestamp) {
-        
-        long pos = super.indexOf(encodeKey(timestamp));
-        
-        if (pos < 0) {
+    @Override
+    public byte[] serializeVal(final ITxState0 val) {
 
-            /*
-             * the key lies between the entries in the index, or possible before
-             * the first entry in the index. [pos] represents the insert
-             * position. we convert it to an entry index and subtract one to get
-             * the index of the first commit record less than the given
-             * timestamp.
-             */
-            
-            pos = -(pos+1);
-
-			if (pos == 0) {
-
-                // No entry is less than or equal to this timestamp.
-                return -1;
-                
-            }
-                
-            pos--;
-
-            return pos;
-            
-        } else {
-            
-            /*
-             * exact hit on an entry.
-             */
-            
-            return pos;
-            
-        }
-
-    }
-    
-    /**
-     * Add an entry.
-     * 
-     * @param txState
-     *            The transaction object.
-     * 
-     * @exception IllegalArgumentException
-     *                if <i>txState</i> is <code>null</code>.
-     */
-//    * @exception IllegalArgumentException
-//    *                if there is already an entry registered under for the
-//    *                given timestamp.
-    public void add(final TxState txState) {
-
-//        if (txId == 0L)
-//            throw new IllegalArgumentException();
-
-        if (txState == null)
-            throw new IllegalArgumentException();
-
-        if (txState.tx == 0L)
-            throw new IllegalArgumentException();
-
-        if (txState.getReadsOnCommitTime() < 0L)
-            throw new IllegalArgumentException();
-
-        final TupleSerializer tupleSer = (TupleSerializer) getIndexMetadata()
-                .getTupleSerializer();
-        
-        final byte[] key = tupleSer.serializeKey(txState);
-
-        if (super.contains(key)) {
-
-            throw new IllegalArgumentException("entry exists: key=" + key
-                    + ", newValue=" + txState);
-
-        }
-
-        final byte[] val = tupleSer.serializeVal(txState);
-
-        super.insert(key, val);
-        
-    }
-    
-    /**
-     * Encapsulates key and value formation.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    static protected class TupleSerializer extends
-            DefaultTupleSerializer<Long, ITxState0> {
-
-        /**
-         * 
-         */
-        private static final long serialVersionUID = -2851852959439807542L;
-
-        /**
-         * De-serialization ctor.
-         */
-        public TupleSerializer() {
-
-            super();
-            
-        }
-
-        /**
-         * Ctor when creating a new instance.
-         * 
-         * @param keyBuilderFactory
-         */
-        public TupleSerializer(final IKeyBuilderFactory keyBuilderFactory) {
-
-            super(keyBuilderFactory);
-
-        }
-        
-        @Override
-        public byte[] serializeKey(final Object obj) {
-
-            final long txId;
-
-            if (obj instanceof ITxState0) {
-
-                txId = ((ITxState) obj).getStartTimestamp();
-
-            } else if (obj instanceof Long) {
-
-                txId = ((Long) obj).longValue();
-
-            } else {
-
-                throw new IllegalArgumentException("class=" + obj.getClass());
-                
-            }
-
-            // Note: absolute value of the start time!
-            final long tmp = Math.abs(txId);
-
-            return getKeyBuilder().reset().append(tmp).getKey();
-
-        }
-        
-        /**
-         * Decodes the key as a transaction identifier.
-         */
-        @Override
-        @SuppressWarnings("rawtypes")
-        public Long deserializeKey(final ITuple tuple) {
-
-            final byte[] key = tuple.getKeyBuffer().array();
-
-            final long id = KeyBuilder.decodeLong(key, 0);
-
-            return id;
-
-        }
-
-        /**
-         * Decodes the value as a commit time.
-         */
-        @SuppressWarnings("rawtypes")
-        public ITxState0 deserialize(final ITuple tuple) {
-
-            final byte[] val = tuple.getValueBuffer().array();
-
-            final long txId = KeyBuilder.decodeLong(val, 0/*off*/);
-
-            final long readsOnCommitTime = KeyBuilder.decodeLong(val,
-                    Bytes.SIZEOF_LONG/* off */);
-
-            return new MyTxState(txId,readsOnCommitTime);
-            
-        }
-        
-        @Override
-        public byte[] serializeVal(final ITxState0 val) {
-
-            return getKeyBuilder().reset().append(val.getStartTimestamp())
-                    .append(val.getReadsOnCommitTime()).getKey();
-
-        }
-        
-        /**
-         * The initial version (no additional persistent state).
-         */
-        private final static transient byte VERSION0 = 0;
-
-        /**
-         * The current version.
-         */
-        private final static transient byte VERSION = VERSION0;
-
-        public void readExternal(final ObjectInput in) throws IOException,
-                ClassNotFoundException {
-
-            super.readExternal(in);
-            
-            final byte version = in.readByte();
-            
-            switch (version) {
-            case VERSION0:
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown version: "
-                        + version);
-            }
-
-        }
-
-        public void writeExternal(final ObjectOutput out) throws IOException {
-
-            super.writeExternal(out);
-            
-            out.writeByte(VERSION);
-            
-        }
-
+      return getKeyBuilder()
+          .reset()
+          .append(val.getStartTimestamp())
+          .append(val.getReadsOnCommitTime())
+          .getKey();
     }
 
+    /** The initial version (no additional persistent state). */
+    private static final transient byte VERSION0 = 0;
+
+    /** The current version. */
+    private static final transient byte VERSION = VERSION0;
+
+    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+
+      super.readExternal(in);
+
+      final byte version = in.readByte();
+
+      switch (version) {
+        case VERSION0:
+          break;
+        default:
+          throw new UnsupportedOperationException("Unknown version: " + version);
+      }
+    }
+
+    public void writeExternal(final ObjectOutput out) throws IOException {
+
+      super.writeExternal(out);
+
+      out.writeByte(VERSION);
+    }
+  }
 }

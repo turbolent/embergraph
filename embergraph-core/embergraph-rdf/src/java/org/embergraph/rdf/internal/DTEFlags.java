@@ -23,27 +23,19 @@ package org.embergraph.rdf.internal;
 
 /**
  * Data type enum bit flags.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
  * @see DTE
  */
 public interface DTEFlags {
 
-    /**
-     * Constant for "no flags".
-     */
-    int NOFLAGS = 0;
+  /** Constant for "no flags". */
+  int NOFLAGS = 0;
 
-    /**
-     * Flag for a numeric data type.
-     */
-    int NUMERIC = 1 << 0;
+  /** Flag for a numeric data type. */
+  int NUMERIC = 1 << 0;
 
-    /**
-     * Flag for an unsigned numeric data type (implies {@link #NUMERIC}).
-     */
-    int UNSIGNED_NUMERIC = (1 << 1) | NUMERIC;
-
+  /** Flag for an unsigned numeric data type (implies {@link #NUMERIC}). */
+  int UNSIGNED_NUMERIC = (1 << 1) | NUMERIC;
 }

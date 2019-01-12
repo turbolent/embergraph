@@ -27,38 +27,40 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * Query hint for turning on/off a distinct filter over the triples extracted
- * from the default graph in quads mode.
- * <p>
- * By default, a DISTINCT filter is applied when evaluating access paths
- * against the default graph, for correctness reasons. The hint (or the 
- * respective system property) can be used to disabled the distinct filter,
- * in order to accelerate default graph queries. This can be done whenever
- * it is known that NO triple occurs in more than one named graph. 
- * 
- * BE CAREFUL: if this condition does not hold and the filter is disabled, 
- * wrong query results (caused by duplicates) will be the consequence.
+ * Query hint for turning on/off a distinct filter over the triples extracted from the default graph
+ * in quads mode.
+ *
+ * <p>By default, a DISTINCT filter is applied when evaluating access paths against the default
+ * graph, for correctness reasons. The hint (or the respective system property) can be used to
+ * disabled the distinct filter, in order to accelerate default graph queries. This can be done
+ * whenever it is known that NO triple occurs in more than one named graph.
+ *
+ * <p>BE CAREFUL: if this condition does not hold and the filter is disabled, wrong query results
+ * (caused by duplicates) will be the consequence.
  */
 final class DefaultGraphDistinctFilterHint extends AbstractBooleanQueryHint {
 
-    protected DefaultGraphDistinctFilterHint() {
-        super(QueryHints.DEFAULT_GRAPH_DISTINCT_FILTER, QueryHints.DEFAULT_DEFAULT_GRAPH_DISTINCT_FILTER);
+  protected DefaultGraphDistinctFilterHint() {
+    super(
+        QueryHints.DEFAULT_GRAPH_DISTINCT_FILTER, QueryHints.DEFAULT_DEFAULT_GRAPH_DISTINCT_FILTER);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    switch (scope) {
+      case Query:
+        context.defaultGraphDistinctFilter = value;
+        return;
+      default:
+        break;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        switch (scope) {
-        case Query:
-            context.defaultGraphDistinctFilter = value;
-            return;
-        default:
-            break;
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

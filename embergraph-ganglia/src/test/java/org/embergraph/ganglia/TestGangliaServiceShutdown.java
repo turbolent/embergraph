@@ -25,154 +25,139 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-
 import junit.framework.TestCase;
 
 /**
  * Unit test for shutdown of the {@link GangliaListener}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestGangliaServiceShutdown extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestGangliaServiceShutdown() {}
+
+  /** @param name */
+  public TestGangliaServiceShutdown(String name) {
+    super(name);
+  }
+
+  /**
+   * Test verifies correct shutdown of the {@link GangliaService} ASSUMING that the {@link
+   * GangliaListener} shuts down correctly.
+   *
+   * @see TestGangliaListenerShutdown
+   */
+  public void test_gangliaService_shutdown() throws UnknownHostException, InterruptedException {
+
+    /*
+     * The host name for this host.
      */
-    public TestGangliaServiceShutdown() {
-    }
+    final String hostName = GangliaService.getCanonicalHostName();
 
-    /**
-     * @param name
+    final String serviceName = GangliaService.class.getSimpleName();
+
+    final int quietPeriod = IGangliaDefaults.QUIET_PERIOD;
+
+    final int initialDelay = IGangliaDefaults.INITIAL_DELAY;
+
+    /*
+     * Note: Use ZERO (0) if you are running gmond on the same host. That
+     * will prevent the GangliaService from transmitting a different
+     * heartbeat, which would confuse gmond and gmetad.
      */
-    public TestGangliaServiceShutdown(String name) {
-        super(name);
-    }
+    final int heartbeatInterval = 0; // IFF using gmond.
+    //      final int heartbeatInterval = IGangliaDefaults.HEARTBEAT_INTERVAL;
 
-    /**
-     * Test verifies correct shutdown of the {@link GangliaService} ASSUMING
-     * that the {@link GangliaListener} shuts down correctly.
-     * 
-     * @see TestGangliaListenerShutdown
+    final int monitoringInterval = IGangliaDefaults.MONITORING_INTERVAL;
+
+    final InetAddress listenGroup = InetAddress.getByName(IGangliaDefaults.DEFAULT_GROUP);
+
+    final int listenPort = IGangliaDefaults.DEFAULT_PORT;
+
+    final String defaultUnits = IGangliaDefaults.DEFAULT_UNITS;
+
+    final GangliaSlopeEnum defaultSlope = IGangliaDefaults.DEFAULT_SLOPE;
+
+    final int defaultTMax = IGangliaDefaults.DEFAULT_TMAX;
+
+    final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
+
+    final InetSocketAddress[] metricsServers =
+        new InetSocketAddress[] {
+          new InetSocketAddress(IGangliaDefaults.DEFAULT_GROUP, IGangliaDefaults.DEFAULT_PORT)
+        };
+
+    /*
+     * Extensible factory for declaring and resolving metrics.
+     *
+     * Note: you can layer on the ability to (a) recognize and align your
+     * own host performance counters hierarchy with those declared by
+     * ganglia and; (b) provide nice declarations for various application
+     * counters of interest.
      */
-    public void test_gangliaService_shutdown() throws UnknownHostException,
-            InterruptedException {
+    final GangliaMetadataFactory metadataFactory =
+        new GangliaMetadataFactory(
+            new DefaultMetadataFactory(defaultUnits, defaultSlope, defaultTMax, defaultDMax));
 
-        /*
-         * The host name for this host.
-         */
-        final String hostName = GangliaService.getCanonicalHostName();
+    ExecutorService executorService = null;
 
-        final String serviceName = GangliaService.class.getSimpleName();
+    // The embedded ganglia service.
+    GangliaService service = null;
 
-        final int quietPeriod = IGangliaDefaults.QUIET_PERIOD;
+    FutureTask<Void> ft = null;
 
-        final int initialDelay = IGangliaDefaults.INITIAL_DELAY;
+    try {
 
-        /*
-         * Note: Use ZERO (0) if you are running gmond on the same host. That
-         * will prevent the GangliaService from transmitting a different
-         * heartbeat, which would confuse gmond and gmetad.
-         */
-        final int heartbeatInterval = 0; // IFF using gmond.
-//      final int heartbeatInterval = IGangliaDefaults.HEARTBEAT_INTERVAL;
-        
-        final int monitoringInterval = IGangliaDefaults.MONITORING_INTERVAL;
-        
-        final InetAddress listenGroup = InetAddress
-                .getByName(IGangliaDefaults.DEFAULT_GROUP);
-        
-        final int listenPort = IGangliaDefaults.DEFAULT_PORT;
+      executorService = Executors.newSingleThreadExecutor();
 
-        final String defaultUnits = IGangliaDefaults.DEFAULT_UNITS;
-        
-        final GangliaSlopeEnum defaultSlope = IGangliaDefaults.DEFAULT_SLOPE;
+      service =
+          new GangliaService(
+              hostName,
+              serviceName,
+              metricsServers,
+              listenGroup,
+              listenPort,
+              true, // listen
+              true, // report
+              true, // mock (does not transmit when true).
+              quietPeriod,
+              initialDelay,
+              heartbeatInterval,
+              monitoringInterval,
+              defaultDMax,
+              metadataFactory);
 
-        final int defaultTMax = IGangliaDefaults.DEFAULT_TMAX;
+      ft = new FutureTask<Void>(service, (Void) null);
 
-        final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
-        
-        final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(
-                IGangliaDefaults.DEFAULT_GROUP,
-                IGangliaDefaults.DEFAULT_PORT
-        ) };
+      /*
+       * Run the ganglia service.
+       */
+      executorService.submit(ft);
 
-        /*
-         * Extensible factory for declaring and resolving metrics.
-         * 
-         * Note: you can layer on the ability to (a) recognize and align your
-         * own host performance counters hierarchy with those declared by
-         * ganglia and; (b) provide nice declarations for various application
-         * counters of interest.
-         */
-        final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-                new DefaultMetadataFactory(
-                        defaultUnits,
-                        defaultSlope,
-                        defaultTMax,
-                        defaultDMax
-                        ));
-        
-        ExecutorService executorService = null;
+      Thread.sleep(2000 /* ms */);
 
-        // The embedded ganglia service.
-        GangliaService service = null;
+      assertTrue(service.isListening());
 
-        FutureTask<Void> ft = null;
+      ft.cancel(true /* mayInterruptIfRunning */);
 
-        try {
+      Thread.sleep(1000 /* ms */);
 
-            executorService = Executors.newSingleThreadExecutor();
+      assertFalse(service.isListening());
 
-            service = new GangliaService(
-                    hostName,
-                    serviceName,
-                    metricsServers,
-                    listenGroup, listenPort,
-                    true,// listen
-                    true,// report
-                    true,// mock (does not transmit when true).
-                    quietPeriod,
-                    initialDelay,
-                    heartbeatInterval,
-                    monitoringInterval,
-                    defaultDMax,
-                    metadataFactory
-            );
+      /*
+       * May be uncommented if you want to look at what is happening in
+       * a debugger.
+       */
+      //            Thread.sleep(Long.MAX_VALUE);
 
-            ft = new FutureTask<Void>(service, (Void) null);
+    } finally {
 
-            /*
-             * Run the ganglia service.
-             */
-            executorService.submit(ft);
-
-            Thread.sleep(2000/* ms */);
-
-            assertTrue(service.isListening());
-
-            ft.cancel(true/* mayInterruptIfRunning */);
-
-            Thread.sleep(1000/* ms */);
-
-            assertFalse(service.isListening());
-
-            /*
-             * May be uncommented if you want to look at what is happening in
-             * a debugger.
-             */
-//            Thread.sleep(Long.MAX_VALUE);
-            
-        } finally {
-
-            /*
-             * Stop host/application metric collection here.
-             */
-            if (executorService != null)
-                executorService.shutdownNow();
-
-        }
-
+      /*
+       * Stop host/application metric collection here.
+       */
+      if (executorService != null) executorService.shutdownNow();
     }
-    
+  }
 }

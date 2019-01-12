@@ -21,63 +21,50 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
+import cutthecrap.utils.striterators.IFilter;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.relation.IRelation;
 
-import cutthecrap.utils.striterators.IFilter;
-
 /**
  * A common interface for all access paths.
- * 
- * @param <R>
- *            The generic type of the [R]elation elements of the
- *            {@link IRelation}.
- * 
+ *
+ * @param <R> The generic type of the [R]elation elements of the {@link IRelation}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IAbstractAccessPath<R> {
 
-    /**
-     * The constraints on the {@link IAccessPath}.
-     */
-    IPredicate<R> getPredicate();
+  /** The constraints on the {@link IAccessPath}. */
+  IPredicate<R> getPredicate();
 
-    /**
-     * True iff the access path is empty (there are no matches for the
-     * {@link IPredicate}) This is more conclusive than {@link #rangeCount()}
-     * since you MAY have a non-zero range count when the key range is in fact
-     * empty (there may be "deleted" index entries within the key range).
-     */
-    boolean isEmpty();
+  /**
+   * True iff the access path is empty (there are no matches for the {@link IPredicate}) This is
+   * more conclusive than {@link #rangeCount()} since you MAY have a non-zero range count when the
+   * key range is in fact empty (there may be "deleted" index entries within the key range).
+   */
+  boolean isEmpty();
 
-    /**
-     * Return the maximum #of elements spanned by the {@link IPredicate}.
-     * <p>
-     * Note: When there is an {@link IFilter} on the {@link IPredicate} the
-     * exact range count MUST apply that {@link IFilter}, which means that it
-     * will be required to traverse the index counting tuples which pass the
-     * {@link IFilter}. However, {@link IFilter}s are ignored for the fast
-     * range count.
-     * 
-     * @param exact
-     *            When <code>true</code>, the result will be an exact count and
-     *            may require a key-range scan. When <code>false</code>, the
-     *            result will be an upper bound IFF delete markers are
-     *            provisioned for the backing index (delete markers are required
-     *            for transactions and for scale-out indices).
-     * 
-     * @see IRangeQuery
-     */
-    long rangeCount(boolean exact);
+  /**
+   * Return the maximum #of elements spanned by the {@link IPredicate}.
+   *
+   * <p>Note: When there is an {@link IFilter} on the {@link IPredicate} the exact range count MUST
+   * apply that {@link IFilter}, which means that it will be required to traverse the index counting
+   * tuples which pass the {@link IFilter}. However, {@link IFilter}s are ignored for the fast range
+   * count.
+   *
+   * @param exact When <code>true</code>, the result will be an exact count and may require a
+   *     key-range scan. When <code>false</code>, the result will be an upper bound IFF delete
+   *     markers are provisioned for the backing index (delete markers are required for transactions
+   *     and for scale-out indices).
+   * @see IRangeQuery
+   */
+  long rangeCount(boolean exact);
 
-    /**
-     * Remove all elements selected by the {@link IPredicate} (optional
-     * operation).
-     * 
-     * @return The #of elements that were removed.
-     */
-    public long removeAll();
-
+  /**
+   * Remove all elements selected by the {@link IPredicate} (optional operation).
+   *
+   * @return The #of elements that were removed.
+   */
+  public long removeAll();
 }

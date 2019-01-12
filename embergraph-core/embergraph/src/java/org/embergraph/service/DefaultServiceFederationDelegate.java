@@ -29,9 +29,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.UUID;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.IProcessCounters;
@@ -40,172 +38,140 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
- * Basic delegate for services that need to override the service UUID and
- * service interface reported to the {@link ILoadBalancerService}.
- * 
+ * Basic delegate for services that need to override the service UUID and service interface reported
+ * to the {@link ILoadBalancerService}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DefaultServiceFederationDelegate<T extends AbstractService>
-        implements IFederationDelegate<T> {
+    implements IFederationDelegate<T> {
 
-    protected final static Logger log = Logger
-            .getLogger(DefaultServiceFederationDelegate.class);
-    
-    final protected T service;
-    
-    public DefaultServiceFederationDelegate(final T service) {
-        
-        if (service == null)
-            throw new IllegalArgumentException();
-        
-        this.service = service;
-        
+  protected static final Logger log = Logger.getLogger(DefaultServiceFederationDelegate.class);
+
+  protected final T service;
+
+  public DefaultServiceFederationDelegate(final T service) {
+
+    if (service == null) throw new IllegalArgumentException();
+
+    this.service = service;
+  }
+
+  public T getService() {
+
+    return service;
+  }
+
+  public String getServiceName() {
+
+    return service.getServiceName();
+  }
+
+  public UUID getServiceUUID() {
+
+    return service.getServiceUUID();
+  }
+
+  public Class getServiceIface() {
+
+    return service.getServiceIface();
+  }
+
+  public void reattachDynamicCounters() {
+
+    /* Reattaches the {@link DirectBufferPool} counters. */
+    // The service's counter set hierarchy.
+    final CounterSet serviceRoot = service.getFederation().getServiceCounterSet();
+
+    // Ensure path exists.
+    final CounterSet tmp = serviceRoot.makePath(IProcessCounters.Memory);
+
+    /*
+     * Add counters reporting on the various DirectBufferPools.
+     */
+    synchronized (tmp) {
+
+      // detach the old counters (if any).
+      tmp.detach("DirectBufferPool");
+
+      // attach the current counters.
+      tmp.makePath("DirectBufferPool").attach(DirectBufferPool.getCounters());
     }
+  }
 
-    public T getService() {
-        
-        return service;
-        
-    }
-    
-    public String getServiceName() {
-        
-        return service.getServiceName();
-        
-    }
-    
-    public UUID getServiceUUID() {
-        
-        return service.getServiceUUID();
-        
-    }
-    
-    public Class getServiceIface() {
-       
-        return service.getServiceIface();
-        
-    }
+  /** Returns <code>true</code> */
+  public boolean isServiceReady() {
 
-	public void reattachDynamicCounters() {
+    return true;
+  }
 
-	    /* Reattaches the {@link DirectBufferPool} counters. */
-		// The service's counter set hierarchy.
-		final CounterSet serviceRoot = service.getFederation()
-				.getServiceCounterSet();
+  /** NOP */
+  public void didStart() {}
 
-		// Ensure path exists.
-		final CounterSet tmp = serviceRoot.makePath(IProcessCounters.Memory);
+  /** NOP */
+  public void serviceJoin(IService service, UUID serviceUUID) {}
 
-		/*
-		 * Add counters reporting on the various DirectBufferPools.
-		 */
-		synchronized (tmp) {
+  /** NOP */
+  public void serviceLeave(UUID serviceUUID) {}
 
-			// detach the old counters (if any).
-			tmp.detach("DirectBufferPool");
+  public AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
+      throws IOException {
 
-			// attach the current counters.
-			tmp.makePath("DirectBufferPool").attach(
-					DirectBufferPool.getCounters());
+    return new CounterSetHTTPD(httpdPort, access, service) {
 
+      @Override
+      public Response doGet(final Request req) throws Exception {
+
+        try {
+
+          reattachDynamicCounters();
+
+        } catch (Exception ex) {
+
+          /*
+           * Typically this is because the live journal has been
+           * concurrently closed during the request.
+           */
+
+          log.warn("Could not re-attach dynamic counters: " + ex, ex);
         }
 
+        return super.doGet(req);
+      }
+    };
+  }
 
-    }
+  /**
+   * Writes the URL of the local httpd service for the {@link DataService} onto a file named <code>
+   * httpd.url</code> in the specified directory.
+   */
+  protected void logHttpdURL(final File file) {
 
-    /**
-     * Returns <code>true</code>
-     */
-    public boolean isServiceReady() {
-        
-        return true;
+    // delete in case old version exists.
+    file.delete();
 
-    }
-    
-    /**
-     * NOP
-     */
-    public void didStart() {
-        
-    }
-    
-    /** NOP */
-    public void serviceJoin(IService service, UUID serviceUUID) {
+    final String httpdURL = service.getFederation().getHttpdURL();
 
-    }
+    if (httpdURL != null) {
 
-    /** NOP */
-    public void serviceLeave(UUID serviceUUID) {
+      try {
 
-    }
+        final Writer w = new BufferedWriter(new FileWriter(file));
 
-    public AbstractHTTPD newHttpd(final int httpdPort,
-            final ICounterSetAccess access) throws IOException {
-        
-        return new CounterSetHTTPD(httpdPort, access, service) {
+        try {
 
-            @Override
-            public Response doGet(final Request req) throws Exception {
+          w.write(httpdURL);
 
-                try {
+        } finally {
 
-                    reattachDynamicCounters();
-
-                } catch (Exception ex) {
-
-                    /*
-                     * Typically this is because the live journal has been
-                     * concurrently closed during the request.
-                     */
-
-                    log.warn("Could not re-attach dynamic counters: " + ex, ex);
-
-                }
-
-                return super.doGet(req);
-
-            }
-
-        };
-
-    }
-
-    /**
-     * Writes the URL of the local httpd service for the {@link DataService}
-     * onto a file named <code>httpd.url</code> in the specified directory.
-     */
-    protected void logHttpdURL(final File file) {
-
-        // delete in case old version exists.
-        file.delete();
-
-        final String httpdURL = service.getFederation().getHttpdURL();
-
-        if (httpdURL != null) {
-
-            try {
-
-                final Writer w = new BufferedWriter(new FileWriter(file));
-
-                try {
-
-                    w.write(httpdURL);
-
-                } finally {
-
-                    w.close();
-
-                }
-
-            } catch (IOException ex) {
-
-                log.warn("Problem writing httpdURL on file: " + file);
-
-            }
-
+          w.close();
         }
 
-    }
+      } catch (IOException ex) {
 
+        log.warn("Problem writing httpdURL on file: " + file);
+      }
+    }
+  }
 }

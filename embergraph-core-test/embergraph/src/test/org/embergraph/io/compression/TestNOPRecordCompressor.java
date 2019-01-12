@@ -23,30 +23,22 @@ package org.embergraph.io.compression;
 
 /**
  * Test suite for {@link NOPRecordCompressor}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestNOPRecordCompressor extends
-        AbstractRecordCompressorTestCase {
+public class TestNOPRecordCompressor extends AbstractRecordCompressorTestCase {
 
-    /**
-     * 
-     */
-    public TestNOPRecordCompressor() {
-    }
+  /** */
+  public TestNOPRecordCompressor() {}
 
-    /**
-     * @param name
-     */
-    public TestNOPRecordCompressor(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestNOPRecordCompressor(String name) {
+    super(name);
+  }
 
-    public IRecordCompressor getInstance() {
+  public IRecordCompressor getInstance() {
 
-        return NOPRecordCompressor.INSTANCE;
-
-    }
-
+    return NOPRecordCompressor.INSTANCE;
+  }
 }

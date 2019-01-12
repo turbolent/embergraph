@@ -28,21 +28,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
-
 import org.apache.log4j.MDC;
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.OWL;
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.rio.RDFFormat;
-
 import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
@@ -51,1442 +43,1308 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOComparator;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.DataLoader;
-import org.embergraph.rdf.store.TempTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
+import org.embergraph.rdf.store.DataLoader;
 import org.embergraph.rdf.store.DataLoader.ClosureEnum;
+import org.embergraph.rdf.store.TempTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
+import org.openrdf.rio.RDFFormat;
 
 /**
  * Test suite for {@link TruthMaintenance}.
- * 
- * @todo add a stress test where we assert random statements and then back out
- *       those assertions verifying that we recover the original closure?
- * 
+ *
+ * @todo add a stress test where we assert random statements and then back out those assertions
+ *     verifying that we recover the original closure?
  * @todo run for both full and fast closure programs.
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
-    /**
-     * 
-     */
-    public TestTruthMaintenance() {
-        super();
-    }
+  /** */
+  public TestTruthMaintenance() {
+    super();
+  }
 
-    /**
-     * @param name
-     */
-    public TestTruthMaintenance(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestTruthMaintenance(String name) {
+    super(name);
+  }
 
-    final private Random r = new Random();
+  private final Random r = new Random();
 
-    /**
-     * Test for
-     * {@link TruthMaintenance#applyExistingStatements(AbstractTripleStore, AbstractTripleStore, IElementFilter filter)}.
-     */
-    public void test_filter_01() {
+  /**
+   * Test for {@link TruthMaintenance#applyExistingStatements(AbstractTripleStore,
+   * AbstractTripleStore, IElementFilter filter)}.
+   */
+  public void test_filter_01() {
 
-        TempTripleStore focusStore = null;
-        final AbstractTripleStore store = getStore();
+    TempTripleStore focusStore = null;
+    final AbstractTripleStore store = getStore();
 
-        try {
+    try {
 
-            /*
-             * Setup some terms.
-             */
+      /*
+       * Setup some terms.
+       */
 
-            final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphValueFactory f = store.getValueFactory();
 
-            final EmbergraphURI x = f.createURI("http://www.foo.org/x1");
-            final EmbergraphURI y = f.createURI("http://www.foo.org/y2");
-            final EmbergraphURI z = f.createURI("http://www.foo.org/z3");
-            
-            store.addTerms(new EmbergraphValue[] { x, y, z });
-            
-            final IV x1 = x.getIV();
-            final IV y2 = y.getIV();
-            final IV z3 = z.getIV();
-            
-            /*
-             * Setup the database.
-             */
-            {
+      final EmbergraphURI x = f.createURI("http://www.foo.org/x1");
+      final EmbergraphURI y = f.createURI("http://www.foo.org/y2");
+      final EmbergraphURI z = f.createURI("http://www.foo.org/z3");
 
-                final SPO[] a = new SPO[] {
-                
-                        new SPO(x1, y2, z3, StatementEnum.Inferred),
-                
-                        new SPO(y2, y2, z3, StatementEnum.Explicit)
-                        
-                };
-                
-                store.addStatements(a, a.length);
+      store.addTerms(new EmbergraphValue[] {x, y, z});
 
-                assertTrue(store.hasStatement(x1, y2, z3));
-                assertTrue(store.getStatement(x1, y2, z3).isInferred());
-                
-                assertTrue(store.hasStatement(y2, y2, z3));
-                assertTrue(store.getStatement(y2, y2, z3).isExplicit());
+      final IV x1 = x.getIV();
+      final IV y2 = y.getIV();
+      final IV z3 = z.getIV();
 
-//                nbefore = store.getStatementCount();
+      /*
+       * Setup the database.
+       */
+      {
+        final SPO[] a =
+            new SPO[] {
+              new SPO(x1, y2, z3, StatementEnum.Inferred),
+              new SPO(y2, y2, z3, StatementEnum.Explicit)
+            };
 
-            }
-            
-            /*
-             * Setup a temporary store.
-             */
-            {
+        store.addStatements(a, a.length);
 
-                final Properties properties = store.getProperties();
-                
-                properties.setProperty(Options.LEXICON, "false");
-                
-                focusStore = new TempTripleStore( properties );
-                
-//                SPOAssertionBuffer buf = new SPOAssertionBuffer(focusStore, store,
-//                        null/* filter */, 100/* capacity */, false/* justified */);
+        assertTrue(store.hasStatement(x1, y2, z3));
+        assertTrue(store.getStatement(x1, y2, z3).isInferred());
 
-                final SPO[] a = new SPO[] {
-                
-                // should be applied to the database since already there as inferred.
-                new SPO(x1, y2, z3, StatementEnum.Explicit),
-                
-                // should be applied to the database since already there as explicit.
-                new SPO(y2, y2, z3, StatementEnum.Explicit),
+        assertTrue(store.hasStatement(y2, y2, z3));
+        assertTrue(store.getStatement(y2, y2, z3).isExplicit());
 
-                // should not be applied to the database since not there at all.
-                new SPO(z3, y2, z3, StatementEnum.Explicit),
+        //                nbefore = store.getStatementCount();
 
-                };
-                
-                /*
-                 * add statement to the focusStore and do NOT use the focusStore
-                 * lexicon (it does not exist) to assign sids to the statements.
-                 */
-                store.addStatements(focusStore, true/* copyOnly */,
-                                new ChunkedArrayIterator<ISPO>(a.length, a, null/* keyOrder */),
-                                null/* filter */);
-                
-                assertTrue(focusStore.hasStatement(x1, y2, z3));
-                assertTrue(focusStore.getStatement(x1, y2, z3).isExplicit());
-                
-                assertTrue(focusStore.hasStatement(y2, y2, z3));
-                assertTrue(focusStore.getStatement(y2, y2, z3).isExplicit());
-                
-                assertTrue(focusStore.hasStatement(z3, y2, z3));
-                assertTrue(focusStore.getStatement(z3, y2, z3).isExplicit());
+      }
 
-//                assertEquals(nbefore + 1, focusStore.getStatementCount());
+      /*
+       * Setup a temporary store.
+       */
+      {
+        final Properties properties = store.getProperties();
 
-            }
+        properties.setProperty(Options.LEXICON, "false");
 
-            /*
-             * For each (explicit) statement in the focusStore that also exists
-             * in the database: (a) if the statement is not explicit in the
-             * database then mark it as explicit; and (b) remove the statement
-             * from the focusStore.
-             */
-            
-            final int nremoved = TruthMaintenance.applyExistingStatements(
-                    focusStore, store, null/*filter*/);
+        focusStore = new TempTripleStore(properties);
 
-            // statement was pre-existing and was converted from inferred to explicit.
-            assertTrue(store.hasStatement(x1, y2, z3));
-            assertTrue(store.getStatement(x1, y2, z3).isExplicit());
-            
-            // statement was pre-existing as "explicit" so no change.
-            assertTrue(store.hasStatement(y2, y2, z3));
-            assertTrue(store.getStatement(y2, y2, z3).isExplicit());
+        //                SPOAssertionBuffer buf = new SPOAssertionBuffer(focusStore, store,
+        //                        null/* filter */, 100/* capacity */, false/* justified */);
 
-//            assertEquals(nbefore, focusStore.getExactStatementCount());
-            
-            assertEquals("#removed", 1, nremoved);
-            
-        } finally {
+        final SPO[] a =
+            new SPO[] {
 
-            if (focusStore != null)
-                focusStore.__tearDownUnitTest();
-            
-            store.__tearDownUnitTest();
-            
-        }
-        
-    }
-    
-    /**
-     * A simple test of {@link TruthMaintenance} in which some statements are
-     * asserted and their closure is computed and aspects of that closure are
-     * verified (this is based on rdfs11).
-     */
-    public void test_assertAll_01() {
+              // should be applied to the database since already there as inferred.
+              new SPO(x1, y2, z3, StatementEnum.Explicit),
 
-        TempTripleStore tempStore = null;
-        final AbstractTripleStore store = getStore();
-        
-        try {
-            
-            final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
-            
-            final EmbergraphValueFactory f = store.getValueFactory();
-            
-            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
-            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
-            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
+              // should be applied to the database since already there as explicit.
+              new SPO(y2, y2, z3, StatementEnum.Explicit),
 
-            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
-
-            tempStore = tm.newTempTripleStore();
-
-            // buffer writes on the tempStore.
-            {
-
-                final StatementBuffer assertionBuffer = new StatementBuffer(
-                        tempStore, store, 10/* capacity */, 10/*queueCapacity*/);
-
-                assertTrue(tempStore == assertionBuffer.getStatementStore());
-                
-                assertionBuffer.add(U, rdfsSubClassOf, V);
-                assertionBuffer.add(V, rdfsSubClassOf, X);
-
-                // flush to the temp store.
-                assertionBuffer.flush();
-                
-            }
-
-            if (log.isInfoEnabled())
-                log.info("\n\ntempStore:\n"
-                        + tempStore.dumpStore(store,
-                                true, true, false, true));
-
-            // perform closure and write on the database.
-            tm.assertAll(tempStore);
-
-            if (log.isInfoEnabled())
-                log.info("\n\ndatabase:\n"
-                        + store.dumpStore(store, true, true, false, true));
-            
-            // explicit.
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-            assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-
-            // inferred.
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-            
-        } finally {
-        // Note: This will be torn down with the [store].
-//            if (tempStore != null)
-//                tempStore.__tearDownUnitTest();
-            
-            store.__tearDownUnitTest();
-            
-        }
-        
-    }
-
-    /**
-     * A simple test of {@link TruthMaintenance} in which some statements are
-     * asserted, their closure is computed and aspects of that closure are
-     * verified, and then an explicit statement is removed and the closure is
-     * updated and we verify that an entailment known to depend on the remove
-     * statement has also been removed (this is based on rdfs11).
-     * 
-     * @todo do a variant test where we remove more than one support at once in
-     *       a case where the at least one of the statements entails the other
-     *       and verify that both statements are removed (ie, verify that
-     *       isGrounded is NOT accepting as grounds any support that is in the
-     *       focusStore). This test could actually be done in
-     *       {@link TestJustifications}.
-     */
-    public void test_retractAll_01() {
-        
-        final AbstractTripleStore store = getStore();
-        
-        try {
-
-            final EmbergraphValueFactory f = store.getValueFactory();
-            
-            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
-            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
-            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
-
-            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
-
-            final InferenceEngine inf = store.getInferenceEngine();
-
-            final TruthMaintenance tm = new TruthMaintenance(inf);
-
-            // add some assertions and verify aspects of their closure.
-            {
-            
-                final StatementBuffer assertionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                assertionBuffer.add(U, rdfsSubClassOf, V);
-                assertionBuffer.add(V, rdfsSubClassOf, X);
-
-                // flush statements to the temp store.
-                assertionBuffer.flush();
-                
-                // perform closure and write on the database.
-                tm.assertAll((TempTripleStore) assertionBuffer
-                        .getStatementStore());
-
-                // explicit.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-                assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-
-                // inferred.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-
-            }
-            
-            /*
-             * retract one of the explicit statements and update the closure.
-             * 
-             * then verify that it is retracted statement is gone, that the
-             * entailed statement is gone, and that the other explicit statement
-             * was not touched.
-             */
-            {
-                
-                final StatementBuffer retractionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                retractionBuffer.add(V, rdfsSubClassOf, X);
-
-                // flush buffer to temp store.
-                retractionBuffer.flush();
-                
-                // update the closure.
-                tm.retractAll((TempTripleStore) retractionBuffer
-                        .getStatementStore());
-                
-                // explicit.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-                assertFalse(store.hasStatement(V, rdfsSubClassOf, X));
-
-                // inferred.
-                assertFalse(store.hasStatement(U, rdfsSubClassOf, X));
-                
-            }
-
-            /*
-             * Add the retracted statement back in and verify that we get the
-             * entailment back.
-             */
-            {
-                
-                final StatementBuffer assertionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-                
-                assertionBuffer.add(V, rdfsSubClassOf, X);
-                
-                // flush to the temp store.
-                assertionBuffer.flush();
-
-                // update the closure.
-                tm.assertAll((TempTripleStore)assertionBuffer.getStatementStore());
-
-                // explicit.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-                assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-
-                // inferred.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-
-            }
-
-            /*
-             * Retract the entailment and verify that it is NOT removed from the
-             * database (removing an inference has no effect).
-             */
-            {
-                
-                final StatementBuffer retractionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                retractionBuffer.add(U, rdfsSubClassOf, X);
-
-                // flush to the temp store.
-                retractionBuffer.flush();
-                
-                // update the closure.
-                tm.retractAll((TempTripleStore)retractionBuffer.getStatementStore());
-
-                // explicit.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-                assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-
-                // inferred.
-                assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-
-            }
-            
-        } finally {
-            
-            store.__tearDownUnitTest();
-            
-        }
-        
-    }
-
-    /**
-     * A simple test of {@link TruthMaintenance} in which some statements are
-     * asserted, including one statement which is also produced as an inference,
-     * and their closure is computed and aspects of that closure are verified
-     * (this is based on rdfs11). After we verify the closure, we retract the
-     * explicit statement and then verify that the closure was updated such that
-     * the statement was downgraded to an inference.
-     */
-    public void test_downgradeExplicitToInference() {
-        
-        final AbstractTripleStore store = getStore();
-        
-        try {
-            
-            final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
-
-            final EmbergraphValueFactory f = store.getValueFactory();
-
-            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
-            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
-            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
-
-            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
-
-            {
-
-                // Note: new triple store on shared temporary store!
-                final TempTripleStore tempStore = tm.newTempTripleStore();
-                // buffer writes on the tempStore.
-                {
-
-                    final StatementBuffer assertionBuffer = new StatementBuffer(
-                            tempStore, store, 10/* capacity */, 10/*queueCapacity*/);
-
-                    assertTrue(tempStore == assertionBuffer.getStatementStore());
-
-                    assertionBuffer.add(U, rdfsSubClassOf, V);
-                    assertionBuffer.add(V, rdfsSubClassOf, X);
-
-                    /*
-                     * Note: this statement is entailed by the other two, but we
-                     * represent it explicitly as well in order to test the
-                     * downgrade mechanism.
-                     */
-                    assertionBuffer.add(U, rdfsSubClassOf, X);
-
-                    // flush to the temp store.
-                    assertionBuffer.flush();
-
-                }
-
-                if (log.isInfoEnabled())
-                    log.info("\n\ntempStore:\n"
-                            + tempStore.dumpStore(store, true, true, false,
-                                    true));
-
-                if (log.isInfoEnabled())
-                    log.info("Doing asserts.");
-
-                // perform closure and write on the database.
-                tm.assertAll(tempStore);
-
-            }
-
-            if (log.isInfoEnabled())
-                log.info("\n\ndatabase:\n"
-                        + store.dumpStore(store, true, true, false, true));
-            
-            // verify statements exist.
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-            assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-
-            // and verify their statement type.
-            assertEquals(StatementEnum.Explicit, store.getStatement(U,
-                    rdfsSubClassOf, V).getStatementType());
-            assertEquals(StatementEnum.Explicit, store.getStatement(V,
-                    rdfsSubClassOf, X).getStatementType());
-            assertEquals(StatementEnum.Explicit, store.getStatement(U,
-                    rdfsSubClassOf, X).getStatementType());
-
-            // now retract
-            {
-
-                // Note: new triple store on shared temporary store!
-                final TempTripleStore tempStore = tm.newTempTripleStore();
-                // buffer writes on the tempStore.
-                {
-
-                    final StatementBuffer retractionBuffer = new StatementBuffer(
-                            tempStore, store, 10/* capacity */, 10/*queueCapacity*/);
-
-                    assertTrue(tempStore == retractionBuffer
-                            .getStatementStore());
-
-                    /*
-                     * Retract this statement. It is explicitly present in the
-                     * DB. However, note that it is also inferred. Therefore, it
-                     * MUST be downgraded to an inference.
-                     */
-                    retractionBuffer.add(U, rdfsSubClassOf, X);
-
-                    // flush to the temp store.
-                    retractionBuffer.flush();
-
-                }
-
-                if (log.isInfoEnabled())
-                    log.info("\n\ntempStore:\n"
-                            + tempStore.dumpStore(store, true, true, false,
-                                    true));
-
-                if (log.isInfoEnabled())
-                    log.info("Doing retraction.");
-
-                // perform closure and write on the database.
-                tm.retractAll(tempStore);
-
-            }
-
-            if (log.isInfoEnabled())
-                log.info("\n\ndatabase:\n"
-                        + store.dumpStore(store, true, true, false, true));
-            
-            // verify statements exist.
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
-            assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
-            assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
-
-            // and verify their statement type. 
-            assertEquals(StatementEnum.Explicit, store.getStatement(U,
-                    rdfsSubClassOf, V).getStatementType());
-            assertEquals(StatementEnum.Explicit, store.getStatement(V,
-                    rdfsSubClassOf, X).getStatementType());
-            assertEquals(StatementEnum.Inferred, store.getStatement(U,
-                    rdfsSubClassOf, X).getStatementType());
-
-        } finally {
-            
-            store.__tearDownUnitTest();
-            
-        }
-        
-    }
-
-    /**
-     * Given three explicit statements:
-     * 
-     * <pre>
-     *  stmt a:  #user #currentGraph #foo
-     *  
-     *  stmt b: #currentGraph rdfs:range #Graph
-     *  
-     *  stmt c: #foo rdf:type #Graph
-     * </pre>
-     * 
-     * a+b implies c
-     * <p>
-     * Delete a and verify that c is NOT gone since it is an explicit statement.
-     */
-    public void test_retractWhenStatementSupportsExplicitStatement() {
-     
-        URI user = new URIImpl("http://www.embergraph.org/user");
-        URI currentGraph = new URIImpl("http://www.embergraph.org/currentGraph");
-        URI foo = new URIImpl("http://www.embergraph.org/foo");
-        URI graph = new URIImpl("http://www.embergraph.org/Graph");
-        URI rdftype = RDF.TYPE;
-        URI rdfsRange = RDFS.RANGE;
-
-        AbstractTripleStore store = getStore();
-        
-        try {
-            
-            final InferenceEngine inf = store.getInferenceEngine();
-            
-            final TruthMaintenance tm = new TruthMaintenance(inf);
-
-            // add some assertions and verify aspects of their closure.
-            {
-            
-                final StatementBuffer assertionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                // stmt a
-                assertionBuffer.add(user, currentGraph, foo );
-                
-                // stmt b
-                assertionBuffer.add(currentGraph, rdfsRange, graph );
-                
-                // stmt c
-                assertionBuffer.add(foo, rdftype, graph );
-
-                // flush to the temp store.
-                assertionBuffer.flush();
-                
-                // perform closure and write on the database.
-                tm.assertAll((TempTripleStore)assertionBuffer.getStatementStore());
-
-                // dump after closure.
-                if (log.isInfoEnabled())
-                    log.info("\n" + store.dumpStore(true, true, false));
-
-                // explicit.
-                assertTrue(store.hasStatement(user, currentGraph, foo ));
-                assertTrue(store.hasStatement(currentGraph, rdfsRange, graph ));
-                assertTrue(store.hasStatement(foo, rdftype, graph));
-
-                // verify that stmt c is marked as explicit in the kb.
-
-                final EmbergraphStatement stmtC = (EmbergraphStatement) store
-                        .getStatement(foo, rdftype, graph);
-                
-                assertNotNull(stmtC);
-                
-                assertEquals(StatementEnum.Explicit, stmtC.getStatementType());
-                
-            }
-            
-            /*
-             * retract stmt A and update the closure.
-             * 
-             * then verify that it is retracted statement is gone and that the
-             * other explicit statements were not touched.
-             */
-            {
-                
-                final StatementBuffer retractionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                retractionBuffer.add(user, currentGraph, foo);
-
-                // flush to the temp store.
-                retractionBuffer.flush();
-                
-                // update the closure.
-                tm.retractAll( (TempTripleStore)retractionBuffer.getStatementStore());
-
-                // dump after re-closure.
-                if (log.isInfoEnabled())
-                    log.info("\n" + store.dumpStore(true, true, false));
-
-                // test the kb.
-                assertFalse(store.hasStatement(user, currentGraph, foo));
-                assertTrue(store.hasStatement(currentGraph, rdfsRange, graph));
-                assertTrue(store.hasStatement(foo, rdftype, graph));
-
-                // verify that stmt c is marked as explicit in the kb.
-
-                final EmbergraphStatement stmtC = (EmbergraphStatement) store
-                        .getStatement(foo, rdftype, graph);
-                
-                assertNotNull(stmtC);
-                
-                assertEquals(StatementEnum.Explicit, stmtC.getStatementType());
-                
-            }
-            
-        } finally {
-            
-            store.__tearDownUnitTest();
-            
-        }
-
-    }
-
-    /**
-     * This test demonstrates TM incorrectness (since fixed of course). I add
-     * two statements into store A, then remove one of them. Then I add the the
-     * statement that remain in store A into store B and compare the closure of
-     * the stores. They should be the same, right? Well, unfortunately they are
-     * not the same. Too many inferences were deleted from the first store
-     * during TM.
-     */
-    public void test_closurecorrectness() {
-        
-        final URI a = new URIImpl("http://www.embergraph.org/a");
-        final URI b = new URIImpl("http://www.embergraph.org/b");
-        final URI c = new URIImpl("http://www.embergraph.org/c");
-//        final URI d = new URIImpl("http://www.embergraph.org/d");
-        final URI sco = RDFS.SUBCLASSOF;
-
-        final AbstractTripleStore store = getStore();
-        
-        try {
-
-            final TruthMaintenance tm = new TruthMaintenance(store
-                    .getInferenceEngine());
-            
-            // add two
-            {
-            
-                final StatementBuffer assertionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                assertionBuffer.add(a, sco, b );
-                assertionBuffer.add(b, sco, c );
-//                assertionBuffer.add(c, sco, d );
-
-                // write statements on the temp store.
-                assertionBuffer.flush();
-                
-                // perform closure and write on the database.
-                tm.assertAll((TempTripleStore) assertionBuffer
-                        .getStatementStore());
-
-                if (log.isInfoEnabled())
-                    log.info("\ndump after closure:\n"
-                            + store.dumpStore(store, true, true, false, true));
-
-            }
-            
-            // retract one
-            {
-                
-                final StatementBuffer retractionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                retractionBuffer.add(b, sco, c);
-
-                // write statements on the temp store.
-                retractionBuffer.flush();
-                
-                // update the closure.
-                tm.retractAll((TempTripleStore)retractionBuffer.getStatementStore());
-
-                if (log.isInfoEnabled())
-                    log.info("\ndump after retraction and re-closure:\n"
-                            + store.dumpStore(true, true, false));
-                
-            }
-            
-            /*
-             * Add statement(s) to the "control store" and compute its closure.
-             * This provides the basis for checking the result that we obtained
-             * above via retraction.
-             */
-            {
-
-                final TempTripleStore controlStore = new TempTripleStore(store
-                        .getProperties());
-
-                try {
-
-                    // Note: maintains closure on the controlStore.
-                    final TruthMaintenance tmControlStore = new TruthMaintenance(
-                            controlStore.getInferenceEngine());
-
-                    final StatementBuffer<?> assertionBuffer = new StatementBuffer(
-                            tmControlStore.newTempTripleStore(), controlStore,
-                            100/* capacity */, 10/*queueCapacity*/);
-
-                    assertionBuffer.add(a, sco, b);
-                    // assertionBuffer.add(c, sco, d );
-
-                    // write statements on the controlStore.
-                    assertionBuffer.flush();
-
-                    // perform closure and write on the database.
-                    tmControlStore.assertAll((TempTripleStore) assertionBuffer
-                            .getStatementStore());
-
-                    if (log.isInfoEnabled())
-                        log.info("\ndump controlStore after closure:\n"
-                                + controlStore.dumpStore(true, true, false));
-
-                    assertSameGraphs(controlStore, store);
-
-                } finally {
-
-                    controlStore.__tearDownUnitTest();
-
-                }
-
-            }
-
-        } finally {
-
-            store.__tearDownUnitTest();
-            
-        }
-
-    }
-    
-    /**
-     * This test demonstrates an infinite loop in TM arising from owl:sameAs.
-     */
-    public void test_infiniteloop() {
-     
-//        if(true) fail("re-enable this test");
-        
-        final URI a = new URIImpl("http://www.embergraph.org/a");
-        final URI b = new URIImpl("http://www.embergraph.org/b");
-        final URI entity = new URIImpl("http://www.embergraph.org/Entity");
-        final URI sameAs = OWL.SAMEAS;
-//        /*
-//         * Note: not using rdf:type to avoid entailments about (x rdf:type
-//         * Class) and (x rdfs:subClassOf y) that are not required by this test.
-//         */
-//      URI rdfType = new URIImpl("http://www.embergraph.org/type");
-        final URI rdfType = RDF.TYPE;
-
-        final AbstractTripleStore store = getStore();
-        
-        try {
-            
-            final InferenceEngine inf = store.getInferenceEngine();
-
-            final TruthMaintenance tm = new TruthMaintenance(inf);
-            
-            // add some assertions and verify aspects of their closure.
-            {
-
-                final StatementBuffer assertionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                // stmt a
-                assertionBuffer.add(a, rdfType, entity );
-                // assertionBuffer.add(a, x, y );
-                
-                // stmt b
-                assertionBuffer.add(b, rdfType, entity );
-                
-                // assert the sameas
-                assertionBuffer.add(a, sameAs, b );
-
-                // flush statements to the tempStore.
-                assertionBuffer.flush();
-
-                // perform closure and write on the database.
-                tm.assertAll((TempTripleStore) assertionBuffer
-                        .getStatementStore());
-
-                // dump after closure.
-                if (log.isInfoEnabled())
-                    log.info("\ndump after closure:\n"
-                            + store.dumpStore(store, true, true, false, true));
-
-            }
-
-            /*
-             * retract stmt A and update the closure.
-             * 
-             * then verify that the retracted statement is gone and that the
-             * other explicit statements were not touched.
-             */
-            {
-
-                final StatementBuffer retractionBuffer = new StatementBuffer(tm
-                        .newTempTripleStore(), store, 100/* capacity */, 10/*queueCapacity*/);
-
-                // retract the sameas
-                retractionBuffer.add(a, sameAs, b);
-
-                // flush statements to the tempStore.
-                retractionBuffer.flush();
-
-                // update the closure.
-                tm.retractAll((TempTripleStore) retractionBuffer
-                        .getStatementStore());
-
-                // dump after re-closure.
-                if (log.isInfoEnabled())
-                    log.info("\ndump after re-closure:\n"
-                            + store.dumpStore(store, true, true, false, true));
-
-            }
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-
-    }
-    
-    /**
-     * This is a stress test for truth maintenance. It verifies that retraction
-     * and assertion are symmetric by randomly retracting and then asserting
-     * statements while using truth maintenance and verifying that the initial
-     * conditions are always recovered. It does NOT prove the correctness of the
-     * entailments, merely that retraction and assertion are symmetric.
-     * 
-     * @todo use data files that we can bundle with the distribution.
-     */
-    public void test_stress() {
-
-//        fail("enable test");
-        
-        final String ontology = "src/test/resources/data/lehigh/univ-bench.owl";
-        final String resource =
-                "src/test/resources/data/lehigh/U1";
-//                "../rdf-data/alibaba_data.rdf",
-//                "../rdf-data/alibaba_schema.rdf"
-//                };
-
-//        final String[] baseURL = new String[] { "", "" 
-//                };
-//
-//        final RDFFormat[] format = new RDFFormat[] {
-//                RDFFormat.RDFXML,
-//                RDFFormat.RDFXML
-//                };
-//
-//        for(String r : resource) {
-//            
-//            if(!new File(r).exists()) {
-//                
-//                System.err.println("Resource not found: "+r+", test="+getName()+" skipped.");
-//                
-//                return;
-//                
-//            }
-//            
-//        }
-
-        final Properties properties = getProperties();
+              // should not be applied to the database since not there at all.
+              new SPO(z3, y2, z3, StatementEnum.Explicit),
+            };
 
         /*
-         * Note: overrides properties to make sure that entailments are
-         * not computed on load.
+         * add statement to the focusStore and do NOT use the focusStore
+         * lexicon (it does not exist) to assign sids to the statements.
          */
+        store.addStatements(
+            focusStore,
+            true /* copyOnly */,
+            new ChunkedArrayIterator<ISPO>(a.length, a, null /* keyOrder */),
+            null /* filter */);
 
-        properties.setProperty(DataLoader.Options.CLOSURE,
-                ClosureEnum.None.toString());
+        assertTrue(focusStore.hasStatement(x1, y2, z3));
+        assertTrue(focusStore.getStatement(x1, y2, z3).isExplicit());
 
-        TempTripleStore tmp = null;
-        final AbstractTripleStore store = getStore(properties);
-        
-        try {
-            
-            final DataLoader dataLoader = store.getDataLoader();
+        assertTrue(focusStore.hasStatement(y2, y2, z3));
+        assertTrue(focusStore.getStatement(y2, y2, z3).isExplicit());
 
-            final String baseURI = new File(resource).toURI().toString();
-            
-            dataLoader.loadData(ontology, baseURI, RDFFormat.RDFXML);
+        assertTrue(focusStore.hasStatement(z3, y2, z3));
+        assertTrue(focusStore.getStatement(z3, y2, z3).isExplicit());
 
-            dataLoader.loadData(resource, baseURI, RDFFormat.RDFXML);
+        //                assertEquals(nbefore + 1, focusStore.getStatementCount());
 
-            /*
-             * Compute the closure of the database.
-             */
-            
-            final InferenceEngine inf = store.getInferenceEngine();
-            
-            inf.computeClosure(null/* focusStore */);
+      }
 
-            /*
-             * Make a copy of the graph (statements only) that will serve as
-             * ground truth.
-             */
-            {
-                final Properties p = new Properties(properties);
+      /*
+       * For each (explicit) statement in the focusStore that also exists
+       * in the database: (a) if the statement is not explicit in the
+       * database then mark it as explicit; and (b) remove the statement
+       * from the focusStore.
+       */
 
-                // no lexicon.
-                p.setProperty(Options.LEXICON, "false");
+      final int nremoved =
+          TruthMaintenance.applyExistingStatements(focusStore, store, null /*filter*/);
 
-                tmp = new TempTripleStore(p);
+      // statement was pre-existing and was converted from inferred to explicit.
+      assertTrue(store.hasStatement(x1, y2, z3));
+      assertTrue(store.getStatement(x1, y2, z3).isExplicit());
 
-                store.copyStatements(tmp, null/* filter */, false/* copyJustifications */);
-                
-            }
-            
-            /*
-             * Start the stress tests.
-             */
+      // statement was pre-existing as "explicit" so no change.
+      assertTrue(store.hasStatement(y2, y2, z3));
+      assertTrue(store.getStatement(y2, y2, z3).isExplicit());
 
-            doStressTest(tmp, inf, 10/*ntrials*/, 1/*depth*/, 1/*nstmts*/);
+      //            assertEquals(nbefore, focusStore.getExactStatementCount());
 
-            doStressTest(tmp, inf, 7/*ntrials*/, 1/*depth*/, 5/*nstmts*/);
+      assertEquals("#removed", 1, nremoved);
 
-            doStressTest(tmp, inf, 5/*ntrials*/, 5/*depth*/, 1/*nstmts*/);
+    } finally {
 
-            doStressTest(tmp, inf, 3/*ntrials*/, 5/*depth*/, 5/*nstmts*/);
+      if (focusStore != null) focusStore.__tearDownUnitTest();
 
-//            // very stressful.
-//            doStressTest(tmp, inf, 100/*ntrials*/, 10/*depth*/, 20/*nstmts*/);
-            
-        } catch(Exception ex) {
-            
-            fail("Not expecting: "+ex, ex);
-            
-        } finally {
-
-            if(tmp != null)
-                tmp.__tearDownUnitTest();
-            
-            store.__tearDownUnitTest();
-            
-        }
-
+      store.__tearDownUnitTest();
     }
-    
-    /**
-     * A stress test for truth maintenance using an arbitrary data set. The test
-     * scans the statement indices in some order, selecting N explicit statement
-     * to retract. It then retracts them, updates the closure, and then
-     * re-asserts them and verifies that original closure was restored.
-     * <p>
-     * Note: this test by itself does not guarentee that any entailments of
-     * those explicit statements were removed - we need to write other tests for
-     * that. repeat several times on the dataset, potentially doing multiple
-     * retractions before we back out of them.
-     * 
-     * @param tmp
-     *            Ground truth (the state that must be recovered in order for
-     *            truth maintenance to be symmetric).
-     * @param inf
-     *            The {@link InferenceEngine} to use in the test. This reads and
-     *            writes on the database whose closure is being maintained.
-     * @param ntrials
-     *            The #of times that we will run the test.
-     * @param D
-     *            The recursive depth of the retractions. A depth of ONE (1)
-     *            means that one set of N statements will be retracted, closure
-     *            updated, and the re-asserted and closure updated and compared
-     *            against ground truth (the initial conditions). When the depth
-     *            is greater than ONE (1) we will recursively retract a set of N
-     *            statements D times. The statements will be reasserted as we
-     *            back out of the recursion and the graph compared with ground
-     *            truth when we return from the top level of the recursion.
-     * @param N
-     *            The #of explicit statements to be randomly selected and
-     *            retracted on each recursive pass.
-     */
-    public void doStressTest(TempTripleStore tmp, InferenceEngine inf,
-            int ntrials, int D, int N) {
+  }
 
-        AbstractTripleStore store = inf.database;
-        
-        /*
-         * Verify our initial conditions agree.
-         */
-        
-        assertSameGraphs( tmp, store );
+  /**
+   * A simple test of {@link TruthMaintenance} in which some statements are asserted and their
+   * closure is computed and aspects of that closure are verified (this is based on rdfs11).
+   */
+  public void test_assertAll_01() {
 
-        for (int trial = 0; trial < ntrials; trial++) {
+    TempTripleStore tempStore = null;
+    final AbstractTripleStore store = getStore();
 
-            /*
-             * Do recursion.
-             */
+    try {
 
-            MDC.put("trial", "trial="+trial);
+      final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
 
-            retractAndAssert(inf,store,0/*depth*/,D,N);
+      final EmbergraphValueFactory f = store.getValueFactory();
 
-            /*
-             * Verify that the closure is correct after all that recursive
-             * mutation and restoration.
-             */
+      final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+      final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+      final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
 
-            assertSameGraphs(tmp, store);
+      final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
-            MDC.remove("trial");
-            
-        }
-        
+      tempStore = tm.newTempTripleStore();
+
+      // buffer writes on the tempStore.
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(tempStore, store, 10 /* capacity */, 10 /*queueCapacity*/);
+
+        assertTrue(tempStore == assertionBuffer.getStatementStore());
+
+        assertionBuffer.add(U, rdfsSubClassOf, V);
+        assertionBuffer.add(V, rdfsSubClassOf, X);
+
+        // flush to the temp store.
+        assertionBuffer.flush();
+      }
+
+      if (log.isInfoEnabled())
+        log.info("\n\ntempStore:\n" + tempStore.dumpStore(store, true, true, false, true));
+
+      // perform closure and write on the database.
+      tm.assertAll(tempStore);
+
+      if (log.isInfoEnabled())
+        log.info("\n\ndatabase:\n" + store.dumpStore(store, true, true, false, true));
+
+      // explicit.
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+      assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+
+      // inferred.
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
+
+    } finally {
+      // Note: This will be torn down with the [store].
+      //            if (tempStore != null)
+      //                tempStore.__tearDownUnitTest();
+
+      store.__tearDownUnitTest();
     }
+  }
 
-    /**
-     * At each level of recursion up to N explicit statements are selected
-     * randomly from the database, retracted, and closure is updated. The method
-     * then calls itself recursively, thereby building up a series of updates to
-     * the graph. When the recursion bottoms out, the retracted statements are
-     * asserted and closure is updated. This continues as we back out of the
-     * recursion until the graph SHOULD contain the identical RDF model.
-     * 
-     * @param inf
-     *            Used to update the closure.
-     * @param db
-     *            The database.
-     * @param depth
-     *            The current depth of recursion (ZERO on the first call).
-     * @param D
-     *            The maximum depth of recursion (depth will always be strictly
-     *            less than D).
-     * @param N
-     *            The #of explicit statements to randomly select at each level
-     *            of recursion for retraction from the database.
-     */
-    private void retractAndAssert(InferenceEngine inf, AbstractTripleStore db,
-            int depth, final int D, final int N) {
+  /**
+   * A simple test of {@link TruthMaintenance} in which some statements are asserted, their closure
+   * is computed and aspects of that closure are verified, and then an explicit statement is removed
+   * and the closure is updated and we verify that an entailment known to depend on the remove
+   * statement has also been removed (this is based on rdfs11).
+   *
+   * @todo do a variant test where we remove more than one support at once in a case where the at
+   *     least one of the statements entails the other and verify that both statements are removed
+   *     (ie, verify that isGrounded is NOT accepting as grounds any support that is in the
+   *     focusStore). This test could actually be done in {@link TestJustifications}.
+   */
+  public void test_retractAll_01() {
 
-        assert depth >= 0;
-        assert depth < D;
+    final AbstractTripleStore store = getStore();
 
-        /*
-         * Select N explicit statements at random.
-         */
-        
-        SPO[] stmts = selectRandomExplicitStatements(db, N);
-        
-        log.info("Selected "+stmts.length+" statements at random: depth="+depth);
+    try {
 
-        final TruthMaintenance tm = new TruthMaintenance(inf);
-        
-        /*
-         * Retract those statements and update the closure of the database.
-         */
+      final EmbergraphValueFactory f = store.getValueFactory();
+
+      final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+      final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+      final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
+
+      final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+
+      final InferenceEngine inf = store.getInferenceEngine();
+
+      final TruthMaintenance tm = new TruthMaintenance(inf);
+
+      // add some assertions and verify aspects of their closure.
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        assertionBuffer.add(U, rdfsSubClassOf, V);
+        assertionBuffer.add(V, rdfsSubClassOf, X);
+
+        // flush statements to the temp store.
+        assertionBuffer.flush();
+
+        // perform closure and write on the database.
+        tm.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
+
+        // explicit.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+        assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+
+        // inferred.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
+      }
+
+      /*
+       * retract one of the explicit statements and update the closure.
+       *
+       * then verify that it is retracted statement is gone, that the
+       * entailed statement is gone, and that the other explicit statement
+       * was not touched.
+       */
+      {
+        final StatementBuffer retractionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        retractionBuffer.add(V, rdfsSubClassOf, X);
+
+        // flush buffer to temp store.
+        retractionBuffer.flush();
+
+        // update the closure.
+        tm.retractAll((TempTripleStore) retractionBuffer.getStatementStore());
+
+        // explicit.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+        assertFalse(store.hasStatement(V, rdfsSubClassOf, X));
+
+        // inferred.
+        assertFalse(store.hasStatement(U, rdfsSubClassOf, X));
+      }
+
+      /*
+       * Add the retracted statement back in and verify that we get the
+       * entailment back.
+       */
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        assertionBuffer.add(V, rdfsSubClassOf, X);
+
+        // flush to the temp store.
+        assertionBuffer.flush();
+
+        // update the closure.
+        tm.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
+
+        // explicit.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+        assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+
+        // inferred.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
+      }
+
+      /*
+       * Retract the entailment and verify that it is NOT removed from the
+       * database (removing an inference has no effect).
+       */
+      {
+        final StatementBuffer retractionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        retractionBuffer.add(U, rdfsSubClassOf, X);
+
+        // flush to the temp store.
+        retractionBuffer.flush();
+
+        // update the closure.
+        tm.retractAll((TempTripleStore) retractionBuffer.getStatementStore());
+
+        // explicit.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+        assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+
+        // inferred.
+        assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
+      }
+
+    } finally {
+
+      store.__tearDownUnitTest();
+    }
+  }
+
+  /**
+   * A simple test of {@link TruthMaintenance} in which some statements are asserted, including one
+   * statement which is also produced as an inference, and their closure is computed and aspects of
+   * that closure are verified (this is based on rdfs11). After we verify the closure, we retract
+   * the explicit statement and then verify that the closure was updated such that the statement was
+   * downgraded to an inference.
+   */
+  public void test_downgradeExplicitToInference() {
+
+    final AbstractTripleStore store = getStore();
+
+    try {
+
+      final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
+
+      final EmbergraphValueFactory f = store.getValueFactory();
+
+      final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+      final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+      final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
+
+      final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+
+      {
+
+        // Note: new triple store on shared temporary store!
+        final TempTripleStore tempStore = tm.newTempTripleStore();
+        // buffer writes on the tempStore.
         {
+          final StatementBuffer assertionBuffer =
+              new StatementBuffer(tempStore, store, 10 /* capacity */, 10 /*queueCapacity*/);
 
-            for(SPO tmp : stmts) {
-                log.info("Retracting: "+tmp.toString(db));
-            }
+          assertTrue(tempStore == assertionBuffer.getStatementStore());
 
-            final TempTripleStore tempStore = tm.newTempTripleStore();
+          assertionBuffer.add(U, rdfsSubClassOf, V);
+          assertionBuffer.add(V, rdfsSubClassOf, X);
 
-            db.addStatements(tempStore, true/* copyOnly */,
-                            new ChunkedArrayIterator<ISPO>(stmts.length, stmts,
-                                    null/* keyOrder */), null/* filter */);
-            
-            log.info("Retracting: n="+stmts.length+", depth="+depth);
+          /*
+           * Note: this statement is entailed by the other two, but we
+           * represent it explicitly as well in order to test the
+           * downgrade mechanism.
+           */
+          assertionBuffer.add(U, rdfsSubClassOf, X);
 
-            // note: an upper bound when using isolated indices.
-            final long before = db.getStatementCount();
-            
-            tm.retractAll(tempStore);
-            
-            final long after = db.getStatementCount();
-            
-            final long delta = after - before;
-            
-            log.info("Retraction: before="+before+", after="+after+", delta="+delta);
-            
-        }
-        
-        if (depth + 1 < D) {
-            
-            retractAndAssert(inf, db, depth+1, D, N);
-            
-        }
-        
-        /*
-         * Assert those statements and update the closure of the database.
-         */
-        {
-
-            for(SPO tmp : stmts) {
-                log.info("Asserting: "+tmp.toString(db));
-            }
-
-            final TempTripleStore tempStore = tm.newTempTripleStore();
-
-            db.addStatements(tempStore, true/* copyOnly */,
-                            new ChunkedArrayIterator<ISPO>(stmts.length, stmts,
-                                    null/*keyOrder*/), null/*filter*/);
-
-            log.info("Asserting: n=" + stmts.length + ", depth=" + depth);
-
-            // note: an upper bound when using isolated indices.
-            final long before = db.getStatementCount();
-
-            tm.assertAll(tempStore);
-            
-            final long after = db.getStatementCount();
-            
-            final long delta = after - before;
-            
-            log.info("Assertion: before="+before+", after="+after+", delta="+delta);
-
-        }
-        
-    }
-    
-    /**
-     * Select N explicit statements from the graph at random.
-     * 
-     * @param db
-     *            The graph.
-     * @param N
-     *            The #of statements to select.
-     * 
-     * @return Up to N distinct explicit statements selected from the graph.
-     */
-    public SPO[] selectRandomExplicitStatements(AbstractTripleStore db, int N) {
-        
-        /*
-         * Count the #of distinct subjects in the graph.
-         */
-        final int nsubjects;
-        {
-
-            final IChunkedIterator<IV> termIds = db.getSPORelation()
-                    .distinctTermScan(SPOKeyOrder.SPO);
-
-            try {
-
-                int n = 0;
-
-                while (termIds.hasNext()) {
-
-                    termIds.next();
-
-                    n++;
-
-                }
-
-                nsubjects = n;
-
-            } finally {
-
-                termIds.close();
-
-            }
-
+          // flush to the temp store.
+          assertionBuffer.flush();
         }
 
         if (log.isInfoEnabled())
-            log.info("There are " + nsubjects + " distinct subjects");
+          log.info("\n\ntempStore:\n" + tempStore.dumpStore(store, true, true, false, true));
 
-        /*
-         * Choose N distinct subjects from the graph at random.
-         */
+        if (log.isInfoEnabled()) log.info("Doing asserts.");
 
-        final Set<IV> subjects = new HashSet<IV>(N);
+        // perform closure and write on the database.
+        tm.assertAll(tempStore);
+      }
 
-        for (int i = 0; i < nsubjects && subjects.size() < N; i++) {
+      if (log.isInfoEnabled())
+        log.info("\n\ndatabase:\n" + store.dumpStore(store, true, true, false, true));
 
-            final IChunkedIterator<IV> termIds = db.getSPORelation()
-                    .distinctTermScan(SPOKeyOrder.SPO);
+      // verify statements exist.
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+      assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
 
-            try {
+      // and verify their statement type.
+      assertEquals(
+          StatementEnum.Explicit, store.getStatement(U, rdfsSubClassOf, V).getStatementType());
+      assertEquals(
+          StatementEnum.Explicit, store.getStatement(V, rdfsSubClassOf, X).getStatementType());
+      assertEquals(
+          StatementEnum.Explicit, store.getStatement(U, rdfsSubClassOf, X).getStatementType());
 
-                // choose subject at random.
-                int index = r.nextInt(nsubjects);
+      // now retract
+      {
 
-                IV s = NULL;
+        // Note: new triple store on shared temporary store!
+        final TempTripleStore tempStore = tm.newTempTripleStore();
+        // buffer writes on the tempStore.
+        {
+          final StatementBuffer retractionBuffer =
+              new StatementBuffer(tempStore, store, 10 /* capacity */, 10 /*queueCapacity*/);
 
-                for (int j = 0; termIds.hasNext() && j < index; j++) {
+          assertTrue(tempStore == retractionBuffer.getStatementStore());
 
-                    s = termIds.next();
+          /*
+           * Retract this statement. It is explicitly present in the
+           * DB. However, note that it is also inferred. Therefore, it
+           * MUST be downgraded to an inference.
+           */
+          retractionBuffer.add(U, rdfsSubClassOf, X);
 
-                }
-
-                subjects.add(s);
-
-            } finally {
-
-                termIds.close();
-
-            }
-            
+          // flush to the temp store.
+          retractionBuffer.flush();
         }
 
         if (log.isInfoEnabled())
-            log.info("Selected " + subjects.size() + " distinct subjects: "
-                    + subjects);
+          log.info("\n\ntempStore:\n" + tempStore.dumpStore(store, true, true, false, true));
 
-        /*
-         * Choose one explicit statement at random for each distinct subject.
-         * 
-         * Note: It is possible that some subjects will not have any explicit
-         * statements, in which case we will select fewer than N statements.
-         */
-        
-        List<ISPO> stmts = new ArrayList<ISPO>(N);
-        
-        for( IV s : subjects ) {
-            
-            final IAccessPath<ISPO> accessPath = db.getAccessPath(s, NULL, NULL,
-                    ExplicitSPOFilter.INSTANCE);
+        if (log.isInfoEnabled()) log.info("Doing retraction.");
 
-            final IChunkedOrderedIterator<ISPO> itr = accessPath.iterator();
+        // perform closure and write on the database.
+        tm.retractAll(tempStore);
+      }
 
-            try {
+      if (log.isInfoEnabled())
+        log.info("\n\ndatabase:\n" + store.dumpStore(store, true, true, false, true));
 
-                if (!itr.hasNext())
-                    continue;
+      // verify statements exist.
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, V));
+      assertTrue(store.hasStatement(V, rdfsSubClassOf, X));
+      assertTrue(store.hasStatement(U, rdfsSubClassOf, X));
 
-                // a chunk of explicit statements for that subject.
-                final ISPO[] chunk = itr.nextChunk();
+      // and verify their statement type.
+      assertEquals(
+          StatementEnum.Explicit, store.getStatement(U, rdfsSubClassOf, V).getStatementType());
+      assertEquals(
+          StatementEnum.Explicit, store.getStatement(V, rdfsSubClassOf, X).getStatementType());
+      assertEquals(
+          StatementEnum.Inferred, store.getStatement(U, rdfsSubClassOf, X).getStatementType());
 
-                // statement randomly choosen from that chunk.
-                final ISPO tmp = chunk[r.nextInt(chunk.length)];
+    } finally {
 
-                if (log.isInfoEnabled())
-                    log.info("Selected at random: " + tmp.toString(db));
-
-                stmts.add(tmp);
-            
-            } finally {
-                
-                itr.close();
-                
-            }
-            
-        }
-        
-        if (log.isInfoEnabled())
-            log.info("Selected " + stmts.size() + " distinct statements: "
-                    + stmts);
-        
-        return stmts.toArray(new SPO[stmts.size()]);
-        
+      store.__tearDownUnitTest();
     }
-    
-    /**
-     * This is a specialized test for equality in the graphs that simply compare
-     * scans on the SPO index.
-     * <p>
-     * Pre-condition: The term identifiers for the graphs MUST be consistently
-     * assigned since the statements are not being materialized as RDF
-     * {@link org.openrdf.model.Value} objects.
-     * 
-     * @param expected
-     *            A copy of the statements made after the data set was loaded
-     *            and its closure computed and before we began to retract and
-     *            assert stuff.
-     * 
-     * @param actual
-     *            Note that this is used by both graphs to resolve the term
-     *            identifiers.
-     */
-    protected void assertSameGraphs(TempTripleStore expected,
-            AbstractTripleStore actual) {
+  }
 
-        // For the truly paranoid.
-//        assertStatementIndicesConsistent(expected);
-//        
-//        assertStatementIndicesConsistent(actual);
+  /**
+   * Given three explicit statements:
+   *
+   * <pre>
+   *  stmt a:  #user #currentGraph #foo
+   *
+   *  stmt b: #currentGraph rdfs:range #Graph
+   *
+   *  stmt c: #foo rdf:type #Graph
+   * </pre>
+   *
+   * a+b implies c
+   *
+   * <p>Delete a and verify that c is NOT gone since it is an explicit statement.
+   */
+  public void test_retractWhenStatementSupportsExplicitStatement() {
 
-        /*
-         * Note: You can not directly compare statement counts when using
-         * isolatable indices since they are upper bounds - not exact counts.
-         */
-//        if (expected.getStatementCount() != actual.getStatementCount()) {
-//
-//            log.warn("statementCount: expected=" + expected.getStatementCount()
-//                    + ", but actual=" + actual.getStatementCount());
-//                    
-//        }
-        
-        final IChunkedOrderedIterator<ISPO> itre = expected.getAccessPath(
-                SPOKeyOrder.SPO).iterator();
+    URI user = new URIImpl("http://www.embergraph.org/user");
+    URI currentGraph = new URIImpl("http://www.embergraph.org/currentGraph");
+    URI foo = new URIImpl("http://www.embergraph.org/foo");
+    URI graph = new URIImpl("http://www.embergraph.org/Graph");
+    URI rdftype = RDF.TYPE;
+    URI rdfsRange = RDFS.RANGE;
 
-        final IChunkedOrderedIterator<ISPO> itra = actual.getAccessPath(
-                SPOKeyOrder.SPO).iterator();
+    AbstractTripleStore store = getStore();
 
-//        int i = 0;
+    try {
 
-        int nerrs = 0;
-        
-        int maxerrs = 10;
+      final InferenceEngine inf = store.getInferenceEngine();
 
-        int nexpected = 0;
-        int nactual = 0;
-        
+      final TruthMaintenance tm = new TruthMaintenance(inf);
+
+      // add some assertions and verify aspects of their closure.
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        // stmt a
+        assertionBuffer.add(user, currentGraph, foo);
+
+        // stmt b
+        assertionBuffer.add(currentGraph, rdfsRange, graph);
+
+        // stmt c
+        assertionBuffer.add(foo, rdftype, graph);
+
+        // flush to the temp store.
+        assertionBuffer.flush();
+
+        // perform closure and write on the database.
+        tm.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
+
+        // dump after closure.
+        if (log.isInfoEnabled()) log.info("\n" + store.dumpStore(true, true, false));
+
+        // explicit.
+        assertTrue(store.hasStatement(user, currentGraph, foo));
+        assertTrue(store.hasStatement(currentGraph, rdfsRange, graph));
+        assertTrue(store.hasStatement(foo, rdftype, graph));
+
+        // verify that stmt c is marked as explicit in the kb.
+
+        final EmbergraphStatement stmtC =
+            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+
+        assertNotNull(stmtC);
+
+        assertEquals(StatementEnum.Explicit, stmtC.getStatementType());
+      }
+
+      /*
+       * retract stmt A and update the closure.
+       *
+       * then verify that it is retracted statement is gone and that the
+       * other explicit statements were not touched.
+       */
+      {
+        final StatementBuffer retractionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        retractionBuffer.add(user, currentGraph, foo);
+
+        // flush to the temp store.
+        retractionBuffer.flush();
+
+        // update the closure.
+        tm.retractAll((TempTripleStore) retractionBuffer.getStatementStore());
+
+        // dump after re-closure.
+        if (log.isInfoEnabled()) log.info("\n" + store.dumpStore(true, true, false));
+
+        // test the kb.
+        assertFalse(store.hasStatement(user, currentGraph, foo));
+        assertTrue(store.hasStatement(currentGraph, rdfsRange, graph));
+        assertTrue(store.hasStatement(foo, rdftype, graph));
+
+        // verify that stmt c is marked as explicit in the kb.
+
+        final EmbergraphStatement stmtC =
+            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+
+        assertNotNull(stmtC);
+
+        assertEquals(StatementEnum.Explicit, stmtC.getStatementType());
+      }
+
+    } finally {
+
+      store.__tearDownUnitTest();
+    }
+  }
+
+  /**
+   * This test demonstrates TM incorrectness (since fixed of course). I add two statements into
+   * store A, then remove one of them. Then I add the the statement that remain in store A into
+   * store B and compare the closure of the stores. They should be the same, right? Well,
+   * unfortunately they are not the same. Too many inferences were deleted from the first store
+   * during TM.
+   */
+  public void test_closurecorrectness() {
+
+    final URI a = new URIImpl("http://www.embergraph.org/a");
+    final URI b = new URIImpl("http://www.embergraph.org/b");
+    final URI c = new URIImpl("http://www.embergraph.org/c");
+    //        final URI d = new URIImpl("http://www.embergraph.org/d");
+    final URI sco = RDFS.SUBCLASSOF;
+
+    final AbstractTripleStore store = getStore();
+
+    try {
+
+      final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
+
+      // add two
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        assertionBuffer.add(a, sco, b);
+        assertionBuffer.add(b, sco, c);
+        //                assertionBuffer.add(c, sco, d );
+
+        // write statements on the temp store.
+        assertionBuffer.flush();
+
+        // perform closure and write on the database.
+        tm.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
+
+        if (log.isInfoEnabled())
+          log.info("\ndump after closure:\n" + store.dumpStore(store, true, true, false, true));
+      }
+
+      // retract one
+      {
+        final StatementBuffer retractionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        retractionBuffer.add(b, sco, c);
+
+        // write statements on the temp store.
+        retractionBuffer.flush();
+
+        // update the closure.
+        tm.retractAll((TempTripleStore) retractionBuffer.getStatementStore());
+
+        if (log.isInfoEnabled())
+          log.info(
+              "\ndump after retraction and re-closure:\n" + store.dumpStore(true, true, false));
+      }
+
+      /*
+       * Add statement(s) to the "control store" and compute its closure.
+       * This provides the basis for checking the result that we obtained
+       * above via retraction.
+       */
+      {
+        final TempTripleStore controlStore = new TempTripleStore(store.getProperties());
+
         try {
 
-            while (itre.hasNext()) {
+          // Note: maintains closure on the controlStore.
+          final TruthMaintenance tmControlStore =
+              new TruthMaintenance(controlStore.getInferenceEngine());
 
-                if(!itra.hasNext()) {
+          final StatementBuffer<?> assertionBuffer =
+              new StatementBuffer(
+                  tmControlStore.newTempTripleStore(),
+                  controlStore,
+                  100 /* capacity */,
+                  10 /*queueCapacity*/);
 
-                    fail("Actual iterator exhausted before expected: nexpected="
-                            + nexpected
-                            + ", nactual="
-                            + nactual
-                            + ", remaining=" + toString(itre, 10, expected));
-                    
-                }
+          assertionBuffer.add(a, sco, b);
+          // assertionBuffer.add(c, sco, d );
 
-                SPO expectedSPO = (SPO)itre.next(); nexpected++;
-                
-                SPO actualSPO = (SPO)itra.next(); nactual++;
-                
-                if (!expectedSPO.equals(actualSPO)) {
+          // write statements on the controlStore.
+          assertionBuffer.flush();
 
-                    while (SPOComparator.INSTANCE.compare(actualSPO, expectedSPO) < 0) {
+          // perform closure and write on the database.
+          tmControlStore.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
 
-                        log.warn("Not expecting: " + actualSPO.toString(actual));
+          if (log.isInfoEnabled())
+            log.info(
+                "\ndump controlStore after closure:\n" + controlStore.dumpStore(true, true, false));
 
-                        if(!itra.hasNext()) break;
-                        
-                        actualSPO = (SPO)itra.next(); nactual++;
-                        
-                        if(nerrs++==maxerrs) fail("Too many errors");
-
-                    }
-
-                    while (SPOComparator.INSTANCE.compare(expectedSPO, actualSPO) < 0) {
-
-                        log.warn("Expecting: " + expectedSPO.toString(actual));
-
-                        if(!itre.hasNext()) break;
-                        
-                        expectedSPO = (SPO)itre.next(); nexpected++;
-
-                        if(nerrs++==maxerrs) fail("Too many errors");
-
-                    }
-
-                }
-                
-//                i++;
-
-            }
-
-            assertFalse("Actual iterator will visit more than expected", itra.hasNext());
+          assertSameGraphs(controlStore, store);
 
         } finally {
 
-            itre.close();
-
-            itra.close();
-
+          controlStore.__tearDownUnitTest();
         }
+      }
 
-        /*
-         * Note: This compares the #of statements actually visited by the two
-         * iterators rather than comparing getStatementCount(), which is an
-         * upper bound based on rangeCount().
-         */
-        
-        assertEquals("statementCount", nexpected, nactual );
+    } finally {
 
+      store.__tearDownUnitTest();
     }
-    
-    /**
-     * Consumes up to max elements from the iterator and returns a
-     * {@link String} representation of those elements. This is used to show the
-     * additional elements that would be visited by an iterator when the other
-     * iterator is exhausted.
-     * 
-     * @param itr
-     *            The iterator.
-     * @param max
-     *            The maximum #of elements to visit.
-     * @param db
-     *            Used to resolve term identifiers to RDF values.
-     *            
-     * @return The string representation of the visited elements.
-     */
-    private String toString(IChunkedOrderedIterator<ISPO> itr, int max, AbstractTripleStore db) {
+  }
 
-        StringBuilder sb = new StringBuilder();
-        
+  /** This test demonstrates an infinite loop in TM arising from owl:sameAs. */
+  public void test_infiniteloop() {
+
+    //        if(true) fail("re-enable this test");
+
+    final URI a = new URIImpl("http://www.embergraph.org/a");
+    final URI b = new URIImpl("http://www.embergraph.org/b");
+    final URI entity = new URIImpl("http://www.embergraph.org/Entity");
+    final URI sameAs = OWL.SAMEAS;
+    //        /*
+    //         * Note: not using rdf:type to avoid entailments about (x rdf:type
+    //         * Class) and (x rdfs:subClassOf y) that are not required by this test.
+    //         */
+    //      URI rdfType = new URIImpl("http://www.embergraph.org/type");
+    final URI rdfType = RDF.TYPE;
+
+    final AbstractTripleStore store = getStore();
+
+    try {
+
+      final InferenceEngine inf = store.getInferenceEngine();
+
+      final TruthMaintenance tm = new TruthMaintenance(inf);
+
+      // add some assertions and verify aspects of their closure.
+      {
+        final StatementBuffer assertionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        // stmt a
+        assertionBuffer.add(a, rdfType, entity);
+        // assertionBuffer.add(a, x, y );
+
+        // stmt b
+        assertionBuffer.add(b, rdfType, entity);
+
+        // assert the sameas
+        assertionBuffer.add(a, sameAs, b);
+
+        // flush statements to the tempStore.
+        assertionBuffer.flush();
+
+        // perform closure and write on the database.
+        tm.assertAll((TempTripleStore) assertionBuffer.getStatementStore());
+
+        // dump after closure.
+        if (log.isInfoEnabled())
+          log.info("\ndump after closure:\n" + store.dumpStore(store, true, true, false, true));
+      }
+
+      /*
+       * retract stmt A and update the closure.
+       *
+       * then verify that the retracted statement is gone and that the
+       * other explicit statements were not touched.
+       */
+      {
+        final StatementBuffer retractionBuffer =
+            new StatementBuffer(
+                tm.newTempTripleStore(), store, 100 /* capacity */, 10 /*queueCapacity*/);
+
+        // retract the sameas
+        retractionBuffer.add(a, sameAs, b);
+
+        // flush statements to the tempStore.
+        retractionBuffer.flush();
+
+        // update the closure.
+        tm.retractAll((TempTripleStore) retractionBuffer.getStatementStore());
+
+        // dump after re-closure.
+        if (log.isInfoEnabled())
+          log.info("\ndump after re-closure:\n" + store.dumpStore(store, true, true, false, true));
+      }
+
+    } finally {
+
+      store.__tearDownUnitTest();
+    }
+  }
+
+  /**
+   * This is a stress test for truth maintenance. It verifies that retraction and assertion are
+   * symmetric by randomly retracting and then asserting statements while using truth maintenance
+   * and verifying that the initial conditions are always recovered. It does NOT prove the
+   * correctness of the entailments, merely that retraction and assertion are symmetric.
+   *
+   * @todo use data files that we can bundle with the distribution.
+   */
+  public void test_stress() {
+
+    //        fail("enable test");
+
+    final String ontology = "src/test/resources/data/lehigh/univ-bench.owl";
+    final String resource = "src/test/resources/data/lehigh/U1";
+    //                "../rdf-data/alibaba_data.rdf",
+    //                "../rdf-data/alibaba_schema.rdf"
+    //                };
+
+    //        final String[] baseURL = new String[] { "", ""
+    //                };
+    //
+    //        final RDFFormat[] format = new RDFFormat[] {
+    //                RDFFormat.RDFXML,
+    //                RDFFormat.RDFXML
+    //                };
+    //
+    //        for(String r : resource) {
+    //
+    //            if(!new File(r).exists()) {
+    //
+    //                System.err.println("Resource not found: "+r+", test="+getName()+" skipped.");
+    //
+    //                return;
+    //
+    //            }
+    //
+    //        }
+
+    final Properties properties = getProperties();
+
+    /*
+     * Note: overrides properties to make sure that entailments are
+     * not computed on load.
+     */
+
+    properties.setProperty(DataLoader.Options.CLOSURE, ClosureEnum.None.toString());
+
+    TempTripleStore tmp = null;
+    final AbstractTripleStore store = getStore(properties);
+
+    try {
+
+      final DataLoader dataLoader = store.getDataLoader();
+
+      final String baseURI = new File(resource).toURI().toString();
+
+      dataLoader.loadData(ontology, baseURI, RDFFormat.RDFXML);
+
+      dataLoader.loadData(resource, baseURI, RDFFormat.RDFXML);
+
+      /*
+       * Compute the closure of the database.
+       */
+
+      final InferenceEngine inf = store.getInferenceEngine();
+
+      inf.computeClosure(null /* focusStore */);
+
+      /*
+       * Make a copy of the graph (statements only) that will serve as
+       * ground truth.
+       */
+      {
+        final Properties p = new Properties(properties);
+
+        // no lexicon.
+        p.setProperty(Options.LEXICON, "false");
+
+        tmp = new TempTripleStore(p);
+
+        store.copyStatements(tmp, null /* filter */, false /* copyJustifications */);
+      }
+
+      /*
+       * Start the stress tests.
+       */
+
+      doStressTest(tmp, inf, 10 /*ntrials*/, 1 /*depth*/, 1 /*nstmts*/);
+
+      doStressTest(tmp, inf, 7 /*ntrials*/, 1 /*depth*/, 5 /*nstmts*/);
+
+      doStressTest(tmp, inf, 5 /*ntrials*/, 5 /*depth*/, 1 /*nstmts*/);
+
+      doStressTest(tmp, inf, 3 /*ntrials*/, 5 /*depth*/, 5 /*nstmts*/);
+
+      //            // very stressful.
+      //            doStressTest(tmp, inf, 100/*ntrials*/, 10/*depth*/, 20/*nstmts*/);
+
+    } catch (Exception ex) {
+
+      fail("Not expecting: " + ex, ex);
+
+    } finally {
+
+      if (tmp != null) tmp.__tearDownUnitTest();
+
+      store.__tearDownUnitTest();
+    }
+  }
+
+  /**
+   * A stress test for truth maintenance using an arbitrary data set. The test scans the statement
+   * indices in some order, selecting N explicit statement to retract. It then retracts them,
+   * updates the closure, and then re-asserts them and verifies that original closure was restored.
+   *
+   * <p>Note: this test by itself does not guarentee that any entailments of those explicit
+   * statements were removed - we need to write other tests for that. repeat several times on the
+   * dataset, potentially doing multiple retractions before we back out of them.
+   *
+   * @param tmp Ground truth (the state that must be recovered in order for truth maintenance to be
+   *     symmetric).
+   * @param inf The {@link InferenceEngine} to use in the test. This reads and writes on the
+   *     database whose closure is being maintained.
+   * @param ntrials The #of times that we will run the test.
+   * @param D The recursive depth of the retractions. A depth of ONE (1) means that one set of N
+   *     statements will be retracted, closure updated, and the re-asserted and closure updated and
+   *     compared against ground truth (the initial conditions). When the depth is greater than ONE
+   *     (1) we will recursively retract a set of N statements D times. The statements will be
+   *     reasserted as we back out of the recursion and the graph compared with ground truth when we
+   *     return from the top level of the recursion.
+   * @param N The #of explicit statements to be randomly selected and retracted on each recursive
+   *     pass.
+   */
+  public void doStressTest(TempTripleStore tmp, InferenceEngine inf, int ntrials, int D, int N) {
+
+    AbstractTripleStore store = inf.database;
+
+    /*
+     * Verify our initial conditions agree.
+     */
+
+    assertSameGraphs(tmp, store);
+
+    for (int trial = 0; trial < ntrials; trial++) {
+
+      /*
+       * Do recursion.
+       */
+
+      MDC.put("trial", "trial=" + trial);
+
+      retractAndAssert(inf, store, 0 /*depth*/, D, N);
+
+      /*
+       * Verify that the closure is correct after all that recursive
+       * mutation and restoration.
+       */
+
+      assertSameGraphs(tmp, store);
+
+      MDC.remove("trial");
+    }
+  }
+
+  /**
+   * At each level of recursion up to N explicit statements are selected randomly from the database,
+   * retracted, and closure is updated. The method then calls itself recursively, thereby building
+   * up a series of updates to the graph. When the recursion bottoms out, the retracted statements
+   * are asserted and closure is updated. This continues as we back out of the recursion until the
+   * graph SHOULD contain the identical RDF model.
+   *
+   * @param inf Used to update the closure.
+   * @param db The database.
+   * @param depth The current depth of recursion (ZERO on the first call).
+   * @param D The maximum depth of recursion (depth will always be strictly less than D).
+   * @param N The #of explicit statements to randomly select at each level of recursion for
+   *     retraction from the database.
+   */
+  private void retractAndAssert(
+      InferenceEngine inf, AbstractTripleStore db, int depth, final int D, final int N) {
+
+    assert depth >= 0;
+    assert depth < D;
+
+    /*
+     * Select N explicit statements at random.
+     */
+
+    SPO[] stmts = selectRandomExplicitStatements(db, N);
+
+    log.info("Selected " + stmts.length + " statements at random: depth=" + depth);
+
+    final TruthMaintenance tm = new TruthMaintenance(inf);
+
+    /*
+     * Retract those statements and update the closure of the database.
+     */
+    {
+      for (SPO tmp : stmts) {
+        log.info("Retracting: " + tmp.toString(db));
+      }
+
+      final TempTripleStore tempStore = tm.newTempTripleStore();
+
+      db.addStatements(
+          tempStore,
+          true /* copyOnly */,
+          new ChunkedArrayIterator<ISPO>(stmts.length, stmts, null /* keyOrder */),
+          null /* filter */);
+
+      log.info("Retracting: n=" + stmts.length + ", depth=" + depth);
+
+      // note: an upper bound when using isolated indices.
+      final long before = db.getStatementCount();
+
+      tm.retractAll(tempStore);
+
+      final long after = db.getStatementCount();
+
+      final long delta = after - before;
+
+      log.info("Retraction: before=" + before + ", after=" + after + ", delta=" + delta);
+    }
+
+    if (depth + 1 < D) {
+
+      retractAndAssert(inf, db, depth + 1, D, N);
+    }
+
+    /*
+     * Assert those statements and update the closure of the database.
+     */
+    {
+      for (SPO tmp : stmts) {
+        log.info("Asserting: " + tmp.toString(db));
+      }
+
+      final TempTripleStore tempStore = tm.newTempTripleStore();
+
+      db.addStatements(
+          tempStore,
+          true /* copyOnly */,
+          new ChunkedArrayIterator<ISPO>(stmts.length, stmts, null /*keyOrder*/),
+          null /*filter*/);
+
+      log.info("Asserting: n=" + stmts.length + ", depth=" + depth);
+
+      // note: an upper bound when using isolated indices.
+      final long before = db.getStatementCount();
+
+      tm.assertAll(tempStore);
+
+      final long after = db.getStatementCount();
+
+      final long delta = after - before;
+
+      log.info("Assertion: before=" + before + ", after=" + after + ", delta=" + delta);
+    }
+  }
+
+  /**
+   * Select N explicit statements from the graph at random.
+   *
+   * @param db The graph.
+   * @param N The #of statements to select.
+   * @return Up to N distinct explicit statements selected from the graph.
+   */
+  public SPO[] selectRandomExplicitStatements(AbstractTripleStore db, int N) {
+
+    /*
+     * Count the #of distinct subjects in the graph.
+     */
+    final int nsubjects;
+    {
+      final IChunkedIterator<IV> termIds = db.getSPORelation().distinctTermScan(SPOKeyOrder.SPO);
+
+      try {
+
         int n = 0;
-        
-        while (itr.hasNext() && n < max) {
-            
-            if (n > 0)
-                sb.append(", ");
 
-            sb.append(itr.next().toString(db));
+        while (termIds.hasNext()) {
 
+          termIds.next();
+
+          n++;
         }
 
-        return "{" + sb.toString() + "}";
+        nsubjects = n;
 
+      } finally {
+
+        termIds.close();
+      }
     }
 
+    if (log.isInfoEnabled()) log.info("There are " + nsubjects + " distinct subjects");
+
+    /*
+     * Choose N distinct subjects from the graph at random.
+     */
+
+    final Set<IV> subjects = new HashSet<IV>(N);
+
+    for (int i = 0; i < nsubjects && subjects.size() < N; i++) {
+
+      final IChunkedIterator<IV> termIds = db.getSPORelation().distinctTermScan(SPOKeyOrder.SPO);
+
+      try {
+
+        // choose subject at random.
+        int index = r.nextInt(nsubjects);
+
+        IV s = NULL;
+
+        for (int j = 0; termIds.hasNext() && j < index; j++) {
+
+          s = termIds.next();
+        }
+
+        subjects.add(s);
+
+      } finally {
+
+        termIds.close();
+      }
+    }
+
+    if (log.isInfoEnabled())
+      log.info("Selected " + subjects.size() + " distinct subjects: " + subjects);
+
+    /*
+     * Choose one explicit statement at random for each distinct subject.
+     *
+     * Note: It is possible that some subjects will not have any explicit
+     * statements, in which case we will select fewer than N statements.
+     */
+
+    List<ISPO> stmts = new ArrayList<ISPO>(N);
+
+    for (IV s : subjects) {
+
+      final IAccessPath<ISPO> accessPath =
+          db.getAccessPath(s, NULL, NULL, ExplicitSPOFilter.INSTANCE);
+
+      final IChunkedOrderedIterator<ISPO> itr = accessPath.iterator();
+
+      try {
+
+        if (!itr.hasNext()) continue;
+
+        // a chunk of explicit statements for that subject.
+        final ISPO[] chunk = itr.nextChunk();
+
+        // statement randomly choosen from that chunk.
+        final ISPO tmp = chunk[r.nextInt(chunk.length)];
+
+        if (log.isInfoEnabled()) log.info("Selected at random: " + tmp.toString(db));
+
+        stmts.add(tmp);
+
+      } finally {
+
+        itr.close();
+      }
+    }
+
+    if (log.isInfoEnabled())
+      log.info("Selected " + stmts.size() + " distinct statements: " + stmts);
+
+    return stmts.toArray(new SPO[stmts.size()]);
+  }
+
+  /**
+   * This is a specialized test for equality in the graphs that simply compare scans on the SPO
+   * index.
+   *
+   * <p>Pre-condition: The term identifiers for the graphs MUST be consistently assigned since the
+   * statements are not being materialized as RDF {@link org.openrdf.model.Value} objects.
+   *
+   * @param expected A copy of the statements made after the data set was loaded and its closure
+   *     computed and before we began to retract and assert stuff.
+   * @param actual Note that this is used by both graphs to resolve the term identifiers.
+   */
+  protected void assertSameGraphs(TempTripleStore expected, AbstractTripleStore actual) {
+
+    // For the truly paranoid.
+    //        assertStatementIndicesConsistent(expected);
+    //
+    //        assertStatementIndicesConsistent(actual);
+
+    /*
+     * Note: You can not directly compare statement counts when using
+     * isolatable indices since they are upper bounds - not exact counts.
+     */
+    //        if (expected.getStatementCount() != actual.getStatementCount()) {
+    //
+    //            log.warn("statementCount: expected=" + expected.getStatementCount()
+    //                    + ", but actual=" + actual.getStatementCount());
+    //
+    //        }
+
+    final IChunkedOrderedIterator<ISPO> itre = expected.getAccessPath(SPOKeyOrder.SPO).iterator();
+
+    final IChunkedOrderedIterator<ISPO> itra = actual.getAccessPath(SPOKeyOrder.SPO).iterator();
+
+    //        int i = 0;
+
+    int nerrs = 0;
+
+    int maxerrs = 10;
+
+    int nexpected = 0;
+    int nactual = 0;
+
+    try {
+
+      while (itre.hasNext()) {
+
+        if (!itra.hasNext()) {
+
+          fail(
+              "Actual iterator exhausted before expected: nexpected="
+                  + nexpected
+                  + ", nactual="
+                  + nactual
+                  + ", remaining="
+                  + toString(itre, 10, expected));
+        }
+
+        SPO expectedSPO = (SPO) itre.next();
+        nexpected++;
+
+        SPO actualSPO = (SPO) itra.next();
+        nactual++;
+
+        if (!expectedSPO.equals(actualSPO)) {
+
+          while (SPOComparator.INSTANCE.compare(actualSPO, expectedSPO) < 0) {
+
+            log.warn("Not expecting: " + actualSPO.toString(actual));
+
+            if (!itra.hasNext()) break;
+
+            actualSPO = (SPO) itra.next();
+            nactual++;
+
+            if (nerrs++ == maxerrs) fail("Too many errors");
+          }
+
+          while (SPOComparator.INSTANCE.compare(expectedSPO, actualSPO) < 0) {
+
+            log.warn("Expecting: " + expectedSPO.toString(actual));
+
+            if (!itre.hasNext()) break;
+
+            expectedSPO = (SPO) itre.next();
+            nexpected++;
+
+            if (nerrs++ == maxerrs) fail("Too many errors");
+          }
+        }
+
+        //                i++;
+
+      }
+
+      assertFalse("Actual iterator will visit more than expected", itra.hasNext());
+
+    } finally {
+
+      itre.close();
+
+      itra.close();
+    }
+
+    /*
+     * Note: This compares the #of statements actually visited by the two
+     * iterators rather than comparing getStatementCount(), which is an
+     * upper bound based on rangeCount().
+     */
+
+    assertEquals("statementCount", nexpected, nactual);
+  }
+
+  /**
+   * Consumes up to max elements from the iterator and returns a {@link String} representation of
+   * those elements. This is used to show the additional elements that would be visited by an
+   * iterator when the other iterator is exhausted.
+   *
+   * @param itr The iterator.
+   * @param max The maximum #of elements to visit.
+   * @param db Used to resolve term identifiers to RDF values.
+   * @return The string representation of the visited elements.
+   */
+  private String toString(IChunkedOrderedIterator<ISPO> itr, int max, AbstractTripleStore db) {
+
+    StringBuilder sb = new StringBuilder();
+
+    int n = 0;
+
+    while (itr.hasNext() && n < max) {
+
+      if (n > 0) sb.append(", ");
+
+      sb.append(itr.next().toString(db));
+    }
+
+    return "{" + sb.toString() + "}";
+  }
 }

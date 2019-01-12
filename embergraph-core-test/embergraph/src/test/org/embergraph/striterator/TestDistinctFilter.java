@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.striterator;
 
 import junit.framework.TestCase2;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -34,219 +33,190 @@ import org.embergraph.util.Bytes;
 
 /**
  * Unit tests for {@link DistinctFilter}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestDistinctFilter extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestDistinctFilter() {
-    }
+  /** */
+  public TestDistinctFilter() {}
 
-    /**
-     * @param arg0
-     */
-    public TestDistinctFilter(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestDistinctFilter(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Unit test where all elements are visited in the first chunk. This case is
-     * optimized to avoid the creation of the {@link BTree}.
-     */
-    public void test_distinctOneChunk() {
-        
-        final IIndexManager indexManager = new TemporaryStore();
+  /**
+   * Unit test where all elements are visited in the first chunk. This case is optimized to avoid
+   * the creation of the {@link BTree}.
+   */
+  public void test_distinctOneChunk() {
 
-        final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
-        
-        final DistinctFilter<Long> filter = new DistinctFilter<Long>(
-                indexManager) {
+    final IIndexManager indexManager = new TemporaryStore();
 
-            @Override
-            protected byte[] getSortKey(Long e) {
+    final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-                return keyBuilder.reset().append(e.longValue()).getKey();
+    final DistinctFilter<Long> filter =
+        new DistinctFilter<Long>(indexManager) {
 
-            }
+          @Override
+          protected byte[] getSortKey(Long e) {
 
+            return keyBuilder.reset().append(e.longValue()).getKey();
+          }
         };
 
-        final Long[] a = {
+    final Long[] a = {12L, 1L, 3L, 1L};
 
-        12L, 1L, 3L, 1L
+    final IChunkedOrderedIterator<Long> src =
+        new ChunkedArrayIterator<Long>(a.length, a, null /* keyOrder */);
 
+    final IChunkedOrderedIterator<Long> dst =
+        new ChunkedConvertingIterator<Long, Long>(src, filter);
+
+    assertSameIterator(new Long[] {1L, 3L, 12L}, dst);
+  }
+
+  /** Unit test where the source iterator is empty. */
+  public void test_distinctOneChunkEmptyIterator() {
+
+    final IIndexManager indexManager = new TemporaryStore();
+
+    final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
+
+    final DistinctFilter<Long> filter =
+        new DistinctFilter<Long>(indexManager) {
+
+          @Override
+          protected byte[] getSortKey(Long e) {
+
+            return keyBuilder.reset().append(e.longValue()).getKey();
+          }
         };
 
-        final IChunkedOrderedIterator<Long> src = new ChunkedArrayIterator<Long>(
-                a.length, a, null/* keyOrder */);
+    final Long[] a = {};
 
-        final IChunkedOrderedIterator<Long> dst = new ChunkedConvertingIterator<Long, Long>(
-                src, filter);
+    final IChunkedOrderedIterator<Long> src =
+        new ChunkedArrayIterator<Long>(a.length, a, null /* keyOrder */);
 
-        assertSameIterator(new Long[] { 1L, 3L, 12L }, dst);
-        
+    final IChunkedOrderedIterator<Long> dst =
+        new ChunkedConvertingIterator<Long, Long>(src, filter);
+
+    assertSameIterator(new Long[] {}, dst);
+  }
+
+  /**
+   * Unit test where multiple chunks are processed. One of the chunks consists entirely of duplicate
+   * elements.
+   */
+  public void test_distinctManyChunks() {
+
+    final IIndexManager indexManager = new TemporaryStore();
+
+    final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
+
+    final DistinctFilter<Long> filter =
+        new DistinctFilter<Long>(indexManager) {
+
+          @Override
+          protected byte[] getSortKey(Long e) {
+
+            return keyBuilder.reset().append(e.longValue()).getKey();
+          }
+        };
+
+    final Long[][] a = {
+
+      // 1st chunk
+      new Long[] {12L, 1L, 3L, 1L},
+
+      // 2nd chunk (only 4 is new).
+      new Long[] {3L, 4L, 12L},
+
+      // 3rd chunk (all duplicates).
+      new Long[] {12L, 1L, 3L, 4L},
+
+      // 4th chunk (only 5 is new).
+      new Long[] {5L, 12L, 4L}
+    };
+
+    final IChunkedOrderedIterator<Long> src = new MyChunkSource<Long>(a);
+
+    final IChunkedOrderedIterator<Long> dst =
+        new ChunkedConvertingIterator<Long, Long>(src, filter);
+
+    assertSameIterator(
+        new Long[] {
+
+          /* 1st chunk*/
+          1L,
+          3L,
+          12L,
+
+          /* 2nd chunk*/
+          4L,
+
+          /* 3rd chunk is empty*/
+
+          /* 4th chunk */
+          5L
+        },
+        dst);
+  }
+
+  /**
+   * Helper class visits a sequence of chunks specified to its ctor.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   * @param <E>
+   */
+  static class MyChunkSource<E> implements IChunkedOrderedIterator<E> {
+
+    private final E[][] chunks;
+
+    private int i = 0;
+
+    public MyChunkSource(E[][] chunks) {
+
+      this.chunks = chunks;
     }
 
-    /**
-     * Unit test where the source iterator is empty.
-     */
-    public void test_distinctOneChunkEmptyIterator() {
+    public IKeyOrder<E> getKeyOrder() {
 
-        final IIndexManager indexManager = new TemporaryStore();
+      return null;
+    }
 
-        final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
-        
-        final DistinctFilter<Long> filter = new DistinctFilter<Long>(
-                indexManager) {
+    public E[] nextChunk(IKeyOrder<E> keyOrder) {
 
-            @Override
-            protected byte[] getSortKey(Long e) {
+      throw new UnsupportedOperationException();
+    }
 
-                return keyBuilder.reset().append(e.longValue()).getKey();
+    public E next() {
 
-            }
+      throw new UnsupportedOperationException();
+    }
 
-        };
+    public E[] nextChunk() {
 
-        final Long[] a = {
+      return chunks[i++];
+    }
 
-        };
+    public void remove() {
 
-        final IChunkedOrderedIterator<Long> src = new ChunkedArrayIterator<Long>(
-                a.length, a, null/* keyOrder */);
+      throw new UnsupportedOperationException();
+    }
 
-        final IChunkedOrderedIterator<Long> dst = new ChunkedConvertingIterator<Long, Long>(
-                src, filter);
+    public void close() {
 
-        assertSameIterator(new Long[] { }, dst);
+      // NOP.
 
     }
-    
-    /**
-     * Unit test where multiple chunks are processed. One of the chunks consists
-     * entirely of duplicate elements.
-     */
-    public void test_distinctManyChunks() {
-        
-        final IIndexManager indexManager = new TemporaryStore();
 
-        final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
-        
-        final DistinctFilter<Long> filter = new DistinctFilter<Long>(
-                indexManager) {
+    public boolean hasNext() {
 
-            @Override
-            protected byte[] getSortKey(Long e) {
-
-                return keyBuilder.reset().append(e.longValue()).getKey();
-
-            }
-
-        };
-
-        final Long[][] a = {
-
-                // 1st chunk
-                new Long[]{12L, 1L, 3L, 1L},
-                
-                // 2nd chunk (only 4 is new).
-                new Long[]{3L, 4L, 12L},
-                
-                // 3rd chunk (all duplicates).
-                new Long[]{12L, 1L, 3L, 4L},
-                
-                // 4th chunk (only 5 is new).
-                new Long[]{5L, 12L, 4L}
-
-        };
-
-        final IChunkedOrderedIterator<Long> src = new MyChunkSource<Long>(a);
-
-        final IChunkedOrderedIterator<Long> dst = new ChunkedConvertingIterator<Long, Long>(
-                src, filter);
-
-        assertSameIterator(new Long[] {
-                
-                /* 1st chunk*/
-                1L, 3L, 12L,
-                
-                /* 2nd chunk*/
-                4L,
-                
-                /* 3rd chunk is empty*/
-                
-                /* 4th chunk */
-                5L
-                
-                }, dst);
-                
+      return i < chunks.length;
     }
-    
-    /**
-     * Helper class visits a sequence of chunks specified to its ctor.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
-     * @param <E>
-     */
-    static class MyChunkSource<E> implements IChunkedOrderedIterator<E> {
-
-        final private E[][] chunks;
-
-        private int i = 0;
-        
-        public MyChunkSource(E[][] chunks) {
-
-            this.chunks = chunks;
-            
-        }
-        
-        public IKeyOrder<E> getKeyOrder() {
-        
-            return null;
-            
-        }
-
-        public E[] nextChunk(IKeyOrder<E> keyOrder) {
-            
-            throw new UnsupportedOperationException();
-            
-        }
-
-        public E next() {
-            
-            throw new UnsupportedOperationException();
-            
-        }
-
-        public E[] nextChunk() {
-            
-            return chunks[i++];
-            
-        }
-
-        public void remove() {
-
-            throw new UnsupportedOperationException();
-            
-        }
-
-        public void close() {
-
-            // NOP.
-            
-        }
-
-        public boolean hasNext() {
-            
-            return i < chunks.length;
-            
-        }
-        
-    }
-    
+  }
 }

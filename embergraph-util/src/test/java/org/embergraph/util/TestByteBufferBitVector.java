@@ -23,168 +23,138 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util;
 
 import it.unimi.dsi.bits.BitVector;
-
 import java.nio.ByteBuffer;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link ByteBufferBitVector}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestByteBufferBitVector extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestByteBufferBitVector() {
+  /** */
+  public TestByteBufferBitVector() {}
+
+  /** @param name */
+  public TestByteBufferBitVector(String name) {
+    super(name);
+  }
+
+  /** Correct rejection test for ctor1. */
+  public void test_ctor1_correct_rejection() {
+
+    try {
+      new ByteBufferBitVector(null);
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      if (log.isInfoEnabled()) log.info("ignoring expected exception: " + ex);
+    }
+  }
+
+  public void test_ctor1() {
+
+    final byte[] d = new byte[1];
+    final ByteBuffer b = ByteBuffer.wrap(d);
+    final BitVector v = new ByteBufferBitVector(b);
+
+    assertEquals("length", 8L, v.length());
+
+    // verify range check.
+    try {
+      v.getBoolean(-1);
+      fail("Expecting: " + IndexOutOfBoundsException.class);
+    } catch (IndexOutOfBoundsException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestByteBufferBitVector(String name) {
-        super(name);
+    // verify range check.
+    try {
+      v.getBoolean(8);
+      fail("Expecting: " + IndexOutOfBoundsException.class);
+    } catch (IndexOutOfBoundsException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /** Correct rejection test for ctor1. */
-    public void test_ctor1_correct_rejection() {
+    for (long i = 0; i < 8L; i++) assertEquals(false, v.getBoolean(i));
 
-        try {
-            new ByteBufferBitVector(null);
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            if (log.isInfoEnabled())
-                log.info("ignoring expected exception: " + ex);
-        }
-        
-    } 
-    
-    public void test_ctor1() {
+    // set bit zero.
+    d[0] |= (1 << 0);
+    if (log.isInfoEnabled()) log.info(v.toString());
+    assertEquals(true, v.getBoolean(0));
 
-        final byte[] d = new byte[1];
-        final ByteBuffer b = ByteBuffer.wrap(d);
-        final BitVector v = new ByteBufferBitVector(b);
+    // clear bit zero.
+    d[0] &= ~(1 << 0);
+    if (log.isInfoEnabled()) log.info(v.toString());
+    assertEquals(false, v.getBoolean(0));
+  }
 
-        assertEquals("length", 8L, v.length());
+  /**
+   * Correct rejection and assumptions for ctor accepting offset and length options.
+   *
+   * @todo this tests with an even byte offset. Try w/ only a few bits offset.
+   */
+  public void test_ctor2() {
 
-        // verify range check.
-        try {
-            v.getBoolean(-1);
-            fail("Expecting: " + IndexOutOfBoundsException.class);
-        } catch (IndexOutOfBoundsException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
+    final byte[] d = new byte[3];
+    final ByteBuffer b = ByteBuffer.wrap(d);
+    final BitVector v = new ByteBufferBitVector(b, 8, 8);
 
-        // verify range check.
-        try {
-            v.getBoolean(8);
-            fail("Expecting: " + IndexOutOfBoundsException.class);
-        } catch (IndexOutOfBoundsException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
+    assertEquals("length", 8L, v.length());
 
-        for (long i = 0; i < 8L; i++)
-            assertEquals(false, v.getBoolean(i));
-
-        // set bit zero.
-        d[0] |= (1 << 0);
-        if (log.isInfoEnabled())
-            log.info(v.toString());
-        assertEquals(true, v.getBoolean(0));
-
-        // clear bit zero.
-        d[0] &= ~(1 << 0);
-        if (log.isInfoEnabled())
-            log.info(v.toString());
-        assertEquals(false, v.getBoolean(0));
-
+    // verify range check.
+    try {
+      v.getBoolean(-1);
+      fail("Expecting: " + IndexOutOfBoundsException.class);
+    } catch (IndexOutOfBoundsException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * Correct rejection and assumptions for ctor accepting offset and length
-     * options.
-     * 
-     * @todo this tests with an even byte offset. Try w/ only a few bits offset.
-     */
-    public void test_ctor2() {
-
-        final byte[] d = new byte[3];
-        final ByteBuffer b = ByteBuffer.wrap(d);
-        final BitVector v = new ByteBufferBitVector(b, 8, 8);
-
-        assertEquals("length", 8L, v.length());
-
-        // verify range check.
-        try {
-            v.getBoolean(-1);
-            fail("Expecting: " + IndexOutOfBoundsException.class);
-        } catch (IndexOutOfBoundsException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        // verify range check.
-        try {
-            v.getBoolean(8);
-            fail("Expecting: " + IndexOutOfBoundsException.class);
-        } catch (IndexOutOfBoundsException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
-
-        for (long i = 0; i < 8L; i++)
-            assertEquals(false, v.getBoolean(i));
-
-        // set bit zero.
-        d[1] |= (1 << 0);
-        if (log.isInfoEnabled())
-            log.info(v.toString());
-        assertEquals(true, v.getBoolean(0));
-
-        // clear bit zero.
-        d[1] &= ~(1 << 0);
-        if (log.isInfoEnabled())
-            log.info(v.toString());
-        assertEquals(false, v.getBoolean(0));
-        
+    // verify range check.
+    try {
+      v.getBoolean(8);
+      fail("Expecting: " + IndexOutOfBoundsException.class);
+    } catch (IndexOutOfBoundsException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * Verify set/clear of each bit in the first byte.
-     */
-    public void test_getBoolean() {
+    for (long i = 0; i < 8L; i++) assertEquals(false, v.getBoolean(i));
 
-        final byte[] d = new byte[1];
-        final ByteBuffer b = ByteBuffer.wrap(d);
-        final BitVector v = new ByteBufferBitVector(b);
+    // set bit zero.
+    d[1] |= (1 << 0);
+    if (log.isInfoEnabled()) log.info(v.toString());
+    assertEquals(true, v.getBoolean(0));
 
-        // verify all bits are zero.
-        for (long i = 0; i < 8L; i++)
-            assertEquals(false, v.getBoolean(i));
+    // clear bit zero.
+    d[1] &= ~(1 << 0);
+    if (log.isInfoEnabled()) log.info(v.toString());
+    assertEquals(false, v.getBoolean(0));
+  }
 
-        // set/clear each bit in the first byte in turn.
-        for (int i = 0; i < 8; i++) {
+  /** Verify set/clear of each bit in the first byte. */
+  public void test_getBoolean() {
 
-            // set bit
-            d[0] |= (1 << i);
-            if (log.isInfoEnabled())
-                log.info(v.toString() + " : i=" + i + ", (1<<" + i + ")="
-                        + (i << i));
-            assertEquals(true, v.getBoolean(i));
+    final byte[] d = new byte[1];
+    final ByteBuffer b = ByteBuffer.wrap(d);
+    final BitVector v = new ByteBufferBitVector(b);
 
-            // clear bit
-            d[0] &= ~(1 << i);
-            if (log.isInfoEnabled())
-                log.info(v.toString());
-            assertEquals(false, v.getBoolean(i));
+    // verify all bits are zero.
+    for (long i = 0; i < 8L; i++) assertEquals(false, v.getBoolean(i));
 
-        }
+    // set/clear each bit in the first byte in turn.
+    for (int i = 0; i < 8; i++) {
 
+      // set bit
+      d[0] |= (1 << i);
+      if (log.isInfoEnabled())
+        log.info(v.toString() + " : i=" + i + ", (1<<" + i + ")=" + (i << i));
+      assertEquals(true, v.getBoolean(i));
+
+      // clear bit
+      d[0] &= ~(1 << i);
+      if (log.isInfoEnabled()) log.info(v.toString());
+      assertEquals(false, v.getBoolean(i));
     }
-
+  }
 }

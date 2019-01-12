@@ -4,18 +4,16 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTConstraint extends SimpleNode {
 
-	public ASTConstraint(int id) {
-		super(id);
-	}
+  public ASTConstraint(int id) {
+    super(id);
+  }
 
-	public ASTConstraint(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTConstraint(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 }

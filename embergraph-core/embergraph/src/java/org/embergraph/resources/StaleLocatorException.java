@@ -27,61 +27,51 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.DataService;
 
 /**
- * An instance of this class is thrown when an index partition has been split,
- * joined, or moved to indicate that the client has a stale
- * {@link PartitionLocator} and should refresh the locator for the key range
- * covered by the named index partition and retry their request on the
- * appropriate {@link DataService}.
- * 
+ * An instance of this class is thrown when an index partition has been split, joined, or moved to
+ * indicate that the client has a stale {@link PartitionLocator} and should refresh the locator for
+ * the key range covered by the named index partition and retry their request on the appropriate
+ * {@link DataService}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class StaleLocatorException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 8595818286122546905L;
+  /** */
+  private static final long serialVersionUID = 8595818286122546905L;
 
-    private final String name;
-    private final StaleLocatorReason reason;
-    
-//    /**
-//     * De-serialization ctor.
-//     */
-//    public StaleLocatorException() {
-//        
-//        super();
-//        
-//    }
+  private final String name;
+  private final StaleLocatorReason reason;
 
-    public String getName() {
-        
-        return name;
-        
-    }
-    
-    public StaleLocatorReason getReason() {
-        
-        return reason;
-        
-    }
-    
-    /**
-     * @param name
-     *            The name of the index partition.
-     * @param reason
-     *            The reason why the locator is no longer valid (split, join or
-     *            moved).
-     */
-    public StaleLocatorException(String name, StaleLocatorReason reason) {
+  //    /**
+  //     * De-serialization ctor.
+  //     */
+  //    public StaleLocatorException() {
+  //
+  //        super();
+  //
+  //    }
 
-        super("name=" + name + ", reason=" + reason);
-        
-        this.name = name;
-        
-        this.reason = reason;
-        
-    }
+  public String getName() {
 
+    return name;
+  }
+
+  public StaleLocatorReason getReason() {
+
+    return reason;
+  }
+
+  /**
+   * @param name The name of the index partition.
+   * @param reason The reason why the locator is no longer valid (split, join or moved).
+   */
+  public StaleLocatorException(String name, StaleLocatorReason reason) {
+
+    super("name=" + name + ", reason=" + reason);
+
+    this.name = name;
+
+    this.reason = reason;
+  }
 }

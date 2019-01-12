@@ -25,55 +25,38 @@ package org.embergraph.config;
 
 /**
  * Base impl for {@link Integer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class IntegerValidator implements IValidator<Integer> {
 
-    /**
-     * Allows all values.
-     */
-    public static final transient IValidator<Integer> DEFAULT = new IntegerValidator();
-    
-    /**
-     * Only allows non-negative values (GTE ZERO).
-     */
-    public static final transient IValidator<Integer> GTE_ZERO = new IntegerValidator() {
-        
-        public void accept(String key, String val, Integer arg) {
-            if (arg < 0)
-                throw new ConfigurationException(key, val,
-                        "Must be non-negative");
-        }
-        
-    };
+  /** Allows all values. */
+  public static final transient IValidator<Integer> DEFAULT = new IntegerValidator();
 
-    /**
-     * Only allows positive values (GT ZERO).
-     */
-    public static final transient IValidator<Integer> GT_ZERO = new IntegerValidator() {
-        
-        public void accept(String key, String val, Integer arg) {
-            if (arg <= 0)
-                throw new ConfigurationException(key, val,
-                        "Must be positive");
-        }
-        
-    };
-    
-    public Integer parse(String key, String val) {
-        
-        return Integer.parseInt(val);
-        
-    }
-    
-    /**
-     * Accepts all values by default.
-     */
-    public void accept(String key, String val, Integer arg)
-            throws ConfigurationException {
-        
-    }
+  /** Only allows non-negative values (GTE ZERO). */
+  public static final transient IValidator<Integer> GTE_ZERO =
+      new IntegerValidator() {
 
+        public void accept(String key, String val, Integer arg) {
+          if (arg < 0) throw new ConfigurationException(key, val, "Must be non-negative");
+        }
+      };
+
+  /** Only allows positive values (GT ZERO). */
+  public static final transient IValidator<Integer> GT_ZERO =
+      new IntegerValidator() {
+
+        public void accept(String key, String val, Integer arg) {
+          if (arg <= 0) throw new ConfigurationException(key, val, "Must be positive");
+        }
+      };
+
+  public Integer parse(String key, String val) {
+
+    return Integer.parseInt(val);
+  }
+
+  /** Accepts all values by default. */
+  public void accept(String key, String val, Integer arg) throws ConfigurationException {}
 }

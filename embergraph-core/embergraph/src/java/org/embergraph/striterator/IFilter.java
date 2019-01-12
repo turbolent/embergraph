@@ -28,26 +28,20 @@ import java.util.Iterator;
 
 /**
  * Stackable filter pattern with generics.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <I>
- *            The generic type of the source iterator.
- * @param <E>
- *            The generic type of the elements visited by the source iterator.
- * @param <F>
- *            The generic type of the elements visited by the filtered iterator.
+ * @param <I> The generic type of the source iterator.
+ * @param <E> The generic type of the elements visited by the source iterator.
+ * @param <F> The generic type of the elements visited by the filtered iterator.
  */
 public interface IFilter<I extends Iterator<E>, E, F> extends Serializable {
 
-    /**
-     * Wrap the source iterator with an iterator that applies this filter.
-     * 
-     * @param src
-     *            The source iterator.
-     * 
-     * @return The filtered iterator.
-     */
-    public Iterator<F> filter(I src);
-
+  /**
+   * Wrap the source iterator with an iterator that applies this filter.
+   *
+   * @param src The source iterator.
+   * @return The filtered iterator.
+   */
+  public Iterator<F> filter(I src);
 }

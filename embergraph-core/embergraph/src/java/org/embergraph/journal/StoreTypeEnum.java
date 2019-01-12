@@ -23,44 +23,42 @@ package org.embergraph.journal;
 
 /**
  * The type of store (read/write vs worm).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum StoreTypeEnum {
 
-    /**
-     * Indicates that the store is a WORM (Write Once, Read Many) aka a journal
-     * or a log-structured store.
-     */
-    WORM((byte) 0),
+  /**
+   * Indicates that the store is a WORM (Write Once, Read Many) aka a journal or a log-structured
+   * store.
+   */
+  WORM((byte) 0),
 
-    /**
-     * Indicate that the store is a read/write store. For the read/write store,
-     * records are allocated from allocation blocks and can be reused sometime
-     * after they have been deleted.
-     */
-    RW((byte) 1);
+  /**
+   * Indicate that the store is a read/write store. For the read/write store, records are allocated
+   * from allocation blocks and can be reused sometime after they have been deleted.
+   */
+  RW((byte) 1);
 
-    private StoreTypeEnum(byte b) {
-        this.type = b;
+  private StoreTypeEnum(byte b) {
+    this.type = b;
+  }
+
+  private final byte type;
+
+  public byte getType() {
+    return type;
+  }
+
+  public static StoreTypeEnum valueOf(final byte type) {
+    switch (type) {
+      case 0:
+        return WORM;
+      case 1:
+        return RW;
+      default:
+        throw new IllegalArgumentException();
     }
-
-    private final byte type;
-
-    public byte getType() {
-        return type;
-    }
-
-    public static StoreTypeEnum valueOf(final byte type) {
-        switch (type) {
-        case 0:
-            return WORM;
-        case 1:
-            return RW;
-        default:
-            throw new IllegalArgumentException();
-        }
-    }
-
+  }
 }

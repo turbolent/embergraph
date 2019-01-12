@@ -23,15 +23,12 @@ package org.embergraph.bop;
 
 /**
  * A factory for {@link IVariable}s (used to facilitate unit testing).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IVariableFactory {
 
-    /**
-     * Return a new anonymous variable.
-     */
-    IVariable<?> var();
-    
+  /** Return a new anonymous variable. */
+  IVariable<?> var();
 }

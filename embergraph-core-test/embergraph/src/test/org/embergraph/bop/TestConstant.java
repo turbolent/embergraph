@@ -23,58 +23,49 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-import org.embergraph.bop.Constant;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link Constant}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestConstant extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestConstant() {
-    }
+  /** */
+  public TestConstant() {}
 
-    /**
-     * @param name
-     */
-    public TestConstant(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestConstant(String name) {
+    super(name);
+  }
 
-    public void test_equals() {
-        
-        Constant c = new Constant<Integer>(1);
-        
-        Constant d = new Constant<Integer>(1);
-        
-        Constant e = new Constant<Integer>(3);
+  public void test_equals() {
 
-        Constant f = new Constant<Long>(1L);
+    Constant c = new Constant<Integer>(1);
 
-        Constant g = new Constant<Long>(4L);
+    Constant d = new Constant<Integer>(1);
 
-        // same reference.
-        assertTrue(c.equals(c));
+    Constant e = new Constant<Integer>(3);
 
-        // same value.
-        assertTrue(c.equals(d));
+    Constant f = new Constant<Long>(1L);
 
-        // different value.
-        assertFalse(c.equals(e));
-        
-        // different type, but equivalent value.
-        assertFalse(c.equals(f));
+    Constant g = new Constant<Long>(4L);
 
-        // different type, different value.
-        assertFalse(c.equals(g));
+    // same reference.
+    assertTrue(c.equals(c));
 
-    }
-    
+    // same value.
+    assertTrue(c.equals(d));
+
+    // different value.
+    assertFalse(c.equals(e));
+
+    // different type, but equivalent value.
+    assertFalse(c.equals(f));
+
+    // different type, different value.
+    assertFalse(c.equals(g));
+  }
 }

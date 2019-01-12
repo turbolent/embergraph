@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.rdf.aggregate;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -29,152 +28,131 @@ import org.embergraph.rdf.internal.constraints.CompareBOp;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
 /**
- * Operator reports the minimum observed value over the presented binding sets
- * for the given variable using SPARQL ORDER_BY semantics. Missing values are
- * ignored.
- * <p>
- * Note: MIN (and MAX) are defined in terms of the ORDER_BY semantics for
- * SPARQL. Therefore, this must handle comparisons when the value is not an IV,
- * e.g., using the {@link IVComparator}.
- * 
+ * Operator reports the minimum observed value over the presented binding sets for the given
+ * variable using SPARQL ORDER_BY semantics. Missing values are ignored.
+ *
+ * <p>Note: MIN (and MAX) are defined in terms of the ORDER_BY semantics for SPARQL. Therefore, this
+ * must handle comparisons when the value is not an IV, e.g., using the {@link IVComparator}.
+ *
  * @author thompsonbry
- * 
- *         TODO What is reported if there are no non-null observations?
+ *     <p>TODO What is reported if there are no non-null observations?
  */
-public class MIN extends AggregateBase<IV> implements INeedsMaterialization{
+public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
 
-//    private static final transient Logger log = Logger.getLogger(MIN.class);
+  //    private static final transient Logger log = Logger.getLogger(MIN.class);
 
-    /**
-	 *
-	 */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Provides SPARQL <em>ORDER BY</em> semantics.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/736">
-     *      MIN() malfunction </a>
-     */
-    private static final transient IVComparator comparator = new IVComparator();
+  /**
+   * Provides SPARQL <em>ORDER BY</em> semantics.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/736">MIN() malfunction </a>
+   */
+  private static final transient IVComparator comparator = new IVComparator();
 
-    public MIN(final MIN op) {
-        super(op);
+  public MIN(final MIN op) {
+    super(op);
+  }
+
+  public MIN(final BOp[] args, final Map<String, Object> annotations) {
+    super(args, annotations);
+  }
+
+  public MIN(final boolean distinct, final IValueExpression... expr) {
+    super(distinct, expr);
+  }
+
+  /**
+   * The minimum observed value and initially <code>null</code>.
+   *
+   * <p>Note: This field is guarded by the monitor on the {@link MIN} instance.
+   */
+  private transient IV min = null;
+
+  /** The first error encountered since the last {@link #reset()}. */
+  private transient Throwable firstCause = null;
+
+  public synchronized IV get(final IBindingSet bindingSet) {
+
+    try {
+
+      return doGet(bindingSet);
+
+    } catch (Throwable t) {
+
+      if (firstCause == null) {
+
+        firstCause = t;
+      }
+
+      throw new RuntimeException(t);
     }
+  }
 
-    public MIN(final BOp[] args, final Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+  private IV doGet(final IBindingSet bindingSet) {
 
-    public MIN(final boolean distinct, final IValueExpression...expr) {
-        super(distinct, expr);
-    }
+    for (int i = 0; i < arity(); i++) {
 
-    /**
-     * The minimum observed value and initially <code>null</code>.
-     * <p>
-     * Note: This field is guarded by the monitor on the {@link MIN} instance.
-     */
-    private transient IV min = null;
+      final IValueExpression<IV> expr = (IValueExpression<IV>) get(i);
 
-    /**
-     * The first error encountered since the last {@link #reset()}.
-     */
-    private transient Throwable firstCause = null;
+      final IV iv = expr.get(bindingSet);
 
-    synchronized public IV get(final IBindingSet bindingSet) {
+      if (iv != null) {
 
-        try {
+        /*
+         * Aggregate non-null values.
+         */
 
-            return doGet(bindingSet);
+        if (min == null) {
 
-        } catch (Throwable t) {
+          min = iv;
 
-            if (firstCause == null) {
+        } else {
 
-                firstCause = t;
+          // Note: This is SPARQL LT semantics, not ORDER BY.
+          //                if (CompareBOp.compare(iv, min, CompareOp.LT)) {
 
-            }
+          // SPARQL ORDER_BY semantics
+          if (comparator.compare(iv, min) < 0) {
 
-            throw new RuntimeException(t);
-
+            min = iv;
+          }
         }
+      }
+    }
+    return min;
+  }
 
+  @Override
+  public synchronized void reset() {
+
+    min = null;
+
+    firstCause = null;
+  }
+
+  public synchronized IV done() {
+
+    if (firstCause != null) {
+
+      throw new RuntimeException(firstCause);
     }
 
-    private IV doGet(final IBindingSet bindingSet) {
+    return min;
+  }
 
-        for (int i = 0; i < arity(); i++) {
+  /**
+   * Note: {@link MIN} only works on pretty much anything and uses the same semantics as {@link
+   * CompareBOp} (it is essentially the transitive closure of LT over the column projection of the
+   * inner expression). This probably means that we always need to materialize something unless it
+   * is an inline numeric IV.
+   *
+   * <p>FIXME MikeP: What is the right return value here?
+   */
+  @Override
+  public Requirement getRequirement() {
 
-            final IValueExpression<IV> expr = (IValueExpression<IV>) get(i);
-
-            final IV iv = expr.get(bindingSet);
-
-            if (iv != null) {
-
-                /*
-                 * Aggregate non-null values.
-                 */
-
-                if (min == null) {
-
-                    min = iv;
-
-                } else {
-
-                    // Note: This is SPARQL LT semantics, not ORDER BY.
-//                if (CompareBOp.compare(iv, min, CompareOp.LT)) {
-
-                    // SPARQL ORDER_BY semantics
-                    if (comparator.compare(iv, min) < 0) {
-
-                        min = iv;
-
-                    }
-
-                }
-
-            }
-        }
-        return min;
-
-    }
-
-    @Override
-    synchronized public void reset() {
-
-        min = null;
-
-        firstCause = null;
-
-    }
-
-    synchronized public IV done() {
-
-        if (firstCause != null) {
-
-            throw new RuntimeException(firstCause);
-
-        }
-
-        return min;
-
-    }
-
-    /**
-     * Note: {@link MIN} only works on pretty much anything and uses the same
-     * semantics as {@link CompareBOp} (it is essentially the transitive closure
-     * of LT over the column projection of the inner expression). This probably
-     * means that we always need to materialize something unless it is an inline
-     * numeric IV.
-     *
-     * FIXME MikeP: What is the right return value here?
-     */
-    @Override
-    public Requirement getRequirement() {
-
-        return INeedsMaterialization.Requirement.ALWAYS;
-
-    }
-
+    return INeedsMaterialization.Requirement.ALWAYS;
+  }
 }

@@ -31,24 +31,18 @@ import junit.framework.TestCase2;
  */
 public class TestTimeRange extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestTimeRange() {
-    }
+  /** */
+  public TestTimeRange() {}
 
-    /**
-     * @param arg0
-     */
-    public TestTimeRange(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestTimeRange(String arg0) {
+    super(arg0);
+  }
 
-    /** @todo write tests. */
-    public void test_something() {
-        
-//        fail("No unit tests yet since I have not decided on the desired functionality.");
-        
-    }
-    
+  /** @todo write tests. */
+  public void test_something() {
+
+    //        fail("No unit tests yet since I have not decided on the desired functionality.");
+
+  }
 }

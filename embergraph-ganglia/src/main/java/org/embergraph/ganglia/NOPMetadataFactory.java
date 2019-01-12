@@ -15,27 +15,19 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * NOP factory.
- */
+/** NOP factory. */
 public class NOPMetadataFactory implements IGangliaMetadataFactory {
 
-	/**
-	 * Always returns <code>null</code>.
-	 */
-	@Override
-	public IGangliaMetadataMessage newDecl(String hostName, String metricName,
-			Object value) {
-		// NOP
-		return null;
-	}
+  /** Always returns <code>null</code>. */
+  @Override
+  public IGangliaMetadataMessage newDecl(String hostName, String metricName, Object value) {
+    // NOP
+    return null;
+  }
 
-	/**
-	 * Always returns the caller's argument.
-	 */
-	@Override
-	public IGangliaMetadataMessage resolve(IGangliaMetadataMessage decl) {
-		return decl;
-	}
-
+  /** Always returns the caller's argument. */
+  @Override
+  public IGangliaMetadataMessage resolve(IGangliaMetadataMessage decl) {
+    return decl;
+  }
 }

@@ -21,300 +21,283 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.OWL;
-
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
+import org.openrdf.model.vocabulary.OWL;
 
 /**
  * Test suite for owl:sameAs processing.
- * 
+ *
  * <pre>
  *   owl:sameAs1 : (x owl:sameAs y) -&gt; (y owl:sameAs x)
  *   owl:sameAs1b: (x owl:sameAs y), (y owl:sameAs z) -&gt; (x owl:sameAs z)
  *   owl:sameAs2 : (x owl:sameAs y), (x a z) -&gt; (y a z).
  *   owl:sameAs3 : (x owl:sameAs y), (z a x) -&gt; (z a y).
  * </pre>
- * 
+ *
  * @see RuleOwlSameAs1
  * @see RuleOwlSameAs1b
  * @see RuleOwlSameAs2
  * @see RuleOwlSameAs3
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRuleOwlSameAs extends AbstractRuleTestCase {
 
-    /**
-     * 
-     */
-    public TestRuleOwlSameAs() {
-        super();
+  /** */
+  public TestRuleOwlSameAs() {
+    super();
+  }
+
+  /** @param name */
+  public TestRuleOwlSameAs(String name) {
+    super(name);
+  }
+
+  /**
+   * Test where the data satisifies the rule exactly once.
+   *
+   * <pre>
+   * owl:sameAs1: (x owl:sameAs y) -&gt; (y owl:sameAs x)
+   * </pre>
+   *
+   * @throws Exception
+   */
+  public void test_owlSameAs1() throws Exception {
+
+    AbstractTripleStore store = getStore();
+
+    try {
+
+      URI X = new URIImpl("http://www.foo.org/X");
+      URI Y = new URIImpl("http://www.foo.org/Y");
+
+      IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
+
+      buffer.add(X, OWL.SAMEAS, Y);
+
+      // write on the store.
+      buffer.flush();
+
+      // verify statement(s).
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      final long nbefore = store.getStatementCount();
+
+      final Vocabulary vocab = store.getVocabulary();
+
+      final Rule r = new RuleOwlSameAs1(store.getSPORelation().getNamespace(), vocab);
+
+      // apply the rule.
+      applyRule(store, r, -1 /*solutionCount*/, 1 /*mutationCount*/);
+
+      /*
+       * validate the state of the primary store.
+       */
+
+      // told
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+
+      // entailed
+      assertTrue(store.hasStatement(Y, OWL.SAMEAS, X));
+
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestRuleOwlSameAs(String name) {
-        super(name);
+  /**
+   * Test where the data satisifies the rule exactly once.
+   *
+   * <pre>
+   * owl:sameAs1b: (x owl:sameAs y), (y owl:sameAs z) -&gt; (x owl:sameAs z)
+   * </pre>
+   *
+   * @throws Exception
+   */
+  public void test_owlSameAs1b() throws Exception {
+
+    AbstractTripleStore store = getStore();
+
+    try {
+
+      URI X = new URIImpl("http://www.foo.org/X");
+      URI Y = new URIImpl("http://www.foo.org/Y");
+      URI Z = new URIImpl("http://www.foo.org/Z");
+
+      IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
+
+      buffer.add(X, OWL.SAMEAS, Y);
+      buffer.add(Y, OWL.SAMEAS, Z);
+
+      // write on the store.
+      buffer.flush();
+
+      // verify statement(s).
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(Y, OWL.SAMEAS, Z));
+      final long nbefore = store.getStatementCount();
+
+      final Vocabulary vocab = store.getVocabulary();
+
+      final Rule r = new RuleOwlSameAs1b(store.getSPORelation().getNamespace(), vocab);
+
+      // apply the rule.
+      applyRule(store, r, -1 /*solutionCount*/, 1 /*mutationCount*/);
+
+      /*
+       * validate the state of the primary store.
+       */
+
+      // told
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(Y, OWL.SAMEAS, Z));
+
+      // entailed
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Z));
+
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
+  }
 
-    /**
-     * Test where the data satisifies the rule exactly once.
-     * 
-     * <pre>
-     * owl:sameAs1: (x owl:sameAs y) -&gt; (y owl:sameAs x)
-     * </pre>
-     * @throws Exception 
-     */
-    public void test_owlSameAs1() throws Exception {
+  /**
+   * Test where the data satisifies the rule exactly once.
+   *
+   * <p>Note: This also verifies that we correctly filter out entailments where <code>
+   * a == owl:sameAs</code>.
+   *
+   * <pre>
+   *  owl:sameAs2: (x owl:sameAs y), (x a z) -&gt; (y a z).
+   * </pre>
+   *
+   * @throws Exception
+   */
+  public void test_owlSameAs2() throws Exception {
 
-        AbstractTripleStore store = getStore();
+    AbstractTripleStore store = getStore();
 
-        try {
+    try {
 
-            URI X = new URIImpl("http://www.foo.org/X");
-            URI Y = new URIImpl("http://www.foo.org/Y");
+      URI A = new URIImpl("http://www.foo.org/A");
+      URI Z = new URIImpl("http://www.foo.org/Z");
+      URI X = new URIImpl("http://www.foo.org/X");
+      URI Y = new URIImpl("http://www.foo.org/Y");
 
-            IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-            
-            buffer.add(X, OWL.SAMEAS, Y);
+      IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
 
-            // write on the store.
-            buffer.flush();
+      buffer.add(X, OWL.SAMEAS, Y);
+      buffer.add(X, A, Z);
 
-            // verify statement(s).
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            final long nbefore = store.getStatementCount();
+      // write on the store.
+      buffer.flush();
 
-            final Vocabulary vocab = store.getVocabulary();
+      // verify statement(s).
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(X, A, Z));
+      final long nbefore = store.getStatementCount();
 
-            final Rule r = new RuleOwlSameAs1(store.getSPORelation()
-                    .getNamespace(), vocab);
+      final Vocabulary vocab = store.getVocabulary();
 
-            // apply the rule.
-            applyRule(store, r, -1/*solutionCount*/,1/*mutationCount*/);
+      final Rule r = new RuleOwlSameAs2(store.getSPORelation().getNamespace(), vocab);
 
-            /*
-             * validate the state of the primary store.
-             */
+      // apply the rule.
+      applyRule(store, r, -1 /* solutionCount */, 1 /* mutationCount */);
 
-            // told
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      /*
+       * validate the state of the primary store.
+       */
 
-            // entailed
-            assertTrue(store.hasStatement(Y, OWL.SAMEAS, X));
+      // told
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(X, A, Z));
 
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
+      // entailed
+      assertTrue(store.hasStatement(Y, A, Z));
 
-        } finally {
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
 
-            store.__tearDownUnitTest();
+    } finally {
 
-        }
-        
+      store.__tearDownUnitTest();
     }
+  }
 
-    /**
-     * Test where the data satisifies the rule exactly once.
-     * 
-     * <pre>
-     * owl:sameAs1b: (x owl:sameAs y), (y owl:sameAs z) -&gt; (x owl:sameAs z)
-     * </pre>
-     * @throws Exception 
-     */
-    public void test_owlSameAs1b() throws Exception {
+  /**
+   * Test where the data satisifies the rule exactly once.
+   *
+   * <p>Note: This also verifies that we correctly filter out entailments where <code>
+   * a == owl:sameAs</code>.
+   *
+   * <pre>
+   * owl:sameAs3: (x owl:sameAs y), (z a x) -&gt; (z a y).
+   * </pre>
+   *
+   * @throws Exception
+   */
+  public void test_owlSameAs3() throws Exception {
 
-        AbstractTripleStore store = getStore();
+    AbstractTripleStore store = getStore();
 
-        try {
+    try {
 
-            URI X = new URIImpl("http://www.foo.org/X");
-            URI Y = new URIImpl("http://www.foo.org/Y");
-            URI Z = new URIImpl("http://www.foo.org/Z");
+      URI A = new URIImpl("http://www.foo.org/A");
+      URI Z = new URIImpl("http://www.foo.org/Z");
+      URI X = new URIImpl("http://www.foo.org/X");
+      URI Y = new URIImpl("http://www.foo.org/Y");
 
-            IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-            
-            buffer.add(X, OWL.SAMEAS, Y);
-            buffer.add(Y, OWL.SAMEAS, Z);
+      {
+        IStatementBuffer buffer = new StatementBuffer(store, 100 /* capacity */);
 
-            // write on the store.
-            buffer.flush();
+        buffer.add(X, OWL.SAMEAS, Y);
+        buffer.add(Z, A, X);
 
-            // verify statement(s).
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(Y, OWL.SAMEAS, Z));
-            final long nbefore = store.getStatementCount();
+        // write on the store.
+        buffer.flush();
+      }
 
-            final Vocabulary vocab = store.getVocabulary();
+      // verify statement(s).
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(Z, A, X));
+      final long nbefore = store.getStatementCount();
 
-            final Rule r = new RuleOwlSameAs1b(store.getSPORelation()
-                    .getNamespace(), vocab);
+      final Vocabulary vocab = store.getVocabulary();
 
-            // apply the rule.
-            applyRule(store, r, -1/*solutionCount*/,1/*mutationCount*/);
+      final Rule r = new RuleOwlSameAs3(store.getSPORelation().getNamespace(), vocab);
 
-            /*
-             * validate the state of the primary store.
-             */
+      // apply the rule.
+      applyRule(store, r, -1 /*solutionCount*/, 1 /*mutationCount*/);
 
-            // told
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(Y, OWL.SAMEAS, Z));
+      /*
+       * validate the state of the primary store.
+       */
 
-            // entailed
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Z));
+      // told
+      assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
+      assertTrue(store.hasStatement(Z, A, X));
 
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
+      // entailed
+      assertTrue(store.hasStatement(Z, A, Y));
 
-        } finally {
+      // final #of statements in the store.
+      assertEquals(nbefore + 1, store.getStatementCount());
 
-            store.__tearDownUnitTest();
+    } finally {
 
-        }
-        
+      store.__tearDownUnitTest();
     }
-
-    /**
-     * Test where the data satisifies the rule exactly once.
-     * <p>
-     * Note: This also verifies that we correctly filter out entailments where
-     * <code>a == owl:sameAs</code>.
-     * 
-     * <pre>
-     *  owl:sameAs2: (x owl:sameAs y), (x a z) -&gt; (y a z).
-     * </pre>
-     * @throws Exception 
-     */
-    public void test_owlSameAs2() throws Exception {
-
-        AbstractTripleStore store = getStore();
-
-        try {
-
-            URI A = new URIImpl("http://www.foo.org/A");
-            URI Z = new URIImpl("http://www.foo.org/Z");
-            URI X = new URIImpl("http://www.foo.org/X");
-            URI Y = new URIImpl("http://www.foo.org/Y");
-
-            IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-            
-            buffer.add(X, OWL.SAMEAS, Y);
-            buffer.add(X, A, Z);
-
-            // write on the store.
-            buffer.flush();
-
-            // verify statement(s).
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(X, A, Z));
-            final long nbefore = store.getStatementCount();
-
-            final Vocabulary vocab = store.getVocabulary();
-
-            final Rule r = new RuleOwlSameAs2(store.getSPORelation()
-                    .getNamespace(), vocab);
-
-            // apply the rule.
-            applyRule(store, r, -1/* solutionCount */, 1/* mutationCount */);
-
-            /*
-             * validate the state of the primary store.
-             */
-
-            // told
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(X, A, Z));
-
-            // entailed
-            assertTrue(store.hasStatement(Y, A, Z));
-
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-        
-    }
-    
-    /**
-     * Test where the data satisifies the rule exactly once.
-     * <p>
-     * Note: This also verifies that we correctly filter out entailments where
-     * <code>a == owl:sameAs</code>.
-     * 
-     * <pre>
-     * owl:sameAs3: (x owl:sameAs y), (z a x) -&gt; (z a y).
-     * </pre>
-     * @throws Exception 
-     */
-    public void test_owlSameAs3() throws Exception {
-
-        AbstractTripleStore store = getStore();
-
-        try {
-
-            URI A = new URIImpl("http://www.foo.org/A");
-            URI Z = new URIImpl("http://www.foo.org/Z");
-            URI X = new URIImpl("http://www.foo.org/X");
-            URI Y = new URIImpl("http://www.foo.org/Y");
-
-            {
-
-                IStatementBuffer buffer = new StatementBuffer(store, 100/* capacity */);
-
-                buffer.add(X, OWL.SAMEAS, Y);
-                buffer.add(Z, A, X);
-
-                // write on the store.
-                buffer.flush();
-                
-            }
-            
-            // verify statement(s).
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(Z, A, X));
-            final long nbefore = store.getStatementCount();
-
-            final Vocabulary vocab = store.getVocabulary();
-
-            final Rule r = new RuleOwlSameAs3(store.getSPORelation()
-                    .getNamespace(), vocab);
-            
-            // apply the rule.
-            applyRule(store,r, -1/*solutionCount*/,1/*mutationCount*/);
-
-            /*
-             * validate the state of the primary store.
-             */
-
-            // told
-            assertTrue(store.hasStatement(X, OWL.SAMEAS, Y));
-            assertTrue(store.hasStatement(Z, A, X));
-
-            // entailed
-            assertTrue(store.hasStatement(Z, A, Y));
-
-            // final #of statements in the store.
-            assertEquals(nbefore + 1, store.getStatementCount());
-
-        } finally {
-
-            store.__tearDownUnitTest();
-
-        }
-        
-    }
-    
+  }
 }

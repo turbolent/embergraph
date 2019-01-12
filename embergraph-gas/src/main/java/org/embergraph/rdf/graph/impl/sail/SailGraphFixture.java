@@ -15,49 +15,43 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.impl.sail;
 
+import org.embergraph.rdf.graph.IGASEngine;
+import org.embergraph.rdf.graph.IGraphAccessor;
+import org.embergraph.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
+import org.embergraph.rdf.graph.util.AbstractGraphFixture;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.memory.MemoryStore;
 
-import org.embergraph.rdf.graph.IGASEngine;
-import org.embergraph.rdf.graph.IGraphAccessor;
-import org.embergraph.rdf.graph.impl.sail.SAILGASEngine.SAILGraphAccessor;
-import org.embergraph.rdf.graph.util.AbstractGraphFixture;
-
 public class SailGraphFixture extends AbstractGraphFixture {
-    
-    private Sail sail;
-    
-    public SailGraphFixture() throws SailException {
-        sail = new MemoryStore();
-        sail.initialize();
-    }
-    
-    /**
-     * Return the provisioned {@link Sail}.
-     */
-    public Sail getSail() {
-        return sail;
-    }
 
-    @Override
-    public void destroy() throws SailException {
-        sail.shutDown();
-    }
+  private Sail sail;
 
-    @Override
-    public IGASEngine newGASEngine(int nthreads) {
+  public SailGraphFixture() throws SailException {
+    sail = new MemoryStore();
+    sail.initialize();
+  }
 
-        return new SAILGASEngine(nthreads);
-        
-    }
+  /** Return the provisioned {@link Sail}. */
+  public Sail getSail() {
+    return sail;
+  }
 
-    @Override
-    public IGraphAccessor newGraphAccessor(SailConnection cxn) {
-        
-        return new SAILGraphAccessor(cxn);
-        
-    }
-    
+  @Override
+  public void destroy() throws SailException {
+    sail.shutDown();
+  }
+
+  @Override
+  public IGASEngine newGASEngine(int nthreads) {
+
+    return new SAILGASEngine(nthreads);
+  }
+
+  @Override
+  public IGraphAccessor newGraphAccessor(SailConnection cxn) {
+
+    return new SAILGraphAccessor(cxn);
+  }
 }

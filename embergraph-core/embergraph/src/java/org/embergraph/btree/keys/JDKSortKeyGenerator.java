@@ -21,120 +21,102 @@ import java.text.Collator;
 import java.util.Locale;
 
 /**
- * Implementation that uses the JDK library (does not support compressed sort
- * keys).
- * 
+ * Implementation that uses the JDK library (does not support compressed sort keys).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class JDKSortKeyGenerator implements UnicodeSortKeyGenerator {
 
-    private final Collator collator;
+  private final Collator collator;
 
-    /**
-     * The {@link Locale} used to configure this object.
-     */
-    private final Locale locale;
-    
-    /**
-     * The {@link Locale} used to configure this object.
-     */
-    public Locale getLocale() {
-        
-        return locale;
-        
-    }
-    
-    public JDKSortKeyGenerator(final Locale locale, final Object strength,
-            final DecompositionEnum mode) {
+  /** The {@link Locale} used to configure this object. */
+  private final Locale locale;
 
-        if (locale == null)
-            throw new IllegalArgumentException();
+  /** The {@link Locale} used to configure this object. */
+  public Locale getLocale() {
 
-        this.locale = locale;
-        
-        this.collator = Collator.getInstance(locale);
+    return locale;
+  }
 
-        if (strength != null) {
+  public JDKSortKeyGenerator(
+      final Locale locale, final Object strength, final DecompositionEnum mode) {
 
-            if (strength instanceof Integer) {
+    if (locale == null) throw new IllegalArgumentException();
 
-                collator.setStrength(((Integer) strength).intValue());
+    this.locale = locale;
 
-            } else {
+    this.collator = Collator.getInstance(locale);
 
-                StrengthEnum str = (StrengthEnum) strength;
+    if (strength != null) {
 
-                switch (str) {
+      if (strength instanceof Integer) {
 
-                case Primary:
-                    collator.setStrength(Collator.PRIMARY);
-                    break;
+        collator.setStrength(((Integer) strength).intValue());
 
-                case Secondary:
-                    collator.setStrength(Collator.SECONDARY);
-                    break;
+      } else {
 
-                case Tertiary:
-                    collator.setStrength(Collator.TERTIARY);
-                    break;
+        StrengthEnum str = (StrengthEnum) strength;
 
-                //                    case Quaternary:
-                //                        collator.setStrength(Collator.QUATERNARY);
-                //                        break;
+        switch (str) {
+          case Primary:
+            collator.setStrength(Collator.PRIMARY);
+            break;
 
-                case Identical:
-                    collator.setStrength(Collator.IDENTICAL);
-                    break;
+          case Secondary:
+            collator.setStrength(Collator.SECONDARY);
+            break;
 
-                default:
-                    throw new UnsupportedOperationException("strength="
-                            + strength);
+          case Tertiary:
+            collator.setStrength(Collator.TERTIARY);
+            break;
 
-                }
+            //                    case Quaternary:
+            //                        collator.setStrength(Collator.QUATERNARY);
+            //                        break;
 
-            }
+          case Identical:
+            collator.setStrength(Collator.IDENTICAL);
+            break;
 
+          default:
+            throw new UnsupportedOperationException("strength=" + strength);
         }
-
-        if (mode != null) {
-
-            switch (mode) {
-
-            case None:
-                collator.setDecomposition(Collator.NO_DECOMPOSITION);
-                break;
-
-            case Full:
-                collator.setDecomposition(Collator.FULL_DECOMPOSITION);
-                break;
-
-            case Canonical:
-                collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
-                break;
-
-            default:
-                throw new UnsupportedOperationException("mode=" + mode);
-
-            }
-
-        }
-
+      }
     }
 
-    public void appendSortKey(KeyBuilder keyBuilder, String s) {
+    if (mode != null) {
 
-        /*
-         * Note: the collation key is expressed as signed bytes since that
-         * is how the JDK normally compares byte[]s. Therefore append it
-         * into the key builder using the API that translates signed bytes
-         * to unsigned bytes.
-         */
+      switch (mode) {
+        case None:
+          collator.setDecomposition(Collator.NO_DECOMPOSITION);
+          break;
 
-        final byte[] sortKey = collator.getCollationKey(s).toByteArray();
+        case Full:
+          collator.setDecomposition(Collator.FULL_DECOMPOSITION);
+          break;
 
-        keyBuilder.append( sortKey );
+        case Canonical:
+          collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
+          break;
 
+        default:
+          throw new UnsupportedOperationException("mode=" + mode);
+      }
     }
+  }
 
+  public void appendSortKey(KeyBuilder keyBuilder, String s) {
+
+    /*
+     * Note: the collation key is expressed as signed bytes since that
+     * is how the JDK normally compares byte[]s. Therefore append it
+     * into the key builder using the API that translates signed bytes
+     * to unsigned bytes.
+     */
+
+    final byte[] sortKey = collator.getCollationKey(s).toByteArray();
+
+    keyBuilder.append(sortKey);
+  }
 }

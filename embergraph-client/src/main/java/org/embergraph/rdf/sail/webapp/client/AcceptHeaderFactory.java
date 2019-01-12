@@ -27,13 +27,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp.client;
 
 import info.aduna.lang.FileFormat;
-
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
 import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.BooleanQueryResultParserRegistry;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
@@ -42,287 +40,249 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParserRegistry;
 
 /**
- * Utility class for generating accept heades modeled on
- * {@link RDFFormat#getAcceptParams(Iterable, boolean, RDFFormat)}, but extended
- * to handle {@link TupleQueryResultFormat} using the same base quality value.
- * 
+ * Utility class for generating accept heades modeled on {@link RDFFormat#getAcceptParams(Iterable,
+ * boolean, RDFFormat)}, but extended to handle {@link TupleQueryResultFormat} using the same base
+ * quality value.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- *          TODO Add a parameter for SID support or just specify as the
- *          preferredFormat when the database is using SIDs (or for any embergraph
- *          database if we support SIDs in all modes).
- * 
- *          TODO It would be nice if the formats indicated their compactness and
- *          unicode support capability. Given that other things are equal, we
- *          would prefer a format which was compact and supported unicode.
+ *     <p>TODO Add a parameter for SID support or just specify as the preferredFormat when the
+ *     database is using SIDs (or for any embergraph database if we support SIDs in all modes).
+ *     <p>TODO It would be nice if the formats indicated their compactness and unicode support
+ *     capability. Given that other things are equal, we would prefer a format which was compact and
+ *     supported unicode.
  */
 public class AcceptHeaderFactory {
 
-    private static final int defaultQValue = 10;
+  private static final int defaultQValue = 10;
 
-    /**
-     * 
-     * @param rdfFormats
-     * @param requireContext
-     * @param preferredFormat
-     * @return
-     */
-    public static List<String> getAcceptParams(
-            final Iterable<RDFFormat> rdfFormats,
-            final boolean requireContext,
-            final RDFFormat preferredFormat
-            ) {
-        
-        final List<String> acceptParams = new LinkedList<String>();
+  /**
+   * @param rdfFormats
+   * @param requireContext
+   * @param preferredFormat
+   * @return
+   */
+  public static List<String> getAcceptParams(
+      final Iterable<RDFFormat> rdfFormats,
+      final boolean requireContext,
+      final RDFFormat preferredFormat) {
 
-        for (RDFFormat format : rdfFormats) {
-            // Determine a q-value that reflects the necessity of context
-            // support and the user specified preference
-            int qValue = defaultQValue;
+    final List<String> acceptParams = new LinkedList<String>();
 
-            if (requireContext && !format.supportsContexts()) {
-                // Prefer context-supporting formats over pure triple-formats
-                qValue -= 5;
-            }
+    for (RDFFormat format : rdfFormats) {
+      // Determine a q-value that reflects the necessity of context
+      // support and the user specified preference
+      int qValue = defaultQValue;
 
-            if (preferredFormat != null && !preferredFormat.equals(format)) {
-                // Prefer specified format over other formats
-                qValue -= 2;
-            }
+      if (requireContext && !format.supportsContexts()) {
+        // Prefer context-supporting formats over pure triple-formats
+        qValue -= 5;
+      }
 
-            if (!format.supportsNamespaces()) {
-                // We like reusing namespace prefixes
-                qValue -= 1;
-            }
+      if (preferredFormat != null && !preferredFormat.equals(format)) {
+        // Prefer specified format over other formats
+        qValue -= 2;
+      }
 
-            for (String mimeType : format.getMIMETypes()) {
+      if (!format.supportsNamespaces()) {
+        // We like reusing namespace prefixes
+        qValue -= 1;
+      }
 
-                // Default is the bare mime type.
-                String acceptParam = mimeType;
+      for (String mimeType : format.getMIMETypes()) {
 
-                if (qValue < 10) {
-                
-                    // Annotate with the factional quality score.
-                    acceptParam += ";q=0." + qValue;
-                    
-                }
+        // Default is the bare mime type.
+        String acceptParam = mimeType;
 
-                acceptParams.add(acceptParam);
+        if (qValue < 10) {
 
-            }
-            
+          // Annotate with the factional quality score.
+          acceptParam += ";q=0." + qValue;
         }
 
-        return acceptParams;
-
+        acceptParams.add(acceptParam);
+      }
     }
 
-    /**
-     * Return a set of accept header values annotated with quality scores.
-     * 
-     * @param formats
-     *            The set of formats which can be accepted.
-     * @param preferredFormat
-     *            The preferred format (optional).
-     *            
-     * @return The list of accept header values with quality scores.
-     */
-    public static <T extends FileFormat> List<String> getAcceptParams(
-            final Iterable<T> formats,
-            final T preferredFormat) {
-        
-        final List<String> acceptParams = new LinkedList<String>();
+    return acceptParams;
+  }
 
-        for (T format : formats) {
-            
-            // Determine a q-value that reflects the user specified preference
-            int qValue = defaultQValue;
+  /**
+   * Return a set of accept header values annotated with quality scores.
+   *
+   * @param formats The set of formats which can be accepted.
+   * @param preferredFormat The preferred format (optional).
+   * @return The list of accept header values with quality scores.
+   */
+  public static <T extends FileFormat> List<String> getAcceptParams(
+      final Iterable<T> formats, final T preferredFormat) {
 
-            if (preferredFormat != null && !preferredFormat.equals(format)) {
-                // Prefer specified format over other formats
-                qValue -= 2;
-            }
+    final List<String> acceptParams = new LinkedList<String>();
 
-            for (String mimeType : format.getMIMETypes()) {
+    for (T format : formats) {
 
-                // Default is the bare mime type
-                String acceptParam = mimeType;
+      // Determine a q-value that reflects the user specified preference
+      int qValue = defaultQValue;
 
-                if (qValue < 10) {
-                
-                    // Annotate with the factional quality score.
-                    acceptParam += ";q=0." + qValue;
-                    
-                }
+      if (preferredFormat != null && !preferredFormat.equals(format)) {
+        // Prefer specified format over other formats
+        qValue -= 2;
+      }
 
-                acceptParams.add(acceptParam);
-                
-            }
+      for (String mimeType : format.getMIMETypes()) {
 
+        // Default is the bare mime type
+        String acceptParam = mimeType;
+
+        if (qValue < 10) {
+
+          // Annotate with the factional quality score.
+          acceptParam += ";q=0." + qValue;
         }
 
-        return acceptParams;
-    
-    }
-    
-    /**
-     * Return an accept header which establishes a preference pattern for graph
-     * data. The accept header will not include any formats for which we can not
-     * discover a parser.
-     */
-    public static String getDefaultGraphAcceptHeader(final boolean requireContext) {
-       
-        // Copy into a Set.
-        final Set<RDFFormat> values = new LinkedHashSet<RDFFormat>(
-                RDFFormat.values());
-
-        final RDFParserRegistry registry = RDFParserRegistry.getInstance();
-
-        final Iterator<RDFFormat> itr = values.iterator();
-
-        while (itr.hasNext()) {
-
-            final RDFFormat format = itr.next();
-
-            if (registry.get(format) == null) {
-
-                /*
-                 * Remove any format for which there is no registered parser.
-                 */
-
-                itr.remove();
-
-            }
-
-        }
-        final List<String> list1 = AcceptHeaderFactory.getAcceptParams(values,
-                requireContext, RDFFormat.BINARY);
-
-        return toString(list1);
-        
+        acceptParams.add(acceptParam);
+      }
     }
 
-    /**
-     * Return an accept header which establishes a preference pattern for
-     * solution set data. The accept header will not include any formats for
-     * which we can not discover a parser.
-     * <p>
-     * Note: You CAN NOT just combine the accept headers for boolean results and
-     * solution sets together because the boolean format overlaps the solution
-     * set format (they are both [application/sparql-results+xml] so putting
-     * them together blurs the quality annotations.
-     */
-    public static String getDefaultSolutionsAcceptHeader() {
-       
-        // Copy into a Set.
-        final Set<TupleQueryResultFormat> values = new LinkedHashSet<TupleQueryResultFormat>(
-                TupleQueryResultFormat.values());
-        
-        final TupleQueryResultParserRegistry registry = TupleQueryResultParserRegistry
-                .getInstance();
-        
-        final Iterator<TupleQueryResultFormat> itr = values.iterator();
+    return acceptParams;
+  }
 
-        while (itr.hasNext()) {
+  /**
+   * Return an accept header which establishes a preference pattern for graph data. The accept
+   * header will not include any formats for which we can not discover a parser.
+   */
+  public static String getDefaultGraphAcceptHeader(final boolean requireContext) {
 
-            final TupleQueryResultFormat format = itr.next();
+    // Copy into a Set.
+    final Set<RDFFormat> values = new LinkedHashSet<RDFFormat>(RDFFormat.values());
 
-            if (registry.get(format) == null) {
+    final RDFParserRegistry registry = RDFParserRegistry.getInstance();
 
-                /*
-                 * Remove any format for which there is no registered parser.
-                 * 
-                 * Note: For example, the JSON parser does not exist for openrdf
-                 * 2.6.3.
-                 */
-                
-                itr.remove();
+    final Iterator<RDFFormat> itr = values.iterator();
 
-            }
+    while (itr.hasNext()) {
 
-        }
-        
-        final List<String> list2 = AcceptHeaderFactory.getAcceptParams(values,
-                TupleQueryResultFormat.BINARY);
+      final RDFFormat format = itr.next();
 
-        return toString(list2);
-        
+      if (registry.get(format) == null) {
+
+        /*
+         * Remove any format for which there is no registered parser.
+         */
+
+        itr.remove();
+      }
+    }
+    final List<String> list1 =
+        AcceptHeaderFactory.getAcceptParams(values, requireContext, RDFFormat.BINARY);
+
+    return toString(list1);
+  }
+
+  /**
+   * Return an accept header which establishes a preference pattern for solution set data. The
+   * accept header will not include any formats for which we can not discover a parser.
+   *
+   * <p>Note: You CAN NOT just combine the accept headers for boolean results and solution sets
+   * together because the boolean format overlaps the solution set format (they are both
+   * [application/sparql-results+xml] so putting them together blurs the quality annotations.
+   */
+  public static String getDefaultSolutionsAcceptHeader() {
+
+    // Copy into a Set.
+    final Set<TupleQueryResultFormat> values =
+        new LinkedHashSet<TupleQueryResultFormat>(TupleQueryResultFormat.values());
+
+    final TupleQueryResultParserRegistry registry = TupleQueryResultParserRegistry.getInstance();
+
+    final Iterator<TupleQueryResultFormat> itr = values.iterator();
+
+    while (itr.hasNext()) {
+
+      final TupleQueryResultFormat format = itr.next();
+
+      if (registry.get(format) == null) {
+
+        /*
+         * Remove any format for which there is no registered parser.
+         *
+         * Note: For example, the JSON parser does not exist for openrdf
+         * 2.6.3.
+         */
+
+        itr.remove();
+      }
     }
 
-    /**
-     * Return an accept header which establishes a preference pattern for
-     * boolean data.  The accept header will not include any formats for
-     * which we can not discover a parser.
-     */
-    public static String getDefaultBooleanAcceptHeader() {
+    final List<String> list2 =
+        AcceptHeaderFactory.getAcceptParams(values, TupleQueryResultFormat.BINARY);
 
-        // Copy into a Set.
-        final Set<BooleanQueryResultFormat> values = new LinkedHashSet<BooleanQueryResultFormat>(
-                BooleanQueryResultFormat.values());
-        
-        final BooleanQueryResultParserRegistry registry = BooleanQueryResultParserRegistry
-                .getInstance();
-        
-        final Iterator<BooleanQueryResultFormat> itr = values.iterator();
+    return toString(list2);
+  }
 
-        while (itr.hasNext()) {
+  /**
+   * Return an accept header which establishes a preference pattern for boolean data. The accept
+   * header will not include any formats for which we can not discover a parser.
+   */
+  public static String getDefaultBooleanAcceptHeader() {
 
-            final BooleanQueryResultFormat format = itr.next();
+    // Copy into a Set.
+    final Set<BooleanQueryResultFormat> values =
+        new LinkedHashSet<BooleanQueryResultFormat>(BooleanQueryResultFormat.values());
 
-            if (registry.get(format) == null) {
+    final BooleanQueryResultParserRegistry registry =
+        BooleanQueryResultParserRegistry.getInstance();
 
-                /*
-                 * Remove any format for which there is no registered parser.
-                 */
-                
-                itr.remove();
+    final Iterator<BooleanQueryResultFormat> itr = values.iterator();
 
-            }
+    while (itr.hasNext()) {
 
-        }
-        
-        final List<String> list3 = AcceptHeaderFactory.getAcceptParams(
-                values,
-                BooleanQueryResultFormat.SPARQL);
+      final BooleanQueryResultFormat format = itr.next();
 
-        return toString(list3);
-        
+      if (registry.get(format) == null) {
+
+        /*
+         * Remove any format for which there is no registered parser.
+         */
+
+        itr.remove();
+      }
     }
 
-    /**
-     * Convert into a comma delimited list.
-     * 
-     * @param values
-     *            The values.
-     *            
-     * @return The comma delimited list.
-     */
-    private static String toString(final Iterable<String> values) {
+    final List<String> list3 =
+        AcceptHeaderFactory.getAcceptParams(values, BooleanQueryResultFormat.SPARQL);
 
-        final StringBuilder sb = new StringBuilder();
+    return toString(list3);
+  }
 
-        boolean first = true;
+  /**
+   * Convert into a comma delimited list.
+   *
+   * @param values The values.
+   * @return The comma delimited list.
+   */
+  private static String toString(final Iterable<String> values) {
 
-        for (String s : values) {
+    final StringBuilder sb = new StringBuilder();
 
-            if (first) {
+    boolean first = true;
 
-                first = false;
+    for (String s : values) {
 
-            } else {
+      if (first) {
 
-                sb.append(",");
+        first = false;
 
-            }
+      } else {
 
-            sb.append(s);
-        }
+        sb.append(",");
+      }
 
-        final String s = sb.toString();
-
-        return s;
-
+      sb.append(s);
     }
 
+    final String s = sb.toString();
+
+    return s;
+  }
 }

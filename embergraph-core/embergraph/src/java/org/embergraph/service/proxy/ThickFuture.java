@@ -28,95 +28,88 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * A thick {@link Future}. This is used to communicate the state of a
- * {@link Future} to a remote client. The constructor blocks until the
- * {@link Future} is done and then makes a record of the {@link Future}'s state.
- * That state is serializable as the object returned by the {@link Future} is
- * serializable.
- * 
+ * A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote
+ * client. The constructor blocks until the {@link Future} is done and then makes a record of the
+ * {@link Future}'s state. That state is serializable as the object returned by the {@link Future}
+ * is serializable.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ThickFuture<V> implements Future<V>, Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    
-    private final V outcome;
-    private final boolean cancelled;
-    private final ExecutionException cause;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Awaits the {@link Future} and then makes a serializable record of the
-     * {@link Future}'s state.
-     */
-    public ThickFuture(final Future<V> f) {
-        V outcome = null;
-        boolean cancelled = false;
-        ExecutionException cause = null;
-        try {
-            outcome = f.get();
-        } catch (InterruptedException e) {
-            cancelled = true;
-        } catch (ExecutionException e) {
-            cause = e;
-        }
-        this.outcome = outcome;
-        this.cancelled = cancelled;
-        this.cause = cause;
-    }
-    
-    /**
-     * {@inheritDoc}
-     * <p>
-     * The future can not be cancelled as it is already done.
-     */
-    @Override
-    final public boolean cancel(boolean mayInterruptIfRunning) {
-        // Return [false] since the Future is already done.
-        return false;
-    }
+  private final V outcome;
+  private final boolean cancelled;
+  private final ExecutionException cause;
 
-    @Override
-    final public boolean isCancelled() {
-        return cancelled;
+  /**
+   * Awaits the {@link Future} and then makes a serializable record of the {@link Future}'s state.
+   */
+  public ThickFuture(final Future<V> f) {
+    V outcome = null;
+    boolean cancelled = false;
+    ExecutionException cause = null;
+    try {
+      outcome = f.get();
+    } catch (InterruptedException e) {
+      cancelled = true;
+    } catch (ExecutionException e) {
+      cause = e;
     }
+    this.outcome = outcome;
+    this.cancelled = cancelled;
+    this.cause = cause;
+  }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Always returns <code>true</code>.
-     */
-    @Override
-    final public boolean isDone() {
-        // Always true.
-        return true;
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The future can not be cancelled as it is already done.
+   */
+  @Override
+  public final boolean cancel(boolean mayInterruptIfRunning) {
+    // Return [false] since the Future is already done.
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * The {@link Future} is already done, so this method does not block.
-     */
-    final public V get() throws InterruptedException, ExecutionException {
-        if (cancelled)
-            throw new InterruptedException();
-        if (cause != null)
-            throw cause;
-        return outcome;
-    }
+  @Override
+  public final boolean isCancelled() {
+    return cancelled;
+  }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * The {@link Future} is already done, so this method does not block.
-     */
-    @Override
-    final public V get(long timeout, TimeUnit unit)
-            throws InterruptedException, ExecutionException, TimeoutException {
-        return get();
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Always returns <code>true</code>.
+   */
+  @Override
+  public final boolean isDone() {
+    // Always true.
+    return true;
+  }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The {@link Future} is already done, so this method does not block.
+   */
+  public final V get() throws InterruptedException, ExecutionException {
+    if (cancelled) throw new InterruptedException();
+    if (cause != null) throw cause;
+    return outcome;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The {@link Future} is already done, so this method does not block.
+   */
+  @Override
+  public final V get(long timeout, TimeUnit unit)
+      throws InterruptedException, ExecutionException, TimeoutException {
+    return get();
+  }
 }

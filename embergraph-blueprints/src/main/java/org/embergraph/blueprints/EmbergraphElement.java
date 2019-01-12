@@ -17,133 +17,111 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.blueprints;
 
+import com.tinkerpop.blueprints.Element;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.openrdf.model.URI;
 
-import com.tinkerpop.blueprints.Element;
-
 /**
- * Base class for {@link EmbergraphVertex} and {@link EmbergraphEdge}.  Handles
- * property-related methods.
- * 
- * @author mikepersonick
+ * Base class for {@link EmbergraphVertex} and {@link EmbergraphEdge}. Handles property-related
+ * methods.
  *
+ * @author mikepersonick
  */
 public abstract class EmbergraphElement implements Element {
 
-	private static final List<String> blacklist = Arrays.asList(new String[] {
-		"id", ""	
-	});
-	
-	protected final URI uri;
-	protected final EmbergraphGraph graph;
-	
-	public EmbergraphElement(final URI uri, final EmbergraphGraph graph) {
-		this.uri = uri;
-		this.graph = graph;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public <T> T getProperty(final String property) {
-		
-		return (T) graph.getProperty(uri, property);
-		
-	}
+  private static final List<String> blacklist = Arrays.asList(new String[] {"id", ""});
 
-	@Override
-	public Set<String> getPropertyKeys() {
-		
-		return graph.getPropertyKeys(uri);
-		
-	}
+  protected final URI uri;
+  protected final EmbergraphGraph graph;
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public <T> T removeProperty(final String property) {
+  public EmbergraphElement(final URI uri, final EmbergraphGraph graph) {
+    this.uri = uri;
+    this.graph = graph;
+  }
 
-		return (T) graph.removeProperty(uri, property);
-		
-	}
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T getProperty(final String property) {
 
-	@Override
-	public void setProperty(final String prop, final Object val) {
+    return (T) graph.getProperty(uri, property);
+  }
 
-		if (prop == null || blacklist.contains(prop)) {
-			throw new IllegalArgumentException();
-		}
-		
-		graph.setProperty(uri, prop, val);
+  @Override
+  public Set<String> getPropertyKeys() {
 
-	}
-	
-//	/**
-//	 * Simple extension for multi-valued properties.
-//	 */
-//	public void addProperty(final String prop, final Object val) {
-//	    
-//        if (prop == null || blacklist.contains(prop)) {
-//            throw new IllegalArgumentException();
-//        }
-//        
-//        graph.addProperty(uri, prop, val);
-//	    
-//	}
-//
-//	/**
-//	 * Simple extension for multi-valued properties.
-//	 */
-//    @SuppressWarnings("unchecked")
-//    public <T> List<T> getProperties(final String property) {
-//        
-//        return (List<T>) graph.getProperties(uri, property);
-//        
-//    }
+    return graph.getPropertyKeys(uri);
+  }
 
-	/**
-	 * Generated code.
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((graph == null) ? 0 : graph.hashCode());
-		result = prime * result + ((uri == null) ? 0 : uri.hashCode());
-		return result;
-	}
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> T removeProperty(final String property) {
 
-    /**
-     * Generated code.
-     */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmbergraphElement other = (EmbergraphElement) obj;
-		if (graph == null) {
-			if (other.graph != null)
-				return false;
-		} else if (!graph.equals(other.graph))
-			return false;
-		if (uri == null) {
-			if (other.uri != null)
-				return false;
-		} else if (!uri.equals(other.uri))
-			return false;
-		return true;
-	}
+    return (T) graph.removeProperty(uri, property);
+  }
 
-	@Override
-    public String toString() {
-        return uri.toString();
+  @Override
+  public void setProperty(final String prop, final Object val) {
+
+    if (prop == null || blacklist.contains(prop)) {
+      throw new IllegalArgumentException();
     }
 
+    graph.setProperty(uri, prop, val);
+  }
 
+  //	/**
+  //	 * Simple extension for multi-valued properties.
+  //	 */
+  //	public void addProperty(final String prop, final Object val) {
+  //
+  //        if (prop == null || blacklist.contains(prop)) {
+  //            throw new IllegalArgumentException();
+  //        }
+  //
+  //        graph.addProperty(uri, prop, val);
+  //
+  //	}
+  //
+  //	/**
+  //	 * Simple extension for multi-valued properties.
+  //	 */
+  //    @SuppressWarnings("unchecked")
+  //    public <T> List<T> getProperties(final String property) {
+  //
+  //        return (List<T>) graph.getProperties(uri, property);
+  //
+  //    }
+
+  /** Generated code. */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((graph == null) ? 0 : graph.hashCode());
+    result = prime * result + ((uri == null) ? 0 : uri.hashCode());
+    return result;
+  }
+
+  /** Generated code. */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    EmbergraphElement other = (EmbergraphElement) obj;
+    if (graph == null) {
+      if (other.graph != null) return false;
+    } else if (!graph.equals(other.graph)) return false;
+    if (uri == null) {
+      if (other.uri != null) return false;
+    } else if (!uri.equals(other.uri)) return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return uri.toString();
+  }
 }

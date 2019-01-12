@@ -20,151 +20,135 @@ package org.embergraph.rdf.internal;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
+import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
+import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.store.BD;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.EmbergraphURI;
-import org.embergraph.rdf.store.BD;
-
 /**
- * Example of how to do a custom enum and map that enum over a byte using a 
- * native inline {@link XSDByteIV}. 
+ * Example of how to do a custom enum and map that enum over a byte using a native inline {@link
+ * XSDByteIV}.
  */
 public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtension<V> {
 
-    /**
-     * The datatype URI for the colors enum extension.
-     */
-    public transient static final URI COLOR = new URIImpl(BD.NAMESPACE + "Color");
-    
-    private final EmbergraphURI color;
-    
-    public ColorsEnumExtension(final IDatatypeURIResolver resolver) {
-        
-        this.color = resolver.resolve(COLOR);
-        
-    }
-        
-    public Set<EmbergraphURI> getDatatypes() {
-        
-        final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
-        datatypes.add(color);
-        return datatypes;
-        
-    }
-    
-    /**
-     * Attempts to convert the supplied RDF value into a colors enum 
-     * representation. Tests for a literal value with the correct datatype
-     * that can be converted to one of the colors in the {@link Color} enum
-     * based on the string value of the literal's label.  Each {@link Color}
-     * in the enum maps to a particular byte. This byte is encoded in a
-     * delegate {@link XSDByteIV}, and an {@link LiteralExtensionIV} is returned that
-     * wraps the native type.
-     */
-    public LiteralExtensionIV createIV(final Value value) {
-        
-        if (value instanceof Literal == false)
-            throw new IllegalArgumentException();
-        
-        final Literal l = (Literal) value;
-        
-        if (l.getDatatype() == null || !color.equals(l.getDatatype()))
-            throw new IllegalArgumentException();
-        
-        final String s = value.stringValue();
+  /** The datatype URI for the colors enum extension. */
+  public static final transient URI COLOR = new URIImpl(BD.NAMESPACE + "Color");
 
-        final Color c;
-        try {
-            c = Enum.valueOf(Color.class, s);
-        } catch (IllegalArgumentException ex) {
-            // not a valid color
-            return null;
-        }
-        
-        final AbstractLiteralIV delegate = new XSDNumericIV(c.getByte());
+  private final EmbergraphURI color;
 
-        return new LiteralExtensionIV(delegate, color.getIV());
-        
-    }
-    
-    /**
-     * Attempt to convert the {@link AbstractLiteralIV#byteValue()} back into
-     * a {@link Color}, and then use the string value of the {@link Color} to
-     * create an RDF literal.
-     */
-    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
-        
-        final byte b = iv.getDelegate().byteValue();
-        
-        final Color c = Color.valueOf(b);
-        
-        if (c == null)
-            throw new RuntimeException("bad color got encoded somehow");
-        
-        return (V) vf.createLiteral(c.toString(), color);
-        
-    }
-    
-    /**
-     * Simple demonstration enum for some common colors. Can fit up to 256 enum 
-     * values into an enum projected onto a byte.
-     */
-    static public enum Color {
-        
-        Red((byte) 0),
-        Blue((byte) 1),
-        Green((byte) 2),
-        Yellow((byte) 3),
-        Orange((byte) 4),
-        Purple((byte) 5),
-        Black((byte) 6),
-        White((byte) 7),
-        Brown((byte) 8);
-        
-        private Color(final byte b) {
-            this.b = b;
-        }
-        
-        static final public Color valueOf(final byte b) {
-            switch (b) {
-            case 0:
-                return Red;
-            case 1:
-                return Blue;
-            case 2:
-                return Green;
-            case 3:
-                return Yellow;
-            case 4:
-                return Orange;
-            case 5:
-                return Purple;
-            case 6:
-                return Black;
-            case 7:
-                return White;
-            case 8:
-                return Brown;
-            default:
-                throw new IllegalArgumentException(Byte.toString(b));
-            }
-        }
+  public ColorsEnumExtension(final IDatatypeURIResolver resolver) {
 
-        private final byte b;
-        
-        public byte getByte() {
-            return b;
-        }
-        
+    this.color = resolver.resolve(COLOR);
+  }
+
+  public Set<EmbergraphURI> getDatatypes() {
+
+    final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
+    datatypes.add(color);
+    return datatypes;
+  }
+
+  /**
+   * Attempts to convert the supplied RDF value into a colors enum representation. Tests for a
+   * literal value with the correct datatype that can be converted to one of the colors in the
+   * {@link Color} enum based on the string value of the literal's label. Each {@link Color} in the
+   * enum maps to a particular byte. This byte is encoded in a delegate {@link XSDByteIV}, and an
+   * {@link LiteralExtensionIV} is returned that wraps the native type.
+   */
+  public LiteralExtensionIV createIV(final Value value) {
+
+    if (value instanceof Literal == false) throw new IllegalArgumentException();
+
+    final Literal l = (Literal) value;
+
+    if (l.getDatatype() == null || !color.equals(l.getDatatype()))
+      throw new IllegalArgumentException();
+
+    final String s = value.stringValue();
+
+    final Color c;
+    try {
+      c = Enum.valueOf(Color.class, s);
+    } catch (IllegalArgumentException ex) {
+      // not a valid color
+      return null;
     }
-    
+
+    final AbstractLiteralIV delegate = new XSDNumericIV(c.getByte());
+
+    return new LiteralExtensionIV(delegate, color.getIV());
+  }
+
+  /**
+   * Attempt to convert the {@link AbstractLiteralIV#byteValue()} back into a {@link Color}, and
+   * then use the string value of the {@link Color} to create an RDF literal.
+   */
+  public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
+
+    final byte b = iv.getDelegate().byteValue();
+
+    final Color c = Color.valueOf(b);
+
+    if (c == null) throw new RuntimeException("bad color got encoded somehow");
+
+    return (V) vf.createLiteral(c.toString(), color);
+  }
+
+  /**
+   * Simple demonstration enum for some common colors. Can fit up to 256 enum values into an enum
+   * projected onto a byte.
+   */
+  public static enum Color {
+    Red((byte) 0),
+    Blue((byte) 1),
+    Green((byte) 2),
+    Yellow((byte) 3),
+    Orange((byte) 4),
+    Purple((byte) 5),
+    Black((byte) 6),
+    White((byte) 7),
+    Brown((byte) 8);
+
+    private Color(final byte b) {
+      this.b = b;
+    }
+
+    public static final Color valueOf(final byte b) {
+      switch (b) {
+        case 0:
+          return Red;
+        case 1:
+          return Blue;
+        case 2:
+          return Green;
+        case 3:
+          return Yellow;
+        case 4:
+          return Orange;
+        case 5:
+          return Purple;
+        case 6:
+          return Black;
+        case 7:
+          return White;
+        case 8:
+          return Brown;
+        default:
+          throw new IllegalArgumentException(Byte.toString(b));
+      }
+    }
+
+    private final byte b;
+
+    public byte getByte() {
+      return b;
+    }
+  }
 }

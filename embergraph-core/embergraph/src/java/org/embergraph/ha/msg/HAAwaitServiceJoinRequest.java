@@ -21,62 +21,58 @@ import java.io.Serializable;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class HAAwaitServiceJoinRequest implements IHAAwaitServiceJoinRequest,
-        Serializable {
+public class HAAwaitServiceJoinRequest implements IHAAwaitServiceJoinRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final UUID serviceUUID;
-    private final long timeout;
-    private final TimeUnit unit;
+  private final UUID serviceUUID;
+  private final long timeout;
+  private final TimeUnit unit;
 
-    public HAAwaitServiceJoinRequest(final UUID serviceUUID,
-            final long timeout, final TimeUnit unit) {
+  public HAAwaitServiceJoinRequest(
+      final UUID serviceUUID, final long timeout, final TimeUnit unit) {
 
-        if (serviceUUID == null)
-            throw new IllegalArgumentException();
+    if (serviceUUID == null) throw new IllegalArgumentException();
 
-        if (timeout < 0L)
-            throw new IllegalArgumentException();
+    if (timeout < 0L) throw new IllegalArgumentException();
 
-        if (unit == null)
-            throw new IllegalArgumentException();
+    if (unit == null) throw new IllegalArgumentException();
 
-        this.serviceUUID = serviceUUID;
+    this.serviceUUID = serviceUUID;
 
-        this.timeout = timeout;
+    this.timeout = timeout;
 
-        this.unit = unit;
+    this.unit = unit;
+  }
 
-    }
+  @Override
+  public UUID getServiceUUID() {
 
-    @Override
-    public UUID getServiceUUID() {
+    return serviceUUID;
+  }
 
-        return serviceUUID;
+  @Override
+  public long getTimeout() {
 
-    }
+    return timeout;
+  }
 
-    @Override
-    public long getTimeout() {
+  @Override
+  public TimeUnit getUnit() {
 
-        return timeout;
-        
-    }
+    return unit;
+  }
 
-    @Override
-    public TimeUnit getUnit() {
-        
-        return unit;
-        
-    }
+  @Override
+  public String toString() {
 
-    @Override
-    public String toString() {
-
-        return super.toString() + "{serviceUUID=" + getServiceUUID()
-                + ", timeout=" + getTimeout() + ", unit=" + getUnit() + "}";
-
-    }
-    
+    return super.toString()
+        + "{serviceUUID="
+        + getServiceUUID()
+        + ", timeout="
+        + getTimeout()
+        + ", unit="
+        + getUnit()
+        + "}";
+  }
 }

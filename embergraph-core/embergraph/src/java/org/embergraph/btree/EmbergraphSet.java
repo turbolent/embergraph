@@ -33,240 +33,194 @@ import java.util.SortedSet;
 
 /**
  * A {@link SortedSet} backed by a B+Tree.
- * <p>
- * Note: The {@link EmbergraphMap} has the same concurrency constraints as the
- * {@link BTree} - it is single-threaded for writes and allows concurrent
- * readers.
- * <p>
- * Note: The {@link EmbergraphSet} is actually flyweight wrapper around a
- * {@link EmbergraphMap} whose keys and values are both formed from the values
- * stored in this {@link SortedSet}.
- * <p>
- * Note: Both {@link Set#equals(Object)} and {@link Set#hashCode()} are VERY
- * expensive, but that is how they are defined.
- * 
- * @param E
- *            The generic type for the elements stored in the set.
- * 
+ *
+ * <p>Note: The {@link EmbergraphMap} has the same concurrency constraints as the {@link BTree} - it
+ * is single-threaded for writes and allows concurrent readers.
+ *
+ * <p>Note: The {@link EmbergraphSet} is actually flyweight wrapper around a {@link EmbergraphMap}
+ * whose keys and values are both formed from the values stored in this {@link SortedSet}.
+ *
+ * <p>Note: Both {@link Set#equals(Object)} and {@link Set#hashCode()} are VERY expensive, but that
+ * is how they are defined.
+ *
+ * @param E The generic type for the elements stored in the set.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
 
-    /**
-     * Text of the error message used when there are more than
-     * {@link Integer#MAX_VALUE} entries.
-     */
-    protected static transient final String ERR_TOO_MANY = "Too many entries";
-    
-    private final EmbergraphMap<E, E> map;
+  /** Text of the error message used when there are more than {@link Integer#MAX_VALUE} entries. */
+  protected static final transient String ERR_TOO_MANY = "Too many entries";
 
-    public EmbergraphSet(IIndex ndx) {
+  private final EmbergraphMap<E, E> map;
 
-        map = new EmbergraphMap<E, E>(ndx);
+  public EmbergraphSet(IIndex ndx) {
 
+    map = new EmbergraphMap<E, E>(ndx);
+  }
+
+  /**
+   * Ctor used to wrap a key-range of a {@link EmbergraphMap}.
+   *
+   * @param map The map which will impose the key-range constraints.
+   */
+  EmbergraphSet(EmbergraphMap<E, E> map) {
+
+    if (map == null) throw new IllegalArgumentException();
+
+    this.map = map;
+  }
+
+  public boolean add(E key) {
+
+    E tmp = map.put(key, key);
+
+    // true if this set did not already contain the specified element.
+    return tmp == null;
+  }
+
+  public boolean remove(Object key) {
+
+    E tmp = map.remove(key);
+
+    // true if the set contained the specified element.
+    return tmp != null;
+  }
+
+  public void clear() {
+
+    map.clear();
+  }
+
+  public boolean contains(Object key) {
+
+    return map.containsKey(key);
+  }
+
+  public boolean isEmpty() {
+
+    return map.isEmpty();
+  }
+
+  /**
+   * The #of index entries. When there are more than {@link Integer#MAX_VALUE} entries then this
+   * method will report {@link Integer#MAX_VALUE} entries. If the backing index supports delete
+   * markers then an index scan will be performed in order to count the #of non-deleted index
+   * entries.
+   */
+  public int size() {
+
+    return map.size();
+  }
+
+  /**
+   * The #of non-deleted entries in the map.
+   *
+   * @param exactCount When <code>true</code> the result will be an exact count, which will require
+   *     a full key-range scan if delete markers are enabled for the index.
+   * @return The #of entries in the map. When <i>exactCount</i> is <code>false</code> and delete
+   *     markers are being used, then this will be an upper bound.
+   * @see IRangeQuery#rangeCount(byte[], byte[])
+   */
+  public long rangeCount(boolean exactCount) {
+
+    return map.rangeCount(exactCount);
+  }
+
+  public Iterator<E> iterator() {
+
+    return map.keySet().iterator();
+  }
+
+  /** @todo override with implementation using chunked ordered writes. */
+  public boolean addAll(Collection<? extends E> c) {
+
+    return super.addAll(c);
+  }
+
+  /** @todo override with implementation using chunked ordered reads. */
+  public boolean containsAll(Collection<?> c) {
+
+    return super.containsAll(c);
+  }
+
+  /** @todo override with implementation using chunked ordered writes. */
+  public boolean removeAll(Collection<?> c) {
+
+    return super.removeAll(c);
+  }
+
+  /** @todo override with implementation using chunked ordered writes. */
+  public boolean retainAll(Collection<?> c) {
+
+    return super.retainAll(c);
+  }
+
+  /**
+   * There is no means available to specify a {@link Comparator} for the {@link SortedSet}.
+   * Application keys are first converted into <strong>unsigned</strong> byte[] keys using the
+   * configured {@link ITupleSerializer} for the backing B+Tree. The index order is directly
+   * determined by those keys.
+   *
+   * @return Always returns <code>null</code>.
+   */
+  public final Comparator<? super E> comparator() {
+
+    return null;
+  }
+
+  /** Note: This is written using an {@link ITupleIterator} in order to decode the entry. */
+  @SuppressWarnings("unchecked")
+  public E first() {
+
+    final IIndex ndx = map.getIndex();
+
+    final ITupleIterator itr =
+        ndx.rangeIterator(
+            map.fromKey, map.toKey, 1 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
+
+    if (!itr.hasNext()) {
+
+      throw new NoSuchElementException();
     }
 
-    /**
-     * Ctor used to wrap a key-range of a {@link EmbergraphMap}.
-     * 
-     * @param map
-     *            The map which will impose the key-range constraints.
-     */
-    EmbergraphSet(EmbergraphMap<E, E> map) {
+    return (E) map.tupleSer.deserialize(itr.next());
+  }
 
-        if (map == null)
-            throw new IllegalArgumentException();
+  /** Note: This is written using an {@link ITupleIterator} in order to decode the entry. */
+  @SuppressWarnings("unchecked")
+  public E last() {
 
-        this.map = map;
-        
+    final IIndex ndx = map.getIndex();
+
+    final ITupleIterator itr =
+        ndx.rangeIterator(
+            map.fromKey,
+            map.toKey,
+            1 /* capacity */,
+            IRangeQuery.DEFAULT | IRangeQuery.REVERSE,
+            null /* filter */);
+
+    if (!itr.hasNext()) {
+
+      throw new NoSuchElementException();
     }
 
-    public boolean add(E key) {
-        
-        E tmp = map.put(key, key);
-        
-        // true if this set did not already contain the specified element.
-        return tmp == null;
-        
-    }
+    return (E) map.tupleSer.deserialize(itr.next());
+  }
 
-    public boolean remove(Object key) {
-        
-        E tmp = map.remove(key);
-        
-        // true if the set contained the specified element. 
-        return tmp != null;
+  public SortedSet<E> headSet(E toKey) {
 
-    }
+    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.headMap(toKey));
+  }
 
-    public void clear() {
+  public SortedSet<E> subSet(E fromKey, E toKey) {
 
-        map.clear();
-        
-    }
+    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.subMap(fromKey, toKey));
+  }
 
-    public boolean contains(Object key) {
+  public SortedSet<E> tailSet(E fromKey) {
 
-        return map.containsKey(key);
-        
-    }
-
-    public boolean isEmpty() {
-
-        return map.isEmpty();
-        
-    }
-
-    /**
-     * The #of index entries. When there are more than {@link Integer#MAX_VALUE}
-     * entries then this method will report {@link Integer#MAX_VALUE} entries.
-     * If the backing index supports delete markers then an index scan will be
-     * performed in order to count the #of non-deleted index entries.
-     */
-    public int size() {
-
-        return map.size();
-        
-    }
-
-    /**
-     * The #of non-deleted entries in the map.
-     * 
-     * @param exactCount
-     *            When <code>true</code> the result will be an exact count,
-     *            which will require a full key-range scan if delete markers are
-     *            enabled for the index.
-     * 
-     * @return The #of entries in the map. When <i>exactCount</i> is
-     *         <code>false</code> and delete markers are being used, then this
-     *         will be an upper bound.
-     * 
-     * @see IRangeQuery#rangeCount(byte[], byte[])
-     */
-    public long rangeCount(boolean exactCount) {
-        
-        return map.rangeCount(exactCount);
-        
-    }
-    
-    public Iterator<E> iterator() {
-
-        return map.keySet().iterator();
-        
-    }
-
-    /**
-     * @todo override with implementation using chunked ordered writes.
-     */
-    public boolean addAll(Collection<? extends E> c) {
-
-        return super.addAll(c);
-        
-    }
-
-    /**
-     * @todo override with implementation using chunked ordered reads.
-     */
-    public boolean containsAll(Collection<?> c) {
-
-        return super.containsAll(c);
-        
-    }
-
-    /**
-     * @todo override with implementation using chunked ordered writes.
-     */
-    public boolean removeAll(Collection<?> c) {
-
-        return super.removeAll(c);
-        
-    }
-
-    /**
-     * @todo override with implementation using chunked ordered writes.
-     */
-    public boolean retainAll(Collection<?> c) {
-
-        return super.retainAll(c);
-        
-    }
-
-    /**
-     * There is no means available to specify a {@link Comparator} for the
-     * {@link SortedSet}. Application keys are first converted into
-     * <strong>unsigned</strong> byte[] keys using the configured
-     * {@link ITupleSerializer} for the backing B+Tree. The index order is
-     * directly determined by those keys.
-     * 
-     * @return Always returns <code>null</code>.
-     */
-    final public Comparator<? super E> comparator() {
-
-        return null;
-        
-    }
-
-    /**
-     * Note: This is written using an {@link ITupleIterator} in order to decode
-     * the entry.
-     */ 
-    @SuppressWarnings("unchecked")
-    public E first() {
-
-        final IIndex ndx = map.getIndex();
-        
-        final ITupleIterator itr = ndx.rangeIterator(map.fromKey, map.toKey,
-                1/* capacity */, IRangeQuery.DEFAULT, null/* filter */);
-        
-        if(!itr.hasNext()) {
-            
-            throw new NoSuchElementException();
-            
-        }
-        
-        return (E) map.tupleSer.deserialize(itr.next());
-        
-    }
-
-    /**
-     * Note: This is written using an {@link ITupleIterator} in order to decode
-     * the entry.
-     */ 
-    @SuppressWarnings("unchecked")
-    public E last() {
-
-        final IIndex ndx = map.getIndex();
-        
-        final ITupleIterator itr = ndx.rangeIterator(map.fromKey, map.toKey,
-                1/* capacity */, IRangeQuery.DEFAULT|IRangeQuery.REVERSE, null/* filter */);
-        
-        if(!itr.hasNext()) {
-            
-            throw new NoSuchElementException();
-            
-        }
-        
-        return (E) map.tupleSer.deserialize(itr.next());
-
-    }
-
-    public SortedSet<E> headSet(E toKey) {
-
-        return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.headMap(toKey));
-
-    }
-
-    public SortedSet<E> subSet(E fromKey, E toKey) {
-
-        return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.subMap(fromKey, toKey));
-
-    }
-
-    public SortedSet<E> tailSet(E fromKey) {
-
-        return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.tailMap(fromKey));
-
-    }
-
+    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.tailMap(fromKey));
+  }
 }

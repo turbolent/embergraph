@@ -22,14 +22,13 @@ package org.embergraph.btree;
 
 /**
  * An interface that declares how we access the dirty state of an object.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IDirty {
 
-    public void setDirty(boolean dirty);
+  public void setDirty(boolean dirty);
 
-    public boolean isDirty();
-
+  public boolean isDirty();
 }

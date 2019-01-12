@@ -24,25 +24,23 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-
 /**
  * Vocabulary and namespace for LUBM using the default namespace.
- * 
- * @see http://swat.cse.lehigh.edu/projects/lubm/ 
- * 
+ *
+ * @see http://swat.cse.lehigh.edu/projects/lubm/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LUBMVocabularyDecl implements VocabularyDecl {
 
-    private static final String NAMESPACE = "http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#";
-    
-    static private final URI[] uris = new URI[]{
+  private static final String NAMESPACE = "http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#";
+
+  private static final URI[] uris =
+      new URI[] {
         // namespace
         new URIImpl(NAMESPACE),
         // classes
@@ -122,15 +120,12 @@ public class LUBMVocabularyDecl implements VocabularyDecl {
         new URIImpl(NAMESPACE + "title"),
         new URIImpl(NAMESPACE + "undergraduateDegreeFrom"),
         new URIImpl(NAMESPACE + "worksFor"),
-    };
+      };
 
-    public LUBMVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public LUBMVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

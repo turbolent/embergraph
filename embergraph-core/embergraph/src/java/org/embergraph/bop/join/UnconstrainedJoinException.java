@@ -22,52 +22,40 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.join;
 
 /**
- * An exception thrown when a hash join does not have any join variables and is
- * considering the cross product of two many solutions as a result.
- * <p>
- * This exception normally indicates a problem with the query plan since a hash
- * join without any join variables will consider the full M x N cross product of
- * the solutions. If that cross product is too large, then the join can become
- * CPU bound and the query will make only very slow progress.
+ * An exception thrown when a hash join does not have any join variables and is considering the
+ * cross product of two many solutions as a result.
+ *
+ * <p>This exception normally indicates a problem with the query plan since a hash join without any
+ * join variables will consider the full M x N cross product of the solutions. If that cross product
+ * is too large, then the join can become CPU bound and the query will make only very slow progress.
  *
  * @see HashJoinAnnotations#NO_JOIN_VARS_LIMIT
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class UnconstrainedJoinException extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public UnconstrainedJoinException() {
-    }
+  /** */
+  public UnconstrainedJoinException() {}
 
-    /**
-     * @param message
-     */
-    public UnconstrainedJoinException(String message) {
-        super(message);
-    }
+  /** @param message */
+  public UnconstrainedJoinException(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public UnconstrainedJoinException(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public UnconstrainedJoinException(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public UnconstrainedJoinException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public UnconstrainedJoinException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

@@ -21,9 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-import org.openrdf.model.impl.LiteralImpl;
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
@@ -43,456 +40,455 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
+import org.openrdf.model.impl.LiteralImpl;
+import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test suite for {@link ASTRunFirstRunLastOptimizer}.
- */
+/** Test suite for {@link ASTRunFirstRunLastOptimizer}. */
 public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCase {
 
-    /**
-     * 
+  /** */
+  public TestASTRunFirstRunLastOptimizer() {}
+
+  /** @param name */
+  public TestASTRunFirstRunLastOptimizer(String name) {
+    super(name);
+  }
+
+  /**
+   * Given:
+   *
+   * <pre>
+   * SELECT *
+   *   JoinGroupNode {
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(x),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *     StatementPatternNode(VarNode(a), ConstantNode(TermId(0U)[http://example/a]), ConstantNode(TermId(0U)[http://example/a]), DEFAULT_CONTEXTS)
+   *     StatementPatternNode(VarNode(b), ConstantNode(TermId(0U)[http://example/b]), ConstantNode(TermId(0U)[http://example/b]), DEFAULT_CONTEXTS)
+   *     StatementPatternNode(VarNode(c), ConstantNode(TermId(0U)[http://example/c]), ConstantNode(TermId(0U)[http://example/c]), DEFAULT_CONTEXTS)
+   *       queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runLast=true}
+   *     StatementPatternNode(VarNode(d), ConstantNode(TermId(0U)[http://example/d]), ConstantNode(TermId(0U)[http://example/d]), DEFAULT_CONTEXTS)
+   *     StatementPatternNode(VarNode(e), ConstantNode(TermId(0U)[http://example/e]), ConstantNode(TermId(0U)[http://example/e]), DEFAULT_CONTEXTS)
+   *       queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runFirst=true}
+   *     StatementPatternNode(VarNode(f), ConstantNode(TermId(0U)[http://example/f]), ConstantNode(TermId(0U)[http://example/f]), DEFAULT_CONTEXTS)
+   *     StatementPatternNode(VarNode(g), ConstantNode(TermId(0U)[http://example/g]), ConstantNode(TermId(0U)[http://example/g]), DEFAULT_CONTEXTS)
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(y),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *   }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_runFirst() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    public TestASTRunFirstRunLastOptimizer() {
+    final IBindingSet[] bsets = new IBindingSet[] {};
+
+    final IV a = makeIV(new URIImpl("http://example/a"));
+
+    final IV b = makeIV(new URIImpl("http://example/b"));
+
+    final IV c = makeIV(new URIImpl("http://example/c"));
+
+    final IV d = makeIV(new URIImpl("http://example/d"));
+
+    final IV e = makeIV(new URIImpl("http://example/e"));
+
+    final IV f = makeIV(new URIImpl("http://example/f"));
+
+    final IV g = makeIV(new URIImpl("http://example/g"));
+
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      // pre-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("b"), new ConstantNode(b), new ConstantNode(b)));
+
+      final StatementPatternNode cSPN =
+          new StatementPatternNode(new VarNode("c"), new ConstantNode(c), new ConstantNode(c));
+
+      cSPN.setProperty(QueryHints.RUN_LAST, true);
+
+      where.addChild(cSPN);
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("d"), new ConstantNode(d), new ConstantNode(d)));
+
+      final StatementPatternNode eSPN =
+          new StatementPatternNode(new VarNode("e"), new ConstantNode(e), new ConstantNode(e));
+
+      eSPN.setProperty(QueryHints.RUN_FIRST, true);
+
+      where.addChild(eSPN);
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("f"), new ConstantNode(f), new ConstantNode(f)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("g"), new ConstantNode(g), new ConstantNode(g)));
+
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
-    /**
-     * @param name
-     */
-    public TestASTRunFirstRunLastOptimizer(String name) {
-        super(name);
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
+
+      final JoinGroupNode where = new JoinGroupNode();
+
+      // pre-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      final StatementPatternNode eSPN =
+          new StatementPatternNode(new VarNode("e"), new ConstantNode(e), new ConstantNode(e));
+
+      eSPN.setProperty(QueryHints.RUN_FIRST, true);
+
+      where.addChild(eSPN);
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("b"), new ConstantNode(b), new ConstantNode(b)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("d"), new ConstantNode(d), new ConstantNode(d)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("f"), new ConstantNode(f), new ConstantNode(f)));
+
+      where.addChild(
+          new StatementPatternNode(new VarNode("g"), new ConstantNode(g), new ConstantNode(g)));
+
+      final StatementPatternNode cSPN =
+          new StatementPatternNode(new VarNode("c"), new ConstantNode(c), new ConstantNode(c));
+
+      cSPN.setProperty(QueryHints.RUN_LAST, true);
+
+      where.addChild(cSPN);
+
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
+
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
     }
 
-    /**
-     * Given:
-     * 
-     * <pre>
-     * SELECT * 
-     *   JoinGroupNode {
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(x),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *     StatementPatternNode(VarNode(a), ConstantNode(TermId(0U)[http://example/a]), ConstantNode(TermId(0U)[http://example/a]), DEFAULT_CONTEXTS)
-     *     StatementPatternNode(VarNode(b), ConstantNode(TermId(0U)[http://example/b]), ConstantNode(TermId(0U)[http://example/b]), DEFAULT_CONTEXTS)
-     *     StatementPatternNode(VarNode(c), ConstantNode(TermId(0U)[http://example/c]), ConstantNode(TermId(0U)[http://example/c]), DEFAULT_CONTEXTS)
-     *       queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runLast=true}
-     *     StatementPatternNode(VarNode(d), ConstantNode(TermId(0U)[http://example/d]), ConstantNode(TermId(0U)[http://example/d]), DEFAULT_CONTEXTS)
-     *     StatementPatternNode(VarNode(e), ConstantNode(TermId(0U)[http://example/e]), ConstantNode(TermId(0U)[http://example/e]), DEFAULT_CONTEXTS)
-     *       queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runFirst=true}
-     *     StatementPatternNode(VarNode(f), ConstantNode(TermId(0U)[http://example/f]), ConstantNode(TermId(0U)[http://example/f]), DEFAULT_CONTEXTS)
-     *     StatementPatternNode(VarNode(g), ConstantNode(TermId(0U)[http://example/g]), ConstantNode(TermId(0U)[http://example/g]), DEFAULT_CONTEXTS)
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(y),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *   }
-     * </pre>
+    final IASTOptimizer rewriter = new ASTRunFirstRunLastOptimizer();
+
+    final IQueryNode actual =
+        rewriter
+            .optimize(null /* AST2BOpContext */, new QueryNodeWithBindingSet(given, bsets))
+            .getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  /**
+   * Unit test with non-SP joins. Given:
+   *
+   * <pre>
+   * SELECT *
+   *   JoinGroupNode {
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(x),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *     StatementPatternNode(VarNode(a), ConstantNode(TermId(0U)[http://example/a]), ConstantNode(TermId(0U)[http://example/a]), DEFAULT_CONTEXTS)
+   *     StatementPatternNode(VarNode(b), ConstantNode(TermId(0U)[http://example/b]), ConstantNode(TermId(0U)[http://example/b]), DEFAULT_CONTEXTS)
+   *     {
+   *       StatementPatternNode(VarNode(c), ConstantNode(TermId(0U)[http://example/c]), ConstantNode(TermId(0U)[http://example/c]), DEFAULT_CONTEXTS)
+   *       StatementPatternNode(VarNode(d), ConstantNode(TermId(0U)[http://example/d]), ConstantNode(TermId(0U)[http://example/d]), DEFAULT_CONTEXTS)
+   *     } queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runLast=true}
+   *     SERVICE {
+   *       StatementPatternNode(VarNode(f), ConstantNode(TermId(0U)[http://example/f]), ConstantNode(TermId(0U)[http://example/f]), DEFAULT_CONTEXTS)
+   *       StatementPatternNode(VarNode(e), ConstantNode(TermId(0U)[http://example/e]), ConstantNode(TermId(0U)[http://example/e]), DEFAULT_CONTEXTS)
+   *     } queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runFirst=true}
+   *     StatementPatternNode(VarNode(g), ConstantNode(TermId(0U)[http://example/g]), ConstantNode(TermId(0U)[http://example/g]), DEFAULT_CONTEXTS)
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(y),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
+   *   }
+   * </pre>
+   */
+  @SuppressWarnings("rawtypes")
+  public void test_runFirst2() {
+
+    /*
+     * Note: DO NOT share structures in this test!!!!
      */
-    @SuppressWarnings("rawtypes")
-    public void test_runFirst() {
+    final IBindingSet[] bsets = new IBindingSet[] {};
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+    final IV serviceURI = makeIV(new URIImpl("http://example/service"));
 
-        final IV a = makeIV(new URIImpl("http://example/a"));
-        
-        final IV b = makeIV(new URIImpl("http://example/b"));
-        
-        final IV c = makeIV(new URIImpl("http://example/c"));
+    final IV a = makeIV(new URIImpl("http://example/a"));
 
-        final IV d = makeIV(new URIImpl("http://example/d"));
+    final IV b = makeIV(new URIImpl("http://example/b"));
 
-        final IV e = makeIV(new URIImpl("http://example/e"));
+    final IV c = makeIV(new URIImpl("http://example/c"));
 
-        final IV f = makeIV(new URIImpl("http://example/f"));
+    final IV d = makeIV(new URIImpl("http://example/d"));
 
-        final IV g = makeIV(new URIImpl("http://example/g"));
+    final IV e = makeIV(new URIImpl("http://example/e"));
 
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+    final IV f = makeIV(new URIImpl("http://example/f"));
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+    final IV g = makeIV(new URIImpl("http://example/g"));
 
-            // pre-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("x"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
-            
-            where.addChild(new StatementPatternNode(new VarNode("a"),
-                    new ConstantNode(a), new ConstantNode(a)));
-            
-            where.addChild(new StatementPatternNode(new VarNode("b"),
-                    new ConstantNode(b), new ConstantNode(b)));
+    // The source AST.
+    final QueryRoot given = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
 
-            final StatementPatternNode cSPN = new StatementPatternNode(new VarNode("c"),
-                    new ConstantNode(c), new ConstantNode(c));
-            
-            cSPN.setProperty(QueryHints.RUN_LAST, true);
-            
-            where.addChild(cSPN);
+      final JoinGroupNode where = new JoinGroupNode();
 
-            where.addChild(new StatementPatternNode(new VarNode("d"),
-                    new ConstantNode(d), new ConstantNode(d)));
+      // pre-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-            final StatementPatternNode eSPN = new StatementPatternNode(new VarNode("e"),
-                    new ConstantNode(e), new ConstantNode(e));
-            
-            eSPN.setProperty(QueryHints.RUN_FIRST, true);
-            
-            where.addChild(eSPN);
+      where.addChild(
+          new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
 
-            where.addChild(new StatementPatternNode(new VarNode("f"),
-                    new ConstantNode(f), new ConstantNode(f)));
+      where.addChild(
+          new StatementPatternNode(new VarNode("b"), new ConstantNode(b), new ConstantNode(b)));
 
-            where.addChild(new StatementPatternNode(new VarNode("g"),
-                    new ConstantNode(g), new ConstantNode(g)));
+      {
+        final JoinGroupNode group1 = new JoinGroupNode();
+        where.addChild(group1);
 
-            // post-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("y"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
-            
-            // post-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("z"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-            
-        }
+        group1.setProperty(QueryHints.RUN_LAST, true);
 
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+        group1.addChild(
+            new StatementPatternNode(new VarNode("c"), new ConstantNode(c), new ConstantNode(c)));
 
-            // pre-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("x"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
-            
-            final StatementPatternNode eSPN = new StatementPatternNode(new VarNode("e"),
-                    new ConstantNode(e), new ConstantNode(e));
-            
-            eSPN.setProperty(QueryHints.RUN_FIRST, true);
-            
-            where.addChild(eSPN);
+        group1.addChild(
+            new StatementPatternNode(new VarNode("d"), new ConstantNode(d), new ConstantNode(d)));
+      }
 
-            where.addChild(new StatementPatternNode(new VarNode("a"),
-                    new ConstantNode(a), new ConstantNode(a)));
-            
-            where.addChild(new StatementPatternNode(new VarNode("b"),
-                    new ConstantNode(b), new ConstantNode(b)));
+      {
+        final JoinGroupNode serviceGroup = new JoinGroupNode();
 
-            where.addChild(new StatementPatternNode(new VarNode("d"),
-                    new ConstantNode(d), new ConstantNode(d)));
+        final ServiceNode service = new ServiceNode(new ConstantNode(serviceURI), serviceGroup);
+        where.addChild(service);
 
-            where.addChild(new StatementPatternNode(new VarNode("f"),
-                    new ConstantNode(f), new ConstantNode(f)));
+        serviceGroup.addChild(
+            new StatementPatternNode(new VarNode("e"), new ConstantNode(e), new ConstantNode(e)));
 
-            where.addChild(new StatementPatternNode(new VarNode("g"),
-                    new ConstantNode(g), new ConstantNode(g)));
+        serviceGroup.addChild(
+            new StatementPatternNode(new VarNode("f"), new ConstantNode(f), new ConstantNode(f)));
 
-            final StatementPatternNode cSPN = new StatementPatternNode(new VarNode("c"),
-                    new ConstantNode(c), new ConstantNode(c));
-            
-            cSPN.setProperty(QueryHints.RUN_LAST, true);
-            
-            where.addChild(cSPN);
+        service.setProperty(QueryHints.RUN_FIRST, true);
+      }
 
-            // post-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("y"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
-            
-            // post-filter
-            where.addChild(new FilterNode(
-            		new FunctionNode(FunctionRegistry.GT, null,
-            				new ValueExpressionNode[] {
-            					new VarNode("z"),
-            					new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-            		})));
+      where.addChild(
+          new StatementPatternNode(new VarNode("g"), new ConstantNode(g), new ConstantNode(g)));
 
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-        final IASTOptimizer rewriter = new ASTRunFirstRunLastOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(null/* AST2BOpContext */,
-              new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-        assertSameAST(expected, actual);
-
+      given.setProjection(projection);
+      given.setWhereClause(where);
     }
 
-    /**
-     * Unit test with non-SP joins.
-     * Given:
-     * 
-     * <pre>
-     * SELECT * 
-     *   JoinGroupNode {
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(x),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *     StatementPatternNode(VarNode(a), ConstantNode(TermId(0U)[http://example/a]), ConstantNode(TermId(0U)[http://example/a]), DEFAULT_CONTEXTS)
-     *     StatementPatternNode(VarNode(b), ConstantNode(TermId(0U)[http://example/b]), ConstantNode(TermId(0U)[http://example/b]), DEFAULT_CONTEXTS)
-     *     {
-     *       StatementPatternNode(VarNode(c), ConstantNode(TermId(0U)[http://example/c]), ConstantNode(TermId(0U)[http://example/c]), DEFAULT_CONTEXTS)
-     *       StatementPatternNode(VarNode(d), ConstantNode(TermId(0U)[http://example/d]), ConstantNode(TermId(0U)[http://example/d]), DEFAULT_CONTEXTS)
-     *     } queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runLast=true}
-     *     SERVICE {
-     *       StatementPatternNode(VarNode(f), ConstantNode(TermId(0U)[http://example/f]), ConstantNode(TermId(0U)[http://example/f]), DEFAULT_CONTEXTS)
-     *       StatementPatternNode(VarNode(e), ConstantNode(TermId(0U)[http://example/e]), ConstantNode(TermId(0U)[http://example/e]), DEFAULT_CONTEXTS)
-     *     } queryHints={org.embergraph.rdf.sparql.ast.QueryHints.runFirst=true}
-     *     StatementPatternNode(VarNode(g), ConstantNode(TermId(0U)[http://example/g]), ConstantNode(TermId(0U)[http://example/g]), DEFAULT_CONTEXTS)
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(y),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *     FILTER( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z),ConstantNode(TermId(0U)[0]))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.w3.org/2005/xpath-functions#greater-than] )
-     *   }
-     * </pre>
-     */
-    @SuppressWarnings("rawtypes")
-    public void test_runFirst2() {
+    // The expected AST after the rewrite.
+    final QueryRoot expected = new QueryRoot(QueryType.SELECT);
+    {
+      final ProjectionNode projection = new ProjectionNode();
+      projection.addProjectionVar(new VarNode("*"));
 
-        /*
-         * Note: DO NOT share structures in this test!!!!
-         */
-        final IBindingSet[] bsets = new IBindingSet[]{};
+      final JoinGroupNode where = new JoinGroupNode();
 
-        final IV serviceURI = makeIV(new URIImpl("http://example/service"));
+      // pre-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-        final IV a = makeIV(new URIImpl("http://example/a"));
-        
-        final IV b = makeIV(new URIImpl("http://example/b"));
-        
-        final IV c = makeIV(new URIImpl("http://example/c"));
+      {
+        final JoinGroupNode serviceGroup = new JoinGroupNode();
 
-        final IV d = makeIV(new URIImpl("http://example/d"));
+        final ServiceNode service = new ServiceNode(new ConstantNode(serviceURI), serviceGroup);
 
-        final IV e = makeIV(new URIImpl("http://example/e"));
+        where.addChild(service);
 
-        final IV f = makeIV(new URIImpl("http://example/f"));
+        serviceGroup.addChild(
+            new StatementPatternNode(new VarNode("e"), new ConstantNode(e), new ConstantNode(e)));
 
-        final IV g = makeIV(new URIImpl("http://example/g"));
+        serviceGroup.addChild(
+            new StatementPatternNode(new VarNode("f"), new ConstantNode(f), new ConstantNode(f)));
 
-        // The source AST.
-        final QueryRoot given = new QueryRoot(QueryType.SELECT);
-        {
+        service.setProperty(QueryHints.RUN_FIRST, true);
+      }
 
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
+      where.addChild(
+          new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
 
-            // pre-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("x"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
+      where.addChild(
+          new StatementPatternNode(new VarNode("b"), new ConstantNode(b), new ConstantNode(b)));
 
-            where.addChild(new StatementPatternNode(new VarNode("a"),
-                    new ConstantNode(a), new ConstantNode(a)));
-            
-            where.addChild(new StatementPatternNode(new VarNode("b"),
-                    new ConstantNode(b), new ConstantNode(b)));
+      where.addChild(
+          new StatementPatternNode(new VarNode("g"), new ConstantNode(g), new ConstantNode(g)));
 
-            {
-                final JoinGroupNode group1 = new JoinGroupNode();
-                where.addChild(group1);
+      {
+        final JoinGroupNode group1 = new JoinGroupNode();
+        where.addChild(group1);
 
-                group1.setProperty(QueryHints.RUN_LAST, true);
+        group1.addChild(
+            new StatementPatternNode(new VarNode("c"), new ConstantNode(c), new ConstantNode(c)));
 
-                group1.addChild(new StatementPatternNode(new VarNode("c"),
-                        new ConstantNode(c), new ConstantNode(c)));
+        group1.addChild(
+            new StatementPatternNode(new VarNode("d"), new ConstantNode(d), new ConstantNode(d)));
 
-                group1.addChild(new StatementPatternNode(new VarNode("d"),
-                        new ConstantNode(d), new ConstantNode(d)));
-            }
+        group1.setProperty(QueryHints.RUN_LAST, true);
+      }
 
-            {
-                
-                final JoinGroupNode serviceGroup = new JoinGroupNode();
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-                final ServiceNode service = new ServiceNode(new ConstantNode(
-                        serviceURI), serviceGroup);
-                where.addChild(service);
+      // post-filter
+      where.addChild(
+          new FilterNode(
+              new FunctionNode(
+                  FunctionRegistry.GT,
+                  null,
+                  new ValueExpressionNode[] {
+                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
+                  })));
 
-                serviceGroup.addChild(new StatementPatternNode(
-                        new VarNode("e"), new ConstantNode(e),
-                        new ConstantNode(e)));
-
-                serviceGroup.addChild(new StatementPatternNode(
-                        new VarNode("f"), new ConstantNode(f),
-                        new ConstantNode(f)));
-
-                service.setProperty(QueryHints.RUN_FIRST, true);
-
-            }
-            
-            where.addChild(new StatementPatternNode(new VarNode("g"),
-                    new ConstantNode(g), new ConstantNode(g)));
-
-            // post-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("y"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
-            
-            // post-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("z"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
-            
-            given.setProjection(projection);
-            given.setWhereClause(where);
-
-        }
-
-        // The expected AST after the rewrite.
-        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
-        {
-            
-            final ProjectionNode projection = new ProjectionNode();
-            projection.addProjectionVar(new VarNode("*"));
-            
-            final JoinGroupNode where = new JoinGroupNode();
-
-            // pre-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("x"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
-            
-            {
-             
-                final JoinGroupNode serviceGroup = new JoinGroupNode();
-
-                final ServiceNode service = new ServiceNode(new ConstantNode(
-                        serviceURI), serviceGroup);
-
-                where.addChild(service);
-
-                serviceGroup.addChild(new StatementPatternNode(
-                        new VarNode("e"), new ConstantNode(e),
-                        new ConstantNode(e)));
-
-                serviceGroup.addChild(new StatementPatternNode(
-                        new VarNode("f"), new ConstantNode(f),
-                        new ConstantNode(f)));
-
-                service.setProperty(QueryHints.RUN_FIRST, true);
-
-            }
-
-            where.addChild(new StatementPatternNode(new VarNode("a"),
-                    new ConstantNode(a), new ConstantNode(a)));
-
-            where.addChild(new StatementPatternNode(new VarNode("b"),
-                    new ConstantNode(b), new ConstantNode(b)));
-
-            where.addChild(new StatementPatternNode(new VarNode("g"),
-                    new ConstantNode(g), new ConstantNode(g)));
-
-            {
-
-                final JoinGroupNode group1 = new JoinGroupNode();
-                where.addChild(group1);
-
-                group1.addChild(new StatementPatternNode(new VarNode("c"),
-                        new ConstantNode(c), new ConstantNode(c)));
-
-                group1.addChild(new StatementPatternNode(new VarNode("d"),
-                        new ConstantNode(d), new ConstantNode(d)));
-
-                group1.setProperty(QueryHints.RUN_LAST, true);
-
-            }
-
-            // post-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("y"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
-            
-            // post-filter
-            where.addChild(new FilterNode(
-                    new FunctionNode(FunctionRegistry.GT, null,
-                            new ValueExpressionNode[] {
-                                new VarNode("z"),
-                                new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                    })));
-
-            expected.setProjection(projection);
-            expected.setWhereClause(where);
-            
-        }
-
-        final IASTOptimizer rewriter = new ASTRunFirstRunLastOptimizer();
-        
-        final IQueryNode actual = rewriter.optimize(null/* AST2BOpContext */,
-              new QueryNodeWithBindingSet(given, bsets)).getQueryNode();
-
-        assertSameAST(expected, actual);
-
+      expected.setProjection(projection);
+      expected.setWhereClause(where);
     }
-    
 
-//    private StatementPatternNode newStatementPatternNode(
-//            final TermNode s, final TermNode p, final TermNode o, 
-//            final long cardinality) {
-//        
-//        return newStatementPatternNode(s, p, o, cardinality, false);
-//        
-//    }
-//        
-//    private StatementPatternNode newStatementPatternNode(
-//            final TermNode s, final TermNode p, final TermNode o, 
-//            final long cardinality, final boolean optional) {
-//        
-//        final StatementPatternNode sp = new StatementPatternNode(s, p, o);
-//        
-//        sp.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
-//        
-//        if (optional) {
-//            
-//            sp.setOptional(true);
-//            
-//        }
-//        
-//        return sp;
-//        
-//    }
+    final IASTOptimizer rewriter = new ASTRunFirstRunLastOptimizer();
+
+    final IQueryNode actual =
+        rewriter
+            .optimize(null /* AST2BOpContext */, new QueryNodeWithBindingSet(given, bsets))
+            .getQueryNode();
+
+    assertSameAST(expected, actual);
+  }
+
+  //    private StatementPatternNode newStatementPatternNode(
+  //            final TermNode s, final TermNode p, final TermNode o,
+  //            final long cardinality) {
+  //
+  //        return newStatementPatternNode(s, p, o, cardinality, false);
+  //
+  //    }
+  //
+  //    private StatementPatternNode newStatementPatternNode(
+  //            final TermNode s, final TermNode p, final TermNode o,
+  //            final long cardinality, final boolean optional) {
+  //
+  //        final StatementPatternNode sp = new StatementPatternNode(s, p, o);
+  //
+  //        sp.setProperty(Annotations.ESTIMATED_CARDINALITY, cardinality);
+  //
+  //        if (optional) {
+  //
+  //            sp.setOptional(true);
+  //
+  //        }
+  //
+  //        return sp;
+  //
+  //    }
 
 }

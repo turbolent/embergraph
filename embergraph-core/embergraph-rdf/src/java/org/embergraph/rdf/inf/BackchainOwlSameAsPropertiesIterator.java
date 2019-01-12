@@ -24,23 +24,20 @@ package org.embergraph.rdf.inf;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
- * Provides backward chaining for property collection and reverse property
- * collection on owl:sameAs for all access paths.
- * <p>
- * Note:
- * 
+ * Provides backward chaining for property collection and reverse property collection on owl:sameAs
+ * for all access paths.
+ *
+ * <p>Note:
+ *
  * @see BackchainOwlSameAsPropertiesSPOIterator
  * @see BackchainOwlSameAsPropertiesSPIterator
  * @see BackchainOwlSameAsPropertiesPOIterator
@@ -48,147 +45,119 @@ import org.embergraph.striterator.IKeyOrder;
  * @see InferenceEngine
  * @see InferenceEngine.Options
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
- * @version $Id: BackchainOwlSameAsPropertiesIterator.java,v 1.2 2008/03/20
- *          04:05:51 mrpersonick Exp $
+ * @version $Id: BackchainOwlSameAsPropertiesIterator.java,v 1.2 2008/03/20 04:05:51 mrpersonick Exp
+ *     $
  */
 public class BackchainOwlSameAsPropertiesIterator implements IChunkedOrderedIterator<ISPO> {
-    
-    /**
-     * Enables record of stack traces for callers and verification that the
-     * iterator is closed.
-     */
-    private static final boolean RECORD_STACK_TRACES = false;
-    
-    private static final Logger log =
-            Logger.getLogger(BackchainOwlSameAsPropertiesIterator.class);
 
-    private boolean closed = false;
-    
-    private String stack;
+  /** Enables record of stack traces for callers and verification that the iterator is closed. */
+  private static final boolean RECORD_STACK_TRACES = false;
 
-    @Override
-    protected void finalize() throws Throwable {
-        
-        super.finalize();
-        
-        if (!closed) {
-            
-            log
-                    .error("DANGER! Someone needs to close this iterator correctly.\n"
-                            + (stack != null ? stack : ""));
-            
-        }
-        
+  private static final Logger log = Logger.getLogger(BackchainOwlSameAsPropertiesIterator.class);
+
+  private boolean closed = false;
+
+  private String stack;
+
+  @Override
+  protected void finalize() throws Throwable {
+
+    super.finalize();
+
+    if (!closed) {
+
+      log.error(
+          "DANGER! Someone needs to close this iterator correctly.\n"
+              + (stack != null ? stack : ""));
     }
+  }
 
-    private IChunkedOrderedIterator<ISPO> delegate;
+  private IChunkedOrderedIterator<ISPO> delegate;
 
-    /**
-     * Create an iterator that will visit all statements in the source iterator
-     * and also backchain any entailments that would have resulted from
-     * owl:sameAs {2,3}.
-     * 
-     * @param src
-     *            The source iterator. {@link #nextChunk()} will sort statements
-     *            into the {@link IKeyOrder} reported by this iterator (as long
-     *            as the {@link IKeyOrder} is non-<code>null</code>).
-     * @param s
-     *            The subject of the triple pattern.
-     * @param p
-     *            The predicate of the triple pattern.
-     * @param o
-     *            The object of the triple pattern.
-     * @param db
-     *            The database from which we will read the distinct subject
-     *            identifiers (iff this is an all unbound triple pattern).
-     * @param sameAs
-     *            The term identifier that corresponds to owl:sameAs for the
-     *            database.
-     */
-    public BackchainOwlSameAsPropertiesIterator(
-            IChunkedOrderedIterator<ISPO> src, IV s, IV p, IV o,
-            AbstractTripleStore db, final IV sameAs) {
+  /**
+   * Create an iterator that will visit all statements in the source iterator and also backchain any
+   * entailments that would have resulted from owl:sameAs {2,3}.
+   *
+   * @param src The source iterator. {@link #nextChunk()} will sort statements into the {@link
+   *     IKeyOrder} reported by this iterator (as long as the {@link IKeyOrder} is non-<code>null
+   *     </code>).
+   * @param s The subject of the triple pattern.
+   * @param p The predicate of the triple pattern.
+   * @param o The object of the triple pattern.
+   * @param db The database from which we will read the distinct subject identifiers (iff this is an
+   *     all unbound triple pattern).
+   * @param sameAs The term identifier that corresponds to owl:sameAs for the database.
+   */
+  public BackchainOwlSameAsPropertiesIterator(
+      IChunkedOrderedIterator<ISPO> src,
+      IV s,
+      IV p,
+      IV o,
+      AbstractTripleStore db,
+      final IV sameAs) {
 
-        if (s != null && o != null) {
-            
-            this.delegate =
-                    new BackchainOwlSameAsPropertiesSPOIterator(
-                            src, s, p, o, db, sameAs);
-            
-        } else if (s != null && o == null) {
-            
-            this.delegate =
-                    new BackchainOwlSameAsPropertiesSPIterator(
-                            src, s, p, db, sameAs);
-            
-        } else if (s == null && o != null) {
-            
-            this.delegate =
-                    new BackchainOwlSameAsPropertiesPOIterator(
-                            src, p, o, db, sameAs);
-            
-        } else if (s == null && o == null) {
-            
-            this.delegate =
-                    new BackchainOwlSameAsPropertiesPIterator(
-                            src, p, db, sameAs);
-            
-        } else throw new AssertionError();
-        
-        if (RECORD_STACK_TRACES) {
-         
-            StringWriter sw = new StringWriter();
-            
-            new Exception("Stack trace").printStackTrace(new PrintWriter(sw));
-            
-            stack = sw.toString();
-            
-        }
-        
+    if (s != null && o != null) {
+
+      this.delegate = new BackchainOwlSameAsPropertiesSPOIterator(src, s, p, o, db, sameAs);
+
+    } else if (s != null && o == null) {
+
+      this.delegate = new BackchainOwlSameAsPropertiesSPIterator(src, s, p, db, sameAs);
+
+    } else if (s == null && o != null) {
+
+      this.delegate = new BackchainOwlSameAsPropertiesPOIterator(src, p, o, db, sameAs);
+
+    } else if (s == null && o == null) {
+
+      this.delegate = new BackchainOwlSameAsPropertiesPIterator(src, p, db, sameAs);
+
+    } else throw new AssertionError();
+
+    if (RECORD_STACK_TRACES) {
+
+      StringWriter sw = new StringWriter();
+
+      new Exception("Stack trace").printStackTrace(new PrintWriter(sw));
+
+      stack = sw.toString();
     }
+  }
 
-    public IKeyOrder<ISPO> getKeyOrder() {
-        
-        return delegate.getKeyOrder();
-        
-    }
+  public IKeyOrder<ISPO> getKeyOrder() {
 
-    public boolean hasNext() {
-        
-        return delegate.hasNext();
-        
-    }
+    return delegate.getKeyOrder();
+  }
 
-    public ISPO next() {
-        
-        return delegate.next();
-        
-    }
+  public boolean hasNext() {
 
-    public ISPO[] nextChunk() {
-        
-        return delegate.nextChunk();
-        
-    }
+    return delegate.hasNext();
+  }
 
-    public ISPO[] nextChunk(IKeyOrder<ISPO> keyOrder) {
-        
-        return delegate.nextChunk(keyOrder);
-        
-    }
+  public ISPO next() {
 
-    public void close() {
+    return delegate.next();
+  }
 
-        delegate.close();
-        
-        closed = true;
-        
-    }
+  public ISPO[] nextChunk() {
 
-    public void remove() {
-        
-        delegate.remove();
-        
-    }
+    return delegate.nextChunk();
+  }
 
+  public ISPO[] nextChunk(IKeyOrder<ISPO> keyOrder) {
+
+    return delegate.nextChunk(keyOrder);
+  }
+
+  public void close() {
+
+    delegate.close();
+
+    closed = true;
+  }
+
+  public void remove() {
+
+    delegate.remove();
+  }
 }

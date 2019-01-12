@@ -23,92 +23,84 @@ import java.util.zip.Deflater;
 
 /**
  * Registration pattern for {@link IRecordCompressor} implementations.
- * 
+ *
  * @author Martyn Cutcher
  */
 public class CompressorRegistry {
-	
-    /**
-     * Key for {@link Deflater} compression with BEST SPEED.
-     * 
-     * @see RecordCompressor
-     */
-    final public static String DEFLATE_BEST_SPEED = "DBS"; 
 
-    /**
-     * Key for {@link Deflater} compression with BEST COMPRESSION.
-     * 
-     * @see RecordCompressor
-     */
-    final public static String DEFLATE_BEST_COMPRESSION = "DBC";
-    
-    /**
-     * Key for GZIP compression.
-     * 
-     * @see GZipCompressor
-     */
-    final public static String GZIP = "GZIP";
-    
-    /**
-     * Key for no compression.
-     * <p>
-     * Note: <code>null</code> is more efficient than the
-     * {@link NOPRecordCompressor} since it avoids all copy for all
-     * {@link IRecordCompressor} methods.
-     * 
-     * @see NOPRecordCompressor
-     */
-    final public static String NOP = "NOP";
+  /**
+   * Key for {@link Deflater} compression with BEST SPEED.
+   *
+   * @see RecordCompressor
+   */
+  public static final String DEFLATE_BEST_SPEED = "DBS";
 
-    private static CompressorRegistry DEFAULT = new CompressorRegistry();
+  /**
+   * Key for {@link Deflater} compression with BEST COMPRESSION.
+   *
+   * @see RecordCompressor
+   */
+  public static final String DEFLATE_BEST_COMPRESSION = "DBC";
 
-    static public CompressorRegistry getInstance() {
+  /**
+   * Key for GZIP compression.
+   *
+   * @see GZipCompressor
+   */
+  public static final String GZIP = "GZIP";
 
-        return DEFAULT;
+  /**
+   * Key for no compression.
+   *
+   * <p>Note: <code>null</code> is more efficient than the {@link NOPRecordCompressor} since it
+   * avoids all copy for all {@link IRecordCompressor} methods.
+   *
+   * @see NOPRecordCompressor
+   */
+  public static final String NOP = "NOP";
 
+  private static CompressorRegistry DEFAULT = new CompressorRegistry();
+
+  public static CompressorRegistry getInstance() {
+
+    return DEFAULT;
+  }
+
+  private final ConcurrentHashMap<String, IRecordCompressor> compressors =
+      new ConcurrentHashMap<String, IRecordCompressor>();
+
+  private CompressorRegistry() {
+    add(DEFLATE_BEST_SPEED, new RecordCompressor(Deflater.BEST_SPEED));
+    add(DEFLATE_BEST_COMPRESSION, new RecordCompressor(Deflater.BEST_COMPRESSION));
+    add(GZIP, new GZipCompressor());
+    add(NOP, new NOPRecordCompressor());
+  }
+
+  /**
+   * Global hook to allow customized compression strategies
+   *
+   * @param key
+   * @param compressor
+   */
+  public void add(final String key, final IRecordCompressor compressor) {
+
+    if (compressors.putIfAbsent(key, compressor) != null) {
+
+      throw new UnsupportedOperationException("Already declared: " + key);
     }
+  }
 
-    final private ConcurrentHashMap<String, IRecordCompressor> compressors = new ConcurrentHashMap<String, IRecordCompressor>();
-	
-	private CompressorRegistry() {
-		add(DEFLATE_BEST_SPEED, new RecordCompressor(Deflater.BEST_SPEED));
-		add(DEFLATE_BEST_COMPRESSION, new RecordCompressor(Deflater.BEST_COMPRESSION));
-		add(GZIP, new GZipCompressor());
-		add(NOP, new NOPRecordCompressor());
-	}
-	
-    /**
-     * Global hook to allow customized compression strategies
-     * 
-     * @param key
-     * @param compressor
-     */
-    public void add(final String key, final IRecordCompressor compressor) {
+  /**
+   * Return the {@link IRecordCompressor} registered under that key (if any).
+   *
+   * @param key The key (optional - may be <code>null</code>).
+   * @return The {@link IRecordCompressor} -or- <code>null</code> if the key is <code>null</code> or
+   *     if there is nothing registered under that key.
+   */
+  public IRecordCompressor get(final String key) {
 
-        if (compressors.putIfAbsent(key, compressor) != null) {
+    if (key == null) return null;
 
-            throw new UnsupportedOperationException("Already declared: " + key);
-
-        }
-        
-    }
-
-    /**
-     * Return the {@link IRecordCompressor} registered under that key (if any).
-     * 
-     * @param key
-     *            The key (optional - may be <code>null</code>).
-     * @return The {@link IRecordCompressor} -or- <code>null</code> if the key
-     *         is <code>null</code> or if there is nothing registered under that
-     *         key.
-     */
-    public IRecordCompressor get(final String key) {
-
-        if (key == null)
-            return null;
-
-        return compressors.get(key);
-
-    }
-    
+    return compressors.get(key);
+  }
 }

@@ -7,29 +7,23 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 import java.util.List;
 
-/**
- * @author jeen
- */
+/** @author jeen */
 public abstract class ASTOperation extends SimpleNode {
 
-	/**
-	 * @param id
-	 */
-	public ASTOperation(int id) {
-		super(id);
-	}
+  /** @param id */
+  public ASTOperation(int id) {
+    super(id);
+  }
 
-	/**
-	 * @param p
-	 * @param id
-	 */
-	public ASTOperation(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  /**
+   * @param p
+   * @param id
+   */
+  public ASTOperation(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	public List<ASTDatasetClause> getDatasetClauseList() {
-		return jjtGetChildren(ASTDatasetClause.class);
-	}
-	
-	
+  public List<ASTDatasetClause> getDatasetClauseList() {
+    return jjtGetChildren(ASTDatasetClause.class);
+  }
 }

@@ -15,23 +15,16 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * Decoder interface for ganglia wire format messages.
- */
+/** Decoder interface for ganglia wire format messages. */
 public interface IGangliaMessageDecoder {
 
-	/**
-	 * Decode a Ganglia message as received from a datagram packet.
-	 * 
-	 * @param data
-	 *            The data.
-	 * @param off
-	 *            The offset of the first byte to decode.
-	 * @param len
-	 *            The #of bytes to decode.
-	 * 
-	 * @return The decoded record.
-	 */
-	IGangliaMessage decode(byte[] data, int off, int len);
-
+  /**
+   * Decode a Ganglia message as received from a datagram packet.
+   *
+   * @param data The data.
+   * @param off The offset of the first byte to decode.
+   * @param len The #of bytes to decode.
+   * @return The decoded record.
+   */
+  IGangliaMessage decode(byte[] data, int off, int len);
 }

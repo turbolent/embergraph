@@ -23,70 +23,54 @@ package org.embergraph.rdf.error;
 
 /**
  * A SPARQL type error.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SparqlTypeErrorException extends W3CQueryLanguageException {
 
-    /**
-     * 
-     */
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  /** Generic type error. */
+  public static String SPARQL_TYPE_ERROR_0000 = toURI(0);
+
+  /** Type error used to indicate an unbound variable. */
+  public static String SPARQL_TYPE_ERROR_0001 = toURI(1);
+
+  /**
+   * Generic SPARQL type error.
+   *
+   * @see #SPARQL_TYPE_ERROR_0000
+   */
+  public SparqlTypeErrorException() {
+
+    this(0 /* errorCode */, SPARQL_TYPE_ERROR_0000);
+  }
+
+  /** Type error thrown when there is an unbound variable. */
+  public static class UnboundVarException extends SparqlTypeErrorException {
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Generic type error.
-     */
-    static public String SPARQL_TYPE_ERROR_0000 = toURI(0);
+    public UnboundVarException() {
 
-    /**
-     * Type error used to indicate an unbound variable.
-     */
-    static public String SPARQL_TYPE_ERROR_0001 = toURI(1);
-
-    /**
-     * Generic SPARQL type error.
-     * 
-     * @see #SPARQL_TYPE_ERROR_0000
-     */
-    public SparqlTypeErrorException() {
-
-		this(0/* errorCode */, SPARQL_TYPE_ERROR_0000);
-
+      super(0001 /* errorCode */, SPARQL_TYPE_ERROR_0001);
     }
+  }
 
-	/**
-	 * Type error thrown when there is an unbound variable.
-	 */
-	static public class UnboundVarException extends SparqlTypeErrorException {
+  /**
+   * @param errorCode The four digit error code.
+   * @param uri The uri of the error.
+   */
+  protected SparqlTypeErrorException(final int errorCode, final String uri) {
 
-		private static final long serialVersionUID = 1L;
+    super(LanguageFamily.SP, ErrorCategory.TY, errorCode, (String) null /* msg */);
+  }
 
-		public UnboundVarException() {
+  protected static String toURI(final int errorCode) {
 
-			super(0001/* errorCode */, SPARQL_TYPE_ERROR_0001);
-
-		}
-
-	}
-
-	/**
-	 * @param errorCode
-	 *            The four digit error code.
-	 * @param uri
-	 *            The uri of the error.
-	 */
-	protected SparqlTypeErrorException(final int errorCode, final String uri) {
-
-        super(LanguageFamily.SP, ErrorCategory.TY, errorCode, (String) null/* msg */);
-
-    }
-
-    static protected String toURI(final int errorCode) {
-
-        return W3CQueryLanguageException.toURI(LanguageFamily.SP,
-                ErrorCategory.TY, errorCode, null/* params */);
-
-    }
-
+    return W3CQueryLanguageException.toURI(
+        LanguageFamily.SP, ErrorCategory.TY, errorCode, null /* params */);
+  }
 }

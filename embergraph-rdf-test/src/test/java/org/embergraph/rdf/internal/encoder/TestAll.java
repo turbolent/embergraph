@@ -23,45 +23,34 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("IV Binding Set Encoders");
+    final TestSuite suite = new TestSuite("IV Binding Set Encoders");
 
-        // Encoding/decoding of IV binding sets
-        suite.addTestSuite(TestIVBindingSetEncoder.class);
+    // Encoding/decoding of IV binding sets
+    suite.addTestSuite(TestIVBindingSetEncoder.class);
 
-//        // Encoding/decoding of IV binding sets with scalable IV => Value cache.
-//        suite.addTestSuite(TestIVBindingSetEncoderWithCache.class);
+    //        // Encoding/decoding of IV binding sets with scalable IV => Value cache.
+    //        suite.addTestSuite(TestIVBindingSetEncoderWithCache.class);
 
-        // Encoding/decoding for the wire of IV solution sets.
-        suite.addTestSuite(TestIVSolutionSetEncoder.class);
-        
-        return suite;
-        
-    }
-    
+    // Encoding/decoding for the wire of IV solution sets.
+    suite.addTestSuite(TestIVSolutionSetEncoder.class);
+
+    return suite;
+  }
 }

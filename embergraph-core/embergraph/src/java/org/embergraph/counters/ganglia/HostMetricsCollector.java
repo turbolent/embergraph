@@ -2,7 +2,6 @@ package org.embergraph.counters.ganglia;
 
 import java.util.Iterator;
 import java.util.regex.Pattern;
-
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
@@ -13,7 +12,7 @@ import org.embergraph.ganglia.IGangliaMetricsReporter;
 
 /**
  * Reflects collected host metrics to ganglia.
- * 
+ *
  * <pre>
  * /192.168.1.10/CPU/% IO Wait=0.0
  * /192.168.1.10/CPU/% Processor Time=0.24
@@ -33,66 +32,58 @@ import org.embergraph.ganglia.IGangliaMetricsReporter;
  */
 public class HostMetricsCollector implements IGangliaMetricsCollector {
 
-    /**
-     * Match anything which does NOT include <code>.service.</code> in the
-     * counter path.
-     * 
-     * @see <a href="http://www.regular-expressions.info/lookaround.html">
-     *      Regular Expressions Info </a>
-     */
-    static final Pattern filter; 
-    static {
+  /**
+   * Match anything which does NOT include <code>.service.</code> in the counter path.
+   *
+   * @see <a href="http://www.regular-expressions.info/lookaround.html">Regular Expressions Info
+   *     </a>
+   */
+  static final Pattern filter;
 
-        filter = Pattern.compile("^(?!.*/service/).*$");
-        
+  static {
+    filter = Pattern.compile("^(?!.*/service/).*$");
+  }
+
+  private final AbstractStatisticsCollector statisticsCollector;
+
+  public HostMetricsCollector(final AbstractStatisticsCollector statisticsCollector) {
+
+    if (statisticsCollector == null) throw new IllegalArgumentException();
+
+    this.statisticsCollector = statisticsCollector;
+  }
+
+  @Override
+  public void collect(final IGangliaMetricsReporter reporter) {
+
+    //		log.warn(statisticsCollector.getCounters().toString());
+
+    // Common base path which is NOT included in the generated metric name.
+    final String basePrefix =
+        ICounterSet.pathSeparator
+            + AbstractStatisticsCollector.fullyQualifiedHostName
+            + ICounterSet.pathSeparator;
+
+    // Start at the "host" level.
+    final CounterSet counters = (CounterSet) statisticsCollector.getCounters().getPath(basePrefix);
+
+    @SuppressWarnings("rawtypes")
+    final Iterator<ICounter> itr = counters.getCounters(filter);
+
+    while (itr.hasNext()) {
+
+      final ICounter<?> c = itr.next();
+
+      final Object value = c.getInstrument().getValue();
+
+      // The full path to the metric name.
+      final String path = c.getPath();
+
+      // Just the metric name.
+      final String metricName =
+          GangliaMunge.munge(path.substring(basePrefix.length()).replace('/', '.'));
+
+      reporter.setMetric(metricName, value);
     }
-
-	private final AbstractStatisticsCollector statisticsCollector;
-
-	public HostMetricsCollector(
-			final AbstractStatisticsCollector statisticsCollector) {
-
-		if (statisticsCollector == null)
-			throw new IllegalArgumentException();
-
-		this.statisticsCollector = statisticsCollector;
-		
-	}
-
-	@Override
-	public void collect(final IGangliaMetricsReporter reporter) {
-
-//		log.warn(statisticsCollector.getCounters().toString());
-
-		// Common base path which is NOT included in the generated metric name.
-		final String basePrefix = ICounterSet.pathSeparator
-				+ AbstractStatisticsCollector.fullyQualifiedHostName
-				+ ICounterSet.pathSeparator;
-
-		// Start at the "host" level.
-		final CounterSet counters = (CounterSet) statisticsCollector
-				.getCounters().getPath(basePrefix);
-
-		@SuppressWarnings("rawtypes")
-        final Iterator<ICounter> itr = counters.getCounters(filter);
-
-		while (itr.hasNext()) {
-
-			final ICounter<?> c = itr.next();
-
-			final Object value = c.getInstrument().getValue();
-
-			// The full path to the metric name.
-			final String path = c.getPath();
-
-			// Just the metric name.
-			final String metricName = GangliaMunge.munge(path.substring(
-					basePrefix.length()).replace('/', '.'));
-
-			reporter.setMetric(metricName, value);
-
-		}
-
-	}
-	
+  }
 }

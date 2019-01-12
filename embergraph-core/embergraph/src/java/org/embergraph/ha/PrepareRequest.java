@@ -21,150 +21,133 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha;
 
 import java.util.concurrent.TimeUnit;
-
 import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
 import org.embergraph.journal.IRootBlockView;
 
 /**
  * A 2-phase request as coordinated by the leader (local object).
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PrepareRequest {
 
-    /** The consensus release time from the GATHER. */
-    private final IHANotifyReleaseTimeResponse consensusReleaseTime;
-    
-    /**
-     * The services joined and non-joined with the met quorum as of the atomic
-     * decision point for the GATHER.
-     */
-    private final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices;
-    /**
-     * The services joined and non-joined with the met quorum as of the atomic
-     * decision point for the PREPARE.
-     */
-    private final IJoinedAndNonJoinedServices prepareJoinedAndNonJoinedServices;
-//    private final UUID[] joinedServiceIds;
-//    private final Set<UUID> nonJoinedPipelineServiceIds;
-    private final IRootBlockView rootBlock;
-    private final long timeout;
-    private final TimeUnit unit;
+  /** The consensus release time from the GATHER. */
+  private final IHANotifyReleaseTimeResponse consensusReleaseTime;
 
-    /** The consensus release time from the GATHER. */
-    public IHANotifyReleaseTimeResponse getConsensusReleaseTime() {
-    
-        return consensusReleaseTime;
-        
-    }
-    
-    /**
-     * The services joined and non-joined with the met quorum as of the atomic
-     * decision point for the GATHER.
-     */
-    public IJoinedAndNonJoinedServices getGatherJoinedAndNonJoinedServices() {
+  /**
+   * The services joined and non-joined with the met quorum as of the atomic decision point for the
+   * GATHER.
+   */
+  private final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices;
+  /**
+   * The services joined and non-joined with the met quorum as of the atomic decision point for the
+   * PREPARE.
+   */
+  private final IJoinedAndNonJoinedServices prepareJoinedAndNonJoinedServices;
+  //    private final UUID[] joinedServiceIds;
+  //    private final Set<UUID> nonJoinedPipelineServiceIds;
+  private final IRootBlockView rootBlock;
+  private final long timeout;
+  private final TimeUnit unit;
 
-        return gatherJoinedAndNonJoinedServices;
-        
-    }
+  /** The consensus release time from the GATHER. */
+  public IHANotifyReleaseTimeResponse getConsensusReleaseTime() {
 
-    /**
-     * The services joined and non-joined with the met quorum as of the atomic
-     * decision point for the PREPARE.
-     */
-    public IJoinedAndNonJoinedServices getPrepareAndNonJoinedServices() {
-        
-        return prepareJoinedAndNonJoinedServices;
-        
-    }
+    return consensusReleaseTime;
+  }
 
-    public IRootBlockView getRootBlock() {
+  /**
+   * The services joined and non-joined with the met quorum as of the atomic decision point for the
+   * GATHER.
+   */
+  public IJoinedAndNonJoinedServices getGatherJoinedAndNonJoinedServices() {
 
-        return rootBlock;
-        
-    }
+    return gatherJoinedAndNonJoinedServices;
+  }
 
-    public long getTimeout() {
+  /**
+   * The services joined and non-joined with the met quorum as of the atomic decision point for the
+   * PREPARE.
+   */
+  public IJoinedAndNonJoinedServices getPrepareAndNonJoinedServices() {
 
-        return timeout;
-        
-    }
+    return prepareJoinedAndNonJoinedServices;
+  }
 
-    public TimeUnit getUnit() {
+  public IRootBlockView getRootBlock() {
 
-        return unit;
-        
-    }
+    return rootBlock;
+  }
 
-    /**
-     * @param consensusReleaseTime
-     *            The consensus release time from the GATHER.
-     * @param gatherJoinedAndNonJoinedServices
-     *            The services joined and non-joined with the met quorum as of
-     *            the atomic decision point for the GATHER.
-     * @param prepareJoinedAndNonJoinedServices
-     *            The services joined and non-joined with the met quorum as of
-     *            the atomic decision point for the PREPARE.
-     * @param isRootBlock0
-     *            if this is rootBlock0.
-     * @param rootBlock
-     *            The new root block.
-     * @param timeout
-     *            How long to wait for the other services to prepare.
-     * @param unit
-     *            The unit for the timeout.
-     */
-    public PrepareRequest(
-            final IHANotifyReleaseTimeResponse consensusReleaseTime,
-            final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices,
-            final IJoinedAndNonJoinedServices prepareJoinedAndNonJoinedServices,
-//            final UUID[] joinedServiceIds,
-//            final Set<UUID> nonJoinedPipelineServiceIds,
-            final IRootBlockView rootBlock, final long timeout,
-            final TimeUnit unit) {
-        
-        if (consensusReleaseTime == null)
-            throw new IllegalArgumentException();
-        
-        if (gatherJoinedAndNonJoinedServices == null)
-            throw new IllegalArgumentException();
+  public long getTimeout() {
 
-        if (prepareJoinedAndNonJoinedServices == null)
-            throw new IllegalArgumentException();
-        
-        if (rootBlock == null)
-            throw new IllegalArgumentException();
+    return timeout;
+  }
 
-        if (unit == null)
-            throw new IllegalArgumentException();
+  public TimeUnit getUnit() {
 
-        this.consensusReleaseTime = consensusReleaseTime;
-        this.gatherJoinedAndNonJoinedServices = gatherJoinedAndNonJoinedServices;
-        this.prepareJoinedAndNonJoinedServices = prepareJoinedAndNonJoinedServices;
-//        this.joinedServiceIds = joinedServiceIds;
-//        this.nonJoinedPipelineServiceIds = nonJoinedPipelineServiceIds;
-        this.rootBlock = rootBlock;
-        this.timeout = timeout;
-        this.unit = unit;
-    }
+    return unit;
+  }
 
-    @Override
-    public String toString() {
-        return super.toString()
-                + "{"
-                + "isRootBlock0="
-                + rootBlock.isRootBlock0()
-                + ", rootBlock="
-                + rootBlock
-                + ", consensusReleaseTime="
-                + consensusReleaseTime
-                + ", gatherJoinedAndNonJoinedServices="
-                + gatherJoinedAndNonJoinedServices
-                + ", prepareJoinedAndNonJoinedServices="
-                + prepareJoinedAndNonJoinedServices
-                + ", timeout=" + timeout
-                + ", unit=" + unit
-                + "}";
-    }
+  /**
+   * @param consensusReleaseTime The consensus release time from the GATHER.
+   * @param gatherJoinedAndNonJoinedServices The services joined and non-joined with the met quorum
+   *     as of the atomic decision point for the GATHER.
+   * @param prepareJoinedAndNonJoinedServices The services joined and non-joined with the met quorum
+   *     as of the atomic decision point for the PREPARE.
+   * @param isRootBlock0 if this is rootBlock0.
+   * @param rootBlock The new root block.
+   * @param timeout How long to wait for the other services to prepare.
+   * @param unit The unit for the timeout.
+   */
+  public PrepareRequest(
+      final IHANotifyReleaseTimeResponse consensusReleaseTime,
+      final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices,
+      final IJoinedAndNonJoinedServices prepareJoinedAndNonJoinedServices,
+      //            final UUID[] joinedServiceIds,
+      //            final Set<UUID> nonJoinedPipelineServiceIds,
+      final IRootBlockView rootBlock,
+      final long timeout,
+      final TimeUnit unit) {
 
+    if (consensusReleaseTime == null) throw new IllegalArgumentException();
+
+    if (gatherJoinedAndNonJoinedServices == null) throw new IllegalArgumentException();
+
+    if (prepareJoinedAndNonJoinedServices == null) throw new IllegalArgumentException();
+
+    if (rootBlock == null) throw new IllegalArgumentException();
+
+    if (unit == null) throw new IllegalArgumentException();
+
+    this.consensusReleaseTime = consensusReleaseTime;
+    this.gatherJoinedAndNonJoinedServices = gatherJoinedAndNonJoinedServices;
+    this.prepareJoinedAndNonJoinedServices = prepareJoinedAndNonJoinedServices;
+    //        this.joinedServiceIds = joinedServiceIds;
+    //        this.nonJoinedPipelineServiceIds = nonJoinedPipelineServiceIds;
+    this.rootBlock = rootBlock;
+    this.timeout = timeout;
+    this.unit = unit;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString()
+        + "{"
+        + "isRootBlock0="
+        + rootBlock.isRootBlock0()
+        + ", rootBlock="
+        + rootBlock
+        + ", consensusReleaseTime="
+        + consensusReleaseTime
+        + ", gatherJoinedAndNonJoinedServices="
+        + gatherJoinedAndNonJoinedServices
+        + ", prepareJoinedAndNonJoinedServices="
+        + prepareJoinedAndNonJoinedServices
+        + ", timeout="
+        + timeout
+        + ", unit="
+        + unit
+        + "}";
+  }
 }

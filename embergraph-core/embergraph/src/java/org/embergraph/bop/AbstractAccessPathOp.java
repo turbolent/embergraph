@@ -22,89 +22,80 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.Map;
-
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * Interface for evaluating operations producing chunks of elements (tuples
- * materialized from some index of a relation).
- * 
+ * Interface for evaluating operations producing chunks of elements (tuples materialized from some
+ * index of a relation).
+ *
  * @see IAccessPath
  * @see IChunkedOrderedIterator
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractAccessPathOp<E> extends BOpBase {
+public abstract class AbstractAccessPathOp<E> extends BOpBase {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends BOp.Annotations, BufferAnnotations {
-        
-    }
+  public interface Annotations extends BOp.Annotations, BufferAnnotations {}
 
-    /**
-     * Required shallow copy constructor.
-     * 
-     * @param args
-     * @param annotations
-     */
-    public AbstractAccessPathOp(final BOp[] args,
-            final Map<String, Object> annotations) {
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args
+   * @param annotations
+   */
+  public AbstractAccessPathOp(final BOp[] args, final Map<String, Object> annotations) {
 
-        super(args, annotations);
+    super(args, annotations);
+  }
 
-    }
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public AbstractAccessPathOp(final AbstractAccessPathOp<E> op) {
+    super(op);
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     * 
-     * @param op
-     */
-    public AbstractAccessPathOp(
-            final AbstractAccessPathOp<E> op) {
-        super(op);
-    }
+  //    /**
+  //     * @see BufferAnnotations#CHUNK_CAPACITY
+  //     */
+  //    protected int getChunkCapacity() {
+  //
+  //        return getProperty(Annotations.CHUNK_CAPACITY,
+  //                Annotations.DEFAULT_CHUNK_CAPACITY);
+  //
+  //    }
+  //
+  //    /**
+  //     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
+  //     */
+  //    protected int getChunkOfChunksCapacity() {
+  //
+  //        return getProperty(Annotations.CHUNK_OF_CHUNKS_CAPACITY,
+  //                Annotations.DEFAULT_CHUNK_OF_CHUNKS_CAPACITY);
+  //
+  //    }
 
-//    /**
-//     * @see BufferAnnotations#CHUNK_CAPACITY
-//     */
-//    protected int getChunkCapacity() {
-//        
-//        return getProperty(Annotations.CHUNK_CAPACITY,
-//                Annotations.DEFAULT_CHUNK_CAPACITY);
-//
-//    }
-//
-//    /**
-//     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
-//     */
-//    protected int getChunkOfChunksCapacity() {
-//
-//        return getProperty(Annotations.CHUNK_OF_CHUNKS_CAPACITY,
-//                Annotations.DEFAULT_CHUNK_OF_CHUNKS_CAPACITY);
-//
-//    }
+  //    protected int getFullyBufferedReadThreshold() {
+  //
+  //        return getProperty(Annotations.FULLY_BUFFERED_READ_THRESHOLD,
+  //                Annotations.DEFAULT_FULLY_BUFFERED_READ_THRESHOLD);
+  //
+  //    }
 
-//    protected int getFullyBufferedReadThreshold() {
-//
-//        return getProperty(Annotations.FULLY_BUFFERED_READ_THRESHOLD,
-//                Annotations.DEFAULT_FULLY_BUFFERED_READ_THRESHOLD);
-//
-//    }
-
-//    /**
-//     * @see BufferAnnotations#CHUNK_TIMEOUT
-//     */
-//    protected long getChunkTimeout() {
-//        
-//        return getProperty(Annotations.CHUNK_TIMEOUT,
-//                Annotations.DEFAULT_CHUNK_TIMEOUT);
-//        
-//    }
+  //    /**
+  //     * @see BufferAnnotations#CHUNK_TIMEOUT
+  //     */
+  //    protected long getChunkTimeout() {
+  //
+  //        return getProperty(Annotations.CHUNK_TIMEOUT,
+  //                Annotations.DEFAULT_CHUNK_TIMEOUT);
+  //
+  //    }
 
 }

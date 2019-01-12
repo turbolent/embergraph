@@ -19,9 +19,6 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.math.BigInteger;
 import java.util.Map;
-
-import org.openrdf.model.Literal;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -29,40 +26,36 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
 
 public class StrlenBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-    private static final long serialVersionUID = 4176318782528605454L;
+  private static final long serialVersionUID = 4176318782528605454L;
 
-    public StrlenBOp(final IValueExpression<? extends IV> x, 
-    		final GlobalAnnotations globals) {
-        super(x, globals);
-    }
+  public StrlenBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
+    super(x, globals);
+  }
 
-    public StrlenBOp(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-        if (args.length != 1 || args[0] == null)
-            throw new IllegalArgumentException();
+  public StrlenBOp(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+    if (args.length != 1 || args[0] == null) throw new IllegalArgumentException();
+  }
 
-    }
+  public StrlenBOp(StrlenBOp op) {
+    super(op);
+  }
 
-    public StrlenBOp(StrlenBOp op) {
-        super(op);
-    }
+  @Override
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
 
-	@Override
-	public Requirement getRequirement() {
-		return Requirement.SOMETIMES;
-	}
+  @Override
+  public IV get(final IBindingSet bs) throws SparqlTypeErrorException {
 
-	@Override
-    public IV get(final IBindingSet bs) throws SparqlTypeErrorException {
-        
-        final Literal lit = getAndCheckLiteralValue(0, bs);
-        final String label = lit.getLabel();
-        final int length = label.length();
-        return new XSDIntegerIV(BigInteger.valueOf(length));
-        
-    }
-
+    final Literal lit = getAndCheckLiteralValue(0, bs);
+    final String label = lit.getLabel();
+    final int length = label.length();
+    return new XSDIntegerIV(BigInteger.valueOf(length));
+  }
 }

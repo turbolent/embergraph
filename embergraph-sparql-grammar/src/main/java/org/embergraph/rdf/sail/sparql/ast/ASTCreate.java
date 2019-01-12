@@ -2,11 +2,10 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTCreate extends ASTUpdate {
+public class ASTCreate extends ASTUpdate {
   private boolean silent;
 
-public ASTCreate(int id) {
+  public ASTCreate(int id) {
     super(id);
   }
 
@@ -14,18 +13,17 @@ public ASTCreate(int id) {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
-  
-	public void setSilent(boolean silent) {
-		this.silent = silent;
-	}
 
-	public boolean isSilent() {
-		return this.silent;
-	}
+  public void setSilent(boolean silent) {
+    this.silent = silent;
+  }
+
+  public boolean isSilent() {
+    return this.silent;
+  }
 }
 /* JavaCC - OriginalChecksum=61522dc17d11a0447f5e2cd7f7a0057e (do not edit this line) */

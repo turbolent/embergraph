@@ -21,43 +21,37 @@ import java.util.UUID;
 
 public class HARebuildRequest implements IHARebuildRequest {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    private final UUID serviceId;
+  private final UUID serviceId;
 
-    /**
-     * @param serviceId
-     *            The {@link UUID} of the service that made the request.
-     */
-    public HARebuildRequest(final UUID serviceId) {
+  /** @param serviceId The {@link UUID} of the service that made the request. */
+  public HARebuildRequest(final UUID serviceId) {
 
-        this.serviceId = serviceId;
+    this.serviceId = serviceId;
+  }
 
-    }
+  @Override
+  public UUID getServiceId() {
 
-    @Override
-    public UUID getServiceId() {
+    return serviceId;
+  }
 
-        return serviceId;
-        
-    }
+  public String toString() {
 
-    public String toString() {
+    return getClass()
+        + "{serviceId="
+        + getServiceId()
+        // + ", incremental=" + isIncremental()
+        + "}";
+  }
 
-        return getClass() + "{serviceId=" + getServiceId()
-                // + ", incremental=" + isIncremental() 
-                + "}";
+  //    @Override
+  //    final public boolean isIncremental() {
+  //
+  //        return false;
+  //
+  //    }
 
-    }
-
-//    @Override
-//    final public boolean isIncremental() {
-//
-//        return false;
-//        
-//    }
-    
 }

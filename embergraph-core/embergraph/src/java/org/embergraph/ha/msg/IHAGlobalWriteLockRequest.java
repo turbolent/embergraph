@@ -21,32 +21,23 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Message requesting a global write lock.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent
- *      unisolated operations against multiple KBs on the same Journal)
+ * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent unisolated operations
+ *     against multiple KBs on the same Journal)
  */
 @Deprecated
 public interface IHAGlobalWriteLockRequest extends IHAMessage {
 
-    /**
-     * The maximum amount of time to wait for the lock.
-     */
-    long getLockWaitTimeout();
+  /** The maximum amount of time to wait for the lock. */
+  long getLockWaitTimeout();
 
-    /**
-     * The units for the timeout.
-     */
-    TimeUnit getLockWaitUnits();
-    
-    /**
-     * The maximum amount of time to hold the lock.
-     */
-    long getLockHoldTimeout();
+  /** The units for the timeout. */
+  TimeUnit getLockWaitUnits();
 
-    /**
-     * The units for the timeout.
-     */
-    TimeUnit getLockHoldUnits();
-    
+  /** The maximum amount of time to hold the lock. */
+  long getLockHoldTimeout();
+
+  /** The units for the timeout. */
+  TimeUnit getLockHoldUnits();
 }

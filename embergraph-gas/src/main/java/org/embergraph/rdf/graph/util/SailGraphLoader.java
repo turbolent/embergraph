@@ -24,63 +24,44 @@ import org.openrdf.sail.SailException;
 
 public class SailGraphLoader extends GraphLoader {
 
-    /**
-     * The connection used to load the data.
-     */
-    private final SailConnection cxn;
+  /** The connection used to load the data. */
+  private final SailConnection cxn;
 
-    /**
-     * 
-     * @param cxn
-     *            The connection used to load the data.
-     */
-    public SailGraphLoader(final SailConnection cxn) {
+  /** @param cxn The connection used to load the data. */
+  public SailGraphLoader(final SailConnection cxn) {
 
-        this.cxn = cxn;
+    this.cxn = cxn;
+  }
 
-    }
+  @Override
+  protected AddStatementHandler newStatementHandler() {
 
-    @Override
-    protected AddStatementHandler newStatementHandler() {
+    return new SailStatementHandler();
+  }
 
-        return new SailStatementHandler();
-        
-    }
-
-    private class SailStatementHandler extends AddStatementHandler {
-
-        @Override
-        protected void addStatement(final Statement stmt, final Resource[] c)
-                throws RDFHandlerException {
-
-            try {
-
-                cxn.addStatement(
-                        stmt.getSubject(),
-                        stmt.getPredicate(),
-                        stmt.getObject(),
-                        c);
-
-                if (c == null || c.length == 0)
-                    ntriples++;
-                else
-                    ntriples += c.length;
-
-            } catch (SailException e) {
-
-                throw new RDFHandlerException(e);
-
-            }
-
-        }
-
-    }
+  private class SailStatementHandler extends AddStatementHandler {
 
     @Override
-    protected ValueFactory getValueFactory() {
+    protected void addStatement(final Statement stmt, final Resource[] c)
+        throws RDFHandlerException {
 
-        return null;
-        
+      try {
+
+        cxn.addStatement(stmt.getSubject(), stmt.getPredicate(), stmt.getObject(), c);
+
+        if (c == null || c.length == 0) ntriples++;
+        else ntriples += c.length;
+
+      } catch (SailException e) {
+
+        throw new RDFHandlerException(e);
+      }
     }
+  }
 
+  @Override
+  protected ValueFactory getValueFactory() {
+
+    return null;
+  }
 }

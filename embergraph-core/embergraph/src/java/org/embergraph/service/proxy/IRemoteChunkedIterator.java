@@ -24,35 +24,31 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.rmi.Remote;
-
 import org.embergraph.striterator.IChunkedIterator;
 
 /**
- * Interface for objects proxying for asynchronous chunked iterators. This is
- * used to export iterators. We wrap an {@link IChunkedIterator} with an object
- * that implements this interface, and then export a proxy for that object. On
- * the client, we wrap the proxy so as to hide the {@link IOException}s and
- * regain our original interface signature.
- * 
+ * Interface for objects proxying for asynchronous chunked iterators. This is used to export
+ * iterators. We wrap an {@link IChunkedIterator} with an object that implements this interface, and
+ * then export a proxy for that object. On the client, we wrap the proxy so as to hide the {@link
+ * IOException}s and regain our original interface signature.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the elements visited by the source iterator.
+ * @param <E> The generic type of the elements visited by the source iterator.
  */
 public interface IRemoteChunkedIterator<E> extends Remote {
 
-    /**
-     * Close the remote iterator.
-     * 
-     * @throws IOException
-     */
-    public void close() throws IOException;
+  /**
+   * Close the remote iterator.
+   *
+   * @throws IOException
+   */
+  public void close() throws IOException;
 
-    /**
-     * Return the next "chunk" from the iterator.
-     * 
-     * @return The next {@link IRemoteChunk}.
-     */
-    public IRemoteChunk<E> nextChunk() throws IOException;
-    
+  /**
+   * Return the next "chunk" from the iterator.
+   *
+   * @return The next {@link IRemoteChunk}.
+   */
+  public IRemoteChunk<E> nextChunk() throws IOException;
 }

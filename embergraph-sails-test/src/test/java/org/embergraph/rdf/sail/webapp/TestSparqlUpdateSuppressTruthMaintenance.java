@@ -51,83 +51,82 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-
 import junit.framework.Test;
-
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
 
+public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager>
+    extends AbstractTestNanoSparqlClient<S> {
 
-public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager> extends
-        AbstractTestNanoSparqlClient<S> {
-    
-    public TestSparqlUpdateSuppressTruthMaintenance() {
+  public TestSparqlUpdateSuppressTruthMaintenance() {}
 
-    }
+  public TestSparqlUpdateSuppressTruthMaintenance(final String name) {
 
-	public TestSparqlUpdateSuppressTruthMaintenance(final String name) {
+    super(name);
+  }
 
-		super(name);
+  public static Test suite() {
 
-	}
+    return ProxySuiteHelper.suiteWhenStandalone(
+        TestSparqlUpdateSuppressTruthMaintenance.class,
+        "test.*",
+        new LinkedHashSet<BufferMode>(
+            Arrays.asList(
+                new BufferMode[] {
+                  BufferMode.MemStore,
+                })),
+        TestMode.triplesPlusTruthMaintenance);
+  }
 
-   static public Test suite() {
+  public void testSuppressTruthMaintenance() throws Exception {
 
-		return ProxySuiteHelper.suiteWhenStandalone(TestSparqlUpdateSuppressTruthMaintenance.class,
-		      "test.*",
-		      new LinkedHashSet<BufferMode>(Arrays.asList(new BufferMode[]{ 
-		    		  BufferMode.MemStore,  
-		    		  })),
-		    		  TestMode.triplesPlusTruthMaintenance
-				);
-	}
+    // test disable truth maintenance
+    String updateStr =
+        "DISABLE ENTAILMENTS; "
+            + "INSERT DATA { "
+            + "<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ."
+            + "<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . "
+            + "}";
 
-   	
-   public void testSuppressTruthMaintenance() throws Exception {
-	   
-		//test disable truth maintenance
-        String updateStr = "DISABLE ENTAILMENTS; " +
-        					"INSERT DATA { " +
-        					"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
-        					"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " +
-        					"}";
+    m_repo.prepareUpdate(updateStr).evaluate();
 
-        m_repo.prepareUpdate(updateStr).evaluate();
+    String queryStr =
+        "SELECT * {<urn:property1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o} ";
 
-        String queryStr = "SELECT * {<urn:property1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o} ";
+    IPreparedTupleQuery query = m_repo.prepareTupleQuery(queryStr);
 
-        IPreparedTupleQuery query = m_repo.prepareTupleQuery(queryStr);
-        
-        assertEquals(0, countResults(query.evaluate()));
-        
-        //test compute closure
-        updateStr = "CREATE ENTAILMENTS; " + // 
-        			"ENABLE ENTAILMENTS";
-				 	
-		m_repo.prepareUpdate(updateStr).evaluate();
-		
-		assertEquals(1, countResults(query.evaluate()));
-		
-		//test drop entailments
-	    updateStr = "DISABLE ENTAILMENTS; " +
-	       			"DELETE DATA { " +
-	       			"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
-	       			"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " +
-	       			"}";
+    assertEquals(0, countResults(query.evaluate()));
 
-	   m_repo.prepareUpdate(updateStr).evaluate();
+    // test compute closure
+    updateStr =
+        "CREATE ENTAILMENTS; "
+            + //
+            "ENABLE ENTAILMENTS";
 
-	   assertEquals(1, countResults(query.evaluate()));
-	       
-	   updateStr = "DROP ENTAILMENTS; " + // 
-	       		   "ENABLE ENTAILMENTS";
-					 	
-		m_repo.prepareUpdate(updateStr).evaluate();
-			
-		assertEquals(0, countResults(query.evaluate()));
-		
-	}
-   
-   
+    m_repo.prepareUpdate(updateStr).evaluate();
+
+    assertEquals(1, countResults(query.evaluate()));
+
+    // test drop entailments
+    updateStr =
+        "DISABLE ENTAILMENTS; "
+            + "DELETE DATA { "
+            + "<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ."
+            + "<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . "
+            + "}";
+
+    m_repo.prepareUpdate(updateStr).evaluate();
+
+    assertEquals(1, countResults(query.evaluate()));
+
+    updateStr =
+        "DROP ENTAILMENTS; "
+            + //
+            "ENABLE ENTAILMENTS";
+
+    m_repo.prepareUpdate(updateStr).evaluate();
+
+    assertEquals(0, countResults(query.evaluate()));
+  }
 }

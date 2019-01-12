@@ -24,73 +24,69 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.resources;
 
 import java.util.Properties;
-
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractTransactionService;
 
 /**
- * Mock implementation supporting only those features required to bootstrap the
- * resource manager test suites.
- * 
+ * Mock implementation supporting only those features required to bootstrap the resource manager
+ * test suites.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 class MockTransactionService extends AbstractTransactionService {
 
-    /**
-     * @param properties
-     */
-    public MockTransactionService(Properties properties) {
-   
-        super(properties);
-   
-    }
+  /** @param properties */
+  public MockTransactionService(Properties properties) {
 
-    @Override
-    protected void abortImpl(TxState state) throws Exception {
-        // TODO Auto-generated method stub
-    }
+    super(properties);
+  }
 
-    @Override
-    protected long commitImpl(TxState state) throws Exception {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+  @Override
+  protected void abortImpl(TxState state) throws Exception {
+    // TODO Auto-generated method stub
+  }
 
-    @Override
-    protected long findCommitTime(long timestamp) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+  @Override
+  protected long commitImpl(TxState state) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    protected long findNextCommitTime(long commitTime) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+  @Override
+  protected long findCommitTime(long timestamp) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    public long getLastCommitTime() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+  @Override
+  protected long findNextCommitTime(long commitTime) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    public AbstractFederation getFederation() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  @Override
+  public long getLastCommitTime() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-//    public boolean committed(long tx, UUID dataService) throws IOException,
-//            InterruptedException, BrokenBarrierException {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
-//
-//    public long prepared(long tx, UUID dataService) throws IOException,
-//            InterruptedException, BrokenBarrierException {
-//        // TODO Auto-generated method stub
-//        return 0;
-//    }
+  @Override
+  public AbstractFederation getFederation() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  //    public boolean committed(long tx, UUID dataService) throws IOException,
+  //            InterruptedException, BrokenBarrierException {
+  //        // TODO Auto-generated method stub
+  //        return false;
+  //    }
+  //
+  //    public long prepared(long tx, UUID dataService) throws IOException,
+  //            InterruptedException, BrokenBarrierException {
+  //        // TODO Auto-generated method stub
+  //        return 0;
+  //    }
 
 }

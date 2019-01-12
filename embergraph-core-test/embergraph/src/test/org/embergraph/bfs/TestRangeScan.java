@@ -27,32 +27,25 @@ import org.embergraph.sparse.SparseRowStore;
 
 /**
  * Test suite for {@link EmbergraphFileSystem#getDocumentHeaders(String, String)}.
- * <p>
- * Note: The correct behavior of this method depends on the
- * {@link SparseRowStore}'s logical row iterator.
- * 
+ *
+ * <p>Note: The correct behavior of this method depends on the {@link SparseRowStore}'s logical row
+ * iterator.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestRangeScan extends AbstractRepositoryTestCase {
 
-    /**
-     * 
-     */
-    public TestRangeScan() {
-    }
+  /** */
+  public TestRangeScan() {}
 
-    /**
-     * @param arg0
-     */
-    public TestRangeScan(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestRangeScan(String arg0) {
+    super(arg0);
+  }
 
-    public void test_rangeScan() {
-        
-        fail("write test");
-        
-    }
-    
+  public void test_rangeScan() {
+
+    fail("write test");
+  }
 }

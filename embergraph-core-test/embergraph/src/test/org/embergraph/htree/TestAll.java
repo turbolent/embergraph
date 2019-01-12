@@ -29,39 +29,28 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("HTree");
+    final TestSuite suite = new TestSuite("HTree");
 
-        // htree specific raba unit tests.
-        suite.addTest(org.embergraph.htree.raba.TestAll.suite());
+    // htree specific raba unit tests.
+    suite.addTest(org.embergraph.htree.raba.TestAll.suite());
 
-        // htree specific data record tests.
-        suite.addTest(org.embergraph.htree.data.TestAll.suite());
+    // htree specific data record tests.
+    suite.addTest(org.embergraph.htree.data.TestAll.suite());
 
-        // htree data structure tests.
-        suite.addTest(org.embergraph.htree.TestAll_HTree.suite());
+    // htree data structure tests.
+    suite.addTest(org.embergraph.htree.TestAll_HTree.suite());
 
-		return suite;
-
-	}
-
+    return suite;
+  }
 }

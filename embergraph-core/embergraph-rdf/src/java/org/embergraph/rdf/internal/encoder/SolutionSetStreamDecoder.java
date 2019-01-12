@@ -20,202 +20,182 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.encoder;
 
+import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.NoSuchElementException;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.io.DataInputBuffer;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
-
 /**
  * Stream decoder for solution sets (chunk oriented).
- * 
+ *
  * @see SolutionSetStreamEncoder
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class SolutionSetStreamDecoder implements
-        ICloseableIterator<IBindingSet[]> {
+public class SolutionSetStreamDecoder implements ICloseableIterator<IBindingSet[]> {
 
-    private static final Logger log = Logger
-            .getLogger(SolutionSetStreamDecoder.class);
+  private static final Logger log = Logger.getLogger(SolutionSetStreamDecoder.class);
 
-    /** The name of the solution set (optional). */
-    private final String name;
+  /** The name of the solution set (optional). */
+  private final String name;
 
-    private final long solutionSetCount;
-    private final DataInputStream in;
-    private final IVSolutionSetDecoder decoder;
+  private final long solutionSetCount;
+  private final DataInputStream in;
+  private final IVSolutionSetDecoder decoder;
 
-    private boolean open = false;
+  private boolean open = false;
 
-    /** The next chunk of solutions to be visited. */
-    private IBindingSet[] bsets = null;
+  /** The next chunk of solutions to be visited. */
+  private IBindingSet[] bsets = null;
 
-    /** The #of solution sets which have been decoded so far. */
-    private long nsolutions = 0;
+  /** The #of solution sets which have been decoded so far. */
+  private long nsolutions = 0;
 
-    /**
-     * 
-     * @param name
-     *            The name of the solution set.
-     * @param in
-     *            The solutions are read from this stream.
-     * @param solutionSetCount
-     *            The #of solutions to be read from the stream.
-     * @throws IOException
-     */
-    public SolutionSetStreamDecoder(final String name,
-            final DataInputStream in, final long solutionSetCount) {
+  /**
+   * @param name The name of the solution set.
+   * @param in The solutions are read from this stream.
+   * @param solutionSetCount The #of solutions to be read from the stream.
+   * @throws IOException
+   */
+  public SolutionSetStreamDecoder(
+      final String name, final DataInputStream in, final long solutionSetCount) {
 
-        if (in == null)
-            throw new IllegalArgumentException();
+    if (in == null) throw new IllegalArgumentException();
 
-        if (solutionSetCount < 0)
-            throw new IllegalArgumentException();
+    if (solutionSetCount < 0) throw new IllegalArgumentException();
 
-        this.name = name;
+    this.name = name;
 
-        this.solutionSetCount = solutionSetCount;
+    this.solutionSetCount = solutionSetCount;
 
-        this.in = in;
+    this.in = in;
 
-        this.open = true;
+    this.open = true;
 
-        this.decoder = new IVSolutionSetDecoder();
+    this.decoder = new IVSolutionSetDecoder();
+  }
 
+  @Override
+  public void close() {
+    if (open) {
+      open = false;
+      try {
+        in.close();
+      } catch (IOException e) {
+        // Unexpected exception.
+        log.error(e, e);
+      }
     }
+  }
 
-    @Override
-    public void close() {
-        if (open) {
-            open = false;
-            try {
-                in.close();
-            } catch (IOException e) {
-                // Unexpected exception.
-                log.error(e, e);
-            }
-        }
-    }
+  @Override
+  public boolean hasNext() {
 
-    @Override
-    public boolean hasNext() {
+    if (open && bsets == null) {
 
-        if (open && bsets == null) {
+      /*
+       * Read ahead and extract a chunk of solutions.
+       */
 
-            /*
-             * Read ahead and extract a chunk of solutions.
-             */
+      try {
 
-            try {
+        if ((bsets = decodeNextChunk()) == null) {
 
-                if ((bsets = decodeNextChunk()) == null) {
-
-                    // Nothing more to be read.
-                    close();
-
-                }
-
-            } catch (IOException e) {
-
-                throw new RuntimeException(e);
-
-            }
-
+          // Nothing more to be read.
+          close();
         }
 
-        return open && bsets != null;
+      } catch (IOException e) {
 
+        throw new RuntimeException(e);
+      }
     }
 
-    /**
-     * Read ahead and decode the next chunk of solutions.
-     * 
-     * @return The decoded solutions.
-     */
-    private IBindingSet[] decodeNextChunk() throws IOException {
+    return open && bsets != null;
+  }
 
-        if (nsolutions == solutionSetCount) {
+  /**
+   * Read ahead and decode the next chunk of solutions.
+   *
+   * @return The decoded solutions.
+   */
+  private IBindingSet[] decodeNextChunk() throws IOException {
 
-            // Nothing more to be read.
+    if (nsolutions == solutionSetCount) {
 
-            if (log.isDebugEnabled())
-                log.debug("Read solutionSet: name=" + name
-                        + ", solutionSetSize=" + nsolutions);
+      // Nothing more to be read.
 
-            return null;
+      if (log.isDebugEnabled())
+        log.debug("Read solutionSet: name=" + name + ", solutionSetSize=" + nsolutions);
 
-        }
-
-        // The version# for this chunk.
-        // final int version =
-        in.readInt(); // version
-
-        // #of solutions in this chunk.
-        final int chunkSize = in.readInt();
-
-        // #of bytes in this chunk.
-        final int byteLength = in.readInt();
-
-        // Read in all the bytes in the next chunk.
-        final byte[] a = new byte[byteLength];
-
-        // read data
-        in.readFully(a);
-
-        // Wrap byte[] as stream.
-        final DataInputBuffer buf = new DataInputBuffer(a);
-
-        // Allocate array for the decoded solutions.
-        final IBindingSet[] t = new IBindingSet[chunkSize];
-
-        // Decode the solutions into the array.
-        for (int i = 0; i < chunkSize; i++) {
-
-            t[i] = decoder.decodeSolution(buf, true/* resolveCachedValues */);
-
-            if (log.isTraceEnabled())
-                log.trace("Read: name=" + name + ", solution=" + t[i]);
-
-        }
-
-        // Update the #of solution sets which have been decoded.
-        nsolutions += chunkSize;
-
-        if (log.isTraceEnabled())
-            log.trace("Read chunk: name=" + name + ", chunkSize=" + chunkSize
-                    + ", bytesRead="
-                    + (SolutionSetStreamEncoder.CHUNK_HEADER_SIZE + byteLength)
-                    + ", solutionSetSize=" + nsolutions);
-
-        // Return the decoded solutions.
-        return t;
-
+      return null;
     }
 
-    @Override
-    public IBindingSet[] next() {
+    // The version# for this chunk.
+    // final int version =
+    in.readInt(); // version
 
-        if (!hasNext())
-            throw new NoSuchElementException();
+    // #of solutions in this chunk.
+    final int chunkSize = in.readInt();
 
-        final IBindingSet[] t = bsets;
+    // #of bytes in this chunk.
+    final int byteLength = in.readInt();
 
-        bsets = null;
+    // Read in all the bytes in the next chunk.
+    final byte[] a = new byte[byteLength];
 
-        return t;
+    // read data
+    in.readFully(a);
+
+    // Wrap byte[] as stream.
+    final DataInputBuffer buf = new DataInputBuffer(a);
+
+    // Allocate array for the decoded solutions.
+    final IBindingSet[] t = new IBindingSet[chunkSize];
+
+    // Decode the solutions into the array.
+    for (int i = 0; i < chunkSize; i++) {
+
+      t[i] = decoder.decodeSolution(buf, true /* resolveCachedValues */);
+
+      if (log.isTraceEnabled()) log.trace("Read: name=" + name + ", solution=" + t[i]);
     }
 
-    @Override
-    public void remove() {
+    // Update the #of solution sets which have been decoded.
+    nsolutions += chunkSize;
 
-        throw new UnsupportedOperationException();
+    if (log.isTraceEnabled())
+      log.trace(
+          "Read chunk: name="
+              + name
+              + ", chunkSize="
+              + chunkSize
+              + ", bytesRead="
+              + (SolutionSetStreamEncoder.CHUNK_HEADER_SIZE + byteLength)
+              + ", solutionSetSize="
+              + nsolutions);
 
-    }
+    // Return the decoded solutions.
+    return t;
+  }
 
+  @Override
+  public IBindingSet[] next() {
+
+    if (!hasNext()) throw new NoSuchElementException();
+
+    final IBindingSet[] t = bsets;
+
+    bsets = null;
+
+    return t;
+  }
+
+  @Override
+  public void remove() {
+
+    throw new UnsupportedOperationException();
+  }
 }

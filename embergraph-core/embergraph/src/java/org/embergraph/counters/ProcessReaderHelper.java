@@ -29,126 +29,102 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.Reader;
 
-public abstract class ProcessReaderHelper extends
-        AbstractProcessReader {
+public abstract class ProcessReaderHelper extends AbstractProcessReader {
 
-    /**
-     * The {@link Reader} from which the output of the process will be read.
-     */
-    protected LineNumberReader r = null;
+  /** The {@link Reader} from which the output of the process will be read. */
+  protected LineNumberReader r = null;
 
-    public ProcessReaderHelper() {
+  public ProcessReaderHelper() {}
 
+  /**
+   * Creates a {@link LineNumberReader} from the {@link InputStream}.
+   *
+   * @param is The input stream from which the output of the process will be read.
+   */
+  public void start(InputStream is) {
+
+    if (r != null) throw new IllegalStateException();
+
+    super.start(is);
+
+    r = new LineNumberReader(new InputStreamReader(is));
+  }
+
+  /** Override to return the {@link ActiveProcess}. */
+  protected abstract ActiveProcess getActiveProcess();
+
+  /**
+   * Returns the next line and blocks if a line is not available.
+   *
+   * @return The next line.
+   * @throws InterruptedException
+   * @throws IOException if the source is closed.
+   * @throws InterruptedException if the thread has been interrupted (this is normal during
+   *     shutdown).
+   */
+  public String readLine() throws IOException, InterruptedException {
+
+    //        final Thread t = Thread.currentThread();
+
+    while (getActiveProcess().isAlive()) {
+
+      if (Thread.interrupted()) {
+
+        throw new InterruptedException();
+      }
+
+      if (!r.ready()) {
+
+        Thread.sleep(100 /*ms*/);
+
+        continue;
+      }
+
+      final String s = r.readLine();
+
+      if (log.isDebugEnabled()) {
+
+        log.debug(s);
+      }
+
+      return s;
     }
 
-    /**
-     * Creates a {@link LineNumberReader} from the {@link InputStream}.
-     * 
-     * @param is
-     *            The input stream from which the output of the process will
-     *            be read.
-     */
-    public void start(InputStream is) {
+    throw new IOException("Closed");
+  }
 
-        if (r != null)
-            throw new IllegalStateException();
-        
-        super.start( is );
-        
-        r = new LineNumberReader( new InputStreamReader( is ));
-        
+  public void run() {
+
+    try {
+
+      readProcess();
+
+    } catch (InterruptedException e) {
+
+      if (log.isInfoEnabled()) log.info("Interrupted - will halt.");
+
+    } catch (Exception e) {
+
+      /*
+       * Note: An IOException here generally means that the process from
+       * which we were reading has been killed. This can happen if you
+       * kill it externally. It can also happen with immediate shutdown.
+       *
+       * FIXME If performance counter collection is killed but the client
+       * is not shutdown then counter collection SHOULD be restarted. This
+       * is especially true for the data services since the load balancer
+       * will otherwise not be able to measure their loads, recommend
+       * moves, etc.
+       */
+
+      log.error("Counter collection halted: " + e.getMessage(), e);
     }
+  }
 
-    /**
-     * Override to return the {@link ActiveProcess}.
-     */
-    abstract protected ActiveProcess getActiveProcess();
-    
-    /**
-     * Returns the next line and blocks if a line is not available.
-     * 
-     * @return The next line.
-     * 
-     * @throws InterruptedException 
-     * 
-     * @throws IOException
-     *             if the source is closed.
-     * @throws InterruptedException
-     *             if the thread has been interrupted (this is
-     *             normal during shutdown).
-     */
-    public String readLine() throws IOException, InterruptedException {
-        
-//        final Thread t = Thread.currentThread();
-        
-        while(getActiveProcess().isAlive()) {
-            
-            if(Thread.interrupted()) {
-                
-                throw new InterruptedException();
-                
-            }
-            
-            if(!r.ready()) {
-                
-                Thread.sleep(100/*ms*/);
-                
-                continue;
-                
-            }
-
-            final String s = r.readLine();
-            
-            if(log.isDebugEnabled()) {
-                
-                log.debug(s);
-                
-            }
-            
-            return s;
-            
-        }
-        
-        throw new IOException("Closed");
-        
-    }
-    
-    public void run() {
-        
-        try {
-         
-            readProcess();
-            
-        } catch (InterruptedException e) {
-            
-            if(log.isInfoEnabled())
-                log.info("Interrupted - will halt.");
-            
-        } catch (Exception e) {
-            
-            /*
-             * Note: An IOException here generally means that the process from
-             * which we were reading has been killed. This can happen if you
-             * kill it externally. It can also happen with immediate shutdown.
-             * 
-             * FIXME If performance counter collection is killed but the client
-             * is not shutdown then counter collection SHOULD be restarted. This
-             * is especially true for the data services since the load balancer
-             * will otherwise not be able to measure their loads, recommend
-             * moves, etc.
-             */
-
-            log.error("Counter collection halted: " + e.getMessage(), e);
-            
-        }
-        
-    }
-
-    /**
-     * Responsible for reading the data.
-     * 
-     * @throws Exception
-     */
-    abstract protected void readProcess() throws Exception;
-
+  /**
+   * Responsible for reading the data.
+   *
+   * @throws Exception
+   */
+  protected abstract void readProcess() throws Exception;
 }

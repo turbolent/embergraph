@@ -33,51 +33,42 @@ import org.embergraph.util.BytesUtil;
  */
 public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
 
-    /**
-     * 
-     */
-    public TestVocabURIByteIV() {
+  /** */
+  public TestVocabURIByteIV() {}
+
+  /** @param name */
+  public TestVocabURIByteIV(String name) {
+    super(name);
+  }
+
+  /**
+   * Unit test for a fully inlined representation of a URI based on a <code>byte</code> code. The
+   * flags byte looks like: <code>VTE=URI, inline=true, extension=false,
+   * DTE=XSDByte</code>. It is followed by a <code>unsigned byte</code> value which is the index of
+   * the URI in the {@link Vocabulary} class for the triple store.
+   */
+  public void test_encodeDecode_URIByteIV() {
+
+    final IV<?, ?>[] e = {
+      //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
+      //                new VocabURIByteIV<EmbergraphURI>((byte) -1),
+      new VocabURIByteIV<EmbergraphURI>((byte) 0),
+      new VocabURIByteIV<EmbergraphURI>((byte) KeyBuilder.encodeByte(14)),
+      new VocabURIByteIV<EmbergraphURI>((byte) 14),
+      //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
+    };
+
+    final KeyBuilder keyBuilder = new KeyBuilder();
+    for (IV iv : e) {
+      System.out.println(
+          "iv="
+              + iv
+              + ", key="
+              + BytesUtil.toString(IVUtility.encode(keyBuilder.reset(), iv).getKey()));
     }
 
-    /**
-     * @param name
-     */
-    public TestVocabURIByteIV(String name) {
-        super(name);
-    }
+    doEncodeDecodeTest(e);
 
-    /**
-     * Unit test for a fully inlined representation of a URI based on a
-     * <code>byte</code> code. The flags byte looks like:
-     * <code>VTE=URI, inline=true, extension=false,
-     * DTE=XSDByte</code>. It is followed by a <code>unsigned byte</code> value
-     * which is the index of the URI in the {@link Vocabulary} class for the
-     * triple store.
-     */
-    public void test_encodeDecode_URIByteIV() {
-
-        final IV<?, ?>[] e = {
-//                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
-//                new VocabURIByteIV<EmbergraphURI>((byte) -1),
-                new VocabURIByteIV<EmbergraphURI>((byte) 0),
-                new VocabURIByteIV<EmbergraphURI>((byte) KeyBuilder.encodeByte(14)),
-                new VocabURIByteIV<EmbergraphURI>((byte) 14),
-//                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
-        };
-
-        final KeyBuilder keyBuilder = new KeyBuilder();
-        for (IV iv : e) {
-            System.out.println("iv="
-                    + iv
-                    + ", key="
-                    + BytesUtil.toString(IVUtility.encode(keyBuilder.reset(),
-                            iv).getKey()));
-        }
-        
-        doEncodeDecodeTest(e);
-
-        doComparatorTest(e);
-
-    }
-
+    doComparatorTest(e);
+  }
 }

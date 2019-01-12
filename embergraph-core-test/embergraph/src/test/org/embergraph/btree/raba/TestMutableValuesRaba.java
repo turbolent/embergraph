@@ -22,39 +22,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba;
 
-import org.embergraph.btree.Leaf;
-
 import junit.framework.TestCase2;
+import org.embergraph.btree.Leaf;
 
 /**
  * Test suite for {@link MutableValuesRaba}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMutableValuesRaba extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestMutableValuesRaba() {
+  /** */
+  public TestMutableValuesRaba() {}
 
-    }
+  /** @param name */
+  public TestMutableValuesRaba(String name) {
+    super(name);
+  }
 
-    /**
-     * @param name
-     */
-    public TestMutableValuesRaba(String name) {
-        super(name);
-    }
+  /** @todo Write tests, but note that this class is exercised by {@link Leaf}. */
+  public void test_something() {
 
-    /**
-     * @todo Write tests, but note that this class is exercised by {@link Leaf}.
-     */
-    public void test_something() {
+    //        fail("write tests");
 
-//        fail("write tests");
-        
-    }
-
+  }
 }

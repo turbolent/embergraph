@@ -22,42 +22,41 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class EmbergraphBindingSet implements Iterable<Map.Entry<String,Object>> {
-        
-    private final Map<String, Object> vals;
-    
-    public EmbergraphBindingSet() {
-        this.vals = new LinkedHashMap<String, Object>();
-    }
-    
-    public void put(final String key, final Object val) {
-        this.vals.put(key, val);
-    }
-    
-    public Object get(final String key) {
-        return this.vals.get(key);
-    }
-    
-    public boolean isBound(final String key) {
-        return this.vals.containsKey(key);
-    }
+public class EmbergraphBindingSet implements Iterable<Map.Entry<String, Object>> {
 
-    public Set<String> getKeys() {
-        return this.vals.keySet();
-    }
-    
-    public Map<String, Object> get() {
-        return vals;
-    }
+  private final Map<String, Object> vals;
 
-    @Override
-    public Iterator<Map.Entry<String,Object>> iterator() {
-        return vals.entrySet().iterator();
-    }
+  public EmbergraphBindingSet() {
+    this.vals = new LinkedHashMap<String, Object>();
+  }
 
-    @Override
-    public String toString() {
-        return "EmbergraphBindings [vals=" + vals + "]";
-    }
-    
+  public void put(final String key, final Object val) {
+    this.vals.put(key, val);
+  }
+
+  public Object get(final String key) {
+    return this.vals.get(key);
+  }
+
+  public boolean isBound(final String key) {
+    return this.vals.containsKey(key);
+  }
+
+  public Set<String> getKeys() {
+    return this.vals.keySet();
+  }
+
+  public Map<String, Object> get() {
+    return vals;
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, Object>> iterator() {
+    return vals.entrySet().iterator();
+  }
+
+  @Override
+  public String toString() {
+    return "EmbergraphBindings [vals=" + vals + "]";
+  }
 }

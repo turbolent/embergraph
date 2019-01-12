@@ -28,28 +28,27 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * For named and default graph access paths where access path cost estimation is
- * disabled by setting the {@link #ACCESS_PATH_SAMPLE_LIMIT} to ZERO (0), this
- * query hint determines whether a SCAN + FILTER or PARALLEL SUBQUERY (aka
- * as-bound data set join) approach.
+ * For named and default graph access paths where access path cost estimation is disabled by setting
+ * the {@link #ACCESS_PATH_SAMPLE_LIMIT} to ZERO (0), this query hint determines whether a SCAN +
+ * FILTER or PARALLEL SUBQUERY (aka as-bound data set join) approach.
  */
 final class AccessPathScanAndFilterHint extends AbstractBooleanQueryHint {
 
-    protected AccessPathScanAndFilterHint() {
-        super(QueryHints.ACCESS_PATH_SCAN_AND_FILTER,
-                QueryHints.DEFAULT_ACCESS_PATH_SCAN_AND_FILTER);
+  protected AccessPathScanAndFilterHint() {
+    super(QueryHints.ACCESS_PATH_SCAN_AND_FILTER, QueryHints.DEFAULT_ACCESS_PATH_SCAN_AND_FILTER);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setAnnotation(context, scope, op, getName(), value);
     }
-
-    @Override
-    public void handle(final AST2BOpContext context, final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        if (op instanceof StatementPatternNode) {
-
-            _setAnnotation(context, scope, op, getName(), value);
-
-        }
-
-    }
-
+  }
 }

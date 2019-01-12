@@ -23,73 +23,62 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("RDF");
+
+    /*
+     * test suite for the rio parser without the triple store integrations.
      */
-    public TestAll() {
-    }
+    suite.addTest(org.embergraph.rdf.rio.TestAll_RIO.suite());
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    // test suite for the internal representation of RDF Values.
+    suite.addTest(org.embergraph.rdf.internal.TestAll.suite());
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    // vocabulary test suite (w/o triple store)
+    suite.addTest(org.embergraph.rdf.vocab.TestAll.suite());
 
-        final TestSuite suite = new TestSuite("RDF");
+    // axioms test suite (w/o triple store) [Note: axioms test suite is now proxied.]
+    // suite.addTest( org.embergraph.rdf.axioms.TestAll.suite() );
 
-        /*
-         * test suite for the rio parser without the triple store integrations.
-         */
-        suite.addTest(org.embergraph.rdf.rio.TestAll_RIO.suite());
+    // test RDF Value and Statement object model (Sesame compliance).
+    suite.addTest(org.embergraph.rdf.model.TestAll.suite());
 
-        // test suite for the internal representation of RDF Values.
-        suite.addTest( org.embergraph.rdf.internal.TestAll.suite() );
+    // test suite for RDF specific operators.
+    suite.addTest(org.embergraph.bop.rdf.TestAll.suite());
 
-        // vocabulary test suite (w/o triple store)
-        suite.addTest( org.embergraph.rdf.vocab.TestAll.suite() );
+    // SPARQL, including the parser, AST, AST optimizers, & AST evaluation.
+    suite.addTest(org.embergraph.rdf.sparql.TestAll.suite());
 
-        // axioms test suite (w/o triple store) [Note: axioms test suite is now proxied.]
-        //suite.addTest( org.embergraph.rdf.axioms.TestAll.suite() );
+    // test various RDF database implementations.
+    suite.addTest(org.embergraph.rdf.store.TestAll.suite());
 
-        // test RDF Value and Statement object model (Sesame compliance).
-        suite.addTest( org.embergraph.rdf.model.TestAll.suite() );
-        
-        // test suite for RDF specific operators.
-        suite.addTest( org.embergraph.bop.rdf.TestAll.suite() );
+    // test the bulk data loader : @todo use proxy tests and move into per-store suites?
+    suite.addTest(org.embergraph.rdf.load.TestAll.suite());
 
-        // SPARQL, including the parser, AST, AST optimizers, & AST evaluation.
-        suite.addTest(org.embergraph.rdf.sparql.TestAll.suite());
+    // test RDF graph mining/analytics
+    //        suite.addTest(org.embergraph.rdf.graph.TestAll.suite()); // Note: This is in its own
+    // maven project.
+    suite.addTest(org.embergraph.rdf.graph.impl.bd.TestAll.suite());
 
-        // test various RDF database implementations.
-        suite.addTest( org.embergraph.rdf.store.TestAll.suite() );
+    // BOp execution
+    suite.addTest(org.embergraph.bop.solutions.TestAll.suite());
 
-        // test the bulk data loader : @todo use proxy tests and move into per-store suites?
-        suite.addTest( org.embergraph.rdf.load.TestAll.suite() );
-
-        // test RDF graph mining/analytics
-//        suite.addTest(org.embergraph.rdf.graph.TestAll.suite()); // Note: This is in its own maven project.
-        suite.addTest(org.embergraph.rdf.graph.impl.bd.TestAll.suite());
-
-        
-        // BOp execution
-        suite.addTest(org.embergraph.bop.solutions.TestAll.suite());
-        
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

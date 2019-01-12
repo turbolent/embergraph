@@ -26,212 +26,177 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.openrdf.query.algebra.StatementPattern.Scope;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
+import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /**
  * A SPARQL Update operation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class Update extends GroupMemberNodeBase<IGroupMemberNode> {
+public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
+
+  /** */
+  private static final long serialVersionUID = 1L;
+
+  interface Annotations extends GroupMemberNodeBase.Annotations {
+
+    /** The {@link UpdateType}. */
+    String UPDATE_TYPE = "updateType";
 
     /**
-     * 
+     * The source graph -or- solution set (for operations which have this concept).
+     *
+     * <p>When the value is a {@link ConstantNode}, then the annotation is the source
+     * <em>graph</em>.
+     *
+     * <p>When the value is a {@link String}, then the annotation is the source <em>solution
+     * set</em>.
      */
-    private static final long serialVersionUID = 1L;
-
-    interface Annotations extends GroupMemberNodeBase.Annotations {
-        
-        /**
-         * The {@link UpdateType}.
-         */
-        String UPDATE_TYPE = "updateType";
-
-        /**
-         * The source graph -or- solution set (for operations which have this
-         * concept).
-         * <p>
-         * When the value is a {@link ConstantNode}, then the annotation is the
-         * source <em>graph</em>.
-         * <p>
-         * When the value is a {@link String}, then the annotation is the source
-         * <em>solution set</em>.
-         */
-        String SOURCE = "source";
-        
-        /**
-         * The target graph -or- solution set (for operations which have this
-         * concept). If there is only one graph (or solution set) on which the
-         * operation will have an effect, then it is modeled by this annotation.
-         * <p>
-         * When the value is a {@link ConstantNode}, then the annotation is the
-         * target <em>graph</em>.
-         * <p>
-         * When the value is a {@link String}, then the annotation is the target
-         * <em>solution set</em>.
-         */
-        String TARGET = "target";
-     
-        /**
-         * The "SILENT" option (default <code>false</code>) (for operations
-         * which have this concept).
-         */
-        String SILENT = "silent";
-        
-        boolean DEFAULT_SILENT = false;
-
-        /**
-         * The {@link Scope} (required for operations which have this concept).
-         */
-        String SCOPE = "scope";
-        
-        /**
-         * Reference to ASTDatasetClause list for operations deferred until evaluation stage
-         * 
-         * @see https://jira.blazegraph.com/browse/BLZG-1176
-         */
-        String DATASET_CLAUSES = "datasetClauses";
- 
-    }
+    String SOURCE = "source";
 
     /**
-     * 
+     * The target graph -or- solution set (for operations which have this concept). If there is only
+     * one graph (or solution set) on which the operation will have an effect, then it is modeled by
+     * this annotation.
+     *
+     * <p>When the value is a {@link ConstantNode}, then the annotation is the target
+     * <em>graph</em>.
+     *
+     * <p>When the value is a {@link String}, then the annotation is the target <em>solution
+     * set</em>.
      */
-    public Update(final UpdateType updateType) {
-
-        setProperty(Annotations.UPDATE_TYPE, updateType);
-
-        setProperty(Annotations.DATASET_CLAUSES, Collections.emptyList());
-
-    }
+    String TARGET = "target";
 
     /**
-     * @param op
+     * The "SILENT" option (default <code>false</code>) (for operations which have this concept).
      */
-    public Update(Update op) {
-        super(op);
-    }
+    String SILENT = "silent";
+
+    boolean DEFAULT_SILENT = false;
+
+    /** The {@link Scope} (required for operations which have this concept). */
+    String SCOPE = "scope";
 
     /**
-     * @param args
-     * @param anns
+     * Reference to ASTDatasetClause list for operations deferred until evaluation stage
+     *
+     * @see https://jira.blazegraph.com/browse/BLZG-1176
      */
-    public Update(BOp[] args, Map<String, Object> anns) {
-        super(args, anns);
-    }
-    
-    final public UpdateType getUpdateType() {
-        
-        return (UpdateType) getRequiredProperty(Annotations.UPDATE_TYPE);
-        
-    }
+    String DATASET_CLAUSES = "datasetClauses";
+  }
 
-    /**
-     * The {@link ConstantNode} for the source graph (for operations which have
-     * this concept).
-     * 
-     * @throws UnsupportedOperationException
-     *             if this concept is not supported by this type of
-     *             {@link Update} operation.
-     */
-    public ConstantNode getSourceGraph() {
+  /** */
+  public Update(final UpdateType updateType) {
 
-        throw new UnsupportedOperationException();
-        
-    }
+    setProperty(Annotations.UPDATE_TYPE, updateType);
 
-    public void setSourceGraph(final ConstantNode sourceGraph) {
+    setProperty(Annotations.DATASET_CLAUSES, Collections.emptyList());
+  }
 
-        throw new UnsupportedOperationException();
-        
-    }
+  /** @param op */
+  public Update(Update op) {
+    super(op);
+  }
 
-    /**
-     * The {@link ConstantNode} for the target graph (for operations which have
-     * this concept). If there is only one graph on which the operation will
-     * have an effect, then it is modeled by this annotation.
-     * 
-     * @throws UnsupportedOperationException
-     *             if this concept is not supported by this type of
-     *             {@link Update} operation.
-     */
-    public ConstantNode getTargetGraph() {
+  /**
+   * @param args
+   * @param anns
+   */
+  public Update(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+  }
 
-        throw new UnsupportedOperationException();
-        
-    }
-    
-    public void setTargetGraph(final ConstantNode targetGraph) {
+  public final UpdateType getUpdateType() {
 
-        throw new UnsupportedOperationException();
-        
-    }
+    return (UpdateType) getRequiredProperty(Annotations.UPDATE_TYPE);
+  }
 
-    /**
-     * The "SILENT" option (default <code>false</code>) (for operations
-     * which have this concept).
-     * 
-     * @throws UnsupportedOperationException
-     *             if this concept is not supported by this type of
-     *             {@link Update} operation.
-     */
-    public boolean isSilent() {
-       
-        throw new UnsupportedOperationException();
-        
-    }
+  /**
+   * The {@link ConstantNode} for the source graph (for operations which have this concept).
+   *
+   * @throws UnsupportedOperationException if this concept is not supported by this type of {@link
+   *     Update} operation.
+   */
+  public ConstantNode getSourceGraph() {
 
-    public void setSilent(final boolean silent) {
-        
-        throw new UnsupportedOperationException();
-        
-    }
-    
-    @Override
-    public Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa) {
-       
-    	return new LinkedHashSet<IVariable<?>>();
-    	
-    }
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa) {
+  public void setSourceGraph(final ConstantNode sourceGraph) {
 
-        return new LinkedHashSet<IVariable<?>>();
+    throw new UnsupportedOperationException();
+  }
 
-    }
+  /**
+   * The {@link ConstantNode} for the target graph (for operations which have this concept). If
+   * there is only one graph on which the operation will have an effect, then it is modeled by this
+   * annotation.
+   *
+   * @throws UnsupportedOperationException if this concept is not supported by this type of {@link
+   *     Update} operation.
+   */
+  public ConstantNode getTargetGraph() {
 
-    /**
-	 * Return the {@link ASTDatasetClause} list for operations deferred until
-	 * evaluation stage.
-	 *
-	 * @see Annotations#DATASET_CLAUSES
-	 * @see https://jira.blazegraph.com/browse/BLZG-1176
-     */
-    public void setDatasetClauses(final List<ASTDatasetClause> uc) {
+    throw new UnsupportedOperationException();
+  }
 
-        setProperty(Annotations.DATASET_CLAUSES, uc);
+  public void setTargetGraph(final ConstantNode targetGraph) {
 
-    }
+    throw new UnsupportedOperationException();
+  }
 
-    /**
-	 * Return the {@link ASTDatasetClause} list for operations deferred until
-	 * evaluation stage.
-	 * 
-	 * @see Annotations#DATASET_CLAUSES
-	 * @see https://jira.blazegraph.com/browse/BLZG-1176
-	 */
-    @SuppressWarnings("unchecked")
-    public List<ASTDatasetClause> getDatasetClauses() {
+  /**
+   * The "SILENT" option (default <code>false</code>) (for operations which have this concept).
+   *
+   * @throws UnsupportedOperationException if this concept is not supported by this type of {@link
+   *     Update} operation.
+   */
+  public boolean isSilent() {
 
-        return (List<ASTDatasetClause>) getProperty(Annotations.DATASET_CLAUSES);
+    throw new UnsupportedOperationException();
+  }
 
-    }
-    
+  public void setSilent(final boolean silent) {
+
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa) {
+
+    return new LinkedHashSet<IVariable<?>>();
+  }
+
+  @Override
+  public Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa) {
+
+    return new LinkedHashSet<IVariable<?>>();
+  }
+
+  /**
+   * Return the {@link ASTDatasetClause} list for operations deferred until evaluation stage.
+   *
+   * @see Annotations#DATASET_CLAUSES
+   * @see https://jira.blazegraph.com/browse/BLZG-1176
+   */
+  public void setDatasetClauses(final List<ASTDatasetClause> uc) {
+
+    setProperty(Annotations.DATASET_CLAUSES, uc);
+  }
+
+  /**
+   * Return the {@link ASTDatasetClause} list for operations deferred until evaluation stage.
+   *
+   * @see Annotations#DATASET_CLAUSES
+   * @see https://jira.blazegraph.com/browse/BLZG-1176
+   */
+  @SuppressWarnings("unchecked")
+  public List<ASTDatasetClause> getDatasetClauses() {
+
+    return (List<ASTDatasetClause>) getProperty(Annotations.DATASET_CLAUSES);
+  }
 }

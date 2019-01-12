@@ -24,9 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.config;
 
 import java.util.Properties;
-
 import junit.framework.TestCase;
-
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
@@ -34,246 +32,280 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 
 /**
  * Unit tests for {@link Configuration}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestConfiguration extends TestCase {
 
-    public TestConfiguration() {
+  public TestConfiguration() {
 
-        super();
-        
-    }
-    
-    public TestConfiguration(String name) {
-        
-        super(name);
-        
-    }
+    super();
+  }
 
-    /**
-     * Unit test for the override of the default by specifying a global value
-     * for a property.
+  public TestConfiguration(String name) {
+
+    super(name);
+  }
+
+  /** Unit test for the override of the default by specifying a global value for a property. */
+  public void testGlobalOverride() {
+
+    final IIndexManager indexManager = null;
+
+    final Properties properties = new Properties();
+
+    final String namespace = "foo.bar";
+
+    // global property name.
+    final String globalName = "embergraph.bar";
+
+    final String defaultValue = "goo";
+
+    final String globalOverride = "boo";
+
+    assertEquals(
+        defaultValue,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+
+    properties.setProperty(globalName, globalOverride);
+
+    assertEquals(
+        globalOverride,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+  }
+
+  /**
+   * Unit test for override of a property value specified for the exact namespace (rather than some
+   * namespace prefix).
+   */
+  public void test_exactNamespaceOverride() {
+
+    final IIndexManager indexManager = null;
+
+    final Properties properties = new Properties();
+
+    final String namespace = "foo.baz";
+
+    //        // local property name.
+    //        final String localName = "bar";
+
+    // global property name.
+    final String globalName = "embergraph.bar";
+
+    final String defaultValue = "goo";
+
+    final String overrideValue = "boo";
+
+    assertEquals(
+        defaultValue,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+
+    final String overrideName = Configuration.getOverrideProperty(namespace, globalName);
+
+    properties.setProperty(overrideName, overrideValue);
+
+    assertEquals(
+        overrideValue,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+  }
+
+  /**
+   * Unit test where the property override is applied at the parent level in the namespace ("foo" vs
+   * "foo.baz").
+   */
+  public void test_prefixNamespaceOverride() {
+
+    final IIndexManager indexManager = null;
+
+    final Properties properties = new Properties();
+
+    final String namespace = "foo.baz";
+
+    //        // local property name.
+    //        final String localName = "bar";
+
+    // global property name.
+    final String globalName = "embergraph.bar";
+
+    final String defaultValue = "goo";
+
+    final String overrideName = Configuration.getOverrideProperty(namespace, globalName);
+
+    final String overrideValue = "boo";
+
+    assertEquals(
+        defaultValue,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+
+    properties.setProperty(overrideName, overrideValue);
+
+    assertEquals(
+        overrideValue,
+        Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
+  }
+
+  public void test_getOverrideProperty() {
+
+    final String namespace = "U8000";
+    final String namespace2 = "U100";
+
+    final String propertyName = IndexMetadata.Options.SCATTER_SPLIT_ENABLED;
+
+    final String overrideName =
+        Configuration.getOverrideProperty(
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName);
+
+    System.err.println(overrideName);
+
+    final String defaultValue = "true";
+
+    final Properties p = new Properties();
+
+    // override this property.
+    p.setProperty(overrideName, "false");
+
+    final IIndexManager indexManager = null;
+
+    /*
+     * Verify override used for U8000.lex.TERMS (this is the specific case
+     * for the override).
      */
-    public void testGlobalOverride() {
+    assertEquals(
+        "false",
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName,
+            defaultValue));
 
-        final IIndexManager indexManager = null;
-
-        final Properties properties = new Properties();
-
-        final String namespace = "foo.bar";
-
-        // global property name.
-        final String globalName = "embergraph.bar";
-        
-        final String defaultValue = "goo";
-        
-        final String globalOverride = "boo";
-        
-        assertEquals(defaultValue, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
-        
-        properties.setProperty(globalName, globalOverride);
-        
-        assertEquals(globalOverride, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
-
-    }
-    
-    /**
-     * Unit test for override of a property value specified for the exact
-     * namespace (rather than some namespace prefix).
+    /*
+     * Verify override ignored for U8000.lex.FOO (another index in the
+     * same relation).
      */
-    public void test_exactNamespaceOverride() {
+    assertEquals(
+        defaultValue,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + "FOO",
+            propertyName,
+            defaultValue));
 
-        final IIndexManager indexManager = null;
-
-        final Properties properties = new Properties();
-
-        final String namespace = "foo.baz";
-        
-//        // local property name.
-//        final String localName = "bar";
-
-        // global property name.
-        final String globalName = "embergraph.bar";
-        
-        final String defaultValue = "goo";
-        
-        final String overrideValue = "boo";
-        
-        assertEquals(defaultValue, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
-        
-        final String overrideName = Configuration.getOverrideProperty(
-                namespace, globalName);
-
-        properties.setProperty(overrideName, overrideValue);
-
-        assertEquals(overrideValue, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
-        
-    }
-
-    /**
-     * Unit test where the property override is applied at the parent level in
-     * the namespace ("foo" vs "foo.baz").
+    /*
+     * Verify override ignored for U100.lex.TERMS (an index in a different
+     * relation).
      */
-    public void test_prefixNamespaceOverride() {
-        
-        final IIndexManager indexManager = null;
+    assertEquals(
+        defaultValue,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName,
+            defaultValue));
+  }
 
-        final Properties properties = new Properties();
+  public void test_getOverrideProperty2() {
 
-        final String namespace = "foo.baz";
+    final String namespace = "U8000";
+    final String namespace1 = "U100";
+    final String namespace2 = "U50";
 
-//        // local property name.
-//        final String localName = "bar";
+    final String propertyName = IndexMetadata.Options.SCATTER_SPLIT_DATA_SERVICE_COUNT;
 
-        // global property name.
-        final String globalName = "embergraph.bar";
+    // override of a specific index in a specific relation.
+    final String overrideName =
+        Configuration.getOverrideProperty(
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName);
 
-        final String defaultValue = "goo";
+    // override of all indices in a different relation.
+    final String overrideName2 = Configuration.getOverrideProperty(namespace2, propertyName);
 
-        final String overrideName = Configuration.getOverrideProperty(
-                namespace, globalName);
-        
-        final String overrideValue = "boo";
+    System.err.println(overrideName);
+    System.err.println(overrideName2);
 
-        assertEquals(defaultValue, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
+    Properties p = new Properties();
 
-        properties.setProperty(overrideName, overrideValue);
+    final String defaultValue = "0";
 
-        assertEquals(overrideValue, Configuration.getProperty(indexManager,
-                properties, namespace, globalName, defaultValue));
-        
-    }
-    
-    public void test_getOverrideProperty() {
-        
-        final String namespace = "U8000";
-        final String namespace2 = "U100";
+    final String globalOverride = "10";
 
-        final String propertyName = IndexMetadata.Options.SCATTER_SPLIT_ENABLED;
+    p = new Properties(p);
 
-        final String overrideName = Configuration.getOverrideProperty(namespace
-                + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                + LexiconKeyOrder.BLOBS, propertyName);
+    final String otherOverride = "5";
 
-        System.err.println(overrideName);
+    // override the global default.
+    p.setProperty(propertyName, globalOverride);
 
-        final String defaultValue = "true";
-        
-        final Properties p = new Properties();
+    // a different override for the specific index.
+    p.setProperty(overrideName, "2");
 
-        // override this property.
-        p.setProperty(overrideName, "false");
+    // a different override for a different relation.
+    p.setProperty(overrideName2, otherOverride);
 
-        final IIndexManager indexManager = null;
+    final IIndexManager indexManager = null;
 
-        /*
-         * Verify override used for U8000.lex.TERMS (this is the specific case
-         * for the override).
-         */
-        assertEquals("false", Configuration.getProperty(indexManager, p,
-                namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + LexiconKeyOrder.BLOBS, propertyName, defaultValue));
+    /*
+     * Verify override used for U8000.lex.TERM2ID (this is the specific case
+     * for the override).
+     */
+    assertEquals(
+        "2",
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName,
+            defaultValue));
 
-        /*
-         * Verify override ignored for U8000.lex.FOO (another index in the
-         * same relation).
-         */
-        assertEquals(defaultValue, Configuration.getProperty(indexManager, p,
-                namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + "FOO", propertyName, defaultValue));
+    /*
+     * Verify global override used for a different index in the same
+     * relation.
+     */
+    assertEquals(
+        globalOverride,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + "FOO",
+            propertyName,
+            defaultValue));
 
-        /*
-         * Verify override ignored for U100.lex.TERMS (an index in a different
-         * relation).
-         */
-        assertEquals(defaultValue, Configuration.getProperty(indexManager, p,
-                namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + LexiconKeyOrder.BLOBS, propertyName, defaultValue));
+    /*
+     * Verify global override used for an index in another relation.
+     */
+    assertEquals(
+        globalOverride,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace1 + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName,
+            defaultValue));
 
-    }
-
-    public void test_getOverrideProperty2() {
-        
-        final String namespace = "U8000";
-        final String namespace1 = "U100";
-        final String namespace2 = "U50";
-
-        final String propertyName = IndexMetadata.Options.SCATTER_SPLIT_DATA_SERVICE_COUNT;
-
-        // override of a specific index in a specific relation.
-        final String overrideName = Configuration.getOverrideProperty(namespace
-                + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                + LexiconKeyOrder.BLOBS, propertyName);
-
-        // override of all indices in a different relation.
-        final String overrideName2 = Configuration.getOverrideProperty(
-                namespace2, propertyName);
-
-        System.err.println(overrideName);
-        System.err.println(overrideName2);
-
-        Properties p = new Properties();
-
-        final String defaultValue = "0";
-        
-        final String globalOverride = "10";
-
-        p = new Properties(p);
-        
-        final String otherOverride = "5";
-        
-        // override the global default.
-        p.setProperty(propertyName, globalOverride);
-        
-        // a different override for the specific index.
-        p.setProperty(overrideName, "2");
-
-        // a different override for a different relation.
-        p.setProperty(overrideName2, otherOverride);
-
-        final IIndexManager indexManager = null;
-
-        /*
-         * Verify override used for U8000.lex.TERM2ID (this is the specific case
-         * for the override).
-         */
-        assertEquals("2", Configuration.getProperty(indexManager, p,
-                namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + LexiconKeyOrder.BLOBS, propertyName, defaultValue));
-
-        /*
-         * Verify global override used for a different index in the same
-         * relation.
-         */
-        assertEquals(globalOverride, Configuration.getProperty(indexManager, p,
-                namespace + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + "FOO", propertyName, defaultValue));
-
-        /*
-         * Verify global override used for an index in another relation.
-         */
-        assertEquals(globalOverride, Configuration.getProperty(indexManager, p,
-                namespace1 + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + LexiconKeyOrder.BLOBS, propertyName, defaultValue));
-
-        /*
-         * Verify other override used for all indices in the namespace2
-         * relation.
-         */
-        assertEquals(otherOverride, Configuration.getProperty(indexManager, p,
-                namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + LexiconKeyOrder.BLOBS, propertyName, defaultValue));
-        assertEquals(otherOverride, Configuration.getProperty(indexManager, p,
-                namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "."
-                        + "FOO", propertyName, defaultValue));
-
-    }
-
+    /*
+     * Verify other override used for all indices in the namespace2
+     * relation.
+     */
+    assertEquals(
+        otherOverride,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + LexiconKeyOrder.BLOBS,
+            propertyName,
+            defaultValue));
+    assertEquals(
+        otherOverride,
+        Configuration.getProperty(
+            indexManager,
+            p,
+            namespace2 + "." + LexiconRelation.NAME_LEXICON_RELATION + "." + "FOO",
+            propertyName,
+            defaultValue));
+  }
 }

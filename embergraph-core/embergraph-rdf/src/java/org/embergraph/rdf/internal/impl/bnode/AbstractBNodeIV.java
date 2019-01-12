@@ -17,71 +17,58 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.impl.bnode;
 
-import org.openrdf.model.BNode;
-import org.openrdf.model.Value;
-import org.openrdf.model.ValueFactory;
-
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
+import org.openrdf.model.BNode;
+import org.openrdf.model.Value;
+import org.openrdf.model.ValueFactory;
 
 /**
- * Class for inline RDF blank nodes. 
- * <p>
- * {@inheritDoc}
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
- * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z
- *          thompsonbry $
- * 
+ * Class for inline RDF blank nodes.
+ *
+ * <p>{@inheritDoc}
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+ * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z thompsonbry $
  * @see AbstractTripleStore.Options
  */
-abstract public class AbstractBNodeIV<V extends EmbergraphBNode, T> extends
-        AbstractInlineIV<V, T> implements BNode {
+public abstract class AbstractBNodeIV<V extends EmbergraphBNode, T> extends AbstractInlineIV<V, T>
+    implements BNode {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4560216387427028030L;
-    
-    public AbstractBNodeIV(final DTE dte) {
+  /** */
+  private static final long serialVersionUID = -4560216387427028030L;
 
-        super(VTE.BNODE, dte);
+  public AbstractBNodeIV(final DTE dte) {
 
+    super(VTE.BNODE, dte);
+  }
+
+  public V asValue(final LexiconRelation lex) {
+
+    V bnode = getValueCache();
+
+    if (bnode == null) {
+
+      final ValueFactory f = lex.getValueFactory();
+
+      bnode = (V) f.createBNode(stringValue());
+
+      bnode.setIV(this);
+
+      setValue(bnode);
     }
 
-	public V asValue(final LexiconRelation lex) {
-		
-		V bnode = getValueCache();
-		
-		if (bnode == null) {
-		
-			final ValueFactory f = lex.getValueFactory();
-			
-			bnode = (V) f.createBNode(stringValue());
-			
-			bnode.setIV(this);
-			
-			setValue(bnode);
+    return bnode;
+  }
 
-		}
-	
-		return bnode;
-		
-    }
-	
-    /**
-     * Implements {@link Value#stringValue()}.
-     */
-    @Override
-    public String stringValue() {
-        
-        return getID();
+  /** Implements {@link Value#stringValue()}. */
+  @Override
+  public String stringValue() {
 
-    }
-
+    return getID();
+  }
 }

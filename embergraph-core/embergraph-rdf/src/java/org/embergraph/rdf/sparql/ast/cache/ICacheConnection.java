@@ -18,56 +18,47 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.cache;
 
 /**
- * Interface for an abstraction used to support application specific local
- * caches, remote caches, and cache fabrics.
- * 
+ * Interface for an abstraction used to support application specific local caches, remote caches,
+ * and cache fabrics.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ICacheConnection {
 
-    /**
-     * Initialize the cache / cache connection.
-     */
-    void init();
-    
-    /**
-     * Close the cache / cache connection.
-     */
-    void close();
+  /** Initialize the cache / cache connection. */
+  void init();
 
-    /**
-     * Destroy the cache(s) associated with that namespace.
-     * 
-     * @param namespace
-     *            The KB namespace.
-     */
-    void destroyCaches(final String namespace,final long timestamp);
+  /** Close the cache / cache connection. */
+  void close();
 
-//    /**
-//     * Return a view of the named SOLUTIONS cache.
-//     * 
-//     * @param namespace
-//     *            The KB namespace.
-//     * @param timestamp
-//     *            The timestamp of the view.
-//     * 
-//     * @return The view of the named solutions cache -or- <code>null</code> if
-//     *         no cache is available for that KB.
-//     */
-//    ISolutionSetManager getSparqlCache(final String namespace,
-//            final long timestamp);
+  /**
+   * Destroy the cache(s) associated with that namespace.
+   *
+   * @param namespace The KB namespace.
+   */
+  void destroyCaches(final String namespace, final long timestamp);
 
-    /**
-     * Return a view of a maintained DESCRIBE cache.
-     * 
-     * @param namespace
-     *            The KB namespace.
-     * @param timestamp
-     *            The timestamp of the view.
-     * 
-     * @return The view of the maintained DESCRIBE cache -or- <code>null</code>
-     *         if no cache is available for that KB.
-     */
-    IDescribeCache getDescribeCache(final String namespace, final long timestamp);
+  //    /**
+  //     * Return a view of the named SOLUTIONS cache.
+  //     *
+  //     * @param namespace
+  //     *            The KB namespace.
+  //     * @param timestamp
+  //     *            The timestamp of the view.
+  //     *
+  //     * @return The view of the named solutions cache -or- <code>null</code> if
+  //     *         no cache is available for that KB.
+  //     */
+  //    ISolutionSetManager getSparqlCache(final String namespace,
+  //            final long timestamp);
 
+  /**
+   * Return a view of a maintained DESCRIBE cache.
+   *
+   * @param namespace The KB namespace.
+   * @param timestamp The timestamp of the view.
+   * @return The view of the maintained DESCRIBE cache -or- <code>null</code> if no cache is
+   *     available for that KB.
+   */
+  IDescribeCache getDescribeCache(final String namespace, final long timestamp);
 }

@@ -2,121 +2,108 @@ package org.embergraph.rdf.internal;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import junit.framework.TestCase2;
-
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test suite for {@link FullyInlineTypedLiteralIV}.
- */
+/** Test suite for {@link FullyInlineTypedLiteralIV}. */
 public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
-	public TestFullyInlineTypedLiteralIV() {
-	}
+  public TestFullyInlineTypedLiteralIV() {}
 
-	public TestFullyInlineTypedLiteralIV(String name) {
-		super(name);
-	}
+  public TestFullyInlineTypedLiteralIV(String name) {
+    super(name);
+  }
 
-	public void test_InlineLiteralIV_plain() {
+  public void test_InlineLiteralIV_plain() {
 
-        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
-        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
-        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
-        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
-        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+  }
 
-	}
-	
-//Removed in backport.    Not used in pre-RDF 1.1 versions
-//	public void test_InlineLiteralIV_languageCode() {
-//
-//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12","fr",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123","de",null/*datatype*/));
-//
-//	}
+  // Removed in backport.    Not used in pre-RDF 1.1 versions
+  //	public void test_InlineLiteralIV_languageCode() {
+  //
+  //        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("","en",null/*datatype*/));
+  //        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ","en",null/*datatype*/));
+  //        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1","en",null/*datatype*/));
+  //        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12","fr",null/*datatype*/));
+  //        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123","de",null/*datatype*/));
+  //
+  //	}
 
-	public void test_InlineLiteralIV_datatypeURI() {
+  public void test_InlineLiteralIV_datatypeURI() {
 
-		final URI datatype = new URIImpl("http://www.embergraph.org");
+    final URI datatype = new URIImpl("http://www.embergraph.org");
 
-		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+  }
 
-	}
+  private void doTest(final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
 
-	private void doTest(final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
+    assertEquals(VTE.LITERAL, iv.getVTE());
 
-		assertEquals(VTE.LITERAL, iv.getVTE());
-		
-		assertTrue(iv.isInline());
-		
-		assertFalse(iv.isExtension());
+    assertTrue(iv.isInline());
 
-		assertEquals(DTE.XSDString, iv.getDTE());
-		
-		final BlobsIndexHelper h = new BlobsIndexHelper();
-		
-		final IKeyBuilder keyBuilder = h.newKeyBuilder();
-		
-		final byte[] key = IVUtility.encode(keyBuilder, iv).getKey();
-		
-		final IV<?,?> actual = IVUtility.decode(key);
-		
-		assertEquals(iv, actual);
-		
-		assertEquals(key.length, iv.byteLength());
+    assertFalse(iv.isExtension());
 
-		assertEquals(key.length, actual.byteLength());
-		
-	}
+    assertEquals(DTE.XSDString, iv.getDTE());
 
-	public void test_encodeDecode_comparator() {
-        
-	    final List<IV<?,?>> ivs = new LinkedList<IV<?,?>>();
-        {
+    final BlobsIndexHelper h = new BlobsIndexHelper();
 
-            final URI datatype = new URIImpl("http://www.embergraph.org");
-            
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
-            
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12","fr",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123","de",null/*datatype*/));
+    final IKeyBuilder keyBuilder = h.newKeyBuilder();
 
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+    final byte[] key = IVUtility.encode(keyBuilder, iv).getKey();
 
-        }
-        
-        final IV<?, ?>[] e = ivs.toArray(new IV[0]);
+    final IV<?, ?> actual = IVUtility.decode(key);
 
-        AbstractEncodeDecodeKeysTestCase.doEncodeDecodeTest(e);
+    assertEquals(iv, actual);
 
-        AbstractEncodeDecodeKeysTestCase.doComparatorTest(e);
-    
-	}
-	
+    assertEquals(key.length, iv.byteLength());
+
+    assertEquals(key.length, actual.byteLength());
+  }
+
+  public void test_encodeDecode_comparator() {
+
+    final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    {
+      final URI datatype = new URIImpl("http://www.embergraph.org");
+
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", "fr", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", "de", null /*datatype*/));
+
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+    }
+
+    final IV<?, ?>[] e = ivs.toArray(new IV[0]);
+
+    AbstractEncodeDecodeKeysTestCase.doEncodeDecodeTest(e);
+
+    AbstractEncodeDecodeKeysTestCase.doComparatorTest(e);
+  }
 }

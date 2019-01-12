@@ -24,9 +24,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.QuorumService;
 import org.embergraph.journal.IIndexManager;
@@ -43,414 +41,392 @@ import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.InnerCause;
 
 /**
- * Task creates a KB for the given namespace iff no such KB exists. The correct
- * use of this class is as follows:
- * 
+ * Task creates a KB for the given namespace iff no such KB exists. The correct use of this class is
+ * as follows:
+ *
  * <pre>
  * AbstractApiTask.submitApiTask(indexManager, new CreateKBTask(namespace, properties)).get();
  * </pre>
- * 
+ *
  * @see DestroyKBTask
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CreateKBTask extends AbstractApiTask<Void> {
 
-    private static final transient Logger log = Logger.getLogger(CreateKBTask.class);
-    private static final transient Logger txLog = Logger.getLogger("org.embergraph.txLog");
-    
-    /**
-     * The effective properties that will be used to create the namespace.
-     */
-    private final Properties properties;
-    
-    /**
-     * Return the effective properties that will be used to create the namespace.
-     */
-    protected Properties getProperties() {
-       return properties;
+  private static final transient Logger log = Logger.getLogger(CreateKBTask.class);
+  private static final transient Logger txLog = Logger.getLogger("org.embergraph.txLog");
+
+  /** The effective properties that will be used to create the namespace. */
+  private final Properties properties;
+
+  /** Return the effective properties that will be used to create the namespace. */
+  protected Properties getProperties() {
+    return properties;
+  }
+
+  public CreateKBTask(final String namespace, final Properties properties) {
+
+    super(namespace, ITx.UNISOLATED, true /* isGRSRequired */);
+
+    if (properties == null) throw new IllegalArgumentException();
+
+    // Use the caller's properties as the default.
+    this.properties = new Properties(properties);
+
+    // override the namespace.
+    this.properties.setProperty(EmbergraphSail.Options.NAMESPACE, namespace);
+  }
+
+  @Override
+  public final boolean isReadOnly() {
+    return false;
+  }
+
+  @Override
+  public Void call() throws Exception {
+
+    try {
+
+      doRun();
+
+    } catch (Throwable t) {
+
+      if (InnerCause.isInnerCause(t, AsynchronousQuorumCloseException.class)) {
+
+        /*
+         * The quorum is closed, so we stopped trying.
+         *
+         * Note: This can also happen if the quorum has not been started
+         * yet. The HAJournalServer explicitly invokes the CreateKBTask
+         * when entering "RunMet" in order to handle this case.
+         */
+        log.warn(t);
+
+      } else {
+
+        log.error(t, t);
+      }
+
+      throw new Exception(t);
     }
 
-   public CreateKBTask(final String namespace, final Properties properties) {
+    return null;
+  }
 
-      super(namespace, ITx.UNISOLATED, true/* isGRSRequired */);
+  /**
+   * Note: This process is not robust if the leader is elected and becomes HAReady and then fails
+   * over before the KB is created. The task should be re-submitted by the new leader once that
+   * leader is elected.
+   *
+   * @throws Exception
+   */
+  private void doRun() throws Exception {
 
-      if (properties == null)
-         throw new IllegalArgumentException();
+    final IIndexManager indexManager = getIndexManager();
 
-      // Use the caller's properties as the default.
-      this.properties = new Properties(properties);
+    if (indexManager instanceof IJournal) {
 
-      // override the namespace.
-      this.properties.setProperty(EmbergraphSail.Options.NAMESPACE, namespace);
+      /*
+       * Create a local triple store.
+       *
+       * Note: This hands over the logic to some custom code located
+       * on the EmbergraphSail.
+       */
 
-   }
+      final IJournal jnl = (IJournal) indexManager;
 
-   @Override
-   final public boolean isReadOnly() {
-      return false;
-   }
-    
-    @Override
-    public Void call() throws Exception {
+      final Quorum<HAGlue, QuorumService<HAGlue>> quorum = jnl.getQuorum();
 
+      boolean isSoloOrLeader;
+
+      if (quorum == null) {
+
+        isSoloOrLeader = true;
+
+      } else {
+
+        /*
+         * Wait for a quorum meet.
+         */
+        final long token;
         try {
-            
-            doRun();
-            
-        } catch (Throwable t) {
-
-            if (InnerCause.isInnerCause(t, AsynchronousQuorumCloseException.class)) {
-
-                /*
-                 * The quorum is closed, so we stopped trying.
-                 * 
-                 * Note: This can also happen if the quorum has not been started
-                 * yet. The HAJournalServer explicitly invokes the CreateKBTask
-                 * when entering "RunMet" in order to handle this case.
-                 */
-                log.warn(t);
-
-            } else {
-
-                log.error(t, t);
-
-            }
-
-            throw new Exception(t);
-            
+          long tmp = quorum.token();
+          if (tmp == Quorum.NO_QUORUM) {
+            // Only log if we are going to wait.
+            log.warn("Awaiting quorum.");
+            tmp = quorum.awaitQuorum();
+          }
+          token = tmp;
+          assert token != Quorum.NO_QUORUM;
+        } catch (AsynchronousQuorumCloseException e1) {
+          throw new RuntimeException(e1);
+        } catch (InterruptedException e1) {
+          throw new RuntimeException(e1);
         }
 
-        return null;
+        /*
+         * Now wait until the service is HAReady.
+         */
+        try {
+          jnl.awaitHAReady(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (AsynchronousQuorumCloseException e) {
+          throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+          throw new RuntimeException(e);
+        }
 
-    }
+        if (quorum.getMember().isLeader(token)) {
+          isSoloOrLeader = true;
+        } else {
+          isSoloOrLeader = false;
+        }
 
-    /**
-     * Note: This process is not robust if the leader is elected and becomes
-     * HAReady and then fails over before the KB is created. The task should be
-     * re-submitted by the new leader once that leader is elected.
-     * 
-     * @throws Exception 
-     */
-    private void doRun() throws Exception {
-    
-       final IIndexManager indexManager = getIndexManager();
-       
-        if (indexManager instanceof IJournal) {
+        final IJournal journal = jnl;
+        if (journal.isGroupCommit() && journal.getRootBlockView().getCommitCounter() == 0L) {
+          /*
+           * Force the GRS to be materialized. This is necessary for the
+           * initial KB create when using group commit and HA. (For HA the
+           * initial KB create is single threaded within the context of the
+           * leader election. However, this is not true for a standalone
+           * Journal.)
+           *
+           * Note: This logic will fail if AbstractTask uses a
+           * DefaultResourceLocator that is based on the HAJournal and not
+           * on an IsolatedActionJournal because that will allow the
+           * GlobalRowStoreHelper.getGlobalRowStore() method to registerr
+           * the GSR index on the unisolated Name2Addr rather than the n2a
+           * class inside of the AbstractTask.
+           */
+          journal.getGlobalRowStore();
+          journal.commit();
+        }
+      }
 
-            /*
-             * Create a local triple store.
-             * 
-             * Note: This hands over the logic to some custom code located
-             * on the EmbergraphSail.
-             */
+      if (isSoloOrLeader) {
 
-            final IJournal jnl = (IJournal) indexManager;
+        /*
+         * Note: createLTS() writes on the GRS. This is an atomic row
+         * store. The change is automatically committed. The unisolated
+         * view of the EmbergraphSailConnection is being used solely to
+         * have the correct locks.
+         *
+         * @see BLZG-2023, BLZG-2041
+         */
+        // Wrap with SAIL.
+        final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
+        try {
+          sail.initialize();
+          final UnisolatedCallable<Void> task =
+              new UnisolatedCallable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                  if (!sail.exists()) {
 
-            final Quorum<HAGlue, QuorumService<HAGlue>> quorum = jnl
-                    .getQuorum();
-
-            boolean isSoloOrLeader;
-
-            if (quorum == null) {
-
-                isSoloOrLeader = true;
-
-            } else {
-
-                /*
-                 * Wait for a quorum meet.
-                 */
-                final long token;
-                try {
-                    long tmp = quorum.token();
-                    if (tmp == Quorum.NO_QUORUM) {
-                        // Only log if we are going to wait.
-                        log.warn("Awaiting quorum.");
-                        tmp = quorum.awaitQuorum();
-                    }
-                    token = tmp;
-                    assert token != Quorum.NO_QUORUM;
-                } catch (AsynchronousQuorumCloseException e1) {
-                    throw new RuntimeException(e1);
-                } catch (InterruptedException e1) {
-                    throw new RuntimeException(e1);
-                }
-
-                /*
-                 * Now wait until the service is HAReady.
-                 */
-                try {
-                    jnl.awaitHAReady(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-                } catch (AsynchronousQuorumCloseException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (TimeoutException e) {
-                    throw new RuntimeException(e);
-                }
-                
-                if (quorum.getMember().isLeader(token)) {
-                    isSoloOrLeader = true;
-                } else {
-                    isSoloOrLeader = false;
-                }
-                
-                final IJournal journal = jnl;
-                if (journal.isGroupCommit()
-                  && journal.getRootBlockView().getCommitCounter() == 0L) {
-                  /*
-                   * Force the GRS to be materialized. This is necessary for the
-                   * initial KB create when using group commit and HA. (For HA the
-                   * initial KB create is single threaded within the context of the
-                   * leader election. However, this is not true for a standalone
-                   * Journal.)
-                   * 
-                   * Note: This logic will fail if AbstractTask uses a
-                   * DefaultResourceLocator that is based on the HAJournal and not
-                   * on an IsolatedActionJournal because that will allow the
-                   * GlobalRowStoreHelper.getGlobalRowStore() method to registerr
-                   * the GSR index on the unisolated Name2Addr rather than the n2a
-                   * class inside of the AbstractTask.
-                   */
-                  journal.getGlobalRowStore();
-                  journal.commit();
-               }
-              
-            }
-
-            if (isSoloOrLeader) {
-
-                /*
-                 * Note: createLTS() writes on the GRS. This is an atomic row
-                 * store. The change is automatically committed. The unisolated
-                 * view of the EmbergraphSailConnection is being used solely to
-                 * have the correct locks.
-                 * 
-                 * @see BLZG-2023, BLZG-2041
-                 */
-                // Wrap with SAIL.
-                final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
-                try {
-                    sail.initialize();
-                    final UnisolatedCallable<Void> task = new UnisolatedCallable<Void>() {
-                        @Override
-                        public Void call() throws Exception {
-                            if (!sail.exists()) {
- 
                     // create the appropriate as configured triple/quad store.
                     createLTS(jnl, getProperties());
 
-                                if (txLog.isInfoEnabled())
-                                    txLog.info("SAIL-CREATE-NAMESPACE: namespace=" + namespace); // FIXME BLZG-2041 document on wiki
-                            }
-                            return null;
-                        }
-                    };
-                    try {
-                        // Do work with appropriate locks are held.
-                        sail.getUnisolatedConnectionLocksAndRunLambda(task);
-                    } finally {
-                        // Release locks.
-                        task.releaseLocks();
-                    }
-                } finally {
-                    sail.shutDown();
+                    if (txLog.isInfoEnabled())
+                      txLog.info(
+                          "SAIL-CREATE-NAMESPACE: namespace="
+                              + namespace); // FIXME BLZG-2041 document on wiki
+                  }
+                  return null;
                 }
-
-            }
-
-        } else {
-
-         // Attempt to resolve the namespace.
-             if (indexManager.getResourceLocator().locate(namespace, ITx.UNISOLATED) == null) {
-    
-            /*
-             * Register triple store for scale-out.
-                 * 
-                 * Note: Scale-out does not have a global lock.
-             */
-    
-            if (log.isInfoEnabled())
-               log.info("Creating KB instance: namespace=" + namespace);
-    
-            final ScaleOutTripleStore lts = new ScaleOutTripleStore(
-                  indexManager, namespace, ITx.UNISOLATED, getProperties());
-    
-                // Note: Commit in scale-out is shard-wise acid.
-            lts.create();
-    
-                if (txLog.isInfoEnabled())
-                   txLog.info("CREATE: namespace=" + namespace);
-
-         } // if( tripleStore == null )
-
+              };
+          try {
+            // Do work with appropriate locks are held.
+            sail.getUnisolatedConnectionLocksAndRunLambda(task);
+          } finally {
+            // Release locks.
+            task.releaseLocks();
+          }
+        } finally {
+          sail.shutDown();
+        }
       }
 
-   }
+    } else {
 
-   /**
-    * Create an {@link AbstractTripleStore} instance against a local database.
-    * <p>
-    * Note: For group commit, the caller will be holding the resource lock for
-    * the namespace.
-    * 
-    * @param indexManager
-    * @param properties
-     * 
-     * @throws IOException
-    */
-    private void createLTS(final IJournal indexManager, final Properties properties) throws IOException {
-       
-      final String namespace = properties.getProperty(
-            EmbergraphSail.Options.NAMESPACE,
-            EmbergraphSail.Options.DEFAULT_NAMESPACE);
+      // Attempt to resolve the namespace.
+      if (indexManager.getResourceLocator().locate(namespace, ITx.UNISOLATED) == null) {
 
-      // throws an exception if there are inconsistent properties
-      EmbergraphSail.checkProperties(properties);
-      
-//      /**
-//       * Note: Unless group commit is enabled, we need to make this operation
-//       * mutually exclusive with KB level writers in order to avoid the
-//       * possibility of a triggering a commit during the middle of a
-//       * EmbergraphSailConnection level operation (or visa versa).
-//       * 
-//       * Note: When group commit is not enabled, the indexManager will be a
-//       * Journal class. When it is enabled, it will merely implement the
-//       * IJournal interface.
-//       * 
-//       * @see #1143 (Isolation broken in NSS when groupCommit disabled)
-//       */
-//      final boolean isGroupCommit = indexManager.isGroupCommit();
-//      boolean acquiredConnection = false;
-//      try {
-//
-//         if (!isGroupCommit) {
-//            try {
-//               // acquire the unisolated connection permit.
-//               ((Journal) indexManager).acquireUnisolatedConnection();
-//               acquiredConnection = true;
-//            } catch (InterruptedException e) {
-//               throw new RuntimeException(e);
-//            }
-//         }
+        /*
+         * Register triple store for scale-out.
+         *
+         * Note: Scale-out does not have a global lock.
+         */
 
-//      Note: Already checked by the caller.
-//      
-//         // Check for pre-existing instance.
-//         {
-//
-//            final LocalTripleStore lts = (LocalTripleStore) indexManager
-//                  .getResourceLocator().locate(namespace, ITx.UNISOLATED);
-//
-//            if (lts != null) {
-//
-//               return;
-//
-//            }
-//
-//         }
+        if (log.isInfoEnabled()) log.info("Creating KB instance: namespace=" + namespace);
 
-         // Create a new instance.
-         {
+        final ScaleOutTripleStore lts =
+            new ScaleOutTripleStore(indexManager, namespace, ITx.UNISOLATED, getProperties());
 
-            if (Boolean.parseBoolean(properties.getProperty(
-                  EmbergraphSail.Options.ISOLATABLE_INDICES,
-                  EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
+        // Note: Commit in scale-out is shard-wise acid.
+        lts.create();
 
-               /*
-                * Isolatable indices: requires the use of a tx to create the KB
-                * instance.
-                * 
-                * FIXME BLZG-2041: Verify test coverage of this code path.
-                */
+        if (txLog.isInfoEnabled()) txLog.info("CREATE: namespace=" + namespace);
+      } // if( tripleStore == null )
+    }
+  }
 
-               final ITransactionService txService = indexManager
-                        .getLocalTransactionManager().getTransactionService();
+  /**
+   * Create an {@link AbstractTripleStore} instance against a local database.
+   *
+   * <p>Note: For group commit, the caller will be holding the resource lock for the namespace.
+   *
+   * @param indexManager
+   * @param properties
+   * @throws IOException
+   */
+  private void createLTS(final IJournal indexManager, final Properties properties)
+      throws IOException {
 
-               final long txIdCreate = txService.newTx(ITx.UNISOLATED);
+    final String namespace =
+        properties.getProperty(
+            EmbergraphSail.Options.NAMESPACE, EmbergraphSail.Options.DEFAULT_NAMESPACE);
 
-               boolean ok = false;
-               try {
+    // throws an exception if there are inconsistent properties
+    EmbergraphSail.checkProperties(properties);
 
-                  final AbstractTripleStore txCreateView = new LocalTripleStore(
-                        indexManager, namespace, Long.valueOf(txIdCreate),
-                        properties);
+    //      /**
+    //       * Note: Unless group commit is enabled, we need to make this operation
+    //       * mutually exclusive with KB level writers in order to avoid the
+    //       * possibility of a triggering a commit during the middle of a
+    //       * EmbergraphSailConnection level operation (or visa versa).
+    //       *
+    //       * Note: When group commit is not enabled, the indexManager will be a
+    //       * Journal class. When it is enabled, it will merely implement the
+    //       * IJournal interface.
+    //       *
+    //       * @see #1143 (Isolation broken in NSS when groupCommit disabled)
+    //       */
+    //      final boolean isGroupCommit = indexManager.isGroupCommit();
+    //      boolean acquiredConnection = false;
+    //      try {
+    //
+    //         if (!isGroupCommit) {
+    //            try {
+    //               // acquire the unisolated connection permit.
+    //               ((Journal) indexManager).acquireUnisolatedConnection();
+    //               acquiredConnection = true;
+    //            } catch (InterruptedException e) {
+    //               throw new RuntimeException(e);
+    //            }
+    //         }
 
-                  // create the kb instance within the tx.
-                  txCreateView.create();
+    //      Note: Already checked by the caller.
+    //
+    //         // Check for pre-existing instance.
+    //         {
+    //
+    //            final LocalTripleStore lts = (LocalTripleStore) indexManager
+    //                  .getResourceLocator().locate(namespace, ITx.UNISOLATED);
+    //
+    //            if (lts != null) {
+    //
+    //               return;
+    //
+    //            }
+    //
+    //         }
 
-                  // commit the tx.
-                  txService.commit(txIdCreate);
+    // Create a new instance.
+    {
+      if (Boolean.parseBoolean(
+          properties.getProperty(
+              EmbergraphSail.Options.ISOLATABLE_INDICES,
+              EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
 
-                  ok = true;
+        /*
+         * Isolatable indices: requires the use of a tx to create the KB
+         * instance.
+         *
+         * FIXME BLZG-2041: Verify test coverage of this code path.
+         */
 
-               } finally {
+        final ITransactionService txService =
+            indexManager.getLocalTransactionManager().getTransactionService();
 
-                  if (!ok)
-                     txService.abort(txIdCreate);
+        final long txIdCreate = txService.newTx(ITx.UNISOLATED);
 
-               }
+        boolean ok = false;
+        try {
 
-            } else {
+          final AbstractTripleStore txCreateView =
+              new LocalTripleStore(indexManager, namespace, Long.valueOf(txIdCreate), properties);
 
-               /*
-                * Create KB without isolatable indices.
-                */
+          // create the kb instance within the tx.
+          txCreateView.create();
 
-               final LocalTripleStore lts = new LocalTripleStore(indexManager,
-                     namespace, ITx.UNISOLATED, properties);
+          // commit the tx.
+          txService.commit(txIdCreate);
 
-               lts.create();
+          ok = true;
 
-            }
+        } finally {
 
-         }
+          if (!ok) txService.abort(txIdCreate);
+        }
 
-//         /*
-//          * Now that we have created the instance, either using a tx or the
-//          * unisolated connection, locate the triple store resource and return
-//          * it.
-//          */
-//         {
-//
-//            final LocalTripleStore lts = (LocalTripleStore) indexManager
-//                  .getResourceLocator().locate(namespace, ITx.UNISOLATED);
-//
-//            if (lts == null) {
-//
-//               /*
-//                * This should only occur if there is a concurrent destroy, which
-//                * is highly unlikely to say the least.
-//                */
-//               throw new RuntimeException("Concurrent create/destroy: "
-//                     + namespace);
-//
-//            }
-//
-//            return;
-//
-//         }
+      } else {
 
-//      } catch (IOException ex) {
-//
-//         throw new RuntimeException(ex);
-//
-//      } finally {
-//
-//         if (!isGroupCommit && acquiredConnection) {
-//
-//            /**
-//             * When group commit is not enabled, we need to release the
-//             * unisolated connection.
-//             * 
-//             * @see #1143 (Isolation broken in NSS when groupCommit disabled)
-//             */
-//            ((Journal) indexManager).releaseUnisolatedConnection();
-//
-//         }
-//
-//      }
+        /*
+         * Create KB without isolatable indices.
+         */
 
-   }
+        final LocalTripleStore lts =
+            new LocalTripleStore(indexManager, namespace, ITx.UNISOLATED, properties);
 
+        lts.create();
+      }
+    }
+
+    //         /*
+    //          * Now that we have created the instance, either using a tx or the
+    //          * unisolated connection, locate the triple store resource and return
+    //          * it.
+    //          */
+    //         {
+    //
+    //            final LocalTripleStore lts = (LocalTripleStore) indexManager
+    //                  .getResourceLocator().locate(namespace, ITx.UNISOLATED);
+    //
+    //            if (lts == null) {
+    //
+    //               /*
+    //                * This should only occur if there is a concurrent destroy, which
+    //                * is highly unlikely to say the least.
+    //                */
+    //               throw new RuntimeException("Concurrent create/destroy: "
+    //                     + namespace);
+    //
+    //            }
+    //
+    //            return;
+    //
+    //         }
+
+    //      } catch (IOException ex) {
+    //
+    //         throw new RuntimeException(ex);
+    //
+    //      } finally {
+    //
+    //         if (!isGroupCommit && acquiredConnection) {
+    //
+    //            /**
+    //             * When group commit is not enabled, we need to release the
+    //             * unisolated connection.
+    //             *
+    //             * @see #1143 (Isolation broken in NSS when groupCommit disabled)
+    //             */
+    //            ((Journal) indexManager).releaseUnisolatedConnection();
+    //
+    //         }
+    //
+    //      }
+
+  }
 }

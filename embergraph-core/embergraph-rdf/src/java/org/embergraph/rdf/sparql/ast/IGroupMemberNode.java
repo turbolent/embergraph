@@ -22,53 +22,44 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 /**
- * An interface for an {@link IQueryNode} which may appear in an
- * {@link IGroupNode}.
- * 
+ * An interface for an {@link IQueryNode} which may appear in an {@link IGroupNode}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IGroupMemberNode extends IQueryNode, IVariableBindingRequirements {
 
-    /**
-     * Return the group to which this node belongs.
-     */
-    IGroupNode<IGroupMemberNode> getParent();
-    
-    /**
-     * Set the group to which this bindings producer node belongs. Should only
-     * be called the group node during the addChild() method.
-     */
-    void setParent(final IGroupNode<IGroupMemberNode> parent);
+  /** Return the group to which this node belongs. */
+  IGroupNode<IGroupMemberNode> getParent();
 
-    /**
-     * Return the lowest {@link JoinGroupNode} which dominates this node. Note
-     * that some kinds of {@link IGroupMemberNode}s do not appear within a
-     * {@link JoinGroupNode} context. For example, {@link NamedSubqueryRoot} and
-     * {@link ConstructNode}.
-     * 
-     * @return The {@link JoinGroupNode} -or- <code>null</code> if there is no
-     *         such parent join group.
-     */
-    JoinGroupNode getParentJoinGroup();
-    
-    /**
-     * Return the lowest {@link GraphPatternGroup} which dominates this node.
-     * Note that some kinds of {@link IGroupMemberNode}s do not appear within a
-     * {@link GraphPatternGroup} context. For example, {@link NamedSubqueryRoot}
-     * and {@link ConstructNode}.
-     * 
-     * @return The {@link GraphPatternGroup} -or- <code>null</code> if there is
-     *         no such parent group.
-     */
-    GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup();
-    
-    /**
-     * Return the context for the group graph pattern dominating this node.
-     * 
-     * @return The context -or- <code>null</code> if there is no graph pattern
-     *         dominating this node.
-     */
-    TermNode getContext();
+  /**
+   * Set the group to which this bindings producer node belongs. Should only be called the group
+   * node during the addChild() method.
+   */
+  void setParent(final IGroupNode<IGroupMemberNode> parent);
 
+  /**
+   * Return the lowest {@link JoinGroupNode} which dominates this node. Note that some kinds of
+   * {@link IGroupMemberNode}s do not appear within a {@link JoinGroupNode} context. For example,
+   * {@link NamedSubqueryRoot} and {@link ConstructNode}.
+   *
+   * @return The {@link JoinGroupNode} -or- <code>null</code> if there is no such parent join group.
+   */
+  JoinGroupNode getParentJoinGroup();
+
+  /**
+   * Return the lowest {@link GraphPatternGroup} which dominates this node. Note that some kinds of
+   * {@link IGroupMemberNode}s do not appear within a {@link GraphPatternGroup} context. For
+   * example, {@link NamedSubqueryRoot} and {@link ConstructNode}.
+   *
+   * @return The {@link GraphPatternGroup} -or- <code>null</code> if there is no such parent group.
+   */
+  GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup();
+
+  /**
+   * Return the context for the group graph pattern dominating this node.
+   *
+   * @return The context -or- <code>null</code> if there is no graph pattern dominating this node.
+   */
+  TermNode getContext();
 }

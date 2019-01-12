@@ -27,53 +27,44 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
 /**
- * A factory for {@link IEvaluationPlan}s that do not reorder the predicates in
- * the tail.
- * 
+ * A factory for {@link IEvaluationPlan}s that do not reorder the predicates in the tail.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NOPEvaluationPlanFactory implements IEvaluationPlanFactory {
 
-    private static final long serialVersionUID = 0L;
-    
-    public static final transient NOPEvaluationPlanFactory INSTANCE = new NOPEvaluationPlanFactory();
-    
-    public IEvaluationPlan newPlan(final IJoinNexus joinNexus, final IRule rule) {
-   
-        final int tailCount = rule.getTailCount();
-        
-        final int[] order = new int[tailCount];
-        
-        for(int i=0; i<tailCount; i++) {
-            
-            order[i] = i;
-            
-        }
-        
-        return new IEvaluationPlan() {
+  private static final long serialVersionUID = 0L;
 
-            public int[] getOrder() {
-                
-                return order;
-                
-            }
+  public static final transient NOPEvaluationPlanFactory INSTANCE = new NOPEvaluationPlanFactory();
 
-            public boolean isEmpty() {
-                
-                return false;
-                
-            }
+  public IEvaluationPlan newPlan(final IJoinNexus joinNexus, final IRule rule) {
 
-            public long rangeCount(int tailIndex) {
+    final int tailCount = rule.getTailCount();
 
-                return joinNexus.getRangeCountFactory().rangeCount(
-                        rule.getTail(tailIndex));
-                
-            }
-            
-        };
-        
+    final int[] order = new int[tailCount];
+
+    for (int i = 0; i < tailCount; i++) {
+
+      order[i] = i;
     }
 
+    return new IEvaluationPlan() {
+
+      public int[] getOrder() {
+
+        return order;
+      }
+
+      public boolean isEmpty() {
+
+        return false;
+      }
+
+      public long rangeCount(int tailIndex) {
+
+        return joinNexus.getRangeCountFactory().rangeCount(rule.getTail(tailIndex));
+      }
+    };
+  }
 }

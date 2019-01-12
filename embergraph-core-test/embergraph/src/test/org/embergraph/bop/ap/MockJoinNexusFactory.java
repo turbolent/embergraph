@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.ap;
 
 import java.util.Properties;
-
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.accesspath.IElementFilter;
@@ -33,31 +32,38 @@ import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
 /**
  * Mock object.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MockJoinNexusFactory extends AbstractJoinNexusFactory {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public MockJoinNexusFactory(ActionEnum action, long writeTimestamp,
-            long readTimestamp, Properties properties, int solutionFlags,
-            IElementFilter<?> solutionFilter,
-            IEvaluationPlanFactory evaluationPlanFactory,
-            IRuleTaskFactory defaultRuleTaskFactory) {
-        
-        super(action, writeTimestamp, readTimestamp, properties, solutionFlags,
-                solutionFilter, evaluationPlanFactory, defaultRuleTaskFactory);
-        
-    }
+  public MockJoinNexusFactory(
+      ActionEnum action,
+      long writeTimestamp,
+      long readTimestamp,
+      Properties properties,
+      int solutionFlags,
+      IElementFilter<?> solutionFilter,
+      IEvaluationPlanFactory evaluationPlanFactory,
+      IRuleTaskFactory defaultRuleTaskFactory) {
 
-    @Override
-    protected IJoinNexus newJoinNexus(IIndexManager indexManager) {
-        return new MockJoinNexus(this,indexManager);
-    }
+    super(
+        action,
+        writeTimestamp,
+        readTimestamp,
+        properties,
+        solutionFlags,
+        solutionFilter,
+        evaluationPlanFactory,
+        defaultRuleTaskFactory);
+  }
 
+  @Override
+  protected IJoinNexus newJoinNexus(IIndexManager indexManager) {
+    return new MockJoinNexus(this, indexManager);
+  }
 }

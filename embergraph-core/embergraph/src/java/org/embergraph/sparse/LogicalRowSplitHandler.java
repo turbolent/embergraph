@@ -26,104 +26,91 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.btree.ISimpleSplitHandler;
 import org.embergraph.btree.IndexSegment;
 import org.embergraph.util.BytesUtil;
 
 /**
- * This class imposes the constraint that the separator key must not split a
- * logical. This constraint is required in order for the logical row store to
- * retain its row-wise ACID semantics when there is more than one shard for that
- * row store. This is done using a linear scan forward from the recommended
- * splitAt index until the first tuple is identified which would be part of a
+ * This class imposes the constraint that the separator key must not split a logical. This
+ * constraint is required in order for the logical row store to retain its row-wise ACID semantics
+ * when there is more than one shard for that row store. This is done using a linear scan forward
+ * from the recommended splitAt index until the first tuple is identified which would be part of a
  * different logical row. The index of that tuple is returned.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LogicalRowSplitHandler implements ISimpleSplitHandler, Externalizable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 9180840621078374197L;
-    
-    protected static transient final Logger log = Logger
-            .getLogger(LogicalRowSplitHandler.class);
+  /** */
+  private static final long serialVersionUID = 9180840621078374197L;
 
-    public static transient final ISimpleSplitHandler INSTANCE = new LogicalRowSplitHandler();
-    
-    public byte[] getSeparatorKey(final IndexSegment seg, final int fromIndex,
-            final int toIndex, final int splitAt) {
+  protected static final transient Logger log = Logger.getLogger(LogicalRowSplitHandler.class);
 
-        final byte[] a = seg.keyAt(splitAt);
+  public static final transient ISimpleSplitHandler INSTANCE = new LogicalRowSplitHandler();
 
-        final int alen = new KeyDecoder(a).getPrefixLength();
+  public byte[] getSeparatorKey(
+      final IndexSegment seg, final int fromIndex, final int toIndex, final int splitAt) {
 
-        for (int i = splitAt + 1; i < toIndex; i++) {
+    final byte[] a = seg.keyAt(splitAt);
 
-            final byte[] b = seg.keyAt(i);
+    final int alen = new KeyDecoder(a).getPrefixLength();
 
-            final int blen = new KeyDecoder(b).getPrefixLength();
+    for (int i = splitAt + 1; i < toIndex; i++) {
 
-            /*
-             * Compare the first N bytes of those keys (unsigned byte[]
-             * comparison).
-             */
-            final int cmp = BytesUtil.compareBytesWithLenAndOffset(
-                    0/* aoff */, alen, a,
-                    0/* boff */, blen, b
-                    );
+      final byte[] b = seg.keyAt(i);
 
-            // the keys must be correctly ordered.
-            assert cmp <= 0;
+      final int blen = new KeyDecoder(b).getPrefixLength();
 
-            if (cmp < 0) {
+      /*
+       * Compare the first N bytes of those keys (unsigned byte[]
+       * comparison).
+       */
+      final int cmp =
+          BytesUtil.compareBytesWithLenAndOffset(0 /* aoff */, alen, a, 0 /* boff */, blen, b);
 
-                /*
-                 * The N byte prefix has changed. Clone the first N bytes of the
-                 * current key and return them to the caller. This is the
-                 * minimum length first successor of the recommended key which
-                 * can serve as a separator key without breaking the logical
-                 * row.
-                 */
+      // the keys must be correctly ordered.
+      assert cmp <= 0;
 
-                final byte[] prefix = new byte[blen];
+      if (cmp < 0) {
 
-                System.arraycopy(b/* src */, 0/* srcPos */, prefix/* dest */,
-                        0/* destPos */, blen/* length */);
+        /*
+         * The N byte prefix has changed. Clone the first N bytes of the
+         * current key and return them to the caller. This is the
+         * minimum length first successor of the recommended key which
+         * can serve as a separator key without breaking the logical
+         * row.
+         */
 
-                if (log.isInfoEnabled())
-                    log.info("Found: prefix=" + BytesUtil.toString(prefix)
-                            + ", splitAt=" + splitAt + ", i=" + i);
+        final byte[] prefix = new byte[blen];
 
-                return prefix;
+        System.arraycopy(
+            b /* src */, 0 /* srcPos */, prefix /* dest */, 0 /* destPos */, blen /* length */);
 
-            }
+        if (log.isInfoEnabled())
+          log.info(
+              "Found: prefix=" + BytesUtil.toString(prefix) + ", splitAt=" + splitAt + ", i=" + i);
 
-        }
-
-        log.warn("No successor: splitAt=" + splitAt);
-
-        // No such successor!
-        return null;
-
+        return prefix;
+      }
     }
 
-    public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
+    log.warn("No successor: splitAt=" + splitAt);
 
-        // NOP
-        
-    }
+    // No such successor!
+    return null;
+  }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
-        // NOP
-        
-    }
+    // NOP
 
+  }
+
+  public void writeExternal(ObjectOutput out) throws IOException {
+
+    // NOP
+
+  }
 }

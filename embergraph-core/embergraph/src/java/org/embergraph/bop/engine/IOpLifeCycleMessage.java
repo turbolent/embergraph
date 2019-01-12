@@ -24,18 +24,14 @@ package org.embergraph.bop.engine;
 import java.util.UUID;
 
 /**
- * Extended metadata for operator evaluation messages also indicates the
- * on which the operator will be / was evaluated.
- * 
+ * Extended metadata for operator evaluation messages also indicates the on which the operator will
+ * be / was evaluated.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IOpLifeCycleMessage extends IOpMessage {
 
-    /**
-     * Return the identifier of the service on which the operator will/did
-     * execute.
-     */
-    UUID getServiceId();
-
+  /** Return the identifier of the service on which the operator will/did execute. */
+  UUID getServiceId();
 }

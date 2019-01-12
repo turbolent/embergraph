@@ -27,34 +27,26 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
- * Streaming iterator class that suppresses generic types. Striterator patterns
- * are often used to convert the type of the elements visited by the underlying
- * iterator. That and the covarying generics combine to make code using generics
- * and striterators rather ugly.
- * 
+ * Streaming iterator class that suppresses generic types. Striterator patterns are often used to
+ * convert the type of the elements visited by the underlying iterator. That and the covarying
+ * generics combine to make code using generics and striterators rather ugly.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class GenericStriterator<E> extends Striterator<Iterator<E>, E> {
 
-    /**
-     * @param src
-     */
-    @SuppressWarnings("unchecked")
-    public GenericStriterator(Iterator<E> src) {
+  /** @param src */
+  @SuppressWarnings("unchecked")
+  public GenericStriterator(Iterator<E> src) {
 
-        super(src);
+    super(src);
+  }
 
-    }
+  /** @param srcEnum */
+  @SuppressWarnings("unchecked")
+  public GenericStriterator(Enumeration<E> srcEnum) {
 
-    /**
-     * @param srcEnum
-     */
-    @SuppressWarnings("unchecked")
-    public GenericStriterator(Enumeration<E> srcEnum) {
-    
-        super(srcEnum);
-
-    }
-
+    super(srcEnum);
+  }
 }

@@ -24,35 +24,30 @@ package org.embergraph.rdf.vocab.decls;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-
+import org.embergraph.rdf.vocab.VocabularyDecl;
+import org.embergraph.service.geospatial.GeoSpatial;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.rdf.vocab.VocabularyDecl;
-import org.embergraph.service.geospatial.GeoSpatial;
-
 /**
  * Vocabulary and namespace for GeoSpatial extensions.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 @Deprecated
 public class GeoSpatialVocabularyDecl implements VocabularyDecl {
 
-    // TODO: proper registration of datatypes passed in via config
-    static private final URI[] uris = new URI[]{
-        new URIImpl(GeoSpatial.NAMESPACE),
-        GeoSpatial.DEFAULT_DATATYPE,
-    };
+  // TODO: proper registration of datatypes passed in via config
+  private static final URI[] uris =
+      new URI[] {
+        new URIImpl(GeoSpatial.NAMESPACE), GeoSpatial.DEFAULT_DATATYPE,
+      };
 
-    public GeoSpatialVocabularyDecl() {
-    }
-    
-    public Iterator<URI> values() {
+  public GeoSpatialVocabularyDecl() {}
 
-        return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
-        
-    }
+  public Iterator<URI> values() {
 
+    return Collections.unmodifiableList(Arrays.asList(uris)).iterator();
+  }
 }

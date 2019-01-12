@@ -29,68 +29,55 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("join operators");
+
+    // Test suite for pipeline join.
+    suite.addTestSuite(TestPipelineJoin.class);
+
+    // Test suite for the guts of the JVM hash join logic.
+    suite.addTestSuite(TestJVMHashJoinUtility.class);
+
+    // Test suite for the guts of the HTree hash join logic.
+    suite.addTestSuite(TestHTreeHashJoinUtility.class);
+
+    // Test suite for a hash join with an access path.
+    suite.addTestSuite(TestJVMHashJoinOp.class); // JVM
+    suite.addTestSuite(TestHTreeHashJoinOp.class); // HTree
+
+    // Test suite for building a hash index from solutions and joining that
+    // hash index back into the pipeline.
+    suite.addTestSuite(TestJVMHashIndexOp.class);
+    suite.addTestSuite(TestHTreeHashIndexOp.class);
+    suite.addTestSuite(TestHTreeSolutionSetHashJoin.class);
+
+    /*
+     * Test suite for a nested loop join using an index scan for each source
+     * solution read from the pipeline.
      */
-    public TestAll() {
-        
-    }
+    suite.addTestSuite(TestNestedLoopJoinOp.class);
 
-    /**
-     * @param arg0
+    suite.addTestSuite(TestFastRangeCountOp.class);
+
+    /*
+     * TODO These tests must be specific to the IV layer. They can not be
+     * written for a relation whose elements are (String,String) tuples.
+     * However, we now have test coverage for this at the AST / SPARQL QUERY
+     * execution layer.
      */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+    //		suite.addTestSuite(TestDistinctTermScanOp.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("join operators");
-
-        // Test suite for pipeline join.
-        suite.addTestSuite(TestPipelineJoin.class);
-
-        // Test suite for the guts of the JVM hash join logic.
-        suite.addTestSuite(TestJVMHashJoinUtility.class);
-
-        // Test suite for the guts of the HTree hash join logic.
-        suite.addTestSuite(TestHTreeHashJoinUtility.class);
-        
-        // Test suite for a hash join with an access path.
-        suite.addTestSuite(TestJVMHashJoinOp.class); // JVM
-        suite.addTestSuite(TestHTreeHashJoinOp.class); // HTree
-        
-        // Test suite for building a hash index from solutions and joining that
-        // hash index back into the pipeline.
-        suite.addTestSuite(TestJVMHashIndexOp.class);
-        suite.addTestSuite(TestHTreeHashIndexOp.class);
-        suite.addTestSuite(TestHTreeSolutionSetHashJoin.class);
-
-        /*
-         * Test suite for a nested loop join using an index scan for each source
-         * solution read from the pipeline.
-         */
-		suite.addTestSuite(TestNestedLoopJoinOp.class);
-
-		suite.addTestSuite(TestFastRangeCountOp.class);
-		
-		/*
-		 * TODO These tests must be specific to the IV layer. They can not be
-		 * written for a relation whose elements are (String,String) tuples.
-		 * However, we now have test coverage for this at the AST / SPARQL QUERY
-		 * execution layer.
-		 */
-//		suite.addTestSuite(TestDistinctTermScanOp.class);
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

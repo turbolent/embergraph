@@ -24,36 +24,25 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
 /**
- * Metadata about a fulltext search result (against an external service).
- * See {@link FTS}.
- *            
+ * Metadata about a fulltext search result (against an external service). See {@link FTS}.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public interface IFulltextSearchHit<V extends Comparable<V>> {
 
-   /**
-    * The result of the search (values contained in projected columns).
-    */
-   public String getRes();
-   
-   /**
-    * The score associated with the search result.
-    */
-    public Double getScore();
+  /** The result of the search (values contained in projected columns). */
+  public String getRes();
 
-    /**
-     * The search snippet associated with the result.
-     */
-    public String getSnippet();
-    
-    /**
-     * Get the set of incoming bindings for the search hit
-     */
-    public IBindingSet getIncomingBindings();
-    
-    /**
-     * Get the conversion target type for the search hit
-     */
-    public SearchResultType getSearchResultType();
+  /** The score associated with the search result. */
+  public Double getScore();
+
+  /** The search snippet associated with the result. */
+  public String getSnippet();
+
+  /** Get the set of incoming bindings for the search hit */
+  public IBindingSet getIncomingBindings();
+
+  /** Get the conversion target type for the search hit */
+  public SearchResultType getSearchResultType();
 }

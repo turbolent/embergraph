@@ -49,40 +49,32 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.embergraph.rdf.sail.webapp;
 
-
 import junit.framework.Test;
-
 import org.embergraph.journal.IIndexManager;
 
 /**
- * Proxied test suite.
- * We test the behavior reported in trac 731 - the bug resport uses the repo properties to set up the describe mode,
- * the behavior reproduced just using a query hint.
+ * Proxied test suite. We test the behavior reported in trac 731 - the bug resport uses the repo
+ * properties to set up the describe mode, the behavior reproduced just using a query hint.
  */
 public class TestCBD731<S extends IIndexManager> extends AbstractSimpleInsertTest<S> {
 
-	static public Test suite() {
-		return ProxySuiteHelper.suiteWhenStandalone(TestCBD731.class,"test.*", TestMode.quads,TestMode.sids,TestMode.triples);
-	}
-    public TestCBD731() {
+  public static Test suite() {
+    return ProxySuiteHelper.suiteWhenStandalone(
+        TestCBD731.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
+  }
 
-    }
+  public TestCBD731() {}
 
-	public TestCBD731(final String name) {
+  public TestCBD731(final String name) {
 
-		super(name);
+    super(name);
+  }
 
-	}
+  public void testInsertSCBD() throws Exception {
+    executeInsert("hint:Query hint:describeMode \"SCBD\"", true);
+  }
 
-    public void testInsertSCBD()
-            throws Exception
-    {
-        executeInsert("hint:Query hint:describeMode \"SCBD\"", true);
-    }
-    public void testInsertCBD()
-            throws Exception
-    {
-        executeInsert("hint:Query hint:describeMode \"CBD\"", true);
-    }
-   
+  public void testInsertCBD() throws Exception {
+    executeInsert("hint:Query hint:describeMode \"CBD\"", true);
+  }
 }

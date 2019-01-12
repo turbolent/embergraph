@@ -20,7 +20,6 @@ package org.embergraph.rdf.sail.webapp.lbs.policy.counters;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.ICounterNode;
@@ -28,70 +27,60 @@ import org.embergraph.rdf.sail.webapp.lbs.AbstractHostMetrics;
 
 public class CounterSetHostMetricsWrapper extends AbstractHostMetrics {
 
-    private final CounterSet counterSet;
+  private final CounterSet counterSet;
 
-    @Override
-    public String toString() {
+  @Override
+  public String toString() {
 
-        return getClass().getName() + "{counters=" + counterSet + "}";
+    return getClass().getName() + "{counters=" + counterSet + "}";
+  }
 
-    }
-    
-    public CounterSetHostMetricsWrapper(final CounterSet counterSet) {
+  public CounterSetHostMetricsWrapper(final CounterSet counterSet) {
 
-        if (counterSet == null)
-            throw new IllegalArgumentException();
-        
-        this.counterSet = counterSet;
-        
-    }
+    if (counterSet == null) throw new IllegalArgumentException();
 
-    @Override
-    public String[] getMetricNames() {
+    this.counterSet = counterSet;
+  }
 
-        final List<String> list = new LinkedList<String>();
-        
-        @SuppressWarnings("rawtypes")
-        final Iterator<ICounter> itr = counterSet
-                .getCounters(null/* filter */);
+  @Override
+  public String[] getMetricNames() {
 
-        while (itr.hasNext()) {
-        
-            final ICounter<?> c = itr.next();
-
-            final String path = c.getPath();
-            
-            list.add(path);
-            
-        }
-
-        return list.toArray(new String[list.size()]);
-
-    }
+    final List<String> list = new LinkedList<String>();
 
     @SuppressWarnings("rawtypes")
-    @Override
-    public Number getNumeric(final String name) {
+    final Iterator<ICounter> itr = counterSet.getCounters(null /* filter */);
 
-        if (name == null)
-            throw new IllegalArgumentException();
+    while (itr.hasNext()) {
 
-        final ICounterNode c = counterSet.getPath(name);
+      final ICounter<?> c = itr.next();
 
-        if (c == null) {
-            // Not found.
-            return null;
-        }
+      final String path = c.getPath();
 
-        if (!c.isCounter()) {
-
-            // Not a counter (an abstract node, not a leaf).
-            return null;
-
-        }
-
-        return (Number) ((ICounter) c).getValue();
-
+      list.add(path);
     }
 
+    return list.toArray(new String[list.size()]);
+  }
+
+  @SuppressWarnings("rawtypes")
+  @Override
+  public Number getNumeric(final String name) {
+
+    if (name == null) throw new IllegalArgumentException();
+
+    final ICounterNode c = counterSet.getPath(name);
+
+    if (c == null) {
+      // Not found.
+      return null;
+    }
+
+    if (!c.isCounter()) {
+
+      // Not a counter (an abstract node, not a leaf).
+      return null;
+    }
+
+    return (Number) ((ICounter) c).getValue();
+  }
 }

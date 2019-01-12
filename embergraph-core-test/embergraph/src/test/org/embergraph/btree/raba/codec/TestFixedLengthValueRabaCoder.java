@@ -24,36 +24,28 @@ package org.embergraph.btree.raba.codec;
 
 /**
  * Test suite for the {@link FixedLengthValueRabaCoder}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestFixedLengthValueRabaCoder extends AbstractRabaCoderTestCase {
 
-    /**
-     * 
-     */
-    public TestFixedLengthValueRabaCoder() {
-    }
+  /** */
+  public TestFixedLengthValueRabaCoder() {}
 
-    /**
-     * @param name
-     */
-    public TestFixedLengthValueRabaCoder(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestFixedLengthValueRabaCoder(String name) {
+    super(name);
+  }
 
-    protected void setUp() throws Exception {
+  protected void setUp() throws Exception {
 
-        rabaCoder = new FixedLengthValueRabaCoder(64);
-        
-    }
+    rabaCoder = new FixedLengthValueRabaCoder(64);
+  }
 
-    @Override
-    protected boolean isFixedLength() {
-        
-        return true;
-        
-    }
+  @Override
+  protected boolean isFixedLength() {
 
+    return true;
+  }
 }

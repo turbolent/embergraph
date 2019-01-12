@@ -15,35 +15,30 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
  */
 package org.embergraph.rdf.graph.impl;
 
-import org.openrdf.model.Statement;
-
+import cutthecrap.utils.striterators.Filter;
 import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASState;
-
-import cutthecrap.utils.striterators.Filter;
+import org.openrdf.model.Statement;
 
 /**
  * Filter visits only edges (filters out attribute values).
- * <p>
- * Note: This filter is pushed down onto the AP and evaluated close to the data.
+ *
+ * <p>Note: This filter is pushed down onto the AP and evaluated close to the data.
  */
 public class EdgeOnlyFilter<VS, ES, ST> extends Filter {
 
-    private static final long serialVersionUID = 1L;
-    
-    private final IGASState<VS, ES, ST> gasState;
+  private static final long serialVersionUID = 1L;
 
-    public EdgeOnlyFilter(final IGASContext<VS, ES, ST> ctx) {
-    
-        this.gasState = ctx.getGASState();
-        
-    }
+  private final IGASState<VS, ES, ST> gasState;
 
-    @Override
-    public boolean isValid(final Object e) {
+  public EdgeOnlyFilter(final IGASContext<VS, ES, ST> ctx) {
 
-        return gasState.isEdge((Statement) e);
-        
-    }
-    
+    this.gasState = ctx.getGASState();
+  }
+
+  @Override
+  public boolean isValid(final Object e) {
+
+    return gasState.isEdge((Statement) e);
+  }
 }

@@ -22,402 +22,354 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.ModifiableBOpBase;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
 
-/**
- * Base class for AST group nodes.
- */
-public abstract class GroupNodeBase<E extends IGroupMemberNode> extends
-        GroupMemberNodeBase<E> implements IGroupNode<E> {
+/** Base class for AST group nodes. */
+public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMemberNodeBase<E>
+    implements IGroupNode<E> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    interface Annotations extends GroupMemberNodeBase.Annotations,
-            IJoinNode.Annotations {
+  interface Annotations extends GroupMemberNodeBase.Annotations, IJoinNode.Annotations {}
 
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public GroupNodeBase(final GroupNodeBase<E> op) {
+
+    super(op);
+  }
+
+  /** Required shallow copy constructor. */
+  public GroupNodeBase(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  //    /**
+  //     * Note: Uses the default for the "optional" annotation.
+  //     */
+  protected GroupNodeBase() {}
+
+  //	protected GroupNodeBase(final boolean optional) {
+  //
+  //		setOptional( optional );
+  //
+  //    }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public Iterator<E> iterator() {
+
+    return (Iterator) argIterator();
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public List<E> getChildren() {
+
+    return (List) args();
+  }
+
+  //	/**
+  //	 * {@inheritDoc}
+  //	 * <p>
+  //	 * Force the maintenance of the parent reference on the children.
+  //	 */
+  //	@Override
+  //	protected void mutation() {
+  //        super.mutation();
+  //        final int arity = arity();
+  //        for (int i = 0; i < arity; i++) {
+  //            final BOp child = get(i);
+  //            ((E) child).setParent((IGroupNode<IGroupMemberNode>) this);
+  //        }
+  //    }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to set the parent reference on the child.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public ModifiableBOpBase setArg(final int index, final BOp newArg) {
+
+    super.setArg(index, newArg);
+
+    ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to set the parent reference on the child
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void addArg(final BOp newArg) {
+
+    super.addArg(newArg);
+
+    ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to set the parent reference on the child
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void addArg(final int index, final BOp newArg) {
+
+    super.addArg(index, newArg);
+
+    ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to clear the parent reference on the child.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public boolean removeArg(final BOp child) {
+
+    if (super.removeArg(child)) {
+
+      ((E) child).setParent(null);
+
+      return true;
     }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public GroupNodeBase(final GroupNodeBase<E> op) {
+    return false;
+  }
 
-        super(op);
-        
-    }
+  @Override
+  public IGroupNode<E> addChild(final E child) {
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public GroupNodeBase(final BOp[] args, final Map<String, Object> anns) {
+    addArg((BOp) child);
 
-        super(args, anns);
+    //        assert child.getParent() == this;
 
-    }
-    
-//    /**
-//     * Note: Uses the default for the "optional" annotation.
-//     */
-    protected GroupNodeBase() {
-        
-    }
+    return this;
+  }
 
-//	protected GroupNodeBase(final boolean optional) {
-//		
-//		setOptional( optional );
-//		
-//    }
+  @Override
+  public IGroupNode<E> removeChild(final E child) {
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-    public Iterator<E> iterator() {
-		
-		return (Iterator) argIterator();
-		
-	}
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<E> getChildren() {
-		
-		return (List) args();
-		
-	}
+    removeArg((BOp) child);
 
-//	/**
-//	 * {@inheritDoc}
-//	 * <p>
-//	 * Force the maintenance of the parent reference on the children. 
-//	 */
-//	@Override
-//	protected void mutation() {
-//        super.mutation();
-//        final int arity = arity();
-//        for (int i = 0; i < arity; i++) {
-//            final BOp child = get(i);
-//            ((E) child).setParent((IGroupNode<IGroupMemberNode>) this);
-//        }
-//    }
+    //        assert child.getParent() == null;
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to set the parent reference on the child.
-     */
+    return this;
+  }
+
+  @Override
+  public boolean isEmpty() {
+
+    return arity() == 0;
+  }
+
+  @Override
+  public int size() {
+
+    return arity();
+  }
+
+  public final List<FilterNode> getAttachedJoinFilters() {
+
     @SuppressWarnings("unchecked")
-    @Override
-    public ModifiableBOpBase setArg(final int index, final BOp newArg) {
-        
-        super.setArg(index, newArg);
-        
-        ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+    final List<FilterNode> filters = (List<FilterNode>) getProperty(Annotations.FILTERS);
 
-        return this;
-        
+    if (filters == null) {
+
+      return Collections.emptyList();
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to set the parent reference on the child
-     */
+    return Collections.unmodifiableList(filters);
+  }
+
+  public final void setAttachedJoinFilters(final List<FilterNode> filters) {
+
+    setProperty(Annotations.FILTERS, filters);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to also clone the children and then set the parent reference on the cloned
+   * children.
+   */
+  @Override
+  public GroupNodeBase<E> clone() {
+
     @SuppressWarnings("unchecked")
-    @Override
-    public void addArg(final BOp newArg) {
+    final GroupNodeBase<E> tmp = (GroupNodeBase<E>) super.clone();
 
-        super.addArg(newArg);
+    final int size = size();
 
-        ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+    for (int i = 0; i < size; i++) {
 
+      IGroupMemberNode aChild = (IGroupMemberNode) tmp.get(i);
+
+      aChild = (IGroupMemberNode) ((ASTBase) aChild).clone();
+
+      tmp.setArg(i, (ASTBase) aChild);
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to set the parent reference on the child
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void addArg(final int index, final BOp newArg) {
+    return tmp;
+  }
 
-        super.addArg(index, newArg);
+  /** Simple but robust version of to-String */
+  @Override
+  public String toString(final int indent) {
 
-        ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
+    final String s = indent(indent);
 
+    final StringBuilder sb = new StringBuilder();
+
+    sb.append("\n").append(s).append(getClass().getSimpleName());
+
+    if (this instanceof IJoinNode) {
+
+      final IJoinNode joinNode = (IJoinNode) this;
+
+      if (joinNode.isOptional()) sb.append(" [optional]");
+
+      if (joinNode.isMinus()) sb.append(" [minus]");
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to clear the parent reference on the child.
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public boolean removeArg(final BOp child) {
+    if (this instanceof JoinGroupNode) {
 
-        if (super.removeArg(child)) {
-        
-            ((E) child).setParent(null);
-            
-            return true;
-            
-        }
+      final JoinGroupNode joinGroup = (JoinGroupNode) this;
 
-        return false;
-        
+      if (joinGroup.getContext() != null) {
+
+        sb.append(" [context=" + joinGroup.getContext() + "]");
+      }
+
+      if (joinGroup.getProperty(JoinGroupNode.Annotations.OPTIMIZER) != null) {
+
+        // Show non-default value.
+        sb.append(
+            " [" + JoinGroupNode.Annotations.OPTIMIZER + "=" + joinGroup.getQueryOptimizer() + "]");
+      }
     }
 
-    @Override
-    public IGroupNode<E> addChild(final E child) {
-		
-        addArg((BOp) child);
-		
-//        assert child.getParent() == this;
-        
-		return this;
-		
-	}
-	
-    @Override
-    public IGroupNode<E> removeChild(final E child) {
+    if (this instanceof GraphPatternGroup) {
 
-        removeArg((BOp) child);
+      final GraphPatternGroup<?> t = (GraphPatternGroup<?>) this;
 
-//        assert child.getParent() == null;
+      final IVariable<?>[] joinVars = t.getJoinVars();
 
-        return this;
+      if (joinVars != null) sb.append(" [joinVars=" + Arrays.toString(joinVars) + "]");
 
-	}
+      final IVariable<?>[] projectInVars = t.getProjectInVars();
 
-    @Override
-    public boolean isEmpty() {
-        
-        return arity() == 0;
-        
-    }
-    
-    @Override
-	public int size() {
-		
-		return arity();
-		
-	}
-	
-    final public List<FilterNode> getAttachedJoinFilters() {
-
-        @SuppressWarnings("unchecked")
-        final List<FilterNode> filters = (List<FilterNode>) getProperty(Annotations.FILTERS);
-
-        if (filters == null) {
-
-            return Collections.emptyList();
-
-        }
-
-        return Collections.unmodifiableList(filters);
-
+      if (projectInVars != null)
+        sb.append(" [projectInVars=" + Arrays.toString(projectInVars) + "]");
     }
 
-    final public void setAttachedJoinFilters(final List<FilterNode> filters) {
+    sb.append(" {");
 
-        setProperty(Annotations.FILTERS, filters);
+    for (IQueryNode n : this) {
 
-    }
-    
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to also clone the children and then set the parent reference
-     * on the cloned children.
-     */
-    @Override
-    public GroupNodeBase<E> clone() {
+      if (n instanceof AssignmentNode) {
+        /*
+         * Note: Otherwise no newline before an AssignmentNode since
+         * also used in a ProjectionNode.
+         */
+        sb.append("\n");
+      }
 
-        @SuppressWarnings("unchecked")
-        final GroupNodeBase<E> tmp = (GroupNodeBase<E>) super.clone();
+      sb.append(n.toString(indent + 1));
 
-        final int size = size();
-
-        for (int i = 0; i < size; i++) {
-
-            IGroupMemberNode aChild = (IGroupMemberNode) tmp.get(i);
-
-            aChild = (IGroupMemberNode) ((ASTBase) aChild).clone();
-
-            tmp.setArg(i, (ASTBase) aChild);
-
-        }
-
-        return tmp;
-
+      if (((IGroupMemberNode) n).getParent() != this) {
+        sb.append(" : ERROR : parent not [this]");
+        throw new RuntimeException(
+            "Parent not this: child="
+                + n
+                + ", this="
+                + toShortString()
+                + ", but parent="
+                + ((IGroupMemberNode) n).getParent());
+      }
     }
 
-    /**
-     * Simple but robust version of to-String 
-     */
-    @Override
-    public String toString(final int indent) {
-        
-        final String s = indent(indent);
-        
-        final StringBuilder sb = new StringBuilder();
+    sb.append("\n").append(s).append("}");
 
-        sb.append("\n").append(s).append(getClass().getSimpleName());
+    if (this instanceof GraphPatternGroup) {
 
-        if (this instanceof IJoinNode) {
+      final IVariable<?>[] joinVars = ((GraphPatternGroup<?>) this).getJoinVars();
 
-            final IJoinNode joinNode = (IJoinNode) this;
+      if (joinVars != null && joinVars.length > 0) {
 
-            if (joinNode.isOptional())
-                sb.append(" [optional]");
+        sb.append(" JOIN ON (");
 
-            if (joinNode.isMinus())
-                sb.append(" [minus]");
+        boolean first = true;
 
+        for (IVariable<?> var : joinVars) {
+
+          if (!first) sb.append(",");
+
+          sb.append(var);
+
+          first = false;
         }
 
-        if (this instanceof JoinGroupNode) {
-
-            final JoinGroupNode joinGroup = (JoinGroupNode) this;
-
-            if (joinGroup.getContext() != null) {
-
-                sb.append(" [context=" + joinGroup.getContext() + "]");
-
-            }
-
-            if (joinGroup.getProperty(JoinGroupNode.Annotations.OPTIMIZER) != null) {
-
-                // Show non-default value.
-                sb.append(" [" + JoinGroupNode.Annotations.OPTIMIZER + "="
-                        + joinGroup.getQueryOptimizer() + "]");
-                
-            }
-
-        }
-        
-        if (this instanceof GraphPatternGroup) {
-
-            final GraphPatternGroup<?> t = (GraphPatternGroup<?>) this;
-
-            final IVariable<?>[] joinVars = t.getJoinVars();
-
-            if (joinVars != null)
-                sb.append(" [joinVars=" + Arrays.toString(joinVars) + "]");
-
-            final IVariable<?>[] projectInVars = t.getProjectInVars();
-
-            if (projectInVars != null)
-                sb.append(" [projectInVars=" + Arrays.toString(projectInVars) + "]");
-
-        }
-
-        sb.append(" {");
-
-        for (IQueryNode n : this) {
-
-            if(n instanceof AssignmentNode) {
-                /*
-                 * Note: Otherwise no newline before an AssignmentNode since
-                 * also used in a ProjectionNode.
-                 */
-                sb.append("\n");
-            }
-            
-            sb.append(n.toString(indent + 1));
-
-            if (((IGroupMemberNode) n).getParent() != this) {
-                sb.append(" : ERROR : parent not [this]");
-                throw new RuntimeException("Parent not this: child=" + n
-                        + ", this=" + toShortString() + ", but parent="
-                        + ((IGroupMemberNode) n).getParent());
-            }
-
-        }
-
-        sb.append("\n").append(s).append("}");
-
-        if (this instanceof GraphPatternGroup) {
-
-            final IVariable<?>[] joinVars = ((GraphPatternGroup<?>) this)
-                    .getJoinVars();
-
-            if (joinVars != null && joinVars.length > 0) {
-
-                sb.append(" JOIN ON (");
-
-                boolean first = true;
-
-                for (IVariable<?> var : joinVars) {
-
-                    if (!first)
-                        sb.append(",");
-
-                    sb.append(var);
-
-                    first = false;
-
-                }
-
-                sb.append(")");
-
-            }
-            
-        }
-
-        final List<FilterNode> filters = getAttachedJoinFilters();
-        if(!filters.isEmpty()) {
-            for (FilterNode filter : filters) {
-                sb.append(filter.toString(indent + 1));
-            }
-        }
-        
-        if (getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY) != null) {
-            sb.append(" AST2BOpBase.estimatedCardinality=");
-            sb.append(getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY).toString());
-        }
-
-        if (getQueryHints() != null && !getQueryHints().isEmpty()) {
-            sb.append("\n");
-            sb.append(indent(indent));
-            sb.append(Annotations.QUERY_HINTS);
-            sb.append("=");
-            sb.append(getQueryHints().toString());
-        }
-        
-        return sb.toString();
-
-    }
-    
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Overridden to set the parent reference on the new child and clear the
-     * parent reference on the old child.
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public int replaceWith(final BOp oldChild, final BOp newChild) {
-
-        final int i = super.replaceWith(oldChild, newChild);
-
-        if (i > 0) {
-
-            if (((E) oldChild).getParent() == this) {
-                ((E) oldChild).setParent(null);
-            }
-
-            ((E) newChild).setParent((IGroupNode<IGroupMemberNode>) this);
-
-        }
-
-        return i;
-    	
+        sb.append(")");
+      }
     }
 
+    final List<FilterNode> filters = getAttachedJoinFilters();
+    if (!filters.isEmpty()) {
+      for (FilterNode filter : filters) {
+        sb.append(filter.toString(indent + 1));
+      }
+    }
+
+    if (getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY) != null) {
+      sb.append(" AST2BOpBase.estimatedCardinality=");
+      sb.append(getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY).toString());
+    }
+
+    if (getQueryHints() != null && !getQueryHints().isEmpty()) {
+      sb.append("\n");
+      sb.append(indent(indent));
+      sb.append(Annotations.QUERY_HINTS);
+      sb.append("=");
+      sb.append(getQueryHints().toString());
+    }
+
+    return sb.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to set the parent reference on the new child and clear the parent reference on
+   * the old child.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public int replaceWith(final BOp oldChild, final BOp newChild) {
+
+    final int i = super.replaceWith(oldChild, newChild);
+
+    if (i > 0) {
+
+      if (((E) oldChild).getParent() == this) {
+        ((E) oldChild).setParent(null);
+      }
+
+      ((E) newChild).setParent((IGroupNode<IGroupMemberNode>) this);
+    }
+
+    return i;
+  }
 }

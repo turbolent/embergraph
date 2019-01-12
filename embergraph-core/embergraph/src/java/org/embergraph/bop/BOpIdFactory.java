@@ -20,110 +20,85 @@ package org.embergraph.bop;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-/**
- * A factory which may be used when some identifiers need to be reserved.
- */
+/** A factory which may be used when some identifiers need to be reserved. */
 public class BOpIdFactory implements IdFactory {
-	
-    /** The set of reserved bop identifiers. */
-    private LinkedHashSet<Integer> ids;
 
-    private int nextId = 0;
+  /** The set of reserved bop identifiers. */
+  private LinkedHashSet<Integer> ids;
 
-    /**
-     * Reserve a bop id by adding it to a set of known identifiers that will not
-     * be issued by {@link #nextId()}.
-     * 
-     * @param id
-     *            The identifier.
-     */
-    public void reserve(final int id) {
-       
-        synchronized (this) {
-        
-            if (ids == null) {
+  private int nextId = 0;
 
-                // Lazily allocated.
-                ids = new LinkedHashSet<Integer>();
+  /**
+   * Reserve a bop id by adding it to a set of known identifiers that will not be issued by {@link
+   * #nextId()}.
+   *
+   * @param id The identifier.
+   */
+  public void reserve(final int id) {
 
-                ids.add(id);
+    synchronized (this) {
+      if (ids == null) {
 
-            }
-            
-        }
-        
+        // Lazily allocated.
+        ids = new LinkedHashSet<Integer>();
+
+        ids.add(id);
+      }
     }
+  }
 
-    @Override
-    public int nextId() {
+  @Override
+  public int nextId() {
 
-        synchronized (this) {
+    synchronized (this) {
+      if (ids != null) {
 
-            if (ids != null) {
+        while (ids.contains(nextId)) {
 
-                while (ids.contains(nextId)) {
-
-                    nextId++;
-
-                }
-
-            }
-
-            return nextId++;
-
+          nextId++;
         }
+      }
 
+      return nextId++;
     }
+  }
 
-    /**
-     * Reserve ids used by the predicates in some join graph.
-     * 
-     * @param preds
-     *            The vertices of the join graph.
-     */
-    public void reserveIds(final IPredicate<?>[] preds) {
+  /**
+   * Reserve ids used by the predicates in some join graph.
+   *
+   * @param preds The vertices of the join graph.
+   */
+  public void reserveIds(final IPredicate<?>[] preds) {
 
-        if (preds == null)
-            throw new IllegalArgumentException();
+    if (preds == null) throw new IllegalArgumentException();
 
-        for (IPredicate<?> p : preds) {
+    for (IPredicate<?> p : preds) {
 
-            reserve(p.getId());
-
-        }
-
+      reserve(p.getId());
     }
+  }
 
-    /**
-     * Reserve ids used by the constraints for some predicate or join graph.
-     * 
-     * @param constraints
-     *            The constraints that attach to some predicate (optional).
-     */
-    public void reserveIds(final IConstraint[] constraints) {
+  /**
+   * Reserve ids used by the constraints for some predicate or join graph.
+   *
+   * @param constraints The constraints that attach to some predicate (optional).
+   */
+  public void reserveIds(final IConstraint[] constraints) {
 
-        if (constraints == null)
-            return;
+    if (constraints == null) return;
 
-        for (IConstraint c : constraints) {
+    for (IConstraint c : constraints) {
 
-            final Iterator<BOp> itr = BOpUtility
-                    .preOrderIteratorWithAnnotations(c);
+      final Iterator<BOp> itr = BOpUtility.preOrderIteratorWithAnnotations(c);
 
-            while (itr.hasNext()) {
+      while (itr.hasNext()) {
 
-                final BOp y = itr.next();
+        final BOp y = itr.next();
 
-                final Integer anId = (Integer) y
-                        .getProperty(BOp.Annotations.BOP_ID);
+        final Integer anId = (Integer) y.getProperty(BOp.Annotations.BOP_ID);
 
-                if (anId != null)
-                    reserve(anId.intValue());
-
-            }
-
-        }
-
+        if (anId != null) reserve(anId.intValue());
+      }
     }
-
+  }
 }

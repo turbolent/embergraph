@@ -25,11 +25,9 @@ import org.embergraph.bop.HashMapAnnotations;
 
 /**
  * Annotations in common for JVM based hash joins.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface JVMHashJoinAnnotations extends HashMapAnnotations,
-        HashJoinAnnotations, JoinAnnotations {
-
-}
+public interface JVMHashJoinAnnotations
+    extends HashMapAnnotations, HashJoinAnnotations, JoinAnnotations {}

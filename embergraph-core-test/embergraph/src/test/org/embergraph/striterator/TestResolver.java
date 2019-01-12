@@ -27,57 +27,46 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.embergraph.striterator.ChunkedStriterator;
-import org.embergraph.striterator.IChunkedStriterator;
-import org.embergraph.striterator.Resolver;
-
 import junit.framework.TestCase2;
 
 /**
  * Unit tests for {@link Resolver}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestResolver extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestResolver() {
+  /** */
+  public TestResolver() {}
 
-    }
+  /** @param arg0 */
+  public TestResolver(String arg0) {
 
-    /**
-     * @param arg0
-     */
-    public TestResolver(String arg0) {
-        
-        super(arg0);
-        
-    }
+    super(arg0);
+  }
 
-    public void test_filter() {
-        
-        final Map<Long,String> map = new HashMap<Long,String>();
-        
-        map.put(1L, "A");
-        map.put(2L, "B");
-        map.put(3L, "C");
-        
-        IChunkedStriterator itr = new ChunkedStriterator(Arrays.asList(
-                new Long[] { 1L, 2L, 3L }).iterator());
-        
-        itr = itr.addFilter(new Resolver<Iterator<Long>, Long, String>(){
+  public void test_filter() {
 
-            @Override
-            protected String resolve(Long e) {
+    final Map<Long, String> map = new HashMap<Long, String>();
+
+    map.put(1L, "A");
+    map.put(2L, "B");
+    map.put(3L, "C");
+
+    IChunkedStriterator itr =
+        new ChunkedStriterator(Arrays.asList(new Long[] {1L, 2L, 3L}).iterator());
+
+    itr =
+        itr.addFilter(
+            new Resolver<Iterator<Long>, Long, String>() {
+
+              @Override
+              protected String resolve(Long e) {
                 return map.get(e);
-            }});
-        
-        assertEquals(new String[] { "A", "B", "C" }, itr.nextChunk());
-        
-    }
-    
+              }
+            });
+
+    assertEquals(new String[] {"A", "B", "C"}, itr.nextChunk());
+  }
 }

@@ -25,157 +25,126 @@ package org.embergraph.util.concurrent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 
 /**
- * Helper class for normal shutdown of an {@link ExecutorService}. 
- * 
+ * Helper class for normal shutdown of an {@link ExecutorService}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ShutdownHelper {
-    
-    static protected final Logger log = Logger.getLogger(ShutdownHelper.class);
 
-    /**
-     * Elapsed nanos (updated each time in the loop until terminated).
-     */
-    private long elapsed;
-    
-    /**
-     * Issues the {@link ExecutorService#shutdown()} request and then waits
-     * until all tasks running on that service have terminated.
-     * <p>
-     * If the caller's {@link Thread} is interrupted while awaiting service
-     * termination, then the caller is responsible for the subsequent behavior.
-     * Common actions include continuing to await shutdown of the service, e.g.,
-     * by invoking this method again, immediately terminating the service, etc.
-     * 
-     * @param executorService
-     *            The service to be shutdown.
-     * 
-     * @throws InterruptedException
-     *             If interrupted while awaiting termination of the service.
-     */
-    public ShutdownHelper(ExecutorService executorService)
-            throws InterruptedException {
+  protected static final Logger log = Logger.getLogger(ShutdownHelper.class);
 
-        this(executorService, Long.MAX_VALUE/* logTimeout */, TimeUnit.SECONDS/* unit */);
+  /** Elapsed nanos (updated each time in the loop until terminated). */
+  private long elapsed;
 
-    }
+  /**
+   * Issues the {@link ExecutorService#shutdown()} request and then waits until all tasks running on
+   * that service have terminated.
+   *
+   * <p>If the caller's {@link Thread} is interrupted while awaiting service termination, then the
+   * caller is responsible for the subsequent behavior. Common actions include continuing to await
+   * shutdown of the service, e.g., by invoking this method again, immediately terminating the
+   * service, etc.
+   *
+   * @param executorService The service to be shutdown.
+   * @throws InterruptedException If interrupted while awaiting termination of the service.
+   */
+  public ShutdownHelper(ExecutorService executorService) throws InterruptedException {
 
-    /**
-     * Issues the {@link ExecutorService#shutdown()} request and then waits
-     * until all tasks running on that service have terminated.
-     * <p>
-     * If the caller's {@link Thread} is interrupted while awaiting service
-     * termination, then the caller is responsible for the subsequent behavior.
-     * Common actions include continuing to await shutdown of the service, e.g.,
-     * by invoking this method again, immediately terminating the service, etc.
-     * 
-     * @param executorService
-     *            The service to be shutdown.
-     * @param logTimeout
-     *            The timeout between
-     *            {@link #logTimeout(ExecutorService, long, Logger)}
-     *            notifications.
-     * @param unit
-     *            The unit in which that timeout is expressed.
-     * 
-     * @return The elapsed nanoseconds since the request was made.
-     * 
-     * @throws IllegalArgumentException
-     *             if <i>executorService</i> is <code>null</code>.
-     * @throws IllegalArgumentException
-     *             if <i>logTimeout</i> is non-positive.
-     * @throws IllegalArgumentException
-     *             if <i>unit</i> is <code>null</code>.
-     * @throws InterruptedException
-     *             If interrupted while awaiting termination of the service.
-     */
-    public ShutdownHelper(final ExecutorService executorService,
-            long logTimeout, final TimeUnit unit) throws InterruptedException {
+    this(executorService, Long.MAX_VALUE /* logTimeout */, TimeUnit.SECONDS /* unit */);
+  }
 
-        if (executorService == null)
-            throw new IllegalArgumentException();
-        if (logTimeout <= 0L)
-            throw new IllegalArgumentException();
-        if (unit == null)
-            throw new IllegalArgumentException();
-        
-        final long begin = System.nanoTime();
-        
-        long lastLogTime = begin;
-        
-        // convert to nanoseconds.
-        logTimeout = unit.toNanos(logTimeout);
+  /**
+   * Issues the {@link ExecutorService#shutdown()} request and then waits until all tasks running on
+   * that service have terminated.
+   *
+   * <p>If the caller's {@link Thread} is interrupted while awaiting service termination, then the
+   * caller is responsible for the subsequent behavior. Common actions include continuing to await
+   * shutdown of the service, e.g., by invoking this method again, immediately terminating the
+   * service, etc.
+   *
+   * @param executorService The service to be shutdown.
+   * @param logTimeout The timeout between {@link #logTimeout(ExecutorService, long, Logger)}
+   *     notifications.
+   * @param unit The unit in which that timeout is expressed.
+   * @return The elapsed nanoseconds since the request was made.
+   * @throws IllegalArgumentException if <i>executorService</i> is <code>null</code>.
+   * @throws IllegalArgumentException if <i>logTimeout</i> is non-positive.
+   * @throws IllegalArgumentException if <i>unit</i> is <code>null</code>.
+   * @throws InterruptedException If interrupted while awaiting termination of the service.
+   */
+  public ShutdownHelper(final ExecutorService executorService, long logTimeout, final TimeUnit unit)
+      throws InterruptedException {
 
-        // request normal service shutdown.
-        executorService.shutdown();
+    if (executorService == null) throw new IllegalArgumentException();
+    if (logTimeout <= 0L) throw new IllegalArgumentException();
+    if (unit == null) throw new IllegalArgumentException();
 
-        // timeout awaitiong the service terminate each time through the loop.
-        final long awaitTimeout = 100; // ms
-        
-        while (!executorService.isTerminated()) {
+    final long begin = System.nanoTime();
 
-            if (executorService.awaitTermination(awaitTimeout,
-                    TimeUnit.MILLISECONDS)) {
+    long lastLogTime = begin;
 
-                // service terminated so break out of loop.
-                break;
+    // convert to nanoseconds.
+    logTimeout = unit.toNanos(logTimeout);
 
-            }
+    // request normal service shutdown.
+    executorService.shutdown();
 
-            // update the elapsed time.
-            this.elapsed = System.nanoTime() - begin;
+    // timeout awaitiong the service terminate each time through the loop.
+    final long awaitTimeout = 100; // ms
 
-            {
+    while (!executorService.isTerminated()) {
 
-                final long now = System.nanoTime();
+      if (executorService.awaitTermination(awaitTimeout, TimeUnit.MILLISECONDS)) {
 
-                final long elapsedLogTime = now - lastLogTime;
+        // service terminated so break out of loop.
+        break;
+      }
 
-                if (elapsedLogTime >= logTimeout) {
+      // update the elapsed time.
+      this.elapsed = System.nanoTime() - begin;
 
-                    try {
-                        logTimeout();
-                    } catch (Throwable t) {
-                        log.error("Ignored", t);
-                    }
+      {
+        final long now = System.nanoTime();
 
-                }
+        final long elapsedLogTime = now - lastLogTime;
 
-                lastLogTime = now;
+        if (elapsedLogTime >= logTimeout) {
 
-            }
+          try {
+            logTimeout();
+          } catch (Throwable t) {
+            log.error("Ignored", t);
+          }
+        }
 
-            // wait again until service is shutdown.
+        lastLogTime = now;
+      }
 
-        } // while(true)
+      // wait again until service is shutdown.
 
-    }
+    } // while(true)
+  }
 
-    /**
-     * The elapsed nanoseconds since the {@link ExecutorService#shutdown()} was
-     * initiated. This value is updated every 100ms until the service is
-     * terminated.
-     */
-    public long elapsed() {
-        
-        return elapsed;
-        
-    }
+  /**
+   * The elapsed nanoseconds since the {@link ExecutorService#shutdown()} was initiated. This value
+   * is updated every 100ms until the service is terminated.
+   */
+  public long elapsed() {
 
-    /**
-     * Invoked each time the <i>logTimeout</i> expires awaiting the service
-     * termination. The default implementation is a NOP, but it may be overriden
-     * in order to log a message, etc.
-     */
-    protected void logTimeout() {
-        
-        // NOP
-        
-    }
-    
+    return elapsed;
+  }
+
+  /**
+   * Invoked each time the <i>logTimeout</i> expires awaiting the service termination. The default
+   * implementation is a NOP, but it may be overriden in order to log a message, etc.
+   */
+  protected void logTimeout() {
+
+    // NOP
+
+  }
 }

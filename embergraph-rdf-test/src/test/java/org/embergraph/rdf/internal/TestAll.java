@@ -21,169 +21,158 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.embergraph.rdf.lexicon.TestTermIVComparator;
 import org.embergraph.rdf.store.TestLocalTripleStore;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("RDF Internal Values");
+
+    // test suite for the DTEFlags (bit patterns).
+    suite.addTestSuite(TestDTEFlags.class);
+
+    // test suite for VTE.
+    suite.addTestSuite(TestVTE.class);
+
+    // test suite for DTE.
+    suite.addTestSuite(TestDTE.class);
+
+    // basic test suite for TermIV.
+    suite.addTestSuite(TestTermIV.class);
+
+    // test suite for putting EmbergraphValues in TermIV order.
+    suite.addTestSuite(TestTermIVComparator.class);
+
+    // basic test suite for BlobIV.
+    suite.addTestSuite(TestBlobIV.class);
+
+    // unit tests for fully inline literals.
+    suite.addTestSuite(TestFullyInlineTypedLiteralIV.class);
+
+    // unit tests for fully inline URIs.
+    suite.addTestSuite(TestFullyInlineURIIV.class);
+
+    // unit tests for fully inline URIs based on a namespace + localName.
+    suite.addTestSuite(TestURIExtensionIV.class);
+
+    // unit tests for inline literals with a datatype IV.
+    suite.addTestSuite(TestLiteralDatatypeIV.class);
+
+    // test suite for encode/decode of IVs.
+    suite.addTestSuite(TestEncodeDecodeKeys.class);
+
+    // test suite for encode/decode of xsd:integer IVs
+    suite.addTestSuite(TestEncodeDecodeXSDIntegerIVs.class);
+
+    // test suite for encode/decode of GeoSpatial literals
+    suite.addTestSuite(TestEncodeDecodeGeoSpatialLiteralIVs.class);
+
+    // test suite for encode/decode of date time literals
+    suite.addTestSuite(TestEncodeDecodeXSDDateIVs.class);
+
+    // test suite for GeoSpatial utility
+    suite.addTestSuite(TestZOrderRangeScanUtility.class);
+
+    // test suite for encode/decode of xsd:decimal IVs
+    suite.addTestSuite(TestEncodeDecodeXSDDecimalIVs.class);
+
+    /*
+     * Test suite for encode/decode of IVs which inline Unicode data.
+     *
+     * Note: All of these tests currently fail. The failures appear to be
+     * related to pretty much the same cause in each case. While I have not
+     * tracked down the cause, it appears to be related to the choice of the
+     * various short strings and their ordering by Java#toString() versus
+     * the encoded Unicode data.  I have filed an issue to support inlining
+     * unicode data.
+     *
+     * @see https://sourceforge.net/apps/trac/bigdata/ticket/334
      */
-    public TestAll() {
-    }
+    suite.addTestSuite(TestIVUnicode.class);
+    suite.addTestSuite(TestEncodeDecodeUnicodeIVs.class);
 
-    /**
-     * @param arg0
+    /*
+     * Test suite for inlining of xsd unsigned data types.
+     *
+     * Note: This feature is not currently supported.
+     *
+     * @see https://sourceforge.net/apps/trac/bigdata/ticket/246
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    suite.addTestSuite(TestUnsignedIVs.class);
+    suite.addTestSuite(TestUnsignedIntegerIVs.class);
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
+    // Encode/decode and *comparator* for mixed VIs.
+    suite.addTestSuite(TestEncodeDecodeMixedIVs.class);
+
+    // Encoding/decoding of individual IV binding sets
+    suite.addTest(org.embergraph.rdf.internal.encoder.TestAll.suite());
+
+    // inline URI tests.
+    suite.addTest(org.embergraph.rdf.internal.impl.uri.TestAll.suite());
+
+    /*
+     * Note: This is an old and never finished test suite. All it does is
+     * explore some of the available hash functions having more than 32 bits
+     * in the generated hash code. However, it seems like 32-bits is plenty.
      */
-    public static Test suite()
-    {
+    // suite.addTestSuite(TestLongLiterals.class);
 
-        final TestSuite suite = new TestSuite("RDF Internal Values");
+    // xpath abs(), ceil(), floor(), and round()
+    suite.addTestSuite(TestXPathFunctions.class);
 
-        // test suite for the DTEFlags (bit patterns).
-        suite.addTestSuite(TestDTEFlags.class);
-        
-        // test suite for VTE.
-        suite.addTestSuite(TestVTE.class);
-        
-        // test suite for DTE.
-        suite.addTestSuite(TestDTE.class);
+    // geospatial format handling.
+    suite.addTest(org.embergraph.rdf.internal.gis.TestAll.suite());
 
-        // basic test suite for TermIV.
-        suite.addTestSuite(TestTermIV.class);
+    // DTEExtension encoding of packed long integer representing a timestamp.
+    suite.addTestSuite(TestEncodeDecodePackedLongIVs.class);
+    suite.addTestSuite(TestPackedLongIVs.class);
 
-        // test suite for putting EmbergraphValues in TermIV order.
-        suite.addTestSuite(TestTermIVComparator.class);
+    // DTEExtension.IPV4
+    suite.addTestSuite(TestEncodeDecodeIPv4AddrIV.class);
 
-        // basic test suite for BlobIV.
-        suite.addTestSuite(TestBlobIV.class);
+    // DTEExtension.ARRAY
+    suite.addTestSuite(TestEncodeDecodeLiteralArrayIVs.class);
 
-        // unit tests for fully inline literals.
-        suite.addTestSuite(TestFullyInlineTypedLiteralIV.class);
+    // DTEExtension.IPV4
+    suite.addTestSuite(TestEncodeDecodeIPv4AddrIV.class);
 
-        // unit tests for fully inline URIs.
-        suite.addTestSuite(TestFullyInlineURIIV.class);
+    // DTEExtension.ARRAY
+    suite.addTestSuite(TestEncodeDecodeLiteralArrayIVs.class);
 
-        // unit tests for fully inline URIs based on a namespace + localName.
-        suite.addTestSuite(TestURIExtensionIV.class);
+    // Inline URI Handlers
+    suite.addTestSuite(TestInlineURIHandlers.class);
 
-        // unit tests for inline literals with a datatype IV.
-        suite.addTestSuite(TestLiteralDatatypeIV.class);
+    // Test handlers for packing multiple inline URI handlers into a single
+    // namespace.
+    suite.addTestSuite(TestInlineLocalNameIntegerURIHandler.class);
 
-        // test suite for encode/decode of IVs.
-        suite.addTestSuite(TestEncodeDecodeKeys.class);
+    // Test Handler for single namespace multiple inline URI Handlers
+    // BLZG-1938
 
-        // test suite for encode/decode of xsd:integer IVs
-        suite.addTestSuite(TestEncodeDecodeXSDIntegerIVs.class);
+    final ProxyTestSuite proxySuite =
+        new ProxyTestSuite(
+            new TestLocalTripleStore(), "Local Triple Store With Provenance Test Suite");
 
-        // test suite for encode/decode of GeoSpatial literals
-        suite.addTestSuite(TestEncodeDecodeGeoSpatialLiteralIVs.class);
-        
-        // test suite for encode/decode of date time literals
-        suite.addTestSuite(TestEncodeDecodeXSDDateIVs.class);
-        
-        // test suite for GeoSpatial utility
-        suite.addTestSuite(TestZOrderRangeScanUtility.class);
+    proxySuite.addTest(TestMultiInlineURIHandlersSingleNamespace.suite());
 
-        // test suite for encode/decode of xsd:decimal IVs
-        suite.addTestSuite(TestEncodeDecodeXSDDecimalIVs.class);
+    suite.addTest(proxySuite);
 
-        /*
-         * Test suite for encode/decode of IVs which inline Unicode data.
-         * 
-         * Note: All of these tests currently fail. The failures appear to be
-         * related to pretty much the same cause in each case. While I have not
-         * tracked down the cause, it appears to be related to the choice of the
-         * various short strings and their ordering by Java#toString() versus
-         * the encoded Unicode data.  I have filed an issue to support inlining
-         * unicode data.
-         * 
-         * @see https://sourceforge.net/apps/trac/bigdata/ticket/334 
-         */
-        suite.addTestSuite(TestIVUnicode.class);
-        suite.addTestSuite(TestEncodeDecodeUnicodeIVs.class);
-
-        /*
-         * Test suite for inlining of xsd unsigned data types.
-         * 
-         * Note: This feature is not currently supported.
-         * 
-         * @see https://sourceforge.net/apps/trac/bigdata/ticket/246
-         */
-        suite.addTestSuite(TestUnsignedIVs.class);
-        suite.addTestSuite(TestUnsignedIntegerIVs.class);
-        
-        // Encode/decode and *comparator* for mixed VIs.
-        suite.addTestSuite(TestEncodeDecodeMixedIVs.class);
-
-        // Encoding/decoding of individual IV binding sets
-        suite.addTest(org.embergraph.rdf.internal.encoder.TestAll.suite());
-
-        // inline URI tests.
-        suite.addTest(org.embergraph.rdf.internal.impl.uri.TestAll.suite());
-
-        /*
-         * Note: This is an old and never finished test suite. All it does is
-         * explore some of the available hash functions having more than 32 bits
-         * in the generated hash code. However, it seems like 32-bits is plenty.
-         */
-        // suite.addTestSuite(TestLongLiterals.class);
-
-        // xpath abs(), ceil(), floor(), and round()
-        suite.addTestSuite(TestXPathFunctions.class);
-
-        // geospatial format handling.
-        suite.addTest(org.embergraph.rdf.internal.gis.TestAll.suite());
-
-        // DTEExtension encoding of packed long integer representing a timestamp.
-        suite.addTestSuite(TestEncodeDecodePackedLongIVs.class);
-        suite.addTestSuite(TestPackedLongIVs.class);
-        
-        // DTEExtension.IPV4
-        suite.addTestSuite(TestEncodeDecodeIPv4AddrIV.class);
-        
-        // DTEExtension.ARRAY
-        suite.addTestSuite(TestEncodeDecodeLiteralArrayIVs.class);
-        
-        // DTEExtension.IPV4
-        suite.addTestSuite(TestEncodeDecodeIPv4AddrIV.class);
-        
-        // DTEExtension.ARRAY
-        suite.addTestSuite(TestEncodeDecodeLiteralArrayIVs.class);
-        
-        //Inline URI Handlers
-        suite.addTestSuite(TestInlineURIHandlers.class);
-        
-        //Test handlers for packing multiple inline URI handlers into a single
-        //namespace.
-        suite.addTestSuite(TestInlineLocalNameIntegerURIHandler.class);
-        
-        //Test Handler for single namespace multiple inline URI Handlers
-        //BLZG-1938
-       
-        final ProxyTestSuite proxySuite = new ProxyTestSuite(new TestLocalTripleStore(),
-                "Local Triple Store With Provenance Test Suite"); 
-        
-        proxySuite.addTest(TestMultiInlineURIHandlersSingleNamespace.suite());
-        
-        suite.addTest( proxySuite);
-       
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

@@ -24,86 +24,78 @@ import java.text.ParseException;
 
 /**
  * Test suite for {@link CoordinateDD}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCoordinateDD extends AbstractCoordinateTestCase {
-    /**
-     * 
-     */
-    public TestCoordinateDD() {
-        super();
-    }
+  /** */
+  public TestCoordinateDD() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestCoordinateDD(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestCoordinateDD(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Verify basic constructor and formatter.
-     */
-    public void test_ctor() {
-        CoordinateDD c = new CoordinateDD(+32.30642, -122.61458);
-        assertEquals(c.northSouth, +32.30642);
-        assertEquals(c.eastWest, -122.61458);
-        assertEquals("+32.30642,-122.61458", c.toString());
-    }
+  /** Verify basic constructor and formatter. */
+  public void test_ctor() {
+    CoordinateDD c = new CoordinateDD(+32.30642, -122.61458);
+    assertEquals(c.northSouth, +32.30642);
+    assertEquals(c.eastWest, -122.61458);
+    assertEquals("+32.30642,-122.61458", c.toString());
+  }
 
-    /**
-     * Test for correct rejection of decimal degrees that are out of range.
-     */
-    public void test_ctor_correctRejection() {
-        try {
-            new CoordinateDD(9000001, 0);
-            fail("Expecting " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
-        try {
-            new CoordinateDD(-9000001, 0);
-            fail("Expecting " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
-        try {
-            new CoordinateDD(0, 18000001);
-            fail("Expecting " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
-        try {
-            new CoordinateDD(0, -18000001);
-            fail("Expecting " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
+  /** Test for correct rejection of decimal degrees that are out of range. */
+  public void test_ctor_correctRejection() {
+    try {
+      new CoordinateDD(9000001, 0);
+      fail("Expecting " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
+    try {
+      new CoordinateDD(-9000001, 0);
+      fail("Expecting " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
+    }
+    try {
+      new CoordinateDD(0, 18000001);
+      fail("Expecting " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
+    }
+    try {
+      new CoordinateDD(0, -18000001);
+      fail("Expecting " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
+    }
+  }
 
-    /**
-     * Test suite for parsing coordinates expressed in decimal degrees.
-     * 
-     * @throws ParseException
-     */
-    public void test_parse() throws ParseException {
-        {
-            CoordinateDD c = new CoordinateDD(+32.30642, -122.61458);
-            assertEquals(c, CoordinateDD.parse("+32.30642, -122.61458"));
-            assertEquals(c, CoordinateDD.parse("+32.30642,-122.61458"));
-            assertEquals(c, CoordinateDD.parse("+32.30642 -122.61458"));
-            assertEquals(c, CoordinateDD.parse("+32.30642 / -122.61458"));
-            assertEquals(c, CoordinateDD.parse("+32.30642/-122.61458"));
-            assertEquals(c, CoordinateDD.parse("+32.30642-122.61458"));
-        }
-        {
-            CoordinateDD c = new CoordinateDD(+36.0726355d, -79.7919754d);
-            /*
-             * Note: Should round up for both lat and long for this case.
-             */
-            assertEquals(c, CoordinateDD.parse("+36.0726355 -79.7919754"));
-        }
+  /**
+   * Test suite for parsing coordinates expressed in decimal degrees.
+   *
+   * @throws ParseException
+   */
+  public void test_parse() throws ParseException {
+    {
+      CoordinateDD c = new CoordinateDD(+32.30642, -122.61458);
+      assertEquals(c, CoordinateDD.parse("+32.30642, -122.61458"));
+      assertEquals(c, CoordinateDD.parse("+32.30642,-122.61458"));
+      assertEquals(c, CoordinateDD.parse("+32.30642 -122.61458"));
+      assertEquals(c, CoordinateDD.parse("+32.30642 / -122.61458"));
+      assertEquals(c, CoordinateDD.parse("+32.30642/-122.61458"));
+      assertEquals(c, CoordinateDD.parse("+32.30642-122.61458"));
     }
+    {
+      CoordinateDD c = new CoordinateDD(+36.0726355d, -79.7919754d);
+      /*
+       * Note: Should round up for both lat and long for this case.
+       */
+      assertEquals(c, CoordinateDD.parse("+36.0726355 -79.7919754"));
+    }
+  }
 }

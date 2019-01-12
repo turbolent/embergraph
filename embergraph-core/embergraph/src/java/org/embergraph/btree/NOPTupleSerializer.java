@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Properties;
-
 import org.embergraph.btree.keys.ASCIIKeyBuilderFactory;
 import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -35,132 +34,107 @@ import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.btree.keys.KeyBuilder;
 
 /**
- * Default implementation uses the {@link KeyBuilder} to format the object as a
- * key and requires that the values are byte[]s which it passes on without
- * change. Deserialization of the tuple value always the byte[] itself.
- * 
+ * Default implementation uses the {@link KeyBuilder} to format the object as a key and requires
+ * that the values are byte[]s which it passes on without change. Deserialization of the tuple value
+ * always the byte[] itself.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NOPTupleSerializer extends DefaultTupleSerializer {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 2211020411074955099L;
+  /** */
+  private static final long serialVersionUID = 2211020411074955099L;
 
-    public static transient final ITupleSerializer INSTANCE = new NOPTupleSerializer(
-            new DefaultKeyBuilderFactory(new Properties()));
+  public static final transient ITupleSerializer INSTANCE =
+      new NOPTupleSerializer(new DefaultKeyBuilderFactory(new Properties()));
 
-    /**
-     * De-serialization ctor.
-     */
-    public NOPTupleSerializer() {
-        
+  /** De-serialization ctor. */
+  public NOPTupleSerializer() {}
+
+  /**
+   * Normally callers will use an {@link ASCIIKeyBuilderFactory} since Unicode support is not
+   * required
+   *
+   * @param keyBuilderFactory
+   * @see ASCIIKeyBuilderFactory
+   */
+  public NOPTupleSerializer(final IKeyBuilderFactory keyBuilderFactory) {
+
+    super(keyBuilderFactory);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Return <i>obj</i> iff it is a <code>byte[]</code> and otherwise converts <i>obj</i> to a
+   * byte[] using {@link IKeyBuilder#append(Object)}.
+   */
+  @Override
+  public byte[] serializeKey(Object obj) {
+
+    if (obj == null) throw new IllegalArgumentException();
+
+    if (obj instanceof byte[]) {
+
+      return (byte[]) obj;
     }
 
-    /**
-     * Normally callers will use an {@link ASCIIKeyBuilderFactory} since
-     * Unicode support is not required 
-     * @param keyBuilderFactory
-     * 
-     * @see ASCIIKeyBuilderFactory
-     */
-    public NOPTupleSerializer(final IKeyBuilderFactory keyBuilderFactory) {
+    return getKeyBuilder().reset().append(obj).getKey();
+  }
 
-        super(keyBuilderFactory);
-        
+  @Override
+  public byte[] serializeVal(Object obj) {
+
+    return (byte[]) obj;
+  }
+
+  @Override
+  public Object deserialize(ITuple tuple) {
+
+    if (tuple == null) throw new IllegalArgumentException();
+
+    return tuple.getValue();
+  }
+
+  /**
+   * This is an unsupported operation. Additional information is required to either decode the
+   * internal unsigned byte[] keys or to extract the key from the de-serialized value (if it is
+   * being stored in that value). You can either write your own {@link ITupleSerializer} or you can
+   * specialize this one so that it can de-serialize your keys using whichever approach makes the
+   * most sense for your data.
+   *
+   * @throws UnsupportedOperationException always.
+   */
+  public Object deserializeKey(ITuple tuple) {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /** The initial version (no additional persistent state). */
+  private static final transient byte VERSION0 = 0;
+
+  /** The current version. */
+  private static final transient byte VERSION = VERSION0;
+
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+
+    super.readExternal(in);
+
+    final byte version = in.readByte();
+
+    switch (version) {
+      case VERSION0:
+        break;
+      default:
+        throw new UnsupportedOperationException("Unknown version: " + version);
     }
+  }
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * Return <i>obj</i> iff it is a <code>byte[]</code> and otherwise converts
-	 * <i>obj</i> to a byte[] using {@link IKeyBuilder#append(Object)}.
-	 */
-    @Override
-    public byte[] serializeKey(Object obj) {
+  public void writeExternal(final ObjectOutput out) throws IOException {
 
-        if (obj == null)
-            throw new IllegalArgumentException();
-        
-        if(obj instanceof byte[]) {
-            
-            return (byte[]) obj;
-            
-        }
-        
-        return getKeyBuilder().reset().append(obj).getKey();
-        
-    }
+    super.writeExternal(out);
 
-    @Override
-    public byte[] serializeVal(Object obj) {
-
-        return (byte[])obj;
-        
-    }
-
-    @Override
-    public Object deserialize(ITuple tuple) {
-
-        if (tuple == null)
-            throw new IllegalArgumentException();
-        
-        return tuple.getValue();
-        
-    }
-
-    /**
-     * This is an unsupported operation. Additional information is required to
-     * either decode the internal unsigned byte[] keys or to extract the key
-     * from the de-serialized value (if it is being stored in that value). You
-     * can either write your own {@link ITupleSerializer} or you can specialize
-     * this one so that it can de-serialize your keys using whichever approach
-     * makes the most sense for your data.
-     * 
-     * @throws UnsupportedOperationException
-     *             always.
-     */
-    public Object deserializeKey(ITuple tuple) {
-        
-        throw new UnsupportedOperationException();
-        
-    }
-
-    /**
-     * The initial version (no additional persistent state).
-     */
-    private final static transient byte VERSION0 = 0;
-
-    /**
-     * The current version.
-     */
-    private final static transient byte VERSION = VERSION0;
-
-    public void readExternal(final ObjectInput in) throws IOException,
-            ClassNotFoundException {
-
-        super.readExternal(in);
-        
-        final byte version = in.readByte();
-        
-        switch (version) {
-        case VERSION0:
-            break;
-        default:
-            throw new UnsupportedOperationException("Unknown version: "
-                    + version);
-        }
-
-    }
-
-    public void writeExternal(final ObjectOutput out) throws IOException {
-
-        super.writeExternal(out);
-        
-        out.writeByte(VERSION);
-        
-    }
-
+    out.writeByte(VERSION);
+  }
 }

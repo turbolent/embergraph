@@ -26,32 +26,27 @@ package org.embergraph.service.proxy;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
-
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
 /**
- * {@link Remote} interface declaring the API of {@link IRunnableBuffer} but
- * also declaring that each methods throws {@link IOException} in order to be
- * compatible with {@link Remote} and Exporter. Of course, this means
- * that this interface can not extend {@link IRunnableBuffer}!
- * 
+ * {@link Remote} interface declaring the API of {@link IRunnableBuffer} but also declaring that
+ * each methods throws {@link IOException} in order to be compatible with {@link Remote} and
+ * Exporter. Of course, this means that this interface can not extend {@link IRunnableBuffer}!
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the elements in the buffer.
- * @param <V>
- *            The generic type of the result of the method call.
+ * @param <E> The generic type of the elements in the buffer.
+ * @param <V> The generic type of the result of the method call.
  */
-public interface RemoteRunnableBuffer<E,V> extends RemoteBuffer<E> {
+public interface RemoteRunnableBuffer<E, V> extends RemoteBuffer<E> {
 
-    public void add(E e) throws IOException;
+  public void add(E e) throws IOException;
 
-    public boolean isOpen() throws IOException;
+  public boolean isOpen() throws IOException;
 
-    public void close() throws IOException;
+  public void close() throws IOException;
 
-    public void abort(Throwable cause) throws IOException;
+  public void abort(Throwable cause) throws IOException;
 
-    public Future<V> getFuture() throws IOException;
-
+  public Future<V> getFuture() throws IOException;
 }

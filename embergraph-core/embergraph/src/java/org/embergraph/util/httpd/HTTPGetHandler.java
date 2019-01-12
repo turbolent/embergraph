@@ -22,41 +22,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util.httpd;
 
 import java.util.Collection;
-
 import org.embergraph.util.httpd.NanoHTTPD.Request;
 import org.embergraph.util.httpd.NanoHTTPD.Response;
 
 /**
  * Interface allows for implementation of different handlers for "GET".
- * 
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
- *         Thompson</a>
+ *
+ * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface HTTPGetHandler {
 
-    /**
-     * HTTP GET 
-     * 
-     * @param uri
-     *            Percent-decoded URI without parameters, for example
-     *            "/index.cgi"
-     * @param method
-     *            "GET", "POST" etc.
-     * @param parms
-     *            Parsed, percent decoded parameters from URI and, in
-     *            case of POST, data. The keys are the parameter names.
-     *            Each value is a {@link Collection} of {@link String}s
-     *            containing the bindings for the named parameter. The
-     *            order of the URL parameters is preserved.
-     * @param header
-     *            Header entries, percent decoded
-     * 
-     * @return HTTP response
-     * 
-     * @see Response
-     */
-    public Response doGet(final Request req)
-            throws Exception;
-
+  /**
+   * HTTP GET
+   *
+   * @param uri Percent-decoded URI without parameters, for example "/index.cgi"
+   * @param method "GET", "POST" etc.
+   * @param parms Parsed, percent decoded parameters from URI and, in case of POST, data. The keys
+   *     are the parameter names. Each value is a {@link Collection} of {@link String}s containing
+   *     the bindings for the named parameter. The order of the URL parameters is preserved.
+   * @param header Header entries, percent decoded
+   * @return HTTP response
+   * @see Response
+   */
+  public Response doGet(final Request req) throws Exception;
 }

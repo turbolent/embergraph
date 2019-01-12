@@ -21,24 +21,20 @@ import java.io.Serializable;
 
 public class HAReadResponse implements IHAReadResponse, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    final private byte[] data;
-    
-    public HAReadResponse(final byte[] data) {
-        
-        if (data == null)
-            throw new IllegalArgumentException();
-        
-        this.data = data;
-        
-    }
-    
-    @Override
-    public byte[] getData() {
+  private final byte[] data;
 
-        return data;
-        
-    }
+  public HAReadResponse(final byte[] data) {
 
+    if (data == null) throw new IllegalArgumentException();
+
+    this.data = data;
+  }
+
+  @Override
+  public byte[] getData() {
+
+    return data;
+  }
 }

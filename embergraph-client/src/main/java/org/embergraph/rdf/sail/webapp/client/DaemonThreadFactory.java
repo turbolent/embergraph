@@ -22,83 +22,68 @@ import java.util.concurrent.ThreadFactory;
 
 /**
  * A thread factory that configures the thread as a daemon thread.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 class DaemonThreadFactory implements ThreadFactory {
 
-    final private ThreadFactory delegate;
-    final private String basename; // MAY be null.
-    private int counter = 0; // used iff basename was given.
+  private final ThreadFactory delegate;
+  private final String basename; // MAY be null.
+  private int counter = 0; // used iff basename was given.
 
-    private static ThreadFactory _default = new DaemonThreadFactory();
-    
-    /**
-     * Returns an instance based on {@link Executors#defaultThreadFactory()}
-     * that configures the thread for daemon mode.
-     */
-    final public static ThreadFactory defaultThreadFactory() {
+  private static ThreadFactory _default = new DaemonThreadFactory();
 
-        return _default;
-        
-    }
-    
-    /**
-     * Uses {@link Executors#defaultThreadFactory()} as the delegate.
-     */
-    public DaemonThreadFactory() {
-        
-        this( Executors.defaultThreadFactory(), null/*basename*/ );
-        
-    }
-    
-    public DaemonThreadFactory(String basename) {
+  /**
+   * Returns an instance based on {@link Executors#defaultThreadFactory()} that configures the
+   * thread for daemon mode.
+   */
+  public static final ThreadFactory defaultThreadFactory() {
 
-        this(Executors.defaultThreadFactory(), basename);
+    return _default;
+  }
 
-    }
-    
-    /**
-     * Uses the specified delegate {@link ThreadFactory}.
-     * 
-     * @param delegate
-     *            The delegate thread factory that is responsible for creating
-     *            the threads.
-     * @param basename
-     *            Optional prefix that will be used to assign names to the
-     *            generated threads.
-     */
-    public DaemonThreadFactory(final ThreadFactory delegate,
-            final String basename) {
-        
-        if (delegate == null)
-            throw new IllegalArgumentException();
-        
-        this.delegate = delegate;
-        
-        this.basename = basename;
-        
-    }
-    
-    @Override
-    public Thread newThread(final Runnable r) {
-        
-        final Thread t = delegate.newThread( r );
- 
-        if (basename != null) {
-         
-            counter++;
-            
-            t.setName(basename + counter);
-            
-        }
-        
-        t.setDaemon(true);
-        
-//        System.err.println("new thread: "+t.getName()+", id="+t.getId());
-        
-        return t;
-        
+  /** Uses {@link Executors#defaultThreadFactory()} as the delegate. */
+  public DaemonThreadFactory() {
+
+    this(Executors.defaultThreadFactory(), null /*basename*/);
+  }
+
+  public DaemonThreadFactory(String basename) {
+
+    this(Executors.defaultThreadFactory(), basename);
+  }
+
+  /**
+   * Uses the specified delegate {@link ThreadFactory}.
+   *
+   * @param delegate The delegate thread factory that is responsible for creating the threads.
+   * @param basename Optional prefix that will be used to assign names to the generated threads.
+   */
+  public DaemonThreadFactory(final ThreadFactory delegate, final String basename) {
+
+    if (delegate == null) throw new IllegalArgumentException();
+
+    this.delegate = delegate;
+
+    this.basename = basename;
+  }
+
+  @Override
+  public Thread newThread(final Runnable r) {
+
+    final Thread t = delegate.newThread(r);
+
+    if (basename != null) {
+
+      counter++;
+
+      t.setName(basename + counter);
     }
 
+    t.setDaemon(true);
+
+    //        System.err.println("new thread: "+t.getName()+", id="+t.getId());
+
+    return t;
+  }
 }

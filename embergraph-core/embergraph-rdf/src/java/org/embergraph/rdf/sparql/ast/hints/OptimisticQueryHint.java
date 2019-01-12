@@ -29,27 +29,26 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
 
 /**
- * Query hint for setting {@link ASTStaticJoinOptimizer.Annotations#OPTIMISTIC}
- * on a {@link JoinGroupNode}.
+ * Query hint for setting {@link ASTStaticJoinOptimizer.Annotations#OPTIMISTIC} on a {@link
+ * JoinGroupNode}.
  */
 final class OptimisticQueryHint extends AbstractDoubleQueryHint {
 
-    protected OptimisticQueryHint() {
-        super(QueryHints.OPTIMISTIC, QueryHints.DEFAULT_OPTIMISTIC);
+  protected OptimisticQueryHint() {
+    super(QueryHints.OPTIMISTIC, QueryHints.DEFAULT_OPTIMISTIC);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Double value) {
+
+    if (op instanceof JoinGroupNode) {
+
+      ((JoinGroupNode) op).setProperty(ASTStaticJoinOptimizer.Annotations.OPTIMISTIC, value);
     }
-
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Double value) {
-
-        if (op instanceof JoinGroupNode) {
-
-            ((JoinGroupNode) op).setProperty(
-                    ASTStaticJoinOptimizer.Annotations.OPTIMISTIC, value);
-
-        }
-
-    }
-
+  }
 }

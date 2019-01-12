@@ -23,7 +23,6 @@ package org.embergraph.rdf.internal.encoder;
 
 import java.util.Collections;
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 import org.embergraph.bop.IPredicate;
@@ -35,75 +34,63 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
 /**
- * Test suite for {@link IVBindingSetEncoderWithIVCache}. This class supports an
- * {@link IV} to {@link EmbergraphValue} cache which provides lookup to resolve the
- * observed associations as reported by {@link IVCache#getValue()}.
- * 
+ * Test suite for {@link IVBindingSetEncoderWithIVCache}. This class supports an {@link IV} to
+ * {@link EmbergraphValue} cache which provides lookup to resolve the observed associations as
+ * reported by {@link IVCache#getValue()}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestIVBindingSetEncoderWithCache.java 6036 2012-02-17 14:07:48Z
- *          thompsonbry $
- *          
- * This class is out of use. As part of https://jira.blazegraph.com/browse/BLZG-1899, 
- * we carried out some experiments illustrating that caching the IVs (i.e., preserving
- * them in HTree hash joins) is far slower than just re-materializing them. We decided
- * to retire the class and, instead, do remove variables from the doneSet within the
- * {@link AST2BOpUtility} update process whenever we set up an analytic hash join.
- * 
- * This test is deprecated and has been disabled in org.embergraph.rdf.internal.encoder.TestAll.
- * Note that, if at some point we decide to re-enable the test, we would need to fix
- * the {@link IVBindingSetEncoderWithIVCache} (I've recently added some tests to this
- * class which are failing). Unless the {@link IVBindingSetEncoderWithIVCache} is resurrected,
- * these test failures can simply be ignored.
+ * @version $Id: TestIVBindingSetEncoderWithCache.java 6036 2012-02-17 14:07:48Z thompsonbry $
+ *     <p>This class is out of use. As part of https://jira.blazegraph.com/browse/BLZG-1899, we
+ *     carried out some experiments illustrating that caching the IVs (i.e., preserving them in
+ *     HTree hash joins) is far slower than just re-materializing them. We decided to retire the
+ *     class and, instead, do remove variables from the doneSet within the {@link AST2BOpUtility}
+ *     update process whenever we set up an analytic hash join.
+ *     <p>This test is deprecated and has been disabled in
+ *     org.embergraph.rdf.internal.encoder.TestAll. Note that, if at some point we decide to
+ *     re-enable the test, we would need to fix the {@link IVBindingSetEncoderWithIVCache} (I've
+ *     recently added some tests to this class which are failing). Unless the {@link
+ *     IVBindingSetEncoderWithIVCache} is resurrected, these test failures can simply be ignored.
  */
 @Deprecated
-public class TestIVBindingSetEncoderWithCache extends
-        AbstractBindingSetEncoderTestCase {
+public class TestIVBindingSetEncoderWithCache extends AbstractBindingSetEncoderTestCase {
 
-    /**
-     * 
-     */
-    public TestIVBindingSetEncoderWithCache() {
-    }
+  /** */
+  public TestIVBindingSetEncoderWithCache() {}
 
-    public TestIVBindingSetEncoderWithCache(String name) {
-        super(name);
-    }
+  public TestIVBindingSetEncoderWithCache(String name) {
+    super(name);
+  }
 
-    /**
-     * Backing store for caches.
-     */
-    private IRawStore store = new SimpleMemoryRawStore();
+  /** Backing store for caches. */
+  private IRawStore store = new SimpleMemoryRawStore();
 
-    /**
-     * Empty operator - will use defaults for various annotations.
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    private BOp op = new BOpBase(new BOp[] {}/* args */,
-            (Map<String, Object>) (Map) Collections.singletonMap(
-                    IPredicate.Annotations.RELATION_NAME,
-                    new String[] { namespace })/* anns */);
+  /** Empty operator - will use defaults for various annotations. */
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  private BOp op =
+      new BOpBase(
+          new BOp[] {} /* args */,
+          (Map<String, Object>)
+              (Map)
+                  Collections.singletonMap(
+                      IPredicate.Annotations.RELATION_NAME, new String[] {namespace}) /* anns */);
 
-    protected void setUp() throws Exception {
-        
-        super.setUp();
-    
-        // The encoder under test.
-        encoder = new IVBindingSetEncoderWithIVCache(
-                store, false/* filter */, op);
-        
-        // The decoder is the same object.
-        decoder = (IVBindingSetEncoderWithIVCache) encoder;
+  protected void setUp() throws Exception {
 
-    }
-    
-    protected void tearDown() throws Exception {
-        
-        super.tearDown();
-        
-        // Clear references.
-        store = null;
-        op = null;
-        
-    }
-    
+    super.setUp();
+
+    // The encoder under test.
+    encoder = new IVBindingSetEncoderWithIVCache(store, false /* filter */, op);
+
+    // The decoder is the same object.
+    decoder = (IVBindingSetEncoderWithIVCache) encoder;
+  }
+
+  protected void tearDown() throws Exception {
+
+    super.tearDown();
+
+    // Clear references.
+    store = null;
+    op = null;
+  }
 }

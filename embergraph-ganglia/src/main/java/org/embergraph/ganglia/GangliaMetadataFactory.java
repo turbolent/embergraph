@@ -18,74 +18,61 @@ package org.embergraph.ganglia;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * A factory which can be extended by an application.
- */
+/** A factory which can be extended by an application. */
 public class GangliaMetadataFactory implements IGangliaMetadataFactory {
 
-	private final CopyOnWriteArraySet<IGangliaMetadataFactory> list = new CopyOnWriteArraySet<IGangliaMetadataFactory>();
+  private final CopyOnWriteArraySet<IGangliaMetadataFactory> list =
+      new CopyOnWriteArraySet<IGangliaMetadataFactory>();
 
-	private final IGangliaMetadataFactory defaultFactory;
-	
-	public GangliaMetadataFactory(final DefaultMetadataFactory defaultFactory) {
+  private final IGangliaMetadataFactory defaultFactory;
 
-		if (defaultFactory == null)
-			throw new IllegalArgumentException();
+  public GangliaMetadataFactory(final DefaultMetadataFactory defaultFactory) {
 
-		this.defaultFactory = defaultFactory;
-		
-	}
+    if (defaultFactory == null) throw new IllegalArgumentException();
 
-	public void add(final IGangliaMetadataFactory factory) {
+    this.defaultFactory = defaultFactory;
+  }
 
-		if (factory == null)
-			throw new IllegalArgumentException();
+  public void add(final IGangliaMetadataFactory factory) {
 
-		list.add(factory);
+    if (factory == null) throw new IllegalArgumentException();
 
-	}
+    list.add(factory);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * Overridden to try each registered delegate first and then the fallback
-	 * delegate specified in the constructor. The first declaration returned by
-	 * a delegate is returned to the caller.
-	 */
-	@Override
-	public IGangliaMetadataMessage newDecl(final String hostName,
-			final String metricName, final Object value) {
-		
-		final Iterator<IGangliaMetadataFactory> itr = list.iterator();
-		
-		IGangliaMetadataMessage decl = null;
-		
-		while(itr.hasNext() && decl == null) {
-		
-			final IGangliaMetadataFactory impl = itr.next();
-			
-			decl = impl.newDecl(hostName, metricName, value);
-			
-		}
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Overridden to try each registered delegate first and then the fallback delegate specified in
+   * the constructor. The first declaration returned by a delegate is returned to the caller.
+   */
+  @Override
+  public IGangliaMetadataMessage newDecl(
+      final String hostName, final String metricName, final Object value) {
 
-		if (decl == null) {
+    final Iterator<IGangliaMetadataFactory> itr = list.iterator();
 
-			decl = defaultFactory.newDecl(hostName, metricName, value);
+    IGangliaMetadataMessage decl = null;
 
-		}
+    while (itr.hasNext() && decl == null) {
 
-		return decl;
+      final IGangliaMetadataFactory impl = itr.next();
 
-	}
+      decl = impl.newDecl(hostName, metricName, value);
+    }
 
-	/**
-	 * Always returns the caller's argument.
-	 */
-	@Override
-	public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl) {
+    if (decl == null) {
 
-		return decl;
+      decl = defaultFactory.newDecl(hostName, metricName, value);
+    }
 
-	}
+    return decl;
+  }
 
+  /** Always returns the caller's argument. */
+  @Override
+  public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl) {
+
+    return decl;
+  }
 }

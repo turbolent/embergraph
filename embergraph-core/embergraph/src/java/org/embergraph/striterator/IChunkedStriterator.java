@@ -25,14 +25,13 @@ package org.embergraph.striterator;
 
 /**
  * Generic-enabled streaming iterator pattern for chunked iterators.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IChunkedStriterator<I extends IChunkedIterator<E>, E> extends
-        IChunkedIterator<E>, IStriterator<I, E> {
+public interface IChunkedStriterator<I extends IChunkedIterator<E>, E>
+    extends IChunkedIterator<E>, IStriterator<I, E> {
 
-    @Override
-    public IChunkedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
-
+  @Override
+  public IChunkedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
 }

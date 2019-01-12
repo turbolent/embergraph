@@ -1,10 +1,9 @@
 package it.unimi.dsi.compression;
 
-
-/*		 
+/*
  * DSI utilities
  *
- * Copyright (C) 2005-2009 Sebastiano Vigna 
+ * Copyright (C) 2005-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -22,27 +21,31 @@ package it.unimi.dsi.compression;
  *
  */
 
-/** An abstract factory corresponding to an instance of a specific compression technique. 
- * 
- * <P>An implementation of this interface provides coders and decoders. The
- * constructors must provide all data that is required to perform coding
- * and decoding.
+/**
+ * An abstract factory corresponding to an instance of a specific compression technique.
+ *
+ * <p>An implementation of this interface provides coders and decoders. The constructors must
+ * provide all data that is required to perform coding and decoding.
  */
-
 public interface Codec {
-	/** Returns a coder for the compression technique represented by this coded. 
-	 * 
-	 * @return a coder for the compression technique represented by this codec. */
-	public Coder coder();
-	
-	/** Returns a decoder for the compression technique represented by this coded. 
-	 * 
-	 * @return a decoder for the compression technique represented by this codec. */
-	public Decoder decoder();
-	
-	/** Returns the number of symbols handled by this codec. 
-	 * 
-	 * @return the number of symbols handled by this codec.
-	 */
-	public int size();
+  /**
+   * Returns a coder for the compression technique represented by this coded.
+   *
+   * @return a coder for the compression technique represented by this codec.
+   */
+  public Coder coder();
+
+  /**
+   * Returns a decoder for the compression technique represented by this coded.
+   *
+   * @return a decoder for the compression technique represented by this codec.
+   */
+  public Decoder decoder();
+
+  /**
+   * Returns the number of symbols handled by this codec.
+   *
+   * @return the number of symbols handled by this codec.
+   */
+  public int size();
 }

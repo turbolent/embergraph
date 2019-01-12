@@ -22,60 +22,46 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * A node whose children are a list of {@link NamedSubqueryRoot}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class NamedSubqueriesNode extends QueryNodeListBaseNode<NamedSubqueryRoot> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Deep copy constructor.
-     */
-    public NamedSubqueriesNode(final NamedSubqueriesNode op) {
+  /** Deep copy constructor. */
+  public NamedSubqueriesNode(final NamedSubqueriesNode op) {
 
-        super(op);
+    super(op);
+  }
 
+  /** Shallow copy constructor. */
+  public NamedSubqueriesNode(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  /** */
+  public NamedSubqueriesNode() {}
+
+  public String toString(final int indent) {
+
+    final StringBuilder sb = new StringBuilder();
+
+    for (NamedSubqueryRoot n : this) {
+      //            sb.append("\n");
+      //            sb.append(indent(indent));
+      //            sb.append("WITH {");
+      sb.append(n.toString(indent));
+      //            sb.append("} AS " + n.getName());
     }
 
-    /**
-     * Shallow copy constructor.
-     */
-    public NamedSubqueriesNode(final BOp[] args, final Map<String, Object> anns) {
-
-        super(args, anns);
-
-    }
-
-    /**
-     * 
-     */
-    public NamedSubqueriesNode() {
-    }
-
-    public String toString(final int indent) {
-
-        final StringBuilder sb = new StringBuilder();
-
-        for (NamedSubqueryRoot n : this) {
-//            sb.append("\n");
-//            sb.append(indent(indent));
-//            sb.append("WITH {");
-            sb.append(n.toString(indent));
-//            sb.append("} AS " + n.getName());
-        }
-
-        return sb.toString();
-
-    }
-    
+    return sb.toString();
+  }
 }

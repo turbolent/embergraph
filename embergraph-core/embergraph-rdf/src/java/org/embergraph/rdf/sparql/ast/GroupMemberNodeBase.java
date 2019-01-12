@@ -22,117 +22,96 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
  * Anything which can appear in an {@link IGroupNode}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class GroupMemberNodeBase<E extends IGroupMemberNode> extends
-        QueryNodeBase implements IGroupMemberNode {
+public abstract class GroupMemberNodeBase<E extends IGroupMemberNode> extends QueryNodeBase
+    implements IGroupMemberNode {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public interface Annotations extends IGroupMemberNode.Annotations {
-    	
-    }
-    
-    private IGroupNode<IGroupMemberNode> parent;
+  public interface Annotations extends IGroupMemberNode.Annotations {}
 
-    @Override
-    final public IGroupNode<IGroupMemberNode> getParent() {
+  private IGroupNode<IGroupMemberNode> parent;
 
-        return parent;
+  @Override
+  public final IGroupNode<IGroupMemberNode> getParent() {
 
-    }
+    return parent;
+  }
 
-    @Override
-    final public void setParent(final IGroupNode<IGroupMemberNode> parent) {
+  @Override
+  public final void setParent(final IGroupNode<IGroupMemberNode> parent) {
 
-        this.parent = parent;
+    this.parent = parent;
+  }
 
-    }
+  public GroupMemberNodeBase() {}
 
-    public GroupMemberNodeBase() {
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public GroupMemberNodeBase(GroupMemberNodeBase<E> op) {
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public GroupMemberNodeBase(GroupMemberNodeBase<E> op) {
+    super(op);
+  }
 
-        super(op);
-        
-    }
+  /** Required shallow copy constructor. */
+  public GroupMemberNodeBase(BOp[] args, Map<String, Object> anns) {
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public GroupMemberNodeBase(BOp[] args, Map<String, Object> anns) {
+    super(args, anns);
+  }
 
-        super(args, anns);
+  @Override
+  public TermNode getContext() {
 
-    }
+    final IQueryNode parent = getParent();
 
-    @Override
-    public TermNode getContext() {
-    
-        final IQueryNode parent = getParent();
-        
-        if (parent instanceof GroupMemberNodeBase<?>) {
+    if (parent instanceof GroupMemberNodeBase<?>) {
 
-            /*
-             * Recursion up to the parent context.
-             * 
-             * TODO It would seem better to explicitly recurse until we find the
-             * first JoinGroup parent, and to define a getJoinGroup() method for
-             * that.
-             */
-            return ((GroupMemberNodeBase<?>) parent).getContext();
-            
-        }
-        
-        return null;
-    
+      /*
+       * Recursion up to the parent context.
+       *
+       * TODO It would seem better to explicitly recurse until we find the
+       * first JoinGroup parent, and to define a getJoinGroup() method for
+       * that.
+       */
+      return ((GroupMemberNodeBase<?>) parent).getContext();
     }
 
-    @Override
-    public JoinGroupNode getParentJoinGroup() {
+    return null;
+  }
 
-        IGroupNode<?> parent = getParent();
+  @Override
+  public JoinGroupNode getParentJoinGroup() {
 
-        while (parent != null) {
+    IGroupNode<?> parent = getParent();
 
-            if (parent instanceof JoinGroupNode)
-                return (JoinGroupNode) parent;
+    while (parent != null) {
 
-            parent = parent.getParent();
+      if (parent instanceof JoinGroupNode) return (JoinGroupNode) parent;
 
-        }
-
-        return null;
-
+      parent = parent.getParent();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup() {
-        
-        IGroupNode<?> parent = getParent();
+    return null;
+  }
 
-        while (parent != null) {
+  @Override
+  @SuppressWarnings("unchecked")
+  public GraphPatternGroup<IGroupMemberNode> getParentGraphPatternGroup() {
 
-            if (parent instanceof GraphPatternGroup)
-                return (GraphPatternGroup<IGroupMemberNode>) parent;
+    IGroupNode<?> parent = getParent();
 
-            parent = parent.getParent();
+    while (parent != null) {
 
-        }
+      if (parent instanceof GraphPatternGroup) return (GraphPatternGroup<IGroupMemberNode>) parent;
 
-        return null;
-        
+      parent = parent.getParent();
     }
-    
+
+    return null;
+  }
 }

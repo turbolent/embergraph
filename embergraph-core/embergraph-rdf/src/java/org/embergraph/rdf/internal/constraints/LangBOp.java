@@ -20,89 +20,68 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.openrdf.model.Literal;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
 
-/**
- * Return the language tag of the literal argument.
- */
+/** Return the language tag of the literal argument. */
 @SuppressWarnings("rawtypes")
-public class LangBOp extends IVValueExpression<IV> 
-		implements INeedsMaterialization {
+public class LangBOp extends IVValueExpression<IV> implements INeedsMaterialization {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7391999162162545704L;
-	
-//	private static final transient Logger log = Logger.getLogger(LangBOp.class);
+  /** */
+  private static final long serialVersionUID = 7391999162162545704L;
 
-    public LangBOp(final IValueExpression<? extends IV> x,
-            final GlobalAnnotations globals) {
+  //	private static final transient Logger log = Logger.getLogger(LangBOp.class);
 
-        super(x, globals);
+  public LangBOp(final IValueExpression<? extends IV> x, final GlobalAnnotations globals) {
 
-    }
-    
-    /**
-     * Required shallow copy constructor.
-     */
-    public LangBOp(final BOp[] args, final Map<String, Object> anns) {
+    super(x, globals);
+  }
 
-        super(args, anns);
+  /** Required shallow copy constructor. */
+  public LangBOp(final BOp[] args, final Map<String, Object> anns) {
 
-        if (args.length != 1 || args[0] == null)
-            throw new IllegalArgumentException();
+    super(args, anns);
 
-        if (getProperty(Annotations.NAMESPACE) == null)
-            throw new IllegalArgumentException();
+    if (args.length != 1 || args[0] == null) throw new IllegalArgumentException();
 
-    }
+    if (getProperty(Annotations.NAMESPACE) == null) throw new IllegalArgumentException();
+  }
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public LangBOp(final LangBOp op) {
-     
-        super(op);
-        
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public LangBOp(final LangBOp op) {
 
-    @Override
-    public IV get(final IBindingSet bs) {
+    super(op);
+  }
 
-        final Literal literal = getAndCheckLiteralValue(0, bs);
+  @Override
+  public IV get(final IBindingSet bs) {
 
-        String langTag = literal.getLanguage();
+    final Literal literal = getAndCheckLiteralValue(0, bs);
 
-        if (langTag == null) {
+    String langTag = literal.getLanguage();
 
-            langTag = "";
+    if (langTag == null) {
 
-        }
-
-        final EmbergraphValueFactory vf = getValueFactory();
-
-        final EmbergraphValue lang = vf.createLiteral(langTag);
-
-        return super.asIV(lang, bs);
-
+      langTag = "";
     }
 
-    @Override
-    public Requirement getRequirement() {
+    final EmbergraphValueFactory vf = getValueFactory();
 
-        return INeedsMaterialization.Requirement.SOMETIMES;
-        
-    }
-    
+    final EmbergraphValue lang = vf.createLiteral(langTag);
+
+    return super.asIV(lang, bs);
+  }
+
+  @Override
+  public Requirement getRequirement() {
+
+    return INeedsMaterialization.Requirement.SOMETIMES;
+  }
 }

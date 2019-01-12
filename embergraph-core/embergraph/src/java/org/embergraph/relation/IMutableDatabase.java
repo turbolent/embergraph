@@ -27,6 +27,4 @@ package org.embergraph.relation;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IMutableDatabase<E> extends IDatabase<E>, IMutableResource<IDatabase<E>> {
-
-}
+public interface IMutableDatabase<E> extends IDatabase<E>, IMutableResource<IDatabase<E>> {}

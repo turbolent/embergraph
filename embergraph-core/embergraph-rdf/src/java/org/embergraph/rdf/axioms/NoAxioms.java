@@ -23,50 +23,40 @@ package org.embergraph.rdf.axioms;
 
 /**
  * An empty axiom model.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NoAxioms extends BaseAxioms {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4149879139683303198L;
+  /** */
+  private static final long serialVersionUID = 4149879139683303198L;
 
-    /**
-     * De-serialization ctor.
-     */
-    public NoAxioms() {
+  /** De-serialization ctor. */
+  public NoAxioms() {
 
-        super();
-        
-    }
+    super();
+  }
 
-    public NoAxioms(final String namespace) {
-        
-        super(namespace);
-        
-    }
-    
-    @Override
-    final public boolean isNone() {
-        
-        return true;
-        
-    }
+  public NoAxioms(final String namespace) {
 
-    @Override
-    final public boolean isRdfSchema() {
-        
-        return false;
-        
-    }
-    
-    @Override
-    final public boolean isOwlSameAs() {
-        
-        return false;
-        
-    }
-    
+    super(namespace);
+  }
+
+  @Override
+  public final boolean isNone() {
+
+    return true;
+  }
+
+  @Override
+  public final boolean isRdfSchema() {
+
+    return false;
+  }
+
+  @Override
+  public final boolean isOwlSameAs() {
+
+    return false;
+  }
 }

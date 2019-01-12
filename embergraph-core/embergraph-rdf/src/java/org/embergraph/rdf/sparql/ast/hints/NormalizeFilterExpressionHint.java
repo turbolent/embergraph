@@ -29,44 +29,43 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTFilterNormalizationOptimizer;
 
 /**
- * Query hint to enable/disable normalization and decomposition of complex
- * FILTER expressions with {@link QueryHints#NORMALIZE_FILTER_EXPRESSIONS}.
- * The hint applies to groups or subgroups.
- * <p>
- * Note: This sets an AST annotation which is interpreted by the
- * {@link ASTFilterNormalizationOptimizer}.
- * 
+ * Query hint to enable/disable normalization and decomposition of complex FILTER expressions with
+ * {@link QueryHints#NORMALIZE_FILTER_EXPRESSIONS}. The hint applies to groups or subgroups.
+ *
+ * <p>Note: This sets an AST annotation which is interpreted by the {@link
+ * ASTFilterNormalizationOptimizer}.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
- * @version $Id$ 
+ * @version $Id$
  */
 final class NormalizeFilterExpressionHint extends AbstractBooleanQueryHint {
 
-    protected NormalizeFilterExpressionHint() {
+  protected NormalizeFilterExpressionHint() {
 
-        super(QueryHints.NORMALIZE_FILTER_EXPRESSIONS, null/* default */);
+    super(QueryHints.NORMALIZE_FILTER_EXPRESSIONS, null /* default */);
+  }
 
-    }
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        switch (scope) {
-        case Group:
-        case GroupAndSubGroups:
-        case Query:
-        case SubQuery:
-            if (op instanceof JoinGroupNode) {
-                _setAnnotation(context, scope, op, getName(), value);
-            }
-            return;
-        default:
-           break;
+    switch (scope) {
+      case Group:
+      case GroupAndSubGroups:
+      case Query:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(context, scope, op, getName(), value);
         }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
+        return;
+      default:
+        break;
     }
 
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

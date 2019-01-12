@@ -23,78 +23,63 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("SPARQL Update Evaluation");
+
+    /*
+     * The openrdf SPARQL UPDATE test suite.
+     *
+     * Note: This test suite is for quads mode only. SPARQL UPDATE support
+     * is also tested by the NSS test suite.
      */
-    public TestAll() {
-    }
+
+    // Unisolated operations.
+    suite.addTestSuite(EmbergraphSPARQLUpdateTest.class);
+
+    // Fully isolated read/write operations.
+    suite.addTestSuite(EmbergraphSPARQLUpdateTxTest.class);
 
     /**
-     * @param arg0
+     * The embergraph extensions to SPARQL UPDATE to support solution sets as well as graphs.
+     *
+     * <p>Note: We need to run a few different IRawStore backends to confirm support for the
+     * IStreamStore interface and to confirm that the store correctly supports SPARQL UPDATE on
+     * NAMED SOLUTION SETS using that IStreamStore interface.
+     *
+     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
+     *     (Trac) </a>
+     * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update">
+     *     SPARQL Update Extensions (Wiki) </a>
+     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/555" > Support
+     *     PSOutputStream/InputStream at IRawStore </a>
      */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
-
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
     {
 
-        final TestSuite suite = new TestSuite("SPARQL Update Evaluation");
+      // Unisolated operations
+      suite.addTestSuite(EmbergraphSPARQLUpdateTest2.class); // MemStore.
+      suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskRW.class);
+      suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskWORM.class);
 
-        /*
-         * The openrdf SPARQL UPDATE test suite.
-         * 
-         * Note: This test suite is for quads mode only. SPARQL UPDATE support
-         * is also tested by the NSS test suite.
-         */
-
-        // Unisolated operations.
-        suite.addTestSuite(EmbergraphSPARQLUpdateTest.class);
-
-        // Fully isolated read/write operations.
-        suite.addTestSuite(EmbergraphSPARQLUpdateTxTest.class);
-
-        /**
-         * The embergraph extensions to SPARQL UPDATE to support solution sets as
-         * well as graphs.
-         * 
-         * Note: We need to run a few different IRawStore backends to confirm
-         * support for the IStreamStore interface and to confirm that the store
-         * correctly supports SPARQL UPDATE on NAMED SOLUTION SETS using that
-         * IStreamStore interface.
-         * 
-         * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">
-         *      SPARQL UPDATE Extensions (Trac) </a>
-         * @see <a
-         *      href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update">
-         *      SPARQL Update Extensions (Wiki) </a>
-         * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/555" >
-         *      Support PSOutputStream/InputStream at IRawStore </a>
-         */
-        {
-
-            // Unisolated operations
-            suite.addTestSuite(EmbergraphSPARQLUpdateTest2.class); // MemStore.
-            suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskRW.class);
-            suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskWORM.class);
-
-            // Fully isolated read/write operations.
-            suite.addTestSuite(EmbergraphSPARQLUpdateTxTest2.class); // MemStore
-
-        }
-
-        return suite;
-
+      // Fully isolated read/write operations.
+      suite.addTestSuite(EmbergraphSPARQLUpdateTxTest2.class); // MemStore
     }
 
+    return suite;
+  }
 }

@@ -19,113 +19,105 @@ package org.embergraph.journal;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.log4j.Logger;
 
 /**
- * Provides a basic implementation of a {@link ISnapshotFactory} to be used 
- * with non-HA operations to provide online backup capabilities.
- * 
- * This is exposed via the REST API via the {@link StatusServlet}.
- * 
- * @author beebs
+ * Provides a basic implementation of a {@link ISnapshotFactory} to be used with non-HA operations
+ * to provide online backup capabilities.
  *
+ * <p>This is exposed via the REST API via the {@link StatusServlet}.
+ *
+ * @author beebs
  */
 public class BasicSnapshotFactory implements ISnapshotFactory {
 
-	 /**
-     * Logger.
-     */
-    private static final Logger log = Logger.getLogger(BasicSnapshotFactory.class);
-    
-    private static final boolean debug = log.isDebugEnabled();
-    private static final boolean info = log.isDebugEnabled();
-	
-	//Default to "backup.jnl" in the directory where the service is running.
-	private String file = "backup.jnl";
-	
-	//Default to uncompressed
-	private boolean compress = false;
-	
-	public BasicSnapshotFactory(final String file, final boolean compress) {
-		
-		this.file = file;
-		this.compress = compress;
-		
-	}
-	
-	public BasicSnapshotFactory() {
-		
-		//Get the absolute path for the running instance.
-		file = getAbsolutePath(file);
-		
-	}  
+  /** Logger. */
+  private static final Logger log = Logger.getLogger(BasicSnapshotFactory.class);
 
-	public String getFile() {
-		return file;
-	}
+  private static final boolean debug = log.isDebugEnabled();
+  private static final boolean info = log.isDebugEnabled();
 
-	public void setFile(String file) {
-		this.file = getAbsolutePath(file);
-	}
+  // Default to "backup.jnl" in the directory where the service is running.
+  private String file = "backup.jnl";
 
-	public void setCompress(boolean compress) {
-		this.compress = compress;
-	}
-	
-	/**
-	 * Utility to get the absolute path of a file if passed a relative one.
-	 * 
-	 * @param file
-	 * @return
-	 */
-	protected String getAbsolutePath(String file) {
+  // Default to uncompressed
+  private boolean compress = false;
 
-		String ret = file;
+  public BasicSnapshotFactory(final String file, final boolean compress) {
 
-		File f = new File(file);
-		//Check if we have a relative path file and use the absolute path.
-		if(f.getParent() == null) {
-			ret = f.getAbsolutePath();
-		}
-		f = null;
-		
-		return ret;
-	}
+    this.file = file;
+    this.compress = compress;
+  }
 
-	/**
-	 * For the default implementation don't append the commit point to the file.
-	 * 
-	 *  In non-HA mode, the system does not have the responsibility to manage and
-	 *  restore from snapshots.  That is accomplished by operations and procedures
-	 *  around the deployment of the non-HA service.
-	 * 
-	 */
-	@Override
-	public File getSnapshotFile(IRootBlockView rbv) throws IOException {
+  public BasicSnapshotFactory() {
 
-		File f = new File(file);
-		
-		if(!f.createNewFile() ) {
-			if(debug) {
-				log.debug("Backup file " + file + " already exists.");
-			}
-			throw new RuntimeException("Backup file " + file + " already exists.");
-		}
-		
-		if(!f.canWrite()) {
-			if(debug) {
-				log.debug("Backup file " + file + " is not writable.");
-			}
-			throw new RuntimeException("Backup file " + file + " is not writable.");
-		}
-		
-		return f;
-	}
+    // Get the absolute path for the running instance.
+    file = getAbsolutePath(file);
+  }
 
-	@Override
-	public boolean getCompress() {
-		return compress;
-	}
+  public String getFile() {
+    return file;
+  }
 
+  public void setFile(String file) {
+    this.file = getAbsolutePath(file);
+  }
+
+  public void setCompress(boolean compress) {
+    this.compress = compress;
+  }
+
+  /**
+   * Utility to get the absolute path of a file if passed a relative one.
+   *
+   * @param file
+   * @return
+   */
+  protected String getAbsolutePath(String file) {
+
+    String ret = file;
+
+    File f = new File(file);
+    // Check if we have a relative path file and use the absolute path.
+    if (f.getParent() == null) {
+      ret = f.getAbsolutePath();
+    }
+    f = null;
+
+    return ret;
+  }
+
+  /**
+   * For the default implementation don't append the commit point to the file.
+   *
+   * <p>In non-HA mode, the system does not have the responsibility to manage and restore from
+   * snapshots. That is accomplished by operations and procedures around the deployment of the
+   * non-HA service.
+   */
+  @Override
+  public File getSnapshotFile(IRootBlockView rbv) throws IOException {
+
+    File f = new File(file);
+
+    if (!f.createNewFile()) {
+      if (debug) {
+        log.debug("Backup file " + file + " already exists.");
+      }
+      throw new RuntimeException("Backup file " + file + " already exists.");
+    }
+
+    if (!f.canWrite()) {
+      if (debug) {
+        log.debug("Backup file " + file + " is not writable.");
+      }
+      throw new RuntimeException("Backup file " + file + " is not writable.");
+    }
+
+    return f;
+  }
+
+  @Override
+  public boolean getCompress() {
+    return compress;
+  }
 }

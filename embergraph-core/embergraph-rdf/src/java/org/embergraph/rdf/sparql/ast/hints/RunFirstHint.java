@@ -30,35 +30,34 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTRunFirstRunLastOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer;
 
 /**
- * Query hint to run a join first in a join group. This hint must be used
- * with {@link QueryHintScope#Prior}.
- * <p>
- * Note: This sets an AST annotation which is interpreted by the
- * {@link ASTRunFirstRunLastOptimizer} and {@link ASTStaticJoinOptimizer}.
+ * Query hint to run a join first in a join group. This hint must be used with {@link
+ * QueryHintScope#Prior}.
+ *
+ * <p>Note: This sets an AST annotation which is interpreted by the {@link
+ * ASTRunFirstRunLastOptimizer} and {@link ASTStaticJoinOptimizer}.
  */
 final class RunFirstHint extends AbstractBooleanQueryHint {
 
-    protected RunFirstHint() {
+  protected RunFirstHint() {
 
-        super(QueryHints.RUN_FIRST, null/* default */);
+    super(QueryHints.RUN_FIRST, null /* default */);
+  }
 
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (scope == QueryHintScope.Prior && op instanceof IJoinNode) {
+
+      _setAnnotation(context, scope, op, getName(), value);
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        if (scope == QueryHintScope.Prior && op instanceof IJoinNode) {
-
-            _setAnnotation(context, scope, op, getName(), value);
-
-            return;
-            
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

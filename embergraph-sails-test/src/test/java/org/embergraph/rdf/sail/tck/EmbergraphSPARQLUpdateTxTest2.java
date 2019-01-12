@@ -22,35 +22,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.tck;
 
 import java.util.Properties;
-
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
  * A variant of the test suite using full read/write transactions.
- * 
- * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531"> SPARQL
- *      UPDATE Extensions (Trac) </a>
- *      
+ *
+ * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
+ *     (Trac) </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmbergraphSPARQLUpdateTxTest2 extends EmbergraphSPARQLUpdateTest2 {
 
-    /**
-     * 
-     */
-    public EmbergraphSPARQLUpdateTxTest2() {
-    }
+  /** */
+  public EmbergraphSPARQLUpdateTxTest2() {}
 
-    @Override
-    public Properties getProperties() {
+  @Override
+  public Properties getProperties() {
 
-        final Properties props = new Properties(super.getProperties());
+    final Properties props = new Properties(super.getProperties());
 
-        props.setProperty(Options.ISOLATABLE_INDICES, "true");
+    props.setProperty(Options.ISOLATABLE_INDICES, "true");
 
-        return props;
-
-    }
-
+    return props;
+  }
 }

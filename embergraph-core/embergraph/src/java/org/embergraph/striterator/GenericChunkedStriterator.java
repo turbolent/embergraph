@@ -26,46 +26,36 @@ package org.embergraph.striterator;
 import java.util.Iterator;
 
 /**
- * Chunked streaming iterator class that supresses generic types. Striterator
- * patterns are often used to convert the type of the elements visited by the
- * underlying iterator. That and the covarying generics combine to make code
- * using generics and striterators rather ugly.
- * 
+ * Chunked streaming iterator class that supresses generic types. Striterator patterns are often
+ * used to convert the type of the elements visited by the underlying iterator. That and the
+ * covarying generics combine to make code using generics and striterators rather ugly.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class GenericChunkedStriterator<E> extends
-        ChunkedStriterator<IChunkedIterator<E>, E> {
+public class GenericChunkedStriterator<E> extends ChunkedStriterator<IChunkedIterator<E>, E> {
 
-    /**
-     * @param src
-     */
-//    @SuppressWarnings("unchecked")
-    public GenericChunkedStriterator(final IChunkedIterator<E> src) {
+  /** @param src */
+  //    @SuppressWarnings("unchecked")
+  public GenericChunkedStriterator(final IChunkedIterator<E> src) {
 
-        super(src);
+    super(src);
+  }
 
-    }
+  /** @param src */
+  //    @SuppressWarnings("unchecked")
+  public GenericChunkedStriterator(final Iterator<E> src) {
 
-    /**
-     * @param src
-     */
-//    @SuppressWarnings("unchecked")
-    public GenericChunkedStriterator(final Iterator<E> src) {
+    super(src);
+  }
 
-        super(src);
+  /**
+   * @param chunkSize
+   * @param src
+   */
+  //    @SuppressWarnings("unchecked")
+  public GenericChunkedStriterator(final int chunkSize, final Iterator<E> src) {
 
-    }
-
-    /**
-     * @param chunkSize
-     * @param src
-     */
-//    @SuppressWarnings("unchecked")
-    public GenericChunkedStriterator(final int chunkSize, final Iterator<E> src) {
-
-        super(chunkSize, src);
-
-    }
-
+    super(chunkSize, src);
+  }
 }

@@ -27,35 +27,34 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the {@link NativeDistinctFilter} on/off.
- */
+/** Query hint for turning the {@link NativeDistinctFilter} on/off. */
 final class NativeDistinctSPOThresholdHint extends AbstractLongQueryHint {
 
-    protected NativeDistinctSPOThresholdHint() {
-        super(QueryHints.NATIVE_DISTINCT_SPO_THRESHOLD,
-                QueryHints.DEFAULT_NATIVE_DISTINCT_SPO_THRESHOLD);
+  protected NativeDistinctSPOThresholdHint() {
+    super(
+        QueryHints.NATIVE_DISTINCT_SPO_THRESHOLD, QueryHints.DEFAULT_NATIVE_DISTINCT_SPO_THRESHOLD);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Long value) {
+
+    if (scope == QueryHintScope.Query) {
+
+      context.nativeDistinctSPOThreshold = value;
+
+      return;
+
+      // } else {
+
+      // super.attach(context, scope, op, value);
+
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Long value) {
-
-        if (scope == QueryHintScope.Query) {
-
-            context.nativeDistinctSPOThreshold = value;
-
-            return;
-
-            // } else {
-
-            // super.attach(context, scope, op, value);
-
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

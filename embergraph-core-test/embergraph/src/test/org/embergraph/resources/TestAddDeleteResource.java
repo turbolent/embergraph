@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.Journal;
@@ -36,152 +35,141 @@ import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 
 /**
- * Unit test of the {@link StoreManager} when adding and deleting journals and
- * index segments.
- * 
+ * Unit test of the {@link StoreManager} when adding and deleting journals and index segments.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAddDeleteResource extends AbstractResourceManagerTestCase {
 
-    /**
-     * 
-     */
-    public TestAddDeleteResource() {
+  /** */
+  public TestAddDeleteResource() {}
+
+  /** @param arg0 */
+  public TestAddDeleteResource(String arg0) {
+    super(arg0);
+  }
+
+  /**
+   * Test verifies add and delete of a journal.
+   *
+   * @throws IOException
+   */
+  public void test_addDeleteJournal() throws IOException {
+
+    final Journal j1;
+    {
+      Properties p = new Properties();
+
+      p.setProperty(
+          Journal.Options.FILE,
+          File.createTempFile("journal_1", Journal.Options.JNL, resourceManager.dataDir)
+              .toString());
+
+      j1 = new Journal(p);
     }
 
-    /**
-     * @param arg0
-     */
-    public TestAddDeleteResource(String arg0) {
-        super(arg0);
+    try {
+
+      assertEquals(1, resourceManager.getManagedJournalCount());
+
+      // add
+      resourceManager.addResource(j1.getResourceMetadata(), j1.getFile());
+
+      assertEquals(2, resourceManager.getManagedJournalCount());
+
+      // store must be closed to be deleted.
+      j1.close();
+
+      // delete
+      resourceManager.deleteResource(j1.getResourceMetadata().getUUID(), true /* isJournal */);
+
+      assertEquals(1, resourceManager.getManagedJournalCount());
+
+    } finally {
+
+      if (j1.isOpen()) {
+        j1.destroy();
+      } else {
+        j1.getFile().delete();
+      }
+    }
+  }
+
+  /**
+   * Test verifies add and delete of an index segment.
+   *
+   * @throws Exception
+   */
+  public void test_addDeleteSegment() throws Exception {
+
+    assertEquals(0, resourceManager.getManagedSegmentCount());
+
+    final BuildResult buildResult;
+    {
+
+      //            Properties p = new Properties();
+
+      //            p.setProperty(IndexSegmentStore.Options.SEGMENT_FILE, File
+      //                    .createTempFile("segment_1", Journal.Options.SEG,
+      //                            resourceManager.dataDir).toString());
+
+      final String INDEX_NAME = "test index";
+
+      final BTree btree =
+          BTree.create(
+              new SimpleMemoryRawStore(), new IndexMetadata(INDEX_NAME, UUID.randomUUID()));
+
+      // insert a tuple.
+      btree.insert("abc", "def");
+
+      final long createTime = resourceManager.nextTimestamp();
+
+      /*
+       * Build an index segment from that btree.
+       *
+       * Note: the IndexSegmentStore is on the retention list and
+       * therefore is not releaseable until we remove it from that list.
+       */
+      buildResult =
+          resourceManager.buildIndexSegment(
+              INDEX_NAME,
+              btree,
+              true /* compactingMerge */,
+              createTime,
+              null /* fromKey */,
+              null /* toKey */,
+              new Event(resourceManager.getFederation(), new EventResource(INDEX_NAME), "test"));
     }
 
-    /**
-     * Test verifies add and delete of a journal.
-     * 
-     * @throws IOException
-     */
-    public void test_addDeleteJournal() throws IOException {
-        
-        final Journal j1;
-        {
+    try {
 
-            Properties p = new Properties();
-            
-            p.setProperty(Journal.Options.FILE, File.createTempFile("journal_1",
-                    Journal.Options.JNL, resourceManager.dataDir).toString());
-            
-            j1 = new Journal(p);
-            
-        }
-        
-        try {
+      // Note: the build already added the index segment for us.
+      assertEquals(1, resourceManager.getManagedSegmentCount());
 
-            assertEquals(1, resourceManager.getManagedJournalCount());
+      try {
+        // delete (should fail since on the retentionSet).
+        resourceManager.deleteResource(
+            buildResult.segmentMetadata.getUUID(), false /* isJournal */);
+        fail("Expecting: " + IllegalStateException.class);
+      } catch (IllegalStateException ex) {
+        log.info("Ignoring expected exception: " + ex);
+      }
 
-            // add
-            resourceManager.addResource(j1.getResourceMetadata(), j1.getFile());
+      // remove from the retentionSet.
+      resourceManager.retentionSetRemove(buildResult.segmentMetadata.getUUID());
 
-            assertEquals(2, resourceManager.getManagedJournalCount());
+      // delete (should succeed).
+      resourceManager.deleteResource(buildResult.segmentMetadata.getUUID(), false /* isJournal */);
 
-            // store must be closed to be deleted.
-            j1.close();
-            
-            // delete
-            resourceManager.deleteResource(j1.getResourceMetadata().getUUID(),
-                    true/* isJournal */);
+      assertEquals(0, resourceManager.getManagedSegmentCount());
 
-            assertEquals(1, resourceManager.getManagedJournalCount());
-            
-        } finally {
+    } finally {
 
-            if (j1.isOpen()) {
-                j1.destroy();
-            } else {
-                j1.getFile().delete(); 
-            }
+      if (buildResult != null) {
 
-        }
-
+        buildResult.builder.outFile.delete();
+      }
     }
-
-    /**
-     * Test verifies add and delete of an index segment.
-     * 
-     * @throws Exception 
-     */
-    public void test_addDeleteSegment() throws Exception {
-
-        assertEquals(0, resourceManager.getManagedSegmentCount());
-
-        final BuildResult buildResult;
-        {
-
-//            Properties p = new Properties();
-            
-//            p.setProperty(IndexSegmentStore.Options.SEGMENT_FILE, File
-//                    .createTempFile("segment_1", Journal.Options.SEG,
-//                            resourceManager.dataDir).toString());
-            
-            final String INDEX_NAME = "test index";
-            
-            final BTree btree = BTree.create(new SimpleMemoryRawStore(),
-                    new IndexMetadata(INDEX_NAME, UUID.randomUUID()));
-            
-            // insert a tuple.
-            btree.insert("abc", "def");
-            
-            final long createTime = resourceManager.nextTimestamp();
-
-            /*
-             * Build an index segment from that btree.
-             * 
-             * Note: the IndexSegmentStore is on the retention list and
-             * therefore is not releaseable until we remove it from that list.
-             */
-            buildResult = resourceManager.buildIndexSegment(INDEX_NAME, btree,
-                    true/* compactingMerge */, createTime, null/* fromKey */,
-                    null /* toKey */, new Event(resourceManager
-                            .getFederation(), new EventResource(INDEX_NAME),
-                            "test"));
-
-        }
-
-        try {
-
-            // Note: the build already added the index segment for us.
-            assertEquals(1, resourceManager.getManagedSegmentCount());
-
-            try {
-                // delete (should fail since on the retentionSet).
-                resourceManager.deleteResource(buildResult.segmentMetadata
-                        .getUUID(), false/* isJournal */);
-                fail("Expecting: " + IllegalStateException.class);
-            } catch (IllegalStateException ex) {
-                log.info("Ignoring expected exception: " + ex);
-            }
-
-            // remove from the retentionSet.
-            resourceManager.retentionSetRemove(buildResult.segmentMetadata
-                    .getUUID());
-            
-            // delete (should succeed).
-            resourceManager.deleteResource(buildResult.segmentMetadata
-                    .getUUID(), false/* isJournal */);
-
-            assertEquals(0, resourceManager.getManagedSegmentCount());
-
-        } finally {
-
-            if (buildResult != null) {
-
-                buildResult.builder.outFile.delete();
-
-            }
-
-        }
-
-    }
-
+  }
 }

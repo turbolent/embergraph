@@ -24,50 +24,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 /**
- * Exception thrown when a service was requested but has not been discovered or
- * is otherwise not available.
- * 
+ * Exception thrown when a service was requested but has not been discovered or is otherwise not
+ * available.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * 
- * @todo this exception should be used consistently when the caller uses one of
- *       the service discover methods on {@link IEmbergraphFederation} and gets
- *       back a <code>null</code> instead of a service. For example,
- *       {@link IEmbergraphFederation#getMetadataService()}.
+ * @todo this exception should be used consistently when the caller uses one of the service discover
+ *     methods on {@link IEmbergraphFederation} and gets back a <code>null</code> instead of a
+ *     service. For example, {@link IEmbergraphFederation#getMetadataService()}.
  */
 public class NoSuchService extends RuntimeException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -997167267628835644L;
+  /** */
+  private static final long serialVersionUID = -997167267628835644L;
 
-    /**
-     * 
-     */
-    public NoSuchService() {
-    }
+  /** */
+  public NoSuchService() {}
 
-    /**
-     * @param message
-     */
-    public NoSuchService(String message) {
-        super(message);
-    }
+  /** @param message */
+  public NoSuchService(String message) {
+    super(message);
+  }
 
-    /**
-     * @param cause
-     */
-    public NoSuchService(Throwable cause) {
-        super(cause);
-    }
+  /** @param cause */
+  public NoSuchService(Throwable cause) {
+    super(cause);
+  }
 
-    /**
-     * @param message
-     * @param cause
-     */
-    public NoSuchService(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  /**
+   * @param message
+   * @param cause
+   */
+  public NoSuchService(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

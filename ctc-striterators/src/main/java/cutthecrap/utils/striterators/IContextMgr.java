@@ -15,24 +15,16 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-/**
- * Interface for managing push/pop of context in a striterator.
- */
+/** Interface for managing push/pop of context in a striterator. */
 public interface IContextMgr {
 
-    /**
-     * Hook gives the implementation an opportunity to push context onto a
-     * stack.
-     * 
-     * @param context
-     *            The context object.
-     */
-    void pushContext(Object context);
+  /**
+   * Hook gives the implementation an opportunity to push context onto a stack.
+   *
+   * @param context The context object.
+   */
+  void pushContext(Object context);
 
-    /**
-     * Hook gives the implementation an opportunity to pop context off of a
-     * stack.
-     */
-	void popContext();
-
+  /** Hook gives the implementation an opportunity to pop context off of a stack. */
+  void popContext();
 }

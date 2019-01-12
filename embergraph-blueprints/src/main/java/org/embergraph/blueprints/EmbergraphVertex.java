@@ -17,216 +17,184 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.blueprints;
 
-import java.util.Arrays;
-import java.util.Set;
-
-import org.apache.log4j.Logger;
-import org.openrdf.model.URI;
-
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.VertexQuery;
 import com.tinkerpop.blueprints.util.DefaultVertexQuery;
+import java.util.Arrays;
+import java.util.Set;
+import org.apache.log4j.Logger;
+import org.openrdf.model.URI;
 
 /**
- * Vertex implementation that wraps a Vertex URI and points to a 
- * {@link EmbergraphGraph} instance.
- * 
- * @author mikepersonick
+ * Vertex implementation that wraps a Vertex URI and points to a {@link EmbergraphGraph} instance.
  *
+ * @author mikepersonick
  */
 public class EmbergraphVertex extends EmbergraphElement implements Vertex {
 
-    private static final transient Logger log = Logger.getLogger(EmbergraphVertex.class);
-    
-	public EmbergraphVertex(final URI uri, final EmbergraphGraph graph) {
-		super(uri, graph);
-	}
-	
-	@Override
-	public Object getId() {
-	    
-        if (log.isInfoEnabled())
-            log.info("");
-	    
-		return graph.factory.fromURI(uri);
-		
-	}
-	
-	@Override
-	public void remove() {
-	    
-        if (log.isInfoEnabled())
-            log.info("");
+  private static final transient Logger log = Logger.getLogger(EmbergraphVertex.class);
 
-		graph.removeVertex(this);
-		
-	}
+  public EmbergraphVertex(final URI uri, final EmbergraphGraph graph) {
+    super(uri, graph);
+  }
 
-	@Override
-	public Edge addEdge(final String label, final Vertex to) {
-	    
-        if (log.isInfoEnabled())
-            log.info("("+label+", "+to+")");
-        
-		return graph.addEdge(null, this, to, label);
-		
-	}
+  @Override
+  public Object getId() {
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public Iterable<Edge> getEdges(final Direction dir, final String... labels) {
-	    
-        if (log.isInfoEnabled())
-            log.info("("+dir+
-                    (labels != null ? (", "+Arrays.toString(labels)) : "")
-                            +")");
-        
-		final URI wild = null;
-		
-		try {
-		    
-    		if (dir == Direction.OUT) {
-    		    
-    			return graph.getEdges(uri, wild, labels);
-    			
-    		} else if (dir == Direction.IN) {
-    		    
-    			return graph.getEdges(wild, uri, labels);
-    			
-    		} else {
-    		    
-    			return graph.fuse(
-    					graph.getEdges(uri, wild, labels),
-    					graph.getEdges(wild, uri, labels));
-    			
-    		}
-    		
-        } catch (RuntimeException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-		
-	}
+    if (log.isInfoEnabled()) log.info("");
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public Iterable<Vertex> getVertices(final Direction dir, final String... labels) {
-	    
-        if (log.isInfoEnabled())
-            log.info("("+dir+
-                    (labels != null ? (", "+Arrays.toString(labels)) : "")
-                            +")");
-        
-		final URI wild = null;
-		
-		try {
-		    
-    		if (dir == Direction.OUT) {
-    		    
-    			return graph.getVertices(uri, wild, labels);
-    			
-    		} else if (dir == Direction.IN) {
-    		    
-    			return graph.getVertices(wild, uri, labels);
-    			
-    		} else {
-    		    
-    			return graph.fuse(
-    					graph.getVertices(uri, wild, labels),
-    					graph.getVertices(wild, uri, labels));
-    			
-    		}
+    return graph.factory.fromURI(uri);
+  }
 
-        } catch (RuntimeException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+  @Override
+  public void remove() {
 
-	}
+    if (log.isInfoEnabled()) log.info("");
 
-	/**
-	 * Not bothering to provide a SPARQL translation for vertex queries at
-	 * this time.  I suspect that scan and filter works fine when starting from
-	 * an individual vertex.
-	 */
-	@Override
-	public VertexQuery query() {
-	    
-        if (log.isInfoEnabled())
-            log.info("");
-        
-		return new DefaultVertexQuery(this);
-		
-	}
+    graph.removeVertex(this);
+  }
 
-	@Override
-	public String toString() {
-	    
-	    return "v["+uri.getLocalName()+"]";
-	    
-	}
+  @Override
+  public Edge addEdge(final String label, final Vertex to) {
 
-    @Override
-    public <T> T getProperty(final String prop) {
-        
-        if (log.isInfoEnabled())
-            log.info("("+prop+")");
-        
-        return super.getProperty(prop);
+    if (log.isInfoEnabled()) log.info("(" + label + ", " + to + ")");
+
+    return graph.addEdge(null, this, to, label);
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public Iterable<Edge> getEdges(final Direction dir, final String... labels) {
+
+    if (log.isInfoEnabled())
+      log.info("(" + dir + (labels != null ? (", " + Arrays.toString(labels)) : "") + ")");
+
+    final URI wild = null;
+
+    try {
+
+      if (dir == Direction.OUT) {
+
+        return graph.getEdges(uri, wild, labels);
+
+      } else if (dir == Direction.IN) {
+
+        return graph.getEdges(wild, uri, labels);
+
+      } else {
+
+        return graph.fuse(graph.getEdges(uri, wild, labels), graph.getEdges(wild, uri, labels));
+      }
+
+    } catch (RuntimeException ex) {
+      throw ex;
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    @Override
-    public Set<String> getPropertyKeys() {
-        
-        if (log.isInfoEnabled())
-            log.info("");
-        
-        return super.getPropertyKeys();
-        
+  @Override
+  @SuppressWarnings("unchecked")
+  public Iterable<Vertex> getVertices(final Direction dir, final String... labels) {
+
+    if (log.isInfoEnabled())
+      log.info("(" + dir + (labels != null ? (", " + Arrays.toString(labels)) : "") + ")");
+
+    final URI wild = null;
+
+    try {
+
+      if (dir == Direction.OUT) {
+
+        return graph.getVertices(uri, wild, labels);
+
+      } else if (dir == Direction.IN) {
+
+        return graph.getVertices(wild, uri, labels);
+
+      } else {
+
+        return graph.fuse(
+            graph.getVertices(uri, wild, labels), graph.getVertices(wild, uri, labels));
+      }
+
+    } catch (RuntimeException ex) {
+      throw ex;
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
     }
+  }
 
-    @Override
-    public <T> T removeProperty(final String prop) {
-        
-        if (log.isInfoEnabled())
-            log.info("("+prop+")");
-        
-        return super.removeProperty(prop);
-        
-    }
+  /**
+   * Not bothering to provide a SPARQL translation for vertex queries at this time. I suspect that
+   * scan and filter works fine when starting from an individual vertex.
+   */
+  @Override
+  public VertexQuery query() {
 
-    @Override
-    public void setProperty(final String prop, final Object val) {
-        
-        if (log.isInfoEnabled())
-            log.info("("+prop+", "+val+")");
-        
-        super.setProperty(prop, val);
-        
-    }
+    if (log.isInfoEnabled()) log.info("");
 
-//    @Override
-//    public void addProperty(final String prop, final Object val) {
-//        
-//        if (log.isInfoEnabled())
-//            log.info("("+prop+", "+val+")");
-//        
-//        super.addProperty(prop, val);
-//        
-//    }
-//
-//    @Override
-//    public <T> List<T> getProperties(final String prop) {
-//        
-//        if (log.isInfoEnabled())
-//            log.info("("+prop+")");
-//        
-//        return super.getProperties(prop);
-//        
-//    }
-	
+    return new DefaultVertexQuery(this);
+  }
+
+  @Override
+  public String toString() {
+
+    return "v[" + uri.getLocalName() + "]";
+  }
+
+  @Override
+  public <T> T getProperty(final String prop) {
+
+    if (log.isInfoEnabled()) log.info("(" + prop + ")");
+
+    return super.getProperty(prop);
+  }
+
+  @Override
+  public Set<String> getPropertyKeys() {
+
+    if (log.isInfoEnabled()) log.info("");
+
+    return super.getPropertyKeys();
+  }
+
+  @Override
+  public <T> T removeProperty(final String prop) {
+
+    if (log.isInfoEnabled()) log.info("(" + prop + ")");
+
+    return super.removeProperty(prop);
+  }
+
+  @Override
+  public void setProperty(final String prop, final Object val) {
+
+    if (log.isInfoEnabled()) log.info("(" + prop + ", " + val + ")");
+
+    super.setProperty(prop, val);
+  }
+
+  //    @Override
+  //    public void addProperty(final String prop, final Object val) {
+  //
+  //        if (log.isInfoEnabled())
+  //            log.info("("+prop+", "+val+")");
+  //
+  //        super.addProperty(prop, val);
+  //
+  //    }
+  //
+  //    @Override
+  //    public <T> List<T> getProperties(final String prop) {
+  //
+  //        if (log.isInfoEnabled())
+  //            log.info("("+prop+")");
+  //
+  //        return super.getProperties(prop);
+  //
+  //    }
+
 }

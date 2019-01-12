@@ -23,159 +23,132 @@ package org.embergraph.rdf.store;
 
 import java.util.Properties;
 import java.util.Set;
-
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
- * Test suite for {@link TempTripleStore}s sharing the same
- * {@link LexiconRelation} as the primary {@link AbstractTripleStore}.
- * 
+ * Test suite for {@link TempTripleStore}s sharing the same {@link LexiconRelation} as the primary
+ * {@link AbstractTripleStore}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestSharedLexiconTempStore extends AbstractTripleStoreTestCase {
 
-    /**
-     * 
-     */
-    public TestSharedLexiconTempStore() {
-    }
+  /** */
+  public TestSharedLexiconTempStore() {}
 
-    /**
-     * @param name
-     */
-    public TestSharedLexiconTempStore(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestSharedLexiconTempStore(String name) {
+    super(name);
+  }
 
-    /**
-     * Test when the {@link TempTripleStore} does not have a
-     * {@link LexiconRelation}.
-     */
-    public void test_TempTripleStore_noLexicon() {
-        
-        final String uriString1 = "http://www.embergraph.org/foo";
-//        final String uriString2 = "http://www.embergraph.org/bar";
-        final String uriString3 = "http://www.embergraph.org/goo";
-        
-        AbstractTripleStore store = getStore();
-        
-        try {
+  /** Test when the {@link TempTripleStore} does not have a {@link LexiconRelation}. */
+  public void test_TempTripleStore_noLexicon() {
 
-            final EmbergraphValueFactory vf = store.getValueFactory();
+    final String uriString1 = "http://www.embergraph.org/foo";
+    //        final String uriString2 = "http://www.embergraph.org/bar";
+    final String uriString3 = "http://www.embergraph.org/goo";
 
-            final EmbergraphURI uri1 = vf.createURI(uriString1);
-//            final EmbergraphURI uri2 = vf.createURI(uriString2);
-            final EmbergraphURI uri3 = vf.createURI(uriString3);
-            
-            // add term to lexicon.
-            store.addTerm(uri1);
+    AbstractTripleStore store = getStore();
 
-            // verify lookup against lexicon.
-            assertNotNull(store.getTerm(uri1.getIV()));
-            
-            {
+    try {
 
-                final Properties properties = new Properties();
+      final EmbergraphValueFactory vf = store.getValueFactory();
 
-                properties.setProperty(AbstractTripleStore.Options.LEXICON,
-                        "false");
-                // properties.setProperty(AbstractTripleStore.Options.ONE_ACCESS_PATH,
-                // "true");
+      final EmbergraphURI uri1 = vf.createURI(uriString1);
+      //            final EmbergraphURI uri2 = vf.createURI(uriString2);
+      final EmbergraphURI uri3 = vf.createURI(uriString3);
 
-                final TempTripleStore tempTripleStore = new TempTripleStore(
-                        store.getIndexManager().getTempStore(), properties,
-                        store);
+      // add term to lexicon.
+      store.addTerm(uri1);
 
-                try {
+      // verify lookup against lexicon.
+      assertNotNull(store.getTerm(uri1.getIV()));
 
-                    // verify lookup of term already known to the main kb.
-                    assertNotNull(store.getTerm(uri1.getIV()));
+      {
+        final Properties properties = new Properties();
 
-                    // the temp triple store does not have its own lexicon.
-                    assertFalse(tempTripleStore.lexicon);
+        properties.setProperty(AbstractTripleStore.Options.LEXICON, "false");
+        // properties.setProperty(AbstractTripleStore.Options.ONE_ACCESS_PATH,
+        // "true");
 
-                    // there is no lexicon associated with the temp kb.
-                    assertNull(tempTripleStore.getLexiconRelation());
-
-//                    // add 2nd term to lexicon of tmp kb.
-//                    tempTripleStore.addTerm(uri2);
-//
-//                    // verify lookup of 2nd term against lexicon of tmp store.
-//                    assertNotNull(tempTripleStore.getTerm(uri2.getIV()));
-
-                } finally {
-
-                    tempTripleStore.destroy();
-
-                }
-
-            }
-            
-//            // verify lookup of 2nd term against lexicon of main store.
-//            assertNotNull(store.getTerm(uri2.getIV()));
-
-            // add third term to main store to verify lexicon still valid.
-            store.addTerm(uri3);
-
-            // verify lookup against lexicon.
-            assertNotNull(store.getTerm(uri3.getIV()));
-
-        } finally {
-            
-            store.__tearDownUnitTest();
-            
-        }
-        
-    }
-    
-    /**
-     * Test when the {@link TempTripleStore} uses a single access path (SPO).
-     */
-    public void test_TempTripleStore_oneAccessPath() {
-        
-        AbstractTripleStore store = getStore();
+        final TempTripleStore tempTripleStore =
+            new TempTripleStore(store.getIndexManager().getTempStore(), properties, store);
 
         try {
 
-            {
+          // verify lookup of term already known to the main kb.
+          assertNotNull(store.getTerm(uri1.getIV()));
 
-                final Properties properties = new Properties();
+          // the temp triple store does not have its own lexicon.
+          assertFalse(tempTripleStore.lexicon);
 
-                properties.setProperty(
-                        AbstractTripleStore.Options.ONE_ACCESS_PATH, "true");
+          // there is no lexicon associated with the temp kb.
+          assertNull(tempTripleStore.getLexiconRelation());
 
-                final TempTripleStore tempTripleStore = new TempTripleStore(
-                        store.getIndexManager().getTempStore(), properties,
-                        store);
-
-                try {
-
-                    assertTrue(tempTripleStore.getSPORelation().oneAccessPath);
-                    
-                    final Set<String> names = tempTripleStore.getSPORelation()
-                            .getIndexNames();
-
-                    final int nexpected = tempTripleStore.isJustify() ? 2 : 1;
-                    
-                    assertEquals(nexpected, names.size());
-
-                } finally {
-
-                    tempTripleStore.destroy();
-
-                }
-
-            }
+          //                    // add 2nd term to lexicon of tmp kb.
+          //                    tempTripleStore.addTerm(uri2);
+          //
+          //                    // verify lookup of 2nd term against lexicon of tmp store.
+          //                    assertNotNull(tempTripleStore.getTerm(uri2.getIV()));
 
         } finally {
-            
-            store.__tearDownUnitTest();
-            
+
+          tempTripleStore.destroy();
         }
-        
+      }
+
+      //            // verify lookup of 2nd term against lexicon of main store.
+      //            assertNotNull(store.getTerm(uri2.getIV()));
+
+      // add third term to main store to verify lexicon still valid.
+      store.addTerm(uri3);
+
+      // verify lookup against lexicon.
+      assertNotNull(store.getTerm(uri3.getIV()));
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
-    
+  }
+
+  /** Test when the {@link TempTripleStore} uses a single access path (SPO). */
+  public void test_TempTripleStore_oneAccessPath() {
+
+    AbstractTripleStore store = getStore();
+
+    try {
+
+      {
+        final Properties properties = new Properties();
+
+        properties.setProperty(AbstractTripleStore.Options.ONE_ACCESS_PATH, "true");
+
+        final TempTripleStore tempTripleStore =
+            new TempTripleStore(store.getIndexManager().getTempStore(), properties, store);
+
+        try {
+
+          assertTrue(tempTripleStore.getSPORelation().oneAccessPath);
+
+          final Set<String> names = tempTripleStore.getSPORelation().getIndexNames();
+
+          final int nexpected = tempTripleStore.isJustify() ? 2 : 1;
+
+          assertEquals(nexpected, names.size());
+
+        } finally {
+
+          tempTripleStore.destroy();
+        }
+      }
+
+    } finally {
+
+      store.__tearDownUnitTest();
+    }
+  }
 }

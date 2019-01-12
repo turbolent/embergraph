@@ -22,45 +22,37 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.fed;
 
 import org.apache.log4j.Logger;
-
-import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
-import org.embergraph.rdf.sparql.ast.eval.IExternalAST2BOp;
 import org.embergraph.util.ClassPathUtil;
 
 /**
  * Singleton factory for a query controller.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * 
- * @see BLZG-1471 (Convert QueryEngineFactory to use getInstance() and public
- *      interface for accessor methods.)
+ * @see BLZG-1471 (Convert QueryEngineFactory to use getInstance() and public interface for accessor
+ *     methods.)
  */
 public class QueryEngineFactory {
 
-	private static final Logger log = Logger.getLogger(QueryEngineFactory.class);
+  private static final Logger log = Logger.getLogger(QueryEngineFactory.class);
 
-	static final IQueryEngineFactory instance;
-	
-	static {
+  static final IQueryEngineFactory instance;
 
-		instance = ClassPathUtil.classForName(
-				"org.embergraph.rdf.gpu.bop.engine.GpuQueryEngineFactory", // preferredClassName,
-				QueryEngineFactoryBase.class, // defaultClass,
-				IQueryEngineFactory.class, // sharedInterface,
-				QueryEngineFactory.class.getClassLoader() // classLoader
-		);
+  static {
+    instance =
+        ClassPathUtil.classForName(
+            "org.embergraph.rdf.gpu.bop.engine.GpuQueryEngineFactory", // preferredClassName,
+            QueryEngineFactoryBase.class, // defaultClass,
+            IQueryEngineFactory.class, // sharedInterface,
+            QueryEngineFactory.class.getClassLoader() // classLoader
+            );
 
-//		instance = new QueryEngineFactoryBase();
+    //		instance = new QueryEngineFactoryBase();
 
-		if (log.isInfoEnabled())
-			log.info("Factory class is " + instance.getClass().getName());
+    if (log.isInfoEnabled()) log.info("Factory class is " + instance.getClass().getName());
+  }
 
-	}
+  public static IQueryEngineFactory getInstance() {
 
-	public static IQueryEngineFactory getInstance() {
-
-		return instance;
-
-	}
-
+    return instance;
+  }
 }

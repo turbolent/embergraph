@@ -20,54 +20,44 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class HARootBlockRequest implements IHARootBlockRequest,
-        Serializable {
+public class HARootBlockRequest implements IHARootBlockRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final UUID storeUUID;
-    private final boolean isNonBlocking;
+  private final UUID storeUUID;
+  private final boolean isNonBlocking;
 
-    /**
-     * Create a non-blocking request (this is the historical behavior).
-     * 
-     * @param storeUUID
-     *            The store UUID (optional).
-     */
-    public HARootBlockRequest(final UUID storeUUID) {
+  /**
+   * Create a non-blocking request (this is the historical behavior).
+   *
+   * @param storeUUID The store UUID (optional).
+   */
+  public HARootBlockRequest(final UUID storeUUID) {
 
-        this(storeUUID, true/* isNonBlocking */);
+    this(storeUUID, true /* isNonBlocking */);
+  }
 
-    }
- 
-    /**
-     * 
-     * @param storeUUID
-     *            The store UUID (optional).
-     * @param isNonBlocking
-     *            <code>true</code> iff the request should be non-blocking.
-     */
-    public HARootBlockRequest(final UUID storeUUID,final boolean isNonBlocking) {
+  /**
+   * @param storeUUID The store UUID (optional).
+   * @param isNonBlocking <code>true</code> iff the request should be non-blocking.
+   */
+  public HARootBlockRequest(final UUID storeUUID, final boolean isNonBlocking) {
 
-        // Note: Optional.
-        this.storeUUID = storeUUID;
-        
-        this.isNonBlocking = isNonBlocking;
+    // Note: Optional.
+    this.storeUUID = storeUUID;
 
-    }
+    this.isNonBlocking = isNonBlocking;
+  }
 
-    @Override
-    public UUID getStoreUUID() {
+  @Override
+  public UUID getStoreUUID() {
 
-        return storeUUID;
+    return storeUUID;
+  }
 
-    }
+  @Override
+  public boolean isNonBlocking() {
 
-    @Override
-    public boolean isNonBlocking() {
-
-        return isNonBlocking;
-        
-    }
-    
+    return isNonBlocking;
+  }
 }

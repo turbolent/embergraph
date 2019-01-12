@@ -27,9 +27,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.sparql;
 
-
-import org.openrdf.query.algebra.StatementPattern.Scope;
-
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ASTBlankNode;
@@ -47,251 +44,207 @@ import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
+import org.openrdf.query.algebra.StatementPattern.Scope;
 
 /**
  * Base class for AST visitor impls.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
  */
 public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
 
-    protected final EmbergraphASTContext context;
+  protected final EmbergraphASTContext context;
 
-    protected EmbergraphASTVisitorBase(final EmbergraphASTContext context) {
+  protected EmbergraphASTVisitorBase(final EmbergraphASTContext context) {
 
-        this.context = context;
+    this.context = context;
+  }
 
+  /**
+   * Return the depth of the node in the parse tree. The depth is ZERO (0) if the node does not have
+   * a parent.
+   *
+   * @param node The node.
+   * @return The depth of that node.
+   */
+  protected final int depth(Node node) {
+
+    int i = 0;
+
+    while ((node = node.jjtGetParent()) != null) {
+
+      i++;
     }
 
-    
-    /**
-     * Return the depth of the node in the parse tree. The depth is ZERO (0) if
-     * the node does not have a parent.
-     * 
-     * @param node
-     *            The node.
+    return i;
+  }
 
-     * @return The depth of that node.
-     */
-    final protected int depth(Node node) {
-        
-        int i = 0;
-        
-        while ((node = node.jjtGetParent()) != null) {
-        
-            i++;
-            
-        }
-        
-        return i;
+  /**
+   * Return a white space string which may be used to indent the node to its depth in the parse
+   * tree.
+   *
+   * @param node The node.
+   * @return The indent string.
+   */
+  protected final String indent(final Node node) {
 
+    return indent(depth(node));
+  }
+
+  /**
+   * Returns a string that may be used to indent a dump of the nodes in the tree.
+   *
+   * @param depth The indentation depth.
+   * @return A string suitable for indent at that height.
+   */
+  protected static String indent(final int depth) {
+
+    if (depth < 0) {
+
+      return "";
     }
 
-    /**
-     * Return a white space string which may be used to indent the node to its
-     * depth in the parse tree.
-     * 
-     * @param node
-     *            The node.
-     *            
-     * @return The indent string.
-     */
-    final protected String indent(final Node node) {
+    return ws.substring(0, depth * 2);
+  }
 
-        return indent(depth(node));
-        
-    }
-    
-    /**
-     * Returns a string that may be used to indent a dump of the nodes in the
-     * tree.
-     * 
-     * @param depth
-     *            The indentation depth.
-     * 
-     * @return A string suitable for indent at that height.
-     */
-    protected static String indent(final int depth) {
+  private static final transient String ws =
+      "                                                                                                                                                                                                                  ";
 
-        if (depth < 0) {
+  @SuppressWarnings("unchecked")
+  private IV<EmbergraphValue, ?> makeIV(final EmbergraphValue value) throws VisitorException {
 
-            return "";
+    if (value == null) throw new VisitorException("Value property not set?");
 
-        }
+    final IV<EmbergraphValue, ?> iv = value.getIV();
 
-        return ws.substring(0, depth *2);
+    if (iv == null) throw new VisitorException("IV not resolved : " + value);
 
-    }
+    return iv;
 
-    private static final transient String ws = "                                                                                                                                                                                                                  ";
+    //        IV iv = context.lexicon.getInlineIV(value);
+    //
+    //        if (iv == null) {
+    //
+    //            iv = (IV<EmbergraphValue, ?>) TermId.mockIV(VTE.valueOf(value));
+    //
+    //            iv.setValue(value);
+    //
+    //        }
+    //
+    //        return iv;
 
-    @SuppressWarnings("unchecked")
-    private IV<EmbergraphValue, ?> makeIV(final EmbergraphValue value)
-            throws VisitorException {
+  }
 
-        if (value == null)
-            throw new VisitorException("Value property not set?");
-        
-        final IV<EmbergraphValue,?> iv = value.getIV();
-        
-        if (iv == null)
-            throw new VisitorException("IV not resolved : " + value);
-        
-        return iv;
+  /*
+   * Productions used by different ASTVisitor facets.
+   */
 
-//        IV iv = context.lexicon.getInlineIV(value);
-//
-//        if (iv == null) {
-//
-//            iv = (IV<EmbergraphValue, ?>) TermId.mockIV(VTE.valueOf(value));
-//            
-//            iv.setValue(value);
-//            
-//        }
-//
-//        return iv;
+  /**
+   * Note: openrdf uses the {@link BlankNodeVarProcessor} create anonymous variables from blank
+   * nodes and then flags those as anonymous variables in this step.
+   */
+  @Override
+  public final VarNode visit(final ASTVar node, final Object data) throws VisitorException {
 
-    }
-    
-    /*
-     * Productions used by different ASTVisitor facets.
-     */
-    
-    /**
-     * Note: openrdf uses the {@link BlankNodeVarProcessor} create anonymous
-     * variables from blank nodes and then flags those as anonymous variables in
-     * this step.
-     */
-    @Override
-    final public VarNode visit(final ASTVar node, final Object data)
-            throws VisitorException {
+    final VarNode var = new VarNode(node.getName());
 
-        final VarNode var = new VarNode(node.getName());
+    if (node.isAnonymous()) var.setAnonymous(true);
 
-        if (node.isAnonymous())
-            var.setAnonymous(true);
+    return var;
+  }
 
-        return var;
+  @Override
+  public final Object visit(final ASTQName node, final Object data) throws VisitorException {
 
-    }
+    throw new VisitorException("QNames must be resolved before building the query model");
+  }
 
-    @Override
-    final public Object visit(final ASTQName node, final Object data)
-            throws VisitorException {
- 
-        throw new VisitorException(
-                "QNames must be resolved before building the query model");
-        
-    }
+  @Override
+  public final Object visit(ASTBlankNode node, Object data) throws VisitorException {
 
-    @Override
-    final public Object visit(ASTBlankNode node, Object data)
-            throws VisitorException {
-        
-        throw new VisitorException(
-                "Blank nodes must be replaced with variables before building the query model");
-    
-    }
+    throw new VisitorException(
+        "Blank nodes must be replaced with variables before building the query model");
+  }
 
-    @Override
-    final public ConstantNode visit(final ASTIRI node, Object data)
-            throws VisitorException {
-        
-        return new ConstantNode(makeIV((EmbergraphValue)node.getRDFValue()));
-        
-    }
+  @Override
+  public final ConstantNode visit(final ASTIRI node, Object data) throws VisitorException {
 
-    @Override
-    final public ConstantNode visit(final ASTRDFLiteral node, Object data)
-            throws VisitorException {
-        
-        return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+    return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  }
 
-    }
+  @Override
+  public final ConstantNode visit(final ASTRDFLiteral node, Object data) throws VisitorException {
 
-    @Override
-    final public ConstantNode visit(ASTNumericLiteral node, Object data)
-            throws VisitorException {
+    return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  }
 
-        return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  @Override
+  public final ConstantNode visit(ASTNumericLiteral node, Object data) throws VisitorException {
 
+    return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  }
+
+  @Override
+  public final ConstantNode visit(ASTTrue node, Object data) throws VisitorException {
+
+    return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  }
+
+  @Override
+  public final ConstantNode visit(ASTFalse node, Object data) throws VisitorException {
+
+    return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  }
+
+  @Override
+  public final String visit(ASTString node, Object data) throws VisitorException {
+
+    return node.getValue();
+  }
+
+  /**
+   * Builds a fresh {@link GroupGraphPattern} that inherits the scope for the given node. This is
+   * done by looking up the scope of the given node by following its ancestor chain, to identify
+   * whether the node has some named graph ancestors. If so, the scope from the enclosing named
+   * graph ancestor is copied over, otherwise we're in default context.
+   *
+   * @param n
+   * @return
+   */
+  protected GroupGraphPattern scopedGroupGraphPattern(Node n) throws VisitorException {
+
+    // extract the enclosing ASTGraphGraphPattern, if any
+    ASTGraphGraphPattern scopePattern = firstASTGraphGraphAncestor(n);
+
+    // if we're in a ASTGraphGraphPattern scope (for instance,
+    // this is the case for a subquery enclosed in a graph section,
+    // so we need to inherit that scope (see e.g. #832)
+    if (scopePattern != null) {
+      Node child = scopePattern.jjtGetChild(0);
+      if (child != null) {
+        final TermNode s = (TermNode) scopePattern.jjtGetChild(0).jjtAccept(this, null);
+
+        if (s != null) return new GroupGraphPattern(s, Scope.NAMED_CONTEXTS);
+      }
     }
 
-    @Override
-    final public ConstantNode visit(ASTTrue node, Object data)
-            throws VisitorException {
+    // otherwise, we're in default scope
+    return new GroupGraphPattern();
+  }
 
-        return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
+  /**
+   * Returns the enclosing ASTGraphGraphPattern ancestor-or-self for the given node, or null if none
+   * exists.
+   *
+   * @param node node at which to start lookup
+   * @return first enclosing {@link ASTGraphGraphPattern} ancestor, if any, null otherwise
+   */
+  protected ASTGraphGraphPattern firstASTGraphGraphAncestor(Node node) {
+    if (node == null) return null;
 
-    }
+    if (node instanceof ASTGraphGraphPattern) return (ASTGraphGraphPattern) node;
 
-    @Override
-    final public ConstantNode visit(ASTFalse node, Object data)
-            throws VisitorException {
-
-        return new ConstantNode(makeIV((EmbergraphValue) node.getRDFValue()));
-
-    }
-
-    @Override
-    final public String visit(ASTString node, Object data)
-            throws VisitorException {
-
-        return node.getValue();
-
-    }
-    
-    /**
-     * Builds a fresh {@link GroupGraphPattern} that inherits the scope
-     * for the given node. This is done by looking up the scope of the given
-     * node by following its ancestor chain, to identify whether the node
-     * has some named graph ancestors. If so, the scope from the enclosing
-     * named graph ancestor is copied over, otherwise we're in default context.
-     * 
-     * @param n
-     * @return
-     */
-    protected GroupGraphPattern scopedGroupGraphPattern(Node n)
-    throws VisitorException {
-       
-        // extract the enclosing ASTGraphGraphPattern, if any
-        ASTGraphGraphPattern scopePattern = firstASTGraphGraphAncestor(n);
-
-        // if we're in a ASTGraphGraphPattern scope (for instance,
-        // this is the case for a subquery enclosed in a graph section,
-        // so we need to inherit that scope (see e.g. #832)
-        if (scopePattern!=null) {
-            Node child = scopePattern.jjtGetChild(0);
-            if (child!=null) {
-                final TermNode s = 
-                    (TermNode) scopePattern.jjtGetChild(0).jjtAccept(this, null);
-                   
-                if (s!=null)
-                    return new GroupGraphPattern(s, Scope.NAMED_CONTEXTS);
-            }
-        }               
-         
-        // otherwise, we're in default scope
-        return new GroupGraphPattern();
-    }
-    
-    
-    /**
-     * Returns the enclosing ASTGraphGraphPattern ancestor-or-self for the
-     * given node, or null if none exists.
-     * 
-     * @param node node at which to start lookup
-     * @return first enclosing {@link ASTGraphGraphPattern} ancestor, if any,
-     *         null otherwise
-     */
-    protected ASTGraphGraphPattern firstASTGraphGraphAncestor(Node node) {
-       if (node==null)
-          return null;
-       
-       if (node instanceof ASTGraphGraphPattern)
-          return (ASTGraphGraphPattern)node;
-       
-       return firstASTGraphGraphAncestor(node.jjtGetParent());
-    }
+    return firstASTGraphGraphAncestor(node.jjtGetParent());
+  }
 }

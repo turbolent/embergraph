@@ -4,8 +4,7 @@ import org.embergraph.rwstore.RWStore;
 
 public interface IBufferedWriter {
 
-	int getSlotSize(int data_len);
+  int getSlotSize(int data_len);
 
-	RWStore.StoreCounters<?> getStoreCounters();
-
+  RWStore.StoreCounters<?> getStoreCounters();
 }

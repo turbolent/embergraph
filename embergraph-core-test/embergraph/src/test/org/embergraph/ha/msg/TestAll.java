@@ -27,40 +27,29 @@ import junit.framework.TestSuite;
 
 /**
  * Runs all tests for all journal implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestAll.java 6643 2012-10-03 15:13:47Z thompsonbry $
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("HA messages");
+    final TestSuite suite = new TestSuite("HA messages");
 
-        suite.addTestSuite(TestHAWriteMessage.class);
+    suite.addTestSuite(TestHAWriteMessage.class);
 
-        suite.addTestSuite(TestHASendState.class);
+    suite.addTestSuite(TestHASendState.class);
 
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

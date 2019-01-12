@@ -21,16 +21,15 @@ import org.embergraph.journal.IRootBlockView;
 
 /**
  * The message when a snapshot has been taken.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHASnapshotResponse extends IHAMessage {
 
-    /**
-     * The root block associated with the snapshot.
-     * 
-     * @return The root block and never <code>null</code>.
-     */
-    IRootBlockView getRootBlock();
-    
+  /**
+   * The root block associated with the snapshot.
+   *
+   * @return The root block and never <code>null</code>.
+   */
+  IRootBlockView getRootBlock();
 }

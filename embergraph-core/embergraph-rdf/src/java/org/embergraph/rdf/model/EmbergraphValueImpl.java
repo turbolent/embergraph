@@ -22,173 +22,150 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.model;
 
 import java.io.IOException;
-
 import org.embergraph.bop.IElement;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
 /**
  * Abstract base class for {@link EmbergraphValue} implementations.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3114316856174115308L;
+  /** */
+  private static final long serialVersionUID = 3114316856174115308L;
 
-	private volatile transient EmbergraphValueFactory valueFactory;
+  private transient volatile EmbergraphValueFactory valueFactory;
 
-    protected volatile IV iv;
+  protected volatile IV iv;
 
-    @Override
-    public final EmbergraphValueFactory getValueFactory() {
-        
-        return valueFactory;
-        
-    }
-    
-//    Note: unused.
-//    /**
-//     * 
-//     * @param valueFactory
-//     * 
-//     * @throws IllegalArgumentException
-//     *             if the argument is <code>null</code>.
-//     * @throws IllegalStateException
-//     *             if a different {@link EmbergraphValueFactoryImpl} has already been
-//     *             set.
-//     */
-//    public final void setValueFactory(final EmbergraphValueFactory valueFactory) {
-//
-//        if (valueFactory == null)
-//            throw new IllegalArgumentException();
-//
-//        if (this.valueFactory != null && this.valueFactory != valueFactory)
-//            throw new IllegalStateException();
-//
-//        this.valueFactory = valueFactory;
-//        
-//    }
-    
-    /**
-     * @param valueFactory
-     *            The value factory that created this object (optional).
-     * @param iv
-     *            The internal value (optional).
-     */
-    protected EmbergraphValueImpl(final EmbergraphValueFactory valueFactory,
-            final IV iv) {
-        
-//        if (valueFactory == null)
-//            throw new IllegalArgumentException();
-        
-        this.valueFactory = valueFactory;
-        
-        this.iv = iv;
-        
-    }
+  @Override
+  public final EmbergraphValueFactory getValueFactory() {
 
-    @Override
-    final public void clearInternalValue() {
+    return valueFactory;
+  }
 
-        iv = null;
-        
-    }
+  //    Note: unused.
+  //    /**
+  //     *
+  //     * @param valueFactory
+  //     *
+  //     * @throws IllegalArgumentException
+  //     *             if the argument is <code>null</code>.
+  //     * @throws IllegalStateException
+  //     *             if a different {@link EmbergraphValueFactoryImpl} has already been
+  //     *             set.
+  //     */
+  //    public final void setValueFactory(final EmbergraphValueFactory valueFactory) {
+  //
+  //        if (valueFactory == null)
+  //            throw new IllegalArgumentException();
+  //
+  //        if (this.valueFactory != null && this.valueFactory != valueFactory)
+  //            throw new IllegalStateException();
+  //
+  //        this.valueFactory = valueFactory;
+  //
+  //    }
 
-    final public boolean isRealIV() {
+  /**
+   * @param valueFactory The value factory that created this object (optional).
+   * @param iv The internal value (optional).
+   */
+  protected EmbergraphValueImpl(final EmbergraphValueFactory valueFactory, final IV iv) {
 
-    	if (iv == null)
-			return false;
-		
-    	if (iv.isNullIV())
-			return false;
-		
-    	return true;
+    //        if (valueFactory == null)
+    //            throw new IllegalArgumentException();
 
-    }
+    this.valueFactory = valueFactory;
 
-    @Override
-    public IV getIV() {
+    this.iv = iv;
+  }
 
-        return iv;
-        
+  @Override
+  public final void clearInternalValue() {
+
+    iv = null;
+  }
+
+  public final boolean isRealIV() {
+
+    if (iv == null) return false;
+
+    if (iv.isNullIV()) return false;
+
+    return true;
+  }
+
+  @Override
+  public IV getIV() {
+
+    return iv;
+  }
+
+  @Override
+  public final void setIV(final IV iv) {
+
+    if (iv == null) {
+
+      throw new IllegalArgumentException("Can not set IV to null: term=" + this);
     }
 
-    @Override
-    final public void setIV(final IV iv) {
+    if (this.iv != null && !IVUtility.equals(this.iv, iv)) {
 
-        if (iv == null) {
-
-            throw new IllegalArgumentException(
-                    "Can not set IV to null: term=" + this);
-
-        }
-
-        if (this.iv != null && !IVUtility.equals(this.iv, iv)) {
-
-            throw new IllegalStateException("Already assigned: old="
-                    + this.iv + ", new=" + iv + ", this: " + this);
-
-        }
-        
-        this.iv = iv;
-        
+      throw new IllegalStateException(
+          "Already assigned: old=" + this.iv + ", new=" + iv + ", this: " + this);
     }
 
-    /**
-     * Extends the serialization format to include the namespace of the lexicon
-     * so we can recover the {@link EmbergraphValueFactory} singleton reference for
-     * that namespace when the value is deserialized.
-     */
-	private void writeObject(final java.io.ObjectOutputStream out) throws IOException {
+    this.iv = iv;
+  }
 
-		out.defaultWriteObject();
-		
-		out.writeUTF(((EmbergraphValueFactoryImpl) valueFactory).getNamespace());
-		
-	}
+  /**
+   * Extends the serialization format to include the namespace of the lexicon so we can recover the
+   * {@link EmbergraphValueFactory} singleton reference for that namespace when the value is
+   * deserialized.
+   */
+  private void writeObject(final java.io.ObjectOutputStream out) throws IOException {
 
-	/**
-	 * Imposes the canonicalizing mapping on the non-Serializable
-	 * EmbergraphValueFactory during object de-serialization.
-	 */
-	private void readObject(final java.io.ObjectInputStream in) throws IOException,
-			ClassNotFoundException {
+    out.defaultWriteObject();
 
-		in.defaultReadObject();
+    out.writeUTF(((EmbergraphValueFactoryImpl) valueFactory).getNamespace());
+  }
 
-		final String namespace = in.readUTF();
-		
-		valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
-		
-	}
-	
-	/**
-	 * Implements {@link IElement}.  EmbergraphValue acts as a lexicon element,
-	 * with the term in the 0th index position and the IV in the 1st index
-	 * position.
-	 */
-	@Override
-	public Object get(int index) {
-		
-		if (index == 0) {
-			
-			return this;
-			
-		} else if (index == 1) {
-			
-			return getIV();
-			
-		} else {
-		
-			throw new IllegalArgumentException();
-			
-		}
-		
-	}
+  /**
+   * Imposes the canonicalizing mapping on the non-Serializable EmbergraphValueFactory during object
+   * de-serialization.
+   */
+  private void readObject(final java.io.ObjectInputStream in)
+      throws IOException, ClassNotFoundException {
 
+    in.defaultReadObject();
+
+    final String namespace = in.readUTF();
+
+    valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
+  }
+
+  /**
+   * Implements {@link IElement}. EmbergraphValue acts as a lexicon element, with the term in the
+   * 0th index position and the IV in the 1st index position.
+   */
+  @Override
+  public Object get(int index) {
+
+    if (index == 0) {
+
+      return this;
+
+    } else if (index == 1) {
+
+      return getIV();
+
+    } else {
+
+      throw new IllegalArgumentException();
+    }
+  }
 }

@@ -55,33 +55,27 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /**
- * A {@link PropertiesWriterFactory} returns {@link PropertiesWriter}s for a
- * specific {@link PropertiesFormat}.
- * 
+ * A {@link PropertiesWriterFactory} returns {@link PropertiesWriter}s for a specific {@link
+ * PropertiesFormat}.
+ *
  * @author Arjohn Kampman
  */
 public interface PropertiesWriterFactory {
 
-    /**
-     * Returns the PropertiesFactory for this factory.
-     */
-    public PropertiesFormat getRDFFormat();
+  /** Returns the PropertiesFactory for this factory. */
+  public PropertiesFormat getRDFFormat();
 
-    /**
-     * Returns an {@link PropertiesWriter} instance that will write to the
-     * supplied output stream.
-     * 
-     * @param out
-     *            The OutputStream to write the RDF to.
-     */
-    public PropertiesWriter getWriter(OutputStream out);
+  /**
+   * Returns an {@link PropertiesWriter} instance that will write to the supplied output stream.
+   *
+   * @param out The OutputStream to write the RDF to.
+   */
+  public PropertiesWriter getWriter(OutputStream out);
 
-    /**
-     * Returns an {@link PropertiesWriter} instance that will write to the
-     * supplied writer.
-     * 
-     * @param writer
-     *            The Writer to write the RDF to.
-     */
-    public PropertiesWriter getWriter(Writer writer);
+  /**
+   * Returns an {@link PropertiesWriter} instance that will write to the supplied writer.
+   *
+   * @param writer The Writer to write the RDF to.
+   */
+  public PropertiesWriter getWriter(Writer writer);
 }

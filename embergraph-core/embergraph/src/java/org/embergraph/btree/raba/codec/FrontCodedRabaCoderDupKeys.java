@@ -20,37 +20,32 @@ package org.embergraph.btree.raba.codec;
 
 /**
  * Variant of the {@link FrontCodedRabaCoder} that supports duplicate keys.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class FrontCodedRabaCoderDupKeys extends FrontCodedRabaCoder {
 
-    /**
-     * A default instance. 
-     */
-    public static final transient FrontCodedRabaCoderDupKeys INSTANCE = new FrontCodedRabaCoderDupKeys();
+  /** A default instance. */
+  public static final transient FrontCodedRabaCoderDupKeys INSTANCE =
+      new FrontCodedRabaCoderDupKeys();
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    protected transient static final int DEFAULT_RATIO = 8;
+  protected static final transient int DEFAULT_RATIO = 8;
 
-    public FrontCodedRabaCoderDupKeys(final int ratio) {
+  public FrontCodedRabaCoderDupKeys(final int ratio) {
 
-        super(ratio);
-        
-    }
+    super(ratio);
+  }
 
-    public FrontCodedRabaCoderDupKeys() {
-        
-        super(DEFAULT_RATIO);
-        
-    }
+  public FrontCodedRabaCoderDupKeys() {
 
-    @Override
-    public boolean isDuplicateKeys() {
+    super(DEFAULT_RATIO);
+  }
 
-        return true;
-        
-    }
+  @Override
+  public boolean isDuplicateKeys() {
 
+    return true;
+  }
 }

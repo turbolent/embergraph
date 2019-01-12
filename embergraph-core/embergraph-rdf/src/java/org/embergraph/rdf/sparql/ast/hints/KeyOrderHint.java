@@ -29,36 +29,34 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 
 /**
- * Query hint used to indicate that a hash join agaist an access path should be
- * used for a given statement pattern node.
+ * Query hint used to indicate that a hash join agaist an access path should be used for a given
+ * statement pattern node.
  */
 final class KeyOrderHint extends AbstractQueryHint<SPOKeyOrder> {
 
-    protected KeyOrderHint() {
-        super(IPredicate.Annotations.KEY_ORDER, null);
+  protected KeyOrderHint() {
+    super(IPredicate.Annotations.KEY_ORDER, null);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final SPOKeyOrder value) {
+
+    if (op instanceof StatementPatternNode) {
+
+      _setQueryHint(context, scope, op, getName(), value);
+
+      return;
     }
+  }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op,
-            final SPOKeyOrder value) {
+  @Override
+  public SPOKeyOrder validate(String value) {
 
-        if (op instanceof StatementPatternNode) {
-
-            _setQueryHint(context, scope, op, getName(), value);
-
-            return;
-
-        }
-
-    }
-
-    @Override
-    public SPOKeyOrder validate(String value) {
-
-        return SPOKeyOrder.fromString(value);
-        
-    }
-
+    return SPOKeyOrder.fromString(value);
+  }
 }

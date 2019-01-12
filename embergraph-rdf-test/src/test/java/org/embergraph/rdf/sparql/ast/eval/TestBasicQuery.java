@@ -23,50 +23,35 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 /**
  * Data driven test suite.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestBasicQuery extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestBasicQuery() {
-    }
+  /** */
+  public TestBasicQuery() {}
 
-    /**
-     * @param name
-     */
-    public TestBasicQuery(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestBasicQuery(String name) {
+    super(name);
+  }
 
-    /**
-     * A SELECT query consisting of a single statement pattern.
-     */
-    public void test_select_1() throws Exception {
-        
-        new TestHelper("select-1").runTest();
-        
-    }
-    
-    /**
-     * A simple SELECT query.
-     */
-    public void test_select_2() throws Exception {
-        
-        new TestHelper("select-2").runTest();
-        
-    }
-    
-    /**
-     * A simple ASK query.
-     */
-    public void test_ask() throws Exception {
+  /** A SELECT query consisting of a single statement pattern. */
+  public void test_select_1() throws Exception {
 
-        new TestHelper("ask").runTest();
-        
-    }
+    new TestHelper("select-1").runTest();
+  }
 
+  /** A simple SELECT query. */
+  public void test_select_2() throws Exception {
+
+    new TestHelper("select-2").runTest();
+  }
+
+  /** A simple ASK query. */
+  public void test_ask() throws Exception {
+
+    new TestHelper("ask").runTest();
+  }
 }

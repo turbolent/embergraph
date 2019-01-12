@@ -24,82 +24,75 @@ package org.embergraph.rdf.sail.webapp;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.embergraph.journal.BufferMode;
 
 /**
  * Test suite.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {
+    super();
+  }
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("WebApp");
+
+    // Test suite of NSS startup behavior and overrides.
+    suite.addTestSuite(TestNanoSparqlServer.class);
+
+    suite.addTestSuite(TestServiceWhiteList.class);
+
+    //
+    //        /*
+    //         * WebApp Client.
+    //         */
+    //        suite.addTest(org.embergraph.rdf.sail.webapp.client.TestAll.suite());
+    //
+    //        /*
+    //         * Test suite utility class for building XML/HTML documents.
+    //         */
+    //        suite.addTestSuite(TestXMLBuilder.class);
+    //
+    //        /*
+    //         * Test suite for content negotiation.
+    //         */
+    //        suite.addTestSuite(TestConneg.class);
+    //
+    //        /*
+    //         * Basic LBS unit tests (ranking and scoring hosts).
+    //         */
+    //        suite.addTest(org.embergraph.rdf.sail.webapp.lbs.TestAll.suite());
+
+    /*
+     * Core test suite for REST API behavior. This test suite is run for
+     * each mode of the database (triples, sids, quads).
+     *
+     * Note: The test suite can also be run against a federation using the
+     * main() routine in TestNanoSparqlServerWithProxyIndexManager.
      */
-    public TestAll() {
-        super();
-    }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+    // RWStore specific unit tests.
+    suite.addTest(
+        TestNanoSparqlServerWithProxyIndexManager.suite(
+            TestNanoSparqlServerWithProxyIndexManager.getTemporaryJournal(BufferMode.DiskRW),
+            TestMode.triples));
 
-    public static Test suite() {
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.sids));
 
-        final TestSuite suite = new TestSuite("WebApp");
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.triples));
 
-        // Test suite of NSS startup behavior and overrides.
-        suite.addTestSuite(TestNanoSparqlServer.class);
+    suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.quads));
 
-        suite.addTestSuite(TestServiceWhiteList.class);
-
-//
-//        /*
-//         * WebApp Client.
-//         */
-//        suite.addTest(org.embergraph.rdf.sail.webapp.client.TestAll.suite());
-//
-//        /*
-//         * Test suite utility class for building XML/HTML documents.
-//         */
-//        suite.addTestSuite(TestXMLBuilder.class);
-//        
-//        /*
-//         * Test suite for content negotiation.
-//         */
-//        suite.addTestSuite(TestConneg.class);
-//        
-//        /*
-//         * Basic LBS unit tests (ranking and scoring hosts).
-//         */
-//        suite.addTest(org.embergraph.rdf.sail.webapp.lbs.TestAll.suite());
-
-        /*
-         * Core test suite for REST API behavior. This test suite is run for
-         * each mode of the database (triples, sids, quads).
-         * 
-         * Note: The test suite can also be run against a federation using the
-         * main() routine in TestNanoSparqlServerWithProxyIndexManager.
-         */
-
-		// RWStore specific unit tests.
-		suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(
-				TestNanoSparqlServerWithProxyIndexManager
-						.getTemporaryJournal(BufferMode.DiskRW),
-				TestMode.triples));
-
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.sids));
-        
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.triples));
-        
-        suite.addTest(TestNanoSparqlServerWithProxyIndexManager.suite(TestMode.quads));
-        
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

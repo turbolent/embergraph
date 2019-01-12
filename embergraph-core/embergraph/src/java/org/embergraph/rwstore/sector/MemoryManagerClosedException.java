@@ -2,17 +2,13 @@ package org.embergraph.rwstore.sector;
 
 /**
  * Thrown the {@link MemoryManager} has been closed.
- * 
+ *
  * @author thompsonbry
  */
 public class MemoryManagerClosedException extends MemoryManagerResourceError {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-	public MemoryManagerClosedException() {
-	}
-
+  public MemoryManagerClosedException() {}
 }

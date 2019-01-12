@@ -19,55 +19,53 @@ import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
 /**
  * An earlier version of the Ganglia protocol.
- * 
- * TODO Is 3.0 or 2.5 the previous format and which one is this?
+ *
+ * <p>TODO Is 3.0 or 2.5 the previous format and which one is this?
  */
 public class GangliaMessageEncoder25 implements IGangliaMessageEncoder {
 
-	/**
-	 * TODO I am not sure whether or not there was a request message in this
-	 * protocol version. While the metadata was sent with each metric record,
-	 * the purpose of the request is not only to obtain the metadata but also to
-	 * tell the ganglia services that a new service wants to get up to speed and
-	 * would they please send it their current state.
-	 * 
-	 * @param xdr
-	 * @param msg
-	 */
-	@Override
-	public void writeRequest(XDROutputBuffer xdr, IGangliaRequestMessage msg) {
+  /**
+   * TODO I am not sure whether or not there was a request message in this protocol version. While
+   * the metadata was sent with each metric record, the purpose of the request is not only to obtain
+   * the metadata but also to tell the ganglia services that a new service wants to get up to speed
+   * and would they please send it their current state.
+   *
+   * @param xdr
+   * @param msg
+   */
+  @Override
+  public void writeRequest(XDROutputBuffer xdr, IGangliaRequestMessage msg) {
 
-		// NOP
-		
-	}
+    // NOP
 
-	/**
-	 * NOP. The metadata was sent with each metric message in this version of
-	 * the protocol.
-	 * 
-	 * @param xdr
-	 * @param decl
-	 */
-	@Override
-	public void writeMetadata(XDROutputBuffer xdr, IGangliaMetadataMessage decl) {
+  }
 
-		// NOP
+  /**
+   * NOP. The metadata was sent with each metric message in this version of the protocol.
+   *
+   * @param xdr
+   * @param decl
+   */
+  @Override
+  public void writeMetadata(XDROutputBuffer xdr, IGangliaMetadataMessage decl) {
 
-	}
+    // NOP
 
-	public void writeMetric(final XDROutputBuffer xdr,
-			final IGangliaMetadataMessage decl,
-			final IGangliaMetricMessage msg) {
+  }
 
-		xdr.reset();
-		xdr.writeInt(0); // metric_user_defined
-		xdr.writeString(decl.getMetricType().getGType());
-		xdr.writeString(decl.getMetricName());
-		xdr.writeString(msg.getStringValue());
-		xdr.writeString(decl.getUnits());
-		xdr.writeInt(decl.getSlope().value());
-		xdr.writeInt(decl.getTMax());
-		xdr.writeInt(decl.getDMax());
+  public void writeMetric(
+      final XDROutputBuffer xdr,
+      final IGangliaMetadataMessage decl,
+      final IGangliaMetricMessage msg) {
 
-	}
+    xdr.reset();
+    xdr.writeInt(0); // metric_user_defined
+    xdr.writeString(decl.getMetricType().getGType());
+    xdr.writeString(decl.getMetricName());
+    xdr.writeString(msg.getStringValue());
+    xdr.writeString(decl.getUnits());
+    xdr.writeInt(decl.getSlope().value());
+    xdr.writeInt(decl.getTMax());
+    xdr.writeInt(decl.getDMax());
+  }
 }

@@ -21,17 +21,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
-import org.embergraph.rdf.model.EmbergraphStatement;
-
 import cutthecrap.utils.striterators.ICloseableIterator;
+import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * Iterator visiting {@link EmbergraphStatement}s.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface EmbergraphStatementIterator extends
-        ICloseableIterator<EmbergraphStatement> {
-
-}
+public interface EmbergraphStatementIterator extends ICloseableIterator<EmbergraphStatement> {}

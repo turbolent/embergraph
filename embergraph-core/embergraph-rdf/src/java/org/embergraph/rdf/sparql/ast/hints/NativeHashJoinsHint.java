@@ -27,32 +27,28 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the enabling/disabling native hash joins using the
- * {@link HTree}.
- */
+/** Query hint for turning the enabling/disabling native hash joins using the {@link HTree}. */
 final class NativeHashJoinsHint extends AbstractBooleanQueryHint {
 
-    protected NativeHashJoinsHint() {
-        super(QueryHints.NATIVE_HASH_JOINS,
-                QueryHints.DEFAULT_NATIVE_HASH_JOINS);
+  protected NativeHashJoinsHint() {
+    super(QueryHints.NATIVE_HASH_JOINS, QueryHints.DEFAULT_NATIVE_HASH_JOINS);
+  }
+
+  @Override
+  public void handle(
+      final AST2BOpContext context,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final Boolean value) {
+
+    if (scope == QueryHintScope.Query) {
+
+      context.nativeHashJoins = value;
+
+      return;
     }
 
-    @Override
-    public void handle(final AST2BOpContext context,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope, final ASTBase op, final Boolean value) {
-
-        if (scope == QueryHintScope.Query) {
-
-            context.nativeHashJoins = value;
-
-            return;
-
-        }
-
-        throw new QueryHintException(scope, op, getName(), value);
-
-    }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

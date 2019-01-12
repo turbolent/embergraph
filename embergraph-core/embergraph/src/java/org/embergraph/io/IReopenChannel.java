@@ -31,55 +31,46 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.FileLock;
 
 /**
- * Interface for objects which know how to re-open a {@link Channel} for some
- * resource and also understand when the resource has been closed and therefore
- * should not be reopened. This is used in combination with
- * {@link FileChannelUtility} to support the transparent re-opening of a file
- * whose channel was closed asynchronously by an interrupt in another thread
- * during an NIO operation.
- * 
+ * Interface for objects which know how to re-open a {@link Channel} for some resource and also
+ * understand when the resource has been closed and therefore should not be reopened. This is used
+ * in combination with {@link FileChannelUtility} to support the transparent re-opening of a file
+ * whose channel was closed asynchronously by an interrupt in another thread during an NIO
+ * operation.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IReopenChannel<C extends Channel> {
 
-    /**
-     * Transparently re-opens the {@link Channel} if it is closed.
-     * <p>
-     * Note: Java will close the backing {@link Channel} if a {@link Thread} is
-     * interrupted during an NIO operation.
-     * <p>
-     * Note: This method MUST NOT be invoked if the channel was closed by an
-     * interrupt in the <strong>caller's</strong> thread. The caller can detect
-     * this condition by a thrown {@link ClosedByInterruptException} rather than
-     * either an {@link AsynchronousCloseException} or an
-     * {@link ClosedChannelException}. See {@link FileChannelUtility} which
-     * knows how to handle this.
-     * <p>
-     * Note: This method MUST synchronized so that concurrent operations do not
-     * try to re-open the {@link Channel} at the same time.
-     * <p>
-     * Note: While the {@link Channel} may be open within the implementation of
-     * this method, it IS NOT possible guaranteed that it will be open by the
-     * time you try to use it except by synchronizing all activity on that
-     * {@link Channel}. In general, that will limit throughput.
-     * <p>
-     * Note: Platforms and volumes (such as NFS) which DO NOT support
-     * {@link FileLock} should re-open the file anyway without throwing an
-     * exception. This behavior is required to run in those contexts.
-     * 
-     * @return The {@link Channel} and never <code>null</code>.
-     * 
-     * @throws IllegalStateException
-     *             if the resource has been closed and is therefore no longer
-     *             permitting reads or writes on the file.
-     * 
-     * @throws IOException
-     */
-    public C reopenChannel() throws IOException;
+  /**
+   * Transparently re-opens the {@link Channel} if it is closed.
+   *
+   * <p>Note: Java will close the backing {@link Channel} if a {@link Thread} is interrupted during
+   * an NIO operation.
+   *
+   * <p>Note: This method MUST NOT be invoked if the channel was closed by an interrupt in the
+   * <strong>caller's</strong> thread. The caller can detect this condition by a thrown {@link
+   * ClosedByInterruptException} rather than either an {@link AsynchronousCloseException} or an
+   * {@link ClosedChannelException}. See {@link FileChannelUtility} which knows how to handle this.
+   *
+   * <p>Note: This method MUST synchronized so that concurrent operations do not try to re-open the
+   * {@link Channel} at the same time.
+   *
+   * <p>Note: While the {@link Channel} may be open within the implementation of this method, it IS
+   * NOT possible guaranteed that it will be open by the time you try to use it except by
+   * synchronizing all activity on that {@link Channel}. In general, that will limit throughput.
+   *
+   * <p>Note: Platforms and volumes (such as NFS) which DO NOT support {@link FileLock} should
+   * re-open the file anyway without throwing an exception. This behavior is required to run in
+   * those contexts.
+   *
+   * @return The {@link Channel} and never <code>null</code>.
+   * @throws IllegalStateException if the resource has been closed and is therefore no longer
+   *     permitting reads or writes on the file.
+   * @throws IOException
+   */
+  public C reopenChannel() throws IOException;
 
-    /**
-     * Should include the name of the backing file (if known).
-     */
-    public String toString();
+  /** Should include the name of the backing file (if known). */
+  public String toString();
 }

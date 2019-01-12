@@ -23,170 +23,145 @@ package org.embergraph.bop.fed;
 
 import java.lang.ref.WeakReference;
 import java.util.Properties;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 
 /**
- * Stress test for correct shutdown of query controllers as allocated by the
- * {@link QueryEngineFactory}.
- * 
+ * Stress test for correct shutdown of query controllers as allocated by the {@link
+ * QueryEngineFactory}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestQueryEngineFactory extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestQueryEngineFactory() {
+  /** */
+  public TestQueryEngineFactory() {}
+
+  /** @param name */
+  public TestQueryEngineFactory(String name) {
+    super(name);
+  }
+
+  public void test_basics() {
+
+    final Properties properties = new Properties();
+
+    properties.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    properties.setProperty(Journal.Options.INITIAL_EXTENT, "" + Bytes.megabyte * 10);
+
+    final Journal jnl = new Journal(properties);
+
+    try {
+
+      // does not exist yet.
+      assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+
+      // was not created.
+      assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+
+      final QueryEngine queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl);
+
+      // still exists and is the same reference.
+      assertTrue(queryEngine == QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+
+    } finally {
+
+      jnl.destroy();
     }
+  }
 
-    /**
-     * @param name
+  /**
+   * Look for a memory leak in the {@link QueryEngineFactory}.
+   *
+   * @throws InterruptedException
+   */
+  public void test_memoryLeak() throws InterruptedException {
+
+    // This test currently fails.... [this has been fixed.]
+    // fail("See https://sourceforge.net/apps/trac/bigdata/ticket/196.");
+
+    final int limit = 200;
+
+    final Properties properties = new Properties();
+
+    properties.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    properties.setProperty(Journal.Options.INITIAL_EXTENT, "" + Bytes.megabyte * 10);
+
+    int ncreated = 0;
+
+    /*
+     * An array of weak references to the journals. These references will
+     * not cause the journals to be retained. However, since we can not
+     * force a major GC, the non-cleared references are used to ensure that
+     * all journals are destroyed by the end of this test.
      */
-    public TestQueryEngineFactory(String name) {
-        super(name);
-    }
-    
-    public void test_basics() {
+    final WeakReference<Journal>[] refs = new WeakReference[limit];
 
-        final Properties properties = new Properties();
+    try {
 
-        properties.setProperty(Journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+      try {
 
-        properties.setProperty(Journal.Options.INITIAL_EXTENT, ""
-                + Bytes.megabyte * 10);
+        for (int i = 0; i < limit; i++) {
 
-        final Journal jnl = new Journal(properties);
+          final Journal jnl = new Journal(properties);
 
-        try {
+          refs[i] = new WeakReference<Journal>(jnl);
 
-            // does not exist yet.
-            assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+          // does not exist yet.
+          assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
 
-            // was not created.
-            assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+          // was not created.
+          assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));
 
-			final QueryEngine queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl);
+          final QueryEngine queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl);
 
-			// still exists and is the same reference.
-			assertTrue(queryEngine == QueryEngineFactory.getInstance().getExistingQueryController(jnl));
+          // still exists and is the same reference.
+          assertTrue(
+              queryEngine == QueryEngineFactory.getInstance().getExistingQueryController(jnl));
 
-        } finally {
-
-            jnl.destroy();
-            
+          ncreated++;
         }
 
-    }
+      } catch (OutOfMemoryError err) {
 
-    /**
-     * Look for a memory leak in the {@link QueryEngineFactory}.
-     * 
-     * @throws InterruptedException
-     */
-    public void test_memoryLeak() throws InterruptedException {
+        log.error("Out of memory after creating " + ncreated + " query controllers.");
+      }
 
-        // This test currently fails.... [this has been fixed.]
-        // fail("See https://sourceforge.net/apps/trac/bigdata/ticket/196.");
+      // Demand a GC.
+      System.gc();
 
-        final int limit = 200;
+      // Wait for it.
+      Thread.sleep(1000 /* ms */);
 
-        final Properties properties = new Properties();
+      if (log.isInfoEnabled()) log.info("Created " + ncreated + " query controllers.");
 
-        properties.setProperty(Journal.Options.BUFFER_MODE,
-                BufferMode.Transient.toString());
+      final int nalive = QueryEngineFactory.getInstance().getQueryControllerCount();
 
-        properties.setProperty(Journal.Options.INITIAL_EXTENT, ""
-                + Bytes.megabyte * 10);
+      if (log.isInfoEnabled())
+        log.info("There are " + nalive + " query controllers which are still alive.");
 
-        int ncreated = 0;
+      if (nalive == ncreated) {
 
-        /*
-         * An array of weak references to the journals. These references will
-         * not cause the journals to be retained. However, since we can not
-         * force a major GC, the non-cleared references are used to ensure that
-         * all journals are destroyed by the end of this test.
-         */
-        final WeakReference<Journal>[] refs = new WeakReference[limit];
+        fail("No query controllers were finalized.");
+      }
 
-        try {
+    } finally {
 
-            try {
-
-                for (int i = 0; i < limit; i++) {
-
-                    final Journal jnl = new Journal(properties);
-
-                    refs[i] = new WeakReference<Journal>(jnl);
-
-                    // does not exist yet.
-                    assertNull(QueryEngineFactory.getInstance()
-                            .getExistingQueryController(jnl));
-
-                    // was not created.
-                    assertNull(QueryEngineFactory.getInstance()
-                            .getExistingQueryController(jnl));
-
-                    final QueryEngine queryEngine = QueryEngineFactory.getInstance()
-                            .getQueryController(jnl);
-
-                    // still exists and is the same reference.
-                    assertTrue(queryEngine == QueryEngineFactory.getInstance()
-                            .getExistingQueryController(jnl));
-
-                    ncreated++;
-
-                }
-
-            } catch (OutOfMemoryError err) {
-
-                log.error("Out of memory after creating " + ncreated
-                        + " query controllers.");
-
-            }
-
-            // Demand a GC.
-            System.gc();
-
-            // Wait for it.
-            Thread.sleep(1000/* ms */);
-
-            if (log.isInfoEnabled())
-                log.info("Created " + ncreated + " query controllers.");
-
-            final int nalive = QueryEngineFactory.getInstance().getQueryControllerCount();
-
-            if (log.isInfoEnabled())
-                log.info("There are " + nalive
-                        + " query controllers which are still alive.");
-
-            if (nalive == ncreated) {
-
-                fail("No query controllers were finalized.");
-
-            }
-
-        } finally {
-
-            /*
-             * Ensure that all journals are destroyed by the end of the test.
-             */
-            for (int i = 0; i < refs.length; i++) {
-                final Journal jnl = refs[i] == null ? null : refs[i].get();
-                if (jnl != null) {
-                    jnl.destroy();
-                }
-            }
-
+      /*
+       * Ensure that all journals are destroyed by the end of the test.
+       */
+      for (int i = 0; i < refs.length; i++) {
+        final Journal jnl = refs[i] == null ? null : refs[i].get();
+        if (jnl != null) {
+          jnl.destroy();
         }
-
+      }
     }
-
+  }
 }

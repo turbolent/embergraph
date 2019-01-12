@@ -29,33 +29,22 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("SPARQL");
+    final TestSuite suite = new TestSuite("SPARQL");
 
-        // SPARQL parser, AST, AST optimizers, and AST evaluation.
-        suite.addTest(org.embergraph.rdf.sparql.ast.TestAll.suite());
+    // SPARQL parser, AST, AST optimizers, and AST evaluation.
+    suite.addTest(org.embergraph.rdf.sparql.ast.TestAll.suite());
 
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

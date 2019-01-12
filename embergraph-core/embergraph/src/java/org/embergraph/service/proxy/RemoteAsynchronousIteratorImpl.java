@@ -28,207 +28,164 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.rmi.Remote;
 import java.util.concurrent.TimeUnit;
-
 import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
 /**
- * A helper object that provides the API of {@link IAsynchronousIterator} but
- * whose methods throw {@link IOException} and are therefore compatible with
- * {@link Remote} and {@link Exporter}.
- * 
+ * A helper object that provides the API of {@link IAsynchronousIterator} but whose methods throw
+ * {@link IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @param <T>
  */
-public class RemoteAsynchronousIteratorImpl<E> implements
-        RemoteAsynchronousIterator<E> {
+public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIterator<E> {
 
-    private final IAsynchronousIterator<E> itr;
+  private final IAsynchronousIterator<E> itr;
 
-    private final IStreamSerializer<E> serializer;
+  private final IStreamSerializer<E> serializer;
 
-    /**
-     * Ctor variant does not support {@link #nextElement()}.
-     * 
-     * @param itr
-     *            The source iterator (local object).
-     */
-    public RemoteAsynchronousIteratorImpl(final IAsynchronousIterator<E> itr) {
+  /**
+   * Ctor variant does not support {@link #nextElement()}.
+   *
+   * @param itr The source iterator (local object).
+   */
+  public RemoteAsynchronousIteratorImpl(final IAsynchronousIterator<E> itr) {
 
-        this(itr, null/* serializer */);
-        
-    }
-    
-    /**
-     * Ctor variant optionally supports {@link #nextElement()}.
-     * 
-     * @param itr
-     *            The source iterator (local object).
-     * @param serializer
-     *            Optional, but {@link #nextElement()} only works when you
-     *            specify an {@link IStreamSerializer}.
-     */
-    public RemoteAsynchronousIteratorImpl(
-            final IAsynchronousIterator<E> itr,
-            final IStreamSerializer<E> serializer
-            ) {
+    this(itr, null /* serializer */);
+  }
 
-        if (itr == null)
-            throw new IllegalArgumentException();
+  /**
+   * Ctor variant optionally supports {@link #nextElement()}.
+   *
+   * @param itr The source iterator (local object).
+   * @param serializer Optional, but {@link #nextElement()} only works when you specify an {@link
+   *     IStreamSerializer}.
+   */
+  public RemoteAsynchronousIteratorImpl(
+      final IAsynchronousIterator<E> itr, final IStreamSerializer<E> serializer) {
 
-//        if (serializer == null)
-//            throw new IllegalArgumentException();
+    if (itr == null) throw new IllegalArgumentException();
 
-        this.itr = itr;
+    //        if (serializer == null)
+    //            throw new IllegalArgumentException();
 
-        this.serializer = serializer;
-        
-    }
+    this.itr = itr;
 
-    public void close() throws IOException {
+    this.serializer = serializer;
+  }
 
-        itr.close();
-        
-    }
+  public void close() throws IOException {
 
-    public boolean hasNext() throws IOException {
-        
-        return itr.hasNext();
-        
-    }
+    itr.close();
+  }
 
-    public boolean hasNext(long timeout, TimeUnit unit) throws IOException,
-            InterruptedException {
-        
-        return itr.hasNext(timeout, unit);
-        
-    }
+  public boolean hasNext() throws IOException {
 
-    public boolean isExhausted() throws IOException {
+    return itr.hasNext();
+  }
 
-        return itr.isExhausted();
-        
-    }
+  public boolean hasNext(long timeout, TimeUnit unit) throws IOException, InterruptedException {
 
-    public E next() throws IOException {
+    return itr.hasNext(timeout, unit);
+  }
 
-        return itr.next();
-        
-    }
+  public boolean isExhausted() throws IOException {
 
-    public E next(long timeout, TimeUnit unit) throws IOException,
-            InterruptedException {
+    return itr.isExhausted();
+  }
 
-        return itr.next(timeout, unit);
-        
-    }
+  public E next() throws IOException {
 
-    public void remove() throws IOException {
-        
-        itr.remove();
-        
-    }
-    
-    /**
-     * @throws UnsupportedOperationException
-     *             if you did not specify an {@link IStreamSerializer} to the ctor.
-     */
-    public RemoteElement<E> nextElement() {
+    return itr.next();
+  }
 
-        if (serializer == null)
-            throw new UnsupportedOperationException();
-        
-        final E e = itr.next();
+  public E next(long timeout, TimeUnit unit) throws IOException, InterruptedException {
 
-        return new RemoteElementImpl<E>(e, serializer);
-        
-    }
-    
-    /**
-     * {@link RemoteElement} impl.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     * @version $Id$
-     * @param <E>
-     */
-    private static class RemoteElementImpl<E> implements RemoteElement<E>,
-            Externalizable {
+    return itr.next(timeout, unit);
+  }
 
-        /**
-         * 
-         */
-        private static final long serialVersionUID = -167351084165715123L;
+  public void remove() throws IOException {
 
-        private transient E e;
-        private transient IStreamSerializer<E> ser;
-        
-        /**
-         * De-serialization ctor.
-         */
-        public RemoteElementImpl() {
-            
-        }
-        
-        public RemoteElementImpl(final E e, final IStreamSerializer<E> ser) {
+    itr.remove();
+  }
 
-            if (e == null)
-                throw new IllegalArgumentException();
+  /**
+   * @throws UnsupportedOperationException if you did not specify an {@link IStreamSerializer} to
+   *     the ctor.
+   */
+  public RemoteElement<E> nextElement() {
 
-            if (ser == null)
-                throw new IllegalArgumentException();
-            
-            this.e = e;
-            
-            this.ser = ser;
-            
-        }
+    if (serializer == null) throw new UnsupportedOperationException();
 
-        public E get() {
+    final E e = itr.next();
 
-            return e;
-            
-        }
+    return new RemoteElementImpl<E>(e, serializer);
+  }
 
-        /**
-         * The initial version.
-         */
-        private static final transient byte VERSION0 = 0;
+  /**
+   * {@link RemoteElement} impl.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   * @version $Id$
+   * @param <E>
+   */
+  private static class RemoteElementImpl<E> implements RemoteElement<E>, Externalizable {
 
-        /**
-         * The current version.
-         */
-        private static final transient byte VERSION = VERSION0;
+    /** */
+    private static final long serialVersionUID = -167351084165715123L;
 
-        public void readExternal(ObjectInput in) throws IOException,
-                ClassNotFoundException {
+    private transient E e;
+    private transient IStreamSerializer<E> ser;
 
-            final byte version = in.readByte();
+    /** De-serialization ctor. */
+    public RemoteElementImpl() {}
 
-            switch (version) {
-            case VERSION0:
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown version: "
-                        + version);
-            }
-            
-            ser = (IStreamSerializer<E>) in.readObject();
+    public RemoteElementImpl(final E e, final IStreamSerializer<E> ser) {
 
-            e = ser.deserialize(in);
-            
-        }
+      if (e == null) throw new IllegalArgumentException();
 
-        public void writeExternal(ObjectOutput out) throws IOException {
+      if (ser == null) throw new IllegalArgumentException();
 
-            out.writeByte(VERSION);
-            
-            out.writeObject(ser);
-            
-            ser.serialize(out, e);
-            
-        }
+      this.e = e;
 
+      this.ser = ser;
     }
 
+    public E get() {
+
+      return e;
+    }
+
+    /** The initial version. */
+    private static final transient byte VERSION0 = 0;
+
+    /** The current version. */
+    private static final transient byte VERSION = VERSION0;
+
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+
+      final byte version = in.readByte();
+
+      switch (version) {
+        case VERSION0:
+          break;
+        default:
+          throw new UnsupportedOperationException("Unknown version: " + version);
+      }
+
+      ser = (IStreamSerializer<E>) in.readObject();
+
+      e = ser.deserialize(in);
+    }
+
+    public void writeExternal(ObjectOutput out) throws IOException {
+
+      out.writeByte(VERSION);
+
+      out.writeObject(ser);
+
+      ser.serialize(out, e);
+    }
+  }
 }

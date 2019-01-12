@@ -19,82 +19,66 @@ package org.embergraph.journal;
 
 /**
  * Enum of transaction run states.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum RunState {
-    
-    Active("Active"),
-    Prepared("Prepared"),
-    Committed("Committed"),
-    Aborted("Aborted");
-    
-    private final String name;
-    
-    RunState(String name) {
-    
-        this.name = name;
-        
-    }
-    
-    public String toString() {
-    
-        return name;
+  Active("Active"),
+  Prepared("Prepared"),
+  Committed("Committed"),
+  Aborted("Aborted");
 
-    }
+  private final String name;
 
-    /**
-     * Return <code>true</code> iff a transition is allowable from the current
-     * {@link RunState} to the proposed {@link RunState}.
-     * <p>
-     * Note: Only certain state transitions are allowed. These are:
-     * {Active->Prepared, Active->Aborted, Active->Committed;
-     * Prepared->Committed, Prepared->Aborted}. Both Committed and Aborted are
-     * absorbing states.
-     * <p>
-     * Note: A transition to the same state is always allowed.
-     * 
-     * @param newval
-     *            The proposed {@link RunState}.
-     * 
-     * @return <code>true</code> iff that state transition is allowed.
-     */
-    public boolean isTransitionAllowed(final RunState newval) {
+  RunState(String name) {
 
-        if (newval == null)
-            throw new IllegalArgumentException();
+    this.name = name;
+  }
 
-        if (this.equals(newval))
-            return true;
-        
-        if (this.equals(Active)) {
+  public String toString() {
 
-            if (newval.equals(Prepared))
-                return true;
+    return name;
+  }
 
-            if (newval.equals(RunState.Aborted))
-                return true;
+  /**
+   * Return <code>true</code> iff a transition is allowable from the current {@link RunState} to the
+   * proposed {@link RunState}.
+   *
+   * <p>Note: Only certain state transitions are allowed. These are: {Active->Prepared,
+   * Active->Aborted, Active->Committed; Prepared->Committed, Prepared->Aborted}. Both Committed and
+   * Aborted are absorbing states.
+   *
+   * <p>Note: A transition to the same state is always allowed.
+   *
+   * @param newval The proposed {@link RunState}.
+   * @return <code>true</code> iff that state transition is allowed.
+   */
+  public boolean isTransitionAllowed(final RunState newval) {
 
-            if (newval.equals(Committed))
-                return true;
+    if (newval == null) throw new IllegalArgumentException();
 
-            return false;
+    if (this.equals(newval)) return true;
 
-        } else if (this.equals(RunState.Prepared)) {
+    if (this.equals(Active)) {
 
-            if (newval.equals(Aborted))
-                return true;
+      if (newval.equals(Prepared)) return true;
 
-            if (newval.equals(Committed))
-                return true;
+      if (newval.equals(RunState.Aborted)) return true;
 
-            return false;
+      if (newval.equals(Committed)) return true;
 
-        }
+      return false;
 
-        return false;
-        
+    } else if (this.equals(RunState.Prepared)) {
+
+      if (newval.equals(Aborted)) return true;
+
+      if (newval.equals(Committed)) return true;
+
+      return false;
     }
 
+    return false;
+  }
 }

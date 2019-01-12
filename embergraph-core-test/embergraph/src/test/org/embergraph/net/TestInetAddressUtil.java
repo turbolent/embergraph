@@ -25,82 +25,89 @@ package org.embergraph.net;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link InetAddressUtil}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestInetAddressUtil extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestInetAddressUtil() {
-    }
+  /** */
+  public TestInetAddressUtil() {}
 
-    /**
-     * @param arg0
-     */
-    public TestInetAddressUtil(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestInetAddressUtil(String arg0) {
+    super(arg0);
+  }
 
-    public void test01() {
+  public void test01() {
 
-        assertSameByte((byte) 0, "0");
+    assertSameByte((byte) 0, "0");
 
-        assertSameByte((byte) 0x7f, "127");
-        
-        assertSameByte((byte) 0x80, "128");
-        
-        assertSameByte((byte) 0xff, "255");
+    assertSameByte((byte) 0x7f, "127");
 
-    }
-    
-    private void assertSameByte(final byte expected, final String str) {
-        
-        final int i = Integer.parseInt(str);
-        
-        final byte actual = (byte) (i - 128);
+    assertSameByte((byte) 0x80, "128");
 
-        final byte actual2 = InetAddressUtil.encodeByte(i - 128);
+    assertSameByte((byte) 0xff, "255");
+  }
 
-        final byte actual3 = InetAddressUtil.decodeByte(i);
+  private void assertSameByte(final byte expected, final String str) {
 
-        System.out.println("expected=" + expected + ", str=" + str + ", int=" + i
-                    + ", actual=" + actual + ", actual2=" + actual2
-                    + ", actual3=" + actual3);
+    final int i = Integer.parseInt(str);
 
-        if (actual2 != expected)
-            fail("expected=" + expected + ", str=" + str + ", int=" + i
-                    + ", actual=" + actual + ", actual2=" + actual2
-                    + ", actual3=" + actual3);
+    final byte actual = (byte) (i - 128);
 
-    }
+    final byte actual2 = InetAddressUtil.encodeByte(i - 128);
 
-    /**
-     * Verifies that the same result is obtained when we interpret some IPV4
-     * addresses using {@link InetAddress#getByName(String)} and using
-     * {@link InetAddressUtil#getByName(String)}.
-     * 
-     * @throws UnknownHostException
-     */
-    public void test_getHostByName() throws UnknownHostException {
-        
-        assertEquals(
-                InetAddress.getByName("0.127.128.255").getAddress(),
-                InetAddressUtil.getByName("0.127.128.255").getAddress()
-                );
+    final byte actual3 = InetAddressUtil.decodeByte(i);
 
-        assertEquals(
-              InetAddress.getByName("192.168.8.12").getAddress(),
-              InetAddressUtil.getByName("192.168.8.12").getAddress()
-              );
+    System.out.println(
+        "expected="
+            + expected
+            + ", str="
+            + str
+            + ", int="
+            + i
+            + ", actual="
+            + actual
+            + ", actual2="
+            + actual2
+            + ", actual3="
+            + actual3);
 
-    }
+    if (actual2 != expected)
+      fail(
+          "expected="
+              + expected
+              + ", str="
+              + str
+              + ", int="
+              + i
+              + ", actual="
+              + actual
+              + ", actual2="
+              + actual2
+              + ", actual3="
+              + actual3);
+  }
 
+  /**
+   * Verifies that the same result is obtained when we interpret some IPV4 addresses using {@link
+   * InetAddress#getByName(String)} and using {@link InetAddressUtil#getByName(String)}.
+   *
+   * @throws UnknownHostException
+   */
+  public void test_getHostByName() throws UnknownHostException {
+
+    assertEquals(
+        InetAddress.getByName("0.127.128.255").getAddress(),
+        InetAddressUtil.getByName("0.127.128.255").getAddress());
+
+    assertEquals(
+        InetAddress.getByName("192.168.8.12").getAddress(),
+        InetAddressUtil.getByName("192.168.8.12").getAddress());
+  }
 }

@@ -27,40 +27,33 @@ import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 
 /**
  * Extended vocabulary to include {@link VoidVocabularyDecl}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: RDFSVocabulary.java 4632 2011-06-06 15:11:53Z thompsonbry $
  */
 public class RDFSVocabularyV2 extends RDFSVocabulary {
 
-    /**
-     * De-serialization ctor.
-     */
-    public RDFSVocabularyV2() {
-        
-        super();
-        
-    }
-    
-    /**
-     * Used by {@link AbstractTripleStore#create()}.
-     * 
-     * @param namespace
-     *            The namespace of the KB instance.
-     */
-    public RDFSVocabularyV2(final String namespace) {
+  /** De-serialization ctor. */
+  public RDFSVocabularyV2() {
 
-        super( namespace );
-        
-    }
+    super();
+  }
 
-    @Override
-    protected void addValues() {
+  /**
+   * Used by {@link AbstractTripleStore#create()}.
+   *
+   * @param namespace The namespace of the KB instance.
+   */
+  public RDFSVocabularyV2(final String namespace) {
 
-        super.addValues();
-        
-        addDecl(new RDFVocabularyDecl());
+    super(namespace);
+  }
 
-    }
+  @Override
+  protected void addValues() {
 
+    super.addValues();
+
+    addDecl(new RDFVocabularyDecl());
+  }
 }

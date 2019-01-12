@@ -26,98 +26,82 @@ package org.embergraph.counters;
 import java.net.InetAddress;
 
 /**
- * The set of core (required) counters that must be reported for all
- * platforms. The items declared on this interface are relative path names
- * for {@link ICounterSet}s and {@link ICounter}s. The root for the path
- * is generally the fully qualified domain name of a host (as reported by
- * {@link InetAddress#getCanonicalHostName()}, a federation, or a service.
- * <p>
- * Note: it is good practice to keep these three namespaces distinct so that
- * you can aggregate counters readily without these different contexts.
- * 
+ * The set of core (required) counters that must be reported for all platforms. The items declared
+ * on this interface are relative path names for {@link ICounterSet}s and {@link ICounter}s. The
+ * root for the path is generally the fully qualified domain name of a host (as reported by {@link
+ * InetAddress#getCanonicalHostName()}, a federation, or a service.
+ *
+ * <p>Note: it is good practice to keep these three namespaces distinct so that you can aggregate
+ * counters readily without these different contexts.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRequiredHostCounters extends ICounterHierarchy {
 
-    /*
-     * INFO
-     */
-    
-    /**
-     * The name of the operating system running on the platform as reported
-     * by {@link System#getProperty(String)} for the <code>os.name</code>
-     * property.
-     */
-    String Info_OperatingSystemName = Info + ps
-            + "Operating System Name";
+  /*
+   * INFO
+   */
 
-    /**
-     * The version of the operating system running on the platform as
-     * reported by {@link System#getProperty(String)} for the
-     * <code>os.version</code> property.
-     */
-    String Info_OperatingSystemVersion = Info + ps
-            + "Operating System Version";
+  /**
+   * The name of the operating system running on the platform as reported by {@link
+   * System#getProperty(String)} for the <code>os.name</code> property.
+   */
+  String Info_OperatingSystemName = Info + ps + "Operating System Name";
 
-    /**
-     * System architecture as reported by {@link System#getProperty(String)}
-     * for the <code>os.arch</code> property.
-     */
-    String Info_Architecture = Info + ps + "Architecture";
+  /**
+   * The version of the operating system running on the platform as reported by {@link
+   * System#getProperty(String)} for the <code>os.version</code> property.
+   */
+  String Info_OperatingSystemVersion = Info + ps + "Operating System Version";
 
-    /*
-     * CPU
-     * 
-     * TODO It would be great to have IO Wait as a required counter, but we
-     * do not have access to it under Windows (last I checked). 
-     * 
-     * See IHostCounters#CPU_PercentIOWait
-     */
-    
-    /** Percentage of the time the processor is not idle in [0:1]. */
-    String CPU_PercentProcessorTime = CPU + ps
-            + "% Processor Time";
+  /**
+   * System architecture as reported by {@link System#getProperty(String)} for the <code>os.arch
+   * </code> property.
+   */
+  String Info_Architecture = Info + ps + "Architecture";
 
-    /*
-     * Memory
-     */
-    
-    /**
-     * Faults which required loading a page from disk.
-     */
-    String Memory_majorFaultsPerSecond = Memory + ps
-            + "Major Page Faults Per Second";
+  /*
+   * CPU
+   *
+   * TODO It would be great to have IO Wait as a required counter, but we
+   * do not have access to it under Windows (last I checked).
+   *
+   * See IHostCounters#CPU_PercentIOWait
+   */
 
-    /*
-     * LogicalDisk
-     */
-    
-    /**
-     * Percentage of the disk space that is free (unused) [0.0:1.0].
-     * 
-     * @todo This should only be monitoring local disk since NAS will typically
-     *       be shared across a cluster and hence of its space remaining will be
-     *       of little use to the LBS.
-     *       <p>
-     *       It will probably require platform specific configuration to select
-     *       only the appropriate devices (which would also address the above
-     *       concern).
-     * 
-     * @todo not collected under linux.
-     */
-    String LogicalDisk_PercentFreeSpace = LogicalDisk + ps + "% Free Space";
+  /** Percentage of the time the processor is not idle in [0:1]. */
+  String CPU_PercentProcessorTime = CPU + ps + "% Processor Time";
 
-    /*
-     * PhysicalDisk
-     */
-    
-    /** Disk bytes read per second for the host (vmstat). */
-    String PhysicalDisk_BytesReadPerSec = PhysicalDisk + ps
-            + "Bytes Read Per Second";
+  /*
+   * Memory
+   */
 
-    /** Disk bytes written per second for the host (vmstat). */
-    String PhysicalDisk_BytesWrittenPerSec = PhysicalDisk + ps
-            + "Bytes Written Per Second";
+  /** Faults which required loading a page from disk. */
+  String Memory_majorFaultsPerSecond = Memory + ps + "Major Page Faults Per Second";
 
+  /*
+   * LogicalDisk
+   */
+
+  /**
+   * Percentage of the disk space that is free (unused) [0.0:1.0].
+   *
+   * @todo This should only be monitoring local disk since NAS will typically be shared across a
+   *     cluster and hence of its space remaining will be of little use to the LBS.
+   *     <p>It will probably require platform specific configuration to select only the appropriate
+   *     devices (which would also address the above concern).
+   * @todo not collected under linux.
+   */
+  String LogicalDisk_PercentFreeSpace = LogicalDisk + ps + "% Free Space";
+
+  /*
+   * PhysicalDisk
+   */
+
+  /** Disk bytes read per second for the host (vmstat). */
+  String PhysicalDisk_BytesReadPerSec = PhysicalDisk + ps + "Bytes Read Per Second";
+
+  /** Disk bytes written per second for the host (vmstat). */
+  String PhysicalDisk_BytesWrittenPerSec = PhysicalDisk + ps + "Bytes Written Per Second";
 };

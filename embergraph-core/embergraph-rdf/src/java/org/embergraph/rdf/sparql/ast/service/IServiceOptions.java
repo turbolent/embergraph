@@ -21,74 +21,60 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
+import org.embergraph.bop.IBindingSet;
+import org.embergraph.rdf.internal.IV;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.internal.IV;
-
 /**
  * Options and metadata for service end points.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IServiceOptions {
 
-    /**
-     * Return <code>true</code> iff the service is a native (aka "embergraph"
-     * aware) internal service. When <code>true</code>, the {@link ServiceCall}
-     * implementation is expected to exchange {@link IBindingSet}s containing
-     * {@link IV}s and those {@link IV}s are NOT guaranteed to be materialized.
-     * When <code>false</code>, the service is expected to exchange
-     * {@link BindingSet}s containing materialized RDF {@link Value}s.
-     */
-    boolean isEmbergraphNativeService();
+  /**
+   * Return <code>true</code> iff the service is a native (aka "embergraph" aware) internal service.
+   * When <code>true</code>, the {@link ServiceCall} implementation is expected to exchange {@link
+   * IBindingSet}s containing {@link IV}s and those {@link IV}s are NOT guaranteed to be
+   * materialized. When <code>false</code>, the service is expected to exchange {@link BindingSet}s
+   * containing materialized RDF {@link Value}s.
+   */
+  boolean isEmbergraphNativeService();
 
-    /**
-     * Return <code>true</code> iff the service is "remote". A remote service is
-     * one where we must generate and send a SPARQL query. A local service is
-     * one where the {@link ServiceNode#getGraphPattern()} may be directly
-     * evaluated by the service implementation.
-     */
-    boolean isRemoteService();
+  /**
+   * Return <code>true</code> iff the service is "remote". A remote service is one where we must
+   * generate and send a SPARQL query. A local service is one where the {@link
+   * ServiceNode#getGraphPattern()} may be directly evaluated by the service implementation.
+   */
+  boolean isRemoteService();
 
-    /**
-     * Return <code>true</code> iff the end point supports
-     * <code>SPARQL 1.0</code>  
-     */
-     boolean isSparql10();
+  /** Return <code>true</code> iff the end point supports <code>SPARQL 1.0</code> */
+  boolean isSparql10();
 
-    /**
-     * Return <code>true</code> iff the service end point is one which should
-     * always be run as early as possible within the join group (default
-     * <code>false</code>).
-     * <p>
-     * Note: This option is only obeyed when the SERVICE reference is a
-     * constant. If the SERVICE reference is a variable, then it is not possible
-     * to resolve the {@link IServiceOptions} for that SERVICE until after the
-     * query planner has locked in the join evaluation order.
-     */
-    boolean isRunFirst();
+  /**
+   * Return <code>true</code> iff the service end point is one which should always be run as early
+   * as possible within the join group (default <code>false</code>).
+   *
+   * <p>Note: This option is only obeyed when the SERVICE reference is a constant. If the SERVICE
+   * reference is a variable, then it is not possible to resolve the {@link IServiceOptions} for
+   * that SERVICE until after the query planner has locked in the join evaluation order.
+   */
+  boolean isRunFirst();
 
-    /**
-     * Return <code>true</code> if the remote service is known to be a embergraph
-     * service that exposes the HA load balancer servlet (default
-     * <code>false</code>). The default may be overridden iff the end point is
-     * known to expose the embergraph LBS pattern.
-     */
-    boolean isEmbergraphLBS();
-    
-    
-    /**
-     * Returns if {@link SPARQLVersion#SPARQL_11} iff the end point supports
-     * <code>SPARQL 1.1</code>.
-     * When {@link SPARQLVersion#SPARQL_10}, the solutions will be vectored to the end point
-     * using a technique which is compatible with <code>SPARQL 1.0</code>.
-     * 
-     * @return the SPARQL version {@link SPARQLVersion}
-     * 
-     *      
-     */
-    SPARQLVersion getSPARQLVersion();
-    
+  /**
+   * Return <code>true</code> if the remote service is known to be a embergraph service that exposes
+   * the HA load balancer servlet (default <code>false</code>). The default may be overridden iff
+   * the end point is known to expose the embergraph LBS pattern.
+   */
+  boolean isEmbergraphLBS();
+
+  /**
+   * Returns if {@link SPARQLVersion#SPARQL_11} iff the end point supports <code>SPARQL 1.1</code>.
+   * When {@link SPARQLVersion#SPARQL_10}, the solutions will be vectored to the end point using a
+   * technique which is compatible with <code>SPARQL 1.0</code>.
+   *
+   * @return the SPARQL version {@link SPARQLVersion}
+   */
+  SPARQLVersion getSPARQLVersion();
 }

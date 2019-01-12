@@ -17,24 +17,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.client;
 
-
 /**
  * Exception indicating that GPU acceleration is not available.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
 public class NoGPUAccelerationAvailable extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public NoGPUAccelerationAvailable() {
-        
-    }
-    
-    public NoGPUAccelerationAvailable(final String message) {
+  public NoGPUAccelerationAvailable() {}
 
-        super(message);
+  public NoGPUAccelerationAvailable(final String message) {
 
-    }
-
+    super(message);
+  }
 }

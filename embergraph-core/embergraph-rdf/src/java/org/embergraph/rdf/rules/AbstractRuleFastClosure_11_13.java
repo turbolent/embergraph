@@ -28,70 +28,66 @@ import org.embergraph.relation.rule.Rule;
 
 /**
  * Rule for steps 11 and 13 of the "fast closure" method.
- * <p>
- * Note: this rule is not very selective and does not produce new entailments
- * unless your ontology and your application both rely on domain/range to confer
- * type information. If you explicitly type your instances then this will not
- * add information during closure.
- * <p>
- * Step 11.
- * 
+ *
+ * <p>Note: this rule is not very selective and does not produce new entailments unless your
+ * ontology and your application both rely on domain/range to confer type information. If you
+ * explicitly type your instances then this will not add information during closure.
+ *
+ * <p>Step 11.
+ *
  * <pre>
  * (?x, rdf:type, ?b) :-
  *     (?x, ?y, ?z),
  *     (?y, rdfs:subPropertyOf, ?a),
  *     (?a, rdfs:domain, ?b).
  * </pre>
- * 
+ *
  * Step 13.
- * 
+ *
  * <pre>
  * (?z, rdf:type, ?b ) :-
  *       (?x, ?y, ?z),
  *       (?y, rdfs:subPropertyOf, ?a),
  *       (?a, rdfs:range, ?b ).
  * </pre>
- * 
+ *
  * @see TestRuleFastClosure_11_13
  */
-abstract public class AbstractRuleFastClosure_11_13 extends Rule {
+public abstract class AbstractRuleFastClosure_11_13 extends Rule {
 
-    protected final IV propertyId;
-    
-    final IVariable<IV> x, y, z, a, b;
-    final IConstant<IV> C1, C2;
-    
-    /**
-     * 
-     * @param head
-     * @param body
-     * @param constraints
-     */
-    public AbstractRuleFastClosure_11_13(String name, SPOPredicate head,
-            SPOPredicate[] body, IConstraint[] constraints) {
+  protected final IV propertyId;
 
-        super(name, head, body, constraints);
+  final IVariable<IV> x, y, z, a, b;
+  final IConstant<IV> C1, C2;
 
-        // validate the binding pattern for the tail of this rule.
-        assert body.length == 3;
+  /**
+   * @param head
+   * @param body
+   * @param constraints
+   */
+  public AbstractRuleFastClosure_11_13(
+      String name, SPOPredicate head, SPOPredicate[] body, IConstraint[] constraints) {
 
-        // (x,y,z)
-        x = (IVariable<IV>) body[0].s();
-        y = (IVariable<IV>) body[0].p();
-        z = (IVariable<IV>) body[0].o();
+    super(name, head, body, constraints);
 
-        // (y,C1,a)
-        assert y.equals((IVariable<IV>) body[1].s());
-        C1 = (IConstant<IV>) body[1].p();
-        a = (IVariable<IV>) body[1].o();
+    // validate the binding pattern for the tail of this rule.
+    assert body.length == 3;
 
-        // (a,C2,b)
-        assert a.equals((IVariable<IV>) body[2].s());
-        C2 = (IConstant<IV>) body[2].p();
-        b = (IVariable<IV>)body[2].o();
+    // (x,y,z)
+    x = (IVariable<IV>) body[0].s();
+    y = (IVariable<IV>) body[0].p();
+    z = (IVariable<IV>) body[0].o();
 
-        this.propertyId = C2.get();
-        
-    }
+    // (y,C1,a)
+    assert y.equals((IVariable<IV>) body[1].s());
+    C1 = (IConstant<IV>) body[1].p();
+    a = (IVariable<IV>) body[1].o();
 
+    // (a,C2,b)
+    assert a.equals((IVariable<IV>) body[2].s());
+    C2 = (IConstant<IV>) body[2].p();
+    b = (IVariable<IV>) body[2].o();
+
+    this.propertyId = C2.get();
+  }
 }

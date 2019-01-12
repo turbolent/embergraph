@@ -26,32 +26,27 @@ import org.embergraph.counters.ICounterSetAccess;
 
 /**
  * Interface for managing named indices.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IIndexManager extends IIndexStore, IGISTManager, ICounterSetAccess {
 
-    /**
-     * Return a view of the named index as of the specified timestamp.
-     * 
-     * @param name
-     *            The index name.
-     * @param timestamp
-     *            A timestamp which represents either a possible commit time on
-     *            the store or a read-only transaction identifier.
-     * 
-     * @return The index or <code>null</code> iff there is no index registered
-     *         with that name for that timestamp.
-     * 
-     * @see IBTreeManager#getIndexLocal(String, long)
-     */
-    IIndex getIndex(String name, long timestamp); // non-GIST
+  /**
+   * Return a view of the named index as of the specified timestamp.
+   *
+   * @param name The index name.
+   * @param timestamp A timestamp which represents either a possible commit time on the store or a
+   *     read-only transaction identifier.
+   * @return The index or <code>null</code> iff there is no index registered with that name for that
+   *     timestamp.
+   * @see IBTreeManager#getIndexLocal(String, long)
+   */
+  IIndex getIndex(String name, long timestamp); // non-GIST
 
-    /**
-     * Return true if the index manager supports group commit semantics.
-     * 
-     * @see #566 (NSS GROUP COMMIT)
-     */
-    boolean isGroupCommit();
-    
+  /**
+   * Return true if the index manager supports group commit semantics.
+   *
+   * @see #566 (NSS GROUP COMMIT)
+   */
+  boolean isGroupCommit();
 }

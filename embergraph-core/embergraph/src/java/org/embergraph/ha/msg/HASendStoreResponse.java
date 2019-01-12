@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 import java.nio.ByteBuffer;
-
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.RootBlockView;
@@ -26,72 +25,69 @@ import org.embergraph.util.BytesUtil;
 
 public class HASendStoreResponse implements IHASendStoreResponse {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    final private byte[] rootBlock0;
-    final private byte[] rootBlock1;
-    final long byteCount;
-    final long blockCount;
+  private final byte[] rootBlock0;
+  private final byte[] rootBlock1;
+  final long byteCount;
+  final long blockCount;
 
-    public HASendStoreResponse(final IRootBlockView rootBlock0,
-            final IRootBlockView rootBlock1, final long byteCount,
-            final long blockCount) {
+  public HASendStoreResponse(
+      final IRootBlockView rootBlock0,
+      final IRootBlockView rootBlock1,
+      final long byteCount,
+      final long blockCount) {
 
-        if (rootBlock0 == null)
-            throw new IllegalArgumentException();
+    if (rootBlock0 == null) throw new IllegalArgumentException();
 
-        if (rootBlock1 == null)
-            throw new IllegalArgumentException();
+    if (rootBlock1 == null) throw new IllegalArgumentException();
 
-        this.rootBlock0 = BytesUtil.toArray(rootBlock0.asReadOnlyBuffer());
+    this.rootBlock0 = BytesUtil.toArray(rootBlock0.asReadOnlyBuffer());
 
-        this.rootBlock1 = BytesUtil.toArray(rootBlock1.asReadOnlyBuffer());
+    this.rootBlock1 = BytesUtil.toArray(rootBlock1.asReadOnlyBuffer());
 
-        this.byteCount = byteCount;
+    this.byteCount = byteCount;
 
-        this.blockCount = blockCount;
+    this.blockCount = blockCount;
+  }
 
-    }
+  @Override
+  public IRootBlockView getRootBlock0() {
 
-    @Override
-    public IRootBlockView getRootBlock0() {
+    return new RootBlockView(true, ByteBuffer.wrap(rootBlock0), new ChecksumUtility());
+  }
 
-        return new RootBlockView(true, ByteBuffer.wrap(rootBlock0),
-                new ChecksumUtility());
+  @Override
+  public IRootBlockView getRootBlock1() {
 
-    }
+    return new RootBlockView(
+        false /* rootBlock0 */, ByteBuffer.wrap(rootBlock1), new ChecksumUtility());
+  }
 
-    @Override
-    public IRootBlockView getRootBlock1() {
+  @Override
+  public long getByteCount() {
 
-        return new RootBlockView(false/* rootBlock0 */,
-                ByteBuffer.wrap(rootBlock1), new ChecksumUtility());
+    return byteCount;
+  }
 
-    }
+  @Override
+  public long getBlockCount() {
 
-    @Override
-    public long getByteCount() {
+    return blockCount;
+  }
 
-        return byteCount;
-        
-    }
-    
-    @Override
-    public long getBlockCount() {
-        
-        return blockCount;
-        
-    }
-    
-    public String toString() {
+  public String toString() {
 
-        return getClass() + "{rootBlock0=" + getRootBlock0() + ", rootBlock1="
-                + getRootBlock1() + ", bytesSent=" + getByteCount()
-                + ", blocksSent=" + getBlockCount() + "}";
-
-    }
-
+    return getClass()
+        + "{rootBlock0="
+        + getRootBlock0()
+        + ", rootBlock1="
+        + getRootBlock1()
+        + ", bytesSent="
+        + getByteCount()
+        + ", blocksSent="
+        + getBlockCount()
+        + "}";
+  }
 }

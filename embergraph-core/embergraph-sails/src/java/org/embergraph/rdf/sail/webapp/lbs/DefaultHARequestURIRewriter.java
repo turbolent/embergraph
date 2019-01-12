@@ -20,61 +20,54 @@ package org.embergraph.rdf.sail.webapp.lbs;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
 import org.embergraph.journal.IIndexManager;
 
 /**
  * Default implementation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class DefaultHARequestURIRewriter implements IHARequestURIRewriter {
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * This implementation is a NOP.
-     */
-    @Override
-    public void init(ServletConfig servletConfig, IIndexManager indexManager)
-            throws ServletException {
-        
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>This implementation is a NOP.
+   */
+  @Override
+  public void init(ServletConfig servletConfig, IIndexManager indexManager)
+      throws ServletException {}
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * This implementation is a NOP.
-     */
-    @Override
-    public void destroy() {
-        
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>This implementation is a NOP.
+   */
+  @Override
+  public void destroy() {}
 
-    @Override
-    public StringBuilder rewriteURI(final boolean isLeaderRequest,
-            final String full_prefix, final String originalRequestURL,
-            final String proxyToRequestURL, final HttpServletRequest request) {
+  @Override
+  public StringBuilder rewriteURI(
+      final boolean isLeaderRequest,
+      final String full_prefix,
+      final String originalRequestURL,
+      final String proxyToRequestURL,
+      final HttpServletRequest request) {
 
-        final StringBuilder uri = new StringBuilder(proxyToRequestURL);
+    final StringBuilder uri = new StringBuilder(proxyToRequestURL);
 
-        if (proxyToRequestURL.endsWith("/"))
-            uri.setLength(uri.length() - 1);
+    if (proxyToRequestURL.endsWith("/")) uri.setLength(uri.length() - 1);
 
-        final String rest = originalRequestURL.substring(full_prefix.length());
+    final String rest = originalRequestURL.substring(full_prefix.length());
 
-        if (!rest.startsWith("/"))
-            uri.append("/");
+    if (!rest.startsWith("/")) uri.append("/");
 
-        uri.append(rest);
+    uri.append(rest);
 
-        final String query = request.getQueryString();
+    final String query = request.getQueryString();
 
-        if (query != null)
-            uri.append("?").append(query);
+    if (query != null) uri.append("?").append(query);
 
-        return uri;
-
-    }
-
+    return uri;
+  }
 }

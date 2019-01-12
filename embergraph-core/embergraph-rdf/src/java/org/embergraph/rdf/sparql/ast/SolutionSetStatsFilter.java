@@ -20,28 +20,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast;
 
-import java.util.Iterator;
-
 import cutthecrap.utils.striterators.FilterBase;
+import java.util.Iterator;
 
 /**
  * Class may be used to collect statistics from a stream of solutions.
- * 
+ *
  * @see SolutionSetStatserator#getStats()
  */
 public class SolutionSetStatsFilter extends FilterBase {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-	@Override
-	protected Iterator filterOnce(final Iterator src,
-			final Object contextIsIgnored) {
+  @Override
+  protected Iterator filterOnce(final Iterator src, final Object contextIsIgnored) {
 
-		return new SolutionSetStatserator(src);
-
-	}
-
+    return new SolutionSetStatserator(src);
+  }
 }

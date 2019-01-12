@@ -21,18 +21,17 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Interface providing an atomic snapshot of the services that are joined with a
- * met quorum (and the services that are not joined with a met quorum) as of
- * some point in the GATHER or PREPARE protocol.
- * 
+ * Interface providing an atomic snapshot of the services that are joined with a met quorum (and the
+ * services that are not joined with a met quorum) as of some point in the GATHER or PREPARE
+ * protocol.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IJoinedAndNonJoinedServices {
 
-    /** The services joined with the met quorum, in their join order. */
-    public UUID[] getJoinedServiceIds();
-    
-    /** The services in the write pipeline (in any order). */
-    public Set<UUID> getNonJoinedPipelineServiceIds();
+  /** The services joined with the met quorum, in their join order. */
+  public UUID[] getJoinedServiceIds();
 
+  /** The services in the write pipeline (in any order). */
+  public Set<UUID> getNonJoinedPipelineServiceIds();
 }

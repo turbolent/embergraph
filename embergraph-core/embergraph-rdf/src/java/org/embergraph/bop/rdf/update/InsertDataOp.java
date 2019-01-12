@@ -23,7 +23,6 @@ package org.embergraph.bop.rdf.update;
 
 import java.util.Map;
 import java.util.concurrent.FutureTask;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
@@ -32,36 +31,31 @@ import org.embergraph.rdf.spo.ISPO;
 
 /**
  * Operator to insert {@link ISPO}s into embergraph.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class InsertDataOp extends PipelineOp {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @param op
-     */
-    public InsertDataOp(PipelineOp op) {
-        super(op);
-    }
+  /** @param op */
+  public InsertDataOp(PipelineOp op) {
+    super(op);
+  }
 
-    /**
-     * @param args
-     * @param annotations
-     */
-    public InsertDataOp(BOp[] args, Map<String, Object> annotations) {
-        super(args, annotations);
-    }
+  /**
+   * @param args
+   * @param annotations
+   */
+  public InsertDataOp(BOp[] args, Map<String, Object> annotations) {
+    super(args, annotations);
+  }
 
-    @Override
-    public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+  @Override
+  public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

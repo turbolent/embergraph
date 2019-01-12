@@ -18,206 +18,167 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.fts;
 
 import java.io.Serializable;
-
 import org.eclipse.jetty.client.HttpClient;
-
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
 /**
  * Abstraction for search interface against external Solr index.
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public interface IFulltextSearch<A extends IFulltextSearchHit> {
 
-   /**
-    * Submit a search query against the Solr Index
-    * 
-    * @param query
-    *           The query.
-    * 
-    * @return The result set.
-    */
-   public FulltextSearchHiterator<A> search(
-         final FulltextSearchQuery query, 
-         HttpClient client);
-   
-   // public int count(final ExternalSolrSearchQuery query);
+  /**
+   * Submit a search query against the Solr Index
+   *
+   * @param query The query.
+   * @return The result set.
+   */
+  public FulltextSearchHiterator<A> search(final FulltextSearchQuery query, HttpClient client);
 
-   public static class FulltextSearchQuery implements Serializable {
+  // public int count(final ExternalSolrSearchQuery query);
 
-      private static final long serialVersionUID = -2509557655519603130L;
+  public static class FulltextSearchQuery implements Serializable {
 
-      final String query;
-      final String params;
-      final String endpoint;
-      final Integer searchTimeout;
-      final String searchField;
-      final String scoreField;
-      final String snippetField;      
-      final IBindingSet incomingBindings;
-      final SearchResultType searchResultType;
-      
-      /**
-       * Constructor
-       */
-      public FulltextSearchQuery(final String query, final String params,
-            final String endpoint, final Integer searchTimeout,
-            final String searchField, final String scoreField, 
-            final String snippetField, final IBindingSet incomingBindings,
-            final SearchResultType searchResultType) {
+    private static final long serialVersionUID = -2509557655519603130L;
 
-         this.query = query;
-         this.params = params;
-         this.endpoint = endpoint;
-         this.searchTimeout = searchTimeout;
-         this.searchField = searchField;
-         this.scoreField = scoreField;
-         this.snippetField = snippetField;
-         this.incomingBindings = incomingBindings;
-         this.searchResultType = searchResultType;
+    final String query;
+    final String params;
+    final String endpoint;
+    final Integer searchTimeout;
+    final String searchField;
+    final String scoreField;
+    final String snippetField;
+    final IBindingSet incomingBindings;
+    final SearchResultType searchResultType;
 
-      }
+    /** Constructor */
+    public FulltextSearchQuery(
+        final String query,
+        final String params,
+        final String endpoint,
+        final Integer searchTimeout,
+        final String searchField,
+        final String scoreField,
+        final String snippetField,
+        final IBindingSet incomingBindings,
+        final SearchResultType searchResultType) {
 
-      /**
-       * @return the query
-       */
-      public String getQuery() {
-         return query;
-      }
+      this.query = query;
+      this.params = params;
+      this.endpoint = endpoint;
+      this.searchTimeout = searchTimeout;
+      this.searchField = searchField;
+      this.scoreField = scoreField;
+      this.snippetField = snippetField;
+      this.incomingBindings = incomingBindings;
+      this.searchResultType = searchResultType;
+    }
 
-      /**
-       * @return the query endpoint
-       */
-      public String getParams() {
-         return params;
-      }
+    /** @return the query */
+    public String getQuery() {
+      return query;
+    }
 
-      /**
-       * @return the query endpoint
-       */
-      public String getEndpoint() {
-         return endpoint;
-      }
+    /** @return the query endpoint */
+    public String getParams() {
+      return params;
+    }
 
-      /**
-       * @return the search timeout
-       */
-      public Integer getSearchTimeout() {
-         return searchTimeout;
-      }
+    /** @return the query endpoint */
+    public String getEndpoint() {
+      return endpoint;
+    }
 
-      /**
-       * @return the field that is mapped to the search result
-       */
-      public String getSearchField() {
-         return searchField;
-      }
+    /** @return the search timeout */
+    public Integer getSearchTimeout() {
+      return searchTimeout;
+    }
 
-      
-      /**
-       * @return the field that is mapped to the snippet variable
-       */
-      public String getSnippetField() {
-         return snippetField;
-      }
-      
-      /**
-       * @return the field that is mapped to the score
-       */
-      public String getScoreField() {
-         return scoreField;
-      }
+    /** @return the field that is mapped to the search result */
+    public String getSearchField() {
+      return searchField;
+    }
 
-      /**
-       * @return the underlying binding set
-       */
-      public IBindingSet getIncomingBindings() {
-         return incomingBindings;
-      }
+    /** @return the field that is mapped to the snippet variable */
+    public String getSnippetField() {
+      return snippetField;
+    }
 
-      /**
-       * @return the target type for conversion
-       */
-      public SearchResultType getSearchResultType() {
-         return searchResultType;
-      }
+    /** @return the field that is mapped to the score */
+    public String getScoreField() {
+      return scoreField;
+    }
 
-      /*
-       * (non-Javadoc)
-       * 
-       * @see java.lang.Object#hashCode()
-       */
-      @Override
-      public int hashCode() {
-         final int prime = 31;
+    /** @return the underlying binding set */
+    public IBindingSet getIncomingBindings() {
+      return incomingBindings;
+    }
 
-         int result = 1;
-         
-         result = prime * result + 
-            ((query == null) ? 0 : query.hashCode());
-         
-         result = prime * result +
-            ((params == null) ? 0 : params.hashCode());
-         
-         result = prime * result + 
-            ((endpoint == null) ? 0 : endpoint.hashCode());
-         
-         result = prime * result + 
-            ((searchTimeout == null) ? 0 : searchTimeout.hashCode());
+    /** @return the target type for conversion */
+    public SearchResultType getSearchResultType() {
+      return searchResultType;
+    }
 
-         result = prime * result + 
-            ((searchResultType == null) ? 0 : searchResultType.hashCode());
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+      final int prime = 31;
 
-         return result;
-      }
+      int result = 1;
 
-      /*
-       * (non-Javadoc)
-       * 
-       * @see java.lang.Object#equals(java.lang.Object)
-       */
-      @Override
-      public boolean equals(Object obj) {
-         if (this == obj)
-            return true;
-         if (obj == null)
-            return false;
-         if (getClass() != obj.getClass())
-            return false;
-         FulltextSearchQuery other = (FulltextSearchQuery) obj;
+      result = prime * result + ((query == null) ? 0 : query.hashCode());
 
-         if ((query == null && other.query != null)
-               || (query != null && other.query == null)
-               || !query.equals(other.query))
-            return false;
+      result = prime * result + ((params == null) ? 0 : params.hashCode());
 
-         if ((params == null && other.params != null)
-               || (params != null && other.params == null)
-               || !params.equals(other.params))
-            return false;
+      result = prime * result + ((endpoint == null) ? 0 : endpoint.hashCode());
 
-         if ((endpoint == null && other.endpoint != null)
-               || (endpoint != null && other.endpoint == null)
-               || !endpoint.equals(other.endpoint))
-            return false;
+      result = prime * result + ((searchTimeout == null) ? 0 : searchTimeout.hashCode());
 
-         if ((searchTimeout == null && other.searchTimeout != null)
-               || (searchTimeout != null && other.searchTimeout == null)
-               || !searchTimeout.equals(other.searchTimeout))
-            return false;
+      result = prime * result + ((searchResultType == null) ? 0 : searchResultType.hashCode());
 
-         if ((searchResultType == null && other.searchResultType != null)
-               || (searchResultType != null && other.searchResultType == null)
-               || !searchResultType.equals(other.searchResultType))
-            return false;
+      return result;
+    }
 
-         return true;
-      }
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) return true;
+      if (obj == null) return false;
+      if (getClass() != obj.getClass()) return false;
+      FulltextSearchQuery other = (FulltextSearchQuery) obj;
 
-   }
+      if ((query == null && other.query != null)
+          || (query != null && other.query == null)
+          || !query.equals(other.query)) return false;
 
+      if ((params == null && other.params != null)
+          || (params != null && other.params == null)
+          || !params.equals(other.params)) return false;
 
+      if ((endpoint == null && other.endpoint != null)
+          || (endpoint != null && other.endpoint == null)
+          || !endpoint.equals(other.endpoint)) return false;
+
+      if ((searchTimeout == null && other.searchTimeout != null)
+          || (searchTimeout != null && other.searchTimeout == null)
+          || !searchTimeout.equals(other.searchTimeout)) return false;
+
+      if ((searchResultType == null && other.searchResultType != null)
+          || (searchResultType != null && other.searchResultType == null)
+          || !searchResultType.equals(other.searchResultType)) return false;
+
+      return true;
+    }
+  }
 }

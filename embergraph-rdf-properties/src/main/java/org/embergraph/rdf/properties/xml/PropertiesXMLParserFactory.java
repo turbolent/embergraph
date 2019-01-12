@@ -52,33 +52,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.rdf.properties.xml;
 
 import java.util.Properties;
-
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 import org.embergraph.rdf.properties.PropertiesParserFactory;
 
 /**
  * An {@link PropertiesParserFactory} for {@link Properties} objects in XML.
- * 
+ *
  * @author Bryan THompson
  */
 public class PropertiesXMLParserFactory implements PropertiesParserFactory {
 
-    /**
-     * Returns {@link PropertiesFormat#XML}.
-     */
-    public PropertiesFormat getFormat() {
+  /** Returns {@link PropertiesFormat#XML}. */
+  public PropertiesFormat getFormat() {
 
-        return PropertiesFormat.XML;
-        
-    }
+    return PropertiesFormat.XML;
+  }
 
-    /**
-     * Returns a new instance of {@link PropertiesXMLParser}.
-     */
-    public PropertiesParser getParser() {
+  /** Returns a new instance of {@link PropertiesXMLParser}. */
+  public PropertiesParser getParser() {
 
-        return new PropertiesXMLParser();
-        
-    }
+    return new PropertiesXMLParser();
+  }
 }

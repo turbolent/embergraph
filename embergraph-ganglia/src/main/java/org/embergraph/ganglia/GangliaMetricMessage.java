@@ -15,155 +15,151 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A ganglia 3.1 metric message.
- */
-public class GangliaMetricMessage extends AbstractGangliaMessage implements
-		IGangliaMetricMessage {
+/** A ganglia 3.1 metric message. */
+public class GangliaMetricMessage extends AbstractGangliaMessage implements IGangliaMetricMessage {
 
-	private final String format;
-	private final Object value;
+  private final String format;
+  private final Object value;
 
-	/**
-	 * Constructor from data.
-	 * 
-	 * @param recordType
-	 * @param hostName
-	 * @param metricName
-	 * @param spoof
-	 * @param format
-	 * @param value
-	 */
-	public GangliaMetricMessage(final GangliaMessageTypeEnum recordType,
-			final String hostName, final String metricName, final boolean spoof,
-			final String format, final Object value) {
+  /**
+   * Constructor from data.
+   *
+   * @param recordType
+   * @param hostName
+   * @param metricName
+   * @param spoof
+   * @param format
+   * @param value
+   */
+  public GangliaMetricMessage(
+      final GangliaMessageTypeEnum recordType,
+      final String hostName,
+      final String metricName,
+      final boolean spoof,
+      final String format,
+      final Object value) {
 
-		super(recordType, hostName, metricName, spoof);
-		
-		switch (recordType) {
-		case DOUBLE:
-		case FLOAT:
-		case INT32:
-		case INT16:
-		case STRING:
-		case UINT32:
-		case UINT16:
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
+    super(recordType, hostName, metricName, spoof);
 
-		if (format == null)
-			throw new IllegalArgumentException();
-		
-		if (value == null)
-			throw new IllegalArgumentException();
-		
-		this.format = format;
-		
-		this.value = value;
+    switch (recordType) {
+      case DOUBLE:
+      case FLOAT:
+      case INT32:
+      case INT16:
+      case STRING:
+      case UINT32:
+      case UINT16:
+        break;
+      default:
+        throw new IllegalArgumentException();
+    }
 
-	}
+    if (format == null) throw new IllegalArgumentException();
 
-	@Override
-	public boolean isMetricValue() {
-		return true;
-	}
+    if (value == null) throw new IllegalArgumentException();
 
-	@Override
-	public boolean isMetricRequest() {
-		return false;
-	}
+    this.format = format;
 
-	@Override
-	public boolean isMetricMetadata() {
-		return false;
-	}
+    this.value = value;
+  }
 
-	@Override
-	public String getFormat() {
-		return format;
-	}
+  @Override
+  public boolean isMetricValue() {
+    return true;
+  }
 
-	@Override
-	public boolean isNumeric() {
-		switch (getRecordType()) {
-		case STRING:
-			return false;
-		default:
-			return true;
-		}
-	}
+  @Override
+  public boolean isMetricRequest() {
+    return false;
+  }
 
-	@Override
-	public Object getValue() {
-		return value;
-	}
+  @Override
+  public boolean isMetricMetadata() {
+    return false;
+  }
 
-	@Override
-	public String getStringValue() {
-		if (value instanceof String) {
-			return (String) value;
-		}
-		return "" + value;
-	}
+  @Override
+  public String getFormat() {
+    return format;
+  }
 
-	@Override
-	public Number getNumericValue() {
-		if (value instanceof Number) {
-			return (Number) value;
-		}
-		throw new UnsupportedOperationException();
-	}
+  @Override
+  public boolean isNumeric() {
+    switch (getRecordType()) {
+      case STRING:
+        return false;
+      default:
+        return true;
+    }
+  }
 
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + "{recordType=" + getRecordType()
-				+ ", hostName=" + getHostName() + ", metricName="
-				+ getMetricName() + ", spoof=" + isSpoof() + ", format="
-				+ format + ", value=" + value
-				+ (" (valueClass=" + value.getClass().getSimpleName() + ")")
-				+ "}";
-	}
+  @Override
+  public Object getValue() {
+    return value;
+  }
 
-	@Override
-	public boolean equals(final Object o) {
+  @Override
+  public String getStringValue() {
+    if (value instanceof String) {
+      return (String) value;
+    }
+    return "" + value;
+  }
 
-		if (o == this)
-			return true;
+  @Override
+  public Number getNumericValue() {
+    if (value instanceof Number) {
+      return (Number) value;
+    }
+    throw new UnsupportedOperationException();
+  }
 
-		final IGangliaMetricMessage t = (IGangliaMetricMessage) o;
+  @Override
+  public String toString() {
+    return getClass().getSimpleName()
+        + "{recordType="
+        + getRecordType()
+        + ", hostName="
+        + getHostName()
+        + ", metricName="
+        + getMetricName()
+        + ", spoof="
+        + isSpoof()
+        + ", format="
+        + format
+        + ", value="
+        + value
+        + (" (valueClass=" + value.getClass().getSimpleName() + ")")
+        + "}";
+  }
 
-		if (!getRecordType().equals(t.getRecordType()))
-			return false;
+  @Override
+  public boolean equals(final Object o) {
 
-		if (!getHostName().equals(t.getHostName()))
-			return false;
+    if (o == this) return true;
 
-		if (!getMetricName().equals(t.getMetricName()))
-			return false;
+    final IGangliaMetricMessage t = (IGangliaMetricMessage) o;
 
-		if (isSpoof() != t.isSpoof())
-			return false;
+    if (!getRecordType().equals(t.getRecordType())) return false;
 
-		if (!getValue().equals(t.getValue()))
-			return false;
+    if (!getHostName().equals(t.getHostName())) return false;
 
-		if (getValue().getClass() != t.getValue().getClass())
-			return false;
+    if (!getMetricName().equals(t.getMetricName())) return false;
 
-		if (!getFormat().equals(t.getFormat()))
-			return false;
+    if (isSpoof() != t.isSpoof()) return false;
 
-		return true;
+    if (!getValue().equals(t.getValue())) return false;
 
-	}
-	
-	@Override
-	public int hashCode() {
+    if (getValue().getClass() != t.getValue().getClass()) return false;
 
-		return getMetricName().hashCode();
-		
-	}
-	
+    if (!getFormat().equals(t.getFormat())) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return getMetricName().hashCode();
+  }
 }

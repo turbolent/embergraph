@@ -17,22 +17,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /**
-Note: Portions of this file are copyright by Aduna.
-
-Copyright Aduna (http://www.aduna-software.com/) (c) 1997-2007.
-
-Licensed under the Aduna BSD-style license.
-*/
-
+ * Note: Portions of this file are copyright by Aduna.
+ *
+ * <p>Copyright Aduna (http://www.aduna-software.com/) (c) 1997-2007.
+ *
+ * <p>Licensed under the Aduna BSD-style license.
+ */
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.model.EmbergraphValueFactory;
-import org.openrdf.model.Literal;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
@@ -40,231 +34,210 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
+import org.openrdf.model.Literal;
 
 /**
- * A math expression involving a left and right IValueExpression operand. The
- * operation to be applied to the operands is specified by the
- * {@link Annotations#OP} annotation.
+ * A math expression involving a left and right IValueExpression operand. The operation to be
+ * applied to the operands is specified by the {@link Annotations#OP} annotation.
  */
-final public class MathBOp extends IVValueExpression
-		implements INeedsMaterialization {
+public final class MathBOp extends IVValueExpression implements INeedsMaterialization {
+
+  /** */
+  private static final long serialVersionUID = 9136864442064392445L;
+
+  private static final transient Logger log = Logger.getLogger(MathBOp.class);
+
+  public interface Annotations extends IVValueExpression.Annotations {
 
     /**
-	 *
-	 */
-	private static final long serialVersionUID = 9136864442064392445L;
-
-	private static final transient Logger log = Logger.getLogger(MathBOp.class);
-
-    public interface Annotations extends IVValueExpression.Annotations {
-
-        /**
-         * The operation to be applied to the left and right operands
-         * (required). The value of this annotation is a {@link MathOp}, such as
-         * {@link MathOp#PLUS}.
-         *
-         * @see MathOp
-         */
-        String OP = (MathBOp.class.getName() + ".op").intern();
-
-    }
-
-	public enum MathOp {
-		PLUS,
-		MINUS,
-		MULTIPLY,
-		DIVIDE,
-		MIN,
-		MAX,
-		ROUND,
-		CEIL,
-		FLOOR;
-
-		public static MathOp valueOf(org.openrdf.query.algebra.MathExpr.MathOp op) {
-			switch(op) {
-			case PLUS: return MathOp.PLUS;
-			case MINUS: return MathOp.MINUS;
-			case MULTIPLY: return MathOp.MULTIPLY;
-			case DIVIDE: return MathOp.DIVIDE;
-			}
-			throw new IllegalArgumentException();
-		}
-	}
-
-    /**
+     * The operation to be applied to the left and right operands (required). The value of this
+     * annotation is a {@link MathOp}, such as {@link MathOp#PLUS}.
      *
-     * @param left
-     *            The left operand.
-     * @param right
-     *            The right operand.
-     * @param op
-     *            The annotation specifying the operation to be performed on
-     *            those operands.
+     * @see MathOp
      */
-    public MathBOp(final IValueExpression<? extends IV> left,
-    		final IValueExpression<? extends IV> right, final MathOp op,
-    		final GlobalAnnotations globals) {
+    String OP = (MathBOp.class.getName() + ".op").intern();
+  }
 
-        this(new BOp[] { left, right }, anns(globals, new NV(Annotations.OP, op)));
+  public enum MathOp {
+    PLUS,
+    MINUS,
+    MULTIPLY,
+    DIVIDE,
+    MIN,
+    MAX,
+    ROUND,
+    CEIL,
+    FLOOR;
 
+    public static MathOp valueOf(org.openrdf.query.algebra.MathExpr.MathOp op) {
+      switch (op) {
+        case PLUS:
+          return MathOp.PLUS;
+        case MINUS:
+          return MathOp.MINUS;
+        case MULTIPLY:
+          return MathOp.MULTIPLY;
+        case DIVIDE:
+          return MathOp.DIVIDE;
+      }
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * @param left The left operand.
+   * @param right The right operand.
+   * @param op The annotation specifying the operation to be performed on those operands.
+   */
+  public MathBOp(
+      final IValueExpression<? extends IV> left,
+      final IValueExpression<? extends IV> right,
+      final MathOp op,
+      final GlobalAnnotations globals) {
+
+    this(new BOp[] {left, right}, anns(globals, new NV(Annotations.OP, op)));
+  }
+
+  /**
+   * Required shallow copy constructor.
+   *
+   * @param args The operands.
+   * @param op The operation.
+   */
+  public MathBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+
+    if (args.length != 2
+        || args[0] == null
+        || args[1] == null
+        || getProperty(Annotations.OP) == null
+        || getProperty(Annotations.NAMESPACE) == null) {
+
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
+   *
+   * @param op
+   */
+  public MathBOp(final MathBOp op) {
+
+    super(op);
+  }
+
+  public final IV get(final IBindingSet bs) {
+
+    final IV iv1 = getAndCheckLiteral(0, bs);
+    final IV iv2 = getAndCheckLiteral(1, bs);
+
+    if (log.isDebugEnabled()) {
+      log.debug(toString(iv1.toString(), iv2.toString()));
     }
 
-	/**
-	 * Required shallow copy constructor.
-	 *
-	 * @param args
-	 *            The operands.
-	 * @param op
-	 *            The operation.
-	 */
-    public MathBOp(final BOp[] args, final Map<String, Object> anns) {
+    final Literal lit1 = asLiteral(iv1);
+    final Literal lit2 = asLiteral(iv2);
 
-        super(args, anns);
+    ILexiconConfiguration<?> lexicon = getLexiconConfiguration(bs);
 
-		if (args.length != 2 || args[0] == null || args[1] == null
-				|| getProperty(Annotations.OP) == null
-				|| getProperty(Annotations.NAMESPACE)==null) {
+    for (IMathOpHandler handler : lexicon.getTypeHandlers()) {
+      if (handler.canInvokeMathOp(lit1, lit2)) {
+        final IV iv = handler.doMathOp(lit1, iv1, lit2, iv2, op(), vf());
 
-			throw new IllegalArgumentException();
-
-		}
-
-    }
-
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     *
-     * @param op
-     */
-    public MathBOp(final MathBOp op) {
-
-        super(op);
-
-    }
-
-    final public IV get(final IBindingSet bs) {
-
-        final IV iv1 = getAndCheckLiteral(0, bs);
-        final IV iv2 = getAndCheckLiteral(1, bs);
-
-    	if (log.isDebugEnabled()) {
-    		log.debug(toString(iv1.toString(), iv2.toString()));
-    	}
-
-		final Literal lit1 = asLiteral(iv1);
-		final Literal lit2 = asLiteral(iv2);
-
-		ILexiconConfiguration<?> lexicon = getLexiconConfiguration(bs);
-
-		for (IMathOpHandler handler: lexicon.getTypeHandlers()) {
-		    if (handler.canInvokeMathOp(lit1, lit2)) {
-		        final IV iv =
-		                handler.doMathOp(lit1, iv1, lit2, iv2, op(), vf());
-
-		        // try to create a real IV if possible
-		        if (iv.isNullIV()) {
-		            final EmbergraphValue val = iv.getValue();
-		            return asIV(val, bs);
-		        } else {
-		            return iv;
-		        }
-		    }
-		}
-
-    	if (log.isDebugEnabled()) {
-    		log.debug("illegal argument(s), filtering solution: " + iv1 + ", " + iv2);
-    	}
-
-    	throw new SparqlTypeErrorException();
-
-    }
-
-    public IValueExpression<? extends IV> left() {
-    	return get(0);
-    }
-
-    public IValueExpression<? extends IV> right() {
-    	return get(1);
-    }
-
-    public MathOp op() {
-    	return (MathOp) getRequiredProperty(Annotations.OP);
-    }
-
-    public EmbergraphValueFactory vf(){
-        return super.getValueFactory();
-    }
-
-    public String toString() {
-
-    	final StringBuilder sb = new StringBuilder();
-    	sb.append(op());
-    	sb.append("(").append(left()).append(", ").append(right()).append(")");
-    	return sb.toString();
-
-    }
-
-    private String toString(final String left, final String right) {
-
-    	final StringBuilder sb = new StringBuilder();
-    	sb.append(op());
-    	sb.append("(").append(left).append(", ").append(right).append(")");
-    	return sb.toString();
-
-    }
-
-    final public boolean equals(final MathBOp m) {
-
-    	if (m == null)
-    		return false;
-
-    	if (this == m)
-    		return true;
-
-    	return op().equals(m.op()) &&
-    		left().equals(m.left()) &&
-    		right().equals(m.right());
-
-    }
-
-    final public boolean equals(final IVValueExpression o) {
-
-    	if(!(o instanceof MathBOp)) {
-            // incomparable types.
-            return false;
+        // try to create a real IV if possible
+        if (iv.isNullIV()) {
+          final EmbergraphValue val = iv.getValue();
+          return asIV(val, bs);
+        } else {
+          return iv;
         }
-        return equals((MathBOp) o);
-
+      }
     }
 
-
-	/**
-	 * Caches the hash code.
-	 */
-	private int hash = 0;
-
-	public int hashCode() {
-
-		int h = hash;
-		if (h == 0) {
-			final int n = arity();
-			for (int i = 0; i < n; i++) {
-				h = 31 * h + get(i).hashCode();
-			}
-			h = 31 * h + op().hashCode();
-			hash = h;
-		}
-		return h;
-
-	}
-
-    /**
-     * The MathBOp can work on inline numerics. It is only when the operands
-     * evaluate to non-inline numerics that this bop needs materialization.
-     */
-    public Requirement getRequirement() {
-    	return INeedsMaterialization.Requirement.SOMETIMES;
+    if (log.isDebugEnabled()) {
+      log.debug("illegal argument(s), filtering solution: " + iv1 + ", " + iv2);
     }
 
+    throw new SparqlTypeErrorException();
+  }
+
+  public IValueExpression<? extends IV> left() {
+    return get(0);
+  }
+
+  public IValueExpression<? extends IV> right() {
+    return get(1);
+  }
+
+  public MathOp op() {
+    return (MathOp) getRequiredProperty(Annotations.OP);
+  }
+
+  public EmbergraphValueFactory vf() {
+    return super.getValueFactory();
+  }
+
+  public String toString() {
+
+    final StringBuilder sb = new StringBuilder();
+    sb.append(op());
+    sb.append("(").append(left()).append(", ").append(right()).append(")");
+    return sb.toString();
+  }
+
+  private String toString(final String left, final String right) {
+
+    final StringBuilder sb = new StringBuilder();
+    sb.append(op());
+    sb.append("(").append(left).append(", ").append(right).append(")");
+    return sb.toString();
+  }
+
+  public final boolean equals(final MathBOp m) {
+
+    if (m == null) return false;
+
+    if (this == m) return true;
+
+    return op().equals(m.op()) && left().equals(m.left()) && right().equals(m.right());
+  }
+
+  public final boolean equals(final IVValueExpression o) {
+
+    if (!(o instanceof MathBOp)) {
+      // incomparable types.
+      return false;
+    }
+    return equals((MathBOp) o);
+  }
+
+  /** Caches the hash code. */
+  private int hash = 0;
+
+  public int hashCode() {
+
+    int h = hash;
+    if (h == 0) {
+      final int n = arity();
+      for (int i = 0; i < n; i++) {
+        h = 31 * h + get(i).hashCode();
+      }
+      h = 31 * h + op().hashCode();
+      hash = h;
+    }
+    return h;
+  }
+
+  /**
+   * The MathBOp can work on inline numerics. It is only when the operands evaluate to non-inline
+   * numerics that this bop needs materialization.
+   */
+  public Requirement getRequirement() {
+    return INeedsMaterialization.Requirement.SOMETIMES;
+  }
 }

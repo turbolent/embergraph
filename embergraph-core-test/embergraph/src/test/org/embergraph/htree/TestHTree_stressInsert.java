@@ -1,9 +1,7 @@
 package org.embergraph.htree;
 
 import java.util.Arrays;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rawstore.IRawStore;
@@ -11,171 +9,157 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
 /**
- * A stress test which inserts a series of integer keys and then verifies the
- * state of the index.
- * 
- * TODO Test with int32 keys (versus single byte keys).
- * 
- * TODO Stress test with random integers.
- * 
- * TODO Stress test with sequential negative numbers and a sequence of
- * alternating negative and positive integers.
- * 
+ * A stress test which inserts a series of integer keys and then verifies the state of the index.
+ *
+ * <p>TODO Test with int32 keys (versus single byte keys).
+ *
+ * <p>TODO Stress test with random integers.
+ *
+ * <p>TODO Stress test with sequential negative numbers and a sequence of alternating negative and
+ * positive integers.
+ *
  * @author thompsonbry@users.sourceforge.net
  * @author martyncutcher@users.sourceforge.net
  */
 public class TestHTree_stressInsert extends AbstractHTreeTestCase {
 
-	private final static Logger log = Logger.getLogger(TestHTree_stressInsert.class);
-	
-	public TestHTree_stressInsert() {
-	}
+  private static final Logger log = Logger.getLogger(TestHTree_stressInsert.class);
 
-	public TestHTree_stressInsert(String name) {
-		super(name);
-	}
+  public TestHTree_stressInsert() {}
 
-    public void test_stressInsert_noEviction_addressBits1() {
+  public TestHTree_stressInsert(String name) {
+    super(name);
+  }
 
-		doStressTest(50/* limit */, 1/* addressBits */);
-        
-    }
+  public void test_stressInsert_noEviction_addressBits1() {
 
-   public void test_stressInsert_noEviction_addressBits2() {
+    doStressTest(50 /* limit */, 1 /* addressBits */);
+  }
 
-		doStressTest(100/* limit */, 2/* addressBits */);
-        
-    }
+  public void test_stressInsert_noEviction_addressBits2() {
 
-   public void test_stressInsert_noEviction_addressBits3() {
+    doStressTest(100 /* limit */, 2 /* addressBits */);
+  }
 
-		doStressTest(500/* limit */, 3/* addressBits */);
-       
-   }
+  public void test_stressInsert_noEviction_addressBits3() {
 
-    public void test_stressInsert_noEviction_addressBits4() {
+    doStressTest(500 /* limit */, 3 /* addressBits */);
+  }
 
-		doStressTest(10000/* limit */, 4/* addressBits */);
-        
-    }
+  public void test_stressInsert_noEviction_addressBits4() {
 
-    public void test_stressInsert_noEviction_addressBits6() {
+    doStressTest(10000 /* limit */, 4 /* addressBits */);
+  }
 
-		doStressTest(10000/* limit */, 6/* addressBits */);
-        
-    }
+  public void test_stressInsert_noEviction_addressBits6() {
 
-    public void test_stressInsert_noEviction_addressBits8() {
+    doStressTest(10000 /* limit */, 6 /* addressBits */);
+  }
 
-		doStressTest(10000/* limit */, 8/* addressBits */);
-        
-    }
+  public void test_stressInsert_noEviction_addressBits8() {
 
-    public void test_stressInsert_noEviction_addressBits10() {
+    doStressTest(10000 /* limit */, 8 /* addressBits */);
+  }
 
-		doStressTest(10000/* limit */, 10/* addressBits */);
-        
-    }
-    public void test_stressInsert_noEviction_addressBitsMAX() {
+  public void test_stressInsert_noEviction_addressBits10() {
 
-		doStressTest(10000/* limit */, 16/* addressBits */);
-        
-    }
+    doStressTest(10000 /* limit */, 10 /* addressBits */);
+  }
 
-    private void doStressTest(final int limit, final int addressBits) {
-//        BucketPage.createdPages = 0;
-//        DirectoryPage.createdPages = 0;
-        
-        final IRawStore store = new SimpleMemoryRawStore();
+  public void test_stressInsert_noEviction_addressBitsMAX() {
 
-//		final int validateInterval = limit < 100 ? 1 : limit / 100;
-        
-        try {
+    doStressTest(10000 /* limit */, 16 /* addressBits */);
+  }
 
-			final HTree htree = getHTree(store, addressBits,
-					false/* rawRecords */, false/* persistent */);
+  private void doStressTest(final int limit, final int addressBits) {
+    //        BucketPage.createdPages = 0;
+    //        DirectoryPage.createdPages = 0;
 
-            try {
-            // Verify initial conditions.
-            assertTrue("store", store == htree.getStore());
-            assertEquals("addressBits", addressBits, htree.getAddressBits());
+    final IRawStore store = new SimpleMemoryRawStore();
 
-            final IKeyBuilder keyBuilder = new KeyBuilder();
-            
-			final byte[][] keys = new byte[limit][];
+    //		final int validateInterval = limit < 100 ? 1 : limit / 100;
 
-            for (int i = 0; i < limit; i++) {
+    try {
 
-                final byte[] key = keyBuilder.reset().append(i).getKey();
+      final HTree htree =
+          getHTree(store, addressBits, false /* rawRecords */, false /* persistent */);
 
-                keys[i] = key;
-                htree.insert(key, key);
-				if (log.isInfoEnabled())
-					log.info("after key=" + i + "\n" + htree.PP());
+      try {
+        // Verify initial conditions.
+        assertTrue("store", store == htree.getStore());
+        assertEquals("addressBits", addressBits, htree.getAddressBits());
 
-//                if ((i % validateInterval) == 0) {
-//
-//                    for (int j = 0; j <= i; j++) {
-//
-//                        final byte[] b = keys[j];
-//                        if (log.isDebugEnabled()) {
-//                        	log.debug("verifying: " + j);
-//                        }
-//                        assertEquals(b, htree.lookupFirst(b));
-//                        
-////                        // TODO Verify the iterator.
-////                        final byte[][] tmp = new byte[i][];
-////                        System.arraycopy(keys/*src*/, 0/*srcOff*/, tmp/*src*/, 0/*dstOff*/, tmp.length/*length*/);
-////                        assertSameIteratorAnyOrder(tmp/*expected*/, htree.values());
-//
-//                    }
-//                    
-//                }
-                
-            }
+        final IKeyBuilder keyBuilder = new KeyBuilder();
 
-            assertEquals(limit, htree.getEntryCount());
+        final byte[][] keys = new byte[limit][];
 
-            // Verify all tuples are found.
-            for (int i = 0; i < limit; i++) {
+        for (int i = 0; i < limit; i++) {
 
-                final byte[] key = keys[i];
+          final byte[] key = keyBuilder.reset().append(i).getKey();
 
-				final byte[] firstVal = htree.lookupFirst(key);
+          keys[i] = key;
+          htree.insert(key, key);
+          if (log.isInfoEnabled()) log.info("after key=" + i + "\n" + htree.PP());
 
-				if (!BytesUtil.bytesEqual(key, firstVal))
-					fail("Expected: " + BytesUtil.toString(key)
-							+ ", actual="
-							+ Arrays.toString(htree.lookupFirst(key)));
-
-            }
-            
-            // Verify the iterator visits all of the tuples.
-            assertSameIteratorAnyOrder(keys, htree.values());
-            
-            if (log.isInfoEnabled())
-               log.info(htree
-                     .dumpPages(true/* recursive */, true/* visitLeaves */));
-
-            } catch (Throwable t) {
-            	try {
-                	log.error("Pretty Print of error state:\n" + htree.PP());
-                  log.error(htree
-                        .dumpPages(true/* recursive */, true/* visitLeaves */));
-            	} catch (Throwable et) {
-            		log.error("Problem with PP", et);
-            	}
-            	
-            	throw new RuntimeException(t);
-            
-            }
-            
-        } finally {
-
-            store.destroy();
+          //                if ((i % validateInterval) == 0) {
+          //
+          //                    for (int j = 0; j <= i; j++) {
+          //
+          //                        final byte[] b = keys[j];
+          //                        if (log.isDebugEnabled()) {
+          //                        	log.debug("verifying: " + j);
+          //                        }
+          //                        assertEquals(b, htree.lookupFirst(b));
+          //
+          ////                        // TODO Verify the iterator.
+          ////                        final byte[][] tmp = new byte[i][];
+          ////                        System.arraycopy(keys/*src*/, 0/*srcOff*/, tmp/*src*/,
+          // 0/*dstOff*/, tmp.length/*length*/);
+          ////                        assertSameIteratorAnyOrder(tmp/*expected*/, htree.values());
+          //
+          //                    }
+          //
+          //                }
 
         }
-        
+
+        assertEquals(limit, htree.getEntryCount());
+
+        // Verify all tuples are found.
+        for (int i = 0; i < limit; i++) {
+
+          final byte[] key = keys[i];
+
+          final byte[] firstVal = htree.lookupFirst(key);
+
+          if (!BytesUtil.bytesEqual(key, firstVal))
+            fail(
+                "Expected: "
+                    + BytesUtil.toString(key)
+                    + ", actual="
+                    + Arrays.toString(htree.lookupFirst(key)));
+        }
+
+        // Verify the iterator visits all of the tuples.
+        assertSameIteratorAnyOrder(keys, htree.values());
+
+        if (log.isInfoEnabled())
+          log.info(htree.dumpPages(true /* recursive */, true /* visitLeaves */));
+
+      } catch (Throwable t) {
+        try {
+          log.error("Pretty Print of error state:\n" + htree.PP());
+          log.error(htree.dumpPages(true /* recursive */, true /* visitLeaves */));
+        } catch (Throwable et) {
+          log.error("Problem with PP", et);
+        }
+
+        throw new RuntimeException(t);
+      }
+
+    } finally {
+
+      store.destroy();
     }
-    
+  }
 }

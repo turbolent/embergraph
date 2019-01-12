@@ -24,33 +24,29 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticBindingsOptimizer;
 
 /**
- * Class for wrapping a query node and an associated binding set (as starting
- * point for evaluating the query). Mainly used in the context of the AST
- * optimizer pipeline. Typically, these optimizers do only modify the AST,
- * but in some cases they may involve manipulation of the binding sets
- * (see for instance the {@link ASTStaticBindingsOptimizer}).
- * 
- * 
+ * Class for wrapping a query node and an associated binding set (as starting point for evaluating
+ * the query). Mainly used in the context of the AST optimizer pipeline. Typically, these optimizers
+ * do only modify the AST, but in some cases they may involve manipulation of the binding sets (see
+ * for instance the {@link ASTStaticBindingsOptimizer}).
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
- * 
  */
 public class QueryNodeWithBindingSet {
-   
-   private final IQueryNode queryNode;
-   private final IBindingSet[] bindingSets;
 
-   public QueryNodeWithBindingSet(
-      IQueryNode queryNode, IBindingSet[] bindingSets) {
-      
-      this.queryNode = queryNode;
-      this.bindingSets = bindingSets;
-   }
-   
-   public IQueryNode getQueryNode() {
-      return queryNode;
-   }
+  private final IQueryNode queryNode;
+  private final IBindingSet[] bindingSets;
 
-   public IBindingSet[] getBindingSets() {
-      return bindingSets;
-   }
+  public QueryNodeWithBindingSet(IQueryNode queryNode, IBindingSet[] bindingSets) {
+
+    this.queryNode = queryNode;
+    this.bindingSets = bindingSets;
+  }
+
+  public IQueryNode getQueryNode() {
+    return queryNode;
+  }
+
+  public IBindingSet[] getBindingSets() {
+    return bindingSets;
+  }
 }

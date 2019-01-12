@@ -28,94 +28,80 @@ import cern.colt.Swapper;
 import cern.colt.function.IntComparator;
 
 /**
- * Utility for merge sort of chunks. Merge sorts are used when two or more
- * ordered chunks have been combined into a single chunk. Since the source
- * chunks were already ordered, the merge sort is less expensive than performing
- * a full sort on the combined chunk.
- * 
+ * Utility for merge sort of chunks. Merge sorts are used when two or more ordered chunks have been
+ * combined into a single chunk. Since the source chunks were already ordered, the merge sort is
+ * less expensive than performing a full sort on the combined chunk.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ChunkMergeSortHelper {
 
-    /**
-     * In place merge sort.
-     * 
-     * @param <E>
-     *            The generic type of the elements in the chunk.
-     * @param chunk
-     *            The chunk.
-     */
-    public static <E> void mergeSort(final E[] chunk) {
+  /**
+   * In place merge sort.
+   *
+   * @param <E> The generic type of the elements in the chunk.
+   * @param chunk The chunk.
+   */
+  public static <E> void mergeSort(final E[] chunk) {
 
-        if (chunk == null)
-            throw new IllegalArgumentException();
+    if (chunk == null) throw new IllegalArgumentException();
 
-        if (chunk.length == 0)
-            return;
+    if (chunk.length == 0) return;
 
-        GenericSorting.mergeSort(
-                0, // fromIndex
-                chunk.length, // toIndex
-                new MyIntComparator((Comparable[]) chunk),
-                new MySwapper((Object[]) chunk));
-        
-        return;
+    GenericSorting.mergeSort(
+        0, // fromIndex
+        chunk.length, // toIndex
+        new MyIntComparator((Comparable[]) chunk),
+        new MySwapper((Object[]) chunk));
 
+    return;
+  }
+
+  /**
+   * Implementation for data in an array whose element type implements {@link Comparable}.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  private static final class MyIntComparator implements IntComparator {
+
+    @SuppressWarnings("rawtypes")
+    private final Comparable[] a;
+
+    @SuppressWarnings("rawtypes")
+    public MyIntComparator(final Comparable[] a) {
+
+      this.a = a;
     }
 
-    /**
-     * Implementation for data in an array whose element type implements
-     * {@link Comparable}.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    final static private class MyIntComparator implements IntComparator {
+    @SuppressWarnings("unchecked")
+    public int compare(final int o1, final int o2) {
 
-        @SuppressWarnings("rawtypes")
-        private final Comparable[] a;
+      return a[o1].compareTo(a[o2]);
+    }
+  }
 
-        @SuppressWarnings("rawtypes")
-        public MyIntComparator(final Comparable[] a) {
+  /**
+   * Implementation swaps object references in an array.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  private static final class MySwapper implements Swapper {
 
-            this.a = a;
+    private final Object[] a;
 
-        }
+    public MySwapper(final Object[] a) {
 
-        @SuppressWarnings("unchecked")
-        public int compare(final int o1, final int o2) {
-
-            return a[o1].compareTo(a[o2]);
-
-        }
-
+      this.a = a;
     }
 
-    /**
-     * Implementation swaps object references in an array.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    final static private class MySwapper implements Swapper {
+    public void swap(final int i, final int j) {
 
-        private final Object[] a;
+      final Object t = a[i];
 
-        public MySwapper(final Object[] a) {
+      a[i] = a[j];
 
-            this.a = a;
-
-        }
-
-        public void swap(final int i, final int j) {
-
-            final Object t = a[i];
-
-            a[i] = a[j];
-
-            a[j] = t;
-
-        }
-
+      a[j] = t;
     }
-
+  }
 }

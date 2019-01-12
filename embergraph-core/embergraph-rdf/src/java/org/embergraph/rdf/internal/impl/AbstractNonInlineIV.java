@@ -20,345 +20,251 @@ package org.embergraph.rdf.internal.impl;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import javax.xml.datatype.XMLGregorianCalendar;
-
+import org.embergraph.rdf.internal.DTE;
+import org.embergraph.rdf.internal.IV;
+import org.embergraph.rdf.internal.VTE;
+import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import org.embergraph.rdf.internal.DTE;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.lexicon.LexiconRelation;
-
 /**
- * Abstract base class for {@link IV}s which CAN NOT be fully materialized
- * from their inline representation.
+ * Abstract base class for {@link IV}s which CAN NOT be fully materialized from their inline
+ * representation.
  */
-abstract public class AbstractNonInlineIV<V extends EmbergraphValue, T>
-		extends AbstractIV<V, T> implements Literal, BNode, URI  {
+public abstract class AbstractNonInlineIV<V extends EmbergraphValue, T> extends AbstractIV<V, T>
+    implements Literal, BNode, URI {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    protected AbstractNonInlineIV(final byte flags) {
+  protected AbstractNonInlineIV(final byte flags) {
 
-        super(flags);
+    super(flags);
+  }
 
+  protected AbstractNonInlineIV(final VTE vte, final boolean extension, final DTE dte) {
+
+    super(vte, false /* inline */, extension, dte);
+  }
+
+  //    /**
+  //     * Callers must explicitly populate the value cache.
+  //     * <p>
+  //     * {@inheritDoc}
+  //     */
+  //    @Override
+  //    final public V setValue(V v) {
+  //
+  //    	return super.setValue(v);
+  //
+  //    }
+
+  /**
+   * Operation is not supported because this {@link IV} type is not 100% inline. You MUST explicitly
+   * set the value cache.
+   *
+   * <p>{@inheritDoc}
+   *
+   * @see #setValue(EmbergraphValue)
+   */
+  public final V asValue(final LexiconRelation lex) {
+
+    return getValue();
+    //        throw new UnsupportedOperationException();
+
+  }
+
+  /** Operation is not supported because this {@link IV} type is not 100% inline. */
+  public final T getInlineValue() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /** Always returns <code>false</code> since the RDF value is not inline. */
+  @Override
+  public final boolean isInline() {
+
+    return false;
+  }
+
+  /** Always returns <code>true</code> since the RDF value is not inline. */
+  @Override
+  public final boolean needsMaterialization() {
+
+    return true;
+  }
+
+  /** Override default serialization to send the cached {@link EmbergraphValue}. */
+  private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+
+    out.defaultWriteObject();
+
+    out.writeObject(getValueCache());
+  }
+
+  /** Override default serialization to recover the cached {@link EmbergraphValue} . */
+  @SuppressWarnings("unchecked")
+  private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+    in.defaultReadObject();
+
+    final V v = (V) in.readObject();
+
+    if (v != null) {
+      // set the value cache.
+      setValue(v);
     }
+  }
 
-    protected AbstractNonInlineIV(final VTE vte, final boolean extension,
-            final DTE dte) {
+  /** Implements {@link Value#stringValue()}. */
+  @Override
+  public String stringValue() {
 
-        super(vte, false/* inline */, extension, dte);
+    return getValue().stringValue();
+  }
 
-    }
+  /** Implements {@link URI#getLocalName()}. */
+  public String getLocalName() {
 
-//    /**
-//     * Callers must explicitly populate the value cache.
-//     * <p>
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    final public V setValue(V v) {
-//    	
-//    	return super.setValue(v);
-//    	
-//    }
-    
-    /**
-     * Operation is not supported because this {@link IV} type is not 100%
-     * inline. You MUST explicitly set the value cache.
-     * <p>
-     * {@inheritDoc}
-     * 
-     * @see #setValue(EmbergraphValue)
-     */
-    final public V asValue(final LexiconRelation lex) {
-    
-		return getValue();
-//        throw new UnsupportedOperationException();
-        
-    }
+    if (!isURI()) throw new ClassCastException();
 
-    /**
-     * Operation is not supported because this {@link IV} type is not 100%
-     * inline.
-     */
-    final public T getInlineValue() {
+    return ((URI) getValue()).getLocalName();
+  }
 
-        throw new UnsupportedOperationException();
-        
-    }
+  /** Implements {@link URI#getNamespace()}. */
+  public String getNamespace() {
 
-    /**
-     * Always returns <code>false</code> since the RDF value is not inline.
-     */
-    @Override
-    final public boolean isInline() {
+    if (!isURI()) throw new ClassCastException();
 
-        return false;
-        
-    }
-    
-    /**
-     * Always returns <code>true</code> since the RDF value is not inline.
-     */
-    @Override
-    final public boolean needsMaterialization() {
-    	
-    	return true;
-    	
-    }
+    return ((URI) getValue()).getNamespace();
+  }
 
-    /**
-     * Override default serialization to send the cached {@link EmbergraphValue}.
-     */
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+  /** Implements {@link BNode#getID()}. */
+  public String getID() {
 
-        out.defaultWriteObject();
+    if (!isBNode()) throw new ClassCastException();
 
-        out.writeObject(getValueCache());
+    return ((BNode) getValue()).getID();
+  }
 
-    }
+  /** Implements {@link Literal#getLabel()}. */
+  @Override
+  public String getLabel() {
 
-    /**
-     * Override default serialization to recover the cached {@link EmbergraphValue}
-     * .
-     */
-    @SuppressWarnings("unchecked")
-    private void readObject(java.io.ObjectInputStream in) throws IOException,
-            ClassNotFoundException {
+    if (!isLiteral()) throw new ClassCastException();
 
-        in.defaultReadObject();
+    return ((Literal) getValue()).getLabel();
+  }
 
-        final V v = (V) in.readObject();
+  /** Implements {@link Literal#getDatatype()}. */
+  @Override
+  public URI getDatatype() {
 
-        if (v != null) {
-            // set the value cache.
-            setValue(v);
-        }
+    if (!isLiteral()) throw new ClassCastException();
 
-    }
-    
-    /**
-     * Implements {@link Value#stringValue()}.
-     */
-	@Override
-	public String stringValue() {
-		
-		return getValue().stringValue();
-		
-	}
+    return ((Literal) getValue()).getDatatype();
+  }
 
-    /**
-     * Implements {@link URI#getLocalName()}.
-     */
-    public String getLocalName() {
-    	
-    	if (!isURI())
-    		throw new ClassCastException();
-    	
-		return ((URI) getValue()).getLocalName();
-    	
-    }
+  /** Implements {@link Literal#getLanguage()}. */
+  @Override
+  public String getLanguage() {
 
-    /**
-     * Implements {@link URI#getNamespace()}.
-     */
-    public String getNamespace() {
+    if (!isLiteral()) throw new ClassCastException();
 
-        if (!isURI())
-            throw new ClassCastException();
+    return ((Literal) getValue()).getLanguage();
+  }
 
-		return ((URI) getValue()).getNamespace();
-    	
-    }
+  /** Implements {@link Literal#booleanValue()}. */
+  @Override
+  public boolean booleanValue() {
 
-    /**
-     * Implements {@link BNode#getID()}.
-     */
-    public String getID() {
+    if (!isLiteral()) throw new ClassCastException();
 
-        if (!isBNode())
-            throw new ClassCastException();
+    return ((Literal) getValue()).booleanValue();
+  }
 
-        return ((BNode) getValue()).getID();
-    	
-    }
+  /** Implements {@link Literal#byteValue()}. */
+  @Override
+  public byte byteValue() {
 
-    /**
-     * Implements {@link Literal#getLabel()}.
-     */
-	@Override
-	public String getLabel() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).getLabel();
-		
-	}
+    if (!isLiteral()) throw new ClassCastException();
 
-    /**
-     * Implements {@link Literal#getDatatype()}.
-     */
-	@Override
-	public URI getDatatype() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).getDatatype();
-		
-	}
+    return ((Literal) getValue()).byteValue();
+  }
 
-    /**
-     * Implements {@link Literal#getLanguage()}.
-     */
-	@Override
-	public String getLanguage() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).getLanguage();
-		
-	}
+  /** Implements {@link Literal#shortValue()}. */
+  @Override
+  public short shortValue() {
 
-    /**
-     * Implements {@link Literal#booleanValue()}.
-     */
-	@Override
-	public boolean booleanValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).booleanValue();
-		
-	}
+    if (!isLiteral()) throw new ClassCastException();
 
-    /**
-     * Implements {@link Literal#byteValue()}.
-     */
-	@Override
-	public byte byteValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).byteValue();
-		
-	}
+    return ((Literal) getValue()).shortValue();
+  }
 
-    /**
-     * Implements {@link Literal#shortValue()}.
-     */
-	@Override
-	public short shortValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).shortValue();
-		
-	}
+  /** Implements {@link Literal#intValue()}. */
+  @Override
+  public int intValue() {
 
-    /**
-     * Implements {@link Literal#intValue()}.
-     */
-	@Override
-	public int intValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).intValue();
-		
-	}
+    if (!isLiteral()) throw new ClassCastException();
 
-    /**
-     * Implements {@link Literal#longValue()}.
-     */
-	@Override
-	public long longValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).longValue();
-		
-	}
+    return ((Literal) getValue()).intValue();
+  }
 
-    /**
-     * Implements {@link Literal#floatValue()}.
-     */
-	@Override
-	public float floatValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).floatValue();
-		
-	}
+  /** Implements {@link Literal#longValue()}. */
+  @Override
+  public long longValue() {
 
-    /**
-     * Implements {@link Literal#doubleValue()}.
-     */
-	@Override
-	public double doubleValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).doubleValue();
-		
-	}
+    if (!isLiteral()) throw new ClassCastException();
 
-    /**
-     * Implements {@link Literal#integerValue()}.
-     */
-	@Override
-	public BigInteger integerValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).integerValue();
-		
-	}
+    return ((Literal) getValue()).longValue();
+  }
 
-    /**
-     * Implements {@link Literal#decimalValue()}.
-     */
-	@Override
-	public BigDecimal decimalValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).decimalValue();
-		
-	}
+  /** Implements {@link Literal#floatValue()}. */
+  @Override
+  public float floatValue() {
 
-    /**
-     * Implements {@link Literal#calendarValue()}.
-     */
-	@Override
-	public XMLGregorianCalendar calendarValue() {
-		
-		if (!isLiteral())
-			throw new ClassCastException();
-		
-		return ((Literal) getValue()).calendarValue();
-		
-	}
+    if (!isLiteral()) throw new ClassCastException();
 
+    return ((Literal) getValue()).floatValue();
+  }
+
+  /** Implements {@link Literal#doubleValue()}. */
+  @Override
+  public double doubleValue() {
+
+    if (!isLiteral()) throw new ClassCastException();
+
+    return ((Literal) getValue()).doubleValue();
+  }
+
+  /** Implements {@link Literal#integerValue()}. */
+  @Override
+  public BigInteger integerValue() {
+
+    if (!isLiteral()) throw new ClassCastException();
+
+    return ((Literal) getValue()).integerValue();
+  }
+
+  /** Implements {@link Literal#decimalValue()}. */
+  @Override
+  public BigDecimal decimalValue() {
+
+    if (!isLiteral()) throw new ClassCastException();
+
+    return ((Literal) getValue()).decimalValue();
+  }
+
+  /** Implements {@link Literal#calendarValue()}. */
+  @Override
+  public XMLGregorianCalendar calendarValue() {
+
+    if (!isLiteral()) throw new ClassCastException();
+
+    return ((Literal) getValue()).calendarValue();
+  }
 }

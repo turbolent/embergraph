@@ -4,47 +4,44 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 import org.openrdf.rio.RDFParser.DatatypeHandling;
 
-public
-class ASTLoad extends ASTUpdate {
+public class ASTLoad extends ASTUpdate {
 
-    private boolean silent;
-    
-    /*
-     * Note: These values default to [null] so we can inherit the default
-     * behavior as configured for the KB when an option is not explicitly
-     * specified.
-     */
-    
-    public DatatypeHandling datatypeHandling = null;
+  private boolean silent;
 
-    public Boolean preserveBNodeIDs = null;
+  /*
+   * Note: These values default to [null] so we can inherit the default
+   * behavior as configured for the KB when an option is not explicitly
+   * specified.
+   */
 
-    public Boolean stopAtFirstError = null;
+  public DatatypeHandling datatypeHandling = null;
 
-    public Boolean verifyData = null;
+  public Boolean preserveBNodeIDs = null;
 
-    public ASTLoad(int id) {
-        super(id);
-    }
+  public Boolean stopAtFirstError = null;
 
-    public ASTLoad(SyntaxTreeBuilder p, int id) {
-        super(p, id);
-    }
+  public Boolean verifyData = null;
 
-    /** Accept the visitor. **/
-    public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-            throws VisitorException {
-        return visitor.visit(this, data);
-    }
+  public ASTLoad(int id) {
+    super(id);
+  }
 
-    public void setSilent(final boolean silent) {
-        this.silent = silent;
-    }
+  public ASTLoad(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-    public boolean isSilent() {
-        return this.silent;
-    }
+  /** Accept the visitor. * */
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 
+  public void setSilent(final boolean silent) {
+    this.silent = silent;
+  }
+
+  public boolean isSilent() {
+    return this.silent;
+  }
 }
 /*
  * JavaCC - OriginalChecksum=b83ece3152041c4178153a0f76debe55 (do not edit this

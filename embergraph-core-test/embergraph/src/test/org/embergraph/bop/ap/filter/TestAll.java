@@ -29,44 +29,31 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("access path filters");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // test filter operator.
-        suite.addTestSuite(TestFilter.class);
+    final TestSuite suite = new TestSuite("access path filters");
 
-        // test resolver operator.
-        suite.addTestSuite(TestResolver.class);
+    // test filter operator.
+    suite.addTestSuite(TestFilter.class);
 
-        // TODO test distinct operators (native and JVM).
-//        suite.addTestSuite(TestDistinctFilter.class);
+    // test resolver operator.
+    suite.addTestSuite(TestResolver.class);
 
-        // @todo operators and test suites for the remaining striterator patterns.
-        
-        return suite;
+    // TODO test distinct operators (native and JVM).
+    //        suite.addTestSuite(TestDistinctFilter.class);
 
-    }
+    // @todo operators and test suites for the remaining striterator patterns.
 
+    return suite;
+  }
 }

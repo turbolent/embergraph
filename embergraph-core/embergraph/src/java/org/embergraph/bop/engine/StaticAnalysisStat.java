@@ -22,78 +22,64 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import java.io.Serializable;
-
 import org.embergraph.counters.CAT;
 
 /**
- * Statistics associated with the Static Analysis phase, such as runtime for
- * the parser, given optimizers, etc.
- * 
+ * Statistics associated with the Static Analysis phase, such as runtime for the parser, given
+ * optimizers, etc.
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class StaticAnalysisStat implements Serializable {
 
-   private static final long serialVersionUID = 7973851199166467621L;
-   
-   /**
-    * Human understandable name describing what these stats are for.
-    */
-   private final String statName;
-   
-   /**
-    * The number of calls to this optimizer.
-    */
-   private final CAT nrCalls = new CAT();
-    
-    /**
-     * The elapsed time (milliseconds) for the statistics object.
-     */
-    private final CAT elapsed = new CAT();
-    
-   /**
-    * Create a new, initially empty statistics object.
-    * 
-    * @param statName
-    *           a descriptive, human understandable name for the stats object
-    */
-   public StaticAnalysisStat(String statName) {
-      this.statName = statName;
-   }
+  private static final long serialVersionUID = 7973851199166467621L;
 
+  /** Human understandable name describing what these stats are for. */
+  private final String statName;
 
-   public void addElapsed(long elapsed) {
-      this.elapsed.add(elapsed);
-   }
+  /** The number of calls to this optimizer. */
+  private final CAT nrCalls = new CAT();
 
+  /** The elapsed time (milliseconds) for the statistics object. */
+  private final CAT elapsed = new CAT();
 
-   
-   public void incrementNrCalls() {
-      this.nrCalls.increment();
-   }
-   
-   @Override
-   public String toString() {
-      final StringBuilder sb = new StringBuilder();
-      sb.append("Stats for " + statName + ":");
-      sb.append("{elapsed=" + elapsed.get());
-      sb.append(", nrCalls=" + nrCalls);
-      sb.append("}");
-      return sb.toString();
-   }
-    
+  /**
+   * Create a new, initially empty statistics object.
+   *
+   * @param statName a descriptive, human understandable name for the stats object
+   */
+  public StaticAnalysisStat(String statName) {
+    this.statName = statName;
+  }
 
-   public long getNrCalls() {
-      return nrCalls.get();
-   }
+  public void addElapsed(long elapsed) {
+    this.elapsed.add(elapsed);
+  }
 
+  public void incrementNrCalls() {
+    this.nrCalls.increment();
+  }
 
-   public long getElapsed() {
-      return elapsed.get();
-   }
-   
-   public String getStatName() {
-      return statName;
-   }
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Stats for " + statName + ":");
+    sb.append("{elapsed=" + elapsed.get());
+    sb.append(", nrCalls=" + nrCalls);
+    sb.append("}");
+    return sb.toString();
+  }
 
+  public long getNrCalls() {
+    return nrCalls.get();
+  }
+
+  public long getElapsed() {
+    return elapsed.get();
+  }
+
+  public String getStatName() {
+    return statName;
+  }
 }

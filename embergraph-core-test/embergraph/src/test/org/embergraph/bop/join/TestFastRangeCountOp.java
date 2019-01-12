@@ -25,9 +25,7 @@ import java.math.BigInteger;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.Constant;
@@ -57,170 +55,160 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
  * Unit tests for the {@link FastRangeCountOp} operator.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestFastRangeCountOp extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestFastRangeCountOp() {
+  /** */
+  public TestFastRangeCountOp() {}
+
+  /** @param name */
+  public TestFastRangeCountOp(String name) {
+    super(name);
+  }
+
+  @Override
+  public Properties getProperties() {
+
+    final Properties p = new Properties(super.getProperties());
+
+    p.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient.toString());
+
+    return p;
+  }
+
+  private static final String namespace = "ns";
+
+  Journal jnl;
+
+  @Override
+  public void setUp() throws Exception {
+
+    super.setUp();
+
+    jnl = new Journal(getProperties());
+
+    loadData(jnl);
+  }
+
+  /** Create and populate relation in the {@link #namespace}. */
+  private void loadData(final Journal store) {
+
+    // create the relation.
+    final R rel = new R(store, namespace, ITx.UNISOLATED, new Properties());
+    rel.create();
+
+    // data to insert.
+    final E[] a = {
+      new E("John", "Mary"), //
+      new E("Mary", "Paul"), //
+      new E("Paul", "Leon"), //
+      new E("Leon", "Paul"), //
+      new E("Mary", "John"), //
+    };
+
+    // insert data (the records are not pre-sorted).
+    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+
+    // Do commit since not scale-out.
+    store.commit();
+  }
+
+  @Override
+  public void tearDown() throws Exception {
+
+    if (jnl != null) {
+      jnl.destroy();
+      jnl = null;
     }
 
-    /**
-     * @param name
-     */
-    public TestFastRangeCountOp(String name) {
-        super(name);
-    }
+    super.tearDown();
+  }
 
-    @Override
-    public Properties getProperties() {
+  /**
+   * Return an {@link IAsynchronousIterator} that will read a single {@link IBindingSet}.
+   *
+   * @param bindingSet the binding set.
+   */
+  protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
+      final IBindingSet bindingSet) {
 
-        final Properties p = new Properties(super.getProperties());
+    return new ThickAsynchronousIterator<IBindingSet[]>(
+        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+  }
 
-        p.setProperty(Journal.Options.BUFFER_MODE, BufferMode.Transient
-                .toString());
+  /**
+   * Unit test corresponding to
+   *
+   * <pre>
+   * SELECT COUNT(*) as ?count) { ("Mary",?X) }
+   * </pre>
+   */
+  public void test_fastRangeCount_01() throws InterruptedException, ExecutionException {
 
-        return p;
-        
-    }
+    final int joinId = 2;
+    final int predId = 3;
 
-    static private final String namespace = "ns";
-    
-    Journal jnl;
-    
-    @Override
-    public void setUp() throws Exception {
+    final Predicate<E> predOp =
+        new Predicate<E>(
+            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+            NV.asMap(
+                new NV[] {
+                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                  new NV(Predicate.Annotations.BOP_ID, predId),
+                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                }));
 
-        super.setUp();
-        
-        jnl = new Journal(getProperties());
+    final FastRangeCountOp<E> query =
+        new FastRangeCountOp<E>(
+            new BOp[] {}, // args
+            new NV(FastRangeCountOp.Annotations.BOP_ID, joinId),
+            new NV(FastRangeCountOp.Annotations.PREDICATE, predOp),
+            new NV(FastRangeCountOp.Annotations.COUNT_VAR, Var.var("count")));
 
-        loadData(jnl);
-
-    }
-    
-    /**
-     * Create and populate relation in the {@link #namespace}.
-     */
-    private void loadData(final Journal store) {
-
-        // create the relation.
-        final R rel = new R(store, namespace, ITx.UNISOLATED, new Properties());
-        rel.create();
-
-        // data to insert.
-        final E[] a = {
-                new E("John", "Mary"),// 
-                new E("Mary", "Paul"),// 
-                new E("Paul", "Leon"),// 
-                new E("Leon", "Paul"),// 
-                new E("Mary", "John"),// 
+    // the expected solutions.
+    final IBindingSet[] expected =
+        new IBindingSet[] {
+          new ListBindingSet(
+              new IVariable[] {Var.var("count")},
+              new IConstant[] {
+                new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(2L)))
+              }),
         };
 
-        // insert data (the records are not pre-sorted).
-        rel.insert(new ChunkedArrayIterator<E>(a.length, a, null/* keyOrder */));
+    final BOpStats stats = query.newStats();
 
-        // Do commit since not scale-out.
-        store.commit();
+    final IAsynchronousIterator<IBindingSet[]> source =
+        new ThickAsynchronousIterator<IBindingSet[]>(
+            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet()}});
 
-    }
+    final IBlockingBuffer<IBindingSet[]> sink =
+        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
 
-    @Override
-    public void tearDown() throws Exception {
+    final BOpContext<IBindingSet> context =
+        new BOpContext<IBindingSet>(
+            new MockRunningQuery(null /* fed */, jnl /* indexManager */),
+            -1 /* partitionId */,
+            stats,
+            query /* op */,
+            false /* lastInvocation */,
+            source,
+            sink,
+            null /* sink2 */);
 
-        if (jnl != null) {
-            jnl.destroy();
-            jnl = null;
-        }
+    // get task.
+    final FutureTask<Void> ft = query.eval(context);
 
-        super.tearDown();
-        
-    }
+    // execute task.
+    jnl.getExecutorService().execute(ft);
 
-    /**
-     * Return an {@link IAsynchronousIterator} that will read a single
-     * {@link IBindingSet}.
-     * 
-     * @param bindingSet
-     *            the binding set.
-     */
-    protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
-            final IBindingSet bindingSet) {
+    AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, sink.iterator(), ft);
 
-        return new ThickAsynchronousIterator<IBindingSet[]>(
-                new IBindingSet[][] { new IBindingSet[] { bindingSet } });
-
-    }
-
-    /**
-	 * Unit test corresponding to
-	 * 
-	 * <pre>
-	 * SELECT COUNT(*) as ?count) { ("Mary",?X) }
-	 * </pre>
-	 */
-    public void test_fastRangeCount_01()
-            throws InterruptedException, ExecutionException {
-
-        final int joinId = 2;
-        final int predId = 3;
-
-		final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
-				new Constant<String>("Mary"), Var.var("x") }, NV
-				.asMap(new NV[] {
-						new NV(Predicate.Annotations.RELATION_NAME,
-								new String[] { namespace }),
-						new NV(Predicate.Annotations.BOP_ID, predId),
-						new NV(Annotations.TIMESTAMP,
-								ITx.READ_COMMITTED),
-				}));
-
-		final FastRangeCountOp<E> query = new FastRangeCountOp<E>(
-				new BOp[] {},// args
-				new NV(FastRangeCountOp.Annotations.BOP_ID, joinId),
-				new NV(FastRangeCountOp.Annotations.PREDICATE, predOp),
-				new NV(FastRangeCountOp.Annotations.COUNT_VAR, Var.var("count"))
-				);
-
-        // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {
-                new ListBindingSet(
-                        new IVariable[] { Var.var("count") },
-                        new IConstant[] { new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(2L))) }
-                ),
-        };
-
-        final BOpStats stats = query.newStats();
-
-        final IAsynchronousIterator<IBindingSet[]> source = new ThickAsynchronousIterator<IBindingSet[]>(
-                new IBindingSet[][] { new IBindingSet[] { new ListBindingSet()} });
-
-        final IBlockingBuffer<IBindingSet[]> sink = new BlockingBufferWithStats<IBindingSet[]>(query, stats);
-
-        final BOpContext<IBindingSet> context = new BOpContext<IBindingSet>(
-                new MockRunningQuery(null/* fed */, jnl/* indexManager */
-                ), -1/* partitionId */, stats,query/* op */,
-                false/* lastInvocation */, 
-                source, sink, null/* sink2 */);
-
-        // get task.
-        final FutureTask<Void> ft = query.eval(context);
-        
-        // execute task.
-        jnl.getExecutorService().execute(ft);
-
-        AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, sink.iterator(),
-                ft);
-
-        // join task
-        assertEquals(1L, stats.chunksIn.get());
-        assertEquals(1L, stats.unitsIn.get());
-        assertEquals(1L, stats.unitsOut.get());
-        assertEquals(1L, stats.chunksOut.get());
-
-    }
-
+    // join task
+    assertEquals(1L, stats.chunksIn.get());
+    assertEquals(1L, stats.unitsIn.get());
+    assertEquals(1L, stats.unitsOut.get());
+    assertEquals(1L, stats.chunksOut.get());
+  }
 }

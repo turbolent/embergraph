@@ -23,34 +23,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.filter;
 
+import cutthecrap.utils.striterators.IFilter;
 import java.util.Iterator;
-
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
-import cutthecrap.utils.striterators.IFilter;
-
 /**
  * Interface for stacked filtering iterators for {@link ITuple}s.
- * 
+ *
  * @see ITupleIterator
- * 
  * @see IRangeQuery#rangeIterator(byte[], byte[], int, int, IFilterConstructor)
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the objects that can be materialized using
- *            {@link ITuple#getObject()}.
+ * @param <E> The generic type of the objects that can be materialized using {@link
+ *     ITuple#getObject()}.
  */
 public interface ITupleFilter<E> extends IFilter {
 
-    /**
-     * Strengthened return type.
-     * <p>
-     * {@inheritDoc}
-     */
-    public ITupleIterator<E> filterOnce(Iterator src, Object context);
-
+  /**
+   * Strengthened return type.
+   *
+   * <p>{@inheritDoc}
+   */
+  public ITupleIterator<E> filterOnce(Iterator src, Object context);
 }

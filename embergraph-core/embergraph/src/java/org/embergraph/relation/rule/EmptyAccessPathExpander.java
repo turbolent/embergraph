@@ -26,36 +26,29 @@ import org.embergraph.relation.accesspath.IAccessPath;
 
 /**
  * An "expander" which replaces the access path with an {@link EmptyAccessPath}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class EmptyAccessPathExpander<E> implements IAccessPathExpander<E> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public static transient final EmptyAccessPathExpander INSTANCE = new EmptyAccessPathExpander();
+  public static final transient EmptyAccessPathExpander INSTANCE = new EmptyAccessPathExpander();
 
-    public IAccessPath<E> getAccessPath(IAccessPath<E> accessPath) {
+  public IAccessPath<E> getAccessPath(IAccessPath<E> accessPath) {
 
-        return new EmptyAccessPath<E>(accessPath.getPredicate(), accessPath
-                .getKeyOrder());
-        
-    }
+    return new EmptyAccessPath<E>(accessPath.getPredicate(), accessPath.getKeyOrder());
+  }
 
-    public boolean runFirst() {
+  public boolean runFirst() {
 
-        return false;
-        
-    }
+    return false;
+  }
 
-    public boolean backchain() {
-        
-        return false;
-        
-    }
+  public boolean backchain() {
 
+    return false;
+  }
 }

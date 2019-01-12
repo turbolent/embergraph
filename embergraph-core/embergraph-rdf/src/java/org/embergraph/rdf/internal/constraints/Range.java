@@ -19,47 +19,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.io.Serializable;
-
 import org.embergraph.rdf.internal.IV;
 
 /**
- * Represents a numerical range of IVs - a lower bound and an upper bound.
- * Useful for constraining predicates to a particular range of values for the
- * object.
+ * Represents a numerical range of IVs - a lower bound and an upper bound. Useful for constraining
+ * predicates to a particular range of values for the object.
  */
 public class Range implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -706615195901299026L;
 
-	private final IV from, to;
-	
-	/**
-	 * Construct a numerical range using two IVs.  The range includes the from
-	 * and to value (>= from && <= to).  Non-inclusive from and to must be
-	 * accomplished using a filter.  The from must be less than or equal to the 
-	 * to.
-	 */
-	public Range(final IV from, final IV to) {
-		
-		if (!from.isNumeric())
-			throw new IllegalArgumentException("not numeric: " + from);
-		if (!to.isNumeric())
-			throw new IllegalArgumentException("not numeric: " + to);
-		
-		this.from = from;
-		this.to = to;
-		
-	}
-	
-	public IV from() {
-		return from;
-	}
-	
-	public IV to() {
-		return to;
-	}
-	
+  /** */
+  private static final long serialVersionUID = -706615195901299026L;
+
+  private final IV from, to;
+
+  /**
+   * Construct a numerical range using two IVs. The range includes the from and to value (>= from &&
+   * <= to). Non-inclusive from and to must be accomplished using a filter. The from must be less
+   * than or equal to the to.
+   */
+  public Range(final IV from, final IV to) {
+
+    if (!from.isNumeric()) throw new IllegalArgumentException("not numeric: " + from);
+    if (!to.isNumeric()) throw new IllegalArgumentException("not numeric: " + to);
+
+    this.from = from;
+    this.to = to;
+  }
+
+  public IV from() {
+    return from;
+  }
+
+  public IV to() {
+    return to;
+  }
 }

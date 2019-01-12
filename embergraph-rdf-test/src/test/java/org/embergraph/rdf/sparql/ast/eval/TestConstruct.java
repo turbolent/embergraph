@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ConstructNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
@@ -31,440 +30,435 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 
 /**
  * Data driven test suite for CONSTRUCT queries.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestBasicQuery.java 6387 2012-07-21 18:37:51Z thompsonbry $
  */
 public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
 
-    /**
-     * 
-     */
-    public TestConstruct() {
-    }
+  /** */
+  public TestConstruct() {}
 
-    /**
-     * @param name
-     */
-    public TestConstruct(String name) {
-        super(name);
-    }
+  /** @param name */
+  public TestConstruct(String name) {
+    super(name);
+  }
 
-    /**
-     * A simple CONSTRUCT query.
-     * 
-     * <pre>
-     * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-     * 
-     * CONSTRUCT {
-     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
-     *   ?x rdf:type foaf:Person . 
-     * } where {
-     *   ?x rdf:type foaf:Person 
-     * }
-     * </pre>
-     */
-    public void test_construct_1() throws Exception {
+  /**
+   * A simple CONSTRUCT query.
+   *
+   * <pre>
+   * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   *
+   * CONSTRUCT {
+   *   <http://www.embergraph.org/DC> rdfs:label "DC" .
+   *   ?x rdf:type foaf:Person .
+   * } where {
+   *   ?x rdf:type foaf:Person
+   * }
+   * </pre>
+   */
+  public void test_construct_1() throws Exception {
 
-        final ASTContainer ast = new TestHelper(
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-1", // testURI,
-                "construct-1.rq",// queryFileURL
-                "construct-1.trig",// dataFileURL
-                "construct-1-result.trig"// resultFileURL
-                ).runTest();
-        
-        final ConstructNode construct = ast.getOptimizedAST().getConstruct();
+                "construct-1.rq", // queryFileURL
+                "construct-1.trig", // dataFileURL
+                "construct-1-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        assertNotNull(construct);
+    final ConstructNode construct = ast.getOptimizedAST().getConstruct();
 
-        assertFalse(construct.isNativeDistinct());
+    assertNotNull(construct);
 
-    }
+    assertFalse(construct.isNativeDistinct());
+  }
 
-    /**
-     * A simple CONSTRUCT query using a native DISTINCT filter.
-     * 
-     * <pre>
-     * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-     * 
-     * CONSTRUCT {
-     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
-     *   ?x rdf:type foaf:Person . 
-     * } where {
-     *   # Enable the native DISTINCT SPO filter.
-     *   hint:Query hint:nativeDistinctSPO true .
-     *   ?x rdf:type foaf:Person 
-     * }
-     * </pre>
-     */
-    public void test_construct_1a() throws Exception {
+  /**
+   * A simple CONSTRUCT query using a native DISTINCT filter.
+   *
+   * <pre>
+   * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   *
+   * CONSTRUCT {
+   *   <http://www.embergraph.org/DC> rdfs:label "DC" .
+   *   ?x rdf:type foaf:Person .
+   * } where {
+   *   # Enable the native DISTINCT SPO filter.
+   *   hint:Query hint:nativeDistinctSPO true .
+   *   ?x rdf:type foaf:Person
+   * }
+   * </pre>
+   */
+  public void test_construct_1a() throws Exception {
 
-        final ASTContainer ast = new TestHelper(
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-1", // testURI,
-                "construct-1a.rq",// queryFileURL
-                "construct-1.trig",// dataFileURL
-                "construct-1-result.trig"// resultFileURL
-                ).runTest();
+                "construct-1a.rq", // queryFileURL
+                "construct-1.trig", // dataFileURL
+                "construct-1-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final ConstructNode construct = ast.getOptimizedAST().getConstruct();
+    final ConstructNode construct = ast.getOptimizedAST().getConstruct();
 
-        assertNotNull(construct);
+    assertNotNull(construct);
 
-        assertTrue(construct.isNativeDistinct());
-        
-    }
+    assertTrue(construct.isNativeDistinct());
+  }
 
-    /**
-     * A simple CONSTRUCT query using a native DISTINCT filter (enabled
-     * via the "analytic" query hint).
-     * 
-     * <pre>
-     * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-     * 
-     * CONSTRUCT {
-     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
-     *   ?x rdf:type foaf:Person . 
-     * } where {
-     *   # Enable the native DISTINCT SPO filter.
-     *   hint:Query hint:analytic true .
-     *   ?x rdf:type foaf:Person 
-     * }
-     * </pre>
-     */
-    public void test_construct_1b() throws Exception {
+  /**
+   * A simple CONSTRUCT query using a native DISTINCT filter (enabled via the "analytic" query
+   * hint).
+   *
+   * <pre>
+   * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+   *
+   * CONSTRUCT {
+   *   <http://www.embergraph.org/DC> rdfs:label "DC" .
+   *   ?x rdf:type foaf:Person .
+   * } where {
+   *   # Enable the native DISTINCT SPO filter.
+   *   hint:Query hint:analytic true .
+   *   ?x rdf:type foaf:Person
+   * }
+   * </pre>
+   */
+  public void test_construct_1b() throws Exception {
 
-        final ASTContainer ast = new TestHelper(
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-1", // testURI,
-                "construct-1b.rq",// queryFileURL
-                "construct-1.trig",// dataFileURL
-                "construct-1-result.trig"// resultFileURL
-                ).runTest();
+                "construct-1b.rq", // queryFileURL
+                "construct-1.trig", // dataFileURL
+                "construct-1-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final ConstructNode construct = ast.getOptimizedAST().getConstruct();
+    final ConstructNode construct = ast.getOptimizedAST().getConstruct();
 
-        assertNotNull(construct);
+    assertNotNull(construct);
 
-        assertTrue(construct.isNativeDistinct());
-        
+    assertTrue(construct.isNativeDistinct());
+  }
+
+  /**
+   * A CONSTRUCT without a template and having a ground triple in the WHERE clause. For this variant
+   * of the test, the triple is not in the KB.
+   *
+   * <pre>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   *
+   * CONSTRUCT WHERE {
+   *   <http://www.embergraph.org/DC> rdfs:label "MD"
+   * }
+   * </pre>
+   */
+  public void test_construct_2() throws Exception {
+
+    new TestHelper(
+            "construct-2", // testURI,
+            "construct-2.rq", // queryFileURL
+            "construct-2.trig", // dataFileURL
+            "construct-2-result.trig" // resultFileURL
+            )
+        .runTest();
+  }
+
+  /**
+   * A CONSTRUCT without a template and having a ground triple in the WHERE clause. For this variant
+   * of the test, the triple is in the KB and should be in the CONSTRUCT result.
+   *
+   * <pre>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   *
+   * CONSTRUCT WHERE {
+   *   <http://www.embergraph.org/DC> rdfs:label "DC"
+   * }
+   * </pre>
+   */
+  public void test_construct_3() throws Exception {
+
+    new TestHelper(
+            "construct-3", // testURI,
+            "construct-3.rq", // queryFileURL
+            "construct-3.trig", // dataFileURL
+            "construct-3-result.trig" // resultFileURL
+            )
+        .runTest();
+  }
+
+  /**
+   * A construct with told triples in the CONSTRUCT clause and no WHERE clause.
+   *
+   * <pre>
+   * PREFIX : <http://www.embergraph.org/>
+   *
+   * CONSTRUCT {
+   *   :Bryan :likes :RDFS
+   * } where {
+   * }
+   * </pre>
+   */
+  public void test_construct_without_where_clause() throws Exception {
+
+    new TestHelper(
+            "construct-without-where-clause", // testURI,
+            "construct-without-where-clause.rq", // queryFileURL
+            "construct-without-where-clause.trig", // dataFileURL
+            "construct-without-where-clause-result.trig" // resultFileURL
+            )
+        .runTest();
+  }
+
+  /**
+   * A CONSTRUCT query where the constructed statements can have blank nodes because a variable
+   * becomes bound to a blank node in the data.
+   *
+   * <pre>
+   * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+   *
+   * CONSTRUCT WHERE {
+   * <http://example.org/bob> rdfs:label ?o
+   * }
+   * </pre>
+   */
+  public void test_construct_5() throws Exception {
+
+    new TestHelper(
+            "construct-5", // testURI,
+            "construct-5.rq", // queryFileURL
+            "construct-5.trig", // dataFileURL
+            "construct-5-result.trig" // resultFileURL
+            )
+        .runTest();
+  }
+
+  /**
+   * Return the non-ground triple pattern templates from the CONSTRUCT node of the query.
+   *
+   * @param queryRoot The query.
+   * @return The non-ground triple patterns in the CONSTRUCT template.
+   */
+  private static List<StatementPatternNode> getConstructTemplates(final QueryRoot queryRoot) {
+
+    final List<StatementPatternNode> templates = new LinkedList<StatementPatternNode>();
+
+    final ConstructNode construct = queryRoot.getConstruct();
+
+    for (StatementPatternNode pat : construct) {
+
+      if (!pat.isGround()) {
+
+        /*
+         * A statement pattern that we will process for each solution.
+         */
+
+        templates.add(pat);
+      }
     }
 
-    /**
-     * A CONSTRUCT without a template and having a ground triple in the WHERE
-     * clause. For this variant of the test, the triple is not in the KB.
-     * 
-     * <pre>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * 
-     * CONSTRUCT WHERE {
-     *   <http://www.embergraph.org/DC> rdfs:label "MD"
-     * }
-     * </pre>
-     */
-    public void test_construct_2() throws Exception {
+    return templates;
+  }
 
+  /**
+   * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
+   * result in distinct triples without the application of a DISTINCT SPO filter.
+   *
+   * <pre>
+   * CONSTRUCT {
+   *   ?x rdf:type foaf:Person .
+   * } where {
+   *   ?x rdf:type foaf:Person
+   * }
+   * </pre>
+   *
+   * For this query against a QUADS mode database, the access path for the sole triple pattern in
+   * the WHERE clause will be a DEFAULT GRAPH access path (the RDF MERGE of the triples across all
+   * named graphs that are visible). That results in an obviously distinct construct.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
+   *     DISTINCT (s,p,o) filter </a>
+   */
+  public void test_isObviouslyDistinct_01() throws Exception {
+
+    final ASTContainer ast =
         new TestHelper(
-                "construct-2", // testURI,
-                "construct-2.rq",// queryFileURL
-                "construct-2.trig",// dataFileURL
-                "construct-2-result.trig"// resultFileURL
-                ).runTest();
-        
-    }
-
-    /**
-     * A CONSTRUCT without a template and having a ground triple in the WHERE
-     * clause. For this variant of the test, the triple is in the KB and should
-     * be in the CONSTRUCT result.
-     * 
-     * <pre>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * 
-     * CONSTRUCT WHERE {
-     *   <http://www.embergraph.org/DC> rdfs:label "DC"
-     * }
-     * </pre>
-     */
-    public void test_construct_3() throws Exception {
-
-        new TestHelper(
-                "construct-3", // testURI,
-                "construct-3.rq",// queryFileURL
-                "construct-3.trig",// dataFileURL
-                "construct-3-result.trig"// resultFileURL
-                ).runTest();
-        
-    }
-
-    /**
-     * A construct with told triples in the CONSTRUCT clause and no WHERE
-     * clause.
-     * 
-     * <pre>
-     * PREFIX : <http://www.embergraph.org/>
-     * 
-     * CONSTRUCT {
-     *   :Bryan :likes :RDFS
-     * } where {
-     * }
-     * </pre>
-     */
-    public void test_construct_without_where_clause() throws Exception {
-       
-        new TestHelper(
-                "construct-without-where-clause", // testURI,
-                "construct-without-where-clause.rq",// queryFileURL
-                "construct-without-where-clause.trig",// dataFileURL
-                "construct-without-where-clause-result.trig"// resultFileURL
-                ).runTest();
-    }
-    
-    /**
-     * A CONSTRUCT query where the constructed statements can have blank nodes
-     * because a variable becomes bound to a blank node in the data.
-     * 
-     * <pre>
-     * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-     * 
-     * CONSTRUCT WHERE {
-     * <http://example.org/bob> rdfs:label ?o
-     * }
-     * </pre>
-     */
-    public void test_construct_5() throws Exception {
-
-        new TestHelper(
-                "construct-5", // testURI,
-                "construct-5.rq",// queryFileURL
-                "construct-5.trig",// dataFileURL
-                "construct-5-result.trig"// resultFileURL
-                ).runTest();
-        
-    }
-
-    /**
-     * Return the non-ground triple pattern templates from the CONSTRUCT node of
-     * the query.
-     * 
-     * @param queryRoot
-     *            The query.
-     *            
-     * @return The non-ground triple patterns in the CONSTRUCT template.
-     */
-    private static List<StatementPatternNode> getConstructTemplates(
-            final QueryRoot queryRoot) {
-
-        final List<StatementPatternNode> templates = new LinkedList<StatementPatternNode>();
-
-        final ConstructNode construct = queryRoot.getConstruct();
-
-        for (StatementPatternNode pat : construct) {
-
-            if (!pat.isGround()) {
-
-                /*
-                 * A statement pattern that we will process for each solution.
-                 */
-
-                templates.add(pat);
-
-            }
-
-        }
-    
-        return templates;
-
-    }
-    
-    /**
-     * Unit test for method identifying whether a CONSTRUCT template and WHERE
-     * clause will obviously result in distinct triples without the application
-     * of a DISTINCT SPO filter.
-     * 
-     * <pre>
-     * CONSTRUCT {
-     *   ?x rdf:type foaf:Person . 
-     * } where {
-     *   ?x rdf:type foaf:Person 
-     * }
-     * </pre>
-     * 
-     * For this query against a QUADS mode database, the access path for the
-     * sole triple pattern in the WHERE clause will be a DEFAULT GRAPH access
-     * path (the RDF MERGE of the triples across all named graphs that are
-     * visible). That results in an obviously distinct construct.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">
-     *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
-     */
-    public void test_isObviouslyDistinct_01() throws Exception {
-     
-        final ASTContainer ast = new TestHelper(
                 "construct-isObviouslyDistinct-01", // testURI,
-                "construct-isObviouslyDistinct-01.rq",// queryFileURL
-                "construct-isObviouslyDistinct-01.trig",// dataFileURL
-                "construct-isObviouslyDistinct-01-result.trig"// resultFileURL
-                ).runTest();
+                "construct-isObviouslyDistinct-01.rq", // queryFileURL
+                "construct-isObviouslyDistinct-01.trig", // dataFileURL
+                "construct-isObviouslyDistinct-01-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final QueryRoot optimizedQuery = ast.getOptimizedAST();
+    final QueryRoot optimizedQuery = ast.getOptimizedAST();
 
-        assertTrue(ASTConstructIterator.isObviouslyDistinct(store.isQuads(),
-                getConstructTemplates(optimizedQuery),
-                optimizedQuery.getWhereClause()));
+    assertTrue(
+        ASTConstructIterator.isObviouslyDistinct(
+            store.isQuads(),
+            getConstructTemplates(optimizedQuery),
+            optimizedQuery.getWhereClause()));
+  }
 
-    }
-    
-    /**
-     * Unit test for method identifying whether a CONSTRUCT template and WHERE
-     * clause will obviously result in distinct triples without the application
-     * of a DISTINCT SPO filter.
-     * 
-     * <pre>
-     * CONSTRUCT WHERE {?s ?p ?o}
-     * </pre>
-     * 
-     * For this query against a QUADS mode database, the access path for the
-     * sole triple pattern in the WHERE clause will be a DEFAULT GRAPH access
-     * path (the RDF MERGE of the triples across all named graphs that are
-     * visible). That results in an obviously distinct construct.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">
-     *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
-     */
-    public void test_isObviouslyDistinct_02() throws Exception {
-     
-        final ASTContainer ast = new TestHelper(
+  /**
+   * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
+   * result in distinct triples without the application of a DISTINCT SPO filter.
+   *
+   * <pre>
+   * CONSTRUCT WHERE {?s ?p ?o}
+   * </pre>
+   *
+   * For this query against a QUADS mode database, the access path for the sole triple pattern in
+   * the WHERE clause will be a DEFAULT GRAPH access path (the RDF MERGE of the triples across all
+   * named graphs that are visible). That results in an obviously distinct construct.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
+   *     DISTINCT (s,p,o) filter </a>
+   */
+  public void test_isObviouslyDistinct_02() throws Exception {
+
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-isObviouslyDistinct-02", // testURI,
-                "construct-isObviouslyDistinct-02.rq",// queryFileURL
-                "construct-isObviouslyDistinct-02.trig",// dataFileURL
-                "construct-isObviouslyDistinct-02-result.trig"// resultFileURL
-                ).runTest();
+                "construct-isObviouslyDistinct-02.rq", // queryFileURL
+                "construct-isObviouslyDistinct-02.trig", // dataFileURL
+                "construct-isObviouslyDistinct-02-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final QueryRoot optimizedQuery = ast.getOptimizedAST();
+    final QueryRoot optimizedQuery = ast.getOptimizedAST();
 
-        assertTrue(ASTConstructIterator.isObviouslyDistinct(store.isQuads(),
-                getConstructTemplates(optimizedQuery),
-                optimizedQuery.getWhereClause()));
+    assertTrue(
+        ASTConstructIterator.isObviouslyDistinct(
+            store.isQuads(),
+            getConstructTemplates(optimizedQuery),
+            optimizedQuery.getWhereClause()));
+  }
 
-    }
-    
-    /**
-     * Unit test for method identifying whether a CONSTRUCT template and WHERE
-     * clause will obviously result in distinct triples without the application
-     * of a DISTINCT SPO filter.
-     * 
-     * <pre>
-     * CONSTRUCT {
-     *   ?x rdf:type foaf:Person . 
-     * } where {
-     *   ?x rdf:type foaf:Person . 
-     *   ?x rdfs:label ?y 
-     * }
-     * </pre>
-     * 
-     * For this query, the <em>possibility</em> of multiple bindings on
-     * <code>y</code> for a given binding on <code>x</code> means that the
-     * CONSTRUCT is NOT obviously distinct.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">
-     *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
-     */
-    public void test_isObviouslyDistinct_03() throws Exception {
-     
-        final ASTContainer ast = new TestHelper(
+  /**
+   * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
+   * result in distinct triples without the application of a DISTINCT SPO filter.
+   *
+   * <pre>
+   * CONSTRUCT {
+   *   ?x rdf:type foaf:Person .
+   * } where {
+   *   ?x rdf:type foaf:Person .
+   *   ?x rdfs:label ?y
+   * }
+   * </pre>
+   *
+   * For this query, the <em>possibility</em> of multiple bindings on <code>y</code> for a given
+   * binding on <code>x</code> means that the CONSTRUCT is NOT obviously distinct.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
+   *     DISTINCT (s,p,o) filter </a>
+   */
+  public void test_isObviouslyDistinct_03() throws Exception {
+
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-isObviouslyDistinct-03", // testURI,
-                "construct-isObviouslyDistinct-03.rq",// queryFileURL
-                "construct-isObviouslyDistinct-03.trig",// dataFileURL
-                "construct-isObviouslyDistinct-03-result.trig"// resultFileURL
-                ).runTest();
+                "construct-isObviouslyDistinct-03.rq", // queryFileURL
+                "construct-isObviouslyDistinct-03.trig", // dataFileURL
+                "construct-isObviouslyDistinct-03-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final QueryRoot optimizedQuery = ast.getOptimizedAST();
+    final QueryRoot optimizedQuery = ast.getOptimizedAST();
 
-        assertFalse(ASTConstructIterator.isObviouslyDistinct(store.isQuads(),
-                getConstructTemplates(optimizedQuery),
-                optimizedQuery.getWhereClause()));
+    assertFalse(
+        ASTConstructIterator.isObviouslyDistinct(
+            store.isQuads(),
+            getConstructTemplates(optimizedQuery),
+            optimizedQuery.getWhereClause()));
+  }
 
-    }
-    
-    
-    /**
-     * Unit test for method identifying whether a CONSTRUCT template and WHERE
-     * clause will obviously result in distinct triples without the application
-     * of a DISTINCT SPO filter.
-     * 
-     * <pre>
-     * CONSTRUCT {
-     *   ?x foaf:accountName ?y . 
-     * } where {
-     *   ?x rdf:label ?y
-     * }
-     * </pre>
-     * 
-     * For this query, both the template and the WHERE clause are a single
-     * triple pattern and all variables are used in both places.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">
-     *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
-     */
-    public void test_isObviouslyDistinct_04() throws Exception {
-     
-        final ASTContainer ast = new TestHelper(
+  /**
+   * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
+   * result in distinct triples without the application of a DISTINCT SPO filter.
+   *
+   * <pre>
+   * CONSTRUCT {
+   *   ?x foaf:accountName ?y .
+   * } where {
+   *   ?x rdf:label ?y
+   * }
+   * </pre>
+   *
+   * For this query, both the template and the WHERE clause are a single triple pattern and all
+   * variables are used in both places.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
+   *     DISTINCT (s,p,o) filter </a>
+   */
+  public void test_isObviouslyDistinct_04() throws Exception {
+
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-isObviouslyDistinct-04", // testURI,
-                "construct-isObviouslyDistinct-04.rq",// queryFileURL
-                "construct-isObviouslyDistinct-04.trig",// dataFileURL
-                "construct-isObviouslyDistinct-04-result.trig"// resultFileURL
-                ).runTest();
+                "construct-isObviouslyDistinct-04.rq", // queryFileURL
+                "construct-isObviouslyDistinct-04.trig", // dataFileURL
+                "construct-isObviouslyDistinct-04-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final QueryRoot optimizedQuery = ast.getOptimizedAST();
+    final QueryRoot optimizedQuery = ast.getOptimizedAST();
 
-        assertTrue(ASTConstructIterator.isObviouslyDistinct(store.isQuads(),
-                getConstructTemplates(optimizedQuery),
-                optimizedQuery.getWhereClause()));
+    assertTrue(
+        ASTConstructIterator.isObviouslyDistinct(
+            store.isQuads(),
+            getConstructTemplates(optimizedQuery),
+            optimizedQuery.getWhereClause()));
+  }
 
-    }
+  /**
+   * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
+   * result in distinct triples without the application of a DISTINCT SPO filter.
+   *
+   * <pre>
+   * CONSTRUCT {
+   *   ?s ?p ?o
+   * }
+   * WHERE {
+   *   GRAPH <http://www.embergraph.org/foo> {
+   *     ?s ?p ?o
+   *   }
+   * }
+   * </pre>
+   *
+   * For this query, both the template and the WHERE clause are a single triple pattern and all
+   * variables are used in both places.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
+   *     DISTINCT (s,p,o) filter </a>
+   */
+  public void test_isObviouslyDistinct_05() throws Exception {
 
-    /**
-     * Unit test for method identifying whether a CONSTRUCT template and WHERE
-     * clause will obviously result in distinct triples without the application
-     * of a DISTINCT SPO filter.
-     * 
-     * <pre>
-     * CONSTRUCT {
-     *   ?s ?p ?o
-     * }
-     * WHERE {
-     *   GRAPH <http://www.embergraph.org/foo> {
-     *     ?s ?p ?o
-     *   }
-     * }
-     * </pre>
-     * 
-     * For this query, both the template and the WHERE clause are a single
-     * triple pattern and all variables are used in both places.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">
-     *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
-     */
-    public void test_isObviouslyDistinct_05() throws Exception {
-
-        final ASTContainer ast = new TestHelper(
+    final ASTContainer ast =
+        new TestHelper(
                 "construct-isObviouslyDistinct-05", // testURI,
-                "construct-isObviouslyDistinct-05.rq",// queryFileURL
-                "construct-isObviouslyDistinct-05.trig",// dataFileURL
-                "construct-isObviouslyDistinct-05-result.trig"// resultFileURL
-        ).runTest();
+                "construct-isObviouslyDistinct-05.rq", // queryFileURL
+                "construct-isObviouslyDistinct-05.trig", // dataFileURL
+                "construct-isObviouslyDistinct-05-result.trig" // resultFileURL
+                )
+            .runTest();
 
-        final QueryRoot optimizedQuery = ast.getOptimizedAST();
+    final QueryRoot optimizedQuery = ast.getOptimizedAST();
 
-        assertTrue(ASTConstructIterator.isObviouslyDistinct(store.isQuads(),
-                getConstructTemplates(optimizedQuery),
-                optimizedQuery.getWhereClause()));
-
-    }
-
+    assertTrue(
+        ASTConstructIterator.isObviouslyDistinct(
+            store.isQuads(),
+            getConstructTemplates(optimizedQuery),
+            optimizedQuery.getWhereClause()));
+  }
 }

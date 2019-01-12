@@ -5,20 +5,15 @@
  */
 package org.embergraph.rdf.sail.sparql.ast;
 
-/**
- * @author jeen
- */
+/** @author jeen */
 public abstract class ASTUpdate extends ASTOperation {
 
-	/**
-	 * @param id
-	 */
-	public ASTUpdate(int id) {
-		super(id);
-	}
+  /** @param id */
+  public ASTUpdate(int id) {
+    super(id);
+  }
 
-	public ASTUpdate(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
-
+  public ASTUpdate(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 }

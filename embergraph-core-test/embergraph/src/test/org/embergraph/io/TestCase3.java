@@ -27,310 +27,265 @@ import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
-
 import org.embergraph.journal.TestHelper;
 import org.embergraph.util.BytesUtil;
 
 /**
- * Base class for some <code>assertEquals</code> methods not covered by
- * {@link TestCase} or {@link TestCase2}.
- * 
+ * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+ * TestCase2}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCase3 extends TestCase2 {
 
-    
-    /**
-     * A random number generated - the seed is NOT fixed.
-     */
-    protected Random r;
+  /** A random number generated - the seed is NOT fixed. */
+  protected Random r;
 
-    /**
-     * 
-     */
-    public TestCase3() {
-     
+  /** */
+  public TestCase3() {}
+
+  /** @param name */
+  public TestCase3(final String name) {
+    super(name);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    r = new Random();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    super.tearDown();
+
+    r = null;
+
+    TestHelper.checkJournalsClosed(this);
+  }
+
+  /**
+   * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
+   * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
+   * effects on the position, mark or limit properties of the buffer.
+   *
+   * @param expected Non-null byte[].
+   * @param actual Buffer.
+   */
+  public static void assertEquals(ByteBuffer expectedBuffer, final ByteBuffer actual) {
+
+    if (expectedBuffer == null) throw new IllegalArgumentException();
+
+    if (actual == null) fail("actual is null");
+
+    if (expectedBuffer.hasArray()
+        && expectedBuffer.arrayOffset() == 0
+        && expectedBuffer.position() == 0
+        && expectedBuffer.limit() == expectedBuffer.capacity()) {
+
+      // evaluate byte[] against actual.
+      assertEquals(expectedBuffer.array(), actual);
+
+      return;
     }
 
-    /**
-     * @param name
+    /*
+     * Copy the expected data into a byte[] using a read-only view on the
+     * buffer so that we do not mess with its position, mark, or limit.
      */
-    public TestCase3(final String name) {
-        super(name);
-     
+    final byte[] expected;
+    {
+      expectedBuffer = expectedBuffer.asReadOnlyBuffer();
+
+      final int len = expectedBuffer.remaining();
+
+      expected = new byte[len];
+
+      expectedBuffer.get(expected);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        r = new Random();
+    // evaluate byte[] against actual.
+    assertEquals(expected, actual);
+  }
 
+  /**
+   * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
+   * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
+   * effects on the position, mark or limit properties of the buffer.
+   *
+   * @param expected Non-null byte[].
+   * @param actual Buffer.
+   */
+  public static void assertEquals(final byte[] expected, ByteBuffer actual) {
+
+    if (expected == null) throw new IllegalArgumentException();
+
+    if (actual == null) fail("actual is null");
+
+    if (actual.hasArray()
+        && actual.arrayOffset() == 0
+        && actual.position() == 0
+        && actual.limit() == actual.capacity()) {
+
+      assertEquals(expected, actual.array());
+
+      return;
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-
-        super.tearDown();
-
-        r = null;
-        
-        TestHelper.checkJournalsClosed(this);
-        
-    }
-    
-    /**
-     * Helper method verifies that the contents of <i>actual</i> from
-     * position() to limit() are consistent with the expected byte[]. A
-     * read-only view of <i>actual</i> is used to avoid side effects on the
-     * position, mark or limit properties of the buffer.
-     * 
-     * @param expected
-     *            Non-null byte[].
-     * @param actual
-     *            Buffer.
+    /*
+     * Create a read-only view on the buffer so that we do not mess with its
+     * position, mark, or limit.
      */
-    public static void assertEquals(ByteBuffer expectedBuffer,
-            final ByteBuffer actual) {
+    actual = actual.asReadOnlyBuffer();
 
-        if (expectedBuffer == null)
-            throw new IllegalArgumentException();
+    final int len = actual.remaining();
 
-        if (actual == null)
-            fail("actual is null");
+    final byte[] actual2 = new byte[len];
 
-        if (expectedBuffer.hasArray() && expectedBuffer.arrayOffset() == 0
-                && expectedBuffer.position() == 0
-                && expectedBuffer.limit() == expectedBuffer.capacity()) {
+    actual.get(actual2);
 
-            // evaluate byte[] against actual.
-            assertEquals(expectedBuffer.array(), actual);
+    // compare byte[]s.
+    assertEquals(expected, actual2);
+  }
 
-            return;
+  /** Return the data in the buffer. */
+  public static byte[] getBytes(final ByteBuffer buf) {
 
-        }
-        
-        /*
-         * Copy the expected data into a byte[] using a read-only view on the
-         * buffer so that we do not mess with its position, mark, or limit.
-         */
-        final byte[] expected;
-        {
+    return BytesUtil.getBytes(buf);
+  }
 
-            expectedBuffer = expectedBuffer.asReadOnlyBuffer();
-
-            final int len = expectedBuffer.remaining();
-
-            expected = new byte[len];
-
-            expectedBuffer.get(expected);
-
-        }
-
-        // evaluate byte[] against actual.
-        assertEquals(expected, actual);
-
-    }
-
-    /**
-     * Helper method verifies that the contents of <i>actual</i> from
-     * position() to limit() are consistent with the expected byte[]. A
-     * read-only view of <i>actual</i> is used to avoid side effects on the
-     * position, mark or limit properties of the buffer.
-     * 
-     * @param expected
-     *            Non-null byte[].
-     * @param actual
-     *            Buffer.
-     */
-    public static void assertEquals(final byte[] expected, ByteBuffer actual) {
-
-        if (expected == null)
-            throw new IllegalArgumentException();
-
-        if (actual == null)
-            fail("actual is null");
-
-        if (actual.hasArray() && actual.arrayOffset() == 0
-                && actual.position() == 0
-                && actual.limit() == actual.capacity()) {
-
-            assertEquals(expected, actual.array());
-
-            return;
-
-        }
-
-        /*
-         * Create a read-only view on the buffer so that we do not mess with its
-         * position, mark, or limit.
-         */
-        actual = actual.asReadOnlyBuffer();
-
-        final int len = actual.remaining();
-
-        final byte[] actual2 = new byte[len];
-
-        actual.get(actual2);
-
-        // compare byte[]s.
-        assertEquals(expected, actual2);
-
-    }
-
-	/**
-	 * Return the data in the buffer.
-	 */
-	public static byte[] getBytes(final ByteBuffer buf) {
-
-	    return BytesUtil.getBytes(buf);
-
-	}
-
-    
-    /**
-     * Wait up to a timeout until some condition succeeds.
-     * 
-     * @param cond
-     *            The condition, which must throw an
-     *            {@link AssertionFailedError} if it does not succeed.
-     * @param timeout
-     *            The timeout.
-     * @param unit
-     * 
-     * @throws AssertionFailedError
-     *             if the condition does not succeed within the timeout.
-     */
-    static public void assertCondition(final Runnable cond,
-            final long timeout, final TimeUnit units) {
-        final long begin = System.nanoTime();
-        final long nanos = units.toNanos(timeout);
-        long remaining = nanos;
-        // remaining = nanos - (now - begin) [aka elapsed]
+  /**
+   * Wait up to a timeout until some condition succeeds.
+   *
+   * @param cond The condition, which must throw an {@link AssertionFailedError} if it does not
+   *     succeed.
+   * @param timeout The timeout.
+   * @param unit
+   * @throws AssertionFailedError if the condition does not succeed within the timeout.
+   */
+  public static void assertCondition(
+      final Runnable cond, final long timeout, final TimeUnit units) {
+    final long begin = System.nanoTime();
+    final long nanos = units.toNanos(timeout);
+    long remaining = nanos;
+    // remaining = nanos - (now - begin) [aka elapsed]
+    remaining = nanos - (System.nanoTime() - begin);
+    while (true) {
+      try {
+        // try the condition
+        cond.run();
+        // success.
+        return;
+      } catch (final Throwable e) {
+        //                final boolean interesting =
+        //                InnerCause.isInnerCause(e, AssertionFailedError.class) ||
+        //                        InnerCause.isInnerCause(e, TimeoutException.class);
         remaining = nanos - (System.nanoTime() - begin);
-        while (true) {
-            try {
-                // try the condition
-                cond.run();
-                // success.
-                return;
-            } catch (final Throwable e) {
-//                final boolean interesting =
-//                InnerCause.isInnerCause(e, AssertionFailedError.class) ||
-//                        InnerCause.isInnerCause(e, TimeoutException.class);
-                remaining = nanos - (System.nanoTime() - begin);
-                if (remaining < 0) {
-                    // Timeout - rethrow the failed assertion.
-                    throw new RuntimeException(e);
-                }
-                // Sleep up to 10ms or the remaining nanos, which ever is less.
-                final int millis = (int) Math.min(
-                        TimeUnit.NANOSECONDS.toMillis(remaining), 10);
-                if (millis > 0) {
-                    // sleep and retry.
-                    try {
-                        Thread.sleep(millis);
-                    } catch (InterruptedException e1) {
-                        // propagate the interrupt.
-                        Thread.currentThread().interrupt();
-                        return;
-                    }
-                    remaining = nanos - (System.nanoTime() - begin);
-                    if (remaining < 0) {
-                        // Timeout - rethrow the failed assertion.
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
+        if (remaining < 0) {
+          // Timeout - rethrow the failed assertion.
+          throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * Waits up to 5 seconds for the condition to succeed.
-     * 
-     * @param cond
-     *            The condition, which must throw an
-     *            {@link AssertionFailedError} if it does not succeed.
-     * 
-     * @throws AssertionFailedError
-     *             if the condition does not succeed within the timeout.
-     * 
-     * @see #assertCondition(Runnable, long, TimeUnit)
-     */
-    static public void assertCondition(final Runnable cond) {
-        
-        assertCondition(cond, 5, TimeUnit.SECONDS);
-        
-    }
-
-    /**
-     * Returns random data that will fit in <i>nbytes</i>.
-     * 
-     * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code>
-     *         having random contents.
-     */
-    protected ByteBuffer getRandomData(final int nbytes) {
-
-        final byte[] bytes = new byte[nbytes];
-
-        r.nextBytes(bytes);
-
-        return ByteBuffer.wrap(bytes);
-
-    }
-
-    /**
-     * Returns random data that will fit in <i>nbytes</i>.
-     * 
-     * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code>
-     *         having random contents.
-     */
-    protected ByteBuffer getRandomData(final ByteBuffer b, final int nbytes) {
-
-        final byte[] a = new byte[nbytes];
-
-        r.nextBytes(a);
-        
-        b.limit(nbytes);
-        b.position(0);
-        b.put(a);
-        
-        b.flip();
-        
-        return b;
-
-    }
-
-    /**
-     * Return an open port on current machine. Try the suggested port first. If
-     * suggestedPort is zero, just select a random port
-     */
-    protected static int getPort(int suggestedPort) throws IOException {
-
-        ServerSocket openSocket;
-        try {
-            openSocket = new ServerSocket(suggestedPort);
-        } catch (BindException ex) {
-            // the port is busy, so look for a random open port
-            openSocket = new ServerSocket(0);
+        // Sleep up to 10ms or the remaining nanos, which ever is less.
+        final int millis = (int) Math.min(TimeUnit.NANOSECONDS.toMillis(remaining), 10);
+        if (millis > 0) {
+          // sleep and retry.
+          try {
+            Thread.sleep(millis);
+          } catch (InterruptedException e1) {
+            // propagate the interrupt.
+            Thread.currentThread().interrupt();
+            return;
+          }
+          remaining = nanos - (System.nanoTime() - begin);
+          if (remaining < 0) {
+            // Timeout - rethrow the failed assertion.
+            throw new RuntimeException(e);
+          }
         }
+      }
+    }
+  }
 
-        final int port = openSocket.getLocalPort();
+  /**
+   * Waits up to 5 seconds for the condition to succeed.
+   *
+   * @param cond The condition, which must throw an {@link AssertionFailedError} if it does not
+   *     succeed.
+   * @throws AssertionFailedError if the condition does not succeed within the timeout.
+   * @see #assertCondition(Runnable, long, TimeUnit)
+   */
+  public static void assertCondition(final Runnable cond) {
 
-        openSocket.close();
+    assertCondition(cond, 5, TimeUnit.SECONDS);
+  }
 
-        if (suggestedPort != 0 && port != suggestedPort) {
+  /**
+   * Returns random data that will fit in <i>nbytes</i>.
+   *
+   * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
+   */
+  protected ByteBuffer getRandomData(final int nbytes) {
 
-            log.warn("suggestedPort is busy: suggestedPort=" + suggestedPort + ", using port=" + port + " instead");
+    final byte[] bytes = new byte[nbytes];
 
-        }
+    r.nextBytes(bytes);
 
-        return port;
+    return ByteBuffer.wrap(bytes);
+  }
 
+  /**
+   * Returns random data that will fit in <i>nbytes</i>.
+   *
+   * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
+   */
+  protected ByteBuffer getRandomData(final ByteBuffer b, final int nbytes) {
+
+    final byte[] a = new byte[nbytes];
+
+    r.nextBytes(a);
+
+    b.limit(nbytes);
+    b.position(0);
+    b.put(a);
+
+    b.flip();
+
+    return b;
+  }
+
+  /**
+   * Return an open port on current machine. Try the suggested port first. If suggestedPort is zero,
+   * just select a random port
+   */
+  protected static int getPort(int suggestedPort) throws IOException {
+
+    ServerSocket openSocket;
+    try {
+      openSocket = new ServerSocket(suggestedPort);
+    } catch (BindException ex) {
+      // the port is busy, so look for a random open port
+      openSocket = new ServerSocket(0);
     }
 
+    final int port = openSocket.getLocalPort();
+
+    openSocket.close();
+
+    if (suggestedPort != 0 && port != suggestedPort) {
+
+      log.warn(
+          "suggestedPort is busy: suggestedPort="
+              + suggestedPort
+              + ", using port="
+              + port
+              + " instead");
+    }
+
+    return port;
+  }
 }

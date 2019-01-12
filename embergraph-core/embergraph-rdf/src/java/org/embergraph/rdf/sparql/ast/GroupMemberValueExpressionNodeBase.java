@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IValueExpression;
@@ -37,83 +36,69 @@ import org.embergraph.rdf.internal.IV;
  * @version $Id$
  */
 @SuppressWarnings("rawtypes")
-public abstract class GroupMemberValueExpressionNodeBase extends
-        GroupMemberNodeBase implements IValueExpressionMetadata {
+public abstract class GroupMemberValueExpressionNodeBase extends GroupMemberNodeBase
+    implements IValueExpressionMetadata {
 
-//    interface Annotations extends GroupMemberNodeBase.Annotations {
-//        
-//        String VALUE_EXPR = "valueExpr";
-//        
-//    }
+  //    interface Annotations extends GroupMemberNodeBase.Annotations {
+  //
+  //        String VALUE_EXPR = "valueExpr";
+  //
+  //    }
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public GroupMemberValueExpressionNodeBase() {
+  public GroupMemberValueExpressionNodeBase() {}
+
+  public GroupMemberValueExpressionNodeBase(BOp[] args, Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  public GroupMemberValueExpressionNodeBase(GroupMemberValueExpressionNodeBase op) {
+
+    super(op);
+  }
+
+  public abstract IValueExpressionNode getValueExpressionNode();
+
+  abstract IValueExpression<? extends IV> getValueExpression();
+
+  /**
+   * Return the {@link IValueExpression}.
+   *
+   * @return The {@link IValueExpression} and never <code>null</code>.
+   * @throws IllegalStateException if the {@link IValueExpression} is not set on this node.
+   */
+  public final IValueExpression<? extends IV> getRequiredValueExpression() {
+
+    final IValueExpression<? extends IV> valueExpr = getValueExpression();
+
+    if (valueExpr == null) throw new IllegalStateException("ValueExpression not set: " + this);
+
+    return valueExpr;
+  }
+
+  @Override
+  public Set<IVariable<?>> getConsumedVars() {
+
+    final Set<IVariable<?>> consumedVars = new LinkedHashSet<IVariable<?>>();
+
+    // collect variables from required value expression
+    final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables(getRequiredValueExpression());
+
+    while (it.hasNext()) {
+      consumedVars.add(it.next());
     }
 
-    public GroupMemberValueExpressionNodeBase(BOp[] args,
-            Map<String, Object> anns) {
+    return consumedVars;
+  }
 
-        super(args, anns);
+  @Override
+  public ComputedMaterializationRequirement getMaterializationRequirement() {
 
-    }
+    final IValueExpression<?> ve = getRequiredValueExpression();
 
-    public GroupMemberValueExpressionNodeBase(
-            GroupMemberValueExpressionNodeBase op) {
-
-        super(op);
-
-    }
-
-    abstract public IValueExpressionNode getValueExpressionNode();
-
-    abstract IValueExpression<? extends IV> getValueExpression();
-
-    /**
-     * Return the {@link IValueExpression}.
-     * 
-     * @return The {@link IValueExpression} and never <code>null</code>.
-     * 
-     * @throws IllegalStateException
-     *             if the {@link IValueExpression} is not set on this node.
-     */
-    public final IValueExpression<? extends IV> getRequiredValueExpression() {
-        
-        final IValueExpression<? extends IV> valueExpr = getValueExpression();
-
-        if (valueExpr == null)
-            throw new IllegalStateException("ValueExpression not set: " + this);
-
-        return valueExpr;
-        
-    }
-
-    @Override
-    public Set<IVariable<?>> getConsumedVars() {
-
-       final Set<IVariable<?>> consumedVars = new LinkedHashSet<IVariable<?>>();
-
-       // collect variables from required value expression
-       final Iterator<IVariable<?>> it = 
-          BOpUtility.getSpannedVariables(getRequiredValueExpression());
-
-       while (it.hasNext()) {
-          consumedVars.add(it.next());
-      }
-       
-       return consumedVars;
-    }
-
-    @Override
-    public ComputedMaterializationRequirement getMaterializationRequirement() {
-
-        final IValueExpression<?> ve = getRequiredValueExpression();
-
-        return new ComputedMaterializationRequirement(ve);
-
-    }
-
+    return new ComputedMaterializationRequirement(ve);
+  }
 }

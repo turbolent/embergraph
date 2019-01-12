@@ -25,7 +25,6 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.embergraph.journal.AbstractIndexManagerTestCase;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.TestEDS;
@@ -37,81 +36,71 @@ import org.embergraph.service.TestJournal;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        super();
-    }
+  /** */
+  public TestAll() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    public static Test suite()
-    {
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("Full Text Index and Search");
+    final TestSuite suite = new TestSuite("Full Text Index and Search");
 
-        // @todo test other facets of search that do not interact with persistence.
-        
-        // search backed by a Journal.
-        suite.addTest(proxySuite(new TestJournal("Journal Search"),"Journal"));
+    // @todo test other facets of search that do not interact with persistence.
 
-//        // search backed by LDS.
-//        suite.addTest(proxySuite(new TestLDS("LDS Search"),"LDS"));
+    // search backed by a Journal.
+    suite.addTest(proxySuite(new TestJournal("Journal Search"), "Journal"));
 
-        // search backed by EDS.
-        suite.addTest(proxySuite(new TestEDS("EDS Search"),"EDS"));
-        
-        suite.addTestSuite(TestLanguageRange.class);
+    //        // search backed by LDS.
+    //        suite.addTest(proxySuite(new TestLDS("LDS Search"),"LDS"));
 
-        return suite;
+    // search backed by EDS.
+    suite.addTest(proxySuite(new TestEDS("EDS Search"), "EDS"));
 
-    }
+    suite.addTestSuite(TestLanguageRange.class);
 
-    /**
-     * Create and populate a {@link ProxyTestSuite} with the unit tests that we
-     * will run against any of the {@link IIndexManager} implementations.
-     * 
-     * @param delegate
-     *            The delegate for the proxied unit tests.
-     * @param name
-     *            The name of the test suite.
-     * @return The {@link ProxyTestSuite} populated with the unit tests.
-     */
-    protected static ProxyTestSuite proxySuite(
-            final AbstractIndexManagerTestCase<? extends IIndexManager> delegate,
-            final String name) {
+    return suite;
+  }
 
-        final ProxyTestSuite suite = new ProxyTestSuite(delegate, name);
+  /**
+   * Create and populate a {@link ProxyTestSuite} with the unit tests that we will run against any
+   * of the {@link IIndexManager} implementations.
+   *
+   * @param delegate The delegate for the proxied unit tests.
+   * @param name The name of the test suite.
+   * @return The {@link ProxyTestSuite} populated with the unit tests.
+   */
+  protected static ProxyTestSuite proxySuite(
+      final AbstractIndexManagerTestCase<? extends IIndexManager> delegate, final String name) {
 
-        // test key formation
-        suite.addTestSuite(TestKeyBuilder.class);
- 
-        // test of search correctness, focusing on cosine computations.
-        suite.addTestSuite(TestSearch.class);
-        
-        // test of prefix search
-        suite.addTestSuite(TestPrefixSearch.class);
-        
-        // test verifies search index is restart safe.
-        suite.addTestSuite(TestSearchRestartSafe.class);
-        
-        // Check behavior of DefaultAnalyzerFactory, see also trac 915
-        suite.addTestSuite(TestDefaultAnalyzerFactory.class);
-        
-        // Check default behavior of ConfigurableAnalyzerFactory
-        // which is intended to be the same as the intended
-        // behavior of DefaultAnalyzerFactory
-        suite.addTestSuite(TestConfigurableAsDefaultAnalyzerFactory.class);
-        suite.addTestSuite(TestConfigurableAnalyzerFactory.class);
-        suite.addTestSuite(TestUnconfiguredAnalyzerFactory.class);
+    final ProxyTestSuite suite = new ProxyTestSuite(delegate, name);
 
-        return suite;
-    }
-    
+    // test key formation
+    suite.addTestSuite(TestKeyBuilder.class);
+
+    // test of search correctness, focusing on cosine computations.
+    suite.addTestSuite(TestSearch.class);
+
+    // test of prefix search
+    suite.addTestSuite(TestPrefixSearch.class);
+
+    // test verifies search index is restart safe.
+    suite.addTestSuite(TestSearchRestartSafe.class);
+
+    // Check behavior of DefaultAnalyzerFactory, see also trac 915
+    suite.addTestSuite(TestDefaultAnalyzerFactory.class);
+
+    // Check default behavior of ConfigurableAnalyzerFactory
+    // which is intended to be the same as the intended
+    // behavior of DefaultAnalyzerFactory
+    suite.addTestSuite(TestConfigurableAsDefaultAnalyzerFactory.class);
+    suite.addTestSuite(TestConfigurableAnalyzerFactory.class);
+    suite.addTestSuite(TestUnconfiguredAnalyzerFactory.class);
+
+    return suite;
+  }
 }

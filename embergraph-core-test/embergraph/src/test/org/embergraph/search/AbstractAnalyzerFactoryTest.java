@@ -22,19 +22,17 @@ package org.embergraph.search;
 
 public abstract class AbstractAnalyzerFactoryTest extends AbstractSearchTest {
 
-	public AbstractAnalyzerFactoryTest() {
-	}
+  public AbstractAnalyzerFactoryTest() {}
 
-	public AbstractAnalyzerFactoryTest(String arg0) {
-		super(arg0);
-	}
+  public AbstractAnalyzerFactoryTest(String arg0) {
+    super(arg0);
+  }
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		init(getExtraProperties());
-	}
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    init(getExtraProperties());
+  }
 
-	abstract String[] getExtraProperties();
-
+  abstract String[] getExtraProperties();
 }

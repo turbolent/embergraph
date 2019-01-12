@@ -27,125 +27,126 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /**
- * Default implementation of {@link IGeoSpatialLiteralSerializer}, translating
- * literals of the form F1#F2#...#Fn to a component string of length n and back.
- * 
+ * Default implementation of {@link IGeoSpatialLiteralSerializer}, translating literals of the form
+ * F1#F2#...#Fn to a component string of length n and back.
+ *
  * @author msc
  */
 public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSerializer {
 
-    private static final long serialVersionUID = 1L;
-    
-    private static final String COMPONENT_SEPARATOR = "#";
-    
-    @Override
-    public String[] toComponents(String literalString) {
-        if (literalString==null) {
-            return new String[0];
-        }
-        
-        return literalString.split(COMPONENT_SEPARATOR);
+  private static final long serialVersionUID = 1L;
+
+  private static final String COMPONENT_SEPARATOR = "#";
+
+  @Override
+  public String[] toComponents(String literalString) {
+    if (literalString == null) {
+      return new String[0];
     }
 
-    @Override
-    public String fromComponents(Object[] components) {
-        
-        if (components==null)
-            return "";
-        
-        final StringBuffer buf = new StringBuffer();
-        for (int i=0; i<components.length; i++) {
-           
-           if (i>0)
-              buf.append(COMPONENT_SEPARATOR);
-           
-           buf.append(components[i]);
-           
-        }
-        
-        return buf.toString();
+    return literalString.split(COMPONENT_SEPARATOR);
+  }
+
+  @Override
+  public String fromComponents(Object[] components) {
+
+    if (components == null) return "";
+
+    final StringBuffer buf = new StringBuffer();
+    for (int i = 0; i < components.length; i++) {
+
+      if (i > 0) buf.append(COMPONENT_SEPARATOR);
+
+      buf.append(components[i]);
     }
 
-    @Override
-    public IV<?,?> serializeLocation(
-        final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
+    return buf.toString();
+  }
 
-        return toSeparatedString(vf, latitude, longitude);
+  @Override
+  public IV<?, ?> serializeLocation(
+      final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
+
+    return toSeparatedString(vf, latitude, longitude);
+  }
+
+  @Override
+  public IV<?, ?> serializeLocationAndTime(
+      final EmbergraphValueFactory vf,
+      final Object latitude,
+      final Object longitude,
+      final Object time) {
+
+    return toSeparatedString(vf, latitude, longitude, time);
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  public IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
+    return new XSDNumericIV((Long) time);
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  public IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
+
+    if (latitude instanceof Double) {
+      return new XSDNumericIV((Double) latitude);
+    } else if (latitude instanceof Long) {
+      return new XSDNumericIV(((Long) latitude).doubleValue());
+    } else {
+      throw new GeoSpatialSearchException("Latitude value expected to be either Double or Long");
+    }
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  public IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
+
+    if (longitude instanceof Double) {
+      return new XSDNumericIV((Double) longitude);
+    } else if (longitude instanceof Long) {
+      return new XSDNumericIV(((Long) longitude).doubleValue());
+    } else {
+      throw new GeoSpatialSearchException("Longitude value expected to be either Double or Long");
+    }
+  }
+
+  @Override
+  public IV<?, ?> serializeCoordSystem(
+      final EmbergraphValueFactory vf, final Object coordinateSystem) {
+    return toSeparatedString(vf, coordinateSystem);
+  }
+
+  @Override
+  public IV<?, ?> serializeCustomFields(
+      final EmbergraphValueFactory vf, final Object... customFields) {
+    return toSeparatedString(vf, customFields);
+  }
+
+  @Override
+  @SuppressWarnings("rawtypes")
+  public IV<?, ?> serializeDistance(
+      final EmbergraphValueFactory vf, final Double distance, final UNITS unit) {
+
+    return new XSDNumericIV(Math.round(distance * 100) / 100.0);
+  }
+
+  /**
+   * Converts the input passed via args into string using its toString() method, separating the
+   * components via {GeoSpatial#CUSTOM_FIELDS_SEPARATOR}.
+   */
+  protected IV<?, ?> toSeparatedString(final EmbergraphValueFactory vf, final Object... args) {
+
+    final StringBuffer buf = new StringBuffer();
+
+    for (int i = 0; i < args.length; i++) {
+
+      if (i > 0) buf.append(GeoSpatial.CUSTOM_FIELDS_SEPARATOR);
+
+      buf.append(args[i].toString());
     }
 
-    @Override
-    public IV<?,?> serializeLocationAndTime(
-        final EmbergraphValueFactory vf, final Object latitude,
-        final Object longitude, final Object time) {
-
-        return toSeparatedString(vf, latitude, longitude, time);
-    }
-
-    @Override
-    @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
-        return new XSDNumericIV((Long)time);
-    }
-
-    @Override
-    @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
-        
-        if (latitude instanceof Double) {
-            return new XSDNumericIV((Double)latitude);
-        } else if (latitude instanceof Long) {
-            return new XSDNumericIV(((Long)latitude).doubleValue());            
-        } else {
-            throw new GeoSpatialSearchException("Latitude value expected to be either Double or Long");
-        }
-    }
-
-    @Override
-    @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
-        
-        if (longitude instanceof Double) {
-            return new XSDNumericIV((Double)longitude);
-        } else if (longitude instanceof Long) {
-            return new XSDNumericIV(((Long)longitude).doubleValue());            
-        } else {
-            throw new GeoSpatialSearchException("Longitude value expected to be either Double or Long");
-        }
-    }
-
-    @Override
-    public IV<?,?> serializeCoordSystem(final EmbergraphValueFactory vf, final Object coordinateSystem) {
-        return toSeparatedString(vf, coordinateSystem);
-    }
-
-    @Override
-    public IV<?,?> serializeCustomFields(final EmbergraphValueFactory vf, final Object... customFields) {
-        return toSeparatedString(vf, customFields);
-    }
-    
-    @Override
-    @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeDistance(final EmbergraphValueFactory vf, final Double distance, final UNITS unit) {
-        
-        return new XSDNumericIV(Math.round(distance*100)/100.0);
-    }
-    
-    /**
-     * Converts the input passed via args into string using its toString() method, 
-     * separating the components via {GeoSpatial#CUSTOM_FIELDS_SEPARATOR}.
-     */
-    protected IV<?,?> toSeparatedString(final EmbergraphValueFactory vf, final Object... args) {
-      
-        final StringBuffer buf = new StringBuffer();
-        
-        for (int i=0; i<args.length; i++) {
-               
-            if (i>0)
-                buf.append(GeoSpatial.CUSTOM_FIELDS_SEPARATOR);
-               
-            buf.append(args[i].toString());
-        }
-        
-        return  DummyConstantNode.toDummyIV(vf.createLiteral(buf.toString()));
-    }
+    return DummyConstantNode.toDummyIV(vf.createLiteral(buf.toString()));
+  }
 }

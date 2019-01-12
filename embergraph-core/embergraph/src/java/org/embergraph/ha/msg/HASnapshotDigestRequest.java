@@ -19,31 +19,26 @@ package org.embergraph.ha.msg;
 
 import java.io.Serializable;
 
-public class HASnapshotDigestRequest implements IHASnapshotDigestRequest,
-        Serializable {
+public class HASnapshotDigestRequest implements IHASnapshotDigestRequest, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final long commitCounter;
-    
-    public HASnapshotDigestRequest(final long commitCounter) {
+  private final long commitCounter;
 
-        this.commitCounter = commitCounter;
-        
-    }
-    
-    @Override
-    public long getCommitCounter() {
-        
-        return commitCounter;
-        
-    }
+  public HASnapshotDigestRequest(final long commitCounter) {
 
-    @Override
-    public String toString() {
+    this.commitCounter = commitCounter;
+  }
 
-        return super.toString() + "{commitCounter=" + getCommitCounter() + "}";
+  @Override
+  public long getCommitCounter() {
 
-    }
-    
+    return commitCounter;
+  }
+
+  @Override
+  public String toString() {
+
+    return super.toString() + "{commitCounter=" + getCommitCounter() + "}";
+  }
 }

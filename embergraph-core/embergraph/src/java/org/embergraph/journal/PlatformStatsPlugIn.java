@@ -18,136 +18,115 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.ICounterSet;
 
 /**
  * {@link IPlugin} for collecting statistics from the operating system.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PlatformStatsPlugIn implements IPlugIn<Journal, AbstractStatisticsCollector> {
 
-    private static final Logger log = Logger.getLogger(PlatformStatsPlugIn.class);
+  private static final Logger log = Logger.getLogger(PlatformStatsPlugIn.class);
 
-    public interface Options extends AbstractStatisticsCollector.Options {
-        
-        /**
-         * Boolean option for the collection of statistics from the underlying
-         * operating system (default
-         * {@value #DEFAULT_COLLECT_PLATFORM_STATISTICS}).
-         * 
-         * @see AbstractStatisticsCollector#newInstance(Properties)
-         */
-        String COLLECT_PLATFORM_STATISTICS = Journal.class.getName()
-                + ".collectPlatformStatistics";
-
-        String DEFAULT_COLLECT_PLATFORM_STATISTICS = "false"; 
-
-    }
-    
-    /**
-     * Collects interesting statistics on the host and process.
-     * 
-     * @see Options#COLLECT_PLATFORM_STATISTICS
-     */
-    private AbstractStatisticsCollector platformStatisticsCollector = null;
+  public interface Options extends AbstractStatisticsCollector.Options {
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * Start collecting performance counters from the OS (if enabled).
+     * Boolean option for the collection of statistics from the underlying operating system (default
+     * {@value #DEFAULT_COLLECT_PLATFORM_STATISTICS}).
+     *
+     * @see AbstractStatisticsCollector#newInstance(Properties)
      */
-    @Override
-    public void startService(final Journal indexManager) {
-        
-        final boolean collectPlatformStatistics = Boolean
-                .valueOf(indexManager.getProperty(Options.COLLECT_PLATFORM_STATISTICS,
-                        Options.DEFAULT_COLLECT_PLATFORM_STATISTICS));
+    String COLLECT_PLATFORM_STATISTICS = Journal.class.getName() + ".collectPlatformStatistics";
 
-        if (log.isInfoEnabled())
-            log.info(Options.COLLECT_PLATFORM_STATISTICS + "="
-                    + collectPlatformStatistics);
+    String DEFAULT_COLLECT_PLATFORM_STATISTICS = "false";
+  }
 
-        if (!collectPlatformStatistics) {
+  /**
+   * Collects interesting statistics on the host and process.
+   *
+   * @see Options#COLLECT_PLATFORM_STATISTICS
+   */
+  private AbstractStatisticsCollector platformStatisticsCollector = null;
 
-            return;
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Start collecting performance counters from the OS (if enabled).
+   */
+  @Override
+  public void startService(final Journal indexManager) {
 
-        }
+    final boolean collectPlatformStatistics =
+        Boolean.valueOf(
+            indexManager.getProperty(
+                Options.COLLECT_PLATFORM_STATISTICS, Options.DEFAULT_COLLECT_PLATFORM_STATISTICS));
 
-        final Properties p = indexManager.getProperties();
+    if (log.isInfoEnabled())
+      log.info(Options.COLLECT_PLATFORM_STATISTICS + "=" + collectPlatformStatistics);
 
-        if (p.getProperty(AbstractStatisticsCollector.Options.PROCESS_NAME) == null) {
+    if (!collectPlatformStatistics) {
 
-            // Set default name for this process.
-            p.setProperty(AbstractStatisticsCollector.Options.PROCESS_NAME,
-                    "service" + ICounterSet.pathSeparator
-                            + Journal.class.getName());
-
-        }
-
-        try {
-
-            final AbstractStatisticsCollector tmp = AbstractStatisticsCollector
-                    .newInstance(p);
-
-            tmp.start();
-
-            synchronized(this) {
-                
-                platformStatisticsCollector = tmp;
-                
-            }
-            
-            if (log.isInfoEnabled())
-                log.info("Collecting platform statistics.");
-
-        } catch (Throwable t) {
-
-            log.error(t, t);
-            
-        }
-   
+      return;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * NOP - Collection is on the JVM and the OS. If it is shutdown with each
-     * {@link Journal} shutdown, then collection would wind up disabled with the
-     * first {@link Journal} shutdown even if there is more than one open
-     * {@link Journal}.
-     */
-    @Override
-    public void stopService(boolean immediateShutdown) {
+    final Properties p = indexManager.getProperties();
 
-        // NOP
-        
+    if (p.getProperty(AbstractStatisticsCollector.Options.PROCESS_NAME) == null) {
+
+      // Set default name for this process.
+      p.setProperty(
+          AbstractStatisticsCollector.Options.PROCESS_NAME,
+          "service" + ICounterSet.pathSeparator + Journal.class.getName());
     }
 
-    @Override
-    public AbstractStatisticsCollector getService() {
+    try {
 
-        synchronized(this) {
+      final AbstractStatisticsCollector tmp = AbstractStatisticsCollector.newInstance(p);
 
-            return platformStatisticsCollector;
-            
-        }
-        
+      tmp.start();
+
+      synchronized (this) {
+        platformStatisticsCollector = tmp;
+      }
+
+      if (log.isInfoEnabled()) log.info("Collecting platform statistics.");
+
+    } catch (Throwable t) {
+
+      log.error(t, t);
     }
+  }
 
-    @Override
-    public boolean isRunning() {
+  /**
+   * {@inheritDoc}
+   *
+   * <p>NOP - Collection is on the JVM and the OS. If it is shutdown with each {@link Journal}
+   * shutdown, then collection would wind up disabled with the first {@link Journal} shutdown even
+   * if there is more than one open {@link Journal}.
+   */
+  @Override
+  public void stopService(boolean immediateShutdown) {
 
-        synchronized(this) {
+    // NOP
 
-            return platformStatisticsCollector != null;
-            
-        }
+  }
 
+  @Override
+  public AbstractStatisticsCollector getService() {
+
+    synchronized (this) {
+      return platformStatisticsCollector;
     }
+  }
 
+  @Override
+  public boolean isRunning() {
+
+    synchronized (this) {
+      return platformStatisticsCollector != null;
+    }
+  }
 }

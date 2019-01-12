@@ -17,9 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.util;
 
-import org.embergraph.bop.joinGraph.TestPartitionedJoinGroup_canJoin;
-import org.embergraph.bop.joinGraph.TestPartitionedJoinGroup_canJoinUsingConstraints;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -32,39 +29,26 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+    super(arg0);
+  }
 
-        final TestSuite suite = new TestSuite("bop utils");
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        // counting variables, etc.
-        suite.addTestSuite(TestBOpUtility.class);
+    final TestSuite suite = new TestSuite("bop utils");
 
-        // unit tests for shared variables.
-        suite.addTestSuite(TestBOpUtility_sharedVariables.class);
+    // counting variables, etc.
+    suite.addTestSuite(TestBOpUtility.class);
 
-        return suite;
-        
-    }
-    
+    // unit tests for shared variables.
+    suite.addTestSuite(TestBOpUtility_sharedVariables.class);
+
+    return suite;
+  }
 }

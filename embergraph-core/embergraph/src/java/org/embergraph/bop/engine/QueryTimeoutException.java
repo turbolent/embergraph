@@ -25,28 +25,20 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * Exception thrown if a query is halted due to a timeout.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QueryTimeoutException extends TimeoutException {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public QueryTimeoutException() {
-    }
+  /** */
+  public QueryTimeoutException() {}
 
-    /**
-     * @param message
-     */
-    public QueryTimeoutException(String message) {
-        super(message);
-    }
-
+  /** @param message */
+  public QueryTimeoutException(String message) {
+    super(message);
+  }
 }

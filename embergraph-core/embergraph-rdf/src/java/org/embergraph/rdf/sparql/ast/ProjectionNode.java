@@ -21,440 +21,363 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.Bind;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
-import java.util.HashSet;
 
 /**
  * AST node modeling projected value expressions.
- * <p>
- * Note: "*" is modeled using an explicit variable whose name is <code>*</code>.
- * 
+ *
+ * <p>Note: "*" is modeled using an explicit variable whose name is <code>*</code>.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    interface Annotations extends ValueExpressionListBaseNode.Annotations {
-    
-        /**
-         * {@link Boolean} value annotation marks projection of the "distinct"
-         * solutions.
-         */
-        String DISTINCT = "distinct";
+  interface Annotations extends ValueExpressionListBaseNode.Annotations {
 
-        boolean DEFAULT_DISTINCT = false;
+    /** {@link Boolean} value annotation marks projection of the "distinct" solutions. */
+    String DISTINCT = "distinct";
 
-        /**
-         * {@link Boolean} value annotation marks projection of the "reduced"
-         * solutions.
-         */
-        String REDUCED = "reduced";
+    boolean DEFAULT_DISTINCT = false;
 
-        boolean DEFAULT_REDUCED = false;
-        
-        /**
-         * Optional annotation specifies the {@link DescribeModeEnum} that will
-         * be used to evaluate a DESCRIBE query. The default is controlled by
-         * {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
-         * 
-         * @see QueryHints#DESCRIBE_MODE
-         */
-        String DESCRIBE_MODE = "describeMode";
+    /** {@link Boolean} value annotation marks projection of the "reduced" solutions. */
+    String REDUCED = "reduced";
 
-        /**
-         * Optional annotation specifies the limit on the #of iterations for an
-         * iterative DESCRIBE algorithm.
-         * 
-         * @see QueryHints#DESCRIBE_ITERATION_LIMIT
-         */
-        String DESCRIBE_ITERATION_LIMIT = "describeIterationLimit";
-        
-        /**
-         * Optional annotation specifies the limit on the #of statements for an
-         * iterative DESCRIBE algorithm.
-         * 
-         * @see QueryHints#DESCRIBE_STATEMENT_LIMIT
-         */
-        String DESCRIBE_STATEMENT_LIMIT = "describeStatementLimit";
-        
-        /** "Black list" for variables that should not be treated as projection
-         * variables, eg, auxiliary aliases introduced for flattening aggregates.
-         * Essentially, the blacklisted variables won't show in 
-         * getProjectionVars().
-         */
-        String VARS_TO_EXCLUDE_FROM_PROJECTION = "varsToExcludeFromProjection";
-        
-        Set<IVariable<?>> DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION = null;
-    }
-
-    public ProjectionNode() {
-
-    }
+    boolean DEFAULT_REDUCED = false;
 
     /**
-     * Deep copy constructor.
+     * Optional annotation specifies the {@link DescribeModeEnum} that will be used to evaluate a
+     * DESCRIBE query. The default is controlled by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
+     *
+     * @see QueryHints#DESCRIBE_MODE
      */
-    public ProjectionNode(final ProjectionNode op) {
-
-        super(op);
-
-    }
+    String DESCRIBE_MODE = "describeMode";
 
     /**
-     * Shallow copy constructor.
+     * Optional annotation specifies the limit on the #of iterations for an iterative DESCRIBE
+     * algorithm.
+     *
+     * @see QueryHints#DESCRIBE_ITERATION_LIMIT
      */
-    public ProjectionNode(final BOp[] args, final Map<String, Object> anns) {
-
-        super(args, anns);
-
-    }
-    
-    public void setDistinct(final boolean distinct) {
-
-        setProperty(Annotations.DISTINCT, distinct);
-
-    }
-
-    public boolean isDistinct() {
-
-        return getProperty(Annotations.DISTINCT, Annotations.DEFAULT_DISTINCT);
-
-    }
-
-    public void setReduced(final boolean reduced) {
-
-        setProperty(Annotations.REDUCED, reduced);
-
-    }
-
-    public boolean isReduced() {
-
-        return getProperty(Annotations.REDUCED, Annotations.DEFAULT_REDUCED);
-
-    }
-
-    public boolean isWildcard() {
-
-        if (isEmpty())
-            return false;
-
-        return getExpr(0).getVar().isWildcard();
-
-    }
+    String DESCRIBE_ITERATION_LIMIT = "describeIterationLimit";
 
     /**
-     * Return the {@link DescribeModeEnum} that will be used to evaluate a
-     * DESCRIBE query.
-     * <p>
-     * Note: The default is governed by
-     * {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
-     * 
-     * @return The {@link DescribeModeEnum} or <code>null</code> if this has not
-     *         been explicitly specified.
+     * Optional annotation specifies the limit on the #of statements for an iterative DESCRIBE
+     * algorithm.
+     *
+     * @see QueryHints#DESCRIBE_STATEMENT_LIMIT
      */
-    public DescribeModeEnum getDescribeMode() {
-        
-        return (DescribeModeEnum) getProperty(Annotations.DESCRIBE_MODE);
-        
-    }
+    String DESCRIBE_STATEMENT_LIMIT = "describeStatementLimit";
 
     /**
-     * Set the {@link DescribeModeEnum} that will be used to evaluate a DESCRIBE
-     * query.
-     * <p>
-     * Note: The default is governed by
-     * {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
-     * 
-     * @param describeMode
-     *            The {@link DescribeModeEnum} or <code>null</code> to use the
-     *            default.
-     *            
-     * @see Annotations#DESCRIBE_MODE
+     * "Black list" for variables that should not be treated as projection variables, eg, auxiliary
+     * aliases introduced for flattening aggregates. Essentially, the blacklisted variables won't
+     * show in getProjectionVars().
      */
-    public void setDescribeMode(final DescribeModeEnum describeMode) {
+    String VARS_TO_EXCLUDE_FROM_PROJECTION = "varsToExcludeFromProjection";
 
-        setProperty(Annotations.DESCRIBE_MODE, describeMode);
+    Set<IVariable<?>> DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION = null;
+  }
 
-    }
-    
-    /**
-     * Return the optional limit on the #of iterations for a DESCRIBE query.
-     * 
-     * @return The limit -or- <code>null</code>.
-     * 
-     * @see Annotations#DESCRIBE_ITERATION_LIMIT
-     */
-    public Integer getDescribeIterationLimit() {
+  public ProjectionNode() {}
 
-        return (Integer) getProperty(Annotations.DESCRIBE_ITERATION_LIMIT);
+  /** Deep copy constructor. */
+  public ProjectionNode(final ProjectionNode op) {
 
-    }
+    super(op);
+  }
 
-    /**
-     * Return the optional limit on the #of statements for a DESCRIBE query.
-     * 
-     * @return The limit -or- <code>null</code>.
-     * 
-     * @see Annotations#DESCRIBE_STATEMENT_LIMIT
-     */
-    public Integer getDescribeStatementLimit() {
-        
-        return (Integer) getProperty(Annotations.DESCRIBE_STATEMENT_LIMIT);
-        
-    }
+  /** Shallow copy constructor. */
+  public ProjectionNode(final BOp[] args, final Map<String, Object> anns) {
 
-    /**
-     * Set the optional limit on the #of iterations for a DESCRIBE query.
-     */
-    public void setDescribeIterationLimit(final int newValue) {
+    super(args, anns);
+  }
 
-        setProperty(Annotations.DESCRIBE_ITERATION_LIMIT, newValue);
+  public void setDistinct(final boolean distinct) {
 
-    }
+    setProperty(Annotations.DISTINCT, distinct);
+  }
 
-    /**
-     * Set the optional limit on the #of statements for a DESCRIBE query.
-     */
-    public void setDescribeStatementLimit(final int newValue) {
+  public boolean isDistinct() {
 
-        setProperty(Annotations.DESCRIBE_STATEMENT_LIMIT, newValue);
+    return getProperty(Annotations.DISTINCT, Annotations.DEFAULT_DISTINCT);
+  }
 
-    }
+  public void setReduced(final boolean reduced) {
 
-    /**
-     * Adds a variable to be projected. The variable is modeled as an assignment
-     * of itself to itself, so everything in the projection node winds up
-     * looking like an assignment.
-     * 
-     * @param var
-     *            The variable.
-     */
-    public void addProjectionVar(final VarNode var) {
+    setProperty(Annotations.REDUCED, reduced);
+  }
 
-        addExpr(new AssignmentNode(var, var));
+  public boolean isReduced() {
 
-    }
+    return getProperty(Annotations.REDUCED, Annotations.DEFAULT_REDUCED);
+  }
 
-    public void addProjectionExpression(final AssignmentNode assignment) {
+  public boolean isWildcard() {
 
-        addExpr(assignment);
+    if (isEmpty()) return false;
 
-    }
-    
-    /** Makes a copy of vars the (new) black list for variables that are 
-     *  not to be treated as projection variables.
-     *  This feature is useful for auxiliary aliases.
-     */
-    public void setVarsToExcludeFromProjection(final Set<IVariable<?>> vars) {
-        setProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION, 
-                new HashSet<IVariable<?>>(vars));
-    }
-    
-    
-    /**
-     * Return the ordered subset of the value expressions which project a
-     * computed value expression which is not a bare variable.
-     * 
-     * TODO Consistent API for {@link #getAssignmentProjections()} and
-     * {@link #getProjectionVars()}.
-     */
-    public List<AssignmentNode> getAssignmentProjections() {
+    return getExpr(0).getVar().isWildcard();
+  }
 
-        final List<AssignmentNode> assignments = new LinkedList<AssignmentNode>();
+  /**
+   * Return the {@link DescribeModeEnum} that will be used to evaluate a DESCRIBE query.
+   *
+   * <p>Note: The default is governed by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
+   *
+   * @return The {@link DescribeModeEnum} or <code>null</code> if this has not been explicitly
+   *     specified.
+   */
+  public DescribeModeEnum getDescribeMode() {
 
-        for (AssignmentNode n : this) {
+    return (DescribeModeEnum) getProperty(Annotations.DESCRIBE_MODE);
+  }
 
-            if (n.getValueExpressionNode().equals(n.getVarNode()))
-                continue;
+  /**
+   * Set the {@link DescribeModeEnum} that will be used to evaluate a DESCRIBE query.
+   *
+   * <p>Note: The default is governed by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
+   *
+   * @param describeMode The {@link DescribeModeEnum} or <code>null</code> to use the default.
+   * @see Annotations#DESCRIBE_MODE
+   */
+  public void setDescribeMode(final DescribeModeEnum describeMode) {
 
-            assignments.add(n);
+    setProperty(Annotations.DESCRIBE_MODE, describeMode);
+  }
 
-        }
+  /**
+   * Return the optional limit on the #of iterations for a DESCRIBE query.
+   *
+   * @return The limit -or- <code>null</code>.
+   * @see Annotations#DESCRIBE_ITERATION_LIMIT
+   */
+  public Integer getDescribeIterationLimit() {
 
-        return assignments;
+    return (Integer) getProperty(Annotations.DESCRIBE_ITERATION_LIMIT);
+  }
 
-    }
+  /**
+   * Return the optional limit on the #of statements for a DESCRIBE query.
+   *
+   * @return The limit -or- <code>null</code>.
+   * @see Annotations#DESCRIBE_STATEMENT_LIMIT
+   */
+  public Integer getDescribeStatementLimit() {
 
-    /**
-     * Return the projected variables.
-     */
-    public IVariable[] getProjectionVars() {
+    return (Integer) getProperty(Annotations.DESCRIBE_STATEMENT_LIMIT);
+  }
 
-        final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+  /** Set the optional limit on the #of iterations for a DESCRIBE query. */
+  public void setDescribeIterationLimit(final int newValue) {
 
-        getProjectionVars(vars);
-//        for (AssignmentNode n : this) {
-//
-//            vars.add(n.getVar());
-//
-//        }
+    setProperty(Annotations.DESCRIBE_ITERATION_LIMIT, newValue);
+  }
 
-        return (IVariable[]) vars.toArray(new IVariable[vars.size()]);
+  /** Set the optional limit on the #of statements for a DESCRIBE query. */
+  public void setDescribeStatementLimit(final int newValue) {
 
-    }
-    
-    /**
-     * Return the projected variables.
-     * 
-     * @param vars
-     *            A set into which the projected variables will be added.
-     * 
-     * @return The caller's set.
-     */
-    public Set<IVariable<?>> getProjectionVars(final Set<IVariable<?>> vars) {
+    setProperty(Annotations.DESCRIBE_STATEMENT_LIMIT, newValue);
+  }
 
-        for (AssignmentNode n : this) {
+  /**
+   * Adds a variable to be projected. The variable is modeled as an assignment of itself to itself,
+   * so everything in the projection node winds up looking like an assignment.
+   *
+   * @param var The variable.
+   */
+  public void addProjectionVar(final VarNode var) {
 
-            if (!excludeFromProjection(n.getVar())) {
-                vars.add(n.getVar());
-            }
+    addExpr(new AssignmentNode(var, var));
+  }
 
-        }
-        
-        return vars;
+  public void addProjectionExpression(final AssignmentNode assignment) {
 
+    addExpr(assignment);
+  }
+
+  /**
+   * Makes a copy of vars the (new) black list for variables that are not to be treated as
+   * projection variables. This feature is useful for auxiliary aliases.
+   */
+  public void setVarsToExcludeFromProjection(final Set<IVariable<?>> vars) {
+    setProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION, new HashSet<IVariable<?>>(vars));
+  }
+
+  /**
+   * Return the ordered subset of the value expressions which project a computed value expression
+   * which is not a bare variable.
+   *
+   * <p>TODO Consistent API for {@link #getAssignmentProjections()} and {@link
+   * #getProjectionVars()}.
+   */
+  public List<AssignmentNode> getAssignmentProjections() {
+
+    final List<AssignmentNode> assignments = new LinkedList<AssignmentNode>();
+
+    for (AssignmentNode n : this) {
+
+      if (n.getValueExpressionNode().equals(n.getVarNode())) continue;
+
+      assignments.add(n);
     }
 
-    
-    
-    /** Checks if the variable is "blacklisted" to be excluded from
-     *  projection variables. This feature is useful for auxiliary aliases.
-     */
-    public boolean excludeFromProjection(final IVariable<?> var) {
-        Set<IVariable<?>> vars = 
-                (Set<IVariable<?>>) getProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
+    return assignments;
+  }
+
+  /** Return the projected variables. */
+  public IVariable[] getProjectionVars() {
+
+    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+
+    getProjectionVars(vars);
+    //        for (AssignmentNode n : this) {
+    //
+    //            vars.add(n.getVar());
+    //
+    //        }
+
+    return (IVariable[]) vars.toArray(new IVariable[vars.size()]);
+  }
+
+  /**
+   * Return the projected variables.
+   *
+   * @param vars A set into which the projected variables will be added.
+   * @return The caller's set.
+   */
+  public Set<IVariable<?>> getProjectionVars(final Set<IVariable<?>> vars) {
+
+    for (AssignmentNode n : this) {
+
+      if (!excludeFromProjection(n.getVar())) {
+        vars.add(n.getVar());
+      }
+    }
+
+    return vars;
+  }
+
+  /**
+   * Checks if the variable is "blacklisted" to be excluded from projection variables. This feature
+   * is useful for auxiliary aliases.
+   */
+  public boolean excludeFromProjection(final IVariable<?> var) {
+    Set<IVariable<?>> vars =
+        (Set<IVariable<?>>)
+            getProperty(
+                Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
                 Annotations.DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION);
-        return (vars != null) && vars.contains(var);
-    }
-    
-    /**
-     * Collect the variables used by the SELECT EXPRESSIONS for this projection
-     * node.
-     * <p>
-     * Note: This DOES NOT report the variables which are projected OUT of the
-     * query. It reports the variables on which those projected variables
-     * depend.
-     * 
-     * @param vars
-     *            The variables are inserted into this set.
-     *            
-     * @return The caller's set.
-     */
-    public Set<IVariable<?>> getSelectExprVars(final Set<IVariable<?>> vars) {
-        
-        for(AssignmentNode n : this) {
+    return (vars != null) && vars.contains(var);
+  }
 
-            final Iterator<IVariable<?>> itr = BOpUtility.getSpannedVariables(n
-                    .getValueExpression());
+  /**
+   * Collect the variables used by the SELECT EXPRESSIONS for this projection node.
+   *
+   * <p>Note: This DOES NOT report the variables which are projected OUT of the query. It reports
+   * the variables on which those projected variables depend.
+   *
+   * @param vars The variables are inserted into this set.
+   * @return The caller's set.
+   */
+  public Set<IVariable<?>> getSelectExprVars(final Set<IVariable<?>> vars) {
 
-            while (itr.hasNext()) {
+    for (AssignmentNode n : this) {
 
-                vars.add(itr.next());
+      final Iterator<IVariable<?>> itr = BOpUtility.getSpannedVariables(n.getValueExpression());
 
-            }
-            
-        }
-        
-        return vars;
-        
-    }
-    
-    /**
-     * Return the {@link IValueExpression}s for this {@link ProjectionNode}.
-     */
-    public IValueExpression[] getValueExpressions() {
+      while (itr.hasNext()) {
 
-        final IValueExpression<?>[] exprs = new IValueExpression[size()];
-        
-        int i = 0;
-        
-        for (AssignmentNode n : this) {
-
-            exprs[i++] = new Bind(n.getVar(), n.getValueExpression());
-
-        }
-        
-        return exprs;
-        
+        vars.add(itr.next());
+      }
     }
 
-    public String toString(final int indent) {
+    return vars;
+  }
 
-        final StringBuilder sb = new StringBuilder();
+  /** Return the {@link IValueExpression}s for this {@link ProjectionNode}. */
+  public IValueExpression[] getValueExpressions() {
 
-        sb.append("\n").append(indent(indent)).append("SELECT ");
+    final IValueExpression<?>[] exprs = new IValueExpression[size()];
 
-        if (isDistinct())
-            sb.append("DISTINCT ");
+    int i = 0;
 
-        if (isReduced())
-            sb.append("REDUCED ");
+    for (AssignmentNode n : this) {
 
-        final DescribeModeEnum describeMode = getDescribeMode();
+      exprs[i++] = new Bind(n.getVar(), n.getValueExpression());
+    }
 
-        final Integer describeIterationLimit = getDescribeIterationLimit();
+    return exprs;
+  }
 
-        final Integer describeStatementLimit = getDescribeStatementLimit();
+  public String toString(final int indent) {
 
-        if (describeMode != null) {
+    final StringBuilder sb = new StringBuilder();
 
-            sb.append("[describeMode=" + describeMode + "]");
+    sb.append("\n").append(indent(indent)).append("SELECT ");
 
-        }
+    if (isDistinct()) sb.append("DISTINCT ");
 
-        if (describeIterationLimit != null) {
+    if (isReduced()) sb.append("REDUCED ");
 
-            sb.append("[describeIterationLimit=" + describeIterationLimit + "]");
+    final DescribeModeEnum describeMode = getDescribeMode();
 
-        }
+    final Integer describeIterationLimit = getDescribeIterationLimit();
 
-        if (describeStatementLimit != null) {
+    final Integer describeStatementLimit = getDescribeStatementLimit();
 
-            sb.append("[describeStatement=" + describeStatementLimit + "]");
+    if (describeMode != null) {
 
-        }
+      sb.append("[describeMode=" + describeMode + "]");
+    }
 
-        if (isWildcard()) {
+    if (describeIterationLimit != null) {
 
-            sb.append("* ");
-            
+      sb.append("[describeIterationLimit=" + describeIterationLimit + "]");
+    }
+
+    if (describeStatementLimit != null) {
+
+      sb.append("[describeStatement=" + describeStatementLimit + "]");
+    }
+
+    if (isWildcard()) {
+
+      sb.append("* ");
+
+    } else {
+
+      boolean first = true;
+
+      for (AssignmentNode v : this) {
+
+        if (first) {
+          first = false;
         } else {
-
-            boolean first = true;
-
-            for (AssignmentNode v : this) {
-
-                if (first) {
-                    first = false;
-                } else {
-                    sb.append(" ");
-                }
-
-                sb.append(v);
-
-                if (excludeFromProjection(v.getVar())) {
-                    sb.append("[excludeFromProjection]");
-                }
-            
-            }
-
+          sb.append(" ");
         }
 
-        return sb.toString();
+        sb.append(v);
 
+        if (excludeFromProjection(v.getVar())) {
+          sb.append("[excludeFromProjection]");
+        }
+      }
     }
 
+    return sb.toString();
+  }
 }

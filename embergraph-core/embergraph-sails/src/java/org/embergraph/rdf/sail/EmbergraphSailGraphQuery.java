@@ -18,114 +18,96 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.util.concurrent.TimeUnit;
-
-import org.openrdf.query.GraphQueryResult;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.algebra.evaluation.QueryBindingSet;
-import org.openrdf.repository.sail.SailGraphQuery;
-
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
 import org.embergraph.rdf.store.AbstractTripleStore;
+import org.openrdf.query.GraphQueryResult;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.algebra.evaluation.QueryBindingSet;
+import org.openrdf.repository.sail.SailGraphQuery;
 
-public class EmbergraphSailGraphQuery extends SailGraphQuery implements
-    EmbergraphSailQuery {
+public class EmbergraphSailGraphQuery extends SailGraphQuery implements EmbergraphSailQuery {
 
-    // private static Logger log = Logger.getLogger(EmbergraphSailGraphQuery.class);
+  // private static Logger log = Logger.getLogger(EmbergraphSailGraphQuery.class);
 
-    private final ASTContainer astContainer;
+  private final ASTContainer astContainer;
 
-    public ASTContainer getASTContainer() {
+  public ASTContainer getASTContainer() {
 
-        return astContainer;
+    return astContainer;
+  }
 
-    }
+  @Override
+  public String toString() {
 
-    @Override
-    public String toString() {
+    return astContainer.toString();
+  }
 
-        return astContainer.toString();
+  public AbstractTripleStore getTripleStore() {
 
-    }
-    
-    public AbstractTripleStore getTripleStore() {
+    return ((EmbergraphSailRepositoryConnection) getConnection()).getTripleStore();
+  }
 
-        return ((EmbergraphSailRepositoryConnection) getConnection())
-                .getTripleStore();
+  public EmbergraphSailGraphQuery(
+      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection con) {
 
-    }
+    super(null /*tupleQuery*/, con);
 
-    public EmbergraphSailGraphQuery(final ASTContainer astContainer,
-            final EmbergraphSailRepositoryConnection con) {
+    if (astContainer == null) throw new IllegalArgumentException();
 
-        super(null/*tupleQuery*/, con);
+    this.astContainer = astContainer;
+  }
 
-        if(astContainer == null)
-            throw new IllegalArgumentException();
-        
-        this.astContainer = astContainer;
-        
-    }
-    
-    @Override
-    public GraphQueryResult evaluate() throws QueryEvaluationException {
+  @Override
+  public GraphQueryResult evaluate() throws QueryEvaluationException {
 
-        return evaluate((BindingsClause) null);
+    return evaluate((BindingsClause) null);
+  }
 
-    }
+  public GraphQueryResult evaluate(final BindingsClause bc) throws QueryEvaluationException {
 
-    public GraphQueryResult evaluate(final BindingsClause bc)
-            throws QueryEvaluationException {
+    final QueryRoot originalQuery = astContainer.getOriginalAST();
 
-        final QueryRoot originalQuery = astContainer.getOriginalAST();
+    if (bc != null) originalQuery.setBindingsClause(bc);
 
-        if (bc != null)
-            originalQuery.setBindingsClause(bc);
+    if (getMaxQueryTime() > 0)
+      originalQuery.setTimeout(TimeUnit.SECONDS.toMillis(getMaxQueryTime()));
 
-        if (getMaxQueryTime() > 0)
-            originalQuery.setTimeout(TimeUnit.SECONDS
-                    .toMillis(getMaxQueryTime()));
+    originalQuery.setIncludeInferred(getIncludeInferred());
 
-        originalQuery.setIncludeInferred(getIncludeInferred());
+    final GraphQueryResult queryResult =
+        ASTEvalHelper.evaluateGraphQuery(
+            getTripleStore(), astContainer, new QueryBindingSet(getBindings()), getDataset());
 
-        final GraphQueryResult queryResult = ASTEvalHelper.evaluateGraphQuery(
-                getTripleStore(), astContainer, new QueryBindingSet(
-                        getBindings()), getDataset());
+    return queryResult;
+  }
 
-        return queryResult;
+  public QueryRoot optimize() throws QueryEvaluationException {
 
-    }
+    return optimize((BindingsClause) null);
+  }
 
-    public QueryRoot optimize() throws QueryEvaluationException {
+  public QueryRoot optimize(final BindingsClause bc) throws QueryEvaluationException {
 
-        return optimize((BindingsClause) null);
+    final QueryRoot originalQuery = astContainer.getOriginalAST();
 
-    }
+    if (bc != null) originalQuery.setBindingsClause(bc);
 
-    public QueryRoot optimize(final BindingsClause bc)
-            throws QueryEvaluationException {
+    if (getMaxQueryTime() > 0)
+      originalQuery.setTimeout(TimeUnit.SECONDS.toMillis(getMaxQueryTime()));
 
-        final QueryRoot originalQuery = astContainer.getOriginalAST();
+    originalQuery.setIncludeInferred(getIncludeInferred());
 
-        if (bc != null)
-            originalQuery.setBindingsClause(bc);
+    final QueryRoot optimized =
+        ASTEvalHelper.optimizeQuery(
+            astContainer,
+            new AST2BOpContext(astContainer, getTripleStore()),
+            new QueryBindingSet(getBindings()),
+            getDataset());
 
-        if (getMaxQueryTime() > 0)
-            originalQuery.setTimeout(TimeUnit.SECONDS
-                    .toMillis(getMaxQueryTime()));
-
-        originalQuery.setIncludeInferred(getIncludeInferred());
-
-        final QueryRoot optimized = ASTEvalHelper.optimizeQuery(
-                astContainer,
-                new AST2BOpContext(astContainer, getTripleStore()),
-                new QueryBindingSet(getBindings()), getDataset());
-
-        return optimized;
-
-    }
-
+    return optimized;
+  }
 }

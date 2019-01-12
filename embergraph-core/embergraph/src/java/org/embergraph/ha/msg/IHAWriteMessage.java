@@ -19,58 +19,52 @@ package org.embergraph.ha.msg;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
-
 import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.StoreTypeEnum;
 
 /**
- * A message carrying RMI metadata about a payload which will be replicated
- * using a socket-level transfer facility.
- * 
+ * A message carrying RMI metadata about a payload which will be replicated using a socket-level
+ * transfer facility.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAWriteMessage extends IHAWriteMessageBase {
 
-    /** The {@link UUID} of the store to which this message belongs. */
-    UUID getUUID();
-    
-    /** The commit counter for the opening root block associated with the write set for this message.*/
-    long getCommitCounter();
+  /** The {@link UUID} of the store to which this message belongs. */
+  UUID getUUID();
 
-    /** The commit time associated with this message. */
-    long getLastCommitTime();
+  /**
+   * The commit counter for the opening root block associated with the write set for this message.
+   */
+  long getCommitCounter();
 
-    /**
-     * The write cache buffer sequence number (reset to ZERO (0) for the first
-     * message after each commit and incremented for each buffer sent by the
-     * leader).
-     */
-    long getSequence();
+  /** The commit time associated with this message. */
+  long getLastCommitTime();
 
-    /**
-     * Applies associated {@link IRecordCompressor} (if any) to decompress the
-     * data
-     */
-    ByteBuffer expand(ByteBuffer bin);
-    
-    /**
-     * Return the associated {@link IRecordCompressor} key (if any).
-     */
-    String getCompressorKey();
+  /**
+   * The write cache buffer sequence number (reset to ZERO (0) for the first message after each
+   * commit and incremented for each buffer sent by the leader).
+   */
+  long getSequence();
 
-    /** The type of backing store (RW or WORM). */
-    StoreTypeEnum getStoreType();
+  /** Applies associated {@link IRecordCompressor} (if any) to decompress the data */
+  ByteBuffer expand(ByteBuffer bin);
 
-    /** The quorum token for which this message is valid. */
-    long getQuorumToken();
+  /** Return the associated {@link IRecordCompressor} key (if any). */
+  String getCompressorKey();
 
-    /** The replication factor for the quorum leader. */
-    int getReplicationFactor();
+  /** The type of backing store (RW or WORM). */
+  StoreTypeEnum getStoreType();
 
-    /** The length of the backing file on the disk. */
-    long getFileExtent();
+  /** The quorum token for which this message is valid. */
+  long getQuorumToken();
 
-    /** The file offset at which the data will be written (WORM only or for Rebuild request). */
-    long getFirstOffset();
+  /** The replication factor for the quorum leader. */
+  int getReplicationFactor();
 
+  /** The length of the backing file on the disk. */
+  long getFileExtent();
+
+  /** The file offset at which the data will be written (WORM only or for Rebuild request). */
+  long getFirstOffset();
 }

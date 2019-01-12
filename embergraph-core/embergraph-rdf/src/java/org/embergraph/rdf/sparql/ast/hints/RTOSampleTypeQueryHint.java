@@ -30,44 +30,42 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 /**
- * The query hint governing the choice of the sampling bais for the RTO
- * optimizer.
- * 
+ * The query hint governing the choice of the sampling bais for the RTO optimizer.
+ *
  * @see JGraph
  * @see SampleType
  * @see QueryHints#RTO_SAMPLE_TYPE
  */
 final class RTOSampleTypeQueryHint extends AbstractQueryHint<SampleType> {
 
-    public RTOSampleTypeQueryHint() {
-        super(QueryHints.RTO_SAMPLE_TYPE, QueryHints.DEFAULT_RTO_SAMPLE_TYPE);
-    }
+  public RTOSampleTypeQueryHint() {
+    super(QueryHints.RTO_SAMPLE_TYPE, QueryHints.DEFAULT_RTO_SAMPLE_TYPE);
+  }
 
-    @Override
-    public SampleType validate(final String value) {
+  @Override
+  public SampleType validate(final String value) {
 
-        return SampleType.valueOf(value);
+    return SampleType.valueOf(value);
+  }
 
-    }
+  @Override
+  public void handle(
+      final AST2BOpContext ctx,
+      final QueryRoot queryRoot,
+      final QueryHintScope scope,
+      final ASTBase op,
+      final SampleType value) {
 
-    @Override
-    public void handle(final AST2BOpContext ctx,
-            final QueryRoot queryRoot,
-            final QueryHintScope scope,
-            final ASTBase op, final SampleType value) {
-
-        switch (scope) {
-        case Group:
-        case GroupAndSubGroups:
-        case Query:
-        case SubQuery:
-            if (op instanceof JoinGroupNode) {
-                _setAnnotation(ctx, scope, op, getName(), value);
-            }
-            return;
+    switch (scope) {
+      case Group:
+      case GroupAndSubGroups:
+      case Query:
+      case SubQuery:
+        if (op instanceof JoinGroupNode) {
+          _setAnnotation(ctx, scope, op, getName(), value);
         }
-        throw new QueryHintException(scope, op, getName(), value);
-
+        return;
     }
-
+    throw new QueryHintException(scope, op, getName(), value);
+  }
 }

@@ -2,9 +2,7 @@ package org.embergraph.rdf.internal;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import junit.framework.TestCase2;
-
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
@@ -14,172 +12,143 @@ import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test suite for {@link PartlyInlineTypedLiteralIV}.
- */
+/** Test suite for {@link PartlyInlineTypedLiteralIV}. */
 public class TestLiteralDatatypeIV extends TestCase2 {
 
-	public TestLiteralDatatypeIV() {
-	}
+  public TestLiteralDatatypeIV() {}
 
-	public TestLiteralDatatypeIV(String name) {
-		super(name);
-	}
+  public TestLiteralDatatypeIV(String name) {
+    super(name);
+  }
 
-	private MockTermIdFactory termIdFactory;
-	
-	@Override
-	protected void setUp() throws Exception {
-		
-	    super.setUp();
-		
-	    termIdFactory = new MockTermIdFactory();
-	    
-	}
+  private MockTermIdFactory termIdFactory;
 
-	@Override
-	protected void tearDown() throws Exception {
-		
-	    super.tearDown();
+  @Override
+  protected void setUp() throws Exception {
 
-	    termIdFactory = null;
-	    
-	}
+    super.setUp();
 
-    /**
-     * Factory for mock {@link IV}s.
-     */
-    private IV<?,?> newTermId(final VTE vte) {
-       
-        return termIdFactory.newTermId(vte);
-        
+    termIdFactory = new MockTermIdFactory();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+
+    super.tearDown();
+
+    termIdFactory = null;
+  }
+
+  /** Factory for mock {@link IV}s. */
+  private IV<?, ?> newTermId(final VTE vte) {
+
+    return termIdFactory.newTermId(vte);
+  }
+
+  public void test_LiteralDatatypeIV() {
+
+    final IV<?, ?> datatypeIV = newTermId(VTE.URI);
+
+    doTest(
+        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+
+    doTest(
+        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV));
+
+    doTest(
+        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV));
+
+    doTest(
+        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+
+    doTest(
+        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+
+    final IV<?, ?>[] e;
+    {
+      final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+
+      ivs.add(
+          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+
+      ivs.add(
+          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV));
+
+      ivs.add(
+          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV));
+
+      ivs.add(
+          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+
+      ivs.add(
+          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+
+      e = ivs.toArray(new IV[0]);
     }
 
-	public void test_LiteralDatatypeIV() {
+    TestEncodeDecodeKeys.doEncodeDecodeTest(e);
+    TestEncodeDecodeKeys.doComparatorTest(e);
+  }
 
-		final IV<?,?> datatypeIV = newTermId(VTE.URI);
+  private void doTest(final PartlyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
 
-		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-				new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV)
-				);
+    assertEquals(VTE.LITERAL, iv.getVTE());
 
-		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV)
-				);
+    assertFalse(iv.isInline());
 
-		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-				new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV)
-				);
+    assertTrue(iv.isExtension());
 
-		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV)
-				);
+    assertEquals(DTE.XSDString, iv.getDTE());
 
-		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV)
-				);
-		
-		final IV<?,?>[] e;
-		{
+    final BlobsIndexHelper h = new BlobsIndexHelper();
 
-            final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    final IKeyBuilder keyBuilder = h.newKeyBuilder();
 
-            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""),
-                    datatypeIV)
-            );
+    final byte[] key = IVUtility.encode(keyBuilder, iv).getKey();
 
-            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"),
-                    datatypeIV)
-            );
+    final PartlyInlineTypedLiteralIV<EmbergraphLiteral> actual =
+        (PartlyInlineTypedLiteralIV<EmbergraphLiteral>) IVUtility.decode(key);
 
-            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "),
-                    datatypeIV)
-            );
+    // Check the extension IVs for consistency.
+    {
+      final AbstractIV<?, ?> expectedExtensionIV = (AbstractIV<?, ?>) iv.getExtensionIV();
 
-            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"),
-                    datatypeIV)
-            );
+      final AbstractIV<?, ?> actualExtensionIV = (AbstractIV<?, ?>) actual.getExtensionIV();
 
-            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"),
-                    datatypeIV)
-            );
+      assertEquals(expectedExtensionIV, actualExtensionIV);
 
-	        e = ivs.toArray(new IV[0]);
-	        
-		}
-		
-        TestEncodeDecodeKeys.doEncodeDecodeTest(e);
-        TestEncodeDecodeKeys.doComparatorTest(e);
-		
-	}
+      assertEquals(expectedExtensionIV.byteLength(), actualExtensionIV.byteLength());
+    }
 
-	private void doTest(final PartlyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
+    // Check the delegate IVs for consistency.
+    {
+      final AbstractIV<?, ?> expectedDelegateIV = (AbstractIV<?, ?>) iv.getDelegate();
 
-		assertEquals(VTE.LITERAL, iv.getVTE());
-		
-		assertFalse(iv.isInline());
-		
-		assertTrue(iv.isExtension());
+      final AbstractIV<?, ?> actualDelegateIV =
+          ((AbstractNonInlineExtensionIVWithDelegateIV<?, ?>) actual).getDelegate();
 
-		assertEquals(DTE.XSDString, iv.getDTE());
-		
-		final BlobsIndexHelper h = new BlobsIndexHelper();
-		
-		final IKeyBuilder keyBuilder = h.newKeyBuilder();
-		
-		final byte[] key = IVUtility.encode(keyBuilder, iv).getKey();
-		
-		final PartlyInlineTypedLiteralIV<EmbergraphLiteral> actual =
-			(PartlyInlineTypedLiteralIV<EmbergraphLiteral>) IVUtility.decode(key);
+      assertEquals(expectedDelegateIV, actualDelegateIV);
 
-		// Check the extension IVs for consistency.
-		{
-		
-			final AbstractIV<?, ?> expectedExtensionIV = (AbstractIV<?, ?>) iv
-					.getExtensionIV();
+      assertEquals(expectedDelegateIV.byteLength(), actualDelegateIV.byteLength());
+    }
 
-			final AbstractIV<?, ?> actualExtensionIV = (AbstractIV<?, ?>) actual
-					.getExtensionIV();
+    // Check the total IVs for consistency.
+    {
+      assertEquals(iv, actual);
 
-			assertEquals(expectedExtensionIV, actualExtensionIV);
+      assertEquals(key.length, iv.byteLength());
 
-			assertEquals(expectedExtensionIV.byteLength(), actualExtensionIV
-					.byteLength());
-
-		}
-		
-		// Check the delegate IVs for consistency.
-		{
-
-			final AbstractIV<?, ?> expectedDelegateIV = (AbstractIV<?, ?>) iv
-					.getDelegate();
-
-			final AbstractIV<?, ?> actualDelegateIV = ((AbstractNonInlineExtensionIVWithDelegateIV<?, ?>) actual)
-					.getDelegate();
-
-			assertEquals(expectedDelegateIV, actualDelegateIV);
-
-			assertEquals(expectedDelegateIV.byteLength(), actualDelegateIV
-					.byteLength());
-			
-		}
-		
-		// Check the total IVs for consistency.
-		{
-		
-			assertEquals(iv, actual);
-
-			assertEquals(key.length, iv.byteLength());
-
-			assertEquals(key.length, actual.byteLength());
-
-		}
-
-	}
-
+      assertEquals(key.length, actual.byteLength());
+    }
+  }
 }

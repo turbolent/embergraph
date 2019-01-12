@@ -18,30 +18,21 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /**
- * A filter which is initially a NOP. You can add other filters to this to stack
- * them.
- * 
+ * A filter which is initially a NOP. You can add other filters to this to stack them.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NOPFilter extends FilterBase {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    public NOPFilter() {
-    }
+  /** */
+  public NOPFilter() {}
 
-    /**
-     * Returns <i>src</i>.
-     */
-    @Override
-    protected Iterator filterOnce(Iterator src, Object context) {
-        return src;
-    }
-
+  /** Returns <i>src</i>. */
+  @Override
+  protected Iterator filterOnce(Iterator src, Object context) {
+    return src;
+  }
 }

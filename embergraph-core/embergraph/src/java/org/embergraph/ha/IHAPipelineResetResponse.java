@@ -21,9 +21,7 @@ import org.embergraph.ha.msg.IHAMessage;
 
 /**
  * Message reporting the outcome of a pipeline reset on a service.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface IHAPipelineResetResponse extends IHAMessage {
-
-}
+public interface IHAPipelineResetResponse extends IHAMessage {}

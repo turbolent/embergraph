@@ -1,9 +1,9 @@
 package it.unimi.dsi.io;
 
-/*		 
+/*
  * DSI utilities
  *
- * Copyright (C) 2006-2009 Sebastiano Vigna 
+ * Copyright (C) 2006-2009 Sebastiano Vigna
  *
  *  This library is free software; you can redistribute it and/or modify it
  *  under the terms of the GNU Lesser General Public License as published by the Free
@@ -22,24 +22,24 @@ package it.unimi.dsi.io;
  */
 import java.io.Closeable;
 
-/** A marker interface for a closeable resource that implements safety measures to
- * make resource tracking easier.
- * 
+/**
+ * A marker interface for a closeable resource that implements safety measures to make resource
+ * tracking easier.
+ *
  * <p>Classes implementing this interface must provide a <em>safety-net finaliser</em>&mdash;a
  * finaliser that closes the resource and logs that resource should have been closed.
- * 
- * <p>When the implementing class is abstract, concrete subclasses <strong>must</strong>
- * call <code>super.close()</code> in their own {@link java.io.Closeable#close()} method
- * to let the abstract class track correctly the resource. Moreover, 
- * they <strong>must</strong> run <code>super.finalize()</code> in
- * their own finaliser (if any), as finalisation chaining is not automatic.
- * 
- * <p>Note that if a concrete subclass implements <code>readResolve()</code>, it must
- * call <code>super.close()</code>, or actually return <code>this</code> (i.e., the deserialised
- * instance); otherwise, a spurious log could be generated when the deserialised instance is collected.
- * 
+ *
+ * <p>When the implementing class is abstract, concrete subclasses <strong>must</strong> call <code>
+ * super.close()</code> in their own {@link java.io.Closeable#close()} method to let the abstract
+ * class track correctly the resource. Moreover, they <strong>must</strong> run <code>
+ * super.finalize()</code> in their own finaliser (if any), as finalisation chaining is not
+ * automatic.
+ *
+ * <p>Note that if a concrete subclass implements <code>readResolve()</code>, it must call <code>
+ * super.close()</code>, or actually return <code>this</code> (i.e., the deserialised instance);
+ * otherwise, a spurious log could be generated when the deserialised instance is collected.
+ *
  * @author Sebastiano Vigna
  * @since 1.1
  */
-
 public interface SafelyCloseable extends Closeable {}

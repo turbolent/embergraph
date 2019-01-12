@@ -20,57 +20,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Always throws a SparqlTypeError.
- */
+/** Always throws a SparqlTypeError. */
 public class SparqlTypeErrorBOp extends XSDBooleanIVValueExpression {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2699085294332649839L;
-	
-    public static final transient SparqlTypeErrorBOp INSTANCE = new SparqlTypeErrorBOp();
+  /** */
+  private static final long serialVersionUID = 2699085294332649839L;
 
-	private SparqlTypeErrorBOp() {
-		
-		this(BOp.NOARGS, BOp.NOANNS);
-		
-	}
-	
-	public SparqlTypeErrorBOp(final IValueExpression<? extends IV> x) {
-		
-		this(new BOp[] { x }, BOp.NOANNS);
-		
-	}
-	
-    /**
-     * Required shallow copy constructor.
-     */
-    public SparqlTypeErrorBOp(final BOp[] args, final Map<String, Object> anns) {
-    	
-        super(args, anns);
-        
-    }
+  public static final transient SparqlTypeErrorBOp INSTANCE = new SparqlTypeErrorBOp();
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public SparqlTypeErrorBOp(final SparqlTypeErrorBOp op) {
-        super(op);
-    }
+  private SparqlTypeErrorBOp() {
 
-    public boolean accept(final IBindingSet bs) {
+    this(BOp.NOARGS, BOp.NOANNS);
+  }
 
-    	throw new SparqlTypeErrorException();
+  public SparqlTypeErrorBOp(final IValueExpression<? extends IV> x) {
 
-    }
-    
+    this(new BOp[] {x}, BOp.NOANNS);
+  }
+
+  /** Required shallow copy constructor. */
+  public SparqlTypeErrorBOp(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
+
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public SparqlTypeErrorBOp(final SparqlTypeErrorBOp op) {
+    super(op);
+  }
+
+  public boolean accept(final IBindingSet bs) {
+
+    throw new SparqlTypeErrorException();
+  }
 }

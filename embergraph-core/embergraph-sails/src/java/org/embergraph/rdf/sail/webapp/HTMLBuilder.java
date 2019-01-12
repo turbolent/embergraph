@@ -22,28 +22,23 @@ import java.io.Writer;
 
 /**
  * Variant of {@link XMLBuilder} for HTML output.
- * 
+ *
  * @author Martyn Cutcher
  */
 public class HTMLBuilder extends XMLBuilder {
 
-	public HTMLBuilder(final Writer w) throws IOException {
+  public HTMLBuilder(final Writer w) throws IOException {
 
-		super(false/* isXML */, null/* encoding */, w);
+    super(false /* isXML */, null /* encoding */, w);
+  }
 
-	}
+  public HTMLBuilder(final String encoding, final Writer w) throws IOException {
 
-	public HTMLBuilder(final String encoding, final Writer w)
-			throws IOException {
+    super(false /* isXML */, encoding, w);
+  }
 
-		super(false/* isXML */, encoding, w);
+  public Node body() throws IOException {
 
-	}
-	
-	public Node body() throws IOException {
-
-		return root("html").node("body");
-		
-    }
-
+    return root("html").node("body");
+  }
 }

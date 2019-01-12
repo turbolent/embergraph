@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.webapp;
 
 import java.util.Arrays;
-
 import junit.framework.Test;
-
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
@@ -29,71 +29,55 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
+/** @see <a href="http://trac.bigdata.com/ticket/605" > Error in function :rangeCount </a> */
+public class Test_Ticket_605<S extends IIndexManager> extends AbstractTestNanoSparqlClient<S> {
 
-/**
- * @see <a href="http://trac.bigdata.com/ticket/605" > Error in function
- *      :rangeCount </a>
- */
-public class Test_Ticket_605<S extends IIndexManager> extends
-		AbstractTestNanoSparqlClient<S> {
+  public Test_Ticket_605() {}
 
-	public Test_Ticket_605() {
+  public Test_Ticket_605(final String name) {
 
-	}
+    super(name);
+  }
 
-	public Test_Ticket_605(final String name) {
+  public static Test suite() {
 
-		super(name);
+    return ProxySuiteHelper.suiteWhenStandalone(
+        Test_Ticket_605.class, "test.*", TestMode.quads
+        //                , TestMode.sids
+        //                , TestMode.triples
+        );
+  }
 
-	}
+  /**
+   * A Java version of the scala example.
+   *
+   * @throws Exception
+   * @see <a href="http://trac.bigdata.com/ticket/605" > Error in function :rangeCount </a>
+   */
+  public void test_ticket_605() throws Exception {
 
-	public static Test suite() {
+    final URI s = new URIImpl(":s");
+    final URI p = new URIImpl(":p");
+    final URI o = new URIImpl(":o");
 
-		return ProxySuiteHelper.suiteWhenStandalone(Test_Ticket_605.class,
-                "test.*", TestMode.quads
-//                , TestMode.sids
-//                , TestMode.triples
-                );
-       
-	}
+    final Statement[] a = new Statement[] {ValueFactoryImpl.getInstance().createStatement(s, p, o)};
 
-   /**
-    * A Java version of the scala example.
-    * 
-    * @throws Exception
-    * 
-    * @see <a href="http://trac.bigdata.com/ticket/605" > Error in function
-    *      :rangeCount </a>
-    */
-   public void test_ticket_605() throws Exception {
+    final AddOp addOp = new AddOp(Arrays.asList(a));
 
-      final URI s = new URIImpl(":s");
-      final URI p = new URIImpl(":p");
-      final URI o = new URIImpl(":o");
+    m_repo.add(addOp);
 
-      final Statement[] a = new Statement[] { ValueFactoryImpl.getInstance()
-            .createStatement(s, p, o) };
-
-      final AddOp addOp = new AddOp(Arrays.asList(a));
-
-      m_repo.add(addOp);
-
-      final TupleQueryResult result = m_repo.prepareTupleQuery(
-            "SELECT * {?s ?p ?o} LIMIT 100").evaluate();
-      try {
-         while (result.hasNext()) {
-            final BindingSet bset = result.next();
-            if (log.isInfoEnabled()) {
-               log.info(bset);
-            }
-            System.out.println(bset);
-         }
-      } finally {
-         result.close();
+    final TupleQueryResult result =
+        m_repo.prepareTupleQuery("SELECT * {?s ?p ?o} LIMIT 100").evaluate();
+    try {
+      while (result.hasNext()) {
+        final BindingSet bset = result.next();
+        if (log.isInfoEnabled()) {
+          log.info(bset);
+        }
+        System.out.println(bset);
       }
-
-   }
-
+    } finally {
+      result.close();
+    }
+  }
 }

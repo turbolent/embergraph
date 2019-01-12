@@ -29,126 +29,107 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 
 /**
- * Batch existence test operation. Existence tests SHOULD be used in place of
- * lookup tests to determine key existence if null values are allowed in an
- * index (lookup will return a null for both a null value and the absence of a
- * key in the index).
- * 
+ * Batch existence test operation. Existence tests SHOULD be used in place of lookup tests to
+ * determine key existence if null values are allowed in an index (lookup will return a null for
+ * both a null value and the absence of a key in the index).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class BatchContains extends AbstractKeyArrayIndexProcedure<ResultBitBuffer> implements
-        IParallelizableIndexProcedure<ResultBitBuffer> {
+public class BatchContains extends AbstractKeyArrayIndexProcedure<ResultBitBuffer>
+    implements IParallelizableIndexProcedure<ResultBitBuffer> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -5195874136364040815L;
+  /** */
+  private static final long serialVersionUID = -5195874136364040815L;
 
-    /**
-     * Factory for {@link BatchContains} procedures.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    public static class BatchContainsConstructor extends AbstractKeyArrayIndexProcedureConstructor<BatchContains> {
+  /**
+   * Factory for {@link BatchContains} procedures.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  public static class BatchContainsConstructor
+      extends AbstractKeyArrayIndexProcedureConstructor<BatchContains> {
 
-        public static final BatchContainsConstructor INSTANCE = new BatchContainsConstructor(); 
-        
-        private BatchContainsConstructor() {
-            
-        }
-        
-        @Override
-        public final boolean sendValues() {
-            
-            return false;
-            
-        }
- 
-        @Override
-        public BatchContains newInstance(final IRabaCoder keysCoder,
-                final IRabaCoder valsCoder, final int fromIndex, final int toIndex,
-                final byte[][] keys, final byte[][] vals) {
+    public static final BatchContainsConstructor INSTANCE = new BatchContainsConstructor();
 
-			if (vals != null)
-				throw new IllegalArgumentException(Errors.ERR_VALS_NOT_NULL);
-            
-            return new BatchContains(keysCoder, fromIndex, toIndex, keys);
-            
-        }
+    private BatchContainsConstructor() {}
 
-    }
+    @Override
+    public final boolean sendValues() {
 
-    /**
-     * De-serialization ctor.
-     *
-     */
-    public BatchContains() {
-        
-    }
-    
-    /**
-     * Create a batch existence test operation.
-     * 
-     * @param keys
-     *            A series of keys. Each key is an variable length unsigned
-     *            byte[]. The keys MUST be presented in sorted order.
-     * 
-     * @see BatchContainsConstructor
-     */
-    protected BatchContains(final IRabaCoder keysCoder, final int fromIndex,
-            final int toIndex, final byte[][] keys) {
-
-        super(keysCoder, null, fromIndex, toIndex, keys, null/*vals*/);
-
+      return false;
     }
 
     @Override
-    public final boolean isReadOnly() {
-        
-        return true;
-        
+    public BatchContains newInstance(
+        final IRabaCoder keysCoder,
+        final IRabaCoder valsCoder,
+        final int fromIndex,
+        final int toIndex,
+        final byte[][] keys,
+        final byte[][] vals) {
+
+      if (vals != null) throw new IllegalArgumentException(Errors.ERR_VALS_NOT_NULL);
+
+      return new BatchContains(keysCoder, fromIndex, toIndex, keys);
     }
-    
-    /**
-     * Applies the operation using {@link ISimpleBTree#contains(byte[])}.
-     * 
-     * @param ndx
-     * 
-     * @return A {@link ResultBitBuffer}.
-     */
-    @Override
-    public ResultBitBuffer applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
+  }
 
-        final int n = keys.size();
+  /** De-serialization ctor. */
+  public BatchContains() {}
 
-        final boolean[] ret = new boolean[n];
+  /**
+   * Create a batch existence test operation.
+   *
+   * @param keys A series of keys. Each key is an variable length unsigned byte[]. The keys MUST be
+   *     presented in sorted order.
+   * @see BatchContainsConstructor
+   */
+  protected BatchContains(
+      final IRabaCoder keysCoder, final int fromIndex, final int toIndex, final byte[][] keys) {
 
-        int i = 0, onCount = 0;
+    super(keysCoder, null, fromIndex, toIndex, keys, null /*vals*/);
+  }
 
-        while (i < n) {
+  @Override
+  public final boolean isReadOnly() {
 
-            if(ret[i] = ndx.contains(keys.get(i))) {
-                
-                onCount++;
-                
-            }
+    return true;
+  }
 
-            i++;
+  /**
+   * Applies the operation using {@link ISimpleBTree#contains(byte[])}.
+   *
+   * @param ndx
+   * @return A {@link ResultBitBuffer}.
+   */
+  @Override
+  public ResultBitBuffer applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
 
-        }
+    final int n = keys.size();
 
-        return new ResultBitBuffer(n, ret, onCount);
+    final boolean[] ret = new boolean[n];
 
+    int i = 0, onCount = 0;
+
+    while (i < n) {
+
+      if (ret[i] = ndx.contains(keys.get(i))) {
+
+        onCount++;
+      }
+
+      i++;
     }
 
-	@Override
-	protected IResultHandler<ResultBitBuffer, ResultBitBuffer> newAggregator() {
+    return new ResultBitBuffer(n, ret, onCount);
+  }
 
-		// knows how to aggregate ResultBitBuffers.
-		final ResultBitBufferHandler resultHandler = new ResultBitBufferHandler(getKeys().size());
+  @Override
+  protected IResultHandler<ResultBitBuffer, ResultBitBuffer> newAggregator() {
 
-		return resultHandler;
-		
-	}
+    // knows how to aggregate ResultBitBuffers.
+    final ResultBitBufferHandler resultHandler = new ResultBitBufferHandler(getKeys().size());
 
+    return resultHandler;
+  }
 }

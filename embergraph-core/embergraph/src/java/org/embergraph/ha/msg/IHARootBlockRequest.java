@@ -19,32 +19,27 @@ package org.embergraph.ha.msg;
 
 import java.util.UUID;
 
-/**
- * Message requesting a root block for a store on a remote service.
- */
+/** Message requesting a root block for a store on a remote service. */
 public interface IHARootBlockRequest extends IHAMessage {
 
-    /**
-     * The {@link UUID} of the journal whose root block will be returned
-     * (optional, defaults to the current Journal).
-     * <p>
-     * Note: This parameter is intended for scale-out if there is a need to
-     * fetch the root block of a historical journal (versus the live journal).
-     */
-    UUID getStoreUUID();
+  /**
+   * The {@link UUID} of the journal whose root block will be returned (optional, defaults to the
+   * current Journal).
+   *
+   * <p>Note: This parameter is intended for scale-out if there is a need to fetch the root block of
+   * a historical journal (versus the live journal).
+   */
+  UUID getStoreUUID();
 
-    /**
-     * When <code>true</code> the request should be non-blocking. Otherwise the
-     * request should obtain the lock that guards the update of the root block
-     * in the commit protocol such that the caller can not observe a root block
-     * that has been updated but where the commit protocol is still in its
-     * critical section.
-     * <p>
-     * Note: The non-blocking form of the request is used in some context where
-     * the avoidence of a deadlock is necessary. The blocking form is used in
-     * some contexts where we need to await a specific commit point on the
-     * service (typically under test suite control).
-     */
-    boolean isNonBlocking();
-    
+  /**
+   * When <code>true</code> the request should be non-blocking. Otherwise the request should obtain
+   * the lock that guards the update of the root block in the commit protocol such that the caller
+   * can not observe a root block that has been updated but where the commit protocol is still in
+   * its critical section.
+   *
+   * <p>Note: The non-blocking form of the request is used in some context where the avoidence of a
+   * deadlock is necessary. The blocking form is used in some contexts where we need to await a
+   * specific commit point on the service (typically under test suite control).
+   */
+  boolean isNonBlocking();
 }

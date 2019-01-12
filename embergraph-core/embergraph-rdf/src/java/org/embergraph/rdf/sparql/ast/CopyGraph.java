@@ -22,52 +22,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
- * The COPY operation is a shortcut for inserting all data from an input graph
- * into a destination graph. Data from the input graph is not affected, but data
- * from the destination graph, if any, is removed before insertion.
- * 
+ * The COPY operation is a shortcut for inserting all data from an input graph into a destination
+ * graph. Data from the input graph is not affected, but data from the destination graph, if any, is
+ * removed before insertion.
+ *
  * <pre>
  * COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
  * </pre>
- * 
+ *
  * @see http://www.w3.org/TR/sparql11-update/#copy
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class CopyGraph extends AbstractFromToGraphManagement {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    public CopyGraph() {
-        
-        super(UpdateType.Copy);
-        
-    }
+  public CopyGraph() {
 
-    /**
-     * @param op
-     */
-    public CopyGraph(final CopyGraph op) {
-        
-        super(op);
-        
-    }
+    super(UpdateType.Copy);
+  }
 
-    /**
-     * @param args
-     * @param anns
-     */
-    public CopyGraph(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-    }
+  /** @param op */
+  public CopyGraph(final CopyGraph op) {
 
+    super(op);
+  }
+
+  /**
+   * @param args
+   * @param anns
+   */
+  public CopyGraph(final BOp[] args, final Map<String, Object> anns) {
+
+    super(args, anns);
+  }
 }

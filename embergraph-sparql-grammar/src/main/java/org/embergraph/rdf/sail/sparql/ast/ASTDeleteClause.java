@@ -2,8 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-public
-class ASTDeleteClause extends SimpleNode {
+public class ASTDeleteClause extends SimpleNode {
   public ASTDeleteClause(int id) {
     super(id);
   }
@@ -12,24 +11,23 @@ class ASTDeleteClause extends SimpleNode {
     super(p, id);
   }
 
-
-  /** Accept the visitor. **/
+  /** Accept the visitor. * */
   public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
     return visitor.visit(this, data);
   }
 
   private String name;
+
   public void setName(String name) {
-      this.name = name;
-  }
-  
-  public String getName() {
-      return name;
-  }
-  
-  public ASTSelect getSelect() {
-      return jjtGetChild(ASTSelect.class);
+    this.name = name;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public ASTSelect getSelect() {
+    return jjtGetChild(ASTSelect.class);
+  }
 }
 /* JavaCC - OriginalChecksum=301afda347437e0cb5e0b2bee033d014 (do not edit this line) */

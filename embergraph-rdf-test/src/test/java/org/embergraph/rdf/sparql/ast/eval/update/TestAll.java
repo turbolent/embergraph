@@ -23,45 +23,34 @@ import junit.framework.TestSuite;
 
 /**
  * Aggregates test suites into increasing dependency order.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("SPARQL Update Evaluation");
+
+    /*
+     * Bootstrapped test suite for core UPDATE functionality based on
+     * BOP evaluation.
+     *
+     * Note: This test has been disabled. We are not using the query
+     * engine to evaluate SPARQL update at this time.
      */
-    public TestAll() {
-    }
+    //        suite.addTestSuite(TestUpdateBootstrap.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
-
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("SPARQL Update Evaluation");
-
-        /*
-         * Bootstrapped test suite for core UPDATE functionality based on
-         * BOP evaluation.
-         * 
-         * Note: This test has been disabled. We are not using the query
-         * engine to evaluate SPARQL update at this time. 
-         */
-//        suite.addTestSuite(TestUpdateBootstrap.class);
-
-        return suite;
-
-    }
-
+    return suite;
+  }
 }

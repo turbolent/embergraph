@@ -24,58 +24,48 @@ package org.embergraph.service.proxy;
 
 import java.io.IOException;
 import java.rmi.Remote;
-
 import org.embergraph.relation.accesspath.IBuffer;
 
 /**
- * A helper object that provides the API of {@link IBuffer} but whose methods
- * throw {@link IOException} and are therefore compatible with {@link Remote}
- * and {@link Exporter}.
- * 
+ * A helper object that provides the API of {@link IBuffer} but whose methods throw {@link
+ * IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class RemoteBufferImpl<E> implements RemoteBuffer<E> {
 
-    private final IBuffer<E> buffer;
-    
-    public RemoteBufferImpl(final IBuffer<E> buffer) {
+  private final IBuffer<E> buffer;
 
-        if (buffer == null)
-            throw new IllegalArgumentException();
-        
-        this.buffer = buffer;
-        
-    }
+  public RemoteBufferImpl(final IBuffer<E> buffer) {
 
-    public void add(E e) throws IOException {
+    if (buffer == null) throw new IllegalArgumentException();
 
-        buffer.add(e);
-        
-    }
+    this.buffer = buffer;
+  }
 
-    public long flush() throws IOException {
+  public void add(E e) throws IOException {
 
-        return buffer.flush();
-        
-    }
+    buffer.add(e);
+  }
 
-    public boolean isEmpty() throws IOException {
+  public long flush() throws IOException {
 
-        return buffer.isEmpty();
-        
-    }
+    return buffer.flush();
+  }
 
-    public void reset() throws IOException {
+  public boolean isEmpty() throws IOException {
 
-        buffer.reset();
-        
-    }
+    return buffer.isEmpty();
+  }
 
-    public int size() throws IOException {
-        
-        return buffer.size();
-        
-    }
-    
+  public void reset() throws IOException {
+
+    buffer.reset();
+  }
+
+  public int size() throws IOException {
+
+    return buffer.size();
+  }
 }

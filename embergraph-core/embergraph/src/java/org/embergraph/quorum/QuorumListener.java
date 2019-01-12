@@ -22,23 +22,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.quorum;
 
 /**
- * An interface for receiving informational quorum events. These events are
- * intended for clients interested in quorum state changes. Services that are HA
- * aware use a more intimate API to handle the state changes.
- * 
+ * An interface for receiving informational quorum events. These events are intended for clients
+ * interested in quorum state changes. Services that are HA aware use a more intimate API to handle
+ * the state changes.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface QuorumListener {
 
-    /**
-     * Notify the client of a quorum event.
-     * <p>
-     * The listener MUST NOT take any event that could block. In particular, it
-     * MUST NOT wait on another thread that will access the {@link Quorum} as
-     * that will cause a deadlock around the internal lock maintained by the
-     * {@link Quorum}.
-     */
-    void notify(QuorumEvent e);
-
+  /**
+   * Notify the client of a quorum event.
+   *
+   * <p>The listener MUST NOT take any event that could block. In particular, it MUST NOT wait on
+   * another thread that will access the {@link Quorum} as that will cause a deadlock around the
+   * internal lock maintained by the {@link Quorum}.
+   */
+  void notify(QuorumEvent e);
 }

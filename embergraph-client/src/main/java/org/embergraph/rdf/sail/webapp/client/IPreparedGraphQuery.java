@@ -25,29 +25,25 @@ import org.openrdf.query.GraphQueryResult;
 
 /**
  * A prepared graph query for the {@link RemoteRepository}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPreparedGraphQuery extends IPreparedQuery {
 
-    /**
-     * Evaluate the graph query.
-     * 
-     * @return The result.
-     * 
-     * @throws Exception
-     */
-	GraphQueryResult evaluate() throws Exception;
+  /**
+   * Evaluate the graph query.
+   *
+   * @return The result.
+   * @throws Exception
+   */
+  GraphQueryResult evaluate() throws Exception;
 
-    /**
-     * Evaluate the graph query, notify the specified listener when complete.
-     * 
-     * @param  listener
-     *              The query listener.
-     * @return The result.
-     * 
-     * @throws Exception
-     */
-    GraphQueryResult evaluate(IPreparedQueryListener listener) 
-            throws Exception;
+  /**
+   * Evaluate the graph query, notify the specified listener when complete.
+   *
+   * @param listener The query listener.
+   * @return The result.
+   * @throws Exception
+   */
+  GraphQueryResult evaluate(IPreparedQueryListener listener) throws Exception;
 }

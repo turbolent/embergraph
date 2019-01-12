@@ -25,126 +25,111 @@ package org.embergraph.service.ndx.pipeline;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.InnerCause;
 
 /**
- * Unit tests for error handling in the control logic used by
- * {@link AbstractMasterTask} and friends.
- * 
+ * Unit tests for error handling in the control logic used by {@link AbstractMasterTask} and
+ * friends.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMasterTaskWithErrors extends AbstractMasterTestCase {
 
-    public TestMasterTaskWithErrors() {
-    }
+  public TestMasterTaskWithErrors() {}
 
-    public TestMasterTaskWithErrors(String name) {
-        super(name);
-    }
+  public TestMasterTaskWithErrors(String name) {
+    super(name);
+  }
 
-    /**
-     * Unit test verifies correct shutdown and error reporting when a subtask
-     * fails.
-     * 
-     * @throws InterruptedException
-     * @throws ExecutionException
+  /**
+   * Unit test verifies correct shutdown and error reporting when a subtask fails.
+   *
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public void test_startWriteErrorStop() throws InterruptedException, ExecutionException {
+
+    final H masterStats = new H();
+
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+
+    /*
+     * Note: The master is overridden so that the 1st chunk written onto
+     * locator(13) will cause an exception to be thrown.
      */
-    public void test_startWriteErrorStop() throws InterruptedException,
-            ExecutionException {
 
-        final H masterStats = new H();
+    final M master =
+        new M(masterStats, masterBuffer, executorService) {
 
-        final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(
-                masterQueueCapacity);
+          @Override
+          protected S newSubtask(L locator, BlockingBuffer<KVO<O>[]> out) {
 
-        /*
-         * Note: The master is overridden so that the 1st chunk written onto
-         * locator(13) will cause an exception to be thrown.
-         */
+            if (locator.locator == 13) {
 
-        final M master = new M(masterStats, masterBuffer, executorService) {
-          
-            @Override
-            protected S newSubtask(L locator, BlockingBuffer<KVO<O>[]> out) {
+              return new S(this, locator, out) {
 
-                if (locator.locator == 13) {
+                @Override
+                protected boolean handleChunk(KVO<O>[] chunk) throws Exception {
 
-                    return new S(this, locator, out) {
-
-                        @Override
-                        protected boolean handleChunk(KVO<O>[] chunk)
-                                throws Exception {
-
-                            throw new TestException();
-                            
-                        }
-
-                    };
-                    
+                  throw new TestException();
                 }
-
-                return super.newSubtask(locator, out);
-                
+              };
             }
-            
-        };
-        
-        // Wrap computation as FutureTask.
-        final FutureTask<H> ft = new FutureTask<H>(master);
-        
-        // Set Future on BlockingBuffer.
-        masterBuffer.setFuture(ft);
-        
-        // Start the consumer.
-        executorService.submit(ft);
-        
-        final KVO<O>[] a = new KVO[] {
-                new KVO<O>(new byte[]{1},new byte[]{2},null/*val*/),
-                new KVO<O>(new byte[]{13},new byte[]{3},null/*val*/)
+
+            return super.newSubtask(locator, out);
+          }
         };
 
-        masterBuffer.add(a);
+    // Wrap computation as FutureTask.
+    final FutureTask<H> ft = new FutureTask<H>(master);
 
-        masterBuffer.close();
+    // Set Future on BlockingBuffer.
+    masterBuffer.setFuture(ft);
 
-        try {
+    // Start the consumer.
+    executorService.submit(ft);
 
-            // Note: We expect an exception.
-            masterBuffer.getFuture().get();
+    final KVO<O>[] a =
+        new KVO[] {
+          new KVO<O>(new byte[] {1}, new byte[] {2}, null /*val*/),
+          new KVO<O>(new byte[] {13}, new byte[] {3}, null /*val*/)
+        };
 
-            fail("Not expecting master to succeed.");
-            
-        } catch (ExecutionException ex) {
-            
-            final TestException t = (TestException) InnerCause.getInnerCause(
-                    ex, TestException.class);
-            
-            if (t == null) {
-            
-                // not the exception we were expecting.
-                throw ex;
-            
-            }
-            
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + t);
-        
-        }
+    masterBuffer.add(a);
 
-        assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
-        assertEquals("chunksIn", 1, masterStats.chunksIn.get());
-        assertEquals("partitionCount", 2, masterStats
-                .getMaximumPartitionCount());
+    masterBuffer.close();
 
-        /*
-         * Note: There is no way to predict whether any chunks will have been
-         * written on L(1) since it is drained by its own Thread.
-         */
-        
+    try {
+
+      // Note: We expect an exception.
+      masterBuffer.getFuture().get();
+
+      fail("Not expecting master to succeed.");
+
+    } catch (ExecutionException ex) {
+
+      final TestException t = (TestException) InnerCause.getInnerCause(ex, TestException.class);
+
+      if (t == null) {
+
+        // not the exception we were expecting.
+        throw ex;
+      }
+
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + t);
     }
 
+    assertEquals("elementsIn", a.length, masterStats.elementsIn.get());
+    assertEquals("chunksIn", 1, masterStats.chunksIn.get());
+    assertEquals("partitionCount", 2, masterStats.getMaximumPartitionCount());
+
+    /*
+     * Note: There is no way to predict whether any chunks will have been
+     * written on L(1) since it is drained by its own Thread.
+     */
+
+  }
 }

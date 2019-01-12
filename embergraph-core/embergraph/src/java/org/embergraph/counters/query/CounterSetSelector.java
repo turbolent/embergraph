@@ -26,9 +26,7 @@ package org.embergraph.counters.query;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.HistoryInstrument;
 import org.embergraph.counters.ICounter;
@@ -36,107 +34,102 @@ import org.embergraph.counters.PeriodEnum;
 
 /**
  * Reads counters from a {@link CounterSet}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CounterSetSelector implements ICounterSelector {
 
-    private static final Logger log = Logger.getLogger(CounterSetSelector.class);
+  private static final Logger log = Logger.getLogger(CounterSetSelector.class);
 
-    private final CounterSet counterSet;
-    
-    public CounterSetSelector(final CounterSet counterSet) {
+  private final CounterSet counterSet;
 
-        if (counterSet == null)
-            throw new IllegalArgumentException();
+  public CounterSetSelector(final CounterSet counterSet) {
 
-        this.counterSet = counterSet;
-        
-    }
+    if (counterSet == null) throw new IllegalArgumentException();
 
-    public CounterSet getRoot() {
-        
-        return counterSet;
-        
-    }
-    
-    /*
-     * Note: logic was modified to no longer consider the relative depth, only
-     * the absolute depth.
-     * 
-     * FIXME does not use [fromTime, toTime, or period] (or model.path)
-     */
-    @Override
-    @SuppressWarnings("rawtypes")
-    public ICounter[] selectCounters(final int depth, final Pattern pattern,
-            final long fromTime, final long toTime, final PeriodEnum period,
-            final boolean historyRequired) {
+    this.counterSet = counterSet;
+  }
 
-//        // depth of the hierarchy at the point where we are starting.
-//        final int ourDepth = counterSet.getDepth();
+  public CounterSet getRoot() {
 
-        if (log.isInfoEnabled())
-            log.info("path=" + counterSet.getPath() + ", depth=" + depth);
+    return counterSet;
+  }
 
-        final Vector<ICounter> counters = new Vector<ICounter>();
-        
-        final Iterator<ICounter> itr = counterSet.getCounters(pattern);
+  /*
+   * Note: logic was modified to no longer consider the relative depth, only
+   * the absolute depth.
+   *
+   * FIXME does not use [fromTime, toTime, or period] (or model.path)
+   */
+  @Override
+  @SuppressWarnings("rawtypes")
+  public ICounter[] selectCounters(
+      final int depth,
+      final Pattern pattern,
+      final long fromTime,
+      final long toTime,
+      final PeriodEnum period,
+      final boolean historyRequired) {
 
-        int nscanned = 0;
-        int nskipped = 0;
-        
-        while (itr.hasNext()) {
+    //        // depth of the hierarchy at the point where we are starting.
+    //        final int ourDepth = counterSet.getDepth();
 
-            final ICounter c = itr.next();
+    if (log.isInfoEnabled()) log.info("path=" + counterSet.getPath() + ", depth=" + depth);
 
-            nscanned++;
-            
-            if (log.isDebugEnabled())
-                log.debug("considering: " + c.getPath());
-            
-            if (historyRequired
-                    && !(c.getInstrument() instanceof HistoryInstrument)) {
+    final Vector<ICounter> counters = new Vector<ICounter>();
 
-                // prune non-history counters.
-                if (log.isDebugEnabled())
-                    log.debug("skipping (history): " + c.getPath());
+    final Iterator<ICounter> itr = counterSet.getCounters(pattern);
 
-                nskipped++;
-                
-                continue;
-                
-            }
-            
-            if (depth > 0) {
+    int nscanned = 0;
+    int nskipped = 0;
 
-                final int counterDepth = c.getDepth();
+    while (itr.hasNext()) {
 
-                if (counterDepth > depth) {
+      final ICounter c = itr.next();
 
-                    // prune by depth
-                    if (log.isDebugEnabled())
-                        log.debug("skipping (depth): " + c.getPath());
+      nscanned++;
 
-                    nskipped++;
+      if (log.isDebugEnabled()) log.debug("considering: " + c.getPath());
 
-                    continue;
-                    
-                }
-                
-            }
-            
-            counters.add( c );
-            
+      if (historyRequired && !(c.getInstrument() instanceof HistoryInstrument)) {
+
+        // prune non-history counters.
+        if (log.isDebugEnabled()) log.debug("skipping (history): " + c.getPath());
+
+        nskipped++;
+
+        continue;
+      }
+
+      if (depth > 0) {
+
+        final int counterDepth = c.getDepth();
+
+        if (counterDepth > depth) {
+
+          // prune by depth
+          if (log.isDebugEnabled()) log.debug("skipping (depth): " + c.getPath());
+
+          nskipped++;
+
+          continue;
         }
+      }
 
-        if (log.isInfoEnabled())
-            log.info("Matched " + counters.size() + " counters; nscanned="
-                    + nscanned + ", nskipped=" + nskipped);
-        
-        final ICounter[] a = counters.toArray(new ICounter[counters.size()]);
-
-        return a;
-        
+      counters.add(c);
     }
 
+    if (log.isInfoEnabled())
+      log.info(
+          "Matched "
+              + counters.size()
+              + " counters; nscanned="
+              + nscanned
+              + ", nskipped="
+              + nskipped);
+
+    final ICounter[] a = counters.toArray(new ICounter[counters.size()]);
+
+    return a;
+  }
 }

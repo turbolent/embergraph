@@ -23,12 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
@@ -39,15 +34,16 @@ import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
+import org.openrdf.model.Literal;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
 
 /**
- * Helper class for parsing an extracting SERVICE parameters. The SERVICE group
- * graph pattern should consist of zero or triples whose Subject is
- * {@link BD#SERVICE_PARAM}. There may be zero or more such triple patterns. The
- * Predicate (key) and Object (val) positions for those triple patterns are
- * extracted into a {@link ServiceParams} object. For each key, there may be one
- * or more values.
- * 
+ * Helper class for parsing an extracting SERVICE parameters. The SERVICE group graph pattern should
+ * consist of zero or triples whose Subject is {@link BD#SERVICE_PARAM}. There may be zero or more
+ * such triple patterns. The Predicate (key) and Object (val) positions for those triple patterns
+ * are extracted into a {@link ServiceParams} object. For each key, there may be one or more values.
+ *
  * <pre>
  * SERVICE <uri> {
  *   bd:serviceParam :key1 :val1 .
@@ -58,442 +54,338 @@ import org.embergraph.rdf.store.BD;
  */
 public class ServiceParams {
 
-    private static final Logger log = Logger
-            .getLogger(AbstractServiceFactory.class);
+  private static final Logger log = Logger.getLogger(AbstractServiceFactory.class);
 
-    /**
-     * The map of service params.
-     */
-    private final Map<URI, List<TermNode>> params;
+  /** The map of service params. */
+  private final Map<URI, List<TermNode>> params;
 
-    public ServiceParams() {
+  public ServiceParams() {
 
-        this.params = new LinkedHashMap<URI, List<TermNode>>();
+    this.params = new LinkedHashMap<URI, List<TermNode>>();
+  }
 
+  /** Add. */
+  public void add(final URI param, final TermNode value) {
+
+    if (!params.containsKey(param)) {
+
+      params.put(param, new LinkedList<TermNode>());
     }
 
-    /**
-     * Add.
-     */
-    public void add(final URI param, final TermNode value) {
+    params.get(param).add(value);
+  }
 
-        if (!params.containsKey(param)) {
+  /** Set (clear and add). */
+  public void set(final URI param, final TermNode value) {
 
-            params.put(param, new LinkedList<TermNode>());
+    clear(param);
 
-        }
+    add(param, value);
+  }
 
-        params.get(param).add(value);
+  /** Clear. */
+  public void clear(final URI param) {
 
+    params.remove(param);
+  }
+
+  /** Check for existence. */
+  public boolean contains(final URI param) {
+
+    return params.containsKey(param);
+  }
+
+  /** Get a singleton value for the specified param. */
+  public TermNode get(final URI param, final TermNode defaultValue) {
+
+    if (params.containsKey(param)) {
+
+      final List<TermNode> values = params.get(param);
+
+      if (values.size() > 1) {
+
+        throw new RuntimeException("not a singleton param");
+      }
+
+      return values.get(0);
     }
 
-    /**
-     * Set (clear and add).
-     */
-    public void set(final URI param, final TermNode value) {
+    return defaultValue;
+  }
 
-        clear(param);
+  /** Helper. */
+  public Boolean getAsBoolean(final URI param) {
 
-        add(param, value);
+    return getAsBoolean(param, null);
+  }
 
+  /** Helper. */
+  public Boolean getAsBoolean(final URI param, final Boolean defaultValue) {
+
+    final Literal term = getAsLiteral(param, null);
+
+    if (term != null) {
+
+      return term.booleanValue();
     }
 
-    /**
-     * Clear.
-     */
-    public void clear(final URI param) {
+    return defaultValue;
+  }
 
-        params.remove(param);
+  /** Helper. */
+  public Integer getAsInt(final URI param) {
 
+    return getAsInt(param, null);
+  }
+
+  /** Helper. */
+  public Integer getAsInt(final URI param, final Integer defaultValue) {
+
+    final Literal term = getAsLiteral(param, null);
+
+    if (term != null) {
+
+      return term.intValue();
     }
 
-    /**
-     * Check for existence.
-     */
-    public boolean contains(final URI param) {
+    return defaultValue;
+  }
 
-        return params.containsKey(param);
+  /** Helper. */
+  public Long getAsLong(final URI param) {
 
+    return getAsLong(param, null);
+  }
+
+  /** Helper. */
+  public Long getAsLong(final URI param, final Long defaultValue) {
+
+    final Literal term = getAsLiteral(param, null);
+
+    if (term != null) {
+
+      return term.longValue();
     }
 
-    /**
-     * Get a singleton value for the specified param.
-     */
-    public TermNode get(final URI param, final TermNode defaultValue) {
+    return defaultValue;
+  }
 
-        if (params.containsKey(param)) {
+  /** Helper. */
+  public String getAsString(final URI param) {
 
-            final List<TermNode> values = params.get(param);
+    return getAsString(param, null);
+  }
 
-            if (values.size() > 1) {
+  /** Helper. */
+  public String getAsString(final URI param, final String defaultValue) {
 
-                throw new RuntimeException("not a singleton param");
+    final Literal term = getAsLiteral(param, null);
 
-            }
+    if (term != null) {
 
-            return values.get(0);
-
-        }
-
-        return defaultValue;
-
+      return term.stringValue();
     }
 
-    /**
-     * Helper.
-     */
-    public Boolean getAsBoolean(final URI param) {
+    return defaultValue;
+  }
 
-        return getAsBoolean(param, null);
+  /** Helper. */
+  public Literal getAsLiteral(final URI param) {
 
+    return getAsLiteral(param, null);
+  }
+
+  /** Helper. */
+  public Literal getAsLiteral(final URI param, final Literal defaultValue) {
+
+    final TermNode term = get(param, null);
+
+    if (term != null) {
+
+      if (term.isVariable()) {
+
+        throw new IllegalArgumentException("not a constant");
+      }
+
+      final Value v = term.getValue();
+
+      if (!(v instanceof Literal)) {
+
+        throw new IllegalArgumentException("not a literal");
+      }
+
+      return ((Literal) v);
     }
 
-    /**
-     * Helper.
-     */
-    public Boolean getAsBoolean(final URI param, final Boolean defaultValue) {
+    return defaultValue;
+  }
 
-        final Literal term = getAsLiteral(param, null);
+  /** Helper. */
+  public URI getAsURI(final URI param) {
 
-        if (term != null) {
+    return getAsURI(param, null);
+  }
 
-            return term.booleanValue();
+  /** Helper. */
+  public URI getAsURI(final URI param, final URI defaultValue) {
 
-        }
+    final TermNode term = get(param, null);
 
-        return defaultValue;
+    if (term != null) {
 
+      if (term.isVariable()) {
+
+        throw new IllegalArgumentException("not a constant");
+      }
+
+      final Value v = term.getValue();
+
+      if (!(v instanceof URI)) {
+
+        throw new IllegalArgumentException("not a uri");
+      }
+
+      return ((URI) v);
     }
 
-    /**
-     * Helper.
-     */
-    public Integer getAsInt(final URI param) {
+    return defaultValue;
+  }
 
-        return getAsInt(param, null);
+  /** Helper. */
+  @SuppressWarnings("rawtypes")
+  public IVariable<IV> getAsVar(final URI param) {
 
+    return getAsVar(param, null);
+  }
+
+  /** Helper. */
+  @SuppressWarnings("rawtypes")
+  public IVariable<IV> getAsVar(final URI param, final IVariable<IV> defaultValue) {
+
+    final TermNode term = get(param, null);
+
+    if (term != null) {
+
+      if (!term.isVariable()) {
+
+        throw new IllegalArgumentException("not a var");
+      }
+
+      return (IVariable<IV>) term.getValueExpression();
     }
 
-    /**
-     * Helper.
-     */
-    public Integer getAsInt(final URI param, final Integer defaultValue) {
+    return defaultValue;
+  }
 
-        final Literal term = getAsLiteral(param, null);
+  /** Helper. */
+  public List<TermNode> get(final URI param) {
 
-        if (term != null) {
+    if (params.containsKey(param)) {
 
-            return term.intValue();
-
-        }
-
-        return defaultValue;
-
+      return params.get(param);
     }
 
-    /**
-     * Helper.
-     */
-    public Long getAsLong(final URI param) {
+    return Collections.emptyList();
+  }
 
-        return getAsLong(param, null);
+  /** Iterator. */
+  public Iterator<Map.Entry<URI, List<TermNode>>> iterator() {
 
-    }
+    return params.entrySet().iterator();
+  }
 
-    /**
-     * Helper.
-     */
-    public Long getAsLong(final URI param, final Long defaultValue) {
+  @Override
+  public String toString() {
 
-        final Literal term = getAsLiteral(param, null);
+    final StringBuilder sb = new StringBuilder();
 
-        if (term != null) {
+    sb.append("[");
 
-            return term.longValue();
+    for (Map.Entry<URI, List<TermNode>> e : params.entrySet()) {
 
-        }
+      final URI param = e.getKey();
 
-        return defaultValue;
+      final List<TermNode> terms = e.getValue();
 
-    }
+      sb.append(param).append(": ");
 
-    /**
-     * Helper.
-     */
-    public String getAsString(final URI param) {
+      if (terms.size() == 1) {
 
-        return getAsString(param, null);
+        sb.append(terms.get(0));
 
-    }
-
-    /**
-     * Helper.
-     */
-    public String getAsString(final URI param, final String defaultValue) {
-
-        final Literal term = getAsLiteral(param, null);
-
-        if (term != null) {
-
-            return term.stringValue();
-
-        }
-
-        return defaultValue;
-
-    }
-
-    /**
-     * Helper.
-     */
-    public Literal getAsLiteral(final URI param) {
-
-        return getAsLiteral(param, null);
-
-    }
-
-    /**
-     * Helper.
-     */
-    public Literal getAsLiteral(final URI param, final Literal defaultValue) {
-
-        final TermNode term = get(param, null);
-
-        if (term != null) {
-
-            if (term.isVariable()) {
-
-                throw new IllegalArgumentException("not a constant");
-
-            }
-
-            final Value v = term.getValue();
-
-            if (!(v instanceof Literal)) {
-
-                throw new IllegalArgumentException("not a literal");
-
-            }
-
-            return ((Literal) v);
-
-        }
-
-        return defaultValue;
-
-    }
-
-    /**
-     * Helper.
-     */
-    public URI getAsURI(final URI param) {
-
-        return getAsURI(param, null);
-
-    }
-
-    /**
-     * Helper.
-     */
-    public URI getAsURI(final URI param, final URI defaultValue) {
-
-        final TermNode term = get(param, null);
-
-        if (term != null) {
-
-            if (term.isVariable()) {
-
-                throw new IllegalArgumentException("not a constant");
-
-            }
-
-            final Value v = term.getValue();
-
-            if (!(v instanceof URI)) {
-
-                throw new IllegalArgumentException("not a uri");
-
-            }
-
-            return ((URI) v);
-
-        }
-
-        return defaultValue;
-
-    }
-
-    /**
-     * Helper.
-     */
-    @SuppressWarnings("rawtypes")
-    public IVariable<IV> getAsVar(final URI param) {
-
-        return getAsVar(param, null);
-
-    }
-
-    /**
-     * Helper.
-     */
-    @SuppressWarnings("rawtypes")
-    public IVariable<IV> getAsVar(final URI param,
-            final IVariable<IV> defaultValue) {
-
-        final TermNode term = get(param, null);
-
-        if (term != null) {
-
-            if (!term.isVariable()) {
-
-                throw new IllegalArgumentException("not a var");
-
-            }
-
-            return (IVariable<IV>) term.getValueExpression();
-
-        }
-
-        return defaultValue;
-
-    }
-
-    /**
-     * Helper.
-     */
-    public List<TermNode> get(final URI param) {
-
-        if (params.containsKey(param)) {
-
-            return params.get(param);
-
-        }
-
-        return Collections.emptyList();
-
-    }
-
-    /**
-     * Iterator.
-     */
-    public Iterator<Map.Entry<URI, List<TermNode>>> iterator() {
-
-        return params.entrySet().iterator();
-
-    }
-
-    @Override
-    public String toString() {
-
-        final StringBuilder sb = new StringBuilder();
+      } else {
 
         sb.append("[");
+        for (TermNode t : terms) {
 
-        for (Map.Entry<URI, List<TermNode>> e : params.entrySet()) {
-
-            final URI param = e.getKey();
-
-            final List<TermNode> terms = e.getValue();
-
-            sb.append(param).append(": ");
-
-            if (terms.size() == 1) {
-
-                sb.append(terms.get(0));
-
-            } else {
-
-                sb.append("[");
-                for (TermNode t : terms) {
-
-                    sb.append(t).append(", ");
-
-                }
-                sb.setLength(sb.length() - 2);
-                sb.append("]");
-
-            }
-
-            sb.append(", ");
-
+          sb.append(t).append(", ");
         }
-
-        if (sb.length() > 1)
-            sb.setLength(sb.length() - 2);
+        sb.setLength(sb.length() - 2);
         sb.append("]");
+      }
 
-        return sb.toString();
-
+      sb.append(", ");
     }
 
-    /**
-     * Gather the service params (any statement patterns with the subject of
-     * {@link BD#SERVICE_PARAM}.
-     */
-    static public ServiceParams gatherServiceParams(
-            final ServiceCallCreateParams createParams) {
+    if (sb.length() > 1) sb.setLength(sb.length() - 2);
+    sb.append("]");
 
-        if (createParams == null)
-            throw new IllegalArgumentException();
+    return sb.toString();
+  }
 
-        final AbstractTripleStore store = createParams.getTripleStore();
+  /**
+   * Gather the service params (any statement patterns with the subject of {@link BD#SERVICE_PARAM}.
+   */
+  public static ServiceParams gatherServiceParams(final ServiceCallCreateParams createParams) {
 
-        if (store == null)
-            throw new IllegalArgumentException();
+    if (createParams == null) throw new IllegalArgumentException();
 
-        final ServiceNode serviceNode = createParams.getServiceNode();
+    final AbstractTripleStore store = createParams.getTripleStore();
 
-        if (serviceNode == null)
-            throw new IllegalArgumentException();
+    if (store == null) throw new IllegalArgumentException();
 
-        final GraphPatternGroup<IGroupMemberNode> group = serviceNode
-                .getGraphPattern();
+    final ServiceNode serviceNode = createParams.getServiceNode();
 
-        if (group == null)
-            throw new IllegalArgumentException();
+    if (serviceNode == null) throw new IllegalArgumentException();
 
-        final ServiceParams serviceParams = new ServiceParams();
+    final GraphPatternGroup<IGroupMemberNode> group = serviceNode.getGraphPattern();
 
-        final Iterator<IGroupMemberNode> it = group.iterator();
+    if (group == null) throw new IllegalArgumentException();
 
-        while (it.hasNext()) {
+    final ServiceParams serviceParams = new ServiceParams();
 
-            final IGroupMemberNode node = it.next();
+    final Iterator<IGroupMemberNode> it = group.iterator();
 
-            if (node instanceof StatementPatternNode) {
+    while (it.hasNext()) {
 
-                final StatementPatternNode sp = (StatementPatternNode) node;
+      final IGroupMemberNode node = it.next();
 
-                final TermNode s = sp.s();
+      if (node instanceof StatementPatternNode) {
 
-                if (s.isConstant() && BD.SERVICE_PARAM.equals(s.getValue())) {
+        final StatementPatternNode sp = (StatementPatternNode) node;
 
-                    if (sp.p().isVariable()) {
+        final TermNode s = sp.s();
 
-                        throw new RuntimeException(
-                                "not a valid service param triple pattern, "
-                                        + "predicate must be constant: " + sp);
+        if (s.isConstant() && BD.SERVICE_PARAM.equals(s.getValue())) {
 
-                    }
+          if (sp.p().isVariable()) {
 
-                    final URI param = (URI) sp.p().getValue();
+            throw new RuntimeException(
+                "not a valid service param triple pattern, " + "predicate must be constant: " + sp);
+          }
 
-                    serviceParams.add(param, sp.o());
+          final URI param = (URI) sp.p().getValue();
 
-                }
-
-            }
-
+          serviceParams.add(param, sp.o());
         }
-
-        if (log.isDebugEnabled()) {
-
-            log.debug(serviceParams);
-            
-        }
-
-        return serviceParams;
-
+      }
     }
 
+    if (log.isDebugEnabled()) {
+
+      log.debug(serviceParams);
+    }
+
+    return serviceParams;
+  }
 } // class ServiceParams

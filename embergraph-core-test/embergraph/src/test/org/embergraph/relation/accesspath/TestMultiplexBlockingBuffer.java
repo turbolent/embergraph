@@ -23,99 +23,85 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-import org.embergraph.relation.accesspath.BlockingBuffer;
-import org.embergraph.relation.accesspath.BufferClosedException;
-import org.embergraph.relation.accesspath.IBlockingBuffer;
-
 /**
  * Test suite for {@link MultiplexBlockingBuffer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestMultiplexBlockingBuffer extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestMultiplexBlockingBuffer() {
+  /** */
+  public TestMultiplexBlockingBuffer() {}
 
+  /** @param name */
+  public TestMultiplexBlockingBuffer(String name) {
+    super(name);
+  }
+
+  public void test_multiplex() {
+
+    final IBlockingBuffer<String> buffer = new BlockingBuffer<String>();
+
+    final MultiplexBlockingBuffer<String> multiplex = new MultiplexBlockingBuffer<String>(buffer);
+
+    // buffer is open and empty.
+    assertTrue(buffer.isOpen());
+    assertTrue(buffer.isEmpty());
+
+    // multiplex is open.
+    assertTrue(multiplex.isOpen());
+
+    final IBlockingBuffer<String> skin1 = multiplex.newInstance();
+
+    final IBlockingBuffer<String> skin2 = multiplex.newInstance();
+
+    // buffer is open and empty.
+    assertTrue(buffer.isOpen());
+    assertTrue(buffer.isEmpty());
+
+    // multiplex is open.
+    assertTrue(multiplex.isOpen());
+
+    skin1.add("a");
+    skin1.flush();
+    skin1.close();
+    try {
+      skin1.add("a2");
+      fail("Expecting: " + BufferClosedException.class);
+    } catch (BufferClosedException ex) {
+      if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param name
-     */
-    public TestMultiplexBlockingBuffer(String name) {
-        super(name);
+    // buffer is open but no longer empty.
+    assertTrue(buffer.isOpen());
+    assertFalse(buffer.isEmpty());
 
-    }
+    // multiplex is open.
+    assertTrue(multiplex.isOpen());
 
-    public void test_multiplex() {
-        
-        final IBlockingBuffer<String> buffer = new BlockingBuffer<String>();
-        
-        final MultiplexBlockingBuffer<String> multiplex = new MultiplexBlockingBuffer<String>(buffer);
+    skin2.add("b");
+    skin2.add("c");
+    skin2.flush();
 
-        // buffer is open and empty.
-        assertTrue(buffer.isOpen());
-        assertTrue(buffer.isEmpty());
-        
-        // multiplex is open.
-        assertTrue(multiplex.isOpen());
-        
-        final IBlockingBuffer<String> skin1 = multiplex.newInstance();
+    // buffer is open but not empty.
+    assertTrue(buffer.isOpen());
+    assertFalse(buffer.isEmpty());
 
-        final IBlockingBuffer<String> skin2 = multiplex.newInstance();
+    // multiplex is open.
+    assertTrue(multiplex.isOpen());
 
-        // buffer is open and empty.
-        assertTrue(buffer.isOpen());
-        assertTrue(buffer.isEmpty());
-        
-        // multiplex is open.
-        assertTrue(multiplex.isOpen());
+    // close the last open skin.
+    skin2.close();
 
-        skin1.add("a");
-        skin1.flush();
-        skin1.close();
-        try {
-            skin1.add("a2");
-            fail("Expecting: " + BufferClosedException.class);
-        } catch (BufferClosedException ex) {
-            if (log.isInfoEnabled())
-                log.info("Ignoring expected exception: " + ex);
-        }
+    // buffer is closed but not empty.
+    assertFalse(buffer.isOpen());
+    assertFalse(buffer.isEmpty());
 
-        // buffer is open but no longer empty.
-        assertTrue(buffer.isOpen());
-        assertFalse(buffer.isEmpty());
+    // multiplex closed.
+    assertFalse(multiplex.isOpen());
 
-        // multiplex is open.
-        assertTrue(multiplex.isOpen());
-
-        skin2.add("b");
-        skin2.add("c");
-        skin2.flush();
-
-        // buffer is open but not empty.
-        assertTrue(buffer.isOpen());
-        assertFalse(buffer.isEmpty());
-
-        // multiplex is open.
-        assertTrue(multiplex.isOpen());
-
-        // close the last open skin.
-        skin2.close();
-        
-        // buffer is closed but not empty.
-        assertFalse(buffer.isOpen());
-        assertFalse(buffer.isEmpty());
-
-        // multiplex closed.
-        assertFalse(multiplex.isOpen());
-
-        // verify the data.
-        assertSameIterator(new String[]{"a","b","c"}, buffer.iterator());
-        
-    }
-
+    // verify the data.
+    assertSameIterator(new String[] {"a", "b", "c"}, buffer.iterator());
+  }
 }

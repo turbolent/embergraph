@@ -18,21 +18,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.util.httpd;
 
 /**
- * A utility class to store configuration settings.  Introduced to consolidate
- * the HTTP port per BLZG-1166.
- * 
- * @author beebs
+ * A utility class to store configuration settings. Introduced to consolidate the HTTP port per
+ * BLZG-1166.
  *
+ * @author beebs
  */
 public final class Config {
-	
-	public static final int HTTP_PORT = 9999;
-	
-    public static final String PATH = "";
 
-    public static final String DEFAULT_HOST = "localhost";
-    
-	public static final String DEFAULT_ENDPOINT = "http://" + DEFAULT_HOST
-			+ ":" + HTTP_PORT + "/" + PATH;
+  public static final int HTTP_PORT = 9999;
 
+  public static final String PATH = "";
+
+  public static final String DEFAULT_HOST = "localhost";
+
+  public static final String DEFAULT_ENDPOINT =
+      "http://" + DEFAULT_HOST + ":" + HTTP_PORT + "/" + PATH;
 }

@@ -21,58 +21,45 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha;
 
 /**
- * Commit request for a 2-phase commit as coodinated by the leader (local
- * object).
- * 
+ * Commit request for a 2-phase commit as coodinated by the leader (local object).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class CommitRequest {
 
-    private final PrepareRequest prepareRequest;
-    private final PrepareResponse prepareResponse;
+  private final PrepareRequest prepareRequest;
+  private final PrepareResponse prepareResponse;
 
-    /**
-     * The request used for the PREPARE.
-     */
-    public PrepareRequest getPrepareRequest() {
-        return prepareRequest;
-    }
+  /** The request used for the PREPARE. */
+  public PrepareRequest getPrepareRequest() {
+    return prepareRequest;
+  }
 
-    /**
-     * The response for the PREPARE. This indicates which services voted to
-     * commit and which did not.
-     */
-    public PrepareResponse getPrepareResponse() {
-        return prepareResponse;
-    }
+  /**
+   * The response for the PREPARE. This indicates which services voted to commit and which did not.
+   */
+  public PrepareResponse getPrepareResponse() {
+    return prepareResponse;
+  }
 
-    /**
-     * 
-     * @param prepareRequest
-     *            The request used for the PREPARE.
-     * @param prepareResponse
-     *            The response for the PREPARE. This indicates which services
-     *            voted to commit and which did not.
-     */
-    public CommitRequest(final PrepareRequest prepareRequest,
-            final PrepareResponse prepareResponse) {
+  /**
+   * @param prepareRequest The request used for the PREPARE.
+   * @param prepareResponse The response for the PREPARE. This indicates which services voted to
+   *     commit and which did not.
+   */
+  public CommitRequest(final PrepareRequest prepareRequest, final PrepareResponse prepareResponse) {
 
-        if (prepareRequest == null)
-            throw new IllegalArgumentException();
+    if (prepareRequest == null) throw new IllegalArgumentException();
 
-        if (prepareResponse == null)
-            throw new IllegalArgumentException();
-        
-        this.prepareRequest = prepareRequest;
-        this.prepareResponse = prepareResponse;
-    }
+    if (prepareResponse == null) throw new IllegalArgumentException();
 
-    @Override
-    public String toString() {
-    
-        return super.toString() + "{req=" + prepareRequest + ", resp="
-                + prepareResponse + "}";
+    this.prepareRequest = prepareRequest;
+    this.prepareResponse = prepareResponse;
+  }
 
-    }
-    
+  @Override
+  public String toString() {
+
+    return super.toString() + "{req=" + prepareRequest + ", resp=" + prepareResponse + "}";
+  }
 }

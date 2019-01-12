@@ -24,65 +24,55 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service;
 
 import java.util.Arrays;
-
+import junit.framework.TestCase;
 import org.embergraph.service.ndx.ClientException;
 
-import junit.framework.TestCase;
-
 /**
- * Class written to verify the stack trace printing behavior of
- * {@link ClientException}.
- * <p>
- * Note: You have to inspect the test results by hand.
- * 
+ * Class written to verify the stack trace printing behavior of {@link ClientException}.
+ *
+ * <p>Note: You have to inspect the test results by hand.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestClientException extends TestCase {
 
-    /**
-     * 
-     */
-    public TestClientException() {
+  /** */
+  public TestClientException() {}
+
+  /** @param arg0 */
+  public TestClientException(String arg0) {
+    super(arg0);
+  }
+
+  void ex1() {
+    throw new RuntimeException("ex1");
+  }
+
+  void ex2() {
+    throw new RuntimeException("ex2");
+  }
+
+  /**
+   * This "test" throws an exception which should print out two "causes". Those causes are
+   * exceptions thrown by {@link #ex1()} and {@link #ex2()}.
+   */
+  public void test01() {
+
+    Throwable t1 = null;
+    try {
+      ex1();
+    } catch (Throwable t) {
+      t1 = t;
     }
 
-    /**
-     * @param arg0
-     */
-    public TestClientException(String arg0) {
-        super(arg0);
+    Throwable t2 = null;
+    try {
+      ex2();
+    } catch (Throwable t) {
+      t2 = t;
     }
 
-    void ex1() {
-        throw new RuntimeException("ex1");
-    }
-
-    void ex2() {
-        throw new RuntimeException("ex2");
-    }
-
-    /**
-     * This "test" throws an exception which should print out two "causes".
-     * Those causes are exceptions thrown by {@link #ex1()} and {@link #ex2()}.
-     */
-    public void test01() {
-
-        Throwable t1 = null;
-        try {
-            ex1();
-        } catch (Throwable t) {
-            t1 = t;
-        }
-
-        Throwable t2 = null;
-        try {
-            ex2();
-        } catch (Throwable t) {
-            t2 = t;
-        }
-
-        throw new ClientException("test", Arrays.asList(new Throwable[] { t1,
-                t2 }));
-    }
-
+    throw new ClientException("test", Arrays.asList(new Throwable[] {t1, t2}));
+  }
 }

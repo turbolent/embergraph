@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.io.compression;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,48 +29,37 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite() {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite(TestAll.class.getPackage()
-                .getName());
+    final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
 
-        // tests for Unicode compression.
-        suite.addTestSuite(TestUnicodeCompressor.class);
-        
-        // tests for the UnicodeHelper
-        suite.addTestSuite(TestUnicodeHelper.class);
-        
-        suite.addTestSuite(TestNOPRecordCompressor.class);
+    // tests for Unicode compression.
+    suite.addTestSuite(TestUnicodeCompressor.class);
 
-        // tests some assumptions for Deflate and Inflate.
-        suite.addTestSuite(TestHuffmanEncoder.class);
+    // tests for the UnicodeHelper
+    suite.addTestSuite(TestUnicodeHelper.class);
 
-        suite.addTestSuite(TestRecordCompressor_BestSpeed.class);
+    suite.addTestSuite(TestNOPRecordCompressor.class);
 
-        suite.addTestSuite(TestRecordCompressor_BestCompression.class);
-        
-        // Test suite for message compression.
-        suite.addTestSuite(TestCompressorRegistry.class);
+    // tests some assumptions for Deflate and Inflate.
+    suite.addTestSuite(TestHuffmanEncoder.class);
 
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(TestRecordCompressor_BestSpeed.class);
+
+    suite.addTestSuite(TestRecordCompressor_BestCompression.class);
+
+    // Test suite for message compression.
+    suite.addTestSuite(TestCompressorRegistry.class);
+
+    return suite;
+  }
 }

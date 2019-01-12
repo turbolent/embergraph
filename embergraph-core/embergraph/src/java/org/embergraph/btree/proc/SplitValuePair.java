@@ -18,43 +18,38 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.proc;
 
 import java.util.Comparator;
-
 import org.embergraph.service.Split;
 
 /**
  * A key/value pair where the key is a Split.
- * 
+ *
  * @param <K>
  * @param <V>
- * 
  * @author bryan
  */
-public class SplitValuePair<K extends Split,V> {
+public class SplitValuePair<K extends Split, V> {
 
-	final public K key;
-	final public V val;
+  public final K key;
+  public final V val;
 
-	public SplitValuePair(final K key, final V val) {
-		this.key = key;
-		this.val = val;
-	}
+  public SplitValuePair(final K key, final V val) {
+    this.key = key;
+    this.val = val;
+  }
 
-	/**
-	 * Sorts {@link SplitValuePair}s.
-	 * 
-	 * @author bryan
-	 */
-	public static class PairComparator<K extends Split, V> implements Comparator<SplitValuePair<K, V>> {
+  /**
+   * Sorts {@link SplitValuePair}s.
+   *
+   * @author bryan
+   */
+  public static class PairComparator<K extends Split, V>
+      implements Comparator<SplitValuePair<K, V>> {
 
-		@Override
-		public int compare(final SplitValuePair<K, V> o1, final SplitValuePair<K, V> o2) {
-			if (o1.key.fromIndex < o2.key.fromIndex)
-				return -1;
-			if (o1.key.fromIndex > o2.key.fromIndex)
-				return 1;
-			return 0;
-		}
-
-	}
-
+    @Override
+    public int compare(final SplitValuePair<K, V> o1, final SplitValuePair<K, V> o2) {
+      if (o1.key.fromIndex < o2.key.fromIndex) return -1;
+      if (o1.key.fromIndex > o2.key.fromIndex) return 1;
+      return 0;
+    }
+  }
 }

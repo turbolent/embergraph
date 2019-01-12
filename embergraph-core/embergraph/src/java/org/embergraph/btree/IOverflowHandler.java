@@ -24,35 +24,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.io.Serializable;
-
 import org.embergraph.rawstore.IRawStore;
 
 /**
- * An interface that allows you to inspect index entries during an
- * {@link IndexSegmentBuilder} operation.
- * 
+ * An interface that allows you to inspect index entries during an {@link IndexSegmentBuilder}
+ * operation.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IOverflowHandler extends Serializable {
 
-    /**
-     * Invoked for each index entry.
-     * 
-     * @param tuple
-     *            The index entry.
-     * @param target
-     *            The target store on which you can write additional data.
-     * 
-     * @return The new value to be stored under the key in the generated
-     *         {@link IndexSegment}.
-     */
-    public byte[] handle(ITuple tuple, IRawStore target);
+  /**
+   * Invoked for each index entry.
+   *
+   * @param tuple The index entry.
+   * @param target The target store on which you can write additional data.
+   * @return The new value to be stored under the key in the generated {@link IndexSegment}.
+   */
+  public byte[] handle(ITuple tuple, IRawStore target);
 
-    /**
-     * Notified when overflow processing is done for a given source and
-     * target.
-     */
-    public void close();
-    
+  /** Notified when overflow processing is done for a given source and target. */
+  public void close();
 }

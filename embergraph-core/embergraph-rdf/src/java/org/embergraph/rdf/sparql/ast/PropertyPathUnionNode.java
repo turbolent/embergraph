@@ -1,42 +1,29 @@
 package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 
 /**
- * This node is purely to trick the ASTJoinOrderByTypeOptimizer - we need to
- * keep the property path stuff in the right order, even the UNIONs.
+ * This node is purely to trick the ASTJoinOrderByTypeOptimizer - we need to keep the property path
+ * stuff in the right order, even the UNIONs.
  */
 public class PropertyPathUnionNode extends UnionNode {
-	
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
-     */
-    public PropertyPathUnionNode(PropertyPathUnionNode op) {
+  /** */
+  private static final long serialVersionUID = 1L;
 
-        super(op);
-        
-    }
+  /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
+  public PropertyPathUnionNode(PropertyPathUnionNode op) {
 
-    /**
-     * Required shallow copy constructor.
-     */
-    public PropertyPathUnionNode(BOp[] args, Map<String, Object> anns) {
+    super(op);
+  }
 
-        super(args, anns);
+  /** Required shallow copy constructor. */
+  public PropertyPathUnionNode(BOp[] args, Map<String, Object> anns) {
 
-    }
+    super(args, anns);
+  }
 
-    /**
-	 * Construct a non-optional union.
-	 */
-	public PropertyPathUnionNode() {
-	}
-
+  /** Construct a non-optional union. */
+  public PropertyPathUnionNode() {}
 }

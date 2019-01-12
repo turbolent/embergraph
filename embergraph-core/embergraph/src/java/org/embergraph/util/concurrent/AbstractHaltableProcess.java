@@ -27,113 +27,89 @@ import java.nio.channels.ClosedByInterruptException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.util.InnerCause;
 
 /**
  * Abstract base class for tasks whose processing may be halted asynchronously.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractHaltableProcess {
 
-    protected final transient static Logger log = Logger
-            .getLogger(AbstractHaltableProcess.class);
+  protected static final transient Logger log = Logger.getLogger(AbstractHaltableProcess.class);
 
-    /**
-     * Volatile flag is set <code>true</code> if the process should halt.
-     */
-    volatile transient private boolean halt = false;
+  /** Volatile flag is set <code>true</code> if the process should halt. */
+  private transient volatile boolean halt = false;
 
-    /**
-     * The first cause as set by {@link #halt(Throwable)}.
-     * <p>
-     * Note: {@link #halt} uses
-     * {@link AtomicReference#compareAndSet(Object, Object)} and specifies
-     * <code>null</code> as the expected value to ensure that only the first
-     * cause is recorded by this field.
-     */
-    final transient private AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>(
-            null);
+  /**
+   * The first cause as set by {@link #halt(Throwable)}.
+   *
+   * <p>Note: {@link #halt} uses {@link AtomicReference#compareAndSet(Object, Object)} and specifies
+   * <code>null</code> as the expected value to ensure that only the first cause is recorded by this
+   * field.
+   */
+  private final transient AtomicReference<Throwable> firstCause =
+      new AtomicReference<Throwable>(null);
 
-    /**
-     * Return unless processing has been halted.
-     * 
-     * @throws RuntimeException
-     *             wrapping the {@link #firstCause} iff processing has been
-     *             halted.
-     * 
-     * @see #halt(Throwable)
-     */
-    final public void halted() {
+  /**
+   * Return unless processing has been halted.
+   *
+   * @throws RuntimeException wrapping the {@link #firstCause} iff processing has been halted.
+   * @see #halt(Throwable)
+   */
+  public final void halted() {
 
-        if (halt) {
+    if (halt) {
 
-            throw new RuntimeException(firstCause.get());
+      throw new RuntimeException(firstCause.get());
+    }
+  }
 
+  /**
+   * Indicate that processing should halt. This method is written defensively and will not throw
+   * anything.
+   *
+   * <p><strong>The caller is responsible for throwing the cause out of their own context.</strong>
+   *
+   * @param cause The cause.
+   * @return The argument.
+   */
+  public final <T extends Throwable> T halt(final T cause) {
+
+    halt = true;
+
+    final boolean isFirstCause = firstCause.compareAndSet(null /* expect */, cause);
+
+    if (log.isEnabledFor(Level.WARN))
+      try {
+
+        if (!InnerCause.isInnerCause(cause, InterruptedException.class)
+            && !InnerCause.isInnerCause(cause, CancellationException.class)
+            && !InnerCause.isInnerCause(cause, ClosedByInterruptException.class)
+            && !InnerCause.isInnerCause(cause, RejectedExecutionException.class)
+            && !InnerCause.isInnerCause(cause, BufferClosedException.class)) {
+
+          /*
+           * This logs all unexpected causes, not just the first one
+           * to be reported for this join task.
+           *
+           * Note: The master will log the firstCause that it receives
+           * as an error.
+           */
+
+          log.warn(this + " : isFirstCause=" + isFirstCause + " : " + cause, cause);
         }
 
-    }
+      } catch (Throwable ex) {
 
-    /**
-     * Indicate that processing should halt. This method is written defensively
-     * and will not throw anything.
-     * 
-     * <strong>The caller is responsible for throwing the cause out of their own
-     * context.</strong>
-     * 
-     * @param cause
-     *            The cause.
-     * 
-     * @return The argument.
-     */
-    final public <T extends Throwable> T halt(final T cause) {
+        // error in logging system - ignore.
 
-        halt = true;
+      }
 
-        final boolean isFirstCause = firstCause.compareAndSet(
-                null/* expect */, cause);
-
-        if (log.isEnabledFor(Level.WARN))
-
-            try {
-
-                if (!InnerCause.isInnerCause(cause, InterruptedException.class)
-                        && !InnerCause.isInnerCause(cause,
-                                CancellationException.class)
-                        && !InnerCause.isInnerCause(cause,
-                                ClosedByInterruptException.class)
-                        && !InnerCause.isInnerCause(cause,
-                                RejectedExecutionException.class)
-                        && !InnerCause.isInnerCause(cause,
-                                BufferClosedException.class)) {
-
-                    /*
-                     * This logs all unexpected causes, not just the first one
-                     * to be reported for this join task.
-                     * 
-                     * Note: The master will log the firstCause that it receives
-                     * as an error.
-                     */
-
-                    log.warn(this + " : isFirstCause=" + isFirstCause + " : "
-                            + cause, cause);
-
-                }
-
-            } catch (Throwable ex) {
-
-                // error in logging system - ignore.
-
-            }
-
-        return cause;
-
-    }
-
+    return cause;
+  }
 }

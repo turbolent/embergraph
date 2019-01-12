@@ -20,114 +20,93 @@ package org.embergraph.btree.proc;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.embergraph.btree.proc.SplitValuePair.PairComparator;
 import org.embergraph.service.Split;
 
 /**
- * Aggregator base class collects the individual results in an internal ordered
- * map and assembles the final result when it is requested from the individual
- * results. With this approach there is no overhead or contention when the
- * results are being produced in parallel and they can be combined efficiently
- * within a single thread in {@link #getResult()}.
- * <p>
- * Note: This implementation assumes that there is one element of the result for
- * each key in the original request. It places the {@link Split}-wise results
- * into a total ordering over the {@link Split}s and then delegates to a
- * concrete implementation to build the aggregated results out of the ordered
- * pairs of ({@link Split}, partial-result).
+ * Aggregator base class collects the individual results in an internal ordered map and assembles
+ * the final result when it is requested from the individual results. With this approach there is no
+ * overhead or contention when the results are being produced in parallel and they can be combined
+ * efficiently within a single thread in {@link #getResult()}.
+ *
+ * <p>Note: This implementation assumes that there is one element of the result for each key in the
+ * original request. It places the {@link Split}-wise results into a total ordering over the {@link
+ * Split}s and then delegates to a concrete implementation to build the aggregated results out of
+ * the ordered pairs of ({@link Split}, partial-result).
  *
  * @author bryan
  */
-abstract public class AbstractLocalSplitResultAggregator<R> implements IResultHandler<R, R> {
+public abstract class AbstractLocalSplitResultAggregator<R> implements IResultHandler<R, R> {
 
-	/**
-	 * The #of elements in the request (which is the must be the same as the
-	 * cardinality of the aggregated result).
-	 */
-	private final int size;
+  /**
+   * The #of elements in the request (which is the must be the same as the cardinality of the
+   * aggregated result).
+   */
+  private final int size;
 
-	/**
-	 * Map for collecting the piece wise results.
-	 */
-	private final ConcurrentHashMap<Split, R> map = new ConcurrentHashMap<Split, R>();
+  /** Map for collecting the piece wise results. */
+  private final ConcurrentHashMap<Split, R> map = new ConcurrentHashMap<Split, R>();
 
-	/**
-	 * 
-	 * @param size
-	 *            The #of elements in the request (which is the same as the
-	 *            cardinality of the aggregated result).
-	 */
-	public AbstractLocalSplitResultAggregator(final int size) {
+  /**
+   * @param size The #of elements in the request (which is the same as the cardinality of the
+   *     aggregated result).
+   */
+  public AbstractLocalSplitResultAggregator(final int size) {
 
-		if (size < 0)
-			throw new IllegalArgumentException();
-		
-		this.size = size;
-		
-	}
+    if (size < 0) throw new IllegalArgumentException();
 
-	@Override
-	public void aggregate(final R result, final Split split) {
+    this.size = size;
+  }
 
-		map.put(split, result);
+  @Override
+  public void aggregate(final R result, final Split split) {
 
-	}
+    map.put(split, result);
+  }
 
-	@Override
-	public R getResult() {
+  @Override
+  public R getResult() {
 
-		/*
-		 * Extract the results into a key/value array.
-		 */
+    /*
+     * Extract the results into a key/value array.
+     */
 
-		final int nresults = map.size();
+    final int nresults = map.size();
 
-		@SuppressWarnings("unchecked")
-		final SplitValuePair<Split, R>[] a = new SplitValuePair[nresults];
+    @SuppressWarnings("unchecked")
+    final SplitValuePair<Split, R>[] a = new SplitValuePair[nresults];
 
-		{
+    {
+      int i = 0;
 
-			int i = 0;
+      for (Map.Entry<Split, R> e : map.entrySet()) {
 
-			for (Map.Entry<Split, R> e : map.entrySet()) {
+        a[i++] = new SplitValuePair<Split, R>(e.getKey(), e.getValue());
+      }
 
-				a[i++] = new SplitValuePair<Split, R>(e.getKey(), e.getValue());
+      if (a.length == 1) {
 
-			}
+        // Do not bother aggregating a single result.
+        return a[0].val;
+      }
+    }
 
-			if (a.length == 1) {
+    /*
+     * Sort the array by Split. This imposes a total ordering and makes the
+     * counters[] 1:1 with the original keys[][] and vals[][] provided to
+     * the index procedure.
+     */
+    Arrays.sort(a, 0 /* fromIndex */, a.length /* toIndex */, new PairComparator<Split, R>());
 
-				// Do not bother aggregating a single result.
-				return a[0].val;
+    return newResult(size, a);
+  }
 
-			}
-
-		}
-
-		/*
-		 * Sort the array by Split. This imposes a total ordering and makes the
-		 * counters[] 1:1 with the original keys[][] and vals[][] provided to
-		 * the index procedure.
-		 */
-		Arrays.sort(a, 0/* fromIndex */, a.length/* toIndex */, new PairComparator<Split, R>());
-
-		return newResult(size, a);
-
-	}
-
-	/**
-	 * Build the aggregated result by aggregate the individual results in the
-	 * given order.
-	 * 
-	 * @param size
-	 *            The number of keys in the original request.
-	 * @param a
-	 *            An array of {@link SplitValuePair}s that is ordered on
-	 *            {@link Split#fromIndex}.
-	 * 
-	 * @return The aggregated result.
-	 */
-	abstract protected R newResult(final int size, final SplitValuePair<Split, R>[] a);
-
+  /**
+   * Build the aggregated result by aggregate the individual results in the given order.
+   *
+   * @param size The number of keys in the original request.
+   * @param a An array of {@link SplitValuePair}s that is ordered on {@link Split#fromIndex}.
+   * @return The aggregated result.
+   */
+  protected abstract R newResult(final int size, final SplitValuePair<Split, R>[] a);
 }

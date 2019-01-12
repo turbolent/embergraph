@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha.msg;
 
 import java.nio.ByteBuffer;
-
 import org.embergraph.io.ChecksumUtility;
 import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.RootBlockView;
@@ -26,57 +25,50 @@ import org.embergraph.util.BytesUtil;
 
 public class HALogRootBlocksResponse implements IHALogRootBlocksResponse {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    final private boolean openIsRootBlock0;
-    final private boolean closeIsRootBlock0;
+  private final boolean openIsRootBlock0;
+  private final boolean closeIsRootBlock0;
 
-    final private byte[] openData;
-    final private byte[] closeData;
+  private final byte[] openData;
+  private final byte[] closeData;
 
-    public HALogRootBlocksResponse(final IRootBlockView openRootBlock,
-            final IRootBlockView closeRootBlock) {
+  public HALogRootBlocksResponse(
+      final IRootBlockView openRootBlock, final IRootBlockView closeRootBlock) {
 
-        if (openRootBlock == null)
-            throw new IllegalArgumentException();
+    if (openRootBlock == null) throw new IllegalArgumentException();
 
-        if (closeRootBlock == null)
-            throw new IllegalArgumentException();
+    if (closeRootBlock == null) throw new IllegalArgumentException();
 
-        this.openIsRootBlock0 = openRootBlock.isRootBlock0();
+    this.openIsRootBlock0 = openRootBlock.isRootBlock0();
 
-        this.closeIsRootBlock0 = closeRootBlock.isRootBlock0();
+    this.closeIsRootBlock0 = closeRootBlock.isRootBlock0();
 
-        this.openData = BytesUtil.toArray(openRootBlock.asReadOnlyBuffer());
+    this.openData = BytesUtil.toArray(openRootBlock.asReadOnlyBuffer());
 
-        this.closeData = BytesUtil.toArray(closeRootBlock.asReadOnlyBuffer());
+    this.closeData = BytesUtil.toArray(closeRootBlock.asReadOnlyBuffer());
+  }
 
-    }
+  @Override
+  public IRootBlockView getOpenRootBlock() {
 
-    @Override
-    public IRootBlockView getOpenRootBlock() {
+    return new RootBlockView(openIsRootBlock0, ByteBuffer.wrap(openData), new ChecksumUtility());
+  }
 
-        return new RootBlockView(openIsRootBlock0, ByteBuffer.wrap(openData),
-                new ChecksumUtility());
+  @Override
+  public IRootBlockView getCloseRootBlock() {
 
-    }
-    
-    @Override
-    public IRootBlockView getCloseRootBlock() {
+    return new RootBlockView(closeIsRootBlock0, ByteBuffer.wrap(closeData), new ChecksumUtility());
+  }
 
-        return new RootBlockView(closeIsRootBlock0, ByteBuffer.wrap(closeData),
-                new ChecksumUtility());
+  public String toString() {
 
-    }
-
-    public String toString() {
-
-        return getClass() + "{openRootBlock=" + getOpenRootBlock()
-                + ", closeRootBlock=" + getCloseRootBlock() + "}";
-
-    }
-
+    return getClass()
+        + "{openRootBlock="
+        + getOpenRootBlock()
+        + ", closeRootBlock="
+        + getCloseRootBlock()
+        + "}";
+  }
 }

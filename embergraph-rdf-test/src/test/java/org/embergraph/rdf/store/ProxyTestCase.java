@@ -22,159 +22,142 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import java.util.Properties;
-
 import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;
 
-
 /**
- * <p>
- * This class provides proxy delegation logic for abstract methods declared by
- * {@link AbstractTestCase} and is used to extend the set of tests that will be
- * applied to all implementations of the generic object model Java API. If you
- * want to test a new implementation, you MUST extend the
- * {@link AbstractTestCase} instead and implement its abstract methods for your
- * implementation. This class provides an implementation neutral way to add new
- * tests, not a means for testing specific generic object model Java API
- * implementations.
- * </p>
- * <p>
- * In order to add new tests for the generic object model Java APIs, you extend
- * this class and write test methods.
- * </p>
- * 
+ * This class provides proxy delegation logic for abstract methods declared by {@link
+ * AbstractTestCase} and is used to extend the set of tests that will be applied to all
+ * implementations of the generic object model Java API. If you want to test a new implementation,
+ * you MUST extend the {@link AbstractTestCase} instead and implement its abstract methods for your
+ * implementation. This class provides an implementation neutral way to add new tests, not a means
+ * for testing specific generic object model Java API implementations.
+ *
+ * <p>In order to add new tests for the generic object model Java APIs, you extend this class and
+ * write test methods.
+ *
  * @see AbstractTestCase
  */
+public abstract class ProxyTestCase extends AbstractTestCase implements IProxyTest {
 
-public abstract class ProxyTestCase
-    extends AbstractTestCase
-    implements IProxyTest
-{
+  public ProxyTestCase() {}
 
-    public ProxyTestCase() {}
-    public ProxyTestCase(String name){super(name);}
-    
-    //************************************************************
-    //************************ IProxyTest ************************
-    //************************************************************
+  public ProxyTestCase(String name) {
+    super(name);
+  }
 
-    private Test m_delegate = null;
+  // ************************************************************
+  // ************************ IProxyTest ************************
+  // ************************************************************
 
-    public void setDelegate(Test delegate) {
+  private Test m_delegate = null;
 
-        m_delegate = delegate;
+  public void setDelegate(Test delegate) {
 
-    }
+    m_delegate = delegate;
+  }
 
-    public Test getDelegate() throws IllegalStateException {
+  public Test getDelegate() throws IllegalStateException {
 
-        return m_delegate;
+    return m_delegate;
+  }
 
-    }
+  /**
+   * Returns the delegate after first making sure that it is non-null and extends {@link
+   * AbstractTestCase}.
+   */
+  public AbstractTestCase getOurDelegate() {
 
-    /**
-     * Returns the delegate after first making sure that it is non-null and
-     * extends {@link AbstractTestCase}.
-     */
+    if (m_delegate == null) {
 
-    public AbstractTestCase getOurDelegate() {
+      /*
+       * This property gives the class name of the concrete instance of
+       * AbstractTestSuite that we need to instantiate so that we can run
+       * or debug a single test at a time! This is designed to support
+       * running or debugging a single test that has failed after running
+       * the entire test suite in an IDE such as Eclipse.
+       *
+       * Note: We reach out to System.getProperty() and not
+       * getProperties() to avoid infinite recursion through
+       * getOurDelegate. The only way this makes sense anyway is when you
+       * define -DtestClass=... as a JVM property.
+       *
+       * @todo document.
+       */
+      String testClass = System.getProperty("testClass");
+      if (testClass == null) {
 
-        if (m_delegate == null) {
+        throw new IllegalStateException(
+            "testClass: property not defined, could not configure delegate.");
+      }
+      try {
+        Class cl = Class.forName(testClass);
+        m_delegate = (Test) cl.newInstance();
+      } catch (Exception ex) {
+        throw new RuntimeException(ex);
+      }
 
-            /*
-             * This property gives the class name of the concrete instance of
-             * AbstractTestSuite that we need to instantiate so that we can run
-             * or debug a single test at a time! This is designed to support
-             * running or debugging a single test that has failed after running
-             * the entire test suite in an IDE such as Eclipse.
-             * 
-             * Note: We reach out to System.getProperty() and not
-             * getProperties() to avoid infinite recursion through
-             * getOurDelegate. The only way this makes sense anyway is when you
-             * define -DtestClass=... as a JVM property.
-             * 
-             * @todo document.
-             */
-            String testClass = System.getProperty("testClass");
-            if (testClass == null) {
-
-                throw new IllegalStateException(
-                        "testClass: property not defined, could not configure delegate.");
-
-            }
-            try {
-                Class cl = Class.forName(testClass);
-                m_delegate = (Test) cl.newInstance();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-
-            // throw new IllegalStateException
-            // ( "The delegate is not configured."
-            // );
-
-        }
-
-        if (m_delegate instanceof AbstractTestCase) {
-
-            return (AbstractTestCase) m_delegate;
-
-        }
-
-        throw new IllegalStateException("The delegate MUST extend "
-                + AbstractTestCase.class.getName() + ", not "
-                + m_delegate.getClass().getName());
+      // throw new IllegalStateException
+      // ( "The delegate is not configured."
+      // );
 
     }
 
-    //************************************************************
-    //********************* proxied methods **********************
-    //************************************************************
+    if (m_delegate instanceof AbstractTestCase) {
 
-    /*
-     * Note: All methods on the delegate MUST be proxied here or they will be
-     * answered by our base class which is the same Class as the delegate, but
-     * whose instance fields have not been initialized! (An instance of the
-     * proxy is created for each test, while one instance of the delegate serves
-     * an entire suite of tests.)
-     */
-    
-    protected void setUp() throws Exception {
-        getOurDelegate().setUp(this);
+      return (AbstractTestCase) m_delegate;
     }
 
-    protected void tearDown() throws Exception {
-        getOurDelegate().tearDown(this);
-    }
+    throw new IllegalStateException(
+        "The delegate MUST extend "
+            + AbstractTestCase.class.getName()
+            + ", not "
+            + m_delegate.getClass().getName());
+  }
 
-    /**
-     * The properties as configured by the delegate.
-     */
-    public Properties getProperties() {
-        return getOurDelegate().getProperties();
-    }
+  // ************************************************************
+  // ********************* proxied methods **********************
+  // ************************************************************
 
-    /**
-     * Create a triple store instance using the delegate and using the
-     * properties as configured by the delegate.
-     */
-    protected AbstractTripleStore getStore() {
-        return getOurDelegate().getStore(getProperties());
-    }
-    
-    /**
-     * Create a triple store instance using the delegate using the specified
-     * properties (typically overriding one or more properties).
-     */
-    protected AbstractTripleStore getStore(Properties properties) {
-        return getOurDelegate().getStore(properties);
-    }
-    
-    /**
-     * Close and then re-open the triple store.
-     */
-    protected AbstractTripleStore reopenStore(AbstractTripleStore store) {
-        return getOurDelegate().reopenStore(store);
-    }
+  /*
+   * Note: All methods on the delegate MUST be proxied here or they will be
+   * answered by our base class which is the same Class as the delegate, but
+   * whose instance fields have not been initialized! (An instance of the
+   * proxy is created for each test, while one instance of the delegate serves
+   * an entire suite of tests.)
+   */
 
+  protected void setUp() throws Exception {
+    getOurDelegate().setUp(this);
+  }
+
+  protected void tearDown() throws Exception {
+    getOurDelegate().tearDown(this);
+  }
+
+  /** The properties as configured by the delegate. */
+  public Properties getProperties() {
+    return getOurDelegate().getProperties();
+  }
+
+  /**
+   * Create a triple store instance using the delegate and using the properties as configured by the
+   * delegate.
+   */
+  protected AbstractTripleStore getStore() {
+    return getOurDelegate().getStore(getProperties());
+  }
+
+  /**
+   * Create a triple store instance using the delegate using the specified properties (typically
+   * overriding one or more properties).
+   */
+  protected AbstractTripleStore getStore(Properties properties) {
+    return getOurDelegate().getStore(properties);
+  }
+
+  /** Close and then re-open the triple store. */
+  protected AbstractTripleStore reopenStore(AbstractTripleStore store) {
+    return getOurDelegate().reopenStore(store);
+  }
 }

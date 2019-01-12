@@ -27,30 +27,20 @@ import junit.framework.TestCase2;
 
 /**
  * Test suite for {@link AbstractArrayBuffer}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestArrayBuffer extends TestCase2 {
 
-    /**
-     * 
-     */
-    public TestArrayBuffer() {
-    }
+  /** */
+  public TestArrayBuffer() {}
 
-    /**
-     * @param arg0
-     */
-    public TestArrayBuffer(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestArrayBuffer(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * @todo place holder for unit tests.
-     */
-    public void test_something() {
-        
-    }
-    
+  /** @todo place holder for unit tests. */
+  public void test_something() {}
 }

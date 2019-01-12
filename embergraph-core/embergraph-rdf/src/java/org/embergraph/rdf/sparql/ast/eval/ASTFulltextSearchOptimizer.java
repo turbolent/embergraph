@@ -24,16 +24,14 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import org.openrdf.model.URI;
-
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.service.fts.FTS;
+import org.openrdf.model.URI;
 
 /**
- * Translate {@link FTS#SEARCH} and related magic predicates into a
- * {@link ServiceNode} which will invoke the embergraph search engine.
- * 
+ * Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
+ * invoke the embergraph search engine.
+ *
  * <pre>
  * with {
  *    select ?subj ?score
@@ -44,45 +42,44 @@ import org.embergraph.service.fts.FTS;
  *    }
  * } as %searchSet1
  * </pre>
- * 
+ *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class ASTFulltextSearchOptimizer extends ASTSearchOptimizerBase {
 
-    static public final Set<URI> searchUris;
-   
-    static {
-      
-        final Set<URI> set = new LinkedHashSet<URI>();
+  public static final Set<URI> searchUris;
 
-        set.add(FTS.SEARCH);
-        set.add(FTS.ENDPOINT);
-        set.add(FTS.ENDPOINT_TYPE);
-        set.add(FTS.PARAMS);
-        set.add(FTS.SEARCH_RESULT_TYPE);
-        set.add(FTS.TIMEOUT);
-        set.add(FTS.SCORE);
-        set.add(FTS.SNIPPET);
-        set.add(FTS.SEARCH_FIELD);
-        set.add(FTS.SNIPPET_FIELD);
-        set.add(FTS.SCORE_FIELD);
-        
-        searchUris = Collections.unmodifiableSet(set);
-    }
-   
-    @Override
-    protected Set<URI> getSearchUris() {
-       return searchUris;
-    }
+  static {
+    final Set<URI> set = new LinkedHashSet<URI>();
 
-    @Override
-    protected String getNamespace() {
-       return FTS.NAMESPACE;
-    }
+    set.add(FTS.SEARCH);
+    set.add(FTS.ENDPOINT);
+    set.add(FTS.ENDPOINT_TYPE);
+    set.add(FTS.PARAMS);
+    set.add(FTS.SEARCH_RESULT_TYPE);
+    set.add(FTS.TIMEOUT);
+    set.add(FTS.SCORE);
+    set.add(FTS.SNIPPET);
+    set.add(FTS.SEARCH_FIELD);
+    set.add(FTS.SNIPPET_FIELD);
+    set.add(FTS.SCORE_FIELD);
 
-    @Override
-    protected URI getSearchPredicate() {
-       return FTS.SEARCH;
-    }
+    searchUris = Collections.unmodifiableSet(set);
+  }
+
+  @Override
+  protected Set<URI> getSearchUris() {
+    return searchUris;
+  }
+
+  @Override
+  protected String getNamespace() {
+    return FTS.NAMESPACE;
+  }
+
+  @Override
+  protected URI getSearchPredicate() {
+    return FTS.SEARCH;
+  }
 }

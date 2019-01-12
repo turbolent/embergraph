@@ -25,46 +25,41 @@ import org.embergraph.bop.IPredicate;
 
 /**
  * Type safe enumeration of access patterns for the {@link LexPredicate}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum LexAccessPatternEnum {
 
-    /** Only the IV position is bound. */
-    IVBound,
-    /** Only the Value position is bound. */
-    ValueBound,
-    /** Neither position is bound. */
-    NoneBound,
-    /** Both positions are bound. */
-    FullyBound;
-    
-    static public LexAccessPatternEnum valueOf(final IPredicate<?> predicate) {
-        
-        if (predicate.arity() != 2)
-            throw new IllegalArgumentException();
+  /** Only the IV position is bound. */
+  IVBound,
+  /** Only the Value position is bound. */
+  ValueBound,
+  /** Neither position is bound. */
+  NoneBound,
+  /** Both positions are bound. */
+  FullyBound;
 
-        if (predicate.get(1/* IV */).isConstant()) {
+  public static LexAccessPatternEnum valueOf(final IPredicate<?> predicate) {
 
-            if(predicate.get(0/* Value */).isConstant()) {
-            
-                return FullyBound;
-                
-            }
-            
-            return IVBound;
-            
-        } else if (predicate.get(0/* Value */).isConstant()) {
-            
-            return ValueBound;
-            
-        } else {
-            
-            return NoneBound;
-            
-        }
+    if (predicate.arity() != 2) throw new IllegalArgumentException();
 
+    if (predicate.get(1 /* IV */).isConstant()) {
+
+      if (predicate.get(0 /* Value */).isConstant()) {
+
+        return FullyBound;
+      }
+
+      return IVBound;
+
+    } else if (predicate.get(0 /* Value */).isConstant()) {
+
+      return ValueBound;
+
+    } else {
+
+      return NoneBound;
     }
-
+  }
 }

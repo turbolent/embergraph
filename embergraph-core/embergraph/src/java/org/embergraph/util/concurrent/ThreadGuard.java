@@ -23,135 +23,117 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
-
 import org.apache.log4j.Logger;
 
 /**
- * Pattern used to guard critical regions that await {@link Condition}s when a
- * concurrent event may cause the {@link Condition} to become unsatisfiable.
- * 
+ * Pattern used to guard critical regions that await {@link Condition}s when a concurrent event may
+ * cause the {@link Condition} to become unsatisfiable.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class ThreadGuard {
 
-    private static final transient Logger log = Logger.getLogger(ThreadGuard.class);
-    
-    public static abstract class Guard {
+  private static final transient Logger log = Logger.getLogger(ThreadGuard.class);
 
-        abstract public void run() throws InterruptedException;
-        
+  public abstract static class Guard {
+
+    public abstract void run() throws InterruptedException;
+  }
+
+  /**
+   * Execute a critical region which needs to be interrupted if some condition is violated.
+   *
+   * @param r The lambda.
+   */
+  public void guard(final Runnable r) {
+    incThread();
+    try {
+      r.run();
+    } finally {
+      decThread();
     }
-    
-    /**
-     * Execute a critical region which needs to be interrupted if some condition
-     * is violated.
-     * 
-     * @param r
-     *            The lambda.
-     */
-    public void guard(final Runnable r) {
-        incThread();
-        try {
-           r.run();
-        } finally {
-            decThread();
-        }
+  }
+
+  /**
+   * Execute a critical region which needs to be interrupted if some condition is violated.
+   *
+   * @param r The lambda.
+   * @return The result (if any).
+   */
+  public void guard(final Guard r) throws InterruptedException {
+    incThread();
+    try {
+      r.run();
+    } catch (InterruptedException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    } finally {
+      decThread();
     }
+  }
 
-    /**
-     * Execute a critical region which needs to be interrupted  if some condition
-     * is violated.
-     * 
-     * @param r
-     *            The lambda.
-     *            
-     * @return The result (if any).
-     */
-    public void guard(final Guard r) throws InterruptedException {
-        incThread();
-        try {
-            r.run();
-        } catch(InterruptedException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            decThread();
-        }
+  /**
+   * Execute a critical region which needs to be interrupted if some condition is violated.
+   *
+   * @param r The lambda.
+   * @return The result (if any).
+   * @throws Exception
+   */
+  public <T> T guard(final Callable<T> r) throws Exception {
+    incThread();
+    try {
+      return r.call();
+    } finally {
+      decThread();
     }
+  }
 
-   /**
-    * Execute a critical region which needs to be interrupted if some condition
-    * is violated.
-    * 
-    * @param r
-    *           The lambda.
-    * 
-    * @return The result (if any).
-    * @throws Exception
-    */
-   public <T> T guard(final Callable<T> r) throws Exception {
-        incThread();
-        try {
-           return r.call();
-        } finally {
-            decThread();
-        }
+  private final ConcurrentHashMap<Thread, AtomicInteger> threads =
+      new ConcurrentHashMap<Thread, AtomicInteger>();
+
+  /** Increment thread in critical region awaiting a {@link Condition}. */
+  private void incThread() {
+    synchronized (threads) {
+      final Thread t = Thread.currentThread();
+      final AtomicInteger tmp = threads.get(t);
+      if (tmp == null) {
+        threads.put(t, new AtomicInteger(1));
+      } else {
+        tmp.incrementAndGet();
+      }
     }
+  }
 
-    private final ConcurrentHashMap<Thread, AtomicInteger> threads = new ConcurrentHashMap<Thread, AtomicInteger>();
-
-    /**
-     * Increment thread in critical region awaiting a {@link Condition}.
-     */
-    private void incThread() {
-        synchronized (threads) {
-            final Thread t = Thread.currentThread();
-            final AtomicInteger tmp = threads.get(t);
-            if (tmp == null) {
-                threads.put(t, new AtomicInteger(1));
-            } else {
-                tmp.incrementAndGet();
-            }
-        }
+  /** Decrement thread in critical region awaiting a {@link Condition}. */
+  public void decThread() {
+    synchronized (threads) {
+      final Thread t = Thread.currentThread();
+      final AtomicInteger tmp = threads.get(t);
+      if (tmp == null) {
+        // code must be wrong with broken try/finally.
+        throw new AssertionError();
+      }
+      if (tmp.decrementAndGet() == 0) {
+        threads.remove(t);
+      }
     }
+  }
 
-    /**
-     * Decrement thread in critical region awaiting a {@link Condition}.
-     */
-    public void decThread() {
-        synchronized (threads) {
-            final Thread t = Thread.currentThread();
-            final AtomicInteger tmp = threads.get(t);
-            if (tmp == null) {
-                // code must be wrong with broken try/finally.
-                throw new AssertionError();
-            }
-            if (tmp.decrementAndGet() == 0) {
-                threads.remove(t);
-            }
-        }
+  /** Interrupt any threads in critical regions awaiting a {@link Condition}. */
+  public void interruptAll() {
+    synchronized (threads) {
+      final Iterator<Map.Entry<Thread, AtomicInteger>> itr = threads.entrySet().iterator();
+      while (itr.hasNext()) {
+        final Map.Entry<Thread, AtomicInteger> e = itr.next();
+        final Thread t = e.getKey();
+        final int counter = e.getValue().get();
+        t.interrupt();
+        log.warn("Interrupted: " + t.getName() + "@counter=" + counter);
+      }
+      // Note: Will be cleared when we leave the finally{}.
+      //            // clear everything!
+      //            threads.clear();
     }
-
-    /**
-     * Interrupt any threads in critical regions awaiting a
-     * {@link Condition}.
-     */
-    public void interruptAll() {
-        synchronized (threads) {
-            final Iterator<Map.Entry<Thread, AtomicInteger>> itr = threads
-                    .entrySet().iterator();
-            while(itr.hasNext()) {
-                final Map.Entry<Thread,AtomicInteger> e = itr.next();
-                final Thread t = e.getKey();
-                final int counter = e.getValue().get();
-                t.interrupt();
-                log.warn("Interrupted: " + t.getName() + "@counter=" + counter);
-            }
-            // Note: Will be cleared when we leave the finally{}.
-//            // clear everything!
-//            threads.clear();
-        }
-    }
-
+  }
 }

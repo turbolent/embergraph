@@ -21,58 +21,51 @@ import java.util.List;
 
 /**
  * Utility class.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class GangliaUtil {
 
-    /**
-     * Parses a space and/or comma separated sequence of server
-     * specifications of the form <i>hostname</i> or <i>hostname:port</i>.
-     * If the specs string is null, defaults to
-     * <i>localhost</i>:<i>defaultPort</i>.
-     * 
-     * @return An array of one or more {@link InetSocketAddress} objects.
-     */
-    static public InetSocketAddress[] parse(final String specs,
-            final String defaultAddr, final int defaultPort) {
-        
-        final List<InetSocketAddress> result = new LinkedList<InetSocketAddress>();
-        
-        if (specs == null) {
+  /**
+   * Parses a space and/or comma separated sequence of server specifications of the form
+   * <i>hostname</i> or <i>hostname:port</i>. If the specs string is null, defaults to
+   * <i>localhost</i>:<i>defaultPort</i>.
+   *
+   * @return An array of one or more {@link InetSocketAddress} objects.
+   */
+  public static InetSocketAddress[] parse(
+      final String specs, final String defaultAddr, final int defaultPort) {
 
-            result.add(new InetSocketAddress(defaultAddr, defaultPort));
-            
+    final List<InetSocketAddress> result = new LinkedList<InetSocketAddress>();
+
+    if (specs == null) {
+
+      result.add(new InetSocketAddress(defaultAddr, defaultPort));
+
+    } else {
+
+      final String[] specStrings = specs.split("[ ,]+");
+
+      for (String specString : specStrings) {
+
+        final int colon = specString.indexOf(':');
+
+        if (colon < 0 || colon == specString.length() - 1) {
+
+          result.add(new InetSocketAddress(specString, defaultPort));
+
         } else {
 
-            final String[] specStrings = specs.split("[ ,]+");
-            
-            for (String specString : specStrings) {
-            
-                final int colon = specString.indexOf(':');
-                
-                if (colon < 0 || colon == specString.length() - 1) {
-                
-                    result.add(new InetSocketAddress(specString, defaultPort));
-                    
-                } else {
-                    
-                    final String hostname = specString.substring(0, colon);
-                    
-                    final int port = Integer.parseInt(specString
-                            .substring(colon + 1));
+          final String hostname = specString.substring(0, colon);
 
-                    result.add(new InetSocketAddress(hostname, port));
-                    
-                }
-                
-            }
-            
+          final int port = Integer.parseInt(specString.substring(colon + 1));
+
+          result.add(new InetSocketAddress(hostname, port));
         }
-
-        return result.toArray(new InetSocketAddress[result.size()]);
-        
+      }
     }
 
+    return result.toArray(new InetSocketAddress[result.size()]);
+  }
 }

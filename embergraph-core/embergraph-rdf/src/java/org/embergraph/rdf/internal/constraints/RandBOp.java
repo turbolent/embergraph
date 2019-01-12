@@ -21,54 +21,43 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 import java.util.Random;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class RandBOp extends IVValueExpression<IV> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+  /** */
+  private static final long serialVersionUID = 1L;
 
-    final private Random rand = new Random();
+  private final Random rand = new Random();
 
-    @Override
-    protected boolean areGlobalsRequired() {
-     
-        return false;
-        
-    }
-    
-    public RandBOp() {
+  @Override
+  protected boolean areGlobalsRequired() {
 
-        this(BOp.NOARGS, BOp.NOANNS);
-        
-    }
+    return false;
+  }
 
-    public RandBOp(final BOp[] args, final Map<String, Object> anns) {
+  public RandBOp() {
 
-        super(args, anns);
+    this(BOp.NOARGS, BOp.NOANNS);
+  }
 
-        if (args.length != 0)
-            throw new IllegalArgumentException();
+  public RandBOp(final BOp[] args, final Map<String, Object> anns) {
 
-    }
+    super(args, anns);
 
-    public RandBOp(final RandBOp op) {
-        
-        super(op);
-        
-    }
+    if (args.length != 0) throw new IllegalArgumentException();
+  }
 
-    public IV get(IBindingSet bindingSet) {
+  public RandBOp(final RandBOp op) {
 
-        return new XSDNumericIV(rand.nextDouble());
-        
-    }
+    super(op);
+  }
 
+  public IV get(IBindingSet bindingSet) {
+
+    return new XSDNumericIV(rand.nextDouble());
+  }
 }

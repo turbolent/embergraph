@@ -30,481 +30,455 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Iterator;
 import java.util.regex.Pattern;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import junit.framework.TestCase;
-
-import org.xml.sax.SAXException;
-
 import org.embergraph.counters.ICounterSet.IInstrumentFactory;
+import org.xml.sax.SAXException;
 
 /**
  * Unit tests for {@link CounterSet}.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCounters extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestCounters() {
+    super();
+  }
+
+  /** @param arg0 */
+  public TestCounters(String arg0) {
+    super(arg0);
+  }
+
+  public void test_ctor() {
+
+    CounterSet root = new CounterSet();
+
+    assertEquals("", root.getName());
+    assertEquals("/", root.getPath());
+  }
+
+  /** Tests of path construction. */
+  public void test_pathSemantics1() {
+
+    // root (name := "").
+    final CounterSet root = new CounterSet();
+
+    assertNull(root.getParent());
+    assertEquals("/", root.getPath());
+    assertEquals("", root.getName());
+    assertEquals(0, root.getDepth());
+
+    // make a child.
+    final CounterSet embergraph = root.makePath("www.embergraph.org");
+
+    assertNotNull(embergraph);
+    assertFalse(root == embergraph);
+
+    // verify parent.
+    assertTrue(root == embergraph.getParent());
+    assertEquals(1, embergraph.getDepth());
+
+    assertEquals("www.embergraph.org", embergraph.getName());
+
+    assertEquals("/www.embergraph.org", embergraph.getPath());
+
+    // make a child of a child using a relative path
+    final CounterSet memory = embergraph.makePath("memory");
+
+    assertTrue(embergraph == memory.getParent());
+
+    assertEquals(2, memory.getDepth());
+
+    assertEquals("memory", memory.getName());
+
+    assertEquals("/www.embergraph.org/memory", memory.getPath());
+
+    // make a child of a child using an absolute path.
+    final CounterSet disk = root.makePath("/www.embergraph.org/disk");
+
+    assertTrue(embergraph == disk.getParent());
+
+    assertEquals("disk", disk.getName());
+
+    assertEquals("/www.embergraph.org/disk", disk.getPath());
+
+    /*
+     * verify makePath recognizes existing nodes with absolute
+     * paths.
      */
-    public TestCounters() {
-        super();
+
+    assertTrue(root == root.makePath("/"));
+
+    assertTrue(embergraph == root.makePath("/www.embergraph.org"));
+
+    assertTrue(memory == root.makePath("/www.embergraph.org/memory"));
+
+    assertTrue(disk == root.makePath("/www.embergraph.org/disk"));
+
+    // illegal.
+    try {
+      root.makePath("");
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
 
-    /**
-     * @param arg0
+    /*
+     * verify makePath recognizes existing nodes with relative
+     * paths.
      */
-    public TestCounters(String arg0) {
-        super(arg0);
+
+    assertTrue(embergraph == root.makePath("www.embergraph.org"));
+
+    assertTrue(memory == root.makePath("www.embergraph.org/memory"));
+
+    assertTrue(memory == embergraph.makePath("memory"));
+
+    /*
+     * Test lookup with absolute paths.
+     */
+
+    assertTrue(root == root.getPath("/"));
+
+    assertTrue(embergraph == root.getPath("/www.embergraph.org"));
+
+    assertTrue(memory == root.getPath("/www.embergraph.org/memory"));
+
+    /*
+     * Test lookup with relative paths.
+     */
+
+    try {
+      root.getPath("");
+      fail("Expecting: " + IllegalArgumentException.class);
+    } catch (IllegalArgumentException ex) {
+      System.err.println("Ignoring expected exception: " + ex);
     }
 
-    public void test_ctor() {
-        
-        CounterSet root = new CounterSet();
+    assertTrue(embergraph == root.getPath("www.embergraph.org"));
 
-        assertEquals("",root.getName());
-        assertEquals("/",root.getPath());
-        
-    }
+    assertTrue(memory == root.getPath("www.embergraph.org/memory"));
 
-    /**
-     * Tests of path construction.
-     */
-    public void test_pathSemantics1() {
-        
-        // root (name := "").
-        final CounterSet root = new CounterSet();
-        
-        assertNull(root.getParent());
-        assertEquals("/",root.getPath());
-        assertEquals("",root.getName());
-        assertEquals(0,root.getDepth());
+    assertTrue(memory == embergraph.getPath("memory"));
+  }
 
-        // make a child.
-        final CounterSet embergraph = root.makePath("www.embergraph.org");
+  /**
+   * FIXME Test attach (aka move). Verify move of children when source is a root and otherwise move
+   * of the source itself. Verify detection of cycles (cycles indicate an illegal request).
+   */
+  public void test_attach1() {
 
-        assertNotNull(embergraph);
-        assertFalse(root == embergraph);
-        
-        // verify parent.
-        assertTrue(root == embergraph.getParent());
-        assertEquals(1,embergraph.getDepth());
+    CounterSet root = new CounterSet();
 
-        assertEquals("www.embergraph.org",embergraph.getName());
-        
-        assertEquals("/www.embergraph.org",embergraph.getPath());
-        
-        // make a child of a child using a relative path
-        final CounterSet memory = embergraph.makePath("memory");
-        
-        assertTrue(embergraph == memory.getParent());
-        
-        assertEquals(2,memory.getDepth());
+    CounterSet tmp = new CounterSet();
 
-        assertEquals("memory",memory.getName());
-        
-        assertEquals("/www.embergraph.org/memory",memory.getPath());
-
-        // make a child of a child using an absolute path.
-        final CounterSet disk = root.makePath("/www.embergraph.org/disk");
-        
-        assertTrue(embergraph == disk.getParent());
-
-        assertEquals("disk",disk.getName());
-        
-        assertEquals("/www.embergraph.org/disk",disk.getPath());
-
-        /*
-         * verify makePath recognizes existing nodes with absolute
-         * paths.
-         */
-        
-        assertTrue(root == root.makePath("/"));
-        
-        assertTrue(embergraph == root.makePath("/www.embergraph.org"));
-        
-        assertTrue(memory == root.makePath("/www.embergraph.org/memory"));
-
-        assertTrue(disk == root.makePath("/www.embergraph.org/disk"));
-
-        // illegal.
-        try {
-            root.makePath("");
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
-        
-        /*
-         * verify makePath recognizes existing nodes with relative
-         * paths.
-         */
-        
-        assertTrue(embergraph == root.makePath("www.embergraph.org"));
-        
-        assertTrue(memory == root.makePath("www.embergraph.org/memory"));
-
-        assertTrue(memory == embergraph.makePath("memory"));
-                
-        /*
-         * Test lookup with absolute paths.
-         */
-        
-        assertTrue(root == root.getPath("/"));
-
-        assertTrue(embergraph == root.getPath("/www.embergraph.org"));
-
-        assertTrue(memory == root.getPath("/www.embergraph.org/memory"));
-
-        /*
-         * Test lookup with relative paths.
-         */
-        
-        try {
-            root.getPath("");
-            fail("Expecting: " + IllegalArgumentException.class);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Ignoring expected exception: " + ex);
-        }
-
-        assertTrue(embergraph == root.getPath("www.embergraph.org"));
-
-        assertTrue(memory == root.getPath("www.embergraph.org/memory"));
-
-        assertTrue(memory == embergraph.getPath("memory"));
-        
-    }
-    
-    /**
-     * FIXME Test attach (aka move). Verify move of children when source is a
-     * root and otherwise move of the source itself. Verify detection of cycles
-     * (cycles indicate an illegal request).
-     */
-    public void test_attach1() {
-
-        CounterSet root = new CounterSet();
-
-        CounterSet tmp = new CounterSet();
-        
-        tmp.addCounter("foo", new Instrument<String>() {
-            public void sample() {
-                setValue("foo");
-            }
+    tmp.addCounter(
+        "foo",
+        new Instrument<String>() {
+          public void sample() {
+            setValue("foo");
+          }
         });
 
-        root.attach(tmp);
-        
-        assertNotNull(root.getPath("foo"));
-        
-    }
-    
-    public void test_directCounters() {
-        
-        CounterSet root = new CounterSet();
-        
-        assertNull(root.getChild("a"));
-        
-        {
-            
-            ICounter tmp = root.addCounter("a", new Instrument<Double>() {
+    root.attach(tmp);
+
+    assertNotNull(root.getPath("foo"));
+  }
+
+  public void test_directCounters() {
+
+    CounterSet root = new CounterSet();
+
+    assertNull(root.getChild("a"));
+
+    {
+      ICounter tmp =
+          root.addCounter(
+              "a",
+              new Instrument<Double>() {
                 public void sample() {}
-            });
+              });
 
-            assertNotNull(root.getChild("a"));
+      assertNotNull(root.getChild("a"));
 
-            assertEquals("a", tmp.getName());
+      assertEquals("a", tmp.getName());
 
-            assertEquals("/a", tmp.getPath());
-            
-        }
-        
-        // directly attached counter iterator.
-        {
-            
-            Iterator<ICounter> itr = root.counterIterator(null/*filter*/);
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounter c = itr.next();
+      assertEquals("/a", tmp.getPath());
+    }
 
-            assertEquals("a",c.getName());
-            
-            assertEquals("/a",c.getPath());
+    // directly attached counter iterator.
+    {
+      Iterator<ICounter> itr = root.counterIterator(null /*filter*/);
 
-            assertFalse( itr.hasNext() );
-            
-        }
-        
-        // recursively attached counter iterator.
-        {
-            
-            Iterator<ICounter> itr = root.getCounters(null/*filter*/);
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounter c = itr.next();
+      assertTrue(itr.hasNext());
 
-            assertEquals("a",c.getName());
-            
-            assertEquals("/a",c.getPath());
+      ICounter c = itr.next();
 
-            assertFalse( itr.hasNext() );
-            
-        }
+      assertEquals("a", c.getName());
 
-        root.addCounter("b", new Instrument<Double>() {
-            public void sample() {}
+      assertEquals("/a", c.getPath());
+
+      assertFalse(itr.hasNext());
+    }
+
+    // recursively attached counter iterator.
+    {
+      Iterator<ICounter> itr = root.getCounters(null /*filter*/);
+
+      assertTrue(itr.hasNext());
+
+      ICounter c = itr.next();
+
+      assertEquals("a", c.getName());
+
+      assertEquals("/a", c.getPath());
+
+      assertFalse(itr.hasNext());
+    }
+
+    root.addCounter(
+        "b",
+        new Instrument<Double>() {
+          public void sample() {}
         });
 
-        // test with pattern filter.
-        {
+    // test with pattern filter.
+    {
+      Iterator<ICounter> itr = root.getCounters(Pattern.compile("/a"));
 
-            Iterator<ICounter> itr = root.getCounters(Pattern.compile("/a"));
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounter c = itr.next();
+      assertTrue(itr.hasNext());
 
-            assertEquals("a",c.getName());
-            
-            assertEquals("/a",c.getPath());
+      ICounter c = itr.next();
 
-            assertFalse( itr.hasNext() );
+      assertEquals("a", c.getName());
 
-        }
-        // again.
-        {
+      assertEquals("/a", c.getPath());
 
-            Iterator<ICounter> itr = root.getCounters(Pattern.compile(".*b.*"));
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounter c = itr.next();
-
-            assertEquals("b",c.getName());
-            
-            assertEquals("/b",c.getPath());
-
-            assertFalse( itr.hasNext() );
-
-        }
-        
+      assertFalse(itr.hasNext());
     }
+    // again.
+    {
+      Iterator<ICounter> itr = root.getCounters(Pattern.compile(".*b.*"));
 
-    /**
-     * 
-     */
-    public void test_children() {
-        
-        final CounterSet root = new CounterSet();
-        
-        assertNull(root.getChild("cpu"));
-        
-        final CounterSet cpu = root.makePath("cpu");
+      assertTrue(itr.hasNext());
 
-        assertNotNull(root.getChild("cpu"));
-        
-        cpu.addCounter("a", new Instrument<Double>() {
-            public void sample() {}
+      ICounter c = itr.next();
+
+      assertEquals("b", c.getName());
+
+      assertEquals("/b", c.getPath());
+
+      assertFalse(itr.hasNext());
+    }
+  }
+
+  /** */
+  public void test_children() {
+
+    final CounterSet root = new CounterSet();
+
+    assertNull(root.getChild("cpu"));
+
+    final CounterSet cpu = root.makePath("cpu");
+
+    assertNotNull(root.getChild("cpu"));
+
+    cpu.addCounter(
+        "a",
+        new Instrument<Double>() {
+          public void sample() {}
         });
-        
-        assertNotNull(cpu.getChild("a"));
-        
-        assertNotNull(cpu.getPath("a"));
-        
-        assertNotNull(root.getPath("/cpu/a"));
 
-        // directly attached counter set iterator.
-        {
-            
-            Iterator<ICounterSet> itr = root.counterSetIterator();
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounterSet tmp = itr.next();
+    assertNotNull(cpu.getChild("a"));
 
-            assertEquals("cpu",tmp.getName());
-            
-            assertEquals("/cpu",tmp.getPath());
+    assertNotNull(cpu.getPath("a"));
 
-            assertFalse( itr.hasNext() );
-            
-        }
-        
-        // recursively attached counter iterator.
-        {
-            
-            Iterator<ICounter> itr = root.getCounters(null/*filter*/);
-            
-            assertTrue( itr.hasNext() );
-            
-            ICounter c = itr.next();
+    assertNotNull(root.getPath("/cpu/a"));
 
-            assertEquals("a",c.getName());
-            
-            assertEquals("/cpu/a",c.getPath());
+    // directly attached counter set iterator.
+    {
+      Iterator<ICounterSet> itr = root.counterSetIterator();
 
-            assertFalse( itr.hasNext() );
-            
-        }
-        
+      assertTrue(itr.hasNext());
+
+      ICounterSet tmp = itr.next();
+
+      assertEquals("cpu", tmp.getName());
+
+      assertEquals("/cpu", tmp.getPath());
+
+      assertFalse(itr.hasNext());
     }
 
-    /**
-     * Test that empty path components are not allowed.
-     */
-    public void test_emptyPathComponentsNotAllowed() {
+    // recursively attached counter iterator.
+    {
+      Iterator<ICounter> itr = root.getCounters(null /*filter*/);
 
-        final CounterSet countersRoot = new CounterSet();
+      assertTrue(itr.hasNext());
 
-        final String badpath = ICounterSet.pathSeparator
-                + ICounterSet.pathSeparator + "foo";
-        
-        try {
-            
-            countersRoot.makePath(badpath);
-            
-            fail("Expecting: " + IllegalArgumentException.class);
+      ICounter c = itr.next();
 
-        } catch (IllegalArgumentException ex) {
-            
-            System.err.println("Ignoring expected exception: " + ex);
-            
-        }
+      assertEquals("a", c.getName());
 
-        try {
-            
-            countersRoot.getPath(badpath);
-            
-            fail("Expecting: " + IllegalArgumentException.class);
+      assertEquals("/cpu/a", c.getPath());
 
-        } catch (IllegalArgumentException ex) {
-            
-            System.err.println("Ignoring expected exception: " + ex);
-            
-        }
-
-        
+      assertFalse(itr.hasNext());
     }
-    
-    /**
-     * Test of XML (de-)serialization.
-     * 
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     */
-    public void test_xml() throws IOException, ParserConfigurationException, SAXException {
-        
-        final CounterSet root = new CounterSet();
-        
-        final ICounter elapsed = root.addCounter("elapsed", new Instrument<Long>() {
-            public void sample(){
+  }
+
+  /** Test that empty path components are not allowed. */
+  public void test_emptyPathComponentsNotAllowed() {
+
+    final CounterSet countersRoot = new CounterSet();
+
+    final String badpath = ICounterSet.pathSeparator + ICounterSet.pathSeparator + "foo";
+
+    try {
+
+      countersRoot.makePath(badpath);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      System.err.println("Ignoring expected exception: " + ex);
+    }
+
+    try {
+
+      countersRoot.getPath(badpath);
+
+      fail("Expecting: " + IllegalArgumentException.class);
+
+    } catch (IllegalArgumentException ex) {
+
+      System.err.println("Ignoring expected exception: " + ex);
+    }
+  }
+
+  /**
+   * Test of XML (de-)serialization.
+   *
+   * @throws IOException
+   * @throws SAXException
+   * @throws ParserConfigurationException
+   */
+  public void test_xml() throws IOException, ParserConfigurationException, SAXException {
+
+    final CounterSet root = new CounterSet();
+
+    final ICounter elapsed =
+        root.addCounter(
+            "elapsed",
+            new Instrument<Long>() {
+              public void sample() {
                 setValue(System.currentTimeMillis());
-                }
+              }
             });
 
-        final CounterSet cpu = root.makePath("www.embergraph.org/cpu");
+    final CounterSet cpu = root.makePath("www.embergraph.org/cpu");
 
-        final ICounter availableProcessors = cpu.addCounter("availableProcessors", new Instrument<Integer>() {
-            public void sample(){
+    final ICounter availableProcessors =
+        cpu.addCounter(
+            "availableProcessors",
+            new Instrument<Integer>() {
+              public void sample() {
                 setValue(Runtime.getRuntime().availableProcessors());
-                }
+              }
             });
 
-        final CounterSet memory = root.makePath("www.embergraph.org/memory");
+    final CounterSet memory = root.makePath("www.embergraph.org/memory");
 
-        final ICounter maxMemory = memory.addCounter("maxMemory", new Instrument<Long>() {
-            public void sample(){
+    final ICounter maxMemory =
+        memory.addCounter(
+            "maxMemory",
+            new Instrument<Long>() {
+              public void sample() {
                 setValue(Runtime.getRuntime().maxMemory());
-                }
+              }
             });
 
-        CounterSet disk = root.makePath("www.embergraph.org/disk");
+    CounterSet disk = root.makePath("www.embergraph.org/disk");
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
-        // write out as XML.
-        root.asXML(baos, "UTF-8", null/*filter*/);
-        
-        byte[] data = baos.toByteArray();
-        
-        Reader r = new InputStreamReader(new ByteArrayInputStream(data),"UTF-8");
-        
-        StringBuilder sb = new StringBuilder();
-        
-        while(true) {
-            
-            int ch = r.read();
-            
-            if(ch==-1) break;
-            
-            sb.append((char)ch);
-            
-        }
-        
-        System.err.println(sb.toString());
-    
-        {
-            
-            CounterSet tmp = new CounterSet();
-            
-            IInstrumentFactory instrumentFactory = new IInstrumentFactory() {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-                public IInstrument newInstance(Class type) {
+    // write out as XML.
+    root.asXML(baos, "UTF-8", null /*filter*/);
 
-                    if (type == Double.class) {
-                        return new Instrument<Double>() {
-                            protected void sample() {
-                            }
-                        };
-                    } else if (type == Long.class) {
-                        return new Instrument<Long>() {
-                            protected void sample() {
-                            }
-                        };
-                    } else {
-                        throw new UnsupportedOperationException("type=" + type);
-                    }
+    byte[] data = baos.toByteArray();
 
-                }
-                
-            };
-            
-            Pattern filter = null;
-            
-            tmp.readXML(new ByteArrayInputStream(data), instrumentFactory, filter);
-            
-            System.err.println("Read back:\n"+tmp.toString());
-            
-            /*
-             * verify the counters that we had declared.
-             * 
-             * Note: This is a mess - I have to tunnel in to do the comparisons.
-             * 
-             * @todo also vet the other counters.
-             * 
-             * @todo mock up a history counter and vet its de-serialization from
-             * XML.
-             */
-            
-            assertNotNull(tmp.getPath(availableProcessors.getPath()));
+    Reader r = new InputStreamReader(new ByteArrayInputStream(data), "UTF-8");
 
-            assertEquals(availableProcessors.lastModified(), ((ICounter) tmp
-                    .getPath(availableProcessors.getPath())).lastModified());
+    StringBuilder sb = new StringBuilder();
 
-            assertEquals(
-                    ((Integer)((Instrument) availableProcessors.getInstrument())
-                            .getCurrentValue()).intValue(),
-                            ((Long)((Instrument) ((ICounter) tmp
-                            .getPath(availableProcessors.getPath()))
-                            .getInstrument()).getCurrentValue()).intValue());
-            
-        }
-        
+    while (true) {
+
+      int ch = r.read();
+
+      if (ch == -1) break;
+
+      sb.append((char) ch);
     }
-    
+
+    System.err.println(sb.toString());
+
+    {
+      CounterSet tmp = new CounterSet();
+
+      IInstrumentFactory instrumentFactory =
+          new IInstrumentFactory() {
+
+            public IInstrument newInstance(Class type) {
+
+              if (type == Double.class) {
+                return new Instrument<Double>() {
+                  protected void sample() {}
+                };
+              } else if (type == Long.class) {
+                return new Instrument<Long>() {
+                  protected void sample() {}
+                };
+              } else {
+                throw new UnsupportedOperationException("type=" + type);
+              }
+            }
+          };
+
+      Pattern filter = null;
+
+      tmp.readXML(new ByteArrayInputStream(data), instrumentFactory, filter);
+
+      System.err.println("Read back:\n" + tmp.toString());
+
+      /*
+       * verify the counters that we had declared.
+       *
+       * Note: This is a mess - I have to tunnel in to do the comparisons.
+       *
+       * @todo also vet the other counters.
+       *
+       * @todo mock up a history counter and vet its de-serialization from
+       * XML.
+       */
+
+      assertNotNull(tmp.getPath(availableProcessors.getPath()));
+
+      assertEquals(
+          availableProcessors.lastModified(),
+          ((ICounter) tmp.getPath(availableProcessors.getPath())).lastModified());
+
+      assertEquals(
+          ((Integer) ((Instrument) availableProcessors.getInstrument()).getCurrentValue())
+              .intValue(),
+          ((Long)
+                  ((Instrument)
+                          ((ICounter) tmp.getPath(availableProcessors.getPath())).getInstrument())
+                      .getCurrentValue())
+              .intValue());
+    }
+  }
 }

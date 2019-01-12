@@ -22,42 +22,34 @@ import org.embergraph.btree.IndexInconsistentError;
 import org.embergraph.rwstore.IRWStrategy;
 
 /**
- * Defines the callback object called on commit that enables the deferred 
- * delete blocks to be associated with a CommitRecord.
- * 
- * @author Martyn Cutcher
+ * Defines the callback object called on commit that enables the deferred delete blocks to be
+ * associated with a CommitRecord.
  *
+ * @author Martyn Cutcher
  */
 public class DeleteBlockCommitter implements ICommitter {
 
-	private final IRWStrategy m_strategy;
-	private volatile Throwable error = null;
-	
-	public DeleteBlockCommitter(final IRWStrategy strategy) {
-	
-	    m_strategy = strategy;
-	    
-	}
+  private final IRWStrategy m_strategy;
+  private volatile Throwable error = null;
 
-    @Override
-    public long handleCommit(final long commitTime) {
+  public DeleteBlockCommitter(final IRWStrategy strategy) {
 
-        if (error != null)
-            throw new IndexInconsistentError(error);
+    m_strategy = strategy;
+  }
 
-	    return m_strategy.saveDeferrals();
-	    
-	}
+  @Override
+  public long handleCommit(final long commitTime) {
 
-    @Override
-    public void invalidate(final Throwable t) {
+    if (error != null) throw new IndexInconsistentError(error);
 
-        if (t == null)
-            throw new IllegalArgumentException();
+    return m_strategy.saveDeferrals();
+  }
 
-        if (error == null)
-            error = t;
+  @Override
+  public void invalidate(final Throwable t) {
 
-    }
+    if (t == null) throw new IllegalArgumentException();
 
+    if (error == null) error = t;
+  }
 }

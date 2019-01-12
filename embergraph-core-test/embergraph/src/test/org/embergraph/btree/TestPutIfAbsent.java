@@ -24,184 +24,171 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree;
 
 import java.util.UUID;
-
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
 /**
  * Test of basic btree operations when delete markers are maintained.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see BLZG-1539 (putIfAbsent)
  */
 public class TestPutIfAbsent extends AbstractBTreeTestCase {
 
-    /**
-     * 
+  /** */
+  public TestPutIfAbsent() {}
+
+  /** @param name */
+  public TestPutIfAbsent(String name) {
+    super(name);
+  }
+
+  /** Basic putIfAbsent() test when delete markers are not enabled. */
+  public void test_putIfAbsent_01() {
+
+    final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
+
+    // create index.
+    final BTree btree = BTree.create(new SimpleMemoryRawStore(), metadata);
+
+    // verify delete markers are NOT in use.
+    assertFalse(btree.getIndexMetadata().getDeleteMarkers());
+
+    final byte[] k1 = new byte[] {1};
+    final byte[] v1 = new byte[] {1};
+    final byte[] v2 = new byte[] {2};
+    final byte[] v3 = null;
+
+    // entry not found under the key.
+    assertFalse(btree.contains(k1));
+
+    // conditional mutation when no entry under the key should return null
+    // and modify the index.
+    assertNull(btree.putIfAbsent(k1, v1));
+
+    // entry now found under the key.
+    assertTrue(btree.contains(k1));
+
+    assertEquals(v1, btree.lookup(k1));
+
+    // conditional mutation when entry under key exists should return old
+    // value and not modify the index.
+    assertEquals(v1, btree.putIfAbsent(k1, v2));
+
+    assertEquals(v1, btree.lookup(k1));
+
+    /*
+     * Now delete out the tuple. Verify that it is gone.
      */
-    public TestPutIfAbsent() {
-    }
+    assertEquals(v1, btree.remove(k1));
+    assertFalse(btree.contains(k1));
+    assertEquals(null, btree.lookup(k1));
 
-    /**
-     * @param name
+    /*
+     * Now use conditional insert again. The tuple was deleted so we should
+     * be able to use putIfAbsent() for the same key and a different value
+     * and find the new value in the index.
      */
-    public TestPutIfAbsent(String name) {
-        super(name);
-    }
+    // conditional insert with new value.
+    assertEquals(null, btree.putIfAbsent(k1, v2));
+    assertTrue(btree.contains(k1));
+    assertEquals(v2, btree.lookup(k1));
 
-    /**
-	 * Basic putIfAbsent() test when delete markers are not enabled.
-	 */
-	public void test_putIfAbsent_01() {
-
-		final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
-
-        // create index.
-        final BTree btree = BTree.create(new SimpleMemoryRawStore(), metadata);
-        
-        // verify delete markers are NOT in use.
-        assertFalse(btree.getIndexMetadata().getDeleteMarkers());
-        
-        final byte[] k1 = new byte[] { 1 };
-        final byte[] v1 = new byte[] { 1 };
-        final byte[] v2 = new byte[] { 2 };
-        final byte[] v3 = null;
-        
-		// entry not found under the key.
-		assertFalse(btree.contains(k1));
-
-		// conditional mutation when no entry under the key should return null
-		// and modify the index.
-		assertNull(btree.putIfAbsent(k1, v1));
-
-		// entry now found under the key.
-		assertTrue(btree.contains(k1));
-
-		assertEquals(v1, btree.lookup(k1));
-
-		// conditional mutation when entry under key exists should return old
-		// value and not modify the index.
-		assertEquals(v1, btree.putIfAbsent(k1, v2));
-
-		assertEquals(v1, btree.lookup(k1));
-		
-		/*
-		 * Now delete out the tuple. Verify that it is gone.
-		 */
-		assertEquals(v1, btree.remove(k1));
-		assertFalse(btree.contains(k1));
-		assertEquals(null, btree.lookup(k1));
-
-		/*
-		 * Now use conditional insert again. The tuple was deleted so we should
-		 * be able to use putIfAbsent() for the same key and a different value
-		 * and find the new value in the index.
-		 */
-		// conditional insert with new value.
-		assertEquals(null, btree.putIfAbsent(k1, v2));
-		assertTrue(btree.contains(k1));
-		assertEquals(v2, btree.lookup(k1));
-
-		/*
-		 * Now examine what happens when we have a null value in the tuple.
-		 */
-
-		// remove the current entry under the key.
-		assertEquals(v2, btree.remove(k1));
-		assertFalse(btree.contains(k1));
-		assertEquals(null, btree.lookup(k1));
-		
-		// conditional insert of a null under the key.
-		assertEquals(null, btree.putIfAbsent(k1, v3));
-		assertTrue(btree.contains(k1)); // index reports key exists.
-		assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
-
-		/*
-		 * Conditional insert of a different (non-null) value should fail since
-		 * there is an entry under that key.
-		 */
-		assertEquals(null, btree.putIfAbsent(k1, v1)); // should fail!
-		assertTrue(btree.contains(k1)); // index reports key exists.
-		assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
-		
-	}
-
-    /**
-     * Variant test when delete markers are enabled.
+    /*
+     * Now examine what happens when we have a null value in the tuple.
      */
-    public void test_putIfAbsent_01_deleteMarkers() {
-        
-    	final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
-        
-        metadata.setDeleteMarkers(true);
 
-        // create index.
-        final BTree btree = BTree.create(new SimpleMemoryRawStore(), metadata);
-        
-        // verify delete markers are in use.
-        assertTrue(btree.getIndexMetadata().getDeleteMarkers());
-        
-        final byte[] k1 = new byte[] { 1 };
-        final byte[] v1 = new byte[] { 1 };
-        final byte[] v2 = new byte[] { 2 };
-        final byte[] v3 = null;
-        
-		// entry not found under the key.
-		assertFalse(btree.contains(k1));
+    // remove the current entry under the key.
+    assertEquals(v2, btree.remove(k1));
+    assertFalse(btree.contains(k1));
+    assertEquals(null, btree.lookup(k1));
 
-		// conditional mutation when no entry under the key should return null
-		// and modify the index.
-		assertNull(btree.putIfAbsent(k1, v1));
+    // conditional insert of a null under the key.
+    assertEquals(null, btree.putIfAbsent(k1, v3));
+    assertTrue(btree.contains(k1)); // index reports key exists.
+    assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
 
-		// entry now found under the key.
-		assertTrue(btree.contains(k1));
+    /*
+     * Conditional insert of a different (non-null) value should fail since
+     * there is an entry under that key.
+     */
+    assertEquals(null, btree.putIfAbsent(k1, v1)); // should fail!
+    assertTrue(btree.contains(k1)); // index reports key exists.
+    assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
+  }
 
-		assertEquals(v1, btree.lookup(k1));
+  /** Variant test when delete markers are enabled. */
+  public void test_putIfAbsent_01_deleteMarkers() {
 
-		// conditional mutation when entry under key exists should return old
-		// value and not modify the index.
-		assertEquals(v1, btree.putIfAbsent(k1, v2));
+    final IndexMetadata metadata = new IndexMetadata(UUID.randomUUID());
 
-		assertEquals(v1, btree.lookup(k1));
-		
-		/*
-		 * Now delete out the tuple. Verify that it is gone.
-		 */
-		assertEquals(v1, btree.remove(k1));
-		assertFalse(btree.contains(k1));
-		assertEquals(null, btree.lookup(k1));
+    metadata.setDeleteMarkers(true);
 
-		/*
-		 * Now use conditional insert again. The tuple was deleted so we should
-		 * be able to use putIfAbsent() for the same key and a different value
-		 * and find the new value in the index.
-		 */
-		// conditional insert with new value.
-		assertEquals(null, btree.putIfAbsent(k1, v2));
-		assertTrue(btree.contains(k1));
-		assertEquals(v2, btree.lookup(k1));
+    // create index.
+    final BTree btree = BTree.create(new SimpleMemoryRawStore(), metadata);
 
-		/*
-		 * Now examine what happens when we have a null value in the tuple.
-		 */
+    // verify delete markers are in use.
+    assertTrue(btree.getIndexMetadata().getDeleteMarkers());
 
-		// remove the current entry under the key.
-		assertEquals(v2, btree.remove(k1));
-		assertFalse(btree.contains(k1));
-		assertEquals(null, btree.lookup(k1));
-		
-		// conditional insert of a null under the key.
-		assertEquals(null, btree.putIfAbsent(k1, v3));
-		assertTrue(btree.contains(k1)); // index reports key exists.
-		assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
+    final byte[] k1 = new byte[] {1};
+    final byte[] v1 = new byte[] {1};
+    final byte[] v2 = new byte[] {2};
+    final byte[] v3 = null;
 
-		/*
-		 * Conditional insert of a different (non-null) value should fail since
-		 * there is an entry under that key.
-		 */
-		assertEquals(null, btree.putIfAbsent(k1, v1)); // should fail!
-		assertTrue(btree.contains(k1)); // index reports key exists.
-		assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
+    // entry not found under the key.
+    assertFalse(btree.contains(k1));
 
-    }
+    // conditional mutation when no entry under the key should return null
+    // and modify the index.
+    assertNull(btree.putIfAbsent(k1, v1));
 
+    // entry now found under the key.
+    assertTrue(btree.contains(k1));
+
+    assertEquals(v1, btree.lookup(k1));
+
+    // conditional mutation when entry under key exists should return old
+    // value and not modify the index.
+    assertEquals(v1, btree.putIfAbsent(k1, v2));
+
+    assertEquals(v1, btree.lookup(k1));
+
+    /*
+     * Now delete out the tuple. Verify that it is gone.
+     */
+    assertEquals(v1, btree.remove(k1));
+    assertFalse(btree.contains(k1));
+    assertEquals(null, btree.lookup(k1));
+
+    /*
+     * Now use conditional insert again. The tuple was deleted so we should
+     * be able to use putIfAbsent() for the same key and a different value
+     * and find the new value in the index.
+     */
+    // conditional insert with new value.
+    assertEquals(null, btree.putIfAbsent(k1, v2));
+    assertTrue(btree.contains(k1));
+    assertEquals(v2, btree.lookup(k1));
+
+    /*
+     * Now examine what happens when we have a null value in the tuple.
+     */
+
+    // remove the current entry under the key.
+    assertEquals(v2, btree.remove(k1));
+    assertFalse(btree.contains(k1));
+    assertEquals(null, btree.lookup(k1));
+
+    // conditional insert of a null under the key.
+    assertEquals(null, btree.putIfAbsent(k1, v3));
+    assertTrue(btree.contains(k1)); // index reports key exists.
+    assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
+
+    /*
+     * Conditional insert of a different (non-null) value should fail since
+     * there is an entry under that key.
+     */
+    assertEquals(null, btree.putIfAbsent(k1, v1)); // should fail!
+    assertTrue(btree.contains(k1)); // index reports key exists.
+    assertEquals(null, btree.lookup(k1)); // null value is returned by lookup.
+  }
 }

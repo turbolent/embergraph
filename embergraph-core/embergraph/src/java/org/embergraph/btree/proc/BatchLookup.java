@@ -29,115 +29,94 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 
 /**
  * Batch lookup operation.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class BatchLookup extends AbstractKeyArrayIndexProcedure<ResultBuffer> implements
-        IParallelizableIndexProcedure<ResultBuffer> {
+public class BatchLookup extends AbstractKeyArrayIndexProcedure<ResultBuffer>
+    implements IParallelizableIndexProcedure<ResultBuffer> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 8102720738892338403L;
+  /** */
+  private static final long serialVersionUID = 8102720738892338403L;
 
-    /**
-     * Factory for {@link BatchLookup} procedures.
-     * 
-     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
-     */
-    public static class BatchLookupConstructor extends AbstractKeyArrayIndexProcedureConstructor<BatchLookup> {
+  /**
+   * Factory for {@link BatchLookup} procedures.
+   *
+   * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+   */
+  public static class BatchLookupConstructor
+      extends AbstractKeyArrayIndexProcedureConstructor<BatchLookup> {
 
-        public static final BatchLookupConstructor INSTANCE = new BatchLookupConstructor(); 
-        
-        private BatchLookupConstructor() {
-            
-        }
-        
-        /**
-         * Values ARE NOT sent.
-         */
-        @Override
-        public final boolean sendValues() {
-            
-            return false;
-            
-        }
+    public static final BatchLookupConstructor INSTANCE = new BatchLookupConstructor();
 
-        @Override
-        public BatchLookup newInstance(final IRabaCoder keysCoder,
-                final IRabaCoder valsCoder, final int fromIndex, final int toIndex,
-            	final byte[][] keys, final byte[][] vals) {
+    private BatchLookupConstructor() {}
 
-			if (vals != null)
-				throw new IllegalArgumentException(Errors.ERR_VALS_NOT_NULL);
+    /** Values ARE NOT sent. */
+    @Override
+    public final boolean sendValues() {
 
-            return new BatchLookup(keysCoder, valsCoder, fromIndex, toIndex,
-                    keys);
-            
-        }
-        
-    }
-    
-    /**
-     * De-serialization ctor.
-     *
-     */
-    public BatchLookup() {
-        
-    }
-    
-    /**
-     * Create a batch lookup operation.
-     * 
-     * @param keys
-     *            The array of keys (one key per tuple).
-     * 
-     * @see BatchLookupConstructor
-     */
-    protected BatchLookup(IRabaCoder keysCoder, IRabaCoder valsCoder,
-            int fromIndex, int toIndex, byte[][] keys) {
-
-        super(keysCoder, valsCoder, fromIndex, toIndex, keys, null/* values */);
-        
+      return false;
     }
 
     @Override
-    public final boolean isReadOnly() {
-       
-        return true;
-        
+    public BatchLookup newInstance(
+        final IRabaCoder keysCoder,
+        final IRabaCoder valsCoder,
+        final int fromIndex,
+        final int toIndex,
+        final byte[][] keys,
+        final byte[][] vals) {
+
+      if (vals != null) throw new IllegalArgumentException(Errors.ERR_VALS_NOT_NULL);
+
+      return new BatchLookup(keysCoder, valsCoder, fromIndex, toIndex, keys);
     }
-    
-    /**
-     * @return {@link ResultBuffer}
-     */
-    @Override
-    public ResultBuffer applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
+  }
 
-        final int n = keys.size();
-        
-        final byte[][] ret = new byte[n][];
-        
-        int i = 0;
-        
-        while (i < n) {
+  /** De-serialization ctor. */
+  public BatchLookup() {}
 
-            ret[i] = ndx.lookup(keys.get(i));
+  /**
+   * Create a batch lookup operation.
+   *
+   * @param keys The array of keys (one key per tuple).
+   * @see BatchLookupConstructor
+   */
+  protected BatchLookup(
+      IRabaCoder keysCoder, IRabaCoder valsCoder, int fromIndex, int toIndex, byte[][] keys) {
 
-            i++;
+    super(keysCoder, valsCoder, fromIndex, toIndex, keys, null /* values */);
+  }
 
-        }
-        
-        return new ResultBuffer(n, ret, ndx.getIndexMetadata()
-                .getTupleSerializer().getLeafValuesCoder());
+  @Override
+  public final boolean isReadOnly() {
 
+    return true;
+  }
+
+  /** @return {@link ResultBuffer} */
+  @Override
+  public ResultBuffer applyOnce(final IIndex ndx, final IRaba keys, final IRaba vals) {
+
+    final int n = keys.size();
+
+    final byte[][] ret = new byte[n][];
+
+    int i = 0;
+
+    while (i < n) {
+
+      ret[i] = ndx.lookup(keys.get(i));
+
+      i++;
     }
 
-	@Override
-	protected IResultHandler<ResultBuffer, ResultBuffer> newAggregator() {
+    return new ResultBuffer(
+        n, ret, ndx.getIndexMetadata().getTupleSerializer().getLeafValuesCoder());
+  }
 
-		return new ResultBufferHandler(getKeys().size(), getValuesCoder());
+  @Override
+  protected IResultHandler<ResultBuffer, ResultBuffer> newAggregator() {
 
-	}
-
+    return new ResultBufferHandler(getKeys().size(), getValuesCoder());
+  }
 }

@@ -25,629 +25,566 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.UUID;
-
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.service.AbstractTransactionService;
 
 /**
- * Test the ability to get (exact match) and find (most recent less than or
- * equal to) historical commit records in a {@link Journal}. Also verifies that
- * a canonicalizing cache is maintained (you never obtain distinct concurrent
- * instances of the same commit record).
- * 
+ * Test the ability to get (exact match) and find (most recent less than or equal to) historical
+ * commit records in a {@link Journal}. Also verifies that a canonicalizing cache is maintained (you
+ * never obtain distinct concurrent instances of the same commit record).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCommitHistory extends ProxyTestCase<Journal> {
 
-    /**
-     * 
-     */
-    public TestCommitHistory() {
+  /** */
+  public TestCommitHistory() {}
+
+  /** @param name */
+  public TestCommitHistory(String name) {
+    super(name);
+  }
+
+  /**
+   * Compare two {@link ICommitRecord}s for equality in their data.
+   *
+   * @param expected
+   * @param actual
+   */
+  public void assertEquals(ICommitRecord expected, ICommitRecord actual) {
+
+    if (expected == null) assertNull("Expected actual to be null", actual);
+    else assertNotNull("Expected actual to be non-null", actual);
+
+    assertEquals("timestamp", expected.getTimestamp(), actual.getTimestamp());
+
+    assertEquals("#roots", expected.getRootAddrCount(), actual.getRootAddrCount());
+
+    final int n = expected.getRootAddrCount();
+
+    for (int i = 0; i < n; i++) {
+
+      if (expected.getRootAddr(i) != actual.getRootAddr(i)) {
+
+        assertEquals("rootAddr[" + i + "]", expected.getRootAddr(i), actual.getRootAddr(i));
+      }
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestCommitHistory(String name) {
-        super(name);
+  /**
+   * Test that {@link Journal#getCommitRecord(long)} returns null if invoked before anything has
+   * been committed.
+   *
+   * @throws IOException
+   */
+  public void test_behaviorBeforeAnythingIsCommitted() throws IOException {
+
+    final Journal journal = new Journal(getProperties());
+
+    try {
+
+      assertNull(journal.getCommitRecord(journal.getLocalTransactionManager().nextTimestamp()));
+
+    } finally {
+
+      journal.destroy();
     }
+  }
 
-    /**
-     * Compare two {@link ICommitRecord}s for equality in their data.
-     * 
-     * @param expected
-     * @param actual
-     */
-    public void assertEquals(ICommitRecord expected, ICommitRecord actual) {
-        
-        if (expected == null)
-            assertNull("Expected actual to be null", actual);
-        else
-            assertNotNull("Expected actual to be non-null", actual);
-        
-        assertEquals("timestamp", expected.getTimestamp(), actual.getTimestamp());
+  /** Test the ability to recover a {@link ICommitRecord} from the {@link CommitRecordIndex}. */
+  public void test_recoverCommitRecord() {
+    final Properties properties = getProperties();
+    // Set a release age for RWStore if required
+    properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
 
-        assertEquals("#roots", expected.getRootAddrCount(), actual.getRootAddrCount());
-        
-        final int n = expected.getRootAddrCount();
-        
-        for(int i=0; i<n; i++) {
-        
-            if(expected.getRootAddr(i) != actual.getRootAddr(i)) {
-                
-                assertEquals("rootAddr[" + i + "]", expected.getRootAddr(i),
-                        actual.getRootAddr(i));
-            }
-            
+    final Journal journal = new Journal(properties);
+
+    try {
+
+      /*
+       * The first commit flushes the root leaves of some indices so we
+       * get back a non-zero commit timestamp.
+       */
+      assertTrue(0L != journal.commit());
+
+      /*
+       * A follow up commit in which nothing has been written should
+       * return a 0L timestamp.
+       */
+      assertEquals(0L, journal.commit());
+
+      journal.write(ByteBuffer.wrap(new byte[] {1, 2, 3}));
+
+      final long commitTime1 = journal.commit();
+
+      assertTrue(commitTime1 != 0L);
+
+      ICommitRecord commitRecord = journal.getCommitRecord(commitTime1);
+
+      assertNotNull(commitRecord);
+
+      assertNotNull(journal.getCommitRecord());
+
+      assertEquals(commitTime1, journal.getCommitRecord().getTimestamp());
+
+      assertEquals(journal.getCommitRecord(), commitRecord);
+
+    } finally {
+
+      journal.destroy();
+    }
+  }
+  /**
+   * Test the ability to recover a {@link ICommitRecord} from the {@link CommitRecordIndex}.
+   *
+   * <p>A second commit should be void and therefore the previous record should be retrievable.
+   */
+  public void test_recoverCommitRecordNoHistory() {
+    final Properties properties = getProperties();
+    // Set a release age for RWStore if required
+    properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "0");
+
+    final Journal journal = new Journal(properties);
+
+    try {
+
+      /*
+       * The first commit flushes the root leaves of some indices so we
+       * get back a non-zero commit timestamp.
+       */
+      assertTrue(0L != journal.commit());
+
+      /*
+       * A follow up commit in which nothing has been written should
+       * return a 0L timestamp.
+       */
+      assertEquals(0L, journal.commit());
+
+      journal.write(ByteBuffer.wrap(new byte[] {1, 2, 3}));
+
+      final long commitTime1 = journal.commit();
+
+      assertTrue(commitTime1 != 0L);
+
+      ICommitRecord commitRecord = journal.getCommitRecord(commitTime1);
+
+      assertNotNull(commitRecord);
+
+      assertNotNull(journal.getCommitRecord());
+
+      assertEquals(commitTime1, journal.getCommitRecord().getTimestamp());
+
+      assertEquals(journal.getCommitRecord(), commitRecord);
+
+    } finally {
+
+      journal.destroy();
+    }
+  }
+
+  /** Tests whether the {@link CommitRecordIndex} is restart-safe. */
+  public void test_commitRecordIndex_restartSafe() {
+
+    final Properties properties = getProperties();
+    // Set a release age for RWStore if required
+    properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
+
+    Journal journal = new Journal(properties);
+
+    try {
+
+      if (!journal.isStable()) {
+
+        // test only applies to restart-safe journals.
+        return;
+      }
+
+      /*
+       * Write a record directly on the store in order to force a commit
+       * to write a commit record (if you write directly on the store it
+       * will not cause a state change in the root addresses, but it will
+       * cause a new commit record to be written with a new timestamp).
+       */
+
+      // write some data.
+      journal.write(ByteBuffer.wrap(new byte[] {1, 2, 3}));
+
+      // commit the store.
+      final long commitTime1 = journal.commit();
+
+      assertTrue(commitTime1 != 0L);
+
+      ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
+
+      assertEquals(commitTime1, commitRecord1.getTimestamp());
+
+      assertEquals(commitTime1, journal.getRootBlockView().getLastCommitTime());
+
+      /*
+       * Close and then re-open the store and verify that the correct
+       * commit record is returned.
+       */
+      journal = reopenStore(journal);
+
+      ICommitRecord commitRecord2 = journal.getCommitRecord();
+
+      assertEquals(commitRecord1, commitRecord2);
+
+      /*
+       * Now recover the commit record by searching the commit record
+       * index.
+       */
+      ICommitRecord commitRecord3 = journal.getCommitRecord(commitTime1);
+
+      assertEquals(commitRecord1, commitRecord3);
+      assertEquals(commitRecord2, commitRecord3);
+
+    } finally {
+
+      journal.destroy();
+    }
+  }
+
+  /**
+   * Tests for finding (less than or equal to) historical commit records using the commit record
+   * index. This also tests restart-safety of the index with multiple records (if the store is
+   * stable).
+   *
+   * <p>The minReleaseAge property has been added to test historical data protection, and not just
+   * the retention of the CommitRecords which currently are erroneously never removed.
+   *
+   * @throws IOException
+   */
+  public void test_commitRecordIndex_find() throws IOException {
+
+    final Properties props = getProperties();
+    props.setProperty(
+        "org.embergraph.service.AbstractTransactionService.minReleaseAge", "2000"); // 2 seconds
+    Journal journal = new Journal(props);
+
+    try {
+
+      final int limit = 10;
+
+      final long[] commitTime = new long[limit];
+
+      final long[] commitRecordIndexAddrs = new long[limit];
+
+      final long[] dataRecordAddrs = new long[limit];
+      final ByteBuffer[] dataRecords = new ByteBuffer[limit];
+
+      final ICommitRecord[] commitRecords = new ICommitRecord[limit];
+
+      for (int i = 0; i < limit; i++) {
+
+        // write some data, this should be protected by minReleaseAge
+        dataRecords[i] = ByteBuffer.wrap(new byte[] {1, 2, 3, (byte) i});
+        dataRecordAddrs[i] = journal.write(dataRecords[i]);
+        dataRecords[i].flip();
+        if (i > 0) {
+          journal.delete(dataRecordAddrs[i - 1]); // remove previous committed data
         }
-        
-    }
 
-    /**
-     * Test that {@link Journal#getCommitRecord(long)} returns null if invoked
-     * before anything has been committed.
-     * 
-     * @throws IOException 
-     */
-    public void test_behaviorBeforeAnythingIsCommitted() throws IOException {
+        // commit the store.
+        commitTime[i] = journal.commit();
 
-        final Journal journal = new Journal(getProperties());
+        assertTrue(commitTime[i] != 0L);
 
-        try {
-        
-            assertNull(journal.getCommitRecord(journal
-                    .getLocalTransactionManager().nextTimestamp()));
+        if (i > 0) assertTrue(commitTime[i] > commitTime[i - 1]);
 
-        } finally {
+        commitRecordIndexAddrs[i] = journal.getRootBlockView().getCommitRecordIndexAddr();
 
-            journal.destroy();
-            
-        }
-        
-    }
-    
-    /**
-     * Test the ability to recover a {@link ICommitRecord} from the
-     * {@link CommitRecordIndex}.
-     */
-    public void test_recoverCommitRecord() {
-    	final Properties properties = getProperties();
-       	// Set a release age for RWStore if required
-        properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
-    	
-        final Journal journal = new Journal(properties);
+        assertTrue(commitRecordIndexAddrs[i] != 0L);
 
-        try {
+        final IBufferStrategy strat = journal.getBufferStrategy();
+        if ((!(strat instanceof IRWStrategy)) && i > 0)
+          assertTrue(commitRecordIndexAddrs[i] > commitRecordIndexAddrs[i - 1]);
 
-            /*
-             * The first commit flushes the root leaves of some indices so we
-             * get back a non-zero commit timestamp.
-             */
-            assertTrue(0L != journal.commit());
+        // get the current commit record.
+        commitRecords[i] = journal.getCommitRecord();
 
-            /*
-             * A follow up commit in which nothing has been written should
-             * return a 0L timestamp.
-             */
-            assertEquals(0L, journal.commit());
+        // test exact match on this timestamp.
+        assertEquals(commitRecords[i], journal.getCommitRecord(commitTime[i]));
 
-            journal.write(ByteBuffer.wrap(new byte[] { 1, 2, 3 }));
+        if (i > 0) {
 
-            final long commitTime1 = journal.commit();
-
-            assertTrue(commitTime1 != 0L);
-
-            ICommitRecord commitRecord = journal.getCommitRecord(commitTime1);
-
-            assertNotNull(commitRecord);
-
-            assertNotNull(journal.getCommitRecord());
-
-            assertEquals(commitTime1, journal.getCommitRecord().getTimestamp());
-
-            assertEquals(journal.getCommitRecord(), commitRecord);
-
-        } finally {
-
-            journal.destroy();
-
-        }
-        
-    }
-    /**
-     * Test the ability to recover a {@link ICommitRecord} from the
-     * {@link CommitRecordIndex}.
-     * 
-     * A second commit should be void and therefore the previous record
-     * should be retrievable.
-     */
-    public void test_recoverCommitRecordNoHistory() {
-    	final Properties properties = getProperties();
-       	// Set a release age for RWStore if required
-        properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "0");
-    	
-        final Journal journal = new Journal(properties);
-
-        try {
-
-            /*
-             * The first commit flushes the root leaves of some indices so we
-             * get back a non-zero commit timestamp.
-             */
-            assertTrue(0L != journal.commit());
-
-            /*
-             * A follow up commit in which nothing has been written should
-             * return a 0L timestamp.
-             */
-            assertEquals(0L, journal.commit());
-
-            journal.write(ByteBuffer.wrap(new byte[] { 1, 2, 3 }));
-
-            final long commitTime1 = journal.commit();
-
-            assertTrue(commitTime1 != 0L);
-
-            ICommitRecord commitRecord = journal.getCommitRecord(commitTime1);
-
-            assertNotNull(commitRecord);
-
-            assertNotNull(journal.getCommitRecord());
-
-            assertEquals(commitTime1, journal.getCommitRecord().getTimestamp());
-
-            assertEquals(journal.getCommitRecord(), commitRecord);
-
-        } finally {
-
-            journal.destroy();
-
-        }
-        
-    }
-    
-    /**
-     * Tests whether the {@link CommitRecordIndex} is restart-safe.
-     */
-    public void test_commitRecordIndex_restartSafe() {
-        
-       	final Properties properties = getProperties();
-       	// Set a release age for RWStore if required
-        properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
-    	
-        Journal journal = new Journal(properties);
-
-        try {
-
-            if (!journal.isStable()) {
-
-                // test only applies to restart-safe journals.
-                return;
-
-            }
-
-            /*
-             * Write a record directly on the store in order to force a commit
-             * to write a commit record (if you write directly on the store it
-             * will not cause a state change in the root addresses, but it will
-             * cause a new commit record to be written with a new timestamp).
-             */
-
-            // write some data.
-            journal.write(ByteBuffer.wrap(new byte[] { 1, 2, 3 }));
-
-            // commit the store.
-            final long commitTime1 = journal.commit();
-
-            assertTrue(commitTime1 != 0L);
-
-            ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
-
-            assertEquals(commitTime1, commitRecord1.getTimestamp());
-
-            assertEquals(commitTime1, journal.getRootBlockView()
-                    .getLastCommitTime());
-
-            /*
-             * Close and then re-open the store and verify that the correct
-             * commit record is returned.
-             */
-            journal = reopenStore(journal);
-
-            ICommitRecord commitRecord2 = journal.getCommitRecord();
-
-            assertEquals(commitRecord1, commitRecord2);
-
-            /*
-             * Now recover the commit record by searching the commit record
-             * index.
-             */
-            ICommitRecord commitRecord3 = journal.getCommitRecord(commitTime1);
-
-            assertEquals(commitRecord1, commitRecord3);
-            assertEquals(commitRecord2, commitRecord3);
-
-        } finally {
-
-            journal.destroy();
-
-        }
-        
-    }
-    
-    /**
-     * Tests for finding (less than or equal to) historical commit records using
-     * the commit record index. This also tests restart-safety of the index with
-     * multiple records (if the store is stable).
-     * 
-     * The minReleaseAge property has been added to test historical data protection,
-     * and not just the retention of the CommitRecords which currently are erroneously
-     * never removed.
-     * 
-     * @throws IOException 
-     */
-    public void test_commitRecordIndex_find() throws IOException {
-        
-    	final Properties props = getProperties();
-    	props.setProperty("org.embergraph.service.AbstractTransactionService.minReleaseAge","2000"); // 2 seconds
-        Journal journal = new Journal(props);
-
-        try {
-        
-        final int limit = 10;
-        
-        final long[] commitTime = new long[limit];
-
-        final long[] commitRecordIndexAddrs = new long[limit];
-        
-        final long[] dataRecordAddrs = new long[limit];
-        final ByteBuffer[] dataRecords = new ByteBuffer[limit];
-        
-        final ICommitRecord[] commitRecords = new ICommitRecord[limit];
-        
-        for(int i=0; i<limit; i++) {
-
-            // write some data, this should be protected by minReleaseAge
-        	dataRecords[i] = ByteBuffer.wrap(new byte[]{1,2,3,(byte) i});
-            dataRecordAddrs[i] = journal.write(dataRecords[i]);
-            dataRecords[i].flip();
-            if (i > 0) {
-            	journal.delete(dataRecordAddrs[i-1]); // remove previous committed data
-            }
-        
-            // commit the store.
-            commitTime[i] = journal.commit();
-            
-            assertTrue(commitTime[i]!=0L);
-
-            if (i > 0)
-                assertTrue(commitTime[i] > commitTime[i - 1]);
-         
-            commitRecordIndexAddrs[i] = journal.getRootBlockView().getCommitRecordIndexAddr();
-
-            assertTrue(commitRecordIndexAddrs[i]!=0L);
-
-            final IBufferStrategy strat = journal.getBufferStrategy();
-            if ((!(strat instanceof IRWStrategy)) && i > 0)
-                assertTrue(commitRecordIndexAddrs[i] > commitRecordIndexAddrs[i - 1]);
-
-            // get the current commit record.
-            commitRecords[i] = journal.getCommitRecord();
-            
-            // test exact match on this timestamp.
-            assertEquals(commitRecords[i],journal.getCommitRecord(commitTime[i]));
-            
-            if(i>0) {
-
-                // test exact match on the prior timestamp.
-                assertEquals(commitRecords[i-1],journal.getCommitRecord(commitTime[i-1]));
-                
-            }
-
-            /*
-             * Obtain a unique timestamp from the same source that the journal
-             * is using to generate the commit timestamps. This ensures that
-             * there will be at least one possible timestamp between each commit
-             * timestamp.
-             */
-            final long ts = journal.getLocalTransactionManager().nextTimestamp();
-            
-            assertTrue(ts>commitTime[i]);
-            
-        }
-        
-        if (journal.isStable()) {
-
-            /*
-             * Close and then re-open the store so that we will also be testing
-             * restart-safety of the commit record index.
-             */
-
-            journal = reopenStore(journal);
-
+          // test exact match on the prior timestamp.
+          assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i - 1]));
         }
 
         /*
-         * Verify the historical commit records on exact match (get).
+         * Obtain a unique timestamp from the same source that the journal
+         * is using to generate the commit timestamps. This ensures that
+         * there will be at least one possible timestamp between each commit
+         * timestamp.
          */
-        {
-            
-            for( int i=0; i<limit; i++) {
-                
-                assertEquals(commitRecords[i], journal
-                        .getCommitRecord(commitTime[i]));
-                
-                final ByteBuffer rdbuf = journal.read(dataRecordAddrs[i]);
-                assertTrue(dataRecords[i].compareTo(rdbuf) == 0);
-                
-            }
-            
-        }
-        
+        final long ts = journal.getLocalTransactionManager().nextTimestamp();
+
+        assertTrue(ts > commitTime[i]);
+      }
+
+      if (journal.isStable()) {
+
         /*
-         * Verify access to historical records on LTE search (find).
-         * 
-         * We ensured above that there is at least one possible timestamp value
-         * between each pair of commit timestamps. We already verified that
-         * timestamps that exactly match a known commit time return the
-         * associated commit record.
-         * 
-         * Now we verify that timestamps which proceed a known commit time but
-         * follow after any earlier commit time, return the proceeding commit
-         * record (finds the most recent commit record having a commit time less
-         * than or equal to the probe time).
+         * Close and then re-open the store so that we will also be testing
+         * restart-safety of the commit record index.
          */
-        
-        {
-            
-            for( int i=1; i<limit; i++) {
-                
-                assertEquals(commitRecords[i - 1], journal
-                        .getCommitRecord(commitTime[i] - 1));
-                
-            }
 
-            /*
-             * Verify a null return if we probe with a timestamp before any
-             * commit time.
-             */
-            assertNull(journal.getCommitRecord(commitTime[0] - 1));
-            
-        }
-        
-        } finally {
+        journal = reopenStore(journal);
+      }
 
-            journal.destroy();
-            
+      /*
+       * Verify the historical commit records on exact match (get).
+       */
+      {
+        for (int i = 0; i < limit; i++) {
+
+          assertEquals(commitRecords[i], journal.getCommitRecord(commitTime[i]));
+
+          final ByteBuffer rdbuf = journal.read(dataRecordAddrs[i]);
+          assertTrue(dataRecords[i].compareTo(rdbuf) == 0);
         }
-        
+      }
+
+      /*
+       * Verify access to historical records on LTE search (find).
+       *
+       * We ensured above that there is at least one possible timestamp value
+       * between each pair of commit timestamps. We already verified that
+       * timestamps that exactly match a known commit time return the
+       * associated commit record.
+       *
+       * Now we verify that timestamps which proceed a known commit time but
+       * follow after any earlier commit time, return the proceeding commit
+       * record (finds the most recent commit record having a commit time less
+       * than or equal to the probe time).
+       */
+
+      {
+        for (int i = 1; i < limit; i++) {
+
+          assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i] - 1));
+        }
+
+        /*
+         * Verify a null return if we probe with a timestamp before any
+         * commit time.
+         */
+        assertNull(journal.getCommitRecord(commitTime[0] - 1));
+      }
+
+    } finally {
+
+      journal.destroy();
     }
+  }
 
-    /**
-     * Test verifies that exact match and find always return the same reference
-     * for the same commit record (at least as long as the test holds a hard
-     * reference to the commit record of interest).
-     */
-    public void test_canonicalizingCache() {
-       	final Properties properties = getProperties();
-       	// Set a release age for RWStore if required
-        properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
-       
-        final Journal journal = new Journal(properties);
-        
-        try {
+  /**
+   * Test verifies that exact match and find always return the same reference for the same commit
+   * record (at least as long as the test holds a hard reference to the commit record of interest).
+   */
+  public void test_canonicalizingCache() {
+    final Properties properties = getProperties();
+    // Set a release age for RWStore if required
+    properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "5000");
 
-        /*
-         * The first commit flushes the root leaves of some indices so we get
-         * back a non-zero commit timestamp.
-         */
-        final long commitTime0 = journal.commit();
+    final Journal journal = new Journal(properties);
 
-        assertTrue(commitTime0 != 0L);
-        
-        /*
-         * obtain the commit record for that commit timestamp.
-         */
-        final ICommitRecord commitRecord0 = journal.getCommitRecord(commitTime0);
+    try {
 
-        // should be the same data that is held by the journal.
-        assertEquals(commitRecord0, journal.getCommitRecord());
+      /*
+       * The first commit flushes the root leaves of some indices so we get
+       * back a non-zero commit timestamp.
+       */
+      final long commitTime0 = journal.commit();
 
-        /*
-         * write a record on the store, commit the store, and note the commit
-         * time.
-         */
-        journal.write(ByteBuffer.wrap(new byte[]{1,2,3}));
-        
-        final long commitTime1 = journal.commit();
-        
-        assertTrue(commitTime1!=0L);
-        
-        /*
-         * obtain the commit record for that commit timestamp.
-         */
-        final ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
+      assertTrue(commitTime0 != 0L);
 
-        // should be the same data that is held by the journal.
-        assertEquals(commitRecord1, journal.getCommitRecord());
+      /*
+       * obtain the commit record for that commit timestamp.
+       */
+      final ICommitRecord commitRecord0 = journal.getCommitRecord(commitTime0);
 
-        /*
-         * verify that we obtain the same instance with find as with an exact
-         * match.
-         */ 
-        
-        assertTrue(commitRecord0 == journal.getCommitRecord(commitTime1 - 1));
-        
-        assertTrue(commitRecord1 == journal.getCommitRecord(commitTime1 + 0 ));
+      // should be the same data that is held by the journal.
+      assertEquals(commitRecord0, journal.getCommitRecord());
 
-        assertTrue(commitRecord1 == journal.getCommitRecord(commitTime1 + 1));
+      /*
+       * write a record on the store, commit the store, and note the commit
+       * time.
+       */
+      journal.write(ByteBuffer.wrap(new byte[] {1, 2, 3}));
 
-        } finally {
+      final long commitTime1 = journal.commit();
 
-            journal.destroy();
-            
-        }
+      assertTrue(commitTime1 != 0L);
 
+      /*
+       * obtain the commit record for that commit timestamp.
+       */
+      final ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
+
+      // should be the same data that is held by the journal.
+      assertEquals(commitRecord1, journal.getCommitRecord());
+
+      /*
+       * verify that we obtain the same instance with find as with an exact
+       * match.
+       */
+
+      assertTrue(commitRecord0 == journal.getCommitRecord(commitTime1 - 1));
+
+      assertTrue(commitRecord1 == journal.getCommitRecord(commitTime1 + 0));
+
+      assertTrue(commitRecord1 == journal.getCommitRecord(commitTime1 + 1));
+
+    } finally {
+
+      journal.destroy();
     }
-    
-    /**
-     * Test of the canonicalizing object cache used to prevent distinct
-     * instances of a historical index from being created. The test also
-     * verifies that the historical named index is NOT the same instance as the
-     * current unisolated index by that name.
-     */
-    public void test_objectCache() {
-        
-        final Journal journal = new Journal(getProperties());
+  }
 
-        try {
+  /**
+   * Test of the canonicalizing object cache used to prevent distinct instances of a historical
+   * index from being created. The test also verifies that the historical named index is NOT the
+   * same instance as the current unisolated index by that name.
+   */
+  public void test_objectCache() {
 
-            assertEquals("commitCounter", 0, journal.getCommitRecord()
-                    .getCommitCounter());
+    final Journal journal = new Journal(getProperties());
 
-            final String name = "abc";
+    try {
 
-            /*
-             * register an index and commit the journal.
-             */
+      assertEquals("commitCounter", 0, journal.getCommitRecord().getCommitCounter());
 
-			final IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
+      final String name = "abc";
 
-			final BTree liveIndex = journal.registerIndex(name, md);
+      /*
+       * register an index and commit the journal.
+       */
 
-			journal.commit();
+      final IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
-            assertEquals("commitCounter", 1, journal.getCommitRecord()
-                    .getCommitCounter());
+      final BTree liveIndex = journal.registerIndex(name, md);
 
-            final long commitTime0 = journal.getCommitRecord().getTimestamp();
+      journal.commit();
 
-            assertNotSame(commitTime0, 0L);
-            assertTrue(commitTime0 > 0L);
+      assertEquals("commitCounter", 1, journal.getCommitRecord().getCommitCounter());
 
-            /*
-             * obtain the commit record for that commit timestamp.
-             */
-            final ICommitRecord commitRecord0 = journal.getCommitRecord(commitTime0);
+      final long commitTime0 = journal.getCommitRecord().getTimestamp();
 
-            // should be the same data that is held by the journal.
-            assertEquals(commitRecord0, journal.getCommitRecord());
+      assertNotSame(commitTime0, 0L);
+      assertTrue(commitTime0 > 0L);
 
-            /*
-             * verify that a request for last committed state the named index
-             * returns a different instance than the "live" index.
-             */
+      /*
+       * obtain the commit record for that commit timestamp.
+       */
+      final ICommitRecord commitRecord0 = journal.getCommitRecord(commitTime0);
 
-            final BTree historicalIndex0 = (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord0);
+      // should be the same data that is held by the journal.
+      assertEquals(commitRecord0, journal.getCommitRecord());
 
-            assertTrue(liveIndex != historicalIndex0);
+      /*
+       * verify that a request for last committed state the named index
+       * returns a different instance than the "live" index.
+       */
 
-            // re-request is still the same object.
-            assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord0));
+      final BTree historicalIndex0 = (BTree) journal.getIndexWithCommitRecord(name, commitRecord0);
 
-            /*
-             * The re-load address for the live index as of that commit record.
-             */
-            final long liveIndexAddr0 = liveIndex.getCheckpoint()
-                    .getCheckpointAddr();
+      assertTrue(liveIndex != historicalIndex0);
 
-            /*
-             * write a record on the store, commit the store, and note the
-             * commit time.
-             * 
-             * Note: This is a raw write on the store, not a write on an index,
-             * so we have to do an explicit commit.
-             */
+      // re-request is still the same object.
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
 
-            journal.write(ByteBuffer.wrap(new byte[] { 1, 2, 3 }));
+      /*
+       * The re-load address for the live index as of that commit record.
+       */
+      final long liveIndexAddr0 = liveIndex.getCheckpoint().getCheckpointAddr();
 
-            journal.commit();
+      /*
+       * write a record on the store, commit the store, and note the
+       * commit time.
+       *
+       * Note: This is a raw write on the store, not a write on an index,
+       * so we have to do an explicit commit.
+       */
 
-            assertEquals("commitCounter", 2, journal.getCommitRecord()
-                    .getCommitCounter());
+      journal.write(ByteBuffer.wrap(new byte[] {1, 2, 3}));
 
-            final long commitTime1 = journal.getCommitRecord().getTimestamp();
+      journal.commit();
 
-            assertTrue(commitTime1 > commitTime0);
+      assertEquals("commitCounter", 2, journal.getCommitRecord().getCommitCounter());
 
-            /*
-             * we did NOT write on the named index, so its address in the store
-             * must not change.
-             */
-            assertEquals(liveIndexAddr0, liveIndex.getCheckpoint()
-                    .getCheckpointAddr());
+      final long commitTime1 = journal.getCommitRecord().getTimestamp();
 
-            // obtain the commit record for that commit timestamp.
-            final ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
+      assertTrue(commitTime1 > commitTime0);
 
-            // should be the same data.
-            assertEquals(commitRecord1, journal.getCommitRecord());
+      /*
+       * we did NOT write on the named index, so its address in the store
+       * must not change.
+       */
+      assertEquals(liveIndexAddr0, liveIndex.getCheckpoint().getCheckpointAddr());
 
-            /*
-             * verify that we get the same historical index object for the new
-             * commit record since the index state was not changed and it will
-             * be reloaded from the same address.
-             */
-            assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord1));
+      // obtain the commit record for that commit timestamp.
+      final ICommitRecord commitRecord1 = journal.getCommitRecord(commitTime1);
 
-            // re-request is still the same object.
-            assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord0));
+      // should be the same data.
+      assertEquals(commitRecord1, journal.getCommitRecord());
 
-            // re-request is still the same object.
-            assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord1));
+      /*
+       * verify that we get the same historical index object for the new
+       * commit record since the index state was not changed and it will
+       * be reloaded from the same address.
+       */
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
 
-            /*
-             * Now write on the live index and commit. verify that there is a
-             * new historical index available for the new commit record, that it
-             * is not the same as the live index, and that it is not the same as
-             * the previous historical index (which should still be accessible).
-             */
+      // re-request is still the same object.
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
 
-            // live index is the same reference.
-            assertTrue(liveIndex == journal.getIndex(name));
+      // re-request is still the same object.
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
 
-            liveIndex.insert(new byte[] { 1, 2 }, new byte[] { 1, 2 });
+      /*
+       * Now write on the live index and commit. verify that there is a
+       * new historical index available for the new commit record, that it
+       * is not the same as the live index, and that it is not the same as
+       * the previous historical index (which should still be accessible).
+       */
 
-            // do an explicit commit since we are not running a write task.
-            journal.commit();
+      // live index is the same reference.
+      assertTrue(liveIndex == journal.getIndex(name));
 
-            assertEquals("commitCounter", 3, journal.getCommitRecord()
-                    .getCommitCounter());
+      liveIndex.insert(new byte[] {1, 2}, new byte[] {1, 2});
 
-            final long commitTime2 = journal.getCommitRecord().getTimestamp();
+      // do an explicit commit since we are not running a write task.
+      journal.commit();
 
-            assertTrue(commitTime2 > commitTime1);
+      assertEquals("commitCounter", 3, journal.getCommitRecord().getCommitCounter());
 
-            // obtain the commit record for that commit timestamp.
-            final ICommitRecord commitRecord2 = journal.getCommitRecord(commitTime2);
+      final long commitTime2 = journal.getCommitRecord().getTimestamp();
 
-            // should be the same instance that is held by the journal.
-            assertEquals(commitRecord2, journal.getCommitRecord());
+      assertTrue(commitTime2 > commitTime1);
 
-            // must be a different index object.
+      // obtain the commit record for that commit timestamp.
+      final ICommitRecord commitRecord2 = journal.getCommitRecord(commitTime2);
 
-            BTree historicalIndex2 = (BTree) journal.getIndexWithCommitRecord(name,
-                    commitRecord2);
+      // should be the same instance that is held by the journal.
+      assertEquals(commitRecord2, journal.getCommitRecord());
 
-            assertTrue(historicalIndex0 != historicalIndex2);
+      // must be a different index object.
 
-            // the live index must be distinct from the historical index.
-            assertTrue(liveIndex != historicalIndex2);
+      BTree historicalIndex2 = (BTree) journal.getIndexWithCommitRecord(name, commitRecord2);
 
-        } finally {
+      assertTrue(historicalIndex0 != historicalIndex2);
 
-            journal.destroy();
+      // the live index must be distinct from the historical index.
+      assertTrue(liveIndex != historicalIndex2);
 
-        }
+    } finally {
 
+      journal.destroy();
     }
-
+  }
 }

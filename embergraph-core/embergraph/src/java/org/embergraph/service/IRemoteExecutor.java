@@ -31,35 +31,26 @@ import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
 /**
- * Interface for running procedures on a remote service. In general,
- * applications SHOULD restrict their discovery of {@link IRemoteExecutor} to
- * {@link IClientService}s. Applications SHOULD NOT run arbitrary
- * {@link Callable}s against an {@link IDataService} or an
- * {@link IMetadataService} unless it is necessary to access the index objects
- * locally on the service (index partition moves, scale-out joins, and rule
- * execution all do this).
- * 
+ * Interface for running procedures on a remote service. In general, applications SHOULD restrict
+ * their discovery of {@link IRemoteExecutor} to {@link IClientService}s. Applications SHOULD NOT
+ * run arbitrary {@link Callable}s against an {@link IDataService} or an {@link IMetadataService}
+ * unless it is necessary to access the index objects locally on the service (index partition moves,
+ * scale-out joins, and rule execution all do this).
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRemoteExecutor extends Remote {
 
-    /**
-     * Submit a {@link Callable} and return its {@link Future}. The
-     * {@link Callable} will execute on the
-     * {@link IEmbergraphFederation#getExecutorService()}.
-     * 
-     * @return The {@link Future} for that task.
-     * 
-     * @throws RejectedExecutionException
-     *             if the task can not be accepted for execution.
-     * @throws IOException
-     *             if there is an RMI problem.
-     * 
-     * @todo change API to <T> Future<T> submit(Callable<T> proc). This will
-     *       break existing code but reflects the correct use of generics.
-     */
-    public Future<? extends Object> submit(Callable<? extends Object> task)
-            throws RemoteException;
-    
+  /**
+   * Submit a {@link Callable} and return its {@link Future}. The {@link Callable} will execute on
+   * the {@link IEmbergraphFederation#getExecutorService()}.
+   *
+   * @return The {@link Future} for that task.
+   * @throws RejectedExecutionException if the task can not be accepted for execution.
+   * @throws IOException if there is an RMI problem.
+   * @todo change API to <T> Future<T> submit(Callable<T> proc). This will break existing code but
+   *     reflects the correct use of generics.
+   */
+  public Future<? extends Object> submit(Callable<? extends Object> task) throws RemoteException;
 }

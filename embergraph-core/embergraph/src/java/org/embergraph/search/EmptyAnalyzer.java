@@ -21,31 +21,27 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.search;
 
 import java.io.IOException;
-import java.io.StringReader;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.miscellaneous.EmptyTokenStream;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 
 /**
- * An analyzer that always returns an {@link EmptyTokenStream}, this can
- * be used with {@link ConfigurableAnalyzerFactory}
- * to switch off indexing and searching for specific language tags.
- * @author jeremycarroll
+ * An analyzer that always returns an {@link EmptyTokenStream}, this can be used with {@link
+ * ConfigurableAnalyzerFactory} to switch off indexing and searching for specific language tags.
  *
+ * @author jeremycarroll
  */
 public class EmptyAnalyzer extends Analyzer {
 
-	@Override
-	protected TokenStreamComponents createComponents(String input) {
-		Tokenizer source = new Tokenizer() {
-			@Override
-			public boolean incrementToken() throws IOException {
-				return false;
-			}
-		};
-	    return new TokenStreamComponents(source);
-	}
-
+  @Override
+  protected TokenStreamComponents createComponents(String input) {
+    Tokenizer source =
+        new Tokenizer() {
+          @Override
+          public boolean incrementToken() throws IOException {
+            return false;
+          }
+        };
+    return new TokenStreamComponents(source);
+  }
 }

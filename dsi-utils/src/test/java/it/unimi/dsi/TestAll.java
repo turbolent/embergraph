@@ -31,34 +31,23 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-    }
+  /** */
+  public TestAll() {}
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("modified dsiutils classes");
+    final TestSuite suite = new TestSuite("modified dsiutils classes");
 
-        suite.addTestSuite(TestBloomFilter2.class);
+    suite.addTestSuite(TestBloomFilter2.class);
 
-        suite.addTestSuite(InputBitStreamTest.class);
-        
-        return suite;
-        
-    }
-    
+    suite.addTestSuite(InputBitStreamTest.class);
+
+    return suite;
+  }
 }

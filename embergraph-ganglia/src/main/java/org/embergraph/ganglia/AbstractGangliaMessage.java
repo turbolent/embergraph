@@ -14,76 +14,72 @@
    limitations under the License.
 */
 package org.embergraph.ganglia;
-/**
- * Base class for ganglia 3.1 wire format messages.
- */
+/** Base class for ganglia 3.1 wire format messages. */
 public abstract class AbstractGangliaMessage implements IGangliaMessage {
 
-	private final GangliaMessageTypeEnum recordType;
-	private final String hostName;
-	private final String metricName;
-	private final boolean spoof;
+  private final GangliaMessageTypeEnum recordType;
+  private final String hostName;
+  private final String metricName;
+  private final boolean spoof;
 
-	public AbstractGangliaMessage(final GangliaMessageTypeEnum recordType,
-			final String hostName, final String metricName, final boolean spoof) {
-		
-		if (recordType == null)
-			throw new IllegalArgumentException();
-		
-		if (hostName == null)
-			throw new IllegalArgumentException();
-		
-		if (metricName == null)
-			throw new IllegalArgumentException();
-		
-		this.recordType = recordType;
-		
-		this.hostName = hostName;
-		
-		this.metricName = metricName;
-		
-		this.spoof = spoof;
-		
-	}
-	
-	@Override
-	public GangliaMessageTypeEnum getRecordType() {
-		return recordType;
-	}
+  public AbstractGangliaMessage(
+      final GangliaMessageTypeEnum recordType,
+      final String hostName,
+      final String metricName,
+      final boolean spoof) {
 
-	@Override
-	public String getHostName() {
-		return hostName;
-	}
+    if (recordType == null) throw new IllegalArgumentException();
 
-	@Override
-	public String getMetricName() {
-		return metricName;
-	}
+    if (hostName == null) throw new IllegalArgumentException();
 
-	@Override
-	public boolean isSpoof() {
-		return spoof;
-	}
+    if (metricName == null) throw new IllegalArgumentException();
 
-	/*
-	 * Overridden to ensure that subclasses implement this.
-	 * 
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	abstract public boolean equals(Object o);
+    this.recordType = recordType;
 
-	/*
-	 * Overridden to ensure that subclasses implement this.
-	 * 
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	abstract public int hashCode();
+    this.hostName = hostName;
 
+    this.metricName = metricName;
+
+    this.spoof = spoof;
+  }
+
+  @Override
+  public GangliaMessageTypeEnum getRecordType() {
+    return recordType;
+  }
+
+  @Override
+  public String getHostName() {
+    return hostName;
+  }
+
+  @Override
+  public String getMetricName() {
+    return metricName;
+  }
+
+  @Override
+  public boolean isSpoof() {
+    return spoof;
+  }
+
+  /*
+   * Overridden to ensure that subclasses implement this.
+   *
+   * (non-Javadoc)
+   *
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public abstract boolean equals(Object o);
+
+  /*
+   * Overridden to ensure that subclasses implement this.
+   *
+   * (non-Javadoc)
+   *
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public abstract int hashCode();
 }

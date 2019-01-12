@@ -5,75 +5,63 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 
 /**
- * Return an iterator that traverses the tuples in the reverse of the natural
- * index order. The iterator is backed by the {@link ITupleCursor} and
- * operations on the iterator effect the state of the cursor and visa versa.
- * <p>
- * Note: This implements the full {@link ITupleCursor} API so that we can stack
- * filters over this class as readily as over an {@link ITupleCursor}. However,
- * the semantics of {@link #hasNext()} and {@link #next()} and of
- * {@link #hasPrior()} and {@link #prior()} are of course reversed (the move
- * counter to the natural index order).
+ * Return an iterator that traverses the tuples in the reverse of the natural index order. The
+ * iterator is backed by the {@link ITupleCursor} and operations on the iterator effect the state of
+ * the cursor and visa versa.
+ *
+ * <p>Note: This implements the full {@link ITupleCursor} API so that we can stack filters over this
+ * class as readily as over an {@link ITupleCursor}. However, the semantics of {@link #hasNext()}
+ * and {@link #next()} and of {@link #hasPrior()} and {@link #prior()} are of course reversed (the
+ * move counter to the natural index order).
  */
 public class Reverserator<E> implements ITupleCursor<E> {
 
-    private final ITupleCursor<E> src;
+  private final ITupleCursor<E> src;
 
-    public Reverserator(final ITupleCursor<E> src) {
+  public Reverserator(final ITupleCursor<E> src) {
 
-        if (src == null)
-            throw new IllegalArgumentException();
+    if (src == null) throw new IllegalArgumentException();
 
-        this.src = src;
+    this.src = src;
+  }
 
-    }
+  public ITuple<E> next() {
 
-    public ITuple<E> next() {
+    return src.prior();
+  }
 
-        return src.prior();
+  public boolean hasNext() {
 
-    }
+    return src.hasPrior();
+  }
 
-    public boolean hasNext() {
+  public void remove() {
 
-        return src.hasPrior();
+    src.remove();
+  }
 
-    }
+  public IIndex getIndex() {
 
-    public void remove() {
+    return src.getIndex();
+  }
 
-        src.remove();
+  public boolean hasPrior() {
 
-    }
+    return src.hasNext();
+  }
 
-    public IIndex getIndex() {
-        
-        return src.getIndex();
-        
-    }
+  public ITuple<E> prior() {
 
-    public boolean hasPrior() {
-        
-        return src.hasNext();
-        
-    }
+    return src.next();
+  }
 
-    public ITuple<E> prior() {
-        
-        return src.next();
-        
-    }
+  public ITuple<E> seek(final byte[] key) {
 
-    public ITuple<E> seek(final byte[] key) {
-        
-        return src.seek(key);
-        
-    }
+    return src.seek(key);
+  }
 
-    public ITuple<E> seek(final Object key) {
+  public ITuple<E> seek(final Object key) {
 
-        return src.seek(key);
-        
-    }
-
+    return src.seek(key);
+  }
 }

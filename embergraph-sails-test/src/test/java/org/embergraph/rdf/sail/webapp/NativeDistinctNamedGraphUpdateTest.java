@@ -21,11 +21,12 @@ import junit.framework.Test;
 
 public class NativeDistinctNamedGraphUpdateTest extends AbstractNamedGraphUpdateTest {
 
-	static public Test suite() {
-		return ProxySuiteHelper.suiteWhenStandalone(NativeDistinctNamedGraphUpdateTest.class,"test.*", TestMode.quads);
-	}
-	public NativeDistinctNamedGraphUpdateTest(String name) {
-		super(true, name);
-	}
+  public static Test suite() {
+    return ProxySuiteHelper.suiteWhenStandalone(
+        NativeDistinctNamedGraphUpdateTest.class, "test.*", TestMode.quads);
+  }
 
+  public NativeDistinctNamedGraphUpdateTest(String name) {
+    super(true, name);
+  }
 }

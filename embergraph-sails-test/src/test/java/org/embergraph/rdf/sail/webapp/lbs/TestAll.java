@@ -27,33 +27,27 @@ import junit.framework.TestSuite;
 
 /**
  * Test suite.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
-     */
-    public TestAll() {
-        super();
-    }
+  /** */
+  public TestAll() {
+    super();
+  }
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-        super(arg0);
-    }
+  /** @param arg0 */
+  public TestAll(String arg0) {
+    super(arg0);
+  }
 
-    public static Test suite() {
+  public static Test suite() {
 
-        final TestSuite suite = new TestSuite("LBS");
+    final TestSuite suite = new TestSuite("LBS");
 
-        suite.addTestSuite(TestAbstractHostLBSPolicy.class);
-        
-        return suite;
+    suite.addTestSuite(TestAbstractHostLBSPolicy.class);
 
-    }
-
+    return suite;
+  }
 }

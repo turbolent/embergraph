@@ -4,18 +4,16 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 public class ASTOptionalGraphPattern extends SimpleNode {
 
-	public ASTOptionalGraphPattern(int id) {
-		super(id);
-	}
+  public ASTOptionalGraphPattern(int id) {
+    super(id);
+  }
 
-	public ASTOptionalGraphPattern(SyntaxTreeBuilder p, int id) {
-		super(p, id);
-	}
+  public ASTOptionalGraphPattern(SyntaxTreeBuilder p, int id) {
+    super(p, id);
+  }
 
-	@Override
-	public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data)
-		throws VisitorException
-	{
-		return visitor.visit(this, data);
-	}
+  @Override
+  public Object jjtAccept(SyntaxTreeBuilderVisitor visitor, Object data) throws VisitorException {
+    return visitor.visit(this, data);
+  }
 }

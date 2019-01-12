@@ -18,40 +18,38 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 
 /**
- * A Contractorator is the reverse of an Expanderator. A Contractorator takes a
- * source Iterator, and consumes elements from it in batches by passing to the
- * Contractor which returns an object when ready. It is upto the Contractor to
- * handle termination conditions. For example, it might batch consume the
- * objects ten at a time with some summary info, but handle that there may be
- * less than ten elements in the final summary.
- * 
- * A Contractor could also be used to chunk up a number of objects for
- * serialization, perhaps for network transmission. Such a pattern might be used
- * with an Expander on the other side to deserialize into an iterator.
- * 
+ * A Contractorator is the reverse of an Expanderator. A Contractorator takes a source Iterator, and
+ * consumes elements from it in batches by passing to the Contractor which returns an object when
+ * ready. It is upto the Contractor to handle termination conditions. For example, it might batch
+ * consume the objects ten at a time with some summary info, but handle that there may be less than
+ * ten elements in the final summary.
+ *
+ * <p>A Contractor could also be used to chunk up a number of objects for serialization, perhaps for
+ * network transmission. Such a pattern might be used with an Expander on the other side to
+ * deserialize into an iterator.
+ *
  * @author Martyn Cutcher
  */
 public class Contractorator extends Prefetch {
-	private final Iterator m_src;
-	protected final Object   m_ctx;
-	private final Contractor m_contractor;
+  private final Iterator m_src;
+  protected final Object m_ctx;
+  private final Contractor m_contractor;
 
-	public Contractorator(Iterator src, final Object ctx, Contractor contractor) {
-		m_src = src;
-		m_ctx = ctx;
-		m_contractor = contractor;
-	}
-	
-	protected Object getNext() {
-		if (m_src.hasNext()) {
-			return m_contractor.contract(m_src);
-		} else {
-			return null;
-		}
-	}
+  public Contractorator(Iterator src, final Object ctx, Contractor contractor) {
+    m_src = src;
+    m_ctx = ctx;
+    m_contractor = contractor;
+  }
 
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+  protected Object getNext() {
+    if (m_src.hasNext()) {
+      return m_contractor.contract(m_src);
+    } else {
+      return null;
+    }
+  }
 
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 }

@@ -28,62 +28,59 @@ import org.embergraph.bop.PipelineOp;
 
 /**
  * Unit tests for {@link PipelinedAggregationOp}.
- * 
+ *
  * @author thompsonbry
  */
 public class TestPipelinedAggregationOp extends AbstractAggregationTestCase {
-    
-	public TestPipelinedAggregationOp() {
-	}
 
-	public TestPipelinedAggregationOp(String name) {
-		super(name);
-	}
+  public TestPipelinedAggregationOp() {}
 
-    @Override
-    protected GroupByOp newFixture(IValueExpression<?>[] select,
-            IValueExpression<?>[] groupBy, IConstraint[] having) {
+  public TestPipelinedAggregationOp(String name) {
+    super(name);
+  }
 
-        final int groupById = 1;
+  @Override
+  protected GroupByOp newFixture(
+      IValueExpression<?>[] select, IValueExpression<?>[] groupBy, IConstraint[] having) {
 
-        final IVariableFactory variableFactory = new MockVariableFactory();
+    final int groupById = 1;
 
-        final IGroupByState groupByState = new GroupByState(
-                select, groupBy, having);
+    final IVariableFactory variableFactory = new MockVariableFactory();
 
-        final IGroupByRewriteState groupByRewrite = new GroupByRewriter(
-                groupByState) {
+    final IGroupByState groupByState = new GroupByState(select, groupBy, having);
 
-            private static final long serialVersionUID = 1L;
+    final IGroupByRewriteState groupByRewrite =
+        new GroupByRewriter(groupByState) {
 
-            @Override
-            public IVariable<?> var() {
-                return variableFactory.var();
-            }
+          private static final long serialVersionUID = 1L;
 
+          @Override
+          public IVariable<?> var() {
+            return variableFactory.var();
+          }
         };
 
-        final GroupByOp query = new PipelinedAggregationOp(new BOp[] {},
-                NV.asMap(new NV[] {
-                        new NV(BOp.Annotations.BOP_ID, groupById),
-                        new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),
-                        new NV(PipelineOp.Annotations.PIPELINED, true),
-                        new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                        new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                        new NV(PipelineOp.Annotations.LAST_PASS, true),
-                        new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState),
-                        new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite),
+    final GroupByOp query =
+        new PipelinedAggregationOp(
+            new BOp[] {},
+            NV.asMap(
+                new NV[] {
+                  new NV(BOp.Annotations.BOP_ID, groupById),
+                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                  new NV(PipelineOp.Annotations.PIPELINED, true),
+                  new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                  new NV(PipelineOp.Annotations.LAST_PASS, true),
+                  new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState),
+                  new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite),
                 }));
 
-        return query;
-    }
+    return query;
+  }
 
-    @Override
-    protected boolean isPipelinedAggregationOp() {
+  @Override
+  protected boolean isPipelinedAggregationOp() {
 
-        return true;
-        
-    }
-
+    return true;
+  }
 }

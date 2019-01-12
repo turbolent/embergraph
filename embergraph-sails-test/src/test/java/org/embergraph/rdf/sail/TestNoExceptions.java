@@ -23,8 +23,11 @@ package org.embergraph.rdf.sail;
 
 import java.io.IOException;
 import java.util.Properties;
-
 import org.apache.commons.io.IOUtils;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.sail.sparql.ast.ParseException;
+import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -37,191 +40,171 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
-import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 /**
- * This test suite is for trac items where the failure mode is a 500 error caused
- * by a software error, often in the static optimizer.
- * 
- * The tests each consist of a test query in a file in this package.
- * The typical test succeeds if the optimizers run on this query without a disaster.
- * This test suite does NOT have either of the following objectives:
- * - that the static optimizer is correct in the sense that the optimized query has the same meaning as the original query
- * or
- * - an optimizer in the sense that the optimized query is likely to be faster than the original query.
- * 
- * The very limited goal is that no uncaught exceptions are thrown!
- * 
+ * This test suite is for trac items where the failure mode is a 500 error caused by a software
+ * error, often in the static optimizer.
+ *
+ * <p>The tests each consist of a test query in a file in this package. The typical test succeeds if
+ * the optimizers run on this query without a disaster. This test suite does NOT have either of the
+ * following objectives: - that the static optimizer is correct in the sense that the optimized
+ * query has the same meaning as the original query or - an optimizer in the sense that the
+ * optimized query is likely to be faster than the original query.
+ *
+ * <p>The very limited goal is that no uncaught exceptions are thrown!
  */
-public class TestNoExceptions extends
-        QuadsTestCase {
+public class TestNoExceptions extends QuadsTestCase {
 
-    /**
-     * 
+  /** */
+  public TestNoExceptions() {}
+
+  /** @param name */
+  public TestNoExceptions(String name) {
+    super(name);
+  }
+
+  public AbstractEmbergraphSailTestCase getOurDelegate() {
+
+    if (getDelegate() == null) {
+
+      String testClass = System.getProperty("testClass");
+      if (testClass != null) {
+        return super.getOurDelegate();
+      }
+      setDelegate(new TestEmbergraphSailWithQuads());
+    }
+    return (AbstractEmbergraphSailTestCase) super.getDelegate();
+  }
+
+  /**
+   * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
+   * JOURNAL FILE.
+   */
+  @Override
+  public Properties getProperties() {
+
+    final Properties props = super.getProperties();
+
+    /*
+     * For example, here is a set of five properties that turns off
+     * inference, truth maintenance, and the free text index.
      */
-    public TestNoExceptions() {
-    }
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    //		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+    //		props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+    //		props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
+    //		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
+    //				"false");
+    props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
 
-    /**
-     * @param name
-     */
-    public TestNoExceptions(String name) {
-        super(name);
-    }
+    return props;
+  }
+  /**
+   * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in the top-level query.
+   *
+   * <p>This is specifically for Trac 746 which crashed out during optimize. So the test simply runs
+   * that far, and does not verify anything other than the ability to optimize without an exception
+   *
+   * @throws IOException
+   */
+  public void test_namedSubquery746() throws Exception, TokenMgrError, ParseException, IOException {
+    optimizeQuery("ticket746");
+  }
 
-    public AbstractEmbergraphSailTestCase getOurDelegate() {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT *
+   * {  { SELECT * { ?s ?p ?o } LIMIT 1 }
+   * FILTER ( ?s = &lt;eg:a&gt; )
+   * }
+   * </pre>
+   *
+   * @throws MalformedQueryException
+   * @throws TokenMgrError
+   * @throws ParseException
+   * @throws IOException
+   */
+  public void test_filterSubselect737()
+      throws Exception, TokenMgrError, ParseException, IOException {
+    optimizeQuery("filterSubselect737");
+  }
 
-        if (getDelegate() == null) {
+  /**
+   *
+   *
+   * <pre>
+   * SELECT *
+   * WHERE {
+   *
+   * { FILTER ( false ) }
+   * UNION
+   * {
+   * {  SELECT ?Subject_A
+   * WHERE {
+   * { SELECT $j__5 ?Subject_A
+   * {
+   * } ORDER BY $j__5
+   * }
+   * } GROUP BY ?Subject_A
+   * }
+   * }
+   * OPTIONAL {
+   * {  SELECT ?Subject_A
+   * WHERE {
+   * { SELECT $j__8 ?Subject_A
+   * {
+   *
+   * }  ORDER BY $j_8
+   * }
+   * } GROUP BY ?Subject_A
+   * }
+   * }
+   * }
+   * </pre>
+   *
+   * @throws MalformedQueryException
+   * @throws TokenMgrError
+   * @throws ParseException
+   * @throws IOException
+   */
+  public void test_nestedSubselectsWithUnion737()
+      throws Exception, TokenMgrError, ParseException, IOException {
+    optimizeQuery("nestedSubselectsWithUnion737");
+  }
 
-            String testClass = System.getProperty("testClass");
-            if (testClass != null) {
-            	return super.getOurDelegate();
-
-            }
-            setDelegate(new TestEmbergraphSailWithQuads());
-        }
-        return (AbstractEmbergraphSailTestCase) super.getDelegate();
-    }
-
-	/**
-	 * Please set your database properties here, except for your journal file,
-	 * please DO NOT SPECIFY A JOURNAL FILE.
-	 */
-	@Override
-	public Properties getProperties() {
-
-		final Properties props = super.getProperties();
-
-		/*
-		 * For example, here is a set of five properties that turns off
-		 * inference, truth maintenance, and the free text index.
-		 */
-		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
-				NoAxioms.class.getName());
-		props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
-				NoVocabulary.class.getName());
-		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
-//		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
-//		props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
-//		props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
-//		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
-//				"false");
-		props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
-
-		return props;
-
-	}
-    /**
-     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
-     * the top-level query. 
-     * 
-     * This is specifically for Trac 746 which crashed out during optimize.
-     * So the test simply runs that far, and does not verify anything
-     * other than the ability to optimize without an exception
-     * @throws IOException 
-     */
-    public void test_namedSubquery746() throws Exception,
-            TokenMgrError, ParseException, IOException {
-        optimizeQuery("ticket746");
-
-    }
-    
-/**
- * <pre>
-SELECT *
-{  { SELECT * { ?s ?p ?o } LIMIT 1 }
-   FILTER ( ?s = &lt;eg:a&gt; )
-}
- </pre>
- * @throws MalformedQueryException
- * @throws TokenMgrError
- * @throws ParseException
- * @throws IOException
- */
-    public void test_filterSubselect737() throws Exception,
-            TokenMgrError, ParseException, IOException {
-        optimizeQuery("filterSubselect737");
-
-    }
-    
-
-/**
- * <pre>
-SELECT *
-WHERE {
-
-   { FILTER ( false ) }
-    UNION
-    {
-    {  SELECT ?Subject_A 
-      WHERE {
-        { SELECT $j__5 ?Subject_A
-          {
-          } ORDER BY $j__5
-        }
-      } GROUP BY ?Subject_A
-    }
-   }
-  OPTIONAL {
-    {  SELECT ?Subject_A 
-      WHERE {
-        { SELECT $j__8 ?Subject_A
-          {
-         
-          }  ORDER BY $j_8
-        }
-      } GROUP BY ?Subject_A
+  void optimizeQuery(final String queryfile) throws Exception {
+    final String sparql = IOUtils.toString(getClass().getResourceAsStream(queryfile + ".rq"));
+    // try with Embergraph:
+    final EmbergraphSail sail = getSail();
+    try {
+      executeQuery(new EmbergraphSailRepository(sail), sparql);
+    } finally {
+      sail.__tearDownUnitTest();
     }
   }
-}
- </pre>
- * @throws MalformedQueryException
- * @throws TokenMgrError
- * @throws ParseException
- * @throws IOException
- */
-    public void test_nestedSubselectsWithUnion737() throws Exception,
-            TokenMgrError, ParseException, IOException {
-        optimizeQuery("nestedSubselectsWithUnion737");
 
+  private void executeQuery(final SailRepository repo, final String query)
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+          RDFParseException, IOException, RDFHandlerException {
+    try {
+      repo.initialize();
+      final RepositoryConnection conn = repo.getConnection();
+      conn.setAutoCommit(false);
+      try {
+        final ValueFactory vf = conn.getValueFactory();
+        conn.commit();
+        TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+        TupleQueryResult tqr = tq.evaluate();
+        tqr.close();
+      } finally {
+        conn.close();
+      }
+    } finally {
+      repo.shutDown();
     }
-
-	void optimizeQuery(final String queryfile) throws Exception {
-		final String sparql = IOUtils.toString(getClass().getResourceAsStream(queryfile+".rq"));
-		// try with Embergraph:
-		final EmbergraphSail sail = getSail();
-		try {
-			executeQuery(new EmbergraphSailRepository(sail),sparql);
-		} finally {
-			sail.__tearDownUnitTest();
-		}
-
-	}
-
-	private void executeQuery(final SailRepository repo, final String query)
-			throws RepositoryException, MalformedQueryException,
-			QueryEvaluationException, RDFParseException, IOException,
-			RDFHandlerException {
-		try {
-			repo.initialize();
-			final RepositoryConnection conn = repo.getConnection();
-			conn.setAutoCommit(false);
-			try {
-				final ValueFactory vf = conn.getValueFactory();
-				conn.commit();
-				TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-				TupleQueryResult tqr = tq.evaluate();
-				tqr.close();
-			} finally {
-				conn.close();
-			}
-		} finally {
-			repo.shutDown();
-		}
-	}
-    
+  }
 }

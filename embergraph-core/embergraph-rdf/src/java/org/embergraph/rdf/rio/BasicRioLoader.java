@@ -21,8 +21,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Iterator;
 import java.util.Vector;
-
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.ServiceProviderHook;
 import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFFormat;
@@ -31,312 +31,263 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 
-import org.embergraph.rdf.ServiceProviderHook;
-
 /**
  * Parses data but does not load it into the indices.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BasicRioLoader implements IRioLoader {
 
-    /**
-     * Note: This logger was historically associated with the {@link IRioLoader}
-     * interface and it is still named for that interface.
-     */
-    protected static final transient Logger log = Logger
-            .getLogger(IRioLoader.class);
+  /**
+   * Note: This logger was historically associated with the {@link IRioLoader} interface and it is
+   * still named for that interface.
+   */
+  protected static final transient Logger log = Logger.getLogger(IRioLoader.class);
 
-    /**
-     * Force the load of the NxParser integration class.
-     * 
-     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">
-     *      Class loader problems </a>
-     */
-    static {
+  /**
+   * Force the load of the NxParser integration class.
+   *
+   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">Class loader problems </a>
+   */
+  static {
 
-        // Force the load of the NXParser integration.
-        ServiceProviderHook.forceLoad();
-        
-    }
-    
-    public long stmtsAdded;
-    
-    long insertTime;
-    
-    long insertStart;
-    
-    Vector<RioLoaderListener> listeners;
+    // Force the load of the NXParser integration.
+    ServiceProviderHook.forceLoad();
+  }
 
-    private final ValueFactory valueFactory;
-    
-    protected String defaultGraph;
-    
-    public BasicRioLoader(final ValueFactory valueFactory) {
-        
-        if (valueFactory == null)
-            throw new IllegalArgumentException();
-        
-        this.valueFactory = valueFactory;
-        
-    }
-    
-    final public long getStatementsAdded() {
-        
-        return stmtsAdded;
-        
-    }
-    
-    final public long getInsertTime() {
-        
-        return insertTime;
-        
-    }
-    
-    final public long getInsertRate() {
-        
-        return (long) ((stmtsAdded * 1000d) / (double) insertTime);
-        
-    }
+  public long stmtsAdded;
 
-    final public void addRioLoaderListener( final RioLoaderListener l ) {
-        
-        if ( listeners == null ) {
-            
-            listeners = new Vector<RioLoaderListener>();
-            
-        }
-        
-        listeners.add( l );
-        
-    }
-    
-    final public void removeRioLoaderListener( final RioLoaderListener l ) {
-        
-        listeners.remove( l );
-        
-    }
-    
-    final protected void notifyListeners() {
+  long insertTime;
 
-        if (listeners == null)
-            return;
+  long insertStart;
 
-        final RioLoaderEvent e = new RioLoaderEvent
-            ( stmtsAdded,
-              System.currentTimeMillis() - insertStart
-              );
-        
-        for ( Iterator<RioLoaderListener> it = listeners.iterator(); 
-              it.hasNext(); ) {
-            
-            it.next().processingNotification( e );
-            
-        }
-        
-    }
-    
-    /**
-     * Choose the parser based on the {@link RDFFormat} specified to the
-     * constructor.
-     * 
-     * @return The parser.
-     */
-    final protected RDFParser getParser(final RDFFormat rdfFormat) {
+  Vector<RioLoaderListener> listeners;
 
-        final RDFParser parser = Rio.createParser(rdfFormat, valueFactory);
-        
-        parser.setValueFactory(valueFactory);
-        
-        return parser;
+  private final ValueFactory valueFactory;
 
+  protected String defaultGraph;
+
+  public BasicRioLoader(final ValueFactory valueFactory) {
+
+    if (valueFactory == null) throw new IllegalArgumentException();
+
+    this.valueFactory = valueFactory;
+  }
+
+  public final long getStatementsAdded() {
+
+    return stmtsAdded;
+  }
+
+  public final long getInsertTime() {
+
+    return insertTime;
+  }
+
+  public final long getInsertRate() {
+
+    return (long) ((stmtsAdded * 1000d) / (double) insertTime);
+  }
+
+  public final void addRioLoaderListener(final RioLoaderListener l) {
+
+    if (listeners == null) {
+
+      listeners = new Vector<RioLoaderListener>();
     }
 
-    final public void loadRdf(final InputStream is, final String baseURI,
-            final RDFFormat rdfFormat, final String defaultGraph,
-            final RDFParserOptions options)
-            throws Exception {
+    listeners.add(l);
+  }
 
-        loadRdf2(is, baseURI, rdfFormat, defaultGraph, options);
-        
+  public final void removeRioLoaderListener(final RioLoaderListener l) {
+
+    listeners.remove(l);
+  }
+
+  protected final void notifyListeners() {
+
+    if (listeners == null) return;
+
+    final RioLoaderEvent e =
+        new RioLoaderEvent(stmtsAdded, System.currentTimeMillis() - insertStart);
+
+    for (Iterator<RioLoaderListener> it = listeners.iterator(); it.hasNext(); ) {
+
+      it.next().processingNotification(e);
     }
-    
-    final public void loadRdf(final Reader reader, final String baseURI,
-            final RDFFormat rdfFormat, final String defaultGraph,
-            final RDFParserOptions options)
-            throws Exception {
+  }
 
-        loadRdf2(reader, baseURI, rdfFormat, defaultGraph, options);
-        
-    }
+  /**
+   * Choose the parser based on the {@link RDFFormat} specified to the constructor.
+   *
+   * @return The parser.
+   */
+  protected final RDFParser getParser(final RDFFormat rdfFormat) {
 
-    /**
-     * Core implementation.
-     * 
-     * @param source
-     *            A {@link Reader} or {@link InputStream}.
-     * @param baseURI
-     * @param rdfFormat
-     * @param options
-     * 
-     * @throws Exception
-     */
-    protected void loadRdf2(final Object source, final String baseURI,
-            final RDFFormat rdfFormat, final String defaultGraph, final RDFParserOptions options)
-            throws Exception {
+    final RDFParser parser = Rio.createParser(rdfFormat, valueFactory);
 
-        if (source == null)
-            throw new IllegalArgumentException();
+    parser.setValueFactory(valueFactory);
 
-        if (!(source instanceof Reader) && !(source instanceof InputStream)) {
+    return parser;
+  }
 
-            throw new IllegalArgumentException();
-            
-        }
+  public final void loadRdf(
+      final InputStream is,
+      final String baseURI,
+      final RDFFormat rdfFormat,
+      final String defaultGraph,
+      final RDFParserOptions options)
+      throws Exception {
 
-        if (options == null)
-            throw new IllegalArgumentException();
+    loadRdf2(is, baseURI, rdfFormat, defaultGraph, options);
+  }
 
-        if (log.isInfoEnabled())
-            log.info("format=" + rdfFormat + ", options=" + options);
-        
-        this.defaultGraph = defaultGraph;
+  public final void loadRdf(
+      final Reader reader,
+      final String baseURI,
+      final RDFFormat rdfFormat,
+      final String defaultGraph,
+      final RDFParserOptions options)
+      throws Exception {
 
-        final RDFParser parser = getParser(rdfFormat);
+    loadRdf2(reader, baseURI, rdfFormat, defaultGraph, options);
+  }
 
-        // apply options to the parser
-        options.apply(parser);
-        
-        // set the handler from the factory.
-        parser.setRDFHandler( newRDFHandler() );
-    
-        // Note: reset to that rates reflect load times not clock times.
-        insertStart = System.currentTimeMillis();
-        insertTime = 0; // clear.
-        
-        // Note: reset so that rates are correct for each source loaded.
-        stmtsAdded = 0;
+  /**
+   * Core implementation.
+   *
+   * @param source A {@link Reader} or {@link InputStream}.
+   * @param baseURI
+   * @param rdfFormat
+   * @param options
+   * @throws Exception
+   */
+  protected void loadRdf2(
+      final Object source,
+      final String baseURI,
+      final RDFFormat rdfFormat,
+      final String defaultGraph,
+      final RDFParserOptions options)
+      throws Exception {
 
-        try {
+    if (source == null) throw new IllegalArgumentException();
 
-            before();
+    if (!(source instanceof Reader) && !(source instanceof InputStream)) {
 
-            log.info("Starting parse.");
-
-            // Parse the data.
-            if(source instanceof Reader) {
-
-                parser.parse((Reader)source, baseURI);
-                
-            } else if( source instanceof InputStream){
-                
-                parser.parse((InputStream)source, baseURI);
-                
-            } else throw new AssertionError();
-
-            insertTime = System.currentTimeMillis() - insertStart;
-
-            if (log.isInfoEnabled())
-                log.info("parse complete: elapsed=" + insertTime
-                        + "ms, toldTriples=" + stmtsAdded + ", tps="
-                        + getInsertRate());
-            
-            success();
-
-        } catch (RuntimeException ex) {
-
-            insertTime += System.currentTimeMillis() - insertStart;
-            
-            try {
-                error(ex);
-            } catch (Exception ex2) {
-                log.error("Ignoring: " + ex2);
-            }
-            
-            throw ex;
-            
-        } finally {
-
-            cleanUp();
-            
-        }
-        
+      throw new IllegalArgumentException();
     }
 
-    /**
-     * Invoked before parse (default is NOP).
-     */
-    protected void before() {
-        
+    if (options == null) throw new IllegalArgumentException();
+
+    if (log.isInfoEnabled()) log.info("format=" + rdfFormat + ", options=" + options);
+
+    this.defaultGraph = defaultGraph;
+
+    final RDFParser parser = getParser(rdfFormat);
+
+    // apply options to the parser
+    options.apply(parser);
+
+    // set the handler from the factory.
+    parser.setRDFHandler(newRDFHandler());
+
+    // Note: reset to that rates reflect load times not clock times.
+    insertStart = System.currentTimeMillis();
+    insertTime = 0; // clear.
+
+    // Note: reset so that rates are correct for each source loaded.
+    stmtsAdded = 0;
+
+    try {
+
+      before();
+
+      log.info("Starting parse.");
+
+      // Parse the data.
+      if (source instanceof Reader) {
+
+        parser.parse((Reader) source, baseURI);
+
+      } else if (source instanceof InputStream) {
+
+        parser.parse((InputStream) source, baseURI);
+
+      } else throw new AssertionError();
+
+      insertTime = System.currentTimeMillis() - insertStart;
+
+      if (log.isInfoEnabled())
+        log.info(
+            "parse complete: elapsed="
+                + insertTime
+                + "ms, toldTriples="
+                + stmtsAdded
+                + ", tps="
+                + getInsertRate());
+
+      success();
+
+    } catch (RuntimeException ex) {
+
+      insertTime += System.currentTimeMillis() - insertStart;
+
+      try {
+        error(ex);
+      } catch (Exception ex2) {
+        log.error("Ignoring: " + ex2);
+      }
+
+      throw ex;
+
+    } finally {
+
+      cleanUp();
     }
-    
-    /**
-     * Invoked after successful parse (default is NOP).
-     */
-    protected void success() {
-        
-    }
-    
-    /**
-     * Invoked if the parse fails (default is NOP).
-     */
-    protected void error(Exception ex) {
-        
-//        log.error("While parsing: " + ex);
+  }
 
-    }
-    
-    /**
-     * Invoked from finally clause after parse regardless of success or failure.
-     */
-    protected void cleanUp() {
-        
-    }
-    
-    /**
-     * Note: YOU MUST override this method to install a different
-     * {@link RDFHandler}. The default is the {@link BasicRDFHandler} which
-     * does NOTHING.
-     */
-    public RDFHandler newRDFHandler() {
-        
-        return new BasicRDFHandler();
-        
-    }
-    
-    private class BasicRDFHandler implements RDFHandler
-    {
+  /** Invoked before parse (default is NOP). */
+  protected void before() {}
 
-        public BasicRDFHandler() {
-            
-        }
+  /** Invoked after successful parse (default is NOP). */
+  protected void success() {}
 
-        public void endRDF() throws RDFHandlerException {
-            
-        }
+  /** Invoked if the parse fails (default is NOP). */
+  protected void error(Exception ex) {
 
-        public void handleComment(String arg0) throws RDFHandlerException {
+    //        log.error("While parsing: " + ex);
 
-        }
+  }
 
-        public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {
-            
-        }
+  /** Invoked from finally clause after parse regardless of success or failure. */
+  protected void cleanUp() {}
 
-        /**
-         * Counts the #of statements.
-         */
-        public void handleStatement(Statement arg0) throws RDFHandlerException {
-            
-            stmtsAdded++;           
-            
-        }
+  /**
+   * Note: YOU MUST override this method to install a different {@link RDFHandler}. The default is
+   * the {@link BasicRDFHandler} which does NOTHING.
+   */
+  public RDFHandler newRDFHandler() {
 
-        public void startRDF() throws RDFHandlerException {
-            
-        }
-        
+    return new BasicRDFHandler();
+  }
+
+  private class BasicRDFHandler implements RDFHandler {
+
+    public BasicRDFHandler() {}
+
+    public void endRDF() throws RDFHandlerException {}
+
+    public void handleComment(String arg0) throws RDFHandlerException {}
+
+    public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {}
+
+    /** Counts the #of statements. */
+    public void handleStatement(Statement arg0) throws RDFHandlerException {
+
+      stmtsAdded++;
     }
 
+    public void startRDF() throws RDFHandlerException {}
+  }
 }

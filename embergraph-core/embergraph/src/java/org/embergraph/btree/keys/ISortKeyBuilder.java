@@ -25,22 +25,18 @@ package org.embergraph.btree.keys;
 
 /**
  * An interface for generating unsigned byte[] sort keys.
- * 
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
- * @param <E>
- *            The generic type of the object whose sort keys will be generated.
+ * @param <E> The generic type of the object whose sort keys will be generated.
  */
 public interface ISortKeyBuilder<E> {
 
-    /**
-     * Return an unsigned byte[] sort key.
-     * 
-     * @param e
-     *            Some object (required).
-     *            
-     * @return The unsigned byte[] sort key.
-     */
-    public byte[] getSortKey(E e);
-    
+  /**
+   * Return an unsigned byte[] sort key.
+   *
+   * @param e Some object (required).
+   * @return The unsigned byte[] sort key.
+   */
+  public byte[] getSortKey(E e);
 }

@@ -18,64 +18,52 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
-
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
 /**
  * @see http://www.w3.org/2005/xpath-functions#contains
- * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class StrcontainsBOp extends XSDBooleanIVValueExpression implements INeedsMaterialization {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8277059116677497632L;
+  /** */
+  private static final long serialVersionUID = -8277059116677497632L;
 
-    @SuppressWarnings("rawtypes")
-    public StrcontainsBOp(
-            final IValueExpression<? extends IV> x,
-            final IValueExpression<? extends IV> y
-            ) {
+  @SuppressWarnings("rawtypes")
+  public StrcontainsBOp(
+      final IValueExpression<? extends IV> x, final IValueExpression<? extends IV> y) {
 
-        this(new BOp[] { x, y }, BOp.NOANNS);
+    this(new BOp[] {x, y}, BOp.NOANNS);
+  }
 
-    }
+  public StrcontainsBOp(final BOp[] args, final Map<String, Object> anns) {
 
-    public StrcontainsBOp(final BOp[] args, final Map<String, Object> anns) {
-        
-        super(args, anns);
-        
-        if (args.length != 2 || args[0] == null || args[1] == null)
-            throw new IllegalArgumentException();
-    
-    }
+    super(args, anns);
 
-    public StrcontainsBOp(final StrcontainsBOp op) {
+    if (args.length != 2 || args[0] == null || args[1] == null)
+      throw new IllegalArgumentException();
+  }
 
-        super(op);
-        
-    }
+  public StrcontainsBOp(final StrcontainsBOp op) {
 
-    @Override
-    public Requirement getRequirement() {
-        return Requirement.SOMETIMES;
-    }
+    super(op);
+  }
 
-    @Override
-    public boolean accept(final IBindingSet bs) throws SparqlTypeErrorException {
+  @Override
+  public Requirement getRequirement() {
+    return Requirement.SOMETIMES;
+  }
 
-        final String v = getAndCheckLiteralValue(0, bs).getLabel();
-        final String c = getAndCheckLiteralValue(1, bs).getLabel();
-        return v.contains(c);
+  @Override
+  public boolean accept(final IBindingSet bs) throws SparqlTypeErrorException {
 
-    }
-
+    final String v = getAndCheckLiteralValue(0, bs).getLabel();
+    final String c = getAndCheckLiteralValue(1, bs).getLabel();
+    return v.contains(c);
+  }
 }

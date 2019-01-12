@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.bop.rdf;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,50 +29,37 @@ import junit.framework.TestSuite;
  */
 public class TestAll extends TestCase {
 
-    /**
-     * 
+  /** */
+  public TestAll() {}
+
+  /** @param arg0 */
+  public TestAll(String arg0) {
+
+    super(arg0);
+  }
+
+  /** Returns a test that will run each of the implementation specific test suites in turn. */
+  public static Test suite() {
+
+    final TestSuite suite = new TestSuite("RDF operators");
+
+    suite.addTestSuite(TestBOpUtility.class);
+
+    // Aggregate operators (COUNT, SUM, MIN, MAX, etc.)
+    suite.addTest(org.embergraph.bop.rdf.aggregate.TestAll.suite());
+
+    // Specialized RDF filters
+    suite.addTest(org.embergraph.bop.rdf.filter.TestAll.suite());
+
+    /*
+     * Test suite for logic which "joins" two solutions, propagating
+     * bindings and verifying constraints.
      */
-    public TestAll() {
-        
-    }
+    suite.addTestSuite(TestBind.class);
 
-    /**
-     * @param arg0
-     */
-    public TestAll(String arg0) {
-     
-        super(arg0);
-        
-    }
+    // Specialized RDF join operators
+    suite.addTest(org.embergraph.bop.rdf.join.TestAll.suite());
 
-    /**
-     * Returns a test that will run each of the implementation specific test
-     * suites in turn.
-     */
-    public static Test suite()
-    {
-
-        final TestSuite suite = new TestSuite("RDF operators");
-
-        suite.addTestSuite(TestBOpUtility.class);
-        
-        // Aggregate operators (COUNT, SUM, MIN, MAX, etc.)
-        suite.addTest(org.embergraph.bop.rdf.aggregate.TestAll.suite());
-
-        // Specialized RDF filters
-        suite.addTest(org.embergraph.bop.rdf.filter.TestAll.suite());
-
-        /*
-         * Test suite for logic which "joins" two solutions, propagating
-         * bindings and verifying constraints.
-         */
-        suite.addTestSuite(TestBind.class);
-        
-        // Specialized RDF join operators
-        suite.addTest(org.embergraph.bop.rdf.join.TestAll.suite());
-
-        return suite;
-        
-    }
-    
+    return suite;
+  }
 }

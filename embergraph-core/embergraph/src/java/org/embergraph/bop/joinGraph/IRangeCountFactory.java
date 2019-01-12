@@ -27,29 +27,24 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.rule.IRule;
 
 /**
- * An interface used by an {@link IEvaluationPlan} to obtain range counts for
- * the {@link IPredicate}s in an {@link IRule}. The use of this interface on
- * the one hand makes it possible to test {@link IEvaluationPlan}s without real
- * data and on the other hand makes it possible to cache range counts across
- * queries evaluated against the same state of the database.
- * 
+ * An interface used by an {@link IEvaluationPlan} to obtain range counts for the {@link
+ * IPredicate}s in an {@link IRule}. The use of this interface on the one hand makes it possible to
+ * test {@link IEvaluationPlan}s without real data and on the other hand makes it possible to cache
+ * range counts across queries evaluated against the same state of the database.
+ *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRangeCountFactory {
 
-    /**
-     * Return the range count for the predicate as bound. For indices that use
-     * delete markers this will be an upper bound NOT an exact range count.
-     * However, if the range count is reported as ZERO (0L) as an upper bound
-     * this still indicates that there are no solutions for that predicate in
-     * the data.
-     * 
-     * @param pred
-     *            The predicate.
-     * 
-     * @return The range count.
-     */
-    public long rangeCount(IPredicate pred);
-    
+  /**
+   * Return the range count for the predicate as bound. For indices that use delete markers this
+   * will be an upper bound NOT an exact range count. However, if the range count is reported as
+   * ZERO (0L) as an upper bound this still indicates that there are no solutions for that predicate
+   * in the data.
+   *
+   * @param pred The predicate.
+   * @return The range count.
+   */
+  public long rangeCount(IPredicate pred);
 }

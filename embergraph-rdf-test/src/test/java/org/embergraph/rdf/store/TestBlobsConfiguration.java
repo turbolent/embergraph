@@ -24,115 +24,99 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.store;
 
 import java.util.Properties;
-
 import org.embergraph.btree.IIndex;
 
 /**
  * Test suite for configuration of the BLOBS index support.
- * 
- * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25"> Disable BLOBS
- *      indexing completely for GPU </a>
+ *
+ * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">Disable BLOBS indexing completely
+ *     for GPU </a>
  */
 public class TestBlobsConfiguration extends AbstractTripleStoreTestCase {
 
-    /**
-     * 
-     */
-    public TestBlobsConfiguration() {
+  /** */
+  public TestBlobsConfiguration() {}
+
+  /** @param name */
+  public TestBlobsConfiguration(final String name) {
+    super(name);
+  }
+
+  /** Default configuration - verify that BLOBS index exists. */
+  public void test_blobsSupport_defaultConfiguration() {
+
+    final AbstractTripleStore store = getStore();
+
+    try {
+
+      final IIndex blobsIndex = store.getLexiconRelation().getBlobsIndex();
+
+      assertNotNull(blobsIndex);
+
+      assertEquals(
+          store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
+          Integer.valueOf(AbstractTripleStore.Options.DEFAULT_BLOBS_THRESHOLD).intValue());
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
+  }
 
-    /**
-     * @param name
-     */
-    public TestBlobsConfiguration(final String name) {
-        super(name);
+  /** Override configuration - BLOBS index uses a non-default threashold. */
+  public void test_blobsSupport_nonDefaultBlobsIndexThresholdConfiguration() {
+
+    final Properties p = new Properties(getProperties());
+
+    final int overrideThreshold =
+        Integer.valueOf(AbstractTripleStore.Options.DEFAULT_BLOBS_THRESHOLD) * 2;
+
+    p.setProperty(AbstractTripleStore.Options.BLOBS_THRESHOLD, Integer.toString(overrideThreshold));
+
+    final AbstractTripleStore store = getStore(p);
+
+    try {
+
+      final IIndex blobsIndex = store.getLexiconRelation().getBlobsIndex();
+
+      assertNotNull(blobsIndex);
+
+      assertEquals(
+          store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
+          overrideThreshold);
+
+    } finally {
+
+      store.__tearDownUnitTest();
     }
+  }
 
-	/**
-	 * Default configuration - verify that BLOBS index exists.
-	 */
-	public void test_blobsSupport_defaultConfiguration() {
+  /** Override configuration - BLOBS index is disabled. */
+  public void test_blobsSupport_noBlobsIndexConfiguration() {
 
-		final AbstractTripleStore store = getStore();
+    final Properties p = new Properties(getProperties());
 
-		try {
+    p.setProperty(AbstractTripleStore.Options.BLOBS_THRESHOLD, Integer.toString(Integer.MAX_VALUE));
 
-			final IIndex blobsIndex = store.getLexiconRelation().getBlobsIndex();
+    final AbstractTripleStore store = getStore(p);
 
-			assertNotNull(blobsIndex);
+    try {
 
-			assertEquals(store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
-					Integer.valueOf(AbstractTripleStore.Options.DEFAULT_BLOBS_THRESHOLD).intValue());
+      try {
+        // Note: Defined to throw an exception if the index does not exist.
+        store.getLexiconRelation().getBlobsIndex();
+        fail("Expecting: " + IllegalStateException.class);
+      } catch (IllegalStateException ex) {
+        if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+      }
 
-		} finally {
+      assertEquals(
+          store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
+          Integer.MAX_VALUE);
 
-			store.__tearDownUnitTest();
+    } finally {
 
-		}
-
-	}
-
-	/**
-	 * Override configuration - BLOBS index uses a non-default threashold.
-	 */
-	public void test_blobsSupport_nonDefaultBlobsIndexThresholdConfiguration() {
-
-		final Properties p = new Properties(getProperties());
-
-		final int overrideThreshold = Integer.valueOf(AbstractTripleStore.Options.DEFAULT_BLOBS_THRESHOLD) * 2;
-
-		p.setProperty(AbstractTripleStore.Options.BLOBS_THRESHOLD, Integer.toString(overrideThreshold));
-
-		final AbstractTripleStore store = getStore(p);
-
-		try {
-
-			final IIndex blobsIndex = store.getLexiconRelation().getBlobsIndex();
-
-			assertNotNull(blobsIndex);
-
-			assertEquals(store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
-					overrideThreshold);
-
-		} finally {
-
-			store.__tearDownUnitTest();
-
-		}
-
-	}
-
-	/**
-	 * Override configuration - BLOBS index is disabled.
-	 */
-	public void test_blobsSupport_noBlobsIndexConfiguration() {
-
-		final Properties p = new Properties(getProperties());
-
-		p.setProperty(AbstractTripleStore.Options.BLOBS_THRESHOLD, Integer.toString(Integer.MAX_VALUE));
-
-		final AbstractTripleStore store = getStore(p);
-
-		try {
-
-			try {
-				// Note: Defined to throw an exception if the index does not exist.
-				store.getLexiconRelation().getBlobsIndex();
-				fail("Expecting: " + IllegalStateException.class);
-			} catch (IllegalStateException ex) {
-				if (log.isInfoEnabled())
-					log.info("Ignoring expected exception: " + ex);
-			}			
-
-			assertEquals(store.getLexiconRelation().getLexiconConfiguration().getBlobsThreshold(),
-					Integer.MAX_VALUE);
-
-		} finally {
-
-			store.__tearDownUnitTest();
-
-		}
-
-	}
-
+      store.__tearDownUnitTest();
+    }
+  }
 }

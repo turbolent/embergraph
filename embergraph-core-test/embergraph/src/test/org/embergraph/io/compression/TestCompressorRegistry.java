@@ -19,135 +19,127 @@ package org.embergraph.io.compression;
 
 import java.nio.ByteBuffer;
 import java.util.Random;
-
 import org.embergraph.io.TestCase3;
 
 public class TestCompressorRegistry extends TestCase3 {
-	final Random r = new Random();
-	
-	/**
-	 * Simple test to confirm standard compress/expand utilities on
-	 * HAWriteMesage
-	 */
-	public void testSimpleCompression() {
-		byte[] bytes = grabRepeatBytes();
-		final ByteBuffer src = ByteBuffer.wrap(bytes);
-		
-		{
-            final IRecordCompressor compressor = CompressorRegistry
-                    .getInstance().get(
-                            CompressorRegistry.DEFLATE_BEST_COMPRESSION);
+  final Random r = new Random();
 
-			final ByteBuffer dst = compressor.compress(src.duplicate());
-			
-			if(log.isInfoEnabled())
-			    log.info("COMPRESSED Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
-	
-			final ByteBuffer res = compressor.decompress(dst.duplicate());
-			
-            if(log.isInfoEnabled())
-                log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
-			
-			assertTrue(res.compareTo(src) == 0);
-		}
+  /** Simple test to confirm standard compress/expand utilities on HAWriteMesage */
+  public void testSimpleCompression() {
+    byte[] bytes = grabRepeatBytes();
+    final ByteBuffer src = ByteBuffer.wrap(bytes);
 
-		{
-            final IRecordCompressor compressor = CompressorRegistry
-                    .getInstance().get(
-                            CompressorRegistry.DEFLATE_BEST_SPEED);
+    {
+      final IRecordCompressor compressor =
+          CompressorRegistry.getInstance().get(CompressorRegistry.DEFLATE_BEST_COMPRESSION);
 
-            final ByteBuffer dst = compressor.compress(src.duplicate());
-			
-            if(log.isInfoEnabled())
-			log.info("SPEED Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
-	
-			final ByteBuffer res = compressor.decompress(dst.duplicate());
-			
-            if(log.isInfoEnabled())
-			log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
-			
-			assertTrue(res.compareTo(src) == 0);
-		}
+      final ByteBuffer dst = compressor.compress(src.duplicate());
 
-		{
-            final IRecordCompressor compressor = CompressorRegistry
-                    .getInstance().get(
-                            CompressorRegistry.NOP);
-			final ByteBuffer dst = compressor.compress(src.duplicate());
-			
-            if(log.isInfoEnabled())
-			log.info("NO COMPRESSION Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
-	
-			final ByteBuffer res = compressor.decompress(dst.duplicate());
-			
-            if(log.isInfoEnabled())
-			log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
-			
-			assertTrue(res.compareTo(src) == 0);
-		}
+      if (log.isInfoEnabled())
+        log.info("COMPRESSED Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
 
-		{
-            final IRecordCompressor compressor = CompressorRegistry
-                    .getInstance().get(
-                            CompressorRegistry.GZIP);
-			final ByteBuffer dst = compressor.compress(src);
-			
-            if(log.isInfoEnabled())
-			log.info("Compressed ZIP Dst: " + dst.limit() + ", Src:" + src.limit());
-	
-			final ByteBuffer res = compressor.decompress(dst);
-			
-            if(log.isInfoEnabled())
-			log.info("Expanded ZIP Dst: " + dst.limit() + ", Src:" + res.limit());
-			
-			assertTrue(res.compareTo(src) == 0);
-		}
-		
-	}
-	
-	private byte[] grabRepeatBytes() {
+      final ByteBuffer res = compressor.decompress(dst.duplicate());
 
-	    final byte[] bytes = new byte[512 * 1024];
-		
-		final byte[] src = new byte[3];
-		r.nextBytes(src);
-		
-		// copy src pattern repeated into bytes
-		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = src[i % src.length];
-		}
+      if (log.isInfoEnabled()) log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
 
-		return bytes;
-	}
-	
-	public void testPerformanceCompression() {
-		doPerformanceCompression(CompressorRegistry.NOP);
-		doPerformanceCompression(CompressorRegistry.DEFLATE_BEST_SPEED);
-		doPerformanceCompression(CompressorRegistry.DEFLATE_BEST_COMPRESSION);
-		doPerformanceCompression(CompressorRegistry.GZIP);
-	}
-	
-	public void doPerformanceCompression(final String strategy) {
-//		HAWriteMessage.setCompression(strategy);
-//		final IRecordCompressor compressor = HAWriteMessage.getCompressor();
-	    
-        final IRecordCompressor compressor = CompressorRegistry.getInstance()
-                .get(strategy);
+      assertTrue(res.compareTo(src) == 0);
+    }
 
-		final long start = System.currentTimeMillis();
-		ByteBuffer res = null;
-		final byte[] bytes = grabRepeatBytes();
-		final ByteBuffer src = ByteBuffer.wrap(bytes);
+    {
+      final IRecordCompressor compressor =
+          CompressorRegistry.getInstance().get(CompressorRegistry.DEFLATE_BEST_SPEED);
 
-		for (int i = 0; i < 2000; i++) {			
-			final ByteBuffer dst = compressor.compress(src.duplicate());
-			
-			res = compressor.decompress(dst);
-			
-			// assertTrue(res.compareTo(src) == 0);
-		}
-		
-        if(log.isInfoEnabled())
-		log.info("Strategy " + strategy + " Compress/Expand Inflator took: "+ (System.currentTimeMillis() - start) + "ms");
-	}
+      final ByteBuffer dst = compressor.compress(src.duplicate());
+
+      if (log.isInfoEnabled())
+        log.info("SPEED Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
+
+      final ByteBuffer res = compressor.decompress(dst.duplicate());
+
+      if (log.isInfoEnabled()) log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
+
+      assertTrue(res.compareTo(src) == 0);
+    }
+
+    {
+      final IRecordCompressor compressor =
+          CompressorRegistry.getInstance().get(CompressorRegistry.NOP);
+      final ByteBuffer dst = compressor.compress(src.duplicate());
+
+      if (log.isInfoEnabled())
+        log.info("NO COMPRESSION Compressed Dst: " + dst.limit() + ", Src:" + src.limit());
+
+      final ByteBuffer res = compressor.decompress(dst.duplicate());
+
+      if (log.isInfoEnabled()) log.info("Expanded Dst: " + dst.limit() + ", Src:" + res.limit());
+
+      assertTrue(res.compareTo(src) == 0);
+    }
+
+    {
+      final IRecordCompressor compressor =
+          CompressorRegistry.getInstance().get(CompressorRegistry.GZIP);
+      final ByteBuffer dst = compressor.compress(src);
+
+      if (log.isInfoEnabled())
+        log.info("Compressed ZIP Dst: " + dst.limit() + ", Src:" + src.limit());
+
+      final ByteBuffer res = compressor.decompress(dst);
+
+      if (log.isInfoEnabled())
+        log.info("Expanded ZIP Dst: " + dst.limit() + ", Src:" + res.limit());
+
+      assertTrue(res.compareTo(src) == 0);
+    }
+  }
+
+  private byte[] grabRepeatBytes() {
+
+    final byte[] bytes = new byte[512 * 1024];
+
+    final byte[] src = new byte[3];
+    r.nextBytes(src);
+
+    // copy src pattern repeated into bytes
+    for (int i = 0; i < bytes.length; i++) {
+      bytes[i] = src[i % src.length];
+    }
+
+    return bytes;
+  }
+
+  public void testPerformanceCompression() {
+    doPerformanceCompression(CompressorRegistry.NOP);
+    doPerformanceCompression(CompressorRegistry.DEFLATE_BEST_SPEED);
+    doPerformanceCompression(CompressorRegistry.DEFLATE_BEST_COMPRESSION);
+    doPerformanceCompression(CompressorRegistry.GZIP);
+  }
+
+  public void doPerformanceCompression(final String strategy) {
+    //		HAWriteMessage.setCompression(strategy);
+    //		final IRecordCompressor compressor = HAWriteMessage.getCompressor();
+
+    final IRecordCompressor compressor = CompressorRegistry.getInstance().get(strategy);
+
+    final long start = System.currentTimeMillis();
+    ByteBuffer res = null;
+    final byte[] bytes = grabRepeatBytes();
+    final ByteBuffer src = ByteBuffer.wrap(bytes);
+
+    for (int i = 0; i < 2000; i++) {
+      final ByteBuffer dst = compressor.compress(src.duplicate());
+
+      res = compressor.decompress(dst);
+
+      // assertTrue(res.compareTo(src) == 0);
+    }
+
+    if (log.isInfoEnabled())
+      log.info(
+          "Strategy "
+              + strategy
+              + " Compress/Expand Inflator took: "
+              + (System.currentTimeMillis() - start)
+              + "ms");
+  }
 }

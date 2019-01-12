@@ -27,8 +27,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-
 import org.apache.log4j.Logger;
+import org.embergraph.journal.IIndexManager;
+import org.embergraph.rdf.axioms.NoAxioms;
+import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -41,30 +43,25 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
-import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.vocab.NoVocabulary;
-
 /**
  * This is a stress test for abort/rollback semantics.
- * <p>
- * This test case will delegate to an underlying backing store. You can specify
- * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
- * <p>
- * There are three possible configurations for the testClass:
+ *
+ * <p>This test case will delegate to an underlying backing store. You can specify this store via a
+ * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
+ * </code>
+ *
+ * <p>There are three possible configurations for the testClass:
+ *
  * <ul>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)
+ *   <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)
  * </ul>
- * <p>
- * The default for triples and SIDs mode is for inference with truth maintenance
- * to be on. If you would like to turn off inference, make sure to do so in
- * {@link #getProperties()}.
- * 
+ *
+ * <p>The default for triples and SIDs mode is for inference with truth maintenance to be on. If you
+ * would like to turn off inference, make sure to do so in {@link #getProperties()}.
+ *
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/278
- * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @author <a href="mailto:gerdev@users.sourceforge.net">Gerjon</a>
@@ -72,305 +69,287 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  */
 public class TestRollbacks extends QuadsTestCase {
 
-    private static final Logger log = Logger.getLogger(TestRollbacks.class);
+  private static final Logger log = Logger.getLogger(TestRollbacks.class);
 
-	public TestRollbacks() {
-    }
+  public TestRollbacks() {}
 
-    public TestRollbacks(String arg0) {
-        super(arg0);
-    }
+  public TestRollbacks(String arg0) {
+    super(arg0);
+  }
 
-    @Override
-    public Properties getProperties() {
-        
-    	final Properties props = super.getProperties();
+  @Override
+  public Properties getProperties() {
 
-        /*
-         * For example, here is a set of five properties that turns off
-         * inference, truth maintenance, and the free text index.
-         */
-        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
-                NoAxioms.class.getName());
-        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
-                NoVocabulary.class.getName());
-        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+    final Properties props = super.getProperties();
 
-        // transactions are off in the base version of this class.
-        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "false");
-
-//		props.setProperty(EmbergraphSail.Options.CREATE_TEMP_FILE, "true");
-//		props.setProperty(EmbergraphSail.Options.BUFFER_MODE, BufferMode.DiskRW
-//				.toString());
-        
-//        props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
-
-        return props;
-    }
-
-
-    /** The thrown exception which is the first cause of failure. */
-    private AtomicReference<Throwable> firstCause;
-
-    /**
-     * Service used to run the individual tasks. This makes it possible to
-     * interrupt them as soon as one of the tasks fails.
+    /*
+     * For example, here is a set of five properties that turns off
+     * inference, truth maintenance, and the free text index.
      */
-    private ExecutorService executorService = null;
+    props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+    props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+    props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+    props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        firstCause = new AtomicReference<Throwable>(null);
-        executorService = Executors.newFixedThreadPool(3/*nthreads*/); 
+    // transactions are off in the base version of this class.
+    props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "false");
+
+    //		props.setProperty(EmbergraphSail.Options.CREATE_TEMP_FILE, "true");
+    //		props.setProperty(EmbergraphSail.Options.BUFFER_MODE, BufferMode.DiskRW
+    //				.toString());
+
+    //        props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
+
+    return props;
+  }
+
+  /** The thrown exception which is the first cause of failure. */
+  private AtomicReference<Throwable> firstCause;
+
+  /**
+   * Service used to run the individual tasks. This makes it possible to interrupt them as soon as
+   * one of the tasks fails.
+   */
+  private ExecutorService executorService = null;
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    firstCause = new AtomicReference<Throwable>(null);
+    executorService = Executors.newFixedThreadPool(3 /*nthreads*/);
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+    if (executorService != null) {
+      // interrupt any running tasks.
+      executorService.shutdownNow();
     }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        if (executorService != null) {
-            // interrupt any running tasks.
-            executorService.shutdownNow();
+    // clear references so that junit does not hold onto them.
+    executorService = null;
+    firstCause = null;
+    super.tearDown();
+  }
+
+  /**
+   * Stress test for abort/rollback semantics consisting of many short runs of the basic test.
+   *
+   * @throws Exception
+   */
+  public void testManyShortRuns() throws Exception {
+
+    for (int i = 0; i < 20; i++) {
+
+      doTest(10);
+    }
+  }
+
+  /**
+   * Stress test for abort/rollback semantics consisting of one moderate duration run of the basic
+   * test.
+   *
+   * @throws Exception
+   */
+  public void testModerateDuration() throws Exception {
+
+    doTest(100);
+  }
+
+  private static final AtomicInteger runCount = new AtomicInteger();
+
+  private void doTest(final int maxCounter) throws InterruptedException, Exception {
+
+    /*
+     * Note: Each run needs to be in a distinct namespace since we otherwise
+     * can have side-effects through the EmbergraphValueFactoryImpl for a given
+     * namespace.
+     */
+
+    final Properties properties = new Properties(getProperties());
+
+    properties.setProperty(EmbergraphSail.Options.NAMESPACE, "kb" + runCount.incrementAndGet());
+
+    final EmbergraphSail sail = getSail(properties);
+
+    try {
+      // Note: Modified to use the EmbergraphSailRepository rather than the base SailRepository
+      // class.
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+      repo.initialize();
+      runConcurrentStuff(repo, maxCounter);
+    } finally {
+      final IIndexManager db = sail.getIndexManager();
+      try {
+        if (sail.isOpen()) {
+          try {
+            sail.shutDown();
+          } catch (Throwable t) {
+            log.error(t, t);
+          }
         }
-        // clear references so that junit does not hold onto them.
-        executorService = null;
-        firstCause = null;
-        super.tearDown();
+      } finally {
+        db.destroy();
+      }
     }
+  }
+
+  private void runConcurrentStuff(final SailRepository repo, final int maxCounter)
+      throws Exception, InterruptedException {
+    try {
+      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      tasks.add(new DoStuff(repo, true /*writer*/, maxCounter));
+      tasks.add(new DoStuff(repo, false /*reader*/, maxCounter));
+      tasks.add(new DoStuff(repo, false /*reader*/, maxCounter));
+      final List<Future<Void>> futures = executorService.invokeAll(tasks);
+      // Look for the first cause.
+      final Throwable t = firstCause.get();
+      if (t != null) {
+        // Found it.
+        throw new RuntimeException(t);
+      }
+      // test each future.
+      for (Future<Void> f : futures) {
+        f.get();
+      }
+    } finally {
+      repo.shutDown();
+    }
+  }
+
+  private class DoStuff implements Callable<Void> {
+
+    private SailRepository repo;
+    private boolean writer;
+    private final int maxCounter;
+    int counter = 0;
 
     /**
-     * Stress test for abort/rollback semantics consisting of many short
-     * runs of the basic test.
-     * 
-     * @throws Exception
+     * @param repo The repository.
+     * @param writer <code>true</code> iff this is a writer.
+     * @param maxCounter Sets a limit on the length of the stress test. A value of 1000 results in a
+     *     26 second run. A value of 100-200 is more reasonable and is sufficient to readily
+     *     identify any problems during CI.
      */
-	public void testManyShortRuns() throws Exception {
-		
-		for (int i = 0; i < 20; i++) {
-		
-			doTest(10);
-			
-		}
-		
+    private DoStuff(final SailRepository repo, final boolean writer, final int maxCounter)
+        throws OpenRDFException {
+      this.repo = repo;
+      this.writer = writer;
+      this.maxCounter = maxCounter;
     }
 
-    /**
-     * Stress test for abort/rollback semantics consisting of one moderate
-     * duration run of the basic test.
-     * 
-     * @throws Exception
-     */
-    public void testModerateDuration() throws Exception {
-
-    	doTest(100);
-    	
-    }
-
-    static private final AtomicInteger runCount = new AtomicInteger();
-    
-    private void doTest(final int maxCounter) throws InterruptedException, Exception {
-
-        /*
-         * Note: Each run needs to be in a distinct namespace since we otherwise
-         * can have side-effects through the EmbergraphValueFactoryImpl for a given
-         * namespace.
-         */
-        
-        final Properties properties = new Properties(getProperties());
-        
-        properties.setProperty(EmbergraphSail.Options.NAMESPACE,
-                "kb" + runCount.incrementAndGet());
-        
-        final EmbergraphSail sail = getSail(properties);
-        
-        try {
-        	// Note: Modified to use the EmbergraphSailRepository rather than the base SailRepository class.
-            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-            repo.initialize();
-            runConcurrentStuff(repo,maxCounter);
-        } finally {
-			final IIndexManager db = sail.getIndexManager();
-			try {
-				if (sail.isOpen()) {
-					try {
-						sail.shutDown();
-					} catch (Throwable t) {
-						log.error(t, t);
-					}
-				}
-			} finally {
-				db.destroy();
-			}
+    public Void call() throws Exception {
+      //            if (writer) {
+      //                // Initial sleep on the writer.
+      //                Thread.sleep(500);
+      //            }
+      RepositoryConnection conn = null;
+      try {
+        int counter2 = 0;
+        conn = repo.getConnection();
+        conn.setAutoCommit(false);
+        while (firstCause.get() == null && counter < maxCounter) {
+          if (writer) writer(conn);
+          else reader(conn);
+          /*
+           * Note: If connection obtained/closed within the loop then
+           * the query is more likely to have some data to visit
+           * within its tx view.
+           */
+          if (++counter2 % 4 == 0) {
+            conn.close();
+            conn = repo.getConnection();
+            conn.setAutoCommit(false);
+          }
+          //					conn = repo.getConnection();
+          //                    conn.setAutoCommit(false);
+          //                    conn.close();
         }
+        return (Void) null;
+      } catch (Throwable t) {
+        firstCause.compareAndSet(null /* expect */, t);
+        throw new RuntimeException(t);
+      } finally {
+        if (conn != null) conn.close();
+      }
     }
-    
-    private void runConcurrentStuff(final SailRepository repo,final int maxCounter)
-            throws Exception,
+
+    private void reader(final RepositoryConnection conn)
+        throws RepositoryException, MalformedQueryException, QueryEvaluationException,
             InterruptedException {
-        try {
-            final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
-            tasks.add(new DoStuff(repo, true/*writer*/, maxCounter));
-            tasks.add(new DoStuff(repo, false/*reader*/, maxCounter));
-            tasks.add(new DoStuff(repo, false/*reader*/, maxCounter));
-            final List<Future<Void>> futures = executorService.invokeAll(tasks);
-            // Look for the first cause.
-            final Throwable t = firstCause.get();
-            if (t != null) {
-                // Found it.
-                throw new RuntimeException(t);
-            }
-            // test each future.
-            for (Future<Void> f : futures) {
-                f.get();
-            }
-        } finally {
-            repo.shutDown();
-        }
+      query(conn);
+      //            Thread.sleep(100);
+      query(conn);
+      ++counter;
+
+      if (counter % 3 == 0) conn.commit();
+      else conn.rollback();
+
+      // if (counter % 7 == 0) {
+      // conn.close();
+      // conn = repo.getConnection();
+      // conn.setAutoCommit(false);
+      // }
     }
 
-	private class DoStuff implements Callable<Void> {
+    private void writer(final RepositoryConnection conn)
+        throws RepositoryException, MalformedQueryException, QueryEvaluationException,
+            InterruptedException {
 
-		private SailRepository repo;
-		private boolean writer;
-		private final int maxCounter;
-		int counter = 0;
+      final URI subj = conn.getValueFactory().createURI("u:s" + (counter++));
+      final Value value = conn.getValueFactory().createLiteral("literal" + counter);
+      query(conn);
+      //            Thread.sleep(200);
+      conn.add(subj, conn.getValueFactory().createURI("u:p"), subj);
+      conn.add(subj, conn.getValueFactory().createURI("u:p"), value);
+      conn.commit();
 
-		/**
-		 * @param repo
-		 *            The repository.
-		 * @param writer
-		 *            <code>true</code> iff this is a writer.
-		 * @param maxCounter
-		 *            Sets a limit on the length of the stress test. A value of
-		 *            1000 results in a 26 second run. A value of 100-200 is
-		 *            more reasonable and is sufficient to readily identify any
-		 *            problems during CI.
-		 */
-		private DoStuff(final SailRepository repo, final boolean writer,
-				final int maxCounter) throws OpenRDFException {
-			this.repo = repo;
-			this.writer = writer;
-			this.maxCounter = maxCounter;
-		}
+      if (log.isInfoEnabled()) log.info("Added statements: size=" + conn.size());
 
-        public Void call() throws Exception {
-//            if (writer) {
-//                // Initial sleep on the writer.
-//                Thread.sleep(500);
-//            }
-            RepositoryConnection conn = null;
-            try {
-				int counter2 = 0;
-                conn = repo.getConnection();
-                conn.setAutoCommit(false);
-                while (firstCause.get() == null && counter < maxCounter) {
-                    if (writer)
-                        writer(conn);
-                    else
-                        reader(conn);
-                    /*
-                     * Note: If connection obtained/closed within the loop then
-                     * the query is more likely to have some data to visit
-                     * within its tx view.
-                     */
-					if (++counter2 % 4 == 0) {
-						conn.close();
-						conn = repo.getConnection();
-						conn.setAutoCommit(false);
-					}
-//					conn = repo.getConnection();
-//                    conn.setAutoCommit(false);
-//                    conn.close();
-                }
-                return (Void) null;
-            } catch (Throwable t) {
-                firstCause.compareAndSet(null/* expect */, t);
-                throw new RuntimeException(t);
-            } finally {
-                if (conn != null)
-                    conn.close();
-            }
-        }
-
-        private void reader(final RepositoryConnection conn)
-                throws RepositoryException, MalformedQueryException,
-                QueryEvaluationException, InterruptedException {
-            query(conn);
-//            Thread.sleep(100);
-            query(conn);
-            ++counter;
-
-            if (counter % 3 == 0)
-                conn.commit();
-            else
-                conn.rollback();
-
-            // if (counter % 7 == 0) {
-            // conn.close();
-            // conn = repo.getConnection();
-            // conn.setAutoCommit(false);
-            // }
-        }
-
-        private void writer(final RepositoryConnection conn) throws RepositoryException,
-                MalformedQueryException, QueryEvaluationException,
-                InterruptedException {
-
-            final URI subj = conn.getValueFactory().createURI(
-                    "u:s" + (counter++));
-            final Value value = conn.getValueFactory().createLiteral(
-                    "literal" + counter);
-            query(conn);
-//            Thread.sleep(200);
-            conn.add(subj, conn.getValueFactory().createURI("u:p"), subj);
-            conn.add(subj, conn.getValueFactory().createURI("u:p"), value);
-            conn.commit();
-
-            if(log.isInfoEnabled())
-                log.info("Added statements: size="+conn.size());
-            
-            // if (counter % 12 == 0) {
-            // conn.close();
-            // conn = repo.getConnection();
-            // conn.setAutoCommit(false);
-            // }
-        }
-
-        private void query(final RepositoryConnection conn) throws RepositoryException,
-                MalformedQueryException, QueryEvaluationException {
-            final long begin = System.currentTimeMillis();
-            /*
-             * Note: This query will do an access path scan rather than a join.
-             * There are different code paths involved with a join, so there
-             * might be problems on those code paths as well.
-             */
-            final boolean useJoin = counter % 2 == 0;
-            final String query = !useJoin
-            // access path scan
-            ? "SELECT ?b { ?a ?b ?c } LIMIT 20"
-            // join
-            : "SELECT ?b { ?a ?b ?c . ?d ?b ?e} LIMIT 20"
-            ;
-            final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-            q.setBinding("b", conn.getValueFactory().createURI("u:p"));
-            if (useJoin)
-                q.setBinding("d", conn.getValueFactory().createLiteral(
-                        "literal1"));
-            final TupleQueryResult tqr = q.evaluate();
-            int n = 0;
-            try {
-                while (tqr.hasNext()) {
-                    tqr.next();
-                    n++;
-                }
-            } finally {
-                tqr.close();
-            }
-            if (log.isInfoEnabled())
-                log.info("Query: writer=" + writer + ", counter=" + counter
-                        + ", nresults=" + n + ", elapsed="
-                        + (System.currentTimeMillis() - begin));
-        }
+      // if (counter % 12 == 0) {
+      // conn.close();
+      // conn = repo.getConnection();
+      // conn.setAutoCommit(false);
+      // }
     }
 
+    private void query(final RepositoryConnection conn)
+        throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+      final long begin = System.currentTimeMillis();
+      /*
+       * Note: This query will do an access path scan rather than a join.
+       * There are different code paths involved with a join, so there
+       * might be problems on those code paths as well.
+       */
+      final boolean useJoin = counter % 2 == 0;
+      final String query =
+          !useJoin
+              // access path scan
+              ? "SELECT ?b { ?a ?b ?c } LIMIT 20"
+              // join
+              : "SELECT ?b { ?a ?b ?c . ?d ?b ?e} LIMIT 20";
+      final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+      q.setBinding("b", conn.getValueFactory().createURI("u:p"));
+      if (useJoin) q.setBinding("d", conn.getValueFactory().createLiteral("literal1"));
+      final TupleQueryResult tqr = q.evaluate();
+      int n = 0;
+      try {
+        while (tqr.hasNext()) {
+          tqr.next();
+          n++;
+        }
+      } finally {
+        tqr.close();
+      }
+      if (log.isInfoEnabled())
+        log.info(
+            "Query: writer="
+                + writer
+                + ", counter="
+                + counter
+                + ", nresults="
+                + n
+                + ", elapsed="
+                + (System.currentTimeMillis() - begin));
+    }
+  }
 }

@@ -21,54 +21,53 @@ package org.embergraph.rwstore;
 import org.apache.log4j.Logger;
 
 public class StorageTerminalError extends Error {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private final Throwable m_cause;
 
-	private static final transient Logger cat = Logger.getLogger(StorageTerminalError.class);
-	
-	public StorageTerminalError(final String message, final Throwable cause) {
-		super(message);
-		
-		m_cause = cause;
-		
-		cat.fatal(message);
-	}
+  /** */
+  private static final long serialVersionUID = 1L;
 
-	public String getMessage() {
-		String msg = super.getMessage();
-		
-		if (m_cause != null) {
-			msg = msg + "[" + m_cause.getMessage() + "]";
-		}
-		
-		return msg;
-	}
-	public void printStackTrace() {
-		if (m_cause != null) {
-			m_cause.printStackTrace();
-		} else {
-			super.printStackTrace();
-		}
-	}
-	
-	public void printStackTrace(java.io.PrintStream s) {
-		if (m_cause != null) {
-			m_cause.printStackTrace(s);
-		} else {
-			super.printStackTrace(s);
-		}
-	}
-	
-	public void printStackTrace(java.io.PrintWriter s) {
-		if (m_cause != null) {
-			m_cause.printStackTrace(s);
-		} else {
-			super.printStackTrace(s);
-		}
-	}
+  private final Throwable m_cause;
+
+  private static final transient Logger cat = Logger.getLogger(StorageTerminalError.class);
+
+  public StorageTerminalError(final String message, final Throwable cause) {
+    super(message);
+
+    m_cause = cause;
+
+    cat.fatal(message);
+  }
+
+  public String getMessage() {
+    String msg = super.getMessage();
+
+    if (m_cause != null) {
+      msg = msg + "[" + m_cause.getMessage() + "]";
+    }
+
+    return msg;
+  }
+
+  public void printStackTrace() {
+    if (m_cause != null) {
+      m_cause.printStackTrace();
+    } else {
+      super.printStackTrace();
+    }
+  }
+
+  public void printStackTrace(java.io.PrintStream s) {
+    if (m_cause != null) {
+      m_cause.printStackTrace(s);
+    } else {
+      super.printStackTrace(s);
+    }
+  }
+
+  public void printStackTrace(java.io.PrintWriter s) {
+    if (m_cause != null) {
+      m_cause.printStackTrace(s);
+    } else {
+      super.printStackTrace(s);
+    }
+  }
 }
