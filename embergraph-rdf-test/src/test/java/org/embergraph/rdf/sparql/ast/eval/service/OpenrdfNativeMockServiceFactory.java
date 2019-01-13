@@ -77,7 +77,7 @@ public class OpenrdfNativeMockServiceFactory extends AbstractServiceFactoryBase 
 
       // System.err.println("ServiceCall: out="+serviceSolutions);
 
-      return new CloseableIteratorWrapper<BindingSet>(serviceSolutions.iterator());
+      return new CloseableIteratorWrapper<>(serviceSolutions.iterator());
     }
 
     @Override

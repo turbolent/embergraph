@@ -595,7 +595,7 @@ public class JGraph {
    */
   public Path[] chooseStartingPaths(final int nedges, final Path[] paths) {
 
-    final List<Path> tmp = new LinkedList<Path>();
+    final List<Path> tmp = new LinkedList<>();
 
     // Sort them by ascending expected cardinality.
     Arrays.sort(paths, 0, paths.length, EstimatedCardinalityComparator.INSTANCE);
@@ -683,7 +683,7 @@ public class JGraph {
      * they could even be discarded at this point.
      */
     {
-      final Set<Vertex> initialVertexSet = new LinkedHashSet<Vertex>();
+      final Set<Vertex> initialVertexSet = new LinkedHashSet<>();
 
       for (Path x : paths_t0) {
 
@@ -755,7 +755,7 @@ public class JGraph {
       if (log.isDebugEnabled()) log.debug("Re-sampling in-use vertices.");
 
       final Map<Vertex, AtomicInteger /* limit */> vertexLimit =
-          new LinkedHashMap<Vertex, AtomicInteger>();
+          new LinkedHashMap<>();
 
       for (Path x : a) {
 
@@ -806,7 +806,7 @@ public class JGraph {
 
     // #of paths with cardinality estimate underflow.
     int nunderflow = 0;
-    final List<Callable<Boolean>> tasks = new LinkedList<Callable<Boolean>>();
+    final List<Callable<Boolean>> tasks = new LinkedList<>();
     for (Path x : a) {
 
       tasks.add(new ResamplePathTask(queryEngine, x, limitIn, edgeSamples));
@@ -1037,10 +1037,10 @@ public class JGraph {
     if (log.isDebugEnabled()) log.debug("Expanding paths: #paths(in)=" + a.length);
 
     // The new set of paths to be explored.
-    final List<Path> tmpAll = new LinkedList<Path>();
+    final List<Path> tmpAll = new LinkedList<>();
 
     // Setup tasks to expand the current join paths.
-    final List<Callable<List<Path>>> tasks = new LinkedList<Callable<List<Path>>>();
+    final List<Callable<List<Path>>> tasks = new LinkedList<>();
     for (Path x : a) {
 
       tasks.add(new ExpandPathTask(queryEngine, x, edgeSamples));
@@ -1131,7 +1131,7 @@ public class JGraph {
       /*
        * The set of vertices used to expand this path in this round.
        */
-      final Set<Vertex> used = new LinkedHashSet<Vertex>();
+      final Set<Vertex> used = new LinkedHashSet<>();
 
       /*
        * Any vertex which (a) does not appear in the path to be
@@ -1144,10 +1144,10 @@ public class JGraph {
        * source of unconnected edges which need to be used to extend
        * the path.
        */
-      final Set<Vertex> nothingShared = new LinkedHashSet<Vertex>();
+      final Set<Vertex> nothingShared = new LinkedHashSet<>();
 
       // The new set of paths to be explored as extensions to this path.
-      final List<Path> tmp = new LinkedList<Path>();
+      final List<Path> tmp = new LinkedList<>();
 
       // Consider all vertices.
       for (Vertex tVertex : V) {
@@ -1286,7 +1286,7 @@ public class JGraph {
    */
   private void sampleAllVertices(final QueryEngine queryEngine, final int limit) {
 
-    final Map<Vertex, AtomicInteger> vertexLimit = new LinkedHashMap<Vertex, AtomicInteger>();
+    final Map<Vertex, AtomicInteger> vertexLimit = new LinkedHashMap<>();
 
     for (Vertex v : V) {
 
@@ -1311,7 +1311,7 @@ public class JGraph {
       final QueryEngine queryEngine, final Map<Vertex, AtomicInteger> vertexLimit) {
 
     // Setup tasks to sample vertices.
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
     for (Map.Entry<Vertex, AtomicInteger> e : vertexLimit.entrySet()) {
 
       final Vertex v = e.getKey();
@@ -1334,7 +1334,7 @@ public class JGraph {
     }
 
     // Check futures for errors.
-    final List<Throwable> causes = new LinkedList<Throwable>();
+    final List<Throwable> causes = new LinkedList<>();
     for (Future<Void> f : futures) {
       try {
         f.get();
@@ -1408,7 +1408,7 @@ public class JGraph {
   private Path[] estimateInitialEdgeWeights(final QueryEngine queryEngine, final int limit)
       throws Exception {
 
-    final List<Callable<Path>> tasks = new LinkedList<Callable<Path>>();
+    final List<Callable<Path>> tasks = new LinkedList<>();
 
     /*
      * Examine all unordered vertex pairs (v1,v2) once. If any vertex has
@@ -1495,7 +1495,7 @@ public class JGraph {
      * Now sample those paths in parallel.
      */
 
-    final List<Path> paths = new LinkedList<Path>();
+    final List<Path> paths = new LinkedList<>();
 
     //        // Sample the paths in the caller's thread.
     //        for(Callable<Path> task : tasks) {
@@ -1597,7 +1597,7 @@ public class JGraph {
     }
     final StringBuilder sb = new StringBuilder();
     final Formatter f = new Formatter(sb);
-    final Set<Path> pruned = new LinkedHashSet<Path>();
+    final Set<Path> pruned = new LinkedHashSet<>();
     for (int i = 0; i < a.length; i++) {
       final Path Pi = a[i];
       if (Pi.edgeSample == null) throw new RuntimeException("Not sampled: " + Pi);
@@ -1635,7 +1635,7 @@ public class JGraph {
         final boolean lte = costPi <= costPj;
         List<Integer> prunedByThisPath = null;
         if (lte) {
-          prunedByThisPath = new LinkedList<Integer>();
+          prunedByThisPath = new LinkedList<>();
           if (pruned.add(Pj)) prunedByThisPath.add(j);
           for (int k = 0; k < a.length; k++) {
             final Path x = a[k];
@@ -1663,7 +1663,7 @@ public class JGraph {
      */
     final Path[] b;
     {
-      final Set<Path> keep = new LinkedHashSet<Path>();
+      final Set<Path> keep = new LinkedHashSet<>();
       for (Path p : a) {
         if (pruned.contains(p)) continue;
         keep.add(p);
@@ -1770,7 +1770,7 @@ public class JGraph {
   public static String showTable(
       final Path[] a, final Path[] pruned, final Map<PathIds, EdgeSample> edgeSamples) {
     final StringBuilder sb = new StringBuilder(128 * a.length);
-    final List<Path> underflowPaths = new LinkedList<Path>();
+    final List<Path> underflowPaths = new LinkedList<>();
     final Formatter f = new Formatter(sb);
     f.format(
         "%-4s %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s %10s %10s",

@@ -207,10 +207,10 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
   public IVSolutionSetEncoder() {
 
     // The ordered set of variables for which bindings have been observed.
-    this.schema = new LinkedHashSet<IVariable<?>>();
+    this.schema = new LinkedHashSet<>();
 
     // The IV -> EmbergraphValue cache
-    this.cache = new HashMap<IV<?, ?>, EmbergraphValue>();
+    this.cache = new HashMap<>();
 
     // Used to encode the IVs.
     this.keyBuilder = new ASCIIKeyBuilderFactory(128).getKeyBuilder();
@@ -270,7 +270,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
      * note which variables are present for the first time in this solution.
      * We will need to write those onto the wire.
      */
-    final List<IVariable<?>> newVars = new LinkedList<IVariable<?>>();
+    final List<IVariable<?>> newVars = new LinkedList<>();
     {
       /*
        * Note: Changed to use bset.iterator() based on a hot spot in the
@@ -299,7 +299,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
      */
     // Ordered set of new IV -> Value associations. List entry is [null] if
     // no association for IV at that ordinal position in the solution.
-    final List<EmbergraphValue> values = new LinkedList<EmbergraphValue>();
+    final List<EmbergraphValue> values = new LinkedList<>();
     // #of bindings with non-null IVs.
     int numBindings = 0;
     // #of new IVCache associations.

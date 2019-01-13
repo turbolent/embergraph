@@ -190,7 +190,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
         // Lazily allocate map.
         if (tmp == null) {
 
-          tmp = new LinkedHashMap<IVariable<?>, Map<URI, StatementPatternNode>>();
+          tmp = new LinkedHashMap<>();
         }
 
         // Lazily allocate set for that searchVar.
@@ -198,7 +198,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (statementPatterns == null) {
 
-          tmp.put(searchVar, statementPatterns = new LinkedHashMap<URI, StatementPatternNode>());
+          tmp.put(searchVar, statementPatterns = new LinkedHashMap<>());
         }
 
         // Add search predicate to set for that searchVar.
@@ -216,7 +216,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
   private void validateSearch(
       final IVariable<?> searchVar, final Map<URI, StatementPatternNode> statementPatterns) {
 
-    final Set<URI> uris = new LinkedHashSet<URI>();
+    final Set<URI> uris = new LinkedHashSet<>();
 
     for (StatementPatternNode sp : statementPatterns.values()) {
 
@@ -456,7 +456,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
     }
 
     private static final ConcurrentWeakValueCacheWithTimeout<String, Set<IV>> cache =
-        new ConcurrentWeakValueCacheWithTimeout<String, Set<IV>>(10, 1000 * 60);
+        new ConcurrentWeakValueCacheWithTimeout<>(10, 1000 * 60);
 
     private Set<IV> getSubjects() {
 
@@ -482,7 +482,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
         log.info("starting subject collection...");
       }
 
-      final Set<IV> subjects = new LinkedHashSet<IV>();
+      final Set<IV> subjects = new LinkedHashSet<>();
 
       while (src.hasNext()) {
 
@@ -552,7 +552,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
       // filtered everything out
       if (!foundOne) {
 
-        return new EmptyCloseableIterator<IBindingSet>();
+        return new EmptyCloseableIterator<>();
       }
 
       final IBindingSet[] out = new IBindingSet[bindingsClause.length];
@@ -645,7 +645,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
         log.info("finished search in search.");
       }
 
-      return new ThickCloseableIterator<IBindingSet>(out, numAccepted);
+      return new ThickCloseableIterator<>(out, numAccepted);
     }
 
     @Override

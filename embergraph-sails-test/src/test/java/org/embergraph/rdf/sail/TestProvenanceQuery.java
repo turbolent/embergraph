@@ -243,7 +243,7 @@ public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
          * These are the expected results for the query (the bindings for Y).
          */
 
-        final Set<Value> expected = new HashSet<Value>();
+        final Set<Value> expected = new HashSet<>();
 
         expected.add(bryan);
 

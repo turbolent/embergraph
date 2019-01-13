@@ -1224,7 +1224,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             ((IScaleOutClientIndex) lexiconRelation.getTerm2IdIndex())
                 .newWriteBuffer(
                     new Term2IdWriteProcAsyncResultHandler(false /* readOnly */),
-                    new DefaultDuplicateRemover<EmbergraphValue>(true /* testRefs */),
+                    new DefaultDuplicateRemover<>(true /* testRefs */),
                     new Term2IdWriteProcConstructor(
                         false /* readOnly */,
                         lexiconRelation.isStoreBlankNodes(),
@@ -1234,7 +1234,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             ((IScaleOutClientIndex) lexiconRelation.getId2TermIndex())
                 .newWriteBuffer(
                     null /* resultHandler */,
-                    new DefaultDuplicateRemover<EmbergraphValue>(true /* testRefs */),
+                    new DefaultDuplicateRemover<>(true /* testRefs */),
                     Id2TermWriteProcConstructor.INSTANCE);
       }
 
@@ -1253,7 +1253,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             ((IScaleOutClientIndex) lexiconRelation.getBlobsIndex())
                 .newWriteBuffer(
                     new BlobsWriteProcAsyncResultHandler(false /* readOnly */),
-                    new DefaultDuplicateRemover<EmbergraphValue>(true /* testRefs */),
+                    new DefaultDuplicateRemover<>(true /* testRefs */),
                     new BlobsWriteProcConstructor(
                         false /* readOnly */, lexiconRelation.isStoreBlankNodes()));
       }
@@ -1281,7 +1281,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
               ((IScaleOutClientIndex) tmp.getIndex())
                   .newWriteBuffer(
                       textResultHandler, // counts tuples written on index
-                      new DefaultDuplicateRemover<EmbergraphValue>(true /* testRefs */),
+                      new DefaultDuplicateRemover<>(true /* testRefs */),
                       TextIndexWriteProc.IndexWriteProcConstructor.NO_OVERWRITE);
 
           indexDatatypeLiterals =
@@ -1307,7 +1307,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
        */
       {
         buffer_stmts =
-            new LinkedHashMap<SPOKeyOrder, IRunnableBuffer<KVO<ISPO>[]>>(
+            new LinkedHashMap<>(
                 tripleStore.isQuads() ? 6 : 3);
 
         final Iterator<SPOKeyOrder> itr = tripleStore.getSPORelation().statementKeyOrderIterator();
@@ -1320,7 +1320,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
               ((IScaleOutClientIndex) spoRelation.getIndex(keyOrder))
                   .newWriteBuffer(
                       keyOrder.isPrimaryIndex() ? statementResultHandler : null,
-                      new DefaultDuplicateRemover<ISPO>(true /* testRefs */),
+                      new DefaultDuplicateRemover<>(true /* testRefs */),
                       SPOIndexWriteProc.IndexWriteProcConstructor.INSTANCE);
 
           buffer_stmts.put(keyOrder, buffer);
@@ -1359,7 +1359,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             parserPoolSize, // maximumPoolSize
             1, // keepAliveTime
             TimeUnit.MINUTES, // keepAlive units.
-            new LinkedBlockingQueue<Runnable>(parserQueueCapacity), // workQueue
+            new LinkedBlockingQueue<>(parserQueueCapacity), // workQueue
             new DaemonThreadFactory(getClass().getName() + "_parserService") // threadFactory
             );
 
@@ -1380,7 +1380,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             term2IdWriterPoolSize, // maximumPoolSize
             1, // keepAliveTime
             TimeUnit.MINUTES, // keepAlive units.
-            new LinkedBlockingQueue<Runnable>(/* unbounded */ ), // workQueue
+            new LinkedBlockingQueue<>(/* unbounded */), // workQueue
             new DaemonThreadFactory(getClass().getName() + "_term2IdWriteService") // threadFactory
             );
 
@@ -1401,7 +1401,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             otherWriterPoolSize, // maximumPoolSize
             1, // keepAliveTime
             TimeUnit.MINUTES, // keepAlive units.
-            new LinkedBlockingQueue<Runnable>(/* unbounded */ ), // workQueue
+            new LinkedBlockingQueue<>(/* unbounded */), // workQueue
             new DaemonThreadFactory(getClass().getName() + "_otherWriteService") // threadFactory
             );
 
@@ -1422,7 +1422,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             notifyPoolSize, // maximumPoolSize
             1, // keepAliveTime
             TimeUnit.MINUTES, // keepAlive units.
-            new LinkedBlockingQueue<Runnable>(/* unbounded */ ), // workQueue
+            new LinkedBlockingQueue<>(/* unbounded */), // workQueue
             new DaemonThreadFactory(getClass().getName() + "_notifyService") // threadFactory
             );
 
@@ -1461,7 +1461,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   private class ServiceStatisticsTask implements Runnable {
 
     private final Map<String, ThreadPoolExecutorBaseStatisticsTask> tasks =
-        new LinkedHashMap<String, ThreadPoolExecutorBaseStatisticsTask>();
+        new LinkedHashMap<>();
 
     private final ScheduledFuture<?> serviceStatisticsFuture;
 
@@ -2196,7 +2196,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
        */
       pauseSet.addCounter(
           "pauseParserPoolStatementThreshold",
-          new OneShotInstrument<Long>(pauseParserPoolStatementThreshold));
+          new OneShotInstrument<>(pauseParserPoolStatementThreshold));
 
       // The #of suspended parse request threads (current value).
       pauseSet.addCounter(
@@ -2758,21 +2758,21 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
               if (blobs == null) {
                 // Lazily allocate.
-                blobs = new ArrayList<KVOC<EmbergraphValue>>();
+                blobs = new ArrayList<>();
               }
               // Assign a sort key to each Value.
-              blobs.add(new KVOC<EmbergraphValue>(key, val, v, latch));
+              blobs.add(new KVOC<>(key, val, v, latch));
               //                            System.err.println("blob  : "+v);
 
             } else {
 
               if (terms == null) {
                 // Lazily allocate to chunkSize.
-                terms = new ArrayList<KVOC<EmbergraphValue>>(chunkIn.length);
+                terms = new ArrayList<>(chunkIn.length);
               }
               // Assign a sort key to each Value.
               terms.add(
-                  new KVOC<EmbergraphValue>(
+                  new KVOC<>(
                       keyBuilderTerm2Id.value2Key(v), null /* val */, v, latch));
               //                            System.err.println("term  : "+v);
 
@@ -2928,7 +2928,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
              * since there is no side-effect on the EmbergraphValue for
              * writes on ID2TERM (unlike the writes on TERM2ID).
              */
-            chunkOut[i++] = new KVOC<EmbergraphValue>(key, val, null /* v */, latch);
+            chunkOut[i++] = new KVOC<>(key, val, null /* v */, latch);
           }
 
           // make dense.
@@ -3125,7 +3125,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
              * force the retention of the RDF Value objects in its
              * s/p/o/c positions.
              */
-            a[i] = new KVOC<ISPO>(key, val, null /* spo */, latch);
+            a[i] = new KVOC<>(key, val, null /* spo */, latch);
           }
 
           // put chunk into sorted order based on assigned keys.
@@ -3201,7 +3201,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
      * large.
      */
     private final AtomicReference<Map<String, EmbergraphBNode>> bnodes =
-        new AtomicReference<Map<String, EmbergraphBNode>>();
+        new AtomicReference<>();
 
     /*
      * The total #of parsed statements so far.
@@ -3358,7 +3358,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
          * Allocate a canonicalizing map for blank nodes. Since this
          * will be a private map it does not need to be thread-safe.
          */
-        setBNodeMap(new HashMap<String, EmbergraphBNode>(bnodesInitialCapacity));
+        setBNodeMap(new HashMap<>(bnodesInitialCapacity));
 
         // fall through.
         bnodes = this.bnodes.get();
@@ -3456,7 +3456,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
          * Note: A linked hash map is used to make the iterator faster.
          */
 
-        values = new LinkedHashMap<Value, EmbergraphValue>(valuesInitialCapacity);
+        values = new LinkedHashMap<>(valuesInitialCapacity);
       }
 
       /*
@@ -3518,7 +3518,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       if (statements == null) {
 
         statements =
-            new UnsynchronizedUnboundedChunkBuffer<S>(
+            new UnsynchronizedUnboundedChunkBuffer<>(
                 producerChunkSize, (Class<? extends S>) EmbergraphStatement.class);
       }
 
@@ -3800,7 +3800,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
        * since reset() would clear those fields which might cause
        * spontaneous failures within ongoing processing.
        */
-      final List<Callable> tasks = new LinkedList<Callable>();
+      final List<Callable> tasks = new LinkedList<>();
 
       /*
        * The #of triples parsed from this document. This is added to the

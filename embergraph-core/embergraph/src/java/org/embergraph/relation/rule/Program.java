@@ -49,7 +49,7 @@ public class Program implements IProgram {
 
   private final IQueryOptions queryOptions;
 
-  private final List<IStep> steps = new LinkedList<IStep>();
+  private final List<IStep> steps = new LinkedList<>();
 
   //    /*
   //     * De-serialization ctor.

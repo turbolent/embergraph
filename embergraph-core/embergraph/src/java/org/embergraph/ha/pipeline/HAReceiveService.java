@@ -264,7 +264,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
     this.addrSelf = addrSelf;
 
-    this.addrNextRef = new AtomicReference<InetSocketAddress>(addrNext);
+    this.addrNextRef = new AtomicReference<>(addrNext);
 
     this.callback = callback;
 
@@ -439,7 +439,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
    *
    * <p>Note: Exposed to {@link #changeUpStream()}.
    */
-  private final AtomicReference<Client> clientRef = new AtomicReference<Client>(null);
+  private final AtomicReference<Client> clientRef = new AtomicReference<>(null);
 
   /*
    * Loops accepting requests and scheduling {@link ReadTask}s. Note that a local caller must hand
@@ -486,8 +486,8 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           // Setup task to read buffer for that message.
           readFuture =
               waitFuture =
-                  new FutureTask<Void>(
-                      new ReadTask<M>(
+                  new FutureTask<>(
+                      new ReadTask<>(
                           server,
                           clientRef,
                           msg,
@@ -574,7 +574,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
      * right thing - namely it sends an RMI message to the new downstream service and retransmits
      * the payload along the write pipeline.
      */
-    private final AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>();
+    private final AtomicReference<Throwable> firstCause = new AtomicReference<>();
 
     //        /** Used to replicate the message to the downstream service (if any). */
     //        private final HASendService downstream;

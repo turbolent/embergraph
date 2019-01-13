@@ -37,7 +37,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
    * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as constants
    */
   private static final transient XSDBooleanIV<EmbergraphLiteral> TRUE =
-      new XSDBooleanIV<EmbergraphLiteral>(true);
+      new XSDBooleanIV<>(true);
 
   /*
    * DO NOT ALLOW THIS REFERENCE TO ESCAPE. SIDE EFFECTS ON ITS [cache] CAUSE PROBLEMS!
@@ -45,7 +45,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
    * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as constants
    */
   private static final transient XSDBooleanIV<EmbergraphLiteral> FALSE =
-      new XSDBooleanIV<EmbergraphLiteral>(false);
+      new XSDBooleanIV<>(false);
 
   /*
    * Return a <strong>strong</strong> new instance of an {@link XSDBooleanIV} whose <code>cache
@@ -74,7 +74,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   @Override
   public IV<V, Boolean> clone(final boolean clearCache) {
 
-    final XSDBooleanIV<V> tmp = new XSDBooleanIV<V>(value);
+    final XSDBooleanIV<V> tmp = new XSDBooleanIV<>(value);
 
     if (!clearCache) {
 

@@ -332,7 +332,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   protected DateTimeExtension<EmbergraphValue> getDateTimeExtensionGMT(
       final EmbergraphValueFactory vf) {
 
-    return new DateTimeExtension<EmbergraphValue>(
+    return new DateTimeExtension<>(
         new IDatatypeURIResolver() {
           public EmbergraphURI resolve(URI uri) {
             final EmbergraphURI buri = vf.createURI(uri.stringValue());

@@ -28,7 +28,7 @@ public class LoadStatementBufferFactory<S extends Statement> implements IStateme
   /** Return the {@link StatementBuffer} to be used for a task. */
   public StatementBuffer<S> newStatementBuffer() {
 
-    return new StatementBuffer<S>(
+    return new StatementBuffer<>(
         null /* statementStore */, db, bufferCapacity, 10 /*queueCapacity*/);
   }
 

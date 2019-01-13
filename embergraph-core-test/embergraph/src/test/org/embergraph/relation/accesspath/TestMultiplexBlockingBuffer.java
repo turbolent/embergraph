@@ -41,9 +41,9 @@ public class TestMultiplexBlockingBuffer extends TestCase2 {
 
   public void test_multiplex() {
 
-    final IBlockingBuffer<String> buffer = new BlockingBuffer<String>();
+    final IBlockingBuffer<String> buffer = new BlockingBuffer<>();
 
-    final MultiplexBlockingBuffer<String> multiplex = new MultiplexBlockingBuffer<String>(buffer);
+    final MultiplexBlockingBuffer<String> multiplex = new MultiplexBlockingBuffer<>(buffer);
 
     // buffer is open and empty.
     assertTrue(buffer.isOpen());

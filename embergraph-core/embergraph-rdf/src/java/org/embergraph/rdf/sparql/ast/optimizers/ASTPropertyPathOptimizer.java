@@ -223,9 +223,9 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
            * arbitrary length path operator because of the ridiculous
            * semantics of zero length paths.
            */
-          final ArrayList<PathElt> newSeq = new ArrayList<PathElt>(i + 1);
-          final ArrayList<PathElt> with = new ArrayList<PathElt>(pathSeq.arity() - i);
-          final ArrayList<PathElt> without = new ArrayList<PathElt>(pathSeq.arity() - i - 1);
+          final ArrayList<PathElt> newSeq = new ArrayList<>(i + 1);
+          final ArrayList<PathElt> with = new ArrayList<>(pathSeq.arity() - i);
+          final ArrayList<PathElt> without = new ArrayList<>(pathSeq.arity() - i - 1);
 
           for (int j = 0; j < pathSeq.arity(); j++) {
 
@@ -490,13 +490,13 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
 
       if (pathOIPS.inverse()) {
 
-        if (back == null) back = new ArrayList<ConstantNode>();
+        if (back == null) back = new ArrayList<>();
 
         back.add(iri);
 
       } else {
 
-        if (forward == null) forward = new ArrayList<ConstantNode>();
+        if (forward == null) forward = new ArrayList<>();
 
         forward.add(iri);
       }

@@ -58,21 +58,21 @@ public class TestSAMPLE extends TestCase2 {
     final IVariable<IV> book = Var.var("book");
     final IVariable<IV> lprice = Var.var("lprice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     /*
      * The test data:
@@ -106,7 +106,7 @@ public class TestSAMPLE extends TestCase2 {
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
-    final Set<IV<?, ?>> values = new LinkedHashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> values = new LinkedHashSet<>();
     for (IBindingSet bs : data) {
       values.add(expr.get(bs));
     }
@@ -131,21 +131,21 @@ public class TestSAMPLE extends TestCase2 {
       final IVariable<IV> book = Var.var("book");
       final IVariable<IV> lprice = Var.var("lprice");
 
-      final IConstant<String> org1 = new Constant<String>("org1");
-      final IConstant<String> org2 = new Constant<String>("org2");
-      final IConstant<String> auth1 = new Constant<String>("auth1");
-      final IConstant<String> auth2 = new Constant<String>("auth2");
-      final IConstant<String> auth3 = new Constant<String>("auth3");
-      final IConstant<String> book1 = new Constant<String>("book1");
-      final IConstant<String> book2 = new Constant<String>("book2");
-      final IConstant<String> book3 = new Constant<String>("book3");
-      final IConstant<String> book4 = new Constant<String>("book4");
+      final IConstant<String> org1 = new Constant<>("org1");
+      final IConstant<String> org2 = new Constant<>("org2");
+      final IConstant<String> auth1 = new Constant<>("auth1");
+      final IConstant<String> auth2 = new Constant<>("auth2");
+      final IConstant<String> auth3 = new Constant<>("auth3");
+      final IConstant<String> book1 = new Constant<>("book1");
+      final IConstant<String> book2 = new Constant<>("book2");
+      final IConstant<String> book3 = new Constant<>("book3");
+      final IConstant<String> book4 = new Constant<>("book4");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+          new Constant<>(new XSDNumericIV<>(5));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+          new Constant<>(new XSDNumericIV<>(7));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       /*
        * The test data:
@@ -194,7 +194,7 @@ public class TestSAMPLE extends TestCase2 {
       assertFalse(op.isDistinct());
       assertFalse(op.isWildcard());
 
-      final Set<IV<?, ?>> values = new LinkedHashSet<IV<?, ?>>();
+      final Set<IV<?, ?>> values = new LinkedHashSet<>();
       for (IBindingSet bs : data) {
         values.add(expr.get(bs));
       }
@@ -217,21 +217,21 @@ public class TestSAMPLE extends TestCase2 {
     final IVariable<IV> book = Var.var("book");
     final IVariable<IV> lprice = Var.var("lprice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     /*
      * The test data:
@@ -271,7 +271,7 @@ public class TestSAMPLE extends TestCase2 {
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
-    final Set<IV<?, ?>> values = new LinkedHashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> values = new LinkedHashSet<>();
     for (IBindingSet bs : data) {
       final IV iv = expr.get(bs);
       if (iv != null) values.add(iv);

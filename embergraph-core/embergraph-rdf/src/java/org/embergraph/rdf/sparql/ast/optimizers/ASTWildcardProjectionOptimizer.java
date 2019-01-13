@@ -69,7 +69,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
     final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
 
     // collect named subquery includes that have been resolved already
-    final Set<String> resolvedNSIs = new HashSet<String>();
+    final Set<String> resolvedNSIs = new HashSet<>();
 
     /*
      * NAMED SUBQUERIES
@@ -187,7 +187,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
       if (projection.isReduced()) p2.setReduced(true);
 
       final Set<IVariable<?>> varSet =
-          sa.getSpannedVariables(whereClause, new LinkedHashSet<IVariable<?>>());
+          sa.getSpannedVariables(whereClause, new LinkedHashSet<>());
 
       if (exogeneousVars != null) {
         varSet.addAll(exogeneousVars);

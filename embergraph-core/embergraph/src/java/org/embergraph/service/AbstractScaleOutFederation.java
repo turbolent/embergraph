@@ -477,7 +477,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
 
     log.warn("Forcing overflow: #dataServices=" + ndataServices + ", now=" + new Date());
 
-    final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(ndataServices);
+    final List<Callable<Void>> tasks = new ArrayList<>(ndataServices);
 
     for (UUID serviceUUID : dataServiceUUIDs) {
 

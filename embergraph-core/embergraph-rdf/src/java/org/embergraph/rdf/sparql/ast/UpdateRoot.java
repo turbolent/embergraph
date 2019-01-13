@@ -119,11 +119,11 @@ public class UpdateRoot extends GroupNodeBase<Update> implements IPrefixDecls {
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 }

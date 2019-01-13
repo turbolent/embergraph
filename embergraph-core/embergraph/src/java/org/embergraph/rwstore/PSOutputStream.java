@@ -213,7 +213,7 @@ public class PSOutputStream extends IPSOutputStream {
 
     if (m_count == m_blobThreshold && !m_writingHdr) {
       if (m_blobHeader == null) {
-        m_blobHeader = new ArrayList<Integer>(); // only support header
+        m_blobHeader = new ArrayList<>(); // only support header
       }
 
       final int curAddr = (int) m_store.alloc(m_buf, m_count, m_context);

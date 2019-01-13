@@ -80,7 +80,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
    *     {@link ResourceQueue} does not have a reference to the resource itself - just to its name.
    */
   private final ConcurrentWeakValueCache<R, ResourceQueue<R, Thread>> resourceQueues =
-      new ConcurrentWeakValueCache<R, ResourceQueue<R, Thread>>(1000 /* nresources */);
+      new ConcurrentWeakValueCache<>(1000 /* nresources */);
 
   /** The set of locks held by each transaction. */
   private final ConcurrentHashMap<Thread, Collection<ResourceQueue<R, Thread>>> lockedResources;
@@ -281,7 +281,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     this.sortLockRequests = sortLockRequests;
 
     lockedResources =
-        new ConcurrentHashMap<Thread, Collection<ResourceQueue<R, Thread>>>(maxConcurrency);
+        new ConcurrentHashMap<>(maxConcurrency);
 
     if (predeclareLocks) {
 
@@ -325,7 +325,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     ResourceQueue<R, Thread> resourceQueue = resourceQueues.get(resource);
 
     // not found, so create a new ResourceQueue for that resource.
-    resourceQueue = new ResourceQueue<R, Thread>(resource, waitsFor);
+    resourceQueue = new ResourceQueue<>(resource, waitsFor);
 
     // put if absent.
     final ResourceQueue<R, Thread> oldval = resourceQueues.putIfAbsent(resource, resourceQueue);
@@ -455,7 +455,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
       final int initialCapacity = resource.length > 16 ? resource.length : 16;
 
-      lockedResources.put(t, new LinkedHashSet<ResourceQueue<R, Thread>>(initialCapacity));
+      lockedResources.put(t, new LinkedHashSet<>(initialCapacity));
     }
 
     for (int i = 0; i < resource.length; i++) {

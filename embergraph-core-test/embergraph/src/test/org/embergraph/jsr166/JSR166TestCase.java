@@ -235,7 +235,7 @@ public class JSR166TestCase extends TestCase {
   }
 
   /** The first exception encountered if any threadAssertXXX method fails. */
-  private final AtomicReference<Throwable> threadFailure = new AtomicReference<Throwable>(null);
+  private final AtomicReference<Throwable> threadFailure = new AtomicReference<>(null);
 
   /*
    * Records an exception so that it can be rethrown later in the test harness thread, triggering a

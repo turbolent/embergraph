@@ -74,7 +74,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
   private static final Logger log = Logger.getLogger(CounterSet.class);
 
   //    private String pathx;
-  private final Map<String, ICounterNode> children = new ConcurrentHashMap<String, ICounterNode>();
+  private final Map<String, ICounterNode> children = new ConcurrentHashMap<>();
 
   /** Ctor for a root node. */
   public CounterSet() {

@@ -211,7 +211,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       permits = null;
       buffers = null;
       threadLocalQueues =
-          new ConcurrentHashMap<Thread, BatchQueue<T>>(
+          new ConcurrentHashMap<>(
               16, // initialCapacity
               0.75f, // load factor (default is .75f)
               concurrencyLevel);
@@ -227,7 +227,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
         //                permits[i] = new Semaphore(1, false/* fair */);
         permits[i] = new ReentrantLock(false /*fair*/);
         buffers[i] =
-            new BatchQueue<T>(
+            new BatchQueue<>(
                 i, // id
                 threadLocalQueueNScan,
                 threadLocalQueueCapacity,
@@ -268,7 +268,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       if (threadLocalQueues.put(
               t,
               tmp =
-                  new BatchQueue<T>(
+                  new BatchQueue<>(
                       0 /* idIsIgnored */,
                       threadLocalQueueNScan,
                       threadLocalQueueCapacity,

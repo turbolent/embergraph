@@ -75,7 +75,7 @@ public class TestEQ extends TestCase2 {
     final IBindingSet bs1 =
         new ListBindingSet(
             new IVariable[] {Var.var("x"), Var.var("y")},
-            new IConstant[] {new Constant<String>("1"), new Constant<String>("1")});
+            new IConstant[] {new Constant<>("1"), new Constant<>("1")});
 
     assertTrue(op.get(bs1));
   }
@@ -88,7 +88,7 @@ public class TestEQ extends TestCase2 {
     final IBindingSet bs1 =
         new ListBindingSet(
             new IVariable[] {Var.var("x"), Var.var("y")},
-            new IConstant[] {new Constant<String>("1"), new Constant<String>("2")});
+            new IConstant[] {new Constant<>("1"), new Constant<>("2")});
 
     assertFalse(op.get(bs1));
   }
@@ -99,7 +99,7 @@ public class TestEQ extends TestCase2 {
 
     final IBindingSet bs1 =
         new ListBindingSet(
-            new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("1")});
+            new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("1")});
 
     assertTrue(op.get(bs1));
   }

@@ -38,7 +38,7 @@ public class NoAxiomFilter<E extends ISPO> extends SPOFilter<E> {
   private static final long serialVersionUID = 6979067019748992496L;
 
   /** Shared instance. */
-  public static final transient NoAxiomFilter<ISPO> INSTANCE = new NoAxiomFilter<ISPO>();
+  public static final transient NoAxiomFilter<ISPO> INSTANCE = new NoAxiomFilter<>();
 
   /** De-serialization ctor. */
   private NoAxiomFilter() {}

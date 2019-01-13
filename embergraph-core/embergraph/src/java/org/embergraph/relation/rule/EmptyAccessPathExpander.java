@@ -39,7 +39,7 @@ public class EmptyAccessPathExpander<E> implements IAccessPathExpander<E> {
 
   public IAccessPath<E> getAccessPath(IAccessPath<E> accessPath) {
 
-    return new EmptyAccessPath<E>(accessPath.getPredicate(), accessPath.getKeyOrder());
+    return new EmptyAccessPath<>(accessPath.getPredicate(), accessPath.getKeyOrder());
   }
 
   public boolean runFirst() {

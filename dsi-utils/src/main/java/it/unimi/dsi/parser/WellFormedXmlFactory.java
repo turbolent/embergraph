@@ -40,11 +40,11 @@ public class WellFormedXmlFactory implements ParsingFactory {
 
   /** A (quick) map from attribute names to attributes. */
   private final Object2ObjectOpenHashMap<CharSequence, Attribute> name2Attribute =
-      new Object2ObjectOpenHashMap<CharSequence, Attribute>(Hash.DEFAULT_INITIAL_SIZE, ONE_HALF);
+      new Object2ObjectOpenHashMap<>(Hash.DEFAULT_INITIAL_SIZE, ONE_HALF);
 
   /** A (quick) map from element-type names to element types. */
   private final Object2ObjectOpenHashMap<CharSequence, Element> name2Element =
-      new Object2ObjectOpenHashMap<CharSequence, Element>(Hash.DEFAULT_INITIAL_SIZE, ONE_HALF);
+      new Object2ObjectOpenHashMap<>(Hash.DEFAULT_INITIAL_SIZE, ONE_HALF);
 
   public WellFormedXmlFactory() {}
 

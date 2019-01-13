@@ -1060,7 +1060,7 @@ public class TestWriteCache extends TestCase3 {
      */
     final ByteBuffer srcBuf = getRandomData(4096);
 
-    ArrayList<AllocView> allocs = new ArrayList<AllocView>();
+    ArrayList<AllocView> allocs = new ArrayList<>();
     int curAddr = 0;
     for (int i = 0; i < 10000; i++) {
       int pos = r.nextInt(3072);

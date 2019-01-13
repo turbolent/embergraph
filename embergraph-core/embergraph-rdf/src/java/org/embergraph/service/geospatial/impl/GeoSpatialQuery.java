@@ -237,7 +237,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
       final Object[] customFieldsUpperBounds) {
 
     final Map<String, LowerAndUpperValue> customFieldsConstraints =
-        new HashMap<String, LowerAndUpperValue>();
+        new HashMap<>();
 
     if (customFields.length != customFieldsLowerBounds.length)
       throw new GeoSpatialSearchException(
@@ -487,7 +487,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
   public List<IGeoSpatialQuery> normalize() {
 
     if (!isSatisfiable()) {
-      return new ArrayList<IGeoSpatialQuery>();
+      return new ArrayList<>();
     }
 
     /*
@@ -511,7 +511,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
                 + ". Search will be split into two search windows.");
       }
 
-      final List<IGeoSpatialQuery> normalizedQueries = new ArrayList<IGeoSpatialQuery>(2);
+      final List<IGeoSpatialQuery> normalizedQueries = new ArrayList<>(2);
 
       final GeoSpatialQuery query1 =
           new GeoSpatialQuery(

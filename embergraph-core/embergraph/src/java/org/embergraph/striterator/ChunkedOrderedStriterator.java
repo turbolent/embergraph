@@ -48,7 +48,7 @@ public class ChunkedOrderedStriterator<I extends IChunkedOrderedIterator<E>, E>
   @SuppressWarnings("unchecked")
   public ChunkedOrderedStriterator(final int chunkSize, final Iterator<E> src) {
 
-    this((I) new ChunkedWrappedIterator<E>(src, chunkSize, null /* keyOrder */, null /*filter*/));
+    this((I) new ChunkedWrappedIterator<>(src, chunkSize, null /* keyOrder */, null /*filter*/));
   }
 
   @Override

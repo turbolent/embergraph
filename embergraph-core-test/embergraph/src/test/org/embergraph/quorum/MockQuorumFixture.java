@@ -93,7 +93,7 @@ public class MockQuorumFixture {
    * MockQuorumWatcher}s collaborate to create this behavior.
    */
   private final CopyOnWriteArraySet<MockQuorumWatcher> listeners =
-      new CopyOnWriteArraySet<MockQuorumWatcher>();
+      new CopyOnWriteArraySet<>();
 
   /** Lock used to force global synchronous event handling semantics. */
   private final Lock globalSynchronousLock = new ReentrantLock();
@@ -107,7 +107,7 @@ public class MockQuorumFixture {
    * queue for each {@link MockQuorumWatcher}. The watcher's thread takes an event from the queue
    * and interprets that event, creating a corresponding local state change.
    */
-  private final LinkedBlockingDeque<QuorumEvent> deque = new LinkedBlockingDeque<QuorumEvent>();
+  private final LinkedBlockingDeque<QuorumEvent> deque = new LinkedBlockingDeque<>();
 
   /*
    * The lock protecting state changes in the remaining fields and used to provide {@link
@@ -127,7 +127,7 @@ public class MockQuorumFixture {
   private long token = Quorum.NO_QUORUM;
 
   /** The service {@link UUID} of each service registered as a member of this quorum. */
-  private final LinkedHashSet<UUID> members = new LinkedHashSet<UUID>();
+  private final LinkedHashSet<UUID> members = new LinkedHashSet<>();
 
   /*
    * A map from collection of the distinct <i>lastCommitTimes</i> for which at least one service has
@@ -135,13 +135,13 @@ public class MockQuorumFixture {
    * <em>in vote order</em>.
    */
   private final TreeMap<Long /* lastCommitTime */, LinkedHashSet<UUID>> votes =
-      new TreeMap<Long, LinkedHashSet<UUID>>();
+      new TreeMap<>();
 
   /*
    * The services joined with the quorum in the order in which they join. This MUST be a {@link
    * LinkedHashSet} to preserve the join order.
    */
-  private final LinkedHashSet<UUID> joined = new LinkedHashSet<UUID>();
+  private final LinkedHashSet<UUID> joined = new LinkedHashSet<>();
 
   /*
    * The ordered set of services in the write pipeline. The {@link LinkedHashSet} is responsible for
@@ -154,14 +154,14 @@ public class MockQuorumFixture {
    * cache blocks to the downstream service. When a service joins the write pipeline, it always
    * joins as the last service in this ordered set.
    */
-  private final LinkedHashSet<UUID> pipeline = new LinkedHashSet<UUID>();
+  private final LinkedHashSet<UUID> pipeline = new LinkedHashSet<>();
 
   /** An {@link Executor} which can be used by the unit tests. */
   private ExecutorService executorService;
 
   /** A map from the serviceId to each {@link QuorumMember}. */
   private final ConcurrentHashMap<UUID, QuorumMember<?>> known =
-      new ConcurrentHashMap<UUID, QuorumMember<?>>();
+      new ConcurrentHashMap<>();
 
   /*
    * An {@link ExecutorService} which can be used by the unit tests.
@@ -424,7 +424,7 @@ public class MockQuorumFixture {
     try {
       LinkedHashSet<UUID> tmp = votes.get(lastCommitTime);
       if (tmp == null) {
-        tmp = new LinkedHashSet<UUID>();
+        tmp = new LinkedHashSet<>();
         votes.put(lastCommitTime, tmp);
       }
       if (tmp.add(serviceId)) {
@@ -855,7 +855,7 @@ public class MockQuorumFixture {
        * because the fixture hands off the events synchronously to each of the {@link
        * MockQuorumWatcher}s.
        */
-      private final BlockingQueue<QuorumEvent> queue = new LinkedBlockingQueue<QuorumEvent>();
+      private final BlockingQueue<QuorumEvent> queue = new LinkedBlockingQueue<>();
 
       /** Condition signaled when an event is ready for this watcher. */
       private final Condition eventReady = fixture.globalSynchronousLock.newCondition();
@@ -1123,7 +1123,7 @@ public class MockQuorumFixture {
        */
       public Future<Void> moveToEndOfPipeline() throws IOException {
         final FutureTask<Void> ft =
-            new FutureTask<Void>(
+            new FutureTask<>(
                 new Runnable() {
                   public void run() {
 
@@ -1132,24 +1132,27 @@ public class MockQuorumFixture {
 
                     if (isPipelineMember()) {
 
-                      if (log.isDebugEnabled())
+                      if (log.isDebugEnabled()) {
                         log.debug("Will remove self from the pipeline: " + getServiceId());
+                      }
 
                       getActor().pipelineRemove();
 
-                      if (log.isDebugEnabled())
+                      if (log.isDebugEnabled()) {
                         log.debug("Will add self back into the pipeline: " + getServiceId());
+                      }
 
                       getActor().pipelineAdd();
 
                       if (lastCommitTime != null) {
 
-                        if (log.isDebugEnabled())
+                        if (log.isDebugEnabled()) {
                           log.debug(
                               "Will cast our vote again: lastCommitTime="
                                   + +lastCommitTime
                                   + ", "
                                   + getServiceId());
+                        }
 
                         getActor().castVote(lastCommitTime);
                       }

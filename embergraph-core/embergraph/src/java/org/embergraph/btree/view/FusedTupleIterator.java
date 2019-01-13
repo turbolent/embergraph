@@ -360,7 +360,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
     // save index of the iterator whose tuple is to be visited.
     final int sourceIndex = lastVisited = current;
 
-    final ITuple<E> tuple = new FusedTuple<E>(sourceTuple[current], sourceIndex, nvisited, deleted);
+    final ITuple<E> tuple = new FusedTuple<>(sourceTuple[current], sourceIndex, nvisited, deleted);
 
     // clear tuples from other sources having the same key as the current tuple.
     clearCurrent();

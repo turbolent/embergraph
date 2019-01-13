@@ -256,7 +256,7 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
   }
 
   private Collection<BindingSet> getExpected(BindingSet... bindingSets) {
-    Collection<BindingSet> expected = new LinkedList<BindingSet>();
+    Collection<BindingSet> expected = new LinkedList<>();
     for (BindingSet bs : bindingSets) expected.add(bs);
     return expected;
   }

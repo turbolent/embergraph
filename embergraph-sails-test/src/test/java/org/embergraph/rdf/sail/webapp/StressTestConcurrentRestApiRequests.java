@@ -159,14 +159,14 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
      * @see RandomNamespaceOp#begin(String, UUID, FutureTask)
      */
     private final ConcurrentHashMap<RestApiOp, String /* namespace */> activeTasks =
-        new ConcurrentHashMap<RestApiOp, String>();
+        new ConcurrentHashMap<>();
     /*
      * The {@link Future}s for the client operations - this collection supports asynchronous
      * cancellation of client operations in order to provoke code paths associated with error
      * handling in both the client and (more vitally) the server.
      */
     private final ConcurrentHashMap<UUID, FutureAndTask> futures =
-        new ConcurrentHashMap<UUID, FutureAndTask>();
+        new ConcurrentHashMap<>();
     /*
      * The #of namespaces that have been created to date. The names of the current namespaces (those
      * that exist) are in {@link #namespaces}.
@@ -200,7 +200,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
       r = new Random();
 
-      namespaces = new ConcurrentHashMap<String, ReadWriteLock>();
+      namespaces = new ConcurrentHashMap<>();
 
       namespaceCreateCounter = new AtomicLong();
 
@@ -318,7 +318,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
     super.setUp();
 
-    restApiOps = new LinkedList<RestApiOp>();
+    restApiOps = new LinkedList<>();
 
     sharedTestState = new SharedTestState(getTestMode());
 
@@ -596,7 +596,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
      * running workload based on this test harness rather than having to
      * generate all tasks up front.
      */
-    final Collection<Callable<Void>> tasks = new LinkedHashSet<Callable<Void>>();
+    final Collection<Callable<Void>> tasks = new LinkedHashSet<>();
 
     {
 
@@ -1134,7 +1134,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
         // Wrap as FutureTask.
         final FutureTask<Void> ft =
-            new FutureTask<Void>(
+            new FutureTask<>(
                 new Callable<Void>() {
 
                   @Override
@@ -1409,7 +1409,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         throws Exception {
 
       // Obtain task and wrap as FutureTask.
-      final FutureTask<Void> ft = new FutureTask<Void>(getTask(rmgr, uuid));
+      final FutureTask<Void> ft = new FutureTask<>(getTask(rmgr, uuid));
 
       begin(namespace, uuid, ft);
 
@@ -1493,7 +1493,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
       // Wrap as FutureTask.
       final FutureTask<Void> ft =
-          new FutureTask<Void>(
+          new FutureTask<>(
               new Callable<Void>() {
 
                 @Override
@@ -1508,7 +1508,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
                   // add entry IFF created.
                   if (sharedTestState.namespaces.putIfAbsent(
-                          namespace, new ReentrantReadWriteLock())
+                      namespace, new ReentrantReadWriteLock())
                       != null) {
                     // Should not exist! Each namespace name is distinct!!!
                     throw new AssertionError("namespace=" + namespace);
@@ -1562,7 +1562,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
 
         // Wrap as FutureTask.
         final FutureTask<Void> ft =
-            new FutureTask<Void>(
+            new FutureTask<>(
                 new Callable<Void>() {
 
                   @Override

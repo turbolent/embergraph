@@ -78,7 +78,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -175,7 +175,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
         return;
       }
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -237,7 +237,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
     try {
 
       // Note: List allows duplicates!
-      final Collection<EmbergraphValue> terms = new LinkedList<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new LinkedList<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -338,7 +338,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
     try {
 
       // Note: List allows duplicates!
-      final Collection<EmbergraphValue> terms = new LinkedList<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new LinkedList<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -424,7 +424,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
     store.getLexiconRelation().addTerms(a, size, false /* readOnly */);
 
     // Collect the assigned IVs.
-    final Collection<IV<?, ?>> ids = new ArrayList<IV<?, ?>>();
+    final Collection<IV<?, ?>> ids = new ArrayList<>();
 
     for (EmbergraphValue t : a) ids.add(t.getIV());
 

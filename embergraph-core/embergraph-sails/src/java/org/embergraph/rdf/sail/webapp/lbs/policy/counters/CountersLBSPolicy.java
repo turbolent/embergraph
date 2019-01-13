@@ -87,7 +87,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
    * hierarchy.]
    */
   private final ConcurrentHashMap<String /* hostname */, IHostMetrics> hostMetricsMap =
-      new ConcurrentHashMap<String, IHostMetrics>();
+      new ConcurrentHashMap<>();
 
   @Override
   protected void toString(final StringBuilder sb) {
@@ -123,7 +123,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
      */
     final String[] hosts;
     {
-      final List<String> tmp = new LinkedList<String>();
+      final List<String> tmp = new LinkedList<>();
       for (ServiceScore serviceScore : serviceScores) {
         if (serviceScore == null) // should never be null.
         continue;

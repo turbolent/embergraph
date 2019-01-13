@@ -20,7 +20,7 @@ public class DocumentHeaderImpl implements DocumentHeader {
   /** Create a new empty document. */
   public DocumentHeaderImpl() {
 
-    properties = new HashMap<String, Object>();
+    properties = new HashMap<>();
   }
 
   /*
@@ -35,7 +35,7 @@ public class DocumentHeaderImpl implements DocumentHeader {
 
   public DocumentHeaderImpl(Map<String, Object> metadata) {
 
-    properties = new HashMap<String, Object>(metadata);
+    properties = new HashMap<>(metadata);
   }
 
   public void setId(String id) {

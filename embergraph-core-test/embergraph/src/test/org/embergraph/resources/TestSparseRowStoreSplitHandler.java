@@ -102,7 +102,7 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
     long nadded = 0;
     for (int i = 0; i < nrows; i++) {
 
-      final Map<String, Object> propertySet = new HashMap<String, Object>();
+      final Map<String, Object> propertySet = new HashMap<>();
 
       id += r.nextInt(20);
 

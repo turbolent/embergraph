@@ -397,7 +397,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     /*
      * The set of indices that we need to declare for the task.
      */
-    final Set<String> indexNames = new HashSet<String>();
+    final Set<String> indexNames = new HashSet<>();
 
     if (action.isMutation()) {
 
@@ -551,7 +551,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
   /** The set of distinct relations identified by the head of each rule in the program. */
   protected Set<String> getWriteRelationNames(IStep step) {
 
-    final Set<String> c = new HashSet<String>();
+    final Set<String> c = new HashSet<>();
 
     getWriteRelationNames(step, c);
 
@@ -598,7 +598,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
 
     if (step == null) throw new IllegalArgumentException();
 
-    final Map<String, IRelation> c = new HashMap<String, IRelation>();
+    final Map<String, IRelation> c = new HashMap<>();
 
     getWriteRelations(indexManager, step, c, timestamp);
 
@@ -651,7 +651,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
 
     if (step == null) throw new IllegalArgumentException();
 
-    final Map<String, IRelation> c = new HashMap<String, IRelation>();
+    final Map<String, IRelation> c = new HashMap<>();
 
     getReadRelations(indexManager, step, c, timestamp);
 
@@ -728,7 +728,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     }
 
     final Map<String, IBuffer<ISolution[]>> c =
-        new HashMap<String, IBuffer<ISolution[]>>(relations.size());
+        new HashMap<>(relations.size());
 
     final Iterator<Map.Entry<String, IRelation>> itr = relations.entrySet().iterator();
 
@@ -781,7 +781,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
 
     if (c.isEmpty()) return Collections.EMPTY_SET;
 
-    final Set<String> set = new HashSet<String>();
+    final Set<String> set = new HashSet<>();
 
     final Iterator<IRelation> itr = c.iterator();
 

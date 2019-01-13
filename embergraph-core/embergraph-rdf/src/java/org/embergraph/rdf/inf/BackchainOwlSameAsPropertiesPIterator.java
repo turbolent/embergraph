@@ -83,7 +83,7 @@ public class BackchainOwlSameAsPropertiesPIterator extends BackchainOwlSameAsIte
       if (sameAs2and3 != null) {
         sameAs2and3It = sameAs2and3.getAccessPath(SPOKeyOrder.SPO).iterator();
       } else {
-        sameAs2and3It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+        sameAs2and3It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
       }
     }
     return sameAs2and3It.hasNext();
@@ -101,7 +101,7 @@ public class BackchainOwlSameAsPropertiesPIterator extends BackchainOwlSameAsIte
         if (sameAs2and3 != null) {
           sameAs2and3It = sameAs2and3.getAccessPath(SPOKeyOrder.SPO).iterator();
         } else {
-          sameAs2and3It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+          sameAs2and3It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
         }
       }
       if (sameAs2and3It.hasNext()) {

@@ -82,10 +82,10 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     if (p2 == null) throw new IllegalArgumentException();
 
     final Set<IVariable<?>> set1 =
-        getSpannedVariables(p1, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(p1, false /* filters */, new LinkedHashSet<>());
 
     final Set<IVariable<?>> set2 =
-        getSpannedVariables(p2, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(p2, false /* filters */, new LinkedHashSet<>());
 
     // The difference gives us the shared variables.
     set1.retainAll(set2);
@@ -160,7 +160,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      * Find the set of variables which are known to be bound because they
      * are referenced as operands of the predicates in the join path.
      */
-    final Set<IVariable<?>> knownBound = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> knownBound = new LinkedHashSet<>();
     {
       for (IJoinNode p : path) {
 
@@ -173,7 +173,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      * predicates in the join path, then we can return immediately.
      */
     {
-      final Set<IVariable<?>> vset = getSpannedVariables(vertex, new LinkedHashSet<IVariable<?>>());
+      final Set<IVariable<?>> vset = getSpannedVariables(vertex, new LinkedHashSet<>());
 
       vset.retainAll(knownBound);
 
@@ -240,7 +240,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
         // consider all variables spanned by the constraint.
         final Set<IVariable<?>> vset =
-            getSpannedVariables(c, true /* filters */, new LinkedHashSet<IVariable<?>>());
+            getSpannedVariables(c, true /* filters */, new LinkedHashSet<>());
 
         vset.retainAll(knownBound);
 
@@ -302,7 +302,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
     if (path.length == 0) throw new IllegalArgumentException();
 
-    if (boundVars == null) boundVars = new LinkedHashSet<IVariable<?>>();
+    if (boundVars == null) boundVars = new LinkedHashSet<>();
 
     // the set of constraints for each predicate in the join path.
     final FilterNode[][] ret = new FilterNode[path.length][];
@@ -315,7 +315,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      */
 
     // the set of constraints which have been consumed.
-    final Set<FilterNode> used = new LinkedHashSet<FilterNode>();
+    final Set<FilterNode> used = new LinkedHashSet<>();
 
     for (int i = 0; i < path.length; i++) {
 
@@ -325,7 +325,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
       if (p == null) throw new IllegalArgumentException();
 
       // the constraints for the current predicate in the join path.
-      final List<FilterNode> constraints = new LinkedList<FilterNode>();
+      final List<FilterNode> constraints = new LinkedList<>();
 
       //            /*
       //             * Visit the variables used by the predicate (and bound by it since
@@ -369,7 +369,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
             // all variables used by the constraint.
             final Set<IVariable<?>> vset =
-                getSpannedVariables(c, true /* filters */, new LinkedHashSet<IVariable<?>>());
+                getSpannedVariables(c, true /* filters */, new LinkedHashSet<>());
 
             // remove all bound variables.
             vset.removeAll(boundVars);

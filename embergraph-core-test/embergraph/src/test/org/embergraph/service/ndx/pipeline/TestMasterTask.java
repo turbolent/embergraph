@@ -54,12 +54,12 @@ public class TestMasterTask extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master = new M(masterStats, masterBuffer, executorService);
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -88,12 +88,12 @@ public class TestMasterTask extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master = new M(masterStats, masterBuffer, executorService);
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -128,12 +128,12 @@ public class TestMasterTask extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master = new M(masterStats, masterBuffer, executorService);
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set the Future on the BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -241,14 +241,14 @@ public class TestMasterTask extends AbstractMasterTestCase {
   private void doStartWriteStop2Test()
       throws InterruptedException, ExecutionException, TimeoutException {
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final H masterStats = new H();
 
     final M master = new M(masterStats, masterBuffer, executorService);
 
     // Wrap as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -317,12 +317,12 @@ public class TestMasterTask extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master = new M(masterStats, masterBuffer, executorService);
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);

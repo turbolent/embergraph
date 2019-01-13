@@ -56,8 +56,8 @@ public class TestListBindingSet extends TestIBindingSet {
 
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
     IVariable<?>[] vars = new IVariable[] {var1, var2};
     IConstant<?>[] vals = new IConstant[] {val1, val2};
 
@@ -69,8 +69,8 @@ public class TestListBindingSet extends TestIBindingSet {
   public void testConstructorVariablesConstants() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
     IVariable<?>[] vars = new IVariable[] {var1, var2};
     IConstant<?>[] vals = new IConstant[] {val1, val2};
 

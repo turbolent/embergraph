@@ -205,12 +205,12 @@ public class JustificationIterator implements IJustificationIterator {
             IRangeQuery.KEYS,
             null /* filter */);
 
-    this.buffer = new ArrayBlockingQueue<Justification>(capacity);
+    this.buffer = new ArrayBlockingQueue<>(capacity);
 
     if (async) {
 
       // wrap reader as Future
-      ft = new FutureTask<Object>(new Reader());
+      ft = new FutureTask<>(new Reader());
 
       // submit for asynchronous read ahead
       indexManager.getExecutorService().submit(ft);

@@ -81,7 +81,7 @@ public class ZeroLengthPathOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ZeroLengthPathTask(this, context));
+    return new FutureTask<>(new ZeroLengthPathTask(this, context));
   }
 
   private static class ZeroLengthPathTask implements Callable<Void> {

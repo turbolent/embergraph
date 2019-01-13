@@ -67,7 +67,7 @@ public class CompressorRegistry {
   }
 
   private final ConcurrentHashMap<String, IRecordCompressor> compressors =
-      new ConcurrentHashMap<String, IRecordCompressor>();
+      new ConcurrentHashMap<>();
 
   private CompressorRegistry() {
     add(DEFLATE_BEST_SPEED, new RecordCompressor(Deflater.BEST_SPEED));

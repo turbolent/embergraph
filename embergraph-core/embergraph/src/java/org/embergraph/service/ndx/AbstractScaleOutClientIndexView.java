@@ -681,7 +681,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
     assert toIndex <= keys.length;
 
-    final LinkedList<Split> splits = new LinkedList<Split>();
+    final LinkedList<Split> splits = new LinkedList<>();
 
     // start w/ the first key.
     int currentIndex = fromIndex;
@@ -1176,14 +1176,14 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
         getIndexMetadata().getAsynchronousIndexWriteConfiguration();
 
     final BlockingBuffer<KVO<O>[]> writeBuffer =
-        new BlockingBuffer<KVO<O>[]>(
+        new BlockingBuffer<>(
             // @todo array vs linked w/ capacity and fair vs unfair.
-            new ArrayBlockingQueue<KVO<O>[]>(conf.getMasterQueueCapacity()),
+            new ArrayBlockingQueue<>(conf.getMasterQueueCapacity()),
             conf.getMasterChunkSize(),
             conf.getMasterChunkTimeoutNanos(), //
             TimeUnit.NANOSECONDS,
             true // ordered
-            );
+        );
 
     final IndexWriteTask.M<T, O, R, A> task =
         new IndexWriteTask.M<T, O, R, A>(

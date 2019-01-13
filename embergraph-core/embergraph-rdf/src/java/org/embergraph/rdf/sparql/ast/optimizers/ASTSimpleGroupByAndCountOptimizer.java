@@ -257,7 +257,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
         log.debug("yep");
       }
 
-      Set<VarNode> varNodesInStmtPattern = new HashSet<VarNode>();
+      Set<VarNode> varNodesInStmtPattern = new HashSet<>();
       VarNode graphVarNode = null;
       for (int i = 0; i < stmtPattern.arity(); i++) {
         final BOp arg = stmtPattern.get(i);

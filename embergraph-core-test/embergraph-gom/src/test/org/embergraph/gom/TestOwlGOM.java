@@ -91,7 +91,7 @@ public class TestOwlGOM extends ProxyGOMTest {
       }
     }
 
-    final ArrayList<IGPO> rootClasses = new ArrayList<IGPO>();
+    final ArrayList<IGPO> rootClasses = new ArrayList<>();
     final IGPO classClass = om.getGPO(OWL.CLASS);
     if (log.isInfoEnabled()) {
       log.info("ClassClass: " + classClass.pp());

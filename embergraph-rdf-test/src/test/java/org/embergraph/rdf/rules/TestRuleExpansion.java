@@ -88,7 +88,7 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
 
     try {
 
-      final Map<Value, IV> termIds = new HashMap<Value, IV>();
+      final Map<Value, IV> termIds = new HashMap<>();
 
       final URI A = new URIImpl("http://www.embergraph.org/A");
       final URI B = new URIImpl("http://www.embergraph.org/B");
@@ -242,7 +242,7 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
                       return delegate;
                     }
                     final IChunkedOrderedIterator<ISPO> appender =
-                        new ChunkedArrayIterator<ISPO>(1, new ISPO[] {spo}, SPOKeyOrder.SPO);
+                        new ChunkedArrayIterator<>(1, new ISPO[]{spo}, SPOKeyOrder.SPO);
                     return new IChunkedOrderedIterator<ISPO>() {
                       public ISPO next() {
                         if (delegate.hasNext()) {
@@ -313,12 +313,12 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
             };
 
         final String SPO = db.getSPORelation().getNamespace();
-        final IConstant<IV> s = new Constant<IV>(termIds.get(X));
+        final IConstant<IV> s = new Constant<>(termIds.get(X));
         final IVariable<IV> _p = Var.var("p");
         final IVariable<IV> _o = Var.var("o");
         final IVariable<IV> _sameS = Var.var("sameS");
         final IVariable<IV> _sameO = Var.var("sameO");
-        final IConstant<IV> sameAs = new Constant<IV>(termIds.get(OWL.SAMEAS));
+        final IConstant<IV> sameAs = new Constant<>(termIds.get(OWL.SAMEAS));
         final IRule rule =
             new Rule(
                 "sameas",

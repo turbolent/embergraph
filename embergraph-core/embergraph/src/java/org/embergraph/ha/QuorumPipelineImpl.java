@@ -211,7 +211,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
   /** Cached metadata about the downstream service. */
   private final AtomicReference<PipelineState<S>> pipelineStateRef =
-      new AtomicReference<PipelineState<S>>();
+      new AtomicReference<>();
 
   /** Inner class does the actual work once to handle an event. */
   private final InnerEventHandler innerEventHandler = new InnerEventHandler();
@@ -237,7 +237,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
      * @see #dispatchEvents()
      */
     private final BlockingQueue<QuorumStateChangeEvent> queue =
-        new LinkedBlockingQueue<QuorumStateChangeEvent>();
+        new LinkedBlockingQueue<>();
 
     protected InnerEventHandler() {}
 
@@ -637,7 +637,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
         final InetSocketAddress addrNext = service.getWritePipelineAddr();
 
-        return new PipelineState<S>(service, addrNext);
+        return new PipelineState<>(service, addrNext);
 
       } catch (IOException e) {
 
@@ -809,7 +809,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         final InetSocketAddress addrNext = nextServiceState == null ? null : nextServiceState.addr;
         // Setup the receive service.
         receiveService =
-            new HAReceiveService<HAMessageWrapper>(
+            new HAReceiveService<>(
                 addrSelf,
                 addrNext,
                 new IHAReceiveCallback<HAMessageWrapper>() {
@@ -1123,7 +1123,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       throws IOException {
 
     final FutureTask<IHAPipelineResetResponse> ft =
-        new FutureTask<IHAPipelineResetResponse>(new ResetPipelineTaskImpl(req));
+        new FutureTask<>(new ResetPipelineTaskImpl(req));
 
     member.getExecutor().submit(ft);
 
@@ -1249,7 +1249,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     lock();
     try {
 
-      ft = new FutureTask<Void>(new RobustReplicateTask(req, newSendState(), msg, b));
+      ft = new FutureTask<>(new RobustReplicateTask(req, newSendState(), msg, b));
 
     } finally {
 
@@ -1572,17 +1572,17 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
         final ByteBuffer b = this.b.duplicate();
 
-        new SendBufferTask<S>(
-                member,
-                quorumToken,
-                req,
-                snd,
-                msg,
-                b,
-                downstream,
-                sendService,
-                QuorumPipelineImpl.this,
-                sendLock)
+        new SendBufferTask<>(
+            member,
+            quorumToken,
+            req,
+            snd,
+            msg,
+            b,
+            downstream,
+            sendService,
+            QuorumPipelineImpl.this,
+            sendLock)
             .call();
 
         return;
@@ -2033,7 +2033,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
      * services and then do f.run() on the leader.
      */
     final List<Future<IHAPipelineResetResponse>> localFutures =
-        new LinkedList<Future<IHAPipelineResetResponse>>();
+        new LinkedList<>();
 
     try {
 
@@ -2046,7 +2046,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          * remote service.
          */
         final Future<IHAPipelineResetResponse> rf =
-            member.getExecutor().submit(new PipelineResetMessageTask<S>(member, serviceId, msg));
+            member.getExecutor().submit(new PipelineResetMessageTask<>(member, serviceId, msg));
 
         // add to list of futures we will check.
         localFutures.add(rf);
@@ -2059,14 +2059,14 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          */
         member.assertLeader(token);
         final FutureTask<IHAPipelineResetResponse> ft =
-            new FutureTask<IHAPipelineResetResponse>(new ResetPipelineTaskImpl(msg));
+            new FutureTask<>(new ResetPipelineTaskImpl(msg));
         localFutures.add(ft);
         ft.run(); // run on the leader.
       }
       /*
        * Check the futures for the other services in the quorum.
        */
-      final List<Throwable> causes = new LinkedList<Throwable>();
+      final List<Throwable> causes = new LinkedList<>();
       for (Future<IHAPipelineResetResponse> ft : localFutures) {
         try {
           ft.get(); // TODO Timeout?
@@ -2189,8 +2189,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          */
 
         ft =
-            new FutureTask<Void>(
-                new ReceiveTask<S>(member, token, req, snd, msg, b, receiveService));
+            new FutureTask<>(
+                new ReceiveTask<>(member, token, req, snd, msg, b, receiveService));
 
         //                try {
         //
@@ -2215,8 +2215,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
          */
 
         ft =
-            new FutureTask<Void>(
-                new ReceiveAndReplicateTask<S>(
+            new FutureTask<>(
+                new ReceiveAndReplicateTask<>(
                     member,
                     token,
                     req,

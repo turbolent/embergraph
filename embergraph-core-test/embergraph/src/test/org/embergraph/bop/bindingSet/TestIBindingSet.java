@@ -65,7 +65,7 @@ public abstract class TestIBindingSet extends TestCase2 {
     Var<?> b = Var.var("b");
     Var<?> c = Var.var("a");
 
-    IBindingSet bs = newBindingSet(new IVariable[] {a}, new IConstant[] {new Constant<Integer>(1)});
+    IBindingSet bs = newBindingSet(new IVariable[] {a}, new IConstant[] {new Constant<>(1)});
 
     assertTrue("bound expected, same variable", bs.isBound(a));
     assertFalse("not bound expected", bs.isBound(b));
@@ -75,8 +75,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   /** Unit test for {@link IBindingSet#set(IVariable,IConstant)} */
   public void testSet() {
     Var<?> var = Var.var("a");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs = newBindingSet(2);
 
@@ -103,7 +103,7 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testGet() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
+    Constant<Integer> val1 = new Constant<>(1);
 
     IBindingSet bs = newBindingSet(new IVariable[] {var1}, new IConstant[] {val1});
 
@@ -121,8 +121,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testClear() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
 
@@ -145,8 +145,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testClearAll() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
 
@@ -160,8 +160,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testSize() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs = newBindingSet(2);
 
@@ -179,8 +179,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testIterator() {
     final Var<?> var1 = Var.var("a");
     final Var<?> var2 = Var.var("b");
-    final Constant<Integer> val1 = new Constant<Integer>(1);
-    final Constant<Integer> val2 = new Constant<Integer>(2);
+    final Constant<Integer> val1 = new Constant<>(1);
+    final Constant<Integer> val2 = new Constant<>(2);
 
     final IBindingSet bs =
         newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
@@ -213,8 +213,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testVars() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
 
@@ -241,11 +241,11 @@ public abstract class TestIBindingSet extends TestCase2 {
     Var<?> var3 = Var.var("c");
     Var<?> var4 = Var.var("d");
     Var<?> var5 = Var.var("e");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
-    Constant<Integer> val3 = new Constant<Integer>(3);
-    Constant<Integer> val4 = new Constant<Integer>(4);
-    Constant<Integer> val5 = new Constant<Integer>(5);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
+    Constant<Integer> val3 = new Constant<>(3);
+    Constant<Integer> val4 = new Constant<>(4);
+    Constant<Integer> val5 = new Constant<>(5);
 
     IBindingSet bs =
         newBindingSet(
@@ -269,9 +269,9 @@ public abstract class TestIBindingSet extends TestCase2 {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
     Var<?> var3 = Var.var("c");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
-    Constant<Integer> val3 = new Constant<Integer>(3);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
+    Constant<Integer> val3 = new Constant<>(3);
 
     IBindingSet bs1 = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
     IBindingSet bs2 = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
@@ -294,8 +294,8 @@ public abstract class TestIBindingSet extends TestCase2 {
   public void testHashCode() {
     Var<?> var1 = Var.var("a");
     Var<?> var2 = Var.var("b");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     IBindingSet bs1 = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
     IBindingSet bs2 = newBindingSet(new IVariable[] {var1, var2}, new IConstant[] {val1, val2});
@@ -409,8 +409,8 @@ public abstract class TestIBindingSet extends TestCase2 {
 
     final Var<?> var1 = Var.var("a");
     final Var<?> var2 = Var.var("b");
-    final Constant<Integer> val1 = new Constant<Integer>(1);
-    final Constant<Integer> val2 = new Constant<Integer>(2);
+    final Constant<Integer> val1 = new Constant<>(1);
+    final Constant<Integer> val2 = new Constant<>(2);
 
     final IBindingSet bs1 = newBindingSet(2 /* size */);
 

@@ -1883,13 +1883,13 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
     protected ReadOnlyCursorPosition<E> newPosition(
         final ILeafCursor<Leaf> leafCursor, final int index, final byte[] key) {
 
-      return new ReadOnlyCursorPosition<E>(this, leafCursor, index, key);
+      return new ReadOnlyCursorPosition<>(this, leafCursor, index, key);
     }
 
     @Override
     protected ReadOnlyCursorPosition<E> newTemporaryPosition(final ICursorPosition<Leaf, E> p) {
 
-      return new ReadOnlyCursorPosition<E>((ReadOnlyCursorPosition<E>) p);
+      return new ReadOnlyCursorPosition<>((ReadOnlyCursorPosition<E>) p);
     }
   }
 
@@ -1917,7 +1917,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
     protected MutableCursorPosition<E> newPosition(
         ILeafCursor<Leaf> leafCursor, int index, byte[] key) {
 
-      return new MutableCursorPosition<E>(this, leafCursor, index, key);
+      return new MutableCursorPosition<>(this, leafCursor, index, key);
     }
 
     /*
@@ -1928,7 +1928,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
     @Override
     protected ReadOnlyCursorPosition<E> newTemporaryPosition(ICursorPosition<Leaf, E> p) {
 
-      return new ReadOnlyCursorPosition<E>((ReadOnlyCursorPosition<E>) p);
+      return new ReadOnlyCursorPosition<>((ReadOnlyCursorPosition<E>) p);
     }
   }
 }

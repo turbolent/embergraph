@@ -1312,7 +1312,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     final StringBuilder sb = new StringBuilder();
 
     if (dataset != null) {
-      Set<URI> graphURIs = new HashSet<URI>();
+      Set<URI> graphURIs = new HashSet<>();
       graphURIs.addAll(dataset.getDefaultGraphs());
       graphURIs.addAll(dataset.getNamedGraphs());
 
@@ -1399,7 +1399,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     //        RepositoryConnection con = dataRep.getConnection();
     //        try {
     // Merge default and named graphs to filter duplicates
-    Set<URI> graphURIs = new HashSet<URI>();
+    Set<URI> graphURIs = new HashSet<>();
     graphURIs.addAll(dataset.getDefaultGraphs());
     graphURIs.addAll(dataset.getNamedGraphs());
 
@@ -1470,10 +1470,10 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
 
       List<BindingSet> expectedBindings = Iterations.asList(expectedResultTable);
 
-      List<BindingSet> missingBindings = new ArrayList<BindingSet>(expectedBindings);
+      List<BindingSet> missingBindings = new ArrayList<>(expectedBindings);
       missingBindings.removeAll(queryBindings);
 
-      List<BindingSet> unexpectedBindings = new ArrayList<BindingSet>(queryBindings);
+      List<BindingSet> unexpectedBindings = new ArrayList<>(queryBindings);
       unexpectedBindings.removeAll(expectedBindings);
 
       StringBuilder message = new StringBuilder(128);

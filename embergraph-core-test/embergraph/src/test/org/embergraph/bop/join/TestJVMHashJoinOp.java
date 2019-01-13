@@ -112,10 +112,10 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
             NamedSolutionSetRefUtility.newInstance(queryId, getName(), joinVars));
 
     final Predicate<IV> pred =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 

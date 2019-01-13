@@ -154,11 +154,11 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
 
     final CounterSet root = super.getCounters();
 
-    root.addCounter(NBUFFERS, new OneShotInstrument<Integer>(nbuffers));
+    root.addCounter(NBUFFERS, new OneShotInstrument<>(nbuffers));
 
-    root.addCounter(DIRTY_LIST_THRESHOLD, new OneShotInstrument<Integer>(dirtyListThreshold));
+    root.addCounter(DIRTY_LIST_THRESHOLD, new OneShotInstrument<>(dirtyListThreshold));
 
-    root.addCounter(COMPACTING_THRESHOLD, new OneShotInstrument<Integer>(compactingThreshold));
+    root.addCounter(COMPACTING_THRESHOLD, new OneShotInstrument<>(compactingThreshold));
 
     root.addCounter(
         NDIRTY,

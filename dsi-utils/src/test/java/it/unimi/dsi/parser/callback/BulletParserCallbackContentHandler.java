@@ -31,11 +31,11 @@ public class BulletParserCallbackContentHandler extends DefaultHandler {
 
   /** The set of tags enclosing CDATA sections. */
   private final ReferenceSet<Element> cdataElements =
-      new ReferenceOpenHashSet<Element>(new Element[] {Element.SCRIPT, Element.STYLE});
+      new ReferenceOpenHashSet<>(new Element[]{Element.SCRIPT, Element.STYLE});
 
   /** The map used to fake an attribute map. */
   private final Reference2ObjectOpenHashMap<Attribute, MutableString> attrMap =
-      new Reference2ObjectOpenHashMap<Attribute, MutableString>();
+      new Reference2ObjectOpenHashMap<>();
 
   public BulletParserCallbackContentHandler(final BulletParser parser, final Callback callback) {
     this.parser = parser;

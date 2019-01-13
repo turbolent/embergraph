@@ -98,15 +98,15 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 
     factory = new MockTermIdFactory();
 
-    rdfsSubClassOf = new Constant<IV>(factory.newTermId(VTE.URI));
+    rdfsSubClassOf = new Constant<>(factory.newTermId(VTE.URI));
 
-    rdfsResource = new Constant<IV>(factory.newTermId(VTE.URI));
+    rdfsResource = new Constant<>(factory.newTermId(VTE.URI));
 
-    rdfType = new Constant<IV>(factory.newTermId(VTE.URI));
+    rdfType = new Constant<>(factory.newTermId(VTE.URI));
 
-    rdfsClass = new Constant<IV>(factory.newTermId(VTE.URI));
+    rdfsClass = new Constant<>(factory.newTermId(VTE.URI));
 
-    someGraph = new Constant<IV>(factory.newTermId(VTE.URI));
+    someGraph = new Constant<>(factory.newTermId(VTE.URI));
   }
 
   protected void tearDown() throws Exception {
@@ -308,9 +308,9 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
                 // tail
                 new SPOPredicate[] {
                   new SPOPredicate(
-                      relationIdentifier, new Constant<IV>(uriId(2L)), Var.var("y"), Var.var("z")),
+                      relationIdentifier, new Constant<>(uriId(2L)), Var.var("y"), Var.var("z")),
                   new SPOPredicate(
-                      relationIdentifier, Var.var("x"), Var.var("y"), new Constant<IV>(uriId(1L)))
+                      relationIdentifier, Var.var("x"), Var.var("y"), new Constant<>(uriId(1L)))
                 },
                 // constraints
                 new IConstraint[] {});
@@ -373,11 +373,11 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
       final SPORelation spoRelation = store.getSPORelation();
 
       // define some vocabulary.
-      final IConstant<IV> U1 = new Constant<IV>(uriId(11L));
-      final IConstant<IV> U2 = new Constant<IV>(uriId(12L));
-      final IConstant<IV> V1 = new Constant<IV>(uriId(21L));
-      final IConstant<IV> V2 = new Constant<IV>(uriId(22L));
-      final IConstant<IV> X1 = new Constant<IV>(uriId(31L));
+      final IConstant<IV> U1 = new Constant<>(uriId(11L));
+      final IConstant<IV> U2 = new Constant<>(uriId(12L));
+      final IConstant<IV> V1 = new Constant<>(uriId(21L));
+      final IConstant<IV> V2 = new Constant<>(uriId(22L));
+      final IConstant<IV> X1 = new Constant<>(uriId(31L));
       // final IConstant<IV> X2 = new Constant<IV>(32L);
 
       // (?u,rdfs:subClassOf,?x), (?v,rdf:type,?u) -> (?v,rdf:type,?x)
@@ -444,7 +444,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 
         assertEquals(
             3,
-            spoRelation.insert(new ChunkedArrayIterator<ISPO>(a.length, a, null /* keyOrder */)));
+            spoRelation.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */)));
 
         if (log.isInfoEnabled()) {
 
@@ -563,11 +563,11 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
       final SPORelation spoRelation = store.getSPORelation();
 
       // define some vocabulary.
-      final IConstant<IV> U1 = new Constant<IV>(uriId(11L));
-      final IConstant<IV> U2 = new Constant<IV>(uriId(12L));
-      final IConstant<IV> V1 = new Constant<IV>(uriId(21L));
-      final IConstant<IV> V2 = new Constant<IV>(uriId(22L));
-      final IConstant<IV> X1 = new Constant<IV>(uriId(31L));
+      final IConstant<IV> U1 = new Constant<>(uriId(11L));
+      final IConstant<IV> U2 = new Constant<>(uriId(12L));
+      final IConstant<IV> V1 = new Constant<>(uriId(21L));
+      final IConstant<IV> V2 = new Constant<>(uriId(22L));
+      final IConstant<IV> X1 = new Constant<>(uriId(31L));
       // final IConstant<IV> X2 = new Constant<IV>(32L);
 
       // (?u,rdfs:subClassOf,?x), (?v,rdf:type,?u) -> (?v,rdf:type,?x)
@@ -629,7 +629,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 
         assertEquals(
             3,
-            spoRelation.insert(new ChunkedArrayIterator<ISPO>(a.length, a, null /* keyOrder */)));
+            spoRelation.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */)));
 
         if (log.isInfoEnabled()) {
 

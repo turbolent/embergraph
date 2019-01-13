@@ -176,7 +176,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
 
       public AddStatementHandler() {
 
-        buffer = new StatementBuffer<Statement>(store, 1000 /* capacity */);
+        buffer = new StatementBuffer<>(store, 1000 /* capacity */);
       }
 
       public void setContext(final Resource context) {

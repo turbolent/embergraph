@@ -90,6 +90,6 @@ public class FilterNode extends GroupMemberValueExpressionNodeBase
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 }

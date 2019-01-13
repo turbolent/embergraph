@@ -101,7 +101,7 @@ public class ConditionalRoutingOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ConditionalRouteTask(this, context));
+    return new FutureTask<>(new ConditionalRouteTask(this, context));
   }
 
   /** Copy the source to the sink or the alternative sink depending on the condition. */

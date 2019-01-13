@@ -503,7 +503,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
                   resp,
                   resp.getOutputStream());
 
-          final FutureTask<Void> ft = new FutureTask<Void>(updateTask);
+          final FutureTask<Void> ft = new FutureTask<>(updateTask);
 
           if (log.isTraceEnabled()) log.trace("Will run update: " + updateStr);
 
@@ -724,7 +724,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           // }
 
-          final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
+          final FutureTask<Void> ft = new FutureTask<>(queryTask);
 
           if (log.isTraceEnabled()) log.trace("Will run query: " + queryStr);
 
@@ -1923,7 +1923,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
           int nlocators = 0;
 
           // The distinct hosts on which the shards are located.
-          final Map<String, AtomicInteger> hosts = new TreeMap<String, AtomicInteger>();
+          final Map<String, AtomicInteger> hosts = new TreeMap<>();
 
           // The host+locators in key order.
           final StringBuilder sb = new StringBuilder();

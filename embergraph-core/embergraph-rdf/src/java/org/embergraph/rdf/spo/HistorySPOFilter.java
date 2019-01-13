@@ -33,7 +33,7 @@ public final class HistorySPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
   private static final long serialVersionUID = 9130715011217566313L;
 
   /** Shared instance. */
-  public static final transient IElementFilter<ISPO> INSTANCE = new HistorySPOFilter<ISPO>();
+  public static final transient IElementFilter<ISPO> INSTANCE = new HistorySPOFilter<>();
 
   /** De-serialization constructor. */
   private HistorySPOFilter() {}

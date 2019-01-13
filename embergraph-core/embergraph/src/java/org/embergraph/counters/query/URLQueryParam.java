@@ -25,7 +25,7 @@ public class URLQueryParam {
 
     } else {
 
-      Vector<String> values = new Vector<String>();
+      Vector<String> values = new Vector<>();
 
       values.add(value);
 
@@ -41,7 +41,7 @@ public class URLQueryParam {
 
     this.name = name;
 
-    Vector<String> tmp = new Vector<String>();
+    Vector<String> tmp = new Vector<>();
 
     for (String s : values) {
 

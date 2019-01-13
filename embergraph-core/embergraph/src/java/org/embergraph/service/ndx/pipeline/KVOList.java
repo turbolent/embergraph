@@ -22,7 +22,7 @@ public class KVOList<O> extends KVO<O> {
    * <p>Note: it is less expensive to allocate this with the {@link KVOList} than to allocate an
    * {@link AtomicReference} and then allocate this list lazily but with guaranteed consistency.
    */
-  private final ConcurrentLinkedQueue<KVO<O>> duplicateList = new ConcurrentLinkedQueue<KVO<O>>();
+  private final ConcurrentLinkedQueue<KVO<O>> duplicateList = new ConcurrentLinkedQueue<>();
 
   private volatile boolean done = false;
 

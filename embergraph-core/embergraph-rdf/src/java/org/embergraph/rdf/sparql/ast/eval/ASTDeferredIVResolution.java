@@ -924,7 +924,7 @@ public class ASTDeferredIVResolution {
       fillInIV(store, ((QuadsDataOrNamedSolutionSet) bop).getQuadData());
     } else if (bop instanceof DatasetNode) {
       final DatasetNode dataset = ((DatasetNode) bop);
-      final Set<IV> newDefaultGraphs = new LinkedHashSet<IV>();
+      final Set<IV> newDefaultGraphs = new LinkedHashSet<>();
       for (final IV iv : dataset.getDefaultGraphs().getGraphs()) {
         defer(
             iv.getValue(),
@@ -943,7 +943,7 @@ public class ASTDeferredIVResolution {
             }
           });
 
-      final Set<IV> newNamedGraphs = new LinkedHashSet<IV>();
+      final Set<IV> newNamedGraphs = new LinkedHashSet<>();
       final Iterator<IV> namedGraphs = dataset.getNamedGraphs().getGraphs().iterator();
       while (namedGraphs.hasNext()) {
         final IV iv = namedGraphs.next();

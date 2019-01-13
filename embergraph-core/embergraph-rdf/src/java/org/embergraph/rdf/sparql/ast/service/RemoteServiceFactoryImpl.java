@@ -87,7 +87,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
   @Override
   public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
 
     final IVariableOrConstant<?> serviceRef = serviceNode.getServiceRef().getValueExpression();
 
@@ -101,7 +101,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
   @Override
   public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode) {
 
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
 
     final Iterator<IVariable<?>> varIt =
         BOpUtility.getSpannedVariables(serviceNode.getGraphPattern());

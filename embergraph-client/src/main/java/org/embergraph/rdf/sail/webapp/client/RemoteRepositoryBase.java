@@ -349,7 +349,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
       final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 
       final Collection<Resource> contexts =
-          Collections.synchronizedCollection(new LinkedList<Resource>());
+          Collections.synchronizedCollection(new LinkedList<>());
 
       /*
        * For example:

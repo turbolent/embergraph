@@ -70,15 +70,15 @@ public class HTMLFactory implements ParsingFactory {
 
   /** A (quick) map from entity names to entites. */
   static final Object2ObjectOpenHashMap<CharSequence, Entity> NAME2ENTITY =
-      new Object2ObjectOpenHashMap<CharSequence, Entity>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new Object2ObjectOpenHashMap<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
 
   /** A (quick) map from attribute names to attributes. */
   static final Object2ObjectOpenHashMap<CharSequence, Attribute> NAME2ATTRIBUTE =
-      new Object2ObjectOpenHashMap<CharSequence, Attribute>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new Object2ObjectOpenHashMap<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
 
   /** A (quick) map from element-type names to element types. */
   static final Object2ObjectOpenHashMap<CharSequence, Element> NAME2ELEMENT =
-      new Object2ObjectOpenHashMap<CharSequence, Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new Object2ObjectOpenHashMap<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
 
   static Element newElement(final CharSequence name) {
     final Element element = new Element(name);

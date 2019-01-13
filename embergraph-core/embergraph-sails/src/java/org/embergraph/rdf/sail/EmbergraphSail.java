@@ -462,7 +462,7 @@ public class EmbergraphSail extends SailBase implements Sail {
    * the namespace is destroyed.
    */
   private final AtomicReference<KnownIsolatableEnum> knownIsolatable =
-      new AtomicReference<KnownIsolatableEnum>(KnownIsolatableEnum.Unknown);
+      new AtomicReference<>(KnownIsolatableEnum.Unknown);
 
   /*
    * Transient (in the sense of non-restart-safe) map of namespace prefixes to namespaces. This map
@@ -746,7 +746,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //            this.lock = lock;
     //        }
 
-    this.namespaces = Collections.synchronizedMap(new LinkedHashMap<String, String>());
+    this.namespaces = Collections.synchronizedMap(new LinkedHashMap<>());
 
     this.queryEngine = QueryEngineFactory.getInstance().getQueryController(mainIndexManager);
 
@@ -1791,12 +1791,12 @@ public class EmbergraphSail extends SailBase implements Sail {
         if (truthMaintenance) {
 
           assertBuffer =
-              new StatementBuffer<Statement>(
+              new StatementBuffer<>(
                   tm.newTempTripleStore(), database, bufferCapacity, queueCapacity);
 
         } else {
 
-          assertBuffer = new StatementBuffer<Statement>(database, bufferCapacity);
+          assertBuffer = new StatementBuffer<>(database, bufferCapacity);
 
           assertBuffer.setChangeLog(changeLog);
         }
@@ -1839,7 +1839,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       if (retractBuffer == null && truthMaintenance) {
 
         retractBuffer =
-            new StatementBuffer<Statement>(
+            new StatementBuffer<>(
                 tm.newTempTripleStore(), database, bufferCapacity, queueCapacity);
 
         // FIXME bnodes : Must also track the reverse mapping [bnodes2].
@@ -2036,7 +2036,7 @@ public class EmbergraphSail extends SailBase implements Sail {
        * Permit registration of SPARQL UPDATE listeners iff the connection
        * is mutable.
        */
-      listeners = readOnly ? null : new CopyOnWriteArraySet<ISPARQLUpdateListener>();
+      listeners = readOnly ? null : new CopyOnWriteArraySet<>();
     }
 
     /*
@@ -2256,8 +2256,8 @@ public class EmbergraphSail extends SailBase implements Sail {
          * explicit synchronization during iterators, which breaks
          * encapsulation.
          */
-        bnodes = new ConcurrentHashMap<String, EmbergraphBNode>();
-        bnodes2 = new ConcurrentHashMap<IV, EmbergraphBNode>();
+        bnodes = new ConcurrentHashMap<>();
+        bnodes2 = new ConcurrentHashMap<>();
         //                bnodes = Collections
         //                        .synchronizedMap(new HashMap<String, EmbergraphBNodeImpl>(
         //                                bufferCapacity));
@@ -2356,7 +2356,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners == null) {
 
-        m_listeners = new Vector<SailConnectionListener>();
+        m_listeners = new Vector<>();
 
         m_listeners.add(listener);
 
@@ -3250,7 +3250,7 @@ public class EmbergraphSail extends SailBase implements Sail {
          * Obtain a chunked iterator using the triple pattern that
          * visits only the explicit statements.
          */
-        final IChunkedOrderedIterator<ISPO> itr = new ChunkedArrayIterator<ISPO>(numStmts, stmts);
+        final IChunkedOrderedIterator<ISPO> itr = new ChunkedArrayIterator<>(numStmts, stmts);
 
         // The tempStore absorbing retractions.
         final AbstractTripleStore tempStore = getRetractionBuffer().getStatementStore();
@@ -3279,7 +3279,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
           final IChunkedOrderedIterator<ISPO> itr =
               database.computeClosureForStatementIdentifiers(
-                  new ChunkedArrayIterator<ISPO>(numStmts, stmts));
+                  new ChunkedArrayIterator<>(numStmts, stmts));
 
           // no need to compute closure for sids since we just did it
           n =
@@ -3900,7 +3900,7 @@ public class EmbergraphSail extends SailBase implements Sail {
        */
 
       // See QueryEvaluationIterator for an example of how to do this.
-      return new Embergraph2SesameIteration<Statement, SailException>(
+      return new Embergraph2SesameIteration<>(
           new CloseableIteratorWrapper<Statement>(
               new Striterator(Arrays.asList(contexts).iterator())
                   .addFilter(

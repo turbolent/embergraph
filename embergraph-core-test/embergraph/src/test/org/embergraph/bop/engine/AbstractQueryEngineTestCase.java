@@ -225,7 +225,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
       final int nrange = expected.length;
 
-      final java.util.Map<T, AtomicInteger> range = new java.util.LinkedHashMap<T, AtomicInteger>();
+      final java.util.Map<T, AtomicInteger> range = new java.util.LinkedHashMap<>();
 
       for (int j = 0; j < nrange; j++) {
 
@@ -267,7 +267,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
       if (actual.hasNext()) {
 
-        final List<T> remaining = new LinkedList<T>();
+        final List<T> remaining = new LinkedList<>();
 
         while (actual.hasNext()) remaining.add(actual.next());
 
@@ -331,7 +331,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
     try {
 
-      final Iterator<IBindingSet> actual = new Dechunkerator<IBindingSet>(itr);
+      final Iterator<IBindingSet> actual = new Dechunkerator<>(itr);
 
       /*
        * Populate a map that we will use to realize the match and
@@ -343,7 +343,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
       final int nrange = expected.length;
 
       final java.util.Map<IBindingSet, AtomicInteger> range =
-          new java.util.LinkedHashMap<IBindingSet, AtomicInteger>();
+          new java.util.LinkedHashMap<>();
 
       for (int j = 0; j < nrange; j++) {
 
@@ -544,9 +544,9 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
       if (n1 > n2) {
 
-        final Set<String> expectedSet = new LinkedHashSet<String>(o1.annotations().keySet());
+        final Set<String> expectedSet = new LinkedHashSet<>(o1.annotations().keySet());
 
-        final Set<String> actualSet = new LinkedHashSet<String>(o2.annotations().keySet());
+        final Set<String> actualSet = new LinkedHashSet<>(o2.annotations().keySet());
 
         expectedSet.removeAll(actualSet);
 
@@ -560,9 +560,9 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
       } else {
 
-        final Set<String> expectedSet = new LinkedHashSet<String>(o1.annotations().keySet());
+        final Set<String> expectedSet = new LinkedHashSet<>(o1.annotations().keySet());
 
-        final Set<String> actualSet = new LinkedHashSet<String>(o2.annotations().keySet());
+        final Set<String> actualSet = new LinkedHashSet<>(o2.annotations().keySet());
 
         actualSet.removeAll(expectedSet);
 
@@ -720,10 +720,10 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
       final List<BindingSet> queryBindings = Iterations.asList(queryResultTable);
       final List<BindingSet> expectedBindings = Iterations.asList(expectedResultTable);
 
-      final List<BindingSet> missingBindings = new ArrayList<BindingSet>(expectedBindings);
+      final List<BindingSet> missingBindings = new ArrayList<>(expectedBindings);
       missingBindings.removeAll(queryBindings);
 
-      final List<BindingSet> unexpectedBindings = new ArrayList<BindingSet>(queryBindings);
+      final List<BindingSet> unexpectedBindings = new ArrayList<>(queryBindings);
       unexpectedBindings.removeAll(expectedBindings);
 
       final StringBuilder message = new StringBuilder(2048);

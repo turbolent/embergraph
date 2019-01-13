@@ -294,7 +294,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
         Executors.newFixedThreadPool(nclients, DaemonThreadFactory.defaultThreadFactory());
 
     // Setup client task queue.
-    final Collection<Callable<Integer>> tasks = new LinkedList<Callable<Integer>>();
+    final Collection<Callable<Integer>> tasks = new LinkedList<>();
 
     {
       final Random r = new Random();
@@ -523,7 +523,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
      *
      * <p>Note: {@link Vector} is thread-safe.
      */
-    private Vector<Record> records = new Vector<Record>(10000, 10000);
+    private Vector<Record> records = new Vector<>(10000, 10000);
 
     private AtomicLong bytesWritten = new AtomicLong(0L);
 
@@ -901,7 +901,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
       // this is the test to be run.
       String className = StressTestMRMW.class.getName();
 
-      Map<String, String> defaultProperties = new HashMap<String, String>();
+      Map<String, String> defaultProperties = new HashMap<>();
 
       // force delete of the files on close of the journal under test.
       defaultProperties.put(Options.CREATE_TEMP_FILE, "true");
@@ -927,7 +927,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
 
       defaultProperties.put(TestOptions.NREADS, "100");
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       //            conditions.addAll(BasicExperimentConditions.getBasicConditions(
       //                    defaultProperties, new NV[] { new NV(TestOptions.NCLIENTS,

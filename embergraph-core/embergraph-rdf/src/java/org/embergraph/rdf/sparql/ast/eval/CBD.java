@@ -166,9 +166,9 @@ public class CBD {
     // Round ZERO (0) is the top-level describe.
     int nrounds = 0;
     // The blank nodes identified in the previous round.
-    final Set<IV<?, ?>> bnodes_tm1 = new LinkedHashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> bnodes_tm1 = new LinkedHashSet<>();
     // The statements identified so far.
-    final Set<EmbergraphStatement> stmts = new LinkedHashSet<EmbergraphStatement>();
+    final Set<EmbergraphStatement> stmts = new LinkedHashSet<>();
     while (true) {
 
       // CBD expansion begins at round ONE (1).
@@ -253,7 +253,7 @@ public class CBD {
      * top-level DESCRIBE query.
      */
 
-    return new CollectionIteration<EmbergraphStatement, QueryEvaluationException>(stmts);
+    return new CollectionIteration<>(stmts);
   }
 
   /*
@@ -342,7 +342,7 @@ public class CBD {
       final Set<IV<?, ?>> bnodes_tm1)
       throws QueryEvaluationException {
 
-    final Set<IV<?, ?>> newBnodes = new LinkedHashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> newBnodes = new LinkedHashSet<>();
     try {
 
       while (src.hasNext()) {

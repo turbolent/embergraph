@@ -34,6 +34,6 @@ public class SoftCacheEntryFactory<K, T> implements IWeakRefCacheEntryFactory<K,
 
   public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue) {
 
-    return new SoftCacheEntry<K, T>(key, obj, queue);
+    return new SoftCacheEntry<>(key, obj, queue);
   }
 }

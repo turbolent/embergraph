@@ -204,7 +204,7 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
 
         final TupleQueryResult tupleQueryResult = ft.get();
 
-        return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
+        return new Sesame2EmbergraphIterator<>(
             tupleQueryResult);
 
       } finally {

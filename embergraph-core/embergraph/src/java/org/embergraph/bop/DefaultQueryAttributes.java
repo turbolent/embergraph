@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DefaultQueryAttributes implements IQueryAttributes {
 
-  private final ConcurrentMap<Object, Object> map = new ConcurrentHashMap<Object, Object>();
+  private final ConcurrentMap<Object, Object> map = new ConcurrentHashMap<>();
 
   public Object get(Object key) {
     return map.get(key);

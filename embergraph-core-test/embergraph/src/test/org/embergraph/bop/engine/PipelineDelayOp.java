@@ -54,7 +54,7 @@ public class PipelineDelayOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new DelayTask(this, context));
+    return new FutureTask<>(new DelayTask(this, context));
   }
 
   private static class DelayTask implements Callable<Void> {

@@ -188,7 +188,7 @@ public class TokenBuffer<V extends Comparable<V>> {
 
     if (newField) {
 
-      buffer[count++] = new TermFrequencyData<V>(docId, fieldId, token);
+      buffer[count++] = new TermFrequencyData<>(docId, fieldId, token);
 
       nterms++;
 
@@ -275,7 +275,7 @@ public class TokenBuffer<V extends Comparable<V>> {
          * into the key/val of the index.
          */
         final ITermDocRecord<V> rec =
-            new ReadOnlyTermDocRecord<V>(
+            new ReadOnlyTermDocRecord<>(
                 termText,
                 docId,
                 fieldId, /* termMetadata.termFreq(), */

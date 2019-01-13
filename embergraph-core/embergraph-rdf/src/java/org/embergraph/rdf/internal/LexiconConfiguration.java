@@ -188,7 +188,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
    *
    * @see BLZG-1592 (ConcurrentModificationException in MathBOp when using expression in BIND)
    */
-  private final ArrayList<IMathOpHandler> typeHandlers = new ArrayList<IMathOpHandler>();
+  private final ArrayList<IMathOpHandler> typeHandlers = new ArrayList<>();
 
   @Override
   public final EmbergraphValueFactory getValueFactory() {
@@ -361,16 +361,16 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     /*
      * TODO Make this configurable.
      */
-    this.inlineDatatypesToTextIndex = new LinkedHashSet<URI>(Arrays.asList(XSD.IPV4));
+    this.inlineDatatypesToTextIndex = new LinkedHashSet<>(Arrays.asList(XSD.IPV4));
 
     /*
      * Note: These collections are read-only so we do NOT need additional
      * synchronization.
      */
 
-    iv2ext = new LinkedHashMap<IV, IExtension<? extends EmbergraphValue>>();
+    iv2ext = new LinkedHashMap<>();
 
-    datatype2ext = new LinkedHashMap<String, IExtension<? extends EmbergraphValue>>();
+    datatype2ext = new LinkedHashMap<>();
   }
 
   @Override
@@ -537,7 +537,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
     if (value.stringValue().length() <= maxInlineTextLength) {
 
-      return new FullyInlineURIIV<EmbergraphURI>(value);
+      return new FullyInlineURIIV<>(value);
     }
 
     final String localName = value.getLocalName();
@@ -551,9 +551,9 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
       if (namespaceIV != null) {
 
         final FullyInlineTypedLiteralIV<EmbergraphLiteral> localNameIV =
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
+            new FullyInlineTypedLiteralIV<>(localName);
 
-        return new URIExtensionIV<EmbergraphURI>(localNameIV, namespaceIV);
+        return new URIExtensionIV<>(localNameIV, namespaceIV);
       }
     }
 
@@ -692,7 +692,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
       if (totalLength <= maxInlineTextLength) {
 
-        return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+        return new FullyInlineTypedLiteralIV<>(
             value.getLabel(), value.getLanguage(), value.getDatatype());
       }
     }
@@ -757,12 +757,12 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
              * Extension for IPv4. Throws UnknownHostException if not
              * parseable as an IPv4.
              */
-            return new IPv4AddrIV<EmbergraphLiteral>(v);
+            return new IPv4AddrIV<>(v);
           case PACKED_LONG:
             /*
              * Extension for packed long value in the range [0;72057594037927935L].
              */
-            return new PackedLongIV<EmbergraphLiteral>(v);
+            return new PackedLongIV<>(v);
           default:
             // Not handled.
             return null;
@@ -774,33 +774,33 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
        */
       switch (dte) {
         case XSDBoolean:
-          return new XSDBooleanIV<EmbergraphLiteral>(XMLDatatypeUtil.parseBoolean(v));
+          return new XSDBooleanIV<>(XMLDatatypeUtil.parseBoolean(v));
         case XSDByte:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseByte(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseByte(v));
         case XSDShort:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseShort(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseShort(v));
         case XSDInt:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseInt(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseInt(v));
         case XSDLong:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseLong(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseLong(v));
         case XSDFloat:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseFloat(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseFloat(v));
         case XSDDouble:
-          return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseDouble(v));
+          return new XSDNumericIV<>(XMLDatatypeUtil.parseDouble(v));
         case XSDInteger:
-          return new XSDIntegerIV<EmbergraphLiteral>(XMLDatatypeUtil.parseInteger(v));
+          return new XSDIntegerIV<>(XMLDatatypeUtil.parseInteger(v));
         case XSDDecimal:
-          return new XSDDecimalIV<EmbergraphLiteral>(XMLDatatypeUtil.parseDecimal(v));
+          return new XSDDecimalIV<>(XMLDatatypeUtil.parseDecimal(v));
         case UUID:
-          return new UUIDLiteralIV<EmbergraphLiteral>(UUID.fromString(v));
+          return new UUIDLiteralIV<>(UUID.fromString(v));
         case XSDUnsignedByte:
-          return new XSDUnsignedByteIV<EmbergraphLiteral>(parseUnsignedByte(v));
+          return new XSDUnsignedByteIV<>(parseUnsignedByte(v));
         case XSDUnsignedShort:
-          return new XSDUnsignedShortIV<EmbergraphLiteral>(parseUnsignedShort(v));
+          return new XSDUnsignedShortIV<>(parseUnsignedShort(v));
         case XSDUnsignedInt:
-          return new XSDUnsignedIntIV<EmbergraphLiteral>(parseUnsignedInt(v));
+          return new XSDUnsignedIntIV<>(parseUnsignedInt(v));
         case XSDUnsignedLong:
-          return new XSDUnsignedLongIV<EmbergraphLiteral>(parseUnsignedLong(v));
+          return new XSDUnsignedLongIV<>(parseUnsignedLong(v));
         case Extension:
           // Fall through. Should have been handled above.
         default:
@@ -926,7 +926,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
         if (uuid.toString().equals(subStr)) {
 
-          return new UUIDBNodeIV<EmbergraphBNode>(uuid);
+          return new UUIDBNodeIV<>(uuid);
         }
 
       } catch (Exception ex) {
@@ -954,7 +954,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
         if (i.toString().equals(subStr)) {
 
-          return new NumericBNodeIV<EmbergraphBNode>(i);
+          return new NumericBNodeIV<>(i);
         }
 
       } catch (Exception ex) {
@@ -973,7 +973,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
        * Inline as [Unicode].
        */
 
-      return new FullyInlineUnicodeBNodeIV<EmbergraphBNode>(id);
+      return new FullyInlineUnicodeBNodeIV<>(id);
     }
 
     // The blank node was not inlined.

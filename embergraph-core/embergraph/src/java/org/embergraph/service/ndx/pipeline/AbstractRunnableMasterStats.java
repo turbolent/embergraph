@@ -375,7 +375,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
             new Callable<Double>() {
               public Double call() {
                 // the per subtask queue sizes.
-                final LinkedList<Integer> queueSizes = new LinkedList<Integer>();
+                final LinkedList<Integer> queueSizes = new LinkedList<>();
                 // #of elements on all subtasks queues.
                 final AtomicLong n = new AtomicLong(0);
                 // #of subtasks.
@@ -839,7 +839,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
             final int N = 10;
             // the minimum queue length before we will report the sink.
             final int M = 3;
-            final TreeSet<SinkQueueSize> sinks = new TreeSet<SinkQueueSize>();
+            final TreeSet<SinkQueueSize> sinks = new TreeSet<>();
             final SubtaskOp op =
                 new SubtaskOp() {
                   public void call(AbstractSubtask subtask) {

@@ -88,42 +88,42 @@ public class TestSliceOp extends TestCase2 {
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    data = new ArrayList<IBindingSet>();
+    data = new ArrayList<>();
     IBindingSet bset = null;
     { // 0
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("John"));
-      bset.set(y, new Constant<String>("Mary"));
+      bset.set(x, new Constant<>("John"));
+      bset.set(y, new Constant<>("Mary"));
       data.add(bset);
     }
     { // 1
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Mary"));
-      bset.set(y, new Constant<String>("Paul"));
+      bset.set(x, new Constant<>("Mary"));
+      bset.set(y, new Constant<>("Paul"));
       data.add(bset);
     }
     { // 2
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Mary"));
-      bset.set(y, new Constant<String>("Jane"));
+      bset.set(x, new Constant<>("Mary"));
+      bset.set(y, new Constant<>("Jane"));
       data.add(bset);
     }
     { // 3
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Paul"));
-      bset.set(y, new Constant<String>("Leon"));
+      bset.set(x, new Constant<>("Paul"));
+      bset.set(y, new Constant<>("Leon"));
       data.add(bset);
     }
     { // 4
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Paul"));
-      bset.set(y, new Constant<String>("John"));
+      bset.set(x, new Constant<>("Paul"));
+      bset.set(y, new Constant<>("John"));
       data.add(bset);
     }
     { // 5
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Leon"));
-      bset.set(y, new Constant<String>("Paul"));
+      bset.set(x, new Constant<>("Leon"));
+      bset.set(y, new Constant<>("Paul"));
       data.add(bset);
     }
   }
@@ -180,13 +180,13 @@ public class TestSliceOp extends TestCase2 {
           //                ),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Jane")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Jane")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Leon")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Leon")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("John")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("John")}),
           //                new ListBindingSet(
           //                        new IVariable[] { x, y },
           //                        new IConstant[] { new Constant<String>("Leon"),
@@ -197,14 +197,14 @@ public class TestSliceOp extends TestCase2 {
     final SliceStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -284,27 +284,27 @@ public class TestSliceOp extends TestCase2 {
           new ListBindingSet(
               new IVariable[] {x, y},
               new IConstant[] {
-                new Constant<String>("Mary"), new Constant<String>("Paul"),
+                  new Constant<>("Mary"), new Constant<>("Paul"),
               }),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Jane")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Jane")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Leon")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Leon")}),
         };
 
     final SliceStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -369,14 +369,14 @@ public class TestSliceOp extends TestCase2 {
     final SliceStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -451,29 +451,29 @@ public class TestSliceOp extends TestCase2 {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Jane")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Jane")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Leon")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Leon")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("John")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("John")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}),
         };
 
     final SliceStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -541,14 +541,14 @@ public class TestSliceOp extends TestCase2 {
     final SliceStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -607,14 +607,14 @@ public class TestSliceOp extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -656,14 +656,14 @@ public class TestSliceOp extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {data.toArray(new IBindingSet[0])});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{data.toArray(new IBindingSet[0])});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */, sink),
             -1 /* partitionId */,
             stats,
@@ -746,21 +746,21 @@ public class TestSliceOp extends TestCase2 {
 
       service.prestartAllCoreThreads();
 
-      final List<FutureTask<Void>> futures = new LinkedList<FutureTask<Void>>();
+      final List<FutureTask<Void>> futures = new LinkedList<>();
 
       for (int i = 0; i < ntrials; i++) {
 
         final IBindingSet[] chunk = chunks[i];
 
         final IAsynchronousIterator<IBindingSet[]> source =
-            new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {chunk});
+            new ThickAsynchronousIterator<>(new IBindingSet[][]{chunk});
 
-        final IBlockingBuffer<IBindingSet[]> sink = new BlockingBuffer<IBindingSet[]>(chunk.length);
+        final IBlockingBuffer<IBindingSet[]> sink = new BlockingBuffer<>(chunk.length);
 
         final IRunningQuery q = new MockRunningQuery(null /* fed */, null /* indexManager */, sink);
 
         final BOpContext<IBindingSet> context =
-            new BOpContext<IBindingSet>(
+            new BOpContext<>(
                 q,
                 -1 /* partitionId */,
                 stats,

@@ -44,7 +44,7 @@ public class CacheConnectionFactory {
    * unless the application is holding a hard reference to the {@link QueryEngine}.
    */
   private static WeakHashMap<QueryEngine, ICacheConnection> instanceCache =
-      new WeakHashMap<QueryEngine, ICacheConnection>();
+      new WeakHashMap<>();
 
   /*
    * Singleton factory test (does not create the cache).

@@ -45,7 +45,7 @@ public class TestPushbackIterator extends TestCase2 {
   public void test_filter() {
 
     final PushbackIterator<Long> actual =
-        new PushbackIterator<Long>(Arrays.asList(new Long[] {1L, 5L, 2L}).iterator());
+        new PushbackIterator<>(Arrays.asList(new Long[]{1L, 5L, 2L}).iterator());
 
     assertTrue(actual.hasNext());
     assertEquals(Long.valueOf(1L), actual.next());

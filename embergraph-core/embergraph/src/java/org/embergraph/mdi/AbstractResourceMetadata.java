@@ -67,7 +67,7 @@ public abstract class AbstractResourceMetadata
 
   public Map<String, Object> getParams() {
 
-    final Map<String, Object> v = new HashMap<String, Object>();
+    final Map<String, Object> v = new HashMap<>();
 
     v.put("UUID", uuid);
 

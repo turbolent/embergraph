@@ -197,7 +197,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
        * treating it as such for the purpose of this test.
        */
 
-      Set<IV> R = new HashSet<IV>();
+      Set<IV> R = new HashSet<>();
 
       R.add(store.getIV(RDFS.RANGE));
 

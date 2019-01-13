@@ -77,7 +77,7 @@ public class TestRegexBOp extends ProxyTestCase {
         final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
 
         final boolean actual =
-            new RegexBOp(new Constant<IV>(var), new Constant<IV>(pattern), new Constant<IV>(flags))
+            new RegexBOp(new Constant<>(var), new Constant<>(pattern), new Constant<>(flags))
                 .accept(emptyBindingSet);
 
         assertEquals(expected, actual);
@@ -94,7 +94,7 @@ public class TestRegexBOp extends ProxyTestCase {
         final IV flags = DummyConstantNode.toDummyIV(vf.createLiteral("i"));
 
         final boolean actual =
-            new RegexBOp(new Constant<IV>(var), new Constant<IV>(pattern), new Constant<IV>(flags))
+            new RegexBOp(new Constant<>(var), new Constant<>(pattern), new Constant<>(flags))
                 .accept(emptyBindingSet);
 
         assertEquals(expected, actual);

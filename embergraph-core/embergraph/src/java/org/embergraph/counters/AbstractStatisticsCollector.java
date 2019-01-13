@@ -185,27 +185,27 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
       // os.arch
       countersRoot.addCounter(
           hostPathPrefix + IHostCounters.Info_Architecture,
-          new OneShotInstrument<String>(System.getProperty("os.arch")));
+          new OneShotInstrument<>(System.getProperty("os.arch")));
 
       // os.name
       countersRoot.addCounter(
           hostPathPrefix + IHostCounters.Info_OperatingSystemName,
-          new OneShotInstrument<String>(System.getProperty("os.name")));
+          new OneShotInstrument<>(System.getProperty("os.name")));
 
       // os.version
       countersRoot.addCounter(
           hostPathPrefix + IHostCounters.Info_OperatingSystemVersion,
-          new OneShotInstrument<String>(System.getProperty("os.version")));
+          new OneShotInstrument<>(System.getProperty("os.version")));
 
       // #of processors.
       countersRoot.addCounter(
           hostPathPrefix + IHostCounters.Info_NumProcessors,
-          new OneShotInstrument<Integer>(SystemUtil.numProcessors()));
+          new OneShotInstrument<>(SystemUtil.numProcessors()));
 
       // processor info
       countersRoot.addCounter(
           hostPathPrefix + IHostCounters.Info_ProcessorInfo,
-          new OneShotInstrument<String>(SystemUtil.cpuInfo()));
+          new OneShotInstrument<>(SystemUtil.cpuInfo()));
     }
 
     return countersRoot;
@@ -230,9 +230,9 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
       final CounterSet serviceInfoSet = serviceRoot.makePath("Info");
 
       serviceInfoSet.addCounter(
-          "Service Type", new OneShotInstrument<String>(serviceIface.getName()));
+          "Service Type", new OneShotInstrument<>(serviceIface.getName()));
 
-      serviceInfoSet.addCounter("Service Name", new OneShotInstrument<String>(serviceName));
+      serviceInfoSet.addCounter("Service Name", new OneShotInstrument<>(serviceName));
 
       AbstractStatisticsCollector.addServiceProperties(serviceInfoSet, properties);
     }
@@ -252,7 +252,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     {
       serviceRoot.addCounter(
           IProcessCounters.Memory_runtimeMaxMemory,
-          new OneShotInstrument<Long>(Runtime.getRuntime().maxMemory()));
+          new OneShotInstrument<>(Runtime.getRuntime().maxMemory()));
 
       serviceRoot.addCounter(
           IProcessCounters.Memory_runtimeFreeMemory,
@@ -340,7 +340,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
 
       if (value == null) continue;
 
-      ptmp.addCounter(name, new OneShotInstrument<String>(value));
+      ptmp.addCounter(name, new OneShotInstrument<>(value));
     }
   }
 

@@ -104,7 +104,7 @@ public class TestLocalNativeChunkMessage extends TestCase2 {
   /** Unit test for a message with a single chunk containing a single empty binding set. */
   public void test_oneChunkWithEmptyBindingSet() {
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       data.add(new ListBindingSet());
     }
@@ -133,7 +133,7 @@ public class TestLocalNativeChunkMessage extends TestCase2 {
     // verify the iterator.
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /** Unit test for a message with a single chunk of binding sets. */
@@ -143,7 +143,7 @@ public class TestLocalNativeChunkMessage extends TestCase2 {
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       IBindingSet bset = null;
       {
@@ -207,7 +207,7 @@ public class TestLocalNativeChunkMessage extends TestCase2 {
 
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /** Mock object. */

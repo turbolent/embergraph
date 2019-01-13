@@ -70,7 +70,7 @@ public class TestTermIV extends TestCase2 {
 
   public void test_TermIV_isExtensionIV() {
 
-    final TermId<EmbergraphURI> iv = new TermId<EmbergraphURI>(VTE.URI, 12L);
+    final TermId<EmbergraphURI> iv = new TermId<>(VTE.URI, 12L);
 
     assertEquals(VTE.URI, iv.getVTE());
 
@@ -177,7 +177,7 @@ public class TestTermIV extends TestCase2 {
       // 64 bit random term identifier.
       final long termId = IVUtility.PACK_TIDS ? Math.abs(r.nextLong()) : r.nextLong();
 
-      final TermId<?> v = new TermId<EmbergraphValue>(vte, termId);
+      final TermId<?> v = new TermId<>(vte, termId);
 
       assertFalse(v.isInline());
 

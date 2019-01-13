@@ -113,7 +113,7 @@ public class JoinTaskSink {
      * will simply wait until there is something to be read from the
      * asynchronous iterator.
      */
-    this.blockingBuffer = new BlockingBuffer<IBindingSet[]>(joinNexus.getChunkOfChunksCapacity());
+    this.blockingBuffer = new BlockingBuffer<>(joinNexus.getChunkOfChunksCapacity());
 
     /*
      * The JoinTask adds bindingSets to this buffer. On overflow, the
@@ -122,7 +122,7 @@ public class JoinTaskSink {
      * JoinTask.
      */
     this.unsyncBuffer =
-        new UnsynchronizedArrayBuffer<IBindingSet>(
+        new UnsynchronizedArrayBuffer<>(
             blockingBuffer, IBindingSet.class, joinNexus.getChunkCapacity());
 
     /*

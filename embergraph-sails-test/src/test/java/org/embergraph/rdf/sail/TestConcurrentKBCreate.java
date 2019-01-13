@@ -530,7 +530,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     final AtomicInteger errorCount = new AtomicInteger(0);
 
     // The tasks to be executed.
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
 
     /*
      * The #of discovery tasks to schedule before/after the CreateKB task.

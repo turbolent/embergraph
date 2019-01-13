@@ -103,7 +103,7 @@ public class HTreeDistinctBindingSetsOp extends PipelineOp implements ISingleThr
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new DistinctTask(this, context));
+    return new FutureTask<>(new DistinctTask(this, context));
   }
 
   /** Task executing on the node. */
@@ -165,7 +165,7 @@ public class HTreeDistinctBindingSetsOp extends PipelineOp implements ISingleThr
       try {
 
         final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-            new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+            new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
         state.filterSolutions(itr, stats, unsyncBuffer);
 

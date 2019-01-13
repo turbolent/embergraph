@@ -527,7 +527,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         final Set<IVariable<?>> projectedVars =
             sa.getMaybeProducedBindings(
-                whereClause, new LinkedHashSet<IVariable<?>>() /* vars */, true /* recursive */);
+                whereClause, new LinkedHashSet<>() /* vars */, true /* recursive */);
 
         for (IBindingSet bs : context.getBindings()) {
 
@@ -1074,9 +1074,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     final Striterator sitr =
         new Striterator(
             // Chunk up the openrdf solutions.
-            new Chunkerator<BindingSet>(
+            new Chunkerator<>(
                 // Convert the Sesame iteration into a Embergraph iterator.
-                new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(result),
+                new Sesame2EmbergraphIterator<>(result),
                 chunkSize));
 
     // Add filter to batch resolve BindingSet[] => IBindingSet[].
@@ -1394,7 +1394,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * INSERT DATA.
      */
     {
-      final Map<String, Object> anns = new HashMap<String, Object>();
+      final Map<String, Object> anns = new HashMap<>();
 
       anns.put(BOp.Annotations.BOP_ID, context.nextId());
 

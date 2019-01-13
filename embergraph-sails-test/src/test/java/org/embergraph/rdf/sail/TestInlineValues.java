@@ -117,7 +117,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
         TupleQueryResult result = tupleQuery.evaluate();
 
-        Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        Collection<BindingSet> solution = new LinkedList<>();
         solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
 
         compare(result, solution);
@@ -182,7 +182,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
         final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
         TupleQueryResult result = tupleQuery.evaluate();
 
-        Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        Collection<BindingSet> solution = new LinkedList<>();
         solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 
         compare(result, solution);
@@ -259,7 +259,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         final TupleQueryResult result = tupleQuery.evaluate();
 
-        Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        Collection<BindingSet> solution = new LinkedList<>();
         solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
         solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 
@@ -298,7 +298,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         final TupleQueryResult result = tupleQuery.evaluate();
 
-        Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        Collection<BindingSet> solution = new LinkedList<>();
         solution.add(createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
         solution.add(createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
 

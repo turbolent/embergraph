@@ -37,7 +37,7 @@ public class UUIDLiteralIV<V extends EmbergraphLiteral> extends AbstractLiteralI
 
   public IV<V, UUID> clone(final boolean clearCache) {
 
-    final UUIDLiteralIV<V> tmp = new UUIDLiteralIV<V>(value);
+    final UUIDLiteralIV<V> tmp = new UUIDLiteralIV<>(value);
 
     if (!clearCache) {
 

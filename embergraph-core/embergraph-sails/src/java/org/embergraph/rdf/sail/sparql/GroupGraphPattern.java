@@ -67,7 +67,7 @@ class GroupGraphPattern {
   private StatementPattern.Scope spScope = StatementPattern.Scope.DEFAULT_CONTEXTS;
 
   /** This is all direct children of the group. */
-  private final List<IGroupMemberNode> children = new LinkedList<IGroupMemberNode>();
+  private final List<IGroupMemberNode> children = new LinkedList<>();
 
   /** Creates a new graph pattern. */
   public GroupGraphPattern() {}

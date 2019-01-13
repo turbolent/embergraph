@@ -214,7 +214,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
    * projection variables. This feature is useful for auxiliary aliases.
    */
   public void setVarsToExcludeFromProjection(final Set<IVariable<?>> vars) {
-    setProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION, new HashSet<IVariable<?>>(vars));
+    setProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION, new HashSet<>(vars));
   }
 
   /*
@@ -226,7 +226,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
    */
   public List<AssignmentNode> getAssignmentProjections() {
 
-    final List<AssignmentNode> assignments = new LinkedList<AssignmentNode>();
+    final List<AssignmentNode> assignments = new LinkedList<>();
 
     for (AssignmentNode n : this) {
 
@@ -241,7 +241,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
   /** Return the projected variables. */
   public IVariable[] getProjectionVars() {
 
-    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new LinkedHashSet<>();
 
     getProjectionVars(vars);
     //        for (AssignmentNode n : this) {

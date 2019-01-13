@@ -44,10 +44,10 @@ public class InMemChangeLog implements IChangeLog {
   private static final Logger log = Logger.getLogger(InMemChangeLog.class);
 
   /** Running tally of new changes since the last commit notification. */
-  private final Map<ISPO, IChangeRecord> changeSet = new HashMap<ISPO, IChangeRecord>();
+  private final Map<ISPO, IChangeRecord> changeSet = new HashMap<>();
 
   /** Keep a record of the change set as of the last commit. */
-  private final Map<ISPO, IChangeRecord> committed = new HashMap<ISPO, IChangeRecord>();
+  private final Map<ISPO, IChangeRecord> committed = new HashMap<>();
 
   /** See {@link IChangeLog#changeEvent(IChangeRecord)}. */
   @Override
@@ -123,7 +123,7 @@ public class InMemChangeLog implements IChangeLog {
   private Collection<IChangeRecord> resolve(
       final AbstractTripleStore db, final Collection<IChangeRecord> unresolved) {
 
-    final Collection<IChangeRecord> resolved = new LinkedList<IChangeRecord>();
+    final Collection<IChangeRecord> resolved = new LinkedList<>();
 
     // collect up the ISPOs out of the unresolved change records
     final ISPO[] spos = new ISPO[unresolved.size()];
@@ -134,7 +134,7 @@ public class InMemChangeLog implements IChangeLog {
 
     // use the database to resolve them into EmbergraphStatements
     final EmbergraphStatementIterator it =
-        db.asStatementIterator(new ChunkedArrayIterator<ISPO>(i, spos, null /* keyOrder */));
+        db.asStatementIterator(new ChunkedArrayIterator<>(i, spos, null /* keyOrder */));
 
     /*
      * the EmbergraphStatementIterator will produce EmbergraphStatement objects

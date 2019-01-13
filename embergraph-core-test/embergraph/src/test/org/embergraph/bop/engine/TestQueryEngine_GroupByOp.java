@@ -121,7 +121,7 @@ public class TestQueryEngine_GroupByOp extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickAsynchronousIterator<>(bindingSetChunks);
   }
 
   //    /*

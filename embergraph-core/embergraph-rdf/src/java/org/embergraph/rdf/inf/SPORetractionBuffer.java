@@ -92,7 +92,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
 
       n =
           store.removeStatements(
-              new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+              new ChunkedArrayIterator<>(numStmts, stmts, null /*keyOrder*/),
               computeClosureForStatementIdentifiers);
 
     } else {
@@ -100,7 +100,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
       n =
           StatementWriter.removeStatements(
               store,
-              new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+              new ChunkedArrayIterator<>(numStmts, stmts, null /*keyOrder*/),
               computeClosureForStatementIdentifiers,
               changeLog);
     }

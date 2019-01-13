@@ -127,7 +127,7 @@ public class ConditionalBind<E extends IV> extends ImmutableBOp
       if (existing == null) {
 
         // bind the variable as a side-effect.
-        bindingSet.set(var, new Constant<E>(val));
+        bindingSet.set(var, new Constant<>(val));
 
         // return the evaluated value
         return val;

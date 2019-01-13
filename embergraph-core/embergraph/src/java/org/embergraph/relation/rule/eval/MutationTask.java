@@ -201,7 +201,7 @@ public class MutationTask extends AbstractStepTask {
 
       if (log.isInfoEnabled()) log.info("Flushing " + n + " buffers.");
 
-      final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(n);
+      final List<Callable<Long>> tasks = new ArrayList<>(n);
 
       final Iterator<IBuffer<ISolution[]>> itr = buffers.values().iterator();
 
@@ -318,7 +318,7 @@ public class MutationTask extends AbstractStepTask {
         throw new IllegalArgumentException("No head for this rule: " + step);
       }
 
-      tasks = new ArrayList<Callable<RuleStats>>(1);
+      tasks = new ArrayList<>(1);
 
       final IRule rule = (IRule) step;
 
@@ -335,7 +335,7 @@ public class MutationTask extends AbstractStepTask {
 
       final boolean parallel = program.isParallel();
 
-      tasks = new ArrayList<Callable<RuleStats>>(program.stepCount());
+      tasks = new ArrayList<>(program.stepCount());
 
       final Iterator<IStep> itr = program.steps();
 

@@ -114,7 +114,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
 
   public IV<V, Void> clone(final boolean clearCache) {
 
-    final BlobIV<V> tmp = new BlobIV<V>(flags, hash, counter);
+    final BlobIV<V> tmp = new BlobIV<>(flags, hash, counter);
 
     if (!clearCache) {
 

@@ -84,7 +84,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     final AbstractTripleStore db = ctx.getAbstractTripleStore();
 
     // Setup tasks to obtain estimated range counts.
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
     for (StatementPatternNode sp : spNodes) {
 
       if (sp.getProperty(Annotations.ESTIMATED_CARDINALITY) == null) {
@@ -106,7 +106,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
 
     // Check futures for errors.
-    final List<Throwable> causes = new LinkedList<Throwable>();
+    final List<Throwable> causes = new LinkedList<>();
     for (Future<Void> f : futures) {
       try {
         f.get();

@@ -148,7 +148,7 @@ public class EmbergraphGASEngine extends GASEngine {
 
     final IGASSchedulerImpl gasScheduler = newScheduler();
 
-    return new EmbergraphGASState<VS, ES, ST>(
+    return new EmbergraphGASState<>(
         this, (EmbergraphGraphAccessor) graphAccessor, frontier, gasScheduler, gasProgram);
   }
 
@@ -219,7 +219,7 @@ public class EmbergraphGASEngine extends GASEngine {
         synchronized (this) {
           if (kbRef == null) {
 
-            kbRef = new WeakReference<AbstractTripleStore>(resolveKB());
+            kbRef = new WeakReference<>(resolveKB());
           }
         }
       }
@@ -742,7 +742,7 @@ public class EmbergraphGASEngine extends GASEngine {
       // Maximum number of samples to attempt.
       final int limit = (int) Math.min(desiredSampleSize * 3L, Integer.MAX_VALUE);
 
-      final Set<IV> samples = new HashSet<IV>();
+      final Set<IV> samples = new HashSet<>();
 
       int round = 0;
       while (samples.size() < desiredSampleSize && round++ < limit) {
@@ -788,7 +788,7 @@ public class EmbergraphGASEngine extends GASEngine {
            * Use tuple that will return both the key and the value so
            * we can decode the entire tuple.
            */
-          final Tuple<ISPO> tuple = new Tuple<ISPO>(ndx, IRangeQuery.KEYS | IRangeQuery.VALS);
+          final Tuple<ISPO> tuple = new Tuple<>(ndx, IRangeQuery.KEYS | IRangeQuery.VALS);
 
           if (ndx.valueAt(rindex, tuple) == null) {
 

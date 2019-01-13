@@ -101,14 +101,14 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> boundByGroup =
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */);
+              group, new LinkedHashSet<>(), true /* recursive */);
 
       /*
        * Find the set of variables which will be definitely bound by the
        * time the group is evaluated.
        */
       final Set<IVariable<?>> incomingBindings =
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
       /*
        * This is only those variables which are bound on entry into the group
@@ -126,14 +126,14 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        * The variables that will definitely be bound inside the subquery.
        */
       final Set<IVariable<?>> definitelyBoundInGroup =
-          sa.getDefinitelyProducedBindings(group, new LinkedHashSet<IVariable<?>>(), true);
+          sa.getDefinitelyProducedBindings(group, new LinkedHashSet<>(), true);
 
       /*
        * Find the set of variables which have appeared in the query and
        * may be bound by the time the group is evaluated.
        */
       final Set<IVariable<?>> maybeIncomingBindings =
-          sa.getMaybeIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+          sa.getMaybeIncomingBindings(group, new LinkedHashSet<>());
 
       /*
        * Add the variables that are used inside filters in the OPTIONAL, since the SPARQL 1.1
@@ -147,7 +147,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
 
         final JoinGroupNode jgn = (JoinGroupNode) group;
         if (jgn.isOptional()) {
-          final Set<FilterNode> filters = new LinkedHashSet<FilterNode>();
+          final Set<FilterNode> filters = new LinkedHashSet<>();
 
           for (BOp node : jgn.args()) {
 
@@ -168,7 +168,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
 
           for (FilterNode fn : filters) {
             definitelyBoundInGroup.addAll(
-                sa.getSpannedVariables(fn, true /* filters */, new LinkedHashSet<IVariable<?>>()));
+                sa.getSpannedVariables(fn, true /* filters */, new LinkedHashSet<>()));
           }
         }
       }

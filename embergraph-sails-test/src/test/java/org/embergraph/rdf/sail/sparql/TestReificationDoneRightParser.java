@@ -142,7 +142,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //				final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.com/");
@@ -279,7 +279,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.com/");
         expected.setPrefixDecls(prefixDecls);
         //                final Map<String, String> prefixDecls = new LinkedHashMap<String,
@@ -371,7 +371,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //				final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.com/");
@@ -453,7 +453,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //				final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.com/");
@@ -539,7 +539,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //				final Map<String, String> prefixDecls = new LinkedHashMap<String, String>();
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.com/");
@@ -617,7 +617,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //                final Map<String, String> prefixDecls = new LinkedHashMap<String,
         // String>();
         expected.setPrefixDecls(prefixDecls);
@@ -687,7 +687,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //                final Map<String, String> prefixDecls = new LinkedHashMap<String,
         // String>();
         expected.setPrefixDecls(prefixDecls);
@@ -762,7 +762,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         //                final Map<String, String> prefixDecls = new LinkedHashMap<String,
         // String>();
         expected.setPrefixDecls(prefixDecls);

@@ -93,7 +93,7 @@ public class TestMultiInlineURIHandlersSingleNamespace extends AbstractTripleSto
       final EmbergraphValueFactory vf = store.getValueFactory();
 
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(store, 4 /* capacity */);
+          new StatementBuffer<>(store, 4 /* capacity */);
 
       EmbergraphURI pred = vf.createURI("http://embergraph.org/Position#hasMarketValue");
       EmbergraphValue obj = vf.createLiteral("100.00");

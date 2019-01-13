@@ -66,7 +66,7 @@ public class ChunkedStriterator<I extends IChunkedIterator<E>, E> extends Strite
   @SuppressWarnings("unchecked")
   public ChunkedStriterator(final int chunkSize, final Iterator<E> src) {
 
-    this((I) new ChunkedWrappedIterator<E>(src, chunkSize, null /* keyOrder */, null /* filter */));
+    this((I) new ChunkedWrappedIterator<>(src, chunkSize, null /* keyOrder */, null /* filter */));
   }
 
   @Override

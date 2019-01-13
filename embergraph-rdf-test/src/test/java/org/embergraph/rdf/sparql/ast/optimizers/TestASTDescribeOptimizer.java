@@ -132,7 +132,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
           };
 
       final StatementBuffer<EmbergraphStatement> buf =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       for (EmbergraphStatement stmt : stmts) {
 
@@ -327,7 +327,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
           };
 
       final StatementBuffer<EmbergraphStatement> buf =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       for (EmbergraphStatement stmt : stmts) {
 
@@ -527,7 +527,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
           };
 
       final StatementBuffer<EmbergraphStatement> buf =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       for (EmbergraphStatement stmt : stmts) {
 
@@ -734,7 +734,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
           };
 
       final StatementBuffer<EmbergraphStatement> buf =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       for (EmbergraphStatement stmt : stmts) {
 
@@ -963,7 +963,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
           };
 
       final StatementBuffer<EmbergraphStatement> buf =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       for (EmbergraphStatement stmt : stmts) {
 

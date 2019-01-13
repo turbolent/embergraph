@@ -134,7 +134,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
   public final void init(final AbstractTripleStore db) {
 
     // setup [axioms] collection.
-    final Set<EmbergraphStatement> axioms = new LinkedHashSet<EmbergraphStatement>(200);
+    final Set<EmbergraphStatement> axioms = new LinkedHashSet<>(200);
 
     // obtain collection of axioms to be used.
     addAxioms(axioms);
@@ -173,7 +173,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 
     final int naxioms = axioms.size();
 
-    final LinkedHashSet<SPO> ret = new LinkedHashSet<SPO>(naxioms);
+    final LinkedHashSet<SPO> ret = new LinkedHashSet<>(naxioms);
 
     if (naxioms > 0) {
 
@@ -403,7 +403,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
     //        if (naxioms < 0 || naxioms > Integer.MAX_VALUE)
     //            throw new IOException();
 
-    axioms = new LinkedHashSet<SPO>(naxioms);
+    axioms = new LinkedHashSet<>(naxioms);
     //        createBTree((int) naxioms);
 
     for (int i = 0; i < naxioms; i++) {

@@ -45,7 +45,7 @@ public class URIExtensionIV<V extends EmbergraphURI> extends AbstractInlineExten
   @Override
   public IV<V, Object> clone(final boolean clearCache) {
 
-    final URIExtensionIV<V> tmp = new URIExtensionIV<V>(delegateIV, namespaceIV);
+    final URIExtensionIV<V> tmp = new URIExtensionIV<>(delegateIV, namespaceIV);
 
     if (!clearCache) {
 

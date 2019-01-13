@@ -370,7 +370,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
       /*
        * Create the tasks.
        */
-      final Collection<AbstractTask<Void>> tasks = new HashSet<AbstractTask<Void>>(ntasks);
+      final Collection<AbstractTask<Void>> tasks = new HashSet<>(ntasks);
 
       // updated by each task that runs.
       final AtomicLong nrun = new AtomicLong(0);
@@ -605,7 +605,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
       // this is the test to be run.
       String className = StressTestGroupCommit.class.getName();
 
-      Map<String, String> defaultProperties = new HashMap<String, String>();
+      Map<String, String> defaultProperties = new HashMap<>();
 
       // force delete of the files on close of the journal under test.
       defaultProperties.put(Options.CREATE_TEMP_FILE, "true");
@@ -621,7 +621,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
 
       defaultProperties.put(TestOptions.NTASKS, "10000");
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       conditions.add(new Condition(defaultProperties));
 

@@ -75,7 +75,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
      * of edges along which they were able to reach this vertex.
      */
     private final Map<Value, Set<URI>> predecessors =
-        Collections.synchronizedMap(new LinkedHashMap<Value, Set<URI>>());
+        Collections.synchronizedMap(new LinkedHashMap<>());
 
     /*
      * The depth at which this vertex was first visited (origin ZERO) and <code>-1</code> if the
@@ -103,7 +103,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
       if (edges == null) {
 
-        edges = new LinkedHashSet<URI>();
+        edges = new LinkedHashSet<>();
 
         predecessors.put(pred, edges);
       }
@@ -320,7 +320,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             final VS vs = state.getState(u);
 
-            return new LinkedList<Value>(vs.predecessors().keySet());
+            return new LinkedList<>(vs.predecessors().keySet());
           }
         });
 
@@ -380,7 +380,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
             /*
              * Return the edges for this predecessor.
              */
-            return new LinkedList<Value>(vs.predecessors().get(predVal));
+            return new LinkedList<>(vs.predecessors().get(predVal));
           }
         });
 
@@ -477,7 +477,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
     final IGASState<PATHS.VS, PATHS.ES, Void> gasState = ctx.getGASState();
 
-    final Set<Value> retainSet = new HashSet<Value>();
+    final Set<Value> retainSet = new HashSet<>();
 
     for (Value v : targetVertices) {
 

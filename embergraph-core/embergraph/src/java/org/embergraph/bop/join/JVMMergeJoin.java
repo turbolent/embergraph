@@ -140,7 +140,7 @@ public class JVMMergeJoin extends AbstractMergeJoin {
   @Override
   public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask<IBindingSet>(context, this));
+    return new FutureTask<>(new ChunkTask<IBindingSet>(context, this));
   }
 
   /** Task executing on the node. */
@@ -230,7 +230,7 @@ public class JVMMergeJoin extends AbstractMergeJoin {
         if (context.isLastInvocation()) {
 
           final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-              new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+              new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
           final IHashJoinUtility[] others = new IHashJoinUtility[state.length - 1];
 

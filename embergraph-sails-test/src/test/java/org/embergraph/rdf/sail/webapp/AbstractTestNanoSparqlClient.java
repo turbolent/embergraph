@@ -239,7 +239,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
       }
     }
 
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
     {
       initParams.put(ConfigParams.NAMESPACE, lnamespace);
 
@@ -513,7 +513,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   protected static Statement[] getMatches(
       final Graph g, final Resource s, final URI p, final Value o) {
 
-    final List<Statement> out = new LinkedList<Statement>();
+    final List<Statement> out = new LinkedList<>();
 
     final Iterator<Statement> itr = g.match(s, p, o);
 

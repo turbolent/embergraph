@@ -155,7 +155,7 @@ public class URLQueryModel {
    *
    * would select events reported for blade12.
    */
-  public final HashMap<Field, Pattern> eventFilters = new HashMap<Field, Pattern>();
+  public final HashMap<Field, Pattern> eventFilters = new HashMap<>();
 
   /*
    * The <code>eventOrderBy=fld</code> URL query parameters specifies the sequence in which events
@@ -411,7 +411,7 @@ public class URLQueryModel {
     final String uri = URLDecoder.decode(req.getRequestURI(), "UTF-8");
 
     final LinkedHashMap<String, Vector<String>> params =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
 
     //        @SuppressWarnings("unchecked")
     final Enumeration<String> enames = req.getParameterNames();
@@ -422,7 +422,7 @@ public class URLQueryModel {
 
       final String[] values = req.getParameterValues(name);
 
-      final Vector<String> value = new Vector<String>();
+      final Vector<String> value = new Vector<>();
 
       for (String v : values) {
 
@@ -449,11 +449,11 @@ public class URLQueryModel {
 
     // Extract the URL query parameters.
     final LinkedHashMap<String, Vector<String>> params =
-        NanoHTTPD.decodeParams(url.getQuery(), new LinkedHashMap<String, Vector<String>>());
+        NanoHTTPD.decodeParams(url.getQuery(), new LinkedHashMap<>());
 
     // add any relevant headers
     final Map<String, String> headers =
-        new TreeMap<String, String>(new CaseInsensitiveStringComparator());
+        new TreeMap<>(new CaseInsensitiveStringComparator());
 
     headers.put("host", url.getHost() + ":" + url.getPort());
 
@@ -615,7 +615,7 @@ public class URLQueryModel {
 
       } else {
 
-        final Vector<Field> fields = new Vector<Field>();
+        final Vector<Field> fields = new Vector<>();
 
         for (String s : v) {
 
@@ -792,7 +792,7 @@ public class URLQueryModel {
 
     } else {
 
-      p = new LinkedHashMap<String, Vector<String>>(params);
+      p = new LinkedHashMap<>(params);
 
       for (URLQueryParam x : override) {
 

@@ -88,7 +88,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
    * @return The set.
    */
   protected static <T> Set<T> set(final T... a) {
-    final Set<T> tmp = new LinkedHashSet<T>();
+    final Set<T> tmp = new LinkedHashSet<>();
     for (T x : a) {
       tmp.add(x);
     }
@@ -99,7 +99,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
   protected static <T> void assertSameEdges(
       final Set<? extends T> expected, final Set<? extends T> actual) {
 
-    final Set<T> tmp = new LinkedHashSet<T>();
+    final Set<T> tmp = new LinkedHashSet<>();
 
     tmp.addAll(expected);
 

@@ -166,7 +166,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     if ((flags & IRangeQuery.REMOVEALL) != 0) throw new IllegalArgumentException();
     if ((flags & IRangeQuery.CURSOR) != 0) throw new IllegalArgumentException();
 
-    this.tuple = new Tuple<E>(seg, flags);
+    this.tuple = new Tuple<>(seg, flags);
 
     this.firstLeafAddr =
         (fromKey == null ? store.getCheckpoint().addrFirstLeaf : seg.findLeafAddr(fromKey));
@@ -289,7 +289,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
       }
       if ((currentLeaf = nextLeaf()) != null) {
         // setup the tuple iterator for the next leaf.
-        tupleItr = new LeafTupleIterator<E>(currentLeaf, tuple, fromKey, toKey);
+        tupleItr = new LeafTupleIterator<>(currentLeaf, tuple, fromKey, toKey);
       } else {
         // done.
         exhausted = true;

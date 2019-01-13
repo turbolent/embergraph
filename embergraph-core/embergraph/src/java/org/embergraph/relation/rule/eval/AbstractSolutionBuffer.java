@@ -67,7 +67,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
       k += tmp.length;
     }
     // iterator on that single combined chunk.
-    itr = new ChunkedArrayIterator<ISolution<R>>(m, b, null /* keyOrder */);
+    itr = new ChunkedArrayIterator<>(m, b, null /* keyOrder */);
 
     // /*
     // * Handle each chunk by itself.

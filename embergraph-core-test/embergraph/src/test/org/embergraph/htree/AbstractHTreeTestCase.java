@@ -83,7 +83,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
       final String msg, final byte[][] expected, final Iterator<byte[]> actual) {
 
     // stuff everything into a list (allows duplicates).
-    final List<byte[]> range = new LinkedList<byte[]>();
+    final List<byte[]> range = new LinkedList<>();
     for (byte[] b : expected) range.add(b);
 
     // Do selection without replacement for the objects visited by
@@ -217,7 +217,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
     @Override
     protected HardReferenceQueue<PO> newWriteRetentionQueue(boolean readOnly) {
 
-      return new HardReferenceQueue<PO>(new NoEvictionListener(), 20000, 10);
+      return new HardReferenceQueue<>(new NoEvictionListener(), 20000, 10);
     }
   }
 

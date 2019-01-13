@@ -3388,7 +3388,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
        * Dump children using pre-order traversal.
        */
 
-      final Set<AbstractNode<?>> dirty = new HashSet<AbstractNode<?>>();
+      final Set<AbstractNode<?>> dirty = new HashSet<>();
 
       for (int i = 0; i <= /* nkeys */ branchingFactor; i++) {
 

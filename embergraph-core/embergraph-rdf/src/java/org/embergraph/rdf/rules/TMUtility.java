@@ -101,7 +101,7 @@ public class TMUtility {
 
     if (focusStore == null) throw new IllegalArgumentException();
 
-    final List<IRule> rules = new LinkedList<IRule>();
+    final List<IRule> rules = new LinkedList<>();
 
     final int tailCount = rule.getTailCount();
 

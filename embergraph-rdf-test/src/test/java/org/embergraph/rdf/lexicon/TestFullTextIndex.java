@@ -663,7 +663,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
         final URI p = f.createURI("x:p");
 
         final IStatementBuffer<Statement> buffer =
-            new StatementBuffer<Statement>(
+            new StatementBuffer<>(
                 null /* focusStore */, store, terms.length /* capacity */, 0 /* queueCapacity */);
 
         for (int i = 0; i < terms.length; i++) {

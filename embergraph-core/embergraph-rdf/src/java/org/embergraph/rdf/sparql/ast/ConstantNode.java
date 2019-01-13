@@ -30,7 +30,7 @@ public class ConstantNode extends TermNode {
   @SuppressWarnings("rawtypes")
   public ConstantNode(final IV val) {
 
-    this(new Constant<IV>(val));
+    this(new Constant<>(val));
   }
 
   @SuppressWarnings("rawtypes")

@@ -880,7 +880,7 @@ public class TestHTree extends AbstractHTreeTestCase {
     final Random rand = new Random(0);
     final List<Pair<byte[], byte[]>> keyValuePairs = new LinkedList<>();
 
-    final Set<Integer> insertedKeys = new HashSet<Integer>();
+    final Set<Integer> insertedKeys = new HashSet<>();
     for (int i = 0; i < 100000; i++) {
 
       final int idx = nextKeyValuePair(keyValuePairs, rand);

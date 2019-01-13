@@ -70,7 +70,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
       super(gasEngine);
 
-      tmp = new ManagedArray<Value>(Value.class, 64);
+      tmp = new ManagedArray<>(Value.class, 64);
     }
   } // class MySTScheduler
 
@@ -85,7 +85,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
     this.nthreads = gasEngine.getNThreads();
 
     this.map =
-        new ConcurrentHashMap<Long, MySTScheduler>(
+        new ConcurrentHashMap<>(
             nthreads /* initialCapacity */, .75f /* loadFactor */, nthreads);
   }
 
@@ -200,7 +200,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
       f2.resetAndEnsureCapacity(nvertices);
       f2.setCompact(false); // NOT COMPACT!
 
-      final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(nsources);
+      final List<Callable<Void>> tasks = new ArrayList<>(nsources);
 
       int i = 0;
       for (MySTScheduler s :

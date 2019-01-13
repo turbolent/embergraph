@@ -99,7 +99,7 @@ public class CounterSetQuery {
 
     if (log.isInfoEnabled()) log.info("Reading queries: " + file);
 
-    final List<URL> tmp = new LinkedList<URL>();
+    final List<URL> tmp = new LinkedList<>();
 
     final BufferedReader r = new BufferedReader(new FileReader(file));
 
@@ -138,7 +138,7 @@ public class CounterSetQuery {
      * note: duplicates are not filtered out but this preserves the
      * evaluation order.
      */
-    final Collection<URL> urls = new LinkedList<URL>();
+    final Collection<URL> urls = new LinkedList<>();
 
     if (file.isDirectory()) {
 
@@ -223,7 +223,7 @@ public class CounterSetQuery {
 
     final int nfiles = counterSetFiles.size();
 
-    final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(nfiles);
+    final List<Callable<Void>> tasks = new ArrayList<>(nfiles);
 
     for (File file : counterSetFiles) {
 
@@ -337,10 +337,10 @@ public class CounterSetQuery {
     File outputDir = new File(".");
 
     // the set of queries to be processed.
-    final List<URLQueryModel> queries = new LinkedList<URLQueryModel>();
+    final List<URLQueryModel> queries = new LinkedList<>();
 
     // the set of counter set XML files to be processed.
-    final List<File> counterSetFiles = new LinkedList<File>();
+    final List<File> counterSetFiles = new LinkedList<>();
 
     for (int i = 0; i < args.length; i++) {
 
@@ -423,7 +423,7 @@ public class CounterSetQuery {
      */
     final Pattern regex;
     {
-      final List<Pattern> tmp = new LinkedList<Pattern>();
+      final List<Pattern> tmp = new LinkedList<>();
 
       for (URLQueryModel model : queries) {
 

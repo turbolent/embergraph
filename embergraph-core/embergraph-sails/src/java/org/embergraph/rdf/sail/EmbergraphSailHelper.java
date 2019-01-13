@@ -317,7 +317,7 @@ public class EmbergraphSailHelper {
     /*
      * Convert the Properties to a Map.
      */
-    final Map<String, Object> map = new HashMap<String, Object>();
+    final Map<String, Object> map = new HashMap<>();
     {
 
       // set the namespace (primary key).
@@ -357,7 +357,7 @@ public class EmbergraphSailHelper {
   protected static void showProperties(final Properties p) {
 
     // sorted collection.
-    final TreeMap<String /* name */, Object /* val */> map = new TreeMap<String, Object>();
+    final TreeMap<String /* name */, Object /* val */> map = new TreeMap<>();
 
     // put into alpha order.
     for (Map.Entry<Object, Object> entry : p.entrySet()) {

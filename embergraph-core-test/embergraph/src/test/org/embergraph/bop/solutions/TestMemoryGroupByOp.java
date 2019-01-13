@@ -164,14 +164,14 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
       final IVariable<IV> S = Var.var("S");
       final IVariable<IV> s = Var.var("s");
 
-      final IConstant<String> s1 = new Constant<String>("s1");
-      final IConstant<String> s2 = new Constant<String>("s2");
+      final IConstant<String> s1 = new Constant<>("s1");
+      final IConstant<String> s2 = new Constant<>("s2");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(1));
+          new Constant<>(new XSDNumericIV<>(1));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(2));
+          new Constant<>(new XSDNumericIV<>(2));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // COUNT(DISTINCT ?v) AS ?S
       final IValueExpression<IV> countDistinctVAsS = new Bind(S, new COUNT(true /* distinct */, v));
@@ -211,8 +211,8 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
        */
       // Note: The aggregates will have gone through type promotion.
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _num1 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(1)));
 
       final IBindingSet[] expected =
           new IBindingSet[] {
@@ -223,10 +223,10 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -234,7 +234,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,

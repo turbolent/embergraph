@@ -48,7 +48,7 @@ public class StaticFrontier2 implements IStaticFrontier {
     /*
      * The managed backing array.
      */
-    backing = new ManagedArray<Value>(Value.class);
+    backing = new ManagedArray<>(Value.class);
 
     /*
      * Initialize with an empty slice. The backing [] will grow as

@@ -70,12 +70,12 @@ public class GroupNodeVarBindingInfo {
     this.requiredBound = node.getRequiredBound(sa);
     this.desiredBound = node.getDesiredBound(sa);
 
-    this.maybeProduced = new HashSet<IVariable<?>>();
+    this.maybeProduced = new HashSet<>();
     if (node instanceof IBindingProducerNode) {
       sa.getMaybeProducedBindings((IBindingProducerNode) node, maybeProduced, true);
     }
 
-    this.definitelyProduced = new HashSet<IVariable<?>>();
+    this.definitelyProduced = new HashSet<>();
     if (node instanceof IBindingProducerNode) {
 
       if (!StaticAnalysis.isMinusOrOptional(node)) {
@@ -134,7 +134,7 @@ public class GroupNodeVarBindingInfo {
    */
   public Set<IVariable<?>> leftToBeBound(Set<IVariable<?>> knownBound) {
 
-    HashSet<IVariable<?>> toBeBound = new HashSet<IVariable<?>>();
+    HashSet<IVariable<?>> toBeBound = new HashSet<>();
     toBeBound.addAll(requiredBound);
     toBeBound.removeAll(knownBound);
 

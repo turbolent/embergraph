@@ -65,7 +65,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
   private boolean hasLon = false;
   private boolean hasTime = false;
   private boolean hasCoordSystem = false;
-  private Map<String, Integer> customFieldsIdxs = new HashMap<String, Integer>();
+  private Map<String, Integer> customFieldsIdxs = new HashMap<>();
 
   /*
    * Constructor, setting up a {@link GeoSpatialDatatypeConfiguration} given a uri and a JSON array
@@ -117,7 +117,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
       }
     }
 
-    fields = new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
+    fields = new ArrayList<>();
 
     /*
      * We expect a JSON array of the following format (example):
@@ -153,8 +153,8 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
     }
 
     // validate that there are no duplicate service mappings used for the fields
-    final Set<ServiceMapping> serviceMappings = new HashSet<ServiceMapping>();
-    final Set<String> customServiceMappings = new HashSet<String>();
+    final Set<ServiceMapping> serviceMappings = new HashSet<>();
+    final Set<String> customServiceMappings = new HashSet<>();
     for (int i = 0; i < fields.size(); i++) {
 
       final GeoSpatialDatatypeFieldConfiguration field = fields.get(i);

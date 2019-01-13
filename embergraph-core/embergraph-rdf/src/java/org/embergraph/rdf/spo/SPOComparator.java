@@ -27,7 +27,7 @@ import java.util.Comparator;
  */
 public class SPOComparator<T extends ISPO> implements Comparator<T> {
 
-  public static final transient Comparator<ISPO> INSTANCE = new SPOComparator<ISPO>();
+  public static final transient Comparator<ISPO> INSTANCE = new SPOComparator<>();
 
   private SPOComparator() {}
 

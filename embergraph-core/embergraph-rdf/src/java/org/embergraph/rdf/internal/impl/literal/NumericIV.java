@@ -47,7 +47,7 @@ public abstract class NumericIV<V extends EmbergraphLiteral, T> extends Abstract
    */
   public static final Set<URI> numericalDatatypes =
       Collections.unmodifiableSet(
-          new HashSet<URI>(
+          new HashSet<>(
               Arrays.asList(
                   // basic numeric data types
                   XSD.INTEGER,

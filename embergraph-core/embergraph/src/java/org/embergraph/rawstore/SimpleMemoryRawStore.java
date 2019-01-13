@@ -89,10 +89,10 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
 
     if (capacity < 0) throw new IllegalArgumentException("capacity is negative");
 
-    records = new ArrayList<byte[]>(capacity);
+    records = new ArrayList<>(capacity);
 
     // estimate hash table capacity to avoid resizing.
-    addrs = new HashMap<Long, Integer>((int) (capacity * 1.25));
+    addrs = new HashMap<>((int) (capacity * 1.25));
   }
 
   @Override

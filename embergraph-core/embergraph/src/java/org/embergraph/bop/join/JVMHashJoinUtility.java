@@ -131,7 +131,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
    * hit counter.
    */
   protected final AtomicReference<JVMHashIndex> rightSolutionsRef =
-      new AtomicReference<JVMHashIndex>();
+      new AtomicReference<>();
 
   /** The #of solutions accepted into the hash index. */
   protected final CAT rightSolutionCount = new CAT();
@@ -290,7 +290,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         new JVMHashIndex(
             keyVars,
             indexSolutionsHavingUnboundJoinVars,
-            new LinkedHashMap<Key, Bucket>(
+            new LinkedHashMap<>(
                 op.getProperty(
                     HashMapAnnotations.INITIAL_CAPACITY,
                     HashMapAnnotations.DEFAULT_INITIAL_CAPACITY),
@@ -798,7 +798,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         // New hash bucket so new DISTINCT set.
         final HashSet<IBindingSet> distinctSet =
             outputDistinctJVs
-                ? new HashSet<IBindingSet>() // TODO Size estimate?
+                ? new HashSet<>() // TODO Size estimate?
                 : null;
 
         for (SolutionHit solutionHit : bucket) {
@@ -921,7 +921,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   static IConstraint[] combineConstraints(
       final IConstraint[] constraints, final IHashJoinUtility[] all) {
 
-    final List<IConstraint> list = new LinkedList<IConstraint>();
+    final List<IConstraint> list = new LinkedList<>();
 
     // For each source.
     for (int i = 0; i < all.length; i++) {

@@ -150,7 +150,7 @@ public class TestTicket693 extends QuadsTestCase {
       }
 
       {
-        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        final Collection<BindingSet> answer = new LinkedList<>();
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/B"))));
 
         final String query = "SELECT * WHERE { ?sub rdfs:subClassOf <http://example.org/A> . } ";
@@ -179,7 +179,7 @@ public class TestTicket693 extends QuadsTestCase {
       }
 
       {
-        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        final Collection<BindingSet> answer = new LinkedList<>();
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/A"))));
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/B"))));
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/C"))));
@@ -212,7 +212,7 @@ public class TestTicket693 extends QuadsTestCase {
       }
 
       {
-        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        final Collection<BindingSet> answer = new LinkedList<>();
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/A"))));
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/B"))));
 
@@ -242,7 +242,7 @@ public class TestTicket693 extends QuadsTestCase {
       }
 
       {
-        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        final Collection<BindingSet> answer = new LinkedList<>();
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/B"))));
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/C"))));
         answer.add(createBindingSet(new BindingImpl("sub", new URIImpl("http://example.org/D"))));

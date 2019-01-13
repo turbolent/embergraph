@@ -1408,7 +1408,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
        * Dump children using pre-order traversal.
        */
 
-      final Set<AbstractPage> dirty = new HashSet<AbstractPage>();
+      final Set<AbstractPage> dirty = new HashSet<>();
 
       for (int i = 0; i < (1 << htree.addressBits); i++) {
 

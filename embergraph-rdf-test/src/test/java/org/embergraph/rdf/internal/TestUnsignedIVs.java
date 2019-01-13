@@ -85,19 +85,19 @@ public class TestUnsignedIVs extends TestCase2 {
      */
 
     final XSDUnsignedByteIV<EmbergraphLiteral> MIN_VALUE =
-        new XSDUnsignedByteIV<EmbergraphLiteral>(Byte.MIN_VALUE);
+        new XSDUnsignedByteIV<>(Byte.MIN_VALUE);
 
     final XSDUnsignedByteIV<EmbergraphLiteral> MINUS_ONE =
-        new XSDUnsignedByteIV<EmbergraphLiteral>((byte) -1);
+        new XSDUnsignedByteIV<>((byte) -1);
 
     final XSDUnsignedByteIV<EmbergraphLiteral> ZERO =
-        new XSDUnsignedByteIV<EmbergraphLiteral>((byte) 0);
+        new XSDUnsignedByteIV<>((byte) 0);
 
     final XSDUnsignedByteIV<EmbergraphLiteral> ONE =
-        new XSDUnsignedByteIV<EmbergraphLiteral>((byte) 1);
+        new XSDUnsignedByteIV<>((byte) 1);
 
     final XSDUnsignedByteIV<EmbergraphLiteral> MAX_VALUE =
-        new XSDUnsignedByteIV<EmbergraphLiteral>(Byte.MAX_VALUE);
+        new XSDUnsignedByteIV<>(Byte.MAX_VALUE);
 
     // Verify IV self-reports as unsigned.
     assertTrue(MIN_VALUE.isUnsignedNumeric());
@@ -157,19 +157,19 @@ public class TestUnsignedIVs extends TestCase2 {
      */
 
     final XSDUnsignedShortIV<EmbergraphLiteral> MIN_VALUE =
-        new XSDUnsignedShortIV<EmbergraphLiteral>(Short.MIN_VALUE);
+        new XSDUnsignedShortIV<>(Short.MIN_VALUE);
 
     final XSDUnsignedShortIV<EmbergraphLiteral> MINUS_ONE =
-        new XSDUnsignedShortIV<EmbergraphLiteral>((short) -1);
+        new XSDUnsignedShortIV<>((short) -1);
 
     final XSDUnsignedShortIV<EmbergraphLiteral> ZERO =
-        new XSDUnsignedShortIV<EmbergraphLiteral>((short) 0);
+        new XSDUnsignedShortIV<>((short) 0);
 
     final XSDUnsignedShortIV<EmbergraphLiteral> ONE =
-        new XSDUnsignedShortIV<EmbergraphLiteral>((short) 1);
+        new XSDUnsignedShortIV<>((short) 1);
 
     final XSDUnsignedShortIV<EmbergraphLiteral> MAX_VALUE =
-        new XSDUnsignedShortIV<EmbergraphLiteral>(Short.MAX_VALUE);
+        new XSDUnsignedShortIV<>(Short.MAX_VALUE);
 
     // Verify IV self-reports as unsigned.
     assertTrue(MIN_VALUE.isUnsignedNumeric());
@@ -222,17 +222,17 @@ public class TestUnsignedIVs extends TestCase2 {
      */
 
     final XSDUnsignedIntIV<EmbergraphLiteral> MIN_VALUE =
-        new XSDUnsignedIntIV<EmbergraphLiteral>(Integer.MIN_VALUE);
+        new XSDUnsignedIntIV<>(Integer.MIN_VALUE);
 
     final XSDUnsignedIntIV<EmbergraphLiteral> MINUS_ONE =
-        new XSDUnsignedIntIV<EmbergraphLiteral>(-1);
+        new XSDUnsignedIntIV<>(-1);
 
-    final XSDUnsignedIntIV<EmbergraphLiteral> ZERO = new XSDUnsignedIntIV<EmbergraphLiteral>(0);
+    final XSDUnsignedIntIV<EmbergraphLiteral> ZERO = new XSDUnsignedIntIV<>(0);
 
-    final XSDUnsignedIntIV<EmbergraphLiteral> ONE = new XSDUnsignedIntIV<EmbergraphLiteral>(1);
+    final XSDUnsignedIntIV<EmbergraphLiteral> ONE = new XSDUnsignedIntIV<>(1);
 
     final XSDUnsignedIntIV<EmbergraphLiteral> MAX_VALUE =
-        new XSDUnsignedIntIV<EmbergraphLiteral>(Integer.MAX_VALUE);
+        new XSDUnsignedIntIV<>(Integer.MAX_VALUE);
 
     // Verify IV self-reports as unsigned.
     assertTrue(MIN_VALUE.isUnsignedNumeric());
@@ -285,17 +285,17 @@ public class TestUnsignedIVs extends TestCase2 {
      */
 
     final XSDUnsignedLongIV<EmbergraphLiteral> MIN_VALUE =
-        new XSDUnsignedLongIV<EmbergraphLiteral>(Long.MIN_VALUE);
+        new XSDUnsignedLongIV<>(Long.MIN_VALUE);
 
     final XSDUnsignedLongIV<EmbergraphLiteral> MINUS_ONE =
-        new XSDUnsignedLongIV<EmbergraphLiteral>(-1L);
+        new XSDUnsignedLongIV<>(-1L);
 
-    final XSDUnsignedLongIV<EmbergraphLiteral> ZERO = new XSDUnsignedLongIV<EmbergraphLiteral>(0L);
+    final XSDUnsignedLongIV<EmbergraphLiteral> ZERO = new XSDUnsignedLongIV<>(0L);
 
-    final XSDUnsignedLongIV<EmbergraphLiteral> ONE = new XSDUnsignedLongIV<EmbergraphLiteral>(1L);
+    final XSDUnsignedLongIV<EmbergraphLiteral> ONE = new XSDUnsignedLongIV<>(1L);
 
     final XSDUnsignedLongIV<EmbergraphLiteral> MAX_VALUE =
-        new XSDUnsignedLongIV<EmbergraphLiteral>(Long.MAX_VALUE);
+        new XSDUnsignedLongIV<>(Long.MAX_VALUE);
 
     // Verify IV self-reports as unsigned.
     assertTrue(MIN_VALUE.isUnsignedNumeric());

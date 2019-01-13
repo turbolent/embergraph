@@ -70,14 +70,14 @@ public class HASendService {
 
   /** The Internet socket address of the receiving service. */
   private final AtomicReference<InetSocketAddress> addrNext =
-      new AtomicReference<InetSocketAddress>();
+      new AtomicReference<>();
 
   /** A single threaded executor on which {@link SendTask}s will be executed. */
   private final AtomicReference<ExecutorService> executorRef =
-      new AtomicReference<ExecutorService>();
+      new AtomicReference<>();
 
   /** The {@link SocketChannel} for communicating with the downstream {@link HAReceiveService}. */
-  private final AtomicReference<SocketChannel> socketChannel = new AtomicReference<SocketChannel>();
+  private final AtomicReference<SocketChannel> socketChannel = new AtomicReference<>();
 
   /*
    * Note: toString() must be thread-safe.

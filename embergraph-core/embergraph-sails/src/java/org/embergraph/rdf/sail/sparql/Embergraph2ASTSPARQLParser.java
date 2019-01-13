@@ -170,7 +170,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
       // Class builds embergraph Update operators from SPARQL UPDATE ops.
       final UpdateExprBuilder updateExprBuilder =
           new UpdateExprBuilder(
-              new EmbergraphASTContext(new LinkedHashMap<Value, EmbergraphValue>()));
+              new EmbergraphASTContext(new LinkedHashMap<>()));
 
       // The sequence of UPDATE operations to be processed.
       final List<ASTUpdateContainer> updateOperations = updateSequence.getUpdateContainers();

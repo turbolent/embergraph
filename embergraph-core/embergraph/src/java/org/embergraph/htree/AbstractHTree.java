@@ -183,9 +183,9 @@ public abstract class AbstractHTree
     {
       counterSet.addCounter(
           "index UUID",
-          new OneShotInstrument<String>(getIndexMetadata().getIndexUUID().toString()));
+          new OneShotInstrument<>(getIndexMetadata().getIndexUUID().toString()));
 
-      counterSet.addCounter("class", new OneShotInstrument<String>(getClass().getName()));
+      counterSet.addCounter("class", new OneShotInstrument<>(getClass().getName()));
     }
 
     /*
@@ -196,11 +196,11 @@ public abstract class AbstractHTree
     {
       final CounterSet tmp = counterSet.makePath(IBTreeCounters.WriteRetentionQueue);
 
-      tmp.addCounter("Capacity", new OneShotInstrument<Integer>(writeRetentionQueue.capacity()));
+      tmp.addCounter("Capacity", new OneShotInstrument<>(writeRetentionQueue.capacity()));
 
-      tmp.addCounter("Size", new OneShotInstrument<Integer>(writeRetentionQueue.size()));
+      tmp.addCounter("Size", new OneShotInstrument<>(writeRetentionQueue.size()));
 
-      tmp.addCounter("Distinct", new OneShotInstrument<Integer>(ndistinctOnWriteRetentionQueue));
+      tmp.addCounter("Distinct", new OneShotInstrument<>(ndistinctOnWriteRetentionQueue));
     }
 
     /*
@@ -211,16 +211,16 @@ public abstract class AbstractHTree
     {
       final CounterSet tmp = counterSet.makePath(IBTreeCounters.Statistics);
 
-      tmp.addCounter("addressBits", new OneShotInstrument<Integer>(addressBits));
+      tmp.addCounter("addressBits", new OneShotInstrument<>(addressBits));
 
       //			tmp.addCounter("height",
       //					new OneShotInstrument<Integer>(getHeight()));
 
-      tmp.addCounter("nodeCount", new OneShotInstrument<Long>(getNodeCount()));
+      tmp.addCounter("nodeCount", new OneShotInstrument<>(getNodeCount()));
 
-      tmp.addCounter("leafCount", new OneShotInstrument<Long>(getLeafCount()));
+      tmp.addCounter("leafCount", new OneShotInstrument<>(getLeafCount()));
 
-      tmp.addCounter("tupleCount", new OneShotInstrument<Long>(getEntryCount()));
+      tmp.addCounter("tupleCount", new OneShotInstrument<>(getEntryCount()));
 
       //			/*
       //			 * Note: The utilization numbers reported here are a bit misleading.
@@ -261,7 +261,7 @@ public abstract class AbstractHTree
 
       final long bytesPerTuple = (long) (entryCount == 0 ? 0d : (bytes / entryCount));
 
-      tmp.addCounter("bytesPerTuple", new OneShotInstrument<Long>(bytesPerTuple));
+      tmp.addCounter("bytesPerTuple", new OneShotInstrument<>(bytesPerTuple));
     }
 
     /*
@@ -1136,10 +1136,10 @@ public abstract class AbstractHTree
        * the shared backing buffer in a timely manner.
        */
 
-      return new HardReferenceQueueWithBatchingUpdates<PO>(
+      return new HardReferenceQueueWithBatchingUpdates<>(
           EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
           16, // concurrencyLevel
-          new HardReferenceQueue<PO>(
+          new HardReferenceQueue<>(
               new DefaultEvictionListener(), writeRetentionQueueCapacity, 0 /* nscan */),
           //                    new DefaultEvictionListener(),
           //                    metadata.getWriteRetentionQueueCapacity(),// shared capacity
@@ -1147,10 +1147,10 @@ public abstract class AbstractHTree
           128, // 64, // thread-local queue capacity @todo config
           64, // 32 // thread-local tryLock size @todo config
           null // batched updates listener.
-          );
+      );
     }
 
-    return new HardReferenceQueue<PO>(
+    return new HardReferenceQueue<>(
         new DefaultEvictionListener(), writeRetentionQueueCapacity, writeRetentionQueueScan);
   }
 
@@ -1634,7 +1634,7 @@ public abstract class AbstractHTree
 
     // Map with one entry per level. Each entry is a dirtyList for that level.
     final Map<Integer /* level */, List<AbstractPage>> dirtyMap =
-        new HashMap<Integer, List<AbstractPage>>();
+        new HashMap<>();
 
     while (itr.hasNext()) {
 
@@ -1670,7 +1670,7 @@ public abstract class AbstractHTree
       if (dirtyList == null) {
 
         // First node or level at this level.
-        dirtyMap.put(level, dirtyList = new LinkedList<AbstractPage>());
+        dirtyMap.put(level, dirtyList = new LinkedList<>());
       }
 
       //          log.error("Adding to dirty list: t="+t.toShortString()+", level="+level+",
@@ -1747,7 +1747,7 @@ public abstract class AbstractHTree
 
       } else {
 
-        final ArrayList<Future<Void>> futureList = new ArrayList<Future<Void>>(dirtyListSize);
+        final ArrayList<Future<Void>> futureList = new ArrayList<>(dirtyListSize);
 
         // Note: Must have the same level of concurrency in
         // NodeSerializer instances.
@@ -1762,7 +1762,7 @@ public abstract class AbstractHTree
             final AbstractPage u = t;
 
             final FutureTask<Void> ft =
-                new FutureTask<Void>(
+                new FutureTask<>(
                     new Runnable() {
 
                       @Override
@@ -2235,11 +2235,11 @@ public abstract class AbstractHTree
        * Note: Used for transient HTrees.
        */
 
-      return new HardReference<AbstractPage>(child);
+      return new HardReference<>(child);
 
     } else {
 
-      return new WeakReference<AbstractPage>(child);
+      return new WeakReference<>(child);
       //        return new SoftReference<AbstractNode>( child ); // causes significant GC
       // "hesitations".
     }

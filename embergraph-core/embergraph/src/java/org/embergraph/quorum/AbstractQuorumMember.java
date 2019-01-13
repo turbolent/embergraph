@@ -220,7 +220,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
 
   /** This is used to dispatch the {@link QuorumStateChangeListener} events. */
   private final CopyOnWriteArraySet<QuorumStateChangeListener> listeners =
-      new CopyOnWriteArraySet<QuorumStateChangeListener>();
+      new CopyOnWriteArraySet<>();
 
   /*
    * Add a delegate listener.

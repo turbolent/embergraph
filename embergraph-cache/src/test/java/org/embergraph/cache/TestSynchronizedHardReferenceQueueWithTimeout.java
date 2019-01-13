@@ -47,7 +47,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
   public void test_ctor() {
 
     final SynchronizedHardReferenceQueueWithTimeout<String> cache =
-        new SynchronizedHardReferenceQueueWithTimeout<String>(
+        new SynchronizedHardReferenceQueueWithTimeout<>(
             100 /* capacity */, 20 /* nscan */, 10000L /* timeout */);
 
     //        assertEquals("listener", listener, cache.getListener());
@@ -104,7 +104,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
   public void test_append_null() {
 
     final SynchronizedHardReferenceQueueWithTimeout<String> cache =
-        new SynchronizedHardReferenceQueueWithTimeout<String>(
+        new SynchronizedHardReferenceQueueWithTimeout<>(
             100 /* capacity */, 2 /* nscan */, 0L /* timeout */);
 
     try {
@@ -152,10 +152,10 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
     final int nscan = 0;
     final long timeoutNanos = 0L;
 
-    final MyListener<String, IRef<String>> listener = new MyListener<String, IRef<String>>();
+    final MyListener<String, IRef<String>> listener = new MyListener<>();
 
     final SynchronizedHardReferenceQueueWithTimeout<String> cache =
-        new SynchronizedHardReferenceQueueWithTimeout<String>(
+        new SynchronizedHardReferenceQueueWithTimeout<>(
             listener, capacity, nscan, timeoutNanos);
 
     final HardReferenceQueue<IRef<String>> innerQueue = cache.getQueue();
@@ -331,10 +331,10 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
     final int nscan = 2;
     final long timeoutNanos = 0L;
 
-    final MyListener<String, IRef<String>> listener = new MyListener<String, IRef<String>>();
+    final MyListener<String, IRef<String>> listener = new MyListener<>();
 
     final SynchronizedHardReferenceQueueWithTimeout<String> cache =
-        new SynchronizedHardReferenceQueueWithTimeout<String>(
+        new SynchronizedHardReferenceQueueWithTimeout<>(
             listener, capacity, nscan, timeoutNanos);
 
     final HardReferenceQueue<IRef<String>> innerQueue = cache.getQueue();
@@ -521,7 +521,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
       setExpectedRef(expectedRefs.pop());
     }
 
-    private Stack<G> expectedRefs = new Stack<G>();
+    private Stack<G> expectedRefs = new Stack<>();
 
     /*
      * Set the expected reference for the next eviction notice. The listener will thrown an

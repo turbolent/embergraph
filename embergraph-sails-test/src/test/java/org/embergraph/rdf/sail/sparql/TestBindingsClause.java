@@ -103,7 +103,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.org/book/");
         expected.setPrefixDecls(prefixDecls);
       }
@@ -119,7 +119,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(title)),
+              new ConstantNode(new Constant<>(title)),
               new VarNode("title"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -127,15 +127,15 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(price)),
+              new ConstantNode(new Constant<>(price)),
               new VarNode("price"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(Var.var("book"));
 
-      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindings = new LinkedList<>();
       {
         final IBindingSet bset = new ListBindingSet();
         bset.set(Var.var("book"), new Constant<IV>(book1));
@@ -191,7 +191,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.org/book/");
         expected.setPrefixDecls(prefixDecls);
       }
@@ -207,7 +207,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(title)),
+              new ConstantNode(new Constant<>(title)),
               new VarNode("title"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -215,15 +215,15 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(price)),
+              new ConstantNode(new Constant<>(price)),
               new VarNode("price"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(Var.var("book"));
 
-      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindings = new LinkedList<>();
       {
         final IBindingSet bset = new ListBindingSet();
         //                bset.set(Var.var("book"), new Constant<IV>(book1));
@@ -282,7 +282,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.org/book/");
         expected.setPrefixDecls(prefixDecls);
       }
@@ -298,7 +298,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(title)),
+              new ConstantNode(new Constant<>(title)),
               new VarNode("title"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -306,15 +306,15 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(price)),
+              new ConstantNode(new Constant<>(price)),
               new VarNode("price"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(Var.var("book"));
 
-      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindings = new LinkedList<>();
       {
         final IBindingSet bset = new ListBindingSet();
         bset.set(Var.var("book"), new Constant<IV>(book1));
@@ -379,7 +379,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.org/book/");
         expected.setPrefixDecls(prefixDecls);
       }
@@ -395,7 +395,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(title)),
+              new ConstantNode(new Constant<>(title)),
               new VarNode("title"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -403,16 +403,16 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(price)),
+              new ConstantNode(new Constant<>(price)),
               new VarNode("price"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(Var.var("book"));
       declaredVars.add(Var.var("title"));
 
-      final List<IBindingSet> bindings = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindings = new LinkedList<>();
       {
         final IBindingSet bset = new ListBindingSet();
         bset.set(Var.var("book"), new Constant<IV>(book1));
@@ -473,7 +473,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("", "http://example.org/book/");
         expected.setPrefixDecls(prefixDecls);
       }
@@ -489,7 +489,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(title)),
+              new ConstantNode(new Constant<>(title)),
               new VarNode("title"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -497,7 +497,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("book"),
-              new ConstantNode(new Constant<IV>(price)),
+              new ConstantNode(new Constant<>(price)),
               new VarNode("price"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));

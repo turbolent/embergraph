@@ -117,7 +117,7 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
    */
   protected LinkedHashSet<String> getDistinctVars(final BindingSet[] bindingSets) {
 
-    final LinkedHashSet<String> vars = new LinkedHashSet<String>();
+    final LinkedHashSet<String> vars = new LinkedHashSet<>();
 
     for (BindingSet bindingSet : bindingSets) {
 
@@ -319,12 +319,12 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
       for (Binding b : bindingSet) {
         final Value v = b.getValue();
         if (!(v instanceof BNode)) continue;
-        if (bnodes == null) bnodes = new LinkedHashMap<BNode, Set<String>>();
+        if (bnodes == null) bnodes = new LinkedHashMap<>();
         final BNode bnd = (BNode) v;
         // Set of correlated variables.
         Set<String> cvars = bnodes.get(bnd);
         if (cvars == null) {
-          bnodes.put(bnd, cvars = new LinkedHashSet<String>());
+          bnodes.put(bnd, cvars = new LinkedHashSet<>());
         } else {
           /*
            * Correlated. This blank node is already the binding

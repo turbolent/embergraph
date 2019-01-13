@@ -78,7 +78,7 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IConstant<?> val = new Constant(new XSDNumericIV<EmbergraphLiteral>(1));
+    final IConstant<?> val = new Constant(new XSDNumericIV<>(1));
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val);
@@ -113,7 +113,7 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IConstant<?> val = new Constant(new XSDNumericIV<EmbergraphLiteral>(1));
+    final IConstant<?> val = new Constant(new XSDNumericIV<>(1));
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val);
@@ -149,9 +149,9 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IConstant<?> val1 = new Constant(new XSDNumericIV<EmbergraphLiteral>(1));
+    final IConstant<?> val1 = new Constant(new XSDNumericIV<>(1));
 
-    final IConstant<?> val2 = new Constant(new XSDNumericIV<EmbergraphLiteral>(2));
+    final IConstant<?> val2 = new Constant(new XSDNumericIV<>(2));
 
     final ListBindingSet left = new ListBindingSet();
     left.set(x, val1);
@@ -192,9 +192,9 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
+    final IV iv1 = new XSDNumericIV<>(1);
+    final IV iv2 = new XSDNumericIV<>(1);
+    final IV iv3 = new XSDNumericIV<>(1);
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
@@ -234,9 +234,9 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
+    final IV iv1 = new XSDNumericIV<>(1);
+    final IV iv2 = new XSDNumericIV<>(1);
+    final IV iv3 = new XSDNumericIV<>(1);
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
@@ -276,9 +276,9 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> x = Var.var("x");
 
-    final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
-    final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
+    final IV iv1 = new XSDNumericIV<>(1);
+    final IV iv2 = new XSDNumericIV<>(1);
+    final IV iv3 = new XSDNumericIV<>(1);
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);

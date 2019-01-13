@@ -187,10 +187,10 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     final ExecutorService execService =
         Executors.newFixedThreadPool(nthreads, DaemonThreadFactory.defaultThreadFactory());
 
-    final Collection<Callable<Object>> tasks = new ArrayList<Callable<Object>>(ntasks);
+    final Collection<Callable<Object>> tasks = new ArrayList<>(ntasks);
 
     LockManager<String> db =
-        new LockManager<String>(
+        new LockManager<>(
             nthreads /* multi-programming level */, predeclareLocks, sortLockRequests);
 
     // distinct resource names. references are reused by reach task.
@@ -251,11 +251,11 @@ public class TestLockManager extends TestCase implements IComparisonTest {
 
       if (r.nextDouble() < percentTaskDeath) {
 
-        task = new LockManagerTask<String, Object>(db, resource, new DeathResourceTask());
+        task = new LockManagerTask<>(db, resource, new DeathResourceTask());
 
       } else {
 
-        task = new LockManagerTask<String, Object>(db, resource, new Wait10ResourceTask());
+        task = new LockManagerTask<>(db, resource, new Wait10ResourceTask());
       }
 
       task.setMaxLockTries(maxLockTries);
@@ -742,7 +742,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
       // this is the test to be run.
       String className = TestLockManager.class.getName();
 
-      Map<String, String> defaultProperties = new HashMap<String, String>();
+      Map<String, String> defaultProperties = new HashMap<>();
 
       /*
        * Set defaults for each condition.
@@ -759,7 +759,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
       defaultProperties.put(TestOptions.SORT_LOCK_REQUESTS, "false");
       defaultProperties.put(TestOptions.LOCK_TIMEOUT, "1000"); // ms
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       // low concurrency.
       conditions.add(getCondition(defaultProperties, new NV[] {new NV(TestOptions.NTHREADS, "2")}));

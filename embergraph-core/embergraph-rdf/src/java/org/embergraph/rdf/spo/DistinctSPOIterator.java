@@ -149,7 +149,7 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
        * reduce the object allocation.
        */
 
-      hashSet = new LinkedHashSet<ISPO>();
+      hashSet = new LinkedHashSet<>();
 
     } else if (btreeSet == null && ndistinct >= MAX_HASH_SET_CAPACITY) {
 

@@ -33,7 +33,7 @@ public class ImmutableExternalPrefixMapTest extends TestCase {
       }
 
     // Similar tests, using all prefixes of all strings in WORDS.
-    Collection<String> p = new ObjectRBTreeSet<String>();
+    Collection<String> p = new ObjectRBTreeSet<>();
     for (int i = 0; i < TernaryIntervalSearchTreeTest.WORDS.length; i++)
       for (int j = 0; j < TernaryIntervalSearchTreeTest.WORDS[i].length(); j++)
         p.add(TernaryIntervalSearchTreeTest.WORDS[i].substring(0, j + 1));

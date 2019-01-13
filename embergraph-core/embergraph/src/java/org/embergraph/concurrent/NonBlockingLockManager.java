@@ -109,9 +109,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   private final ConcurrentWeakValueCacheWithTimeout<
           R, ResourceQueue<LockFutureTask<? extends Object>>>
       resourceQueues =
-          new ConcurrentWeakValueCacheWithTimeout<
-              R, ResourceQueue<LockFutureTask<? extends Object>>>(
-              1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
+      new ConcurrentWeakValueCacheWithTimeout<>(
+          1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
 
   /*
    * Release all locks held by the {@link LockFutureTask} currently holding a lock on the specified
@@ -423,7 +422,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
               final Iterator<
                       Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<? extends Object>>>>>
                   itr = resourceQueues.entryIterator();
-              final LinkedList<ResourceQueueSize> list = new LinkedList<ResourceQueueSize>();
+              final LinkedList<ResourceQueueSize> list = new LinkedList<>();
               while (itr.hasNext()) {
                 final Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<? extends Object>>>>
                     entry = itr.next();
@@ -714,7 +713,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      * NonBlockingLockManager#resourceQueues} collection by the garbage collector.
      */
     private final LinkedHashSet<ResourceQueue<LockFutureTask<? extends Object>>> lockedResources =
-        new LinkedHashSet<ResourceQueue<LockFutureTask<? extends Object>>>();
+        new LinkedHashSet<>();
 
     /** True if the {@link #lockTimeout} has expired when measured against <i>now</i>. */
     protected boolean isTimeout() {
@@ -930,7 +929,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(resource);
 
     // not found, so create a new ResourceQueue for that resource.
-    resourceQueue = new ResourceQueue<LockFutureTask<? extends Object>>(resource);
+    resourceQueue = new ResourceQueue<>(resource);
 
     // put if absent.
     final ResourceQueue<LockFutureTask<? extends Object>> oldval =
@@ -1023,7 +1022,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
         case Running:
           {
             final LockFutureTask<T> future =
-                new LockFutureTask<T>(a, task, lockTimeout, maxLockTries);
+                new LockFutureTask<>(a, task, lockTimeout, maxLockTries);
 
             try {
 
@@ -1082,14 +1081,14 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * lock request.
    */
   private final BlockingQueue<LockFutureTask<? extends Object>> acceptedTasks =
-      new LinkedBlockingQueue<LockFutureTask<? extends Object>>();
+      new LinkedBlockingQueue<>();
 
   /*
    * Tasks whose lock requests are in the appropriate {@link ResourceQueue}s but which are not yet
    * executing.
    */
   private final BlockingQueue<LockFutureTask<? extends Object>> waitingTasks =
-      new LinkedBlockingQueue<LockFutureTask<? extends Object>>();
+      new LinkedBlockingQueue<>();
 
   /*
    * {@link Runnable} drains the {@link #acceptedTasks} queue and manages state changes in the
@@ -1700,7 +1699,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        * Collect the set of tasks on which this task must wait.
        */
       final LinkedHashSet<LockFutureTask<? extends Object>> predecessors =
-          new LinkedHashSet<LockFutureTask<? extends Object>>();
+          new LinkedHashSet<>();
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
@@ -1936,7 +1935,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      * The queue of transactions seeking access to the {@link #resource}. The object at the head of
      * the queue is the transaction with the lock on the resource.
      */
-    final BlockingQueue<T /* tx */> queue = new LinkedBlockingQueue<T>(/* unbounded */ );
+    final BlockingQueue<T /* tx */> queue = new LinkedBlockingQueue<>(/* unbounded */);
 
     /** The resource whose locks are administeded by this object. */
     public R getResource() {

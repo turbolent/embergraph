@@ -49,6 +49,6 @@ public class QueueStats {
 
   public QueueStats() {
 
-    this.shardSet = new HashSet<Integer>();
+    this.shardSet = new HashSet<>();
   }
 }

@@ -82,7 +82,7 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
   public IV<V, String> clone(final boolean clearCache) {
 
     final FullyInlineTypedLiteralIV<V> tmp =
-        new FullyInlineTypedLiteralIV<V>(label, language, datatype);
+        new FullyInlineTypedLiteralIV<>(label, language, datatype);
 
     // propagate transient state if available.
     tmp.byteLength = byteLength;

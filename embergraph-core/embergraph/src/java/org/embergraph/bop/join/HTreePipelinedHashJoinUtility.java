@@ -86,10 +86,10 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
   protected final CAT nResultsFromSubqueries = new CAT();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#distinctProjectionBuffer} */
-  private final Set<IBindingSet> distinctProjectionBuffer = new HashSet<IBindingSet>();
+  private final Set<IBindingSet> distinctProjectionBuffer = new HashSet<>();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#incomingBindingsBuffer} */
-  private final List<IBindingSet> incomingBindingsBuffer = new LinkedList<IBindingSet>();
+  private final List<IBindingSet> incomingBindingsBuffer = new LinkedList<>();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#rightSolutionsWithoutSubqueryResult} */
   private HTree rightSolutionsWithoutSubqueryResult;
@@ -169,7 +169,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
     long naccepted = 0;
 
     // 1. Compute those distinct binding sets in the chunk not seen before
-    final List<IBindingSet> dontRequireSubqueryEvaluation = new LinkedList<IBindingSet>();
+    final List<IBindingSet> dontRequireSubqueryEvaluation = new LinkedList<>();
 
     // first, divide the mappings into a set of mappings that can be joined immediately
     // (i.e., those for which the subquery has previously been calculated) and those
@@ -215,7 +215,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
           // joined against rightSolutions or the rightSolutionsWithoutSubqueryResult, used to
           // avoid redundant joins against the indices; the local cache makes particular sense
           // because we expect to co-occur incoming bindings with the same distinct projection
-          final Map<IBindingSet, Boolean> joinsCache = new HashMap<IBindingSet, Boolean>();
+          final Map<IBindingSet, Boolean> joinsCache = new HashMap<>();
 
           for (int i = 0; i < n; i++) {
 
@@ -642,14 +642,14 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
          * found. These solutions will be post-processed, to cover non-"Normal" join semantics such
          * as OPTIONAL, NOT EXISTS, and negative EXISTS solutions.
          */
-        final Set<IBindingSet> leftSolutionsWithoutMatch = new LinkedHashSet<IBindingSet>();
+        final Set<IBindingSet> leftSolutionsWithoutMatch = new LinkedHashSet<>();
 
         /*
          * The positive EXISTS solutions. We can't output those directly, since this might result in
          * wrong multiplicities (as we iterate over left multiple times here. Therefore, we delay
          * outputting them by storing them in a hash set and output them in the end.
          */
-        final Set<IBindingSet> existsSolutions = new LinkedHashSet<IBindingSet>();
+        final Set<IBindingSet> existsSolutions = new LinkedHashSet<>();
 
         if (!titr.hasNext()) {
           for (int i = fromIndex; i < toIndex; i++) {

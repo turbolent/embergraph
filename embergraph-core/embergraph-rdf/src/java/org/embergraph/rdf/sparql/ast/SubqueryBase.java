@@ -110,11 +110,11 @@ public abstract class SubqueryBase extends QueryBase implements IGroupMemberNode
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return getProjectedVars(new HashSet<IVariable<?>>());
+    return getProjectedVars(new HashSet<>());
   }
 }

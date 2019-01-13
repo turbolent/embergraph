@@ -159,7 +159,7 @@ public class HashIndexOp extends HashIndexOpBase {
       final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       state.outputSolutions(unsyncBuffer);
 

@@ -51,9 +51,9 @@ public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
     final IV<?, ?>[] e = {
       //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
       //                new VocabURIByteIV<EmbergraphURI>((byte) -1),
-      new VocabURIByteIV<EmbergraphURI>((byte) 0),
-      new VocabURIByteIV<EmbergraphURI>(KeyBuilder.encodeByte(14)),
-      new VocabURIByteIV<EmbergraphURI>((byte) 14),
+        new VocabURIByteIV<>((byte) 0),
+        new VocabURIByteIV<>(KeyBuilder.encodeByte(14)),
+        new VocabURIByteIV<>((byte) 14),
       //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
     };
 

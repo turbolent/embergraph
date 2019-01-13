@@ -43,15 +43,15 @@ public class TestConstant extends TestCase2 {
 
   public void test_equals() {
 
-    Constant c = new Constant<Integer>(1);
+    Constant c = new Constant<>(1);
 
-    Constant d = new Constant<Integer>(1);
+    Constant d = new Constant<>(1);
 
-    Constant e = new Constant<Integer>(3);
+    Constant e = new Constant<>(3);
 
-    Constant f = new Constant<Long>(1L);
+    Constant f = new Constant<>(1L);
 
-    Constant g = new Constant<Long>(4L);
+    Constant g = new Constant<>(4L);
 
     // same reference.
     assertTrue(c.equals(c));

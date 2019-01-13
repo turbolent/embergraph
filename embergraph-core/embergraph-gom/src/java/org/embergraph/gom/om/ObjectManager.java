@@ -272,7 +272,7 @@ public class ObjectManager extends ObjectMgrModel {
 
       if (g != null) {
 
-        initGPO((GPO) gpo, new CloseableIteratorWrapper<Statement>(g.iterator()));
+        initGPO((GPO) gpo, new CloseableIteratorWrapper<>(g.iterator()));
 
         return;
       }

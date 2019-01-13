@@ -1050,7 +1050,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
         vars.addAll(
             getDefinitelyProducedBindings(
                 (IBindingProducerNode) child,
-                new LinkedHashSet<IVariable<?>>(),
+                new LinkedHashSet<>(),
                 true /* recursive */));
 
       } else if (child instanceof GraphPatternGroup<?>) {
@@ -1169,13 +1169,13 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     /*
      * Collect all definitely produced bindings from each of the children.
      */
-    final Set<IVariable<?>> all = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> all = new LinkedHashSet<>();
 
-    final List<Set<IVariable<?>>> perChildSets = new LinkedList<Set<IVariable<?>>>();
+    final List<Set<IVariable<?>>> perChildSets = new LinkedList<>();
 
     for (JoinGroupNode child : node) {
 
-      final Set<IVariable<?>> childSet = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> childSet = new LinkedHashSet<>();
 
       perChildSets.add(childSet);
 
@@ -1247,11 +1247,11 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     if (projection == null) {
 
       // If there is no projection then there is nothing to report.
-      return new LinkedHashSet<IVariable<?>>();
+      return new LinkedHashSet<>();
     }
 
     // The set of definitely bound variables in the query.
-    final Set<IVariable<?>> definitelyBound = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> definitelyBound = new LinkedHashSet<>();
 
     @SuppressWarnings("unchecked")
     final GraphPatternGroup<IGroupMemberNode> whereClause = queryBase.getWhereClause();
@@ -1305,7 +1305,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
       /*
        * The set of projected variables which are definitely bound.
        */
-      final Set<IVariable<?>> tmp = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> tmp = new LinkedHashSet<>();
 
       for (AssignmentNode bind : projection) {
 
@@ -1377,7 +1377,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
            * expression.
            */
           final Set<IVariable<?>> usedVars =
-              getSpannedVariables(bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
+              getSpannedVariables(bind.getValueExpression(), new LinkedHashSet<>());
 
           usedVars.removeAll(definitelyBound);
 
@@ -1420,7 +1420,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   // MAYBE : QueryBase
   public Set<IVariable<?>> getMaybeProducedBindings(final QueryBase node) {
 
-    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new LinkedHashSet<>();
 
     final ProjectionNode projection = node.getProjection();
 
@@ -1443,7 +1443,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   // MUST : ServiceNode
   public Set<IVariable<?>> getDefinitelyProducedBindings(final ServiceNode node) {
 
-    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new LinkedHashSet<>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern = node.getGraphPattern();
 
@@ -1463,7 +1463,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   // MAY : ServiceNode
   public Set<IVariable<?>> getMaybeProducedBindings(final ServiceNode node) {
 
-    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new LinkedHashSet<>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern = node.getGraphPattern();
 
@@ -1499,7 +1499,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * Get the variables known to be bound starting out.
      */
     final Set<IVariable<?>> knownBound =
-        getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
     /*
      * Get the filters that are bound by this set of known bound variables.
@@ -1523,7 +1523,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * Get the variables known to be bound starting out.
      */
     final Set<IVariable<?>> knownBound =
-        getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
     /*
      * Add all the "must" bound variables for this group.
@@ -1574,7 +1574,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * Get the variables known to be bound starting out.
      */
     final Set<IVariable<?>> knownBound =
-        getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
     /*
      * Add all the "must" bound variables for this group.
@@ -1635,7 +1635,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * Get the variables known to be bound starting out.
      */
     final Set<IVariable<?>> maybeBound =
-        getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
     /*
      * Add all "must" / "may" bound variables for this group (recursively).
@@ -1658,7 +1658,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * as easily.
      */
 
-    final Set<FilterNode> isBoundFilters = new LinkedHashSet<FilterNode>();
+    final Set<FilterNode> isBoundFilters = new LinkedHashSet<>();
 
     for (FilterNode filter : maybeFilters) {
 
@@ -1686,7 +1686,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   private final List<FilterNode> getBoundFilters(
       final JoinGroupNode group, final Set<IVariable<?>> knownBound) {
 
-    final List<FilterNode> filters = new LinkedList<FilterNode>();
+    final List<FilterNode> filters = new LinkedList<>();
 
     for (IQueryNode node : group) {
 
@@ -1723,7 +1723,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   @SuppressWarnings("rawtypes")
   public static boolean requiresMaterialization(final IConstraint c) {
 
-    return StaticAnalysis.gatherVarsToMaterialize(c, new LinkedHashSet<IVariable<IV>>())
+    return StaticAnalysis.gatherVarsToMaterialize(c, new LinkedHashSet<>())
         != Requirement.NEVER;
   }
 
@@ -1830,7 +1830,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
     final int arity = c.arity();
 
-    final Set<IVariable<IV>> terms = new LinkedHashSet<IVariable<IV>>(arity);
+    final Set<IVariable<IV>> terms = new LinkedHashSet<>(arity);
 
     for (int i = 0; i < arity; i++) {
 
@@ -1908,7 +1908,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * in which the subquery appears.
      */
     final Set<IVariable<?>> incomingBindings =
-        getDefinitelyIncomingBindings(theNode, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(theNode, new LinkedHashSet<>());
 
     if (log.isInfoEnabled()) {
       log.info(incomingBindings);
@@ -1955,7 +1955,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * in which the SERVICE appears.
      */
     final Set<IVariable<?>> incomingBindings =
-        getDefinitelyIncomingBindings(serviceNode, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(serviceNode, new LinkedHashSet<>());
 
     /*
      * This is only those variables which are bound on entry into the group
@@ -1987,14 +1987,14 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * Note: Collection is not modifyable, so we copy it.
      */
     final Set<IVariable<?>> boundByBindingsClause =
-        new LinkedHashSet<IVariable<?>>(stats.getAlwaysBound());
+        new LinkedHashSet<>(stats.getAlwaysBound());
 
     /*
      * The variables which are definitely bound on entry to the join group
      * in which the VALUES clause appears.
      */
     final Set<IVariable<?>> incomingBindings =
-        getDefinitelyIncomingBindings(bc, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(bc, new LinkedHashSet<>());
 
     /*
      * This is only those variables which are bound on entry into the group
@@ -2037,7 +2037,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * order to make changes to that collection below.
      */
     final Set<IVariable<?>> boundInSolutionSet =
-        new LinkedHashSet<IVariable<?>>(stats.getAlwaysBound());
+        new LinkedHashSet<>(stats.getAlwaysBound());
 
     /*
      * The variables which are definitely bound on entry to the INCLUDE
@@ -2045,7 +2045,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * it appears in the join order of the query.
      */
     final Set<IVariable<?>> incomingBindings =
-        getDefinitelyIncomingBindings(nsi, new LinkedHashSet<IVariable<?>>());
+        getDefinitelyIncomingBindings(nsi, new LinkedHashSet<>());
 
     /*
      * This is only those variables which are bound on entry into the
@@ -2149,7 +2149,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
     // All variables which are used within the WHERE clause.
     final Set<IVariable<?>> groupVars =
-        getSpannedVariables(groupToLift, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(groupToLift, new LinkedHashSet<>());
 
     /*
      * Figure out what we need to project INTO the group.
@@ -2157,7 +2157,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
     // All variables which might be incoming bound into the proxy node.
     final Set<IVariable<?>> beforeVars =
-        getMaybeIncomingBindings(proxy, new LinkedHashSet<IVariable<?>>());
+        getMaybeIncomingBindings(proxy, new LinkedHashSet<>());
 
     // Add in anything which is known to be bound outside of the query.
     beforeVars.addAll(exogenousVars);
@@ -2170,7 +2170,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      */
 
     // All variables used after the proxy node in its's parent join group.
-    final Set<IVariable<?>> afterVars = getAfterVars(proxy, new LinkedHashSet<IVariable<?>>());
+    final Set<IVariable<?>> afterVars = getAfterVars(proxy, new LinkedHashSet<>());
 
     // Gather the variables used by the SELECT EXPRESSIONS which are
     // projected out of the query in which this group appears.
@@ -2316,7 +2316,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
    */
   @SuppressWarnings("rawtypes")
   public Set<IVariable<?>> getVarsInBindingSet(final List<IBindingSet> bss) {
-    Set<IVariable<?>> bssVars = new HashSet<IVariable<?>>();
+    Set<IVariable<?>> bssVars = new HashSet<>();
     for (int i = 0; i < bss.size(); i++) {
 
       final IBindingSet bs = bss.get(i);
@@ -2592,11 +2592,11 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
        * (thus not changing the tree).
        */
       final List<IValueExpressionNode> leftConjuncts =
-          extractToplevelConjuncts(left, new ArrayList<IValueExpressionNode>());
+          extractToplevelConjuncts(left, new ArrayList<>());
       final List<IValueExpressionNode> rightConjuncts =
-          extractToplevelConjuncts(right, new ArrayList<IValueExpressionNode>());
+          extractToplevelConjuncts(right, new ArrayList<>());
 
-      final List<IValueExpressionNode> newConjuncts = new ArrayList<IValueExpressionNode>();
+      final List<IValueExpressionNode> newConjuncts = new ArrayList<>();
       for (IValueExpressionNode leftConjunct : leftConjuncts) {
         for (IValueExpressionNode rightConjunct : rightConjuncts) {
 

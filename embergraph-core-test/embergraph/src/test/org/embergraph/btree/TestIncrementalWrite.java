@@ -122,7 +122,7 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
 
     protected HardReferenceQueue<PO> newWriteRetentionQueue(final boolean readOnly) {
 
-      return new MyHardReferenceQueue<PO>(
+      return new MyHardReferenceQueue<>(
           new DefaultEvictionListener(), getQueueCapacity(), getQueueScan());
     }
   }

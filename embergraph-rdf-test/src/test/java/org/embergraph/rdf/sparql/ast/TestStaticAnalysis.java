@@ -97,7 +97,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
     expected.add(Var.var("x"));
 
@@ -106,7 +106,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertEquals(
         expected,
         sa.getDefinitelyProducedBindings(
-            queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
   }
 
   /*
@@ -130,21 +130,21 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
     expectedProjected.add(Var.var("x"));
     expectedProjected.add(Var.var("y"));
 
     assertEquals(expectedProjected, sa.getDefinitelyProducedBindings(queryRoot));
 
-    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
     expectedWhereClause.add(Var.var("x"));
 
     assertEquals(
         expectedWhereClause,
         sa.getDefinitelyProducedBindings(
-            queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
   }
 
   /*
@@ -176,21 +176,21 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
     expectedProjected.add(Var.var("x"));
     expectedProjected.add(Var.var("y"));
 
     assertEquals(expectedProjected, sa.getDefinitelyProducedBindings(queryRoot));
 
-    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
     expectedWhereClause.add(Var.var("x"));
 
     assertEquals(
         expectedWhereClause,
         sa.getDefinitelyProducedBindings(
-            queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
   }
 
   /*
@@ -222,14 +222,14 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
     expectedProjected.add(Var.var("x"));
     expectedProjected.add(Var.var("y"));
 
     assertEquals(expectedProjected, sa.getDefinitelyProducedBindings(queryRoot));
 
-    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
     expectedWhereClause.add(Var.var("x"));
     expectedWhereClause.add(Var.var("p"));
@@ -238,7 +238,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertEquals(
         expectedWhereClause,
         sa.getDefinitelyProducedBindings(
-            queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
   }
 
   /*
@@ -267,7 +267,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
     expectedProjected.add(Var.var("x"));
     expectedProjected.add(Var.var("y"));
@@ -276,7 +276,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // The spanned variables includes the SERVICE URI (if it is a variable).
     {
-      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
       expectedWhereClause.add(Var.var("uri"));
       expectedWhereClause.add(Var.var("x"));
@@ -284,13 +284,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
       assertEquals(
           expectedWhereClause,
-          sa.getSpannedVariables(queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>()));
+          sa.getSpannedVariables(queryRoot.getWhereClause(), new LinkedHashSet<>()));
     }
 
     // The definitely bound variables does NOT include the SERVICE URI. When
     // that is a variable it needs to become bound through other means.
     {
-      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
       expectedWhereClause.add(Var.var("x"));
       expectedWhereClause.add(Var.var("z"));
@@ -298,7 +298,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedWhereClause,
           sa.getDefinitelyProducedBindings(
-              queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -334,7 +334,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // variables which must be bound in the top-level query's projection.
     {
-      final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
       expectedProjected.add(Var.var("x"));
       expectedProjected.add(Var.var("o"));
@@ -344,7 +344,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // variables which must be bound in the named subquery's projection.
     {
-      final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
       expectedProjected.add(Var.var("x"));
 
@@ -356,7 +356,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // variables which must be bound in the main query's where clause.
     {
-      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedWhereClause = new LinkedHashSet<>();
 
       expectedWhereClause.add(Var.var("x"));
       expectedWhereClause.add(Var.var("o"));
@@ -364,12 +364,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedWhereClause,
           sa.getDefinitelyProducedBindings(
-              queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              queryRoot.getWhereClause(), new LinkedHashSet<>(), true /* recursive */));
     }
 
     // the join variables as reported by static analysis.
     {
-      final Set<IVariable<?>> expectedJoinVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedJoinVars = new LinkedHashSet<>();
       expectedJoinVars.add(Var.var("x"));
 
       final NamedSubqueryRoot namedSubquery =
@@ -379,7 +379,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
           BOpUtility.visitAll(queryRoot, NamedSubqueryInclude.class).next();
 
       final Set<IVariable<?>> vars =
-          sa.getJoinVars(namedSubquery, anInclude, new LinkedHashSet<IVariable<?>>());
+          sa.getJoinVars(namedSubquery, anInclude, new LinkedHashSet<>());
 
       assertEquals(expectedJoinVars, vars);
     }
@@ -419,18 +419,18 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertEquals(
         expected,
         sa.getDefinitelyProducedBindings(
-            whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            whereClause, new LinkedHashSet<>(), true /* recursive */));
 
     // Test "maybe" bound bindings for the where clause.
     assertEquals(
         expected,
         sa.getMaybeProducedBindings(
-            whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+            whereClause, new LinkedHashSet<>(), true /* recursive */));
 
     // Test "incoming" bindings for the where clause.
     assertEquals(
         EMPTY_SET,
-        sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+        sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
   }
 
   /*
@@ -483,19 +483,19 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // Test "incoming" bindings for the where clause.
       assertEquals(
           EMPTY_SET,
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       // Test "must" bound bindings for the where clause.
       assertEquals(
           expected,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings for the where clause.
       assertEquals(
           expected,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // FILTER's group clause.
@@ -505,19 +505,19 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // Test "incoming" bindings.
       assertEquals(
           asSet(new String[] {"v"}),
-          sa.getDefinitelyIncomingBindings(filterClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(filterClause, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           EMPTY_SET,
           sa.getDefinitelyProducedBindings(
-              filterClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              filterClause, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           EMPTY_SET,
           sa.getMaybeProducedBindings(
-              filterClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              filterClause, new LinkedHashSet<>(), true /* recursive */));
 
       // The FILTER node itself.
       final FilterNode filter = BOpUtility.visitAll(queryRoot, FilterNode.class).next();
@@ -637,31 +637,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
       // Test "incoming" bindings.
       assertEquals(
-          EMPTY_SET, sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          EMPTY_SET, sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"v"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"v", "w"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"v"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"v", "w", "v2"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // Nested group clause {  :x :q ?w  }
@@ -672,67 +672,67 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // Test "incoming" bindings.
       assertEquals(
           asSet(new String[] {"v"}),
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"w"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"w"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"w"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"w", "v2"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // Optional group clause { :x :p ?v2 FILTER(?v = 1)  }
     {
       final JoinGroupNode group = (JoinGroupNode) queryRoot.getWhereClause().get(1).get(1);
 
-      sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+      sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
       // Test "incoming" bindings.
       assertEquals(
           asSet(new String[] {"v", "w"}),
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"v2"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"v2"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"v2"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"v2"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // The FILTER node itself.
       final FilterNode filter = BOpUtility.visitAll(queryRoot, FilterNode.class).next();
@@ -823,31 +823,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
       // Test "incoming" bindings.
       assertEquals(
-          EMPTY_SET, sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          EMPTY_SET, sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"X"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"X", "Y"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"X"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"X", "Y", "Z"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // Nested group clause {  ?Y :name "george" }
@@ -858,31 +858,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // Test "incoming" bindings.
       assertEquals(
           asSet(new String[] {"X"}),
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"Y"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"Y"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"Y"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"Y", "X", "Z"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // Optional group clause OPTIONAL { ?X :email ?Z }
@@ -892,31 +892,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // Test "incoming" bindings.
       assertEquals(
           asSet(new String[] {"X", "Y"}),
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>()));
 
       // Test "must" bound bindings.
       assertEquals(
           asSet(new String[] {"X", "Z"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "must" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"X", "Z"}),
           sa.getDefinitelyProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
 
       // Test "maybe" bound bindings.
       assertEquals(
           asSet(new String[] {"X", "Z"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), false /* recursive */));
+              group, new LinkedHashSet<>(), false /* recursive */));
 
       // Test "maybe" bound bindings (recursive).
       assertEquals(
           asSet(new String[] {"X", "Z"}),
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              group, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -973,7 +973,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // variables which must be bound in the top-level query's
       // projection.
       {
-        final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
         expectedProjected.add(Var.var("subj"));
         expectedProjected.add(Var.var("score"));
@@ -983,7 +983,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
       // variables which must be bound in the main query's where clause.
       {
-        final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
         expected.add(Var.var("subj"));
         expected.add(Var.var("score"));
@@ -994,13 +994,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             expected,
             sa.getDefinitelyProducedBindings(
                 queryRoot.getWhereClause(),
-                new LinkedHashSet<IVariable<?>>(),
+                new LinkedHashSet<>(),
                 true /* recursive */));
       }
 
       // variables which may be bound in the main query's where clause.
       {
-        final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
         expected.add(Var.var("subj"));
         expected.add(Var.var("score"));
@@ -1011,7 +1011,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             expected,
             sa.getMaybeProducedBindings(
                 queryRoot.getWhereClause(),
-                new LinkedHashSet<IVariable<?>>(),
+                new LinkedHashSet<>(),
                 true /* recursive */));
       }
     }
@@ -1129,7 +1129,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       // variables which must be bound in the top-level query's
       // projection.
       {
-        final Set<IVariable<?>> expectedProjected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedProjected = new LinkedHashSet<>();
 
         expectedProjected.add(Var.var("s"));
         expectedProjected.add(Var.var("o1"));
@@ -1139,7 +1139,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
       // variables which must be bound in the main query's where clause.
       {
-        final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
         expected.add(Var.var("s"));
         expected.add(Var.var("p"));
@@ -1149,13 +1149,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             expected,
             sa.getDefinitelyProducedBindings(
                 queryRoot.getWhereClause(),
-                new LinkedHashSet<IVariable<?>>(),
+                new LinkedHashSet<>(),
                 true /* recursive */));
       }
 
       // variables which may be bound in the main query's where clause.
       {
-        final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
         expected.add(Var.var("s"));
         expected.add(Var.var("p"));
@@ -1167,14 +1167,14 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             expected,
             sa.getMaybeProducedBindings(
                 queryRoot.getWhereClause(),
-                new LinkedHashSet<IVariable<?>>(),
+                new LinkedHashSet<>(),
                 true /* recursive */));
       }
     }
 
     // variables which must be bound by endpoint1.
     {
-      final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
       expected.add(Var.var("s"));
       expected.add(Var.var("p"));
@@ -1183,12 +1183,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expected,
           sa.getDefinitelyProducedBindings(
-              endpoint1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              endpoint1, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // variables which must be bound by endpoint2.
     {
-      final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
       expected.add(Var.var("s"));
       expected.add(Var.var("p2"));
@@ -1197,31 +1197,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expected,
           sa.getDefinitelyProducedBindings(
-              endpoint2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              endpoint2, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // ServiceCallJoin variables for endpoint1
     {
-      final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
-      assertEquals(expected, sa.getJoinVars(endpoint1, new LinkedHashSet<IVariable<?>>()));
+      assertEquals(expected, sa.getJoinVars(endpoint1, new LinkedHashSet<>()));
     }
 
     // ServiceCallJoin variables for endpoint2
     {
-      final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expected = new LinkedHashSet<>();
 
       expected.add(Var.var("s"));
 
-      assertEquals(expected, sa.getJoinVars(endpoint2, new LinkedHashSet<IVariable<?>>()));
+      assertEquals(expected, sa.getJoinVars(endpoint2, new LinkedHashSet<>()));
     }
 
     // Join with the OPTIONAL group.
     {
-      final Set<IVariable<?>> expected = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expected = new LinkedHashSet<>();
       expected.add(Var.var("s"));
 
-      final Set<IVariable<?>> actual = new HashSet<IVariable<?>>();
+      final Set<IVariable<?>> actual = new HashSet<>();
       for (IVariable<?> v : optionalGroup.getJoinVars()) {
         actual.add(v);
       }
@@ -1367,7 +1367,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         "definitely-and-filters",
         asSet(new String[] {"a", "b", "ageA", "ageB", "x"}),
         sa.getDefinitelyProducedBindingsAndFilterVariables(
-            innerGroup, new LinkedHashSet<IVariable<?>>()));
+            innerGroup, new LinkedHashSet<>()));
 
     // Outer group.
 
@@ -1384,7 +1384,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         "definitely-and-filters",
         asSet(new String[] {"a", "b", "ageA"}),
         sa.getDefinitelyProducedBindingsAndFilterVariables(
-            outerGroup, new LinkedHashSet<IVariable<?>>()));
+            outerGroup, new LinkedHashSet<>()));
   }
 
   /** Unit test focused on required and optional {@link StatementPatternNode} s. */
@@ -1421,9 +1421,9 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -1431,23 +1431,23 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       expectedVars.add(Var.var("m"));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // sp1
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(sp1, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(sp1, new LinkedHashSet<>()));
 
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -1455,28 +1455,28 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              sp1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              sp1, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              sp1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              sp1, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // sp2
     {
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
 
         assertEquals(
-            expectedVars, sa.getDefinitelyIncomingBindings(sp2, new LinkedHashSet<IVariable<?>>()));
+            expectedVars, sa.getDefinitelyIncomingBindings(sp2, new LinkedHashSet<>()));
       }
 
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("m"));
@@ -1484,12 +1484,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         assertEquals(
             expectedVars,
             sa.getDefinitelyProducedBindings(
-                sp2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                sp2, new LinkedHashSet<>(), true /* recursive */));
 
         assertEquals(
             expectedVars,
             sa.getMaybeProducedBindings(
-                sp2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                sp2, new LinkedHashSet<>(), true /* recursive */));
       }
     }
   }
@@ -1543,7 +1543,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
     expectedVars.add(Var.var("a"));
     expectedVars.add(Var.var("n"));
@@ -1563,21 +1563,21 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           Collections.emptySet(),
-          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     /*
@@ -1586,20 +1586,20 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           expectedVars,
-          sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<>()));
 
       assertEquals(
-          expectedVars, sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+          expectedVars, sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<>()));
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              minusGroup, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              minusGroup, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -1646,13 +1646,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
     expectedVars.add(Var.var("s"));
     expectedVars.add(Var.var("p"));
     expectedVars.add(Var.var("o"));
 
-    final Set<IVariable<?>> otherVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> otherVars = new LinkedHashSet<>();
 
     otherVars.add(Var.var("x"));
     otherVars.add(Var.var("y"));
@@ -1673,21 +1673,21 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           Collections.emptySet(),
-          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     /*
@@ -1696,20 +1696,20 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           expectedVars,
-          sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<>()));
 
       assertEquals(
-          expectedVars, sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+          expectedVars, sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<>()));
 
       assertEquals(
           otherVars,
           sa.getDefinitelyProducedBindings(
-              minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              minusGroup, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           otherVars,
           sa.getMaybeProducedBindings(
-              minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              minusGroup, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -1782,7 +1782,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      * First, the QueryRoot.
      */
     {
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -1800,13 +1800,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           Collections.emptySet(),
-          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<>()));
 
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -1814,31 +1814,31 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       expectedVars.add(Var.var("b"));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     /*
      * Optional group1.
      */
     {
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
 
       assertEquals(
           expectedVars,
-          sa.getDefinitelyIncomingBindings(optGroup1, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(optGroup1, new LinkedHashSet<>()));
 
       assertEquals(
-          expectedVars, sa.getMaybeIncomingBindings(optGroup1, new LinkedHashSet<IVariable<?>>()));
+          expectedVars, sa.getMaybeIncomingBindings(optGroup1, new LinkedHashSet<>()));
 
       expectedVars.clear();
       expectedVars.add(Var.var("b"));
@@ -1846,12 +1846,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              optGroup1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optGroup1, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              optGroup1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optGroup1, new LinkedHashSet<>(), true /* recursive */));
     }
 
     /*
@@ -1859,24 +1859,24 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     {
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
 
         assertEquals(
             expectedVars,
-            sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+            sa.getDefinitelyIncomingBindings(minusGroup, new LinkedHashSet<>()));
 
         expectedVars.add(Var.var("b"));
 
         assertEquals(
             expectedVars,
-            sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<IVariable<?>>()));
+            sa.getMaybeIncomingBindings(minusGroup, new LinkedHashSet<>()));
       }
 
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
@@ -1884,14 +1884,14 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         assertEquals(
             expectedVars,
             sa.getDefinitelyProducedBindings(
-                minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                minusGroup, new LinkedHashSet<>(), true /* recursive */));
 
         expectedVars.add(Var.var("c"));
 
         assertEquals(
             expectedVars,
             sa.getMaybeProducedBindings(
-                minusGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                minusGroup, new LinkedHashSet<>(), true /* recursive */));
       }
     }
 
@@ -1899,19 +1899,19 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      * Optional group 2.
      */
     {
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
 
       assertEquals(
           expectedVars,
-          sa.getDefinitelyIncomingBindings(optGroup2, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(optGroup2, new LinkedHashSet<>()));
 
       expectedVars.add(Var.var("b"));
 
       assertEquals(
-          expectedVars, sa.getMaybeIncomingBindings(optGroup2, new LinkedHashSet<IVariable<?>>()));
+          expectedVars, sa.getMaybeIncomingBindings(optGroup2, new LinkedHashSet<>()));
 
       expectedVars.clear();
       expectedVars.add(Var.var("c"));
@@ -1919,12 +1919,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              optGroup2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optGroup2, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              optGroup2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optGroup2, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2003,7 +2003,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      * First, the QueryRoot.
      */
     {
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -2022,13 +2022,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     {
       assertEquals(
           Collections.emptySet(),
-          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<>()));
 
       assertEquals(
           Collections.emptySet(),
-          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
+          sa.getMaybeIncomingBindings(whereClause, new LinkedHashSet<>()));
 
-      final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("n"));
@@ -2036,7 +2036,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       expectedVars.add(Var.var("b"));
       expectedVars.add(Var.var("c"));
@@ -2044,7 +2044,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     /*
@@ -2052,22 +2052,22 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     {
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
 
         assertEquals(
             expectedVars,
-            sa.getDefinitelyIncomingBindings(childGroup, new LinkedHashSet<IVariable<?>>()));
+            sa.getDefinitelyIncomingBindings(childGroup, new LinkedHashSet<>()));
 
         assertEquals(
             expectedVars,
-            sa.getMaybeIncomingBindings(childGroup, new LinkedHashSet<IVariable<?>>()));
+            sa.getMaybeIncomingBindings(childGroup, new LinkedHashSet<>()));
       }
 
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
@@ -2075,14 +2075,14 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         assertEquals(
             expectedVars,
             sa.getDefinitelyProducedBindings(
-                childGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                childGroup, new LinkedHashSet<>(), true /* recursive */));
 
         expectedVars.add(Var.var("c"));
 
         assertEquals(
             expectedVars,
             sa.getMaybeProducedBindings(
-                childGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                childGroup, new LinkedHashSet<>(), true /* recursive */));
       }
 
       /*
@@ -2090,33 +2090,33 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
        */
       {
         {
-          final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+          final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
           expectedVars.add(Var.var("a"));
           expectedVars.add(Var.var("n"));
 
           assertEquals(
               expectedVars,
-              sa.getDefinitelyIncomingBindings(optGroup2, new LinkedHashSet<IVariable<?>>()));
+              sa.getDefinitelyIncomingBindings(optGroup2, new LinkedHashSet<>()));
 
           assertEquals(
               expectedVars,
-              sa.getMaybeIncomingBindings(optGroup2, new LinkedHashSet<IVariable<?>>()));
+              sa.getMaybeIncomingBindings(optGroup2, new LinkedHashSet<>()));
         }
 
         {
-          final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+          final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
           expectedVars.add(Var.var("c"));
 
           assertEquals(
               expectedVars,
               sa.getDefinitelyProducedBindings(
-                  optGroup2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                  optGroup2, new LinkedHashSet<>(), true /* recursive */));
 
           assertEquals(
               expectedVars,
               sa.getMaybeProducedBindings(
-                  optGroup2, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                  optGroup2, new LinkedHashSet<>(), true /* recursive */));
         }
       }
     }
@@ -2126,36 +2126,36 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     {
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("a"));
         expectedVars.add(Var.var("n"));
 
         assertEquals(
             expectedVars,
-            sa.getDefinitelyIncomingBindings(optGroup1, new LinkedHashSet<IVariable<?>>()));
+            sa.getDefinitelyIncomingBindings(optGroup1, new LinkedHashSet<>()));
 
         expectedVars.add(Var.var("c"));
 
         assertEquals(
             expectedVars,
-            sa.getMaybeIncomingBindings(optGroup1, new LinkedHashSet<IVariable<?>>()));
+            sa.getMaybeIncomingBindings(optGroup1, new LinkedHashSet<>()));
       }
 
       {
-        final Set<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
         expectedVars.add(Var.var("b"));
 
         assertEquals(
             expectedVars,
             sa.getDefinitelyProducedBindings(
-                optGroup1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                optGroup1, new LinkedHashSet<>(), true /* recursive */));
 
         assertEquals(
             expectedVars,
             sa.getMaybeProducedBindings(
-                optGroup1, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+                optGroup1, new LinkedHashSet<>(), true /* recursive */));
       }
     }
   }
@@ -2330,12 +2330,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // Optional group 1.
     if (true) {
 
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("var1"));
       expectedVars.add(Var.var("var6"));
@@ -2347,13 +2347,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
               optionalGroup1,
               queryRoot,
               exogenousVars,
-              new LinkedHashSet<IVariable<?>>() // projectedVars
+              new LinkedHashSet<>() // projectedVars
               ));
     }
 
     // Optional group 2.
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("var1"));
       expectedVars.add(Var.var("var4"));
@@ -2365,13 +2365,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
               optionalGroup2,
               queryRoot,
               exogenousVars,
-              new LinkedHashSet<IVariable<?>>() // projectedVars
+              new LinkedHashSet<>() // projectedVars
               ));
     }
 
     // Optional group 3.
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("var1"));
       expectedVars.add(Var.var("var10"));
@@ -2383,7 +2383,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
               optionalGroup3,
               queryRoot,
               exogenousVars,
-              new LinkedHashSet<IVariable<?>>() // projectedVars
+              new LinkedHashSet<>() // projectedVars
               ));
     }
   }
@@ -2433,11 +2433,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("b"));
 
@@ -2448,19 +2448,19 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2520,11 +2520,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       assertEquals(expectedVars, sa.getDefinitelyProducedBindings(queryRoot));
 
@@ -2535,36 +2535,36 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       expectedVars.add(Var.var("a"));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // optionalGroup
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              optionalGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optionalGroup, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              optionalGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optionalGroup, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2596,11 +2596,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("b"));
 
@@ -2611,17 +2611,17 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2714,11 +2714,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("b"));
@@ -2731,7 +2731,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("x"));
       expectedVars.add(Var.var("a"));
@@ -2740,12 +2740,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2836,11 +2836,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
 
@@ -2854,7 +2854,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("x"));
       expectedVars.add(Var.var("a"));
@@ -2862,19 +2862,19 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       expectedVars.add(Var.var("b"));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
 
     // optionalGroup
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("x"));
       expectedVars.add(Var.var("b"));
@@ -2882,12 +2882,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              optionalGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optionalGroup, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              optionalGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              optionalGroup, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 
@@ -2990,11 +2990,11 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> exogenousVars = new LinkedHashSet<>();
 
     // QueryRoot
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("a"));
       expectedVars.add(Var.var("b"));
@@ -3008,7 +3008,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     // whereClause
     {
-      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> expectedVars = new LinkedHashSet<>();
 
       expectedVars.add(Var.var("x"));
       expectedVars.add(Var.var("a"));
@@ -3017,12 +3017,12 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       assertEquals(
           expectedVars,
           sa.getDefinitelyProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
 
       assertEquals(
           expectedVars,
           sa.getMaybeProducedBindings(
-              whereClause, new LinkedHashSet<IVariable<?>>(), true /* recursive */));
+              whereClause, new LinkedHashSet<>(), true /* recursive */));
     }
   }
 

@@ -65,7 +65,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
    * The list of criteria. Embergraph's query optimizer will re-order the criteria based on
    * selectivity and execute for maximum performance and minimum IO.
    */
-  private final List<Has> criteria = new LinkedList<Has>();
+  private final List<Has> criteria = new LinkedList<>();
 
   /** Limit the number of results. */
   private transient int limit = Integer.MAX_VALUE;

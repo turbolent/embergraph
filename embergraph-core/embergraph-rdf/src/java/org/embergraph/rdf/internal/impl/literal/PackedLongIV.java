@@ -72,7 +72,7 @@ public class PackedLongIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   @Override
   public IV<V, Long> clone(final boolean clearCache) {
 
-    final PackedLongIV<V> tmp = new PackedLongIV<V>(value);
+    final PackedLongIV<V> tmp = new PackedLongIV<>(value);
 
     if (!clearCache) {
 

@@ -78,7 +78,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
   public BindingsClause(
       final LinkedHashSet<IVariable<?>> declaredVars, final List<IBindingSet> bindingSets) {
 
-    super(NOARGS, new HashMap<String, Object>(2));
+    super(NOARGS, new HashMap<>(2));
 
     if (declaredVars == null) throw new IllegalArgumentException();
 
@@ -226,11 +226,11 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 }

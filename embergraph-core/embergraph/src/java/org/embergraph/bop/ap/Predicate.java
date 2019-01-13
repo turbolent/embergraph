@@ -430,7 +430,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
   public Predicate<E> clone() {
 
     // Fast path for clone().
-    return new Predicate<E>(this);
+    return new Predicate<>(this);
     //        return (Predicate<E>) super.clone();
 
   }

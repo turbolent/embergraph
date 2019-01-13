@@ -76,7 +76,7 @@ public class CounterSetSelector implements ICounterSelector {
 
     if (log.isInfoEnabled()) log.info("path=" + counterSet.getPath() + ", depth=" + depth);
 
-    final Vector<ICounter> counters = new Vector<ICounter>();
+    final Vector<ICounter> counters = new Vector<>();
 
     final Iterator<ICounter> itr = counterSet.getCounters(pattern);
 

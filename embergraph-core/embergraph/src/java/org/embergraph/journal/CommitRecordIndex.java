@@ -62,7 +62,7 @@ public class CommitRecordIndex extends BTree {
    * (typically the unnamed indices) loaded from a given {@link ICommitRecord}.
    */
   private final WeakValueCache<Long, ICommitRecord> cache =
-      new WeakValueCache<Long, ICommitRecord>(new LRUCache<Long, ICommitRecord>(10));
+      new WeakValueCache<>(new LRUCache<>(10));
 
   /*
    * Create a new instance.

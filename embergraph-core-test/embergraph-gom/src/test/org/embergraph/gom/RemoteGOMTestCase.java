@@ -160,7 +160,7 @@ public class RemoteGOMTestCase extends TestCase implements IGOMProxy {
 
     m_namespace = EmbergraphSail.Options.DEFAULT_NAMESPACE;
 
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
     {
       initParams.put(ConfigParams.NAMESPACE, m_namespace);
 

@@ -146,7 +146,7 @@ public class ASTFlattenJoinGroupsOptimizer implements IASTOptimizer {
       int pos = parentJoinGroup.indexOf(thisJoinGroup);
 
       final List<IGroupMemberNode> children =
-          new LinkedList<IGroupMemberNode>(thisJoinGroup.getChildren());
+          new LinkedList<>(thisJoinGroup.getChildren());
 
       for (IGroupMemberNode child : children) {
 

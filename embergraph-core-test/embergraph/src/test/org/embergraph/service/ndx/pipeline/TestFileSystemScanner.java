@@ -51,7 +51,7 @@ public class TestFileSystemScanner extends TestCase2 {
 
   public void test_runScanner() throws Exception {
 
-    final BlockingBuffer<File[]> buffer = new BlockingBuffer<File[]>();
+    final BlockingBuffer<File[]> buffer = new BlockingBuffer<>();
 
     final AbstractResourceScanner<File> scanner =
         FileSystemScanner.newFactory(
@@ -101,7 +101,7 @@ public class TestFileSystemScanner extends TestCase2 {
     try {
 
       // Wrap computation as FutureTask.
-      final FutureTask<Long> ft = new FutureTask<Long>(new DrainBuffer());
+      final FutureTask<Long> ft = new FutureTask<>(new DrainBuffer());
 
       // buffer will be abort()ed if task fails.
       buffer.setFuture(ft);

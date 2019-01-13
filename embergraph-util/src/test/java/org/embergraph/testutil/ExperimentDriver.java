@@ -192,7 +192,7 @@ public class ExperimentDriver {
      * the appropriate column. This is an ordered map so that [showAll] will
      * place any additional columns into an order.
      */
-    final Map<String, String> tmp = new TreeMap<String, String>();
+    final Map<String, String> tmp = new TreeMap<>();
     {
       Iterator itr = data.entrySet().iterator();
 
@@ -280,7 +280,7 @@ public class ExperimentDriver {
    */
   public static List<Condition> apply(List<Condition> conditions, NV[] a) {
 
-    List<Condition> ret = new LinkedList<Condition>();
+    List<Condition> ret = new LinkedList<>();
 
     for (int i = 0; i < a.length; i++) {
 
@@ -312,7 +312,7 @@ public class ExperimentDriver {
    */
   public static List<Condition> apply(List<Condition> conditions, NV[][] a) {
 
-    List<Condition> ret = new LinkedList<Condition>();
+    List<Condition> ret = new LinkedList<>();
 
     for (int i = 0; i < a.length; i++) {
 
@@ -347,7 +347,7 @@ public class ExperimentDriver {
   public static Collection<Condition> replicateConditions(
       int nruns, Collection<Condition> conditions) {
 
-    List<Condition> ret = new LinkedList<Condition>();
+    List<Condition> ret = new LinkedList<>();
 
     for (Condition c : conditions) {
 
@@ -372,7 +372,7 @@ public class ExperimentDriver {
 
     int[] order = TestCase2.getRandomOrder(a.length);
 
-    List<Condition> ret = new ArrayList<Condition>(a.length);
+    List<Condition> ret = new ArrayList<>(a.length);
 
     // add to result in permutated order.
     for (int i : order) {
@@ -655,9 +655,9 @@ public class ExperimentDriver {
          * run. This simplifies looking for invariants, conditions and
          * variables in the results.
          */
-        Set<Object> conditionColumns = new TreeSet<Object>();
-        Set<Object> resultColumns = new TreeSet<Object>();
-        Map<Object, Object> invariants = new HashMap<Object, Object>();
+        Set<Object> conditionColumns = new TreeSet<>();
+        Set<Object> resultColumns = new TreeSet<>();
+        Map<Object, Object> invariants = new HashMap<>();
         {
           boolean first = true;
 
@@ -958,7 +958,7 @@ public class ExperimentDriver {
 
     protected Map<String, String> defaultProperties = null;
 
-    protected Collection<Condition> conditions = new Vector<Condition>();
+    protected Collection<Condition> conditions = new Vector<>();
 
     public Experiment parse(InputSource source)
         throws SAXException, IOException, ParserConfigurationException {
@@ -995,13 +995,13 @@ public class ExperimentDriver {
 
         inDefaults = true;
 
-        properties = new HashMap<String, String>();
+        properties = new HashMap<>();
 
       } else if (qName.equals("condition")) {
 
         inCondition = true;
 
-        properties = new HashMap<String, String>();
+        properties = new HashMap<>();
 
       } else if (qName.equals("property")) {
 
@@ -1023,7 +1023,7 @@ public class ExperimentDriver {
 
         inCondition = false;
 
-        Map<String, String> tmp = new HashMap<String, String>();
+        Map<String, String> tmp = new HashMap<>();
 
         tmp.putAll(defaultProperties);
 
@@ -1076,7 +1076,7 @@ public class ExperimentDriver {
   protected static Condition getCondition(Map<String, String> properties, NV[] params)
       throws IOException {
 
-    properties = new HashMap<String, String>(properties);
+    properties = new HashMap<>(properties);
 
     for (int i = 0; i < params.length; i++) {
 

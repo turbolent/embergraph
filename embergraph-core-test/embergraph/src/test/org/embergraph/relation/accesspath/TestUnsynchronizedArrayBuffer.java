@@ -47,10 +47,10 @@ public class TestUnsynchronizedArrayBuffer extends TestCase2 {
   private final int chunkOfChunksCapacity = 5;
 
   private TestArrayBuffer<String[]> syncBuffer =
-      new TestArrayBuffer<String[]>(chunkOfChunksCapacity);
+      new TestArrayBuffer<>(chunkOfChunksCapacity);
 
   private UnsynchronizedArrayBuffer<String> unsyncBuffer =
-      new UnsynchronizedArrayBuffer<String>(syncBuffer, String.class, chunkCapacity);
+      new UnsynchronizedArrayBuffer<>(syncBuffer, String.class, chunkCapacity);
 
   @Override
   protected void tearDown() throws Exception {

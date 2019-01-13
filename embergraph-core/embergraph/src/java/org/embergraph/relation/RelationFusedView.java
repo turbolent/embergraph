@@ -87,7 +87,7 @@ public class RelationFusedView<E> implements IRelation<E> {
 
   public Set<String> getIndexNames() {
 
-    final Set<String> set = new HashSet<String>();
+    final Set<String> set = new HashSet<>();
 
     set.addAll(relation1.getIndexNames());
 
@@ -192,7 +192,7 @@ public class RelationFusedView<E> implements IRelation<E> {
 
   public IAccessPath<E> getAccessPath(final IPredicate<E> predicate) {
 
-    return new AccessPathFusedView<E>(
+    return new AccessPathFusedView<>(
         (AccessPath<E>) relation1.getAccessPath(predicate),
         (AccessPath<E>) relation2.getAccessPath(predicate));
   }

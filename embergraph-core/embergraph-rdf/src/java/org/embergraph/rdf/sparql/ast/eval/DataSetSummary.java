@@ -33,7 +33,7 @@ public class DataSetSummary {
     //        if(graphs.isEmpty())
     //            return null;
 
-    final Set<IV> s = new LinkedHashSet<IV>();
+    final Set<IV> s = new LinkedHashSet<>();
 
     for (URI uri : graphs) {
 
@@ -166,7 +166,7 @@ public class DataSetSummary {
     Arrays.sort(a);
 
     // Populate hash set which will maintain the sorted order.
-    this.graphs = new LinkedHashSet<IV>(nknown);
+    this.graphs = new LinkedHashSet<>(nknown);
 
     for (int i = 0; i < nknown; i++) {
 

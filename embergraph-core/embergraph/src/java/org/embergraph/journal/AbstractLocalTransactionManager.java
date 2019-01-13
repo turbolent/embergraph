@@ -31,7 +31,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
    * <p>TODO Configure the initial capacity and concurrency. For example, this should be sized to
    * the #of client connections for both the initialCapacity and the concurrency level.
    */
-  private final ConcurrentHashMap<Long, Tx> activeTx = new ConcurrentHashMap<Long, Tx>();
+  private final ConcurrentHashMap<Long, Tx> activeTx = new ConcurrentHashMap<>();
 
   @Override
   public ITxState[] getActiveTx() {

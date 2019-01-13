@@ -211,13 +211,13 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
     if (!ASTStaticJoinOptimizer.isStaticOptimizer(ctx, joinGroup)) return;
 
-    final List<IGroupMemberNode> ordered = new LinkedList<IGroupMemberNode>();
+    final List<IGroupMemberNode> ordered = new LinkedList<>();
 
     final List<AssignmentNode> assignments = joinGroup.getAssignments();
 
     final List<ServiceNode> serviceNodes = joinGroup.getServiceNodes();
 
-    final List<SubqueryRoot> askSubqueries = new LinkedList<SubqueryRoot>();
+    final List<SubqueryRoot> askSubqueries = new LinkedList<>();
 
     for (BindingsClause values : joinGroup.getChildren(BindingsClause.class)) {
 

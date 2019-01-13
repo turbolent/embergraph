@@ -214,7 +214,7 @@ public class TripleStoreUtility {
     final int capacity = 100000;
 
     final BlockingBuffer<EmbergraphStatement> buffer =
-        new BlockingBuffer<EmbergraphStatement>(capacity);
+        new BlockingBuffer<>(capacity);
 
     final StatementBuffer2<Statement, EmbergraphStatement> sb =
         new StatementBuffer2<Statement, EmbergraphStatement>(
@@ -309,7 +309,7 @@ public class TripleStoreUtility {
      */
 
     // Wrap computation as FutureTask.
-    final FutureTask<Void> ft = new FutureTask<Void>(myTask);
+    final FutureTask<Void> ft = new FutureTask<>(myTask);
 
     // Set Future on BlockingBuffer.
     buffer.setFuture(ft);
@@ -354,7 +354,7 @@ public class TripleStoreUtility {
     try {
 
       final StatementBuffer<Statement> sb =
-          new StatementBuffer<Statement>(tmp, 100000 /* capacity */, 10 /* queueCapacity */);
+          new StatementBuffer<>(tmp, 100000 /* capacity */, 10 /* queueCapacity */);
 
       final IV NULL = null;
 

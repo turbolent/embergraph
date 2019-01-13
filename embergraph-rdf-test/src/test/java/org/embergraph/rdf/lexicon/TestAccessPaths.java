@@ -81,7 +81,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -121,7 +121,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
       store.getLexiconRelation().addTerms(a, size, false /* readOnly */);
 
       // populate map w/ the assigned term identifiers.
-      final Collection<IV> ids = new ArrayList<IV>();
+      final Collection<IV> ids = new ArrayList<>();
 
       for (EmbergraphValue t : a) {
 
@@ -161,7 +161,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
 
     final IPredicate<EmbergraphValue> predicate =
         LexPredicate.reverseInstance(
-            r.getNamespace(), ITx.UNISOLATED, termvar, new Constant<IV>(expected.getIV()));
+            r.getNamespace(), ITx.UNISOLATED, termvar, new Constant<>(expected.getIV()));
 
     final IKeyOrder<EmbergraphValue> keyOrder = r.getKeyOrder(predicate);
 

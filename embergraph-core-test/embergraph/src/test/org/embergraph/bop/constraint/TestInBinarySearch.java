@@ -56,7 +56,7 @@ public class TestInBinarySearch extends TestINConstraint {
     Var<?> x = Var.var("x");
 
     IConstant[] vals = new IConstant[100];
-    for (int i = 0; i < vals.length; i++) vals[i] = new Constant<Integer>(i);
+    for (int i = 0; i < vals.length; i++) vals[i] = new Constant<>(i);
     List<IConstant> list = Arrays.asList(vals);
     Collections.shuffle(list);
     vals = list.toArray(vals);
@@ -66,19 +66,19 @@ public class TestInBinarySearch extends TestINConstraint {
     assertTrue(
         op.get(
             new ListBindingSet(
-                new IVariable<?>[] {x}, new IConstant[] {new Constant<Integer>(21)})));
+                new IVariable<?>[] {x}, new IConstant[] {new Constant<>(21)})));
     assertTrue(
         op.get(
             new ListBindingSet(
-                new IVariable<?>[] {x}, new IConstant[] {new Constant<Integer>(37)})));
+                new IVariable<?>[] {x}, new IConstant[] {new Constant<>(37)})));
     assertTrue(
         op.get(
             new ListBindingSet(
-                new IVariable<?>[] {x}, new IConstant[] {new Constant<Integer>(75)})));
+                new IVariable<?>[] {x}, new IConstant[] {new Constant<>(75)})));
     assertFalse(
         op.get(
             new ListBindingSet(
-                new IVariable<?>[] {x}, new IConstant[] {new Constant<Integer>(101)})));
+                new IVariable<?>[] {x}, new IConstant[] {new Constant<>(101)})));
   }
 
   @Override

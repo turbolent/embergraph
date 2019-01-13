@@ -48,7 +48,7 @@ public class TestNEConstant extends TestCase2 {
   /** Unit test for {@link NEConstant#NEConstant(IVariable,IConstant)} */
   public void testConstructor() {
     try {
-      assertTrue(null != new NEConstant(null, new Constant<String>("1")));
+      assertTrue(null != new NEConstant(null, new Constant<>("1")));
       fail("IllegalArgumentException expected, lhs was null");
     } catch (IllegalArgumentException e) {
     }
@@ -59,15 +59,15 @@ public class TestNEConstant extends TestCase2 {
     } catch (IllegalArgumentException e) {
     }
 
-    assertTrue(null != new NEConstant(Var.var("x"), new Constant<String>("1")));
+    assertTrue(null != new NEConstant(Var.var("x"), new Constant<>("1")));
   }
 
   /** Unit test for {@link NEConstant#get(IBindingSet)} */
   public void testAccept() {
     Var<?> var = Var.var("x");
-    Constant<String> val1 = new Constant<String>("1");
-    Constant<String> val2 = new Constant<String>("2");
-    Constant<Integer> val3 = new Constant<Integer>(1);
+    Constant<String> val1 = new Constant<>("1");
+    Constant<String> val2 = new Constant<>("2");
+    Constant<Integer> val3 = new Constant<>(1);
 
     NEConstant op = new NEConstant(var, val1);
 

@@ -95,7 +95,7 @@ public class AVERAGE extends AggregateBase<IV> implements INeedsMaterialization 
     if (n == 0) return ZERO;
 
     return MathUtility.literalMath(
-        aggregated, new XSDNumericIV<EmbergraphLiteral>(n), MathBOp.MathOp.DIVIDE);
+        aggregated, new XSDNumericIV<>(n), MathBOp.MathOp.DIVIDE);
   }
 
   public synchronized IV get(final IBindingSet bindingSet) {

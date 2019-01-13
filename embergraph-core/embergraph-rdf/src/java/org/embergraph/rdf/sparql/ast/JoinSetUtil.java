@@ -128,8 +128,8 @@ public class JoinSetUtil {
     public final Set<IVariable<?>> joinvars;
 
     public VertexJoinSet() {
-      vertices = new LinkedHashSet<Integer>();
-      joinvars = new LinkedHashSet<IVariable<?>>();
+      vertices = new LinkedHashSet<>();
+      joinvars = new LinkedHashSet<>();
     }
 
     public VertexJoinSet(final Set<Integer> vertices, final Set<IVariable<?>> joinvars) {
@@ -167,7 +167,7 @@ public class JoinSetUtil {
     this.group = group;
 
     if (knownBound == null) {
-      knownBound = new LinkedHashSet<IVariable<?>>();
+      knownBound = new LinkedHashSet<>();
     }
     this.knownBound = knownBound;
 
@@ -177,7 +177,7 @@ public class JoinSetUtil {
 
     // Locate all the required joins.
     {
-      final List<IJoinNode> list = new LinkedList<IJoinNode>();
+      final List<IJoinNode> list = new LinkedList<>();
       for (IGroupMemberNode m : group) {
         if (m instanceof IJoinNode) {
           final IJoinNode j = (IJoinNode) m;
@@ -192,13 +192,13 @@ public class JoinSetUtil {
      * Create an array of the variables for each of the required join
      * vertices.
      */
-    eventuallyBoundVars = new LinkedHashSet<IVariable<?>>();
+    eventuallyBoundVars = new LinkedHashSet<>();
     {
       vars = new Set[requiredJoinCount];
       for (int i = 0; i < requiredJoinCount; i++) {
         final IJoinNode j = requiredJoins[i];
         // anything bound by this join.
-        final Set<IVariable<?>> tmp = sa.getSpannedVariables(j, new LinkedHashSet<IVariable<?>>());
+        final Set<IVariable<?>> tmp = sa.getSpannedVariables(j, new LinkedHashSet<>());
         tmp.addAll(knownBound); // plus anything bound on entry to the group.
         eventuallyBoundVars.addAll(vars[i] = tmp);
       }
@@ -211,9 +211,9 @@ public class JoinSetUtil {
      * required joins).
      */
     {
-      preFilters = new LinkedHashSet<FilterNode>();
-      joinFilters = new LinkedHashSet<FilterNode>();
-      postFilters = new LinkedHashSet<FilterNode>();
+      preFilters = new LinkedHashSet<>();
+      joinFilters = new LinkedHashSet<>();
+      postFilters = new LinkedHashSet<>();
       for (IGroupMemberNode m : group) {
         if (m instanceof FilterNode) {
           final FilterNode f = (FilterNode) m;
@@ -261,7 +261,7 @@ public class JoinSetUtil {
     {
       for (int i = 0; i < requiredJoinCount; i++) {
         for (int j = i + 1; j < requiredJoinCount; j++) {
-          final Set<IVariable<?>> sharedVars = new HashSet<IVariable<?>>();
+          final Set<IVariable<?>> sharedVars = new HashSet<>();
           sharedVars.addAll(vars[i]);
           sharedVars.retainAll(vars[j]);
           if ((canJoin[i][j] = sharedVars.size()) > 0) {
@@ -301,10 +301,10 @@ public class JoinSetUtil {
    */
   private Set<VertexJoinSet> calcDirectJoinSets() {
 
-    final Set<VertexJoinSet> joinSets = new LinkedHashSet<VertexJoinSet>();
+    final Set<VertexJoinSet> joinSets = new LinkedHashSet<>();
 
     // The set of vertices which have been consumed.
-    final Set<Integer> used = new LinkedHashSet<Integer>();
+    final Set<Integer> used = new LinkedHashSet<>();
     for (int i = 0; i < requiredJoinCount; i++) {
       if (used.contains(i)) continue;
       // This join set.

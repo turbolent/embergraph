@@ -69,10 +69,10 @@ public class TestDistinctFilter extends TestCase2 {
     final Long[] a = {12L, 1L, 3L, 1L};
 
     final IChunkedOrderedIterator<Long> src =
-        new ChunkedArrayIterator<Long>(a.length, a, null /* keyOrder */);
+        new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */);
 
     final IChunkedOrderedIterator<Long> dst =
-        new ChunkedConvertingIterator<Long, Long>(src, filter);
+        new ChunkedConvertingIterator<>(src, filter);
 
     assertSameIterator(new Long[] {1L, 3L, 12L}, dst);
   }
@@ -97,10 +97,10 @@ public class TestDistinctFilter extends TestCase2 {
     final Long[] a = {};
 
     final IChunkedOrderedIterator<Long> src =
-        new ChunkedArrayIterator<Long>(a.length, a, null /* keyOrder */);
+        new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */);
 
     final IChunkedOrderedIterator<Long> dst =
-        new ChunkedConvertingIterator<Long, Long>(src, filter);
+        new ChunkedConvertingIterator<>(src, filter);
 
     assertSameIterator(new Long[] {}, dst);
   }
@@ -140,10 +140,10 @@ public class TestDistinctFilter extends TestCase2 {
       new Long[] {5L, 12L, 4L}
     };
 
-    final IChunkedOrderedIterator<Long> src = new MyChunkSource<Long>(a);
+    final IChunkedOrderedIterator<Long> src = new MyChunkSource<>(a);
 
     final IChunkedOrderedIterator<Long> dst =
-        new ChunkedConvertingIterator<Long, Long>(src, filter);
+        new ChunkedConvertingIterator<>(src, filter);
 
     assertSameIterator(
         new Long[] {

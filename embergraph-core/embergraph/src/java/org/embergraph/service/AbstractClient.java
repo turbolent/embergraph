@@ -292,7 +292,7 @@ public abstract class AbstractClient<T> implements IEmbergraphClient<T> {
   }
 
   private final AtomicReference<IFederationDelegate<T>> delegate =
-      new AtomicReference<IFederationDelegate<T>>();
+      new AtomicReference<>();
 
   /** The delegate for the federation. */
   public final IFederationDelegate<T> getDelegate() {

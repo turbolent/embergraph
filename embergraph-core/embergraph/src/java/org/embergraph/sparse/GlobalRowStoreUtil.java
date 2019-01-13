@@ -34,7 +34,7 @@ public class GlobalRowStoreUtil {
   /** Convert the Properties to a Map. */
   public static Map<String, Object> convert(final Properties properties) {
 
-    final Map<String, Object> map = new HashMap<String, Object>();
+    final Map<String, Object> map = new HashMap<>();
 
     final Enumeration<? extends Object> e = properties.propertyNames();
 

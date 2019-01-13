@@ -38,7 +38,7 @@ public class InferredSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
   private static final long serialVersionUID = -7026008442779748082L;
 
   /** Shared instance. */
-  public static final transient IElementFilter<ISPO> INSTANCE = new InferredSPOFilter<ISPO>();
+  public static final transient IElementFilter<ISPO> INSTANCE = new InferredSPOFilter<>();
 
   /** De-serialization ctor. */
   private InferredSPOFilter() {

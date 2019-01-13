@@ -119,7 +119,7 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
 
     final E e = itr.next();
 
-    return new RemoteElementImpl<E>(e, serializer);
+    return new RemoteElementImpl<>(e, serializer);
   }
 
   /*

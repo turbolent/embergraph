@@ -48,11 +48,11 @@ public class TestEncodeDecodeXSDIntegerIVs extends AbstractEncodeDecodeKeysTestC
   public void test_encodeDecode_XSDInteger() {
 
     final IV<?, ?>[] e = {
-      new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(-1L)),
-      new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(0L)),
-      new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)),
-      new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MAX_VALUE)),
-      new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MIN_VALUE)),
+        new XSDIntegerIV<>(BigInteger.valueOf(-1L)),
+        new XSDIntegerIV<>(BigInteger.valueOf(0L)),
+        new XSDIntegerIV<>(BigInteger.valueOf(1L)),
+        new XSDIntegerIV<>(BigInteger.valueOf(Long.MAX_VALUE)),
+        new XSDIntegerIV<>(BigInteger.valueOf(Long.MIN_VALUE)),
     };
 
     doEncodeDecodeTest(e);
@@ -73,10 +73,10 @@ public class TestEncodeDecodeXSDIntegerIVs extends AbstractEncodeDecodeKeysTestC
 
     final IV<?, ?>[] e =
         new IV[] {
-          new XSDIntegerIV<EmbergraphLiteral>(p1),
-          new XSDIntegerIV<EmbergraphLiteral>(p2),
-          new XSDIntegerIV<EmbergraphLiteral>(m1),
-          new XSDIntegerIV<EmbergraphLiteral>(m2),
+            new XSDIntegerIV<>(p1),
+            new XSDIntegerIV<>(p2),
+            new XSDIntegerIV<>(m1),
+            new XSDIntegerIV<>(m2),
         };
 
     doEncodeDecodeTest(e);
@@ -89,7 +89,7 @@ public class TestEncodeDecodeXSDIntegerIVs extends AbstractEncodeDecodeKeysTestC
 
     final Random r = new Random();
 
-    final List<IV<?, ?>> a = new LinkedList<IV<?, ?>>();
+    final List<IV<?, ?>> a = new LinkedList<>();
 
     for (int i = 0; i < 100; i++) {
 
@@ -109,15 +109,15 @@ public class TestEncodeDecodeXSDIntegerIVs extends AbstractEncodeDecodeKeysTestC
       final BigInteger t6 = t1.add(BigInteger.valueOf(5));
       final BigInteger t7 = t1.add(BigInteger.valueOf(9));
 
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t1));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(v2));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(v4));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t2));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t4));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t5));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t3));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t6));
-      a.add(new XSDIntegerIV<EmbergraphLiteral>(t7));
+      a.add(new XSDIntegerIV<>(t1));
+      a.add(new XSDIntegerIV<>(v2));
+      a.add(new XSDIntegerIV<>(v4));
+      a.add(new XSDIntegerIV<>(t2));
+      a.add(new XSDIntegerIV<>(t4));
+      a.add(new XSDIntegerIV<>(t5));
+      a.add(new XSDIntegerIV<>(t3));
+      a.add(new XSDIntegerIV<>(t6));
+      a.add(new XSDIntegerIV<>(t7));
     }
 
     final IV<?, ?>[] e = a.toArray(new IV[0]);

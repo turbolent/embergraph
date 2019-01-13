@@ -152,7 +152,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
 
   public WeakValueCache(ICachePolicy<K, T> delegate) {
 
-    this(INITIAL_CAPACITY, LOAD_FACTOR, delegate, new WeakCacheEntryFactory<K, T>());
+    this(INITIAL_CAPACITY, LOAD_FACTOR, delegate, new WeakCacheEntryFactory<>());
   }
 
   public WeakValueCache(ICachePolicy<K, T> delegate, IWeakRefCacheEntryFactory<K, T> factory) {
@@ -210,9 +210,9 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
      * the probability that N threads will have an overlapping "touch" set,
      * and the maximum reasonable concurrency.)
      */
-    _cache = new HashMap<K, IWeakRefCacheEntry<K, T>>(initialCapacity, loadFactor);
+    _cache = new HashMap<>(initialCapacity, loadFactor);
 
-    _queue = new ReferenceQueue<T>();
+    _queue = new ReferenceQueue<>();
 
     _delegate = delegate;
 
@@ -230,9 +230,9 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
 
     reportStatistics(true);
 
-    _cache = new HashMap<K, IWeakRefCacheEntry<K, T>>(_initialCapacity, _loadFactor);
+    _cache = new HashMap<>(_initialCapacity, _loadFactor);
 
-    _queue = new ReferenceQueue<T>();
+    _queue = new ReferenceQueue<>();
 
     _delegate.clear();
   }

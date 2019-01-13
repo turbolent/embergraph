@@ -34,7 +34,7 @@ public class DelegatingChangeLog implements IChangeLog {
 
   public DelegatingChangeLog() {
 
-    this.delegates = new CopyOnWriteArraySet<IChangeLog>();
+    this.delegates = new CopyOnWriteArraySet<>();
   }
 
   @Override

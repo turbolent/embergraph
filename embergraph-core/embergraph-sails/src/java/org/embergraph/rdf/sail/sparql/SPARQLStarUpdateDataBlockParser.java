@@ -155,7 +155,7 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
     // Use our own class in recursion.
     SPARQLStarUpdateDataBlockParser p =
         new SPARQLStarUpdateDataBlockParser(valueFactory, namespaceTable);
-    final List<Statement> stmts = new LinkedList<Statement>();
+    final List<Statement> stmts = new LinkedList<>();
     final StatementCollector sc = new StatementCollector(stmts);
     p.setRDFHandler(sc);
     p.setParserConfig(getParserConfig());

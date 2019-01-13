@@ -139,6 +139,6 @@ public class RemoteServiceCallImpl implements RemoteServiceCall {
       repo.close();
     }
 
-    return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(queryResult);
+    return new Sesame2EmbergraphIterator<>(queryResult);
   }
 }

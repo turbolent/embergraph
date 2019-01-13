@@ -74,17 +74,17 @@ public class TestDecodeParams extends TestCase2 {
   public void test_decodeParams() throws UnsupportedEncodingException {
 
     final LinkedHashMap<String, Vector<String>> expected =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
     {
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("1");
         v.add("2");
         v.add("3");
         expected.put("a", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("a b c");
         v.add("d e");
         v.add("f");
@@ -97,7 +97,7 @@ public class TestDecodeParams extends TestCase2 {
     if (log.isInfoEnabled()) log.info("encoded=" + uri);
 
     final LinkedHashMap<String, Vector<String>> actual =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
 
     NanoHTTPD.decodeParams(uri, actual);
 
@@ -107,20 +107,20 @@ public class TestDecodeParams extends TestCase2 {
   public void test_paramHasEmptyStringValue() throws UnsupportedEncodingException {
 
     final LinkedHashMap<String, Vector<String>> expected =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
     {
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("1"); // non-empty value.
         expected.put("a", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add(""); // empty value.
         expected.put("b", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         // no value.
         expected.put("c", v);
       }
@@ -129,7 +129,7 @@ public class TestDecodeParams extends TestCase2 {
     final String uri = "a=1&b=&c";
 
     final LinkedHashMap<String, Vector<String>> actual =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
 
     NanoHTTPD.decodeParams(uri, actual);
 
@@ -144,20 +144,20 @@ public class TestDecodeParams extends TestCase2 {
   public void test_decodeParams_with_whitespace() throws UnsupportedEncodingException {
 
     final LinkedHashMap<String, Vector<String>> expected =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
     {
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add(" 1 ");
         expected.put("a", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add(" 2");
         expected.put("b", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add(" ");
         expected.put("c", v);
       }
@@ -166,7 +166,7 @@ public class TestDecodeParams extends TestCase2 {
     final String uri = "a= 1 &b= 2&c= ";
 
     final LinkedHashMap<String, Vector<String>> actual =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
 
     NanoHTTPD.decodeParams(uri, actual);
 

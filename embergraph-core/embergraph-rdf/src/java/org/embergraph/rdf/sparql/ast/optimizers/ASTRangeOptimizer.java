@@ -80,7 +80,7 @@ public class ASTRangeOptimizer extends AbstractJoinGroupOptimizer implements IAS
     }
     if (!rangeSafe) return;
 
-    final Map<VarNode, RangeNode> ranges = new LinkedHashMap<VarNode, RangeNode>();
+    final Map<VarNode, RangeNode> ranges = new LinkedHashMap<>();
 
     for (IQueryNode node : group) {
 

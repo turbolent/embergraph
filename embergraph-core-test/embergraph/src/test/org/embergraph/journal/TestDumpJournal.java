@@ -607,9 +607,9 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         }
       }
 
-      final List<FutureTask<Void>> tasks1 = new LinkedList<FutureTask<Void>>();
-      final List<FutureTask<Void>> tasks2 = new LinkedList<FutureTask<Void>>();
-      final List<FutureTask<Void>> tasksAll = new LinkedList<FutureTask<Void>>();
+      final List<FutureTask<Void>> tasks1 = new LinkedList<>();
+      final List<FutureTask<Void>> tasks2 = new LinkedList<>();
+      final List<FutureTask<Void>> tasksAll = new LinkedList<>();
 
       // Setup executor that limits parallelism.
       final LatchedExecutor executor1 =
@@ -622,13 +622,13 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
       try {
 
         // Tasks to run.
-        tasks1.add(new FutureTaskMon<Void>(new DumpTask(src)));
-        tasks1.add(new FutureTaskMon<Void>(new DumpTask(src)));
-        tasks1.add(new FutureTaskMon<Void>(new DumpTask(src)));
+        tasks1.add(new FutureTaskMon<>(new DumpTask(src)));
+        tasks1.add(new FutureTaskMon<>(new DumpTask(src)));
+        tasks1.add(new FutureTaskMon<>(new DumpTask(src)));
 
-        tasks2.add(new FutureTaskMon<Void>(new UpdateTask(src)));
-        tasks2.add(new FutureTaskMon<Void>(new UpdateTask(src)));
-        tasks2.add(new FutureTaskMon<Void>(new UpdateTask(src)));
+        tasks2.add(new FutureTaskMon<>(new UpdateTask(src)));
+        tasks2.add(new FutureTaskMon<>(new UpdateTask(src)));
+        tasks2.add(new FutureTaskMon<>(new UpdateTask(src)));
 
         // Schedule the tasks.
         for (FutureTask<Void> ft : tasks1) executor1.execute(ft);

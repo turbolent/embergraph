@@ -239,7 +239,7 @@ public class TestMemoryManager extends TestCase2 {
     final ExecutorService executorService =
         Executors.newFixedThreadPool(nclients, DaemonThreadFactory.defaultThreadFactory());
 
-    final Collection<Callable<Long>> tasks = new HashSet<Callable<Long>>();
+    final Collection<Callable<Long>> tasks = new HashSet<>();
     for (int i = 0; i < nclients; i++) {
       tasks.add(
           new Callable<Long>() {
@@ -264,7 +264,7 @@ public class TestMemoryManager extends TestCase2 {
 
     int allocs = 0;
     int frees = 0;
-    final ArrayList<Long> addrs = new ArrayList<Long>();
+    final ArrayList<Long> addrs = new ArrayList<>();
     try {
       for (int i = 0; i < tests; i++) {
         final long addr1 = allocate(mm, genString(1, maxString));
@@ -329,7 +329,7 @@ public class TestMemoryManager extends TestCase2 {
     final int sectorSize = manager.getSectorSize(); // allow for blob
 
     // grab all the memory (for this size of allocation).
-    final List<Long> addrs = new LinkedList<Long>();
+    final List<Long> addrs = new LinkedList<>();
     while (true) {
       try {
         final long addr = manager.allocate(sectorSize, false /* blocks */);
@@ -359,13 +359,14 @@ public class TestMemoryManager extends TestCase2 {
     //				: 0L;
 
     final FutureTask<Long> ft =
-        new FutureTask<Long>(
+        new FutureTask<>(
             new Callable<Long>() {
               public Long call() throws Exception {
                 try {
-                  if (log.isInfoEnabled())
+                  if (log.isInfoEnabled()) {
                     log.info(
                         "Attempting blocking allocation: slotBytes: " + manager.getSlotBytes());
+                  }
                   /*
                    * blocking allocation of the same size that was
                    * just refused.

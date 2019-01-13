@@ -67,7 +67,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
    * the destruction of a namespace we clean up. We have to synchronize this for thread safety.
    */
   private static final Map<UUID, ConfiguredAnalyzerFactory> allConfigs =
-      Collections.synchronizedMap(new WeakHashMap<UUID, ConfiguredAnalyzerFactory>());
+      Collections.synchronizedMap(new WeakHashMap<>());
 
   private static final String ALL_LUCENE_NATURAL_LANGUAGES =
       "org.embergraph.search.ConfigurableAnalyzerFactory.analyzer.*.like=eng\n"
@@ -521,7 +521,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       final Properties properties = initProperties();
 
       final Map<String, ConfigOptionsToAnalyzer> analyzers =
-          new HashMap<String, ConfigOptionsToAnalyzer>();
+          new HashMap<>();
 
       properties2analyzers(properties, analyzers);
 

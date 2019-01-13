@@ -125,7 +125,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -157,17 +157,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     final IVariable<?> y = Var.var("y");
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("John"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("John"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
-        new PipelineJoin<E>(
-            new BOp[] {},
+        new PipelineJoin<>(
+            new BOp[]{},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -185,11 +185,11 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Mary")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
               new IConstant[] {
-                new Constant<String>("Brad"), new Constant<String>("Fred"),
+                  new Constant<>("Brad"), new Constant<>("Fred"),
               }),
         };
 
@@ -199,17 +199,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Brad"));
-      tmp.set(y, new Constant<String>("Fred"));
+      tmp.set(x, new Constant<>("Brad"));
+      tmp.set(y, new Constant<>("Fred"));
       list.add(tmp);
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Mary"));
+      tmp.set(x, new Constant<>("Mary"));
       list.add(tmp);
 
       initialBindingSets = list.toArray(new IBindingSet[0]);
@@ -255,17 +255,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     //        };
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("John"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("John"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
-        new PipelineJoin<E>(
-            new BOp[] {},
+        new PipelineJoin<>(
+            new BOp[]{},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -279,7 +279,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
             new NV(
                 SubqueryOp.Annotations.CONSTRAINTS,
                 new IConstraint[] {
-                  Constraint.wrap(new EQConstant(x, new Constant<String>("Brad"))),
+                  Constraint.wrap(new EQConstant(x, new Constant<>("Brad"))),
                 }),
             new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE));
 
@@ -295,7 +295,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
           new ListBindingSet(
               new IVariable[] {x, y},
               new IConstant[] {
-                new Constant<String>("Brad"), new Constant<String>("Fred"),
+                  new Constant<>("Brad"), new Constant<>("Fred"),
               }),
         };
 
@@ -305,17 +305,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Brad"));
-      tmp.set(y, new Constant<String>("Fred"));
+      tmp.set(x, new Constant<>("Brad"));
+      tmp.set(y, new Constant<>("Fred"));
       list.add(tmp);
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Mary"));
+      tmp.set(x, new Constant<>("Mary"));
       list.add(tmp);
 
       initialBindingSets = list.toArray(new IBindingSet[0]);
@@ -357,17 +357,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     final IVariable<?> y = Var.var("y");
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("John"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("John"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // the subquery (basically, an access path read with "x" unbound).
     final PipelineJoin<E> subquery =
-        new PipelineJoin<E>(
-            new BOp[] {},
+        new PipelineJoin<>(
+            new BOp[]{},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal));
@@ -387,11 +387,11 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Mary")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
               new IConstant[] {
-                new Constant<String>("Brad"), new Constant<String>("Fred"),
+                  new Constant<>("Brad"), new Constant<>("Fred"),
               }),
         };
 
@@ -401,17 +401,17 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Brad"));
-      tmp.set(y, new Constant<String>("Fred"));
+      tmp.set(x, new Constant<>("Brad"));
+      tmp.set(y, new Constant<>("Fred"));
       list.add(tmp);
 
       tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Mary"));
+      tmp.set(x, new Constant<>("Mary"));
       list.add(tmp);
 
       initialBindingSets = list.toArray(new IBindingSet[0]);
@@ -623,52 +623,52 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Fred")
+                    new Constant<>("Paul"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Fred")
                 }),
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Paul"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Leon")
                 }),
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Fred")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Fred")
                 }),
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Leon")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Leon")
                 }),
             // plus anything we read from the first access path which did not
             // pass the optional join
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Paul"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("John"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("John"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Mary"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Fred")}),
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Fred")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Leon")})
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Leon")})
           };
 
       /*
@@ -820,7 +820,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
               new NV(
                   PipelineJoin.Annotations.CONSTRAINTS,
                   new IConstraint[] {
-                    Constraint.wrap(new NEConstant(d, new Constant<String>("Leon")))
+                    Constraint.wrap(new NEConstant(d, new Constant<>("Leon")))
                   }),
               new NV(QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
               //				// join is optional.
@@ -888,36 +888,36 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Fred")
+                    new Constant<>("Paul"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Fred")
                 }),
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Fred")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Fred")
                 }),
             // plus anything we read from the first access path which did not
             // pass the optional join
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Paul"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("John"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("John"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Mary"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Fred")}),
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Fred")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Leon")})
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Leon")})
           };
 
       AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);
@@ -1047,7 +1047,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
             new NV(Predicate.Annotations.BOP_ID, joinId1),
             new NV(PipelineJoin.Annotations.PREDICATE, pred1Op));
 
-    final IConstraint condition = Constraint.wrap(new NEConstant(a, new Constant<String>("Paul")));
+    final IConstraint condition = Constraint.wrap(new NEConstant(a, new Constant<>("Paul")));
 
     final ConditionalRoutingOp condOp =
         new ConditionalRoutingOp(
@@ -1145,39 +1145,39 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Leon")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Leon")
                 }),
             new ListBindingSet(
                 new IVariable[] {a, b, c, d},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Brad"),
-                  new Constant<String>("Fred")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("Brad"),
+                    new Constant<>("Fred")
                 }),
             // plus anything we read from the first access path which did not
             // pass the optional join
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Mary")}),
+                new IConstant[] {new Constant<>("Paul"), new Constant<>("Mary")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Paul"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("John"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("John"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Brad")}),
+                new IConstant[] {new Constant<>("Mary"), new Constant<>("Brad")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Fred")}),
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Fred")}),
             new ListBindingSet(
                 new IVariable[] {a, b},
-                new IConstant[] {new Constant<String>("Brad"), new Constant<String>("Leon")})
+                new IConstant[] {new Constant<>("Brad"), new Constant<>("Leon")})
           };
 
       AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);

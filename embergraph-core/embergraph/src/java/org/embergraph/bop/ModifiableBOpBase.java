@@ -84,9 +84,9 @@ public class ModifiableBOpBase extends CoreBaseBOp {
    */
   public ModifiableBOpBase(final ModifiableBOpBase op) {
 
-    args = new ArrayList<BOp>(op.args);
+    args = new ArrayList<>(op.args);
 
-    annotations = new LinkedHashMap<String, Object>(op.annotations);
+    annotations = new LinkedHashMap<>(op.annotations);
   }
 
   /*
@@ -103,13 +103,13 @@ public class ModifiableBOpBase extends CoreBaseBOp {
 
     checkArgs(args);
 
-    this.args = new ArrayList<BOp>(args.length);
+    this.args = new ArrayList<>(args.length);
 
     for (BOp t : args) this.args.add(t);
 
     this.annotations =
         (annotations == null
-            ? new LinkedHashMap<String, Object>(DEFAULT_INITIAL_CAPACITY)
+            ? new LinkedHashMap<>(DEFAULT_INITIAL_CAPACITY)
             : annotations);
   }
 
@@ -305,7 +305,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
    */
   public final List<BOp> args() {
 
-    return new NotifyingList<BOp>(this);
+    return new NotifyingList<>(this);
   }
 
   /** Class provides notice on mutation events. */
@@ -345,7 +345,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     }
 
     public Iterator<T> iterator() {
-      return new NotifyingListIterator<T>(bop, delegate.listIterator());
+      return new NotifyingListIterator<>(bop, delegate.listIterator());
     }
 
     public Object[] toArray() {
@@ -427,15 +427,15 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     }
 
     public ListIterator<T> listIterator() {
-      return new NotifyingListIterator<T>(bop, delegate.listIterator());
+      return new NotifyingListIterator<>(bop, delegate.listIterator());
     }
 
     public ListIterator<T> listIterator(int index) {
-      return new NotifyingListIterator<T>(bop, delegate.listIterator(index));
+      return new NotifyingListIterator<>(bop, delegate.listIterator(index));
     }
 
     public List<T> subList(int fromIndex, int toIndex) {
-      return new NotifyingList<T>(bop, delegate.subList(fromIndex, toIndex));
+      return new NotifyingList<>(bop, delegate.subList(fromIndex, toIndex));
     }
   }
 
@@ -498,7 +498,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
    */
   public final Iterator<BOp> argIterator() {
 
-    return new NotifyingList<BOp>(this, args).iterator();
+    return new NotifyingList<>(this, args).iterator();
   }
 
   // shallow copy

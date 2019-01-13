@@ -90,7 +90,7 @@ public abstract class SampleBase {
   }
 
   /** Sample. */
-  private final AtomicReference<IBindingSet[]> sampleRef = new AtomicReference<IBindingSet[]>();
+  private final AtomicReference<IBindingSet[]> sampleRef = new AtomicReference<>();
 
   /*
    * The sampled solution set.

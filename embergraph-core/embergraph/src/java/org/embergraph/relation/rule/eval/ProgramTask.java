@@ -242,7 +242,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
         /*
          * Execute a query.
          */
-        return new ChunkConsumerIterator<ISolution>(executeQuery(step));
+        return new ChunkConsumerIterator<>(executeQuery(step));
       }
 
     } finally {

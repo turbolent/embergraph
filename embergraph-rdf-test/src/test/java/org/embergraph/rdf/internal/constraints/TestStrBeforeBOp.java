@@ -80,8 +80,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
 
         final IV actual =
             new StrBeforeBOp(
-                    new Constant<IV>(arg1),
-                    new Constant<IV>(arg2),
+                new Constant<>(arg1),
+                new Constant<>(arg2),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -98,8 +98,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
 
         final IV actual =
             new StrBeforeBOp(
-                    new Constant<IV>(arg1),
-                    new Constant<IV>(arg2),
+                new Constant<>(arg1),
+                new Constant<>(arg2),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -115,8 +115,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
         try {
           final IV actual =
               new StrBeforeBOp(
-                      new Constant<IV>(arg1),
-                      new Constant<IV>(arg2),
+                  new Constant<>(arg1),
+                  new Constant<>(arg2),
                       new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                   .get(emptyBindingSet);
 
@@ -135,8 +135,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
 
         final IV actual =
             new StrBeforeBOp(
-                    new Constant<IV>(arg1),
-                    new Constant<IV>(arg2),
+                new Constant<>(arg1),
+                new Constant<>(arg2),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -153,8 +153,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
 
         final IV actual =
             new StrBeforeBOp(
-                    new Constant<IV>(arg1),
-                    new Constant<IV>(arg2),
+                new Constant<>(arg1),
+                new Constant<>(arg2),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -171,8 +171,8 @@ public class TestStrBeforeBOp extends ProxyTestCase {
 
         final IV actual =
             new StrBeforeBOp(
-                    new Constant<IV>(arg1),
-                    new Constant<IV>(arg2),
+                new Constant<>(arg1),
+                new Constant<>(arg2),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 

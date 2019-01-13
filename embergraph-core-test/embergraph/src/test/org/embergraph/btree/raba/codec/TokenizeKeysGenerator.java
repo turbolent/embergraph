@@ -146,7 +146,7 @@ public class TokenizeKeysGenerator implements IRabaGenerator {
   public Set<String> tokenize(final String fileOrResource, final Reader r) throws Exception {
 
     // the distinct terms.
-    final Set<String> terms = new HashSet<String>(10000);
+    final Set<String> terms = new HashSet<>(10000);
 
     // the tokenizer.
     final StreamTokenizer tok = new StreamTokenizer(r);

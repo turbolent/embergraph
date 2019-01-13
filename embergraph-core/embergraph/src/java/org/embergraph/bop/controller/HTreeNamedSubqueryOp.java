@@ -139,7 +139,7 @@ public class HTreeNamedSubqueryOp extends PipelineOp
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ControllerTask(this, context));
+    return new FutureTask<>(new ControllerTask(this, context));
   }
 
   /*
@@ -250,7 +250,7 @@ public class HTreeNamedSubqueryOp extends PipelineOp
         }
 
         // source.
-        final Iterator<IBindingSet[]> source = new SingleValueIterator<IBindingSet[]>(bindingSets);
+        final Iterator<IBindingSet[]> source = new SingleValueIterator<>(bindingSets);
 
         // default sink
         final IBlockingBuffer<IBindingSet[]> sink = context.getSink();

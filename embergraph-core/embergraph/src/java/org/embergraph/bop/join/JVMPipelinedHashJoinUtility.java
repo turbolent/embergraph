@@ -74,13 +74,13 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
   protected final CAT nResultsFromSubqueries = new CAT();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#distinctProjectionBuffer} */
-  final Set<IBindingSet> distinctProjectionBuffer = new HashSet<IBindingSet>();
+  final Set<IBindingSet> distinctProjectionBuffer = new HashSet<>();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#incomingBindingsBuffer} */
-  final List<IBindingSet> incomingBindingsBuffer = new LinkedList<IBindingSet>();
+  final List<IBindingSet> incomingBindingsBuffer = new LinkedList<>();
 
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#distinctProjectionsWithoutSubqueryResult} */
-  final Set<IBindingSet> distinctProjectionsWithoutSubqueryResult = new HashSet<IBindingSet>();
+  final Set<IBindingSet> distinctProjectionsWithoutSubqueryResult = new HashSet<>();
 
   /*
    * Set to true if processing binding sets are passed in via Annotations.BINDING_SETS_SOURCE *and*
@@ -143,7 +143,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
     long naccepted = 0;
 
     // 1. Compute those distinct binding sets in the chunk not seen before
-    final List<IBindingSet> dontRequireSubqueryEvaluation = new LinkedList<IBindingSet>();
+    final List<IBindingSet> dontRequireSubqueryEvaluation = new LinkedList<>();
 
     // first, join the mappings that can be joined immediately and
     // calculate the remaining ones, including the

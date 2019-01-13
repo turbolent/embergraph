@@ -293,7 +293,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         // Lazily allocate map.
         if (tmp == null) {
 
-          tmp = new LinkedHashMap<IVariable<?>, Map<URI, StatementPatternNode>>();
+          tmp = new LinkedHashMap<>();
         }
 
         // Lazily allocate set for that searchVar.
@@ -301,7 +301,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         if (statementPatterns == null) {
 
-          tmp.put(searchVar, statementPatterns = new LinkedHashMap<URI, StatementPatternNode>());
+          tmp.put(searchVar, statementPatterns = new LinkedHashMap<>());
         }
 
         // Add search predicate to set for that searchVar.
@@ -319,7 +319,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
   private void validateSearch(
       final IVariable<?> searchVar, final Map<URI, StatementPatternNode> statementPatterns) {
 
-    final Set<URI> uris = new LinkedHashSet<URI>();
+    final Set<URI> uris = new LinkedHashSet<>();
 
     for (StatementPatternNode sp : statementPatterns.values()) {
 
@@ -525,10 +525,10 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       final EmbergraphValueFactory vf = kb.getValueFactory();
 
       final BlockingBuffer<IBindingSet[]> buffer =
-          new BlockingBuffer<IBindingSet[]>(globalBufferChunkOfChunksCapacity);
+          new BlockingBuffer<>(globalBufferChunkOfChunksCapacity);
 
       final FutureTask<Void> ft =
-          new FutureTask<Void>(
+          new FutureTask<>(
               new GeoSpatialServiceCallTask(
                   buffer,
                   query.normalize(),
@@ -547,7 +547,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       buffer.setFuture(ft); // set the future on the buffer
       kb.getIndexManager().getExecutorService().submit(ft);
 
-      return new ChunkConsumerIterator<IBindingSet>(buffer.iterator());
+      return new ChunkConsumerIterator<>(buffer.iterator());
     }
 
     private static Var<?> varFromIVar(IVariable<?> iVar) {
@@ -643,7 +643,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       protected List<GeoSpatialServiceCallSubRangeTask> getSubTasks() {
 
         final List<GeoSpatialServiceCallSubRangeTask> subTasks =
-            new LinkedList<GeoSpatialServiceCallSubRangeTask>();
+            new LinkedList<>();
 
         for (IGeoSpatialQuery query : queries) {
 
@@ -677,7 +677,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           }
 
           final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
-              new GeoSpatialLiteralExtension<EmbergraphValue>(
+              new GeoSpatialLiteralExtension<>(
                   kb.getLexiconRelation(), datatypeConfig);
 
           // this debug code (currently broken) might be re-enabled once needed
@@ -785,7 +785,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         // set up datatype configuration for the datatype URI
         final GeoSpatialDatatypeConfiguration datatypeConfig = query.getDatatypeConfig();
         final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
-            new GeoSpatialLiteralExtension<EmbergraphValue>(
+            new GeoSpatialLiteralExtension<>(
                 kb.getLexiconRelation(), datatypeConfig);
 
         switch (query.getSearchFunction()) {
@@ -801,7 +801,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                       query.getSpatialUnit(),
                       query.getTimeStart(),
                       query.getTimeEnd(),
-                      new GeoSpatialLiteralExtension<EmbergraphValue>(
+                      new GeoSpatialLiteralExtension<>(
                           kb.getLexiconRelation(), datatypeConfig),
                       geoSpatialCounters);
             }
@@ -816,7 +816,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
               // (which might be the case if we query an index without latitude and longitude)
               filter =
                   new AcceptAllSolutionsFilter(
-                      new GeoSpatialLiteralExtension<EmbergraphValue>(
+                      new GeoSpatialLiteralExtension<>(
                           kb.getLexiconRelation(), datatypeConfig),
                       geoSpatialCounters);
             }
@@ -901,7 +901,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                 subjectPos,
                 objectPos,
                 vf,
-                new GeoSpatialLiteralExtension<EmbergraphValue>(
+                new GeoSpatialLiteralExtension<>(
                     kb.getLexiconRelation(), datatypeConfig),
                 query.getCustomFieldsConstraints().keySet(),
                 centerPointDD,
@@ -921,7 +921,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         // set up datatype configuration and literal extension object for the datatype URI
         final GeoSpatialDatatypeConfiguration datatypeConfig = query.getDatatypeConfig();
         final GeoSpatialLiteralExtension litExt =
-            new GeoSpatialLiteralExtension<EmbergraphValue>(
+            new GeoSpatialLiteralExtension<>(
                 kb.getLexiconRelation(), datatypeConfig);
 
         // set up range scan
@@ -1005,11 +1005,11 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
          * tasks for errors and ensure that any running tasks are
          * cancelled.
          */
-        final List<FutureTask<Void>> futureTasks = new LinkedList<FutureTask<Void>>();
+        final List<FutureTask<Void>> futureTasks = new LinkedList<>();
 
         for (GeoSpatialServiceCallSubRangeTask task : tasks) {
 
-          final FutureTask<Void> ft = new FutureTask<Void>(task);
+          final FutureTask<Void> ft = new FutureTask<>(task);
 
           futureTasks.add(ft);
         }
@@ -1082,7 +1082,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
           // create a local buffer linked to the backing, thread safe blocking buffer
           localBuffer =
-              new UnsynchronizedArrayBuffer<IBindingSet>(
+              new UnsynchronizedArrayBuffer<>(
                   backingBuffer, IBindingSet.class, threadLocalBufferCapacity);
 
           this.accessPath = accessPath;
@@ -1159,7 +1159,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         public List<GeoSpatialSearchRange> partition(
             int numTasks, long totalPointsInRange, int minDatapointsPerTask) {
 
-          final List<GeoSpatialSearchRange> partitions = new ArrayList<GeoSpatialSearchRange>();
+          final List<GeoSpatialSearchRange> partitions = new ArrayList<>();
 
           final long numPartitions =
               computeNumberOfPartitions(numTasks, totalPointsInRange, minDatapointsPerTask);
@@ -1216,7 +1216,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
           final long dist = diff / numPartitions;
 
-          final List<Long> breakPoints = new ArrayList<Long>();
+          final List<Long> breakPoints = new ArrayList<>();
 
           /** Compute the break points */
           long lastConsidered = -1;
@@ -1480,7 +1480,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         final IV[] ivs = IVUtility.decode(key, extractToPosition);
 
         final IBindingSet bs = incomingBindingSet.clone();
-        bs.set(var, new Constant<IV>(ivs[subjectPos]));
+        bs.set(var, new Constant<>(ivs[subjectPos]));
 
         // handle request for binding index components
         if (requiresObjectDereferencing) {
@@ -1552,7 +1552,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
             bs.set(
                 literalVar,
-                new Constant<IV>(
+                new Constant<>(
                     DummyConstantNode.toDummyIV(
                         vf.createLiteral(
                             literalSerializer.fromComponents(componentArr),
@@ -1952,7 +1952,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
    */
   Collection<StatementPatternNode> getStatementPatterns(final ServiceNode serviceNode) {
 
-    final List<StatementPatternNode> statementPatterns = new ArrayList<StatementPatternNode>();
+    final List<StatementPatternNode> statementPatterns = new ArrayList<>();
 
     for (IGroupMemberNode child : serviceNode.getGraphPattern()) {
 
@@ -1973,7 +1973,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
      * This method extracts exactly those variables that are incoming, i.e. must be bound before
      * executing the execution of the service.
      */
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     for (StatementPatternNode sp : getStatementPatterns(serviceNode)) {
 
       final URI predicate = (URI) (sp.p()).getValue();

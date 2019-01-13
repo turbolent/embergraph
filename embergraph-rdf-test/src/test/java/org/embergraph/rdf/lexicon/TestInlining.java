@@ -92,7 +92,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values, ensure range is beyond max signed values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -168,7 +168,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values, ensure range is beyond max signed values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -235,7 +235,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values, ensure range is beyond max signed values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -335,7 +335,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         return;
       }
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -425,7 +425,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         return;
       }
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -550,7 +550,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         return;
       }
 
-      final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new HashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();
@@ -634,7 +634,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
     store.getLexiconRelation().addTerms(a, size, false /* readOnly */);
 
     // populate map w/ the assigned term identifiers.
-    final Collection<IV<?, ?>> ids = new ArrayList<IV<?, ?>>();
+    final Collection<IV<?, ?>> ids = new ArrayList<>();
 
     for (EmbergraphValue t : a) {
 
@@ -690,7 +690,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
     try {
 
-      final Collection<EmbergraphValue> terms = new LinkedHashSet<EmbergraphValue>();
+      final Collection<EmbergraphValue> terms = new LinkedHashSet<>();
 
       // lookup/add some values.
       final EmbergraphValueFactory f = store.getValueFactory();

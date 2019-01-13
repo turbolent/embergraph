@@ -797,8 +797,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final RWStrategy bufferStrategy = (RWStrategy) store.getBufferStrategy();
 
         final RWStore rw = bufferStrategy.getStore();
-        final ArrayList<Integer> sizes = new ArrayList<Integer>();
-        final TreeMap<Long, Integer> paddrs = new TreeMap<Long, Integer>();
+        final ArrayList<Integer> sizes = new ArrayList<>();
+        final TreeMap<Long, Integer> paddrs = new TreeMap<>();
         for (int i = 0; i < 100000; i++) {
           final int s = r.nextInt(250) + 1;
           sizes.add(s);
@@ -884,7 +884,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         int breaks = 0;
         int contiguous = 0;
 
-        ArrayList<Integer> recycle = new ArrayList<Integer>();
+        ArrayList<Integer> recycle = new ArrayList<>();
 
         long pap = rw.physicalAddress(rw.alloc(cAllocSize, null));
         for (int i = 0; i < 500000; i++) {
@@ -957,7 +957,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         int breaks = 0;
         int contiguous = 0;
 
-        ArrayList<Integer> recycle = new ArrayList<Integer>();
+        ArrayList<Integer> recycle = new ArrayList<>();
 
         long pap = rw.physicalAddress(rw.alloc(cAllocSize, null));
         for (int i = 0; i < 500000; i++) {
@@ -1336,7 +1336,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final Random ran = new Random();
 
         for (int r = 0; r < 20; r++) {
-          ArrayList<Integer> addrs = new ArrayList<Integer>();
+          ArrayList<Integer> addrs = new ArrayList<>();
           for (int a = 0; a < allocs; a++) {
             addrs.add(rw.alloc(50, cntxt));
           }
@@ -1385,7 +1385,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final Random ran = new Random();
 
         for (int r = 0; r < 20; r++) {
-          final ArrayList<Integer> addrs = new ArrayList<Integer>();
+          final ArrayList<Integer> addrs = new ArrayList<>();
           for (int a = 0; a < allocs; a++) {
             addrs.add(rw.alloc(50, cntxt));
           }
@@ -1440,8 +1440,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // allocate a global address
         final int allocs = 1000;
         final PseudoRandom ran = new PseudoRandom(20000);
-        final ArrayList<Integer> addrs = new ArrayList<Integer>();
-        final ArrayList<Integer> sizes = new ArrayList<Integer>();
+        final ArrayList<Integer> addrs = new ArrayList<>();
+        final ArrayList<Integer> sizes = new ArrayList<>();
 
         for (int a = 0; a < allocs; a++) {
           final int sze = 32 + ran.nextInt(1200);
@@ -1828,7 +1828,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
         System.out.println("File: " + rw.getStoreFile().getAbsolutePath());
 
-        final ArrayList<Integer> addrs = new ArrayList<Integer>();
+        final ArrayList<Integer> addrs = new ArrayList<>();
 
         final Random r = new Random();
 
@@ -2342,7 +2342,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       try {
         for (int i = 0; i < 100; i++) commitSomeData(journal);
 
-        final AtomicReference<IRootBlockView> rbv = new AtomicReference<IRootBlockView>();
+        final AtomicReference<IRootBlockView> rbv = new AtomicReference<>();
         final Iterator<ISnapshotEntry> data = journal.snapshotAllocationData(rbv).entries();
 
         while (data.hasNext()) {
@@ -2417,7 +2417,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final ByteBuffer bb = ByteBuffer.wrap(buf);
 
         final IRawTx tx = rw.newTx();
-        final ArrayList<Long> addrs = new ArrayList<Long>();
+        final ArrayList<Long> addrs = new ArrayList<>();
 
         // We just want to stress a single allocator, so make 5000
         // allocations to force multiple allocBlocks.
@@ -2866,7 +2866,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
-        final ArrayList<Long> addrs = new ArrayList<Long>();
+        final ArrayList<Long> addrs = new ArrayList<>();
         for (int i = 0; i < cAddrs; i++) {
           addrs.add(bs.write(randomData(45)));
         }
@@ -2937,7 +2937,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
-        ArrayList<Long> addrs = new ArrayList<Long>();
+        ArrayList<Long> addrs = new ArrayList<>();
         for (int i = 0; i < nallocs; i++) {
           addrs.add(bs.write(randomData(45)));
         }
@@ -2997,7 +2997,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
-        ArrayList<Long> addrs = new ArrayList<Long>();
+        ArrayList<Long> addrs = new ArrayList<>();
         for (int i = 0; i < nallocs; i++) {
           addrs.add(bs.write(randomData(1024))); // mostly blob data
         }
@@ -3055,7 +3055,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
         for (int r = 0; r < 10; r++) {
-          ArrayList<Long> addrs = new ArrayList<Long>();
+          ArrayList<Long> addrs = new ArrayList<>();
           for (int i = 0; i < 100; i++) {
             addrs.add(bs.write(randomData(45)));
           }
@@ -3093,7 +3093,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final RWStore rw = bs.getStore();
 
         for (int r = 0; r < 10; r++) {
-          ArrayList<Long> addrs = new ArrayList<Long>();
+          ArrayList<Long> addrs = new ArrayList<>();
           for (int i = 0; i < 1000; i++) {
             addrs.add(bs.write(randomData(2048)));
           }
@@ -3130,7 +3130,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         final RWStore rw = bs.getStore();
 
         for (int r = 0; r < 10; r++) {
-          ArrayList<Long> addrs = new ArrayList<Long>();
+          ArrayList<Long> addrs = new ArrayList<>();
           for (int i = 0; i < 1000; i++) {
             addrs.add(bs.write(randomData(2048)));
           }

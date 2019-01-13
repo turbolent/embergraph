@@ -157,25 +157,25 @@ public class TestSlice extends AbstractRuleTestCase {
           new ListBindingSet(
               vars,
               new IConstant[] {
-                new Constant<IV>(x0.getIV()),
-                new Constant<IV>(y0.getIV()),
-                new Constant<IV>(z0.getIV())
+                  new Constant<>(x0.getIV()),
+                  new Constant<>(y0.getIV()),
+                  new Constant<>(z0.getIV())
               });
       final IBindingSet bs1 =
           new ListBindingSet(
               vars,
               new IConstant[] {
-                new Constant<IV>(x1.getIV()),
-                new Constant<IV>(y1.getIV()),
-                new Constant<IV>(z1.getIV())
+                  new Constant<>(x1.getIV()),
+                  new Constant<>(y1.getIV()),
+                  new Constant<>(z1.getIV())
               });
       final IBindingSet bs2 =
           new ListBindingSet(
               vars,
               new IConstant[] {
-                new Constant<IV>(x2.getIV()),
-                new Constant<IV>(y2.getIV()),
-                new Constant<IV>(z2.getIV())
+                  new Constant<>(x2.getIV()),
+                  new Constant<>(y2.getIV()),
+                  new Constant<>(z2.getIV())
               });
 
       // no slice.
@@ -275,12 +275,12 @@ public class TestSlice extends AbstractRuleTestCase {
           new SPOPredicate(
               store.getSPORelation().getNamespace(),
               Var.var("x"),
-              new Constant<IV>(foo.getIV()),
+              new Constant<>(foo.getIV()),
               Var.var("y")),
           new SPOPredicate(
               store.getSPORelation().getNamespace(),
               Var.var("y"),
-              new Constant<IV>(bar.getIV()),
+              new Constant<>(bar.getIV()),
               Var.var("z")),
         },
         new QueryOptions(false /* distinct */, true /* stable */, null /* orderBy */, slice),

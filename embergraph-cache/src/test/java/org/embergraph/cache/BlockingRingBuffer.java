@@ -51,7 +51,7 @@ public class BlockingRingBuffer<E> implements BlockingQueue<E> {
   /** @param capacity */
   public BlockingRingBuffer(final int capacity) {
 
-    buffer = new RingBuffer<E>(capacity);
+    buffer = new RingBuffer<>(capacity);
   }
 
   public boolean add(E e) {

@@ -48,7 +48,7 @@ public class TestEQConstant extends TestCase2 {
   /** Unit test for {@link EQConstant#EQConstant(IVariable,IConstant)} */
   public void testConstructor() {
     try {
-      assertTrue(null != new EQConstant(null, new Constant<String>("1")));
+      assertTrue(null != new EQConstant(null, new Constant<>("1")));
       fail("IllegalArgumentException expected, lhs was null");
     } catch (IllegalArgumentException e) {
     }
@@ -59,15 +59,15 @@ public class TestEQConstant extends TestCase2 {
     } catch (IllegalArgumentException e) {
     }
 
-    assertTrue(null != new EQConstant(Var.var("x"), new Constant<String>("1")));
+    assertTrue(null != new EQConstant(Var.var("x"), new Constant<>("1")));
   }
 
   /** Unit test for {@link EQConstant#accept(IBindingSet)} */
   public void testAccept() {
     Var<?> var = Var.var("x");
-    Constant<String> val1 = new Constant<String>("1");
-    Constant<String> val2 = new Constant<String>("2");
-    Constant<Integer> val3 = new Constant<Integer>(1);
+    Constant<String> val1 = new Constant<>("1");
+    Constant<String> val2 = new Constant<>("2");
+    Constant<Integer> val3 = new Constant<>(1);
 
     EQConstant op = new EQConstant(var, val1);
 

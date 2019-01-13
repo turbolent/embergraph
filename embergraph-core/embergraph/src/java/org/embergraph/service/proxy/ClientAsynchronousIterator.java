@@ -147,7 +147,7 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
     if (future != null) throw new IllegalStateException();
 
     // allocate local buffer.
-    this.localBuffer = new BlockingBuffer<E>(capacity);
+    this.localBuffer = new BlockingBuffer<>(capacity);
 
     /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
@@ -155,7 +155,7 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>, 
      */
 
     // Wrap computation as FutureTask.
-    final FutureTask<Void> ft = new FutureTask<Void>(new ReaderTask());
+    final FutureTask<Void> ft = new FutureTask<>(new ReaderTask());
 
     /*
      * Set future on the local buffer so that we can interrupt it when the

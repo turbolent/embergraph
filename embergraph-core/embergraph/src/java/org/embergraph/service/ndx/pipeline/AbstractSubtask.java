@@ -254,14 +254,14 @@ public abstract class AbstractSubtask<
     private int chunkSize;
 
     /** The set of chunks that have been buffered so far. */
-    private LinkedList<E[]> chunks = new LinkedList<E[]>();
+    private LinkedList<E[]> chunks = new LinkedList<>();
 
     /** Clear the internal state after returning a chunk to the caller. */
     private void clear() {
 
       chunkSize = 0;
 
-      chunks = new LinkedList<E[]>();
+      chunks = new LinkedList<>();
     }
 
     public String toString() {

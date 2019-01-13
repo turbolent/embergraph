@@ -413,7 +413,7 @@ public abstract class AbstractBTree
       final Executor s = ((Journal) store).getReadExecutor();
 
       final FutureTask<AbstractNode<?>> ft =
-          new FutureTask<AbstractNode<?>>(
+          new FutureTask<>(
               new Callable<AbstractNode<?>>() {
 
                 public AbstractNode<?> call() throws Exception {
@@ -726,9 +726,9 @@ public abstract class AbstractBTree
     {
       counterSet.addCounter(
           "index UUID",
-          new OneShotInstrument<String>(getIndexMetadata().getIndexUUID().toString()));
+          new OneShotInstrument<>(getIndexMetadata().getIndexUUID().toString()));
 
-      counterSet.addCounter("class", new OneShotInstrument<String>(getClass().getName()));
+      counterSet.addCounter("class", new OneShotInstrument<>(getClass().getName()));
     }
 
     /*
@@ -739,11 +739,11 @@ public abstract class AbstractBTree
     {
       final CounterSet tmp = counterSet.makePath(IBTreeCounters.WriteRetentionQueue);
 
-      tmp.addCounter("Capacity", new OneShotInstrument<Integer>(writeRetentionQueue.capacity()));
+      tmp.addCounter("Capacity", new OneShotInstrument<>(writeRetentionQueue.capacity()));
 
-      tmp.addCounter("Size", new OneShotInstrument<Integer>(writeRetentionQueue.size()));
+      tmp.addCounter("Size", new OneShotInstrument<>(writeRetentionQueue.size()));
 
-      tmp.addCounter("Distinct", new OneShotInstrument<Integer>(ndistinctOnWriteRetentionQueue));
+      tmp.addCounter("Distinct", new OneShotInstrument<>(ndistinctOnWriteRetentionQueue));
     }
 
     /*
@@ -754,15 +754,15 @@ public abstract class AbstractBTree
     {
       final CounterSet tmp = counterSet.makePath(IBTreeCounters.Statistics);
 
-      tmp.addCounter("branchingFactor", new OneShotInstrument<Integer>(branchingFactor));
+      tmp.addCounter("branchingFactor", new OneShotInstrument<>(branchingFactor));
 
-      tmp.addCounter("height", new OneShotInstrument<Integer>(getHeight()));
+      tmp.addCounter("height", new OneShotInstrument<>(getHeight()));
 
-      tmp.addCounter("nodeCount", new OneShotInstrument<Long>(getNodeCount()));
+      tmp.addCounter("nodeCount", new OneShotInstrument<>(getNodeCount()));
 
-      tmp.addCounter("leafCount", new OneShotInstrument<Long>(getLeafCount()));
+      tmp.addCounter("leafCount", new OneShotInstrument<>(getLeafCount()));
 
-      tmp.addCounter("tupleCount", new OneShotInstrument<Long>(getEntryCount()));
+      tmp.addCounter("tupleCount", new OneShotInstrument<>(getEntryCount()));
 
       /*
        * Note: The utilization numbers reported here are a bit misleading.
@@ -778,14 +778,14 @@ public abstract class AbstractBTree
       final IBTreeUtilizationReport r = getUtilization();
 
       // % utilization in [0:100] for nodes
-      tmp.addCounter("%nodeUtilization", new OneShotInstrument<Integer>(r.getNodeUtilization()));
+      tmp.addCounter("%nodeUtilization", new OneShotInstrument<>(r.getNodeUtilization()));
 
       // % utilization in [0:100] for leaves
-      tmp.addCounter("%leafUtilization", new OneShotInstrument<Integer>(r.getLeafUtilization()));
+      tmp.addCounter("%leafUtilization", new OneShotInstrument<>(r.getLeafUtilization()));
 
       // % utilization in [0:100] for the whole tree (nodes + leaves).
       tmp.addCounter(
-          "%totalUtilization", new OneShotInstrument<Integer>(r.getTotalUtilization())); // / 100d
+          "%totalUtilization", new OneShotInstrument<>(r.getTotalUtilization())); // / 100d
 
       /*
        * Compute the average bytes per tuple. This requires access to the
@@ -801,7 +801,7 @@ public abstract class AbstractBTree
 
       final long bytesPerTuple = (long) (entryCount == 0 ? 0d : (bytes / entryCount));
 
-      tmp.addCounter("bytesPerTuple", new OneShotInstrument<Long>(bytesPerTuple));
+      tmp.addCounter("bytesPerTuple", new OneShotInstrument<>(bytesPerTuple));
     }
 
     /*
@@ -1001,10 +1001,10 @@ public abstract class AbstractBTree
        * the shared backing buffer in a timely manner.
        */
 
-      return new HardReferenceQueueWithBatchingUpdates<PO>(
+      return new HardReferenceQueueWithBatchingUpdates<>(
           EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
           16, // concurrencyLevel
-          new HardReferenceQueue<PO>(
+          new HardReferenceQueue<>(
               new DefaultEvictionListener(),
               metadata.getWriteRetentionQueueCapacity(),
               0 /* nscan */),
@@ -1014,10 +1014,10 @@ public abstract class AbstractBTree
           128, // 64, // thread-local queue capacity @todo config
           64, // 32 // thread-local tryLock size @todo config
           null // batched updates listener.
-          );
+      );
     }
 
-    return new HardReferenceQueue<PO>(
+    return new HardReferenceQueue<>(
         new DefaultEvictionListener(),
         metadata.getWriteRetentionQueueCapacity(),
         metadata.getWriteRetentionQueueScan());
@@ -3523,7 +3523,7 @@ public abstract class AbstractBTree
 
     // Map with one entry per level. Each entry is a dirtyList for that level.
     final Map<Integer /* level */, List<AbstractNode>> dirtyMap =
-        new HashMap<Integer, List<AbstractNode>>();
+        new HashMap<>();
 
     while (itr.hasNext()) {
 
@@ -3556,7 +3556,7 @@ public abstract class AbstractBTree
       if (dirtyList == null) {
 
         // First node or level at this level.
-        dirtyMap.put(level, dirtyList = new LinkedList<AbstractNode>());
+        dirtyMap.put(level, dirtyList = new LinkedList<>());
       }
 
       //          log.error("Adding to dirty list: t="+t.toShortString()+", level="+level+",
@@ -3632,7 +3632,7 @@ public abstract class AbstractBTree
 
       } else {
 
-        final ArrayList<Future<Void>> futureList = new ArrayList<Future<Void>>(dirtyListSize);
+        final ArrayList<Future<Void>> futureList = new ArrayList<>(dirtyListSize);
 
         // Note: Must have the same level of concurrency in
         // NodeSerializer instances.
@@ -3647,7 +3647,7 @@ public abstract class AbstractBTree
             final AbstractNode u = t;
 
             final FutureTask<Void> ft =
-                new FutureTask<Void>(
+                new FutureTask<>(
                     new Runnable() {
 
                       @Override
@@ -4103,11 +4103,11 @@ public abstract class AbstractBTree
        * Note: Used for transient BTrees.
        */
 
-      return new HardReference<AbstractNode<T>>(child);
+      return new HardReference<>(child);
 
     } else {
 
-      return new WeakReference<AbstractNode<T>>(child);
+      return new WeakReference<>(child);
       //        return new SoftReference<AbstractNode>( child ); // causes significant GC
       // "hesitations".
     }

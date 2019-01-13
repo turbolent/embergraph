@@ -42,7 +42,7 @@ public class EmbergraphSolutionResolverator
     super(
         db,
         src,
-        new BlockingBuffer<IBindingSet[]>(
+        new BlockingBuffer<>(
             db.getChunkOfChunksCapacity(),
             db.getChunkCapacity(),
             db.getChunkTimeout(),
@@ -68,7 +68,7 @@ public class EmbergraphSolutionResolverator
      * chunk.
      */
 
-    final Collection<IV<?, ?>> ids = new HashSet<IV<?, ?>>(chunk.length * state.getSPOKeyArity());
+    final Collection<IV<?, ?>> ids = new HashSet<>(chunk.length * state.getSPOKeyArity());
 
     for (ISolution solution : chunk) {
 
@@ -170,7 +170,7 @@ public class EmbergraphSolutionResolverator
        * FIXME This probably needs to strip out the EmbergraphSail#NULL_GRAPH
        * since that should not become bound.
        */
-      bindingSet.set(entry.getKey(), new Constant<EmbergraphValue>(value));
+      bindingSet.set(entry.getKey(), new Constant<>(value));
     }
 
     return bindingSet;

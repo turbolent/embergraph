@@ -367,7 +367,7 @@ public class Rule<E> implements IRule<E> {
     // the predicate declarations for the body.
     this.tail = tail;
 
-    final Set<IVariable> vars = new HashSet<IVariable>();
+    final Set<IVariable> vars = new HashSet<>();
 
     for (int i = 0; i < tail.length; i++) {
 
@@ -451,7 +451,7 @@ public class Rule<E> implements IRule<E> {
     this.taskFactory = taskFactory;
 
     // required variables may be null
-    final Set<IVariable> s = new HashSet<IVariable>();
+    final Set<IVariable> s = new HashSet<>();
     if (requiredVars == null) {
       s.addAll(vars);
     } else {
@@ -523,7 +523,7 @@ public class Rule<E> implements IRule<E> {
     final IRuleTaskFactory taskFactory = getTaskFactory();
 
     final IRule<E> newRule =
-        new Rule<E>(
+        new Rule<>(
             name,
             newHead,
             newTail,
@@ -568,7 +568,7 @@ public class Rule<E> implements IRule<E> {
    */
   public static Set<IVariable<?>> getSharedVars(final IPredicate p1, final IPredicate p2) {
 
-    final Set<IVariable<?>> vars = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new HashSet<>();
 
     final int arity1 = p1.arity();
 

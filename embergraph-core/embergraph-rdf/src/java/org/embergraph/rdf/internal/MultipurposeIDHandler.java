@@ -101,7 +101,7 @@ public class MultipurposeIDHandler extends InlineURIHandler {
 
     if (localName.length() < maxTextLen) {
       // just use a UTF encoded string, this is expensive
-      return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
+      return new FullyInlineTypedLiteralIV<>(localName);
     }
 
     return null;

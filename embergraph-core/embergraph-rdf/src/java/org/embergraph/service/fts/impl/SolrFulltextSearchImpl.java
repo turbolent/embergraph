@@ -54,7 +54,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
       try {
         FulltextSearchHit[] hits = queryIndex(query, client);
 
-        return new FulltextSearchHiterator<FulltextSearchHit>(hits);
+        return new FulltextSearchHiterator<>(hits);
 
       } catch (Exception e) {
 
@@ -62,7 +62,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
       }
     }
 
-    return new FulltextSearchHiterator<FulltextSearchHit>(new FulltextSearchHit[] {});
+    return new FulltextSearchHiterator<>(new FulltextSearchHit[]{});
   }
 
   @SuppressWarnings("deprecation")
@@ -152,7 +152,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
     JSONArray docs = resp.getJSONArray("docs");
 
     /** Collect results from JSON */
-    List<FulltextSearchHit> searchHits = new ArrayList<FulltextSearchHit>(docs.length());
+    List<FulltextSearchHit> searchHits = new ArrayList<>(docs.length());
     for (int i = 0; i < docs.length(); i++) {
 
       JSONObject result = docs.getJSONObject(i);

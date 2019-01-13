@@ -76,7 +76,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
   @Override
   public IV<V, Void> clone(final boolean clearCache) {
 
-    final TermId<V> tmp = new TermId<V>(flags, termId);
+    final TermId<V> tmp = new TermId<>(flags, termId);
 
     if (!clearCache) {
 

@@ -146,7 +146,7 @@ public class BlobsIndexHelper {
 
         final byte[] val = valSer.serialize(term, out.reset(), tmp);
 
-        a[i] = new KVO<EmbergraphValue>(key, val, term);
+        a[i] = new KVO<>(key, val, term);
       }
 
     } finally {

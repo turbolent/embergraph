@@ -66,7 +66,7 @@ public class CounterSetBTreeSelector implements ICounterSelector {
     // filter was already applied.
     final Iterator<ICounter> itr = counterSet.getCounters(null /* filter */);
 
-    final Vector<ICounter> v = new Vector<ICounter>();
+    final Vector<ICounter> v = new Vector<>();
 
     //        int ndistinct = 0;
 

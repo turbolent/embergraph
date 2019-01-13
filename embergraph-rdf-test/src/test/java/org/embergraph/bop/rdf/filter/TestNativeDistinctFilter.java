@@ -179,7 +179,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
        * The distinct SPOs.
        */
       final List<SPO> expected =
-          new LinkedList<SPO>(
+          new LinkedList<>(
               Arrays.asList(
                   new SPO(setup.paul, setup.knows, setup.mary, StatementEnum.Explicit), // [0]
                   new SPO(setup.paul, setup.knows, setup.brad, StatementEnum.Explicit), // [1]
@@ -188,10 +188,10 @@ public class TestNativeDistinctFilter extends TestCase2 {
                   new SPO(setup.mary, setup.knows, setup.brad, StatementEnum.Explicit), // [4]
                   new SPO(setup.brad, setup.knows, setup.fred, StatementEnum.Explicit), // [5]
                   new SPO(setup.brad, setup.knows, setup.leon, StatementEnum.Explicit) // [6]
-                  ));
+              ));
 
       // Add everything that we expect.
-      final List<SPO> given = new LinkedList<SPO>(expected);
+      final List<SPO> given = new LinkedList<>(expected);
 
       // Add in some duplicates too.
       given.addAll(

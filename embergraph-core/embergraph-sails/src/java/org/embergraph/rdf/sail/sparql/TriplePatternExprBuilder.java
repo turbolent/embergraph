@@ -305,7 +305,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     final int childCount = node.jjtGetNumChildren();
 
-    final List<TermNode> result = new ArrayList<TermNode>(childCount);
+    final List<TermNode> result = new ArrayList<>(childCount);
 
     for (int i = 0; i < childCount; i++) {
 
@@ -1158,7 +1158,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
       EmbergraphBNode val = context.valueFactory.createBNode(stmt);
 
-      SidIV<EmbergraphBNode> iv = new SidIV<EmbergraphBNode>(stmt);
+      SidIV<EmbergraphBNode> iv = new SidIV<>(stmt);
 
       val.setIV(iv);
 

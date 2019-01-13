@@ -522,7 +522,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
         if (indexLocalFilter != null) tmp.addFilter(indexLocalFilter);
 
-        tmp.addFilter(new SameVariableConstraintTupleFilter<R>(sameVarConstraint));
+        tmp.addFilter(new SameVariableConstraintTupleFilter<>(sameVarConstraint));
 
         this.indexLocalFilter = tmp;
 
@@ -772,7 +772,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (DEBUG) log.debug("Proven empty by historical range count");
 
-      return new EmptyChunkedIterator<R>(keyOrder);
+      return new EmptyChunkedIterator<>(keyOrder);
     }
 
     if (DEBUG)
@@ -804,7 +804,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
       if (offset > 0L) {
 
         // the iterator will be empty if the offset is GT zero.
-        return new EmptyChunkedIterator<R>(keyOrder);
+        return new EmptyChunkedIterator<>(keyOrder);
       }
 
       capacity = 1;
@@ -834,7 +834,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
           if (!filter.contains(fromKey)) {
 
             // proven to not exist.
-            return new EmptyChunkedIterator<R>(keyOrder);
+            return new EmptyChunkedIterator<>(keyOrder);
           }
 
           bloomHit = true;
@@ -914,7 +914,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
         if (DEBUG) log.debug("No elements based on range count.");
 
-        return new EmptyChunkedIterator<R>(keyOrder);
+        return new EmptyChunkedIterator<>(keyOrder);
       }
 
       if (rangeCountRemaining < fullyBufferedReadThreshold) {
@@ -1072,10 +1072,10 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
     if (nread == 0) {
 
-      return new EmptyChunkedIterator<R>(keyOrder);
+      return new EmptyChunkedIterator<>(keyOrder);
     }
 
-    return new ChunkedArrayIterator<R>(nused, buffer, keyOrder);
+    return new ChunkedArrayIterator<>(nused, buffer, keyOrder);
   }
 
   /*
@@ -1097,7 +1097,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
      * evaluated close to the data, not here where it would be evaluated
      * once the elements were materialized on the client.
      */
-    final BlockingBuffer<R[]> buffer = new BlockingBuffer<R[]>(chunkOfChunksCapacity);
+    final BlockingBuffer<R[]> buffer = new BlockingBuffer<>(chunkOfChunksCapacity);
 
     /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
@@ -1105,7 +1105,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
      */
 
     // Wrap computation as FutureTask.
-    final FutureTask<Void> ft = new FutureTask<Void>(new ChunkConsumerTask<R>(this, src, buffer));
+    final FutureTask<Void> ft = new FutureTask<>(new ChunkConsumerTask<>(this, src, buffer));
 
     // Set Future on BlockingBuffer *before* starting computation.
     buffer.setFuture(ft);
@@ -1113,7 +1113,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     // Start computation.
     indexManager.getExecutorService().submit(ft);
 
-    return new ChunkConsumerIterator<R>(buffer.iterator(), keyOrder);
+    return new ChunkConsumerIterator<>(buffer.iterator(), keyOrder);
   }
 
   /*
@@ -1166,7 +1166,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
        * those chunks are available with little or no added latency.
        */
       final IChunkedOrderedIterator<R> itr =
-          new ChunkedWrappedIterator<R>(
+          new ChunkedWrappedIterator<>(
               src, accessPath.chunkCapacity, accessPath.keyOrder, null /* filter */);
 
       long nchunks = 0;

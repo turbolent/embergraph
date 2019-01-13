@@ -921,7 +921,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
   @Override
   public final FunctionNode visit(ASTGroupConcat node, Object data) throws VisitorException {
 
-    Map<String, Object> scalarValues = new LinkedHashMap<String, Object>();
+    Map<String, Object> scalarValues = new LinkedHashMap<>();
 
     if (node.isDistinct()) {
 

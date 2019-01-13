@@ -708,10 +708,10 @@ public class TestKeyBuilder extends TestCase2 {
 
     KVO<String>[] a =
         new KVO[] {
-          new KVO<String>(TestKeyBuilder.asSortKey("bro"), null, "bro"),
-          new KVO<String>(TestKeyBuilder.asSortKey("brown"), null, "brown"),
-          new KVO<String>(TestKeyBuilder.asSortKey("bre"), null, "bre"),
-          new KVO<String>(TestKeyBuilder.asSortKey("break"), null, "break"),
+            new KVO<>(TestKeyBuilder.asSortKey("bro"), null, "bro"),
+            new KVO<>(TestKeyBuilder.asSortKey("brown"), null, "brown"),
+            new KVO<>(TestKeyBuilder.asSortKey("bre"), null, "bre"),
+            new KVO<>(TestKeyBuilder.asSortKey("break"), null, "break"),
         };
 
     // sort by the assigned sort keys.
@@ -1109,7 +1109,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
     //        final float[] vals = new float[limit];
     //        final byte[][] keys = new byte[limit][];
-    Set<Float> set = new HashSet<Float>(limit);
+    Set<Float> set = new HashSet<>(limit);
     final X[] data = new X[limit];
     IKeyBuilder keyBuilder = new KeyBuilder();
     {
@@ -1146,7 +1146,7 @@ public class TestKeyBuilder extends TestCase2 {
     System.err.println("Populating map");
 
     TreeMap<byte[], Float> map =
-        new TreeMap<byte[], Float>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
+        new TreeMap<>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
 
     int[] order = getRandomOrder(limit);
 
@@ -1244,7 +1244,7 @@ public class TestKeyBuilder extends TestCase2 {
         return 0;
       }
     }
-    Set<Double> set = new HashSet<Double>(limit);
+    Set<Double> set = new HashSet<>(limit);
     final X[] data = new X[limit];
     IKeyBuilder keyBuilder = new KeyBuilder();
     {
@@ -1281,7 +1281,7 @@ public class TestKeyBuilder extends TestCase2 {
     System.err.println("Populating map");
 
     TreeMap<byte[], Double> map =
-        new TreeMap<byte[], Double>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
+        new TreeMap<>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
 
     int[] order = getRandomOrder(limit);
 

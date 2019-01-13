@@ -316,7 +316,7 @@ public class AtomicRowWriteRead extends AbstractAtomicRowReadOrWrite {
      * index write operations will be fully ordered.
      */
 
-    propertySet = new TreeMap<String, Object>();
+    propertySet = new TreeMap<>();
 
     // #of property values.
     final int n = in.readInt();

@@ -73,7 +73,7 @@ public class TestIVSolutionSetEncoder extends AbstractBindingSetEncoderTestCase 
   @SuppressWarnings("rawtypes")
   public void test_streamAPI() {
 
-    final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
+    final List<IBindingSet> expectedSolutions = new ArrayList<>();
 
     {
       final IBindingSet expected = new ListBindingSet();
@@ -97,7 +97,7 @@ public class TestIVSolutionSetEncoder extends AbstractBindingSetEncoderTestCase 
   @SuppressWarnings("rawtypes")
   public void test_streamAPI2() {
 
-    final List<IBindingSet> expectedSolutions = new ArrayList<IBindingSet>();
+    final List<IBindingSet> expectedSolutions = new ArrayList<>();
     {
       final IBindingSet expected = new ListBindingSet();
       expected.set(Var.var("x"), new Constant<IV>(termId));

@@ -330,7 +330,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       final float loadFactor =
           getProperty(properties, Annotations.LOAD_FACTOR, Annotations.DEFAULT_LOAD_FACTOR);
 
-      lru = new LinkedHashMap<ISPO, byte[]>(initialCapacity, loadFactor);
+      lru = new LinkedHashMap<>(initialCapacity, loadFactor);
 
       this.nominalCapacity = initialCapacity;
 

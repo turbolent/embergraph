@@ -28,7 +28,7 @@ public abstract class TupleRemover<E> extends FilterBase implements ITupleFilter
   @Override
   public ITupleIterator<E> filterOnce(final Iterator src, Object context) {
 
-    return new TupleRemover.Removerator<E>((ITupleIterator<E>) src, context, this);
+    return new TupleRemover.Removerator<>((ITupleIterator<E>) src, context, this);
   }
 
   /*

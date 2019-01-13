@@ -116,7 +116,7 @@ public class VMStatCollector extends AbstractProcessCollector
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>vmstat</code>.
    */
-  private final Map<String, Object> vals = new ConcurrentHashMap<String, Object>();
+  private final Map<String, Object> vals = new ConcurrentHashMap<>();
 
   /** The timestamp associated with the most recently collected values. */
   private final AtomicLong lastModified = new AtomicLong(System.currentTimeMillis());
@@ -146,7 +146,7 @@ public class VMStatCollector extends AbstractProcessCollector
   @Override
   public List<String> getCommand() {
 
-    final List<String> command = new LinkedList<String>();
+    final List<String> command = new LinkedList<>();
 
     command.add("/usr/bin/vmstat");
 
@@ -164,7 +164,7 @@ public class VMStatCollector extends AbstractProcessCollector
   public CounterSet getCounters() {
 
     @SuppressWarnings("rawtypes")
-    final List<I> inst = new LinkedList<I>();
+    final List<I> inst = new LinkedList<>();
 
     /*
      * Note: Counters are all declared as Double to facilitate aggregation.

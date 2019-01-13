@@ -45,7 +45,7 @@ public abstract class AbstractLocalSplitResultAggregator<R> implements IResultHa
   private final int size;
 
   /** Map for collecting the piece wise results. */
-  private final ConcurrentHashMap<Split, R> map = new ConcurrentHashMap<Split, R>();
+  private final ConcurrentHashMap<Split, R> map = new ConcurrentHashMap<>();
 
   /*
    * @param size The #of elements in the request (which is the same as the cardinality of the
@@ -81,7 +81,7 @@ public abstract class AbstractLocalSplitResultAggregator<R> implements IResultHa
 
       for (Map.Entry<Split, R> e : map.entrySet()) {
 
-        a[i++] = new SplitValuePair<Split, R>(e.getKey(), e.getValue());
+        a[i++] = new SplitValuePair<>(e.getKey(), e.getValue());
       }
 
       if (a.length == 1) {
@@ -96,7 +96,7 @@ public abstract class AbstractLocalSplitResultAggregator<R> implements IResultHa
      * counters[] 1:1 with the original keys[][] and vals[][] provided to
      * the index procedure.
      */
-    Arrays.sort(a, 0 /* fromIndex */, a.length /* toIndex */, new PairComparator<Split, R>());
+    Arrays.sort(a, 0 /* fromIndex */, a.length /* toIndex */, new PairComparator<>());
 
     return newResult(size, a);
   }

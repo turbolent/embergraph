@@ -107,7 +107,7 @@ public class TestDeepCopy extends TestCase2 {
 
   /** Exclusion list for classes which do not support deep copy semantics. */
   static final Set<Class<?>> noDeepCopy =
-      new LinkedHashSet<Class<?>>(
+      new LinkedHashSet<>(
           Arrays.asList(
               /*
                * {@link Var} does not have deep copy semantics since it imposes a canonizaling
@@ -117,7 +117,7 @@ public class TestDeepCopy extends TestCase2 {
 
   /** Exclusion list for classes which do not support shallow copy semantics. */
   static final Set<Class<?>> noShallowCopy =
-      new LinkedHashSet<Class<?>>(Arrays.asList(Var.class, Constant.class));
+      new LinkedHashSet<>(Arrays.asList(Var.class, Constant.class));
 
   /** */
   public TestDeepCopy() {}
@@ -135,10 +135,10 @@ public class TestDeepCopy extends TestCase2 {
   public void test_ctors() {
 
     // all bad bops.
-    final Map<Class<?>, String /*cause*/> bad = new LinkedHashMap<Class<?>, String>();
+    final Map<Class<?>, String /*cause*/> bad = new LinkedHashMap<>();
 
     // all discovered bops.
-    final List<Class<?>> found = new LinkedList<Class<?>>();
+    final List<Class<?>> found = new LinkedList<>();
 
     for (Class<?> cls : all) {
 

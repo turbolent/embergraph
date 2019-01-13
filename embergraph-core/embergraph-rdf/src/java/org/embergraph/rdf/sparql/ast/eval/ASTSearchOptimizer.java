@@ -54,7 +54,7 @@ public class ASTSearchOptimizer extends ASTSearchOptimizerBase {
   static final Set<URI> searchUris;
 
   static {
-    final Set<URI> set = new LinkedHashSet<URI>();
+    final Set<URI> set = new LinkedHashSet<>();
 
     set.add(BDS.SEARCH);
     set.add(BDS.RELEVANCE);

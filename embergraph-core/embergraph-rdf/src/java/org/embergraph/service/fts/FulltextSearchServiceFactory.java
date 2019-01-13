@@ -202,7 +202,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
         // Lazily allocate map.
         if (tmp == null) {
 
-          tmp = new LinkedHashMap<IVariable<?>, Map<URI, StatementPatternNode>>();
+          tmp = new LinkedHashMap<>();
         }
 
         // Lazily allocate set for that searchVar.
@@ -210,7 +210,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (statementPatterns == null) {
 
-          tmp.put(searchVar, statementPatterns = new LinkedHashMap<URI, StatementPatternNode>());
+          tmp.put(searchVar, statementPatterns = new LinkedHashMap<>());
         }
 
         // Add search predicate to set for that searchVar.
@@ -228,7 +228,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
   private void validateSearch(
       final IVariable<?> searchVar, final Map<URI, StatementPatternNode> statementPatterns) {
 
-    final Set<URI> uris = new LinkedHashSet<URI>();
+    final Set<URI> uris = new LinkedHashSet<>();
 
     for (StatementPatternNode sp : statementPatterns.values()) {
 
@@ -571,7 +571,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     @Override
     public List<IVariable<IV>> getMockVariables() {
 
-      List<IVariable<IV>> externalVars = new LinkedList<IVariable<IV>>();
+      List<IVariable<IV>> externalVars = new LinkedList<>();
       for (int i = 0; i < vars.length; i++) {
 
         if (!vars[i].isAnonymous()) {
@@ -1093,7 +1093,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
      * This method extracts exactly those variables that are incoming, i.e. must be bound before
      * executing the execution of the service.
      */
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     for (StatementPatternNode sp : getStatementPatterns(serviceNode)) {
 
       final URI predicate = (URI) (sp.p()).getValue();
@@ -1127,7 +1127,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
    */
   Collection<StatementPatternNode> getStatementPatterns(final ServiceNode serviceNode) {
 
-    final List<StatementPatternNode> statementPatterns = new ArrayList<StatementPatternNode>();
+    final List<StatementPatternNode> statementPatterns = new ArrayList<>();
 
     for (IGroupMemberNode child : serviceNode.getGraphPattern()) {
 

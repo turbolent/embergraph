@@ -477,7 +477,7 @@ public class HTreeVersusHashMapDemo {
           .run();
     } else {
       new JavaCollectionDemo(
-              new ReportListener(), nkeys, vectorSize, gen, new HashMap<Object, Object>(nkeys))
+              new ReportListener(), nkeys, vectorSize, gen, new HashMap<>(nkeys))
           .run();
     }
   }

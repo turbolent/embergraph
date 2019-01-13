@@ -84,7 +84,7 @@ public class TestGather extends AbstractSailGraphTestCase {
       return new Factory<Value, Set<Statement>>() {
         @Override
         public Set<Statement> initialValue(Value value) {
-          return new LinkedHashSet<Statement>();
+          return new LinkedHashSet<>();
         }
       };
     }
@@ -126,7 +126,7 @@ public class TestGather extends AbstractSailGraphTestCase {
        * Note: This happens to preserve the visitation order. That is not
        * essential, but it is nice.
        */
-      final Set<Statement> tmp = new LinkedHashSet<Statement>(left);
+      final Set<Statement> tmp = new LinkedHashSet<>(left);
 
       tmp.addAll(right);
 

@@ -110,7 +110,7 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
      * Create a task which reads chunks from the source iterator and writes
      * resolved chunks on the buffer.
      */
-    final FutureTask<Long> ft = new FutureTask<Long>(new ChunkConsumerTask());
+    final FutureTask<Long> ft = new FutureTask<>(new ChunkConsumerTask());
 
     /*
      * Set the future for that task on the buffer.

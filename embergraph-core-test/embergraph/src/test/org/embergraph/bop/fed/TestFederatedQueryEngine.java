@@ -199,7 +199,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
       /*
        * Insert data into the appropriate index partitions.
        */
-      rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+      rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
     }
   }
 
@@ -303,9 +303,9 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("Paul")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("John")})
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("John")})
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -379,18 +379,18 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
 
     // access path has has no constants and no constraint.
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 // Note: local access path!
                 new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false)));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             // Note: shard-partitioned joins!
@@ -413,19 +413,19 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}), //
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}), //
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("John")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("John")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Paul")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Leon")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Leon")}),
         };
     //        // partition0
     //        new E("John", "Mary"),//
@@ -520,18 +520,18 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
      * to model it as an IElementFilter on the predicate.
      */
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 // Note: local access path!
                 new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false)));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             // Note: shard-partitioned joins!
@@ -539,8 +539,8 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             // impose constraint on the join.
             new NV(
                 PipelineJoin.Annotations.CONSTRAINTS,
-                new IConstraint[] {
-                  Constraint.wrap(new EQConstant(y, new Constant<String>("Paul")))
+                new IConstraint[]{
+                    Constraint.wrap(new EQConstant(y, new Constant<>("Paul")))
                 }));
 
     final PipelineOp query =
@@ -560,10 +560,10 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}), //
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}), //
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Paul")}),
         };
     //        // partition0
     //        new E("John", "Mary"),//
@@ -664,18 +664,18 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
 
     // Note: tuples with "Mary" in the 1st column are on partition1.
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 // Note: local access path!
                 new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             // Note: shard-partitioned joins!
@@ -697,9 +697,9 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("Paul")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("John")})
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("John")})
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -832,7 +832,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     final UUID queryId = UUID.randomUUID();
     final IBindingSet initialBindings = new ListBindingSet();
     {
-      initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
+      initialBindings.set(Var.var("x"), new Constant<>("Mary"));
     }
     final IRunningQuery runningQuery = queryEngine.eval(queryId, query, initialBindings);
 
@@ -847,16 +847,16 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             new ListBindingSet( // partition1
                 new IVariable[] {Var.var("x"), Var.var("y"), Var.var("z")},
                 new IConstant[] {
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Mary"),
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon")
                 }),
             new ListBindingSet( // partition0
                 new IVariable[] {Var.var("x"), Var.var("y"), Var.var("z")},
                 new IConstant[] {
-                  new Constant<String>("Mary"),
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary")
+                    new Constant<>("Mary"),
+                    new Constant<>("John"),
+                    new Constant<>("Mary")
                 })
           };
 
@@ -1056,30 +1056,30 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary"),
-                  new Constant<String>("John")
+                    new Constant<>("John"),
+                    new Constant<>("Mary"),
+                    new Constant<>("John")
                 }),
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("Mary"),
-                  new Constant<String>("John"),
-                  new Constant<String>("Mary")
+                    new Constant<>("Mary"),
+                    new Constant<>("John"),
+                    new Constant<>("Mary")
                 }),
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("Leon"),
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Leon"),
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon")
                 }),
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon"),
-                  new Constant<String>("Paul")
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon"),
+                    new Constant<>("Paul")
                 }),
             /*
             * No. The CONSTRAINT on the 2nd join [x == y] filters all

@@ -115,7 +115,7 @@ public class TestRollbacks extends QuadsTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    firstCause = new AtomicReference<Throwable>(null);
+    firstCause = new AtomicReference<>(null);
     executorService = Executors.newFixedThreadPool(3 /*nthreads*/);
   }
 
@@ -196,7 +196,7 @@ public class TestRollbacks extends QuadsTestCase {
   private void runConcurrentStuff(final SailRepository repo, final int maxCounter)
       throws Exception {
     try {
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
       tasks.add(new DoStuff(repo, true /*writer*/, maxCounter));
       tasks.add(new DoStuff(repo, false /*reader*/, maxCounter));
       tasks.add(new DoStuff(repo, false /*reader*/, maxCounter));

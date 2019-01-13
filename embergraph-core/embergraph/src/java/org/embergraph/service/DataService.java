@@ -145,7 +145,7 @@ public abstract class DataService extends AbstractService
 
   /** Object used to support distributed query. */
   private final AtomicReference<FederatedQueryEngine> queryEngine =
-      new AtomicReference<FederatedQueryEngine>();
+      new AtomicReference<>();
 
   /** The object used to manage the local resources. */
   public ResourceManager getResourceManager() {
@@ -1302,7 +1302,7 @@ public abstract class DataService extends AbstractService
 
       // wrap the caller's task.
       final AbstractTask<T> task =
-          new IndexProcedureTask<T>(concurrencyManager, timestamp, name, proc);
+          new IndexProcedureTask<>(concurrencyManager, timestamp, name, proc);
 
       if (task instanceof IFederationCallable) {
 

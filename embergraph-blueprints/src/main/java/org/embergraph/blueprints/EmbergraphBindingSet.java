@@ -27,7 +27,7 @@ public class EmbergraphBindingSet implements Iterable<Map.Entry<String, Object>>
   private final Map<String, Object> vals;
 
   public EmbergraphBindingSet() {
-    this.vals = new LinkedHashMap<String, Object>();
+    this.vals = new LinkedHashMap<>();
   }
 
   public void put(final String key, final Object val) {

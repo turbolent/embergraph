@@ -322,7 +322,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
                 new RemoveStatementHandler(conn, nmodified /*, defaultDeleteContext*/));
 
             // Wrap as Future.
-            final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
+            final FutureTask<Void> ft = new FutureTask<>(queryTask);
 
             // Submit query for evaluation.
             context.queryService.execute(ft);
@@ -515,7 +515,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
           rdfParser.setRDFHandler(buffer);
 
           // Wrap as Future.
-          final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
+          final FutureTask<Void> ft = new FutureTask<>(queryTask);
 
           // Submit query for evaluation.
           context.queryService.execute(ft);
@@ -810,7 +810,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private final AtomicLong nmodified;
     private final Resource[] defaultContext;
 
-    private final Set<Statement> stmts = new LinkedHashSet<Statement>();
+    private final Set<Statement> stmts = new LinkedHashSet<>();
 
     public BufferStatementHandler(
         final EmbergraphSailConnection conn,

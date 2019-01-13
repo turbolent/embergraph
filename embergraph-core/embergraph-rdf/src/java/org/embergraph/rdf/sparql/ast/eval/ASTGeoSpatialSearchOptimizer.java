@@ -39,7 +39,7 @@ public class ASTGeoSpatialSearchOptimizer extends ASTSearchOptimizerBase {
   public static final Set<URI> searchUris;
 
   static {
-    final Set<URI> set = new LinkedHashSet<URI>();
+    final Set<URI> set = new LinkedHashSet<>();
 
     set.add(GeoSpatial.SEARCH);
     set.add(GeoSpatial.SEARCH_DATATYPE);

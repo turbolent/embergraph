@@ -51,7 +51,7 @@ public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> 
 
   public Set<EmbergraphURI> getDatatypes() {
 
-    final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
+    final Set<EmbergraphURI> datatypes = new LinkedHashSet<>();
     datatypes.add(epoch);
     return datatypes;
   }

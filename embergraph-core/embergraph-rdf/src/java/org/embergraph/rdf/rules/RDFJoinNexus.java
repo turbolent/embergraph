@@ -419,7 +419,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
   }
 
   private static final transient IConstant<IV> fakeTermId =
-      new Constant<IV>(TermId.mockIV(VTE.URI));
+      new Constant<>(TermId.mockIV(VTE.URI));
 
   /*
    * FIXME unit tests for DISTINCT with a head and ELEMENT, with bindings and a head, with bindings
@@ -554,7 +554,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
        * latency when also writing justifications.
        */
 
-      final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(2);
+      final List<Callable<Long>> tasks = new ArrayList<>(2);
 
       /*
        * Note: we reject using the filter before stmts or justifications
@@ -573,7 +573,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
           new Callable<Long>() {
             public Long call() {
               return r.addJustifications(
-                  new ChunkedArrayIterator<Justification>(b.length, b, null /* keyOrder */));
+                  new ChunkedArrayIterator<>(b.length, b, null /* keyOrder */));
             }
           });
 

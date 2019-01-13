@@ -267,10 +267,10 @@ public class TestRule extends AbstractRuleTestCase {
      */
 
     // spot check equals() for the Constant.
-    assertTrue(rdfsClass.equals(new Constant<IV>(rdfsClass.get())));
+    assertTrue(rdfsClass.equals(new Constant<>(rdfsClass.get())));
 
     // re-bind [x].
-    bindingSet.set(x, new Constant<IV>(rdfsClass.get()));
+    bindingSet.set(x, new Constant<>(rdfsClass.get()));
 
     if (log.isInfoEnabled()) {
       log.info(bindingSet.toString());

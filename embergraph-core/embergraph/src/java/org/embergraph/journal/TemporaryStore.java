@@ -299,7 +299,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   @Override
   public Iterator<String> indexNameScan(final String prefix, final long timestampIsIgnored) {
 
-    final List<String> names = new LinkedList<String>();
+    final List<String> names = new LinkedList<>();
 
     synchronized (name2Addr) {
       final Iterator<String> itr = Name2Addr.indexNameScan(prefix, name2Addr);

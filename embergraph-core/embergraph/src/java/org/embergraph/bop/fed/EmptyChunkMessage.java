@@ -165,7 +165,7 @@ public class EmptyChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
       public ICloseableIterator<E[]> iterator() {
 
-        return new EmptyCloseableIterator<E[]>();
+        return new EmptyCloseableIterator<>();
       }
     };
   }

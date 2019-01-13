@@ -82,7 +82,7 @@ public class TestBOpUtility extends TestCase2 {
 
     for (int i = 0; i < count; i++) {
 
-      final IValueExpression c = new DummyVE(new BOp[] {a, new Constant<Integer>(i)}, BOp.NOANNS);
+      final IValueExpression c = new DummyVE(new BOp[] {a, new Constant<>(i)}, BOp.NOANNS);
 
       if (bop == null) {
         bop = c;

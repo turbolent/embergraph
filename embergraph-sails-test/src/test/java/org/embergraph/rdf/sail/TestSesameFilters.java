@@ -131,7 +131,7 @@ public class TestSesameFilters extends ProxyEmbergraphSailTestCase {
             (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
         tupleQuery.setIncludeInferred(false /* includeInferred */);
 
-        final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+        final Collection<BindingSet> answer = new LinkedList<>();
         answer.add(createBindingSet(new BindingImpl("s", mike), new BindingImpl("label", l1)));
 
         final TupleQueryResult result = tupleQuery.evaluate();

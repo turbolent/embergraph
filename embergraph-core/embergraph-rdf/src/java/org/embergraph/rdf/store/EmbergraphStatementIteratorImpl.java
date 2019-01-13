@@ -62,7 +62,7 @@ public class EmbergraphStatementIteratorImpl
     super(
         db,
         src,
-        new BlockingBuffer<EmbergraphStatement[]>(
+        new BlockingBuffer<>(
             db.getChunkOfChunksCapacity(),
             db.getChunkCapacity(),
             db.getChunkTimeout(),
@@ -90,7 +90,7 @@ public class EmbergraphStatementIteratorImpl
      */
 
     final Collection<IV<?, ?>> ivs =
-        new LinkedHashSet<IV<?, ?>>(chunk.length * state.getSPOKeyArity());
+        new LinkedHashSet<>(chunk.length * state.getSPOKeyArity());
 
     for (ISPO spo : chunk) {
 

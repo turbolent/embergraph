@@ -277,7 +277,7 @@ public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {
       final IVariableOrConstant<IV> o) {
 
     // The annotations for the predicate.
-    final List<NV> anns = new LinkedList<NV>();
+    final List<NV> anns = new LinkedList<>();
 
     // Decide on the correct arity for the predicate.
     final BOp[] vars = new BOp[] {s, p, o};

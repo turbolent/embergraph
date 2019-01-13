@@ -16,7 +16,7 @@ public class SampleExtensionFactory implements IExtensionFactory {
 
   public SampleExtensionFactory() {
 
-    extensions = new LinkedList<IExtension<? extends EmbergraphValue>>();
+    extensions = new LinkedList<>();
   }
 
   @Override

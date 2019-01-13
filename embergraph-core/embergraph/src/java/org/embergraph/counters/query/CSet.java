@@ -64,7 +64,7 @@ public class CSet {
 
     this.cats = cats;
 
-    this.counters = new LinkedList<ICounter>();
+    this.counters = new LinkedList<>();
 
     add(counter);
   }

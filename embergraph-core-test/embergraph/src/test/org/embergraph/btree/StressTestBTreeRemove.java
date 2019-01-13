@@ -241,7 +241,7 @@ public class StressTestBTreeRemove extends TestCase2 { // AbstractBTreeTestCase 
     final BTree btree = getBTree(m);
 
     // Ground truth.
-    final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
+    final Map<Integer, SimpleEntry> expected = new TreeMap<>();
 
     // All possible keys.
     final Integer[] keys = new Integer[nkeys];

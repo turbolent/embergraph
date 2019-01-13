@@ -57,14 +57,14 @@ public class TestCounterSetHTTPDServer extends TestCase {
 
       final String localIpAddr = NicUtil.getIpAddress("default.nic", "default", true);
 
-      cset.addCounter("hostname", new OneShotInstrument<String>(localIpAddr));
+      cset.addCounter("hostname", new OneShotInstrument<>(localIpAddr));
 
-      cset.addCounter("ipaddr", new OneShotInstrument<String>(localIpAddr));
+      cset.addCounter("ipaddr", new OneShotInstrument<>(localIpAddr));
 
       // 60 minutes of data : @todo replace with CounterSetBTree (no fixed limit).
       final HistoryInstrument<Double> history1 =
-          new HistoryInstrument<Double>(
-              new History<Double>(
+          new HistoryInstrument<>(
+              new History<>(
                   new Double[60], PeriodEnum.Minutes.getPeriodMillis(), true /*overwrite*/));
 
       cset.addCounter(
@@ -98,10 +98,10 @@ public class TestCounterSetHTTPDServer extends TestCase {
 
       cset.addCounter(
           "ipaddr",
-          new OneShotInstrument<String>(
+          new OneShotInstrument<>(
               InetAddress.getByName("www.embergraph.org").getHostAddress()));
 
-      cset.makePath("foo").addCounter("bar", new OneShotInstrument<String>("baz"));
+      cset.makePath("foo").addCounter("bar", new OneShotInstrument<>("baz"));
     }
   }
 

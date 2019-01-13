@@ -134,7 +134,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
     {
       prefixDecls.put("foo", "http://www.embergraph.org/foo");
     }
@@ -142,7 +142,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -154,7 +154,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
 
     final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
 
@@ -204,7 +204,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
     {
       prefixDecls.put("foo", "http://www.embergraph.org/foo");
     }
@@ -212,7 +212,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -224,7 +224,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     {
       bindingSets.add(new MapBindingSet());
     }
@@ -292,7 +292,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
     {
       prefixDecls.put("foo", "http://www.embergraph.org/foo");
     }
@@ -300,7 +300,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -312,7 +312,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("s", book1);
@@ -444,7 +444,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?book ?p ?o}";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
     {
       prefixDecls.put("", "http://example.org/book/");
     }
@@ -452,7 +452,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("book"));
         projectedVars.add(Var.var("p"));
@@ -464,7 +464,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("book", book1);
@@ -646,12 +646,12 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
 
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -663,7 +663,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     /*
      * Note: Blank nodes are not permitting in the BINDINGS clause (per the
      * SPARQL 1.1 grammar). However, a blank node MAY be turned into an
@@ -757,12 +757,12 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
 
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -774,7 +774,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     /*
      * Note: A blank node MAY be turned into an unbound variable as long as
      * we impose the constraint that all vars having that blank node for a
@@ -880,12 +880,12 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o . ?s ?p ?o1 }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
 
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -898,7 +898,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     /*
      * Note: A blank node MAY be turned into an unbound variable as long as
      * we impose the constraint that all vars having that blank node for a
@@ -1019,12 +1019,12 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
 
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -1036,7 +1036,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     /*
      * Note: A blank node MAY be turned into an unbound variable as long as
      * we impose the constraint that all vars having that blank node for a
@@ -1144,12 +1144,12 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     final String exprImage = "SERVICE <" + serviceURI + "> { ?s ?p ?o }";
 
     final Map<String, String> prefixDecls =
-        new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+        new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
 
     final ServiceNode serviceNode =
         new ServiceNode(new ConstantNode(makeIV(serviceURI)), groupNode);
     {
-      final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
       {
         projectedVars.add(Var.var("s"));
         projectedVars.add(Var.var("p"));
@@ -1161,7 +1161,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
       serviceNode.setProjectedVars(projectedVars);
     }
 
-    final List<BindingSet> bindingSets = new LinkedList<BindingSet>();
+    final List<BindingSet> bindingSets = new LinkedList<>();
     /*
      * A blank node MAY be turned into an unbound variable as long as we
      * impose the constraint that all vars having that blank node for a

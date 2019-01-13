@@ -20,10 +20,10 @@ public class TestFullyInlineURIIV extends TestCase2 {
 
   public void test_InlineURIIV() {
 
-    doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
-    doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
-    doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/foo")));
-    doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org:80/foo")));
+    doTest(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org")));
+    doTest(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/")));
+    doTest(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/foo")));
+    doTest(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org:80/foo")));
   }
 
   private void doTest(final FullyInlineURIIV<EmbergraphURI> iv) {
@@ -53,12 +53,12 @@ public class TestFullyInlineURIIV extends TestCase2 {
 
   public void test_encodeDecode_comparator() {
 
-    final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    final List<IV<?, ?>> ivs = new LinkedList<>();
     {
-      ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
-      ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
-      ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/foo")));
-      ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org:80/foo")));
+      ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org")));
+      ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/")));
+      ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/foo")));
+      ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org:80/foo")));
     }
 
     final IV<?, ?>[] e = ivs.toArray(new IV[0]);

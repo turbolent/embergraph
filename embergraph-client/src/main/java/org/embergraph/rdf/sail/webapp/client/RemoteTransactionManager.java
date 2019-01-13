@@ -600,7 +600,7 @@ public class RemoteTransactionManager {
 
       final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 
-      final List<IRemoteTxState0> list = new LinkedList<IRemoteTxState0>();
+      final List<IRemoteTxState0> list = new LinkedList<>();
 
       /*
        * For example: <tx txId="-512" readsOnCommitTime="11201201212"/>

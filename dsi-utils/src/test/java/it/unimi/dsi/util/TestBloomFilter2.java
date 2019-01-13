@@ -70,7 +70,7 @@ public class TestBloomFilter2 extends TestCase {
   public void testConflicts() {
     BloomFilter2 bloomFilter = new BloomFilter2(1000, 10); // Low precision
     //		LongOpenHashSet longs = new LongOpenHashSet();
-    HashSet<Long> longs = new HashSet<Long>();
+    HashSet<Long> longs = new HashSet<>();
     Random random = new Random(0);
 
     for (int i = 1000; i-- != 0; ) {

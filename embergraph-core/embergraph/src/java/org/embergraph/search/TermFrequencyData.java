@@ -23,7 +23,7 @@ public class TermFrequencyData<V extends Comparable<V>> {
 
   /** The set of distinct tokens and their {@link ITermMetadata}. */
   public final LinkedHashMap<String, ITermMetadata> terms =
-      new LinkedHashMap<String, ITermMetadata>();
+      new LinkedHashMap<>();
 
   public TermFrequencyData(final V docId, final int fieldId, final String token) {
 

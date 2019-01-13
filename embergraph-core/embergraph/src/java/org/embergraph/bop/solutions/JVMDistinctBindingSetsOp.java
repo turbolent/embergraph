@@ -117,7 +117,7 @@ public class JVMDistinctBindingSetsOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new DistinctTask(this, context));
+    return new FutureTask<>(new DistinctTask(this, context));
   }
 
   /** Task executing on the node. */
@@ -174,7 +174,7 @@ public class JVMDistinctBindingSetsOp extends PipelineOp {
       try {
 
         final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-            new UnsyncLocalOutputBuffer<IBindingSet>(chunkCapacity, sink);
+            new UnsyncLocalOutputBuffer<>(chunkCapacity, sink);
 
         filter.filterSolutions(itr, stats, unsyncBuffer);
 

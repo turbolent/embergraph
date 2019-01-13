@@ -110,7 +110,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x a ub:GraduateStudent .
       p0 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(rdfType), new Constant<String>(graduateStudent)},
+              new BOp[] {x, new Constant<>(rdfType), new Constant<>(graduateStudent)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -118,7 +118,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?y a ub:University .
       p1 =
           new Predicate(
-              new BOp[] {y, new Constant<String>(rdfType), new Constant<String>(university)},
+              new BOp[] {y, new Constant<>(rdfType), new Constant<>(university)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -126,7 +126,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?z a ub:Department .
       p2 =
           new Predicate(
-              new BOp[] {z, new Constant<String>(rdfType), new Constant<String>(department)},
+              new BOp[] {z, new Constant<>(rdfType), new Constant<>(department)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -134,7 +134,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x ub:memberOf ?z .
       p3 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(memberOf), z},
+              new BOp[] {x, new Constant<>(memberOf), z},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -142,7 +142,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?z ub:subOrganizationOf ?y .
       p4 =
           new Predicate(
-              new BOp[] {z, new Constant<String>(subOrganizationOf), y},
+              new BOp[] {z, new Constant<>(subOrganizationOf), y},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -150,7 +150,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x ub:undergraduateDegreeFrom ?y
       p5 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(undergraduateDegreeFrom), y},
+              new BOp[] {x, new Constant<>(undergraduateDegreeFrom), y},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -183,9 +183,9 @@ public class TestPartitionedJoinGroup extends TestCase2 {
 
     // Test w/ constraint(s) on the join graph.
     {
-      final IConstraint c1 = Constraint.wrap(new NEConstant(x, new Constant<String>("Bob")));
+      final IConstraint c1 = Constraint.wrap(new NEConstant(x, new Constant<>("Bob")));
 
-      final IConstraint c2 = Constraint.wrap(new NEConstant(y, new Constant<String>("UNCG")));
+      final IConstraint c2 = Constraint.wrap(new NEConstant(y, new Constant<>("UNCG")));
 
       final IConstraint[] constraints = new IConstraint[] {c1, c2};
 
@@ -282,7 +282,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x a ub:GraduateStudent .
       p0 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(rdfType), new Constant<String>(graduateStudent)},
+              new BOp[] {x, new Constant<>(rdfType), new Constant<>(graduateStudent)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -290,7 +290,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?y a ub:University .
       p1 =
           new Predicate(
-              new BOp[] {y, new Constant<String>(rdfType), new Constant<String>(university)},
+              new BOp[] {y, new Constant<>(rdfType), new Constant<>(university)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -298,7 +298,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?z a ub:Department .  (optional)
       p2 =
           new Predicate(
-              new BOp[] {z, new Constant<String>(rdfType), new Constant<String>(department)},
+              new BOp[] {z, new Constant<>(rdfType), new Constant<>(department)},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.OPTIONAL, true),
@@ -307,7 +307,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x ub:memberOf ?z . (optional).
       p3 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(memberOf), z},
+              new BOp[] {x, new Constant<>(memberOf), z},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.OPTIONAL, true),
@@ -316,7 +316,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?z ub:subOrganizationOf ?y . (optional).
       p4 =
           new Predicate(
-              new BOp[] {z, new Constant<String>(subOrganizationOf), y},
+              new BOp[] {z, new Constant<>(subOrganizationOf), y},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.OPTIONAL, true),
@@ -325,7 +325,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
       // ?x ub:undergraduateDegreeFrom ?y
       p5 =
           new Predicate(
-              new BOp[] {x, new Constant<String>(undergraduateDegreeFrom), y},
+              new BOp[] {x, new Constant<>(undergraduateDegreeFrom), y},
               new NV(BOp.Annotations.BOP_ID, nextId++),
               new NV(Annotations.TIMESTAMP, timestamp),
               new NV(IPredicate.Annotations.RELATION_NAME, relation));
@@ -368,11 +368,11 @@ public class TestPartitionedJoinGroup extends TestCase2 {
 
     // Test w/ constraint(s) on the join graph.
     {
-      final IConstraint c1 = Constraint.wrap(new NEConstant(x, new Constant<String>("Bob")));
+      final IConstraint c1 = Constraint.wrap(new NEConstant(x, new Constant<>("Bob")));
 
-      final IConstraint c2 = Constraint.wrap(new NEConstant(y, new Constant<String>("UNCG")));
+      final IConstraint c2 = Constraint.wrap(new NEConstant(y, new Constant<>("UNCG")));
 
-      final IConstraint c3 = Constraint.wrap(new NEConstant(z, new Constant<String>("Physics")));
+      final IConstraint c3 = Constraint.wrap(new NEConstant(z, new Constant<>("Physics")));
 
       final IConstraint[] constraints = new IConstraint[] {c1, c2, c3};
 

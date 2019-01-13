@@ -138,7 +138,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
       new RuntimeException("No service selected for request.");
 
   /** @see InitParams#LOCAL_FORWARD_THRESHOLD */
-  private final AtomicReference<Double> localForwardThresholdRef = new AtomicReference<Double>();
+  private final AtomicReference<Double> localForwardThresholdRef = new AtomicReference<>();
 
   /*
    * The rule used to score the {@link IHostMetrics}.
@@ -146,7 +146,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
    * @see InitParams#HOST_SCORING_RULE
    */
   private final AtomicReference<IHostScoringRule> scoringRuleRef =
-      new AtomicReference<IHostScoringRule>();
+      new AtomicReference<>();
 
   /*
    * The initial delay before the first discovery cycle that updates our local knowledge of the load
@@ -772,7 +772,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
       final Random rand, final HostScore hostScore, final ServiceScore[] serviceScores) {
 
     // The set of services on the given host.
-    final List<ServiceScore> foundServices = new LinkedList<ServiceScore>();
+    final List<ServiceScore> foundServices = new LinkedList<>();
 
     for (ServiceScore tmp : serviceScores) {
 

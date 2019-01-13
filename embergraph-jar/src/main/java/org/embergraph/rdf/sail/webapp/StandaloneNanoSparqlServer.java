@@ -101,7 +101,7 @@ public class StandaloneNanoSparqlServer extends NanoSparqlServer {
       i++;
     }
 
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
 
     initParams.put(ConfigParams.PROPERTY_FILE, propertyFile);
 

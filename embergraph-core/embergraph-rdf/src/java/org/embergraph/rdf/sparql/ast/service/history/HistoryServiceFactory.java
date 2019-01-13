@@ -228,7 +228,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
       if (changeSet == null) {
 
         // Lazy instantiation.
-        changeSet = new HashMap<ISPO, IChangeRecord>();
+        changeSet = new HashMap<>();
 
         // Get the history index.
         ndx = getHistoryIndex(tripleStore);
@@ -364,7 +364,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
 
             final byte[] val = tupSer.serializeVal(s);
 
-            b[i] = new KVO<HistoryChangeRecord>(key, val, s);
+            b[i] = new KVO<>(key, val, s);
           }
         }
 

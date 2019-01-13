@@ -120,7 +120,7 @@ public class ASTConstructIterator
 
     if (bnodes == null) {
 
-      return new LinkedHashMap<String, EmbergraphBNode>();
+      return new LinkedHashMap<>();
     }
 
     return bnodes;
@@ -139,7 +139,7 @@ public class ASTConstructIterator
    * <p>The buffer is pre-populated with any ground triples in the construct template by the
    * constructor.
    */
-  private final LinkedList<EmbergraphStatement> buffer = new LinkedList<EmbergraphStatement>();
+  private final LinkedList<EmbergraphStatement> buffer = new LinkedList<>();
 
   /*
    * A filter which restricts the emitted statements to the distinct {@link ISPO}. The {@link
@@ -209,9 +209,9 @@ public class ASTConstructIterator
 
     //        this.toldBNodes = store.getLexiconRelation().isStoreBlankNodes();
 
-    templates = new LinkedList<StatementPatternNode>();
+    templates = new LinkedList<>();
 
-    groundTriples = new LinkedList<EmbergraphStatement>();
+    groundTriples = new LinkedList<>();
 
     // Blank nodes (scoped to the solution).
     Map<String, EmbergraphBNode> bnodes = null;

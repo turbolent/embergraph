@@ -28,7 +28,7 @@ public class PartialElement implements Element {
 
   private final String id;
 
-  private final Map<String, Object> properties = new LinkedHashMap<String, Object>();
+  private final Map<String, Object> properties = new LinkedHashMap<>();
 
   public PartialElement(final String id) {
     this.id = id;
@@ -80,7 +80,7 @@ public class PartialElement implements Element {
 
       } else {
 
-        final List<Object> list = new LinkedList<Object>();
+        final List<Object> list = new LinkedList<>();
         list.add(o);
         list.add(value);
 

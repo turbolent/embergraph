@@ -183,7 +183,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
       log.info("Sail is initialized.");
 
       final AtomicReference<EmbergraphSailConnection> uicnxn =
-          new AtomicReference<EmbergraphSailConnection>();
+          new AtomicReference<>();
       final Semaphore c1 = new Semaphore(0);
 
       final Thread t =

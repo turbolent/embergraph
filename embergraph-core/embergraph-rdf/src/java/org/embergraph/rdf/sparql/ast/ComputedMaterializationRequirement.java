@@ -66,7 +66,7 @@ public class ComputedMaterializationRequirement implements INeedsMaterialization
 
   public ComputedMaterializationRequirement(final IValueExpression<?> ve) {
 
-    varsToMaterialize = new LinkedHashSet<IVariable<IV>>();
+    varsToMaterialize = new LinkedHashSet<>();
 
     requirement = StaticAnalysis.gatherVarsToMaterialize(ve, varsToMaterialize);
   }

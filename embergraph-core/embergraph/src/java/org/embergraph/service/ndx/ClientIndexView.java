@@ -751,7 +751,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     final long chunkTimeout = 1;
     final TimeUnit chunkTimeoutUnit = TimeUnit.MILLISECONDS;
     final BlockingBuffer<ITuple<?>[]> queryBuffer =
-        new BlockingBuffer<ITuple<?>[]>(capacity, minimumChunkSize, chunkTimeout, chunkTimeoutUnit);
+        new BlockingBuffer<>(capacity, minimumChunkSize, chunkTimeout, chunkTimeoutUnit);
 
     /*
      * This task will map the range iterator over the index partitions with
@@ -767,7 +767,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
      */
 
     // Wrap computation as FutureTask.
-    final FutureTask<Void> ft = new FutureTask<Void>(task);
+    final FutureTask<Void> ft = new FutureTask<>(task);
 
     // Set Future on BlockingBuffer.
     queryBuffer.setFuture(ft);
@@ -921,7 +921,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
               + maxTasksPerRequest;
 
       helper =
-          new ExecutionHelper<Void>(
+          new ExecutionHelper<>(
               fed.getExecutorService(), fed.getClient().getTaskTimeout(), TimeUnit.MILLISECONDS);
     }
 
@@ -959,7 +959,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
            * correct sequence.
            */
 
-          final ArrayList<Callable<Void>> tasks = new ArrayList<Callable<Void>>(maxTasks);
+          final ArrayList<Callable<Void>> tasks = new ArrayList<>(maxTasks);
 
           for (int i = 0; i < maxTasks && itr.hasNext(); i++) {
 
@@ -1159,7 +1159,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
       }
 
       // required to get the result back from the procedure.
-      final IResultHandler<T, T> resultHandler = new IdentityHandler<T>();
+      final IResultHandler<T, T> resultHandler = new IdentityHandler<>();
 
       final SimpleDataServiceProcedureTask task =
           new SimpleDataServiceProcedureTask(
@@ -1319,7 +1319,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
        */
 
       final ArrayList<AbstractDataServiceProcedureTask> tasks =
-          new ArrayList<AbstractDataServiceProcedureTask>(maxTasks);
+          new ArrayList<>(maxTasks);
 
       for (int i = 0; i < maxTasks && itr.hasNext(); i++) {
 
@@ -1486,7 +1486,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
      */
 
     final ArrayList<AbstractDataServiceProcedureTask> tasks =
-        new ArrayList<AbstractDataServiceProcedureTask>(nsplits);
+        new ArrayList<>(nsplits);
 
     final Iterator<Split> itr = splits.iterator();
 
@@ -1631,7 +1631,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
     int nfailed = 0;
 
-    final LinkedList<Throwable> causes = new LinkedList<Throwable>();
+    final LinkedList<Throwable> causes = new LinkedList<>();
 
     try {
 
@@ -2108,16 +2108,16 @@ public class ClientIndexView implements IScaleOutClientIndex {
         getIndexMetadata().getAsynchronousIndexWriteConfiguration();
 
     final BlockingBuffer<KVO<O>[]> writeBuffer =
-        new BlockingBuffer<KVO<O>[]>(
+        new BlockingBuffer<>(
             // @todo array vs linked w/ capacity and fair vs unfair.
             // @todo config deque vs queue (deque combines on add() as well)
-            new LinkedBlockingDeque<KVO<O>[]>(conf.getMasterQueueCapacity()),
+            new LinkedBlockingDeque<>(conf.getMasterQueueCapacity()),
             //                new ArrayBlockingQueue<KVO<O>[]>(conf.getMasterQueueCapacity()),
             conf.getMasterChunkSize(),
             conf.getMasterChunkTimeoutNanos(), //
             TimeUnit.NANOSECONDS,
             true // ordered
-            );
+        );
 
     final IndexWriteTask.M<T, O, R, A> task =
         new IndexWriteTask.M<T, O, R, A>(

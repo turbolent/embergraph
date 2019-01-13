@@ -226,7 +226,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
         /*
          * The sample will contain everything in the access path.
          */
-        return new AccessPathSample<E>(limit, accessPath);
+        return new AccessPathSample<>(limit, accessPath);
       }
 
       /*
@@ -249,16 +249,16 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       switch (sampleType) {
         case EVEN:
           advancer =
-              new EvenSampleAdvancer<E>( // rangeCount,
+              new EvenSampleAdvancer<>( // rangeCount,
                   limit, accessPath.getFromKey(), accessPath.getToKey());
           break;
         case RANDOM:
           advancer =
-              new RandomSampleAdvancer<E>( // rangeCount,
+              new RandomSampleAdvancer<>( // rangeCount,
                   seed(), limit, accessPath.getFromKey(), accessPath.getToKey());
           break;
         case DENSE:
-          advancer = new DenseSampleAdvancer<E>();
+          advancer = new DenseSampleAdvancer<>();
           break;
         default:
           throw new UnsupportedOperationException("SampleType=" + sampleType);
@@ -266,7 +266,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       predicate = ((Predicate<E>) predicate).addIndexLocalFilter(advancer);
 
-      return new AccessPathSample<E>(limit, context.getAccessPath(relation, predicate));
+      return new AccessPathSample<>(limit, context.getAccessPath(relation, predicate));
     }
   }
 
@@ -513,7 +513,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       this.limit = limit;
 
       // drain the access path iterator.
-      final ArrayList<E> tmp = new ArrayList<E>(limit);
+      final ArrayList<E> tmp = new ArrayList<>(limit);
 
       int nsamples = 0;
 

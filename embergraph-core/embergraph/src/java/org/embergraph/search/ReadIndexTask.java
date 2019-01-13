@@ -95,7 +95,7 @@ public class ReadIndexTask<V extends Comparable<V>> extends AbstractIndexTask<V>
                 IRangeQuery.KEYS | IRangeQuery.VALS,
                 null /* filter */);
 
-    tmp = new Hit<V>(numTerms);
+    tmp = new Hit<>(numTerms);
   }
 
   /** @return The #of fields with a hit on the search term as a {@link Long}. */
@@ -169,7 +169,7 @@ public class ReadIndexTask<V extends Comparable<V>> extends AbstractIndexTask<V>
         if (oldValue == null) {
           hit = tmp;
           hit.setDocId(docId);
-          tmp = new Hit<V>(numQueryTerms);
+          tmp = new Hit<>(numQueryTerms);
         } else {
           hit = oldValue;
         }

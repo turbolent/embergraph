@@ -168,13 +168,13 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
   @Override
   public Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa) {
 
-    return new LinkedHashSet<IVariable<?>>();
+    return new LinkedHashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa) {
 
-    return new LinkedHashSet<IVariable<?>>();
+    return new LinkedHashSet<>();
   }
 
   /*

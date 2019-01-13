@@ -134,7 +134,7 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
       final Var<?> x = Var.var("x");
       final Var<?> y = Var.var("y");
 
-      data = new LinkedList<IBindingSet>();
+      data = new LinkedList<>();
       IBindingSet bset = null;
       {
         bset = new HashBindingSet();
@@ -251,14 +251,14 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {setup.data.toArray(new IBindingSet[0])});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{setup.data.toArray(new IBindingSet[0])});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,

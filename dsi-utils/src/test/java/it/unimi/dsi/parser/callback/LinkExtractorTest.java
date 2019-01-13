@@ -22,9 +22,9 @@ public class LinkExtractorTest extends TestCase {
 
   private void testExtractorResults(final LinkExtractor linkExtractor) {
     assertEquals(
-        new ObjectLinkedOpenHashSet<String>(
-            new String[] {
-              "manual.css", "http://link.com/", "http://anchor.com/", "http://badanchor.com/"
+        new ObjectLinkedOpenHashSet<>(
+            new String[]{
+                "manual.css", "http://link.com/", "http://anchor.com/", "http://badanchor.com/"
             }),
         linkExtractor.urls);
     assertEquals("http://base.com/", linkExtractor.base());

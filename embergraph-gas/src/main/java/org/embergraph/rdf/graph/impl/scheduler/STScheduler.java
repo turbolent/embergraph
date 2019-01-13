@@ -36,7 +36,7 @@ public class STScheduler implements IGASSchedulerImpl {
 
   public STScheduler(final GASEngine gasEngine) {
 
-    this.vertices = new LinkedHashSet<Value>();
+    this.vertices = new LinkedHashSet<>();
     this.sortFrontier = gasEngine.getSortFrontier();
   }
 

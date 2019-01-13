@@ -199,7 +199,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
                   q.getFederation(), pred, timestamp, capacity) {
                 @Override
                 protected IBuffer<IBindingSet[]> newBuffer(final PartitionLocator locator) {
-                  return new BlockingBuffer<IBindingSet[]>(
+                  return new BlockingBuffer<>(
                       chunkOfChunksCapacity,
                       chunkSize,
                       BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,
@@ -274,7 +274,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
             final IBindingSet[] a;
             {
               int n = 0;
-              final List<IBindingSet[]> lst = new LinkedList<IBindingSet[]>();
+              final List<IBindingSet[]> lst = new LinkedList<>();
               final IAsynchronousIterator<IBindingSet[]> itr = shardSink.iterator();
               try {
                 while (itr.hasNext()) {
@@ -462,7 +462,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
       if (source.length <= nioThreshold) {
 
         msg =
-            new ThickChunkMessage<IBindingSet>(
+            new ThickChunkMessage<>(
                 q.getQueryController(), q.getQueryId(), sinkId, partitionId, source);
 
       } else {
@@ -473,7 +473,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
          * against the ResourceService.
          */
         msg =
-            new NIOChunkMessage<IBindingSet>(
+            new NIOChunkMessage<>(
                 q.getQueryController(),
                 q.getQueryId(),
                 sinkId,

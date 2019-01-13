@@ -148,7 +148,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
     this.upperBound = (Long) controllerOp.getProperty(Annotations.UPPER_BOUND);
 
-    this.projectInVars = new LinkedHashSet<IVariable<?>>();
+    this.projectInVars = new LinkedHashSet<>();
     this.projectInVars.addAll(
         Arrays.asList((IVariable<?>[]) controllerOp.getProperty(Annotations.PROJECT_IN_VARS)));
 
@@ -163,7 +163,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
      * buffer forms chunks which get flushed onto the sink.
      */
     out =
-        new UnsynchronizedArrayBuffer<IBindingSet>(
+        new UnsynchronizedArrayBuffer<>(
             context.getSink(), IBindingSet.class, controllerOp.getChunkCapacity());
 
     edgeVar = (IVariable<?>) controllerOp.getProperty(Annotations.EDGE_VAR);
@@ -189,7 +189,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
      * represented as constants because they are known to be statically bound to a
      * given value.
      */
-    varsToRetain = new LinkedHashSet<IVariable<?>>();
+    varsToRetain = new LinkedHashSet<>();
     if (leftVar != null) {
       varsToRetain.add(leftVar);
     } else {
@@ -227,7 +227,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
             controllerOp.getProperty(Annotations.LOAD_FACTOR, Annotations.DEFAULT_LOAD_FACTOR),
             ConcurrentHashMapAnnotations.DEFAULT_CONCURRENCY_LEVEL);
 
-    this.dropVars = controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<IVariable<?>>());
+    this.dropVars = controllerOp.getProperty(Annotations.DROP_VARS, new ArrayList<>());
 
     if (log.isDebugEnabled()) {
       log.debug("vars to drop: " + dropVars);
@@ -275,14 +275,14 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
   private void processChunk(final IBindingSet[] chunkIn) throws Exception {
 
-    final Map<SolutionKey, IBindingSet> solutions = new LinkedHashMap<SolutionKey, IBindingSet>();
+    final Map<SolutionKey, IBindingSet> solutions = new LinkedHashMap<>();
 
     final QueryEngine queryEngine = this.context.getRunningQuery().getQueryEngine();
 
     /*
      * The input to each round of transitive chaining.
      */
-    final Set<IBindingSet> nextRoundInput = new LinkedHashSet<IBindingSet>();
+    final Set<IBindingSet> nextRoundInput = new LinkedHashSet<>();
 
     /*
      * Decide based on the schematics of the path and the incoming data
@@ -392,7 +392,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
      * This set collects visited nodes.  It will only be used if we are
      * doing a bonus round.
      */
-    final Set<IConstant<?>> visited = bonusRound ? new LinkedHashSet<IConstant<?>>() : null;
+    final Set<IConstant<?>> visited = bonusRound ? new LinkedHashSet<>() : null;
 
     for (int i = 0; i < n; i++) {
 
@@ -674,7 +674,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
      */
     if (lowerBound == 0 && (gearing.inVar != null && gearing.outVar != null)) {
 
-      final Map<SolutionKey, IBindingSet> zlps = new LinkedHashMap<SolutionKey, IBindingSet>();
+      final Map<SolutionKey, IBindingSet> zlps = new LinkedHashMap<>();
 
       for (IBindingSet bs : solutions.values()) {
 

@@ -129,7 +129,7 @@ public class BuildResult extends AbstractResult implements Params {
 
   public Map<String, Object> getParams() {
 
-    final Map<String, Object> v = new HashMap<String, Object>();
+    final Map<String, Object> v = new HashMap<>();
 
     v.put("name", name);
 

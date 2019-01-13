@@ -1113,7 +1113,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     protected final CursorPosition<E> newPosition(
         final ILeafCursor<ImmutableLeaf> leafCursor, final int index, final byte[] key) {
 
-      final CursorPosition<E> pos = new CursorPosition<E>(this, leafCursor, index, key);
+      final CursorPosition<E> pos = new CursorPosition<>(this, leafCursor, index, key);
 
       return pos;
     }
@@ -1121,7 +1121,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     @Override
     protected CursorPosition<E> newTemporaryPosition(final ICursorPosition<ImmutableLeaf, E> p) {
 
-      return new CursorPosition<E>((CursorPosition<E>) p);
+      return new CursorPosition<>((CursorPosition<E>) p);
     }
 
     /*

@@ -106,7 +106,7 @@ public class SnapshotTask implements Callable<ISnapshotResult> {
        * Get all snapshot core data, including rootblocks and any allocation
        * data, setting the current committed rootblock view.
        */
-      final AtomicReference<IRootBlockView> rbv = new AtomicReference<IRootBlockView>();
+      final AtomicReference<IRootBlockView> rbv = new AtomicReference<>();
       final ISnapshotData coreData = journal.snapshotAllocationData(rbv);
 
       if (rbv.get().getCommitCounter() == 0L) {

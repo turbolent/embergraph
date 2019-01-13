@@ -211,7 +211,7 @@ public class TestQuadsAPI extends QuadsTestCase {
 
       final TupleQueryResult result = tupleQuery.evaluate();
 
-      final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+      final Collection<BindingSet> answer = new LinkedList<>();
 
       answer.add(createBindingSet(new BindingImpl("g", graphA)));
 

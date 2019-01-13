@@ -296,7 +296,7 @@ public class RuleState implements IRuleState {
 
     final IVariable[][] a = new IVariable[tailCount][];
 
-    final Set<IVariable> constraintVars = new HashSet<IVariable>();
+    final Set<IVariable> constraintVars = new HashSet<>();
     if (rule.getConstraintCount() > 0) {
       final Iterator<IConstraint> constraints = rule.getConstraints();
       while (constraints.hasNext()) {
@@ -312,7 +312,7 @@ public class RuleState implements IRuleState {
     for (int orderIndex = tailCount - 1; orderIndex >= 0; orderIndex--) {
 
       // guarantee uniqueness
-      final HashSet<IVariable> required = new HashSet<IVariable>();
+      final HashSet<IVariable> required = new HashSet<>();
 
       if (orderIndex == tailCount - 1) {
         // attach the post-join required variables (projection and

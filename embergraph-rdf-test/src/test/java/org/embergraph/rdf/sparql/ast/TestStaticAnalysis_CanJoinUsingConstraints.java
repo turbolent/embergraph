@@ -86,11 +86,11 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
   public void test_canJoinUsingConstraints_illegalArgument() {
 
     @SuppressWarnings("rawtypes")
-    final ConstantNode p = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode p = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode q = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode q = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode r = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode r = new ConstantNode(new Constant<>(mockIV()));
 
     final VarNode x = new VarNode("x");
     final VarNode y = new VarNode("y");
@@ -232,7 +232,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
     final IJoinNode vertex;
     {
       // collection of predicates used so far by the path.
-      final Set<Integer> used = new LinkedHashSet<Integer>();
+      final Set<Integer> used = new LinkedHashSet<>();
       for (int i = 0; i < path.length; i++) {
         // Locate an unused predicate.
         int index;

@@ -271,7 +271,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
   @Override
   public List<IBinder<VS, ES, ST>> getBinderList() {
 
-    final List<IBinder<VS, ES, ST>> tmp = new LinkedList<IBinder<VS, ES, ST>>();
+    final List<IBinder<VS, ES, ST>> tmp = new LinkedList<>();
 
     tmp.add(
         new BinderBase<VS, ES, ST>() {

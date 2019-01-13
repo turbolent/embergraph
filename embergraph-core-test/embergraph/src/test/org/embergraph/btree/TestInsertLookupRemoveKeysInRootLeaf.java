@@ -338,7 +338,7 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
 
     final BTree btree = getBTree(m);
 
-    Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
+    Map<Integer, SimpleEntry> expected = new TreeMap<>();
 
     Integer k1 = 1;
     Integer k2 = 2;

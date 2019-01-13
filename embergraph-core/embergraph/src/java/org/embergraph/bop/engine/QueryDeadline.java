@@ -35,7 +35,7 @@ class QueryDeadline implements Comparable<QueryDeadline> {
 
     this.deadlineNanos = deadlineNanos;
 
-    this.queryRef = new WeakReference<AbstractRunningQuery>(query);
+    this.queryRef = new WeakReference<>(query);
   }
 
   /*

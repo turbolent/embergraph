@@ -96,11 +96,11 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     /** The {@link Resource} used to model the data set in the {@link Graph}. */
     final Resource dataset;
     /** The dc:title(s) for the data set. */
-    final List<Literal> title = new LinkedList<Literal>();
+    final List<Literal> title = new LinkedList<>();
     /** The embergraph namespace for the data set. */
     final Literal namespace;
     /** The sparql end point URL(s) for the data set. */
-    final List<URI> sparqlEndpoint = new LinkedList<URI>();
+    final List<URI> sparqlEndpoint = new LinkedList<>();
 
     /*
      * @param dataset The {@link Resource} used to model the data set in the {@link Graph}.
@@ -151,7 +151,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
    */
   protected static Map<String, VoidSummary> indexOnNamespace(final Collection<VoidSummary> c) {
 
-    final Map<String, VoidSummary> map = new TreeMap<String, VoidSummary>();
+    final Map<String, VoidSummary> map = new TreeMap<>();
 
     for (VoidSummary x : c) {
 
@@ -170,7 +170,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
   protected Map<Resource, VoidSummary> getRepositoryDescriptions() throws Exception {
 
     // The discovered data sets.
-    final Map<Resource, VoidSummary> summaries = new LinkedHashMap<Resource, VoidSummary>();
+    final Map<Resource, VoidSummary> summaries = new LinkedHashMap<>();
 
     // Do the discovery.
     final Graph g = RemoteRepository.asGraph(m_mgr.getRepositoryDescriptions());

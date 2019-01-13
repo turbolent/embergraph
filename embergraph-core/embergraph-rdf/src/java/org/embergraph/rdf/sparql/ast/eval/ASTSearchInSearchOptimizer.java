@@ -149,7 +149,7 @@ public class ASTSearchInSearchOptimizer extends AbstractJoinGroupOptimizer {
     args[0] = var;
 
     for (int i = 0; i < hits.length; i++) {
-      args[i + 1] = new ConstantNode(new Constant<IV>(hits[i]));
+      args[i + 1] = new ConstantNode(new Constant<>(hits[i]));
     }
 
     final Map<String, Object> props = NV.asMap(new NV(InFactory.Annotations.ALLOW_LITERALS, true));

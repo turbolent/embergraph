@@ -114,7 +114,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
      * stores the events whose matching end event we are awaiting.
      */
 
-    this.eventCache = new LinkedHashMap<UUID, Event>(1000 /* initialCapacity */);
+    this.eventCache = new LinkedHashMap<>(1000 /* initialCapacity */);
 
     this.ndx = new UnisolatedReadWriteIndex(eventBTree);
 

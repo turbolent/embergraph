@@ -393,7 +393,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    * @see IndexManager#buildIndexSegment(String, org.embergraph.btree.ILocalBTreeView, boolean,
    *     long, byte[], byte[], Event)
    */
-  private final Set<UUID> retentionSet = new HashSet<UUID>();
+  private final Set<UUID> retentionSet = new HashSet<>();
 
   /*
    * Add an {@link IndexSegment} to the set of {@link IndexSegment}s which have been generated but
@@ -466,7 +466,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   protected final ConcurrentWeakValueCacheWithTimeout<UUID, IRawStore> storeCache;
 
   /** Provides locks on a per-{resourceUUID} basis for higher concurrency. */
-  private final transient NamedLock<UUID> namedLock = new NamedLock<UUID>();
+  private final transient NamedLock<UUID> namedLock = new NamedLock<>();
 
   /*
    * The #of entries in the hard reference cache for {@link IRawStore}s, including both {@link
@@ -503,7 +503,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
   /** A atomic hard reference to the live journal. */
   protected final AtomicReference<ManagedJournal> liveJournalRef =
-      new AtomicReference<ManagedJournal>(null);
+      new AtomicReference<>(null);
 
   /*
    * <code>true</code> initially and remains <code>true</code> until the {@link ResourceManager} is
@@ -641,7 +641,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    * IndexSegmentStore} generally reflects the name of the file as specified to the ctor for that
    * class, so it may be relative to some arbitrary directory or absolute within the file system.
    */
-  private final Map<UUID, File> resourceFiles = new HashMap<UUID, File>();
+  private final Map<UUID, File> resourceFiles = new HashMap<>();
 
   /** The properties given to the ctor. */
   private final Properties properties;
@@ -929,7 +929,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
         throw new RuntimeException(Options.STORE_CACHE_TIMEOUT + " must be non-negative");
 
       storeCache =
-          new ConcurrentWeakValueCacheWithTimeout<UUID, IRawStore>(
+          new ConcurrentWeakValueCacheWithTimeout<>(
               storeCacheCapacity, TimeUnit.MILLISECONDS.toNanos(storeCacheTimeout));
 
       //            storeCache = new WeakValueCache<UUID, IRawStore>(
@@ -1711,7 +1711,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     public int nsegments;
 
     /** A list of all bad files found during the scan. */
-    public Collection<String> badFiles = Collections.synchronizedCollection(new TreeSet<String>());
+    public Collection<String> badFiles = Collections.synchronizedCollection(new TreeSet<>());
 
     /** total #of bytes of user data found in those files. */
     public long nbytes;
@@ -3853,7 +3853,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     // must be a commitTime.
     if (commitTimeToPreserve <= 0) throw new IllegalArgumentException();
 
-    final Set<UUID> uuids = new LinkedHashSet<UUID>(512);
+    final Set<UUID> uuids = new LinkedHashSet<>(512);
 
     /*
      * The live journal is always a dependency, even if there are no indices
@@ -3936,7 +3936,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
            * different commit point then its state has not changed
            * between those commit points).
            */
-          final Set<Long /* checkpointAddr */> addrs = new HashSet<Long>(512);
+          final Set<Long /* checkpointAddr */> addrs = new HashSet<>(512);
 
           /*
            * In order to scan timestamps from [commitTime] through to

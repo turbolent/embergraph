@@ -200,14 +200,14 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
 
     public IStatementBuffer<S> newStatementBuffer() {
 
-      return new StatementBuffer<S>(store, 100000 /* capacity */);
+      return new StatementBuffer<>(store, 100000 /* capacity */);
     }
   }
 
   protected void doLoad(AbstractTripleStore store, String resource, final boolean parallel)
       throws Exception {
 
-    doLoad(store, resource, parallel, new StatementBufferFactory<EmbergraphStatement>(store));
+    doLoad(store, resource, parallel, new StatementBufferFactory<>(store));
   }
 
   //    /*

@@ -90,7 +90,7 @@ public class TestEmbergraphNativeServiceEvaluation extends AbstractDataDrivenSPA
     ////      fourtyTwo = makeIV(store.getValueFactory().createLiteral("42", XSD.INTEGER));
     //        fourtyTwo = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42));
 
-    final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
+    final List<IBindingSet> serviceSolutions = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(Var.var("book"), new Constant<IV>(book1));
@@ -155,7 +155,7 @@ public class TestEmbergraphNativeServiceEvaluation extends AbstractDataDrivenSPA
     final IV<?, ?> book2 =
         store.addTerm(store.getValueFactory().createURI("http://example.org/book/book2"));
 
-    final List<IBindingSet> serviceSolutions = new LinkedList<IBindingSet>();
+    final List<IBindingSet> serviceSolutions = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(Var.var("book"), new Constant<IV>(book1));

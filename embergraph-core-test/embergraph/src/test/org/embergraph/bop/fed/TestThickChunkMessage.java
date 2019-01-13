@@ -97,11 +97,11 @@ public class TestThickChunkMessage extends TestCase2 {
 
     final EmbergraphLiteral value = valueFactory.createLiteral(s);
 
-    final TermId<EmbergraphLiteral> termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, nextId++);
+    final TermId<EmbergraphLiteral> termId = new TermId<>(VTE.LITERAL, nextId++);
 
     termId.setValue(value);
 
-    return new Constant<IV<?, ?>>(termId);
+    return new Constant<>(termId);
   }
 
   /** Correct rejection test for an empty chunk (no solutions, not even an empty solution). */
@@ -126,7 +126,7 @@ public class TestThickChunkMessage extends TestCase2 {
   /** Unit test for a message with a single chunk containing a single empty binding set. */
   public void test_oneChunkWithEmptyBindingSet() {
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       data.add(new ListBindingSet());
     }
@@ -140,7 +140,7 @@ public class TestThickChunkMessage extends TestCase2 {
 
     // build the chunk.
     final IChunkMessage<IBindingSet> msg1 =
-        new ThickChunkMessage<IBindingSet>(queryController, queryId, bopId, partitionId, source);
+        new ThickChunkMessage<>(queryController, queryId, bopId, partitionId, source);
 
     // same reference.
     assertTrue(queryController == msg1.getQueryController());
@@ -164,7 +164,7 @@ public class TestThickChunkMessage extends TestCase2 {
     // verify the iterator.
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /** Unit test for a message with a single chunk of binding sets. */
@@ -173,7 +173,7 @@ public class TestThickChunkMessage extends TestCase2 {
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       IBindingSet bset = null;
       {
@@ -223,7 +223,7 @@ public class TestThickChunkMessage extends TestCase2 {
 
     // build the chunk.
     final IChunkMessage<IBindingSet> msg1 =
-        new ThickChunkMessage<IBindingSet>(queryController, queryId, bopId, partitionId, source);
+        new ThickChunkMessage<>(queryController, queryId, bopId, partitionId, source);
 
     // same reference.
     assertTrue(queryController == msg1.getQueryController());
@@ -246,7 +246,7 @@ public class TestThickChunkMessage extends TestCase2 {
 
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /*

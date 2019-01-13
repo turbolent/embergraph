@@ -427,10 +427,10 @@ public class SolutionSetManager implements ISolutionSetManager {
     /*
      * Write an empty solution set.
      */
-    final List<IBindingSet[]> emptySolutionSet = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> emptySolutionSet = new LinkedList<>();
 
     final ICloseableIterator<IBindingSet[]> src =
-        new CloseableIteratorWrapper<IBindingSet[]>(emptySolutionSet.iterator());
+        new CloseableIteratorWrapper<>(emptySolutionSet.iterator());
 
     // write the solutions.
     writeSolutions(sset, src);

@@ -274,7 +274,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
   }
 
   private Map<String, String[]> pairs2map(String... paramValues) {
-    final Map<String, String[]> params = new HashMap<String, String[]>();
+    final Map<String, String[]> params = new HashMap<>();
     for (int i = 0; i < paramValues.length; i += 2) {
       final String key = paramValues[i];
       final String value = paramValues[i + 1];

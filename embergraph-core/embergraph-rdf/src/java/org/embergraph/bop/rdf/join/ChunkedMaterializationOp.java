@@ -148,7 +148,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   /** Task executing on the node. */
@@ -253,7 +253,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
      * later use these constants canonically. -> see https://jira.blazegraph.com/browse/BLZG-1591
      */
     final Map<IV<?, ?>, IConstant<?>> idToConstMap =
-        new HashMap<IV<?, ?>, IConstant<?>>(initialCapacity);
+        new HashMap<>(initialCapacity);
 
     for (IBindingSet solution : chunkIn) {
 

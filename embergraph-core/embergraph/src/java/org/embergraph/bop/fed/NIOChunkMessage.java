@@ -235,7 +235,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
     int n = 0;
 
-    final List<IAllocation> allocations = new LinkedList<IAllocation>();
+    final List<IAllocation> allocations = new LinkedList<>();
 
     // Next chunk to be serialized.
     final E[] chunk = source; // itr.next();
@@ -373,7 +373,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
     try {
       // list of the allocations created to receive the data.
-      final List<IAllocation> received = new LinkedList<IAllocation>();
+      final List<IAllocation> received = new LinkedList<>();
 
       for (A a : allocations) {
 

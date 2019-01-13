@@ -251,11 +251,11 @@ public abstract class WriteCacheService implements IWriteCache {
   private final Condition dirtyListChange = dirtyListLock.newCondition();
 
   /** Used to compact sparsely utilized {@link WriteCache}. */
-  private final AtomicReference<WriteCache> compactingCacheRef = new AtomicReference<WriteCache>();
+  private final AtomicReference<WriteCache> compactingCacheRef = new AtomicReference<>();
 
   /** Maintained to guarantee that compaction is possible. This is always a clean cache. */
   private final AtomicReference<WriteCache> compactingReserveRef =
-      new AtomicReference<WriteCache>();
+      new AtomicReference<>();
 
   /*
    * Disable {@link WriteCache} compaction when <code>false</code>.
@@ -274,10 +274,10 @@ public abstract class WriteCacheService implements IWriteCache {
    * The current buffer. Modification of this value and reset of the current {@link WriteCache} are
    * protected by the write lock of {@link #lock()}.
    */
-  private final AtomicReference<WriteCache> current = new AtomicReference<WriteCache>();
+  private final AtomicReference<WriteCache> current = new AtomicReference<>();
 
   /** The current read cache. */
-  private final AtomicReference<ReadCache> readCache = new AtomicReference<ReadCache>();
+  private final AtomicReference<ReadCache> readCache = new AtomicReference<>();
 
   /*
    * Flag set if {@link WriteTask} encounters an error. The cause is set on {@link #firstCause} as
@@ -294,7 +294,7 @@ public abstract class WriteCacheService implements IWriteCache {
   private volatile boolean halt = false;
 
   /** The first cause of an error within the asynchronous {@link WriteTask}. */
-  private final AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>();
+  private final AtomicReference<Throwable> firstCause = new AtomicReference<>();
 
   /** The capacity of the cache buffers. This is assumed to be the same for each buffer. */
   private final int capacity;
@@ -487,9 +487,9 @@ public abstract class WriteCacheService implements IWriteCache {
 
     this.reader = reader;
 
-    dirtyList = new LinkedBlockingQueue<WriteCache>();
+    dirtyList = new LinkedBlockingQueue<>();
 
-    cleanList = new LinkedBlockingDeque<WriteCache>();
+    cleanList = new LinkedBlockingDeque<>();
 
     writeBuffers = new WriteCache[nwriteBuffers];
 
@@ -518,7 +518,7 @@ public abstract class WriteCacheService implements IWriteCache {
 
     // Setup ReadCache
     this.readListSize = nreadBuffers;
-    this.readList = new LinkedBlockingDeque<ReadCache>();
+    this.readList = new LinkedBlockingDeque<>();
 
     readBuffers = new ReadCache[nreadBuffers];
 
@@ -540,7 +540,7 @@ public abstract class WriteCacheService implements IWriteCache {
         hotListSize = 0;
       }
     }
-    hotList = new LinkedBlockingDeque<ReadCache>();
+    hotList = new LinkedBlockingDeque<>();
 
     this.hotCacheThreshold = hotCacheThreshold;
 
@@ -619,13 +619,13 @@ public abstract class WriteCacheService implements IWriteCache {
       writeBuffers[i].setCounters(counters);
     }
 
-    this.counters = new AtomicReference<WriteCacheServiceCounters>(counters);
+    this.counters = new AtomicReference<>(counters);
 
     // assume capacity is the same for each buffer instance.
     capacity = current.get().capacity();
 
     // set initial capacity based on an assumption of 1k buffers.
-    serviceMap = new ConcurrentHashMap<Long, WriteCache>(nwriteBuffers * (capacity / 1024));
+    serviceMap = new ConcurrentHashMap<>(nwriteBuffers * (capacity / 1024));
 
     /*
      * Memoizer used to install reads into the cache on a cache miss.
@@ -1618,7 +1618,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private void drainAndResetDirtyList() throws InterruptedException {
 
-    final List<WriteCache> c = new LinkedList<WriteCache>();
+    final List<WriteCache> c = new LinkedList<>();
 
     // drain the dirty list.
     dirtyListLock.lockInterruptibly();
@@ -1717,7 +1717,7 @@ public abstract class WriteCacheService implements IWriteCache {
     // reset buffers on the dirtyList.
     dirtyListLock.lock /*Interruptibly*/();
     try {
-      dirtyList.drainTo(new LinkedList<WriteCache>());
+      dirtyList.drainTo(new LinkedList<>());
       dirtyListEmpty.signalAll();
       dirtyListChange.signalAll();
     } finally {
@@ -1727,7 +1727,7 @@ public abstract class WriteCacheService implements IWriteCache {
     // close() buffers on the cleanList.
     cleanListLock.lock /*Interruptibly*/();
     try {
-      cleanList.drainTo(new LinkedList<WriteCache>());
+      cleanList.drainTo(new LinkedList<>());
     } finally {
       cleanListLock.unlock();
     }

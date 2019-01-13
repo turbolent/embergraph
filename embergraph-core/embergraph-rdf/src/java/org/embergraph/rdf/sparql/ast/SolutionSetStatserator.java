@@ -60,19 +60,19 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
   protected long nsolutions = 0;
 
   /** The set of variables observed across all solutions. */
-  protected final Set<IVariable<?>> usedVars = new HashSet<IVariable<?>>();
+  protected final Set<IVariable<?>> usedVars = new HashSet<>();
 
   /*
    * The set of variables which are NOT bound in at least one solution (e.g., MAYBE bound
    * semantics).
    */
-  protected final Set<IVariable<?>> notAlwaysBound = new HashSet<IVariable<?>>();
+  protected final Set<IVariable<?>> notAlwaysBound = new HashSet<>();
 
   /*
    * The set of variables whose {@link IVCache} association is NOT set is at least one solution in
    * which the variable is bound.
    */
-  protected final Set<IVariable<?>> notMaterialized = new HashSet<IVariable<?>>();
+  protected final Set<IVariable<?>> notMaterialized = new HashSet<>();
 
   /*
    * A map from the variable to the first bound value for that variable. This is used to identify
@@ -80,17 +80,17 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
    * solution thereafter and always to the same value).
    */
   protected final Map<IVariable<?>, IConstant<?>> firstBoundValue =
-      new HashMap<IVariable<?>, IConstant<?>>();
+      new HashMap<>();
 
   /*
    * The set of variables which have been proven to not be effective constants. In order to be an
    * effective constant, the variable must be bound in all solutions and it must be bound to the
    * same value in each solution.
    */
-  protected final Set<IVariable<?>> notConstant = new HashSet<IVariable<?>>();
+  protected final Set<IVariable<?>> notConstant = new HashSet<>();
 
-  protected final Set<IVariable<?>> currentVars = new HashSet<IVariable<?>>();
-  protected final Set<IVariable<?>> notBoundThisSolution = new HashSet<IVariable<?>>();
+  protected final Set<IVariable<?>> currentVars = new HashSet<>();
+  protected final Set<IVariable<?>> notBoundThisSolution = new HashSet<>();
 
   /*
    * Convenience method.
@@ -235,7 +235,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
   protected ISolutionSetStats compile() {
 
     // Figure out which variables were bound in every solution.
-    final Set<IVariable<?>> alwaysBound = new HashSet<IVariable<?>>(usedVars);
+    final Set<IVariable<?>> alwaysBound = new HashSet<>(usedVars);
 
     alwaysBound.removeAll(notAlwaysBound);
 
@@ -243,7 +243,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
      * Figure out which variables were always materialized when they were
      * bound.
      */
-    final Set<IVariable<?>> materialized = new HashSet<IVariable<?>>(usedVars);
+    final Set<IVariable<?>> materialized = new HashSet<>(usedVars);
 
     materialized.removeAll(notMaterialized);
 
@@ -254,7 +254,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
      * constant.
      */
     final Map<IVariable<?>, IConstant<?>> constants =
-        new HashMap<IVariable<?>, IConstant<?>>(firstBoundValue);
+        new HashMap<>(firstBoundValue);
 
     for (IVariable<?> v : notConstant) {
 

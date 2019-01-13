@@ -543,7 +543,7 @@ public class TestFileChannelUtility extends TestCase {
     // Now let's read 50M randomly from the file
     final byte[] buf = new byte[50 * 1024 * 1024];
     long addr = 0;
-    final ArrayList<AsyncTransfer> transfers = new ArrayList<AsyncTransfer>();
+    final ArrayList<AsyncTransfer> transfers = new ArrayList<>();
     while (addr < buf.length) { // cursor is within buffer
       // final int rdlen = r.nextInt(4096);
       final int rdlen = 4096;
@@ -606,7 +606,7 @@ public class TestFileChannelUtility extends TestCase {
     final byte[] buf = new byte[5 * 1024 * 1024];
     long addr = 0;
     long readAddr = 0;
-    final ArrayList<AsyncTransfer> transfers = new ArrayList<AsyncTransfer>();
+    final ArrayList<AsyncTransfer> transfers = new ArrayList<>();
     while (addr < buf.length) { // cursor is within buffer
       // final int rdlen = r.nextInt(4096);
 

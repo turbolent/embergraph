@@ -1141,7 +1141,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     public AddOp(final Collection<String> uris) {
       if (uris == null) throw new IllegalArgumentException();
       if (uris.isEmpty()) throw new IllegalArgumentException();
-      this.uris = new LinkedList<String>(uris);
+      this.uris = new LinkedList<>(uris);
     }
 
     public AddOp(final Iterable<? extends Statement> stmts) {

@@ -502,7 +502,7 @@ public class TransformationStrategies {
     return (Iterator<BitVector>)
         (transformationStrategy == IDENTITY
             ? iterator
-            : new IteratorWrapper<T>(iterator, transformationStrategy));
+            : new IteratorWrapper<>(iterator, transformationStrategy));
   }
 
   private static final class IterableWrapper<T> implements Iterable<BitVector> {
@@ -517,7 +517,7 @@ public class TransformationStrategies {
     }
 
     public ObjectIterator<BitVector> iterator() {
-      return new IteratorWrapper<T>(collection.iterator(), transformationStrategy.copy());
+      return new IteratorWrapper<>(collection.iterator(), transformationStrategy.copy());
     }
   }
 
@@ -536,7 +536,7 @@ public class TransformationStrategies {
     return (Iterable<BitVector>)
         (transformationStrategy == IDENTITY
             ? iterable
-            : new IterableWrapper<T>(iterable, transformationStrategy));
+            : new IterableWrapper<>(iterable, transformationStrategy));
   }
 
   private static final class ListWrapper<T> extends AbstractObjectList<BitVector> {
@@ -573,7 +573,7 @@ public class TransformationStrategies {
     return (List<BitVector>)
         (transformationStrategy == IDENTITY
             ? list
-            : new ListWrapper<T>(list, transformationStrategy));
+            : new ListWrapper<>(list, transformationStrategy));
   }
 
   private static class PrefixFreeTransformationStrategy

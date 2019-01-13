@@ -73,7 +73,7 @@ public final class CommitOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(context, this));
+    return new FutureTask<>(new ChunkTask(context, this));
   }
 
   private static class ChunkTask implements Callable<Void> {

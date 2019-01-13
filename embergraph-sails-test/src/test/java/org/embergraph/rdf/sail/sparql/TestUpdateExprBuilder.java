@@ -2262,7 +2262,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
                     Scope.NAMED_CONTEXTS)));
       }
 
-      final Set<IV> namedGraphs = new LinkedHashSet<IV>();
+      final Set<IV> namedGraphs = new LinkedHashSet<>();
       namedGraphs.add(addresses);
       namedGraphs.add(addresses2);
 
@@ -3083,7 +3083,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
                       Scope.NAMED_CONTEXTS)));
         }
 
-        final Set<IV> namedGraphs = new LinkedHashSet<IV>();
+        final Set<IV> namedGraphs = new LinkedHashSet<>();
         namedGraphs.add(addresses);
 
         @SuppressWarnings("unchecked")
@@ -3203,7 +3203,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
                       Scope.NAMED_CONTEXTS)));
         }
 
-        final Set<IV> namedGraphs = new LinkedHashSet<IV>();
+        final Set<IV> namedGraphs = new LinkedHashSet<>();
         namedGraphs.add(addresses);
 
         @SuppressWarnings("unchecked")
@@ -3371,7 +3371,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
                       Scope.NAMED_CONTEXTS)));
         }
 
-        final Set<IV> namedGraphs = new LinkedHashSet<IV>();
+        final Set<IV> namedGraphs = new LinkedHashSet<>();
         namedGraphs.add(addresses);
 
         @SuppressWarnings("unchecked")
@@ -3430,7 +3430,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
                       Scope.NAMED_CONTEXTS)));
         }
 
-        final Set<IV> namedGraphs = new LinkedHashSet<IV>();
+        final Set<IV> namedGraphs = new LinkedHashSet<>();
         namedGraphs.add(addresses2);
 
         @SuppressWarnings("unchecked")

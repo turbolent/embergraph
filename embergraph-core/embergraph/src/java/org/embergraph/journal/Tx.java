@@ -172,7 +172,7 @@ public class Tx implements ITx {
     return readOnly;
   }
 
-  private final AtomicReference<RunState> runState = new AtomicReference<RunState>();
+  private final AtomicReference<RunState> runState = new AtomicReference<>();
 
   //    /*
   //     * A temporary store used to hold write sets for read-write transactions. It
@@ -232,7 +232,7 @@ public class Tx implements ITx {
 
     //        this.localTransactionManager = localTransactionManager;
 
-    this.indices = readOnly ? null : new ConcurrentHashMap<String, ILocalBTreeView>();
+    this.indices = readOnly ? null : new ConcurrentHashMap<>();
 
     this.resourceManager = resourceManager;
 
@@ -853,7 +853,7 @@ public class Tx implements ITx {
     this.revisionTime = revisionTime;
 
     // Create tasks to checkpoint the indices.
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
     {
       final Iterator<Map.Entry<String, ILocalBTreeView>> itr = indices.entrySet().iterator();
 

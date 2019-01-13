@@ -47,7 +47,7 @@ public class FullyInlineURIIV<V extends EmbergraphURI> extends AbstractInlineIV<
 
   public IV<V, URI> clone(final boolean clearCache) {
 
-    final FullyInlineURIIV<V> tmp = new FullyInlineURIIV<V>(uri);
+    final FullyInlineURIIV<V> tmp = new FullyInlineURIIV<>(uri);
 
     // propagate transient state if available.
     tmp.byteLength = byteLength;

@@ -188,7 +188,7 @@ public abstract class AbstractTransactionService extends AbstractService
    * @todo config param for the initial capacity of the map.
    * @todo config for the concurrency rating of the map.
    */
-  private final ConcurrentHashMap<Long, TxState> activeTx = new ConcurrentHashMap<Long, TxState>();
+  private final ConcurrentHashMap<Long, TxState> activeTx = new ConcurrentHashMap<>();
 
   /*
    * Return the {@link TxState} associated with the specified transition identifier.
@@ -2193,9 +2193,9 @@ public abstract class AbstractTransactionService extends AbstractService
       // pre-compute the hash code for the transaction.
       this.hashCode = Long.valueOf(tx).hashCode();
 
-      this.dataServices = readOnly ? null : new LinkedHashSet<UUID>();
+      this.dataServices = readOnly ? null : new LinkedHashSet<>();
 
-      this.resources = readOnly ? null : new LinkedHashSet<String>();
+      this.resources = readOnly ? null : new LinkedHashSet<>();
     }
 
     /** The hash code is based on the {@link #getStartTimestamp()}. */

@@ -325,7 +325,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
 
       liftedSp.setOptional(true);
 
-      final List<FilterNode> filters = new LinkedList<FilterNode>();
+      final List<FilterNode> filters = new LinkedList<>();
 
       final FilterNode filterNode =
           new FilterNode(

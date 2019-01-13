@@ -47,7 +47,7 @@ public class ExplainHints implements Iterable<IExplainHint> {
 
   /** Constructor, setting up an explain hints object containing a single {@link IExplainHint}. */
   public ExplainHints(final IExplainHint explainHint) {
-    explainHints = new HashSet<IExplainHint>();
+    explainHints = new HashSet<>();
     explainHints.add(explainHint);
   }
 
@@ -68,7 +68,7 @@ public class ExplainHints implements Iterable<IExplainHint> {
         ExplainHints.explainHintAnnotatedBOpIterator(bop);
 
     // collect explain hint nodesWithExplainHints nodes
-    final List<BOp> nodesWithExplainHints = new ArrayList<BOp>();
+    final List<BOp> nodesWithExplainHints = new ArrayList<>();
     while (explainHintAnnotatedBOps.hasNext()) {
       nodesWithExplainHints.add(explainHintAnnotatedBOps.next());
     }

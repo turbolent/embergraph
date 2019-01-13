@@ -72,7 +72,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
     super(
         db,
         src,
-        new BlockingBuffer<IBindingSet[]>(
+        new BlockingBuffer<>(
             db.getChunkOfChunksCapacity(),
             db.getChunkCapacity(),
             db.getChunkTimeout(),
@@ -113,7 +113,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
 
     final int initialCapacity = chunk.length;
 
-    final Collection<Value> valueSet = new LinkedHashSet<Value>(initialCapacity);
+    final Collection<Value> valueSet = new LinkedHashSet<>(initialCapacity);
 
     for (BindingSet bindingSet : chunk) {
 
@@ -141,7 +141,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
      * Value to EmbergraphValue as we go.
      */
     final EmbergraphValue[] values = new EmbergraphValue[nvalues];
-    final Map<Value, EmbergraphValue> map = new LinkedHashMap<Value, EmbergraphValue>(nvalues);
+    final Map<Value, EmbergraphValue> map = new LinkedHashMap<>(nvalues);
     {
       int i = 0;
 

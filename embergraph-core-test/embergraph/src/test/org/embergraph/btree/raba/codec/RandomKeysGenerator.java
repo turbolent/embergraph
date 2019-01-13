@@ -86,7 +86,7 @@ public class RandomKeysGenerator implements IRabaGenerator {
      */
 
     // used to ensure distinct keys.
-    final Set<byte[]> set = new TreeSet<byte[]>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
+    final Set<byte[]> set = new TreeSet<>(BytesUtil.UnsignedByteArrayComparator.INSTANCE);
 
     final byte[][] keys = new byte[maxKeys][];
 

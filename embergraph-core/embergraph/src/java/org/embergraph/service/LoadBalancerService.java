@@ -142,11 +142,11 @@ public abstract class LoadBalancerService extends AbstractService
    *     require tracking the #of services on the host which we do not do directly right now.
    */
   protected ConcurrentHashMap<String /* hostname */, HostScore> activeHosts =
-      new ConcurrentHashMap<String, HostScore>();
+      new ConcurrentHashMap<>();
 
   /** The set of active services. */
   protected ConcurrentHashMap<UUID /* serviceUUID */, ServiceScore> activeDataServices =
-      new ConcurrentHashMap<UUID, ServiceScore>();
+      new ConcurrentHashMap<>();
 
   /*
    * Scores for the hosts in ascending order (least utilized to most utilized).
@@ -155,7 +155,7 @@ public abstract class LoadBalancerService extends AbstractService
    * UpdateTask}. The main consumer of this information is the logic in {@link UpdateTask} that
    * computes the service utilization.
    */
-  protected AtomicReference<HostScore[]> hostScores = new AtomicReference<HostScore[]>(null);
+  protected AtomicReference<HostScore[]> hostScores = new AtomicReference<>(null);
 
   /*
    * Scores for the services in ascending order (least utilized to most utilized).
@@ -167,7 +167,7 @@ public abstract class LoadBalancerService extends AbstractService
    * service is still live.
    */
   protected AtomicReference<ServiceScore[]> serviceScores =
-      new AtomicReference<ServiceScore[]>(null);
+      new AtomicReference<>(null);
 
   /*
    * The #of {@link UpdateTask}s which have run so far.
@@ -822,7 +822,7 @@ public abstract class LoadBalancerService extends AbstractService
        * Update scores for the active hosts.
        */
 
-      final Vector<HostScore> scores = new Vector<HostScore>();
+      final Vector<HostScore> scores = new Vector<>();
 
       // For each host
       final Iterator<ICounterSet> itrh = getFederation().getCounters().counterSetIterator();
@@ -914,7 +914,7 @@ public abstract class LoadBalancerService extends AbstractService
        * Update scores for the active services.
        */
 
-      final Vector<ServiceScore> scores = new Vector<ServiceScore>();
+      final Vector<ServiceScore> scores = new Vector<>();
 
       // For each host
       final Iterator<ICounterSet> itrh = getFederation().getCounters().counterSetIterator();
@@ -1574,8 +1574,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               tmpScores.addCounter(
                   hn,
-                  new HistoryInstrument<Double>(
-                      new History<Double>(
+                  new HistoryInstrument<>(
+                      new History<>(
                           new Double[60],
                           PeriodEnum.Minutes.getPeriodMillis(),
                           true /*overwrite*/)));
@@ -1606,8 +1606,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               tmpFormula.addCounter(
                   hn,
-                  new HistoryInstrument<String>(
-                      new History<String>(
+                  new HistoryInstrument<>(
+                      new History<>(
                           new String[60],
                           PeriodEnum.Minutes.getPeriodMillis(),
                           true /*overwrite*/)));
@@ -1651,8 +1651,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               tmpScores.addCounter(
                   idStr,
-                  new HistoryInstrument<Double>(
-                      new History<Double>(
+                  new HistoryInstrument<>(
+                      new History<>(
                           new Double[60],
                           PeriodEnum.Minutes.getPeriodMillis(),
                           true /*overwrite*/)));
@@ -1688,8 +1688,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               tmpFormula.addCounter(
                   idStr,
-                  new HistoryInstrument<String>(
-                      new History<String>(
+                  new HistoryInstrument<>(
+                      new History<>(
                           new String[60],
                           PeriodEnum.Minutes.getPeriodMillis(),
                           true /*overwrite*/)));

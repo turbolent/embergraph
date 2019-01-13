@@ -186,7 +186,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     this.serviceName = serviceName;
 
     //        this.service = service;
-    this.serviceRef = new WeakReference<ThreadPoolExecutor>(service);
+    this.serviceRef = new WeakReference<>(service);
 
     //        this.startNanos = System.nanoTime();
 

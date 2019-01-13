@@ -64,7 +64,7 @@ public class TestPackedLongIVs extends TestCase2 {
     final MockTermIdFactory termIdFactory = new MockTermIdFactory();
 
     final CompressedTimestampExtension<EmbergraphValue> ext =
-        new CompressedTimestampExtension<EmbergraphValue>(
+        new CompressedTimestampExtension<>(
             new IDatatypeURIResolver() {
               @Override
               public EmbergraphURI resolve(final URI uri) {

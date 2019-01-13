@@ -152,7 +152,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask<E>(this, context));
+    return new FutureTask<>(new ChunkTask<>(this, context));
   }
 
   /** Copy the source to the sink. */
@@ -204,7 +204,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
        * binding for that variable.
        */
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(leftSolutions.length /* capacity */, sink);
+          new UnsyncLocalOutputBuffer<>(leftSolutions.length /* capacity */, sink);
 
       final IVariable<?>[] selectVars = op.getSelect();
 
@@ -269,7 +269,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
            */
           right.set(
               countVar,
-              new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(rangeCount))));
+              new Constant<>(new XSDIntegerIV(BigInteger.valueOf(rangeCount))));
 
           // See if the solutions join.
           final IBindingSet outSolution =

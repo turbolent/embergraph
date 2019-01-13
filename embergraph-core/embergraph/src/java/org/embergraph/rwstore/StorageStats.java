@@ -465,7 +465,7 @@ public class StorageStats {
 
   /** @param buckets - the slot sizes used by the FixedAllocators */
   public StorageStats(final int[] buckets) {
-    m_buckets = new ArrayList<Bucket>();
+    m_buckets = new ArrayList<>();
     int prevLimit = 0;
     for (int i = 0; i < buckets.length; i++) {
       m_buckets.add(new Bucket(buckets[i] * 64, prevLimit)); // slot sizes are 64 multiples
@@ -473,7 +473,7 @@ public class StorageStats {
     }
     // last fixed allocator needed to compute BlobBuckets
     m_maxFixed = m_buckets.get(buckets.length - 1).m_size;
-    m_blobBuckets = new ArrayList<BlobBucket>();
+    m_blobBuckets = new ArrayList<>();
     int curInc = m_maxFixed;
     int nxtBlob = m_maxFixed;
     final int cMaxBucket = 64 * 1024 * 1024; // 64 Mb
@@ -494,13 +494,13 @@ public class StorageStats {
     if (cVersion != version) {
       throw new IllegalStateException("StorageStats object is wrong version");
     }
-    m_buckets = new ArrayList<Bucket>();
+    m_buckets = new ArrayList<>();
     int nbuckets = instr.readInt();
     for (int i = 0; i < nbuckets; i++) {
       m_buckets.add(new Bucket(instr));
     }
     m_maxFixed = m_buckets.get(m_buckets.size() - 1).m_size;
-    m_blobBuckets = new ArrayList<BlobBucket>();
+    m_blobBuckets = new ArrayList<>();
     int nblobbuckets = instr.readInt();
     for (int i = 0; i < nblobbuckets; i++) {
       m_blobBuckets.add(new BlobBucket(instr));

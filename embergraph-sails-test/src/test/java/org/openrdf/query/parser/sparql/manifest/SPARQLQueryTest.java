@@ -296,10 +296,10 @@ public abstract class SPARQLQueryTest extends TestCase {
 
       List<BindingSet> expectedBindings = Iterations.asList(expectedResultTable);
 
-      List<BindingSet> missingBindings = new ArrayList<BindingSet>(expectedBindings);
+      List<BindingSet> missingBindings = new ArrayList<>(expectedBindings);
       missingBindings.removeAll(queryBindings);
 
-      List<BindingSet> unexpectedBindings = new ArrayList<BindingSet>(queryBindings);
+      List<BindingSet> unexpectedBindings = new ArrayList<>(queryBindings);
       unexpectedBindings.removeAll(expectedBindings);
 
       StringBuilder message = new StringBuilder(128);
@@ -456,7 +456,7 @@ public abstract class SPARQLQueryTest extends TestCase {
     RepositoryConnection con = dataRep.getConnection();
     try {
       // Merge default and named graphs to filter duplicates
-      Set<URI> graphURIs = new HashSet<URI>();
+      Set<URI> graphURIs = new HashSet<>();
       graphURIs.addAll(dataset.getDefaultGraphs());
       graphURIs.addAll(dataset.getNamedGraphs());
 
@@ -563,7 +563,7 @@ public abstract class SPARQLQueryTest extends TestCase {
       parser.setPreserveBNodeIDs(true);
       parser.setValueFactory(dataRep.getValueFactory());
 
-      Set<Statement> result = new LinkedHashSet<Statement>();
+      Set<Statement> result = new LinkedHashSet<>();
       parser.setRDFHandler(new StatementCollector(result));
 
       InputStream in = new URL(resultFileURL).openStream();

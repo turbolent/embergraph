@@ -78,7 +78,7 @@ public class ListIndicesTask extends DataServiceCallable<String[]> {
     //
     //        }
 
-    final List<String> names = new LinkedList<String>();
+    final List<String> names = new LinkedList<>();
 
     final Iterator<String> itr = journal.indexNameScan(namespace, ts);
 

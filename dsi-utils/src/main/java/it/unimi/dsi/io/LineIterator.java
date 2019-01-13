@@ -99,7 +99,7 @@ public class LineIterator extends AbstractObjectIterator<MutableString> {
    * @return all lines remaining in this iterator as a list.
    */
   public List<MutableString> allLines() {
-    final ObjectArrayList<MutableString> result = new ObjectArrayList<MutableString>();
+    final ObjectArrayList<MutableString> result = new ObjectArrayList<>();
     while (hasNext()) result.add(next().copy());
     return result;
   }

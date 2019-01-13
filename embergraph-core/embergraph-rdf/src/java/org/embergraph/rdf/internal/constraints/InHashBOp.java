@@ -110,7 +110,7 @@ public class InHashBOp extends InBOp {
     // populate the cache.
     final IConstant<IV>[] a = getSet();
 
-    set = new LinkedHashSet<IV>(a.length);
+    set = new LinkedHashSet<>(a.length);
 
     for (IConstant<IV> IV : a) {
 

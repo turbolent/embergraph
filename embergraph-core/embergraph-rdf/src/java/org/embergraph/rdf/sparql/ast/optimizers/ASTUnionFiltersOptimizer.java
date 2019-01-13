@@ -135,7 +135,7 @@ public class ASTUnionFiltersOptimizer implements IASTOptimizer {
 
           if (filters == null) {
 
-            filters = new LinkedList<FilterNode>();
+            filters = new LinkedList<>();
           }
 
           filters.add((FilterNode) child);

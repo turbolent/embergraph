@@ -334,7 +334,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     if (log.isInfoEnabled()) log.info("URIs: " + Arrays.toString(uris));
 
     // Before we do anything, make sure we have valid URLs.
-    final Vector<URL> urls = new Vector<URL>(uris.length);
+    final Vector<URL> urls = new Vector<>(uris.length);
 
     for (String uri : uris) {
 

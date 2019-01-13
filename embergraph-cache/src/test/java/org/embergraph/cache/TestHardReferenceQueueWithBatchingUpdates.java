@@ -91,14 +91,14 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
     final String ref5 = "5";
 
     final IHardReferenceQueue<String> q =
-        new HardReferenceQueueWithBatchingUpdates<String>(
-            new HardReferenceQueue<String>(listener, capacity, 0 /* nscan */),
+        new HardReferenceQueueWithBatchingUpdates<>(
+            new HardReferenceQueue<>(listener, capacity, 0 /* nscan */),
             //                listener, capacity,
             threadLocalNSCan,
             threadLocalQueueCapacity,
             threadLocalTryLockSize,
             null // batched updates listener.
-            );
+        );
 
     // add ref, but not batched through.
     q.add(ref0);
@@ -216,20 +216,20 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
       throws InterruptedException, BrokenBarrierException, TimeoutException, ExecutionException {
 
     final HardReferenceQueueWithBatchingUpdates<Object> queue =
-        new HardReferenceQueueWithBatchingUpdates<Object>(
+        new HardReferenceQueueWithBatchingUpdates<>(
             threadLocalBuffers,
             concurrencyLevel,
-            new HardReferenceQueue<Object>(
+            new HardReferenceQueue<>(
                 null, // listener
                 capacity,
                 0 // nscan
-                ),
+            ),
             //                null/* listener */, capacity,
             threadLocalNScan,
             threadLocalQueueCapacity,
             threadLocalTryLockSize,
             null // batched updates listener
-            );
+        );
 
     final ExecutorService service =
         Executors.newFixedThreadPool(threadPoolSize, new DaemonThreadFactory(getName()));
@@ -244,7 +244,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
 
       final CyclicBarrier barrier = new CyclicBarrier(threadPoolSize + 1);
 
-      final List<Future<Object>> futures = new ArrayList<Future<Object>>(threadPoolSize);
+      final List<Future<Object>> futures = new ArrayList<>(threadPoolSize);
 
       for (int i = 0; i < threadPoolSize; i++) {
 
@@ -521,7 +521,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
        * Set defaults for each condition.
        */
 
-      final Map<String, String> defaultProperties = new HashMap<String, String>();
+      final Map<String, String> defaultProperties = new HashMap<>();
 
       defaultProperties.put(TestOptions.TIMEOUT, "10");
 
@@ -535,7 +535,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
        * Build up the conditions.
        */
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       conditions.add(new Condition(defaultProperties));
 

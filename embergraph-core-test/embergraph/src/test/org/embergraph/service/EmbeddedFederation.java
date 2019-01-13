@@ -113,7 +113,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
   private DataService[] dataService;
 
   /** Map providing lookup of the (in process) {@link DataService}s by service UUID. */
-  private Map<UUID, DataService> dataServiceByUUID = new HashMap<UUID, DataService>();
+  private Map<UUID, DataService> dataServiceByUUID = new HashMap<>();
 
   /** Return true if the federation is not backed by disk. */
   public boolean isTransient() {

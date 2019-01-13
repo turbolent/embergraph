@@ -48,7 +48,7 @@ public class TestResolver extends TestCase2 {
 
   public void test_filter() {
 
-    final Map<Long, String> map = new HashMap<Long, String>();
+    final Map<Long, String> map = new HashMap<>();
 
     map.put(1L, "A");
     map.put(2L, "B");

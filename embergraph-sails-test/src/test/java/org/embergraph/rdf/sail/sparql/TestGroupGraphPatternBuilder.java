@@ -91,7 +91,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -124,7 +124,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -171,7 +171,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -215,7 +215,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -271,7 +271,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -328,7 +328,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -390,7 +390,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -461,7 +461,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -536,7 +536,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -620,7 +620,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -681,7 +681,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -733,7 +733,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -785,7 +785,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -836,7 +836,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -892,7 +892,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -942,7 +942,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -991,7 +991,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1041,7 +1041,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1093,7 +1093,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1146,7 +1146,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1257,7 +1257,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1317,7 +1317,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -1380,7 +1380,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     final QueryRoot expected = new QueryRoot(QueryType.SELECT);
     {
       final Map<String, String> prefixDecls =
-          new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+          new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
       {
         prefixDecls.put("", "http://www.embergraph.org/");
         expected.setPrefixDecls(prefixDecls);
@@ -1437,7 +1437,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 

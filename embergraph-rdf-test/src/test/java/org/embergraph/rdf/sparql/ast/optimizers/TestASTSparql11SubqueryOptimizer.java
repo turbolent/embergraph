@@ -211,7 +211,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 Scope.DEFAULT_CONTEXTS));
 
         final NamedSubqueryInclude nsi = new NamedSubqueryInclude(name);
-        nsi.setAttachedJoinFilters(new LinkedList<FilterNode>());
+        nsi.setAttachedJoinFilters(new LinkedList<>());
         whereClause.addChild(nsi);
 
         subqueryRoot = new NamedSubqueryRoot(QueryType.SELECT, name);
@@ -373,7 +373,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 Scope.DEFAULT_CONTEXTS));
 
         final NamedSubqueryInclude nsi = new NamedSubqueryInclude(name);
-        nsi.setAttachedJoinFilters(new LinkedList<FilterNode>());
+        nsi.setAttachedJoinFilters(new LinkedList<>());
         whereClause.addChild(nsi);
 
         subqueryRoot = new NamedSubqueryRoot(QueryType.SELECT, name);
@@ -669,7 +669,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 Scope.DEFAULT_CONTEXTS));
 
         final NamedSubqueryInclude nsi = new NamedSubqueryInclude(name);
-        nsi.setAttachedJoinFilters(new LinkedList<FilterNode>());
+        nsi.setAttachedJoinFilters(new LinkedList<>());
         whereClause.addChild(nsi);
 
         subqueryRoot = new NamedSubqueryRoot(QueryType.SELECT, name);

@@ -206,7 +206,7 @@ public class ConnegUtil {
 
     final String[] a = pattern.split(acceptStr);
 
-    final List<ConnegScore<?>> scores = new LinkedList<ConnegScore<?>>();
+    final List<ConnegScore<?>> scores = new LinkedList<>();
 
     {
       for (String s : a) {
@@ -219,7 +219,7 @@ public class ConnegUtil {
 
           if (rdfFormat != null) {
 
-            scores.add(new ConnegScore<RDFFormat>(t.q, rdfFormat));
+            scores.add(new ConnegScore<>(t.q, rdfFormat));
           }
         }
 
@@ -230,7 +230,7 @@ public class ConnegUtil {
 
           if (tupleFormat != null) {
 
-            scores.add(new ConnegScore<TupleQueryResultFormat>(t.q, tupleFormat));
+            scores.add(new ConnegScore<>(t.q, tupleFormat));
           }
         }
 
@@ -241,7 +241,7 @@ public class ConnegUtil {
 
           if (booleanFormat != null) {
 
-            scores.add(new ConnegScore<BooleanQueryResultFormat>(t.q, booleanFormat));
+            scores.add(new ConnegScore<>(t.q, booleanFormat));
           }
         }
 
@@ -251,7 +251,7 @@ public class ConnegUtil {
 
           if (format != null) {
 
-            scores.add(new ConnegScore<PropertiesFormat>(t.q, format));
+            scores.add(new ConnegScore<>(t.q, format));
           }
         }
 
@@ -261,7 +261,7 @@ public class ConnegUtil {
 
           if (format != null) {
 
-            scores.add(new ConnegScore<CounterSetFormat>(t.q, format));
+            scores.add(new ConnegScore<>(t.q, format));
           }
         }
       }
@@ -450,7 +450,7 @@ public class ConnegUtil {
 
     if (cls == null) throw new IllegalArgumentException();
 
-    final List<ConnegScore<E>> t = new LinkedList<ConnegScore<E>>();
+    final List<ConnegScore<E>> t = new LinkedList<>();
 
     for (ConnegScore<?> s : scores) {
 

@@ -59,7 +59,7 @@ public class ConcurrentWeakValueCacheWithTimeout<K, V> extends ConcurrentWeakVal
       final long timeout) {
 
     super(
-        new SynchronizedHardReferenceQueueWithTimeout<V>(queueCapacity, timeout),
+        new SynchronizedHardReferenceQueueWithTimeout<>(queueCapacity, timeout),
         loadFactor,
         concurrencyLevel,
         true /* removeClearedReferences */);

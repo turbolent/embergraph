@@ -48,7 +48,7 @@ public class TestDechunkerator extends TestCase2 {
 
     final Object[][] a = new Object[][] {};
     final Iterator<Object[]> src = Arrays.asList(a).iterator();
-    final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
+    final Dechunkerator<Object> actual = new Dechunkerator<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -60,7 +60,7 @@ public class TestDechunkerator extends TestCase2 {
 
     final Object[][] a = new Object[][] {new Object[] {"A"}};
     final Iterator<Object[]> src = Arrays.asList(a).iterator();
-    final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
+    final Dechunkerator<Object> actual = new Dechunkerator<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -75,7 +75,7 @@ public class TestDechunkerator extends TestCase2 {
           new Object[] {"A"}, new Object[] {"B"},
         };
     final Iterator<Object[]> src = Arrays.asList(a).iterator();
-    final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
+    final Dechunkerator<Object> actual = new Dechunkerator<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -90,7 +90,7 @@ public class TestDechunkerator extends TestCase2 {
           new Object[] {"A"}, new Object[] {}, new Object[] {"B"},
         };
     final Iterator<Object[]> src = Arrays.asList(a).iterator();
-    final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
+    final Dechunkerator<Object> actual = new Dechunkerator<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -105,7 +105,7 @@ public class TestDechunkerator extends TestCase2 {
           new Object[] {"A"}, new Object[] {"a", "b"}, new Object[] {"B"},
         };
     final Iterator<Object[]> src = Arrays.asList(a).iterator();
-    final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
+    final Dechunkerator<Object> actual = new Dechunkerator<>(src);
 
     assertSameIterator(expected, actual);
   }

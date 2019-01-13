@@ -77,7 +77,7 @@ public class TestBTreeRecycle extends TestCase2 {
      * found in this collection when a {@link #delete(long)} is observed will result in a thrown
      * exception.
      */
-    private final Set<Long> addrs = new HashSet<Long>();
+    private final Set<Long> addrs = new HashSet<>();
 
     /*
      * Add an address which should be deleted to the set of such addresses.

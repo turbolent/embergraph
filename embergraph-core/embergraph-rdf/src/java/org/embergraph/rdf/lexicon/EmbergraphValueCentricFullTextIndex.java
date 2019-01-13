@@ -371,7 +371,7 @@ public class EmbergraphValueCentricFullTextIndex extends FullTextIndex
 
     final Hit[] tmp = new Hit[hits.length];
 
-    final Map<IV<?, ?>, Hit> iv2Hit = new HashMap<IV<?, ?>, Hit>(chunkSize);
+    final Map<IV<?, ?>, Hit> iv2Hit = new HashMap<>(chunkSize);
 
     final LexiconRelation lex = getLexiconRelation();
 
@@ -435,7 +435,7 @@ public class EmbergraphValueCentricFullTextIndex extends FullTextIndex
 
     final Hit[] tmp = new Hit[hits.length];
 
-    final Map<IV<?, ?>, Hit> iv2Hit = new HashMap<IV<?, ?>, Hit>(chunkSize);
+    final Map<IV<?, ?>, Hit> iv2Hit = new HashMap<>(chunkSize);
 
     final LexiconRelation lex = getLexiconRelation();
 

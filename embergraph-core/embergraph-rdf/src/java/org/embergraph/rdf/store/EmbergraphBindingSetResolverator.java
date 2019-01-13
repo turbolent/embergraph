@@ -67,7 +67,7 @@ public class EmbergraphBindingSetResolverator
     super(
         db,
         src,
-        new BlockingBuffer<IBindingSet[]>(
+        new BlockingBuffer<>(
             chunkOfChunksCapacity, chunkCapacity, chunkTimeout, TimeUnit.MILLISECONDS));
 
     this.queryId = queryId;
@@ -157,7 +157,7 @@ public class EmbergraphBindingSetResolverator
             ? chunk.length
             : ((required.length == 0) ? 1 : chunk.length * required.length);
 
-    final Collection<IV<?, ?>> ids = new HashSet<IV<?, ?>>(initialCapacity);
+    final Collection<IV<?, ?>> ids = new HashSet<>(initialCapacity);
 
     for (IBindingSet solution : chunk) {
 
@@ -353,7 +353,7 @@ public class EmbergraphBindingSetResolverator
        * FIXME This probably needs to strip out the EmbergraphSail#NULL_GRAPH
        * since that should not become bound.
        */
-      bindingSet.set(entry.getKey(), new Constant<EmbergraphValue>(value));
+      bindingSet.set(entry.getKey(), new Constant<>(value));
     }
 
     return bindingSet;

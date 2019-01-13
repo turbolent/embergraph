@@ -41,7 +41,7 @@ public class BasicExperimentConditions extends ExperimentDriver {
   public static List<Condition> getBasicConditions(Map<String, String> properties, NV[] params)
       throws Exception {
 
-    List<Condition> conditions = new LinkedList<Condition>();
+    List<Condition> conditions = new LinkedList<>();
 
     conditions.add(new Condition(properties));
 

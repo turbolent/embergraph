@@ -89,7 +89,7 @@ public class ASTJoinGroupPartition {
   /** @return the flat (ordered) list of nodes in the partition */
   public List<IGroupMemberNode> extractNodeList(final boolean includeOptionalOrMinusNode) {
 
-    final List<IGroupMemberNode> nodeList = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodeList = new ArrayList<>();
 
     nodeList.addAll(nonOptionalNonMinusNodes);
     if (includeOptionalOrMinusNode && optionalOrMinus != null) nodeList.add(optionalOrMinus);
@@ -180,7 +180,7 @@ public class ASTJoinGroupPartition {
      * by this node, than it might be good to place this node right at the beginning, as this
      * implies a join that could restrict the intermediate result set.
      */
-    final Set<IVariable<?>> intersectionWithExternallyIncomings = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> intersectionWithExternallyIncomings = new HashSet<>();
     intersectionWithExternallyIncomings.addAll(externallyBound);
     intersectionWithExternallyIncomings.retainAll(maybeProducedByNode);
 
@@ -199,7 +199,7 @@ public class ASTJoinGroupPartition {
       final Set<IVariable<?>> desiredBound =
           bindingInfoMap.get(nonOptionalNonMinusNodes.get(i)).getDesiredBound();
 
-      final Set<IVariable<?>> intersection = new HashSet<IVariable<?>>();
+      final Set<IVariable<?>> intersection = new HashSet<>();
       intersection.addAll(desiredBound);
       intersection.retainAll(maybeProducedByNode);
 
@@ -278,7 +278,7 @@ public class ASTJoinGroupPartition {
      * can be passed in. Variables will be added as we iterate over the non-optional non-minus nodes
      * in the partition,
      */
-    final HashSet<IVariable<?>> knownBound = new HashSet<IVariable<?>>(externallyBound);
+    final HashSet<IVariable<?>> knownBound = new HashSet<>(externallyBound);
     knownBound.addAll(additionalKnownBound);
 
     /*
@@ -287,7 +287,7 @@ public class ASTJoinGroupPartition {
      * Variables counts will be decreased (and entries will be removed once we reach 0) as we
      * iterate over the non-optional non-minus nodes in the partition.
      */
-    final Map<IVariable<?>, Integer> remainingMaybeBound = new HashMap<IVariable<?>, Integer>();
+    final Map<IVariable<?>, Integer> remainingMaybeBound = new HashMap<>();
     if (!requiresAllBound) { // save initialization effort if not used
 
       // both non-optional non-minus nodes generate maybe bound mappings ...
@@ -403,7 +403,7 @@ public class ASTJoinGroupPartition {
   /** Recompute the definitely produced variables by this partition. */
   private void recomputeDefinitelyProduced() {
 
-    definitelyProduced = new HashSet<IVariable<?>>();
+    definitelyProduced = new HashSet<>();
 
     definitelyProduced.addAll(externallyBound);
 

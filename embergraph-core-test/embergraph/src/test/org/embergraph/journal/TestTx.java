@@ -1192,7 +1192,7 @@ public class TestTx extends ProxyTestCase<Journal> {
        * for which the conflict was detected will be aborted when it tries
        * to commit.
        */
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       for (int i = 0; i < ntx; i++) {
 

@@ -53,13 +53,13 @@ public class TestPredicate extends TestCase2 {
 
   private static final String relation = "test";
 
-  private static final Constant<Long> c1 = new Constant<Long>(1L);
+  private static final Constant<Long> c1 = new Constant<>(1L);
 
-  private static final Constant<Long> c2 = new Constant<Long>(2L);
+  private static final Constant<Long> c2 = new Constant<>(2L);
 
-  private static final Constant<Long> c3 = new Constant<Long>(3L);
+  private static final Constant<Long> c3 = new Constant<>(3L);
 
-  private static final Constant<Long> c4 = new Constant<Long>(4L);
+  private static final Constant<Long> c4 = new Constant<>(4L);
 
   public void test_ctor() {
 

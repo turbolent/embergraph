@@ -109,7 +109,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
 
     if (queue.timeout > 0) {
 
-      queues.add(new WeakReference<SynchronizedHardReferenceQueueWithTimeout>(this));
+      queues.add(new WeakReference<>(this));
     }
   }
 
@@ -338,7 +338,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
 
     if (ref == null) throw new IllegalArgumentException();
 
-    return queue.add(new ValueAge<T>(ref));
+    return queue.add(new ValueAge<>(ref));
   }
 
   public synchronized void clear(final boolean clearRefs) {
@@ -414,7 +414,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    */
   private static ConcurrentLinkedQueue<WeakReference<SynchronizedHardReferenceQueueWithTimeout>>
       queues =
-          new ConcurrentLinkedQueue<WeakReference<SynchronizedHardReferenceQueueWithTimeout>>();
+      new ConcurrentLinkedQueue<>();
 
   /*
    * Cleans stale references from all known {@link SynchronizedHardReferenceQueue} instances having

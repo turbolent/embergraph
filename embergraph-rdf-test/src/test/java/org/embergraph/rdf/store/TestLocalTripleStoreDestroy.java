@@ -263,7 +263,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
       final IIndexManager indexManager, final long timestamp) {
 
     // the triple store namespaces.
-    final List<String> namespaces = new LinkedList<String>();
+    final List<String> namespaces = new LinkedList<>();
 
     final SparseRowStore grs = indexManager.getGlobalRowStore(timestamp);
 

@@ -741,7 +741,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     @SuppressWarnings("unchecked")
     public PushbackIterator<E> filterOnce(Iterator src, Object context) {
 
-      return new PushbackIterator<E>((Iterator<E>) src);
+      return new PushbackIterator<>((Iterator<E>) src);
     }
   }
 
@@ -856,7 +856,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
       this.rdfsResource = rdfsResource;
       this.s = (IV) accessPath.getPredicate().get(0).get();
       SPO spo = new SPO(s, rdfType, rdfsResource, StatementEnum.Inferred);
-      this.appender = new ChunkedArrayIterator<ISPO>(1, new SPO[] {spo}, SPOKeyOrder.SPO);
+      this.appender = new ChunkedArrayIterator<>(1, new SPO[]{spo}, SPOKeyOrder.SPO);
     }
 
     private void testSPO(ISPO spo) {

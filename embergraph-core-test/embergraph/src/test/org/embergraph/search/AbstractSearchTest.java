@@ -55,7 +55,7 @@ public abstract class AbstractSearchTest extends ProxyTestCase<IIndexManager> {
       properties.setProperty(propertyValuePairs[i++], propertyValuePairs[i++]);
     }
     FullTextIndex<Long> ndx =
-        new FullTextIndex<Long>(indexManager, namespace, ITx.UNISOLATED, properties);
+        new FullTextIndex<>(indexManager, namespace, ITx.UNISOLATED, properties);
     ndx.create();
     return ndx;
   }

@@ -609,7 +609,7 @@ public class GPO implements IGPO {
 
     materialize();
 
-    final HashSet<IGPO> ret = new HashSet<IGPO>();
+    final HashSet<IGPO> ret = new HashSet<>();
     GPOEntry linkEntry = this.m_headLinkEntry;
     while (linkEntry != null) {
       Iterator<Value> inlinks = linkEntry.values();
@@ -656,7 +656,7 @@ public class GPO implements IGPO {
 
     materialize();
 
-    final HashSet<IGPO> ret = new HashSet<IGPO>();
+    final HashSet<IGPO> ret = new HashSet<>();
     GPOEntry entry = m_headEntry;
     while (entry != null) {
       final Iterator<Value> values = entry.values();
@@ -689,7 +689,7 @@ public class GPO implements IGPO {
 
     materialize();
 
-    final Map<URI, Long> ret = new HashMap<URI, Long>();
+    final Map<URI, Long> ret = new HashMap<>();
 
     final String query =
         "SELECT ?p (COUNT(?o) AS ?count)\n"
@@ -717,7 +717,7 @@ public class GPO implements IGPO {
     //		try {
     materialize();
 
-    final HashSet<Statement> out = new HashSet<Statement>();
+    final HashSet<Statement> out = new HashSet<>();
 
     GPOEntry entry = m_headEntry;
     while (entry != null) {
@@ -758,7 +758,7 @@ public class GPO implements IGPO {
     //		try {
     materialize();
 
-    HashSet<Value> values = new HashSet<Value>();
+    HashSet<Value> values = new HashSet<>();
 
     final GPOEntry entry = getEntry(property);
     if (entry != null) {
@@ -1208,7 +1208,7 @@ public class GPO implements IGPO {
         }
       }
     } else {
-      m_skins = new ArrayList<IGenericSkin>(2);
+      m_skins = new ArrayList<>(2);
     }
 
     ret = GenericSkinRegistry.asClass(this, intf);
@@ -1224,10 +1224,10 @@ public class GPO implements IGPO {
     materialize();
 
     if (m_headEntry == null) {
-      return new EmptyIterator<URI>();
+      return new EmptyIterator<>();
     }
 
-    ArrayList<URI> properties = new ArrayList<URI>();
+    ArrayList<URI> properties = new ArrayList<>();
     GPOEntry entry = m_headEntry;
     while (entry != null) {
       properties.add(entry.m_key);

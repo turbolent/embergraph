@@ -377,7 +377,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
       namedGraphsQuery.setBinding("graphDef", action);
       TupleQueryResult inputNamedGraphsResult = namedGraphsQuery.evaluate();
 
-      HashMap<String, URI> inputNamedGraphs = new HashMap<String, URI>();
+      HashMap<String, URI> inputNamedGraphs = new HashMap<>();
 
       if (inputNamedGraphsResult.hasNext()) {
         while (inputNamedGraphsResult.hasNext()) {
@@ -393,7 +393,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
       namedGraphsQuery.setBinding("graphDef", result);
       TupleQueryResult resultNamedGraphsResult = namedGraphsQuery.evaluate();
 
-      HashMap<String, URI> resultNamedGraphs = new HashMap<String, URI>();
+      HashMap<String, URI> resultNamedGraphs = new HashMap<>();
 
       if (resultNamedGraphsResult.hasNext()) {
         while (resultNamedGraphsResult.hasNext()) {

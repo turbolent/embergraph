@@ -206,8 +206,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
             {
 
-                final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(
-                        store, 10);
+                final StatementBuffer<Statement> buffer = new StatementBuffer<>(
+                    store, 10);
 
                 buffer.add(s1, p1, o1);
 
@@ -228,7 +228,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
                         store.getSPORelation().getNamespace(),
                         Var.var("g"), // s
                         Var.var("h"), // p
-                        new Constant<IV>(o1.getIV()) // o
+                    new Constant<>(o1.getIV()) // o
                 );
 
                 final IAccessPath<ISPO> accessPath = store.getSPORelation()
@@ -248,7 +248,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
                         store.getSPORelation().getNamespace(),
                         Var.var("g"), // s
                         Var.var("g"), // s
-                        new Constant<IV>(o1.getIV()) // o
+                    new Constant<>(o1.getIV()) // o
                 );
 
                 final IAccessPath<ISPO> accessPath = store.getSPORelation()
@@ -314,8 +314,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
             {
 
-                final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(
-                        store, 10);
+                final StatementBuffer<Statement> buffer = new StatementBuffer<>(
+                    store, 10);
 
                 buffer.add(graphA, p1, o1, graphA);
 
@@ -334,8 +334,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
                 final SPOPredicate predicate = new SPOPredicate(
                         new BOp[] { Var.var("g"), // s
-                                new Constant<IV>(p1.getIV()), // p
-                                new Constant<IV>(o1.getIV()), // o
+                            new Constant<>(p1.getIV()), // p
+                            new Constant<>(o1.getIV()), // o
                                 Var.var("h") // c
                         }, new NV(IPredicate.Annotations.RELATION_NAME,
                                 new String[] { store.getSPORelation()
@@ -359,8 +359,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
             {
                 final SPOPredicate predicate = new SPOPredicate(
                         new BOp[] { Var.var("g"), // s
-                                new Constant<IV>(p1.getIV()), // p
-                                new Constant<IV>(o1.getIV()), // o
+                            new Constant<>(p1.getIV()), // p
+                            new Constant<>(o1.getIV()), // o
                                 Var.var("g") // c
                         }, new NV(IPredicate.Annotations.RELATION_NAME,
                                 new String[] { store.getSPORelation()

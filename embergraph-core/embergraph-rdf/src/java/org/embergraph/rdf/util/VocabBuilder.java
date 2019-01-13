@@ -65,10 +65,10 @@ public class VocabBuilder {
   private final IRDFParserOptions parserOptions;
 
   // map reporting predicate frequency
-  private final Map<URI, UriFrequency> preds = new LinkedHashMap<URI, UriFrequency>();
+  private final Map<URI, UriFrequency> preds = new LinkedHashMap<>();
 
   // map reporting type frequency
-  private final Map<URI, UriFrequency> types = new LinkedHashMap<URI, UriFrequency>();
+  private final Map<URI, UriFrequency> types = new LinkedHashMap<>();
 
   private VocabBuilder() {
 

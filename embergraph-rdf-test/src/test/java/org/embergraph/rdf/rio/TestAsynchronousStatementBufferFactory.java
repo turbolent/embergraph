@@ -465,7 +465,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
     parserOptions.setVerifyData(false);
 
     final AsynchronousStatementBufferFactory<EmbergraphStatement, File> statementBufferFactory =
-        new AsynchronousStatementBufferFactory<EmbergraphStatement, File>(
+        new AsynchronousStatementBufferFactory<>(
             (ScaleOutTripleStore) store,
             chunkSize,
             valuesInitialCapacity,

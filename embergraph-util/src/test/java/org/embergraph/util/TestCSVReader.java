@@ -228,7 +228,7 @@ public class TestCSVReader extends TestCase2 {
 
     assert headers.length == vals.length;
 
-    Map<String, Object> map = new TreeMap<String, Object>();
+    Map<String, Object> map = new TreeMap<>();
 
     for (int i = 0; i < headers.length; i++) {
 

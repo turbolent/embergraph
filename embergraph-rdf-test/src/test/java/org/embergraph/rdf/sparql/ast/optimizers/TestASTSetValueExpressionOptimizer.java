@@ -110,9 +110,9 @@ public class TestASTSetValueExpressionOptimizer extends AbstractASTEvaluationTes
       final BOpStats stats = new BOpStats();
       final PipelineOp mockQuery = new MockQuery();
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{});
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(mockQuery, stats);
+          new BlockingBufferWithStats<>(mockQuery, stats);
       final UUID queryId = UUID.randomUUID();
       final IQueryContext queryContext = new MockQueryContext(queryId);
       final IRunningQuery runningQuery =

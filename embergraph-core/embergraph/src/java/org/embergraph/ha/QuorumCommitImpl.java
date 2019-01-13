@@ -138,7 +138,7 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
      * the PREPARE message.
      */
     final ArrayList<Future<Boolean>> localFutures =
-        new ArrayList<Future<Boolean>>(joinedServiceIds.length);
+        new ArrayList<>(joinedServiceIds.length);
 
     try {
 
@@ -348,9 +348,9 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
      * then it will have a null entry in this list.
      */
     final ArrayList<Future<Void>> localFutures =
-        new ArrayList<Future<Void>>(joinedServiceIds.length);
+        new ArrayList<>(joinedServiceIds.length);
 
-    final ArrayList<Throwable> causes = new ArrayList<Throwable>();
+    final ArrayList<Throwable> causes = new ArrayList<>();
 
     try {
 
@@ -470,7 +470,7 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
      * To minimize latency, we first submit the futures for the other
      * services and then do f.run() on the leader.
      */
-    final List<Future<Void>> localFutures = new LinkedList<Future<Void>>();
+    final List<Future<Void>> localFutures = new LinkedList<>();
 
     try {
 
@@ -502,7 +502,7 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
       /*
        * Check the futures for the other services in the quorum.
        */
-      final List<Throwable> causes = new LinkedList<Throwable>();
+      final List<Throwable> causes = new LinkedList<>();
       for (Future<Void> ft : localFutures) {
         try {
           ft.get(); // TODO Timeout for abort?

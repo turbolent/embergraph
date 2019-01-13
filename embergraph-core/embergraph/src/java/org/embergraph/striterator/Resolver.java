@@ -64,7 +64,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
   @Override
   public IChunkedIterator<F> filter(final I src) {
 
-    return new ChunkedResolvingIterator<I, E, F>(src, this);
+    return new ChunkedResolvingIterator<>(src, this);
   }
 
   /*

@@ -178,7 +178,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 

@@ -114,7 +114,7 @@ class BatchResolveBlobIVsTask implements Callable<Void> {
 
       // System.err.println("N="+N+", M="+M+", nchunks="+nchunks+", perChunk="+perChunk);
 
-      final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(nchunks);
+      final List<Callable<Void>> tasks = new ArrayList<>(nchunks);
 
       int fromIndex = 0;
       int remaining = numNotFound;

@@ -685,7 +685,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
      * The master under test.
      */
     final BlockingBuffer<KVO<O>[]> masterBuffer =
-        new BlockingBuffer<KVO<O>[]>(
+        new BlockingBuffer<>(
             masterQueueCapacity, masterChunkSize, masterChunkTimeoutNanos, TimeUnit.NANOSECONDS);
 
     final M master =
@@ -693,13 +693,13 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
 
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 subtaskChunkSize, //
                 subtaskChunkTimeoutNanos,
                 TimeUnit.NANOSECONDS,
                 true // ordered
-                );
+            );
           }
         };
 
@@ -747,7 +747,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     // Start the master.
     {
       // Wrap computation as FutureTask.
-      final FutureTask<H> ft = new FutureTask<H>(master);
+      final FutureTask<H> ft = new FutureTask<>(master);
 
       // Set Future on BlockingBuffer.
       masterBuffer.setFuture(ft);
@@ -757,12 +757,12 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     }
 
     // Setup producers.
-    final List<FutureTask<Void>> producerFutures = new LinkedList<FutureTask<Void>>();
+    final List<FutureTask<Void>> producerFutures = new LinkedList<>();
 
     for (int i = 0; i < nproducers; i++) {
 
       // Wrap computation as FutureTask.
-      producerFutures.add(new FutureTask<Void>(new ProducerTask(masterBuffer)));
+      producerFutures.add(new FutureTask<>(new ProducerTask(masterBuffer)));
     }
 
     // Start writing data.
@@ -846,7 +846,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
 
       {
         // show the subtask stats using an ordered map.
-        final Map<L, HS> subStats = new TreeMap<L, HS>(master.stats.getSubtaskStats());
+        final Map<L, HS> subStats = new TreeMap<>(master.stats.getSubtaskStats());
 
         for (Map.Entry<L, HS> e : subStats.entrySet()) {
 

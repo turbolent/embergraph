@@ -116,7 +116,7 @@ public class TestEncodeDecodePackedLongIVs extends AbstractEncodeDecodeKeysTestC
         EmbergraphValueFactoryImpl.getInstance(getName() + UUID.randomUUID());
 
     final CompressedTimestampExtension<EmbergraphValue> ext =
-        new CompressedTimestampExtension<EmbergraphValue>(
+        new CompressedTimestampExtension<>(
             new IDatatypeURIResolver() {
               @Override
               public EmbergraphURI resolve(final URI uri) {

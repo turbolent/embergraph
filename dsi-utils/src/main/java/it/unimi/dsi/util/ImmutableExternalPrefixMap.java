@@ -275,7 +275,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
 
     final IntArrayList blockStarts = new IntArrayList();
     final IntArrayList blockOffsets = new IntArrayList();
-    final ObjectArrayList<MutableString> delimiters = new ObjectArrayList<MutableString>();
+    final ObjectArrayList<MutableString> delimiters = new ObjectArrayList<>();
     prevTerm.length(0);
 
     for (Iterator<?> i = terms.iterator(); i.hasNext(); ) {
@@ -356,7 +356,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     intervalApproximator =
         prefixCoder == null
             ? null
-            : new ImmutableBinaryTrie<CharSequence>(
+            : new ImmutableBinaryTrie<>(
                 delimiters, new PrefixCoderTransformationStrategy(prefixCoder, char2symbol, false));
 
     blockStarts.add(size);
@@ -815,7 +815,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     else {
       if (termFile != null) termList = new FileLinesCollection(termFile, encoding.name(), zipped);
       else {
-        final ObjectArrayList<MutableString> list = new ObjectArrayList<MutableString>();
+        final ObjectArrayList<MutableString> list = new ObjectArrayList<>();
         termList = list;
         final FastBufferedReader terms =
             new FastBufferedReader(

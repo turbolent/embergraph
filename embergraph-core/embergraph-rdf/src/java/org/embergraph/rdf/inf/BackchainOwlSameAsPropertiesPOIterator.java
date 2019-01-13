@@ -144,7 +144,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
       if (sameAs3 != null) {
         sameAs3It = sameAs3.getAccessPath(SPOKeyOrder.SPO).iterator();
       } else {
-        sameAs3It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+        sameAs3It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
       }
     }
     if (src.hasNext() || sameAs3It.hasNext()) {
@@ -153,7 +153,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
       if (sameAs2 != null) {
         sameAs2It = sameAs2.getAccessPath(SPOKeyOrder.SPO).iterator();
       } else {
-        sameAs2It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+        sameAs2It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
       }
     }
     return sameAs2It.hasNext();
@@ -169,7 +169,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
       if (sameAs3 != null) {
         sameAs3It = sameAs3.getAccessPath(SPOKeyOrder.SPO).iterator();
       } else {
-        sameAs3It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+        sameAs3It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
       }
     }
     canRemove = false;
@@ -186,7 +186,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
         if (sameAs2 != null) {
           sameAs2It = sameAs2.getAccessPath(SPOKeyOrder.SPO).iterator();
         } else {
-          sameAs2It = new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+          sameAs2It = new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
         }
       }
       if (sameAs2It.hasNext()) {

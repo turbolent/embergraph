@@ -118,7 +118,7 @@ public class MemoryGroupByOp extends GroupByOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new GroupByTask(this, context));
+    return new FutureTask<>(new GroupByTask(this, context));
   }
 
   /** Wrapper used for the solution groups in the {@link ConcurrentHashMap}. */
@@ -217,7 +217,7 @@ public class MemoryGroupByOp extends GroupByOp {
   /** A multiset of solutions associated with a {@link SolutionGroup}. */
   private static class SolutionMultiSet {
 
-    private List<IBindingSet> solutions = new LinkedList<IBindingSet>();
+    private List<IBindingSet> solutions = new LinkedList<>();
 
     public void add(final IBindingSet bset) {
 
@@ -262,7 +262,7 @@ public class MemoryGroupByOp extends GroupByOp {
       this.map =
           groupBy == null
               ? null
-              : new LinkedHashMap<SolutionGroup, SolutionMultiSet>(
+              : new LinkedHashMap<>(
                   op.getInitialCapacity(), op.getLoadFactor());
     }
 
@@ -303,7 +303,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
       try {
 
-        final List<IBindingSet> accepted = new LinkedList<IBindingSet>();
+        final List<IBindingSet> accepted = new LinkedList<>();
 
         int naccepted = 0;
 
@@ -629,7 +629,7 @@ public class MemoryGroupByOp extends GroupByOp {
          */
 
         // Set used to impose DISTINCT on the solution multiset.
-        final LinkedHashSet<IBindingSet> set = new LinkedHashSet<IBindingSet>();
+        final LinkedHashSet<IBindingSet> set = new LinkedHashSet<>();
 
         expr.reset();
         for (IBindingSet bset : solutions) {
@@ -656,7 +656,7 @@ public class MemoryGroupByOp extends GroupByOp {
          */
 
         // Set used to impose "DISTINCT" on value expression results.
-        final Set<Solution> set = new LinkedHashSet<Solution>();
+        final Set<Solution> set = new LinkedHashSet<>();
 
         expr.reset();
 

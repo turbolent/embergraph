@@ -76,13 +76,13 @@ public class VertexDistribution {
   private final Random r;
 
   /** Map from {@link Resource} to {@link VertexSample}. */
-  private final Map<Resource, VertexSample> samples = new HashMap<Resource, VertexSample>();
+  private final Map<Resource, VertexSample> samples = new HashMap<>();
 
   /*
    * Map from an arbitrary (one-up) index (origin ZERO) to the sequence in which the {@link
    * VertexSample} was first observed.
    */
-  private final Map<Integer, VertexSample> indexOf = new HashMap<Integer, VertexSample>();
+  private final Map<Integer, VertexSample> indexOf = new HashMap<>();
 
   public VertexDistribution(final Random r) {
 
@@ -271,7 +271,7 @@ public class VertexDistribution {
     int round = 0;
 
     // The selected samples.
-    final Set<Resource> selected = new HashSet<Resource>();
+    final Set<Resource> selected = new HashSet<>();
 
     while (selected.size() < desiredSampleSize && round++ < limit) {
 
@@ -322,7 +322,7 @@ public class VertexDistribution {
     int round = 0;
 
     // The selected samples.
-    final Set<Resource> selected = new HashSet<Resource>();
+    final Set<Resource> selected = new HashSet<>();
 
     while (selected.size() < desiredSampleSize && round++ < limit) {
 
@@ -368,7 +368,7 @@ public class VertexDistribution {
     }
 
     // The selected samples.
-    final Set<Resource> selected = new HashSet<Resource>();
+    final Set<Resource> selected = new HashSet<>();
 
     for (int i = 0; i < indexOf.size(); i++) {
 

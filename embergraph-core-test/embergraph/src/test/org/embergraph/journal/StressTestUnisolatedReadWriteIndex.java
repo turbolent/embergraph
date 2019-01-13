@@ -216,9 +216,9 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
      * Setup the tasks that we will submit.
      */
 
-    final Collection<Callable<Void>> tasks = new HashSet<Callable<Void>>();
+    final Collection<Callable<Void>> tasks = new HashSet<>();
 
-    final ConcurrentHashSet<Thread> threads = new ConcurrentHashSet<Thread>();
+    final ConcurrentHashSet<Thread> threads = new ConcurrentHashSet<>();
 
     for (int i = 0; i < ntrials; i++) {
 
@@ -228,7 +228,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
       assert nlocks >= minLocks && nlocks <= maxLocks;
 
-      final Collection<String> tmp = new HashSet<String>(nlocks);
+      final Collection<String> tmp = new HashSet<>(nlocks);
 
       while (tmp.size() < nlocks) {
 

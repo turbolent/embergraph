@@ -229,7 +229,7 @@ public class ThickChunkMessage<E> implements IChunkMessage<E>, Externalizable {
 
       if (solutionCount == 0) {
 
-        source = new EmptyCloseableIterator<E[]>();
+        source = new EmptyCloseableIterator<>();
 
         return;
       }
@@ -246,7 +246,7 @@ public class ThickChunkMessage<E> implements IChunkMessage<E>, Externalizable {
         a[i] = decoder.decodeSolution(in, true /* resolveCachedValues */);
       }
 
-      source = new ThickCloseableIterator<E[]>(((E[][]) new IBindingSet[][] {a}));
+      source = new ThickCloseableIterator<>(((E[][]) new IBindingSet[][]{a}));
     }
 
     @Override

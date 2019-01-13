@@ -339,7 +339,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
   /** Populate and return a map for fast resolution of XSD URIs. */
   private Map<String, EmbergraphURIImpl> getXSDMap() {
 
-    final Map<String, EmbergraphURIImpl> map = new LinkedHashMap<String, EmbergraphURIImpl>();
+    final Map<String, EmbergraphURIImpl> map = new LinkedHashMap<>();
 
     final EmbergraphURIImpl[] a =
         new EmbergraphURIImpl[] {
@@ -643,7 +643,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
   /** (De-)serializer paired with this {@link EmbergraphValueFactoryImpl}. */
   private final transient EmbergraphValueSerializer<EmbergraphValue> valueSer =
-      new EmbergraphValueSerializer<EmbergraphValue>(this);
+      new EmbergraphValueSerializer<>(this);
 
   @Override
   public EmbergraphValueSerializer<EmbergraphValue> getValueSerializer() {

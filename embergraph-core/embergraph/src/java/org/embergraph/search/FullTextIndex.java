@@ -472,7 +472,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     }
 
     this.cache =
-        new ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]>(
+        new ConcurrentWeakValueCacheWithTimeout<>(
             hitCacheSize, hitCacheTimeoutMillis);
 
     {
@@ -807,7 +807,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     final Hit<V>[] a = _search(query);
 
-    return new Hiterator<Hit<V>>(a);
+    return new Hiterator<>(a);
   }
 
   /** Perform a range count on a full text query. */
@@ -851,7 +851,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       final ITermMetadata md = e.getValue();
 
       final CountIndexTask<V> task1 =
-          new CountIndexTask<V>(termText, 0, 1, prefixMatch, md.getLocalTermWeight(), this);
+          new CountIndexTask<>(termText, 0, 1, prefixMatch, md.getLocalTermWeight(), this);
 
       return (int) task1.getRangeCount();
 
@@ -872,7 +872,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     // tokenize the query.
     final TermFrequencyData<V> qdata;
     {
-      final TokenBuffer<V> buffer = new TokenBuffer<V>(1, this);
+      final TokenBuffer<V> buffer = new TokenBuffer<>(1, this);
 
       /*
        * If we are using prefix match ('*' operator) then we don't want to
@@ -1274,14 +1274,14 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       final ITermMetadata md = e.getValue();
 
       final CountIndexTask<V> task1 =
-          new CountIndexTask<V>(termText, 0, 1, prefixMatch, md.getLocalTermWeight(), this);
+          new CountIndexTask<>(termText, 0, 1, prefixMatch, md.getLocalTermWeight(), this);
 
-      hits = new SingleTokenHitCollector<V>(task1);
+      hits = new SingleTokenHitCollector<>(task1);
 
     } else {
 
       final List<CountIndexTask<V>> tasks =
-          new ArrayList<CountIndexTask<V>>(qdata.distinctTermCount());
+          new ArrayList<>(qdata.distinctTermCount());
 
       int i = 0;
       for (Map.Entry<String, ITermMetadata> e : qdata.terms.entrySet()) {
@@ -1291,17 +1291,17 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
         final ITermMetadata md = e.getValue();
 
         tasks.add(
-            new CountIndexTask<V>(
+            new CountIndexTask<>(
                 termText, i++, qdata.terms.size(), prefixMatch, md.getLocalTermWeight(), this));
       }
 
-      hits = new MultiTokenHitCollector<V>(tasks);
+      hits = new MultiTokenHitCollector<>(tasks);
     }
 
     // run the queries.
     {
       final List<Callable<Object>> tasks =
-          new ArrayList<Callable<Object>>(qdata.distinctTermCount());
+          new ArrayList<>(qdata.distinctTermCount());
 
       int i = 0;
       for (Map.Entry<String, ITermMetadata> e : qdata.terms.entrySet()) {
@@ -1311,7 +1311,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
         final ITermMetadata md = e.getValue();
 
         tasks.add(
-            new ReadIndexTask<V>(
+            new ReadIndexTask<>(
                 termText,
                 i++,
                 qdata.terms.size(),
@@ -1322,7 +1322,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       }
 
       final ExecutionHelper<Object> executionHelper =
-          new ExecutionHelper<Object>(getExecutorService(), timeout, unit);
+          new ExecutionHelper<>(getExecutorService(), timeout, unit);
 
       try {
 

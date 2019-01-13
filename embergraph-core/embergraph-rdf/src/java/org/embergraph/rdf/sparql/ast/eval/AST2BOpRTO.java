@@ -257,9 +257,9 @@ public class AST2BOpRTO extends AST2BOpJoins {
     //        final Set<StatementPatternNode> sps = new LinkedHashSet<StatementPatternNode>();
     // The predicates for the join graph.
     @SuppressWarnings("rawtypes")
-    final LinkedList<Predicate> preds = new LinkedList<Predicate>();
+    final LinkedList<Predicate> preds = new LinkedList<>();
     // The constraints for the join graph.
-    final List<IConstraint> constraints = new LinkedList<IConstraint>();
+    final List<IConstraint> constraints = new LinkedList<>();
     // The #of JOINs accepted into the RTO's join group.
     int naccepted = 0;
     {
@@ -269,7 +269,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
        * avoid side-effects if this join group is not complex enough to run
        * the RTO.
        */
-      final Set<IVariable<?>> doneSetTmp = new LinkedHashSet<IVariable<?>>(doneSet);
+      final Set<IVariable<?>> doneSetTmp = new LinkedHashSet<>(doneSet);
 
       // Examine the remaining joins, stopping at the first non-SP.
       for (int i = start.get(); i < arity; i++) {
@@ -289,7 +289,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
           @SuppressWarnings("rawtypes")
           final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-              new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+              new LinkedHashMap<>();
 
           getJoinConstraints(attachedConstraints, needsMaterialization);
 
@@ -416,7 +416,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
     final IConstraint[] constraints = joinGraph.getConstraints();
 
-    final Set<IVariable<?>> doneSet = new LinkedHashSet<IVariable<?>>(joinGraph.getDoneSet());
+    final Set<IVariable<?>> doneSet = new LinkedHashSet<>(joinGraph.getDoneSet());
 
     /*
      * The AST JoinGroupNode for the joins and filters that we are running
@@ -469,7 +469,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
           join(
               left,
               pred,
-              optional ? new LinkedHashSet<IVariable<?>>(doneSet) : doneSet,
+              optional ? new LinkedHashSet<>(doneSet) : doneSet,
               attachedJoinConstraints == null ? null : Arrays.asList(attachedJoinConstraints),
               null, // cutoff join limit
               sp.getQueryHints(),
@@ -539,7 +539,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
   private static Map<Integer, StatementPatternNode> getIndex(final JoinGroupNode op) {
     if (op == null) throw new IllegalArgumentException();
     final LinkedHashMap<Integer, StatementPatternNode> map =
-        new LinkedHashMap<Integer, StatementPatternNode>();
+        new LinkedHashMap<>();
     final Iterator<IGroupMemberNode> itr = op.iterator();
     while (itr.hasNext()) {
       final BOp t = itr.next();
@@ -764,7 +764,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
      * just apply the analysis to each step in the path to figure out what
      * is done each time we setup cutoff evaluation of an operator.
      */
-    final Set<IVariable<?>> doneSet = new LinkedHashSet<IVariable<?>>(joinGraph.getDoneSet());
+    final Set<IVariable<?>> doneSet = new LinkedHashSet<>(joinGraph.getDoneSet());
 
     // Start with an empty plan.
     PipelineOp left = null;
@@ -781,7 +781,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
         join(
             left,
             pred,
-            optional ? new LinkedHashSet<IVariable<?>>(doneSet) : doneSet,
+            optional ? new LinkedHashSet<>(doneSet) : doneSet,
             attachedJoinConstraints == null ? null : Arrays.asList(attachedJoinConstraints),
             Long.valueOf(limit), // cutoff join limit.
             sp.getQueryHints(),
@@ -974,13 +974,13 @@ public class AST2BOpRTO extends AST2BOpJoins {
             //                        sourceSample.getSample())
             sourceSample.getSample());
 
-    final List<IBindingSet> result = new LinkedList<IBindingSet>();
+    final List<IBindingSet> result = new LinkedList<>();
     try {
       int nresults = 0;
       try {
         IBindingSet bset = null;
         // Figure out the #of source samples consumed.
-        final Iterator<IBindingSet> itr = new Dechunkerator<IBindingSet>(runningQuery.iterator());
+        final Iterator<IBindingSet> itr = new Dechunkerator<>(runningQuery.iterator());
         while (itr.hasNext()) {
           bset = itr.next();
           result.add(bset);
@@ -1106,7 +1106,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
      * breaks the foundations on which we are attempting to perform the
      * cutoff evaluation of the JOIN.
      */
-    final List<IBindingSet> result = new LinkedList<IBindingSet>();
+    final List<IBindingSet> result = new LinkedList<>();
     final int inputCount; // #of solutions in.
     final long outputCount; // #of solutions out.
     try {
@@ -1114,7 +1114,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
       try {
         IBindingSet bset = null;
         // Figure out the #of source samples consumed.
-        final Iterator<IBindingSet> itr = new Dechunkerator<IBindingSet>(runningQuery.iterator());
+        final Iterator<IBindingSet> itr = new Dechunkerator<>(runningQuery.iterator());
         /*
          * Injected row id variable.
          *

@@ -190,7 +190,7 @@ public class TestJournalShutdown extends TestCase2 {
                 }
               };
 
-          refs[i] = new WeakReference<Journal>(jnl);
+          refs[i] = new WeakReference<>(jnl);
 
           nunfinalized.incrementAndGet();
           ncreated.incrementAndGet();

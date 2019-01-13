@@ -67,7 +67,7 @@ public class TestNameAndExtensionFilter extends TestCase {
     assertEquals("#of files", expected.length, actual.length);
 
     // Insert the expected files into a set.
-    final Set<String> expectedSet = new HashSet<String>();
+    final Set<String> expectedSet = new HashSet<>();
 
     for (int i = 0; i < expected.length; i++) {
 
@@ -130,7 +130,7 @@ public class TestNameAndExtensionFilter extends TestCase {
 
     final int N = 100;
 
-    final Vector<File> v = new Vector<File>(N);
+    final Vector<File> v = new Vector<>(N);
 
     final File logBaseFile = File.createTempFile(getName(), "-test");
     // logBaseFile.deleteOnExit();

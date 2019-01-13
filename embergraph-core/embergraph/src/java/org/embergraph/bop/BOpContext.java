@@ -610,7 +610,7 @@ public class BOpContext<E> extends BOpContextBase {
             "namedSetRef=" + namedSetRef + ", class=" + tmp.getClass());
       }
 
-      return new Chunkerator<IBindingSet>(src, op.getChunkCapacity(), IBindingSet.class);
+      return new Chunkerator<>(src, op.getChunkCapacity(), IBindingSet.class);
 
     } else {
 
@@ -800,7 +800,7 @@ public class BOpContext<E> extends BOpContextBase {
         final IV p = (IV) e.get(1);
         final IV o = (IV) e.get(2);
         final ISPO spo = new SPO(s, p, o);
-        final SidIV sidIV = new SidIV<EmbergraphBNode>(spo);
+        final SidIV sidIV = new SidIV<>(spo);
 
         bindingSet.set(sidVar, new Constant(sidIV));
       }

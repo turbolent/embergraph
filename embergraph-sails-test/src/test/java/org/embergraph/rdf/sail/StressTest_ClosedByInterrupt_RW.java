@@ -209,7 +209,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
     private Collection<Statement> getStatementsForContext(
         final RepositoryConnection conn, final URI context) throws RepositoryException {
       RepositoryResult<Statement> res = null;
-      final Collection<Statement> statements = new ArrayList<Statement>();
+      final Collection<Statement> statements = new ArrayList<>();
       try {
         res = conn.getStatements(null, null, null, false, context);
         while (res.hasNext()) {
@@ -254,7 +254,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
             final TupleQuery query = conn.prepareTupleQuery(QueryLanguage.SPARQL, sparql);
             result = query.evaluate();
 
-            final List<String> duds = new ArrayList<String>();
+            final List<String> duds = new ArrayList<>();
 
             while (result.hasNext()) {
               final BindingSet bindingSet = result.next();

@@ -289,7 +289,7 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
 
       final int nsplits = splitResult.buildResults.length;
 
-      final List<MoveTask.AtomicUpdate> moveTasks = new ArrayList<MoveTask.AtomicUpdate>(nsplits);
+      final List<MoveTask.AtomicUpdate> moveTasks = new ArrayList<>(nsplits);
 
       // create the move tasks.
       {

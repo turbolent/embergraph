@@ -60,12 +60,12 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 
       final EmbergraphValueFactory vf = store.getValueFactory();
 
-      final LinkedList<EmbergraphURI> uriList = new LinkedList<EmbergraphURI>();
+      final LinkedList<EmbergraphURI> uriList = new LinkedList<>();
 
       Random rand = new Random();
 
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(
+          new StatementBuffer<>(
               store, PubChemInlineURIFactory.uris.length /* capacity */);
 
       EmbergraphURI pred = vf.createURI("http://semanticscience.org/resource/CHEMINF_000461");

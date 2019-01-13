@@ -88,7 +88,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
    * {@link #getCounters()} and not whatever path the counters are eventually placed under within a
    * larger hierarchy.
    */
-  private Map<String, Object> vals = new HashMap<String, Object>();
+  private Map<String, Object> vals = new HashMap<>();
 
   /** @param interval */
   public TypeperfCollector(int interval) {
@@ -200,7 +200,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
     // make sure that our counters have been declared.
     getCounters();
 
-    final List<String> command = new LinkedList<String>();
+    final List<String> command = new LinkedList<>();
     {
       command.add("typeperf");
 

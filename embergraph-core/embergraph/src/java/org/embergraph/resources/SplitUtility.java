@@ -446,7 +446,7 @@ public class SplitUtility {
     final int nsplits = splits.length;
 
     final List<BuildIndexSegmentSplitTask> tasks =
-        new ArrayList<BuildIndexSegmentSplitTask>(nsplits);
+        new ArrayList<>(nsplits);
 
     for (int i = 0; i < splits.length; i++) {
 
@@ -469,7 +469,7 @@ public class SplitUtility {
 
     // copy the individual build results into an array.
     final BuildResult[] buildResults = new BuildResult[nsplits];
-    final List<Throwable> causes = new LinkedList<Throwable>();
+    final List<Throwable> causes = new LinkedList<>();
     {
       int i = 0;
       for (Future<BuildResult> f : futures) {
@@ -717,7 +717,7 @@ public class SplitUtility {
     }
 
     // The splits (may be fewer than N).
-    final List<Split> splits = new ArrayList<Split>(N);
+    final List<Split> splits = new ArrayList<>(N);
 
     // the index of the inclusive lower bound.
     int low = 0;

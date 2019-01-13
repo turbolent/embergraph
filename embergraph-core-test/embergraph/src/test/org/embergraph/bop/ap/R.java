@@ -161,7 +161,7 @@ public class R extends AbstractRelation<E> {
 
   public Set<String> getIndexNames() {
 
-    final Set<String> tmp = new HashSet<String>();
+    final Set<String> tmp = new HashSet<>();
 
     tmp.add(getFQN(primaryKeyOrder));
 

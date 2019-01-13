@@ -125,21 +125,21 @@ public class RAMGASEngine extends GASEngine {
 
       private boolean addAttrib(final Statement s) {
         if (attribs == null) {
-          attribs = new LinkedHashSet<Statement>();
+          attribs = new LinkedHashSet<>();
         }
         return attribs.add(s);
       }
 
       private boolean addOutEdge(final Statement s) {
         if (outEdges == null) {
-          outEdges = new LinkedHashSet<Statement>();
+          outEdges = new LinkedHashSet<>();
         }
         return outEdges.add(s);
       }
 
       private boolean addInEdge(final Statement s) {
         if (inEdges == null) {
-          inEdges = new LinkedHashSet<Statement>();
+          inEdges = new LinkedHashSet<>();
         }
         return inEdges.add(s);
       }
@@ -177,7 +177,7 @@ public class RAMGASEngine extends GASEngine {
 
     public RAMGraph() {
 
-      vertices = new ConcurrentHashMap<Value, Vertex>();
+      vertices = new ConcurrentHashMap<>();
 
       vf = new ValueFactoryImpl();
     }

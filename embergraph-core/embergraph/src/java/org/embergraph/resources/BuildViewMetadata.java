@@ -113,7 +113,7 @@ class BuildViewMetadata {
 
       this.nsources = sources.length;
 
-      final List<AbstractBTree> accepted = new ArrayList<AbstractBTree>(nsources);
+      final List<AbstractBTree> accepted = new ArrayList<>(nsources);
 
       // the mutable BTree on the old journal.
       accepted.add(sources[0]);
@@ -197,7 +197,7 @@ class BuildViewMetadata {
 
   public Map<String, Object> getParams() {
 
-    final Map<String, Object> m = new HashMap<String, Object>();
+    final Map<String, Object> m = new HashMap<>();
 
     m.put("maxSumSegBytes", maxSumSegBytes);
 

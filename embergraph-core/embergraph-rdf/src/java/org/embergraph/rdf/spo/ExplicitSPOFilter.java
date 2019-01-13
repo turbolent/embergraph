@@ -38,7 +38,7 @@ public final class ExplicitSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
   private static final long serialVersionUID = 2123102826207595688L;
 
   /** Shared instance. */
-  public static final transient IElementFilter<ISPO> INSTANCE = new ExplicitSPOFilter<ISPO>();
+  public static final transient IElementFilter<ISPO> INSTANCE = new ExplicitSPOFilter<>();
 
   /** De-serialization constructor. */
   private ExplicitSPOFilter() {}

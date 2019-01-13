@@ -80,7 +80,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
 
   private static final Logger log = Logger.getLogger(AbstractInlineSELECTTestCase.class);
 
-  private final Map<String, String> prefixes = new HashMap<String, String>();
+  private final Map<String, String> prefixes = new HashMap<>();
   /** */
   public AbstractInlineSELECTTestCase() {}
 

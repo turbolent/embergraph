@@ -122,7 +122,7 @@ public class EmbergraphStatics {
 
       // Setup an ordered map.
       final Map<Thread, StackTraceElement[]> dump =
-          new TreeMap<Thread, StackTraceElement[]>(
+          new TreeMap<>(
               new Comparator<Thread>() {
                 @Override
                 public int compare(Thread o1, Thread o2) {

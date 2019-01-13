@@ -134,14 +134,14 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Declare some IVs.
      */
-    termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, 12 /* termId */);
+    termId = new TermId<>(VTE.LITERAL, 12 /* termId */);
     termId.setValue(valueFactory.createLiteral("abc"));
 
-    termId2 = new TermId<EmbergraphLiteral>(VTE.LITERAL, 36 /* termId */);
+    termId2 = new TermId<>(VTE.LITERAL, 36 /* termId */);
     termId2.setValue(valueFactory.createLiteral("xyz"));
 
     blobIV =
-        new BlobIV<EmbergraphLiteral>(
+        new BlobIV<>(
             VTE.LITERAL, 912 /* hash */, (short) 0 /* collisionCounter */);
     blobIV.setValue(valueFactory.createLiteral("bigfoo"));
 
@@ -154,7 +154,7 @@ public class TestSolutionSetManager extends TestCase2 {
     mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
     mockIV3.setValue(valueFactory.createLiteral("green"));
 
-    inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
+    inlineIV = new XSDIntegerIV<>(BigInteger.valueOf(100));
     inlineIV.setValue(valueFactory.createLiteral("100", XSD.INTEGER));
 
     inlineIV2 = XSDBooleanIV.valueOf(true);
@@ -202,9 +202,9 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Setup the source solution set chunks.
      */
-    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in = new LinkedList<>();
     {
-      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      final List<IBindingSet> t = new LinkedList<>();
 
       // An empty binding set.
       t.add(new ListBindingSet());
@@ -224,7 +224,7 @@ public class TestSolutionSetManager extends TestCase2 {
     assertFalse(solutionSetsManager.existsSolutions(solutionSet));
 
     solutionSetsManager.putSolutions(
-        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        solutionSet, new CloseableIteratorWrapper<>(in.iterator()));
 
     assertTrue(solutionSetsManager.existsSolutions(solutionSet));
 
@@ -241,9 +241,9 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Setup the source solution set chunks.
      */
-    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in = new LinkedList<>();
     {
-      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      final List<IBindingSet> t = new LinkedList<>();
 
       // An empty binding set.
       {
@@ -270,7 +270,7 @@ public class TestSolutionSetManager extends TestCase2 {
     }
 
     solutionSetsManager.putSolutions(
-        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        solutionSet, new CloseableIteratorWrapper<>(in.iterator()));
 
     final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
 
@@ -287,14 +287,14 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Setup the source solution set chunks.
      */
-    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in = new LinkedList<>();
     {
       final IVariable<?> x = Var.var("x");
       final IVariable<?> y = Var.var("y");
       final IVariable<?> z = Var.var("z");
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -325,7 +325,7 @@ public class TestSolutionSetManager extends TestCase2 {
     }
 
     solutionSetsManager.putSolutions(
-        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        solutionSet, new CloseableIteratorWrapper<>(in.iterator()));
 
     final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
 
@@ -342,14 +342,14 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Setup the source solution set chunks.
      */
-    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in = new LinkedList<>();
     {
       final IVariable<?> x = Var.var("x");
       final IVariable<?> y = Var.var("y");
       final IVariable<?> z = Var.var("z");
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -363,7 +363,7 @@ public class TestSolutionSetManager extends TestCase2 {
       }
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -376,7 +376,7 @@ public class TestSolutionSetManager extends TestCase2 {
       }
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -397,7 +397,7 @@ public class TestSolutionSetManager extends TestCase2 {
     }
 
     solutionSetsManager.putSolutions(
-        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        solutionSet, new CloseableIteratorWrapper<>(in.iterator()));
 
     final ICloseableIterator<IBindingSet[]> out = solutionSetsManager.getSolutions(solutionSet);
 
@@ -411,14 +411,14 @@ public class TestSolutionSetManager extends TestCase2 {
     /*
      * Setup the source solution set chunks.
      */
-    final List<IBindingSet[]> in = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in = new LinkedList<>();
     {
       final IVariable<?> x = Var.var("x");
       final IVariable<?> y = Var.var("y");
       final IVariable<?> z = Var.var("z");
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -432,7 +432,7 @@ public class TestSolutionSetManager extends TestCase2 {
       }
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -445,7 +445,7 @@ public class TestSolutionSetManager extends TestCase2 {
       }
 
       {
-        final List<IBindingSet> t = new LinkedList<IBindingSet>();
+        final List<IBindingSet> t = new LinkedList<>();
 
         {
           final ListBindingSet b = new ListBindingSet();
@@ -467,7 +467,7 @@ public class TestSolutionSetManager extends TestCase2 {
 
     // write the solution set.
     solutionSetsManager.putSolutions(
-        solutionSet, new CloseableIteratorWrapper<IBindingSet[]>(in.iterator()));
+        solutionSet, new CloseableIteratorWrapper<>(in.iterator()));
 
     // read them back
     {
@@ -498,9 +498,9 @@ public class TestSolutionSetManager extends TestCase2 {
   /** Unit test for clearing all named solution sets. */
   public void test_clearAllSolutionSets() {
 
-    final List<IBindingSet[]> in1 = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in1 = new LinkedList<>();
     {
-      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      final List<IBindingSet> t = new LinkedList<>();
 
       {
         final ListBindingSet b = new ListBindingSet();
@@ -510,9 +510,9 @@ public class TestSolutionSetManager extends TestCase2 {
       in1.add(t.toArray(new IBindingSet[0]));
     }
 
-    final List<IBindingSet[]> in2 = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> in2 = new LinkedList<>();
     {
-      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      final List<IBindingSet> t = new LinkedList<>();
 
       {
         final ListBindingSet b = new ListBindingSet();
@@ -546,9 +546,9 @@ public class TestSolutionSetManager extends TestCase2 {
 
     // write the solution sets.
     solutionSetsManager.putSolutions(
-        solutionSet1, new CloseableIteratorWrapper<IBindingSet[]>(in1.iterator()));
+        solutionSet1, new CloseableIteratorWrapper<>(in1.iterator()));
     solutionSetsManager.putSolutions(
-        solutionSet2, new CloseableIteratorWrapper<IBindingSet[]>(in2.iterator()));
+        solutionSet2, new CloseableIteratorWrapper<>(in2.iterator()));
 
     // read them back
     assertSameSolutionsAnyOrder(
@@ -595,7 +595,7 @@ public class TestSolutionSetManager extends TestCase2 {
 
     try {
 
-      final List<IBindingSet> t = new LinkedList<IBindingSet>();
+      final List<IBindingSet> t = new LinkedList<>();
 
       while (itr.hasNext()) {
 
@@ -629,7 +629,7 @@ public class TestSolutionSetManager extends TestCase2 {
 
     try {
 
-      final Iterator<IBindingSet> actual = new Dechunkerator<IBindingSet>(itr);
+      final Iterator<IBindingSet> actual = new Dechunkerator<>(itr);
 
       /*
        * Populate a map that we will use to realize the match and
@@ -641,7 +641,7 @@ public class TestSolutionSetManager extends TestCase2 {
       final int nrange = expected.length;
 
       final java.util.Map<IBindingSet, AtomicInteger> range =
-          new java.util.LinkedHashMap<IBindingSet, AtomicInteger>();
+          new java.util.LinkedHashMap<>();
 
       for (int j = 0; j < nrange; j++) {
 

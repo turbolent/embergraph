@@ -166,7 +166,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
    * The run state of the query and the result of the computation iff it completes execution
    * normally (without being interrupted, cancelled, etc).
    */
-  private final Haltable<Void> future = new Haltable<Void>();
+  private final Haltable<Void> future = new Haltable<>();
 
   /*
    * The {@link Future} of this query.
@@ -504,7 +504,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
 
       runState = new RunState(this);
 
-      statsMap = new ConcurrentHashMap<Integer, BOpStats>();
+      statsMap = new ConcurrentHashMap<>();
 
       populateStatsMap(query);
 
@@ -522,7 +522,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
 
         queryBuffer = newQueryBuffer(query, queryStats);
 
-        queryIterator = new QueryResultIterator<IBindingSet[]>(this, queryBuffer.iterator());
+        queryIterator = new QueryResultIterator<>(this, queryBuffer.iterator());
 
         // } else {
 
@@ -553,7 +553,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   protected final IBlockingBuffer<IBindingSet[]> newQueryBuffer(
       final PipelineOp query, final BOpStats queryStats) {
 
-    return new BlockingBufferWithStats<IBindingSet[]>(query, queryStats);
+    return new BlockingBufferWithStats<>(query, queryStats);
   }
 
   /*
@@ -805,7 +805,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
          * Since evaluation is purely local, we specify -1 as the shardId.
          */
         final IChunkMessage<IBindingSet> emptyMessage =
-            new EmptyChunkMessage<IBindingSet>(
+            new EmptyChunkMessage<>(
                 getQueryController(), queryId, bopId, -1 /* shardId */, true /* lastInvocation */);
 
         acceptChunk(emptyMessage);
@@ -890,7 +890,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
      * Since evaluation is purely local, we specify -1 as the shardId.
      */
     final IChunkMessage<IBindingSet> emptyMessage =
-        new EmptyChunkMessage<IBindingSet>(
+        new EmptyChunkMessage<>(
             getQueryController(), queryId, bopId, -1 /* shardId */, true /* lastInvocation */);
 
     acceptChunk(emptyMessage);
@@ -1387,7 +1387,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
     return memoryManager;
   }
 
-  private final AtomicReference<MemoryManager> memoryManager = new AtomicReference<MemoryManager>();
+  private final AtomicReference<MemoryManager> memoryManager = new AtomicReference<>();
 
   /*
    * Allocate a memory manager for the query.
@@ -1464,7 +1464,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
       }
 
       // Add in all direct child queries.
-      final List<IRunningQuery> tmp = new LinkedList<IRunningQuery>(children.values());
+      final List<IRunningQuery> tmp = new LinkedList<>(children.values());
 
       // Note: Do not iterator over [tmp] to avoid concurrent modification.
       for (IRunningQuery c : children.values()) {
@@ -1510,7 +1510,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   }
 
   private final LinkedHashMap<UUID, IRunningQuery> children =
-      new LinkedHashMap<UUID, IRunningQuery>();
+      new LinkedHashMap<>();
 
   /*
    * Return the textual representation of the {@link RunState} of this query.

@@ -83,7 +83,7 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
     final Integer e2 = new Integer(2);
 
     final int queueCapacity = 3;
-    final BlockingQueue<Integer[]> queue = new ArrayBlockingQueue<Integer[]>(queueCapacity);
+    final BlockingQueue<Integer[]> queue = new ArrayBlockingQueue<>(queueCapacity);
     final int chunkSize = 4;
     final long chunkTimeout = 1000;
     final TimeUnit chunkTimeoutUnit = TimeUnit.MILLISECONDS;
@@ -97,7 +97,7 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
     final boolean ordered = false;
 
     final BlockingBuffer<Integer[]> buffer =
-        new BlockingBuffer<Integer[]>(queue, chunkSize, chunkTimeout, chunkTimeoutUnit, ordered);
+        new BlockingBuffer<>(queue, chunkSize, chunkTimeout, chunkTimeoutUnit, ordered);
 
     // buffer is empty.
     assertTrue(buffer.isOpen());

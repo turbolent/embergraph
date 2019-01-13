@@ -84,7 +84,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
   @Override
   public IV<V, ISPO> clone(final boolean clearCache) {
 
-    final SidIV<V> tmp = new SidIV<V>(spo);
+    final SidIV<V> tmp = new SidIV<>(spo);
 
     // Propagate the cached byte[] key.
     tmp.key = key;

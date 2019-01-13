@@ -63,7 +63,7 @@ public class TestHistoryInstrument extends TestCase2 {
   public void test_history01() {
 
     // a history buffer with 60 samples each spaced 60 seconds apart.
-    final History<Double> h = new History<Double>(new Double[60], t60, true /*overwrite*/);
+    final History<Double> h = new History<>(new Double[60], t60, true /*overwrite*/);
 
     assertEquals(0, h.size());
     assertEquals(60, h.capacity());
@@ -104,7 +104,7 @@ public class TestHistoryInstrument extends TestCase2 {
     /*
      * a history buffer with 2 samples each spaced 60 seconds apart.
      */
-    final History<Double> h = new History<Double>(new Double[2], t60, true /* overwrite */);
+    final History<Double> h = new History<>(new Double[2], t60, true /* overwrite */);
 
     assertEquals(0, h.size());
     assertEquals(2, h.capacity());
@@ -112,7 +112,7 @@ public class TestHistoryInstrument extends TestCase2 {
     /*
      * a history buffer with 3 samples each spaced two minutes apart.
      */
-    final History<Double> h2 = new History<Double>(3, h);
+    final History<Double> h2 = new History<>(3, h);
 
     assertEquals(0, h2.size());
     assertEquals(3, h2.capacity());

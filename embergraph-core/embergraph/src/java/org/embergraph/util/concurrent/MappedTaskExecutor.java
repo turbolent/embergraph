@@ -129,7 +129,7 @@ public class MappedTaskExecutor {
 
     final Iterator<Callable<T>> itr = tasks.iterator();
 
-    final List<T> list = new LinkedList<T>();
+    final List<T> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -166,7 +166,7 @@ public class MappedTaskExecutor {
 
     final Iterator<Future<T>> itr = futures.iterator();
 
-    final List<T> list = new LinkedList<T>();
+    final List<T> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -206,12 +206,12 @@ public class MappedTaskExecutor {
     final Iterator<Callable<T>> titr = tasks.iterator();
 
     // values collected from task futures.
-    final List<T> list = new LinkedList<T>();
+    final List<T> list = new LinkedList<>();
 
     while (titr.hasNext()) {
 
       // chunk of tasks.
-      final List<Callable<T>> taskChunk = new LinkedList<Callable<T>>();
+      final List<Callable<T>> taskChunk = new LinkedList<>();
 
       // collect a chunk of tasks to run in parallel.
       while (taskChunk.size() < maxParallel && titr.hasNext()) {

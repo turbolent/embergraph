@@ -121,7 +121,7 @@ public class TestEmbergraphGraphClientInMemorySail extends AbstractTestEmbergrap
     }
 
     private Map<String, EmbergraphSailNSSWrapper> testSails =
-        new LinkedHashMap<String, EmbergraphSailNSSWrapper>();
+        new LinkedHashMap<>();
 
     @Override
     public Graph generateGraph(final String key) {

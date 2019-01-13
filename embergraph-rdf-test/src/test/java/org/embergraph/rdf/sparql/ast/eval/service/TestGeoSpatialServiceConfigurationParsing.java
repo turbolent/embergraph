@@ -52,7 +52,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config1 = sampleConfigComplete(config1Uri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config1);
 
     final GeoSpatialConfig conf =
@@ -120,7 +120,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
     final String config3 = sampleConfigComplete(config3Uri);
 
     // parse config
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config1);
     datatypeConfigs.add(config2);
     datatypeConfigs.add(config3);
@@ -194,7 +194,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config1 = sampleConfigNoFields(config1Uri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config1);
 
     try {
@@ -212,7 +212,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config1 = sampleConfigSyntacticallyInvalid(config1Uri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config1);
 
     try {
@@ -230,7 +230,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config = sampleConfigWithMissingValueType(configUri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config);
 
     try {
@@ -248,7 +248,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config = sampleConfigWithMissingServiceMapping(configUri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config);
 
     try {
@@ -266,7 +266,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config = sampleConfigWithMappingConflict(configUri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config);
 
     try {
@@ -284,7 +284,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
 
     final String config = sampleConfigWithMappingConflict(configUri);
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config);
 
     try {
@@ -303,7 +303,7 @@ public class TestGeoSpatialServiceConfigurationParsing extends AbstractDataDrive
     final String config1 = sampleConfigWithMappingConflict(configUri);
     final String config2 = sampleConfigWithMappingConflict(configUri); // same URI -> invalid!
 
-    final List<String> datatypeConfigs = new ArrayList<String>();
+    final List<String> datatypeConfigs = new ArrayList<>();
     datatypeConfigs.add(config1);
     datatypeConfigs.add(config2);
 

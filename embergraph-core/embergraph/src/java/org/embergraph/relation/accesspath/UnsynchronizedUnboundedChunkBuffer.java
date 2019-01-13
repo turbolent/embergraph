@@ -84,7 +84,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
     this.keyOrder = keyOrder;
 
-    queue = new LinkedBlockingQueue<E[]>(/* unbounded capacity */ );
+    queue = new LinkedBlockingQueue<>(/* unbounded capacity */);
   }
 
   /** Add the chunk to the target buffer. */
@@ -116,7 +116,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
       if (queue.isEmpty()) {
 
         // Note: handles case where chunkClass is not defined.
-        return new EmptyChunkedIterator<E>(keyOrder);
+        return new EmptyChunkedIterator<>(keyOrder);
       }
 
       assert chunkClass != null;
@@ -129,7 +129,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
               .iterator();
 
       // wrap with the IChunkedOrderedIterator API.
-      return new ListOfChunksIterator<E>(src, keyOrder);
+      return new ListOfChunksIterator<>(src, keyOrder);
     }
   }
 

@@ -170,7 +170,7 @@ public class AbstractMasterTestCase extends TestCase2 {
 
         if (v[i] == null) {
 
-          v[i] = new LinkedList<KVO<O>>();
+          v[i] = new LinkedList<>();
         }
 
         v[i].add(e);
@@ -201,7 +201,7 @@ public class AbstractMasterTestCase extends TestCase2 {
      * <p>The map is empty by default. Some unit tests populate it as they force redirects.
      */
     protected final ConcurrentHashMap<Integer, Integer> redirects =
-        new ConcurrentHashMap<Integer, Integer>();
+        new ConcurrentHashMap<>();
 
     /*
      * Assigns elements from an ordered chunk to key-range partitions by interpreting the first byte
@@ -229,7 +229,7 @@ public class AbstractMasterTestCase extends TestCase2 {
 
         if (v[i] == null) {
 
-          v[i] = new LinkedList<KVO<O>>();
+          v[i] = new LinkedList<>();
         }
 
         v[i].add(e);
@@ -278,15 +278,15 @@ public class AbstractMasterTestCase extends TestCase2 {
 
     protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-      return new BlockingBuffer<KVO<O>[]>(
+      return new BlockingBuffer<>(
           (isDeque()
-              ? new LinkedBlockingDeque<KVO<O>[]>(subtaskQueueCapacity)
-              : new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity)),
+              ? new LinkedBlockingDeque<>(subtaskQueueCapacity)
+              : new ArrayBlockingQueue<>(subtaskQueueCapacity)),
           BlockingBuffer.DEFAULT_MINIMUM_CHUNK_SIZE, //
           BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,
           BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT,
           true // ordered
-          );
+      );
     }
 
     @Override

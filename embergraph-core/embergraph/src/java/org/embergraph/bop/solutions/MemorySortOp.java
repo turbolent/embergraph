@@ -106,7 +106,7 @@ public class MemorySortOp extends SortOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new SortTask(this, context));
+    return new FutureTask<>(new SortTask(this, context));
   }
 
   /** Task executing on the node. */
@@ -154,7 +154,7 @@ public class MemorySortOp extends SortOp {
 
       if (solutions == null) {
 
-        solutions = new LinkedList<IBindingSet>();
+        solutions = new LinkedList<>();
 
         if (attrs.putIfAbsent(key, solutions) != null) throw new AssertionError();
       }

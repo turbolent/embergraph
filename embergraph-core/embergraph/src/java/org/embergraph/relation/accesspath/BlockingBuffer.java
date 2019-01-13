@@ -272,7 +272,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       final TimeUnit chunkTimeoutUnit) {
 
     this(
-        capacity == 0 ? new SynchronousQueue<E>() : new LinkedBlockingDeque<E>(capacity),
+        capacity == 0 ? new SynchronousQueue<>() : new LinkedBlockingDeque<>(capacity),
         //                    new ArrayBlockingQueue<E>(capacity),
         minimumChunkSize,
         chunkTimeout,

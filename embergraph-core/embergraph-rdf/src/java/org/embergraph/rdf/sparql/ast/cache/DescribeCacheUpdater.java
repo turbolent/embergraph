@@ -52,7 +52,7 @@ public class DescribeCacheUpdater
    * {@link IV}s and its {@link Value}s, so the {@link TempTripleStore} will not work. Something
    * more custom?
    */
-  private final HashMap<EmbergraphValue, Graph> graphs = new HashMap<EmbergraphValue, Graph>();
+  private final HashMap<EmbergraphValue, Graph> graphs = new HashMap<>();
 
   private boolean open = true;
 

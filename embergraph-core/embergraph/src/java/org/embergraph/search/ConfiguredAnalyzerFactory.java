@@ -88,7 +88,7 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
 
   /** This caches the result of looking up a lang tag in the config of language ranges. */
   private final Map<String, AnalyzerPair> langTag2AnalyzerPair =
-      new ConcurrentHashMap<String, AnalyzerPair>();
+      new ConcurrentHashMap<>();
 
   /*
    * While it would be very unusual to have more than 500 different language tags in a store it is

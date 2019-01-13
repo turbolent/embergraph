@@ -75,36 +75,36 @@ public class TestConditionalRoutingOp extends TestCase2 {
 
     final Var<?> x = Var.var("x");
 
-    data = new LinkedList<IBindingSet>();
+    data = new LinkedList<>();
     IBindingSet bset = null;
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("John"));
+      bset.set(x, new Constant<>("John"));
       data.add(bset);
     }
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Mary"));
+      bset.set(x, new Constant<>("Mary"));
       data.add(bset);
     }
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Mary"));
+      bset.set(x, new Constant<>("Mary"));
       data.add(bset);
     }
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Paul"));
+      bset.set(x, new Constant<>("Paul"));
       data.add(bset);
     }
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Paul"));
+      bset.set(x, new Constant<>("Paul"));
       data.add(bset);
     }
     {
       bset = new HashBindingSet();
-      bset.set(x, new Constant<String>("Leon"));
+      bset.set(x, new Constant<>("Leon"));
       data.add(bset);
     }
   }
@@ -134,22 +134,22 @@ public class TestConditionalRoutingOp extends TestCase2 {
                 new NV(BOp.Annotations.BOP_ID, bopId),
                 new NV(
                     ConditionalRoutingOp.Annotations.CONDITION,
-                    Constraint.wrap(new EQConstant(x, new Constant<String>("Mary"))))));
+                    Constraint.wrap(new EQConstant(x, new Constant<>("Mary"))))));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Mary")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Mary")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Mary")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Mary")}),
         };
 
     // the expected solutions (alt sink).
     final IBindingSet[] expected2 =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("John")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Paul")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Paul")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Leon")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("John")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Paul")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Paul")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Leon")}),
         };
 
     final BOpStats stats = query.newStats();
@@ -158,12 +158,12 @@ public class TestConditionalRoutingOp extends TestCase2 {
         newBindingSetIterator(data.toArray(new IBindingSet[0]));
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
     final IBlockingBuffer<IBindingSet[]> sink2 =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, null /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -200,6 +200,6 @@ public class TestConditionalRoutingOp extends TestCase2 {
   private static ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[] bsets) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {bsets});
+    return new ThickAsynchronousIterator<>(new IBindingSet[][]{bsets});
   }
 }

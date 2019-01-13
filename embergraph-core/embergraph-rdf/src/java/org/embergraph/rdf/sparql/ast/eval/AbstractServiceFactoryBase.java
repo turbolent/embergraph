@@ -43,7 +43,7 @@ public abstract class AbstractServiceFactoryBase implements ServiceFactory {
    */
   @Override
   public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   /*
@@ -54,6 +54,6 @@ public abstract class AbstractServiceFactoryBase implements ServiceFactory {
    */
   @Override
   public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 }

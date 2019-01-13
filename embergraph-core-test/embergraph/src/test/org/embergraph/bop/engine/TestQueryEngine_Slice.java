@@ -106,7 +106,7 @@ public class TestQueryEngine_Slice extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickAsynchronousIterator<>(bindingSetChunks);
   }
 
   public void testStressThreadSafe() throws Exception {

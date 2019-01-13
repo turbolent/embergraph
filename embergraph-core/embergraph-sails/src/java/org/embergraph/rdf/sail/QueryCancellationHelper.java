@@ -39,7 +39,7 @@ public class QueryCancellationHelper {
 
   public static void cancelQuery(final UUID queryId, final QueryEngine queryEngine) {
 
-    final Collection<UUID> queryIds = new LinkedList<UUID>();
+    final Collection<UUID> queryIds = new LinkedList<>();
 
     queryIds.add(queryId);
 

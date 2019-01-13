@@ -96,7 +96,7 @@ public class TestCompletionScan extends AbstractTripleStoreTestCase {
        * Do a completion scan on "minor".
        */
       {
-        final Set<Literal> expected = new HashSet<Literal>();
+        final Set<Literal> expected = new HashSet<>();
 
         expected.add(new LiteralImpl("minor"));
 

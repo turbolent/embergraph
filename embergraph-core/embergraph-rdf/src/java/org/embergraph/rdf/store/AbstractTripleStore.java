@@ -1576,7 +1576,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
                * explicit configuration is provided, we fallback on our single
                * latitude-longitude-time default.
                */
-              final List<String> geoSpatialDatatypeConfigs = new LinkedList<String>();
+              final List<String> geoSpatialDatatypeConfigs = new LinkedList<>();
               boolean finished = false;
               for (int i = 0; !finished; i++) {
 
@@ -1979,7 +1979,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    *
    * @see #getVocabulary()
    */
-  private final AtomicReference<Vocabulary> vocabRef = new AtomicReference<Vocabulary>();
+  private final AtomicReference<Vocabulary> vocabRef = new AtomicReference<>();
 
   /*
    * The geospatial configuration -- if null, geospatial is disabled.
@@ -1987,7 +1987,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    * @see #getGeoSpatialConfig()
    */
   private final AtomicReference<GeoSpatialConfig> geoSpatialConfigRef =
-      new AtomicReference<GeoSpatialConfig>();
+      new AtomicReference<>();
 
   /** The {@link SPORelation} (triples and their access paths). */
   public final SPORelation getSPORelation() {
@@ -2017,7 +2017,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return spoRelationRef.get();
   }
 
-  private final AtomicReference<SPORelation> spoRelationRef = new AtomicReference<SPORelation>();
+  private final AtomicReference<SPORelation> spoRelationRef = new AtomicReference<>();
 
   /*
    * The {@link LexiconRelation} handles all things related to the indices mapping RDF {@link
@@ -2429,7 +2429,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         dataLoader = new DataLoader(this);
 
-        dataLoaderRef = new WeakReference<DataLoader>(dataLoader);
+        dataLoaderRef = new WeakReference<>(dataLoader);
       }
 
       return dataLoader;
@@ -2463,7 +2463,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
 
     final IStatementBuffer<Statement> buffer =
-        new StatementBuffer<Statement>(
+        new StatementBuffer<>(
             null /* focusStore */, this, 1 /* capacity */, 0 /* queueCapacity */);
 
     buffer.add(s, p, o, c);
@@ -2726,7 +2726,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
       final IChunkedOrderedIterator<EmbergraphTriplePattern> triplePatterns) {
 
     return asStatementIterator(
-        new ChunkedWrappedIterator<ISPO>(
+        new ChunkedWrappedIterator<>(
             new EmbergraphTriplePatternMaterializer(this, triplePatterns)
                 .start(getExecutorService())));
   }
@@ -2743,7 +2743,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     /*
      * Use batch API to resolve the term identifiers.
      */
-    final List<IV<?, ?>> ivs = new ArrayList<IV<?, ?>>(4);
+    final List<IV<?, ?>> ivs = new ArrayList<>(4);
 
     ivs.add(spo.s());
 
@@ -2852,13 +2852,13 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      * statement pattern.
      */
 
-    if (s != null && _s.getIV() == null) return new EmptyAccessPath<ISPO>();
+    if (s != null && _s.getIV() == null) return new EmptyAccessPath<>();
 
-    if (p != null && _p.getIV() == null) return new EmptyAccessPath<ISPO>();
+    if (p != null && _p.getIV() == null) return new EmptyAccessPath<>();
 
-    if (o != null && _o.getIV() == null) return new EmptyAccessPath<ISPO>();
+    if (o != null && _o.getIV() == null) return new EmptyAccessPath<>();
 
-    if (quads && c != null && _c.getIV() == null) return new EmptyAccessPath<ISPO>();
+    if (quads && c != null && _c.getIV() == null) return new EmptyAccessPath<>();
 
     //        /*
     //         * Convert our object types to internal identifiers.
@@ -3084,7 +3084,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    */
 
   // namespace to prefix
-  private final Map<String, String> uriToPrefix = new LinkedHashMap<String, String>();
+  private final Map<String, String> uriToPrefix = new LinkedHashMap<>();
 
   /*
    * Defines a transient mapping from a URI to a namespace prefix that will be used for that URI by
@@ -3606,7 +3606,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
          * latency when also writing justifications.
          */
 
-        final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(2);
+        final List<Callable<Long>> tasks = new ArrayList<>(2);
 
         /*
          * Note: we reject using the filter before stmts or
@@ -3680,17 +3680,17 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     if (numStmts == 0) {
 
-      return new EmptyChunkedIterator<ISPO>(getSPORelation().getPrimaryKeyOrder());
+      return new EmptyChunkedIterator<>(getSPORelation().getPrimaryKeyOrder());
     }
 
     return bulkFilterStatements(
-        new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */), present);
+        new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */), present);
   }
 
   public IChunkedOrderedIterator<ISPO> bulkFilterStatements(
       final IChunkedOrderedIterator<ISPO> itr, final boolean present) {
 
-    return new ChunkedConvertingIterator<ISPO, ISPO>(
+    return new ChunkedConvertingIterator<>(
         itr, new BulkFilterConverter(getSPORelation().getPrimaryIndex(), present));
   }
 
@@ -3699,11 +3699,11 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     if (numStmts == 0) {
 
-      return new EmptyChunkedIterator<ISPO>(getSPORelation().getPrimaryKeyOrder());
+      return new EmptyChunkedIterator<>(getSPORelation().getPrimaryKeyOrder());
     }
 
     return bulkCompleteStatements(
-        new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */));
+        new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */));
   }
 
   public ISPO[] bulkCompleteStatements(final ISPO[] stmts) {
@@ -3723,7 +3723,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     if (numStmts == 0) return 0;
 
     return addStatements(
-        new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */), null /* filter */);
+        new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */), null /* filter */);
   }
 
   public long addStatements(
@@ -3732,7 +3732,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     if (numStmts == 0) return 0;
 
     return addStatements(
-        new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */), filter);
+        new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */), filter);
   }
 
   public long addStatements(
@@ -3869,7 +3869,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   public long removeStatements(final ISPO[] stmts, final int numStmts) {
 
     return removeStatements(
-        new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */),
+        new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */),
         true /*computeClosureForStatementIdentifiers*/);
   }
 
@@ -4060,7 +4060,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     long statementCount0;
     long statementCount1;
-    final HashSet<IV> sids = new HashSet<IV>();
+    final HashSet<IV> sids = new HashSet<>();
     //        final LongOpenHashSet sids = new LongOpenHashSet();
     int nrounds = 0;
     do {
@@ -4461,14 +4461,14 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         if (iv != null) nknown++;
 
-        _preds[i] = new Constant<IV>(iv);
+        _preds[i] = new Constant<>(iv);
       }
 
       if (nknown == 0) {
 
         if (log.isInfoEnabled()) log.warn("No known predicates: preds=" + Arrays.toString(preds));
 
-        return new EmptyChunkedIterator<IBindingSet>(null /* keyOrder */);
+        return new EmptyChunkedIterator<>(null /* keyOrder */);
       }
     }
 
@@ -4481,7 +4481,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (log.isInfoEnabled()) log.warn("Unknown class: class=" + cls);
 
-      return new EmptyChunkedIterator<IBindingSet>(null /* keyOrder */);
+      return new EmptyChunkedIterator<>(null /* keyOrder */);
     }
 
     /*
@@ -4542,7 +4542,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     // instantiate the rule.
     final Rule r =
         new MatchRule(
-            getSPORelation().getNamespace(), getVocabulary(), lit, _preds, new Constant<IV>(_cls));
+            getSPORelation().getNamespace(), getVocabulary(), lit, _preds, new Constant<>(_cls));
 
     //        // bindings used to specialize the rule for each completed literal.
     //        final IBindingSet bindings = new ArrayBindingSet(r.getVariableCount());
@@ -4556,7 +4556,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       final IBindingSet constants = new ListBindingSet(); // new ArrayBindingSet(1);
 
-      constants.set(lit, new Constant<IV>(iv));
+      constants.set(lit, new Constant<>(iv));
 
       final IRule tmp = r.specialize(constants, null /* constraints */);
 

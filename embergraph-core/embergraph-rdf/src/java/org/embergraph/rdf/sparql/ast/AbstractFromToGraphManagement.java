@@ -144,11 +144,11 @@ public abstract class AbstractFromToGraphManagement extends GraphManagement {
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 }

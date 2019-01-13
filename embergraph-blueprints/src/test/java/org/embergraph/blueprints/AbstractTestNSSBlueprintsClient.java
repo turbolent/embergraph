@@ -107,7 +107,7 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestEmberg
         .get();
 
     // Override namespace.  Do not create the default KB.
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
     {
       initParams.put(ConfigParams.NAMESPACE, namespace);
 

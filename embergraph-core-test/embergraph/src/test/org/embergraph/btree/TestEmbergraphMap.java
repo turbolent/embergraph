@@ -77,7 +77,7 @@ public class TestEmbergraphMap extends TestCase {
         new StringSerializer(new DefaultKeyBuilderFactory(new Properties())));
 
     map =
-        new EmbergraphMap<String, String>(BTree.create(new SimpleMemoryRawStore(), indexMetadata));
+        new EmbergraphMap<>(BTree.create(new SimpleMemoryRawStore(), indexMetadata));
   }
 
   /** Basic tests of isEmpty(), size(), containsKey(), put(), and remove(). */

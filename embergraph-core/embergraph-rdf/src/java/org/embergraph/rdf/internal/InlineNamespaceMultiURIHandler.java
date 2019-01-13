@@ -59,7 +59,7 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
  */
 public class InlineNamespaceMultiURIHandler extends InlineURIHandler {
 
-  private final List<InlineURIHandler> inlineHandlers = new LinkedList<InlineURIHandler>();
+  private final List<InlineURIHandler> inlineHandlers = new LinkedList<>();
 
   public InlineNamespaceMultiURIHandler(String namespace) {
     super(namespace);

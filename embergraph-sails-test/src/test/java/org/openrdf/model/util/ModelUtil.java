@@ -38,10 +38,10 @@ public class ModelUtil {
   public static boolean equals(
       Iterable<? extends Statement> model1, Iterable<? extends Statement> model2) {
     // Filter duplicates
-    Set<Statement> set1 = new LinkedHashSet<Statement>();
+    Set<Statement> set1 = new LinkedHashSet<>();
     Iterators.addAll(model1.iterator(), set1);
 
-    Set<Statement> set2 = new LinkedHashSet<Statement>();
+    Set<Statement> set2 = new LinkedHashSet<>();
     Iterators.addAll(model2.iterator(), set2);
 
     return equals(set1, set2);
@@ -69,10 +69,10 @@ public class ModelUtil {
   public static boolean isSubset(
       Iterable<? extends Statement> model1, Iterable<? extends Statement> model2) {
     // Filter duplicates
-    Set<Statement> set1 = new LinkedHashSet<Statement>();
+    Set<Statement> set1 = new LinkedHashSet<>();
     Iterators.addAll(model1.iterator(), set1);
 
-    Set<Statement> set2 = new LinkedHashSet<Statement>();
+    Set<Statement> set2 = new LinkedHashSet<>();
     Iterators.addAll(model2.iterator(), set2);
 
     return isSubset(set1, set2);
@@ -100,7 +100,7 @@ public class ModelUtil {
   private static boolean matchModels(
       Set<? extends Statement> model1, Set<? extends Statement> model2) {
     // Compare statements without blank nodes first, save the rest for later
-    List<Statement> model1BNodes = new ArrayList<Statement>(model1.size());
+    List<Statement> model1BNodes = new ArrayList<>(model1.size());
 
     for (Statement st : model1) {
       if (st.getSubject() instanceof BNode || st.getObject() instanceof BNode) {
@@ -112,7 +112,7 @@ public class ModelUtil {
       }
     }
 
-    return matchModels(model1BNodes, model2, new HashMap<BNode, BNode>(), 0);
+    return matchModels(model1BNodes, model2, new HashMap<>(), 0);
   }
 
   /*
@@ -140,7 +140,7 @@ public class ModelUtil {
 
       for (Statement st2 : matchingStats) {
         // Map bNodes in st1 to bNodes in st2
-        Map<BNode, BNode> newBNodeMapping = new HashMap<BNode, BNode>(bNodeMapping);
+        Map<BNode, BNode> newBNodeMapping = new HashMap<>(bNodeMapping);
 
         if (st1.getSubject() instanceof BNode && st2.getSubject() instanceof BNode) {
           newBNodeMapping.put((BNode) st1.getSubject(), (BNode) st2.getSubject());
@@ -171,7 +171,7 @@ public class ModelUtil {
 
   private static List<Statement> findMatchingStatements(
       Statement st, Iterable<? extends Statement> model, Map<BNode, BNode> bNodeMapping) {
-    List<Statement> result = new ArrayList<Statement>();
+    List<Statement> result = new ArrayList<>();
 
     for (Statement modelSt : model) {
       if (statementsMatch(st, modelSt, bNodeMapping)) {

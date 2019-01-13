@@ -101,7 +101,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
    * @todo config for initial capacity and concurrency?
    */
   private final ConcurrentHashMap<Long /* tx */, DistributedTxCommitTask /* state */> commitList =
-      new ConcurrentHashMap<Long, DistributedTxCommitTask>();
+      new ConcurrentHashMap<>();
 
   /*
    * The {@link LockManager} used to impose a partial ordering on the prepare phase of distributed
@@ -109,7 +109,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
    * contend.
    */
   private final LockManager<String> indexLockManager =
-      new LockManager<String>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
+      new LockManager<>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
 
   /*
    * The {@link LockManager} used to impose a partial ordering on the commit phase of distributed
@@ -117,7 +117,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
    * the tasks must contend.
    */
   private final LockManager<UUID> dataServiceLockManager =
-      new LockManager<UUID>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
+      new LockManager<>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
 
   /*
    * A {@link BTree} containing a log of the historical commit points.
@@ -760,7 +760,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
     final ITxCommitProtocol[] services = getDataServices(uuids);
 
-    final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(uuids.length);
+    final List<Callable<Void>> tasks = new ArrayList<>(uuids.length);
 
     for (ITxCommitProtocol dataService : services) {
 
@@ -793,7 +793,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         if (causes == null) {
 
-          causes = new LinkedList<Throwable>();
+          causes = new LinkedList<>();
         }
 
         causes.add(t);
@@ -897,7 +897,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      * resources and then invoke our task to perform the commit.
      */
     final LockManagerTask<String, Long> delegate =
-        new LockManagerTask<String, Long>(
+        new LockManagerTask<>(
             indexLockManager, state.getResources(), new DistributedTxCommitTask(state));
 
     /*
@@ -1175,39 +1175,39 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
          * <p>Note: This task will run in the same thread as the caller. This means that the task
          * will already hold the {@link TxState#lock}.
          */
-        new LockManagerTask<UUID, Void>(
-                dataServiceLockManager,
-                state.getDataServiceUUIDs(),
-                new Callable<Void>() {
+        new LockManagerTask<>(
+            dataServiceLockManager,
+            state.getDataServiceUUIDs(),
+            new Callable<Void>() {
 
-                  public Void call() throws Exception {
+              public Void call() throws Exception {
 
-                    if (!state.lock.isHeldByCurrentThread()) {
+                if (!state.lock.isHeldByCurrentThread()) {
 
-                      /*
-                       * Note: The task runs in its caller's thread and
-                       * the caller should already be holding the TxState
-                       * lock.
-                       */
+                  /*
+                   * Note: The task runs in its caller's thread and
+                   * the caller should already be holding the TxState
+                   * lock.
+                   */
 
-                      throw new IllegalMonitorStateException();
-                    }
+                  throw new IllegalMonitorStateException();
+                }
 
-                    /*
-                     * Signal so that the task which caused the prepared
-                     * barrier to break can resume. It turn, when the
-                     * prepared runnable finishes, all tasks awaiting that
-                     * barrier will continue to execute and will enter their
-                     * "commit" phase.
-                     */
-                    locksHeld.signal();
+                /*
+                 * Signal so that the task which caused the prepared
+                 * barrier to break can resume. It turn, when the
+                 * prepared runnable finishes, all tasks awaiting that
+                 * barrier will continue to execute and will enter their
+                 * "commit" phase.
+                 */
+                locksHeld.signal();
 
-                    // Signaled when the committed barrier breaks.
-                    committed.await();
+                // Signaled when the committed barrier breaks.
+                committed.await();
 
-                    return null;
-                  }
-                })
+                return null;
+              }
+            })
             .call();
 
         // Done.
@@ -1264,7 +1264,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
          * each dataService.
          */
         final List<Future<Void>> futures;
-        final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(nservices);
+        final List<Callable<Void>> tasks = new ArrayList<>(nservices);
 
         for (ITxCommitProtocol dataService : services) {
 
@@ -1306,7 +1306,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
             if (causes == null) {
 
-              causes = new LinkedList<Throwable>();
+              causes = new LinkedList<>();
             }
 
             causes.add(t);
@@ -1803,7 +1803,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         final IDataService[] services = getFederation().getDataServices(a);
 
-        final List<Callable<Void>> tasks = new ArrayList<Callable<Void>>(a.length);
+        final List<Callable<Void>> tasks = new ArrayList<>(a.length);
 
         for (IDataService dataService : services) {
 

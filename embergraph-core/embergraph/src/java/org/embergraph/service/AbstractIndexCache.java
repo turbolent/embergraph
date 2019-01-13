@@ -37,7 +37,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
   //    final private WeakValueCache<NT, T> indexCache;
   private final ConcurrentWeakValueCache<NT, T> indexCache;
 
-  private final NamedLock<NT> indexCacheLock = new NamedLock<NT>();
+  private final NamedLock<NT> indexCacheLock = new NamedLock<>();
 
   /*
    * @param capacity The capacity of the backing LRU hard reference cache.
@@ -50,7 +50,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
     //        indexCache = new WeakValueCache<NT, T>(new LRUCache<NT, T>(capacity));
 
     indexCache =
-        new ConcurrentWeakValueCacheWithTimeout<NT, T>(
+        new ConcurrentWeakValueCacheWithTimeout<>(
             capacity, TimeUnit.MILLISECONDS.toNanos(timeout));
   }
 

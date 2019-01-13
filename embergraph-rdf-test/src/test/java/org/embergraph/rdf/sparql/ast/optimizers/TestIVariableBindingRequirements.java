@@ -118,7 +118,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBoundSpn123 = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBoundSpn123 = new HashSet<>();
     final Set<IVariable<?>> desiredBoundSpn1 =
         store.isQuads()
             ? new HashSet<IVariable<?>>() {
@@ -137,7 +137,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             };
 
-    final Set<IVariable<?>> desiredBoundSpn2 = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBoundSpn2 = new HashSet<>();
     final Set<IVariable<?>> desiredBoundSpn3 =
         new HashSet<IVariable<?>>() {
           {
@@ -193,7 +193,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBoundAn1 = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBoundAn1 = new HashSet<>();
     final Set<IVariable<?>> requiredBoundAn2 =
         new HashSet<IVariable<?>>() {
           {
@@ -209,9 +209,9 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
           }
         };
 
-    final Set<IVariable<?>> desiredBoundAn1 = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> desiredBoundAn2 = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> desiredBoundAn3 = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBoundAn1 = new HashSet<>();
+    final Set<IVariable<?>> desiredBoundAn2 = new HashSet<>();
+    final Set<IVariable<?>> desiredBoundAn3 = new HashSet<>();
 
     // dummy sa object
     final StaticAnalysis sa = new StaticAnalysis(new QueryRoot(QueryType.SELECT), null);
@@ -341,7 +341,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     final AST2BOpContext context = new AST2BOpContext(new ASTContainer(query), store);
     final StaticAnalysis sa = new StaticAnalysis(query, context);
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     final Set<IVariable<?>> desiredBound =
         new HashSet<IVariable<?>>() {
           {
@@ -387,7 +387,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     final AST2BOpContext context = new AST2BOpContext(new ASTContainer(query), store);
     final StaticAnalysis sa = new StaticAnalysis(query, context);
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     final Set<IVariable<?>> desiredBound =
         new HashSet<IVariable<?>>() {
           {
@@ -417,7 +417,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBoundAlpNode = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBoundAlpNode = new HashSet<>();
     final Set<IVariable<?>> desiredBoundAlpNode =
         new HashSet<IVariable<?>>() {
           {
@@ -450,7 +450,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBoundAlpNode = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBoundAlpNode = new HashSet<>();
     final Set<IVariable<?>> desiredBoundAlpNode =
         new HashSet<IVariable<?>>() {
           {
@@ -497,7 +497,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
             add(Var.var("z"));
           }
         };
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
 
     /*
      * We need to convert the filter node. Usually (in the optimization chain) this is done through
@@ -559,7 +559,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
             add(Var.var("x"));
           }
         };
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
 
     /*
      * We need to convert the filter nodes. Usually (in the optimization chain) this is done through
@@ -599,7 +599,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     final Set<IVariable<?>> desiredBound =
         new HashSet<IVariable<?>>() {
           {
@@ -719,7 +719,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     final Set<IVariable<?>> desiredBound =
         new HashSet<IVariable<?>>() {
           {
@@ -814,8 +814,8 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
               }
             }.getTmp();
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
 
     // dummy sa object
     final StaticAnalysis sa = new StaticAnalysis(new QueryRoot(QueryType.SELECT), null);
@@ -926,7 +926,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
             add(Var.var("searchResultType"));
           }
         };
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
 
     // dummy sa object
     final StaticAnalysis sa = new StaticAnalysis(new QueryRoot(QueryType.SELECT), null);

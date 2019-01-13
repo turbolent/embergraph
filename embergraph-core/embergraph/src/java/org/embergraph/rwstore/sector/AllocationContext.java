@@ -79,7 +79,7 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
    * All addresses allocated either directly by this {@link AllocationContext} or recursively by any
    * {@link AllocationContext} created within this {@link AllocationContext}.
    */
-  private final LinkedHashSet<Long> m_addresses = new LinkedHashSet<Long>();
+  private final LinkedHashSet<Long> m_addresses = new LinkedHashSet<>();
 
   private final AtomicLong m_allocCount = new AtomicLong();
   private final AtomicLong m_userBytes = new AtomicLong();
@@ -281,13 +281,13 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
     final CounterSet root = new CounterSet();
 
     // #of allocation slot bytes.
-    root.addCounter("slotBytes", new OneShotInstrument<Long>(getUserBytes()));
+    root.addCounter("slotBytes", new OneShotInstrument<>(getUserBytes()));
 
     // #of application data bytes.
-    root.addCounter("userBytes", new OneShotInstrument<Long>(getUserBytes()));
+    root.addCounter("userBytes", new OneShotInstrument<>(getUserBytes()));
 
     // #of allocations spanned by this context.
-    root.addCounter("allocationCount", new OneShotInstrument<Long>(getAllocationCount()));
+    root.addCounter("allocationCount", new OneShotInstrument<>(getAllocationCount()));
 
     return root;
   }

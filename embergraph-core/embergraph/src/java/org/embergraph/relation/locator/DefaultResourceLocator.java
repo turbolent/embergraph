@@ -120,7 +120,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
   private final String STORE_UUID = DefaultResourceLocator.class.getName() + ".storeUUID";
 
   /** Provides locks on a per-namespace basis for higher concurrency. */
-  private final transient NamedLock<String> namedLock = new NamedLock<String>();
+  private final transient NamedLock<String> namedLock = new NamedLock<>();
 
   /*
    * The default #of recently located resources whose hard references will be retained by the {@link
@@ -168,7 +168,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     if (cacheTimeout < 0) throw new IllegalArgumentException();
 
     this.resourceCache =
-        new ConcurrentWeakValueCacheWithTimeout<NT, T>(
+        new ConcurrentWeakValueCacheWithTimeout<>(
             cacheCapacity, TimeUnit.MILLISECONDS.toNanos(cacheTimeout));
 
     /*
@@ -187,7 +187,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
       final long propertyCacheTimeout = TimeUnit.MILLISECONDS.toNanos(cacheTimeout) * 10;
 
       this.propertyCache =
-          new ConcurrentWeakValueCacheWithTimeout<NT, Map<String, Object>>(
+          new ConcurrentWeakValueCacheWithTimeout<>(
               propertyCacheCapacity, propertyCacheTimeout);
     }
   }
@@ -323,7 +323,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
      * First, test this locator, including any [seeAlso] IIndexManager
      * objects.
      */
-    final AtomicReference<IIndexManager> foundOn = new AtomicReference<IIndexManager>();
+    final AtomicReference<IIndexManager> foundOn = new AtomicReference<>();
 
     final Properties properties = locateResource(nt.getName(), nt.getTimestamp(), foundOn);
 
@@ -1090,5 +1090,5 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     }
   }
 
-  private final WeakHashMap<IIndexManager, Void> seeAlso = new WeakHashMap<IIndexManager, Void>();
+  private final WeakHashMap<IIndexManager, Void> seeAlso = new WeakHashMap<>();
 }

@@ -204,7 +204,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
   public LinkedBlockingQueue(int capacity) {
     if (capacity <= 0) throw new IllegalArgumentException();
     this.capacity = capacity;
-    last = head = new Node<E>(null);
+    last = head = new Node<>(null);
   }
 
   /*
@@ -224,7 +224,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
       for (E e : c) {
         if (e == null) throw new NullPointerException();
         if (n == capacity) throw new IllegalStateException("Queue full");
-        enqueue(new Node<E>(e));
+        enqueue(new Node<>(e));
         ++n;
       }
       count.set(n);
@@ -318,7 +318,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
         if (nanos <= 0) return false;
         nanos = notFull.awaitNanos(nanos);
       }
-      enqueue(new Node<E>(e));
+      enqueue(new Node<>(e));
       c = count.getAndIncrement();
       if (c + 1 < capacity) notFull.signal();
     } finally {
@@ -769,7 +769,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
     s.defaultReadObject();
 
     count.set(0);
-    last = head = new Node<E>(null);
+    last = head = new Node<>(null);
 
     // Read in all elements and place in queue
     for (; ; ) {

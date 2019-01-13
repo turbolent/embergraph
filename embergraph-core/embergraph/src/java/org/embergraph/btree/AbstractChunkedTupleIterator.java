@@ -641,7 +641,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
 
     if (removeList == null) {
 
-      removeList = new ArrayList<byte[]>(capacity);
+      removeList = new ArrayList<>(capacity);
     }
 
     final byte[] key = lastVisited == -1 ? lastVisitedKeyInPriorResultSet : tuple.getKey();

@@ -145,7 +145,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
         ndx.getIndex().getIndexMetadata().getTupleSerializer();
 
     // the full term.
-    final byte[] k0 = tupleSer.serializeKey(new ReadOnlyTermDocKey<Long>("brown", docId, fieldId));
+    final byte[] k0 = tupleSer.serializeKey(new ReadOnlyTermDocKey<>("brown", docId, fieldId));
 
     // the successor of the full term.
     final byte[] k0s;
@@ -163,7 +163,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
     assertTrue(BytesUtil.compareBytes(k0, k0s) < 0);
 
     // a prefix of that term.
-    final byte[] k1 = tupleSer.serializeKey(new ReadOnlyTermDocKey<Long>("bro", docId, fieldId));
+    final byte[] k1 = tupleSer.serializeKey(new ReadOnlyTermDocKey<>("bro", docId, fieldId));
 
     // the successor of that prefix.
     final byte[] k1s;

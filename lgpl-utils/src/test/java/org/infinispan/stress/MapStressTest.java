@@ -38,9 +38,9 @@ public class MapStressTest extends TestCase {
   final int NUM_KEYS = 50000;
   final int LOOP_FACTOR = 5;
 
-  private List<Integer> readOps = new ArrayList<Integer>(NUM_KEYS * LOOP_FACTOR);
-  private List<Integer> writeOps = new ArrayList<Integer>(NUM_KEYS * LOOP_FACTOR);
-  private List<Integer> removeOps = new ArrayList<Integer>(NUM_KEYS * LOOP_FACTOR);
+  private List<Integer> readOps = new ArrayList<>(NUM_KEYS * LOOP_FACTOR);
+  private List<Integer> writeOps = new ArrayList<>(NUM_KEYS * LOOP_FACTOR);
+  private List<Integer> removeOps = new ArrayList<>(NUM_KEYS * LOOP_FACTOR);
 
   private static final Random RANDOM_READ = new Random(12345);
   private static final Random RANDOM_WRITE = new Random(34567);
@@ -61,7 +61,7 @@ public class MapStressTest extends TestCase {
 
   //    @Test(invocationCount=5)
   public void testConcurrentHashMap() throws Exception {
-    doTest(new ConcurrentHashMap<Integer, Integer>(MAP_CAPACITY, MAP_LOAD_FACTOR, CONCURRENCY));
+    doTest(new ConcurrentHashMap<>(MAP_CAPACITY, MAP_LOAD_FACTOR, CONCURRENCY));
   }
 
   //    @Test(invocationCount=5)
@@ -71,38 +71,41 @@ public class MapStressTest extends TestCase {
   //    }
   public void testBufferedConcurrentHashMapLRU() throws Exception {
     doTest(
-        new BufferedConcurrentHashMap<Integer, Integer>(
+        new BufferedConcurrentHashMap<>(
             MAP_CAPACITY,
             MAP_LOAD_FACTOR,
             CONCURRENCY,
             Eviction.LRU,
             new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-              public void evicted(Integer arg0, Integer arg1) {}
+              public void evicted(Integer arg0, Integer arg1) {
+              }
             }));
   }
 
   public void testBufferedConcurrentHashMapLIRS() throws Exception {
     doTest(
-        new BufferedConcurrentHashMap<Integer, Integer>(
+        new BufferedConcurrentHashMap<>(
             MAP_CAPACITY,
             MAP_LOAD_FACTOR,
             CONCURRENCY,
             Eviction.LIRS,
             new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-              public void evicted(Integer arg0, Integer arg1) {}
+              public void evicted(Integer arg0, Integer arg1) {
+              }
             }));
   }
 
   public void testLRUStress() throws Exception {
     for (int i = 0; i < 20; i++) {
       doTest(
-          new BufferedConcurrentHashMap<Integer, Integer>(
+          new BufferedConcurrentHashMap<>(
               MAP_CAPACITY,
               MAP_LOAD_FACTOR,
               CONCURRENCY,
               Eviction.LRU,
               new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-                public void evicted(Integer arg0, Integer arg1) {}
+                public void evicted(Integer arg0, Integer arg1) {
+                }
               }),
           48, // nreaders
           6, // nwriters
@@ -121,7 +124,7 @@ public class MapStressTest extends TestCase {
   //    @Test(invocationCount=5)
   public void testHashMap() throws Exception {
     doTest(
-        Collections.synchronizedMap(new HashMap<Integer, Integer>(MAP_CAPACITY, MAP_LOAD_FACTOR)));
+        Collections.synchronizedMap(new HashMap<>(MAP_CAPACITY, MAP_LOAD_FACTOR)));
   }
 
   private void doTest(final Map<Integer, Integer> map) throws Exception {
@@ -137,9 +140,9 @@ public class MapStressTest extends TestCase {
       throws Exception {
 
     latch = new CountDownLatch(1);
-    final Map<String, String> perf = new ConcurrentSkipListMap<String, String>();
+    final Map<String, String> perf = new ConcurrentSkipListMap<>();
     final AtomicBoolean run = new AtomicBoolean(true);
-    List<Thread> threads = new LinkedList<Thread>();
+    List<Thread> threads = new LinkedList<>();
 
     for (int i = 0; i < numReaders; i++) {
       Thread getter =

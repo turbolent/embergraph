@@ -74,7 +74,7 @@ public class EmbergraphTriplePatternMaterializer
     super(
         db,
         src,
-        new BlockingBuffer<ISPO[]>(
+        new BlockingBuffer<>(
             db.getChunkOfChunksCapacity(),
             db.getChunkCapacity(),
             db.getChunkTimeout(),
@@ -97,7 +97,7 @@ public class EmbergraphTriplePatternMaterializer
   }
 
   private final AtomicReference<LatchedExecutor> helperService =
-      new AtomicReference<LatchedExecutor>();
+      new AtomicReference<>();
 
   @Override
   protected ISPO[] resolveChunk(final EmbergraphTriplePattern[] chunk) {
@@ -114,9 +114,9 @@ public class EmbergraphTriplePatternMaterializer
      * @see <a href="http://trac.blazegraph.com/ticket/985" > Deadlock in
      *     EmbergraphTriplePatternMaterializer </a>
      */
-    final Queue<ISPO[]> out = new ConcurrentLinkedQueue<ISPO[]>(/*chunk.length*/ );
+    final Queue<ISPO[]> out = new ConcurrentLinkedQueue<>(/*chunk.length*/);
 
-    final List<FutureTask<Long>> tasks = new LinkedList<FutureTask<Long>>();
+    final List<FutureTask<Long>> tasks = new LinkedList<>();
 
     try {
 

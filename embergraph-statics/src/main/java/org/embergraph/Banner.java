@@ -334,7 +334,7 @@ public class Banner {
    */
   public static synchronized Map<String, String> getStaticVariables(final String className) {
 
-    final Map<String, String> map = new LinkedHashMap<String, String>();
+    final Map<String, String> map = new LinkedHashMap<>();
 
     try {
 
@@ -384,7 +384,7 @@ public class Banner {
   }
 
   private static final AtomicReference<Map<String, String>> buildInfoRef =
-      new AtomicReference<Map<String, String>>();
+      new AtomicReference<>();
 
   private static final String getBuildString() {
 

@@ -917,7 +917,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     final IRootBlockView m_rb = fileMetadata.rootBlock;
 
-    m_allocs = new ArrayList<FixedAllocator>();
+    m_allocs = new ArrayList<>();
 
     // m_freeBlobs = new ArrayList<BlobAllocator>();
 
@@ -1258,7 +1258,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     m_freeFixed = new ArrayList[numFixed];
 
     for (int i = 0; i < numFixed; i++) {
-      m_freeFixed[i] = new ArrayList<FixedAllocator>();
+      m_freeFixed[i] = new ArrayList<>();
     }
 
     m_fileSize = convertFromAddr(m_fd.length());
@@ -1615,7 +1615,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_freeFixed = new ArrayList[numFixed];
 
         for (int i = 0; i < numFixed; i++) {
-          m_freeFixed[i] = new ArrayList<FixedAllocator>();
+          m_freeFixed[i] = new ArrayList<>();
         }
 
         checkCoreAllocations();
@@ -2147,7 +2147,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
             //							}
             //	                    }
           } else { // read non-cached data with FileChannelUtility
-            final ArrayList<AsyncTransfer> transfers = new ArrayList<AsyncTransfer>();
+            final ArrayList<AsyncTransfer> transfers = new ArrayList<>();
             int cursor = 0;
             int rdlen = m_maxFixedAlloc;
             for (int i = 0; i < nblocks; i++) {
@@ -3440,7 +3440,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @see <a href="http://trac.blazegraph.com/ticket/973" >RWStore commit is not robust to internal
    *     failure.</a>
    */
-  private final AtomicReference<CommitState> m_commitStateRef = new AtomicReference<CommitState>();
+  private final AtomicReference<CommitState> m_commitStateRef = new AtomicReference<>();
 
   /** Package private method used by the test suite. */
   void clearCommitStateRef() {
@@ -4405,7 +4405,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     final Lock lock = m_allocationLock.readLock();
     lock.lock();
     try {
-      final HashMap<Integer, FixedAllocator> map = new HashMap<Integer, FixedAllocator>();
+      final HashMap<Integer, FixedAllocator> map = new HashMap<>();
       for (FixedAllocator fa : m_allocs) {
         fa.addToRegionMap(map);
       }
@@ -5374,12 +5374,12 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
       for (int i = 0; i < m_freeFixed.length; i++) {
 
-        m_freeFixed[i] = new ArrayList<FixedAllocator>();
+        m_freeFixed[i] = new ArrayList<>();
       }
 
-      m_allFixed = new ArrayList<FixedAllocator>();
+      m_allFixed = new ArrayList<>();
 
-      m_deferredFrees = new ArrayList<Long>();
+      m_deferredFrees = new ArrayList<>();
 
       //          m_freeBlobs = new ArrayList<BlobAllocator>();
 
@@ -5500,7 +5500,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * the governing {@link #m_allocationLock}.
    */
   private final Map<IAllocationContext, ContextAllocation> m_contexts =
-      new ConcurrentHashMap<IAllocationContext, ContextAllocation>();
+      new ConcurrentHashMap<>();
 
   private ContextAllocation getContextAllocation(final IAllocationContext context) {
 
@@ -6169,7 +6169,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   /** Striped performance counters for this class. */
   @SuppressWarnings("unchecked")
-  private final AtomicReference<StoreCounters> storeCounters = new AtomicReference<StoreCounters>();
+  private final AtomicReference<StoreCounters> storeCounters = new AtomicReference<>();
 
   /** Returns the striped performance counters for the store. */
   public StoreCounters<?> getStoreCounters() {
@@ -6874,7 +6874,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           m_metaBitsAddr = -(int) nxtOffset;
         }
 
-        final ArrayList<FixedAllocator> nallocs = new ArrayList<FixedAllocator>();
+        final ArrayList<FixedAllocator> nallocs = new ArrayList<>();
 
         // current metabits
         final int[] oldmetabits = m_metaBits;
@@ -7099,9 +7099,9 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     private int m_addresses = 0;
     private int m_blobs = 0;
     private int m_badAddresses = 0;
-    private final HashMap<Integer, Integer> m_freed = new HashMap<Integer, Integer>();
+    private final HashMap<Integer, Integer> m_freed = new HashMap<>();
     /** The latched address of each address that appears more than once across the delete blocks. */
-    private final Set<Integer> m_duplicates = new LinkedHashSet<Integer>();
+    private final Set<Integer> m_duplicates = new LinkedHashSet<>();
     //        /*
     //         * The hexstring version of the data associated with the addresses that
     //         * are present more than once in the delete blocks.

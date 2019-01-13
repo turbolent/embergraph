@@ -203,7 +203,7 @@ class RunState {
      * interface. Even an immutable map does not help because of the mutable {@link AtomicLong}s.
      */
     final Map<Integer /* bopId */, AtomicLong /* availableChunkCount */> availableMap =
-        new LinkedHashMap<Integer, AtomicLong>();
+        new LinkedHashMap<>();
 
     /*
      * A collection reporting on the #of instances of a given {@link BOp} which are concurrently
@@ -214,7 +214,7 @@ class RunState {
      * interface. Even an immutable map does not help because of the mutable {@link AtomicLong}s.
      */
     final Map<Integer /* bopId */, AtomicLong /* runningCount */> runningMap =
-        new LinkedHashMap<Integer, AtomicLong>();
+        new LinkedHashMap<>();
 
     /*
      * The set of services on which this query has started an operator. This will be just the query
@@ -222,7 +222,7 @@ class RunState {
      * the query has been evaluated. This collection is maintained based on the {@link
      * #startQuery(IChunkMessage)} and {@link #startOp(IStartOpMessage)} messages.
      */
-    final Set<UUID /* serviceId */> serviceIds = new LinkedHashSet<UUID>();
+    final Set<UUID /* serviceId */> serviceIds = new LinkedHashSet<>();
 
     /*
      * A map associating each operator for which evaluation has begun with the the set of distinct
@@ -257,7 +257,7 @@ class RunState {
      * an operator, it is recognized as being in the {@link RunStateEnum#RunningLastPass} state
      * until its {@link #doneOn} set becomes empty.
      */
-    final Map<Integer /* bopId */, Set<?>> startedOn = new LinkedHashMap<Integer, Set<?>>();
+    final Map<Integer /* bopId */, Set<?>> startedOn = new LinkedHashMap<>();
 
     /*
      * A collection for each operator which has executed at least once and for which the optional
@@ -271,14 +271,14 @@ class RunState {
      * @see #startedOn
      */
     @SuppressWarnings("rawtypes")
-    final Map<Integer /* bopId */, Set> doneOn = new LinkedHashMap<Integer, Set>();
+    final Map<Integer /* bopId */, Set> doneOn = new LinkedHashMap<>();
 
     /*
      * The set of operators for which a last evaluation pass was requested.
      *
      * @see #startOp(IStartOpMessage, boolean)
      */
-    final Set<Integer /* bopId */> lastPassRequested = new LinkedHashSet<Integer>();
+    final Set<Integer /* bopId */> lastPassRequested = new LinkedHashSet<>();
 
     /*
      * The set of operators for which at-once evaluation is required. The operator is removed from
@@ -288,7 +288,7 @@ class RunState {
      * @see <a href="http://trac.blazegraph.com/ticket/868">COUNT(DISTINCT) returns no rows rather
      *     than ZERO. </a>
      */
-    final Set<Integer /* bopId */> atOnceRequired = new LinkedHashSet<Integer>();
+    final Set<Integer /* bopId */> atOnceRequired = new LinkedHashSet<>();
 
     @Override
     public String toString() {

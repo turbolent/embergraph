@@ -74,7 +74,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
     public Class<IGASSchedulerImpl> schedulerClassOverride;
 
     /** Set of files to load (may be empty). */
-    public final LinkedHashSet<String> loadSet = new LinkedHashSet<String>();
+    public final LinkedHashSet<String> loadSet = new LinkedHashSet<>();
 
     /** The name of the implementation specific configuration file. */
     public String propertyFile;

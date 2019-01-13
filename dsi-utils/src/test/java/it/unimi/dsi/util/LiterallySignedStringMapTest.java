@@ -36,7 +36,7 @@ public class LiterallySignedStringMapTest extends TestCase {
       FrontCodedStringList fcl = new FrontCodedStringList(Arrays.asList(s), 8, true);
       // Test with mph
       Object2LongOpenCustomHashMap<CharSequence> mph =
-          new Object2LongOpenCustomHashMap<CharSequence>(new CharSequenceStrategy());
+          new Object2LongOpenCustomHashMap<>(new CharSequenceStrategy());
       mph.defaultReturnValue(-1);
       for (int i = 0; i < s.length; i++) mph.put(new MutableString(s[i]), i);
 

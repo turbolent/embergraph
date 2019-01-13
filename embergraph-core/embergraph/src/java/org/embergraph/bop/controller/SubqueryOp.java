@@ -196,7 +196,7 @@ public class SubqueryOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ControllerTask(this, context));
+    return new FutureTask<>(new ControllerTask(this, context));
   }
 
   /*
@@ -397,7 +397,7 @@ public class SubqueryOp extends PipelineOp {
               //                                                    .next() : "N/A")
               //                                            + ", askVar=" + success);
               //
-              parentSolutionIn.set(askVar, new Constant<IV<EmbergraphLiteral, Boolean>>(success));
+              parentSolutionIn.set(askVar, new Constant<>(success));
 
               parentContext.getSink().add(new IBindingSet[] {parentSolutionIn});
 

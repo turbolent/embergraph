@@ -42,7 +42,7 @@ public class UUIDBNodeIV<V extends EmbergraphBNode> extends AbstractBNodeIV<V, U
 
   public IV<V, UUID> clone(final boolean clearCache) {
 
-    final UUIDBNodeIV<V> tmp = new UUIDBNodeIV<V>(id);
+    final UUIDBNodeIV<V> tmp = new UUIDBNodeIV<>(id);
 
     if (!clearCache) {
 

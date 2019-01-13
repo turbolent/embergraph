@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentMap;
 public class QueryHintRegistry {
 
   private static ConcurrentMap<String /* name */, IQueryHint<?>> registry =
-      new ConcurrentHashMap<String /* name */, IQueryHint<?>>();
+      new ConcurrentHashMap<>();
 
   /*
    * Register an {@link IQueryHint}.

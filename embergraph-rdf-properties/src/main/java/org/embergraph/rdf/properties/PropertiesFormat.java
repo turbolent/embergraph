@@ -67,7 +67,7 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
 
   /** All known/registered formats for this class. */
   private static final CopyOnWriteArraySet<PropertiesFormat> formats =
-      new CopyOnWriteArraySet<PropertiesFormat>();
+      new CopyOnWriteArraySet<>();
 
   /** A thread-safe iterator that will visit all known formats (declared by {@link Iterable}). */
   @Override

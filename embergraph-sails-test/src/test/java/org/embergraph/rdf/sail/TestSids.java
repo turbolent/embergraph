@@ -142,7 +142,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
           {
             final TupleQueryResult result = tupleQuery.evaluate();
 
-            final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+            final Collection<BindingSet> solution = new LinkedList<>();
             solution.add(
                 createBindingSet(
                     new BindingImpl("s", new URIImpl("http://localhost/host1")),
@@ -303,7 +303,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
           {
             final TupleQueryResult result = tupleQuery.evaluate();
 
-            Collection<BindingSet> solution = new LinkedList<BindingSet>();
+            Collection<BindingSet> solution = new LinkedList<>();
             solution.add(
                 createBindingSet(
                     new BindingImpl("s", new URIImpl("http://localhost/host1")),

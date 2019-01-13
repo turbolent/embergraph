@@ -118,7 +118,7 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
          * Evaluate the query and verify that the correct solution
          * is produced.
          */
-        final Collection<BindingSet> expected = new LinkedList<BindingSet>();
+        final Collection<BindingSet> expected = new LinkedList<>();
         {
           final MapBindingSet bset = new MapBindingSet();
           bset.addBinding("a", new URIImpl("s:1"));

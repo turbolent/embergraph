@@ -51,7 +51,7 @@ public class TestLocalChunkMessage extends TestCase2 {
   /** Unit test for a message with a single chunk containing a single empty binding set. */
   public void test_oneChunkWithEmptyBindingSet() {
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       data.add(new HashBindingSet());
     }
@@ -89,7 +89,7 @@ public class TestLocalChunkMessage extends TestCase2 {
     // verify the iterator.
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /** Unit test for a message with a single chunk of binding sets. */
@@ -98,43 +98,43 @@ public class TestLocalChunkMessage extends TestCase2 {
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
     {
       IBindingSet bset = null;
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("John"));
-        bset.set(y, new Constant<String>("Mary"));
+        bset.set(x, new Constant<>("John"));
+        bset.set(y, new Constant<>("Mary"));
         data.add(bset);
       }
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Mary"));
-        bset.set(y, new Constant<String>("Paul"));
+        bset.set(x, new Constant<>("Mary"));
+        bset.set(y, new Constant<>("Paul"));
         data.add(bset);
       }
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Mary"));
-        bset.set(y, new Constant<String>("Jane"));
+        bset.set(x, new Constant<>("Mary"));
+        bset.set(y, new Constant<>("Jane"));
         data.add(bset);
       }
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Paul"));
-        bset.set(y, new Constant<String>("Leon"));
+        bset.set(x, new Constant<>("Paul"));
+        bset.set(y, new Constant<>("Leon"));
         data.add(bset);
       }
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Paul"));
-        bset.set(y, new Constant<String>("John"));
+        bset.set(x, new Constant<>("Paul"));
+        bset.set(y, new Constant<>("John"));
         data.add(bset);
       }
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Leon"));
-        bset.set(y, new Constant<String>("Paul"));
+        bset.set(x, new Constant<>("Leon"));
+        bset.set(y, new Constant<>("Paul"));
         data.add(bset);
       }
     }
@@ -171,7 +171,7 @@ public class TestLocalChunkMessage extends TestCase2 {
 
     assertSameIterator(
         data.toArray(new IBindingSet[0]),
-        new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
+        new Dechunkerator<>(msg.getChunkAccessor().iterator()));
   }
 
   /** Mock object. */

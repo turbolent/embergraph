@@ -42,34 +42,34 @@ public class TestArrayIterator extends TestCase2 {
     }
 
     try {
-      new ArrayIterator<String>(new String[] {}, 0, 1);
+      new ArrayIterator<>(new String[]{}, 0, 1);
       fail();
     } catch (IllegalArgumentException ex) {
       // ignore
     }
 
     try {
-      new ArrayIterator<String>(new String[] {}, 0, -1);
+      new ArrayIterator<>(new String[]{}, 0, -1);
       fail();
     } catch (IllegalArgumentException ex) {
       // ignore
     }
 
     try {
-      new ArrayIterator<String>(new String[] {}, -1, 0);
+      new ArrayIterator<>(new String[]{}, -1, 0);
       fail();
     } catch (IllegalArgumentException ex) {
       // ignore
     }
 
-    new ArrayIterator<String>(new String[] {}, 0, 0);
+    new ArrayIterator<>(new String[]{}, 0, 0);
 
-    new ArrayIterator<String>(new String[] {"1"}, 0, 1);
+    new ArrayIterator<>(new String[]{"1"}, 0, 1);
 
-    new ArrayIterator<String>(new String[] {"1"}, 1, 0);
+    new ArrayIterator<>(new String[]{"1"}, 1, 0);
 
     try {
-      new ArrayIterator<String>(new String[] {"1"}, 1, 1);
+      new ArrayIterator<>(new String[]{"1"}, 1, 1);
       fail();
     } catch (IllegalArgumentException ex) {
       // ignore
@@ -78,19 +78,19 @@ public class TestArrayIterator extends TestCase2 {
 
   public void test_iterator() {
 
-    assertSameIterator(new String[] {}, new ArrayIterator<String>(new String[] {}, 0, 0));
+    assertSameIterator(new String[] {}, new ArrayIterator<>(new String[]{}, 0, 0));
 
-    assertSameIterator(new String[] {}, new ArrayIterator<String>(new String[] {"1"}, 1, 0));
+    assertSameIterator(new String[] {}, new ArrayIterator<>(new String[]{"1"}, 1, 0));
 
-    assertSameIterator(new String[] {"1"}, new ArrayIterator<String>(new String[] {"1"}, 0, 1));
-
-    assertSameIterator(
-        new String[] {"1"}, new ArrayIterator<String>(new String[] {"1", "2"}, 0, 1));
+    assertSameIterator(new String[] {"1"}, new ArrayIterator<>(new String[]{"1"}, 0, 1));
 
     assertSameIterator(
-        new String[] {"1", "2"}, new ArrayIterator<String>(new String[] {"1", "2"}, 0, 2));
+        new String[] {"1"}, new ArrayIterator<>(new String[]{"1", "2"}, 0, 1));
 
     assertSameIterator(
-        new String[] {"2"}, new ArrayIterator<String>(new String[] {"1", "2"}, 1, 1));
+        new String[] {"1", "2"}, new ArrayIterator<>(new String[]{"1", "2"}, 0, 2));
+
+    assertSameIterator(
+        new String[] {"2"}, new ArrayIterator<>(new String[]{"1", "2"}, 1, 1));
   }
 }

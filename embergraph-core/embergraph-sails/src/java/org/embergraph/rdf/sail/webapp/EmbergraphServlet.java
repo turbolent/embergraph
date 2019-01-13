@@ -358,7 +358,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
       final ServletContext servletContext, final HttpServletRequest req) {
 
     // One or more.
-    final List<String> serviceURIs = new LinkedList<String>();
+    final List<String> serviceURIs = new LinkedList<>();
 
     /*
      * Figure out the service end point.

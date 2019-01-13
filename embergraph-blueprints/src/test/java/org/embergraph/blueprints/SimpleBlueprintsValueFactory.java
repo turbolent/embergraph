@@ -83,7 +83,7 @@ public class SimpleBlueprintsValueFactory extends DefaultBlueprintsValueFactory 
         return id;
       }
 
-      final List<String> tokens = new LinkedList<String>();
+      final List<String> tokens = new LinkedList<>();
 
       final StringTokenizer tokenizer = new StringTokenizer(id, ":");
       while (tokenizer.hasMoreTokens()) {

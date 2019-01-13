@@ -124,12 +124,12 @@ public class TestCacheConnectionFactory extends TestCase2 {
 
           final Journal jnl = new Journal(properties);
 
-          refs[i] = new WeakReference<Journal>(jnl);
+          refs[i] = new WeakReference<>(jnl);
 
           final QueryEngine queryEngine;
 
           refs2[i] =
-              new WeakReference<QueryEngine>(
+              new WeakReference<>(
                   queryEngine = QueryEngineFactory.getInstance().getQueryController(jnl));
 
           // does not exist yet.

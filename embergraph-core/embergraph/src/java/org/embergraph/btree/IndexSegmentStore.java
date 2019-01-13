@@ -464,7 +464,7 @@ public class IndexSegmentStore extends AbstractRawStore {
           getCounters().attach(seg.getBtreeCounters().getCounters(), true /*replace*/);
 
           // set the canonicalizing weak reference to the open seg.
-          ref = new WeakReference<IndexSegment>(seg);
+          ref = new WeakReference<>(seg);
 
           // return seg.
           return seg;
@@ -708,35 +708,35 @@ public class IndexSegmentStore extends AbstractRawStore {
 
     final CounterSet counterSet = new CounterSet();
 
-    counterSet.addCounter("file", new OneShotInstrument<String>(file.toString()));
+    counterSet.addCounter("file", new OneShotInstrument<>(file.toString()));
 
     // checkpoint (counters are all oneshot).
     {
       final CounterSet tmp = counterSet.makePath("checkpoint");
 
       tmp.addCounter(
-          "segment UUID", new OneShotInstrument<String>(checkpoint.segmentUUID.toString()));
+          "segment UUID", new OneShotInstrument<>(checkpoint.segmentUUID.toString()));
 
       // length in bytes of the file.
-      tmp.addCounter("length", new OneShotInstrument<String>(Long.toString(checkpoint.length)));
+      tmp.addCounter("length", new OneShotInstrument<>(Long.toString(checkpoint.length)));
 
-      tmp.addCounter("#nodes", new OneShotInstrument<String>(Long.toString(checkpoint.nnodes)));
+      tmp.addCounter("#nodes", new OneShotInstrument<>(Long.toString(checkpoint.nnodes)));
 
-      tmp.addCounter("#leaves", new OneShotInstrument<String>(Long.toString(checkpoint.nleaves)));
+      tmp.addCounter("#leaves", new OneShotInstrument<>(Long.toString(checkpoint.nleaves)));
 
-      tmp.addCounter("#entries", new OneShotInstrument<String>(Long.toString(checkpoint.nentries)));
+      tmp.addCounter("#entries", new OneShotInstrument<>(Long.toString(checkpoint.nentries)));
 
-      tmp.addCounter("height", new OneShotInstrument<String>(Long.toString(checkpoint.height)));
+      tmp.addCounter("height", new OneShotInstrument<>(Long.toString(checkpoint.height)));
     }
 
     // metadata (all oneshot).
     {
       final CounterSet tmp = counterSet.makePath("metadata");
 
-      tmp.addCounter("name", new OneShotInstrument<String>(indexMetadata.getName()));
+      tmp.addCounter("name", new OneShotInstrument<>(indexMetadata.getName()));
 
       tmp.addCounter(
-          "index UUID", new OneShotInstrument<String>(indexMetadata.getIndexUUID().toString()));
+          "index UUID", new OneShotInstrument<>(indexMetadata.getIndexUUID().toString()));
     }
 
     // dynamic counters.

@@ -158,7 +158,7 @@ public class QueryTask extends AbstractStepTask {
 
     if (step.isRule()) {
 
-      tasks = new ArrayList<Callable<RuleStats>>(1);
+      tasks = new ArrayList<>(1);
 
       final IRule rule = (IRule) step;
 
@@ -173,7 +173,7 @@ public class QueryTask extends AbstractStepTask {
 
       final boolean parallel = program.isParallel();
 
-      tasks = new ArrayList<Callable<RuleStats>>(program.stepCount());
+      tasks = new ArrayList<>(program.stepCount());
 
       final Iterator<? extends IStep> itr = program.steps();
 

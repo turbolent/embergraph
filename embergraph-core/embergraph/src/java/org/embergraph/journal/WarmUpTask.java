@@ -88,7 +88,7 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
    *
    * <p>Note: This collection is ordered and is NOT thread-safe.
    */
-  private final Map<String, BaseIndexStats> statsMap = new TreeMap<String, BaseIndexStats>();
+  private final Map<String, BaseIndexStats> statsMap = new TreeMap<>();
 
   /*
    * @param journal The journal.
@@ -136,7 +136,7 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
       final ICommitRecord commitRecord = journal.getCommitRecord(readOnCommitTime);
 
       // Populate the tasks.
-      final List<FutureTask<BaseIndexStats>> tasks = new LinkedList<FutureTask<BaseIndexStats>>();
+      final List<FutureTask<BaseIndexStats>> tasks = new LinkedList<>();
       {
         // Scan the named indices.
         final Iterator<String> nitr = journal.indexNameScan(null /* prefix */, timestamp);
@@ -170,7 +170,7 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
           if (log.isInfoEnabled()) log.info("Will warm up index: name=" + name);
 
           tasks.add(
-              new FutureTask<BaseIndexStats>(
+              new FutureTask<>(
                   new Callable<BaseIndexStats>() {
                     @Override
                     public BaseIndexStats call() throws Exception {

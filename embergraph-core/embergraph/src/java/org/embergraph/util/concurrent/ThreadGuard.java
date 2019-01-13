@@ -90,7 +90,7 @@ public class ThreadGuard {
   }
 
   private final ConcurrentHashMap<Thread, AtomicInteger> threads =
-      new ConcurrentHashMap<Thread, AtomicInteger>();
+      new ConcurrentHashMap<>();
 
   /** Increment thread in critical region awaiting a {@link Condition}. */
   private void incThread() {

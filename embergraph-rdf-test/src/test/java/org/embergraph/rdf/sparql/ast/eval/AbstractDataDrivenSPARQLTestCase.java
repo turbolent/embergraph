@@ -417,7 +417,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
         parser.setPreserveBNodeIDs(true);
         parser.setValueFactory(store.getValueFactory());
 
-        final Set<Statement> result = new LinkedHashSet<Statement>();
+        final Set<Statement> result = new LinkedHashSet<>();
 
         parser.setRDFHandler(new StatementCollector(result));
 

@@ -94,7 +94,7 @@ public class FunctionRegistry {
 
   public interface Annotations extends AggregateBase.Annotations {}
 
-  private static ConcurrentMap<URI, Factory> factories = new ConcurrentHashMap<URI, Factory>();
+  private static ConcurrentMap<URI, Factory> factories = new ConcurrentHashMap<>();
 
   public static final String SPARQL_FUNCTIONS = "http://www.w3.org/2006/sparql-functions#";
   public static final String XPATH_FUNCTIONS = "http://www.w3.org/2005/xpath-functions#";
@@ -1572,7 +1572,7 @@ public class FunctionRegistry {
 
       checkArgs(args, ValueExpressionNode.class);
 
-      final LinkedHashMap<String, Object> tmp = new LinkedHashMap<String, Object>(scalarValues);
+      final LinkedHashMap<String, Object> tmp = new LinkedHashMap<>(scalarValues);
 
       if (!scalarValues.containsKey(Annotations.SEPARATOR)) {
 

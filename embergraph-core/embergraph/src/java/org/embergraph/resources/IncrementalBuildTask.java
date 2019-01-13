@@ -321,7 +321,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
     protected IResourceMetadata[] doTask() throws Exception {
 
       // populated with the description of the ordered sources of the new view.
-      final List<IResourceMetadata> newView = new LinkedList<IResourceMetadata>();
+      final List<IResourceMetadata> newView = new LinkedList<>();
 
       /*
        * Note: The event is labeled a "build" even if all sources

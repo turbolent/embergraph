@@ -261,7 +261,7 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
     //
     //        }
     //
-    return new ReadOnlyTermDocRecord<V>(
+    return new ReadOnlyTermDocRecord<>(
         null /* token */, docId, fieldId, /* termFreq, */ termWeight);
   }
 

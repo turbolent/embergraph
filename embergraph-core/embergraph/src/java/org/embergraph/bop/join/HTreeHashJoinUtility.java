@@ -263,13 +263,13 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
    * {@link IV}[], similar to the encoding in the statement indices. The mapping from the index
    * positions in the {@link IV}s to the variables is managed by the {@link #encoder}.
    */
-  private final AtomicReference<HTree> rightSolutions = new AtomicReference<HTree>();
+  private final AtomicReference<HTree> rightSolutions = new AtomicReference<>();
 
   /*
    * The set of distinct source solutions which joined. This set is maintained iff the join is
    * optional and is <code>null</code> otherwise.
    */
-  private final AtomicReference<HTree> joinSet = new AtomicReference<HTree>();
+  private final AtomicReference<HTree> joinSet = new AtomicReference<>();
 
   /*
    * The maximum #of (left,right) solution joins that will be considered before failing the join.
@@ -1006,7 +1006,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             case Optional:
             case Exists:
             case NotExists:
-              joined = new LinkedList<BS2>();
+              joined = new LinkedList<>();
               break;
             default:
               joined = null;
@@ -1569,7 +1569,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             // TODO This is not on the native heap. But it only
             // handles a single bucket. Still, it is possible for
             // a bucket to get very large.
-            distinctSet = outputDistinctJVs ? new HashSet<IBindingSet>() : null;
+            distinctSet = outputDistinctJVs ? new HashSet<>() : null;
             lastHashCode = newHashCode;
           }
 

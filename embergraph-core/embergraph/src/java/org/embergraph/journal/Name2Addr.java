@@ -156,7 +156,7 @@ public class Name2Addr extends BTree {
    * the commit is not successfull.
    */
   private ConcurrentHashMap<String, DirtyListener> commitList =
-      new ConcurrentHashMap<String, DirtyListener>();
+      new ConcurrentHashMap<>();
 
   /*
    * An instance of this {@link DirtyListener} is registered with each named index that we
@@ -394,7 +394,7 @@ public class Name2Addr extends BTree {
     // new LRUCache<String, BTree>(cacheCapacity));
 
     indexCache =
-        new ConcurrentWeakValueCacheWithTimeout<String, ICheckpointProtocol>(
+        new ConcurrentWeakValueCacheWithTimeout<>(
             cacheCapacity, TimeUnit.MILLISECONDS.toNanos(cacheTimeout));
   }
 
@@ -610,7 +610,7 @@ public class Name2Addr extends BTree {
     }
 
     // for each entry in the snapshot of the commit list.
-    final List<CommitIndexTask> tasks = new ArrayList<CommitIndexTask>(a.length);
+    final List<CommitIndexTask> tasks = new ArrayList<>(a.length);
     for (int i = 0; i < a.length; i++) {
 
       final DirtyListener l = a[i];
@@ -647,7 +647,7 @@ public class Name2Addr extends BTree {
     }
 
     // for each entry in the snapshot of the commit list.
-    final List<Throwable> causes = new LinkedList<Throwable>();
+    final List<Throwable> causes = new LinkedList<>();
     for (Future<CommitIndexTask> f : futures) {
 
       try {

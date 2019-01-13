@@ -145,7 +145,7 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
      * for this initialization procedure.
      */
     {
-      effectiveInitParams = new LinkedHashMap<String, String>();
+      effectiveInitParams = new LinkedHashMap<>();
 
       /*
        * Copy the init params from web.xml into a local map.
@@ -393,7 +393,7 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
     if (indexManager instanceof Journal && warmupTimeoutMillis > 0L) {
 
       // Note: null -or- empty => ALL namespaces.
-      final List<String> warmupNamespaceList = new LinkedList<String>();
+      final List<String> warmupNamespaceList = new LinkedList<>();
       {
         String s = getInitParameter(ConfigParams.WARMUP_NAMESPACE_LIST);
 

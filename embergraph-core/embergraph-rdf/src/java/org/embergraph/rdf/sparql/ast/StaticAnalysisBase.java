@@ -376,7 +376,7 @@ public class StaticAnalysisBase {
   public boolean isFullyBound(final FilterNode f, final Set<IVariable<?>> vars) {
 
     final Set<IVariable<?>> fvars =
-        getSpannedVariables(f, true /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(f, true /* filters */, new LinkedHashSet<>());
 
     fvars.removeAll(vars);
 
@@ -396,7 +396,7 @@ public class StaticAnalysisBase {
    */
   public static Set<IVariable<?>> getSPOVariables(final StatementPatternNode sp) {
 
-    final LinkedHashSet<IVariable<?>> set = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> set = new LinkedHashSet<>();
 
     for (int i = 0; i < 3; i++) {
 

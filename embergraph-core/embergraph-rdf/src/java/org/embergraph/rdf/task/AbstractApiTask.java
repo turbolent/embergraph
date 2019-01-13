@@ -57,7 +57,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
 
   /** The reference to the {@link IIndexManager} is set before the task is executed. */
   private final AtomicReference<IIndexManager> indexManagerRef =
-      new AtomicReference<IIndexManager>();
+      new AtomicReference<>();
 
   /** The namespace of the target KB instance. */
   protected final String namespace;

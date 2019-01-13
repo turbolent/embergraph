@@ -280,7 +280,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
            */
 
           final Set<IVariable<?>> projectedVars =
-              subquery.getProjectedVars(new LinkedHashSet<IVariable<?>>());
+              subquery.getProjectedVars(new LinkedHashSet<>());
 
           final IVariable<?>[] variablesToKeep = BOpUtility.toArray(projectedVars.iterator());
 
@@ -330,7 +330,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
         IBindingProducerNode[] ancestry,
         JoinGroupNode joinGroup) {
       super(ctx, exogenousBindings, queryRoot, ancestry, joinGroup);
-      this.ancestry = new LinkedList<IBindingProducerNode>(Arrays.asList(ancestry));
+      this.ancestry = new LinkedList<>(Arrays.asList(ancestry));
       this.sa = new StaticAnalysis(queryRoot, ctx);
       /*
        * Look for service calls and named subquery includes, since they
@@ -503,7 +503,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
       final double optimistic =
           joinGroup.getProperty(Annotations.OPTIMISTIC, Annotations.DEFAULT_OPTIMISTIC);
 
-      final List<IReorderableNode> required = new LinkedList<IReorderableNode>();
+      final List<IReorderableNode> required = new LinkedList<>();
 
       IReorderableNode runLast = null;
 

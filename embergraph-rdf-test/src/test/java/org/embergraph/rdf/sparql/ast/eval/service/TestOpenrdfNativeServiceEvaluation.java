@@ -68,7 +68,7 @@ public class TestOpenrdfNativeServiceEvaluation extends AbstractDataDrivenSPARQL
    */
   public void test_service_001() throws Exception {
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("book", new URIImpl("http://example.org/book/book1"));
@@ -120,7 +120,7 @@ public class TestOpenrdfNativeServiceEvaluation extends AbstractDataDrivenSPARQL
    */
   public void test_service_002() throws Exception {
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("book", new URIImpl("http://example.org/book/book1"));

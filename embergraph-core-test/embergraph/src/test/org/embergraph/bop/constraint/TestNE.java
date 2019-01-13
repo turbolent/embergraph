@@ -78,12 +78,12 @@ public class TestNE extends TestCase2 {
 
     final IBindingSet eq =
         new ListBindingSet(
-            vars, new IConstant[] {new Constant<String>("1"), new Constant<String>("1")});
+            vars, new IConstant[] {new Constant<>("1"), new Constant<>("1")});
     final IBindingSet ne =
         new ListBindingSet(
-            vars, new IConstant[] {new Constant<String>("1"), new Constant<String>("2")});
+            vars, new IConstant[] {new Constant<>("1"), new Constant<>("2")});
     final IBindingSet nb =
-        new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {new Constant<String>("1")});
+        new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {new Constant<>("1")});
 
     assertTrue(op.get(ne));
     assertFalse(op.get(eq));

@@ -53,7 +53,7 @@ public class TestRuleState extends TestCase2 {
 
     // select ?a where { ?a x ?b . ?b x ?c . ?c x ?d . ?d x ?e . }
 
-    final IConstant x = new Constant<Integer>(1);
+    final IConstant x = new Constant<>(1);
 
     final IPredicate[] tails =
         new IPredicate[] {

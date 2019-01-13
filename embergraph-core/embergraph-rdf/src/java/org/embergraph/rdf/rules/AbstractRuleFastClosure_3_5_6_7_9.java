@@ -398,9 +398,9 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
           final long timestamp1 = joinNexus.getReadTimestamp(/*focusStore*/ );
 
-          return new RelationFusedView<ISPO>(
-                  (IRelation<ISPO>) resourceLocator.locate(database, timestamp0),
-                  (IRelation<ISPO>) resourceLocator.locate(focusStore, timestamp1))
+          return new RelationFusedView<>(
+              (IRelation<ISPO>) resourceLocator.locate(database, timestamp0),
+              (IRelation<ISPO>) resourceLocator.locate(focusStore, timestamp1))
               .init();
         }
         // final IAccessPath accessPath = (focusStore == null
@@ -486,7 +486,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
      */
     public Set<IV> getSubProperties() {
 
-      final Set<IV> P = new HashSet<IV>();
+      final Set<IV> P = new HashSet<>();
 
       P.add(rdfsSubPropertyOf.get());
 
@@ -499,7 +499,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
         int nafter = 0;
         int nrounds = 0;
 
-        final Set<IV> tmp = new HashSet<IV>();
+        final Set<IV> tmp = new HashSet<>();
 
         do {
 
@@ -519,7 +519,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
                     "view", // @todo the label here is ignored, but should be the ordered names of
                     // the relations in the view.
                     Var.var("x"),
-                    new Constant<IV>(p),
+                    new Constant<>(p),
                     Var.var("y"));
 
             final IAccessPath<ISPO> accessPath = view.getAccessPath(pred);
@@ -649,7 +649,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       //
       //            }
 
-      final Set<IV> tmp = new HashSet<IV>();
+      final Set<IV> tmp = new HashSet<>();
 
       /*
        * query := (?x, rdfs:subPropertyOf, p).

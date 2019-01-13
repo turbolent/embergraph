@@ -416,7 +416,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
     long remaining = nanos;
 
     // errors.
-    final List<ExecutionException> errors = new LinkedList<ExecutionException>();
+    final List<ExecutionException> errors = new LinkedList<>();
 
     for (Future<Void> f : futures) {
 
@@ -546,8 +546,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*

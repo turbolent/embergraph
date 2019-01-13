@@ -59,7 +59,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(
@@ -71,18 +71,18 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 10, // chunkSize
                 20, // chunkTimeout
                 TimeUnit.MILLISECONDS, // chunkTimeoutUnit
                 true // ordered
-                );
+            );
           }
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -213,7 +213,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     // make sure there is enough room for the test to succeed.
     assertTrue(sinkIdleTimeoutNanos * 2 <= sinkChunkTimeoutNanos);
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(
@@ -225,18 +225,18 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 10, // chunkSize
                 sinkChunkTimeoutNanos,
                 TimeUnit.NANOSECONDS, // chunkTimeoutUnit
                 true // ordered
-                );
+            );
           }
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer
     masterBuffer.setFuture(ft);
@@ -389,13 +389,13 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
      * Note: this hides the field by the same name on our base class!
      */
     final BlockingBuffer<KVO<O>[]> masterBuffer =
-        new BlockingBuffer<KVO<O>[]>(
+        new BlockingBuffer<>(
             masterQueueCapacity, //
             1, // chunkSize
             0L /*
-                * Note: a chunkTimeout of ZERO (0) disables the chunk
-                * combiner for the master.
-                */,
+         * Note: a chunkTimeout of ZERO (0) disables the chunk
+         * combiner for the master.
+         */,
             TimeUnit.NANOSECONDS);
 
     final M master =
@@ -408,18 +408,18 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 100, // chunkSize
                 sinkChunkTimeoutNanos,
                 TimeUnit.NANOSECONDS, // chunkTimeoutUnit
                 true // ordered
-                );
+            );
           }
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -637,7 +637,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(
@@ -651,18 +651,18 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
           @Override
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 BlockingBuffer.DEFAULT_MINIMUM_CHUNK_SIZE, //
                 Long.MAX_VALUE,
                 TimeUnit.SECONDS, // chunkTimeout
                 true // ordered
-                );
+            );
           }
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -740,7 +740,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(
@@ -754,18 +754,18 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
           @Override
           protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
-            return new BlockingBuffer<KVO<O>[]>(
-                new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
+            return new BlockingBuffer<>(
+                new ArrayBlockingQueue<>(subtaskQueueCapacity),
                 BlockingBuffer.DEFAULT_MINIMUM_CHUNK_SIZE, //
                 Long.MAX_VALUE,
                 TimeUnit.SECONDS, // chunkTimeout (infinite)
                 true // ordered
-                );
+            );
           }
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);

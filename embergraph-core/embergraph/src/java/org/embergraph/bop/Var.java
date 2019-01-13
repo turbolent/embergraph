@@ -165,9 +165,9 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
    * @see ConcurrentWeakValueCache
    */
   private static final ConcurrentWeakValueCache<String, Var<?>> vars =
-      new ConcurrentWeakValueCache<String, Var<?>>(
+      new ConcurrentWeakValueCache<>(
           0 // queue capacity (no hard reference queue).
-          );
+      );
 
   /** Generate an anonymous random variable. */
   public static Var<?> var() {

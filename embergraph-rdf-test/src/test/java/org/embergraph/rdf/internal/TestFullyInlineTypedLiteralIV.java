@@ -21,11 +21,11 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
   public void test_InlineLiteralIV_plain() {
 
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+    doTest(new FullyInlineTypedLiteralIV<>(""));
+    doTest(new FullyInlineTypedLiteralIV<>(" "));
+    doTest(new FullyInlineTypedLiteralIV<>("1"));
+    doTest(new FullyInlineTypedLiteralIV<>("12"));
+    doTest(new FullyInlineTypedLiteralIV<>("123"));
   }
 
   // Removed in backport.    Not used in pre-RDF 1.1 versions
@@ -43,11 +43,11 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
     final URI datatype = new URIImpl("http://www.embergraph.org");
 
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
-    doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<>("", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<>(" ", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<>("1", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<>("12", null, datatype));
+    doTest(new FullyInlineTypedLiteralIV<>("123", null, datatype));
   }
 
   private void doTest(final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
@@ -77,27 +77,27 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
   public void test_encodeDecode_comparator() {
 
-    final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    final List<IV<?, ?>> ivs = new LinkedList<>();
     {
       final URI datatype = new URIImpl("http://www.embergraph.org");
 
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+      ivs.add(new FullyInlineTypedLiteralIV<>(""));
+      ivs.add(new FullyInlineTypedLiteralIV<>(" "));
+      ivs.add(new FullyInlineTypedLiteralIV<>("1"));
+      ivs.add(new FullyInlineTypedLiteralIV<>("12"));
+      ivs.add(new FullyInlineTypedLiteralIV<>("123"));
 
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", "en", null /*datatype*/));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", "en", null /*datatype*/));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", "en", null /*datatype*/));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", "fr", null /*datatype*/));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", "de", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<>("", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<>(" ", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<>("1", "en", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<>("12", "fr", null /*datatype*/));
+      ivs.add(new FullyInlineTypedLiteralIV<>("123", "de", null /*datatype*/));
 
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
-      ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<>("", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<>(" ", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<>("1", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<>("12", null, datatype));
+      ivs.add(new FullyInlineTypedLiteralIV<>("123", null, datatype));
     }
 
     final IV<?, ?>[] e = ivs.toArray(new IV[0]);

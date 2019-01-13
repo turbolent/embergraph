@@ -54,7 +54,7 @@ public class InlineURIFactory implements IInlineURIFactory {
    * to guarantee that the changes are visible once we leave the scope of the constructor.
    */
   private final TreeMap<String, InlineURIHandler> handlersByNamespace =
-      new TreeMap<String, InlineURIHandler>();
+      new TreeMap<>();
 
   /** By default, handle IPv4 and UUID. */
   public InlineURIFactory() {

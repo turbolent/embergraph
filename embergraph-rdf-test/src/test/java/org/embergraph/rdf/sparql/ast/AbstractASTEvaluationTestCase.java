@@ -194,7 +194,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
   protected static Set<IVariable<?>> asSet(final String[] vars) {
 
-    final Set<IVariable<?>> set = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> set = new LinkedHashSet<>();
 
     for (String s : vars) {
 
@@ -206,7 +206,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
   protected static Set<IVariable<?>> asSet(final IVariable<?>[] vars) {
 
-    final Set<IVariable<?>> set = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> set = new LinkedHashSet<>();
 
     for (IVariable<?> var : vars) {
 
@@ -218,17 +218,17 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
   protected static final Set<VarNode> asSet(final VarNode[] a) {
 
-    return new LinkedHashSet<VarNode>(Arrays.asList(a));
+    return new LinkedHashSet<>(Arrays.asList(a));
   }
 
   protected static final Set<FilterNode> asSet(final FilterNode[] a) {
 
-    return new LinkedHashSet<FilterNode>(Arrays.asList(a));
+    return new LinkedHashSet<>(Arrays.asList(a));
   }
 
   protected static final Set<Integer> asSet(final Integer[] a) {
 
-    return new LinkedHashSet<Integer>(Arrays.asList(a));
+    return new LinkedHashSet<>(Arrays.asList(a));
   }
 
   //    /*

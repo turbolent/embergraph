@@ -155,11 +155,11 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
    * backing hard reference queue at all in this case.
    */
   private final ConcurrentWeakValueCache<L, HS> sinkStats =
-      new ConcurrentWeakValueCache<L, HS>(0 /* queueCapacity */);
+      new ConcurrentWeakValueCache<>(0 /* queueCapacity */);
 
   /** Weak value hash map of the active masters. */
   protected final ConcurrentWeakValueCache<Integer, AbstractMasterTask> masters =
-      new ConcurrentWeakValueCache<Integer, AbstractMasterTask>(0 /* queueCapacity */);
+      new ConcurrentWeakValueCache<>(0 /* queueCapacity */);
 
   /*
    * The #of master tasks which have been created for the index whose asynchronous write statistics
@@ -237,7 +237,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** Return a snapshot of the statistics for each index partition. */
   public Map<L, HS> getSubtaskStats() {
 
-    final Map<L, HS> m = new LinkedHashMap<L, HS>(sinkStats.size());
+    final Map<L, HS> m = new LinkedHashMap<>(sinkStats.size());
 
     final Iterator<Map.Entry<L, WeakReference<HS>>> itr = sinkStats.entryIterator();
 

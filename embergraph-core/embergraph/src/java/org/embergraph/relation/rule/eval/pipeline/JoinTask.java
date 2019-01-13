@@ -182,7 +182,7 @@ public abstract class JoinTask implements Callable<Void> {
    * Object)} and must specify <code>null</code> as the expected value. This ensures that only the
    * first cause is recorded by this field.
    */
-  protected final AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>(null);
+  protected final AtomicReference<Throwable> firstCause = new AtomicReference<>(null);
 
   /*
    * Indicate that join processing should halt. This method is written defensively and will not
@@ -270,7 +270,7 @@ public abstract class JoinTask implements Callable<Void> {
      * <p>Note: Since the collection is not thread-safe, synchronization is required when adding to
      * the collection and when visiting the elements of the collection.
      */
-    private final LinkedList<T> list = new LinkedList<T>();
+    private final LinkedList<T> list = new LinkedList<>();
 
     protected ThreadLocalFactory() {
 
@@ -280,7 +280,7 @@ public abstract class JoinTask implements Callable<Void> {
     protected ThreadLocalFactory(
         final int initialCapacity, final float loadFactor, final int concurrencyLevel) {
 
-      map = new ConcurrentHashMap<Thread, T>(initialCapacity, loadFactor, concurrencyLevel);
+      map = new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
     }
 
     /** Return the #of thread-local objects. */
@@ -970,7 +970,7 @@ public abstract class JoinTask implements Callable<Void> {
       final int tailIndex = getTailIndex(orderIndex);
 
       final Map<IPredicate<?>, Collection<IBindingSet>> map =
-          new LinkedHashMap<IPredicate<?>, Collection<IBindingSet>>(chunk.length);
+          new LinkedHashMap<>(chunk.length);
 
       for (IBindingSet bindingSet : chunk) {
 
@@ -1006,7 +1006,7 @@ public abstract class JoinTask implements Callable<Void> {
            * into the map using that predicate as the key.
            */
 
-          values = new LinkedList<IBindingSet>();
+          values = new LinkedList<>();
 
           map.put(predicate, values);
 
@@ -1108,11 +1108,11 @@ public abstract class JoinTask implements Callable<Void> {
        * for errors and ensure that any running tasks are cancelled.
        */
 
-      final List<FutureTask<Void>> futureTasks = new LinkedList<FutureTask<Void>>();
+      final List<FutureTask<Void>> futureTasks = new LinkedList<>();
 
       for (AccessPathTask task : tasks) {
 
-        final FutureTask<Void> ft = new FutureTask<Void>(task);
+        final FutureTask<Void> ft = new FutureTask<>(task);
 
         futureTasks.add(ft);
       }
@@ -1395,7 +1395,7 @@ public abstract class JoinTask implements Callable<Void> {
            * First, gather all chunks.
            */
           int nchunks = 0;
-          final List<Object[]> chunks = new LinkedList<Object[]>();
+          final List<Object[]> chunks = new LinkedList<>();
           while (itr.hasNext()) {
 
             final Object[] chunk = itr.nextChunk();
@@ -1473,7 +1473,7 @@ public abstract class JoinTask implements Callable<Void> {
 
                 if (constraintSolutions == null) {
 
-                  constraintSolutions = new LinkedList<IBindingSet>();
+                  constraintSolutions = new LinkedList<>();
                 }
 
                 for (IBindingSet bs : solutions) {

@@ -187,7 +187,7 @@ public class LocalNativeChunkMessage implements IChunkMessage<IBindingSet> {
 
       // play the result into a native memory backed solution set stream
       final ThickCloseableIterator<IBindingSet[]> itr =
-          new ThickCloseableIterator<IBindingSet[]>(bindingSetChunks);
+          new ThickCloseableIterator<>(bindingSetChunks);
       try {
         ssstr.put(itr);
       } finally {
@@ -257,7 +257,7 @@ public class LocalNativeChunkMessage implements IChunkMessage<IBindingSet> {
     public ChunkAccessor() {
       if (released) throw new IllegalStateException();
       if (ssstr == null) {
-        source = new EmptyCloseableIterator<IBindingSet[]>();
+        source = new EmptyCloseableIterator<>();
       } else {
         source = ssstr.get();
       }

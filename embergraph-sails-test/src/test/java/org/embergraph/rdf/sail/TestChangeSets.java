@@ -146,7 +146,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // should see all of the stmts[] added
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : stmts) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -163,7 +163,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // shouldn't see any change records
-        compare(new LinkedList<IChangeRecord>(), changeLog.getLastCommit(tripleStore));
+        compare(new LinkedList<>(), changeLog.getLastCommit(tripleStore));
       }
 
       // add the stmts2[]
@@ -175,7 +175,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // should see all of the stmts2[] added
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : stmts2) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -249,7 +249,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // should see all of the stmts[] added
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : stmts) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -266,7 +266,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // shouldn't see any change records
-        compare(new LinkedList<IChangeRecord>(), changeLog.getLastCommit(tripleStore));
+        compare(new LinkedList<>(), changeLog.getLastCommit(tripleStore));
       }
 
       // add the stmts2[]
@@ -278,7 +278,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // should see all of the stmts2[] added
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : stmts2) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -348,7 +348,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       { // should see all of the stmts[] removed
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : stmts) {
           expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
         }
@@ -365,7 +365,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       { // shouldn't see any change records
-        compare(new LinkedList<IChangeRecord>(), changeLog.getLastCommit(tripleStore));
+        compare(new LinkedList<>(), changeLog.getLastCommit(tripleStore));
       }
 
     } finally {
@@ -452,7 +452,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : add) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -467,7 +467,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : explicitRemove) {
           expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
         }
@@ -562,7 +562,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : explicit) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -586,7 +586,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : upgrades) {
           expected.add(new ChangeRecord(stmt, ChangeAction.UPDATED));
         }
@@ -677,7 +677,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : explicitAdd) {
           expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
         }
@@ -700,7 +700,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       cxn.commit();
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         for (EmbergraphStatement stmt : explicitRemove) {
           expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
         }
@@ -803,7 +803,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         expected.add(new ChangeRecord(update, ChangeAction.UPDATED));
 
         compare(expected, changeLog.getLastCommit(tripleStore));
@@ -825,7 +825,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
       }
 
       {
-        final Collection<IChangeRecord> expected = new LinkedList<IChangeRecord>();
+        final Collection<IChangeRecord> expected = new LinkedList<>();
         expected.add(new ChangeRecord(update, ChangeAction.UPDATED));
 
         compare(expected, changeLog.getLastCommit(tripleStore));
@@ -845,8 +845,8 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
   private void compare(
       final Collection<IChangeRecord> expected, final Collection<IChangeRecord> actual) {
 
-    final Collection<IChangeRecord> extra = new LinkedList<IChangeRecord>();
-    Collection<IChangeRecord> missing = new LinkedList<IChangeRecord>();
+    final Collection<IChangeRecord> extra = new LinkedList<>();
+    Collection<IChangeRecord> missing = new LinkedList<>();
 
     //        int resultCount = 0;
     int nmatched = 0;

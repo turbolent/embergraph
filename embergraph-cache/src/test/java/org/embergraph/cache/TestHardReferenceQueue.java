@@ -42,9 +42,9 @@ public class TestHardReferenceQueue extends TestCase2 {
   /** Test constructor and its post-conditions. */
   public void test_ctor() {
 
-    final HardReferenceQueueEvictionListener<String> listener = new MyListener<String>();
+    final HardReferenceQueueEvictionListener<String> listener = new MyListener<>();
 
-    final HardReferenceQueue<String> cache = new HardReferenceQueue<String>(listener, 100, 20);
+    final HardReferenceQueue<String> cache = new HardReferenceQueue<>(listener, 100, 20);
 
     assertEquals("listener", listener, cache.getListener());
     assertEquals("capacity", 100, cache.capacity());
@@ -65,7 +65,7 @@ public class TestHardReferenceQueue extends TestCase2 {
     //        }
 
     try {
-      new HardReferenceQueue<String>(new MyListener<String>(), 0);
+      new HardReferenceQueue<>(new MyListener<>(), 0);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expectedRefs exception: " + ex);
@@ -75,9 +75,9 @@ public class TestHardReferenceQueue extends TestCase2 {
   /** Correct rejection test for appending a null reference to the cache. */
   public void test_append_null() {
 
-    final HardReferenceQueueEvictionListener<String> listener = new MyListener<String>();
+    final HardReferenceQueueEvictionListener<String> listener = new MyListener<>();
 
-    final HardReferenceQueue<String> cache = new HardReferenceQueue<String>(listener, 100, 2);
+    final HardReferenceQueue<String> cache = new HardReferenceQueue<>(listener, 100, 2);
 
     try {
       cache.add(null);
@@ -98,9 +98,9 @@ public class TestHardReferenceQueue extends TestCase2 {
    */
   public void test_add_evict() {
 
-    final MyListener<String> listener = new MyListener<String>();
+    final MyListener<String> listener = new MyListener<>();
 
-    final HardReferenceQueue<String> cache = new HardReferenceQueue<String>(listener, 5, 0);
+    final HardReferenceQueue<String> cache = new HardReferenceQueue<>(listener, 5, 0);
 
     final String ref0 = "0";
     final String ref1 = "1";
@@ -247,9 +247,9 @@ public class TestHardReferenceQueue extends TestCase2 {
    */
   public void test_add_scan() {
 
-    final MyListener<String> listener = new MyListener<String>();
+    final MyListener<String> listener = new MyListener<>();
 
-    final HardReferenceQueue<String> cache = new HardReferenceQueue<String>(listener, 5, 2);
+    final HardReferenceQueue<String> cache = new HardReferenceQueue<>(listener, 5, 2);
 
     final String ref0 = "0";
     final String ref1 = "1";
@@ -419,7 +419,7 @@ public class TestHardReferenceQueue extends TestCase2 {
       setExpectedRef(expectedRefs.pop());
     }
 
-    Stack<T> expectedRefs = new Stack<T>();
+    Stack<T> expectedRefs = new Stack<>();
 
     /*
      * Set the expected reference for the next eviction notice. The listener will thrown an

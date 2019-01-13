@@ -187,7 +187,7 @@ public class BulletParser {
    * The subset of attributes whose values will be actually parsed (if, of course, {@link
    * #parseAttributes}is true).
    */
-  protected ReferenceArraySet<Attribute> parsedAttrs = new ReferenceArraySet<Attribute>();
+  protected ReferenceArraySet<Attribute> parsedAttrs = new ReferenceArraySet<>();
   /** An externally visible, immutable subset of attributes whose values will be actually parsed. */
   public ReferenceSet<Attribute> parsedAttributes = ReferenceSets.unmodifiable(parsedAttrs);
   /** The character represented by the last scanned entity. */
@@ -539,7 +539,7 @@ public class BulletParser {
     Element currentElement;
     /* The current attribute object */
     Attribute currAttr = null;
-    attrMap = new Reference2ObjectArrayMap<Attribute, MutableString>(16);
+    attrMap = new Reference2ObjectArrayMap<>(16);
 
     callback.startDocument();
 

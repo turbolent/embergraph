@@ -46,7 +46,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class NamedReadWriteLock<T> {
 
-  private final Map<T, ReentrantReadWriteLock> locks = new WeakHashMap<T, ReentrantReadWriteLock>();
+  private final Map<T, ReentrantReadWriteLock> locks = new WeakHashMap<>();
 
   /*
    * Return the canonical instance of the lock for a named resource.

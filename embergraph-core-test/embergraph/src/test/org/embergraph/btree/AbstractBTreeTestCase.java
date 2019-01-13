@@ -911,7 +911,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     @Override
     protected HardReferenceQueue<PO> newWriteRetentionQueue(boolean readOnly) {
 
-      return new HardReferenceQueue<PO>(new NoEvictionListener(), 10000, 10);
+      return new HardReferenceQueue<>(new NoEvictionListener(), 10000, 10);
     }
   }
 
@@ -1720,7 +1720,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     /*
      * Run test.
      */
-    final Map<Integer, SimpleEntry> expected = new TreeMap<Integer, SimpleEntry>();
+    final Map<Integer, SimpleEntry> expected = new TreeMap<>();
 
     for (int i = 0; i < ntrials; i++) {
 

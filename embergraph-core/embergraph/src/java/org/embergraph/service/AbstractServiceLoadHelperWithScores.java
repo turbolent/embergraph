@@ -100,7 +100,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
      * criteria.
      */
     final List<UUID> underUtilized =
-        new ArrayList<UUID>(Math.max(scores.length, Math.max(minCount, maxCount)));
+        new ArrayList<>(Math.max(scores.length, Math.max(minCount, maxCount)));
 
     int nok = 0;
     for (int i = 0; i < scores.length; i++) {

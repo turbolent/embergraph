@@ -316,7 +316,7 @@ public abstract class AbstractJournal
    * @see #installRootBlocks(IRootBlockView, IRootBlockView)
    */
   private final AtomicReference<JournalMetadata> journalMetadata =
-      new AtomicReference<JournalMetadata>();
+      new AtomicReference<>();
 
   /*
    *
@@ -846,13 +846,13 @@ public abstract class AbstractJournal
 
       // Cache by addr
       historicalIndexCache =
-          new ConcurrentWeakValueCacheWithTimeout<Long, ICommitter>(
+          new ConcurrentWeakValueCacheWithTimeout<>(
               historicalIndexCacheCapacity,
               TimeUnit.MILLISECONDS.toNanos(historicalIndexCacheTimeout));
 
       // Cache by (name,commitTime). This cache is in front of the cache by addr.
       indexCache =
-          new ConcurrentWeakValueCacheWithTimeout<NT, ICheckpointProtocol>(
+          new ConcurrentWeakValueCacheWithTimeout<>(
               historicalIndexCacheCapacity,
               TimeUnit.MILLISECONDS.toNanos(historicalIndexCacheTimeout));
 
@@ -1415,7 +1415,7 @@ public abstract class AbstractJournal
 
       final CounterSet counters = new CounterSet();
 
-      final WeakReference<AbstractJournal> ref = new WeakReference<AbstractJournal>(jnl);
+      final WeakReference<AbstractJournal> ref = new WeakReference<>(jnl);
 
       counters.addCounter(
           "file",
@@ -1609,7 +1609,7 @@ public abstract class AbstractJournal
   protected final CounterSet getIndexCounters() {
 
     // If we find a live view of an index, we put its name in this set.
-    final Set<String /* name */> foundLive = new HashSet<String>();
+    final Set<String /* name */> foundLive = new HashSet<>();
 
     final CounterSet tmp = new CounterSet();
 
@@ -1640,7 +1640,7 @@ public abstract class AbstractJournal
      */
 
     final Map<String /* commitTime */, ICheckpointProtocol> map =
-        new HashMap<String /* name */, ICheckpointProtocol>();
+        new HashMap<>();
     {
       final Iterator<Map.Entry<NT, WeakReference<ICheckpointProtocol>>> itr =
           indexCache.entryIterator();
@@ -5358,7 +5358,7 @@ public abstract class AbstractJournal
 
       try {
 
-        final List<String> names = new LinkedList<String>();
+        final List<String> names = new LinkedList<>();
 
         synchronized (_name2Addr) {
           final Iterator<String> itr = Name2Addr.indexNameScan(prefix, _name2Addr);
@@ -6311,7 +6311,7 @@ public abstract class AbstractJournal
    *     HAJournalServer process </a>
    */
   private final AtomicReference<Future<IHANotifyReleaseTimeResponse>> gatherFuture =
-      new AtomicReference<Future<IHANotifyReleaseTimeResponse>>();
+      new AtomicReference<>();
 
   //    /*
   //     * The {@link Quorum} for this service -or- <code>null</code> if the service
@@ -6441,7 +6441,7 @@ public abstract class AbstractJournal
 
     /** The most recent prepare request. */
     private final AtomicReference<IHA2PhasePrepareMessage> prepareRequest =
-        new AtomicReference<IHA2PhasePrepareMessage>();
+        new AtomicReference<>();
 
     /** Whether or not we voted "yes" for the last prepare request. */
     private final AtomicBoolean vote = new AtomicBoolean(false);
@@ -6706,7 +6706,7 @@ public abstract class AbstractJournal
          * A NOP task if this service is not joined with the met quorum.
          */
 
-        ft = new FutureTaskMon<Boolean>(new VoteNoTask(quorumService));
+        ft = new FutureTaskMon<>(new VoteNoTask(quorumService));
 
       } else {
 
@@ -6717,7 +6717,7 @@ public abstract class AbstractJournal
          * Note: This code path is only when [isJoined := true].
          */
 
-        ft = new FutureTaskMon<Boolean>(new Prepare2PhaseTask(isLeader, prepareMessage));
+        ft = new FutureTaskMon<>(new Prepare2PhaseTask(isLeader, prepareMessage));
       }
 
       if (isLeader) {
@@ -7195,7 +7195,7 @@ public abstract class AbstractJournal
     public Future<Void> commit2Phase(final IHA2PhaseCommitMessage commitMessage) {
 
       final FutureTask<Void> ft =
-          new FutureTaskMon<Void>(new Commit2PhaseTask(commitMessage), null /* Void */);
+          new FutureTaskMon<>(new Commit2PhaseTask(commitMessage), null /* Void */);
 
       /*
        * Run in the caller's thread.
@@ -7376,7 +7376,7 @@ public abstract class AbstractJournal
     public Future<Void> abort2Phase(final IHA2PhaseAbortMessage abortMessage) {
 
       final FutureTask<Void> ft =
-          new FutureTaskMon<Void>(new Abort2PhaseTask(abortMessage), null /* Void */);
+          new FutureTaskMon<>(new Abort2PhaseTask(abortMessage), null /* Void */);
 
       /*
        * Run in the caller's thread.
@@ -7463,13 +7463,15 @@ public abstract class AbstractJournal
       if (haLog.isInfoEnabled()) haLog.info("token=" + token + ", addr=" + addr);
 
       final FutureTask<IHAReadResponse> ft =
-          new FutureTask<IHAReadResponse>(
+          new FutureTask<>(
               new Callable<IHAReadResponse>() {
 
                 @Override
                 public IHAReadResponse call() throws Exception {
 
-                  if (haLog.isInfoEnabled()) haLog.info("token=" + token);
+                  if (haLog.isInfoEnabled()) {
+                    haLog.info("token=" + token);
+                  }
 
                   quorum.assertQuorum(token);
 
@@ -7653,10 +7655,12 @@ public abstract class AbstractJournal
     @Override
     public Future<Void> moveToEndOfPipeline() {
       final FutureTask<Void> ft =
-          new FutureTaskMon<Void>(
+          new FutureTaskMon<>(
               new Runnable() {
                 public void run() {
-                  if (haLog.isInfoEnabled()) haLog.info("");
+                  if (haLog.isInfoEnabled()) {
+                    haLog.info("");
+                  }
                   final QuorumActor<?, ?> actor = quorum.getActor();
                   actor.pipelineRemove();
                   actor.pipelineAdd();
@@ -7773,7 +7777,7 @@ public abstract class AbstractJournal
               .newGatherMinimumVisibleCommitTimeTask(leader, serviceId, req);
 
       final FutureTask<IHANotifyReleaseTimeResponse> ft =
-          new FutureTask<IHANotifyReleaseTimeResponse>(task);
+          new FutureTask<>(task);
 
       // Save reference to the gather Future.
       gatherFuture.set(ft);
@@ -7943,7 +7947,7 @@ public abstract class AbstractJournal
 
   public static class SnapshotData implements ISnapshotData {
 
-    final TreeMap<Long, byte[]> m_map = new TreeMap<Long, byte[]>();
+    final TreeMap<Long, byte[]> m_map = new TreeMap<>();
 
     @Override
     public void put(long addr, byte[] data) {

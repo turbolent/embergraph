@@ -45,12 +45,12 @@ public class TestMergeFilter extends TestCase2 {
   public void test_filter() {
 
     final IChunkedIterator<Long> actual =
-        new ChunkedStriterator<IChunkedIterator<Long>, Long>(
-                Arrays.asList(new Long[] {1L, 3L, 5L}).iterator())
+        new ChunkedStriterator<>(
+            Arrays.asList(new Long[]{1L, 3L, 5L}).iterator())
             .addFilter(
-                new MergeFilter<IChunkedIterator<Long>, Long>(
-                    new ChunkedWrappedIterator<Long>(
-                        Arrays.asList(new Long[] {2L, 3L, 4L}).iterator())));
+                new MergeFilter<>(
+                    new ChunkedWrappedIterator<>(
+                        Arrays.asList(new Long[]{2L, 3L, 4L}).iterator())));
 
     assertEquals(new Long[] {1L, 2L, 3L, 4L, 5L}, actual.nextChunk());
   }

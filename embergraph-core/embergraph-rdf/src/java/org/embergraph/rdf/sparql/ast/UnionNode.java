@@ -122,7 +122,7 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    Set<IVariable<?>> requiredBound = new HashSet<>();
 
     for (JoinGroupNode jgn : getChildren()) {
       requiredBound.addAll(jgn.getRequiredBound(sa));
@@ -133,7 +133,7 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    Set<IVariable<?>> desiredBound = new HashSet<>();
 
     for (JoinGroupNode jgn : getChildren()) {
       desiredBound.addAll(jgn.getDesiredBound(sa));

@@ -115,13 +115,13 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
   public IVSolutionSetDecoder() {
 
     // The ordered set of variables for which bindings have been observed.
-    this.schema = new LinkedHashSet<IVariable<?>>();
+    this.schema = new LinkedHashSet<>();
 
     // The ordered set of variables for which bindings have been observed.
-    this.schemaIndex = new ArrayList<IVariable<?>>();
+    this.schemaIndex = new ArrayList<>();
 
     // The IV -> EmbergraphValue cache
-    this.cache = new HashMap<IV<?, ?>, EmbergraphValue>();
+    this.cache = new HashMap<>();
 
     this.tmp = new StringBuilder();
   }
@@ -298,7 +298,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
        * IVCache associations in this record (newCached>0).
        */
       final List<IV<?, ?>> ivs;
-      if (newCached > 0) ivs = new ArrayList<IV<?, ?>>(numBindings);
+      if (newCached > 0) ivs = new ArrayList<>(numBindings);
       else ivs = Collections.emptyList();
       if (numBindings > 0) {
         int chksum = 0;

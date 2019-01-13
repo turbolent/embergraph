@@ -643,9 +643,9 @@ public abstract class Stream implements ICheckpointProtocol {
     {
       counterSet.addCounter(
           "index UUID",
-          new OneShotInstrument<String>(getIndexMetadata().getIndexUUID().toString()));
+          new OneShotInstrument<>(getIndexMetadata().getIndexUUID().toString()));
 
-      counterSet.addCounter("class", new OneShotInstrument<String>(getClass().getName()));
+      counterSet.addCounter("class", new OneShotInstrument<>(getClass().getName()));
     }
 
     return counterSet;

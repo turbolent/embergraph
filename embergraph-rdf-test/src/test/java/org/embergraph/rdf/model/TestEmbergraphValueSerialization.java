@@ -34,7 +34,7 @@ public class TestEmbergraphValueSerialization extends TestCase2 {
 
     super.setUp();
 
-    fixture = new EmbergraphValueSerializer<Value>(ValueFactoryImpl.getInstance());
+    fixture = new EmbergraphValueSerializer<>(ValueFactoryImpl.getInstance());
   }
 
   protected void tearDown() throws Exception {

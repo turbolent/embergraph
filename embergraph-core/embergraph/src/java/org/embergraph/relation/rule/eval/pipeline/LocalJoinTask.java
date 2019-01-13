@@ -102,7 +102,7 @@ public class LocalJoinTask extends JoinTask {
        * will terminate.
        */
 
-      this.syncBuffer = new BlockingBuffer<IBindingSet[]>(joinNexus.getChunkOfChunksCapacity());
+      this.syncBuffer = new BlockingBuffer<>(joinNexus.getChunkOfChunksCapacity());
 
       // not used.
       this.solutionBuffer = null;
@@ -143,7 +143,7 @@ public class LocalJoinTask extends JoinTask {
        */
 
       // flushes to the solution buffer.
-      return new UnsynchronizedSolutionBuffer<IBindingSet>(
+      return new UnsynchronizedSolutionBuffer<>(
           this, joinNexus, joinNexus.getChunkCapacity());
 
     } else {
@@ -157,7 +157,7 @@ public class LocalJoinTask extends JoinTask {
        */
 
       // flushes to the syncBuffer.
-      return new UnsyncLocalOutputBuffer<IBindingSet>(
+      return new UnsyncLocalOutputBuffer<>(
           stats, joinNexus.getChunkCapacity(), syncBuffer);
     }
   }

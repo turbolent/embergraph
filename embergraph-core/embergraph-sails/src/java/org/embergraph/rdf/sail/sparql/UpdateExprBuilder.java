@@ -641,7 +641,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
     final SPARQLStarUpdateDataBlockParser parser =
         new SPARQLStarUpdateDataBlockParser(context.valueFactory);
-    final Collection<Statement> stmts = new LinkedList<Statement>();
+    final Collection<Statement> stmts = new LinkedList<>();
     final StatementCollector sc = new StatementCollector(stmts);
     parser.setRDFHandler(sc);
     parser.getParserConfig().addNonFatalError(BasicParserSettings.VERIFY_DATATYPE_VALUES);
@@ -765,7 +765,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     /*
      * Flatten the QuadData into a simple ISPO[].
      */
-    final List<ISPO> stmts = new LinkedList<ISPO>();
+    final List<ISPO> stmts = new LinkedList<>();
 
     final Iterator<StatementPatternNode> itr =
         BOpUtility.visitAll(quadData, StatementPatternNode.class);

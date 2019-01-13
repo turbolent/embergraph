@@ -1575,7 +1575,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       } else if (bufferNodes) {
         // Buffer the nodes in memory.
         nodeBuffer = null;
-        nodeList = new LinkedList<NodeMetadata>();
+        nodeList = new LinkedList<>();
       } else {
         // Buffer the nodes on a temporary file.
         nodeBuffer = new TemporaryRawStore(offsetBits);
@@ -3931,7 +3931,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     File journalFile = null;
 
     // The name(s) of the indices to be processed.
-    final List<String> names = new LinkedList<String>();
+    final List<String> names = new LinkedList<>();
 
     // The directory into which the generated index segments will be
     // written. Each index segment will be named based on the source index

@@ -90,7 +90,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     private EmbergraphBNode lastSID;
   }
 
-  private final Stack<State> stack = new Stack<State>();
+  private final Stack<State> stack = new Stack<>();
 
   private void push(final State state) {
     stack.add(state);

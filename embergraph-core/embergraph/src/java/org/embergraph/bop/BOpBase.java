@@ -128,7 +128,7 @@ public class BOpBase extends CoreBaseBOp {
     } else {
       args = Arrays.copyOf(op.args, op.args.length);
     }
-    annotations = new LinkedHashMap<String, Object>(op.annotations);
+    annotations = new LinkedHashMap<>(op.annotations);
   }
 
   /*
@@ -147,7 +147,7 @@ public class BOpBase extends CoreBaseBOp {
 
     this.annotations =
         (annotations == null
-            ? new LinkedHashMap<String, Object>(DEFAULT_INITIAL_CAPACITY)
+            ? new LinkedHashMap<>(DEFAULT_INITIAL_CAPACITY)
             : annotations);
   }
 
@@ -185,7 +185,7 @@ public class BOpBase extends CoreBaseBOp {
   /** A copy of the annotations. */
   protected final Map<String, Object> annotationsCopy() {
 
-    return new LinkedHashMap<String, Object>(annotations);
+    return new LinkedHashMap<>(annotations);
   }
 
   /*
@@ -378,7 +378,7 @@ public class BOpBase extends CoreBaseBOp {
       return a;
     }
     // allocate map.
-    final Map<String, Object> t = new LinkedHashMap<String, Object>(a.size());
+    final Map<String, Object> t = new LinkedHashMap<>(a.size());
     // copy map's entries.
     final Iterator<Map.Entry<String, Object>> itr = a.entrySet().iterator();
     while (itr.hasNext()) {

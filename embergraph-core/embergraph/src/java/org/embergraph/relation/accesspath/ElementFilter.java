@@ -51,7 +51,7 @@ public class ElementFilter<R> extends TupleFilter<R> {
 
     if (test == null) return null;
 
-    return new ElementFilter<R>(test);
+    return new ElementFilter<>(test);
   }
 
   /*

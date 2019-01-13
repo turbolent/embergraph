@@ -202,7 +202,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
     final ExecutorService executorService =
         Executors.newFixedThreadPool(nclients, DaemonThreadFactory.defaultThreadFactory());
 
-    final Collection<Callable<Long>> tasks = new HashSet<Callable<Long>>();
+    final Collection<Callable<Long>> tasks = new HashSet<>();
 
     for (int i = 0; i < ntrials; i++) {
 
@@ -607,7 +607,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
        * Set defaults for each condition.
        */
 
-      final Map<String, String> defaultProperties = new HashMap<String, String>();
+      final Map<String, String> defaultProperties = new HashMap<>();
 
       // force delete of the files on close of the journal under test.
       defaultProperties.put(Options.CREATE_TEMP_FILE, "true");
@@ -629,7 +629,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
        * Build up the conditions.
        */
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       conditions.add(new Condition(defaultProperties));
 

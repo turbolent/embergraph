@@ -193,7 +193,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     }
     */
 
-    final Set<IVariable<?>> runFirstVars = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> runFirstVars = new HashSet<>();
 
     int startIndex = 0;
     for (int i = 0; i < tailCount; i++) {
@@ -361,7 +361,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
       }
     }
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(minT1.getVars());
     vars.addAll(minT2.getVars());
     return new Join(minT1, minT2, minJoinCardinality, vars);
@@ -402,7 +402,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     }
 
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(t1.getVars());
     vars.addAll(minT2.getVars());
     return new Join(t1, minT2, minJoinCardinality, vars);
@@ -464,7 +464,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
       }
     }
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(d1.getVars());
     vars.addAll(minTail.getVars());
     return new Join(d1, minTail, minJoinCardinality, vars);
@@ -612,7 +612,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
    * @return the named variables
    */
   protected Set<String> getVars(int tail) {
-    final Set<String> vars = new HashSet<String>();
+    final Set<String> vars = new HashSet<>();
     IPredicate pred = rule.getTail(tail);
     for (int i = 0; i < pred.arity(); i++) {
       IVariableOrConstant term = pred.get(i);

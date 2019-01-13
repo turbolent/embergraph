@@ -486,6 +486,6 @@ public class NamedSolutionSetRefUtility {
     @SuppressWarnings("unchecked")
     final ICloseableIterator<IBindingSet> src = (ICloseableIterator<IBindingSet>) index.scan();
 
-    return new Chunkerator<IBindingSet>(src, chunkCapacity, IBindingSet.class);
+    return new Chunkerator<>(src, chunkCapacity, IBindingSet.class);
   }
 }

@@ -75,9 +75,9 @@ public class VerifyAggregates {
   private final IValueExpression<?>[] select;
   private final IValueExpression<?>[] groupBy;
   private final IConstraint[] having;
-  private final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
-  private final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
-  private final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+  private final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
+  private final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
+  private final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
 
   @Override
   public String toString() {

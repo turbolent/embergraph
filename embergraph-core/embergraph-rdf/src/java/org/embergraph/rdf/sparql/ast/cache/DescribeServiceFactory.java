@@ -148,7 +148,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
       if (ivs == null) {
 
         // Lazy instantiation.
-        ivs = new LinkedHashSet<IV<?, ?>>();
+        ivs = new LinkedHashSet<>();
 
         size = 0;
       }

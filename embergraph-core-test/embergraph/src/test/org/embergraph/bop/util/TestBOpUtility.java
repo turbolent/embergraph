@@ -96,9 +96,9 @@ public class TestBOpUtility extends TestCase2 {
 
     {
       final BOp op3 =
-          new BOpBase(new BOp[] {new Constant<String>("x"), Var.var("y")}, null /* annotations */);
+          new BOpBase(new BOp[] {new Constant<>("x"), Var.var("y")}, null /* annotations */);
 
-      assertSameIterator(new Object[] {new Constant<String>("x"), Var.var("y")}, op3.argIterator());
+      assertSameIterator(new Object[] {new Constant<>("x"), Var.var("y")}, op3.argIterator());
 
       assertSameIterator(new Object[] {Var.var("y")}, BOpUtility.getArgumentVariables(op3));
 
@@ -117,13 +117,13 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("x"), Var.var("y"), op2
+                new Constant<>("x"), Var.var("y"), op2
             },
             null /* annotations */);
 
     final Object[] expected =
         new Object[] {
-          root, new Constant<String>("x"), Var.var("y"), op2, Var.var("x"),
+          root, new Constant<>("x"), Var.var("y"), op2, Var.var("x"),
         };
     int i = 0;
     final Iterator<BOp> itr = BOpUtility.preOrderIterator(root);
@@ -148,13 +148,13 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("x"), Var.var("y"), op2
+                new Constant<>("x"), Var.var("y"), op2
             },
             null /* annotations */);
 
     final Object[] expected =
         new Object[] {
-          new Constant<String>("x"), Var.var("y"), Var.var("x"), op2, root,
+            new Constant<>("x"), Var.var("y"), Var.var("x"), op2, root,
         };
     int i = 0;
     final Iterator<BOp> itr = BOpUtility.postOrderIterator(root);
@@ -213,12 +213,12 @@ public class TestBOpUtility extends TestCase2 {
               // annotations
               NV.asMap(
                   new NV("foo", Var.var("x")),
-                  new NV("bar", new Constant<String>("2")),
+                  new NV("bar", new Constant<>("2")),
                   new NV("baz", "3")));
 
       final BOp[] expected =
           new BOp[] {
-            Var.var("x"), new Constant<String>("2"),
+            Var.var("x"), new Constant<>("2"),
           };
       int i = 0;
       final Iterator<BOp> itr = BOpUtility.annotationOpIterator(op);
@@ -312,14 +312,14 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("12"), Var.var("y"), op2
+                new Constant<>("12"), Var.var("y"), op2
             },
             null /* annotations */);
 
     final Object[] expected =
         new Object[] {
           root,
-          new Constant<String>("12"),
+            new Constant<>("12"),
           Var.var("y"),
           op2,
           a1,
@@ -370,7 +370,7 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("12"), Var.var("y"), op2
+                new Constant<>("12"), Var.var("y"), op2
             },
             null /* annotations */);
 
@@ -405,7 +405,7 @@ public class TestBOpUtility extends TestCase2 {
           // root annotations {}
 
           // root arguments {"12", ?y, op2}
-          new Constant<String>("12"),
+            new Constant<>("12"),
           Var.var("y"),
 
           // op2 annotations {a1, a3}
@@ -437,7 +437,7 @@ public class TestBOpUtility extends TestCase2 {
   }
 
   private Object[] unwrap(Iterator<BOp> iter) {
-    final ArrayList<BOp> array = new ArrayList<BOp>();
+    final ArrayList<BOp> array = new ArrayList<>();
     while (iter.hasNext()) {
       array.add(iter.next());
     }
@@ -463,7 +463,7 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("12"), Var.var("y"), op2
+                new Constant<>("12"), Var.var("y"), op2
             },
             null /* annotations */);
 
@@ -670,7 +670,7 @@ public class TestBOpUtility extends TestCase2 {
 
     final BOp a4 =
         new MockPipelineOp(
-            new BOp[] {new Constant<String>("a")}, NV.asMap(new NV(BOp.Annotations.BOP_ID, 1)));
+            new BOp[] {new Constant<>("a")}, NV.asMap(new NV(BOp.Annotations.BOP_ID, 1)));
 
     // non-pipeline op.
     try {
@@ -859,7 +859,7 @@ public class TestBOpUtility extends TestCase2 {
     final BOp root =
         new BOpBase(
             new BOp[] { // root args[]
-              new Constant<String>("12"), Var.var("y"), op2
+                new Constant<>("12"), Var.var("y"), op2
             },
             NV.asMap(new NV(BOp.Annotations.BOP_ID, 4)));
 

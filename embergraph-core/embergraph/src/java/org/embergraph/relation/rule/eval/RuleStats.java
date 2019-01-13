@@ -667,7 +667,7 @@ public class RuleStats {
    * When execution {@link RuleState}s are being aggregated, this will contain the individual {@link
    * RuleStats} for each execution {@link RuleState}.
    */
-  public List<RuleStats> detailStats = new Vector<RuleStats>();
+  public List<RuleStats> detailStats = new Vector<>();
 
   /*
    * Aggregates statistics.

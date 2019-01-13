@@ -68,51 +68,51 @@ public class TestIVComparator extends TestCase2 {
      */
 
     final IV<EmbergraphLiteral, Void> noninline_plain_lit1 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_plain_lit2 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_languageCode_en_lit1 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_languageCode_en_lit2 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_languageCode_de_lit1 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_languageCode_de_lit2 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_xsd_string_lit1 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
     final IV<EmbergraphLiteral, Void> noninline_xsd_string_lit2 =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+        new TermId<>(VTE.LITERAL, termId++);
 
     final IV<EmbergraphLiteral, Number> inline_xsd_byte1 =
-        new XSDNumericIV<EmbergraphLiteral>((byte) 1);
-    final IV<EmbergraphLiteral, Number> inline_xsd_int1 = new XSDNumericIV<EmbergraphLiteral>(1);
+        new XSDNumericIV<>((byte) 1);
+    final IV<EmbergraphLiteral, Number> inline_xsd_int1 = new XSDNumericIV<>(1);
 
     final IV<EmbergraphLiteral, Boolean> inline_xsd_boolean_true =
-        new XSDBooleanIV<EmbergraphLiteral>(true);
+        new XSDBooleanIV<>(true);
     final IV<EmbergraphLiteral, Boolean> inline_xsd_boolean_false =
-        new XSDBooleanIV<EmbergraphLiteral>(false);
+        new XSDBooleanIV<>(false);
 
     final IV<EmbergraphLiteral, Number> inline_xsd_dateTime1 =
-        new XSDNumericIV<EmbergraphLiteral>(1);
+        new XSDNumericIV<>(1);
 
     /*
      * URIs
      */
-    final IV<EmbergraphURI, Void> noninline_uri1 = new TermId<EmbergraphURI>(VTE.URI, termId++);
-    final IV<EmbergraphURI, Void> noninline_uri2 = new TermId<EmbergraphURI>(VTE.URI, termId++);
+    final IV<EmbergraphURI, Void> noninline_uri1 = new TermId<>(VTE.URI, termId++);
+    final IV<EmbergraphURI, Void> noninline_uri2 = new TermId<>(VTE.URI, termId++);
 
     /*
      * Blank nodes.
      */
-    final IV<EmbergraphBNode, Integer> inline_bnode1 = new NumericBNodeIV<EmbergraphBNode>(1);
-    final IV<EmbergraphBNode, Integer> inline_bnode2 = new NumericBNodeIV<EmbergraphBNode>(2);
+    final IV<EmbergraphBNode, Integer> inline_bnode1 = new NumericBNodeIV<>(1);
+    final IV<EmbergraphBNode, Integer> inline_bnode2 = new NumericBNodeIV<>(2);
 
     final SidIV<EmbergraphBNode> sid1 =
-        new SidIV<EmbergraphBNode>(new SPO(noninline_uri1, noninline_uri2, noninline_plain_lit1));
+        new SidIV<>(new SPO(noninline_uri1, noninline_uri2, noninline_plain_lit1));
 
     final SidIV<EmbergraphBNode> sid2 =
-        new SidIV<EmbergraphBNode>(new SPO(inline_bnode1, noninline_uri2, inline_xsd_dateTime1));
+        new SidIV<>(new SPO(inline_bnode1, noninline_uri2, inline_xsd_dateTime1));
 
     public V() {
 
@@ -133,7 +133,7 @@ public class TestIVComparator extends TestCase2 {
           };
 
       final DateTimeExtension<EmbergraphValue> dtExt =
-          new DateTimeExtension<EmbergraphValue>(resolver, TimeZone.getTimeZone("GMT"));
+          new DateTimeExtension<>(resolver, TimeZone.getTimeZone("GMT"));
 
       dtExt.createIV(f.createLiteral(df.newXMLGregorianCalendar("2001-10-26T21:32:52.126Z")));
       dtExt.createIV(f.createLiteral("2001-10-26", XSD.DATE));

@@ -139,7 +139,7 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
 
     this.defaultRuleTaskFactory = defaultRuleTaskFactory;
 
-    joinNexusCache = new WeakHashMap<IIndexManager, WeakReference<IJoinNexus>>();
+    joinNexusCache = new WeakHashMap<>();
   }
 
   // @todo assumes one "central" relation (e.g., SPORelation)?
@@ -156,7 +156,7 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
 
         joinNexus = newJoinNexus(indexManager);
 
-        joinNexusCache.put(indexManager, new WeakReference<IJoinNexus>(joinNexus));
+        joinNexusCache.put(indexManager, new WeakReference<>(joinNexus));
       }
 
       return joinNexus;
@@ -236,7 +236,7 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
      * Note: Must be explicitly allocated when de-serialized.
      */
 
-    joinNexusCache = new WeakHashMap<IIndexManager, WeakReference<IJoinNexus>>();
+    joinNexusCache = new WeakHashMap<>();
 
     in.defaultReadObject();
   }

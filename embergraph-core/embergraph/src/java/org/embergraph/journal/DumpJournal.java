@@ -133,7 +133,7 @@ public class DumpJournal {
 
     // Zero or more namespaces to be dumped. All are dumped if none are
     // specified.
-    final List<String> namespaces = new LinkedList<String>();
+    final List<String> namespaces = new LinkedList<>();
 
     boolean dumpHistory = false;
 
@@ -145,7 +145,7 @@ public class DumpJournal {
 
     boolean alternateRootBlock = false;
 
-    final List<Long> addrs = new LinkedList<Long>();
+    final List<Long> addrs = new LinkedList<>();
 
     for (; i < args.length; i++) {
 
@@ -619,7 +619,7 @@ public class DumpJournal {
     final Iterator<String> nitr =
         journal.indexNameScan(null /* prefix */, commitRecord.getTimestamp());
 
-    final Map<String, BaseIndexStats> pageStats = new TreeMap<String, BaseIndexStats>();
+    final Map<String, BaseIndexStats> pageStats = new TreeMap<>();
 
     while (nitr.hasNext()) {
 

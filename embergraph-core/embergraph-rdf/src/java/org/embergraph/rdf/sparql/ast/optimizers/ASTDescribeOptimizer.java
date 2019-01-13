@@ -186,7 +186,7 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
 
     queryRoot.setConstruct(construct); // add CONSTRUCT node.
 
-    final Collection<TermNode> terms = new LinkedHashSet<TermNode>();
+    final Collection<TermNode> terms = new LinkedHashSet<>();
 
     if (projection.isWildcard()) {
 

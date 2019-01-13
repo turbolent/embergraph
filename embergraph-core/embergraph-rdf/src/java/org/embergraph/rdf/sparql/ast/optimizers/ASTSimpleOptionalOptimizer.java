@@ -111,7 +111,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
      * this explicitly visits the interesting parts of the tree.
      */
 
-    final Collection<JoinGroupNode> optionalGroups = new LinkedList<JoinGroupNode>();
+    final Collection<JoinGroupNode> optionalGroups = new LinkedList<>();
 
     {
       if (queryRoot.getNamedSubqueries() != null) {
@@ -224,8 +224,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
      * requirements would be satisfied in the parent.
      */
     final StatementPatternNode sp;
-    final List<FilterNode> filters = new LinkedList<FilterNode>();
-    final List<FilterNode> mockFilters = new LinkedList<FilterNode>();
+    final List<FilterNode> filters = new LinkedList<>();
+    final List<FilterNode> mockFilters = new LinkedList<>();
     {
       StatementPatternNode tmp = null;
 
@@ -424,7 +424,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
               (Set) ((ComputedMaterializationRequirement) req).getVarsToMaterialize();
 
           final Set<IVariable<?>> incomingBound =
-              sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+              sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
           requiredVars.removeAll(incomingBound);
 

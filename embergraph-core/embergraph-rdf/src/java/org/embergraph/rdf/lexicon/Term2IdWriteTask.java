@@ -337,7 +337,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
       final EmbergraphValue term = terms[i];
 
-      a[i] = new KVO<EmbergraphValue>(keyBuilder.value2Key(term), null /* val */, term);
+      a[i] = new KVO<>(keyBuilder.value2Key(term), null /* val */, term);
     }
 
     return a;

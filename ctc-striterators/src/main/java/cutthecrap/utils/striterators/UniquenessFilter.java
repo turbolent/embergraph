@@ -29,7 +29,7 @@ public class UniquenessFilter extends Filter {
 
   private static final long serialVersionUID = 424197241022124358L;
   //    ArrayList m_members = new ArrayList();
-  private final Set<Object> m_members = new HashSet<Object>();
+  private final Set<Object> m_members = new HashSet<>();
 
   public UniquenessFilter() {}
 

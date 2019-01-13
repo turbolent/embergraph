@@ -1139,7 +1139,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
     final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("x", new URIImpl("http://www.embergraph.org/Mike"));
@@ -1209,7 +1209,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
     final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("x", new URIImpl("http://www.embergraph.org/Mike"));
@@ -1272,7 +1272,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
     final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("x", new URIImpl("http://www.embergraph.org/Mike"));
@@ -1337,7 +1337,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
     final URI serviceURI = new URIImpl("http://www.embergraph.org/mockService");
 
-    final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
+    final List<BindingSet> serviceSolutions = new LinkedList<>();
     {
       final MapBindingSet bset = new MapBindingSet();
       bset.addBinding("x", new URIImpl("http://www.embergraph.org/Mike"));

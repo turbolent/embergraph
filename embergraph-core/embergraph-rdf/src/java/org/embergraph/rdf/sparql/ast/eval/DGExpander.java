@@ -219,7 +219,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
       // }
 
-      return new ChunkedWrappedIterator<ISPO>(src);
+      return new ChunkedWrappedIterator<>(src);
     }
 
     /*
@@ -266,7 +266,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
         // this.capacity = capacity;
 
-        this.buffer = new BlockingBuffer<ISPO>(sourceAccessPath.getChunkCapacity());
+        this.buffer = new BlockingBuffer<>(sourceAccessPath.getChunkCapacity());
 
         FutureTask<Void> future = null;
         try {
@@ -289,7 +289,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
            */
 
           // Wrap task as FutureTask.
-          future = new FutureTask<Void>(newRunIteratorsTask(buffer));
+          future = new FutureTask<>(newRunIteratorsTask(buffer));
 
           // set the future on the BlockingBuffer.
           buffer.setFuture(future);
@@ -404,14 +404,14 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         /** Outer callable submits tasks for execution. */
         public Void call() throws Exception {
 
-          final List<Future<Void>> tasks = new LinkedList<Future<Void>>();
+          final List<Future<Void>> tasks = new LinkedList<>();
 
           try {
 
             // Schedule tasks.
             for (IV<?, ?> termId : graphs) {
 
-              final FutureTask<Void> ft = new FutureTask<Void>(new DrainIteratorTask(termId));
+              final FutureTask<Void> ft = new FutureTask<>(new DrainIteratorTask(termId));
 
               tasks.add(ft);
 

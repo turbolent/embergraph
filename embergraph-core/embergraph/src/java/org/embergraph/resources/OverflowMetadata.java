@@ -243,7 +243,7 @@ public class OverflowMetadata {
   }
 
   private final Map<OverflowActionEnum, AtomicInteger> actionCounts =
-      new HashMap<OverflowActionEnum, AtomicInteger>();
+      new HashMap<>();
 
   /*
    * Captures various metadata about the live journal in preparation for a synchronous overflow
@@ -284,7 +284,7 @@ public class OverflowMetadata {
       // using read-historical view of Name2Addr
       final int numIndices = (int) oldJournal.getName2Addr(lastCommitTime).rangeCount();
 
-      views = new LinkedHashMap<String, ViewMetadata>(numIndices);
+      views = new LinkedHashMap<>(numIndices);
 
       // the name2addr view as of the last commit time.
       final ITupleIterator<?> itr = oldJournal.getName2Addr(lastCommitTime).rangeIterator();
@@ -328,7 +328,7 @@ public class OverflowMetadata {
 
       this.scores = new Score[nscores];
 
-      this.scoreMap = new HashMap<String /* name */, Score>(nscores);
+      this.scoreMap = new HashMap<>(nscores);
 
       this.totalRawStore = totalCounters.computeRawWriteScore();
 

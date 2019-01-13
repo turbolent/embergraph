@@ -53,7 +53,7 @@ public class AST2SPARQLUtil {
        * Build up a reverse map from namespace to prefix.
        */
 
-      namespaces = new HashMap<String, String>();
+      namespaces = new HashMap<>();
 
       for (Map.Entry<String, String> e : prefixDecls.entrySet()) {
 

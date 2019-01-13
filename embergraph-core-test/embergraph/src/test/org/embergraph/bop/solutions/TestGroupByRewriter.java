@@ -162,7 +162,7 @@ public class TestGroupByRewriter extends TestCase2 {
     final IVariable<?> x = Var.var("x");
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     assertTrue(x == GroupByRewriter.rewrite(x, new MockVariableFactory(), actualAggExpr));
 
@@ -181,7 +181,7 @@ public class TestGroupByRewriter extends TestCase2 {
     final IConstant<?> x = new Constant(12);
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     assertTrue(x == GroupByRewriter.rewrite(x, new MockVariableFactory(), actualAggExpr));
 
@@ -225,7 +225,7 @@ public class TestGroupByRewriter extends TestCase2 {
     final IValueExpression<?> expectedExpr = new Bind(y, _0);
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> expectedAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
     expectedAggExpr.put(_sumX, _0);
 
     /*
@@ -233,7 +233,7 @@ public class TestGroupByRewriter extends TestCase2 {
      */
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     final IValueExpression<?> actualExpr =
         GroupByRewriter.rewrite(sumX, new MockVariableFactory(), actualAggExpr);
@@ -280,7 +280,7 @@ public class TestGroupByRewriter extends TestCase2 {
             new CompareBOp(_0, new Constant<IV>(new XSDNumericIV(10)), CompareOp.GT));
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> expectedAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
     expectedAggExpr.put(_sumX, _0);
 
     /*
@@ -288,7 +288,7 @@ public class TestGroupByRewriter extends TestCase2 {
      */
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     final IConstraint actualExpr =
         GroupByRewriter.rewrite(constraint, new MockVariableFactory(), actualAggExpr);
@@ -332,7 +332,7 @@ public class TestGroupByRewriter extends TestCase2 {
     final IValueExpression<?> expectedExpr2 = new Bind(z, _0);
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> expectedAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
     expectedAggExpr.put(_sumX, _0);
 
     /*
@@ -340,7 +340,7 @@ public class TestGroupByRewriter extends TestCase2 {
      */
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     final IValueExpression<?> actualExpr1 =
         GroupByRewriter.rewrite(sumX1, new MockVariableFactory(), actualAggExpr);
@@ -394,7 +394,7 @@ public class TestGroupByRewriter extends TestCase2 {
             new MathBOp(new Constant<IV>(new XSDNumericIV(1)), _0, MathBOp.MathOp.PLUS, globals));
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> expectedAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
     expectedAggExpr.put(_sumX, _0);
 
     /*
@@ -402,7 +402,7 @@ public class TestGroupByRewriter extends TestCase2 {
      */
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     final IValueExpression<?> actualExpr =
         GroupByRewriter.rewrite(expr, new MockVariableFactory(), actualAggExpr);
@@ -449,7 +449,7 @@ public class TestGroupByRewriter extends TestCase2 {
     final IValueExpression<IV> expectedExpr = new Bind(y, _1);
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> expectedAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
     expectedAggExpr.put(_minX, _0);
     expectedAggExpr.put(_sumX, _1);
 
@@ -458,7 +458,7 @@ public class TestGroupByRewriter extends TestCase2 {
      */
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> actualAggExpr =
-        new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     final IValueExpression<?> actualExpr =
         GroupByRewriter.rewrite(sumX, new MockVariableFactory(), actualAggExpr);

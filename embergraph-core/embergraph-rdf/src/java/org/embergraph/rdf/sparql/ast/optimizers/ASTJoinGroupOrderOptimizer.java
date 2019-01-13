@@ -79,7 +79,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     // variables incoming externally (i.e. those variables definitely bound
     // when evaluating this join group)
     final Set<IVariable<?>> externallyIncoming =
-        sa.getDefinitelyIncomingBindings(joinGroup, new HashSet<IVariable<?>>());
+        sa.getDefinitelyIncomingBindings(joinGroup, new HashSet<>());
 
     // easy-access information to FILTER [NOT] EXISTS constructs in this group
     final ASTJoinGroupFilterExistsInfo fExInfo = new ASTJoinGroupFilterExistsInfo(joinGroup);
@@ -160,10 +160,10 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
      * evaluating a partition. We maintain this set for fast lookup.
      */
     final List<Set<IVariable<?>>> definitelyProducedUpToPartition =
-        new ArrayList<Set<IVariable<?>>>(partitionList.size());
+        new ArrayList<>(partitionList.size());
 
     final Set<IVariable<?>> producedUpToPartition =
-        new HashSet<IVariable<?>>(externallyKnownProduced);
+        new HashSet<>(externallyKnownProduced);
     for (int i = 0; i < partitionList.size(); i++) {
 
       // we start out with the second partition, so this will succeed
@@ -171,7 +171,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
         producedUpToPartition.addAll(partitionList.get(i - 1).getDefinitelyProduced());
       }
 
-      definitelyProducedUpToPartition.add(new HashSet<IVariable<?>>(producedUpToPartition));
+      definitelyProducedUpToPartition.add(new HashSet<>(producedUpToPartition));
     }
 
     /*
@@ -184,7 +184,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
       final ASTJoinGroupPartition partition = partitionList.get(i);
 
-      final List<IGroupMemberNode> unmovableNodes = new ArrayList<IGroupMemberNode>();
+      final List<IGroupMemberNode> unmovableNodes = new ArrayList<>();
       for (IGroupMemberNode candidate : partition.nonOptionalNonMinusNodes) {
 
         // find the firstmost partition in which the node can be moved
@@ -200,10 +200,10 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
            */
           final Set<IVariable<?>> conflictingVars;
           if (candidatePartition.optionalOrMinus == null) {
-            conflictingVars = new HashSet<IVariable<?>>();
+            conflictingVars = new HashSet<>();
           } else {
             conflictingVars =
-                new HashSet<IVariable<?>>(
+                new HashSet<>(
                     bindingInfoMap.get(candidatePartition.optionalOrMinus).getMaybeProduced());
           }
 
@@ -282,7 +282,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
     final List<ASTJoinGroupPartition> partitionList = partitions.getPartitionList();
 
-    final Set<IVariable<?>> knownBoundFromPrevPartitions = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> knownBoundFromPrevPartitions = new HashSet<>();
 
     for (ASTJoinGroupPartition partition : partitionList) {
       optimizeWithinPartition(
@@ -356,7 +356,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
             // get the variables that are required bound in the node ...
             final Set<IVariable<?>> reqBoundInNode =
-                new HashSet<IVariable<?>>(bindingInfoMap.get(node).getRequiredBound());
+                new HashSet<>(bindingInfoMap.get(node).getRequiredBound());
             // ... and substract those that maybe prodcued inside
             reqBoundInNode.removeAll(bindingInfoMap.get(node).getMaybeProduced());
 
@@ -372,7 +372,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
      * In a first step, we remove service nodes, assignment nodes, and bindings clauses from the
      * partition. They will be handled in a special way.
      */
-    final List<IGroupMemberNode> toRemove = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> toRemove = new ArrayList<>();
     toRemove.addAll(classifier.get(ServiceNode.class));
     toRemove.addAll(classifier.get(AssignmentNode.class));
     toRemove.addAll(classifier.get(BindingsClause.class));
@@ -393,7 +393,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     }
 
     // the non-VALUE nodes that will be placed (some lines below)
-    final List<IGroupMemberNode> nonValueNodesToBePlaced = new LinkedList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nonValueNodesToBePlaced = new LinkedList<>();
     nonValueNodesToBePlaced.addAll(classifier.get(AssignmentNode.class));
     nonValueNodesToBePlaced.addAll(classifier.get(ServiceNode.class));
     nonValueNodesToBePlaced.addAll(classifier.get(IGroupMemberNode.class));
@@ -416,7 +416,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       final BindingsClause bc = (BindingsClause) node;
       final Set<IVariable<?>> declaredVars = bc.getDeclaredVariables();
 
-      final Set<IVariable<?>> intersectionWithNonValueNodesToBePlaced = new HashSet<IVariable<?>>();
+      final Set<IVariable<?>> intersectionWithNonValueNodesToBePlaced = new HashSet<>();
 
       // start out with all non value nodes to be placed and intersect
       for (final IGroupMemberNode cur : nonValueNodesToBePlaced) {
@@ -442,7 +442,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
      * able to place node 1 after the first bind node.
      */
     final Set<IVariable<?>> knownBoundSomewhere =
-        new HashSet<IVariable<?>>(partition.definitelyProduced);
+        new HashSet<>(partition.definitelyProduced);
 
     // ... order the bind and SERVICE nodes according to dependencies,
     // essentially constructing a dependency graph over these nodes
@@ -494,12 +494,12 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       final GroupNodeVarBindingInfoMap bindingInfoMap,
       final Set<IVariable<?>> knownBoundSomewhere) {
 
-    final List<IGroupMemberNode> ordered = new ArrayList<IGroupMemberNode>(nodes.size());
+    final List<IGroupMemberNode> ordered = new ArrayList<>(nodes.size());
 
     /** Initially, all nodes must be placed */
-    final LinkedList<IGroupMemberNode> toBePlaced = new LinkedList<IGroupMemberNode>(nodes);
+    final LinkedList<IGroupMemberNode> toBePlaced = new LinkedList<>(nodes);
 
-    final Set<IVariable<?>> knownBound = new HashSet<IVariable<?>>(knownBoundSomewhere);
+    final Set<IVariable<?>> knownBound = new HashSet<>(knownBoundSomewhere);
     while (!toBePlaced.isEmpty()) {
 
       for (int i = 0; i < toBePlaced.size(); i++) {

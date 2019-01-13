@@ -54,7 +54,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
   private final long token;
 
   private final List<QuorumEventInvariant> m_triggers =
-      new CopyOnWriteArrayList<QuorumEventInvariant>();
+      new CopyOnWriteArrayList<>();
 
   public FutureTaskInvariantMon(
       final Callable<T> callable, final Quorum<HAGlue, QuorumService<HAGlue>> quorum) {

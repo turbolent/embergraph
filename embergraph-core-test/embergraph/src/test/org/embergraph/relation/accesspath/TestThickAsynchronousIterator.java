@@ -47,7 +47,7 @@ public class TestThickAsynchronousIterator extends TestCase2 {
 
     final String[] expected = new String[] {};
 
-    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }
@@ -56,7 +56,7 @@ public class TestThickAsynchronousIterator extends TestCase2 {
 
     final String[] expected = new String[] {"a"};
 
-    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }
@@ -65,7 +65,7 @@ public class TestThickAsynchronousIterator extends TestCase2 {
 
     final String[] expected = new String[] {"a", "b", "c"};
 
-    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<String>(expected);
+    final IAsynchronousIterator<String> itr = new ThickAsynchronousIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }

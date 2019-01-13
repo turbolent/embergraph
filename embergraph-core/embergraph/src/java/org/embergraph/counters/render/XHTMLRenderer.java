@@ -1347,7 +1347,7 @@ public class XHTMLRenderer implements IRenderer {
      * Map from the key for the event group to the basename of the variables
      * for that event group.
      */
-    final Map<String, String> seriesByGroup = new HashMap<String, String>();
+    final Map<String, String> seriesByGroup = new HashMap<>();
 
     /*
      * Map from the key for the event group to the StringBuilder whose
@@ -1356,14 +1356,14 @@ public class XHTMLRenderer implements IRenderer {
      * in this manner so that they will be assigned the same color by the
      * legend.
      */
-    final Map<String, StringBuilder> eventsByHost = new HashMap<String, StringBuilder>();
+    final Map<String, StringBuilder> eventsByHost = new HashMap<>();
 
     /*
      * Map from the key for the event group to the StringBuilder whose
      * contents are rendered into the page and provide the tooltip for each
      * event in that event group.
      */
-    final Map<String, StringBuilder> tooltipsByHost = new HashMap<String, StringBuilder>();
+    final Map<String, StringBuilder> tooltipsByHost = new HashMap<>();
 
     int naccepted = 0;
     int nvisited = 0;

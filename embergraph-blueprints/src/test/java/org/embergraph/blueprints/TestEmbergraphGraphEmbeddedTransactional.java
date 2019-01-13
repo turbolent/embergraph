@@ -178,7 +178,7 @@ public class TestEmbergraphGraphEmbeddedTransactional extends AbstractTestEmberg
     }
 
     private Map<String, EmbergraphGraphEmbedded> testGraphs =
-        new LinkedHashMap<String, EmbergraphGraphEmbedded>();
+        new LinkedHashMap<>();
 
     @Override
     public Graph generateGraph(final String key) {

@@ -54,7 +54,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
    * <p>Note: Since the collection is not thread-safe, synchronization is required when adding to
    * the collection and when visiting the elements of the collection.
    */
-  private final LinkedList<T> list = new LinkedList<T>();
+  private final LinkedList<T> list = new LinkedList<>();
 
   protected ThreadLocalBufferFactory() {
 
@@ -64,7 +64,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
   protected ThreadLocalBufferFactory(
       final int initialCapacity, final float loadFactor, final int concurrencyLevel) {
 
-    map = new ConcurrentHashMap<Thread, T>(initialCapacity, loadFactor, concurrencyLevel);
+    map = new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
   }
 
   /** Return the #of thread-local objects. */

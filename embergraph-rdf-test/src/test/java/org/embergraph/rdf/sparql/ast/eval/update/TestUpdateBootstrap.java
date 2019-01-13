@@ -211,7 +211,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
     /*
      * Populate the source solutions with the statements to be asserted.
      */
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final Var<?> s = Var.var("s"), p = Var.var("p"), o = Var.var("o"), c = Var.var("c");
 
@@ -363,7 +363,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
      * INSERT DATA.
      */
     {
-      final Map<String, Object> anns = new HashMap<String, Object>();
+      final Map<String, Object> anns = new HashMap<>();
 
       anns.put(BOp.Annotations.BOP_ID, parseId);
 

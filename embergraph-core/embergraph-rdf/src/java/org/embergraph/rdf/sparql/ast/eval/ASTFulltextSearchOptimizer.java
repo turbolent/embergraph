@@ -50,7 +50,7 @@ public class ASTFulltextSearchOptimizer extends ASTSearchOptimizerBase {
   public static final Set<URI> searchUris;
 
   static {
-    final Set<URI> set = new LinkedHashSet<URI>();
+    final Set<URI> set = new LinkedHashSet<>();
 
     set.add(FTS.SEARCH);
     set.add(FTS.ENDPOINT);

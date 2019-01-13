@@ -249,7 +249,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
                  * elapsed execution time.
                  */
                 final TreeMap<Long /* elapsed */, IndexSegmentBuilder> map =
-                    new TreeMap<Long, IndexSegmentBuilder>(new ReverseLongComparator());
+                    new TreeMap<>(new ReverseLongComparator());
                 final long now = System.currentTimeMillis();
                 for (IndexSegmentBuilder task : buildTasks.values()) {
                   final long startTime = task.getStartTime();
@@ -460,7 +460,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
 
       tmp.addCounter(
           IStoreManagerCounters.StoreCacheCapacity,
-          new OneShotInstrument<Integer>(storeCache.capacity()));
+          new OneShotInstrument<>(storeCache.capacity()));
 
       tmp.addCounter(
           IStoreManagerCounters.StoreCacheSize,

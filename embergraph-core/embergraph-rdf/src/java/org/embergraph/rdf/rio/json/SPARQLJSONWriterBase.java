@@ -365,7 +365,7 @@ abstract class SPARQLJSONWriterBase extends QueryResultWriterBase implements Que
 
   @Override
   public final Collection<RioSetting<?>> getSupportedSettings() {
-    Set<RioSetting<?>> result = new HashSet<RioSetting<?>>(super.getSupportedSettings());
+    Set<RioSetting<?>> result = new HashSet<>(super.getSupportedSettings());
 
     result.add(BasicQueryWriterSettings.JSONP_CALLBACK);
     result.add(BasicWriterSettings.PRETTY_PRINT);

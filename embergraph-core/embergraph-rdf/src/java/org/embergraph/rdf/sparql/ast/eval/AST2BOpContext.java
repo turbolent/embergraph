@@ -333,7 +333,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    * query controller node.
    */
   private final AtomicReference<Map<Object, Object>> queryAttributes =
-      new AtomicReference<Map<Object, Object>>();
+      new AtomicReference<>();
 
   public void addQueryAttribute(final Object key, final Object val) {
 
@@ -341,7 +341,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
 
       // Lazy initialization.
       queryAttributes.compareAndSet(
-          null /* expect */, new LinkedHashMap<Object, Object>() /* update */);
+          null /* expect */, new LinkedHashMap<>() /* update */);
     }
 
     queryAttributes.get().put(key, val);
@@ -472,7 +472,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
 
     this.context = new BOpContextBase(queryEngine);
 
-    this.globallyScopedVariables = new HashSet<IVariable<?>>();
+    this.globallyScopedVariables = new HashSet<>();
 
     // try to set this.gpuEvaluation
     this.gpuEvaluation = initGPUEvaluation();
@@ -822,7 +822,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
   public void setGloballyScopedVariables(final Set<IVariable<?>> globallyScopedVariables) {
 
     if (globallyScopedVariables == null) {
-      this.globallyScopedVariables = new HashSet<IVariable<?>>();
+      this.globallyScopedVariables = new HashSet<>();
     }
 
     this.globallyScopedVariables = globallyScopedVariables;

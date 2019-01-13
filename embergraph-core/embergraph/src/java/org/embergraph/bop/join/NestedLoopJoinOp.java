@@ -131,7 +131,7 @@ public class NestedLoopJoinOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   /** Copy the source to the sink. */
@@ -160,7 +160,7 @@ public class NestedLoopJoinOp extends PipelineOp {
       final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       final IVariable<?>[] selectVars = op.getSelect();
 

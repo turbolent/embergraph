@@ -152,6 +152,6 @@ public class ArbitraryLengthPathOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ArbitraryLengthPathTask(this, context));
+    return new FutureTask<>(new ArbitraryLengthPathTask(this, context));
   }
 }

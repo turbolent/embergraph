@@ -100,7 +100,7 @@ public abstract class GASEngine implements IGASEngine {
             : Executors.newFixedThreadPool(
                 nthreads, new DaemonThreadFactory(GASEngine.class.getSimpleName()));
 
-    this.schedulerClassRef = new AtomicReference<Class<IGASSchedulerImpl>>();
+    this.schedulerClassRef = new AtomicReference<>();
 
     this.schedulerClassRef.set((Class) CHMScheduler.class);
   }
@@ -220,7 +220,7 @@ public abstract class GASEngine implements IGASEngine {
        * If the frontier is known to be compact, then this map is not
        * initialized and is not used.
        */
-      this.scheduled = f.isCompact() ? null : new HashSet<Value>(f.size());
+      this.scheduled = f.isCompact() ? null : new HashSet<>(f.size());
     }
 
     @Override
@@ -239,7 +239,7 @@ public abstract class GASEngine implements IGASEngine {
        * require either non-blocking operations in a single thread or two
        * threads.
        */
-      final List<FutureTask<Long>> tasks = new LinkedList<FutureTask<Long>>();
+      final List<FutureTask<Long>> tasks = new LinkedList<>();
 
       long nedges = 0L;
 
@@ -267,7 +267,7 @@ public abstract class GASEngine implements IGASEngine {
           }
 
           // Future will compute scatter for vertex.
-          final FutureTask<Long> ft = new FutureTask<Long>(taskFactory.newVertexTask(u));
+          final FutureTask<Long> ft = new FutureTask<>(taskFactory.newVertexTask(u));
 
           // Add to set of created futures.
           tasks.add(ft);
@@ -359,7 +359,7 @@ public abstract class GASEngine implements IGASEngine {
 
     final IGASState<VS, ES, ST> gasState = newGASState(graphAccessor, gasProgram);
 
-    return new GASContext<VS, ES, ST>(this /* GASEngine */, graphAccessor, gasState, gasProgram);
+    return new GASContext<>(this /* GASEngine */, graphAccessor, gasState, gasProgram);
   }
 
   public <VS, ES, ST> IGASState<VS, ES, ST> newGASState(
@@ -369,6 +369,6 @@ public abstract class GASEngine implements IGASEngine {
 
     final IGASSchedulerImpl gasScheduler = newScheduler();
 
-    return new GASState<VS, ES, ST>(this, graphAccessor, frontier, gasScheduler, gasProgram);
+    return new GASState<>(this, graphAccessor, frontier, gasScheduler, gasProgram);
   }
 } // GASEngine

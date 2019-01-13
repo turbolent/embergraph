@@ -98,7 +98,7 @@ public class NicUtil {
    * @throws SocketException if there is an error in the underlying I/O subsystem and/or protocol.
    */
   public static Map<InetAddress, String> getInetAddressMap() throws SocketException {
-    Map<InetAddress, String> retMap = new HashMap<InetAddress, String>();
+    Map<InetAddress, String> retMap = new HashMap<>();
 
     // get all nics on the current node
     Enumeration<NetworkInterface> nics = NetworkInterface.getNetworkInterfaces();
@@ -664,8 +664,8 @@ public class NicUtil {
     }
   }
 
-  private static AddrCache<String> loopbackCache = new AddrCache<String>();
-  private static AddrCache<String> nonLoopbackCache = new AddrCache<String>();
+  private static AddrCache<String> loopbackCache = new AddrCache<>();
+  private static AddrCache<String> nonLoopbackCache = new AddrCache<>();
 
   public static String getDefaultIpv4Address() throws IOException {
     return getDefaultIpv4Address(false); // localhost NOT ok

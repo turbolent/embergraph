@@ -128,7 +128,7 @@ public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
           final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
           TupleQueryResult result = tupleQuery.evaluate();
 
-          Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          Collection<BindingSet> solution = new LinkedList<>();
           solution.add(createBindingSet(new BindingImpl("a", a)));
 
           compare(result, solution);

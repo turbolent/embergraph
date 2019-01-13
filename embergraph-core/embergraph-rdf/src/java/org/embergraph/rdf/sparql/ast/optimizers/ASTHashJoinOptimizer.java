@@ -187,7 +187,7 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
           final Set<IVariable<?>> set1 = a[i].joinvars;
           final Set<IVariable<?>> set2 = a[j].joinvars;
 
-          final Set<IVariable<?>> joinvars = new LinkedHashSet<IVariable<?>>();
+          final Set<IVariable<?>> joinvars = new LinkedHashSet<>();
           joinvars.addAll(set1);
           joinvars.addAll(set2);
 

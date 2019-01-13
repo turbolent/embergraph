@@ -222,7 +222,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
       private boolean expectedDirty = false;
     }
 
-    private Vector<Event<K, T>> events = new Vector<Event<K, T>>();
+    private Vector<Event<K, T>> events = new Vector<>();
 
     /*
      * Verify that event data is consistent with our expectations.
@@ -271,7 +271,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     public void addExpectedEvent(K oid, T obj, boolean dirty) {
       assert oid != null;
       assert obj != null;
-      Event<K, T> e = new Event<K, T>();
+      Event<K, T> e = new Event<>();
       e.expectedOid = oid;
       e.expectedObj = obj;
       e.expectedDirty = dirty;
@@ -365,7 +365,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
 
     String[] obj = new String[] {"o1", "o2", "o3", "o4", "o5"};
 
-    MyCacheListener<Long, String> listener = new MyCacheListener<Long, String>();
+    MyCacheListener<Long, String> listener = new MyCacheListener<>();
     listener.denyEvents(); // listener will deny events.
     cache.setListener(listener); // set listener on cache.
 
@@ -388,7 +388,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameIterator("ordering", new Object[] {obj[0]}, cache.iterator());
     assertSameEntryOrdering(
         "ordering",
-        new ICacheEntry[] {new CacheEntry<Long, String>(oid[0], obj[0], true)},
+        new ICacheEntry[] {new CacheEntry<>(oid[0], obj[0], true)},
         cache.entryIterator());
 
     cache.put(oid[1], obj[1], true);
@@ -397,8 +397,8 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[1], obj[1], true),
         },
         cache.entryIterator());
 
@@ -408,9 +408,9 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[2], obj[2], true)
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[2], obj[2], true)
         },
         cache.entryIterator());
 
@@ -421,10 +421,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], true)
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[3], obj[3], true)
         },
         cache.entryIterator());
 
@@ -442,10 +442,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], true),
-          new CacheEntry<Long, String>(oid[4], obj[4], true)
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[3], obj[3], true),
+            new CacheEntry<>(oid[4], obj[4], true)
         },
         cache.entryIterator());
 
@@ -459,10 +459,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], true),
-          new CacheEntry<Long, String>(oid[4], obj[4], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[3], obj[3], true),
+            new CacheEntry<>(oid[4], obj[4], true),
+            new CacheEntry<>(oid[0], obj[0], true),
         },
         cache.entryIterator());
 
@@ -475,10 +475,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[4], obj[4], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[4], obj[4], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[3], obj[3], true),
         },
         cache.entryIterator());
 
@@ -492,10 +492,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[4], obj[4], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[4], obj[4], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[3], obj[3], false),
         },
         cache.entryIterator());
 
@@ -508,10 +508,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[4], obj[4], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[4], obj[4], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[2], obj[2], true),
         },
         cache.entryIterator());
 
@@ -525,10 +525,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[1], obj[1], true),
         },
         cache.entryIterator());
 
@@ -541,9 +541,9 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], true),
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[1], obj[1], true),
         },
         cache.entryIterator());
 
@@ -556,8 +556,8 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[1], obj[1], true),
         },
         cache.entryIterator());
 
@@ -570,9 +570,9 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], false),
         },
         cache.entryIterator());
 
@@ -585,10 +585,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[2], obj[2], true),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[2], obj[2], true),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[3], obj[3], false),
         },
         cache.entryIterator());
 
@@ -601,10 +601,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
-          new CacheEntry<Long, String>(oid[4], obj[4], false),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[4], obj[4], false),
         },
         cache.entryIterator());
 
@@ -616,10 +616,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
-          new CacheEntry<Long, String>(oid[4], obj[4], false),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[4], obj[4], false),
         },
         cache.entryIterator());
 
@@ -631,10 +631,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
-          new CacheEntry<Long, String>(oid[4], obj[4], false),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[4], obj[4], false),
+            new CacheEntry<>(oid[1], obj[1], true),
         },
         cache.entryIterator());
 
@@ -646,10 +646,10 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     assertSameEntryOrdering(
         "ordering",
         new ICacheEntry[] {
-          new CacheEntry<Long, String>(oid[0], obj[0], false),
-          new CacheEntry<Long, String>(oid[4], obj[4], false),
-          new CacheEntry<Long, String>(oid[1], obj[1], true),
-          new CacheEntry<Long, String>(oid[3], obj[3], false),
+            new CacheEntry<>(oid[0], obj[0], false),
+            new CacheEntry<>(oid[4], obj[4], false),
+            new CacheEntry<>(oid[1], obj[1], true),
+            new CacheEntry<>(oid[3], obj[3], false),
         },
         cache.entryIterator());
 

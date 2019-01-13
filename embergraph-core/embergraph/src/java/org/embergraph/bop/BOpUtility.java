@@ -315,7 +315,7 @@ public class BOpUtility {
         });
 
     // visit the node.
-    itr.append(new SingleValueIterator<BOp>(op));
+    itr.append(new SingleValueIterator<>(op));
 
     return itr;
 
@@ -401,7 +401,7 @@ public class BOpUtility {
   //    }
   public static <T> List<T> toList(final Iterator<T> it) {
 
-    final List<T> c = new LinkedList<T>();
+    final List<T> c = new LinkedList<>();
 
     while (it.hasNext()) {
 
@@ -438,7 +438,7 @@ public class BOpUtility {
    */
   public static <C> List<C> toList(final BOp op, final Class<C> clas) {
 
-    final List<C> list = new LinkedList<C>();
+    final List<C> list = new LinkedList<>();
 
     final Iterator<C> it = visitAll(op, clas);
 
@@ -582,7 +582,7 @@ public class BOpUtility {
    */
   public static Map<Integer, BOp> getIndex(final BOp op) {
     if (op == null) throw new IllegalArgumentException();
-    final LinkedHashMap<Integer, BOp> map = new LinkedHashMap<Integer, BOp>();
+    final LinkedHashMap<Integer, BOp> map = new LinkedHashMap<>();
     //        final LinkedHashSet<BOp> distinct = new LinkedHashSet<BOp>();
     final Iterator<BOp> itr = preOrderIterator(op); // WithAnnotations(op);
     while (itr.hasNext()) {
@@ -793,7 +793,7 @@ public class BOpUtility {
    */
   public static Integer[] getEvaluationOrder(final BOp op) {
 
-    final List<Integer> order = new LinkedList<Integer>();
+    final List<Integer> order = new LinkedList<>();
 
     getEvaluationOrder(op, order, 0 /*depth*/);
 
@@ -855,7 +855,7 @@ public class BOpUtility {
       return firstChunk;
     }
 
-    final List<IBindingSet[]> list = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> list = new LinkedList<>();
 
     list.add(firstChunk);
 
@@ -936,8 +936,8 @@ public class BOpUtility {
    */
   public static ICloseableIterator<IBindingSet[]> asIterator(final IBindingSet[] bindingSets) {
 
-    return new CloseableIteratorWrapper<IBindingSet[]>(
-        new SingleValueIterator<IBindingSet[]>(bindingSets));
+    return new CloseableIteratorWrapper<>(
+        new SingleValueIterator<>(bindingSets));
   }
 
   /*
@@ -1339,7 +1339,7 @@ public class BOpUtility {
         if (p1vars == null) {
 
           // lazy initialization.
-          p1vars = new LinkedHashSet<IVariable<?>>();
+          p1vars = new LinkedHashSet<>();
         }
 
         p1vars.add(itr.next());
@@ -1368,7 +1368,7 @@ public class BOpUtility {
           if (sharedVars == null) {
 
             // lazy initialization.
-            sharedVars = new LinkedHashSet<IVariable<?>>();
+            sharedVars = new LinkedHashSet<>();
           }
 
           sharedVars.add(avar);
@@ -1418,7 +1418,7 @@ public class BOpUtility {
      * Annotations.
      */
 
-    final LinkedHashMap<String, Object> anns = new LinkedHashMap<String, Object>();
+    final LinkedHashMap<String, Object> anns = new LinkedHashMap<>();
 
     for (Map.Entry<String, Object> e : op.annotations().entrySet()) {
 
@@ -1504,7 +1504,7 @@ public class BOpUtility {
      * Annotations.
      */
 
-    final LinkedHashMap<String, Object> anns = new LinkedHashMap<String, Object>();
+    final LinkedHashMap<String, Object> anns = new LinkedHashMap<>();
 
     for (Map.Entry<String, Object> e : op.annotations().entrySet()) {
 
@@ -1566,7 +1566,7 @@ public class BOpUtility {
    */
   public static IConstraint[] concat(final IConstraint[] a, final IConstraint[] b) {
 
-    final List<IConstraint> list = new LinkedList<IConstraint>();
+    final List<IConstraint> list = new LinkedList<>();
 
     if (a != null) {
       for (IConstraint c : a) {

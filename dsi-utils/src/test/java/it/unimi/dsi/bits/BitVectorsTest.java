@@ -59,7 +59,7 @@ public class BitVectorsTest extends TestCase {
         };
 
     OfflineIterable<BitVector, LongArrayBitVector> iterable =
-        new OfflineIterable<BitVector, LongArrayBitVector>(
+        new OfflineIterable<>(
             BitVectors.OFFLINE_SERIALIZER, LongArrayBitVector.getInstance());
     iterable.addAll(Arrays.asList(a));
 

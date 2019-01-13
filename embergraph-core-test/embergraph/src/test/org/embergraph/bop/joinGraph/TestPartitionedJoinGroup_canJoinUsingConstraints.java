@@ -188,7 +188,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
           new IPredicate[] {p2}, // path
           p1, // vertex
           new IConstraint[] {
-            Constraint.wrap(new NEConstant(x, new Constant<Integer>(12))), null
+            Constraint.wrap(new NEConstant(x, new Constant<>(12))), null
           } // constraints
           );
       fail("Expecting: " + IllegalArgumentException.class);
@@ -372,7 +372,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
   private final IPredicate<?> p3 =
       new Predicate(
           new BOp[] {
-            new Constant<String>(productInstance),
+              new Constant<>(productInstance),
             new Constant(productPropertyNumeric1),
             origProperty1
           },
@@ -403,7 +403,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
   /** FILTER (productInstance != ?product) */
   final IConstraint c0 =
-      Constraint.wrap(new NEConstant(product, new Constant<String>(productInstance)));
+      Constraint.wrap(new NEConstant(product, new Constant<>(productInstance)));
 
   /*
    * FILTER (?simProperty1 < (?origProperty1 + 120) && ?simProperty1 > (?origProperty1 - 120))
@@ -417,12 +417,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
           new AND(
               new MyCompareOp(
                   new BOp[] {
-                    simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), PLUS)
+                    simProperty1, new MathBOp(origProperty1, new Constant<>(120), PLUS)
                   },
                   NV.asMap(new NV(OP, LT))),
               new MyCompareOp(
                   new BOp[] {
-                    simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), MINUS)
+                    simProperty1, new MathBOp(origProperty1, new Constant<>(120), MINUS)
                   },
                   NV.asMap(new NV(OP, GT)))));
 
@@ -438,12 +438,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
           new AND(
               new MyCompareOp(
                   new BOp[] {
-                    simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), PLUS)
+                    simProperty2, new MathBOp(origProperty2, new Constant<>(170), PLUS)
                   },
                   NV.asMap(new NV(OP, LT))),
               new MyCompareOp(
                   new BOp[] {
-                    simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), MINUS)
+                    simProperty2, new MathBOp(origProperty2, new Constant<>(170), MINUS)
                   },
                   NV.asMap(new NV(OP, GT)))));
 
@@ -500,7 +500,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     final IPredicate<?> vertex;
     {
       // collection of predicates used so far by the path.
-      final Set<Integer> used = new LinkedHashSet<Integer>();
+      final Set<Integer> used = new LinkedHashSet<>();
       for (int i = 0; i < path.length; i++) {
         // Locate an unused predicate.
         int index;
@@ -677,7 +677,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
   private final Set<IConstraint> asSet(IConstraint[] a) {
 
-    return new LinkedHashSet<IConstraint>(Arrays.asList(a));
+    return new LinkedHashSet<>(Arrays.asList(a));
   }
 
   /** no constraints. */

@@ -452,7 +452,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     final Stats stats = new Stats();
 
     // Setup readers.
-    final List<Callable<Void>> readerTasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> readerTasks = new LinkedList<>();
     {
 
       /*
@@ -635,17 +635,17 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
 
     // Queue used to pass batches from readers to writer.
-    final LinkedBlockingQueue<Batch> queue = new LinkedBlockingQueue<Batch>(effectiveQueueCapacity);
+    final LinkedBlockingQueue<Batch> queue = new LinkedBlockingQueue<>(effectiveQueueCapacity);
 
     // Track statistics.
     final Stats stats = new Stats();
 
     // Setup writer.
     final FutureTask<T> writerFuture =
-        new FutureTask<T>(new WriterTask(lock, queue, ndx, resultHandler, stats));
+        new FutureTask<>(new WriterTask(lock, queue, ndx, resultHandler, stats));
 
     // Setup readers.
-    final List<Callable<Void>> readerTasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> readerTasks = new LinkedList<>();
     {
 
       /*

@@ -224,7 +224,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
   public static String toString(final Map<Long, UUID[]> votes) {
 
     // put things into a ordered Collection. toString() for the Collection is nice.
-    final Map<Long, LinkedHashSet<UUID>> m = new LinkedHashMap<Long, LinkedHashSet<UUID>>();
+    final Map<Long, LinkedHashSet<UUID>> m = new LinkedHashMap<>();
 
     for (Map.Entry<Long, UUID[]> e : votes.entrySet()) {
 
@@ -236,7 +236,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
 
       if (votesForCommitTime == null) {
 
-        votesForCommitTime = new LinkedHashSet<UUID>();
+        votesForCommitTime = new LinkedHashSet<>();
 
         m.put(commitTime, votesForCommitTime);
       }

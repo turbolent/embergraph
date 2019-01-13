@@ -199,7 +199,7 @@ public class FileLinesCollection extends AbstractCollection<MutableString> {
    * @return all lines of the file wrapped by this file-lines collection.
    */
   public ObjectList<MutableString> allLines() {
-    final ObjectArrayList<MutableString> result = new ObjectArrayList<MutableString>();
+    final ObjectArrayList<MutableString> result = new ObjectArrayList<>();
     for (Iterator<MutableString> i = iterator(); i.hasNext(); ) result.add(i.next().copy());
     return result;
   }

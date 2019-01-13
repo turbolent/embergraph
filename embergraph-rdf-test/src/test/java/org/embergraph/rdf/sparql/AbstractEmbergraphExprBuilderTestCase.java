@@ -217,7 +217,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
 
     final QueryRoot ast = astContainer.getOriginalAST();
 
-    final Collection<ValueExpressionNode> nodes = new LinkedList<ValueExpressionNode>();
+    final Collection<ValueExpressionNode> nodes = new LinkedList<>();
 
     final Iterator<ValueExpressionNode> itr = BOpUtility.visitAll(ast, ValueExpressionNode.class);
 

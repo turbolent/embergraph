@@ -108,10 +108,10 @@ public class CounterSetHTTPDServer implements Runnable {
     final DummyEventReportingService service = new DummyEventReportingService();
 
     // any -filter arguments.
-    final Collection<String> filter = new LinkedList<String>();
+    final Collection<String> filter = new LinkedList<>();
 
     // any -regex arguments.
-    final Collection<String> regex = new LinkedList<String>();
+    final Collection<String> regex = new LinkedList<>();
 
     for (int i = 0; i < args.length; i++) {
 

@@ -246,20 +246,20 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     NONE {
       // @Override
       public <K, V> EvictionPolicy<K, V> make(Segment<K, V> s, int capacity, float lf) {
-        return new NullEvictionPolicy<K, V>();
+        return new NullEvictionPolicy<>();
       }
     },
     LRU {
 
       // @Override
       public <K, V> EvictionPolicy<K, V> make(Segment<K, V> s, int capacity, float lf) {
-        return new LRU<K, V>(s, capacity, lf, capacity * 10, lf);
+        return new LRU<>(s, capacity, lf, capacity * 10, lf);
       }
     },
     LIRS {
       // @Override
       public <K, V> EvictionPolicy<K, V> make(Segment<K, V> s, int capacity, float lf) {
-        return new LIRS<K, V>(s, capacity, lf, capacity * 10, lf);
+        return new LIRS<>(s, capacity, lf, capacity * 10, lf);
       }
     };
 
@@ -383,15 +383,15 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       this.trimDownSize = (int) (capacity * lf);
       this.maxBatchQueueSize = maxBatchSize > MAX_BATCH_SIZE ? MAX_BATCH_SIZE : maxBatchSize;
       this.batchThresholdFactor = batchThresholdFactor;
-      this.accessQueue = new ConcurrentLinkedQueue<HashEntry<K, V>>();
-      this.lruQueue = new LinkedList<HashEntry<K, V>>();
+      this.accessQueue = new ConcurrentLinkedQueue<>();
+      this.lruQueue = new LinkedList<>();
     }
 
     // @Override
     public Set<HashEntry<K, V>> execute() {
       Set<HashEntry<K, V>> evicted = Collections.emptySet();
       if (isOverflow()) {
-        evicted = new HashSet<HashEntry<K, V>>();
+        evicted = new HashSet<>();
       }
       try {
         for (HashEntry<K, V> e : accessQueue) {
@@ -481,14 +481,14 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       }
       this.maxBatchQueueSize = maxBatchSize > MAX_BATCH_SIZE ? MAX_BATCH_SIZE : maxBatchSize;
       this.batchThresholdFactor = batchThresholdFactor;
-      this.accessQueue = new ConcurrentLinkedQueue<HashEntry<K, V>>();
-      this.stack = new LinkedHashMap<Integer, HashEntry<K, V>>();
-      this.queue = new LinkedList<HashEntry<K, V>>();
+      this.accessQueue = new ConcurrentLinkedQueue<>();
+      this.stack = new LinkedHashMap<>();
+      this.queue = new LinkedList<>();
     }
 
     // @Override
     public Set<HashEntry<K, V>> execute() {
-      Set<HashEntry<K, V>> evicted = new HashSet<HashEntry<K, V>>();
+      Set<HashEntry<K, V>> evicted = new HashSet<>();
       try {
         for (HashEntry<K, V> e : accessQueue) {
           if (present(e)) {
@@ -565,7 +565,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
           if (inStack) {
             e.transitionHIRResidentToLIRResident();
-            Set<HashEntry<K, V>> evicted = new HashSet<HashEntry<K, V>>();
+            Set<HashEntry<K, V>> evicted = new HashSet<>();
             switchBottomostLIRtoHIRAndPrune(evicted);
             removeFromSegment(evicted);
           } else {
@@ -918,11 +918,11 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
               first = tab[index];
             }
             // add a new entry
-            tab[index] = new HashEntry<K, V>(key, hash, first, value);
+            tab[index] = new HashEntry<>(key, hash, first, value);
             // notify a miss
             eviction.onEntryMiss(tab[index]);
           } else {
-            tab[index] = new HashEntry<K, V>(key, hash, first, value);
+            tab[index] = new HashEntry<>(key, hash, first, value);
           }
         }
         return oldValue;
@@ -984,7 +984,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
             for (HashEntry<K, V> p = e; p != lastRun; p = p.next) {
               int k = p.hash & sizeMask;
               HashEntry<K, V> n = newTable[k];
-              newTable[k] = new HashEntry<K, V>(p.key, p.hash, n, p.value);
+              newTable[k] = new HashEntry<>(p.key, p.hash, n, p.value);
             }
           }
         }
@@ -1020,7 +1020,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
             for (HashEntry<K, V> p = first; p != e; p = p.next) {
               // allow p to be GC-ed
               eviction.onEntryRemove(p);
-              newFirst = new HashEntry<K, V>(p.key, p.hash, newFirst, p.value);
+              newFirst = new HashEntry<>(p.key, p.hash, newFirst, p.value);
               // and notify eviction algorithm about new hash entries
               eviction.onEntryMiss(newFirst);
             }
@@ -1099,7 +1099,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     while (cap < c) cap <<= 1;
 
     for (int i = 0; i < this.segments.length; ++i)
-      this.segments[i] = new Segment<K, V>(cap, loadFactor, evictionStrategy, evictionListener);
+      this.segments[i] = new Segment<>(cap, loadFactor, evictionStrategy, evictionListener);
   }
 
   public BufferedConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
@@ -1113,7 +1113,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
         loadFactor,
         concurrencyLevel,
         evictionStrategy,
-        new NullEvictionListener<K, V>());
+        new NullEvictionListener<>());
   }
 
   /*

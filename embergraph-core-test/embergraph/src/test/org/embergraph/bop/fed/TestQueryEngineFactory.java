@@ -111,7 +111,7 @@ public class TestQueryEngineFactory extends TestCase2 {
 
           final Journal jnl = new Journal(properties);
 
-          refs[i] = new WeakReference<Journal>(jnl);
+          refs[i] = new WeakReference<>(jnl);
 
           // does not exist yet.
           assertNull(QueryEngineFactory.getInstance().getExistingQueryController(jnl));

@@ -212,7 +212,7 @@ public class HashBindingSet implements IBindingSet {
     //
     //		stack.push(new LinkedHashMap<IVariable, IConstant>());
 
-    current = new LinkedHashMap<IVariable, IConstant>();
+    current = new LinkedHashMap<>();
   }
 
   /*
@@ -265,7 +265,7 @@ public class HashBindingSet implements IBindingSet {
       final LinkedHashMap<IVariable, IConstant> src, final IVariable[] variablesToKeep) {
 
     final LinkedHashMap<IVariable, IConstant> dst =
-        new LinkedHashMap<IVariable, IConstant>(
+        new LinkedHashMap<>(
             variablesToKeep != null ? variablesToKeep.length : src.size());
 
     final Iterator<Map.Entry<IVariable, IConstant>> itr = src.entrySet().iterator();
@@ -310,7 +310,7 @@ public class HashBindingSet implements IBindingSet {
       final LinkedHashMap<IVariable, IConstant> src, final IVariable[] variablesToKeep) {
 
     final LinkedHashMap<IVariable, IConstant> dst =
-        new LinkedHashMap<IVariable, IConstant>(
+        new LinkedHashMap<>(
             variablesToKeep != null ? variablesToKeep.length : src.size());
 
     final Iterator<Map.Entry<IVariable, IConstant>> itr = src.entrySet().iterator();

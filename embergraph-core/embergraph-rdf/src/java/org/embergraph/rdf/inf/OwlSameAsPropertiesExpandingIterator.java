@@ -99,10 +99,10 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     final String SPO = db.getSPORelation().getNamespace();
     final IVariable<IV> _sameS = Var.var("sameS");
     final IVariable<IV> _sameO = Var.var("sameO");
-    final IConstant<IV> sameAs = new Constant<IV>(this.sameAs);
-    final IConstant<IV> s = new Constant<IV>(this.s);
-    final IConstant<IV> o = new Constant<IV>(this.o);
-    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<IV>(this.p) : Var.var("p");
+    final IConstant<IV> sameAs = new Constant<>(this.sameAs);
+    final IConstant<IV> s = new Constant<>(this.s);
+    final IConstant<IV> o = new Constant<>(this.o);
+    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<>(this.p) : Var.var("p");
     final SPOPredicate head = new SPOPredicate(SPO, s, _p, o);
     final IRule rule =
         new Rule(
@@ -133,10 +133,10 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     final String SPO = db.getSPORelation().getNamespace();
     final IVariable<IV> _sameS = Var.var("sameS");
     final IVariable<IV> _sameO = Var.var("sameO");
-    final IConstant<IV> sameAs = new Constant<IV>(this.sameAs);
-    final IConstant<IV> s = new Constant<IV>(this.s);
+    final IConstant<IV> sameAs = new Constant<>(this.sameAs);
+    final IConstant<IV> s = new Constant<>(this.s);
     final IVariable<IV> _o = Var.var("o");
-    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<IV>(this.p) : Var.var("p");
+    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<>(this.p) : Var.var("p");
     final SPOPredicate head = new SPOPredicate(SPO, s, _p, _sameO);
     final IRule rule =
         new Rule(
@@ -167,10 +167,10 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     final String SPO = db.getSPORelation().getNamespace();
     final IVariable<IV> _sameS = Var.var("sameS");
     final IVariable<IV> _sameO = Var.var("sameO");
-    final IConstant<IV> sameAs = new Constant<IV>(this.sameAs);
+    final IConstant<IV> sameAs = new Constant<>(this.sameAs);
     final IVariable<IV> _s = Var.var("s");
-    final IConstant<IV> o = new Constant<IV>(this.o);
-    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<IV>(this.p) : Var.var("p");
+    final IConstant<IV> o = new Constant<>(this.o);
+    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<>(this.p) : Var.var("p");
     final SPOPredicate head = new SPOPredicate(SPO, _sameS, _p, o);
     final IRule rule =
         new Rule(
@@ -201,10 +201,10 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     final String SPO = db.getSPORelation().getNamespace();
     final IVariable<IV> _sameS = Var.var("sameS");
     final IVariable<IV> _sameO = Var.var("sameO");
-    final IConstant<IV> sameAs = new Constant<IV>(this.sameAs);
+    final IConstant<IV> sameAs = new Constant<>(this.sameAs);
     final IVariable<IV> _s = Var.var("s");
     final IVariable<IV> _o = Var.var("o");
-    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<IV>(this.p) : Var.var("p");
+    final IVariableOrConstant<IV> _p = this.p != null ? new Constant<>(this.p) : Var.var("p");
     final SPOPredicate head = new SPOPredicate(SPO, _sameS, _p, _sameO);
     final IRule rule =
         new Rule(
@@ -397,7 +397,7 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
         if (log.isInfoEnabled()) log.info("appending SPO: " + spo.toString(db));
       }
       if (spo != null) {
-        return new ChunkedArrayIterator<ISPO>(1, new SPO[] {spo}, SPOKeyOrder.SPO);
+        return new ChunkedArrayIterator<>(1, new SPO[]{spo}, SPOKeyOrder.SPO);
       } else {
         return null;
       }

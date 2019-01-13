@@ -80,7 +80,7 @@ public final class Element {
     this.breaksFlow = breaksFlow;
     this.isSimple = isSimple;
     this.isImplicit = isImplicit;
-    this.contentModel = new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+    this.contentModel = new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   }
 
   /*
@@ -232,27 +232,27 @@ public final class Element {
   public static final Element UNKNOWN = HTMLFactory.newElement("unknown");
 
   private static final ReferenceLinkedOpenHashSet<Element> HEADING =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> LIST =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> PREFORMATTED =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> FONTSTYLE =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> PHRASE =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> SPECIAL =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> FORM_CONTROL =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> INLINE =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> BLOCK =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> FLOW =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   private static final ReferenceLinkedOpenHashSet<Element> PRE_EXCLUSION =
-      new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
+      new ReferenceLinkedOpenHashSet<>(Hash.DEFAULT_INITIAL_SIZE, .5f);
 
   static {
     // We define sets for several entities contained in the HTML 4.01 loose DTD

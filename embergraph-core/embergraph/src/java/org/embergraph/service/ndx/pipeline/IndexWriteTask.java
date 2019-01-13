@@ -224,8 +224,8 @@ public abstract class IndexWriteTask<
   @Override
   protected BlockingBuffer<E[]> newSubtaskBuffer() {
 
-    return new BlockingBuffer<E[]>(
-        new LinkedBlockingDeque<E[]>(sinkQueueCapacity),
+    return new BlockingBuffer<>(
+        new LinkedBlockingDeque<>(sinkQueueCapacity),
         sinkChunkSize, //
         sinkChunkTimeoutNanos,
         TimeUnit.NANOSECONDS,

@@ -100,7 +100,7 @@ public class INHashMap<T> extends INConstraint<T> {
     // populate the cache.
     final IConstant<T>[] a = getSet();
 
-    set = new ConcurrentHashMap<T, T>(a.length);
+    set = new ConcurrentHashMap<>(a.length);
 
     for (IConstant<T> t : a) {
 

@@ -187,9 +187,9 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
 
     //        this.distinctValues = new HashMap<Value, EmbergraphValue>(capacity
     //                * IRawTripleStore.N);
-    this.distinctValues = new HashMap<Value, EmbergraphValue>(capacity * db.getSPOKeyArity());
+    this.distinctValues = new HashMap<>(capacity * db.getSPOKeyArity());
 
-    this.deferredStatementBuffer = db.getStatementIdentifiers() ? new LinkedList<G>() : null;
+    this.deferredStatementBuffer = db.getStatementIdentifiers() ? new LinkedList<>() : null;
 
     this.valueFactory = db.getValueFactory();
   }
@@ -242,7 +242,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
       if (bnodes == null) {
 
         // allocate map lazily.
-        bnodes = new HashMap<String, EmbergraphBNode>(capacity);
+        bnodes = new HashMap<>(capacity);
       }
 
       EmbergraphBNode b = bnodes.get(id);

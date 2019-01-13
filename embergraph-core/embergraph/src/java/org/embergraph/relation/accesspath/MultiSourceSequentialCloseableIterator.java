@@ -44,7 +44,7 @@ public class MultiSourceSequentialCloseableIterator<E> implements IMultiSourceCl
   private final ReentrantLock lock = new ReentrantLock();
 
   private final Queue<ICloseableIterator<E>> sources =
-      new LinkedBlockingQueue<ICloseableIterator<E>>();
+      new LinkedBlockingQueue<>();
 
   /*
    * The current inner iterator. When <code>null</code> the outer iterator has been closed and will

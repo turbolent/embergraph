@@ -164,7 +164,7 @@ public abstract class AbstractMasterTask<
    * the outstanding write by that sink, then this situation would deadlock since the {@link #lock}
    * is already held and the sink is unable to drain.
    */
-  private final BlockingQueue<E[]> redirectQueue = new LinkedBlockingQueue<E[]>(/* unbounded */ );
+  private final BlockingQueue<E[]> redirectQueue = new LinkedBlockingQueue<>(/* unbounded */);
 
   /** The #of chunks on the master's redirectQueue. */
   public final int getRedirectQueueSize() {
@@ -252,7 +252,7 @@ public abstract class AbstractMasterTask<
    * operations. {@link #awaitAll()} and {@link #cancelAll(boolean)} both handle this in their own
    * way.
    */
-  private final BlockingQueue<S> finishedSubtaskQueue = new LinkedBlockingQueue<S>();
+  private final BlockingQueue<S> finishedSubtaskQueue = new LinkedBlockingQueue<>();
 
   /*
    * Notify the master that a subtask is done. The subtask is placed onto the {@link
@@ -354,7 +354,7 @@ public abstract class AbstractMasterTask<
      * resized frequently. The only time there is a rapid change in the #of
      * index partitions is when we scatter-split an index.
      */
-    this.sinks = new ConcurrentHashMap<L, S>();
+    this.sinks = new ConcurrentHashMap<>();
 
     stats.addMaster(this);
   }

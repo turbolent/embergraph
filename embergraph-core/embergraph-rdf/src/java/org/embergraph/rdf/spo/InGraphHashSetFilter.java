@@ -43,7 +43,7 @@ public final class InGraphHashSetFilter<E extends ISPO> extends SPOFilter<E> {
      * we will accept.
      */
 
-    contextSet = new HashSet<IV>(initialCapacity);
+    contextSet = new HashSet<>(initialCapacity);
 
     for (IV termId : graphs) {
 

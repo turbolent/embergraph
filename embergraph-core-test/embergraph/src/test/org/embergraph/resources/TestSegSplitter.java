@@ -960,8 +960,8 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
     final int ntuples = 1000;
 
     // any builders/segments we create for the 3 output segments below.
-    final List<IndexSegmentBuilder> builders = new LinkedList<IndexSegmentBuilder>();
-    final List<IndexSegment> segments = new LinkedList<IndexSegment>();
+    final List<IndexSegmentBuilder> builders = new LinkedList<>();
+    final List<IndexSegment> segments = new LinkedList<>();
 
     IndexSegmentBuilder builder = null;
     final IJournal store = getStore();

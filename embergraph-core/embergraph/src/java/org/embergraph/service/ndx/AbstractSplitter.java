@@ -101,7 +101,7 @@ public abstract class AbstractSplitter implements ISplitter {
 
     if (toIndex > keys.length) throw new IllegalArgumentException();
 
-    final LinkedList<Split> splits = new LinkedList<Split>();
+    final LinkedList<Split> splits = new LinkedList<>();
 
     // start w/ the first key.
     int currentIndex = fromIndex;

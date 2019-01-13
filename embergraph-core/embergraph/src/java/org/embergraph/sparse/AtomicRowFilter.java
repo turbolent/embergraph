@@ -97,7 +97,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
   protected ITupleIterator<TPS> newTransformer(
       ILookaheadTupleIterator<TPV> src, final Object context) {
 
-    return new Transformerator<TPV, TPS>(src, context);
+    return new Transformerator<>(src, context);
   }
 
   private class Transformerator<E extends TPV /* src */, F extends TPS /* out */>

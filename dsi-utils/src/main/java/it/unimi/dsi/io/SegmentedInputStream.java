@@ -146,7 +146,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
   public SegmentedInputStream(final InputStream in) {
     if (in == null) throw new NullPointerException();
     this.in = in;
-    this.blocks = new ObjectArrayList<SegmentBlock>();
+    this.blocks = new ObjectArrayList<>();
     this.currentBlock = -1;
   }
 

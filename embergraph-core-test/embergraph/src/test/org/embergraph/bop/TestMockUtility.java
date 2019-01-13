@@ -82,11 +82,11 @@ public class TestMockUtility {
     final BOpStats stats = new BOpStats();
     final PipelineOp mockQuery = new MockQuery();
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{});
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(mockQuery, stats);
+        new BlockingBufferWithStats<>(mockQuery, stats);
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,

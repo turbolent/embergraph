@@ -196,7 +196,7 @@ public class DescribeCacheServlet extends EmbergraphRDFServlet {
     /*
      * Ensure that URIs are BigdatURIs for this namespace.
      */
-    final Set<EmbergraphURI> internalURIs = new LinkedHashSet<EmbergraphURI>();
+    final Set<EmbergraphURI> internalURIs = new LinkedHashSet<>();
     {
       final EmbergraphValueFactory valueFactory = tripleStore.getValueFactory();
 

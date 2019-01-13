@@ -43,7 +43,7 @@ public class XSDUnsignedByteIV<V extends EmbergraphLiteral> extends AbstractLite
 
   public IV<V, Short> clone(final boolean clearCache) {
 
-    final XSDUnsignedByteIV<V> tmp = new XSDUnsignedByteIV<V>(value);
+    final XSDUnsignedByteIV<V> tmp = new XSDUnsignedByteIV<>(value);
 
     if (!clearCache) {
 

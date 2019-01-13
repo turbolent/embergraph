@@ -177,7 +177,7 @@ public class TestReceiveBuffer extends TestCase3 {
     final Random r = new Random();
 
     final ConcurrentHashMap<UUID, IBufferAccess> buffers =
-        new ConcurrentHashMap<UUID, IBufferAccess>();
+        new ConcurrentHashMap<>();
 
     final ResourceService service =
         new ResourceService(
@@ -224,7 +224,7 @@ public class TestReceiveBuffer extends TestCase3 {
       }
 
       // setup concurrent tasks.
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       for (int i = 0; i < ntasks; i++) {
 

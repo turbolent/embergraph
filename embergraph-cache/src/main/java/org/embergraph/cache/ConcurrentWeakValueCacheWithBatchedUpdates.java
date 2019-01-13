@@ -170,7 +170,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
       final boolean removeClearedReferences) {
 
     this(
-        new HardReferenceQueue<V>(null /* listener */, queueCapacity),
+        new HardReferenceQueue<>(null /* listener */, queueCapacity),
         loadFactor,
         concurrencyLevel,
         removeClearedReferences);
@@ -229,7 +229,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     if (queue == null) throw new IllegalArgumentException();
 
     this.queue =
-        new HardReferenceQueueWithBatchingUpdates<V>(
+        new HardReferenceQueueWithBatchingUpdates<>(
             EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
             16, // concurrencyLevel
             queue, // sharedQueue
@@ -254,11 +254,11 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
      * resizing the ConcurrentHashMap, which is relatively expensive.
      */
 
-    map = new ConcurrentHashMap<K, WeakReference<V>>(initialCapacity, loadFactor, concurrencyLevel);
+    map = new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
 
     if (removeClearedReferences) {
 
-      referenceQueue = new ReferenceQueue<V>();
+      referenceQueue = new ReferenceQueue<>();
 
     } else {
 
@@ -684,10 +684,10 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
     if (referenceQueue == null) {
 
-      return new WeakReference<V>(v);
+      return new WeakReference<>(v);
     }
 
-    return new WeakRef<K, V>(k, v, referenceQueue);
+    return new WeakRef<>(k, v, referenceQueue);
   }
 
   /*

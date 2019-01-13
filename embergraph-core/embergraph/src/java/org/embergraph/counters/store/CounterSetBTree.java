@@ -315,7 +315,7 @@ public class CounterSetBTree extends BTree {
 
     final long begin = System.currentTimeMillis();
 
-    final Vector<KVO<Entry>> v = new Vector<KVO<Entry>>();
+    final Vector<KVO<Entry>> v = new Vector<>();
 
     final CounterSetBTreeTupleSerializer tupleSer =
         (CounterSetBTreeTupleSerializer) getIndexMetadata().getTupleSerializer();
@@ -342,7 +342,7 @@ public class CounterSetBTree extends BTree {
 
           final byte[] val = tupleSer.serializeVal(entry); // .value);
 
-          v.add(new KVO<Entry>(key, val, entry));
+          v.add(new KVO<>(key, val, entry));
         }
 
       } else {
@@ -353,7 +353,7 @@ public class CounterSetBTree extends BTree {
 
         final byte[] val = tupleSer.serializeVal(entry);
 
-        v.add(new KVO<Entry>(key, val, entry));
+        v.add(new KVO<>(key, val, entry));
       }
     }
 

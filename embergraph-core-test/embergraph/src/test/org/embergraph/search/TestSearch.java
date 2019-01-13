@@ -110,7 +110,7 @@ public class TestSearch extends AbstractSearchTest {
        */
       long docId = 1;
       final int fieldId = 0;
-      final TokenBuffer<Long> buffer = new TokenBuffer<Long>(docs.length, getNdx());
+      final TokenBuffer<Long> buffer = new TokenBuffer<>(docs.length, getNdx());
       for (String s : docs) {
 
         getNdx().index(buffer, Long.valueOf(docId++), fieldId, languageCode, new StringReader(s));
@@ -145,10 +145,10 @@ public class TestSearch extends AbstractSearchTest {
 
       assertSameHits(
           new IHit[] {
-            new HT<Long>(5L, 0.44194173824159216d),
-            new HT<Long>(6L, 0.44194173824159216d),
-            new HT<Long>(2L, 0.35355339059327373d),
-            new HT<Long>(3L, 0.35355339059327373d),
+              new HT<>(5L, 0.44194173824159216d),
+              new HT<>(6L, 0.44194173824159216d),
+              new HT<>(2L, 0.35355339059327373d),
+              new HT<>(3L, 0.35355339059327373d),
           },
           itr);
     }

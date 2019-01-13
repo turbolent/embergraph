@@ -111,7 +111,7 @@ public class AbstractRTOTestCase extends AbstractDataDrivenSPARQLTestCase {
   protected static class MyQueryListener implements IRunningQueryListener {
 
     private final UUID queryId;
-    private final Set<IRunningQuery> queries = new LinkedHashSet<IRunningQuery>();
+    private final Set<IRunningQuery> queries = new LinkedHashSet<>();
 
     public MyQueryListener(final UUID queryId) {
 

@@ -97,7 +97,7 @@ public class TestDistinctTermScanOp extends TestCase2 {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -122,8 +122,8 @@ public class TestDistinctTermScanOp extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   //    /*

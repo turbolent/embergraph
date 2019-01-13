@@ -2143,7 +2143,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
     if (leafListeners == null) {
 
-      leafListeners = new WeakHashMap<ILeafListener, Void>();
+      leafListeners = new WeakHashMap<>();
     }
 
     leafListeners.put(l, null);

@@ -542,7 +542,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     // The ordered list of variable bindings.
     final List<ASTVar> varNodes = node.jjtGetChildren(ASTVar.class);
     final int nvars = varNodes.size();
-    final LinkedHashSet<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>(nvars);
+    final LinkedHashSet<IVariable<?>> vars = new LinkedHashSet<>(nvars);
 
     {
       for (ASTVar varNode : varNodes) {
@@ -560,7 +560,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     {
       final List<ASTBindingSet> bindingNodes = node.jjtGetChildren(ASTBindingSet.class);
 
-      final List<IBindingSet> bindingSets = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new LinkedList<>();
 
       final IVariable<?>[] declaredVars = vars.toArray(new IVariable[nvars]);
 

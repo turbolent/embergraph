@@ -40,7 +40,7 @@ public final class ResourceLockService implements IResourceLockService {
    *
    * @todo could use simple locks in weak value hash map with the name as the key.
    */
-  private final NamedLock<String /* namespace */> locks = new NamedLock<String>();
+  private final NamedLock<String /* namespace */> locks = new NamedLock<>();
 
   public ResourceLockService() {}
 

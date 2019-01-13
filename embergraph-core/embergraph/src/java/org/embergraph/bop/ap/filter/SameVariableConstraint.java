@@ -248,7 +248,7 @@ public class SameVariableConstraint<E> implements IFilterTest, Externalizable {
 
           if (vars == null) {
 
-            vars = new LinkedHashMap<IVariableOrConstant<?>, Integer>();
+            vars = new LinkedHashMap<>();
           }
 
           Integer cnt = vars.get(t);
@@ -321,6 +321,6 @@ public class SameVariableConstraint<E> implements IFilterTest, Externalizable {
       assert i == indices.length;
     }
 
-    return new SameVariableConstraint<E>(p, indices);
+    return new SameVariableConstraint<>(p, indices);
   } // factory method.
 }

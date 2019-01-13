@@ -152,9 +152,9 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
               }
             });
 
-    addListener(this.commitImpl = new QuorumCommitImpl<S>(this));
+    addListener(this.commitImpl = new QuorumCommitImpl<>(this));
 
-    addListener(this.readImpl = new QuorumReadImpl<S>(this));
+    addListener(this.readImpl = new QuorumReadImpl<>(this));
   }
 
   protected abstract long getRetrySendTimeoutNanos();

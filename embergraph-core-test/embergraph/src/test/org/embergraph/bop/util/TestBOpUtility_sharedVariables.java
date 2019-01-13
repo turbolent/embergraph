@@ -82,16 +82,16 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
   public void test_getSharedVariables_nothingShared() {
 
     // nothing shared because no variables for one operand.
-    assertTrue(BOpUtility.getSharedVars(new Constant<Integer>(12), Var.var("y")).isEmpty());
+    assertTrue(BOpUtility.getSharedVars(new Constant<>(12), Var.var("y")).isEmpty());
 
     // nothing shared because no variables for the other operand.
-    assertTrue(BOpUtility.getSharedVars(Var.var("y"), new Constant<Integer>(12)).isEmpty());
+    assertTrue(BOpUtility.getSharedVars(Var.var("y"), new Constant<>(12)).isEmpty());
 
     // nothing shared.
     assertTrue(BOpUtility.getSharedVars(Var.var("x"), Var.var("y")).isEmpty());
 
     // nothing shared.
-    assertTrue(BOpUtility.getSharedVars(Var.var("x"), new Constant<String>("x")).isEmpty());
+    assertTrue(BOpUtility.getSharedVars(Var.var("x"), new Constant<>("x")).isEmpty());
 
     // nothing shared.
     assertTrue(
@@ -126,7 +126,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
         BOpUtility.getSharedVars(
             Var.var("x"),
             new BOpBase(
-                new BOp[] {new Constant<String>("x"), Var.var("x")}, null // annotations
+                new BOp[] {new Constant<>("x"), Var.var("x")}, null // annotations
                 )));
 
     // expression and variable.
@@ -134,7 +134,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
         new IVariable[] {Var.var("x")},
         BOpUtility.getSharedVars(
             new BOpBase(
-                new BOp[] {new Constant<String>("x"), Var.var("x")}, null // annotations
+                new BOp[] {new Constant<>("x"), Var.var("x")}, null // annotations
                 ),
             Var.var("x")));
 

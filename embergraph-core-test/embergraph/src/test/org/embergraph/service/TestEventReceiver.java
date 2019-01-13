@@ -354,7 +354,7 @@ public class TestEventReceiver extends TestCase2 {
     final int nevents = 100;
     try {
 
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       for (int i = 0; i < nthreads; i++) {
 

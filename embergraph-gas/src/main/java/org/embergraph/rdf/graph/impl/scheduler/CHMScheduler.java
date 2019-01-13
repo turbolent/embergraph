@@ -34,7 +34,7 @@ public class CHMScheduler implements IGASSchedulerImpl {
 
   public CHMScheduler(final GASEngine gasEngine) {
 
-    vertices = new ConcurrentHashMap<Value, Value>(gasEngine.getNThreads());
+    vertices = new ConcurrentHashMap<>(gasEngine.getNThreads());
 
     sortFrontier = gasEngine.getSortFrontier();
   }

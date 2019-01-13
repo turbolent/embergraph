@@ -494,7 +494,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
   public void test_consistencyIssue() {
 
     final EmbergraphValueSerializer<Value> fixture =
-        new EmbergraphValueSerializer<Value>(ValueFactoryImpl.getInstance());
+        new EmbergraphValueSerializer<>(ValueFactoryImpl.getInstance());
 
     final byte[] newValBytes =
         new byte[] {0, 2, 0, 14, 66, 114, 105, 97, 110, 32, 77, 99, 67, 97, 114, 116, 104, 121};

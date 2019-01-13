@@ -43,9 +43,9 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
    * Variables *
    *-----------*/
 
-  private Set<String> bindingNames = new LinkedHashSet<String>();
+  private Set<String> bindingNames = new LinkedHashSet<>();
 
-  private List<BindingSet> bindingSets = new ArrayList<BindingSet>();
+  private List<BindingSet> bindingSets = new ArrayList<>();
 
   /** The index of the next element that will be returned by a call to {@link #next()}. */
   private int currentIndex = 0;
@@ -93,7 +93,7 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
    *---------*/
 
   public List<String> getBindingNames() {
-    return new ArrayList<String>(bindingNames);
+    return new ArrayList<>(bindingNames);
   }
 
   public int size() {
@@ -240,8 +240,8 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
   @Override
   public MutableTupleQueryResult clone() throws CloneNotSupportedException {
     MutableTupleQueryResult clone = (MutableTupleQueryResult) super.clone();
-    clone.bindingNames = new LinkedHashSet<String>(bindingNames);
-    clone.bindingSets = new LinkedList<BindingSet>(bindingSets);
+    clone.bindingNames = new LinkedHashSet<>(bindingNames);
+    clone.bindingSets = new LinkedList<>(bindingSets);
     return clone;
   }
 }

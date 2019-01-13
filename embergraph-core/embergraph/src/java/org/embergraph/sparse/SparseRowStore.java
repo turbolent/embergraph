@@ -939,7 +939,7 @@ public class SparseRowStore implements IRowStoreConstants {
    */
   public List<String> getNamespaces(long tx) {
     // the triple store namespaces.
-    final List<String> namespaces = new LinkedList<String>();
+    final List<String> namespaces = new LinkedList<>();
 
     // scan the relation schema in the global row store.
     @SuppressWarnings("unchecked")

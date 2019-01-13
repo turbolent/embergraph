@@ -211,9 +211,9 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
      * Setup the tasks that we will submit.
      */
 
-    final Collection<AbstractTask<Void>> tasks = new HashSet<AbstractTask<Void>>();
+    final Collection<AbstractTask<Void>> tasks = new HashSet<>();
 
-    final ConcurrentHashMap<String, Thread> btrees = new ConcurrentHashMap<String, Thread>();
+    final ConcurrentHashMap<String, Thread> btrees = new ConcurrentHashMap<>();
 
     for (int i = 0; i < ntrials; i++) {
 
@@ -223,7 +223,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
 
       assert nlocks >= minLocks && nlocks <= maxLocks;
 
-      final Collection<String> tmp = new HashSet<String>(nlocks);
+      final Collection<String> tmp = new HashSet<>(nlocks);
 
       while (tmp.size() < nlocks) {
 
@@ -662,7 +662,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
       // this is the test to be run.
       final String className = StressTestConcurrentUnisolatedIndices.class.getName();
 
-      final Map<String, String> defaultProperties = new HashMap<String, String>();
+      final Map<String, String> defaultProperties = new HashMap<>();
 
       // force delete of the files on close of the journal under test.
       defaultProperties.put(Options.CREATE_TEMP_FILE, "true");
@@ -695,7 +695,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
        * Build up the conditions.
        */
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       conditions.add(new Condition(defaultProperties));
 

@@ -25,7 +25,7 @@ public class TestHTreeRecycle extends AbstractHTreeTestCase {
       super(DirectBufferPool.INSTANCE);
     }
 
-    private final Set<Long> addrs = new HashSet<Long>();
+    private final Set<Long> addrs = new HashSet<>();
 
     /*
      * Add an address which should be deleted to the set of such addresses.

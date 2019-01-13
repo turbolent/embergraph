@@ -40,7 +40,7 @@ public class ClassPathUtil {
    * resolving failed, e.g. for the optional GPU add-on optimizers).
    */
   private static final Map<ClassPathUtilRequestConfig, Class<?>> cache =
-      Collections.synchronizedMap(new HashMap<ClassPathUtilRequestConfig, Class<?>>());
+      Collections.synchronizedMap(new HashMap<>());
 
   public static <T> T classForName(
       final String preferredClassName,

@@ -48,11 +48,11 @@ public class DirectBufferPoolAllocator {
 
   /** The set of allocation contexts. */
   private final ConcurrentHashMap<Object /* key */, AllocationContext> allocationContexts =
-      new ConcurrentHashMap<Object, AllocationContext>();
+      new ConcurrentHashMap<>();
 
   /** The set of {@link IAllocation} outstanding against the {@link #directBufferPool}. */
   private final ConcurrentHashMap<UUID, Allocation> allocations =
-      new ConcurrentHashMap<UUID, Allocation>();
+      new ConcurrentHashMap<>();
 
   /*
    * @todo Maybe replace this with a private {@link Haltable} (or extend {@link Haltable}) so we can
@@ -315,7 +315,7 @@ public class DirectBufferPoolAllocator {
      * The set of native {@link ByteBuffer}s in use by this allocation context. Last element in the
      * list is the {@link ByteBuffer} against which allocations are currently being made.
      */
-    private final LinkedList<IBufferAccess> directBuffers = new LinkedList<IBufferAccess>();
+    private final LinkedList<IBufferAccess> directBuffers = new LinkedList<>();
 
     /*
      * The set of native {@link ByteBuffer}s in use by this allocation context. The positive of in
@@ -324,7 +324,7 @@ public class DirectBufferPoolAllocator {
      * independent position, offset, and limit from the original {@link ByteBuffer}.
      */
     private final ConcurrentHashMap<UUID, Allocation> allocations =
-        new ConcurrentHashMap<UUID, Allocation>();
+        new ConcurrentHashMap<>();
 
     /*
      * Human readable summary (non-blocking).
@@ -358,7 +358,7 @@ public class DirectBufferPoolAllocator {
       lock.lock();
       try {
 
-        final LinkedList<IAllocation> allocations = new LinkedList<IAllocation>();
+        final LinkedList<IAllocation> allocations = new LinkedList<>();
 
         while (nbytes > 0) {
 

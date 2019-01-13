@@ -249,7 +249,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     ctx.sa = new StaticAnalysis(optimizedQuery, ctx);
 
     // The set of known materialized variables.
-    final LinkedHashSet<IVariable<?>> doneSet = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> doneSet = new LinkedHashSet<>();
 
     // true IFF the query plan should handle materialize the projection.
     final boolean materializeProjection =
@@ -342,10 +342,10 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     // The variables projected by the subquery.
     final List<IVariable<?>> projectedVarList =
-        projectedVars == null ? new LinkedList<IVariable<?>>() : Arrays.asList(projectedVars);
+        projectedVars == null ? new LinkedList<>() : Arrays.asList(projectedVars);
 
     // Temporary set scoped to the subquery.
-    final Set<IVariable<?>> tmp = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> tmp = new LinkedHashSet<>();
 
     // Add everything known to have been materialized up to now.
     tmp.addAll(doneSet);
@@ -470,7 +470,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       if (isAggregate) {
 
-        final Set<IVariable<IV>> vars = new HashSet<IVariable<IV>>();
+        final Set<IVariable<IV>> vars = new HashSet<>();
 
         StaticAnalysis.gatherVarsToMaterialize(having, vars, true /* includeAnnotations */);
         vars.removeAll(doneSet);
@@ -619,7 +619,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         //				// the final projection, as it won't change the query result
         //				if (!varNamesProjected.containsAll(varNamesMaybeBound)) {
 
-        final List<NV> anns = new LinkedList<NV>();
+        final List<NV> anns = new LinkedList<>();
         anns.add(new NV(BOp.Annotations.BOP_ID, ctx.nextId()));
         anns.add(new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER));
         anns.add(new NV(PipelineOp.Annotations.SHARED_STATE, true)); // live stats
@@ -657,7 +657,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
          */
 
         final Set<IVariable<?>> tmp =
-            projection.getProjectionVars(new LinkedHashSet<IVariable<?>>());
+            projection.getProjectionVars(new LinkedHashSet<>());
 
         // do not materialize anything which was already materialized.
         tmp.removeAll(doneSet);
@@ -670,7 +670,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
           final IVariable<?>[] vars = tmp.toArray(new IVariable[tmp.size()]);
 
-          final List<NV> anns = new LinkedList<NV>();
+          final List<NV> anns = new LinkedList<>();
           anns.add(new NV(ChunkedMaterializationOp.Annotations.VARS, vars));
           anns.add(new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}));
           anns.add(new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp));
@@ -797,11 +797,11 @@ public class AST2BOpUtility extends AST2BOpRTO {
      */
 
     // All named subqueries with NO dependencies.
-    final List<NamedSubqueryRoot> runFirst = new LinkedList<NamedSubqueryRoot>();
+    final List<NamedSubqueryRoot> runFirst = new LinkedList<>();
 
     // Remaining named subqueries, which MUST already be in an ordering
     // consistent with their dependencies.
-    final List<NamedSubqueryRoot> remainder = new LinkedList<NamedSubqueryRoot>();
+    final List<NamedSubqueryRoot> remainder = new LinkedList<>();
 
     for (NamedSubqueryRoot subqueryRoot : namedSubquerieNode) {
 
@@ -972,7 +972,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(serviceNode), needsMaterialization);
@@ -988,7 +988,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     // true if we need to materialize variables before running the SERVICE.
     final boolean isMaterialize;
     // variables that are generated inside the service and may carry mock IVs
-    final Set<IVariable<IV>> varsToMockResolve = new HashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> varsToMockResolve = new HashSet<>();
     if (serviceRef instanceof IConstant) {
 
       final EmbergraphURI serviceURI = ServiceCallUtility.getConstantServiceURI(serviceRef);
@@ -1124,9 +1124,9 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       // Anything which MIGHT be bound by the time the SERVICE runs.
       final Set<IVariable<?>> maybeBound =
-          ctx.sa.getMaybeIncomingBindings(serviceNode, new LinkedHashSet<IVariable<?>>());
+          ctx.sa.getMaybeIncomingBindings(serviceNode, new LinkedHashSet<>());
 
-      final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+      final Set<IVariable<?>> vars = new LinkedHashSet<>();
       vars.addAll(projectedVars); // start with everything "projected".
       vars.retainAll(maybeBound); // retain "maybe" incoming bound vars.
       if (serviceRef instanceof IVariable) {
@@ -1159,7 +1159,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * and the solutions flowing out of that SERVICE call.
      */
     final Set<IVariable<?>> joinVarSet =
-        ctx.sa.getJoinVars(serviceNode, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getJoinVars(serviceNode, new LinkedHashSet<>());
 
     /*
      * Note: For overall sanity, the ServiceCallJoin is being run on the
@@ -1178,7 +1178,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * TODO Unit test where join constraints wind up attached to the
      * ServiceCallJoin operator.
      */
-    final Map<String, Object> anns = new LinkedHashMap<String, Object>();
+    final Map<String, Object> anns = new LinkedHashMap<>();
     anns.put(BOp.Annotations.BOP_ID, rightId);
     anns.put(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER);
     anns.put(PipelineOp.Annotations.PIPELINED, false); // at-once by default.
@@ -1427,7 +1427,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * building a hash index on the desired join variables.
          */
         final Set<IVariable<?>> joinvars =
-            ctx.sa.getJoinVars(nsi, name /* solutionSet */, new LinkedHashSet<IVariable<?>>());
+            ctx.sa.getJoinVars(nsi, name /* solutionSet */, new LinkedHashSet<>());
 
         // flatten into IVariable[].
         joinVars = joinvars.toArray(new IVariable[] {});
@@ -1534,7 +1534,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(nsi), needsMaterialization);
@@ -1643,7 +1643,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     // Convert solutions from VALUES clause to an IBindingSet[].
     final IBindingSet[] bindingSets =
         BOpUtility.toArray(
-            new Chunkerator<IBindingSet>(bindingsClause.getBindingSets().iterator()),
+            new Chunkerator<>(bindingsClause.getBindingSets().iterator()),
             null /*stats*/);
 
     // Static analysis of the VALUES solutions.
@@ -1651,7 +1651,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     /*
      * BindingsClause is an IBindingsProducer, but it should also be
@@ -1670,7 +1670,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final String solutionSetName = "--values-" + ctx.nextId(); // Unique name.
 
     final Set<IVariable<?>> joinVarSet =
-        ctx.sa.getJoinVars(bindingsClause, bindingsClauseStats, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getJoinVars(bindingsClause, bindingsClauseStats, new LinkedHashSet<>());
 
     @SuppressWarnings("rawtypes")
     final IVariable[] joinVars = joinVarSet.toArray(new IVariable[0]);
@@ -1855,7 +1855,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(nsi), needsMaterialization);
@@ -1921,16 +1921,16 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     // The variables projected by the subquery.
     final Set<IVariable<?>> projectedVars =
-        projection.getProjectionVars(new HashSet<IVariable<?>>());
+        projection.getProjectionVars(new HashSet<>());
 
     final Set<IVariable<?>> maybeIncomingBindings =
-        ctx.sa.getMaybeIncomingBindings(subqueryRoot, new HashSet<IVariable<?>>());
+        ctx.sa.getMaybeIncomingBindings(subqueryRoot, new HashSet<>());
 
     projectedVars.retainAll(maybeIncomingBindings);
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(subqueryRoot), needsMaterialization);
@@ -1954,7 +1954,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final String solutionSetName = "--set-" + ctx.nextId(); // Unique name.
 
     final Set<IVariable<?>> joinVarSet =
-        ctx.sa.getJoinVars(subqueryRoot, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getJoinVars(subqueryRoot, new LinkedHashSet<>());
 
     @SuppressWarnings("rawtypes")
     final IVariable[] joinVars = joinVarSet.toArray(new IVariable[0]);
@@ -2189,7 +2189,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(subqueryRoot), needsMaterialization);
@@ -2204,7 +2204,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final String solutionSetName = "--set-" + ctx.nextId(); // Unique name.
 
     final Set<IVariable<?>> joinVarSet =
-        ctx.sa.getJoinVars(subqueryRoot, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getJoinVars(subqueryRoot, new LinkedHashSet<>());
 
     @SuppressWarnings("rawtypes")
     final IVariable[] joinVars = joinVarSet.toArray(new IVariable[0]);
@@ -2223,9 +2223,9 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * FILTER includes the outer scope).
      */
     final Set<IVariable<?>> projectInVars =
-        ctx.sa.getMaybeIncomingBindings(subqueryRoot, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getMaybeIncomingBindings(subqueryRoot, new LinkedHashSet<>());
     final Set<IVariable<?>> spannedVars =
-        ctx.sa.getSpannedVariables(subqueryRoot, new HashSet<IVariable<?>>());
+        ctx.sa.getSpannedVariables(subqueryRoot, new HashSet<>());
     //        projectInVars.retainAll(alpVars);
     projectInVars.retainAll(spannedVars);
     final IVariable<?>[] projectInVarsArr =
@@ -2283,7 +2283,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
           convertJoinGroupOrUnion(
               null /* standalone */,
               subqueryRoot.getWhereClause(),
-              new LinkedHashSet<IVariable<?>>(doneSet) /* doneSet */,
+              new LinkedHashSet<>(doneSet) /* doneSet */,
               ctx);
       // inherit the namespace property (which is needed for the CPU/GPU),
       // see https://github.com/SYSTAP/bigdata-gpu/issues/343
@@ -2336,7 +2336,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
           convertJoinGroupOrUnion(
               left,
               subqueryRoot.getWhereClause(),
-              new LinkedHashSet<IVariable<?>>(doneSet) /* doneSet */,
+              new LinkedHashSet<>(doneSet) /* doneSet */,
               ctx);
     }
 
@@ -2429,7 +2429,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(subqueryRoot), needsMaterialization);
@@ -2594,7 +2594,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      */
     for (int j = 0; j < (arity - 1); j++) {
 
-      final LinkedList<NV> anns = new LinkedList<NV>();
+      final LinkedList<NV> anns = new LinkedList<>();
 
       anns.add(new NV(BOp.Annotations.BOP_ID, thisTeeId));
 
@@ -2634,7 +2634,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      */
     int i = 0;
     // Start with everything already known to be materialized.
-    final Set<IVariable<?>> doneSetsIntersection = new LinkedHashSet<IVariable<?>>(doneSet);
+    final Set<IVariable<?>> doneSetsIntersection = new LinkedHashSet<>(doneSet);
     for (IGroupMemberNode child : unionNode) {
 
       // convert the child
@@ -2652,7 +2652,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
               leftOrEmpty(left), NV.asMap(new NV(Predicate.Annotations.BOP_ID, subqueryIds[i++])));
 
       // Start with everything already known to be materialized.
-      final Set<IVariable<?>> tmp = new LinkedHashSet<IVariable<?>>(doneSet);
+      final Set<IVariable<?>> tmp = new LinkedHashSet<>(doneSet);
 
       // Convert the child join group.
       final PipelineOp subquery =
@@ -2719,10 +2719,10 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * variable that is possibly also bound from previous computations.
      */
     final Set<IVariable<?>> alpVars =
-        ctx.sa.getDefinitelyProducedBindings(alpNode, new LinkedHashSet<IVariable<?>>(), true);
+        ctx.sa.getDefinitelyProducedBindings(alpNode, new LinkedHashSet<>(), true);
 
     final Set<IVariable<?>> joinVarsSet =
-        ctx.sa.getDefinitelyIncomingBindings(alpNode, new LinkedHashSet<IVariable<?>>());
+        ctx.sa.getDefinitelyIncomingBindings(alpNode, new LinkedHashSet<>());
     joinVarsSet.retainAll(alpVars);
 
     final IVariable<?>[] joinVars = joinVarsSet.toArray(new IVariable<?>[joinVarsSet.size()]);
@@ -2734,8 +2734,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
     // that we do *not* project in - both calculations start out with the set
     // of possibly bind variables
     final Set<IVariable<?>> projectInVars =
-        ctx.sa.getMaybeIncomingBindings(alpNode, new LinkedHashSet<IVariable<?>>());
-    final Set<IVariable<?>> nonProjectInVars = new HashSet<IVariable<?>>(projectInVars);
+        ctx.sa.getMaybeIncomingBindings(alpNode, new LinkedHashSet<>());
+    final Set<IVariable<?>> nonProjectInVars = new HashSet<>(projectInVars);
 
     // we project in whatever's used inside the ALP
     projectInVars.retainAll(alpUsedVars);
@@ -2746,7 +2746,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     if (log.isDebugEnabled()) {
       log.debug(alpNode.getUsedVars());
-      log.debug(ctx.sa.getMaybeIncomingBindings(alpNode, new LinkedHashSet<IVariable<?>>()));
+      log.debug(ctx.sa.getMaybeIncomingBindings(alpNode, new LinkedHashSet<>()));
       log.debug(projectInVars);
     }
 
@@ -3048,7 +3048,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * in support of (NOT) EXISTS and which need to be dropped before we
      * exit this group.
      */
-    final LinkedList<IVariable<?>> dropVars = new LinkedList<IVariable<?>>();
+    final LinkedList<IVariable<?>> dropVars = new LinkedList<>();
 
     /*
      * This checks to make sure that join filters were attached to join
@@ -3087,7 +3087,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      *
      * @see JoinGroupNode#getInFilters()
      */
-    final Set<FilterNode> inFilters = new LinkedHashSet<FilterNode>();
+    final Set<FilterNode> inFilters = new LinkedHashSet<>();
     inFilters.addAll(joinGroup.getInFilters());
 
     final AtomicInteger start = new AtomicInteger(0);
@@ -3153,7 +3153,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
             join(
                 left,
                 pred,
-                optional ? new LinkedHashSet<IVariable<?>>(doneSet) : doneSet,
+                optional ? new LinkedHashSet<>(doneSet) : doneSet,
                 getJoinConstraints(sp),
                 null, // cutoffLimit
                 sp.getQueryHints(),
@@ -3242,7 +3242,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         final boolean required = !(subgroup.isOptional() || subgroup.isMinus());
 
         final Set<IVariable<?>> groupLocalDoneSet =
-            required ? doneSet : new LinkedHashSet<IVariable<?>>(doneSet);
+            required ? doneSet : new LinkedHashSet<>(doneSet);
         left = addSubgroup(left, subgroup, groupLocalDoneSet, ctx);
 
         /*
@@ -3386,17 +3386,17 @@ public class AST2BOpUtility extends AST2BOpRTO {
       return left;
     }
 
-    final List<NamedSubqueryInclude> requiredIncludes = new LinkedList<NamedSubqueryInclude>();
-    final List<NamedSubqueryInclude> optionalIncludes = new LinkedList<NamedSubqueryInclude>();
+    final List<NamedSubqueryInclude> requiredIncludes = new LinkedList<>();
+    final List<NamedSubqueryInclude> optionalIncludes = new LinkedList<>();
 
     // Collect the join constraints from each INCLUDE that we will use.
-    final List<FilterNode> joinConstraints = new LinkedList<FilterNode>();
+    final List<FilterNode> joinConstraints = new LinkedList<>();
 
     /*
      * Join variables must be the same for all secondary sources. They are
      * set once we find the first secondary source.
      */
-    final Set<IVariable<?>> joinVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> joinVars = new LinkedHashSet<>();
 
     // Start at the 2nd member in the group.
     int j;
@@ -3581,7 +3581,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      */
     final INamedSolutionSetRef[] namedSolutionSetRefs;
     {
-      final List<INamedSolutionSetRef> list = new LinkedList<INamedSolutionSetRef>();
+      final List<INamedSolutionSetRef> list = new LinkedList<>();
 
       list.add(firstNamedSolutionSetRef);
 
@@ -3611,7 +3611,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * properly handle join constraints.
      */
 
-    final List<IConstraint> constraints = new LinkedList<IConstraint>();
+    final List<IConstraint> constraints = new LinkedList<>();
 
     // convert constraints to join constraints (BLZG-1648).
     for (FilterNode filter : joinConstraints) {
@@ -3759,7 +3759,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final IValueExpression ve = assignmentNode.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
 
     /*
      * Get the vars this filter needs materialized.
@@ -3842,7 +3842,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final IValueExpression ve = assignmentNode.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
 
     /*
      * Get the vars this filter needs materialized.
@@ -3918,7 +3918,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
             ctx);
 
     // operator B.
-    final Set<IVariable<IV>> iVars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> iVars = new LinkedHashSet<>();
     iVars.add(freshVar);
     left =
         addMockTermResolverOp(
@@ -3956,7 +3956,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     @SuppressWarnings("unchecked")
     final IValueExpression<IV> ve = (IValueExpression<IV>) filter.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
 
     /*
      * Get the variables that this filter needs materialized.
@@ -4024,7 +4024,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final IConstant<IV>[] set = bop.getSet();
 
-    final LinkedHashSet<IV> ivs = new LinkedHashSet<IV>();
+    final LinkedHashSet<IV> ivs = new LinkedHashSet<>();
 
     for (IConstant<IV> iv : set) {
 
@@ -4098,7 +4098,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     @SuppressWarnings("rawtypes")
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     final IConstraint[] joinConstraints =
         getJoinConstraints(getJoinConstraints(subgroup), needsMaterialization);
@@ -4258,7 +4258,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
       if (joinType.equals(JoinTypeEnum.Normal)) {
 
         final Set<IVariable<?>> nonProjectInVariables =
-            ctx.sa.getMaybeIncomingBindings(subgroup, new LinkedHashSet<IVariable<?>>());
+            ctx.sa.getMaybeIncomingBindings(subgroup, new LinkedHashSet<>());
 
         for (int i = 0; i < projectInVars.length; i++) {
           nonProjectInVariables.remove(projectInVars[i]);
@@ -4348,7 +4348,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
       /*
        * DISTINCT on the JVM heap.
        */
-      final List<NV> anns = new LinkedList<NV>();
+      final List<NV> anns = new LinkedList<>();
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, bopId));
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, vars));
       anns.add(
@@ -4479,7 +4479,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * TODO Review. I believe that AssignmentNode.getValueExpression()
      * should always return the Bind().
      */
-    final Set<IVariable<IV>> vars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
 
     if (projectExprs != null) {
 
@@ -4629,7 +4629,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     // The query hints are taken from the QueryBase
     final Properties queryHints = queryBase.getQueryHints();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
 
     final ISortOrder<IV>[] sortOrders = new ISortOrder[orderBy.size()];
 
@@ -4755,7 +4755,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final IVariableOrConstant<IV> c = cvar == null ? null : cvar.getValueExpression();
 
     // The annotations for the predicate.
-    final List<NV> anns = new LinkedList<NV>();
+    final List<NV> anns = new LinkedList<>();
 
     anns.add(
         new NV(
@@ -4884,12 +4884,12 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       // Start with everything known bound on entry.
       final Set<IVariable<?>> joinVars =
-          ctx.sa.getDefinitelyIncomingBindings(sp, new LinkedHashSet<IVariable<?>>());
+          ctx.sa.getDefinitelyIncomingBindings(sp, new LinkedHashSet<>());
 
       // Find all variables which this predicate will bind.
       final Set<IVariable<?>> predVars =
           ctx.sa.getDefinitelyProducedBindings(
-              sp, new LinkedHashSet<IVariable<?>>(), false /* recursive */);
+              sp, new LinkedHashSet<>(), false /* recursive */);
 
       // Retain only those variables which this predicate will bind.
       joinVars.retainAll(predVars);
@@ -5016,7 +5016,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      * (#1037)?
      */
     {
-      final List<IFilter> filters = new LinkedList<IFilter>();
+      final List<IFilter> filters = new LinkedList<>();
 
       if (Boolean.valueOf(
           sp.getProperty(
@@ -5484,14 +5484,14 @@ public class AST2BOpUtility extends AST2BOpRTO {
       final IVariable<?> askVar,
       final PipelineOp subqueryPlan) {
 
-    final Set<IVariable<?>> joinVarsSet = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> joinVarsSet = new HashSet<>();
     if (joinVars != null) {
       for (int i = 0; i < joinVars.length; i++) {
         joinVarsSet.add(joinVars[i]);
       }
     }
 
-    final Set<IVariable<?>> projectInVarsSet = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> projectInVarsSet = new HashSet<>();
     if (projectInVars != null) {
       for (int i = 0; i < projectInVars.length; i++) {
         projectInVarsSet.add(projectInVars[i]);
@@ -5644,7 +5644,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     if (!ctx.nativeDistinctSolutions) {
 
-      final List<NV> anns = new LinkedList<NV>();
+      final List<NV> anns = new LinkedList<>();
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, ctx.nextId()));
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, projectionVars));
       anns.add(
@@ -5661,7 +5661,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
           NamedSolutionSetRefUtility.newInstance(
               ctx.queryId, "--distinct-" + ctx.nextId(), projectionVars);
 
-      final List<NV> anns = new LinkedList<NV>();
+      final List<NV> anns = new LinkedList<>();
       anns.add(new NV(HTreeDistinctBindingSetsOp.Annotations.BOP_ID, ctx.nextId()));
       anns.add(new NV(HTreeDistinctBindingSetsOp.Annotations.VARIABLES, projectionVars));
       anns.add(

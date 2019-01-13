@@ -63,7 +63,7 @@ public class IPv4AddrIV<V extends EmbergraphLiteral> extends AbstractLiteralIV<V
   @Override
   public IV<V, IPv4Address> clone(final boolean clearCache) {
 
-    final IPv4AddrIV<V> tmp = new IPv4AddrIV<V>(value);
+    final IPv4AddrIV<V> tmp = new IPv4AddrIV<>(value);
 
     // Propagate the cached EmbergraphValue.
     tmp.uri = uri;

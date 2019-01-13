@@ -132,7 +132,7 @@ public class TestSampleIndex extends TestCase2 {
     Arrays.sort(a, R.primaryKeyOrder.getComparator());
 
     // insert data (the records are not pre-sorted).
-    final long ninserts = rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    final long ninserts = rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     jnl.commit();
@@ -301,9 +301,9 @@ public class TestSampleIndex extends TestCase2 {
     final IVariable<?> y = Var.var("y");
 
     final IPredicate<E> predicate =
-        new Predicate<E>(
-            new BOp[] {x, y},
-            new NV(IPredicate.Annotations.RELATION_NAME, new String[] {namespace}),
+        new Predicate<>(
+            new BOp[]{x, y},
+            new NV(IPredicate.Annotations.RELATION_NAME, new String[]{namespace}),
             new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED));
 
     final int[] limits =
@@ -338,7 +338,7 @@ public class TestSampleIndex extends TestCase2 {
     final BOpContextBase context = new BOpContextBase(null /* fed */, jnl /* indexManager */);
 
     final SampleIndex<E> sampleOp =
-        new SampleIndex<E>(
+        new SampleIndex<>(
             new BOp[0],
             NV.asMap(
                 new NV(SampleIndex.Annotations.PREDICATE, predicate),

@@ -86,13 +86,13 @@ public class TestSameVariableConstraint extends TestCase2 {
 
     relation = "r";
 
-    a = new Constant<IV>(factory.newTermId(VTE.URI));
+    a = new Constant<>(factory.newTermId(VTE.URI));
 
-    b = new Constant<IV>(factory.newTermId(VTE.URI));
+    b = new Constant<>(factory.newTermId(VTE.URI));
 
-    c = new Constant<IV>(factory.newTermId(VTE.URI));
+    c = new Constant<>(factory.newTermId(VTE.URI));
 
-    d = new Constant<IV>(factory.newTermId(VTE.URI));
+    d = new Constant<>(factory.newTermId(VTE.URI));
   }
 
   protected void tearDown() throws Exception {

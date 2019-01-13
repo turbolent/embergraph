@@ -225,7 +225,7 @@ public class TemporaryStoreFactory {
       stores.put(t.getUUID(), t);
 
       // return weak reference.
-      ref = new WeakReference<TemporaryStore>(t);
+      ref = new WeakReference<>(t);
     }
 
     return t;
@@ -239,7 +239,7 @@ public class TemporaryStoreFactory {
    * which case you may have dead temporary stores lying around.
    */
   private ConcurrentWeakValueCache<UUID, TemporaryStore> stores =
-      new ConcurrentWeakValueCache<UUID, TemporaryStore>(0);
+      new ConcurrentWeakValueCache<>(0);
 
   /** Close all open temporary stores allocated by this factory. */
   public synchronized void closeAll() {

@@ -125,7 +125,7 @@ public class Event implements Serializable {
    */
   protected static Map<String, Object> newDetails() {
 
-    return Collections.synchronizedMap(new HashMap<String, Object>());
+    return Collections.synchronizedMap(new HashMap<>());
   }
 
   /*
@@ -637,7 +637,7 @@ public class Event implements Serializable {
     private int i;
 
     public MyStringTokenizer(final String s, final String delim) {
-      this.tokens = new ArrayList<String>(20);
+      this.tokens = new ArrayList<>(20);
       final StringTokenizer st = new StringTokenizer(s, delim, true);
       while (st.hasMoreTokens()) {
         tokens.add(st.nextToken());

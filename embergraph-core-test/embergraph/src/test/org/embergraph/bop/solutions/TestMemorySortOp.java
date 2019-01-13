@@ -85,7 +85,7 @@ public class TestMemorySortOp extends TestCase2 {
 
   private IV<EmbergraphLiteral, ?> makeIV(final EmbergraphLiteral lit) {
 
-    final IV<EmbergraphLiteral, ?> iv = new TermId<EmbergraphLiteral>(VTE.LITERAL, termId++);
+    final IV<EmbergraphLiteral, ?> iv = new TermId<>(VTE.LITERAL, termId++);
 
     iv.setValue(lit);
 
@@ -100,11 +100,11 @@ public class TestMemorySortOp extends TestCase2 {
 
     final IVariable<IV> x = Var.var("x");
     final IVariable<IV> y = Var.var("y");
-    final IConstant<IV> a = new Constant<IV>(makeIV(f.createLiteral("a")));
-    final IConstant<IV> b = new Constant<IV>(makeIV(f.createLiteral("b")));
-    final IConstant<IV> c = new Constant<IV>(makeIV(f.createLiteral("c")));
-    final IConstant<IV> d = new Constant<IV>(makeIV(f.createLiteral("d")));
-    final IConstant<IV> e = new Constant<IV>(makeIV(f.createLiteral("e")));
+    final IConstant<IV> a = new Constant<>(makeIV(f.createLiteral("a")));
+    final IConstant<IV> b = new Constant<>(makeIV(f.createLiteral("b")));
+    final IConstant<IV> c = new Constant<>(makeIV(f.createLiteral("c")));
+    final IConstant<IV> d = new Constant<>(makeIV(f.createLiteral("d")));
+    final IConstant<IV> e = new Constant<>(makeIV(f.createLiteral("e")));
 
     final ISortOrder<?>[] sors =
         new ISortOrder[] {new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
@@ -159,10 +159,10 @@ public class TestMemorySortOp extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final UUID queryId = UUID.randomUUID();
     final IQueryContext queryContext = new MockQueryContext(queryId);
@@ -170,7 +170,7 @@ public class TestMemorySortOp extends TestCase2 {
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -212,11 +212,11 @@ public class TestMemorySortOp extends TestCase2 {
 
     final IVariable<IV> x = Var.var("x");
     final IVariable<IV> y = Var.var("y");
-    final IConstant<IV> a = new Constant<IV>(new XSDNumericIV(1));
-    final IConstant<IV> b = new Constant<IV>(new XSDNumericIV(2));
-    final IConstant<IV> c = new Constant<IV>(new XSDNumericIV(3));
-    final IConstant<IV> d = new Constant<IV>(new XSDNumericIV(4));
-    final IConstant<IV> e = new Constant<IV>(new XSDNumericIV(5));
+    final IConstant<IV> a = new Constant<>(new XSDNumericIV(1));
+    final IConstant<IV> b = new Constant<>(new XSDNumericIV(2));
+    final IConstant<IV> c = new Constant<>(new XSDNumericIV(3));
+    final IConstant<IV> d = new Constant<>(new XSDNumericIV(4));
+    final IConstant<IV> e = new Constant<>(new XSDNumericIV(5));
 
     final ISortOrder<?>[] sors =
         new ISortOrder[] {new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
@@ -271,10 +271,10 @@ public class TestMemorySortOp extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final UUID queryId = UUID.randomUUID();
     final IQueryContext queryContext = new MockQueryContext(queryId);
@@ -282,7 +282,7 @@ public class TestMemorySortOp extends TestCase2 {
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -343,11 +343,11 @@ public class TestMemorySortOp extends TestCase2 {
       final IVariable<IV> x = Var.var("x");
       final IVariable<IV> y = Var.var("y");
       final IVariable<IV> z = Var.var("z");
-      final IConstant<IV> _1 = new Constant<IV>(new XSDNumericIV(1));
-      final IConstant<IV> _2 = new Constant<IV>(new XSDNumericIV(2));
-      final IConstant<IV> _3 = new Constant<IV>(new XSDNumericIV(3));
-      final IConstant<IV> _4 = new Constant<IV>(new XSDNumericIV(4));
-      final IConstant<IV> _5 = new Constant<IV>(new XSDNumericIV(5));
+      final IConstant<IV> _1 = new Constant<>(new XSDNumericIV(1));
+      final IConstant<IV> _2 = new Constant<>(new XSDNumericIV(2));
+      final IConstant<IV> _3 = new Constant<>(new XSDNumericIV(3));
+      final IConstant<IV> _4 = new Constant<>(new XSDNumericIV(4));
+      final IConstant<IV> _5 = new Constant<>(new XSDNumericIV(5));
 
       final ISortOrder<?>[] sors =
           new ISortOrder[] {
@@ -425,10 +425,10 @@ public class TestMemorySortOp extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final UUID queryId = UUID.randomUUID();
       final IQueryContext queryContext = new MockQueryContext(queryId);
@@ -436,7 +436,7 @@ public class TestMemorySortOp extends TestCase2 {
           new MockRunningQuery(null /* fed */, store /* indexManager */, queryContext);
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,

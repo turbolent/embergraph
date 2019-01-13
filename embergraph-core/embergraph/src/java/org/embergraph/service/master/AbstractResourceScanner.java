@@ -72,7 +72,7 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
 
     this.buffer = buffer;
 
-    this.queue = new ArrayBlockingQueue<V>(2 * buffer.getMinimumChunkSize());
+    this.queue = new ArrayBlockingQueue<>(2 * buffer.getMinimumChunkSize());
   }
 
   /*
@@ -141,7 +141,7 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
   @SuppressWarnings("unchecked")
   private void transferChunk() {
 
-    final LinkedList<V> c = new LinkedList<V>();
+    final LinkedList<V> c = new LinkedList<>();
 
     // drain chunk containing up to the desired chunk size.
     queue.drainTo(c, buffer.getMinimumChunkSize());

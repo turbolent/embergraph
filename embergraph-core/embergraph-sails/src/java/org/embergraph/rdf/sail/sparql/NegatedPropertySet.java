@@ -29,7 +29,7 @@ public class NegatedPropertySet {
 
   private Var contextVar;
 
-  private List<PropertySetElem> propertySetElems = new ArrayList<PropertySetElem>();
+  private List<PropertySetElem> propertySetElems = new ArrayList<>();
 
   /** @param scope The scope to set. */
   public void setScope(Scope scope) {

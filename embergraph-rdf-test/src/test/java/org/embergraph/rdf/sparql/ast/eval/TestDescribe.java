@@ -107,7 +107,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     // The expected solutions for the DESCRIBE query.
     final Set<Statement> expectedStatements = h.expectedGraphQueryResult;
 
-    final Set<Statement> graph = new HashSet<Statement>();
+    final Set<Statement> graph = new HashSet<>();
 
     for (Statement stmt : expectedStatements) {
 
@@ -145,7 +145,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     final Set<Statement> expectedGraph = getExpectedDescription(describedResource, h);
 
     // Check the description.
-    h.compareGraphs(new HashSet<Statement>(actualGraph), expectedGraph);
+    h.compareGraphs(new HashSet<>(actualGraph), expectedGraph);
 
     for (Statement stmt : actualGraph) {
 

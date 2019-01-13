@@ -36,7 +36,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       fail();
@@ -52,7 +52,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       fail();
@@ -68,7 +68,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       fail();
@@ -84,7 +84,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       fail();
@@ -103,7 +103,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = false;
@@ -122,7 +122,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = false;
@@ -141,7 +141,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = true;
@@ -160,7 +160,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = true;
@@ -179,7 +179,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = true;
@@ -198,7 +198,7 @@ public class IPv4AddrIVTest extends TestCase {
     IPv4AddrIV<EmbergraphLiteral> addr = null;
 
     try {
-      addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
+      addr = new IPv4AddrIV<>(testCase);
     } catch (UnknownHostException uh) {
       log.info(uh);
       test = true;

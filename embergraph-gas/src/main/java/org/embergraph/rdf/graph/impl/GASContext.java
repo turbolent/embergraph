@@ -62,7 +62,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
    * is {@link TraversalDirectionEnum#Forward}).
    */
   private final AtomicReference<TraversalDirectionEnum> traversalDirection =
-      new AtomicReference<TraversalDirectionEnum>(TraversalDirectionEnum.Forward);
+      new AtomicReference<>(TraversalDirectionEnum.Forward);
 
   /** The maximum number of iterations (defaults to {@link Integer#MAX_VALUE}). */
   private final AtomicInteger maxIterations = new AtomicInteger(Integer.MAX_VALUE);
@@ -71,17 +71,17 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   private final AtomicInteger maxVertices = new AtomicInteger(Integer.MAX_VALUE);
 
   /** An optional constraint on the type of the visited links. */
-  private final AtomicReference<URI> linkType = new AtomicReference<URI>(null);
+  private final AtomicReference<URI> linkType = new AtomicReference<>(null);
 
   /** An optional constraint on the type of the visited link attributes. */
-  private final AtomicReference<URI> linkAttributeType = new AtomicReference<URI>(null);
+  private final AtomicReference<URI> linkAttributeType = new AtomicReference<>(null);
 
   /** An optional {@link IReducer} that will executed after the {@link IGASProgram}. */
   private final AtomicReference<IReducer<VS, ES, ST, ?>> afterOp =
-      new AtomicReference<IReducer<VS, ES, ST, ?>>(null);
+      new AtomicReference<>(null);
 
   /** A collection of target vertices for the program to reach. */
-  private final Set<Value> targetVertices = Collections.synchronizedSet(new LinkedHashSet<Value>());
+  private final Set<Value> targetVertices = Collections.synchronizedSet(new LinkedHashSet<>());
 
   /*
    * The maximum number of iterations after the target vertices have been reached. Default behavior

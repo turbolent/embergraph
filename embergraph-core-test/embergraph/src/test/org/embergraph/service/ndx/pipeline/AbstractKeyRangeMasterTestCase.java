@@ -86,7 +86,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
   }
 
   /** Mapping from {@link UUID}s onto {@link DS data services}. */
-  protected final Map<UUID, DS> dataServices = new ConcurrentHashMap<UUID, DS>();
+  protected final Map<UUID, DS> dataServices = new ConcurrentHashMap<>();
 
   /** Choose a data service at random. */
   protected DS getRandomDataService() {
@@ -115,10 +115,10 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
      * <p>Note: Explicit synchronization is required across accesses to {@link #staleLocators},
      * {@link #knownLocators}, and across {@link #writeChunk(L, KVO[])}.
      */
-    private final Set<Integer /* partitionId */> staleLocators = new HashSet<Integer>();
+    private final Set<Integer /* partitionId */> staleLocators = new HashSet<>();
 
     /** A collection of index partitions known to exist on this data service. */
-    private final Set<Integer /* partitionId */> knownLocators = new HashSet<Integer>();
+    private final Set<Integer /* partitionId */> knownLocators = new HashSet<>();
 
     public DS(UUID uuid) {
 

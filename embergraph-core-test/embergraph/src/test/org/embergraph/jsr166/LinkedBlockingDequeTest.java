@@ -50,7 +50,7 @@ public class LinkedBlockingDequeTest extends JSR166TestCase {
 
   /** Create a deque of given size containing consecutive Integers 0 ... n. */
   private LinkedBlockingDeque<Integer> populatedDeque(int n) {
-    LinkedBlockingDeque<Integer> q = new LinkedBlockingDeque<Integer>(n);
+    LinkedBlockingDeque<Integer> q = new LinkedBlockingDeque<>(n);
     assertTrue(q.isEmpty());
     for (int i = 0; i < n; i++) assertTrue(q.offer(new Integer(i)));
     assertFalse(q.isEmpty());

@@ -132,7 +132,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -252,10 +252,10 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     //                }));
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -272,7 +272,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("Paul")})
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("Paul")})
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -331,10 +331,10 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -349,7 +349,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<String>("Paul")})
+              new IVariable[] {Var.var("value")}, new IConstant[] {new Constant<>("Paul")})
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -435,16 +435,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -474,11 +474,11 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     final IBindingSet[] source;
     {
       final IBindingSet bset1 = new ListBindingSet();
-      bset1.set(x, new Constant<String>("Paul"));
+      bset1.set(x, new Constant<>("Paul"));
       final IBindingSet bset2 = new ListBindingSet();
-      bset2.set(x, new Constant<String>("Leon"));
+      bset2.set(x, new Constant<>("Leon"));
       final IBindingSet bset3 = new ListBindingSet();
-      bset3.set(x, new Constant<String>("Mary"));
+      bset3.set(x, new Constant<>("Mary"));
 
       source =
           new IBindingSet[] {bset1, bset2, bset3
@@ -514,13 +514,13 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Leon")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Leon")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Paul")}),
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -635,16 +635,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Mark")})
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Mark")})
         };
     // Put each source binding set into a chunk by itself.
     final IBindingSet[][] sources = new IBindingSet[source.length][];
@@ -749,16 +749,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Mark")})
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Mark")})
         };
     // Put each source binding set into a chunk by itself.
     final IBindingSet[][] sources = new IBindingSet[source.length][];
@@ -864,16 +864,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -896,10 +896,10 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Mary")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Mary")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")})
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")})
         };
 
     final UUID queryId = UUID.randomUUID();
@@ -1006,26 +1006,26 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
      * to model it as an IElementFilter on the predicate.
      */
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)
                 //                        new NV(Predicate.Annotations.KEY_ORDER,
                 //                                R.primaryKeyOrder),
-                ));
+            ));
 
     final PipelineJoin<E> joinOp =
-        new PipelineJoin<E>(
-            new BOp[] {startOp},
+        new PipelineJoin<>(
+            new BOp[]{startOp},
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             // impose constraint on the join.
             new NV(
                 PipelineJoin.Annotations.CONSTRAINTS,
-                new IConstraint[] {
-                  Constraint.wrap(new EQConstant(y, new Constant<String>("Paul")))
+                new IConstraint[]{
+                    Constraint.wrap(new EQConstant(y, new Constant<>("Paul")))
                 }));
 
     final PipelineOp query =
@@ -1050,7 +1050,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
           //                ),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Leon"), new Constant<String>("Paul")}), //
+              new IConstant[] {new Constant<>("Leon"), new Constant<>("Paul")}), //
           //                new ListBindingSet(
           //                        new IVariable[] { x, y },
           //                        new IConstant[] { new Constant<String>("Mary"),
@@ -1058,7 +1058,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
           //                ),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("Paul")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("Paul")}),
           //                new ListBindingSet(
           //                        new IVariable[] { x, y },
           //                        new IConstant[] { new Constant<String>("Paul"),
@@ -1199,7 +1199,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
 
       //            final IBindingSet initialBindings = new HashBindingSet();
 
-      initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
+      initialBindings.set(Var.var("x"), new Constant<>("Mary"));
 
       //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
       //                    queryId, startId,
@@ -1218,9 +1218,9 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new ListBindingSet(
                 new IVariable[] {Var.var("x"), Var.var("y"), Var.var("z")},
                 new IConstant[] {
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Mary"),
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon")
                 })
           };
 
@@ -1339,17 +1339,19 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
 
     final Executor service = new LatchedExecutor(jnl.getExecutorService(), poolSize);
 
-    final List<FutureTask<Void>> futures = new LinkedList<FutureTask<Void>>();
+    final List<FutureTask<Void>> futures = new LinkedList<>();
 
     for (int i = 0; i < ntrials; i++) {
 
       final int trial = i;
       final FutureTask<Void> ft =
-          new FutureTask<Void>(
+          new FutureTask<>(
               new Runnable() {
                 public void run() {
                   try {
-                    if (log.isInfoEnabled()) log.info("trial=" + trial);
+                    if (log.isInfoEnabled()) {
+                      log.info("trial=" + trial);
+                    }
                     test_query_join2();
                   } catch (Throwable t) {
                     // log error.
@@ -1371,7 +1373,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     int ntimeout = 0;
     int nsuccess = 0;
     int ninterrupt = 0;
-    final LinkedList<ExecutionException> errors = new LinkedList<ExecutionException>();
+    final LinkedList<ExecutionException> errors = new LinkedList<>();
     for (FutureTask<Void> ft : futures) {
       // remaining nanoseconds.
       final long remaining = nanos - (System.nanoTime() - begin);
@@ -1534,16 +1536,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("Leon"),
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Leon"),
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon")
                 }),
             new ListBindingSet(
                 new IVariable[] {x, y, z},
                 new IConstant[] {
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon"),
-                  new Constant<String>("Paul")
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon"),
+                    new Constant<>("Paul")
                 }),
             /*
              * No. The CONSTRAINT on the 2nd join [x == y] filters all
@@ -1647,7 +1649,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     int joinId2 = 3;
 
     IConstraint condition =
-        Constraint.wrap(new EQConstant(Var.var("x"), new Constant<String>("Mary")));
+        Constraint.wrap(new EQConstant(Var.var("x"), new Constant<>("Mary")));
     IRunningQuery runningQuery =
         initQueryWithConditionalRoutingOp(condition, startId, joinId1, joinId2);
 
@@ -1659,9 +1661,9 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new ListBindingSet(
                 new IVariable[] {Var.var("x"), Var.var("y"), Var.var("z")},
                 new IConstant[] {
-                  new Constant<String>("Mary"),
-                  new Constant<String>("Paul"),
-                  new Constant<String>("Leon")
+                    new Constant<>("Mary"),
+                    new Constant<>("Paul"),
+                    new Constant<>("Leon")
                 })
           };
 
@@ -1729,7 +1731,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
 
     // 'x' is actually bound to "Mary" so this condition will be false.
     IConstraint condition =
-        Constraint.wrap(new EQConstant(Var.var("x"), new Constant<String>("Fred")));
+        Constraint.wrap(new EQConstant(Var.var("x"), new Constant<>("Fred")));
 
     IRunningQuery runningQuery =
         initQueryWithConditionalRoutingOp(condition, startId, joinId1, joinId2);
@@ -1740,7 +1742,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
       final IBindingSet[] expected =
           new IBindingSet[] {
             new ListBindingSet(
-                new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("Mary")})
+                new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("Mary")})
           };
 
       AbstractQueryEngineTestCase.assertSameSolutions(expected, runningQuery);
@@ -1879,7 +1881,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     final IBindingSet initialBindings = new ListBindingSet();
     {
       //            final IBindingSet initialBindings = new HashBindingSet();
-      initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
+      initialBindings.set(Var.var("x"), new Constant<>("Mary"));
 
       //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
       //                    queryId, startId,

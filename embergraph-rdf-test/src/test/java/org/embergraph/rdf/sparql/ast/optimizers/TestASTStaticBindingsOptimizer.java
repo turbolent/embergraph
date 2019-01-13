@@ -105,7 +105,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     final IBindingSet[] bsets =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("p")}, new IConstant[] {new Constant<IV>(mockIV)})
+              new IVariable[] {Var.var("p")}, new IConstant[] {new Constant<>(mockIV)})
         };
 
     // The source AST.
@@ -193,7 +193,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     final IBindingSet[] bsets =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<IV>(c12)})
+              new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<>(c12)})
         };
 
     // The source AST.
@@ -324,7 +324,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -416,7 +416,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -508,7 +508,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -556,12 +556,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       given.setWhereClause(whereClause);
 
       final IVariable<?> var = Var.var("p");
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(var);
 
-      final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new ArrayList<>();
       IBindingSet bs = new ListBindingSet();
-      bs.set(var, new Constant<IV>(cTest));
+      bs.set(var, new Constant<>(cTest));
       bindingSets.add(bs);
 
       whereClause.addChild(
@@ -606,7 +606,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -654,12 +654,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       given.setWhereClause(whereClause);
 
       final IVariable<?> var = Var.var("p");
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(var);
 
-      final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new ArrayList<>();
       IBindingSet bs = new ListBindingSet();
-      bs.set(var, new Constant<IV>(cTest));
+      bs.set(var, new Constant<>(cTest));
       bindingSets.add(bs);
 
       final BindingsClause bc = new BindingsClause(declaredVars, bindingSets);
@@ -703,7 +703,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -740,7 +740,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     final IBindingSet[] bsetsGiven =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<IV>(cFalse)})
+              new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<>(cFalse)})
         };
 
     // The source AST.
@@ -780,8 +780,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 2);
-    assertTrue(resBs[0].get(Var.var("s")).equals(new Constant<IV>(cFalse)));
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTrue)));
+    assertTrue(resBs[0].get(Var.var("s")).equals(new Constant<>(cFalse)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTrue)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -850,14 +850,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
      * "a3", ?c -> "c3" } }
      */
     final IBindingSet exogeneousIn1 = new ListBindingSet();
-    exogeneousIn1.set(Var.var("a"), new Constant<IV>(a1Lit));
-    exogeneousIn1.set(Var.var("c"), new Constant<IV>(c1Lit));
+    exogeneousIn1.set(Var.var("a"), new Constant<>(a1Lit));
+    exogeneousIn1.set(Var.var("c"), new Constant<>(c1Lit));
     final IBindingSet exogeneousIn2 = new ListBindingSet();
-    exogeneousIn2.set(Var.var("a"), new Constant<IV>(a2Lit));
-    exogeneousIn2.set(Var.var("c"), new Constant<IV>(c2Lit));
+    exogeneousIn2.set(Var.var("a"), new Constant<>(a2Lit));
+    exogeneousIn2.set(Var.var("c"), new Constant<>(c2Lit));
     final IBindingSet exogeneousIn3 = new ListBindingSet();
-    exogeneousIn3.set(Var.var("a"), new Constant<IV>(a3Lit));
-    exogeneousIn3.set(Var.var("c"), new Constant<IV>(c3Lit));
+    exogeneousIn3.set(Var.var("a"), new Constant<>(a3Lit));
+    exogeneousIn3.set(Var.var("c"), new Constant<>(c3Lit));
     final IBindingSet[] bsetsGiven =
         new IBindingSet[] {exogeneousIn1, exogeneousIn2, exogeneousIn3};
 
@@ -873,30 +873,30 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final AssignmentNode bAss = new AssignmentNode(new VarNode("b"), new ConstantNode(bLit));
 
       // VALUES ?e { "e" }
-      final LinkedHashSet<IVariable<?>> declaredVarsE = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVarsE = new LinkedHashSet<>();
       declaredVarsE.add(Var.var("e"));
 
-      final List<IBindingSet> bindingSetsE = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSetsE = new ArrayList<>();
       IBindingSet bsE = new ListBindingSet();
-      bsE.set(Var.var("e"), new Constant<IV>(eLit));
+      bsE.set(Var.var("e"), new Constant<>(eLit));
       bindingSetsE.add(bsE);
       final BindingsClause eBindings = new BindingsClause(declaredVarsE, bindingSetsE);
 
       // VALUES (?c ?d) { ("c1" "d1") ("c2" "d2") }
-      final LinkedHashSet<IVariable<?>> declaredVarsBcd = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVarsBcd = new LinkedHashSet<>();
       declaredVarsE.add(Var.var("b"));
       declaredVarsE.add(Var.var("c"));
       declaredVarsE.add(Var.var("d"));
 
-      final List<IBindingSet> bindingSetsCd = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSetsCd = new ArrayList<>();
       IBindingSet bsCd1 = new ListBindingSet();
-      bsCd1.set(Var.var("c"), new Constant<IV>(c1Lit));
-      bsCd1.set(Var.var("d"), new Constant<IV>(d1Lit));
+      bsCd1.set(Var.var("c"), new Constant<>(c1Lit));
+      bsCd1.set(Var.var("d"), new Constant<>(d1Lit));
       bindingSetsCd.add(bsCd1);
 
       IBindingSet bsCd2 = new ListBindingSet();
-      bsCd2.set(Var.var("c"), new Constant<IV>(c2Lit));
-      bsCd2.set(Var.var("d"), new Constant<IV>(d2Lit));
+      bsCd2.set(Var.var("c"), new Constant<>(c2Lit));
+      bsCd2.set(Var.var("d"), new Constant<>(d2Lit));
       bindingSetsCd.add(bsCd2);
 
       final BindingsClause bcdBindings = new BindingsClause(declaredVarsBcd, bindingSetsCd);
@@ -940,19 +940,19 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
     final IBindingSet bs1 = resBs[0];
     assertTrue(bs1.size() == 5);
-    assertTrue(bs1.get(Var.var("a")).equals(new Constant<IV>(a1Lit)));
-    assertTrue(bs1.get(Var.var("b")).equals(new Constant<IV>(bLit)));
-    assertTrue(bs1.get(Var.var("c")).equals(new Constant<IV>(c1Lit)));
-    assertTrue(bs1.get(Var.var("d")).equals(new Constant<IV>(d1Lit)));
-    assertTrue(bs1.get(Var.var("e")).equals(new Constant<IV>(eLit)));
+    assertTrue(bs1.get(Var.var("a")).equals(new Constant<>(a1Lit)));
+    assertTrue(bs1.get(Var.var("b")).equals(new Constant<>(bLit)));
+    assertTrue(bs1.get(Var.var("c")).equals(new Constant<>(c1Lit)));
+    assertTrue(bs1.get(Var.var("d")).equals(new Constant<>(d1Lit)));
+    assertTrue(bs1.get(Var.var("e")).equals(new Constant<>(eLit)));
 
     final IBindingSet bs2 = resBs[1];
     assertTrue(bs2.size() == 5);
-    assertTrue(bs2.get(Var.var("a")).equals(new Constant<IV>(a2Lit)));
-    assertTrue(bs2.get(Var.var("b")).equals(new Constant<IV>(bLit)));
-    assertTrue(bs2.get(Var.var("c")).equals(new Constant<IV>(c2Lit)));
-    assertTrue(bs2.get(Var.var("d")).equals(new Constant<IV>(d2Lit)));
-    assertTrue(bs2.get(Var.var("e")).equals(new Constant<IV>(eLit)));
+    assertTrue(bs2.get(Var.var("a")).equals(new Constant<>(a2Lit)));
+    assertTrue(bs2.get(Var.var("b")).equals(new Constant<>(bLit)));
+    assertTrue(bs2.get(Var.var("c")).equals(new Constant<>(c2Lit)));
+    assertTrue(bs2.get(Var.var("d")).equals(new Constant<>(d2Lit)));
+    assertTrue(bs2.get(Var.var("e")).equals(new Constant<>(eLit)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -1545,14 +1545,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
      * "a3", ?c -> "c3" } }
      */
     final IBindingSet exogeneousIn1 = new ListBindingSet();
-    exogeneousIn1.set(Var.var("a"), new Constant<IV>(a1Lit));
-    exogeneousIn1.set(Var.var("c"), new Constant<IV>(c1Lit));
+    exogeneousIn1.set(Var.var("a"), new Constant<>(a1Lit));
+    exogeneousIn1.set(Var.var("c"), new Constant<>(c1Lit));
     final IBindingSet exogeneousIn2 = new ListBindingSet();
-    exogeneousIn2.set(Var.var("a"), new Constant<IV>(a2Lit));
-    exogeneousIn2.set(Var.var("c"), new Constant<IV>(c2Lit));
+    exogeneousIn2.set(Var.var("a"), new Constant<>(a2Lit));
+    exogeneousIn2.set(Var.var("c"), new Constant<>(c2Lit));
     final IBindingSet exogeneousIn3 = new ListBindingSet();
-    exogeneousIn3.set(Var.var("a"), new Constant<IV>(a3Lit));
-    exogeneousIn3.set(Var.var("c"), new Constant<IV>(c3Lit));
+    exogeneousIn3.set(Var.var("a"), new Constant<>(a3Lit));
+    exogeneousIn3.set(Var.var("c"), new Constant<>(c3Lit));
     final IBindingSet[] bsetsGiven =
         new IBindingSet[] {exogeneousIn1, exogeneousIn2, exogeneousIn3};
 
@@ -1568,30 +1568,30 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final AssignmentNode bAss = new AssignmentNode(new VarNode("b"), new ConstantNode(bLit));
 
       // VALUES ?e { "e" }
-      final LinkedHashSet<IVariable<?>> declaredVarsE = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVarsE = new LinkedHashSet<>();
       declaredVarsE.add(Var.var("e"));
 
-      final List<IBindingSet> bindingSetsE = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSetsE = new ArrayList<>();
       IBindingSet bsE = new ListBindingSet();
-      bsE.set(Var.var("e"), new Constant<IV>(eLit));
+      bsE.set(Var.var("e"), new Constant<>(eLit));
       bindingSetsE.add(bsE);
       final BindingsClause eBindings = new BindingsClause(declaredVarsE, bindingSetsE);
 
       // VALUES (?c ?d) { ("c1" "d1") ("c2" "d2") }
-      final LinkedHashSet<IVariable<?>> declaredVarsBcd = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVarsBcd = new LinkedHashSet<>();
       declaredVarsE.add(Var.var("b"));
       declaredVarsE.add(Var.var("c"));
       declaredVarsE.add(Var.var("d"));
 
-      final List<IBindingSet> bindingSetsCd = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSetsCd = new ArrayList<>();
       IBindingSet bsCd1 = new ListBindingSet();
-      bsCd1.set(Var.var("c"), new Constant<IV>(c1Lit));
-      bsCd1.set(Var.var("d"), new Constant<IV>(d1Lit));
+      bsCd1.set(Var.var("c"), new Constant<>(c1Lit));
+      bsCd1.set(Var.var("d"), new Constant<>(d1Lit));
       bindingSetsCd.add(bsCd1);
 
       IBindingSet bsCd2 = new ListBindingSet();
-      bsCd2.set(Var.var("c"), new Constant<IV>(c2Lit));
-      bsCd2.set(Var.var("d"), new Constant<IV>(d2Lit));
+      bsCd2.set(Var.var("c"), new Constant<>(c2Lit));
+      bsCd2.set(Var.var("d"), new Constant<>(d2Lit));
       bindingSetsCd.add(bsCd2);
 
       final BindingsClause bcdBindings = new BindingsClause(declaredVarsBcd, bindingSetsCd);
@@ -1635,19 +1635,19 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
     final IBindingSet bs1 = resBs[0];
     assertTrue(bs1.size() == 5);
-    assertTrue(bs1.get(Var.var("a")).equals(new Constant<IV>(a1Lit)));
-    assertTrue(bs1.get(Var.var("b")).equals(new Constant<IV>(bLit)));
-    assertTrue(bs1.get(Var.var("c")).equals(new Constant<IV>(c1Lit)));
-    assertTrue(bs1.get(Var.var("d")).equals(new Constant<IV>(d1Lit)));
-    assertTrue(bs1.get(Var.var("e")).equals(new Constant<IV>(eLit)));
+    assertTrue(bs1.get(Var.var("a")).equals(new Constant<>(a1Lit)));
+    assertTrue(bs1.get(Var.var("b")).equals(new Constant<>(bLit)));
+    assertTrue(bs1.get(Var.var("c")).equals(new Constant<>(c1Lit)));
+    assertTrue(bs1.get(Var.var("d")).equals(new Constant<>(d1Lit)));
+    assertTrue(bs1.get(Var.var("e")).equals(new Constant<>(eLit)));
 
     final IBindingSet bs2 = resBs[1];
     assertTrue(bs2.size() == 5);
-    assertTrue(bs2.get(Var.var("a")).equals(new Constant<IV>(a2Lit)));
-    assertTrue(bs2.get(Var.var("b")).equals(new Constant<IV>(bLit)));
-    assertTrue(bs2.get(Var.var("c")).equals(new Constant<IV>(c2Lit)));
-    assertTrue(bs2.get(Var.var("d")).equals(new Constant<IV>(d2Lit)));
-    assertTrue(bs2.get(Var.var("e")).equals(new Constant<IV>(eLit)));
+    assertTrue(bs2.get(Var.var("a")).equals(new Constant<>(a2Lit)));
+    assertTrue(bs2.get(Var.var("b")).equals(new Constant<>(bLit)));
+    assertTrue(bs2.get(Var.var("c")).equals(new Constant<>(c2Lit)));
+    assertTrue(bs2.get(Var.var("d")).equals(new Constant<>(d2Lit)));
+    assertTrue(bs2.get(Var.var("e")).equals(new Constant<>(eLit)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -1938,12 +1938,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       sq.setWhereClause(sqWhereClause);
 
       final IVariable<?> var = Var.var("p");
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(var);
 
-      final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new ArrayList<>();
       IBindingSet bs = new ListBindingSet();
-      bs.set(var, new Constant<IV>(cTest2));
+      bs.set(var, new Constant<>(cTest2));
       bindingSets.add(bs);
 
       BindingsClause sqBC = new BindingsClause(declaredVars, bindingSets);
@@ -1963,7 +1963,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("p")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -2012,7 +2012,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
     final IBindingSet[] bsetsGiven =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<IV>(c3)})
+          new ListBindingSet(new IVariable[] {Var.var("s")}, new IConstant[] {new Constant<>(c3)})
         };
 
     // The source AST.
@@ -2052,12 +2052,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       sq.setWhereClause(sqWhereClause);
 
       final IVariable<?> var = Var.var("y");
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(var);
 
-      final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new ArrayList<>();
       IBindingSet bs = new ListBindingSet();
-      bs.set(var, new Constant<IV>(c2));
+      bs.set(var, new Constant<>(c2));
       bindingSets.add(bs);
 
       BindingsClause sqBc = new BindingsClause(declaredVars, bindingSets);
@@ -2104,14 +2104,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       final IVariable<?> varX = Var.var("x");
       final IVariable<?> varY = Var.var("y");
-      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+      final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
       declaredVars.add(varX);
       declaredVars.add(varY);
 
-      final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new ArrayList<>();
       IBindingSet bs = new ListBindingSet();
-      bs.set(varX, new Constant<IV>(c1));
-      bs.set(varY, new Constant<IV>(c2));
+      bs.set(varX, new Constant<>(c1));
+      bs.set(varY, new Constant<>(c2));
       bindingSets.add(bs);
 
       BindingsClause sqBc = new BindingsClause(declaredVars, bindingSets);
@@ -2131,7 +2131,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("s")).equals(new Constant<IV>(c3)));
+    assertTrue(resBs[0].get(Var.var("s")).equals(new Constant<>(c3)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -2274,7 +2274,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("uri")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("uri")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }
@@ -2370,7 +2370,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     IBindingSet[] resBs = res.getBindingSets();
     assertTrue(resBs.length == 1);
     assertTrue(resBs[0].size() == 1);
-    assertTrue(resBs[0].get(Var.var("o")).equals(new Constant<IV>(cTest)));
+    assertTrue(resBs[0].get(Var.var("o")).equals(new Constant<>(cTest)));
 
     assertSameAST(expected, res.getQueryNode());
   }

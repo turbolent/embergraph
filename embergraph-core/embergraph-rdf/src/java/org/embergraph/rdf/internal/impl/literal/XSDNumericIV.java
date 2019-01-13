@@ -41,7 +41,7 @@ public class XSDNumericIV<V extends EmbergraphLiteral> extends NumericIV<V, Numb
 
   public IV<V, Number> clone(final boolean clearCache) {
 
-    final XSDNumericIV<V> tmp = new XSDNumericIV<V>(number, getDTE());
+    final XSDNumericIV<V> tmp = new XSDNumericIV<>(number, getDTE());
 
     if (!clearCache) {
 

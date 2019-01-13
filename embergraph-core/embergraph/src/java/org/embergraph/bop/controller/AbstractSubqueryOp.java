@@ -140,7 +140,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ControllerTask(this, context));
+    return new FutureTask<>(new ControllerTask(this, context));
   }
 
   /*
@@ -215,7 +215,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
     private void consumeBindingSet(final IBindingSet bset)
         throws InterruptedException, ExecutionException {
 
-      final List<FutureTask<IRunningQuery>> tasks = new LinkedList<FutureTask<IRunningQuery>>();
+      final List<FutureTask<IRunningQuery>> tasks = new LinkedList<>();
 
       try {
 

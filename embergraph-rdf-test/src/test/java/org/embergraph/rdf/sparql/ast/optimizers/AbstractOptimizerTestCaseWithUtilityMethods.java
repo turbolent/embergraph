@@ -333,12 +333,12 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
   /** Returns a {@link BindingsClause} binding the specified vars. */
   BindingsClause bindingsClauseWithVars(final String... varNames) {
 
-    final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> declaredVars = new LinkedHashSet<>();
     for (String varName : varNames) {
       declaredVars.add(Var.var(varName));
     }
 
-    final List<IBindingSet> bindingSets = new ArrayList<IBindingSet>();
+    final List<IBindingSet> bindingSets = new ArrayList<>();
     IBindingSet bs = new ListBindingSet();
     for (String varName : varNames) {
       bs.set(Var.var(varName), new Constant<>(TermId.mockIV(VTE.URI)));
@@ -516,7 +516,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
   }
 
   public Set<IVariable<?>> varSet(String... varNames) {
-    final Set<IVariable<?>> varSet = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> varSet = new HashSet<>();
     for (String varName : varNames) {
       varSet.add(Var.var(varName));
     }

@@ -83,7 +83,7 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
 
         final String[] resource = new String[] {"foo", "bar", "baz"};
 
-        final Collection<AbstractTask<Object>> tasks = new HashSet<AbstractTask<Object>>(ntasks);
+        final Collection<AbstractTask<Object>> tasks = new HashSet<>(ntasks);
 
         for (int i = 0; i < ntasks; i++) {
 

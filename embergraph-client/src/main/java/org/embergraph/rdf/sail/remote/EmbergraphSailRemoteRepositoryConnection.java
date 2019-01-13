@@ -166,7 +166,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
       /*
        * Well this was certainly annoying.  is there a better way?
        */
-      return new RepositoryResult<Statement>(
+      return new RepositoryResult<>(
           new CloseableIteration<Statement, RepositoryException>() {
 
             @Override
@@ -535,7 +535,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
 
       final Iterator<Resource> contexts = remote.getContexts().iterator();
 
-      return new RepositoryResult<Resource>(
+      return new RepositoryResult<>(
           new CloseableIteration<Resource, RepositoryException>() {
 
             @Override
@@ -786,7 +786,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
    *
    * <p>Note: The monitor of this object is also used as a synchronization point.
    */
-  private final AtomicReference<IRemoteTx> remoteTx = new AtomicReference<IRemoteTx>();
+  private final AtomicReference<IRemoteTx> remoteTx = new AtomicReference<>();
 
   @Override
   public boolean isOpen() throws RepositoryException {

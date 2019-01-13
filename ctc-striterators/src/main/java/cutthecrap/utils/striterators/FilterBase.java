@@ -62,7 +62,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
          * the backing list.
          */
         if (filterChain == null) {
-          filterChain = Collections.synchronizedList(new LinkedList<IFilter>());
+          filterChain = Collections.synchronizedList(new LinkedList<>());
         }
       }
     }
@@ -137,7 +137,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
        */
       synchronized (this) {
         if (annotations == null) {
-          annotations = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+          annotations = Collections.synchronizedMap(new LinkedHashMap<>());
         }
       }
     }

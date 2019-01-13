@@ -73,7 +73,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
     {
       final InetSocketAddress receiveAddrC = new InetSocketAddress(getPort(0));
 
-      receiveServiceC = new HAReceiveService<HAMessageWrapper>(receiveAddrC, null /* downstream */);
+      receiveServiceC = new HAReceiveService<>(receiveAddrC, null /* downstream */);
 
       receiveServiceC.start();
     }
@@ -86,7 +86,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
       final InetSocketAddress receiveAddrB = new InetSocketAddress(getPort(0));
 
       receiveServiceB =
-          new HAReceiveService<HAMessageWrapper>(receiveAddrB, receiveServiceC.getAddrSelf());
+          new HAReceiveService<>(receiveAddrB, receiveServiceC.getAddrSelf());
 
       receiveServiceB.start();
     }
@@ -525,7 +525,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
         log.info("Pipeline: [C,B,A] (A added)");
         final InetSocketAddress receiveAddrA = new InetSocketAddress(getPort(0));
         receiveServiceA =
-            new HAReceiveService<HAMessageWrapper>(receiveAddrA, null /* downstream */);
+            new HAReceiveService<>(receiveAddrA, null /* downstream */);
         receiveServiceA.start();
         receiveServiceB.changeDownStream(receiveServiceA.getAddrSelf());
 

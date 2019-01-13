@@ -64,7 +64,7 @@ public class LocalJoinMasterTask extends JoinMasterTask {
     sources[0] = newBindingSetIterator(joinNexus.newBindingSet(rule));
 
     // Future for each JoinTask.
-    final List<Future<Void>> futures = new ArrayList<Future<Void>>(tailCount);
+    final List<Future<Void>> futures = new ArrayList<>(tailCount);
 
     // the previous JoinTask and null iff this is the first join dimension.
     LocalJoinTask priorJoinTask = null;
@@ -116,7 +116,7 @@ public class LocalJoinMasterTask extends JoinMasterTask {
        * will always have its sinkFuture set before it begins to execute.
        */
 
-      final FutureTask<Void> ft = new FutureTask<Void>(joinTask);
+      final FutureTask<Void> ft = new FutureTask<>(joinTask);
 
       // Save reference to the Future.
       futures.add(ft);

@@ -143,7 +143,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   /** Wrapper used for the solution groups. */
@@ -265,7 +265,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
         final LinkedHashMap<IAggregate<?>, IVariable<?>> aggExpr,
         final IBindingSet bset) {
 
-      this.aggExpr = new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+      this.aggExpr = new LinkedHashMap<>();
 
       for (Map.Entry<IAggregate<?>, IVariable<?>> e : aggExpr.entrySet()) {
 
@@ -422,7 +422,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
          */
 
         map =
-            new LinkedHashMap<SolutionGroup, SolutionGroupState>(
+            new LinkedHashMap<>(
                 op.getInitialCapacity(), op.getLoadFactor());
 
         aggExpr = null;
@@ -570,7 +570,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
         if (context.isLastInvocation()) {
 
           // The solutions to be written onto the sink.
-          final List<IBindingSet> outList = new LinkedList<IBindingSet>();
+          final List<IBindingSet> outList = new LinkedList<>();
 
           if (groupBy == null) {
 

@@ -150,7 +150,7 @@ public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
       return;
     }
 
-    final Set<IVariable<?>> varsToExcludeFromProjection = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> varsToExcludeFromProjection = new HashSet<>();
 
     for (OrderByExpr orderByExpr : orderBy) {
       IValueExpression<? extends IV> ve = orderByExpr.getValueExpression();

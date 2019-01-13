@@ -159,7 +159,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
 
     final CounterSet root = new CounterSet();
 
-    root.addCounter("UUID", new OneShotInstrument<String>(getUUID().toString()));
+    root.addCounter("UUID", new OneShotInstrument<>(getUUID().toString()));
 
     root.attach(m_strategy.getStore().getCounters());
 

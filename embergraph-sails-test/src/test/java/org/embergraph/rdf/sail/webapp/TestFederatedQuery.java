@@ -738,7 +738,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
       parser.setPreserveBNodeIDs(true);
       parser.setValueFactory(ValueFactoryImpl.getInstance());
 
-      final Set<Statement> result = new LinkedHashSet<Statement>();
+      final Set<Statement> result = new LinkedHashSet<>();
       parser.setRDFHandler(new StatementCollector(result));
 
       final InputStream in =
@@ -817,10 +817,10 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
 
       List<BindingSet> expectedBindings = Iterations.asList(expectedResultTable);
 
-      List<BindingSet> missingBindings = new ArrayList<BindingSet>(expectedBindings);
+      List<BindingSet> missingBindings = new ArrayList<>(expectedBindings);
       missingBindings.removeAll(queryBindings);
 
-      List<BindingSet> unexpectedBindings = new ArrayList<BindingSet>(queryBindings);
+      List<BindingSet> unexpectedBindings = new ArrayList<>(queryBindings);
       unexpectedBindings.removeAll(expectedBindings);
 
       StringBuilder message = new StringBuilder(128);

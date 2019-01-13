@@ -134,7 +134,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     /*
      * Insert data into the appropriate index partitions.
      */
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
   }
 
   /*
@@ -296,66 +296,66 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
-    final List<IBindingSet> expectedPartition0 = new LinkedList<IBindingSet>();
-    final List<IBindingSet> expectedPartition1 = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
+    final List<IBindingSet> expectedPartition0 = new LinkedList<>();
+    final List<IBindingSet> expectedPartition1 = new LinkedList<>();
     {
       IBindingSet bset = null;
       {
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("John"));
-        bset.set(y, new Constant<String>("Mary"));
+        bset.set(x, new Constant<>("John"));
+        bset.set(y, new Constant<>("Mary"));
         data.add(bset);
         expectedPartition0.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Mary"));
-        bset.set(y, new Constant<String>("Paul"));
+        bset.set(x, new Constant<>("Mary"));
+        bset.set(y, new Constant<>("Paul"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Mary"));
-        bset.set(y, new Constant<String>("Jane"));
+        bset.set(x, new Constant<>("Mary"));
+        bset.set(y, new Constant<>("Jane"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Paul"));
-        bset.set(y, new Constant<String>("John"));
+        bset.set(x, new Constant<>("Paul"));
+        bset.set(y, new Constant<>("John"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
       { // partition0
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Leon"));
-        bset.set(y, new Constant<String>("Paul"));
+        bset.set(x, new Constant<>("Leon"));
+        bset.set(y, new Constant<>("Paul"));
         data.add(bset);
         expectedPartition0.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Paul"));
-        bset.set(y, new Constant<String>("Leon"));
+        bset.set(x, new Constant<>("Paul"));
+        bset.set(y, new Constant<>("Leon"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
     }
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new BOp[] {x, y},
-            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+        new Predicate<>(
+            new BOp[]{x, y},
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
     try {
 
       final MockMapBindingSetsOverShardsBuffer<E> fixture =
-          new MockMapBindingSetsOverShardsBuffer<E>(
+          new MockMapBindingSetsOverShardsBuffer<>(
               fed, pred, /*rel.getPrimaryKeyOrder(),*/ tx, 100 /* capacity */);
 
       // write the binding sets on the fixture.
@@ -373,8 +373,8 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
        */
       {
         final List<Bundle> flushedChunks = fixture.flushedChunks;
-        final List<IBindingSet[]> actualPartition0 = new LinkedList<IBindingSet[]>();
-        final List<IBindingSet[]> actualPartition1 = new LinkedList<IBindingSet[]>();
+        final List<IBindingSet[]> actualPartition0 = new LinkedList<>();
+        final List<IBindingSet[]> actualPartition1 = new LinkedList<>();
         for (Bundle b : flushedChunks) {
           if (b.locator.getPartitionId() == 0) {
             actualPartition0.add(b.bindingSets);
@@ -397,7 +397,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
 
           AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(
               expectedPartition0.toArray(new IBindingSet[0]),
-              new Dechunkerator<IBindingSet>(actualPartition0.iterator()));
+              new Dechunkerator<>(actualPartition0.iterator()));
         }
 
         // partition1
@@ -412,7 +412,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
 
           AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(
               expectedPartition1.toArray(new IBindingSet[0]),
-              new Dechunkerator<IBindingSet>(actualPartition1.iterator()));
+              new Dechunkerator<>(actualPartition1.iterator()));
         }
       }
 
@@ -440,35 +440,35 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
-    final List<IBindingSet> expectedPartition0 = new LinkedList<IBindingSet>();
-    final List<IBindingSet> expectedPartition1 = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
+    final List<IBindingSet> expectedPartition0 = new LinkedList<>();
+    final List<IBindingSet> expectedPartition1 = new LinkedList<>();
     {
       IBindingSet bset = null;
       { // partition0
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("John"));
+        bset.set(x, new Constant<>("John"));
         //                bset.set(y, new Constant<String>("Mary"));
         data.add(bset);
         expectedPartition0.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Mary"));
+        bset.set(x, new Constant<>("Mary"));
         //                bset.set(y, new Constant<String>("Paul"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
       { // partition1
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Paul"));
+        bset.set(x, new Constant<>("Paul"));
         //                bset.set(y, new Constant<String>("John"));
         data.add(bset);
         expectedPartition1.add(bset);
       }
       { // partition0
         bset = new HashBindingSet();
-        bset.set(x, new Constant<String>("Leon"));
+        bset.set(x, new Constant<>("Leon"));
         //                bset.set(y, new Constant<String>("Paul"));
         data.add(bset);
         expectedPartition0.add(bset);
@@ -485,16 +485,16 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     }
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new BOp[] {x, y},
-            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+        new Predicate<>(
+            new BOp[]{x, y},
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
     try {
 
       final MockMapBindingSetsOverShardsBuffer<E> fixture =
-          new MockMapBindingSetsOverShardsBuffer<E>(
+          new MockMapBindingSetsOverShardsBuffer<>(
               fed, pred, /*rel.getPrimaryKeyOrder(),*/ tx, 100 /* capacity */);
 
       // write the binding sets on the fixture.
@@ -512,8 +512,8 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
        */
       {
         final List<Bundle> flushedChunks = fixture.flushedChunks;
-        final List<IBindingSet[]> actualPartition0 = new LinkedList<IBindingSet[]>();
-        final List<IBindingSet[]> actualPartition1 = new LinkedList<IBindingSet[]>();
+        final List<IBindingSet[]> actualPartition0 = new LinkedList<>();
+        final List<IBindingSet[]> actualPartition1 = new LinkedList<>();
         for (Bundle b : flushedChunks) {
           if (b.locator.getPartitionId() == 0) {
             actualPartition0.add(b.bindingSets);
@@ -536,7 +536,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
 
           AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(
               expectedPartition0.toArray(new IBindingSet[0]),
-              new Dechunkerator<IBindingSet>(actualPartition0.iterator()));
+              new Dechunkerator<>(actualPartition0.iterator()));
         }
 
         // partition1
@@ -551,7 +551,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
 
           AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(
               expectedPartition1.toArray(new IBindingSet[0]),
-              new Dechunkerator<IBindingSet>(actualPartition1.iterator()));
+              new Dechunkerator<>(actualPartition1.iterator()));
         }
       }
 
@@ -578,9 +578,9 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     final Var<?> x = Var.var("x");
     final Var<?> y = Var.var("y");
 
-    final List<IBindingSet> data = new LinkedList<IBindingSet>();
-    final List<IBindingSet> partition0 = new LinkedList<IBindingSet>();
-    final List<IBindingSet> partition1 = new LinkedList<IBindingSet>();
+    final List<IBindingSet> data = new LinkedList<>();
+    final List<IBindingSet> partition0 = new LinkedList<>();
+    final List<IBindingSet> partition1 = new LinkedList<>();
     {
       final IBindingSet bset = new HashBindingSet();
       data.add(bset);
@@ -589,16 +589,16 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     }
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new BOp[] {x, y},
-            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+        new Predicate<>(
+            new BOp[]{x, y},
+            NV.asMap(new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
     try {
 
       final MockMapBindingSetsOverShardsBuffer<E> fixture =
-          new MockMapBindingSetsOverShardsBuffer<E>(
+          new MockMapBindingSetsOverShardsBuffer<>(
               fed, pred, /*rel.getPrimaryKeyOrder(),*/ tx, 100 /* capacity */);
 
       // write the binding sets on the fixture.
@@ -736,6 +736,6 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
      * A list of the binding set chunks which were flushed out. Each chunk is paired with the {@link
      * PartitionLocator} onto which the binding sets in that chunk were mapped.
      */
-    final LinkedList<Bundle> flushedChunks = new LinkedList<Bundle>();
+    final LinkedList<Bundle> flushedChunks = new LinkedList<>();
   } // class MockDistributedOutputBuffer
 }

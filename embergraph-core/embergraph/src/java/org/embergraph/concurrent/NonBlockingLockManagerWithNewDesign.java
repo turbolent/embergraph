@@ -123,9 +123,8 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
   private final ConcurrentWeakValueCacheWithTimeout<
           R, ResourceQueue<R, LockFutureTask<R, ? extends Object>>>
       resourceQueues =
-          new ConcurrentWeakValueCacheWithTimeout<
-              R, ResourceQueue<R, LockFutureTask<R, ? extends Object>>>(
-              1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
+      new ConcurrentWeakValueCacheWithTimeout<>(
+          1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
 
   /*
    * True iff locks MUST be predeclared by the operation - this is a special case of 2PL (two-phrase
@@ -190,7 +189,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * the lock service is halted.
    */
   private final BlockingQueue<LockFutureTask<R, ? extends Object>> retryQueue =
-      new LinkedBlockingQueue<LockFutureTask<R, ? extends Object>>();
+      new LinkedBlockingQueue<>();
 
   /*
    * Run states for the {@link NonBlockingLockManagerWithNewDesign}.
@@ -667,7 +666,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     }
 
     // start service.
-    service.submit(new AcceptTask<R>(this));
+    service.submit(new AcceptTask<>(this));
 
     // change the run state.
     lock.lock();
@@ -854,7 +853,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         throw new RejectedExecutionException();
       }
 
-      return new LockFutureTask<R, T>(this, a, task).acceptTask();
+      return new LockFutureTask<>(this, a, task).acceptTask();
 
     } finally {
 
@@ -923,7 +922,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
         throw new RejectedExecutionException();
       }
 
-      return new LockFutureTask<R, T>(this, a, task, val).acceptTask();
+      return new LockFutureTask<>(this, a, task, val).acceptTask();
 
     } finally {
 
@@ -1228,7 +1227,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      */
     private final LinkedHashSet<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>
         lockedResources =
-            new LinkedHashSet<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>();
+        new LinkedHashSet<>();
 
     /** Either a {@link Callable} or a {@link Runnable}. */
     private final Object callersTask;
@@ -1951,7 +1950,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     }
 
     // not found, so create a new ResourceQueue for that resource.
-    resourceQueue = new ResourceQueue<R, LockFutureTask<R, ? extends Object>>(this, resource);
+    resourceQueue = new ResourceQueue<>(this, resource);
 
     // put if absent.
     final ResourceQueue<R, LockFutureTask<R, ? extends Object>> oldval =
@@ -2039,7 +2038,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
        * Collect the set of tasks on which this task must wait.
        */
       final LinkedHashSet<LockFutureTask<R, ? extends Object>> predecessors =
-          new LinkedHashSet<LockFutureTask<R, ? extends Object>>();
+          new LinkedHashSet<>();
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
@@ -2164,7 +2163,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * the head of the queue).
      */
     final List<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> resourceQueues =
-        new LinkedList<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>();
+        new LinkedList<>();
 
     try {
 
@@ -2444,7 +2443,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       this.resource = resource;
 
-      this.queue = new LinkedBlockingQueue<T>(/* unbounded */ );
+      this.queue = new LinkedBlockingQueue<>(/* unbounded */);
 
       this.statisticsTask = new QueueSizeMovingAverageTask(resource.toString(), queue);
     }

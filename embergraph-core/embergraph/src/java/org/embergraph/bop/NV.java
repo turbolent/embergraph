@@ -124,7 +124,7 @@ public class NV implements Serializable, Comparable<NV> {
    */
   public static Map<String, Object> asMap(final String name, final Object val) {
 
-    final Map<String, Object> tmp = new LinkedHashMap<String, Object>(1);
+    final Map<String, Object> tmp = new LinkedHashMap<>(1);
 
     tmp.put(name, val);
 
@@ -142,7 +142,7 @@ public class NV implements Serializable, Comparable<NV> {
 
     if (nameValuePairs.length % 2 != 0) throw new IllegalArgumentException();
 
-    final Map<String, Object> rslt = new LinkedHashMap<String, Object>(nameValuePairs.length / 2);
+    final Map<String, Object> rslt = new LinkedHashMap<>(nameValuePairs.length / 2);
 
     for (int i = 0; i < nameValuePairs.length; i += 2) {
 
@@ -169,7 +169,7 @@ public class NV implements Serializable, Comparable<NV> {
     //
     //        }
 
-    final Map<String, Object> tmp = new LinkedHashMap<String, Object>(a.length);
+    final Map<String, Object> tmp = new LinkedHashMap<>(a.length);
 
     for (int i = 0; i < a.length; i++) {
 

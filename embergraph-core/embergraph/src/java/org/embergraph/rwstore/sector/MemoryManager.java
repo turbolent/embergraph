@@ -139,10 +139,10 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
    */
   private final boolean m_blocks;
 
-  private final ArrayList<SectorAllocator> m_sectors = new ArrayList<SectorAllocator>();
+  private final ArrayList<SectorAllocator> m_sectors = new ArrayList<>();
 
   /** The free list (of sectors). */
-  private final ArrayList<SectorAllocator> m_free = new ArrayList<SectorAllocator>();
+  private final ArrayList<SectorAllocator> m_free = new ArrayList<>();
 
   /** The #of bytes in the backing buffers. */
   private final AtomicLong m_extent = new AtomicLong();
@@ -294,7 +294,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
     m_blocks = blocks;
 
-    m_resources = new ArrayList<IBufferAccess>();
+    m_resources = new ArrayList<>();
 
     m_sectorSize = pool.getBufferCapacity();
 
@@ -1135,25 +1135,25 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     final CounterSet root = new CounterSet();
 
     // maximum #of buffers which may be allocated.
-    root.addCounter("bufferCapacity", new OneShotInstrument<Integer>(m_maxSectors));
+    root.addCounter("bufferCapacity", new OneShotInstrument<>(m_maxSectors));
 
     // current #of buffers which are allocated.
-    root.addCounter("bufferCount", new OneShotInstrument<Integer>(getSectorCount()));
+    root.addCounter("bufferCount", new OneShotInstrument<>(getSectorCount()));
 
     // current backing storage in bytes.
-    root.addCounter("extent", new OneShotInstrument<Long>(m_extent.get()));
+    root.addCounter("extent", new OneShotInstrument<>(m_extent.get()));
 
     // the current #of allocation.
-    root.addCounter("allocationCount", new OneShotInstrument<Long>(getAllocationCount()));
+    root.addCounter("allocationCount", new OneShotInstrument<>(getAllocationCount()));
 
     // #of allocation slot bytes.
-    root.addCounter("slotBytes", new OneShotInstrument<Long>(getUserBytes()));
+    root.addCounter("slotBytes", new OneShotInstrument<>(getUserBytes()));
 
     // #of application data bytes.
-    root.addCounter("userBytes", new OneShotInstrument<Long>(getUserBytes()));
+    root.addCounter("userBytes", new OneShotInstrument<>(getUserBytes()));
 
     // report whether or not the allocation policy is blocking.
-    root.addCounter("blocking", new OneShotInstrument<Boolean>(isBlocking()));
+    root.addCounter("blocking", new OneShotInstrument<>(isBlocking()));
 
     return root;
   }
@@ -1686,7 +1686,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
   //	}
 
   private final Map<IAllocationContext, AllocationContext> m_contexts =
-      new ConcurrentHashMap<IAllocationContext, AllocationContext>();
+      new ConcurrentHashMap<>();
 
   private int m_contextRequests = 0;
   private int m_contextRemovals = 0;

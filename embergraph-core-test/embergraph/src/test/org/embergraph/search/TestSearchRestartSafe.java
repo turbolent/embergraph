@@ -96,7 +96,7 @@ public class TestSearchRestartSafe extends AbstractSearchTest {
     final String text = "The quick brown dog";
     final String languageCode = "EN";
     {
-      final TokenBuffer<Long> buffer = new TokenBuffer<Long>(2, getNdx());
+      final TokenBuffer<Long> buffer = new TokenBuffer<>(2, getNdx());
 
       getNdx().index(buffer, docId, fieldId, languageCode, new StringReader(text));
 
@@ -109,7 +109,7 @@ public class TestSearchRestartSafe extends AbstractSearchTest {
     /* Search w/o restart. */
     {
       final FullTextIndex<Long> ndx =
-          new FullTextIndex<Long>(
+          new FullTextIndex<>(
               getIndexManager(), getNamespace(), ITx.UNISOLATED, getSearchProperties());
 
       final Hiterator<?> itr =
@@ -154,7 +154,7 @@ public class TestSearchRestartSafe extends AbstractSearchTest {
     /* Search with restart. */
     {
       final FullTextIndex<Long> ndx =
-          new FullTextIndex<Long>(
+          new FullTextIndex<>(
               getIndexManager(), getNamespace(), ITx.UNISOLATED, getSearchProperties());
 
       final Hiterator<?> itr = // ndx.search(text, languageCode);

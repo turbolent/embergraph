@@ -104,13 +104,13 @@ public class TestRWWriteCacheService extends TestCase3 {
   protected void setUp() throws Exception {
     fixture = new MockQuorumFixture();
     logicalServiceId = "logicalService_" + getName();
-    quorum = new MockQuorum<HAPipelineGlue, MyMockQuorumMember<HAPipelineGlue>>(k, fixture);
+    quorum = new MockQuorum<>(k, fixture);
     file = null;
     opener = null;
     writeCache = null;
     fixture.start();
 
-    quorum.start(new MyMockQuorumMember<HAPipelineGlue>(fixture, logicalServiceId));
+    quorum.start(new MyMockQuorumMember<>(fixture, logicalServiceId));
     final QuorumActor<?, ?> actor = quorum.getActor();
 
     actor.memberAdd();
@@ -232,7 +232,7 @@ public class TestRWWriteCacheService extends TestCase3 {
 
     final int totalAllocs = 10000;
 
-    ArrayList<AllocView> allocs = new ArrayList<AllocView>();
+    ArrayList<AllocView> allocs = new ArrayList<>();
     int curAddr = 0;
     for (int i = 0; i < totalAllocs; i++) {
       int pos = r.nextInt(3072);
@@ -621,7 +621,7 @@ public class TestRWWriteCacheService extends TestCase3 {
         };
 
     try {
-      final HashMap<Long, WriteCache> map = new HashMap<Long, WriteCache>();
+      final HashMap<Long, WriteCache> map = new HashMap<>();
       long addr = 0;
       for (WriteCache src : srccaches) {
         boolean notFull = true;

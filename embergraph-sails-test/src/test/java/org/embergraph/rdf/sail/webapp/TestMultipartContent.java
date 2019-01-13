@@ -32,7 +32,7 @@ public class TestMultipartContent extends TestCase {
 
   public void testSimpleFormContent() throws UnsupportedEncodingException {
 
-    final List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+    final List<NameValuePair> formparams = new ArrayList<>();
 
     formparams.add(new BasicNameValuePair("First Name", "Martyn"));
     formparams.add(new BasicNameValuePair("Last Name", "Cutcher"));

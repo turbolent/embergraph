@@ -47,7 +47,7 @@ public class TestThickCloseableIterator extends TestCase2 {
 
     final String[] expected = new String[] {};
 
-    final ICloseableIterator<String> itr = new ThickCloseableIterator<String>(expected);
+    final ICloseableIterator<String> itr = new ThickCloseableIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }
@@ -56,7 +56,7 @@ public class TestThickCloseableIterator extends TestCase2 {
 
     final String[] expected = new String[] {"a"};
 
-    final ICloseableIterator<String> itr = new ThickCloseableIterator<String>(expected);
+    final ICloseableIterator<String> itr = new ThickCloseableIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }
@@ -65,7 +65,7 @@ public class TestThickCloseableIterator extends TestCase2 {
 
     final String[] expected = new String[] {"a", "b", "c"};
 
-    final ICloseableIterator<String> itr = new ThickCloseableIterator<String>(expected);
+    final ICloseableIterator<String> itr = new ThickCloseableIterator<>(expected);
 
     doRoundTripTest(expected, itr);
   }

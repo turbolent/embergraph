@@ -482,7 +482,7 @@ public class TestBlobsIndex extends TestCase2 {
           expected[i] = a[i].obj.getIV(); // make a note of it.
           final EmbergraphValue newVal = vf.asValue(vf2.asValue(tmp));
           // replace entry in a[].
-          a[i] = new KVO<EmbergraphValue>(a[i].key, a[i].val, newVal);
+          a[i] = new KVO<>(a[i].key, a[i].val, newVal);
           assertEquals(tmp, a[i].obj); // same Value.
           assertNull(a[i].obj.getIV()); // but IV is not set.
         }

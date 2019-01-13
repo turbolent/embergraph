@@ -34,6 +34,6 @@ public class WeakCacheEntryFactory<K, T> implements IWeakRefCacheEntryFactory<K,
 
   public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue) {
 
-    return new WeakCacheEntry<K, T>(key, obj, queue);
+    return new WeakCacheEntry<>(key, obj, queue);
   }
 }

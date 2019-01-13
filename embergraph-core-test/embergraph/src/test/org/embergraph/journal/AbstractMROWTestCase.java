@@ -154,7 +154,7 @@ public abstract class AbstractMROWTestCase extends AbstractRawStoreTestCase {
         Executors.newFixedThreadPool(nclients, DaemonThreadFactory.defaultThreadFactory());
 
     // Setup readers queue.
-    Collection<Callable<Long>> tasks = new HashSet<Callable<Long>>();
+    Collection<Callable<Long>> tasks = new HashSet<>();
 
     for (int i = 0; i < ntrials; i++) {
 

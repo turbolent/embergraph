@@ -32,7 +32,7 @@ public class PartlyInlineURIIV<V extends EmbergraphURI>
    */
   public IV<V, URI> clone(final boolean clearCache) {
 
-    final PartlyInlineURIIV<V> tmp = new PartlyInlineURIIV<V>(getDelegate(), getExtensionIV());
+    final PartlyInlineURIIV<V> tmp = new PartlyInlineURIIV<>(getDelegate(), getExtensionIV());
 
     if (!clearCache) {
 

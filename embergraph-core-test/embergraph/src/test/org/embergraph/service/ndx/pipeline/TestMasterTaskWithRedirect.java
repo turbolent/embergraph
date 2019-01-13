@@ -82,7 +82,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     /*
      * Note: The master is overridden so that the 1st chunk written onto
@@ -123,7 +123,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -213,7 +213,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(masterStats, masterBuffer, executorService) {
@@ -289,7 +289,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -618,7 +618,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     final M master =
         new M(masterStats, masterBuffer, executorService) {
@@ -656,7 +656,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     redirecter.init(initialLocatorCount);
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);
@@ -665,7 +665,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     executorService.submit(ft);
 
     // start writing data.
-    final List<Future> producerFutures = new LinkedList<Future>();
+    final List<Future> producerFutures = new LinkedList<>();
     for (int i = 0; i < nproducers; i++) {
 
       producerFutures.add(executorService.submit(new ProducerTask(masterBuffer)));
@@ -764,7 +764,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
       if (false) {
         // show the redirects using an ordered map.
-        final Map<Integer, Integer> redirects = new TreeMap<Integer, Integer>(master.redirects);
+        final Map<Integer, Integer> redirects = new TreeMap<>(master.redirects);
 
         for (Map.Entry<Integer, Integer> e : redirects.entrySet()) {
 
@@ -773,7 +773,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
       }
       {
         // show the subtask stats using an ordered map.
-        final Map<L, HS> subStats = new TreeMap<L, HS>(master.stats.getSubtaskStats());
+        final Map<L, HS> subStats = new TreeMap<>(master.stats.getSubtaskStats());
 
         for (Map.Entry<L, HS> e : subStats.entrySet()) {
 

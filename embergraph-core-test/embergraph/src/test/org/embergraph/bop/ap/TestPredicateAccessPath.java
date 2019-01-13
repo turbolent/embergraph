@@ -120,7 +120,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -156,9 +156,9 @@ public class TestPredicateAccessPath extends TestCase2 {
     // nothing bound.
     final IAccessPath<E> accessPath =
         rel.getAccessPath(
-            new Predicate<E>(
-                new BOp[] {Var.var("name"), Var.var("value")},
-                new NV(IPredicate.Annotations.RELATION_NAME, new String[] {namespace})));
+            new Predicate<>(
+                new BOp[]{Var.var("name"), Var.var("value")},
+                new NV(IPredicate.Annotations.RELATION_NAME, new String[]{namespace})));
 
     // verify the range count.
     assertEquals(5, accessPath.rangeCount(true /* exact */));
@@ -196,9 +196,9 @@ public class TestPredicateAccessPath extends TestCase2 {
 
     final IAccessPath<E> accessPath =
         rel.getAccessPath(
-            new Predicate<E>(
-                new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+            new Predicate<>(
+                new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace})));
 
     // verify the range count.
     assertEquals(2, accessPath.rangeCount(true /* exact */));
@@ -231,10 +231,10 @@ public class TestPredicateAccessPath extends TestCase2 {
   public void test_predicate_eval() {
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 new NV(Annotations.REMOTE_ACCESS_PATH, false)));
 
@@ -250,12 +250,12 @@ public class TestPredicateAccessPath extends TestCase2 {
         newBindingSetIterator(new IBindingSet[0]);
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -319,10 +319,10 @@ public class TestPredicateAccessPath extends TestCase2 {
         };
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 new NV(Annotations.INDEX_LOCAL_FILTER, filter)));
 
@@ -338,12 +338,12 @@ public class TestPredicateAccessPath extends TestCase2 {
         newBindingSetIterator(new IBindingSet[0]);
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -426,10 +426,10 @@ public class TestPredicateAccessPath extends TestCase2 {
         new DistinctFilter(new BOp[] {stripper /* filters */}, null /* annotations */);
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter)));
 
@@ -448,12 +448,12 @@ public class TestPredicateAccessPath extends TestCase2 {
         newBindingSetIterator(new IBindingSet[0]);
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -496,7 +496,7 @@ public class TestPredicateAccessPath extends TestCase2 {
   private static ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[] bsets) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {bsets});
+    return new ThickAsynchronousIterator<>(new IBindingSet[][]{bsets});
   }
 
   protected class MockPipelineOp extends PipelineOp {

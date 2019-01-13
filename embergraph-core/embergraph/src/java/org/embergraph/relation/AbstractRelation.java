@@ -245,14 +245,14 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
       //            final int chunkCapacity, final int fullyBufferedReadThreshold
       ) {
 
-    return new AccessPath<E>(
-            this /*relation*/,
-            localIndexManager, // timestamp,
-            predicate,
-            keyOrder
-            //                , ndx, flags, chunkOfChunksCapacity,
-            //                chunkCapacity, fullyBufferedReadThreshold
-            )
+    return new AccessPath<>(
+        this /*relation*/,
+        localIndexManager, // timestamp,
+        predicate,
+        keyOrder
+        //                , ndx, flags, chunkOfChunksCapacity,
+        //                chunkCapacity, fullyBufferedReadThreshold
+    )
         .init();
   }
 

@@ -111,7 +111,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
     final int joinId = ctx.nextId();
 
     // annotations for this join.
-    final List<NV> anns = new LinkedList<NV>();
+    final List<NV> anns = new LinkedList<>();
 
     anns.add(new NV(BOp.Annotations.BOP_ID, joinId));
 
@@ -124,7 +124,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
      * one or more constraints.
      */
     final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization =
-        new LinkedHashMap<IConstraint, Set<IVariable<IV>>>();
+        new LinkedHashMap<>();
 
     /*
      * Add constraints to the join for that predicate.
@@ -283,7 +283,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
     // A mock constant used for predicate in which the distinctVar is not
     // yet bound.
-    final Constant<IV> mockConst = new Constant<IV>(TermId.mockIV(VTE.URI));
+    final Constant<IV> mockConst = new Constant<>(TermId.mockIV(VTE.URI));
 
     // ensure distinctVar is bound in mockPred.
     final IPredicate mockPred = pred.asBound(distinctVar, mockConst);
@@ -575,7 +575,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
       // IN filter for the named graphs.
       final IElementFilter<ISPO> test =
-          new InGraphHashSetFilter<ISPO>(summary.nknown, summary.graphs);
+          new InGraphHashSetFilter<>(summary.nknown, summary.graphs);
 
       // layer filter onto the predicate.
       pred = pred.addIndexLocalFilter(ElementFilter.newInstance(test));
@@ -879,7 +879,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
         // IN filter for the named graphs.
         final IElementFilter<ISPO> test =
-            new InGraphHashSetFilter<ISPO>(summary.nknown, summary.graphs);
+            new InGraphHashSetFilter<>(summary.nknown, summary.graphs);
 
         // layer filter onto the predicate.
         pred = pred.addIndexLocalFilter(ElementFilter.newInstance(test));

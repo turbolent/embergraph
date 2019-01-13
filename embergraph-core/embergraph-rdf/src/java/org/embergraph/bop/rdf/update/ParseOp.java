@@ -233,7 +233,7 @@ public class ParseOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(context, this));
+    return new FutureTask<>(new ChunkTask(context, this));
   }
 
   private static class ChunkTask implements Callable<Void> {
@@ -699,7 +699,7 @@ public class ParseOp extends PipelineOp {
        * be good (that is the DataLoader default).
        */
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(chunkCapacity, context.getSink());
+          new UnsyncLocalOutputBuffer<>(chunkCapacity, context.getSink());
 
       rdfParser.setRDFHandler(new AddStatementHandler(unsyncBuffer));
 
@@ -729,7 +729,7 @@ public class ParseOp extends PipelineOp {
 
         iv.setValue((EmbergraphValue) v);
 
-        return new Constant<IV>(iv);
+        return new Constant<>(iv);
       }
 
       public void handleStatement(final Statement stmt) throws RDFHandlerException {

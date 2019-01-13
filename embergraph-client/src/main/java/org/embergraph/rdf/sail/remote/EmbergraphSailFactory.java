@@ -215,7 +215,7 @@ public class EmbergraphSailFactory {
   /** Create a new embergraph instance using the specified options. */
   public static Sail createSail(final Properties props, final String file, final Option... args) {
 
-    final List<Option> options = args != null ? Arrays.asList(args) : new LinkedList<Option>();
+    final List<Option> options = args != null ? Arrays.asList(args) : new LinkedList<>();
 
     checkArgs(file, options);
 

@@ -63,7 +63,7 @@ public class TestEmbergraphSet extends TestCase {
      */
     //        indexMetadata.setIsolatable(true);
 
-    set = new EmbergraphSet<String>(BTree.create(new SimpleMemoryRawStore(), indexMetadata));
+    set = new EmbergraphSet<>(BTree.create(new SimpleMemoryRawStore(), indexMetadata));
   }
 
   /** basic tests of add(), isEmpty(), size(), contains(), and remove(). */

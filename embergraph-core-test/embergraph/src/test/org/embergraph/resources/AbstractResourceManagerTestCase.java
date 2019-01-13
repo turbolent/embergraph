@@ -684,7 +684,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
 
     // copy to avoid side-effects.
-    final Set<UUID> tmp = new HashSet<UUID>(actual);
+    final Set<UUID> tmp = new HashSet<>(actual);
 
     for (int i = 0; i < expected.length; i++) {
 

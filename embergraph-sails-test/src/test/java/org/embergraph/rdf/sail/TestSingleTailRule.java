@@ -166,7 +166,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
         //                    System.err.println(result.next());
         //                }
 
-        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        final Collection<BindingSet> solution = new LinkedList<>();
         solution.add(
             createBindingSet(
                 new BindingImpl("s", mike),
@@ -199,7 +199,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
         //                    System.err.println(result.next());
         //                }
 
-        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        final Collection<BindingSet> solution = new LinkedList<>();
         solution.add(createBindingSet(new BindingImpl("s", l1)));
 
         compare(result, solution);
@@ -302,7 +302,7 @@ public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
       //                System.err.println(result.next());
       //            }
 
-      Collection<BindingSet> solution = new LinkedList<BindingSet>();
+      Collection<BindingSet> solution = new LinkedList<>();
       solution.add(
           createBindingSet(
               new BindingImpl("s", s), new BindingImpl("v1", v1), new BindingImpl("v2", v2)));

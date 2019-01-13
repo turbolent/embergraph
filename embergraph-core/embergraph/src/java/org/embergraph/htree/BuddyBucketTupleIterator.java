@@ -61,7 +61,7 @@ class BuddyBucketTupleIterator<E> implements ITupleIterator<E> {
     // Lookup first slot to test.
     index = bucket.lookupIndex(key);
 
-    tuple = new Tuple<E>(bucket.htree, IRangeQuery.DEFAULT);
+    tuple = new Tuple<>(bucket.htree, IRangeQuery.DEFAULT);
   }
 
   /*

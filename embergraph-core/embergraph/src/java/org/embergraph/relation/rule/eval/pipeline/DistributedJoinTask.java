@@ -85,7 +85,7 @@ public class DistributedJoinTask extends JoinTask {
    * processing.
    */
   private final Vector<IAsynchronousIterator<IBindingSet[]>> sources =
-      new Vector<IAsynchronousIterator<IBindingSet[]>>();
+      new Vector<>();
 
   /*
    * <code>false</code> until all binding sets have been consumed and the join task has made an
@@ -405,7 +405,7 @@ public class DistributedJoinTask extends JoinTask {
     int bindingSetCount = 0;
 
     // source chunks read so far.
-    final List<IBindingSet[]> chunks = new LinkedList<IBindingSet[]>();
+    final List<IBindingSet[]> chunks = new LinkedList<>();
 
     /*
      * Assemble a chunk of suitable size
@@ -675,7 +675,7 @@ public class DistributedJoinTask extends JoinTask {
        */
 
       unsyncOutputBuffer =
-          new UnsynchronizedSolutionBuffer<IBindingSet>(this, fedJoinNexus, chunkCapacity);
+          new UnsynchronizedSolutionBuffer<>(this, fedJoinNexus, chunkCapacity);
 
     } else {
 
@@ -690,7 +690,7 @@ public class DistributedJoinTask extends JoinTask {
        * DataService which hosts that index partition.
        */
 
-      unsyncOutputBuffer = new UnsyncDistributedOutputBuffer<IBindingSet>(fed, this, chunkCapacity);
+      unsyncOutputBuffer = new UnsyncDistributedOutputBuffer<>(fed, this, chunkCapacity);
     }
 
     return unsyncOutputBuffer;
@@ -769,7 +769,7 @@ public class DistributedJoinTask extends JoinTask {
       {
         if (halt) throw new RuntimeException(firstCause.get());
 
-        final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+        final List<Callable<Void>> tasks = new LinkedList<>();
 
         final Iterator<JoinTaskSink> itr = memo.getSinks();
 

@@ -194,7 +194,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
    * local counter. This means that the index partition tuples are created in strict order.
    */
   private LRUCache<Integer, PartitionLocator> locatorCache =
-      new LRUCache<Integer, PartitionLocator>(1000);
+      new LRUCache<>(1000);
 
   /*
    * Remove the locator from the {@link #locatorCache}. It will be re-read on demand from the {@link

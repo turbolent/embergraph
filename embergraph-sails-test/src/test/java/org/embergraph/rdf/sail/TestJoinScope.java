@@ -131,7 +131,7 @@ public class TestJoinScope extends QuadsTestCase {
 
       TupleExpr tupleExpr = tupleQuery.getParsedQuery().getTupleExpr();
 
-      Collection<BindingSet> answer = new LinkedList<BindingSet>();
+      Collection<BindingSet> answer = new LinkedList<>();
 
       compare(result, answer);
 

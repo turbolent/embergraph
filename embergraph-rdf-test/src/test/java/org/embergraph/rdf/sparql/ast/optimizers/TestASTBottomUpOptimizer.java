@@ -1053,7 +1053,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new IVariable[] {Var.var("v")}, new IConstant[] {new Constant(x.getIV())})
         };
 
-    Set<IVariable<?>> globallyScopedVars = new HashSet<IVariable<?>>();
+    Set<IVariable<?>> globallyScopedVars = new HashSet<>();
     globallyScopedVars.add(Var.var("v"));
 
     context.setSolutionSetStats(SolutionSetStatserator.get(bindingSets));

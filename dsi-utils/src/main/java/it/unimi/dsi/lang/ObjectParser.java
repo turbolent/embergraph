@@ -342,7 +342,7 @@ public class ObjectParser extends StringParser {
       throw new ClassCastException(
           "Class " + klass.getSimpleName() + " is not assignable to " + type);
 
-    final ObjectArrayList<Object> args = new ObjectArrayList<Object>();
+    final ObjectArrayList<Object> args = new ObjectArrayList<>();
     if (contextualised) args.add(context);
 
     if (endOfName < length) {

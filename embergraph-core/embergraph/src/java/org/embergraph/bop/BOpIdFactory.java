@@ -40,7 +40,7 @@ public class BOpIdFactory implements IdFactory {
       if (ids == null) {
 
         // Lazily allocated.
-        ids = new LinkedHashSet<Integer>();
+        ids = new LinkedHashSet<>();
 
         ids.add(id);
       }

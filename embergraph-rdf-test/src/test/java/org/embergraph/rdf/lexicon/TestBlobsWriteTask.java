@@ -325,7 +325,7 @@ public class TestBlobsWriteTask extends TestCase2 {
     //        final TermId<?> iv = (TermId<?>) IVUtility.decode(key);
 
     final BlobIV<?> iv =
-        new BlobIV<EmbergraphValue>(VTE.valueOf(asValue), asValue.hashCode(), (short) counter);
+        new BlobIV<>(VTE.valueOf(asValue), asValue.hashCode(), (short) counter);
 
     return iv;
   }

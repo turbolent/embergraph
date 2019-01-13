@@ -145,7 +145,7 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
   @SuppressWarnings("rawtypes")
   public Set<IVariable<?>> getJoinVarSet() {
 
-    final Set<IVariable<?>> set = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> set = new LinkedHashSet<>();
 
     final VarNode[] a = getJoinVars();
 
@@ -245,13 +245,13 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
 
     final NamedSubqueryRoot nsr = sa.resolveNamedSubqueryInclude(this, sa);
-    return nsr == null ? new HashSet<IVariable<?>>() : nsr.getRequiredBound(sa);
+    return nsr == null ? new HashSet<>() : nsr.getRequiredBound(sa);
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
 
     final NamedSubqueryRoot nsr = sa.resolveNamedSubqueryInclude(this, sa);
-    return nsr == null ? new HashSet<IVariable<?>>() : nsr.getDesiredBound(sa);
+    return nsr == null ? new HashSet<>() : nsr.getDesiredBound(sa);
   }
 }

@@ -50,7 +50,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
 
   public Set<EmbergraphURI> getDatatypes() {
 
-    final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
+    final Set<EmbergraphURI> datatypes = new LinkedHashSet<>();
     datatypes.add(color);
     return datatypes;
   }

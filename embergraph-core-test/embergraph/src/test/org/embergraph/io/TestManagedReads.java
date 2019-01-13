@@ -43,7 +43,7 @@ public class TestManagedReads extends TestCase {
     }
   }
 
-  ArrayList<Record> m_records = new ArrayList<Record>(20000); // capacity for 20000 record entries
+  ArrayList<Record> m_records = new ArrayList<>(20000); // capacity for 20000 record entries
   Random r = new Random();
 
   /*
@@ -154,7 +154,7 @@ public class TestManagedReads extends TestCase {
 
     long start = System.currentTimeMillis();
     for (int i = 0; i < 1000; i++) {
-      ArrayList<Record> recs = new ArrayList<Record>(5);
+      ArrayList<Record> recs = new ArrayList<>(5);
 
       for (int j = 0; j < 5; j++) {
         recs.add(m_records.get(r.nextInt(m_records.size() - 1)));

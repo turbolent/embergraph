@@ -56,7 +56,7 @@ public class TestBlobIV extends TestCase2 {
   public void test_BlobIV_isExtensionIV() {
 
     final BlobIV<EmbergraphURI> iv =
-        new BlobIV<EmbergraphURI>(VTE.URI, 12 /* hash */, (short) 50 /* counter */);
+        new BlobIV<>(VTE.URI, 12 /* hash */, (short) 50 /* counter */);
 
     assertEquals(VTE.URI, iv.getVTE());
 

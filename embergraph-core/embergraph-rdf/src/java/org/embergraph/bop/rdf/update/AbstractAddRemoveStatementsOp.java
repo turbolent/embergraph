@@ -84,7 +84,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
   protected static Set<ISPO> acceptSolutions(
       final BOpContext<IBindingSet> context, final boolean bindsC) {
 
-    final Set<ISPO> set = new LinkedHashSet<ISPO>();
+    final Set<ISPO> set = new LinkedHashSet<>();
 
     final BOpStats stats = context.getStats();
 

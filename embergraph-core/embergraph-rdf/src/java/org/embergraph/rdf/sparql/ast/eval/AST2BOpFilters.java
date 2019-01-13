@@ -393,7 +393,7 @@ public class AST2BOpFilters extends AST2BOpBase {
       {
 
         // annotations for this join.
-        final List<NV> anns = new LinkedList<NV>();
+        final List<NV> anns = new LinkedList<>();
 
         // TODO Why is lexPred being cloned?
         Predicate<?> pred = (Predicate) lexPred.clone();
@@ -639,7 +639,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     }
 
     // Collect variables that require materialization.
-    final Set<IVariable<IV>> matvars = new LinkedHashSet<IVariable<IV>>();
+    final Set<IVariable<IV>> matvars = new LinkedHashSet<>();
 
     for (Map.Entry<IConstraint, Set<IVariable<IV>>> e : needsMaterialization.entrySet()) {
 
@@ -759,11 +759,11 @@ public class AST2BOpFilters extends AST2BOpBase {
     }
 
     // create a mutable version
-    final Collection<IConstraint> joinConstraints = new LinkedList<IConstraint>();
+    final Collection<IConstraint> joinConstraints = new LinkedList<>();
 
     joinConstraints.addAll(constraints);
 
-    final Collection<IConstraint> tryBeforeMaterialization = new LinkedList<IConstraint>();
+    final Collection<IConstraint> tryBeforeMaterialization = new LinkedList<>();
 
     final Iterator<IConstraint> it = joinConstraints.iterator();
 
@@ -776,7 +776,7 @@ public class AST2BOpFilters extends AST2BOpBase {
        * the join and run it as a ConditionalRoutingOp later.
        */
 
-      final Set<IVariable<IV>> terms = new LinkedHashSet<IVariable<IV>>();
+      final Set<IVariable<IV>> terms = new LinkedHashSet<>();
 
       final Requirement req = StaticAnalysis.gatherVarsToMaterialize(c, terms);
 
@@ -820,7 +820,7 @@ public class AST2BOpFilters extends AST2BOpBase {
       return null;
     }
 
-    final List<IConstraint> constraints = new LinkedList<IConstraint>();
+    final List<IConstraint> constraints = new LinkedList<>();
 
     for (FilterNode filter : joinFilters) {
 

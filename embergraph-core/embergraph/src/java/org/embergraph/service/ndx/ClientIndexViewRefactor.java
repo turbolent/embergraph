@@ -187,7 +187,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
 
     int nfailed = 0;
 
-    final LinkedList<Throwable> causes = new LinkedList<Throwable>();
+    final LinkedList<Throwable> causes = new LinkedList<>();
 
     try {
 

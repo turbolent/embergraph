@@ -350,7 +350,7 @@ public class StatementBuffer<S extends Statement>
 
     final CounterSet counters = new CounterSet();
 
-    counters.addCounter("readOnly", new OneShotInstrument<Boolean>(readOnly));
+    counters.addCounter("readOnly", new OneShotInstrument<>(readOnly));
 
     counters.addCounter(
         "bnodesSize",
@@ -390,7 +390,7 @@ public class StatementBuffer<S extends Statement>
           }
         });
 
-    counters.addCounter("bufferCapacity", new OneShotInstrument<Integer>(bufferCapacity));
+    counters.addCounter("bufferCapacity", new OneShotInstrument<>(bufferCapacity));
 
     // Note: tracked even when the queue is not enabled.
     counters.addCounter(
@@ -416,7 +416,7 @@ public class StatementBuffer<S extends Statement>
 
       // Only defined when the queue is enabled.
 
-      counters.addCounter("queueCapacity", new OneShotInstrument<Integer>(queueCapacity));
+      counters.addCounter("queueCapacity", new OneShotInstrument<>(queueCapacity));
 
       counters.addCounter(
           "queueSize",
@@ -587,7 +587,7 @@ public class StatementBuffer<S extends Statement>
      * hash map.
      */
 
-    distinctTermMap = new HashMap<Value, EmbergraphValue>(capacity * arity);
+    distinctTermMap = new HashMap<>(capacity * arity);
 
     this.statementIdentifiers = database.getStatementIdentifiers();
 
@@ -643,7 +643,7 @@ public class StatementBuffer<S extends Statement>
        *
        * @see BLZG-1813
        */
-      queue = new LinkedBlockingQueue<Batch<S>>(queueCapacity /* capacity */);
+      queue = new LinkedBlockingQueue<>(queueCapacity /* capacity */);
 
       /*
        * Setup executor used to drain the queue, merge the batches and
@@ -781,7 +781,7 @@ public class StatementBuffer<S extends Statement>
       if (batch == Batch.POISON_PILL) // DO NOT pass the poisen pill!
       throw new IllegalArgumentException();
 
-      final List<Batch<S>> avail = new LinkedList<Batch<S>>();
+      final List<Batch<S>> avail = new LinkedList<>();
 
       // add the batch already on hand (from caller)
       avail.add(batch);
@@ -1274,7 +1274,7 @@ public class StatementBuffer<S extends Statement>
     if (queue == null) {
 
       final BatchResult batchResult =
-          new Batch<S>(this, true /* avoidCloningIfPossible */).writeNow();
+          new Batch<>(this, true /* avoidCloningIfPossible */).writeNow();
       bnodesResolvedCount += batchResult.getNumBNodesResolved();
       batchWriteCount++;
 
@@ -1317,7 +1317,7 @@ public class StatementBuffer<S extends Statement>
          * StatementBuffer object invalid for further use.
          */
 
-        ft = new FutureTask<Void>(new DrainQueueCallable());
+        ft = new FutureTask<>(new DrainQueueCallable());
 
         executor.execute(ft);
       }
@@ -1325,7 +1325,7 @@ public class StatementBuffer<S extends Statement>
       try {
 
         // Blocking put.
-        queue.put(new Batch<S>(this, false /* avoidCloningIfPossible */));
+        queue.put(new Batch<>(this, false /* avoidCloningIfPossible */));
         batchAddCount++;
 
       } catch (InterruptedException e) {
@@ -1405,7 +1405,7 @@ public class StatementBuffer<S extends Statement>
         values = new EmbergraphValue[maxValues];
 
         // set map to find the distinct Values.
-        distinctTermMap = new HashMap<EmbergraphValue, EmbergraphValue>(maxValues);
+        distinctTermMap = new HashMap<>(maxValues);
       }
 
       // copy statements, finding distinct Values.
@@ -1434,7 +1434,7 @@ public class StatementBuffer<S extends Statement>
       }
 
       final Batch<S> sb = avail.get(0);
-      return new Batch<S>(
+      return new Batch<>(
           sb.database, // copy by reference
           sb.statementStore, // copy by reference
           sb.readOnly, // copy by reference
@@ -1444,7 +1444,7 @@ public class StatementBuffer<S extends Statement>
           values, // copied the data.
           numStmts, // copied the data.
           stmts // copied the data.
-          );
+      );
     } // merge()
 
     /*
@@ -2006,7 +2006,7 @@ public class StatementBuffer<S extends Statement>
         final IWrittenSPOArray callback) {
 
       final IChunkedOrderedIterator<ISPO> itr =
-          new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */);
+          new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */);
 
       final AbstractTripleStore sink = statementStore != null ? statementStore : database;
 
@@ -2091,8 +2091,8 @@ public class StatementBuffer<S extends Statement>
          * reset()).
          */
         flush();
-        bnodes = new HashMap<String, EmbergraphBNode>(bufferCapacity);
-        deferredStmts = new HashSet<EmbergraphStatement>(stmts.length);
+        bnodes = new HashMap<>(bufferCapacity);
+        deferredStmts = new HashSet<>(stmts.length);
       }
     }
 
@@ -2186,7 +2186,7 @@ public class StatementBuffer<S extends Statement>
            * https://jira.blazegraph.com/browse/BLZG-1708 (DataLoader
            * fails with ArrayIndexOutOfBoundsException).
            */
-          bnodes = new LinkedHashMap<String, EmbergraphBNode>(bufferCapacity);
+          bnodes = new LinkedHashMap<>(bufferCapacity);
 
           bnodesTotalCount = 0;
 
@@ -2373,7 +2373,7 @@ public class StatementBuffer<S extends Statement>
 
         if (reifiedStmts == null) {
 
-          reifiedStmts = new HashMap<EmbergraphBNodeImpl, ReifiedStmt>();
+          reifiedStmts = new HashMap<>();
         }
 
         final ReifiedStmt reifiedStmt;

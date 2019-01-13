@@ -604,7 +604,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
 
     rangeCheck(k, false /*allowUpperBound*/);
 
-    return new EmbergraphMap<K, V>(ndx, k, fromKey);
+    return new EmbergraphMap<>(ndx, k, fromKey);
   }
 
   /*
@@ -621,7 +621,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
 
     rangeCheck(kt, true /*allowUpperBound*/);
 
-    return new EmbergraphMap<K, V>(ndx, kf, kt);
+    return new EmbergraphMap<>(ndx, kf, kt);
   }
 
   /*
@@ -634,7 +634,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
 
     rangeCheck(k, false /*allowUpperBound*/);
 
-    return new EmbergraphMap<K, V>(ndx, toKey, k);
+    return new EmbergraphMap<>(ndx, toKey, k);
   }
 
   /** Note: {@link #keySet()} and {@link #values()} both depend on this method. */

@@ -73,7 +73,7 @@ public class PivotTable {
      * counters is preserved here (minus duplicate counter names) due to the
      * virtues of the linked hash set.
      */
-    vcols = new LinkedHashSet<String>();
+    vcols = new LinkedHashSet<>();
     for (int i = 0; i < a.length; i++) {
 
       vcols.add(a[i].getName());
@@ -380,7 +380,7 @@ public class PivotTable {
      * on to the next set whose reference has not been cleared. We are done
      * when all references in [sets] have been cleared.
      */
-    final List<CSet> csets = new LinkedList<CSet>();
+    final List<CSet> csets = new LinkedList<>();
 
     for (int i = 0; i < sets.length; i++) {
 

@@ -755,7 +755,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
       return null;
     }
 
-    final Set<UUID> tmp = new HashSet<UUID>(Arrays.asList(a));
+    final Set<UUID> tmp = new HashSet<>(Arrays.asList(a));
 
     tmp.add(resourceManager.getDataServiceUUID());
 

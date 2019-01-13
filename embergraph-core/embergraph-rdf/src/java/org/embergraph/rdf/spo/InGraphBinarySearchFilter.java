@@ -40,7 +40,7 @@ public final class InGraphBinarySearchFilter<E extends ISPO> extends SPOFilter<E
      * we will accept.
      */
 
-    final HashSet<IV> contextSet = new HashSet<IV>();
+    final HashSet<IV> contextSet = new HashSet<>();
 
     for (URI uri : graphs) {
 

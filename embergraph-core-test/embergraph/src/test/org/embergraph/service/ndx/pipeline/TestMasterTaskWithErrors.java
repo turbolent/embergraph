@@ -54,7 +54,7 @@ public class TestMasterTaskWithErrors extends AbstractMasterTestCase {
 
     final H masterStats = new H();
 
-    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<KVO<O>[]>(masterQueueCapacity);
+    final BlockingBuffer<KVO<O>[]> masterBuffer = new BlockingBuffer<>(masterQueueCapacity);
 
     /*
      * Note: The master is overridden so that the 1st chunk written onto
@@ -84,7 +84,7 @@ public class TestMasterTaskWithErrors extends AbstractMasterTestCase {
         };
 
     // Wrap computation as FutureTask.
-    final FutureTask<H> ft = new FutureTask<H>(master);
+    final FutureTask<H> ft = new FutureTask<>(master);
 
     // Set Future on BlockingBuffer.
     masterBuffer.setFuture(ft);

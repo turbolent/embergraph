@@ -145,7 +145,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
 
   /** The {@link QuorumListener}s. */
   private final CopyOnWriteArraySet<QuorumListener> listeners =
-      new CopyOnWriteArraySet<QuorumListener>();
+      new CopyOnWriteArraySet<>();
 
   /*
    * The lock protecting state changes in the remaining fields and used to provide {@link
@@ -314,7 +314,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
 
   private final long actorShutdownTimeout = watcherShutdownTimeout; // ms
   /** Collector of queued or running futures for actor action tasks. */
-  private final Set<FutureTask<Void>> knownActorTasks = new HashSet<FutureTask<Void>>();
+  private final Set<FutureTask<Void>> knownActorTasks = new HashSet<>();
 
   /*
    * A single threaded service used to pump events to clients outside of the thread in which those
@@ -374,18 +374,18 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
      * maintained by the linked hash set. Otherwise we need to compare
      * sorted arrays.
      */
-    members = new LinkedHashSet<UUID>(k);
+    members = new LinkedHashSet<>(k);
 
     /*
      * Note: The TreeMap maintains data in order by ascending timestamp
      * which makes it easier to interpret.
      */
-    votes = new TreeMap<Long, LinkedHashSet<UUID>>();
+    votes = new TreeMap<>();
 
-    joined = new LinkedHashSet<UUID>(k);
+    joined = new LinkedHashSet<>(k);
 
     // There can be more than [k] services in the pipeline.
-    pipeline = new LinkedHashSet<UUID>(k * 2);
+    pipeline = new LinkedHashSet<>(k * 2);
   }
 
   protected void finalize() throws Throwable {
@@ -423,7 +423,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 1,
                 0L,
                 TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(),
+                new LinkedBlockingQueue<>(),
                 new DaemonThreadFactory("WatcherActionService"));
         // this.watcherActionService =
         // Executors.newSingleThreadExecutor(new
@@ -441,7 +441,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 1,
                 0L,
                 TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(),
+                new LinkedBlockingQueue<>(),
                 new DaemonThreadFactory("ActorActionService"));
       } else {
         // run in the caller's thread.
@@ -944,7 +944,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
        * Note: A linked hash map will preserve the view order and is
        * faster than a TreeMap.
        */
-      final Map<Long, UUID[]> tmp = new LinkedHashMap<Long, UUID[]>();
+      final Map<Long, UUID[]> tmp = new LinkedHashMap<>();
       final Iterator<Long> itr = votes.keySet().iterator();
       while (itr.hasNext()) {
         final Long lastCommitTime = itr.next();
@@ -1467,7 +1467,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       /*
        * Run on the single-threaded executor.
        */
-      final FutureTask<Void> ft = new FutureTaskMon<Void>(task);
+      final FutureTask<Void> ft = new FutureTaskMon<>(task);
       synchronized (knownActorTasks) {
         if (!knownActorTasks.add(ft)) throw new AssertionError();
       }
@@ -1508,7 +1508,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
          */
         throw new UnsupportedOperationException();
       }
-      final FutureTask<Void> ft = new FutureTaskMon<Void>(task);
+      final FutureTask<Void> ft = new FutureTaskMon<>(task);
       synchronized (knownActorTasks) {
         if (!knownActorTasks.add(ft)) throw new AssertionError();
       }
@@ -2757,7 +2757,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         LinkedHashSet<UUID> votesForCommitTime = votes.get(lastCommitTime);
         if (votesForCommitTime == null) {
           // None found, so create an empty set now.
-          votesForCommitTime = new LinkedHashSet<UUID>();
+          votesForCommitTime = new LinkedHashSet<>();
           // And add it to the map.
           votes.put(lastCommitTime, votesForCommitTime);
         }

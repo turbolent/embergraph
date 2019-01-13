@@ -156,7 +156,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
       final int nthreads = 4;
 
       // Setup the tasks to be run.
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       for (int i = 0; i < LIMIT; i++) {
 

@@ -276,7 +276,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
     itr2.addTypeFilter(SubqueryRoot.class);
 
-    final List<SubqueryRoot> subqueries = new LinkedList<SubqueryRoot>();
+    final List<SubqueryRoot> subqueries = new LinkedList<>();
 
     while (itr2.hasNext()) {
 

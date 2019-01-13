@@ -231,7 +231,7 @@ public class TxDag {
    * removed from the list when they are assigned to a transaction. Entries are returned to the list
    * when a transaction is complete (abort or commit).
    */
-  private final List<Integer> indices = new LinkedList<Integer>();
+  private final List<Integer> indices = new LinkedList<>();
 
   /*
    * Mapping from the application "transaction" object to the {@link Integer} index assigned to that
@@ -239,7 +239,7 @@ public class TxDag {
    *
    * @see #indices
    */
-  private final Map<Object, Integer> mapping = new HashMap<Object, Integer>();
+  private final Map<Object, Integer> mapping = new HashMap<>();
 
   /*
    * The maximum multi-programming level supported (from the constructor).
@@ -1062,7 +1062,7 @@ public class TxDag {
     //        // extract index -> transaction object mapping.
     //        Object[] transactions = getTransactions();
     // populate array of explict edges w/ optional closure.
-    Vector<Edge> v = new Vector<Edge>();
+    Vector<Edge> v = new Vector<>();
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
         if (W[order[i]][order[j]]) {

@@ -162,7 +162,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
   protected List<Callable<Void>> getLoadTasks(
       final String resource, final IStatementBufferFactory<EmbergraphStatement> factory) {
 
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
 
     if (getClass().getResource(resource) != null) {
 
@@ -456,7 +456,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
   protected List<Callable<Void>> getVerifyTasks(
       final String resource, final AbstractTripleStore store) {
 
-    final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+    final List<Callable<Void>> tasks = new LinkedList<>();
 
     if (getClass().getResource(resource) != null
         || getClass().getClassLoader().getResource(resource) != null) {

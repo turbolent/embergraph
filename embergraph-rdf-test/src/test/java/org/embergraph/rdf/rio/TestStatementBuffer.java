@@ -71,7 +71,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     try {
 
       final StatementBuffer<Statement> buffer =
-          new StatementBuffer<Statement>(store, capacity, queueCapacity);
+          new StatementBuffer<>(store, capacity, queueCapacity);
 
       assertEquals(store, buffer.getDatabase());
       //            assertTrue(buffer.distinct);
@@ -100,7 +100,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     try {
 
       final StatementBuffer<Statement> buffer =
-          new StatementBuffer<Statement>(store, capacity, queueCapacity);
+          new StatementBuffer<>(store, capacity, queueCapacity);
 
       assertEquals(store, buffer.getDatabase());
       //            assertTrue(buffer.distinct);
@@ -130,7 +130,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 
     try {
 
-      final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, capacity);
+      final StatementBuffer<Statement> buffer = new StatementBuffer<>(store, capacity);
 
       //            assertTrue(buffer.distinct);
 
@@ -223,7 +223,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 
       final EmbergraphValueFactory vf = store.getValueFactory();
 
-      final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, capacity);
+      final StatementBuffer<Statement> buffer = new StatementBuffer<>(store, capacity);
 
       /*
        * add a statement.
@@ -325,7 +325,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
       // store is empty.
       assertEquals(0, store.getStatementCount());
 
-      final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, capacity);
+      final StatementBuffer<Statement> buffer = new StatementBuffer<>(store, capacity);
 
       // ground statement.
       buffer.add(
@@ -493,7 +493,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
       // store is empty.
       assertEquals(0, store.getStatementCount());
 
-      final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, capacity);
+      final StatementBuffer<Statement> buffer = new StatementBuffer<>(store, capacity);
 
       // ground statement.
       buffer.add(
@@ -616,7 +616,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
       final EmbergraphURI o = vf.createURI("http://example.com/o");
       final EmbergraphURI c = vf.createURI("http://example.com/c");
 
-      final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, capacity);
+      final StatementBuffer<Statement> buffer = new StatementBuffer<>(store, capacity);
       buffer.add(vf.createStatement(s, p, o, c, StatementEnum.Explicit));
 
       // flush the buffer.

@@ -251,7 +251,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
    */
   private static List<StatementPatternNode> getConstructTemplates(final QueryRoot queryRoot) {
 
-    final List<StatementPatternNode> templates = new LinkedList<StatementPatternNode>();
+    final List<StatementPatternNode> templates = new LinkedList<>();
 
     final ConstructNode construct = queryRoot.getConstruct();
 

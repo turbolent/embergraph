@@ -161,7 +161,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     // Insert the statements.
     {
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(tripleStore, 10 /* capacity */);
+          new StatementBuffer<>(tripleStore, 10 /* capacity */);
 
       sb.add(
           valueFactory.createStatement(vg, virtualGraph, alice, context, StatementEnum.Explicit));
@@ -175,7 +175,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("foaf", FOAFVocabularyDecl.NAMESPACE);
         prefixDecls.put("dc", DC.NAMESPACE);
         expected.setPrefixDecls(prefixDecls);
@@ -311,7 +311,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     // Insert the statements.
     {
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(tripleStore, 10 /* capacity */);
+          new StatementBuffer<>(tripleStore, 10 /* capacity */);
 
       sb.add(
           valueFactory.createStatement(vg, virtualGraph, alice, context, StatementEnum.Explicit));
@@ -325,7 +325,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("foaf", FOAFVocabularyDecl.NAMESPACE);
         prefixDecls.put("dc", DC.NAMESPACE);
         expected.setPrefixDecls(prefixDecls);
@@ -358,7 +358,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
         //                        .stringValue());
         //                bob2.setIV(bob.getIV().clone(true/* clearCache */));
         @SuppressWarnings("rawtypes")
-        final Set<IV> defaultGraphs = new LinkedHashSet<IV>();
+        final Set<IV> defaultGraphs = new LinkedHashSet<>();
         defaultGraphs.add(uri1.getIV());
         defaultGraphs.add(alice.getIV().clone(true /*clearCache*/));
         defaultGraphs.add(bob.getIV().clone(true /*clearCache*/));

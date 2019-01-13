@@ -76,7 +76,7 @@ public class EmbergraphNativeMockServiceFactory extends AbstractServiceFactoryBa
 
       // System.err.println("ServiceCall: out="+serviceSolutions);
 
-      return new CloseableIteratorWrapper<IBindingSet>(serviceSolutions.iterator());
+      return new CloseableIteratorWrapper<>(serviceSolutions.iterator());
     }
 
     @Override

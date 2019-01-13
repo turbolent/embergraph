@@ -263,7 +263,7 @@ public class SampleServiceFactory extends AbstractServiceFactory implements Serv
 
       if (pred == null) {
 
-        return new EmptyCloseableIterator<IBindingSet>();
+        return new EmptyCloseableIterator<>();
       }
 
       pred =
@@ -302,22 +302,22 @@ public class SampleServiceFactory extends AbstractServiceFactory implements Serv
 
         if (sp.s() != null && sp.s().isVariable())
           bSets[i].set(
-              (IVariable<IV>) sp.s().getValueExpression(), new Constant<IV>(elements[i].s()));
+              (IVariable<IV>) sp.s().getValueExpression(), new Constant<>(elements[i].s()));
 
         if (sp.p() != null && sp.p().isVariable())
           bSets[i].set(
-              (IVariable<IV>) sp.p().getValueExpression(), new Constant<IV>(elements[i].p()));
+              (IVariable<IV>) sp.p().getValueExpression(), new Constant<>(elements[i].p()));
 
         if (sp.o() != null && sp.o().isVariable())
           bSets[i].set(
-              (IVariable<IV>) sp.o().getValueExpression(), new Constant<IV>(elements[i].o()));
+              (IVariable<IV>) sp.o().getValueExpression(), new Constant<>(elements[i].o()));
 
         if (sp.c() != null && sp.c().isVariable())
           bSets[i].set(
-              (IVariable<IV>) sp.c().getValueExpression(), new Constant<IV>(elements[i].c()));
+              (IVariable<IV>) sp.c().getValueExpression(), new Constant<>(elements[i].c()));
       }
 
-      return new ThickCloseableIterator<IBindingSet>(bSets, bSets.length);
+      return new ThickCloseableIterator<>(bSets, bSets.length);
     }
 
     @Override

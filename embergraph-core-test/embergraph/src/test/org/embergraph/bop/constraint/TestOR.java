@@ -70,8 +70,8 @@ public class TestOR extends TestCase2 {
   public void testAccept() {
     Var<?> x = Var.var("x");
     Var<?> y = Var.var("y");
-    Constant<Integer> val1 = new Constant<Integer>(1);
-    Constant<Integer> val2 = new Constant<Integer>(2);
+    Constant<Integer> val1 = new Constant<>(1);
+    Constant<Integer> val2 = new Constant<>(2);
 
     BooleanValueExpression eq = new EQ(x, y);
     BooleanValueExpression eqc = new EQConstant(y, val2);

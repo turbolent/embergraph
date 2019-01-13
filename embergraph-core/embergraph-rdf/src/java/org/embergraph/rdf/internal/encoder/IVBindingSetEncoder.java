@@ -98,7 +98,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
 
     this.filter = filter;
 
-    this.schema = new LinkedHashSet<IVariable<?>>();
+    this.schema = new LinkedHashSet<>();
 
     this.keyBuilder = new ASCIIKeyBuilderFactory(128).getKeyBuilder();
   }

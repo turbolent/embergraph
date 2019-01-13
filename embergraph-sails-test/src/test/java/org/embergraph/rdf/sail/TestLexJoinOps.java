@@ -157,7 +157,7 @@ public class TestLexJoinOps extends QuadsTestCase {
             }
           }
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
           answer.add(createBindingSet(new BindingImpl("o", _1)));
           answer.add(createBindingSet(new BindingImpl("o", _2)));
           answer.add(createBindingSet(new BindingImpl("o", _3)));
@@ -268,7 +268,7 @@ public class TestLexJoinOps extends QuadsTestCase {
             }
           }
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
           answer.add(createBindingSet(new BindingImpl("o", _1)));
           answer.add(createBindingSet(new BindingImpl("o", _2)));
           answer.add(createBindingSet(new BindingImpl("o", _3)));
@@ -388,7 +388,7 @@ public class TestLexJoinOps extends QuadsTestCase {
             }
           }
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
           answer.add(createBindingSet(new BindingImpl("o", _5)));
           answer.add(createBindingSet(new BindingImpl("o", _6)));
 
@@ -491,7 +491,7 @@ public class TestLexJoinOps extends QuadsTestCase {
             }
           }
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
           answer.add(createBindingSet(new BindingImpl("title", _2)));
           answer.add(createBindingSet(new BindingImpl("title", _3)));
 

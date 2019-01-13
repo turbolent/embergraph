@@ -221,12 +221,12 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
        */
       final IKeyOrder<F> keyOrder = null;
 
-      algorithm = new Algorithm_FullyBoundPredicate<E, F>(this, keyOrder);
+      algorithm = new Algorithm_FullyBoundPredicate<>(this, keyOrder);
 
     } else {
 
       // general purpose.
-      algorithm = new Algorithm_NestedLocatorScan<E, F>(this);
+      algorithm = new Algorithm_NestedLocatorScan<>(this);
     }
   }
 
@@ -276,7 +276,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
       final IKeyBuilder keyBuilder = relation.getIndex(keyOrder).getIndexMetadata().getKeyBuilder();
 
       // save the bundle for processing.
-      bundles[i] = new Bundle<F>(keyBuilder, asBound, keyOrder, bindingSet);
+      bundles[i] = new Bundle<>(keyBuilder, asBound, keyOrder, bindingSet);
     }
 
     //        /*
@@ -326,7 +326,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
    * MapBindingSetsOverShardsBuffer} is not thread-safe either so this should be Ok.
    */
   private final LinkedHashMap<PartitionLocator, IBuffer<IBindingSet[]> /* sink */> sinks =
-      new LinkedHashMap<PartitionLocator, IBuffer<IBindingSet[]>>();
+      new LinkedHashMap<>();
 
   /*
    * An immutable view of the sinks.

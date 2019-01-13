@@ -84,7 +84,7 @@ public class TestJoinGraph extends TestCase2 {
           };
       final IConstraint[] constraints =
           new IConstraint[] {
-            Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
+            Constraint.wrap(new NEConstant(Var.var("x"), new Constant<>(12L)))
           };
       final JoinGraph joinGraph =
           new JoinGraph(
@@ -108,7 +108,7 @@ public class TestJoinGraph extends TestCase2 {
           };
       final IConstraint[] constraints =
           new IConstraint[] {
-            Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
+            Constraint.wrap(new NEConstant(Var.var("x"), new Constant<>(12L)))
           };
       final int limit = 50;
       final int nedges = 1;
@@ -216,7 +216,7 @@ public class TestJoinGraph extends TestCase2 {
             };
         final IConstraint[] constraints =
             new IConstraint[] {
-              Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
+              Constraint.wrap(new NEConstant(Var.var("x"), new Constant<>(12L)))
             };
         final int limit = 0;
         final int nedges = 1;
@@ -244,7 +244,7 @@ public class TestJoinGraph extends TestCase2 {
             };
         final IConstraint[] constraints =
             new IConstraint[] {
-              Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
+              Constraint.wrap(new NEConstant(Var.var("x"), new Constant<>(12L)))
             };
         final int limit = 10;
         final int nedges = 0;

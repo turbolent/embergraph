@@ -44,11 +44,11 @@ public class InlineIntegerURIHandlerMap extends InlineLocalNameIntegerURIHandler
   public static final Pattern descriptorPattern = Pattern.compile("(.*[a-zA-Z])\\d+(_.*)");
 
   // Map of IDs to Handlers
-  private HashMap<Integer, InlineURIHandler> hMap = new HashMap<Integer, InlineURIHandler>();
+  private HashMap<Integer, InlineURIHandler> hMap = new HashMap<>();
 
   // Treemap of Namespaces and URIs
   private final TreeMap<String, InlineURIHandler> handlersByLocalName =
-      new TreeMap<String, InlineURIHandler>();
+      new TreeMap<>();
 
   public InlineIntegerURIHandlerMap(final String namespace) {
     super(namespace);

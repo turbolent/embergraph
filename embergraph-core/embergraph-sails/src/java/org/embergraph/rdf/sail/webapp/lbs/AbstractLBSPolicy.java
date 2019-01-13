@@ -61,14 +61,14 @@ public abstract class AbstractLBSPolicy
    * The {@link ServletContext#getContextPath()} is cached in {@link #init(ServletConfig,
    * IIndexManager)}.
    */
-  private final AtomicReference<String> contextPath = new AtomicReference<String>();
+  private final AtomicReference<String> contextPath = new AtomicReference<>();
 
   /** A {@link WeakReference} to the {@link HAJournal} avoids pinning the {@link HAJournal}. */
   protected final AtomicReference<WeakReference<IHAJournal>> journalRef =
-      new AtomicReference<WeakReference<IHAJournal>>();
+      new AtomicReference<>();
 
   /** The {@link UUID} of the HAJournalServer. */
-  protected final AtomicReference<UUID> serviceIDRef = new AtomicReference<UUID>();
+  protected final AtomicReference<UUID> serviceIDRef = new AtomicReference<>();
 
   /*
    * This is the table of known services. We can scan the table for a service {@link UUID} and then
@@ -77,7 +77,7 @@ public abstract class AbstractLBSPolicy
    * the request.
    */
   protected final AtomicReference<ServiceScore[]> serviceTableRef =
-      new AtomicReference<ServiceScore[]>(null);
+      new AtomicReference<>(null);
 
   /** Note: implementation is non-blocking! */
   @Override
@@ -151,7 +151,7 @@ public abstract class AbstractLBSPolicy
 
     serviceIDRef.compareAndSet(null /* expect */, journal.getServiceID() /* update */);
 
-    this.journalRef.set(new WeakReference<IHAJournal>(journal));
+    this.journalRef.set(new WeakReference<>(journal));
 
     final Quorum<HAGlue, QuorumService<HAGlue>> quorum = journal.getQuorum();
 

@@ -834,12 +834,12 @@ public class TestASTNamedSubqueryOptimizer extends AbstractASTEvaluationTestCase
     // Test "incoming" bindings.
     assertEquals(
         asSet(new Var[] {Var.var("var1")}),
-        sa.getDefinitelyIncomingBindings(complexOpt1, new LinkedHashSet<IVariable<?>>()));
+        sa.getDefinitelyIncomingBindings(complexOpt1, new LinkedHashSet<>()));
 
     // Test "incoming" bindings.
     assertEquals(
         asSet(new Var[] {Var.var("var1")}),
-        sa.getDefinitelyIncomingBindings(complexOpt2, new LinkedHashSet<IVariable<?>>()));
+        sa.getDefinitelyIncomingBindings(complexOpt2, new LinkedHashSet<>()));
 
     //        System.err.println(new ASTSubGroupJoinVarOptimizer().optimize(context,
     //                actual/* queryNode */, bsets));

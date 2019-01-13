@@ -101,13 +101,13 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     final String relation = "spo";
     final long timestamp = ITx.READ_COMMITTED;
 
-    final Constant<?> rdfType = new Constant<String>("rdfType");
-    final Constant<?> Department = new Constant<String>("Department");
-    final Constant<?> Student = new Constant<String>("Student");
-    final Constant<?> memberOf = new Constant<String>("memberOf");
-    final Constant<?> subOrganizationOf = new Constant<String>("subOrganizationOf");
-    final Constant<?> emailAddress = new Constant<String>("emailAddress");
-    final Constant<?> University0 = new Constant<String>("University0");
+    final Constant<?> rdfType = new Constant<>("rdfType");
+    final Constant<?> Department = new Constant<>("Department");
+    final Constant<?> Student = new Constant<>("Student");
+    final Constant<?> memberOf = new Constant<>("memberOf");
+    final Constant<?> subOrganizationOf = new Constant<>("subOrganizationOf");
+    final Constant<?> emailAddress = new Constant<>("emailAddress");
+    final Constant<?> University0 = new Constant<>("University0");
 
     final IPredicate<?> pred0 =
         new Predicate(
@@ -158,7 +158,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
      * rangeCount=8330, tailIndex=4, tail=([kb.spo.], x, 216, z)
      */
     //        final long[] rangeCount = { 15, 6463, 8830, 15, 8330 };
-    final Map<IPredicate, Long> rangeCount = new HashMap<IPredicate, Long>();
+    final Map<IPredicate, Long> rangeCount = new HashMap<>();
     {
       rangeCount.put(pred0, 15L);
       rangeCount.put(pred1, 6463L);
@@ -242,11 +242,11 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
      * ?p type Property
      */
 
-    final Constant<?> search = new Constant<String>("search");
-    final Constant<?> Mike = new Constant<String>("Mike");
-    final Constant<?> type = new Constant<String>("type");
-    final Constant<?> Person = new Constant<String>("Person");
-    final Constant<?> Property = new Constant<String>("Property");
+    final Constant<?> search = new Constant<>("search");
+    final Constant<?> Mike = new Constant<>("Mike");
+    final Constant<?> type = new Constant<>("type");
+    final Constant<?> Person = new Constant<>("Person");
+    final Constant<?> Property = new Constant<>("Property");
 
     final IAccessPathExpander expander =
         new IAccessPathExpander() {
@@ -300,7 +300,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
             null // constraints
             );
 
-    final Map<IPredicate, Long> rangeCount = new HashMap<IPredicate, Long>();
+    final Map<IPredicate, Long> rangeCount = new HashMap<>();
     {
       rangeCount.put(pred0, 0L);
       rangeCount.put(pred1, 1000000L);

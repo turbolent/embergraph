@@ -70,7 +70,7 @@ public class TestLexAccessPatternEnum extends TestCase2 {
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance(getName());
 
     final IConstant<?> value =
-        new Constant<EmbergraphURI>(vf.createURI("http://www.embergraph.org"));
+        new Constant<>(vf.createURI("http://www.embergraph.org"));
 
     final IVariableOrConstant<?>[] args =
         new IVariableOrConstant[] {
@@ -92,7 +92,7 @@ public class TestLexAccessPatternEnum extends TestCase2 {
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance(getName());
 
     final IConstant<?> value =
-        new Constant<EmbergraphURI>(vf.createURI("http://www.embergraph.org"));
+        new Constant<>(vf.createURI("http://www.embergraph.org"));
 
     final IVariableOrConstant<?>[] args =
         new IVariableOrConstant[] {

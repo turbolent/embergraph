@@ -51,7 +51,7 @@ public class BackgroundTupleResult extends TupleQueryResultImpl
   public BackgroundTupleResult(final TupleQueryResultParser parser, final InputStream in) {
 
     // TODO Why is the capacity so small? Why not 100 or more?
-    this(new QueueCursor<BindingSet>(10 /* capacity */), parser, in);
+    this(new QueueCursor<>(10 /* capacity */), parser, in);
   }
 
   public BackgroundTupleResult(

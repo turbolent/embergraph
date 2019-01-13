@@ -192,7 +192,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         // Lazily allocate map.
         if (tmp == null) {
 
-          tmp = new LinkedHashMap<IVariable<?>, Map<URI, StatementPatternNode>>();
+          tmp = new LinkedHashMap<>();
         }
 
         // Lazily allocate set for that searchVar.
@@ -200,7 +200,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (statementPatterns == null) {
 
-          tmp.put(searchVar, statementPatterns = new LinkedHashMap<URI, StatementPatternNode>());
+          tmp.put(searchVar, statementPatterns = new LinkedHashMap<>());
         }
 
         // Add search predicate to set for that searchVar.
@@ -218,7 +218,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
   private void validateSearch(
       final IVariable<?> searchVar, final Map<URI, StatementPatternNode> statementPatterns) {
 
-    final Set<URI> uris = new LinkedHashSet<URI>();
+    final Set<URI> uris = new LinkedHashSet<>();
 
     for (StatementPatternNode sp : statementPatterns.values()) {
 
@@ -612,7 +612,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
                 new IVariable[] {rangeCountVar},
                 new IConstant[] {new Constant(new XSDNumericIV(i))});
 
-        return new SingleValueChunkedIterator<IBindingSet>(bs);
+        return new SingleValueChunkedIterator<>(bs);
 
       } else {
 

@@ -49,7 +49,7 @@ public class LiteralExtensionIV<V extends EmbergraphLiteral>
   @Override
   public IV<V, Object> clone(final boolean clearCache) {
 
-    final LiteralExtensionIV<V> tmp = new LiteralExtensionIV<V>(delegate, datatype);
+    final LiteralExtensionIV<V> tmp = new LiteralExtensionIV<>(delegate, datatype);
 
     if (!clearCache) {
 

@@ -619,7 +619,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
 
     final Random r = new Random();
 
-    final Map<FileVersionBlock, byte[]> blocks = new TreeMap<FileVersionBlock, byte[]>();
+    final Map<FileVersionBlock, byte[]> blocks = new TreeMap<>();
 
     //        // the 1st block in the file or -1L iff there are no blocks in the file.
     //        final AtomicLong firstBlockId = new AtomicLong(-1L);

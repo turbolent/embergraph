@@ -47,7 +47,7 @@ public class NumericBNodeIV<V extends EmbergraphBNode> extends AbstractBNodeIV<V
 
   public IV<V, Integer> clone(final boolean clearCache) {
 
-    final NumericBNodeIV<V> tmp = new NumericBNodeIV<V>(id);
+    final NumericBNodeIV<V> tmp = new NumericBNodeIV<>(id);
 
     if (!clearCache) {
 

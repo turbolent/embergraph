@@ -59,8 +59,8 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
 
     assert !btree.isReadOnly();
 
-    return new MutableBTreeTupleCursor<String>(
-        (BTree) btree, new Tuple<String>(btree, flags), fromKey, toKey);
+    return new MutableBTreeTupleCursor<>(
+        (BTree) btree, new Tuple<>(btree, flags), fromKey, toKey);
   }
 
   /** Test ability to remove tuples using {@link ITupleCursor#remove()} during forward traversal. */
@@ -88,7 +88,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // visit the first tuple and verify its state.
-        assertEquals(new TestTuple<String>(10, "Bryan"), cursor.next());
+        assertEquals(new TestTuple<>(10, "Bryan"), cursor.next());
 
         // remove it.
         cursor.remove();
@@ -101,7 +101,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // visit the next tuple and verify its state.
-        assertEquals(new TestTuple<String>(20, "Mike"), cursor.next());
+        assertEquals(new TestTuple<>(20, "Mike"), cursor.next());
 
         // remove it.
         cursor.remove();
@@ -114,7 +114,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // visit the next tuple and verify its state.
-        assertEquals(new TestTuple<String>(30, "James"), cursor.next());
+        assertEquals(new TestTuple<>(30, "James"), cursor.next());
 
         // remove it.
         cursor.remove();
@@ -156,7 +156,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // verify the state of the last tuple.
-        assertEquals(new TestTuple<String>(30, "James"), cursor.prior());
+        assertEquals(new TestTuple<>(30, "James"), cursor.prior());
 
         // remove it.
         cursor.remove();
@@ -169,7 +169,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // visit the prior tuple and verify its state.
-        assertEquals(new TestTuple<String>(20, "Mike"), cursor.prior());
+        assertEquals(new TestTuple<>(20, "Mike"), cursor.prior());
 
         // remove it.
         cursor.remove();
@@ -182,7 +182,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       {
 
         // visit the prior tuple and verify its state.
-        assertEquals(new TestTuple<String>(10, "Bryan"), cursor.prior());
+        assertEquals(new TestTuple<>(10, "Bryan"), cursor.prior());
 
         // remote it.
         cursor.remove();
@@ -224,16 +224,16 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       ITupleCursor2<String> cursor = newCursor(btree);
 
       // seek to a tuple and verify its state.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.seek(20));
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.seek(20));
 
       // verify state reported by tuple()
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       // update the tuple.
       btree.insert(20, "Michael");
 
       // verify update is reflected by the tuple.
-      assertEquals(new TestTuple<String>(20, "Michael"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Michael"), cursor.tuple());
     }
   }
 
@@ -263,10 +263,10 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       ITupleCursor2<String> cursor = newCursor(btree);
 
       // seek to a tuple and verify its state.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.seek(20));
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.seek(20));
 
       // verify same state reported by tuple().
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       /*
        * insert a tuple before the current tuple (moves the current tuple
@@ -278,13 +278,13 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(TestKeyBuilder.asSortKey(20), cursor.currentKey());
 
       // verify the current tuple state is unchanged.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       // visit the prior tuple (the one we just inserted).
-      assertEquals(new TestTuple<String>(15, "Paul"), cursor.prior());
+      assertEquals(new TestTuple<>(15, "Paul"), cursor.prior());
 
       // verify the tuple state using tuple().
-      assertEquals(new TestTuple<String>(15, "Paul"), cursor.tuple());
+      assertEquals(new TestTuple<>(15, "Paul"), cursor.tuple());
 
       /*
        * remove the current tuple (moves the successors of this tuple in
@@ -299,7 +299,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(TestKeyBuilder.asSortKey(15), cursor.currentKey());
 
       // visit the next tuple.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.next());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.next());
 
       // delete that tuple.
       btree.remove(20);
@@ -320,10 +320,10 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(null, cursor.tuple());
 
       // advance the cursor and verify the tuple state
-      assertEquals(new TestTuple<String>(25, "Allen"), cursor.next());
+      assertEquals(new TestTuple<>(25, "Allen"), cursor.next());
 
       // verify the tuple state using tuple().
-      assertEquals(new TestTuple<String>(25, "Allen"), cursor.tuple());
+      assertEquals(new TestTuple<>(25, "Allen"), cursor.tuple());
     }
   }
 
@@ -363,10 +363,10 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       ITupleCursor2<String> cursor = newCursor(btree);
 
       // seek to a tuple and verify its state.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.seek(20));
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.seek(20));
 
       // verify same state reported by tuple().
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       // insert a tuple before the current tuple (forces the leaf to be split).
       btree.insert(15, "Paul");
@@ -375,13 +375,13 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(TestKeyBuilder.asSortKey(20), cursor.currentKey());
 
       // verify the current tuple state is unchanged.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       // visit the prior tuple (the one we just inserted).
-      assertEquals(new TestTuple<String>(15, "Paul"), cursor.prior());
+      assertEquals(new TestTuple<>(15, "Paul"), cursor.prior());
 
       // verify the tuple state using tuple().
-      assertEquals(new TestTuple<String>(15, "Paul"), cursor.tuple());
+      assertEquals(new TestTuple<>(15, "Paul"), cursor.tuple());
 
       /*
        * remove the current tuple. This causes the leaf to underflow and
@@ -397,7 +397,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(null, cursor.tuple());
 
       // visit the next tuple.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.next());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.next());
 
       // delete that tuple.
       btree.remove(20);
@@ -418,10 +418,10 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(null, cursor.tuple());
 
       // advance the cursor and verify the tuple state
-      assertEquals(new TestTuple<String>(25, "Allen"), cursor.next());
+      assertEquals(new TestTuple<>(25, "Allen"), cursor.next());
 
       // verify the tuple state using tuple().
-      assertEquals(new TestTuple<String>(25, "Allen"), cursor.tuple());
+      assertEquals(new TestTuple<>(25, "Allen"), cursor.tuple());
     }
   }
 
@@ -459,7 +459,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertTrue(cursor.hasNext());
 
       // visit the first tuple.
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.next());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.next());
 
       // remove that tuple from the index (triggers copy-on-write).
       btree.remove(10);
@@ -471,7 +471,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(null, cursor.tuple());
 
       // visit the next tuple.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.next());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.next());
 
       // verify the cursor position.
       assertEquals(TestKeyBuilder.asSortKey(20), cursor.currentKey());
@@ -489,10 +489,10 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertEquals(TestKeyBuilder.asSortKey(20), cursor.currentKey());
 
       // verify the current tuple state.
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       // visit the prior tuple (the one that we just inserted).
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.prior());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.prior());
     }
   }
 
@@ -528,7 +528,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       ITupleCursor2<String> cursor = newCursor(btree, flags, null /* fromKey */, null /* toKey */);
 
       assertEquals(
-          new TestTuple<String>(flags, 10, "Bryan", false /* deleted */, 0L /* timestamp */),
+          new TestTuple<>(flags, 10, "Bryan", false /* deleted */, 0L /* timestamp */),
           cursor.seek(10));
 
       cursor.remove();
@@ -540,7 +540,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertTrue(cursor.hasNext());
 
       assertEquals(
-          new TestTuple<String>(flags, 20, "Mike", false /* deleted */, 0L /* timestamp */),
+          new TestTuple<>(flags, 20, "Mike", false /* deleted */, 0L /* timestamp */),
           cursor.next());
 
       assertTrue(cursor.hasPrior());
@@ -585,7 +585,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       ITupleCursor2<String> cursor = newCursor(btree, flags, null /* fromKey */, null /* toKey */);
 
       assertEquals(
-          new TestTuple<String>(flags, 10, "Bryan", false /* deleted */, 0L /* timestamp */),
+          new TestTuple<>(flags, 10, "Bryan", false /* deleted */, 0L /* timestamp */),
           cursor.seek(10));
 
       cursor.remove();
@@ -596,7 +596,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
       assertTrue(cursor.hasNext());
 
       assertEquals(
-          new TestTuple<String>(flags, 20, "Mike", false /* deleted */, 0L /* timestamp */),
+          new TestTuple<>(flags, 20, "Mike", false /* deleted */, 0L /* timestamp */),
           cursor.next());
 
       // the prior tuple is the one that we deleted so it is not visitable.
@@ -632,18 +632,18 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
 
       assertTrue(cursor.hasNext());
 
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.next());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.next());
 
       assertFalse(cursor.hasNext());
 
       // insert after
       btree.insert(20, "Mike");
 
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.tuple());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.tuple());
 
       assertTrue(cursor.hasNext());
 
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.next());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.next());
     }
   }
 
@@ -668,18 +668,18 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
 
       assertTrue(cursor.hasPrior());
 
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.prior());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.prior());
 
       assertFalse(cursor.hasPrior());
 
       // insert before.
       btree.insert(10, "Bryan");
 
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       assertTrue(cursor.hasPrior());
 
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.prior());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.prior());
     }
   }
 }

@@ -337,7 +337,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         NamedSolutionSetRefUtility.newInstance(queryId, solutionSetName + "source", joinVars);
 
     // The Stream will be attached to the query attributes
-    final Map<Object, Object> queryAttributes = new LinkedHashMap<Object, Object>();
+    final Map<Object, Object> queryAttributes = new LinkedHashMap<>();
 
     // The solutions to index.
     final IBindingSet[] solutionsToIndex;
@@ -491,7 +491,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     @Override
     public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-      return new FutureTask<Void>(new ChunkTask(this, context));
+      return new FutureTask<>(new ChunkTask(this, context));
     }
 
     private static class ChunkTask implements Callable<Void> {

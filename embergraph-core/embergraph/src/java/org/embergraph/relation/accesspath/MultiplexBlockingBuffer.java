@@ -47,7 +47,7 @@ public class MultiplexBlockingBuffer<E> {
   private final ReentrantLock lock = new ReentrantLock();
 
   /** The set of opened buffered which have not yet been closed. */
-  private final LinkedHashSet<IBlockingBuffer<E>> set = new LinkedHashSet<IBlockingBuffer<E>>();
+  private final LinkedHashSet<IBlockingBuffer<E>> set = new LinkedHashSet<>();
 
   /** The #of currently open buffers. */
   private int counter = 0;

@@ -213,7 +213,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
   @Override
   public Iterator<T> iterator() {
 
-    return new ArrayIterator<T>(array(), off(), len());
+    return new ArrayIterator<>(array(), off(), len());
   }
 
   /*
@@ -440,7 +440,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     @Override
     public Iterator<T> iterator() {
 
-      return new ArrayIterator<T>(array(), off(), len());
+      return new ArrayIterator<>(array(), off(), len());
     }
   } // class SliceImpl
 }

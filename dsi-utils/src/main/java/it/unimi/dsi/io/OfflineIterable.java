@@ -207,7 +207,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
       dos.flush();
       final DataInputStream dis =
           new DataInputStream(new FastBufferedInputStream(new FileInputStream(file)));
-      return new OfflineIterator<T, U>(dis, serializer, store, size);
+      return new OfflineIterator<>(dis, serializer, store, size);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

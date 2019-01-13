@@ -177,7 +177,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
       super(capacity, maxLockTries, predeclareLocks);
 
       //            this.service = service;
-      this.serviceRef = new WeakReference<WriteExecutorService>(service);
+      this.serviceRef = new WeakReference<>(service);
     }
 
     protected void ready(final Runnable r) {
@@ -265,7 +265,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
        */
 
       lockManager =
-          new MyLockManager<String>(
+          new MyLockManager<>(
               maximumPoolSize, // capacity
               3, // @todo config maxLockTries
               true, // predeclareLocks
@@ -287,7 +287,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
     }
 
-    this.resourceManagerRef = new WeakReference<IResourceManager>(resourceManager);
+    this.resourceManagerRef = new WeakReference<>(resourceManager);
 
     /*
      * Tracks rejected executions on a counter.
@@ -362,14 +362,14 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
   /** The threads that are running our tasks (so that we can interrupt them if necessary). */
   private final ConcurrentHashMap<Thread, AbstractTask<?>> active =
-      new ConcurrentHashMap<Thread, AbstractTask<?>>();
+      new ConcurrentHashMap<>();
 
   /*
    * The set of tasks that make it into the commit group (so that we can set the commit time on each
    * of them iff the group commit succeeds).
    */
   private final Map<Thread, AbstractTask<?>> commitGroup =
-      new LinkedHashMap<Thread, AbstractTask<?>>();
+      new LinkedHashMap<>();
 
   /** #of write tasks completed since the last commit. */
   private final AtomicInteger nwrites = new AtomicInteger(0);
@@ -387,7 +387,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
    *
    * @see #1130 (ClocksNotSynchronizedException (HA, GROUP_COMMIT))
    */
-  private final AtomicReference<Throwable> firstCauseRef = new AtomicReference<Throwable>();
+  private final AtomicReference<Throwable> firstCauseRef = new AtomicReference<>();
 
   /*
    * Counters

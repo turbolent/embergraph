@@ -151,7 +151,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     // initialize variables used throughout the optimizer
     final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
     final VariableUsageInfo varUsageInfo = new VariableUsageInfo();
-    final Set<InlineTasks> inlineTasks = new HashSet<InlineTasks>();
+    final Set<InlineTasks> inlineTasks = new HashSet<>();
 
     /** Setup inlining tasks for existing bindings in the binding set */
     // extract information about used vars from a top-level perspective
@@ -269,7 +269,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             subqueryRoot.getBindingsClause());
 
     // record static bindings in subquery VALUES clause, if any
-    final LinkedHashSet<IVariable<?>> bcVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> bcVars = new LinkedHashSet<>();
     bcVars.addAll(SolutionSetStatserator.get(staticBindings).getUsedVars());
 
     final List<IBindingSet> bcBindings = Arrays.asList(staticBindings);
@@ -334,13 +334,13 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     childVarUsageInfo.extractVarSPUsageInfoChildren(group);
 
     /** Collect the children that introduce static bindings for later removal. */
-    final List<IGroupMemberNode> toRemove = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> toRemove = new ArrayList<>();
 
     // ticket 933b: the prerequisite for static binding of a variable is that
     // there is no preceding OPTIONAL or MINUS possibly binding the variable
     // within the join group, since the OPTIONAL or MINUS would be logically
     // evaluated first
-    final Set<IVariable<?>> optOrMinusVars = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> optOrMinusVars = new HashSet<>();
 
     for (IGroupMemberNode child : group) {
 
@@ -571,7 +571,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             (SubqueryRoot) child,
             new StaticBindingInfo(),
             new VariableUsageInfo(),
-            new HashSet<InlineTasks>());
+            new HashSet<>());
       }
     }
   }
@@ -587,7 +587,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
     /** Constructor creating an empty object (no usages). */
     public VariableUsageInfo() {
-      usageMap = new HashMap<IVariable<?>, List<IQueryNode>>();
+      usageMap = new HashMap<>();
     }
 
     /*
@@ -757,7 +757,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         final IVariable<?> iVar = varNode.getValueExpression();
 
         if (!usageMap.containsKey(iVar)) {
-          usageMap.put(iVar, new ArrayList<IQueryNode>());
+          usageMap.put(iVar, new ArrayList<>());
         }
 
         // add node to list
@@ -861,7 +861,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       if (var == null) return;
 
       if (!usageMap.containsKey(var)) {
-        usageMap.put(var, new ArrayList<IQueryNode>());
+        usageMap.put(var, new ArrayList<>());
       }
 
       // add node to list
@@ -881,7 +881,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       for (IVariable<?> var : xUsageMap.keySet()) {
 
         // make sure there's an entry for the key ...
-        if (!usageMap.containsKey(var)) usageMap.put(var, new ArrayList<IQueryNode>());
+        if (!usageMap.containsKey(var)) usageMap.put(var, new ArrayList<>());
 
         // ... and perform merge
         usageMap.get(var).addAll(xUsageMap.get(var));
@@ -891,7 +891,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       for (IVariable<?> var : yUsageMap.keySet()) {
 
         // make sure there's an entry for the key ...
-        if (!usageMap.containsKey(var)) usageMap.put(var, new ArrayList<IQueryNode>());
+        if (!usageMap.containsKey(var)) usageMap.put(var, new ArrayList<>());
 
         // ... and perform merge
         usageMap.get(var).addAll(yUsageMap.get(var));
@@ -915,14 +915,14 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     /** Constructor with empty input binding set. */
     public StaticBindingInfo() {
 
-      this.produced = new ArrayList<List<IBindingSet>>();
+      this.produced = new ArrayList<>();
       this.queryInput = new IBindingSet[] {new ListBindingSet()};
     }
 
     /** Constructor with given input binding set. */
     public StaticBindingInfo(IBindingSet[] queryInput) {
 
-      this.produced = new ArrayList<List<IBindingSet>>();
+      this.produced = new ArrayList<>();
       this.queryInput = queryInput;
     }
 
@@ -943,7 +943,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     }
 
     private List<IBindingSet> wrap(IBindingSet bs) {
-      final List<IBindingSet> bsList = new ArrayList<IBindingSet>();
+      final List<IBindingSet> bsList = new ArrayList<>();
       bsList.add(bs);
       return bsList;
     }
@@ -966,7 +966,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
       for (List<IBindingSet> staticBinding : staticBindings) {
 
-        final List<IBindingSet> tmp = new LinkedList<IBindingSet>();
+        final List<IBindingSet> tmp = new LinkedList<>();
 
         for (IBindingSet left : leftBindingSets) {
 
@@ -1112,7 +1112,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         final VarNode sVar = (VarNode) s;
         final ConstantNode constNode =
-            new ConstantNode(new Constant<IV>(sVar.getValueExpression(), val));
+            new ConstantNode(new Constant<>(sVar.getValueExpression(), val));
         spn.setArg(0, constNode);
       }
 
@@ -1120,7 +1120,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         final VarNode pVar = (VarNode) p;
         final ConstantNode constNode =
-            new ConstantNode(new Constant<IV>(pVar.getValueExpression(), val));
+            new ConstantNode(new Constant<>(pVar.getValueExpression(), val));
         spn.setArg(1, constNode);
       }
 
@@ -1128,7 +1128,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         final VarNode oVar = (VarNode) o;
         final ConstantNode constNode =
-            new ConstantNode(new Constant<IV>(oVar.getValueExpression(), val));
+            new ConstantNode(new Constant<>(oVar.getValueExpression(), val));
         spn.setArg(2, constNode);
       }
 
@@ -1136,7 +1136,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         final VarNode cVar = (VarNode) c;
         final ConstantNode constNode =
-            new ConstantNode(new Constant<IV>(cVar.getValueExpression(), val));
+            new ConstantNode(new Constant<>(cVar.getValueExpression(), val));
         spn.setArg(3, constNode);
       }
     }
@@ -1159,7 +1159,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
           final VarNode sVar = (VarNode) s;
           final ConstantNode constNode =
-              new ConstantNode(new Constant<IV>(sVar.getValueExpression(), val));
+              new ConstantNode(new Constant<>(sVar.getValueExpression(), val));
           ppn.setArg(0, constNode);
         }
 
@@ -1169,7 +1169,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
           final VarNode oVar = (VarNode) o;
           final ConstantNode constNode =
-              new ConstantNode(new Constant<IV>(oVar.getValueExpression(), val));
+              new ConstantNode(new Constant<>(oVar.getValueExpression(), val));
           ppn.setArg(2, constNode);
         }
       }
@@ -1182,7 +1182,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
           final VarNode cVar = (VarNode) c;
           final ConstantNode constNode =
-              new ConstantNode(new Constant<IV>(cVar.getValueExpression(), val));
+              new ConstantNode(new Constant<>(cVar.getValueExpression(), val));
           ppn.setArg(3, constNode);
         }
       }
@@ -1209,7 +1209,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         if (cur instanceof VarNode && ((VarNode) cur).get(0).equals(var)) {
 
           final ConstantNode constNode =
-              new ConstantNode(new Constant<IV>(((VarNode) cur).getValueExpression(), val));
+              new ConstantNode(new Constant<>(((VarNode) cur).getValueExpression(), val));
 
           functionNode.setArg(i, constNode);
 

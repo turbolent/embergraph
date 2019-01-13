@@ -62,8 +62,8 @@ public class TypeBasedASTJoinGroupPartitionReorderer implements IASTJoinGroupPar
             partition.nonOptionalNonMinusNodes);
 
     // split service nodes into runFirst and runLast service nodes
-    final List<ServiceNode> runFirstSNs = new LinkedList<ServiceNode>();
-    final List<ServiceNode> runLastSNs = new LinkedList<ServiceNode>();
+    final List<ServiceNode> runFirstSNs = new LinkedList<>();
+    final List<ServiceNode> runLastSNs = new LinkedList<>();
     for (ServiceNode sn : nodeClassifier.get(ServiceNode.class)) {
       if (sn.getResponsibleServiceFactory().getServiceOptions().isRunFirst()) {
         runFirstSNs.add(sn);
@@ -73,7 +73,7 @@ public class TypeBasedASTJoinGroupPartitionReorderer implements IASTJoinGroupPar
     }
 
     // order the nodes based on their types
-    final List<IGroupMemberNode> ordered = new LinkedList<IGroupMemberNode>();
+    final List<IGroupMemberNode> ordered = new LinkedList<>();
     ordered.addAll(runFirstSNs);
     ordered.addAll(nodeClassifier.get(NamedSubqueryInclude.class));
     ordered.addAll(nodeClassifier.get(StatementPatternNode.class));

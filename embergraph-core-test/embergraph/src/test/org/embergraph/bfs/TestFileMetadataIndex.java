@@ -130,7 +130,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     final String id = "test";
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
 
     metadata.put(FileMetadataSchema.ID, id);
 
@@ -179,7 +179,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     final String id = "test";
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
 
     metadata.put(FileMetadataSchema.ID, id);
 
@@ -300,7 +300,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     final String id = "test";
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
 
     metadata.put(FileMetadataSchema.ID, id);
 

@@ -45,7 +45,7 @@ import java.util.concurrent.FutureTask;
 public abstract class Memoizer<A, V> implements Computable<A, V> {
 
   /** Cache accumulates results. */
-  protected final ConcurrentMap<A, Future<V>> cache = new ConcurrentHashMap<A, Future<V>>();
+  protected final ConcurrentMap<A, Future<V>> cache = new ConcurrentHashMap<>();
 
   /** The method which computes a result (V) from an argument (A). */
   private final Computable<A, V> c;
@@ -65,7 +65,7 @@ public abstract class Memoizer<A, V> implements Computable<A, V> {
                 return c.compute(arg);
               }
             };
-        final FutureTask<V> ft = new FutureTask<V>(eval);
+        final FutureTask<V> ft = new FutureTask<>(eval);
         f = cache.putIfAbsent(arg, ft);
         if (f == null) {
           willRun = true; // Note: MUST set before running!

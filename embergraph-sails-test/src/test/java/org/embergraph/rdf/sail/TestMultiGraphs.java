@@ -172,7 +172,7 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         //                    System.err.println(result.next());
         //                }
 
-        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        final Collection<BindingSet> solution = new LinkedList<>();
         solution.add(
             createBindingSet(new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
         solution.add(createBindingSet(new BindingImpl("p", likes), new BindingImpl("o", rdf)));
@@ -210,7 +210,7 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         //                    System.err.println(result.next());
         //                }
 
-        final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+        final Collection<BindingSet> solution = new LinkedList<>();
         solution.add(
             createBindingSet(new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
         solution.add(createBindingSet(new BindingImpl("p", likes), new BindingImpl("o", rdf)));

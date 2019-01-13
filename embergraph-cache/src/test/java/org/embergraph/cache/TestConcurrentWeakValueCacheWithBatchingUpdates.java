@@ -48,11 +48,11 @@ public class TestConcurrentWeakValueCacheWithBatchingUpdates extends TestCase2 {
   public void test_memoryLeak() {
 
     final ConcurrentWeakValueCacheWithBatchedUpdates<Long, String> fixture =
-        new ConcurrentWeakValueCacheWithBatchedUpdates<Long, String>(
+        new ConcurrentWeakValueCacheWithBatchedUpdates<>(
             16, // backing hard reference LRU queue capacity.
             .75f, // loadFactor (.75 is the default)
             16 // concurrency level (16 is the default)
-            );
+        );
 
     /*
      * Populate the cache. We will hold hard references to all of the values
@@ -61,9 +61,9 @@ public class TestConcurrentWeakValueCacheWithBatchingUpdates extends TestCase2 {
      */
     final int outerSize = 100;
     final int innerSize = 1000000; // 1M
-    final Map<Long, String> outerMap = new HashMap<Long, String>();
+    final Map<Long, String> outerMap = new HashMap<>();
     {
-      final Map<Long, String> innerMap = new HashMap<Long, String>();
+      final Map<Long, String> innerMap = new HashMap<>();
 
       /*
        * Note: Fill the inner map first. This way the references for the
@@ -118,7 +118,7 @@ public class TestConcurrentWeakValueCacheWithBatchingUpdates extends TestCase2 {
     {
       final Random r = new Random();
 
-      final Map<Long, String> junkMap = new HashMap<Long, String>();
+      final Map<Long, String> junkMap = new HashMap<>();
 
       while (junkMap.size() < Bytes.megabyte32 * 1) {
 

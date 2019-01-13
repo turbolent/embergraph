@@ -52,11 +52,11 @@ public class ASTJoinGroupFilterExistsInfo {
 
   public ASTJoinGroupFilterExistsInfo(final Iterable<IGroupMemberNode> nodeList) {
 
-    filterMap = new HashMap<SubqueryRoot, FilterNode>();
+    filterMap = new HashMap<>();
 
     /** extract ASK subqueries and Exists() + NotExists() filter nodes */
-    final Map<IVariable<?>, FilterNode> filters = new HashMap<IVariable<?>, FilterNode>();
-    final Set<SubqueryRoot> askSubqueries = new HashSet<SubqueryRoot>();
+    final Map<IVariable<?>, FilterNode> filters = new HashMap<>();
+    final Set<SubqueryRoot> askSubqueries = new HashSet<>();
     for (final IGroupMemberNode node : nodeList) {
 
       if (node instanceof FilterNode) {

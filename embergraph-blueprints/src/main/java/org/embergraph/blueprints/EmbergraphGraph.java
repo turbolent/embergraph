@@ -206,7 +206,7 @@ public abstract class EmbergraphGraph implements Graph {
             /*
              * Multi-value, use a list.
              */
-            final List<Object> list = new LinkedList<Object>();
+            final List<Object> list = new LinkedList<>();
 
             list.add(getProperty(stmt.getObject()));
 
@@ -312,7 +312,7 @@ public abstract class EmbergraphGraph implements Graph {
 
       try {
 
-        final Set<String> properties = new LinkedHashSet<String>();
+        final Set<String> properties = new LinkedHashSet<>();
 
         while (result.hasNext()) {
 
@@ -387,7 +387,7 @@ public abstract class EmbergraphGraph implements Graph {
 
   protected Collection<Literal> toLiterals(final Object val) {
 
-    final Collection<Literal> literals = new LinkedList<Literal>();
+    final Collection<Literal> literals = new LinkedList<>();
 
     if (val instanceof Collection) {
 
@@ -1026,7 +1026,7 @@ public abstract class EmbergraphGraph implements Graph {
         final boolean subject) {
       this.stmts = stmts;
       this.subject = subject;
-      this.cache = new LinkedList<Vertex>();
+      this.cache = new LinkedList<>();
     }
 
     @Override
@@ -1084,7 +1084,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     public EdgeIterable(final CloseableIteration<Statement, ? extends OpenRDFException> stmts) {
       this.stmts = stmts;
-      this.cache = new LinkedList<Edge>();
+      this.cache = new LinkedList<>();
     }
 
     @Override
@@ -1130,7 +1130,7 @@ public abstract class EmbergraphGraph implements Graph {
   /** Fuse two iterables together into one. Useful for combining IN and OUT edges for a vertex. */
   public final <T> Iterable<T> fuse(final Iterable<T>... args) {
 
-    return new FusedIterable<T>(args);
+    return new FusedIterable<>(args);
   }
 
   /*
@@ -1253,7 +1253,7 @@ public abstract class EmbergraphGraph implements Graph {
       throw ex;
     }
 
-    final IStriterator sitr = new Striterator(new WrappedResult<Statement>(result, queryId));
+    final IStriterator sitr = new Striterator(new WrappedResult<>(result, queryId));
 
     sitr.addFilter(
         new Filter() {
@@ -1419,7 +1419,7 @@ public abstract class EmbergraphGraph implements Graph {
       throw ex;
     }
 
-    final IStriterator sitr = new Striterator(new WrappedResult<BindingSet>(result, queryId));
+    final IStriterator sitr = new Striterator(new WrappedResult<>(result, queryId));
 
     sitr.addFilter(
         new Resolver() {
@@ -1620,7 +1620,7 @@ public abstract class EmbergraphGraph implements Graph {
       throw ex;
     }
 
-    final IStriterator sitr = new Striterator(new WrappedResult<BindingSet>(result, queryId));
+    final IStriterator sitr = new Striterator(new WrappedResult<>(result, queryId));
 
     sitr.addFilter(
         new Resolver() {

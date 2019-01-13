@@ -81,11 +81,11 @@ public class SolutionSetStats implements ISolutionSetStats {
 
     int nsolutions = 0;
 
-    final Set<IVariable<?>> usedVars = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> notAlwaysBound = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> notMaterialized = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> currentVars = new HashSet<IVariable<?>>();
-    final Set<IVariable<?>> notBoundThisSolution = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> usedVars = new HashSet<>();
+    final Set<IVariable<?>> notAlwaysBound = new HashSet<>();
+    final Set<IVariable<?>> notMaterialized = new HashSet<>();
+    final Set<IVariable<?>> currentVars = new HashSet<>();
+    final Set<IVariable<?>> notBoundThisSolution = new HashSet<>();
 
     for (IBindingSet bset : bindingSets) {
 
@@ -156,12 +156,12 @@ public class SolutionSetStats implements ISolutionSetStats {
     this.nsolutions = nsolutions;
 
     // Figure out which variables were bound in every solution.
-    final Set<IVariable<?>> alwaysBound = new HashSet<IVariable<?>>(usedVars);
+    final Set<IVariable<?>> alwaysBound = new HashSet<>(usedVars);
     alwaysBound.removeAll(notAlwaysBound);
 
     // Figure out which variables were always materialized when they were
     // bound.
-    final Set<IVariable<?>> materialized = new HashSet<IVariable<?>>(usedVars);
+    final Set<IVariable<?>> materialized = new HashSet<>(usedVars);
     materialized.removeAll(notMaterialized);
 
     // Expose immutable versions of these collections.
@@ -181,7 +181,7 @@ public class SolutionSetStats implements ISolutionSetStats {
     } else {
 
       final Map<IVariable<?>, IConstant<?>> constants =
-          new HashMap<IVariable<?>, IConstant<?>>(alwaysBound.size());
+          new HashMap<>(alwaysBound.size());
 
       for (IVariable<?> v : alwaysBound) {
 

@@ -312,7 +312,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTaskMon<Void>(new JoinTask<E>(this, context));
+    return new FutureTaskMon<>(new JoinTask<>(this, context));
   }
 
   /** Pipeline join impl. */
@@ -959,7 +959,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
            * Do not coalesce access paths.
            */
 
-          final List<AccessPathTask> tmp = new LinkedList<AccessPathTask>();
+          final List<AccessPathTask> tmp = new LinkedList<>();
 
           for (int i = 0; i < chunk.length; i++) {
 
@@ -1031,7 +1031,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
          * collection.
          */
         final Map<IPredicate<E>, Collection<IBindingSet>> map =
-            new HashMap<IPredicate<E>, Collection<IBindingSet>>(chunk.length);
+            new HashMap<>(chunk.length);
 
         for (IBindingSet bindingSet : chunk) {
 
@@ -1086,7 +1086,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
              * into the map using that predicate as the key.
              */
 
-            values = new LinkedList<IBindingSet>();
+            values = new LinkedList<>();
 
             map.put(hashedPred, values);
 
@@ -1198,11 +1198,11 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
          * cancelled.
          */
 
-        final List<FutureTask<Void>> futureTasks = new LinkedList<FutureTask<Void>>();
+        final List<FutureTask<Void>> futureTasks = new LinkedList<>();
 
         for (AccessPathTask task : tasks) {
 
-          final FutureTask<Void> ft = new FutureTaskMon<Void>(task);
+          final FutureTask<Void> ft = new FutureTaskMon<>(task);
 
           futureTasks.add(ft);
         }
@@ -1744,7 +1744,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
              * First, gather all chunks.
              */
             int nchunks = 0;
-            final List<Object[]> chunks = new LinkedList<Object[]>();
+            final List<Object[]> chunks = new LinkedList<>();
             while (itr.hasNext()) {
 
               final Object[] chunk = itr.nextChunk();
@@ -1823,7 +1823,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
                   if (constraintSolutions == null) {
 
-                    constraintSolutions = new LinkedList<IBindingSet>();
+                    constraintSolutions = new LinkedList<>();
                   }
 
                   for (IBindingSet bs : solutions) {
@@ -2133,7 +2133,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
          * local buffer.
          */
 
-        return new UnsyncLocalOutputBuffer<IBindingSet>(
+        return new UnsyncLocalOutputBuffer<>(
             /* stats, */ joinOp.getChunkCapacity(), sink);
       }
 

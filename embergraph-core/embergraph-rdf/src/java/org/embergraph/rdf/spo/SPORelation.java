@@ -279,7 +279,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
     // declare the various indices.
     {
-      final Set<String> set = new HashSet<String>();
+      final Set<String> set = new HashSet<>();
 
       if (keyArity == 3) {
 
@@ -318,7 +318,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
         } else {
 
-          final List<SPOKeyOrder> tmp = new ArrayList<SPOKeyOrder>(6);
+          final List<SPOKeyOrder> tmp = new ArrayList<>(6);
 
           for (int i = SPOKeyOrder.FIRST_QUAD_INDEX; i <= SPOKeyOrder.LAST_QUAD_INDEX; i++) {
 
@@ -568,7 +568,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
    */
   public ICloseableIterator<ISPO> distinctSPOIterator(final ICloseableIterator<ISPO> src) {
 
-    if (!src.hasNext()) return new EmptyChunkedIterator<ISPO>(SPOKeyOrder.SPO);
+    if (!src.hasNext()) return new EmptyChunkedIterator<>(SPOKeyOrder.SPO);
 
     return new DistinctSPOIterator(this, src);
   }
@@ -1038,18 +1038,18 @@ public class SPORelation extends AbstractRelation<ISPO> {
       IElementFilter<ISPO> filter,
       final RangeBOp range) {
 
-    final IVariableOrConstant<IV> S = (s == null ? Var.var("s") : new Constant<IV>(s));
+    final IVariableOrConstant<IV> S = (s == null ? Var.var("s") : new Constant<>(s));
 
-    final IVariableOrConstant<IV> P = (p == null ? Var.var("p") : new Constant<IV>(p));
+    final IVariableOrConstant<IV> P = (p == null ? Var.var("p") : new Constant<>(p));
 
-    final IVariableOrConstant<IV> O = (o == null ? Var.var("o") : new Constant<IV>(o));
+    final IVariableOrConstant<IV> O = (o == null ? Var.var("o") : new Constant<>(o));
 
     IVariableOrConstant<IV> C = null;
 
     switch (keyArity) {
       case 3:
         if (statementIdentifiers) {
-          C = (c == null ? Var.var("c") : new Constant<IV>(c));
+          C = (c == null ? Var.var("c") : new Constant<>(c));
         } else if (c != null) {
           /*
            * The 4th position should never become bound for a triple store
@@ -1064,13 +1064,13 @@ public class SPORelation extends AbstractRelation<ISPO> {
         }
         break;
       case 4:
-        C = (c == null ? Var.var("c") : new Constant<IV>(c));
+        C = (c == null ? Var.var("c") : new Constant<>(c));
         break;
       default:
         throw new AssertionError();
     }
 
-    final Map<String, Object> anns = new LinkedHashMap<String, Object>();
+    final Map<String, Object> anns = new LinkedHashMap<>();
     anns.put(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()});
     if (range != null) {
       anns.put(IPredicate.Annotations.RANGE, range);
@@ -1443,7 +1443,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
             if (!spo.get(i).equals(iv)) {
 
-              return new EmptyAccessPath<ISPO>(predicate, SPOKeyOrder.SPO);
+              return new EmptyAccessPath<>(predicate, SPOKeyOrder.SPO);
             }
           }
         }
@@ -1452,7 +1452,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           log.debug("materializing an inline SID access path: " + spo);
         }
 
-        return new ArrayAccessPath<ISPO>(new ISPO[] {spo}, predicate, SPOKeyOrder.SPO);
+        return new ArrayAccessPath<>(new ISPO[]{spo}, predicate, SPOKeyOrder.SPO);
       }
     }
 
@@ -1610,7 +1610,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
                 });
 
     //        return new ChunkedWrappedIterator<IV>(itr);
-    return new ChunkedWrappedIterator<IV>(itr, IChunkedIterator.DEFAULT_CHUNK_SIZE, IV.class);
+    return new ChunkedWrappedIterator<>(itr, IChunkedIterator.DEFAULT_CHUNK_SIZE, IV.class);
   }
 
   /*
@@ -1715,11 +1715,11 @@ public class SPORelation extends AbstractRelation<ISPO> {
                   }
                 });
 
-    return new ChunkedWrappedIterator<IV>(
+    return new ChunkedWrappedIterator<>(
         itr,
         ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE, // chunkSize
         IV.class // elementClass
-        );
+    );
   }
 
   //    /*
@@ -1918,7 +1918,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
     final AtomicLong mutationCount = new AtomicLong(0);
 
-    final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(3);
+    final List<Callable<Long>> tasks = new ArrayList<>(3);
 
     /*
      * When true, mutations on the primary index (SPO or SPOC) will be
@@ -2192,7 +2192,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     // The mutation count.
     final AtomicLong mutationCount = new AtomicLong(0);
 
-    final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(3);
+    final List<Callable<Long>> tasks = new ArrayList<>(3);
 
     /*
      * When true, mutations on the primary index (SPO or SPOC) will be

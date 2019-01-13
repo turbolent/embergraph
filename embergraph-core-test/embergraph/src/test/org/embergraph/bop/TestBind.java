@@ -30,10 +30,10 @@ public class TestBind extends TestCase2 {
 
     // verify bind() returns the value of the constant.
     assertEquals(
-        Integer.valueOf(12), new Bind(y, new Constant<Integer>(Integer.valueOf(12))).get(bset));
+        Integer.valueOf(12), new Bind(y, new Constant<>(Integer.valueOf(12))).get(bset));
 
     // verify side-effect on the binding set.
-    assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+    assertEquals(new Constant<>(Integer.valueOf(12)), bset.get(y));
   }
 
   /** Unit test of bind(var,otherVar). */
@@ -45,12 +45,12 @@ public class TestBind extends TestCase2 {
 
     final IVariable<?> y = Var.var("y");
 
-    bset.set(x, new Constant<Integer>(12));
+    bset.set(x, new Constant<>(12));
 
     // verify bind() returns the value of the other variable.
     assertEquals(Integer.valueOf(12), new Bind(y, x).get(bset));
 
     // verify side-effect on the binding set.
-    assertEquals(new Constant<Integer>(Integer.valueOf(12)), bset.get(y));
+    assertEquals(new Constant<>(Integer.valueOf(12)), bset.get(y));
   }
 }

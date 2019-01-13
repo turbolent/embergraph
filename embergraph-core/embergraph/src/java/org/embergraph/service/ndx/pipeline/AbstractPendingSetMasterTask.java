@@ -144,7 +144,7 @@ public abstract class AbstractPendingSetMasterTask<
     try {
       Collection<L> locators = getPendingMap().remove(e);
       if (locators == null) {
-        locators = new LinkedHashSet<L>();
+        locators = new LinkedHashSet<>();
         locators.add(locator);
         getPendingMap().put(e, locators);
         sink.getPendingSet().add(e);

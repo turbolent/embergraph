@@ -72,7 +72,7 @@ class BTreeMetadata {
 
         if (btree == null) throw new IllegalArgumentException();
 
-        ref = new SoftReference<BTree>(btree);
+        ref = new SoftReference<>(btree);
       }
     }
 
@@ -181,7 +181,7 @@ class BTreeMetadata {
    * that you are holding the {@link #lock} before you look at the value.
    */
   private final AtomicReference<OverflowActionEnum> actionRef =
-      new AtomicReference<OverflowActionEnum>();
+      new AtomicReference<>();
 
   /*
    * The action taken and <code>null</code> if no action has been taken for this local index

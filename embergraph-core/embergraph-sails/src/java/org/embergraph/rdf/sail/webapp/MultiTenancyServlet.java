@@ -373,7 +373,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
           }
         }
 
-        Set<Object> keySet = new HashSet<Object>();
+        Set<Object> keySet = new HashSet<>();
 
         keySet.addAll(effectiveProperties.keySet());
 

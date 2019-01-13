@@ -32,7 +32,7 @@ public class DefaultExtensionFactory implements IExtensionFactory {
 
   public DefaultExtensionFactory() {
 
-    extensions = new LinkedList<IExtension<? extends EmbergraphValue>>();
+    extensions = new LinkedList<>();
   }
 
   @Override

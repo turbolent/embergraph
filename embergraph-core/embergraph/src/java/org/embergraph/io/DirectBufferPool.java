@@ -452,7 +452,7 @@ public class DirectBufferPool {
 
   /** An unbounded list of all {@link DirectBufferPool} instances. */
   private static List<DirectBufferPool> pools =
-      Collections.synchronizedList(new LinkedList<DirectBufferPool>());
+      Collections.synchronizedList(new LinkedList<>());
 
   static {
     final int poolCapacity =
@@ -526,7 +526,7 @@ public class DirectBufferPool {
 
     this.bufferCapacity = bufferCapacity;
 
-    this.pool = new LinkedBlockingQueue<ByteBuffer>(poolCapacity);
+    this.pool = new LinkedBlockingQueue<>(poolCapacity);
 
     pools.add(this);
   }
@@ -823,33 +823,33 @@ public class DirectBufferPool {
       totalAcquired += acquired;
       totalBytesUsed.addAndGet(bytesUsed);
 
-      c.addCounter("poolCapacity", new OneShotInstrument<Integer>(poolCapacity));
+      c.addCounter("poolCapacity", new OneShotInstrument<>(poolCapacity));
 
-      c.addCounter("bufferCapacity", new OneShotInstrument<Integer>(bufferCapacity));
+      c.addCounter("bufferCapacity", new OneShotInstrument<>(bufferCapacity));
 
-      c.addCounter("acquired", new OneShotInstrument<Integer>(acquired));
+      c.addCounter("acquired", new OneShotInstrument<>(acquired));
 
-      c.addCounter("leaked", new OneShotInstrument<Long>(nleaked));
+      c.addCounter("leaked", new OneShotInstrument<>(nleaked));
 
-      c.addCounter("poolSize", new OneShotInstrument<Integer>(poolSize));
+      c.addCounter("poolSize", new OneShotInstrument<>(poolSize));
 
       /*
        * #of bytes allocated and held by the DirectBufferPool.
        */
-      c.addCounter("bytesUsed", new OneShotInstrument<Long>(bytesUsed));
+      c.addCounter("bytesUsed", new OneShotInstrument<>(bytesUsed));
     } // next DirectBufferPool
 
     /*
      * Totals.
      */
 
-    tmp.addCounter("totalAcquired", new OneShotInstrument<Integer>(totalAcquired));
+    tmp.addCounter("totalAcquired", new OneShotInstrument<>(totalAcquired));
 
-    tmp.addCounter("bufferPoolCount", new OneShotInstrument<Integer>(bufferPoolCount));
+    tmp.addCounter("bufferPoolCount", new OneShotInstrument<>(bufferPoolCount));
 
-    tmp.addCounter("bufferInUseCount", new OneShotInstrument<Integer>(bufferInUseCount));
+    tmp.addCounter("bufferInUseCount", new OneShotInstrument<>(bufferInUseCount));
 
-    tmp.addCounter("totalBytesUsed", new OneShotInstrument<Long>(totalBytesUsed.get()));
+    tmp.addCounter("totalBytesUsed", new OneShotInstrument<>(totalBytesUsed.get()));
 
     return tmp;
   }

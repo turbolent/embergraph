@@ -304,8 +304,8 @@ public abstract class ProxyEmbergraphSailTestCase extends AbstractEmbergraphSail
 
     try {
 
-      final Collection<BindingSet> extraResults = new LinkedList<BindingSet>();
-      Collection<BindingSet> missingResults = new LinkedList<BindingSet>();
+      final Collection<BindingSet> extraResults = new LinkedList<>();
+      Collection<BindingSet> missingResults = new LinkedList<>();
 
       int resultCount = 0;
       int nmatched = 0;

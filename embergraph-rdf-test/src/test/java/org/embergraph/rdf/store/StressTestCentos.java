@@ -60,7 +60,7 @@ public class StressTestCentos extends AbstractTripleStoreTestCase {
       for (int k = 0; k < N; k++) {
 
         StatementBuffer<EmbergraphStatement> sb =
-            new StatementBuffer<EmbergraphStatement>(store, 20000);
+            new StatementBuffer<>(store, 20000);
 
         EmbergraphURI g = store.getValueFactory().createURI("http://test/g" + k);
 

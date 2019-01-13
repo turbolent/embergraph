@@ -204,7 +204,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
        */
 
       final ArrayList<AbstractDataServiceProcedureTask> tasks =
-          new ArrayList<AbstractDataServiceProcedureTask>(maxTasks);
+          new ArrayList<>(maxTasks);
 
       for (int i = 0; i < maxTasks && itr.hasNext(); i++) {
 
@@ -269,7 +269,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
      */
 
     final ArrayList<AbstractDataServiceProcedureTask> tasks =
-        new ArrayList<AbstractDataServiceProcedureTask>(nsplits);
+        new ArrayList<>(nsplits);
 
     final Iterator<Split> itr = splits.iterator();
 

@@ -86,7 +86,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -150,7 +150,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -210,7 +210,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -278,7 +278,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -348,7 +348,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -429,7 +429,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -533,7 +533,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("rdf", RDF.NAMESPACE);
         prefixDecls.put("foaf", FOAFVocabularyDecl.NAMESPACE);
         expected.setPrefixDecls(prefixDecls);
@@ -607,7 +607,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("rdf", RDF.NAMESPACE);
         prefixDecls.put("foaf", FOAFVocabularyDecl.NAMESPACE);
         expected.setPrefixDecls(prefixDecls);
@@ -691,7 +691,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         prefixDecls.put("rdfs", RDFS.NAMESPACE);
         expected.setPrefixDecls(prefixDecls);
       }

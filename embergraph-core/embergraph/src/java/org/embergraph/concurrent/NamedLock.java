@@ -46,7 +46,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class NamedLock<T> {
 
-  private final Map<T, ReentrantLock> locks = new WeakHashMap<T, ReentrantLock>();
+  private final Map<T, ReentrantLock> locks = new WeakHashMap<>();
 
   /*
    * Return the canonical instance of the lock for a named resource.

@@ -611,7 +611,7 @@ public class HashCollisionUtility {
      * <p>TODO Collisions in a bucket are very rare given an int32 hash code, so this should be
      * optimized for the common case with a single address.
      */
-    public final List<Long> addrs = new LinkedList<Long>();
+    public final List<Long> addrs = new LinkedList<>();
 
     public Bucket(final byte[] key) {
 
@@ -651,7 +651,7 @@ public class HashCollisionUtility {
   private static class ValueBuffer {
 
     /** The allocation contexts which can be released once these data have been processed. */
-    private final Set<IMemoryManager> contexts = new LinkedHashSet<IMemoryManager>();
+    private final Set<IMemoryManager> contexts = new LinkedHashSet<>();
 
     /*
      * The #of distinct records in the addrMap (this is more than the map size if there are hash
@@ -804,7 +804,7 @@ public class HashCollisionUtility {
       final long keepAliveTime = 60;
       final TimeUnit unit = TimeUnit.SECONDS;
       final BlockingQueue<Runnable> workQueue =
-          new LinkedBlockingQueue<Runnable>(parserWorkQueueCapacity);
+          new LinkedBlockingQueue<>(parserWorkQueueCapacity);
       //			final BlockingQueue<Runnable> workQueue = new SynchronousQueue<Runnable>();
       this.parserService =
           new ThreadPoolExecutor(
@@ -825,7 +825,7 @@ public class HashCollisionUtility {
     this.indexerService = Executors.newSingleThreadExecutor();
 
     // *blocking* queue of ValueBuffers to be indexed
-    this.valueQueue = new LinkedBlockingQueue<ValueBuffer>(valQueueCapacity); // lock);
+    this.valueQueue = new LinkedBlockingQueue<>(valQueueCapacity); // lock);
 
     vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -870,7 +870,7 @@ public class HashCollisionUtility {
      * since the DateTimeExtension uses the LexiconRelation to do its work.
      */
     conf =
-        new LexiconConfiguration<EmbergraphValue>(
+        new LexiconConfiguration<>(
             256, // blobsThreshold
             true, // inlineXSDDatatypeLiterals
             true, // inlineTextLiterals
@@ -886,7 +886,7 @@ public class HashCollisionUtility {
             uriFactory,
             false, // GeoSpatial support
             null // GeoSpatial config
-            );
+        );
 
     //		valueCache = new ConcurrentWeakValueCacheWithBatchedUpdates<Value, EmbergraphValue>(
     //				50000 // hard reference queue capacity
@@ -904,7 +904,7 @@ public class HashCollisionUtility {
       if (indexerTask != null) throw new IllegalStateException();
 
       // start indexer.
-      indexerTask = new FutureTask<Void>(new IndexerMainTask());
+      indexerTask = new FutureTask<>(new IndexerMainTask());
 
       indexerService.submit(indexerTask);
 
@@ -930,7 +930,7 @@ public class HashCollisionUtility {
    * Poison pill used to indicate that no more objects will be placed onto the {@link #valueQueue}.
    */
   private final ValueBuffer poisonPill =
-      new ValueBuffer(new LinkedList<IMemoryManager>(), 0, new LinkedHashMap<byte[], Bucket>());
+      new ValueBuffer(new LinkedList<>(), 0, new LinkedHashMap<>());
 
   /*
    * Normal shutdown. Running parsers will complete and their data will be indexed, but new parsers
@@ -1008,7 +1008,7 @@ public class HashCollisionUtility {
           final ValueBuffer first = valueQueue.take();
 
           // Drain queue, but keep an eye out for that poison pill.
-          final LinkedList<ValueBuffer> coll = new LinkedList<ValueBuffer>();
+          final LinkedList<ValueBuffer> coll = new LinkedList<>();
 
           // The element we already took from the queue.
           coll.add(first);
@@ -1086,8 +1086,8 @@ public class HashCollisionUtility {
 
         for (ValueBuffer t : coll) nvalues += t.nvalues;
 
-        final List<IMemoryManager> contexts = new LinkedList<IMemoryManager>();
-        final LinkedHashMap<byte[], Bucket> addrMap = new LinkedHashMap<byte[], Bucket>();
+        final List<IMemoryManager> contexts = new LinkedList<>();
+        final LinkedHashMap<byte[], Bucket> addrMap = new LinkedHashMap<>();
 
         //				int off = 0;
 
@@ -1322,7 +1322,7 @@ public class HashCollisionUtility {
         new StatementHandler(valBufSize, c, conf, vf, mmgr, valueQueue, parsing);
 
     final FutureTask<Void> ft =
-        new ReportingFutureTask<Void>(
+        new ReportingFutureTask<>(
             f, new ParseFileTask(f, fallback, fileBufSize, vf, stmtHandler));
 
     if (parserService != null) {
@@ -1637,7 +1637,7 @@ public class HashCollisionUtility {
         // Lazy allocation of the buffer.
         context = memoryManager.createAllocationContext();
 
-        addrMap = new LinkedHashMap<byte[], Bucket>();
+        addrMap = new LinkedHashMap<>();
       }
 
       /*
@@ -1748,7 +1748,7 @@ public class HashCollisionUtility {
        * cleared when the data have been consumed) and the address map.
        */
 
-      final List<IMemoryManager> contexts = new LinkedList<IMemoryManager>();
+      final List<IMemoryManager> contexts = new LinkedList<>();
       contexts.add(context);
 
       // put the buffer on the queue (blocking operation).

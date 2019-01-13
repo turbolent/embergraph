@@ -167,7 +167,7 @@ public class DefaultAnalyzerFactory implements IAnalyzerFactory {
       return analyzers;
     }
 
-    analyzers = new HashMap<String, AnalyzerConstructor>();
+    analyzers = new HashMap<>();
 
     final CharArraySet emptyStopwords = CharArraySet.EMPTY_SET;
 

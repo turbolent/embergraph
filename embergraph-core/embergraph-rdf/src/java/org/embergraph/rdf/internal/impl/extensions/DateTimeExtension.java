@@ -63,7 +63,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
   public DateTimeExtension(final IDatatypeURIResolver resolver, final TimeZone defaultTZ) {
 
     //        this.dateTime = resolver.resolve(XSD.DATETIME);
-    this.datatypes = new LinkedHashMap<IV, EmbergraphURI>();
+    this.datatypes = new LinkedHashMap<>();
     resolve(resolver, XSD.DATETIME);
     resolve(resolver, XSD.DATE);
     resolve(resolver, XSD.TIME);
@@ -89,7 +89,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
   @Override
   public Set<EmbergraphURI> getDatatypes() {
 
-    return new LinkedHashSet<EmbergraphURI>(datatypes.values());
+    return new LinkedHashSet<>(datatypes.values());
   }
 
   /*

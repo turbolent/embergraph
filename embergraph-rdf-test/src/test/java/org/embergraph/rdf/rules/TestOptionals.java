@@ -93,7 +93,7 @@ public class TestOptionals extends AbstractInferenceEngineTestCase {
 
     try {
 
-      final Map<Value, IV> termIds = new HashMap<Value, IV>();
+      final Map<Value, IV> termIds = new HashMap<>();
 
       final URI A = new URIImpl("http://www.embergraph.org/A");
       final URI B = new URIImpl("http://www.embergraph.org/B");
@@ -164,10 +164,10 @@ public class TestOptionals extends AbstractInferenceEngineTestCase {
       { // works great
         final String SPO = db.getSPORelation().getNamespace();
         final IVariableOrConstant<IV> s = Var.var("s");
-        final IVariableOrConstant<IV> type = new Constant<IV>(TYPE);
-        final IVariableOrConstant<IV> t = new Constant<IV>(x);
-        final IVariableOrConstant<IV> label = new Constant<IV>(LABEL);
-        final IVariableOrConstant<IV> comment = new Constant<IV>(COMMENT);
+        final IVariableOrConstant<IV> type = new Constant<>(TYPE);
+        final IVariableOrConstant<IV> t = new Constant<>(x);
+        final IVariableOrConstant<IV> label = new Constant<>(LABEL);
+        final IVariableOrConstant<IV> comment = new Constant<>(COMMENT);
         final IVariableOrConstant<IV> l = Var.var("l");
         final IVariableOrConstant<IV> c = Var.var("c");
         final IRule rule =
@@ -212,10 +212,10 @@ public class TestOptionals extends AbstractInferenceEngineTestCase {
 
         final String SPO = db.getSPORelation().getNamespace();
         final IVariableOrConstant<IV> s = Var.var("s");
-        final IVariableOrConstant<IV> type = new Constant<IV>(TYPE);
-        final IVariableOrConstant<IV> t = new Constant<IV>(x);
-        final IVariableOrConstant<IV> label = new Constant<IV>(LABEL);
-        final IVariableOrConstant<IV> comment = new Constant<IV>(COMMENT);
+        final IVariableOrConstant<IV> type = new Constant<>(TYPE);
+        final IVariableOrConstant<IV> t = new Constant<>(x);
+        final IVariableOrConstant<IV> label = new Constant<>(LABEL);
+        final IVariableOrConstant<IV> comment = new Constant<>(COMMENT);
         final IVariableOrConstant<IV> l = Var.var("l");
         final IVariableOrConstant<IV> c = Var.var("c");
         final IRule rule =
@@ -256,10 +256,10 @@ public class TestOptionals extends AbstractInferenceEngineTestCase {
       { // two optionals does not work either
         final String SPO = db.getSPORelation().getNamespace();
         final IVariableOrConstant<IV> s = Var.var("s");
-        final IVariableOrConstant<IV> type = new Constant<IV>(TYPE);
-        final IVariableOrConstant<IV> t = new Constant<IV>(x);
-        final IVariableOrConstant<IV> label = new Constant<IV>(LABEL);
-        final IVariableOrConstant<IV> comment = new Constant<IV>(COMMENT);
+        final IVariableOrConstant<IV> type = new Constant<>(TYPE);
+        final IVariableOrConstant<IV> t = new Constant<>(x);
+        final IVariableOrConstant<IV> label = new Constant<>(LABEL);
+        final IVariableOrConstant<IV> comment = new Constant<>(COMMENT);
         final IVariableOrConstant<IV> l = Var.var("l");
         final IVariableOrConstant<IV> c = Var.var("c");
         final IRule rule =

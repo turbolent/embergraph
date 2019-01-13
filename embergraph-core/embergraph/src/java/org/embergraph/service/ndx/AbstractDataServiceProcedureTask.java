@@ -264,7 +264,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
 
     } catch (Exception ex) {
 
-      if (causes == null) causes = new LinkedList<Throwable>();
+      if (causes == null) causes = new LinkedList<>();
 
       causes.add(ex);
 

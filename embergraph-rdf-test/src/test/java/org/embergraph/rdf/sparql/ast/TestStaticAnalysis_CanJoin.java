@@ -53,11 +53,11 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
   public void test_canJoin_correctRejection() {
 
     @SuppressWarnings("rawtypes")
-    final ConstantNode p = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode p = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode q = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode q = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode r = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode r = new ConstantNode(new Constant<>(mockIV()));
 
     final VarNode x = new VarNode("x");
     final VarNode y = new VarNode("y");
@@ -93,11 +93,11 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
   public void test_canJoin() {
 
     @SuppressWarnings("rawtypes")
-    final ConstantNode p = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode p = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode q = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode q = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode r = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode r = new ConstantNode(new Constant<>(mockIV()));
 
     final VarNode u = new VarNode("u");
     final VarNode x = new VarNode("x");
@@ -142,11 +142,11 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
   public void test_canJoin_filtersAreIngored() {
 
     @SuppressWarnings("rawtypes")
-    final ConstantNode p = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode p = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode q = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode q = new ConstantNode(new Constant<>(mockIV()));
     @SuppressWarnings("rawtypes")
-    final ConstantNode r = new ConstantNode(new Constant<IV>(mockIV()));
+    final ConstantNode r = new ConstantNode(new Constant<>(mockIV()));
 
     final VarNode x = new VarNode("x");
     final VarNode y = new VarNode("y");

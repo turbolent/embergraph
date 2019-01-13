@@ -183,7 +183,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
      * Populate a weak value collection from the BTree's nodes and leaves.
      */
     final LinkedList<WeakReference<AbstractNode>> refs =
-        new LinkedList<WeakReference<AbstractNode>>();
+        new LinkedList<>();
     {
       final Iterator<AbstractNode> itr = btree.getRoot().postOrderNodeIterator();
 
@@ -244,7 +244,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
         return;
       }
 
-      final List<byte[]> stuff = new LinkedList<byte[]>();
+      final List<byte[]> stuff = new LinkedList<>();
 
       for (int y = 0; y < 1000; y++) {
 
@@ -341,7 +341,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
      * Populate a weak value collection from the BTree's nodes and leaves.
      */
     final LinkedList<WeakReference<AbstractNode>> refs =
-        new LinkedList<WeakReference<AbstractNode>>();
+        new LinkedList<>();
     {
       final Iterator<AbstractNode> itr = btree.getRoot().postOrderNodeIterator();
 
@@ -402,7 +402,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
         return;
       }
 
-      final List<byte[]> stuff = new LinkedList<byte[]>();
+      final List<byte[]> stuff = new LinkedList<>();
 
       for (int y = 0; y < 1000; y++) {
 

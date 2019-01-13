@@ -45,7 +45,7 @@ public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
    * That is by design since both read and write scenarios have high demand.
    */
   private final ConcurrentWeakValueCacheWithTimeout<Thread, A> cache =
-      new ConcurrentWeakValueCacheWithTimeout<Thread, A>(
+      new ConcurrentWeakValueCacheWithTimeout<>(
           10 /* queueCapacity */, TimeUnit.SECONDS.toNanos(5));
 
   private final IRecordCompressorFactory<A> delegate;

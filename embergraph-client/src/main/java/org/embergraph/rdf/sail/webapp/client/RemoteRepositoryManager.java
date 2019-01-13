@@ -1932,7 +1932,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
       final InsertBindingSetCursor cursor = new InsertBindingSetCursor(result, bindings);
 
       // Wrap as FutureTask so we can cancel.
-      ft = new FutureTask<Void>(result, null /* result */);
+      ft = new FutureTask<>(result, null /* result */);
 
       /*
        * Submit task for execution. It will asynchronously consume the
@@ -1947,7 +1947,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
        * can not be done until we submit the BackgroundTupleResult for
        * execution.
        */
-      final List<String> list = new ArrayList<String>(result.getBindingNames());
+      final List<String> list = new ArrayList<>(result.getBindingNames());
 
       /*
        * The task was accepted by the executor. Wrap with iteration

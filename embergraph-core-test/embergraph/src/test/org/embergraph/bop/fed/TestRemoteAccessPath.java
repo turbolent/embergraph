@@ -235,7 +235,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
       /*
        * Insert data into the appropriate index partitions.
        */
-      rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+      rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
     }
   }
 
@@ -247,17 +247,17 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   public void test_remoteAccessPath_readsOnBothPartitions() {
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {Var.var("name"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{Var.var("name"), Var.var("value")},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
                 new NV(Annotations.REMOTE_ACCESS_PATH, true),
                 // Note: turns off shard-wise parallelism!
@@ -280,12 +280,12 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         newBindingSetIterator(new IBindingSet[][] {new IBindingSet[0]});
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(fed, queryEngineStore /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -326,10 +326,10 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
   public void test_remoteAccessPath_readsOnPartition0() {
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("John"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("John"), Var.var("value")},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
                 new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
@@ -344,12 +344,12 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         newBindingSetIterator(new IBindingSet[][] {new IBindingSet[0]});
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(fed, queryEngineStore /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -390,10 +390,10 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
   public void test_remoteAccessPath_readsOnPartition1() {
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
                 new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
@@ -409,12 +409,12 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         newBindingSetIterator(new IBindingSet[][] {new IBindingSet[0]});
 
     final IBlockingBuffer<IBindingSet[]> sinkIsIgnored =
-        new BlockingBuffer<IBindingSet[]>(1 /* capacity */);
+        new BlockingBuffer<>(1 /* capacity */);
 
     final PipelineOp mockQuery = new MockPipelineOp(BOp.NOARGS);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(fed, queryEngineStore /* indexManager */),
             -1 /* partitionId */,
             statIsIgnored,
@@ -461,7 +461,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
   private static ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickAsynchronousIterator<>(bindingSetChunks);
   }
 
   protected class MockPipelineOp extends PipelineOp {

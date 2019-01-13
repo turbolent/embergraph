@@ -389,7 +389,7 @@ public class TestGOM extends ProxyGOMTest {
   public void notestPerfStringIntern() {
     final Random r = new Random();
     final int limit = 10000;
-    final ArrayList<String> strs = new ArrayList<String>(limit);
+    final ArrayList<String> strs = new ArrayList<>(limit);
     for (int i = 0; i < limit; i++) {
       strs.add("url://this/is/a/long/string/" + (987654 + r.nextInt(1000000)));
     }
@@ -402,7 +402,7 @@ public class TestGOM extends ProxyGOMTest {
       final long end = System.nanoTime();
       if (log.isInfoEnabled()) log.info("Interns#" + i + ":" + (end - start));
     }
-    final ConcurrentHashMap<String, String> dict = new ConcurrentHashMap<String, String>();
+    final ConcurrentHashMap<String, String> dict = new ConcurrentHashMap<>();
     for (int i = 0; i < 20; i++) {
       final long start = System.nanoTime();
       final Iterator<String> striter = strs.iterator();

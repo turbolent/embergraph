@@ -37,12 +37,12 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
   private final InputStream in;
   private final String baseURI;
   private final CountDownLatch namespacesReady = new CountDownLatch(1);
-  private final Map<String, String> namespaces = new ConcurrentHashMap<String, String>();
+  private final Map<String, String> namespaces = new ConcurrentHashMap<>();
   private final QueueCursor<Statement> queue;
 
   public BackgroundGraphResult(
       final RDFParser parser, final InputStream in, final Charset charset, final String baseURI) {
-    this(new QueueCursor<Statement>(10), parser, in, charset, baseURI);
+    this(new QueueCursor<>(10), parser, in, charset, baseURI);
   }
 
   public BackgroundGraphResult(

@@ -649,7 +649,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
             ValueType.LONG, null, 10, ServiceMapping.TIME, null);
 
     final List<GeoSpatialDatatypeFieldConfiguration> fieldConfig =
-        new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
+        new ArrayList<>();
     fieldConfig.add(field1Config);
     fieldConfig.add(field2Config);
     fieldConfig.add(field3Config);
@@ -674,7 +674,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
             ValueType.DOUBLE, null, 100000, ServiceMapping.LONGITUDE, null);
 
     final List<GeoSpatialDatatypeFieldConfiguration> fieldConfig =
-        new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
+        new ArrayList<>();
     fieldConfig.add(field1Config);
     fieldConfig.add(field2Config);
 
@@ -701,7 +701,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
             ValueType.LONG, null, 1, ServiceMapping.LONGITUDE, null);
 
     final List<GeoSpatialDatatypeFieldConfiguration> fieldConfig =
-        new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
+        new ArrayList<>();
     fieldConfig.add(field1Config);
     fieldConfig.add(field2Config);
 
@@ -728,7 +728,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
             ValueType.LONG, min, 1, ServiceMapping.LONGITUDE, null);
 
     final List<GeoSpatialDatatypeFieldConfiguration> fieldConfig =
-        new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
+        new ArrayList<>();
     fieldConfig.add(field1Config);
     fieldConfig.add(field2Config);
 
@@ -746,7 +746,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
   protected GeoSpatialLiteralExtension<EmbergraphValue> getGSLiteralExtension(
       final EmbergraphValueFactory vf, final GeoSpatialDatatypeConfiguration datatypeConfig) {
 
-    return new GeoSpatialLiteralExtension<EmbergraphValue>(
+    return new GeoSpatialLiteralExtension<>(
         new IDatatypeURIResolver() {
           public EmbergraphURI resolve(URI uri) {
             final EmbergraphURI buri = vf.createURI(uri.stringValue());

@@ -310,7 +310,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
       final int indexDefaultCapacity = capacity / (1 * Bytes.kilobyte32);
 
       // allocate and initialize the write cache index.
-      writeCacheIndex = new ConcurrentHashMap<Long, Integer>(indexDefaultCapacity);
+      writeCacheIndex = new ConcurrentHashMap<>(indexDefaultCapacity);
     }
 
     /** The current position in the buffer. */
@@ -1088,7 +1088,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
         // add counter for the write cache capacity.
         writeCache.addCounter(
-            "capacity", new OneShotInstrument<Long>(tmp == null ? 0L : tmp.capacity()));
+            "capacity", new OneShotInstrument<>(tmp == null ? 0L : tmp.capacity()));
       }
     }
 

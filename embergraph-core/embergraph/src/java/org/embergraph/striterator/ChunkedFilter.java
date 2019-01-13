@@ -86,7 +86,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
    */
   public IChunkedOrderedIterator<F> filter(final I src) {
 
-    return new ChunkedFilteringIterator<I, E, F>(src, this);
+    return new ChunkedFilteringIterator<>(src, this);
   }
 
   //    /*

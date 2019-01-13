@@ -79,7 +79,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   //	transient EmbergraphSailRepositoryConnection cxn;
 
   final List<EmbergraphGraphListener> listeners =
-      Collections.synchronizedList(new LinkedList<EmbergraphGraphListener>());
+      Collections.synchronizedList(new LinkedList<>());
 
   /** Create a Blueprints wrapper around a {@link EmbergraphSail} instance. */
   public EmbergraphGraphEmbedded(final EmbergraphSail sail) {
@@ -332,7 +332,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   }
 
   /** We need to batch and materialize these. */
-  private final List<IChangeRecord> removes = new LinkedList<IChangeRecord>();
+  private final List<IChangeRecord> removes = new LinkedList<>();
 
   /** Changed events coming from embergraph. */
   @Override
@@ -405,7 +405,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
 
     try {
 
-      final List<IChangeRecord> materialized = new LinkedList<IChangeRecord>();
+      final List<IChangeRecord> materialized = new LinkedList<>();
 
       final AbstractTripleStore db = cxn().getTripleStore();
 
@@ -418,7 +418,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
 
       // use the database to resolve them into EmbergraphStatements
       final EmbergraphStatementIterator it =
-          db.asStatementIterator(new ChunkedArrayIterator<ISPO>(i, spos, null /* keyOrder */));
+          db.asStatementIterator(new ChunkedArrayIterator<>(i, spos, null /* keyOrder */));
 
       /*
        * the EmbergraphStatementIterator will produce EmbergraphStatement
@@ -740,7 +740,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
    * begins to execute. See {@link AbstractQueryTask#setQueryId(ASTContainer)}.
    */
   private static final ConcurrentHashMap<String /* extQueryId */, RunningQuery> m_queries =
-      new ConcurrentHashMap<String, RunningQuery>();
+      new ConcurrentHashMap<>();
 
   /*
    * The currently executing QUERY and UPDATE requests.
@@ -754,7 +754,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
    * resolve the {@link Future}
    */
   private static final ConcurrentHashMap<UUID /* queryUuid */, RunningQuery> m_queries2 =
-      new ConcurrentHashMap<UUID, RunningQuery>();
+      new ConcurrentHashMap<>();
 
   public RunningQuery getQueryById(final UUID queryUuid) {
 

@@ -144,7 +144,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
     // Note: MAY be null.
     this.service = service;
 
-    final HashMap<String /* uri */, DeclaredResource> map = new HashMap<String, DeclaredResource>();
+    final HashMap<String /* uri */, DeclaredResource> map = new HashMap<>();
 
     /*
      * Pre-declare resources that will be served from the CLASSPATH.

@@ -138,8 +138,8 @@ public class StringMaps {
    */
   public static <T extends CharSequence> StringMap<T> synchronize(final StringMap<T> stringMap) {
     return stringMap instanceof PrefixMap
-        ? new SynchronizedPrefixMap<T>((PrefixMap<T>) stringMap)
-        : new SynchronizedStringMap<T>(stringMap);
+        ? new SynchronizedPrefixMap<>((PrefixMap<T>) stringMap)
+        : new SynchronizedStringMap<>(stringMap);
   }
 
   /*
@@ -149,6 +149,6 @@ public class StringMaps {
    * @return a synchronized view of the specified prefix map.
    */
   public static <T extends CharSequence> PrefixMap<T> synchronize(final PrefixMap<T> prefixMap) {
-    return new SynchronizedPrefixMap<T>(prefixMap);
+    return new SynchronizedPrefixMap<>(prefixMap);
   }
 }

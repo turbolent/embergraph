@@ -318,7 +318,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
    */
   public List<FilterNode> getInFilters() {
 
-    final List<FilterNode> filters = new LinkedList<FilterNode>();
+    final List<FilterNode> filters = new LinkedList<>();
 
     for (IQueryNode node : this) {
 
@@ -384,7 +384,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
 
-    final Set<IVariable<?>> requiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> requiredBound = new HashSet<>();
     for (IGroupMemberNode child : getChildren()) {
       requiredBound.addAll(child.getRequiredBound(sa));
     }
@@ -395,7 +395,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
 
-    final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> desiredBound = new HashSet<>();
     for (IGroupMemberNode child : getChildren()) {
       desiredBound.addAll(child.getDesiredBound(sa));
     }

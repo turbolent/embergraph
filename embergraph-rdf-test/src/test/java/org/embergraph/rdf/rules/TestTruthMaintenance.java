@@ -163,7 +163,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         store.addStatements(
             focusStore,
             true /* copyOnly */,
-            new ChunkedArrayIterator<ISPO>(a.length, a, null /* keyOrder */),
+            new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */),
             null /* filter */);
 
         assertTrue(focusStore.hasStatement(x1, y2, z3));
@@ -1043,7 +1043,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
       db.addStatements(
           tempStore,
           true /* copyOnly */,
-          new ChunkedArrayIterator<ISPO>(stmts.length, stmts, null /* keyOrder */),
+          new ChunkedArrayIterator<>(stmts.length, stmts, null /* keyOrder */),
           null /* filter */);
 
       log.info("Retracting: n=" + stmts.length + ", depth=" + depth);
@@ -1078,7 +1078,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
       db.addStatements(
           tempStore,
           true /* copyOnly */,
-          new ChunkedArrayIterator<ISPO>(stmts.length, stmts, null /*keyOrder*/),
+          new ChunkedArrayIterator<>(stmts.length, stmts, null /*keyOrder*/),
           null /*filter*/);
 
       log.info("Asserting: n=" + stmts.length + ", depth=" + depth);
@@ -1137,7 +1137,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
      * Choose N distinct subjects from the graph at random.
      */
 
-    final Set<IV> subjects = new HashSet<IV>(N);
+    final Set<IV> subjects = new HashSet<>(N);
 
     for (int i = 0; i < nsubjects && subjects.size() < N; i++) {
 
@@ -1173,7 +1173,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
      * statements, in which case we will select fewer than N statements.
      */
 
-    List<ISPO> stmts = new ArrayList<ISPO>(N);
+    List<ISPO> stmts = new ArrayList<>(N);
 
     for (IV s : subjects) {
 

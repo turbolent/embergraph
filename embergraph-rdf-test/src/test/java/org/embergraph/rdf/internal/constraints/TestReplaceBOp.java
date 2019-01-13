@@ -80,9 +80,9 @@ public class TestReplaceBOp extends ProxyTestCase {
 
         final IV actual =
             new ReplaceBOp(
-                    new Constant<IV>(var),
-                    new Constant<IV>(pattern),
-                    new Constant<IV>(replacement),
+                new Constant<>(var),
+                new Constant<>(pattern),
+                new Constant<>(replacement),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -103,10 +103,10 @@ public class TestReplaceBOp extends ProxyTestCase {
 
         final IV actual =
             new ReplaceBOp(
-                    new Constant<IV>(var),
-                    new Constant<IV>(pattern),
-                    new Constant<IV>(replacement),
-                    new Constant<IV>(flags),
+                new Constant<>(var),
+                new Constant<>(pattern),
+                new Constant<>(replacement),
+                new Constant<>(flags),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -127,10 +127,10 @@ public class TestReplaceBOp extends ProxyTestCase {
 
         final IV actual =
             new ReplaceBOp(
-                    new Constant<IV>(var),
-                    new Constant<IV>(pattern),
-                    new Constant<IV>(replacement),
-                    new Constant<IV>(flags),
+                new Constant<>(var),
+                new Constant<>(pattern),
+                new Constant<>(replacement),
+                new Constant<>(flags),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 

@@ -286,7 +286,7 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
              * wildcards for those variables.
              */
 
-            bindingSet.set(h, new Constant<IV>(iv));
+            bindingSet.set(h, new Constant<>(iv));
 
             if (rule.isConsistent(bindingSet)) {
 

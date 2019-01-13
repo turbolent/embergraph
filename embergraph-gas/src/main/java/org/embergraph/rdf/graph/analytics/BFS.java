@@ -61,7 +61,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     private final AtomicInteger depth = new AtomicInteger(-1);
 
     /** The predecessor is the first source vertex to visit a given target vertex. */
-    private final AtomicReference<Value> predecessor = new AtomicReference<Value>();
+    private final AtomicReference<Value> predecessor = new AtomicReference<>();
 
     /*
      * The depth at which this vertex was first visited (origin ZERO) and <code>-1</code> if the
@@ -361,7 +361,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
 
     final IGASState<BFS.VS, BFS.ES, Void> gasState = ctx.getGASState();
 
-    final Set<Value> retainSet = new HashSet<Value>();
+    final Set<Value> retainSet = new HashSet<>();
 
     for (Value v : targetVertices) {
 

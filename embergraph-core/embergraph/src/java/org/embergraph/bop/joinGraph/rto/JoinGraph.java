@@ -341,7 +341,7 @@ public class JoinGraph extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new JoinGraphTask(context));
+    return new FutureTask<>(new JoinGraphTask(context));
   }
 
   /*
@@ -383,7 +383,7 @@ public class JoinGraph extends PipelineOp {
          * as an ordered array of bopIds) with edge sample to avoid
          * redundant effort.
          */
-        final Map<PathIds, EdgeSample> edgeSamples = new LinkedHashMap<PathIds, EdgeSample>();
+        final Map<PathIds, EdgeSample> edgeSamples = new LinkedHashMap<>();
 
         // Find the best join path.
         final Path path =

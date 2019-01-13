@@ -66,7 +66,7 @@ public class TestPrefixSearch extends AbstractSearchTest {
     final int fieldId = 3;
     final String languageCode = "EN";
     {
-      final TokenBuffer<Long> buffer = new TokenBuffer<Long>(2, getNdx());
+      final TokenBuffer<Long> buffer = new TokenBuffer<>(2, getNdx());
 
       // index a document. ("The" is a stopword).
       getNdx().index(buffer, docId, fieldId, languageCode, new StringReader("The quick brown dog"));

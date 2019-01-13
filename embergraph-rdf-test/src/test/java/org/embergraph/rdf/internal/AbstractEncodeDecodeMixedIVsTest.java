@@ -147,7 +147,7 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           }
         };
 
-    final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    final List<IV<?, ?>> ivs = new LinkedList<>();
     {
 
       // Fully inline
@@ -158,57 +158,57 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
          */
         if (fullyInlineUnicode) {
           // blank nodes with Unicode IDs.
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("FOO"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("_bar"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("bar"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("baz"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("12"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("1298"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("asassdao"));
-          ivs.add(new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("1"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("FOO"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("_bar"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("bar"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("baz"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("12"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("1298"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("asassdao"));
+          ivs.add(new FullyInlineUnicodeBNodeIV<>("1"));
         }
 
         // blank nodes with numeric IDs.
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(-1));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(0));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(1));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(-52));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(52));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(Integer.MAX_VALUE));
-        ivs.add(new NumericBNodeIV<EmbergraphBNode>(Integer.MIN_VALUE));
+        ivs.add(new NumericBNodeIV<>(-1));
+        ivs.add(new NumericBNodeIV<>(0));
+        ivs.add(new NumericBNodeIV<>(1));
+        ivs.add(new NumericBNodeIV<>(-52));
+        ivs.add(new NumericBNodeIV<>(52));
+        ivs.add(new NumericBNodeIV<>(Integer.MAX_VALUE));
+        ivs.add(new NumericBNodeIV<>(Integer.MIN_VALUE));
 
         // blank nodes with UUID IDs.
         for (int i = 0; i < 100; i++) {
 
-          ivs.add(new UUIDBNodeIV<EmbergraphBNode>(UUID.randomUUID()));
+          ivs.add(new UUIDBNodeIV<>(UUID.randomUUID()));
         }
 
         /*
          * URIs
          */
-        ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
-        ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
-        ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/foo")));
+        ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org")));
+        ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/")));
+        ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org/foo")));
         ivs.add(
-            new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org:80/foo")));
-        ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
+            new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org:80/foo")));
+        ivs.add(new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org")));
         if (fullyInlineUnicode) {
-          ivs.add(new FullyInlineURIIV<EmbergraphURI>(RDF.TYPE));
-          ivs.add(new FullyInlineURIIV<EmbergraphURI>(RDF.SUBJECT));
-          ivs.add(new FullyInlineURIIV<EmbergraphURI>(RDF.BAG));
-          ivs.add(new FullyInlineURIIV<EmbergraphURI>(RDF.OBJECT));
+          ivs.add(new FullyInlineURIIV<>(RDF.TYPE));
+          ivs.add(new FullyInlineURIIV<>(RDF.SUBJECT));
+          ivs.add(new FullyInlineURIIV<>(RDF.BAG));
+          ivs.add(new FullyInlineURIIV<>(RDF.OBJECT));
           ivs.add(
-              new URIExtensionIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("http://www.example.com/"),
-                  new VocabURIByteIV<EmbergraphURI>((byte) 1)));
+              new URIExtensionIV<>(
+                  new FullyInlineTypedLiteralIV<>("http://www.example.com/"),
+                  new VocabURIByteIV<>((byte) 1)));
           ivs.add(
-              new URIExtensionIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("http://www.example.com/foo"),
-                  new VocabURIByteIV<EmbergraphURI>((byte) 1)));
+              new URIExtensionIV<>(
+                  new FullyInlineTypedLiteralIV<>("http://www.example.com/foo"),
+                  new VocabURIByteIV<>((byte) 1)));
           ivs.add(
-              new URIExtensionIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("http://www.example.com/foobar"),
-                  new VocabURIByteIV<EmbergraphURI>((byte) 1)));
+              new URIExtensionIV<>(
+                  new FullyInlineTypedLiteralIV<>("http://www.example.com/foobar"),
+                  new VocabURIByteIV<>((byte) 1)));
         }
 
         /*
@@ -217,297 +217,297 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
 
         if (fullyInlineUnicode) {
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "foo", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "bar", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "baz", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "123", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "23", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "3", null /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "", null /* language */, null /* datatype */));
         }
 
         if (fullyInlineUnicode) {
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "foo", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "bar", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "goo", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "baz", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "foo", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "bar", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "goo", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "baz", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "1", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "1", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "12", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "12", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "2", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "2", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "23", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "23", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "123", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "123", "de" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "3", "en" /* language */, null /* datatype */));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+              new FullyInlineTypedLiteralIV<>(
                   "3", "de" /* language */, null /* datatype */));
         }
 
         if (fullyInlineUnicode) {
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null /* language */, dt1));
+              new FullyInlineTypedLiteralIV<>("foo", null /* language */, dt1));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null /* language */, dt1));
+              new FullyInlineTypedLiteralIV<>("bar", null /* language */, dt1));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null /* language */, dt1));
+              new FullyInlineTypedLiteralIV<>("baz", null /* language */, dt1));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null /* language */, dt1));
+              new FullyInlineTypedLiteralIV<>("goo", null /* language */, dt1));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("foo", null /* language */, dt2));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("bar", null /* language */, dt2));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("baz", null /* language */, dt2));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("goo", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("1", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("1", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("12", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("12", null /* language */, dt2));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("123", null /* language */, dt2));
           ivs.add(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null /* language */, dt2));
-          ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null /* language */, dt2));
+              new FullyInlineTypedLiteralIV<>("123", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("23", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("23", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("3", null /* language */, dt2));
+          ivs.add(new FullyInlineTypedLiteralIV<>("3", null /* language */, dt2));
         }
 
         ivs.add(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<>(
                 "foo", null /* language */, XSD.STRING /* datatype */));
         ivs.add(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<>(
                 "bar", null /* language */, XSD.STRING /* datatype */));
         ivs.add(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+            new FullyInlineTypedLiteralIV<>(
                 "baz", null /* language */, XSD.STRING /* datatype */));
 
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
+        ivs.add(new FullyInlineTypedLiteralIV<>(""));
+        ivs.add(new FullyInlineTypedLiteralIV<>(" "));
+        ivs.add(new FullyInlineTypedLiteralIV<>("1"));
+        ivs.add(new FullyInlineTypedLiteralIV<>("12"));
+        ivs.add(new FullyInlineTypedLiteralIV<>("123"));
 
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", "en", null /*datatype*/));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", "en", null /*datatype*/));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", "en", null /*datatype*/));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", "fr", null /*datatype*/));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", "de", null /*datatype*/));
+        ivs.add(new FullyInlineTypedLiteralIV<>("", "en", null /*datatype*/));
+        ivs.add(new FullyInlineTypedLiteralIV<>(" ", "en", null /*datatype*/));
+        ivs.add(new FullyInlineTypedLiteralIV<>("1", "en", null /*datatype*/));
+        ivs.add(new FullyInlineTypedLiteralIV<>("12", "fr", null /*datatype*/));
+        ivs.add(new FullyInlineTypedLiteralIV<>("123", "de", null /*datatype*/));
 
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
-        ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
+        ivs.add(new FullyInlineTypedLiteralIV<>("", null, datatype));
+        ivs.add(new FullyInlineTypedLiteralIV<>(" ", null, datatype));
+        ivs.add(new FullyInlineTypedLiteralIV<>("1", null, datatype));
+        ivs.add(new FullyInlineTypedLiteralIV<>("12", null, datatype));
+        ivs.add(new FullyInlineTypedLiteralIV<>("123", null, datatype));
 
         // xsd:boolean
-        ivs.add(new XSDBooleanIV<EmbergraphLiteral>(true));
-        ivs.add(new XSDBooleanIV<EmbergraphLiteral>(false));
+        ivs.add(new XSDBooleanIV<>(true));
+        ivs.add(new XSDBooleanIV<>(false));
 
         // xsd:byte
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Byte.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) -1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) 0));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((byte) 1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Byte.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>(Byte.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>((byte) -1));
+        ivs.add(new XSDNumericIV<>((byte) 0));
+        ivs.add(new XSDNumericIV<>((byte) 1));
+        ivs.add(new XSDNumericIV<>(Byte.MAX_VALUE));
 
         // xsd:short
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) -1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) 0));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>((short) 1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Short.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Short.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>((short) -1));
+        ivs.add(new XSDNumericIV<>((short) 0));
+        ivs.add(new XSDNumericIV<>((short) 1));
+        ivs.add(new XSDNumericIV<>(Short.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>(Short.MAX_VALUE));
 
         // xsd:int
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(0));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(-1));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Integer.MAX_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Integer.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>(1));
+        ivs.add(new XSDNumericIV<>(0));
+        ivs.add(new XSDNumericIV<>(-1));
+        ivs.add(new XSDNumericIV<>(Integer.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>(Integer.MIN_VALUE));
 
         // xsd:long
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(1L));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(0L));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(-1L));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Long.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Long.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>(1L));
+        ivs.add(new XSDNumericIV<>(0L));
+        ivs.add(new XSDNumericIV<>(-1L));
+        ivs.add(new XSDNumericIV<>(Long.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>(Long.MAX_VALUE));
 
         // xsd:float
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(1f));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(-1f));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(+0f));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.MAX_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.MIN_NORMAL));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.POSITIVE_INFINITY));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.NEGATIVE_INFINITY));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Float.NaN));
+        ivs.add(new XSDNumericIV<>(1f));
+        ivs.add(new XSDNumericIV<>(-1f));
+        ivs.add(new XSDNumericIV<>(+0f));
+        ivs.add(new XSDNumericIV<>(Float.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>(Float.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>(Float.MIN_NORMAL));
+        ivs.add(new XSDNumericIV<>(Float.POSITIVE_INFINITY));
+        ivs.add(new XSDNumericIV<>(Float.NEGATIVE_INFINITY));
+        ivs.add(new XSDNumericIV<>(Float.NaN));
 
         // xsd:double
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(1d));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(-1d));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(+0d));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.MAX_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.MIN_VALUE));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.MIN_NORMAL));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.POSITIVE_INFINITY));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.NEGATIVE_INFINITY));
-        ivs.add(new XSDNumericIV<EmbergraphLiteral>(Double.NaN));
+        ivs.add(new XSDNumericIV<>(1d));
+        ivs.add(new XSDNumericIV<>(-1d));
+        ivs.add(new XSDNumericIV<>(+0d));
+        ivs.add(new XSDNumericIV<>(Double.MAX_VALUE));
+        ivs.add(new XSDNumericIV<>(Double.MIN_VALUE));
+        ivs.add(new XSDNumericIV<>(Double.MIN_NORMAL));
+        ivs.add(new XSDNumericIV<>(Double.POSITIVE_INFINITY));
+        ivs.add(new XSDNumericIV<>(Double.NEGATIVE_INFINITY));
+        ivs.add(new XSDNumericIV<>(Double.NaN));
 
         // uuid (not an official xsd type, but one we handle natively).
         for (int i = 0; i < 100; i++) {
-          ivs.add(new UUIDLiteralIV<EmbergraphLiteral>(UUID.randomUUID()));
+          ivs.add(new UUIDLiteralIV<>(UUID.randomUUID()));
         }
 
         // xsd:unsignedByte
-        ivs.add(new XSDUnsignedByteIV<EmbergraphLiteral>(Byte.MIN_VALUE));
-        ivs.add(new XSDUnsignedByteIV<EmbergraphLiteral>((byte) -1));
-        ivs.add(new XSDUnsignedByteIV<EmbergraphLiteral>((byte) 0));
-        ivs.add(new XSDUnsignedByteIV<EmbergraphLiteral>((byte) 1));
-        ivs.add(new XSDUnsignedByteIV<EmbergraphLiteral>(Byte.MAX_VALUE));
+        ivs.add(new XSDUnsignedByteIV<>(Byte.MIN_VALUE));
+        ivs.add(new XSDUnsignedByteIV<>((byte) -1));
+        ivs.add(new XSDUnsignedByteIV<>((byte) 0));
+        ivs.add(new XSDUnsignedByteIV<>((byte) 1));
+        ivs.add(new XSDUnsignedByteIV<>(Byte.MAX_VALUE));
 
         // xsd:unsignedShort
-        ivs.add(new XSDUnsignedShortIV<EmbergraphLiteral>(Short.MIN_VALUE));
-        ivs.add(new XSDUnsignedShortIV<EmbergraphLiteral>((short) -1));
-        ivs.add(new XSDUnsignedShortIV<EmbergraphLiteral>((short) 0));
-        ivs.add(new XSDUnsignedShortIV<EmbergraphLiteral>((short) 1));
-        ivs.add(new XSDUnsignedShortIV<EmbergraphLiteral>(Short.MAX_VALUE));
+        ivs.add(new XSDUnsignedShortIV<>(Short.MIN_VALUE));
+        ivs.add(new XSDUnsignedShortIV<>((short) -1));
+        ivs.add(new XSDUnsignedShortIV<>((short) 0));
+        ivs.add(new XSDUnsignedShortIV<>((short) 1));
+        ivs.add(new XSDUnsignedShortIV<>(Short.MAX_VALUE));
 
         // xsd:unsignedInt
-        ivs.add(new XSDUnsignedIntIV<EmbergraphLiteral>(Integer.MIN_VALUE));
-        ivs.add(new XSDUnsignedIntIV<EmbergraphLiteral>(-1));
-        ivs.add(new XSDUnsignedIntIV<EmbergraphLiteral>(0));
-        ivs.add(new XSDUnsignedIntIV<EmbergraphLiteral>(1));
-        ivs.add(new XSDUnsignedIntIV<EmbergraphLiteral>(Integer.MAX_VALUE));
+        ivs.add(new XSDUnsignedIntIV<>(Integer.MIN_VALUE));
+        ivs.add(new XSDUnsignedIntIV<>(-1));
+        ivs.add(new XSDUnsignedIntIV<>(0));
+        ivs.add(new XSDUnsignedIntIV<>(1));
+        ivs.add(new XSDUnsignedIntIV<>(Integer.MAX_VALUE));
 
         // xsd:unsignedLong
-        ivs.add(new XSDUnsignedLongIV<EmbergraphLiteral>(Long.MIN_VALUE));
-        ivs.add(new XSDUnsignedLongIV<EmbergraphLiteral>(-1L));
-        ivs.add(new XSDUnsignedLongIV<EmbergraphLiteral>(0L));
-        ivs.add(new XSDUnsignedLongIV<EmbergraphLiteral>(1L));
-        ivs.add(new XSDUnsignedLongIV<EmbergraphLiteral>(Long.MAX_VALUE));
+        ivs.add(new XSDUnsignedLongIV<>(Long.MIN_VALUE));
+        ivs.add(new XSDUnsignedLongIV<>(-1L));
+        ivs.add(new XSDUnsignedLongIV<>(0L));
+        ivs.add(new XSDUnsignedLongIV<>(1L));
+        ivs.add(new XSDUnsignedLongIV<>(Long.MAX_VALUE));
 
         // xsd:integer
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(-1L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(0L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(-1L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(0L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(1L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(Long.MAX_VALUE)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(Long.MIN_VALUE)));
 
         // xsd:decimal
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(2.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-2.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(10.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(11.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(258.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(3.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.01)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.02)));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(new BigDecimal("1.5")));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(new BigDecimal("1.51")));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(new BigDecimal("-1.5")));
-        ivs.add(new XSDDecimalIV<EmbergraphLiteral>(new BigDecimal("-1.51")));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(1.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(2.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(0.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(1.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(-1.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(0.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(-2.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(-1.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(10.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(11.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(258.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(259.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(3.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(259.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(383.01)));
+        ivs.add(new XSDDecimalIV<>(BigDecimal.valueOf(383.02)));
+        ivs.add(new XSDDecimalIV<>(new BigDecimal("1.5")));
+        ivs.add(new XSDDecimalIV<>(new BigDecimal("1.51")));
+        ivs.add(new XSDDecimalIV<>(new BigDecimal("-1.5")));
+        ivs.add(new XSDDecimalIV<>(new BigDecimal("-1.51")));
 
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(-1L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(0L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(new BigInteger("15")));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(new BigInteger("151")));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(new BigInteger("-15")));
-        ivs.add(new XSDIntegerIV<EmbergraphLiteral>(new BigInteger("-151")));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(-1L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(0L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(1L)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(Long.MAX_VALUE)));
+        ivs.add(new XSDIntegerIV<>(BigInteger.valueOf(Long.MIN_VALUE)));
+        ivs.add(new XSDIntegerIV<>(new BigInteger("15")));
+        ivs.add(new XSDIntegerIV<>(new BigInteger("151")));
+        ivs.add(new XSDIntegerIV<>(new BigInteger("-15")));
+        ivs.add(new XSDIntegerIV<>(new BigInteger("-151")));
 
         // byte vocabulary IVs.
-        ivs.add(new VocabURIByteIV<EmbergraphURI>(Byte.MIN_VALUE));
-        ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) -1));
-        ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) 0));
-        ivs.add(new VocabURIByteIV<EmbergraphURI>((byte) 1));
-        ivs.add(new VocabURIByteIV<EmbergraphURI>(Byte.MAX_VALUE));
+        ivs.add(new VocabURIByteIV<>(Byte.MIN_VALUE));
+        ivs.add(new VocabURIByteIV<>((byte) -1));
+        ivs.add(new VocabURIByteIV<>((byte) 0));
+        ivs.add(new VocabURIByteIV<>((byte) 1));
+        ivs.add(new VocabURIByteIV<>(Byte.MAX_VALUE));
 
         // short vocabulary IVs.
-        ivs.add(new VocabURIShortIV<EmbergraphURI>(Short.MIN_VALUE));
-        ivs.add(new VocabURIShortIV<EmbergraphURI>((short) -1));
-        ivs.add(new VocabURIShortIV<EmbergraphURI>((short) 0));
-        ivs.add(new VocabURIShortIV<EmbergraphURI>((short) 1));
-        ivs.add(new VocabURIShortIV<EmbergraphURI>(Short.MAX_VALUE));
+        ivs.add(new VocabURIShortIV<>(Short.MIN_VALUE));
+        ivs.add(new VocabURIShortIV<>((short) -1));
+        ivs.add(new VocabURIShortIV<>((short) 0));
+        ivs.add(new VocabURIShortIV<>((short) 1));
+        ivs.add(new VocabURIShortIV<>(Short.MAX_VALUE));
 
         // SIDs
         {
@@ -548,23 +548,23 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                   StatementEnum.Explicit);
 
           final IV<?, ?>[] e = {
-            new SidIV<EmbergraphBNode>(spo1),
-            new SidIV<EmbergraphBNode>(spo2),
-            new SidIV<EmbergraphBNode>(spo3),
-            new SidIV<EmbergraphBNode>(spo4),
-            new SidIV<EmbergraphBNode>(spo5),
-            new SidIV<EmbergraphBNode>(spo6),
-            new SidIV<EmbergraphBNode>(spo7),
-            new SidIV<EmbergraphBNode>(spo8),
-            new SidIV<EmbergraphBNode>(spo9),
-            new SidIV<EmbergraphBNode>(spo10),
-            new SidIV<EmbergraphBNode>(spo11),
-            new SidIV<EmbergraphBNode>(spo12),
-            new SidIV<EmbergraphBNode>(spo13),
-            new SidIV<EmbergraphBNode>(spo14),
-            new SidIV<EmbergraphBNode>(spo15),
-            new SidIV<EmbergraphBNode>(spo16),
-            new SidIV<EmbergraphBNode>(spo17),
+              new SidIV<>(spo1),
+              new SidIV<>(spo2),
+              new SidIV<>(spo3),
+              new SidIV<>(spo4),
+              new SidIV<>(spo5),
+              new SidIV<>(spo6),
+              new SidIV<>(spo7),
+              new SidIV<>(spo8),
+              new SidIV<>(spo9),
+              new SidIV<>(spo10),
+              new SidIV<>(spo11),
+              new SidIV<>(spo12),
+              new SidIV<>(spo13),
+              new SidIV<>(spo14),
+              new SidIV<>(spo15),
+              new SidIV<>(spo16),
+              new SidIV<>(spo17),
           };
           ivs.addAll(Arrays.asList(e));
         }
@@ -621,181 +621,181 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
         // URIs
         if (fullyInlineUnicode) {
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), namespaceIV));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), namespaceIV));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), namespaceIV));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), namespaceIV));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), namespaceIV));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), namespaceIV));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), namespaceIV));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), namespaceIV));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), namespaceIV));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), namespaceIV));
         }
 
         // LITERALs
         ivs.add(
-            new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+            new PartlyInlineTypedLiteralIV<>(
+                new FullyInlineTypedLiteralIV<>(""), datatypeIV));
 
         ivs.add(
-            new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV));
+            new PartlyInlineTypedLiteralIV<>(
+                new FullyInlineTypedLiteralIV<>("abc"), datatypeIV));
 
         ivs.add(
-            new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV));
+            new PartlyInlineTypedLiteralIV<>(
+                new FullyInlineTypedLiteralIV<>(" "), datatypeIV));
 
         ivs.add(
-            new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+            new PartlyInlineTypedLiteralIV<>(
+                new FullyInlineTypedLiteralIV<>("1"), datatypeIV));
 
         ivs.add(
-            new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+            new PartlyInlineTypedLiteralIV<>(
+                new FullyInlineTypedLiteralIV<>("12"), datatypeIV));
 
         if (fullyInlineUnicode) {
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>(""), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>(" "), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("1"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("1"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("12"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("12"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), datatypeIV));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), datatypeIV2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), datatypeIV2));
         }
 
         if (fullyInlineUnicode) {
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 1) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), // localName
+                  new VocabURIShortIV<>((short) 1) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 1) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), // localName
+                  new VocabURIShortIV<>((short) 1) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
           ivs.add(
-              new PartlyInlineURIIV<EmbergraphURI>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), // localName
-                  new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
-                  ));
+              new PartlyInlineURIIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), // localName
+                  new VocabURIShortIV<>((short) 2) // namespace
+              ));
         }
 
         if (fullyInlineUnicode) {
 
-          final IV<?, ?> datatypeIVa = new VocabURIShortIV<EmbergraphURI>((short) 1);
-          final IV<?, ?> datatypeIVa2 = new VocabURIShortIV<EmbergraphURI>((short) 2);
+          final IV<?, ?> datatypeIVa = new VocabURIShortIV<>((short) 1);
+          final IV<?, ?> datatypeIVa2 = new VocabURIShortIV<>((short) 2);
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIVa));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), datatypeIVa));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIVa2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("bar"), datatypeIVa2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIVa));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), datatypeIVa));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIVa2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("baz"), datatypeIVa2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIVa));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), datatypeIVa));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIVa2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("123"), datatypeIVa2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIVa));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), datatypeIVa));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIVa2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("23"), datatypeIVa2));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIVa));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), datatypeIVa));
           ivs.add(
-              new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-                  new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIVa2));
+              new PartlyInlineTypedLiteralIV<>(
+                  new FullyInlineTypedLiteralIV<>("3"), datatypeIVa2));
         }
       } // partly inline.
 
@@ -809,7 +809,7 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           final DatatypeFactory df = DatatypeFactory.newInstance();
 
           final DateTimeExtension<EmbergraphValue> ext =
-              new DateTimeExtension<EmbergraphValue>(resolver, TimeZone.getDefault());
+              new DateTimeExtension<>(resolver, TimeZone.getDefault());
 
           final EmbergraphLiteral[] dt = {
             vf.createLiteral(df.newXMLGregorianCalendar("2001-10-26T21:32:52")),
@@ -832,7 +832,7 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           final DatatypeFactory df = DatatypeFactory.newInstance();
 
           final DerivedNumericsExtension<EmbergraphValue> ext =
-              new DerivedNumericsExtension<EmbergraphValue>(resolver);
+              new DerivedNumericsExtension<>(resolver);
 
           final EmbergraphLiteral[] dt = {
             vf.createLiteral("1", XSD.POSITIVE_INTEGER),
@@ -855,7 +855,7 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
           final int maxInlineStringLength = 128;
 
           final XSDStringExtension<EmbergraphValue> ext =
-              new XSDStringExtension<EmbergraphValue>(resolver, maxInlineStringLength);
+              new XSDStringExtension<>(resolver, maxInlineStringLength);
 
           final IV<?, ?>[] e = {
             ext.createIV(new LiteralImpl("", XSD.STRING)),
@@ -878,7 +878,7 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
         if (true) {
 
           final ColorsEnumExtension<EmbergraphValue> ext =
-              new ColorsEnumExtension<EmbergraphValue>(resolver);
+              new ColorsEnumExtension<>(resolver);
 
           for (Color c : ColorsEnumExtension.Color.values()) {
 

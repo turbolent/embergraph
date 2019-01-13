@@ -47,7 +47,7 @@ public class MultiTokenHitCollector<V extends Comparable<V>> implements IHitColl
     }
 
     hits =
-        new ConcurrentHashMap<V, Hit<V>>(initialCapacity, .75f /* loadFactor */, concurrencyLevel);
+        new ConcurrentHashMap<>(initialCapacity, .75f /* loadFactor */, concurrencyLevel);
   }
 
   @Override

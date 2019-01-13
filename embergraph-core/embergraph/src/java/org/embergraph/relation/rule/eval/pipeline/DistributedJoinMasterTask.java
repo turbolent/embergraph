@@ -272,7 +272,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
     final Iterator<PartitionLocator> itr = joinNexus.locatorScan(fed, predicate);
 
-    final List<Future> futures = new LinkedList<Future>();
+    final List<Future> futures = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -358,7 +358,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
      * Since we process the factory task futures in order the list will
      * be in the same order as the factory task futures.
      */
-    final List<Future<Void>> joinTaskFutures = new ArrayList<Future<Void>>(size);
+    final List<Future<Void>> joinTaskFutures = new ArrayList<>(size);
 
     final Iterator<Future> itr = factoryTaskFutures.iterator();
 
@@ -366,7 +366,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
      * Initially empty. Populated with an errors encountered when trying
      * to execute the _factory_ tasks.
      */
-    final List<ExecutionException> causes = new LinkedList<ExecutionException>();
+    final List<ExecutionException> causes = new LinkedList<>();
 
     /*
      * Process all factory tasks.

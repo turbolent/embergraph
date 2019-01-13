@@ -50,48 +50,48 @@ public class TestLiteralDatatypeIV extends TestCase2 {
     final IV<?, ?> datatypeIV = newTermId(VTE.URI);
 
     doTest(
-        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+        new PartlyInlineTypedLiteralIV<>(
+            new FullyInlineTypedLiteralIV<>(""), datatypeIV));
 
     doTest(
-        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV));
+        new PartlyInlineTypedLiteralIV<>(
+            new FullyInlineTypedLiteralIV<>("abc"), datatypeIV));
 
     doTest(
-        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV));
+        new PartlyInlineTypedLiteralIV<>(
+            new FullyInlineTypedLiteralIV<>(" "), datatypeIV));
 
     doTest(
-        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+        new PartlyInlineTypedLiteralIV<>(
+            new FullyInlineTypedLiteralIV<>("1"), datatypeIV));
 
     doTest(
-        new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-            new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+        new PartlyInlineTypedLiteralIV<>(
+            new FullyInlineTypedLiteralIV<>("12"), datatypeIV));
 
     final IV<?, ?>[] e;
     {
-      final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+      final List<IV<?, ?>> ivs = new LinkedList<>();
 
       ivs.add(
-          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV));
+          new PartlyInlineTypedLiteralIV<>(
+              new FullyInlineTypedLiteralIV<>(""), datatypeIV));
 
       ivs.add(
-          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV));
+          new PartlyInlineTypedLiteralIV<>(
+              new FullyInlineTypedLiteralIV<>("abc"), datatypeIV));
 
       ivs.add(
-          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV));
+          new PartlyInlineTypedLiteralIV<>(
+              new FullyInlineTypedLiteralIV<>(" "), datatypeIV));
 
       ivs.add(
-          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV));
+          new PartlyInlineTypedLiteralIV<>(
+              new FullyInlineTypedLiteralIV<>("1"), datatypeIV));
 
       ivs.add(
-          new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
-              new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV));
+          new PartlyInlineTypedLiteralIV<>(
+              new FullyInlineTypedLiteralIV<>("12"), datatypeIV));
 
       e = ivs.toArray(new IV[0]);
     }

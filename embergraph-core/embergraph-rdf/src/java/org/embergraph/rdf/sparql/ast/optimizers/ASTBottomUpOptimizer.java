@@ -199,7 +199,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);
 
       // List of the inner optional groups for badly designed left joins.
-      final List<JoinGroupNode> innerOptionalGroups = new LinkedList<JoinGroupNode>();
+      final List<JoinGroupNode> innerOptionalGroups = new LinkedList<>();
 
       {
         if (queryRoot.getNamedSubqueries() != null) {
@@ -405,7 +405,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
      * candidate optional join groups.
      */
     final Set<IVariable<?>> topDownVars =
-        sa.getDefinitelyIncomingBindings(p, new LinkedHashSet<IVariable<?>>());
+        sa.getDefinitelyIncomingBindings(p, new LinkedHashSet<>());
 
     /*
      * Obtain the set of variables used in JOINs -OR- FILTERs within this
@@ -418,7 +418,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
      */
     final Set<IVariable<?>> innerGroupVars =
         sa.getDefinitelyProducedBindingsAndFilterVariables(
-            group, new LinkedHashSet<IVariable<?>>());
+            group, new LinkedHashSet<>());
 
     /*
      * Obtain the set of variables used in joins within the parent join
@@ -426,7 +426,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
      */
     final Set<IVariable<?>> parentVars =
         sa.getDefinitelyProducedBindings(
-            (IBindingProducerNode) p, new LinkedHashSet<IVariable<?>>(), false /* recursive */);
+            (IBindingProducerNode) p, new LinkedHashSet<>(), false /* recursive */);
 
     /*
      * The inner optional is part of a badly designed left join if it uses
@@ -505,7 +505,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
 
         nsr.setProjection(projection);
 
-        final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> vars = new LinkedHashSet<>();
 
         sa.getMaybeProducedBindings(p, vars, true /* recursive */);
 
@@ -619,7 +619,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
 
     // Map for renamed variables.
     final Map<IVariable<?> /* old */, IVariable<?> /* new */> map =
-        new LinkedHashMap<IVariable<?>, IVariable<?>>();
+        new LinkedHashMap<>();
 
     /*
      * Visit all join groups, which is where the filters are found.
@@ -666,7 +666,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> maybeBound =
           sa.getMaybeProducedBindings(
-              group, new LinkedHashSet<IVariable<?>>(), true /* recursive */);
+              group, new LinkedHashSet<>(), true /* recursive */);
 
       /*
        * Add globally scoped variables, we're not allowed to rewrite
@@ -707,7 +707,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
           // bindings "maybe" produced in the parent (non-recursive)
           final Set<IVariable<?>> incomingBound =
               sa.getMaybeProducedBindings(
-                  p, new LinkedHashSet<IVariable<?>>(), false /* recursive */);
+                  p, new LinkedHashSet<>(), false /* recursive */);
 
           // add to those visible in FILTERs for this group.
           maybeBound.addAll(incomingBound);
@@ -736,7 +736,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
           // Recursively clear the old value expression.
 
           // gather subexpression (avoiding CCME)
-          List<FunctionNode> subexpr = new ArrayList<FunctionNode>();
+          List<FunctionNode> subexpr = new ArrayList<>();
           final Iterator<FunctionNode> veitr = BOpUtility.visitAll(filter, FunctionNode.class);
           while (veitr.hasNext()) {
             subexpr.add(veitr.next());
@@ -917,13 +917,13 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
          * http://www.w3.org/TR/sparql11-query/#sparqlAlgebra
          */
         final Set<IVariable<?>> incomingBound =
-            sa.getMaybeIncomingBindings(childGroup, new LinkedHashSet<IVariable<?>>());
+            sa.getMaybeIncomingBindings(childGroup, new LinkedHashSet<>());
 
         final Set<IVariable<?>> maybeProduced =
             sa.getMaybeProducedBindings(
-                childGroup, new LinkedHashSet<IVariable<?>>(), true /* recursive */);
+                childGroup, new LinkedHashSet<>(), true /* recursive */);
 
-        final Set<IVariable<?>> intersection = new LinkedHashSet<IVariable<?>>(incomingBound);
+        final Set<IVariable<?>> intersection = new LinkedHashSet<>(incomingBound);
 
         intersection.retainAll(maybeProduced);
 

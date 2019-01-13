@@ -123,7 +123,7 @@ public class ASTFlattenUnionsOptimizer implements IASTOptimizer {
        */
       final UnionNode thisUnion = (UnionNode) op;
 
-      final List<JoinGroupNode> childrenToRemove = new LinkedList<JoinGroupNode>();
+      final List<JoinGroupNode> childrenToRemove = new LinkedList<>();
 
       for (int i = 0; i < op.arity(); i++) {
 

@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class ImmutableBinaryTrieTest extends TestCase {
 
   public void testImmutableBinaryTrie(List<String> strings) {
-    ObjectArrayList<BitVector> vectors = new ObjectArrayList<BitVector>();
+    ObjectArrayList<BitVector> vectors = new ObjectArrayList<>();
     for (int i = 0; i < strings.size(); i++) {
       BitVector v = LongArrayBitVector.ofLength(strings.get(i).length());
       for (int j = 0; j < strings.get(i).length(); j++)
@@ -20,7 +20,7 @@ public class ImmutableBinaryTrieTest extends TestCase {
     }
 
     ImmutableBinaryTrie<BitVector> t =
-        new ImmutableBinaryTrie<BitVector>(vectors, TransformationStrategies.identity());
+        new ImmutableBinaryTrie<>(vectors, TransformationStrategies.identity());
 
     assertEquals(vectors.size(), t.size());
     for (int i = 0; i < vectors.size(); i++)

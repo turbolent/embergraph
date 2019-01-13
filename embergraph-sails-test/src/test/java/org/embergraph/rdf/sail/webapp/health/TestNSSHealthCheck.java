@@ -219,7 +219,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     AbstractApiTask.submitApiTask(m_indexManager, new CreateKBTask(m_namespace, properties)).get();
     //		createTripleStore(m_indexManager, m_namespace, properties);
 
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
     {
       initParams.put(ConfigParams.NAMESPACE, m_namespace);
 

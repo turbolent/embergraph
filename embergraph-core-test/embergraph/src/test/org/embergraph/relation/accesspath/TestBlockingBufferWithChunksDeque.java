@@ -88,7 +88,7 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
     final Integer e6 = new Integer(6);
 
     final int queueCapacity = 3;
-    final BlockingQueue<Integer[]> queue = new LinkedBlockingDeque<Integer[]>(queueCapacity);
+    final BlockingQueue<Integer[]> queue = new LinkedBlockingDeque<>(queueCapacity);
     final int minimumChunkSize = 2;
     final long chunkTimeout = 1000;
     final TimeUnit chunkTimeoutUnit = TimeUnit.MILLISECONDS;
@@ -102,7 +102,7 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
     final boolean ordered = false;
 
     final BlockingBuffer<Integer[]> buffer =
-        new BlockingBuffer<Integer[]>(
+        new BlockingBuffer<>(
             queue, minimumChunkSize, chunkTimeout, chunkTimeoutUnit, ordered);
 
     // buffer is empty.

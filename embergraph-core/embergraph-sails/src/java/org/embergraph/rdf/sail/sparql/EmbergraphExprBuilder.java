@@ -405,7 +405,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
     final int childCount = node.jjtGetNumChildren();
 
-    final List<OrderByExpr> elements = new ArrayList<OrderByExpr>(childCount);
+    final List<OrderByExpr> elements = new ArrayList<>(childCount);
 
     for (int i = 0; i < childCount; i++) {
 
@@ -571,7 +571,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     } else {
 
       // Used to detect duplicate variables in a projection.
-      final Set<String> vars = new HashSet<String>();
+      final Set<String> vars = new HashSet<>();
 
       final Iterator<ASTProjectionElem> itr = select.getProjectionElemList().iterator();
 
@@ -790,7 +790,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     // The ordered list of variable bindings.
     final List<ASTVar> varNodes = node.jjtGetChildren(ASTVar.class);
     final int nvars = varNodes.size();
-    final LinkedHashSet<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>(nvars);
+    final LinkedHashSet<IVariable<?>> vars = new LinkedHashSet<>(nvars);
 
     {
       for (ASTVar varNode : varNodes) {
@@ -808,7 +808,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     {
       final List<ASTBindingSet> bindingNodes = node.jjtGetChildren(ASTBindingSet.class);
 
-      final List<IBindingSet> bindingSets = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bindingSets = new LinkedList<>();
 
       final IVariable<?>[] declaredVars = vars.toArray(new IVariable[nvars]);
 

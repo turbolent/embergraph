@@ -76,36 +76,36 @@ public class DefaultInstrumentFactory implements IInstrumentFactory {
     if (type == Double.class || type == Float.class) {
 
       final History<Double> minutes =
-          new History<Double>(new Double[nslots], period.getPeriodMillis(), overwrite);
+          new History<>(new Double[nslots], period.getPeriodMillis(), overwrite);
 
       if (overwrite) {
 
         // 24 hours in a day
-        final History<Double> hours = new History<Double>(24, minutes);
+        final History<Double> hours = new History<>(24, minutes);
 
         // 30 days of history
         //                final History<Double> days =
-        new History<Double>(30, hours);
+        new History<>(30, hours);
       }
 
-      return new HistoryInstrument<Double>(minutes);
+      return new HistoryInstrument<>(minutes);
 
     } else if (type == Long.class || type == Integer.class) {
 
       final History<Long> minutes =
-          new History<Long>(new Long[nslots], period.getPeriodMillis(), overwrite);
+          new History<>(new Long[nslots], period.getPeriodMillis(), overwrite);
 
       if (overwrite) {
 
         // 24 hours in a day
-        final History<Long> hours = new History<Long>(24, minutes);
+        final History<Long> hours = new History<>(24, minutes);
 
         // 30 days of history
         //                final History<Long> days =
-        new History<Long>(30, hours);
+        new History<>(30, hours);
       }
 
-      return new HistoryInstrument<Long>(minutes);
+      return new HistoryInstrument<>(minutes);
 
     } else if (type == String.class) {
 

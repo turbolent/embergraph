@@ -129,16 +129,16 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     if (iv2val != null) throw new IllegalStateException();
 
     // Setup declarations set.
-    this.decls = new LinkedHashSet<VocabularyDecl>(declsInitialCapacity);
+    this.decls = new LinkedHashSet<>(declsInitialCapacity);
 
     // Setup forward map.
-    val2iv = new LinkedHashMap<Value, EmbergraphValue>(valuesInitialCapacity);
+    val2iv = new LinkedHashMap<>(valuesInitialCapacity);
 
     // Hook for subclass to provide its vocabulary decls.
     addValues();
 
     // Setup reverse map now that we know the exact size.
-    iv2val = new LinkedHashMap<IV, EmbergraphValue>(val2iv.size());
+    iv2val = new LinkedHashMap<>(val2iv.size());
 
     addAllDecls();
 
@@ -250,12 +250,12 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
       if (i <= 255) {
 
         // Use a byte for the 1st 256 declared vocabulary items.
-        iv = new VocabURIByteIV<EmbergraphURI>((byte) i);
+        iv = new VocabURIByteIV<>((byte) i);
 
       } else {
 
         // Use a short for the next 64k declared vocabulary items.
-        iv = new VocabURIShortIV<EmbergraphURI>((short) i);
+        iv = new VocabURIShortIV<>((short) i);
       }
 
       // Cache the IV on the Value.
@@ -323,7 +323,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
 
     if (iv == null) throw new IllegalArgumentException("Not defined: " + value);
 
-    return new Constant<IV>(iv);
+    return new Constant<>(iv);
   }
 
   //    /*

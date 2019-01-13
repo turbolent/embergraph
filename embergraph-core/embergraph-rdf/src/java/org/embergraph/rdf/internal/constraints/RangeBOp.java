@@ -64,7 +64,7 @@ public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<
 
   public RangeBOp() {
 
-    this(BOp.NOARGS, new LinkedHashMap<String, Object>());
+    this(BOp.NOARGS, new LinkedHashMap<>());
   }
 
   //    public RangeBOp(final IVariable<? extends IV> var) {
@@ -172,7 +172,7 @@ public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<
       } else {
         try {
           final IV iv = origFrom.get(bs);
-          asBoundFrom = new Constant<IV>(iv);
+          asBoundFrom = new Constant<>(iv);
         } catch (SparqlTypeErrorException ex) {
           asBoundFrom = origFrom;
         }
@@ -188,7 +188,7 @@ public final class RangeBOp extends ModifiableBOpBase { // implements IVariable<
       } else {
         try {
           final IV iv = origTo.get(bs);
-          asBoundTo = new Constant<IV>(iv);
+          asBoundTo = new Constant<>(iv);
         } catch (SparqlTypeErrorException ex) {
           asBoundTo = origTo;
         }

@@ -50,7 +50,7 @@ public class TestServiceWhiteList extends TestCase2 {
   private String m_serviceURL;
   private RemoteRepositoryManager m_repo;
   private HttpClient m_client;
-  private final Map<String, String> initParams = new LinkedHashMap<String, String>();
+  private final Map<String, String> initParams = new LinkedHashMap<>();
 
   public void testServiceWhiteList() throws Exception {
 

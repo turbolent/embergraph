@@ -192,7 +192,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
    * @see InitParams#POLICY
    */
   private final AtomicReference<IHALoadBalancerPolicy> policyRef =
-      new AtomicReference<IHALoadBalancerPolicy>();
+      new AtomicReference<>();
 
   /*
    * The {@link IHARequestURIRewriter} that rewrites the original Request-URI into a Request-URI for
@@ -201,7 +201,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
    * @see InitParams#REWRITER
    */
   private final AtomicReference<IHARequestURIRewriter> rewriterRef =
-      new AtomicReference<IHARequestURIRewriter>();
+      new AtomicReference<>();
 
   /** The number of requests that were forwarded to the local service. */
   private final CAT nforward = new CAT();
@@ -421,7 +421,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
         servletContext.setAttribute(
             EmbergraphServlet.ATTRIBUTE_LBS_INSTANCES,
-            servletSet = new CopyOnWriteArraySet<HALoadBalancerServlet>());
+            servletSet = new CopyOnWriteArraySet<>());
       }
 
       servletSet.add(servlet);

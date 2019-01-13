@@ -55,7 +55,7 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
 
   public EmbergraphSet(IIndex ndx) {
 
-    map = new EmbergraphMap<E, E>(ndx);
+    map = new EmbergraphMap<>(ndx);
   }
 
   /*
@@ -210,16 +210,16 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
 
   public SortedSet<E> headSet(E toKey) {
 
-    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.headMap(toKey));
+    return new EmbergraphSet<>((EmbergraphMap<E, E>) map.headMap(toKey));
   }
 
   public SortedSet<E> subSet(E fromKey, E toKey) {
 
-    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.subMap(fromKey, toKey));
+    return new EmbergraphSet<>((EmbergraphMap<E, E>) map.subMap(fromKey, toKey));
   }
 
   public SortedSet<E> tailSet(E fromKey) {
 
-    return new EmbergraphSet<E>((EmbergraphMap<E, E>) map.tailMap(fromKey));
+    return new EmbergraphSet<>((EmbergraphMap<E, E>) map.tailMap(fromKey));
   }
 }

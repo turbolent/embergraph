@@ -97,7 +97,7 @@ public abstract class SailBase implements Sail {
    * null in case debugging was disable at the time the connection was acquired.
    */
   private final Map<SailConnection, ConnectionContext> activeConnections =
-      new IdentityHashMap<SailConnection, ConnectionContext>();
+      new IdentityHashMap<>();
 
   protected void manageConnection(final SailConnection cnxn) {
     synchronized (activeConnections) {

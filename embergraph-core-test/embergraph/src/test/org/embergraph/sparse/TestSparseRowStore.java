@@ -145,7 +145,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       /*
        * The ground truth data read from the test resource.
        */
-      final Vector<Map<String, Object>> rows = new Vector<Map<String, Object>>();
+      final Vector<Map<String, Object>> rows = new Vector<>();
 
       /*
        * @todo use mark/reset to avoid having to re-encode the schema and
@@ -439,7 +439,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
         final SparseRowStore srs = new SparseRowStore(getIndex(store));
 
         {
-          final Map<String, Object> propertySet = new HashMap<String, Object>();
+          final Map<String, Object> propertySet = new HashMap<>();
 
           propertySet.put("Id", 1L);
           propertySet.put("Name", "Bryan");
@@ -462,7 +462,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
         }
 
         {
-          final Map<String, Object> propertySet = new HashMap<String, Object>();
+          final Map<String, Object> propertySet = new HashMap<>();
 
           propertySet.put("Id", 2L);
           propertySet.put("Name", "Mike");
@@ -556,7 +556,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       final long timestamp1;
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L); // primary key.
         propertySet.put("Name", "Bryan");
@@ -582,7 +582,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       // overwrite a property value.
       final long timestamp2;
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L); // primary key.
         propertySet.put("State", "NC"); // update this value.
@@ -670,7 +670,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       final SparseRowStore srs = new SparseRowStore(getIndex(store));
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Bryan");
@@ -692,7 +692,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
          * Atomic write where the pre-condition is not satisfied.
          */
 
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Mike");
@@ -725,7 +725,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
          * Atomic write where the pre-condition is satisfied.
          */
 
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Bryan");
@@ -776,7 +776,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       final SparseRowStore srs = new SparseRowStore(getIndex(store));
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Bryan");
@@ -785,14 +785,14 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         final Map<String, Object> actual = srs.write(schema, propertySet);
 
-        final Map<String, Object> expected = new HashMap<String, Object>(propertySet);
+        final Map<String, Object> expected = new HashMap<>(propertySet);
         expected.put("Counter", 0L); // expected value assigned by auto-inc.
 
         assertSameValues(expected, actual);
       }
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("State", "NC");
@@ -800,7 +800,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         final Map<String, Object> actual = srs.write(schema, propertySet);
 
-        final Map<String, Object> expected = new HashMap<String, Object>(propertySet);
+        final Map<String, Object> expected = new HashMap<>(propertySet);
         expected.put("Name", "Bryan"); // read back from the store.
         expected.put("Counter", 1L); // expected value assigned by auto-inc.
 
@@ -819,7 +819,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         assertTrue(actual != null);
 
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", 1L);
         expected.put("Name", "Bryan");
@@ -842,7 +842,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
         {
           final ITPS actual = srs.delete(schema, 1L);
 
-          final Map<String, Object> expected = new HashMap<String, Object>();
+          final Map<String, Object> expected = new HashMap<>();
 
           expected.put("Id", 1L);
           expected.put("Name", "Bryan");
@@ -855,19 +855,19 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         // verify gone.
         {
-          assertSameValues(new HashMap<String, Object>(), srs.read(schema, 1L));
+          assertSameValues(new HashMap<>(), srs.read(schema, 1L));
         }
 
         // verify auto-inc with same primaryKey.
         {
-          final Map<String, Object> propertySet = new HashMap<String, Object>();
+          final Map<String, Object> propertySet = new HashMap<>();
 
           propertySet.put("Id", 1L);
           propertySet.put("Counter", AutoIncLongCounter.INSTANCE);
 
           final Map<String, Object> actual = srs.write(schema, propertySet, AUTO_TIMESTAMP_UNIQUE);
 
-          final Map<String, Object> expected = new HashMap<String, Object>();
+          final Map<String, Object> expected = new HashMap<>();
 
           expected.put("Id", 1L);
           expected.put("Counter", 0L);
@@ -891,7 +891,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         // delete the counter (not the row).
         {
-          final Map<String, Object> propertySet = new HashMap<String, Object>();
+          final Map<String, Object> propertySet = new HashMap<>();
 
           propertySet.put("Id", 1L);
           propertySet.put("Name", "Bryan"); // write this field.
@@ -900,7 +900,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
           final Map<String, Object> actual = srs.write(schema, propertySet, AUTO_TIMESTAMP_UNIQUE);
 
-          final Map<String, Object> expected = new HashMap<String, Object>();
+          final Map<String, Object> expected = new HashMap<>();
 
           expected.put("Id", 1L);
           expected.put("Name", "Bryan");
@@ -915,7 +915,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
         {
           final Map<String, Object> actual = srs.read(schema, 1L);
 
-          final Map<String, Object> expected = new HashMap<String, Object>();
+          final Map<String, Object> expected = new HashMap<>();
 
           expected.put("Id", 1L);
           expected.put("Name", "Bryan");
@@ -927,14 +927,14 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         // verify increment restarts the counter at zero.
         {
-          final Map<String, Object> propertySet = new HashMap<String, Object>();
+          final Map<String, Object> propertySet = new HashMap<>();
 
           propertySet.put("Id", 1L);
           propertySet.put("Counter", AutoIncLongCounter.INSTANCE);
 
           final Map<String, Object> actual = srs.write(schema, propertySet, AUTO_TIMESTAMP_UNIQUE);
 
-          final Map<String, Object> expected = new HashMap<String, Object>();
+          final Map<String, Object> expected = new HashMap<>();
 
           expected.put("Id", 1L);
           expected.put("Name", "Bryan");
@@ -974,7 +974,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       final SparseRowStore srs = new SparseRowStore(getIndex(store));
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Bryan");
@@ -984,7 +984,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       }
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 2L);
         propertySet.put("Name", "Mike");
@@ -1045,7 +1045,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       final SparseRowStore srs = new SparseRowStore(getIndex(store));
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 1L);
         propertySet.put("Name", "Bryan");
@@ -1055,7 +1055,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
       }
 
       {
-        final Map<String, Object> propertySet = new HashMap<String, Object>();
+        final Map<String, Object> propertySet = new HashMap<>();
 
         propertySet.put("Id", 2L);
         propertySet.put("Name", "Mike");
@@ -1129,7 +1129,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       // add one row.
       {
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", 1L);
         expected.put("Name", "Bryan");
@@ -1142,7 +1142,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       // add another row.
       {
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", 2L);
         expected.put("Name", "Mike");
@@ -1170,7 +1170,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         assertTrue(tps != null);
 
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", 1L);
         expected.put("Name", "Bryan");
@@ -1191,7 +1191,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         assertTrue(tps != null);
 
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", 2L);
         expected.put("Name", "Mike");
@@ -1238,7 +1238,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       // add one row.
       {
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", "10");
         expected.put("Name", "Bryan");
@@ -1251,7 +1251,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       // add another row.
       {
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", "20");
         expected.put("Name", "Mike");
@@ -1279,7 +1279,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         assertTrue(tps != null);
 
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", "10");
         expected.put("Name", "Bryan");
@@ -1300,7 +1300,7 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
         assertTrue(tps != null);
 
-        final Map<String, Object> expected = new HashMap<String, Object>();
+        final Map<String, Object> expected = new HashMap<>();
 
         expected.put("Id", "20");
         expected.put("Name", "Mike");

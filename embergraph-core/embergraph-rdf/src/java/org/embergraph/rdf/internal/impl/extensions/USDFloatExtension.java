@@ -62,7 +62,7 @@ public class USDFloatExtension<V extends EmbergraphValue> implements IExtension<
     final Literal lit = (Literal) value;
 
     final AbstractLiteralIV delegate =
-        new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseFloat(lit.getLabel()));
+        new XSDNumericIV<>(XMLDatatypeUtil.parseFloat(lit.getLabel()));
 
     return new LiteralExtensionIV(delegate, datatype.getIV());
   }

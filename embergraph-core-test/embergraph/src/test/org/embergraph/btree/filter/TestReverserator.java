@@ -57,8 +57,8 @@ public class TestReverserator extends AbstractTupleCursorTestCase {
   protected ITupleCursor2<String> newCursor(
       AbstractBTree btree, int flags, byte[] fromKey, byte[] toKey) {
 
-    return new ReadOnlyBTreeTupleCursor<String>(
-        (BTree) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
+    return new ReadOnlyBTreeTupleCursor<>(
+        (BTree) btree, new Tuple<>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
   /*
@@ -78,24 +78,24 @@ public class TestReverserator extends AbstractTupleCursorTestCase {
       final ITupleCursor2<String> cursor =
           newCursor(btree, IRangeQuery.DEFAULT, null /* fromKey */, null /* toKey */);
 
-      final ITupleIterator<String> itr = new Reverserator<String>(cursor);
+      final ITupleIterator<String> itr = new Reverserator<>(cursor);
 
       //            assertEquals(null, cursor.tuple());
 
       assertTrue(itr.hasNext());
 
-      assertEquals(new TestTuple<String>(30, "James"), itr.next());
-      assertEquals(new TestTuple<String>(30, "James"), cursor.tuple());
+      assertEquals(new TestTuple<>(30, "James"), itr.next());
+      assertEquals(new TestTuple<>(30, "James"), cursor.tuple());
 
       assertTrue(itr.hasNext());
 
-      assertEquals(new TestTuple<String>(20, "Mike"), itr.next());
-      assertEquals(new TestTuple<String>(20, "Mike"), cursor.tuple());
+      assertEquals(new TestTuple<>(20, "Mike"), itr.next());
+      assertEquals(new TestTuple<>(20, "Mike"), cursor.tuple());
 
       assertTrue(itr.hasNext());
 
-      assertEquals(new TestTuple<String>(10, "Bryan"), itr.next());
-      assertEquals(new TestTuple<String>(10, "Bryan"), cursor.tuple());
+      assertEquals(new TestTuple<>(10, "Bryan"), itr.next());
+      assertEquals(new TestTuple<>(10, "Bryan"), cursor.tuple());
 
       // exhausted.
       assertFalse(itr.hasNext());
@@ -155,7 +155,7 @@ public class TestReverserator extends AbstractTupleCursorTestCase {
         final ITupleCursor2<String> cursor =
             newCursor(btree, IRangeQuery.DEFAULT, null /* fromKey */, null /* toKey */);
 
-        final ITupleIterator<String> itr = new Reverserator<String>(cursor);
+        final ITupleIterator<String> itr = new Reverserator<>(cursor);
 
         long count = 0;
 

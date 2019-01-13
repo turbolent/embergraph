@@ -546,7 +546,7 @@ public class FixedAllocator implements Allocator {
      * either the AllocBlocks or their managed allocation slots on the
      * persistent heap yet.
      */
-    m_allocBlocks = new ArrayList<AllocBlock>(numBlocks);
+    m_allocBlocks = new ArrayList<>(numBlocks);
     for (int i = 0; i < numBlocks; i++) {
       m_allocBlocks.add(new AllocBlock(0, m_bitSize, this)); // , cache));
     }

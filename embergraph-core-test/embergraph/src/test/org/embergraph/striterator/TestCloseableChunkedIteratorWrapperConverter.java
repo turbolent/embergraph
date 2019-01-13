@@ -108,10 +108,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
 
     final String[][] expected = new String[][] {new String[] {}};
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -121,10 +121,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
 
     final String[][] expected = new String[][] {new String[] {"A"}};
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -137,10 +137,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
           new String[] {"A"}, new String[] {"B"},
         };
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -153,10 +153,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
           new String[] {"A"}, new String[] {}, new String[] {"B"},
         };
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -171,10 +171,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
           new String[] {"B", "b"},
         };
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }
@@ -187,10 +187,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
           new String[] {"A"}, new String[] {"C", "c"}, new String[] {"B"},
         };
 
-    final IChunkedIterator<String> src = new MyArrayExpander<String>(expected);
+    final IChunkedIterator<String> src = new MyArrayExpander<>(expected);
 
     final CloseableChunkedIteratorWrapperConverter<String> actual =
-        new CloseableChunkedIteratorWrapperConverter<String>(src);
+        new CloseableChunkedIteratorWrapperConverter<>(src);
 
     assertSameIterator(expected, actual);
   }

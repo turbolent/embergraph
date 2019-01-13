@@ -101,7 +101,7 @@ public class ParserSpeedTest {
     final StatementHandler stmtHandler = new StatementHandler();
 
     final FutureTask<Void> ft =
-        new FutureTask<Void>(new ParseFileTask(f, fileBufSize, vf, stmtHandler));
+        new FutureTask<>(new ParseFileTask(f, fileBufSize, vf, stmtHandler));
 
     // run the parser
     parserService.submit(ft);

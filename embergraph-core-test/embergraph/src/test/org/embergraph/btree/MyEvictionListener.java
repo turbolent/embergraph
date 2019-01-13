@@ -59,7 +59,7 @@ public class MyEvictionListener extends DefaultEvictionListener {
     setExpectedRef(expectedRefs.pop());
   }
 
-  Stack<PO> expectedRefs = new Stack<PO>();
+  Stack<PO> expectedRefs = new Stack<>();
 
   /*
    * Set the expected reference for the next eviction notice. The listener will thrown an exception

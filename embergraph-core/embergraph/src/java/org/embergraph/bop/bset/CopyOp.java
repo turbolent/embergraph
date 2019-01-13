@@ -116,7 +116,7 @@ public class CopyOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new CopyTask(this, context));
+    return new FutureTask<>(new CopyTask(this, context));
   }
 
   /*
@@ -163,7 +163,7 @@ public class CopyOp extends PipelineOp {
 
           // copy optional additional binding sets.
           BOpUtility.copy(
-              new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {bindingSets}),
+              new ThickAsynchronousIterator<>(new IBindingSet[][]{bindingSets}),
               sink,
               sink2,
               null /* mergeSolution */,

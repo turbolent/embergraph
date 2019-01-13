@@ -53,7 +53,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
    *     annotation.
    */
   private final Collection<IStarConstraint<ISPO>> starConstraints =
-      new LinkedList<IStarConstraint<ISPO>>();
+      new LinkedList<>();
 
   /** Required shallow copy constructor. */
   public SPOStarJoin(final BOp[] values, final Map<String, Object> annotations) {
@@ -167,7 +167,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
   /** Return an iterator over the constraint variables for this star join. */
   public Iterator<IVariable> getConstraintVariables() {
 
-    final Set<IVariable> vars = new HashSet<IVariable>();
+    final Set<IVariable> vars = new HashSet<>();
 
     for (IStarConstraint constraint : starConstraints) {
 
@@ -292,12 +292,12 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
 
       if (p.isVar()) {
 
-        bs.set((IVariable) p, new Constant<IV>(spo.p()));
+        bs.set((IVariable) p, new Constant<>(spo.p()));
       }
 
       if (o.isVar()) {
 
-        bs.set((IVariable) o, new Constant<IV>(spo.o()));
+        bs.set((IVariable) o, new Constant<>(spo.o()));
       }
     }
 

@@ -88,7 +88,7 @@ public class ChunkedResolutionOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(context, this));
+    return new FutureTask<>(new ChunkTask(context, this));
   }
 
   private static class ChunkTask implements Callable<Void> {
@@ -143,7 +143,7 @@ public class ChunkedResolutionOp extends PipelineOp {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private IBindingSet[] resolve(final IBindingSet[] bindingSets) {
 
-      final Map<Value, EmbergraphValue> values = new LinkedHashMap<Value, EmbergraphValue>();
+      final Map<Value, EmbergraphValue> values = new LinkedHashMap<>();
 
       final EmbergraphValueFactory valueFactory = lex.getValueFactory();
 

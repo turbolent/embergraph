@@ -186,7 +186,7 @@ public class PIDStatCollector extends AbstractProcessCollector
    * #getCounters()} and not whatever path the counters are eventually placed under within a larger
    * hierarchy.
    */
-  private final Map<String, Object> vals = new ConcurrentHashMap<String, Object>();
+  private final Map<String, Object> vals = new ConcurrentHashMap<>();
 
   /*
    * @param pid Process to be monitored.
@@ -214,7 +214,7 @@ public class PIDStatCollector extends AbstractProcessCollector
   @Override
   public List<String> getCommand() {
 
-    final List<String> command = new LinkedList<String>();
+    final List<String> command = new LinkedList<>();
 
     command.add(SysstatUtil.getPath("pidstat").getPath());
 
@@ -242,7 +242,7 @@ public class PIDStatCollector extends AbstractProcessCollector
   @Override
   public CounterSet getCounters() {
 
-    final List<AbstractInst<?>> inst = new LinkedList<AbstractInst<?>>();
+    final List<AbstractInst<?>> inst = new LinkedList<>();
 
     /*
      * Note: Counters are all declared as Double to facilitate aggregation

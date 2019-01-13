@@ -305,7 +305,7 @@ public class TernaryIntervalSearchTreeTest extends TestCase {
   public void testLargeSet() {
     long seed = System.currentTimeMillis();
     System.err.println(seed);
-    List<String> c = new ObjectArrayList<String>(WORDS);
+    List<String> c = new ObjectArrayList<>(WORDS);
     Collections.shuffle(c);
     TernaryIntervalSearchTree t = new TernaryIntervalSearchTree(c);
 
@@ -341,7 +341,7 @@ public class TernaryIntervalSearchTreeTest extends TestCase {
         assertEquals(s, Interval.valueOf(k - 1), t.getApproximatedInterval(s));
       }
 
-    Collection<String> p = new ObjectRBTreeSet<String>();
+    Collection<String> p = new ObjectRBTreeSet<>();
     for (int i = 0; i < WORDS.length; i++)
       for (int j = 0; j < WORDS[i].length(); j++) p.add(WORDS[i].substring(0, j + 1));
     t = new TernaryIntervalSearchTree(p);

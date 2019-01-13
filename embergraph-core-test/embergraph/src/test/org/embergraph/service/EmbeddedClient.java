@@ -78,7 +78,7 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
 
     if (fed == null) {
 
-      fed = new EmbeddedFederation<T>(this);
+      fed = new EmbeddedFederation<>(this);
     }
 
     return fed;

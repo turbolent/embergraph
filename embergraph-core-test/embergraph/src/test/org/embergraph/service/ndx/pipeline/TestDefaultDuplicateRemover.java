@@ -47,15 +47,15 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
   public void test_filter_keyAndVal() {
 
     final IDuplicateRemover<Object> fixture =
-        new DefaultDuplicateRemover<Object>(false /* filterRefs */);
+        new DefaultDuplicateRemover<>(false /* filterRefs */);
 
-    final KVO<Object> t0 = new KVO<Object>(new byte[] {}, new byte[] {}, null);
-    final KVO<Object> t1 = new KVO<Object>(new byte[] {1}, new byte[] {1}, null);
+    final KVO<Object> t0 = new KVO<>(new byte[]{}, new byte[]{}, null);
+    final KVO<Object> t1 = new KVO<>(new byte[]{1}, new byte[]{1}, null);
     // t2 is dup of t1.
-    final KVO<Object> t2 = new KVO<Object>(new byte[] {1}, new byte[] {1}, null);
+    final KVO<Object> t2 = new KVO<>(new byte[]{1}, new byte[]{1}, null);
     // t3 has the same key, but is not a dup
-    final KVO<Object> t3 = new KVO<Object>(new byte[] {1}, new byte[] {2}, null);
-    final KVO<Object> t4 = new KVO<Object>(new byte[] {1, 2}, new byte[] {}, null);
+    final KVO<Object> t3 = new KVO<>(new byte[]{1}, new byte[]{2}, null);
+    final KVO<Object> t4 = new KVO<>(new byte[]{1, 2}, new byte[]{}, null);
 
     /*
      * Note: The array is given in ordered order to avoid sort() choosing
@@ -82,20 +82,20 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
   public void test_filter_ref() {
 
     final IDuplicateRemover<Object> fixture =
-        new DefaultDuplicateRemover<Object>(true /* filterRefs */);
+        new DefaultDuplicateRemover<>(true /* filterRefs */);
 
     final Object o0 = new Object();
     final Object o1 = new Object();
     final Object o2 = new Object();
     final Object o3 = new Object();
 
-    final KVO<Object> t0 = new KVO<Object>(new byte[] {}, new byte[] {}, o0);
-    final KVO<Object> t1 = new KVO<Object>(new byte[] {1}, new byte[] {1}, o1);
+    final KVO<Object> t0 = new KVO<>(new byte[]{}, new byte[]{}, o0);
+    final KVO<Object> t1 = new KVO<>(new byte[]{1}, new byte[]{1}, o1);
     // t2 is dup of t1.
-    final KVO<Object> t2 = new KVO<Object>(new byte[] {1}, new byte[] {1}, o1);
+    final KVO<Object> t2 = new KVO<>(new byte[]{1}, new byte[]{1}, o1);
     // t3 has the same key, but is not a dup
-    final KVO<Object> t3 = new KVO<Object>(new byte[] {1}, new byte[] {2}, o2);
-    final KVO<Object> t4 = new KVO<Object>(new byte[] {1, 2}, new byte[] {}, o3);
+    final KVO<Object> t3 = new KVO<>(new byte[]{1}, new byte[]{2}, o2);
+    final KVO<Object> t4 = new KVO<>(new byte[]{1, 2}, new byte[]{}, o3);
 
     /*
      * Note: The array is given in ordered order to avoid sort() choosing
@@ -153,7 +153,7 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
   public void test_duplicateList() {
 
     final IDuplicateRemover<Object> fixture =
-        new DefaultDuplicateRemover<Object>(true /* filterRefs */);
+        new DefaultDuplicateRemover<>(true /* filterRefs */);
 
     final Object o0 = new Object();
     final Object o1 = new Object();
@@ -162,23 +162,23 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
 
     final AtomicInteger counter = new AtomicInteger();
 
-    final KVOList<Object> t0 = new KVODupTest<Object>(new byte[] {}, new byte[] {}, o0, counter);
+    final KVOList<Object> t0 = new KVODupTest<>(new byte[]{}, new byte[]{}, o0, counter);
 
-    final KVOList<Object> t1 = new KVODupTest<Object>(new byte[] {1}, new byte[] {1}, o1, counter);
+    final KVOList<Object> t1 = new KVODupTest<>(new byte[]{1}, new byte[]{1}, o1, counter);
 
     // t2 is dup of t1.
-    final KVOList<Object> t2 = new KVODupTest<Object>(new byte[] {1}, new byte[] {1}, o1, counter);
+    final KVOList<Object> t2 = new KVODupTest<>(new byte[]{1}, new byte[]{1}, o1, counter);
 
     // t3 is also a dup of t1.
-    final KVOList<Object> t3 = new KVODupTest<Object>(new byte[] {1}, new byte[] {1}, o1, counter);
+    final KVOList<Object> t3 = new KVODupTest<>(new byte[]{1}, new byte[]{1}, o1, counter);
 
     // t4 has the same key but is not a dup.
     final KVOList<Object> t4 =
-        new KVODupTest<Object>(new byte[] {1}, new byte[] {1, 0, 2}, o2, counter);
+        new KVODupTest<>(new byte[]{1}, new byte[]{1, 0, 2}, o2, counter);
 
     // t5 has a different key.
     final KVOList<Object> t5 =
-        new KVODupTest<Object>(new byte[] {1, 2}, new byte[] {}, o3, counter);
+        new KVODupTest<>(new byte[]{1, 2}, new byte[]{}, o3, counter);
 
     /*
      * Note: The array is given in ordered order to avoid sort() choosing

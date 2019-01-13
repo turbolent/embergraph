@@ -137,7 +137,7 @@ public class AbstractConnectOptions implements IMimeTypes {
   public void addRequestParam(final String name, final String[] vals) {
 
     if (requestParams == null) {
-      requestParams = new LinkedHashMap<String, String[]>();
+      requestParams = new LinkedHashMap<>();
     }
 
     requestParams.put(name, vals);
@@ -163,7 +163,7 @@ public class AbstractConnectOptions implements IMimeTypes {
   public void setHeader(final String name, final String val) {
 
     if (requestHeaders == null) {
-      requestHeaders = new LinkedHashMap<String, String>();
+      requestHeaders = new LinkedHashMap<>();
     }
 
     requestHeaders.put(name, val);
@@ -229,7 +229,7 @@ public class AbstractConnectOptions implements IMimeTypes {
   public static HttpEntity getFormEntity(final Map<String, String[]> requestParams)
       throws Exception {
 
-    final List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+    final List<NameValuePair> formparams = new ArrayList<>();
 
     if (requestParams != null) {
       for (Map.Entry<String, String[]> e : requestParams.entrySet()) {

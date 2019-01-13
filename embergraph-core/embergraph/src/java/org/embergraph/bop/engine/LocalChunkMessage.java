@@ -219,7 +219,7 @@ public class LocalChunkMessage implements IChunkMessage<IBindingSet> {
   private static ThickCloseableIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickCloseableIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickCloseableIterator<>(bindingSetChunks);
   }
 
   private static int solutionCount(final IBindingSet[][] bindingSetChunks) {

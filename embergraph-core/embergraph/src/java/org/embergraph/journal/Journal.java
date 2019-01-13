@@ -415,7 +415,7 @@ public class Journal extends AbstractJournal
      * @see GatherTask
      */
     private final Map<UUID, IHANotifyReleaseTimeRequest> followerResponses =
-        new ConcurrentHashMap<UUID, IHANotifyReleaseTimeRequest>();
+        new ConcurrentHashMap<>();
 
     /*
      * The value from {@link #followerResponses} associated with the earliest commit point. This is
@@ -650,7 +650,7 @@ public class Journal extends AbstractJournal
       //            final boolean[] remoteDone = new boolean[joinedServiceIds.length];
 
       // Local future for RMI requesting GATHER on each follower.
-      final List<Future<Void>> futures = new LinkedList<Future<Void>>();
+      final List<Future<Void>> futures = new LinkedList<>();
 
       try {
 
@@ -1138,7 +1138,7 @@ public class Journal extends AbstractJournal
      * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/445" > RWStore does not track
      *     tx release correctly </a>
      */
-    private final ConcurrentHashMap<Long, IRawTx> m_rawTxs = new ConcurrentHashMap<Long, IRawTx>();
+    private final ConcurrentHashMap<Long, IRawTx> m_rawTxs = new ConcurrentHashMap<>();
 
     /*
      * This lock is used to ensure that the following actions are MUTEX:
@@ -1168,7 +1168,7 @@ public class Journal extends AbstractJournal
      * This is used to coordinate the protocol for achiving an atomic consensus on the new
      * <i>releaseTime</i> for the services joined with a met quorum.
      */
-    private final AtomicReference<BarrierState> barrierRef = new AtomicReference<BarrierState>();
+    private final AtomicReference<BarrierState> barrierRef = new AtomicReference<>();
 
     @Override
     public void runWithBarrierLock(final Runnable r) {
@@ -3333,7 +3333,7 @@ public class Journal extends AbstractJournal
   }
 
   private final AtomicReference<GlobalRowStoreHelper> globalRowStoreHelper =
-      new AtomicReference<GlobalRowStoreHelper>();
+      new AtomicReference<>();
 
   /*
    * global file system.
@@ -3369,7 +3369,7 @@ public class Journal extends AbstractJournal
   }
 
   private final AtomicReference<GlobalFileSystemHelper> globalFileSystemHelper =
-      new AtomicReference<GlobalFileSystemHelper>();
+      new AtomicReference<>();
 
   @Override
   protected void discardCommitters() {
@@ -3447,11 +3447,11 @@ public class Journal extends AbstractJournal
 
   private final AtomicReference<IPlugIn<Journal, ThreadPoolExecutorBaseStatisticsTask>>
       pluginQueueStats =
-          new AtomicReference<IPlugIn<Journal, ThreadPoolExecutorBaseStatisticsTask>>();
+      new AtomicReference<>();
   private final AtomicReference<IPlugIn<Journal, AbstractStatisticsCollector>> pluginPlatformStats =
-      new AtomicReference<IPlugIn<Journal, AbstractStatisticsCollector>>();
+      new AtomicReference<>();
   private final AtomicReference<IPlugIn<Journal, ?>> pluginHttpd =
-      new AtomicReference<IPlugIn<Journal, ?>>();
+      new AtomicReference<>();
 
   /*
    * Host wide performance counters (collected from the OS) (optional).
@@ -3519,7 +3519,7 @@ public class Journal extends AbstractJournal
     final int nparallel = 20;
 
     final FutureTask<Map<String, BaseIndexStats>> ft =
-        new FutureTask<Map<String, BaseIndexStats>>(
+        new FutureTask<>(
             new WarmUpTask(
                 this,
                 namespaces,
@@ -3668,7 +3668,7 @@ public class Journal extends AbstractJournal
    * @see #dropIndex(String)
    */
   private final ConcurrentHashMap<String /* name */, BTreeCounters> indexCounters =
-      new ConcurrentHashMap<String, BTreeCounters>();
+      new ConcurrentHashMap<>();
 
   @Override
   public BTreeCounters getIndexCounters(final String name) {

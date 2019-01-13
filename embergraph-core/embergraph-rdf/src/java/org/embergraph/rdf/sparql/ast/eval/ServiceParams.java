@@ -61,7 +61,7 @@ public class ServiceParams {
 
   public ServiceParams() {
 
-    this.params = new LinkedHashMap<URI, List<TermNode>>();
+    this.params = new LinkedHashMap<>();
   }
 
   /** Add. */
@@ -69,7 +69,7 @@ public class ServiceParams {
 
     if (!params.containsKey(param)) {
 
-      params.put(param, new LinkedList<TermNode>());
+      params.put(param, new LinkedList<>());
     }
 
     params.get(param).add(value);

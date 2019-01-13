@@ -42,7 +42,7 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
 
     this.src = (ITupleCursor<E>) src;
 
-    return new Advancer.Advancerator<E>(this.src, context, this);
+    return new Advancer.Advancerator<>(this.src, context, this);
   }
 
   /*

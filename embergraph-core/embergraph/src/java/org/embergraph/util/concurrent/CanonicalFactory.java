@@ -46,7 +46,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
   public CanonicalFactory(final int queueCapacity) {
 
     //		cache = new WeakValueCache<KEY, VAL>(new LRUCache<KEY, VAL>(queueCapacity));
-    cache = new ConcurrentWeakValueCache<KEY, VAL>(queueCapacity);
+    cache = new ConcurrentWeakValueCache<>(queueCapacity);
   }
 
   /*

@@ -310,13 +310,13 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
     if (n2a != null) throw new IllegalStateException();
 
-    n2a = new HashMap<String, Entry>(resource.length);
+    n2a = new HashMap<>(resource.length);
 
     /*
      * Note: getIndex() sets the listener on the BTree. That listener is
      * responsible for putting dirty indices onto the commit list.
      */
-    commitList = new ConcurrentHashMap<String, DirtyListener>(resource.length);
+    commitList = new ConcurrentHashMap<>(resource.length);
 
     // the unisolated name2Addr object.
     final Name2Addr name2Addr = resourceManager.getLiveJournal()._getName2Addr();
@@ -931,7 +931,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
      * Create task to checkpoint each entry in the snapshot of the commit
      * list.
      */
-    final List<CheckpointIndexTask> tasks = new LinkedList<CheckpointIndexTask>();
+    final List<CheckpointIndexTask> tasks = new LinkedList<>();
 
     for (final DirtyListener l : commitList.values()) {
 
@@ -1250,7 +1250,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
     this.resource = resource;
 
-    this.indexCache = new HashMap<String, ILocalBTreeView>(resource.length);
+    this.indexCache = new HashMap<>(resource.length);
 
     this.isReadWriteTx = TimestampUtility.isReadWriteTx(timestamp);
 
@@ -1712,7 +1712,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          * Delegate handles handshaking for writable transactions.
          */
 
-        final Callable<T> delegate = new InnerReadWriteTxServiceCallable<T>(this, tx);
+        final Callable<T> delegate = new InnerReadWriteTxServiceCallable<>(this, tx);
 
         return delegate.call();
       }
@@ -1776,7 +1776,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     //        final LockManagerTask<String,T> delegate = new LockManagerTask<String,T>(lockManager,
     //                resource, new InnerWriteServiceCallable(this));
 
-    final Callable<T> delegate = new InnerWriteServiceCallable<T>(this);
+    final Callable<T> delegate = new InnerWriteServiceCallable<>(this);
 
     final WriteExecutorService writeService = concurrencyManager.getWriteService();
 

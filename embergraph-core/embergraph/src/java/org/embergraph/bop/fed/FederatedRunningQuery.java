@@ -90,7 +90,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
    * closure operation.
    */
   private final ConcurrentHashMap<AllocationContextKey, IAllocationContext> allocationContexts =
-      new ConcurrentHashMap<AllocationContextKey, IAllocationContext>();
+      new ConcurrentHashMap<>();
 
   /*
    * Extended to release all allocations associated with the specified operator.
@@ -334,7 +334,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
           for (UUID serviceId : ((Set<UUID>) doneOn)) {
 
             final IChunkMessage<IBindingSet> emptyMessage =
-                new EmptyChunkMessage<IBindingSet>(
+                new EmptyChunkMessage<>(
                     getQueryController(),
                     getQueryId(),
                     bopId,
@@ -364,7 +364,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
           for (Integer shardId : ((Set<Integer>) doneOn)) {
 
             final IChunkMessage<IBindingSet> emptyMessage =
-                new EmptyChunkMessage<IBindingSet>(
+                new EmptyChunkMessage<>(
                     getQueryController(), getQueryId(), bopId, shardId, true /* lastInvocation */);
 
             acceptChunk(emptyMessage);

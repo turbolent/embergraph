@@ -46,7 +46,7 @@ public class GroupNodeVarBindingInfoMap {
       final StaticAnalysis sa,
       final ASTJoinGroupFilterExistsInfo fExInfo) {
 
-    bindingInfo = new HashMap<IGroupMemberNode, GroupNodeVarBindingInfo>();
+    bindingInfo = new HashMap<>();
     for (IGroupMemberNode node : nodes) {
 
       final GroupNodeVarBindingInfo vbc = new GroupNodeVarBindingInfo(node, sa, fExInfo);

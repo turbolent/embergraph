@@ -190,7 +190,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         MemStrategy bs = (MemStrategy) store.getBufferStrategy();
 
         for (int r = 0; r < 10; r++) {
-          ArrayList<Long> addrs = new ArrayList<Long>();
+          ArrayList<Long> addrs = new ArrayList<>();
           for (int i = 0; i < 100; i++) {
             addrs.add(bs.write(randomData(45)));
           }
@@ -312,7 +312,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         ByteBuffer bb = ByteBuffer.wrap(buf);
 
         IRawTx tx = bs.newTx();
-        ArrayList<Long> addrs = new ArrayList<Long>();
+        ArrayList<Long> addrs = new ArrayList<>();
 
         // We just want to stress a single allocator, so do not
         //	make more allocations than a single allocator can
@@ -418,7 +418,7 @@ public class TestMemStore extends AbstractJournalTestCase {
 
         MemStrategy bs = (MemStrategy) store.getBufferStrategy();
 
-        ArrayList<Long> addrs = new ArrayList<Long>();
+        ArrayList<Long> addrs = new ArrayList<>();
         for (int i = 0; i < 4000; i++) {
           addrs.add(bs.write(randomData(45)));
         }

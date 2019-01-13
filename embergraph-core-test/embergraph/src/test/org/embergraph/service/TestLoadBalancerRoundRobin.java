@@ -63,7 +63,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     final UUID service1 = UUID.randomUUID();
     final UUID service2 = UUID.randomUUID();
 
-    final Set<UUID> services = new HashSet<UUID>();
+    final Set<UUID> services = new HashSet<>();
     services.add(service1);
     services.add(service2);
 
@@ -78,7 +78,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
         };
 
     // copy the set of known services.
-    Set<UUID> tmp = new HashSet<UUID>(services);
+    Set<UUID> tmp = new HashSet<>(services);
 
     // Note: 1st round robin assignment (1 out of 2 possible).
     UUID[] actual = fixture.getUnderUtilizedDataServices(minCount, maxCount, exclude);
@@ -133,7 +133,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
 
     final int N = 12;
 
-    final Set<UUID> services = new HashSet<UUID>();
+    final Set<UUID> services = new HashSet<>();
     for (int i = 0; i < N; i++) {
       services.add(UUID.randomUUID());
     }
@@ -149,7 +149,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
         };
 
     // copy the set of known services.
-    Set<UUID> tmp = new HashSet<UUID>(services);
+    Set<UUID> tmp = new HashSet<>(services);
 
     // the actual order in which the services are assigned.
     final UUID[] expected = new UUID[N];
@@ -204,7 +204,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
 
       final UUID exclude = UUID.randomUUID();
 
-      final Set<UUID> services = new HashSet<UUID>();
+      final Set<UUID> services = new HashSet<>();
 
       services.add(exclude);
 

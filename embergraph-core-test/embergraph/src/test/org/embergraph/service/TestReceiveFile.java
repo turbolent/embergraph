@@ -178,7 +178,7 @@ public class TestReceiveFile extends TestCase3 {
     final ExecutorService exService =
         Executors.newCachedThreadPool(DaemonThreadFactory.defaultThreadFactory());
 
-    final List<File> tempFiles = new LinkedList<File>();
+    final List<File> tempFiles = new LinkedList<>();
 
     try {
 
@@ -186,7 +186,7 @@ public class TestReceiveFile extends TestCase3 {
 
       assertTrue(service.isOpen());
 
-      final List<Callable<File>> tasks = new LinkedList<Callable<File>>();
+      final List<Callable<File>> tasks = new LinkedList<>();
 
       for (int i = 0; i < 20; i++) {
 

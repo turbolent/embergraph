@@ -95,7 +95,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
   /** The client (if connected). */
   private final AtomicReference<AbstractClient<T>> client =
-      new AtomicReference<AbstractClient<T>>();
+      new AtomicReference<>();
 
   private final boolean collectPlatformStatistics;
   private final boolean collectQueueStatistics;
@@ -357,10 +357,10 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
   }
 
   /** httpd reporting the live counters for the client while it is connected to the federation. */
-  private final AtomicReference<AbstractHTTPD> httpd = new AtomicReference<AbstractHTTPD>();
+  private final AtomicReference<AbstractHTTPD> httpd = new AtomicReference<>();
 
   /** The URL that may be used to access the httpd service exposed by this client. */
-  private final AtomicReference<String> httpdURL = new AtomicReference<String>();
+  private final AtomicReference<String> httpdURL = new AtomicReference<>();
 
   @Override
   public final String getHttpdURL() {
@@ -399,7 +399,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
    *     or we can just let the counters indicates the unisolated writes.
    */
   private final Map<String, ScaleOutIndexCounters> scaleOutIndexCounters =
-      new HashMap<String, ScaleOutIndexCounters>();
+      new HashMap<>();
 
   /*
    * Return the {@link TaskCounters} which aggregate across all operations performed by the client
@@ -455,7 +455,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
    * ILoadBalancerService}.
    */
   private final AtomicReference<AbstractStatisticsCollector> statisticsCollector =
-      new AtomicReference<AbstractStatisticsCollector>();
+      new AtomicReference<>();
 
   @Override
   public ScheduledFuture<?> addScheduledTask(
@@ -511,7 +511,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
           if (s != null) {
 
             // add counter reporting that url to the load balancer.
-            serviceRoot.addCounter(IServiceCounters.LOCAL_HTTPD, new OneShotInstrument<String>(s));
+            serviceRoot.addCounter(IServiceCounters.LOCAL_HTTPD, new OneShotInstrument<>(s));
           }
         }
 
@@ -635,7 +635,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
        * default delegate.
        */
 
-      client2.setDelegate(new DefaultClientDelegate<T>(client, null /* clientOrService */));
+      client2.setDelegate(new DefaultClientDelegate<>(client, null /* clientOrService */));
     }
 
     final int threadPoolSize = client.getThreadPoolSize();
@@ -1520,7 +1520,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
   }
 
   /** Queue of events sent periodically to the {@link ILoadBalancerService}. */
-  private final BlockingQueue<Event> events = new LinkedBlockingQueue<Event>();
+  private final BlockingQueue<Event> events = new LinkedBlockingQueue<>();
 
   /*
    * Sends events to the {@link ILoadBalancerService}.
@@ -1548,7 +1548,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         final long begin = System.currentTimeMillis();
 
-        final LinkedList<Event> c = new LinkedList<Event>();
+        final LinkedList<Event> c = new LinkedList<>();
 
         events.drainTo(c);
 

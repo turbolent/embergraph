@@ -138,7 +138,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> y = Var.var("y");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -174,7 +174,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> x = Var.var("x");
 
       // The right solutions (the hash index).
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -283,7 +283,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> person = Var.var("person");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -312,7 +312,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> name = Var.var("name");
 
       // The right solutions (the hash index).
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -394,7 +394,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> nvar = Var.var("n");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -428,7 +428,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       //            final IVariable<?> mvar = Var.var("m");
 
       // The right solutions (the hash index).
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -543,7 +543,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       {
         final BOpStats stats = new BOpStats();
 
-        state.acceptSolutions(new Chunkerator<IBindingSet>(right.iterator()), stats);
+        state.acceptSolutions(new Chunkerator<>(right.iterator()), stats);
 
         assertEquals(right.size(), state.getRightSolutionCount());
 
@@ -564,10 +564,10 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         //                        left.iterator());
 
         final ICloseableIterator<IBindingSet[]> leftItr =
-            new Chunkerator<IBindingSet>(left.iterator(), 100 /*chunkSize*/, IBindingSet.class);
+            new Chunkerator<>(left.iterator(), 100 /*chunkSize*/, IBindingSet.class);
 
         // Buffer used to collect the solutions.
-        final TestBuffer<IBindingSet> outputBuffer = new TestBuffer<IBindingSet>();
+        final TestBuffer<IBindingSet> outputBuffer = new TestBuffer<>();
 
         // Compute the "required" solutions.
         state.hashJoin(leftItr, null /* stats */, outputBuffer);
@@ -621,10 +621,10 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     final IConstraint[] constraints = null;
 
     // The left solutions (the pipeline).
-    final List<IBindingSet> left = new LinkedList<IBindingSet>();
+    final List<IBindingSet> left = new LinkedList<>();
 
     // The right solutions (the hash index).
-    final List<IBindingSet> right = new LinkedList<IBindingSet>();
+    final List<IBindingSet> right = new LinkedList<>();
 
     // The expected solutions to the join.
     final IBindingSet[] expected = new IBindingSet[0];
@@ -645,10 +645,10 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     final IConstraint[] constraints = null;
 
     // The left solutions (the pipeline).
-    final List<IBindingSet> left = new LinkedList<IBindingSet>();
+    final List<IBindingSet> left = new LinkedList<>();
 
     // The right solutions (the hash index).
-    final List<IBindingSet> right = new LinkedList<IBindingSet>();
+    final List<IBindingSet> right = new LinkedList<>();
 
     // The expected solutions to the join.
     final IBindingSet[] expected = new IBindingSet[0];
@@ -1020,7 +1020,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         first.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(firstSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(firstSolutions).iterator()), stats);
 
         assertEquals(firstSolutions.length, first.getRightSolutionCount());
 
@@ -1032,7 +1032,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         other.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(otherSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(otherSolutions).iterator()), stats);
 
         assertEquals(otherSolutions.length, other.getRightSolutionCount());
 
@@ -1277,7 +1277,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         first.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(firstSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(firstSolutions).iterator()), stats);
 
         assertEquals(firstSolutions.length, first.getRightSolutionCount());
 
@@ -1289,7 +1289,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         other.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(otherSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(otherSolutions).iterator()), stats);
 
         assertEquals(otherSolutions.length, other.getRightSolutionCount());
 
@@ -1593,7 +1593,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         first.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(firstSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(firstSolutions).iterator()), stats);
 
         assertEquals(firstSolutions.length, first.getRightSolutionCount());
 
@@ -1605,7 +1605,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         other.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(otherSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(otherSolutions).iterator()), stats);
 
         assertEquals(otherSolutions.length, other.getRightSolutionCount());
 
@@ -1617,7 +1617,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         final BOpStats stats = new BOpStats();
 
         more.acceptSolutions(
-            new Chunkerator<IBindingSet>(Arrays.asList(moreSolutions).iterator()), stats);
+            new Chunkerator<>(Arrays.asList(moreSolutions).iterator()), stats);
 
         assertEquals(moreSolutions.length, more.getRightSolutionCount());
 
@@ -1659,7 +1659,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IHashJoinUtility... others) {
 
     // Buffer used to collect the solutions.
-    final TestBuffer<IBindingSet> outputBuffer = new TestBuffer<IBindingSet>();
+    final TestBuffer<IBindingSet> outputBuffer = new TestBuffer<>();
 
     // Do the merge join,
     first.mergeJoin(others, outputBuffer, constraints, optional);
@@ -1973,7 +1973,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> o1 = Var.var("o1");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2007,7 +2007,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> o2 = Var.var("o2");
 
       // The right solutions (the hash index).
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2043,7 +2043,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> p2 = Var.var("p2");
       final IVariable<?> o2 = Var.var("o2");
 
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2281,7 +2281,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> o1 = Var.var("o1");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2342,7 +2342,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> o2 = Var.var("o2");
 
       // The left solutions (the pipeline).
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2386,7 +2386,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> p1 = Var.var("p1");
       final IVariable<?> o1 = Var.var("o1");
 
-      final List<IBindingSet> right = new LinkedList<IBindingSet>();
+      final List<IBindingSet> right = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -2421,7 +2421,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> p = Var.var("p1");
       final IVariable<?> o1 = Var.var("o1");
 
-      final List<IBindingSet> left = new LinkedList<IBindingSet>();
+      final List<IBindingSet> left = new LinkedList<>();
 
       left.addAll(getServiceCallJoinSolutions());
 

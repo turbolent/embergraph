@@ -51,7 +51,7 @@ public class MiniMime {
    * elements. You can just break out of the loop when you hit the first <code>null</code> MIME type
    * parameter name.
    */
-  private final List<NV> params = new LinkedList<NV>();
+  private final List<NV> params = new LinkedList<>();
 
   /*
    * @param s The value to be parsed.

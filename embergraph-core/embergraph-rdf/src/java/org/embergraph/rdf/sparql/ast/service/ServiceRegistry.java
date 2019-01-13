@@ -83,21 +83,21 @@ public class ServiceRegistry {
 
   /** Allowed service whitelist. */
   private final Set<String> serviceWhitelist =
-      Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+      Collections.newSetFromMap(new ConcurrentHashMap<>());
 
   /** Whether service whitelisting is enabled. */
   private boolean whitelistEnabled = false;
 
   protected ServiceRegistry() {
 
-    services = new ConcurrentHashMap<URI, ServiceFactory>();
+    services = new ConcurrentHashMap<>();
 
-    customServices = new CopyOnWriteArrayList<CustomServiceFactory>();
+    customServices = new CopyOnWriteArrayList<>();
 
-    aliases = new ConcurrentHashMap<URI, URI>();
+    aliases = new ConcurrentHashMap<>();
 
     defaultServiceFactoryRef =
-        new AtomicReference<ServiceFactory>(new RemoteServiceFactoryImpl(SPARQLVersion.SPARQL_11));
+        new AtomicReference<>(new RemoteServiceFactoryImpl(SPARQLVersion.SPARQL_11));
 
     // Add the Embergraph search service.
     add(BDS.SEARCH, new SearchServiceFactory());
@@ -315,7 +315,7 @@ public class ServiceRegistry {
      * efficient traversal with snapshot isolation.
      */
 
-    return new ReadOnlyIterator<CustomServiceFactory>(customServices.iterator());
+    return new ReadOnlyIterator<>(customServices.iterator());
   }
 
   /*

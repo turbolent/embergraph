@@ -53,7 +53,7 @@ public abstract class AbstractHaltableProcess {
    * field.
    */
   private final transient AtomicReference<Throwable> firstCause =
-      new AtomicReference<Throwable>(null);
+      new AtomicReference<>(null);
 
   /*
    * Return unless processing has been halted.

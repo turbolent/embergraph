@@ -46,7 +46,7 @@ public class FullyInlineUnicodeBNodeIV<V extends EmbergraphBNode> extends Abstra
 
   public IV<V, String> clone(final boolean clearCache) {
 
-    final FullyInlineUnicodeBNodeIV<V> tmp = new FullyInlineUnicodeBNodeIV<V>(id);
+    final FullyInlineUnicodeBNodeIV<V> tmp = new FullyInlineUnicodeBNodeIV<>(id);
 
     // propagate transient state if available.
     tmp.byteLength = byteLength;

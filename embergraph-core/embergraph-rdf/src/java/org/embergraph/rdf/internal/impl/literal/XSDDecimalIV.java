@@ -41,7 +41,7 @@ public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigD
 
   public IV<V, BigDecimal> clone(final boolean clearCache) {
 
-    final XSDDecimalIV<V> tmp = new XSDDecimalIV<V>(value);
+    final XSDDecimalIV<V> tmp = new XSDDecimalIV<>(value);
 
     // propagate transient state if available.
     tmp.byteLength = byteLength;

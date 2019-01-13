@@ -645,10 +645,10 @@ public class DataLoader {
   public class MyLoadStats extends LoadStats {
 
     /** The set of resources that failed during a load. */
-    private final Set<File> failSet = new LinkedHashSet<File>();
+    private final Set<File> failSet = new LinkedHashSet<>();
 
     /** The set of resources that were successfully loaded. */
-    private final Set<File> goodSet = new LinkedHashSet<File>();
+    private final Set<File> goodSet = new LinkedHashSet<>();
 
     /** Method must be invoked if load of a {@link File} fails. */
     void didFail(final File file) {
@@ -1812,7 +1812,7 @@ public class DataLoader {
 
     final String propertyFileName = args[i++];
 
-    final List<File> files = new LinkedList<File>();
+    final List<File> files = new LinkedList<>();
 
     final Properties properties =
         processProperties(propertyFileName, quiet, verbose, durableQueues);

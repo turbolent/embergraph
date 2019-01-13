@@ -127,7 +127,7 @@ public class COUNT extends AggregateBase<IV> {
       throw new RuntimeException(firstCause);
     }
 
-    return new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(aggregated));
+    return new XSDIntegerIV<>(BigInteger.valueOf(aggregated));
     // return new XSDNumericIV<EmbergraphLiteral>(aggregated);
 
   }

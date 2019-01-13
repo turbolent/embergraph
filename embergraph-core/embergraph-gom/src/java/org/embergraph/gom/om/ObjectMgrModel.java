@@ -78,7 +78,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
    * predicates within the scope of a given object manager.
    */
   private final ConcurrentHashMap<EmbergraphURI, EmbergraphURI> m_internedKeys =
-      new ConcurrentHashMap<EmbergraphURI, EmbergraphURI>();
+      new ConcurrentHashMap<>();
 
   /*
    * We need to maintain a dirty list in order to pin object references that are dirty. On commit,
@@ -87,7 +87,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
    */
   // private final List<GPO> m_dirtyGPOs = new LinkedList<GPO>();
   // Sample code indicates that an ArrayList is less overhead than a LinkedList
-  private final List<GPO> m_dirtyGPOs = new ArrayList<GPO>();
+  private final List<GPO> m_dirtyGPOs = new ArrayList<>();
 
   private final URI s_nmeMgr;
 
@@ -133,7 +133,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     /*
      * Note: This sets the hard reference queue capacity.
      */
-    m_dict = new ConcurrentWeakValueCache<Object, IGPO>(1000 /* queueCapacity */);
+    m_dict = new ConcurrentWeakValueCache<>(1000 /* queueCapacity */);
   }
 
   public IGPO getDefaultNameMgr() {
@@ -251,8 +251,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
       /*
        * Gather up and apply the edit set (statements added and removed).
        */
-      final List<Statement> inserts = new LinkedList<Statement>();
-      final List<Statement> removes = new LinkedList<Statement>();
+      final List<Statement> inserts = new LinkedList<>();
+      final List<Statement> removes = new LinkedList<>();
 
       final Iterator<GPO> updates = m_dirtyGPOs.iterator();
 
@@ -434,7 +434,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
     } else {
 
-      map = new HashMap<Resource, IGPO>();
+      map = new HashMap<>();
     }
 
     try {

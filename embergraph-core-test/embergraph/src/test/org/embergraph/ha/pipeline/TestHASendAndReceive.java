@@ -64,7 +64,7 @@ public class TestHASendAndReceive extends AbstractHASendAndReceiveTestCase {
 
     final InetSocketAddress addr = new InetSocketAddress(port);
 
-    receiveService = new HAReceiveService<HAMessageWrapper>(addr, null);
+    receiveService = new HAReceiveService<>(addr, null);
     receiveService.start();
 
     sendService = new HASendService();

@@ -190,7 +190,7 @@ public class ASTEvalHelper {
     final IVariable<?>[] projected =
         astContainer.getOptimizedAST().getProjection().getProjectionVars();
 
-    final List<String> projectedSet = new LinkedList<String>();
+    final List<String> projectedSet = new LinkedList<>();
 
     for (IVariable<?> var : projected) projectedSet.add(var.getName());
 
@@ -268,7 +268,7 @@ public class ASTEvalHelper {
       final IVariable<?>[] projected =
           astContainer.getOptimizedAST().getProjection().getProjectionVars();
 
-      projectedSet = new LinkedList<String>();
+      projectedSet = new LinkedList<>();
 
       for (IVariable<?> var : projected) projectedSet.add(var.getName());
 
@@ -414,7 +414,7 @@ public class ASTEvalHelper {
      * top-level DESCRIBE query.
      */
     final Map<String, EmbergraphBNode> bnodes =
-        (isDescribe ? new LinkedHashMap<String, EmbergraphBNode>() : null);
+        (isDescribe ? new LinkedHashMap<>() : null);
 
     final IDescribeCache describeCache;
     final Set<IVariable<?>> describeVars;
@@ -433,7 +433,7 @@ public class ASTEvalHelper {
        * constants by an AssignmentNode (DESCRIBE uri).
        */
       describeVars =
-          astContainer.getOriginalAST().getProjectedVars(new LinkedHashSet<IVariable<?>>());
+          astContainer.getOriginalAST().getProjectedVars(new LinkedHashSet<>());
 
     } else {
 
@@ -496,7 +496,7 @@ public class ASTEvalHelper {
 
         // Concurrency safe set.
         describedResources =
-            Collections.newSetFromMap(new ConcurrentHashMap<EmbergraphValue, Boolean>());
+            Collections.newSetFromMap(new ConcurrentHashMap<>());
 
         // Collect the bindings on those variables.
         solutions2 =
@@ -721,7 +721,7 @@ public class ASTEvalHelper {
 
       final IV iv = ((EmbergraphValue) binding.getValue()).getIV();
 
-      final IConstant<IV> val = new Constant<IV>(iv);
+      final IConstant<IV> val = new Constant<>(iv);
 
       bindingSet.set(var, val);
     }
@@ -784,7 +784,7 @@ public class ASTEvalHelper {
 
     // Wrap in an IChunkedOrderedIterator
     final IChunkedOrderedIterator<IBindingSet> it2 =
-        new ChunkedWrappedIterator<IBindingSet>(it1, chunkCapacity, IBindingSet.class);
+        new ChunkedWrappedIterator<>(it1, chunkCapacity, IBindingSet.class);
 
     final CloseableIteration<BindingSet, QueryEvaluationException> it3;
 
@@ -893,11 +893,11 @@ public class ASTEvalHelper {
     final ICloseableIterator<IBindingSet[]> it1 = runningQuery.iterator();
 
     // Dechunkify the original iterator
-    final ICloseableIterator<IBindingSet> it2 = new Dechunkerator<IBindingSet>(it1);
+    final ICloseableIterator<IBindingSet> it2 = new Dechunkerator<>(it1);
 
     // Monitor IRunningQuery and cancel if Sesame iterator is closed.
     final ICloseableIterator<IBindingSet> it3 =
-        new RunningQueryCloseableIterator<IBindingSet>(runningQuery, it2);
+        new RunningQueryCloseableIterator<>(runningQuery, it2);
 
     return it3;
   }

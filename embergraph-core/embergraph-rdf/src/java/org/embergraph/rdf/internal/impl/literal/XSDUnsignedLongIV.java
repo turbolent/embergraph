@@ -45,7 +45,7 @@ public class XSDUnsignedLongIV<V extends EmbergraphLiteral>
 
   public IV<V, BigInteger> clone(final boolean clearCache) {
 
-    final XSDUnsignedLongIV<V> tmp = new XSDUnsignedLongIV<V>(value);
+    final XSDUnsignedLongIV<V> tmp = new XSDUnsignedLongIV<>(value);
 
     if (!clearCache) {
 

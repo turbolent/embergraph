@@ -27,7 +27,7 @@ class BucketPageTupleIterator<E> implements ITupleIterator<E> {
 
     if (src == null) throw new IllegalArgumentException();
 
-    this.tuple = new Tuple<E>(htree, flags);
+    this.tuple = new Tuple<>(htree, flags);
 
     this.src = src;
   }

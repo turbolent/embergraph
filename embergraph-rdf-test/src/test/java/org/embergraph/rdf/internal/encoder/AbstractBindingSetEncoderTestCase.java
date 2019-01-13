@@ -163,14 +163,14 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     super.setUp();
 
-    termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, 12 /* termId */);
+    termId = new TermId<>(VTE.LITERAL, 12 /* termId */);
     termId.setValue(valueFactory.createLiteral("abc"));
 
-    termId2 = new TermId<EmbergraphLiteral>(VTE.LITERAL, 36 /* termId */);
+    termId2 = new TermId<>(VTE.LITERAL, 36 /* termId */);
     termId2.setValue(valueFactory.createLiteral("xyz"));
 
     blobIV =
-        new BlobIV<EmbergraphLiteral>(
+        new BlobIV<>(
             VTE.LITERAL, 912 /* hash */, (short) 0 /* collisionCounter */);
     blobIV.setValue(valueFactory.createLiteral("bigfoo"));
 
@@ -189,13 +189,13 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
     mockIVCarryingBNode = (TermId) TermId.mockIV(VTE.BNODE);
     mockIVCarryingBNode.setValue(valueFactory.createBNode("_:green_as_bnode"));
 
-    inlineIV1 = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
+    inlineIV1 = new XSDIntegerIV<>(BigInteger.valueOf(100));
     inlineIV1.setValue(valueFactory.createLiteral("100", XSD.INTEGER));
 
-    inlineIV2 = new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(100));
+    inlineIV2 = new XSDDecimalIV<>(BigDecimal.valueOf(100));
     inlineIV2.setValue(valueFactory.createLiteral("100.0", XSD.DOUBLE));
 
-    inlineIV3 = new XSDNumericIV<EmbergraphLiteral>(2);
+    inlineIV3 = new XSDNumericIV<>(2);
     inlineIV3.setValue(valueFactory.createLiteral("2", XSD.SHORT));
 
     inlineIV4 = XSDBooleanIV.valueOf(true);
@@ -376,7 +376,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
   public void test_encodeNonEmpty() {
 
     final IBindingSet expected = new ListBindingSet();
-    expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+    expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
 
     doEncodeDecodeTest(expected);
   }
@@ -385,11 +385,11 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
   public void test_encodeNonEmpty2() {
 
     final IBindingSet expected = new ListBindingSet();
-    expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+    expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
     expected.set(
         Var.var("y"),
         new Constant<IV>(
-            new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+            new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
     doEncodeDecodeTest(expected);
   }
@@ -400,18 +400,18 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
       expected.set(
           Var.var("y"),
           new Constant<IV>(
-              new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+              new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
       doEncodeDecodeTest(expected);
     }
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(99)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(99)));
 
       doEncodeDecodeTest(expected);
     }
@@ -423,18 +423,18 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
 
       doEncodeDecodeTest(expected);
     }
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(99)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(99)));
       expected.set(
           Var.var("y"),
           new Constant<IV>(
-              new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+              new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
       doEncodeDecodeTest(expected);
     }
@@ -446,7 +446,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
 
       doEncodeDecodeTest(expected);
     }
@@ -459,11 +459,11 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(99)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(99)));
       expected.set(
           Var.var("y"),
           new Constant<IV>(
-              new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+              new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
       doEncodeDecodeTest(expected);
     }
@@ -481,18 +481,18 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
 
       doEncodeDecodeTest(expected);
     }
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(99)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(99)));
       expected.set(
           Var.var("y"),
           new Constant<IV>(
-              new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+              new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
       doEncodeDecodeTest(expected);
     }
@@ -504,18 +504,18 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(12)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(12)));
 
       doEncodeDecodeTest(expected);
     }
 
     {
       final IBindingSet expected = new ListBindingSet();
-      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<EmbergraphLiteral>(99)));
+      expected.set(Var.var("x"), new Constant<IV>(new XSDNumericIV<>(99)));
       expected.set(
           Var.var("y"),
           new Constant<IV>(
-              new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org"))));
+              new FullyInlineURIIV<>(new URIImpl("http://www.embergraph.org"))));
 
       doEncodeDecodeTest(expected);
     }
@@ -718,7 +718,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
   public void test_solutionWithThreeBindingsSomeNotCached1() {
 
     final TermId<EmbergraphLiteral> termIdNoCache =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, 912 /* termId */);
+        new TermId<>(VTE.LITERAL, 912 /* termId */);
 
     {
       final IBindingSet expected = new ListBindingSet();
@@ -762,7 +762,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
   public void test_solutionWithThreeBindingsSomeNotCachedSomeInline() {
 
     final TermId<EmbergraphLiteral> termIdNoCache =
-        new TermId<EmbergraphLiteral>(VTE.LITERAL, 912 /* termId */);
+        new TermId<>(VTE.LITERAL, 912 /* termId */);
 
     {
       final IBindingSet expected = new ListBindingSet();
@@ -898,7 +898,7 @@ public abstract class AbstractBindingSetEncoderTestCase extends TestCase2 {
     final short collisionCounter = (short) r.nextInt(12);
 
     final BlobIV<EmbergraphLiteral> blobIV2 =
-        new BlobIV<EmbergraphLiteral>(VTE.LITERAL, hash, collisionCounter);
+        new BlobIV<>(VTE.LITERAL, hash, collisionCounter);
 
     blobIV2.setValue(valueFactory.createLiteral(s));
 

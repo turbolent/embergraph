@@ -120,7 +120,7 @@ public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
 
       final TupleQueryResult tqr = q.evaluate();
 
-      final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+      final Collection<BindingSet> solution = new LinkedList<>();
       // [myDate="2014-04-11"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="3"^^<http://www.w3.org/2001/XMLSchema#integer>]
       // [myDate="2014-05-29"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
       solution.add(

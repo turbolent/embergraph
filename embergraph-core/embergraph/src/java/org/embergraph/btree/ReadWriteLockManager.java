@@ -81,7 +81,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
 
   /** Canonicalizing mapping for the {@link ReadWriteLockManager} objects. */
   private static final WeakHashMap<ICommitter, ReadWriteLockManager> locks =
-      new WeakHashMap<ICommitter, ReadWriteLockManager>();
+      new WeakHashMap<>();
 
   @Override
   public int getReadLockCount() {
@@ -199,7 +199,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
       final int concurrencyLevel = initialCapacity;
       final float loadFactor = .75f;
       this.threadLockMap =
-          new ConcurrentHashMap<Long, Integer>(initialCapacity, loadFactor, concurrencyLevel);
+          new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
     }
 
     @Override

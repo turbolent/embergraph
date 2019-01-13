@@ -114,7 +114,7 @@ public class GenerateBarData {
                 employee,
                 employees[getUniformInteger(1.0, 0, totalServers)],
                 orderGraph));
-        final ArrayList<URI> items = new ArrayList<URI>();
+        final ArrayList<URI> items = new ArrayList<>();
         for (int k = 0; k < getUniformInteger(0.90, 1, maxItemsPerOrder); k++) {
           totalItems++;
           final URI orderItem =

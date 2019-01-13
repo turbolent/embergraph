@@ -208,7 +208,7 @@ public class SliceOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new SliceTask(this, context));
+    return new FutureTask<>(new SliceTask(this, context));
   }
 
   /** Copy the source to the sink or the alternative sink depending on the condition. */
@@ -267,7 +267,7 @@ public class SliceOp extends PipelineOp {
          * not buffer more than min(#source,#needed).
          */
         final UnsynchronizedArrayBuffer<IBindingSet> out =
-            new UnsynchronizedArrayBuffer<IBindingSet>(
+            new UnsynchronizedArrayBuffer<>(
                 sink, IBindingSet.class, op.getChunkCapacity());
 
         while (source.hasNext()) {

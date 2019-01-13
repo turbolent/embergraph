@@ -64,7 +64,7 @@ public class JoinedAndNonJoinedServices implements Serializable, IJoinedAndNonJo
     }
 
     // The services in the write pipeline (in any order).
-    nonJoinedPipelineServiceIds = new LinkedHashSet<UUID>(Arrays.asList(quorum.getPipeline()));
+    nonJoinedPipelineServiceIds = new LinkedHashSet<>(Arrays.asList(quorum.getPipeline()));
 
     // Remove all services that are joined from this collection.
     for (UUID joinedServiceId : joinedServiceIds) {

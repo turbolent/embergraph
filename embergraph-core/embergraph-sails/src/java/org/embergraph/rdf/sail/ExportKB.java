@@ -260,7 +260,7 @@ public class ExportKB {
   static List<String> getNamespaces(final IIndexManager indexManager) {
 
     // the triple store namespaces.
-    final List<String> namespaces = new LinkedList<String>();
+    final List<String> namespaces = new LinkedList<>();
 
     // scan the relation schema in the global row store.
     @SuppressWarnings("unchecked")
@@ -339,7 +339,7 @@ public class ExportKB {
       throw new IllegalArgumentException();
     }
 
-    final Map<String, String> out = new LinkedHashMap<String, String>();
+    final Map<String, String> out = new LinkedHashMap<>();
 
     final Enumeration<?> e = properties.propertyNames();
 
@@ -395,7 +395,7 @@ public class ExportKB {
     RDFFormat format = null;
     File propertyFile = null;
     File outdir = new File(".");
-    final List<String> namespaces = new LinkedList<String>();
+    final List<String> namespaces = new LinkedList<>();
 
     // Parse options.
     int i = 0;

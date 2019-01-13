@@ -204,13 +204,13 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(org);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(org);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
 
     final MockGroupByState expected =
         new MockGroupByState(
@@ -252,13 +252,13 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(org);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(newVar);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
 
     final MockGroupByState expected =
         new MockGroupByState(
@@ -303,14 +303,14 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(org);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(org);
     selectVars.add(totalPrice);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(lprice);
 
     final MockGroupByState expected =
@@ -355,12 +355,12 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(totalPrice);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(lprice);
 
     final MockGroupByState expected =
@@ -407,13 +407,13 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(org2);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(org2);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
 
     final MockGroupByState expected =
         new MockGroupByState(
@@ -458,13 +458,13 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(index);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(index);
 
-    final LinkedHashSet<IVariable<?>> havingVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> havingVars = new LinkedHashSet<>();
 
     final MockGroupByState expected =
         new MockGroupByState(
@@ -509,17 +509,17 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having =
         new IConstraint[] {
-          new SPARQLConstraint<XSDBooleanIV>(
-              new CompareBOp(x, new Constant<XSDNumericIV>(new XSDNumericIV(10)), CompareOp.LT))
+            new SPARQLConstraint<>(
+                new CompareBOp(x, new Constant<>(new XSDNumericIV(10)), CompareOp.LT))
         };
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(z);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(x);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(y);
 
     final MockGroupByState expected =
@@ -565,20 +565,20 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having =
         new IConstraint[] {
-          new SPARQLConstraint<XSDBooleanIV>(
-              new CompareBOp(
-                  new SUM(false /* distinct */, (IValueExpression<IV>) y),
-                  new Constant<XSDNumericIV>(new XSDNumericIV(10)),
-                  CompareOp.LT))
+            new SPARQLConstraint<>(
+                new CompareBOp(
+                    new SUM(false /* distinct */, (IValueExpression<IV>) y),
+                    new Constant<>(new XSDNumericIV(10)),
+                    CompareOp.LT))
         };
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(z);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(x);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(y);
 
     final MockGroupByState expected =
@@ -634,13 +634,13 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(a);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(z);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(x);
     columnVars.add(y);
 
@@ -695,14 +695,14 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(b);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(z);
     selectVars.add(a);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(y);
     columnVars.add(x);
 
@@ -788,17 +788,17 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having =
         new IConstraint[] {
-          new SPARQLConstraint<XSDBooleanIV>(
-              new CompareBOp(x, new Constant<XSDNumericIV>(new XSDNumericIV(10)), CompareOp.LT))
+            new SPARQLConstraint<>(
+                new CompareBOp(x, new Constant<>(new XSDNumericIV(10)), CompareOp.LT))
         };
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(z);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(x);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(y);
 
     final MockGroupByState expected =
@@ -844,21 +844,21 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having =
         new IConstraint[] {
-          new SPARQLConstraint<XSDBooleanIV>(
-              new CompareBOp(
-                  new /* Conditional */ Bind(
-                      x, new SUM(true /* distinct */, (IValueExpression<IV>) y)),
-                  new Constant<XSDNumericIV>(new XSDNumericIV(10)),
-                  CompareOp.LT))
+            new SPARQLConstraint<>(
+                new CompareBOp(
+                    new /* Conditional */ Bind(
+                        x, new SUM(true /* distinct */, (IValueExpression<IV>) y)),
+                    new Constant<>(new XSDNumericIV(10)),
+                    CompareOp.LT))
         };
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
     groupByVars.add(z);
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(x);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
     columnVars.add(y);
 
     final MockGroupByState expected =
@@ -903,12 +903,12 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having = null;
 
-    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> groupByVars = new LinkedHashSet<>();
 
-    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> selectVars = new LinkedHashSet<>();
     selectVars.add(x);
 
-    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<IVariable<?>>();
+    final LinkedHashSet<IVariable<?>> columnVars = new LinkedHashSet<>();
 
     final MockGroupByState expected =
         new MockGroupByState(
@@ -940,12 +940,12 @@ public class TestGroupByState extends TestCase2 {
 
     final IConstraint[] having =
         new IConstraint[] {
-          new SPARQLConstraint<XSDBooleanIV>(
-              new CompareBOp(
-                  new /* Conditional */ Bind(
-                      x, new SUM(true /* distinct */, (IValueExpression<IV>) y)),
-                  new Constant<XSDNumericIV>(new XSDNumericIV(10)),
-                  CompareOp.LT))
+            new SPARQLConstraint<>(
+                new CompareBOp(
+                    new /* Conditional */ Bind(
+                        x, new SUM(true /* distinct */, (IValueExpression<IV>) y)),
+                    new Constant<>(new XSDNumericIV(10)),
+                    CompareOp.LT))
         };
 
     // SELECT may not be null.

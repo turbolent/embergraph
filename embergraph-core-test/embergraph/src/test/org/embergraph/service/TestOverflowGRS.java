@@ -148,7 +148,7 @@ public class TestOverflowGRS extends AbstractEmbeddedFederationTestCase {
      * very small and the total bytes on the disk for the Journal is not
      * enough to trigger an overflow.
      */
-    final Map<String, Object> propertySet = new LinkedHashMap<String, Object>();
+    final Map<String, Object> propertySet = new LinkedHashMap<>();
     {
       for (int i = 0; i < N; i++) {
 

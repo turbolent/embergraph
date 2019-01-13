@@ -89,9 +89,9 @@ public class TestSubstrBOp extends ProxyTestCase {
 
         final IV actual =
             new SubstrBOp(
-                    new Constant<IV>(plain_text.getIV()),
-                    new Constant<IV>(_1),
-                    new Constant<IV>(_3),
+                new Constant<>(plain_text.getIV()),
+                new Constant<>(_1),
+                new Constant<>(_3),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -107,9 +107,9 @@ public class TestSubstrBOp extends ProxyTestCase {
 
         final IV actual =
             new SubstrBOp(
-                    new Constant<IV>(plain_text.getIV()),
-                    new Constant<IV>(_1),
-                    new Constant<IV>(_9999),
+                new Constant<>(plain_text.getIV()),
+                new Constant<>(_1),
+                new Constant<>(_9999),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 
@@ -125,9 +125,9 @@ public class TestSubstrBOp extends ProxyTestCase {
 
         final IV actual =
             new SubstrBOp(
-                    new Constant<IV>(plain_text.getIV()),
-                    new Constant<IV>(_0),
-                    new Constant<IV>(_3),
+                new Constant<>(plain_text.getIV()),
+                new Constant<>(_0),
+                new Constant<>(_3),
                     new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED))
                 .get(emptyBindingSet);
 

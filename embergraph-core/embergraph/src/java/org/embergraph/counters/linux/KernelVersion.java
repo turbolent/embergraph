@@ -54,7 +54,7 @@ public class KernelVersion {
    */
   public static KernelVersion get() {
 
-    final List<String> commands = new LinkedList<String>();
+    final List<String> commands = new LinkedList<>();
 
     final Process pr;
 

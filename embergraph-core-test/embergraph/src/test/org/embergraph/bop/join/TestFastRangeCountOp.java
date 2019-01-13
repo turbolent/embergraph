@@ -109,7 +109,7 @@ public class TestFastRangeCountOp extends TestCase2 {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -134,8 +134,8 @@ public class TestFastRangeCountOp extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*
@@ -151,16 +151,16 @@ public class TestFastRangeCountOp extends TestCase2 {
     final int predId = 3;
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final FastRangeCountOp<E> query =
-        new FastRangeCountOp<E>(
-            new BOp[] {}, // args
+        new FastRangeCountOp<>(
+            new BOp[]{}, // args
             new NV(FastRangeCountOp.Annotations.BOP_ID, joinId),
             new NV(FastRangeCountOp.Annotations.PREDICATE, predOp),
             new NV(FastRangeCountOp.Annotations.COUNT_VAR, Var.var("count")));
@@ -171,21 +171,21 @@ public class TestFastRangeCountOp extends TestCase2 {
           new ListBindingSet(
               new IVariable[] {Var.var("count")},
               new IConstant[] {
-                new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(2L)))
+                  new Constant<>(new XSDIntegerIV(BigInteger.valueOf(2L)))
               }),
         };
 
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet()}});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{new IBindingSet[]{new ListBindingSet()}});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,

@@ -209,7 +209,7 @@ public class LinkSet implements ILinkSet {
       }
 
       if (entry == null) {
-        return new EmptyIterator<IGPO>();
+        return new EmptyIterator<>();
       }
 
       return new Iterator<IGPO>() {
@@ -282,7 +282,7 @@ public class LinkSet implements ILinkSet {
   /** Eagerly streams materialized objects into an array */
   @Override
   public Object[] toArray() {
-    final ArrayList<Object> out = new ArrayList<Object>();
+    final ArrayList<Object> out = new ArrayList<>();
 
     final Iterator<IGPO> gpos = iterator();
     while (gpos.hasNext()) {

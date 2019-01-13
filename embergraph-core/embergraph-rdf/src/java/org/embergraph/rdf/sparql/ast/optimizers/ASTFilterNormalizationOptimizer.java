@@ -85,7 +85,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
 
     // substitution map (collected in upcoming for loop)
     final Map<FilterNode, List<List<FilterNode>>> subst =
-        new HashMap<FilterNode, List<List<FilterNode>>>();
+        new HashMap<>();
 
     for (IGroupMemberNode child : group) {
 
@@ -104,12 +104,12 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
           if (filterAsCNF != null) {
 
             final List<FilterNode> splittedFilterNodes =
-                constructFiltersForValueExpressionNode(filterAsCNF, new ArrayList<FilterNode>());
+                constructFiltersForValueExpressionNode(filterAsCNF, new ArrayList<>());
 
             if (splittedFilterNodes != null) {
 
               if (!subst.containsKey(filterNode)) {
-                subst.put(filterNode, new ArrayList<List<FilterNode>>());
+                subst.put(filterNode, new ArrayList<>());
               }
 
               final List<List<FilterNode>> values = subst.get(filterNode);
@@ -144,18 +144,18 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
       AST2BOpContext ctx, StaticAnalysis sa, IBindingSet[] bSets, JoinGroupNode group) {
 
     // variables that are definitely bound *after* executing the group
-    final Set<IVariable<?>> definitelyProd = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> definitelyProd = new HashSet<>();
     sa.getDefinitelyIncomingBindings(group, definitelyProd);
     sa.getDefinitelyProducedBindings(group, definitelyProd, true);
 
     // variables that are maybe bound *after* executing the group
-    final Set<IVariable<?>> maybeProd = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> maybeProd = new HashSet<>();
     sa.getMaybeIncomingBindings(group, maybeProd);
     sa.getMaybeProducedBindings(group, maybeProd, true);
 
     // record the filters we've already seen, to remove duplicates
-    final Set<FilterNode> alreadySeen = new HashSet<FilterNode>();
-    final List<FilterNode> filtersToRemove = new ArrayList<FilterNode>();
+    final Set<FilterNode> alreadySeen = new HashSet<>();
+    final List<FilterNode> filtersToRemove = new ArrayList<>();
     for (int i = group.size() - 1; i >= 0; i--) {
 
       final BOp child = group.get(i);
@@ -334,7 +334,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
       final IValueExpressionNode vexp, final List<FilterNode> filters) {
 
     final List<IValueExpressionNode> topLevelConjuncts =
-        StaticAnalysis.extractToplevelConjuncts(vexp, new ArrayList<IValueExpressionNode>());
+        StaticAnalysis.extractToplevelConjuncts(vexp, new ArrayList<>());
 
     for (IValueExpressionNode toplevelConjunct : topLevelConjuncts) {
       filters.add(new FilterNode(toplevelConjunct));

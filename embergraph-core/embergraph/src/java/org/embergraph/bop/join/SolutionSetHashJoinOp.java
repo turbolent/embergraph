@@ -142,7 +142,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask<IBindingSet>(context, this));
+    return new FutureTask<>(new ChunkTask<IBindingSet>(context, this));
   }
 
   /** Task executing on the node. */
@@ -266,7 +266,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
       stats.accessPathRangeCount.add(state.getRightSolutionCount());
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       state.hashJoin2(context.getSource(), stats, unsyncBuffer, constraints);
 
@@ -303,7 +303,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
             final AbstractUnsynchronizedArrayBuffer<IBindingSet> unsyncBuffer2 =
                 sink2 == null
                     ? unsyncBuffer
-                    : new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink2);
+                    : new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink2);
 
             state.outputOptionals(unsyncBuffer2);
 

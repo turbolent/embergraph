@@ -18,7 +18,7 @@ public class ShiftAddXorSignedStringMapTest extends TestCase {
       for (int i = s.length; i-- != 0; ) s[(int) (v[i] = i)] = Integer.toString(i);
 
       // Test with mph
-      Object2LongOpenHashMap<String> mph = new Object2LongOpenHashMap<String>(s, v);
+      Object2LongOpenHashMap<String> mph = new Object2LongOpenHashMap<>(s, v);
       ShiftAddXorSignedStringMap map =
           new ShiftAddXorSignedStringMap(Arrays.asList(s).iterator(), mph, width);
 

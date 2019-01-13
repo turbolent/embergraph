@@ -125,7 +125,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
          * the backing list.
          */
         if (filters == null) {
-          filters = Collections.synchronizedList(new LinkedList<IFilter>());
+          filters = Collections.synchronizedList(new LinkedList<>());
         }
       }
     }

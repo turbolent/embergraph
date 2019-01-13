@@ -126,7 +126,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
   @Override
   public ITupleIterator<E> filterOnce(Iterator src, Object context) {
 
-    return new PrefixFilterator<E>((ITupleCursor<E>) src, context, this);
+    return new PrefixFilterator<>((ITupleCursor<E>) src, context, this);
   }
 
   private static class PrefixFilterator<E> implements ITupleIterator<E> {

@@ -46,14 +46,14 @@ public abstract class BackchainOwlSameAsIterator implements IChunkedOrderedItera
   }
 
   protected Set<IV> getSelfAndSames(IV iv) {
-    Set<IV> selfAndSames = new TreeSet<IV>();
+    Set<IV> selfAndSames = new TreeSet<>();
     selfAndSames.add(iv);
     getSames(iv, selfAndSames);
     return selfAndSames;
   }
 
   protected Set<IV> getSames(IV iv) {
-    Set<IV> sames = new TreeSet<IV>();
+    Set<IV> sames = new TreeSet<>();
     sames.add(iv);
     getSames(iv, sames);
     sames.remove(iv);

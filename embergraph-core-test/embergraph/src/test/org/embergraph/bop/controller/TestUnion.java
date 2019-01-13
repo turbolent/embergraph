@@ -107,7 +107,7 @@ public class TestUnion extends TestCase2 {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -219,8 +219,8 @@ public class TestUnion extends TestCase2 {
      * Create an initial non-empty binding set.
      */
     final IBindingSet bset = new ListBindingSet();
-    bset.set(Var.var("x"), new Constant<String>("John"));
-    bset.set(Var.var("y"), new Constant<String>("Mary"));
+    bset.set(Var.var("x"), new Constant<>("John"));
+    bset.set(Var.var("y"), new Constant<>("Mary"));
 
     // the expected solutions.
     final IBindingSet[] expected =
@@ -253,15 +253,15 @@ public class TestUnion extends TestCase2 {
     final IBindingSet[] bindingSets1 = new IBindingSet[1];
     {
       final IBindingSet tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Leon"));
+      tmp.set(x, new Constant<>("Leon"));
       bindingSets1[0] = tmp;
     }
 
     final IBindingSet[] bindingSets2 = new IBindingSet[1];
     {
       final IBindingSet tmp = new ListBindingSet();
-      tmp.set(x, new Constant<String>("Mary"));
-      tmp.set(y, new Constant<String>("John"));
+      tmp.set(x, new Constant<>("Mary"));
+      tmp.set(y, new Constant<>("John"));
       bindingSets2[0] = tmp;
     }
 
@@ -308,10 +308,10 @@ public class TestUnion extends TestCase2 {
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Leon")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Leon")}),
           new ListBindingSet(
               new IVariable[] {x, y},
-              new IConstant[] {new Constant<String>("Mary"), new Constant<String>("John")}),
+              new IConstant[] {new Constant<>("Mary"), new Constant<>("John")}),
         };
 
     final IRunningQuery runningQuery = queryEngine.eval(query);

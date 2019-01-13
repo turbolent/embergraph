@@ -178,7 +178,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     final Iterator<BOp> itr = BOpUtility.preOrderIteratorWithAnnotations(queryRoot);
 
     // Note: working around a ConcurrentModificationException.
-    final List<ASTBase> list = new LinkedList<ASTBase>();
+    final List<ASTBase> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -695,7 +695,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     final Iterator<BOp> itr = BOpUtility.preOrderIteratorWithAnnotations(queryRoot);
 
     // Note: working around a ConcurrentModificationException.
-    final List<ASTBase> list = new LinkedList<ASTBase>();
+    final List<ASTBase> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 

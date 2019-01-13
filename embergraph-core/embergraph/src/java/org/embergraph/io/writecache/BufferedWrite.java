@@ -50,7 +50,7 @@ public class BufferedWrite {
 
   /** The direct {@link ByteBuffer} used to combine writes which are contiguous into a single IO. */
   //	private final ByteBuffer m_data;
-  private final AtomicReference<IBufferAccess> m_data = new AtomicReference<IBufferAccess>();
+  private final AtomicReference<IBufferAccess> m_data = new AtomicReference<>();
 
   /*
    * The offset on the backing channel at which the data in {@link #m_data} will be written when it

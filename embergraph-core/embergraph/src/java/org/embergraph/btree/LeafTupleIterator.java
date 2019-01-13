@@ -55,7 +55,7 @@ public class LeafTupleIterator<E> implements ITupleIterator<E> {
 
   public LeafTupleIterator(Leaf leaf) {
 
-    this(leaf, new Tuple<E>(leaf.btree, IRangeQuery.DEFAULT), null, null);
+    this(leaf, new Tuple<>(leaf.btree, IRangeQuery.DEFAULT), null, null);
   }
 
   public LeafTupleIterator(final Leaf leaf, final AbstractTuple<E> tuple) {

@@ -22,8 +22,8 @@ public class TestSolutionSetStatserator extends AbstractSolutionSetStatsTestCase
 
     final SolutionSetStatserator itr =
         new SolutionSetStatserator(
-            new CloseableIteratorWrapper<IBindingSet[]>(
-                new SingleValueIterator<IBindingSet[]>(bindingSets)));
+            new CloseableIteratorWrapper<>(
+                new SingleValueIterator<>(bindingSets)));
     try {
       while (itr.hasNext()) {
         // statistics filter will observed each solution set[].

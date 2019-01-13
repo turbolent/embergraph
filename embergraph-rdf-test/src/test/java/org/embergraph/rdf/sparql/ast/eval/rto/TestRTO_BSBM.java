@@ -235,7 +235,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
     /*
      * Verify that the runtime optimizer produced the expected join path.
      */
-    final List<int[]> expectedOrders = new LinkedList<int[]>();
+    final List<int[]> expectedOrders = new LinkedList<>();
 
     expectedOrders.add(new int[] {1, 3, 2, 5, 4, 7, 6});
     expectedOrders.add(new int[] {1, 3, 5, 4, 2, 7, 6});
@@ -262,7 +262,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      * construction and join in one operator, there is one less operator
      * in the plan, so the indices decrease by one.
      */
-    final List<int[]> expectedOrders = new LinkedList<int[]>();
+    final List<int[]> expectedOrders = new LinkedList<>();
 
     expectedOrders.add(
         QueryHints.DEFAULT_PIPELINED_HASH_JOIN

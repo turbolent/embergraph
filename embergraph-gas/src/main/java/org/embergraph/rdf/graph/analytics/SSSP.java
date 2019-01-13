@@ -97,7 +97,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
      * The predecessor is the source vertex to visit a given target vertex with the minimum observed
      * distance.
      */
-    private final AtomicReference<Value> predecessor = new AtomicReference<Value>();
+    private final AtomicReference<Value> predecessor = new AtomicReference<>();
 
     /** Return the vertex preceding this vertex on the shortest path. */
     public Value predecessor() {
@@ -496,7 +496,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
 
     final IGASState<SSSP.VS, SSSP.ES, Integer> gasState = ctx.getGASState();
 
-    final Set<Value> retainSet = new HashSet<Value>();
+    final Set<Value> retainSet = new HashSet<>();
 
     for (Value v : targetVertices) {
 

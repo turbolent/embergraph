@@ -241,7 +241,7 @@ public class WORMStrategy extends AbstractBufferStrategy
    * <p>Note: This can not be final since it is potentially changed (in HA) when we install new root
    * blocks onto a store.
    */
-  private final AtomicReference<UUID> storeUUIDRef = new AtomicReference<UUID>();
+  private final AtomicReference<UUID> storeUUIDRef = new AtomicReference<>();
 
   @Override
   public boolean useChecksums() {
@@ -759,7 +759,7 @@ public class WORMStrategy extends AbstractBufferStrategy
   } // class StoreCounters
 
   /** Striped performance counters for this class. */
-  private final AtomicReference<StoreCounters> storeCounters = new AtomicReference<StoreCounters>();
+  private final AtomicReference<StoreCounters> storeCounters = new AtomicReference<>();
 
   /** Returns the striped performance counters for the store. */
   public StoreCounters<?> getStoreCounters() {

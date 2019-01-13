@@ -146,10 +146,10 @@ public class TestMatch extends AbstractTripleStoreTestCase {
        */
       {
         final Map<Literal, Map<String, Value>> expected =
-            new HashMap<Literal, Map<String, Value>>();
+            new HashMap<>();
 
         {
-          final Map<String, Value> bindingSet = new HashMap<String, Value>();
+          final Map<String, Value> bindingSet = new HashMap<>();
 
           bindingSet.put("s", bryan);
 
@@ -163,7 +163,7 @@ public class TestMatch extends AbstractTripleStoreTestCase {
         }
 
         {
-          final Map<String, Value> bindingSet = new HashMap<String, Value>();
+          final Map<String, Value> bindingSet = new HashMap<>();
 
           bindingSet.put("s", bryan);
 

@@ -99,7 +99,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
 
     this.schema = schema;
 
-    this.tuples = new TreeMap<TP, ITPV>();
+    this.tuples = new TreeMap<>();
 
     this.writeTime = timestamp;
   }
@@ -297,7 +297,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     }
 
     // note: maintains the original map order and has fast iterator.
-    final LinkedHashMap<String, TPV> m = new LinkedHashMap<String, TPV>();
+    final LinkedHashMap<String, TPV> m = new LinkedHashMap<>();
 
     final Iterator<ITPV> itr = tuples.values().iterator();
 
@@ -468,7 +468,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
    */
   public LinkedHashMap<String, Object> asMap(final long timestamp, final INameFilter filter) {
 
-    final LinkedHashMap<String, Object> m = new LinkedHashMap<String, Object>();
+    final LinkedHashMap<String, Object> m = new LinkedHashMap<>();
 
     final Iterator<ITPV> itr = tuples.values().iterator();
 
@@ -653,7 +653,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
 
     this.writeTime = in.readLong();
 
-    this.tuples = new TreeMap<TP, ITPV>();
+    this.tuples = new TreeMap<>();
 
     this.preconditionOk = in.readBoolean();
 

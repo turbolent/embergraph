@@ -114,7 +114,7 @@ public class TestPipelineJoin extends TestCase2 {
     };
 
     // insert data (the records are not pre-sorted).
-    rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
+    rel.insert(new ChunkedArrayIterator<>(a.length, a, null /* keyOrder */));
 
     // Do commit since not scale-out.
     store.commit();
@@ -139,8 +139,8 @@ public class TestPipelineJoin extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*
@@ -156,16 +156,16 @@ public class TestPipelineJoin extends TestCase2 {
     final int predId = 3;
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -173,22 +173,22 @@ public class TestPipelineJoin extends TestCase2 {
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("John")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("John")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("Paul")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet()}});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{new IBindingSet[]{new ListBindingSet()}});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -241,36 +241,36 @@ public class TestPipelineJoin extends TestCase2 {
     //				}));
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp)
             //				new NV(PipelineJoin.Annotations.COALESCE_DUPLICATE_ACCESS_PATHS, false)
-            );
+        );
 
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("y")},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Jack")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Jack")}),
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("y")},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Jack")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Jack")}),
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("z")},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Jill")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Jill")}),
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("z")},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Jill")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Jill")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
@@ -280,19 +280,19 @@ public class TestPipelineJoin extends TestCase2 {
       final IBindingSet bset1 = new ListBindingSet();
       final IBindingSet bset2 = new ListBindingSet();
 
-      bset1.set(Var.var("y"), new Constant<String>("Jack"));
-      bset2.set(Var.var("z"), new Constant<String>("Jill"));
+      bset1.set(Var.var("y"), new Constant<>("Jack"));
+      bset2.set(Var.var("z"), new Constant<>("Jill"));
 
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2}});
     }
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -341,16 +341,16 @@ public class TestPipelineJoin extends TestCase2 {
     final int predId = 3;
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -359,10 +359,10 @@ public class TestPipelineJoin extends TestCase2 {
         new IBindingSet[] {
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("y")},
-              new IConstant[] {new Constant<String>("John"), new Constant<String>("Jack")}),
+              new IConstant[] {new Constant<>("John"), new Constant<>("Jack")}),
           new ListBindingSet(
               new IVariable[] {Var.var("x"), Var.var("z")},
-              new IConstant[] {new Constant<String>("Paul"), new Constant<String>("Jill")}),
+              new IConstant[] {new Constant<>("Paul"), new Constant<>("Jill")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
@@ -372,22 +372,22 @@ public class TestPipelineJoin extends TestCase2 {
       final IBindingSet bset1 = new ListBindingSet();
       final IBindingSet bset2 = new ListBindingSet();
 
-      bset1.set(Var.var("x"), new Constant<String>("John"));
-      bset1.set(Var.var("y"), new Constant<String>("Jack"));
+      bset1.set(Var.var("x"), new Constant<>("John"));
+      bset1.set(Var.var("y"), new Constant<>("Jack"));
 
-      bset2.set(Var.var("x"), new Constant<String>("Paul"));
-      bset2.set(Var.var("z"), new Constant<String>("Jill"));
+      bset2.set(Var.var("x"), new Constant<>("Paul"));
+      bset2.set(Var.var("z"), new Constant<>("Jill"));
 
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2}});
     }
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -434,16 +434,16 @@ public class TestPipelineJoin extends TestCase2 {
     //				}));
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(Predicate.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
@@ -451,27 +451,27 @@ public class TestPipelineJoin extends TestCase2 {
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("John")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("John")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("Paul")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("John")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("John")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("x")}, new IConstant[] {new Constant<>("Paul")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     // submit TWO (2) empty binding sets in ONE (1) chunk.
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet(), new ListBindingSet()}});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{new IBindingSet[]{new ListBindingSet(), new ListBindingSet()}});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -527,7 +527,7 @@ public class TestPipelineJoin extends TestCase2 {
     final Var<String> y = Var.var("y");
     final IConstant<String>[] set =
         new IConstant[] {
-          new Constant<String>("John"),
+            new Constant<>("John"),
         };
 
     //        final int startId = 1;
@@ -539,40 +539,40 @@ public class TestPipelineJoin extends TestCase2 {
     //				}));
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), y},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(BOpBase.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
             new NV(
                 PipelineJoin.Annotations.CONSTRAINTS,
-                new IConstraint[] {Constraint.wrap(new INBinarySearch<String>(y, set))}));
+                new IConstraint[]{Constraint.wrap(new INBinarySearch<>(y, set))}));
 
     // the expected solution (just one).
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("John")})
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("John")})
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet()}});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{new IBindingSet[]{new ListBindingSet()}});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -634,21 +634,21 @@ public class TestPipelineJoin extends TestCase2 {
     final int predId = 3;
 
     final Predicate<E> predOp =
-        new Predicate<E>(
-            new IVariableOrConstant[] {x, y},
+        new Predicate<>(
+            new IVariableOrConstant[]{x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {
-              /*startOp*/
+        new PipelineJoin<>(
+            new BOp[]{
+                /*startOp*/
             },
             new NV(BOpBase.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, predOp),
-            new NV(PipelineJoin.Annotations.SELECT, new IVariable[] {y}));
+            new NV(PipelineJoin.Annotations.SELECT, new IVariable[]{y}));
 
     /*
      * The expected solutions.
@@ -656,28 +656,28 @@ public class TestPipelineJoin extends TestCase2 {
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("Mary")}),
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("Mary")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("Paul")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("John")}),
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("John")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("Paul")}),
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("Paul")}),
           new ListBindingSet(
-              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<String>("Leon")}),
+              new IVariable[] {Var.var("y")}, new IConstant[] {new Constant<>("Leon")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(
-            new IBindingSet[][] {new IBindingSet[] {new ListBindingSet()}});
+        new ThickAsynchronousIterator<>(
+            new IBindingSet[][]{new IBindingSet[]{new ListBindingSet()}});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -734,21 +734,21 @@ public class TestPipelineJoin extends TestCase2 {
     //				}));
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(BOpBase.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, pred)
             //				new NV(PipelineJoin.Annotations.OPTIONAL, Boolean.TRUE)
-            );
+        );
 
     /*
      * Setup the source with two initial binding sets. One has nothing bound
@@ -761,28 +761,28 @@ public class TestPipelineJoin extends TestCase2 {
       final IBindingSet bset1 = new ListBindingSet();
       final IBindingSet bset2 = new ListBindingSet();
       {
-        bset2.set(x, new Constant<String>("Luke"));
+        bset2.set(x, new Constant<>("Luke"));
       }
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2}});
     }
 
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("John")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Paul")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Luke")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("John")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Paul")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Luke")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -837,21 +837,21 @@ public class TestPipelineJoin extends TestCase2 {
     //				}));
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(BOpBase.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, pred)
             //				new NV(PipelineJoin.Annotations.OPTIONAL, Boolean.TRUE)
-            );
+        );
 
     /*
      * Setup the source with two initial binding sets. One has nothing bound
@@ -864,36 +864,36 @@ public class TestPipelineJoin extends TestCase2 {
       final IBindingSet bset1 = new ListBindingSet();
       final IBindingSet bset2 = new ListBindingSet();
       {
-        bset2.set(x, new Constant<String>("Luke"));
+        bset2.set(x, new Constant<>("Luke"));
       }
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2}});
     }
 
     // the expected solutions for the default sink.
     final IBindingSet[] expected =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("John")}),
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Paul")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("John")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Paul")}),
         };
 
     // the expected solutions for the alternative sink.
     final IBindingSet[] expected2 =
         new IBindingSet[] {
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Luke")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Luke")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IBlockingBuffer<IBindingSet[]> sink2 =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,
@@ -946,24 +946,24 @@ public class TestPipelineJoin extends TestCase2 {
     final int predId = 3;
 
     final Predicate<E> pred =
-        new Predicate<E>(
-            new IVariableOrConstant[] {new Constant<String>("Mary"), x},
+        new Predicate<>(
+            new IVariableOrConstant[]{new Constant<>("Mary"), x},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{namespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
-        new PipelineJoin<E>(
-            new BOp[] {}, // args
+        new PipelineJoin<>(
+            new BOp[]{}, // args
             new NV(BOpBase.Annotations.BOP_ID, joinId),
             new NV(PipelineJoin.Annotations.PREDICATE, pred),
             // constraint d != Paul
             new NV(
                 PipelineJoin.Annotations.CONSTRAINTS,
-                new IConstraint[] {
-                  Constraint.wrap(new NEConstant(x, new Constant<String>("Paul")))
+                new IConstraint[]{
+                    Constraint.wrap(new NEConstant(x, new Constant<>("Paul")))
                 }));
 
     /*
@@ -990,37 +990,37 @@ public class TestPipelineJoin extends TestCase2 {
 
       final IBindingSet bset2 = new ListBindingSet();
       {
-        bset2.set(x, new Constant<String>("Luke"));
+        bset2.set(x, new Constant<>("Luke"));
       }
 
       final IBindingSet bset3 = new ListBindingSet();
       {
-        bset3.set(x, new Constant<String>("Paul"));
+        bset3.set(x, new Constant<>("Paul"));
       }
 
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2, bset3}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2, bset3}});
     }
 
     // the expected solutions.
     final IBindingSet[] expected =
         new IBindingSet[] {
           // bset1 : one join passes the constraint, so no optionals.
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("John")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("John")}),
           // bset2 : join fails, but bset2 is output anyway as "optional".
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Luke")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Luke")}),
           // bset3: join fails, but bset3 is  output anyway as "optional".
-          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<String>("Paul")}),
+          new ListBindingSet(new IVariable[] {x}, new IConstant[] {new Constant<>("Paul")}),
         };
 
     final PipelineJoinStats stats = query.newStats();
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             new MockRunningQuery(null /* fed */, jnl /* indexManager */),
             -1 /* partitionId */,
             stats,

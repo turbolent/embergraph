@@ -24,7 +24,7 @@ public class OfflineIterableTest extends TestCase {
           }
         };
     OfflineIterable<MutableString, MutableString> stringIterable =
-        new OfflineIterable<MutableString, MutableString>(stringSerializer, new MutableString());
+        new OfflineIterable<>(stringSerializer, new MutableString());
     for (String s : strings) stringIterable.add(new MutableString(s));
     ObjectIterator<String> shouldBe = ObjectIterators.wrap(strings);
     for (MutableString m : stringIterable) assertEquals(new MutableString(shouldBe.next()), m);

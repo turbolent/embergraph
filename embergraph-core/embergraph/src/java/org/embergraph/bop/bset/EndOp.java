@@ -44,7 +44,7 @@ public class EndOp extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new OpTask(/*this, */ context));
+    return new FutureTask<>(new OpTask(/*this, */ context));
   }
 
   /** Copy the source to the sink or the alternative sink depending on the condition. */

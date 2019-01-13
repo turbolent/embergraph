@@ -149,7 +149,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     final CAT commits = new CAT();
     final CAT aborts = new CAT();
     final CAT nreadersDone = new CAT();
-    final AtomicReference<Throwable> failex = new AtomicReference<Throwable>(null);
+    final AtomicReference<Throwable> failex = new AtomicReference<>(null);
     // Set [true] iff there are no failures by the time we cancel the running tasks.
     final AtomicBoolean success = new AtomicBoolean(false);
     // log.warn("Journal: "+sail.getDatabase().getIndexManager()+",
@@ -719,7 +719,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     props.load(new FileInputStream(propertyFile));
 
     final AtomicReference<EmbergraphSail> sail =
-        new AtomicReference<EmbergraphSail>(new EmbergraphSail(props));
+        new AtomicReference<>(new EmbergraphSail(props));
 
     final int nreaderThreads = (int) getLongArg(args, "-nreaderthreads", 20); // 20
 

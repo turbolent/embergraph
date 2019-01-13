@@ -108,7 +108,7 @@ public class FederatedQueryEngine extends QueryEngine {
    *     on cluster </a>
    */
   private final AtomicReference<ExecutorService> acceptTaskService =
-      new AtomicReference<ExecutorService>();
+      new AtomicReference<>();
 
   //    /*
   //     * The {@link Future} for the task draining the {@link #chunkMaterializationQueue}.
@@ -745,7 +745,7 @@ public class FederatedQueryEngine extends QueryEngine {
 
   /** Cache for {@link #getQueryPeer(UUID)}. */
   private final ConcurrentHashMap<UUID, IQueryPeer> proxyMap =
-      new ConcurrentHashMap<UUID, IQueryPeer>();
+      new ConcurrentHashMap<>();
 
   /** Extension hook for new {@link QueryEngineCounters} instances. */
   @Override

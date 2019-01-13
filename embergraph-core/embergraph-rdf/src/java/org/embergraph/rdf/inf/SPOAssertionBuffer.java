@@ -184,7 +184,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
             db.addStatements(
                 focusStore,
                 true /* copyOnly */,
-                new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+                new ChunkedArrayIterator<>(numStmts, stmts, null /*keyOrder*/),
                 null /*filter*/);
 
       } else {
@@ -195,7 +195,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
                 focusStore,
                 true /* copyOnly */,
                 null /* filter */,
-                new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+                new ChunkedArrayIterator<>(numStmts, stmts, null /*keyOrder*/),
                 changeLog);
       }
 
@@ -207,7 +207,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
        * latency when also writing justifications.
        */
 
-      final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(2);
+      final List<Callable<Long>> tasks = new ArrayList<>(2);
 
       /*
        * Note: we reject using the filter before stmts or
@@ -224,7 +224,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
               getTermDatabase(),
               focusStore,
               false /* copyOnly */,
-              new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /*keyOrder*/),
+              new ChunkedArrayIterator<>(numStmts, stmts, null /*keyOrder*/),
               nwritten,
               changeLog));
 
@@ -233,7 +233,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
       tasks.add(
           new JustificationWriter(
               focusStore,
-              new ChunkedArrayIterator<Justification>(
+              new ChunkedArrayIterator<>(
                   numJustifications, justifications, null /* keyOrder */),
               nwrittenj));
 

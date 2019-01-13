@@ -204,7 +204,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
        */
 
       // Wrap as iterator and return.
-      return new ChunkedArrayIterator<E>(e);
+      return new ChunkedArrayIterator<>(e);
     }
 
     // Allocate dense array.
@@ -215,7 +215,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
         e /* src */, (int) offset /* srcPos */, a /* dst */, 0 /* dstPos */, n /* length */);
 
     // Wrap as iterator and return.
-    return new ChunkedArrayIterator<E>(a);
+    return new ChunkedArrayIterator<>(a);
   }
 
   /*

@@ -140,7 +140,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
         {
           final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           answer.add(
               createBindingSet(new BindingImpl("name", buffy), new BindingImpl("weight", w1)));
@@ -157,7 +157,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
         {
           final TupleQuery tupleQuery = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           answer.add(
               createBindingSet(new BindingImpl("name", snowball), new BindingImpl("weight", w2)));

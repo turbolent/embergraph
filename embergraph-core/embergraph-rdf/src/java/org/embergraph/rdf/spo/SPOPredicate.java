@@ -364,7 +364,7 @@ public class SPOPredicate extends Predicate<ISPO> {
 
       } else if (this.s().isVar()) {
 
-        bindingSet.set((IVariable) this.s(), new Constant<IV>(s));
+        bindingSet.set((IVariable) this.s(), new Constant<>(s));
       }
 
       if (this.p().isConstant() && !this.p().get().equals(p)) {
@@ -374,7 +374,7 @@ public class SPOPredicate extends Predicate<ISPO> {
 
       } else if (this.p().isVar()) {
 
-        bindingSet.set((IVariable) this.p(), new Constant<IV>(p));
+        bindingSet.set((IVariable) this.p(), new Constant<>(p));
       }
 
       if (this.o().isConstant() && !this.o().get().equals(o)) {
@@ -384,7 +384,7 @@ public class SPOPredicate extends Predicate<ISPO> {
 
       } else if (this.o().isVar()) {
 
-        bindingSet.set((IVariable) this.o(), new Constant<IV>(o));
+        bindingSet.set((IVariable) this.o(), new Constant<>(o));
       }
 
       // TODO implement RDR in quads mode

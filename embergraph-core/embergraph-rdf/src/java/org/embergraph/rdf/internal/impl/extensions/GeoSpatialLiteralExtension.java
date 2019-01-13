@@ -97,7 +97,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
   @Override
   public Set<EmbergraphURI> getDatatypes() {
 
-    final HashSet<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
+    final HashSet<EmbergraphURI> datatypes = new LinkedHashSet<>();
     datatypes.add(datatype);
     return datatypes;
   }

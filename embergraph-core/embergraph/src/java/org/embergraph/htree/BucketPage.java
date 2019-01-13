@@ -755,7 +755,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
       // look for the first slot.
       if (findNextSlot()) {
 
-        this.tuple = new Tuple<E>(htree, flags);
+        this.tuple = new Tuple<>(htree, flags);
 
       } else {
 

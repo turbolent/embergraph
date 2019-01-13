@@ -253,7 +253,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
      * Make sure that there are no correlated variables in the SP.
      */
     {
-      final Set<VarNode> vars = new LinkedHashSet<VarNode>();
+      final Set<VarNode> vars = new LinkedHashSet<>();
 
       for (VarNode varNode : BOpUtility.toList(sp, VarNode.class)) {
 
@@ -432,21 +432,21 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
      */
     final int maxLength = isQuads ? 2 : 1;
     if (constantPosBuf.length() > maxLength) {
-      return new LinkedHashSet<SPOKeyOrder>();
+      return new LinkedHashSet<>();
     }
 
     final String prefix = constantPosBuf.toString();
-    final Set<String> allPossibleConstPrefixes = new LinkedHashSet<String>();
+    final Set<String> allPossibleConstPrefixes = new LinkedHashSet<>();
     getPermutations(prefix, allPossibleConstPrefixes);
     if (allPossibleConstPrefixes.isEmpty()) allPossibleConstPrefixes.add(""); // neutral element
 
     final String suffix = unconstrainedPosBuf.toString();
-    final Set<String> allPossibleConstSuffixes = new LinkedHashSet<String>();
+    final Set<String> allPossibleConstSuffixes = new LinkedHashSet<>();
     getPermutations(suffix, allPossibleConstSuffixes);
     if (allPossibleConstSuffixes.isEmpty()) allPossibleConstSuffixes.add(""); // neutral element
 
     // calculate set of all key order candidates
-    final Set<SPOKeyOrder> allPossiblePrefixes = new LinkedHashSet<SPOKeyOrder>();
+    final Set<SPOKeyOrder> allPossiblePrefixes = new LinkedHashSet<>();
     for (String constPrefix : allPossibleConstPrefixes) {
       for (String constSuffix : allPossibleConstSuffixes) {
         final String index = constPrefix + distinctTermScanPos + constSuffix;

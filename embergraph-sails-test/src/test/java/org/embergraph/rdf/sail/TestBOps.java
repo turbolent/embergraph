@@ -141,7 +141,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           //                    System.err.println(result.next());
           //                }
 
-          final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          final Collection<BindingSet> solution = new LinkedList<>();
           solution.add(
               createBindingSet(
                   new BindingImpl("s", mike),
@@ -240,7 +240,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           //                    System.err.println(result.next());
           //                }
 
-          final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          final Collection<BindingSet> solution = new LinkedList<>();
           solution.add(
               createBindingSet(
                   new BindingImpl("s", jill),
@@ -327,7 +327,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           //                    System.err.println(result.next());
           //                }
 
-          final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          final Collection<BindingSet> solution = new LinkedList<>();
           solution.add(
               createBindingSet(
                   new BindingImpl("s", mike),
@@ -421,7 +421,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           //                    System.err.println(result.next());
           //                }
 
-          final Collection<BindingSet> solution = new LinkedList<BindingSet>();
+          final Collection<BindingSet> solution = new LinkedList<>();
           solution.add(
               createBindingSet(
                   new BindingImpl("s", mike),

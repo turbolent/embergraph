@@ -76,7 +76,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
       final ExecutorService executorService =
           Executors.newFixedThreadPool(nclients, DaemonThreadFactory.defaultThreadFactory());
 
-      final Collection<Callable<Long>> tasks = new HashSet<Callable<Long>>();
+      final Collection<Callable<Long>> tasks = new HashSet<>();
       for (int i = 0; i < nclients; i++) {
         tasks.add(
             new Callable<Long>() {
@@ -136,11 +136,11 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
     config.fixture = new MockQuorumFixture();
     final String logicalServiceId = "logicalService_" + getName();
     config.quorum =
-        new MockQuorum<HAPipelineGlue, MyMockQuorumMember<HAPipelineGlue>>(k, config.fixture);
+        new MockQuorum<>(k, config.fixture);
     File file = null;
 
     config.fixture.start();
-    config.quorum.start(new MyMockQuorumMember<HAPipelineGlue>(config.fixture, logicalServiceId));
+    config.quorum.start(new MyMockQuorumMember<>(config.fixture, logicalServiceId));
 
     final QuorumActor<?, ?> actor = config.quorum.getActor();
 

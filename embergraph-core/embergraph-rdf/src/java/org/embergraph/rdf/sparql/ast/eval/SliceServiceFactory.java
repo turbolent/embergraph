@@ -135,7 +135,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
   static {
     cache =
-        new ConcurrentWeakValueCacheWithTimeout<IPredicate<ISPO>, CacheHit>(
+        new ConcurrentWeakValueCacheWithTimeout<>(
             100, TimeUnit.MINUTES.toMillis(1));
   }
 
@@ -302,7 +302,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
        * Keep a map of variables in the statement pattern to the position
        * in which they appear in the statement pattern.
        */
-      final Map<IVariable, Integer> vars = new LinkedHashMap<IVariable, Integer>();
+      final Map<IVariable, Integer> vars = new LinkedHashMap<>();
 
       for (int i = 0; i < sp.arity(); i++) {
 
@@ -376,7 +376,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
       if (pred == null) {
 
-        return new EmptyCloseableIterator<IBindingSet>();
+        return new EmptyCloseableIterator<>();
       }
 
       // Get the right key order for the predicate.
@@ -444,7 +444,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
         bSets[0].set(v, new Constant<IV>(new XSDNumericIV(range)));
 
-        return new ThickCloseableIterator<IBindingSet>(bSets, 1);
+        return new ThickCloseableIterator<>(bSets, 1);
       }
 
       final long offset = serviceParams.getAsLong(SliceParams.OFFSET, SliceParams.DEFAULT_OFFSET);
@@ -538,7 +538,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
           final int pos = vars.get(v);
 
-          bSets[i].set(v, new Constant<IV>(spo.get(pos)));
+          bSets[i].set(v, new Constant<>(spo.get(pos)));
         }
 
         //            	if (log.isTraceEnabled()) {
@@ -552,7 +552,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
         log.trace("done iterating " + i + " results.");
       }
 
-      return new ThickCloseableIterator<IBindingSet>(bSets, i);
+      return new ThickCloseableIterator<>(bSets, i);
     }
 
     /*

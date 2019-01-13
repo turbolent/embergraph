@@ -168,7 +168,7 @@ public class ServiceCallJoin extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   @Override
@@ -296,7 +296,7 @@ public class ServiceCallJoin extends PipelineOp {
           final ServiceCallChunk serviceCallChunk =
               new ServiceCallChunk(serviceURI, serviceCall, chunk);
 
-          final FutureTask<Void> ft = new FutureTask<Void>(new ServiceCallTask(serviceCallChunk));
+          final FutureTask<Void> ft = new FutureTask<>(new ServiceCallTask(serviceCallChunk));
 
           context.getExecutorService().execute(ft);
 
@@ -348,7 +348,7 @@ public class ServiceCallJoin extends PipelineOp {
         while (sitr.hasNext()) {
 
           final Map<EmbergraphURI, ServiceCallChunk> serviceCallChunks =
-              new HashMap<EmbergraphURI, ServiceCallChunk>();
+              new HashMap<>();
 
           final IBindingSet[] chunk = sitr.next();
 
@@ -403,14 +403,14 @@ public class ServiceCallJoin extends PipelineOp {
               new LatchedExecutor(context.getExecutorService(), nparallel);
 
           final List<FutureTask<Void>> tasks =
-              new ArrayList<FutureTask<Void>>(serviceCallChunks.size());
+              new ArrayList<>(serviceCallChunks.size());
 
           try {
 
             for (ServiceCallChunk serviceCallChunk : serviceCallChunks.values()) {
 
               final FutureTask<Void> ft =
-                  new FutureTask<Void>(new ServiceCallTask(serviceCallChunk));
+                  new FutureTask<>(new ServiceCallTask(serviceCallChunk));
 
               tasks.add(ft);
 
@@ -506,7 +506,7 @@ public class ServiceCallJoin extends PipelineOp {
       public Void call() throws Exception {
 
         final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-            new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), context.getSink());
+            new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), context.getSink());
 
         final IBlockingBuffer<IBindingSet[]> sink2 = context.getSink();
 
@@ -514,13 +514,13 @@ public class ServiceCallJoin extends PipelineOp {
         final AbstractUnsynchronizedArrayBuffer<IBindingSet> unsyncBuffer2 =
             sink2 == null
                 ? null
-                : new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink2);
+                : new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink2);
 
         final JVMHashJoinUtility state =
             new JVMHashJoinUtility(op, silent ? JoinTypeEnum.Optional : JoinTypeEnum.Normal);
 
         // Pump the solutions into the hash map.
-        state.acceptSolutions(new SingleValueIterator<IBindingSet[]>(chunk), null /* stats */);
+        state.acceptSolutions(new SingleValueIterator<>(chunk), null /* stats */);
 
         // The iterator draining the subquery
         ICloseableIterator<IBindingSet[]> serviceSolutionItr = null;
@@ -629,7 +629,7 @@ public class ServiceCallJoin extends PipelineOp {
           }
 
           final ICloseableIterator<IBindingSet[]> itr2 =
-              new Chunkerator<IBindingSet>(itr, op.getChunkCapacity(), IBindingSet.class);
+              new Chunkerator<>(itr, op.getChunkCapacity(), IBindingSet.class);
 
           return itr2;
 
@@ -705,7 +705,7 @@ public class ServiceCallJoin extends PipelineOp {
          * of delivering a very large number of solutions.
          */
         ICloseableIterator<BindingSet> results = null;
-        final List<BindingSet> serviceResults = new LinkedList<BindingSet>();
+        final List<BindingSet> serviceResults = new LinkedList<>();
         try {
 
           results = serviceCall.call(left2);
@@ -733,7 +733,7 @@ public class ServiceCallJoin extends PipelineOp {
         final IBindingSet[] embergraphSolutionChunk =
             ServiceCallUtility.resolve(db, serviceResultChunk);
 
-        return new ChunkedArrayIterator<IBindingSet>(embergraphSolutionChunk);
+        return new ChunkedArrayIterator<>(embergraphSolutionChunk);
       }
 
       /*
@@ -801,7 +801,7 @@ public class ServiceCallJoin extends PipelineOp {
 
       this.chunk = null;
 
-      this.sourceSolutions = new LinkedList<IBindingSet>();
+      this.sourceSolutions = new LinkedList<>();
     }
 
     public void addSourceSolution(final IBindingSet bset) {

@@ -103,7 +103,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
    *
    * <p>Note: This is precisely the same mapping we use for the ID2TERM index.
    */
-  private final AtomicReference<BTree> ivCache = new AtomicReference<BTree>();
+  private final AtomicReference<BTree> ivCache = new AtomicReference<>();
 
   /*
    * The {@link IV}:{@link EmbergraphValue} mapping for {@link BlobIV}s with cached {@link
@@ -112,14 +112,14 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
    *
    * <p>Note: This is precisely the same mapping we use for the BLOBS index.
    */
-  private final AtomicReference<BTree> blobsCache = new AtomicReference<BTree>();
+  private final AtomicReference<BTree> blobsCache = new AtomicReference<>();
 
   /*
    * The {@link IV}:{@link EmbergraphValue} mapping for {@link LiteralExtensionIV}s with cached
    * {@link EmbergraphValue}s. This captures any cached EmbergraphValue references encountered on
    * {@link LiteralExtensionIV}s. This map does not store duplicate entries for the same {@link IV}.
    */
-  private final AtomicReference<BTree> literalExtensionIVCache = new AtomicReference<BTree>();
+  private final AtomicReference<BTree> literalExtensionIVCache = new AtomicReference<>();
 
   public String toString() {
     /*
@@ -350,9 +350,9 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
 
       blobsCache.set(BTree.create(store, getBlobsCacheIndexMetadata(op)));
 
-      ivCacheSchema = new LinkedHashSet<IVariable<?>>();
+      ivCacheSchema = new LinkedHashSet<>();
 
-      cache = new HashMap<IV<?, ?>, EmbergraphValue>();
+      cache = new HashMap<>();
 
     } else {
 

@@ -71,7 +71,7 @@ public class EmbergraphSailNSSWrapper {
 
   public void init() throws Exception {
 
-    final Map<String, String> initParams = new LinkedHashMap<String, String>();
+    final Map<String, String> initParams = new LinkedHashMap<>();
     {
       initParams.put(ConfigParams.NAMESPACE, getSail().getNamespace());
 

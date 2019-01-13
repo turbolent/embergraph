@@ -104,7 +104,7 @@ public class TestBloomFilter extends TestCase2 {
     // displays filter state as provisioned.
     System.err.println("provisioned: " + bloomFilter.toString());
 
-    final Set<byte[]> groundTruth = new HashSet<byte[]>(nkeys);
+    final Set<byte[]> groundTruth = new HashSet<>(nkeys);
 
     final byte[][] keys = new byte[nkeys][];
 

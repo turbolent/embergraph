@@ -82,7 +82,7 @@ public abstract class GroupMemberValueExpressionNodeBase extends GroupMemberNode
   @Override
   public Set<IVariable<?>> getConsumedVars() {
 
-    final Set<IVariable<?>> consumedVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> consumedVars = new LinkedHashSet<>();
 
     // collect variables from required value expression
     final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables(getRequiredValueExpression());

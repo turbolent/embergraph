@@ -96,7 +96,7 @@ public class TestNanoHTTPD extends TestCase2 {
         assertTrue("open", fixture.isOpen());
 
         final FutureTask<Void> ft =
-            new FutureTask<Void>(
+            new FutureTask<>(
                 new Runnable() {
                   public void run() {
                     fixture.shutdown();
@@ -221,17 +221,17 @@ public class TestNanoHTTPD extends TestCase2 {
   public void test_getDecodeParams() throws IOException {
 
     final LinkedHashMap<String, Vector<String>> expected =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
     {
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("1");
         v.add("2");
         v.add("3");
         expected.put("a", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("a b c");
         v.add("d e");
         v.add("f");
@@ -531,17 +531,17 @@ public class TestNanoHTTPD extends TestCase2 {
   public void test_post_application_x_www_form_urlencoded() throws IOException {
 
     final LinkedHashMap<String, Vector<String>> expected =
-        new LinkedHashMap<String, Vector<String>>();
+        new LinkedHashMap<>();
     {
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("1");
         v.add("2");
         v.add("3");
         expected.put("a", v);
       }
       {
-        final Vector<String> v = new Vector<String>();
+        final Vector<String> v = new Vector<>();
         v.add("a b c");
         v.add("d e");
         v.add("f");

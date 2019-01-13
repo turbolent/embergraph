@@ -40,7 +40,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
    * the {@link QueryEngine}.
    */
   private static ConcurrentWeakValueCache<IBTreeManager, QueryEngine> standaloneQECache =
-      new ConcurrentWeakValueCache<IBTreeManager, QueryEngine>(0 /* queueCapacity */);
+      new ConcurrentWeakValueCache<>(0 /* queueCapacity */);
 
   /*
    * Weak value cache to enforce the singleton pattern for {@link IEmbergraphClient}s (the data
@@ -53,8 +53,8 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
    */
   private static ConcurrentWeakValueCache<IEmbergraphFederation<?>, FederatedQueryEngine>
       federationQECache =
-          new ConcurrentWeakValueCache<IEmbergraphFederation<?>, FederatedQueryEngine>(
-              0 /* queueCapacity */);
+      new ConcurrentWeakValueCache<>(
+          0 /* queueCapacity */);
 
   /* (non-Javadoc)
    * @see org.embergraph.bop.fed.IQueryEngineFactory#getExistingQueryController(org.embergraph.journal.IBTreeManager)

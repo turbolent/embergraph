@@ -60,20 +60,20 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
       doTest(lex, bnd.getIV(), bnd);
       doTest(lex, lit.getIV(), lit);
 
-      doTest(lex, new XSDBooleanIV<EmbergraphLiteral>(true));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>((byte) 1));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>((short) 1));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1L));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1f));
-      doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1d));
-      doTest(lex, new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)));
-      doTest(lex, new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1d)));
+      doTest(lex, new XSDBooleanIV<>(true));
+      doTest(lex, new XSDNumericIV<>((byte) 1));
+      doTest(lex, new XSDNumericIV<>((short) 1));
+      doTest(lex, new XSDNumericIV<>(1));
+      doTest(lex, new XSDNumericIV<>(1L));
+      doTest(lex, new XSDNumericIV<>(1f));
+      doTest(lex, new XSDNumericIV<>(1d));
+      doTest(lex, new XSDIntegerIV<>(BigInteger.valueOf(1L)));
+      doTest(lex, new XSDDecimalIV<>(BigDecimal.valueOf(1d)));
 
-      doTest(lex, new UUIDBNodeIV<EmbergraphBNode>(UUID.randomUUID()));
-      doTest(lex, new NumericBNodeIV<EmbergraphBNode>(1));
+      doTest(lex, new UUIDBNodeIV<>(UUID.randomUUID()));
+      doTest(lex, new NumericBNodeIV<>(1));
 
-      doTest(lex, new UUIDLiteralIV<EmbergraphLiteral>(UUID.randomUUID()));
+      doTest(lex, new UUIDLiteralIV<>(UUID.randomUUID()));
 
     } finally {
 

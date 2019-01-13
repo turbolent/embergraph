@@ -623,7 +623,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
     // the default serializer will work fine for this.
     final ITupleSerializer<Long, String> tupleSer =
-        new DefaultTupleSerializer<Long, String>(new DefaultKeyBuilderFactory(new Properties()));
+        new DefaultTupleSerializer<>(new DefaultKeyBuilderFactory(new Properties()));
 
     metadata.setTupleSerializer(tupleSer);
 
@@ -653,7 +653,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
        * in a known order
        */
       data[i] =
-          new TupleData<Long, String>(i * 2L, getRandomString(100 /* len */, i /* id */), tupleSer);
+          new TupleData<>(i * 2L, getRandomString(100 /* len */, i /* id */), tupleSer);
 
       boolean delete = false;
       if (deleteMarkers && r.nextInt(100) < 5) {

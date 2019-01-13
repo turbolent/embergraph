@@ -48,7 +48,7 @@ public class DummyEventReportingService extends EventReceiver implements IServic
     }
     // create a temporary list in case the CSV rows are not ordered
     // correctly
-    final List<Event> events = new LinkedList<Event>();
+    final List<Event> events = new LinkedList<>();
     String row;
     int lineno = 0;
     while ((row = reader.readLine()) != null) {

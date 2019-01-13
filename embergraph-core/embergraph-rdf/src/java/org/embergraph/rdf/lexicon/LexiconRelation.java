@@ -135,11 +135,11 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   private final List<IKeyOrder<EmbergraphValue>> keyOrders;
 
   private final AtomicReference<IValueCentricTextIndexer<?>> viewRef =
-      new AtomicReference<IValueCentricTextIndexer<?>>();
+      new AtomicReference<>();
 
   /** A new one for the subject-centric full text index. */
   private final AtomicReference<ISubjectCentricTextIndexer<?>> viewRef2 =
-      new AtomicReference<ISubjectCentricTextIndexer<?>>();
+      new AtomicReference<>();
 
   /** Note: This is a stateless class. */
   private final BlobsIndexHelper h = new BlobsIndexHelper();
@@ -417,7 +417,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
 
     {
-      final Set<String> set = new HashSet<String>();
+      final Set<String> set = new HashSet<>();
 
       set.add(getFQN(LexiconKeyOrder.TERM2ID));
       set.add(getFQN(LexiconKeyOrder.ID2TERM));
@@ -517,12 +517,12 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
          * Unshared for any other view of the triple store.
          */
         termCache =
-            new TermCache<IV<?, ?>, EmbergraphValue>(
-                new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?, ?>, EmbergraphValue>(
+            new TermCache<>(
+                new ConcurrentWeakValueCacheWithBatchedUpdates<>(
                     termCacheCapacity, // queueCapacity
                     .75f, // loadFactor (.75 is the default)
                     16 // concurrency level (16 is the default)
-                    ));
+                ));
       }
     }
 
@@ -627,7 +627,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
        */
 
       lexiconConfiguration =
-          new LexiconConfiguration<EmbergraphValue>(
+          new LexiconConfiguration<>(
               blobsThreshold,
               inlineLiterals,
               inlineTextLiterals,
@@ -1626,18 +1626,18 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
     // Will be resolved against TERM2ID/ID2TERM.
     final LinkedHashMap<EmbergraphValue, EmbergraphValue> terms =
-        new LinkedHashMap<EmbergraphValue, EmbergraphValue>(numTerms);
+        new LinkedHashMap<>(numTerms);
 
     // Will be resolved against BLOBS.
     final LinkedHashMap<EmbergraphValue, EmbergraphValue> blobs =
-        new LinkedHashMap<EmbergraphValue, EmbergraphValue>(/* default */ );
+        new LinkedHashMap<>(/* default */);
 
     // Either same reference -or- distinct reference but equals().
-    final List<EmbergraphValue> dups = new LinkedList<EmbergraphValue>();
+    final List<EmbergraphValue> dups = new LinkedList<>();
 
     // Inline literals that should still make it into the text index.
     final LinkedHashSet<EmbergraphValue> textIndex =
-        new LinkedHashSet<EmbergraphValue>(/* default */ );
+        new LinkedHashSet<>(/* default */);
 
     int nunknown = 0, nblobs = 0, nterms = 0;
 
@@ -1926,7 +1926,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       {
         final long _begin = System.currentTimeMillis();
 
-        final List<Callable<Long>> tasks = new LinkedList<Callable<Long>>();
+        final List<Callable<Long>> tasks = new LinkedList<>();
 
         tasks.add(
             new ReverseIndexWriterTask(
@@ -2314,7 +2314,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       /*
        * Keep a collection of literals to be indexed for that subject.
        */
-      final Collection<IV<?, ?>> literals = new LinkedList<IV<?, ?>>();
+      final Collection<IV<?, ?>> literals = new LinkedList<>();
 
       long subjectCount = 0;
       long statementCount = 0;
@@ -2503,15 +2503,15 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
      * across the ID2TERM and BLOBS indices.
      */
     final ConcurrentHashMap<IV<?, ?> /* iv */, EmbergraphValue /* term */> ret =
-        new ConcurrentHashMap<IV<?, ?>, EmbergraphValue>(n /* initialCapacity */);
+        new ConcurrentHashMap<>(n /* initialCapacity */);
 
     // TermIVs which must be resolved against an index.
-    final Collection<TermId<?>> termIVs = new LinkedList<TermId<?>>();
+    final Collection<TermId<?>> termIVs = new LinkedList<>();
 
     // BlobIVs which must be resolved against an index.
-    final Collection<BlobIV<?>> blobIVs = new LinkedList<BlobIV<?>>();
+    final Collection<BlobIV<?>> blobIVs = new LinkedList<>();
 
-    final Set<IV<?, ?>> unrequestedSidTerms = new LinkedHashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> unrequestedSidTerms = new LinkedHashSet<>();
 
     /*
      * We need to materialize terms inside of SIDs so that the SIDs
@@ -2611,7 +2611,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       final ExecutorService service = getExecutorService();
 
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       if (!termIVs.isEmpty()) {
 
@@ -2806,12 +2806,12 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
             @Override
             protected ITermCache<IV<?, ?>, EmbergraphValue> newInstance(
                 NT key, Integer termCacheCapacity) {
-              return new TermCache<IV<?, ?>, EmbergraphValue>(
-                  new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?, ?>, EmbergraphValue>(
+              return new TermCache<>(
+                  new ConcurrentWeakValueCacheWithBatchedUpdates<>(
                       termCacheCapacity.intValue(), // backing hard reference LRU queue capacity.
                       .75f, // loadFactor (.75 is the default)
                       16 // concurrency level (16 is the default)
-                      ));
+                  ));
             }
           };
 
@@ -3183,7 +3183,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
 
     final BlobIV<?> iv =
-        new BlobIV<EmbergraphValue>(VTE.valueOf(asValue), asValue.hashCode(), (short) counter);
+        new BlobIV<>(VTE.valueOf(asValue), asValue.hashCode(), (short) counter);
 
     if (value instanceof EmbergraphValue) {
 
@@ -3381,7 +3381,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
              * empty.
              */
 
-            return new EmptyAccessPath<EmbergraphValue>();
+            return new EmptyAccessPath<>();
           }
 
           if (val.hashCode() != iv.hashCode()) {
@@ -3391,7 +3391,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
              * provably empty.
              */
 
-            return new EmptyAccessPath<EmbergraphValue>();
+            return new EmptyAccessPath<>();
           }
 
           /*
@@ -3420,8 +3420,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
             // cache the value on the IV
             iv.setValue(val);
 
-            return new ArrayAccessPath<EmbergraphValue>(
-                new EmbergraphValue[] {val}, predicate, keyOrder);
+            return new ArrayAccessPath<>(
+                new EmbergraphValue[]{val}, predicate, keyOrder);
           }
 
           //            if (log.isDebugEnabled())
@@ -3434,7 +3434,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
              * told blank nodes semantics.
              */
 
-            return new EmptyAccessPath<EmbergraphValue>();
+            return new EmptyAccessPath<>();
           }
 
           final CacheValueFilter filter = CacheValueFilter.newInstance();
@@ -3444,7 +3444,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                   predicate.setProperty(Predicate.Annotations.ACCESS_PATH_FILTER, filter);
 
           final AccessPath<EmbergraphValue> ap =
-              new AccessPath<EmbergraphValue>(this, localIndexManager, tmp, keyOrder).init();
+              new AccessPath<>(this, localIndexManager, tmp, keyOrder).init();
 
           return ap;
         }
@@ -3469,8 +3469,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
             // cache the value on the IV
             iv.setValue(val);
 
-            return new ArrayAccessPath<EmbergraphValue>(
-                new EmbergraphValue[] {val}, predicate, keyOrder);
+            return new ArrayAccessPath<>(
+                new EmbergraphValue[]{val}, predicate, keyOrder);
           }
 
           final CacheValueFilter filter = CacheValueFilter.newInstance();
@@ -3480,7 +3480,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                   predicate.setProperty(Predicate.Annotations.ACCESS_PATH_FILTER, filter);
 
           final AccessPath<EmbergraphValue> ap =
-              new AccessPath<EmbergraphValue>(this, localIndexManager, tmp, keyOrder);
+              new AccessPath<>(this, localIndexManager, tmp, keyOrder);
 
           return ap;
         }

@@ -258,7 +258,7 @@ public class TestName2Addr extends ProxyTestCase<Journal> {
     if (log.isInfoEnabled())
       log.info("prefix=" + prefix + ", timestamp=" + TimestampUtility.toString(timestamp));
 
-    final Set<String> names = new LinkedHashSet<String>();
+    final Set<String> names = new LinkedHashSet<>();
 
     final Iterator<String> itr = jnl.indexNameScan(prefix, timestamp);
 

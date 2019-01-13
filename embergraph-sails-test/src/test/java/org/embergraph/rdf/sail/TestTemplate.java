@@ -167,7 +167,7 @@ public class TestTemplate extends QuadsTestCase {
         }
       }
 
-      final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+      final Collection<BindingSet> answer = new LinkedList<>();
 
       /*
        * Here is how you manually build the answer set, but please make

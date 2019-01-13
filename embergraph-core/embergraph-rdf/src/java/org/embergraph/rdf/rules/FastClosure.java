@@ -196,7 +196,7 @@ public class FastClosure extends BaseClosure {
          * that set.
          */
 
-        final List<IRule> tmp = new LinkedList<IRule>();
+        final List<IRule> tmp = new LinkedList<>();
 
         if (forwardChainOwlTransitiveProperty) {
 

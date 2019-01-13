@@ -65,7 +65,7 @@ public class ResourceQueue<R, T> {
    * The queue of transactions seeking access to the {@link #resource}. The object at the head of
    * the queue is the transaction with the lock on the resource.
    */
-  final BlockingQueue<T /* tx */> queue = new LinkedBlockingQueue<T>(/* unbounded */ );
+  final BlockingQueue<T /* tx */> queue = new LinkedBlockingQueue<>(/* unbounded */);
 
   /** Used to restrict access to {@link #queue}. */
   final Lock lock = new ReentrantLock();

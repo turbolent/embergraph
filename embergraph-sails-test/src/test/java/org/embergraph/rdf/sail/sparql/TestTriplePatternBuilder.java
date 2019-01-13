@@ -74,7 +74,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -122,7 +122,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -164,7 +164,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -206,7 +206,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -250,7 +250,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -294,7 +294,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -341,7 +341,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -374,7 +374,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -420,7 +420,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -481,7 +481,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -521,7 +521,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -588,7 +588,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
 
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -633,7 +633,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
       }
 
@@ -696,7 +696,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/");
       }
@@ -756,7 +756,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/");
       }
@@ -822,7 +822,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/");
       }
@@ -896,7 +896,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/");
       }
@@ -981,7 +981,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("foaf", FOAFVocabularyDecl.NAMESPACE);
       }
@@ -1073,7 +1073,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/ns#");
         prefixDecls.put("rdf", RDF.NAMESPACE);
@@ -1193,7 +1193,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/ns#");
         prefixDecls.put("rdf", RDF.NAMESPACE);
@@ -1311,7 +1311,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("xsd", XSD.NAMESPACE);
         prefixDecls.put("", "http://example.org/ns#");
@@ -1418,7 +1418,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/ns#");
       }
@@ -1534,7 +1534,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("", "http://example.org/ns#");
       }
@@ -1649,7 +1649,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("dc", DCElementsVocabularyDecl.NAMESPACE);
       }
@@ -1722,7 +1722,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("dc", DCElementsVocabularyDecl.NAMESPACE);
       }
@@ -1787,7 +1787,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("dc", DCElementsVocabularyDecl.NAMESPACE);
       }
@@ -1851,7 +1851,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     {
       {
         final Map<String, String> prefixDecls =
-            new LinkedHashMap<String, String>(PrefixDeclProcessor.defaultDecls);
+            new LinkedHashMap<>(PrefixDeclProcessor.defaultDecls);
         expected.setPrefixDecls(prefixDecls);
         prefixDecls.put("dc", DCElementsVocabularyDecl.NAMESPACE);
       }

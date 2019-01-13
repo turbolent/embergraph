@@ -108,8 +108,8 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
   protected ITupleCursor2<String> newCursor(
       final AbstractBTree btree, final int flags, final byte[] fromKey, final byte[] toKey) {
 
-    return new IndexSegmentTupleCursor<String>(
-        (IndexSegment) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
+    return new IndexSegmentTupleCursor<>(
+        (IndexSegment) btree, new Tuple<>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
   public void test_oneTuple() throws Exception {
@@ -129,7 +129,7 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
       {
         ITupleCursor2<String> cursor = newCursor(seg);
 
-        assertEquals(new TestTuple<String>(10, "Bryan"), cursor.next());
+        assertEquals(new TestTuple<>(10, "Bryan"), cursor.next());
 
         try {
           cursor.remove();

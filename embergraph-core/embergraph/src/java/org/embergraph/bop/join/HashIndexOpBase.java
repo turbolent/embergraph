@@ -168,7 +168,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(createChunkTask(context));
+    return new FutureTask<>(createChunkTask(context));
   }
 
   protected abstract ChunkTaskBase createChunkTask(final BOpContext<IBindingSet> context);
@@ -297,7 +297,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
         final IBindingSet[] bindingSets =
             (IBindingSet[]) op.getProperty(Annotations.BINDING_SETS_SOURCE);
 
-        src = new SingleValueIterator<IBindingSet[]>(bindingSets);
+        src = new SingleValueIterator<>(bindingSets);
 
       } else {
 

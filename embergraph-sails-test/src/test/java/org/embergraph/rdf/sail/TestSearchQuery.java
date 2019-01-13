@@ -430,7 +430,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
           try {
             // silly construct queries, can't guarantee distinct
             // results
-            final Set<Statement> results = new LinkedHashSet<Statement>();
+            final Set<Statement> results = new LinkedHashSet<>();
             final GraphQuery graphQuery = cxn.prepareGraphQuery(QueryLanguage.SPARQL, query);
             graphQuery.evaluate(new StatementCollector(results));
             for (Statement stmt : results) {
@@ -464,7 +464,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
           try {
             // silly construct queries, can't guarantee distinct
             // results
-            final Set<Statement> results = new LinkedHashSet<Statement>();
+            final Set<Statement> results = new LinkedHashSet<>();
             final GraphQuery graphQuery = cxn.prepareGraphQuery(QueryLanguage.SPARQL, query);
             graphQuery.evaluate(new StatementCollector(results));
             for (Statement stmt : results) {
@@ -706,7 +706,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
          */
         cxn.commit();
 
-        final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
+        final Map<IV, Literal> literals = new LinkedHashMap<>();
         literals.put(((EmbergraphValue) l1).getIV(), l1);
         literals.put(((EmbergraphValue) l2).getIV(), l2);
         literals.put(((EmbergraphValue) l3).getIV(), l3);
@@ -716,7 +716,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         literals.put(((EmbergraphValue) l7).getIV(), l7);
         literals.put(((EmbergraphValue) l8).getIV(), l8);
 
-        final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
+        final Map<IV, URI> uris = new LinkedHashMap<>();
         uris.put(((EmbergraphValue) l1).getIV(), s1);
         uris.put(((EmbergraphValue) l2).getIV(), s2);
         uris.put(((EmbergraphValue) l3).getIV(), s3);
@@ -768,7 +768,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
           }
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final ITextIndexer search = cxn.getTripleStore().getLexiconRelation().getSearchEngine();
           final Hiterator<IHit> hits =
@@ -844,7 +844,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -935,7 +935,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -1022,7 +1022,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -1108,7 +1108,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -1197,7 +1197,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -1277,7 +1277,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -1362,7 +1362,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final IValueCentricTextIndexer search =
               cxn.getTripleStore().getLexiconRelation().getSearchEngine();
@@ -2187,7 +2187,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
          */
         cxn.commit();
 
-        final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
+        final Map<IV, Literal> literals = new LinkedHashMap<>();
         literals.put(((EmbergraphValue) l1).getIV(), l1);
         literals.put(((EmbergraphValue) l2).getIV(), l2);
         literals.put(((EmbergraphValue) l3).getIV(), l3);
@@ -2197,7 +2197,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         literals.put(((EmbergraphValue) l7).getIV(), l7);
         literals.put(((EmbergraphValue) l8).getIV(), l8);
 
-        final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
+        final Map<IV, URI> uris = new LinkedHashMap<>();
         uris.put(((EmbergraphValue) l1).getIV(), s1);
         uris.put(((EmbergraphValue) l2).getIV(), s2);
         uris.put(((EmbergraphValue) l3).getIV(), s3);
@@ -2250,7 +2250,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
           result = tupleQuery.evaluate();
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final ITextIndexer search = cxn.getTripleStore().getLexiconRelation().getSearchEngine();
           final Hiterator<IHit> hits =
@@ -2574,7 +2574,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
          */
         cxn.commit();
 
-        final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
+        final Map<IV, Literal> literals = new LinkedHashMap<>();
         literals.put(((EmbergraphValue) l1).getIV(), l1);
         literals.put(((EmbergraphValue) l2).getIV(), l2);
         literals.put(((EmbergraphValue) l3).getIV(), l3);
@@ -2584,7 +2584,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         literals.put(((EmbergraphValue) l7).getIV(), l7);
         literals.put(((EmbergraphValue) l8).getIV(), l8);
 
-        final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
+        final Map<IV, URI> uris = new LinkedHashMap<>();
         uris.put(((EmbergraphValue) l1).getIV(), s1);
         uris.put(((EmbergraphValue) l2).getIV(), s2);
         uris.put(((EmbergraphValue) l3).getIV(), s3);
@@ -2638,7 +2638,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
             result.close();
           }
 
-          final Collection<BindingSet> answer = new LinkedList<BindingSet>();
+          final Collection<BindingSet> answer = new LinkedList<>();
 
           final ITextIndexer search = cxn.getTripleStore().getLexiconRelation().getSearchEngine();
           final Hiterator<IHit> hits =

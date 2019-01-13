@@ -87,7 +87,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
    * DISTINCT (we might be better off with such large visited sets using a full traveral strategy,
    * but overflow to an HTree or (if fixed stride) a MemStore or BigArray could help).
    */
-  protected final ConcurrentMap<Value, VS> vertexState = new ConcurrentHashMap<Value, VS>();
+  protected final ConcurrentMap<Value, VS> vertexState = new ConcurrentHashMap<>();
 
   /*
    * TODO EDGE STATE: state needs to be configurable. When disabled, leave this as <code>null</code>
@@ -258,7 +258,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     reset();
 
     // Used to ensure that the initial frontier is distinct.
-    final Set<Value> tmp = new HashSet<Value>();
+    final Set<Value> tmp = new HashSet<>();
 
     for (Value v : vertices) {
 

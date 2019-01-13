@@ -271,7 +271,7 @@ public class VoID {
   protected void describeVocabularies(final IVCount[] predicatePartitionCounts) {
 
     // Find the distinct vocabularies in use.
-    final Set<String> namespaces = new LinkedHashSet<String>();
+    final Set<String> namespaces = new LinkedHashSet<>();
     {
 
       // property partitions.
@@ -448,9 +448,9 @@ public class VoID {
 
     try {
 
-      final Set<IV<?, ?>> ivs = new LinkedHashSet<IV<?, ?>>();
+      final Set<IV<?, ?>> ivs = new LinkedHashSet<>();
 
-      final Map<IV<?, ?>, IVCount> counts = new LinkedHashMap<IV<?, ?>, IVCount>();
+      final Map<IV<?, ?>, IVCount> counts = new LinkedHashMap<>();
 
       while (itr2.hasNext()) {
 
@@ -510,7 +510,7 @@ public class VoID {
     }
 
     // The non-zero counts.
-    final List<IVCount> counts = new LinkedList<IVCount>();
+    final List<IVCount> counts = new LinkedList<>();
 
     // Check the known non-empty predicate partitions.
     for (IVCount in : predicatePartitionCounts) {
@@ -595,9 +595,9 @@ public class VoID {
 
     try {
 
-      final Set<IV<?, ?>> ivs = new LinkedHashSet<IV<?, ?>>();
+      final Set<IV<?, ?>> ivs = new LinkedHashSet<>();
 
-      final Map<IV<?, ?>, IVCount> counts = new LinkedHashMap<IV<?, ?>, IVCount>();
+      final Map<IV<?, ?>, IVCount> counts = new LinkedHashMap<>();
 
       while (itr2.hasNext()) {
 
@@ -671,7 +671,7 @@ public class VoID {
     }
 
     // The non-zero counts.
-    final List<IVCount> counts = new LinkedList<IVCount>();
+    final List<IVCount> counts = new LinkedList<>();
 
     // Check the known non-empty predicate partitions.
     for (IVCount in : classPartitionCounts) {

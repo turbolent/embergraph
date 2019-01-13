@@ -186,7 +186,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
           embergraphValue = (EmbergraphValue) value.getRDFValue();
           iv = embergraphValue.getIV();
         } else if (value instanceof ASTIRI) {
-          iv = new TermId<EmbergraphValue>(VTE.URI, 0);
+          iv = new TermId<>(VTE.URI, 0);
           embergraphValue = valueFactory.createURI(((ASTIRI) value).getValue());
           if (!embergraphValue.isRealIV()) {
             embergraphValue.clearInternalValue();
@@ -215,7 +215,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
               iv.setValue(embergraphValue);
             }
           } else {
-            iv = new TermId<EmbergraphValue>(VTE.LITERAL, 0);
+            iv = new TermId<>(VTE.LITERAL, 0);
             if (lang != null) {
               embergraphValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), lang);
             } else {
@@ -256,7 +256,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
             embergraphValue.setIV(iv);
           }
         } else {
-          iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(value.toString(), true);
+          iv = new FullyInlineTypedLiteralIV<>(value.toString(), true);
           embergraphValue = iv.getValue();
         }
 
@@ -341,7 +341,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     if (value.isEmpty()) {
       EmbergraphLiteral embergraphValue = valueFactory.createLiteral(value, dte.getDatatypeURI());
       IV iv =
-          new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, dte.getDatatypeURI(), true);
+          new FullyInlineTypedLiteralIV<>("", null, dte.getDatatypeURI(), true);
       embergraphValue.setIV(iv);
       iv.setValue(embergraphValue);
       return embergraphValue;
@@ -549,47 +549,47 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
       case XSDByte:
         {
           final byte x = Byte.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case XSDShort:
         {
           final short x = Short.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case XSDInt:
         {
           final int x = Integer.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case XSDLong:
         {
           final long x = Long.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case XSDFloat:
         {
           final float x = Float.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case XSDDouble:
         {
           final double x = Double.valueOf(val);
-          return new XSDNumericIV<EmbergraphLiteral>(x);
+          return new XSDNumericIV<>(x);
         }
       case UUID:
         {
           final UUID x = UUID.fromString(val);
-          return new UUIDLiteralIV<EmbergraphLiteral>(x);
+          return new UUIDLiteralIV<>(x);
         }
       case XSDInteger:
         {
           final BigInteger x = new BigInteger(val);
-          return new XSDIntegerIV<EmbergraphLiteral>(x);
+          return new XSDIntegerIV<>(x);
         }
       case XSDDecimal:
         {
           final BigDecimal x = new BigDecimal(val);
-          return new XSDDecimalIV<EmbergraphLiteral>(x);
+          return new XSDDecimalIV<>(x);
         }
       case XSDString:
         {

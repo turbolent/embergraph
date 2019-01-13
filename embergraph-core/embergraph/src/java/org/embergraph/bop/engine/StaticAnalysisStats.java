@@ -61,7 +61,7 @@ public class StaticAnalysisStats implements Serializable {
    */
   public StaticAnalysisStats() {
 
-    this.optimizerStats = new LinkedHashMap<String, StaticAnalysisStat>();
+    this.optimizerStats = new LinkedHashMap<>();
 
     parserStat = new StaticAnalysisStat("ParseTime");
     resolveValuesStat = new StaticAnalysisStat("ResolveValues");

@@ -126,7 +126,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
     itr.addTypeFilter(NamedSubqueryInclude.class);
 
-    final List<NamedSubqueryInclude> list = new LinkedList<NamedSubqueryInclude>();
+    final List<NamedSubqueryInclude> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -167,7 +167,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
     itr.addTypeFilter(NamedSubqueryInclude.class);
 
-    final List<NamedSubqueryInclude> list = new LinkedList<NamedSubqueryInclude>();
+    final List<NamedSubqueryInclude> list = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -238,7 +238,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
       final NamedSubqueriesNode namedSubqueries, final NamedSubqueryInclude[] allIncludes) {
 
     // The set of all named solution sets produced by this query.
-    final Set<String> namedSets = new LinkedHashSet<String>();
+    final Set<String> namedSets = new LinkedHashSet<>();
 
     for (NamedSubqueryRoot aNamedSubquery : namedSubqueries) {
 
@@ -252,7 +252,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
       if (namedSet == null || namedSet.trim().length() == 0)
         throw new RuntimeException("Missing or illegal name for named subquery.");
 
-      final List<NamedSubqueryInclude> includes = new LinkedList<NamedSubqueryInclude>();
+      final List<NamedSubqueryInclude> includes = new LinkedList<>();
 
       for (NamedSubqueryInclude anInclude : allIncludes) {
 
@@ -299,7 +299,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
       final String namedSet = aNamedSubquery.getName();
 
       // Collect each INCLUDE for this named subquery.
-      final List<NamedSubqueryInclude> includes = new LinkedList<NamedSubqueryInclude>();
+      final List<NamedSubqueryInclude> includes = new LinkedList<>();
       {
         for (NamedSubqueryInclude anInclude : allIncludes) {
 
@@ -317,7 +317,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
        * important, we sort each joinvar[] to ensure that they have a
        * common order.
        */
-      final Set<JoinVars> distinctJoinVarsSet = new LinkedHashSet<JoinVars>();
+      final Set<JoinVars> distinctJoinVarsSet = new LinkedHashSet<>();
 
       for (NamedSubqueryInclude anInclude : includes) {
 
@@ -344,7 +344,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
            * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/535">Optimize JOIN VARS
            *     for Sub-Selects </a>
            */
-          final Set<IVariable<?>> set = new LinkedHashSet<IVariable<?>>();
+          final Set<IVariable<?>> set = new LinkedHashSet<>();
 
           sa.getJoinVars(aNamedSubquery, anInclude, set);
 
@@ -388,7 +388,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
          */
 
         // First, collect all join variables.
-        final Set<IVariable<?>> sharedVariables = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> sharedVariables = new LinkedHashSet<>();
 
         for (JoinVars joinVars : distinctJoinVarsSet) {
 
@@ -445,7 +445,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
     // Map from solution set name to named subquery root.
     final Map<String, NamedSubqueryRoot> nameToSubquery =
-        new LinkedHashMap<String, NamedSubqueryRoot>();
+        new LinkedHashMap<>();
     {
       for (NamedSubqueryRoot aNamedSubquery : namedSubqueries) {
 
@@ -459,12 +459,12 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
      * before any named subquery root which will consume them.
      */
     final Map<NamedSubqueryRoot, List<String>> subqueryToIncludes =
-        new LinkedHashMap<NamedSubqueryRoot, List<String>>();
+        new LinkedHashMap<>();
     {
       for (NamedSubqueryRoot aNamedSubquery : namedSubqueries) {
 
-        final List<String> includes = new LinkedList<String>();
-        final List<String> includesNamedSubqueries = new LinkedList<String>();
+        final List<String> includes = new LinkedList<>();
+        final List<String> includesNamedSubqueries = new LinkedList<>();
 
         subqueryToIncludes.put(aNamedSubquery, includesNamedSubqueries);
 
@@ -489,7 +489,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
      * evaluation order for the named subqueries.
      */
     {
-      final Set<String> processed = new HashSet<String>();
+      final Set<String> processed = new HashSet<>();
 
       final NamedSubqueriesNode newNode = new NamedSubqueriesNode();
 
@@ -552,7 +552,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
     public JoinVars(final IVariable<?>[] vars) {
 
-      this.vars = new LinkedHashSet<IVariable<?>>();
+      this.vars = new LinkedHashSet<>();
 
       for (int i = 0; i < vars.length; i++) {
 

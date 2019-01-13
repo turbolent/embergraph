@@ -456,7 +456,7 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
        */
       {
         store.removeStatements(
-            new ChunkedArrayIterator<ISPO>(stmts1.length, stmts1, null /*keyOrder*/));
+            new ChunkedArrayIterator<>(stmts1.length, stmts1, null /*keyOrder*/));
 
         assertSameSPOArray(store, new SPO[] {}, 0 /*numStmts*/);
       }
@@ -580,7 +580,7 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
        */
       {
         store.removeStatements(
-            new ChunkedArrayIterator<ISPO>(stmts1.length, stmts1, null /*keyOrder*/));
+            new ChunkedArrayIterator<>(stmts1.length, stmts1, null /*keyOrder*/));
 
         assertSameSPOArray(store, new SPO[] {}, 0 /*numStmts*/);
       }

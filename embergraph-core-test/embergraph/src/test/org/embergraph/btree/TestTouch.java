@@ -63,7 +63,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     final int queueCapacity = 2;
     final int queueScan = 0;
     final MyHardReferenceQueue<PO> leafQueue =
-        new MyHardReferenceQueue<PO>(listener, queueCapacity, queueScan);
+        new MyHardReferenceQueue<>(listener, queueCapacity, queueScan);
     assertEquals(queueCapacity, leafQueue.capacity());
     assertEquals(queueScan, leafQueue.nscan());
     assertEquals(listener, leafQueue.getListener());
@@ -164,7 +164,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     final int queueCapacity = 2;
     final int queueScan = 1;
     final MyHardReferenceQueue<PO> leafQueue =
-        new MyHardReferenceQueue<PO>(listener, queueCapacity, queueScan);
+        new MyHardReferenceQueue<>(listener, queueCapacity, queueScan);
     assertEquals(queueCapacity, leafQueue.capacity());
     assertEquals(queueScan, leafQueue.nscan());
     assertEquals(listener, leafQueue.getListener());
@@ -263,7 +263,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     final int queueCapacity = 20;
     final int queueScan = 0;
     final MyHardReferenceQueue<PO> leafQueue =
-        new MyHardReferenceQueue<PO>(listener, queueCapacity, queueScan);
+        new MyHardReferenceQueue<>(listener, queueCapacity, queueScan);
     assertEquals(queueCapacity, leafQueue.capacity());
     assertEquals(queueScan, leafQueue.nscan());
     assertEquals(listener, leafQueue.getListener());

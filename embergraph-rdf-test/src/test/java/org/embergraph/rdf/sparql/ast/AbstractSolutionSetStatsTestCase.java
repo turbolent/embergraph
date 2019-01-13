@@ -74,7 +74,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
 
   protected <T> IConstant<T> asConst(final T val) {
 
-    return new Constant<T>(val);
+    return new Constant<>(val);
   }
 
   /*
@@ -85,7 +85,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
    */
   protected Set<IVariable> asSet(final IVariable... vars) {
 
-    final Set<IVariable> set = new HashSet<IVariable>();
+    final Set<IVariable> set = new HashSet<>();
 
     for (IVariable v : vars) {
 
@@ -103,7 +103,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
 
     assert vars.length == vals.length;
 
-    final Map<IVariable, IConstant> map = new LinkedHashMap<IVariable, IConstant>();
+    final Map<IVariable, IConstant> map = new LinkedHashMap<>();
 
     for (int i = 0; i < vars.length; i++) {
 
@@ -167,10 +167,10 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
 
     final IVariable x = Var.var("x");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     //		one.setValue(f.createLiteral(1));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -200,10 +200,10 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
 
     final IVariable x = Var.var("x");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -234,13 +234,13 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable x = Var.var("x");
     final IVariable y = Var.var("y");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     //		one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(1);
     two.setValue(f.createLiteral(2));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -271,19 +271,19 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable x = Var.var("x");
     final IVariable y = Var.var("y");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -321,19 +321,19 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable x = Var.var("x");
     final IVariable y = Var.var("y");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     //		four.setValue(f.createLiteral(4));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -373,22 +373,22 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(f.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -429,22 +429,22 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     //		two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     //		three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(f.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -486,22 +486,22 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(f.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(three));
@@ -544,22 +544,22 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     //		five.setValue(f.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(three));
@@ -596,22 +596,22 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(f.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(three));
@@ -655,28 +655,28 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     final IVariable y = Var.var("y");
     final IVariable z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(f.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(f.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     three.setValue(f.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(f.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(f.createLiteral(5));
 
-    final XSDNumericIV<EmbergraphLiteral> six = new XSDNumericIV<EmbergraphLiteral>(6);
+    final XSDNumericIV<EmbergraphLiteral> six = new XSDNumericIV<>(6);
     six.setValue(f.createLiteral(6));
 
-    final XSDNumericIV<EmbergraphLiteral> seven = new XSDNumericIV<EmbergraphLiteral>(7);
+    final XSDNumericIV<EmbergraphLiteral> seven = new XSDNumericIV<>(7);
     seven.setValue(f.createLiteral(7));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));

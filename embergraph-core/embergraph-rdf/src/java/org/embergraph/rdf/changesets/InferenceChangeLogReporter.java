@@ -35,10 +35,10 @@ public class InferenceChangeLogReporter implements IChangeLog {
   private final AbstractTripleStore kb;
 
   /** New inferences. */
-  private final Set<ISPO> added = new LinkedHashSet<ISPO>();
+  private final Set<ISPO> added = new LinkedHashSet<>();
 
   /** Removed inferences. */
-  private final Set<ISPO> removed = new LinkedHashSet<ISPO>();
+  private final Set<ISPO> removed = new LinkedHashSet<>();
 
   /** @param kb The KB (used to resolve {@link IV}s to {@link Value}s). */
   public InferenceChangeLogReporter(final AbstractTripleStore kb) {
@@ -96,7 +96,7 @@ public class InferenceChangeLogReporter implements IChangeLog {
   public EmbergraphStatementIterator addedIterator() {
 
     // Wrap as chunked iterator.
-    final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<ISPO>(added.iterator());
+    final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<>(added.iterator());
 
     // Asynchronous conversion of ISPOs to Statements.
     return new EmbergraphStatementIteratorImpl(kb, src).start(kb.getExecutorService());
@@ -106,7 +106,7 @@ public class InferenceChangeLogReporter implements IChangeLog {
   public EmbergraphStatementIterator removedIterator() {
 
     // Wrap as chunked iterator.
-    final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<ISPO>(removed.iterator());
+    final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<>(removed.iterator());
 
     // Asynchronous conversion of ISPOs to Statements.
     return new EmbergraphStatementIteratorImpl(kb, src).start(kb.getExecutorService());

@@ -232,7 +232,7 @@ public class NanoHTTPD implements IServiceShutdown {
 
       if (header == null) {
 
-        header = new TreeMap<String, String>(new CaseInsensitiveStringComparator());
+        header = new TreeMap<>(new CaseInsensitiveStringComparator());
       }
 
       header.put(name, value);
@@ -577,10 +577,10 @@ public class NanoHTTPD implements IServiceShutdown {
 
       // Note: The Map comparator folds case for header names!
       final Map<String, String> headers =
-          new TreeMap<String, String>(new CaseInsensitiveStringComparator());
+          new TreeMap<>(new CaseInsensitiveStringComparator());
 
       final LinkedHashMap<String, Vector<String>> params =
-          new LinkedHashMap<String, Vector<String>>();
+          new LinkedHashMap<>();
 
       /*
        * Tokenize the request line.
@@ -1196,7 +1196,7 @@ public class NanoHTTPD implements IServiceShutdown {
       if (log.isDebugEnabled()) log.debug(name + ": " + val);
       Vector<String> vals = p.get(name);
       if (vals == null) {
-        vals = new Vector<String>();
+        vals = new Vector<>();
         p.put(name, vals);
       }
       if (val != null) vals.add(val);
@@ -1248,7 +1248,7 @@ public class NanoHTTPD implements IServiceShutdown {
   }
 
   /** Hashtable mapping (String)FILENAME_EXTENSION -> (String)MIME_TYPE */
-  private static Hashtable<String, String> theMimeTypes = new Hashtable<String, String>();
+  private static Hashtable<String, String> theMimeTypes = new Hashtable<>();
 
   static {
     StringTokenizer st =

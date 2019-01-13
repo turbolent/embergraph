@@ -132,9 +132,9 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
           jp.getCurrentLocation().getColumnNr());
     }
 
-    List<String> varsList = new ArrayList<String>();
+    List<String> varsList = new ArrayList<>();
     boolean varsFound = false;
-    Set<BindingSet> bindings = new HashSet<BindingSet>();
+    Set<BindingSet> bindings = new HashSet<>();
 
     while (jp.nextToken() != JsonToken.END_OBJECT) {
 
@@ -185,7 +185,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
             }
 
           } else if (headStr.equals(LINK)) {
-            List<String> linksList = new ArrayList<String>();
+            List<String> linksList = new ArrayList<>();
             if (jp.nextToken() != JsonToken.START_ARRAY) {
               throw new QueryResultParseException(
                   "Expected links to be an array",

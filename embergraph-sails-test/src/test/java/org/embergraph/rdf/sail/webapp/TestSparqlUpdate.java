@@ -109,7 +109,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
         //		      "testMoveFromDefault",
         //				"testStressInsertWhereGraph",
         //				"testInsertWhereGraph",
-        new LinkedHashSet<BufferMode>(
+        new LinkedHashSet<>(
             Arrays.asList(
                 BufferMode.Transient, BufferMode.DiskWORM, BufferMode.MemStore, BufferMode.DiskRW)),
         TestMode.quads);

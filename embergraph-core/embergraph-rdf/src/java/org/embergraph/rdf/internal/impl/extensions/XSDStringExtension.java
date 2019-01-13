@@ -54,7 +54,7 @@ public class XSDStringExtension<V extends EmbergraphValue> implements IExtension
 
   public Set<EmbergraphURI> getDatatypes() {
 
-    final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
+    final Set<EmbergraphURI> datatypes = new LinkedHashSet<>();
     datatypes.add(xsdStringURI);
     return datatypes;
   }
@@ -79,11 +79,11 @@ public class XSDStringExtension<V extends EmbergraphValue> implements IExtension
     final String s = value.stringValue();
 
     final FullyInlineTypedLiteralIV<EmbergraphLiteral> delegate =
-        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
+        new FullyInlineTypedLiteralIV<>(
             s, // label
             null, // no language
             null // no datatype
-            );
+        );
 
     return new LiteralExtensionIV<EmbergraphLiteral>(delegate, xsdStringURI.getIV());
   }

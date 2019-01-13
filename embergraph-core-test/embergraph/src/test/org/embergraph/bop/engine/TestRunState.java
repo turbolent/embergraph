@@ -83,8 +83,8 @@ public class TestRunState extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*
@@ -95,7 +95,7 @@ public class TestRunState extends TestCase2 {
    */
   protected Set<Integer> newSet(int[] a) {
 
-    final Set<Integer> s = new LinkedHashSet<Integer>();
+    final Set<Integer> s = new LinkedHashSet<>();
 
     for (int x : a) {
 
@@ -113,7 +113,7 @@ public class TestRunState extends TestCase2 {
    */
   protected <T> Set<T> newSet(T[] a) {
 
-    final Set<T> s = new LinkedHashSet<T>();
+    final Set<T> s = new LinkedHashSet<>();
 
     for (T x : a) {
 
@@ -134,7 +134,7 @@ public class TestRunState extends TestCase2 {
 
     assertEquals(ids.length, vals.length);
 
-    final Map<Integer, AtomicLong> m = new LinkedHashMap<Integer, AtomicLong>();
+    final Map<Integer, AtomicLong> m = new LinkedHashMap<>();
 
     for (int i = 0; i < ids.length; i++) {
 
@@ -155,7 +155,7 @@ public class TestRunState extends TestCase2 {
 
     assertEquals(ids.length, vals.length);
 
-    final Map<Integer, T> m = new LinkedHashMap<Integer, T>();
+    final Map<Integer, T> m = new LinkedHashMap<>();
 
     for (int i = 0; i < ids.length; i++) {
 
@@ -179,7 +179,7 @@ public class TestRunState extends TestCase2 {
 
     assertEquals(ids.length, vals.length);
 
-    final Map<Integer, Set> m = new LinkedHashMap<Integer, Set>();
+    final Map<Integer, Set> m = new LinkedHashMap<>();
 
     for (int i = 0; i < ids.length; i++) {
 

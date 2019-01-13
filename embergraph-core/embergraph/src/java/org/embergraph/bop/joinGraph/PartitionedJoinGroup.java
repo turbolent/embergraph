@@ -42,33 +42,33 @@ public class PartitionedJoinGroup {
   private static final transient Logger log = Logger.getLogger(PartitionedJoinGroup.class);
 
   /** The set of variables bound by the non-optional predicates. */
-  private final Set<IVariable<?>> joinGraphVars = new LinkedHashSet<IVariable<?>>();
+  private final Set<IVariable<?>> joinGraphVars = new LinkedHashSet<>();
 
   /*
    * The set of non-optional predicates which have been flagged as "run first". These are usually
    * special access paths created using an expander which replaces a mock access path. For example,
    * free text search.
    */
-  private final List<IPredicate<?>> headPlan = new LinkedList<IPredicate<?>>();
+  private final List<IPredicate<?>> headPlan = new LinkedList<>();
 
   /** The set of non-optional predicates which represent the join graph. */
-  private final List<IPredicate<?>> joinGraph = new LinkedList<IPredicate<?>>();
+  private final List<IPredicate<?>> joinGraph = new LinkedList<>();
 
   /*
    * The set of constraints which can be evaluated with the head plan and/or join graph predicates
    * because the variables appearing in those constraints are known to become bound within the join
    * graph. ( The {@link #headPlan} and the {@link #joinGraph} share the same pool of constraints.)
    */
-  private final List<IConstraint> joinGraphConstraints = new LinkedList<IConstraint>();
+  private final List<IConstraint> joinGraphConstraints = new LinkedList<>();
 
   /** A set of optional predicates which will be run after the join graph. */
-  private final List<IPredicate<?>> tailPlan = new LinkedList<IPredicate<?>>();
+  private final List<IPredicate<?>> tailPlan = new LinkedList<>();
 
   /*
    * An unordered list of those constraints containing at least one variable known be bound (and
    * optionally) bound within the tail plan.
    */
-  private final List<IConstraint> tailPlanConstraints = new LinkedList<IConstraint>();
+  private final List<IConstraint> tailPlanConstraints = new LinkedList<>();
 
   /*
    * A map indicating which constraints are run for which predicate in the tail plan. The keys are
@@ -78,7 +78,7 @@ public class PartitionedJoinGroup {
    * @todo This assumes that the tail plan is not reordered.
    */
   private final Map<Integer /* predId */, List<IConstraint>> tailPlanConstraintMap =
-      new LinkedHashMap<Integer, List<IConstraint>>();
+      new LinkedHashMap<>();
 
   /*
    * The set of variables bound by the non-optional predicates (either the head plan or the join
@@ -215,7 +215,7 @@ public class PartitionedJoinGroup {
     final IConstraint[][] ret = new IConstraint[path.length][];
 
     // the set of variables which are bound.
-    final Set<IVariable<?>> boundVars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> boundVars = new LinkedHashSet<>();
 
     // add the already known bound vars
     if (knownBoundVars != null) {
@@ -230,7 +230,7 @@ public class PartitionedJoinGroup {
      */
 
     // the set of constraints which have been consumed.
-    final Set<IConstraint> used = new LinkedHashSet<IConstraint>();
+    final Set<IConstraint> used = new LinkedHashSet<>();
 
     for (int i = 0; i < path.length; i++) {
 
@@ -243,7 +243,7 @@ public class PartitionedJoinGroup {
       if (p == null) throw new IllegalArgumentException();
 
       // the constraints for the current predicate in the join path.
-      final List<IConstraint> constraints = new LinkedList<IConstraint>();
+      final List<IConstraint> constraints = new LinkedList<>();
 
       {
         /*
@@ -509,7 +509,7 @@ public class PartitionedJoinGroup {
      * Find the set of variables which are known to be bound because they
      * are referenced as operands of the predicates in the join path.
      */
-    final Set<IVariable<?>> knownBound = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> knownBound = new LinkedHashSet<>();
 
     for (IPredicate<?> p : path) {
 
@@ -739,7 +739,7 @@ public class PartitionedJoinGroup {
        * the last index in the tail plan at which it MIGHT become bound.
        */
       final Map<IVariable<?>, Integer /* lastIndexOf */> lastIndexOf =
-          new LinkedHashMap<IVariable<?>, Integer>();
+          new LinkedHashMap<>();
       int indexOf = 0;
       for (IPredicate<?> p : tailPlan) {
         final Iterator<IVariable<?>> vitr = BOpUtility.getArgumentVariables(p);
@@ -794,7 +794,7 @@ public class PartitionedJoinGroup {
            */
           List<IConstraint> tmp = tailPlanConstraintMap.get(predId);
           if (tmp == null) {
-            tmp = new LinkedList<IConstraint>();
+            tmp = new LinkedList<>();
             tailPlanConstraintMap.put(predId, tmp);
           }
           tmp.add(c);

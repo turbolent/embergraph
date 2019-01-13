@@ -27,7 +27,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
   public IV<V, Literal> clone(final boolean clearCache) {
 
     final PartlyInlineTypedLiteralIV<V> tmp =
-        new PartlyInlineTypedLiteralIV<V>(getDelegate(), getExtensionIV());
+        new PartlyInlineTypedLiteralIV<>(getDelegate(), getExtensionIV());
 
     if (!clearCache) {
 

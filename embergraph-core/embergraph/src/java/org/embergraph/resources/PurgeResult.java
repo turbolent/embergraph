@@ -148,7 +148,7 @@ public class PurgeResult implements Serializable, Params {
 
   public Map<String, Object> getParams() {
 
-    final Map<String, Object> v = new HashMap<String, Object>();
+    final Map<String, Object> v = new HashMap<>();
 
     v.put("firstCommitTime", firstCommitTime);
     v.put("lastCommitTime", lastCommitTime);

@@ -87,7 +87,7 @@ public class DropOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   /** Task executing on the node. */

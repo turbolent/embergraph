@@ -91,7 +91,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
   protected <T> IConstant<T> asConst(final T val) {
 
-    return new Constant<T>(val);
+    return new Constant<>(val);
   }
 
   /*
@@ -147,22 +147,22 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
     final IVariable<?> y = Var.var("y");
     final IVariable<?> z = Var.var("z");
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(vf.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     //		two.setValue(vf.createLiteral(2));
 
-    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+    final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
     //		three.setValue(vf.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(vf.createLiteral(4));
 
-    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+    final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
     five.setValue(vf.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(one));
@@ -283,24 +283,24 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
       assertNotNull(DC.getIV());
     }
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(vf.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(vf.createLiteral(2));
 
     //      final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
     //              3);
     //      three.setValue(vf.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(vf.createLiteral(4));
 
     //      final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
     //              5);
     //      five.setValue(vf.createLiteral(5));
 
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(Mike.getIV()));
@@ -428,17 +428,17 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
       assertNotNull(DC.getIV());
     }
 
-    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+    final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
     one.setValue(vf.createLiteral(1));
 
-    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+    final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
     two.setValue(vf.createLiteral(2));
 
     //		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
     //				3);
     //		three.setValue(vf.createLiteral(3));
 
-    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+    final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
     four.setValue(vf.createLiteral(4));
 
     //		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
@@ -455,7 +455,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
      * {x=:DC,    y=1}
      * </pre>
      */
-    final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+    final List<IBindingSet> bsets = new LinkedList<>();
     {
       final IBindingSet bset = new ListBindingSet();
       bset.set(x, asConst(Mike.getIV()));
@@ -610,20 +610,20 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
       final IVariable<?> y = Var.var("y");
       final IVariable<?> z = Var.var("z");
 
-      final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(1);
+      final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<>(1);
       one.setValue(vf.createLiteral(1));
 
-      final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(2);
+      final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<>(2);
 
-      final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(3);
+      final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<>(3);
 
-      final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(4);
+      final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<>(4);
       four.setValue(vf.createLiteral(4));
 
-      final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(5);
+      final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<>(5);
       five.setValue(vf.createLiteral(5));
 
-      final List<IBindingSet> bsets = new LinkedList<IBindingSet>();
+      final List<IBindingSet> bsets = new LinkedList<>();
       {
         final IBindingSet bset = new ListBindingSet();
         bset.set(x, asConst(one));
@@ -664,7 +664,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
     protected <T> IConstant<T> asConst(final T val) {
 
-      return new Constant<T>(val);
+      return new Constant<>(val);
     }
   }
 }

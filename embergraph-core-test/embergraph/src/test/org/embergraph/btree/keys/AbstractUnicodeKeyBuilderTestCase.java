@@ -223,10 +223,10 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
 
     final KVO<String>[] a =
         new KVO[] {
-          new KVO<String>(TestKeyBuilder.asSortKey("bro"), null, "bro"),
-          new KVO<String>(TestKeyBuilder.asSortKey("brown"), null, "brown"),
-          new KVO<String>(TestKeyBuilder.asSortKey("bre"), null, "bre"),
-          new KVO<String>(TestKeyBuilder.asSortKey("break"), null, "break"),
+            new KVO<>(TestKeyBuilder.asSortKey("bro"), null, "bro"),
+            new KVO<>(TestKeyBuilder.asSortKey("brown"), null, "brown"),
+            new KVO<>(TestKeyBuilder.asSortKey("bre"), null, "bre"),
+            new KVO<>(TestKeyBuilder.asSortKey("break"), null, "break"),
         };
 
     // sort by the assigned sort keys.

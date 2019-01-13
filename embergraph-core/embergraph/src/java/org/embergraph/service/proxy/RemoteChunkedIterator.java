@@ -117,7 +117,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
         log.info("nchunks=" + nchunks + " : source is exhausted");
       }
 
-      chunk = new RemoteChunk<E>(true /* exhausted */, serializer, keyOrder, null);
+      chunk = new RemoteChunk<>(true /* exhausted */, serializer, keyOrder, null);
 
     } else {
 
@@ -158,7 +158,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
                 + sourceExhausted);
       }
 
-      chunk = new RemoteChunk<E>(sourceExhausted, serializer, keyOrder, a);
+      chunk = new RemoteChunk<>(sourceExhausted, serializer, keyOrder, a);
     }
 
     nchunks++;

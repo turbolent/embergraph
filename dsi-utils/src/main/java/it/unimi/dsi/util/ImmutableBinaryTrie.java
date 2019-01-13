@@ -132,7 +132,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     defRetValue = -1;
     // Check order
     final Iterator<? extends T> iterator = elements.iterator();
-    final ObjectList<LongArrayBitVector> words = new ObjectArrayList<LongArrayBitVector>();
+    final ObjectList<LongArrayBitVector> words = new ObjectArrayList<>();
     int cmp;
     if (iterator.hasNext()) {
       final LongArrayBitVector prev =

@@ -144,9 +144,9 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       // note: use a large initial capacity. default concurrency level is 16.
 
-      groundTruthId2Term = new ConcurrentHashMap<Long, byte[]>(500000);
+      groundTruthId2Term = new ConcurrentHashMap<>(500000);
 
-      groundTruthTerm2Id = new ConcurrentHashMap<byte[], Long>(500000);
+      groundTruthTerm2Id = new ConcurrentHashMap<>(500000);
     }
   }
 

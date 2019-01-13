@@ -394,7 +394,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
         sampleService.scheduleWithFixedDelay(spamTask, initialDelay, delay, unit);
       }
 
-      final Collection<Callable<Void>> tasks = new HashSet<Callable<Void>>();
+      final Collection<Callable<Void>> tasks = new HashSet<>();
 
       for (int i = 0; i < ntrials; i++) {
 
@@ -434,7 +434,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
       // time.
       int ntimeout = 0;
       int ninterrupted = 0;
-      final LinkedList<Exception> failures = new LinkedList<Exception>();
+      final LinkedList<Exception> failures = new LinkedList<>();
 
       while (itr.hasNext()) {
 
@@ -1138,7 +1138,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
       // this is the test to be run.
       String className = StressTestConcurrent.class.getName();
 
-      Map<String, String> defaultProperties = new HashMap<String, String>();
+      Map<String, String> defaultProperties = new HashMap<>();
 
       // force delete of the files on close of the journal under test.
       defaultProperties.put(Options.CREATE_TEMP_FILE, "true");
@@ -1160,7 +1160,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       defaultProperties.put(TestOptions.NOPS, "100");
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       conditions.addAll(
           BasicExperimentConditions.getBasicConditions(

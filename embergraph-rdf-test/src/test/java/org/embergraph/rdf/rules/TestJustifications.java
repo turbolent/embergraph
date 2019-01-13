@@ -156,7 +156,7 @@ public class TestJustifications extends AbstractRuleTestCase {
          * wildcards.
          */
         //                bindingSet.set(Var.var("u"), new Constant<IV>(U));
-        bindingSet.set(Var.var("a"), new Constant<IV>(A));
+        bindingSet.set(Var.var("a"), new Constant<>(A));
         //                bindingSet.set(Var.var("y"), new Constant<IV>(Y));
 
         final ISolution solution = new Solution(joinNexus, rule, bindingSet);

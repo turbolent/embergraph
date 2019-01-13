@@ -35,7 +35,7 @@ public class DummyConstantNode extends ConstantNode {
 
   public DummyConstantNode(final EmbergraphValue val) {
 
-    super(new Constant<IV>(toDummyIV(val)));
+    super(new Constant<>(toDummyIV(val)));
   }
 
   /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */

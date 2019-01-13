@@ -132,7 +132,7 @@ public class ExecutionHelper<T> {
           interrupted = true;
         } catch (ExecutionException ex) {
           if (causes == null) {
-            causes = new LinkedList<ExecutionException>();
+            causes = new LinkedList<>();
           }
           causes.add(ex);
         }

@@ -151,7 +151,7 @@ public class TestNonBlockingLockManager extends TestCase {
   public void test_shutdownNow() throws InterruptedException, ExecutionException {
 
     final NonBlockingLockManager<String> service =
-        new NonBlockingLockManager<String>(
+        new NonBlockingLockManager<>(
             10 /* maxConcurrency */,
             true /* predeclareLocks */,
             new MockExecutor(null /*delegate*/));
@@ -179,7 +179,7 @@ public class TestNonBlockingLockManager extends TestCase {
   public void test_shutdown() throws InterruptedException, ExecutionException {
 
     final NonBlockingLockManager<String> service =
-        new NonBlockingLockManager<String>(
+        new NonBlockingLockManager<>(
             10 /* maxConcurrency */,
             true /* predeclareLocks */,
             new MockExecutor(null /*delegate*/));
@@ -244,7 +244,7 @@ public class TestNonBlockingLockManager extends TestCase {
         Executors.newCachedThreadPool(new DaemonThreadFactory(getClass().getName()));
 
     final NonBlockingLockManager<String> service =
-        new NonBlockingLockManager<String>(
+        new NonBlockingLockManager<>(
             10 /* maxConcurrency */, true /* predeclareLocks */, new MockExecutor(delegate));
 
     try {
@@ -283,7 +283,7 @@ public class TestNonBlockingLockManager extends TestCase {
         Executors.newCachedThreadPool(new DaemonThreadFactory(getClass().getName()));
 
     final NonBlockingLockManager<String> service =
-        new NonBlockingLockManager<String>(
+        new NonBlockingLockManager<>(
             10 /* maxConcurrency */, true /* predeclareLocks */, new MockExecutor(delegate));
 
     try {

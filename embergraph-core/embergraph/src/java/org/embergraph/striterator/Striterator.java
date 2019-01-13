@@ -126,7 +126,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
   @Override
   public IStriterator<I, E> append(final I src) {
 
-    return addFilter(new Appender<I, E>(src));
+    return addFilter(new Appender<>(src));
   }
 
   /*

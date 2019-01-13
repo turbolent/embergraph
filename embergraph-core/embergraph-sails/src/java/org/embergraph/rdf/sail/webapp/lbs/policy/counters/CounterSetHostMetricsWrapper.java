@@ -45,7 +45,7 @@ public class CounterSetHostMetricsWrapper extends AbstractHostMetrics {
   @Override
   public String[] getMetricNames() {
 
-    final List<String> list = new LinkedList<String>();
+    final List<String> list = new LinkedList<>();
 
     @SuppressWarnings("rawtypes")
     final Iterator<ICounter> itr = counterSet.getCounters(null /* filter */);

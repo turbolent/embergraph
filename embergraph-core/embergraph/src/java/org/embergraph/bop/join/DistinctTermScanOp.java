@@ -162,7 +162,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask<E>(this, context));
+    return new FutureTask<>(new ChunkTask<>(this, context));
   }
 
   /** Copy the source to the sink. */
@@ -206,7 +206,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
       final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       final IVariable<?>[] selectVars = op.getSelect();
 
@@ -420,7 +420,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
                     }
                   });
 
-      return new ChunkedWrappedIterator<IV>(itr, ap.getChunkCapacity(), IV.class);
+      return new ChunkedWrappedIterator<>(itr, ap.getChunkCapacity(), IV.class);
     }
   } // class ChunkTask
 }

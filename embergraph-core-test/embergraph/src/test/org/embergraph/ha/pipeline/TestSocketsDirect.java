@@ -598,8 +598,8 @@ public class TestSocketsDirect extends TestCase3 {
 
     final int nclients = 10;
 
-    final ArrayList<SocketChannel> clients = new ArrayList<SocketChannel>();
-    final ArrayList<Socket> sockets = new ArrayList<Socket>();
+    final ArrayList<SocketChannel> clients = new ArrayList<>();
+    final ArrayList<Socket> sockets = new ArrayList<>();
 
     final InetSocketAddress serverAddr = new InetSocketAddress(getPort(0));
 
@@ -689,7 +689,7 @@ public class TestSocketsDirect extends TestCase3 {
   /** wrap the ServerSocket accept with a timeout check. */
   private Socket accept(final ServerSocket ss) {
 
-    final AtomicReference<Socket> av = new AtomicReference<Socket>();
+    final AtomicReference<Socket> av = new AtomicReference<>();
 
     assertNoTimeout(
         1,

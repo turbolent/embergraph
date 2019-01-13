@@ -56,11 +56,11 @@ public class ASTJoinGroupPartitions {
       final GroupNodeVarBindingInfoMap bindingInfo,
       final Set<IVariable<?>> externallyKnownProduced) {
 
-    partitions = new ArrayList<ASTJoinGroupPartition>();
+    partitions = new ArrayList<>();
 
-    final Set<IVariable<?>> tmpKnownProduced = new HashSet<IVariable<?>>(externallyKnownProduced);
+    final Set<IVariable<?>> tmpKnownProduced = new HashSet<>(externallyKnownProduced);
 
-    final List<IGroupMemberNode> tmpNonOptionalOrMinusNodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> tmpNonOptionalOrMinusNodes = new ArrayList<>();
     IGroupMemberNode tmpOptionalOrMinus = null;
     for (int i = 0; i < nodes.size(); i++) {
 
@@ -87,10 +87,10 @@ public class ASTJoinGroupPartitions {
         // create partition
         final ASTJoinGroupPartition partition =
             new ASTJoinGroupPartition(
-                new LinkedList<IGroupMemberNode>(tmpNonOptionalOrMinusNodes),
+                new LinkedList<>(tmpNonOptionalOrMinusNodes),
                 tmpOptionalOrMinus /* may be null */,
                 bindingInfo,
-                new HashSet<IVariable<?>>(tmpKnownProduced));
+                new HashSet<>(tmpKnownProduced));
 
         // record partition
         partitions.add(partition);
@@ -106,10 +106,10 @@ public class ASTJoinGroupPartitions {
     if (partitions.isEmpty()) {
       final ASTJoinGroupPartition partition =
           new ASTJoinGroupPartition(
-              new LinkedList<IGroupMemberNode>(tmpNonOptionalOrMinusNodes),
+              new LinkedList<>(tmpNonOptionalOrMinusNodes),
               null,
               bindingInfo,
-              new HashSet<IVariable<?>>(tmpKnownProduced));
+              new HashSet<>(tmpKnownProduced));
       partitions.add(partition);
     }
   }
@@ -122,7 +122,7 @@ public class ASTJoinGroupPartitions {
   /** Extracts all nodes in all partitions, in order. */
   public LinkedList<IGroupMemberNode> extractNodeList(final boolean includeOptionalOrMinusNode) {
 
-    LinkedList<IGroupMemberNode> res = new LinkedList<IGroupMemberNode>();
+    LinkedList<IGroupMemberNode> res = new LinkedList<>();
     for (int i = 0; i < partitions.size(); i++) {
       res.addAll(partitions.get(i).extractNodeList(includeOptionalOrMinusNode));
     }
@@ -137,7 +137,7 @@ public class ASTJoinGroupPartitions {
    */
   public void placeAtFirstPossiblePosition(IGroupMemberNode node) {
 
-    final Set<IVariable<?>> knownBoundFromPrevPartitions = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> knownBoundFromPrevPartitions = new HashSet<>();
     for (int i = 0; i < partitions.size(); i++) {
 
       final ASTJoinGroupPartition partition = partitions.get(i);
@@ -168,7 +168,7 @@ public class ASTJoinGroupPartitions {
         } else {
 
           // append a dummy partition containing the node
-          final LinkedList<IGroupMemberNode> listWithNode = new LinkedList<IGroupMemberNode>();
+          final LinkedList<IGroupMemberNode> listWithNode = new LinkedList<>();
           listWithNode.add(node);
 
           final ASTJoinGroupPartition dummyPartition =

@@ -41,7 +41,7 @@ public class XSDIntegerIV<V extends EmbergraphLiteral> extends NumericIV<V, BigI
 
   public IV<V, BigInteger> clone(final boolean clearCache) {
 
-    final XSDIntegerIV<V> tmp = new XSDIntegerIV<V>(value);
+    final XSDIntegerIV<V> tmp = new XSDIntegerIV<>(value);
 
     // propagate transient state if available.
     tmp.byteLength = byteLength;

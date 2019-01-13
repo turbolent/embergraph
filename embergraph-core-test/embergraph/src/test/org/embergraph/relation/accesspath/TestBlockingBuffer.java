@@ -79,7 +79,7 @@ public class TestBlockingBuffer extends TestCase2 {
     final Object e1 = new Object();
     final Object e2 = new Object();
 
-    final BlockingBuffer<Object> buffer = new BlockingBuffer<Object>(3 /* capacity */);
+    final BlockingBuffer<Object> buffer = new BlockingBuffer<>(3 /* capacity */);
 
     // buffer is empty.
     assertTrue(buffer.isOpen());
@@ -181,10 +181,10 @@ public class TestBlockingBuffer extends TestCase2 {
     final Object e0 = new Object();
 
     // the buffer
-    final BlockingBuffer<Object> buffer = new BlockingBuffer<Object>(2 /* capacity */);
+    final BlockingBuffer<Object> buffer = new BlockingBuffer<>(2 /* capacity */);
 
     // Set to the first cause for the producer.
-    final AtomicReference<Throwable> producerCause = new AtomicReference<Throwable>();
+    final AtomicReference<Throwable> producerCause = new AtomicReference<>();
 
     // the producer - just drops an object onto the buffer.
     final class Producer implements Runnable {
@@ -265,10 +265,10 @@ public class TestBlockingBuffer extends TestCase2 {
     final Object e0 = new Object();
 
     // the buffer
-    final BlockingBuffer<Object> buffer = new BlockingBuffer<Object>(2 /* capacity */);
+    final BlockingBuffer<Object> buffer = new BlockingBuffer<>(2 /* capacity */);
 
     // Set to the first cause for the producer.
-    final AtomicReference<Throwable> producerCause = new AtomicReference<Throwable>();
+    final AtomicReference<Throwable> producerCause = new AtomicReference<>();
 
     // the producer - just drops an object onto the buffer.
     final class Producer implements Runnable {
@@ -300,7 +300,7 @@ public class TestBlockingBuffer extends TestCase2 {
     try {
 
       // Wrap computation as FutureTask.
-      ft = new FutureTask<Void>(new Producer(), null /* result */);
+      ft = new FutureTask<>(new Producer(), null /* result */);
 
       /*
        * Set the Future on the BlockingBuffer. This is how it will notice
@@ -380,16 +380,16 @@ public class TestBlockingBuffer extends TestCase2 {
     final Object e0 = new Object();
 
     // the buffer
-    final BlockingBuffer<Object> buffer = new BlockingBuffer<Object>(BUFFER_CAPACITY);
+    final BlockingBuffer<Object> buffer = new BlockingBuffer<>(BUFFER_CAPACITY);
 
     // the iterator draining that buffer.
     final IAsynchronousIterator<Object> itr = buffer.iterator();
 
     // Set to the first cause for the producer.
-    final AtomicReference<Throwable> producerCause = new AtomicReference<Throwable>();
+    final AtomicReference<Throwable> producerCause = new AtomicReference<>();
 
     // Set to the first cause for the consumer.
-    final AtomicReference<Throwable> consumerCause = new AtomicReference<Throwable>();
+    final AtomicReference<Throwable> consumerCause = new AtomicReference<>();
 
     // the producer - just drops an object onto the buffer.
     final class Producer implements Runnable {

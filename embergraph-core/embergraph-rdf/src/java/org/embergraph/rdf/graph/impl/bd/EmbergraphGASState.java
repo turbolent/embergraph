@@ -58,7 +58,7 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
     final AbstractTripleStore kb = getGraphAccessor().getKB();
 
     // Get all terms in the frontier.
-    final Set<IV<?, ?>> tmp = new HashSet<IV<?, ?>>();
+    final Set<IV<?, ?>> tmp = new HashSet<>();
 
     for (Value v : frontier()) {
 

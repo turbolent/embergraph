@@ -118,7 +118,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new InsertTask<E>(this, context));
+    return new FutureTask<>(new InsertTask<>(this, context));
   }
 
   /** Create elements from the selected bindings and insert them onto the named index. */

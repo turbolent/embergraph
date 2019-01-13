@@ -108,7 +108,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
     String value = null;
 
     // added for Sids support
-    final Map<String, Value> sid = new LinkedHashMap<String, Value>();
+    final Map<String, Value> sid = new LinkedHashMap<>();
 
     while (jp.nextToken() != JsonToken.END_OBJECT) {
 

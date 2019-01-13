@@ -60,7 +60,7 @@ public class LatchedExecutor implements Executor {
    *
    * @todo The capacity of this queue does not of necessity need to be unbounded.
    */
-  private final BlockingQueue<Runnable> queue = new LinkedBlockingDeque<Runnable>(/*unbounded*/ );
+  private final BlockingQueue<Runnable> queue = new LinkedBlockingDeque<>(/*unbounded*/);
 
   private final int nparallel;
 

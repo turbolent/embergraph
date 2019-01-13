@@ -50,7 +50,7 @@ public class LinkedBlockingQueueTest extends JSR166TestCase {
 
   /** Create a queue of given size containing consecutive Integers 0 ... n. */
   private LinkedBlockingQueue<Integer> populatedQueue(int n) {
-    LinkedBlockingQueue<Integer> q = new LinkedBlockingQueue<Integer>(n);
+    LinkedBlockingQueue<Integer> q = new LinkedBlockingQueue<>(n);
     assertTrue(q.isEmpty());
     for (int i = 0; i < n; i++) assertTrue(q.offer(new Integer(i)));
     assertFalse(q.isEmpty());

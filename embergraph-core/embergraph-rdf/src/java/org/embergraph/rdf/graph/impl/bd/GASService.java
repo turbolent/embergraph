@@ -321,7 +321,7 @@ public class GASService extends CustomServiceFactoryBase {
   static final Set<URI> gasUris;
 
   static {
-    final Set<URI> set = new LinkedHashSet<URI>();
+    final Set<URI> set = new LinkedHashSet<>();
 
     set.add(Options.PROGRAM);
 
@@ -563,7 +563,7 @@ public class GASService extends CustomServiceFactoryBase {
         if (!s.equals(sp.s().getValue())) continue;
         if (!p.equals(sp.p().getValue())) continue;
 
-        if (tmp == null) tmp = new LinkedList<Value>();
+        if (tmp == null) tmp = new LinkedList<>();
 
         // found an o.
         return ((VarNode) sp.o()).getValueExpression();
@@ -606,7 +606,7 @@ public class GASService extends CustomServiceFactoryBase {
         if (!s.equals(sp.s().getValue())) continue;
         if (!p.equals(sp.p().getValue())) continue;
 
-        if (tmp == null) tmp = new LinkedList<Value>();
+        if (tmp == null) tmp = new LinkedList<>();
 
         // found an o.
         final TermNode o = sp.o();
@@ -787,9 +787,9 @@ public class GASService extends CustomServiceFactoryBase {
 
         final IBindingSet[] out =
             gasState.reduce(
-                new BindingSetReducer<VS, ES, ST>(outVars, store, gasProgram, gasContext));
+                new BindingSetReducer<>(outVars, store, gasProgram, gasContext));
 
-        return new ChunkedArrayIterator<IBindingSet>(out);
+        return new ChunkedArrayIterator<>(out);
 
       } finally {
 
@@ -851,7 +851,7 @@ public class GASService extends CustomServiceFactoryBase {
       private final List<IBinder<VS, ES, ST>> binderList;
 
       /** The collected solutions. */
-      private final List<IBindingSet> tmp = new LinkedList<IBindingSet>();
+      private final List<IBindingSet> tmp = new LinkedList<>();
 
       /*
        * @param outVars The declared output variables (the ones that the caller wants to extract).
@@ -877,7 +877,7 @@ public class GASService extends CustomServiceFactoryBase {
       @Override
       public void visit(final IGASState<VS, ES, ST> state, final Value u) {
 
-        final List<IBindingSet> bSets = new LinkedList<IBindingSet>();
+        final List<IBindingSet> bSets = new LinkedList<>();
 
         bSets.add(new ListBindingSet());
 
@@ -890,7 +890,7 @@ public class GASService extends CustomServiceFactoryBase {
 
           final Iterator<IBindingSet> it = bSets.iterator();
 
-          final List<IBindingSet> bSets2 = new LinkedList<IBindingSet>();
+          final List<IBindingSet> bSets2 = new LinkedList<>();
 
           while (it.hasNext()) {
 

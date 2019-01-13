@@ -55,8 +55,8 @@ public class TestReadOnlyBTreeCursors extends AbstractBTreeCursorTestCase {
 
     assert btree.isReadOnly();
 
-    return new ReadOnlyBTreeTupleCursor<String>(
-        (BTree) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
+    return new ReadOnlyBTreeTupleCursor<>(
+        (BTree) btree, new Tuple<>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
   /*
@@ -75,7 +75,7 @@ public class TestReadOnlyBTreeCursors extends AbstractBTreeCursorTestCase {
 
     final ITupleCursor<String> cursor = newCursor(btree);
 
-    assertEquals(new TestTuple<String>(10, "Bryan"), cursor.next());
+    assertEquals(new TestTuple<>(10, "Bryan"), cursor.next());
 
     try {
       cursor.remove();

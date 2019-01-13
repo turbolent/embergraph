@@ -89,7 +89,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
         FunctionNode.AND(bound1, FunctionNode.AND(not1, FunctionNode.AND(or1, bound6)));
 
     final List<IValueExpressionNode> actual =
-        StaticAnalysis.extractToplevelConjuncts(toCheck, new ArrayList<IValueExpressionNode>());
+        StaticAnalysis.extractToplevelConjuncts(toCheck, new ArrayList<>());
 
     assertFalse(StaticAnalysis.isCNF(toCheck));
     assertEquals(actual.size(), 4);
@@ -127,7 +127,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     final ASTFilterNormalizationOptimizer filterOptimizer = new ASTFilterNormalizationOptimizer();
 
     final List<FilterNode> filters =
-        filterOptimizer.constructFiltersForValueExpressionNode(base, new ArrayList<FilterNode>());
+        filterOptimizer.constructFiltersForValueExpressionNode(base, new ArrayList<>());
 
     assertFalse(StaticAnalysis.isCNF(base));
     assertEquals(filters.size(), 4);
@@ -156,7 +156,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     // conjunct 4
     final FunctionNode bound6 = new FunctionNode(FunctionRegistry.BOUND, null, new VarNode("s6"));
 
-    final List<IValueExpressionNode> baseConjuncts = new ArrayList<IValueExpressionNode>();
+    final List<IValueExpressionNode> baseConjuncts = new ArrayList<>();
     baseConjuncts.add(bound1);
     baseConjuncts.add(not1);
     baseConjuncts.add(or1);
@@ -1035,7 +1035,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
        * <p>Each of those topmost OR expression gives us one FILTER expression in the end, resulting
        * in 8x8 = 64 FILTERs. We construct them schematically below.
        */
-      final List<FunctionNode> lefts = new ArrayList<FunctionNode>();
+      final List<FunctionNode> lefts = new ArrayList<>();
       lefts.add(FunctionNode.OR(bound1, bound3));
       lefts.add(FunctionNode.OR(bound1, bound4));
       lefts.add(FunctionNode.OR(bound2, bound3));
@@ -1045,7 +1045,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
       lefts.add(FunctionNode.OR(bound6, bound7));
       lefts.add(FunctionNode.OR(bound6, bound8));
 
-      final List<FunctionNode> rights = new ArrayList<FunctionNode>();
+      final List<FunctionNode> rights = new ArrayList<>();
       rights.add(FunctionNode.OR(bound9, bound11));
       rights.add(FunctionNode.OR(bound9, bound12));
       rights.add(FunctionNode.OR(bound10, bound11));
@@ -1157,13 +1157,13 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
        * in the right top-level AND expression. After decomposing, this actually gives us 4x4 = 16
        * FILTERs.
        */
-      final List<FunctionNode> lefts = new ArrayList<FunctionNode>();
+      final List<FunctionNode> lefts = new ArrayList<>();
       lefts.add(FunctionNode.OR(bound1, bound3));
       lefts.add(FunctionNode.OR(bound1, bound4));
       lefts.add(FunctionNode.OR(bound2, bound3));
       lefts.add(FunctionNode.OR(bound2, bound4));
 
-      final List<FunctionNode> rights = new ArrayList<FunctionNode>();
+      final List<FunctionNode> rights = new ArrayList<>();
       rights.add(FunctionNode.OR(bound5, bound7));
       rights.add(FunctionNode.OR(bound5, bound8));
       rights.add(FunctionNode.OR(bound6, bound7));

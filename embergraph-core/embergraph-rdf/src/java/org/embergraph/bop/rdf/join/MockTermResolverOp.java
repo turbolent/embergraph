@@ -135,7 +135,7 @@ public class MockTermResolverOp extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask(this, context));
+    return new FutureTask<>(new ChunkTask(this, context));
   }
 
   /** Task executing on the node. */
@@ -226,7 +226,7 @@ public class MockTermResolverOp extends PipelineOp {
      * EmbergraphValue.
      */
     final Map<IV<?, ?>, EmbergraphValue> ivMap =
-        new LinkedHashMap<IV<?, ?>, EmbergraphValue>(initialCapacity);
+        new LinkedHashMap<>(initialCapacity);
 
     for (IBindingSet solution : chunk) {
 

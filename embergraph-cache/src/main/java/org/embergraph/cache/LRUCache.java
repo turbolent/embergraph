@@ -116,7 +116,7 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
 
     this.loadFactor = loadFactor;
 
-    this.map = new HashMap<K, Entry<K, T>>(capacity, loadFactor);
+    this.map = new HashMap<>(capacity, loadFactor);
   }
 
   public void setListener(ICacheListener<K, T> listener) {
@@ -279,7 +279,7 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
            * over capacity.
            */
 
-          entry = new Entry<K, T>(key, obj, dirty);
+          entry = new Entry<>(key, obj, dirty);
 
           map.put(key, entry);
 
@@ -380,7 +380,7 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
    */
   protected synchronized void addCacheOrderChangeListener(ICacheOrderChangeListener<K, T> l) {
     if (_cacheOrderChangeListeners == null) {
-      _cacheOrderChangeListeners = new CopyOnWriteArraySet<ICacheOrderChangeListener<K, T>>();
+      _cacheOrderChangeListeners = new CopyOnWriteArraySet<>();
     }
     _cacheOrderChangeListeners.add(l);
   }

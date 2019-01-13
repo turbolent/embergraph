@@ -550,7 +550,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     final Journal journal = new Journal(properties);
 
     // the thread that we need to eventually interrupt.
-    final AtomicReference<Thread> t = new AtomicReference<Thread>(null);
+    final AtomicReference<Thread> t = new AtomicReference<>(null);
 
     try {
 
@@ -1718,7 +1718,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
          * while.
          */
         {
-          final Collection<AbstractTask<Void>> tasks = new LinkedList<AbstractTask<Void>>();
+          final Collection<AbstractTask<Void>> tasks = new LinkedList<>();
           for (int i = 0; i < NRESOURCES * 10; i++) {
 
             tasks.add(new ReadTask(journal, resource[i % resource.length]));

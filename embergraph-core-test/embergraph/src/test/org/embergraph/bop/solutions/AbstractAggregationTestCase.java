@@ -154,8 +154,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     final IVariable<?> org = Var.var("org");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
 
     final GroupByOp query =
         newFixture(
@@ -201,16 +201,16 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -257,8 +257,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<?> org = Var.var("org");
     final IVariable<?> newVar = Var.var("newVar");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
 
     final GroupByOp query =
         newFixture(
@@ -304,16 +304,16 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -404,21 +404,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<?> lprice = Var.var("lprice");
     final IVariable<?> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<?> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
@@ -469,11 +469,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(7)));
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(21)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
@@ -484,17 +484,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -586,23 +586,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<?> totalPrice = Var.var("totalPrice");
     final IVariable<?> z = Var.var("z");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price12 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(12));
+        new Constant<>(new XSDNumericIV<>(12));
 
     final IValueExpression<?> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
@@ -655,11 +655,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(7)));
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(21)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
@@ -671,17 +671,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -778,27 +778,27 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * value's cached (the data are not being visited which is why the tests
      * are passing). Also fix the other tests in this class. See TestSUM.
      */
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
 
     final IConstraint totalPriceConstraint =
-        new SPARQLConstraint<XSDBooleanIV>(
+        new SPARQLConstraint<>(
             new CompareBOp(
                 totalPrice,
                 new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
@@ -849,8 +849,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(21)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org1, _price21})
@@ -859,17 +859,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -961,31 +961,31 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
-    final TermId tid1 = new TermId<EmbergraphValue>(VTE.LITERAL, 1);
+    final TermId tid1 = new TermId<>(VTE.LITERAL, 1);
     tid1.setValue(f.createLiteral("blue"));
-    final IConstant<IV> blue = new Constant<IV>(tid1);
+    final IConstant<IV> blue = new Constant<>(tid1);
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
 
     final IConstraint totalPriceConstraint =
-        new SPARQLConstraint<XSDBooleanIV>(
+        new SPARQLConstraint<>(
             new CompareBOp(
                 totalPrice,
                 new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(5)),
@@ -1036,8 +1036,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(7)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org2, _price7})
@@ -1046,17 +1046,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -1147,25 +1147,25 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
-    final TermId tid1 = new TermId<EmbergraphValue>(VTE.LITERAL, 1);
+    final TermId tid1 = new TermId<>(VTE.LITERAL, 1);
     tid1.setValue(f.createLiteral("blue"));
-    final IConstant<IV> blue = new Constant<IV>(tid1);
+    final IConstant<IV> blue = new Constant<>(tid1);
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
@@ -1216,8 +1216,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(7)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(
@@ -1233,17 +1233,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -1334,27 +1334,27 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
 
     final IConstraint totalPriceConstraint =
-        new SPARQLConstraint<XSDBooleanIV>(
+        new SPARQLConstraint<>(
             new CompareBOp(
                 totalPrice,
                 new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
@@ -1405,8 +1405,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(28)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price28})
@@ -1415,17 +1415,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -1510,27 +1510,27 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
 
     final IConstraint totalPriceConstraint =
-        new SPARQLConstraint<XSDBooleanIV>(
+        new SPARQLConstraint<>(
             new CompareBOp(
                 totalPrice,
                 new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(50)),
@@ -1576,17 +1576,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -1680,21 +1680,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(false /* distinct */, (IValueExpression<IV>) lprice));
@@ -1744,8 +1744,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(28)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price28})
@@ -1754,17 +1754,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -1858,21 +1858,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> lprice = Var.var("lprice");
     final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalPriceExpr =
         new Bind(totalPrice, new SUM(true /* distinct */, (IValueExpression<IV>) lprice));
@@ -1922,8 +1922,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
     // Note: The aggregates will have gone through type promotion.
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(21)));
     final IBindingSet[] expected =
         new IBindingSet[] {
           new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price21})
@@ -1946,17 +1946,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -2047,21 +2047,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> star = Var.var("*");
     final IVariable<IV> totalCount = Var.var("totalCount");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalCountExpr =
         new Bind(totalCount, new COUNT(false /* distinct */, star));
@@ -2113,8 +2113,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     // Constant<XSDNumericIV<EmbergraphLiteral>>(
     //                new XSDNumericIV<EmbergraphLiteral>(4L));
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _totalCount =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(4L)));
 
     final IBindingSet[] expected =
         new IBindingSet[] {
@@ -2124,17 +2124,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -2226,21 +2226,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IVariable<IV> star = Var.var("*");
     final IVariable<IV> totalCount = Var.var("totalCount");
 
-    final IConstant<String> org1 = new Constant<String>("org1");
-    final IConstant<String> org2 = new Constant<String>("org2");
-    final IConstant<String> auth1 = new Constant<String>("auth1");
-    final IConstant<String> auth2 = new Constant<String>("auth2");
-    final IConstant<String> auth3 = new Constant<String>("auth3");
-    final IConstant<String> book1 = new Constant<String>("book1");
-    final IConstant<String> book2 = new Constant<String>("book2");
-    final IConstant<String> book3 = new Constant<String>("book3");
-    final IConstant<String> book4 = new Constant<String>("book4");
+    final IConstant<String> org1 = new Constant<>("org1");
+    final IConstant<String> org2 = new Constant<>("org2");
+    final IConstant<String> auth1 = new Constant<>("auth1");
+    final IConstant<String> auth2 = new Constant<>("auth2");
+    final IConstant<String> auth3 = new Constant<>("auth3");
+    final IConstant<String> book1 = new Constant<>("book1");
+    final IConstant<String> book2 = new Constant<>("book2");
+    final IConstant<String> book3 = new Constant<>("book3");
+    final IConstant<String> book4 = new Constant<>("book4");
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+        new Constant<>(new XSDNumericIV<>(5));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+        new Constant<>(new XSDNumericIV<>(7));
     final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+        new Constant<>(new XSDNumericIV<>(9));
 
     final IValueExpression<IV> totalCountExpr =
         new Bind(totalCount, new COUNT(true /* distinct */, star));
@@ -2296,8 +2296,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     // Constant<XSDNumericIV<EmbergraphLiteral>>(
     //                new XSDNumericIV<EmbergraphLiteral>(4L));
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _totalCount =
-        new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
+        new Constant<>(
+            new XSDIntegerIV<>(BigInteger.valueOf(4L)));
 
     final IBindingSet[] expected =
         new IBindingSet[] {
@@ -2321,17 +2321,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final BOpStats stats = query.newStats();
 
     final IAsynchronousIterator<IBindingSet[]> source =
-        new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+        new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
     final IBlockingBuffer<IBindingSet[]> sink =
-        new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+        new BlockingBufferWithStats<>(query, stats);
 
     final IRunningQuery runningQuery =
         new MockRunningQuery(null /* fed */, null /* indexManager */, queryContext);
 
     // Note: [lastInvocation:=true] forces the solutions to be emitted.
     final BOpContext<IBindingSet> context =
-        new BOpContext<IBindingSet>(
+        new BOpContext<>(
             runningQuery,
             -1 /* partitionId */,
             stats,
@@ -2426,21 +2426,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> lprice = Var.var("lprice");
       final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-      final IConstant<String> org1 = new Constant<String>("org1");
-      final IConstant<String> org2 = new Constant<String>("org2");
-      final IConstant<String> auth1 = new Constant<String>("auth1");
-      final IConstant<String> auth2 = new Constant<String>("auth2");
-      final IConstant<String> auth3 = new Constant<String>("auth3");
-      final IConstant<String> book1 = new Constant<String>("book1");
-      final IConstant<String> book2 = new Constant<String>("book2");
-      final IConstant<String> book3 = new Constant<String>("book3");
-      final IConstant<String> book4 = new Constant<String>("book4");
+      final IConstant<String> org1 = new Constant<>("org1");
+      final IConstant<String> org2 = new Constant<>("org2");
+      final IConstant<String> auth1 = new Constant<>("auth1");
+      final IConstant<String> auth2 = new Constant<>("auth2");
+      final IConstant<String> auth3 = new Constant<>("auth3");
+      final IConstant<String> book1 = new Constant<>("book1");
+      final IConstant<String> book2 = new Constant<>("book2");
+      final IConstant<String> book3 = new Constant<>("book3");
+      final IConstant<String> book4 = new Constant<>("book4");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+          new Constant<>(new XSDNumericIV<>(5));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+          new Constant<>(new XSDNumericIV<>(7));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // SUM(?lprice)
       final IValueExpression<IV> sumLPrice =
@@ -2455,7 +2455,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice, nestedExpr);
 
       final IConstraint totalPriceConstraint =
-          new SPARQLConstraint<XSDBooleanIV>(
+          new SPARQLConstraint<>(
               new CompareBOp(
                   totalPrice,
                   new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
@@ -2506,8 +2506,8 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: The aggregates will have gone through type promotion.
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price140 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(140)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(140)));
       final IBindingSet[] expected =
           new IBindingSet[] {
             new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price140})
@@ -2530,10 +2530,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -2541,7 +2541,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,
@@ -2641,21 +2641,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> lprice = Var.var("lprice");
       final IVariable<IV> totalPrice = Var.var("totalPrice");
 
-      final IConstant<String> org1 = new Constant<String>("org1");
-      final IConstant<String> org2 = new Constant<String>("org2");
-      final IConstant<String> auth1 = new Constant<String>("auth1");
-      final IConstant<String> auth2 = new Constant<String>("auth2");
-      final IConstant<String> auth3 = new Constant<String>("auth3");
-      final IConstant<String> book1 = new Constant<String>("book1");
-      final IConstant<String> book2 = new Constant<String>("book2");
-      final IConstant<String> book3 = new Constant<String>("book3");
-      final IConstant<String> book4 = new Constant<String>("book4");
+      final IConstant<String> org1 = new Constant<>("org1");
+      final IConstant<String> org2 = new Constant<>("org2");
+      final IConstant<String> auth1 = new Constant<>("auth1");
+      final IConstant<String> auth2 = new Constant<>("auth2");
+      final IConstant<String> auth3 = new Constant<>("auth3");
+      final IConstant<String> book1 = new Constant<>("book1");
+      final IConstant<String> book2 = new Constant<>("book2");
+      final IConstant<String> book3 = new Constant<>("book3");
+      final IConstant<String> book4 = new Constant<>("book4");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+          new Constant<>(new XSDNumericIV<>(5));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+          new Constant<>(new XSDNumericIV<>(7));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // SUM(?lprice)
       final IValueExpression<IV> sumLPrice =
@@ -2670,7 +2670,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice, nestedExpr);
 
       final IConstraint totalPriceConstraint =
-          new SPARQLConstraint<XSDBooleanIV>(
+          new SPARQLConstraint<>(
               new CompareBOp(
                   totalPrice,
                   new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
@@ -2722,11 +2722,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: The aggregates will have gone through type promotion.
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price84 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(84)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(84)));
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price14 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(14)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(14)));
       final IBindingSet[] expected =
           new IBindingSet[] {
             new ListBindingSet(
@@ -2752,10 +2752,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -2763,7 +2763,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,
@@ -2870,21 +2870,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> totalPrice = Var.var("totalPrice");
       final IVariable<IV> inflatedPrice = Var.var("inflatedPrice");
 
-      final IConstant<String> org1 = new Constant<String>("org1");
-      final IConstant<String> org2 = new Constant<String>("org2");
-      final IConstant<String> auth1 = new Constant<String>("auth1");
-      final IConstant<String> auth2 = new Constant<String>("auth2");
-      final IConstant<String> auth3 = new Constant<String>("auth3");
-      final IConstant<String> book1 = new Constant<String>("book1");
-      final IConstant<String> book2 = new Constant<String>("book2");
-      final IConstant<String> book3 = new Constant<String>("book3");
-      final IConstant<String> book4 = new Constant<String>("book4");
+      final IConstant<String> org1 = new Constant<>("org1");
+      final IConstant<String> org2 = new Constant<>("org2");
+      final IConstant<String> auth1 = new Constant<>("auth1");
+      final IConstant<String> auth2 = new Constant<>("auth2");
+      final IConstant<String> auth3 = new Constant<>("auth3");
+      final IConstant<String> book1 = new Constant<>("book1");
+      final IConstant<String> book2 = new Constant<>("book2");
+      final IConstant<String> book3 = new Constant<>("book3");
+      final IConstant<String> book4 = new Constant<>("book4");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+          new Constant<>(new XSDNumericIV<>(5));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+          new Constant<>(new XSDNumericIV<>(7));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // SUM(?lprice)
       final IValueExpression<IV> totalPriceExpr =
@@ -2898,7 +2898,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
                   totalPrice, new Constant(new XSDNumericIV(2)), MathBOp.MathOp.MULTIPLY, globals));
 
       final IConstraint totalPriceConstraint =
-          new SPARQLConstraint<XSDBooleanIV>(
+          new SPARQLConstraint<>(
               new CompareBOp(
                   totalPrice,
                   new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
@@ -2949,11 +2949,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: The aggregates will have gone through type promotion.
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(28)));
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price56 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(56)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(56)));
       final IBindingSet[] expected =
           new IBindingSet[] {
             new ListBindingSet(
@@ -2964,10 +2964,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -2975,7 +2975,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,
@@ -3084,21 +3084,21 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> totalPrice = Var.var("totalPrice");
       final IVariable<IV> inflatedPrice = Var.var("inflatedPrice");
 
-      final IConstant<String> org1 = new Constant<String>("org1");
-      final IConstant<String> org2 = new Constant<String>("org2");
-      final IConstant<String> auth1 = new Constant<String>("auth1");
-      final IConstant<String> auth2 = new Constant<String>("auth2");
-      final IConstant<String> auth3 = new Constant<String>("auth3");
-      final IConstant<String> book1 = new Constant<String>("book1");
-      final IConstant<String> book2 = new Constant<String>("book2");
-      final IConstant<String> book3 = new Constant<String>("book3");
-      final IConstant<String> book4 = new Constant<String>("book4");
+      final IConstant<String> org1 = new Constant<>("org1");
+      final IConstant<String> org2 = new Constant<>("org2");
+      final IConstant<String> auth1 = new Constant<>("auth1");
+      final IConstant<String> auth2 = new Constant<>("auth2");
+      final IConstant<String> auth3 = new Constant<>("auth3");
+      final IConstant<String> book1 = new Constant<>("book1");
+      final IConstant<String> book2 = new Constant<>("book2");
+      final IConstant<String> book3 = new Constant<>("book3");
+      final IConstant<String> book4 = new Constant<>("book4");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(5));
+          new Constant<>(new XSDNumericIV<>(5));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(7));
+          new Constant<>(new XSDNumericIV<>(7));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // SUM(?lprice)
       final IValueExpression<IV> totalPriceExpr =
@@ -3163,17 +3163,17 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: The aggregates will have gone through type promotion.
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(7)));
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price14 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(14)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(14)));
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(21)));
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price42 =
-          new Constant<XSDIntegerIV<EmbergraphLiteral>>(
-              new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42)));
+          new Constant<>(
+              new XSDIntegerIV<>(BigInteger.valueOf(42)));
       final IBindingSet[] expected =
           new IBindingSet[] {
             new ListBindingSet(
@@ -3187,10 +3187,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -3198,7 +3198,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,
@@ -3290,14 +3290,14 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> S = Var.var("S");
       final IVariable<IV> s = Var.var("s");
 
-      final IConstant<String> s1 = new Constant<String>("s1");
-      final IConstant<String> s2 = new Constant<String>("s2");
+      final IConstant<String> s1 = new Constant<>("s1");
+      final IConstant<String> s2 = new Constant<>("s2");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(1));
+          new Constant<>(new XSDNumericIV<>(1));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(2));
+          new Constant<>(new XSDNumericIV<>(2));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       // SAMPLE(?v) AS ?S
       final IValueExpression<IV> sampleVAsS = new Bind(S, new SAMPLE(false /* distinct */, v));
@@ -3344,10 +3344,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -3355,7 +3355,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,
@@ -3447,15 +3447,15 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IVariable<IV> S = Var.var("S");
       final IVariable<IV> s = Var.var("s");
 
-      final IConstant<String> s1 = new Constant<String>("s1");
-      final IConstant<String> s2 = new Constant<String>("s2");
-      final IConstant<String> s3 = new Constant<String>("s3");
+      final IConstant<String> s1 = new Constant<>("s1");
+      final IConstant<String> s2 = new Constant<>("s2");
+      final IConstant<String> s3 = new Constant<>("s3");
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(1));
+          new Constant<>(new XSDNumericIV<>(1));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(2));
+          new Constant<>(new XSDNumericIV<>(2));
       final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 =
-          new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
+          new Constant<>(new XSDNumericIV<>(9));
 
       final GroupByOp query =
           newFixture(
@@ -3503,10 +3503,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final BOpStats stats = query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {data});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{data});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IRunningQuery runningQuery =
           new MockRunningQuery(
@@ -3514,7 +3514,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // Note: [lastInvocation:=true] forces the solutions to be emitted.
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               runningQuery,
               -1 /* partitionId */,
               stats,

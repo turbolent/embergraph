@@ -133,7 +133,7 @@ public class TestOptionals extends QuadsTestCase {
       tupleQuery.setIncludeInferred(true /* includeInferred */);
       TupleQueryResult result = tupleQuery.evaluate();
 
-      Collection<BindingSet> answer = new LinkedList<BindingSet>();
+      Collection<BindingSet> answer = new LinkedList<>();
       answer.add(
           createBindingSet(
               new BindingImpl("title", new LiteralImpl("TITLE 1")),

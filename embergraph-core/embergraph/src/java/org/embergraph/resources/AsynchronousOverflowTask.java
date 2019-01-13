@@ -170,7 +170,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
    *     <p>{@link ViewMetadata#getAction()} will report the action which is actually being executed
    *     and <code>null</code> until an action starts to execute.
    */
-  private final Map<String, String> used = new TreeMap<String, String>();
+  private final Map<String, String> used = new TreeMap<>();
 
   /*
    * Return <code>true</code> if the named index partition has already been "used" by assigning it
@@ -439,7 +439,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * partitions which are the least likely to have a merge performed.
      */
     final Queue<Priority<ViewMetadata>> buildList =
-        new PriorityBlockingQueue<Priority<ViewMetadata>>(overflowMetadata.getIndexCount());
+        new PriorityBlockingQueue<>(overflowMetadata.getIndexCount());
 
     /*
      * Put a merge task on the merge queue. The mergePriority reflects the
@@ -450,7 +450,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * a split, which is undesirable.
      */
     final Queue<Priority<ViewMetadata>> mergeList =
-        new PriorityBlockingQueue<Priority<ViewMetadata>>(overflowMetadata.getIndexCount());
+        new PriorityBlockingQueue<>(overflowMetadata.getIndexCount());
 
     while (itr.hasNext()) {
 
@@ -470,7 +470,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
       } else {
 
-        buildList.add(new Priority<ViewMetadata>(vmd.buildPriority, vmd));
+        buildList.add(new Priority<>(vmd.buildPriority, vmd));
       }
 
       if (vmd.mergePriority > 0d || (forceCompactingMerges && vmd.sourceCount > 1)) {
@@ -481,7 +481,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
          * in the view since there would be nothing to compact).
          */
 
-        mergeList.add(new Priority<ViewMetadata>(vmd.mergePriority, vmd));
+        mergeList.add(new Priority<>(vmd.mergePriority, vmd));
       }
     } // itr.hasNext()
 
@@ -514,8 +514,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * The AtomicCallable is responsible for submitting the AbstractTask to
      * the ConcurrencyManager once the task begins to execute.
      */
-    final List<Future<?>> mergeFutures = new LinkedList<Future<?>>();
-    final List<Future<?>> buildFutures = new LinkedList<Future<?>>();
+    final List<Future<?>> mergeFutures = new LinkedList<>();
+    final List<Future<?>> buildFutures = new LinkedList<>();
     try {
 
       final Executor buildService =
@@ -624,7 +624,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
        * error occurred and then log that error.
        */
 
-      final List<Future<?>> allFutures = new LinkedList<Future<?>>();
+      final List<Future<?>> allFutures = new LinkedList<>();
       allFutures.addAll(buildFutures);
       allFutures.addAll(mergeFutures);
 
@@ -664,7 +664,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
   protected List<AbstractTask> chooseScatterSplits() {
 
     // set of tasks created.
-    final List<AbstractTask> tasks = new LinkedList<AbstractTask>();
+    final List<AbstractTask> tasks = new LinkedList<>();
 
     // set of index partition views to consider.
     final Iterator<ViewMetadata> itr = overflowMetadata.views();
@@ -749,7 +749,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
             return tasks;
           }
 
-          final Set<UUID> tmp = new HashSet<UUID>(Arrays.asList(a));
+          final Set<UUID> tmp = new HashSet<>(Arrays.asList(a));
 
           tmp.add(resourceManager.getDataServiceUUID());
 
@@ -808,7 +808,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
     }
 
     // list of tasks that we create (if any).
-    final List<AbstractTask> tasks = new LinkedList<AbstractTask>();
+    final List<AbstractTask> tasks = new LinkedList<>();
 
     if (log.isInfoEnabled()) log.info("begin: lastCommitTime=" + lastCommitTime);
 
@@ -826,7 +826,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * This map is populated during the scan of the named indices with index
      * partitions that are "undercapacity"
      */
-    final Map<String, BTree> undercapacityIndexPartitions = new HashMap<String, BTree>();
+    final Map<String, BTree> undercapacityIndexPartitions = new HashMap<>();
     {
 
       // counters : must sum to ndone as post-condition.
@@ -1500,7 +1500,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
     long maxRangeCount = 0L;
 
     // just those indices that survive the cuts we impose here.
-    final List<Score> scores = new LinkedList<Score>();
+    final List<Score> scores = new LinkedList<>();
 
     for (Score score : overflowMetadata.getScores()) {
 
@@ -1605,7 +1605,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * to the index partitions that we want to move.
      */
     final PriorityQueue<Priority<ViewMetadata>> moveQueue =
-        new PriorityQueue<Priority<ViewMetadata>>();
+        new PriorityQueue<>();
 
     for (Score score : scores) {
 
@@ -1775,7 +1775,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
        * have lower range counts we prefer those which have the highest
        * scores.
        */
-      moveQueue.add(new Priority<ViewMetadata>(movePriority, vmd));
+      moveQueue.add(new Priority<>(movePriority, vmd));
     } // next Score (active index).
 
     /*
@@ -1783,7 +1783,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      */
     int nmove = 0;
 
-    final List<AbstractTask> tasks = new ArrayList<AbstractTask>(maxMoves);
+    final List<AbstractTask> tasks = new ArrayList<>(maxMoves);
 
     while (nmove < maxMoves && !moveQueue.isEmpty()) {
 
@@ -2305,7 +2305,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
     // tasks to be created (capacity of the array is estimated).
     final List<AbstractTask> tasks =
-        new ArrayList<AbstractTask>((int) oldJournal.getName2Addr().rangeCount());
+        new ArrayList<>((int) oldJournal.getName2Addr().rangeCount());
 
     if (!forceCompactingMerges) {
 
@@ -2425,7 +2425,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
     int nsplit = 0; // split task.
 
     // set of tasks created.
-    final List<AbstractTask> tasks = new LinkedList<AbstractTask>();
+    final List<AbstractTask> tasks = new LinkedList<>();
 
     // set of index partition views to consider.
     final Iterator<ViewMetadata> itr = overflowMetadata.views();
@@ -2439,7 +2439,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
      * to the index partitions that we want to merge.
      */
     final PriorityQueue<Priority<ViewMetadata>> mergeQueue =
-        new PriorityQueue<Priority<ViewMetadata>>(overflowMetadata.getIndexCount());
+        new PriorityQueue<>(overflowMetadata.getIndexCount());
 
     while (itr.hasNext()) {
 
@@ -2590,7 +2590,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       }
 
       // put into priority queue to be processed below.
-      mergeQueue.add(new Priority<ViewMetadata>(vmd.mergePriority, vmd));
+      mergeQueue.add(new Priority<>(vmd.mergePriority, vmd));
     } // itr.hasNext()
 
     /*

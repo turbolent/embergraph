@@ -353,7 +353,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
    */
   public class PageRankReducer implements IReducer<PR.VS, PR.ES, Double, Map<Value, Double>> {
 
-    private final ConcurrentHashMap<Value, Double> values = new ConcurrentHashMap<Value, Double>();
+    private final ConcurrentHashMap<Value, Double> values = new ConcurrentHashMap<>();
 
     @Override
     public void visit(final IGASState<VS, ES, Double> state, final Value u) {

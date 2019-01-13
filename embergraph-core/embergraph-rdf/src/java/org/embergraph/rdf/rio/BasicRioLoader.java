@@ -94,7 +94,7 @@ public class BasicRioLoader implements IRioLoader {
 
     if (listeners == null) {
 
-      listeners = new Vector<RioLoaderListener>();
+      listeners = new Vector<>();
     }
 
     listeners.add(l);

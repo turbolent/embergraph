@@ -609,7 +609,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
     // MAY be null.
     final IElementFilter<ISolution> filter = getSolutionFilter();
 
-    return new UnsynchronizedArrayBuffer<ISolution>(
+    return new UnsynchronizedArrayBuffer<>(
         targetBuffer, chunkCapacity, ISolution.class, filter);
   }
 
@@ -621,7 +621,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
 
     if (getAction().isMutation()) throw new IllegalStateException();
 
-    return new BlockingBuffer<ISolution[]>(
+    return new BlockingBuffer<>(
         chunkOfChunksCapacity, chunkCapacity, chunkTimeout, chunkTimeoutUnit);
   }
 
@@ -754,7 +754,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
         }
       }
 
-      return new ChunkedConvertingIterator<ISolution, ISolution>(
+      return new ChunkedConvertingIterator<>(
           itr,
           new DistinctFilter<ISolution>(indexManager) {
 

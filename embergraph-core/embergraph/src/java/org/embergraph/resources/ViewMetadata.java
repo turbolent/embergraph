@@ -84,7 +84,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
           view = resourceManager.getIndex(name, commitTime);
 
-          ref = new SoftReference<ILocalBTreeView>(view);
+          ref = new SoftReference<>(view);
 
           initView(view);
         }
@@ -387,7 +387,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
    */
   public Map<String, Object> getParams() {
 
-    final Map<String, Object> m = new HashMap<String, Object>();
+    final Map<String, Object> m = new HashMap<>();
 
     /*
      * Fields from the BTreeMetadata class.

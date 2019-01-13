@@ -159,7 +159,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
       if (namedSubqueries != null) {
 
-        final List<NamedSubqueryRoot> roots = new LinkedList<NamedSubqueryRoot>();
+        final List<NamedSubqueryRoot> roots = new LinkedList<>();
 
         for (NamedSubqueryRoot namedSubquery : namedSubqueries) {
 
@@ -317,7 +317,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
     final String mainSolutionSetName = "--nsr-" + context.nextId();
 
     // The set of direct children which are complex optional groups.
-    final List<JoinGroupNode> complexGroups = new LinkedList<JoinGroupNode>();
+    final List<JoinGroupNode> complexGroups = new LinkedList<>();
 
     //        // The list of direct children which were moved.
     //        final List<IGroupMemberNode> move = new LinkedList<IGroupMemberNode>();
@@ -411,12 +411,12 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
 
         // All variables which are used within the WHERE clause of the lifted named subquery.
         final Set<IVariable<?>> groupVars =
-            sa.getSpannedVariables(whereClause, new LinkedHashSet<IVariable<?>>());
+            sa.getSpannedVariables(whereClause, new LinkedHashSet<>());
 
         // All variables still referenced in the joins or filters of
         // the group (after extracting the named subquery).
         final Set<IVariable<?>> afterVars =
-            sa.getSpannedVariables(group, new LinkedHashSet<IVariable<?>>());
+            sa.getSpannedVariables(group, new LinkedHashSet<>());
 
         if (query.getProjection() != null) {
           // Include anything that we must project out of the query.
@@ -426,7 +426,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
           // variables USED in the SELECT expressions, NOT the variables projected out of the query.
         }
 
-        final Set<IVariable<?>> projectedVars = new LinkedHashSet<IVariable<?>>();
+        final Set<IVariable<?>> projectedVars = new LinkedHashSet<>();
         projectedVars.addAll(groupVars);
         projectedVars.retainAll(afterVars);
 
@@ -446,10 +446,10 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
      * easy way for reuse in the subsequent iteration
      */
     final List<Set<IVariable<?>>> complexGroupsDefiniteVars =
-        new ArrayList<Set<IVariable<?>>>(complexGroups.size());
+        new ArrayList<>(complexGroups.size());
     for (int i = 0; i < complexGroups.size(); i++) {
 
-      final Set<IVariable<?>> cur = new HashSet<IVariable<?>>();
+      final Set<IVariable<?>> cur = new HashSet<>();
       sa.getDefinitelyProducedBindings(complexGroups.get(i), cur, true);
       complexGroupsDefiniteVars.add(i, cur);
     }
@@ -500,7 +500,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
          */
         final Set<IVariable<?>> projectedVars =
             sa.getProjectedVars(
-                anInclude, whereClause, query, exogenousVars, new LinkedHashSet<IVariable<?>>());
+                anInclude, whereClause, query, exogenousVars, new LinkedHashSet<>());
 
         /*
          * In addition to the vars collected by sa.getProjectedVars,
@@ -516,7 +516,7 @@ public class ASTComplexOptionalOptimizer implements IASTOptimizer {
          */
         final Set<IVariable<?>> joinVarCandidates = complexGroupsDefiniteVars.get(i);
 
-        final Set<IVariable<?>> subsequentGroupDefiniteVars = new HashSet<IVariable<?>>();
+        final Set<IVariable<?>> subsequentGroupDefiniteVars = new HashSet<>();
         for (int j = i + 1; j < complexGroupsDefiniteVars.size(); j++) {
           subsequentGroupDefiniteVars.addAll(complexGroupsDefiniteVars.get(j));
         }

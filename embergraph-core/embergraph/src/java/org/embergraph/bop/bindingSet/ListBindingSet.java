@@ -186,7 +186,7 @@ public class ListBindingSet implements IBindingSet {
     //
     //		stack.push(new LinkedList<E>());
 
-    current = new LinkedList<E>();
+    current = new LinkedList<>();
   }
 
   /*
@@ -265,7 +265,7 @@ public class ListBindingSet implements IBindingSet {
   @SuppressWarnings("rawtypes")
   private List<E> copy(final List<E> src, final IVariable[] variablesToKeep) {
 
-    final List<E> dst = new LinkedList<E>();
+    final List<E> dst = new LinkedList<>();
 
     final Iterator<E> itr = src.iterator();
 
@@ -309,7 +309,7 @@ public class ListBindingSet implements IBindingSet {
   @SuppressWarnings("rawtypes")
   private List<E> copyMinusErrors(final List<E> src, final IVariable[] variablesToKeep) {
 
-    final List<E> dst = new LinkedList<E>();
+    final List<E> dst = new LinkedList<>();
 
     final Iterator<E> itr = src.iterator();
 

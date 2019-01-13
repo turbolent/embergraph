@@ -25,8 +25,8 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*
@@ -38,7 +38,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[] bindingSets) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {bindingSets});
+    return new ThickAsynchronousIterator<>(new IBindingSet[][]{bindingSets});
   }
 
   /*
@@ -50,7 +50,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickAsynchronousIterator<>(bindingSetChunks);
   }
 
   //    /*

@@ -55,9 +55,9 @@ class ASTTypeBasedNodeClassifier {
   public ASTTypeBasedNodeClassifier(final Class<?>[] clazzez) {
 
     this.clazzez = clazzez;
-    unclassifiedNodes = new LinkedList<IGroupMemberNode>();
-    classifiedNodes = new HashMap<Class<?>, List<IGroupMemberNode>>();
-    clazzConstraints = new HashMap<Class<?>, ASTTypeBasedNodeClassifierConstraint>();
+    unclassifiedNodes = new LinkedList<>();
+    classifiedNodes = new HashMap<>();
+    clazzConstraints = new HashMap<>();
   }
 
   /*
@@ -82,7 +82,7 @@ class ASTTypeBasedNodeClassifier {
 
     // initialize map with empty arrays
     for (Class<?> clazz : clazzez) {
-      classifiedNodes.put(clazz, new LinkedList<IGroupMemberNode>());
+      classifiedNodes.put(clazz, new LinkedList<>());
     }
 
     // and popuplate it

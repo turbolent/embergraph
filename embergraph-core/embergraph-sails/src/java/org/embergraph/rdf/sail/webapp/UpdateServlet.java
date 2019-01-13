@@ -424,7 +424,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
                   new RemoveStatementHandler(conn, nmodified, defaultContextDelete));
 
               // Wrap as Future.
-              final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
+              final FutureTask<Void> ft = new FutureTask<>(queryTask);
 
               // Submit query for evaluation.
               context.queryService.execute(ft);
@@ -669,7 +669,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
               rdfParser.setRDFHandler(buffer);
 
               // Wrap as Future.
-              final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
+              final FutureTask<Void> ft = new FutureTask<>(queryTask);
 
               // Submit query for evaluation.
               context.queryService.execute(ft);

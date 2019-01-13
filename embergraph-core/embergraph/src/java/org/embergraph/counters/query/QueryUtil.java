@@ -476,7 +476,7 @@ public class QueryUtil {
 
     if (filter == null) throw new IllegalArgumentException();
 
-    final Collection<File> out = new LinkedList<File>();
+    final Collection<File> out = new LinkedList<>();
 
     for (File file : in) {
 

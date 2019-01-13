@@ -183,7 +183,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
       final IStriterator results = new Striterator(Collections.emptyIterator());
 
       final Map<Predicate, List<IBindingSet>> coalesced =
-          new LinkedHashMap<Predicate, List<IBindingSet>>();
+          new LinkedHashMap<>();
 
       for (final IBindingSet bs : bindingSets) {
 
@@ -193,7 +193,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
         if (coalesced.containsKey(asBound)) {
           values = coalesced.get(asBound);
         } else {
-          coalesced.put(asBound, values = new LinkedList<IBindingSet>());
+          coalesced.put(asBound, values = new LinkedList<>());
         }
         values.add(bs);
       }
@@ -302,7 +302,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
                           final IVariableOrConstant term = asBound.get(i);
                           if (term.isVar()) {
                             final IVariable var = (IVariable<IV>) term;
-                            bs.set(var, new Constant<IV>(ivs[i]));
+                            bs.set(var, new Constant<>(ivs[i]));
                           }
                         }
                         return bs;

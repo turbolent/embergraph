@@ -87,7 +87,7 @@ public class GeoSpatialConfig implements Serializable {
 
   private void initDatatypes(List<String> geoSpatialDatatypeConfigs) {
 
-    datatypeConfigs = new ArrayList<GeoSpatialDatatypeConfiguration>();
+    datatypeConfigs = new ArrayList<>();
 
     if (geoSpatialDatatypeConfigs == null) return; // nothing to be done
 
@@ -127,7 +127,7 @@ public class GeoSpatialConfig implements Serializable {
       }
 
       // validate that there are no duplicate URIs used for the datatypeConfigs
-      final Set<URI> uris = new HashSet<URI>();
+      final Set<URI> uris = new HashSet<>();
       for (int i = 0; i < datatypeConfigs.size(); i++) {
 
         final URI curUri = datatypeConfigs.get(i).getUri();

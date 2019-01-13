@@ -356,7 +356,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
       final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       final ICloseableIterator<IBindingSet[]> src;
 

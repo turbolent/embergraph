@@ -107,7 +107,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
     this.vars = vars;
 
     this.map =
-        new ConcurrentHashMap<Solution, Solution>(initialCapacity, loadFactor, concurrencyLevel);
+        new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
   }
 
   /* (non-Javadoc)

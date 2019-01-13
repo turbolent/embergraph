@@ -110,7 +110,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
   @SuppressWarnings("unchecked")
   public <T> List<T> getChildren(final Class<T> type) {
 
-    final List<T> children = new LinkedList<T>();
+    final List<T> children = new LinkedList<>();
 
     for (IQueryNode node : this) {
 

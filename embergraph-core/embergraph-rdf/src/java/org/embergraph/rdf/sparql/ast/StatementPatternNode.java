@@ -453,7 +453,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
    */
   public Set<IVariable<?>> getProducedBindings() {
 
-    final Set<IVariable<?>> producedBindings = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> producedBindings = new LinkedHashSet<>();
 
     final TermNode s = s();
     final TermNode p = p();
@@ -611,11 +611,11 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return sa.getSpannedVariables(this, true, new HashSet<IVariable<?>>());
+    return sa.getSpannedVariables(this, true, new HashSet<>());
   }
 }

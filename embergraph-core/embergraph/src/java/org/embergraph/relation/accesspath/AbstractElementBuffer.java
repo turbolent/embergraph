@@ -62,7 +62,7 @@ public abstract class AbstractElementBuffer<R> extends AbstractArrayBuffer<R> {
   protected final long flush(final int n, final R[] a) {
 
     final IChunkedOrderedIterator<R> itr =
-        new ChunkedArrayIterator<R>(n, a, null /* keyOrder(unknown) */);
+        new ChunkedArrayIterator<>(n, a, null /* keyOrder(unknown) */);
 
     return flush(itr);
   }

@@ -51,7 +51,7 @@ public class TestHaltable extends TestCase2 {
    */
   public void test_cancel() throws InterruptedException, ExecutionException {
 
-    final Haltable<Void> f = new Haltable<Void>();
+    final Haltable<Void> f = new Haltable<>();
 
     assertFalse(f.isDone());
     assertFalse(f.isCancelled());
@@ -81,7 +81,7 @@ public class TestHaltable extends TestCase2 {
    */
   public void test_get() throws InterruptedException, ExecutionException {
 
-    final Haltable<Long> f = new Haltable<Long>();
+    final Haltable<Long> f = new Haltable<>();
 
     assertFalse(f.isDone());
     assertFalse(f.isCancelled());
@@ -106,7 +106,7 @@ public class TestHaltable extends TestCase2 {
 
   public void test_get_timeout() throws InterruptedException, ExecutionException {
 
-    final Haltable<Long> f = new Haltable<Long>();
+    final Haltable<Long> f = new Haltable<>();
 
     assertFalse(f.isDone());
     assertFalse(f.isCancelled());

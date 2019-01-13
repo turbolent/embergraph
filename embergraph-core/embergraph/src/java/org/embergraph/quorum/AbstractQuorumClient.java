@@ -36,7 +36,7 @@ public abstract class AbstractQuorumClient<S extends Remote> implements QuorumCl
 
   protected static final transient Logger log = Logger.getLogger(AbstractQuorumClient.class);
 
-  private final AtomicReference<Quorum<?, ?>> quorum = new AtomicReference<Quorum<?, ?>>();
+  private final AtomicReference<Quorum<?, ?>> quorum = new AtomicReference<>();
 
   private final String logicalServiceZPath;
 

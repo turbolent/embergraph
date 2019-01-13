@@ -168,7 +168,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new ChunkTask<E>(context, this));
+    return new FutureTask<>(new ChunkTask<>(context, this));
   }
 
   /** Task executing on the node. */
@@ -319,7 +319,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
       stats.accessPathRangeCount.add(accessPath.rangeCount(false /* exact */));
 
       final UnsyncLocalOutputBuffer<IBindingSet> unsyncBuffer =
-          new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink);
+          new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink);
 
       final long cutoffLimit =
           pred.getProperty(
@@ -359,7 +359,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
             final AbstractUnsynchronizedArrayBuffer<IBindingSet> unsyncBuffer2 =
                 sink2 == null
                     ? unsyncBuffer
-                    : new UnsyncLocalOutputBuffer<IBindingSet>(op.getChunkCapacity(), sink2);
+                    : new UnsyncLocalOutputBuffer<>(op.getChunkCapacity(), sink2);
 
             state.outputOptionals(unsyncBuffer2);
 

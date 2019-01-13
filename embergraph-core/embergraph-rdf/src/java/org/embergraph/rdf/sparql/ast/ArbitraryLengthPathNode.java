@@ -248,7 +248,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
   /** Return the variables bound by the path - i.e. what this node will attempt to bind when run. */
   public Set<IVariable<?>> getDefinitelyProducedBindings() {
 
-    final Set<IVariable<?>> producedBindings = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> producedBindings = new LinkedHashSet<>();
 
     addVar(left(), producedBindings, true);
     addVar(right(), producedBindings, true);
@@ -542,11 +542,11 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
 
   @Override
   public Set<IVariable<?>> getRequiredBound(StaticAnalysis sa) {
-    return new HashSet<IVariable<?>>();
+    return new HashSet<>();
   }
 
   @Override
   public Set<IVariable<?>> getDesiredBound(StaticAnalysis sa) {
-    return sa.getSpannedVariables(this, true, new HashSet<IVariable<?>>());
+    return sa.getSpannedVariables(this, true, new HashSet<>());
   }
 }

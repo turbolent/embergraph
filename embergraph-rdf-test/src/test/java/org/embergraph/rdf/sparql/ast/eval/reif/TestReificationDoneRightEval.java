@@ -123,7 +123,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
     s1.setStatementIdentifier(true);
     final ISPO spo = new SPO(s0); // SAP.getIV(), bought.getIV(), sybase.getIV(),
     //				null/* NO CONTEXT */, StatementEnum.Explicit);
-    s1.setIV(new SidIV<EmbergraphBNode>(spo));
+    s1.setIV(new SidIV<>(spo));
 
     // metadata statements.
 
@@ -210,7 +210,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
             sybase.getIV(),
             null /* NO CONTEXT */,
             StatementEnum.Explicit);
-    s1.setIV(new SidIV<EmbergraphBNode>(spo));
+    s1.setIV(new SidIV<>(spo));
 
     // metadata statements.
 

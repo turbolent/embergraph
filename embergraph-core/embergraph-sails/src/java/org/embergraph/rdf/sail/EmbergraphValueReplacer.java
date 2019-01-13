@@ -90,7 +90,7 @@ public class EmbergraphValueReplacer {
      * indicates that the query CAN NOT be satisfied by the data since
      * one or more required terms are unknown to the database.
      */
-    final Map<Value, EmbergraphValue> values = new LinkedHashMap<Value, EmbergraphValue>();
+    final Map<Value, EmbergraphValue> values = new LinkedHashMap<>();
 
     final EmbergraphValueFactory valueFactory = database.getValueFactory();
 

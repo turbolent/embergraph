@@ -497,7 +497,7 @@ public abstract class WriteCache implements IWriteCache {
     }
 
     // save reference to the write cache.
-    this.buf = new AtomicReference<IBufferAccess>(buf);
+    this.buf = new AtomicReference<>(buf);
 
     // the capacity of the buffer in bytes.
     this.capacity = buf.buffer().capacity();
@@ -537,9 +537,9 @@ public abstract class WriteCache implements IWriteCache {
      * non-scattered writes as well.
      */
     if (prefixWrites) {
-      recordMap = new ConcurrentSkipListMap<Long, RecordMetadata>();
+      recordMap = new ConcurrentSkipListMap<>();
     } else {
-      recordMap = new ConcurrentHashMap<Long, RecordMetadata>(indexDefaultCapacity);
+      recordMap = new ConcurrentHashMap<>(indexDefaultCapacity);
     }
 
     if (isHighlyAvailable && !bufferHasData) {
@@ -549,7 +549,7 @@ public abstract class WriteCache implements IWriteCache {
        * buffer replicated from the leader.
        */
 
-      orderedRecords = new LinkedList<WriteCache.RecordMetadata>();
+      orderedRecords = new LinkedList<>();
 
     } else {
 
@@ -1542,7 +1542,7 @@ public abstract class WriteCache implements IWriteCache {
 
   /** The current performance counters. */
   protected final AtomicReference<WriteCacheCounters> counters =
-      new AtomicReference<WriteCacheCounters>(new WriteCacheCounters());
+      new AtomicReference<>(new WriteCacheCounters());
 
   /*
    * Stores the number of bytes removed from this {@link WriteCache}.

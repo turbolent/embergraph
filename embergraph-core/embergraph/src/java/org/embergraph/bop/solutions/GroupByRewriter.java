@@ -193,7 +193,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
     final LinkedHashMap<IAggregate<?>, IVariable<?>> aggExpr = rewrittenState.getAggExpr();
 
-    this.aggExpr = new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+    this.aggExpr = new LinkedHashMap<>();
 
     for (Map.Entry<IAggregate<?>, IVariable<?>> e : aggExpr.entrySet()) {
 
@@ -206,7 +206,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
     if (groupByState == null) throw new IllegalArgumentException();
 
-    this.aggExpr = new LinkedHashMap<IAggregate<?>, IVariable<?>>();
+    this.aggExpr = new LinkedHashMap<>();
 
     //        this.columnProjections = new LinkedHashMap<IValueExpression<?>, ProjectionType>();
 

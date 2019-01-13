@@ -603,7 +603,7 @@ public class NanoSparqlClient {
   private static final Map<String /* src */, String /* query */> readQueries(
       final List<File> fileList, final Pattern delim) throws IOException {
 
-    final Map<String /* src */, String /* query */> map = new LinkedHashMap<String, String>();
+    final Map<String /* src */, String /* query */> map = new LinkedHashMap<>();
 
     for (File file : fileList) {
 
@@ -811,7 +811,7 @@ public class NanoSparqlClient {
 
     /** Metadata about each query presentation. */
     public final LinkedBlockingQueue<QueryTrial> trials =
-        new LinkedBlockingQueue<QueryTrial>(/* unbounded */ );
+        new LinkedBlockingQueue<>(/* unbounded */);
 
     /** Total elapsed nanoseconds over all {@link QueryTrial}s for this {@link Query}. */
     public final CAT elapsedNanos = new CAT();
@@ -1347,7 +1347,7 @@ public class NanoSparqlClient {
       if (opts.verbose) System.err.println("Reading query(s) from file: " + file);
 
       // Figure out which files will be read.
-      final List<File> fileList = new LinkedList<File>();
+      final List<File> fileList = new LinkedList<>();
 
       // Get the list of files to be read.
       getFiles(file, fileList);
@@ -1437,7 +1437,7 @@ public class NanoSparqlClient {
       final int[] order = getQueryOrder(seed, repeat, queries.length);
 
       // The tasks to be run.
-      final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
+      final List<Callable<Void>> tasks = new LinkedList<>();
 
       for (int i = 0; i < order.length; i++) {
 

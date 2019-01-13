@@ -194,17 +194,17 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     this.chunkHandler = getChunkHandler(queryEngine, query);
 
     this.operatorFutures =
-        new ConcurrentHashMap<BSBundle, ConcurrentHashMap<ChunkFutureTask, ChunkFutureTask>>();
+        new ConcurrentHashMap<>();
 
     if (orderedOperatorQueueMap) {
 
       this.operatorQueues =
-          new ConcurrentSkipListMap<BSBundle, BlockingQueue<IChunkMessage<IBindingSet>>>();
+          new ConcurrentSkipListMap<>();
 
     } else {
 
       this.operatorQueues =
-          new ConcurrentHashMap<BSBundle, BlockingQueue<IChunkMessage<IBindingSet>>>();
+          new ConcurrentHashMap<>();
     }
   }
 
@@ -266,7 +266,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
         // Create a new queue using [lock].
         queue =
-            new org.embergraph.jsr166.LinkedBlockingDeque<IChunkMessage<IBindingSet>>(
+            new org.embergraph.jsr166.LinkedBlockingDeque<>(
                 capacity, lock);
 
         // Add to the collection of operator input queues.
@@ -571,7 +571,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
        * for this operator.
        */
       final List<IChunkMessage<IBindingSet>> accepted =
-          new LinkedList<IChunkMessage<IBindingSet>>();
+          new LinkedList<>();
       try {
         /*
          * Note: Once we drain these messages from the work queue we are
@@ -640,7 +640,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/475
          */
         final IMultiSourceCloseableIterator<IBindingSet[]> source =
-            new MultiSourceSequentialCloseableIterator<IBindingSet[]>(
+            new MultiSourceSequentialCloseableIterator<>(
                 //                  accepted.remove(0).getChunkAccessor().iterator()
                 firstChunk.getChunkAccessor().iterator());
         //            for (IChunkMessage<IBindingSet> msg : accepted) {
@@ -683,7 +683,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          * to one for a given query.
          */
         if (map == null) {
-          map = new ConcurrentHashMap<ChunkFutureTask, ChunkFutureTask>();
+          map = new ConcurrentHashMap<>();
           operatorFutures.put(bundle, map);
         }
         map.put(cft, cft);
@@ -1184,7 +1184,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          * buffer.
          */
         sink =
-            new NoCloseBuffer<IBindingSet[]>(
+            new NoCloseBuffer<>(
                 getQueryId(), bop, bopId, partitionId, getQueryBuffer());
       } else {
         //                final BOp targetOp = getBOpIndex().get(sinkId);
@@ -1225,7 +1225,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       // context : @todo pass in IChunkMessage or IChunkAccessor
       context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               ChunkedRunningQuery.this,
               partitionId,
               stats,
@@ -1530,7 +1530,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
             outputBufferedChunk();
           }
 
-          if (smallChunks == null) smallChunks = new LinkedList<IBindingSet[]>();
+          if (smallChunks == null) smallChunks = new LinkedList<>();
 
           // Add to the buffer.
           smallChunks.add(e);
@@ -1583,7 +1583,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          * Add the chunk to the internal buffer.
          */
 
-        if (smallChunks == null) smallChunks = new LinkedList<IBindingSet[]>();
+        if (smallChunks == null) smallChunks = new LinkedList<>();
 
         // Add to the buffer.
         smallChunks.add(e);
@@ -1805,7 +1805,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       if (queue.isEmpty()) continue;
 
-      final LinkedList<IChunkMessage<IBindingSet>> c = new LinkedList<IChunkMessage<IBindingSet>>();
+      final LinkedList<IChunkMessage<IBindingSet>> c = new LinkedList<>();
 
       queue.drainTo(c);
 
@@ -1825,7 +1825,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    */
   protected Map<Integer /* bopId */, QueueStats> getQueueStats() {
 
-    final Map<Integer, QueueStats> map = new HashMap<Integer, QueueStats>();
+    final Map<Integer, QueueStats> map = new HashMap<>();
 
     for (Map.Entry<BSBundle, BlockingQueue<IChunkMessage<IBindingSet>>> e :
         operatorQueues.entrySet()) {

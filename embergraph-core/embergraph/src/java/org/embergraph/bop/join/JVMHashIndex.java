@@ -238,7 +238,7 @@ public class JVMHashIndex {
      * A set of solutions (and their hit counters) which have the same as-bound values for the join
      * variables.
      */
-    private final List<SolutionHit> solutions = new LinkedList<SolutionHit>();
+    private final List<SolutionHit> solutions = new LinkedList<>();
 
     @Override
     public String toString() {

@@ -106,7 +106,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
       final EmbergraphURI uri3 = vf.createURI("urn:uuid:foo");
 
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       sb.add(uri1, RDF.TYPE, XSD.UUID);
       sb.add(uri2, RDF.TYPE, XSD.UUID);
@@ -144,7 +144,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
       final EmbergraphLiteral l = vf.createLiteral("10.128.1.2", XSD.IPV4);
 
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       sb.add(uri1, RDF.TYPE, XSD.IPV4);
       sb.add(uri2, RDF.TYPE, XSD.IPV4);
@@ -188,7 +188,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
       final EmbergraphURI uri3 = vf.createURI(CUSTOM_NAMESPACE + "foo");
 
       final StatementBuffer<EmbergraphStatement> sb =
-          new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+          new StatementBuffer<>(store, 10 /* capacity */);
 
       sb.add(uri1, RDF.TYPE, XSD.UUID);
       sb.add(uri2, RDF.TYPE, XSD.UUID);
@@ -295,7 +295,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
       final ArrayList<EmbergraphURI> uris = new ArrayList<>();
       {
         final StatementBuffer<EmbergraphStatement> sb =
-            new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+            new StatementBuffer<>(store, 10 /* capacity */);
         for (int i = 0; i < options.length; i += 2) {
           final EmbergraphURI uri = vf.createURI((String) options[i]);
           uris.add(uri);
@@ -355,7 +355,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
       {
         final StatementBuffer<EmbergraphStatement> sb =
-            new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+            new StatementBuffer<>(store, 10 /* capacity */);
         sb.add(uri1, RDF.TYPE, RDFS.RESOURCE);
         sb.add(uri2, RDF.TYPE, RDFS.RESOURCE);
         sb.add(uri3, RDF.TYPE, RDFS.RESOURCE);
@@ -421,7 +421,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
       {
         final StatementBuffer<EmbergraphStatement> buf =
-            new StatementBuffer<EmbergraphStatement>(store, 10 /* capacity */);
+            new StatementBuffer<>(store, 10 /* capacity */);
         buf.add(uri1, RDF.TYPE, RDFS.RESOURCE);
         buf.flush();
         store.commit();
@@ -559,7 +559,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
       }
 
       // just use a UTF encoded string, this is expensive
-      return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
+      return new FullyInlineTypedLiteralIV<>(localName);
     }
   }
 

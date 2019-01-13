@@ -41,7 +41,7 @@ public class Precondition implements IPrecondition {
   /** */
   private static final long serialVersionUID = -5628116520592503669L;
 
-  private final List<IPrecondition> conditions = new LinkedList<IPrecondition>();
+  private final List<IPrecondition> conditions = new LinkedList<>();
 
   /** De-serializator ctor. */
   public Precondition() {}

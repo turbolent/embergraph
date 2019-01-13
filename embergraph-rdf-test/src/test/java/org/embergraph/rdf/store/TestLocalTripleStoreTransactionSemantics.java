@@ -310,7 +310,7 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
 
         {
           // prepare the write set on [tx2].
-          final StatementBuffer<Statement> sb = new StatementBuffer<Statement>(tx2View, 10);
+          final StatementBuffer<Statement> sb = new StatementBuffer<>(tx2View, 10);
 
           // add to the tx write set.
           sb.add(john, loves, mary);
@@ -360,7 +360,7 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
          */
         {
           // prepare the write set.
-          final StatementBuffer<Statement> sb = new StatementBuffer<Statement>(tx3View, 10);
+          final StatementBuffer<Statement> sb = new StatementBuffer<>(tx3View, 10);
 
           // add to the tx write set.
           sb.add(john, loves, mary);

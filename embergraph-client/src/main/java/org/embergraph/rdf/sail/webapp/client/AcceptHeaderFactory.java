@@ -67,7 +67,7 @@ public class AcceptHeaderFactory {
       final boolean requireContext,
       final RDFFormat preferredFormat) {
 
-    final List<String> acceptParams = new LinkedList<String>();
+    final List<String> acceptParams = new LinkedList<>();
 
     for (RDFFormat format : rdfFormats) {
       // Determine a q-value that reflects the necessity of context
@@ -117,7 +117,7 @@ public class AcceptHeaderFactory {
   public static <T extends FileFormat> List<String> getAcceptParams(
       final Iterable<T> formats, final T preferredFormat) {
 
-    final List<String> acceptParams = new LinkedList<String>();
+    final List<String> acceptParams = new LinkedList<>();
 
     for (T format : formats) {
 
@@ -154,7 +154,7 @@ public class AcceptHeaderFactory {
   public static String getDefaultGraphAcceptHeader(final boolean requireContext) {
 
     // Copy into a Set.
-    final Set<RDFFormat> values = new LinkedHashSet<RDFFormat>(RDFFormat.values());
+    final Set<RDFFormat> values = new LinkedHashSet<>(RDFFormat.values());
 
     final RDFParserRegistry registry = RDFParserRegistry.getInstance();
 
@@ -191,7 +191,7 @@ public class AcceptHeaderFactory {
 
     // Copy into a Set.
     final Set<TupleQueryResultFormat> values =
-        new LinkedHashSet<TupleQueryResultFormat>(TupleQueryResultFormat.values());
+        new LinkedHashSet<>(TupleQueryResultFormat.values());
 
     final TupleQueryResultParserRegistry registry = TupleQueryResultParserRegistry.getInstance();
 
@@ -228,7 +228,7 @@ public class AcceptHeaderFactory {
 
     // Copy into a Set.
     final Set<BooleanQueryResultFormat> values =
-        new LinkedHashSet<BooleanQueryResultFormat>(BooleanQueryResultFormat.values());
+        new LinkedHashSet<>(BooleanQueryResultFormat.values());
 
     final BooleanQueryResultParserRegistry registry =
         BooleanQueryResultParserRegistry.getInstance();

@@ -271,7 +271,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
               Integer.MAX_VALUE, // maxPoolSize,
               Long.MAX_VALUE /* keepAliveTime */,
               TimeUnit.SECONDS /* keepAliveUnit */,
-              new SynchronousQueue<Runnable>(synchronousQueueFair));
+              new SynchronousQueue<>(synchronousQueueFair));
     } else {
       /*
        * fixed size thread pool w/ an unbounded queue.
@@ -286,7 +286,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
               maxPoolSize,
               Long.MAX_VALUE /* keepAliveTime */,
               TimeUnit.SECONDS /*keepAliveUnit*/,
-              new LinkedBlockingQueue<Runnable>());
+              new LinkedBlockingQueue<>());
     }
     if (prestartCoreThreads) {
 
@@ -337,7 +337,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     try {
 
       final Collection<LockCallableImpl<String, Object>> tasks =
-          new ArrayList<LockCallableImpl<String, Object>>(ntasks);
+          new ArrayList<>(ntasks);
 
       // distinct resource names. references are reused by reach task.
       final String[] resources = new String[nresources];
@@ -400,11 +400,11 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
 
         if (r.nextDouble() < percentTaskDeath) {
 
-          task = new LockCallableImpl<String, Object>(resource, new DeathResourceTask<Object>());
+          task = new LockCallableImpl<>(resource, new DeathResourceTask<>());
 
         } else {
 
-          task = new LockCallableImpl<String, Object>(resource, new Wait10ResourceTask<Object>());
+          task = new LockCallableImpl<>(resource, new Wait10ResourceTask<>());
         }
 
         tasks.add(task);
@@ -412,7 +412,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
 
       // submit the tasks for execution.
       final long begin = System.nanoTime();
-      final List<Future<Object>> futures = new LinkedList<Future<Object>>();
+      final List<Future<Object>> futures = new LinkedList<>();
       int nsubmitted = 0;
       {
         if (INFO)
@@ -701,7 +701,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
       // this is the test to be run.
       String className = TestLockManager.class.getName();
 
-      Map<String, String> defaultProperties = new HashMap<String, String>();
+      Map<String, String> defaultProperties = new HashMap<>();
 
       /*
        * Set defaults for each condition.
@@ -718,7 +718,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
       defaultProperties.put(TestOptions.SORT_LOCK_REQUESTS, "false");
       defaultProperties.put(TestOptions.TASK_TIMEOUT, "1000"); // ms
 
-      List<Condition> conditions = new ArrayList<Condition>();
+      List<Condition> conditions = new ArrayList<>();
 
       // low concurrency.
       conditions.add(

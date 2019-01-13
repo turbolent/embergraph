@@ -80,7 +80,7 @@ public class TestRemoverator extends AbstractTupleCursorTestCase {
 
     assertTrue(btree.contains(10));
 
-    assertEquals(new TestTuple<String>(10, "Bryan"), itr.next());
+    assertEquals(new TestTuple<>(10, "Bryan"), itr.next());
 
     assertFalse(btree.contains(10));
 
@@ -88,7 +88,7 @@ public class TestRemoverator extends AbstractTupleCursorTestCase {
 
     assertTrue(btree.contains(20));
 
-    assertEquals(new TestTuple<String>(20, "Mike"), itr.next());
+    assertEquals(new TestTuple<>(20, "Mike"), itr.next());
 
     assertFalse(btree.contains(20));
 
@@ -96,7 +96,7 @@ public class TestRemoverator extends AbstractTupleCursorTestCase {
 
     assertTrue(btree.contains(30));
 
-    assertEquals(new TestTuple<String>(30, "James"), itr.next());
+    assertEquals(new TestTuple<>(30, "James"), itr.next());
 
     assertFalse(itr.hasNext());
 
@@ -109,7 +109,7 @@ public class TestRemoverator extends AbstractTupleCursorTestCase {
   protected ITupleCursor2<String> newCursor(
       AbstractBTree btree, int flags, byte[] fromKey, byte[] toKey) {
 
-    return new MutableBTreeTupleCursor<String>(
-        (BTree) btree, new Tuple<String>(btree, flags), fromKey, toKey);
+    return new MutableBTreeTupleCursor<>(
+        (BTree) btree, new Tuple<>(btree, flags), fromKey, toKey);
   }
 }

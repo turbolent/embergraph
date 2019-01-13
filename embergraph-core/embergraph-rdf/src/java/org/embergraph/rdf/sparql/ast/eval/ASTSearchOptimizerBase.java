@@ -203,14 +203,14 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
               // Lazily allocate map.
               if (tmp == null) {
-                tmp = new LinkedHashMap<IVariable<?>, Map<URI, StatementPatternNode>>();
+                tmp = new LinkedHashMap<>();
               }
 
               // Lazily allocate set for that searchVar.
               Map<URI, StatementPatternNode> statementPatterns = tmp.get(searchVar);
               if (statementPatterns == null) {
                 tmp.put(
-                    searchVar, statementPatterns = new LinkedHashMap<URI, StatementPatternNode>());
+                    searchVar, statementPatterns = new LinkedHashMap<>());
               }
 
               // Add search predicate to set for that searchVar.

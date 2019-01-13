@@ -46,7 +46,7 @@ public class LinkExtractor extends DefaultCallback {
       new TextPattern("URL=", TextPattern.CASE_INSENSITIVE);
 
   /** The URLs resulting from the parsing process. */
-  public final Set<String> urls = new ObjectLinkedOpenHashSet<String>();
+  public final Set<String> urls = new ObjectLinkedOpenHashSet<>();
 
   /*
    * The URL contained in the first <samp>META </samp> <samp>HTTP-EQUIV </samp> element of refresh

@@ -75,7 +75,7 @@ public class NanoSparqlObjectManager extends ObjectMgrModel {
       final TupleQueryResult res = q.evaluate();
 
       // Will close the TupleQueryResult.
-      return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(res);
+      return new Sesame2EmbergraphIterator<>(res);
 
     } catch (Exception ex) {
 
@@ -106,7 +106,7 @@ public class NanoSparqlObjectManager extends ObjectMgrModel {
       final GraphQueryResult res = q.evaluate();
 
       // Will close the GraphQueryResult.
-      return new Sesame2EmbergraphIterator<Statement, QueryEvaluationException>(res);
+      return new Sesame2EmbergraphIterator<>(res);
 
     } catch (Exception ex) {
 

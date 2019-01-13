@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import junit.framework.TestCase;
 
 public class TestCloseable extends TestCase {
-  ArrayList<Character> m_data = new ArrayList<Character>();
+  ArrayList<Character> m_data = new ArrayList<>();
 
   protected void setUp() {
     char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();

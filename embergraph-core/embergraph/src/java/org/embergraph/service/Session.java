@@ -36,7 +36,7 @@ public class Session {
 
   protected static final Logger log = Logger.getLogger(Session.class);
 
-  private ConcurrentHashMap<String, Object> session = new ConcurrentHashMap<String, Object>();
+  private ConcurrentHashMap<String, Object> session = new ConcurrentHashMap<>();
 
   public Object get(String name) {
 

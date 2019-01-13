@@ -416,7 +416,7 @@ public class RDRHistory implements IChangeLog {
 
     @Override
     protected long flush(final int n, final ISPO[] a) {
-      final long l = tempStore.removeStatements(new ChunkedArrayIterator<ISPO>(n, a, null), false);
+      final long l = tempStore.removeStatements(new ChunkedArrayIterator<>(n, a, null), false);
       counter += l;
       return l;
     }

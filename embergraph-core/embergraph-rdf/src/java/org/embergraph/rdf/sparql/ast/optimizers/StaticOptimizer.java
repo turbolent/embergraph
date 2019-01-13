@@ -112,7 +112,7 @@ public final class StaticOptimizer {
 
     this.ancestry = ancestry;
 
-    this.ancestryVars = new LinkedHashSet<IVariable<?>>();
+    this.ancestryVars = new LinkedHashSet<>();
 
     this.nodes = nodes;
 
@@ -350,7 +350,7 @@ public final class StaticOptimizer {
       }
     }
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(minT1.getVars());
     vars.addAll(minT2.getVars());
     return new Join(minT1, minT2, minJoinCardinality, vars);
@@ -395,7 +395,7 @@ public final class StaticOptimizer {
     }
 
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(t1.getVars());
     vars.addAll(minT2.getVars());
     return new Join(t1, minT2, minJoinCardinality, vars);
@@ -487,7 +487,7 @@ public final class StaticOptimizer {
     }
 
     // the join variables is the union of the join dimensions' variables
-    Set<String> vars = new HashSet<String>();
+    Set<String> vars = new HashSet<>();
     vars.addAll(d1.getVars());
     vars.addAll(minTail.getVars());
     return new Join(d1, minTail, minJoinCardinality, vars);
@@ -635,7 +635,7 @@ public final class StaticOptimizer {
     //			ASTStaticJoinOptimizer.log.debug(node);
     //		}
 
-    final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
+    final Set<IVariable<?>> vars = new LinkedHashSet<>();
     /*
      * Changed recursive to true so that we get the right produced
      * bindings out of UnionNodes so that they can be reordered
@@ -643,7 +643,7 @@ public final class StaticOptimizer {
      */
     sa.getDefinitelyProducedBindings(node, vars, true);
 
-    final Set<String> varNames = new LinkedHashSet<String>();
+    final Set<String> varNames = new LinkedHashSet<>();
     for (IVariable<?> v : vars) varNames.add(v.getName());
 
     return varNames;
@@ -670,7 +670,7 @@ public final class StaticOptimizer {
 
     final Set<IVariable<?>> tailVars =
         sa.getDefinitelyProducedBindings(
-            nodes.get(tail), new LinkedHashSet<IVariable<?>>(), true /* recursive */);
+            nodes.get(tail), new LinkedHashSet<>(), true /* recursive */);
 
     return !Collections.disjoint(ancestryVars, tailVars);
   }

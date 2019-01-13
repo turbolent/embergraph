@@ -214,7 +214,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
         bSets[i].set(var, (IConstant<IV>) vals.get(i).getValueExpression());
       }
 
-      return new ThickCloseableIterator<IBindingSet>(bSets, bSets.length);
+      return new ThickCloseableIterator<>(bSets, bSets.length);
     }
 
     @Override

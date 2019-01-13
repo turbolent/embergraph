@@ -750,11 +750,11 @@ public class ConcurrencyManager implements IConcurrencyManager {
       final boolean synchronousQueue = writeServiceQueueCapacity == 0;
       final BlockingQueue<Runnable> queue;
       if (synchronousQueue) {
-        queue = new SynchronousQueue<Runnable>();
+        queue = new SynchronousQueue<>();
       } else if (writeServiceQueueCapacity == Integer.MAX_VALUE) {
-        queue = new LinkedBlockingQueue<Runnable>(writeServiceQueueCapacity);
+        queue = new LinkedBlockingQueue<>(writeServiceQueueCapacity);
       } else {
-        queue = new ArrayBlockingQueue<Runnable>(writeServiceQueueCapacity);
+        queue = new ArrayBlockingQueue<>(writeServiceQueueCapacity);
       }
       writeService =
           new WriteExecutorService(
@@ -1235,7 +1235,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
     } else {
 
-      ft = new FutureTask<T>(task);
+      ft = new FutureTask<>(task);
 
       service.submit(ft);
     }
@@ -1306,7 +1306,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
     assertOpen();
 
-    final List<Future<T>> futures = new LinkedList<Future<T>>();
+    final List<Future<T>> futures = new LinkedList<>();
 
     boolean done = false;
 
@@ -1386,7 +1386,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
     assertOpen();
 
-    final List<Future<T>> futures = new LinkedList<Future<T>>();
+    final List<Future<T>> futures = new LinkedList<>();
 
     boolean done = false;
 

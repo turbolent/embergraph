@@ -98,7 +98,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
 
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new MaterializeTask(this, context));
+    return new FutureTask<>(new MaterializeTask(this, context));
   }
 
   /** Copy the source to the sink after materializing the EmbergraphValues. */

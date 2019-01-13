@@ -178,7 +178,7 @@ public class Vertex implements Serializable {
        * chunk.
        */
 
-      final List<Object> tmp = new ArrayList<Object>((int) rangeCount);
+      final List<Object> tmp = new ArrayList<>((int) rangeCount);
 
       final IChunkedIterator<Object> itr = ap.iterator();
 

@@ -81,7 +81,7 @@ public class CompactTask implements Callable<Journal> {
   protected final ICommitRecord commitRecord;
 
   // cause from first task to error.
-  protected final AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>();
+  protected final AtomicReference<Throwable> firstCause = new AtomicReference<>();
 
   // #of tasks started.
   protected final AtomicInteger startCount = new AtomicInteger(0);

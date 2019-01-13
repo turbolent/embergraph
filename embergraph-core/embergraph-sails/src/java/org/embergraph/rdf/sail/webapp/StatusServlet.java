@@ -261,7 +261,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
       return;
     }
 
-    final Set<UUID> queryIds = new LinkedHashSet<UUID>();
+    final Set<UUID> queryIds = new LinkedHashSet<>();
 
     for (String s : a) {
 
@@ -467,7 +467,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     final Map<UUID /* IRunningQuery.queryId */, RunningQuery> crosswalkMap = getQueryCrosswalkMap();
 
     final List<org.embergraph.rdf.sail.model.RunningQuery> modelRunningQueries =
-        new ArrayList<org.embergraph.rdf.sail.model.RunningQuery>();
+        new ArrayList<>();
 
     /*
      * Show the queries that are currently executing (actually running on
@@ -596,7 +596,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
           } else {
 
-            namespaces = new LinkedList<String>();
+            namespaces = new LinkedList<>();
 
             for (String namespace : a) {
 
@@ -1369,7 +1369,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
    * @return The map.
    */
   private <T> TreeMap<Long, T> newQueryMap() {
-    return new TreeMap<Long, T>(
+    return new TreeMap<>(
         new Comparator<Long>() {
           /*
            * Comparator puts the entries into descending order by the query execution time (longest
@@ -1377,8 +1377,12 @@ public class StatusServlet extends EmbergraphRDFServlet {
            */
           @Override
           public int compare(final Long o1, final Long o2) {
-            if (o1.longValue() < o2.longValue()) return 1;
-            if (o1.longValue() > o2.longValue()) return -1;
+            if (o1.longValue() < o2.longValue()) {
+              return 1;
+            }
+            if (o1.longValue() > o2.longValue()) {
+              return -1;
+            }
             return 0;
           }
         });
@@ -1399,7 +1403,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
   private Map<UUID /* IRunningQuery.queryId */, RunningQuery> getQueryCrosswalkMap() {
 
     final Map<UUID /* IRunningQuery.queryId */, RunningQuery> crosswalkMap =
-        new LinkedHashMap<UUID, RunningQuery>();
+        new LinkedHashMap<>();
 
     //        // Marker timestamp used to report the age of queries.
     //        final long now = System.nanoTime();
@@ -1485,7 +1489,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
      * The set of queryIds for which information was explicitly requested.
      * If empty, then information will be provided for all running queries.
      */
-    final Set<UUID> requestedQueryIds = new HashSet<UUID>();
+    final Set<UUID> requestedQueryIds = new HashSet<>();
     {
       final String[] a = req.getParameterValues(QUERY_ID);
 
@@ -1563,7 +1567,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     final Iterator<Map.Entry<Long /* age */, IRunningQuery>> itr =
         runningQueryAge.entrySet().iterator();
 
-    final LinkedList<RunningQuery> runningSparqlQueries = new LinkedList<RunningQuery>();
+    final LinkedList<RunningQuery> runningSparqlQueries = new LinkedList<>();
 
     while (itr.hasNext()) {
 
@@ -1627,7 +1631,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
    */
   private Collection<RunningQuery> getPendingUpdates(final Set<UUID> requestedQueryIds) {
 
-    final LinkedList<RunningQuery> pendingUpdates = new LinkedList<RunningQuery>();
+    final LinkedList<RunningQuery> pendingUpdates = new LinkedList<>();
 
     final Iterator<RunningQuery> itr = getEmbergraphRDFContext().getQueries().values().iterator();
 
@@ -1690,7 +1694,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
   private Collection<TaskAndFutureTask<?>> getOtherTasks(final Set<UUID> requestedQueryIds) {
 
-    final LinkedList<TaskAndFutureTask<?>> otherTasks = new LinkedList<TaskAndFutureTask<?>>();
+    final LinkedList<TaskAndFutureTask<?>> otherTasks = new LinkedList<>();
 
     final Iterator<TaskAndFutureTask<?>> itr =
         getEmbergraphRDFContext().getTasks().values().iterator();

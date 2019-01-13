@@ -125,7 +125,7 @@ public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
        * Create a collection of the distinct IVs used in this chunk.
        */
 
-      final Collection<IV<?, ?>> ivs = new HashSet<IV<?, ?>>(chunk.length);
+      final Collection<IV<?, ?>> ivs = new HashSet<>(chunk.length);
 
       for (IV<?, ?> id : chunk) {
 

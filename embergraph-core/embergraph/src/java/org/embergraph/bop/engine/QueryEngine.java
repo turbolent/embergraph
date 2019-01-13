@@ -347,7 +347,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
   /** The {@link HttpClient} is used to make remote HTTP connections (SPARQL SERVICE call joins). */
   private final AtomicReference<HttpClient> clientConnectionManagerRef =
-      new AtomicReference<HttpClient>();
+      new AtomicReference<>();
 
   //    /*
   //     * A pool used to service IO requests (reads on access paths).
@@ -473,7 +473,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
   /** The currently executing queries. */
   private final ConcurrentHashMap<UUID /* queryId */, AbstractRunningQuery> runningQueries =
-      new ConcurrentHashMap<UUID, AbstractRunningQuery>();
+      new ConcurrentHashMap<>();
 
   /*
    * LRU cache used to handle problems with asynchronous termination of running queries.
@@ -579,7 +579,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
    *     we need to pass one into the constructor for the queue.
    */
   private final BlockingQueue<AbstractRunningQuery> priorityQueue =
-      new LinkedBlockingQueue<AbstractRunningQuery>();
+      new LinkedBlockingQueue<>();
   //    final private BlockingQueue<RunningQuery> priorityQueue = new
   // PriorityBlockingQueue<RunningQuery>(
   //            );
@@ -617,7 +617,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
    *     at operator start/stop. </a>
    */
   private final PriorityBlockingQueue<QueryDeadline> deadlineQueue =
-      new PriorityBlockingQueue<QueryDeadline>();
+      new PriorityBlockingQueue<>();
 
   /*
    * Queries with a deadline that lies significantly in the future can lie around in the priority
@@ -734,7 +734,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private static void scanDeadlineQueue(
       final long nowNanos, final PriorityBlockingQueue<QueryDeadline> deadlineQueue) {
 
-    final List<QueryDeadline> c = new ArrayList<QueryDeadline>(DEADLINE_QUEUE_SCAN_SIZE);
+    final List<QueryDeadline> c = new ArrayList<>(DEADLINE_QUEUE_SCAN_SIZE);
 
     // drain up to that many elements.
     deadlineQueue.drainTo(c, DEADLINE_QUEUE_SCAN_SIZE);
@@ -791,7 +791,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   public void init() {
 
     final FutureTask<Void> ft =
-        new FutureTaskMon<Void>(new QueryEngineTask(priorityQueue, deadlineQueue), null);
+        new FutureTaskMon<>(new QueryEngineTask(priorityQueue, deadlineQueue), null);
 
     if (engineFuture.compareAndSet(null /* expect */, ft)) {
 
@@ -822,11 +822,11 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
   /** The service on which we run the query engine. This is started by {@link #init()}. */
   private final AtomicReference<ExecutorService> engineService =
-      new AtomicReference<ExecutorService>();
+      new AtomicReference<>();
 
   /** The {@link Future} for the query engine. This is set by {@link #init()}. */
   private final AtomicReference<FutureTask<Void>> engineFuture =
-      new AtomicReference<FutureTask<Void>>();
+      new AtomicReference<>();
 
   /*
    * Volatile flag is set for normal termination. When set, no new queries will be accepted but
@@ -1816,7 +1816,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
   /** Registered listeners. */
   private final CopyOnWriteArraySet<IRunningQueryListener> listeners =
-      new CopyOnWriteArraySet<IRunningQueryListener>();
+      new CopyOnWriteArraySet<>();
 
   /** Add a query listener. */
   public void addListener(final IRunningQueryListener l) {

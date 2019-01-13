@@ -1097,7 +1097,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       {
 
         // load statements into db.
-        final IStatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, 2);
+        final IStatementBuffer<Statement> buffer = new StatementBuffer<>(store, 2);
 
         buffer.add(A, rdfType, B);
         buffer.add(A, rdfType, C);
@@ -1215,7 +1215,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
       {
-        final IStatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, 100);
+        final IStatementBuffer<Statement> buffer = new StatementBuffer<>(store, 100);
 
         buffer.add(A, rdfType, B);
         buffer.add(A, rdfType, C);
@@ -1306,8 +1306,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       assertEquals(
           1,
           store.removeStatements(
-              new ChunkedArrayIterator<ISPO>(
-                  1, new SPO[] {new SPO(x1, y2, z3, StatementEnum.Explicit)}, null /*keyOrder*/),
+              new ChunkedArrayIterator<>(
+                  1, new SPO[]{new SPO(x1, y2, z3, StatementEnum.Explicit)}, null /*keyOrder*/),
               false /* computeClosureForStatementIdentifiers */));
 
       assertFalse(store.hasStatement(x1, y2, z3));
@@ -1351,7 +1351,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       final EmbergraphURI foafKnows = f.asValue(FOAF.KNOWS);
 
       {
-        final IStatementBuffer<Statement> buffer = new StatementBuffer<Statement>(store, 100);
+        final IStatementBuffer<Statement> buffer = new StatementBuffer<>(store, 100);
 
         buffer.add(A, rdfType, Person);
         buffer.add(B, rdfType, Person);
@@ -1370,7 +1370,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
         final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {};
         assertSameStatements(
             new Statement[] {},
-            store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(triplePatterns)));
+            store.getStatements(new ChunkedArrayIterator<>(triplePatterns)));
       }
 
       // Single pattern matching one statement.
@@ -1383,7 +1383,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             new Statement[] {
               new StatementImpl(A, rdfType, Person),
             },
-            store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(triplePatterns)));
+            store.getStatements(new ChunkedArrayIterator<>(triplePatterns)));
       }
 
       // Single pattern matching three statements.
@@ -1398,7 +1398,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
               new StatementImpl(B, rdfType, Person),
               new StatementImpl(C, rdfType, Person),
             },
-            store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(triplePatterns)));
+            store.getStatements(new ChunkedArrayIterator<>(triplePatterns)));
       }
 
       // Two patterns matching various statements.
@@ -1415,7 +1415,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
               new StatementImpl(B, rdfType, Person),
               new StatementImpl(C, rdfType, Person),
             },
-            store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(triplePatterns)));
+            store.getStatements(new ChunkedArrayIterator<>(triplePatterns)));
       }
 
       // Three patterns, two of which match various statements.
@@ -1433,7 +1433,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
               new StatementImpl(B, rdfType, Person),
               new StatementImpl(C, rdfType, Person),
             },
-            store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(triplePatterns)));
+            store.getStatements(new ChunkedArrayIterator<>(triplePatterns)));
       }
 
     } finally {

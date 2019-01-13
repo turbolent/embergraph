@@ -124,7 +124,7 @@ public class TestQueryEngine_DistinctOp extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet[][] bindingSetChunks) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
+    return new ThickAsynchronousIterator<>(bindingSetChunks);
   }
 
   //    /*

@@ -112,9 +112,9 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
 
       dc = sail.getValueFactory().createURI("http://www.embergraph.org/DC");
 
-      vertices = new LinkedHashSet<Value>(Arrays.asList(foafPerson, mike, bryan, martyn, dc));
+      vertices = new LinkedHashSet<>(Arrays.asList(foafPerson, mike, bryan, martyn, dc));
 
-      linkTypes = new LinkedHashSet<Value>(Arrays.asList(rdfType, foafKnows));
+      linkTypes = new LinkedHashSet<>(Arrays.asList(rdfType, foafKnows));
     }
 
     public URI getRdfType() {
@@ -218,9 +218,9 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
       v4 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/4");
       v5 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/5");
 
-      vertices = new LinkedHashSet<Value>(Arrays.asList(v1, v2, v3, v4, v5));
+      vertices = new LinkedHashSet<>(Arrays.asList(v1, v2, v3, v4, v5));
 
-      linkTypes = new LinkedHashSet<Value>(Arrays.asList(link));
+      linkTypes = new LinkedHashSet<>(Arrays.asList(link));
     }
 
     public Value get_v1() {

@@ -251,7 +251,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    * to execute. See {@link AbstractQueryTask#setQueryId(ASTContainer)}.
    */
   private final ConcurrentHashMap<Long /* queryId */, RunningQuery> m_queries =
-      new ConcurrentHashMap<Long, RunningQuery>();
+      new ConcurrentHashMap<>();
 
   /*
    * The currently executing QUERY and UPDATE requests.
@@ -265,7 +265,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    * resolve the {@link Future} of an {@link UpdateTask}.
    */
   private final ConcurrentHashMap<UUID /* queryId2 */, RunningQuery> m_queries2 =
-      new ConcurrentHashMap<UUID, RunningQuery>();
+      new ConcurrentHashMap<>();
 
   /** Class units a task and its future. */
   static class TaskAndFutureTask<T> {
@@ -345,7 +345,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    *     cancelable from both REST API and workbench </a>
    */
   private final ConcurrentHashMap<UUID /* RestAPITask */, TaskAndFutureTask<?>> m_restTasks =
-      new ConcurrentHashMap<UUID, TaskAndFutureTask<?>>();
+      new ConcurrentHashMap<>();
 
   /*
    * Return the {@link RunningQuery} for a currently executing SPARQL QUERY or UPDATE request.
@@ -396,7 +396,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    */
   <T> void addTask(final AbstractRestApiTask<T> task, final FutureTask<T> ft) {
 
-    m_restTasks.put(task.uuid, new TaskAndFutureTask<T>(task, ft, System.nanoTime()));
+    m_restTasks.put(task.uuid, new TaskAndFutureTask<>(task, ft, System.nanoTime()));
   }
 
   /*

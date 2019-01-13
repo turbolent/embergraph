@@ -158,7 +158,7 @@ public class RemoteSparqlBuilderFactory {
       for (Binding b : bindingSet) {
         final Value v = b.getValue();
         if (!(v instanceof BNode)) continue;
-        if (bnodes == null) bnodes = new HashSet<BNode>();
+        if (bnodes == null) bnodes = new HashSet<>();
         final BNode t = (BNode) v;
         if (bnodes.add(t)) {
           /*

@@ -80,7 +80,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
 
     public VS(final Value v) {
 
-      this.label = new AtomicReference<Value>(v);
+      this.label = new AtomicReference<>(v);
     }
 
     /*
@@ -324,7 +324,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
       implements IReducer<CC.VS, CC.ES, Value, Map<Value, AtomicInteger>> {
 
     final ConcurrentHashMap<Value, AtomicInteger> labels =
-        new ConcurrentHashMap<Value, AtomicInteger>();
+        new ConcurrentHashMap<>();
 
     @Override
     public void visit(final IGASState<VS, ES, Value> state, final Value u) {

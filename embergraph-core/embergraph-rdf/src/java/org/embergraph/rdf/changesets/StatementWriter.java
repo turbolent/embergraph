@@ -74,7 +74,7 @@ public class StatementWriter {
         database.addStatements(
             statementStore,
             copyOnly,
-            new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */),
+            new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */),
             filter);
 
     // Copy the state of the isModified() flag and notify changeLog
@@ -141,7 +141,7 @@ public class StatementWriter {
 
     final long n =
         database.removeStatements(
-            new ChunkedArrayIterator<ISPO>(numStmts, stmts, null /* keyOrder */),
+            new ChunkedArrayIterator<>(numStmts, stmts, null /* keyOrder */),
             computeClosureForStatementIdentifiers);
 
     // Copy the state of the isModified() flag and notify changeLog

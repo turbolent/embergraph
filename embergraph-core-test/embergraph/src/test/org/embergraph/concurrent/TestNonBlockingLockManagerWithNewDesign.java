@@ -187,7 +187,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     final int maximumPoolSize = 10;
     final long keepAliveTime = 60;
     final TimeUnit unit = TimeUnit.SECONDS;
-    final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>();
+    final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
 
     return new ThreadPoolExecutor(
         corePoolSize,
@@ -207,7 +207,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    */
   public void test_submitOneThenCancel() throws InterruptedException, ExecutionException {
 
-    final BlockingQueue<Runnable> readyQueue = new LinkedBlockingQueue<Runnable>();
+    final BlockingQueue<Runnable> readyQueue = new LinkedBlockingQueue<>();
 
     final NonBlockingLockManagerWithNewDesign<String> service =
         new NonBlockingLockManagerWithNewDesign<String>(

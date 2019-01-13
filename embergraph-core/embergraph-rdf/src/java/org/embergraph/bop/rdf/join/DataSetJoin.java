@@ -114,7 +114,7 @@ public class DataSetJoin extends PipelineOp {
   @Override
   public FutureTask<Void> eval(final BOpContext<IBindingSet> context) {
 
-    return new FutureTask<Void>(new DataSetJoinTask(this, context));
+    return new FutureTask<>(new DataSetJoinTask(this, context));
   }
 
   /** Specialized in-memory join. */
@@ -152,7 +152,7 @@ public class DataSetJoin extends PipelineOp {
         final BOpStats stats = context.getStats();
 
         final UnsynchronizedArrayBuffer<IBindingSet> tmp =
-            new UnsynchronizedArrayBuffer<IBindingSet>(
+            new UnsynchronizedArrayBuffer<>(
                 sink, IBindingSet.class, op.getChunkCapacity());
 
         while (source.hasNext()) {
@@ -204,7 +204,7 @@ public class DataSetJoin extends PipelineOp {
 
             bset = bset.clone();
 
-            bset.set(var, new Constant<IV>(c));
+            bset.set(var, new Constant<>(c));
 
             tmp.add(bset);
           }

@@ -58,7 +58,7 @@ public class DerivedNumericsExtension<V extends EmbergraphValue> implements IExt
 
   public DerivedNumericsExtension(final IDatatypeURIResolver resolver) {
 
-    this.datatypes = new LinkedHashMap<IV, EmbergraphURI>();
+    this.datatypes = new LinkedHashMap<>();
     resolve(resolver, XSD.POSITIVE_INTEGER);
     resolve(resolver, XSD.NEGATIVE_INTEGER);
     resolve(resolver, XSD.NON_POSITIVE_INTEGER);
@@ -77,7 +77,7 @@ public class DerivedNumericsExtension<V extends EmbergraphValue> implements IExt
 
   public Set<EmbergraphURI> getDatatypes() {
 
-    return new LinkedHashSet<EmbergraphURI>(datatypes.values());
+    return new LinkedHashSet<>(datatypes.values());
   }
 
   /** Attempts to convert the supplied value into an internal representation using BigInteger. */

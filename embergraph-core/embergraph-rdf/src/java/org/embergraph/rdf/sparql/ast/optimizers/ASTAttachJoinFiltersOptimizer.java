@@ -154,10 +154,10 @@ public class ASTAttachJoinFiltersOptimizer implements IASTOptimizer {
      */
 
     // The join path (required joins only).
-    final List<IJoinNode> requiredJoins = new LinkedList<IJoinNode>();
+    final List<IJoinNode> requiredJoins = new LinkedList<>();
 
     // The join filters.
-    final List<FilterNode> joinFilters = new LinkedList<FilterNode>(sa.getJoinFilters(group));
+    final List<FilterNode> joinFilters = new LinkedList<>(sa.getJoinFilters(group));
 
     for (IGroupMemberNode child : group) {
 
@@ -236,7 +236,7 @@ public class ASTAttachJoinFiltersOptimizer implements IASTOptimizer {
     }
 
     // The join filters that become attached to joins.
-    final List<FilterNode> attachedFilters = new LinkedList<FilterNode>();
+    final List<FilterNode> attachedFilters = new LinkedList<>();
 
     /*
      * Figure out which filters are attached to which joins.
@@ -247,7 +247,7 @@ public class ASTAttachJoinFiltersOptimizer implements IASTOptimizer {
       final IJoinNode[] path = requiredJoins.toArray(new IJoinNode[requiredJoinCount]);
 
       final Set<IVariable<?>> knownBound =
-          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<IVariable<?>>());
+          sa.getDefinitelyIncomingBindings(group, new LinkedHashSet<>());
 
       final FilterNode[][] assignedConstraints =
           sa.getJoinGraphConstraints(

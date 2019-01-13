@@ -54,7 +54,7 @@ public class PIDUtil {
    */
   public static int getLinuxPIDWithBash() {
 
-    final List<String> commands = new LinkedList<String>();
+    final List<String> commands = new LinkedList<>();
 
     final Process pr;
 

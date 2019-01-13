@@ -54,10 +54,10 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
   /** Test empty partition. */
   public void testEmptyPartitions() {
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     final GroupNodeVarBindingInfoMap bindingInfo =
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
-    final Set<IVariable<?>> external = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> external = new HashSet<>();
 
     final ASTJoinGroupPartitions partitions =
         new ASTJoinGroupPartitions(nodes, bindingInfo, external);
@@ -72,13 +72,13 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
 
     final StatementPatternNode spn = stmtPatternWithVar("x");
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     nodes.add(spn);
 
     final GroupNodeVarBindingInfoMap bindingInfo =
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
 
-    final Set<IVariable<?>> external = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> external = new HashSet<>();
     external.add(Var.var("y"));
     external.add(Var.var("z"));
 
@@ -110,14 +110,14 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     final StatementPatternNode spn1 = stmtPatternWithVar("x1");
     final StatementPatternNode spn2 = stmtPatternWithVar("x2");
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     nodes.add(spn1);
     nodes.add(spn2);
 
     final GroupNodeVarBindingInfoMap bindingInfo =
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
 
-    final Set<IVariable<?>> external = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> external = new HashSet<>();
     external.add(Var.var("y"));
 
     final ASTJoinGroupPartitions partitions =
@@ -152,7 +152,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     final StatementPatternNode spn2 = stmtPatternWithVar("x2");
     final StatementPatternNode spn3Opt = stmtPatternWithVarOptional("x3");
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     nodes.add(spn1);
     nodes.add(spn2);
     nodes.add(spn3Opt);
@@ -161,7 +161,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
 
     final ASTJoinGroupPartitions partitions =
-        new ASTJoinGroupPartitions(nodes, bindingInfo, new HashSet<IVariable<?>>());
+        new ASTJoinGroupPartitions(nodes, bindingInfo, new HashSet<>());
 
     // checks on partitions object
     assertEquals(1, partitions.getPartitionList().size());
@@ -196,7 +196,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     final StatementPatternNode spn7Opt = stmtPatternWithVarOptional("x7");
     final StatementPatternNode spn8 = stmtPatternWithVar("x8");
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     nodes.add(spn1);
     nodes.add(spn2);
     nodes.add(spn3Opt);
@@ -209,7 +209,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     final GroupNodeVarBindingInfoMap bindingInfo =
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
 
-    final Set<IVariable<?>> external = new HashSet<IVariable<?>>();
+    final Set<IVariable<?>> external = new HashSet<>();
     external.add(Var.var("y"));
 
     final ASTJoinGroupPartitions partitions =
@@ -221,7 +221,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
 
     // checks on partition object
     final ASTJoinGroupPartition p1 = partitions.getPartitionList().get(0);
-    final List<IGroupMemberNode> p1Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p1Exp = new ArrayList<>();
     p1Exp.add(spn1);
     p1Exp.add(spn2);
     p1Exp.add(spn3Opt);
@@ -230,7 +230,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     assertEquals(varSet("y", "x1", "x2"), p1.definitelyProduced);
 
     final ASTJoinGroupPartition p2 = partitions.getPartitionList().get(1);
-    final List<IGroupMemberNode> p2Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p2Exp = new ArrayList<>();
     p2Exp.add(spn4);
     p2Exp.add(spn5Opt);
     assertEquals(p2Exp, p2.extractNodeList(true));
@@ -238,7 +238,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     assertEquals(varSet("y", "x1", "x2", "x4"), p2.definitelyProduced);
 
     final ASTJoinGroupPartition p3 = partitions.getPartitionList().get(2);
-    final List<IGroupMemberNode> p3Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p3Exp = new ArrayList<>();
     p3Exp.add(spn6);
     p3Exp.add(spn7Opt);
     assertEquals(p3Exp, p3.extractNodeList(true));
@@ -246,7 +246,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     assertEquals(varSet("y", "x1", "x2", "x4", "x6"), p3.definitelyProduced);
 
     final ASTJoinGroupPartition p4 = partitions.getPartitionList().get(3);
-    final List<IGroupMemberNode> p4Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p4Exp = new ArrayList<>();
     p4Exp.add(spn8);
     assertEquals(p4Exp, p4.extractNodeList(true));
     assertNull(p4.optionalOrMinus);
@@ -269,7 +269,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     final IGroupMemberNode n9 = unionWithVars("x2", "x3");
     final IGroupMemberNode n10 = unionWithVars("x8", "x8", "x7");
 
-    final List<IGroupMemberNode> nodes = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> nodes = new ArrayList<>();
     nodes.add(n1);
     nodes.add(n2);
     nodes.add(n3);
@@ -285,7 +285,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
         new GroupNodeVarBindingInfoMap(nodes, statisAnalysisForNodes(nodes), null);
 
     final ASTJoinGroupPartitions partitions =
-        new ASTJoinGroupPartitions(nodes, bindingInfo, new HashSet<IVariable<?>>());
+        new ASTJoinGroupPartitions(nodes, bindingInfo, new HashSet<>());
 
     // checks on partitions object
     assertEquals(3, partitions.getPartitionList().size());
@@ -293,7 +293,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
 
     // checks on partition object
     final ASTJoinGroupPartition p1 = partitions.getPartitionList().get(0);
-    final List<IGroupMemberNode> p1Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p1Exp = new ArrayList<>();
     p1Exp.add(n1);
     p1Exp.add(n2);
     p1Exp.add(n3);
@@ -303,7 +303,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     assertEquals(varSet("x1", "x2", "x4"), p1.definitelyProduced);
 
     final ASTJoinGroupPartition p2 = partitions.getPartitionList().get(1);
-    final List<IGroupMemberNode> p2Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p2Exp = new ArrayList<>();
     p2Exp.add(n5);
     p2Exp.add(n6);
     p2Exp.add(n7);
@@ -312,7 +312,7 @@ public class TestASTJoinGroupPartitioning extends AbstractOptimizerTestCaseWithU
     assertEquals(varSet("x1", "x2", "x4", "x5", "x6"), p2.definitelyProduced);
 
     final ASTJoinGroupPartition p3 = partitions.getPartitionList().get(2);
-    final List<IGroupMemberNode> p3Exp = new ArrayList<IGroupMemberNode>();
+    final List<IGroupMemberNode> p3Exp = new ArrayList<>();
     p3Exp.add(n8);
     p3Exp.add(n9);
     p3Exp.add(n10);

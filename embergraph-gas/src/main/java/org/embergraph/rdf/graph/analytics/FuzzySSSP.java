@@ -93,10 +93,10 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
      * key and the value of the inner map is the target vertex - it is being used as a set).
      */
     private ConcurrentMap<Value, ConcurrentMap<Value, Value>> reachable =
-        new ConcurrentHashMap<Value, ConcurrentMap<Value, Value>>();
+        new ConcurrentHashMap<>();
 
     /** The set of visited vertices. */
-    private Set<Value> visited = new LinkedHashSet<Value>();
+    private Set<Value> visited = new LinkedHashSet<>();
 
     //        private Map<Value,Set<Value>>
     private boolean addVisited(final Value v) {
@@ -121,7 +121,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
       if (tmp == null) {
 
         final ConcurrentMap<Value, Value> old =
-            reachable.putIfAbsent(src, tmp = new ConcurrentHashMap<Value, Value>());
+            reachable.putIfAbsent(src, tmp = new ConcurrentHashMap<>());
 
         if (old != null) {
 
@@ -220,7 +220,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
      */
 
     // The set of vertices along a shortest path.
-    final Set<Value> setAll = new LinkedHashSet<Value>();
+    final Set<Value> setAll = new LinkedHashSet<>();
 
     for (Value src : this.src) {
 
@@ -236,7 +236,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
       gasContext.call();
 
       // The set of vertices along a shortest path for this source.
-      final Set<Value> set = new LinkedHashSet<Value>();
+      final Set<Value> set = new LinkedHashSet<>();
 
       /*
        * FIXME Extract the vertices on a shortest path.

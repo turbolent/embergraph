@@ -227,7 +227,7 @@ public abstract class IndexManager extends StoreManager {
    * pushes the problem back onto the application.
    */
   private final ConcurrentHashMap<String, Void> disabledShards =
-      new ConcurrentHashMap<String, Void>();
+      new ConcurrentHashMap<>();
 
   /** Declare that the named index will no longer accept writes (transient effect only). */
   public void disableWrites(final String name) {
@@ -325,7 +325,7 @@ public abstract class IndexManager extends StoreManager {
   private final ConcurrentWeakValueCacheWithTimeout<UUID, IndexSegment> indexSegmentCache;
 
   /** Provides locks on a per-{name+timestamp} basis for higher concurrency. */
-  private final transient NamedLock<NT> namedLock = new NamedLock<NT>();
+  private final transient NamedLock<NT> namedLock = new NamedLock<>();
 
   /*
    * Provides locks on a per-{@link IndexSegment} UUID basis for higher concurrency.
@@ -336,7 +336,7 @@ public abstract class IndexManager extends StoreManager {
    * #indexSegmentCache} because many different timestamps will be mapped onto the same {@link
    * IndexSegment}.
    */
-  private final transient NamedLock<UUID> segmentLock = new NamedLock<UUID>();
+  private final transient NamedLock<UUID> segmentLock = new NamedLock<>();
 
   /*
    * The #of entries in the hard reference cache for {@link IIndex}s. There MAY be more {@link
@@ -459,7 +459,7 @@ public abstract class IndexManager extends StoreManager {
    */
   // private // @todo exposed for counters - should be private.
   protected final LRUCache<String /* name */, StaleLocatorReason /* reason */> staleLocatorCache =
-      new LRUCache<String, StaleLocatorReason>(1000);
+      new LRUCache<>(1000);
 
   /*
    * Note: this information is based on an LRU cache with a large fixed capacity. It is expected
@@ -564,7 +564,7 @@ public abstract class IndexManager extends StoreManager {
         throw new RuntimeException(Options.INDEX_SEGMENT_CACHE_TIMEOUT + " must be non-negative");
 
       indexSegmentCache =
-          new ConcurrentWeakValueCacheWithTimeout<UUID, IndexSegment>(
+          new ConcurrentWeakValueCacheWithTimeout<>(
               indexSegmentCacheCapacity, TimeUnit.MILLISECONDS.toNanos(indexSegmentCacheTimeout));
     }
   }
@@ -1436,7 +1436,7 @@ public abstract class IndexManager extends StoreManager {
 
     final Event e;
     {
-      final Map<String, Object> m = new HashMap<String, Object>();
+      final Map<String, Object> m = new HashMap<>();
       m.put("name", indexPartitionName);
       m.put("merge", compactingMerge);
       m.put("#sources", src.getSourceCount());
@@ -1619,7 +1619,7 @@ public abstract class IndexManager extends StoreManager {
    * those tasks out via the performance counters interface.
    */
   protected final ConcurrentHashMap<File, IndexSegmentBuilder> buildTasks =
-      new ConcurrentHashMap<File, IndexSegmentBuilder>();
+      new ConcurrentHashMap<>();
 
   /** The #of build tasks which are executing concurrently. */
   protected final AtomicInteger concurrentBuildTaskCount = new AtomicInteger();
@@ -1663,14 +1663,14 @@ public abstract class IndexManager extends StoreManager {
    * re-registered!
    */
   private final ConcurrentHashMap<String /* name */, BTreeCounters> indexCounters =
-      new ConcurrentHashMap<String, BTreeCounters>();
+      new ConcurrentHashMap<>();
 
   /*
    * The aggregated performance counters for each unisolated index partition view as of the time
    * when the old journal was closed for writes. This is used to compute the delta for each
    * unisolated index partition view at the end of the life cycle for the new live journal.
    */
-  private Map<String /*name*/, BTreeCounters> mark = new HashMap<String, BTreeCounters>();
+  private Map<String /*name*/, BTreeCounters> mark = new HashMap<>();
 
   @Override
   public BTreeCounters getIndexCounters(final String name) {
@@ -1718,7 +1718,7 @@ public abstract class IndexManager extends StoreManager {
    */
   protected synchronized Map<String, BTreeCounters> markAndGetDelta() {
 
-    final Map<String /*name*/, BTreeCounters> newMark = new HashMap<String, BTreeCounters>();
+    final Map<String /*name*/, BTreeCounters> newMark = new HashMap<>();
 
     /*
      * The net change in the performance counters for each unisolated index
@@ -1728,7 +1728,7 @@ public abstract class IndexManager extends StoreManager {
      * {@link Score} for each index partition. Those {@link Score}s inform
      * the choice of the index partition moves.
      */
-    final Map<String /* name */, BTreeCounters> delta = new HashMap<String, BTreeCounters>();
+    final Map<String /* name */, BTreeCounters> delta = new HashMap<>();
 
     final Iterator<Map.Entry<String, BTreeCounters>> itr = indexCounters.entrySet().iterator();
 

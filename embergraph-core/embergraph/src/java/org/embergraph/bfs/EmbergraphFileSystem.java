@@ -468,7 +468,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     assertString(metadata, FileMetadataSchema.ID);
 
     // clone the map since it may be unmodifiable.
-    metadata = new HashMap<String, Object>(metadata);
+    metadata = new HashMap<>(metadata);
 
     // auto-increment the last defined version counter.
     metadata.put(FileMetadataSchema.VERSION, AutoIncIntegerCounter.INSTANCE);
@@ -581,7 +581,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
   public Map<String, Object> updateMetadata(String id, Map<String, Object> metadata) {
 
     // copy since the map might be unmodifyable.
-    metadata = new HashMap<String, Object>(metadata);
+    metadata = new HashMap<>(metadata);
 
     // set the id - this is required for the primary key.
     metadata.put(FileMetadataSchema.ID, id);
@@ -655,7 +655,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
      * "deleted" by this class.
      */
     {
-      final Map<String, Object> metadata = new HashMap<String, Object>();
+      final Map<String, Object> metadata = new HashMap<>();
 
       // primary key.
       metadata.put(FileMetadataSchema.ID, id);
@@ -777,7 +777,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
      */
     ITPS tps = readMetadata(id, Long.MAX_VALUE);
 
-    Vector<ITPV> vec = new Vector<ITPV>();
+    Vector<ITPV> vec = new Vector<>();
 
     /*
      * Filter for only the version properties, skipping "delete" entries.

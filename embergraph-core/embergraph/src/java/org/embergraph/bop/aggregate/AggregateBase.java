@@ -177,7 +177,7 @@ public abstract class AggregateBase<E> extends ImmutableBOp implements IAggregat
   }
 
   /** A ZERO. */
-  protected static final transient NumericIV ZERO = new XSDNumericIV<EmbergraphLiteral>(0);
+  protected static final transient NumericIV ZERO = new XSDNumericIV<>(0);
 
   /** An empty string. */
   protected static final transient Literal EMPTY_LITERAL = new LiteralImpl("");

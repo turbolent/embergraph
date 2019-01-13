@@ -187,8 +187,8 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
   protected ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator(
       final IBindingSet bindingSet) {
 
-    return new ThickAsynchronousIterator<IBindingSet[]>(
-        new IBindingSet[][] {new IBindingSet[] {bindingSet}});
+    return new ThickAsynchronousIterator<>(
+        new IBindingSet[][]{new IBindingSet[]{bindingSet}});
   }
 
   /*
@@ -233,12 +233,12 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     final UUID queryId = UUID.randomUUID();
 
     final Predicate<IV> predOp =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -261,7 +261,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -283,10 +283,10 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {initialBindingSets});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{initialBindingSets});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -296,7 +296,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,
@@ -357,12 +357,12 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     final UUID queryId = UUID.randomUUID();
 
     final Predicate<IV> predOp =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -385,7 +385,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -407,10 +407,10 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {initialBindingSets});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{initialBindingSets});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -420,7 +420,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,
@@ -470,12 +470,12 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     final UUID queryId = UUID.randomUUID();
 
     final Predicate<IV> predOp =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -512,7 +512,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -534,10 +534,10 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {initialBindingSets});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{initialBindingSets});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -547,7 +547,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,
@@ -597,12 +597,12 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     final UUID queryId = UUID.randomUUID();
 
     final Predicate<IV> predOp =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -633,7 +633,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
      */
     final IBindingSet[] initialBindingSets;
     {
-      final List<IBindingSet> list = new LinkedList<IBindingSet>();
+      final List<IBindingSet> list = new LinkedList<>();
 
       IBindingSet tmp;
 
@@ -655,10 +655,10 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IAsynchronousIterator<IBindingSet[]> source =
-          new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {initialBindingSets});
+          new ThickAsynchronousIterator<>(new IBindingSet[][]{initialBindingSets});
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -668,7 +668,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,
@@ -724,19 +724,19 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
 
     // AP("Paul" ?x)
     final Predicate<IV> pred =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 // constraint x != Luke
                 new NV(
                     PipelineJoin.Annotations.CONSTRAINTS,
-                    new IConstraint[] {
-                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    new IConstraint[]{
+                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
                     }),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -775,8 +775,8 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       }
 
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2, bset3}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2, bset3}});
     }
 
     // the expected solutions.
@@ -796,7 +796,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -806,7 +806,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,
@@ -862,19 +862,19 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     final UUID queryId = UUID.randomUUID();
 
     final Predicate<IV> pred =
-        new Predicate<IV>(
-            new IVariableOrConstant[] {
-              new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
+        new Predicate<>(
+            new IVariableOrConstant[]{
+                new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.RELATION_NAME, new String[]{setup.spoNamespace}),
                 new NV(Predicate.Annotations.BOP_ID, predId),
                 new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 // constraint x != Luke
                 new NV(
                     PipelineJoin.Annotations.CONSTRAINTS,
-                    new IConstraint[] {
-                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    new IConstraint[]{
+                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
                     }),
                 new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
@@ -926,8 +926,8 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       }
 
       source =
-          new ThickAsynchronousIterator<IBindingSet[]>(
-              new IBindingSet[][] {new IBindingSet[] {bset1, bset2, bset3}});
+          new ThickAsynchronousIterator<>(
+              new IBindingSet[][]{new IBindingSet[]{bset1, bset2, bset3}});
     }
 
     // the expected solutions.
@@ -962,10 +962,10 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
       final BaseJoinStats stats = (BaseJoinStats) query.newStats();
 
       final IBlockingBuffer<IBindingSet[]> sink =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       final IBlockingBuffer<IBindingSet[]> sink2 =
-          new BlockingBufferWithStats<IBindingSet[]>(query, stats);
+          new BlockingBufferWithStats<>(query, stats);
 
       /*
        * Note: Since the operator relies on the isLastInvocation() test to
@@ -975,7 +975,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
        */
 
       final BOpContext<IBindingSet> context =
-          new BOpContext<IBindingSet>(
+          new BOpContext<>(
               new MockRunningQuery(null /* fed */, setup.jnl /* indexManager */, queryContext),
               -1 /* partitionId */,
               stats,

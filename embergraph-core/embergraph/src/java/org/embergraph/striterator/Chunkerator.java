@@ -63,7 +63,7 @@ public class Chunkerator<E> implements ICloseableIterator<E[]> {
 
     if (src == null) throw new IllegalArgumentException();
 
-    this.src = new ChunkedWrappedIterator<E>(src, chunkSize, elementClass, keyOrder, filter);
+    this.src = new ChunkedWrappedIterator<>(src, chunkSize, elementClass, keyOrder, filter);
   }
 
   @Override

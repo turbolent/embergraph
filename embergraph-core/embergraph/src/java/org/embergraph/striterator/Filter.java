@@ -65,7 +65,7 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
   //    @SuppressWarnings("unchecked")
   public IChunkedIterator<E> filter(I src) {
 
-    return new FilteredIterator<I, E>(chunkSize, src, this);
+    return new FilteredIterator<>(chunkSize, src, this);
   }
 
   /*

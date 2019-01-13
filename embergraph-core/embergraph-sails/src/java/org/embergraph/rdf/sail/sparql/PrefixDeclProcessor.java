@@ -51,7 +51,7 @@ public class PrefixDeclProcessor {
 
   private static final Logger log = Logger.getLogger(PrefixDeclProcessor.class);
 
-  public static final Map<String, String> defaultDecls = new LinkedHashMap<String, String>();
+  public static final Map<String, String> defaultDecls = new LinkedHashMap<>();
 
   public interface Options {
 
@@ -101,7 +101,7 @@ public class PrefixDeclProcessor {
     List<ASTPrefixDecl> prefixDeclList = qc.getPrefixDeclList();
 
     // Build a prefix --> IRI map
-    Map<String, String> prefixMap = new LinkedHashMap<String, String>();
+    Map<String, String> prefixMap = new LinkedHashMap<>();
 
     for (ASTPrefixDecl prefixDecl : prefixDeclList) {
       String prefix = prefixDecl.getPrefix();

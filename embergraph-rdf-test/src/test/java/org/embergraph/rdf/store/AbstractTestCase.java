@@ -347,7 +347,7 @@ public abstract class AbstractTestCase extends TestCase2 {
       if (i >= expected.length) {
 
         // buffer up to N 'extra' values from the itr for the err msg.
-        final Vector<ISPO> v = new Vector<ISPO>();
+        final Vector<ISPO> v = new Vector<>();
 
         while (actual.hasNext() && v.size() < 10) {
 
@@ -427,7 +427,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
     try {
 
-      Map<ISPO, ISPO> map = new TreeMap<ISPO, ISPO>(SPOComparator.INSTANCE);
+      Map<ISPO, ISPO> map = new TreeMap<>(SPOComparator.INSTANCE);
 
       for (ISPO tmp : expected) {
 
@@ -910,7 +910,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
     private void verifyStatements(final int n, final Statement[] a) {
 
-      final Map<Value, EmbergraphValue> termSet = new LinkedHashMap<Value, EmbergraphValue>(n);
+      final Map<Value, EmbergraphValue> termSet = new LinkedHashMap<>(n);
       {
         for (int i = 0; i < n; i++) {
 
@@ -959,7 +959,7 @@ public abstract class AbstractTestCase extends TestCase2 {
        * Now verify reverse lookup for those terms.
        */
       {
-        final Set<IV<?, ?>> ivs = new LinkedHashSet<IV<?, ?>>(termSet.size());
+        final Set<IV<?, ?>> ivs = new LinkedHashSet<>(termSet.size());
 
         for (EmbergraphValue term : termSet.values()) {
 

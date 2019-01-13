@@ -111,10 +111,10 @@ public class TestURIExtensionIV extends TestCase2 {
     }
 
     final FullyInlineTypedLiteralIV<EmbergraphLiteral> localNameIV =
-        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(uri.getLocalName());
+        new FullyInlineTypedLiteralIV<>(uri.getLocalName());
 
     final URIExtensionIV<EmbergraphURI> iv =
-        new URIExtensionIV<EmbergraphURI>(localNameIV, namespaceIV);
+        new URIExtensionIV<>(localNameIV, namespaceIV);
 
     return iv;
   }
@@ -161,7 +161,7 @@ public class TestURIExtensionIV extends TestCase2 {
 
   public void test_encodeDecode_comparator() {
 
-    final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
+    final List<IV<?, ?>> ivs = new LinkedList<>();
     {
 
       //            ivs.add(newFixture(new URIImpl("http://www.embergraph.org")));
