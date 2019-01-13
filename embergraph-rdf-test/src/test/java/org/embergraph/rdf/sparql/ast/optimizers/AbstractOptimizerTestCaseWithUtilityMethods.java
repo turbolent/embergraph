@@ -599,7 +599,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
    */
   StaticAnalysis statisAnalysisForNodes(List<IGroupMemberNode> nodes) {
 
-    final IGroupMemberNode[] nodesArr = nodes.toArray(new IGroupMemberNode[nodes.size()]);
+    final IGroupMemberNode[] nodesArr = nodes.toArray(new IGroupMemberNode[0]);
     final JoinGroupNode jgn =
         (JoinGroupNode)
             new Helper() {

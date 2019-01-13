@@ -226,7 +226,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 

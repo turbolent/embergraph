@@ -417,7 +417,6 @@ public class DenseDoubleMatrix1D extends DoubleMatrix1D {
       index += s;
       otherIndex += ys;
     }
-    return;
   }
   /*
    * Fills the cell values into the specified 1-dimensional array. The values are copied. So

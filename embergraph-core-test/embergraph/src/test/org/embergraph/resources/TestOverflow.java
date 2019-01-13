@@ -83,7 +83,7 @@ public class TestOverflow extends AbstractResourceManagerTestCase {
    *
    * @throws IOException
    */
-  public void test_overflow() throws IOException {
+  public void test_overflow() {
 
     /*
      * Define, register, and populate the initial partition of a named

@@ -318,7 +318,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
      * @return The ordered array of resources that define the post-condition view.
      */
     @Override
-    protected IResourceMetadata[] doTask() throws Exception {
+    protected IResourceMetadata[] doTask() {
 
       // populated with the description of the ordered sources of the new view.
       final List<IResourceMetadata> newView = new LinkedList<>();
@@ -505,10 +505,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
           final int startIndex = 1 + buildResult.sourceCount;
 
-          for (int i = startIndex; i < currentResources.length; i++) {
-
-            newView.add(currentResources[i]);
-          }
+          newView
+              .addAll(Arrays.asList(currentResources).subList(startIndex, currentResources.length));
 
           newResources = newView.toArray(new IResourceMetadata[] {});
         }

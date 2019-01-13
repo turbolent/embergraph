@@ -47,14 +47,14 @@ public class EmptyRabaValueCoder implements IRabaCoder, Externalizable {
   private static final long serialVersionUID = -8011456562258609162L;
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) {
 
     // NOP
 
   }
 
   @Override
-  public void writeExternal(ObjectOutput out) throws IOException {
+  public void writeExternal(ObjectOutput out) {
 
     // NOP
 
@@ -295,7 +295,7 @@ public class EmptyRabaValueCoder implements IRabaCoder, Externalizable {
     }
 
     @Override
-    public final int add(DataInput in, int len) throws IOException {
+    public final int add(DataInput in, int len) {
       throw new UnsupportedOperationException();
     }
 

@@ -280,31 +280,27 @@ public class RAMGASEngine extends GASEngine {
     public Iterator<Statement> getEdges(
         final IGASContext<?, ?, ?> ctx, final Value u, final EdgesEnum edges) {
 
-      try {
-        switch (edges) {
-          case NoEdges:
-            return EmptyIterator.DEFAULT;
-          case InEdges:
-            return getEdges(true /* inEdges */, ctx, u);
-          case OutEdges:
-            return getEdges(false /* inEdges */, ctx, u);
-          case AllEdges:
-            {
-              final IStriterator a = getEdges(true /* inEdges */, ctx, u);
-              final IStriterator b = getEdges(false /* outEdges */, ctx, u);
-              a.append(b);
-              return a;
-            }
-          default:
-            throw new UnsupportedOperationException(edges.name());
-        }
-      } catch (SailException ex) {
-        throw new RuntimeException(ex);
+      switch (edges) {
+        case NoEdges:
+          return EmptyIterator.DEFAULT;
+        case InEdges:
+          return getEdges(true /* inEdges */, ctx, u);
+        case OutEdges:
+          return getEdges(false /* inEdges */, ctx, u);
+        case AllEdges:
+          {
+            final IStriterator a = getEdges(true /* inEdges */, ctx, u);
+            final IStriterator b = getEdges(false /* outEdges */, ctx, u);
+            a.append(b);
+            return a;
+          }
+        default:
+          throw new UnsupportedOperationException(edges.name());
       }
     }
 
     private IStriterator getEdges(
-        final boolean inEdges, final IGASContext<?, ?, ?> ctx, final Value u) throws SailException {
+        final boolean inEdges, final IGASContext<?, ?, ?> ctx, final Value u) {
 
       final URI linkTypeIV = ctx.getLinkType();
       if (linkTypeIV != null) {

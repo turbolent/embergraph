@@ -141,8 +141,7 @@ public class BackgroundTupleResult extends TupleQueryResultImpl
   }
 
   @Override
-  public void startQueryResult(final List<String> bindingNames)
-      throws TupleQueryResultHandlerException {
+  public void startQueryResult(final List<String> bindingNames) {
     this.bindingNames = bindingNames;
     bindingNamesReady.countDown();
   }
@@ -158,18 +157,18 @@ public class BackgroundTupleResult extends TupleQueryResultImpl
   }
 
   @Override
-  public void endQueryResult() throws TupleQueryResultHandlerException {
+  public void endQueryResult() {
     // no-op
   }
 
   @Override
-  public void handleBoolean(boolean arg0) throws QueryResultHandlerException {
+  public void handleBoolean(boolean arg0) {
 
     throw new UnsupportedOperationException("Cannot handle boolean results");
   }
 
   @Override
-  public void handleLinks(List<String> arg0) throws QueryResultHandlerException {
+  public void handleLinks(List<String> arg0) {
     // no-op
   }
 }

@@ -296,7 +296,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
     anns.add(new NV(PipelineJoin.Annotations.PREDICATE, pred));
 
     return applyQueryHints(
-        new DistinctTermScanOp(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[anns.size()]))),
+        new DistinctTermScanOp(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[0]))),
         queryHints,
         ctx);
   }
@@ -331,7 +331,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
     anns.add(new NV(PipelineJoin.Annotations.PREDICATE, pred));
 
     return applyQueryHints(
-        new FastRangeCountOp(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[anns.size()]))),
+        new FastRangeCountOp(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[0]))),
         queryHints,
         ctx);
   }
@@ -1093,7 +1093,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
       final AST2BOpContext ctx) {
 
     // Convert join annotations to a map so we can lookup some stuff.
-    final Map<String, Object> map = NV.asMap(anns.toArray(new NV[anns.size()]));
+    final Map<String, Object> map = NV.asMap(anns.toArray(new NV[0]));
 
     // Look up the predicate for the access path.
     Predicate<?> pred = (Predicate<?>) map.get(AccessPathJoinAnnotations.PREDICATE);
@@ -1156,7 +1156,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
          */
 
         // cutoff join.
-        map.put(PipelineJoin.Annotations.LIMIT, Long.valueOf(cutoffLimit));
+        map.put(PipelineJoin.Annotations.LIMIT, cutoffLimit);
 
         /*
          * Note: In order to have an accurate estimate of the join hit

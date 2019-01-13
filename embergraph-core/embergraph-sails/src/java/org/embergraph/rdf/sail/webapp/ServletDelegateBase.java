@@ -31,14 +31,14 @@ public class ServletDelegateBase implements IServletDelegate {
   public ServletDelegateBase() {}
 
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {}
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) {}
 
   @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {}
+  public void doPost(HttpServletRequest req, HttpServletResponse resp) {}
 
   @Override
-  public void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {}
+  public void doDelete(HttpServletRequest req, HttpServletResponse resp) {}
 
   @Override
-  public void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {}
+  public void doPut(HttpServletRequest req, HttpServletResponse resp) {}
 }

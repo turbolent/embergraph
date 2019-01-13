@@ -43,10 +43,10 @@ import org.embergraph.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
 public abstract class TupleTransformer<E, F> extends FilterBase implements ITupleFilter<F> {
 
   /** The serialization provider for the transformed tuples. */
-  protected final ITupleSerializer<? extends Object /*key*/, F /*val*/> tupleSer;
+  protected final ITupleSerializer<? /*key*/, F /*val*/> tupleSer;
 
   /** @param tupleSer The serialization provider for the transformed tuples. */
-  public TupleTransformer(ITupleSerializer<? extends Object /* key */, F /* value */> tupleSer) {
+  public TupleTransformer(ITupleSerializer<? /* key */, F /* value */> tupleSer) {
 
     if (tupleSer == null) throw new IllegalArgumentException();
 

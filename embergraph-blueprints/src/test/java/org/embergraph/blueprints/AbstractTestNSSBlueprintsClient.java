@@ -197,7 +197,7 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestEmberg
     testGraph.shutdown();
   }
 
-  protected abstract EmbergraphGraph getNewGraph(String file) throws Exception;
+  protected abstract EmbergraphGraph getNewGraph(String file);
 
   @Override
   protected EmbergraphGraph loadGraph(String file) throws Exception {

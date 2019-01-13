@@ -65,13 +65,12 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getSimpleName());
-    sb.append("{aggExpr=" + aggExpr);
-    sb.append(",select2=" + Arrays.toString(select2));
-    sb.append(",having2=" + Arrays.toString(having2));
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{aggExpr=" + aggExpr
+        + ",select2=" + Arrays.toString(select2)
+        + ",having2=" + Arrays.toString(having2)
+        + "}";
+    return sb;
   }
 
   /*

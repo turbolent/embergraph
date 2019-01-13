@@ -52,9 +52,9 @@ public class TestAltHALogWriter extends TestCase {
   protected void tearDown() {
     // clear directory
     final File[] files = m_logdir.listFiles();
-    for (int i = 0; i < files.length; i++) {
+    for (File file : files) {
       try {
-        files[i].delete();
+        file.delete();
       } catch (Exception e) {
         // ignore
       }
@@ -375,15 +375,13 @@ public class TestAltHALogWriter extends TestCase {
 
     @Override
     public void run() {
-      IHALogReader reader = null;
-      try {
-        final HALogFile file = manager.getOpenLogFile();
-        if (file == null) return;
-
-        reader = file.getReader();
-      } catch (IOException e1) {
-        e1.printStackTrace();
+      IHALogReader reader;
+      final HALogFile file = manager.getOpenLogFile();
+      if (file == null) {
+        return;
       }
+
+      reader = file.getReader();
 
       if (reader == null) {
         return;

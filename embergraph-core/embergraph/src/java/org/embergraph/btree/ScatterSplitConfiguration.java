@@ -56,19 +56,12 @@ public class ScatterSplitConfiguration implements Externalizable {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder(getClass().getName());
-
-    sb.append("{enabled=" + enabled);
-
-    sb.append(", percentOfSplitThreshold=" + percentOfSplitThreshold);
-
-    sb.append(", dataServiceCount=" + dataServiceCount);
-
-    sb.append(", indexPartitionCount=" + indexPartitionCount);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getName() + "{enabled=" + enabled
+        + ", percentOfSplitThreshold=" + percentOfSplitThreshold
+        + ", dataServiceCount=" + dataServiceCount
+        + ", indexPartitionCount=" + indexPartitionCount
+        + "}";
+    return sb;
   }
 
   /** De-serialization ctor. */
@@ -114,7 +107,7 @@ public class ScatterSplitConfiguration implements Externalizable {
 
   private static final transient int VERSION0 = 0x0;
 
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     final int version = (int) LongPacker.unpackLong(in);
 

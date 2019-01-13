@@ -54,17 +54,11 @@ public class DelegateIndex implements IIndex {
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{ ");
-
-    sb.append(delegate.toString());
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ "
+        + delegate.toString()
+        + "}";
+    return sb;
   }
 
   @Override

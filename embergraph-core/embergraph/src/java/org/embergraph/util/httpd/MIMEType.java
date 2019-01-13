@@ -225,11 +225,11 @@ public class MIMEType {
       throw new IllegalArgumentException("params may not be null.");
     }
 
-    for (int i = 0; i < params.length; i++) {
+    for (NVPair param : params) {
 
-      String attribute = params[i].getName();
+      String attribute = param.getName();
 
-      String value = params[i].getValue();
+      String value = param.getValue();
 
       if (!HTTPHeaderUtility.isHttpToken(attribute)) {
 
@@ -707,9 +707,9 @@ public class MIMEType {
 
         boolean dropThisParam = false;
 
-        for (int i = 0; i < dropParams.length; i++) {
+        for (String dropParam : dropParams) {
 
-          if (name.equalsIgnoreCase(dropParams[i])) {
+          if (name.equalsIgnoreCase(dropParam)) {
 
             dropThisParam = true;
 
@@ -741,9 +741,9 @@ public class MIMEType {
 
         boolean dropThisParam = false;
 
-        for (int i = 0; i < dropParams.length; i++) {
+        for (String dropParam : dropParams) {
 
-          if (name.equalsIgnoreCase(dropParams[i])) {
+          if (name.equalsIgnoreCase(dropParam)) {
 
             dropThisParam = true;
 
@@ -779,7 +779,7 @@ public class MIMEType {
 
     if (true) { // local variables.
 
-      sb.append(type + "/" + subtype);
+      sb.append(type).append("/").append(subtype);
 
       Iterator itr = params.entrySet().iterator();
 
@@ -791,7 +791,7 @@ public class MIMEType {
 
         NVPair param = (NVPair) entry.getValue();
 
-        sb.append(";" + param.getName() + "=" + param.getValue());
+        sb.append(";").append(param.getName()).append("=").append(param.getValue());
       }
     }
 
@@ -865,16 +865,16 @@ public class MIMEType {
 
         NVPair[] params = getParams();
 
-        for (int i = 0; i < params.length; i++) {
+        for (NVPair param : params) {
 
-          String name = params[i].getName();
+          String name = param.getName();
 
           if (isIgnoredParam(name)) {
 
             continue;
           }
 
-          String value = params[i].getValue();
+          String value = param.getValue();
 
           String otherValue = other.getParamValue(name);
 
@@ -899,9 +899,7 @@ public class MIMEType {
 
         String[] defaultNames = getDefaultParamNames();
 
-        for (int i = 0; i < defaultNames.length; i++) {
-
-          String name = defaultNames[i];
+        for (String name : defaultNames) {
 
           if (isIgnoredParam(name)) {
 
@@ -1066,13 +1064,13 @@ public class MIMEType {
 
     NVPair[] params = getParams();
 
-    for (int i = 0; i < params.length; i++) {
+    for (NVPair param : params) {
 
-      String attribute = params[i].getName();
+      String attribute = param.getName();
 
       if (name.equalsIgnoreCase(attribute)) {
 
-        return params[i].getValue();
+        return param.getValue();
       }
     }
 
@@ -1095,18 +1093,18 @@ public class MIMEType {
 
     NVPair[] params = getParams();
 
-    for (int i = 0; i < params.length; i++) {
+    for (NVPair param : params) {
 
-      String attribute = params[i].getName();
+      String attribute = param.getName();
 
       // Note: value represented as quoted-string iff
       // necessary.
 
-      String value = HTTPHeaderUtility.quoteString(params[i].getValue(), false);
+      String value = HTTPHeaderUtility.quoteString(param.getValue(), false);
 
       // Note: no LWS between attribute and value.
 
-      sb.append("; " + attribute + "=" + value);
+      sb.append("; ").append(attribute).append("=").append(value);
     }
 
     return sb.toString();

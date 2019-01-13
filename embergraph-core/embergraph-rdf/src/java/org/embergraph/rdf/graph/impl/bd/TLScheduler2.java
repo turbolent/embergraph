@@ -209,14 +209,11 @@ public class TLScheduler2 implements IGASSchedulerImpl {
         final MySTScheduler t = s;
         final int index = i++;
         tasks.add(
-            new Callable<Void>() {
-              @Override
-              public Void call() throws Exception {
-                final IArraySlice<Value> orderedSegment =
-                    GASImplUtil.compactAndSort(t.getVertices(), t.tmp);
-                f2.copyIntoResetFrontier(off[index], orderedSegment);
-                return null;
-              }
+            () -> {
+              final IArraySlice<Value> orderedSegment =
+                  GASImplUtil.compactAndSort(t.getVertices(), t.tmp);
+              f2.copyIntoResetFrontier(off[index], orderedSegment);
+              return null;
             });
       }
 

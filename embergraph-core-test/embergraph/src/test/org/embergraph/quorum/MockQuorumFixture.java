@@ -344,7 +344,7 @@ public class MockQuorumFixture {
    *     <p>If you need more control over the visibility of state changes use {@link
    *     #assertCondition(Runnable)}.
    */
-  public void awaitDeque() throws InterruptedException {
+  public void awaitDeque() {
     //        lock.lock();
     //        try {
     //            assertRunning();
@@ -1121,41 +1121,39 @@ public class MockQuorumFixture {
        *     updated across this operation. The real implemention should be a little more
        *     sophisticated.
        */
-      public Future<Void> moveToEndOfPipeline() throws IOException {
+      public Future<Void> moveToEndOfPipeline() {
         final FutureTask<Void> ft =
             new FutureTask<>(
-                new Runnable() {
-                  public void run() {
+                () -> {
 
-                    // note the current vote (if any).
-                    final Long lastCommitTime = getQuorum().getCastVote(getServiceId());
+                  // note the current vote (if any).
+                  final Long lastCommitTime = getQuorum().getCastVote(getServiceId());
 
-                    if (isPipelineMember()) {
+                  if (isPipelineMember()) {
+
+                    if (log.isDebugEnabled()) {
+                      log.debug("Will remove self from the pipeline: " + getServiceId());
+                    }
+
+                    getActor().pipelineRemove();
+
+                    if (log.isDebugEnabled()) {
+                      log.debug("Will add self back into the pipeline: " + getServiceId());
+                    }
+
+                    getActor().pipelineAdd();
+
+                    if (lastCommitTime != null) {
 
                       if (log.isDebugEnabled()) {
-                        log.debug("Will remove self from the pipeline: " + getServiceId());
+                        log.debug(
+                            "Will cast our vote again: lastCommitTime="
+                                + +lastCommitTime
+                                + ", "
+                                + getServiceId());
                       }
 
-                      getActor().pipelineRemove();
-
-                      if (log.isDebugEnabled()) {
-                        log.debug("Will add self back into the pipeline: " + getServiceId());
-                      }
-
-                      getActor().pipelineAdd();
-
-                      if (lastCommitTime != null) {
-
-                        if (log.isDebugEnabled()) {
-                          log.debug(
-                              "Will cast our vote again: lastCommitTime="
-                                  + +lastCommitTime
-                                  + ", "
-                                  + getServiceId());
-                        }
-
-                        getActor().castVote(lastCommitTime);
-                      }
+                      getActor().castVote(lastCommitTime);
                     }
                   }
                 },
@@ -1166,24 +1164,22 @@ public class MockQuorumFixture {
 
       @Override
       public Future<Void> receiveAndReplicate(
-          final IHASyncRequest req, final IHASendState snd, IHAWriteMessage msg)
-          throws IOException {
+          final IHASyncRequest req, final IHASendState snd, IHAWriteMessage msg) {
         throw new UnsupportedOperationException();
       }
 
       @Override
-      public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg)
-          throws IOException {
+      public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg) {
         throw new UnsupportedOperationException();
       }
 
       @Override
-      public Future<Void> sendHALogForWriteSet(IHALogRequest msg) throws IOException {
+      public Future<Void> sendHALogForWriteSet(IHALogRequest msg) {
         throw new UnsupportedOperationException();
       }
 
       @Override
-      public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) throws IOException {
+      public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) {
         throw new UnsupportedOperationException();
       }
 
@@ -1193,8 +1189,7 @@ public class MockQuorumFixture {
       }
 
       @Override
-      public Future<IHAPipelineResetResponse> resetPipeline(IHAPipelineResetRequest req)
-          throws IOException {
+      public Future<IHAPipelineResetResponse> resetPipeline(IHAPipelineResetRequest req) {
         throw new UnsupportedOperationException();
       }
     } // MockService

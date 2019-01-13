@@ -155,9 +155,8 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
     // validate that there are no duplicate service mappings used for the fields
     final Set<ServiceMapping> serviceMappings = new HashSet<>();
     final Set<String> customServiceMappings = new HashSet<>();
-    for (int i = 0; i < fields.size(); i++) {
+    for (final GeoSpatialDatatypeFieldConfiguration field : fields) {
 
-      final GeoSpatialDatatypeFieldConfiguration field = fields.get(i);
       final ServiceMapping curServiceMapping = field.getServiceMapping();
 
       if (ServiceMapping.CUSTOM.equals(curServiceMapping)) {

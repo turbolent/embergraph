@@ -20,6 +20,7 @@ package org.embergraph.blueprints.webapp;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +41,7 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
 
   private static final transient Logger log = Logger.getLogger(BlueprintsServlet.class);
 
-  public static final List<String> mimeTypes = Arrays.asList("application/graphml+xml");
+  public static final List<String> mimeTypes = Collections.singletonList("application/graphml+xml");
 
   public BlueprintsServlet() {}
 

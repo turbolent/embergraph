@@ -72,7 +72,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future =
+        final Future<?> future =
             journal.submit(
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
@@ -124,11 +124,11 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future =
+        final Future<?> future =
             journal.submit(
                 new AbstractTask(journal, ITx.READ_COMMITTED, name) {
 
-                  protected Object doTask() throws Exception {
+                  protected Object doTask() {
 
                     /*
                      * Note: Throws an exception if the index is not registered.
@@ -174,7 +174,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future = journal.submit(new DropIndexTask(journal, name));
+        final Future<?> future = journal.submit(new DropIndexTask(journal, name));
 
         try {
 
@@ -219,11 +219,11 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future =
+        final Future<?> future =
             journal.submit(
                 new AbstractTask(journal, ITx.READ_COMMITTED, name) {
 
-                  protected Object doTask() throws Exception {
+                  protected Object doTask() {
 
                     /*
                      * Note: Throws an exception if the index is not registered.
@@ -305,7 +305,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future =
+        final Future<?> future =
             journal.submit(
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
@@ -334,7 +334,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future =
+        final Future<?> future =
             journal.submit(
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
@@ -358,7 +358,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future = journal.submit(new DropIndexTask(journal, name));
+        final Future<?> future = journal.submit(new DropIndexTask(journal, name));
 
         // should return true if the index was dropped.
         assertTrue("Index did not exist?", (Boolean) future.get());
@@ -379,7 +379,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
       {
         final long commitCounterBefore = journal.getRootBlockView().getCommitCounter();
 
-        final Future<? extends Object> future = journal.submit(new DropIndexTask(journal, name));
+        final Future<?> future = journal.submit(new DropIndexTask(journal, name));
 
         // should return false since the index does not exist.
         assertFalse("Index exists?", (Boolean) future.get());
@@ -417,11 +417,11 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
       final String name = "abc";
 
-      final Future<? extends Object> future =
+      final Future<?> future =
           journal.submit(
               new AbstractTask(journal, ITx.READ_COMMITTED, name) {
 
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   getIndex(name);
 

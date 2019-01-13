@@ -46,7 +46,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
    * @throws IOException
    * @throws Exception
    */
-  public void test_duplicateKeys() throws IOException, Exception {
+  public void test_duplicateKeys() {
 
     final IRawStore store = new SimpleMemoryRawStore();
 
@@ -240,7 +240,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
    * @throws IOException
    * @throws Exception
    */
-  public void test_duplicateKeyValues() throws IOException, Exception {
+  public void test_duplicateKeyValues() {
 
     final IRawStore store = new SimpleMemoryRawStore();
 

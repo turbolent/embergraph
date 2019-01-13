@@ -491,7 +491,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
 
     @Override
-    public Void visit(final ASTNumericLiteral node, final Object data) throws VisitorException {
+    public Void visit(final ASTNumericLiteral node, final Object data) {
 
       nodes.put(node, valueFactory.createLiteral(node.getValue(), node.getDatatype()));
 
@@ -499,7 +499,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
 
     @Override
-    public Void visit(final ASTTrue node, final Object data) throws VisitorException {
+    public Void visit(final ASTTrue node, final Object data) {
 
       nodes.put(node, valueFactory.createLiteral(true));
 
@@ -507,7 +507,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
 
     @Override
-    public Void visit(final ASTFalse node, final Object data) throws VisitorException {
+    public Void visit(final ASTFalse node, final Object data) {
 
       nodes.put(node, valueFactory.createLiteral(false));
 
@@ -516,7 +516,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
     /** Note: This supports the visitor method for a Literal. */
     @Override
-    public String visit(final ASTString node, final Object data) throws VisitorException {
+    public String visit(final ASTString node, final Object data) {
 
       return node.getValue();
     }

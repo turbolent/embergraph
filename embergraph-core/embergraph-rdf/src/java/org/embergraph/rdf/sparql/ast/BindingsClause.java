@@ -182,7 +182,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
 
       sb.append(s1);
 
-      sb.append("[ count=" + bindingSets.size() + " ]");
+      sb.append("[ count=").append(bindingSets.size()).append(" ]");
     }
 
     sb.append("\n");

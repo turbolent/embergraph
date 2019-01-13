@@ -166,12 +166,12 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
 
   protected IRawStore store;
 
-  public void setUpComparisonTest(Properties properties) throws Exception {
+  public void setUpComparisonTest(Properties properties) {
 
     store = new Journal(properties).getBufferStrategy();
   }
 
-  public void tearDownComparisonTest() throws Exception {
+  public void tearDownComparisonTest() {
 
     if (store != null) {
 
@@ -654,7 +654,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
      *
      * @return The #of records written.
      */
-    public Integer call() throws Exception {
+    public Integer call() {
 
       try {
 
@@ -720,7 +720,7 @@ public abstract class AbstractMRMWTestCase extends AbstractRawStoreTestCase
      *
      * @return The #of records read and validated.
      */
-    public Integer call() throws Exception {
+    public Integer call() {
 
       // Random reads.
 

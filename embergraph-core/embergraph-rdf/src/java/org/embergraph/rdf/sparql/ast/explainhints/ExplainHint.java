@@ -67,18 +67,16 @@ public abstract class ExplainHint implements IExplainHint {
   @Override
   public String toString() {
 
-    final StringBuffer buf = new StringBuffer();
-    buf.append("Type: " + getExplainHintType());
-    buf.append("\n");
-    buf.append("Category: " + getExplainHintCategory());
-    buf.append("\n");
-    buf.append("Severity: " + getExplainHintSeverity());
-    buf.append("\n");
-    buf.append("Description: " + getExplainHintDescription());
-    buf.append("\n");
-    buf.append("Node: " + getExplainHintNode());
-
-    return buf.toString();
+    String buf = ("Type: " + getExplainHintType())
+        + "\n"
+        + "Category: " + getExplainHintCategory()
+        + "\n"
+        + "Severity: " + getExplainHintSeverity()
+        + "\n"
+        + "Description: " + getExplainHintDescription()
+        + "\n"
+        + "Node: " + getExplainHintNode();
+    return buf;
   }
 
   @Override

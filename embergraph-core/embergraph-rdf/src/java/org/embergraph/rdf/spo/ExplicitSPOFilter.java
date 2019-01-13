@@ -61,18 +61,18 @@ public final class ExplicitSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
   }
 
   /** Imposes the canonicalizing mapping during object de-serialization. */
-  private Object readResolve() throws ObjectStreamException {
+  private Object readResolve() {
 
     return INSTANCE;
   }
 
-  private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+  private void writeObject(java.io.ObjectOutputStream out) {
 
     // NOP - stateless.
 
   }
 
-  private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+  private void readObject(java.io.ObjectInputStream in) {
 
     // NOP - stateless.
 

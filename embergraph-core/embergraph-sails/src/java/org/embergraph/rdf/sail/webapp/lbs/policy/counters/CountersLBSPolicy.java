@@ -133,7 +133,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
         tmp.add(hostname);
       }
       // dense array of hosts names for services.
-      hosts = tmp.toArray(new String[tmp.size()]);
+      hosts = tmp.toArray(new String[0]);
     }
 
     final HttpClient cm = getClientConnectionManager();

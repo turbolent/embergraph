@@ -164,9 +164,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
    */
   public void test_randomDenseKeys() throws Exception {
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      final int m = branchingFactors[i];
+    for (final int m : branchingFactors) {
 
       doBuildIndexSegmentAndCompare(doSplitWithRandomDenseKeySequence(getBTree(m), m, m));
 
@@ -191,9 +189,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
 
     final int trace = 0;
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      final int m = branchingFactors[i];
+    for (final int m : branchingFactors) {
 
       doBuildIndexSegmentAndCompare(doInsertRandomSparseKeySequenceTest(getBTree(m), m, trace));
 
@@ -279,9 +275,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
             8196
           };
 
-      for (int i = 0; i < branchingFactors.length; i++) {
-
-        final int m = branchingFactors[i];
+      for (final int m : branchingFactors) {
 
         for (BuildEnum buildEnum : BuildEnum.values()) {
 

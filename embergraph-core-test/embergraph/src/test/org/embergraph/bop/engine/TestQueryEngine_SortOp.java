@@ -74,7 +74,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
   Journal jnl;
   QueryEngine queryEngine;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -83,7 +83,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
     queryEngine.init();
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();
@@ -104,7 +104,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
     super(name);
   }
 
-  public void testStressThreadSafe() throws Exception {
+  public void testStressThreadSafe() {
 
     for (int i = 0; i < 100; i++) {
 

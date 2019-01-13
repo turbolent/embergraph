@@ -200,7 +200,7 @@ public class TestFulltextSearch extends AbstractDataDrivenSPARQLTestCase {
    *
    * @throws Exception
    */
-  public void testVariableInjectionFailing() throws Exception {
+  public void testVariableInjectionFailing() {
 
     try {
 
@@ -221,7 +221,7 @@ public class TestFulltextSearch extends AbstractDataDrivenSPARQLTestCase {
    *
    * @throws Exception
    */
-  public void testTypeCastException() throws Exception {
+  public void testTypeCastException() {
 
     try {
 

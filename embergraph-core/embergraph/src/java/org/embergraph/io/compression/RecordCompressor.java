@@ -275,7 +275,7 @@ public class RecordCompressor implements Externalizable, IRecordCompressor {
     return ByteBuffer.wrap(_buf, 0, off).asReadOnlyBuffer();
   }
 
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     level = in.readInt();
 

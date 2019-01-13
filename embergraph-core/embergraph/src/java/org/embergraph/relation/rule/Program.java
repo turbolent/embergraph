@@ -280,13 +280,13 @@ public class Program implements IProgram {
 
     sb.append(getClass().getSimpleName());
 
-    sb.append("{ name=" + getName());
+    sb.append("{ name=").append(getName());
 
-    sb.append(", parallel=" + isParallel());
+    sb.append(", parallel=").append(isParallel());
 
-    sb.append(", closure=" + isClosure());
+    sb.append(", closure=").append(isClosure());
 
-    sb.append(", nsteps=" + stepCount());
+    sb.append(", nsteps=").append(stepCount());
 
     //        sb.append(", steps=" + Arrays.toString(toArray()));
 

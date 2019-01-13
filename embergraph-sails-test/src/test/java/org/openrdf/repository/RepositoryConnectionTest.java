@@ -230,7 +230,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
    *
    * @return an uninitialized repository.
    */
-  protected abstract Repository createRepository() throws Exception;
+  protected abstract Repository createRepository();
 
   @Test
   public void testAddStatement() throws Exception {
@@ -545,12 +545,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context1);
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
-    StringBuilder queryBuilder = new StringBuilder(128);
-    queryBuilder.append(" prefix foaf: <" + FOAF_NS + ">");
-    queryBuilder.append(" SELECT ?name ?mbox");
-    queryBuilder.append(" where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }");
+    String queryBuilder = (" prefix foaf: <" + FOAF_NS + ">")
+        + " SELECT ?name ?mbox"
+        + " where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }";
     TupleQueryResult result =
-        testCon.prepareTupleQuery(QueryLanguage.SPARQL, queryBuilder.toString()).evaluate();
+        testCon.prepareTupleQuery(QueryLanguage.SPARQL, queryBuilder).evaluate();
     try {
       assertThat(result, is(notNullValue()));
       assertThat(result.hasNext(), is(equalTo(true)));
@@ -609,11 +608,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context1);
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
-    StringBuilder queryBuilder = new StringBuilder();
-    queryBuilder.append(" prefix foaf: <" + FOAF_NS + ">");
-    queryBuilder.append(" select ?name ?mbox ");
-    queryBuilder.append(" where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }");
-    TupleQuery query = testCon.prepareTupleQuery(QueryLanguage.SPARQL, queryBuilder.toString());
+    String queryBuilder = (" prefix foaf: <" + FOAF_NS + ">")
+        + " select ?name ?mbox "
+        + " where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }";
+    TupleQuery query = testCon.prepareTupleQuery(QueryLanguage.SPARQL,
+        queryBuilder);
     query.setBinding(NAME, nameBob);
     TupleQueryResult result = query.evaluate();
     try {
@@ -641,11 +640,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context1);
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
-    StringBuilder queryBuilder = new StringBuilder();
-    queryBuilder.append(" prefix foaf: <" + FOAF_NS + ">");
-    queryBuilder.append(" SELECT ?name ?mbox");
-    queryBuilder.append(" where { ?VAR foaf:name ?name . ?VAR foaf:mbox ?mbox . }");
-    TupleQuery query = testCon.prepareTupleQuery(QueryLanguage.SPARQL, queryBuilder.toString());
+    String queryBuilder = (" prefix foaf: <" + FOAF_NS + ">")
+        + " SELECT ?name ?mbox"
+        + " where { ?VAR foaf:name ?name . ?VAR foaf:mbox ?mbox . }";
+    TupleQuery query = testCon.prepareTupleQuery(QueryLanguage.SPARQL,
+        queryBuilder);
     query.setBinding("VAR", bob);
     TupleQueryResult result = query.evaluate();
     try {
@@ -675,13 +674,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
 
-    StringBuilder queryBuilder = new StringBuilder(128);
-    queryBuilder.append(" prefix foaf: <" + FOAF_NS + ">");
-    queryBuilder.append(" construct ");
-    queryBuilder.append(" where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }");
-
+    String queryBuilder = (" prefix foaf: <" + FOAF_NS + ">")
+        + " construct "
+        + " where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }";
     GraphQueryResult result =
-        testCon.prepareGraphQuery(QueryLanguage.SPARQL, queryBuilder.toString()).evaluate();
+        testCon.prepareGraphQuery(QueryLanguage.SPARQL, queryBuilder).evaluate();
 
     try {
       assertThat(result, is(notNullValue()));
@@ -709,11 +706,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context1);
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
-    StringBuilder queryBuilder = new StringBuilder(128);
-    queryBuilder.append(" prefix foaf: <" + FOAF_NS + ">");
-    queryBuilder.append(" construct ");
-    queryBuilder.append(" where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }");
-    GraphQuery query = testCon.prepareGraphQuery(QueryLanguage.SPARQL, queryBuilder.toString());
+    String queryBuilder = (" prefix foaf: <" + FOAF_NS + ">")
+        + " construct "
+        + " where { ?s foaf:name ?name . ?s foaf:mbox ?mbox . }";
+    GraphQuery query = testCon.prepareGraphQuery(QueryLanguage.SPARQL,
+        queryBuilder);
     query.setBinding(NAME, nameBob);
     GraphQueryResult result = query.evaluate();
     try {
@@ -746,13 +743,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
 
-    StringBuilder queryBuilder = new StringBuilder(64);
-    queryBuilder.append(PREFIX_FOAF + FOAF_NS + "> ");
-    queryBuilder.append(ASK);
-    queryBuilder.append("{ ?p foaf:name ?name }");
-
+    String queryBuilder = (PREFIX_FOAF + FOAF_NS + "> ")
+        + ASK
+        + "{ ?p foaf:name ?name }";
     boolean exists =
-        testCon.prepareBooleanQuery(QueryLanguage.SPARQL, queryBuilder.toString()).evaluate();
+        testCon.prepareBooleanQuery(QueryLanguage.SPARQL, queryBuilder).evaluate();
 
     assertThat(exists, is(equalTo(true)));
   }
@@ -767,12 +762,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, mbox, mboxBob, context1);
     testCon.add(context1, publisher, nameBob);
 
-    StringBuilder queryBuilder = new StringBuilder();
-    queryBuilder.append(PREFIX_FOAF + FOAF_NS + "> ");
-    queryBuilder.append(ASK);
-    queryBuilder.append("{ ?p foaf:name ?name }");
-
-    BooleanQuery query = testCon.prepareBooleanQuery(QueryLanguage.SPARQL, queryBuilder.toString());
+    String queryBuilder = (PREFIX_FOAF + FOAF_NS + "> ")
+        + ASK
+        + "{ ?p foaf:name ?name }";
+    BooleanQuery query = testCon.prepareBooleanQuery(QueryLanguage.SPARQL,
+        queryBuilder);
     query.setBinding(NAME, nameBob);
 
     assertThat(query.evaluate(), is(equalTo(true)));
@@ -863,7 +857,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
   }
 
   @Test
-  public void testGetStatementsMalformedTypedLiteral() throws Exception {
+  public void testGetStatementsMalformedTypedLiteral() {
     Literal invalidIntegerLiteral = vf.createLiteral("the number four", XMLSchema.INTEGER);
     try {
       URI pred = vf.createURI(URN_PRED);
@@ -883,7 +877,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
   }
 
   @Test
-  public void testGetStatementsMalformedLanguageLiteral() throws Exception {
+  public void testGetStatementsMalformedLanguageLiteral() {
     Literal invalidLanguageLiteral = vf.createLiteral("the number four", "en_us");
     try {
       URI pred = vf.createURI(URN_PRED);
@@ -1176,7 +1170,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
     assertThat(map.get(RDF_PREFIX), is(equalTo("http://www.w3.org/1999/02/22-rdf-syntax-ns#")));
   }
 
-  private void setupNamespaces() throws IOException, RDFParseException, RepositoryException {
+  private void setupNamespaces() throws RepositoryException {
     testCon.setNamespace(EXAMPLE, EXAMPLE_NS);
     testCon.setNamespace(RDF_PREFIX, "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
     testCon.setNamespace(RDFS_PREFIX, RDFS_NS);
@@ -1457,7 +1451,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         new RDFHandlerBase() {
 
           @Override
-          public void handleStatement(Statement st) throws RDFHandlerException {
+          public void handleStatement(Statement st) {
             assertThat(st, is(not(equalTo(stmt))));
           }
         });
@@ -1485,7 +1479,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context1);
     assertThat(
         Iterations.asList(testCon.getContextIDs()),
-        is(equalTo(Arrays.asList((Resource) context1))));
+        is(equalTo(Collections.singletonList((Resource) context1))));
 
     testCon.remove(bob, name, nameBob, context1);
     assertThat(Iterations.asList(testCon.getContextIDs()).size(), is(equalTo(0)));
@@ -1493,7 +1487,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
     testCon.add(bob, name, nameBob, context2);
     assertThat(
         Iterations.asList(testCon.getContextIDs()),
-        is(equalTo(Arrays.asList((Resource) context2))));
+        is(equalTo(Collections.singletonList((Resource) context2))));
   }
 
   @Test

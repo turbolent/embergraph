@@ -459,46 +459,44 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
       // start scheduled task.
       final ScheduledFuture<?> f =
           scheduledExecutorService.scheduleWithFixedDelay(
-              new Runnable() {
-                public void run() {
+              () -> {
 
-                  // halt?
-                  if (halt.get()) throw new HaltedException();
+                // halt?
+                if (halt.get()) throw new HaltedException();
 
-                  /*
-                   * Verify the sink WAS NOT closed by an idle
-                   * timeout.
-                   *
-                   * TODO I have seen this assertion
-                   * triggered occasionally. However, on
-                   * re-trial it generally succeeds [I think
-                   * that this was related to the visibility
-                   * of the state change in the field. It is
-                   * now an AtomicLong, which may fix this.
-                   * Nope. Still occasionally fails] [I've
-                   * modified this to log @ ERROR to see if
-                   * the test will pass now on those occasions
-                   * when it would have failed before. BT
-                   * 6/21/2011]
-                   */
-                  //                                    assertEquals("subtaskIdleTimeout", 0,
-                  //
-                  // masterStats.subtaskIdleTimeoutCount.get());
-                  final long tmp = masterStats.subtaskIdleTimeoutCount.get();
-                  if (0L != tmp) {
-                    log.error("subtaskIdleTimeout: expected ZERO (0) but was " + tmp);
-                  }
-
-                  // add chunk to master's input buffer.
-                  final KVO<O>[] a =
-                      new KVO[] {
-                        new KVO<O>(new byte[] {1}, new byte[] {2}, null /* val */),
-                      };
-                  masterBuffer.add(a);
-
-                  // increment counter.
-                  counter.incrementAndGet();
+                /*
+                 * Verify the sink WAS NOT closed by an idle
+                 * timeout.
+                 *
+                 * TODO I have seen this assertion
+                 * triggered occasionally. However, on
+                 * re-trial it generally succeeds [I think
+                 * that this was related to the visibility
+                 * of the state change in the field. It is
+                 * now an AtomicLong, which may fix this.
+                 * Nope. Still occasionally fails] [I've
+                 * modified this to log @ ERROR to see if
+                 * the test will pass now on those occasions
+                 * when it would have failed before. BT
+                 * 6/21/2011]
+                 */
+                //                                    assertEquals("subtaskIdleTimeout", 0,
+                //
+                // masterStats.subtaskIdleTimeoutCount.get());
+                final long tmp = masterStats.subtaskIdleTimeoutCount.get();
+                if (0L != tmp) {
+                  log.error("subtaskIdleTimeout: expected ZERO (0) but was " + tmp);
                 }
+
+                // add chunk to master's input buffer.
+                final KVO<O>[] a =
+                    new KVO[] {
+                      new KVO<O>(new byte[] {1}, new byte[] {2}, null /* val */),
+                    };
+                masterBuffer.add(a);
+
+                // increment counter.
+                counter.incrementAndGet();
               },
               0L /* initialDelay */,
               scheduledDelayNanos,
@@ -535,7 +533,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
       } catch (ExecutionException ex) {
         // verify correct exception was thrown.
         final Throwable cause = ex.getCause();
-        if (cause == null || (!(cause instanceof HaltedException))) {
+        if ((!(cause instanceof HaltedException))) {
           fail("Expecting: " + HaltedException.class);
         }
         if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

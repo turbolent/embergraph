@@ -983,7 +983,7 @@ public abstract class AbstractRawStoreTestCase extends TestCase3 {
     }
   }
 
-  public void testEmptyStream() throws IOException, ClassNotFoundException {
+  public void testEmptyStream() throws IOException {
     final IRawStore store = getStore();
 
     try {

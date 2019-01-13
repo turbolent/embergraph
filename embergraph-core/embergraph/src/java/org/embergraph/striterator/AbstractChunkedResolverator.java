@@ -163,7 +163,7 @@ public abstract class AbstractChunkedResolverator<E, F, S> implements ICloseable
      * @throws Exception
      */
     @Override
-    public Long call() throws Exception {
+    public Long call() {
 
       try {
 

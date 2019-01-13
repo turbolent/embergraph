@@ -2528,10 +2528,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     /*
      * Add the SID terms to the IVs to materialize.
      */
-    for (IV<?, ?> iv : unrequestedSidTerms) {
-
-      ivs.add(iv);
-    }
+    ivs.addAll(unrequestedSidTerms);
 
     /*
      * Filter out the inline values first and those that have already
@@ -2555,7 +2552,6 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       } else if (iv instanceof SidIV) {
 
         // defer until the end
-        continue;
 
       } else if (iv.isInline()) {
 

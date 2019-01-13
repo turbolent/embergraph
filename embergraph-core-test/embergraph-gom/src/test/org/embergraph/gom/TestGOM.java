@@ -93,7 +93,7 @@ public class TestGOM extends ProxyGOMTest {
   }
 
   /** Creates a simple GPO within a transaction. Commits and and checks materialization */
-  public void testSimpleCreate() throws RepositoryException, IOException {
+  public void testSimpleCreate() {
 
     final ValueFactory vf = om.getValueFactory();
 
@@ -124,7 +124,7 @@ public class TestGOM extends ProxyGOMTest {
   }
 
   /** Checks getPropertyURIs of committed GPO */
-  public void testSimpleProperties() throws RepositoryException, IOException {
+  public void testSimpleProperties() {
 
     final ValueFactory vf = om.getValueFactory();
 
@@ -182,7 +182,7 @@ public class TestGOM extends ProxyGOMTest {
     }
   }
 
-  public void testSimpleReverseLinkProperties() throws RepositoryException, IOException {
+  public void testSimpleReverseLinkProperties() {
 
     final ValueFactory vf = om.getValueFactory();
 
@@ -236,7 +236,7 @@ public class TestGOM extends ProxyGOMTest {
    *
    * <p>Class: Person Class: Employee Class: Manager Class: Company
    */
-  public void testSimpleClassObjects() throws RepositoryException, IOException {
+  public void testSimpleClassObjects() {
 
     final ValueFactory vf = om.getValueFactory();
 
@@ -315,7 +315,7 @@ public class TestGOM extends ProxyGOMTest {
   }
 
   /** Throughput test for updates. */
-  public void testUpdateThroughput() throws RepositoryException, IOException {
+  public void testUpdateThroughput() {
 
     final ValueFactory vf = om.getValueFactory();
 

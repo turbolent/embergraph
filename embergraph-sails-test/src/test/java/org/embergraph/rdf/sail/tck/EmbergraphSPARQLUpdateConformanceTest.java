@@ -26,6 +26,7 @@ import info.aduna.iteration.Iterations;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
@@ -59,25 +60,23 @@ import org.openrdf.rio.RDFFormat;
  */
 public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConformanceTest {
 
+  //          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/add/manifest#add02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-where-01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-data-spo-named2",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-data-spo-named3"
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-data/manifest#dawg-delete-data-05"
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-where/manifest#dawg-delete-where-05"
   /*
    * An array of URIs for tests to be run. When null or empty the default test suite is run. When
    * specified, only the tests matching these test URIs are run.
    */
   static final Collection<String> testURIs =
-      Arrays.asList(
-          new String[] {
-            //          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/add/manifest#add02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-where-01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-data-spo-named2",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/basic-update/manifest#insert-data-spo-named3"
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-data/manifest#dawg-delete-data-05"
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/delete-where/manifest#dawg-delete-where-05"
-          });
+      Collections.emptyList();
 
   /*
    * These test are known to fail.
@@ -178,28 +177,14 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
 
     TestSuite suite1 =
         SPARQL11ManifestTest.suite(
-            new Factory() {
-
-              @Override
-              public EmbergraphSPARQLUpdateConformanceTest createSPARQLUpdateConformanceTest(
-                  String testURI,
-                  String name,
-                  String requestFile,
-                  URI defaultGraphURI,
-                  Map<String, URI> inputNamedGraphs,
-                  URI resultDefaultGraphURI,
-                  Map<String, URI> resultNamedGraphs) {
-
-                return new EmbergraphSPARQLUpdateConformanceTest(
-                    testURI,
-                    name,
-                    requestFile,
-                    defaultGraphURI,
-                    inputNamedGraphs,
-                    resultDefaultGraphURI,
-                    resultNamedGraphs);
-              }
-            },
+            (testURI, name, requestFile, defaultGraphURI, inputNamedGraphs, resultDefaultGraphURI, resultNamedGraphs) -> new EmbergraphSPARQLUpdateConformanceTest(
+                testURI,
+                name,
+                requestFile,
+                defaultGraphURI,
+                inputNamedGraphs,
+                resultDefaultGraphURI,
+                resultNamedGraphs),
             true,
             false,
             false);
@@ -271,7 +256,7 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
   }
 
   @Override
-  protected EmbergraphSailRepository newRepository() throws RepositoryException {
+  protected EmbergraphSailRepository newRepository() {
 
     //        if (true) {
     final Properties props = getProperties();
@@ -429,7 +414,7 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
       message.append("=========================================\n");
 
       final String queryStr = readUpdateString();
-      message.append("Query:\n" + queryStr);
+      message.append("Query:\n").append(queryStr);
       message.append("\n=========================================\n");
 
       //                message.append("Data:\n"+readInputData(dataset));
@@ -439,7 +424,7 @@ public class EmbergraphSPARQLUpdateConformanceTest extends SPARQLUpdateConforman
           (EmbergraphSailUpdate) cxn.prepareUpdate(QueryLanguage.SPARQL, queryStr);
 
       final UpdateRoot original = query.getASTContainer().getOriginalUpdateAST();
-      message.append("Original AST:\n" + original);
+      message.append("Original AST:\n").append(original);
       message.append("\n=========================================\n");
 
       logger.error(message.toString());

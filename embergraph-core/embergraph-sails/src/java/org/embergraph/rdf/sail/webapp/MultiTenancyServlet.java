@@ -227,7 +227,6 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     // Pass through to the SPARQL end point REST API.
     m_restServlet.doGet(req, resp);
 
-    return;
   }
 
   /*
@@ -373,9 +372,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
           }
         }
 
-        Set<Object> keySet = new HashSet<>();
-
-        keySet.addAll(effectiveProperties.keySet());
+        Set<Object> keySet = new HashSet<>(effectiveProperties.keySet());
 
         Iterator<Object> it = keySet.iterator();
 
@@ -543,8 +540,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
    * @param resp
    * @throws IOException
    */
-  private void doDeleteNamespace(final HttpServletRequest req, final HttpServletResponse resp)
-      throws IOException {
+  private void doDeleteNamespace(final HttpServletRequest req, final HttpServletResponse resp) {
 
     final String namespace = getNamespace(req);
 
@@ -565,8 +561,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
    * @param resp
    * @throws IOException
    */
-  private void doShowProperties(final HttpServletRequest req, final HttpServletResponse resp)
-      throws IOException {
+  private void doShowProperties(final HttpServletRequest req, final HttpServletResponse resp) {
 
     final String namespace = getNamespace(req);
 
@@ -636,8 +631,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
   }
 
   /** Generate a VoID Description for the known namespaces. */
-  private void doDescribeNamespaces(final HttpServletRequest req, final HttpServletResponse resp)
-      throws IOException {
+  private void doDescribeNamespaces(final HttpServletRequest req, final HttpServletResponse resp) {
 
     final long timestamp = getTimestamp(req);
 
@@ -714,8 +708,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
       final Graph g,
       final String namespace,
       final boolean describeEachNamedGraph,
-      final long tx)
-      throws IOException {
+      final long tx) {
 
     // Get a view onto that KB instance for that timestamp.
     final AbstractTripleStore tripleStore = getEmbergraphRDFContext().getTripleStore(namespace, tx);

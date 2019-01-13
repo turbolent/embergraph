@@ -206,7 +206,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     if (bindingsClause != null) {
 
       List<IBindingSet> bs = bindingsClause.getBindingSets();
-      IBindingSet[] bsList = bs.toArray(new IBindingSet[bs.size()]);
+      IBindingSet[] bsList = bs.toArray(new IBindingSet[0]);
 
       // register produced bindings
       staticBindingInfo.addProduced(bs);
@@ -269,8 +269,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             subqueryRoot.getBindingsClause());
 
     // record static bindings in subquery VALUES clause, if any
-    final LinkedHashSet<IVariable<?>> bcVars = new LinkedHashSet<>();
-    bcVars.addAll(SolutionSetStatserator.get(staticBindings).getUsedVars());
+    final LinkedHashSet<IVariable<?>> bcVars = new LinkedHashSet<>(
+        SolutionSetStatserator.get(staticBindings).getUsedVars());
 
     final List<IBindingSet> bcBindings = Arrays.asList(staticBindings);
 
@@ -426,7 +426,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         final VariableUsageInfo usageInfo =
             VariableUsageInfo.merge(ancOrSelfVarUsageInfo, childVarUsageInfo);
 
-        final IBindingSet[] bs = bss.toArray(new IBindingSet[bss.size()]);
+        final IBindingSet[] bs = bss.toArray(new IBindingSet[0]);
         final Map<IVariable<?>, IConstant<?>> constantVars =
             SolutionSetStatserator.get(bs).getConstants();
 
@@ -635,8 +635,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
 
       final List<IQueryNode> varOccurrences = usageMap.get(var);
-      for (int i = 0; i < varOccurrences.size(); i++) {
-        final IQueryNode n = varOccurrences.get(i);
+      for (final IQueryNode n : varOccurrences) {
         if (n instanceof FilterNode || n instanceof AssignmentNode) {
           return true;
         }
@@ -987,7 +986,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         leftBindingSets = tmp; // prepare for next iteration
       }
 
-      return leftBindingSets.toArray(new IBindingSet[leftBindingSets.size()]);
+      return leftBindingSets.toArray(new IBindingSet[0]);
     }
   }
 
@@ -1108,7 +1107,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       final TermNode o = spn.o();
       final TermNode c = spn.c();
 
-      if (s != null && s instanceof VarNode && s.get(0).equals(var)) {
+      if (s instanceof VarNode && s.get(0).equals(var)) {
 
         final VarNode sVar = (VarNode) s;
         final ConstantNode constNode =
@@ -1116,7 +1115,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         spn.setArg(0, constNode);
       }
 
-      if (p != null && p instanceof VarNode && p.get(0).equals(var)) {
+      if (p instanceof VarNode && p.get(0).equals(var)) {
 
         final VarNode pVar = (VarNode) p;
         final ConstantNode constNode =
@@ -1124,7 +1123,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         spn.setArg(1, constNode);
       }
 
-      if (o != null && o instanceof VarNode && o.get(0).equals(var)) {
+      if (o instanceof VarNode && o.get(0).equals(var)) {
 
         final VarNode oVar = (VarNode) o;
         final ConstantNode constNode =
@@ -1132,7 +1131,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         spn.setArg(2, constNode);
       }
 
-      if (c != null && c instanceof VarNode && c.get(0).equals(var)) {
+      if (c instanceof VarNode && c.get(0).equals(var)) {
 
         final VarNode cVar = (VarNode) c;
         final ConstantNode constNode =
@@ -1155,7 +1154,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         // cover subject variable replacement
         final BOp s = ppn.get(0);
-        if (s != null && s instanceof VarNode && s.get(0).equals(var)) {
+        if (s instanceof VarNode && s.get(0).equals(var)) {
 
           final VarNode sVar = (VarNode) s;
           final ConstantNode constNode =
@@ -1165,7 +1164,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
         // cover object variable replacement
         final BOp o = ppn.get(2);
-        if (o != null && o instanceof VarNode && o.get(0).equals(var)) {
+        if (o instanceof VarNode && o.get(0).equals(var)) {
 
           final VarNode oVar = (VarNode) o;
           final ConstantNode constNode =
@@ -1178,7 +1177,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       if (ppn.arity() >= 4) {
 
         final BOp c = ppn.get(3);
-        if (c != null && c instanceof VarNode && c.get(0).equals(var)) {
+        if (c instanceof VarNode && c.get(0).equals(var)) {
 
           final VarNode cVar = (VarNode) c;
           final ConstantNode constNode =
@@ -1198,7 +1197,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     @SuppressWarnings("rawtypes")
     private void applyToValueExpressionNode(final IV val, final IValueExpressionNode vexpr) {
 
-      if (vexpr == null || !(vexpr instanceof FunctionNode)) return;
+      if (!(vexpr instanceof FunctionNode)) return;
 
       final FunctionNode functionNode = (FunctionNode) vexpr;
 

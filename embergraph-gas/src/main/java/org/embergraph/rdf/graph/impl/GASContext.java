@@ -463,17 +463,13 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       @Override
       public Callable<Long> newVertexTask(final Value u) {
 
-        return new Callable<Long>() {
+        return () -> {
 
-          @Override
-          public Long call() {
+          // program.apply(gasState, u, null/* sum */);
+          op.visit(gasState, u);
 
-            // program.apply(gasState, u, null/* sum */);
-            op.visit(gasState, u);
-
-            // Nothing returned by visit().
-            return ONE;
-          }
+          // Nothing returned by visit().
+          return ONE;
         };
       }
     }
@@ -628,7 +624,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
      * @return The #of visited edges.
      */
     @Override
-    public Long call() throws Exception {
+    public Long call() {
 
       final boolean TRACE = log.isTraceEnabled();
 
@@ -697,7 +693,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     }
 
     @Override
-    public Long call() throws Exception {
+    public Long call() {
 
       long nedges = 0;
 

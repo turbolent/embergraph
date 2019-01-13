@@ -43,27 +43,27 @@ public class RemoteBufferImpl<E> implements RemoteBuffer<E> {
     this.buffer = buffer;
   }
 
-  public void add(E e) throws IOException {
+  public void add(E e) {
 
     buffer.add(e);
   }
 
-  public long flush() throws IOException {
+  public long flush() {
 
     return buffer.flush();
   }
 
-  public boolean isEmpty() throws IOException {
+  public boolean isEmpty() {
 
     return buffer.isEmpty();
   }
 
-  public void reset() throws IOException {
+  public void reset() {
 
     buffer.reset();
   }
 
-  public int size() throws IOException {
+  public int size() {
 
     return buffer.size();
   }

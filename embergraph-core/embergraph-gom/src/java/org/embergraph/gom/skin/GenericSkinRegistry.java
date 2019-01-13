@@ -135,9 +135,9 @@ public class GenericSkinRegistry {
        * this interface.
        */
 
-      for (Iterator it = m_registeredClass.iterator(); it.hasNext(); ) {
+      for (Object m_registeredClass1 : m_registeredClass) {
 
-        Class aClass = (Class) it.next();
+        Class aClass = (Class) m_registeredClass1;
 
         if (theClassOrInterface.isAssignableFrom(aClass)) {
 

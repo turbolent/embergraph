@@ -605,9 +605,8 @@ public class EigenvalueDecomposition implements java.io.Serializable {
 
     for (int i = 0; i < nn; i++) {
       if (i < low | i > high) {
-        for (int j = i; j < nn; j++) {
-          V[i][j] = H[i][j];
-        }
+        if (nn - i >= 0)
+          System.arraycopy(H[i], i, V[i], i, nn - i);
       }
     }
 
@@ -734,28 +733,28 @@ public class EigenvalueDecomposition implements java.io.Serializable {
     try {
       buf.append(this.getRealEigenvalues());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\nimagEigenvalues = ");
     try {
       buf.append(this.getImagEigenvalues());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nD = ");
     try {
       buf.append(this.getD());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
       buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     return buf.toString();
@@ -768,9 +767,8 @@ public class EigenvalueDecomposition implements java.io.Serializable {
     //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
     //  Fortran subroutine in EISPACK.
 
-    for (int i = 1; i < n; i++) {
-      e[i - 1] = e[i];
-    }
+    if (n - 1 >= 0)
+      System.arraycopy(e, 1, e, 0, n - 1);
     e[n - 1] = 0.0;
 
     double f = 0.0;
@@ -885,9 +883,8 @@ public class EigenvalueDecomposition implements java.io.Serializable {
     //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
     //  Fortran subroutine in EISPACK.
 
-    for (int j = 0; j < n; j++) {
-      d[j] = V[n - 1][j];
-    }
+    if (n >= 0)
+      System.arraycopy(V[n - 1], 0, d, 0, n);
 
     // Householder reduction to tridiagonal form.
 

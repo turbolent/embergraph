@@ -763,10 +763,10 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
             V v = e.value;
             if (v != null) {
               result = v;
-              break loop;
+              break;
             } else {
               result = readValueUnderLock(e); // recheck
-              break loop;
+              break;
             }
           }
           e = e.next;
@@ -820,12 +820,16 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       if (count != 0) { // read-volatile
         HashEntry<K, V>[] tab = table;
         int len = tab.length;
-        for (int i = 0; i < len; i++) {
-          for (HashEntry<K, V> e = tab[i]; e != null; e = e.next) {
+        for (HashEntry<K, V> kvHashEntry : tab) {
+          for (HashEntry<K, V> e = kvHashEntry; e != null; e = e.next) {
             V v = e.value;
             if (v == null) // recheck
-            v = readValueUnderLock(e);
-            if (value.equals(v)) return true;
+            {
+              v = readValueUnderLock(e);
+            }
+            if (value.equals(v)) {
+              return true;
+            }
           }
         }
       }
@@ -956,18 +960,17 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       HashEntry<K, V>[] newTable = HashEntry.newArray(oldCapacity << 1);
       threshold = (int) (newTable.length * loadFactor);
       int sizeMask = newTable.length - 1;
-      for (int i = 0; i < oldCapacity; i++) {
+      for (HashEntry<K, V> e : oldTable) {
         // We need to guarantee that any existing reads of old Map can
         // proceed. So we cannot yet null out each bin.
-        HashEntry<K, V> e = oldTable[i];
-
         if (e != null) {
           HashEntry<K, V> next = e.next;
           int idx = e.hash & sizeMask;
 
           // Single node on list
-          if (next == null) newTable[idx] = e;
-          else {
+          if (next == null) {
+            newTable[idx] = e;
+          } else {
             // Reuse trailing consecutive sequence at same slot
             HashEntry<K, V> lastRun = e;
             int lastIdx = idx;
@@ -1232,9 +1235,15 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     }
     if (true) { // Resort to locking all segments
       sum = 0;
-      for (int i = 0; i < segments.length; ++i) segments[i].lock();
-      for (int i = 0; i < segments.length; ++i) sum += segments[i].count;
-      for (int i = 0; i < segments.length; ++i) segments[i].unlock();
+      for (Segment<K, V> segment2 : segments) {
+        segment2.lock();
+      }
+      for (Segment<K, V> segment1 : segments) {
+        sum += segment1.count;
+      }
+      for (Segment<K, V> segment : segments) {
+        segment.unlock();
+      }
     }
     if (sum > Integer.MAX_VALUE) return Integer.MAX_VALUE;
     else return (int) sum;
@@ -1307,17 +1316,21 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       if (cleanSweep) return false;
     }
     // Resort to locking all segments
-    for (int i = 0; i < segments.length; ++i) segments[i].lock();
+    for (Segment<K, V> segment1 : segments) {
+      segment1.lock();
+    }
     boolean found = false;
     try {
-      for (int i = 0; i < segments.length; ++i) {
-        if (segments[i].containsValue(value)) {
+      for (Segment<K, V> segment : segments) {
+        if (segment.containsValue(value)) {
           found = true;
           break;
         }
       }
     } finally {
-      for (int i = 0; i < segments.length; ++i) segments[i].unlock();
+      for (Segment<K, V> segment : segments) {
+        segment.unlock();
+      }
     }
     return found;
   }
@@ -1430,7 +1443,9 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /** Removes all of the mappings from this map. */
   public void clear() {
-    for (int i = 0; i < segments.length; ++i) segments[i].clear();
+    for (Segment<K, V> segment : segments) {
+      segment.clear();
+    }
   }
 
   /*
@@ -1694,13 +1709,12 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
   private void writeObject(java.io.ObjectOutputStream s) throws IOException {
     s.defaultWriteObject();
 
-    for (int k = 0; k < segments.length; ++k) {
-      Segment<K, V> seg = segments[k];
+    for (Segment<K, V> seg : segments) {
       seg.lock();
       try {
         HashEntry<K, V>[] tab = seg.table;
-        for (int i = 0; i < tab.length; ++i) {
-          for (HashEntry<K, V> e = tab[i]; e != null; e = e.next) {
+        for (HashEntry<K, V> kvHashEntry : tab) {
+          for (HashEntry<K, V> e = kvHashEntry; e != null; e = e.next) {
             s.writeObject(e.key);
             s.writeObject(e.value);
           }
@@ -1722,8 +1736,8 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     s.defaultReadObject();
 
     // Initialize each segment to be minimally sized, and let grow.
-    for (int i = 0; i < segments.length; ++i) {
-      segments[i].setTable(new HashEntry[1]);
+    for (Segment<K, V> segment : segments) {
+      segment.setTable(new HashEntry[1]);
     }
 
     // Read the keys and values, and put the mappings in the table

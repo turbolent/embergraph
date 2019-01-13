@@ -207,7 +207,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
                 0 /* requestServicePoolSize */) {
 
               @Override
-              protected File getResource(UUID uuid) throws Exception {
+              protected File getResource(UUID uuid) {
                 // Will not serve up files.
                 return null;
               }

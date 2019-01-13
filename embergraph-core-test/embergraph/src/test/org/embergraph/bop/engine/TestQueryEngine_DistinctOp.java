@@ -56,7 +56,7 @@ public class TestQueryEngine_DistinctOp extends TestCase2 {
   private QueryEngine queryEngine;
 
   @Override
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -66,7 +66,7 @@ public class TestQueryEngine_DistinctOp extends TestCase2 {
   }
 
   @Override
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();
@@ -87,7 +87,7 @@ public class TestQueryEngine_DistinctOp extends TestCase2 {
     super(name);
   }
 
-  public void test_something_StressThreadSafe() throws Exception {
+  public void test_something_StressThreadSafe() {
 
     for (int i = 0; i < 100; i++) {
 
@@ -103,7 +103,7 @@ public class TestQueryEngine_DistinctOp extends TestCase2 {
   }
 
   /** @todo WRITE TEST : Unit test for DISTINCT. How to judge correctness? */
-  public void test_something_distinct_threadSafe() throws Exception {
+  public void test_something_distinct_threadSafe() {
 
     final long timeout = 10000; // ms
 

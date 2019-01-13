@@ -23,6 +23,7 @@ package org.embergraph.rdf.sparql.ast.ssets;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -601,13 +602,10 @@ public class TestSolutionSetManager extends TestCase2 {
 
         final IBindingSet[] a = itr.next();
 
-        for (IBindingSet b : a) {
-
-          t.add(b);
-        }
+        t.addAll(Arrays.asList(a));
       }
 
-      return t.toArray(new IBindingSet[t.size()]);
+      return t.toArray(new IBindingSet[0]);
 
     } finally {
 
@@ -643,16 +641,16 @@ public class TestSolutionSetManager extends TestCase2 {
       final java.util.Map<IBindingSet, AtomicInteger> range =
           new java.util.LinkedHashMap<>();
 
-      for (int j = 0; j < nrange; j++) {
+      for (IBindingSet iBindingSet : expected) {
 
-        AtomicInteger count = range.get(expected[j]);
+        AtomicInteger count = range.get(iBindingSet);
 
         if (count == null) {
 
           count = new AtomicInteger();
         }
 
-        range.put(expected[j], count);
+        range.put(iBindingSet, count);
 
         count.incrementAndGet();
       }

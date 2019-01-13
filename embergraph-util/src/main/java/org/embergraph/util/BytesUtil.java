@@ -525,7 +525,7 @@ public class BytesUtil {
 
     final int n = data.length;
 
-    sb.append("data(n=" + n + ")={");
+    sb.append("data(n=").append(n).append(")={");
 
     for (int i = 0; i < n; i++) {
 
@@ -533,7 +533,7 @@ public class BytesUtil {
 
       sb.append("\n");
 
-      sb.append("data[" + i + "]=");
+      sb.append("data[").append(i).append("]=");
 
       sb.append(BytesUtil.toString(a));
 
@@ -1162,8 +1162,7 @@ public class BytesUtil {
     throw new IllegalArgumentException();
     final char[] chars = new char[b.length << 3]; // one char per bit.
     int bitIndex = 0; // start at the msb.
-    for (int i = 0; i < b.length; i++) {
-      final byte x = b[i]; // next byte.
+    for (final byte x : b) {
       for (int withinByteIndex = 7; withinByteIndex >= 0; withinByteIndex--) {
         final int mask = 1 << withinByteIndex;
         final boolean bit = (x & mask) != 0;
@@ -1363,7 +1362,7 @@ public class BytesUtil {
     int curs = 0;
     while (rem >= 64) {
       sb.append(String.format("%8d: ", curs));
-      sb.append(hexData.substring(curs, curs + 64) + "\n");
+      sb.append(hexData.substring(curs, curs + 64)).append("\n");
       curs += 64;
       rem -= 64;
     }

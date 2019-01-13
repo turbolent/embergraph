@@ -852,7 +852,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
   /** Modified to dump internal record metadata and to show the byte[]s as unsigned values. */
   public String toString() {
     final StringBuffer s = new StringBuffer();
-    s.append("{ratio=" + ratio + ", size=" + n + ", p[]=" + java.util.Arrays.toString(p));
+    s.append("{ratio=").append(ratio).append(", size=").append(n).append(", p[]=")
+        .append(java.util.Arrays.toString(p));
     s.append("[\n");
     for (int i = 0; i < n; ) {
       int pos = p[i / ratio];
@@ -869,26 +870,10 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
           pos += count(clen);
         }
         final byte[] a = get(i);
-        s.append(
-            "index="
-                + i
-                + ", delta="
-                + delta
-                + ", p["
-                + (i / ratio)
-                + "]="
-                + p[i / ratio]
-                + ", pos@rlen="
-                + pos0
-                + ", rlen="
-                + rlen
-                + ", clen="
-                + clen
-                + ", pos@remainder="
-                + pos
-                + " :: "
-                + toString(a)
-                + "\n");
+        s.append("index=").append(i).append(", delta=").append(delta).append(", p[")
+            .append(i / ratio).append("]=").append(p[i / ratio]).append(", pos@rlen=").append(pos0)
+            .append(", rlen=").append(rlen).append(", clen=").append(clen)
+            .append(", pos@remainder=").append(pos).append(" :: ").append(toString(a)).append("\n");
         pos += rlen;
       }
       //        for(int i=0; i<n; i++) {

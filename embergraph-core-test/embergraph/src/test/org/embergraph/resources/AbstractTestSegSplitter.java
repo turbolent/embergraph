@@ -71,23 +71,11 @@ public class AbstractTestSegSplitter extends TestCase2 {
 
   /** Always accepts the recommended separator key. */
   protected static final ISimpleSplitHandler acceptAllSplits =
-      new ISimpleSplitHandler() {
-
-        public byte[] getSeparatorKey(IndexSegment seg, int fromIndex, int toIndex, int splitAt) {
-
-          return seg.keyAt(splitAt);
-        }
-      };
+      (seg, fromIndex, toIndex, splitAt) -> seg.keyAt(splitAt);
 
   /** Always returns <code>null</code> (never accepts any splits). */
   protected static final ISimpleSplitHandler rejectAllSplits =
-      new ISimpleSplitHandler() {
-
-        public byte[] getSeparatorKey(IndexSegment seg, int fromIndex, int toIndex, int splitAt) {
-
-          return null;
-        }
-      };
+      (seg, fromIndex, toIndex, splitAt) -> null;
 
   /*
    * Accepts the recommended separator key unless it is GTE the key given to the constructor, in

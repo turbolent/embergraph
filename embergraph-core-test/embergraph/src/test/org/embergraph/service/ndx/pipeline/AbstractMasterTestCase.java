@@ -98,7 +98,7 @@ public class AbstractMasterTestCase extends TestCase2 {
 
   static class HS extends MockSubtaskStats {}
 
-  static class O extends Object {}
+  static class O {}
 
   static class H extends MockMasterStats<L, HS> {
 
@@ -185,7 +185,7 @@ public class AbstractMasterTestCase extends TestCase2 {
           continue;
         }
 
-        final KVO<O>[] a = t.toArray(new KVO[t.size()]);
+        final KVO<O>[] a = t.toArray(new KVO[0]);
 
         addToOutputBuffer(
             new L(i), a, 0 /* fromIndex */, a.length /* toIndex */, false /* reopen */);
@@ -247,7 +247,7 @@ public class AbstractMasterTestCase extends TestCase2 {
           continue;
         }
 
-        final KVO<O>[] a = t.toArray(new KVO[t.size()]);
+        final KVO<O>[] a = t.toArray(new KVO[0]);
 
         addToOutputBuffer(new L(i), a, 0 /* fromIndex */, a.length /* toIndex */, reopen);
       }

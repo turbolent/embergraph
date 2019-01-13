@@ -185,9 +185,9 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

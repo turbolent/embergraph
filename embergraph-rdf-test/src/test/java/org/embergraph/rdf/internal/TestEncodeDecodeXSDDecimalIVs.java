@@ -28,7 +28,6 @@ import java.util.Random;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
  * Unit tests for {@link XSDDecimalIV}.

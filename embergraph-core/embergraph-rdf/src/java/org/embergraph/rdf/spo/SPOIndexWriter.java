@@ -179,7 +179,7 @@ public class SPOIndexWriter implements Callable<Long> {
    *
    * @return The elapsed time for the operation.
    */
-  public Long call() throws Exception {
+  public Long call() {
 
     final long begin = System.currentTimeMillis();
 

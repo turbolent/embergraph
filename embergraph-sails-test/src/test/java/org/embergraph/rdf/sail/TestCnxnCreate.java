@@ -54,7 +54,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
    * @throws InterruptedException
    * @throws IOException
    */
-  public void test_manageConnections() throws SailException, InterruptedException, IOException {
+  public void test_manageConnections() throws SailException, InterruptedException {
 
     final Properties properties = getProperties();
 
@@ -111,7 +111,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
    * @throws IOException
    */
   public void test_manageDefaultConnection()
-      throws SailException, InterruptedException, IOException {
+      throws SailException {
 
     final Properties properties = getProperties();
 
@@ -156,7 +156,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
   }
 
   public void test_manageThreadConnections()
-      throws SailException, InterruptedException, IOException {
+      throws SailException, InterruptedException {
 
     final Properties properties = getProperties();
 
@@ -190,11 +190,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
           new Thread() {
             public void run() {
               System.out.println("Running...");
-              try {
-                uicnxn.set(sail.getUnisolatedConnection());
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
+              uicnxn.set(sail.getUnisolatedConnection());
               System.out.println("Releasing permit");
               c1.release();
             }

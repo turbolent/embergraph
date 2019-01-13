@@ -215,19 +215,12 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{ name=" + name);
-
-    sb.append(", timestamp=" + timestamp);
-
-    sb.append(", readConsistent=" + readConsistent);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ name=" + name
+        + ", timestamp=" + timestamp
+        + ", readConsistent=" + readConsistent
+        + "}";
+    return sb;
   }
 
   /*

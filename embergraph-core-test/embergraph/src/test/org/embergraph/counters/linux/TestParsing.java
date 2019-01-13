@@ -251,7 +251,7 @@ public class TestParsing extends TestCase2 {
     test_pid_stat_collector(output);
   }
 
-  protected void test_pid_stat_collector(String output) throws IOException, InterruptedException {
+  protected void test_pid_stat_collector(String output) throws InterruptedException {
 
     final PIDStatCollector pidStatCollector =
         new PIDStatCollector(1, 1, new KernelVersion("2.6.32")) {

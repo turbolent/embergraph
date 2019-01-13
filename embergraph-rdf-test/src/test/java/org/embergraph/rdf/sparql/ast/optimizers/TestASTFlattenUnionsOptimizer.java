@@ -351,7 +351,7 @@ public class TestASTFlattenUnionsOptimizer extends AbstractASTEvaluationTestCase
    *
    * @throws Exception
    */
-  public void test_flattenUnions2() throws Exception {
+  public void test_flattenUnions2() {
 
     /*
      * Note: DO NOT share structures in this test!!!!

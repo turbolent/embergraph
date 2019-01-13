@@ -172,13 +172,7 @@ public class CounterSetQuery {
     final Collection<File> flatFileList =
         QueryUtil.collectFiles(
             counterSetFiles,
-            new FileFilter() {
-
-              public boolean accept(File pathname) {
-
-                return !pathname.isHidden() && pathname.getName().endsWith(".xml");
-              }
-            });
+            pathname -> !pathname.isHidden() && pathname.getName().endsWith(".xml"));
 
     if (log.isInfoEnabled())
       log.info("Reading performance counters from " + flatFileList.size() + " sources.");
@@ -218,8 +212,7 @@ public class CounterSetQuery {
       final int nsamples,
       final PeriodEnum period,
       final Pattern regex)
-      throws IOException, SAXException, ParserConfigurationException, InterruptedException,
-          ExecutionException {
+      throws InterruptedException {
 
     final int nfiles = counterSetFiles.size();
 

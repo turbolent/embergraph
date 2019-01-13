@@ -226,9 +226,9 @@ public class LocalChunkMessage implements IChunkMessage<IBindingSet> {
 
     int solutionCount = 0;
 
-    for (int i = 0; i < bindingSetChunks.length; i++) {
+    for (IBindingSet[] bindingSetChunk : bindingSetChunks) {
 
-      solutionCount += bindingSetChunks[i].length;
+      solutionCount += bindingSetChunk.length;
     }
 
     return solutionCount;

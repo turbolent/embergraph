@@ -46,7 +46,7 @@ public class MapStressTest extends TestCase {
   private static final Random RANDOM_WRITE = new Random(34567);
   private static final Random RANDOM_REMOVE = new Random(56789);
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
     generateArraysForOps();
   }
 
@@ -76,9 +76,7 @@ public class MapStressTest extends TestCase {
             MAP_LOAD_FACTOR,
             CONCURRENCY,
             Eviction.LRU,
-            new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-              public void evicted(Integer arg0, Integer arg1) {
-              }
+            (arg0, arg1) -> {
             }));
   }
 
@@ -89,9 +87,7 @@ public class MapStressTest extends TestCase {
             MAP_LOAD_FACTOR,
             CONCURRENCY,
             Eviction.LIRS,
-            new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-              public void evicted(Integer arg0, Integer arg1) {
-              }
+            (arg0, arg1) -> {
             }));
   }
 
@@ -103,9 +99,7 @@ public class MapStressTest extends TestCase {
               MAP_LOAD_FACTOR,
               CONCURRENCY,
               Eviction.LRU,
-              new BufferedConcurrentHashMap.EvictionListener<Integer, Integer>() {
-                public void evicted(Integer arg0, Integer arg1) {
-                }
+              (arg0, arg1) -> {
               }),
           48, // nreaders
           6, // nwriters

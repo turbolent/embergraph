@@ -154,8 +154,8 @@ class DoubleBufferSet extends BufferSet {
   public DoubleBuffer collapse(DoubleBuffer[] buffers) {
     // determine W
     int W = 0; // sum of all weights
-    for (int i = 0; i < buffers.length; i++) {
-      W += buffers[i].weight();
+    for (DoubleBuffer buffer : buffers) {
+      W += buffer.weight();
     }
 
     // determine outputTriggerPositions
@@ -364,8 +364,8 @@ class DoubleBufferSet extends BufferSet {
     StringBuffer buf = new StringBuffer();
     for (int b = 0; b < this.b(); b++) {
       if (!buffers[b].isEmpty()) {
-        buf.append("buffer#" + b + " = ");
-        buf.append(buffers[b].toString() + "\n");
+        buf.append("buffer#").append(b).append(" = ");
+        buf.append(buffers[b].toString()).append("\n");
       }
     }
     return buf.toString();

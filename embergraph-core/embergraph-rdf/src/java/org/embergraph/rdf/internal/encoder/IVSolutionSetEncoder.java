@@ -194,14 +194,13 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(super.toString());
-    sb.append("{namespace=" + namespace);
-    sb.append(",schema=" + schema); // Not thread-safe.
-    sb.append(",cacheSize=" + cache.size()); // Not thread-safe
-    sb.append(",nsolutions=" + nsolutions);
-    sb.append("}");
-    return sb.toString();
+    String sb = super.toString()
+        + "{namespace=" + namespace
+        + ",schema=" + schema // Not thread-safe.
+        + ",cacheSize=" + cache.size() // Not thread-safe
+        + ",nsolutions=" + nsolutions
+        + "}";
+    return sb;
   }
 
   public IVSolutionSetEncoder() {

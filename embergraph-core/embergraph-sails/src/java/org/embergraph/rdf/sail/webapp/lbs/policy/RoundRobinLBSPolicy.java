@@ -37,7 +37,7 @@ public class RoundRobinLBSPolicy extends AbstractLBSPolicy {
 
     super.toString(sb);
 
-    sb.append(",nextService=" + nextService.get());
+    sb.append(",nextService=").append(nextService.get());
   }
 
   /*
@@ -106,7 +106,6 @@ public class RoundRobinLBSPolicy extends AbstractLBSPolicy {
 
       if (serviceScore.getRequestURI() == null) {
         // Can't use if no requestURL.
-        continue;
       }
     }
 

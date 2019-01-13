@@ -873,7 +873,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       if (log.isInfoEnabled()) log.info("Writing checkpoint: " + l.name);
 
@@ -1216,9 +1216,9 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
       throw new NullPointerException();
     }
 
-    for (int i = 0; i < resource.length; i++) {
+    for (String s : resource) {
 
-      if (resource[i] == null) {
+      if (s == null) {
 
         throw new NullPointerException();
       }
@@ -2011,7 +2011,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
     /** Note: Locks on the named indices are ONLY held during this call. */
     @Override
-    public T call() throws Exception {
+    public T call() {
 
       // The write service on which this task is running.
       final WriteExecutorService writeService = delegate.concurrencyManager.getWriteService();

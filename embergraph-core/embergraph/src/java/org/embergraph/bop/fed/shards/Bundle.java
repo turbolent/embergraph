@@ -101,13 +101,12 @@ class Bundle<F> implements Comparable<Bundle<F>> {
   private int hash = 0;
 
   public String toString() {
-    StringBuilder sb = new StringBuilder(super.toString());
-    sb.append("{bindingSet=" + bindingSet);
-    sb.append(",asBound=" + asBound);
-    sb.append(",keyOrder=" + keyOrder);
-    sb.append(",fromKey=" + BytesUtil.toString(fromKey));
-    sb.append(",toKey=" + BytesUtil.toString(toKey));
-    sb.append("}");
-    return sb.toString();
+    String sb = super.toString() + "{bindingSet=" + bindingSet
+        + ",asBound=" + asBound
+        + ",keyOrder=" + keyOrder
+        + ",fromKey=" + BytesUtil.toString(fromKey)
+        + ",toKey=" + BytesUtil.toString(toKey)
+        + "}";
+    return sb;
   }
 }

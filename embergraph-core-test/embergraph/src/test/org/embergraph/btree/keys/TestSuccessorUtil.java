@@ -461,8 +461,10 @@ public class TestSuccessorUtil extends TestCase2 {
 
         if (true) {
           boolean allones = true;
-          for (int k = 0; k < b.length; k++) {
-            if (b[k] != -1) allones = false;
+          for (byte b1 : b) {
+            if (b1 != -1) {
+              allones = false;
+            }
           }
           if (allones) {
             System.err.println("short " + v + " is all ones.");

@@ -452,7 +452,7 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends QuorumStateChangeL
    * commitNow(), but we do not have the atomic set of joined services in AbstractJournal.abort())].
    */
   @Override
-  public void abort2Phase(final long token) throws IOException, InterruptedException {
+  public void abort2Phase(final long token) throws IOException {
 
     if (log.isInfoEnabled()) log.info("token=" + token);
 

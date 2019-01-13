@@ -458,25 +458,31 @@ public class RuleStats {
 
     //        final String sep = titles ? ", " : this.sep;
 
-    sb.append((titles ? "startTime=" : "") + dateStr);
-    sb.append(sep + (titles ? "rule=" : "") + ruleNameStr);
-    sb.append(sep + (titles ? "elapsed=" : "") + elapsed);
-    sb.append(sep + (titles ? "solutionCount=" : "") + solutionCountStr);
-    sb.append(sep + (titles ? "solutions/sec=" : "") + solutionsPerSec);
-    sb.append(sep + (titles ? "mutationCount=" : "") + mutationCountStr);
-    sb.append(sep + (titles ? "mutations/sec=" : "") + mutationsPerSec);
+    sb.append(titles ? "startTime=" : "").append(dateStr);
+    sb.append(sep).append(titles ? "rule=" : "").append(ruleNameStr);
+    sb.append(sep).append(titles ? "elapsed=" : "").append(elapsed);
+    sb.append(sep).append(titles ? "solutionCount=" : "").append(solutionCountStr);
+    sb.append(sep).append(titles ? "solutions/sec=" : "").append(solutionsPerSec);
+    sb.append(sep).append(titles ? "mutationCount=" : "").append(mutationCountStr);
+    sb.append(sep).append(titles ? "mutations/sec=" : "").append(mutationsPerSec);
 
     if (!aggregation) {
 
       if (!joinDetails) {
 
-        sb.append(sep + (titles ? "evalOrder=" : "") + q + toString(evalOrder) + q);
-        sb.append(sep + (titles ? "keyOrder=" : "") + q + toString(keyOrder) + q);
-        sb.append(sep + (titles ? "nvars=" : "") + q + toString(nvars) + q);
-        sb.append(sep + (titles ? "rangeCount=" : "") + q + toString(rangeCount) + q);
-        sb.append(sep + (titles ? "chunkCount=" : "") + q + toString(chunkCount) + q);
-        sb.append(sep + (titles ? "elementCount=" : "") + q + toString(elementCount) + q);
-        sb.append(sep + (titles ? "subqueryCount=" : "") + q + toString(subqueryCount) + q);
+        sb.append(sep).append(titles ? "evalOrder=" : "").append(q).append(toString(evalOrder))
+            .append(q);
+        sb.append(sep).append(titles ? "keyOrder=" : "").append(q).append(toString(keyOrder))
+            .append(q);
+        sb.append(sep).append(titles ? "nvars=" : "").append(q).append(toString(nvars)).append(q);
+        sb.append(sep).append(titles ? "rangeCount=" : "").append(q).append(toString(rangeCount))
+            .append(q);
+        sb.append(sep).append(titles ? "chunkCount=" : "").append(q).append(toString(chunkCount))
+            .append(q);
+        sb.append(sep).append(titles ? "elementCount=" : "").append(q)
+            .append(toString(elementCount)).append(q);
+        sb.append(sep).append(titles ? "subqueryCount=" : "").append(q)
+            .append(toString(subqueryCount)).append(q);
 
       } else {
 
@@ -487,24 +493,24 @@ public class RuleStats {
         for (int tailIndex = 0; tailIndex < tailCount; tailIndex++) {
 
           if (tailIndex > 0)
-            sb.append(
-                "\n" + dateStr + sep + ruleNameStr + (sep + sep + sep + sep + sep)); // ",,,,,");
+            sb.append("\n").append(dateStr).append(sep).append(ruleNameStr)
+                .append(sep + sep + sep + sep + sep); // ",,,,,");
 
           final int i = showInEvalOrder ? evalOrder[tailIndex] : tailIndex;
           final int orderIndex = showInEvalOrder ? tailIndex : permutation[i];
 
-          sb.append(sep + orderIndex);
+          sb.append(sep).append(orderIndex);
 
-          sb.append(sep + keyOrder[i]);
-          sb.append(sep + nvars[i]);
-          sb.append(sep + rangeCount[i]);
-          sb.append(sep + chunkCount[i]);
-          sb.append(sep + elementCount[i]);
-          sb.append(sep + subqueryCount[i]);
+          sb.append(sep).append(keyOrder[i]);
+          sb.append(sep).append(nvars[i]);
+          sb.append(sep).append(rangeCount[i]);
+          sb.append(sep).append(chunkCount[i]);
+          sb.append(sep).append(elementCount[i]);
+          sb.append(sep).append(subqueryCount[i]);
 
-          sb.append(sep + i);
+          sb.append(sep).append(i);
 
-          sb.append(sep + "\"" + toString(r.getTail(i)).replace(",", " ") + "\"");
+          sb.append(sep + "\"").append(toString(r.getTail(i)).replace(",", " ")).append("\"");
         }
       }
     }
@@ -625,9 +631,9 @@ public class RuleStats {
     final RuleStats[] a = detailStats.toArray(new RuleStats[] {});
 
     // aggregate level.
-    sb.append("\n" + getHeadings());
+    sb.append("\n").append(getHeadings());
 
-    sb.append("\n" + toStringSimple(depth, false /* titles */, joinDetails));
+    sb.append("\n").append(toStringSimple(depth, false /* titles */, joinDetails));
 
     toString(minElapsed, joinDetails, depth + 1, sb, a);
 
@@ -644,18 +650,16 @@ public class RuleStats {
       final RuleStats[] a) {
 
     // detail level.
-    for (int i = 0; i < a.length; i++) {
-
-      final RuleStats x = a[i];
+    for (final RuleStats x : a) {
 
       if (x.elapsed >= minElapsed) {
 
-        sb.append("\n" + x.toStringSimple(depth, false /* titles */, joinDetails));
+        sb.append("\n").append(x.toStringSimple(depth, false /* titles */, joinDetails));
 
         if (x.aggregation && !x.detailStats.isEmpty()) {
 
           toString(
-              minElapsed, joinDetails, depth + 1, sb, x.detailStats.toArray(new RuleStats[] {}));
+              minElapsed, joinDetails, depth + 1, sb, x.detailStats.toArray(new RuleStats[]{}));
         }
       }
     }

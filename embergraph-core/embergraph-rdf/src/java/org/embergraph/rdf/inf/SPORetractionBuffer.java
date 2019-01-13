@@ -23,7 +23,6 @@ package org.embergraph.rdf.inf;
 
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.StatementWriter;
-import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.ChunkedArrayIterator;
 

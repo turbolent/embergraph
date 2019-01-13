@@ -58,7 +58,7 @@ public abstract class TermNode extends ValueExpressionNode {
 
     final IVariableOrConstant<IV> val = getValueExpression();
 
-    if (val != null && val instanceof IConstant) {
+    if (val instanceof IConstant) {
 
       final IV iv = val.get();
 

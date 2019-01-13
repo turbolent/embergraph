@@ -30,8 +30,7 @@ public class BulletParserTest extends TestCase {
                         String[] methods = {"configure", "startDocument", "endDocument"};
 
                         public Object invoke(
-                            final Object proxy, final Method method, final Object[] args)
-                            throws Throwable {
+                            final Object proxy, final Method method, final Object[] args) {
                           if (call < methods.length)
                             assertEquals(method.getName(), methods[call++]);
                           return Boolean.TRUE;

@@ -57,7 +57,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
         );
   }
 
-  public void test_startup() throws Exception {
+  public void test_startup() {
 
     assertTrue("open", m_fixture.isRunning());
   }

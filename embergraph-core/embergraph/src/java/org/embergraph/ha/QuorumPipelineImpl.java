@@ -1119,8 +1119,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   }
 
   @Override
-  public Future<IHAPipelineResetResponse> resetPipeline(final IHAPipelineResetRequest req)
-      throws IOException {
+  public Future<IHAPipelineResetResponse> resetPipeline(final IHAPipelineResetRequest req) {
 
     final FutureTask<IHAPipelineResetResponse> ft =
         new FutureTask<>(new ResetPipelineTaskImpl(req));
@@ -1242,7 +1241,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
    */
   @Override
   public Future<Void> replicate(
-      final IHASyncRequest req, final IHAWriteMessage msg, final ByteBuffer b) throws IOException {
+      final IHASyncRequest req, final IHAWriteMessage msg, final ByteBuffer b) {
 
     final RunnableFuture<Void> ft;
 
@@ -1585,8 +1584,6 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
             sendLock)
             .call();
 
-        return;
-
       } finally {
 
         unlock();
@@ -1666,7 +1663,6 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                   + t,
               t);
 
-          continue;
         }
       }
 
@@ -1752,7 +1748,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    private void doRunWithLock() throws InterruptedException, ExecutionException, IOException {
+    private void doRunWithLock() throws InterruptedException, IOException {
 
       // Get Future for send() outcome on local service.
       final Future<Void> futLoc = sendService.send(b, snd.getMarker());
@@ -2133,8 +2129,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
   @Override
   public Future<Void> receiveAndReplicate(
-      final IHASyncRequest req, final IHASendState snd, final IHAWriteMessage msg)
-      throws IOException {
+      final IHASyncRequest req, final IHASendState snd, final IHAWriteMessage msg) {
 
     /*
      * FIXME We should probably pass the quorum token through from the
@@ -2294,7 +2289,6 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
           } catch (TimeoutException ex) {
             // Timeout. Ignore and retry loop.
             Thread.sleep(100 /* ms */);
-            continue;
           }
         }
 

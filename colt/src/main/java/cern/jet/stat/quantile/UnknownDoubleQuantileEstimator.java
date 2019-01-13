@@ -162,12 +162,10 @@ class UnknownDoubleQuantileEstimator extends DoubleQuantileEstimator {
         .quickSortFromTo(
             0,
             fullBuffers.length - 1,
-            new java.util.Comparator() {
-              public int compare(Object o1, Object o2) {
-                int l1 = ((DoubleBuffer) o1).level();
-                int l2 = ((DoubleBuffer) o2).level();
-                return l1 < l2 ? -1 : l1 == l2 ? 0 : +1;
-              }
+            (o1, o2) -> {
+              int l1 = ((DoubleBuffer) o1).level();
+              int l2 = ((DoubleBuffer) o2).level();
+              return l1 < l2 ? -1 : l1 == l2 ? 0 : +1;
             });
   }
   /** Returns a String representation of the receiver. */

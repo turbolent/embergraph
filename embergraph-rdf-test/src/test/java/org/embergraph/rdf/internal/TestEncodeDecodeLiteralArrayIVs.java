@@ -85,7 +85,7 @@ public class TestEncodeDecodeLiteralArrayIVs extends AbstractEncodeDecodeMixedIV
       }
     }
 
-    final AbstractLiteralIV[] ivs = arrays.toArray(new AbstractLiteralIV[arrays.size()]);
+    final AbstractLiteralIV[] ivs = arrays.toArray(new AbstractLiteralIV[0]);
 
     byte vocab = 1;
 

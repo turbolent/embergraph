@@ -51,6 +51,6 @@ public class ParserStats extends BOpStats {
 
   @Override
   protected void toString(final StringBuilder sb) {
-    sb.append(",toldTriples=" + toldTriples.get());
+    sb.append(",toldTriples=").append(toldTriples.get());
   }
 }

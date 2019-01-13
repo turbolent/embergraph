@@ -89,9 +89,9 @@ public class CommitRecord implements ICommitRecord {
 
     sb.append("CommitRecord");
 
-    sb.append("{timestamp=" + timestamp);
+    sb.append("{timestamp=").append(timestamp);
 
-    sb.append(", commitCounter=" + commitCounter);
+    sb.append(", commitCounter=").append(commitCounter);
 
     sb.append(", roots=[");
 

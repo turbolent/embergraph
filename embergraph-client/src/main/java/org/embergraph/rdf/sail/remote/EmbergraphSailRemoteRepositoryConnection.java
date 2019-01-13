@@ -242,7 +242,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public BooleanQuery prepareBooleanQuery(
       final QueryLanguage ql, final String query, final String baseURI)
-      throws RepositoryException, MalformedQueryException {
+      throws RepositoryException {
 
     if (ql != QueryLanguage.SPARQL) {
 
@@ -269,7 +269,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public GraphQuery prepareGraphQuery(
       final QueryLanguage ql, final String query, final String baseURI)
-      throws RepositoryException, MalformedQueryException {
+      throws RepositoryException {
 
     if (ql != QueryLanguage.SPARQL) {
 
@@ -294,8 +294,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   }
 
   @Override
-  public Query prepareQuery(final QueryLanguage ql, final String query)
-      throws RepositoryException, MalformedQueryException {
+  public Query prepareQuery(final QueryLanguage ql, final String query) {
 
     throw new UnsupportedOperationException(
         "please use the specific operation for your query type: prepare[Boolean/Tuple/Graph]Query");
@@ -311,7 +310,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public TupleQuery prepareTupleQuery(
       final QueryLanguage ql, final String query, final String baseURI)
-      throws RepositoryException, MalformedQueryException {
+      throws RepositoryException {
 
     if (ql != QueryLanguage.SPARQL) {
 
@@ -397,7 +396,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public void add(
       final Reader input, final String baseURI, final RDFFormat format, final Resource... c)
-      throws IOException, RDFParseException, RepositoryException {
+      throws RepositoryException {
 
     final AddOp op = new AddOp(input, format);
 
@@ -408,7 +407,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public void add(
       final URL input, final String baseURI, final RDFFormat format, final Resource... c)
-      throws IOException, RDFParseException, RepositoryException {
+      throws RepositoryException {
 
     final AddOp op = new AddOp(input.toString());
 
@@ -419,7 +418,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public void add(
       final File input, final String baseURI, final RDFFormat format, final Resource... c)
-      throws IOException, RDFParseException, RepositoryException {
+      throws RepositoryException {
 
     final AddOp op = new AddOp(input, format);
 
@@ -430,7 +429,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   @Override
   public void add(
       final InputStream input, final String baseURI, final RDFFormat format, final Resource... c)
-      throws IOException, RDFParseException, RepositoryException {
+      throws RepositoryException {
 
     final AddOp op = new AddOp(input, format);
 
@@ -539,22 +538,22 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
           new CloseableIteration<Resource, RepositoryException>() {
 
             @Override
-            public boolean hasNext() throws RepositoryException {
+            public boolean hasNext() {
               return contexts.hasNext();
             }
 
             @Override
-            public Resource next() throws RepositoryException {
+            public Resource next() {
               return contexts.next();
             }
 
             @Override
-            public void remove() throws RepositoryException {
+            public void remove() {
               contexts.remove();
             }
 
             @Override
-            public void close() throws RepositoryException {
+            public void close() {
               // noop
             }
           });
@@ -627,7 +626,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
       final boolean includeInferred,
       final RDFHandler handler,
       final Resource... c)
-      throws RepositoryException, RDFHandlerException {
+      throws RepositoryException {
 
     try {
 
@@ -652,7 +651,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
 
   @Override
   public Update prepareUpdate(final QueryLanguage ql, final String query)
-      throws RepositoryException, MalformedQueryException {
+      throws RepositoryException {
 
     if (ql != QueryLanguage.SPARQL) {
 
@@ -736,27 +735,27 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   }
 
   @Override
-  public void setNamespace(String arg0, String arg1) throws RepositoryException {
+  public void setNamespace(String arg0, String arg1) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public String getNamespace(String arg0) throws RepositoryException {
+  public String getNamespace(String arg0) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public RepositoryResult<Namespace> getNamespaces() throws RepositoryException {
+  public RepositoryResult<Namespace> getNamespaces() {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void removeNamespace(String arg0) throws RepositoryException {
+  public void removeNamespace(String arg0) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void clearNamespaces() throws RepositoryException {
+  public void clearNamespaces() {
     throw new UnsupportedOperationException();
   }
 
@@ -789,7 +788,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   private final AtomicReference<IRemoteTx> remoteTx = new AtomicReference<>();
 
   @Override
-  public boolean isOpen() throws RepositoryException {
+  public boolean isOpen() {
 
     return open.get();
   }
@@ -807,7 +806,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
    */
   @Deprecated
   @Override
-  public boolean isAutoCommit() throws RepositoryException {
+  public boolean isAutoCommit() {
 
     /*
      * A connection is defined as being in auto-commit mode if no transaction
@@ -842,7 +841,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   }
 
   @Override
-  public void close() throws RepositoryException {
+  public void close() {
     if (open.compareAndSet(true /* expect */, false /* newValue */)) {
       /*
        * The connection was open and is now closed. We submit a runnable
@@ -855,29 +854,26 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
           .getRemoteRepositoryManager()
           .getExecutor()
           .execute(
-              new Runnable() {
-                @Override
-                public void run() {
-                  /*
-                   * Note: This invokes the tx.abort() without regard to whether or
-                   * not the connection is open (it will be closed since we closed
-                   * it before submitting this for execution).
-                   */
-                  synchronized (remoteTx) {
-                    final IRemoteTx tx = remoteTx.get();
-                    if (tx != null) {
-                      try {
-                        tx.abort();
-                      } catch (RuntimeException e) {
-                        // Log and ignore.
-                        log.error(e, e);
-                      } catch (Exception e) {
-                        // Log and ignore.
-                        log.error(e, e);
-                      } finally {
-                        // Clear the reference since we are closing the conn.
-                        remoteTx.set(null /* newValue */);
-                      }
+              () -> {
+                /*
+                 * Note: This invokes the tx.abort() without regard to whether or
+                 * not the connection is open (it will be closed since we closed
+                 * it before submitting this for execution).
+                 */
+                synchronized (remoteTx) {
+                  final IRemoteTx tx = remoteTx.get();
+                  if (tx != null) {
+                    try {
+                      tx.abort();
+                    } catch (RuntimeException e) {
+                      // Log and ignore.
+                      log.error(e, e);
+                    } catch (Exception e) {
+                      // Log and ignore.
+                      log.error(e, e);
+                    } finally {
+                      // Clear the reference since we are closing the conn.
+                      remoteTx.set(null /* newValue */);
                     }
                   }
                 }

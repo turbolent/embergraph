@@ -99,13 +99,11 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = indexes.length; --i >= 0; ) indexes[i] = i;
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            double av = vector.getQuick(a);
-            double bv = vector.getQuick(b);
-            if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
-            return av < bv ? -1 : (av == bv ? 0 : 1);
-          }
+        (a, b) -> {
+          double av = vector.getQuick(a);
+          double bv = vector.getQuick(b);
+          if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
+          return av < bv ? -1 : (av == bv ? 0 : 1);
         };
 
     runSort(indexes, 0, indexes.length, comp);
@@ -143,11 +141,7 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = indexes.length; --i >= 0; ) indexes[i] = i;
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            return c.compare(vector.getQuick(a), vector.getQuick(b));
-          }
-        };
+        (a, b) -> c.compare(vector.getQuick(a), vector.getQuick(b));
 
     runSort(indexes, 0, indexes.length, comp);
 
@@ -239,27 +233,23 @@ public class Sorting extends cern.colt.PersistentObject {
 
     // compares two aggregates at a time
     cern.colt.function.IntComparator comp =
-        new cern.colt.function.IntComparator() {
-          public int compare(int x, int y) {
-            double a = aggregates[x];
-            double b = aggregates[y];
-            if (a != a || b != b) return compareNaN(a, b); // swap NaNs to the end
-            return a < b ? -1 : (a == b) ? 0 : 1;
-          }
+        (x, y) -> {
+          double a = aggregates[x];
+          double b = aggregates[y];
+          if (a != a || b != b) return compareNaN(a, b); // swap NaNs to the end
+          return a < b ? -1 : (a == b) ? 0 : 1;
         };
     // swaps aggregates and reorders indexes
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int x, int y) {
-            int t1;
-            double t2;
-            t1 = indexes[x];
-            indexes[x] = indexes[y];
-            indexes[y] = t1;
-            t2 = aggregates[x];
-            aggregates[x] = aggregates[y];
-            aggregates[y] = t2;
-          }
+        (x, y) -> {
+          int t1;
+          double t2;
+          t1 = indexes[x];
+          indexes[x] = indexes[y];
+          indexes[y] = t1;
+          t2 = aggregates[x];
+          aggregates[x] = aggregates[y];
+          aggregates[y] = t2;
         };
 
     // sort indexes and aggregates
@@ -319,13 +309,11 @@ public class Sorting extends cern.colt.PersistentObject {
 
     final DoubleMatrix1D col = matrix.viewColumn(column);
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            double av = col.getQuick(a);
-            double bv = col.getQuick(b);
-            if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
-            return av < bv ? -1 : (av == bv ? 0 : 1);
-          }
+        (a, b) -> {
+          double av = col.getQuick(a);
+          double bv = col.getQuick(b);
+          if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
+          return av < bv ? -1 : (av == bv ? 0 : 1);
         };
 
     runSort(rowIndexes, 0, rowIndexes.length, comp);
@@ -367,11 +355,9 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = views.length; --i >= 0; ) views[i] = matrix.viewRow(i);
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            // return c.compare(matrix.viewRow(a), matrix.viewRow(b));
-            return c.compare(views[a], views[b]);
-          }
+        (a, b) -> {
+          // return c.compare(matrix.viewRow(a), matrix.viewRow(b));
+          return c.compare(views[a], views[b]);
         };
 
     runSort(rowIndexes, 0, rowIndexes.length, comp);
@@ -500,13 +486,11 @@ public class Sorting extends cern.colt.PersistentObject {
 
     final DoubleMatrix1D sliceView = matrix.viewRow(row).viewColumn(column);
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            double av = sliceView.getQuick(a);
-            double bv = sliceView.getQuick(b);
-            if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
-            return av < bv ? -1 : (av == bv ? 0 : 1);
-          }
+        (a, b) -> {
+          double av = sliceView.getQuick(a);
+          double bv = sliceView.getQuick(b);
+          if (av != av || bv != bv) return compareNaN(av, bv); // swap NaNs to the end
+          return av < bv ? -1 : (av == bv ? 0 : 1);
         };
 
     runSort(sliceIndexes, 0, sliceIndexes.length, comp);
@@ -550,11 +534,9 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = views.length; --i >= 0; ) views[i] = matrix.viewSlice(i);
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            // return c.compare(matrix.viewSlice(a), matrix.viewSlice(b));
-            return c.compare(views[a], views[b]);
-          }
+        (a, b) -> {
+          // return c.compare(matrix.viewSlice(a), matrix.viewSlice(b));
+          return c.compare(views[a], views[b]);
         };
 
     runSort(sliceIndexes, 0, sliceIndexes.length, comp);
@@ -568,12 +550,10 @@ public class Sorting extends cern.colt.PersistentObject {
     Sorting sort = quickSort;
     DoubleMatrix2D matrix = DoubleFactory2D.dense.descending(4, 3);
     DoubleMatrix1DComparator comp =
-        new DoubleMatrix1DComparator() {
-          public int compare(DoubleMatrix1D a, DoubleMatrix1D b) {
-            double as = a.zSum();
-            double bs = b.zSum();
-            return as < bs ? -1 : as == bs ? 0 : 1;
-          }
+        (a, b) -> {
+          double as = a.zSum();
+          double bs = b.zSum();
+          return as < bs ? -1 : as == bs ? 0 : 1;
         };
     System.out.println("unsorted:" + matrix);
     System.out.println("sorted  :" + sort.sort(matrix, comp));
@@ -583,12 +563,10 @@ public class Sorting extends cern.colt.PersistentObject {
     Sorting sort = quickSort;
     DoubleMatrix3D matrix = DoubleFactory3D.dense.descending(4, 3, 2);
     DoubleMatrix2DComparator comp =
-        new DoubleMatrix2DComparator() {
-          public int compare(DoubleMatrix2D a, DoubleMatrix2D b) {
-            double as = a.zSum();
-            double bs = b.zSum();
-            return as < bs ? -1 : as == bs ? 0 : 1;
-          }
+        (a, b) -> {
+          double as = a.zSum();
+          double bs = b.zSum();
+          return as < bs ? -1 : as == bs ? 0 : 1;
         };
     System.out.println("unsorted:" + matrix);
     System.out.println("sorted  :" + sort.sort(matrix, comp));
@@ -599,12 +577,10 @@ public class Sorting extends cern.colt.PersistentObject {
     double[] values = {0.5, 1.5, 2.5, 3.5};
     DoubleMatrix1D matrix = new DenseDoubleMatrix1D(values);
     cern.colt.function.DoubleComparator comp =
-        new cern.colt.function.DoubleComparator() {
-          public int compare(double a, double b) {
-            double as = Math.sin(a);
-            double bs = Math.sin(b);
-            return as < bs ? -1 : as == bs ? 0 : 1;
-          }
+        (a, b) -> {
+          double as = Math.sin(a);
+          double bs = Math.sin(b);
+          return as < bs ? -1 : as == bs ? 0 : 1;
         };
     System.out.println("unsorted:" + matrix);
 
@@ -710,17 +686,15 @@ public class Sorting extends cern.colt.PersistentObject {
     System.out.print("now sorting - slow version... ");
     A = B;
     cern.colt.matrix.doublealgo.DoubleMatrix1DComparator fun =
-        new cern.colt.matrix.doublealgo.DoubleMatrix1DComparator() {
-          public int compare(DoubleMatrix1D x, DoubleMatrix1D y) {
-            // FIXME:  Should this test exist without hep.aida
-            System.out.println("FIXME:  Should this test exist without hep.aida");
-            // double a = cern.colt.matrix.doublealgo.Statistic.bin(x).median();
-            // double b = cern.colt.matrix.doublealgo.Statistic.bin(y).median();
-            // double a = x.aggregate(F.plus,F.log);
-            // double b = y.aggregate(F.plus,F.log);
-            // return a < b ? -1 : (a==b) ? 0 : 1;
-            return 1;
-          }
+        (x, y) -> {
+          // FIXME:  Should this test exist without hep.aida
+          System.out.println("FIXME:  Should this test exist without hep.aida");
+          // double a = cern.colt.matrix.doublealgo.Statistic.bin(x).median();
+          // double b = cern.colt.matrix.doublealgo.Statistic.bin(y).median();
+          // double a = x.aggregate(F.plus,F.log);
+          // double b = y.aggregate(F.plus,F.log);
+          // return a < b ? -1 : (a==b) ? 0 : 1;
+          return 1;
         };
     timer.reset().start();
     A = sort.sort(A, fun);

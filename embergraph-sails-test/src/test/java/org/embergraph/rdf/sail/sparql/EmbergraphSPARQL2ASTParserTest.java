@@ -107,7 +107,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** grouping by expression, done wrong */
-  public void test_agg08() throws MalformedQueryException {
+  public void test_agg08() {
 
     final String query =
         "PREFIX : <http://www.example.org/>\n"
@@ -119,7 +119,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Projection of an ungrouped variable (not appearing in the GROUP BY expression) */
-  public void test_agg09() throws MalformedQueryException {
+  public void test_agg09() {
 
     final String query =
         "PREFIX : <http://www.example.org/>\n"
@@ -130,7 +130,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Projection of an ungrouped variable (no GROUP BY expression at all) */
-  public void test_agg10() throws MalformedQueryException {
+  public void test_agg10() {
 
     final String query =
         "PREFIX : <http://www.example.org/>\n"
@@ -141,7 +141,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Use of an ungrouped variable in a project expression */
-  public void test_agg11() throws MalformedQueryException {
+  public void test_agg11() {
 
     final String query =
         "PREFIX : <http://www.example.org/>\n"
@@ -155,7 +155,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
    * Use of an ungrouped variable in a project expression, where the variable appears in a GROUP BY
    * expression
    */
-  public void test_agg12() throws MalformedQueryException {
+  public void test_agg12() {
 
     final String query =
         "PREFIX : <http://www.example.org/>\n"
@@ -166,7 +166,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** projection of ungrouped variable */
-  public void test_group06() throws MalformedQueryException {
+  public void test_group06() {
 
     final String query =
         "PREFIX : <http://example/>\n"
@@ -180,7 +180,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** projection of ungrouped variable, more complex example than Group-6 */
-  public void test_group07() throws MalformedQueryException {
+  public void test_group07() {
 
     final String query =
         "prefix lode: <http://linkedevents.org/ontology/>\n"
@@ -204,7 +204,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Select * Not allowed with GROUP BY */
-  public void test_syn_bad_01() throws MalformedQueryException {
+  public void test_syn_bad_01() {
 
     final String query = "SELECT * { ?s ?p ?o } GROUP BY ?s";
 
@@ -212,7 +212,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** required syntax error : out of scope variable in SELECT from group. */
-  public void test_syn_bad_02() throws MalformedQueryException {
+  public void test_syn_bad_02() {
 
     final String query = "SELECT ?o { ?s ?p ?o } GROUP BY ?s";
 
@@ -220,7 +220,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Same variable can not be projected more than once. */
-  public void test_syn_bad_03() throws MalformedQueryException {
+  public void test_syn_bad_03() {
 
     final String query = "SELECT (1 AS ?X) (1 AS ?X) {}";
 
@@ -251,7 +251,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Variable in DELETE DATA's data. */
-  public void test_syntax_update_bad_03() throws MalformedQueryException {
+  public void test_syntax_update_bad_03() {
 
     final String query = "DELETE DATA { ?s <:p> <:o> }";
 
@@ -259,7 +259,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Variable in INSERT DATA's data. */
-  public void test_syntax_update_bad_04() throws MalformedQueryException {
+  public void test_syntax_update_bad_04() {
 
     final String query = "INSERT DATA { GRAPH ?g {<:s> <:p> <:o> } }";
 
@@ -267,7 +267,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Too many separators (in UPDATE request) */
-  public void test_syntax_update_bad_08() throws MalformedQueryException {
+  public void test_syntax_update_bad_08() {
 
     final String query = "CREATE GRAPH <:g> ;; LOAD <:remote> into GRAPH <:g>";
 
@@ -275,7 +275,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** Too many separators (in UPDATE request) */
-  public void test_syntax_update_bad_09() throws MalformedQueryException {
+  public void test_syntax_update_bad_09() {
 
     final String query = "CREATE GRAPH <:g> ; LOAD <:remote> into GRAPH <:g> ;;";
 
@@ -283,7 +283,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
   }
 
   /** BNode in DELETE WHERE */
-  public void test_syntax_update_bad_10() throws MalformedQueryException {
+  public void test_syntax_update_bad_10() {
 
     final String query = "DELETE WHERE { _:a <:p> <:o> }";
 

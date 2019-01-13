@@ -230,8 +230,7 @@ public class TestRollbacks extends QuadsTestCase {
      *     26 second run. A value of 100-200 is more reasonable and is sufficient to readily
      *     identify any problems during CI.
      */
-    private DoStuff(final SailRepository repo, final boolean writer, final int maxCounter)
-        throws OpenRDFException {
+    private DoStuff(final SailRepository repo, final boolean writer, final int maxCounter) {
       this.repo = repo;
       this.writer = writer;
       this.maxCounter = maxCounter;
@@ -274,8 +273,7 @@ public class TestRollbacks extends QuadsTestCase {
     }
 
     private void reader(final RepositoryConnection conn)
-        throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-            InterruptedException {
+        throws RepositoryException, MalformedQueryException, QueryEvaluationException {
       query(conn);
       //            Thread.sleep(100);
       query(conn);
@@ -292,8 +290,7 @@ public class TestRollbacks extends QuadsTestCase {
     }
 
     private void writer(final RepositoryConnection conn)
-        throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-            InterruptedException {
+        throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 
       final URI subj = conn.getValueFactory().createURI("u:s" + (counter++));
       final Value value = conn.getValueFactory().createLiteral("literal" + counter);

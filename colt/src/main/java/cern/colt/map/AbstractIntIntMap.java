@@ -36,11 +36,7 @@ public abstract class AbstractIntIntMap extends AbstractMap {
    */
   public boolean containsKey(final int key) {
     return !forEachKey(
-        new IntProcedure() {
-          public boolean apply(int iterKey) {
-            return (key != iterKey);
-          }
-        });
+        iterKey -> (key != iterKey));
   }
   /*
    * Returns <tt>true</tt> if the receiver contains the specified value.
@@ -49,11 +45,7 @@ public abstract class AbstractIntIntMap extends AbstractMap {
    */
   public boolean containsValue(final int value) {
     return !forEachPair(
-        new IntIntProcedure() {
-          public boolean apply(int iterKey, int iterValue) {
-            return (value != iterValue);
-          }
-        });
+        (iterKey, iterValue) -> (value != iterValue));
   }
   /*
    * Returns a deep copy of the receiver; uses <code>clone()</code> and casts the result.
@@ -102,17 +94,9 @@ public abstract class AbstractIntIntMap extends AbstractMap {
     if (other.size() != size()) return false;
 
     return forEachPair(
-            new IntIntProcedure() {
-              public boolean apply(int key, int value) {
-                return other.containsKey(key) && other.get(key) == value;
-              }
-            })
+        (key, value) -> other.containsKey(key) && other.get(key) == value)
         && other.forEachPair(
-            new IntIntProcedure() {
-              public boolean apply(int key, int value) {
-                return containsKey(key) && get(key) == value;
-              }
-            });
+        (key, value) -> containsKey(key) && get(key) == value);
   }
   /*
    * Applies a procedure to each key of the receiver, if any. Note: Iterates over the keys in no
@@ -140,11 +124,7 @@ public abstract class AbstractIntIntMap extends AbstractMap {
    */
   public boolean forEachPair(final IntIntProcedure procedure) {
     return forEachKey(
-        new IntProcedure() {
-          public boolean apply(int key) {
-            return procedure.apply(key, get(key));
-          }
-        });
+        key -> procedure.apply(key, get(key)));
   }
   /*
    * Returns the value associated with the specified key. It is often a good idea to first check
@@ -169,12 +149,10 @@ public abstract class AbstractIntIntMap extends AbstractMap {
     final int[] foundKey = new int[1];
     boolean notFound =
         forEachPair(
-            new IntIntProcedure() {
-              public boolean apply(int iterKey, int iterValue) {
-                boolean found = value == iterValue;
-                if (found) foundKey[0] = iterKey;
-                return !found;
-              }
+            (iterKey, iterValue) -> {
+              boolean found = value == iterValue;
+              if (found) foundKey[0] = iterKey;
+              return !found;
             });
     if (notFound) return Integer.MIN_VALUE;
     return foundKey[0];
@@ -206,11 +184,9 @@ public abstract class AbstractIntIntMap extends AbstractMap {
   public void keys(final IntArrayList list) {
     list.clear();
     forEachKey(
-        new IntProcedure() {
-          public boolean apply(int key) {
-            list.add(key);
-            return true;
-          }
+        key -> {
+          list.add(key);
+          return true;
         });
   }
   /*
@@ -253,14 +229,12 @@ public abstract class AbstractIntIntMap extends AbstractMap {
     valueList.clear();
 
     forEachPair(
-        new IntIntProcedure() {
-          public boolean apply(int key, int value) {
-            if (condition.apply(key, value)) {
-              keyList.add(key);
-              valueList.add(value);
-            }
-            return true;
+        (key, value) -> {
+          if (condition.apply(key, value)) {
+            keyList.add(key);
+            valueList.add(value);
           }
+          return true;
         });
   }
   /*
@@ -301,25 +275,19 @@ public abstract class AbstractIntIntMap extends AbstractMap {
     final int[] k = keyList.elements();
     final int[] v = valueList.elements();
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int a, int b) {
-            int t2;
-            int t1;
-            t1 = v[a];
-            v[a] = v[b];
-            v[b] = t1;
-            t2 = k[a];
-            k[a] = k[b];
-            k[b] = t2;
-          }
+        (a, b) -> {
+          int t2;
+          int t1;
+          t1 = v[a];
+          v[a] = v[b];
+          v[b] = t1;
+          t2 = k[a];
+          k[a] = k[b];
+          k[b] = t2;
         };
 
     cern.colt.function.IntComparator comp =
-        new cern.colt.function.IntComparator() {
-          public int compare(int a, int b) {
-            return v[a] < v[b] ? -1 : v[a] > v[b] ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
-          }
-        };
+        (a, b) -> v[a] < v[b] ? -1 : v[a] > v[b] ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
 
     cern.colt.GenericSorting.quickSort(0, keyList.size(), comp, swapper);
   }
@@ -410,11 +378,9 @@ public abstract class AbstractIntIntMap extends AbstractMap {
   public void values(final IntArrayList list) {
     list.clear();
     forEachKey(
-        new IntProcedure() {
-          public boolean apply(int key) {
-            list.add(get(key));
-            return true;
-          }
+        key -> {
+          list.add(get(key));
+          return true;
         });
   }
 }

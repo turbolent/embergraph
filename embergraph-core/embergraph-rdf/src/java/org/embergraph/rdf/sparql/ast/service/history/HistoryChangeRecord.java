@@ -83,7 +83,7 @@ public class HistoryChangeRecord extends ChangeRecord {
 
     if (o == this) return true;
 
-    if (o == null || o instanceof HistoryChangeRecord == false) return false;
+    if (o instanceof HistoryChangeRecord == false) return false;
 
     final HistoryChangeRecord rec = (HistoryChangeRecord) o;
 

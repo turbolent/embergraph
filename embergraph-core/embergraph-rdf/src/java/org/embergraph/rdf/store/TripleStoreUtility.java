@@ -73,8 +73,7 @@ public class TripleStoreUtility {
    * @return true if all statements in the expected graph are in the actual graph and if the actual
    *     graph does not contain any statements that are not also in the expected graph.
    */
-  public static boolean modelsEqual(AbstractTripleStore expected, AbstractTripleStore actual)
-      throws Exception {
+  public static boolean modelsEqual(AbstractTripleStore expected, AbstractTripleStore actual) {
 
     //        int actualSize = 0;
     int notExpecting = 0;
@@ -267,40 +266,37 @@ public class TripleStoreUtility {
      * found in [actual] onto the blocking buffer.
      */
     final Callable<Void> myTask =
-        new Callable<Void>() {
+        () -> {
 
-          public Void call() throws Exception {
+          try {
 
-            try {
+            while (itr2.hasNext()) {
 
-              while (itr2.hasNext()) {
+              // a statement from the source db.
+              final EmbergraphStatement stmt = itr2.next();
 
-                // a statement from the source db.
-                final EmbergraphStatement stmt = itr2.next();
+              // if (log.isInfoEnabled()) log.info("Source: "
+              // + stmt);
 
-                // if (log.isInfoEnabled()) log.info("Source: "
-                // + stmt);
-
-                // add to the buffer.
-                sb.add(stmt);
-              }
-
-            } finally {
-
-              itr2.close();
+              // add to the buffer.
+              sb.add(stmt);
             }
 
-            /*
-             * Flush everything in the StatementBuffer so that it
-             * shows up in the BlockingBuffer's iterator().
-             */
+          } finally {
 
-            final long nnotFound = sb.flush();
-
-            if (log.isInfoEnabled()) log.info("Flushed: #notFound=" + nnotFound);
-
-            return null;
+            itr2.close();
           }
+
+          /*
+           * Flush everything in the StatementBuffer so that it
+           * shows up in the BlockingBuffer's iterator().
+           */
+
+          final long nnotFound = sb.flush();
+
+          if (log.isInfoEnabled()) log.info("Flushed: #notFound=" + nnotFound);
+
+          return null;
         };
 
     /*

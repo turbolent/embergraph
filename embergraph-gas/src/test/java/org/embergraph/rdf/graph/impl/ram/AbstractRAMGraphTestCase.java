@@ -38,13 +38,7 @@ public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
   @Override
   protected IGraphFixtureFactory getGraphFixtureFactory() {
 
-    return new IGraphFixtureFactory() {
-
-      @Override
-      public IGraphFixture newGraphFixture() throws Exception {
-        return new RAMGraphFixture();
-      }
-    };
+    return () -> new RAMGraphFixture();
   }
 
   @Override
@@ -88,7 +82,7 @@ public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
      * #}
      * </pre>
      */
-    public SmallGraphProblem() throws Exception {
+    public SmallGraphProblem() {
 
       final RAMGraph g = getGraphFixture().getGraph();
 

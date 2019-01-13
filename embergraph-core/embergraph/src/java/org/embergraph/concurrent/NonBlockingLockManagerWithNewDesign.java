@@ -121,7 +121,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * had activity in the last reporting period.
    */
   private final ConcurrentWeakValueCacheWithTimeout<
-          R, ResourceQueue<R, LockFutureTask<R, ? extends Object>>>
+          R, ResourceQueue<R, LockFutureTask<R, ?>>>
       resourceQueues =
       new ConcurrentWeakValueCacheWithTimeout<>(
           1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
@@ -188,7 +188,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * deadlock or if {@link #maxLockTries} would be exceeded for that task. The queue is cleared if
    * the lock service is halted.
    */
-  private final BlockingQueue<LockFutureTask<R, ? extends Object>> retryQueue =
+  private final BlockingQueue<LockFutureTask<R, ?>> retryQueue =
       new LinkedBlockingQueue<>();
 
   /*
@@ -454,18 +454,18 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       final CounterSet tmp = root.makePath("queues");
 
       final Iterator<
-              Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>>>
+              Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>>>>
           itr = resourceQueues.entryIterator();
 
       while (itr.hasNext()) {
 
-        final Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>>
+        final Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>>>
             entry = itr.next();
 
-        final WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> queueRef =
+        final WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>> queueRef =
             entry.getValue();
 
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> queue = queueRef.get();
+        final ResourceQueue<R, LockFutureTask<R, ?>> queue = queueRef.get();
 
         if (queue == null) continue;
 
@@ -500,7 +500,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
     public void sample() {
 
-      final ResourceQueue<R, LockFutureTask<R, ? extends Object>> queue =
+      final ResourceQueue<R, LockFutureTask<R, ?>> queue =
           resourceQueues.get(resource);
 
       if (queue == null) {
@@ -990,11 +990,11 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
     try {
 
-      LockFutureTask<R, ? extends Object> task = null;
+      LockFutureTask<R, ?> task = null;
 
       for (R r : resource) {
 
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
             resourceQueues.get(r);
 
         if (resourceQueue == null) {
@@ -1225,7 +1225,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * the {@link ResourceQueue}s would be asynchronously cleared from the {@link
      * NonBlockingLockManagerWithNewDesign#resourceQueues} collection by the garbage collector.
      */
-    private final LinkedHashSet<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>
+    private final LinkedHashSet<ResourceQueue<R, LockFutureTask<R, ?>>>
         lockedResources =
         new LinkedHashSet<>();
 
@@ -1868,12 +1868,12 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * @param tasks The tasks.
      */
     private void cancelTasks(
-        final Iterator<LockFutureTask<R, ? extends Object>> itr,
+        final Iterator<LockFutureTask<R, ?>> itr,
         final boolean mayInterruptIfRunning) {
 
       while (itr.hasNext()) {
 
-        final LockFutureTask<R, ? extends Object> t = itr.next();
+        final LockFutureTask<R, ?> t = itr.next();
 
         t.cancel(mayInterruptIfRunning);
 
@@ -1896,11 +1896,11 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
 
       int nchanged = 0;
 
-      final Iterator<LockFutureTask<R, ? extends Object>> itr = lockManager.retryQueue.iterator();
+      final Iterator<LockFutureTask<R, ?>> itr = lockManager.retryQueue.iterator();
 
       while (itr.hasNext()) {
 
-        final LockFutureTask<R, ? extends Object> t = itr.next();
+        final LockFutureTask<R, ?> t = itr.next();
 
         if (t.requestLocks()) {
           /*
@@ -1937,10 +1937,10 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @param resource The resource.
    * @return The {@link ResourceQueue}.
    */
-  private ResourceQueue<R, LockFutureTask<R, ? extends Object>> declareResource(final R resource) {
+  private ResourceQueue<R, LockFutureTask<R, ?>> declareResource(final R resource) {
 
     // test 1st to avoid creating a new ResourceQueue if it already exists.
-    ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+    ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
         resourceQueues.get(resource);
 
     if (resourceQueue != null) {
@@ -1953,7 +1953,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     resourceQueue = new ResourceQueue<>(this, resource);
 
     // put if absent.
-    final ResourceQueue<R, LockFutureTask<R, ? extends Object>> oldval =
+    final ResourceQueue<R, LockFutureTask<R, ?>> oldval =
         resourceQueues.putIfAbsent(resource, resourceQueue);
 
     if (oldval != null) {
@@ -2037,12 +2037,12 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       /*
        * Collect the set of tasks on which this task must wait.
        */
-      final LinkedHashSet<LockFutureTask<R, ? extends Object>> predecessors =
+      final LinkedHashSet<LockFutureTask<R, ?>> predecessors =
           new LinkedHashSet<>();
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
             declareResource(r);
 
         if (!resourceQueue.queue.isEmpty()) {
@@ -2077,7 +2077,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
             declareResource(r);
 
         /*
@@ -2113,7 +2113,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
             declareResource(r);
 
         /*
@@ -2162,17 +2162,17 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * The set of resource queues for which this task was holding a lock (at
      * the head of the queue).
      */
-    final List<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> resourceQueues =
+    final List<ResourceQueue<R, LockFutureTask<R, ?>>> resourceQueues =
         new LinkedList<>();
 
     try {
 
-      final Iterator<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> itr =
+      final Iterator<ResourceQueue<R, LockFutureTask<R, ?>>> itr =
           t.lockedResources.iterator();
 
       while (itr.hasNext()) {
 
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue = itr.next();
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue = itr.next();
 
         if (resourceQueue.queue.peek() == t) {
 
@@ -2241,14 +2241,14 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
      * of its locks, then put that task on the [readyQueue].
      */
     {
-      final Iterator<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> itr =
+      final Iterator<ResourceQueue<R, LockFutureTask<R, ?>>> itr =
           resourceQueues.iterator();
 
       while (itr.hasNext()) {
 
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue = itr.next();
+        final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue = itr.next();
 
-        final LockFutureTask<R, ? extends Object> task = resourceQueue.queue.peek();
+        final LockFutureTask<R, ?> task = resourceQueue.queue.peek();
 
         if (task != null
             && task.taskRunState == TaskRunState.LocksRequested
@@ -2287,7 +2287,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    */
   public boolean isLockHeldByTask(final R lock, final Runnable task) {
 
-    final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+    final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
         resourceQueues.get(lock);
 
     return resourceQueue.queue.peek() == task;
@@ -2299,13 +2299,13 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @param task The task.
    * @return <code>true</code> iff it holds its locks.
    */
-  private boolean holdsAllLocks(final LockFutureTask<R, ? extends Object> task) {
+  private boolean holdsAllLocks(final LockFutureTask<R, ?> task) {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
     for (R r : task.resource) {
 
-      final ResourceQueue<R, LockFutureTask<R, ? extends Object>> resourceQueue =
+      final ResourceQueue<R, LockFutureTask<R, ?>> resourceQueue =
           resourceQueues.get(r);
 
       assert resourceQueue != null : "resource=" + r;
@@ -2357,7 +2357,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @see TxDag
    */
   protected static class ResourceQueue<
-      R extends Comparable<R>, T extends LockFutureTask<R, ? extends Object>> {
+      R extends Comparable<R>, T extends LockFutureTask<R, ?>> {
 
     /*
      * The outer class.
@@ -2462,47 +2462,27 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     final MovingAverageTask nretryAverageTask =
         new MovingAverageTask(
             "nretry",
-            new Callable<Integer>() {
-              public Integer call() {
-                return counters.nretry;
-              }
-            });
+            (Callable<Integer>) () -> counters.nretry);
 
     final MovingAverageTask nwaitingAverageTask =
         new MovingAverageTask(
             "nwaiting",
-            new Callable<Integer>() {
-              public Integer call() {
-                return counters.nwaiting;
-              }
-            });
+            (Callable<Integer>) () -> counters.nwaiting);
 
     final MovingAverageTask nreadyAverageTask =
         new MovingAverageTask(
             "nready",
-            new Callable<Integer>() {
-              public Integer call() {
-                return counters.nready;
-              }
-            });
+            (Callable<Integer>) () -> counters.nready);
 
     final MovingAverageTask nrunningAverageTask =
         new MovingAverageTask(
             "nrunning",
-            new Callable<Integer>() {
-              public Integer call() {
-                return counters.nrunning;
-              }
-            });
+            (Callable<Integer>) () -> counters.nrunning);
 
     final MovingAverageTask nrunningWithLocksHeldAverageTask =
         new MovingAverageTask(
             "nrunningWithLocksHeld",
-            new Callable<Integer>() {
-              public Integer call() {
-                return counters.nrunningWithLocksHeld;
-              }
-            });
+            (Callable<Integer>) () -> counters.nrunningWithLocksHeld);
 
     /*
      * Used to stuff the datum to be incorporated into the average into {@link
@@ -2514,11 +2494,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
     final MovingAverageTask nqueueBusyAverageTask =
         new MovingAverageTask(
             "nbusy",
-            new Callable<Integer>() {
-              public Integer call() {
-                return queueCountWithNonZeroTasks.get();
-              }
-            });
+            (Callable<Integer>) () -> queueCountWithNonZeroTasks.get());
 
     private StatisticsTask() {}
 
@@ -2547,18 +2523,18 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
       int nbusy = 0;
 
       final Iterator<
-              Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>>>
+              Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>>>>
           itr = resourceQueues.entryIterator();
 
       while (itr.hasNext()) {
 
-        final Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>>>
+        final Map.Entry<R, WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>>>
             entry = itr.next();
 
-        final WeakReference<ResourceQueue<R, LockFutureTask<R, ? extends Object>>> queueRef =
+        final WeakReference<ResourceQueue<R, LockFutureTask<R, ?>>> queueRef =
             entry.getValue();
 
-        final ResourceQueue<R, LockFutureTask<R, ? extends Object>> queue = queueRef.get();
+        final ResourceQueue<R, LockFutureTask<R, ?>> queue = queueRef.get();
 
         if (queue == null) continue;
 

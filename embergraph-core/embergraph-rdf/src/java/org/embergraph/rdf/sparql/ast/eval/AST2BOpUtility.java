@@ -345,10 +345,9 @@ public class AST2BOpUtility extends AST2BOpRTO {
         projectedVars == null ? new LinkedList<>() : Arrays.asList(projectedVars);
 
     // Temporary set scoped to the subquery.
-    final Set<IVariable<?>> tmp = new LinkedHashSet<>();
 
     // Add everything known to have been materialized up to now.
-    tmp.addAll(doneSet);
+    final Set<IVariable<?>> tmp = new LinkedHashSet<>(doneSet);
 
     // Retain only those variables projected by the subquery.
     tmp.retainAll(projectedVarList);
@@ -404,7 +403,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     // add bindings clause object
     final Object bindingsClause =
         queryBase.annotations().get(QueryBase.Annotations.BINDINGS_CLAUSE);
-    if (bindingsClause != null && bindingsClause instanceof BindingsClause) {
+    if (bindingsClause instanceof BindingsClause) {
       left = addValues(left, (BindingsClause) bindingsClause, doneSet, ctx);
     }
 
@@ -634,7 +633,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         }
         left =
             applyQueryHints(
-                new ProjectionOp(leftOrEmpty(left), anns.toArray(new NV[anns.size()])),
+                new ProjectionOp(leftOrEmpty(left), anns.toArray(new NV[0])),
                 queryBase,
                 ctx);
         //				}
@@ -668,7 +667,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
           final String ns = ctx.getLexiconNamespace();
 
-          final IVariable<?>[] vars = tmp.toArray(new IVariable[tmp.size()]);
+          final IVariable<?>[] vars = tmp.toArray(new IVariable[0]);
 
           final List<NV> anns = new LinkedList<>();
           anns.add(new NV(ChunkedMaterializationOp.Annotations.VARS, vars));
@@ -691,7 +690,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
           left =
               applyQueryHints(
                   new ChunkedMaterializationOp(
-                      leftOrEmpty(left), anns.toArray(new NV[anns.size()])),
+                      leftOrEmpty(left), anns.toArray(new NV[0])),
                   queryBase,
                   ctx);
 
@@ -1126,8 +1125,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
       final Set<IVariable<?>> maybeBound =
           ctx.sa.getMaybeIncomingBindings(serviceNode, new LinkedHashSet<>());
 
-      final Set<IVariable<?>> vars = new LinkedHashSet<>();
-      vars.addAll(projectedVars); // start with everything "projected".
+      final Set<IVariable<?>> vars = new LinkedHashSet<>(projectedVars); // start with everything "projected".
       vars.retainAll(maybeBound); // retain "maybe" incoming bound vars.
       if (serviceRef instanceof IVariable) {
         /*
@@ -2229,7 +2227,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     //        projectInVars.retainAll(alpVars);
     projectInVars.retainAll(spannedVars);
     final IVariable<?>[] projectInVarsArr =
-        projectInVars.toArray(new IVariable<?>[projectInVars.size()]);
+        projectInVars.toArray(new IVariable<?>[0]);
 
     final INamedSolutionSetRef namedSolutionSet =
         NamedSolutionSetRefUtility.newInstance(
@@ -2621,7 +2619,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
       left =
           applyQueryHints(
-              new Tee(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[anns.size()]))),
+              new Tee(leftOrEmpty(left), NV.asMap(anns.toArray(new NV[0]))),
               unionNode,
               ctx);
     }
@@ -2725,7 +2723,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         ctx.sa.getDefinitelyIncomingBindings(alpNode, new LinkedHashSet<>());
     joinVarsSet.retainAll(alpVars);
 
-    final IVariable<?>[] joinVars = joinVarsSet.toArray(new IVariable<?>[joinVarsSet.size()]);
+    final IVariable<?>[] joinVars = joinVarsSet.toArray(new IVariable<?>[0]);
 
     /** We project in everything that might help in binding the variables of the ALP node. */
     final Set<IVariable<?>> alpUsedVars = alpNode.getUsedVars();
@@ -2739,7 +2737,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     // we project in whatever's used inside the ALP
     projectInVars.retainAll(alpUsedVars);
-    IVariable<?>[] projectInVarsArr = projectInVars.toArray(new IVariable<?>[projectInVars.size()]);
+    IVariable<?>[] projectInVarsArr = projectInVars.toArray(new IVariable<?>[0]);
 
     // the remaining variables are those that are not projected in
     nonProjectInVars.removeAll(projectInVars);
@@ -3087,8 +3085,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
      *
      * @see JoinGroupNode#getInFilters()
      */
-    final Set<FilterNode> inFilters = new LinkedHashSet<>();
-    inFilters.addAll(joinGroup.getInFilters());
+    final Set<FilterNode> inFilters = new LinkedHashSet<>(joinGroup.getInFilters());
 
     final AtomicInteger start = new AtomicInteger(0);
 
@@ -3158,31 +3155,25 @@ public class AST2BOpUtility extends AST2BOpRTO {
                 null, // cutoffLimit
                 sp.getQueryHints(),
                 ctx);
-        continue;
       } else if (child instanceof ArbitraryLengthPathNode) {
         final ArbitraryLengthPathNode alpNode = (ArbitraryLengthPathNode) child;
         left = convertArbitraryLengthPath(left, alpNode, doneSet, ctx);
-        continue;
       } else if (child instanceof ZeroLengthPathNode) {
         final ZeroLengthPathNode zlpNode = (ZeroLengthPathNode) child;
         left = convertZeroLengthPath(left, zlpNode, doneSet, ctx);
-        continue;
       } else if (child instanceof ServiceNode) {
         // SERVICE
         left = addServiceCall(left, (ServiceNode) child, doneSet, ctx);
-        continue;
       } else if (child instanceof NamedSubqueryInclude) {
         /*
          * INCLUDE
          */
         left = addNamedSubqueryInclude(left, (NamedSubqueryInclude) child, doneSet, ctx);
-        continue;
       } else if (child instanceof BindingsClause) {
         /*
          * VALUES clause
          */
         left = addValues(left, (BindingsClause) child, doneSet, ctx);
-        continue;
       } else if (child instanceof SubqueryRoot) {
         final SubqueryRoot subquery = (SubqueryRoot) child;
         switch (subquery.getQueryType()) {
@@ -3210,12 +3201,10 @@ public class AST2BOpUtility extends AST2BOpRTO {
             throw new UnsupportedOperationException(
                 "Subquery has queryType=" + subquery.getQueryType());
         }
-        continue;
       } else if (child instanceof UnionNode) {
         //                @SuppressWarnings("unchecked")
         final UnionNode unionNode = (UnionNode) child;
         left = convertUnion(left, unionNode, doneSet, ctx);
-        continue;
       } else if (child instanceof GraphPatternGroup<?>) {
         /*
          * Sub-groups, OPTIONAL groups, and UNION.
@@ -3251,7 +3240,6 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * visibility, so we need to propagate this information to the doneSet.
          */
         doneSet.retainAll(groupLocalDoneSet);
-        continue;
       } else if (child instanceof FilterNode) {
         final FilterNode filter = (FilterNode) child;
         if (inFilters.contains(filter)) {
@@ -3260,7 +3248,6 @@ public class AST2BOpUtility extends AST2BOpRTO {
         }
         // FILTER
         left = addConditional(left, joinGroup, filter, doneSet, ctx);
-        continue;
       } else if (child instanceof AssignmentNode) {
 
         if (mustBeResolvedInContext((AssignmentNode) child, ctx)) {
@@ -3281,20 +3268,17 @@ public class AST2BOpUtility extends AST2BOpRTO {
                   false /* projection */);
         }
 
-        continue;
-
       } else if (child instanceof BindingsClause) {
         //                // LET / BIND
         //                left = addAssignment(left, (AssignmentNode) child, doneSet,
         //                        joinGroup.getQueryHints(), ctx, false/* projection */);
-        continue;
       } else {
         throw new UnsupportedOperationException("child: " + child);
       }
     } // next child.
 
     if (!dropVars.isEmpty()) {
-      final IVariable<?>[] a = dropVars.toArray(new IVariable[dropVars.size()]);
+      final IVariable<?>[] a = dropVars.toArray(new IVariable[0]);
       left =
           applyQueryHints(
               new DropOp(
@@ -3531,7 +3515,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
     final List<NamedSubqueryInclude> includes = optional ? optionalIncludes : requiredIncludes;
 
     // The join variables as an IVariable[].
-    final IVariable<?>[] joinvars2 = joinVars.toArray(new IVariable[joinVars.size()]);
+    final IVariable<?>[] joinvars2 = joinVars.toArray(new IVariable[0]);
 
     // The hash index for the first source.
     final INamedSolutionSetRef firstNamedSolutionSetRef =
@@ -3590,7 +3574,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         list.add(NamedSolutionSetRefUtility.newInstance(ctx.queryId, nsi.getName(), joinvars2));
       }
 
-      namedSolutionSetRefs = list.toArray(new INamedSolutionSetRef[list.size()]);
+      namedSolutionSetRefs = list.toArray(new INamedSolutionSetRef[0]);
     }
 
     /*
@@ -3759,14 +3743,12 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final IValueExpression ve = assignmentNode.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
-
     /*
      * Get the vars this filter needs materialized.
      */
     final ComputedMaterializationRequirement req = assignmentNode.getMaterializationRequirement();
 
-    vars.addAll(req.getVarsToMaterialize());
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>(req.getVarsToMaterialize());
 
     /*
      * Remove the ones we've already done.
@@ -3842,14 +3824,12 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final IValueExpression ve = assignmentNode.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
-
     /*
      * Get the vars this filter needs materialized.
      */
     final ComputedMaterializationRequirement req = assignmentNode.getMaterializationRequirement();
 
-    vars.addAll(req.getVarsToMaterialize());
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>(req.getVarsToMaterialize());
 
     /*
      * Remove the ones we've already done.
@@ -3956,14 +3936,12 @@ public class AST2BOpUtility extends AST2BOpRTO {
     @SuppressWarnings("unchecked")
     final IValueExpression<IV> ve = (IValueExpression<IV>) filter.getValueExpression();
 
-    final Set<IVariable<IV>> vars = new LinkedHashSet<>();
-
     /*
      * Get the variables that this filter needs materialized.
      */
     final ComputedMaterializationRequirement req = filter.getMaterializationRequirement();
 
-    vars.addAll(req.getVarsToMaterialize());
+    final Set<IVariable<IV>> vars = new LinkedHashSet<>(req.getVarsToMaterialize());
 
     /*
      * Remove the ones we've already done.
@@ -4260,8 +4238,8 @@ public class AST2BOpUtility extends AST2BOpRTO {
         final Set<IVariable<?>> nonProjectInVariables =
             ctx.sa.getMaybeIncomingBindings(subgroup, new LinkedHashSet<>());
 
-        for (int i = 0; i < projectInVars.length; i++) {
-          nonProjectInVariables.remove(projectInVars[i]);
+        for (IVariable<?> projectInVar : projectInVars) {
+          nonProjectInVariables.remove(projectInVar);
         }
 
         doneSet.removeAll(nonProjectInVariables);
@@ -4364,7 +4342,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         anns.add(new NV(PipelineOp.Annotations.MAX_PARALLEL, 1));
         anns.add(new NV(SliceOp.Annotations.REORDER_SOLUTIONS, false));
       }
-      op = new JVMDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[anns.size()]));
+      op = new JVMDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[0]));
     } else {
       /*
        * DISTINCT on the native heap.
@@ -4906,7 +4884,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         anns.add(
             new NV(
-                HashJoinAnnotations.JOIN_VARS, joinVars.toArray(new IVariable[joinVars.size()])));
+                HashJoinAnnotations.JOIN_VARS, joinVars.toArray(new IVariable[0])));
       }
     }
 
@@ -5018,10 +4996,9 @@ public class AST2BOpUtility extends AST2BOpRTO {
     {
       final List<IFilter> filters = new LinkedList<>();
 
-      if (Boolean.valueOf(
-          sp.getProperty(
-              StatementPatternNode.Annotations.DISTINCT,
-              StatementPatternNode.Annotations.DEFAULT_DISTINCT))) {
+      if (sp.getProperty(
+          StatementPatternNode.Annotations.DISTINCT,
+          StatementPatternNode.Annotations.DEFAULT_DISTINCT)) {
 
         /*
          * Visit only the distinct values for the first key component.
@@ -5099,7 +5076,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         vars = new BOp[] {s, p, o, c};
       }
 
-      return new SPOPredicate(vars, anns.toArray(new NV[anns.size()]));
+      return new SPOPredicate(vars, anns.toArray(new NV[0]));
     }
   }
 
@@ -5486,16 +5463,12 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
     final Set<IVariable<?>> joinVarsSet = new HashSet<>();
     if (joinVars != null) {
-      for (int i = 0; i < joinVars.length; i++) {
-        joinVarsSet.add(joinVars[i]);
-      }
+      joinVarsSet.addAll(Arrays.asList(joinVars));
     }
 
     final Set<IVariable<?>> projectInVarsSet = new HashSet<>();
     if (projectInVars != null) {
-      for (int i = 0; i < projectInVars.length; i++) {
-        projectInVarsSet.add(projectInVars[i]);
-      }
+      projectInVarsSet.addAll(Arrays.asList(projectInVars));
     }
 
     /*
@@ -5653,7 +5626,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
               BOpEvaluationContext.CONTROLLER));
       anns.add(new NV(JVMDistinctBindingSetsOp.Annotations.SHARED_STATE, true));
 
-      left = new JVMDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[anns.size()]));
+      left = new JVMDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[0]));
 
     } else {
 
@@ -5674,7 +5647,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
       anns.add(
           new NV(IPredicate.Annotations.RELATION_NAME, new String[] {ctx.getLexiconNamespace()}));
 
-      left = new HTreeDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[anns.size()]));
+      left = new HTreeDistinctBindingSetsOp(leftOrEmpty(left), anns.toArray(new NV[0]));
     }
 
     return left;

@@ -306,7 +306,7 @@ public class HTreeNamedSubqueryOp extends PipelineOp
       }
 
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         // The subquery
         IRunningQuery runningSubquery = null;

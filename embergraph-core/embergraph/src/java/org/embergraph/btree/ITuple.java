@@ -38,7 +38,7 @@ import org.embergraph.rawstore.IBlock;
  * @todo consider only the {@link #getKeyStream()} and {@link #getValueStream()} vs the {@link
  *     #getKeyBuffer()} and {@link #getValueBuffer()} methods. do we need both?
  */
-public interface ITuple<E extends Object> {
+public interface ITuple<E> {
 
   /*
    * The {@link IRangeQuery} flags

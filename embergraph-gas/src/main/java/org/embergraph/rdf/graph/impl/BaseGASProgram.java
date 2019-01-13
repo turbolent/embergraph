@@ -164,7 +164,6 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
             || ctx.getGraphAccessor().getEdgeCount(ctx, r, EdgesEnum.OutEdges) != 0) {
           filtered.add(r);
         } else {
-          continue;
         }
       }
       final Resource[] filteredFrontier = new Resource[filtered.size()];

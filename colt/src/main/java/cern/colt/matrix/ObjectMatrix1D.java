@@ -425,7 +425,6 @@ public abstract class ObjectMatrix1D extends AbstractMatrix1D {
       setQuick(i, other.getQuick(i));
       other.setQuick(i, tmp);
     }
-    return;
   }
   /*
    * Constructs and returns a 1-dimensional array containing the cell values. The values are copied.

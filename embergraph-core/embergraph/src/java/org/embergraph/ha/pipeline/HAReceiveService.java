@@ -395,7 +395,6 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
           } catch (BindException ex) {
             log.warn("Sleeping to retry: " + ex);
             Thread.sleep(100 /* ms */);
-            continue;
           }
         }
         if (!didBind) {
@@ -451,7 +450,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
    * @throws InterruptedException
    */
   private void runNoBlock(final ServerSocketChannel server)
-      throws IOException, InterruptedException, ExecutionException {
+      throws IOException, InterruptedException {
 
     try {
 

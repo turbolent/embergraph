@@ -45,7 +45,7 @@ public class DropIndexTask extends AbstractTask<Boolean> {
    *     the index did not exist at the time that this task was executed.
    */
   @Override
-  public Boolean doTask() throws Exception {
+  public Boolean doTask() {
 
     final String name = getOnlyResource();
 

@@ -74,7 +74,7 @@ public class TestQueryEngine_Slice extends TestCase2 {
   private QueryEngine queryEngine;
 
   @Override
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -84,7 +84,7 @@ public class TestQueryEngine_Slice extends TestCase2 {
   }
 
   @Override
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();

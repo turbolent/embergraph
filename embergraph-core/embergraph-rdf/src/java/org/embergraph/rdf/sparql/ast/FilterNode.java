@@ -66,12 +66,6 @@ public class FilterNode extends GroupMemberValueExpressionNodeBase
   @Override
   public String toString(final int indent) {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("\n");
-    sb.append(indent(indent));
-    sb.append("FILTER( ").append(getValueExpressionNode().toString(indent + 1)).append(" )");
-
     //        if (getQueryHints() != null) {
     //            sb.append("\n");
     //            sb.append(indent(indent));
@@ -80,7 +74,10 @@ public class FilterNode extends GroupMemberValueExpressionNodeBase
     //            sb.append(getQueryHints().toString());
     //        }
 
-    return sb.toString();
+    String sb = "\n"
+        + indent(indent)
+        + "FILTER( " + getValueExpressionNode().toString(indent + 1) + " )";
+    return sb;
   }
 
   @Override

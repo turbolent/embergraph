@@ -157,7 +157,7 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
          * @see https ://sourceforge.net/projects/bigdata/forums/forum
          *     /676946/topic/6092294/index/page/1
          */
-        sb.append("... out of " + arity() + " elements\n");
+        sb.append("... out of ").append(arity()).append(" elements\n");
 
         // Break out of the loop.
         break;

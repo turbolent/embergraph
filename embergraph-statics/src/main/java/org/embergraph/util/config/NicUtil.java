@@ -134,7 +134,7 @@ public class NicUtil {
     if (name.equals("all")) {
       Enumeration en = NetworkInterface.getNetworkInterfaces();
       List nicList = (en != null) ? Collections.list(en) : Collections.EMPTY_LIST;
-      nics = (NetworkInterface[]) (nicList.toArray(new NetworkInterface[nicList.size()]));
+      nics = (NetworkInterface[]) (nicList.toArray(new NetworkInterface[0]));
     } else {
       nics = new NetworkInterface[1];
       nics[0] = NetworkInterface.getByName(name);
@@ -225,8 +225,8 @@ public class NicUtil {
       List<InterfaceAddress> interfaceAddrs = nic.getInterfaceAddresses();
       if (interfaceAddrs.size() == 0) return null;
       int inet4AddrIndex = 0;
-      for (int i = 0; i < interfaceAddrs.size(); i++) {
-        InetAddress inetAddr = (interfaceAddrs.get(i)).getAddress();
+      for (InterfaceAddress interfaceAddr : interfaceAddrs) {
+        InetAddress inetAddr = interfaceAddr.getAddress();
         if (inetAddr instanceof Inet4Address) {
           if (index == inet4AddrIndex) {
             Inet4Address inet4Addr = (Inet4Address) inetAddr;
@@ -301,7 +301,7 @@ public class NicUtil {
         if (i == 0) {
           strBuf.append(subStr);
         } else {
-          strBuf.append(":" + subStr);
+          strBuf.append(":").append(subStr);
         }
       }
       macAddr = strBuf.toString();
@@ -520,7 +520,7 @@ public class NicUtil {
    *     is <i>reachable</i>.
    */
   public static String getDefaultIpv4Address(final boolean loopbackOk)
-      throws SocketException, IOException {
+      throws IOException {
     /*
      * Note: I've commented out the inetAddr.isReachable() lines. Their
      * return value was not being used, the method call was imposing

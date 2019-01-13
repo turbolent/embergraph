@@ -634,35 +634,35 @@ public class LUDecompositionQuick implements java.io.Serializable {
     try {
       buf.append(this.isNonsingular());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\ndet = ");
     try {
       buf.append(this.det());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\npivot = ");
     try {
       buf.append(new cern.colt.list.IntArrayList(this.getPivot()));
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nL = ");
     try {
       buf.append(this.getL());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
       buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\ninverse(A) = ");
@@ -671,7 +671,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
       this.solve(identity);
       buf.append(identity);
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     return buf.toString();

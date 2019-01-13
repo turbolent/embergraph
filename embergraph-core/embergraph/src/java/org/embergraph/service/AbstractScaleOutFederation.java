@@ -420,7 +420,6 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
       // @todo the way this is written can sleep longer than the remaining time
       Thread.sleep(interval);
 
-      continue;
     }
 
     if (log.isInfoEnabled())
@@ -516,7 +515,6 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
         nok++;
       } catch (InterruptedException ex) {
         log.warn(ex.getLocalizedMessage());
-        continue;
       } catch (ExecutionException ex) {
         log.error(ex.getLocalizedMessage(), ex);
       }

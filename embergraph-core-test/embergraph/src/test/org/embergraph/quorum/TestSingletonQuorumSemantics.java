@@ -798,9 +798,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
           //        		new long[] {0, 2, 2}, // token bumped more than one
         };
 
-    for (int i = 0; i < tokens.length; i++) {
-      final long[] tst = tokens[i];
-
+    for (final long[] tst : tokens) {
       // token combinations with isJoined == true
       final QuorumTokenTransitions qtjoined =
           new QuorumTokenTransitions(

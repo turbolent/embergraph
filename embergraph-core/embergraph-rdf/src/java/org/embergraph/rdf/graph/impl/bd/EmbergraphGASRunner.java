@@ -343,9 +343,9 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
      */
     @Override
     public void report(final StringBuilder sb) {
-      sb.append(", edges(kb)=" + nedges);
-      sb.append(", namespace=" + namespace);
-      sb.append(", bufferMode=" + jnl.getBufferStrategy().getBufferMode());
+      sb.append(", edges(kb)=").append(nedges);
+      sb.append(", namespace=").append(namespace);
+      sb.append(", bufferMode=").append(jnl.getBufferStrategy().getBufferMode());
     }
   }
 
@@ -433,7 +433,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
   }
 
   @Override
-  public void loadFiles() throws IOException {
+  public void loadFiles() {
 
     final EmbergraphOptionData opt = getOptionData();
 

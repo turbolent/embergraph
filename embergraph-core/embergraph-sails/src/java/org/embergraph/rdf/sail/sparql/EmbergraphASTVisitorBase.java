@@ -145,7 +145,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
    * nodes and then flags those as anonymous variables in this step.
    */
   @Override
-  public final VarNode visit(final ASTVar node, final Object data) throws VisitorException {
+  public final VarNode visit(final ASTVar node, final Object data) {
 
     final VarNode var = new VarNode(node.getName());
 
@@ -198,7 +198,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
   }
 
   @Override
-  public final String visit(ASTString node, Object data) throws VisitorException {
+  public final String visit(ASTString node, Object data) {
 
     return node.getValue();
   }

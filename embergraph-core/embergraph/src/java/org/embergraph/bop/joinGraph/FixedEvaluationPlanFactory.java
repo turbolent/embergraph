@@ -54,9 +54,11 @@ public class FixedEvaluationPlanFactory implements IEvaluationPlanFactory {
 
       int nfound = 0;
 
-      for (int j = 0; j < order.length; j++) {
+      for (int i1 : order) {
 
-        if (order[j] == i) nfound++;
+        if (i1 == i) {
+          nfound++;
+        }
       }
 
       if (nfound == 0)

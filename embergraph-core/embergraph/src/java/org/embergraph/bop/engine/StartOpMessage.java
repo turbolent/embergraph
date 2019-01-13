@@ -52,14 +52,13 @@ public class StartOpMessage implements Externalizable, IStartOpMessage {
   }
 
   public String toString() {
-    final StringBuilder sb = new StringBuilder(getClass().getName());
-    sb.append("{queryId=" + queryId);
-    sb.append(",bopId=" + bopId);
-    sb.append(",partitionId=" + partitionId);
-    sb.append(",serviceId=" + serviceId);
-    sb.append(",nchunks=" + messageReadyCount);
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getName() + "{queryId=" + queryId
+        + ",bopId=" + bopId
+        + ",partitionId=" + partitionId
+        + ",serviceId=" + serviceId
+        + ",nchunks=" + messageReadyCount
+        + "}";
+    return sb;
   }
 
   @Override
@@ -100,7 +99,7 @@ public class StartOpMessage implements Externalizable, IStartOpMessage {
   }
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
     queryId = new UUID(in.readLong() /* MSB */, in.readLong() /* LSB */);
     serviceId = new UUID(in.readLong() /* MSB */, in.readLong() /* LSB */);
     bopId = in.readInt();

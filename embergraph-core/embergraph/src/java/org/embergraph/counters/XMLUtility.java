@@ -466,12 +466,12 @@ public class XMLUtility {
       }
     }
 
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
 
       cdata.append(ch, start, length);
     }
 
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
       try {
 

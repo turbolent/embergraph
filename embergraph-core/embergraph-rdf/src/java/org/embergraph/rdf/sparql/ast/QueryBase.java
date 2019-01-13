@@ -390,13 +390,13 @@ public abstract class QueryBase extends QueryNodeBase
     if (getProperty(Annotations.INCLUDE_INFERRED) != null) {
       sb.append("\n");
       sb.append(s);
-      sb.append("includeInferred=" + getIncludeInferred());
+      sb.append("includeInferred=").append(getIncludeInferred());
     }
 
     if (getProperty(Annotations.TIMEOUT) != null) {
       sb.append("\n");
       sb.append(s);
-      sb.append("timeout=" + getTimeout());
+      sb.append("timeout=").append(getTimeout());
     }
 
     if (construct != null && !construct.isEmpty()) {

@@ -47,7 +47,7 @@ public class TestEventParser extends TestCase2 {
 
   private static class MockEventReceivingService implements IEventReceivingService {
 
-    public void notifyEvent(Event e) throws IOException {}
+    public void notifyEvent(Event e) {}
   }
 
   public void test_parser() throws ClassNotFoundException {

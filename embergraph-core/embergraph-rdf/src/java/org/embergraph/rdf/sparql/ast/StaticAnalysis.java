@@ -2317,9 +2317,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   @SuppressWarnings("rawtypes")
   public Set<IVariable<?>> getVarsInBindingSet(final List<IBindingSet> bss) {
     Set<IVariable<?>> bssVars = new HashSet<>();
-    for (int i = 0; i < bss.size(); i++) {
-
-      final IBindingSet bs = bss.get(i);
+    for (final IBindingSet bs : bss) {
 
       final Iterator<IVariable> bsVars = bs.vars();
 

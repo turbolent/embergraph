@@ -131,18 +131,11 @@ public class Solution<E> implements ISolution<E>, Serializable {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("Solution");
-
-    sb.append("{ element=" + e);
-
-    sb.append(", rule=" + rule);
-
-    sb.append(", bindingSet=" + bindingSet);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = "Solution"
+        + "{ element=" + e
+        + ", rule=" + rule
+        + ", bindingSet=" + bindingSet
+        + "}";
+    return sb;
   }
 }

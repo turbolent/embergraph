@@ -374,7 +374,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
 
     @Override
     IBindingProducerNode[] getAncestry() {
-      return ancestry.toArray(new IBindingProducerNode[ancestry.size()]);
+      return ancestry.toArray(new IBindingProducerNode[0]);
     }
 
     @Override
@@ -527,7 +527,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           new StaticOptimizer(
               queryRoot,
               ctx,
-              ancestry.toArray(new IBindingProducerNode[ancestry.size()]),
+              ancestry.toArray(new IBindingProducerNode[0]),
               required,
               optimistic);
 

@@ -154,7 +154,7 @@ public class HTreeDistinctBindingSetsOp extends PipelineOp implements ISingleThr
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 

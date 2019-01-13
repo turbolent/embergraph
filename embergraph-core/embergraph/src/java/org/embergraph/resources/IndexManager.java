@@ -1333,7 +1333,8 @@ public abstract class IndexManager extends StoreManager {
       return "No journal: timestamp=" + timestamp;
     }
 
-    sb.append("timestamp=" + timestamp + "\njournal=" + journal.getResourceMetadata());
+    sb.append("timestamp=").append(timestamp).append("\njournal=")
+        .append(journal.getResourceMetadata());
 
     //        // historical view of Name2Addr as of that timestamp.
     //        final ITupleIterator<?> itr = journal.getName2Addr(timestamp)
@@ -1376,7 +1377,8 @@ public abstract class IndexManager extends StoreManager {
       // index partition metadata
       final LocalPartitionMetadata pmd = indexMetadata.getPartitionMetadata();
 
-      sb.append("\nname=" + name + ", checkpoint=" + btree.getCheckpoint() + ", pmd=" + pmd);
+      sb.append("\nname=").append(name).append(", checkpoint=").append(btree.getCheckpoint())
+          .append(", pmd=").append(pmd);
     }
 
     return sb.toString();

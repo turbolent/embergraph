@@ -37,7 +37,6 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.util.DumpLexicon;
@@ -288,33 +287,33 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
       final boolean storeBlankNodes = store.getLexiconRelation().isStoreBlankNodes();
 
-      for (int i = 0; i < terms.length; i++) {
+      for (EmbergraphValue term : terms) {
 
         // verify set by side-effect on batch insert.
-        assertNotSame(NULL, terms[i].getIV());
+        assertNotSame(NULL, term.getIV());
 
         // save & clear
-        final IV termId = terms[i].getIV();
-        terms[i].clearInternalValue();
+        final IV termId = term.getIV();
+        term.clearInternalValue();
 
-        if (storeBlankNodes || !(terms[i] instanceof BNode)) {
+        if (storeBlankNodes || !(term instanceof BNode)) {
 
           // check the forward mapping (term -> id)
-          assertEquals("forward mapping", termId, store.getIV(terms[i]));
+          assertEquals("forward mapping", termId, store.getIV(term));
 
           // verify set by side effect.
-          assertEquals(termId, terms[i].getIV());
+          assertEquals(termId, term.getIV());
         }
 
         // check the reverse mapping (id -> term)
-        if (terms[i] instanceof BNode) {
+        if (term instanceof BNode) {
 
           // the bnode ID is not preserved.
           assertTrue(store.getTerm(termId) instanceof BNode);
 
         } else {
 
-          assertEquals("reverse mapping", terms[i], store.getTerm(termId));
+          assertEquals("reverse mapping", term, store.getTerm(termId));
         }
       }
 

@@ -204,8 +204,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
   int countChildRefs(AbstractPage pge) {
     int count = 0;
-    for (int i = 0; i < childRefs.length; i++) {
-      if (childRefs[i] == pge.self) {
+    for (Reference<AbstractPage> childRef : childRefs) {
+      if (childRef == pge.self) {
         count++;
       }
     }
@@ -1105,17 +1105,17 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     // sb.append(getClass().getName());
     sb.append(super.toString());
 
-    sb.append("{ isDirty=" + isDirty());
+    sb.append("{ isDirty=").append(isDirty());
 
-    sb.append(", isDeleted=" + isDeleted());
+    sb.append(", isDeleted=").append(isDeleted());
 
-    sb.append(", addr=" + identity);
+    sb.append(", addr=").append(identity);
 
     final DirectoryPage p = (parent == null ? null : parent.get());
 
-    sb.append(", parent=" + (p == null ? "N/A" : p.toShortString()));
+    sb.append(", parent=").append(p == null ? "N/A" : p.toShortString());
 
-    sb.append(", isRoot=" + (htree.root == this));
+    sb.append(", isRoot=").append(htree.root == this);
 
     if (data == null) {
 
@@ -1125,9 +1125,9 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
       return sb.toString();
     }
-    sb.append(", globalDepth=" + getGlobalDepth());
-    sb.append(", nbuddies=" + (1 << htree.addressBits) / (1 << globalDepth));
-    sb.append(", slotsPerBuddy=" + (1 << globalDepth));
+    sb.append(", globalDepth=").append(getGlobalDepth());
+    sb.append(", nbuddies=").append((1 << htree.addressBits) / (1 << globalDepth));
+    sb.append(", slotsPerBuddy=").append(1 << globalDepth);
     // sb.append(", minKeys=" + minKeys());
 
     // sb.append(", maxKeys=" + maxKeys());
@@ -1522,7 +1522,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
     final int nchildren = data.getChildCount();
 
-    sb.append(", nchildren=" + nchildren);
+    sb.append(", nchildren=").append(nchildren);
 
     // sb.append(", spannedTupleCount=" + data.getSpannedTupleCount());
 
@@ -1560,12 +1560,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
     if (data.hasVersionTimestamps()) {
 
-      sb.append(
-          ",\nversionTimestamps={min="
-              + data.getMinimumVersionTimestamp()
-              + ",max="
-              + data.getMaximumVersionTimestamp()
-              + "}");
+      sb.append(",\nversionTimestamps={min=").append(data.getMinimumVersionTimestamp())
+          .append(",max=").append(data.getMaximumVersionTimestamp()).append("}");
     }
 
     return sb;
@@ -1574,7 +1570,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
   @Override
   public void PP(final StringBuilder sb, final boolean showBinary) {
 
-    sb.append(PPID() + " [" + globalDepth + "] " + indent(getLevel()));
+    sb.append(PPID()).append(" [").append(globalDepth).append("] ").append(indent(getLevel()));
 
     sb.append("("); // start of address map.
 

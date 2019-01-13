@@ -175,14 +175,13 @@ public class MockRunningQuery implements IRunningQuery {
   }
 
   @Override
-  public Void get() throws InterruptedException, ExecutionException {
+  public Void get() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public Void get(long timeout, TimeUnit unit)
-      throws InterruptedException, ExecutionException, TimeoutException {
+  public Void get(long timeout, TimeUnit unit) {
     // TODO Auto-generated method stub
     return null;
   }

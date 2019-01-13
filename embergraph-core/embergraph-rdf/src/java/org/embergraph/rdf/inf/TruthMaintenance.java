@@ -258,9 +258,9 @@ public class TruthMaintenance {
 
         final ISPO[] chunk = itr.nextChunk();
 
-        for (int i = 0; i < chunk.length; i++) {
+        for (ISPO ispo : chunk) {
 
-          final SPO spo = (SPO) chunk[i];
+          final SPO spo = (SPO) ispo;
 
           // Lookup the statement in the database.
           final ISPO tmp = database.getStatement(spo.s, spo.p, spo.o);
@@ -666,9 +666,9 @@ public class TruthMaintenance {
 
         final ISPO[] chunk = itr.nextChunk();
 
-        for (int i = 0; i < chunk.length; i++) {
+        for (ISPO ispo : chunk) {
 
-          final SPO spo = (SPO) chunk[i];
+          final SPO spo = (SPO) ispo;
 
           assert spo.isFullyBound();
 
@@ -679,7 +679,9 @@ public class TruthMaintenance {
             /*
              * Ignore.
              */
-            if (INFO) log.info("Ignoring axiom in the tempStore: " + spo);
+            if (INFO) {
+              log.info("Ignoring axiom in the tempStore: " + spo);
+            }
 
           } else if (depth > 0 && spo.getStatementType() == StatementEnum.Explicit) {
 
@@ -713,11 +715,13 @@ public class TruthMaintenance {
 
             downgradeBuffer.add(tmp, null);
 
-            if (INFO) log.info("Downgrading to axiom: " + spo.toString(database));
+            if (INFO) {
+              log.info("Downgrading to axiom: " + spo.toString(database));
+            }
 
           } else if (depth == 0
               && Justification.isGrounded(
-                  inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
+              inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
 
             /*
              * Add a variant of the statement that is marked as
@@ -740,17 +744,21 @@ public class TruthMaintenance {
 
             downgradeBuffer.add(tmp, null);
 
-            if (INFO) log.info("Downgrading to inferred: " + spo.toString(database));
+            if (INFO) {
+              log.info("Downgrading to inferred: " + spo.toString(database));
+            }
 
           } else if (depth > 0
               && Justification.isGrounded(
-                  inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
+              inferenceEngine, tempStore, database, spo, testHead, testFocusStore)) {
 
             /*
              * Ignore.
              */
 
-            if (INFO) log.info(spo.toString(database) + " is grounded");
+            if (INFO) {
+              log.info(spo.toString(database) + " is grounded");
+            }
 
           } else if (!database.hasStatement(spo.s, spo.p, spo.o)) {
 
@@ -777,7 +785,9 @@ public class TruthMaintenance {
 
             retractionBuffer.add(spo);
 
-            if (INFO) log.info("Retracting: " + spo.toString(database));
+            if (INFO) {
+              log.info("Retracting: " + spo.toString(database));
+            }
 
             /*
              * The ungrounded statement will be added to the

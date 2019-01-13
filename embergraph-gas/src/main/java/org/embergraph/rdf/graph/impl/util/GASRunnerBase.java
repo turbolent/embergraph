@@ -495,19 +495,19 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       // Total over all sampled vertices.
       final StringBuilder sb = new StringBuilder();
       sb.append("TOTAL");
-      sb.append(": analytic=" + gasProgram.getClass().getSimpleName());
-      sb.append(", nseed=" + opt.seed);
-      sb.append(", nruns=" + opt.nruns); // #runs (per sample if sampling)
-      sb.append(", nsamples=" + opt.nsamples); // #desired samples
-      sb.append(", nsampled=" + (sampled == null ? "N/A" : sampled.length)); // #actually sampled
-      sb.append(", distSize=" + (dist == null ? "N/A" : dist.size())); // #available for sampling.
-      sb.append(", nunconnected=" + nunconnected); // #unconnected vertices.
-      sb.append(", nthreads=" + opt.nthreads);
-      sb.append(", scheduler=" + gasState.getScheduler().getClass().getSimpleName());
-      sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
+      sb.append(": analytic=").append(gasProgram.getClass().getSimpleName());
+      sb.append(", nseed=").append(opt.seed);
+      sb.append(", nruns=").append(opt.nruns); // #runs (per sample if sampling)
+      sb.append(", nsamples=").append(opt.nsamples); // #desired samples
+      sb.append(", nsampled=").append(sampled == null ? "N/A" : sampled.length); // #actually sampled
+      sb.append(", distSize=").append(dist == null ? "N/A" : dist.size()); // #available for sampling.
+      sb.append(", nunconnected=").append(nunconnected); // #unconnected vertices.
+      sb.append(", nthreads=").append(opt.nthreads);
+      sb.append(", scheduler=").append(gasState.getScheduler().getClass().getSimpleName());
+      sb.append(", gasEngine=").append(gasEngine.getClass().getSimpleName());
       opt.report(sb); // extension hook.
       // performance results.
-      sb.append(", stats(total)=" + total);
+      sb.append(", stats(total)=").append(total);
       System.out.println(sb);
 
       return total;

@@ -323,7 +323,7 @@ public class EmbergraphSailHelper {
       // set the namespace (primary key).
       map.put(RelationSchema.NAMESPACE, namespace);
 
-      final Enumeration<? extends Object> e = properties.propertyNames();
+      final Enumeration<?> e = properties.propertyNames();
 
       while (e.hasMoreElements()) {
 

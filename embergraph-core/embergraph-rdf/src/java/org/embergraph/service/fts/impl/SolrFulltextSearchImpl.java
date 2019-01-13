@@ -85,9 +85,9 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
     final String searchParams = query.getParams();
     if (searchParams != null && !searchParams.isEmpty()) {
       final String[] params = searchParams.split("&");
-      for (int i = 0; i < params.length; i++) {
-        if (params[i] != null) {
-          String[] kv = params[i].split("=");
+      for (String param : params) {
+        if (param != null) {
+          String[] kv = param.split("=");
           if (kv.length == 2 && kv[0] != null && !(kv[0].isEmpty())) {
             if (!(kv[0].equals("wt"))) {
               try {
@@ -97,7 +97,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
                 if (log.isInfoEnabled()) {
                   log.info(
                       "Solr search param: '"
-                          + params[i]
+                          + param
                           + "'"
                           + "' can't be URL decoded. Will be ignored...");
                 }
@@ -105,7 +105,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
             }
           } else {
             if (log.isInfoEnabled()) {
-              log.info("Invalid Solr search param: '" + params[i] + "'");
+              log.info("Invalid Solr search param: '" + param + "'");
               log.info("Will be ignored...");
             }
           }
@@ -205,7 +205,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
       }
     }
 
-    return searchHits.toArray(new FulltextSearchHit[searchHits.size()]);
+    return searchHits.toArray(new FulltextSearchHit[0]);
   }
 
   /*

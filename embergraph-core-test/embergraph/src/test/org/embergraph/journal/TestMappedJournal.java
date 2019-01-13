@@ -112,7 +112,7 @@ public class TestMappedJournal extends AbstractJournalTestCase {
    *
    * @throws IOException
    */
-  public void test_create_mapped01() throws IOException {
+  public void test_create_mapped01() {
 
     final Properties properties = getProperties();
 

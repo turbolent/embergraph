@@ -320,15 +320,13 @@ public abstract class DataService extends AbstractService
     getFederation()
         .getExecutorService()
         .execute(
-            new Runnable() {
-              public void run() {
-                final DataService dataService = DataService.this;
-                dataService.getResourceManager().awaitRunning();
-                final FederatedQueryEngine queryEngine = new FederatedQueryEngine(dataService);
-                queryEngine.init();
-                dataService.queryEngine.set(queryEngine);
-                if (log.isInfoEnabled()) log.info("Setup query engine.");
-              }
+            () -> {
+              final DataService dataService = DataService.this;
+              dataService.getResourceManager().awaitRunning();
+              final FederatedQueryEngine queryEngine = new FederatedQueryEngine(dataService);
+              queryEngine.init();
+              dataService.queryEngine.set(queryEngine);
+              if (log.isInfoEnabled()) log.info("Setup query engine.");
             });
 
     return this;
@@ -732,8 +730,7 @@ public abstract class DataService extends AbstractService
    * @see JournalTransactionService#commitImpl(long)}.
    */
   @Override
-  public long singlePhaseCommit(final long tx)
-      throws ExecutionException, InterruptedException, IOException {
+  public long singlePhaseCommit(final long tx) {
 
     setupLoggingContext();
 
@@ -898,7 +895,7 @@ public abstract class DataService extends AbstractService
 
   @Override
   public void prepare(final long tx, final long revisionTime)
-      throws ExecutionException, InterruptedException, IOException {
+      throws ExecutionException, InterruptedException {
 
     setupLoggingContext();
 
@@ -1121,7 +1118,7 @@ public abstract class DataService extends AbstractService
   }
 
   @Override
-  public void abort(final long tx) throws IOException {
+  public void abort(final long tx) {
 
     setupLoggingContext();
 
@@ -1199,7 +1196,7 @@ public abstract class DataService extends AbstractService
 
   @Override
   public void registerIndex(final String name, final IndexMetadata metadata)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -1219,7 +1216,7 @@ public abstract class DataService extends AbstractService
 
   @Override
   public void dropIndex(final String name)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -1237,7 +1234,7 @@ public abstract class DataService extends AbstractService
 
   @Override
   public IndexMetadata getIndexMetadata(final String name, final long timestamp)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -1271,7 +1268,7 @@ public abstract class DataService extends AbstractService
     }
 
     @Override
-    protected IndexMetadata doTask() throws Exception {
+    protected IndexMetadata doTask() {
 
       return getIndex(getOnlyResource()).getIndexMetadata();
     }
@@ -1335,7 +1332,7 @@ public abstract class DataService extends AbstractService
    *     itself would be shutdown.
    */
   @Override
-  public Future<? extends Object> submit(final Callable<? extends Object> task) {
+  public Future<?> submit(final Callable<?> task) {
 
     setupLoggingContext();
 
@@ -1552,7 +1549,7 @@ public abstract class DataService extends AbstractService
     }
 
     @Override
-    public ResultSet doTask() throws Exception {
+    public ResultSet doTask() {
 
       final IIndex ndx = getIndex(getOnlyResource());
 
@@ -1594,7 +1591,7 @@ public abstract class DataService extends AbstractService
 
   @Override
   public void forceOverflow(final boolean immediate, final boolean compactingMerge)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -1691,7 +1688,7 @@ public abstract class DataService extends AbstractService
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       //            final WriteExecutorService writeService = concurrencyManager
       //                    .getWriteService();
@@ -1715,7 +1712,7 @@ public abstract class DataService extends AbstractService
   }
 
   @Override
-  public long getAsynchronousOverflowCounter() throws IOException {
+  public long getAsynchronousOverflowCounter() {
 
     setupLoggingContext();
 
@@ -1735,7 +1732,7 @@ public abstract class DataService extends AbstractService
   }
 
   @Override
-  public boolean isOverflowActive() throws IOException {
+  public boolean isOverflowActive() {
 
     setupLoggingContext();
 

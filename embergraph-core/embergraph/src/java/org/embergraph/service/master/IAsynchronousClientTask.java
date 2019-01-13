@@ -61,7 +61,7 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
    * @throws RemoteException if there is an RMI problem.
    * @throws InterruptedException if the client thread accepting the request is interrupted.
    */
-  void accept(V[] chunk) throws RemoteException, InterruptedException;
+  void accept(V[] chunk) throws RemoteException;
 
   /*
    * Signal that no new chunks will be tasked to client. The client should flush its asynchronous
@@ -72,7 +72,7 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
    * @throws RemoteException if there is an RMI problem.
    * @throws InterruptedException if the client thread accepting the request is interrupted.
    */
-  void close() throws RemoteException, InterruptedException;
+  void close() throws RemoteException;
 
   /*
    * Return a proxy for the future of this task (this allows us to have both the proxy for the task

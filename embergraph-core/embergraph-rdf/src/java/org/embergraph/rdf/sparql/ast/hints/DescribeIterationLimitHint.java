@@ -53,7 +53,6 @@ final class DescribeIterationLimitHint extends AbstractIntQueryHint {
       // _setQueryHint(context, scope, op, getName(), value);
       ((ProjectionNode) op).setDescribeIterationLimit(value);
 
-      return;
     }
 
     // throw new QueryHintException(scope, op, getName(), value);

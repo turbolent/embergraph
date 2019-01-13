@@ -72,7 +72,7 @@ public class TestJournalShutdown extends TestCase2 {
         for (Thread t : threads) {
           if (t == null) continue;
           if (nactive > 0) info.append(',');
-          info.append("[" + t.getName() + "]");
+          info.append("[").append(t.getName()).append("]");
           nactive++;
         }
 
@@ -340,8 +340,8 @@ public class TestJournalShutdown extends TestCase2 {
        * Ensure that all journals are destroyed by the end of the test.
        */
       int destroyed = 0;
-      for (int i = 0; i < refs.length; i++) {
-        final Journal jnl = refs[i] == null ? null : refs[i].get();
+      for (WeakReference<Journal> ref : refs) {
+        final Journal jnl = ref == null ? null : ref.get();
         if (jnl != null) {
           destroyed++;
           jnl.destroy();
@@ -366,7 +366,7 @@ public class TestJournalShutdown extends TestCase2 {
     }
 
     @Override
-    protected Void doTask() throws Exception {
+    protected Void doTask() {
       return null;
     }
   }

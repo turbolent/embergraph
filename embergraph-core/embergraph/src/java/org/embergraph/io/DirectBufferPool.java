@@ -728,8 +728,6 @@ public class DirectBufferPool {
        * since they hold the lock.
        */
 
-      return;
-
     } catch (OutOfMemoryError err) {
 
       /*
@@ -768,7 +766,6 @@ public class DirectBufferPool {
 
     assert !pool.isEmpty();
 
-    return;
   }
 
   /*

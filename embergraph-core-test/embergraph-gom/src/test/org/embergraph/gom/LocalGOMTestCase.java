@@ -119,7 +119,7 @@ public class LocalGOMTestCase extends TestCase implements IGOMProxy {
             "http://localhost" + EmbergraphStatics.getContextPath() + "/sparql", m_repo);
   }
 
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
     //        try {
     //            final long start = System.currentTimeMillis();
     // m_repo.close();

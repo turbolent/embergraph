@@ -30,8 +30,6 @@ import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.model.EmbergraphBNode;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
@@ -70,12 +68,10 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
 
     final XSDStringExtension<EmbergraphValue> ext =
         new XSDStringExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(final URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             },
             maxInlineStringLength);
 

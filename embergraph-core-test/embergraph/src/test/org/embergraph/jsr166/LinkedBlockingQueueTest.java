@@ -574,16 +574,20 @@ public class LinkedBlockingQueueTest extends JSR166TestCase {
   public void testToArray() {
     LinkedBlockingQueue q = populatedQueue(SIZE);
     Object[] o = q.toArray();
-    for (int i = 0; i < o.length; i++) assertSame(o[i], q.poll());
+    for (Object o1 : o) {
+      assertSame(o1, q.poll());
+    }
   }
 
   /** toArray(a) contains all elements in FIFO order */
-  public void testToArray2() throws InterruptedException {
+  public void testToArray2() {
     LinkedBlockingQueue<Integer> q = populatedQueue(SIZE);
     Integer[] ints = new Integer[SIZE];
     Integer[] array = q.toArray(ints);
     assertSame(ints, array);
-    for (int i = 0; i < ints.length; i++) assertSame(ints[i], q.poll());
+    for (Integer anInt : ints) {
+      assertSame(anInt, q.poll());
+    }
   }
 
   /** toArray(null) throws NullPointerException */
@@ -640,8 +644,8 @@ public class LinkedBlockingQueueTest extends JSR166TestCase {
     q.add(three);
     assertEquals(0, q.remainingCapacity());
     int k = 0;
-    for (Iterator it = q.iterator(); it.hasNext(); ) {
-      assertEquals(++k, it.next());
+    for (Object o : q) {
+      assertEquals(++k, o);
     }
     assertEquals(3, k);
   }
@@ -652,9 +656,8 @@ public class LinkedBlockingQueueTest extends JSR166TestCase {
     q.add(one);
     q.add(two);
     q.add(three);
-    for (Iterator it = q.iterator(); it.hasNext(); ) {
+    for (Object o : q) {
       q.remove();
-      it.next();
     }
     assertEquals(0, q.size());
   }

@@ -168,10 +168,10 @@ public class PrefixDeclProcessor {
       sb.append("PREFIX");
       final String prefix = entry.getKey();
       if (prefix != null) {
-        sb.append(" " + prefix);
+        sb.append(" ").append(prefix);
       }
       sb.append(":");
-      sb.append(" <" + entry.getValue() + ">");
+      sb.append(" <").append(entry.getValue()).append(">");
     }
     return sb.toString();
   }

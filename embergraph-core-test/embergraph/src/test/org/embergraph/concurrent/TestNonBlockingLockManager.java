@@ -68,7 +68,7 @@ public class TestNonBlockingLockManager extends TestCase {
    */
   public static class Wait10ResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       //            if (INFO)
       //                log.info("Executing: "+this);
@@ -104,7 +104,7 @@ public class TestNonBlockingLockManager extends TestCase {
    */
   static class DeathResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       if (DEBUG) log.debug("Arrgh!");
 
@@ -148,7 +148,7 @@ public class TestNonBlockingLockManager extends TestCase {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_shutdownNow() throws InterruptedException, ExecutionException {
+  public void test_shutdownNow() {
 
     final NonBlockingLockManager<String> service =
         new NonBlockingLockManager<>(
@@ -176,7 +176,7 @@ public class TestNonBlockingLockManager extends TestCase {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_shutdown() throws InterruptedException, ExecutionException {
+  public void test_shutdown() {
 
     final NonBlockingLockManager<String> service =
         new NonBlockingLockManager<>(
@@ -254,11 +254,7 @@ public class TestNonBlockingLockManager extends TestCase {
       final Future<String> f =
           service.submit(
               new String[0],
-              new Callable<String>() {
-                public String call() throws Exception {
-                  return expected;
-                }
-              });
+              () -> expected);
 
       assertEquals(expected, f.get());
 
@@ -293,11 +289,7 @@ public class TestNonBlockingLockManager extends TestCase {
       final Future<String> f =
           service.submit(
               new String[] {"test"},
-              new Callable<String>() {
-                public String call() throws Exception {
-                  return expected;
-                }
-              });
+              () -> expected);
 
       assertEquals(expected, f.get());
 

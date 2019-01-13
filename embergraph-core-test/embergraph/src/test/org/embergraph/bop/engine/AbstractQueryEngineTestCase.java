@@ -115,13 +115,15 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
       while (itr.hasNext()) {
         final IBindingSet[] e = itr.next();
         if (log.isInfoEnabled()) log.info(n + " : chunkSize=" + e.length);
-        for (int i = 0; i < e.length; i++) {
-          if (log.isInfoEnabled()) log.info(n + " : " + e[i]);
-          if (n >= expected.length) {
-            fail("Willing to deliver too many solutions: n=" + n + " : " + e[i]);
+        for (IBindingSet iBindingSet : e) {
+          if (log.isInfoEnabled()) {
+            log.info(n + " : " + iBindingSet);
           }
-          if (!expected[n].equals(e[i])) {
-            fail("n=" + n + ", expected=" + expected[n] + ", actual=" + e[i]);
+          if (n >= expected.length) {
+            fail("Willing to deliver too many solutions: n=" + n + " : " + iBindingSet);
+          }
+          if (!expected[n].equals(iBindingSet)) {
+            fail("n=" + n + ", expected=" + expected[n] + ", actual=" + iBindingSet);
           }
           n++;
         }
@@ -162,13 +164,15 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
         final IBindingSet[] e = itr.next();
         if (ft != null && ft.isDone()) ft.get();
         if (log.isInfoEnabled()) log.info(n + " : chunkSize=" + e.length);
-        for (int i = 0; i < e.length; i++) {
-          if (log.isInfoEnabled()) log.info(n + " : " + e[i]);
-          if (n >= expected.length) {
-            fail("Willing to deliver too many solutions: n=" + n + " : " + e[i]);
+        for (IBindingSet iBindingSet : e) {
+          if (log.isInfoEnabled()) {
+            log.info(n + " : " + iBindingSet);
           }
-          if (!expected[n].equals(e[i])) {
-            fail("n=" + n + ", expected=" + expected[n] + ", actual=" + e[i]);
+          if (n >= expected.length) {
+            fail("Willing to deliver too many solutions: n=" + n + " : " + iBindingSet);
+          }
+          if (!expected[n].equals(iBindingSet)) {
+            fail("n=" + n + ", expected=" + expected[n] + ", actual=" + iBindingSet);
           }
           n++;
         }
@@ -227,16 +231,16 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
 
       final java.util.Map<T, AtomicInteger> range = new java.util.LinkedHashMap<>();
 
-      for (int j = 0; j < nrange; j++) {
+      for (T t : expected) {
 
-        AtomicInteger count = range.get(expected[j]);
+        AtomicInteger count = range.get(t);
 
         if (count == null) {
 
           count = new AtomicInteger();
         }
 
-        range.put(expected[j], count);
+        range.put(t, count);
 
         count.incrementAndGet();
       }
@@ -345,16 +349,16 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
       final java.util.Map<IBindingSet, AtomicInteger> range =
           new java.util.LinkedHashMap<>();
 
-      for (int j = 0; j < nrange; j++) {
+      for (IBindingSet iBindingSet : expected) {
 
-        AtomicInteger count = range.get(expected[j]);
+        AtomicInteger count = range.get(iBindingSet);
 
         if (count == null) {
 
           count = new AtomicInteger();
         }
 
-        range.put(expected[j], count);
+        range.put(iBindingSet, count);
 
         count.incrementAndGet();
       }

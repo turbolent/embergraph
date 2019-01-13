@@ -231,7 +231,7 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
               if (i > 1) {
                 sb.append(" &&");
               }
-              sb.append(" sameTerm( ?" + names[0] + ", ?" + names[i] + ")");
+              sb.append(" sameTerm( ?").append(names[0]).append(", ?").append(names[i]).append(")");
             }
             sb.append(" ).\n");
           }
@@ -284,7 +284,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
              * handles this).
              */
             sb.append("FILTER (");
-            sb.append(" sameTerm( ?" + name + ", " + util.toExternal(v) + ")");
+            sb.append(" sameTerm( ?").append(name).append(", ").append(util.toExternal(v))
+                .append(")");
             sb.append(" ).\n");
           }
         }

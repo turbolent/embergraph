@@ -448,9 +448,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
    */
   private boolean isConsistent(final IConstraint[] constraints, final IBindingSet bindingSet) {
 
-    for (int i = 0; i < constraints.length; i++) {
-
-      final IConstraint constraint = constraints[i];
+    for (final IConstraint constraint : constraints) {
 
       if (!constraint.accept(bindingSet)) {
 

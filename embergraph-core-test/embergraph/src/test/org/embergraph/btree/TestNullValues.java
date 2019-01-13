@@ -59,7 +59,7 @@ public class TestNullValues extends AbstractBTreeTestCase {
    * @throws IOException
    * @throws Exception
    */
-  public void test_nullValues() throws IOException, Exception {
+  public void test_nullValues() throws Exception {
 
     final IRawStore store = new SimpleMemoryRawStore();
 

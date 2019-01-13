@@ -69,9 +69,7 @@ public class ParserSpeedTest {
 
       final File[] files = fileOrDir.listFiles();
 
-      for (int i = 0; i < files.length; i++) {
-
-        final File f = files[i];
+      for (final File f : files) {
 
         parseFileOrDirectory(f);
       }
@@ -158,8 +156,7 @@ public class ParserSpeedTest {
     }
 
     private void parseFile(final File file)
-        throws IOException, RDFParseException, RDFHandlerException, NoSuchAlgorithmException,
-            InterruptedException {
+        throws IOException, RDFParseException, RDFHandlerException {
 
       if (!file.exists()) throw new RuntimeException("Not found: " + file);
 
@@ -223,7 +220,7 @@ public class ParserSpeedTest {
       if (log.isInfoEnabled()) log.info("End of source.");
     }
 
-    public void handleStatement(final Statement stmt) throws RDFHandlerException {
+    public void handleStatement(final Statement stmt) {
 
       final long n = nstmts.incrementAndGet();
 

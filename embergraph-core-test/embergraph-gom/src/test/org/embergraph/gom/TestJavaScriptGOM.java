@@ -40,7 +40,7 @@ public class TestJavaScriptGOM extends TestCase2 {
 
   protected ScriptEngine jsEngine;
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     final ScriptEngineManager mgr = new ScriptEngineManager();
 
@@ -58,7 +58,7 @@ public class TestJavaScriptGOM extends TestCase2 {
     //        �}
   }
 
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
 
     jsEngine = null;
   }
@@ -90,7 +90,7 @@ public class TestJavaScriptGOM extends TestCase2 {
    *
    * @throws ScriptException
    */
-  public void testScriptExceptionThrown() throws ScriptException {
+  public void testScriptExceptionThrown() {
 
     try {
 

@@ -208,13 +208,13 @@ public abstract class AbstractCounterSet implements ICounterSet {
     ICounterNode t = this;
 
     // the remaining path components.
-    for (int i = 0; i < a.length; i++) {
-
-      final String name = a[i];
+    for (final String name : a) {
 
       t = t.getChild(name);
 
-      if (t == null) return null;
+      if (t == null) {
+        return null;
+      }
     }
 
     return t;
@@ -245,7 +245,7 @@ public abstract class AbstractCounterSet implements ICounterSet {
 
       ICounter c = itr.next();
 
-      sb.append("\n" + c.getPath() + "=" + c.getValue());
+      sb.append("\n").append(c.getPath()).append("=").append(c.getValue());
     }
 
     return sb.toString();

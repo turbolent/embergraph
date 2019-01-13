@@ -312,7 +312,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
   }
 
   @Override
-  protected void finalize() throws Throwable {
+  protected void finalize() {
     // release to pool.
     releaseDirectBuffers();
   }
@@ -440,11 +440,11 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
     //		final ByteBuffer src = data;//data.duplicate();
     int pos = 0;
-    for (int i = 0; i < dst.length; i++) {
-      final int tsize = dst[i].remaining();
+    for (ByteBuffer byteBuffer : dst) {
+      final int tsize = byteBuffer.remaining();
       src.limit(pos + tsize);
       src.position(pos);
-      dst[i].put(src);
+      byteBuffer.put(src);
       pos += tsize;
     }
   }

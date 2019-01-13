@@ -292,7 +292,7 @@ public class VertexDistribution {
       selected.add(v);
     }
 
-    return selected.toArray(new Resource[selected.size()]);
+    return selected.toArray(new Resource[0]);
   }
 
   /*
@@ -333,7 +333,7 @@ public class VertexDistribution {
       selected.add(v);
     }
 
-    return selected.toArray(new Resource[selected.size()]);
+    return selected.toArray(new Resource[0]);
 
     //        // The selected samples.
     //        final Set<Resource> selected = new HashSet<Resource>();
@@ -377,7 +377,7 @@ public class VertexDistribution {
       selected.add(v);
     }
 
-    return selected.toArray(new Resource[selected.size()]);
+    return selected.toArray(new Resource[0]);
   }
 
   @Override

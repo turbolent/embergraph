@@ -136,7 +136,6 @@ public class ASTFlattenJoinGroupsOptimizer implements IASTOptimizer {
     if (op instanceof JoinGroupNode
         && !((JoinGroupNode) op).isOptional()
         && !((JoinGroupNode) op).isMinus()
-        && parent != null
         && parent instanceof JoinGroupNode) {
 
       final JoinGroupNode thisJoinGroup = (JoinGroupNode) op;

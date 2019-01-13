@@ -221,47 +221,41 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
 
     private final Session session = new Session();
 
-    public int nextPartitionId(String name)
-        throws IOException, InterruptedException, ExecutionException {
+    public int nextPartitionId(String name) {
       return partitionId.incrementAndGet();
     }
 
     public UUID registerScaleOutIndex(
-        IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServices)
-        throws IOException, InterruptedException, ExecutionException {
+        IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServices) {
       throw new UnsupportedOperationException();
     }
 
-    public void dropScaleOutIndex(String name)
-        throws IOException, InterruptedException, ExecutionException {
+    public void dropScaleOutIndex(String name) {
       throw new UnsupportedOperationException();
     }
 
-    public UUID getServiceUUID() throws IOException {
+    public UUID getServiceUUID() {
       throw new UnsupportedOperationException();
     }
 
-    public String getStatistics() throws IOException {
+    public String getStatistics() {
       throw new UnsupportedOperationException();
     }
 
-    public void registerIndex(String name, IndexMetadata metadata)
-        throws IOException, InterruptedException, ExecutionException {
+    public void registerIndex(String name, IndexMetadata metadata) {
       throw new UnsupportedOperationException();
     }
 
-    public IndexMetadata getIndexMetadata(String name, long timestamp) throws IOException {
+    public IndexMetadata getIndexMetadata(String name, long timestamp) {
       throw new UnsupportedOperationException();
     }
 
-    public void dropIndex(String name)
-        throws IOException, InterruptedException, ExecutionException {
+    public void dropIndex(String name) {
       throw new UnsupportedOperationException();
     }
 
     public ResultSet rangeIterator(
-        long tx, String name, byte[] fromKey, byte[] toKey, int capacity, int flags, IFilter filter)
-        throws InterruptedException, ExecutionException, IOException {
+        long tx, String name, byte[] fromKey, byte[] toKey, int capacity, int flags, IFilter filter) {
       throw new UnsupportedOperationException();
     }
 
@@ -274,8 +268,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
 
     public void splitIndexPartition(
-        String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
-        throws IOException, InterruptedException, ExecutionException {
+        String name, PartitionLocator oldLocator, PartitionLocator[] newLocators) {
 
       log.info(
           "Split index partition: name="
@@ -287,8 +280,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
 
     public void joinIndexPartition(
-        String name, PartitionLocator[] oldLocators, PartitionLocator newLocator)
-        throws IOException, InterruptedException, ExecutionException {
+        String name, PartitionLocator[] oldLocators, PartitionLocator newLocator) {
 
       log.info(
           "Join index partitions: name="
@@ -300,8 +292,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
 
     public void moveIndexPartition(
-        String name, PartitionLocator oldLocator, PartitionLocator newLocator)
-        throws IOException, InterruptedException, ExecutionException {
+        String name, PartitionLocator oldLocator, PartitionLocator newLocator) {
 
       log.info(
           "Move index partition: name="
@@ -312,57 +303,54 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
               + newLocator);
     }
 
-    public PartitionLocator get(String name, long timestamp, byte[] key)
-        throws InterruptedException, ExecutionException, IOException {
+    public PartitionLocator get(String name, long timestamp, byte[] key) {
 
       return null;
     }
 
-    public PartitionLocator find(String name, long timestamp, byte[] key)
-        throws InterruptedException, ExecutionException, IOException {
+    public PartitionLocator find(String name, long timestamp, byte[] key) {
 
       return null;
     }
 
-    public void forceOverflow(boolean immediate, boolean compactingMerge) throws IOException {
+    public void forceOverflow(boolean immediate, boolean compactingMerge) {
 
       throw new UnsupportedOperationException();
     }
 
-    public boolean isOverflowActive() throws IOException {
+    public boolean isOverflowActive() {
 
       throw new UnsupportedOperationException();
     }
 
-    public long getAsynchronousOverflowCounter() throws IOException {
+    public long getAsynchronousOverflowCounter() {
 
       throw new UnsupportedOperationException();
     }
 
     public void destroy() {}
 
-    public Future<? extends Object> submit(Callable<? extends Object> proc) {
+    public Future<?> submit(Callable<?> proc) {
 
       return null;
     }
 
-    public String getHostname() throws IOException {
+    public String getHostname() {
 
       return null;
     }
 
-    public Class getServiceIface() throws IOException {
+    public Class getServiceIface() {
 
       return null;
     }
 
-    public String getServiceName() throws IOException {
+    public String getServiceName() {
 
       return null;
     }
 
-    public boolean purgeOldResources(long timeout, boolean truncateJournal)
-        throws IOException, InterruptedException {
+    public boolean purgeOldResources(long timeout, boolean truncateJournal) {
       // TODO Auto-generated method stub
       return false;
     }
@@ -372,19 +360,17 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
 
     }
 
-    public void abort(long tx) throws IOException {
+    public void abort(long tx) {
 
       throw new UnsupportedOperationException();
     }
 
-    public long singlePhaseCommit(long tx)
-        throws InterruptedException, ExecutionException, IOException {
+    public long singlePhaseCommit(long tx) {
 
       throw new UnsupportedOperationException();
     }
 
-    public void prepare(long tx, long revisionTime)
-        throws InterruptedException, ExecutionException, IOException {
+    public void prepare(long tx, long revisionTime) {
 
       throw new UnsupportedOperationException();
     }
@@ -393,7 +379,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
       return session;
     }
 
-    public IQueryPeer getQueryEngine() throws IOException {
+    public IQueryPeer getQueryEngine() {
       return null;
     }
   }
@@ -591,7 +577,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
       return true;
     }
 
-    public AbstractHTTPD newHttpd(int httpdPort, ICounterSetAccess access) throws IOException {
+    public AbstractHTTPD newHttpd(int httpdPort, ICounterSetAccess access) {
       return null;
     }
 
@@ -686,15 +672,15 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     // copy to avoid side-effects.
     final Set<UUID> tmp = new HashSet<>(actual);
 
-    for (int i = 0; i < expected.length; i++) {
+    for (IRawStore iRawStore : expected) {
 
-      final UUID uuid = expected[i].getResourceMetadata().getUUID();
+      final UUID uuid = iRawStore.getResourceMetadata().getUUID();
 
       assertFalse(tmp.isEmpty());
 
       if (!tmp.remove(uuid)) {
 
-        fail("Expecting " + expected[i].getResourceMetadata());
+        fail("Expecting " + iRawStore.getResourceMetadata());
       }
     }
 

@@ -141,18 +141,18 @@ public class PresortRioLoader extends BasicRioLoader implements RDFHandler {
   }
 
   @Override
-  public void endRDF() throws RDFHandlerException {
+  public void endRDF() {
 
     // @todo why not invoke buffer#force()?
 
   }
 
   @Override
-  public void handleComment(String arg0) throws RDFHandlerException {}
+  public void handleComment(String arg0) {}
 
   @Override
-  public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {}
+  public void handleNamespace(String arg0, String arg1) {}
 
   @Override
-  public void startRDF() throws RDFHandlerException {}
+  public void startRDF() {}
 }

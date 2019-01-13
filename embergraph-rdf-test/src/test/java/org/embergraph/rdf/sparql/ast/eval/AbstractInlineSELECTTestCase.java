@@ -115,7 +115,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
      * @param testURI
      * @throws Exception
      */
-    public Execute(final String queryStr) throws Exception {
+    public Execute(final String queryStr) {
       super(queryStr);
 
       if (log.isInfoEnabled()) log.info("\nquery:\n" + queryStr);
@@ -129,7 +129,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
      *     then there may be fewer statements written onto the KB.
      * @throws UnsupportedEncodingException
      */
-    private long loadData(String data) throws UnsupportedEncodingException {
+    private long loadData(String data) {
 
       if (data == null || data.length() == 0) {
         return 0;

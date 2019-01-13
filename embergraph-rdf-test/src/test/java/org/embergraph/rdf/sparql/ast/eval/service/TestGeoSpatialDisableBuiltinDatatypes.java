@@ -47,7 +47,7 @@ public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPA
   }
 
   /** Verify that built-in lat+lon datatype is disabled */
-  public void testDisableBuiltin01() throws Exception {
+  public void testDisableBuiltin01() {
 
     try {
 
@@ -70,7 +70,7 @@ public class TestGeoSpatialDisableBuiltinDatatypes extends AbstractDataDrivenSPA
   }
 
   /** Verify that built-in lat+lon+time datatype is disabled */
-  public void testDisableBuiltin02() throws Exception {
+  public void testDisableBuiltin02() {
 
     try {
 

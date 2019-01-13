@@ -101,7 +101,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
    */
   public static class Wait10ResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       //            if (INFO)
       //                log.info("Executing: "+this);
@@ -137,7 +137,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
    */
   static class DeathResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       if (DEBUG) log.debug("Arrgh!");
 
@@ -483,7 +483,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
                 break;
               } catch (TimeoutException ex) {
                 log.warn("Future not ready yet: task=" + future + ", service=" + lockManager);
-                continue; // keep waiting.
+                // keep waiting.
               }
             } catch (ExecutionException ex) {
               if (ex.getCause() instanceof DeadlockException) {
@@ -672,9 +672,9 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     public static final String DEFAULT_SORT_LOCK_REQUESTS = "true";
   }
 
-  public void setUpComparisonTest(Properties properties) throws Exception {}
+  public void setUpComparisonTest(Properties properties) {}
 
-  public void tearDownComparisonTest() throws Exception {}
+  public void tearDownComparisonTest() {}
 
   /*
    * Generates an XML file that can be used to (re-)run the concurrency control tests. The outputs

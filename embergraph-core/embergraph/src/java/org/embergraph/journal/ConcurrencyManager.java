@@ -1321,7 +1321,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       // await all futures.
 
-      for (Future<? extends Object> f : futures) {
+      for (Future<?> f : futures) {
 
         if (!f.isDone()) {
 

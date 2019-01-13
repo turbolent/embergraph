@@ -182,7 +182,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
   }
 
   @Override
-  public int read() throws IOException {
+  public int read() {
 
     if (off >= limit) return -1; // EOF
 
@@ -233,7 +233,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
   }
 
   /** Overridden for more efficiency. */
-  public final int read(final byte[] a, final int aoff, final int alen) throws IOException {
+  public final int read(final byte[] a, final int aoff, final int alen) {
 
     if (alen == 0) {
 
@@ -275,7 +275,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     return v;
   }
 
-  public String readLine() throws IOException {
+  public String readLine() {
 
     throw new UnsupportedOperationException();
   }
@@ -454,7 +454,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
    * Report the position of the stream within its slice (relative to the original offset for the
    * backing buffer)
    */
-  public long position() throws IOException {
+  public long position() {
 
     return off - origin;
   }
@@ -463,7 +463,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
    * Reposition the stream within its slice (relative to the original offset for the backing
    * buffer).
    */
-  public void position(final long v) throws IOException {
+  public void position(final long v) {
 
     //        if (v < origin || v > limit) {
     //

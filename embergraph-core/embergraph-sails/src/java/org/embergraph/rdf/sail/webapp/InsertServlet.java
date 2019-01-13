@@ -98,10 +98,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
     if (req.getParameter(EmbergraphRDFContext.URI) != null) {
       doPostWithURIs(req, resp);
-      return;
     } else {
       doPostWithBody(req, resp);
-      return;
     }
   }
 

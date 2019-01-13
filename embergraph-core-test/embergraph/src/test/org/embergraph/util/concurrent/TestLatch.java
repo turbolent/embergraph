@@ -87,17 +87,14 @@ public class TestLatch extends TestCase2 {
     final Latch latch = new Latch();
 
     final Callable<?> r =
-        new Callable<Void>() {
+        (Callable<Void>) () -> {
 
-          public Void call() throws Exception {
+          latch.inc();
 
-            latch.inc();
+          if (!latch.await(100, TimeUnit.MILLISECONDS))
+            fail("Expecting latch to decrement to zero.");
 
-            if (!latch.await(100, TimeUnit.MILLISECONDS))
-              fail("Expecting latch to decrement to zero.");
-
-            return null;
-          }
+          return null;
         };
 
     final ExecutorService service =

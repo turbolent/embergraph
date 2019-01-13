@@ -47,7 +47,7 @@ public interface QuorumCommit<S extends HACommitGlue> { // extends QuorumService
    *     prepared to commit.
    */
   PrepareResponse prepare2Phase(PrepareRequest req)
-      throws InterruptedException, TimeoutException, IOException;
+      throws InterruptedException, IOException;
 
   /*
    * Used by the leader to send a message to each joined service in the quorum telling it to commit

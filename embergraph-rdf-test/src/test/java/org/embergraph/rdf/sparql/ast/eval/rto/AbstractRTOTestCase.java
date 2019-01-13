@@ -240,9 +240,9 @@ public class AbstractRTOTestCase extends AbstractDataDrivenSPARQLTestCase {
           sb.append(", ");
           first = false;
         }
-        sb.append(" " + Arrays.toString(expected));
+        sb.append(" ").append(Arrays.toString(expected));
       }
-      sb.append(", actual=" + Arrays.toString(path.getVertexIds()));
+      sb.append(", actual=").append(Arrays.toString(path.getVertexIds()));
       // joinGraph.getQueryPlan(q)
       fail(sb.toString());
     }

@@ -119,10 +119,9 @@ public class ElementFilter<R> extends TupleFilter<R> {
    */
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(super.toString());
-    sb.append("{test=" + test);
-    sb.append("}");
-    return sb.toString();
+    String sb = super.toString()
+        + "{test=" + test
+        + "}";
+    return sb;
   }
 }

@@ -328,8 +328,7 @@ public class TestConflictResolution extends TestCase2 {
       this.resolvedValue = resolvedValue;
     }
 
-    public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
-        throws Exception {
+    public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple) {
 
       // The key must be the same for both tuples.
       assertEquals(txTuple.getKey(), currentTuple.getKey());

@@ -237,10 +237,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
       // SPO[] exposed by our StatementBuffer subclass.
       final SPO[] stmts = buffer.stmts;
 
-      for (SPO spo : stmts) {
-
-        ret.add(spo);
-      }
+      ret.addAll(Arrays.asList(stmts));
     }
 
     // The axioms as SPO objects.
@@ -352,7 +349,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
   private static final transient byte currentVersion = VERSION1;
 
   @Override
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     final byte version = in.readByte();
 

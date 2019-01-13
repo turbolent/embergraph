@@ -728,9 +728,9 @@ public abstract class TestCase2 extends TestCase {
 
     java.util.Map range = new java.util.HashMap();
 
-    for (int j = 0; j < nrange; j++) {
+    for (Object o : expected) {
 
-      range.put(expected[j], expected[j]);
+      range.put(o, o);
     }
 
     // Do selection without replacement for the objects visited by
@@ -1423,7 +1423,6 @@ public abstract class TestCase2 extends TestCase {
          * new properties layer.
          */
 
-        classNameProperties:
         {
 
           /* Convert the class name into a resource identifier.
@@ -1471,7 +1470,6 @@ public abstract class TestCase2 extends TestCase {
          * will wind up on top of the properties hierarchy.
          */
 
-        user_home:
         {
           String userHome = System.getProperty("user.home");
 
@@ -1616,7 +1614,7 @@ public abstract class TestCase2 extends TestCase {
 
     StringBuilder sb = new StringBuilder();
 
-    sb.append("Properties:: [ source = '" + properties.getSource() + "' ]\n");
+    sb.append("Properties:: [ source = '").append(properties.getSource()).append("' ]\n");
 
     TreeMap map =
         new TreeMap // sorted view.
@@ -1632,14 +1630,8 @@ public abstract class TestCase2 extends TestCase {
 
       String value = (String) entry.getValue();
 
-      sb.append(
-          indent(level)
-              + "'"
-              + name
-              + "'"
-              + " = "
-              + (value != null ? "'" + value + "'" : "<none>")
-              + "\n");
+      sb.append(indent(level)).append("'").append(name).append("'").append(" = ")
+          .append(value != null ? "'" + value + "'" : "<none>").append("\n");
     }
 
     log.info(sb.toString());

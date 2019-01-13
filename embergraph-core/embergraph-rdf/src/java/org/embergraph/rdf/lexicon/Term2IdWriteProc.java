@@ -606,10 +606,10 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       LongPacker.packLong(out, n);
 
-      for (int i = 0; i < n; i++) {
+      for (IV iv : ivs) {
 
         //                LongPacker.packLong(out, ids[i]);
-        out.writeObject(ivs[i]);
+        out.writeObject(iv);
       }
     }
   }
@@ -649,11 +649,11 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
       @SuppressWarnings("rawtypes")
       final IV[] ivs = new IV[size];
 
-      for (int i = 0; i < a.length; i++) {
+      for (SplitValuePair<Split, Result> splitResultSplitValuePair : a) {
 
-        final Split split = a[i].key;
+        final Split split = splitResultSplitValuePair.key;
 
-        final Result tmp = a[i].val;
+        final Result tmp = splitResultSplitValuePair.val;
 
         System.arraycopy(
             tmp.ivs /* src */,

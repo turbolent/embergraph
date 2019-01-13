@@ -198,7 +198,6 @@ public abstract class GraphLoader {
               if (log.isInfoEnabled())
                 log.info("Skipping non-RDF entry: resource=" + resource + ", entry=" + e.getName());
 
-              continue;
             }
           }
 

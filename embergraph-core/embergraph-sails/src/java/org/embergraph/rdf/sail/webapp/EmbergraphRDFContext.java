@@ -2152,7 +2152,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       final HttpServletResponse resp,
       final OutputStream os
       //            final boolean update
-      ) throws MalformedQueryException, IOException {
+      ) {
 
     if (cxn == null) throw new IllegalArgumentException();
 
@@ -2225,7 +2225,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       acceptStr =
           ConnegUtil.getMimeTypeForQueryParameterQueryRequest(
               req.getParameter(EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER),
-              acceptHeaders.toArray(new String[acceptHeaders.size()]));
+              acceptHeaders.toArray(new String[0]));
     }
 
     // Do conneg.

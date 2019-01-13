@@ -96,8 +96,6 @@ public class TxServlet extends EmbergraphRDFServlet {
       // CREATE-TX
       doCreateTx(req, resp);
 
-      return;
-
     } else if (req.getParameter(ATTR_PREPARE) != null) {
 
       doPrepareTx(req, resp);
@@ -138,8 +136,6 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       // LIST-TX
       doListTx(req, resp);
-
-      return;
 
     } else if (req.getParameter(ATTR_STATUS) != null) {
 
@@ -575,8 +571,6 @@ public class TxServlet extends EmbergraphRDFServlet {
             MIME_TEXT_PLAIN,
             "Scale-out does not support STATUS-TX");
 
-        return;
-
       } else {
 
         // On the journal we can lookup the Tx.
@@ -616,7 +610,6 @@ public class TxServlet extends EmbergraphRDFServlet {
             // disable caching (if GET)
             new NV("Cache-Control", "no-cache"));
 
-        return;
       }
 
     } catch (Throwable t) {

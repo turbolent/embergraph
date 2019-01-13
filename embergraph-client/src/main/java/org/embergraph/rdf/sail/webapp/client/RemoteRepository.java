@@ -208,8 +208,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
    * @param uuid The {@link UUID} used to identify this query.
    * @return The {@link IPreparedTupleQuery}.
    */
-  public IPreparedTupleQuery prepareTupleQuery(final String query, final UUID uuid)
-      throws Exception {
+  public IPreparedTupleQuery prepareTupleQuery(final String query, final UUID uuid) {
 
     return new TupleQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
@@ -232,8 +231,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
    * @param uuid The {@link UUID} used to identify this query.
    * @return The {@link IPreparedGraphQuery}
    */
-  public IPreparedGraphQuery prepareGraphQuery(final String query, final UUID uuid)
-      throws Exception {
+  public IPreparedGraphQuery prepareGraphQuery(final String query, final UUID uuid) {
 
     return new GraphQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
@@ -256,8 +254,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
    * @param uuid The {@link UUID} used to identify this query.
    * @return the {@link IPreparedBooleanQuery}
    */
-  public IPreparedBooleanQuery prepareBooleanQuery(final String query, final UUID uuid)
-      throws Exception {
+  public IPreparedBooleanQuery prepareBooleanQuery(final String query, final UUID uuid) {
 
     return new BooleanQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
@@ -282,8 +279,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
    * @return The {@link SparqlUpdate} operation.
    * @throws Exception
    */
-  public IPreparedSparqlUpdate prepareUpdate(final String updateStr, final UUID uuid)
-      throws Exception {
+  public IPreparedSparqlUpdate prepareUpdate(final String updateStr, final UUID uuid) {
 
     return new SparqlUpdate(
         mgr.newUpdateConnectOptions(sparqlEndpointURL, uuid, tx), uuid, updateStr);

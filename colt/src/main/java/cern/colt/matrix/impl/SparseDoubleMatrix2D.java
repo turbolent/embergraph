@@ -241,38 +241,32 @@ public class SparseDoubleMatrix2D extends DoubleMatrix2D {
       final double alpha = ((cern.jet.math.PlusMult) function).multiplicator;
       if (alpha == 0) return this; // nothing to do
       y.forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, getQuick(i, j) + alpha * value);
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, getQuick(i, j) + alpha * value);
+            return value;
           });
       return this;
     }
 
     if (function == cern.jet.math.Functions.mult) { // x[i] = x[i] * y[i]
       this.elements.forEachPair(
-          new cern.colt.function.IntDoubleProcedure() {
-            public boolean apply(int key, double value) {
-              int i = key / columns;
-              int j = key % columns;
-              double r = value * y.getQuick(i, j);
-              if (r != value) elements.put(key, r);
-              return true;
-            }
+          (key, value) -> {
+            int i = key / columns;
+            int j = key % columns;
+            double r = value * y.getQuick(i, j);
+            if (r != value) elements.put(key, r);
+            return true;
           });
     }
 
     if (function == cern.jet.math.Functions.div) { // x[i] = x[i] / y[i]
       this.elements.forEachPair(
-          new cern.colt.function.IntDoubleProcedure() {
-            public boolean apply(int key, double value) {
-              int i = key / columns;
-              int j = key % columns;
-              double r = value / y.getQuick(i, j);
-              if (r != value) elements.put(key, r);
-              return true;
-            }
+          (key, value) -> {
+            int i = key / columns;
+            int j = key % columns;
+            double r = value / y.getQuick(i, j);
+            if (r != value) elements.put(key, r);
+            return true;
           });
     }
 
@@ -302,14 +296,12 @@ public class SparseDoubleMatrix2D extends DoubleMatrix2D {
   public DoubleMatrix2D forEachNonZero(final cern.colt.function.IntIntDoubleFunction function) {
     if (this.isNoView) {
       this.elements.forEachPair(
-          new cern.colt.function.IntDoubleProcedure() {
-            public boolean apply(int key, double value) {
-              int i = key / columns;
-              int j = key % columns;
-              double r = function.apply(i, j, value);
-              if (r != value) elements.put(key, r);
-              return true;
-            }
+          (key, value) -> {
+            int i = key / columns;
+            int j = key % columns;
+            double r = function.apply(i, j, value);
+            if (r != value) elements.put(key, r);
+            return true;
           });
     } else {
       super.forEachNonZero(function);
@@ -511,19 +503,17 @@ public class SparseDoubleMatrix2D extends DoubleMatrix2D {
     if (yElements == null || zElements == null) throw new InternalError();
 
     this.elements.forEachPair(
-        new cern.colt.function.IntDoubleProcedure() {
-          public boolean apply(int key, double value) {
-            int i = key / columns;
-            int j = key % columns;
-            if (transposeA) {
-              int tmp = i;
-              i = j;
-              j = tmp;
-            }
-            zElements[zi + zStride * i] += value * yElements[yi + yStride * j];
-            // System.out.println("["+i+","+j+"]-->"+value);
-            return true;
+        (key, value) -> {
+          int i = key / columns;
+          int j = key % columns;
+          if (transposeA) {
+            int tmp = i;
+            i = j;
+            j = tmp;
           }
+          zElements[zi + zStride * i] += value * yElements[yi + yStride * j];
+          // System.out.println("["+i+","+j+"]-->"+value);
+          return true;
         });
 
     /*
@@ -592,15 +582,13 @@ public class SparseDoubleMatrix2D extends DoubleMatrix2D {
     final cern.jet.math.PlusMult fun = cern.jet.math.PlusMult.plusMult(0);
 
     this.elements.forEachPair(
-        new cern.colt.function.IntDoubleProcedure() {
-          public boolean apply(int key, double value) {
-            int i = key / columns;
-            int j = key % columns;
-            fun.multiplicator = value * alpha;
-            if (!transposeA) Crows[i].assign(Brows[j], fun);
-            else Crows[j].assign(Brows[i], fun);
-            return true;
-          }
+        (key, value) -> {
+          int i = key / columns;
+          int j = key % columns;
+          fun.multiplicator = value * alpha;
+          if (!transposeA) Crows[i].assign(Brows[j], fun);
+          else Crows[j].assign(Brows[i], fun);
+          return true;
         });
 
     return C;

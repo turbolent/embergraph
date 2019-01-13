@@ -77,7 +77,7 @@ public class ActiveProcess {
 
       for (String s : command) {
 
-        sb.append(s + " ");
+        sb.append(s).append(" ");
       }
 
       if (log.isInfoEnabled()) log.info("command:\n" + sb);

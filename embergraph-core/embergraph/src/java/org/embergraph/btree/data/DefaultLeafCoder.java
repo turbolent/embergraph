@@ -1172,7 +1172,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
 
       final StringBuilder sb = new StringBuilder();
 
-      sb.append(getClass().getName() + "{");
+      sb.append(getClass().getName()).append("{");
 
       DefaultLeafCoder.toString(this, sb);
 
@@ -1269,14 +1269,14 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
 
     if (leaf.isDoubleLinked()) {
 
-      sb.append(", priorAddr=" + leaf.getPriorAddr());
+      sb.append(", priorAddr=").append(leaf.getPriorAddr());
 
-      sb.append(", nextAddr=" + leaf.getNextAddr());
+      sb.append(", nextAddr=").append(leaf.getNextAddr());
     }
 
-    sb.append(",\nkeys=" + leaf.getKeys());
+    sb.append(",\nkeys=").append(leaf.getKeys());
 
-    sb.append(",\nvals=" + leaf.getValues());
+    sb.append(",\nvals=").append(leaf.getValues());
 
     if (leaf.hasDeleteMarkers()) {
 
@@ -1294,12 +1294,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
 
     if (leaf.hasVersionTimestamps()) {
 
-      sb.append(
-          ",\nversionTimestamps={min="
-              + leaf.getMinimumVersionTimestamp()
-              + ",max="
-              + leaf.getMaximumVersionTimestamp()
-              + ",tuples=[");
+      sb.append(",\nversionTimestamps={min=").append(leaf.getMinimumVersionTimestamp())
+          .append(",max=").append(leaf.getMaximumVersionTimestamp()).append(",tuples=[");
 
       for (int i = 0; i < nkeys; i++) {
 

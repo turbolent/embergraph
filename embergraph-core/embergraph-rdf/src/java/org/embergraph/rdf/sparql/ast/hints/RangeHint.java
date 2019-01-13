@@ -49,7 +49,6 @@ final class RangeHint extends AbstractQueryHint<Boolean> {
 
       _setQueryHint(context, scope, op, getName(), value);
 
-      return;
     }
   }
 

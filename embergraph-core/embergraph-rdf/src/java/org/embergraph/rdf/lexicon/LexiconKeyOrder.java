@@ -159,7 +159,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
   }
 
   /** Imposes the canonicalizing mapping during object de-serialization. */
-  private Object readResolve() throws ObjectStreamException {
+  private Object readResolve() {
 
     return LexiconKeyOrder.valueOf(index);
   }

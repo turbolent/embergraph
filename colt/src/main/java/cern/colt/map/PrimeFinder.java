@@ -16,7 +16,7 @@ package cern.colt.map;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
  */
-public class PrimeFinder extends Object {
+public class PrimeFinder {
   /** The largest prime this class can generate; currently equal to <tt>Integer.MAX_VALUE</tt>. */
   public static final int largestPrime = Integer.MAX_VALUE; // yes, it is prime.
 

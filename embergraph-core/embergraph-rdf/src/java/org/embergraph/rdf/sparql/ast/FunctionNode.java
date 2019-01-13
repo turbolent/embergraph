@@ -238,7 +238,7 @@ public class FunctionNode extends ValueExpressionNode {
     sb.append(getClass().getSimpleName());
     final Integer bopId = (Integer) getProperty(Annotations.BOP_ID);
     if (bopId != null) {
-      sb.append("[" + bopId + "]");
+      sb.append("[").append(bopId).append("]");
     }
     sb.append("(");
     int nwritten = 0;

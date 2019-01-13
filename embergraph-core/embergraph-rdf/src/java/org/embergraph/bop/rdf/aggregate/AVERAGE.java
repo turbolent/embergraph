@@ -31,7 +31,6 @@ import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
 import org.embergraph.rdf.internal.constraints.MathUtility;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 /*

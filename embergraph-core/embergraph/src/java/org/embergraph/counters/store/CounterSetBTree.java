@@ -358,7 +358,7 @@ public class CounterSetBTree extends BTree {
     }
 
     // to array
-    final KVO[] a = v.toArray(new KVO[v.size()]);
+    final KVO[] a = v.toArray(new KVO[0]);
 
     // order by the key.
     Arrays.sort(a);

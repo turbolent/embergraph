@@ -116,9 +116,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
     final double p = 1 / 64d; // error rate
     final double maxP = p * 10; // max error rate
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      final int m = branchingFactors[i];
+    for (final int m : branchingFactors) {
 
       doBuildIndexSegmentAndCompare(
           doSplitWithRandomDenseKeySequence(
@@ -149,9 +147,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
     int trace = 0;
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      int m = branchingFactors[i];
+    for (int m : branchingFactors) {
 
       doBuildIndexSegmentAndCompare(doInsertRandomSparseKeySequenceTest(getBTree(m), m, trace));
 
@@ -321,9 +317,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
       // branching factors used for the index segment.
       final int[] branchingFactors = new int[] {3, 4, 5, 10, 20, 60, 100, 256, 1024, 4096, 8192};
 
-      for (int i = 0; i < branchingFactors.length; i++) {
-
-        int m = branchingFactors[i];
+      for (int m : branchingFactors) {
 
         final File outFile = new File(getName() + "_m" + m + ".seg");
         final File outFile2 = new File(getName() + "_m" + m + "_bloom.seg");
@@ -345,7 +339,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
         final long commitTime = System.currentTimeMillis();
 
         {
-          if (log.isInfoEnabled())
+          if (log.isInfoEnabled()) {
             log.info(
                 "Building index segment (w/o bloom): in(m="
                     + btree.getBranchingFactor()
@@ -354,21 +348,22 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
                     + "), out(m="
                     + m
                     + ")");
+          }
 
           IndexMetadata metadata = btree.getIndexMetadata().clone();
 
           metadata.setBloomFilterFactory(null /*disable*/);
 
           IndexSegmentBuilder.newInstance(
-                  outFile,
-                  tmpDir,
-                  btree.getEntryCount(),
-                  btree.rangeIterator(),
-                  m,
-                  metadata,
-                  commitTime,
-                  true /*compactingMerge*/,
-                  bufferNodes)
+              outFile,
+              tmpDir,
+              btree.getEntryCount(),
+              btree.rangeIterator(),
+              m,
+              metadata,
+              commitTime,
+              true /*compactingMerge*/,
+              bufferNodes)
               .call();
 
           //              new IndexSegmentBuilder(outFile, tmpDir, btree, m, 0.);
@@ -377,7 +372,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
 
         final IndexSegmentBuilder builder2;
         {
-          if (log.isInfoEnabled())
+          if (log.isInfoEnabled()) {
             log.info(
                 "Building index segment (w/ bloom): in(m="
                     + btree.getBranchingFactor()
@@ -386,6 +381,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
                     + "), out(m="
                     + m
                     + ")");
+          }
 
           final IndexMetadata metadata = btree.getIndexMetadata().clone();
 
@@ -423,7 +419,9 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
          * case and not, for example, those aspects that depend on the
          * specifics of the length of serialized nodes or leaves).
          */
-        if (log.isInfoEnabled()) log.info("Opening index segment w/o bloom filter.");
+        if (log.isInfoEnabled()) {
+          log.info("Opening index segment w/o bloom filter.");
+        }
         final IndexSegment seg = new IndexSegmentStore(outFile).loadIndexSegment();
 
         /*
@@ -433,7 +431,9 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
          * case and not, for example, those aspects that depend on the
          * specifics of the length of serialized nodes or leaves).
          */
-        if (log.isInfoEnabled()) log.info("Opening index segment w/ bloom filter.");
+        if (log.isInfoEnabled()) {
+          log.info("Opening index segment w/ bloom filter.");
+        }
         final IndexSegment seg2 = new IndexSegmentStore(outFile2).loadIndexSegment();
 
         /*
@@ -462,13 +462,17 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
          * Verify index segments against the source btree and against one
          * another.
          */
-        if (log.isInfoEnabled()) log.info("Verifying index segments.");
+        if (log.isInfoEnabled()) {
+          log.info("Verifying index segments.");
+        }
         assertSameBTree(btree, seg);
         assertSameBTree(btree, seg2);
         seg2.close(); // close seg w/ bloom filter and the verify with implicit reopen.
         assertSameBTree(seg, seg2);
 
-        if (log.isInfoEnabled()) log.info("Closing index segments.");
+        if (log.isInfoEnabled()) {
+          log.info("Closing index segments.");
+        }
         seg.close();
         seg2.close();
 

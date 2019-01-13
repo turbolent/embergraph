@@ -79,7 +79,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
   protected IRabaCoder rabaCoder = null;
 
   /** A simple unit test. */
-  public void test_mike_personick() throws UnsupportedEncodingException {
+  public void test_mike_personick() {
 
     if (isFixedLength()) return;
 
@@ -126,7 +126,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
   /*
    * Test with byte values which are negative values when interpreted as as signed 8 bit integers.
    */
-  public void test_negativeByteValues() throws UnsupportedEncodingException {
+  public void test_negativeByteValues() {
 
     if (isFixedLength()) return;
 
@@ -150,7 +150,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_emptyElement() throws UnsupportedEncodingException {
+  public void test_emptyElement() {
 
     if (isFixedLength()) return;
 
@@ -218,7 +218,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_withNulls() throws UnsupportedEncodingException {
+  public void test_withNulls() {
 
     if (!rabaCoder.isValueCoder()) {
 
@@ -295,7 +295,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
   }
 
   /** This test case was developed for the {@link FrontCodedRabaCoder}. */
-  public void test_error1() throws IOException {
+  public void test_error1() {
 
     if (isFixedLength()) return;
 
@@ -421,7 +421,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
    *
    * @throws Exception
    */
-  public void test_randomURIs() throws Exception {
+  public void test_randomURIs() {
 
     if (isFixedLength()) return;
 
@@ -493,7 +493,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
    * @throws IOException
    */
   protected void doRandomRoundTripTest(
-      final IRabaCoder dataCoder, final int size, final int capacity) throws IOException {
+      final IRabaCoder dataCoder, final int size, final int capacity) {
 
     assert capacity >= size;
 

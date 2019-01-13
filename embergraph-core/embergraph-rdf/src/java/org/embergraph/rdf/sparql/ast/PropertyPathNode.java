@@ -189,7 +189,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
 
     final Scope scope = getScope();
     if (scope != null) {
-      sb.append(" [scope=" + scope + "]");
+      sb.append(" [scope=").append(scope).append("]");
     }
 
     return sb.toString();

@@ -102,7 +102,6 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
     @Override
     protected void updateReleaseTimeForBareCommit(final long commitTime) {
 
-      return;
     }
 
     /** Exposed to the unit tests. */

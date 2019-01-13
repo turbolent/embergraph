@@ -144,17 +144,15 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
    */
   protected String getNamespaceDeclarations() {
 
-    final StringBuilder declarations = new StringBuilder();
-    declarations.append("PREFIX : <" + DEFAULT_PREFIX + "> \n");
-    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
-    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
-    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-    declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
-    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
-    declarations.append("PREFIX ex: <" + "http://example.org/" + "> \n");
-    declarations.append("\n");
-
-    return declarations.toString();
+    String declarations = ("PREFIX : <" + DEFAULT_PREFIX + "> \n")
+        + "PREFIX rdf: <" + RDF.NAMESPACE + "> \n"
+        + "PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n"
+        + "PREFIX foaf: <" + FOAF.NAMESPACE + "> \n"
+        + "PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n"
+        + "PREFIX dc: <" + DC.NAMESPACE + "> \n"
+        + "PREFIX ex: <" + "http://example.org/" + "> \n"
+        + "\n";
+    return declarations;
   }
 
   @Override
@@ -896,7 +894,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
      * @throws UpdateExecutionException
      */
     public void test_tx_begin_addStatement_commit()
-        throws RepositoryException, MalformedQueryException, UpdateExecutionException {
+        throws RepositoryException {
 
       if (true) return; // FIXME (***) TX TEST DISABLED
 

@@ -200,7 +200,9 @@ public class FileLinesCollection extends AbstractCollection<MutableString> {
    */
   public ObjectList<MutableString> allLines() {
     final ObjectArrayList<MutableString> result = new ObjectArrayList<>();
-    for (Iterator<MutableString> i = iterator(); i.hasNext(); ) result.add(i.next().copy());
+    for (MutableString mutableString : this) {
+      result.add(mutableString.copy());
+    }
     return result;
   }
 

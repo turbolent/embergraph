@@ -155,7 +155,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
   }
 
   @Override
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     final Properties props = getProperties();
 
@@ -214,8 +214,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/558
    */
   public void test_ticket538()
-      throws UpdateExecutionException, RepositoryException, MalformedQueryException,
-          QueryEvaluationException {
+      throws UpdateExecutionException, RepositoryException, MalformedQueryException {
 
     // the [in] and [out] graphs.
     final URI gin = f.createURI("http://example/in");
@@ -317,18 +316,16 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     con.clear();
     con.commit();
 
-    final StringBuilder update = new StringBuilder();
-    update.append("DROP ALL;\n");
-    update.append("INSERT DATA {\n");
-    update.append(" GRAPH <http://example.org/one> {\n");
-    update.append("   <http://example.org/a> <http://example.org/b> <http://example.org/c> .\n");
-    update.append("   <http://example.org/d> <http://example.org/e> <http://example.org/f> .\n");
-    update.append("}};\n");
-    update.append(
-        "ADD SILENT GRAPH <http://example.org/one> TO GRAPH <http://example.org/two> ;\n");
-    update.append("DROP SILENT GRAPH <http://example.org/one>  ;\n");
-
-    final Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
+    String update = "DROP ALL;\n"
+        + "INSERT DATA {\n"
+        + " GRAPH <http://example.org/one> {\n"
+        + "   <http://example.org/a> <http://example.org/b> <http://example.org/c> .\n"
+        + "   <http://example.org/d> <http://example.org/e> <http://example.org/f> .\n"
+        + "}};\n"
+        + "ADD SILENT GRAPH <http://example.org/one> TO GRAPH <http://example.org/two> ;\n"
+        + "DROP SILENT GRAPH <http://example.org/one>  ;\n";
+    final Update operation = con.prepareUpdate(QueryLanguage.SPARQL,
+        update);
 
     operation.execute();
 
@@ -768,13 +765,11 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     long nrTriplesBeforeUpdate = countSolutions(queryStr);
 
     // Insert statement:
-    StringBuilder updateStrBuf = new StringBuilder();
-    updateStrBuf.append("INSERT DATA { ");
-    updateStrBuf.append("<http://rm-lod.org/object/2176/production/date> ");
-    updateStrBuf.append("<http://www.w3.org/2000/01/rdf-schema#label> ");
-    updateStrBuf.append("\"1906\"@ru . }");
 
-    String updateStr = updateStrBuf.toString();
+    String updateStr = "INSERT DATA { "
+        + "<http://rm-lod.org/object/2176/production/date> "
+        + "<http://www.w3.org/2000/01/rdf-schema#label> "
+        + "\"1906\"@ru . }";
 
     final EmbergraphSailUpdate update =
         (EmbergraphSailUpdate) con.prepareUpdate(QueryLanguage.SPARQL, updateStr);

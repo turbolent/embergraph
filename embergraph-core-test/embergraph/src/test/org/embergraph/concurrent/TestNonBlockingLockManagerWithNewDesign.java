@@ -68,7 +68,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    */
   public static class Wait10ResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       //            if (INFO)
       //                log.info("Executing: "+this);
@@ -104,7 +104,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    */
   static class DeathResourceTask<T> implements Callable<T> {
 
-    public T call() throws Exception {
+    public T call() {
 
       if (DEBUG) log.debug("Arrgh!");
 
@@ -118,7 +118,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_shutdownNow() throws InterruptedException, ExecutionException {
+  public void test_shutdownNow() {
 
     final NonBlockingLockManagerWithNewDesign<String> service =
         new NonBlockingLockManagerWithNewDesign<String>(
@@ -150,7 +150,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_shutdown() throws InterruptedException, ExecutionException {
+  public void test_shutdown() {
 
     final NonBlockingLockManagerWithNewDesign<String> service =
         new NonBlockingLockManagerWithNewDesign<String>(
@@ -227,11 +227,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
           (LockFutureTask<String, String>)
               service.submit(
                   new String[0],
-                  new Callable<String>() {
-                    public String call() throws Exception {
-                      return expected;
-                    }
-                  });
+                  () -> expected);
 
       /*
        * Note: This verifies that locks are granted synchronously when we
@@ -299,11 +295,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
           (LockFutureTask<String, String>)
               service.submit(
                   new String[0],
-                  new Callable<String>() {
-                    public String call() throws Exception {
-                      return expected;
-                    }
-                  });
+                  () -> expected);
 
       assertFalse(f.isCancelled());
 
@@ -337,7 +329,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
    * @throws TimeoutException
    */
   public void test_runOneThrowsException()
-      throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException, TimeoutException {
 
     final ExecutorService delegate = newExecutor();
 
@@ -357,11 +349,9 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
           (LockFutureTask<String, String>)
               service.submit(
                   new String[0],
-                  new Callable<String>() {
-                    public String call() throws Exception {
-                      // task throws exception.
-                      throw new HorridTaskDeath();
-                    }
+                  (Callable<String>) () -> {
+                    // task throws exception.
+                    throw new HorridTaskDeath();
                   });
 
       assertFalse(f.isCancelled());
@@ -460,11 +450,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
           (LockFutureTask<String, String>)
               service.submit(
                   new String[] {"test"},
-                  new Callable<String>() {
-                    public String call() throws Exception {
-                      return expected;
-                    }
-                  });
+                  () -> expected);
 
       assertEquals(expected, f.get(10 /* ms */, TimeUnit.MILLISECONDS));
 
@@ -521,19 +507,17 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
           (LockFutureTask<String, String>)
               service.submit(
                   new String[] {"test"},
-                  new Callable<String>() {
-                    public String call() throws Exception {
-                      // release locks.
+                  () -> {
+                    // release locks.
+                    service.releaseLocksForTask(new String[] {"test"});
+                    try {
+                      // error expected the 2nd time.
                       service.releaseLocksForTask(new String[] {"test"});
-                      try {
-                        // error expected the 2nd time.
-                        service.releaseLocksForTask(new String[] {"test"});
-                        fail("Expected: " + IllegalStateException.class);
-                      } catch (IllegalStateException ex) {
-                        if (INFO) log.info("Ignoring expected exception: " + ex);
-                      }
-                      return expected;
+                      fail("Expected: " + IllegalStateException.class);
+                    } catch (IllegalStateException ex) {
+                      if (INFO) log.info("Ignoring expected exception: " + ex);
                     }
+                    return expected;
                   });
 
       assertEquals(expected, f.get(10 /* ms */, TimeUnit.MILLISECONDS));

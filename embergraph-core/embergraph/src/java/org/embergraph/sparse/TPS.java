@@ -837,14 +837,8 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append(
-        "TPS{schema="
-            + schema
-            + ", timestamp="
-            + writeTime
-            + ", primaryKey="
-            + getPrimaryKey()
-            + ", tuples={");
+    sb.append("TPS{schema=").append(schema).append(", timestamp=").append(writeTime)
+        .append(", primaryKey=").append(getPrimaryKey()).append(", tuples={");
 
     final int n = 0;
 

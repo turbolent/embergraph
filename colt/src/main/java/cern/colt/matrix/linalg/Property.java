@@ -1163,22 +1163,16 @@ public class Property extends cern.colt.PersistentObject {
 
     // sort ascending by property name
     cern.colt.function.IntComparator comp =
-        new cern.colt.function.IntComparator() {
-          public int compare(int a, int b) {
-            return get(names, a).compareTo(get(names, b));
-          }
-        };
+        (a, b) -> get(names, a).compareTo(get(names, b));
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int a, int b) {
-            Object tmp;
-            tmp = names.get(a);
-            names.set(a, names.get(b));
-            names.set(b, tmp);
-            tmp = values.get(a);
-            values.set(a, values.get(b));
-            values.set(b, tmp);
-          }
+        (a, b) -> {
+          Object tmp;
+          tmp = names.get(a);
+          names.set(a, names.get(b));
+          names.set(b, tmp);
+          tmp = values.get(a);
+          values.set(a, values.get(b));
+          values.set(b, tmp);
         };
     cern.colt.GenericSorting.quickSort(0, names.size(), comp, swapper);
 

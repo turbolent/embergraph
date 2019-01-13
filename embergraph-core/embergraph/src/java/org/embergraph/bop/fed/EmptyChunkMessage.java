@@ -161,12 +161,6 @@ public class EmptyChunkMessage<E> implements IChunkMessage<E>, Serializable {
   @Override
   public IChunkAccessor<E> getChunkAccessor() {
 
-    return new IChunkAccessor<E>() {
-
-      public ICloseableIterator<E[]> iterator() {
-
-        return new EmptyCloseableIterator<>();
-      }
-    };
+    return () -> new EmptyCloseableIterator<>();
   }
 }

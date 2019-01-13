@@ -370,7 +370,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     private static final transient short VERSION0 = 0x0;
 
     @Override
-    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(final ObjectInput in) throws IOException {
 
       final short version = ShortPacker.unpackShort(in);
 
@@ -421,9 +421,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
        * the [short] value is in [0:Short.MAX_VALUE] we can then pack it
        * into the output stream.
        */
-      for (int i = 0; i < n; i++) {
-
-        final int c = counters[i];
+      for (final int c : counters) {
 
         final short tmp = c == BlobsIndexHelper.NOT_FOUND ? Short.MAX_VALUE : (short) c;
 
@@ -469,11 +467,11 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       final int[] counters = new int[size];
 
-      for (int i = 0; i < a.length; i++) {
+      for (SplitValuePair<Split, Result> splitResultSplitValuePair : a) {
 
-        final Split split = a[i].key;
+        final Split split = splitResultSplitValuePair.key;
 
-        final Result tmp = a[i].val;
+        final Result tmp = splitResultSplitValuePair.val;
 
         totalBucketSize += tmp.totalBucketSize;
 

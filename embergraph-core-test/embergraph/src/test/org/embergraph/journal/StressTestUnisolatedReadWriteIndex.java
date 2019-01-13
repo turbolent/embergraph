@@ -60,12 +60,12 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
   private Journal journal;
 
-  public void setUpComparisonTest(final Properties properties) throws Exception {
+  public void setUpComparisonTest(final Properties properties) {
 
     journal = new Journal(properties);
   }
 
-  public void tearDownComparisonTest() throws Exception {
+  public void tearDownComparisonTest() {
 
     if (journal != null) {
 
@@ -402,7 +402,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
      * @return null
      */
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final UnisolatedReadWriteIndex[] indices = new UnisolatedReadWriteIndex[resource.length];
 

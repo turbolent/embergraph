@@ -139,7 +139,7 @@ public class ObjectSocketChannelStream {
     return new OutputStream() {
       final ByteBuffer buf = ByteBuffer.allocate(2048);
 
-      public synchronized void write(int b) throws IOException {
+      public synchronized void write(int b) {
         if (buf.remaining() == 0) {
           flush();
         }
@@ -147,7 +147,7 @@ public class ObjectSocketChannelStream {
         buf.put((byte) b);
       }
 
-      public synchronized void write(byte[] bytes, int off, int len) throws IOException {
+      public synchronized void write(byte[] bytes, int off, int len) {
         int rem = buf.remaining();
         while (len > rem) {
           len -= rem;

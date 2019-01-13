@@ -48,18 +48,16 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
     final MovingAverageTask averageMasterPendingSetSize =
         new MovingAverageTask(
             "averageMasterPendingSetSize",
-            new Callable<Long>() {
-              public Long call() {
-                long n = 0;
-                final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
-                while (itr.hasNext()) {
-                  final AbstractPendingSetMasterTask master =
-                      (AbstractPendingSetMasterTask) itr.next().get();
-                  if (master == null) continue;
-                  n += master.getPendingSetSize();
-                }
-                return n;
+            (Callable<Long>) () -> {
+              long n = 0;
+              final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
+              while (itr.hasNext()) {
+                final AbstractPendingSetMasterTask master =
+                    (AbstractPendingSetMasterTask) itr.next().get();
+                if (master == null) continue;
+                n += master.getPendingSetSize();
               }
+              return n;
             });
 
     final MovingAverageTask averageSinkPendingSetSize =
@@ -72,14 +70,12 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
                 // #of subtasks.
                 final AtomicInteger m = new AtomicInteger(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        final int size = ((AbstractPendingSetSubtask) subtask).getPendingSetSize();
-                        // sum of pending set sizes.
-                        n.addAndGet(size);
-                        // #of subtasks reflected by that sum.
-                        m.incrementAndGet();
-                      }
+                    subtask -> {
+                      final int size = ((AbstractPendingSetSubtask) subtask).getPendingSetSize();
+                      // sum of pending set sizes.
+                      n.addAndGet(size);
+                      // #of subtasks reflected by that sum.
+                      m.incrementAndGet();
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
                 while (itr.hasNext()) {
@@ -88,8 +84,6 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -110,14 +104,12 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
               public Integer call() {
                 final AtomicInteger max = new AtomicInteger(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        final int size = ((AbstractPendingSetSubtask) subtask).getPendingSetSize();
-                        // find the max (sync not necessary since op is
-                        // serialized).
-                        if (size > max.get()) {
-                          max.set(size);
-                        }
+                    subtask -> {
+                      final int size = ((AbstractPendingSetSubtask) subtask).getPendingSetSize();
+                      // find the max (sync not necessary since op is
+                      // serialized).
+                      if (size > max.get()) {
+                        max.set(size);
                       }
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
@@ -127,8 +119,6 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;

@@ -188,18 +188,15 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
     this.batchedUpdatedListener = batchedUpdateListener;
 
+    /*
+     * Add the reference to the backing queue for the outer class. The caller MUST hold the
+     * outer class lock.
+     */
     this.threadLocalQueueEvictionListener =
-        new HardReferenceQueueEvictionListener<T>() {
+        (cache, ref) -> {
 
-          /*
-           * Add the reference to the backing queue for the outer class. The caller MUST hold the
-           * outer class lock.
-           */
-          public void evicted(final IHardReferenceQueue<T> cache, final T ref) {
-
-            // Note: invokes add() on the shared inner queue.
-            sharedQueue.add(ref);
-          }
+          // Note: invokes add() on the shared inner queue.
+          sharedQueue.add(ref);
         };
 
     this.threadLocalBuffers = threadLocalBuffers;

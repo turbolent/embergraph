@@ -19,11 +19,6 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.eclipse.jetty.server.Server;
-import org.embergraph.Banner;
-import org.embergraph.journal.ITx;
-import org.embergraph.journal.TimestampUtility;
-import org.embergraph.util.httpd.Config;
 
 /*
  * Utility class provides a simple SPARQL end point with a REST API. It is intended to be used for
@@ -35,7 +30,7 @@ import org.embergraph.util.httpd.Config;
  */
 public class StandaloneNanoSparqlServer extends NanoSparqlServer {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     Banner.banner();
 
     int port = -1;

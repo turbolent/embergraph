@@ -56,7 +56,6 @@ import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
@@ -111,40 +110,38 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
     final IV<?, ?> xsdDateTimeIV = newTermId(VTE.URI); // XSD.DATETIME;
 
     final IDatatypeURIResolver resolver =
-        new IDatatypeURIResolver() {
-          public EmbergraphURI resolve(final URI uri) {
-            final EmbergraphURI buri = vf.createURI(uri.stringValue());
-            if (ColorsEnumExtension.COLOR.equals(uri)) {
-              buri.setIV(colorIV);
-            } else if (XSD.STRING.equals(uri)) {
-              buri.setIV(xsdStringIV);
-            } else if (XSD.DATETIME.equals(uri)) {
-              buri.setIV(xsdDateTimeIV);
-            } else if (XSD.DATE.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.TIME.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.GDAY.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.GMONTH.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.GMONTHDAY.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.GYEAR.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.GYEARMONTH.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.POSITIVE_INTEGER.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.NEGATIVE_INTEGER.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.NON_POSITIVE_INTEGER.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else if (XSD.NON_NEGATIVE_INTEGER.equals(uri)) {
-              buri.setIV(newTermId(VTE.URI));
-            } else throw new UnsupportedOperationException();
-            return buri;
-          }
+        uri -> {
+          final EmbergraphURI buri = vf.createURI(uri.stringValue());
+          if (ColorsEnumExtension.COLOR.equals(uri)) {
+            buri.setIV(colorIV);
+          } else if (XSD.STRING.equals(uri)) {
+            buri.setIV(xsdStringIV);
+          } else if (XSD.DATETIME.equals(uri)) {
+            buri.setIV(xsdDateTimeIV);
+          } else if (XSD.DATE.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.TIME.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.GDAY.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.GMONTH.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.GMONTHDAY.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.GYEAR.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.GYEARMONTH.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.POSITIVE_INTEGER.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.NEGATIVE_INTEGER.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.NON_POSITIVE_INTEGER.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else if (XSD.NON_NEGATIVE_INTEGER.equals(uri)) {
+            buri.setIV(newTermId(VTE.URI));
+          } else throw new UnsupportedOperationException();
+          return buri;
         };
 
     final List<IV<?, ?>> ivs = new LinkedList<>();
@@ -821,9 +818,9 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
             vf.createLiteral(df.newXMLGregorianCalendar("1901-10-26T21:32:52")),
           };
 
-          for (int i = 0; i < dt.length; i++) {
+          for (EmbergraphLiteral embergraphLiteral : dt) {
 
-            ivs.add(ext.createIV(dt[i]));
+            ivs.add(ext.createIV(embergraphLiteral));
           }
         }
 
@@ -843,9 +840,9 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
             vf.createLiteral("0", XSD.NON_NEGATIVE_INTEGER),
           };
 
-          for (int i = 0; i < dt.length; i++) {
+          for (EmbergraphLiteral embergraphLiteral : dt) {
 
-            ivs.add(ext.createIV(dt[i]));
+            ivs.add(ext.createIV(embergraphLiteral));
           }
         }
 

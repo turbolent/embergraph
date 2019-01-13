@@ -171,9 +171,9 @@ public class NV implements Serializable, Comparable<NV> {
 
     final Map<String, Object> tmp = new LinkedHashMap<>(a.length);
 
-    for (int i = 0; i < a.length; i++) {
+    for (NV nv : a) {
 
-      tmp.put(a[i].name, a[i].value);
+      tmp.put(nv.name, nv.value);
     }
 
     return tmp;

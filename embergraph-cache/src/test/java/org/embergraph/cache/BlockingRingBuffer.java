@@ -248,24 +248,24 @@ public class BlockingRingBuffer<E> implements BlockingQueue<E> {
     return 0;
   }
 
-  public boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean offer(E e, long timeout, TimeUnit unit) {
     // TODO Auto-generated method stub
     return false;
   }
 
-  public E poll(long timeout, TimeUnit unit) throws InterruptedException {
+  public E poll(long timeout, TimeUnit unit) {
     // TODO Auto-generated method stub
     return null;
   }
 
   // @todo must gain lock and then await signal if buffer is full
-  public void put(E e) throws InterruptedException {
+  public void put(E e) {
     // TODO Auto-generated method stub
 
   }
 
   // @todo must gain lock and then await signal if buffer is empty
-  public E take() throws InterruptedException {
+  public E take() {
     // TODO Auto-generated method stub
     return null;
   }

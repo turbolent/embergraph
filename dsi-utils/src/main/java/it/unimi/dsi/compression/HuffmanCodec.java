@@ -231,11 +231,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
         symbol,
         0,
         size,
-        new IntComparator() {
-          public int compare(int x, int y) {
-            return frequency[y] - frequency[x];
-          }
-        });
+        (x, y) -> frequency[y] - frequency[x]);
 
     // Assign codewords (just for the coder--the decoder needs just the lengths).
     int s = symbol[0];

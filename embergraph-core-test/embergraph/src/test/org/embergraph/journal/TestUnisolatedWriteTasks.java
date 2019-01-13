@@ -106,7 +106,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.UNISOLATED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   if (log.isInfoEnabled()) log.info("Will register " + getOnlyResource());
 
@@ -149,7 +149,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.READ_COMMITTED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   if (log.isInfoEnabled()) log.info("Will read from " + getOnlyResource());
 
@@ -252,7 +252,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.UNISOLATED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   getJournal()
                       .registerIndex(resource[0], new IndexMetadata(resource[0], indexUUID1));
@@ -300,7 +300,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.READ_COMMITTED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   {
                     final IIndex ndx = getIndex("foo");
@@ -466,7 +466,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.UNISOLATED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   // register all indices.
                   for (int i = 0; i < nindices; i++) {
@@ -515,7 +515,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                 // verify the writes on each index.
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   for (int i = 0; i < nindices; i++) {
 

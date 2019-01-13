@@ -299,7 +299,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
         this.bset = bset;
       }
 
-      public IRunningQuery call() throws Exception {
+      public IRunningQuery call() {
 
         IRunningQuery runningSubquery = null;
         ICloseableIterator<IBindingSet[]> subquerySolutionItr = null;

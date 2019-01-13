@@ -103,7 +103,9 @@ public class DebugInputBitStream extends InputBitStream {
   public void read(byte[] bits, int len) throws IOException {
     ibs.read(bits, len);
     MutableString s = new MutableString(" {");
-    for (int i = 0; i < bits.length; i++) s.append(DebugOutputBitStream.byte2Binary(bits[i]));
+    for (byte bit : bits) {
+      s.append(DebugOutputBitStream.byte2Binary(bit));
+    }
     pw.print(s.length(len).append("}"));
   }
 

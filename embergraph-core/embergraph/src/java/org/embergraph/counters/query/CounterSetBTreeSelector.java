@@ -88,6 +88,6 @@ public class CounterSetBTreeSelector implements ICounterSelector {
     //        if (log.isInfoEnabled())
     //            log.info("Selected: ndistinct=" + ndistinct);
 
-    return v.toArray(new ICounter[v.size()]);
+    return v.toArray(new ICounter[0]);
   }
 }

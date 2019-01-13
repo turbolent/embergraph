@@ -63,12 +63,11 @@ public class StaticAnalysisStat implements Serializable {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append("Stats for " + statName + ":");
-    sb.append("{elapsed=" + elapsed.get());
-    sb.append(", nrCalls=" + nrCalls);
-    sb.append("}");
-    return sb.toString();
+    String sb = ("Stats for " + statName + ":")
+        + "{elapsed=" + elapsed.get()
+        + ", nrCalls=" + nrCalls
+        + "}";
+    return sb;
   }
 
   public long getNrCalls() {

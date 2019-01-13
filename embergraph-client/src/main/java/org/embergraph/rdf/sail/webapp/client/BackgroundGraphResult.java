@@ -69,7 +69,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
   }
 
   @Override
-  public void remove() throws QueryEvaluationException {
+  public void remove() {
     queue.remove();
   }
 
@@ -165,7 +165,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
   }
 
   @Override
-  public void startRDF() throws RDFHandlerException {
+  public void startRDF() {
     // no-op
   }
 
@@ -180,12 +180,12 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
   }
 
   @Override
-  public void handleComment(final String comment) throws RDFHandlerException {
+  public void handleComment(final String comment) {
     // ignore
   }
 
   @Override
-  public void handleNamespace(final String prefix, final String uri) throws RDFHandlerException {
+  public void handleNamespace(final String prefix, final String uri) {
     namespaces.put(prefix, uri);
   }
 
@@ -201,7 +201,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
   }
 
   @Override
-  public void endRDF() throws RDFHandlerException {
+  public void endRDF() {
     namespacesReady.countDown();
   }
 }

@@ -448,9 +448,7 @@ public class SplitUtility {
     final List<BuildIndexSegmentSplitTask> tasks =
         new ArrayList<>(nsplits);
 
-    for (int i = 0; i < splits.length; i++) {
-
-      final Split split = splits[i];
+    for (final Split split : splits) {
 
       /*
        * Create task to build an index segment from the key-range
@@ -1004,6 +1002,6 @@ public class SplitUtility {
       throw new AssertionError();
     }
 
-    return splits.toArray(new Split[splits.size()]);
+    return splits.toArray(new Split[0]);
   }
 }

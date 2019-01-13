@@ -435,16 +435,15 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
    */
   private static String getNamespaceDeclarations() {
-    final StringBuilder declarations = new StringBuilder();
     // declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
     // declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
     // declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
     // declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
     // declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
-    declarations.append("\n");
 
-    return declarations.toString();
+    String declarations = ("PREFIX ex: <" + EX_NS + "> \n")
+        + "\n";
+    return declarations;
   }
 
   /*
@@ -822,7 +821,6 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
             log.warn(t, t);
           }
         }
-        return;
       }
     }
   }
@@ -1135,16 +1133,12 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         // Wrap as FutureTask.
         final FutureTask<Void> ft =
             new FutureTask<>(
-                new Callable<Void>() {
+                () -> {
 
-                  @Override
-                  public Void call() throws Exception {
+                  // do operation.
+                  doApplyToNamespace(repo, uuid);
 
-                    // do operation.
-                    doApplyToNamespace(repo, uuid);
-
-                    return null;
-                  }
+                  return null;
                 });
 
         // register test.
@@ -1494,31 +1488,27 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
       // Wrap as FutureTask.
       final FutureTask<Void> ft =
           new FutureTask<>(
-              new Callable<Void>() {
+              () -> {
 
-                @Override
-                public Void call() throws Exception {
+                // Note: Wrap properties to avoid modification!
+                final Properties properties =
+                    new Properties(sharedTestState.testMode.getProperties());
 
-                  // Note: Wrap properties to avoid modification!
-                  final Properties properties =
-                      new Properties(sharedTestState.testMode.getProperties());
+                // create namespace.
+                rmgr.createRepository(namespace, properties);
 
-                  // create namespace.
-                  rmgr.createRepository(namespace, properties);
-
-                  // add entry IFF created.
-                  if (sharedTestState.namespaces.putIfAbsent(
-                      namespace, new ReentrantReadWriteLock())
-                      != null) {
-                    // Should not exist! Each namespace name is distinct!!!
-                    throw new AssertionError("namespace=" + namespace);
-                  }
-
-                  // Track #of namespaces that exist in the service.
-                  sharedTestState.namespaceExistCounter.incrementAndGet();
-
-                  return null;
+                // add entry IFF created.
+                if (sharedTestState.namespaces.putIfAbsent(
+                    namespace, new ReentrantReadWriteLock())
+                    != null) {
+                  // Should not exist! Each namespace name is distinct!!!
+                  throw new AssertionError("namespace=" + namespace);
                 }
+
+                // Track #of namespaces that exist in the service.
+                sharedTestState.namespaceExistCounter.incrementAndGet();
+
+                return null;
               });
 
       begin(namespace, uuid, ft);
@@ -1563,51 +1553,47 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         // Wrap as FutureTask.
         final FutureTask<Void> ft =
             new FutureTask<>(
-                new Callable<Void>() {
+                () -> {
 
-                  @Override
-                  public Void call() throws Exception {
+                  /*
+                   * Atomic decision whether to destroy the namespace
+                   * (MUTEX).
+                   *
+                   * TODO This MUTEX section means that at most one
+                   * DESTORY NAMESPACE operation can run at a time. This
+                   * means that we are never running those operations
+                   * concurrently and that means that we could be missing
+                   * some interesting edge cases in the concurrency
+                   * control. Modify this code to support more
+                   * concurrency.
+                   */
+                  sharedTestState.destroyNamespaceLock.lock();
+                  try {
 
-                    /*
-                     * Atomic decision whether to destroy the namespace
-                     * (MUTEX).
-                     *
-                     * TODO This MUTEX section means that at most one
-                     * DESTORY NAMESPACE operation can run at a time. This
-                     * means that we are never running those operations
-                     * concurrently and that means that we could be missing
-                     * some interesting edge cases in the concurrency
-                     * control. Modify this code to support more
-                     * concurrency.
-                     */
-                    sharedTestState.destroyNamespaceLock.lock();
-                    try {
+                    // Track #of namespaces that exist in the service.
+                    if (sharedTestState.namespaceExistCounter.get()
+                        <= sharedTestState.minimumNamespaceCount.get()) {
 
-                      // Track #of namespaces that exist in the service.
-                      if (sharedTestState.namespaceExistCounter.get()
-                          <= sharedTestState.minimumNamespaceCount.get()) {
+                      log.warn(
+                          "AT NAMESPACE MINIMUM: min="
+                              + sharedTestState.minimumNamespaceCount
+                              + ", cur="
+                              + sharedTestState.namespaceExistCounter);
 
-                        log.warn(
-                            "AT NAMESPACE MINIMUM: min="
-                                + sharedTestState.minimumNamespaceCount
-                                + ", cur="
-                                + sharedTestState.namespaceExistCounter);
-
-                        return null;
-                      }
-
-                      // destroy the namespace.
-                      rmgr.deleteRepository(namespace, uuid);
-
-                      success.set(true);
-
-                    } finally {
-
-                      sharedTestState.destroyNamespaceLock.unlock();
+                      return null;
                     }
 
-                    return null;
+                    // destroy the namespace.
+                    rmgr.deleteRepository(namespace, uuid);
+
+                    success.set(true);
+
+                  } finally {
+
+                    sharedTestState.destroyNamespaceLock.unlock();
                   }
+
+                  return null;
                 });
 
         begin(namespace, uuid, ft);
@@ -1645,14 +1631,11 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
     @Override
     protected Callable<Void> getTask(final RemoteRepositoryManager rmgr, final UUID uuid) {
 
-      return new Callable<Void>() {
+      return () -> {
 
-        public Void call() throws Exception {
+        rmgr.getRepositoryDescriptions(uuid);
 
-          rmgr.getRepositoryDescriptions(uuid);
-
-          return null;
-        }
+        return null;
       };
     }
   }

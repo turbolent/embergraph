@@ -173,7 +173,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
     final IValueExpressionNode vexp = getValueExpressionNode();
 
     Set<IVariable<?>> requiredBound = new HashSet<>();
-    if (vexp != null && vexp instanceof ValueExpressionNode) {
+    if (vexp instanceof ValueExpressionNode) {
 
       requiredBound = sa.getSpannedVariables((ValueExpressionNode) vexp, true, requiredBound);
     }

@@ -231,7 +231,7 @@ public abstract class AbstractInterruptsTestCase extends AbstractRawStoreTestCas
     }
 
     @Override
-    protected Void doTask() throws Exception {
+    protected Void doTask() {
 
       // Get the live version of the named index.
       final BTree ndx = (BTree) getIndex(getOnlyResource());

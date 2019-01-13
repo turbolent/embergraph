@@ -446,7 +446,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
    *     <i>tm</i> indicates that truth maintenance should be enabled (only valid with triples or
    *     sids).
    */
-  public static void main(final String[] args) throws Exception {
+  public static void main(final String[] args) {
 
     if (args.length < 2) {
       System.err.println("(triples|sids|quads) (propertyFile|configFile) (tm)?");

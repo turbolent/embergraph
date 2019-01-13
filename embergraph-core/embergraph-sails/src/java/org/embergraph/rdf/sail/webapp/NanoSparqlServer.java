@@ -428,7 +428,7 @@ public class NanoSparqlServer {
    * @throws Exception
    */
   public static void awaitServerStart(final Server server)
-      throws InterruptedException, TimeoutException, Exception {
+      throws Exception {
 
     //        Note: Does not appear to help.
     //
@@ -524,7 +524,7 @@ public class NanoSparqlServer {
    * @throws SocketException
    * @throws IOException
    */
-  protected static String getHost() throws SocketException, IOException {
+  protected static String getHost() throws IOException {
 
     String hostAddr = NicUtil.getIpAddress("default.nic", "default", true /* loopbackOk */);
 

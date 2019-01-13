@@ -84,7 +84,7 @@ public class TestJournalAbort extends TestCase2 {
    *
    * @throws InterruptedException
    */
-  public void test_simpleAbortFailure() throws InterruptedException {
+  public void test_simpleAbortFailure() {
 
     // Define atomic to control whether abort should succeed or fail
     final AtomicBoolean succeed = new AtomicBoolean(true);

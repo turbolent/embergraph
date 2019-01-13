@@ -79,11 +79,10 @@ public class GeoSpatialUtility {
 
     @Override
     public String toString() {
-      final StringBuffer buf = new StringBuffer();
-      buf.append(getLat());
-      buf.append("#");
-      buf.append(getLon());
-      return buf.toString();
+      String buf = String.valueOf(getLat())
+          + "#"
+          + getLon();
+      return buf;
     }
 
     /*
@@ -164,13 +163,12 @@ public class GeoSpatialUtility {
 
     @Override
     public String toString() {
-      final StringBuffer buf = new StringBuffer();
-      buf.append(getLat());
-      buf.append("#");
-      buf.append(getLon());
-      buf.append("#");
-      buf.append(getTimestamp());
-      return buf.toString();
+      String buf = String.valueOf(getLat())
+          + "#"
+          + getLon()
+          + "#"
+          + getTimestamp();
+      return buf;
     }
 
     /*
@@ -233,28 +231,23 @@ public class GeoSpatialUtility {
     @Override
     public String toString() {
 
-      final StringBuffer buf = new StringBuffer();
-      buf.append("Center point: ");
-      buf.append(centerPoint);
-      buf.append("\n");
-
-      buf.append("Distance (lat/lon/time): ");
-      buf.append(distanceLat);
-      buf.append("/");
-      buf.append(distanceLon);
-      buf.append("/");
-      buf.append(distanceTime);
-      buf.append("\n");
-
-      buf.append("-> Low border: ");
-      buf.append(getLowerBorder());
-      buf.append("\n");
-
-      buf.append("-> High border: ");
-      buf.append(getUpperBorder());
-      buf.append("\n");
-
-      return buf.toString();
+      String buf = "Center point: "
+          + centerPoint
+          + "\n"
+          + "Distance (lat/lon/time): "
+          + distanceLat
+          + "/"
+          + distanceLon
+          + "/"
+          + distanceTime
+          + "\n"
+          + "-> Low border: "
+          + getLowerBorder()
+          + "\n"
+          + "-> High border: "
+          + getUpperBorder()
+          + "\n";
+      return buf;
     }
   }
 }

@@ -132,7 +132,7 @@ public class ByteBufferInputStream extends MeasurableInputStream implements Repo
   }
 
   @Override
-  public long skip(final long n) throws IOException {
+  public long skip(final long n) {
     final long toSkip = Math.min(remaining(), n);
     position(position() + toSkip);
     return toSkip;

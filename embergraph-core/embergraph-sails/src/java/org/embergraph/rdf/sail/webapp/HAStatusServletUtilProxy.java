@@ -55,8 +55,7 @@ public class HAStatusServletUtilProxy {
    *
    * @throws IOException
    */
-  public void doGet(HttpServletRequest req, HttpServletResponse resp, XMLBuilder.Node current)
-      throws IOException {
+  public void doGet(HttpServletRequest req, HttpServletResponse resp, XMLBuilder.Node current) {
     if (log.isInfoEnabled()) {
       log.info(WITHOUT_JINI_MSG);
     }
@@ -72,7 +71,7 @@ public class HAStatusServletUtilProxy {
    * @throws AsynchronousQuorumCloseException
    * @throws IOException
    */
-  public void doHAStatus(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void doHAStatus(HttpServletRequest req, HttpServletResponse resp) {
     if (log.isInfoEnabled()) {
       log.info(WITHOUT_JINI_MSG);
     }
@@ -88,7 +87,7 @@ public class HAStatusServletUtilProxy {
    * @throws AsynchronousQuorumCloseException
    * @throws IOException
    */
-  public void doHealthStatus(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void doHealthStatus(HttpServletRequest req, HttpServletResponse resp) {
     if (log.isInfoEnabled()) {
       log.info(WITHOUT_JINI_MSG);
     }

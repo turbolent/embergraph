@@ -89,7 +89,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
   public static class Wait10ResourceTask implements Callable<Object> {
 
     @Override
-    public Object call() throws Exception {
+    public Object call() {
 
       synchronized (this) {
         try {
@@ -115,7 +115,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
   static class DeathResourceTask implements Callable<Object> {
 
     @Override
-    public Object call() throws Exception {
+    public Object call() {
 
       throw new HorridTaskDeath();
     }
@@ -438,9 +438,9 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     public static final String DEFAULT_SORT_LOCK_REQUESTS = "true";
   }
 
-  public void setUpComparisonTest(Properties properties) throws Exception {}
+  public void setUpComparisonTest(Properties properties) {}
 
-  public void tearDownComparisonTest() throws Exception {}
+  public void tearDownComparisonTest() {}
 
   public void test_noResourcesDoesNotWait() throws Exception {
 

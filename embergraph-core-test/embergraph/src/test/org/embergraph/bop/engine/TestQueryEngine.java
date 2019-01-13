@@ -105,7 +105,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
   private QueryEngine queryEngine;
 
   @Override
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -139,7 +139,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
   }
 
   @Override
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();
@@ -159,7 +159,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
    *
    * @throws Exception
    */
-  public void test_startStop() throws Exception {
+  public void test_startStop() {
 
     // NOP
 
@@ -1346,19 +1346,17 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
       final int trial = i;
       final FutureTask<Void> ft =
           new FutureTask<>(
-              new Runnable() {
-                public void run() {
-                  try {
-                    if (log.isInfoEnabled()) {
-                      log.info("trial=" + trial);
-                    }
-                    test_query_join2();
-                  } catch (Throwable t) {
-                    // log error.
-                    log.error("trial=" + trial + " : " + t, t);
-                    // wrap exception.
-                    throw new RuntimeException(t);
+              () -> {
+                try {
+                  if (log.isInfoEnabled()) {
+                    log.info("trial=" + trial);
                   }
+                  test_query_join2();
+                } catch (Throwable t) {
+                  // log error.
+                  log.error("trial=" + trial + " : " + t, t);
+                  // wrap exception.
+                  throw new RuntimeException(t);
                 }
               },
               null);
@@ -1908,14 +1906,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     final Semaphore sem = new Semaphore(1);
 
     final Runnable task =
-        new Runnable() {
-
-          @Override
-          public void run() {
-
-            sem.release();
-          }
-        };
+        () -> sem.release();
 
     // Without the fix to the LatchedExecutor.scheduleNext this deadlocks in less than
     //	10,000 iterations

@@ -54,29 +54,25 @@ public class GeoSpatialTestWKTLiteralSerializer extends GeoSpatialDefaultLiteral
       throw new GeoSpatialSearchException(
           "Expected component string of lenth 2, but was " + components.length);
 
-    final StringBuffer buf = new StringBuffer();
-    buf.append("Point(");
-    buf.append(components[0]);
-    buf.append(",");
-    buf.append(components[1]);
-    buf.append(")");
-
-    return buf.toString();
+    String buf = "Point("
+        + components[0]
+        + ","
+        + components[1]
+        + ")";
+    return buf;
   }
 
   @Override
   public IV<?, ?> serializeLocation(
       final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
 
-    final StringBuffer buf = new StringBuffer();
-    buf.append("Point(");
-    buf.append(latitude);
-    buf.append(",");
-    buf.append(longitude);
-    buf.append(")");
-
+    String buf = "Point("
+        + latitude
+        + ","
+        + longitude
+        + ")";
     return DummyConstantNode.toDummyIV(
         vf.createLiteral(
-            buf.toString(), new URIImpl("http://www.opengis.net/ont/geosparql#wktLiteral")));
+            buf, new URIImpl("http://www.opengis.net/ont/geosparql#wktLiteral")));
   }
 }

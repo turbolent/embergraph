@@ -79,13 +79,13 @@ public class Bits {
 
     byte b = 0;
 
-    for (int i = 0; i < m.length; i++) {
+    for (int i1 : m) {
 
-      if (m[i] < 0 || m[i] > 7) {
+      if (i1 < 0 || i1 > 7) {
         throw new IndexOutOfBoundsException();
       }
 
-      b |= (0x1 << m[i]);
+      b |= (0x1 << i1);
     }
 
     b &= bits;

@@ -215,8 +215,7 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
   //        return repo;
   //    }
 
-  protected EmbergraphSailRepositoryConnection getQueryConnection(Repository dataRep)
-      throws Exception {
+  protected EmbergraphSailRepositoryConnection getQueryConnection(Repository dataRep) {
     // return dataRep.getConnection();
     final EmbergraphSailRepositoryConnection con =
         new EmbergraphSailRepositoryConnection(
@@ -261,7 +260,7 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
    * different for some of the tests to handle things like tests which will fail with inlining
    * enabled versus tests which require Unicode collation strength of IDENTICAL.
    */
-  private Properties getProperties() throws Exception {
+  private Properties getProperties() {
     final Properties _properties;
 
     /*

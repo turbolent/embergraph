@@ -92,7 +92,7 @@ public abstract class ManagedResourceService extends ResourceService {
    *     to read the data from that allocation.
    */
   @Override
-  protected ByteBuffer getBuffer(final UUID uuid) throws Exception {
+  protected ByteBuffer getBuffer(final UUID uuid) {
     final IAllocation allocation = allocator.getAllocation(uuid);
     if (allocation == null) return null;
     return allocation.getSlice();

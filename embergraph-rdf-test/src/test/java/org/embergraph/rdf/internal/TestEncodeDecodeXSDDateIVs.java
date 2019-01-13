@@ -48,7 +48,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:date literal encoding. */
-  public void test_encodeDecodeDateLiterals() throws Exception {
+  public void test_encodeDecodeDateLiterals() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -80,7 +80,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:gDay literal encoding. */
-  public void test_encodeDecodeGDay() throws Exception {
+  public void test_encodeDecodeGDay() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -115,7 +115,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:gMonth literal encoding. */
-  public void test_encodeDecodeGMonth() throws Exception {
+  public void test_encodeDecodeGMonth() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -150,7 +150,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:gMonthDay literal encoding. */
-  public void test_encodeDecodeGMonthDay() throws Exception {
+  public void test_encodeDecodeGMonthDay() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -185,7 +185,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:gYear literal encoding. */
-  public void test_encodeDecodeGYear() throws Exception {
+  public void test_encodeDecodeGYear() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -220,7 +220,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:gYear literal encoding. */
-  public void test_encodeDecodeGYearMonth() throws Exception {
+  public void test_encodeDecodeGYearMonth() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -255,7 +255,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:dateTime literal encoding. */
-  public void test_encodeDecodeDateTime() throws Exception {
+  public void test_encodeDecodeDateTime() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -293,7 +293,7 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
   }
 
   /** Unit test for xsd:dateTime literal encoding. */
-  public void test_encodeDecodeTime() throws Exception {
+  public void test_encodeDecodeTime() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -333,12 +333,10 @@ public class TestEncodeDecodeXSDDateIVs extends AbstractEncodeDecodeKeysTestCase
       final EmbergraphValueFactory vf) {
 
     return new DateTimeExtension<>(
-        new IDatatypeURIResolver() {
-          public EmbergraphURI resolve(URI uri) {
-            final EmbergraphURI buri = vf.createURI(uri.stringValue());
-            buri.setIV(newTermId(VTE.URI));
-            return buri;
-          }
+        uri -> {
+          final EmbergraphURI buri = vf.createURI(uri.stringValue());
+          buri.setIV(newTermId(VTE.URI));
+          return buri;
         },
         TimeZone.getTimeZone("GMT"));
   }

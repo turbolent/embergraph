@@ -413,7 +413,7 @@ public class AST2BOpFilters extends AST2BOpBase {
         final PipelineOp lexJoinOp =
             applyQueryHints(
                 new PipelineJoin(
-                    leftOrEmpty(inlineMaterializeOp), anns.toArray(new NV[anns.size()])),
+                    leftOrEmpty(inlineMaterializeOp), anns.toArray(new NV[0])),
                 queryHints,
                 ctx);
         //                final PipelineOp lexJoinOp = newJoin(inlineMaterializeOp, anns,
@@ -759,9 +759,8 @@ public class AST2BOpFilters extends AST2BOpBase {
     }
 
     // create a mutable version
-    final Collection<IConstraint> joinConstraints = new LinkedList<>();
 
-    joinConstraints.addAll(constraints);
+    final Collection<IConstraint> joinConstraints = new LinkedList<>(constraints);
 
     final Collection<IConstraint> tryBeforeMaterialization = new LinkedList<>();
 
@@ -801,7 +800,7 @@ public class AST2BOpFilters extends AST2BOpBase {
       joinConstraints.add(new TryBeforeMaterializationConstraint(c));
     }
 
-    return joinConstraints.toArray(new IConstraint[joinConstraints.size()]);
+    return joinConstraints.toArray(new IConstraint[0]);
   }
 
   /*

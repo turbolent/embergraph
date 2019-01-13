@@ -223,7 +223,6 @@ public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
       } else if (child instanceof ServiceNode) {
 
         // Do not rewrite things inside of a SERVICE node.
-        continue;
       }
     }
   } // doRecursiveRewrite(final AST2BOpContext context,..

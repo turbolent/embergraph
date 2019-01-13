@@ -833,7 +833,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
   @Override
   public void PP(final StringBuilder sb, final boolean showBinary) {
 
-    sb.append(PPID() + " [" + globalDepth + "] " + indent(getLevel()));
+    sb.append(PPID()).append(" [").append(globalDepth).append("] ").append(indent(getLevel()));
 
     sb.append("("); // start of address map.
 
@@ -856,7 +856,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
         sb.append(",");
 
         final int slot = i * slotsPerBuddy + j;
-        if (slot > 0 && slot % 16 == 0) sb.append("\n----------" + indent(getLevel()));
+        if (slot > 0 && slot % 16 == 0) sb.append("\n----------").append(indent(getLevel()));
 
         sb.append(PPVAL(slot, showBinary));
       }
@@ -937,18 +937,18 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 
     sb.append(super.toString());
 
-    sb.append("{ isDirty=" + isDirty());
+    sb.append("{ isDirty=").append(isDirty());
 
-    sb.append(", isDeleted=" + isDeleted());
+    sb.append(", isDeleted=").append(isDeleted());
 
-    sb.append(", addr=" + identity);
+    sb.append(", addr=").append(identity);
 
     final DirectoryPage p = (parent == null ? null : parent.get());
 
-    sb.append(", parent=" + (p == null ? "N/A" : p.toShortString()));
-    sb.append(", globalDepth=" + getGlobalDepth());
-    sb.append(", nbuddies=" + (1 << htree.addressBits) / (1 << globalDepth));
-    sb.append(", slotsPerBuddy=" + (1 << globalDepth));
+    sb.append(", parent=").append(p == null ? "N/A" : p.toShortString());
+    sb.append(", globalDepth=").append(getGlobalDepth());
+    sb.append(", nbuddies=").append((1 << htree.addressBits) / (1 << globalDepth));
+    sb.append(", slotsPerBuddy=").append(1 << globalDepth);
     if (data == null) {
 
       // No data record? (Generally, this means it was stolen by copy on
@@ -958,7 +958,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
       return sb.toString();
     }
 
-    sb.append(", nkeys=" + getKeyCount());
+    sb.append(", nkeys=").append(getKeyCount());
 
     // sb.append(", minKeys=" + minKeys());
 

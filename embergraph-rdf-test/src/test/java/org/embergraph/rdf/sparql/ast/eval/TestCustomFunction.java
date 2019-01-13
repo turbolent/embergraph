@@ -67,22 +67,14 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     final URI myFunctionUri = new URIImpl("http://www.embergraph.org/myFunction");
 
     final FunctionRegistry.Factory myFactory =
-        new FunctionRegistry.Factory() {
+        (context, globals, scalarValues, args) -> {
 
-          @Override
-          public IValueExpression<? extends IV> create(
-              final BOpContextBase context,
-              final GlobalAnnotations globals,
-              final Map<String, Object> scalarValues,
-              final ValueExpressionNode... args) {
+          FunctionRegistry.checkArgs(args, ValueExpressionNode.class);
 
-            FunctionRegistry.checkArgs(args, ValueExpressionNode.class);
+          final IValueExpression<? extends IV> ve =
+              AST2BOpUtility.toVE(context, globals, args[0]);
 
-            final IValueExpression<? extends IV> ve =
-                AST2BOpUtility.toVE(context, globals, args[0]);
-
-            return new MyFunctionBOp(ve, globals);
-          }
+          return new MyFunctionBOp(ve, globals);
         };
 
     FunctionRegistry.add(myFunctionUri, myFactory);

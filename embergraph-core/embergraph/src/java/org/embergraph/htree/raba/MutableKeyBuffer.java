@@ -117,11 +117,9 @@ public class MutableKeyBuffer implements IRaba {
     this.keys = new byte[src.keys.length][];
 
     // copy the keys.
-    for (int i = 0; i < keys.length; i++) {
-
-      // Note: copies the reference.
-      this.keys[i] = src.keys[i];
-    }
+    // Note: copies the reference.
+    if (keys.length >= 0)
+      System.arraycopy(src.keys, 0, this.keys, 0, keys.length);
   }
 
   /*
@@ -366,7 +364,7 @@ public class MutableKeyBuffer implements IRaba {
    * @throws UnsupportedOperationException
    */
   @Override
-  public int add(DataInput in, int len) throws IOException {
+  public int add(DataInput in, int len) {
 
     throw new UnsupportedOperationException();
   }

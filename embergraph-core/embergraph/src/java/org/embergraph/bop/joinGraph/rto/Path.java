@@ -179,10 +179,10 @@ public class Path {
     //            first = false;
     //        }
     sb.append("]");
-    sb.append(",sumEstRead=" + sumEstRead);
-    sb.append(",sumEstCard=" + sumEstCard);
-    sb.append(",sumEstCost=" + sumEstCost);
-    sb.append(",sample=" + edgeSample);
+    sb.append(",sumEstRead=").append(sumEstRead);
+    sb.append(",sumEstCard=").append(sumEstCard);
+    sb.append(",sumEstCost=").append(sumEstCost);
+    sb.append(",sample=").append(edgeSample);
     sb.append("}");
     return sb.toString();
   }
@@ -345,14 +345,12 @@ public class Path {
      * are NOT found in this path the paths are not unordered variations
      * of one another.
      */
-    for (int i = 0; i < v2.length; i++) {
-
-      final Vertex tmp = v2[i];
+    for (final Vertex tmp : v2) {
 
       boolean found = false;
-      for (int j = 0; j < v1.length; j++) {
+      for (Vertex vertex : v1) {
 
-        if (v1[j] == tmp) {
+        if (vertex == tmp) {
           found = true;
           break;
         }

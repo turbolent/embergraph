@@ -202,7 +202,7 @@ public class PSOutputStream extends IPSOutputStream {
    * <p>We no longer store continuation addresses, instead we allocate blob allocations via a blob
    * header block.
    */
-  public void write(final int b) throws IOException {
+  public void write(final int b) {
     if (m_store == null) {
       throw new IllegalStateException(ERR_NO_STORE);
     }
@@ -334,8 +334,8 @@ public class PSOutputStream extends IPSOutputStream {
           final ByteArrayOutputStream hdrbuf = new ByteArrayOutputStream(hdrBufSize);
           final DataOutputStream hdrout = new DataOutputStream(hdrbuf);
           hdrout.writeInt(m_blobHeader.size());
-          for (int i = 0; i < m_blobHeader.size(); i++) {
-            hdrout.writeInt(m_blobHeader.get(i));
+          for (Integer integer : m_blobHeader) {
+            hdrout.writeInt(integer);
           }
           hdrout.flush();
 
@@ -365,7 +365,7 @@ public class PSOutputStream extends IPSOutputStream {
     return addr;
   }
 
-  public void close() throws IOException {
+  public void close() {
     if (false && m_store != null) {
       m_store = null;
 

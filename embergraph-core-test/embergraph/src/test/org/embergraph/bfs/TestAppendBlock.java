@@ -235,7 +235,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
    * @todo do more correct rejection tests.
    * @throws IOException
    */
-  public void test_atomicAppendCorrectRejection() throws IOException {
+  public void test_atomicAppendCorrectRejection() {
 
     final String id = "test";
 

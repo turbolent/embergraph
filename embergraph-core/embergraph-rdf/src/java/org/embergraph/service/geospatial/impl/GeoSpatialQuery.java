@@ -22,6 +22,7 @@ package org.embergraph.service.geospatial.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -582,7 +583,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
 
     } else {
 
-      return Arrays.asList((IGeoSpatialQuery) this);
+      return Collections.singletonList((IGeoSpatialQuery) this);
     }
   }
 

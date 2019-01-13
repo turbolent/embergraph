@@ -15,6 +15,7 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import junit.framework.TestCase;
@@ -89,9 +90,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
    */
   protected static <T> Set<T> set(final T... a) {
     final Set<T> tmp = new LinkedHashSet<>();
-    for (T x : a) {
-      tmp.add(x);
-    }
+    tmp.addAll(Arrays.asList(a));
     return tmp;
   }
 
@@ -99,9 +98,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
   protected static <T> void assertSameEdges(
       final Set<? extends T> expected, final Set<? extends T> actual) {
 
-    final Set<T> tmp = new LinkedHashSet<>();
-
-    tmp.addAll(expected);
+    final Set<T> tmp = new LinkedHashSet<>(expected);
 
     for (T t : actual) {
 

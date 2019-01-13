@@ -25,8 +25,8 @@ public class TestCloseable extends TestCase {
 
   protected void setUp() {
     char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-    for (int i = 0; i < chars.length; i++) {
-      m_data.add(Character.valueOf(chars[i]));
+    for (char aChar : chars) {
+      m_data.add(Character.valueOf(aChar));
     }
   }
 

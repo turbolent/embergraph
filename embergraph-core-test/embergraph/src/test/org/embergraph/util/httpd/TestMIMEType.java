@@ -64,17 +64,16 @@ public class TestMIMEType extends TestCase {
 
       sb.append("Criteria");
 
-      sb.append(": type=" + getType());
-      sb.append(", subtype=" + getSubtype());
+      sb.append(": type=").append(getType());
+      sb.append(", subtype=").append(getSubtype());
       sb.append(", params=");
 
       NVPair[] params = getParams();
 
-      for (int i = 0; i < params.length; i++) {
+      for (NVPair param : params) {
 
-        NVPair param = params[i];
-
-        sb.append("\"" + param.getName() + "\"=\"" + param.getValue() + "\"");
+        sb.append("\"").append(param.getName()).append("\"=\"").append(param.getValue())
+            .append("\"");
       }
 
       return sb.toString();
@@ -114,11 +113,11 @@ public class TestMIMEType extends TestCase {
 
       NVPair[] params = getParams();
 
-      for (int i = 0; i < params.length; i++) {
+      for (NVPair param : params) {
 
-        String attribute = params[i].getName();
+        String attribute = param.getName();
 
-        String realValue = params[i].getValue();
+        String realValue = param.getValue();
 
         String foundValue = t.getParamValue(attribute);
 

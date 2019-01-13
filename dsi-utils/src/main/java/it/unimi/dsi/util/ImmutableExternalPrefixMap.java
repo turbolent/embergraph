@@ -194,17 +194,20 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
 
     final MutableString prevTerm = new MutableString();
 
-    for (Iterator<? extends CharSequence> i = terms.iterator(); i.hasNext(); ) {
-      s = i.next();
+    for (CharSequence term1 : terms) {
+      s = term1;
       maxWordLength = Math.max(s.length(), maxWordLength);
-      for (int j = s.length(); j-- != 0; ) frequency[s.charAt(j)]++;
-      if (count > 0 && prevTerm.compareTo(s) >= 0)
+      for (int j = s.length(); j-- != 0; ) {
+        frequency[s.charAt(j)]++;
+      }
+      if (count > 0 && prevTerm.compareTo(s) >= 0) {
         throw new IllegalArgumentException(
             "The provided term collection is not sorted, or contains duplicates ["
                 + prevTerm
                 + ", "
                 + s
                 + "]");
+      }
       count++;
       prevTerm.replace(s);
     }
@@ -278,8 +281,8 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     final ObjectArrayList<MutableString> delimiters = new ObjectArrayList<>();
     prevTerm.length(0);
 
-    for (Iterator<?> i = terms.iterator(); i.hasNext(); ) {
-      s = (CharSequence) i.next();
+    for (CharSequence term : terms) {
+      s = term;
       length = s.length();
 
       isDelimiter = false;
@@ -291,9 +294,12 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
           prefixLength < length
               && prefixLength < prevTermLength
               && prevTerm.charAt(prefixLength) == s.charAt(prefixLength);
-          prefixLength++) ;
-      for (int j = prefixLength; j < length; j++)
+          prefixLength++) {
+        ;
+      }
+      for (int j = prefixLength; j < length; j++) {
         bits += codeWord[char2symbol.get(s.charAt(j))].size();
+      }
 
       // if ( bits + length + 1 > blockSize ) throw new IllegalArgumentException( "The string \"" +
       // s + "\" is too long to be encoded with block size " + blockSizeInBytes );
@@ -302,18 +308,20 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
       // align.
       if (output.writtenBits() % blockSize != 0
           && output.writtenBits() / blockSize
-              != (output.writtenBits()
-                      + (length - prefixLength + 1)
-                      + (prefixLength + 1)
-                      + bits
-                      - 1)
-                  / blockSize) {
+          != (output.writtenBits()
+          + (length - prefixLength + 1)
+          + (prefixLength + 1)
+          + bits
+          - 1)
+          / blockSize) {
         // We align by writing 0es.
-        if (DEBUG)
+        if (DEBUG) {
           System.err.println(
               "Aligning away " + (blockSize - output.writtenBits() % blockSize) + " bits...");
-        for (int j = (int) (blockSize - output.writtenBits() % blockSize); j-- != 0; )
+        }
+        for (int j = (int) (blockSize - output.writtenBits() % blockSize); j-- != 0; ) {
           output.writeBit(0);
+        }
         assert !ASSERTS || output.writtenBits() % blockSize == 0;
       }
 
@@ -324,19 +332,24 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
       }
 
       // Note that delimiters do not get the prefix length, as it's 0.
-      if (!isDelimiter) output.writeUnary(prefixLength);
+      if (!isDelimiter) {
+        output.writeUnary(prefixLength);
+      }
       output.writeUnary(length - prefixLength);
 
       // Write the next coded suffix on output.
       for (int j = prefixLength; j < length; j++) {
         BitVector c = codeWord[char2symbol.get(s.charAt(j))];
-        for (int k = 0; k < c.size(); k++) output.writeBit(c.getBoolean(k));
+        for (int k = 0; k < c.size(); k++) {
+          output.writeBit(c.getBoolean(k));
+        }
       }
 
       if (isDelimiter) {
-        if (DEBUG)
+        if (DEBUG) {
           System.err.println(
               "First string of block " + blockStarts.size() + ": " + termCount + " (" + s + ")");
+        }
         // The current word starts a new block
         blockStarts.add(termCount);
         // We do not want to rely on s being immutable.

@@ -160,7 +160,6 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
       sail.create(properties);
       if (log.isInfoEnabled()) log.info("Created tripleStore: " + namespace);
       ok = true;
-      return;
     } finally {
       if (!ok) sail.shutDown();
     }
@@ -184,8 +183,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
 
   }
 
-  private void dropTripleStore(final IIndexManager indexManager, final String namespace)
-      throws InterruptedException, ExecutionException {
+  private void dropTripleStore(final IIndexManager indexManager, final String namespace) {
 
     if (log.isInfoEnabled()) log.info("KB namespace=" + namespace);
 
@@ -522,7 +520,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
       out.add(itr.next());
     }
 
-    return out.toArray(new Statement[out.size()]);
+    return out.toArray(new Statement[0]);
   }
 
   /*
@@ -664,7 +662,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return baos.toByteArray();
   }
 
-  protected Graph genNTRIPLES2(final int ntriples) throws RDFHandlerException {
+  protected Graph genNTRIPLES2(final int ntriples) {
 
     final Graph g = new LinkedHashModel();
 

@@ -162,7 +162,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public ICloseableIterator<IBindingSet> call(final IBindingSet[] bindingSets) throws Exception {
+    public ICloseableIterator<IBindingSet> call(final IBindingSet[] bindingSets) {
 
       /*
        * << <s> ?p ?o >> ?action ?time . # SPO

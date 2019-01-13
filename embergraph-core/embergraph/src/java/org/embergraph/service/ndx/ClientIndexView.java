@@ -261,21 +261,13 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{ ");
-
-    sb.append("name=" + name);
-
-    sb.append(", timestamp=" + timestamp);
-
-    sb.append(", readConsistent=" + readConsistent);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ "
+        + "name=" + name
+        + ", timestamp=" + timestamp
+        + ", readConsistent=" + readConsistent
+        + "}";
+    return sb;
   }
 
   /*
@@ -842,7 +834,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
      *     timely.
      */
     @Override
-    protected void finalize() throws Exception {
+    protected void finalize() {
 
       src.close();
     }
@@ -1028,7 +1020,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
       }
 
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         try {
 

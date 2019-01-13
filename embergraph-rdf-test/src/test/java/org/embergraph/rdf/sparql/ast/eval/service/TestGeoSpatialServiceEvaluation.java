@@ -621,7 +621,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
    * geo:spatialCircleCenter "-91#0.883" . ?res geo:spatialCircleRadius "10000000" . # spans all
    * earth ?res geo:timeStart "0" . ?res geo:timeEnd "0" . }
    */
-  public void testCircleOutOfBounds01a() throws Exception {
+  public void testCircleOutOfBounds01a() {
 
     try {
       new TestHelper(
@@ -651,7 +651,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
    * geo:spatialCircleCenter "27.9932#182" . ?res geo:spatialCircleRadius "10000000" . # spans all
    * earth ?res geo:timeStart "0" . ?res geo:timeEnd "0" . }
    */
-  public void testCircleOutOfBounds01b() throws Exception {
+  public void testCircleOutOfBounds01b() {
 
     try {
 
@@ -698,7 +698,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
    *
    * @throws Exception
    */
-  public void testRectangleOutOfBounds01a() throws Exception {
+  public void testRectangleOutOfBounds01a() {
 
     try {
       new TestHelper(
@@ -724,7 +724,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
    *
    * @throws Exception
    */
-  public void testRectangleOutOfBounds01b() throws Exception {
+  public void testRectangleOutOfBounds01b() {
 
     try {
       new TestHelper(

@@ -63,7 +63,7 @@ public class DescribeBindingsCollector
 
     if (src == null) throw new IllegalArgumentException();
 
-    this.originalVars = originalVars.toArray(new IVariable[originalVars.size()]);
+    this.originalVars = originalVars.toArray(new IVariable[0]);
 
     this.describedResources = describedResources;
 
@@ -71,7 +71,7 @@ public class DescribeBindingsCollector
   }
 
   @Override
-  public void close() throws QueryEvaluationException {
+  public void close() {
 
     open = false;
   }
@@ -120,7 +120,7 @@ public class DescribeBindingsCollector
   }
 
   @Override
-  public void remove() throws QueryEvaluationException {
+  public void remove() {
 
     throw new UnsupportedOperationException();
   }

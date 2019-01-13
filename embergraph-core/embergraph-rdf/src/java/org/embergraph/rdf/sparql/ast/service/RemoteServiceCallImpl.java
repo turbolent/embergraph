@@ -28,7 +28,6 @@ import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.openrdf.query.BindingSet;
-import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 /*
@@ -48,11 +47,10 @@ public class RemoteServiceCallImpl implements RemoteServiceCall {
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getName());
-    sb.append("{params=" + params);
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getName()
+        + "{params=" + params
+        + "}";
+    return sb;
   }
 
   public RemoteServiceCallImpl(final ServiceCallCreateParams params) {

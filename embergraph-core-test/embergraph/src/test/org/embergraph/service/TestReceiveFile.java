@@ -93,7 +93,7 @@ public class TestReceiveFile extends TestCase3 {
           }
 
           @Override
-          protected ByteBuffer getBuffer(UUID uuid) throws Exception {
+          protected ByteBuffer getBuffer(UUID uuid) {
             // No such resource.
             return null;
           }
@@ -169,7 +169,7 @@ public class TestReceiveFile extends TestCase3 {
           }
 
           @Override
-          protected ByteBuffer getBuffer(UUID uuid) throws Exception {
+          protected ByteBuffer getBuffer(UUID uuid) {
             // No such resource.
             return null;
           }

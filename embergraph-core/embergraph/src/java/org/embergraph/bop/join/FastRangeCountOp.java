@@ -185,7 +185,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 

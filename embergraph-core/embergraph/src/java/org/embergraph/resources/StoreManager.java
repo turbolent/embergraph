@@ -1205,10 +1205,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
            */
           throw new UnsupportedOperationException();
         }
-        while (true) {
-          if (fed.getTransactionService() != null) {
-            break;
-          }
+        while (fed.getTransactionService() == null) {
           log.warn("Waiting for transaction service discovery");
         }
       } catch (UnsupportedOperationException ex) {
@@ -2729,9 +2726,9 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
         return;
       }
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 
@@ -4272,6 +4269,5 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
               + ", adjustedExtent="
               + adjustedExtent);
 
-    return;
   }
 }

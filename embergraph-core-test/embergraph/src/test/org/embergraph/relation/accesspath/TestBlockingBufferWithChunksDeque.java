@@ -77,7 +77,7 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
    * @throws InterruptedException
    */
   public void test_blockingBuffer()
-      throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException {
 
     final Integer e0 = new Integer(0);
     final Integer e1 = new Integer(1);
@@ -172,125 +172,121 @@ public class TestBlockingBufferWithChunksDeque extends TestCase2 {
     // future of task writing another element on the buffer.
     final Future producerFuture =
         service.submit(
-            new Callable<Void>() {
-              public Void call() throws Exception {
+            (Callable<Void>) () -> {
 
-                lock.lockInterruptibly();
-                try {
-                  if (!proceedFlag.get()) {
-                    cond.await();
-                  }
-
-                  if (log.isInfoEnabled()) log.info("Producer resumed.");
-
-                  assertTrue("isOpen", buffer.isOpen());
-                  assertTrue("isEmpty", buffer.isEmpty());
-
-                  /*
-                   * Add another element - should not block since the buffer is
-                   * empty.
-                   */
-                  if (log.isInfoEnabled()) log.info("Adding last chunk to buffer.");
-                  buffer.add(new Integer[] {e5, e6});
-                  if (log.isInfoEnabled()) log.info("Added last chunk to buffer.");
-                  assertTrue("isOpen", buffer.isOpen());
-                  assertEquals("chunkCount", 4L, buffer.getChunksAddedCount());
-                  assertEquals("elementCount", 7L, buffer.getElementsAddedCount());
-
-                  /*
-                   * itr.hasNext() (in the producer thread) will block until
-                   * the buffer is closed.
-                   */
-                  buffer.close();
-                } finally {
-                  lock.unlock();
+              lock.lockInterruptibly();
+              try {
+                if (!proceedFlag.get()) {
+                  cond.await();
                 }
-                // done.
-                return null;
+
+                if (log.isInfoEnabled()) log.info("Producer resumed.");
+
+                assertTrue("isOpen", buffer.isOpen());
+                assertTrue("isEmpty", buffer.isEmpty());
+
+                /*
+                 * Add another element - should not block since the buffer is
+                 * empty.
+                 */
+                if (log.isInfoEnabled()) log.info("Adding last chunk to buffer.");
+                buffer.add(new Integer[] {e5, e6});
+                if (log.isInfoEnabled()) log.info("Added last chunk to buffer.");
+                assertTrue("isOpen", buffer.isOpen());
+                assertEquals("chunkCount", 4L, buffer.getChunksAddedCount());
+                assertEquals("elementCount", 7L, buffer.getElementsAddedCount());
+
+                /*
+                 * itr.hasNext() (in the producer thread) will block until
+                 * the buffer is closed.
+                 */
+                buffer.close();
+              } finally {
+                lock.unlock();
               }
+              // done.
+              return null;
             });
 
     // future of task draining the buffer.
     final Future consumerFuture =
         service.submit(
-            new Callable<Void>() {
-              public Void call() throws Exception {
+            (Callable<Void>) () -> {
 
+              try {
+                lock.lockInterruptibly();
                 try {
-                  lock.lockInterruptibly();
-                  try {
 
-                    assertTrue(itr.hasNext());
+                  assertTrue(itr.hasNext());
 
-                    // take the first chunk - two elements.
-                    if (log.isInfoEnabled()) log.info("Awaiting first chunk");
-                    assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
-                    if (log.isInfoEnabled()) log.info("Have first chunk");
-
-                    /*
-                     * Verify that we obtained the first chunk before the
-                     * buffer was closed. Otherwise next() blocked
-                     * attempting to compile a full chunk until the producer
-                     * timeout, at which point the producer closed the
-                     * buffer and next() noticed the closed buffer and
-                     * returned.
-                     */
-                    assertTrue(buffer.isOpen());
-                    assertFalse("buffer closed?", itr.isExhausted());
-
-                    // take the 2nd chunk - 3 elements.
-                    if (log.isInfoEnabled()) log.info("Awaiting second chunk");
-                    assertSameArray(new Integer[] {e2, e3, e4}, itr.next());
-                    if (log.isInfoEnabled()) log.info("Have second chunk");
-
-                    /*
-                     * Verify that nothing is available from the iterator
-                     * (non-blocking test).
-                     */
-                    assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
-                    assertNull(itr.next(1, TimeUnit.NANOSECONDS));
-
-                    // Signal the producer that it should continue.
-                    proceedFlag.set(true);
-                    cond.signal();
-
-                  } finally {
-
-                    lock.unlock();
-                  }
+                  // take the first chunk - two elements.
+                  if (log.isInfoEnabled()) log.info("Awaiting first chunk");
+                  assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
+                  if (log.isInfoEnabled()) log.info("Have first chunk");
 
                   /*
-                   * Should block until we close the buffer. Will report
-                   * [false] if the consumer was interrupted within hasNext()
-                   * since that will cause the iterator to be asynchronously
-                   * closed.
+                   * Verify that we obtained the first chunk before the
+                   * buffer was closed. Otherwise next() blocked
+                   * attempting to compile a full chunk until the producer
+                   * timeout, at which point the producer closed the
+                   * buffer and next() noticed the closed buffer and
+                   * returned.
                    */
-                  assertTrue("Iterator exhausted?", itr.hasNext());
+                  assertTrue(buffer.isOpen());
+                  assertFalse("buffer closed?", itr.isExhausted());
 
-                  // last chunk
-                  assertSameArray(new Integer[] {e5, e6}, itr.next());
+                  // take the 2nd chunk - 3 elements.
+                  if (log.isInfoEnabled()) log.info("Awaiting second chunk");
+                  assertSameArray(new Integer[] {e2, e3, e4}, itr.next());
+                  if (log.isInfoEnabled()) log.info("Have second chunk");
 
-                  // should be immediately false.
+                  /*
+                   * Verify that nothing is available from the iterator
+                   * (non-blocking test).
+                   */
                   assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
-                  // should be immediately null.
                   assertNull(itr.next(1, TimeUnit.NANOSECONDS));
 
-                  // The synchronous API should also report an exhausted
-                  // itr.
-                  assertFalse(itr.hasNext());
-                  try {
-                    itr.next();
-                    fail("Expecting: " + NoSuchElementException.class);
-                  } catch (NoSuchElementException ex) {
-                    if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
-                  }
+                  // Signal the producer that it should continue.
+                  proceedFlag.set(true);
+                  cond.signal();
 
-                  return null;
+                } finally {
 
-                } catch (Throwable t) {
-                  log.error("Consumer failed or blocked: " + t, t);
-                  throw new Exception(t);
+                  lock.unlock();
                 }
+
+                /*
+                 * Should block until we close the buffer. Will report
+                 * [false] if the consumer was interrupted within hasNext()
+                 * since that will cause the iterator to be asynchronously
+                 * closed.
+                 */
+                assertTrue("Iterator exhausted?", itr.hasNext());
+
+                // last chunk
+                assertSameArray(new Integer[] {e5, e6}, itr.next());
+
+                // should be immediately false.
+                assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
+                // should be immediately null.
+                assertNull(itr.next(1, TimeUnit.NANOSECONDS));
+
+                // The synchronous API should also report an exhausted
+                // itr.
+                assertFalse(itr.hasNext());
+                try {
+                  itr.next();
+                  fail("Expecting: " + NoSuchElementException.class);
+                } catch (NoSuchElementException ex) {
+                  if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+                }
+
+                return null;
+
+              } catch (Throwable t) {
+                log.error("Consumer failed or blocked: " + t, t);
+                throw new Exception(t);
               }
             });
 

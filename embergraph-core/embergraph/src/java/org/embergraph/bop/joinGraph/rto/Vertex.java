@@ -199,7 +199,7 @@ public class Vertex implements Serializable {
               rangeCount,
               limit,
               EstimateEnum.Exact,
-              elementsToBindingSets(pred, tmp.toArray(new Object[tmp.size()])));
+              elementsToBindingSets(pred, tmp.toArray(new Object[0])));
 
     } else {
 
@@ -225,7 +225,6 @@ public class Vertex implements Serializable {
 
     if (log.isTraceEnabled()) log.trace("Sampled: id=" + pred.getId() + ", sample=" + sample);
 
-    return;
   }
 
   /*

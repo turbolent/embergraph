@@ -826,7 +826,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
 
     while (iter.hasNext()) {
       final RunningQuery r = iter.next();
-      sb.append(r.getQueryUuid() + " : \n" + r.getExtQueryId());
+      sb.append(r.getQueryUuid()).append(" : \n").append(r.getExtQueryId());
     }
 
     return sb.toString();
@@ -895,7 +895,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     }
 
     @Override
-    public EmbergraphSailRepositoryConnection cxn() throws Exception {
+    public EmbergraphSailRepositoryConnection cxn() {
       return cxn;
     }
 
@@ -948,7 +948,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
       return EmbergraphGraphEmbedded.this.isQueryCancelled(queryId);
     }
 
-    public StringBuilder dumpStore() throws Exception {
+    public StringBuilder dumpStore() {
       return cxn.getTripleStore().dumpStore();
     }
 

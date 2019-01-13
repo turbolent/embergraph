@@ -235,7 +235,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     final StringBuilder sb = new StringBuilder();
 
     if (type == VERTEX) {
-      sb.append("construct { ?x <" + TYPE + "> <" + type + "> . }\n");
+      sb.append("construct { ?x <").append(TYPE).append("> <").append(type).append("> . }\n");
       sb.append("{\n  select distinct ?x where {\n");
     } else {
       sb.append("construct { ?from ?x ?to . }\n");
@@ -306,7 +306,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     // need a statement pattern for the filter not exists
     if (!hasHas) {
 
-      sb.append("    ?x <" + TYPE + "> <").append(type).append("> .\n");
+      sb.append("    ?x <").append(TYPE).append("> <").append(type).append("> .\n");
     }
 
     //        sb.setLength(sb.length()-1);
@@ -315,7 +315,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
 
     if (limit < Integer.MAX_VALUE) {
 
-      sb.append(" limit " + factory.toLiteral(limit).getLabel());
+      sb.append(" limit ").append(factory.toLiteral(limit).getLabel());
     }
 
     sb.append("\n}");

@@ -2517,9 +2517,9 @@ public class TestKeyBuilder extends TestCase2 {
       doEncodeDecodeTest(i);
     }
 
-    for (int i = 0; i < a.length; i++) {
-      for (int j = 0; j < a.length; j++) {
-        doCompareTest(a[i], a[j], CompareEnum.EQ);
+    for (BigDecimal bigDecimal1 : a) {
+      for (BigDecimal bigDecimal : a) {
+        doCompareTest(bigDecimal1, bigDecimal, CompareEnum.EQ);
       }
     }
   }

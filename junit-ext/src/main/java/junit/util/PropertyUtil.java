@@ -237,8 +237,6 @@ public class PropertyUtil {
 
           // Property already has this value.
 
-          continue;
-
         } else if (ignoreConflicts) {
 
           // Override the existing value.

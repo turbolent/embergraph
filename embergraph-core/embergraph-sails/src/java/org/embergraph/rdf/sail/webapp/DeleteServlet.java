@@ -829,7 +829,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     }
 
     @Override
-    public void handleStatement(final Statement stmt) throws RDFHandlerException {
+    public void handleStatement(final Statement stmt) {
 
       stmts.add(stmt);
     }

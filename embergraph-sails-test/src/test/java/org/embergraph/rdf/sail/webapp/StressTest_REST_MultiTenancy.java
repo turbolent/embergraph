@@ -86,7 +86,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
    *     http client (was Roll forward the apache http components dependency to 4.3.3) </a>
    * @throws Exception
    */
-  public void test_multiTenancy_967() throws Exception {
+  public void test_multiTenancy_967() {
 
     //	   doMultiTenancyStressTest(TimeUnit.SECONDS.toMillis(20));
 

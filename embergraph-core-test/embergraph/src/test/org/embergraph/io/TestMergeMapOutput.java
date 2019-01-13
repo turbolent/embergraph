@@ -55,8 +55,10 @@ public class TestMergeMapOutput extends TestCase2 {
     final byte[] outbuf = out.toByteArray();
 
     int outYcount = 0;
-    for (int i = 0; i < outbuf.length; i++) {
-      if (outbuf[i] == 'Y') outYcount++;
+    for (byte b : outbuf) {
+      if (b == 'Y') {
+        outYcount++;
+      }
     }
 
     log.info("src.length: " + src.length + ", outbuf.length: " + outbuf.length);

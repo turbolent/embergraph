@@ -376,9 +376,9 @@ public class Justification implements Comparable<Justification> {
     @SuppressWarnings("rawtypes")
     final IV[] ivs = jst.ivs;
 
-    for (int i = 0; i < ivs.length; i++) {
+    for (IV iv : ivs) {
 
-      IVUtility.encode(keyBuilder, ivs[i]);
+      IVUtility.encode(keyBuilder, iv);
     }
 
     return keyBuilder.getKey();
@@ -869,7 +869,7 @@ public class Justification implements Comparable<Justification> {
       }
     }
 
-    protected void finalized() throws Exception {
+    protected void finalized() {
 
       close();
     }

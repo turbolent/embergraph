@@ -150,7 +150,7 @@ public class TestBasicIndexStuff extends AbstractEmbeddedFederationTestCase {
    *
    * @throws Exception
    */
-  public void test_onePartition() throws Exception {
+  public void test_onePartition() {
 
     final String name = "testIndex";
 

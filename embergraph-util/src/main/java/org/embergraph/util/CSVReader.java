@@ -157,11 +157,11 @@ public class CSVReader implements Iterator<Map<String, Object>> {
      */
     public Object parseValue(final String text) {
 
-      for (int i = 0; i < formats.length; i++) {
+      for (Format format : formats) {
 
         try {
 
-          final Format f = formats[i];
+          final Format f = format;
 
           if (f instanceof DateFormat) {
 
@@ -171,7 +171,9 @@ public class CSVReader implements Iterator<Map<String, Object>> {
 
             return ((NumberFormat) f).parse(text);
 
-          } else throw new AssertionError();
+          } else {
+            throw new AssertionError();
+          }
 
         } catch (NumberFormatException ex) {
 
@@ -267,7 +269,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     r = new BufferedReader(new InputStreamReader(is, charSet), BUF_SIZE);
   }
 
-  public CSVReader(final Reader r) throws IOException {
+  public CSVReader(final Reader r) {
 
     if (r == null) throw new IllegalArgumentException();
 

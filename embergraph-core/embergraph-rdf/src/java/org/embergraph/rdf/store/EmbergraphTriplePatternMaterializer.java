@@ -214,7 +214,7 @@ public class EmbergraphTriplePatternMaterializer
     }
 
     @Override
-    public Long call() throws Exception {
+    public Long call() {
       /*
        * TODO What about closure over the SIDs?
        *

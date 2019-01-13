@@ -282,7 +282,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     }
 
     @Override
-    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(final ObjectInput in) throws IOException {
       //            flags = in.readByte();
       final int nbytes = LongPacker.unpackInt(in);
       key = new byte[nbytes];
@@ -296,7 +296,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
       out.write(key);
     }
 
-    private Object readResolve() throws ObjectStreamException {
+    private Object readResolve() {
 
       final ISPO spo = SPOKeyOrder.SPO.decodeKey(key);
 
@@ -307,7 +307,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     }
   }
 
-  private Object writeReplace() throws ObjectStreamException {
+  private Object writeReplace() {
 
     return new SidIVState(this);
   }

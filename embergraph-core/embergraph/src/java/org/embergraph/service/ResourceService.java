@@ -642,7 +642,6 @@ public abstract class ResourceService {
             }
           default:
             sendError(StatusEnum.NOT_FOUND);
-            return;
         }
 
       } catch (SentErrorException ex) {
@@ -664,8 +663,6 @@ public abstract class ResourceService {
           log.error("Unknown error: " + t, t);
 
           sendError(StatusEnum.INTERNAL_ERROR);
-
-          return;
 
         } catch (Throwable t2) {
 
@@ -850,8 +847,6 @@ public abstract class ResourceService {
         // could be client death here.
         log.warn(ex, ex);
 
-        return;
-
       } finally {
 
         try {
@@ -882,7 +877,7 @@ public abstract class ResourceService {
      * @throws IOException
      */
     private final void sendBuffer(final UUID uuid, final ByteBuffer buffer)
-        throws SentErrorException, IOException {
+        throws SentErrorException {
 
       /*
        * Get a read-only view to avoid problems with concurrent
@@ -913,8 +908,6 @@ public abstract class ResourceService {
 
         // could be client death here.
         log.warn(ex, ex);
-
-        return;
 
       } finally {
 
@@ -1097,7 +1090,7 @@ public abstract class ResourceService {
    *     that {@link UUID}.
    * @throws Exception if the resource may not be served.
    */
-  protected abstract ByteBuffer getBuffer(final UUID uuid) throws Exception;
+  protected abstract ByteBuffer getBuffer(final UUID uuid);
 
   /*
    * Client for a {@link BufferService} reads a single resource from the specified service, writing

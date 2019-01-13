@@ -179,7 +179,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 

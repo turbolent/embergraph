@@ -62,7 +62,7 @@ public interface HATXSGlue extends Remote {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/673" > Native thread leak in
    *     HAJournalServer process </a>
    */
-  void gatherMinimumVisibleCommitTime(IHAGatherReleaseTimeRequest req) throws IOException;
+  void gatherMinimumVisibleCommitTime(IHAGatherReleaseTimeRequest req);
 
   /*
    * Message used by the follower to notify the leader about the new release time that will be

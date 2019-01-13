@@ -61,23 +61,22 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
 
     //        sb.append("{ ruleContext=" + ruleContext);
 
-    sb.append("{ action=" + action);
+    sb.append("{ action=").append(action);
 
-    sb.append(", writeTime=" + writeTimestamp);
+    sb.append(", writeTime=").append(writeTimestamp);
 
-    sb.append(", readTime=" + readTimestamp);
+    sb.append(", readTime=").append(readTimestamp);
 
-    sb.append(", properties=" + properties);
+    sb.append(", properties=").append(properties);
 
-    sb.append(", solutionFlags=" + solutionFlags);
+    sb.append(", solutionFlags=").append(solutionFlags);
 
-    sb.append(
-        ", solutionFilter="
-            + (solutionFilter == null ? "N/A" : solutionFilter.getClass().getName()));
+    sb.append(", solutionFilter=")
+        .append(solutionFilter == null ? "N/A" : solutionFilter.getClass().getName());
 
-    sb.append(", planFactory=" + evaluationPlanFactory.getClass().getName());
+    sb.append(", planFactory=").append(evaluationPlanFactory.getClass().getName());
 
-    sb.append(", defaultRuleTaskFactory=" + defaultRuleTaskFactory.getClass().getName());
+    sb.append(", defaultRuleTaskFactory=").append(defaultRuleTaskFactory.getClass().getName());
 
     // allow extension by derived classes.
     toString(sb);

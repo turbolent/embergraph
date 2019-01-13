@@ -47,12 +47,10 @@ public class Intervals {
    * &lt; <var>b</var>.
    */
   public static final Comparator<Interval> STARTS_BEFORE_OR_PROLONGS =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.left != i2.left) return i1.left < i2.left ? -1 : 1;
-          if (i1.right != i2.right) return i2.right < i1.right ? -1 : 1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.left != i2.left) return i1.left < i2.left ? -1 : 1;
+        if (i1.right != i2.right) return i2.right < i1.right ? -1 : 1;
+        return 0;
       };
 
   /*
@@ -62,12 +60,10 @@ public class Intervals {
    * <var>a</var>' &lt; <var>a</var>.
    */
   public static final Comparator<Interval> ENDS_BEFORE_OR_IS_SUFFIX =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.right != i2.right) return i1.right < i2.right ? -1 : 1;
-          if (i1.left != i2.left) return i2.left < i1.left ? -1 : 1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.right != i2.right) return i1.right < i2.right ? -1 : 1;
+        if (i1.left != i2.left) return i2.left < i1.left ? -1 : 1;
+        return 0;
       };
 
   /*
@@ -76,11 +72,9 @@ public class Intervals {
    * that is, iff <var>a</var>' &lt; <var>a</var>.
    */
   public static final Comparator<Interval> STARTS_AFTER =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.left != i2.left) return i2.left < i1.left ? -1 : 1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.left != i2.left) return i2.left < i1.left ? -1 : 1;
+        return 0;
       };
 
   /*
@@ -89,11 +83,9 @@ public class Intervals {
    * that is, iff <var>a</var>' &gt; <var>a</var>.
    */
   public static final Comparator<Interval> STARTS_BEFORE =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.left != i2.left) return i2.left < i1.left ? 1 : -1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.left != i2.left) return i2.left < i1.left ? 1 : -1;
+        return 0;
       };
 
   /*
@@ -102,11 +94,9 @@ public class Intervals {
    * is, iff <var>b</var>' &lt; <var>b</var>.
    */
   public static final Comparator<Interval> ENDS_AFTER =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.right != i2.right) return i2.right < i1.right ? -1 : 1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.right != i2.right) return i2.right < i1.right ? -1 : 1;
+        return 0;
       };
 
   /*
@@ -115,18 +105,12 @@ public class Intervals {
    * is, iff <var>b</var>' &gt; <var>b</var>.
    */
   public static final Comparator<Interval> ENDS_BEFORE =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          if (i1.right != i2.right) return i2.right < i1.right ? 1 : -1;
-          return 0;
-        }
+      (i1, i2) -> {
+        if (i1.right != i2.right) return i2.right < i1.right ? 1 : -1;
+        return 0;
       };
 
   /** A comparator between intervals based on their length. */
   public static final Comparator<Interval> LENGTH_COMPARATOR =
-      new Comparator<Interval>() {
-        public int compare(final Interval i1, final Interval i2) {
-          return i1.length() - i2.length();
-        }
-      };
+      (i1, i2) -> i1.length() - i2.length();
 }

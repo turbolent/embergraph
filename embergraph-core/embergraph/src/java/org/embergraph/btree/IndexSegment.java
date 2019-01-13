@@ -228,28 +228,28 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
 
     if (metadata.getName() != null) {
 
-      sb.append("name=" + metadata.getName());
+      sb.append("name=").append(metadata.getName());
 
     } else {
 
-      sb.append("uuid=" + metadata.getIndexUUID());
+      sb.append("uuid=").append(metadata.getIndexUUID());
     }
 
     // Note: Guaranteed available on the IndexSegmentStore.
     final IndexSegmentCheckpoint chk = fileStore.getCheckpoint();
 
     // Note: [branchingFactor is final on AbstractBTree
-    sb.append(", m=" + branchingFactor); // getBranchingFactor());
+    sb.append(", m=").append(branchingFactor); // getBranchingFactor());
 
-    sb.append(", height=" + chk.height);
+    sb.append(", height=").append(chk.height);
 
-    sb.append(", entryCount=" + chk.nentries);
+    sb.append(", entryCount=").append(chk.nentries);
 
-    sb.append(", nodeCount=" + chk.nnodes);
+    sb.append(", nodeCount=").append(chk.nnodes);
 
-    sb.append(", leafCount=" + chk.nleaves);
+    sb.append(", leafCount=").append(chk.nleaves);
 
-    sb.append(", lastCommitTime=" + chk.commitTime);
+    sb.append(", lastCommitTime=").append(chk.commitTime);
 
     sb.append("}");
 
@@ -374,9 +374,7 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
     // prevent concurrent close.
     fileStore.lock.lock();
     try {
-
       if (fileStore.fed != null) {
-
         openCloseEvent =
             new Event(
                 fileStore.fed,
@@ -385,7 +383,6 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
       }
 
       if (!fileStore.isOpen()) {
-
         // reopen the store.
         fileStore.reopen();
       }
@@ -404,25 +401,16 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
       final boolean bufferNodes = metadata.getIndexSegmentBufferNodes();
 
       if (checkpoint.nnodes > 0 && bufferNodes) {
-
-        try {
-
-          /*
-           * Read the index nodes from the file into a buffer. If
-           * there are no index nodes (that is if everything fits in
-           * the root leaf of the index) then we skip this step.
-           *
-           * Note: We always read in the root in IndexSegment#_open()
-           * and hold a hard reference to the root while the
-           * IndexSegment is open.
-           */
-
-          fileStore.bufferIndexNodes();
-
-        } catch (IOException ex) {
-
-          throw new RuntimeException(ex);
-        }
+        /*
+         * Read the index nodes from the file into a buffer. If
+         * there are no index nodes (that is if everything fits in
+         * the root leaf of the index) then we skip this step.
+         *
+         * Note: We always read in the root in IndexSegment#_open()
+         * and hold a hard reference to the root while the
+         * IndexSegment is open.
+         */
+        fileStore.bufferIndexNodes();
       }
 
       /*
@@ -434,37 +422,20 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
        */
       final long addrRoot = checkpoint.addrRoot;
       if (addrRoot == 0L) {
-
         // empty index segment; create an empty root leaf.
         this.root = new ImmutableLeaf(this);
-
       } else {
-
         // read the root node/leaf from the file.
         this.root = readNodeOrLeaf(addrRoot);
       }
 
       if (checkpoint.addrBloom != 0L) {
-
-        try {
-
-          /*
-           * Read the optional bloom filter from the backing store.
-           */
-          bloomFilter = fileStore.readBloomFilter();
-
-        } catch (IOException ex) {
-
-          throw new RuntimeException(ex);
-        }
+        /*
+         * Read the optional bloom filter from the backing store.
+         */
+        bloomFilter = fileStore.readBloomFilter();
       }
-
-      //            // report on the event.
-      //            ResourceManager.openIndexSegment(null/* name */, fileStore
-      //                    .getFile().toString(), fileStore.size());
-
     } finally {
-
       fileStore.lock.unlock();
     }
   }
@@ -514,7 +485,6 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
 
   /** @throws UnsupportedOperationException always since the {@link IndexSegment} is read-only. */
   public final long getRevisionTimestamp() {
-
     throw new UnsupportedOperationException(ERROR_READ_ONLY);
   }
 
@@ -525,14 +495,12 @@ public class IndexSegment extends AbstractBTree { // implements ILocalBTreeView 
 
   /** Operation is disallowed - the counter is only stored in the mutable {@link BTree}. */
   public final ICounter getCounter() {
-
     throw new UnsupportedOperationException(ERROR_READ_ONLY);
   }
 
   /** @throws UnsupportedOperationException always. */
   @Override
   public final void removeAll() {
-
     throw new UnsupportedOperationException(ERROR_READ_ONLY);
   }
 

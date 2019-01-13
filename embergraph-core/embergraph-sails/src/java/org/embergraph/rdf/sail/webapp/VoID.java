@@ -292,7 +292,7 @@ public class VoID {
     }
 
     // Sort into dictionary order.
-    final String[] a = namespaces.toArray(new String[namespaces.size()]);
+    final String[] a = namespaces.toArray(new String[0]);
 
     Arrays.sort(a);
 
@@ -475,7 +475,7 @@ public class VoID {
         count.setValue(e.getValue());
       }
 
-      final IVCount[] a = counts.values().toArray(new IVCount[counts.size()]);
+      final IVCount[] a = counts.values().toArray(new IVCount[0]);
 
       // Order by descending count.
       Arrays.sort(a);
@@ -526,7 +526,7 @@ public class VoID {
       counts.add(out);
     }
 
-    final IVCount[] a = counts.toArray(new IVCount[counts.size()]);
+    final IVCount[] a = counts.toArray(new IVCount[0]);
 
     // Order by descending count.
     Arrays.sort(a);
@@ -624,7 +624,7 @@ public class VoID {
         count.setValue(e.getValue());
       }
 
-      final IVCount[] a = counts.values().toArray(new IVCount[counts.size()]);
+      final IVCount[] a = counts.values().toArray(new IVCount[0]);
 
       // Order by descending count.
       Arrays.sort(a);
@@ -689,7 +689,7 @@ public class VoID {
       counts.add(out);
     }
 
-    final IVCount[] a = counts.toArray(new IVCount[counts.size()]);
+    final IVCount[] a = counts.toArray(new IVCount[0]);
 
     // Order by descending count.
     Arrays.sort(a);

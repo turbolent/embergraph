@@ -219,10 +219,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
     final List<SubqueryRoot> askSubqueries = new LinkedList<>();
 
-    for (BindingsClause values : joinGroup.getChildren(BindingsClause.class)) {
-
-      ordered.add(values);
-    }
+    ordered.addAll(joinGroup.getChildren(BindingsClause.class));
 
     /*
      * Assignments for a constant.
@@ -258,10 +255,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
      * failed by a filter. We will do less work if we fail the solution in
      * the parent group.
      */
-    for (IGroupMemberNode n : sa.getPreFilters(joinGroup)) {
-
-      ordered.add(n);
-    }
+    ordered.addAll(sa.getPreFilters(joinGroup));
 
     /*
      * FIXME We need to move away from the DataSetJoin class and replace it
@@ -278,10 +272,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
      *
      * @see JoinGroupNode#getInFilters()
      */
-    for (IGroupMemberNode n : joinGroup.getInFilters()) {
-
-      ordered.add(n);
-    }
+    ordered.addAll(joinGroup.getInFilters());
 
     /*
      * Required joins and non-optional subqueries.
@@ -422,10 +413,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
        * TODO Why is this here?!? It should either be empty or run
        * after the last required join, right?
        */
-      for (IGroupMemberNode n : sa.getJoinFilters(joinGroup)) {
-
-        ordered.add(n);
-      }
+      ordered.addAll(sa.getJoinFilters(joinGroup));
 
       /*
        * Add SPARQL 1.1 style subqueries which were not lifted out into
@@ -499,10 +487,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
        * service ref that have not been scheduled as run first or run
        * last).
        */
-      for (ServiceNode n : serviceNodes) {
-
-        ordered.add(n);
-      }
+      ordered.addAll(serviceNodes);
     } // end of required joins.
 
     //      /*
@@ -539,10 +524,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/515">Query with two "FILTER
      *     NOT EXISTS" expressions returns no results</a>
      */
-    for (SubqueryRoot askSubquery : askSubqueries) {
-
-      ordered.add(askSubquery);
-    }
+    ordered.addAll(askSubqueries);
 
     //        /*
     //         * Next do the property paths.
@@ -601,18 +583,12 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
     /*
      * Add the LET assignments to the pipeline.
      */
-    for (AssignmentNode n : assignments) {
-
-      ordered.add(n);
-    }
+    ordered.addAll(assignments);
 
     /*
      * Add the post-conditionals to the pipeline.
      */
-    for (IGroupMemberNode n : sa.getPostFilters(joinGroup)) {
-
-      ordered.add(n);
-    }
+    ordered.addAll(sa.getPostFilters(joinGroup));
 
     final int arity = joinGroup.arity();
 

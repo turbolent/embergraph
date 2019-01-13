@@ -416,15 +416,15 @@ public class FastBufferedReader extends Reader implements WordReader {
     word.length(0);
     nonWord.length(0);
 
-    for (; ; ) {
-      for (i = 0; i < avail && isWordConstituent(buffer[pos + i]); i++) ;
+    do {
+      for (i = 0; i < avail && isWordConstituent(buffer[pos + i]); i++)
+        ;
 
       word.append(buffer, pos, i);
       pos += i;
       avail -= i;
 
-      if (avail > 0 || noMoreCharacters()) break;
-    }
+    } while (avail <= 0 && !noMoreCharacters());
 
     if (noMoreCharacters()) return true;
 

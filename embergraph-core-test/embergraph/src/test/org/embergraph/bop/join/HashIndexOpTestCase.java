@@ -69,7 +69,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
 
   protected QueryEngine queryEngine;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -78,7 +78,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     queryEngine.init();
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();
@@ -343,7 +343,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     final IBindingSet[] solutionsToIndex;
     //        solutionsToIndex = setup.getRight1().toArray(
     //                new IBindingSet[setup.getRight1().size()]);
-    solutionsToIndex = setup.getLeft1().toArray(new IBindingSet[setup.getLeft1().size()]);
+    solutionsToIndex = setup.getLeft1().toArray(new IBindingSet[0]);
 
     final SolutionSetStream stream;
     {
@@ -511,7 +511,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
        * that the correct solutions were placed into the index.
        */
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         // The solutions that should be in the generated index.
         final IBindingSet[] expectedSolutions =

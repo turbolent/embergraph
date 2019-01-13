@@ -175,7 +175,9 @@ public abstract class BitVectorTestCase extends TestCase {
 
     v.clear();
     int[] bits = {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0};
-    for (int i = 0; i < bits.length; i++) v.add(bits[i]);
+    for (int bit1 : bits) {
+      v.add(bit1);
+    }
 
     LongArrayBitVector c = LongArrayBitVector.getInstance();
     for (int i = 5; i < bits.length; i++) c.add(bits[i]);
@@ -196,7 +198,9 @@ public abstract class BitVectorTestCase extends TestCase {
           0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1,
           1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0
         };
-    for (int i = 0; i < bits.length; i++) v.add(bits[i]);
+    for (int bit : bits) {
+      v.add(bit);
+    }
     c = LongArrayBitVector.getInstance();
     for (int i = 5; i < bits.length - 2; i++) c.add(bits[i]);
 

@@ -85,7 +85,7 @@ public class TestEmbergraphGraphClientNSS extends AbstractTestNSSBlueprintsClien
   }
 
   @Override
-  protected EmbergraphGraph getNewGraph(String file) throws Exception {
+  protected EmbergraphGraph getNewGraph(String file) {
 
     final String testURL = getServiceURL() + "/sparql";
 

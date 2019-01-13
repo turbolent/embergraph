@@ -299,7 +299,7 @@ public class HASendService {
    *     kill testing </a>
    */
   private void launderThrowable(final Throwable t)
-      throws InterruptedException, ImmediateDownstreamReplicationException {
+      throws ImmediateDownstreamReplicationException {
 
     if (Haltable.isTerminationByInterrupt(t)) {
 

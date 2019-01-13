@@ -84,8 +84,8 @@ public class TestTicket1889_2 extends TestTicket1889 {
    */
   @Override
   protected void executeQuery(final EmbergraphSailRepository repo, final int n, final int k)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, IOException, UpdateExecutionException {
+      throws RepositoryException, MalformedQueryException,
+      RDFParseException, IOException, UpdateExecutionException {
     final EmbergraphSailRepositoryConnection conn = repo.getConnection();
     conn.setAutoCommit(false);
     conn.clear();

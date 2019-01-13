@@ -563,7 +563,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       // Setup view onto the sub-key range of the keys / vals.
 
@@ -1521,7 +1521,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
 
     @Override
-    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(final ObjectInput in) throws IOException {
 
       final byte version = in.readByte();
 

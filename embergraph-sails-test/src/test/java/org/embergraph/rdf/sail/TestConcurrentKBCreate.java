@@ -546,28 +546,24 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
 
     tasks.add(
-        new Callable<Void>() {
+        () -> {
 
-          @Override
-          public Void call() throws Exception {
+          try {
 
-            try {
+            AbstractApiTask.submitApiTask(
+                    indexManager,
+                    new CreateKBTask(namespace, ((Journal) indexManager).getProperties()))
+                .get();
 
-              AbstractApiTask.submitApiTask(
-                      indexManager,
-                      new CreateKBTask(namespace, ((Journal) indexManager).getProperties()))
-                  .get();
+            created.set(true);
 
-              created.set(true);
+            return null; // Done.
 
-              return null; // Done.
+          } catch (Throwable t) {
 
-            } catch (Throwable t) {
+            log.error(t, t);
 
-              log.error(t, t);
-
-              throw new RuntimeException(t);
-            }
+            throw new RuntimeException(t);
           }
         });
 
@@ -668,8 +664,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
    * @throws SailException
    */
   private EmbergraphSailRepositoryConnection getQueryConnection(
-      final IIndexManager indexManager, final String namespace, final long timestamp)
-      throws RepositoryException, SailException {
+      final IIndexManager indexManager, final String namespace, final long timestamp) {
 
     //        boolean ok = false;
     //        final EmbergraphSail sail = new EmbergraphSail(namespace, indexManager);

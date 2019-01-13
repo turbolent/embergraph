@@ -48,7 +48,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with geospatial literal that has too many elements. */
-  public void testCRWrongDataFormat01() throws Exception {
+  public void testCRWrongDataFormat01() {
 
     try {
 
@@ -71,7 +71,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with geospatial literal that has not enough elements. */
-  public void testCRWrongDataFormat02() throws Exception {
+  public void testCRWrongDataFormat02() {
 
     try {
 
@@ -94,7 +94,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with geospatial literal that is not numerical. */
-  public void testCRWrongDataFormat03() throws Exception {
+  public void testCRWrongDataFormat03() {
 
     try {
 
@@ -117,7 +117,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with timeStart specification missing. */
-  public void testCRMissingTimeStart() throws Exception {
+  public void testCRMissingTimeStart() {
 
     try {
 
@@ -140,7 +140,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with timeEnd specification missing. */
-  public void testCRMissingTimeEnd() throws Exception {
+  public void testCRMissingTimeEnd() {
 
     try {
 
@@ -160,7 +160,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with timeStart specification given, but not present in index. */
-  public void testCRUnusableTimeStart() throws Exception {
+  public void testCRUnusableTimeStart() {
 
     try {
 
@@ -183,7 +183,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with timeEnd specification missing, but not present in index. */
-  public void testCRUnusableTimeEnd() throws Exception {
+  public void testCRUnusableTimeEnd() {
 
     try {
 
@@ -206,7 +206,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification missing. */
-  public void testCRMissingCustomFields01() throws Exception {
+  public void testCRMissingCustomFields01() {
 
     try {
 
@@ -229,7 +229,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification missing. */
-  public void testCRMissingCustomFields02() throws Exception {
+  public void testCRMissingCustomFields02() {
 
     try {
 
@@ -252,7 +252,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification missing. */
-  public void testCRMissingCustomFields03() throws Exception {
+  public void testCRMissingCustomFields03() {
 
     try {
 
@@ -275,7 +275,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification missing. */
-  public void testCRMissingCustomFields04() throws Exception {
+  public void testCRMissingCustomFields04() {
 
     try {
 
@@ -298,7 +298,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification being incomplete. */
-  public void testCRIncompleteCustomFields() throws Exception {
+  public void testCRIncompleteCustomFields() {
 
     try {
 
@@ -321,7 +321,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields given, but no custom fields being defined in the index. */
-  public void testCRUnusableCustomFields() throws Exception {
+  public void testCRUnusableCustomFields() {
 
     try {
 
@@ -344,7 +344,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case with customFields specification containing too many elements. */
-  public void testCRTooManyCustomFields() throws Exception {
+  public void testCRTooManyCustomFields() {
 
     try {
 
@@ -367,7 +367,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where geo function is not given, but index requires it. */
-  public void testCRMissingGeoFunction() throws Exception {
+  public void testCRMissingGeoFunction() {
 
     try {
 
@@ -390,7 +390,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where geo function is invalid. */
-  public void testCRInvalidGeoFunction() throws Exception {
+  public void testCRInvalidGeoFunction() {
 
     try {
 
@@ -413,7 +413,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where geo function is given, but index cannot use it. */
-  public void testCRUnusableGeoFunction() throws Exception {
+  public void testCRUnusableGeoFunction() {
 
     try {
 
@@ -436,7 +436,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where coordinate system is given, but index requires it. */
-  public void testCRMissingCoordSystem() throws Exception {
+  public void testCRMissingCoordSystem() {
 
     try {
 
@@ -459,7 +459,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where coordinate system is given, but index cannot use it. */
-  public void testCRUnusableCoordSystem() throws Exception {
+  public void testCRUnusableCoordSystem() {
 
     try {
 
@@ -482,7 +482,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given, but no south-west coordinate is specified. */
-  public void testCRInRectangleNoSouthWest() throws Exception {
+  public void testCRInRectangleNoSouthWest() {
 
     try {
 
@@ -505,7 +505,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given and south-west is not a valid coordinate. */
-  public void testCRInRectangleInvalidSouthWest() throws Exception {
+  public void testCRInRectangleInvalidSouthWest() {
 
     try {
 
@@ -528,7 +528,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given, but no north-east coordinate is specified. */
-  public void testCRInRectangleNoNorthEast() throws Exception {
+  public void testCRInRectangleNoNorthEast() {
 
     try {
 
@@ -551,7 +551,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given and north-east is not a valid coordinate. */
-  public void testCRInRectangleInvalidNorthEast() throws Exception {
+  public void testCRInRectangleInvalidNorthEast() {
 
     try {
 
@@ -574,7 +574,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given in combination with a circle center. */
-  public void testCRInRectangleCenterGiven() throws Exception {
+  public void testCRInRectangleCenterGiven() {
 
     try {
 
@@ -597,7 +597,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where rectangle query is given in combination with a circle radius. */
-  public void testCRInRectangleRadiusGiven() throws Exception {
+  public void testCRInRectangleRadiusGiven() {
 
     try {
 
@@ -620,7 +620,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given in combination with a south-west coordinate. */
-  public void testCRInCircleSouthWestGiven() throws Exception {
+  public void testCRInCircleSouthWestGiven() {
 
     try {
 
@@ -643,7 +643,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given in combination with a north-east coordinate. */
-  public void testCRInCircleNorthEastGiven() throws Exception {
+  public void testCRInCircleNorthEastGiven() {
 
     try {
 
@@ -666,7 +666,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given but no circle center is specified. */
-  public void testCRInCircleNoCenterGiven() throws Exception {
+  public void testCRInCircleNoCenterGiven() {
 
     try {
 
@@ -689,7 +689,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given with an invalid center */
-  public void testCRInCircleInvalidCenterGiven() throws Exception {
+  public void testCRInCircleInvalidCenterGiven() {
 
     try {
 
@@ -712,7 +712,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given but no radius is specified. */
-  public void testCRInCircleNoRadiusGiven() throws Exception {
+  public void testCRInCircleNoRadiusGiven() {
 
     try {
 
@@ -735,7 +735,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where circle query is given with an invalid radius */
-  public void testCRInCircleInvalidRadiusGiven() throws Exception {
+  public void testCRInCircleInvalidRadiusGiven() {
 
     try {
 
@@ -760,7 +760,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   /*
    * Test case where we aim at extracting the location value, but the index contains no location.
    */
-  public void testCRLocationValueButNoLocation() throws Exception {
+  public void testCRLocationValueButNoLocation() {
 
     try {
 
@@ -786,7 +786,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
    * Test case where we aim at extracting the locationAndTime value, but the index contains no
    * location.
    */
-  public void testCRLocationAndTimeValueButNoLocation() throws Exception {
+  public void testCRLocationAndTimeValueButNoLocation() {
 
     try {
 
@@ -811,7 +811,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   /*
    * Test case where we aim at extracting the locationAndTime value, but the index contains no time.
    */
-  public void testCRLocationAndTimeValueButNoTime() throws Exception {
+  public void testCRLocationAndTimeValueButNoTime() {
 
     try {
 
@@ -836,7 +836,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   /*
    * Test case where we aim at extracting the latitude value, but the index contains no location.
    */
-  public void testCRLatValueButNoLocation() throws Exception {
+  public void testCRLatValueButNoLocation() {
 
     try {
 
@@ -861,7 +861,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   /*
    * Test case where we aim at extracting the longitude value, but the index contains no location.
    */
-  public void testCRLonValueButNoLocation() throws Exception {
+  public void testCRLonValueButNoLocation() {
 
     try {
 
@@ -884,7 +884,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where we aim at extracting the time value, but the index contains no time. */
-  public void testCRTimeValueButNoTime() throws Exception {
+  public void testCRTimeValueButNoTime() {
 
     try {
 
@@ -959,7 +959,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where we aim at extracting the time value, but the index contains no time. */
-  public void testCRCustomFieldsValueButNoCustomFields() throws Exception {
+  public void testCRCustomFieldsValueButNoCustomFields() {
 
     try {
 
@@ -982,7 +982,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
   }
 
   /** Test case where we query a datatype that is not a geospatial one. */
-  public void testCRUnknownGeoSpatialDatatype() throws Exception {
+  public void testCRUnknownGeoSpatialDatatype() {
 
     try {
 

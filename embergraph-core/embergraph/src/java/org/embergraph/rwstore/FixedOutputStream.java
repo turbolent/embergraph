@@ -40,11 +40,11 @@ public class FixedOutputStream extends OutputStream {
     m_buf[m_count++] = (byte) ((b >>> 0) & 0xFF);
   }
 
-  public void write(final int b) throws IOException {
+  public void write(final int b) {
     m_buf[m_count++] = (byte) b;
   }
 
-  public void write(final byte[] b, final int off, final int len) throws IOException {
+  public void write(final byte[] b, final int off, final int len) {
     System.arraycopy(b, off, m_buf, m_count, len);
 
     m_count += len;

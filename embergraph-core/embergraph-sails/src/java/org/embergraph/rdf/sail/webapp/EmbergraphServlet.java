@@ -200,7 +200,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
    *     cancelable from both REST API and workbench </a>
    */
   protected <T> FutureTask<T> submitApiTask(final AbstractRestApiTask<T> task)
-      throws DatasetNotFoundException, InterruptedException, ExecutionException, IOException {
+      throws InterruptedException, ExecutionException, IOException {
 
     if (task == null) throw new IllegalArgumentException();
 
@@ -426,7 +426,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
       }
     }
 
-    return serviceURIs.toArray(new String[serviceURIs.size()]);
+    return serviceURIs.toArray(new String[0]);
   }
 
   /*

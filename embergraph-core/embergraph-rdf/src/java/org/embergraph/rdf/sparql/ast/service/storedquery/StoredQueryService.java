@@ -33,7 +33,6 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.openrdf.query.BindingSet;
-import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 /*

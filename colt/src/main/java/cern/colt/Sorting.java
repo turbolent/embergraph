@@ -29,7 +29,7 @@ import java.util.Comparator;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 03-Jul-99
  */
-public class Sorting extends Object {
+public class Sorting {
   private static final int SMALL = 7;
   private static final int MEDIUM = 40;
   /** Makes this class non instantiable, but still let's others inherit from it. */

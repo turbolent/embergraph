@@ -53,7 +53,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     return new ThickAsynchronousIterator<>(a);
   }
 
-  public void test1() throws InterruptedException {
+  public void test1() {
 
     // empty iterator.
     final MultiSourceSequentialCloseableIterator<String> itr =
@@ -98,7 +98,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     assertFalse(itr.add(new ThickAsynchronousIterator<>(new String[]{"b"})));
   }
 
-  public void test2() throws InterruptedException {
+  public void test2() {
 
     // empty iterator.
     final MultiSourceSequentialCloseableIterator<String> itr =
@@ -141,21 +141,18 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
 
       final FutureTask<Void> ft =
           new FutureTask<>(
-              new Callable<Void>() {
+              () -> {
 
-                public Void call() throws Exception {
+                log.info("Will wait on iterator.");
 
-                  log.info("Will wait on iterator.");
+                assertFalse(itr.hasNext());
+                //                    if (itr.hasNext(1000, TimeUnit.MILLISECONDS))
+                //                        fail("Iterator should not visit anything.");
 
-                  assertFalse(itr.hasNext());
-                  //                    if (itr.hasNext(1000, TimeUnit.MILLISECONDS))
-                  //                        fail("Iterator should not visit anything.");
+                // Can not add more sources.
+                assertFalse(itr.add(new ThickAsynchronousIterator<>(new String[]{"b"})));
 
-                  // Can not add more sources.
-                  assertFalse(itr.add(new ThickAsynchronousIterator<>(new String[]{"b"})));
-
-                  return null;
-                }
+                return null;
               });
 
       service.submit(ft);
@@ -179,7 +176,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
    *
    * @throws InterruptedException
    */
-  public void test4_sources_closed() throws InterruptedException {
+  public void test4_sources_closed() {
 
     final ThickAsynchronousIterator<String> itr1 = iterator("a", "b", "c");
 
@@ -215,7 +212,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
    *
    * @throws InterruptedException
    */
-  public void test5_sources_closed() throws InterruptedException {
+  public void test5_sources_closed() {
 
     final ThickAsynchronousIterator<String> itr1 = iterator("a", "b", "c");
     final ThickAsynchronousIterator<String> itr2 = iterator("d", "e", "f");

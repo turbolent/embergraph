@@ -153,12 +153,7 @@ public class TLScheduler implements IGASSchedulerImpl {
       for (MySTScheduler s : map.values()) {
         final MySTScheduler t = s;
         tasks.add(
-            new Callable<IArraySlice<Value>>() {
-              @Override
-              public IArraySlice<Value> call() throws Exception {
-                return GASImplUtil.compactAndSort(t.getVertices(), t.tmp);
-              }
-            });
+            () -> GASImplUtil.compactAndSort(t.getVertices(), t.tmp));
       }
       // invokeAll() - futures will be done() before it returns.
       final List<Future<IArraySlice<Value>>> futures;

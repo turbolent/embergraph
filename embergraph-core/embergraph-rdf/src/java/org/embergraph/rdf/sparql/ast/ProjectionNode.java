@@ -250,7 +250,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     //
     //        }
 
-    return vars.toArray(new IVariable[vars.size()]);
+    return vars.toArray(new IVariable[0]);
   }
 
   /*
@@ -340,17 +340,17 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
 
     if (describeMode != null) {
 
-      sb.append("[describeMode=" + describeMode + "]");
+      sb.append("[describeMode=").append(describeMode).append("]");
     }
 
     if (describeIterationLimit != null) {
 
-      sb.append("[describeIterationLimit=" + describeIterationLimit + "]");
+      sb.append("[describeIterationLimit=").append(describeIterationLimit).append("]");
     }
 
     if (describeStatementLimit != null) {
 
-      sb.append("[describeStatement=" + describeStatementLimit + "]");
+      sb.append("[describeStatement=").append(describeStatementLimit).append("]");
     }
 
     if (isWildcard()) {

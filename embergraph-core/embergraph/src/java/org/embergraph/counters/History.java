@@ -443,14 +443,8 @@ public class History<T> {
 
       final IHistoryEntry<T> entry = itr.next();
 
-      sb.append(
-          "("
-              + entry.getValue()
-              + ","
-              + entry.getCount()
-              + ", "
-              + new Date(entry.lastModified())
-              + ")");
+      sb.append("(").append(entry.getValue()).append(",").append(entry.getCount()).append(", ")
+          .append(new Date(entry.lastModified())).append(")");
 
       if (itr.hasNext()) sb.append(",");
 
@@ -459,7 +453,7 @@ public class History<T> {
 
     final T average = getAverage();
 
-    sb.append("},average=" + average + ",n=" + n);
+    sb.append("},average=").append(average).append(",n=").append(n);
 
     return sb.toString();
   }

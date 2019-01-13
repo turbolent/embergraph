@@ -208,10 +208,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     final Set<IVariable<?>> set = new LinkedHashSet<>();
 
-    for (IVariable<?> var : vars) {
-
-      set.add(var);
-    }
+    set.addAll(Arrays.asList(vars));
 
     return set;
   }

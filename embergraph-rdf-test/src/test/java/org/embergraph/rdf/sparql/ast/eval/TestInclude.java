@@ -545,7 +545,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
    *
    * @throws Exception
    */
-  public void test_stressTests() throws Exception {
+  public void test_stressTests() {
 
     for (int i = 0; i < 100; i++) {
       final TestSuite suite = new TestSuite(IncludeStressTests.class.getSimpleName());

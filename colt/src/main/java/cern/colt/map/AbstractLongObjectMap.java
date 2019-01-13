@@ -37,11 +37,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    */
   public boolean containsKey(final long key) {
     return !forEachKey(
-        new LongProcedure() {
-          public boolean apply(long iterKey) {
-            return (key != iterKey);
-          }
-        });
+        iterKey -> (key != iterKey));
   }
   /*
    * Returns <tt>true</tt> if the receiver contains the specified value. Tests for identity.
@@ -50,11 +46,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    */
   public boolean containsValue(final Object value) {
     return !forEachPair(
-        new LongObjectProcedure() {
-          public boolean apply(long iterKey, Object iterValue) {
-            return (value != iterValue);
-          }
-        });
+        (iterKey, iterValue) -> (value != iterValue));
   }
   /*
    * Returns a deep copy of the receiver; uses <code>clone()</code> and casts the result.
@@ -103,17 +95,9 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     if (other.size() != size()) return false;
 
     return forEachPair(
-            new LongObjectProcedure() {
-              public boolean apply(long key, Object value) {
-                return other.containsKey(key) && other.get(key) == value;
-              }
-            })
+        (key, value) -> other.containsKey(key) && other.get(key) == value)
         && other.forEachPair(
-            new LongObjectProcedure() {
-              public boolean apply(long key, Object value) {
-                return containsKey(key) && get(key) == value;
-              }
-            });
+        (key, value) -> containsKey(key) && get(key) == value);
   }
   /*
    * Applies a procedure to each key of the receiver, if any. Note: Iterates over the keys in no
@@ -141,11 +125,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    */
   public boolean forEachPair(final LongObjectProcedure procedure) {
     return forEachKey(
-        new LongProcedure() {
-          public boolean apply(long key) {
-            return procedure.apply(key, get(key));
-          }
-        });
+        key -> procedure.apply(key, get(key)));
   }
   /*
    * Returns the value associated with the specified key. It is often a good idea to first check
@@ -170,12 +150,10 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     final long[] foundKey = new long[1];
     boolean notFound =
         forEachPair(
-            new LongObjectProcedure() {
-              public boolean apply(long iterKey, Object iterValue) {
-                boolean found = value == iterValue;
-                if (found) foundKey[0] = iterKey;
-                return !found;
-              }
+            (iterKey, iterValue) -> {
+              boolean found = value == iterValue;
+              if (found) foundKey[0] = iterKey;
+              return !found;
             });
     if (notFound) return Long.MIN_VALUE;
     return foundKey[0];
@@ -207,11 +185,9 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
   public void keys(final LongArrayList list) {
     list.clear();
     forEachKey(
-        new LongProcedure() {
-          public boolean apply(long key) {
-            list.add(key);
-            return true;
-          }
+        key -> {
+          list.add(key);
+          return true;
         });
   }
   /*
@@ -256,14 +232,12 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     valueList.clear();
 
     forEachPair(
-        new LongObjectProcedure() {
-          public boolean apply(long key, Object value) {
-            if (condition.apply(key, value)) {
-              keyList.add(key);
-              valueList.add(value);
-            }
-            return true;
+        (key, value) -> {
+          if (condition.apply(key, value)) {
+            keyList.add(key);
+            valueList.add(value);
           }
+          return true;
         });
   }
   /*
@@ -305,26 +279,22 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     final long[] k = keyList.elements();
     final Object[] v = valueList.elements();
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int a, int b) {
-            long t2;
-            Object t1;
-            t1 = v[a];
-            v[a] = v[b];
-            v[b] = t1;
-            t2 = k[a];
-            k[a] = k[b];
-            k[b] = t2;
-          }
+        (a, b) -> {
+          long t2;
+          Object t1;
+          t1 = v[a];
+          v[a] = v[b];
+          v[b] = t1;
+          t2 = k[a];
+          k[a] = k[b];
+          k[b] = t2;
         };
 
     cern.colt.function.IntComparator comp =
-        new cern.colt.function.IntComparator() {
-          public int compare(int a, int b) {
-            int ab = ((Comparable) v[a]).compareTo(v[b]);
-            return ab < 0 ? -1 : ab > 0 ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
-            // return v[a]<v[b] ? -1 : v[a]>v[b] ? 1 : (k[a]<k[b] ? -1 : (k[a]==k[b] ? 0 : 1));
-          }
+        (a, b) -> {
+          int ab = ((Comparable) v[a]).compareTo(v[b]);
+          return ab < 0 ? -1 : ab > 0 ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
+          // return v[a]<v[b] ? -1 : v[a]>v[b] ? 1 : (k[a]<k[b] ? -1 : (k[a]==k[b] ? 0 : 1));
         };
 
     cern.colt.GenericSorting.quickSort(0, keyList.size(), comp, swapper);
@@ -416,11 +386,9 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
   public void values(final ObjectArrayList list) {
     list.clear();
     forEachKey(
-        new LongProcedure() {
-          public boolean apply(long key) {
-            list.add(get(key));
-            return true;
-          }
+        key -> {
+          list.add(get(key));
+          return true;
         });
   }
 }

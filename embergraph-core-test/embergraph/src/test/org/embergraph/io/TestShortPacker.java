@@ -94,7 +94,7 @@ public class TestShortPacker extends TestCase {
     doUnpackTest((short) 0x8e, new byte[] {(byte) 0x80, (byte) 0x8e});
   }
 
-  public void doPackTest(short v, byte[] expected) throws IOException {
+  public void doPackTest(short v, byte[] expected) {
 
     DataOutputBuffer dob = new DataOutputBuffer();
 

@@ -243,14 +243,14 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
 
           lspace[index++] = fac.createLiteral(getRandomString(litsize, index));
 
-          for (int j = 0; j < langSpace.length; j++) {
+          for (String s : langSpace) {
 
-            lspace[index++] = fac.createLiteral(getRandomString(litsize, index), langSpace[j]);
+            lspace[index++] = fac.createLiteral(getRandomString(litsize, index), s);
           }
 
-          for (int j = 0; j < tspace.length; j++) {
+          for (URI uri : tspace) {
 
-            lspace[index++] = fac.createLiteral(getRandomType(tspace[j], index), tspace[j]);
+            lspace[index++] = fac.createLiteral(getRandomType(uri, index), uri);
           }
         }
       }
@@ -285,14 +285,14 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
 
       int index = 0;
 
-      for (int i = 0; i < cspace.length; i++) {
+      for (URI uri : cspace) {
 
-        ospace[index++] = cspace[i];
+        ospace[index++] = uri;
       }
 
-      for (int i = 0; i < lspace.length; i++) {
+      for (Literal literal : lspace) {
 
-        ospace[index++] = lspace[i];
+        ospace[index++] = literal;
       }
     }
 

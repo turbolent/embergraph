@@ -23,6 +23,7 @@ package org.embergraph.bop;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -108,7 +109,7 @@ public class TestDeepCopy extends TestCase2 {
   /** Exclusion list for classes which do not support deep copy semantics. */
   static final Set<Class<?>> noDeepCopy =
       new LinkedHashSet<>(
-          Arrays.asList(
+          Collections.singletonList(
               /*
                * {@link Var} does not have deep copy semantics since it imposes a canonizaling
                * mapping from names to object references.

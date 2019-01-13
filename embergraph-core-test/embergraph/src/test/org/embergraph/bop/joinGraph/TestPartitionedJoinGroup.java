@@ -445,9 +445,9 @@ public class TestPartitionedJoinGroup extends TestCase2 {
 
     final java.util.Map range = new java.util.HashMap();
 
-    for (int j = 0; j < nrange; j++) {
+    for (Object o : expected) {
 
-      range.put(expected[j], expected[j]);
+      range.put(o, o);
     }
 
     // Do selection without replacement for the objects visited by

@@ -49,9 +49,7 @@ public class BindingSetComparator<E> implements Comparator<IBindingSet> {
       if (Thread.interrupted()) throw new RuntimeException(new InterruptedException());
     }
 
-    for (int i = 0; i < sortOrder.length; i++) {
-
-      final ISortOrder<E> o = sortOrder[i];
+    for (final ISortOrder<E> o : sortOrder) {
 
       IValueExpression<E> v = o.getExpr();
 
@@ -82,7 +80,9 @@ public class BindingSetComparator<E> implements Comparator<IBindingSet> {
        */
       int ret = valueComparator.compare(v.get(bs1), v.get(bs2));
 
-      if (!o.isAscending()) ret = -ret;
+      if (!o.isAscending()) {
+        ret = -ret;
+      }
 
       if (ret != 0) {
 

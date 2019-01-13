@@ -408,7 +408,6 @@ public class TypeperfCollector extends AbstractProcessCollector {
 
           log.warn(ex.getMessage(), ex);
 
-          continue;
         }
       }
 

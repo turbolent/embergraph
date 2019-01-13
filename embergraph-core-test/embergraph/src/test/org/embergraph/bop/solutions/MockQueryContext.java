@@ -69,7 +69,7 @@ public class MockQueryContext implements IQueryContext {
     this.memoryManager = null;
   }
 
-  protected void finalize() throws Throwable {
+  protected void finalize() {
 
     close();
   }

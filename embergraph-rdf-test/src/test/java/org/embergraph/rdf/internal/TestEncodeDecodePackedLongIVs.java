@@ -49,7 +49,7 @@ public class TestEncodeDecodePackedLongIVs extends AbstractEncodeDecodeKeysTestC
   }
 
   @SuppressWarnings("rawtypes")
-  public void testRoundTripAndComparePackedLongIV() throws Exception {
+  public void testRoundTripAndComparePackedLongIV() {
 
     final AbstractLiteralIV[] ivs =
         new AbstractLiteralIV[] {
@@ -109,7 +109,7 @@ public class TestEncodeDecodePackedLongIVs extends AbstractEncodeDecodeKeysTestC
   }
 
   @SuppressWarnings("rawtypes")
-  public void testRoundTripAndCompareCompressedTimestamp() throws Exception {
+  public void testRoundTripAndCompareCompressedTimestamp() {
 
     // namespaces should never be reused in test suites.
     final EmbergraphValueFactory vf =
@@ -117,13 +117,10 @@ public class TestEncodeDecodePackedLongIVs extends AbstractEncodeDecodeKeysTestC
 
     final CompressedTimestampExtension<EmbergraphValue> ext =
         new CompressedTimestampExtension<>(
-            new IDatatypeURIResolver() {
-              @Override
-              public EmbergraphURI resolve(final URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             });
 
     // we'll create a permutation over all values above
@@ -184,11 +181,13 @@ public class TestEncodeDecodePackedLongIVs extends AbstractEncodeDecodeKeysTestC
       e[i] = ext.createIV(dt[i]);
     }
 
-    for (int i = 0; i < e.length; i++) {
-      final EmbergraphValue val = ext.asValue((LiteralExtensionIV) e[i], vf);
+    for (IV<?, ?> iv : e) {
+      final EmbergraphValue val = ext.asValue((LiteralExtensionIV) iv, vf);
 
       // verify val has been correctly round-tripped
-      if (log.isInfoEnabled()) log.info(val);
+      if (log.isInfoEnabled()) {
+        log.info(val);
+      }
     }
 
     doEncodeDecodeTest(e);

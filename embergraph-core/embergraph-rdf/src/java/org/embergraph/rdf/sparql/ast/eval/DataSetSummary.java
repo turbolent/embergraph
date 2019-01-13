@@ -39,7 +39,7 @@ public class DataSetSummary {
 
       IV iv = null;
 
-      if (uri != null && uri instanceof EmbergraphURI) {
+      if (uri instanceof EmbergraphURI) {
 
         final EmbergraphURI bURI = (EmbergraphURI) uri;
 
@@ -168,10 +168,7 @@ public class DataSetSummary {
     // Populate hash set which will maintain the sorted order.
     this.graphs = new LinkedHashSet<>(nknown);
 
-    for (int i = 0; i < nknown; i++) {
-
-      this.graphs.add(a[i]);
-    }
+    this.graphs.addAll(Arrays.asList(a).subList(0, nknown));
   }
 
   /*

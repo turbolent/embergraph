@@ -92,8 +92,7 @@ public abstract class AbstractPendingSetSubtask<
   }
 
   @Override
-  protected final void cancelRemoteTask(final boolean mayInterruptIfRunning)
-      throws InterruptedException {
+  protected final void cancelRemoteTask(final boolean mayInterruptIfRunning) {
 
     try {
 
@@ -161,8 +160,7 @@ public abstract class AbstractPendingSetSubtask<
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  protected boolean handleChunk(final E[] chunk)
-      throws ExecutionException, InterruptedException, IOException {
+  protected boolean handleChunk(final E[] chunk) {
 
     assert chunk != null;
     assert chunk.length > 0;

@@ -1271,7 +1271,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
     /** Evaluate the {@link IChunkMessage}. */
     @Override
-    public Void call() throws Exception {
+    public Void call() {
       if (log.isDebugEnabled()) log.debug("Running chunk: " + this);
       try {
         ft.run(); // run

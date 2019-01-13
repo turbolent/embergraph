@@ -129,8 +129,7 @@ public class TestTicket4249 extends QuadsTestCase {
       final double start,
       final double length,
       final String expected)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, IOException, VisitorException {
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 
     final ValueFactory vf = conn.getValueFactory();
     final String query =

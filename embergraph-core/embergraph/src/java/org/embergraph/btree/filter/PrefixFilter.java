@@ -114,9 +114,11 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
 
     if (keyPrefix.length == 0) throw new IllegalArgumentException();
 
-    for (int i = 0; i < keyPrefix.length; i++) {
+    for (byte[] keyPrefix1 : keyPrefix) {
 
-      if (keyPrefix[i] == null) throw new IllegalArgumentException();
+      if (keyPrefix1 == null) {
+        throw new IllegalArgumentException();
+      }
     }
 
     this.keyPrefix = keyPrefix;

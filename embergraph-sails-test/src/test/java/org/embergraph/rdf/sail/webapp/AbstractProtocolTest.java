@@ -96,26 +96,23 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
   }
 
   private final RequestFactory GET =
-      new RequestFactory() {
-        @Override
-        public HttpUriRequest createRequest(String... params) {
-          final StringBuffer url = new StringBuffer();
-          url.append(getSparqlURL(m_serviceURL));
-          char sep = '?';
-          for (int i = 0; i < params.length; i += 2) {
-            url.append(sep);
-            url.append(params[i]);
-            url.append('=');
-            try {
-              url.append(URLEncoder.encode(params[i + 1], "UTF-8"));
-            } catch (final UnsupportedEncodingException e) {
-              // JVM must support UTF-8
-              throw new Error(e);
-            }
-            sep = '&';
+      params -> {
+        final StringBuffer url = new StringBuffer();
+        url.append(getSparqlURL(m_serviceURL));
+        char sep = '?';
+        for (int i = 0; i < params.length; i += 2) {
+          url.append(sep);
+          url.append(params[i]);
+          url.append('=');
+          try {
+            url.append(URLEncoder.encode(params[i + 1], "UTF-8"));
+          } catch (final UnsupportedEncodingException e) {
+            // JVM must support UTF-8
+            throw new Error(e);
           }
-          return new HttpGet(url.toString());
+          sep = '&';
         }
+        return new HttpGet(url.toString());
       };
 
   private volatile RequestFactory requestFactory = GET;
@@ -298,17 +295,14 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
    */
   protected void setMethodisPostUrlEncodedData() {
     requestFactory =
-        new RequestFactory() {
-          @Override
-          public HttpUriRequest createRequest(String... params) {
-            final HttpPost rslt = new HttpPost(getSparqlURL(m_serviceURL));
-            try {
-              rslt.setEntity(ConnectOptions.getFormEntity(pairs2map(params)));
-            } catch (final Exception e) {
-              throw new RuntimeException(e);
-            }
-            return rslt;
+        params -> {
+          final HttpPost rslt = new HttpPost(getSparqlURL(m_serviceURL));
+          try {
+            rslt.setEntity(ConnectOptions.getFormEntity(pairs2map(params)));
+          } catch (final Exception e) {
+            throw new RuntimeException(e);
           }
+          return rslt;
         };
   }
 
@@ -327,29 +321,25 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
     }
     final HttpEntity toPost = toPostx;
     requestFactory =
-        new RequestFactory() {
-
-          @Override
-          public HttpUriRequest createRequest(String... params) {
-            final StringBuffer url = new StringBuffer();
-            url.append(getSparqlURL(m_serviceURL));
-            char sep = '?';
-            for (int i = 0; i < params.length; i += 2) {
-              url.append(sep);
-              url.append(params[i]);
-              url.append('=');
-              try {
-                url.append(URLEncoder.encode(params[i + 1], "UTF-8"));
-              } catch (final UnsupportedEncodingException e) {
-                // JVM must support UTF-8
-                throw new Error(e);
-              }
-              sep = '&';
+        params -> {
+          final StringBuffer url = new StringBuffer();
+          url.append(getSparqlURL(m_serviceURL));
+          char sep = '?';
+          for (int i = 0; i < params.length; i += 2) {
+            url.append(sep);
+            url.append(params[i]);
+            url.append('=');
+            try {
+              url.append(URLEncoder.encode(params[i + 1], "UTF-8"));
+            } catch (final UnsupportedEncodingException e) {
+              // JVM must support UTF-8
+              throw new Error(e);
             }
-            final HttpPost rslt = new HttpPost(url.toString());
-            rslt.setEntity(toPost);
-            return rslt;
+            sep = '&';
           }
+          final HttpPost rslt = new HttpPost(url.toString());
+          rslt.setEntity(toPost);
+          return rslt;
         };
   }
 

@@ -128,9 +128,9 @@ public class GeoSpatialConfig implements Serializable {
 
       // validate that there are no duplicate URIs used for the datatypeConfigs
       final Set<URI> uris = new HashSet<>();
-      for (int i = 0; i < datatypeConfigs.size(); i++) {
+      for (GeoSpatialDatatypeConfiguration datatypeConfig : datatypeConfigs) {
 
-        final URI curUri = datatypeConfigs.get(i).getUri();
+        final URI curUri = datatypeConfig.getUri();
 
         if (uris.contains(curUri)) {
           throw new IllegalArgumentException(
@@ -143,8 +143,7 @@ public class GeoSpatialConfig implements Serializable {
   }
 
   public GeoSpatialDatatypeConfiguration getConfigurationForDatatype(URI datatypeUri) {
-    for (int i = 0; i < datatypeConfigs.size(); i++) {
-      final GeoSpatialDatatypeConfiguration cur = datatypeConfigs.get(i);
+    for (final GeoSpatialDatatypeConfiguration cur : datatypeConfigs) {
       if (cur.getUri().equals(datatypeUri)) {
         return cur;
       }

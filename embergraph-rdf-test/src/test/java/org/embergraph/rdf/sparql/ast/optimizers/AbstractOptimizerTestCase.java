@@ -804,30 +804,15 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     }
 
     protected ApplyAnnotation joinOn(final VarNode... joinVars) {
-      return new ApplyAnnotation() {
-        @Override
-        public void apply(ASTBase target) {
-          target.setProperty(Annotations.JOIN_VARS, joinVars);
-        }
-      };
+      return target -> target.setProperty(Annotations.JOIN_VARS, joinVars);
     }
 
     protected ApplyAnnotation dependsOn(final String... dependsOn) {
-      return new ApplyAnnotation() {
-        @Override
-        public void apply(ASTBase target) {
-          ((NamedSubqueryRoot) target).setDependsOn(dependsOn);
-        }
-      };
+      return target -> ((NamedSubqueryRoot) target).setDependsOn(dependsOn);
     }
 
     protected ApplyAnnotation slice(final long offset, final long limit) {
-      return new ApplyAnnotation() {
-        @Override
-        public void apply(ASTBase target) {
-          ((QueryBase) target).setSlice(new SliceNode(offset, limit));
-        }
-      };
+      return target -> ((QueryBase) target).setSlice(new SliceNode(offset, limit));
     }
   }
 

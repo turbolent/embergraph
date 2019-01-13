@@ -24,6 +24,7 @@ package org.embergraph.io.writecache;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -545,13 +546,9 @@ public abstract class WriteCacheService implements IWriteCache {
     this.hotCacheThreshold = hotCacheThreshold;
 
     // pre-populate hotList and readList
-    for (int i = 0; i < hotListSize; i++) {
-      hotList.add(readBuffers[i]);
-    }
+    hotList.addAll(Arrays.asList(readBuffers).subList(0, hotListSize));
 
-    for (int i = hotListSize; i < readListSize; i++) {
-      readList.add(readBuffers[i]);
-    }
+    readList.addAll(Arrays.asList(readBuffers).subList(hotListSize, readListSize));
 
     // set initial read cache
     hotCache = hotList.poll();
@@ -614,9 +611,9 @@ public abstract class WriteCacheService implements IWriteCache {
     final WriteCacheServiceCounters counters =
         new WriteCacheServiceCounters(nwriteBuffers, m_dirtyListThreshold, compactionThreshold);
 
-    for (int i = 0; i < writeBuffers.length; i++) {
+    for (WriteCache writeBuffer : writeBuffers) {
 
-      writeBuffers[i].setCounters(counters);
+      writeBuffer.setCounters(counters);
     }
 
     this.counters = new AtomicReference<>(counters);
@@ -790,7 +787,7 @@ public abstract class WriteCacheService implements IWriteCache {
      *     interrupt or otherwise invalidate any readers with access to historical data which is no
      *     longer part of the quorum.
      */
-    public Void call() throws Exception {
+    public Void call() {
       try {
         if (quorum != null) {
           // allocate heap byte buffer for whole buffer checksum.
@@ -1745,7 +1742,6 @@ public abstract class WriteCacheService implements IWriteCache {
           t.close();
         } catch (InterruptedException ex) {
           interrupted = true;
-          continue;
         }
       }
 
@@ -1755,7 +1751,6 @@ public abstract class WriteCacheService implements IWriteCache {
           t.close();
         } catch (InterruptedException ex) {
           interrupted = true;
-          continue;
         }
       }
 
@@ -1793,7 +1788,7 @@ public abstract class WriteCacheService implements IWriteCache {
    *
    * @throws Throwable
    */
-  protected void finalized() throws Throwable {
+  protected void finalized() {
 
     close();
   }
@@ -2136,7 +2131,7 @@ public abstract class WriteCacheService implements IWriteCache {
    * @throws InterruptedException
    * @throws IllegalStateException
    */
-  public void setExtent(final long fileExtent) throws IllegalStateException, InterruptedException {
+  public void setExtent(final long fileExtent) throws IllegalStateException {
 
     if (fileExtent < 0L) throw new IllegalArgumentException();
 
@@ -2852,7 +2847,7 @@ public abstract class WriteCacheService implements IWriteCache {
    * @return The {@link WriteCache} iff one was available.
    * @throws InterruptedException
    */
-  private WriteCache getDirectCleanCache() throws InterruptedException {
+  private WriteCache getDirectCleanCache() {
 
     final WriteCache tmp = cleanList.poll();
 
@@ -3025,17 +3020,11 @@ public abstract class WriteCacheService implements IWriteCache {
 
     final Long off = Long.valueOf(offset);
 
-    while (true) {
-
-      if (!open.get()) {
-
-        /*
-         * Not open. Return [null] rather than throwing an exception per
-         * the contract for this implementation.
-         */
-
-        return null;
-      }
+    /*
+     * Not open. Return [null] rather than throwing an exception per
+     * the contract for this implementation.
+     */
+    while (open.get()) {
 
       final WriteCache cache = serviceMap.get(off);
 
@@ -3063,12 +3052,12 @@ public abstract class WriteCacheService implements IWriteCache {
           log.debug("WriteCache out of sync with WriteCacheService");
         }
 
-        if (ret != null) return ret;
+        if (ret != null)
+          return ret;
 
         // May have been transferred to another Cache!
 
         // Fall through.
-        continue;
 
       } catch (IllegalStateException ex) {
         /*
@@ -3127,44 +3116,41 @@ public abstract class WriteCacheService implements IWriteCache {
   }
 
   /*
+   * Loads a record from the specified address.
+   *
+   * @return A heap {@link ByteBuffer} containing the data for that record.
+   * @throws IllegalArgumentException if addr is {@link IRawStore#NULL}.
+   */
+  /*
    * Helper loads a child node from the specified address by delegating {@link
    * WriteCacheService#_getRecord(long, int)}.
    */
   private static final Computable<LoadRecordRequest, ByteBuffer> loadChild =
-      new Computable<LoadRecordRequest, ByteBuffer>() {
+      req -> {
 
-        /*
-         * Loads a record from the specified address.
-         *
-         * @return A heap {@link ByteBuffer} containing the data for that record.
-         * @throws IllegalArgumentException if addr is {@link IRawStore#NULL}.
-         */
-        public ByteBuffer compute(final LoadRecordRequest req) throws InterruptedException {
+        try {
 
-          try {
+          final ByteBuffer ret = req.service._getRecord(req.offset, req.nbytes);
 
-            final ByteBuffer ret = req.service._getRecord(req.offset, req.nbytes);
+          if (ret != null && ret.remaining() == 0) throw new AssertionError();
 
-            if (ret != null && ret.remaining() == 0) throw new AssertionError();
+          return ret;
 
-            return ret;
+        } finally {
 
-          } finally {
+          /*
+           * Clear the future task from the memoizer cache.
+           *
+           * Note: This is necessary in order to prevent the cache from
+           * retaining a hard reference to each child materialized for the
+           * B+Tree.
+           *
+           * Note: This does not depend on any additional synchronization.
+           * The Memoizer pattern guarantees that only one thread actually
+           * call ft.run() and hence runs this code.
+           */
 
-            /*
-             * Clear the future task from the memoizer cache.
-             *
-             * Note: This is necessary in order to prevent the cache from
-             * retaining a hard reference to each child materialized for the
-             * B+Tree.
-             *
-             * Note: This does not depend on any additional synchronization.
-             * The Memoizer pattern guarantees that only one thread actually
-             * call ft.run() and hence runs this code.
-             */
-
-            req.service.memo.removeFromCache(req);
-          }
+          req.service.memo.removeFromCache(req);
         }
       };
 
@@ -3676,7 +3662,7 @@ public abstract class WriteCacheService implements IWriteCache {
       if (addrsUsed[i] == paddr) {
         ret.append(addrActions[i]);
         if (addrActions[i] == 'A') {
-          ret.append("[" + addrLens[i] + "]");
+          ret.append("[").append(addrLens[i]).append("]");
         }
       }
     }

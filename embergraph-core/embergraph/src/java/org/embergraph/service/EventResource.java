@@ -66,7 +66,7 @@ public class EventResource implements Serializable {
 
       if (partitionId != null && partitionId.length() != 0) {
 
-        sb.append("#" + partitionId);
+        sb.append("#").append(partitionId);
       }
 
     } else if (partitionId != null && partitionId.length() != 0) {

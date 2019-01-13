@@ -78,11 +78,11 @@ public class ProxySuiteHelper {
           super.addTest(
               new TestSetup(suite2) {
                 @Override
-                protected void setUp() throws Exception {}
+                protected void setUp() {}
 
                 @SuppressWarnings("rawtypes")
                 @Override
-                protected void tearDown() throws Exception {
+                protected void tearDown() {
                   ((TestNanoSparqlServerWithProxyIndexManager) suite2.getDelegate())
                       .tearDownAfterSuite();
                   /*

@@ -59,7 +59,7 @@ public class EndOp extends PipelineOp {
       this.context = context;
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> source = context.getSource();
 

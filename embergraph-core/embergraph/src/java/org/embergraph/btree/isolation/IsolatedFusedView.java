@@ -139,9 +139,9 @@ public class IsolatedFusedView extends FusedView {
     writeSet = (BTree) sources[0];
 
     // verify all sources support timestamps.
-    for (int i = 0; i < sources.length; i++) {
+    for (AbstractBTree source : sources) {
 
-      if (!sources[i].getIndexMetadata().getVersionTimestamps()) {
+      if (!source.getIndexMetadata().getVersionTimestamps()) {
 
         throw new IllegalArgumentException();
       }

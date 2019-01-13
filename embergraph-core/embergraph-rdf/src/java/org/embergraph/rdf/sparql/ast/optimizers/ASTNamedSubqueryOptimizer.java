@@ -348,7 +348,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
           sa.getJoinVars(aNamedSubquery, anInclude, set);
 
-          joinvars = set.toArray(new IVariable[set.size()]);
+          joinvars = set.toArray(new IVariable[0]);
 
           // Sort.
           Arrays.sort(joinvars);
@@ -547,17 +547,14 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
 
     public IVariable<?>[] toArray() {
 
-      return vars.toArray(new IVariable[vars.size()]);
+      return vars.toArray(new IVariable[0]);
     }
 
     public JoinVars(final IVariable<?>[] vars) {
 
       this.vars = new LinkedHashSet<>();
 
-      for (int i = 0; i < vars.length; i++) {
-
-        this.vars.add(vars[i]);
-      }
+      this.vars.addAll(Arrays.asList(vars));
 
       this.hashCode = Arrays.hashCode(vars);
     }

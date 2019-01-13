@@ -454,12 +454,12 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
       return null;
     }
 
-    public long runMutation(IStep step) throws Exception {
+    public long runMutation(IStep step) {
 
       return 0;
     }
 
-    public IChunkedOrderedIterator<ISolution> runQuery(IStep step) throws Exception {
+    public IChunkedOrderedIterator<ISolution> runQuery(IStep step) {
 
       return null;
     }

@@ -414,7 +414,7 @@ public class DirectBufferPoolAllocator {
           nbytes -= allocSize;
         }
 
-        return allocations.toArray(new IAllocation[allocations.size()]);
+        return allocations.toArray(new IAllocation[0]);
 
       } finally {
 

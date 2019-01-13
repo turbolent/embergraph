@@ -83,7 +83,7 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
    * Data files are placed into a directory named by the test. If the directory exists, then it is
    * removed before the federation is set up.
    */
-  public void setUp(ProxyTestCase testCase) throws Exception {
+  public void setUp(ProxyTestCase testCase) {
 
     final String name = testCase.getName();
 
@@ -101,7 +101,7 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
    * Optional cleanup after the test runs, but sometimes its helpful to be able to see what was
    * created in the file system.
    */
-  public void tearDown(ProxyTestCase testCase) throws Exception {
+  public void tearDown(ProxyTestCase testCase) {
 
     if (true && dataDir.exists() && dataDir.isDirectory()) {
 
@@ -121,9 +121,9 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

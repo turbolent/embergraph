@@ -109,7 +109,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
    */
   @Override
   public final V get(long timeout, TimeUnit unit)
-      throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException, ExecutionException {
     return get();
   }
 }

@@ -138,109 +138,103 @@ public enum ValueType {
    */
   public static byte[] encode(Object v) {
 
-    try {
+    if (v == null) {
 
-      if (v == null) {
+      /*
+       * A null will be interpreted as a deletion request for a
+       * column value on insert / update.
+       */
+      return null;
+    }
 
-        /*
-         * A null will be interpreted as a deletion request for a
-         * column value on insert / update.
-         */
-        return null;
-      }
+    DataOutputBuffer buf = getBuffer();
 
-      DataOutputBuffer buf = getBuffer();
+    buf.reset();
 
-      buf.reset();
+    if (v instanceof byte[]) {
 
-      if (v instanceof byte[]) {
+      buf.writeByte(ValueType.ByteArray.intValue());
 
-        buf.writeByte(ValueType.ByteArray.intValue());
+      // @todo constrain max byte[] length?
+      byte[] bytes = (byte[]) v;
 
-        // @todo constrain max byte[] length?
-        byte[] bytes = (byte[]) v;
+      buf.packLong(bytes.length);
 
-        buf.packLong(bytes.length);
+      buf.write(bytes);
 
-        buf.write(bytes);
+    } else if (v instanceof Number) {
 
-      } else if (v instanceof Number) {
+      if (v instanceof Integer) {
 
-        if (v instanceof Integer) {
+        buf.writeByte(ValueType.Integer.intValue());
 
-          buf.writeByte(ValueType.Integer.intValue());
+        buf.writeInt(((Number) v).intValue());
 
-          buf.writeInt(((Number) v).intValue());
+      } else if (v instanceof Long) {
 
-        } else if (v instanceof Long) {
+        buf.writeByte(ValueType.Long.intValue());
 
-          buf.writeByte(ValueType.Long.intValue());
+        buf.writeLong(((Number) v).longValue());
 
-          buf.writeLong(((Number) v).longValue());
+      } else if (v instanceof Float) {
 
-        } else if (v instanceof Float) {
+        buf.writeByte(ValueType.Float.intValue());
 
-          buf.writeByte(ValueType.Float.intValue());
+        buf.writeFloat(((Number) v).floatValue());
 
-          buf.writeFloat(((Number) v).floatValue());
+      } else if (v instanceof Double) {
 
-        } else if (v instanceof Double) {
+        buf.writeByte(ValueType.Double.intValue());
 
-          buf.writeByte(ValueType.Double.intValue());
-
-          buf.writeDouble(((Number) v).doubleValue());
-
-        } else {
-
-          throw new UnsupportedOperationException();
-        }
-
-      } else if (v instanceof Date) {
-
-        buf.writeByte(ValueType.Date.intValue());
-
-        buf.writeLong(((Date) v).getTime());
-
-      } else if (v instanceof String) {
-
-        buf.writeByte(ValueType.Unicode.intValue());
-
-        // @todo constrain max byte[] length?
-        byte[] bytes = ((String) v).getBytes(StandardCharsets.UTF_8);
-
-        buf.packLong(bytes.length);
-
-        buf.write(bytes);
-
-      } else if (v instanceof AutoIncIntegerCounter) {
-
-        buf.writeByte(ValueType.AutoIncInteger.intValue());
-
-      } else if (v instanceof AutoIncLongCounter) {
-
-        buf.writeByte(ValueType.AutoIncLong.intValue());
-
-      } else if (v instanceof Serializable) {
-
-        buf.writeByte(ValueType.Serializable.intValue());
-
-        final byte[] bytes = SerializerUtil.serialize(v);
-
-        buf.packLong(bytes.length);
-
-        buf.write(bytes);
+        buf.writeDouble(((Number) v).doubleValue());
 
       } else {
 
         throw new UnsupportedOperationException();
       }
 
-      return buf.toByteArray();
+    } else if (v instanceof Date) {
 
-    } catch (IOException ex) {
+      buf.writeByte(ValueType.Date.intValue());
 
-      throw new RuntimeException(ex);
+      buf.writeLong(((Date) v).getTime());
+
+    } else if (v instanceof String) {
+
+      buf.writeByte(ValueType.Unicode.intValue());
+
+      // @todo constrain max byte[] length?
+      byte[] bytes = ((String) v).getBytes(StandardCharsets.UTF_8);
+
+      buf.packLong(bytes.length);
+
+      buf.write(bytes);
+
+    } else if (v instanceof AutoIncIntegerCounter) {
+
+      buf.writeByte(ValueType.AutoIncInteger.intValue());
+
+    } else if (v instanceof AutoIncLongCounter) {
+
+      buf.writeByte(ValueType.AutoIncLong.intValue());
+
+    } else if (v instanceof Serializable) {
+
+      buf.writeByte(ValueType.Serializable.intValue());
+
+      final byte[] bytes = SerializerUtil.serialize(v);
+
+      buf.packLong(bytes.length);
+
+      buf.write(bytes);
+
+    } else {
+
+      throw new UnsupportedOperationException();
     }
+
+    return buf.toByteArray();
+
   }
 
   /*

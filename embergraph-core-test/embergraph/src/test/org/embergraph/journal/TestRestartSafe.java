@@ -131,7 +131,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
    *
    * @throws IOException
    */
-  public void test_restartSafe01() throws IOException {
+  public void test_restartSafe01() {
 
     Journal journal = new Journal(getProperties());
 
@@ -239,7 +239,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
    *
    * @throws IOException
    */
-  public void test_restartSafe_offsetBits() throws IOException {
+  public void test_restartSafe_offsetBits() {
 
     final int offsetBits = WormAddressManager.SCALE_OUT_OFFSET_BITS;
     Journal journal;

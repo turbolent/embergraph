@@ -42,7 +42,7 @@ public class QueryTask extends AbstractStepTask {
   }
 
   /** Run the task (invoked once we are in the target execution context). */
-  public RuleStats call() throws Exception {
+  public RuleStats call() {
 
     /*
      * Create the IJoinNexus that will be used to evaluate the Query now

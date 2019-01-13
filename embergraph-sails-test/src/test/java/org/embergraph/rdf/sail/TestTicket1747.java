@@ -68,8 +68,7 @@ public class TestTicket1747 extends QuadsTestCase {
   }
 
   private void executeQuery(final EmbergraphSailRepository repo)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, IOException, VisitorException {
+      throws RepositoryException, MalformedQueryException {
     try {
       repo.initialize();
       final EmbergraphSailRepositoryConnection conn = repo.getConnection();

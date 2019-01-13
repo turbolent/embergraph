@@ -244,9 +244,9 @@ public class CommitCounterUtility {
 
       final File[] children = f.listFiles(fileFilter);
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(errorIfDeleteFails, children[i], fileFilter);
+        recursiveDelete(errorIfDeleteFails, child, fileFilter);
       }
     }
 
@@ -288,8 +288,7 @@ public class CommitCounterUtility {
    * @return The file from the directory structure associated with the greatest commit counter.
    * @throws IOException
    */
-  public static File findGreatestCommitCounter(final File f, final FileFilter fileFilter)
-      throws IOException {
+  public static File findGreatestCommitCounter(final File f, final FileFilter fileFilter) {
 
     if (f == null) throw new IllegalArgumentException();
 
@@ -311,9 +310,9 @@ public class CommitCounterUtility {
        */
       Arrays.sort(files, ReverseFileComparator.INSTANCE);
 
-      for (int i = 0; i < files.length; i++) {
+      for (File file : files) {
 
-        final File tmp = findGreatestCommitCounter(files[i], fileFilter);
+        final File tmp = findGreatestCommitCounter(file, fileFilter);
 
         if (tmp != null) {
 

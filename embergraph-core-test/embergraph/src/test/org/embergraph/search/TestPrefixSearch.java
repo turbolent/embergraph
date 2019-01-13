@@ -46,7 +46,7 @@ public class TestPrefixSearch extends AbstractSearchTest {
     super(name);
   }
 
-  public void test_prefixSearch() throws InterruptedException {
+  public void test_prefixSearch() {
 
     final double minCosine = .4;
     final double maxCosine = 1.0d;

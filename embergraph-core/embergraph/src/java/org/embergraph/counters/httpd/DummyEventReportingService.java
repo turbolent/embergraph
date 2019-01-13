@@ -66,16 +66,14 @@ public class DummyEventReportingService extends EventReceiver implements IServic
     // sort into time order
     Collections.sort(
         events,
-        new Comparator<Event>() {
-          public int compare(Event e1, Event e2) {
-            if (e1.getStartTime() < e2.getStartTime()) {
-              return -1;
-            }
-            if (e1.getStartTime() > e2.getStartTime()) {
-              return 1;
-            }
-            return 0;
+        (e1, e2) -> {
+          if (e1.getStartTime() < e2.getStartTime()) {
+            return -1;
           }
+          if (e1.getStartTime() > e2.getStartTime()) {
+            return 1;
+          }
+          return 0;
         });
 
     for (Event e : events) {
@@ -84,22 +82,22 @@ public class DummyEventReportingService extends EventReceiver implements IServic
     }
   }
 
-  public String getHostname() throws IOException {
+  public String getHostname() {
 
     return AbstractStatisticsCollector.fullyQualifiedHostName;
   }
 
-  public Class getServiceIface() throws IOException {
+  public Class getServiceIface() {
 
     return getClass();
   }
 
-  public String getServiceName() throws IOException {
+  public String getServiceName() {
 
     return getClass().getName() + "#" + hashCode();
   }
 
-  public UUID getServiceUUID() throws IOException {
+  public UUID getServiceUUID() {
 
     return serviceUUID;
   }

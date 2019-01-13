@@ -66,7 +66,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_var_var_var()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o}";
 
@@ -107,7 +107,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_const_var_var()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?p where {<http://www.embergraph.org/s> ?p ?o}";
 
@@ -149,7 +149,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_var_const_var()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s <http://www.embergraph.org/p> ?o}";
 
@@ -191,7 +191,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_var_var_const()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p <http://www.embergraph.org/o> }";
 
@@ -233,7 +233,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_const_var_const()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?p where { <http://www.embergraph.org/s> ?p <http://www.embergraph.org/o> }";
@@ -277,7 +277,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_const_const_var()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?o where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> ?o }";
@@ -321,7 +321,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_triple_pattern_const_const_const()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?x where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> <http://www.embergraph.org/o> }";
@@ -366,7 +366,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * select ?s where {?s ?p ?o . ?o ?p2 ?s}
    * </pre>
    */
-  public void test_simple_join() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_simple_join() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . ?o ?p2 ?s}";
 
@@ -412,7 +412,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * select ?s where {?s ?p ?o ; ?p2 ?o2 }
    * </pre>
    */
-  public void test_predicate_list() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_predicate_list() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o ; ?p2 ?o2 }";
 
@@ -462,7 +462,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_predicate_list_where_predicate_is_constant()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?s \n"
@@ -513,7 +513,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * select ?s where {?s ?p ?o , ?o2 , ?o3 . }
    * </pre>
    */
-  public void test_object_list() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_object_list() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o , ?o2 , ?o3 . }";
 
@@ -570,7 +570,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_object_list_where_objects_are_constants()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?s where {?s ?p <http://www.embergraph.org/foo> , <http://www.embergraph.org/bar> , <http://www.embergraph.org/goo> . }";
@@ -625,7 +625,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_with_predicate_list_and_object_list()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o ; ?p2 ?o2 , ?o3}";
 
@@ -688,7 +688,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "" + "PREFIX  : <http://example.org/>\n" + "SELECT * { [] :p \"v\" }";
 
@@ -748,7 +748,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "" + "PREFIX  : <http://example.org/>\n" + "SELECT * { [ :p \"v\" ] }";
 
@@ -813,7 +813,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_03()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "" + "PREFIX  : <http://example.org/>\n" + "SELECT * { [ :p \"v\" ] :q \"w\" }";
@@ -887,7 +887,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_04()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "" + "PREFIX  : <http://example.org/>\n" + "SELECT * { :x :q [ :p \"v\" ] }";
@@ -966,7 +966,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_05()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1061,7 +1061,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_rdf_collections_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1181,7 +1181,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * embergraph AST model is generated.
    */
   public void test_rdf_collections_02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1299,7 +1299,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_rdf_collections_03()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1409,7 +1409,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_rdf_collections_04()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "" + "PREFIX  : <http://example.org/ns#>\n" + "SELECT ?p ?v { :x ?p (?v) . }";
@@ -1525,7 +1525,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * </pre>
    */
   public void test_rdf_collections_05()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "" + "PREFIX  : <http://example.org/ns#>\n" + "SELECT ?p ?v ?w { :x ?p (?v ?w) . }";
@@ -1636,7 +1636,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * <p>Note: This also uses the alternative <code>$title</code> syntax, but <code>$title</code> and
    * <code>?title</code> are the same variable.
    */
-  public void test_base_01() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_base_01() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1707,7 +1707,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * <p>Note: This also uses the alternative <code>$title</code> syntax, but <code>$title</code> and
    * <code>?title</code> are the same variable.
    */
-  public void test_base_02() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_base_02() throws MalformedQueryException, TokenMgrError {
 
     if (baseURIBusted) return;
 
@@ -1772,7 +1772,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * <p>Note: This also uses the alternative <code>$title</code> syntax, but <code>$title</code> and
    * <code>?title</code> are the same variable.
    */
-  public void test_base_03() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_base_03() throws MalformedQueryException, TokenMgrError {
 
     if (baseURIBusted) return;
 
@@ -1836,7 +1836,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * <p>Note: This also uses the alternative <code>$title</code> syntax, but <code>$title</code> and
    * <code>?title</code> are the same variable.
    */
-  public void test_base_04() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_base_04() throws MalformedQueryException, TokenMgrError {
 
     if (baseURIBusted) return;
 

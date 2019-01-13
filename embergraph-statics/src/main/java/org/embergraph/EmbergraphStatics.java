@@ -117,18 +117,13 @@ public class EmbergraphStatics {
       final Date date = new Date(System.currentTimeMillis());
 
       w.append(Banner.getBanner());
-      w.append("Thread dump. Date:" + df.format(date));
+      w.append("Thread dump. Date:").append(df.format(date));
       w.append("\n\n");
 
       // Setup an ordered map.
       final Map<Thread, StackTraceElement[]> dump =
           new TreeMap<>(
-              new Comparator<Thread>() {
-                @Override
-                public int compare(Thread o1, Thread o2) {
-                  return Long.compare(o1.getId(), o2.getId());
-                }
-              });
+              (o1, o2) -> Long.compare(o1.getId(), o2.getId()));
 
       // Add the stack trace for each thread.
       dump.putAll(Thread.getAllStackTraces());
@@ -137,22 +132,14 @@ public class EmbergraphStatics {
 
         final Thread thread = threadEntry.getKey();
 
-        w.append(
-            "THREAD#"
-                + thread.getId()
-                + ", name="
-                + thread.getName()
-                + ", state="
-                + thread.getState()
-                + ", priority="
-                + thread.getPriority()
-                + ", daemon="
-                + thread.isDaemon()
-                + "\n");
+        w.append("THREAD#").append(String.valueOf(thread.getId())).append(", name=")
+            .append(thread.getName()).append(", state=").append(String.valueOf(thread.getState()))
+            .append(", priority=").append(String.valueOf(thread.getPriority())).append(", daemon=")
+            .append(String.valueOf(thread.isDaemon())).append("\n");
 
         for (StackTraceElement elem : threadEntry.getValue()) {
 
-          w.append("\t" + elem.toString() + "\n");
+          w.append("\t").append(elem.toString()).append("\n");
         }
       }
 

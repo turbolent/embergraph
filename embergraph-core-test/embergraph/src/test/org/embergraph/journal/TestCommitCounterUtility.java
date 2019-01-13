@@ -76,16 +76,12 @@ public class TestCommitCounterUtility extends TestCase2 {
     final String ext = ".tmp";
 
     final FileFilter fileFilter =
-        new FileFilter() {
+        f -> {
+          if (f.isDirectory()) {
 
-          @Override
-          public boolean accept(final File f) {
-            if (f.isDirectory()) {
-
-              return true;
-            }
-            return f.getName().endsWith(ext);
+            return true;
           }
+          return f.getName().endsWith(ext);
         };
 
     // temp directory for this test.

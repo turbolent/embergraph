@@ -174,7 +174,7 @@ public class LocalJoinTask extends JoinTask {
    * <code>null</code> if things error out before it gets set or perhaps if they complete too
    * quickly.
    */
-  private volatile Future<? extends Object> sinkFuture;
+  private volatile Future<?> sinkFuture;
 
   /*
    * Set the future for the downstream join dimension on this join task. This MUST be done before
@@ -186,7 +186,7 @@ public class LocalJoinTask extends JoinTask {
    * @throws IllegalStateException if the future was already set.
    * @throws IllegalArgumentException if the argument is <code>null</code>.
    */
-  protected final void setSinkFuture(final Future<? extends Object> f) {
+  protected final void setSinkFuture(final Future<?> f) {
 
     if (f == null) throw new IllegalArgumentException();
 
@@ -196,8 +196,7 @@ public class LocalJoinTask extends JoinTask {
   }
 
   @Override
-  protected void flushAndCloseBuffersAndAwaitSinks()
-      throws InterruptedException, ExecutionException {
+  protected void flushAndCloseBuffersAndAwaitSinks() {
 
     if (DEBUG) log.debug("orderIndex=" + orderIndex + ", partitionId=" + partitionId);
 

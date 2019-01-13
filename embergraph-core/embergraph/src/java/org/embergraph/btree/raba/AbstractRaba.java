@@ -338,10 +338,10 @@ public abstract class AbstractRaba implements IRaba {
     final boolean isKeys = raba.isKeys();
 
     sb.append(raba.getClass().getName());
-    sb.append("{ capacity=" + raba.capacity());
-    sb.append(", size=" + raba.size());
-    sb.append(", isKeys=" + isKeys);
-    sb.append(", isReadOnly=" + raba.isReadOnly());
+    sb.append("{ capacity=").append(raba.capacity());
+    sb.append(", size=").append(raba.size());
+    sb.append(", isKeys=").append(isKeys);
+    sb.append(", isReadOnly=").append(raba.isReadOnly());
     sb.append(", [\n");
 
     int i = 0;

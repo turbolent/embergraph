@@ -89,13 +89,15 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
     if (parts.length == 0) return make(0);
 
     int size = 0;
-    for (int i = 0; i < parts.length; i++) size += parts[i].size();
+    for (DoubleMatrix1D part1 : parts) {
+      size += part1.size();
+    }
 
     DoubleMatrix1D vector = make(size);
     size = 0;
-    for (int i = 0; i < parts.length; i++) {
-      vector.viewPart(size, parts[i].size()).assign(parts[i]);
-      size += parts[i].size();
+    for (DoubleMatrix1D part : parts) {
+      vector.viewPart(size, part.size()).assign(part);
+      size += part.size();
     }
 
     return vector;

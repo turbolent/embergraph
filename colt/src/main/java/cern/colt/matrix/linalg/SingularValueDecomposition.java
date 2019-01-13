@@ -534,8 +534,8 @@ public class SingularValueDecomposition implements java.io.Serializable {
     double eps = Math.pow(2.0, -52.0);
     double tol = Math.max(m, n) * s[0] * eps;
     int r = 0;
-    for (int i = 0; i < s.length; i++) {
-      if (s[i] > tol) {
+    for (double v : s) {
+      if (v > tol) {
         r++;
       }
     }
@@ -562,42 +562,42 @@ public class SingularValueDecomposition implements java.io.Serializable {
     try {
       buf.append(this.cond());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\nrank = ");
     try {
       buf.append(this.rank());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\nnorm2 = ");
     try {
       buf.append(this.norm2());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
       buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nS = ");
     try {
       buf.append(this.getS());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
       buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     return buf.toString();

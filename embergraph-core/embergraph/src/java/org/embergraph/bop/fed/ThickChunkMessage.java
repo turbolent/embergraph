@@ -183,9 +183,9 @@ public class ThickChunkMessage<E> implements IChunkMessage<E>, Externalizable {
 
       final IVSolutionSetEncoder encoder = new IVSolutionSetEncoder();
 
-      for (int i = 0; i < source.length; i++) {
+      for (IBindingSet iBindingSet : source) {
 
-        encoder.encodeSolution(out, source[i]);
+        encoder.encodeSolution(out, iBindingSet);
       }
 
       this.data = out.toByteArray();

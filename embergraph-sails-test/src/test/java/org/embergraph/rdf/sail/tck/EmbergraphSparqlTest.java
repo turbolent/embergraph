@@ -31,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -419,7 +420,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
    * work with {ASCII,IDENTICAL} or {JDK,IDENTICAL} but not with {ICU,IDENTICAL} for some reason.
    */
   protected static final Collection<String> unicodeStrengthIdentical =
-      Arrays.asList(
+      Collections.singletonList(
           "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/i18n/manifest#normalization-1");
 
   //    private static String datasetTests =
@@ -535,513 +536,485 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     return suite2;
   }
 
+  ///// *
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt03",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang03",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#isnumeric01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#abs01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ceil01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#floor01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#round01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#concat01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#concat02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#substring01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#substring02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#length01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ucase01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#lcase01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#encode01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#contains01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#starts01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ends01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#plus-1",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#plus-2",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#md5-01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#md5-02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha1-01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha1-02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha256-01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha256-02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha512-01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha512-02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#minutes",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#seconds",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#hours",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#month",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#year",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#day",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#timezone",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#tz",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#in01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#in02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#notin01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#notin02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#now01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#rand01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#iri01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#if01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#if02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#coalesce01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strbefore01a",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strbefore02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strafter01a",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strafter02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace02",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace03",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#uuid01",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#struuid01",
+  //// */
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values1",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values2",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values3",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values4",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values5",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values6",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values7",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values8",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#inline1",
+  //
+  // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#inline2",
+  // property paths
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-collection-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-collection-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-alternative-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-alternative-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-03",
+  //// Simple Sequences
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-02",  // with inverse
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-03",
+  //// Sequence 04, 05, and 06 use the Property paths forms {...}, which were removed in
+  // the July 24th Working Draft
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-04",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-05",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-06",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-07",  // with optional
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-05",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-06",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-reflexive-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-05",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-06",
+  //    		"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-simple"
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-2"
+  //    		"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/cast/manifest#cast-dT"
+  // 8, 9, 14-19, 23-30
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-in-01",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-in-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-05",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-06",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-substr-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-substr-03"
+  // derived numeric types
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-08",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-09",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-14",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-19",
+  // Throwing NotSerializableException - something is dragging in the SPOAccessPath
+  // @see http://sourceforge.net/apps/trac/bigdata/ticket/379
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/triple-match/manifest#dawg-triple-pattern-003",
+  // Hanging with error locating named subquery solution
+  // @see https://sourceforge.net/apps/trac/bigdata/ticket/380#comment:1
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
+  // Hanging, presumably due to failure to trigger last pass evaluation for SORT.
+  // @see https://sourceforge.net/apps/trac/bigdata/ticket/380#comment:3
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/sort/manifest#dawg-sort-3",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-2",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-2",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-3",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-2",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-3",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-2",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-scope-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-scope-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-1",
+  //
+  // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-2",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-05",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-06",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-07",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-08",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-09",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-10",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-11",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-12",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-13",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-14",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-15",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-16",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-17",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-18",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-19",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-20",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-21",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-22",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-23",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-24",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-25",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-26",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-27",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-28",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-29",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-30",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-1",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-2",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-3",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-4",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-5",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-6",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-eq",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-02",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-03",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-04",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-05",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-06",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-07",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-08",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-09",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-10",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-11",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-12",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
+  /*
+   * working through the new query engine failures: 0 errors, 11 failures
+   */
+  /*
+   * Basically we are having a lot of problems with our compare
+   * operator, which is supposed to do fuzzy comparisons that
+   * sometimes requires materialized RDF values. These I feel I can
+   * handle on my own.
+   */
+  // "a" and "a"^^xsd:string have different term ids?  also bnodes are different
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-07",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-08",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-10",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-11",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-12",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-01",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
+  /*
+   * These tests have to do with that that weird "well designed"
+   * optional nesting P = A OPT (B OPT C) where A and C share
+   * variables not in B.  I think I can handle these on my own.
+   */
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-scope-1",
+  /*
+   * Everything below this point I need help with.
+   */
+  /*
+   * This one is truly bizarre - involving a non-optional subquuery
+   * plus an optional subquery. Don't even know where to start on this
+   * guy.
+   */
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-scope-1",
+  /*
+   * Sometimes, a filter is the entire join group, and it should not
+   * be able to see variables outside the group.  Frankly I do not
+   * understand this one.
+   */
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-2",
+  //			/*
+  //			 * These demonstrate the problem of where to put non-optional
+  //			 * filters that need to be evaluated after optional tails and
+  //			 * optional join groups.
+  //			 *
+  //			 * NOTE: These are fixed.
+  //			 */
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/bound/manifest#dawg-bound-query-001",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional-filter/manifest#dawg-optional-filter-002",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional-filter/manifest#dawg-optional-filter-003",
+  //			/*
+  //			 * These failures have to do with nested UNIONs - we don't seem to
+  //			 * be handling them correctly at all.
+  //			 *
+  //			 * NOTE: These are fixed.
+  //			 */
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-1",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-2",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-1",
+  //
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-2",
+  ////
+  //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-4",
   /*
    * An array of URIs for tests to be run. When null or empty the default test suite is run. When
    * specified, only the tests matching these test URIs are run.
    */
   protected static final Collection<String> testURIs =
-      Arrays.asList(
-          new String[] {
-
-            ///// *
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strdt03",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strlang03",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#isnumeric01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#abs01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ceil01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#floor01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#round01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#concat01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#concat02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#substring01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#substring02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#length01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ucase01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#lcase01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#encode01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#contains01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#starts01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#ends01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#plus-1",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#plus-2",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#md5-01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#md5-02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha1-01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha1-02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha256-01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha256-02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha512-01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#sha512-02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#minutes",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#seconds",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#hours",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#month",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#year",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#day",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#timezone",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#tz",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#in01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#in02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#notin01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#notin02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#now01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#rand01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#iri01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#if01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#if02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#coalesce01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strbefore01a",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strbefore02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strafter01a",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#strafter02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace02",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#replace03",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#uuid01",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#struuid01",
-            //// */
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values1",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values2",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values3",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values4",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values5",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values6",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values7",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values8",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#inline1",
-            //
-            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#inline2",
-
-            // property paths
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-collection-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-collection-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-alternative-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-alternative-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-inverse-03",
-            //// Simple Sequences
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-02",  // with inverse
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-03",
-            //// Sequence 04, 05, and 06 use the Property paths forms {...}, which were removed in
-            // the July 24th Working Draft
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-04",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-05",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-06",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-07",  // with optional
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-negated-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-05",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-06",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-reflexive-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-05",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-nested-06",
-
-            //    		"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-simple"
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-2"
-            //    		"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/cast/manifest#cast-dT"
-
-            // 8, 9, 14-19, 23-30
-
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-in-01",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-in-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-not-in-03",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-05",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-06",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-substr-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-substr-03"
-
-            // derived numeric types
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-08",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-09",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-14",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-19",
-
-            // Throwing NotSerializableException - something is dragging in the SPOAccessPath
-            // @see http://sourceforge.net/apps/trac/bigdata/ticket/379
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/triple-match/manifest#dawg-triple-pattern-003",
-
-            // Hanging with error locating named subquery solution
-            // @see https://sourceforge.net/apps/trac/bigdata/ticket/380#comment:1
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
-
-            // Hanging, presumably due to failure to trigger last pass evaluation for SORT.
-            // @see https://sourceforge.net/apps/trac/bigdata/ticket/380#comment:3
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/sort/manifest#dawg-sort-3",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-2",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-2",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#opt-filter-3",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-2",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-place-3",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-2",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-scope-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-scope-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-1",
-            //
-            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-2",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-05",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-06",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-07",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-08",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-09",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-10",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-11",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-12",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-13",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-14",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-15",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-16",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-17",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-18",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-19",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-20",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-21",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-22",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-23",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-24",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-25",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-26",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-27",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-28",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-29",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/type-promotion/manifest#type-promotion-30",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-1",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-2",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-3",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-4",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-5",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/boolean-effective-value/manifest#dawg-bev-6",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-eq",
-
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-02",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-03",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-04",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-05",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-06",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-07",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-08",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-09",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-10",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-11",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-12",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
-
-            /*
-             * working through the new query engine failures: 0 errors, 11 failures
-             */
-
-            /*
-             * Basically we are having a lot of problems with our compare
-             * operator, which is supposed to do fuzzy comparisons that
-             * sometimes requires materialized RDF values. These I feel I can
-             * handle on my own.
-             */
-
-            // "a" and "a"^^xsd:string have different term ids?  also bnodes are different
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-07",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-08",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-10",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-11",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-12",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-01",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-cmp-02",
-
-            /*
-             * These tests have to do with that that weird "well designed"
-             * optional nesting P = A OPT (B OPT C) where A and C share
-             * variables not in B.  I think I can handle these on my own.
-             */
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#nested-opt-1",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-scope-1",
-
-            /*
-             * Everything below this point I need help with.
-             */
-
-            /*
-             * This one is truly bizarre - involving a non-optional subquuery
-             * plus an optional subquery. Don't even know where to start on this
-             * guy.
-             */
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-scope-1",
-
-            /*
-             * Sometimes, a filter is the entire join group, and it should not
-             * be able to see variables outside the group.  Frankly I do not
-             * understand this one.
-             */
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#filter-nested-2",
-
-            //			/*
-            //			 * These demonstrate the problem of where to put non-optional
-            //			 * filters that need to be evaluated after optional tails and
-            //			 * optional join groups.
-            //			 *
-            //			 * NOTE: These are fixed.
-            //			 */
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/bound/manifest#dawg-bound-query-001",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional-filter/manifest#dawg-optional-filter-002",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional-filter/manifest#dawg-optional-filter-003",
-
-            //			/*
-            //			 * These failures have to do with nested UNIONs - we don't seem to
-            //			 * be handling them correctly at all.
-            //			 *
-            //			 * NOTE: These are fixed.
-            //			 */
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-1",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/algebra/manifest#join-combo-2",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-1",
-            //
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-2",
-            ////
-            //	"http://www.w3.org/2001/sw/DataAccess/tests/data-r2/optional/manifest#dawg-optional-complex-4",
-
-          });
+      Collections.emptyList();
 
   /*
    * Return the sole test in the suite associated with the specified testURI.
@@ -1178,7 +1151,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
 
     Repository delegate = dataRep; // ((DatasetRepository) dataRep).getDelegate();
 
-    if (delegate != null && delegate instanceof EmbergraphSailRepository) {
+    if (delegate instanceof EmbergraphSailRepository) {
 
       backend = ((EmbergraphSailRepository) delegate).getSail().getIndexManager();
     }
@@ -1247,7 +1220,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
   }
 
   @Override
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     if (true) {
       final Properties props = getProperties();
@@ -1553,10 +1526,10 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
       }
 
       final String queryStr = readQueryString();
-      message.append("Query:\n" + queryStr);
+      message.append("Query:\n").append(queryStr);
       message.append("\n=========================================\n");
 
-      message.append("Data:\n" + readInputData(dataset));
+      message.append("Data:\n").append(readInputData(dataset));
       message.append("\n=========================================\n");
 
       //                final EmbergraphSailRepositoryConnection cxn = getQueryConnection(dataRep);
@@ -1565,11 +1538,11 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
           (EmbergraphSailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
 
       final QueryRoot original = query.getASTContainer().getOriginalAST();
-      message.append("Original AST:\n" + original);
+      message.append("Original AST:\n").append(original);
       message.append("\n=========================================\n");
 
       final QueryRoot optimized = query.optimize();
-      message.append("Optimized AST:\n" + optimized);
+      message.append("Optimized AST:\n").append(optimized);
       message.append("\n=========================================\n");
 
       logger.error(message.toString());
@@ -1657,10 +1630,10 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
       message.append("=========================================\n");
 
       final String queryStr = readQueryString();
-      message.append("Query:\n" + queryStr);
+      message.append("Query:\n").append(queryStr);
       message.append("\n=========================================\n");
 
-      message.append("Data:\n" + readInputData(dataset));
+      message.append("Data:\n").append(readInputData(dataset));
       message.append("\n=========================================\n");
 
       logger.error(message.toString());

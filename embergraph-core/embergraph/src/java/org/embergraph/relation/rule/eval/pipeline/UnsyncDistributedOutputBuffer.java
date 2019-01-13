@@ -91,11 +91,9 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet>
 
     final int naccepted = chunk.length;
 
-    for (int i = 0; i < naccepted; i++) {
+    for (final IBindingSet bindingSet : chunk) {
 
       // an accepted binding set.
-      final IBindingSet bindingSet = chunk[i];
-
       /*
        * Locator scan for the index partitions for that predicate as
        * bound.
@@ -107,7 +105,7 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet>
 
         final PartitionLocator locator = itr.next();
 
-        if (log.isTraceEnabled())
+        if (log.isTraceEnabled()) {
           log.trace(
               "adding bindingSet to buffer: nextOrderIndex="
                   + nextOrderIndex
@@ -115,6 +113,7 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet>
                   + locator.getPartitionId()
                   + ", bindingSet="
                   + bindingSet);
+        }
 
         // obtain sink JoinTask from cache or dataService.
         final JoinTaskSink sink;

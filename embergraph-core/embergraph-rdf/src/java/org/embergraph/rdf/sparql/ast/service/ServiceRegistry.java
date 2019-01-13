@@ -355,7 +355,7 @@ public class ServiceRegistry {
    * @param serviceNode The AST model of the SERVICE clause.
    * @return A {@link ServiceCall} for that service.
    */
-  public final ServiceCall<? extends Object> toServiceCall(
+  public final ServiceCall<?> toServiceCall(
       final AbstractTripleStore store,
       final HttpClient cm,
       URI serviceURI,
@@ -482,15 +482,14 @@ public class ServiceRegistry {
     @Override
     public String toString() {
 
-      final StringBuilder sb = new StringBuilder();
-      sb.append(getClass().getName());
-      sb.append("{serviceURI=" + getServiceURI());
-      sb.append(",serviceNode=" + getServiceNode());
-      sb.append(",serviceOptions=" + getServiceOptions());
-      sb.append(",tripleStore=" + getTripleStore());
-      sb.append(",clientConnectionManager=" + getClientConnectionManager());
-      sb.append("}");
-      return sb.toString();
+      String sb = getClass().getName()
+          + "{serviceURI=" + getServiceURI()
+          + ",serviceNode=" + getServiceNode()
+          + ",serviceOptions=" + getServiceOptions()
+          + ",tripleStore=" + getTripleStore()
+          + ",clientConnectionManager=" + getClientConnectionManager()
+          + "}";
+      return sb;
     }
   }
 }

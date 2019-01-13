@@ -66,9 +66,7 @@ public class BindingSetSortKeyBuilder implements ISortKeyBuilder<IBindingSet> {
 
     keyBuilder.reset();
 
-    for (int i = 0; i < vars.length; i++) {
-
-      final IVariable<?> var = vars[i];
+    for (final IVariable<?> var : vars) {
 
       Object val = bindingSet.get(var);
       if (val == null) {

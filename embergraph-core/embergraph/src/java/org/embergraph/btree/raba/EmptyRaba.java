@@ -141,17 +141,17 @@ public abstract class EmptyRaba implements IRaba, Externalizable {
   }
 
   @Override
-  public final int add(DataInput in, int len) throws IOException {
+  public final int add(DataInput in, int len) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) {
     // NOP
   }
 
   @Override
-  public void writeExternal(ObjectOutput out) throws IOException {
+  public void writeExternal(ObjectOutput out) {
     // NOP
   }
 }

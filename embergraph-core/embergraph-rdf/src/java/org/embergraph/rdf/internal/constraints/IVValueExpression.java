@@ -88,9 +88,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     nv[1] = new NV(Annotations.TIMESTAMP, globals.timestamp);
 
     if (anns != null) {
-      for (int i = 0; i < anns.length; i++) {
-        nv[i + 2] = anns[i];
-      }
+      System.arraycopy(anns, 0, nv, 2, anns.length);
     }
 
     return NV.asMap(nv);

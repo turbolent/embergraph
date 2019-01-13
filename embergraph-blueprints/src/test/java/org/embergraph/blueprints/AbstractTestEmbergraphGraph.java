@@ -99,7 +99,7 @@ public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
   private Properties properties = null;
 
   @Override
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
 
     properties = null;
   }
@@ -130,7 +130,7 @@ public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
     return getSail(properties);
   }
 
-  protected abstract GraphTest newEmbergraphGraphTest() throws Exception;
+  protected abstract GraphTest newEmbergraphGraphTest();
 
   public void testVertexTestSuite() throws Exception {
     final GraphTest test = newEmbergraphGraphTest();

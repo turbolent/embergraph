@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -105,7 +106,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
 
     this.args = new ArrayList<>(args.length);
 
-    for (BOp t : args) this.args.add(t);
+    this.args.addAll(Arrays.asList(args));
 
     this.annotations =
         (annotations == null
@@ -504,7 +505,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   // shallow copy
   public BOp[] toArray() {
 
-    return args.toArray(new BOp[args.size()]);
+    return args.toArray(new BOp[0]);
   }
 
   // shallow copy

@@ -231,7 +231,6 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
       }
 
       // done.
-      return;
 
     } else {
 
@@ -352,18 +351,15 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
 
           // add listener to log progress.
           loader.addRioLoaderListener(
-              new RioLoaderListener() {
+              e -> {
 
-                public void processingNotification(RioLoaderEvent e) {
-
-                  if (log.isInfoEnabled())
-                    log.info(
-                        e.getStatementsProcessed()
-                            + " stmts added in "
-                            + (e.getTimeElapsed() / 1000d)
-                            + " secs, rate= "
-                            + e.getInsertRate());
-                }
+                if (log.isInfoEnabled())
+                  log.info(
+                      e.getStatementsProcessed()
+                          + " stmts added in "
+                          + (e.getTimeElapsed() / 1000d)
+                          + " secs, rate= "
+                          + e.getInsertRate());
               });
 
           loader.loadRdf(reader, baseURI, rdfFormat, baseURI, options);
@@ -509,7 +505,6 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
       }
 
       // done.
-      return;
 
     } else {
 
@@ -564,7 +559,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
      *     it does not validate bnodes based on consistent RDF properties but only based on their
      *     Java fields.
      */
-    private void verify() throws FileNotFoundException, Exception {
+    private void verify() throws Exception {
 
       if (log.isInfoEnabled()) {
         log.info("computing predicate usage...");

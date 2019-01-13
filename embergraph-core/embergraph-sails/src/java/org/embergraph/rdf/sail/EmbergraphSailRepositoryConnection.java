@@ -160,7 +160,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
    */
   @Override
   public Update prepareUpdate(final QueryLanguage ql, final String update, final String baseURI)
-      throws RepositoryException, MalformedQueryException {
+      throws MalformedQueryException {
 
     if (ql == QueryLanguage.SPARQL) {
 
@@ -365,7 +365,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
    *
    * @throws RepositoryException
    */
-  public void removeAllEntailments() throws SailException, RepositoryException {
+  public void removeAllEntailments() throws RepositoryException {
 
     try {
 

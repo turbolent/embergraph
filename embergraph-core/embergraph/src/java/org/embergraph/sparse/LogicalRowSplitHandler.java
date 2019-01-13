@@ -102,13 +102,13 @@ public class LogicalRowSplitHandler implements ISimpleSplitHandler, Externalizab
     return null;
   }
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) {
 
     // NOP
 
   }
 
-  public void writeExternal(ObjectOutput out) throws IOException {
+  public void writeExternal(ObjectOutput out) {
 
     // NOP
 

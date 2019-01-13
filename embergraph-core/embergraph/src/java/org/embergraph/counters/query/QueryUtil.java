@@ -169,7 +169,7 @@ public class QueryUtil {
         }
 
         // non-capturing group.
-        sb.append("(?:.*" + Pattern.quote(val) + ".*)");
+        sb.append("(?:.*").append(Pattern.quote(val)).append(".*)");
       }
     }
 
@@ -189,7 +189,7 @@ public class QueryUtil {
         }
 
         // Non-capturing group.
-        sb.append("(?:" + val + ")");
+        sb.append("(?:").append(val).append(")");
       }
     }
 
@@ -231,7 +231,7 @@ public class QueryUtil {
       }
 
       // Non-capturing group.
-      sb.append("(?:" + val + ")");
+      sb.append("(?:").append(val).append(")");
     }
 
     final String s = sb.toString();

@@ -72,7 +72,7 @@ public class TestPaths extends ProxyEmbergraphSailTestCase {
     cxn.add(is, "", RDFFormat.TURTLE);
   }
 
-  protected InputStream open(final String resource) throws Exception {
+  protected InputStream open(final String resource) {
 
     return getClass().getResourceAsStream(resource);
   }

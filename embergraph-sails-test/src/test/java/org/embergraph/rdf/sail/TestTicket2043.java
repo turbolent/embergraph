@@ -120,8 +120,7 @@ public class TestTicket2043 extends QuadsTestCase {
 
   private void executeQuery(
       final RepositoryConnection conn, final String value, final int expectedCnt)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, IOException, VisitorException {
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 
     final String query =
         "PREFIX :    <http://example/>\r\n"

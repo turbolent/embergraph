@@ -115,11 +115,13 @@ public class SolutionSetStreamEncoder {
         final IBindingSet[] chunk = src.next();
 
         // Write solutions.
-        for (int i = 0; i < chunk.length; i++) {
+        for (IBindingSet iBindingSet : chunk) {
 
-          encoder.encodeSolution(buf, chunk[i]);
+          encoder.encodeSolution(buf, iBindingSet);
 
-          if (log.isTraceEnabled()) log.trace("Wrote name=" + name + ", solution=" + chunk[i]);
+          if (log.isTraceEnabled()) {
+            log.trace("Wrote name=" + name + ", solution=" + iBindingSet);
+          }
         }
 
         // #of bytes written onto the buffer.

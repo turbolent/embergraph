@@ -112,8 +112,8 @@ public class NOPRecordCompressor implements IRecordCompressor, Externalizable {
   }
 
   /** NOP */
-  public void readExternal(ObjectInput arg0) throws IOException, ClassNotFoundException {}
+  public void readExternal(ObjectInput arg0) {}
 
   /** NOP */
-  public void writeExternal(ObjectOutput arg0) throws IOException {}
+  public void writeExternal(ObjectOutput arg0) {}
 }

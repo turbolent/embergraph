@@ -257,7 +257,7 @@ abstract class SPARQLJSONWriterBase extends QueryResultWriterBase implements Que
   }
 
   @Override
-  public void handleStylesheet(String stylesheetUrl) throws QueryResultHandlerException {
+  public void handleStylesheet(String stylesheetUrl) {
     // Ignore, as JSON does not support stylesheets
   }
 
@@ -378,7 +378,7 @@ abstract class SPARQLJSONWriterBase extends QueryResultWriterBase implements Que
   }
 
   @Override
-  public void handleNamespace(String prefix, String uri) throws QueryResultHandlerException {
+  public void handleNamespace(String prefix, String uri) {
     // Ignored by SPARQLJSONWriterBase
   }
 

@@ -39,7 +39,7 @@ import org.embergraph.service.Split;
  * @see IAsynchronousWriteBufferFactory
  */
 public interface IAsyncResultHandler<
-        R extends Object, A extends Object, O extends Object, X extends KVO<O>>
+        R, A, O, X extends KVO<O>>
     extends IResultHandler<R, A> {
 
   /*

@@ -206,11 +206,10 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
   /** Human readable representation of the filter chain. */
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(super.toString());
-    sb.append("{filterChain=" + filters);
-    sb.append("}");
-    return sb.toString();
+    String sb = super.toString()
+        + "{filterChain=" + filters
+        + "}";
+    return sb;
   }
 
   /*

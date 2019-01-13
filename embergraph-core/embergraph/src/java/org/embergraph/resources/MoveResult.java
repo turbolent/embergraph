@@ -74,16 +74,13 @@ public class MoveResult extends AbstractResult {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("MoveResult");
-    sb.append("{ name=" + name);
-    sb.append(", newPartitionId=" + newPartitionId);
-    sb.append(", targetDataService=" + targetDataServiceUUID);
-    sb.append(", oldLocator=" + oldLocator);
-    sb.append(", newLocator=" + newLocator);
-    sb.append(" }");
-
-    return sb.toString();
+    String sb = "MoveResult"
+        + "{ name=" + name
+        + ", newPartitionId=" + newPartitionId
+        + ", targetDataService=" + targetDataServiceUUID
+        + ", oldLocator=" + oldLocator
+        + ", newLocator=" + newLocator
+        + " }";
+    return sb;
   }
 }

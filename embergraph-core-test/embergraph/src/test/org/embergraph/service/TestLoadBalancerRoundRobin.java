@@ -70,8 +70,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     final IServiceLoadHelper fixture =
         new AbstractRoundRobinServiceLoadHelper() {
 
-          protected UUID[] awaitServices(int minCount, long timeout)
-              throws InterruptedException, TimeoutException {
+          protected UUID[] awaitServices(int minCount, long timeout) {
 
             return new UUID[] {service1, service2};
           }
@@ -141,8 +140,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     final IServiceLoadHelper fixture =
         new AbstractRoundRobinServiceLoadHelper() {
 
-          protected UUID[] awaitServices(int minCount, long timeout)
-              throws InterruptedException, TimeoutException {
+          protected UUID[] awaitServices(int minCount, long timeout) {
 
             return services.toArray(new UUID[] {});
           }
@@ -218,8 +216,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
       final IServiceLoadHelper fixture =
           new AbstractRoundRobinServiceLoadHelper() {
 
-            protected UUID[] awaitServices(int minCount, long timeout)
-                throws InterruptedException, TimeoutException {
+            protected UUID[] awaitServices(int minCount, long timeout) {
 
               return services.toArray(new UUID[] {});
             }

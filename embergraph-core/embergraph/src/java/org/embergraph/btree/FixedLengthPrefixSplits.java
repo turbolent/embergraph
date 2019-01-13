@@ -93,7 +93,7 @@ public class FixedLengthPrefixSplits implements ISimpleSplitHandler, Serializabl
     return null;
   }
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     N = in.readInt();
   }

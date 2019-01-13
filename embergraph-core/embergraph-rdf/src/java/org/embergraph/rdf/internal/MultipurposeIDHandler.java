@@ -23,7 +23,6 @@ import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /** Inline URI handler for IDs of multiple types. */
 public class MultipurposeIDHandler extends InlineURIHandler {

@@ -266,7 +266,7 @@ public class TestRemoteGOM extends TestCase {
     }
   }
 
-  public void testSimpleCreate() throws RepositoryException, IOException {
+  public void testSimpleCreate() {
     final NanoSparqlObjectManager om =
         new NanoSparqlObjectManager(m_repo.getRepositoryForDefaultNamespace(), m_namespace);
     final ValueFactory vf = om.getValueFactory();
@@ -296,7 +296,7 @@ public class TestRemoteGOM extends TestCase {
   }
 
   /** Throughput test for updates. */
-  public void testUpdateThroughput() throws RepositoryException, IOException {
+  public void testUpdateThroughput() {
 
     final IObjectManager om =
         new NanoSparqlObjectManager(m_repo.getRepositoryForDefaultNamespace(), m_namespace);
@@ -350,7 +350,7 @@ public class TestRemoteGOM extends TestCase {
     }
   }
 
-  public void testSimpleJSON() throws RepositoryException, IOException {
+  public void testSimpleJSON() throws IOException {
     final NanoSparqlObjectManager om =
         new NanoSparqlObjectManager(m_repo.getRepositoryForDefaultNamespace(), m_namespace);
     final ValueFactory vf = om.getValueFactory();

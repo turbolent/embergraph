@@ -162,7 +162,7 @@ public class MockTermResolverOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 
@@ -295,7 +295,7 @@ public class MockTermResolverOp extends PipelineOp {
      */
     final Collection<EmbergraphValue> ivVals = ivMap.values();
 
-    final EmbergraphValue[] ivValsArr = ivVals.toArray(new EmbergraphValue[ivVals.size()]);
+    final EmbergraphValue[] ivValsArr = ivVals.toArray(new EmbergraphValue[0]);
 
     for (EmbergraphValue ivVal : ivValsArr) {
 

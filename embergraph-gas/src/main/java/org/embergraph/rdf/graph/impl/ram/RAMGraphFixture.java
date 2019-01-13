@@ -27,7 +27,7 @@ public class RAMGraphFixture extends AbstractGraphFixture {
 
   private RAMGraph g;
 
-  public RAMGraphFixture() throws SailException {
+  public RAMGraphFixture() {
     g = new RAMGraph();
   }
 
@@ -41,7 +41,7 @@ public class RAMGraphFixture extends AbstractGraphFixture {
   }
 
   @Override
-  public void destroy() throws SailException {
+  public void destroy() {
     g = null;
   }
 

@@ -329,7 +329,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_eliminateJoinGroup05() throws Exception {
+  public void test_eliminateJoinGroup05() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -441,7 +441,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_eliminateJoinGroup06() throws Exception {
+  public void test_eliminateJoinGroup06() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -582,7 +582,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_eliminateJoinGroup07() throws Exception {
+  public void test_eliminateJoinGroup07() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -954,7 +954,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_eliminateJoinGroup08() throws Exception {
+  public void test_eliminateJoinGroup08() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -1246,7 +1246,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/416
    */
-  public void test_ticket416() throws Exception {
+  public void test_ticket416() {
 
     /*
      * Note: DO NOT share structures in this test!!!!

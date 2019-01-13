@@ -67,8 +67,7 @@ public class GenerateBarData {
     final int totalServers = Integer.parseInt(args[1]);
     final int maxItemsPerOrder = Integer.parseInt(args[2]);
     final File output = new File("./barData.trig");
-    final FileWriter fw = new FileWriter(output);
-    try {
+    try (FileWriter fw = new FileWriter(output)) {
       final RDFWriter writer = Rio.createWriter(RDFFormat.TRIG, fw);
       writer.startRDF();
       writer.handleNamespace("bar", "http://test/bar#");
@@ -85,13 +84,13 @@ public class GenerateBarData {
       final URI beverage = factory.createURI("http://test/bar#beverageType");
 
       final Literal[] drinks =
-          new Literal[] {
-            factory.createLiteral("Beer"),
-            factory.createLiteral("Wine"),
-            factory.createLiteral("Water"),
-            factory.createLiteral("Soda"),
-            factory.createLiteral("DietSoda"),
-            factory.createLiteral("Juice")
+          new Literal[]{
+              factory.createLiteral("Beer"),
+              factory.createLiteral("Wine"),
+              factory.createLiteral("Water"),
+              factory.createLiteral("Soda"),
+              factory.createLiteral("DietSoda"),
+              factory.createLiteral("Juice")
           };
       final URI[] employees = new URI[totalServers];
       for (int s = 0; s < totalServers; s++) {
@@ -132,8 +131,6 @@ public class GenerateBarData {
       }
       System.err.println("totalItems=" + totalItems);
       writer.endRDF();
-    } finally {
-      fw.close();
     }
   }
 }

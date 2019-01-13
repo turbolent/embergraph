@@ -28,7 +28,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /*
  * Operator computes the number of non-null values over the presented binding sets for the given

@@ -210,8 +210,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
   protected void encodeDecodeGeoSpatialLiterals(
       final EmbergraphValueFactory vf,
       final EmbergraphLiteral[] dt,
-      final GeoSpatialLiteralExtension<EmbergraphValue> ext)
-      throws Exception {
+      final GeoSpatialLiteralExtension<EmbergraphValue> ext) {
 
     // create associated IVs
     final IV<?, ?>[] e = new IV[dt.length];
@@ -501,9 +500,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
 
     // compute permutations from the base arrays provided above
     int ctr = 0;
-    for (int lat = 0; lat < baseLatLong.length; lat++) {
-      for (int lon = 0; lon < baseLatLong.length; lon++) {
-        dt[ctr++] = vf.createLiteral(baseLatLong[lat] + "#" + baseLatLong[lon], datatype);
+    for (Double aDouble1 : baseLatLong) {
+      for (Double aDouble : baseLatLong) {
+        dt[ctr++] = vf.createLiteral(aDouble1 + "#" + aDouble, datatype);
       }
     }
 
@@ -592,12 +591,12 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
 
     // compute permutations from the base arrays provided above
     int ctr = 0;
-    for (int lat = 0; lat < baseLatLong.length; lat++) {
-      for (int lon = 0; lon < baseLatLong.length; lon++) {
-        for (int time = 0; time < baseTime.length; time++) {
+    for (Double aDouble1 : baseLatLong) {
+      for (Double aDouble : baseLatLong) {
+        for (Long aLong : baseTime) {
           dt[ctr++] =
               vf.createLiteral(
-                  baseLatLong[lat] + "#" + baseLatLong[lon] + "#" + baseTime[time], datatype);
+                  aDouble1 + "#" + aDouble + "#" + aLong, datatype);
         }
       }
     }
@@ -747,12 +746,10 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
       final EmbergraphValueFactory vf, final GeoSpatialDatatypeConfiguration datatypeConfig) {
 
     return new GeoSpatialLiteralExtension<>(
-        new IDatatypeURIResolver() {
-          public EmbergraphURI resolve(URI uri) {
-            final EmbergraphURI buri = vf.createURI(uri.stringValue());
-            buri.setIV(newTermId(VTE.URI));
-            return buri;
-          }
+        uri -> {
+          final EmbergraphURI buri = vf.createURI(uri.stringValue());
+          buri.setIV(newTermId(VTE.URI));
+          return buri;
         },
         datatypeConfig);
   }

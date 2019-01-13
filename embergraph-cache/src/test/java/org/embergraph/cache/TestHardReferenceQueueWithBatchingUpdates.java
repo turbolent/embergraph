@@ -155,22 +155,20 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
         0, // threadLocalNScan
         64, // 32,//64, // threadLocalQueueCapacity
         32, // 16,//32, // threadLocalTryLockSize
-        new Callable<Object>() {
-          public Object call() throws Exception {
-            //                        final int nspin = spinMax == 0 ? 0 : Math.abs(r.next()
-            //                                % spinMax);
-            //                        for (int i = 0; i < nspin; i++) {
-            //                            // spin
-            // }
-            if (r.next() % 10 == 1) {
-              Thread.yield();
-              //                            final long waitMillis = Math.abs(r.next()
-              //                                    % waitMillisMax);
-              //                            if (waitMillis > 0)
-              //                                Thread.sleep(waitMillis);
-            }
-            return vals[Math.abs(r.next() % ndistinct)];
+        () -> {
+          //                        final int nspin = spinMax == 0 ? 0 : Math.abs(r.next()
+          //                                % spinMax);
+          //                        for (int i = 0; i < nspin; i++) {
+          //                            // spin
+          // }
+          if (r.next() % 10 == 1) {
+            Thread.yield();
+            //                            final long waitMillis = Math.abs(r.next()
+            //                                    % waitMillisMax);
+            //                            if (waitMillis > 0)
+            //                                Thread.sleep(waitMillis);
           }
+          return vals[Math.abs(r.next() % ndistinct)];
         });
   }
 
@@ -213,7 +211,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
       final int threadLocalQueueCapacity,
       final int threadLocalTryLockSize,
       final Callable<?> worker)
-      throws InterruptedException, BrokenBarrierException, TimeoutException, ExecutionException {
+      throws InterruptedException, BrokenBarrierException {
 
     final HardReferenceQueueWithBatchingUpdates<Object> queue =
         new HardReferenceQueueWithBatchingUpdates<>(
@@ -377,14 +375,14 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
   }
 
   @Override
-  public void setUpComparisonTest(Properties properties) throws Exception {
+  public void setUpComparisonTest(Properties properties) {
 
     //        queue = xxx;
 
   }
 
   @Override
-  public void tearDownComparisonTest() throws Exception {
+  public void tearDownComparisonTest() {
 
     //        queue = null;
 
@@ -476,22 +474,20 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
             threadLocalNScan,
             threadLocalCapacity,
             threadLocalTryLockSize,
-            new Callable<Object>() {
-              public Object call() throws Exception {
-                //                        final int nspin = spinMax == 0 ? 0 : Math.abs(r.next()
-                //                                % spinMax);
-                //                        for (int i = 0; i < nspin; i++) {
-                //                            // spin
-                // }
-                if (r.next() % 100 == 1) {
-                  Thread.yield();
-                  //                            final long waitMillis = Math.abs(r.next()
-                  //                                    % waitMillisMax);
-                  //                            if (waitMillis > 0)
-                  //                                Thread.sleep(waitMillis);
-                }
-                return vals[Math.abs(r.next() % ndistinct)];
+            () -> {
+              //                        final int nspin = spinMax == 0 ? 0 : Math.abs(r.next()
+              //                                % spinMax);
+              //                        for (int i = 0; i < nspin; i++) {
+              //                            // spin
+              // }
+              if (r.next() % 100 == 1) {
+                Thread.yield();
+                //                            final long waitMillis = Math.abs(r.next()
+                //                                    % waitMillisMax);
+                //                            if (waitMillis > 0)
+                //                                Thread.sleep(waitMillis);
               }
+              return vals[Math.abs(r.next() % ndistinct)];
             });
 
     result.put("touches/unit", "" + touchesPerUnit);
@@ -512,7 +508,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
      *
      * @param args ignored.
      */
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
 
       // this is the test to be run.
       final String className = TestHardReferenceQueueWithBatchingUpdates.class.getName();

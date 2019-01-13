@@ -169,7 +169,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     }
   }
 
-  public void setUp() throws IOException {
+  public void setUp() {
 
     System.err.println("------------------\n");
 
@@ -178,7 +178,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     journal = new Journal(getProperties());
   }
 
-  public void tearDown() throws IOException {
+  public void tearDown() {
 
     try {
 
@@ -205,7 +205,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     fpf.setMaximumFractionDigits(2);
   }
 
-  public void testRawRecordWriteRate() throws IOException {
+  public void testRawRecordWriteRate() {
 
     doRawRecordWriteRateTest(getRecordSize());
   }
@@ -214,7 +214,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
    * Test the index write rate using an index that does NOT support transactional isolation using 32
    * bit integer keys and 128 byte values for the index entries.
    */
-  public void testNonIsolatableIndexWriteRate() throws IOException {
+  public void testNonIsolatableIndexWriteRate() {
 
     // register named index that does NOT support isolation.
     String name = "abc";
@@ -243,7 +243,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
    * Test the index write rate using an index that supports transactional isolation but without
    * transactional isolation using 32 bit integer keys and 128 byte values for the index entries.
    */
-  public void testUnisolatedIndexWriteRate() throws IOException {
+  public void testUnisolatedIndexWriteRate() {
 
     // register named index that can support isolation.
     String name = "abc";
@@ -274,7 +274,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
    * Test the index write rate for a fully isolated transaction using 32 bit integer keys and 128
    * byte values for the index entries.
    */
-  public void testIsolatedIndexWriteRate() throws IOException {
+  public void testIsolatedIndexWriteRate() {
 
     // register named index that can support isolation.
     String name = "abc";

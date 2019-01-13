@@ -157,7 +157,7 @@ public class IndexPartitionCause implements Externalizable {
   /** The current version. */
   private static final transient byte VERSION = VERSION0;
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     final byte version = in.readByte();
 

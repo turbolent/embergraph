@@ -83,7 +83,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    *
    * matches with one solution in which variable x is not bound.
    */
-  public void test_empty_group() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_empty_group() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where { }";
 
@@ -116,7 +116,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_named_graph_pattern()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {GRAPH ?src {?s ?p ?o}}";
 
@@ -160,7 +160,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_named_graph_pattern_graphConstant()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}";
 
@@ -207,7 +207,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_triple_pattern_with_simple_join_group()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . { ?o ?p2 ?s } }";
 
@@ -263,7 +263,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_triple_pattern_with_named_graph_group()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . GRAPH ?src { ?o ?p2 ?s } }";
 
@@ -320,7 +320,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_two_simple_join_groups()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where { { ?s ?p ?o } .  { ?o ?p2 ?s } }";
 
@@ -373,7 +373,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_union_two_groups()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -436,7 +436,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_union_three_groups()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -508,7 +508,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_union_four_groups()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -587,7 +587,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_union_two_groups_with_embedded_union()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -673,7 +673,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * }
    * </pre>
    */
-  public void test_minus() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_minus() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o MINUS { ?o ?p2 ?s }}";
 
@@ -725,7 +725,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_join_with_optional_triple_pattern()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o OPTIONAL { ?o ?p2 ?s }}";
 
@@ -777,7 +777,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_filter()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . FILTER (?s = ?o) }";
 
@@ -824,7 +824,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_empty_group_with_filter()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select * where { "
@@ -884,7 +884,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_bind_and_filter()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . BIND(?o AS ?x) FILTER (?s = ?o) }";
 
@@ -934,7 +934,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_let_and_filter()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o . LET(?x := ?o) FILTER (?s = ?o) }";
 
@@ -983,7 +983,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_IN_filter()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN())}";
 
@@ -1033,7 +1033,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_IN_filter_singletonSet()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?o))}";
 
@@ -1085,7 +1085,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_IN_filter_variables()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(?p,?o))}";
 
@@ -1138,7 +1138,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * </pre>
    */
   public void test_simple_triple_pattern_with_IN_filter_constants()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o. FILTER (?s IN(1,2))}";
 
@@ -1189,7 +1189,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * SELECT ?s where {?s ?p ?o. SERVICE <http://bigdata.com/myService> {?s ?p ?o}}
    * </pre>
    */
-  public void test_service_001() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_service_001() throws MalformedQueryException, TokenMgrError {
 
     final String serviceExpr = "SERVICE <http://embergraph.org/myService> {?s ?p ?o}";
 
@@ -1245,7 +1245,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * SELECT ?s where {?s ?p ?o. SERVICE SILENT <http://bigdata.com/myService> {?s ?p ?o}}
    * </pre>
    */
-  public void test_service_002() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_service_002() throws MalformedQueryException, TokenMgrError {
 
     final String serviceExpr = "SERVICE SILENT <http://embergraph.org/myService> {?s ?p ?o}";
 
@@ -1307,7 +1307,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
    * </pre>
    */
-  public void test_service_003() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_service_003() throws MalformedQueryException, TokenMgrError {
 
     final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
 
@@ -1367,7 +1367,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
    * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
    * </pre>
    */
-  public void test_service_004() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_service_004() throws MalformedQueryException, TokenMgrError {
 
     final String serviceExpr = "SERVICE ?o {?s ?p ?o}";
 
@@ -1426,7 +1426,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
 
   /** A unit test for an OPTIONAL wrapping a SERVICE. */
   public void test_optional_SERVICE()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String serviceExpr = "service ?s { ?s ?p ?o  }";
 

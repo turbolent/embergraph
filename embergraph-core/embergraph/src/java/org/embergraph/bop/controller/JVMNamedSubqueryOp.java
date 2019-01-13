@@ -290,7 +290,7 @@ public class JVMNamedSubqueryOp extends PipelineOp implements INamedSubqueryOp, 
       }
 
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         // The subquery
         IRunningQuery runningSubquery = null;

@@ -172,7 +172,7 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
   }
 
   /** Writes cache performance statistics. */
-  protected void finalize() throws Throwable {
+  protected void finalize() {
 
     if (INFO) log.info(getStatistics());
   }

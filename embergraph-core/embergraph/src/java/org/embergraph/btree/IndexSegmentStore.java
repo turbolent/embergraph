@@ -300,7 +300,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    * the other way around. Therefore an {@link IndexSegment} will be swept before its store is
    * finalized.
    */
-  protected void finalize() throws Exception {
+  protected void finalize() {
 
     if (open) {
 
@@ -1179,7 +1179,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    * <p>Note: If the nodes could not be buffered then reads against the nodes will read through to
    * the backing file.
    */
-  protected void bufferIndexNodes() throws IOException {
+  protected void bufferIndexNodes() {
 
     if (!lock.isHeldByCurrentThread()) {
 
@@ -1311,7 +1311,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    * @return The bloom filter -or- <code>null</code> if the bloom filter was not constructed when
    *     the {@link IndexSegment} was built.
    */
-  protected BloomFilter readBloomFilter() throws IOException {
+  protected BloomFilter readBloomFilter() {
 
     final long addr = checkpoint.addrBloom;
 
@@ -1373,7 +1373,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   /*
    * Reads the {@link IndexMetadata} record directly from the file (this is invoked by the ctor).
    */
-  private final IndexMetadata readMetadata() throws IOException {
+  private final IndexMetadata readMetadata() {
 
     final long addr = checkpoint.addrMetadata;
 

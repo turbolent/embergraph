@@ -17,6 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1222,9 +1223,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
       expected.add(Var.var("s"));
 
       final Set<IVariable<?>> actual = new HashSet<>();
-      for (IVariable<?> v : optionalGroup.getJoinVars()) {
-        actual.add(v);
-      }
+      actual.addAll(Arrays.asList(optionalGroup.getJoinVars()));
 
       assertEquals(expected, actual);
     }

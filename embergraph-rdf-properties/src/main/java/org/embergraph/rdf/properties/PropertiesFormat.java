@@ -55,6 +55,7 @@ import info.aduna.lang.FileFormat;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -86,17 +87,17 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
   public static final PropertiesFormat TEXT =
       new PropertiesFormat(
           "text/plain",
-          Arrays.asList("text/plain"),
+          Collections.singletonList("text/plain"),
           Charset.forName("UTF-8"),
-          Arrays.asList("properties"));
+          Collections.singletonList("properties"));
 
   /** XML properties file using <code>application/xml</code> and <code>UTF-8</code>. */
   public static final PropertiesFormat XML =
       new PropertiesFormat(
           "application/xml",
-          Arrays.asList("application/xml"),
+          Collections.singletonList("application/xml"),
           Charset.forName("UTF-8"), // charset
-          Arrays.asList("xml") // known-file-extensions
+          Collections.singletonList("xml") // known-file-extensions
           );
 
   /** Registers the specified format. */

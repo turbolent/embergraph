@@ -1129,7 +1129,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
    * @see <a href="http://trac.bigdata.com/ticket/429">Optimization for GRAPH uri {} and GRAPH ?foo
    *     {}</a>.
    */
-  public void test_ticket_429a() throws Exception {
+  public void test_ticket_429a() {
 
     // FIXME:   Commented out per @thompsonbry for clean CI with merge.
 

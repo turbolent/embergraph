@@ -372,17 +372,13 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     final String[] dataFiles =
         readFiles(
             new File("src/test/resources/data/lehigh/U1"),
-            new FilenameFilter() {
-              public boolean accept(File dir, String name) {
-                return name.endsWith(".owl");
-              }
-            });
+            (dir, name) -> name.endsWith(".owl"));
 
     // And add in the ontology.
     final List<String> tmp = new LinkedList<>();
     tmp.add("src/test/resources/data/lehigh/univ-bench-modified-no-bnodes.owl");
     tmp.addAll(Arrays.asList(dataFiles));
-    final String[] resources = tmp.toArray(new String[tmp.size()]);
+    final String[] resources = tmp.toArray(new String[0]);
 
     final Properties properties = getProperties(FullClosure.class, false /* nestedSubquery */);
 
@@ -429,17 +425,13 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     final String[] dataFiles =
         readFiles(
             new File("src/test/resources/data/lehigh/U1"),
-            new FilenameFilter() {
-              public boolean accept(File dir, String name) {
-                return name.endsWith(".owl");
-              }
-            });
+            (dir, name) -> name.endsWith(".owl"));
 
     // And add in the ontology.
     final List<String> tmp = new LinkedList<>();
     tmp.add("src/test/resources/data/lehigh/univ-bench-modified-no-bnodes.owl");
     tmp.addAll(Arrays.asList(dataFiles));
-    final String[] resources = tmp.toArray(new String[tmp.size()]);
+    final String[] resources = tmp.toArray(new String[0]);
 
     final Properties properties = getProperties(FastClosure.class, false /* nestedSubquery */);
 

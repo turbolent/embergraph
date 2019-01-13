@@ -113,7 +113,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
   }
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     cat.set(in.readLong());
   }

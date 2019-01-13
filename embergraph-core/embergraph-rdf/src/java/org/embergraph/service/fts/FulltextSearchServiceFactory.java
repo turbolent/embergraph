@@ -572,11 +572,11 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     public List<IVariable<IV>> getMockVariables() {
 
       List<IVariable<IV>> externalVars = new LinkedList<>();
-      for (int i = 0; i < vars.length; i++) {
+      for (IVariable<IV> var : vars) {
 
-        if (!vars[i].isAnonymous()) {
+        if (!var.isAnonymous()) {
 
-          externalVars.add(vars[i]);
+          externalVars.add(var);
         }
       }
 

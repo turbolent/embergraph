@@ -213,11 +213,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
   private final MovingAverageTask queueSizeTask =
       new MovingAverageTask(
           "queueSize",
-          new Callable<Integer>() {
-            public Integer call() {
-              return getService().getQueue().size();
-            }
-          });
+          (Callable<Integer>) () -> getService().getQueue().size());
 
   /*
    * The moving average of the change in the total inter-arrival time.

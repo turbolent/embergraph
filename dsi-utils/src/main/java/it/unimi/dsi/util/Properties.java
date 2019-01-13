@@ -101,7 +101,9 @@ public class Properties extends PropertiesConfiguration implements Serializable 
   // Methods to add properties represented by primitive types easily
 
   public void addProperties(final String key, final String[] s) {
-    for (int i = 0; i < s.length; i++) super.addProperty(key, s[i]);
+    for (String s1 : s) {
+      super.addProperty(key, s1);
+    }
   }
 
   public void addProperty(final String key, final boolean b) {
@@ -171,7 +173,9 @@ public class Properties extends PropertiesConfiguration implements Serializable 
   // Same methods, but with Enum keys
 
   public void addProperties(final Enum<?> key, final String[] s) {
-    for (int i = 0; i < s.length; i++) super.addProperty(key.name().toLowerCase(), s[i]);
+    for (String s1 : s) {
+      super.addProperty(key.name().toLowerCase(), s1);
+    }
   }
 
   public void addProperty(final Enum<?> key, final boolean b) {

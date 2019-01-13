@@ -88,7 +88,7 @@ public final class RemoveStatementsOp extends AbstractAddRemoveStatementsOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final boolean bindsC = sids | quads;
 
@@ -96,7 +96,7 @@ public final class RemoveStatementsOp extends AbstractAddRemoveStatementsOp {
       final Set<ISPO> b = acceptSolutions(context, bindsC);
 
       // Convert into array.
-      final ISPO[] stmts = b.toArray(new ISPO[b.size()]);
+      final ISPO[] stmts = b.toArray(new ISPO[0]);
 
       //            System.err.println("before:\n" + tripleStore.dumpStore());
 

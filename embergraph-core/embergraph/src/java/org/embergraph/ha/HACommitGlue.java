@@ -47,7 +47,7 @@ public interface HACommitGlue extends Remote {
    * @return A {@link Future} which evaluates to a yes/no vote on whether the service is prepared to
    *     commit.
    */
-  Future<Boolean> prepare2Phase(IHA2PhasePrepareMessage prepareMessage) throws IOException;
+  Future<Boolean> prepare2Phase(IHA2PhasePrepareMessage prepareMessage);
 
   /*
    * Commit using the root block from the corresponding prepare message. It is an error if a commit
@@ -55,7 +55,7 @@ public interface HACommitGlue extends Remote {
    *
    * @param commitMessage The commit message.
    */
-  Future<Void> commit2Phase(IHA2PhaseCommitMessage commitMessage) throws IOException;
+  Future<Void> commit2Phase(IHA2PhaseCommitMessage commitMessage);
 
   /*
    * Discard the current write set using {@link AbstractJournal#abort()}, reloading all state from
@@ -68,5 +68,5 @@ public interface HACommitGlue extends Remote {
    *
    * @param token The token for the quorum for which this request was made.
    */
-  Future<Void> abort2Phase(IHA2PhaseAbortMessage abortMessage) throws IOException;
+  Future<Void> abort2Phase(IHA2PhaseAbortMessage abortMessage);
 }

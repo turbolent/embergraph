@@ -357,44 +357,41 @@ public abstract class AbstractHTree
   }
 
   /*
+   * Loads a child node from the specified address.
+   *
+   * @return A hard reference to that child node.
+   * @throws IllegalArgumentException if addr is <code>null</code>.
+   * @throws IllegalArgumentException if addr is {@link IRawStore#NULL}.
+   */
+  /*
    * Helper loads a child node from the specified address by delegating to {@link
    * Node#_getChild(int)}.
    */
   private static final Computable<LoadChildRequest, AbstractPage> loadChild =
-      new Computable<LoadChildRequest, AbstractPage>() {
+      req -> {
 
-        /*
-         * Loads a child node from the specified address.
-         *
-         * @return A hard reference to that child node.
-         * @throws IllegalArgumentException if addr is <code>null</code>.
-         * @throws IllegalArgumentException if addr is {@link IRawStore#NULL}.
-         */
-        public AbstractPage compute(final LoadChildRequest req) throws InterruptedException {
+        //            try {
 
-          //            try {
+        return req.parent._getChild(req.index, req);
 
-          return req.parent._getChild(req.index, req);
+        //            } finally {
+        //
+        //                /*
+        //                 * Clear the future task from the memoizer cache.
+        //                 *
+        //                 * Note: This is necessary in order to prevent the cache from
+        //                 * retaining a hard reference to each child materialized for the
+        //                 * B+Tree.
+        //                 *
+        //                 * Note: This does not depend on any additional synchronization.
+        //                 * The Memoizer pattern guarantees that only one thread actually
+        //                 * call ft.run() and hence runs this code.
+        //                 */
+        //
+        //                req.parent.htree.memo.removeFromCache(req);
+        //
+        //            }
 
-          //            } finally {
-          //
-          //                /*
-          //                 * Clear the future task from the memoizer cache.
-          //                 *
-          //                 * Note: This is necessary in order to prevent the cache from
-          //                 * retaining a hard reference to each child materialized for the
-          //                 * B+Tree.
-          //                 *
-          //                 * Note: This does not depend on any additional synchronization.
-          //                 * The Memoizer pattern guarantees that only one thread actually
-          //                 * call ft.run() and hence runs this code.
-          //                 */
-          //
-          //                req.parent.htree.memo.removeFromCache(req);
-          //
-          //            }
-
-        }
       };
 
   /*
@@ -918,24 +915,24 @@ public abstract class AbstractHTree
 
     if (metadata.getName() != null) {
 
-      sb.append("name=" + metadata.getName());
+      sb.append("name=").append(metadata.getName());
 
     } else {
 
-      sb.append("uuid=" + metadata.getIndexUUID());
+      sb.append("uuid=").append(metadata.getIndexUUID());
     }
 
-    sb.append(", addressBits=" + getAddressBits());
+    sb.append(", addressBits=").append(getAddressBits());
 
     //        sb.append(", height=" + getHeight());
 
-    sb.append(", entryCount=" + getEntryCount());
+    sb.append(", entryCount=").append(getEntryCount());
 
-    sb.append(", nodeCount=" + getNodeCount());
+    sb.append(", nodeCount=").append(getNodeCount());
 
-    sb.append(", leafCount=" + getLeafCount());
+    sb.append(", leafCount=").append(getLeafCount());
 
-    sb.append(", lastCommitTime=" + getLastCommitTime());
+    sb.append(", lastCommitTime=").append(getLastCommitTime());
 
     sb.append("}");
 
@@ -1763,36 +1760,32 @@ public abstract class AbstractHTree
 
             final FutureTask<Void> ft =
                 new FutureTask<>(
-                    new Runnable() {
+                    () -> {
 
-                      @Override
-                      public void run() {
+                      if (u != root) {
 
-                        if (u != root) {
+                        /*
+                         * The parent MUST be defined unless this is
+                         * the root node.
+                         */
 
-                          /*
-                           * The parent MUST be defined unless this is
-                           * the root node.
-                           */
-
-                          assert u.parent != null;
-                          assert u.parent.get() != null;
-                        }
-
-                        // An instance just for this thread.
-                        final NodeSerializer myNodeSer =
-                            new NodeSerializer(
-                                store, // addressManager
-                                nodeSer.nodeFactory,
-                                addressBits,
-                                nodeSer.getWriteBufferCapacity(),
-                                metadata,
-                                readOnly,
-                                nodeSer.recordCompressorFactory);
-
-                        // write dirty node on store (non-recursive)
-                        writeNodeOrLeaf(u, myNodeSer);
+                        assert u.parent != null;
+                        assert u.parent.get() != null;
                       }
+
+                      // An instance just for this thread.
+                      final NodeSerializer myNodeSer =
+                          new NodeSerializer(
+                              store, // addressManager
+                              nodeSer.nodeFactory,
+                              addressBits,
+                              nodeSer.getWriteBufferCapacity(),
+                              metadata,
+                              readOnly,
+                              nodeSer.recordCompressorFactory);
+
+                      // write dirty node on store (non-recursive)
+                      writeNodeOrLeaf(u, myNodeSer);
                     },
                     null /* Void */);
 

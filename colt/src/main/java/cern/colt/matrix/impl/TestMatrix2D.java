@@ -186,11 +186,7 @@ class TestMatrix2D {
     // Sum( x[i]*x[i] )
     System.out.println(
         matrix.viewSelection(
-            new cern.colt.function.DoubleProcedure() {
-              public final boolean apply(double a) {
-                return a % 2 == 0;
-              }
-            }));
+            a -> a % 2 == 0));
     // --> 14
 
     // Sum( x[i]*x[i] )
@@ -231,11 +227,7 @@ class TestMatrix2D {
     // Product( x[i] ) of all x[i] > limit
     final double limit = 1;
     DoubleFunction f =
-        new DoubleFunction() {
-          public final double apply(double a) {
-            return a > limit ? a : 1;
-          }
-        };
+        a -> a > limit ? a : 1;
     System.out.println(matrix.aggregate(Functions.mult, f));
     // --> 6
 
@@ -264,11 +256,7 @@ class TestMatrix2D {
         matrix.aggregate(
             otherMatrix1D,
             Functions.plus,
-            new DoubleDoubleFunction() {
-              public double apply(double a, double b) {
-                return Math.PI * Math.log(b / a);
-              }
-            }));
+            (a, b) -> Math.PI * Math.log(b / a)));
 
     DoubleMatrix3D x = cern.colt.matrix.DoubleFactory3D.dense.ascending(2, 2, 2);
     System.out.println(x);
@@ -804,20 +792,8 @@ class TestMatrix2D {
     A = factory.make(size, size, value);
 
     cern.colt.function.Double9Function function =
-        new cern.colt.function.Double9Function() {
-          public final double apply(
-              double a00,
-              double a01,
-              double a02,
-              double a10,
-              double a11,
-              double a12,
-              double a20,
-              double a21,
-              double a22) {
-            return alpha * a11 + beta * (a01 + a10 + a12 + a21);
-          }
-        };
+        (a00, a01, a02, a10, a11, a12, a20, a21, a22) ->
+            alpha * a11 + beta * (a01 + a10 + a12 + a21);
     cern.colt.Timer timer = new cern.colt.Timer().start();
 
     System.out.println("benchmarking stencil...");
@@ -880,11 +856,7 @@ class TestMatrix2D {
     cern.colt.Timer timer = new cern.colt.Timer().start();
 
     DoubleMatrix2DComparator fun =
-        new DoubleMatrix2DComparator() {
-          public int compare(DoubleMatrix2D a, DoubleMatrix2D b) {
-            return a.zSum() == b.zSum() ? 1 : 0;
-          }
-        };
+        (a, b) -> a.zSum() == b.zSum() ? 1 : 0;
 
     System.out.println(A);
     System.out.println(Algebra.ZERO.inverse(A));

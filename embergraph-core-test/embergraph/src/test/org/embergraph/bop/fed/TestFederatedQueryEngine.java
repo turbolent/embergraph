@@ -210,7 +210,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
    *
    * @throws Exception
    */
-  public void test_startStop() throws Exception {
+  public void test_startStop() {
 
     // NOP
 

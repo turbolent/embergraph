@@ -85,7 +85,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
   protected EmbergraphValueFactory valueFactory = null;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     tripleStore = getStore(getProperties());
 
@@ -95,7 +95,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
   }
 
   @Override
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
 
     baseURI = null;
 

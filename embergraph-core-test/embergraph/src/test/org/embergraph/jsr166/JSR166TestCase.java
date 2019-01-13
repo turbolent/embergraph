@@ -611,7 +611,7 @@ public class JSR166TestCase extends TestCase {
   }
 
   public abstract class RunnableShouldThrow implements Runnable {
-    protected abstract void realRun() throws Throwable;
+    protected abstract void realRun();
 
     final Class<?> exceptionClass;
 

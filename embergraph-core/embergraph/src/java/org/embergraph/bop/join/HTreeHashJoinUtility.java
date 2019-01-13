@@ -314,26 +314,20 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
     sb.append(getClass().getSimpleName());
 
-    sb.append("{open=" + open);
-    sb.append(",joinType=" + joinType);
+    sb.append("{open=").append(open);
+    sb.append(",joinType=").append(joinType);
     //        sb.append(",chunkSize=" + chunkSize);
     //        sb.append(",optional=" + optional);
     //        sb.append(",filter=" + filter);
-    if (askVar != null) sb.append(",askVar=" + askVar);
-    sb.append(",joinVars=" + Arrays.toString(joinVars));
-    sb.append(",outputDistinctJVs=" + outputDistinctJVs);
-    if (selectVars != null) sb.append(",selectVars=" + Arrays.toString(selectVars));
-    if (constraints != null) sb.append(",constraints=" + Arrays.toString(constraints));
-    sb.append(",size=" + getRightSolutionCount());
-    sb.append(
-        ",considered(left="
-            + nleftConsidered
-            + ",right="
-            + nrightConsidered
-            + ",joins="
-            + nJoinsConsidered
-            + ")");
-    if (joinSet.get() != null) sb.append(",joinSetSize=" + getJoinSetSize());
+    if (askVar != null) sb.append(",askVar=").append(askVar);
+    sb.append(",joinVars=").append(Arrays.toString(joinVars));
+    sb.append(",outputDistinctJVs=").append(outputDistinctJVs);
+    if (selectVars != null) sb.append(",selectVars=").append(Arrays.toString(selectVars));
+    if (constraints != null) sb.append(",constraints=").append(Arrays.toString(constraints));
+    sb.append(",size=").append(getRightSolutionCount());
+    sb.append(",considered(left=").append(nleftConsidered).append(",right=")
+        .append(nrightConsidered).append(",joins=").append(nJoinsConsidered).append(")");
+    if (joinSet.get() != null) sb.append(",joinSetSize=").append(getJoinSetSize());
     //        sb.append(",encoder="+encoder);
     sb.append("}");
 

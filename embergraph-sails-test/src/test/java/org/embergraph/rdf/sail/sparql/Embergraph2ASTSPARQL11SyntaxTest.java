@@ -158,16 +158,8 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
   public static Test suite() throws Exception {
 
     final SPARQL11SyntaxTest.Factory factory =
-        new SPARQL11SyntaxTest.Factory() {
-
-          @Override
-          public SPARQL11SyntaxTest createSPARQLSyntaxTest(
-              String testURI, String testName, String testAction, boolean positiveTest) {
-
-            return new Embergraph2ASTSPARQL11SyntaxTest(
-                testURI, testName, testAction, positiveTest);
-          }
-        };
+        (testURI, testName, testAction, positiveTest) -> new Embergraph2ASTSPARQL11SyntaxTest(
+            testURI, testName, testAction, positiveTest);
 
     /*
      * Filter out known bad tests.

@@ -223,9 +223,9 @@ public class HTreeIndexMetadata extends IndexMetadata {
     super.toString(sb);
 
     // htree
-    sb.append(", htreeClassName=" + htreeClassName);
-    sb.append(", addressBits=" + addressBits);
-    sb.append(", keyLen=" + keyLen);
+    sb.append(", htreeClassName=").append(htreeClassName);
+    sb.append(", addressBits=").append(addressBits);
+    sb.append(", keyLen=").append(keyLen);
   }
 
   /** The initial version. */

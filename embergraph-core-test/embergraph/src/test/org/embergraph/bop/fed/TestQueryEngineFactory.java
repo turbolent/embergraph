@@ -156,8 +156,8 @@ public class TestQueryEngineFactory extends TestCase2 {
       /*
        * Ensure that all journals are destroyed by the end of the test.
        */
-      for (int i = 0; i < refs.length; i++) {
-        final Journal jnl = refs[i] == null ? null : refs[i].get();
+      for (WeakReference<Journal> ref : refs) {
+        final Journal jnl = ref == null ? null : ref.get();
         if (jnl != null) {
           jnl.destroy();
         }

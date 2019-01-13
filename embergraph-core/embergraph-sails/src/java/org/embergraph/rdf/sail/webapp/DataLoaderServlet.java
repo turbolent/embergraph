@@ -415,9 +415,9 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
 
         final String[] fileToLoad = fileOrDirs.split(",");
 
-        for (int i = 0; i < fileToLoad.length; i++) {
+        for (String s : fileToLoad) {
 
-          final File nextFile = new File(fileToLoad[i]);
+          final File nextFile = new File(s);
 
           if (!nextFile.exists()) {
             if (log.isInfoEnabled()) {

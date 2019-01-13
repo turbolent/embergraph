@@ -182,7 +182,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
   }
 
   @Override
-  public IBuffer<ISolution[]> getSolutionBuffer() throws IOException {
+  public IBuffer<ISolution[]> getSolutionBuffer() {
 
     if (joinNexus.getAction().isMutation()) {
 

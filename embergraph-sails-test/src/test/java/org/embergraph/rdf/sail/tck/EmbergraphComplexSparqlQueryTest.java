@@ -141,7 +141,7 @@ public class EmbergraphComplexSparqlQueryTest extends ComplexSPARQLQueryTest {
   }
 
   @Override
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     final Properties props = getProperties();
 
@@ -280,13 +280,11 @@ public class EmbergraphComplexSparqlQueryTest extends ComplexSPARQLQueryTest {
   /** TODO Write optimizer to pull this BindingsClause out of the join group and make it global. */
   public void testRequiredValues() throws Exception {
     loadTestData("/testdata-query/dataset-ses1692.trig");
-    StringBuilder query = new StringBuilder();
-    query.append(" PREFIX : <http://example.org/>\n");
-    query.append(
-        " SELECT DISTINCT ?a ?name ?isX WHERE { ?b :p1 ?a . ?a :name ?name. ?a a :X . VALUES(?isX) { (:X) } } ");
 
+    String query = " PREFIX : <http://example.org/>\n"
+        + " SELECT DISTINCT ?a ?name ?isX WHERE { ?b :p1 ?a . ?a :name ?name. ?a a :X . VALUES(?isX) { (:X) } } ";
     EmbergraphSailTupleQuery tq =
-        (EmbergraphSailTupleQuery) conn.prepareTupleQuery(QueryLanguage.SPARQL, query.toString());
+        (EmbergraphSailTupleQuery) conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 
     if (logger.isInfoEnabled()) {
       logger.info("optimized ast:\n" + tq.optimize());

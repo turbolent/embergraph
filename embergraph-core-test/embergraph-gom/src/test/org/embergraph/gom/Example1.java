@@ -42,7 +42,7 @@ public class Example1 implements Callable<Void> {
   }
 
   @Override
-  public Void call() throws Exception {
+  public Void call() {
 
     final ICloseableIterator<Statement> itr =
         om.evaluateGraph(

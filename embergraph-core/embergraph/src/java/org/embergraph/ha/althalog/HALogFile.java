@@ -368,7 +368,7 @@ public class HALogFile {
    * @return The {@link ByteBuffer}. The position will be zero. The limit will be the #of bytes in
    *     the serialized object.
    */
-  private ByteBuffer bufferObject(final Object obj) throws IOException {
+  private ByteBuffer bufferObject(final Object obj) {
 
     // Note: pos=0; limit=capacity=length.
     return ByteBuffer.wrap(SerializerUtil.serialize(obj));
@@ -425,7 +425,7 @@ public class HALogFile {
    * @return a new reader for the file
    * @throws IOException
    */
-  public IHALogReader getReader() throws IOException {
+  public IHALogReader getReader() {
     return new HALogReader();
   }
 
@@ -737,7 +737,7 @@ public class HALogFile {
     }
 
     @Override
-    public IRootBlockView getClosingRootBlock() throws IOException {
+    public IRootBlockView getClosingRootBlock() {
       return HALogFile.this.getClosingRootBlock();
     }
 
@@ -753,7 +753,7 @@ public class HALogFile {
   }
 
   static void computeDigest(final IReopenChannel<FileChannel> reopener, final MessageDigest digest)
-      throws DigestException, IOException {
+      throws IOException {
 
     IBufferAccess buf = null;
     try {
@@ -830,7 +830,6 @@ public class HALogFile {
         log.info("Computed digest: #blocks=" + sequence + ", #bytes=" + totalBytes);
 
       // Done.
-      return;
 
     } finally {
 

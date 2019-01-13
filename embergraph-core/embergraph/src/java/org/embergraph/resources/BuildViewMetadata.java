@@ -68,19 +68,16 @@ class BuildViewMetadata {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-    sb.append("{nsources=" + nsources);
-    sb.append(",naccepted=" + naccepted);
-    sb.append(",compactingMerge=" + compactingMerge);
-    sb.append(",journalCount=" + journalCount);
-    sb.append(",segmentCount=" + segmentCount);
-    sb.append(",sumEntryCount=" + sumEntryCount);
-    sb.append(",sumSegBytes=" + sumSegBytes);
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{nsources=" + nsources
+        + ",naccepted=" + naccepted
+        + ",compactingMerge=" + compactingMerge
+        + ",journalCount=" + journalCount
+        + ",segmentCount=" + segmentCount
+        + ",sumEntryCount=" + sumEntryCount
+        + ",sumSegBytes=" + sumSegBytes
+        + "}";
+    return sb;
   }
 
   /*

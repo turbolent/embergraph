@@ -36,7 +36,7 @@ public class GlobalRowStoreUtil {
 
     final Map<String, Object> map = new HashMap<>();
 
-    final Enumeration<? extends Object> e = properties.propertyNames();
+    final Enumeration<?> e = properties.propertyNames();
 
     while (e.hasMoreElements()) {
 

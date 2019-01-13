@@ -111,12 +111,10 @@ public class ZeroLengthPathNode extends GroupMemberNodeBase<ZeroLengthPathNode>
 
     final String s = indent(indent);
 
-    final StringBuilder sb = new StringBuilder();
-    sb.append("\n");
-    sb.append(s).append(getClass().getSimpleName());
-    sb.append("(left=").append(left()).append(", right=").append(right()).append(")");
-
-    return sb.toString();
+    String sb = "\n"
+        + s + getClass().getSimpleName()
+        + "(left=" + left() + ", right=" + right() + ")";
+    return sb;
   }
 
   @Override

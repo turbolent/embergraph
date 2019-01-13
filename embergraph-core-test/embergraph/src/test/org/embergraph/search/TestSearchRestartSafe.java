@@ -74,7 +74,7 @@ public class TestSearchRestartSafe extends AbstractSearchTest {
   //
   //    }
 
-  public void test_simple() throws InterruptedException {
+  public void test_simple() {
 
     final boolean prefixMatch = false;
     final double minCosine = .4;

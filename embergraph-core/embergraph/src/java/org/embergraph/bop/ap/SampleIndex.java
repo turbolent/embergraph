@@ -200,7 +200,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
 
     /** Return a sample from the access path. */
-    public E[] call() throws Exception {
+    public E[] call() {
 
       return sample(limit(), getSampleType(), getPredicate()).getSample();
     }

@@ -314,23 +314,23 @@ public class BloomFilter implements IBloomFilter, Externalizable {
 
     sb.append("BloomFilter");
 
-    sb.append("{ minSize=" + filter.size());
+    sb.append("{ minSize=").append(filter.size());
 
-    sb.append(", n=" + n);
+    sb.append(", n=").append(n);
 
-    sb.append(", p=" + p);
+    sb.append(", p=").append(p);
 
-    sb.append(", maxN=" + maxN);
+    sb.append(", maxN=").append(maxN);
 
-    sb.append(", bitLength=" + filter.m());
+    sb.append(", bitLength=").append(filter.m());
 
-    sb.append(", hashFunctionCount=" + filter.d());
+    sb.append(", hashFunctionCount=").append(filter.d());
 
-    sb.append(", errorRate=" + getErrorRate());
+    sb.append(", errorRate=").append(getErrorRate());
 
     if (dirty) sb.append(", dirty");
     if (!enabled) sb.append(", disabled");
-    if (addr != 0L) sb.append(", addr=" + addr);
+    if (addr != 0L) sb.append(", addr=").append(addr);
 
     sb.append("}");
 

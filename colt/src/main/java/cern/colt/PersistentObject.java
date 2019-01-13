@@ -16,7 +16,7 @@ package cern.colt;
  * Thus, by modifying the inheritance of this class the entire tree of subclasses can be switched to
  * Objectivity compatibility (and back) with minimum effort.
  */
-public abstract class PersistentObject extends Object implements java.io.Serializable, Cloneable {
+public abstract class PersistentObject implements java.io.Serializable, Cloneable {
   public static final long serialVersionUID = 1020L;
   /** Not yet commented. */
   protected PersistentObject() {}

@@ -47,7 +47,6 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.join.JVMHashIndex.Bucket;
-import org.embergraph.bop.join.JVMHashIndex.Key;
 import org.embergraph.bop.join.JVMHashIndex.SolutionHit;
 import org.embergraph.counters.CAT;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
@@ -162,24 +161,18 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
     sb.append(getClass().getSimpleName());
 
-    sb.append("{open=" + open);
-    sb.append(",joinType=" + joinType);
+    sb.append("{open=").append(open);
+    sb.append(",joinType=").append(joinType);
     //        sb.append(",optional=" + optional);
     //        sb.append(",filter=" + filter);
-    if (askVar != null) sb.append(",askVar=" + askVar);
-    sb.append(",joinVars=" + Arrays.toString(joinVars));
-    sb.append(",outputDistinctJVs=" + outputDistinctJVs);
-    if (selectVars != null) sb.append(",selectVars=" + Arrays.toString(selectVars));
-    if (constraints != null) sb.append(",constraints=" + Arrays.toString(constraints));
-    sb.append(",size=" + getRightSolutionCount());
-    sb.append(
-        ",considered(left="
-            + nleftConsidered
-            + ",right="
-            + nrightConsidered
-            + ",joins="
-            + nJoinsConsidered
-            + ")");
+    if (askVar != null) sb.append(",askVar=").append(askVar);
+    sb.append(",joinVars=").append(Arrays.toString(joinVars));
+    sb.append(",outputDistinctJVs=").append(outputDistinctJVs);
+    if (selectVars != null) sb.append(",selectVars=").append(Arrays.toString(selectVars));
+    if (constraints != null) sb.append(",constraints=").append(Arrays.toString(constraints));
+    sb.append(",size=").append(getRightSolutionCount());
+    sb.append(",considered(left=").append(nleftConsidered).append(",right=")
+        .append(nrightConsidered).append(",joins=").append(nJoinsConsidered).append(")");
     sb.append("}");
 
     return sb.toString();
@@ -924,9 +917,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     final List<IConstraint> list = new LinkedList<>();
 
     // For each source.
-    for (int i = 0; i < all.length; i++) {
-
-      final IHashJoinUtility tmp = all[i];
+    for (final IHashJoinUtility tmp : all) {
 
       if (tmp.getConstraints() != null) {
 
@@ -940,7 +931,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
       list.addAll(Arrays.asList(constraints));
     }
 
-    return list.isEmpty() ? null : list.toArray(new IConstraint[list.size()]);
+    return list.isEmpty() ? null : list.toArray(new IConstraint[0]);
   }
 
   /*

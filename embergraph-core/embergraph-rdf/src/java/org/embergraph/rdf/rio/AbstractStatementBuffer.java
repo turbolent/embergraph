@@ -459,10 +459,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     final G[] a = (G[]) new EmbergraphStatement[nstmts];
 
     // copy references.
-    for (int i = 0; i < nstmts; i++) {
-
-      a[i] = statementBuffer[i];
-    }
+    System.arraycopy(statementBuffer, 0, a, 0, nstmts);
 
     // update the counter.
     counter += handleProcessedStatements(a);

@@ -1205,7 +1205,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     if (log.isInfoEnabled())
       log.info("Selected " + stmts.size() + " distinct statements: " + stmts);
 
-    return stmts.toArray(new SPO[stmts.size()]);
+    return stmts.toArray(new SPO[0]);
   }
 
   /*

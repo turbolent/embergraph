@@ -533,7 +533,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> itr = context.getSource();
 
@@ -604,7 +604,6 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                 expr.get(aggregates);
               } catch (SparqlTypeErrorException ex) {
                 TypeErrorLog.handleTypeError(ex, expr, stats);
-                continue;
               } catch (IllegalArgumentException ex) {
                 /*
                  * Note: This a hack turns an
@@ -616,7 +615,6 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                  * group!)
                  */
                 TypeErrorLog.handleTypeError(ex, expr, stats);
-                continue;
               }
             }
 
@@ -664,7 +662,6 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                   expr.get(aggregates);
                 } catch (SparqlTypeErrorException ex) {
                   TypeErrorLog.handleTypeError(ex, expr, stats);
-                  continue;
                 } catch (IllegalArgumentException ex) {
                   /*
                    * Note: This hack turns an
@@ -676,7 +673,6 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                    * to drop the entire group!)
                    */
                   TypeErrorLog.handleTypeError(ex, expr, stats);
-                  continue;
                 }
               }
 

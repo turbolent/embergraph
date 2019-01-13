@@ -181,16 +181,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
    */
   protected String getNamespaceDeclarations() {
-    final StringBuilder declarations = new StringBuilder();
-    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
-    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
-    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
-    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
-    declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
-    declarations.append("\n");
 
-    return declarations.toString();
+    String declarations = ("PREFIX rdf: <" + RDF.NAMESPACE + "> \n")
+        + "PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n"
+        + "PREFIX dc: <" + DC.NAMESPACE + "> \n"
+        + "PREFIX foaf: <" + FOAF.NAMESPACE + "> \n"
+        + "PREFIX ex: <" + EX_NS + "> \n"
+        + "PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n"
+        + "\n";
+    return declarations;
   }
 
   protected boolean hasStatement(
@@ -212,14 +211,13 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   public void testInsertWhere() throws Exception {
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
     assertFalse(hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
     assertTrue(hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
@@ -285,13 +283,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //      @Test
   public void testInsertEmptyWhere() throws Exception {
     log.debug("executing test testInsertEmptyWhere");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT { <" + bob + "> rdfs:label \"Bob\" . } WHERE { }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT { <" + bob + "> rdfs:label \"Bob\" . } WHERE { }";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
   }
@@ -327,13 +324,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //      @Test
   public void testInsertNonMatchingWhere() throws Exception {
     log.debug("executing test testInsertNonMatchingWhere");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT { ?x rdfs:label ?y . } WHERE { ?x rdfs:comment ?y }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, null, true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT { ?x rdfs:label ?y . } WHERE { ?x rdfs:comment ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(bob, RDFS.LABEL, null, true));
   }
@@ -401,20 +397,19 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertWhereWithOptional() throws Exception {
     log.debug("executing testInsertWhereWithOptional");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(" INSERT { ?s ex:age ?incAge } ");
     // update.append(" DELETE { ?s ex:age ?age } ");
-    update.append(" WHERE { ?s foaf:name ?name . ");
-    update.append(" OPTIONAL {?s ex:age ?age . BIND ((?age + 1) as ?incAge)  } ");
-    update.append(" } ");
 
     final URI age = f.createURI(EX_NS, "age");
 
     assertFalse(hasStatement(alice, age, null, true));
     assertTrue(hasStatement(bob, age, null, true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + " INSERT { ?s ex:age ?incAge } "
+        + " WHERE { ?s foaf:name ?name . "
+        + " OPTIONAL {?s ex:age ?age . BIND ((?age + 1) as ?incAge)  } "
+        + " } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     //        RepositoryResult<Statement> result = m_repo.getStatements(bob, age, null, true);
     //
@@ -439,15 +434,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   ////    //@Test
   public void testDeleteInsertWhere() throws Exception {
     //        log.debug("executing test DeleteInsertWhere");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "DELETE { ?x foaf:name ?y } INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
     assertFalse(hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE { ?x foaf:name ?y } INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     assertTrue(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
     assertTrue(hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
@@ -491,14 +485,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   /** @since openrdf 2.6.3 */
   public void testDeleteInsertWhereLoopingBehavior() throws Exception {
     log.debug("executing test testDeleteInsertWhereLoopingBehavior");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(" DELETE { ?x ex:age ?y } INSERT {?x ex:age ?z }");
-    update.append(" WHERE { ");
-    update.append("   ?x ex:age ?y .");
-    update.append("   BIND((?y + 1) as ?z) ");
-    update.append("   FILTER( ?y < 46 ) ");
-    update.append(" } ");
 
     final URI age = f.createURI(EX_NS, "age");
     final Literal originalAgeValue = f.createLiteral("42", XMLSchema.INTEGER);
@@ -507,7 +493,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     assertTrue(hasStatement(bob, age, originalAgeValue, true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + " DELETE { ?x ex:age ?y } INSERT {?x ex:age ?z }"
+        + " WHERE { "
+        + "   ?x ex:age ?y ."
+        + "   BIND((?y + 1) as ?z) "
+        + "   FILTER( ?y < 46 ) "
+        + " } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(bob, age, originalAgeValue, true));
     assertTrue(hasStatement(bob, age, correctAgeValue, true));
@@ -518,14 +511,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertTransformedWhere() throws Exception {
     //        log.debug("executing test InsertTransformedWhere");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT {?x rdfs:label [] . } WHERE {?y ex:containsPerson ?x.  }");
-
     assertFalse(hasStatement(bob, RDFS.LABEL, null, true));
     assertFalse(hasStatement(alice, RDFS.LABEL, null, true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT {?x rdfs:label [] . } WHERE {?y ex:containsPerson ?x.  }";
+    m_repo.prepareUpdate(update).evaluate();
 
     /*
      * FIXME getStatements() is hitting a problem in the ASTConstruct iterator where a blank node is
@@ -548,15 +539,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testInsertWhereGraph() throws Exception {
     //        log.debug("executing testInsertWhereGraph");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT {GRAPH ?g {?x rdfs:label ?y . }} WHERE {GRAPH ?g {?x foaf:name ?y }}");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT {GRAPH ?g {?x rdfs:label ?y . }} WHERE {GRAPH ?g {?x foaf:name ?y }}";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     String message = "labels should have been inserted in corresponding named graphs only.";
     assertTrue(message, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true, graph1));
@@ -569,15 +560,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertWhereUsing() throws Exception {
 
     //        log.debug("executing testInsertWhereUsing");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT {?x rdfs:label ?y . } USING ex:graph1 WHERE {?x foaf:name ?y }");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT {?x rdfs:label ?y . } USING ex:graph1 WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     String message = "label should have been inserted in default graph, for ex:bob only";
     assertTrue(message, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
@@ -596,15 +586,13 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertWhereWith() throws Exception {
     //        log.debug("executing testInsertWhereWith");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("WITH ex:graph1 INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "WITH ex:graph1 INSERT {?x rdfs:label ?y . } WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     String message = "label should have been inserted in graph1 only, for ex:bob only";
     assertTrue(message, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true, graph1));
@@ -617,16 +605,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testDeleteWhereShortcut() throws Exception {
     //        log.debug("executing testDeleteWhereShortcut");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DELETE WHERE {?x foaf:name ?y }");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
     assertTrue(hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "foaf:name properties should have been deleted";
     assertFalse(msg, hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
@@ -652,14 +638,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     //        log.debug("executing testDeleteWhereShortcut2");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DELETE WHERE { GRAPH ?g {?x foaf:name ?y } }");
-
     assertTrue(hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
     assertTrue(hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE WHERE { GRAPH ?g {?x foaf:name ?y } }";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "foaf:name properties should have been deleted";
     assertFalse(msg, hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
@@ -674,17 +658,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testDeleteWhere() throws Exception {
     //        log.debug("executing testDeleteWhere");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DELETE {?x foaf:name ?y } WHERE {?x foaf:name ?y }");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
     assertTrue(hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE {?x foaf:name ?y } WHERE {?x foaf:name ?y }";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "foaf:name properties should have been deleted";
     assertFalse(msg, hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true));
@@ -730,10 +712,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertData() throws Exception {
     //        log.debug("executing testInsertData");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT DATA { ex:book1 dc:title \"book 1\" ; dc:creator \"Ringo\" . } ");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     URI book1 = f.createURI(EX_NS, "book1");
@@ -742,7 +720,10 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(book1, DC.CREATOR, f.createLiteral("Ringo"), true));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT DATA { ex:book1 dc:title \"book 1\" ; dc:creator \"Ringo\" . } ";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     String msg = "two new statements about ex:book1 should have been inserted";
     assertTrue(msg, hasStatement(book1, DC.TITLE, f.createLiteral("book 1"), true));
@@ -752,11 +733,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testInsertDataMultiplePatterns() throws Exception {
     //        log.debug("executing testInsertData");
-
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "INSERT DATA { ex:book1 dc:title \"book 1\". ex:book1 dc:creator \"Ringo\" . ex:book2 dc:creator \"George\". } ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -768,7 +744,10 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(book2, DC.CREATOR, f.createLiteral("George"), true));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT DATA { ex:book1 dc:title \"book 1\". ex:book1 dc:creator \"Ringo\" . ex:book2 dc:creator \"George\". } ";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     String msg = "newly inserted statement missing";
     assertTrue(msg, hasStatement(book1, DC.TITLE, f.createLiteral("book 1"), true));
@@ -780,11 +759,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertDataInGraph() throws Exception {
     //        log.debug("executing testInsertDataInGraph");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "INSERT DATA { GRAPH ex:graph1 { ex:book1 dc:title \"book 1\" ; dc:creator \"Ringo\" . } } ");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     URI book1 = f.createURI(EX_NS, "book1");
@@ -792,7 +766,10 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(book1, DC.TITLE, f.createLiteral("book 1"), true, graph1));
     assertFalse(hasStatement(book1, DC.CREATOR, f.createLiteral("Ringo"), true, graph1));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT DATA { GRAPH ex:graph1 { ex:book1 dc:title \"book 1\" ; dc:creator \"Ringo\" . } } ";
+    m_repo.prepareUpdate(
+        update).evaluate();
     //        operation.execute();
 
     String msg = "two new statements about ex:book1 should have been inserted in graph1";
@@ -805,16 +782,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testInsertDataInGraph2() throws Exception {
     log.debug("executing testInsertDataInGraph2");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "INSERT DATA { GRAPH ex:graph1 { ex:Human rdfs:subClassOf ex:Mammal. ex:Mammal rdfs:subClassOf ex:Animal. ex:george a ex:Human. ex:ringo a ex:Human. } } ");
-
     final URI human = f.createURI(EX_NS, "Human");
     final URI mammal = f.createURI(EX_NS, "Mammal");
     final URI george = f.createURI(EX_NS, "george");
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT DATA { GRAPH ex:graph1 { ex:Human rdfs:subClassOf ex:Mammal. ex:Mammal rdfs:subClassOf ex:Animal. ex:george a ex:Human. ex:ringo a ex:Human. } } ";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     assertTrue(hasStatement(human, RDFS.SUBCLASSOF, mammal, true, graph1));
     assertTrue(hasStatement(mammal, RDFS.SUBCLASSOF, null, true, graph1));
@@ -824,16 +799,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testDeleteData() throws Exception {
     //        log.debug("executing testDeleteData");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DELETE DATA { ex:alice foaf:knows ex:bob. } ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(alice, FOAF.KNOWS, bob, true));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE DATA { ex:alice foaf:knows ex:bob. } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "statement should have been deleted.";
     assertFalse(msg, hasStatement(alice, FOAF.KNOWS, bob, true));
@@ -842,10 +816,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testDeleteDataMultiplePatterns() throws Exception {
     //        log.debug("executing testDeleteData");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "DELETE DATA { ex:alice foaf:knows ex:bob. ex:alice foaf:mbox \"alice@example.org\" .} ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -853,7 +823,10 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(alice, FOAF.MBOX, f.createLiteral("alice@example.org"), true));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE DATA { ex:alice foaf:knows ex:bob. ex:alice foaf:mbox \"alice@example.org\" .} ";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     String msg = "statement should have been deleted.";
     assertFalse(msg, hasStatement(alice, FOAF.KNOWS, bob, true));
@@ -864,16 +837,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testDeleteDataFromGraph() throws Exception {
     //        log.debug("executing testDeleteDataFromGraph");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DELETE DATA { GRAPH ex:graph1 {ex:alice foaf:knows ex:bob. } } ");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(alice, FOAF.KNOWS, bob, true, graph1));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE DATA { GRAPH ex:graph1 {ex:alice foaf:knows ex:bob. } } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "statement should have been deleted from graph1";
     assertFalse(msg, hasStatement(alice, FOAF.KNOWS, bob, true, graph1));
@@ -883,11 +854,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testDeleteDataFromWrongGraph() throws Exception {
     //        log.debug("executing testDeleteDataFromWrongGraph");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-
     // statement does not exist in graph2.
-    update.append("DELETE DATA { GRAPH ex:graph2 {ex:alice foaf:knows ex:bob. } } ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -895,7 +862,9 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(alice, FOAF.KNOWS, bob, true, graph2));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE DATA { GRAPH ex:graph2 {ex:alice foaf:knows ex:bob. } } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "statement should have not have been deleted from graph1";
     assertTrue(msg, hasStatement(alice, FOAF.KNOWS, bob, true, graph1));
@@ -910,7 +879,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     URI newGraph = f.createURI(EX_NS, "new-graph");
 
-    update.append("CREATE GRAPH <" + newGraph + "> ");
+    update.append("CREATE GRAPH <").append(newGraph).append("> ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -924,12 +893,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   // @Test
-  public void testCreateExistingGraph() throws Exception {
+  public void testCreateExistingGraph() {
     //        log.debug("executing testCreateExistingGraph");
 
     final StringBuilder update = new StringBuilder();
     update.append(getNamespaceDeclarations());
-    update.append("CREATE GRAPH <" + graph1 + "> ");
+    update.append("CREATE GRAPH <").append(graph1).append("> ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -948,9 +917,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testCopyToDefault() throws Exception {
     //        log.debug("executing testCopyToDefault");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("COPY GRAPH <" + graph1.stringValue() + "> TO DEFAULT");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -958,7 +924,9 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "COPY GRAPH <" + graph1.stringValue() + "> TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertFalse(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -970,14 +938,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testCopyToExistingNamed() throws Exception {
     //        log.debug("executing testCopyToExistingNamed");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("COPY GRAPH ex:graph1 TO ex:graph2");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "COPY GRAPH ex:graph1 TO ex:graph2";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, graph2));
     assertFalse(hasStatement(alice, FOAF.NAME, null, false, graph2));
@@ -988,15 +954,13 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testCopyToNewNamed() throws Exception {
     //        log.debug("executing testCopyToNewNamed");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("COPY GRAPH ex:graph1 TO ex:graph3");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "COPY GRAPH ex:graph1 TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, f.createURI(EX_NS, "graph3")));
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, graph1));
@@ -1006,17 +970,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testCopyFromDefault() throws Exception {
     //        log.debug("executing testCopyFromDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("COPY DEFAULT TO ex:graph3");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "COPY DEFAULT TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1028,17 +990,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testCopyFromDefaultToDefault() throws Exception {
     //        log.debug("executing testCopyFromDefaultToDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("COPY DEFAULT TO DEFAULT");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "COPY DEFAULT TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1048,17 +1008,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testAddToDefault() throws Exception {
     //        log.debug("executing testAddToDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("ADD GRAPH <" + graph1.stringValue() + "> TO DEFAULT");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "ADD GRAPH <" + graph1.stringValue() + "> TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1070,14 +1028,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testAddToExistingNamed() throws Exception {
     //        log.debug("executing testAddToExistingNamed");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("ADD GRAPH ex:graph1 TO ex:graph2");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "ADD GRAPH ex:graph1 TO ex:graph2";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, graph2));
     assertTrue(hasStatement(alice, FOAF.NAME, null, false, graph2));
@@ -1088,15 +1044,13 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testAddToNewNamed() throws Exception {
     //        log.debug("executing testAddToNewNamed");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("ADD GRAPH ex:graph1 TO ex:graph3");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "ADD GRAPH ex:graph1 TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, f.createURI(EX_NS, "graph3")));
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, graph1));
@@ -1106,17 +1060,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testAddFromDefault() throws Exception {
     //        log.debug("executing testAddFromDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("ADD DEFAULT TO ex:graph3");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "ADD DEFAULT TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1128,17 +1080,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testAddFromDefaultToDefault() throws Exception {
     //        log.debug("executing testAddFromDefaultToDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("ADD DEFAULT TO DEFAULT");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "ADD DEFAULT TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1148,17 +1098,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testMoveToDefault() throws Exception {
     //        log.debug("executing testMoveToDefault");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("MOVE GRAPH <" + graph1.stringValue() + "> TO DEFAULT");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "MOVE GRAPH <" + graph1.stringValue() + "> TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertFalse(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1169,15 +1117,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testMoveToNewNamed() throws Exception {
     //        log.debug("executing testMoveToNewNamed");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("MOVE GRAPH ex:graph1 TO ex:graph3");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "MOVE GRAPH ex:graph1 TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, FOAF.NAME, null, false, f.createURI(EX_NS, "graph3")));
     assertFalse(hasStatement(null, null, null, false, graph1));
@@ -1186,9 +1133,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testMoveFromDefault() throws Exception {
     //        log.debug("executing testMoveFromDefault");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("MOVE DEFAULT TO ex:graph3");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -1196,7 +1140,9 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "MOVE DEFAULT TO ex:graph3";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertFalse(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1207,9 +1153,6 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testMoveFromDefaultToDefault() throws Exception {
     //        log.debug("executing testMoveFromDefaultToDefault");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("MOVE DEFAULT TO DEFAULT");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
@@ -1217,7 +1160,9 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "MOVE DEFAULT TO DEFAULT";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(graph1, DC.PUBLISHER, null, false, (Resource) null));
     assertTrue(hasStatement(graph2, DC.PUBLISHER, null, false, (Resource) null));
@@ -1240,15 +1185,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testClearGraph() throws Exception {
     //        log.debug("executing testClearGraph");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("CLEAR GRAPH <" + graph1.stringValue() + "> ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "CLEAR GRAPH <" + graph1.stringValue() + "> ";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1315,15 +1259,14 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   // @Test
   public void testDropGraph() throws Exception {
     //        log.debug("executing testDropGraph");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("DROP GRAPH <" + graph1.stringValue() + "> ");
 
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DROP GRAPH <" + graph1.stringValue() + "> ";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1446,19 +1389,17 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   public void testUpdateSequenceInsertDelete2() throws Exception {
     //        log.debug("executing testUpdateSequenceInsertDelete2");
 
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "INSERT { GRAPH ex:graph2 { ?s ?p ?o } } WHERE { GRAPH ex:graph1 { ?s ?p ?o . FILTER (?s = ex:bob) } }; ");
-    update.append("WITH ex:graph1 DELETE { ?s ?p ?o } WHERE {?s ?p ?o . FILTER (?s = ex:bob) } ");
-
     //        Update operation = con.prepareUpdate(QueryLanguage.SPARQL, update.toString());
 
     assertTrue(hasStatement(bob, FOAF.NAME, f.createLiteral("Bob"), true, graph1));
     assertTrue(hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true, graph2));
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT { GRAPH ex:graph2 { ?s ?p ?o } } WHERE { GRAPH ex:graph1 { ?s ?p ?o . FILTER (?s = ex:bob) } }; "
+        + "WITH ex:graph1 DELETE { ?s ?p ?o } WHERE {?s ?p ?o . FILTER (?s = ex:bob) } ";
+    m_repo.prepareUpdate(
+        update).evaluate();
 
     String msg = "statements about bob should have been removed from graph1";
     assertFalse(msg, hasStatement(bob, null, null, true, graph1));
@@ -1486,30 +1427,28 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     final URI bookStore = f.createURI("http://example/bookStore");
     final URI bookStore2 = f.createURI("http://example/bookStore2");
 
-    final StringBuilder update = new StringBuilder();
-    update.append("prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ");
-    update.append("prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  ");
-    update.append("prefix xsd: <http://www.w3.org/2001/XMLSchema#>  ");
-    update.append("prefix dc: <http://purl.org/dc/elements/1.1/>  ");
-    update.append("prefix dcmitype: <http://purl.org/dc/dcmitype/>  ");
-    update.append("INSERT  { GRAPH <http://example/bookStore2> { ?book ?p ?v } } ");
-    update.append(" WHERE ");
-    update.append(" { GRAPH  <http://example/bookStore> ");
-    update.append("   { ?book dc:date ?date . ");
-    update.append("       FILTER ( ?date < \"2000-01-01T00:00:00-02:00\"^^xsd:dateTime ) ");
-    update.append("       ?book ?p ?v ");
-    update.append("      } ");
-    update.append(" } ;");
-    update.append("WITH <http://example/bookStore> ");
-    update.append(" DELETE { ?book ?p ?v } ");
-    update.append(" WHERE ");
-    update.append(" { ?book dc:date ?date ; ");
-    update.append("         a dcmitype:PhysicalObject .");
-    update.append("    FILTER ( ?date < \"2000-01-01T00:00:00-02:00\"^^xsd:dateTime ) ");
-    update.append("   ?book ?p ?v");
-    update.append(" } ");
-
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+        + "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  "
+        + "prefix xsd: <http://www.w3.org/2001/XMLSchema#>  "
+        + "prefix dc: <http://purl.org/dc/elements/1.1/>  "
+        + "prefix dcmitype: <http://purl.org/dc/dcmitype/>  "
+        + "INSERT  { GRAPH <http://example/bookStore2> { ?book ?p ?v } } "
+        + " WHERE "
+        + " { GRAPH  <http://example/bookStore> "
+        + "   { ?book dc:date ?date . "
+        + "       FILTER ( ?date < \"2000-01-01T00:00:00-02:00\"^^xsd:dateTime ) "
+        + "       ?book ?p ?v "
+        + "      } "
+        + " } ;"
+        + "WITH <http://example/bookStore> "
+        + " DELETE { ?book ?p ?v } "
+        + " WHERE "
+        + " { ?book dc:date ?date ; "
+        + "         a dcmitype:PhysicalObject ."
+        + "    FILTER ( ?date < \"2000-01-01T00:00:00-02:00\"^^xsd:dateTime ) "
+        + "   ?book ?p ?v"
+        + " } ";
+    m_repo.prepareUpdate(update).evaluate();
 
     String msg = "statements about book1 should have been removed from bookStore";
     assertFalse(msg, hasStatement(book1, null, null, true, bookStore));
@@ -1549,18 +1488,15 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //        con.commit();
     m_repo.prepareUpdate("DROP ALL").evaluate();
 
-    final StringBuilder update = new StringBuilder();
-    update.append("DROP ALL;\n");
-    update.append("INSERT DATA {\n");
-    update.append(" GRAPH <http://example.org/one> {\n");
-    update.append("   <http://example.org/a> <http://example.org/b> <http://example.org/c> .\n");
-    update.append("   <http://example.org/d> <http://example.org/e> <http://example.org/f> .\n");
-    update.append("}};\n");
-    update.append(
-        "ADD SILENT GRAPH <http://example.org/one> TO GRAPH <http://example.org/two> ;\n");
-    update.append("DROP SILENT GRAPH <http://example.org/one>  ;\n");
-
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = "DROP ALL;\n"
+        + "INSERT DATA {\n"
+        + " GRAPH <http://example.org/one> {\n"
+        + "   <http://example.org/a> <http://example.org/b> <http://example.org/c> .\n"
+        + "   <http://example.org/d> <http://example.org/e> <http://example.org/f> .\n"
+        + "}};\n"
+        + "ADD SILENT GRAPH <http://example.org/one> TO GRAPH <http://example.org/two> ;\n"
+        + "DROP SILENT GRAPH <http://example.org/one>  ;\n";
+    m_repo.prepareUpdate(update).evaluate();
 
     final URI one = f.createURI("http://example.org/one");
     final URI two = f.createURI("http://example.org/two");
@@ -1758,13 +1694,12 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     final Literal l = getReallyLongLiteral(1000);
 
     log.debug("executing test testInsertEmptyWhere");
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT { <" + bob + "> rdfs:label " + l + " . } WHERE { }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, l, true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT { <" + bob + "> rdfs:label " + l + " . } WHERE { }";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(bob, RDFS.LABEL, l, true));
   }
@@ -1786,7 +1721,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   /** A stress test written to look for stochastic behaviors in SPARQL UPDATE for GROUP COMMIT. */
-  public void testStressInsertWhereGraph() throws Exception {
+  public void testStressInsertWhereGraph() {
 
     final int LIMIT = 10;
     int i = 0;
@@ -1826,30 +1761,27 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     final URI o2 = f.createURI("http://o2");
 
     // bootstrap repository with two triples
-    final StringBuilder bootstrap = new StringBuilder();
-    bootstrap.append(getNamespaceDeclarations());
-    bootstrap.append(
-        "INSERT { <http://s1> <http://p1> <http://o1> . <http://s1> <http://p2> <http://o2> } WHERE { }");
 
     m_repo.prepareUpdate("DROP ALL").evaluate();
-    m_repo.prepareUpdate(bootstrap.toString()).evaluate();
+    String bootstrap = getNamespaceDeclarations()
+        + "INSERT { <http://s1> <http://p1> <http://o1> . <http://s1> <http://p2> <http://o2> } WHERE { }";
+    m_repo.prepareUpdate(
+        bootstrap).evaluate();
 
     // assert repo is properly initialized
     assertTrue("Repo setup problem: missing statement", hasStatement(s1, p1, o1, true));
     assertTrue("Repo setup problem: missing statement", hasStatement(s1, p2, o2, true));
 
     // now execute an INSERT + DELETE
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append(
-        "DELETE { ?s <http://p1> ?o1 } "
-            + "INSERT { ?s <http://p3> ?o2 } "
-            + "WHERE { "
-            + "  ?s <http://p1> ?o1 ."
-            + "  ?s <http://p2> | <http://p3> ?o2 "
-            + "}");
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "DELETE { ?s <http://p1> ?o1 } "
+        + "INSERT { ?s <http://p3> ?o2 } "
+        + "WHERE { "
+        + "  ?s <http://p1> ?o1 ."
+        + "  ?s <http://p2> | <http://p3> ?o2 "
+        + "}";
+    m_repo.prepareUpdate(update).evaluate();
 
     // this one has been deleted
     assertFalse("Problem in UPDATE: unexpected statement", hasStatement(s1, p1, o1, true));

@@ -59,6 +59,6 @@ public class MultiTokenHitCollector<V extends Comparable<V>> implements IHitColl
   @Override
   public Hit<V>[] getHits() {
 
-    return hits.values().toArray(new Hit[hits.size()]);
+    return hits.values().toArray(new Hit[0]);
   }
 }

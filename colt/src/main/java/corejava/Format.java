@@ -481,12 +481,12 @@ public class Format {
 
   private static String convert(long x, int n, int m, String d) {
     if (x == 0) return "0";
-    String r = "";
+    StringBuilder r = new StringBuilder();
     while (x != 0) {
-      r = d.charAt((int) (x & m)) + r;
+      r.insert(0, d.charAt((int) (x & m)));
       x = x >>> n;
     }
-    return r;
+    return r.toString();
   }
 
   private String pad(String r) {
@@ -526,10 +526,10 @@ public class Format {
     if (fr >= 1 || fr < 0) return expFormat(d);
 
     double factor = 1;
-    String leadingZeroes = "";
+    StringBuilder leadingZeroes = new StringBuilder();
     for (int i = 1; i <= precision && factor <= 0x7FFFFFFFFFFFFFFFL; i++) {
       factor *= 10;
-      leadingZeroes = leadingZeroes + "0";
+      leadingZeroes.append("0");
     }
     long l = (long) (factor * fr + 0.5);
     if (l >= factor) {
@@ -537,7 +537,7 @@ public class Format {
       whole++;
     } // CSH 10-25-97
 
-    String z = leadingZeroes + l;
+    String z = leadingZeroes.toString() + l;
     z = "." + z.substring(z.length() - precision);
 
     if (removeTrailing) {

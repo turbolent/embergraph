@@ -460,7 +460,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
       if (servletSet == null) return null;
 
-      return servletSet.toArray(new HALoadBalancerServlet[servletSet.size()]);
+      return servletSet.toArray(new HALoadBalancerServlet[0]);
     }
   }
 
@@ -511,9 +511,9 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
     final StringBuilder sb = new StringBuilder();
 
-    for (int i = 0; i < servlets.length; i++) {
+    for (HALoadBalancerServlet servlet : servlets) {
 
-      sb.append(servlets[i].toString());
+      sb.append(servlet.toString());
     }
 
     return sb.toString();

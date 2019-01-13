@@ -183,7 +183,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype
    *
    * @throws Exception
    */
-  public void testUnknownDatatypeRejected() throws Exception {
+  public void testUnknownDatatypeRejected() {
 
     try {
       new TestHelper(

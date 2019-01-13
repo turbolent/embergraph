@@ -90,7 +90,7 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
    * IndexSegment}.
    */
   public void test_buildWithOverflow()
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     /*
      * Register the index.
@@ -344,7 +344,7 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
           new AbstractTask<Long>(concurrencyManager, ITx.UNISOLATED, new String[] {name}) {
 
             @Override
-            protected Long doTask() throws Exception {
+            protected Long doTask() {
 
               final ILocalBTreeView view = getIndex(getOnlyResource());
 

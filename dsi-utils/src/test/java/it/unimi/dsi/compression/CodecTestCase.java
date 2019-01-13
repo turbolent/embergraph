@@ -18,15 +18,17 @@ public abstract class CodecTestCase extends TestCase {
     int[] symbol = new int[100];
     BooleanArrayList bits = new BooleanArrayList();
     for (int i = 0; i < symbol.length; i++) symbol[i] = r.nextInt(codec.size());
-    for (int i = 0; i < symbol.length; i++) {
-      BitVector word = codec.codeWords()[symbol[i]];
-      for (int j = 0; j < word.size(); j++) bits.add(word.get(j));
+    for (int i3 : symbol) {
+      BitVector word = codec.codeWords()[i3];
+      for (Boolean aBoolean : word) {
+        bits.add(aBoolean);
+      }
     }
 
     BooleanIterator booleanIterator = bits.iterator();
     Decoder decoder = codec.decoder();
-    for (int i = 0; i < symbol.length; i++) {
-      assertEquals(decoder.decode(booleanIterator), symbol[i]);
+    for (int i2 : symbol) {
+      assertEquals(decoder.decode(booleanIterator), i2);
     }
 
     FastByteArrayOutputStream fbaos = new FastByteArrayOutputStream();
@@ -35,8 +37,8 @@ public abstract class CodecTestCase extends TestCase {
     obs.flush();
     InputBitStream ibs = new InputBitStream(fbaos.array);
 
-    for (int i = 0; i < symbol.length; i++) {
-      assertEquals(decoder.decode(ibs), symbol[i]);
+    for (int i1 : symbol) {
+      assertEquals(decoder.decode(ibs), i1);
     }
   }
 

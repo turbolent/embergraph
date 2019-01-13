@@ -51,7 +51,7 @@ public class TestRestartSafe extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  public void test_restartSafe() throws IOException {
+  public void test_restartSafe() {
 
     final Properties properties = super.getProperties();
 

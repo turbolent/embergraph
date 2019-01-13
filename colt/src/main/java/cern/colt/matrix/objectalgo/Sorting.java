@@ -88,13 +88,11 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = indexes.length; --i >= 0; ) indexes[i] = i;
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (vector.getQuick(a));
-            Comparable bv = (Comparable) (vector.getQuick(b));
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r > 0 ? 1 : 0);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (vector.getQuick(a));
+          Comparable bv = (Comparable) (vector.getQuick(b));
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r > 0 ? 1 : 0);
         };
 
     runSort(indexes, 0, indexes.length, comp);
@@ -131,11 +129,7 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = indexes.length; --i >= 0; ) indexes[i] = i;
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            return c.compare(vector.getQuick(a), vector.getQuick(b));
-          }
-        };
+        (a, b) -> c.compare(vector.getQuick(a), vector.getQuick(b));
 
     runSort(indexes, 0, indexes.length, comp);
 
@@ -191,13 +185,11 @@ public class Sorting extends cern.colt.PersistentObject {
 
     final ObjectMatrix1D col = matrix.viewColumn(column);
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (col.getQuick(a));
-            Comparable bv = (Comparable) (col.getQuick(b));
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r > 0 ? 1 : 0);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (col.getQuick(a));
+          Comparable bv = (Comparable) (col.getQuick(b));
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r > 0 ? 1 : 0);
         };
 
     runSort(rowIndexes, 0, rowIndexes.length, comp);
@@ -239,11 +231,9 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = views.length; --i >= 0; ) views[i] = matrix.viewRow(i);
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            // return c.compare(matrix.viewRow(a), matrix.viewRow(b));
-            return c.compare(views[a], views[b]);
-          }
+        (a, b) -> {
+          // return c.compare(matrix.viewRow(a), matrix.viewRow(b));
+          return c.compare(views[a], views[b]);
         };
 
     runSort(rowIndexes, 0, rowIndexes.length, comp);
@@ -290,13 +280,11 @@ public class Sorting extends cern.colt.PersistentObject {
 
     final ObjectMatrix1D sliceView = matrix.viewRow(row).viewColumn(column);
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (sliceView.getQuick(a));
-            Comparable bv = (Comparable) (sliceView.getQuick(b));
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r > 0 ? 1 : 0);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (sliceView.getQuick(a));
+          Comparable bv = (Comparable) (sliceView.getQuick(b));
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r > 0 ? 1 : 0);
         };
 
     runSort(sliceIndexes, 0, sliceIndexes.length, comp);
@@ -340,11 +328,9 @@ public class Sorting extends cern.colt.PersistentObject {
     for (int i = views.length; --i >= 0; ) views[i] = matrix.viewSlice(i);
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            // return c.compare(matrix.viewSlice(a), matrix.viewSlice(b));
-            return c.compare(views[a], views[b]);
-          }
+        (a, b) -> {
+          // return c.compare(matrix.viewSlice(a), matrix.viewSlice(b));
+          return c.compare(views[a], views[b]);
         };
 
     runSort(sliceIndexes, 0, sliceIndexes.length, comp);

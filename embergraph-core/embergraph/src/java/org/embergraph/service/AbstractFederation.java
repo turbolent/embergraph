@@ -26,8 +26,6 @@ package org.embergraph.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,7 +37,6 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
@@ -1090,7 +1087,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         log.error(t, t);
 
-        return;
       }
     }
 
@@ -1131,10 +1127,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         // Wait for the service to become ready, trying every
         // two seconds, while logging failures.
-        while (true) {
-          if (isServiceReady()) {
-            break;
-          }
+        while (!isServiceReady()) {
           if (elapsed > 1000 * 10)
             log.warn(
                 ERR_SERVICE_NOT_READY
@@ -1144,7 +1137,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
                     + getServiceName()
                     + ", elapsed="
                     + elapsed);
-          else if (log.isInfoEnabled()) log.info(ERR_SERVICE_NOT_READY + " : " + elapsed);
+          else if (log.isInfoEnabled())
+            log.info(ERR_SERVICE_NOT_READY + " : " + elapsed);
           try {
             Thread.sleep(2000);
           } catch (InterruptedException e) {

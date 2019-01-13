@@ -130,7 +130,7 @@ public class ExperimentDriver {
 
         Map.Entry<String, String> entry = itr.next();
 
-        sb.append(entry.getKey() + "=" + entry.getValue());
+        sb.append(entry.getKey()).append("=").append(entry.getValue());
 
         first = false;
       }
@@ -182,7 +182,7 @@ public class ExperimentDriver {
    *     are written as [name=value].
    */
   public static String toString(
-      Map<? extends Object, ? extends Object> data, String[] cols, boolean showAll) {
+      Map<?, ?> data, String[] cols, boolean showAll) {
 
     final StringBuilder sb = new StringBuilder();
 
@@ -207,13 +207,13 @@ public class ExperimentDriver {
     /*
      * Handle the columns that were named by the caller.
      */
-    for (int i = 0; i < cols.length; i++) {
-
-      String col = cols[i];
+    for (String col : cols) {
 
       String val = tmp.remove(col); // remove as we go.
 
-      if (val != null) sb.append(val); // iff value defined for that col.
+      if (val != null) {
+        sb.append(val); // iff value defined for that col.
+      }
 
       sb.append("\t"); // tab delimited.
     }
@@ -229,7 +229,7 @@ public class ExperimentDriver {
 
         Map.Entry<String, String> entry = itr.next();
 
-        sb.append(entry.getKey() + "=" + entry.getValue() + "\t");
+        sb.append(entry.getKey()).append("=").append(entry.getValue()).append("\t");
       }
     }
 
@@ -282,7 +282,7 @@ public class ExperimentDriver {
 
     List<Condition> ret = new LinkedList<>();
 
-    for (int i = 0; i < a.length; i++) {
+    for (NV nv : a) {
 
       Iterator<Condition> itr = conditions.iterator();
 
@@ -292,7 +292,7 @@ public class ExperimentDriver {
 
         Properties properties = new Properties(c.properties);
 
-        properties.put(a[i].getName(), a[i].getValue());
+        properties.put(nv.getName(), nv.getValue());
 
         ret.add(new Condition(properties));
       }
@@ -314,7 +314,7 @@ public class ExperimentDriver {
 
     List<Condition> ret = new LinkedList<>();
 
-    for (int i = 0; i < a.length; i++) {
+    for (NV[] nvs : a) {
 
       Iterator<Condition> itr = conditions.iterator();
 
@@ -324,9 +324,9 @@ public class ExperimentDriver {
 
         Properties properties = new Properties(c.properties);
 
-        for (int j = 0; j < a[i].length; j++) {
+        for (int j = 0; j < nvs.length; j++) {
 
-          properties.put(a[i][j].getName(), a[i][j].getValue());
+          properties.put(nvs[j].getName(), nvs[j].getValue());
         }
 
         ret.add(new Condition(properties));
@@ -368,7 +368,7 @@ public class ExperimentDriver {
    */
   public static Collection<Condition> randomize(Collection<Condition> conditions) {
 
-    Condition[] a = conditions.toArray(new Condition[conditions.size()]);
+    Condition[] a = conditions.toArray(new Condition[0]);
 
     int[] order = TestCase2.getRandomOrder(a.length);
 
@@ -430,9 +430,9 @@ public class ExperimentDriver {
               + "\""
               + ">\n");
 
-      sb.append("<!-- There are " + _conditions.size() + " conditions. -->\n");
+      sb.append("<!-- There are ").append(_conditions.size()).append(" conditions. -->\n");
 
-      sb.append("<experiment class=\"" + className + "\">\n");
+      sb.append("<experiment class=\"").append(className).append("\">\n");
 
       if (!defaultProperties.isEmpty()) {
 
@@ -444,8 +444,8 @@ public class ExperimentDriver {
 
           Map.Entry<String, String> entry = itr.next();
 
-          sb.append(
-              "  <property name=\"" + entry.getKey() + "\">" + entry.getValue() + "</property>\n");
+          sb.append("  <property name=\"").append(entry.getKey()).append("\">")
+              .append(entry.getValue()).append("</property>\n");
         }
 
         sb.append(" </defaults>\n");
@@ -459,7 +459,7 @@ public class ExperimentDriver {
 
         Condition cond = conditr.next();
 
-        sb.append(" <!-- condition#" + (n + 1) + " -->\n");
+        sb.append(" <!-- condition#").append(n + 1).append(" -->\n");
 
         sb.append(" <condition>\n");
 
@@ -481,12 +481,8 @@ public class ExperimentDriver {
               continue;
             }
 
-            sb.append(
-                "  <property name=\""
-                    + entry.getKey()
-                    + "\">"
-                    + entry.getValue()
-                    + "</property>\n");
+            sb.append("  <property name=\"").append(entry.getKey()).append("\">")
+                .append(entry.getValue()).append("</property>\n");
           }
         }
 
@@ -501,8 +497,8 @@ public class ExperimentDriver {
 
             Map.Entry entry = (Map.Entry) itr.next();
 
-            sb.append(
-                "  <result name=\"" + entry.getKey() + "\">" + entry.getValue() + "</result>\n");
+            sb.append("  <result name=\"").append(entry.getKey()).append("\">")
+                .append(entry.getValue()).append("</result>\n");
           }
         }
 
@@ -931,7 +927,7 @@ public class ExperimentDriver {
     }
 
     /** Log the warning. */
-    public void warning(SAXParseException e) throws SAXException {
+    public void warning(SAXParseException e) {
 
       log.warn(e);
     }
@@ -984,8 +980,7 @@ public class ExperimentDriver {
     private String pname = null;
     private StringBuilder pvalue = new StringBuilder();
 
-    public void startElement(String uri, String localName, String qName, Attributes atts)
-        throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes atts) {
 
       if (qName.equals("experiment")) {
 
@@ -1009,7 +1004,7 @@ public class ExperimentDriver {
       }
     }
 
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
       if (qName.equals("defaults")) {
 
@@ -1045,7 +1040,7 @@ public class ExperimentDriver {
     }
 
     /** Collect the property value. */
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
 
       pvalue.append(ch, start, length);
     }
@@ -1073,14 +1068,13 @@ public class ExperimentDriver {
    * @param params The overriden properties.
    * @return A new {@link Properties}.
    */
-  protected static Condition getCondition(Map<String, String> properties, NV[] params)
-      throws IOException {
+  protected static Condition getCondition(Map<String, String> properties, NV[] params) {
 
     properties = new HashMap<>(properties);
 
-    for (int i = 0; i < params.length; i++) {
+    for (NV param : params) {
 
-      properties.put(params[i].getName(), params[i].getValue());
+      properties.put(param.getName(), param.getValue());
     }
 
     return new Condition(properties);

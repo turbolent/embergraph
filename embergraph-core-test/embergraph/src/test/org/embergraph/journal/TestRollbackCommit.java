@@ -108,15 +108,14 @@ public class TestRollbackCommit extends ProxyTestCase<Journal> {
 
       final StringBuffer sb = new StringBuffer();
 
-      sb.append(
-          "Root blocks differ: delegate="
-              + getDelegate()
-              + ", bufferStrategy="
-              + journal.getBufferStrategy());
+      sb.append("Root blocks differ: delegate=").append(getDelegate()).append(", bufferStrategy=")
+          .append(journal.getBufferStrategy());
 
-      sb.append(", expected=" + new RootBlockView(isRootBlock0, expected, null /* checker */));
+      sb.append(", expected=")
+          .append(new RootBlockView(isRootBlock0, expected, null /* checker */));
       try {
-        sb.append(", actual=" + new RootBlockView(isRootBlock0, expected, null /* checker */));
+        sb.append(", actual=")
+            .append(new RootBlockView(isRootBlock0, expected, null /* checker */));
       } catch (Throwable t) {
         /*
          * Show the error if we can't decode the root block.

@@ -36,7 +36,7 @@ public class TestMemoryManager extends TestCase2 {
 
   private Random r;
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
     r = new Random();
     manager = new MemoryManager(DirectBufferPool.INSTANCE, 10);
     c_testData = genTestData();
@@ -242,15 +242,13 @@ public class TestMemoryManager extends TestCase2 {
     final Collection<Callable<Long>> tasks = new HashSet<>();
     for (int i = 0; i < nclients; i++) {
       tasks.add(
-          new Callable<Long>() {
-            public Long call() throws Exception {
-              try {
-                doStressAllocations(manager, false, 50000, 5 + r.nextInt(600));
-              } catch (Throwable t) {
-                t.printStackTrace();
-              }
-              return null;
+          () -> {
+            try {
+              doStressAllocations(manager, false, 50000, 5 + r.nextInt(600));
+            } catch (Throwable t) {
+              t.printStackTrace();
             }
+            return null;
           });
     }
 
@@ -360,24 +358,22 @@ public class TestMemoryManager extends TestCase2 {
 
     final FutureTask<Long> ft =
         new FutureTask<>(
-            new Callable<Long>() {
-              public Long call() throws Exception {
-                try {
-                  if (log.isInfoEnabled()) {
-                    log.info(
-                        "Attempting blocking allocation: slotBytes: " + manager.getSlotBytes());
-                  }
-                  /*
-                   * blocking allocation of the same size that was
-                   * just refused.
-                   */
-                  return manager.allocate(sectorSize);
-                } catch (Throwable t) {
-                  if (InnerCause.isInnerCause(t, InterruptedException.class)) {
-                    fail("Not expecting interrupt");
-                  }
-                  throw new RuntimeException(t);
+            () -> {
+              try {
+                if (log.isInfoEnabled()) {
+                  log.info(
+                      "Attempting blocking allocation: slotBytes: " + manager.getSlotBytes());
                 }
+                /*
+                 * blocking allocation of the same size that was
+                 * just refused.
+                 */
+                return manager.allocate(sectorSize);
+              } catch (Throwable t) {
+                if (InnerCause.isInnerCause(t, InterruptedException.class)) {
+                  fail("Not expecting interrupt");
+                }
+                throw new RuntimeException(t);
               }
             });
 
@@ -476,15 +472,15 @@ public class TestMemoryManager extends TestCase2 {
 
     final ByteBuffer[] bufs = manager.get(saddr);
 
-    for (int i = 0; i < bufs.length; i++) {
+    for (ByteBuffer buf : bufs) {
       final byte[] data;
-      if (bufs[i].isDirect()) {
-        final ByteBuffer indbuf = ByteBuffer.allocate(bufs[i].remaining());
+      if (buf.isDirect()) {
+        final ByteBuffer indbuf = ByteBuffer.allocate(buf.remaining());
         data = indbuf.array();
-        indbuf.put(bufs[i]);
+        indbuf.put(buf);
         indbuf.flip();
       } else {
-        data = bufs[i].array();
+        data = buf.array();
       }
 
       sb.append(new String(data));

@@ -686,9 +686,9 @@ public class TestRingBuffer extends TestCase2 {
     assertTrue(expected.length == b.size());
 
     // Remove entries in LRU to MRU order
-    for (int i = 0; i < expected.length; i++) {
+    for (String s1 : expected) {
       String s = b.remove(0);
-      assertSame(expected[i], s);
+      assertSame(s1, s);
     }
     assertTrue(b.isEmpty());
   }
@@ -717,8 +717,8 @@ public class TestRingBuffer extends TestCase2 {
     b.addAll(Arrays.asList(expected));
 
     // Access entries in order -- removing each LRU along the way
-    for (int i = 0; i < expected.length; i++) {
-      assertSame(expected[i], b.element());
+    for (String s : expected) {
+      assertSame(s, b.element());
       b.remove();
     }
     assertTrue(b.isEmpty());
@@ -742,8 +742,8 @@ public class TestRingBuffer extends TestCase2 {
     b.addAll(Arrays.asList(expected));
 
     // Access entries in order -- removing each LRU along the way
-    for (int i = 0; i < expected.length; i++) {
-      assertSame(expected[i], b.peek());
+    for (String s : expected) {
+      assertSame(s, b.peek());
       b.remove();
     }
     assertTrue(b.isEmpty());
@@ -770,8 +770,8 @@ public class TestRingBuffer extends TestCase2 {
     b.addAll(Arrays.asList(expected));
 
     // Access entries in order
-    for (int i = 0; i < expected.length; i++) {
-      assertSame(expected[i], b.poll());
+    for (String s : expected) {
+      assertSame(s, b.poll());
     }
     assertTrue(b.isEmpty());
   }
@@ -942,14 +942,14 @@ public class TestRingBuffer extends TestCase2 {
 
   public void test_contains_all_empty() {
     final RingBuffer<String> b = new RingBuffer<>(1);
-    assertFalse(b.contains(Arrays.asList("a")));
+    assertFalse(b.contains(Collections.singletonList("a")));
   }
 
   public void test_contains_all_missing() {
     String[] elems = {"a", "b", "c"};
     final RingBuffer<String> b = new RingBuffer<>(elems.length);
     b.addAll(Arrays.asList(elems));
-    assertFalse(b.containsAll(Arrays.asList("d")));
+    assertFalse(b.containsAll(Collections.singletonList("d")));
   }
 
   public void test_contains_all_subset() {
@@ -997,10 +997,10 @@ public class TestRingBuffer extends TestCase2 {
     final RingBuffer<String> b = new RingBuffer<>(elems.length);
     b.addAll(Arrays.asList(elems));
     Iterator<String> iter = b.iterator();
-    for (int i = 0; i < elems.length; i++) {
+    for (String elem : elems) {
       assertTrue(iter.hasNext());
       String n = iter.next();
-      assertEquals(elems[i], n);
+      assertEquals(elem, n);
     }
     assertFalse(iter.hasNext());
   }
@@ -1029,10 +1029,10 @@ public class TestRingBuffer extends TestCase2 {
     final RingBuffer<String> b = new RingBuffer<>(elems.length);
     b.addAll(Arrays.asList(elems));
     Iterator<String> iter = b.iterator();
-    for (int i = 0; i < elems.length; i++) {
+    for (String elem : elems) {
       assertTrue(iter.hasNext());
       String n = iter.next();
-      assertEquals(elems[i], n);
+      assertEquals(elem, n);
       iter.remove();
     }
     assertFalse(iter.hasNext());
@@ -1052,8 +1052,8 @@ public class TestRingBuffer extends TestCase2 {
   private void test_remove_ref_common(String[] elems) {
     final RingBuffer<String> b = new RingBuffer<>(elems.length);
     b.addAll(Arrays.asList(elems));
-    for (int i = 0; i < elems.length; i++) {
-      b.remove(elems[i]);
+    for (String elem : elems) {
+      b.remove(elem);
     }
     assertTrue(b.isEmpty());
   }
@@ -1081,7 +1081,7 @@ public class TestRingBuffer extends TestCase2 {
     String[] elems = {"a", "b", "c", "d"};
     final RingBuffer<String> b = new RingBuffer<>(elems.length);
     b.addAll(Arrays.asList(elems));
-    assertFalse(b.removeAll(Arrays.asList("z")));
+    assertFalse(b.removeAll(Collections.singletonList("z")));
   }
 
   public void test_iterator_remove_all() {

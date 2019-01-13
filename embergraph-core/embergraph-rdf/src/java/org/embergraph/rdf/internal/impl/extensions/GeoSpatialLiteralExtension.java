@@ -344,9 +344,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
   public byte[] padLeadingZero(byte[] arr) {
     final byte[] ret = new byte[arr.length + 1];
 
-    for (int i = 0; i < arr.length; i++) {
-      ret[i + 1] = arr[i];
-    }
+    System.arraycopy(arr, 0, ret, 1, arr.length);
 
     return ret;
   }
@@ -438,8 +436,8 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     for (int i = 0; i < paddedArraySize - bigIntAsByteArr.length; i++) {
       bigIntAsByteArrPad[idx++] = 0; // padding
     }
-    for (int i = 0; i < bigIntAsByteArr.length; i++) {
-      bigIntAsByteArrPad[idx++] = bigIntAsByteArr[i]; // copy of bytes
+    for (byte b : bigIntAsByteArr) {
+      bigIntAsByteArrPad[idx++] = b; // copy of bytes
     }
 
     final byte[] bigIntAsByteArrUnsigned = unpadLeadingZero(bigIntAsByteArrPad);
@@ -472,8 +470,8 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
 
     kb.reset();
 
-    for (int i = 0; i < byteArr.length; i++) {
-      kb.append(byteArr[i]);
+    for (byte b : byteArr) {
+      kb.append(b);
     }
 
     final long[] componentsAsLongArr = kb.fromZOrder(datatypeConfig.getNumDimensions());
@@ -543,9 +541,8 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
 
     final byte[] ret = new byte[arr.length - 1];
 
-    for (int i = 0; i < ret.length; i++) {
-      ret[i] = arr[i + 1];
-    }
+    if (ret.length >= 0)
+      System.arraycopy(arr, 1, ret, 0, ret.length);
 
     return ret;
   }

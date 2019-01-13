@@ -133,7 +133,7 @@ public class TestMemStore extends AbstractJournalTestCase {
    *
    * @throws IOException
    */
-  public void test_create_transient01() throws IOException {
+  public void test_create_transient01() {
 
     final IRawStore store = new MemStore(DirectBufferPool.INSTANCE, 1 /* nbuffers */);
     try {

@@ -44,7 +44,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @param data The serialized performance counter data.
    * @throws IOException
    */
-  void notify(UUID serviceUUID, byte[] data) throws IOException;
+  void notify(UUID serviceUUID, byte[] data);
 
   /*
    * A warning issued by a client when it is in danger of depleting its resources.
@@ -53,7 +53,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @param serviceUUID The service {@link UUID} that is self-reporting.
    * @throws IOException
    */
-  void warn(String msg, UUID serviceUUID) throws IOException;
+  void warn(String msg, UUID serviceUUID);
 
   /*
    * An urgent warning issued the caller is in immediate danger of depleting its resources with a
@@ -63,7 +63,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @param serviceUUID The service {@link UUID} that is self-reporting.
    * @throws IOException
    */
-  void urgent(String msg, UUID serviceUUID) throws IOException;
+  void urgent(String msg, UUID serviceUUID);
 
   /*
    * Return the {@link UUID} of an under-utilized data service. If there is no under-utilized
@@ -105,7 +105,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    *     signifier for [maxCount].
    */
   UUID[] getUnderUtilizedDataServices(int minCount, int maxCount, UUID exclude)
-      throws IOException, TimeoutException, InterruptedException;
+      throws TimeoutException, InterruptedException;
 
   /*
    * Return <code>true</code> if the service is considered to be "highly utilized".
@@ -118,7 +118,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @return <code>true</code> if the service is considered to be "highly utilized".
    * @throws IOException
    */
-  boolean isHighlyUtilizedDataService(UUID serviceUUID) throws IOException;
+  boolean isHighlyUtilizedDataService(UUID serviceUUID);
 
   /*
    * Return <code>true</code> if the service is considered to be "under-utilized".
@@ -127,7 +127,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @return <code>true</code> if the service is considered to be "under-utilized".
    * @throws IOException
    */
-  boolean isUnderUtilizedDataService(UUID serviceUUID) throws IOException;
+  boolean isUnderUtilizedDataService(UUID serviceUUID);
 
   /** Logs counters to a temp file. Replacement for sighup mechanism. */
   void sighup() throws IOException;

@@ -242,7 +242,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
    * indicates a code path where {@link Event#end()} is not getting called but could also indicate a
    * disconnected client or service.
    */
-  public void notifyEvent(final Event e) throws IOException {
+  public void notifyEvent(final Event e) {
 
     if (e == null) throw new IllegalArgumentException();
 

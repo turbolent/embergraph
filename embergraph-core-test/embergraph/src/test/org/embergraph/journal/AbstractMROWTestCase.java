@@ -449,7 +449,7 @@ public abstract class AbstractMROWTestCase extends AbstractRawStoreTestCase {
     }
 
     /** Executes random reads and validates against ground truth. */
-    public Long call() throws Exception {
+    public Long call() {
 
       // Random reads.
 

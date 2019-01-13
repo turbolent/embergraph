@@ -171,12 +171,7 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
 
           tasks.add(
               new FutureTask<>(
-                  new Callable<BaseIndexStats>() {
-                    @Override
-                    public BaseIndexStats call() throws Exception {
-                      return warmUpIndex(name, commitRecord);
-                    }
-                  }));
+                  () -> warmUpIndex(name, commitRecord)));
         } // while(itr) (next index)
       }
 
@@ -219,14 +214,9 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
          * Write out warmup statistics (summary and detail).
          */
         final StringWriter strw = new StringWriter(statsMap.size() * Bytes.kilobyte32);
-        strw.append(
-            "Warmed up: "
-                + statsMap.size()
-                + " indices in "
-                + TimeUnit.NANOSECONDS.toMillis(elapsed)
-                + "ms using up to "
-                + nparallel
-                + " threads.\n");
+        strw.append("Warmed up: ").append(String.valueOf(statsMap.size())).append(" indices in ")
+            .append(String.valueOf(TimeUnit.NANOSECONDS.toMillis(elapsed)))
+            .append("ms using up to ").append(String.valueOf(nparallel)).append(" threads.\n");
         final PrintWriter w = new PrintWriter(strw);
         BaseIndexStats.writeOn(w, statsMap);
         w.flush();

@@ -50,13 +50,9 @@ public class ASCIIKeyBuilderFactory implements IKeyBuilderFactory, Externalizabl
   @Override
   public String toString() {
 
-    StringBuilder sb = new StringBuilder(getClass().getName());
-
-    sb.append("{ initialCapacity=" + initialCapacity);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getName() + "{ initialCapacity=" + initialCapacity
+        + "}";
+    return sb;
   }
 
   /** De-serialization ctor. */
@@ -87,7 +83,7 @@ public class ASCIIKeyBuilderFactory implements IKeyBuilderFactory, Externalizabl
   }
 
   @Override
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     initialCapacity = in.readInt();
   }

@@ -112,7 +112,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    *
    * @throws InterruptedException
    */
-  void setExtentForLocalStore(final long extent) throws IOException, InterruptedException;
+  void setExtentForLocalStore(final long extent);
 
   /*
    * Reload from the current root block - <strong>CAUTION : THIS IS NOT A RESET / ABORT</strong>.

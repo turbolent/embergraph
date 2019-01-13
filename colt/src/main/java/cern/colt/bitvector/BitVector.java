@@ -264,7 +264,7 @@ public class BitVector extends cern.colt.PersistentObject {
    * @return <code>true</code> if the objects are the same; <code>false</code> otherwise.
    */
   public boolean equals(Object obj) {
-    if (obj == null || !(obj instanceof BitVector)) return false;
+    if (!(obj instanceof BitVector)) return false;
     if (this == obj) return true;
 
     BitVector other = (BitVector) obj;

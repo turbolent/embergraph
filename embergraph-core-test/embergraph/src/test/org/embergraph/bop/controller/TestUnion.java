@@ -78,7 +78,7 @@ public class TestUnion extends TestCase2 {
   private QueryEngine queryEngine;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -114,7 +114,7 @@ public class TestUnion extends TestCase2 {
   }
 
   @Override
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();

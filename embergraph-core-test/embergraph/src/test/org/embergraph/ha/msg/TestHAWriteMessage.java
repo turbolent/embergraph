@@ -27,7 +27,7 @@ import org.embergraph.util.BytesUtil;
 public class TestHAWriteMessage extends TestCase {
 
   /** Simple test to verify HAWriteMessage serialization */
-  public void testSerialization() throws IOException, ClassNotFoundException {
+  public void testSerialization() {
 
     final IHAWriteMessage msg1 =
         new HAWriteMessage(

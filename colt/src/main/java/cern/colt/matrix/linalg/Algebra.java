@@ -114,11 +114,7 @@ public class Algebra extends cern.colt.PersistentObject {
   }
   /** Returns sqrt(a^2 + b^2) without under/overflow. */
   protected static cern.colt.function.DoubleDoubleFunction hypotFunction() {
-    return new cern.colt.function.DoubleDoubleFunction() {
-      public final double apply(double a, double b) {
-        return hypot(a, b);
-      }
-    };
+    return (a, b) -> hypot(a, b);
   }
   /*
    * Returns the inverse or pseudo-inverse of matrix <tt>A</tt>.
@@ -376,11 +372,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
 
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int a, int b) {
-            A.viewRow(a).swap(A.viewRow(b));
-          }
-        };
+        (a, b) -> A.viewRow(a).swap(A.viewRow(b));
 
     cern.colt.GenericPermuting.permute(indexes, swapper, work, null);
     return A;
@@ -683,22 +675,16 @@ public class Algebra extends cern.colt.PersistentObject {
 
     // sort ascending by property name
     cern.colt.function.IntComparator comp =
-        new cern.colt.function.IntComparator() {
-          public int compare(int a, int b) {
-            return Property.get(names, a).compareTo(Property.get(names, b));
-          }
-        };
+        (a, b) -> Property.get(names, a).compareTo(Property.get(names, b));
     cern.colt.Swapper swapper =
-        new cern.colt.Swapper() {
-          public void swap(int a, int b) {
-            Object tmp;
-            tmp = names.get(a);
-            names.set(a, names.get(b));
-            names.set(b, tmp);
-            tmp = values.get(a);
-            values.set(a, values.get(b));
-            values.set(b, tmp);
-          }
+        (a, b) -> {
+          Object tmp;
+          tmp = names.get(a);
+          names.set(a, names.get(b));
+          names.set(b, tmp);
+          tmp = values.get(a);
+          values.set(a, values.get(b));
+          values.set(b, tmp);
         };
     cern.colt.GenericSorting.quickSort(0, names.size(), comp, swapper);
 
@@ -886,49 +872,53 @@ public class Algebra extends cern.colt.PersistentObject {
     buf.append("A = ");
     buf.append(matrix);
 
-    buf.append("\n\n" + toString(matrix));
-    buf.append("\n\n" + Property.DEFAULT.toString(matrix));
+    buf.append("\n\n").append(toString(matrix));
+    buf.append("\n\n").append(Property.DEFAULT.toString(matrix));
 
     LUDecomposition lu = null;
     try {
       lu = new LUDecomposition(matrix);
     } catch (IllegalArgumentException exc) {
-      buf.append("\n\n" + constructionException + " LUDecomposition: " + exc.getMessage());
+      buf.append("\n\n").append(constructionException).append(" LUDecomposition: ")
+          .append(exc.getMessage());
     }
-    if (lu != null) buf.append("\n\n" + lu.toString());
+    if (lu != null) buf.append("\n\n").append(lu.toString());
 
     QRDecomposition qr = null;
     try {
       qr = new QRDecomposition(matrix);
     } catch (IllegalArgumentException exc) {
-      buf.append("\n\n" + constructionException + " QRDecomposition: " + exc.getMessage());
+      buf.append("\n\n").append(constructionException).append(" QRDecomposition: ")
+          .append(exc.getMessage());
     }
-    if (qr != null) buf.append("\n\n" + qr.toString());
+    if (qr != null) buf.append("\n\n").append(qr.toString());
 
     CholeskyDecomposition chol = null;
     try {
       chol = new CholeskyDecomposition(matrix);
     } catch (IllegalArgumentException exc) {
-      buf.append("\n\n" + constructionException + " CholeskyDecomposition: " + exc.getMessage());
+      buf.append("\n\n").append(constructionException).append(" CholeskyDecomposition: ")
+          .append(exc.getMessage());
     }
-    if (chol != null) buf.append("\n\n" + chol.toString());
+    if (chol != null) buf.append("\n\n").append(chol.toString());
 
     EigenvalueDecomposition eig = null;
     try {
       eig = new EigenvalueDecomposition(matrix);
     } catch (IllegalArgumentException exc) {
-      buf.append("\n\n" + constructionException + " EigenvalueDecomposition: " + exc.getMessage());
+      buf.append("\n\n").append(constructionException).append(" EigenvalueDecomposition: ")
+          .append(exc.getMessage());
     }
-    if (eig != null) buf.append("\n\n" + eig.toString());
+    if (eig != null) buf.append("\n\n").append(eig.toString());
 
     SingularValueDecomposition svd = null;
     try {
       svd = new SingularValueDecomposition(matrix);
     } catch (IllegalArgumentException exc) {
-      buf.append(
-          "\n\n" + constructionException + " SingularValueDecomposition: " + exc.getMessage());
+      buf.append("\n\n").append(constructionException).append(" SingularValueDecomposition: ")
+          .append(exc.getMessage());
     }
-    if (svd != null) buf.append("\n\n" + svd.toString());
+    if (svd != null) buf.append("\n\n").append(svd.toString());
 
     return buf.toString();
   }

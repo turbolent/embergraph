@@ -503,8 +503,8 @@ public class AllocBlock {
 
   public String show() {
     StringBuilder sb = new StringBuilder();
-    sb.append("AllocBlock, baseAddress: " + RWStore.convertAddr(m_addr) + " bits: ");
-    for (int b : m_transients) sb.append(b + " ");
+    sb.append("AllocBlock, baseAddress: ").append(RWStore.convertAddr(m_addr)).append(" bits: ");
+    for (int b : m_transients) sb.append(b).append(" ");
 
     return sb.toString();
   }

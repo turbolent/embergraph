@@ -562,7 +562,6 @@ public class ASTConstructIterator
        * solution.
        */
 
-      continue;
     }
   }
 
@@ -604,7 +603,7 @@ public class ASTConstructIterator
   }
 
   @Override
-  public void remove() throws QueryEvaluationException {
+  public void remove() {
 
     throw new UnsupportedOperationException();
   }

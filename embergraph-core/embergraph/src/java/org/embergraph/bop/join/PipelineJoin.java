@@ -507,7 +507,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      * @return <code>null</code>.
      */
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       // final long begin = System.currentTimeMillis();
 
@@ -653,8 +653,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      * @throws InterruptedException
      * @throws ExecutionException
      */
-    protected void flushAndCloseBuffersAndAwaitSinks()
-        throws InterruptedException, ExecutionException {
+    protected void flushAndCloseBuffersAndAwaitSinks() {
 
       if (log.isDebugEnabled()) log.debug("joinOp=" + joinOp);
 
@@ -726,7 +725,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      *
      * @return The next chunk -or- <code>null</code> iff the source is exhausted.
      */
-    protected IBindingSet[] nextChunk() throws InterruptedException {
+    protected IBindingSet[] nextChunk() {
 
       if (log.isDebugEnabled()) log.debug("joinOp=" + joinOp);
 
@@ -833,7 +832,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
        *     lastJoin) and that {@link IBlockingBuffer} has been closed.
        */
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         try {
 
@@ -961,9 +960,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
 
           final List<AccessPathTask> tmp = new LinkedList<>();
 
-          for (int i = 0; i < chunk.length; i++) {
-
-            final IBindingSet bindingSet = chunk[i];
+          for (final IBindingSet bindingSet : chunk) {
 
             // constrain the predicate to the given bindings.
             IPredicate<E> asBound = predicate.asBound(bindingSet);
@@ -1395,7 +1392,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
        *     lastJoin) and that {@link IBlockingBuffer} has been closed.
        */
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         halted();
 
@@ -1536,7 +1533,6 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
               stats.outputSolutions.increment();
             }
           }
-          return;
 
         } catch (Throwable t) {
 
@@ -1693,7 +1689,6 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
               stats.outputSolutions.increment();
             }
           }
-          return;
 
         } catch (Throwable t) {
 
@@ -1868,7 +1863,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
                  * and move on to the next constraint.
                  */
                 solutions =
-                    constraintSolutions.toArray(new IBindingSet[constraintSolutions.size()]);
+                    constraintSolutions.toArray(new IBindingSet[0]);
               }
             }
 
@@ -1895,8 +1890,6 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
               }
             }
           }
-
-          return;
 
         } catch (Throwable t) {
 
@@ -2004,7 +1997,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
        *     lastJoin) and that {@link IBlockingBuffer} has been closed.
        */
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         try {
 

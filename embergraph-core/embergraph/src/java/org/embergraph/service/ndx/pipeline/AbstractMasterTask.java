@@ -219,7 +219,7 @@ public abstract class AbstractMasterTask<
    * @throws ExecutionException if a subtask throws an exception.
    */
   public void mapOperationOverSubtasks(final SubtaskOp<S> op)
-      throws InterruptedException, ExecutionException {
+      throws ExecutionException {
 
     final Iterator<S> itr = sinks.values().iterator();
 
@@ -359,7 +359,7 @@ public abstract class AbstractMasterTask<
     stats.addMaster(this);
   }
 
-  public H call() throws Exception {
+  public H call() {
 
     /*
      * Note: If idle timeouts are allowed then we need to reopen the sink if
@@ -493,7 +493,7 @@ public abstract class AbstractMasterTask<
    * Extension hook invoked when the master's buffer is exhausted by {@link #awaitAll()}. The
    * default implementation is a NOP.
    */
-  protected void willShutdown() throws InterruptedException {
+  protected void willShutdown() {
 
     // NOP.
 

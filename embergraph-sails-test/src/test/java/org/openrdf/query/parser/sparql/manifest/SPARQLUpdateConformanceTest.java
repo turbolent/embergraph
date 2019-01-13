@@ -192,7 +192,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
     return repo;
   }
 
-  protected abstract Repository newRepository() throws Exception;
+  protected abstract Repository newRepository();
 
   @Override
   protected void tearDown() throws Exception {
@@ -275,7 +275,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
       message.append("=========================================\n");
 
       final String queryStr = readUpdateString();
-      message.append("Query:\n" + queryStr);
+      message.append("Query:\n").append(queryStr);
       message.append("\n=========================================\n");
 
       //            message.append("Data:\n"+readInputData(dataset));

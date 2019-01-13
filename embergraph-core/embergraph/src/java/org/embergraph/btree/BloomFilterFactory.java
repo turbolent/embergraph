@@ -229,14 +229,11 @@ public class BloomFilterFactory implements Serializable {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder(getClass().getSimpleName());
-
-    sb.append("{ n=" + n);
-    sb.append(", p=" + p);
-    sb.append(", maxP=" + maxP);
-    sb.append(", maxN=" + maxN);
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName() + "{ n=" + n
+        + ", p=" + p
+        + ", maxP=" + maxP
+        + ", maxN=" + maxN
+        + "}";
+    return sb;
   }
 }

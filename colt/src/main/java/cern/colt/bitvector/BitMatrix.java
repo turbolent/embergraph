@@ -156,7 +156,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
    *     bits.length*64</tt>
    */
   protected void elements(long[] bits, int columns, int rows) {
-    if (columns < 0 || columns < 0 || columns * rows > bits.length * QuickBitVector.BITS_PER_UNIT)
+    if (columns < 0 || columns * rows > bits.length * QuickBitVector.BITS_PER_UNIT)
       throw new IllegalArgumentException();
     this.bits = bits;
     this.columns = columns;
@@ -172,7 +172,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
    * @return <code>true</code> if the objects are the same; <code>false</code> otherwise.
    */
   public boolean equals(Object obj) {
-    if (obj == null || !(obj instanceof BitMatrix)) return false;
+    if (!(obj instanceof BitMatrix)) return false;
     if (this == obj) return true;
 
     BitMatrix other = (BitMatrix) obj;
@@ -228,7 +228,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     long val = theBits[bits.length - 1];
     for (int j = vector.numberOfBitsInPartialUnit(); --j >= 0; ) {
       long mask = val & (1L << j);
-      if (state ? mask != 0L : mask == 0L) {
+      if (state == (mask != 0L)) {
         if (!procedure.apply(column, row)) return false;
       }
       if (--column < 0) {

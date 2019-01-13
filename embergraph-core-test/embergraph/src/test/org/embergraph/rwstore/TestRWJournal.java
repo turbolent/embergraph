@@ -242,7 +242,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
    *
    * @throws IOException
    */
-  public void test_create_disk01() throws IOException {
+  public void test_create_disk01() {
 
     File file = null;
 
@@ -2172,7 +2172,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      *
      * @throws IOException
      */
-    public void test_allocationContexts() throws IOException {
+    public void test_allocationContexts() {
       final Journal store = (Journal) getStore();
       try {
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2525,7 +2525,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      *
      * @throws IOException
      */
-    public void testSimpleReplication() throws IOException {
+    public void testSimpleReplication() {
 
       // Create a couple of stores with temp files
       Journal store1 = (Journal) getStore();
@@ -2559,7 +2559,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      *
      * @throws IOException
      */
-    public void testStressReplication() throws IOException {
+    public void testStressReplication() {
 
       // Create a couple of stores with temp files
       final Journal store1 = (Journal) getStore();
@@ -2654,8 +2654,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         if (i % 3 != 0) { // make avail 2 out of 3 for realloc
           freeAddr[freeCurs++] = addr;
           if (freeCurs == freeAddr.length) {
-            for (int f = 0; f < freeAddr.length; f++) {
-              rw.free(freeAddr[f], 0);
+            for (int i1 : freeAddr) {
+              rw.free(i1, 0);
             }
             freeCurs = 0;
           }
@@ -3715,7 +3715,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      *
      * @throws InterruptedException
      */
-    public void test_simpleConcurrentReadersWithResets() throws InterruptedException {
+    public void test_simpleConcurrentReadersWithResets() {
       final Journal store = (Journal) getStore();
       // use executor service to enable exception trapping
       final ExecutorService es = store.getExecutorService();
@@ -3732,47 +3732,38 @@ public class TestRWJournal extends AbstractJournalTestCase {
         assertTrue(bs.isCommitted(addrs[0]));
 
         Runnable writer =
-            new Runnable() {
-              @Override
-              public void run() {
-                for (int i = 0; i < 2000; i++) {
-                  bs.delete(addrs[r.nextInt(addrs.length)]);
-                  for (int w = 0; w < 1000; w++) bs.write(randomData(r.nextInt(500) + 1));
-                  bs.abort();
-                }
+            () -> {
+              for (int i = 0; i < 2000; i++) {
+                bs.delete(addrs[r.nextInt(addrs.length)]);
+                for (int w = 0; w < 1000; w++) bs.write(randomData(r.nextInt(500) + 1));
+                bs.abort();
               }
             };
         final Future<?> wfuture = es.submit(writer);
         Runnable reader1 =
-            new Runnable() {
-              @Override
-              public void run() {
-                for (int i = 0; i < 5000; i++) {
-                  for (int rdr = 0; rdr < addrs.length; rdr++) {
-                    bs.read(addrs[r.nextInt(addrs.length)]);
-                  }
-                  try {
-                    Thread.sleep(1);
-                  } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                  }
+            () -> {
+              for (int i = 0; i < 5000; i++) {
+                for (int rdr = 0; rdr < addrs.length; rdr++) {
+                  bs.read(addrs[r.nextInt(addrs.length)]);
+                }
+                try {
+                  Thread.sleep(1);
+                } catch (InterruptedException e) {
+                  throw new RuntimeException(e);
                 }
               }
             };
         final Future<?> r1future = es.submit(reader1);
         Runnable reader2 =
-            new Runnable() {
-              @Override
-              public void run() {
-                for (int i = 0; i < 5000; i++) {
-                  for (int rdr = 0; rdr < addrs.length; rdr++) {
-                    bs.read(addrs[r.nextInt(addrs.length)]);
-                  }
-                  try {
-                    Thread.sleep(1);
-                  } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                  }
+            () -> {
+              for (int i = 0; i < 5000; i++) {
+                for (int rdr = 0; rdr < addrs.length; rdr++) {
+                  bs.read(addrs[r.nextInt(addrs.length)]);
+                }
+                try {
+                  Thread.sleep(1);
+                } catch (InterruptedException e) {
+                  throw new RuntimeException(e);
                 }
               }
             };
@@ -3785,8 +3776,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         } catch (Exception e) {
           fail(e.getMessage(), e);
         }
-        for (int i = 0; i < addrs.length; i++) {
-          assertTrue(bs.isCommitted(addrs[i]));
+        for (long addr : addrs) {
+          assertTrue(bs.isCommitted(addr));
         }
       } finally {
         es.shutdownNow();

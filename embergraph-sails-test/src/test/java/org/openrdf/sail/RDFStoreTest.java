@@ -381,7 +381,7 @@ public abstract class RDFStoreTest extends TestCase {
   }
 
   @Test
-  public void testInvalidDateTime() throws Exception {
+  public void testInvalidDateTime() {
     // SES-711
     Literal date1 = vf.createLiteral("2004-12-20", XMLSchema.DATETIME);
     Literal date2 = vf.createLiteral("2004-12-20", XMLSchema.DATETIME);
@@ -803,7 +803,7 @@ public abstract class RDFStoreTest extends TestCase {
   }
 
   @Test
-  public void testStatementEquals() throws Exception {
+  public void testStatementEquals() {
     Statement st = vf.createStatement(picasso, RDF.TYPE, painter);
     assertEquals(st, vf.createStatement(picasso, RDF.TYPE, painter, context1));
     assertEquals(st, vf.createStatement(picasso, RDF.TYPE, painter, context2));
@@ -971,16 +971,13 @@ public abstract class RDFStoreTest extends TestCase {
               con2.evaluate(
                   tupleQuery.getTupleExpr(), null, EmptyBindingSet.getInstance(), false)));
       Runnable clearer =
-          new Runnable() {
-
-            public void run() {
-              try {
-                con.begin();
-                con.clear();
-                con.commit();
-              } catch (SailException e) {
-                throw new RuntimeException(e);
-              }
+          () -> {
+            try {
+              con.begin();
+              con.clear();
+              con.commit();
+            } catch (SailException e) {
+              throw new RuntimeException(e);
             }
           };
       Thread thread = new Thread(clearer);

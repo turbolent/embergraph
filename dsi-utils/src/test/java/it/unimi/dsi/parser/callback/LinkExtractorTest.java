@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 public class LinkExtractorTest extends TestCase {
 
-  public void testExtractor() throws IOException {
+  public void testExtractor() {
     //		char[] text = IOUtils.toCharArray( this.getClass().getResourceAsStream(
     // "LinkExtractorTest1.html" ), "UTF-8" );
     //

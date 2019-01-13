@@ -47,14 +47,14 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   // ************************************************************
 
   /** Invoked from {@link TestCase#setUp()} for each test in the suite. */
-  public void setUp(ProxyTestCase<S> testCase) throws Exception {
+  public void setUp(ProxyTestCase<S> testCase) {
 
     if (log.isInfoEnabled())
       log.info("\n\n================:BEGIN:" + testCase.getName() + ":BEGIN:====================");
   }
 
   /** Invoked from {@link TestCase#tearDown()} for each test in the suite. */
-  public void tearDown(ProxyTestCase<S> testCase) throws Exception {
+  public void tearDown(ProxyTestCase<S> testCase) {
 
     if (log.isInfoEnabled())
       log.info("\n================:END:" + testCase.getName() + ":END:====================\n");

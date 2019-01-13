@@ -122,8 +122,8 @@ public class TestMultiInlineURIHandlersSingleNamespace extends AbstractTripleSto
             "Position_010072F0000038090100000000D56C9E_WashSale"
           };
 
-      for (int i = 0; i < uris.length; i++) {
-        sb.add(uris[i], pred, obj);
+      for (EmbergraphURI uris1 : uris) {
+        sb.add(uris1, pred, obj);
       }
 
       sb.flush();

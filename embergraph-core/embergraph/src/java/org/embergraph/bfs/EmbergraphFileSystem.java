@@ -798,7 +798,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
       vec.add(tpv);
     }
 
-    return vec.toArray(new ITPV[vec.size()]);
+    return vec.toArray(new ITPV[0]);
   }
 
   /** @todo write tests. */

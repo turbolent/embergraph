@@ -128,7 +128,7 @@ public class CounterSetSelector implements ICounterSelector {
               + ", nskipped="
               + nskipped);
 
-    final ICounter[] a = counters.toArray(new ICounter[counters.size()]);
+    final ICounter[] a = counters.toArray(new ICounter[0]);
 
     return a;
   }

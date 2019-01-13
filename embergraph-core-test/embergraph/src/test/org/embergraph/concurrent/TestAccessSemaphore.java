@@ -44,16 +44,12 @@ public class TestAccessSemaphore {
 
     final Future<?> r1 =
         execService.submit(
-            new Runnable() {
-
-              @Override
-              public void run() {
-                try {
-                  final Access access = accessSemaphore.acquireExclusive();
-                  access.release();
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
-                }
+            () -> {
+              try {
+                final Access access = accessSemaphore.acquireExclusive();
+                access.release();
+              } catch (InterruptedException e) {
+                e.printStackTrace();
               }
             });
 
@@ -97,23 +93,19 @@ public class TestAccessSemaphore {
       for (int t = 0; t < NTASKS; t++) {
         final Future<?> r1 =
             execService.submit(
-                new Runnable() {
+                () -> {
+                  try {
+                    for (int i = 0; i < NACQUIRES; i++) {
+                      final int v = r.nextInt();
+                      final Access access =
+                          (v % 20) == 0
+                              ? accessSemaphore.acquireExclusive()
+                              : accessSemaphore.acquireShared();
 
-                  @Override
-                  public void run() {
-                    try {
-                      for (int i = 0; i < NACQUIRES; i++) {
-                        final int v = r.nextInt();
-                        final Access access =
-                            (v % 20) == 0
-                                ? accessSemaphore.acquireExclusive()
-                                : accessSemaphore.acquireShared();
-
-                        access.release();
-                      }
-                    } catch (InterruptedException e) {
-                      e.printStackTrace();
+                      access.release();
                     }
+                  } catch (InterruptedException e) {
+                    e.printStackTrace();
                   }
                 });
 

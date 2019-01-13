@@ -106,7 +106,7 @@ public class TestEmbergraphGraphEmbeddedRepository extends AbstractTestEmbergrap
   }
 
   @Override
-  protected EmbergraphGraph loadGraph(String file) throws Exception {
+  protected EmbergraphGraph loadGraph(String file) {
 
     return new EmbergraphGraphEmbedded(getOrCreateRepository(file));
   }

@@ -96,7 +96,7 @@ public abstract class CoreBaseBOp implements BOp {
       sb.append(t.getClass().getSimpleName());
       final Integer tid = (Integer) t.getProperty(Annotations.BOP_ID);
       if (tid != null) {
-        sb.append("[" + tid + "]");
+        sb.append("[").append(tid).append("]");
         //            } else {
         //                sb.append("@"+t.hashCode());
       }
@@ -115,7 +115,7 @@ public abstract class CoreBaseBOp implements BOp {
     //        sb.append(super.toString());
     final Integer bopId = (Integer) getProperty(Annotations.BOP_ID);
     if (bopId != null) {
-      sb.append("[" + bopId + "]");
+      sb.append("[").append(bopId).append("]");
     }
     sb.append("(");
     int nwritten = 0;

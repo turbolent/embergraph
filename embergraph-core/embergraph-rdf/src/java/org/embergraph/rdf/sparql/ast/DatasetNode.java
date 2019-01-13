@@ -207,12 +207,12 @@ public class DatasetNode extends QueryNodeBase {
     if (defaultGraphFilter != null) {
       sb.append("\n");
       sb.append(s);
-      sb.append("defaultGraphFilter=" + defaultGraphFilter);
+      sb.append("defaultGraphFilter=").append(defaultGraphFilter);
     }
     if (namedGraphFilter != null) {
       sb.append("\n");
       sb.append(s);
-      sb.append("namedGraphFilter=" + namedGraphFilter);
+      sb.append("namedGraphFilter=").append(namedGraphFilter);
     }
     //        if (getQueryHints() != null) {
     //            sb.append("\n");

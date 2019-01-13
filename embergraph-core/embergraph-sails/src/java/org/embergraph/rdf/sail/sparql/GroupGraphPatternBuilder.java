@@ -624,8 +624,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
   /** INCLUDE for a named subquery result set. */
   @Override
-  public final Void visit(final ASTNamedSubqueryInclude node, final Object data)
-      throws VisitorException {
+  public final Void visit(final ASTNamedSubqueryInclude node, final Object data) {
 
     final NamedSubqueryInclude includeNode = new NamedSubqueryInclude(node.getName());
 

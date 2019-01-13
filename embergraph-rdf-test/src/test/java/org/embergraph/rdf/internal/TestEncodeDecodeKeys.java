@@ -45,7 +45,6 @@ import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
@@ -408,12 +407,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
     final EpochExtension<EmbergraphValue> ext =
         new EpochExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(final URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             });
 
     final Random r = new Random();
@@ -447,12 +444,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
     final ColorsEnumExtension<EmbergraphValue> ext =
         new ColorsEnumExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             });
 
     final List<IV<?, ?>> a = new LinkedList<>();
@@ -478,12 +473,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
     final DateTimeExtension<EmbergraphValue> ext =
         new DateTimeExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             },
             TimeZone.getDefault());
 
@@ -535,12 +528,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
     final DateTimeExtension<EmbergraphValue> ext =
         new DateTimeExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             },
             TimeZone.getTimeZone("GMT"));
 
@@ -583,18 +574,16 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   }
 
   /** Unit test for round-trip of derived numeric values. */
-  public void test_encodeDecodeDerivedNumerics() throws Exception {
+  public void test_encodeDecodeDerivedNumerics() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
     final DerivedNumericsExtension<EmbergraphValue> ext =
         new DerivedNumericsExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             });
 
     final EmbergraphLiteral[] dt = {
@@ -630,7 +619,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   }
 
   /** Unit test for round-trip of GeoSpatial literals */
-  public void test_encodeDecodeGeoSpatialLiterals01() throws Exception {
+  public void test_encodeDecodeGeoSpatialLiterals01() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -642,12 +631,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     final GeoSpatialDatatypeConfiguration datatypeConfig = conf.getDatatypeConfigs().get(0);
     final GeoSpatialLiteralExtension<EmbergraphValue> ext =
         new GeoSpatialLiteralExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             },
             datatypeConfig);
 
@@ -684,7 +671,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   }
 
   /** Unit test for round-trip of GeoSpatial literals */
-  public void test_encodeDecodeGeoSpatialLiterals02() throws Exception {
+  public void test_encodeDecodeGeoSpatialLiterals02() {
 
     final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
@@ -696,12 +683,10 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     final GeoSpatialDatatypeConfiguration datatypeConfig = conf.getDatatypeConfigs().get(0);
     final GeoSpatialLiteralExtension<EmbergraphValue> ext =
         new GeoSpatialLiteralExtension<>(
-            new IDatatypeURIResolver() {
-              public EmbergraphURI resolve(URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(newTermId(VTE.URI));
+              return buri;
             },
             datatypeConfig);
 

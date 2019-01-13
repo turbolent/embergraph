@@ -46,7 +46,7 @@ public class JustificationWriter implements Callable<Long> {
    *
    * @return The elapsed time.
    */
-  public Long call() throws Exception {
+  public Long call() {
 
     final long begin = System.currentTimeMillis();
 

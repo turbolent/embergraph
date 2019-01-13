@@ -250,14 +250,14 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
 
       if (joinGroup.getContext() != null) {
 
-        sb.append(" [context=" + joinGroup.getContext() + "]");
+        sb.append(" [context=").append(joinGroup.getContext()).append("]");
       }
 
       if (joinGroup.getProperty(JoinGroupNode.Annotations.OPTIMIZER) != null) {
 
         // Show non-default value.
-        sb.append(
-            " [" + JoinGroupNode.Annotations.OPTIMIZER + "=" + joinGroup.getQueryOptimizer() + "]");
+        sb.append(" [" + JoinGroupNode.Annotations.OPTIMIZER + "=")
+            .append(joinGroup.getQueryOptimizer()).append("]");
       }
     }
 
@@ -267,12 +267,12 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
 
       final IVariable<?>[] joinVars = t.getJoinVars();
 
-      if (joinVars != null) sb.append(" [joinVars=" + Arrays.toString(joinVars) + "]");
+      if (joinVars != null) sb.append(" [joinVars=").append(Arrays.toString(joinVars)).append("]");
 
       final IVariable<?>[] projectInVars = t.getProjectInVars();
 
       if (projectInVars != null)
-        sb.append(" [projectInVars=" + Arrays.toString(projectInVars) + "]");
+        sb.append(" [projectInVars=").append(Arrays.toString(projectInVars)).append("]");
     }
 
     sb.append(" {");

@@ -1238,8 +1238,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       IndexMetadata metadata,
       final long commitTime,
       final boolean compactingMerge,
-      final boolean bufferNodes)
-      throws IOException {
+      final boolean bufferNodes) {
 
     if (outFile == null) throw new IllegalArgumentException();
 

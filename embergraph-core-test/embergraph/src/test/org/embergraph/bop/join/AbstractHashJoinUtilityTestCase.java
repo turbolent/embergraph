@@ -551,7 +551,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
         // Verify all expected solutions are in the hash index.
         assertSameSolutionsAnyOrder(
-            right.toArray(new IBindingSet[right.size()]), state.indexScan());
+            right.toArray(new IBindingSet[0]), state.indexScan());
       }
 
       /*
@@ -2421,9 +2421,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       final IVariable<?> p = Var.var("p1");
       final IVariable<?> o1 = Var.var("o1");
 
-      final List<IBindingSet> left = new LinkedList<>();
-
-      left.addAll(getServiceCallJoinSolutions());
+      final List<IBindingSet> left = new LinkedList<>(getServiceCallJoinSolutions());
 
       IBindingSet tmp;
 

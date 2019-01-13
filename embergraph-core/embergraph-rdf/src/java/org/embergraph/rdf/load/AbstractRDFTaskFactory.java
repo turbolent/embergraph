@@ -141,7 +141,7 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
     this.bufferFactory = bufferFactory;
   }
 
-  public T newTask(final String resource) throws Exception {
+  public T newTask(final String resource) {
 
     if (log.isInfoEnabled()) log.info("resource=" + resource);
 

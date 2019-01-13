@@ -91,7 +91,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
 
     final IVariableOrConstant<?> serviceRef = serviceNode.getServiceRef().getValueExpression();
 
-    if (serviceRef != null && serviceRef instanceof IVariable) {
+    if (serviceRef instanceof IVariable) {
       requiredBound.add((IVariable<?>) serviceRef);
     }
 

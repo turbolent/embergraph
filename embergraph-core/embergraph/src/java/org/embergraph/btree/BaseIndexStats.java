@@ -99,23 +99,20 @@ public class BaseIndexStats {
    */
   public String getHeaderRow() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("name");
-    sb.append('\t');
-    sb.append("indexType");
-    sb.append('\t');
-    sb.append("m");
-    sb.append('\t');
-    sb.append("height");
-    sb.append('\t');
-    sb.append("nnodes");
-    sb.append('\t');
-    sb.append("nleaves");
-    sb.append('\t');
-    sb.append("nentries");
-
-    return sb.toString();
+    String sb = "name"
+        + '\t'
+        + "indexType"
+        + '\t'
+        + "m"
+        + '\t'
+        + "height"
+        + '\t'
+        + "nnodes"
+        + '\t'
+        + "nleaves"
+        + '\t'
+        + "nentries";
+    return sb;
   }
 
   /*
@@ -127,23 +124,20 @@ public class BaseIndexStats {
 
     final BaseIndexStats stats = this;
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(name);
-    sb.append('\t');
-    sb.append(indexType);
-    sb.append('\t');
-    sb.append(stats.m);
-    sb.append('\t');
-    sb.append(stats.height);
-    sb.append('\t');
-    sb.append(stats.nnodes);
-    sb.append('\t');
-    sb.append(stats.nleaves);
-    sb.append('\t');
-    sb.append(stats.ntuples);
-
-    return sb.toString();
+    String sb = name
+        + '\t'
+        + indexType
+        + '\t'
+        + stats.m
+        + '\t'
+        + stats.height
+        + '\t'
+        + stats.nnodes
+        + '\t'
+        + stats.nleaves
+        + '\t'
+        + stats.ntuples;
+    return sb;
   }
 
   /*

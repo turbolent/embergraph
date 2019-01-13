@@ -33,7 +33,6 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
 import org.openrdf.model.Statement;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.GraphQueryResult;
-import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 /*

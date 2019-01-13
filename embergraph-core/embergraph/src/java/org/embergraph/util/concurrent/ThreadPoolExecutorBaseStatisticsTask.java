@@ -63,41 +63,25 @@ public class ThreadPoolExecutorBaseStatisticsTask implements Runnable {
     queueSizeTask =
         new MovingAverageTask(
             "queueSize",
-            new Callable<Integer>() {
-              public Integer call() {
-                return service.getQueue().size();
-              }
-            },
+            (Callable<Integer>) () -> service.getQueue().size(),
             w);
 
     activeCountTask =
         new MovingAverageTask(
             "activeCount",
-            new Callable<Integer>() {
-              public Integer call() {
-                return service.getActiveCount();
-              }
-            },
+            (Callable<Integer>) () -> service.getActiveCount(),
             w);
 
     queueLengthTask =
         new MovingAverageTask(
             "queueLength",
-            new Callable<Integer>() {
-              public Integer call() {
-                return service.getQueue().size() + service.getActiveCount();
-              }
-            },
+            (Callable<Integer>) () -> service.getQueue().size() + service.getActiveCount(),
             w);
 
     poolSizeTask =
         new MovingAverageTask(
             "poolSize",
-            new Callable<Integer>() {
-              public Integer call() {
-                return service.getPoolSize();
-              }
-            },
+            (Callable<Integer>) () -> service.getPoolSize(),
             w);
   }
 

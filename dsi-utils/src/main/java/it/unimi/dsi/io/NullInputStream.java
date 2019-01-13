@@ -71,8 +71,7 @@ public class NullInputStream extends MeasurableInputStream
     return 0;
   }
 
-  public void position(long position) throws IOException {
+  public void position(long position) {
     // TODO: we should specify the semantics out of bounds
-    return;
   }
 }

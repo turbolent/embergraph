@@ -91,9 +91,9 @@ public class PseudoRandom {
    */
   public PseudoRandom(final int range) {
     int m_mask = 0;
-    for (int m = 0; m < s_masks.length; m++) {
-      if (s_masks[m] > range) {
-        m_mask = s_masks[m];
+    for (int s_mask : s_masks) {
+      if (s_mask > range) {
+        m_mask = s_mask;
         break;
       }
     }

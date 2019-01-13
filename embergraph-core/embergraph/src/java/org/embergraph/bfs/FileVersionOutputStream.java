@@ -107,7 +107,7 @@ public class FileVersionOutputStream extends OutputStream {
    *
    * @throws IOException
    */
-  public void flush() throws IOException {
+  public void flush() {
 
     if (len > 0) {
 

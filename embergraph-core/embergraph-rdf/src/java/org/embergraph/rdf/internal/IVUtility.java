@@ -66,7 +66,6 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
-import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
@@ -245,7 +244,7 @@ public class IVUtility {
       off += iv == null ? TermId.NullIV.byteLength() : iv.byteLength();
     }
 
-    return ivs.toArray(new IV[ivs.size()]);
+    return ivs.toArray(new IV[0]);
   }
 
   /*

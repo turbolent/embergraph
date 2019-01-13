@@ -65,7 +65,7 @@ public class TestConditionalRoutingOp extends TestCase2 {
 
   List<IBindingSet> data = null;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     setUpData();
   }
@@ -109,7 +109,7 @@ public class TestConditionalRoutingOp extends TestCase2 {
     }
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     // clear reference.
     data = null;
@@ -121,7 +121,7 @@ public class TestConditionalRoutingOp extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_conditionalRouting() throws InterruptedException, ExecutionException {
+  public void test_conditionalRouting() {
 
     final Var<?> x = Var.var("x");
 

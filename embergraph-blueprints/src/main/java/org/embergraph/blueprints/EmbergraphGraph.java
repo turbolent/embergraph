@@ -728,16 +728,16 @@ public abstract class EmbergraphGraph implements Graph {
 
     final StringBuilder sb = new StringBuilder();
     sb.append("construct { ?from ?edge ?to . } where {\n");
-    sb.append("  ?edge <" + TYPE + "> <" + EDGE + "> .\n");
+    sb.append("  ?edge <").append(TYPE).append("> <").append(EDGE).append("> .\n");
     sb.append("  ?from ?edge ?to .\n");
     if (labels != null && labels.length > 0) {
       if (labels.length == 1) {
-        sb.append("  ?edge <" + LABEL + "> \"").append(labels[0]).append("\" .\n");
+        sb.append("  ?edge <").append(LABEL).append("> \"").append(labels[0]).append("\" .\n");
       } else {
-        sb.append("  ?edge <" + LABEL + "> ?label .\n");
+        sb.append("  ?edge <").append(LABEL).append("> ?label .\n");
         sb.append("  filter(?label in (");
         for (String label : labels) {
-          sb.append("\"" + label + "\", ");
+          sb.append("\"").append(label).append("\", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append(")) .\n");
@@ -843,13 +843,10 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final StringBuilder sb = new StringBuilder();
-      sb.append("construct { ?from ?edge ?to . } where {\n");
-      sb.append("  ?edge <" + p + "> " + o + " .\n");
-      sb.append("  ?from ?edge ?to .\n");
-      sb.append("}");
-
-      final String queryStr = sb.toString();
+      final String queryStr = "construct { ?from ?edge ?to . } where {\n"
+          + "  ?edge <" + p + "> " + o + " .\n"
+          + "  ?from ?edge ?to .\n"
+          + "}";
 
       return getEdges(queryStr);
 
@@ -1511,7 +1508,7 @@ public abstract class EmbergraphGraph implements Graph {
   }
 
   /** Update graph using SPARQL Update. */
-  public void update(final String queryStr, final String extQueryId) throws Exception {
+  public void update(final String queryStr, final String extQueryId) {
 
     try {
 
@@ -1566,7 +1563,7 @@ public abstract class EmbergraphGraph implements Graph {
       final StringBuilder vc = new StringBuilder();
       vc.append("    values (?s) { \n");
       for (URI id : ids) {
-        vc.append("        (<" + id + ">) \n");
+        vc.append("        (<").append(id).append(">) \n");
       }
       vc.append("    } \n");
       sb.insert(sb.length() - 1, vc.toString());

@@ -84,7 +84,7 @@ public class TestThickAsynchronousIterator extends TestCase2 {
   protected void assertSameIterator(
       final String[] expected, final IAsynchronousIterator<String> actual) {
 
-    for (int i = 0; i < expected.length; i++) {
+    for (String s : expected) {
 
       assertTrue(actual.hasNext());
 
@@ -96,7 +96,7 @@ public class TestThickAsynchronousIterator extends TestCase2 {
 
       final String val = actual.next();
 
-      assertEquals(expected[i], val);
+      assertEquals(s, val);
     }
 
     assertFalse(actual.hasNext());

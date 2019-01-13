@@ -146,7 +146,7 @@ public class TestTicket276 extends QuadsTestCase {
   }
 
   private void addData(final RepositoryConnection conn)
-      throws IOException, RDFParseException, RepositoryException, RDFHandlerException {
+      throws IOException, RDFParseException, RDFHandlerException {
 
     final RDFParser rdfParser = Rio.createParser(RDFFormat.NTRIPLES, conn.getValueFactory());
     rdfParser.setVerifyData(true);

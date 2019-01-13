@@ -42,13 +42,7 @@ public class QueueSizeMovingAverageTask extends MovingAverageTask implements Run
 
     super(
         name,
-        new Callable<Integer>() {
-
-          public Integer call() {
-
-            return queue.size();
-          }
-        },
+        (Callable<Integer>) () -> queue.size(),
         w);
   }
 }

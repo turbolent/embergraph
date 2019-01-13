@@ -121,7 +121,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * </pre>
    */
   public void test_triple_ref_pattern_var_const_const()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -191,7 +191,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * of this are explicitly ruled out by the extension).
    */
   public void test_triple_ref_pattern_blankNodesAreNotAllowed_subjectPosition()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -214,7 +214,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * of this are explicitly ruled out by the extension).
    */
   public void test_triple_ref_pattern_blankNodesAreNotAllowed_objectPosition()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -257,7 +257,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * {@link StatementPatternNode}.
    */
   public void test_triple_ref_pattern_no_vars()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -347,7 +347,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * </pre>
    */
   public void test_triple_ref_pattern_nested_in_subject_position()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -429,7 +429,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * </pre>
    */
   public void test_triple_ref_pattern_nested_in_object_position()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -515,7 +515,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * must exist in the data in order for the query to succeed.
    */
   public void test_triple_ref_pattern_is_constant()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -598,7 +598,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * must exist in the data in order for the query to succeed.
    */
   public void test_triple_ref_pattern_all_vars()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     if (!EmbergraphStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
     return;
@@ -671,7 +671,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * must exist in the data in order for the query to succeed.
    */
   public void test_triple_ref_pattern_all_vars2()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n" + "select ?a {\n" + "  <<?a ?b ?c>> ?d ?e .\n" + "}";
@@ -742,7 +742,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    * must exist in the data in order for the query to succeed.
    */
   public void test_triple_ref_pattern_all_vars_with_explicit_bind()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "prefix : <http://example.com/>\n"
@@ -809,7 +809,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
    *     <p>TODO Write DELETE DATA test case for RDR as well.
    */
   public void test_update_insert_data_RDR()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX : <http://example/>\n"

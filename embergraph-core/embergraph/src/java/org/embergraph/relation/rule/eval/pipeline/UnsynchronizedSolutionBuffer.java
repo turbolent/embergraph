@@ -64,11 +64,9 @@ class UnsynchronizedSolutionBuffer<E extends IBindingSet> extends Unsynchronized
 
     int naccepted = 0;
 
-    for (int i = 0; i < chunk.length; i++) {
+    for (final IBindingSet bindingSet : chunk) {
 
       // an accepted binding set.
-      final IBindingSet bindingSet = chunk[i];
-
       /*
        * Note: The [joinNexus] MUST have access to the global and
        * mutable index views. For the federation, this means that it

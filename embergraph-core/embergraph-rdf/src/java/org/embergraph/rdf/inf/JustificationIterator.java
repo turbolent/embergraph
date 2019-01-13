@@ -238,7 +238,7 @@ public class JustificationIterator implements IJustificationIterator {
      *
      * @return <code>null</code>.
      */
-    public Object call() throws Exception {
+    public Object call() {
 
       while (src.hasNext()) {
 

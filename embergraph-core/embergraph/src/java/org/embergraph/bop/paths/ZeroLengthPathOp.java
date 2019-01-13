@@ -115,7 +115,7 @@ public class ZeroLengthPathOp extends PipelineOp {
       }
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       // source.
       final ICloseableIterator<IBindingSet[]> source = context.getSource();
@@ -154,9 +154,9 @@ public class ZeroLengthPathOp extends PipelineOp {
       final IBindingSet[] chunkOut = new IBindingSet[chunk.length];
 
       int j = 0;
-      for (int i = 0; i < chunk.length; i++) {
+      for (IBindingSet iBindingSet : chunk) {
 
-        final IBindingSet bs = chunk[i].clone();
+        final IBindingSet bs = iBindingSet.clone();
 
         final Gearing gearing = getGearing(bs);
 

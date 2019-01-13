@@ -82,7 +82,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
   //    }
 
   /** Close the source iterator. */
-  public void close() throws IOException {
+  public void close() {
 
     if (open) {
 
@@ -106,7 +106,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
    * Return the next {@link IRemoteChunk} from the source iterator. If it is exhausted then return
    * an {@link IRemoteChunk} which indicates that no more results are available.
    */
-  public IRemoteChunk<E> nextChunk() throws IOException {
+  public IRemoteChunk<E> nextChunk() {
 
     final IRemoteChunk<E> chunk;
 

@@ -57,7 +57,7 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
 
   /** https://sourceforge.net/apps/trac/bigdata/ticket/416 */
   @SuppressWarnings("rawtypes")
-  public void test_ticket416() throws Exception {
+  public void test_ticket416() {
 
     /*
      * Note: DO NOT share structures in this test!!!!

@@ -56,14 +56,11 @@ public class TestFileSystemScanner extends TestCase2 {
     final AbstractResourceScanner<File> scanner =
         FileSystemScanner.newFactory(
                 new File("embergraph/src/java/org/embergraph/service/ndx/pipeline"),
-                new FilenameFilter() {
-
-                  public boolean accept(File dir, String name) {
-                    if (log.isInfoEnabled())
-                      log.info("Considering: " + dir + File.separator + name);
-                    return name.endsWith(".java");
-                  }
-                })
+            (dir, name) -> {
+              if (log.isInfoEnabled())
+                log.info("Considering: " + dir + File.separator + name);
+              return name.endsWith(".java");
+            })
             .newScanner(buffer);
 
     /*

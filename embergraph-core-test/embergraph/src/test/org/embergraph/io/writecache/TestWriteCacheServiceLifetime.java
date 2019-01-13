@@ -79,30 +79,26 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
       final Collection<Callable<Long>> tasks = new HashSet<>();
       for (int i = 0; i < nclients; i++) {
         tasks.add(
-            new Callable<Long>() {
-              public Long call() throws Exception {
-                try {
-                  for (int i = 0; i < nwrites; i++) {
-                    config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
-                    config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
-                    Thread.sleep(20); // give WriteTask chance to catch up
-                  }
-                } catch (Throwable t) {
-                  t.printStackTrace();
+            () -> {
+              try {
+                for (int i1 = 0; i1 < nwrites; i1++) {
+                  config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
+                  config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
+                  Thread.sleep(20); // give WriteTask chance to catch up
                 }
-
-                return null;
+              } catch (Throwable t) {
+                t.printStackTrace();
               }
+
+              return null;
             });
       }
       tasks.add(
-          new Callable<Long>() {
-            public Long call() throws Exception {
-              Thread.sleep(5000);
-              config.service.close();
+          () -> {
+            Thread.sleep(5000);
+            config.service.close();
 
-              return null;
-            }
+            return null;
           });
 
       executorService.invokeAll(tasks, 20, TimeUnit.SECONDS);

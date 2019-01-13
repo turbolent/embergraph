@@ -74,9 +74,9 @@ public class PivotTable {
      * virtues of the linked hash set.
      */
     vcols = new LinkedHashSet<>();
-    for (int i = 0; i < a.length; i++) {
+    for (ICounter iCounter : a) {
 
-      vcols.add(a[i].getName());
+      vcols.add(iCounter.getName());
     }
 
     if (log.isInfoEnabled()) log.info("vnames: " + vcols);
@@ -238,7 +238,6 @@ public class PivotTable {
         if (ndefined == 0) {
 
           // no data for this row.
-          continue;
         }
 
         // @todo else output a PivotRow.

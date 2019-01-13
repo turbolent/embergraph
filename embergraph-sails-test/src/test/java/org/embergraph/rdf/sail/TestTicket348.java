@@ -81,8 +81,7 @@ public class TestTicket348 extends QuadsTestCase {
   }
 
   private void executeTest(final SailRepository repo)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, RDFHandlerException, IOException {
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
     try {
       repo.initialize();
       final RepositoryConnection conn = repo.getConnection();

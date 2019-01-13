@@ -49,7 +49,6 @@ final class CutoffLimitHint extends AbstractLongQueryHint {
 
       _setQueryHint(context, scope, op, getName(), value);
 
-      return;
     }
   }
 }

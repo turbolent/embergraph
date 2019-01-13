@@ -159,8 +159,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
   }
 
   /** Handle a simple function without any arguments. */
-  protected FunctionNode noneary(final SimpleNode node, final URI functionURI)
-      throws VisitorException {
+  protected FunctionNode noneary(final SimpleNode node, final URI functionURI) {
 
     return new FunctionNode(functionURI, null /* scalarValues */);
   }

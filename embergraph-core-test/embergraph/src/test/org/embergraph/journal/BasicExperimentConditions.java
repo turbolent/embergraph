@@ -38,8 +38,7 @@ public class BasicExperimentConditions extends ExperimentDriver {
    * also sets up {@link Condition}s for {@link BufferMode}s that are backed by disk where {@link
    * Options#FORCE_ON_COMMIT} is set to {@link ForceEnum#No}
    */
-  public static List<Condition> getBasicConditions(Map<String, String> properties, NV[] params)
-      throws Exception {
+  public static List<Condition> getBasicConditions(Map<String, String> properties, NV[] params) {
 
     List<Condition> conditions = new LinkedList<>();
 

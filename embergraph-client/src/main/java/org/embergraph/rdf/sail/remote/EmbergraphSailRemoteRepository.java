@@ -171,7 +171,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
   }
 
   @Override
-  public EmbergraphSailRemoteRepositoryConnection getConnection() throws RepositoryException {
+  public EmbergraphSailRemoteRepositoryConnection getConnection() {
 
     return new EmbergraphSailRemoteRepositoryConnection(this);
   }
@@ -187,7 +187,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
   }
 
   @Override
-  public boolean isWritable() throws RepositoryException {
+  public boolean isWritable() {
     return open;
   }
 

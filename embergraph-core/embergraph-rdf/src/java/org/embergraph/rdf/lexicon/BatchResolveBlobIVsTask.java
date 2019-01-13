@@ -58,7 +58,7 @@ class BatchResolveBlobIVsTask implements Callable<Void> {
     this.MAX_CHUNK = chunkSize;
   }
 
-  public Void call() throws Exception {
+  public Void call() {
 
     final int numNotFound = ivs.size();
 

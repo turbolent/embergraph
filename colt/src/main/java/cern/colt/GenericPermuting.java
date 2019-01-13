@@ -93,7 +93,7 @@ package cern.colt;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 10-Oct-99
  */
-public class GenericPermuting extends Object {
+public class GenericPermuting {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected GenericPermuting() {}
   /*
@@ -180,7 +180,8 @@ public class GenericPermuting extends Object {
       io = io % fac;
       permutation[N - M - 1] = tmp[in - 1];
 
-      for (int j = in; j <= M; j++) tmp[j - 1] = tmp[j];
+      if (M + 1 - in >= 0)
+        System.arraycopy(tmp, in, tmp, in - 1, M + 1 - in);
     }
     if (N > 0) permutation[N - 1] = tmp[0];
 

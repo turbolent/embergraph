@@ -185,7 +185,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
       }
 
       @Override
-      public void handleStatement(final Statement stmt) throws RDFHandlerException {
+      public void handleStatement(final Statement stmt) {
 
         final Resource s = stmt.getSubject();
         final URI p = stmt.getPredicate();

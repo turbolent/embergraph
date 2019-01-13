@@ -106,12 +106,12 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
 
     final StringBuilder strBuf = new StringBuilder(buf.length * 2);
 
-    for (int i = 0; i < buf.length; i++) {
+    for (byte b : buf) {
 
-      strBuf.append(hexChar[(buf[i] & 0xf0) >>> 4]); // fill left with
+      strBuf.append(hexChar[(b & 0xf0) >>> 4]); // fill left with
 
       // zero bits
-      strBuf.append(hexChar[buf[i] & 0x0f]);
+      strBuf.append(hexChar[b & 0x0f]);
     }
 
     return strBuf.toString();
@@ -174,9 +174,8 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-    sb.append(op());
-    sb.append("(").append(get(0)).append(")");
-    return sb.toString();
+    String sb = String.valueOf(op())
+        + "(" + get(0) + ")";
+    return sb;
   }
 }

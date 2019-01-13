@@ -1041,9 +1041,9 @@ public abstract class WriteCache implements IWriteCache {
     if (tpos == 0) {
       tpos = buf.limit();
     }
-    str.append(prefix + ", length: " + tpos + " : ");
+    str.append(prefix).append(", length: ").append(tpos).append(" : ");
     for (int tb = 0; tb < tpos && tb < 20; tb++) {
-      str.append(buf.get(tb) + ",");
+      str.append(buf.get(tb)).append(",");
     }
     // log.trace(str.toString());
     return str.toString();
@@ -1258,7 +1258,7 @@ public abstract class WriteCache implements IWriteCache {
       final long firstOffset,
       final Map<Long, RecordMetadata> recordMap,
       final long nanos)
-      throws InterruptedException, TimeoutException, IOException;
+      throws InterruptedException, IOException;
 
   /*
    * {@inheritDoc}.
@@ -1914,15 +1914,14 @@ public abstract class WriteCache implements IWriteCache {
 
     @Override
     protected boolean writeOnChannel(
-        ByteBuffer buf, long firstOffset, Map<Long, RecordMetadata> recordMap, long nanos)
-        throws InterruptedException, TimeoutException, IOException {
+        ByteBuffer buf, long firstOffset, Map<Long, RecordMetadata> recordMap, long nanos) {
       throw new UnsupportedOperationException();
     }
 
     /** Overide clearAddrMap for read cache to always remove from the record map. */
     @Override
     /* public */ boolean clearAddrMap(final long addr, final int latchedAddr)
-        throws IllegalStateException, InterruptedException {
+        throws IllegalStateException {
 
       // Remove record from this cache.
       final RecordMetadata removed = recordMap.remove(addr);
@@ -1950,8 +1949,7 @@ public abstract class WriteCache implements IWriteCache {
         final ByteBuffer data,
         final int chk,
         boolean writeChecksum,
-        final int latchedAddr)
-        throws InterruptedException {
+        final int latchedAddr) {
 
       throw new UnsupportedOperationException();
     }

@@ -112,7 +112,7 @@ public class TestReceiveBuffer extends TestCase3 {
             }
 
             @Override
-            protected File getResource(UUID uuid) throws Exception {
+            protected File getResource(UUID uuid) {
               // No such file.
               return null;
             }
@@ -194,7 +194,7 @@ public class TestReceiveBuffer extends TestCase3 {
           }
 
           @Override
-          protected File getResource(UUID uuid) throws Exception {
+          protected File getResource(UUID uuid) {
             // No such resource.
             return null;
           }
@@ -229,30 +229,28 @@ public class TestReceiveBuffer extends TestCase3 {
       for (int i = 0; i < ntasks; i++) {
 
         tasks.add(
-            new Callable<Void>() {
-              public Void call() throws Exception {
-                final UUID uuid = uuids[r.nextInt(nbuffers)];
-                final ByteBuffer expected = buffers.get(uuid).buffer();
+            () -> {
+              final UUID uuid = uuids[r.nextInt(nbuffers)];
+              final ByteBuffer expected = buffers.get(uuid).buffer();
 
-                final IBufferAccess tmp = DirectBufferPool.INSTANCE.acquire();
-                try {
+              final IBufferAccess tmp = DirectBufferPool.INSTANCE.acquire();
+              try {
 
-                  tmp.buffer().clear();
+                tmp.buffer().clear();
 
-                  final ByteBuffer actual =
-                      new ReadBufferTask(service.getAddr(), uuid, tmp.buffer()).call();
+                final ByteBuffer actual =
+                    new ReadBufferTask(service.getAddr(), uuid, tmp.buffer()).call();
 
-                  /*
-                   * Verify that the returned buffer has the same data
-                   * (the position of the data in the buffer may be
-                   * different).
-                   */
-                  assertEquals(expected, actual);
-                } finally {
-                  tmp.release();
-                }
-                return null;
+                /*
+                 * Verify that the returned buffer has the same data
+                 * (the position of the data in the buffer may be
+                 * different).
+                 */
+                assertEquals(expected, actual);
+              } finally {
+                tmp.release();
               }
+              return null;
             });
       }
 

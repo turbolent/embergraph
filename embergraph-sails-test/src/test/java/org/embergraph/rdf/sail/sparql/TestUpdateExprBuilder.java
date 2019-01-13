@@ -86,7 +86,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * load <http://www.embergraph.org/data>
    * </pre>
    */
-  public void test_load_graph() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_load_graph() throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load <http://www.embergraph.org/data>";
@@ -116,7 +116,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_silent_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load silent <http://www.embergraph.org/data>";
@@ -148,7 +148,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_silent_graph_into_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql =
@@ -177,7 +177,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
   }
 
   /** Unit test for a sequence of simple LOAD operations */
-  public void test_load_graphs() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_load_graphs() throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql =
@@ -230,7 +230,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_verifyData_true()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load verifyData=true <http://www.embergraph.org/data>";
@@ -264,7 +264,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_verifyData_false()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load verifyData=false <http://www.embergraph.org/data>";
@@ -298,7 +298,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_stopAtFirstError_true()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load stopAtFirstError=true <http://www.embergraph.org/data>";
@@ -332,7 +332,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_stopAtFirstError_false()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load stopAtFirstError=false <http://www.embergraph.org/data>";
@@ -366,7 +366,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_preserveBNodeIDs_true()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load preserveBNodeIDs=true <http://www.embergraph.org/data>";
@@ -400,7 +400,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_preserveBNodeIDs_false()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load preserveBNodeIDs=false <http://www.embergraph.org/data>";
@@ -434,7 +434,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_datatypeHandling_ignore()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load datatypeHandling=ignore <http://www.embergraph.org/data>";
@@ -468,7 +468,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_datatypeHandling_verify()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load datatypeHandling=verify <http://www.embergraph.org/data>";
@@ -502,7 +502,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_datatypeHandling_normalize()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql = "load datatypeHandling=normalize <http://www.embergraph.org/data>";
@@ -536,7 +536,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_load_nonStandard_multipleOptions()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // LOAD ( SILENT )? IRIref_from ( INTO GRAPH IRIref_to )?
     final String sparql =
@@ -572,7 +572,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * clear graph <http://www.embergraph.org/data>
    * </pre>
    */
-  public void test_clear_graph() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_graph() throws MalformedQueryException, TokenMgrError {
 
     // CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "clear graph <http://www.embergraph.org/data>";
@@ -599,7 +599,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * clear default
    * </pre>
    */
-  public void test_clear_default() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_default() throws MalformedQueryException, TokenMgrError {
 
     // CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "clear default";
@@ -625,7 +625,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * clear named
    * </pre>
    */
-  public void test_clear_named() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_named() throws MalformedQueryException, TokenMgrError {
 
     // CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "clear named";
@@ -651,7 +651,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * clear all
    * </pre>
    */
-  public void test_clear_all() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_all() throws MalformedQueryException, TokenMgrError {
 
     // CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "clear all";
@@ -680,7 +680,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_clear_silent_all()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // clear  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "clear silent all";
@@ -710,7 +710,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * drop graph <http://www.embergraph.org/data>
    * </pre>
    */
-  public void test_drop_graph() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_graph() throws MalformedQueryException, TokenMgrError {
 
     // drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "drop graph <http://www.embergraph.org/data>";
@@ -737,7 +737,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * drop default
    * </pre>
    */
-  public void test_drop_default() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_default() throws MalformedQueryException, TokenMgrError {
 
     // drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "drop default";
@@ -763,7 +763,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * drop named
    * </pre>
    */
-  public void test_drop_named() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_named() throws MalformedQueryException, TokenMgrError {
 
     // drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "drop named";
@@ -789,7 +789,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * drop all
    * </pre>
    */
-  public void test_drop_all() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_all() throws MalformedQueryException, TokenMgrError {
 
     // drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "drop all";
@@ -817,7 +817,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * drop silent all
    * </pre>
    */
-  public void test_drop_silent_all() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_silent_all() throws MalformedQueryException, TokenMgrError {
 
     // drop  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
     final String sparql = "drop silent all";
@@ -847,7 +847,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * create graph <http://www.embergraph.org/graph1>
    * </pre>
    */
-  public void test_create() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_create() throws MalformedQueryException, TokenMgrError {
 
     // CREATE ( SILENT )? GRAPH IRIref
     final String sparql = "create graph <http://www.embergraph.org/graph1>";
@@ -874,7 +874,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * create silent graph <http://www.embergraph.org/graph1>
    * </pre>
    */
-  public void test_create_silent() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_create_silent() throws MalformedQueryException, TokenMgrError {
 
     // CREATE ( SILENT )? GRAPH IRIref
     final String sparql = "create silent graph <http://www.embergraph.org/graph1>";
@@ -904,7 +904,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_copy_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -936,7 +936,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_copy_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -970,7 +970,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_copy_graph_to_default()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "copy silent <http://www.embergraph.org/graph1> to default";
@@ -1000,7 +1000,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_copy_default_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "copy silent default to <http://www.embergraph.org/graph2>";
@@ -1030,7 +1030,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_move_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -1062,7 +1062,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_move_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -1096,7 +1096,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_move_graph_to_default()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "move silent <http://www.embergraph.org/graph1> to default";
@@ -1126,7 +1126,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_move_default_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "move silent default to <http://www.embergraph.org/graph2>";
@@ -1156,7 +1156,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_add_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -1188,7 +1188,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_add_graph_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql =
@@ -1222,7 +1222,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_add_graph_to_default()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "add silent <http://www.embergraph.org/graph1> to default";
@@ -1252,7 +1252,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_silent_add_default_to_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // COPY ( SILENT )? ( ( GRAPH )? IRIref_from | DEFAULT) TO ( ( GRAPH )? IRIref_to | DEFAULT )
     final String sparql = "add silent default to <http://www.embergraph.org/graph2>";
@@ -1287,7 +1287,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   //    @SuppressWarnings("rawtypes")
-  public void test_insert_data() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_insert_data() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1339,7 +1339,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   //    @SuppressWarnings("rawtypes")
   public void test_insert_data_quads()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1434,7 +1434,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   //    @SuppressWarnings("rawtypes")
   public void test_insert_data_triples_then_quads()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1478,7 +1478,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
   }
 
   public void test_insert_data_triples_then_quads2()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1510,7 +1510,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   //    @SuppressWarnings("rawtypes")
   public void test_insert_data_quads_then_triples()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1568,7 +1568,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   //    @SuppressWarnings("rawtypes")
   public void test_insert_data_triples_quads_triples()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1630,7 +1630,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_data_quads_insert_data_quads()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
@@ -1714,7 +1714,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_00()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -1822,7 +1822,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -1936,7 +1936,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2058,7 +2058,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_03()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2180,7 +2180,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_04()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2313,7 +2313,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_10()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2455,7 +2455,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_11()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2586,7 +2586,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_20()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
@@ -2659,7 +2659,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_21()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
@@ -2747,7 +2747,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * DELETE WHERE {?x foaf:name ?y }
    * </pre>
    */
-  public void test_delete_where_01() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_delete_where_01() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "DELETE WHERE {?x <http://xmlns.com/foaf/0.1/name> ?y }";
 
@@ -2786,7 +2786,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/568 (DELETE WHERE fails with Java
    *     AssertionError)
    */
-  public void test_delete_where_02() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_delete_where_02() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "DELETE WHERE { GRAPH ?g { ?x <http://xmlns.com/foaf/0.1/name> ?y } }";
 
@@ -2836,7 +2836,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    *     handling of blank nodes </a>
    */
   public void test_delete_insert_blankNodes01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2869,7 +2869,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    *     handling of blank nodes </a>
    */
   public void test_delete_insert_blankNodes02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -2900,7 +2900,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * </pre>
    */
   public void test_delete_where_without_shortcut_02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "DELETE {?x <http://xmlns.com/foaf/0.1/name> ?y}\n"
@@ -2965,7 +2965,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_30()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -3131,7 +3131,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert_31()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -3297,7 +3297,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    */
   @SuppressWarnings("rawtypes")
   public void test_datasets_isolation()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
@@ -3474,7 +3474,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/562" > Sub-select in INSERT
    *     cause NPE in UpdateExprBuilder </a>
    */
-  public void test_ticket_562() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_ticket_562() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "INSERT {\n"

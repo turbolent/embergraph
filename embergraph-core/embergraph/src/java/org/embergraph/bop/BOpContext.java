@@ -39,7 +39,6 @@ import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
@@ -1001,9 +1000,9 @@ public class BOpContext<E> extends BOpContextBase {
         final IVariable<?> var = (IVariable<?>) e.getKey();
 
         boolean found = false;
-        for (int i = 0; i < varsToKeep.length; i++) {
+        for (IVariable iVariable : varsToKeep) {
 
-          if (var == varsToKeep[i]) {
+          if (var == iVariable) {
 
             found = true;
 

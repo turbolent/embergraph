@@ -234,8 +234,8 @@ public class ASTDeferredIVResolution {
     {
       final ASTQueryContainer qc = (ASTQueryContainer) ast.getProperty(Annotations.PARSE_TREE);
       if (qc != null && qc.getOperation() != null) {
-        final List<ASTDatasetClause> dcList = new ArrayList<>();
-        dcList.addAll(qc.getOperation().getDatasetClauseList());
+        final List<ASTDatasetClause> dcList = new ArrayList<>(
+            qc.getOperation().getDatasetClauseList());
         dcLists.put(queryRoot, dcList);
       }
     }
@@ -337,8 +337,7 @@ public class ASTDeferredIVResolution {
     final Map<IDataSetNode, List<ASTDatasetClause>> dcLists = new LinkedHashMap<>();
     for (final Update update : qc.getChildren()) {
       if (update instanceof IDataSetNode) {
-        final List<ASTDatasetClause> dcList = new ArrayList();
-        dcList.addAll(update.getDatasetClauses());
+        final List<ASTDatasetClause> dcList = new ArrayList(update.getDatasetClauses());
         dcLists.put((IDataSetNode) update, dcList);
       }
     }
@@ -472,8 +471,7 @@ public class ASTDeferredIVResolution {
    * @throws MalformedQueryException
    */
   private void resolveDataset(
-      final AbstractTripleStore store, final Map<IDataSetNode, List<ASTDatasetClause>> dcLists)
-      throws MalformedQueryException {
+      final AbstractTripleStore store, final Map<IDataSetNode, List<ASTDatasetClause>> dcLists) {
 
     if (dcLists == null) {
       return;
@@ -508,89 +506,83 @@ public class ASTDeferredIVResolution {
           // scope for defaultGraphs and namedGraphs.
           defer(
               (EmbergraphURI) astIri.getRDFValue(),
-              new Handler() {
+              newIV -> {
 
-                @Override
-                public void handle(final IV newIV) {
+                final EmbergraphValue uri = newIV.getValue();
 
-                  final EmbergraphValue uri = newIV.getValue();
+                if (dc.isVirtual()) {
 
-                  if (dc.isVirtual()) {
+                  if (uri.getIV().isNullIV()) {
+                    /*
+                     * A virtual graph was referenced which is not
+                     * declared in the database. This virtual graph will
+                     * not have any members.
+                     */
+                    throw new RuntimeException("Not declared: " + uri);
+                  }
 
-                    if (uri.getIV().isNullIV()) {
-                      /*
-                       * A virtual graph was referenced which is not
-                       * declared in the database. This virtual graph will
-                       * not have any members.
-                       */
-                      throw new RuntimeException("Not declared: " + uri);
+                  final IV virtualGraph = resolvedValues.get(BD.VIRTUAL_GRAPH);
+
+                  if (virtualGraph == null) {
+
+                    throw new RuntimeException("Not declared: " + BD.VIRTUAL_GRAPH);
+                  }
+
+                  final IAccessPath<ISPO> ap =
+                      store
+                          .getSPORelation()
+                          .getAccessPath(
+                              uri.getIV(), // the virtual graph "name"
+                              virtualGraph,
+                              null /* o */,
+                              null /* c */);
+
+                  final Iterator<ISPO> itr = ap.iterator();
+
+                  while (itr.hasNext()) {
+
+                    final IV memberGraph = itr.next().o();
+                    final EmbergraphValue value = store.getLexiconRelation().getTerm(memberGraph);
+                    memberGraph.setValue(value);
+
+                    if (dc.isNamed()) {
+
+                      namedGraphs.add(memberGraph);
+
+                    } else {
+
+                      defaultGraphs.add(memberGraph);
                     }
+                  }
 
-                    final IV virtualGraph = resolvedValues.get(BD.VIRTUAL_GRAPH);
+                } else {
 
-                    if (virtualGraph == null) {
+                  if (uri.getIV() != null) {
 
-                      throw new RuntimeException("Not declared: " + BD.VIRTUAL_GRAPH);
-                    }
+                    if (dc.isNamed()) {
 
-                    final IAccessPath<ISPO> ap =
-                        store
-                            .getSPORelation()
-                            .getAccessPath(
-                                uri.getIV(), // the virtual graph "name"
-                                virtualGraph,
-                                null /* o */,
-                                null /* c */);
+                      namedGraphs.add(uri.getIV());
 
-                    final Iterator<ISPO> itr = ap.iterator();
+                    } else {
 
-                    while (itr.hasNext()) {
-
-                      final IV memberGraph = itr.next().o();
-                      final EmbergraphValue value = store.getLexiconRelation().getTerm(memberGraph);
-                      memberGraph.setValue(value);
-
-                      if (dc.isNamed()) {
-
-                        namedGraphs.add(memberGraph);
-
-                      } else {
-
-                        defaultGraphs.add(memberGraph);
-                      }
-                    }
-
-                  } else {
-
-                    if (uri.getIV() != null) {
-
-                      if (dc.isNamed()) {
-
-                        namedGraphs.add(uri.getIV());
-
-                      } else {
-
-                        defaultGraphs.add(uri.getIV());
-                      }
+                      defaultGraphs.add(uri.getIV());
                     }
                   }
                 }
               });
           deferRunnable(
-              new Runnable() {
-                public void run() {
-                  if (!defaultGraphs.isEmpty() || !namedGraphs.isEmpty()) {
+              () -> {
+                if (!defaultGraphs.isEmpty() || !namedGraphs.isEmpty()) {
 
-                    // Note: Cast required to shut up the compiler.
-                    final DatasetNode datasetNode =
-                        new DatasetNode((Set) defaultGraphs, (Set) namedGraphs, update);
+                  // Note: Cast required to shut up the compiler.
+                  final DatasetNode datasetNode =
+                      new DatasetNode((Set) defaultGraphs, (Set) namedGraphs, update);
 
-                    /*
-                     * Set the data set on the QueryRoot or
-                     * DeleteInsertGraph node.
-                     */
-                    dcList.getKey().setDataset(datasetNode);
-                  }
+                  /*
+                   * Set the data set on the QueryRoot or
+                   * DeleteInsertGraph node.
+                   */
+                  dcList.getKey().setDataset(datasetNode);
                 }
               });
         }
@@ -716,12 +708,7 @@ public class ASTDeferredIVResolution {
       if (value instanceof EmbergraphValue) {
         defer(
             (EmbergraphValue) value,
-            new Handler() {
-              @Override
-              public void handle(final IV newIV) {
-                entry.setValue(new Constant(newIV));
-              }
-            });
+            newIV -> entry.setValue(new Constant(newIV)));
       } else if (value instanceof AbstractIV) {
         // See BLZG-1788 (Typed literals in VALUES clause not matching data)
         // Changed from TermId to AbstractIV, as there are other types of IVs,
@@ -729,12 +716,7 @@ public class ASTDeferredIVResolution {
         // (for ex. FullyInlineTypedLiteralIV which represents typed literal)
         defer(
             ((AbstractIV) value).getValue(),
-            new Handler() {
-              @Override
-              public void handle(final IV newIV) {
-                entry.setValue(new Constant(newIV));
-              }
-            });
+            newIV -> entry.setValue(new Constant(newIV)));
       }
     }
   }
@@ -759,12 +741,7 @@ public class ASTDeferredIVResolution {
           final EmbergraphValue bValue = (EmbergraphValue) value;
           defer(
               (EmbergraphValue) value,
-              new Handler() {
-                @Override
-                public void handle(final IV newIV) {
-                  bValue.setIV(newIV);
-                }
-              });
+              newIV -> bValue.setIV(newIV));
         }
         newBs.addBinding(entry.getName(), value);
       }
@@ -807,12 +784,7 @@ public class ASTDeferredIVResolution {
       final EmbergraphValue bValue = (EmbergraphValue) value;
       defer(
           (EmbergraphValue) value,
-          new Handler() {
-            @Override
-            public void handle(final IV newIV) {
-              bValue.setIV(newIV);
-            }
-          });
+          newIV -> bValue.setIV(newIV));
     }
     return value;
   }
@@ -836,12 +808,7 @@ public class ASTDeferredIVResolution {
          */
         defer(
             value,
-            new Handler() {
-              @Override
-              public void handle(final IV newIV) {
-                ((ConstantNode) bop).setArg(0, new Constant(newIV));
-              }
-            });
+            newIV -> ((ConstantNode) bop).setArg(0, new Constant(newIV)));
       }
       return;
     }
@@ -854,32 +821,24 @@ public class ASTDeferredIVResolution {
         if (v instanceof EmbergraphValue) {
           defer(
               (EmbergraphValue) v,
-              new Handler() {
-                @Override
-                public void handle(final IV newIV) {
-                  bop.args().set(fk, new Constant(newIV));
-                }
-              });
+              newIV -> bop.args().set(fk, new Constant(newIV)));
         } else if (v instanceof TermId) {
           defer(
               ((TermId) v).getValue(),
-              new Handler() {
-                @Override
-                public void handle(final IV newIV) {
-                  if (bop instanceof BOpBase) {
-                    ((BOpBase) bop).__replaceArg(fk, new Constant(newIV));
+              newIV -> {
+                if (bop instanceof BOpBase) {
+                  ((BOpBase) bop).__replaceArg(fk, new Constant(newIV));
+                } else {
+                  List<BOp> args = bop.args();
+                  if (args instanceof ArrayList) {
+                    args.set(fk, new Constant(newIV));
                   } else {
-                    List<BOp> args = bop.args();
-                    if (args instanceof ArrayList) {
-                      args.set(fk, new Constant(newIV));
-                    } else {
-                      log.warn(
-                          "bop.args() class "
-                              + args.getClass()
-                              + " or "
-                              + bop.getClass()
-                              + " does not allow updates");
-                    }
+                    log.warn(
+                        "bop.args() class "
+                            + args.getClass()
+                            + " or "
+                            + bop.getClass()
+                            + " does not allow updates");
                   }
                 }
               });
@@ -928,20 +887,10 @@ public class ASTDeferredIVResolution {
       for (final IV iv : dataset.getDefaultGraphs().getGraphs()) {
         defer(
             iv.getValue(),
-            new Handler() {
-              @Override
-              public void handle(final IV newIV) {
-                newDefaultGraphs.add(newIV);
-              }
-            });
+            newIV -> newDefaultGraphs.add(newIV));
       }
       deferRunnable(
-          new Runnable() {
-            @Override
-            public void run() {
-              dataset.setDefaultGraphs(new DataSetSummary(newDefaultGraphs, true));
-            }
-          });
+          () -> dataset.setDefaultGraphs(new DataSetSummary(newDefaultGraphs, true)));
 
       final Set<IV> newNamedGraphs = new LinkedHashSet<>();
       final Iterator<IV> namedGraphs = dataset.getNamedGraphs().getGraphs().iterator();
@@ -949,20 +898,10 @@ public class ASTDeferredIVResolution {
         final IV iv = namedGraphs.next();
         defer(
             iv.getValue(),
-            new Handler() {
-              @Override
-              public void handle(final IV newIV) {
-                newNamedGraphs.add(newIV);
-              }
-            });
+            newIV -> newNamedGraphs.add(newIV));
       }
       deferRunnable(
-          new Runnable() {
-            @Override
-            public void run() {
-              dataset.setNamedGraphs(new DataSetSummary(newNamedGraphs, true));
-            }
-          });
+          () -> dataset.setNamedGraphs(new DataSetSummary(newNamedGraphs, true)));
     } else if (bop instanceof PathNode) {
       final PathAlternative path = ((PathNode) bop).getPathAlternative();
       for (int k = 0; k < path.arity(); k++) {
@@ -990,25 +929,22 @@ public class ASTDeferredIVResolution {
             final int fk = k;
             defer(
                 v,
-                new Handler() {
-                  @Override
-                  public void handle(final IV newIV) {
-                    final EmbergraphValue resolved = vf.asValue(v);
-                    if (resolved.getIV() == null && newIV != null) {
-                      resolved.setIV(newIV);
-                      newIV.setValue(resolved);
-                      final Constant newConstant = new Constant(newIV);
-                      // we need to reread value expression from the node, as it might get changed
-                      // by sibling nodes resolution
-                      // @see https://jira.blazegraph.com/browse/BLZG-1682
-                      final IValueExpression<? extends IV> fve =
-                          ((ValueExpressionNode) bop).getValueExpression();
-                      IValueExpression<? extends IV> newVe =
-                          (IValueExpression<? extends IV>)
-                              ((IVValueExpression) fve).setArg(fk, newConstant);
-                      ((ValueExpressionNode) bop).setValueExpression(newVe);
-                      ((ValueExpressionNode) bop).setArg(fk, new ConstantNode(newConstant));
-                    }
+                newIV -> {
+                  final EmbergraphValue resolved = vf.asValue(v);
+                  if (resolved.getIV() == null && newIV != null) {
+                    resolved.setIV(newIV);
+                    newIV.setValue(resolved);
+                    final Constant newConstant = new Constant(newIV);
+                    // we need to reread value expression from the node, as it might get changed
+                    // by sibling nodes resolution
+                    // @see https://jira.blazegraph.com/browse/BLZG-1682
+                    final IValueExpression<? extends IV> fve1 =
+                        ((ValueExpressionNode) bop).getValueExpression();
+                    IValueExpression<? extends IV> newVe =
+                        (IValueExpression<? extends IV>)
+                            ((IVValueExpression) fve1).setArg(fk, newConstant);
+                    ((ValueExpressionNode) bop).setValueExpression(newVe);
+                    ((ValueExpressionNode) bop).setArg(fk, new ConstantNode(newConstant));
                   }
                 });
           } else if (veBop instanceof IVValueExpression) {
@@ -1020,12 +956,7 @@ public class ASTDeferredIVResolution {
         if (value instanceof EmbergraphValue) {
           defer(
               (EmbergraphValue) value,
-              new Handler() {
-                @Override
-                public void handle(final IV newIV) {
-                  ((FunctionNode) bop).setValueExpression(new Constant(newIV));
-                }
-              });
+              newIV -> ((FunctionNode) bop).setValueExpression(new Constant(newIV)));
         }
       }
     } else if (bop instanceof ValueExpressionNode) {
@@ -1056,12 +987,7 @@ public class ASTDeferredIVResolution {
       final TermNode serviceRef = node.getServiceRef();
       defer(
           serviceRef.getValue(),
-          new Handler() {
-            @Override
-            public void handle(final IV newIV) {
-              node.setServiceRef(new ConstantNode(new Constant(newIV)));
-            }
-          });
+          newIV -> node.setServiceRef(new ConstantNode(new Constant(newIV))));
       fillInIV(store, node.getGraphPattern());
 
     } else if (bop instanceof QueryBase) {

@@ -77,7 +77,7 @@ public class TestSliceOp extends TestCase2 {
 
   ArrayList<IBindingSet> data;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     setUpData();
   }
@@ -128,7 +128,7 @@ public class TestSliceOp extends TestCase2 {
     }
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     // clear reference.
     data = null;
@@ -585,7 +585,7 @@ public class TestSliceOp extends TestCase2 {
     assertEquals(6L, stats.naccepted.get());
   }
 
-  public void test_slice_correctRejection_badOffset() throws InterruptedException {
+  public void test_slice_correctRejection_badOffset() {
 
     final int bopId = 1;
 
@@ -633,7 +633,7 @@ public class TestSliceOp extends TestCase2 {
     }
   }
 
-  public void test_slice_correctRejection_badLimit() throws InterruptedException {
+  public void test_slice_correctRejection_badLimit() {
 
     final int bopId = 1;
 

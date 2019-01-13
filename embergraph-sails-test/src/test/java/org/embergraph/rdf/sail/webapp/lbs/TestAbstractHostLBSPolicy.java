@@ -38,7 +38,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
   private AtomicInteger nextPort;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
     nextPort = new AtomicInteger(Config.HTTP_PORT);
   }
 

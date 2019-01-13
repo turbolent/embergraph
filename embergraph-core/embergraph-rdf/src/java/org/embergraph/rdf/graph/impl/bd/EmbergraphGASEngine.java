@@ -752,7 +752,7 @@ public class EmbergraphGASEngine extends GASEngine {
         samples.add(iv);
       }
 
-      return samples.toArray(new IV[samples.size()]);
+      return samples.toArray(new IV[0]);
     }
 
     /*

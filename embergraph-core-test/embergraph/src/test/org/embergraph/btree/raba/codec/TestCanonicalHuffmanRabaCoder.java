@@ -59,7 +59,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     super(name);
   }
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     rabaCoder = CanonicalHuffmanRabaCoder.INSTANCE;
   }
@@ -83,7 +83,8 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
       //            System.err.println("codeWord=" + v + ", v.size=" + v.size()
       //                    + " : long2=" + long2);
 
-      sb.append("codeWord: " + v + ", bitLength=" + v.size() + ", longValue=" + long2 + "\n");
+      sb.append("codeWord: ").append(v).append(", bitLength=").append(v.size())
+          .append(", longValue=").append(long2).append("\n");
     }
 
     return sb.toString();
@@ -289,8 +290,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
       final FastByteArrayOutputStream abaos = new FastByteArrayOutputStream();
       final OutputBitStream eobs = new OutputBitStream(ebaos);
       final OutputBitStream aobs = new OutputBitStream(abaos);
-      for (int i = 0; i < value.length; i++) {
-        final int symbol = value[i];
+      for (final int symbol : value) {
         expected.encode(symbol, eobs);
         actual.encode(symbol, aobs);
       }
@@ -320,9 +320,9 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     {
       final InputBitStream ibs = new InputBitStream(codedValue);
 
-      for (int i = 0; i < value.length; i++) {
+      for (int i1 : value) {
 
-        assertEquals(value[i] /* symbol */, actualDecoder.decode(ibs));
+        assertEquals(i1 /* symbol */, actualDecoder.decode(ibs));
       }
     }
   }
@@ -337,7 +337,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
    *
    * @throws IOException
    */
-  public void test_emptyKeyRabaSetup() throws IOException {
+  public void test_emptyKeyRabaSetup() {
 
     final int n = 0;
     final byte[][] a = new byte[n][];
@@ -433,7 +433,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
    *
    * @throws IOException
    */
-  public void test_emptyValueRabaSetup() throws IOException {
+  public void test_emptyValueRabaSetup() {
 
     final int n = 0;
     final byte[][] a = new byte[n][];

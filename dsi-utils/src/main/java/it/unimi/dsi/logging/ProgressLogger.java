@@ -252,7 +252,6 @@ public final class ProgressLogger {
               + (info != null ? "; " + info : ""));
 
     lastLog = currentTime;
-    return;
   }
 
   /*

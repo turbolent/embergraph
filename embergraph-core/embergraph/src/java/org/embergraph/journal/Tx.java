@@ -787,7 +787,7 @@ public class Tx implements ITx {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       if (log.isInfoEnabled()) log.info("Writing checkpoint: " + name);
 
@@ -1081,7 +1081,7 @@ public class Tx implements ITx {
 
     try {
 
-      return indices.keySet().toArray(new String[indices.size()]);
+      return indices.keySet().toArray(new String[0]);
 
     } finally {
 

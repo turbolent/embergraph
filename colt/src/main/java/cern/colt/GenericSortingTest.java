@@ -15,7 +15,7 @@ import cern.colt.function.IntComparator;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 03-Jul-99
  */
-class GenericSortingTest extends Object {
+class GenericSortingTest {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected GenericSortingTest() {}
   /** Just a demo. */
@@ -29,28 +29,22 @@ class GenericSortingTest extends Object {
     z = new double[] {6.0, 7.0, 8.0};
 
     Swapper swapper =
-        new Swapper() {
-          public void swap(int a, int b) {
-            int t1;
-            double t2, t3;
-            t1 = x[a];
-            x[a] = x[b];
-            x[b] = t1;
-            t2 = y[a];
-            y[a] = y[b];
-            y[b] = t2;
-            t3 = z[a];
-            z[a] = z[b];
-            z[b] = t3;
-          }
+        (a, b) -> {
+          int t1;
+          double t2, t3;
+          t1 = x[a];
+          x[a] = x[b];
+          x[b] = t1;
+          t2 = y[a];
+          y[a] = y[b];
+          y[b] = t2;
+          t3 = z[a];
+          z[a] = z[b];
+          z[b] = t3;
         };
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            return x[a] == x[b] ? 0 : (x[a] < x[b] ? -1 : 1);
-          }
-        };
+        (a, b) -> x[a] == x[b] ? 0 : (x[a] < x[b] ? -1 : 1);
 
     System.out.println("before:");
     System.out.println("X=" + Arrays.toString(x));
@@ -78,28 +72,24 @@ class GenericSortingTest extends Object {
     z = new double[] {5.0, 4.0, 4.0, 1.0};
 
     Swapper swapper =
-        new Swapper() {
-          public void swap(int a, int b) {
-            int t1;
-            double t2, t3;
-            t1 = x[a];
-            x[a] = x[b];
-            x[b] = t1;
-            t2 = y[a];
-            y[a] = y[b];
-            y[b] = t2;
-            t3 = z[a];
-            z[a] = z[b];
-            z[b] = t3;
-          }
+        (a, b) -> {
+          int t1;
+          double t2, t3;
+          t1 = x[a];
+          x[a] = x[b];
+          x[b] = t1;
+          t2 = y[a];
+          y[a] = y[b];
+          y[b] = t2;
+          t3 = z[a];
+          z[a] = z[b];
+          z[b] = t3;
         };
 
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            if (y[a] == y[b]) return z[a] == z[b] ? 0 : (z[a] < z[b] ? -1 : 1);
-            return y[a] < y[b] ? -1 : 1;
-          }
+        (a, b) -> {
+          if (y[a] == y[b]) return z[a] == z[b] ? 0 : (z[a] < z[b] ? -1 : 1);
+          return y[a] < y[b] ? -1 : 1;
         };
 
     System.out.println("before:");

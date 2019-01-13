@@ -840,7 +840,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
      *
      * @return The commit time of the transaction.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       byte[][] keys = new byte[nops][];
       byte[][] vals = new byte[nops][];

@@ -325,7 +325,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
     /** Evaluate. */
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 

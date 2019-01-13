@@ -67,7 +67,7 @@ public class IfBOp extends IVValueExpression<IV> implements IPassesMaterializati
   public IV get(final IBindingSet bs) {
 
     final IV iv = get(0).get(bs);
-    if (iv == null || !(iv instanceof XSDBooleanIV)) {
+    if (!(iv instanceof XSDBooleanIV)) {
       throw new SparqlTypeErrorException();
     }
 

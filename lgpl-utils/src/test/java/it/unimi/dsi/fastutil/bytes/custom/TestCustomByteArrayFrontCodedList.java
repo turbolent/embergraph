@@ -220,7 +220,6 @@ public class TestCustomByteArrayFrontCodedList extends TestCase {
     ensure(contentEquals(m, t), "Error (" + seed + "): m does not equal t after save/read");
 
     System.out.println("Test OK");
-    return;
   }
 
   //    public static void main( String args[] ) {

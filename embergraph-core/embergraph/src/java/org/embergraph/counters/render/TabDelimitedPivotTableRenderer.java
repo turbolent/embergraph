@@ -191,9 +191,9 @@ public class TabDelimitedPivotTableRenderer extends PivotTableRenderer {
           w.write(cset.cats[j] + "\t");
         }
 
-        for (int j = 0; j < vals.length; j++) {
+        for (Double val : vals) {
 
-          final String s = vals[j] == null ? "" : Double.toString(vals[j]);
+          final String s = val == null ? "" : Double.toString(val);
 
           w.write(s + "\t");
         }

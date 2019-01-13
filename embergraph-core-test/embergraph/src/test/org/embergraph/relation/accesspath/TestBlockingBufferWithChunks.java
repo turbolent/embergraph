@@ -142,103 +142,99 @@ public class TestBlockingBufferWithChunks extends TestCase2 {
     // future of task writing a 3rd element on the buffer.
     final Future<?> producerFuture =
         service.submit(
-            new Callable<Void>() {
-              public Void call() throws Exception {
+            (Callable<Void>) () -> {
 
-                lock.lockInterruptibly();
-                try {
-                  if (!proceedFlag.get()) {
-                    cond.await();
-                  }
-                  /*
-                   * add another element - should block until we take an
-                   * element using the iterator.
-                   */
-                  buffer.add(new Integer[] {e2});
-
-                  /*
-                   * itr.hasNext() will block until the buffer is closed.
-                   */
-                  buffer.close();
-                } finally {
-                  lock.unlock();
+              lock.lockInterruptibly();
+              try {
+                if (!proceedFlag.get()) {
+                  cond.await();
                 }
-                // done.
-                return null;
+                /*
+                 * add another element - should block until we take an
+                 * element using the iterator.
+                 */
+                buffer.add(new Integer[] {e2});
+
+                /*
+                 * itr.hasNext() will block until the buffer is closed.
+                 */
+                buffer.close();
+              } finally {
+                lock.unlock();
               }
+              // done.
+              return null;
             });
 
     // future of task draining the buffer.
     final Future<?> consumerFuture =
         service.submit(
-            new Callable<Void>() {
-              public Void call() throws Exception {
+            (Callable<Void>) () -> {
 
+              try {
+                lock.lockInterruptibly();
                 try {
-                  lock.lockInterruptibly();
-                  try {
 
-                    assertTrue(itr.hasNext());
-
-                    // take the first chunk - two elements.
-                    if (log.isInfoEnabled()) log.info("Awaiting first chunk");
-                    assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
-                    if (log.isInfoEnabled()) log.info("Have first chunk");
-
-                    /*
-                     * Verify that we obtained the first chunk before the
-                     * buffer was closed. Otherwise next() blocked
-                     * attempting to compile a full chunk until the producer
-                     * timeout, at which point the producer closed the
-                     * buffer and next() noticed the closed buffer and
-                     * returned.
-                     */
-                    assertTrue(buffer.isOpen());
-                    assertFalse("buffer was closed.", itr.isExhausted());
-
-                    /*
-                     * Verify that nothing is available from the iterator
-                     * (non-blocking test).
-                     */
-                    assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
-                    assertNull(itr.next(1, TimeUnit.NANOSECONDS));
-
-                    // Signal the producer that it should continue.
-                    proceedFlag.set(true);
-                    cond.signal();
-
-                  } finally {
-
-                    lock.unlock();
-                  }
-
-                  // should block until we close the buffer.
                   assertTrue(itr.hasNext());
 
-                  // last chunk
-                  assertSameArray(new Integer[] {e2}, itr.next());
+                  // take the first chunk - two elements.
+                  if (log.isInfoEnabled()) log.info("Awaiting first chunk");
+                  assertSameArray(new Integer[] {e0, e1}, itr.next(50, TimeUnit.MILLISECONDS));
+                  if (log.isInfoEnabled()) log.info("Have first chunk");
 
-                  // should be immediately false.
+                  /*
+                   * Verify that we obtained the first chunk before the
+                   * buffer was closed. Otherwise next() blocked
+                   * attempting to compile a full chunk until the producer
+                   * timeout, at which point the producer closed the
+                   * buffer and next() noticed the closed buffer and
+                   * returned.
+                   */
+                  assertTrue(buffer.isOpen());
+                  assertFalse("buffer was closed.", itr.isExhausted());
+
+                  /*
+                   * Verify that nothing is available from the iterator
+                   * (non-blocking test).
+                   */
                   assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
-                  // should be immediately null.
                   assertNull(itr.next(1, TimeUnit.NANOSECONDS));
 
-                  // The synchronous API should also report an exhausted
-                  // itr.
-                  assertFalse(itr.hasNext());
-                  try {
-                    itr.next();
-                    fail("Expecting: " + NoSuchElementException.class);
-                  } catch (NoSuchElementException ex) {
-                    if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
-                  }
+                  // Signal the producer that it should continue.
+                  proceedFlag.set(true);
+                  cond.signal();
 
-                  return null;
+                } finally {
 
-                } catch (Throwable t) {
-                  log.error("Consumer failed or blocked: " + t, t);
-                  throw new Exception(t);
+                  lock.unlock();
                 }
+
+                // should block until we close the buffer.
+                assertTrue(itr.hasNext());
+
+                // last chunk
+                assertSameArray(new Integer[] {e2}, itr.next());
+
+                // should be immediately false.
+                assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
+                // should be immediately null.
+                assertNull(itr.next(1, TimeUnit.NANOSECONDS));
+
+                // The synchronous API should also report an exhausted
+                // itr.
+                assertFalse(itr.hasNext());
+                try {
+                  itr.next();
+                  fail("Expecting: " + NoSuchElementException.class);
+                } catch (NoSuchElementException ex) {
+                  if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
+                }
+
+                return null;
+
+              } catch (Throwable t) {
+                log.error("Consumer failed or blocked: " + t, t);
+                throw new Exception(t);
               }
             });
 

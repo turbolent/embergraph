@@ -121,29 +121,25 @@ public class PurgeResult implements Serializable, Params {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{firstCommitTime=" + firstCommitTime);
-    sb.append(",lastCommitTime=" + lastCommitTime);
-    sb.append(",givenReleaseTime=" + givenReleaseTime);
-    sb.append(",indexRetentionTime=" + indexRetentionTime);
-    sb.append(",choosenReleaseTime=" + choosenReleaseTime);
-    sb.append(",commitTimeToPreserve=" + commitTimeToPreserve);
-    sb.append(",resourcesInUseCount=" + resourcesInUseCount);
-    sb.append(",journalBeforeCount=" + journalBeforeCount);
-    sb.append(",journalAfterCount=" + journalAfterCount);
-    sb.append(",segmentBeforeCount=" + segmentBeforeCount);
-    sb.append(",segmentAfterCount=" + segmentAfterCount);
-    sb.append(",bytesBeforeCount=" + bytesBeforeCount);
-    sb.append(",bytesAfterCount=" + bytesAfterCount);
-    sb.append(",elapsedScanCommitIndicesTime=" + elapsedScanCommitIndicesTime);
-    sb.append(",elapsedDeleteResourcesTime=" + elapsedDeleteResourcesTime);
-    sb.append(",elapsedPurgeResourcesTime=" + elapsedPurgeResourcesTime);
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{firstCommitTime=" + firstCommitTime
+        + ",lastCommitTime=" + lastCommitTime
+        + ",givenReleaseTime=" + givenReleaseTime
+        + ",indexRetentionTime=" + indexRetentionTime
+        + ",choosenReleaseTime=" + choosenReleaseTime
+        + ",commitTimeToPreserve=" + commitTimeToPreserve
+        + ",resourcesInUseCount=" + resourcesInUseCount
+        + ",journalBeforeCount=" + journalBeforeCount
+        + ",journalAfterCount=" + journalAfterCount
+        + ",segmentBeforeCount=" + segmentBeforeCount
+        + ",segmentAfterCount=" + segmentAfterCount
+        + ",bytesBeforeCount=" + bytesBeforeCount
+        + ",bytesAfterCount=" + bytesAfterCount
+        + ",elapsedScanCommitIndicesTime=" + elapsedScanCommitIndicesTime
+        + ",elapsedDeleteResourcesTime=" + elapsedDeleteResourcesTime
+        + ",elapsedPurgeResourcesTime=" + elapsedPurgeResourcesTime
+        + "}";
+    return sb;
   }
 
   public Map<String, Object> getParams() {

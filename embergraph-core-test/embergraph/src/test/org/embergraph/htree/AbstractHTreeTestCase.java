@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.htree;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
 
     // stuff everything into a list (allows duplicates).
     final List<byte[]> range = new LinkedList<>();
-    for (byte[] b : expected) range.add(b);
+    range.addAll(Arrays.asList(expected));
 
     // Do selection without replacement for the objects visited by
     // iterator.
@@ -262,10 +263,12 @@ public class AbstractHTreeTestCase extends TestCase2 {
   }
 
   public static void assertSameOrderIterator(byte[][] keys, Iterator<byte[]> values) {
-    for (int i = 0; i < keys.length; i++) {
+    for (byte[] key : keys) {
       final byte[] other = values.next();
 
-      if (!BytesUtil.bytesEqual(keys[i], other)) fail("Unexpected ordered value");
+      if (!BytesUtil.bytesEqual(key, other)) {
+        fail("Unexpected ordered value");
+      }
     }
   }
 

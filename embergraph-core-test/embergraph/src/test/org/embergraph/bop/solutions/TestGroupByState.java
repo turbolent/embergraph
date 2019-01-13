@@ -38,7 +38,6 @@ import org.embergraph.rdf.internal.constraints.MathBOp;
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
 import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.constraints.UcaseBOp;
-import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.Compare.CompareOp;

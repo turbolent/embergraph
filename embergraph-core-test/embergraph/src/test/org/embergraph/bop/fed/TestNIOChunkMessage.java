@@ -79,14 +79,14 @@ public class TestNIOChunkMessage extends TestCase2 {
             0 /* requestServicePoolSize */) {
 
           @Override
-          protected File getResource(UUID uuid) throws Exception {
+          protected File getResource(UUID uuid) {
             throw new UnsupportedOperationException();
           }
         };
   }
 
   @Override
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (resourceService != null) {
       resourceService.shutdownNow();

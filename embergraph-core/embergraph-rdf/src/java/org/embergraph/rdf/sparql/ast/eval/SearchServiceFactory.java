@@ -579,8 +579,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
               throw new UnsupportedOperationException();
             }
           } else {
-            for (int i = 0; i < vars.length; i++) {
-              if (bs.isBound(vars[i])) {
+            for (IVariable<?> var : vars) {
+              if (bs.isBound(var)) {
                 /*
                  * FIXME This case is not supported.  We need to run
                  * the search engine for each of the source solutions.

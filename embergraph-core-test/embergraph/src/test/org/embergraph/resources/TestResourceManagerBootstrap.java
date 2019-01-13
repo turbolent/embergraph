@@ -92,9 +92,9 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 
@@ -112,7 +112,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
    *
    * @throws IOException
    */
-  public void test_create() throws IOException {
+  public void test_create() {
 
     /*
      * Setup the resource manager.

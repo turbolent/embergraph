@@ -108,7 +108,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
    * @throws MalformedQueryException
    */
   public void test_virtualGraphs_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -261,7 +261,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
    * @throws MalformedQueryException
    */
   public void test_virtualGraphs_02()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""

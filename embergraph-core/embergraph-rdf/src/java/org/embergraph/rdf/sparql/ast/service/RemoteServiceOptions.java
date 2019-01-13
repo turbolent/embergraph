@@ -120,13 +120,12 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getName());
-    sb.append("{SPARQLVersion=" + getSPARQLVersion());
-    sb.append(",GET=" + isGET());
-    sb.append(",Accept=" + getAcceptHeader());
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getName()
+        + "{SPARQLVersion=" + getSPARQLVersion()
+        + ",GET=" + isGET()
+        + ",Accept=" + getAcceptHeader()
+        + "}";
+    return sb;
   }
 
   @Override

@@ -82,9 +82,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
        * Create indices that we should not be able to see when holding
        * just the lock for the namespace.
        */
-      for (int i = 0; i < disallowed_indices.length; i++) {
-
-        final String name = disallowed_indices[i];
+      for (final String name : disallowed_indices) {
 
         journal
             .submit(
@@ -99,9 +97,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
        * Create indices that we should be able to see when holding the
        * lock for the namespace.
        */
-      for (int i = 0; i < allowed_indices.length; i++) {
-
-        final String name = allowed_indices[i];
+      for (final String name : allowed_indices) {
 
         journal
             .submit(
@@ -123,7 +119,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Void>(journal.getConcurrencyManager(), ITx.UNISOLATED, namespace) {
 
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   // Verify access to the indices in that namespace.
                   for (String name : allowed_indices) {
@@ -186,7 +182,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                       journal.getConcurrencyManager(), ITx.UNISOLATED, namespace) {
 
                     @Override
-                    protected UUID[] doTask() throws Exception {
+                    protected UUID[] doTask() {
 
                       final UUID[] indexUUIDs = new UUID[allowed_indices.length];
 
@@ -252,7 +248,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Void>(journal.getConcurrencyManager(), ITx.UNISOLATED, namespace) {
 
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   /*
                    * Verify access to the newly created indices.
@@ -285,15 +281,13 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Void>(journal.getConcurrencyManager(), ITx.UNISOLATED, namespace) {
 
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   /*
                    * Create indices that we should be able to see when
                    * holding the lock for the namespace.
                    */
-                  for (int i = 0; i < allowed_indices.length; i++) {
-
-                    final String name = allowed_indices[i];
+                  for (final String name : allowed_indices) {
 
                     getJournal().dropIndex(name);
                   }
@@ -312,14 +306,12 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
               new AbstractTask<Void>(journal.getConcurrencyManager(), ITx.UNISOLATED, namespace) {
 
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   /*
                    * Verify no access to the dropped indices.
                    */
-                  for (int i = 0; i < allowed_indices.length; i++) {
-
-                    final String name = allowed_indices[i];
+                  for (final String name : allowed_indices) {
 
                     try {
                       // Attempt to access index.
@@ -327,7 +319,9 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                       fail("Expecting: " + IllegalStateException.class + " for " + name);
                     } catch (IllegalStateException ex) {
                       // log and ignore expected exception.
-                      if (log.isInfoEnabled()) log.info("Ignoring expected exception");
+                      if (log.isInfoEnabled()) {
+                        log.info("Ignoring expected exception");
+                      }
                     }
                   }
 

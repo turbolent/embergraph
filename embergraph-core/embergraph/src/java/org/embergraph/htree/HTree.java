@@ -1521,7 +1521,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append("#nodes=" + nnodes + ", #leaves=" + nleaves + ", #entries=" + nentries + "\n");
+    sb.append("#nodes=").append(nnodes).append(", #leaves=").append(nleaves).append(", #entries=")
+        .append(nentries).append("\n");
 
     root.PP(sb, showBinary);
 

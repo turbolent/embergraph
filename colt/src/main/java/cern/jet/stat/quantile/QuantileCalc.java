@@ -9,7 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.stat.quantile;
 
 /** Computes b and k vor various parameters. */
-class QuantileCalc extends Object {
+class QuantileCalc {
   /*
    * Efficiently computes the binomial coefficient, often also referred to as "n over k" or "n
    * choose k". The binomial coefficient is defined as n!/((n-k)!*k!). Tries to avoid numeric
@@ -293,7 +293,7 @@ class QuantileCalc extends Object {
   public static void test_B_and_K_Calculation(String[] args) {
     boolean known_N;
     if (args == null) known_N = false;
-    else known_N = new Boolean(args[0]).booleanValue();
+    else known_N = Boolean.valueOf(args[0]).booleanValue();
 
     int[] quantiles = {1, 1000};
 
@@ -310,21 +310,16 @@ class QuantileCalc extends Object {
     System.out.println("mem [elements/1024]");
     System.out.println("***********************************");
 
-    for (int q = 0; q < quantiles.length; q++) {
-      int p = quantiles[q];
+    for (int p : quantiles) {
       System.out.println("------------------------------");
       System.out.println("computing for p = " + p);
-      for (int s = 0; s < sizes.length; s++) {
-        long N = sizes[s];
+      for (long N : sizes) {
         System.out.println("   ------------------------------");
         System.out.println("   computing for N = " + N);
-        for (int d = 0; d < deltas.length; d++) {
-          double delta = deltas[d];
+        for (double delta : deltas) {
           System.out.println("      ------------------------------");
           System.out.println("      computing for delta = " + delta);
-          for (int e = 0; e < epsilons.length; e++) {
-            double epsilon = epsilons[e];
-
+          for (double epsilon : epsilons) {
             double[] returnSamplingRate = new double[1];
             long[] result;
             if (known_N) {
@@ -338,9 +333,13 @@ class QuantileCalc extends Object {
             System.out.print(
                 "         (e,d,N,p)=(" + epsilon + "," + delta + "," + N + "," + p + ") --> ");
             System.out.print("(b,k,mem");
-            if (known_N) System.out.print(",sampling");
+            if (known_N) {
+              System.out.print(",sampling");
+            }
             System.out.print(")=(" + b + "," + k + "," + (b * k / 1024));
-            if (known_N) System.out.print("," + returnSamplingRate[0]);
+            if (known_N) {
+              System.out.print("," + returnSamplingRate[0]);
+            }
             System.out.println(")");
           }
         }

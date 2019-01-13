@@ -153,7 +153,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       estimateCardinality(sp, ctx, exogenousBindings, nrExogeneousBindings);
 

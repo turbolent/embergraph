@@ -44,7 +44,7 @@ import junit.framework.TestCase2;
 /** Unit tests for the {@link EmbergraphRDFContext#getQueryTimeout} method. */
 public class TestGetRequestTimeout extends TestCase2 {
 
-  public void testGetRequestTimeout() throws Exception {
+  public void testGetRequestTimeout() {
 
     final String httpHeaderEmbergraphMaxQueryMillis = "1000";
     final String maxQuryTimeMillis = "1000";
@@ -61,7 +61,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     assertEquals(expected, actual);
   }
 
-  public void testGetRequestTimeout1() throws Exception {
+  public void testGetRequestTimeout1() {
 
     final String httpHeaderEmbergraphMaxQueryMillis = "1";
     final String maxQuryTimeMillis = "1000";
@@ -78,7 +78,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     assertEquals(expected, actual);
   }
 
-  public void testGetRequestTimeout2() throws Exception {
+  public void testGetRequestTimeout2() {
 
     final String httpHeaderEmbergraphMaxQueryMillis = "1000";
     final String maxQuryTimeMillis = "1";
@@ -95,7 +95,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     assertEquals(expected, actual);
   }
 
-  public void testGetRequestTimeout3() throws Exception {
+  public void testGetRequestTimeout3() {
 
     final String httpHeaderEmbergraphMaxQueryMillis = "10000";
     final String maxQuryTimeMillis = "10000";
@@ -159,7 +159,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     }
 
     @Override
-    public void setCharacterEncoding(String env) throws UnsupportedEncodingException {
+    public void setCharacterEncoding(String env) {
       // TODO Auto-generated method stub
 
     }
@@ -183,7 +183,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     }
 
     @Override
-    public ServletInputStream getInputStream() throws IOException {
+    public ServletInputStream getInputStream() {
       // TODO Auto-generated method stub
       return null;
     }
@@ -231,7 +231,7 @@ public class TestGetRequestTimeout extends TestCase2 {
     }
 
     @Override
-    public BufferedReader getReader() throws IOException {
+    public BufferedReader getReader() {
       // TODO Auto-generated method stub
       return null;
     }
@@ -508,38 +508,37 @@ public class TestGetRequestTimeout extends TestCase2 {
     }
 
     @Override
-    public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
+    public boolean authenticate(HttpServletResponse response) {
       // TODO Auto-generated method stub
       return false;
     }
 
     @Override
-    public void login(String username, String password) throws ServletException {
+    public void login(String username, String password) {
       // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void logout() throws ServletException {
+    public void logout() {
       // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Collection<Part> getParts() throws IOException, ServletException {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public Part getPart(String name) throws IOException, ServletException {
+    public Collection<Part> getParts() {
       // TODO Auto-generated method stub
       return null;
     }
 
     @Override
-    public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass)
-        throws IOException, ServletException {
+    public Part getPart(String name) {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) {
       // TODO Auto-generated method stub
       return null;
     }

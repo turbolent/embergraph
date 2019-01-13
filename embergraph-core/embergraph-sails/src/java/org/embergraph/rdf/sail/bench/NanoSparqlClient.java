@@ -575,9 +575,7 @@ public class NanoSparqlClient {
 
       final File[] files = dir.listFiles();
 
-      for (int i = 0; i < files.length; i++) {
-
-        final File f = files[i];
+      for (final File f : files) {
 
         // recursion.
         getFiles(f, fileList);
@@ -1061,14 +1059,13 @@ public class NanoSparqlClient {
 
     System.out.println("average(ms)\tsource\tquery");
 
-    for (int i = 0; i < a.length; i++) {
-
-      final Score s = a[i];
+    for (final Score s : a) {
 
       final long elapsedMillis = TimeUnit.NANOSECONDS.toMillis(s.elapsedNanos);
 
-      if (elapsedMillis >= minMillisLatencyToReport)
+      if (elapsedMillis >= minMillisLatencyToReport) {
         System.out.println(elapsedMillis + "\t" + s.query.source + "\t" + s.query.queryStr);
+      }
     }
   }
 
@@ -1416,9 +1413,7 @@ public class NanoSparqlClient {
 
       final int[] order = getQueryOrder(seed, repeat, queries.length);
 
-      for (int i = 0; i < order.length; i++) {
-
-        final int queryId = order[i];
+      for (final int queryId : order) {
 
         final Query query = queries[queryId];
 
@@ -1439,16 +1434,14 @@ public class NanoSparqlClient {
       // The tasks to be run.
       final List<Callable<Void>> tasks = new LinkedList<>();
 
-      for (int i = 0; i < order.length; i++) {
+      for (int i1 : order) {
 
-        final RunQueryTask runnable = new RunQueryTask(queries[order[i]], opts, nerrors);
+        final RunQueryTask runnable = new RunQueryTask(queries[i1], opts, nerrors);
 
         tasks.add(
-            new Callable<Void>() {
-              public Void call() throws Exception {
-                runnable.run();
-                return null;
-              }
+            () -> {
+              runnable.run();
+              return null;
             });
       }
 

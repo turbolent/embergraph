@@ -1057,7 +1057,8 @@ public class GPO implements IGPO {
     while (entry != null) {
       Iterator<Value> values = entry.values();
       while (values.hasNext())
-        out.append(entry.m_key.toString() + ": " + values.next().toString() + "\n");
+        out.append(entry.m_key.toString()).append(": ").append(values.next().toString())
+            .append("\n");
 
       entry = entry.m_next;
     }
@@ -1202,9 +1203,9 @@ public class GPO implements IGPO {
   public IGenericSkin getSkin(final Class intf) {
     IGenericSkin ret = null;
     if (m_skins != null) {
-      for (int i = 0; i < m_skins.size(); i++) {
-        if (intf.isInstance(m_skins.get(i))) {
-          return m_skins.get(i);
+      for (IGenericSkin m_skin : m_skins) {
+        if (intf.isInstance(m_skin)) {
+          return m_skin;
         }
       }
     } else {

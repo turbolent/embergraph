@@ -61,7 +61,7 @@ public class EmbergraphGraphBulkLoad extends EmbergraphGraph
   }
 
   @Override
-  public RepositoryConnection cxn() throws Exception {
+  public RepositoryConnection cxn() {
     return cxn;
   }
 

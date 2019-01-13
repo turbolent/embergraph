@@ -55,18 +55,16 @@ public final class Linux implements CPUParser {
         }
       }
 
-      StringBuffer buf = new StringBuffer();
-      buf.append(props.getProperty("model name"));
-      buf.append(" Family ");
-      buf.append(props.getProperty("cpu family"));
-      buf.append(" Model ");
-      buf.append(props.getProperty("model"));
-      buf.append(" Stepping ");
-      buf.append(props.getProperty("stepping"));
-      buf.append(", ");
-      buf.append(props.getProperty("vendor_id"));
-
-      info = buf.toString();
+      String buf = props.getProperty("model name")
+          + " Family "
+          + props.getProperty("cpu family")
+          + " Model "
+          + props.getProperty("model")
+          + " Stepping "
+          + props.getProperty("stepping")
+          + ", "
+          + props.getProperty("vendor_id");
+      info = buf;
     } catch (Exception e) {
       procs = 1;
       e.printStackTrace();

@@ -159,9 +159,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
               } else if (node instanceof StatementPatternNode) {
                 final StatementPatternNode nodeAsSP = (StatementPatternNode) node;
                 final List<FilterNode> attachedFilters = nodeAsSP.getAttachedJoinFilters();
-                for (final FilterNode filter : attachedFilters) {
-                  filters.add(filter);
-                }
+                filters.addAll(attachedFilters);
               }
             }
           }

@@ -381,7 +381,7 @@ public class Schema implements Externalizable {
 
   private static final transient short VERSION0 = 0x0;
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     final short version = in.readShort();
 

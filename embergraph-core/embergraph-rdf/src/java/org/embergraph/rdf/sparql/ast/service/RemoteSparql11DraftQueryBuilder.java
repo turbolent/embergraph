@@ -155,7 +155,7 @@ public class RemoteSparql11DraftQueryBuilder extends RemoteSparql11QueryBuilder 
             if (i > 1) {
               sb.append(" &&");
             }
-            sb.append(" sameTerm( ?" + names[0] + ", ?" + names[i] + ")");
+            sb.append(" sameTerm( ?").append(names[0]).append(", ?").append(names[i]).append(")");
           }
           sb.append(" ).\n");
         }

@@ -55,7 +55,6 @@ final class DescribeModeHint extends AbstractQueryHint<DescribeModeEnum> {
       // _setQueryHint(context, scope, op, getName(), value);
       ((ProjectionNode) op).setDescribeMode(value);
 
-      return;
     }
 
     // throw new QueryHintException(scope, op, getName(), value);

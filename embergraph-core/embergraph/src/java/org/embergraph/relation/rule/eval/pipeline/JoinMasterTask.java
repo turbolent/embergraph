@@ -640,7 +640,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
   }
 
   /** Returns the buffer specified to the ctor (overridden for distributed joins). */
-  public IBuffer<ISolution[]> getSolutionBuffer() throws IOException {
+  public IBuffer<ISolution[]> getSolutionBuffer() {
 
     return solutionBuffer;
   }

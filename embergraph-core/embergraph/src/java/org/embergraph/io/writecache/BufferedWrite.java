@@ -252,7 +252,7 @@ public class BufferedWrite {
             + m_storeCounters.bufferDataBytes;
 
     if (buf != null) {
-      buf.append(ret + "\n");
+      buf.append(ret).append("\n");
     }
 
     if (reset) {

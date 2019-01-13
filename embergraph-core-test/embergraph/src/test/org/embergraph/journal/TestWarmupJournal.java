@@ -340,39 +340,35 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
         final Future<Void> f2 =
             src.getExecutorService()
                 .submit(
-                    new Callable<Void>() {
+                    () -> {
 
-                      @Override
-                      public Void call() throws Exception {
+                      for (int i = 0; i < NUM_INDICES; i++) {
 
-                        for (int i = 0; i < NUM_INDICES; i++) {
+                        final String name = PREFIX + i;
 
-                          final String name = PREFIX + i;
+                        // lookup the index.
+                        final BTree ndx = src.getIndex(name);
 
-                          // lookup the index.
-                          final BTree ndx = src.getIndex(name);
+                        // #of tuples to write.
+                        final int ntuples = r.nextInt(10000);
 
-                          // #of tuples to write.
-                          final int ntuples = r.nextInt(10000);
+                        // generate random data.
+                        final KV[] a = AbstractBTreeTestCase.getRandomKeyValues(ntuples);
 
-                          // generate random data.
-                          final KV[] a = AbstractBTreeTestCase.getRandomKeyValues(ntuples);
+                        // write tuples (in random order)
+                        for (KV kv : a) {
 
-                          // write tuples (in random order)
-                          for (KV kv : a) {
+                          ndx.insert(kv.key, kv.val);
 
-                            ndx.insert(kv.key, kv.val);
+                          if (r.nextInt(100) < 10) {
 
-                            if (r.nextInt(100) < 10) {
-
-                              // randomly increment the counter (10% of the time).
-                              ndx.getCounter().incrementAndGet();
-                            }
+                            // randomly increment the counter (10% of the time).
+                            ndx.getCounter().incrementAndGet();
                           }
                         }
-                        // Done.
-                        return null;
                       }
+                      // Done.
+                      return null;
                     });
 
         try {

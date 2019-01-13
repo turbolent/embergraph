@@ -19,7 +19,7 @@ public class TestMemoryManagerStreams extends TestCase {
 
   private Random r;
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
     r = new Random();
     manager = new MemoryManager(DirectBufferPool.INSTANCE, 30); // 30 * 1M buffers
   }
@@ -69,15 +69,15 @@ public class TestMemoryManagerStreams extends TestCase {
 
     final ByteBuffer[] bufs = manager.get(saddr);
 
-    for (int i = 0; i < bufs.length; i++) {
+    for (ByteBuffer buf : bufs) {
       final byte[] data;
-      if (bufs[i].isDirect()) {
-        final ByteBuffer indbuf = ByteBuffer.allocate(bufs[i].remaining());
+      if (buf.isDirect()) {
+        final ByteBuffer indbuf = ByteBuffer.allocate(buf.remaining());
         data = indbuf.array();
-        indbuf.put(bufs[i]);
+        indbuf.put(buf);
         indbuf.flip();
       } else {
-        data = bufs[i].array();
+        data = buf.array();
       }
 
       sb.append(new String(data));
@@ -151,7 +151,7 @@ public class TestMemoryManagerStreams extends TestCase {
     assert manager.getSlotBytes() == 0;
   }
 
-  public void testBlobStreamScale() throws IOException, ClassNotFoundException {
+  public void testBlobStreamScale() throws IOException {
 
     final int largeBlob = 25 * 1024 * 1024; // requires blob of blobs
     final byte[] data = new byte[largeBlob];
@@ -172,7 +172,7 @@ public class TestMemoryManagerStreams extends TestCase {
     assert manager.getSlotBytes() == 0;
   }
 
-  public void testBlobStreamBoundaries() throws IOException, ClassNotFoundException {
+  public void testBlobStreamBoundaries() throws IOException {
     int start = SectorAllocator.BLOB_SIZE - 1;
     int end = SectorAllocator.BLOB_SIZE * 4 + 1;
 

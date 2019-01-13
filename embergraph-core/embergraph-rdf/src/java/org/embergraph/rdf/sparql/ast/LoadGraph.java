@@ -143,40 +143,34 @@ public class LoadGraph extends GraphUpdate {
     if (silent) sb.append(" SILENT");
 
     if (getProperty(Annotations.VERIFY_DATA) != null) {
-      sb.append(" " + Annotations.VERIFY_DATA + "=" + getProperty(Annotations.VERIFY_DATA));
+      sb.append(" " + Annotations.VERIFY_DATA + "=").append(getProperty(Annotations.VERIFY_DATA));
     }
 
     if (getProperty(Annotations.PRESERVE_BLANK_NODE_IDS) != null) {
-      sb.append(
-          " "
-              + Annotations.PRESERVE_BLANK_NODE_IDS
-              + "="
-              + getProperty(Annotations.PRESERVE_BLANK_NODE_IDS));
+      sb.append(" " + Annotations.PRESERVE_BLANK_NODE_IDS + "=")
+          .append(getProperty(Annotations.PRESERVE_BLANK_NODE_IDS));
     }
 
     if (getProperty(Annotations.STOP_AT_FIRST_ERROR) != null) {
-      sb.append(
-          " "
-              + Annotations.STOP_AT_FIRST_ERROR
-              + "="
-              + getProperty(Annotations.STOP_AT_FIRST_ERROR));
+      sb.append(" " + Annotations.STOP_AT_FIRST_ERROR + "=")
+          .append(getProperty(Annotations.STOP_AT_FIRST_ERROR));
     }
 
     if (getProperty(Annotations.DATA_TYPE_HANDLING) != null) {
-      sb.append(
-          " " + Annotations.DATA_TYPE_HANDLING + "=" + getProperty(Annotations.DATA_TYPE_HANDLING));
+      sb.append(" " + Annotations.DATA_TYPE_HANDLING + "=")
+          .append(getProperty(Annotations.DATA_TYPE_HANDLING));
     }
 
     if (sourceGraph != null) {
       sb.append("\n");
       sb.append(indent(indent + 1));
-      sb.append("source=" + sourceGraph);
+      sb.append("source=").append(sourceGraph);
     }
 
     if (targetGraph != null) {
       sb.append("\n");
       sb.append(indent(indent + 1));
-      sb.append("target=" + targetGraph);
+      sb.append("target=").append(targetGraph);
     }
 
     sb.append("\n");

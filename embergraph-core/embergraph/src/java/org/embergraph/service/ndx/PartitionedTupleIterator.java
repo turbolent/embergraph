@@ -612,39 +612,24 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{ flags=" + Tuple.flagString(flags));
-
-    sb.append(", timestamp=" + ts);
-
-    sb.append(", isReadConsistentTx=" + isReadConsistentTx);
-
-    sb.append(", capacity=" + capacity);
-
-    sb.append(", fromKey=" + (fromKey == null ? "n/a" : BytesUtil.toString(fromKey)));
-
-    sb.append(", toKey=" + (toKey == null ? "n/a" : BytesUtil.toString(toKey)));
-
-    sb.append(", filter=" + filter);
-
     // dynamic state.
 
-    sb.append(", #visited=" + nvisited);
-
-    sb.append(", exhausted=" + exhausted);
-
-    sb.append(", locator=" + locator);
-
-    sb.append(", lastStaleLocator=" + lastStaleLocator);
-
     // Note: [src] is the per index partition source (dynamic state).
-    sb.append(", src=" + (src == null ? "N/A" : src.getClass()));
 
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ flags=" + Tuple.flagString(flags)
+        + ", timestamp=" + ts
+        + ", isReadConsistentTx=" + isReadConsistentTx
+        + ", capacity=" + capacity
+        + ", fromKey=" + (fromKey == null ? "n/a" : BytesUtil.toString(fromKey))
+        + ", toKey=" + (toKey == null ? "n/a" : BytesUtil.toString(toKey))
+        + ", filter=" + filter
+        + ", #visited=" + nvisited
+        + ", exhausted=" + exhausted
+        + ", locator=" + locator
+        + ", lastStaleLocator=" + lastStaleLocator
+        + ", src=" + (src == null ? "N/A" : src.getClass())
+        + "}";
+    return sb;
   }
 }

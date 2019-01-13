@@ -420,12 +420,12 @@ public class NativeDistinctFilter extends BOpFilterBase {
       Arrays.sort(a, 0, a.length, UnsignedByteArrayComparator.INSTANCE);
       // Insert
       if (index instanceof BTree) {
-        for (int i = 0; i < a.length; i++) {
-          add((BTree) index, a[i]);
+        for (byte[] bytes : a) {
+          add((BTree) index, bytes);
         }
       } else if (index instanceof HTree) {
-        for (int i = 0; i < a.length; i++) {
-          add((HTree) index, a[i]);
+        for (byte[] bytes : a) {
+          add((HTree) index, bytes);
         }
       } else throw new AssertionError();
     }

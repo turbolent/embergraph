@@ -1394,10 +1394,7 @@ public class BTree extends AbstractBTree
       newResources[1] = new JournalMetadata((AbstractJournal) getStore(), priorCommitTime);
 
       // any other stores in the view are copied.
-      for (int i = 1; i < oldResources.length; i++) {
-
-        newResources[i + 1] = oldResources[i];
-      }
+      System.arraycopy(oldResources, 1, newResources, 2, oldResources.length - 1);
 
       final LocalPartitionMetadata newPmd =
           new LocalPartitionMetadata(

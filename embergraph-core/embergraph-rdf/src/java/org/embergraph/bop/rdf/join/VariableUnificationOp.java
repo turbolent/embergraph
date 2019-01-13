@@ -153,7 +153,7 @@ public class VariableUnificationOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 

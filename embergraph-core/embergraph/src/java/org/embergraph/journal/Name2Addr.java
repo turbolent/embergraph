@@ -478,7 +478,7 @@ public class Name2Addr extends BTree {
 
     /** @return <i>self</i> */
     @Override
-    public CommitIndexTask call() throws Exception {
+    public CommitIndexTask call() {
 
       if (log.isInfoEnabled()) log.info("Will commit: " + l.name);
 
@@ -611,11 +611,11 @@ public class Name2Addr extends BTree {
 
     // for each entry in the snapshot of the commit list.
     final List<CommitIndexTask> tasks = new ArrayList<>(a.length);
-    for (int i = 0; i < a.length; i++) {
+    for (final DirtyListener l : a) {
 
-      final DirtyListener l = a[i];
-
-      if (log.isInfoEnabled()) log.info("Will commit: " + l.name);
+      if (log.isInfoEnabled()) {
+        log.info("Will commit: " + l.name);
+      }
 
       tasks.add(new CommitIndexTask(l, commitTime));
     }

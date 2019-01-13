@@ -9,6 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 import cern.colt.function.ObjectProcedure;
+import java.util.Arrays;
+
 /*
  * Resizable list holding <code>Object</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
@@ -977,7 +979,7 @@ public class ObjectArrayList extends AbstractList {
     int mySize = size();
     Object[] theElements = elements;
     java.util.ArrayList list = new java.util.ArrayList(mySize);
-    for (int i = 0; i < mySize; i++) list.add(theElements[i]);
+    list.addAll(Arrays.asList(theElements).subList(0, mySize));
     return list;
   }
   /*

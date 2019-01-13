@@ -753,7 +753,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
           tmp.add(resourceManager.getDataServiceUUID());
 
-          moveTargets = tmp.toArray(new UUID[tmp.size()]);
+          moveTargets = tmp.toArray(new UUID[0]);
         }
 
         // #of splits.
@@ -774,7 +774,6 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         if (log.isInfoEnabled()) log.info("will scatter: " + vmd);
 
-        continue;
       }
     } // itr.hasNext()
 
@@ -2287,7 +2286,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
    * <p>FIXME make the atomic update tasks truly atomic using full transactions and/or distributed
    * locks and correcting actions.
    */
-  protected List<AbstractTask> chooseTasks(final boolean forceCompactingMerges) throws Exception {
+  protected List<AbstractTask> chooseTasks(final boolean forceCompactingMerges) {
 
     // the old journal.
     final AbstractJournal oldJournal = resourceManager.getJournal(lastCommitTime);
@@ -2368,7 +2367,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       final Iterator<Map.Entry<String, String>> itrx = used.entrySet().iterator();
       while (itrx.hasNext()) {
         final Map.Entry<String, String> entry = itrx.next();
-        sb.append("\n" + entry.getKey() + "\t = " + entry.getValue());
+        sb.append("\n").append(entry.getKey()).append("\t = ").append(entry.getValue());
       }
       log.warn(
           "\nlastCommitTime="
@@ -2681,7 +2680,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
    * @throws Exception This implementation does not throw anything since there is no one to catch
    *     the exception. Instead it logs exceptions at a high log level.
    */
-  public Object call() throws Exception {
+  public Object call() {
 
     /*
      * Mark the purpose of the thread using the same variable name as the
@@ -2950,8 +2949,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
    * Runs the overflow tasks one at a time, stopping when the journal needs to overflow again, when
    * we run out of time, or when there are no more tasks to be executed.
    */
-  protected <T> void runTasksInSingleThread(final List<AbstractTask<T>> tasks)
-      throws InterruptedException {
+  protected <T> void runTasksInSingleThread(final List<AbstractTask<T>> tasks) {
 
     final ExecutorService executorService =
         Executors.newSingleThreadExecutor(DaemonThreadFactory.defaultThreadFactory());
@@ -2992,7 +2990,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
         final AbstractTask<T> task = titr.next();
 
-        final Future<? extends Object> f = resourceManager.getConcurrencyManager().submit(task);
+        final Future<?> f = resourceManager.getConcurrencyManager().submit(task);
 
         getFutureForTask(f, task, remaining, TimeUnit.NANOSECONDS);
 
@@ -3067,7 +3065,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       final Iterator<AbstractTask<T>> titr = tasks.iterator();
 
       // verify that all tasks completed successfully.
-      for (Future<? extends Object> f : futures) {
+      for (Future<?> f : futures) {
 
         // the task for that future.
         final AbstractTask<T> task = titr.next();
@@ -3104,7 +3102,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
    * that index partition succeeds.
    */
   private void getFutureForTask(
-      final Future<? extends Object> f,
+      final Future<?> f,
       final AbstractTask task,
       final long timeout,
       final TimeUnit unit) {

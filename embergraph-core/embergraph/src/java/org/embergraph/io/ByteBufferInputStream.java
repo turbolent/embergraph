@@ -50,7 +50,7 @@ public class ByteBufferInputStream extends InputStream {
    *
    * @return The byte as a value in [0:255].
    */
-  public synchronized int read() throws IOException {
+  public synchronized int read() {
 
     if (buf.remaining() == 0) {
 
@@ -69,7 +69,7 @@ public class ByteBufferInputStream extends InputStream {
 
   }
 
-  public synchronized int read(final byte[] a, final int off, final int len) throws IOException {
+  public synchronized int read(final byte[] a, final int off, final int len) {
 
     if (len == 0) return 0;
 

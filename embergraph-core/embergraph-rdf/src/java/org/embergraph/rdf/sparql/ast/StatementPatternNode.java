@@ -562,22 +562,22 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
     final VarNode sid = sid();
     if (sid != null) {
-      sb.append(" [sid=" + sid + "]");
+      sb.append(" [sid=").append(sid).append("]");
     }
 
     final Scope scope = getScope();
     if (scope != null) {
-      sb.append(" [scope=" + scope + "]");
+      sb.append(" [scope=").append(scope).append("]");
     }
 
     final VarNode fastRangeCountVar = getFastRangeCountVar();
     if (fastRangeCountVar != null) {
-      sb.append(" [fastRangeCount=" + fastRangeCountVar + "]");
+      sb.append(" [fastRangeCount=").append(fastRangeCountVar).append("]");
     }
 
     final VarNode distinctTermScanVar = getDistinctTermScanVar();
     if (distinctTermScanVar != null) {
-      sb.append(" [distinctTermScan=" + distinctTermScanVar + "]");
+      sb.append(" [distinctTermScan=").append(distinctTermScanVar).append("]");
     }
 
     if (isOptional()) {
@@ -585,7 +585,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     }
 
     if (!getAttachedJoinFilters().isEmpty()) {
-      sb.append(" [#filters=" + getAttachedJoinFilters().size() + "]");
+      sb.append(" [#filters=").append(getAttachedJoinFilters().size()).append("]");
     }
 
     return sb.toString();

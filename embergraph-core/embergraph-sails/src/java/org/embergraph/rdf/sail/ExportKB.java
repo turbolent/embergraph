@@ -178,21 +178,22 @@ public class ExportKB {
     // Prepare a comment block for the properties file.
     final StringBuilder comments = new StringBuilder("Configuration properties.\n");
     if (kb.getIndexManager() instanceof IRawStore) {
-      comments.append("source=" + ((IRawStore) kb.getIndexManager()).getFile() + "\n");
-      comments.append("namespace=" + namespace + "\n");
+      comments.append("source=").append(((IRawStore) kb.getIndexManager()).getFile()).append("\n");
+      comments.append("namespace=").append(namespace).append("\n");
       // The timestamp of the KB view.
-      comments.append("timestamp=" + kb.getTimestamp() + "\n");
+      comments.append("timestamp=").append(kb.getTimestamp()).append("\n");
       // The date and time when the KB export began. (Automatically added by Java).
       //            comments.append("exportDate=" + new Date() + "\n");
       // The approximate #of statements (includes axioms, inferences, and
       // deleted statements).
-      comments.append("fastStatementCount=" + kb.getStatementCount(false /* exact */) + "\n");
+      comments.append("fastStatementCount=").append(kb.getStatementCount(false /* exact */))
+          .append("\n");
       // The #of URIs in the lexicon indices.
-      comments.append("uriCount=" + kb.getURICount() + "\n");
+      comments.append("uriCount=").append(kb.getURICount()).append("\n");
       // The #of Literals in the lexicon indices.
-      comments.append("literalCount=" + kb.getLiteralCount() + "\n");
+      comments.append("literalCount=").append(kb.getLiteralCount()).append("\n");
       // The #of blank nodes in the lexicon indices.
-      comments.append("bnodeCount=" + kb.getBNodeCount() + "\n");
+      comments.append("bnodeCount=").append(kb.getBNodeCount()).append("\n");
     }
     // Flatten the properties so inherited defaults will also be written
     // out.

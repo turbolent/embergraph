@@ -103,7 +103,7 @@ public class EmbergraphSailRepository extends SailRepository {
    * @return a read-only connection to the database
    * @see EmbergraphSail#getReadOnlyConnection()
    */
-  public EmbergraphSailRepositoryConnection getReadOnlyConnection() throws RepositoryException {
+  public EmbergraphSailRepositoryConnection getReadOnlyConnection() {
 
     return new EmbergraphSailRepositoryConnection(this, getSail().getReadOnlyConnection());
   }
@@ -116,8 +116,7 @@ public class EmbergraphSailRepository extends SailRepository {
    * @return a read-only connection to the database
    * @see EmbergraphSail#getReadOnlyConnection(long)
    */
-  public EmbergraphSailRepositoryConnection getReadOnlyConnection(final long timestamp)
-      throws RepositoryException {
+  public EmbergraphSailRepositoryConnection getReadOnlyConnection(final long timestamp) {
 
     return new EmbergraphSailRepositoryConnection(this, getSail().getReadOnlyConnection(timestamp));
   }
@@ -170,15 +169,7 @@ public class EmbergraphSailRepository extends SailRepository {
    * @see EmbergraphSail#getUnisolatedConnection()
    * @see #getConnection()
    */
-  public EmbergraphSailRepositoryConnection getUnisolatedConnection() throws RepositoryException {
-
-    try {
-
-      return new EmbergraphSailRepositoryConnection(this, getSail().getUnisolatedConnection());
-
-    } catch (InterruptedException e) {
-
-      throw new RepositoryException(e);
-    }
+  public EmbergraphSailRepositoryConnection getUnisolatedConnection() {
+    return new EmbergraphSailRepositoryConnection(this, getSail().getUnisolatedConnection());
   }
 }

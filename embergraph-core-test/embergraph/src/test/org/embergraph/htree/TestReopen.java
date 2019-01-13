@@ -369,7 +369,7 @@ public class TestReopen extends AbstractHTreeTestCase {
           psr2.nextBytes(key, i);
           byte[] r1 = htree.remove(key);
           byte[] r2 = groundTruth.remove(key);
-          if (r1 == null ? r2 != null : r2 == null) fail("Inconsistency on remove!");
+          if ((r1 == null) == (r2 != null)) fail("Inconsistency on remove!");
           if (r1 != null) entries--;
         } else {
           // add an entry.

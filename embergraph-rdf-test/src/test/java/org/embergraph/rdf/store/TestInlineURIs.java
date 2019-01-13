@@ -90,7 +90,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     super(arg0);
   }
 
-  public void testInlineUUIDs() throws Exception {
+  public void testInlineUUIDs() {
 
     /*
      * The embergraph store, backed by a temporary journal file.
@@ -125,7 +125,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     }
   }
 
-  public void testInlineIPv4s() throws Exception {
+  public void testInlineIPv4s() {
 
     /*
      * The embergraph store, backed by a temporary journal file.
@@ -165,7 +165,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     }
   }
 
-  public void testCustomUUIDNamespace() throws Exception {
+  public void testCustomUUIDNamespace() {
 
     final Properties props = new Properties(getProperties());
 
@@ -277,7 +277,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
         false);
   }
 
-  private void uriRoundtripTestCase(final Object... options) throws Exception {
+  private void uriRoundtripTestCase(final Object... options) {
 
     final Properties props = new Properties(getProperties());
     props.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS, CustomVocab.class.getName());
@@ -327,7 +327,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     }
   }
 
-  public void testMultipurposeIDNamespace() throws Exception {
+  public void testMultipurposeIDNamespace() {
 
     final Properties props = new Properties(getProperties());
 
@@ -387,7 +387,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     }
   }
 
-  public void testInlineArray() throws Exception {
+  public void testInlineArray() {
 
     final Properties props = new Properties(getProperties());
 
@@ -592,7 +592,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
         throw new IllegalArgumentException();
       }
 
-      return new LiteralArrayIV(list.toArray(new AbstractLiteralIV[list.size()]));
+      return new LiteralArrayIV(list.toArray(new AbstractLiteralIV[0]));
     }
 
     @Override

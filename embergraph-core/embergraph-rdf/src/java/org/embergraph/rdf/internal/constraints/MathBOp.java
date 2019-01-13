@@ -184,18 +184,16 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-    sb.append(op());
-    sb.append("(").append(left()).append(", ").append(right()).append(")");
-    return sb.toString();
+    String sb = String.valueOf(op())
+        + "(" + left() + ", " + right() + ")";
+    return sb;
   }
 
   private String toString(final String left, final String right) {
 
-    final StringBuilder sb = new StringBuilder();
-    sb.append(op());
-    sb.append("(").append(left).append(", ").append(right).append(")");
-    return sb.toString();
+    String sb = String.valueOf(op())
+        + "(" + left + ", " + right + ")";
+    return sb;
   }
 
   public final boolean equals(final MathBOp m) {

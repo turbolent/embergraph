@@ -621,14 +621,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       final File[] logFiles =
           logDir.listFiles(
-              new FileFilter() {
-
-                public boolean accept(File pathname) {
-
-                  return pathname.getName().startsWith("counters")
-                      && pathname.getName().endsWith(".xml");
-                }
-              });
+              pathname -> pathname.getName().startsWith("counters")
+                  && pathname.getName().endsWith(".xml"));
 
       if (logFiles != null) {
 
@@ -2081,7 +2075,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  public boolean isHighlyUtilizedDataService(final UUID serviceUUID) throws IOException {
+  public boolean isHighlyUtilizedDataService(final UUID serviceUUID) {
 
     setupLoggingContext();
 
@@ -2114,7 +2108,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  public boolean isUnderUtilizedDataService(final UUID serviceUUID) throws IOException {
+  public boolean isUnderUtilizedDataService(final UUID serviceUUID) {
 
     setupLoggingContext();
 
@@ -2209,7 +2203,7 @@ public abstract class LoadBalancerService extends AbstractService
 
   public UUID[] getUnderUtilizedDataServices(
       final int minCount, final int maxCount, final UUID exclude)
-      throws IOException, TimeoutException, InterruptedException {
+      throws TimeoutException, InterruptedException {
 
     setupLoggingContext();
 

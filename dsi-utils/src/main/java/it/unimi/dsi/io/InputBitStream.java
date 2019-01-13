@@ -567,22 +567,18 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     if (len <= fill) {
       if (len <= 8) {
         bits[0] = (byte) (readFromCurrent(len) << 8 - len);
-        return;
       } else if (len <= 16) {
         bits[0] = (byte) (readFromCurrent(8));
         bits[1] = (byte) (readFromCurrent(len - 8) << 16 - len);
-        return;
       } else if (len <= 24) {
         bits[0] = (byte) (readFromCurrent(8));
         bits[1] = (byte) (readFromCurrent(8));
         bits[2] = (byte) (readFromCurrent(len - 16) << 24 - len);
-        return;
       } else {
         bits[0] = (byte) (readFromCurrent(8));
         bits[1] = (byte) (readFromCurrent(8));
         bits[2] = (byte) (readFromCurrent(8));
         bits[3] = (byte) (readFromCurrent(len - 24) << 32 - len);
-        return;
       }
     } else {
       int i, j = 0, b;

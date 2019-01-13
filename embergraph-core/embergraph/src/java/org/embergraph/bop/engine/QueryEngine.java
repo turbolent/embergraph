@@ -936,7 +936,6 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
           } catch (Throwable t) {
             // log and continue
             log.error(t, t);
-            continue;
           }
         } // while(true)
       } finally {
@@ -1461,8 +1460,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
       final UUID queryId,
       final PipelineOp query,
       final Map<Object, Object> queryAttributes,
-      final IChunkMessage<IBindingSet> msg)
-      throws Exception {
+      final IChunkMessage<IBindingSet> msg) {
 
     if (queryId == null) throw new IllegalArgumentException();
 

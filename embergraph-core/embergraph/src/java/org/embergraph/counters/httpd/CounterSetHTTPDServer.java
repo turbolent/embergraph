@@ -97,13 +97,7 @@ public class CounterSetHTTPDServer implements Runnable {
     final CounterSet counterSet = new CounterSet();
 
     final ICounterSetAccess access =
-        new ICounterSetAccess() {
-
-          public CounterSet getCounters() {
-
-            return counterSet;
-          }
-        };
+        () -> counterSet;
 
     final DummyEventReportingService service = new DummyEventReportingService();
 

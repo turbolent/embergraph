@@ -24,6 +24,7 @@ package org.embergraph.rdf.sail;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -257,7 +258,7 @@ public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
 
   private Collection<BindingSet> getExpected(BindingSet... bindingSets) {
     Collection<BindingSet> expected = new LinkedList<>();
-    for (BindingSet bs : bindingSets) expected.add(bs);
+    expected.addAll(Arrays.asList(bindingSets));
     return expected;
   }
 }

@@ -2037,17 +2037,17 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     //      sb.append(getClass().getName());
     sb.append(super.toString());
 
-    sb.append("{ isDirty=" + isDirty());
+    sb.append("{ isDirty=").append(isDirty());
 
-    sb.append(", isDeleted=" + isDeleted());
+    sb.append(", isDeleted=").append(isDeleted());
 
-    sb.append(", addr=" + identity);
+    sb.append(", addr=").append(identity);
 
     final Node p = (parent == null ? null : parent.get());
 
-    sb.append(", parent=" + (p == null ? "N/A" : p.toShortString()));
+    sb.append(", parent=").append(p == null ? "N/A" : p.toShortString());
 
-    sb.append(", isRoot=" + (btree.root == this));
+    sb.append(", isRoot=").append(btree.root == this);
 
     if (data == null) {
 
@@ -2058,11 +2058,11 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
       return sb.toString();
     }
 
-    sb.append(", nkeys=" + getKeyCount());
+    sb.append(", nkeys=").append(getKeyCount());
 
-    sb.append(", minKeys=" + minKeys());
+    sb.append(", minKeys=").append(minKeys());
 
-    sb.append(", maxKeys=" + maxKeys());
+    sb.append(", maxKeys=").append(maxKeys());
 
     DefaultLeafCoder.toString(this, sb);
 

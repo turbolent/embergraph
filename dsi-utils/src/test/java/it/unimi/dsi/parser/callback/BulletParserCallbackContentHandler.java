@@ -71,10 +71,12 @@ public class BulletParserCallbackContentHandler extends DefaultHandler {
     String value;
     Attribute attribute;
 
-    for (Iterator<Attribute> i = parser.parsedAttributes.iterator(); i.hasNext(); ) {
-      attribute = i.next();
+    for (Attribute attribute1 : parser.parsedAttributes) {
+      attribute = attribute1;
       value = attributes.getValue(attribute.toString());
-      if (value != null) attrMap.put(attribute, new MutableString(value));
+      if (value != null) {
+        attrMap.put(attribute, new MutableString(value));
+      }
     }
 
     Element element = parser.factory.getElement(new MutableString(localName));

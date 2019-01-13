@@ -122,9 +122,11 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
     //        if (resource.length == 0)
     //            throw new IllegalArgumentException();
 
-    for (int i = 0; i < resource.length; i++) {
+    for (R r : resource) {
 
-      if (resource[i] == null) throw new NullPointerException();
+      if (r == null) {
+        throw new NullPointerException();
+      }
     }
 
     if (target == null) throw new NullPointerException();

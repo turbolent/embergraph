@@ -250,7 +250,7 @@ public class TestParse_iostat extends AbstractParserTestCase {
     test_iostat_collector(output);
   }
 
-  protected void test_iostat_collector(String output) throws IOException, InterruptedException {
+  protected void test_iostat_collector(String output) throws InterruptedException {
 
     final IOStatCollector ioStatCollector =
         new IOStatCollector(1, true) {

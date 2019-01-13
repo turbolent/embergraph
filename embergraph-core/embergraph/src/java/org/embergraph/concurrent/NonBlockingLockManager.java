@@ -107,7 +107,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @todo reconsider the timeout. it is set to one LBS period right now.
    */
   private final ConcurrentWeakValueCacheWithTimeout<
-          R, ResourceQueue<LockFutureTask<? extends Object>>>
+          R, ResourceQueue<LockFutureTask<?>>>
       resourceQueues =
       new ConcurrentWeakValueCacheWithTimeout<>(
           1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
@@ -137,11 +137,11 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     lock.lock();
     try {
 
-      LockFutureTask<? extends Object> task = null;
+      LockFutureTask<?> task = null;
 
       for (R r : resource) {
 
-        final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(r);
+        final ResourceQueue<LockFutureTask<?>> resourceQueue = resourceQueues.get(r);
 
         if (task == null) {
 
@@ -420,15 +420,15 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
           new Instrument<String>() {
             public void sample() {
               final Iterator<
-                      Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<? extends Object>>>>>
+                      Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<?>>>>>
                   itr = resourceQueues.entryIterator();
               final LinkedList<ResourceQueueSize> list = new LinkedList<>();
               while (itr.hasNext()) {
-                final Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<? extends Object>>>>
+                final Map.Entry<R, WeakReference<ResourceQueue<LockFutureTask<?>>>>
                     entry = itr.next();
-                final WeakReference<ResourceQueue<LockFutureTask<? extends Object>>> queueRef =
+                final WeakReference<ResourceQueue<LockFutureTask<?>>> queueRef =
                     entry.getValue();
-                final ResourceQueue<LockFutureTask<? extends Object>> queue = queueRef.get();
+                final ResourceQueue<LockFutureTask<?>> queue = queueRef.get();
                 if (queue == null) continue;
                 list.add(new ResourceQueueSize(queue));
               }
@@ -460,7 +460,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     final R resource;
     int size;
 
-    public ResourceQueueSize(ResourceQueue<LockFutureTask<? extends Object>> queue) {
+    public ResourceQueueSize(ResourceQueue<LockFutureTask<?>> queue) {
       resource = queue.getResource();
       size = queue.getQueueSize();
     }
@@ -712,7 +712,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      * the {@link ResourceQueue}s would be asynchronously cleared from the {@link
      * NonBlockingLockManager#resourceQueues} collection by the garbage collector.
      */
-    private final LinkedHashSet<ResourceQueue<LockFutureTask<? extends Object>>> lockedResources =
+    private final LinkedHashSet<ResourceQueue<LockFutureTask<?>>> lockedResources =
         new LinkedHashSet<>();
 
     /** True if the {@link #lockTimeout} has expired when measured against <i>now</i>. */
@@ -923,16 +923,16 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @param resource The resource.
    * @return The {@link ResourceQueue}.
    */
-  private ResourceQueue<LockFutureTask<? extends Object>> declareResource(final R resource) {
+  private ResourceQueue<LockFutureTask<?>> declareResource(final R resource) {
 
     // test 1st to avoid creating a new ResourceQueue if it already exists.
-    ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(resource);
+    ResourceQueue<LockFutureTask<?>> resourceQueue = resourceQueues.get(resource);
 
     // not found, so create a new ResourceQueue for that resource.
     resourceQueue = new ResourceQueue<>(resource);
 
     // put if absent.
-    final ResourceQueue<LockFutureTask<? extends Object>> oldval =
+    final ResourceQueue<LockFutureTask<?>> oldval =
         resourceQueues.putIfAbsent(resource, resourceQueue);
 
     if (oldval != null) {
@@ -1080,14 +1080,14 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * or periods when the system is at the maximum multi-programming level and can not accept another
    * lock request.
    */
-  private final BlockingQueue<LockFutureTask<? extends Object>> acceptedTasks =
+  private final BlockingQueue<LockFutureTask<?>> acceptedTasks =
       new LinkedBlockingQueue<>();
 
   /*
    * Tasks whose lock requests are in the appropriate {@link ResourceQueue}s but which are not yet
    * executing.
    */
-  private final BlockingQueue<LockFutureTask<? extends Object>> waitingTasks =
+  private final BlockingQueue<LockFutureTask<?>> waitingTasks =
       new LinkedBlockingQueue<>();
 
   /*
@@ -1221,11 +1221,11 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      * @param tasks The tasks.
      */
     private void cancelTasks(
-        final Iterator<LockFutureTask<? extends Object>> itr, final boolean mayInterruptIfRunning) {
+        final Iterator<LockFutureTask<?>> itr, final boolean mayInterruptIfRunning) {
 
       while (itr.hasNext()) {
 
-        final LockFutureTask<? extends Object> t = itr.next();
+        final LockFutureTask<?> t = itr.next();
 
         t.cancel(mayInterruptIfRunning);
 
@@ -1254,11 +1254,11 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
       int nmoved = 0;
 
-      final Iterator<LockFutureTask<? extends Object>> itr = acceptedTasks.iterator();
+      final Iterator<LockFutureTask<?>> itr = acceptedTasks.iterator();
 
       while (itr.hasNext()) {
 
-        final LockFutureTask<? extends Object> t = itr.next();
+        final LockFutureTask<?> t = itr.next();
 
         if (t.isCancelled()) {
 
@@ -1465,13 +1465,13 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      */
     private boolean processWaitingTasks() {
 
-      final Iterator<LockFutureTask<? extends Object>> itr = waitingTasks.iterator();
+      final Iterator<LockFutureTask<?>> itr = waitingTasks.iterator();
 
       int nstarted = 0;
 
       while (itr.hasNext()) {
 
-        final LockFutureTask<? extends Object> t = itr.next();
+        final LockFutureTask<?> t = itr.next();
 
         if (t.isCancelled()) {
 
@@ -1541,7 +1541,6 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           nstarted++;
 
-          continue;
         }
       }
 
@@ -1698,12 +1697,12 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       /*
        * Collect the set of tasks on which this task must wait.
        */
-      final LinkedHashSet<LockFutureTask<? extends Object>> predecessors =
+      final LinkedHashSet<LockFutureTask<?>> predecessors =
           new LinkedHashSet<>();
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
+        final ResourceQueue<LockFutureTask<?>> resourceQueue = declareResource(r);
 
         if (!resourceQueue.queue.isEmpty()) {
 
@@ -1743,7 +1742,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
+        final ResourceQueue<LockFutureTask<?>> resourceQueue = declareResource(r);
 
         /*
          * Add a lock request for this resource.
@@ -1769,7 +1768,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       for (R r : task.resource) {
 
         // make sure queue exists for this resource.
-        final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
+        final ResourceQueue<LockFutureTask<?>> resourceQueue = declareResource(r);
 
         /*
          * Add a lock request for this resource.
@@ -1791,13 +1790,13 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @param task The task.
    * @return <code>true</code> iff it holds its locks.
    */
-  private boolean holdsAllLocks(final LockFutureTask<? extends Object> task) {
+  private boolean holdsAllLocks(final LockFutureTask<?> task) {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
     for (R r : task.resource) {
 
-      final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(r);
+      final ResourceQueue<LockFutureTask<?>> resourceQueue = resourceQueues.get(r);
 
       assert resourceQueue != null : "resource=" + r;
 
@@ -1829,12 +1828,12 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
     try {
 
-      final Iterator<ResourceQueue<LockFutureTask<? extends Object>>> itr =
+      final Iterator<ResourceQueue<LockFutureTask<?>>> itr =
           t.lockedResources.iterator();
 
       while (itr.hasNext()) {
 
-        final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = itr.next();
+        final ResourceQueue<LockFutureTask<?>> resourceQueue = itr.next();
 
         /*
          * Remove lock request from resource queue
@@ -1926,7 +1925,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @see LockManager
    * @see TxDag
    */
-  protected class ResourceQueue<T extends LockFutureTask<? extends Object>> {
+  protected class ResourceQueue<T extends LockFutureTask<?>> {
 
     /** The resource whose access is controlled by this object. */
     private final R resource;

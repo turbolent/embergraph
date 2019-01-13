@@ -25,28 +25,28 @@ public class RemoteFutureImpl<T> implements RemoteFuture<T> {
     this.future = future;
   }
 
-  public boolean cancel(boolean mayInterruptIfRunning) throws IOException {
+  public boolean cancel(boolean mayInterruptIfRunning) {
 
     return future.cancel(mayInterruptIfRunning);
   }
 
-  public T get() throws InterruptedException, ExecutionException, IOException {
+  public T get() throws InterruptedException, ExecutionException {
 
     return future.get();
   }
 
   public T get(long timeout, TimeUnit unit)
-      throws InterruptedException, ExecutionException, TimeoutException, IOException {
+      throws InterruptedException, ExecutionException, TimeoutException {
 
     return future.get(timeout, unit);
   }
 
-  public boolean isCancelled() throws IOException {
+  public boolean isCancelled() {
 
     return future.isCancelled();
   }
 
-  public boolean isDone() throws IOException {
+  public boolean isDone() {
 
     return future.isDone();
   }

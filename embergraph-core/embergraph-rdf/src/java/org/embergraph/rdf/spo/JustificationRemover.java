@@ -76,7 +76,7 @@ public class JustificationRemover implements Callable<Long> {
     this.writeTime = writeTime;
   }
 
-  public Long call() throws Exception {
+  public Long call() {
 
     final long begin = System.currentTimeMillis();
 

@@ -95,7 +95,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
    *     identifier was not already known. (This may be used to write on the reverse index).
    * @throws Exception
    */
-  public KVO<EmbergraphValue>[] call() throws Exception {
+  public KVO<EmbergraphValue>[] call() {
 
     /*
      * Insert into the forward index (term -> id). This will either assign a

@@ -1248,7 +1248,6 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         quorumChange.await();
       }
       if (client == null) throw new AsynchronousQuorumCloseException();
-      return;
     } finally {
       lock.unlock();
     }
@@ -1270,7 +1269,6 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       }
       if (client == null) throw new AsynchronousQuorumCloseException();
       if (remaining <= 0) throw new TimeoutException();
-      return;
     } finally {
       lock.unlock();
     }
@@ -1298,11 +1296,9 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       }
       if (client == null) throw new AsynchronousQuorumCloseException();
       if (remaining <= 0) throw new TimeoutException();
-      return;
     } catch (InterruptedException e) {
       // propagate interrupt.
       Thread.currentThread().interrupt();
-      return;
     }
   }
 
@@ -2213,7 +2209,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       }
 
       @Override
-      protected void doAction() throws InterruptedException {
+      protected void doAction() {
         log.warn(
             "Forcing remove of service"
                 + ": thisService="
@@ -2284,8 +2280,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
         qlog.info("self    = " + serviceId);
       }
       boolean modified = false;
-      for (int i = 0; i < pipeline.length; i++) {
-        final UUID otherId = pipeline[i];
+      for (final UUID otherId : pipeline) {
         if (leaderId.equals(otherId)) {
           // Done.
           return modified;
@@ -2409,18 +2404,16 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
       if (watcherActionService == null) throw new IllegalStateException();
       watcherActionService.execute(
-          new Runnable() {
-            public void run() {
-              /*
-               * Note: DO NOT acquire the lock here. It will cause
-               * reorganizePipeline() to deadlock if it runs with the lock
-               * held.
-               */
-              try {
-                r.run();
-              } catch (Throwable t) {
-                log.error(t, t);
-              }
+          () -> {
+            /*
+             * Note: DO NOT acquire the lock here. It will cause
+             * reorganizePipeline() to deadlock if it runs with the lock
+             * held.
+             */
+            try {
+              r.run();
+            } catch (Throwable t) {
+              log.error(t, t);
             }
           });
     }
@@ -2697,31 +2690,27 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                      */
                     if (log.isInfoEnabled())
                       log.info("Electing leader: " + AbstractQuorum.this.toString());
+                    /*
+                     * Note: This needs to be submitted
+                     * as an action since we will
+                     * otherwise be in the zk event
+                     * thread and be unable to observe
+                     * the effect of the action that we
+                     * take.
+                     *
+                     * This was observed for the
+                     * following HA3 test. A was unable
+                     * to observe the new token value
+                     * when it invoked setToken() from
+                     * the current thread rather than by
+                     * submitting the setToken() method
+                     * in a runnable as we do here.
+                     *
+                     * See TestHA3JournalServer.
+                     * testStartABC_RebuildWithPipelineReorganisation
+                     */
                     doAction(
-                        new Runnable() {
-                          /*
-                           * Note: This needs to be submitted
-                           * as an action since we will
-                           * otherwise be in the zk event
-                           * thread and be unable to observe
-                           * the effect of the action that we
-                           * take.
-                           *
-                           * This was observed for the
-                           * following HA3 test. A was unable
-                           * to observe the new token value
-                           * when it invoked setToken() from
-                           * the current thread rather than by
-                           * submitting the setToken() method
-                           * in a runnable as we do here.
-                           *
-                           * See TestHA3JournalServer.
-                           * testStartABC_RebuildWithPipelineReorganisation
-                           */
-                          public void run() {
-                            actor.setToken(lastValidToken + 1);
-                          }
-                        });
+                        () -> actor.setToken(lastValidToken + 1));
                   }
                 }
               }
@@ -2820,11 +2809,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                  */
                 if (log.isInfoEnabled()) log.info("First service will join");
                 doAction(
-                    new Runnable() {
-                      public void run() {
-                        actor.serviceJoin();
-                      }
-                    });
+                    () -> actor.serviceJoin());
               } else {
                 if (clientId.equals(serviceId)) {
                   /*
@@ -2845,12 +2830,10 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                     if (log.isInfoEnabled())
                       log.info("Follower will join: " + AbstractQuorum.this.toString());
                     doAction(
-                        new Runnable() {
-                          public void run() {
-                            actor.serviceJoin();
-                            if (qlog.isInfoEnabled())
-                              qlog.info("After join: " + AbstractQuorum.this);
-                          }
+                        () -> {
+                          actor.serviceJoin();
+                          if (qlog.isInfoEnabled())
+                            qlog.info("After join: " + AbstractQuorum.this);
                         });
                   }
                 }
@@ -3137,20 +3120,14 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                  */
                 final long lastCommitTime = ((QuorumService<?>) member).getLastCommitTime();
                 doAction(
-                    new Runnable() {
-                      public void run() {
-                        // recast our vote.
-                        actor.castVote(lastCommitTime);
-                      }
+                    () -> {
+                      // recast our vote.
+                      actor.castVote(lastCommitTime);
                     });
               } else {
                 // just withdraw the vote.
                 doAction(
-                    new Runnable() {
-                      public void run() {
-                        actor.withdrawVote();
-                      }
-                    });
+                    () -> actor.withdrawVote());
               }
             }
           }
@@ -3241,32 +3218,30 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                       "Ready to elect leader or reorganize pipeline: "
                           + AbstractQuorum.this.toString());
                 doAction(
-                    new Runnable() {
-                      public void run() {
-                        if (actor.reorganizePipeline()) {
-                          /*
-                           * Reorganizing the pipeline can
-                           * cause service leaves for services
-                           * before the leader in the pipeline
-                           * order. This means that we need to
-                           * wait until the pipeline is
-                           * properly organized and then try
-                           * again.
-                           */
-                          if (log.isInfoEnabled())
-                            log.info("Reorganized the pipeline: " + AbstractQuorum.this.toString());
-                        } else {
-                          /*
-                           * The pipeline is well organized,
-                           * so elect the leader now.
-                           */
-                          if (log.isInfoEnabled())
-                            log.info("Electing leader: " + AbstractQuorum.this.toString());
-                          //                                            actor
-                          //
-                          // .setLastValidToken(lastValidToken + 1);
-                          actor.setToken(lastValidToken + 1);
-                        }
+                    () -> {
+                      if (actor.reorganizePipeline()) {
+                        /*
+                         * Reorganizing the pipeline can
+                         * cause service leaves for services
+                         * before the leader in the pipeline
+                         * order. This means that we need to
+                         * wait until the pipeline is
+                         * properly organized and then try
+                         * again.
+                         */
+                        if (log.isInfoEnabled())
+                          log.info("Reorganized the pipeline: " + AbstractQuorum.this.toString());
+                      } else {
+                        /*
+                         * The pipeline is well organized,
+                         * so elect the leader now.
+                         */
+                        if (log.isInfoEnabled())
+                          log.info("Electing leader: " + AbstractQuorum.this.toString());
+                        //                                            actor
+                        //
+                        // .setLastValidToken(lastValidToken + 1);
+                        actor.setToken(lastValidToken + 1);
                       }
                     });
                 //                                client.electedLeader(); // moved to watcher.
@@ -3290,11 +3265,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 if (log.isInfoEnabled())
                   log.info("Follower will join: " + AbstractQuorum.this.toString());
                 doAction(
-                    new Runnable() {
-                      public void run() {
-                        actor.serviceJoin();
-                      }
-                    });
+                    () -> actor.serviceJoin());
               }
             }
           }
@@ -3370,11 +3341,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
            */
           //                    new Thread() {public void run(){actor.clearToken();}}.start();
           doAction(
-              new Runnable() {
-                public void run() {
-                  actor.clearToken();
-                }
-              });
+              () -> actor.clearToken());
         }
         if (client != null) {
           // Notify all quorum members that a service left.
@@ -3433,24 +3400,22 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
       try {
         // Submit task to send the event.
         executor.execute(
-            new Runnable() {
-              public void run() {
+            () -> {
+              /*
+               * Block until we get the lock so these events will come
+               * after the Quorum has handled the original message.
+               */
+              lock.lock();
+              try {
                 /*
-                 * Block until we get the lock so these events will come
-                 * after the Quorum has handled the original message.
+                 * We acquired the lock so the events appear after
+                 * they were handled by the Quourm, but we will send
+                 * the events without the lock.
                  */
-                lock.lock();
-                try {
-                  /*
-                   * We acquired the lock so the events appear after
-                   * they were handled by the Quourm, but we will send
-                   * the events without the lock.
-                   */
-                } finally {
-                  lock.unlock();
-                }
-                sendEventNow(e);
+              } finally {
+                lock.unlock();
               }
+              sendEventNow(e);
             });
       } catch (RejectedExecutionException ex) {
         // ignore.

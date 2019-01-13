@@ -83,12 +83,12 @@ public class EmbergraphSPARQLResultsJSONParserForConstruct extends RDFParserBase
   }
 
   @Override
-  public void handleBoolean(boolean value) throws QueryResultHandlerException {
+  public void handleBoolean(boolean value) {
     // do nothing
   }
 
   @Override
-  public void handleLinks(List<String> linkUrls) throws QueryResultHandlerException {
+  public void handleLinks(List<String> linkUrls) {
     // do nothing
   }
 

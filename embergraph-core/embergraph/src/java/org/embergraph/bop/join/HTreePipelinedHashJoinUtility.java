@@ -878,36 +878,27 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
     sb.append(getClass().getSimpleName());
 
-    sb.append("{open=" + getOpen());
-    sb.append(",joinType=" + getJoinType());
+    sb.append("{open=").append(getOpen());
+    sb.append(",joinType=").append(getJoinType());
     //        sb.append(",chunkSize=" + chunkSize);
     //        sb.append(",optional=" + optional);
     //        sb.append(",filter=" + filter);
-    if (getAskVar() != null) sb.append(",askVar=" + getAskVar());
-    sb.append(",joinVars=" + Arrays.toString(getJoinVars()));
-    sb.append(",outputDistinctJVs=" + getOutputDistintcJVs());
-    if (getSelectVars() != null) sb.append(",selectVars=" + Arrays.toString(getSelectVars()));
-    if (getConstraints() != null) sb.append(",constraints=" + Arrays.toString(getConstraints()));
-    sb.append(",size=" + getRightSolutionCount());
-    sb.append(
-        ", distinctProjectionsWithoutSubqueryResult="
-            + rightSolutionsWithoutSubqueryResult.getEntryCount());
-    sb.append(
-        ", distinctBindingSets (seen/released)="
-            + nDistinctBindingSets
-            + "/"
-            + nDistinctBindingSetsReleased);
-    sb.append(", subqueriesIssued=" + nSubqueriesIssued);
-    sb.append(", resultsFromSubqueries=" + nResultsFromSubqueries);
-    sb.append(
-        ",considered(left="
-            + nleftConsidered
-            + ",right="
-            + nrightConsidered
-            + ",joins="
-            + nJoinsConsidered
-            + ")");
-    if (getJoinSet() != null) sb.append(",joinSetSize=" + getJoinSetSize());
+    if (getAskVar() != null) sb.append(",askVar=").append(getAskVar());
+    sb.append(",joinVars=").append(Arrays.toString(getJoinVars()));
+    sb.append(",outputDistinctJVs=").append(getOutputDistintcJVs());
+    if (getSelectVars() != null) sb.append(",selectVars=").append(Arrays.toString(getSelectVars()));
+    if (getConstraints() != null) sb.append(",constraints=")
+        .append(Arrays.toString(getConstraints()));
+    sb.append(",size=").append(getRightSolutionCount());
+    sb.append(", distinctProjectionsWithoutSubqueryResult=")
+        .append(rightSolutionsWithoutSubqueryResult.getEntryCount());
+    sb.append(", distinctBindingSets (seen/released)=").append(nDistinctBindingSets).append("/")
+        .append(nDistinctBindingSetsReleased);
+    sb.append(", subqueriesIssued=").append(nSubqueriesIssued);
+    sb.append(", resultsFromSubqueries=").append(nResultsFromSubqueries);
+    sb.append(",considered(left=").append(nleftConsidered).append(",right=")
+        .append(nrightConsidered).append(",joins=").append(nJoinsConsidered).append(")");
+    if (getJoinSet() != null) sb.append(",joinSetSize=").append(getJoinSetSize());
     //        sb.append(",encoder="+encoder);
     sb.append("}");
 

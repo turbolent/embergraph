@@ -56,13 +56,13 @@ public class RDFJoinNexusFactory extends AbstractJoinNexusFactory {
   @Override
   protected void toString(final StringBuilder sb) {
 
-    sb.append("{ ruleContext=" + ruleContext);
+    sb.append("{ ruleContext=").append(ruleContext);
 
-    sb.append(", justify=" + justify);
+    sb.append(", justify=").append(justify);
 
-    sb.append(", backchain=" + backchain);
+    sb.append(", backchain=").append(backchain);
 
-    sb.append(", isOwlSameAsUsed=" + isOwlSameAsUsed);
+    sb.append(", isOwlSameAsUsed=").append(isOwlSameAsUsed);
   }
 
   /*

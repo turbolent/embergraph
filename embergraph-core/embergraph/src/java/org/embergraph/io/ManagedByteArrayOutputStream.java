@@ -43,7 +43,7 @@ public class ManagedByteArrayOutputStream extends OutputStream {
   }
 
   @Override
-  public void write(int b) throws IOException {
+  public void write(int b) {
 
     buf.append((byte) (b & 0xff));
   }

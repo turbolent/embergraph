@@ -491,7 +491,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       final DeleteInsertGraph op,
       final AST2BOpUpdateContext context,
       final DeleteInsertWhereStats deleteInsertWhereStats)
-      throws QueryEvaluationException, RepositoryException, SailException {
+      throws QueryEvaluationException, SailException {
 
     if (runOnQueryEngine) throw new UnsupportedOperationException();
 
@@ -1679,7 +1679,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
     /** Overridden to send out an incremental progress report for the end of the LOAD operation. */
     @Override
-    public void endRDF() throws RDFHandlerException {
+    public void endRDF() {
 
       final long nparsed = nmodified.get();
 

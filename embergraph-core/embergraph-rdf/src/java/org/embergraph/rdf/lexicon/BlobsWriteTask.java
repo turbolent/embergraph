@@ -78,7 +78,7 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
    *     index).
    * @throws Exception
    */
-  public KVO<EmbergraphValue>[] call() throws Exception {
+  public KVO<EmbergraphValue>[] call() {
 
     /*
      * Insert into the TERMS index ({termCode,hash(Value),counter} ->

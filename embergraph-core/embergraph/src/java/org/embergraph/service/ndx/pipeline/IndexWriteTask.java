@@ -62,7 +62,7 @@ import org.embergraph.service.ndx.IScaleOutClientIndex;
  */
 public abstract class IndexWriteTask<
         H extends IndexAsyncWriteStats<L, HS>,
-        O extends Object,
+        O,
         E extends KVO<O>,
         S extends IndexPartitionWriteTask,
         L extends PartitionLocator,

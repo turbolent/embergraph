@@ -84,8 +84,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
    * @throws InterruptedException
    */
   public UUID[] getUnderUtilizedDataServices(
-      final int minCount, final int maxCount, final UUID exclude)
-      throws TimeoutException, InterruptedException {
+      final int minCount, final int maxCount, final UUID exclude) {
 
     if (exclude != null && knownGood.equals(exclude)) {
 
@@ -103,15 +102,17 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
         new ArrayList<>(Math.max(scores.length, Math.max(minCount, maxCount)));
 
     int nok = 0;
-    for (int i = 0; i < scores.length; i++) {
-
-      final ServiceScore score = scores[i];
+    for (final ServiceScore score : scores) {
 
       // excluded?
-      if (score.serviceUUID.equals(exclude)) continue;
+      if (score.serviceUUID.equals(exclude)) {
+        continue;
+      }
 
       // not active?
-      if (!isActiveDataService(score.serviceUUID)) continue;
+      if (!isActiveDataService(score.serviceUUID)) {
+        continue;
+      }
 
       if (isUnderUtilizedDataService(score, scores)) {
 
@@ -122,14 +123,18 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
 
       if (maxCount > 0 && nok >= maxCount) {
 
-        if (INFO) log.info("Satisifed maxCount=" + maxCount);
+        if (INFO) {
+          log.info("Satisifed maxCount=" + maxCount);
+        }
 
         break;
       }
 
       if (minCount > 0 && maxCount == 0 && nok >= minCount) {
 
-        if (INFO) log.info("Satisifed minCount=" + minCount);
+        if (INFO) {
+          log.info("Satisifed minCount=" + minCount);
+        }
 
         break;
       }

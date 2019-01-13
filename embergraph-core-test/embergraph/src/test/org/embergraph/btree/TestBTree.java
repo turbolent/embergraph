@@ -98,9 +98,7 @@ public class TestBTree extends AbstractBTreeTestCase {
 
     int[] branchingFactors = new int[] {3, 4, 5}; // 6,7,8,20,55,79,256,512,1024,4097};
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      int m = branchingFactors[i];
+    for (int m : branchingFactors) {
 
       doSplitWithIncreasingKeySequence(getBTree(m), m, m);
 
@@ -120,9 +118,7 @@ public class TestBTree extends AbstractBTreeTestCase {
 
     int[] branchingFactors = new int[] {3, 4, 5}; // 6,7,8,20,55,79,256,512,1024,4097};
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      int m = branchingFactors[i];
+    for (int m : branchingFactors) {
 
       doSplitWithDecreasingKeySequence(getBTree(m), m, m);
 
@@ -155,9 +151,7 @@ public class TestBTree extends AbstractBTreeTestCase {
 
     int[] branchingFactors = new int[] {3, 4, 5}; // 6,7,8,20,55,79,256,512,1024,4097};
 
-    for (int i = 0; i < branchingFactors.length; i++) {
-
-      int m = branchingFactors[i];
+    for (int m : branchingFactors) {
 
       doSplitWithRandomDenseKeySequence(getBTree(m), m, m);
 

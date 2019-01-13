@@ -91,8 +91,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
    * @throws SailException
    */
   public AST2BOpUpdateContext(
-      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection conn)
-      throws SailException {
+      final ASTContainer astContainer, final EmbergraphSailRepositoryConnection conn) {
 
     super(astContainer, conn.getTripleStore());
 

@@ -99,7 +99,7 @@ public abstract class AbstractResourceManagerTask<T> extends AbstractTask<T> {
 
     sb.append(label);
 
-    sb.append("(" + a.length + ")=[");
+    sb.append("(").append(a.length).append(")=[");
 
     for (Object t : a) {
 

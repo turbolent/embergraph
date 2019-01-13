@@ -61,7 +61,7 @@ public class ListIndicesTask extends DataServiceCallable<String[]> {
   //
   //    }
 
-  public String[] call() throws Exception {
+  public String[] call() {
 
     //        if (dataService == null)
     //            throw new IllegalStateException("DataService not set.");

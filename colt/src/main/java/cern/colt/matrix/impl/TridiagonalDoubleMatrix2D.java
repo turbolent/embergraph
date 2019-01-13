@@ -132,11 +132,7 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
       */
 
       forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              return function.apply(value);
-            }
-          });
+          (i, j, value) -> function.apply(value));
     } else {
       super.assign(function);
     }
@@ -170,11 +166,9 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
     if (source instanceof RCDoubleMatrix2D || source instanceof SparseDoubleMatrix2D) {
       assign(0);
       source.forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, value);
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, value);
+            return value;
           });
       return this;
     }
@@ -190,33 +184,27 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
       final double alpha = ((cern.jet.math.PlusMult) function).multiplicator;
       if (alpha == 0) return this; // nothing to do
       y.forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, getQuick(i, j) + alpha * value);
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, getQuick(i, j) + alpha * value);
+            return value;
           });
       return this;
     }
 
     if (function == cern.jet.math.Functions.mult) { // x[i] = x[i] * y[i]
       forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, getQuick(i, j) * y.getQuick(i, j));
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, getQuick(i, j) * y.getQuick(i, j));
+            return value;
           });
       return this;
     }
 
     if (function == cern.jet.math.Functions.div) { // x[i] = x[i] / y[i]
       forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, getQuick(i, j) / y.getQuick(i, j));
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, getQuick(i, j) / y.getQuick(i, j));
+            return value;
           });
       return this;
     }
@@ -472,18 +460,16 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
     if (yElements == null || zElements == null) throw new InternalError();
 
     forEachNonZero(
-        new cern.colt.function.IntIntDoubleFunction() {
-          public double apply(int i, int j, double value) {
-            if (transposeA) {
-              int tmp = i;
-              i = j;
-              j = tmp;
-            }
-            zElements[zi + zStride * i] += value * yElements[yi + yStride * j];
-            // z.setQuick(row,z.getQuick(row) + value * y.getQuick(column));
-            // System.out.println("["+i+","+j+"]-->"+value);
-            return value;
+        (i, j, value) -> {
+          if (transposeA) {
+            int tmp = i;
+            i = j;
+            j = tmp;
           }
+          zElements[zi + zStride * i] += value * yElements[yi + yStride * j];
+          // z.setQuick(row,z.getQuick(row) + value * y.getQuick(column));
+          // System.out.println("["+i+","+j+"]-->"+value);
+          return value;
         });
 
     if (alpha != 1) z.assign(cern.jet.math.Functions.mult(alpha));
@@ -535,13 +521,11 @@ class TridiagonalDoubleMatrix2D extends WrapperDoubleMatrix2D {
     final cern.jet.math.PlusMult fun = cern.jet.math.PlusMult.plusMult(0);
 
     forEachNonZero(
-        new cern.colt.function.IntIntDoubleFunction() {
-          public double apply(int i, int j, double value) {
-            fun.multiplicator = value * alpha;
-            if (!transposeA) Crows[i].assign(Brows[j], fun);
-            else Crows[j].assign(Brows[i], fun);
-            return value;
-          }
+        (i, j, value) -> {
+          fun.multiplicator = value * alpha;
+          if (!transposeA) Crows[i].assign(Brows[j], fun);
+          else Crows[j].assign(Brows[i], fun);
+          return value;
         });
 
     return C;

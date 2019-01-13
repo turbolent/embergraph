@@ -149,7 +149,7 @@ public class ServiceScore {
    */
   public static ServiceScore newInstance(
       final IIndexManager indexManager, final String contextPath, final UUID serviceUUID)
-      throws IllegalArgumentException, ClassCastException, IOException, RuntimeException {
+      throws IOException, RuntimeException {
 
     if (indexManager == null) throw new IllegalArgumentException();
 

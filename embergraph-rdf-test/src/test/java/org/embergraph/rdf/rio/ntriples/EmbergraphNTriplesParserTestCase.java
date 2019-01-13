@@ -53,7 +53,7 @@ public abstract class EmbergraphNTriplesParserTestCase extends TestCase2 {
     turtleParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
     turtleParser.setRDFHandler(
         new RDFHandlerBase() {
-          public void handleStatement(Statement st) throws RDFHandlerException {
+          public void handleStatement(Statement st) {
             if (log.isInfoEnabled()) log.info("Statement: " + st);
           }
         });
@@ -96,7 +96,7 @@ public abstract class EmbergraphNTriplesParserTestCase extends TestCase2 {
     turtleParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
     turtleParser.setRDFHandler(
         new RDFHandlerBase() {
-          public void handleStatement(final Statement st) throws RDFHandlerException {
+          public void handleStatement(final Statement st) {
             if (log.isInfoEnabled()) log.info("Statement: " + st);
           }
         });
@@ -121,7 +121,7 @@ public abstract class EmbergraphNTriplesParserTestCase extends TestCase2 {
     turtleParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
     turtleParser.setRDFHandler(
         new RDFHandlerBase() {
-          public void handleStatement(final Statement st) throws RDFHandlerException {
+          public void handleStatement(final Statement st) {
             if (log.isInfoEnabled()) log.info("Statement: " + st);
           }
         });

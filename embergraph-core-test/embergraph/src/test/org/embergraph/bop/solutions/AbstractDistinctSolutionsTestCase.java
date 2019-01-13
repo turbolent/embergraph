@@ -80,14 +80,14 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
 
   protected Setup setup;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     //        jnl = new Journal(getProperties());
 
     setup = new Setup(getName());
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     //        if (jnl != null) {
     //            jnl.destroy();
@@ -212,7 +212,7 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
    * @throws InterruptedException
    */
   @SuppressWarnings("rawtypes")
-  public void test_distinctBindingSets() throws InterruptedException, ExecutionException {
+  public void test_distinctBindingSets() {
 
     final UUID queryId = UUID.randomUUID();
 

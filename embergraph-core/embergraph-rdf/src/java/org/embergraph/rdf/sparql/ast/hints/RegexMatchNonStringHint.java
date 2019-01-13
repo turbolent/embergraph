@@ -64,7 +64,7 @@ final class RegexMatchNonStringHint extends AbstractBooleanQueryHint {
       @SuppressWarnings("rawtypes")
       final IValueExpression n2 = n.getValueExpression();
 
-      if (n2 != null && n2 instanceof RegexBOp) {
+      if (n2 instanceof RegexBOp) {
         ((RegexBOp) n2).setMatchNonString(value);
       }
     }

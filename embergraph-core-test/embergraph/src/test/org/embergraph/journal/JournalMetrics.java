@@ -14,12 +14,9 @@ public class JournalMetrics {
 
   /** @return a debug string with info on open journals and active threads */
   public String getStatus() {
-    final StringBuilder bldr = new StringBuilder();
 
-    bldr.append("Open journals: " + AbstractJournal.nopen.get() + "\n");
-
-    bldr.append("Threads - startup: " + m_startupThreads + ", current: " + m_grp.activeCount());
-
-    return bldr.toString();
+    String bldr = ("Open journals: " + AbstractJournal.nopen.get() + "\n")
+        + "Threads - startup: " + m_startupThreads + ", current: " + m_grp.activeCount();
+    return bldr;
   }
 }

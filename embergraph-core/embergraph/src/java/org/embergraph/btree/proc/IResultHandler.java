@@ -35,7 +35,7 @@ import org.embergraph.service.Split;
  *     iterative processing to the results as they are obtained without any sense of aggregation.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public interface IResultHandler<R extends Object, A extends Object> {
+public interface IResultHandler<R, A> {
 
   /*
    * Method is invoked for each result and is responsible for combining the results in whatever

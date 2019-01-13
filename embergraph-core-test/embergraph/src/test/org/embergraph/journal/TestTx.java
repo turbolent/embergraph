@@ -354,7 +354,7 @@ public class TestTx extends ProxyTestCase<Journal> {
         final ICommitRecord record =
             CommitRecordSerializer.INSTANCE.deserialize(journal.read(entry.addr));
 
-        out.append(record.toString() + "\n");
+        out.append(record.toString()).append("\n");
       } catch (RuntimeException re) {
 
         throw new RuntimeException("Problem with entry at " + entry.addr, re);
@@ -1297,7 +1297,7 @@ public class TestTx extends ProxyTestCase<Journal> {
      *     already successfully committed).
      * @throws Exception
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       // Start a transaction.
       final long txid = jnl.newTx(ITx.UNISOLATED);

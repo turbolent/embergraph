@@ -50,8 +50,7 @@ public class RAMGraphLoader extends GraphLoader {
   private class RAMStatementHandler extends AddStatementHandler {
 
     @Override
-    protected void addStatement(final Statement stmt, final Resource[] c)
-        throws RDFHandlerException {
+    protected void addStatement(final Statement stmt, final Resource[] c) {
 
       g.add(stmt);
 

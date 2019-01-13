@@ -243,7 +243,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
    * @see QuorumPipelineImpl#handleReplicatedWrite(IHAWriteMessage, ByteBuffer)
    */
   protected abstract void handleReplicatedWrite(
-      IHASyncRequest req, IHAWriteMessage msg, ByteBuffer data) throws Exception;
+      IHASyncRequest req, IHAWriteMessage msg, ByteBuffer data);
 
   /*
    * Core implementation of callback for monitoring progress of replicated writes.
@@ -261,7 +261,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
       final int nreads,
       final int rdlen,
       final int rem)
-      throws Exception;
+  ;
 
   /*
    * {@inheritDoc}
@@ -269,8 +269,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
    * <p>Note: The default implementation is a NOP.
    */
   @Override
-  public void logWriteCacheBlock(final IHAWriteMessage msg, final ByteBuffer data)
-      throws IOException {
+  public void logWriteCacheBlock(final IHAWriteMessage msg, final ByteBuffer data) {
 
     // NOP
 
@@ -295,7 +294,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
    */
   @Override
   public void logRootBlock( // final boolean isJoinedService,
-      final IRootBlockView rootBlock) throws IOException {
+      final IRootBlockView rootBlock) {
 
     // NOP
 
@@ -320,7 +319,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
 
   @Override
   public PrepareResponse prepare2Phase(final PrepareRequest req)
-      throws InterruptedException, TimeoutException, IOException {
+      throws InterruptedException, IOException {
 
     return commitImpl.prepare2Phase(req);
   }

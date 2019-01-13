@@ -186,24 +186,20 @@ public class Test_REST_DESCRIBE<S extends IIndexManager> extends AbstractTestNan
 
       final AtomicInteger errorCount = new AtomicInteger();
       final Callable<Void> task =
-          new Callable<Void>() {
+          () -> {
+            try {
 
-            @Override
-            public Void call() throws Exception {
-              try {
+              final Graph actual = asGraph(m_repo.prepareGraphQuery(queryStr));
 
-                final Graph actual = asGraph(m_repo.prepareGraphQuery(queryStr));
+              assertTrue(!actual.isEmpty());
 
-                assertTrue(!actual.isEmpty());
+              return null;
+            } catch (Exception e) {
+              log.warn("Call failure", e);
 
-                return null;
-              } catch (Exception e) {
-                log.warn("Call failure", e);
+              errorCount.incrementAndGet();
 
-                errorCount.incrementAndGet();
-
-                throw e;
-              }
+              throw e;
             }
           };
 

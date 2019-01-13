@@ -80,7 +80,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * </pre>
    */
   @SuppressWarnings("rawtypes")
-  public void test_bindings_001() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_001() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -168,7 +168,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * </pre>
    */
   @SuppressWarnings("rawtypes")
-  public void test_bindings_002() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_002() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -258,7 +258,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * </pre>
    */
   @SuppressWarnings("rawtypes")
-  public void test_bindings_003() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_003() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -353,7 +353,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * </pre>
    */
   @SuppressWarnings("rawtypes")
-  public void test_bindings_004() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_004() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -452,7 +452,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * </pre>
    */
   @SuppressWarnings("rawtypes")
-  public void test_bindings_005() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_005() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -539,7 +539,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * }
    * </pre>
    */
-  public void test_bindings_006() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_006() throws TokenMgrError {
 
     final String sparql =
         ""
@@ -582,7 +582,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * }
    * </pre>
    */
-  public void test_bindings_007() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_007() throws TokenMgrError {
 
     final String sparql =
         ""
@@ -624,7 +624,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * }
    * </pre>
    */
-  public void test_bindings_008() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_008() throws TokenMgrError {
 
     final String sparql =
         ""
@@ -667,7 +667,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * }
    * </pre>
    */
-  public void test_bindings_009() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_009() throws TokenMgrError {
 
     final String sparql =
         ""
@@ -712,7 +712,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
    * }
    * </pre>
    */
-  public void test_bindings_010() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_bindings_010() throws TokenMgrError {
 
     final String sparql =
         ""

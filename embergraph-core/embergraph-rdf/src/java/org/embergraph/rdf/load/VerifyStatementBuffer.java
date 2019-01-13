@@ -155,7 +155,6 @@ public class VerifyStatementBuffer extends StatementBuffer {
                   + " is marked as "
                   + spo.getStatementType());
 
-          continue;
         }
       }
     }

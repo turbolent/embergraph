@@ -124,9 +124,9 @@ public class AbstractResourceManagerBootstrapTestCase extends TestCase2 {
         return;
       }
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

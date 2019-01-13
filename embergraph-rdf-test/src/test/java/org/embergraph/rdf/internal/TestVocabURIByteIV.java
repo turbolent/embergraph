@@ -23,7 +23,6 @@ package org.embergraph.rdf.internal;
 
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
-import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.util.BytesUtil;
 
 /*

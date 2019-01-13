@@ -29,11 +29,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface IServletDelegate {
 
-  void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doGet(HttpServletRequest req, HttpServletResponse resp);
 
-  void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doPost(HttpServletRequest req, HttpServletResponse resp);
 
-  void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doDelete(HttpServletRequest req, HttpServletResponse resp);
 
-  void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+  void doPut(HttpServletRequest req, HttpServletResponse resp);
 }

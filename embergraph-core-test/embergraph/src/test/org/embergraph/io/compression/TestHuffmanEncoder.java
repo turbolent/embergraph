@@ -180,7 +180,7 @@ public class TestHuffmanEncoder extends TestCase2 {
    * byte[]s. While instances of these classes are reused, concurrency is not tested (reuse is
    * serialized).
    */
-  public void test_huffman_reuse() throws IOException {
+  public void test_huffman_reuse() {
 
     final String[] messages = {
       "this is an example of huffman encoding",
@@ -192,9 +192,9 @@ public class TestHuffmanEncoder extends TestCase2 {
     HuffmanEncoder c = new HuffmanEncoder();
     HuffmanDecoder d = new HuffmanDecoder();
 
-    for (int i = 0; i < messages.length; i++) {
+    for (String message : messages) {
 
-      final byte[] uncompressed = messages[i].getBytes(StandardCharsets.UTF_8);
+      final byte[] uncompressed = message.getBytes(StandardCharsets.UTF_8);
 
       System.err.println(
           "uncompressed(" + uncompressed.length + "): " + Arrays.toString(uncompressed));

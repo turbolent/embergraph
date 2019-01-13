@@ -369,10 +369,10 @@ public class AST2BOpRTO extends AST2BOpJoins {
             // new NV(PipelineOp.Annotations.LAST_PASS, true),// required
             //                new NV(JoinGraph.Annotations.SELECTED, selectVars
             //                        .toArray(new IVariable[selectVars.size()])),
-            new NV(JoinGraph.Annotations.VERTICES, preds.toArray(new Predicate[preds.size()])),
+            new NV(JoinGraph.Annotations.VERTICES, preds.toArray(new Predicate[0])),
             new NV(
                 JoinGraph.Annotations.CONSTRAINTS,
-                constraints.toArray(new IConstraint[constraints.size()])),
+                constraints.toArray(new IConstraint[0])),
             new NV(JoinGraph.Annotations.JOIN_GROUP, rtoJoinGroup),
             new NV(JoinGraph.Annotations.LIMIT, limit),
             new NV(JoinGraph.Annotations.NEDGES, nedges),
@@ -605,8 +605,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
       final IPredicate<?>[] predicates,
       final IConstraint[] constraints,
       final boolean pathIsComplete,
-      final SampleBase sourceSample)
-      throws Exception {
+      final SampleBase sourceSample) {
 
     if (predicates == null) throw new IllegalArgumentException();
 
@@ -697,8 +696,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
       final IPredicate<?>[] predicates,
       final IConstraint[] constraints,
       final boolean pathIsComplete,
-      final SampleBase sourceSample)
-      throws Exception {
+      final SampleBase sourceSample) {
 
     // Note: Arguments are checked by caller : cutoffJoin().
 
@@ -1337,7 +1335,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
             estRead, // estimated tuples read if fully executed.
             limit,
             estimateEnum,
-            result.toArray(new IBindingSet[result.size()]));
+            result.toArray(new IBindingSet[0]));
 
     if (log.isDebugEnabled())
       log.debug( // Arrays.toString(BOpUtility.getPredIds(predicates))

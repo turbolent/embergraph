@@ -166,7 +166,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public void test() throws IOException, InterruptedException, ExecutionException {
+    public void test() throws InterruptedException, ExecutionException {
 
       // no overflow yet.
       assertEquals(0, resourceManager.getAsynchronousOverflowCount());
@@ -295,7 +295,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public void test() throws IOException, InterruptedException, ExecutionException {
+    public void test() throws InterruptedException, ExecutionException {
 
       // no overflow yet.
       assertEquals(0, resourceManager.getAsynchronousOverflowCount());
@@ -448,7 +448,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public void test() throws IOException, InterruptedException, ExecutionException {
+    public void test() throws InterruptedException, ExecutionException {
 
       // no overflow yet.
       assertEquals(0, resourceManager.getAsynchronousOverflowCount());

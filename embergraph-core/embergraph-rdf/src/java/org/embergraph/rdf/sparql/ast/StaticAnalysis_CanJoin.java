@@ -400,7 +400,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
       } // joinGraphConstraints != null;
 
       // store the constraint[] for that predicate.
-      ret[i] = constraints.toArray(new FilterNode[constraints.size()]);
+      ret[i] = constraints.toArray(new FilterNode[0]);
     } // next predicate in the join path.
 
     /*

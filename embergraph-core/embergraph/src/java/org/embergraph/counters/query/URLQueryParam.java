@@ -1,5 +1,6 @@
 package org.embergraph.counters.query;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 /*
@@ -43,10 +44,7 @@ public class URLQueryParam {
 
     Vector<String> tmp = new Vector<>();
 
-    for (String s : values) {
-
-      tmp.add(s);
-    }
+    tmp.addAll(Arrays.asList(values));
 
     this.values = tmp;
   }

@@ -25,6 +25,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Collections;
 import org.apache.log4j.Logger;
 import org.openrdf.query.resultio.TupleQueryResultParserFactory;
 import org.openrdf.query.resultio.TupleQueryResultParserRegistry;
@@ -102,9 +103,9 @@ public class ServiceProviderHook {
     TURTLE_RDR =
         new RDFFormat(
             "Turtle-RDR",
-            Arrays.asList("application/x-turtle-RDR"),
+            Collections.singletonList("application/x-turtle-RDR"),
             Charset.forName("UTF-8"),
-            Arrays.asList("ttlx"),
+            Collections.singletonList("ttlx"),
             true,
             false);
 

@@ -37,7 +37,7 @@ public class EmptyAnalyzer extends Analyzer {
     Tokenizer source =
         new Tokenizer() {
           @Override
-          public boolean incrementToken() throws IOException {
+          public boolean incrementToken() {
             return false;
           }
         };

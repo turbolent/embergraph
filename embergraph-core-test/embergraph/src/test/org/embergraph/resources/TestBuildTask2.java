@@ -471,8 +471,6 @@ public class TestBuildTask2 extends AbstractResourceManagerTestCase {
 
           AbstractBTreeTestCase.assertSameBTree(groundTruth, seg);
 
-          continue;
-
         } else {
 
           // Success.

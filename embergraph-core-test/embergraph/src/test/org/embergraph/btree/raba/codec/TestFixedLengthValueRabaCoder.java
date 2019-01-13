@@ -38,7 +38,7 @@ public class TestFixedLengthValueRabaCoder extends AbstractRabaCoderTestCase {
     super(name);
   }
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     rabaCoder = new FixedLengthValueRabaCoder(64);
   }

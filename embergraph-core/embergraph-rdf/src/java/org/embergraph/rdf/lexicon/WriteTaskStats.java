@@ -49,20 +49,19 @@ public class WriteTaskStats {
   final AtomicInteger nunknown = new AtomicInteger();
 
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getSimpleName());
-    sb.append("{ndistinct=" + ndistinct);
-    sb.append(",keyGenTime=" + keyGenTime + "ms");
-    sb.append(",keySortTime=" + keySortTime + "ms");
-    sb.append(",indexTime=" + indexTime + "ms");
-    sb.append(",t2idIndexTime=" + forwardIndexTime + "ms");
-    sb.append(",id2tIndexTime=" + reverseIndexTime + "ms");
-    sb.append(",termsIndexTime=" + termsIndexTime + "ms");
-    sb.append(",fullTextIndexTime=" + fullTextIndexTime + "ms");
-    sb.append(",totalBucketSize=" + totalBucketSize);
-    sb.append(",maxBucketSize=" + maxBucketSize);
-    sb.append(",nunknown=" + nunknown);
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ndistinct=" + ndistinct
+        + ",keyGenTime=" + keyGenTime + "ms"
+        + ",keySortTime=" + keySortTime + "ms"
+        + ",indexTime=" + indexTime + "ms"
+        + ",t2idIndexTime=" + forwardIndexTime + "ms"
+        + ",id2tIndexTime=" + reverseIndexTime + "ms"
+        + ",termsIndexTime=" + termsIndexTime + "ms"
+        + ",fullTextIndexTime=" + fullTextIndexTime + "ms"
+        + ",totalBucketSize=" + totalBucketSize
+        + ",maxBucketSize=" + maxBucketSize
+        + ",nunknown=" + nunknown
+        + "}";
+    return sb;
   }
 }

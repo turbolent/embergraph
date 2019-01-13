@@ -680,7 +680,7 @@ public class FixedAllocator implements Allocator {
       if (block.m_addr == 0) {
         break;
       }
-      sb.append(block.getStats(null) + "\r\n");
+      sb.append(block.getStats(null)).append("\r\n");
       if (counter != null) counter.addAndGet(block.getAllocBits() * (long) m_size);
     }
 
@@ -941,10 +941,11 @@ public class FixedAllocator implements Allocator {
         return value;
       } else {
         StringBuilder sb = new StringBuilder();
-        sb.append("FixedAllocator returning null address, with freeBits: " + m_freeBits + "\n");
+        sb.append("FixedAllocator returning null address, with freeBits: ").append(m_freeBits)
+            .append("\n");
 
         for (AllocBlock ab : m_allocBlocks) {
-          sb.append(ab.show() + "\n");
+          sb.append(ab.show()).append("\n");
         }
 
         log.error(sb);
@@ -1090,7 +1091,7 @@ public class FixedAllocator implements Allocator {
     int si = -1;
 
     if (stats == null) {
-      str.append("Index: " + m_index + ", " + m_size);
+      str.append("Index: ").append(m_index).append(", ").append(m_size);
     } else {
       for (int i = 0; i < stats.length; i++) {
         if (m_size == stats[i].m_blockSize) {

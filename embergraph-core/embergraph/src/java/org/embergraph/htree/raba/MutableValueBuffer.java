@@ -108,11 +108,9 @@ public class MutableValueBuffer implements IRaba {
     this.values = new byte[src.values.length][];
 
     // copy the values.
-    for (int i = 0; i < values.length; i++) {
-
-      // Note: copies the reference.
-      this.values[i] = src.values[i];
-    }
+    // Note: copies the reference.
+    if (values.length >= 0)
+      System.arraycopy(src.values, 0, this.values, 0, values.length);
   }
 
   /*
@@ -355,7 +353,7 @@ public class MutableValueBuffer implements IRaba {
    * @throws UnsupportedOperationException
    */
   @Override
-  public int add(DataInput in, int len) throws IOException {
+  public int add(DataInput in, int len) {
 
     throw new UnsupportedOperationException();
   }

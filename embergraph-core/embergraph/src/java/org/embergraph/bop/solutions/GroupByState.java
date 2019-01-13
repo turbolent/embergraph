@@ -68,13 +68,12 @@ public class GroupByState implements IGroupByState, Serializable {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getSimpleName());
-    sb.append("{select=" + Arrays.toString(select));
-    sb.append(",groupBy=" + Arrays.toString(groupBy));
-    sb.append(",having=" + Arrays.toString(having));
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{select=" + Arrays.toString(select)
+        + ",groupBy=" + Arrays.toString(groupBy)
+        + ",having=" + Arrays.toString(having)
+        + "}";
+    return sb;
   }
 
   @Override

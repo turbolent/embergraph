@@ -331,32 +331,29 @@ public class NanoHTTPD implements IServiceShutdown {
     open = true;
 
     acceptService.submit(
-        new Runnable() {
+        () -> {
 
-          public void run() {
+          try {
 
-            try {
+            while (open) {
 
-              while (open) {
+              /*
+               * Hand off request to a pool of worker threads.
+               */
 
-                /*
-                 * Hand off request to a pool of worker threads.
-                 */
-
-                requestService.submit(new HTTPSession(ss.accept()));
-              }
-
-            } catch (IOException ioe) {
-
-              if (!open) {
-
-                if (log.isInfoEnabled()) log.info("closed.");
-
-                return;
-              }
-
-              log.error(ioe, ioe);
+              requestService.submit(new HTTPSession(ss.accept()));
             }
+
+          } catch (IOException ioe) {
+
+            if (!open) {
+
+              if (log.isInfoEnabled()) log.info("closed.");
+
+              return;
+            }
+
+            log.error(ioe, ioe);
           }
         });
   }
@@ -537,7 +534,6 @@ public class NanoHTTPD implements IServiceShutdown {
         } catch (Exception ex) {
           log.warn(ex.getMessage(), ex);
           sendError(HTTP_INTERNALERROR, ex.getMessage());
-          return;
         }
 
       } catch (InterruptedException ie) {
@@ -1084,45 +1080,45 @@ public class NanoHTTPD implements IServiceShutdown {
       // No index file, list the directory
       else if (allowDirectoryListing) {
         final String[] files = f.list();
-        String msg = "<html><body><h1>Directory " + uri + "</h1><br/>";
+        StringBuilder msg = new StringBuilder("<html><body><h1>Directory " + uri + "</h1><br/>");
 
         if (uri.length() > 1) {
           final String u = uri.substring(0, uri.length() - 1);
           final int slash = u.lastIndexOf('/');
           if (slash >= 0 && slash < u.length())
-            msg += "<b><a href=\"" + uri.substring(0, slash + 1) + "\">..</a></b><br/>";
+            msg.append("<b><a href=\"").append(uri.substring(0, slash + 1))
+                .append("\">..</a></b><br/>");
         }
 
         for (int i = 0; i < files.length; ++i) {
           final File curFile = new File(f, files[i]);
           final boolean dir = curFile.isDirectory();
           if (dir) {
-            msg += "<b>";
+            msg.append("<b>");
             files[i] += "/";
           }
 
-          msg += "<a href=\"" + encodeUri(uri + files[i]) + "\">" + files[i] + "</a>";
+          msg.append("<a href=\"").append(encodeUri(uri + files[i])).append("\">").append(files[i])
+              .append("</a>");
 
           // Show file size
           if (curFile.isFile()) {
             long len = curFile.length();
-            msg += " &nbsp;<font size=2>(";
-            if (len < 1024) msg += curFile.length() + " bytes";
+            msg.append(" &nbsp;<font size=2>(");
+            if (len < 1024) msg.append(curFile.length()).append(" bytes");
             else if (len < 1024 * 1024)
-              msg += curFile.length() / 1024 + "." + (curFile.length() % 1024 / 10 % 100) + " KB";
+              msg.append(curFile.length() / 1024).append(".")
+                  .append(curFile.length() % 1024 / 10 % 100).append(" KB");
             else
-              msg +=
-                  curFile.length() / (1024 * 1024)
-                      + "."
-                      + curFile.length() % (1024 * 1024) / 10 % 100
-                      + " MB";
+              msg.append(curFile.length() / (1024 * 1024)).append(".")
+                  .append(curFile.length() % (1024 * 1024) / 10 % 100).append(" MB");
 
-            msg += ")</font>";
+            msg.append(")</font>");
           }
-          msg += "<br/>";
-          if (dir) msg += "</b>";
+          msg.append("<br/>");
+          if (dir) msg.append("</b>");
         }
-        return new Response(HTTP_OK, MIME_TEXT_HTML, msg);
+        return new Response(HTTP_OK, MIME_TEXT_HTML, msg.toString());
       } else {
         return new Response(HTTP_FORBIDDEN, MIME_TEXT_PLAIN, "FORBIDDEN: No directory listing.");
       }

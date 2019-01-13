@@ -196,7 +196,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
    * @todo This test now logs a warning rather than failing pending resolution of
    *     https://sourceforge.net/apps/trac/bigdata/ticket/147
    */
-  public void test_stress_startWriteStop2() throws InterruptedException, ExecutionException {
+  public void test_stress_startWriteStop2() {
 
     final int LIMIT = 10000;
     int nerr = 0;

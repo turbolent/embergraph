@@ -38,18 +38,14 @@ public interface IHALogReader {
    * of the HALog directory.
    */
   FileFilter HALOG_FILTER =
-      new FileFilter() {
+      f -> {
 
-        @Override
-        public boolean accept(final File f) {
+        if (f.isDirectory()) {
 
-          if (f.isDirectory()) {
-
-            return true;
-          }
-
-          return f.getName().endsWith(HA_LOG_EXT);
+          return true;
         }
+
+        return f.getName().endsWith(HA_LOG_EXT);
       };
 
   /*

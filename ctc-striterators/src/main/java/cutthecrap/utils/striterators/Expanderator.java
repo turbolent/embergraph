@@ -57,7 +57,6 @@ public class Expanderator extends Prefetch implements ITailOp {
 
           // Avoid unnecessary stack growth
           // return getNext();
-          continue;
         } else {
           return null;
         }

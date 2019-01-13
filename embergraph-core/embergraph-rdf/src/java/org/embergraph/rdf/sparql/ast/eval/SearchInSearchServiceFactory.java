@@ -535,9 +535,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
        * We are filtering out incoming binding sets that don't have a
        * binding for the search var
        */
-      for (int i = 0; i < bindingsClause.length; i++) {
-
-        final IBindingSet bs = bindingsClause[i];
+      for (final IBindingSet bs : bindingsClause) {
 
         if (bs.isBound(searchVar)) {
 
@@ -626,18 +624,18 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
 
       final Set<IV> subjects = getSubjects();
 
-      for (int i = 0; i < bindingsClause.length; i++) {
+      for (IBindingSet iBindingSet : bindingsClause) {
 
         /*
          * We know it's bound.  If it weren't it would have been
          * filtered out above.
          */
-        final IV s = (IV) bindingsClause[i].get(searchVar).get();
+        final IV s = (IV) iBindingSet.get(searchVar).get();
 
         if (subjects.contains(s)) {
 
           // add the binding set to the output
-          out[numAccepted++] = bindingsClause[i];
+          out[numAccepted++] = iBindingSet;
         }
       }
 

@@ -98,7 +98,7 @@ public class TestDataOutputBuffer extends TestCase2 {
    */
 
   /** Tests ability to append to the buffer, including with overflow of the buffer capacity. */
-  public void test_append_bytes() throws IOException {
+  public void test_append_bytes() {
 
     // setup buffer with some data and two(2) free bytes.
     DataOutputBuffer DataOutputBuffer = new DataOutputBuffer(5, new byte[] {1, 2, 3, 4, 5, 0, 0});

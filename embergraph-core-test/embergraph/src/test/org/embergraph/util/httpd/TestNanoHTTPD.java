@@ -97,11 +97,7 @@ public class TestNanoHTTPD extends TestCase2 {
 
         final FutureTask<Void> ft =
             new FutureTask<>(
-                new Runnable() {
-                  public void run() {
-                    fixture.shutdown();
-                  }
-                },
+                () -> fixture.shutdown(),
                 null /* Void */);
 
         executor.submit(ft);

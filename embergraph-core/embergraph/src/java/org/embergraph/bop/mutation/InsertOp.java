@@ -163,7 +163,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
      *     mapping them across shards. However, for standalone databases it may make sense to insert
      *     a SORT on the selected attributes before the INSERT.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       final ILocalBTreeView ndx =
           getMutableLocalIndexView(relation, keyOrder, context.getPartitionId());
@@ -183,9 +183,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
 
           int nwritten = 0;
           final List<BOp> args = predicate.args();
-          for (int i = 0; i < chunk.length; i++) {
-
-            final IBindingSet bset = chunk[i];
+          for (final IBindingSet bset : chunk) {
 
             final E e = relation.newElement(args, bset);
 

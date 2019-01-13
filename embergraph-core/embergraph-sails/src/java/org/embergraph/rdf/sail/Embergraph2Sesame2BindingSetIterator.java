@@ -276,12 +276,12 @@ public class Embergraph2Sesame2BindingSetIterator
   }
 
   /** @throws UnsupportedOperationException */
-  public void remove() throws QueryEvaluationException {
+  public void remove() {
 
     throw new UnsupportedOperationException();
   }
 
-  public void close() throws QueryEvaluationException {
+  public void close() {
 
     if (open) {
 

@@ -92,7 +92,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   /** Create an unisolated transaction, verify its metadata, and abort it. */
-  public void test_CREATE_TX_UNISOLATED_01() throws Exception {
+  public void test_CREATE_TX_UNISOLATED_01() {
 
     assertNotNull(m_mgr);
     assertNotNull(m_mgr.getTransactionManager());
@@ -122,7 +122,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
    * verify that we can read back the write set after the commit. Note that we can only write on the
    * resulting transaction if the namespace supports isolatable indices.
    */
-  public void test_CREATE_TX_UNISOLATED_02() throws Exception {
+  public void test_CREATE_TX_UNISOLATED_02() {
 
     assertNotNull(m_mgr);
     assertNotNull(m_mgr.getTransactionManager());
@@ -141,7 +141,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
   }
 
   /** Create an read-only transaction, verify its metadata, and abort it. */
-  public void test_CREATE_TX_READ_ONLY_01() throws Exception {
+  public void test_CREATE_TX_READ_ONLY_01() {
 
     assertNotNull(m_mgr);
     assertNotNull(m_mgr.getTransactionManager());
@@ -175,7 +175,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
    * that a commit point has been pinned and that subsequent commits have been applied and verify
    * that the new tx is also reading from the correct commit point.)
    */
-  public void test_CREATE_TX_READ_ONLY_02() throws Exception {
+  public void test_CREATE_TX_READ_ONLY_02() {
 
     assertNotNull(m_mgr);
     assertNotNull(m_mgr.getTransactionManager());

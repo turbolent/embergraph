@@ -91,7 +91,7 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
               new AbstractTask<Object>(journal, ITx.UNISOLATED, resource) {
 
                 @Override
-                protected Object doTask() throws Exception {
+                protected Object doTask() {
 
                   return null;
                 }
@@ -142,7 +142,7 @@ public class StressTestLockContention extends ProxyTestCase<Journal> {
 
     while (itr.hasNext()) {
 
-      final Future<? extends Object> future = itr.next();
+      final Future<?> future = itr.next();
 
       if (future.isCancelled()) {
 

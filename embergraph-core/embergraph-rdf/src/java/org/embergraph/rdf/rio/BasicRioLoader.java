@@ -112,9 +112,9 @@ public class BasicRioLoader implements IRioLoader {
     final RioLoaderEvent e =
         new RioLoaderEvent(stmtsAdded, System.currentTimeMillis() - insertStart);
 
-    for (Iterator<RioLoaderListener> it = listeners.iterator(); it.hasNext(); ) {
+    for (RioLoaderListener listener : listeners) {
 
-      it.next().processingNotification(e);
+      listener.processingNotification(e);
     }
   }
 
@@ -276,18 +276,18 @@ public class BasicRioLoader implements IRioLoader {
 
     public BasicRDFHandler() {}
 
-    public void endRDF() throws RDFHandlerException {}
+    public void endRDF() {}
 
-    public void handleComment(String arg0) throws RDFHandlerException {}
+    public void handleComment(String arg0) {}
 
-    public void handleNamespace(String arg0, String arg1) throws RDFHandlerException {}
+    public void handleNamespace(String arg0, String arg1) {}
 
     /** Counts the #of statements. */
-    public void handleStatement(Statement arg0) throws RDFHandlerException {
+    public void handleStatement(Statement arg0) {
 
       stmtsAdded++;
     }
 
-    public void startRDF() throws RDFHandlerException {}
+    public void startRDF() {}
   }
 }

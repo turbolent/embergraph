@@ -145,7 +145,7 @@ public class TestFastRangeCountOp extends TestCase2 {
    * SELECT COUNT(*) as ?count) { ("Mary",?X) }
    * </pre>
    */
-  public void test_fastRangeCount_01() throws InterruptedException, ExecutionException {
+  public void test_fastRangeCount_01() {
 
     final int joinId = 2;
     final int predId = 3;

@@ -5773,12 +5773,8 @@ public abstract class AbstractJournal
 
             haLog.info("Fetching root block from leader.");
             final IRootBlockView leaderRB;
-            try {
-              leaderRB =
-                  leader.getRootBlock(new HARootBlockRequest(null /* storeUUID */)).getRootBlock();
-            } catch (IOException e) {
-              throw new RuntimeException(e);
-            }
+            leaderRB =
+                leader.getRootBlock(new HARootBlockRequest(null /* storeUUID */)).getRootBlock();
 
             if (leaderRB.getCommitCounter() == 0L) {
 
@@ -6578,22 +6574,19 @@ public abstract class AbstractJournal
     }
 
     @Override
-    public IHADigestResponse computeDigest(final IHADigestRequest req)
-        throws IOException, NoSuchAlgorithmException, DigestException {
+    public IHADigestResponse computeDigest(final IHADigestRequest req) {
 
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public IHALogDigestResponse computeHALogDigest(final IHALogDigestRequest req)
-        throws IOException, NoSuchAlgorithmException, DigestException {
+    public IHALogDigestResponse computeHALogDigest(final IHALogDigestRequest req) {
 
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public IHASnapshotDigestResponse computeHASnapshotDigest(final IHASnapshotDigestRequest req)
-        throws IOException, NoSuchAlgorithmException, DigestException {
+    public IHASnapshotDigestResponse computeHASnapshotDigest(final IHASnapshotDigestRequest req) {
 
       throw new UnsupportedOperationException();
     }
@@ -6607,14 +6600,13 @@ public abstract class AbstractJournal
     //        }
 
     @Override
-    public Future<IHASnapshotResponse> takeSnapshot(final IHASnapshotRequest req)
-        throws IOException {
+    public Future<IHASnapshotResponse> takeSnapshot(final IHASnapshotRequest req) {
 
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public Future<Void> rebuildFromLeader(IHARemoteRebuildRequest req) throws IOException {
+    public Future<Void> rebuildFromLeader(IHARemoteRebuildRequest req) {
 
       throw new UnsupportedOperationException();
     }
@@ -6772,7 +6764,7 @@ public abstract class AbstractJournal
       }
 
       @Override
-      public Boolean call() throws Exception {
+      public Boolean call() {
 
         // Vote NO.
         vote.set(false);
@@ -7464,39 +7456,35 @@ public abstract class AbstractJournal
 
       final FutureTask<IHAReadResponse> ft =
           new FutureTask<>(
-              new Callable<IHAReadResponse>() {
+              () -> {
 
-                @Override
-                public IHAReadResponse call() throws Exception {
-
-                  if (haLog.isInfoEnabled()) {
-                    haLog.info("token=" + token);
-                  }
-
-                  quorum.assertQuorum(token);
-
-                  // final ILRUCache<Long, Object> cache = (LRUNexus.INSTANCE
-                  // == null) ? null
-                  // : LRUNexus.getCache(jnl);
-
-                  // Object obj = cache.get(addr);
-                  //
-                  // if(obj != null && obj instanceof IDataRecordAccess) {
-                  //
-                  // return ((IDataRecordAccess)obj).data();
-                  //
-                  // }
-
-                  // read from the local store.
-                  final ByteBuffer b =
-                      ((IHABufferStrategy) getBufferStrategy()).readFromLocalStore(addr);
-
-                  final byte[] a = BytesUtil.toArray(b);
-
-                  // cache.putIfAbsent(addr, b);
-
-                  return new HAReadResponse(a);
+                if (haLog.isInfoEnabled()) {
+                  haLog.info("token=" + token);
                 }
+
+                quorum.assertQuorum(token);
+
+                // final ILRUCache<Long, Object> cache = (LRUNexus.INSTANCE
+                // == null) ? null
+                // : LRUNexus.getCache(jnl);
+
+                // Object obj = cache.get(addr);
+                //
+                // if(obj != null && obj instanceof IDataRecordAccess) {
+                //
+                // return ((IDataRecordAccess)obj).data();
+                //
+                // }
+
+                // read from the local store.
+                final ByteBuffer b =
+                    ((IHABufferStrategy) getBufferStrategy()).readFromLocalStore(addr);
+
+                final byte[] a = BytesUtil.toArray(b);
+
+                // cache.putIfAbsent(addr, b);
+
+                return new HAReadResponse(a);
               });
 
       ft.run();
@@ -7524,8 +7512,7 @@ public abstract class AbstractJournal
      * maintaining the HA Log files.
      */
     @Override
-    public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg)
-        throws IOException {
+    public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg) {
       throw new UnsupportedOperationException();
     }
 
@@ -7534,7 +7521,7 @@ public abstract class AbstractJournal
      * maintaining the HA Log files.
      */
     @Override
-    public Future<Void> sendHALogForWriteSet(IHALogRequest msg) throws IOException {
+    public Future<Void> sendHALogForWriteSet(IHALogRequest msg) {
       throw new UnsupportedOperationException();
     }
 
@@ -7542,7 +7529,7 @@ public abstract class AbstractJournal
      * This is implemented by HAJournal.
      */
     @Override
-    public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) throws IOException {
+    public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) {
       throw new UnsupportedOperationException();
     }
 
@@ -7656,15 +7643,13 @@ public abstract class AbstractJournal
     public Future<Void> moveToEndOfPipeline() {
       final FutureTask<Void> ft =
           new FutureTaskMon<>(
-              new Runnable() {
-                public void run() {
-                  if (haLog.isInfoEnabled()) {
-                    haLog.info("");
-                  }
-                  final QuorumActor<?, ?> actor = quorum.getActor();
-                  actor.pipelineRemove();
-                  actor.pipelineAdd();
+              () -> {
+                if (haLog.isInfoEnabled()) {
+                  haLog.info("");
                 }
+                final QuorumActor<?, ?> actor = quorum.getActor();
+                actor.pipelineRemove();
+                actor.pipelineAdd();
               },
               null /* result */);
       getExecutorService().execute(ft);
@@ -7732,8 +7717,7 @@ public abstract class AbstractJournal
      *     HAJournalServer process </a>
      */
     @Override
-    public void gatherMinimumVisibleCommitTime(final IHAGatherReleaseTimeRequest req)
-        throws IOException {
+    public void gatherMinimumVisibleCommitTime(final IHAGatherReleaseTimeRequest req) {
 
       if (haLog.isInfoEnabled()) haLog.info("req=" + req);
 
@@ -7791,7 +7775,6 @@ public abstract class AbstractJournal
        */
       getExecutorService().execute(ft);
 
-      return;
     }
 
     @Override
@@ -7843,20 +7826,20 @@ public abstract class AbstractJournal
      */
 
     @Override
-    public UUID getServiceUUID() throws IOException {
+    public UUID getServiceUUID() {
 
       return getServiceId();
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Class getServiceIface() throws IOException {
+    public Class getServiceIface() {
 
       return HAGlue.class;
     }
 
     @Override
-    public String getHostname() throws IOException {
+    public String getHostname() {
 
       return AbstractStatisticsCollector.fullyQualifiedHostName;
     }
@@ -7875,8 +7858,7 @@ public abstract class AbstractJournal
     }
 
     @Override
-    public <T> Future<T> submit(final IIndexManagerCallable<T> callable, final boolean asyncFuture)
-        throws IOException {
+    public <T> Future<T> submit(final IIndexManagerCallable<T> callable, final boolean asyncFuture) {
 
       callable.setIndexManager(getIndexManager());
 

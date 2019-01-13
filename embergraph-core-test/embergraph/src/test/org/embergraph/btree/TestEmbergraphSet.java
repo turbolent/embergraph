@@ -53,7 +53,7 @@ public class TestEmbergraphSet extends TestCase {
    */
   EmbergraphSet<String> set;
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     final IndexMetadata indexMetadata = new IndexMetadata(UUID.randomUUID());
 

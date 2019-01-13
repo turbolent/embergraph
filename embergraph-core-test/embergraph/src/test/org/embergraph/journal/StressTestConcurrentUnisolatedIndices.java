@@ -64,13 +64,13 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
   private Journal journal;
 
   @Override
-  public void setUpComparisonTest(final Properties properties) throws Exception {
+  public void setUpComparisonTest(final Properties properties) {
 
     journal = new Journal(properties);
   }
 
   @Override
-  public void tearDownComparisonTest() throws Exception {
+  public void tearDownComparisonTest() {
 
     if (journal != null) {
 
@@ -387,7 +387,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
      * @return null
      */
     @Override
-    public Void doTask() throws Exception {
+    public Void doTask() {
 
       // the index names on which the writer holds a lock.
       final String[] resource = getResource();
@@ -657,7 +657,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
      *
      * @param args
      */
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
 
       // this is the test to be run.
       final String className = StressTestConcurrentUnisolatedIndices.class.getName();

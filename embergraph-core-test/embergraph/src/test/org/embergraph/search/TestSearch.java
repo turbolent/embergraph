@@ -87,7 +87,7 @@ public class TestSearch extends AbstractSearchTest {
     return properties;
   }
 
-  public void test_ChildProofing() throws InterruptedException {
+  public void test_ChildProofing() {
 
     /** all documents are in English. */
     final String languageCode = "EN";

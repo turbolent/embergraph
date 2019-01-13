@@ -209,10 +209,8 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
                   //                    chunk[index].getClass(),
                   chunk.getClass().getComponentType(), nremaining);
 
-      for (int i = 0; i < nremaining; i++) {
-
-        tmp[i] = chunk[index + i];
-      }
+      if (nremaining >= 0)
+        System.arraycopy(chunk, index + 0, tmp, 0, nremaining);
 
       // we need another chunk after this.
       chunk = null;

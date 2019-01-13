@@ -170,7 +170,7 @@ public abstract class ProxyEmbergraphSailTestCase extends AbstractEmbergraphSail
         for (Thread t : threads) {
           if (t == null) continue;
           if (!first) info.append(',');
-          info.append("[" + t.getName() + "]");
+          info.append("[").append(t.getName()).append("]");
           first = false;
         }
 
@@ -260,9 +260,9 @@ public abstract class ProxyEmbergraphSailTestCase extends AbstractEmbergraphSail
 
     final java.util.Map range = new java.util.HashMap();
 
-    for (int j = 0; j < nrange; j++) {
+    for (Resource resource : expected) {
 
-      range.put(expected[j], expected[j]);
+      range.put(resource, resource);
     }
 
     // Do selection without replacement for the objects visited by

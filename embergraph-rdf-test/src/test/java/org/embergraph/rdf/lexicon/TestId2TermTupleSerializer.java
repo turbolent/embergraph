@@ -125,9 +125,9 @@ public class TestId2TermTupleSerializer extends TestCase2 {
    */
   private static class V1 implements Externalizable {
 
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {}
+    public void readExternal(ObjectInput in) {}
 
-    public void writeExternal(ObjectOutput out) throws IOException {}
+    public void writeExternal(ObjectOutput out) {}
   }
 
   /*
@@ -185,7 +185,7 @@ public class TestId2TermTupleSerializer extends TestCase2 {
       this.valueFactoryClass = valueFactoryClass;
     }
 
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(ObjectInput in) throws IOException {
       short version = VERSION0;
       String s1 = in.readUTF();
       String s2 = EmbergraphValueFactoryImpl.class.getName();

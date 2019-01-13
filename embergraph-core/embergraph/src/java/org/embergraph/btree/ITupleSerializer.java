@@ -66,7 +66,7 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
  * @param K The generic type of the application key.
  * @param V The generic type of the application value.
  */
-public interface ITupleSerializer<K extends Object, V extends Object>
+public interface ITupleSerializer<K, V>
     extends IKeyBuilderFactory, Serializable {
 
   /*

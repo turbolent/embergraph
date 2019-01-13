@@ -283,7 +283,7 @@ public class ServiceCallJoin extends PipelineOp {
       if (serviceURI == null) throw new AssertionError();
 
       // Lookup a class to "talk" to that Service URI.
-      final ServiceCall<? extends Object> serviceCall = resolveService(serviceURI);
+      final ServiceCall<?> serviceCall = resolveService(serviceURI);
 
       try {
 
@@ -318,7 +318,6 @@ public class ServiceCallJoin extends PipelineOp {
         context.getSink().flush();
 
         // Done.
-        return;
 
       } finally {
 
@@ -352,9 +351,7 @@ public class ServiceCallJoin extends PipelineOp {
 
           final IBindingSet[] chunk = sitr.next();
 
-          for (int i = 0; i < chunk.length; i++) {
-
-            final IBindingSet bset = chunk[i];
+          for (final IBindingSet bset : chunk) {
 
             final EmbergraphURI serviceURI = ServiceCallUtility.getServiceURI(serviceRef, bset);
 
@@ -363,7 +360,7 @@ public class ServiceCallJoin extends PipelineOp {
             if (serviceCallChunk == null) {
 
               // Lookup a class to "talk" to that Service URI.
-              final ServiceCall<? extends Object> serviceCall = resolveService(serviceURI);
+              final ServiceCall<?> serviceCall = resolveService(serviceURI);
 
               serviceCallChunks.put(
                   serviceURI, serviceCallChunk = new ServiceCallChunk(serviceURI, serviceCall));
@@ -450,7 +447,6 @@ public class ServiceCallJoin extends PipelineOp {
         context.getSink().flush();
 
         // Done.
-        return;
 
       } finally {
 
@@ -466,7 +462,7 @@ public class ServiceCallJoin extends PipelineOp {
      * @param serviceURI The service URI.
      * @return The {@link ServiceCall} and never <code>null</code>.
      */
-    private ServiceCall<? extends Object> resolveService(final EmbergraphURI serviceURI) {
+    private ServiceCall<?> resolveService(final EmbergraphURI serviceURI) {
 
       final ServiceCall<?> serviceCall =
           ServiceRegistry.getInstance()
@@ -601,8 +597,7 @@ public class ServiceCallJoin extends PipelineOp {
        *     call. Do this as part of vectoring solutions in and out of service calls?
        */
       private ICloseableIterator<IBindingSet[]> doServiceCall(
-          final ServiceCall<? extends Object> serviceCall, final IBindingSet[] left)
-          throws Exception {
+          final ServiceCall<?> serviceCall, final IBindingSet[] left) {
 
         try {
 
@@ -728,7 +723,7 @@ public class ServiceCallJoin extends PipelineOp {
          */
 
         final BindingSet[] serviceResultChunk =
-            serviceResults.toArray(new BindingSet[serviceResults.size()]);
+            serviceResults.toArray(new BindingSet[0]);
 
         final IBindingSet[] embergraphSolutionChunk =
             ServiceCallUtility.resolve(db, serviceResultChunk);
@@ -818,7 +813,7 @@ public class ServiceCallJoin extends PipelineOp {
         return chunk;
       }
 
-      chunk = sourceSolutions.toArray(new IBindingSet[sourceSolutions.size()]);
+      chunk = sourceSolutions.toArray(new IBindingSet[0]);
 
       return chunk;
     }

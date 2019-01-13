@@ -166,12 +166,12 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
 
   protected JoinSetup setup = null;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     setup = new JoinSetup(getName());
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (setup != null) {
       setup.destroy();
@@ -220,7 +220,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
    * elements, yielding as-bound solutions. The hash map containing the buffered source solutions is
    * probed and the as-bound solutions which join are written out.
    */
-  public void test_join_simple() throws InterruptedException, ExecutionException {
+  public void test_join_simple() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -342,7 +342,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
    * <p>For this variant, there are no join variables. We should get exactly the same solutions but
    * the join will do more work.
    */
-  public void test_join_simple_noJoinVars() throws InterruptedException, ExecutionException {
+  public void test_join_simple_noJoinVars() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -457,7 +457,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  public void test_join_simple_withConstraint() throws InterruptedException, ExecutionException {
+  public void test_join_simple_withConstraint() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -584,7 +584,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  public void test_join_simple_selectOnly_x() throws InterruptedException, ExecutionException {
+  public void test_join_simple_selectOnly_x() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -711,7 +711,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_optionalJoin_and_constraint() throws InterruptedException, ExecutionException {
+  public void test_optionalJoin_and_constraint() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -850,7 +850,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_optionalJoin_withAltSink() throws InterruptedException, ExecutionException {
+  public void test_optionalJoin_withAltSink() {
 
     final int joinId = 2;
     final int predId = 3;

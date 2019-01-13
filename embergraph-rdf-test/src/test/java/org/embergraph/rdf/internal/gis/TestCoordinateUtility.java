@@ -73,7 +73,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
    * using a formula that does not adjust for the flattening of the Earth. This makes the test
    * comparisons accurate to within 1m, which is sufficient to verify the calculation.
    */
-  public void test_approxMetersLongitude() throws ParseException {
+  public void test_approxMetersLongitude() {
     // The #of digits after the decimal at which to round for the test.
     final int dad = 0;
     // at the equator.
@@ -113,7 +113,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
    *
    * @todo reduce rounding or remove altogether for this test.
    */
-  public void test_realMetersLongitude() throws ParseException {
+  public void test_realMetersLongitude() {
     // The #of digits after the decimal at which to round for the test.
     final int dad = 2;
     // at the equator.
@@ -150,7 +150,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
    *
    * @throws ParseException
    */
-  public void test_distance_noDistance01() throws ParseException {
+  public void test_distance_noDistance01() {
     CoordinateDD c = new CoordinateDD(0, 0);
     assertEquals(0d, c.northSouth);
     assertEquals(0d, c.eastWest);

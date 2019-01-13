@@ -394,33 +394,30 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
       final File[] serviceDirs =
           dataDir.listFiles(
-              new FileFilter() {
+              pathname -> {
 
-                public boolean accept(File pathname) {
+                if (!pathname.isDirectory()) {
 
-                  if (!pathname.isDirectory()) {
+                  if (log.isInfoEnabled()) log.info("Ignoring normal file: " + pathname);
 
-                    if (log.isInfoEnabled()) log.info("Ignoring normal file: " + pathname);
+                  return false;
+                }
 
-                    return false;
-                  }
+                final String name = pathname.getName();
 
-                  final String name = pathname.getName();
+                try {
 
-                  try {
+                  UUID.fromString(name);
 
-                    UUID.fromString(name);
+                  if (log.isInfoEnabled()) log.info("Found service directory: " + pathname);
 
-                    if (log.isInfoEnabled()) log.info("Found service directory: " + pathname);
+                  return true;
 
-                    return true;
+                } catch (IllegalArgumentException ex) {
 
-                  } catch (IllegalArgumentException ex) {
+                  if (log.isInfoEnabled()) log.info("Ignoring directory: " + pathname);
 
-                    if (log.isInfoEnabled()) log.info("Ignoring directory: " + pathname);
-
-                    return false;
-                  }
+                  return false;
                 }
               });
 
@@ -706,11 +703,11 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
       abstractTransactionService.shutdown();
     }
 
-    for (int i = 0; i < dataService.length; i++) {
+    for (DataService dataService1 : dataService) {
 
-      if (dataService[i] != null) {
+      if (dataService1 != null) {
 
-        dataService[i].shutdown();
+        dataService1.shutdown();
       }
     }
 
@@ -747,11 +744,11 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
       abstractTransactionService.shutdownNow();
     }
 
-    for (int i = 0; i < dataService.length; i++) {
+    for (DataService dataService1 : dataService) {
 
-      if (dataService[i] != null) {
+      if (dataService1 != null) {
 
-        dataService[i].shutdownNow();
+        dataService1.shutdownNow();
       }
     }
 
@@ -777,11 +774,11 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
     abstractTransactionService.destroy();
 
-    for (int i = 0; i < dataService.length; i++) {
+    for (DataService dataService1 : dataService) {
 
-      if (dataService[i] != null) {
+      if (dataService1 != null) {
 
-        dataService[i].destroy();
+        dataService1.destroy();
       }
     }
 
@@ -833,10 +830,10 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     long maxValue = 0;
 
     // check each of the data services.
-    for (int i = 0; i < dataService.length; i++) {
+    for (DataService dataService1 : dataService) {
 
       final long commitTime =
-          dataService[i]
+          dataService1
               .getResourceManager()
               .getLiveJournal()
               .getRootBlockView()

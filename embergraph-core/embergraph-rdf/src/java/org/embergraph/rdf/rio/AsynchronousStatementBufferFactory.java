@@ -752,7 +752,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * @throws Exception if there is a problem creating the parser task.
    * @throws RejectedExecutionException if the work queue for the parser service is full.
    */
-  private void submitOne(final R resource, final Callable<?> task) throws Exception {
+  private void submitOne(final R resource, final Callable<?> task) {
 
     if (resource == null) throw new IllegalArgumentException();
 
@@ -882,11 +882,6 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         }
 
         // retry
-        continue;
-
-      } catch (InterruptedException ex) {
-
-        throw ex;
 
       } catch (Exception ex) {
 
@@ -1487,7 +1482,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
               this, 0 /* initialDelay */, 1000 /* delay */, TimeUnit.MILLISECONDS);
     }
 
-    protected void finalize() throws Exception {
+    protected void finalize() {
 
       cancel();
     }
@@ -1753,18 +1748,16 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
           // queue up success notice.
           notifyService.submit(
-              new Runnable() {
-                public void run() {
+              () -> {
+                try {
+                  task.run();
+                } finally {
+                  lock.lock(); // acquire latch w/in task.
                   try {
-                    task.run();
+                    // decrement after the task is done.
+                    guardLatch_notify.dec();
                   } finally {
-                    lock.lock(); // acquire latch w/in task.
-                    try {
-                      // decrement after the task is done.
-                      guardLatch_notify.dec();
-                    } finally {
-                      lock.unlock();
-                    }
+                    lock.unlock();
                   }
                 }
               });
@@ -1826,18 +1819,16 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
           // queue up failure notice.
           notifyService.submit(
-              new Runnable() {
-                public void run() {
+              () -> {
+                try {
+                  task.run();
+                } finally {
+                  lock.lock(); // acquire latch w/in task.
                   try {
-                    task.run();
+                    // decrement after the task is done.
+                    guardLatch_notify.dec();
                   } finally {
-                    lock.lock(); // acquire latch w/in task.
-                    try {
-                      // decrement after the task is done.
-                      guardLatch_notify.dec();
-                    } finally {
-                      lock.unlock();
-                    }
+                    lock.unlock();
                   }
                 }
               });
@@ -1897,13 +1888,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   protected Runnable newFailureTask(final R resource, final Throwable cause) {
 
-    return new Runnable() {
-
-      public void run() {
-
-        log.error(resource, cause);
-      }
-    };
+    return () -> log.error(resource, cause);
   }
 
   /*
@@ -2332,8 +2317,6 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
           count++;
 
-          return;
-
         } catch (InterruptedException ex) {
 
           throw ex;
@@ -2707,7 +2690,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
      * Reshapes the {@link #src} into {@link KVOC}[]s a chunk at a time and submits each chunk to
      * the write buffer for the TERM2ID index.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       /*
        * This is a thread-local instance, which is why we defer obtaining
@@ -2782,7 +2765,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           if (terms != null && !terms.isEmpty()) {
 
             @SuppressWarnings("unchecked")
-            final KVOC<EmbergraphValue>[] a = terms.toArray(new KVOC[terms.size()]);
+            final KVOC<EmbergraphValue>[] a = terms.toArray(new KVOC[0]);
 
             // Place in KVO sorted order (by the byte[] keys).
             Arrays.sort(a);
@@ -2800,7 +2783,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           if (blobs != null && !blobs.isEmpty()) {
 
             @SuppressWarnings("unchecked")
-            final KVOC<EmbergraphValue>[] a = blobs.toArray(new KVOC[blobs.size()]);
+            final KVOC<EmbergraphValue>[] a = blobs.toArray(new KVOC[0]);
 
             // Place in KVO sorted order (by the byte[] keys).
             Arrays.sort(a);
@@ -2871,7 +2854,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.buffer = buffer;
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       // used to serialize the Values for the BTree.
       final EmbergraphValueSerializer<EmbergraphValue> ser = valueFactory.getValueSerializer();
@@ -3007,7 +2990,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
      *
      * @see EmbergraphValueCentricFullTextIndex
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       latch.inc();
 
@@ -3083,7 +3066,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
               spoRelation.getIndex(keyOrder).getIndexMetadata().getTupleSerializer();
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       long chunksOut = 0;
       long elementsOut = 0;

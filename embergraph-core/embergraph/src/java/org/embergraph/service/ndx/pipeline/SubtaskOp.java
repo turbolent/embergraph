@@ -9,5 +9,5 @@ package org.embergraph.service.ndx.pipeline;
  */
 public interface SubtaskOp<S extends AbstractSubtask> {
 
-  void call(S s) throws Exception;
+  void call(S s);
 }

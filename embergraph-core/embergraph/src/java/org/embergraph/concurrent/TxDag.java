@@ -531,10 +531,8 @@ public class TxDag {
    */
   final synchronized void backup(final int[] order) {
     final int n = order.length;
-    for (int i = 0; i < n; i++) {
-      final int oi = order[i];
-      for (int j = 0; j < n; j++) {
-        final int oj = order[j];
+    for (final int oi : order) {
+      for (final int oj : order) {
         M1[oi][oj] = M[oi][oj];
       }
     }
@@ -548,10 +546,8 @@ public class TxDag {
    */
   final synchronized void restore(final int[] order) {
     final int n = order.length;
-    for (int i = 0; i < n; i++) {
-      final int oi = order[i];
-      for (int j = 0; j < n; j++) {
-        final int oj = order[j];
+    for (final int oi : order) {
+      for (final int oj : order) {
         M[oi][oj] = M1[oi][oj];
       }
     }
@@ -599,12 +595,14 @@ public class TxDag {
       log.debug("W:: t(" + t + ") -> u(" + u + "), insert=" + insert + ", size=" + n);
     }
     final int max = Integer.MAX_VALUE;
-    for (int s = 0; s < n; s++) {
-      final int os = order[s];
-      if (os == t) continue;
-      for (int v = 0; v < n; v++) {
-        final int ov = order[v];
-        if (ov == u) continue;
+    for (final int os : order) {
+      if (os == t) {
+        continue;
+      }
+      for (final int ov : order) {
+        if (ov == u) {
+          continue;
+        }
         // M[s,v] := M[s,v] +/- M[s,t] . M[u,v]; s!=t; u!=v
         if (DEBUG) {
           log.debug(
@@ -614,7 +612,9 @@ public class TxDag {
         }
         if (insert) {
           long val = M[os][ov] + (M[os][t] * M[u][ov]);
-          if (val > max) throw new ArithmeticException("overflow");
+          if (val > max) {
+            throw new ArithmeticException("overflow");
+          }
           M[os][ov] = (int) val;
         } else {
           M[os][ov] -= M[os][t] * M[u][ov];
@@ -628,15 +628,18 @@ public class TxDag {
       }
       if (insert) {
         long val = M[os][u] + M[os][t];
-        if (val > max) throw new ArithmeticException("overflow");
+        if (val > max) {
+          throw new ArithmeticException("overflow");
+        }
         M[os][u] = (int) val;
       } else {
         M[os][u] -= M[os][t];
       }
     }
-    for (int v = 0; v < n; v++) {
-      final int ov = order[v];
-      if (ov == u) continue;
+    for (final int ov : order) {
+      if (ov == u) {
+        continue;
+      }
       // M[t,v] := M[t,v] +/- M[u,v]; u!=v
       if (DEBUG) {
         log.debug(
@@ -645,7 +648,9 @@ public class TxDag {
       }
       if (insert) {
         long val = M[t][ov] + M[u][ov];
-        if (val > max) throw new ArithmeticException("overflow");
+        if (val > max) {
+          throw new ArithmeticException("overflow");
+        }
         M[t][ov] = (int) val;
       } else {
         M[t][ov] -= M[u][ov];
@@ -663,8 +668,7 @@ public class TxDag {
       M[t][u] -= 1;
     }
     // check for deadlock.
-    for (int s = 0; s < n; s++) {
-      final int os = order[s];
+    for (final int os : order) {
       if (M[os][os] > 0) {
         if (DEBUG) {
           log.debug("deadlock: M[" + os + "," + os + "]=" + M[os][os]);
@@ -692,12 +696,13 @@ public class TxDag {
     }
     StringBuffer sb = new StringBuffer();
     //        final int n = size();
-    sb.append("TxDag::\ncapacity=" + capacity() + ", size=" + size() + "\n");
+    sb.append("TxDag::\ncapacity=").append(capacity()).append(", size=").append(size())
+        .append("\n");
     // get the in-use transaction indices into W and M.
     sb.append("index\t#in\t#out\n");
-    for (int i = 0; i < order.length; i++) {
-      final int oi = order[i];
-      sb.append("" + order[i] + "\t" + inbound[oi] + "\t" + outbound[oi] + "\n");
+    for (final int oi : order) {
+      sb.append("").append(oi).append("\t").append(inbound[oi]).append("\t")
+          .append(outbound[oi]).append("\n");
     }
     /*
      * Matrix W. Note that W is not updated by updateClosure(), but only be
@@ -706,12 +711,11 @@ public class TxDag {
      * (some of the test cases do not, so if you are wondering why you are
      * not seeing the edges listed, that is probably why).
      */
-    for (int i = 0; i < order.length; i++) {
-      final int oi = order[i];
-      for (int j = 0; j < order.length; j++) {
-        final int oj = order[j];
+    for (final int oi : order) {
+      for (final int oj : order) {
         if (W[oi][oj]) {
-          sb.append("\t" + transactions[oi] + " -> " + transactions[oj] + "\n");
+          sb.append("\t").append(transactions[oi]).append(" -> ").append(transactions[oj])
+              .append("\n");
         }
       }
     }
@@ -720,20 +724,18 @@ public class TxDag {
      */
     // column headings.
     sb.append("index");
-    for (int j = 0; j < order.length; j++) {
-      sb.append("\t" + order[j]);
+    for (int i1 : order) {
+      sb.append("\t").append(i1);
     }
     sb.append("\n");
     // matrix contents.
     boolean deadlock = false;
-    for (int i = 0; i < order.length; i++) {
-      final int oi = order[i];
-      sb.append("" + oi); // row heading
-      for (int j = 0; j < order.length; j++) {
-        final int oj = order[j];
+    for (final int oi : order) {
+      sb.append("").append(oi); // row heading
+      for (final int oj : order) {
         final int count = M[oi][oj];
         if (count != 0) {
-          sb.append("\t" + count);
+          sb.append("\t").append(count);
         } else {
           sb.append("\t-");
         }
@@ -741,14 +743,14 @@ public class TxDag {
           deadlock = true;
         }
       }
-      sb.append("\t" + transactions[oi] + "\n"); // row trailer
+      sb.append("\t").append(transactions[oi]).append("\n"); // row trailer
     }
     // column footers
-    for (int j = 0; j < order.length; j++) {
-      sb.append("\t" + transactions[order[j]]);
+    for (int i : order) {
+      sb.append("\t").append(transactions[i]);
     }
     sb.append("\n");
-    sb.append("deadlock=" + deadlock + "\n");
+    sb.append("deadlock=").append(deadlock).append("\n");
     return sb.toString();
   }
 
@@ -951,8 +953,8 @@ public class TxDag {
     final int[] order = getOrder();
     backup(order);
     try {
-      for (int i = 0; i < dst.length; i++) {
-        if (!updateClosure(src, dst[i], true)) {
+      for (int i1 : dst) {
+        if (!updateClosure(src, i1, true)) {
           log.warn("deadlock");
           if (DEBUG) {
             log.debug(toString());
@@ -983,8 +985,7 @@ public class TxDag {
      * then we reset the order[] cache.
      */
     boolean reset = false;
-    for (int i = 0; i < dst.length; i++) {
-      final int tgt = dst[i];
+    for (final int tgt : dst) {
       W[src][tgt] = true; // add edge to W.
       outbound[src]++; // increment outbound counter.
       inbound[tgt]++; // increment inbound counter.
@@ -1063,13 +1064,13 @@ public class TxDag {
     //        Object[] transactions = getTransactions();
     // populate array of explict edges w/ optional closure.
     Vector<Edge> v = new Vector<>();
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) {
-        if (W[order[i]][order[j]]) {
-          v.add(new Edge(transactions[order[i]], transactions[order[j]], true));
+    for (int i2 : order) {
+      for (int i1 : order) {
+        if (W[i2][i1]) {
+          v.add(new Edge(transactions[i2], transactions[i1], true));
         } else {
-          if (closure && M[order[i]][order[j]] > 0) {
-            v.add(new Edge(transactions[order[i]], transactions[order[j]], false));
+          if (closure && M[i2][i1] > 0) {
+            v.add(new Edge(transactions[i2], transactions[i1], false));
           }
         }
       }
@@ -1256,8 +1257,7 @@ public class TxDag {
        * edge counters for the [tgt] vertex.
        */
       final int[] order = getOrder();
-      for (int i = 0; i < order.length; i++) {
-        final int oi = order[i];
+      for (final int oi : order) {
         if (W[tgt][oi]) {
           inbound[oi]--;
           if (inbound[oi] < 0) {
@@ -1285,8 +1285,7 @@ public class TxDag {
        * those transactions that have declared inbound or outbound edges.
        */
       final int[] order = getOrder();
-      for (int i = 0; i < order.length; i++) {
-        final int oi = order[i];
+      for (final int oi : order) {
         if (W[oi][tgt]) {
           // oi WAITS_FOR tgt
           removeEdge(oi, tgt);

@@ -303,29 +303,29 @@ public class URLQueryModel {
 
     sb.append(URLQueryModel.class.getName());
 
-    sb.append("{uri=" + uri);
+    sb.append("{uri=").append(uri);
 
-    sb.append(",params=" + params);
+    sb.append(",params=").append(params);
 
-    sb.append(",path=" + path);
+    sb.append(",path=").append(path);
 
-    sb.append(",depth=" + depth);
+    sb.append(",depth=").append(depth);
 
-    sb.append(",reportType=" + reportType);
+    sb.append(",reportType=").append(reportType);
 
-    sb.append(",mimeType=" + mimeType);
+    sb.append(",mimeType=").append(mimeType);
 
-    sb.append(",pattern=" + pattern);
+    sb.append(",pattern=").append(pattern);
 
-    sb.append(",category=" + (category == null ? "N/A" : Arrays.toString(category)));
+    sb.append(",category=").append(category == null ? "N/A" : Arrays.toString(category));
 
-    sb.append(",period=" + period);
+    sb.append(",period=").append(period);
 
-    sb.append(",[fromTime=" + fromTime);
+    sb.append(",[fromTime=").append(fromTime);
 
-    sb.append(",toTime=" + toTime + "]");
+    sb.append(",toTime=").append(toTime).append("]");
 
-    sb.append(",flot=" + flot);
+    sb.append(",flot=").append(flot);
 
     if (eventOrderBy != null) {
       sb.append(",eventOrderBy=[");
@@ -379,18 +379,15 @@ public class URLQueryModel {
      * path but not any query parameters.
      */
 
-    final StringBuilder sb = new StringBuilder();
-
     // protocol (known from the container).
-    sb.append("http://");
 
     // host and port
-    sb.append(headers.get("host"));
 
     // path (including the leading '/')
-    sb.append(uri);
 
-    final String requestURL = sb.toString();
+    final String requestURL = "http://"
+        + headers.get("host")
+        + uri;
 
     return new URLQueryModel(service, uri, params, requestURL);
   }
@@ -424,10 +421,7 @@ public class URLQueryModel {
 
       final Vector<String> value = new Vector<>();
 
-      for (String v : values) {
-
-        value.add(v);
-      }
+      value.addAll(Arrays.asList(values));
 
       params.put(name, value);
     }
@@ -502,7 +496,7 @@ public class URLQueryModel {
     // assemble the optional filter.
     this.pattern = QueryUtil.getPattern(params.get(FILTER), params.get(REGEX));
 
-    if (service != null && service instanceof IEventReportingService) {
+    if (service instanceof IEventReportingService) {
 
       // events are available.
       eventReportingService = ((IEventReportingService) service);
@@ -588,7 +582,7 @@ public class URLQueryModel {
       if (log.isInfoEnabled()) {
         final StringBuilder sb = new StringBuilder();
         for (Field f : eventFilters.keySet()) {
-          sb.append(f.getName() + "=" + eventFilters.get(f));
+          sb.append(f.getName()).append("=").append(eventFilters.get(f));
         }
         log.info("eventFilters={" + sb + "}");
       }
@@ -802,7 +796,7 @@ public class URLQueryModel {
 
     final StringBuilder sb = getRequestURL();
 
-    sb.append("?path=" + encodeURL(getProperty(p, PATH, ICounterSet.pathSeparator)));
+    sb.append("?path=").append(encodeURL(getProperty(p, PATH, ICounterSet.pathSeparator)));
 
     final Iterator<Map.Entry<String, Vector<String>>> itr = p.entrySet().iterator();
 
@@ -822,7 +816,7 @@ public class URLQueryModel {
 
       for (String s : vals) {
 
-        sb.append("&" + encodeURL(name) + "=" + encodeURL(s));
+        sb.append("&").append(encodeURL(name)).append("=").append(encodeURL(s));
       }
     }
 

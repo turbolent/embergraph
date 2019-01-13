@@ -208,36 +208,33 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       try {
 
         final Callable<Void> task =
-            new Callable<Void>() {
+            () -> {
 
-              public Void call() throws Exception {
+              SailConnection conn1 = null;
+              SailConnection conn2 = null;
 
-                SailConnection conn1 = null;
-                SailConnection conn2 = null;
+              try {
+
+                log.info("Requesting 1st unisolated connection.");
+
+                conn1 = sail.getUnisolatedConnection();
+
+                log.info("Requesting 2nd unisolated connection.");
 
                 try {
-
-                  log.info("Requesting 1st unisolated connection.");
-
-                  conn1 = sail.getUnisolatedConnection();
-
-                  log.info("Requesting 2nd unisolated connection.");
-
-                  try {
-                    conn2 = sail.getUnisolatedConnection();
-                    fail("Not expecting a 2nd unisolated connection");
-                  } catch (IllegalStateException ex) {
-                    if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
-                  }
-
-                  return null;
-
-                } finally {
-
-                  if (conn1 != null) conn1.close();
-
-                  if (conn2 != null) conn2.close();
+                  conn2 = sail.getUnisolatedConnection();
+                  fail("Not expecting a 2nd unisolated connection");
+                } catch (IllegalStateException ex) {
+                  if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
                 }
+
+                return null;
+
+              } finally {
+
+                if (conn1 != null) conn1.close();
+
+                if (conn2 != null) conn2.close();
               }
             };
 
@@ -305,41 +302,37 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       try {
 
         final Callable<Void> task1 =
-            new Callable<Void>() {
-              public Void call() throws Exception {
-                SailConnection conn1 = null;
+            () -> {
+              SailConnection conn1 = null;
+              try {
+                log.info("Requesting 1st unisolated connection.");
+                lock.lock();
                 try {
-                  log.info("Requesting 1st unisolated connection.");
-                  lock.lock();
-                  try {
-                    conn1 = sail.getUnisolatedConnection();
-                    haveFirst.set(true);
-                    haveFirstConnection.signal();
-                    // Wait on condition to release connection.
-                    while (!releaseFirst.get()) releaseFirstConnection.await();
-                    log.info("Releasing 1st unisolated connection.");
-                  } finally {
-                    lock.unlock();
-                  }
-                  return null;
+                  conn1 = sail.getUnisolatedConnection();
+                  haveFirst.set(true);
+                  haveFirstConnection.signal();
+                  // Wait on condition to release connection.
+                  while (!releaseFirst.get()) releaseFirstConnection.await();
+                  log.info("Releasing 1st unisolated connection.");
                 } finally {
-                  if (conn1 != null) conn1.close();
+                  lock.unlock();
                 }
+                return null;
+              } finally {
+                if (conn1 != null) conn1.close();
               }
             };
 
         final Callable<Void> task2 =
-            new Callable<Void>() {
-              public Void call() throws Exception {
-                SailConnection conn2 = null;
-                try {
-                  log.info("Requesting 2nd unisolated connection.");
-                  conn2 = sail.getUnisolatedConnection();
-                  log.info("Have 2nd unisolated connection");
-                  return null;
-                } finally {
-                  if (conn2 != null) conn2.close();
-                }
+            () -> {
+              SailConnection conn2 = null;
+              try {
+                log.info("Requesting 2nd unisolated connection.");
+                conn2 = sail.getUnisolatedConnection();
+                log.info("Have 2nd unisolated connection");
+                return null;
+              } finally {
+                if (conn2 != null) conn2.close();
               }
             };
 
@@ -422,34 +415,30 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       try {
 
         final Callable<Void> task =
-            new Callable<Void>() {
+            () -> {
 
-              @Override
-              public Void call() throws Exception {
+              SailConnection conn1 = null;
+              SailConnection conn2 = null;
 
-                SailConnection conn1 = null;
-                SailConnection conn2 = null;
+              try {
 
-                try {
+                log.info("Requesting 1st unisolated connection.");
 
-                  log.info("Requesting 1st unisolated connection.");
+                conn1 = sail.getUnisolatedConnection();
 
-                  conn1 = sail.getUnisolatedConnection();
+                log.info("Requesting 2nd unisolated connection.");
 
-                  log.info("Requesting 2nd unisolated connection.");
+                conn2 = sail2.getUnisolatedConnection();
 
-                  conn2 = sail2.getUnisolatedConnection();
+                fail("Not expecting a 2nd unisolated connection");
 
-                  fail("Not expecting a 2nd unisolated connection");
+                return null;
 
-                  return null;
+              } finally {
 
-                } finally {
+                if (conn1 != null) conn1.close();
 
-                  if (conn1 != null) conn1.close();
-
-                  if (conn2 != null) conn2.close();
-                }
+                if (conn2 != null) conn2.close();
               }
             };
 
@@ -542,18 +531,15 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       try {
 
         final Callable<SailConnection> task =
-            new Callable<SailConnection>() {
+            () -> {
 
-              public SailConnection call() throws Exception {
+              SailConnection conn1 = null;
 
-                SailConnection conn1 = null;
+              log.info("Requesting 1st unisolated connection.");
 
-                log.info("Requesting 1st unisolated connection.");
+              conn1 = sail.getUnisolatedConnection();
 
-                conn1 = sail.getUnisolatedConnection();
-
-                return conn1;
-              }
+              return conn1;
             };
 
         // run task. it should block when attempting to get the 2nd

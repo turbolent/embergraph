@@ -58,35 +58,23 @@ import cern.jet.random.engine.RandomEngine;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
  */
-public class Statistic extends Object {
+public class Statistic {
   private static final cern.jet.math.Functions F = cern.jet.math.Functions.functions;
   /** Euclidean distance function; <tt>Sqrt(Sum( (x[i]-y[i])^2 ))</tt>. */
   public static final VectorVectorFunction EUCLID =
-      new VectorVectorFunction() {
-        public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return Math.sqrt(
-              a.aggregate(b, Functions.plus, Functions.chain(Functions.square, Functions.minus)));
-        }
-      };
+      (a, b) -> Math.sqrt(
+          a.aggregate(b, Functions.plus, Functions.chain(Functions.square, Functions.minus)));
 
   /** Bray-Curtis distance function; <tt>Sum( abs(x[i]-y[i]) ) / Sum( x[i]+y[i] )</tt>. */
   public static final VectorVectorFunction BRAY_CURTIS =
-      new VectorVectorFunction() {
-        public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus))
-              / a.aggregate(b, Functions.plus, Functions.plus);
-        }
-      };
+      (a, b) -> a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus))
+          / a.aggregate(b, Functions.plus, Functions.plus);
 
   /** Canberra distance function; <tt>Sum( abs(x[i]-y[i]) / abs(x[i]+y[i]) )</tt>. */
   public static final VectorVectorFunction CANBERRA =
       new VectorVectorFunction() {
         DoubleDoubleFunction fun =
-            new DoubleDoubleFunction() {
-              public final double apply(double a, double b) {
-                return Math.abs(a - b) / Math.abs(a + b);
-              }
-            };
+            (a, b) -> Math.abs(a - b) / Math.abs(a + b);
 
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
           return a.aggregate(b, Functions.plus, fun);
@@ -95,19 +83,11 @@ public class Statistic extends Object {
 
   /** Maximum distance function; <tt>Max( abs(x[i]-y[i]) )</tt>. */
   public static final VectorVectorFunction MAXIMUM =
-      new VectorVectorFunction() {
-        public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.max, Functions.chain(Functions.abs, Functions.minus));
-        }
-      };
+      (a, b) -> a.aggregate(b, Functions.max, Functions.chain(Functions.abs, Functions.minus));
 
   /** Manhattan distance function; <tt>Sum( abs(x[i]-y[i]) )</tt>. */
   public static final VectorVectorFunction MANHATTAN =
-      new VectorVectorFunction() {
-        public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus));
-        }
-      };
+      (a, b) -> a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus));
 
   /*
    * Interface that represents a function object: a function that takes two argument vectors and

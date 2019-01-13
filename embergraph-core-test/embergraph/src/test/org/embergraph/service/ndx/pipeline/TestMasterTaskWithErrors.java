@@ -72,7 +72,7 @@ public class TestMasterTaskWithErrors extends AbstractMasterTestCase {
               return new S(this, locator, out) {
 
                 @Override
-                protected boolean handleChunk(KVO<O>[] chunk) throws Exception {
+                protected boolean handleChunk(KVO<O>[] chunk) {
 
                   throw new TestException();
                 }

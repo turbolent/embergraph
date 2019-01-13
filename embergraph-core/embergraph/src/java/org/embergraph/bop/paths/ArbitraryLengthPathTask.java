@@ -212,7 +212,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
 
     varsToRetain.addAll(projectInVars);
     final IVariable<?>[] varsToRetainList =
-        varsToRetain.toArray(new IVariable<?>[varsToRetain.size()]);
+        varsToRetain.toArray(new IVariable<?>[0]);
 
     if (log.isDebugEnabled()) {
       log.debug("vars to retain: " + varsToRetain);
@@ -273,7 +273,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
     }
   }
 
-  private void processChunk(final IBindingSet[] chunkIn) throws Exception {
+  private void processChunk(final IBindingSet[] chunkIn) {
 
     final Map<SolutionKey, IBindingSet> solutions = new LinkedHashMap<>();
 
@@ -414,7 +414,7 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
          */
         runningSubquery =
             queryEngine.eval(
-                subquery, nextRoundInput.toArray(new IBindingSet[nextRoundInput.size()]));
+                subquery, nextRoundInput.toArray(new IBindingSet[0]));
 
         long subqueryChunksOut = 0L; // #of chunks read from subquery
         long subquerySolutionsOut = 0L; // #of solutions read from subquery
@@ -1056,11 +1056,11 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
         final IVariable<?> tVarIn,
         final IVariable<?> tVarOut) {
 
-      if (inVar == null ? inConst == null : inConst != null) {
+      if ((inVar == null) == (inConst == null)) {
         throw new IllegalArgumentException();
       }
 
-      if (outVar == null ? outConst == null : outConst != null) {
+      if ((outVar == null) == (outConst == null)) {
         throw new IllegalArgumentException();
       }
 
@@ -1090,18 +1090,15 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
     @Override
     public String toString() {
 
-      final StringBuilder sb = new StringBuilder();
-
-      sb.append(getClass().getSimpleName()).append(" [");
-      sb.append("inVar=").append(inVar);
-      sb.append(", outVar=").append(outVar);
-      sb.append(", inConst=").append(inConst);
-      sb.append(", outConst=").append(outConst);
-      sb.append(", tVarIn=").append(suffix(tVarIn, 8));
-      sb.append(", tVarOut=").append(suffix(tVarOut, 8));
-      sb.append("]");
-
-      return sb.toString();
+      String sb = getClass().getSimpleName() + " ["
+          + "inVar=" + inVar
+          + ", outVar=" + outVar
+          + ", inConst=" + inConst
+          + ", outConst=" + outConst
+          + ", tVarIn=" + suffix(tVarIn, 8)
+          + ", tVarOut=" + suffix(tVarOut, 8)
+          + "]";
+      return sb;
     }
 
     public String suffix(final Object o, final int len) {

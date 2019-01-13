@@ -38,7 +38,7 @@ public class TestSimpleRabaCoder extends AbstractRabaCoderTestCase {
     super(name);
   }
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     rabaCoder = SimpleRabaCoder.INSTANCE;
   }

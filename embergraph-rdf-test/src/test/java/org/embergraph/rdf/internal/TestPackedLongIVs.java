@@ -65,13 +65,10 @@ public class TestPackedLongIVs extends TestCase2 {
 
     final CompressedTimestampExtension<EmbergraphValue> ext =
         new CompressedTimestampExtension<>(
-            new IDatatypeURIResolver() {
-              @Override
-              public EmbergraphURI resolve(final URI uri) {
-                final EmbergraphURI buri = vf.createURI(uri.stringValue());
-                buri.setIV(termIdFactory.newTermId(VTE.URI));
-                return buri;
-              }
+            uri -> {
+              final EmbergraphURI buri = vf.createURI(uri.stringValue());
+              buri.setIV(termIdFactory.newTermId(VTE.URI));
+              return buri;
             });
 
     final EmbergraphValue bvZero =

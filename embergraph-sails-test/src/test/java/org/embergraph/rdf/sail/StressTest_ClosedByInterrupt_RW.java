@@ -258,8 +258,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
 
             while (result.hasNext()) {
               final BindingSet bindingSet = result.next();
-              for (final Iterator<Binding> i = bindingSet.iterator(); i.hasNext(); ) {
-                final Binding b = i.next();
+              for (final Binding b : bindingSet) {
                 if (b.getValue() != null) {
                   duds.add(b.getValue().stringValue());
                 }

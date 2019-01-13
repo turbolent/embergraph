@@ -66,8 +66,7 @@ public class CountersServlet extends EmbergraphServlet {
    * </pre>
    */
   @Override
-  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-      throws IOException {
+  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
 
     try {
 

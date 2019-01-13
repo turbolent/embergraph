@@ -290,7 +290,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
           set.add(getFQN(SPOKeyOrder.SPO));
 
-          keyOrders = Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPO));
+          keyOrders = Collections.unmodifiableList(Collections.singletonList(SPOKeyOrder.SPO));
 
         } else {
 
@@ -314,7 +314,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
           set.add(getFQN(SPOKeyOrder.SPOC));
 
-          keyOrders = Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPOC));
+          keyOrders = Collections.unmodifiableList(Collections.singletonList(SPOKeyOrder.SPOC));
 
         } else {
 
@@ -846,8 +846,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
     public SPOWriteWriteResolver() {}
 
-    public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
-        throws Exception {
+    public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple) {
 
       /*
        * Note: In fact, retract-retract conflicts SHOULD NOT be resolved
@@ -1649,8 +1648,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
     final IKeyBuilder keyBuilder = KeyBuilder.newInstance();
 
-    for (int i = 0; i < knownTerms.length; i++) {
-      knownTerms[i].encode(keyBuilder);
+    for (IV knownTerm : knownTerms) {
+      knownTerm.encode(keyBuilder);
     }
 
     final byte[] fromKey = knownTerms.length == 0 ? null : keyBuilder.getKey();

@@ -627,7 +627,7 @@ public class GASService extends CustomServiceFactoryBase {
 
       if (tmp == null) return null;
 
-      return tmp.toArray(new Value[tmp.size()]);
+      return tmp.toArray(new Value[0]);
     }
 
     /*
@@ -771,14 +771,13 @@ public class GASService extends CustomServiceFactoryBase {
         }
 
         if (log.isInfoEnabled()) {
-          final StringBuilder sb = new StringBuilder();
-          sb.append("GAS");
-          sb.append(": analytic=" + gasProgram.getClass().getSimpleName());
-          sb.append(", nthreads=" + nthreads);
-          sb.append(", scheduler=" + gasState.getScheduler().getClass().getSimpleName());
-          sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
-          sb.append(", stats=" + stats);
-          log.info(sb.toString());
+          String sb = "GAS"
+              + ": analytic=" + gasProgram.getClass().getSimpleName()
+              + ", nthreads=" + nthreads
+              + ", scheduler=" + gasState.getScheduler().getClass().getSimpleName()
+              + ", gasEngine=" + gasEngine.getClass().getSimpleName()
+              + ", stats=" + stats;
+          log.info(sb);
         }
 
         /*
@@ -988,7 +987,7 @@ public class GASService extends CustomServiceFactoryBase {
       @Override
       public IBindingSet[] get() {
 
-        return tmp.toArray(new IBindingSet[tmp.size()]);
+        return tmp.toArray(new IBindingSet[0]);
       }
     }
 

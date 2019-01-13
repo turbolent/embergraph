@@ -170,7 +170,7 @@ public class MemorySortOp extends SortOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> itr = context.getSource();
 

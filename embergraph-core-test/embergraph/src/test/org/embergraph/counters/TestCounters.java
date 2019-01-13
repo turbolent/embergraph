@@ -431,21 +431,18 @@ public class TestCounters extends TestCase {
       CounterSet tmp = new CounterSet();
 
       IInstrumentFactory instrumentFactory =
-          new IInstrumentFactory() {
+          type -> {
 
-            public IInstrument newInstance(Class type) {
-
-              if (type == Double.class) {
-                return new Instrument<Double>() {
-                  protected void sample() {}
-                };
-              } else if (type == Long.class) {
-                return new Instrument<Long>() {
-                  protected void sample() {}
-                };
-              } else {
-                throw new UnsupportedOperationException("type=" + type);
-              }
+            if (type == Double.class) {
+              return new Instrument<Double>() {
+                protected void sample() {}
+              };
+            } else if (type == Long.class) {
+              return new Instrument<Long>() {
+                protected void sample() {}
+              };
+            } else {
+              throw new UnsupportedOperationException("type=" + type);
             }
           };
 

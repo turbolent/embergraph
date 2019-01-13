@@ -279,19 +279,10 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
                       (pmd == null ? "N/A" : pmd.getIndexPartitionCause().toString());
                   final String indexPartitionName =
                       DataService.getIndexPartitionName(name, partitionId);
-                  sb.append(
-                      indexPartitionName
-                          + "{elapsed="
-                          + elapsed
-                          + "ms, cause="
-                          + cause
-                          + ", compactingMerge="
-                          + task.compactingMerge
-                          + ", commitTime="
-                          + task.commitTime
-                          + ", plan="
-                          + task.plan
-                          + "} ");
+                  sb.append(indexPartitionName).append("{elapsed=").append(elapsed)
+                      .append("ms, cause=").append(cause).append(", compactingMerge=")
+                      .append(task.compactingMerge).append(", commitTime=").append(task.commitTime)
+                      .append(", plan=").append(task.plan).append("} ");
                 }
                 setValue(sb.toString());
               }
@@ -333,7 +324,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
                 while (itr.hasNext()) {
                   try {
                     final ICacheEntry<String /* name */, StaleLocatorReason> entry = itr.next();
-                    sb.append(entry.getKey() + "=" + entry.getObject() + "\n");
+                    sb.append(entry.getKey()).append("=").append(entry.getObject()).append("\n");
                   } catch (NoSuchElementException ex) {
                     // Ignore - concurrent modification.
                   }

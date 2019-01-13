@@ -55,7 +55,6 @@ public class ChunkMergeSortHelper {
         new MyIntComparator((Comparable[]) chunk),
         new MySwapper(chunk));
 
-    return;
   }
 
   /*

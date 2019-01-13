@@ -1067,7 +1067,7 @@ public class ByteArrayBuffer extends OutputStream
    * nodes in the B+Tree.
    */
 
-  public long position() throws IOException {
+  public long position() {
 
     return pos;
   }

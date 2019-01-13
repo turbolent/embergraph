@@ -133,11 +133,7 @@ public class Banner {
          * Set a logger for any uncaught exceptions.
          */
         Thread.setDefaultUncaughtExceptionHandler(
-            new UncaughtExceptionHandler() {
-              public void uncaughtException(final Thread t, final Throwable e) {
-                log.error("Uncaught exception in thread", e);
-              }
-            });
+            (t, e) -> log.error("Uncaught exception in thread", e));
       }
 
       if (!quiet) {
@@ -392,11 +388,11 @@ public class Banner {
 
     final StringBuilder s = new StringBuilder();
 
-    s.append("\nbuildVersion=" + getBuildInfo().get(BuildInfoMeta.buildVersion));
+    s.append("\nbuildVersion=").append(getBuildInfo().get(BuildInfoMeta.buildVersion));
 
     // BLZG-1688
     if (getBuildInfo().get(BuildInfoMeta.gitCommit) != null) {
-      s.append("\ngitCommit=" + getBuildInfo().get(BuildInfoMeta.gitCommit));
+      s.append("\ngitCommit=").append(getBuildInfo().get(BuildInfoMeta.gitCommit));
     }
 
     return s.toString();

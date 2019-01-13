@@ -1474,7 +1474,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
       }
 
       // Convert to array.
-      return tmp.toArray(new IRunningQuery[tmp.size()]);
+      return tmp.toArray(new IRunningQuery[0]);
     }
   }
 
@@ -1529,7 +1529,7 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder(getClass().getName());
-    sb.append("{queryId=" + queryId);
+    sb.append("{queryId=").append(queryId);
     /*
      * Note: Obtaining the lock here is required to avoid concurrent
      * modification exception in RunState's toString() when there is a
@@ -1538,17 +1538,17 @@ public abstract class AbstractRunningQuery implements IRunningQuery {
      */
     lock.lock();
     try {
-      sb.append(",elapsed=" + getElapsed());
-      sb.append(",deadline=" + runState.getDeadline());
-      sb.append(",isDone=" + isDone());
-      sb.append(",isCancelled=" + isCancelled());
-      sb.append(",runState=" + runState);
+      sb.append(",elapsed=").append(getElapsed());
+      sb.append(",deadline=").append(runState.getDeadline());
+      sb.append(",isDone=").append(isDone());
+      sb.append(",isCancelled=").append(isCancelled());
+      sb.append(",runState=").append(runState);
     } finally {
       lock.unlock();
     }
-    sb.append(",controller=" + controller);
-    sb.append(",clientProxy=" + clientProxy);
-    sb.append(",query=" + query);
+    sb.append(",controller=").append(controller);
+    sb.append(",clientProxy=").append(clientProxy);
+    sb.append(",query=").append(query);
     sb.append("}");
     return sb.toString();
   }

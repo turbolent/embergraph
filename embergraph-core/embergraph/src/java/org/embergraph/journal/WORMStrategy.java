@@ -2162,11 +2162,7 @@ public class WORMStrategy extends AbstractBufferStrategy
          * changed. It will propagate this message along the write
          * pipeline when HA is enabled.
          */
-        try {
-          writeCacheService.setExtent(newExtent);
-        } catch (InterruptedException t) {
-          throw new RuntimeException(t);
-        }
+        writeCacheService.setExtent(newExtent);
       }
 
       // Update fields and counters while holding the lock.
@@ -2332,10 +2328,10 @@ public class WORMStrategy extends AbstractBufferStrategy
           }
 
           @Override
-          public void release() throws InterruptedException {}
+          public void release() {}
 
           @Override
-          public void release(long timeout, TimeUnit unit) throws InterruptedException {}
+          public void release(long timeout, TimeUnit unit) {}
         };
 
     /*
@@ -2404,7 +2400,7 @@ public class WORMStrategy extends AbstractBufferStrategy
   @Override
   public Future<Void> sendHALogBuffer(
       final IHALogRequest req, final IHAWriteMessage msg, final IBufferAccess b)
-      throws IOException, InterruptedException {
+      throws IOException {
 
     // Buffer now contains data directly from log, DO NOT read direct from store
     final ByteBuffer clientBuffer = b.buffer();
@@ -2435,7 +2431,7 @@ public class WORMStrategy extends AbstractBufferStrategy
       final long offset,
       final int nbytes,
       final ByteBuffer b)
-      throws IOException, InterruptedException {
+      throws IOException {
 
     // read direct from store
     final ByteBuffer clientBuffer = b;
@@ -2493,7 +2489,7 @@ public class WORMStrategy extends AbstractBufferStrategy
   }
 
   @Override
-  public void setExtentForLocalStore(final long extent) throws IOException, InterruptedException {
+  public void setExtentForLocalStore(final long extent) {
 
     truncate(extent);
   }
@@ -2534,7 +2530,7 @@ public class WORMStrategy extends AbstractBufferStrategy
 
   @Override
   public void computeDigest(final Object snapshot, final MessageDigest digest)
-      throws DigestException, IOException {
+      throws IOException {
 
     if (snapshot != null) throw new UnsupportedOperationException();
 
@@ -2624,7 +2620,6 @@ public class WORMStrategy extends AbstractBufferStrategy
         log.info("Computed digest: #blocks=" + sequence + ", #bytes=" + totalBytes);
 
       // Done.
-      return;
 
     } finally {
 
@@ -2668,7 +2663,7 @@ public class WORMStrategy extends AbstractBufferStrategy
 
     @Override
     public boolean equals(final Object obj) {
-      if (obj == null || !(obj instanceof WormStoreState)) return false;
+      if (!(obj instanceof WormStoreState)) return false;
       final WormStoreState other = (WormStoreState) obj;
       // Nothing to compare.
       return true;

@@ -74,14 +74,14 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
   public FastRDFValueCoder2() {}
 
   @Override
-  public void writeExternal(ObjectOutput out) throws IOException {
+  public void writeExternal(ObjectOutput out) {
 
     // NOP
 
   }
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) {
 
     // NOP
 

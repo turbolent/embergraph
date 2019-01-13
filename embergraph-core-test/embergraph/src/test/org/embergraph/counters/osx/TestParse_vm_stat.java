@@ -221,7 +221,7 @@ public class TestParse_vm_stat extends AbstractParserTestCase {
     }
   }
 
-  public void test_iostat_collector() throws IOException, InterruptedException {
+  public void test_iostat_collector() throws InterruptedException {
 
     String output =
         "Mach Virtual Memory Statistics: (page size of 4096 bytes, cache hits 0%)\n"

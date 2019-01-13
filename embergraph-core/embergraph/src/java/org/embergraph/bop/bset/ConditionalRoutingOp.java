@@ -138,7 +138,7 @@ public class ConditionalRoutingOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
       try {
         while (source.hasNext()) {
 

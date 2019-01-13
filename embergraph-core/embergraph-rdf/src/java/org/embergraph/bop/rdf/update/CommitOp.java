@@ -104,7 +104,7 @@ public final class CommitOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final long commitTime;
 

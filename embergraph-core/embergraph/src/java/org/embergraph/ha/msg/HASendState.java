@@ -170,7 +170,7 @@ public class HASendState implements IHASendState, Externalizable {
   private static final transient int currentVersionLen = VERSION0_LEN;
 
   @Override
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     readExternal2(in);
   }

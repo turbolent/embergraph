@@ -462,7 +462,7 @@ public class DumpLexicon {
       // Used to decode the Values.
       final StringBuilder tmp = new StringBuilder();
 
-      w.append("fastRangeCount=" + ndx.rangeCount() + "\n");
+      w.append("fastRangeCount=").append(String.valueOf(ndx.rangeCount())).append("\n");
 
       @SuppressWarnings("unchecked")
       final ITupleIterator<BlobIV<?>> itr = ndx.rangeIterator();
@@ -511,7 +511,7 @@ public class DumpLexicon {
         }
       }
 
-      w.append("nvisited=" + nvisited + "\n");
+      w.append("nvisited=").append(String.valueOf(nvisited)).append("\n");
 
       w.append("binSize=" + BIN_SIZE + "\n");
 
@@ -526,14 +526,15 @@ public class DumpLexicon {
 
         if (numberInBin == 0) continue;
 
-        w.append("bins[" + bin + "]=" + numberInBin + "\n");
+        w.append("bins[").append(String.valueOf(bin)).append("]=")
+            .append(String.valueOf(numberInBin)).append("\n");
 
         nnzero++;
       }
 
-      w.append("numNonZeroBins=" + nnzero + "\n");
+      w.append("numNonZeroBins=").append(String.valueOf(nnzero)).append("\n");
 
-      w.append("maxCollisionCounter=" + maxCollisionCounter + "\n");
+      w.append("maxCollisionCounter=").append(String.valueOf(maxCollisionCounter)).append("\n");
 
     } catch (IOException e) {
 

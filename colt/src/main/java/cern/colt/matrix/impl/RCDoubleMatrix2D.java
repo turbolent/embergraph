@@ -240,11 +240,9 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
 
       assign(0);
       source.forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, value);
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, value);
+            return value;
           });
       /*
       indexes.clear();
@@ -286,11 +284,9 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
       final double alpha = ((cern.jet.math.PlusMult) function).multiplicator;
       if (alpha == 0) return this; // nothing to do
       y.forEachNonZero(
-          new cern.colt.function.IntIntDoubleFunction() {
-            public double apply(int i, int j, double value) {
-              setQuick(i, j, getQuick(i, j) + alpha * value);
-              return value;
-            }
+          (i, j, value) -> {
+            setQuick(i, j, getQuick(i, j) + alpha * value);
+            return value;
           });
       return this;
     }

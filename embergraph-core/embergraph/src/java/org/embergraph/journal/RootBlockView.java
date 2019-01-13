@@ -847,34 +847,29 @@ public class RootBlockView implements IRootBlockView {
         DateFormat.getDateTimeInstance(
             DateFormat.FULL /* dateStyle */, DateFormat.FULL /* timeStyle */);
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("rootBlock");
-
-    sb.append("{ rootBlock=" + (isRootBlock0() ? 0 : 1));
-    sb.append(", challisField=" + getChallisField());
-    sb.append(", version=" + getVersion());
-    sb.append(", nextOffset=" + getNextOffset());
-    sb.append(", localTime=" + toString(df, getLocalTime()));
-    sb.append(", firstCommitTime=" + toString(df, getFirstCommitTime()));
-    sb.append(", lastCommitTime=" + toString(df, getLastCommitTime()));
-    sb.append(", commitCounter=" + getCommitCounter());
-    sb.append(", commitRecordAddr=" + am.toString(getCommitRecordAddr()));
-    sb.append(", commitRecordIndexAddr=" + am.toString(getCommitRecordIndexAddr()));
-    sb.append(", blockSequence=" + getBlockSequence());
-    sb.append(", quorumToken=" + getQuorumToken());
-    sb.append(", metaBitsAddr=" + getMetaBitsAddr());
-    sb.append(", metaStartAddr=" + getMetaStartAddr());
-    sb.append(", storeType=" + getStoreType());
-    sb.append(", uuid=" + getUUID());
-    sb.append(", offsetBits=" + getOffsetBits());
-    sb.append(", checksum=" + (checker == null ? "N/A" : "" + calcChecksum(checker)));
-    sb.append(", createTime=" + toString(df, getCreateTime()));
-    sb.append(", closeTime=" + toString(df, getCloseTime()));
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = "rootBlock"
+        + "{ rootBlock=" + (isRootBlock0() ? 0 : 1)
+        + ", challisField=" + getChallisField()
+        + ", version=" + getVersion()
+        + ", nextOffset=" + getNextOffset()
+        + ", localTime=" + toString(df, getLocalTime())
+        + ", firstCommitTime=" + toString(df, getFirstCommitTime())
+        + ", lastCommitTime=" + toString(df, getLastCommitTime())
+        + ", commitCounter=" + getCommitCounter()
+        + ", commitRecordAddr=" + am.toString(getCommitRecordAddr())
+        + ", commitRecordIndexAddr=" + am.toString(getCommitRecordIndexAddr())
+        + ", blockSequence=" + getBlockSequence()
+        + ", quorumToken=" + getQuorumToken()
+        + ", metaBitsAddr=" + getMetaBitsAddr()
+        + ", metaStartAddr=" + getMetaStartAddr()
+        + ", storeType=" + getStoreType()
+        + ", uuid=" + getUUID()
+        + ", offsetBits=" + getOffsetBits()
+        + ", checksum=" + (checker == null ? "N/A" : "" + calcChecksum(checker))
+        + ", createTime=" + toString(df, getCreateTime())
+        + ", closeTime=" + toString(df, getCloseTime())
+        + "}";
+    return sb;
   }
 
   private static final String toString(final DateFormat df, final long t) {

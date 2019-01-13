@@ -93,7 +93,7 @@ public class TestTransactionService extends TestCase2 {
     }
 
     @Override
-    protected long commitImpl(final TxState state) throws Exception {
+    protected long commitImpl(final TxState state) {
 
       state.setRunState(RunState.Committed);
 
@@ -646,7 +646,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_newTx_readCommitted01() throws IOException {
+  public void test_newTx_readCommitted01() {
 
     final MockTransactionService service = newFixture();
 
@@ -774,7 +774,7 @@ public class TestTransactionService extends TestCase2 {
    * MockTransactionService#nextTimestamp()} which has been overridden to guarantee that there are
    * at least two distinct values such that this test will pass.
    */
-  public void test_newTx_readOnly() throws IOException {
+  public void test_newTx_readOnly() {
 
     final Properties properties = new Properties();
 
@@ -888,7 +888,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_newTx_readOnly_contention() throws IOException {
+  public void test_newTx_readOnly_contention() {
 
     final MockTransactionService service = newFixture();
 
@@ -1018,7 +1018,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_newTx_readOnly_timestamp_is_lastCommitTime() throws IOException {
+  public void test_newTx_readOnly_timestamp_is_lastCommitTime() {
 
     final MockTransactionService service = newFixture();
 
@@ -1167,7 +1167,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/467
    */
-  public void test_newTx_readOnly_releaseTimeRespectsReadsOnCommitTime() throws IOException {
+  public void test_newTx_readOnly_releaseTimeRespectsReadsOnCommitTime() {
 
     final Properties p = new Properties();
 
@@ -1268,7 +1268,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * <p>Any transaction which starts after tx2 will see history back to ct0.
    */
-  public void test_newTx_readOnly_historyGone() throws IOException {
+  public void test_newTx_readOnly_historyGone() {
 
     final Properties p = new Properties();
 
@@ -1441,7 +1441,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * <p>Any transaction which starts after ct1 will see read on ct1.
    */
-  public void test_newTx_readOnly_historyGone2() throws IOException {
+  public void test_newTx_readOnly_historyGone2() {
 
     final Properties p = new Properties();
 
@@ -1588,7 +1588,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_updateReleaseTime_noTxRemaining() throws IOException {
+  public void test_updateReleaseTime_noTxRemaining() {
 
     final MockTransactionService service = newFixture();
 
@@ -1652,7 +1652,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_updateReleaseTime_otherTxStillActive() throws IOException {
+  public void test_updateReleaseTime_otherTxStillActive() {
 
     final MockTransactionService service = newFixture();
 
@@ -1754,7 +1754,7 @@ public class TestTransactionService extends TestCase2 {
    *
    * @throws IOException
    */
-  public void test_newTx_readOnly_txComplete_postConditions() throws IOException {
+  public void test_newTx_readOnly_txComplete_postConditions() {
 
     final MockTransactionService service = newFixture();
 
@@ -2168,7 +2168,7 @@ public class TestTransactionService extends TestCase2 {
   }
 
   /** Test for {@link AbstractTransactionService#abortAllTx()}. */
-  public void test_abortAll() throws InterruptedException {
+  public void test_abortAll() {
 
     final MockTransactionService service = newFixture();
 

@@ -369,15 +369,15 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
     if (initView) {
 
-      sb.append(", rangeCount=" + rangeCount);
+      sb.append(", rangeCount=").append(rangeCount);
 
-      sb.append(", partitionCount=" + partitionCount);
+      sb.append(", partitionCount=").append(partitionCount);
 
-      sb.append(", adjustedNominalShardSize=" + adjustedNominalShardSize);
+      sb.append(", adjustedNominalShardSize=").append(adjustedNominalShardSize);
 
-      sb.append(", percentOfSplit=" + percentOfSplit);
+      sb.append(", percentOfSplit=").append(percentOfSplit);
 
-      sb.append(", tailSplit=" + tailSplit);
+      sb.append(", tailSplit=").append(tailSplit);
     }
   }
 

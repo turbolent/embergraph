@@ -62,7 +62,7 @@ class KeyRangeDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
    * IResultHandler)}.
    */
   @Override
-  protected void retry() throws Exception {
+  protected void retry() {
 
     synchronized (taskCountersByIndex) {
       taskCountersByIndex.redirectCount++;

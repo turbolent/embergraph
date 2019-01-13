@@ -29,6 +29,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import cutthecrap.utils.striterators.SingleValueIterator;
 import cutthecrap.utils.striterators.Striterator;
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -36,6 +37,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -797,7 +799,7 @@ public class BOpUtility {
 
     getEvaluationOrder(op, order, 0 /*depth*/);
 
-    return order.toArray(new Integer[order.size()]);
+    return order.toArray(new Integer[0]);
   }
 
   private static void getEvaluationOrder(final BOp op, final List<Integer> order, final int depth) {
@@ -1052,9 +1054,7 @@ public class BOpUtility {
   public static boolean isConsistent(
       final IConstraint[] constraints, final IBindingSet bindingSet) {
 
-    for (int i = 0; i < constraints.length; i++) {
-
-      final IConstraint constraint = constraints[i];
+    for (final IConstraint constraint : constraints) {
 
       if (!constraint.accept(bindingSet)) {
 
@@ -1177,9 +1177,7 @@ public class BOpUtility {
 
     int j = 0;
 
-    for (int i = 0; i < chunk.length; i++) {
-
-      final IBindingSet sourceSolution = chunk[i];
+    for (final IBindingSet sourceSolution : chunk) {
 
       IBindingSet bindingSet = sourceSolution;
 
@@ -1195,11 +1193,11 @@ public class BOpUtility {
 
       if (mergeSolution != null) {
 
-        final Iterator<Map.Entry<IVariable, IConstant>> itr = mergeSolution.iterator();
+        final Iterator<Entry<IVariable, IConstant>> itr = mergeSolution.iterator();
 
         while (itr.hasNext()) {
 
-          final Map.Entry<IVariable, IConstant> e = itr.next();
+          final Entry<IVariable, IConstant> e = itr.next();
 
           final IVariable var = e.getKey();
 
@@ -1569,18 +1567,14 @@ public class BOpUtility {
     final List<IConstraint> list = new LinkedList<>();
 
     if (a != null) {
-      for (IConstraint c : a) {
-        list.add(c);
-      }
+      list.addAll(Arrays.asList(a));
     }
 
     if (b != null) {
-      for (IConstraint c : b) {
-        list.add(c);
-      }
+      list.addAll(Arrays.asList(b));
     }
 
-    return list.isEmpty() ? null : list.toArray(new IConstraint[list.size()]);
+    return list.isEmpty() ? null : list.toArray(new IConstraint[0]);
   }
 
   /*

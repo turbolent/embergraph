@@ -574,9 +574,9 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
   }
 
   public static int getBlockForSize(final int size) {
-    for (int i = 0; i < ALLOC_SIZES.length; i++) {
-      if (size <= ALLOC_SIZES[i]) {
-        return ALLOC_SIZES[i];
+    for (int allocSize : ALLOC_SIZES) {
+      if (size <= allocSize) {
+        return allocSize;
       }
     }
 
@@ -646,18 +646,9 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 
     for (int t = 0; t < m_free.length; t++) {
 
-      str.append(
-          "("
-              + (m_free[t] / m_total[t])
-              + ")[T"
-              + (m_total[t] * 32)
-              + ",A"
-              + m_allocations[t]
-              + ",F"
-              + m_free[t]
-              + ",R"
-              + m_recycles[t]
-              + "]");
+      str.append("(").append(m_free[t] / m_total[t]).append(")[T").append(m_total[t] * 32)
+          .append(",A").append(m_allocations[t]).append(",F").append(m_free[t]).append(",R")
+          .append(m_recycles[t]).append("]");
     }
 
     return str.toString();

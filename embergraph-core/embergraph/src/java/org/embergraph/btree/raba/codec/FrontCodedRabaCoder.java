@@ -73,12 +73,12 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
     }
 
     @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(ObjectInput in) throws IOException {
       // NOP
     }
 
     @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
+    public void writeExternal(ObjectOutput out) {
       // NOP
     }
   }
@@ -131,7 +131,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
   }
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     ratio = in.readInt();
   }

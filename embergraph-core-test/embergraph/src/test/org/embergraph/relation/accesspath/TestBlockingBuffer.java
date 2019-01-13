@@ -120,43 +120,39 @@ public class TestBlockingBuffer extends TestCase2 {
     // future of task writing a 3rd element on the buffer.
     final Future<?> producerFuture =
         service.submit(
-            new Runnable() {
-              public void run() {
+            () -> {
 
-                /*
-                 * add another element - should block until we take an element
-                 * using the iterator.
-                 */
-                buffer.add(e2);
+              /*
+               * add another element - should block until we take an element
+               * using the iterator.
+               */
+              buffer.add(e2);
 
-                /*
-                 * itr.hasNext() will block until the buffer is closed.
-                 */
-                buffer.close();
-              }
+              /*
+               * itr.hasNext() will block until the buffer is closed.
+               */
+              buffer.close();
             });
 
     // future of task draining the buffer.
     final Future<?> consumerFuture =
         service.submit(
-            new Runnable() {
-              public void run() {
+            () -> {
 
-                assertEquals(e0, itr.next());
-                assertEquals(e1, itr.next());
-                assertEquals(e2, itr.next());
+              assertEquals(e0, itr.next());
+              assertEquals(e1, itr.next());
+              assertEquals(e2, itr.next());
 
-                // nothing available from the iterator (non-blocking test).
-                try {
-                  assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
-                  assertNull(itr.next(1, TimeUnit.NANOSECONDS));
-                } catch (InterruptedException e) {
-                  throw new RuntimeException(e);
-                }
-
-                // will block until we close the buffer.
-                assertFalse(itr.hasNext());
+              // nothing available from the iterator (non-blocking test).
+              try {
+                assertFalse(itr.hasNext(1, TimeUnit.NANOSECONDS));
+                assertNull(itr.next(1, TimeUnit.NANOSECONDS));
+              } catch (InterruptedException e) {
+                throw new RuntimeException(e);
               }
+
+              // will block until we close the buffer.
+              assertFalse(itr.hasNext());
             });
 
     // wait a little bit for the producer future.
@@ -360,7 +356,7 @@ public class TestBlockingBuffer extends TestCase2 {
    *     does not unblock threads </a>
    */
   public void test_blockingBuffer_close()
-      throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException {
 
     // capacity of the target buffer.
     final int BUFFER_CAPACITY = 1000;
@@ -536,8 +532,7 @@ public class TestBlockingBuffer extends TestCase2 {
   }
 
   /** Stress test version of {@link #test_blockingBuffer_close()}. */
-  public void _testStress_blockingBuffer_close()
-      throws InterruptedException, ExecutionException, TimeoutException {
+  public void _testStress_blockingBuffer_close() {
 
     for (int i = 0; i < 100; i++) {
 

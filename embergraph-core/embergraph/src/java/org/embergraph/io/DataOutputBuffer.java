@@ -143,7 +143,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     limit = pos;
   }
 
-  public final void writeBoolean(final boolean v) throws IOException {
+  public final void writeBoolean(final boolean v) {
 
     if (pos + 1 > buf.length) ensureCapacity(pos + 1);
 
@@ -152,7 +152,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     limit = pos;
   }
 
-  public final void writeByte(final int v) throws IOException {
+  public final void writeByte(final int v) {
 
     if (pos + 1 > buf.length) ensureCapacity(pos + 1);
 
@@ -161,27 +161,27 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     limit = pos;
   }
 
-  public final void writeDouble(final double v) throws IOException {
+  public final void writeDouble(final double v) {
 
     putDouble(v);
   }
 
-  public final void writeFloat(final float v) throws IOException {
+  public final void writeFloat(final float v) {
 
     putFloat(v);
   }
 
-  public final void writeInt(final int v) throws IOException {
+  public final void writeInt(final int v) {
 
     putInt(v);
   }
 
-  public final void writeLong(final long v) throws IOException {
+  public final void writeLong(final long v) {
 
     putLong(v);
   }
 
-  public final void writeShort(final int v) throws IOException {
+  public final void writeShort(final int v) {
 
     //        if (len + 2 > buf.length)
     //            ensureCapacity(len + 2);
@@ -193,7 +193,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     putShort((short) v);
   }
 
-  public final void writeChar(final int v) throws IOException {
+  public final void writeChar(final int v) {
 
     if (pos + 2 > buf.length) ensureCapacity(pos + 2);
 
@@ -203,7 +203,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     limit = pos;
   }
 
-  public void writeBytes(final String s) throws IOException {
+  public void writeBytes(final String s) {
 
     // #of bytes == #of characters (writes only the low bytes).
     final int len = s.length();
@@ -218,7 +218,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     limit = pos;
   }
 
-  public void writeChars(final String s) throws IOException {
+  public void writeChars(final String s) {
 
     // #of characters (twice as many bytes).
     final int len = s.length();

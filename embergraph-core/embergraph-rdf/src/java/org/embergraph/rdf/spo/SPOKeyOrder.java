@@ -368,11 +368,11 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
       final int[] keyMap = orders[index];
 
       // compare terms one by one in the appropriate key order
-      for (int i = 0; i < keyMap.length; i++) {
+      for (int i1 : keyMap) {
 
-        final IV<?, ?> t1 = o1.get(keyMap[i]);
+        final IV<?, ?> t1 = o1.get(i1);
 
-        final IV<?, ?> t2 = o2.get(keyMap[i]);
+        final IV<?, ?> t2 = o2.get(i1);
 
         final int ret = IVUtility.compare(t1, t2);
 
@@ -680,9 +680,9 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
     final int[] a = orders[index];
 
-    for (int i = 0; i < a.length; i++) {
+    for (int i1 : a) {
 
-      IVUtility.encode(keyBuilder, spo.get(a[i]));
+      IVUtility.encode(keyBuilder, spo.get(i1));
     }
 
     return keyBuilder;
@@ -835,7 +835,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
    * <p>Note: Serialization breaks with the introduction of quads as the <code>name</code> field is
    * no longer serialized and the {@link #index()} is serialized as a byte field.
    */
-  private Object readResolve() throws ObjectStreamException {
+  private Object readResolve() {
 
     return SPOKeyOrder.valueOf(index);
   }

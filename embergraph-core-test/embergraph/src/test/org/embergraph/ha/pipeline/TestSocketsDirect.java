@@ -221,7 +221,7 @@ public class TestSocketsDirect extends TestCase3 {
    * @throws IOException
    * @throws InterruptedException
    */
-  public void testDirectSockets_largeWrite_NotAccepted() throws IOException, InterruptedException {
+  public void testDirectSockets_largeWrite_NotAccepted() throws IOException {
 
     final Random r = new Random();
 
@@ -620,27 +620,23 @@ public class TestSocketsDirect extends TestCase3 {
       assertNoTimeout(
           10,
           TimeUnit.SECONDS,
-          new Callable<Void>() {
+          () -> {
 
-            @Override
-            public Void call() throws Exception {
+            for (int c = 0; c < nclients; c++) {
 
-              for (int c = 0; c < nclients; c++) {
+              // client connects to server.
+              final SocketChannel cs = SocketChannel.open();
+              cs.connect(serverAddr);
+              clients.add(cs);
 
-                // client connects to server.
-                final SocketChannel cs = SocketChannel.open();
-                cs.connect(serverAddr);
-                clients.add(cs);
+              // accept connection on server.
+              sockets.add(ss.accept());
 
-                // accept connection on server.
-                sockets.add(ss.accept());
-
-                // write to each SocketChannel (after connect/accept)
-                cs.write(ByteBuffer.wrap(data));
-              }
-
-              return null;
+              // write to each SocketChannel (after connect/accept)
+              cs.write(ByteBuffer.wrap(data));
             }
+
+            return null;
           });
 
       /*
@@ -694,15 +690,11 @@ public class TestSocketsDirect extends TestCase3 {
     assertNoTimeout(
         1,
         TimeUnit.SECONDS,
-        new Callable<Void>() {
+        () -> {
 
-          @Override
-          public Void call() throws Exception {
+          av.set(ss.accept());
 
-            av.set(ss.accept());
-
-            return null;
-          }
+          return null;
         });
 
     return av.get();
@@ -729,7 +721,6 @@ public class TestSocketsDirect extends TestCase3 {
       // that is expected
       final long elapsed = System.currentTimeMillis() - begin;
       if (log.isInfoEnabled()) log.info("timeout after " + elapsed + "ms");
-      return;
     } catch (Exception e) {
       final long elapsed = System.currentTimeMillis() - begin;
       fail("Expected timeout: elapsed=" + elapsed + ", timeout=" + timeout + " " + unit, e);

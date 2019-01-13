@@ -458,8 +458,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
 
   /** Load using {@link AsynchronousStatementBufferFactory}. */
   protected AsynchronousStatementBufferFactory<EmbergraphStatement, File> doLoad2(
-      final AbstractTripleStore store, final File resource, final boolean parallel)
-      throws Exception {
+      final AbstractTripleStore store, final File resource, final boolean parallel) {
 
     final RDFParserOptions parserOptions = new RDFParserOptions();
     parserOptions.setVerifyData(false);

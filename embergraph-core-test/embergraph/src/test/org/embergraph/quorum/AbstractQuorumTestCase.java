@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.quorum;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -94,7 +95,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
     }
   }
 
-  protected void tearDown() throws Exception {
+  protected void tearDown() {
     if (log.isInfoEnabled()) log.info(getName());
     if (quorums != null) {
       for (int i = 0; i < k; i++) {
@@ -241,10 +242,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
         m.put(commitTime, votesForCommitTime);
       }
 
-      for (UUID uuid : a) {
-
-        votesForCommitTime.add(uuid);
-      }
+      votesForCommitTime.addAll(Arrays.asList(a));
     }
 
     return m.toString();

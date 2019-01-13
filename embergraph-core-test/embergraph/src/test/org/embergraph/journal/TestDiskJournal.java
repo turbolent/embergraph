@@ -112,7 +112,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
    *
    * @throws IOException
    */
-  public void test_create_disk01() throws IOException {
+  public void test_create_disk01() {
 
     final Properties properties = getProperties();
 

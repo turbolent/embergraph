@@ -97,7 +97,7 @@ public class SolutionsLog {
     final StringBuilder sb = new StringBuilder();
     final Integer predId = pred == null ? null : (Integer) pred.getProperty(BOp.Annotations.BOP_ID);
     sb.append(pred.getClass().getSimpleName());
-    sb.append("[" + predId + "](");
+    sb.append("[").append(predId).append("](");
     final Iterator<BOp> itr = pred.argIterator();
     boolean first = true;
     while (itr.hasNext()) {

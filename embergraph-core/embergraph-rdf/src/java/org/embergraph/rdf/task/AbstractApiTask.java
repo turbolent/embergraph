@@ -257,7 +257,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
    * @throws DatasetNotFoundException if the specified namespace does not exist.
    */
   protected EmbergraphSailRepositoryConnection getConnection()
-      throws SailException, RepositoryException {
+      throws RepositoryException {
 
     // Wrap with SAIL.
     final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());

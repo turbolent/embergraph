@@ -415,19 +415,15 @@ public class HALogReader implements IHALogReader {
 
     final File[] files =
         dir.listFiles(
-            new FilenameFilter() {
+            (dir1, name) -> {
 
-              @Override
-              public boolean accept(File dir, String name) {
+              if (new File(dir1, name).isDirectory()) {
 
-                if (new File(dir, name).isDirectory()) {
-
-                  // Allow recursion through directories.
-                  return true;
-                }
-
-                return name.endsWith(IHALogReader.HA_LOG_EXT);
+                // Allow recursion through directories.
+                return true;
               }
+
+              return name.endsWith(IHALogReader.HA_LOG_EXT);
             });
 
     /*
@@ -521,7 +517,7 @@ public class HALogReader implements IHALogReader {
   }
 
   static void computeDigest(final IReopenChannel<FileChannel> reopener, final MessageDigest digest)
-      throws DigestException, IOException {
+      throws IOException {
 
     IBufferAccess buf = null;
     try {
@@ -599,7 +595,6 @@ public class HALogReader implements IHALogReader {
         log.info("Computed digest: #blocks=" + sequence + ", #bytes=" + totalBytes);
 
       // Done.
-      return;
 
     } finally {
 

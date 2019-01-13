@@ -177,21 +177,19 @@ class Fun {
     if (beta < 1.57) {
       fx = (fkt2_value(lambda, beta, x)) * 0.01;
       y = 0.0;
-      for (; ; ) { // while (!NULL) {
+      do { // while (!NULL) {
         y += 0.1;
-        if ((fkt2_value(lambda, beta, y)) < fx) break;
-      }
+      } while (!((fkt2_value(lambda, beta, y)) < fx));
       step = y * 0.001;
       x1 = step;
       sum = (0.5 * (10.0 * step + fkt2_value(lambda, beta, x1))) * step;
       first_value = sum;
-      for (; ; ) { // while (!NULL) {
+      do { // while (!NULL) {
         x = x1;
         x1 += step;
         new_value = (0.5 * (fkt2_value(lambda, beta, x) + fkt2_value(lambda, beta, x1))) * step;
         sum += new_value;
-        if ((new_value / first_value) < epsilon) break;
-      }
+      } while (!((new_value / first_value) < epsilon));
       erg = -Math.log(2.0 * sum);
       return (erg);
     } else {

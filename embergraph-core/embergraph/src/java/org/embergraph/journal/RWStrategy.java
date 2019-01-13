@@ -129,9 +129,6 @@ public class RWStrategy extends AbstractRawStore
     try {
       // Try reading from the local store.
       return readFromLocalStore(addr);
-    } catch (InterruptedException e) {
-      // wrap and rethrow.
-      throw new RuntimeException(e);
     } catch (ChecksumError e) {
       /*
        * Note: This assumes that the ChecksumError is not wrapped by
@@ -325,7 +322,7 @@ public class RWStrategy extends AbstractRawStore
    *
    * @throws UnsupportedOperationException always.
    */
-  public long transferTo(RandomAccessFile out) throws IOException {
+  public long transferTo(RandomAccessFile out) {
 
     // @todo could perhaps be implemented at some point.
     throw new UnsupportedOperationException();
@@ -598,11 +595,7 @@ public class RWStrategy extends AbstractRawStore
       final long token)
       throws IOException, QuorumException {
 
-    try {
-      m_store.writeOnStream(os, snapshotData, quorum, token);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
+    m_store.writeOnStream(os, snapshotData, quorum, token);
   }
 
   @Override
@@ -618,7 +611,7 @@ public class RWStrategy extends AbstractRawStore
     m_store.computeDigest(snapshot, digest);
   }
 
-  public ByteBuffer readFromLocalStore(final long addr) throws InterruptedException {
+  public ByteBuffer readFromLocalStore(final long addr) {
 
     final int rwaddr = decodeAddr(addr);
 
@@ -649,7 +642,7 @@ public class RWStrategy extends AbstractRawStore
    *
    * @see org.embergraph.journal.IHABufferStrategy#setExtentForLocalStore(long)
    */
-  public void setExtentForLocalStore(final long extent) throws IOException, InterruptedException {
+  public void setExtentForLocalStore(final long extent) {
 
     m_store.establishExtent(extent);
   }

@@ -82,8 +82,10 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
     int[] sample = new int[n];
     int j = 0;
     int length = elements.length;
-    for (int i = 0; i < length; i++) {
-      if (assistant.sampleNextElement()) sample[j++] = elements[i];
+    for (int element : elements) {
+      if (assistant.sampleNextElement()) {
+        sample[j++] = element;
+      }
     }
     return sample;
   }

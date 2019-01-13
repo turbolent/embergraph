@@ -123,13 +123,15 @@ public class TestBlobsWriteTask extends TestCase2 {
 
   private void doAddTermsTest(final Value[] valuesIn, final boolean toldBNodes) {
 
-    for (int i = 0; i < valuesIn.length; i++) {
+    for (final Value v : valuesIn) {
 
-      final Value v = valuesIn[i];
+      if (v == null) {
+        fail("Not expecting null inputs.");
+      }
 
-      if (v == null) fail("Not expecting null inputs.");
-
-      if (v instanceof EmbergraphValue) fail("Not expecting EmbergraphValue inputs.");
+      if (v instanceof EmbergraphValue) {
+        fail("Not expecting EmbergraphValue inputs.");
+      }
     }
 
     final BlobsIndexHelper h = new BlobsIndexHelper();
@@ -147,9 +149,9 @@ public class TestBlobsWriteTask extends TestCase2 {
        * found.
        */
       {
-        for (int i = 0; i < valuesIn.length; i++) {
+        for (Value value : valuesIn) {
 
-          final IV iv = getTermIV(valuesIn[i], h, vf, ndx);
+          final IV iv = getTermIV(value, h, vf, ndx);
 
           assertNull(iv);
         }

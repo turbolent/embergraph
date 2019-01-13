@@ -109,11 +109,9 @@ public class Binding implements IBinding {
 
   public String toString() {
 
-    StringBuilder sb = new StringBuilder();
-    sb.append(var.toString());
-    sb.append('=');
-    sb.append(val.toString());
-
-    return sb.toString();
+    String sb = var.toString()
+        + '='
+        + val.toString();
+    return sb;
   }
 }

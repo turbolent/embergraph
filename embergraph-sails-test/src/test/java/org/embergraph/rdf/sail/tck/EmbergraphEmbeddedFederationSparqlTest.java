@@ -238,7 +238,7 @@ public class EmbergraphEmbeddedFederationSparqlTest extends EmbergraphSparqlTest
   }
 
   @Override
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     /*
      * Data files are placed into a directory named by the test. If the
@@ -311,9 +311,9 @@ public class EmbergraphEmbeddedFederationSparqlTest extends EmbergraphSparqlTest
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

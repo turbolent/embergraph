@@ -249,35 +249,35 @@ public class QRDecomposition implements java.io.Serializable {
     try {
       buf.append(this.hasFullRank());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nH = ");
     try {
       buf.append(this.getH());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nQ = ");
     try {
       buf.append(this.getQ());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nR = ");
     try {
       buf.append(this.getR());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\npseudo inverse(A) = ");
     try {
       buf.append(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows())));
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     return buf.toString();

@@ -135,14 +135,14 @@ public class BOpStats implements Serializable {
   public String toString() {
     final StringBuilder sb = new StringBuilder();
     sb.append(super.toString());
-    sb.append("{elapsed=" + elapsed.get());
-    sb.append(",opCount=" + opCount.get());
-    sb.append(",chunksIn=" + chunksIn.get());
-    sb.append(",unitsIn=" + unitsIn.get());
-    sb.append(",chunksOut=" + chunksOut.get());
-    sb.append(",unitsOut=" + unitsOut.get());
-    sb.append(",typeErrors=" + typeErrors.get());
-    sb.append(",mutationCount=" + mutationCount.get());
+    sb.append("{elapsed=").append(elapsed.get());
+    sb.append(",opCount=").append(opCount.get());
+    sb.append(",chunksIn=").append(chunksIn.get());
+    sb.append(",unitsIn=").append(unitsIn.get());
+    sb.append(",chunksOut=").append(chunksOut.get());
+    sb.append(",unitsOut=").append(unitsOut.get());
+    sb.append(",typeErrors=").append(typeErrors.get());
+    sb.append(",mutationCount=").append(mutationCount.get());
     toString(sb); // extension hook
     sb.append("}");
     return sb.toString();

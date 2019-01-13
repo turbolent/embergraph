@@ -45,7 +45,7 @@ public interface ITxCommitProtocol extends Remote {
    * @throws IllegalStateException if the read lock is set to a time earlier than its current value.
    * @throws IOException if there is an RMI problem.
    */
-  void setReleaseTime(long releaseTime) throws IOException;
+  void setReleaseTime(long releaseTime);
 
   /*
    * Request abort of the transaction by the data service. This message is sent in response to
@@ -57,7 +57,7 @@ public interface ITxCommitProtocol extends Remote {
    * @throws IllegalArgumentException if the transaction has not been started on this data service.
    * @throws IOException if there is an RMI problem.
    */
-  void abort(long tx) throws IOException;
+  void abort(long tx);
 
   /*
    * Request commit of the transaction by the data service. In the case where the transaction is
@@ -73,7 +73,7 @@ public interface ITxCommitProtocol extends Remote {
    * @throws ExecutionException This will wrap a {@link ValidationError} if validation fails.
    * @throws IOException if there is an RMI problem.
    */
-  long singlePhaseCommit(long tx) throws InterruptedException, ExecutionException, IOException;
+  long singlePhaseCommit(long tx);
 
   /*
    * Request that the {@link IDataService} participate in a 3-phase commit.
@@ -202,7 +202,7 @@ public interface ITxCommitProtocol extends Remote {
    *     <p>Failing that, we will need to exclude other tasks (or at least other distributed commit
    *     processing tasks) from the commit group.
    */
-  void prepare(long tx, long revisionTime) throws Throwable, IOException;
+  void prepare(long tx, long revisionTime) throws Throwable;
 
   //    /*
   //     * Cancel a 2-phase commit.

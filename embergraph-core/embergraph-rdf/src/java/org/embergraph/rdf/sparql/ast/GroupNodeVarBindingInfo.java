@@ -134,8 +134,7 @@ public class GroupNodeVarBindingInfo {
    */
   public Set<IVariable<?>> leftToBeBound(Set<IVariable<?>> knownBound) {
 
-    HashSet<IVariable<?>> toBeBound = new HashSet<>();
-    toBeBound.addAll(requiredBound);
+    HashSet<IVariable<?>> toBeBound = new HashSet<>(requiredBound);
     toBeBound.removeAll(knownBound);
 
     return toBeBound;

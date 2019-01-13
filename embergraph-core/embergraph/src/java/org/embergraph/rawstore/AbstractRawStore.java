@@ -239,7 +239,7 @@ public abstract class AbstractRawStore implements IRawStore {
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() {
       if (!m_bb.hasRemaining() && m_hbb != null && m_hbb.hasRemaining()) {
         m_bb = AbstractRawStore.this.read(m_hbb.getLong());
       }
@@ -250,8 +250,7 @@ public abstract class AbstractRawStore implements IRawStore {
       return 0xFF & m_bb.get();
     }
 
-    public synchronized int read(final byte[] dst, final int off, final int len)
-        throws IOException {
+    public synchronized int read(final byte[] dst, final int off, final int len) {
       if (m_bb.remaining() >= len) {
         m_bb.get(dst, off, len);
         return len;

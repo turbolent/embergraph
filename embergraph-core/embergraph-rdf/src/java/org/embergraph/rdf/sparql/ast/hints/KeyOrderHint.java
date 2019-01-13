@@ -50,7 +50,6 @@ final class KeyOrderHint extends AbstractQueryHint<SPOKeyOrder> {
 
       _setQueryHint(context, scope, op, getName(), value);
 
-      return;
     }
   }
 

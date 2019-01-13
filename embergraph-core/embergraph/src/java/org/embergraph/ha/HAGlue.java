@@ -75,7 +75,7 @@ public interface HAGlue
    * @return the quorum token for which the service became HA ready.
    */
   long awaitHAReady(long timeout, TimeUnit unit)
-      throws IOException, InterruptedException, TimeoutException, QuorumException;
+      throws InterruptedException, TimeoutException, QuorumException;
 
   /*
    * A follower uses this message to request that the quorum leader await the visibility of the
@@ -97,7 +97,7 @@ public interface HAGlue
    *     pipelineRemove() and getLeaderId()</a>
    */
   IHANotifyReleaseTimeResponse awaitServiceJoin(IHAAwaitServiceJoinRequest req)
-      throws IOException, InterruptedException, TimeoutException;
+      throws InterruptedException, TimeoutException;
 
   /*
    * Synchronization.
@@ -117,22 +117,22 @@ public interface HAGlue
    * @param msg The message requesting the then current root block.
    * @return The then current root block.
    */
-  IHARootBlockResponse getRootBlock(IHARootBlockRequest msg) throws IOException;
+  IHARootBlockResponse getRootBlock(IHARootBlockRequest msg);
 
   /** The port that the NanoSparqlServer is running on. */
-  int getNSSPort() throws IOException;
+  int getNSSPort();
 
   /*
    * The {@link RunState} of the service - this does NOT tell you whether the service is ready to
    * act as a leader or follower.
    */
-  RunState getRunState() throws IOException;
+  RunState getRunState();
 
   /*
    * The extended run state of the service - this embeds more information but is not designed for
    * progamatic interpretation.
    */
-  String getExtendedRunState() throws IOException;
+  String getExtendedRunState();
 
   /*
    * A simplified summary of the HA status of the service. This may be used to reliably decide
@@ -140,7 +140,7 @@ public interface HAGlue
    * {@link HAStatusEnum#NotReady}. This is exposed both here (an RMI interface) and by the REST
    * API.
    */
-  HAStatusEnum getHAStatus() throws IOException;
+  HAStatusEnum getHAStatus();
 
   /*
    * Compute the digest of the entire backing store - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
@@ -150,7 +150,7 @@ public interface HAGlue
    * compared with the digest of another store unless both stores are known to be stable.
    */
   IHADigestResponse computeDigest(IHADigestRequest req)
-      throws IOException, NoSuchAlgorithmException, DigestException;
+  ;
 
   /*
    * Compute the digest of the entire HALog file - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
@@ -162,7 +162,7 @@ public interface HAGlue
    * @throws FileNotFoundException if the HALog for the specified commit point does not exist.
    */
   IHALogDigestResponse computeHALogDigest(IHALogDigestRequest req)
-      throws IOException, NoSuchAlgorithmException, DigestException;
+  ;
 
   /*
    * Compute the digest of the entire snapshot file - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
@@ -172,7 +172,7 @@ public interface HAGlue
    * @throws FileNotFoundException if no snapshot exists for that commit point.
    */
   IHASnapshotDigestResponse computeHASnapshotDigest(IHASnapshotDigestRequest req)
-      throws IOException, NoSuchAlgorithmException, DigestException;
+  ;
 
   //    /*
   //     * Obtain a global write lock on the leader. The lock only blocks writers.
@@ -221,7 +221,7 @@ public interface HAGlue
    * @return A {@link Future} for the snapshot -or- <code>null</code> if no snapshot is running and
    *     none will be taken for that request.
    */
-  Future<IHASnapshotResponse> takeSnapshot(IHASnapshotRequest req) throws IOException;
+  Future<IHASnapshotResponse> takeSnapshot(IHASnapshotRequest req);
 
   /*
    * Disaster recovery (REBUILD) of the local database instance from the leader of a met quorum.
@@ -241,7 +241,7 @@ public interface HAGlue
    * @return The (asynchronous) {@link Future} of the REBUILD operation -or- <code>null</code> if
    *     any of the pre-conditions were violated.
    */
-  Future<Void> rebuildFromLeader(IHARemoteRebuildRequest req) throws IOException;
+  Future<Void> rebuildFromLeader(IHARemoteRebuildRequest req);
 
   /*
    * Run the caller's task on the service.
@@ -256,5 +256,5 @@ public interface HAGlue
    *     computation. <code>false</code> if the task will execute synchronously and return a thick
    *     {@link Future}.
    */
-  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture) throws IOException;
+  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture);
 }

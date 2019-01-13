@@ -95,22 +95,18 @@ public class HostScore {
    * #getHostname()} is used to break any ties.
    */
   public static final Comparator<HostScore> COMPARE_BY_SCORE =
-      new Comparator<HostScore>() {
+      (t1, t2) -> {
 
-        @Override
-        public int compare(final HostScore t1, final HostScore t2) {
+        if (t1.availability < t2.availability) {
 
-          if (t1.availability < t2.availability) {
+          return 1;
 
-            return 1;
+        } else if (t1.availability > t2.availability) {
 
-          } else if (t1.availability > t2.availability) {
-
-            return -1;
-          }
-
-          return t1.hostname.compareTo(t2.hostname);
+          return -1;
         }
+
+        return t1.hostname.compareTo(t2.hostname);
       };
 
   /*
@@ -118,12 +114,5 @@ public class HostScore {
    * </code>.
    */
   public static final Comparator<HostScore> COMPARE_BY_HOSTNAME =
-      new Comparator<HostScore>() {
-
-        @Override
-        public int compare(final HostScore t1, final HostScore t2) {
-
-          return t1.hostname.compareTo(t2.hostname);
-        }
-      };
+      (t1, t2) -> t1.hostname.compareTo(t2.hostname);
 }

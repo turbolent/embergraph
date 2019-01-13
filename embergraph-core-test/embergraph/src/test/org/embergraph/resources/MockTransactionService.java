@@ -43,12 +43,12 @@ class MockTransactionService extends AbstractTransactionService {
   }
 
   @Override
-  protected void abortImpl(TxState state) throws Exception {
+  protected void abortImpl(TxState state) {
     // TODO Auto-generated method stub
   }
 
   @Override
-  protected long commitImpl(TxState state) throws Exception {
+  protected long commitImpl(TxState state) {
     // TODO Auto-generated method stub
     return 0;
   }

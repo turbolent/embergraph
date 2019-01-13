@@ -131,7 +131,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
       this.sink = context.getSink();
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 
@@ -154,9 +154,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
 
           int ndef = 0, nalt = 0;
 
-          for (int i = 0; i < chunk.length; i++) {
-
-            final IBindingSet bset = chunk[i];
+          for (final IBindingSet bset : chunk) {
 
             final IV iv = v.get(bset);
 

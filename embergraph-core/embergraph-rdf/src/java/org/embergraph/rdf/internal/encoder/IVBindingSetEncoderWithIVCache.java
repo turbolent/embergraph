@@ -130,9 +130,9 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
      */
     final StringBuilder sb = new StringBuilder();
     sb.append(getClass().getSimpleName());
-    sb.append("{namespace=" + namespace);
-    if (ivCache.get() != null) sb.append(",ivCacheSize=" + getIVCacheSize());
-    if (blobsCache.get() != null) sb.append(",blobCacheSize=" + getBlobsCacheSize());
+    sb.append("{namespace=").append(namespace);
+    if (ivCache.get() != null) sb.append(",ivCacheSize=").append(getIVCacheSize());
+    if (blobsCache.get() != null) sb.append(",blobCacheSize=").append(getBlobsCacheSize());
     sb.append("}");
     return sb.toString();
   }

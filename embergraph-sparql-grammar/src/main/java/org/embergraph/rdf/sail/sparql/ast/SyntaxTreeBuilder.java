@@ -2437,7 +2437,7 @@ public class SyntaxTreeBuilder /*@bgen(jjtree)*/
     while (true) {
       if (jj_2_2(2)) {
       } else {
-        break label_23;
+        break;
       }
       jj_consume_token(DOT);
       TriplesSameSubjectPath();
@@ -2457,7 +2457,7 @@ public class SyntaxTreeBuilder /*@bgen(jjtree)*/
     while (true) {
       if (jj_2_3(2)) {
       } else {
-        break label_24;
+        break;
       }
       jj_consume_token(DOT);
       TriplesSameSubject();
@@ -11469,10 +11469,12 @@ public class SyntaxTreeBuilder /*@bgen(jjtree)*/
       jj_gen++;
       if (++jj_gc > 100) {
         jj_gc = 0;
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-          JJCalls c = jj_2_rtns[i];
+        for (JJCalls jj_2_rtn : jj_2_rtns) {
+          JJCalls c = jj_2_rtn;
           while (c != null) {
-            if (c.gen < jj_gen) c.first = null;
+            if (c.gen < jj_gen) {
+              c.first = null;
+            }
             c = c.next;
           }
         }
@@ -11550,12 +11552,10 @@ public class SyntaxTreeBuilder /*@bgen(jjtree)*/
       jj_lasttokens[jj_endpos++] = kind;
     } else if (jj_endpos != 0) {
       jj_expentry = new int[jj_endpos];
-      for (int i = 0; i < jj_endpos; i++) {
-        jj_expentry[i] = jj_lasttokens[i];
-      }
+      System.arraycopy(jj_lasttokens, 0, jj_expentry, 0, jj_endpos);
       jj_entries_loop:
-      for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext(); ) {
-        int[] oldentry = (int[]) (it.next());
+      for (int[] jj_expentry1 : jj_expentries) {
+        int[] oldentry = (int[]) (jj_expentry1);
         if (oldentry.length == jj_expentry.length) {
           for (int i = 0; i < jj_expentry.length; i++) {
             if (oldentry[i] != jj_expentry[i]) {
@@ -11563,7 +11563,7 @@ public class SyntaxTreeBuilder /*@bgen(jjtree)*/
             }
           }
           jj_expentries.add(jj_expentry);
-          break jj_entries_loop;
+          break;
         }
       }
       if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;

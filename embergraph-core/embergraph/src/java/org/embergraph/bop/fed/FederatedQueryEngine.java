@@ -639,7 +639,9 @@ public class FederatedQueryEngine extends QueryEngine {
     // lookup query by id.
     final FederatedRunningQuery q = getRunningQuery(queryId);
 
-    if (q == null) return;
+    if (q == null) {
+      return;
+    }
 
     /*
      * Queue the cancellation notice for asynchronous processing and return
@@ -654,11 +656,8 @@ public class FederatedQueryEngine extends QueryEngine {
      */
 
     try {
-
       execute(new CancelQuery(q, cause));
-
     } catch (RejectedExecutionException ex) {
-
       // ignore - the node is shutting down.
 
     }
@@ -719,12 +718,10 @@ public class FederatedQueryEngine extends QueryEngine {
       }
 
       if (proxy == null) {
-
         /*
          * Note: Presumably this is due to the concurrent tear down of
          * the peer.
          */
-
         throw new RuntimeException("No query engine on service: " + serviceUUID);
       }
 
@@ -733,11 +730,6 @@ public class FederatedQueryEngine extends QueryEngine {
       if (tmp != null) {
         proxy = tmp;
       }
-
-      //          if(log.isTraceEnabled()) log.trace("serviceUUID=" + serviceUUID + ",
-      // addedToCache="
-      //                  + (tmp == null) + ", proxy=" + proxy);
-
     }
 
     return proxy;
@@ -750,7 +742,6 @@ public class FederatedQueryEngine extends QueryEngine {
   /** Extension hook for new {@link QueryEngineCounters} instances. */
   @Override
   protected FederatedQueryEngineCounters newCounters() {
-
     return new FederatedQueryEngineCounters();
   }
 
@@ -761,7 +752,6 @@ public class FederatedQueryEngine extends QueryEngine {
    */
   @Override
   protected FederatedQueryEngineCounters getQueryEngineCounters() {
-
     return (FederatedQueryEngineCounters) counters;
   }
 }

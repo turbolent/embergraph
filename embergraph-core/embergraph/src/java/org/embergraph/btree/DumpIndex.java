@@ -56,24 +56,24 @@ public class DumpIndex {
 
     tupleSB.setLength(0); // reset.
 
-    tupleSB.append("rec=" + recno);
+    tupleSB.append("rec=").append(recno);
 
     try {
 
-      tupleSB.append("\nkey=" + tupleSer.deserializeKey(tuple));
+      tupleSB.append("\nkey=").append(tupleSer.deserializeKey(tuple));
 
     } catch (Throwable t) {
 
-      tupleSB.append("\nkey=" + BytesUtil.toString(tuple.getKey()));
+      tupleSB.append("\nkey=").append(BytesUtil.toString(tuple.getKey()));
     }
 
     try {
 
-      tupleSB.append("\nval=" + tupleSer.deserialize(tuple));
+      tupleSB.append("\nval=").append(tupleSer.deserialize(tuple));
 
     } catch (Throwable t) {
 
-      tupleSB.append("\nval=" + BytesUtil.toString(tuple.getValue()));
+      tupleSB.append("\nval=").append(BytesUtil.toString(tuple.getValue()));
     }
 
     System.out.println(tupleSB);

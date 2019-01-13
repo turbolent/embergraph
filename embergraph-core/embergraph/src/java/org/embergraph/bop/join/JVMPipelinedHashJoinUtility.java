@@ -157,7 +157,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
         stats.unitsIn.add(chunk.length);
       }
 
-      for (int i = 0; i < chunk.length; i++) {
+      for (IBindingSet iBindingSet : chunk) {
 
         /*
          * fast path: if we don't have a subquery but a join against mappings passed in via binding
@@ -166,12 +166,12 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
          * method already).
          */
         if (subquery == null) {
-          dontRequireSubqueryEvaluation.add(chunk[i]);
+          dontRequireSubqueryEvaluation.add(iBindingSet);
           continue;
         }
 
         // Take a distinct projection of the join variables.
-        final IBindingSet bsetDistinct = chunk[i].copy(projectInVars);
+        final IBindingSet bsetDistinct = iBindingSet.copy(projectInVars);
 
         /*
          * Find bucket in hash index for that distinct projection (bucket of solutions with the same
@@ -186,13 +186,13 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
            * any results. Either way, it will take a fast path that
            * avoids the subquery.
            */
-          dontRequireSubqueryEvaluation.add(chunk[i]);
+          dontRequireSubqueryEvaluation.add(iBindingSet);
 
         } else {
           // This is a new distinct projection. It will need to run
           // through the subquery. We buffer the solutions in a
           // operator-global data structure
-          incomingBindingsBuffer.add(chunk[i]);
+          incomingBindingsBuffer.add(iBindingSet);
           distinctProjectionBuffer.add(bsetDistinct);
         }
 
@@ -511,32 +511,22 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility
 
     sb.append(getClass().getSimpleName());
 
-    sb.append("{open=" + open);
-    sb.append(",joinType=" + joinType);
-    if (askVar != null) sb.append(",askVar=" + askVar);
-    sb.append(",joinVars=" + Arrays.toString(joinVars));
-    sb.append(",outputDistinctJVs=" + outputDistinctJVs);
-    if (selectVars != null) sb.append(",selectVars=" + Arrays.toString(selectVars));
-    if (constraints != null) sb.append(",constraints=" + Arrays.toString(constraints));
-    sb.append(",size=" + getRightSolutionCount());
-    sb.append(
-        ", distinctProjectionsWithoutSubqueryResult="
-            + distinctProjectionsWithoutSubqueryResult.size());
-    sb.append(
-        ", distinctBindingSets (seen/released)="
-            + nDistinctBindingSets
-            + "/"
-            + nDistinctBindingSetsReleased);
-    sb.append(", subqueriesIssued=" + nSubqueriesIssued);
-    sb.append(", resultsFromSubqueries=" + nResultsFromSubqueries);
-    sb.append(
-        ",considered(left="
-            + nleftConsidered
-            + ",right="
-            + nrightConsidered
-            + ",joins="
-            + nJoinsConsidered
-            + ")");
+    sb.append("{open=").append(open);
+    sb.append(",joinType=").append(joinType);
+    if (askVar != null) sb.append(",askVar=").append(askVar);
+    sb.append(",joinVars=").append(Arrays.toString(joinVars));
+    sb.append(",outputDistinctJVs=").append(outputDistinctJVs);
+    if (selectVars != null) sb.append(",selectVars=").append(Arrays.toString(selectVars));
+    if (constraints != null) sb.append(",constraints=").append(Arrays.toString(constraints));
+    sb.append(",size=").append(getRightSolutionCount());
+    sb.append(", distinctProjectionsWithoutSubqueryResult=")
+        .append(distinctProjectionsWithoutSubqueryResult.size());
+    sb.append(", distinctBindingSets (seen/released)=").append(nDistinctBindingSets).append("/")
+        .append(nDistinctBindingSetsReleased);
+    sb.append(", subqueriesIssued=").append(nSubqueriesIssued);
+    sb.append(", resultsFromSubqueries=").append(nResultsFromSubqueries);
+    sb.append(",considered(left=").append(nleftConsidered).append(",right=")
+        .append(nrightConsidered).append(",joins=").append(nJoinsConsidered).append(")");
     sb.append("}");
 
     return sb.toString();

@@ -1094,9 +1094,9 @@ public class XHTMLRenderer implements IRenderer {
             w.write("  <td>" + cset.cats[j] + "</td\n>");
           }
 
-          for (int j = 0; j < vals.length; j++) {
+          for (Double val : vals) {
 
-            final String s = vals[j] == null ? "" : Double.toString(vals[j]);
+            final String s = val == null ? "" : Double.toString(val);
 
             w.write("  <td>" + s + "</td\n>");
           }
@@ -1297,7 +1297,7 @@ public class XHTMLRenderer implements IRenderer {
 
       try {
 
-        sb.append("" + f.get(e));
+        sb.append("").append(f.get(e));
 
       } catch (Exception ex) {
 
@@ -1313,11 +1313,7 @@ public class XHTMLRenderer implements IRenderer {
   // FIXME format the event as an HTML table and link into the code.
   protected String getEventTable(final Event e) {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(e.toString());
-
-    return sb.toString();
+    return e.toString();
   }
 
   /*
@@ -1439,7 +1435,7 @@ public class XHTMLRenderer implements IRenderer {
 
       eventsSB.append(hostyvar);
 
-      eventsSB.append((offset < 0 ? "" : "+") + offset + " ], [ ");
+      eventsSB.append(offset < 0 ? "" : "+").append(offset).append(" ], [ ");
 
       eventsSB.append(e.getEndTime());
 
@@ -1447,7 +1443,7 @@ public class XHTMLRenderer implements IRenderer {
 
       eventsSB.append(hostyvar);
 
-      eventsSB.append((offset < 0 ? "" : "+") + offset + " ], null,\n");
+      eventsSB.append(offset < 0 ? "" : "+").append(offset).append(" ], null,\n");
 
       final StringBuilder tooltipsSB = tooltipsByHost.get(key);
 
@@ -1533,9 +1529,9 @@ public class XHTMLRenderer implements IRenderer {
     /*
      * Output the variables containing the tooltips for each series.
      */
-    for (int i = 0; i < keys.length; i++) {
+    for (String key1 : keys) {
 
-      final StringBuilder sb = tooltipsByHost.get(keys[i]);
+      final StringBuilder sb = tooltipsByHost.get(key1);
 
       sb.setLength(sb.length() - 2);
 

@@ -109,33 +109,33 @@ public abstract class PageStats extends BaseIndexStats {
   public String toString() {
     final StringBuilder sb = new StringBuilder();
     sb.append(getClass().getName());
-    sb.append("{indexType=" + indexType);
-    sb.append(",m=" + m);
-    sb.append(",nnodes=" + nnodes);
-    sb.append(",nleaves=" + nleaves);
-    sb.append(",nrawRecs=" + nrawRecs);
-    sb.append(",nodeBytes=" + nodeBytes);
-    sb.append(",minNodeBytes=" + minNodeBytes);
-    sb.append(",maxNodeBytes=" + maxNodeBytes);
-    sb.append(",leafBytes=" + leafBytes);
-    sb.append(",minLeafBytes=" + minLeafBytes);
-    sb.append(",maxLeafBytes=" + maxLeafBytes);
-    sb.append(",rawRecBytes=" + rawRecBytes);
-    sb.append(",bytesPerNode=" + getBytesPerNode());
-    sb.append(",bytesPerLeaf=" + getBytesPerLeaf());
-    sb.append(",bytesPerRawRec=" + getBytesPerRawRecord());
-    sb.append(",nerrors=" + nerrors);
+    sb.append("{indexType=").append(indexType);
+    sb.append(",m=").append(m);
+    sb.append(",nnodes=").append(nnodes);
+    sb.append(",nleaves=").append(nleaves);
+    sb.append(",nrawRecs=").append(nrawRecs);
+    sb.append(",nodeBytes=").append(nodeBytes);
+    sb.append(",minNodeBytes=").append(minNodeBytes);
+    sb.append(",maxNodeBytes=").append(maxNodeBytes);
+    sb.append(",leafBytes=").append(leafBytes);
+    sb.append(",minLeafBytes=").append(minLeafBytes);
+    sb.append(",maxLeafBytes=").append(maxLeafBytes);
+    sb.append(",rawRecBytes=").append(rawRecBytes);
+    sb.append(",bytesPerNode=").append(getBytesPerNode());
+    sb.append(",bytesPerLeaf=").append(getBytesPerLeaf());
+    sb.append(",bytesPerRawRec=").append(getBytesPerRawRecord());
+    sb.append(",nerrors=").append(nerrors);
     final long npages = (nleaves + nnodes);
     for (int i = 0; i < SLOT_SIZES.length; i++) {
       final long slotsThisSize = histogram[i];
       final double percentSlotSize = ((double) slotsThisSize) / npages;
-      sb.append(",slot_" + SLOT_SIZES[i] + "=" + round(percentSlotSize));
+      sb.append(",slot_").append(SLOT_SIZES[i]).append("=").append(round(percentSlotSize));
     }
     {
       final double percentBlobs = ((double) blobs) / npages;
-      sb.append(",blobs=" + round(percentBlobs));
+      sb.append(",blobs=").append(round(percentBlobs));
     }
-    sb.append(",newM=" + getRecommendedBranchingFactor());
+    sb.append(",newM=").append(getRecommendedBranchingFactor());
     sb.append("}");
     return sb.toString();
   }

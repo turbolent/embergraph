@@ -177,40 +177,38 @@ public class TestWORMWriteCacheService extends TestCase3 {
      * QuorumActor#reorganizePipeline} in {@link MockQuorumFixture}.
      */
     @Override
-    public RunnableFuture<Void> moveToEndOfPipeline() throws IOException {
+    public RunnableFuture<Void> moveToEndOfPipeline() {
 
       final FutureTask<Void> ft =
           new FutureTask<>(
-              new Runnable() {
-                public void run() {
+              () -> {
 
-                  // note the current vote (if any).
-                  final Long lastCommitTime = member.getQuorum().getCastVote(getServiceId());
+                // note the current vote (if any).
+                final Long lastCommitTime = member.getQuorum().getCastVote(getServiceId());
 
-                  if (member.isPipelineMember()) {
+                if (member.isPipelineMember()) {
+
+                  // System.err
+                  // .println("Will remove self from the pipeline: "
+                  // + getServiceId());
+
+                  member.getActor().pipelineRemove();
+
+                  // System.err
+                  // .println("Will add self back into the pipeline: "
+                  // + getServiceId());
+
+                  member.getActor().pipelineAdd();
+
+                  if (lastCommitTime != null) {
 
                     // System.err
-                    // .println("Will remove self from the pipeline: "
+                    // .println("Will cast our vote again: lastCommitTime="
+                    // + +lastCommitTime
+                    // + ", "
                     // + getServiceId());
 
-                    member.getActor().pipelineRemove();
-
-                    // System.err
-                    // .println("Will add self back into the pipeline: "
-                    // + getServiceId());
-
-                    member.getActor().pipelineAdd();
-
-                    if (lastCommitTime != null) {
-
-                      // System.err
-                      // .println("Will cast our vote again: lastCommitTime="
-                      // + +lastCommitTime
-                      // + ", "
-                      // + getServiceId());
-
-                      member.getActor().castVote(lastCommitTime);
-                    }
+                    member.getActor().castVote(lastCommitTime);
                   }
                 }
               },
@@ -220,18 +218,17 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
 
     @Override
-    public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg)
-        throws IOException {
+    public IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg) {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public Future<Void> sendHALogForWriteSet(IHALogRequest msg) throws IOException {
+    public Future<Void> sendHALogForWriteSet(IHALogRequest msg) {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) throws IOException {
+    public Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) {
       throw new UnsupportedOperationException();
     }
 
@@ -241,8 +238,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
 
     @Override
-    public Future<IHAPipelineResetResponse> resetPipeline(final IHAPipelineResetRequest req)
-        throws IOException {
+    public Future<IHAPipelineResetResponse> resetPipeline(final IHAPipelineResetRequest req) {
       throw new UnsupportedOperationException();
     }
   } // class MockHAPipelineGlue
@@ -278,8 +274,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
                 @Override
                 protected void handleReplicatedWrite(
-                    final IHASyncRequest req, final IHAWriteMessage msg, final ByteBuffer data)
-                    throws Exception {
+                    final IHASyncRequest req, final IHAWriteMessage msg, final ByteBuffer data) {
 
                   nreceived.incrementAndGet();
 
@@ -322,8 +317,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
                     final IHAWriteMessage msg,
                     final int nreads,
                     final int rdlen,
-                    final int rem)
-                    throws Exception {
+                    final int rem) {
                   // NOP
                 }
 
@@ -437,14 +431,13 @@ public class TestWORMWriteCacheService extends TestCase3 {
     private long lastCommitTime = 0;
 
     @Override
-    public void logWriteCacheBlock(final IHAWriteMessage msg, final ByteBuffer data)
-        throws IOException {
+    public void logWriteCacheBlock(final IHAWriteMessage msg, final ByteBuffer data) {
       // NOP.
     }
 
     @Override
     public void logRootBlock( // final boolean isJoinedService,
-        final IRootBlockView rootBlock) throws IOException {
+        final IRootBlockView rootBlock) {
 
       // NOP
 
@@ -458,8 +451,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
 
     @Override
-    public Future<IHAPipelineResetResponse> resetPipeline(IHAPipelineResetRequest req)
-        throws IOException {
+    public Future<IHAPipelineResetResponse> resetPipeline(IHAPipelineResetRequest req) {
       throw new UnsupportedOperationException();
     }
   } // MockQuorumMemberImpl
@@ -1223,12 +1215,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       // Verify the expected services joined.
       AbstractQuorumTestCase.assertCondition(
-          new Runnable() {
-            public void run() {
-              assertEquals(3, quorum0.getJoined().length);
-              assertEquals(3, quorum1.getJoined().length);
-              assertEquals(3, quorum2.getJoined().length);
-            }
+          () -> {
+            assertEquals(3, quorum0.getJoined().length);
+            assertEquals(3, quorum1.getJoined().length);
+            assertEquals(3, quorum2.getJoined().length);
           });
 
       /*
@@ -1973,12 +1963,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       // Verify the expected services joined.
       AbstractQuorumTestCase.assertCondition(
-          new Runnable() {
-            public void run() {
-              assertEquals(3, quorum0.getJoined().length);
-              assertEquals(3, quorum1.getJoined().length);
-              assertEquals(3, quorum2.getJoined().length);
-            }
+          () -> {
+            assertEquals(3, quorum0.getJoined().length);
+            assertEquals(3, quorum1.getJoined().length);
+            assertEquals(3, quorum2.getJoined().length);
           });
 
       final long nsend =
@@ -2079,12 +2067,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       // Verify the expected services joined.
       AbstractQuorumTestCase.assertCondition(
-          new Runnable() {
-            public void run() {
-              assertEquals(3, quorum0.getJoined().length);
-              assertEquals(3, quorum1.getJoined().length);
-              assertEquals(3, quorum2.getJoined().length);
-            }
+          () -> {
+            assertEquals(3, quorum0.getJoined().length);
+            assertEquals(3, quorum1.getJoined().length);
+            assertEquals(3, quorum2.getJoined().length);
           });
 
       final long nsend =
@@ -2170,14 +2156,11 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
     // Await quorum meet.
     assertCondition(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              assertEquals(0L, quorum.token());
-            } catch (Exception e) {
-              fail();
-            }
+        () -> {
+          try {
+            assertEquals(0L, quorum.token());
+          } catch (Exception e) {
+            fail();
           }
         },
         5000 /*timeout*/,
@@ -2301,9 +2284,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
         }
 
         // replace with random ordering of the records.
-        for (int i = 0; i < nrecs; i++) {
-          records[i] = tmp[i];
-        }
+        System.arraycopy(tmp, 0, records, 0, nrecs);
       }
 
       /*

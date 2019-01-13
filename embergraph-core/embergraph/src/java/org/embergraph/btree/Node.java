@@ -2922,18 +2922,15 @@ public class Node extends AbstractNode<Node> implements INodeData {
       final int index = i;
 
       s.execute(
-          new Runnable() {
+          () -> {
 
-            public void run() {
-
-              if (!node.btree.isOpen()) {
-                // No longer open.
-                return;
-              }
-
-              // Materialize the child.
-              node.getChild(index);
+            if (!node.btree.isOpen()) {
+              // No longer open.
+              return;
             }
+
+            // Materialize the child.
+            node.getChild(index);
           });
     }
 
@@ -3022,19 +3019,16 @@ public class Node extends AbstractNode<Node> implements INodeData {
     final Executor s = ((Journal) btree.store).getReadExecutor();
 
     s.execute(
-        new Runnable() {
+        () -> {
 
-          public void run() {
+          if (!p.btree.isOpen()) {
 
-            if (!p.btree.isOpen()) {
-
-              // No longer open.
-              return;
-            }
-
-            // Materialize the right sibling.
-            p.getRightSibling(node, true /* materialize */);
+            // No longer open.
+            return;
           }
+
+          // Materialize the right sibling.
+          p.getRightSibling(node, true /* materialize */);
         });
   }
 
@@ -3591,15 +3585,15 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // sb.append(getClass().getName());
     sb.append(super.toString());
 
-    sb.append("{ isDirty=" + isDirty());
+    sb.append("{ isDirty=").append(isDirty());
 
-    sb.append(", isDeleted=" + isDeleted());
+    sb.append(", isDeleted=").append(isDeleted());
 
-    sb.append(", addr=" + identity);
+    sb.append(", addr=").append(identity);
 
     final Node p = (parent == null ? null : parent.get());
 
-    sb.append(", parent=" + (p == null ? "N/A" : p.toShortString()));
+    sb.append(", parent=").append(p == null ? "N/A" : p.toShortString());
 
     if (data == null) {
 
@@ -3610,11 +3604,11 @@ public class Node extends AbstractNode<Node> implements INodeData {
       return sb.toString();
     }
 
-    sb.append(", nkeys=" + getKeyCount());
+    sb.append(", nkeys=").append(getKeyCount());
 
-    sb.append(", minKeys=" + minKeys());
+    sb.append(", minKeys=").append(minKeys());
 
-    sb.append(", maxKeys=" + maxKeys());
+    sb.append(", maxKeys=").append(maxKeys());
 
     DefaultNodeCoder.toString(this, sb);
 

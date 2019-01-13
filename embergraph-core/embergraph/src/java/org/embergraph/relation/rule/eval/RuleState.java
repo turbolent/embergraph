@@ -359,15 +359,13 @@ public class RuleState implements IRuleState {
 
         // plus next tail's passalongs
         final IVariable[] nextRequired = a[nextTailIndex];
-        for (IVariable v : nextRequired) {
-          required.add(v);
-        }
+        required.addAll(Arrays.asList(nextRequired));
       }
 
       final int tailIndex = order[orderIndex];
 
       // save results.
-      a[tailIndex] = required.toArray(new IVariable[required.size()]);
+      a[tailIndex] = required.toArray(new IVariable[0]);
 
       if (log.isDebugEnabled()) {
         log.debug(

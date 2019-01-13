@@ -515,11 +515,11 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append(tuple.getClass().getName() + "@" + tuple.hashCode());
+    sb.append(tuple.getClass().getName()).append("@").append(tuple.hashCode());
 
-    sb.append("{ nvisited=" + tuple.getVisitCount());
+    sb.append("{ nvisited=").append(tuple.getVisitCount());
 
-    sb.append(", flags=" + flagString(tuple.flags()));
+    sb.append(", flags=").append(flagString(tuple.flags()));
 
     if (tuple.isDeletedVersion()) {
 
@@ -528,20 +528,18 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
 
     if (tuple.getVersionTimestamp() != 0L) {
 
-      sb.append(", timestamp=" + tuple.getVersionTimestamp());
+      sb.append(", timestamp=").append(tuple.getVersionTimestamp());
     }
 
-    sb.append(", key=" + (tuple.getKeysRequested() ? Arrays.toString(tuple.getKey()) : "N/A"));
+    sb.append(", key=").append(tuple.getKeysRequested() ? Arrays.toString(tuple.getKey()) : "N/A");
 
-    sb.append(
-        ", val="
-            + (tuple.getValuesRequested()
-                ? (tuple.isNull() ? "null" : Arrays.toString(tuple.getValue()))
-                : "N/A"));
+    sb.append(", val=").append(tuple.getValuesRequested()
+        ? (tuple.isNull() ? "null" : Arrays.toString(tuple.getValue()))
+        : "N/A");
 
-    sb.append(", obj=" + (obj instanceof byte[] ? Arrays.toString((byte[]) obj) : obj));
+    sb.append(", obj=").append(obj instanceof byte[] ? Arrays.toString((byte[]) obj) : obj);
 
-    sb.append(", sourceIndex=" + tuple.getSourceIndex());
+    sb.append(", sourceIndex=").append(tuple.getSourceIndex());
 
     sb.append("}");
 

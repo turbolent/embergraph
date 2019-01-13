@@ -97,9 +97,7 @@ public class TestICUUnicodeKeyBuilder extends AbstractUnicodeKeyBuilderTestCase 
 
     int minStrength = -1;
 
-    for (int i = 0; i < strengths.length; i++) {
-
-      final int strength = strengths[i];
+    for (final int strength : strengths) {
 
       // set the strength on the collator.
       properties.setProperty(Options.STRENGTH, "" + Collator.IDENTICAL);

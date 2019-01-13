@@ -210,7 +210,7 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
       }
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 
@@ -221,10 +221,8 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
 
           final IHashJoinUtility[] others = new IHashJoinUtility[state.length - 1];
 
-          for (int i = 1; i < state.length; i++) {
-
-            others[i - 1] = state[i];
-          }
+          if (state.length - 1 >= 0)
+            System.arraycopy(state, 1, others, 0, state.length - 1);
 
           state[0].mergeJoin(
               others, unsyncBuffer, constraints, state[0].getJoinType().isOptional());

@@ -66,7 +66,7 @@ public class RegisterIndexTask extends AbstractTask<UUID> {
    * @return The {@link UUID} of the named index.
    */
   @Override
-  protected UUID doTask() throws Exception {
+  protected UUID doTask() {
 
     final String name = getOnlyResource();
 

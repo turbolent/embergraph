@@ -467,9 +467,9 @@ public class StorageStats {
   public StorageStats(final int[] buckets) {
     m_buckets = new ArrayList<>();
     int prevLimit = 0;
-    for (int i = 0; i < buckets.length; i++) {
-      m_buckets.add(new Bucket(buckets[i] * 64, prevLimit)); // slot sizes are 64 multiples
-      prevLimit = buckets[i] * 64;
+    for (int bucket : buckets) {
+      m_buckets.add(new Bucket(bucket * 64, prevLimit)); // slot sizes are 64 multiples
+      prevLimit = bucket * 64;
     }
     // last fixed allocator needed to compute BlobBuckets
     m_maxFixed = m_buckets.get(buckets.length - 1).m_size;

@@ -173,7 +173,7 @@ public abstract class AbstractResourceMetadata
    */
   private static final transient short VERSION1 = 0x1;
 
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     final short version = ShortPacker.unpackShort(in);
 

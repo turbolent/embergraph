@@ -28,6 +28,7 @@ import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,7 +153,7 @@ public class TestEmbergraphGraphEmbeddedTransactional extends AbstractTestEmberg
   private class EmbergraphGraphTest extends GraphTest {
 
     private List<String> exclude =
-        Arrays.asList(
+        Collections.singletonList(
             // this one creates a deadlock, no way around it
             "testTransactionIsolationCommitCheck");
 

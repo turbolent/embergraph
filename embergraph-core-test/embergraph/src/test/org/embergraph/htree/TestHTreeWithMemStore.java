@@ -245,8 +245,8 @@ public class TestHTreeWithMemStore extends TestCase {
         assertEquals(total, visits);
       }
 
-      for (int i = 0; i < keys.length; i++) {
-        assertTrue(htree.contains(keys[i]));
+      for (byte[] key : keys) {
+        assertTrue(htree.contains(key));
       }
 
       final long end = System.currentTimeMillis();

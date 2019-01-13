@@ -1680,7 +1680,6 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
         }
 
         if (uuid == null
-            && indexManager != null
             && indexManager instanceof IEmbergraphFederation<?>) {
 
           final IEmbergraphFederation<?> fed = (IEmbergraphFederation<?>) indexManager;
@@ -2183,52 +2182,47 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     final StringBuilder sb = new StringBuilder();
 
     // transient
-    sb.append("addrMetadata=" + addrMetadata);
+    sb.append("addrMetadata=").append(addrMetadata);
 
     // persistent
-    sb.append(", name=" + (name == null ? "N/A" : name));
-    sb.append(", indexType=" + indexType);
-    sb.append(", indexUUID=" + indexUUID);
+    sb.append(", name=").append(name == null ? "N/A" : name);
+    sb.append(", indexType=").append(indexType);
+    sb.append(", indexUUID=").append(indexUUID);
     if (initialDataServiceUUID != null) {
-      sb.append(", initialDataServiceUUID=" + initialDataServiceUUID);
+      sb.append(", initialDataServiceUUID=").append(initialDataServiceUUID);
     }
-    sb.append(", branchingFactor=" + branchingFactor);
-    sb.append(", pmd=" + pmd);
-    sb.append(", btreeClassName=" + btreeClassName);
-    sb.append(", checkpointClass=" + checkpointClassName);
+    sb.append(", branchingFactor=").append(branchingFactor);
+    sb.append(", pmd=").append(pmd);
+    sb.append(", btreeClassName=").append(btreeClassName);
+    sb.append(", checkpointClass=").append(checkpointClassName);
     //        sb.append(", childAddrSerializer=" + addrSer.getClass().getName());
-    sb.append(", nodeKeysCoder=" + nodeKeysCoder); // .getClass().getName());
-    sb.append(
-        ", btreeRecordCompressorFactory="
-            + (btreeRecordCompressorFactory == null ? "N/A" : btreeRecordCompressorFactory));
-    sb.append(", tupleSerializer=" + tupleSer); // .getClass().getName());
-    sb.append(
-        ", conflictResolver="
-            + (conflictResolver == null ? "N/A" : conflictResolver.getClass().getName()));
-    sb.append(", deleteMarkers=" + deleteMarkers);
-    sb.append(", versionTimestamps=" + versionTimestamps);
-    sb.append(", versionTimestampFilters=" + versionTimestampFilters);
-    sb.append(", isolatable=" + isIsolatable());
-    sb.append(", rawRecords=" + rawRecords);
-    sb.append(", maxRecLen=" + maxRecLen);
-    sb.append(
-        ", bloomFilterFactory="
-            + (bloomFilterFactory == null ? "N/A" : bloomFilterFactory.toString()));
-    sb.append(
-        ", overflowHandler="
-            + (overflowHandler == null ? "N/A" : overflowHandler.getClass().getName()));
-    sb.append(", splitHandler=" + (splitHandler2 == null ? "N/A" : splitHandler2.toString()));
-    sb.append(", indexSegmentBranchingFactor=" + indexSegmentBranchingFactor);
-    sb.append(", indexSegmentBufferNodes=" + indexSegmentBufferNodes);
+    sb.append(", nodeKeysCoder=").append(nodeKeysCoder); // .getClass().getName());
+    sb.append(", btreeRecordCompressorFactory=")
+        .append(btreeRecordCompressorFactory == null ? "N/A" : btreeRecordCompressorFactory);
+    sb.append(", tupleSerializer=").append(tupleSer); // .getClass().getName());
+    sb.append(", conflictResolver=")
+        .append(conflictResolver == null ? "N/A" : conflictResolver.getClass().getName());
+    sb.append(", deleteMarkers=").append(deleteMarkers);
+    sb.append(", versionTimestamps=").append(versionTimestamps);
+    sb.append(", versionTimestampFilters=").append(versionTimestampFilters);
+    sb.append(", isolatable=").append(isIsolatable());
+    sb.append(", rawRecords=").append(rawRecords);
+    sb.append(", maxRecLen=").append(maxRecLen);
+    sb.append(", bloomFilterFactory=")
+        .append(bloomFilterFactory == null ? "N/A" : bloomFilterFactory.toString());
+    sb.append(", overflowHandler=")
+        .append(overflowHandler == null ? "N/A" : overflowHandler.getClass().getName());
+    sb.append(", splitHandler=").append(splitHandler2 == null ? "N/A" : splitHandler2.toString());
+    sb.append(", indexSegmentBranchingFactor=").append(indexSegmentBranchingFactor);
+    sb.append(", indexSegmentBufferNodes=").append(indexSegmentBufferNodes);
     //        sb.append(", indexSegmentLeafCacheCapacity=" + indexSegmentLeafCacheCapacity);
     //        sb.append(", indexSegmentLeafCacheTimeout=" + indexSegmentLeafCacheTimeout);
-    sb.append(
-        ", indexSegmentRecordCompressorFactory="
-            + (indexSegmentRecordCompressorFactory == null
-                ? "N/A"
-                : indexSegmentRecordCompressorFactory));
-    sb.append(", asynchronousIndexWriteConfiguration=" + asynchronousIndexWriteConfiguration);
-    sb.append(", scatterSplitConfiguration=" + scatterSplitConfiguration);
+    sb.append(", indexSegmentRecordCompressorFactory=")
+        .append(indexSegmentRecordCompressorFactory == null
+            ? "N/A"
+            : indexSegmentRecordCompressorFactory);
+    sb.append(", asynchronousIndexWriteConfiguration=").append(asynchronousIndexWriteConfiguration);
+    sb.append(", scatterSplitConfiguration=").append(scatterSplitConfiguration);
     toString(sb); // extension hook
 
     return sb.toString();

@@ -155,7 +155,7 @@ public class AtomicBlockWriteProc implements ISimpleIndexProcedure<Object>, Exte
   }
 
   @Override
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     id = in.readUTF();
 

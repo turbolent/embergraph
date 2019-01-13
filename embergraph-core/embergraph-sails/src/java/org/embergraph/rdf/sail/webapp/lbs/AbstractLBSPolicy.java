@@ -95,10 +95,10 @@ public abstract class AbstractLBSPolicy
     final StringBuilder sb = new StringBuilder(256);
 
     sb.append(this.getClass().getName());
-    sb.append("{contextPath=" + contextPath.get());
-    sb.append(",journal=" + journalRef.get());
-    sb.append(",serviceID=" + serviceIDRef.get());
-    sb.append(",services=" + tmp);
+    sb.append("{contextPath=").append(contextPath.get());
+    sb.append(",journal=").append(journalRef.get());
+    sb.append(",serviceID=").append(serviceIDRef.get());
+    sb.append(",services=").append(tmp);
     toString(sb); // extension hook
     sb.append("}");
 
@@ -390,12 +390,7 @@ public abstract class AbstractLBSPolicy
             .getExecutorService()
             .execute(
                 new FutureTaskMon<Void>(
-                    new Runnable() {
-                      @Override
-                      public void run() {
-                        updateServiceTable();
-                      }
-                    },
+                    () -> updateServiceTable(),
                     null /* result */));
         break;
     }
@@ -465,14 +460,12 @@ public abstract class AbstractLBSPolicy
       if (oldTable != null) {
 
         // Check old service table before doing RMI.
-        for (int j = 0; j < oldTable.length; j++) {
-
-          final ServiceScore oldScore = oldTable[j];
+        for (final ServiceScore oldScore : oldTable) {
 
           if (oldScore != null && serviceId.equals(oldScore.getServiceUUID())) {
 
             // Found existing declaration for this service.
-            serviceScores[i] = oldTable[j];
+            serviceScores[i] = oldScore;
 
             break;
           }
@@ -489,7 +482,6 @@ public abstract class AbstractLBSPolicy
         // Service is not usable.
         log.warn(ex, ex);
 
-        continue;
       }
     }
 

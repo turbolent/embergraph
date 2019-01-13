@@ -409,7 +409,6 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
       }
     }
 
-    return;
   }
 
   public boolean removeBoolean(final long index) {

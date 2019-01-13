@@ -374,39 +374,32 @@ class BTreeMetadata {
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append("name=" + name);
+    sb.append("name=").append(name);
 
-    sb.append(", action=" + actionRef.get());
+    sb.append(", action=").append(actionRef.get());
 
-    sb.append(", entryCount=" + entryCount);
+    sb.append(", entryCount=").append(entryCount);
 
-    sb.append(", sumSegBytes=" + sumSegBytes);
+    sb.append(", sumSegBytes=").append(sumSegBytes);
 
-    sb.append(", mergePriority=" + mergePriority);
+    sb.append(", mergePriority=").append(mergePriority);
 
     //        sb.append(", splitPriority=" + splitPriority);
 
-    sb.append(", manditoryMerge=" + mandatoryMerge);
+    sb.append(", manditoryMerge=").append(mandatoryMerge);
 
-    sb.append(
-        ", sourceCounts="
-            + "{all="
-            + sourceCount
-            + ",journals="
-            + sourceJournalCount
-            + ",segments="
-            + sourceSegmentCount
-            + "}");
+    sb.append(", sourceCounts=" + "{all=").append(sourceCount).append(",journals=")
+        .append(sourceJournalCount).append(",segments=").append(sourceSegmentCount).append("}");
 
-    sb.append(", #leafSplit=" + btreeCounters.leavesSplit);
+    sb.append(", #leafSplit=").append(btreeCounters.leavesSplit);
 
-    sb.append(", #headSplit=" + btreeCounters.headSplit);
+    sb.append(", #headSplit=").append(btreeCounters.headSplit);
 
-    sb.append(", #tailSplit=" + btreeCounters.tailSplit);
+    sb.append(", #tailSplit=").append(btreeCounters.tailSplit);
 
-    sb.append(", percentHeadSplits=" + percentHeadSplits);
+    sb.append(", percentHeadSplits=").append(percentHeadSplits);
 
-    sb.append(", percentTailSplits=" + percentTailSplits);
+    sb.append(", percentTailSplits=").append(percentTailSplits);
 
     toString(sb);
 

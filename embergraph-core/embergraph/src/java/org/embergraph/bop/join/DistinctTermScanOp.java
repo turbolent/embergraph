@@ -195,7 +195,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final BOpStats stats = context.getStats();
 
@@ -355,8 +355,8 @@ public class DistinctTermScanOp<E> extends PipelineOp {
       // term advancer is sufficient
       List<BOp> predicateArgs = ap.getPredicate().args();
       int nrConsts = 0;
-      for (int i = 0; i < predicateArgs.size(); i++) {
-        if (predicateArgs.get(i) instanceof IConstant) {
+      for (BOp predicateArg : predicateArgs) {
+        if (predicateArg instanceof IConstant) {
           nrConsts++;
         }
       }

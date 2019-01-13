@@ -9,7 +9,6 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.impl.LiteralImpl;
 

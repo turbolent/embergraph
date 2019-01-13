@@ -185,7 +185,6 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
       if (needsLifting(subqueryRoot)) {
 
         liftSparql11Subquery(context, sa, subqueryRoot);
-        continue;
       }
 
       /*

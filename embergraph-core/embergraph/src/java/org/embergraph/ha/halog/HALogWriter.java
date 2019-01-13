@@ -256,7 +256,7 @@ public class HALogWriter implements IHALogWriter {
    * @throws FileNotFoundException
    * @throws IOException
    */
-  public void createLog(final IRootBlockView rootBlock) throws FileNotFoundException, IOException {
+  public void createLog(final IRootBlockView rootBlock) throws IOException {
 
     if (rootBlock == null) throw new IllegalArgumentException();
 
@@ -340,22 +340,18 @@ public class HALogWriter implements IHALogWriter {
 
   /** Hook for {@link FileChannelUtility#writeAll(IReopenChannel, ByteBuffer, long)} */
   private final IReopenChannel<FileChannel> reopener =
-      new IReopenChannel<FileChannel>() {
+      () -> {
+        final Lock lock = m_stateLock.readLock();
+        lock.lock();
+        try {
+          if (m_state == null || m_state.m_channel == null || !m_state.m_channel.isOpen()) {
 
-        @Override
-        public FileChannel reopenChannel() throws IOException {
-          final Lock lock = m_stateLock.readLock();
-          lock.lock();
-          try {
-            if (m_state == null || m_state.m_channel == null || !m_state.m_channel.isOpen()) {
-
-              throw new IOException("Closed");
-            }
-
-            return m_state.m_channel;
-          } finally {
-            lock.unlock();
+            throw new IOException("Closed");
           }
+
+          return m_state.m_channel;
+        } finally {
+          lock.unlock();
         }
       };
 
@@ -546,7 +542,7 @@ public class HALogWriter implements IHALogWriter {
    * @return The {@link ByteBuffer}. The position will be zero. The limit will be the #of bytes in
    *     the serialized object.
    */
-  private ByteBuffer bufferObject(final Object obj) throws IOException {
+  private ByteBuffer bufferObject(final Object obj) {
 
     // Note: pos=0; limit=capacity=length.
     return ByteBuffer.wrap(SerializerUtil.serialize(obj));

@@ -74,37 +74,37 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
     this.serializer = serializer;
   }
 
-  public void close() throws IOException {
+  public void close() {
 
     itr.close();
   }
 
-  public boolean hasNext() throws IOException {
+  public boolean hasNext() {
 
     return itr.hasNext();
   }
 
-  public boolean hasNext(long timeout, TimeUnit unit) throws IOException, InterruptedException {
+  public boolean hasNext(long timeout, TimeUnit unit) throws InterruptedException {
 
     return itr.hasNext(timeout, unit);
   }
 
-  public boolean isExhausted() throws IOException {
+  public boolean isExhausted() {
 
     return itr.isExhausted();
   }
 
-  public E next() throws IOException {
+  public E next() {
 
     return itr.next();
   }
 
-  public E next(long timeout, TimeUnit unit) throws IOException, InterruptedException {
+  public E next(long timeout, TimeUnit unit) throws InterruptedException {
 
     return itr.next(timeout, unit);
   }
 
-  public void remove() throws IOException {
+  public void remove() {
 
     itr.remove();
   }

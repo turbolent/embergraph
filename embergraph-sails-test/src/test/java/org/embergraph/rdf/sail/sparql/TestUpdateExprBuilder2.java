@@ -85,7 +85,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert__insertInto_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
@@ -183,7 +183,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    */
   @SuppressWarnings("rawtypes")
   public void test_delete_insert__deleteFrom_01()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
@@ -266,7 +266,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_create_solutions()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // CREATE ( SILENT )? SOLUTIONS SolutionSetName
     final String sparql = "create solutions %solutionSet";
@@ -295,7 +295,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_create_solutions_silent()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // CREATE ( SILENT )? SOLUTIONS SolutionSetName
     final String sparql = "create silent solutions %solutionSet";
@@ -332,7 +332,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    */
   //    @SuppressWarnings("rawtypes")
   public void test_create_solutions_silent_params()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // CREATE ( SILENT )? SOLUTIONS SolutionSetName { TriplesTemplate }
     final String sparql =
@@ -410,7 +410,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_drop_solutions_namedSet()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -438,7 +438,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_drop_solutions_namedSet_silent()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -467,7 +467,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * drop solutions
    * </pre>
    */
-  public void test_drop_solutions() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_solutions() throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -494,7 +494,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * drop graphs
    * </pre>
    */
-  public void test_drop_graphs() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_drop_graphs() throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -522,7 +522,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_clear_solutions_namedSet()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -550,7 +550,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * </pre>
    */
   public void test_clear_solutions_namedSet_silent()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)
@@ -579,7 +579,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * clear solutions
    * </pre>
    */
-  public void test_clear_solutions() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_solutions() throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME))
@@ -606,7 +606,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * clear graphs
    * </pre>
    */
-  public void test_clear_graphs() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_clear_graphs() throws MalformedQueryException, TokenMgrError {
 
     // DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS
     // %VARNAME)

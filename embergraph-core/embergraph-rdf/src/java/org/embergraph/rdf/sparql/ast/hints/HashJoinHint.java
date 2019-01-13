@@ -49,7 +49,6 @@ final class HashJoinHint extends AbstractBooleanQueryHint {
 
       _setQueryHint(context, scope, op, getName(), value);
 
-      return;
     }
 
     //        throw new QueryHintException(scope, op, getName(), value);

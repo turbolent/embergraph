@@ -61,10 +61,12 @@ public class HuTuckerTransformationStrategy extends PrefixCoderTransformationStr
     CharSequence s;
     int n = 0;
 
-    for (Iterator<? extends CharSequence> i = iterable.iterator(); i.hasNext(); ) {
-      s = i.next();
+    for (CharSequence charSequence : iterable) {
+      s = charSequence;
       maxWordLength = Math.max(s.length(), maxWordLength);
-      for (int j = s.length(); j-- != 0; ) frequency[s.charAt(j)]++;
+      for (int j = s.length(); j-- != 0; ) {
+        frequency[s.charAt(j)]++;
+      }
       n++;
     }
 

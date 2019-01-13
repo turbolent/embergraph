@@ -563,19 +563,11 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
        */
 
       tasks.add(
-          new Callable<Long>() {
-            public Long call() {
-              return r.insert(a, a.length, null /*filter*/);
-            }
-          });
+          () -> r.insert(a, a.length, null /*filter*/));
 
       tasks.add(
-          new Callable<Long>() {
-            public Long call() {
-              return r.addJustifications(
-                  new ChunkedArrayIterator<>(b.length, b, null /* keyOrder */));
-            }
-          });
+          () -> r.addJustifications(
+              new ChunkedArrayIterator<>(b.length, b, null /* keyOrder */)));
 
       final List<Future<Long>> futures;
 

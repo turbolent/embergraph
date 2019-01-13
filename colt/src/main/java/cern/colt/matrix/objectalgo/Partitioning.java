@@ -25,7 +25,7 @@ import cern.colt.matrix.ObjectMatrix2D;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
  */
-public class Partitioning extends Object {
+public class Partitioning {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Partitioning() {}
   /*
@@ -123,46 +123,38 @@ public class Partitioning extends Object {
     // this one knows how to swap two row indexes (a,b)
     final int[] g = rowIndexes;
     Swapper swapper =
-        new Swapper() {
-          public void swap(int b, int c) {
-            int tmp = g[b];
-            g[b] = g[c];
-            g[c] = tmp;
-          }
+        (b, c) -> {
+          int tmp = g[b];
+          g[b] = g[c];
+          g[c] = tmp;
         };
 
     // compare splitter[a] with columnView[rowIndexes[b]]
     final ObjectMatrix1D columnView = matrix.viewColumn(column);
     IntComparator comp =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (splitters[a]);
-            Comparable bv = (Comparable) (columnView.getQuick(g[b]));
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r == 0 ? 0 : 1);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (splitters[a]);
+          Comparable bv = (Comparable) (columnView.getQuick(g[b]));
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r == 0 ? 0 : 1);
         };
 
     // compare columnView[rowIndexes[a]] with columnView[rowIndexes[b]]
     IntComparator comp2 =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (columnView.getQuick(g[a]));
-            Comparable bv = (Comparable) (columnView.getQuick(g[b]));
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r == 0 ? 0 : 1);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (columnView.getQuick(g[a]));
+          Comparable bv = (Comparable) (columnView.getQuick(g[b]));
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r == 0 ? 0 : 1);
         };
 
     // compare splitter[a] with splitter[b]
     IntComparator comp3 =
-        new IntComparator() {
-          public int compare(int a, int b) {
-            Comparable av = (Comparable) (splitters[a]);
-            Comparable bv = (Comparable) (splitters[b]);
-            int r = av.compareTo(bv);
-            return r < 0 ? -1 : (r == 0 ? 0 : 1);
-          }
+        (a, b) -> {
+          Comparable av = (Comparable) (splitters[a]);
+          Comparable bv = (Comparable) (splitters[b]);
+          int r = av.compareTo(bv);
+          return r < 0 ? -1 : (r == 0 ? 0 : 1);
         };
 
     // generic partitioning does the main work of reordering row indexes

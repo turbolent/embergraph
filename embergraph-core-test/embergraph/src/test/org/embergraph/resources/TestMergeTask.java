@@ -78,7 +78,7 @@ public class TestMergeTask extends AbstractResourceManagerTestCase {
    * @todo test more complex merges.
    */
   public void test_mergeWithOverflow()
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     /*
      * Register the index.

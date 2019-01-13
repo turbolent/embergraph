@@ -92,17 +92,15 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageElementsOnMasterQueues =
         new MovingAverageTask(
             "averageElementsOnMasterQueues",
-            new Callable<Long>() {
-              public Long call() {
-                long n = 0;
-                final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
-                while (itr.hasNext()) {
-                  final AbstractMasterTask master = itr.next().get();
-                  if (master == null) continue;
-                  n += master.buffer.getElementsOnQueueCount();
-                }
-                return n;
+            (Callable<Long>) () -> {
+              long n = 0;
+              final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
+              while (itr.hasNext()) {
+                final AbstractMasterTask master = itr.next().get();
+                if (master == null) continue;
+                n += master.buffer.getElementsOnQueueCount();
               }
+              return n;
             });
 
     /*
@@ -112,11 +110,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageHandleChunkNanos =
         new MovingAverageTask(
             "averageHandleChunkNanos",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = handledChunkCount.get();
-                return (t == 0L ? 0 : elapsedHandleChunkNanos / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = handledChunkCount.get();
+              return (t == 0L ? 0 : elapsedHandleChunkNanos / (double) t);
             });
 
     /*
@@ -126,11 +122,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageSplitChunkNanos =
         new MovingAverageTask(
             "averageSplitChunkNanos",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = handledChunkCount.get();
-                return (t == 0L ? 0 : elapsedSplitChunkNanos / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = handledChunkCount.get();
+              return (t == 0L ? 0 : elapsedSplitChunkNanos / (double) t);
             });
 
     /*
@@ -140,11 +134,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageSinkOfferNanos =
         new MovingAverageTask(
             "averageSinkOfferNanos",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = chunksTransferred.get();
-                return (t == 0L ? 0 : elapsedSinkOfferNanos / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = chunksTransferred.get();
+              return (t == 0L ? 0 : elapsedSinkOfferNanos / (double) t);
             });
 
     /*
@@ -154,11 +146,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageTransferChunkSize =
         new MovingAverageTask(
             "averageTransferChunkSize",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = chunksTransferred.get();
-                return (t == 0L ? 0 : elementsTransferred.get() / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = chunksTransferred.get();
+              return (t == 0L ? 0 : elementsTransferred.get() / (double) t);
             });
 
     /*
@@ -168,11 +158,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageSinkChunkWaitingNanos =
         new MovingAverageTask(
             "averageSinkChunkWaitingNanos",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = chunksOut.get();
-                return (t == 0L ? 0 : elapsedSinkChunkWaitingNanos / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = chunksOut.get();
+              return (t == 0L ? 0 : elapsedSinkChunkWaitingNanos / (double) t);
             });
 
     /*
@@ -188,13 +176,11 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               public Long call() {
                 final AtomicLong max = new AtomicLong(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        final long nanos = subtask.stats.elapsedChunkWaitingNanos;
-                        // find the max (sync not necessary since op is serialized).
-                        if (nanos > max.get()) {
-                          max.set(nanos);
-                        }
+                    subtask -> {
+                      final long nanos = subtask.stats.elapsedChunkWaitingNanos;
+                      // find the max (sync not necessary since op is serialized).
+                      if (nanos > max.get()) {
+                        max.set(nanos);
                       }
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
@@ -203,8 +189,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -221,11 +205,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageSinkChunkWritingNanos =
         new MovingAverageTask(
             "averageSinkChunkWritingNanos",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = chunksOut.get();
-                return (t == 0L ? 0 : elapsedSinkChunkWritingNanos / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = chunksOut.get();
+              return (t == 0L ? 0 : elapsedSinkChunkWritingNanos / (double) t);
             });
 
     /*
@@ -240,13 +222,11 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               public Long call() {
                 final AtomicLong max = new AtomicLong(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        final long nanos = subtask.stats.elapsedChunkWritingNanos;
-                        // find the max (sync not necessary since op is serialized).
-                        if (nanos > max.get()) {
-                          max.set(nanos);
-                        }
+                    subtask -> {
+                      final long nanos = subtask.stats.elapsedChunkWritingNanos;
+                      // find the max (sync not necessary since op is serialized).
+                      if (nanos > max.get()) {
+                        max.set(nanos);
                       }
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
@@ -255,8 +235,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -270,11 +248,9 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageSinkWriteChunkSize =
         new MovingAverageTask(
             "averageSinkWriteChunkSize",
-            new Callable<Double>() {
-              public Double call() {
-                final long t = chunksOut.get();
-                return (t == 0L ? 0 : elementsOut.get() / (double) t);
-              }
+            (Callable<Double>) () -> {
+              final long t = chunksOut.get();
+              return (t == 0L ? 0 : elementsOut.get() / (double) t);
             });
 
     /*
@@ -284,17 +260,15 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageMasterQueueSize =
         new MovingAverageTask(
             "averageMasterQueueSize",
-            new Callable<Integer>() {
-              public Integer call() {
-                int n = 0;
-                final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
-                while (itr.hasNext()) {
-                  final AbstractMasterTask master = itr.next().get();
-                  if (master == null) continue;
-                  n += master.buffer.size();
-                }
-                return n;
+            (Callable<Integer>) () -> {
+              int n = 0;
+              final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
+              while (itr.hasNext()) {
+                final AbstractMasterTask master = itr.next().get();
+                if (master == null) continue;
+                n += master.buffer.size();
               }
+              return n;
             });
 
     /*
@@ -304,17 +278,15 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageMasterRedirectQueueSize =
         new MovingAverageTask(
             "averageMasterRedirectQueueSize",
-            new Callable<Integer>() {
-              public Integer call() {
-                int n = 0;
-                final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
-                while (itr.hasNext()) {
-                  final AbstractMasterTask master = itr.next().get();
-                  if (master == null) continue;
-                  n += master.getRedirectQueueSize();
-                }
-                return n;
+            (Callable<Integer>) () -> {
+              int n = 0;
+              final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
+              while (itr.hasNext()) {
+                final AbstractMasterTask master = itr.next().get();
+                if (master == null) continue;
+                n += master.getRedirectQueueSize();
               }
+              return n;
             });
 
     /*
@@ -332,15 +304,13 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                 // #of subtasks.
                 final AtomicInteger m = new AtomicInteger(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        // the subtask queue size.
-                        final int queueSize = subtask.buffer.size();
-                        // sum of subtask queue lengths.
-                        n.addAndGet(queueSize);
-                        // #of subtasks reflected by that sum.
-                        m.incrementAndGet();
-                      }
+                    subtask -> {
+                      // the subtask queue size.
+                      final int queueSize = subtask.buffer.size();
+                      // sum of subtask queue lengths.
+                      n.addAndGet(queueSize);
+                      // #of subtasks reflected by that sum.
+                      m.incrementAndGet();
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
                 while (itr.hasNext()) {
@@ -348,8 +318,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -381,17 +349,15 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                 // #of subtasks.
                 final AtomicInteger m = new AtomicInteger(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        // the subtask queue size.
-                        final int queueSize = subtask.buffer.size();
-                        // track them all.
-                        queueSizes.add(queueSize);
-                        // sum of subtask queue lengths.
-                        n.addAndGet(queueSize);
-                        // #of subtasks reflected by that sum.
-                        m.incrementAndGet();
-                      }
+                    subtask -> {
+                      // the subtask queue size.
+                      final int queueSize = subtask.buffer.size();
+                      // track them all.
+                      queueSizes.add(queueSize);
+                      // sum of subtask queue lengths.
+                      n.addAndGet(queueSize);
+                      // #of subtasks reflected by that sum.
+                      m.incrementAndGet();
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
                 while (itr.hasNext()) {
@@ -399,8 +365,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -443,14 +407,12 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               public Integer call() {
                 final AtomicInteger max = new AtomicInteger(0);
                 final SubtaskOp op =
-                    new SubtaskOp() {
-                      public void call(AbstractSubtask subtask) {
-                        // the subtask queue size.
-                        final int queueSize = subtask.buffer.size();
-                        // find the max (sync not necessary since op is serialized).
-                        if (queueSize > max.get()) {
-                          max.set(queueSize);
-                        }
+                    subtask -> {
+                      // the subtask queue size.
+                      final int queueSize = subtask.buffer.size();
+                      // find the max (sync not necessary since op is serialized).
+                      if (queueSize > max.get()) {
+                        max.set(queueSize);
                       }
                     };
                 final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
@@ -459,8 +421,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   if (master == null) continue;
                   try {
                     master.mapOperationOverSubtasks(op);
-                  } catch (InterruptedException ex) {
-                    break;
                   } catch (ExecutionException ex) {
                     log.error(this, ex);
                     break;
@@ -482,11 +442,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     private final MovingAverageTask averageElementsOnSinkQueues =
         new MovingAverageTask(
             "averageElementsOnSinkQueues",
-            new Callable<Long>() {
-              public Long call() {
-                return elementsOnSinkQueues.get();
-              }
-            });
+            (Callable<Long>) () -> elementsOnSinkQueues.get());
 
     public void run() {
 
@@ -841,12 +797,10 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
             final int M = 3;
             final TreeSet<SinkQueueSize> sinks = new TreeSet<>();
             final SubtaskOp op =
-                new SubtaskOp() {
-                  public void call(AbstractSubtask subtask) {
-                    final int queueSize = subtask.buffer.size();
-                    if (queueSize >= M) {
-                      sinks.add(new SinkQueueSize(subtask, queueSize));
-                    }
+                subtask -> {
+                  final int queueSize = subtask.buffer.size();
+                  if (queueSize >= M) {
+                    sinks.add(new SinkQueueSize(subtask, queueSize));
                   }
                 };
             final Iterator<WeakReference<AbstractMasterTask>> itr = masters.iterator();
@@ -855,8 +809,6 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               if (master == null) continue;
               try {
                 master.mapOperationOverSubtasks(op);
-              } catch (InterruptedException ex) {
-                break;
               } catch (ExecutionException ex) {
                 log.error(this, ex);
                 break;
@@ -869,7 +821,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
             final StringBuilder sb = new StringBuilder();
             for (SinkQueueSize t : sinks) {
               if (n >= N) break;
-              sb.append("{queueSize=" + t.queueSize + ", sink=" + t.sink + "} ");
+              sb.append("{queueSize=").append(t.queueSize).append(", sink=").append(t.sink)
+                  .append("} ");
               n++;
             }
             setValue(sb.toString());

@@ -193,9 +193,9 @@ public class SliceOp extends PipelineOp {
     @Override
     protected void toString(final StringBuilder sb) {
 
-      sb.append(",nseen=" + nseen);
+      sb.append(",nseen=").append(nseen);
 
-      sb.append(",naccepted=" + naccepted);
+      sb.append(",naccepted=").append(naccepted);
     }
   }
 
@@ -252,7 +252,7 @@ public class SliceOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> source = context.getSource();
 
@@ -367,21 +367,25 @@ public class SliceOp extends PipelineOp {
 
       //            int nadded = 0;
 
-      for (int i = 0; i < chunk.length; i++) {
+      for (IBindingSet iBindingSet : chunk) {
 
-        if (stats.naccepted.get() >= limit) return true; // nothing more will be accepted.
+        if (stats.naccepted.get() >= limit) {
+          return true; // nothing more will be accepted.
+        }
 
         stats.unitsIn.increment();
 
         final long S = stats.nseen.incrementAndGet();
 
-        if (S <= offset) continue; // skip solution.
+        if (S <= offset) {
+          continue; // skip solution.
+        }
 
         final long A = stats.naccepted.get();
 
         if (A < limit) {
 
-          final IBindingSet bset = chunk[i];
+          final IBindingSet bset = iBindingSet;
 
           out.add(bset);
 
@@ -389,7 +393,9 @@ public class SliceOp extends PipelineOp {
 
           stats.naccepted.incrementAndGet();
 
-          if (log.isTraceEnabled()) log.trace(toString() + ":" + bset);
+          if (log.isTraceEnabled()) {
+            log.trace(toString() + ":" + bset);
+          }
         }
       } // next bindingSet
 

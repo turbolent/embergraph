@@ -141,7 +141,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     return repo;
   }
 
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     final Properties props = getProperties();
 
@@ -195,17 +195,16 @@ public class SPARQLUpdateTestv2 extends TestCase {
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
    */
   protected String getNamespaceDeclarations() {
-    StringBuilder declarations = new StringBuilder();
-    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
-    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
-    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
-    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
-    declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
-    declarations.append("PREFIX bd: <" + BD.NAMESPACE + "> \n");
-    declarations.append("\n");
 
-    return declarations.toString();
+    String declarations = ("PREFIX rdf: <" + RDF.NAMESPACE + "> \n")
+        + "PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n"
+        + "PREFIX dc: <" + DC.NAMESPACE + "> \n"
+        + "PREFIX foaf: <" + FOAF.NAMESPACE + "> \n"
+        + "PREFIX ex: <" + EX_NS + "> \n"
+        + "PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n"
+        + "PREFIX bd: <" + BD.NAMESPACE + "> \n"
+        + "\n";
+    return declarations;
   }
 
   /*

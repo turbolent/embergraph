@@ -47,7 +47,7 @@ import org.embergraph.io.SerializerUtil;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class DefaultTupleSerializer<K extends Object, V extends Object>
+public class DefaultTupleSerializer<K, V>
     implements ITupleSerializer<K, V>, Externalizable {
 
   /** */
@@ -178,15 +178,12 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getName() + "{");
-    sb.append(", keyBuilderFactory=" + delegateKeyBuilderFactory);
-    sb.append(", leafKeysCoder=" + leafKeysCoder); // .getClass().getName());
-    sb.append(", leafValuesCoder=" + leafValsCoder); // .getClass().getName());
-    sb.append("}");
-
-    return sb.toString();
+    String sb = (getClass().getName() + "{")
+        + ", keyBuilderFactory=" + delegateKeyBuilderFactory
+        + ", leafKeysCoder=" + leafKeysCoder // .getClass().getName());
+        + ", leafValuesCoder=" + leafValsCoder // .getClass().getName());
+        + "}";
+    return sb;
   }
 
   /*

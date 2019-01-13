@@ -213,21 +213,21 @@ public class CholeskyDecomposition implements java.io.Serializable {
     try {
       buf.append(this.isSymmetricPositiveDefinite());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\nL = ");
     try {
       buf.append(this.getL());
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     buf.append("\n\ninverse(A) = ");
     try {
       buf.append(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(L.rows())));
     } catch (IllegalArgumentException exc) {
-      buf.append(unknown + exc.getMessage());
+      buf.append(unknown).append(exc.getMessage());
     }
 
     return buf.toString();

@@ -124,11 +124,9 @@ public class SmpBlas implements Blas {
     run(
         A,
         false,
-        new Matrix2DMatrix2DFunction() {
-          public double apply(DoubleMatrix2D AA, DoubleMatrix2D BB) {
-            seqBlas.assign(AA, function);
-            return 0;
-          }
+        (AA, BB) -> {
+          seqBlas.assign(AA, function);
+          return 0;
         });
   }
 
@@ -138,11 +136,9 @@ public class SmpBlas implements Blas {
         A,
         B,
         false,
-        new Matrix2DMatrix2DFunction() {
-          public double apply(DoubleMatrix2D AA, DoubleMatrix2D BB) {
-            seqBlas.assign(AA, BB, function);
-            return 0;
-          }
+        (AA, BB) -> {
+          seqBlas.assign(AA, BB, function);
+          return 0;
         });
   }
 
@@ -454,11 +450,7 @@ public class SmpBlas implements Blas {
         run(
             A,
             true,
-            new Matrix2DMatrix2DFunction() {
-              public double apply(DoubleMatrix2D AA, DoubleMatrix2D BB) {
-                return AA.zSum();
-              }
-            });
+            (AA, BB) -> AA.zSum());
 
     double sum = 0;
     for (int i = sums.length; --i >= 0; ) sum += sums[i];

@@ -27,7 +27,6 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.test.MockTermIdFactory;

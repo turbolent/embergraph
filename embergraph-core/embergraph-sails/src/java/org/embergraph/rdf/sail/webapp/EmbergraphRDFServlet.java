@@ -496,7 +496,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     final String acceptStr =
         ConnegUtil.getMimeTypeForQueryParameterQueryRequest(
             req.getParameter(EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER),
-            acceptHeaders.toArray(new String[acceptHeaders.size()]));
+            acceptHeaders.toArray(new String[0]));
 
     final ConnegUtil util = new ConnegUtil(acceptStr);
 
@@ -567,7 +567,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     final String acceptStr =
         ConnegUtil.getMimeTypeForQueryParameterQueryRequest(
             req.getParameter(EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER),
-            acceptHeaders.toArray(new String[acceptHeaders.size()]));
+            acceptHeaders.toArray(new String[0]));
 
     final ConnegUtil util = new ConnegUtil(acceptStr);
 

@@ -149,8 +149,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_join_noSharedVariables_emptySourceSolution()
-      throws InterruptedException, ExecutionException {
+  public void test_join_noSharedVariables_emptySourceSolution() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -229,8 +228,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_join_noSharedVariables_multipleSourceSolutions()
-      throws InterruptedException, ExecutionException {
+  public void test_join_noSharedVariables_multipleSourceSolutions() {
 
     //        final int startId = 1;
     final int joinId = 2;
@@ -334,8 +332,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_join_sharedVariables_multipleSourceSolutions()
-      throws InterruptedException, ExecutionException {
+  public void test_join_sharedVariables_multipleSourceSolutions() {
 
     final int joinId = 2;
     final int predId = 3;
@@ -423,7 +420,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_join_duplicateElimination() throws InterruptedException, ExecutionException {
+  public void test_join_duplicateElimination() {
 
     //        final int startId = 1;
     final int joinId = 2;
@@ -521,7 +518,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_join_constraint() throws InterruptedException, ExecutionException {
+  public void test_join_constraint() {
 
     //        final Var<String> x = Var.var("x");
     final Var<String> y = Var.var("y");
@@ -625,7 +622,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_join_selectVariables() throws InterruptedException, ExecutionException {
+  public void test_join_selectVariables() {
 
     final Var<String> x = Var.var("x");
     final Var<String> y = Var.var("y");
@@ -721,7 +718,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_optionalJoin() throws InterruptedException, ExecutionException {
+  public void test_optionalJoin() {
 
     final Var<?> x = Var.var("x");
 
@@ -824,7 +821,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public void test_optionalJoin_withAltSink() throws InterruptedException, ExecutionException {
+  public void test_optionalJoin_withAltSink() {
 
     final Var<?> x = Var.var("x");
 
@@ -938,7 +935,7 @@ public class TestPipelineJoin extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_optionalJoin_withConstraint() throws InterruptedException, ExecutionException {
+  public void test_optionalJoin_withConstraint() {
 
     final Var<?> x = Var.var("x");
 

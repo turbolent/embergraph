@@ -751,9 +751,9 @@ public class ResultSet implements ILeafData, Externalizable {
       out.write(lastKey);
     }
 
-    for (int i = 0; i < sources.length; i++) {
+    for (IResourceMetadata source : sources) {
 
-      out.writeObject(sources[i]);
+      out.writeObject(source);
     }
 
     out.writeObject(tupleSerializer);

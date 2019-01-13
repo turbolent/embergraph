@@ -49,7 +49,7 @@ public class DefaultDirectoryPageCoder
    */
   private static final transient byte VERSION0 = 0x00;
 
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     final byte version = in.readByte();
     switch (version) {
@@ -313,7 +313,7 @@ public class DefaultDirectoryPageCoder
 
       final StringBuilder sb = new StringBuilder();
 
-      sb.append(getClass().getName() + "{");
+      sb.append(getClass().getName()).append("{");
 
       DefaultDirectoryPageCoder.toString(this, sb);
 
@@ -338,7 +338,7 @@ public class DefaultDirectoryPageCoder
 
     final int nchildren = node.getChildCount();
 
-    sb.append(", nchildren=" + nchildren);
+    sb.append(", nchildren=").append(nchildren);
 
     {
       sb.append(",\nchildAddr=[");
@@ -355,12 +355,8 @@ public class DefaultDirectoryPageCoder
 
     if (node.hasVersionTimestamps()) {
 
-      sb.append(
-          ",\nversionTimestamps={min="
-              + node.getMinimumVersionTimestamp()
-              + ",max="
-              + node.getMaximumVersionTimestamp()
-              + "}");
+      sb.append(",\nversionTimestamps={min=").append(node.getMinimumVersionTimestamp())
+          .append(",max=").append(node.getMaximumVersionTimestamp()).append("}");
     }
 
     return sb;

@@ -56,22 +56,22 @@ public class RemoteRunnableBufferImpl<E, V> extends RemoteBufferImpl<E>
     this.futureProxy = futureProxy;
   }
 
-  public void abort(Throwable cause) throws IOException {
+  public void abort(Throwable cause) {
 
     localBuffer.abort(cause);
   }
 
-  public void close() throws IOException {
+  public void close() {
 
     localBuffer.close();
   }
 
-  public boolean isOpen() throws IOException {
+  public boolean isOpen() {
 
     return localBuffer.isOpen();
   }
 
-  public Future<V> getFuture() throws IOException {
+  public Future<V> getFuture() {
 
     return futureProxy;
   }

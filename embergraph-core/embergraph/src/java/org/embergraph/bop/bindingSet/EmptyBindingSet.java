@@ -132,7 +132,7 @@ public final class EmptyBindingSet implements IBindingSet, Serializable {
   }
 
   /** Imposes singleton pattern during object de-serialization. */
-  private Object readResolve() throws ObjectStreamException {
+  private Object readResolve() {
 
     return EmptyBindingSet.INSTANCE;
   }

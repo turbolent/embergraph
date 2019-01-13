@@ -55,6 +55,7 @@ import info.aduna.lang.FileFormat;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -86,26 +87,26 @@ public class CounterSetFormat extends FileFormat implements Iterable<CounterSetF
   public static final CounterSetFormat TEXT =
       new CounterSetFormat(
           "text/plain",
-          Arrays.asList("text/plain"),
+          Collections.singletonList("text/plain"),
           Charset.forName("UTF-8"),
-          Arrays.asList("counterSet"));
+          Collections.singletonList("counterSet"));
 
   /** XML properties file using <code>application/xml</code> and <code>UTF-8</code>. */
   public static final CounterSetFormat XML =
       new CounterSetFormat(
           "application/xml",
-          Arrays.asList("application/xml"),
+          Collections.singletonList("application/xml"),
           Charset.forName("UTF-8"), // charset
-          Arrays.asList("xml") // known-file-extensions
+          Collections.singletonList("xml") // known-file-extensions
           );
 
   /** XML properties file using <code>text/html</code> and <code>UTF-8</code>. */
   public static final CounterSetFormat HTML =
       new CounterSetFormat(
           "text/html",
-          Arrays.asList("text/html"),
+          Collections.singletonList("text/html"),
           Charset.forName("UTF-8"), // charset
-          Arrays.asList("html") // known-file-extensions
+          Collections.singletonList("html") // known-file-extensions
           );
 
   /** Registers the specified format. */

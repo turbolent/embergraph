@@ -138,9 +138,7 @@ public class QueryLog {
 
         if (children != null) {
 
-          for (int i = 0; i < children.length; i++) {
-
-            final IRunningQuery c = children[i];
+          for (final IRunningQuery c : children) {
 
             final Map<Integer /* bopId */, QueueStats> queueStats =
                 ((ChunkedRunningQuery) c).getQueueStats();
@@ -218,67 +216,64 @@ public class QueryLog {
 
   private static String getTableHeader() {
 
-    final StringBuilder sb = new StringBuilder();
-
     /*
      * Common columns for the overall query and for each pipeline operator.
      */
-    sb.append("queryId");
     //        sb.append("\ttag");
-    sb.append("\tbeginTime");
-    sb.append("\tdoneTime");
-    sb.append("\tdeadline");
-    sb.append("\telapsed");
-    sb.append("\tserviceId");
-    sb.append("\tcause");
-    sb.append("\tbop");
     /*
      * Columns for each pipeline operator.
      */
-    sb.append("\tevalOrder"); // [0..n-1]
-    sb.append("\tevalContext");
-    sb.append("\tcontroller");
-    sb.append("\tbopId");
-    sb.append("\tpredId");
-    sb.append("\tbopSummary"); // short form of the bop.
-    sb.append("\tpredSummary"); // short form of the pred.
     // metadata considered by the static optimizer.
-    sb.append("\tstaticBestKeyOrder"); // original key order assigned by static optimizer.
-    sb.append("\toverrideKeyOrder"); // key order iff explicitly overridden.
-    sb.append("\tnvars"); // #of variables in the predicate for a join.
-    sb.append("\tfastRangeCount"); // fast range count used by the static optimizer.
     // dynamics (aggregated for totals as well).
-    sb.append("\trunState"); // true iff the operator will not be evaluated again.
-    sb.append("\tsumMillis"); // cumulative milliseconds for eval of this operator.
-    sb.append("\topCount"); // cumulative #of invocations of tasks for this operator.
-    sb.append("\tnumRunning"); // #of concurrent invocations of the operator (current value)
-    sb.append("\tfanOut"); // #of shards/nodes on which the operator has started.
-    sb.append("\tqueueShards"); // #of shards with work queued for this operator.
-    sb.append("\tqueueChunks"); // #of chunks queued for this operator.
-    sb.append("\tqueueSolutions"); // #of solutions queued for this operator.
-    sb.append("\tchunksIn");
-    sb.append("\tunitsIn");
-    sb.append("\tunitsInPerChunk"); // average #of solutions in per chunk.
-    sb.append("\tchunksOut");
-    sb.append("\tunitsOut");
-    sb.append("\tunitsOutPerChunk"); // average #of solutions out per chunk.
-    sb.append("\tmutationCount");
-    sb.append("\ttypeErrors");
-    sb.append("\tjoinRatio"); // expansion rate multipler in the solution count.
-    sb.append("\taccessPathDups");
-    sb.append("\taccessPathCount");
-    sb.append("\taccessPathRangeCount");
-    sb.append("\taccessPathChunksIn");
-    sb.append("\taccessPathUnitsIn");
     // dynamics based on elapsed wall clock time.
-    sb.append("\tsolutions/ms");
-    sb.append("\tmutations/ms");
 
     // cost model(s)
 
-    sb.append('\n');
-
-    return sb.toString();
+    String sb = "queryId"
+        + "\tbeginTime"
+        + "\tdoneTime"
+        + "\tdeadline"
+        + "\telapsed"
+        + "\tserviceId"
+        + "\tcause"
+        + "\tbop"
+        + "\tevalOrder" // [0..n-1]
+        + "\tevalContext"
+        + "\tcontroller"
+        + "\tbopId"
+        + "\tpredId"
+        + "\tbopSummary" // short form of the bop.
+        + "\tpredSummary" // short form of the pred.
+        + "\tstaticBestKeyOrder" // original key order assigned by static optimizer.
+        + "\toverrideKeyOrder" // key order iff explicitly overridden.
+        + "\tnvars" // #of variables in the predicate for a join.
+        + "\tfastRangeCount" // fast range count used by the static optimizer.
+        + "\trunState" // true iff the operator will not be evaluated again.
+        + "\tsumMillis" // cumulative milliseconds for eval of this operator.
+        + "\topCount" // cumulative #of invocations of tasks for this operator.
+        + "\tnumRunning" // #of concurrent invocations of the operator (current value)
+        + "\tfanOut" // #of shards/nodes on which the operator has started.
+        + "\tqueueShards" // #of shards with work queued for this operator.
+        + "\tqueueChunks" // #of chunks queued for this operator.
+        + "\tqueueSolutions" // #of solutions queued for this operator.
+        + "\tchunksIn"
+        + "\tunitsIn"
+        + "\tunitsInPerChunk" // average #of solutions in per chunk.
+        + "\tchunksOut"
+        + "\tunitsOut"
+        + "\tunitsOutPerChunk" // average #of solutions out per chunk.
+        + "\tmutationCount"
+        + "\ttypeErrors"
+        + "\tjoinRatio" // expansion rate multipler in the solution count.
+        + "\taccessPathDups"
+        + "\taccessPathCount"
+        + "\taccessPathRangeCount"
+        + "\taccessPathChunksIn"
+        + "\taccessPathUnitsIn"
+        + "\tsolutions/ms"
+        + "\tmutations/ms"
+        + '\n';
+    return sb;
   }
 
   /*
@@ -376,20 +371,20 @@ public class QueryLog {
       sb.append("total");
     } else {
       sb.append(bop.getClass().getSimpleName());
-      sb.append("[" + bopId + "]");
+      sb.append("[").append(bopId).append("]");
       final Integer defaultSink = (Integer) bop.getProperty(PipelineOp.Annotations.SINK_REF);
       final Integer altSink = (Integer) bop.getProperty(PipelineOp.Annotations.ALT_SINK_REF);
       if (defaultSink != null) {
-        sb.append(", sink=" + defaultSink);
+        sb.append(", sink=").append(defaultSink);
       }
       if (altSink != null) {
-        sb.append(", altSink=" + altSink);
+        sb.append(", altSink=").append(altSink);
       }
     }
     sb.append('\t');
     if (pred != null) {
       sb.append(pred.getClass().getSimpleName());
-      sb.append("[" + predId + "](");
+      sb.append("[").append(predId).append("](");
       final Iterator<BOp> itr = pred.argIterator();
       boolean first = true;
       while (itr.hasNext()) {
@@ -694,9 +689,7 @@ public class QueryLog {
 
       if (children != null) {
 
-        for (int i = 0; i < children.length; i++) {
-
-          final IRunningQuery c = children[i];
+        for (final IRunningQuery c : children) {
 
           // Repeat the header so we can recognize what follows as a
           // child query.

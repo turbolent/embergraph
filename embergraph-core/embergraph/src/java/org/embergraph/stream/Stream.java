@@ -355,8 +355,8 @@ public abstract class Stream implements ICheckpointProtocol {
       super.toString(sb);
 
       // stream
-      sb.append(", streamClassName=" + streamClassName);
-      sb.append(", streamCompressionType=" + streamCompressionType);
+      sb.append(", streamClassName=").append(streamClassName);
+      sb.append(", streamCompressionType=").append(streamCompressionType);
     }
 
     /** The initial version. */

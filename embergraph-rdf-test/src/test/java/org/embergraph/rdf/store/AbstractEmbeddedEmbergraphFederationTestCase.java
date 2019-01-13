@@ -105,9 +105,9 @@ public abstract class AbstractEmbeddedEmbergraphFederationTestCase extends TestC
 
       File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

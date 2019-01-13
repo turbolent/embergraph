@@ -267,7 +267,7 @@ public class ConnegUtil {
       }
     }
 
-    this.scores = scores.toArray(new ConnegScore[scores.size()]);
+    this.scores = scores.toArray(new ConnegScore[0]);
 
     // Order by quality.
     Arrays.sort(this.scores);
@@ -460,7 +460,7 @@ public class ConnegUtil {
       }
     }
 
-    return t.toArray(new ConnegScore[t.size()]);
+    return t.toArray(new ConnegScore[0]);
   }
 
   @Override

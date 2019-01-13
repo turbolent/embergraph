@@ -54,6 +54,6 @@ public class NamedSolutionSetStats extends BOpStats {
 
     super.toString(sb);
 
-    sb.append(",solutionSetSize=" + solutionSetSize.get());
+    sb.append(",solutionSetSize=").append(solutionSetSize.get());
   }
 }

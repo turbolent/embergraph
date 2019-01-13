@@ -462,7 +462,7 @@ public class TestFileChannelUtility extends TestCase {
     }
   }
 
-  public void testReopenerInputStream() throws IOException, InterruptedException {
+  public void testReopenerInputStream() throws IOException {
     final Random r = new Random();
 
     final File sourceFile = File.createTempFile("TestFileChannelUtility", getName());
@@ -489,15 +489,11 @@ public class TestFileChannelUtility extends TestCase {
 
       try {
         final IReopenChannel<FileChannel> reopener =
-            new IReopenChannel<FileChannel>() {
+            () -> {
 
-              @Override
-              public FileChannel reopenChannel() throws IOException {
+              if (channel == null) throw new IOException("Closed");
 
-                if (channel == null) throw new IOException("Closed");
-
-                return channel;
-              }
+              return channel;
             };
 
         final FileChannelUtility.ReopenerInputStream instr =
@@ -532,7 +528,7 @@ public class TestFileChannelUtility extends TestCase {
    * The idea is to write a large file and then read asynchronously across a large number of small buffers.
    *
    */
-  public void no_testAsyncReadersCancelled() throws IOException, InterruptedException {
+  public void no_testAsyncReadersCancelled() throws IOException {
     final Random r = new Random();
 
     final File sourceFile =
@@ -559,18 +555,14 @@ public class TestFileChannelUtility extends TestCase {
 
     final Thread canceller =
         new Thread(
-            new Runnable() {
-
-              @Override
-              public void run() {
-                try {
-                  Thread.sleep(20);
-                } catch (InterruptedException e) {
-                  throw new RuntimeException(e);
-                }
-                for (int i = transfers.size() - 1; i >= 0; i--) {
-                  transfers.get(i).cancel();
-                }
+            () -> {
+              try {
+                Thread.sleep(20);
+              } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+              }
+              for (int i = transfers.size() - 1; i >= 0; i--) {
+                transfers.get(i).cancel();
               }
             });
     canceller.start();
@@ -590,7 +582,7 @@ public class TestFileChannelUtility extends TestCase {
    * The idea is to write a large file and then read asynchronously across a large number of small buffers.
    *
    */
-  public void no_testAsyncReadersCloseChannel() throws IOException, InterruptedException {
+  public void no_testAsyncReadersCloseChannel() throws IOException {
     final Random r = new Random();
 
     final File sourceFile =
@@ -629,24 +621,20 @@ public class TestFileChannelUtility extends TestCase {
 
     final Thread closer =
         new Thread(
-            new Runnable() {
-
-              @Override
-              public void run() {
-                while (true) {
-                  try {
-                    reopener.getAsyncChannel().close();
-                    System.out.println("File Close: " + closes.get());
-                    closes.incrementAndGet();
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                  try {
-                    Thread.sleep(50);
-                  } catch (InterruptedException e) {
-                    // expected
-                    return;
-                  }
+            () -> {
+              while (true) {
+                try {
+                  reopener.getAsyncChannel().close();
+                  System.out.println("File Close: " + closes.get());
+                  closes.incrementAndGet();
+                } catch (IOException e) {
+                  e.printStackTrace();
+                }
+                try {
+                  Thread.sleep(50);
+                } catch (InterruptedException e) {
+                  // expected
+                  return;
                 }
               }
             });

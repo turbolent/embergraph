@@ -161,7 +161,7 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
         for (Thread t : threads) {
           if (t == null) continue;
           if (!first) info.append(',');
-          info.append("[" + t.getName() + "]");
+          info.append("[").append(t.getName()).append("]");
           first = false;
         }
 

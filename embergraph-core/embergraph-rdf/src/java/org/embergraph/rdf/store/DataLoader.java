@@ -1185,8 +1185,6 @@ public class DataLoader {
             defaultGraph,
             endOfBatch);
 
-        return;
-
       } catch (RDFParseException ex) {
 
         if (ignoreInvalidFiles) {
@@ -1367,38 +1365,34 @@ public class DataLoader {
     //        loader.setFlush(false);
     // add listener to log progress.
     loader.addRioLoaderListener(
-        new RioLoaderListener() {
+        e -> {
+          /*
+           * This reports as statements are parsed. Depending on how
+           * things are buffered, the parser can run ahead of the index
+           * writes.
+           */
+          if (log.isInfoEnabled() || verbose > 1) {
+            final String msg =
+                e.getStatementsProcessed()
+                    + " stmts buffered in "
+                    + (e.getTimeElapsed() / 1000d)
+                    + " secs, rate= "
+                    + e.getInsertRate()
+                    + (baseURI != null ? ", baseURL=" + baseURI : "")
+                    + (", totalStatementsSoFar="
+                        + (e.getStatementsProcessed() + totals.toldTriples.get()));
 
-          @Override
-          public void processingNotification(final RioLoaderEvent e) {
-            /*
-             * This reports as statements are parsed. Depending on how
-             * things are buffered, the parser can run ahead of the index
-             * writes.
-             */
-            if (log.isInfoEnabled() || verbose > 1) {
-              final String msg =
-                  e.getStatementsProcessed()
-                      + " stmts buffered in "
-                      + (e.getTimeElapsed() / 1000d)
-                      + " secs, rate= "
-                      + e.getInsertRate()
-                      + (baseURI != null ? ", baseURL=" + baseURI : "")
-                      + (", totalStatementsSoFar="
-                          + (e.getStatementsProcessed() + totals.toldTriples.get()));
+            if (log.isInfoEnabled()) log.info(msg);
 
-              if (log.isInfoEnabled()) log.info(msg);
+            if (verbose > 1) output.println(msg);
+          }
 
-              if (verbose > 1) output.println(msg);
-            }
-
-            if (verbose > 2) {
-              // Show more details, especially about the assertion buffers.
-              final StatementBuffer<?> tmp = buffer;
-              if (tmp != null) {
-                output.println(tmp.toString());
-                output.println(tmp.getCounters().toString());
-              }
+          if (verbose > 2) {
+            // Show more details, especially about the assertion buffers.
+            final StatementBuffer<?> tmp = buffer;
+            if (tmp != null) {
+              output.println(tmp.toString());
+              output.println(tmp.getCounters().toString());
             }
           }
         });
@@ -1500,8 +1494,6 @@ public class DataLoader {
                     .toString());
         }
       }
-
-      return;
 
     } catch (Throwable t) {
 
@@ -2037,37 +2029,33 @@ public class DataLoader {
    * ntriples, etc as their file extension. gzip and zip extensions are also supported.
    */
   private static final FilenameFilter filter =
-      new FilenameFilter() {
+      (dir, name) -> {
 
-        @Override
-        public boolean accept(final File dir, final String name) {
+        if (new File(dir, name).isDirectory()) {
 
-          if (new File(dir, name).isDirectory()) {
+          // Skip hidden files.
+          return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
+          //
+          //                    // Skip .svn files.
+          //                    return false;
+          //
+          //                }
 
-            // Skip hidden files.
-            return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
-            //
-            //                    // Skip .svn files.
-            //                    return false;
-            //
-            //                }
-
-            // visit subdirectories.
-          }
-
-          // if recognizable as RDF.
-          boolean isRDF =
-              RDFFormat.forFileName(name) != null
-                  || (name.endsWith(".zip")
-                      && RDFFormat.forFileName(name.substring(0, name.length() - 4)) != null)
-                  || (name.endsWith(".gz")
-                      && RDFFormat.forFileName(name.substring(0, name.length() - 3)) != null);
-
-          if (log.isDebugEnabled())
-            log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
-
-          return isRDF;
+          // visit subdirectories.
         }
+
+        // if recognizable as RDF.
+        boolean isRDF =
+            RDFFormat.forFileName(name) != null
+                || (name.endsWith(".zip")
+                    && RDFFormat.forFileName(name.substring(0, name.length() - 4)) != null)
+                || (name.endsWith(".gz")
+                    && RDFFormat.forFileName(name.substring(0, name.length() - 3)) != null);
+
+        if (log.isDebugEnabled())
+          log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
+
+        return isRDF;
       };
 
   /*

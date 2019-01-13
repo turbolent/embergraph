@@ -221,7 +221,7 @@ public class Rule<E> implements IRule<E> {
 
     if (queryOptions != null) {
 
-      sb.append(", queryOptions=" + queryOptions);
+      sb.append(", queryOptions=").append(queryOptions);
     }
 
     return sb.toString();
@@ -369,11 +369,11 @@ public class Rule<E> implements IRule<E> {
 
     final Set<IVariable> vars = new HashSet<>();
 
-    for (int i = 0; i < tail.length; i++) {
+    for (final IPredicate pred : tail) {
 
-      final IPredicate pred = tail[i];
-
-      if (pred == null) throw new IllegalArgumentException();
+      if (pred == null) {
+        throw new IllegalArgumentException();
+      }
 
       final int arity = pred.arity();
 
@@ -438,9 +438,9 @@ public class Rule<E> implements IRule<E> {
 
     if (constraints != null) {
 
-      for (int i = 0; i < constraints.length; i++) {
+      for (IConstraint constraint : constraints) {
 
-        assert constraints[i] != null;
+        assert constraint != null;
       }
     }
 
@@ -455,9 +455,7 @@ public class Rule<E> implements IRule<E> {
     if (requiredVars == null) {
       s.addAll(vars);
     } else {
-      for (IVariable v : requiredVars) {
-        s.add(v);
-      }
+      s.addAll(Arrays.asList(requiredVars));
     }
     this.requiredVars = Collections.unmodifiableSet(s);
   }
@@ -531,7 +529,7 @@ public class Rule<E> implements IRule<E> {
             newConstraint,
             bindingSet,
             taskFactory,
-            requiredVars.toArray(new IVariable[requiredVars.size()]));
+            requiredVars.toArray(new IVariable[0]));
 
     return newRule;
   }
@@ -668,9 +666,7 @@ public class Rule<E> implements IRule<E> {
 
       // check constraints.
 
-      for (int i = 0; i < constraints.length; i++) {
-
-        final IConstraint constraint = constraints[i];
+      for (final IConstraint constraint : constraints) {
 
         if (!constraint.accept(bindingSet)) {
 

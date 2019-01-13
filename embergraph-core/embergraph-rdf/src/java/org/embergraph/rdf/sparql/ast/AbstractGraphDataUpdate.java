@@ -121,7 +121,7 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
            * @see https ://sourceforge.net/projects/bigdata/forums/forum
            *     /676946/topic/6092294/index/page/1
            */
-          sb.append("... out of " + data.length + " statements\n");
+          sb.append("... out of ").append(data.length).append(" statements\n");
 
           // Break out of the loop.
           break;

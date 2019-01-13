@@ -201,12 +201,12 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
   protected static final transient byte VERSION0 = 0x00;
 
   @Override
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) {
     // No state.
   }
 
   @Override
-  public void writeExternal(ObjectOutput out) throws IOException {
+  public void writeExternal(ObjectOutput out) {
     // No state.
   }
 
@@ -304,7 +304,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
     assert nsizes >= 0;
 
-    if (sb != null) sb.append("min=" + min + ", max=" + max + "\n");
+    if (sb != null) sb.append("min=").append(min).append(", max=").append(max).append("\n");
 
     // the minimum code word bit length.
     obs.writeNibble(min);
@@ -336,10 +336,11 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
           assert thisSize >= lastSize + 1;
           assert sizeCount >= 0;
           if (sb != null)
-            sb.append("codeSize=" + lastSize + ", sizeCount=" + sizeCount + ", symbols=[");
+            sb.append("codeSize=").append(lastSize).append(", sizeCount=").append(sizeCount)
+                .append(", symbols=[");
           obs.writeNibble(sizeCount);
           for (int j = nextSymbol; j < i; j++) {
-            if (sb != null) sb.append(" " + symbol[j]);
+            if (sb != null) sb.append(" ").append(symbol[j]);
             obs.writeNibble(symbol[j]);
           }
           if (sb != null) sb.append("]\n");
@@ -352,10 +353,11 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     if (sizeCount > 0) {
       // make sure that we write out the last count.
       if (sb != null)
-        sb.append("codeSize=" + lastSize + ", sizeCount=" + sizeCount + ", symbols=[");
+        sb.append("codeSize=").append(lastSize).append(", sizeCount=").append(sizeCount)
+            .append(", symbols=[");
       obs.writeNibble(sizeCount);
       for (int j = nextSymbol; j < nsymbols; j++) {
-        if (sb != null) sb.append(" " + symbol[j]);
+        if (sb != null) sb.append(" ").append(symbol[j]);
         obs.writeNibble(symbol[j]);
       }
       if (sb != null) sb.append(" ]\n");
@@ -366,7 +368,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     obs.write(decoderInputs.getShortestCodeWord().iterator());
 
     if (sb != null) {
-      sb.append("shortestCodeWord=" + decoderInputs.getShortestCodeWord() + "\n");
+      sb.append("shortestCodeWord=").append(decoderInputs.getShortestCodeWord()).append("\n");
     }
   }
 
@@ -388,7 +390,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
     final int max = ibs.readNibble();
 
-    if (sb != null) sb.append("min=" + min + ", max=" + max + "\n");
+    if (sb != null) sb.append("min=").append(min).append(", max=").append(max).append("\n");
 
     final int[] length = new int[nsymbols];
     final int[] symbol = new int[nsymbols];
@@ -399,10 +401,11 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     while (codeSize <= max) {
       final int sizeCount = ibs.readNibble();
       if (sb != null)
-        sb.append("codeSize=" + codeSize + ", sizeCount=" + sizeCount + ", symbols=[");
+        sb.append("codeSize=").append(codeSize).append(", sizeCount=").append(sizeCount)
+            .append(", symbols=[");
       for (int i = 0; i < sizeCount; i++, lastSymbol++) {
         final int tmp = ibs.readNibble();
-        if (sb != null) sb.append(" " + tmp);
+        if (sb != null) sb.append(" ").append(tmp);
         length[lastSymbol] = codeSize;
         symbol[lastSymbol] = tmp;
       }
@@ -421,7 +424,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
     }
 
     if (sb != null) {
-      sb.append("shortestCodeWord=" + shortestCodeWord + "\n");
+      sb.append("shortestCodeWord=").append(shortestCodeWord).append("\n");
     }
 
     return new DecoderInputs(shortestCodeWord, length, symbol);
@@ -594,15 +597,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
           final byte b = symbol2byte.symbol2byte(symbol);
 
-          sb.append(
-              "codeWord: "
-                  + v
-                  + ", symbol="
-                  + symbol
-                  + ", value="
-                  + b
-                  + (b >= 32 && b < 127 ? " (" + (char) b + ")" : "")
-                  + "\n");
+          sb.append("codeWord: ").append(v).append(", symbol=").append(symbol).append(", value=")
+              .append(b).append(b >= 32 && b < 127 ? " (" + (char) b + ")" : "").append("\n");
 
           symbol++;
         }
@@ -990,7 +986,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
      * Write out the record on a bit stream backed by a byte[] buffer.
      */
     final int O_origin = buf.pos(); // byte offset of the origin.
-    if (debug) sb.append("O_origin=" + O_origin + "\n");
+    if (debug) sb.append("O_origin=").append(O_origin).append("\n");
     try {
 
       // The serialization version for the record.
@@ -1021,20 +1017,20 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
       // unused bit flags.
       obs.writeInt(0, 4);
       if (debug) {
-        sb.append("isKeys=" + raba.isKeys() + "\n");
-        sb.append("isSymbolTable=" + isSymbolTable + "\n");
+        sb.append("isKeys=").append(raba.isKeys()).append("\n");
+        sb.append("isSymbolTable=").append(isSymbolTable).append("\n");
         sb.append("isOffsetArray=" + isOffsetArray + "\n");
         sb.append("isByteAlignedOffsets=" + isByteAlignedOffsets + "\n");
       }
 
       // The #of elements in the logical byte[][].
       obs.writeInt(size, 31);
-      if (debug) sb.append("size=" + size + "\n");
+      if (debug) sb.append("size=").append(size).append("\n");
 
       // The #of symbols in the code.
       obs.writeInt(nsymbols, 9 /* nbits */);
       assert obs.writtenBits() == CodedRabaImpl.O_symbols;
-      if (debug) sb.append("nsymbols=" + nsymbols + "\n");
+      if (debug) sb.append("nsymbols=").append(nsymbols).append("\n");
 
       if (isSymbolTable) {
         // Write out the optional symbol2byte[].
@@ -1048,24 +1044,25 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
       final long O_codedValueOffsetBits = obs.writtenBits();
       obs.writeInt(codedValueOffsetBits, 8 /* nbits */);
       if (debug) {
-        sb.append("O_codedValueOffsetBits=" + O_codedValueOffsetBits + "\n");
-        sb.append("codedValueOffsetBits=" + codedValueOffsetBits + "\n");
+        sb.append("O_codedValueOffsetBits=").append(O_codedValueOffsetBits).append("\n");
+        sb.append("codedValueOffsetBits=").append(codedValueOffsetBits).append("\n");
       }
 
       if (codedValueOffsetBits != 0) {
         obs.writeLong(sumCodedValueBitLengths, 32 /* nbits */);
-        if (debug) sb.append("sumCodedValueBitLengths=" + sumCodedValueBitLengths + "\n");
+        if (debug) sb.append("sumCodedValueBitLengths=").append(sumCodedValueBitLengths)
+            .append("\n");
       }
 
       // nulls[] : bit flags identifying null byte[]s.
       final long O_nulls = obs.writtenBits();
       assert O_nulls == O_codedValueOffsetBits + 8 + (codedValueOffsetBits == 0 ? 0 : 32);
       if (!raba.isKeys()) {
-        if (debug) sb.append("O_nulls=" + O_nulls + "\n");
+        if (debug) sb.append("O_nulls=").append(O_nulls).append("\n");
         for (int i = 0; i < size; i++) {
           final boolean isNull = raba.isNull(i);
           obs.writeBit(isNull);
-          if (debug) sb.append("null[" + i + "]=" + isNull + "\n");
+          if (debug) sb.append("null[").append(i).append("]=").append(isNull).append("\n");
         }
       }
 
@@ -1081,13 +1078,13 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         // write the code word length[], the correlated symbol[], and the
         // shortest code word.
         final long O_decoderInputs = obs.writtenBits();
-        if (debug) sb.append("O_decoderInputs=" + O_decoderInputs + "\n");
+        if (debug) sb.append("O_decoderInputs=").append(O_decoderInputs).append("\n");
         writeDecoderInputs(setup.decoderInputs(), obs, sb);
 
         // Write out the coded values.
         final long O_codedValues = obs.writtenBits();
         decoderInputsBitLength = O_codedValues - O_decoderInputs;
-        if (debug) sb.append("O_codedValues=" + O_codedValues + "\n");
+        if (debug) sb.append("O_codedValues=").append(O_codedValues).append("\n");
         //            assert O_codedValues == O_nulls + (raba.isKeys() ? 0 : size);
         final long[] codedValueOffset = (codedValueOffsetBits == 0 ? null : new long[size + 1]);
         final long sumCodedValueBitLengths2 =
@@ -1107,11 +1104,12 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
           //                obs.align();
           O_codedValueOffsets = obs.writtenBits();
           assert O_codedValueOffsets == O_codedValues + sumCodedValueBitLengths;
-          if (debug) sb.append("O_codedValueOffsets=" + O_codedValueOffsets + "\n");
+          if (debug) sb.append("O_codedValueOffsets=").append(O_codedValueOffsets).append("\n");
           for (int i = 0; i < codedValueOffset.length; i++) {
             final long offset = codedValueOffset[i];
             obs.writeLong(offset, codedValueOffsetBits /* nbits */);
-            if (debug) sb.append("codedValueOffsets[" + i + "]=" + offset + "\n");
+            if (debug) sb.append("codedValueOffsets[").append(i).append("]=").append(offset)
+                .append("\n");
           }
         } else {
           // Not included in the record.
@@ -1123,7 +1121,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
       obs.flush();
 
       if (debug) {
-        sb.append("bytesWritten=" + (buf.pos() - O_origin) + "\n");
+        sb.append("bytesWritten=").append(buf.pos() - O_origin).append("\n");
         log.debug(sb.toString());
       }
 
@@ -1293,7 +1291,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         if (version != VERSION0) {
           throw new IOException("Unknown version: " + version);
         }
-        if (debug) sb.append("version=" + version + "\n");
+        if (debug) sb.append("version=").append(version).append("\n");
 
         isKeys = ibs.readBit() != 0;
 
@@ -1307,18 +1305,18 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         ibs.readInt(4 /*nbits*/);
 
         if (debug) {
-          sb.append("isKeys=" + isKeys + "\n");
-          sb.append("isSymbolTable=" + isSymbolTable + "\n");
-          sb.append("isOffsetArray=" + isOffsetArray + "\n");
-          sb.append("isByteAlignedOffsets=" + isByteAlignedOffsets + "\n");
+          sb.append("isKeys=").append(isKeys).append("\n");
+          sb.append("isSymbolTable=").append(isSymbolTable).append("\n");
+          sb.append("isOffsetArray=").append(isOffsetArray).append("\n");
+          sb.append("isByteAlignedOffsets=").append(isByteAlignedOffsets).append("\n");
         }
 
         this.size = ibs.readInt(31 /*nbits*/);
-        if (debug) sb.append("size=" + size + "\n");
+        if (debug) sb.append("size=").append(size).append("\n");
         if (size < 0) throw new IOException();
 
         nsymbols = ibs.readInt(9 /* nbits */);
-        if (debug) sb.append("nsymbols=" + nsymbols + "\n");
+        if (debug) sb.append("nsymbols=").append(nsymbols).append("\n");
         assert ibs.readBits() == O_symbols;
 
         // skip over the packed symbol table.
@@ -1332,8 +1330,8 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         final long O_codedValueOffsetBits = ibs.readBits();
         codedValueOffsetBits = ibs.readInt(8 /* nbits */);
         if (debug) {
-          sb.append("O_codedValueOffsetBits=" + O_codedValueOffsetBits + "\n");
-          sb.append("codedValueOffsetBits=" + codedValueOffsetBits + "\n");
+          sb.append("O_codedValueOffsetBits=").append(O_codedValueOffsetBits).append("\n");
+          sb.append("codedValueOffsetBits=").append(codedValueOffsetBits).append("\n");
         }
 
         final long sumCodedValueBitLengths;
@@ -1343,17 +1341,18 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
           // note: not reported.
           sumCodedValueBitLengths = 0L;
         }
-        if (debug) sb.append("sumCodedValueBitLengths=" + sumCodedValueBitLengths + "\n");
+        if (debug) sb.append("sumCodedValueBitLengths=").append(sumCodedValueBitLengths)
+            .append("\n");
 
         // offset to the nulls[] (bit flags).
         O_nulls = ibs.readBits();
         assert O_nulls == O_codedValueOffsetBits + 8 + (codedValueOffsetBits == 0 ? 0 : 32);
         if (!isKeys) {
           if (debug) {
-            sb.append("O_nulls=" + O_nulls + "\n");
+            sb.append("O_nulls=").append(O_nulls).append("\n");
             for (int i = 0; i < size; i++) {
               final boolean isNull = ibs.readBit() != 0;
-              sb.append("null[" + i + "]=" + isNull + "\n");
+              sb.append("null[").append(i).append("]=").append(isNull).append("\n");
               assert isNull == data.getBit(O_nulls + i) : "index=" + i;
             }
           } else {
@@ -1379,7 +1378,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
          * Setup the decoder.
          */
         final long O_decoderInputs = ibs.readBits();
-        if (debug) sb.append("O_decoderInputs=" + O_decoderInputs + "\n");
+        if (debug) sb.append("O_decoderInputs=").append(O_decoderInputs).append("\n");
         assert O_decoderInputs == O_nulls + (isKeys ? 0 : size);
 
         // read bit length[], symbol[], and shortest code word.
@@ -1403,7 +1402,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
 
         // skip over the coded byte[][] values.
         O_codedValues = ibs.readBits();
-        if (debug) sb.append("O_codedValues=" + O_codedValues + "\n");
+        if (debug) sb.append("O_codedValues=").append(O_codedValues).append("\n");
 
         // skip over the coded byte[][] values.
         ibs.skip(sumCodedValueBitLengths);
@@ -1412,11 +1411,12 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
         O_codedValueOffsets =
             (codedValueOffsetBits == 0 ? 0L : O_codedValues + sumCodedValueBitLengths);
         if (debug) {
-          sb.append("O_codedValueOffsets=" + O_codedValueOffsets + "\n");
+          sb.append("O_codedValueOffsets=").append(O_codedValueOffsets).append("\n");
           if (O_codedValueOffsets != 0L) {
             ibs.position(O_codedValueOffsets);
             for (int i = 0; i <= size; i++) {
-              sb.append("codedValueOffsets[" + i + "]=" + ibs.readInt(codedValueOffsetBits) + "\n");
+              sb.append("codedValueOffsets[").append(i).append("]=")
+                  .append(ibs.readInt(codedValueOffsetBits)).append("\n");
             }
           }
         }

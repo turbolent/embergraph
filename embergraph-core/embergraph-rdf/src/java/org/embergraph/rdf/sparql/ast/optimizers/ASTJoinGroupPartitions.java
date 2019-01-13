@@ -123,8 +123,8 @@ public class ASTJoinGroupPartitions {
   public LinkedList<IGroupMemberNode> extractNodeList(final boolean includeOptionalOrMinusNode) {
 
     LinkedList<IGroupMemberNode> res = new LinkedList<>();
-    for (int i = 0; i < partitions.size(); i++) {
-      res.addAll(partitions.get(i).extractNodeList(includeOptionalOrMinusNode));
+    for (ASTJoinGroupPartition partition : partitions) {
+      res.addAll(partition.extractNodeList(includeOptionalOrMinusNode));
     }
 
     return res;

@@ -40,6 +40,7 @@
 
 package org.embergraph.rdf.store;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -127,10 +128,7 @@ public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
 
       final Collection<IV<?, ?>> ivs = new HashSet<>(chunk.length);
 
-      for (IV<?, ?> id : chunk) {
-
-        ivs.add(id);
-      }
+      ivs.addAll(Arrays.asList(chunk));
 
       if (log.isInfoEnabled()) log.info("Resolving " + ivs.size() + " term identifiers");
 

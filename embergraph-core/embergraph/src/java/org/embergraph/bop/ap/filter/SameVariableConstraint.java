@@ -207,9 +207,9 @@ public class SameVariableConstraint<E> implements IFilterTest, Externalizable {
 
     LongPacker.packLong(out, indices.length);
 
-    for (int i = 0; i < indices.length; i++) {
+    for (int index : indices) {
 
-      LongPacker.packLong(out, indices[i]);
+      LongPacker.packLong(out, index);
     }
   }
 

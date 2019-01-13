@@ -74,7 +74,7 @@ public abstract class AbstractKeyRangeIndexProcedure<T> extends AbstractIndexPro
 
   private static final short VERSION0 = 0x0;
 
-  protected void readKeys(final ObjectInput in) throws IOException, ClassNotFoundException {
+  protected void readKeys(final ObjectInput in) throws IOException {
 
     final short version = in.readShort();
 

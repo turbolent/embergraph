@@ -253,7 +253,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
    */
   protected RuleStats runOne(
       final IJoinNexus joinNexus, final IStep program, final Callable<RuleStats> task)
-      throws InterruptedException, ExecutionException {
+      throws ExecutionException {
 
     if (log.isInfoEnabled()) log.info("program=" + program.getName());
 

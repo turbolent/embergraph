@@ -46,7 +46,7 @@ public class IndexProcedureTask<T> extends AbstractTask<T> {
   }
 
   @Override
-  public final T doTask() throws Exception {
+  public final T doTask() {
 
     return proc.apply(getIndex(getOnlyResource()));
   }

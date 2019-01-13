@@ -88,7 +88,7 @@ public class BloomFilter2 implements Externalizable {
   private static final transient boolean DEBUG = false;
   //    private static final long serialVersionUID = 2L;
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
     final int version = in.readInt();
     if (version != VERSION0) throw new IOException("Unknown version=" + version);
     size = in.readInt();
@@ -118,8 +118,8 @@ public class BloomFilter2 implements Externalizable {
     out.writeLong(m);
     out.writeInt(d);
     // m/Long.SIZE [bits]
-    for (int i = 0; i < bits.length; i++) {
-      out.writeLong(bits[i]);
+    for (long bit : bits) {
+      out.writeLong(bit);
     }
     // weight[d][#weights]
     for (int i = 0; i < d; i++) {

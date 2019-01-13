@@ -153,7 +153,7 @@ public class QuadsDataOrNamedSolutionSet extends QueryNodeBase
     }
 
     if (namedSolutionSet != null) {
-      sb.append("namedSet=" + namedSolutionSet);
+      sb.append("namedSet=").append(namedSolutionSet);
     }
     if (projection != null) {
       sb.append("\n");

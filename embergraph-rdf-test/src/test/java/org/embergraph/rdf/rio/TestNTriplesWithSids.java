@@ -67,7 +67,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
    * @throws RDFHandlerException
    * @throws RDFParseException
    */
-  public void test_ntriples_sids_00() throws RDFParseException, RDFHandlerException, IOException {
+  public void test_ntriples_sids_00() throws IOException {
 
     final String data =
         ""
@@ -215,7 +215,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
    * @throws RDFHandlerException
    * @throws RDFParseException
    */
-  public void test_ntriples_sids_01() throws RDFParseException, RDFHandlerException, IOException {
+  public void test_ntriples_sids_01() throws IOException {
 
     final String data =
         ""

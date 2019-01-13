@@ -1232,12 +1232,10 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       };
     } catch (InterruptedException e) {
       throw new IllegalStateException(ERR_WRITE_CACHE_CREATE, e);
-    } catch (IOException e) {
-      throw new IllegalStateException(ERR_WRITE_CACHE_CREATE, e);
     }
   }
 
-  private void setAllocations(final FileMetadata fileMetadata) throws IOException {
+  private void setAllocations(final FileMetadata fileMetadata) {
 
     final String buckets =
         fileMetadata.getProperty(Options.ALLOCATION_SIZES, Options.DEFAULT_ALLOCATION_SIZES);
@@ -2253,9 +2251,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
                     + m_writeCacheService.addrDebugInfo(paddr));
           }
           final byte[] in = bbuf.array(); // reads in with checksum - no need to check if in cache
-          for (int i = 0; i < length - 4; i++) {
-            buf[offset + i] = in[i];
-          }
+          if (length - 4 >= 0)
+            System.arraycopy(in, 0, buf, offset + 0, length - 4);
           m_cacheReads++;
           /*
            * Hit on the write cache.
@@ -2937,8 +2934,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     // Now find candidate allocator with maximum free slots above a minimum threshold
     FixedAllocator candidate = null;
     int candidateFreeBits = cSmallSlotThresholdHighWaste; // minimum threshold
-    for (int i = 0; i < m_allocs.size(); i++) {
-      final FixedAllocator tst = m_allocs.get(i);
+    for (final FixedAllocator tst : m_allocs) {
       if (tst.getBlockSize() == block) { // right size
         if (tst.m_freeBits > candidateFreeBits) {
           candidate = tst;
@@ -3027,13 +3023,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           throw new RuntimeException("Closed Store?", e);
 
         } finally {
-          try {
-            psout.close(); // return stream
-          } catch (IOException ioe) {
-            // should not happen, since this should only be
-            // recycling
-            log.warn("Unexpected error closing PSOutputStream", ioe);
-          }
+          psout.close(); // return stream
         }
       }
 
@@ -3371,15 +3361,15 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
        * Options.ALLOCATION_SIZES (this is where we store that
        * information).
        */
-      for (int i = 0; i < m_allocSizes.length; i++) {
-        str.writeInt(m_allocSizes[i]);
+      for (int m_allocSize : m_allocSizes) {
+        str.writeInt(m_allocSize);
       }
 
       /*
        * Write out XXX
        */
-      for (int i = 0; i < m_metaBits.length; i++) {
-        str.writeInt(m_metaBits[i]);
+      for (int m_metaBit : m_metaBits) {
+        str.writeInt(m_metaBit);
       }
 
       str.flush();
@@ -4411,7 +4401,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       }
       str.append("okay\n");
     } catch (IllegalStateException is) {
-      str.append(is.getMessage() + "\n");
+      str.append(is.getMessage()).append("\n");
     } finally {
       lock.unlock();
     }
@@ -6245,10 +6235,10 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           }
 
           @Override
-          public void release() throws InterruptedException {}
+          public void release() {}
 
           @Override
-          public void release(long timeout, TimeUnit unit) throws InterruptedException {}
+          public void release(long timeout, TimeUnit unit) {}
         };
 
     /*
@@ -6301,7 +6291,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   public Future<Void> sendHALogBuffer(
       final IHALogRequest req, final IHAWriteMessage msg, final IBufferAccess buf)
-      throws IOException, InterruptedException {
+      throws IOException {
 
     final ByteBuffer b = buf.buffer();
 
@@ -6329,7 +6319,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       final long offset,
       final int nbytes,
       final ByteBuffer b)
-      throws IOException, InterruptedException {
+      throws IOException {
 
     // read direct from store
     final ByteBuffer clientBuffer = b;
@@ -6369,7 +6359,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       final ISnapshotData snapshotData,
       final Quorum<HAGlue, QuorumService<HAGlue>> quorum,
       final long token)
-      throws IOException, QuorumException, InterruptedException {
+      throws IOException, QuorumException {
 
     // final FileInputStream filein = new FileInputStream(this.m_fd);
     final FileChannelUtility.ReopenerInputStream filein =
@@ -6913,7 +6903,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           Iterator<Entry<Long, WeakReference<ICommitter>>> entries =
               m_externalCache.entryIterator();
           while (entries.hasNext()) {
-            sb.append(entries.next().getKey() + "|");
+            sb.append(entries.next().getKey()).append("|");
           }
 
           log.trace(
@@ -7133,19 +7123,13 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     public String toString(final RWStore store) {
       final StringBuilder sb = new StringBuilder();
-      sb.append(
-          "CommitRecords: "
-              + m_commitRecords
-              + ", Addresses: "
-              + m_addresses
-              + ", Blobs: "
-              + m_blobs
-              + ", bad: "
-              + +m_badAddresses);
+      sb.append("CommitRecords: ").append(m_commitRecords).append(", Addresses: ")
+          .append(m_addresses).append(", Blobs: ").append(m_blobs).append(", bad: ")
+          .append(+m_badAddresses);
       if (!m_duplicates.isEmpty()) {
         for (int latchedAddr : m_duplicates) {
           //                  final int latchedAddr = m_duplicates.get(i);
-          sb.append("\nDuplicate: latchedAddr=" + latchedAddr + "\n");
+          sb.append("\nDuplicate: latchedAddr=").append(latchedAddr).append("\n");
           /*
            * Note: Now dumped by DumpJournal.
            */
@@ -7412,7 +7396,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   }
 
   private void computeDigestOld(final Object snapshot, final MessageDigest digest)
-      throws DigestException, IOException {
+      throws IOException {
 
     if (snapshot != null) throw new UnsupportedOperationException();
 
@@ -7491,7 +7475,6 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         log.info("Computed digest: #blocks=" + sequence + ", #bytes=" + totalBytes);
 
       // Done.
-      return;
 
     } finally {
 
@@ -7514,8 +7497,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @throws DigestException
    * @throws IOException
    */
-  private void computeDigestAlt(final Object snapshot, final MessageDigest digest)
-      throws DigestException, IOException {
+  private void computeDigestAlt(final Object snapshot, final MessageDigest digest) {
     if (snapshot != null) throw new UnsupportedOperationException();
 
     m_allocationWriteLock.lock();
@@ -7571,16 +7553,9 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     for (int index = 0; index < m_allocs.size(); index++) {
       final FixedAllocator xfa = m_allocs.get(index);
-      sb.append(
-          "Allocator "
-              + index
-              + ", size: "
-              + xfa.m_size
-              + ", startAddress: "
-              + xfa.getStartAddr()
-              + ", allocated: "
-              + xfa.getAllocatedSlots()
-              + "\n");
+      sb.append("Allocator ").append(index).append(", size: ").append(xfa.m_size)
+          .append(", startAddress: ").append(xfa.getStartAddr()).append(", allocated: ")
+          .append(xfa.getAllocatedSlots()).append("\n");
     }
 
     return sb.toString();
@@ -7627,7 +7602,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     @Override
     public boolean equals(final Object obj) {
-      if (obj == null || !(obj instanceof RWStoreState)) return false;
+      if (!(obj instanceof RWStoreState)) return false;
       final RWStoreState other = (RWStoreState) obj;
       return m_fileSize == other.m_fileSize
           && m_nextAllocation == other.m_nextAllocation
@@ -7642,20 +7617,18 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     @Override
     public String toString() {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("RWStoreState\n");
-      sb.append("fileSize: " + m_fileSize + "\n");
-      sb.append("nextAllocation: " + m_nextAllocation + "\n");
-      sb.append("committedNextAllocation: " + m_committedNextAllocation + "\n");
-      sb.append("minReleaseAge: " + m_minReleaseAge + "\n");
-      sb.append("lastDeferredReleaseTime: " + m_lastDeferredReleaseTime + "\n");
-      sb.append("storageStatsAddr: " + m_storageStatsAddr + "\n");
-      sb.append("allocsSize: " + m_allocsSize + "\n");
-      sb.append("metaBitsAddr: " + m_metaBitsAddr + "\n");
-      sb.append("metaBitsSize: " + m_metaBitsSize + "\n");
-
-      return sb.toString();
+      String sb = "RWStoreState\n"
+          + "fileSize: " + m_fileSize + "\n"
+          + "nextAllocation: " + m_nextAllocation + "\n"
+          + "committedNextAllocation: " + m_committedNextAllocation + "\n"
+          + "minReleaseAge: " + m_minReleaseAge + "\n"
+          + "lastDeferredReleaseTime: " + m_lastDeferredReleaseTime + "\n"
+          + "storageStatsAddr: " + m_storageStatsAddr + "\n"
+          + "allocsSize: " + m_allocsSize + "\n"
+          + "metaBitsAddr: " + m_metaBitsAddr + "\n"
+          + "metaBitsSize: " + m_metaBitsSize + "\n";
+      return sb;
     }
   }
 
@@ -7666,9 +7639,10 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @return whether addr is within slot allocated area
    */
   public boolean verifyAllocatedAddress(final long addr) {
-    for (int index = 0; index < m_allocs.size(); index++) {
-      final FixedAllocator xfa = m_allocs.get(index);
-      if (xfa.verifyAllocatedAddress(addr)) return true;
+    for (final FixedAllocator xfa : m_allocs) {
+      if (xfa.verifyAllocatedAddress(addr)) {
+        return true;
+      }
     }
 
     return false;

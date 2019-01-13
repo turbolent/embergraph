@@ -30,7 +30,7 @@ public class TestHASendState extends TestCase2 {
     super(name);
   }
 
-  public void test_roundTrip() throws IOException {
+  public void test_roundTrip() {
 
     final long messageId = 5;
     final UUID originalSenderUUID = UUID.randomUUID();

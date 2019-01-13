@@ -212,39 +212,22 @@ public class JoinStats implements Serializable {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder("JoinStats");
-
-    sb.append("{ orderIndex=" + orderIndex);
-
-    sb.append(", partitionId=" + partitionId);
-
-    sb.append(", fanIn=" + fanIn);
-
-    sb.append(", fanOut=" + fanOut);
-
-    sb.append(", partitionIdCount=" + partitionCount);
-
-    sb.append(", bindingSetChunksIn=" + bindingSetChunksIn);
-
-    sb.append(", bindingSetsIn=" + bindingSetsIn);
-
-    sb.append(", accessPathCount=" + accessPathCount);
-
-    sb.append(", accessPathDups=" + accessPathDups);
-
-    sb.append(", chunkCount=" + chunkCount);
-
-    sb.append(", elementCount=" + elementCount);
-
-    sb.append(", bindingSetsOut=" + bindingSetsOut);
-
-    sb.append(", bindingSetChunksOut=" + bindingSetChunksOut);
-
-    sb.append(", mutationCount=" + mutationCount);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = "JoinStats" + "{ orderIndex=" + orderIndex
+        + ", partitionId=" + partitionId
+        + ", fanIn=" + fanIn
+        + ", fanOut=" + fanOut
+        + ", partitionIdCount=" + partitionCount
+        + ", bindingSetChunksIn=" + bindingSetChunksIn
+        + ", bindingSetsIn=" + bindingSetsIn
+        + ", accessPathCount=" + accessPathCount
+        + ", accessPathDups=" + accessPathDups
+        + ", chunkCount=" + chunkCount
+        + ", elementCount=" + elementCount
+        + ", bindingSetsOut=" + bindingSetsOut
+        + ", bindingSetChunksOut=" + bindingSetChunksOut
+        + ", mutationCount=" + mutationCount
+        + "}";
+    return sb;
   }
 
   private static final transient String sep = ", ";
@@ -286,27 +269,27 @@ public class JoinStats implements Serializable {
 
       final String ruleNameStr = "\"" + rule.getName().replace(',', ' ') + "\"";
 
-      sb.append(dateFormat.format(s.startTime).replace(sep, " ") + sep);
-      sb.append(ruleNameStr + sep);
-      sb.append(s.orderIndex + sep);
+      sb.append(dateFormat.format(s.startTime).replace(sep, " ")).append(sep);
+      sb.append(ruleNameStr).append(sep);
+      sb.append(s.orderIndex).append(sep);
       //            sb.append(Integer.toString(s.partitionId)+sep); // always -1 when aggregated.
-      sb.append(ruleState.getKeyOrder()[tailIndex].toString().replace(sep, " ") + sep);
-      sb.append(ruleState.getNVars()[tailIndex] + sep);
-      sb.append(ruleState.getPlan().rangeCount(tailIndex) + sep);
-      sb.append(s.fanIn + sep);
-      sb.append(s.fanOut + sep);
-      sb.append(s.partitionCount + sep);
-      sb.append(s.bindingSetChunksIn + sep);
-      sb.append(s.bindingSetsIn + sep);
-      sb.append(s.accessPathCount + sep);
-      sb.append(s.accessPathDups + sep);
-      sb.append(s.chunkCount + sep);
-      sb.append(s.elementCount + sep);
-      sb.append(s.bindingSetsOut + sep);
-      sb.append(s.bindingSetChunksOut + sep);
-      sb.append(s.mutationCount.get() + sep);
-      sb.append(tailIndex + sep);
-      sb.append(rule.getTail(tailIndex).toString().replace(sep, " ") + "\n");
+      sb.append(ruleState.getKeyOrder()[tailIndex].toString().replace(sep, " ")).append(sep);
+      sb.append(ruleState.getNVars()[tailIndex]).append(sep);
+      sb.append(ruleState.getPlan().rangeCount(tailIndex)).append(sep);
+      sb.append(s.fanIn).append(sep);
+      sb.append(s.fanOut).append(sep);
+      sb.append(s.partitionCount).append(sep);
+      sb.append(s.bindingSetChunksIn).append(sep);
+      sb.append(s.bindingSetsIn).append(sep);
+      sb.append(s.accessPathCount).append(sep);
+      sb.append(s.accessPathDups).append(sep);
+      sb.append(s.chunkCount).append(sep);
+      sb.append(s.elementCount).append(sep);
+      sb.append(s.bindingSetsOut).append(sep);
+      sb.append(s.bindingSetChunksOut).append(sep);
+      sb.append(s.mutationCount.get()).append(sep);
+      sb.append(tailIndex).append(sep);
+      sb.append(rule.getTail(tailIndex).toString().replace(sep, " ")).append("\n");
     }
 
     return sb;

@@ -45,7 +45,7 @@ import org.embergraph.util.InnerCause;
  */
 public class IndexPartitionWriteTask<
         H extends IndexAsyncWriteStats<L, HS>,
-        O extends Object,
+        O,
         E extends KVO<O>,
         L extends PartitionLocator,
         S extends IndexPartitionWriteTask,
@@ -252,9 +252,9 @@ public class IndexPartitionWriteTask<
        * KVOList was used, then done() will be mapped over each duplicate
        * as well.
        */
-      for (int i = 0; i < chunkSize; i++) {
+      for (KVO<O> okvo : chunk) {
 
-        chunk[i].done();
+        okvo.done();
       }
 
       // keep reading.

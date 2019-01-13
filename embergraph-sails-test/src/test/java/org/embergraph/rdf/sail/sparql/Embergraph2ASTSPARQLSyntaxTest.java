@@ -127,15 +127,7 @@ public class Embergraph2ASTSPARQLSyntaxTest extends SPARQLSyntaxTest {
   public static Test suite() throws Exception {
 
     final Factory factory =
-        new Factory() {
-
-          @Override
-          public SPARQLSyntaxTest createSPARQLSyntaxTest(
-              String testURI, String testName, String testAction, boolean positiveTest) {
-
-            return new Embergraph2ASTSPARQLSyntaxTest(testURI, testName, testAction, positiveTest);
-          }
-        };
+        (testURI, testName, testAction, positiveTest) -> new Embergraph2ASTSPARQLSyntaxTest(testURI, testName, testAction, positiveTest);
 
     final TestSuite suite = new TestSuite();
 

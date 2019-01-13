@@ -91,10 +91,10 @@ public class BaseJoinStats extends BOpStats {
   @Override
   protected void toString(final StringBuilder sb) {
     super.toString(sb);
-    sb.append(",accessPathDups=" + accessPathDups.get());
-    sb.append(",accessPathCount=" + accessPathCount.get());
-    sb.append(",accessPathRangeCount=" + accessPathRangeCount.get());
-    sb.append(",accessPathChunksIn=" + accessPathChunksIn.get());
-    sb.append(",accessPathUnitsIn=" + accessPathUnitsIn.get());
+    sb.append(",accessPathDups=").append(accessPathDups.get());
+    sb.append(",accessPathCount=").append(accessPathCount.get());
+    sb.append(",accessPathRangeCount=").append(accessPathRangeCount.get());
+    sb.append(",accessPathChunksIn=").append(accessPathChunksIn.get());
+    sb.append(",accessPathUnitsIn=").append(accessPathUnitsIn.get());
   }
 }

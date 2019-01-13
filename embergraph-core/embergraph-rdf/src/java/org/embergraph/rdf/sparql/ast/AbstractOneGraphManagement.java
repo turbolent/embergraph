@@ -132,11 +132,11 @@ public abstract class AbstractOneGraphManagement extends GraphManagement {
 
     if (targetGraph != null) {
 
-      sb.append(" targetGraph=" + targetGraph);
+      sb.append(" targetGraph=").append(targetGraph);
     }
     if (targetSolutionSet != null) {
 
-      sb.append(" targetSolutionSet=" + targetSolutionSet);
+      sb.append(" targetSolutionSet=").append(targetSolutionSet);
     }
 
     if (this instanceof DropGraph) {

@@ -456,7 +456,7 @@ public class TestNSSHealthCheck extends TestCase2 {
    * @throws MalformedURLException
    *     <p>TODO Support HA health checks as well.
    */
-  public static void main(final String[] args) throws MalformedURLException {
+  public static void main(final String[] args) {
 
     if (args.length < 1) {
       System.err.println("usage: Request-URI");

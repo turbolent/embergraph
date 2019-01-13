@@ -223,15 +223,12 @@ public class EmbergraphStoreTest extends RDFStoreTest {
       final int nexpected = 1; // Yes. This is embergraph snapshot isolation semantics.
       assertEquals(nexpected, countElements(queryResult));
       Runnable clearer =
-          new Runnable() {
-
-            public void run() {
-              try {
-                con.clear();
-                con.commit();
-              } catch (SailException e) {
-                throw new RuntimeException(e);
-              }
+          () -> {
+            try {
+              con.clear();
+              con.commit();
+            } catch (SailException e) {
+              throw new RuntimeException(e);
             }
           };
       Thread thread = new Thread(clearer);

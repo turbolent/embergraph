@@ -174,10 +174,7 @@ public class BOpBase extends CoreBaseBOp {
 
     final BOp[] tmp = new BOp[args.length];
 
-    for (int i = 0; i < args.length; i++) {
-
-      tmp[i] = args[i];
-    }
+    System.arraycopy(args, 0, tmp, 0, args.length);
 
     return tmp;
   }

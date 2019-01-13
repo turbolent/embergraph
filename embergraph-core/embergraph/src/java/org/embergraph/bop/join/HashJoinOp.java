@@ -248,7 +248,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       boolean didRun = false;
       try {

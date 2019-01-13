@@ -225,7 +225,7 @@ public abstract class AbstractSubtask<
    *
    * @throws InterruptedException
    */
-  protected void cancelRemoteTask(boolean mayInterruptIfRunning) throws InterruptedException {
+  protected void cancelRemoteTask(boolean mayInterruptIfRunning) {
 
     // NOP - overriden by subclass which supports pendingSets.
 

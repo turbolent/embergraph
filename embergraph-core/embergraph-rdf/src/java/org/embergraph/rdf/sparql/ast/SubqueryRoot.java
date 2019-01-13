@@ -183,11 +183,11 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
 
     sb.append(indent(indent));
 
-    if (runOnce) sb.append("@" + Annotations.RUN_ONCE + "=" + runOnce);
+    if (runOnce) sb.append("@" + Annotations.RUN_ONCE + "=").append(runOnce);
 
     final IVariable<?> askVar = getAskVar();
 
-    if (askVar != null) sb.append("@" + Annotations.ASK_VAR + "=" + askVar);
+    if (askVar != null) sb.append("@" + Annotations.ASK_VAR + "=").append(askVar);
 
     final List<FilterNode> filters = getAttachedJoinFilters();
     if (!filters.isEmpty()) {

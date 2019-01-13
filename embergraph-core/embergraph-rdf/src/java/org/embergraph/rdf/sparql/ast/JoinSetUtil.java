@@ -261,8 +261,7 @@ public class JoinSetUtil {
     {
       for (int i = 0; i < requiredJoinCount; i++) {
         for (int j = i + 1; j < requiredJoinCount; j++) {
-          final Set<IVariable<?>> sharedVars = new HashSet<>();
-          sharedVars.addAll(vars[i]);
+          final Set<IVariable<?>> sharedVars = new HashSet<>(vars[i]);
           sharedVars.retainAll(vars[j]);
           if ((canJoin[i][j] = sharedVars.size()) > 0) {
             // #of times there is a direct join for this vertex.

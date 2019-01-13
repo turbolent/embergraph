@@ -23,7 +23,7 @@ public class TestJsonModelSerialization extends TestCase {
    * @throws JsonGenerationException
    */
   @org.junit.Test
-  public void testSerialToJson() throws JsonGenerationException, JsonMappingException, IOException {
+  public void testSerialToJson() throws IOException {
     final List<RunningQuery> rQueriesOrig = deserialize(rQueryJson);
     final List<RunningQuery> rQueriesDeserial;
 

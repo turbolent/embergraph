@@ -25,7 +25,6 @@ import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;

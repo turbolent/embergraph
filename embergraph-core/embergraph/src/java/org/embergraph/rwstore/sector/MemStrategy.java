@@ -285,7 +285,7 @@ public class MemStrategy implements IBufferStrategy, IRWStrategy, IAllocationMan
   }
 
   @Override
-  public long transferTo(RandomAccessFile out) throws IOException {
+  public long transferTo(RandomAccessFile out) {
     throw new UnsupportedOperationException();
   }
 

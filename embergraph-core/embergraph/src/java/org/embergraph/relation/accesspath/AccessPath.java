@@ -1153,7 +1153,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       /*
        * Chunked iterator reading from the ITupleIterator. The filter was

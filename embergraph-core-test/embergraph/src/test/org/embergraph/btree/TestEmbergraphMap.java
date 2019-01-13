@@ -64,7 +64,7 @@ public class TestEmbergraphMap extends TestCase {
    */
   EmbergraphMap<String, String> map;
 
-  protected void setUp() throws Exception {
+  protected void setUp() {
 
     final IndexMetadata indexMetadata = new IndexMetadata(UUID.randomUUID());
 

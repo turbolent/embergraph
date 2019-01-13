@@ -38,7 +38,7 @@ public interface IRemoteRepository {
    * @param query the query string
    * @return the {@link TupleQuery}
    */
-  TupleQuery prepareTupleQuery(String query) throws Exception;
+  TupleQuery prepareTupleQuery(String query);
 
   /*
    * Prepare a graph query.
@@ -46,7 +46,7 @@ public interface IRemoteRepository {
    * @param query the query string
    * @return the {@link GraphQuery}
    */
-  GraphQuery prepareGraphQuery(String query) throws Exception;
+  GraphQuery prepareGraphQuery(String query);
 
   /*
    * Prepare a boolean (ask) query.
@@ -54,14 +54,14 @@ public interface IRemoteRepository {
    * @param query the query string
    * @return the {@link BooleanQuery}
    */
-  BooleanQuery prepareBooleanQuery(String query) throws Exception;
+  BooleanQuery prepareBooleanQuery(String query);
 
   /*
    * Cancel a query running remotely on the server.
    *
    * @param queryID the UUID of the query to cancel
    */
-  void cancel(UUID queryID) throws Exception;
+  void cancel(UUID queryID);
 
   /*
    * Perform a fast range count on the statement indices for a given triple (quad) pattern.
@@ -72,7 +72,7 @@ public interface IRemoteRepository {
    * @param c the context (can be null)
    * @return the range count
    */
-  long rangeCount(URI s, URI p, Value o, URI c) throws Exception;
+  long rangeCount(URI s, URI p, Value o, URI c);
 
   /*
    * A prepared query will hold metadata for a particular query instance.
@@ -120,14 +120,14 @@ public interface IRemoteRepository {
    *
    * @param add The RDF data to be added.
    */
-  void add(AddOp add) throws Exception;
+  void add(AddOp add);
 
   /*
    * Removes RDF data from the remote repository.
    *
    * @param remove The RDF data to be removed.
    */
-  void remove(RemoveOp remove) throws Exception;
+  void remove(RemoveOp remove);
 
   /*
    * Perform an ACID update (delete+insert) per the semantics of <a
@@ -137,7 +137,7 @@ public interface IRemoteRepository {
    * @param remove The RDF data to be removed.
    * @param add The RDF data to be added.
    */
-  void update(RemoveOp remove, AddOp add) throws Exception;
+  void update(RemoveOp remove, AddOp add);
 
   /*
    * This class will have a number of different ctors:

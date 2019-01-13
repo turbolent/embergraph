@@ -67,7 +67,7 @@ public class ReverseIndexWriterTask implements Callable<Long> {
   }
 
   /** @return the elapsed time for this task. */
-  public Long call() throws Exception {
+  public Long call() {
 
     final long _begin = System.currentTimeMillis();
 

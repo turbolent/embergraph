@@ -123,7 +123,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * does not actually read anything.
                  */
                 @Override
-                protected String doTask() throws Exception {
+                protected String doTask() {
 
                   ran.compareAndSet(false, true);
 
@@ -181,7 +181,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * does not actually read or write on anything.
                  */
                 @Override
-                protected String doTask() throws Exception {
+                protected String doTask() {
 
                   ran.compareAndSet(false, true);
 
@@ -247,7 +247,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * does not actually read or write on anything.
                  */
                 @Override
-                protected String doTask() throws Exception {
+                protected String doTask() {
 
                   ran.compareAndSet(false, true);
 
@@ -313,7 +313,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * does not actually read or write on anything.
                  */
                 @Override
-                protected String doTask() throws Exception {
+                protected String doTask() {
 
                   ran.compareAndSet(false, true);
 
@@ -386,7 +386,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * does not actually read or write on anything.
                  */
                 @Override
-                protected String doTask() throws Exception {
+                protected String doTask() {
 
                   ran.compareAndSet(false, true);
 
@@ -484,9 +484,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
 
       // wait until the task starts executing.
 
-      while (true) {
-
-        if (ran.get()) break;
+      while (!ran.get()) {
 
         Thread.sleep(100);
       }
@@ -569,7 +567,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                  * <strong>ignoring interrupts</strong>.
                  */
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   t.set(Thread.currentThread());
 
@@ -592,9 +590,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
 
       // wait until the task starts executing.
 
-      while (true) {
-
-        if (ran.get()) break;
+      while (!ran.get()) {
 
         Thread.sleep(100);
       }
@@ -872,7 +868,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           new AbstractTask<Void>(journal, ITx.UNISOLATED, resource) {
 
             @Override
-            protected Void doTask() throws Exception {
+            protected Void doTask() {
 
               return null;
             }
@@ -1129,7 +1125,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
               new AbstractTask<Void>(journal, ITx.UNISOLATED, name) {
 
                 @Override
-                protected Void doTask() throws Exception {
+                protected Void doTask() {
 
                   final BTree ndx = (BTree) getIndex(name);
 
@@ -1655,7 +1651,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           }
 
           @Override
-          protected Void doTask() throws Exception {
+          protected Void doTask() {
 
             final IIndex ndx = getIndex(getOnlyResource());
 
@@ -1702,14 +1698,11 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
         for (int i = 0; i < 10; i++) {
           final String theResource = resource[i % resource.length];
           writerService.submit(
-              new Callable<Object>() {
-                @Override
-                public Object call() throws Exception {
-                  journal.submit(new InterruptMyselfTask(journal, ITx.UNISOLATED, theResource));
-                  // pause between submits
-                  Thread.sleep(20);
-                  return null;
-                }
+              () -> {
+                journal.submit(new InterruptMyselfTask(journal, ITx.UNISOLATED, theResource));
+                // pause between submits
+                Thread.sleep(20);
+                return null;
               });
         }
 

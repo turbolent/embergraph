@@ -295,7 +295,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
           // check for problematic COUNT(DISTINCT ...)) pattern
           final Map<String, Object> scalarVals = fNode.getScalarValues();
           final Object isDistinct = scalarVals.get(AggregateBase.Annotations.DISTINCT);
-          if (isDistinct != null && isDistinct instanceof Boolean && (Boolean) isDistinct) {
+          if (isDistinct instanceof Boolean && (Boolean) isDistinct) {
             return; // COUNT (DISTINCT ...) cannot be optimized
           }
 

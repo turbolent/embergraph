@@ -371,8 +371,6 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         log.error(t.getMessage(), t);
 
-        return;
-
       } finally {
 
         lock.unlock();
@@ -911,7 +909,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
   }
 
   /** Prepare and commit a read-write transaction that has written on a single data service. */
-  protected long singlePhaseCommit(final TxState state) throws Exception {
+  protected long singlePhaseCommit(final TxState state) {
 
     if (!state.lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
@@ -1178,35 +1176,32 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         new LockManagerTask<>(
             dataServiceLockManager,
             state.getDataServiceUUIDs(),
-            new Callable<Void>() {
+            (Callable<Void>) () -> {
 
-              public Void call() throws Exception {
-
-                if (!state.lock.isHeldByCurrentThread()) {
-
-                  /*
-                   * Note: The task runs in its caller's thread and
-                   * the caller should already be holding the TxState
-                   * lock.
-                   */
-
-                  throw new IllegalMonitorStateException();
-                }
+              if (!state.lock.isHeldByCurrentThread()) {
 
                 /*
-                 * Signal so that the task which caused the prepared
-                 * barrier to break can resume. It turn, when the
-                 * prepared runnable finishes, all tasks awaiting that
-                 * barrier will continue to execute and will enter their
-                 * "commit" phase.
+                 * Note: The task runs in its caller's thread and
+                 * the caller should already be holding the TxState
+                 * lock.
                  */
-                locksHeld.signal();
 
-                // Signaled when the committed barrier breaks.
-                committed.await();
-
-                return null;
+                throw new IllegalMonitorStateException();
               }
+
+              /*
+               * Signal so that the task which caused the prepared
+               * barrier to break can resume. It turn, when the
+               * prepared runnable finishes, all tasks awaiting that
+               * barrier will continue to execute and will enter their
+               * "commit" phase.
+               */
+              locksHeld.signal();
+
+              // Signaled when the committed barrier breaks.
+              committed.await();
+
+              return null;
             })
             .call();
 
@@ -1391,34 +1386,31 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     protected void setupCommittedBarrier() {
 
+      /*
+       * Method runs when the "committed" barrier breaks. At this point the transaction is
+       * fully committed on the participating data services.
+       */
       committedBarrier =
           new CyclicBarrier(
               nservices,
-              new Runnable() {
+              () -> {
 
-                /*
-                 * Method runs when the "committed" barrier breaks. At this point the transaction is
-                 * fully committed on the participating data services.
-                 */
-                public void run() {
+                state.lock.lock();
 
-                  state.lock.lock();
+                try {
 
-                  try {
+                  // wake up the main thread.
+                  committed.signal();
 
-                    // wake up the main thread.
-                    committed.signal();
+                  // Set the assigned commitTime on the TxState.
+                  state.setCommitTime(commitTime);
 
-                    // Set the assigned commitTime on the TxState.
-                    state.setCommitTime(commitTime);
+                  // Change the tx run state.
+                  state.setRunState(RunState.Committed);
 
-                    // Change the tx run state.
-                    state.setRunState(RunState.Committed);
+                } finally {
 
-                  } finally {
-
-                    state.lock.unlock();
-                  }
+                  state.lock.unlock();
                 }
               });
     }
@@ -1438,7 +1430,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         this.service = service;
       }
 
-      public Void call() throws Exception {
+      public Void call() {
 
         try {
 
@@ -1551,7 +1543,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
    */
   @Override
   public long prepared(final long tx, final UUID dataService)
-      throws IOException, InterruptedException, BrokenBarrierException {
+      throws InterruptedException, BrokenBarrierException {
 
     final DistributedTxCommitTask task = commitList.get(tx);
 
@@ -1597,7 +1589,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
    */
   @Override
   public boolean committed(final long tx, final UUID dataService)
-      throws IOException, InterruptedException, BrokenBarrierException {
+      throws InterruptedException, BrokenBarrierException {
 
     final DistributedTxCommitTask task = commitList.get(tx);
 

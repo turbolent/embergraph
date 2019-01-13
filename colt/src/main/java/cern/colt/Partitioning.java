@@ -39,7 +39,7 @@ import cern.colt.list.IntArrayList;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 03-Jul-99
  */
-public class Partitioning extends Object {
+public class Partitioning {
   private static final int SMALL = 7;
   private static final int MEDIUM = 40;
 

@@ -222,7 +222,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
 
   static class HS extends MockSubtaskStats {}
 
-  static class O extends Object {}
+  static class O {}
 
   static class H extends MockMasterStats<L, HS> {
 
@@ -439,7 +439,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
      * This method may be overridden to simulate the latency of the write operation. The default is
      * a NOP.
      */
-    protected void writeData(KVO<O>[] chunk) throws Exception {}
+    protected void writeData(KVO<O>[] chunk) {}
 
     @Override
     protected boolean handleChunk(final KVO<O>[] chunk) throws Exception {

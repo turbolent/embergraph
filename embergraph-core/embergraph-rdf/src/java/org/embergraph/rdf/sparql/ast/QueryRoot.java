@@ -238,7 +238,8 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
 
         sb.append("\n");
         sb.append(s);
-        sb.append("hint: [" + key + "]=[" + queryHints.getProperty(key) + "]");
+        sb.append("hint: [").append(key).append("]=[").append(queryHints.getProperty(key))
+            .append("]");
       }
     }
 

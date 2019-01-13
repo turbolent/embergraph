@@ -100,10 +100,12 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
       int maxWidth = minColumnWidth;
       int maxLead = Integer.MIN_VALUE;
       // int maxTrail = Integer.MIN_VALUE;
-      for (int row = 0; row < rows; row++) {
-        String s = strings[row][column];
+      for (String[] string : strings) {
+        String s = string[column];
         maxWidth = Math.max(maxWidth, s.length());
-        if (isDecimal) maxLead = Math.max(maxLead, lead(s));
+        if (isDecimal) {
+          maxLead = Math.max(maxLead, lead(s));
+        }
         // maxTrail = Math.max(maxTrail, trail(s));
       }
       maxColWidth[column] = maxWidth;
@@ -113,8 +115,8 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
 
     // format each row according to alignment parameters
     // StringBuffer total = new StringBuffer();
-    for (int row = 0; row < rows; row++) {
-      alignRow(strings[row], maxColWidth, maxColLead);
+    for (String[] string : strings) {
+      alignRow(string, maxColWidth, maxColLead);
     }
   }
   /** Converts a row into a string. */

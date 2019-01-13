@@ -413,17 +413,17 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     sb.append(super.toString());
     //        sb.append("BlockingBuffer");
 
-    sb.append("{ open=" + open);
+    sb.append("{ open=").append(open);
 
-    sb.append(", hasFuture=" + (future != null));
+    sb.append(", hasFuture=").append(future != null);
 
-    sb.append(", elementsAddedCount=" + elementsAddedCount);
+    sb.append(", elementsAddedCount=").append(elementsAddedCount);
 
-    sb.append(", chunksAddedCount=" + chunksAddedCount);
+    sb.append(", chunksAddedCount=").append(chunksAddedCount);
 
-    sb.append(", chunksDrainedCount=" + chunksDrainedCount);
+    sb.append(", chunksDrainedCount=").append(chunksDrainedCount);
 
-    sb.append(", elementsDrainedCount=" + elementsDrainedCount);
+    sb.append(", elementsDrainedCount=").append(elementsDrainedCount);
 
     if (true || log.isInfoEnabled()) {
 
@@ -433,12 +433,12 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
        * remainingCapacity().
        */
 
-      sb.append(", size~=" + queue.size());
+      sb.append(", size~=").append(queue.size());
 
-      sb.append(", remainingCapacity~=" + queue.remainingCapacity());
+      sb.append(", remainingCapacity~=").append(queue.remainingCapacity());
     }
 
-    if (cause != null) sb.append(", cause=" + cause);
+    if (cause != null) sb.append(", cause=").append(cause);
 
     sb.append("}");
 
@@ -1061,21 +1061,13 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     /** Safe non-blocking representation of the iterator state. */
     public String toString() {
 
-      final StringBuilder sb = new StringBuilder();
-
-      sb.append("BlockingIterator");
-
-      sb.append("{ open=" + open);
-
-      sb.append(", futureIsDone=" + futureIsDone);
-
-      sb.append(", bufferIsOpen=" + BlockingBuffer.this.open);
-
-      sb.append(", nextE=" + (nextE != null));
-
-      sb.append("}");
-
-      return sb.toString();
+      String sb = "BlockingIterator"
+          + "{ open=" + open
+          + ", futureIsDone=" + futureIsDone
+          + ", bufferIsOpen=" + BlockingBuffer.this.open
+          + ", nextE=" + (nextE != null)
+          + "}";
+      return sb;
     }
 
     /** Create an iterator that reads from the buffer. */
@@ -1732,7 +1724,6 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         }
 
         // loop again.
-        continue;
       }
 
       //            if (log.isInfoEnabled())

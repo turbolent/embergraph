@@ -297,7 +297,7 @@ public class CBD {
 
     final StringBuilder sb = new StringBuilder(stmts.size() * 100);
     {
-      sb.append("Statements: (" + stmts.size() + ")\n");
+      sb.append("Statements: (").append(stmts.size()).append(")\n");
       for (EmbergraphStatement st : stmts) {
         sb.append(st.toString());
         sb.append("\n");
@@ -306,7 +306,7 @@ public class CBD {
     }
     {
       sb.setLength(0); // truncate.
-      sb.append("BNodes(t-1): (" + bnodes_tm1.size() + ")\n");
+      sb.append("BNodes(t-1): (").append(bnodes_tm1.size()).append(")\n");
       for (IV<?, ?> iv : bnodes_tm1) {
         sb.append(iv.toString());
         sb.append("\n");
@@ -315,7 +315,7 @@ public class CBD {
     }
     if (newBnodes != null) {
       sb.setLength(0); // truncate.
-      sb.append("BNodes(new): (" + newBnodes.size() + ")\n");
+      sb.append("BNodes(new): (").append(newBnodes.size()).append(")\n");
       for (IV<?, ?> iv : newBnodes) {
         sb.append(iv.toString());
         sb.append("\n");

@@ -1091,9 +1091,9 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

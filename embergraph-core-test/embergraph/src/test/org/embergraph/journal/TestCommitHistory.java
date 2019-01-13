@@ -80,7 +80,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
    *
    * @throws IOException
    */
-  public void test_behaviorBeforeAnythingIsCommitted() throws IOException {
+  public void test_behaviorBeforeAnythingIsCommitted() {
 
     final Journal journal = new Journal(getProperties());
 
@@ -258,7 +258,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
    *
    * @throws IOException
    */
-  public void test_commitRecordIndex_find() throws IOException {
+  public void test_commitRecordIndex_find() {
 
     final Properties props = getProperties();
     props.setProperty(

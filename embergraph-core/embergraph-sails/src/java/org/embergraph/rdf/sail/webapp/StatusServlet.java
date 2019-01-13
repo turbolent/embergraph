@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -217,7 +218,6 @@ public class StatusServlet extends EmbergraphRDFServlet {
      */
     doGet(req, resp);
 
-    return;
   }
 
   /*
@@ -598,10 +598,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
             namespaces = new LinkedList<>();
 
-            for (String namespace : a) {
-
-              namespaces.add(namespace);
-            }
+            namespaces.addAll(Arrays.asList(a));
           }
         }
 
@@ -1369,22 +1366,19 @@ public class StatusServlet extends EmbergraphRDFServlet {
    * @return The map.
    */
   private <T> TreeMap<Long, T> newQueryMap() {
+    /*
+     * Comparator puts the entries into descending order by the query execution time (longest
+     * running queries are first).
+     */
     return new TreeMap<>(
-        new Comparator<Long>() {
-          /*
-           * Comparator puts the entries into descending order by the query execution time (longest
-           * running queries are first).
-           */
-          @Override
-          public int compare(final Long o1, final Long o2) {
-            if (o1.longValue() < o2.longValue()) {
-              return 1;
-            }
-            if (o1.longValue() > o2.longValue()) {
-              return -1;
-            }
-            return 0;
+        (o1, o2) -> {
+          if (o1.longValue() < o2.longValue()) {
+            return 1;
           }
+          if (o1.longValue() > o2.longValue()) {
+            return -1;
+          }
+          return 0;
         });
   }
 

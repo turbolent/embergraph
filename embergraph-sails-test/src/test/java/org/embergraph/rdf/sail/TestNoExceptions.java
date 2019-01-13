@@ -129,7 +129,7 @@ public class TestNoExceptions extends QuadsTestCase {
    * @throws IOException
    */
   public void test_filterSubselect737()
-      throws Exception, TokenMgrError, ParseException, IOException {
+      throws Exception, TokenMgrError {
     optimizeQuery("filterSubselect737");
   }
 
@@ -172,7 +172,7 @@ public class TestNoExceptions extends QuadsTestCase {
    * @throws IOException
    */
   public void test_nestedSubselectsWithUnion737()
-      throws Exception, TokenMgrError, ParseException, IOException {
+      throws Exception, TokenMgrError {
     optimizeQuery("nestedSubselectsWithUnion737");
   }
 
@@ -188,8 +188,7 @@ public class TestNoExceptions extends QuadsTestCase {
   }
 
   private void executeQuery(final SailRepository repo, final String query)
-      throws RepositoryException, MalformedQueryException, QueryEvaluationException,
-          RDFParseException, IOException, RDFHandlerException {
+      throws RepositoryException, MalformedQueryException, QueryEvaluationException {
     try {
       repo.initialize();
       final RepositoryConnection conn = repo.getConnection();

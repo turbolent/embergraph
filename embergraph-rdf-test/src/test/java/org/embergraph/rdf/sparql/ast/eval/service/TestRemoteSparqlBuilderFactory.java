@@ -110,7 +110,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * A simple test with nothing bound and NO source solution. This can be handled by either {@link
    * IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_001() throws Exception {
+  public void test_service_001() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -144,7 +144,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
 
     final List<BindingSet> bindingSets = new LinkedList<>();
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -171,7 +171,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * A simple test with nothing bound and a single <em>empty</em> source solution. This can be
    * handled by either {@link IRemoteSparqlQueryBuilder} .
    */
-  public void test_service_001b() throws Exception {
+  public void test_service_001b() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -208,7 +208,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(new MapBindingSet());
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -235,7 +235,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * A test where a single fully bound triple pattern is presented. This can be handled by either
    * {@link IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_002() throws Exception {
+  public void test_service_002() {
 
     /*
      * Resolve IVs that we will use below.
@@ -294,7 +294,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -323,7 +323,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * This test does NOT use blank nodes in the BINDINGS. This can be handled by either {@link
    * IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_003() throws Exception {
+  public void test_service_003() {
 
     /*
      * Resolve IVs that we will use below.
@@ -400,7 +400,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -428,7 +428,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * SERVICE. In this test the blank nodes are not correlated so we do not need to impose a FILTER
    * on the remote service. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_004() throws Exception {
+  public void test_service_004() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -470,7 +470,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -498,7 +498,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_005() throws Exception {
+  public void test_service_005() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -547,7 +547,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -579,7 +579,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    * accomplish this since the predicate can not be a blank node. This can be handled by either
    * {@link IRemoteSparqlQueryBuilder}.
    */
-  public void test_service_006() throws Exception {
+  public void test_service_006() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -633,7 +633,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -663,7 +663,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    *
    * <p>This case is only handled by the {@link RemoteSparql10QueryBuilder}.
    */
-  public void test_service_007() throws Exception {
+  public void test_service_007() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -717,7 +717,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -758,7 +758,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
    *
    * <p>This case is only handled by the {@link RemoteSparql10QueryBuilder}.
    */
-  public void test_service_008() throws Exception {
+  public void test_service_008() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -815,7 +815,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 
@@ -846,7 +846,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  public void test_service_009() throws Exception {
+  public void test_service_009() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -887,7 +887,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final RemoteServiceOptions options = new RemoteServiceOptions();
 

@@ -133,7 +133,7 @@ public class CompactTask implements Callable<Journal> {
    *     {@link Journal} (if created) will have been closed. If you are backing up data, then be
    *     sure to shutdown the returned {@link Journal} so that it can release its resources.
    */
-  public Journal call() throws Exception {
+  public Journal call() {
 
     final Journal newJournal = createJournal();
 
@@ -330,7 +330,7 @@ public class CompactTask implements Callable<Journal> {
      * Creates and index on the {@link #newJournal}, copies the data from the index on the old
      * journal, and then registers the new index on the {@link #newJournal}.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 

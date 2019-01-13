@@ -689,7 +689,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
       }
     }
 
-    final EmbergraphStatement[] a = stmts.toArray(new EmbergraphStatement[stmts.size()]);
+    final EmbergraphStatement[] a = stmts.toArray(new EmbergraphStatement[0]);
 
     return a;
   }
@@ -809,7 +809,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
       stmts.add(spo);
     }
 
-    final EmbergraphStatement[] a = stmts.toArray(new EmbergraphStatement[stmts.size()]);
+    final EmbergraphStatement[] a = stmts.toArray(new EmbergraphStatement[0]);
 
     return a;
   }
@@ -934,8 +934,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
    * VarNode#isSolutionSet()}.
    */
   @Override
-  public final VarNode visit(final ASTSolutionsRef node, final Object data)
-      throws VisitorException {
+  public final VarNode visit(final ASTSolutionsRef node, final Object data) {
 
     final String name = node.getName();
 
@@ -947,22 +946,22 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
   }
 
   @Override
-  public DropEntailments visit(ASTDropEntailments node, Object data) throws VisitorException {
+  public DropEntailments visit(ASTDropEntailments node, Object data) {
     return new DropEntailments();
   }
 
   @Override
-  public CreateEntailments visit(ASTCreateEntailments node, Object data) throws VisitorException {
+  public CreateEntailments visit(ASTCreateEntailments node, Object data) {
     return new CreateEntailments();
   }
 
   @Override
-  public EnableEntailments visit(ASTEnableEntailments node, Object data) throws VisitorException {
+  public EnableEntailments visit(ASTEnableEntailments node, Object data) {
     return new EnableEntailments();
   }
 
   @Override
-  public DisableEntailments visit(ASTDisableEntailments node, Object data) throws VisitorException {
+  public DisableEntailments visit(ASTDisableEntailments node, Object data) {
     return new DisableEntailments();
   }
 }

@@ -340,8 +340,10 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
       final boolean[] b = ModifiedEnum.toBooleans(modified, n);
 
       int onCount = 0;
-      for (int i = 0; i < b.length; i++) {
-        if (b[i]) onCount++;
+      for (boolean b1 : b) {
+        if (b1) {
+          onCount++;
+        }
       }
 
       final ResultBitBuffer rbb = new ResultBitBuffer(b.length, b, onCount);

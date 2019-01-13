@@ -1094,7 +1094,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         @SuppressWarnings("unchecked")
         @Override
-        public Void call() throws Exception {
+        public Void call() {
 
           final Iterator<IBindingSet> itr =
               new Striterator(

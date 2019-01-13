@@ -96,7 +96,7 @@ public class TestPredicateAccessPath extends TestCase2 {
 
   R rel;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -131,7 +131,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     assertNotNull(rel);
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (jnl != null) {
       jnl.destroy();

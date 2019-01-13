@@ -76,15 +76,14 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
       @Override
       public String getQuery(
           final ServiceCallCreateParams createParams, final ServiceParams serviceParams) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n");
-        sb.append("PREFIX :     <http://example.org/book/> \n");
-        sb.append("PREFIX ns:   <http://example.org/ns#> \n");
-        sb.append("SELECT ?book ?title ?price { \n");
-        sb.append("  ?book dc:title ?title ; \n");
-        sb.append("  ns:price ?price . \n");
-        sb.append("} \n");
-        return sb.toString();
+        String sb = "PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n"
+            + "PREFIX :     <http://example.org/book/> \n"
+            + "PREFIX ns:   <http://example.org/ns#> \n"
+            + "SELECT ?book ?title ?price { \n"
+            + "  ?book dc:title ?title ; \n"
+            + "  ns:price ?price . \n"
+            + "} \n";
+        return sb;
       }
     }
 
@@ -140,16 +139,15 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
 
         final URI val = serviceParams.getAsURI(new URIImpl("http://example.org/book/book"));
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n");
-        sb.append("PREFIX :     <http://example.org/book/> \n");
-        sb.append("PREFIX ns:   <http://example.org/ns#> \n");
-        sb.append("SELECT ?book ?title ?price { \n");
-        sb.append("  BIND( <" + val.stringValue() + "> as ?book ) . \n");
-        sb.append("  ?book dc:title ?title ; \n");
-        sb.append("  ns:price ?price . \n");
-        sb.append("} \n");
-        return sb.toString();
+        String sb = "PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n"
+            + "PREFIX :     <http://example.org/book/> \n"
+            + "PREFIX ns:   <http://example.org/ns#> \n"
+            + "SELECT ?book ?title ?price { \n"
+            + "  BIND( <" + val.stringValue() + "> as ?book ) . \n"
+            + "  ?book dc:title ?title ; \n"
+            + "  ns:price ?price . \n"
+            + "} \n";
+        return sb;
       }
     }
 
@@ -207,17 +205,14 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
 
         final URI val = serviceParams.getAsURI(new URIImpl("http://example.org/book/book"));
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n");
-        sb.append("PREFIX :     <http://example.org/book/> \n");
-        sb.append("PREFIX ns:   <http://example.org/ns#> \n");
-        sb.append("SELECT ?book ?title ?price { \n");
-        sb.append("  BIND( <" + val.stringValue() + "> as ?book ) . \n");
-        sb.append("  ?book dc:title ?title ; \n");
-        sb.append("  ns:price ?price . \n");
-        sb.append("} \n");
-
-        final String queryStr = sb.toString();
+        final String queryStr = "PREFIX dc:   <http://purl.org/dc/elements/1.1/> \n"
+            + "PREFIX :     <http://example.org/book/> \n"
+            + "PREFIX ns:   <http://example.org/ns#> \n"
+            + "SELECT ?book ?title ?price { \n"
+            + "  BIND( <" + val.stringValue() + "> as ?book ) . \n"
+            + "  ?book dc:title ?title ; \n"
+            + "  ns:price ?price . \n"
+            + "} \n";
 
         final String baseURI = createParams.getServiceURI().stringValue();
 

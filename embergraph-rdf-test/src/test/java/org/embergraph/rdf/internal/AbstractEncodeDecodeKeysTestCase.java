@@ -79,9 +79,9 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
     {
       keyBuilder.reset();
 
-      for (int i = 0; i < e.length; i++) {
+      for (IV<?, ?> iv : e) {
 
-        e[i].encode(keyBuilder);
+        iv.encode(keyBuilder);
       }
 
       key = keyBuilder.getKey();

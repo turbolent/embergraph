@@ -51,7 +51,7 @@ public class RWWriteCacheService extends WriteCacheService implements IWriteCach
       final IReopenChannel<? extends Channel> opener,
       final Quorum quorum,
       final IBackingReader reader)
-      throws InterruptedException, IOException {
+      throws InterruptedException {
 
     super(
         nbuffers,

@@ -324,17 +324,11 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getSimpleName());
-
-    sb.append("{ ");
-
-    sb.append(Arrays.toString(getSources()));
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getSimpleName()
+        + "{ "
+        + Arrays.toString(getSources())
+        + "}";
+    return sb;
   }
 
   protected void assertNotReadOnly() {

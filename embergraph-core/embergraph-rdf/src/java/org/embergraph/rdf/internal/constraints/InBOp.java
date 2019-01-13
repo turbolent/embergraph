@@ -48,10 +48,7 @@ public abstract class InBOp extends XSDBooleanIVValueExpression {
 
     args[0] = var;
 
-    for (int i = 0; i < set.length; i++) {
-
-      args[i + 1] = set[i];
-    }
+    System.arraycopy(set, 0, args, 1, set.length);
 
     return args;
   }

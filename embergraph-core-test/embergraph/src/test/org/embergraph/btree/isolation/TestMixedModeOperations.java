@@ -52,7 +52,7 @@ public class TestMixedModeOperations extends AbstractBTreeTestCase {
     super(name);
   }
 
-  public void test_mixedOps() throws IOException {
+  public void test_mixedOps() {
 
     final Properties properties = new Properties();
 

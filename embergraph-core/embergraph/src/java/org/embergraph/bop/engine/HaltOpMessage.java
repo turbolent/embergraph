@@ -73,14 +73,14 @@ public class HaltOpMessage implements Externalizable, IHaltOpMessage {
 
   public String toString() {
     final StringBuilder sb = new StringBuilder(getClass().getName());
-    sb.append("{queryId=" + queryId);
-    sb.append(",bopId=" + bopId);
-    sb.append(",partitionId=" + partitionId);
-    sb.append(",serviceId=" + serviceId);
-    sb.append(",sinkChunksOut=" + sinkMessagesOut);
-    sb.append(",altSinkChunksOut=" + altSinkMessagesOut);
-    sb.append(",stats=" + stats);
-    if (cause != null) sb.append(",cause=" + cause);
+    sb.append("{queryId=").append(queryId);
+    sb.append(",bopId=").append(bopId);
+    sb.append(",partitionId=").append(partitionId);
+    sb.append(",serviceId=").append(serviceId);
+    sb.append(",sinkChunksOut=").append(sinkMessagesOut);
+    sb.append(",altSinkChunksOut=").append(altSinkMessagesOut);
+    sb.append(",stats=").append(stats);
+    if (cause != null) sb.append(",cause=").append(cause);
     sb.append("}");
     return sb.toString();
   }

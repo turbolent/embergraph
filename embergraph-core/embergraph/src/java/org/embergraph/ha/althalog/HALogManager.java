@@ -287,19 +287,15 @@ public class HALogManager {
 
   private static File[] logFiles(final File dir) {
     return dir.listFiles(
-        new FilenameFilter() {
+        (dir1, name) -> {
 
-          @Override
-          public boolean accept(File dir, String name) {
+          if (new File(dir1, name).isDirectory()) {
 
-            if (new File(dir, name).isDirectory()) {
-
-              // Allow recursion through directories.
-              return true;
-            }
-
-            return name.endsWith(IHALogReader.HA_LOG_EXT);
+            // Allow recursion through directories.
+            return true;
           }
+
+          return name.endsWith(IHALogReader.HA_LOG_EXT);
         });
   }
 

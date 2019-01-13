@@ -306,7 +306,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     }
 
     if (timeout != Long.MAX_VALUE) {
-      sb.append(" [timeout=" + timeout + "ms]");
+      sb.append(" [timeout=").append(timeout).append("ms]");
     }
 
     if (getGraphPattern() != null) {
@@ -358,14 +358,14 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     final IVariableOrConstant<?> serviceRef = getServiceRef().getValueExpression();
 
     URI serviceUri = null; // will be set if there is a URI
-    if (serviceRef != null && serviceRef instanceof IConstant) {
+    if (serviceRef instanceof IConstant) {
       final IConstant<?> serviceRefConst = (IConstant<?>) serviceRef;
       final Object val = serviceRefConst.get();
 
       if (val instanceof TermId<?>) {
         final TermId<?> valTerm = (TermId<?>) val;
         final EmbergraphValue bdVal = valTerm.getValue();
-        if (bdVal != null && bdVal instanceof URI) {
+        if (bdVal instanceof URI) {
           serviceUri = (URI) bdVal;
         }
       }

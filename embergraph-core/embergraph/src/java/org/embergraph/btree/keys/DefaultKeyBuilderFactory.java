@@ -106,21 +106,13 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
   @Override
   public String toString() {
 
-    StringBuilder sb = new StringBuilder(getClass().getName());
-
-    sb.append("{ initialCapacity=" + initialCapacity);
-
-    sb.append(", collator=" + collator);
-
-    sb.append(", locale=" + locale);
-
-    sb.append(", strength=" + strength);
-
-    sb.append(", decomposition=" + decompositionMode);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getName() + "{ initialCapacity=" + initialCapacity
+        + ", collator=" + collator
+        + ", locale=" + locale
+        + ", strength=" + strength
+        + ", decomposition=" + decompositionMode
+        + "}";
+    return sb;
   }
 
   /*

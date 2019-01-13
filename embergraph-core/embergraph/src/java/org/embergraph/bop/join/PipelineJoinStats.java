@@ -124,8 +124,8 @@ public class PipelineJoinStats extends BaseJoinStats {
 
   @Override
   protected void toString(final StringBuilder sb) {
-    sb.append(",inputSolutions=" + inputSolutions.get());
-    sb.append(",outputSolutions=" + outputSolutions.get());
-    sb.append(",joinHitRatio=" + getJoinHitRatio());
+    sb.append(",inputSolutions=").append(inputSolutions.get());
+    sb.append(",outputSolutions=").append(outputSolutions.get());
+    sb.append(",joinHitRatio=").append(getJoinHitRatio());
   }
 }

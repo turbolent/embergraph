@@ -74,7 +74,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
    * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
    *     fatal exception)
    */
-  public void test_DataLoader_ignoreFailures01() throws IOException {
+  public void test_DataLoader_ignoreFailures01() {
 
     boolean ok = false;
 
@@ -148,7 +148,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
    * @see BLZG-1531 (Add option to make the DataLoader robust to files that cause rio to throw a
    *     fatal exception)
    */
-  public void test_DataLoader_ignoreFailures03() throws IOException {
+  public void test_DataLoader_ignoreFailures03() {
 
     final AbstractTripleStore store = getStore();
 
@@ -379,12 +379,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
             null /* baseURI */,
             RDFFormat.TURTLE,
             null /* defaultGraph */,
-            new FilenameFilter() {
-              @Override
-              public boolean accept(File dir, String name) {
-                return name.endsWith(".ttl");
-              }
-            });
+            (dir, name) -> name.endsWith(".ttl"));
       }
 
       // Verify post-conditions in the tmp directory.

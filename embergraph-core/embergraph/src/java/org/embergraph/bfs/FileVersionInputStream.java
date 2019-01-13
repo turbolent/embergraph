@@ -168,7 +168,7 @@ public class FileVersionInputStream extends InputStream {
     return true;
   }
 
-  public int read() throws IOException {
+  public int read() {
 
     if (b == null) {
 
@@ -194,7 +194,7 @@ public class FileVersionInputStream extends InputStream {
   }
 
   /** Overriden for greater efficiency. */
-  public int read(byte[] b, int off, int len) throws IOException {
+  public int read(byte[] b, int off, int len) {
 
     if (b == null) {
 

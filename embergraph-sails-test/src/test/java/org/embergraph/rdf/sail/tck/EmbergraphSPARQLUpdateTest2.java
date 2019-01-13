@@ -331,7 +331,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
   }
 
   //    @Override
-  protected Repository newRepository() throws RepositoryException {
+  protected Repository newRepository() {
 
     final Properties props = getProperties();
 
@@ -403,7 +403,6 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Build the solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
       /*
        * FIXME test variants w/ and w/o embedded sub-select and verify the
@@ -425,38 +424,37 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
        * SPARQL does not allow solution modifiers on the top-level WHERE clause
        * for INSERT/DELETE+WHERE.
        */
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("INSERT INTO %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE { SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  ?x rdf:type foaf:Person .\n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("}\n");
-      sb.append("ORDER BY ?name\n");
-      sb.append("}");
 
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "INSERT INTO %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE { SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  ?x rdf:type foaf:Person .\n"
+          + "  ?x rdfs:label ?name .\n"
+          + "}\n"
+          + "ORDER BY ?name\n"
+          + "}";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Query it.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
       //            sb.append("SELECT *\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet1 .\n");
-      sb.append("  ?x rdfs:label \"Mike\" .\n");
-      sb.append("}\n");
 
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet1 .\n"
+          + "  ?x rdfs:label \"Mike\" .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_insertIntoSolutions_01.srx");
@@ -483,52 +481,46 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Build the solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("INSERT INTO %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  ?x rdf:type foaf:Person .\n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "INSERT INTO %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  ?x rdf:type foaf:Person .\n"
+          + "  ?x rdfs:label ?name .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Remove some solutions.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("DELETE FROM %namedSet1\n");
-      sb.append("SELECT * \n");
-      sb.append("WHERE { \n");
-      sb.append("   BIND(<http://www.embergraph.org/Mike> as ?x)\n");
-      sb.append("   BIND(\"Mike\" as ?name)\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "DELETE FROM %namedSet1\n"
+          + "SELECT * \n"
+          + "WHERE { \n"
+          + "   BIND(<http://www.embergraph.org/Mike> as ?x)\n"
+          + "   BIND(\"Mike\" as ?name)\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Query it.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet1 .\n");
-      sb.append("}\n");
-
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet1 .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_deleteFromSolutions_01.srx");
@@ -555,52 +547,46 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Build the solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("INSERT INTO %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  ?x rdf:type foaf:Person .\n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "INSERT INTO %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  ?x rdf:type foaf:Person .\n"
+          + "  ?x rdfs:label ?name .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Remove some solutions.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("DELETE FROM %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE { \n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("  FILTER (?x = <http://www.embergraph.org/Mike> ) .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "DELETE FROM %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE { \n"
+          + "  ?x rdfs:label ?name .\n"
+          + "  FILTER (?x = <http://www.embergraph.org/Mike> ) .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Query it.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet1 .\n");
-      sb.append("}\n");
-
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet1 .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_deleteFromSolutions_02.srx");
@@ -627,52 +613,46 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Build the solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("INSERT INTO %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  ?x rdf:type foaf:Person .\n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "INSERT INTO %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  ?x rdf:type foaf:Person .\n"
+          + "  ?x rdfs:label ?name .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Remove some solutions.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("DELETE FROM %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE { \n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "DELETE FROM %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE { \n"
+          + "  ?x rdfs:label ?name .\n"
+          + "  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Query it.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet1 .\n");
-      sb.append("}\n");
-
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet1 .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_deleteFromSolutions_03.srx");
@@ -708,54 +688,48 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Build the solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("INSERT INTO %namedSet1\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  ?x rdf:type foaf:Person .\n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "INSERT INTO %namedSet1\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  ?x rdf:type foaf:Person .\n"
+          + "  ?x rdfs:label ?name .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Remove some solutions, inserting them into a different solution set.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("DELETE FROM %namedSet1\n");
-      sb.append("  SELECT ?x ?name\n");
-      sb.append("INSERT INTO %namedSet2\n");
-      sb.append("  SELECT ?x ?name\n"); // TODO Variant with different projection.
-      sb.append("WHERE { \n");
-      sb.append("  ?x rdfs:label ?name .\n");
-      sb.append("  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n");
-      sb.append("}\n");
-
-      con.prepareUpdate(QueryLanguage.SPARQL, sb.toString()).execute();
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "DELETE FROM %namedSet1\n"
+          + "  SELECT ?x ?name\n"
+          + "INSERT INTO %namedSet2\n"
+          + "  SELECT ?x ?name\n" // TODO Variant with different projection.
+          + "WHERE { \n"
+          + "  ?x rdfs:label ?name .\n"
+          + "  FILTER (?x = <http://www.embergraph.org/Bryan> ) .\n"
+          + "}\n";
+      con.prepareUpdate(QueryLanguage.SPARQL, sb).execute();
     }
 
     // Query the solution set from which the solutions were removed.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet1 .\n");
-      sb.append("}\n");
-
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet1 .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_deleteInsertSolutions_01a.srx");
@@ -765,18 +739,16 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
     // Query the solution set into which the solutions were inserted.
     {
-      final StringBuilder sb = new StringBuilder();
 
-      sb.append("PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-      sb.append("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
-      sb.append("PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n");
-      sb.append("SELECT ?x ?name\n");
-      sb.append("WHERE {\n");
-      sb.append("  INCLUDE %namedSet2 .\n");
-      sb.append("}\n");
-
+      String sb = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+          + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+          + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+          + "SELECT ?x ?name\n"
+          + "WHERE {\n"
+          + "  INCLUDE %namedSet2 .\n"
+          + "}\n";
       final TupleQueryResult ret =
-          con.prepareTupleQuery(QueryLanguage.SPARQL, sb.toString()).evaluate();
+          con.prepareTupleQuery(QueryLanguage.SPARQL, sb).evaluate();
 
       final TupleQueryResult expected =
           readExpectedTupleQueryResult(packagePath + "test_deleteInsertSolutions_01b.srx");
@@ -879,7 +851,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
    * does not exist.
    */
   public void test_dropSolutionSet_01()
-      throws UpdateExecutionException, RepositoryException, MalformedQueryException {
+      throws RepositoryException, MalformedQueryException {
 
     if (!isSolutionSetUpdateEnabled()) {
       /*
@@ -918,7 +890,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
    * does not exist.
    */
   public void test_clearSolutionSet_01()
-      throws UpdateExecutionException, RepositoryException, MalformedQueryException {
+      throws RepositoryException, MalformedQueryException {
 
     if (!isSolutionSetUpdateEnabled()) {
       /*

@@ -38,7 +38,6 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
-import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;

@@ -68,7 +68,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
    *
    * @todo test ctor in all quadrants.
    */
-  public void test_ctor() throws ParseException {
+  public void test_ctor() {
     CoordinateDMS c =
         new CoordinateDMS(
             32,

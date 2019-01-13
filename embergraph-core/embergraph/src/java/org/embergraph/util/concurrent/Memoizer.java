@@ -60,11 +60,7 @@ public abstract class Memoizer<A, V> implements Computable<A, V> {
       boolean willRun = false;
       if (f == null) {
         final Callable<V> eval =
-            new Callable<V>() {
-              public V call() throws InterruptedException {
-                return c.compute(arg);
-              }
-            };
+            () -> c.compute(arg);
         final FutureTask<V> ft = new FutureTask<>(eval);
         f = cache.putIfAbsent(arg, ft);
         if (f == null) {

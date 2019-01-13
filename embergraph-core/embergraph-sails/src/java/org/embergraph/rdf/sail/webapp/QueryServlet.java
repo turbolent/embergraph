@@ -280,7 +280,6 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
       doServiceDescription(req, resp);
 
-      return;
     }
   }
 
@@ -300,8 +299,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/500
    */
-  private void doServiceDescription(final HttpServletRequest req, final HttpServletResponse resp)
-      throws IOException {
+  private void doServiceDescription(final HttpServletRequest req, final HttpServletResponse resp) {
 
     /*
      * Protect the entire operation with a transaction.
@@ -1945,8 +1943,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
             nshards.incrementAndGet();
 
-            sb.append("\nhost=" + hostname);
-            sb.append(", locator=" + loc);
+            sb.append("\nhost=").append(hostname);
+            sb.append(", locator=").append(loc);
 
             nlocators++;
           } // while(itr.hasNext())
@@ -1989,9 +1987,9 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
             for (Map.Entry<String, AtomicInteger> e : hosts.entrySet()) {
 
-              sb.append("\nhost=" + e.getKey());
+              sb.append("\nhost=").append(e.getKey());
 
-              sb.append(", #shards=" + e.getValue());
+              sb.append(", #shards=").append(e.getValue());
             }
 
             current.node("H2", "hosts").node("pre", sb.toString());

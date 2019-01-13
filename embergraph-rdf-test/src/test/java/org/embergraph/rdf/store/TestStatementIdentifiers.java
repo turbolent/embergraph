@@ -156,9 +156,9 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
       /*
        * Verify statement identifiers were assigned.
        */
-      for (int i = 0; i < stmts.length; i++) {
+      for (SPO stmt : stmts) {
 
-        final IV sid = stmts[i].getStatementIdentifier();
+        final IV sid = stmt.getStatementIdentifier();
 
         assertNotSame(NULL, sid);
 
@@ -167,7 +167,9 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
         assertFalse(sid.isURI());
         assertFalse(sid.isBNode());
 
-        if (log.isInfoEnabled()) log.info(stmts[i].toString(store) + " ::: " + stmts[i].toString());
+        if (log.isInfoEnabled()) {
+          log.info(stmt.toString(store) + " ::: " + stmt.toString());
+        }
       }
 
       /*

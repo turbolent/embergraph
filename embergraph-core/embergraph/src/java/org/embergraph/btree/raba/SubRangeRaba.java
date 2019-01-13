@@ -176,7 +176,7 @@ public class SubRangeRaba implements IRaba {
   }
 
   @Override
-  public int add(DataInput in, int len) throws IOException {
+  public int add(DataInput in, int len) {
     throw new UnsupportedOperationException();
   }
 

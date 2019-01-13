@@ -862,13 +862,9 @@ public abstract class AbstractNode<
 
       merge(rightSibling, true);
 
-      return;
-
     } else if (leftSibling != null) {
 
       merge(leftSibling, false);
-
-      return;
 
     } else {
 

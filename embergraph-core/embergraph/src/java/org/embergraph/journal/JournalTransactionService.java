@@ -191,7 +191,7 @@ public abstract class JournalTransactionService extends AbstractHATransactionSer
   }
 
   @Override
-  protected long commitImpl(final TxState state) throws ExecutionException, InterruptedException {
+  protected long commitImpl(final TxState state) {
 
     if (state.isReadOnly()) {
 

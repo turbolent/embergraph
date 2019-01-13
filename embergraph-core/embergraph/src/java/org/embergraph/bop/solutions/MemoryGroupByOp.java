@@ -295,7 +295,7 @@ public class MemoryGroupByOp extends GroupByOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> itr = context.getSource();
 
@@ -531,7 +531,6 @@ public class MemoryGroupByOp extends GroupByOp {
           expr.get(aggregates);
         } catch (SparqlTypeErrorException ex) {
           TypeErrorLog.handleTypeError(ex, expr, stats);
-          continue;
         } catch (IllegalArgumentException ex) {
           /*
            * Note: This is a hack turning an IllegalArgumentException
@@ -541,7 +540,6 @@ public class MemoryGroupByOp extends GroupByOp {
            * trying to drop the entire group!)
            */
           TypeErrorLog.handleTypeError(ex, expr, stats);
-          continue;
         }
       }
 

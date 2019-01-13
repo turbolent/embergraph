@@ -117,13 +117,7 @@ public class TestCounterSetHTTPDServer extends TestCase {
     final CounterSet counterSet = new CounterSet();
 
     final ICounterSetAccess access =
-        new ICounterSetAccess() {
-
-          public CounterSet getCounters() {
-
-            return counterSet;
-          }
-        };
+        () -> counterSet;
 
     final DummyEventReportingService service = new DummyEventReportingService();
 

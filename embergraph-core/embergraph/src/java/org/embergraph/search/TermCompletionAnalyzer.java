@@ -146,7 +146,7 @@ public class TermCompletionAnalyzer extends Analyzer {
     }
 
     @Override
-    public boolean incrementToken() throws IOException {
+    public boolean incrementToken() {
       if (next()) {
         if (afterDiscard != null) {
           int lg = afterDiscard.length();

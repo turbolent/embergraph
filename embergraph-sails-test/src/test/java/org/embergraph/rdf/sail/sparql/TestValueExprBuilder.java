@@ -64,7 +64,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * SELECT (?s as ?x) where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_bind() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_bind() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (?s as ?x) where {?s ?p ?o}";
 
@@ -88,7 +88,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_math_expr()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (?s + ?o as ?x) where {?s ?p ?o}";
 
@@ -120,7 +120,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_compare_expr()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (?s < ?o as ?x) where {?s ?p ?o}";
 
@@ -145,7 +145,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
   }
 
   /** Simple unit test for a value expression which is a URI. */
-  public void test_select_uri() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_uri() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ( <http://xmlns.com/foaf/0.1/> as ?x) where {?s ?p ?o}";
 
@@ -170,7 +170,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * <p>Note: a bare blank node may not appear in the SELECT expression with (bnode as ?x) so we
    * have to test this somewhere else in the syntax of the query.
    */
-  public void test_select_bnode() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_bnode() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p _:a1}";
 
@@ -207,7 +207,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
   }
 
   /** Simple unit test for a value expression which is a plain literal. */
-  public void test_select_literal() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_literal() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (\"abc\" as ?x) where {?s ?p ?o}";
 
@@ -226,7 +226,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
   }
 
   /** Simple unit test for a value expression which is a <code>xsd:int</code>. */
-  public void test_select_xsd_int() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_xsd_int() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select (\"12\"^^<http://www.w3.org/2001/XMLSchema#int> as ?x) where {?s ?p ?o}";
@@ -253,7 +253,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_count_foo()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (count(?s) as ?x) where {?s ?p ?o}";
 
@@ -284,7 +284,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_count_distinct_foo()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (count(distinct ?s) as ?x) where {?s ?p ?o}";
 
@@ -317,7 +317,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_count_star()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (count(*) as ?x) where {?s ?p ?o}";
 
@@ -348,7 +348,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_count_distinct_star()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (count(distinct *) as ?x) where {?s ?p ?o}";
 
@@ -381,7 +381,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_function_call()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (<" + FunctionRegistry.ADD + ">(?s,?o) as ?x) where {?s ?p ?o}";
 
@@ -412,7 +412,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * SELECT (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_coalesce() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_coalesce() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (coalesce(?s,?p,?o) as ?x) where {?s ?p ?o}";
 
@@ -445,7 +445,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_if_then_else()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (if(?s,?p,?o) as ?x) where {?s ?p ?o}";
 
@@ -477,7 +477,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * SELECT (regex(?o, "^ali") as ?x) where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_regex() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_regex() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ( regex(?o,\"^ali\") as ?x) where {?s ?p ?o}";
 
@@ -509,7 +509,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_regex_flags()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ( regex(?o,\"^ali\", \"i\") as ?x) where {?s ?p ?o}";
 
@@ -544,7 +544,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * @see http://www.openrdf.org/issues/browse/SES-818
    */
   public void test_select_foo_IN_none()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (?s IN() as ?x) where {?s ?p ?o}";
 
@@ -577,7 +577,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
    * @see http://www.openrdf.org/issues/browse/SES-818
    */
   public void test_select_foo_IN_bar()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select (?s IN(?p,?o) as ?x) where {?s ?p ?o}";
 

@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.bop.engine;
 
 import java.rmi.RemoteException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -115,10 +116,7 @@ public class TestRunState extends TestCase2 {
 
     final Set<T> s = new LinkedHashSet<>();
 
-    for (T x : a) {
-
-      s.add(x);
-    }
+    s.addAll(Arrays.asList(a));
 
     return s;
   }
@@ -187,7 +185,7 @@ public class TestRunState extends TestCase2 {
 
       final Object[] b = vals[i];
 
-      for (Object o : b) set.add(o);
+      set.addAll(Arrays.asList(b));
 
       m.put(ids[i], set);
     }
@@ -1234,7 +1232,7 @@ public class TestRunState extends TestCase2 {
    * @todo Write a unit test verifies that attempting to start an operator after the query is done
    *     is an error.
    */
-  public void test_startQueryTwice() throws TimeoutException, ExecutionException {
+  public void test_startQueryTwice() throws TimeoutException {
 
     final UUID serviceId = UUID.randomUUID();
 
@@ -1305,7 +1303,7 @@ public class TestRunState extends TestCase2 {
    * @throws InterruptedException
    */
   public void test_deadline_startQ()
-      throws TimeoutException, ExecutionException, InterruptedException {
+      throws InterruptedException {
 
     final UUID serviceId = UUID.randomUUID();
 
@@ -1381,7 +1379,7 @@ public class TestRunState extends TestCase2 {
    * @throws InterruptedException
    */
   public void test_deadline_startOp()
-      throws TimeoutException, ExecutionException, InterruptedException {
+      throws TimeoutException, InterruptedException {
 
     final UUID serviceId = UUID.randomUUID();
 
@@ -1572,7 +1570,7 @@ public class TestRunState extends TestCase2 {
    * @see PipelineOp.Annotations#LAST_PASS
    */
   public void test_lastPassRequested()
-      throws TimeoutException, ExecutionException, InterruptedException {
+      throws TimeoutException, ExecutionException {
 
     final UUID serviceId = UUID.randomUUID();
 

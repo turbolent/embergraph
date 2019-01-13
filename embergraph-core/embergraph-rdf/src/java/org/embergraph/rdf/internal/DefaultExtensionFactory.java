@@ -52,9 +52,9 @@ public class DefaultExtensionFactory implements IExtensionFactory {
       // register the extensions, adding one extension per datatype config
       final List<GeoSpatialDatatypeConfiguration> datatypeConfigs =
           config.getGeoSpatialConfig().getDatatypeConfigs();
-      for (int i = 0; i < datatypeConfigs.size(); i++) {
+      for (GeoSpatialDatatypeConfiguration datatypeConfig : datatypeConfigs) {
         extensions.add(
-            new GeoSpatialLiteralExtension<EmbergraphLiteral>(resolver, datatypeConfigs.get(i)));
+            new GeoSpatialLiteralExtension<EmbergraphLiteral>(resolver, datatypeConfig));
       }
     }
 

@@ -512,7 +512,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
    * }
    * </pre>
    */
-  public void test_query_hints_03() throws Exception {
+  public void test_query_hints_03() {
 
     try {
 

@@ -138,7 +138,7 @@ public class CopyOp extends PipelineOp {
       this.context = context;
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       // source.
       final ICloseableIterator<IBindingSet[]> source = context.getSource();

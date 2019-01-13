@@ -122,7 +122,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
    *     example, if they use {@link AbstractFederation#shutdownNow()} then the {@link DataService}
    *     itself would be shutdown.
    */
-  public Future<? extends Object> submit(final Callable<? extends Object> task) {
+  public Future<?> submit(final Callable<?> task) {
 
     setupLoggingContext();
 

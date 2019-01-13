@@ -386,7 +386,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_query_hints_2() throws Exception {
+  public void test_query_hints_2() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -567,7 +567,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_query_hints_3() throws Exception {
+  public void test_query_hints_3() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -708,7 +708,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_query_hints_4() throws Exception {
+  public void test_query_hints_4() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -877,7 +877,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_query_hints_5() throws Exception {
+  public void test_query_hints_5() {
 
     /*
      * Note: DO NOT share structures in this test!!!!
@@ -1011,7 +1011,7 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
    *
    * @throws Exception
    */
-  public void test_query_hints_6() throws Exception {
+  public void test_query_hints_6() {
 
     /*
      * Note: DO NOT share structures in this test!!!!

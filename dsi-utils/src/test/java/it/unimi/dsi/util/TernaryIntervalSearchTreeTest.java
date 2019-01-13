@@ -309,16 +309,26 @@ public class TernaryIntervalSearchTreeTest extends TestCase {
     Collections.shuffle(c);
     TernaryIntervalSearchTree t = new TernaryIntervalSearchTree(c);
 
-    for (int i = 0; i < WORDS.length; i++) assertTrue(WORDS[i], t.containsKey(WORDS[i]));
+    for (String word2 : WORDS) {
+      assertTrue(word2, t.containsKey(word2));
+    }
     for (int i = 0; i < WORDS.length; i++) assertEquals(WORDS[i], t.list().get(i).toString());
 
-    for (int i = 0; i < WORDS.length; i++)
-      for (int j = 0; j < WORDS[i].length(); j++) {
-        String s = WORDS[i].substring(0, j + 1);
+    for (String word1 : WORDS) {
+      for (int j = 0; j < word1.length(); j++) {
+        String s = word1.substring(0, j + 1);
         int k, left, right;
-        for (k = 0; k < WORDS.length; k++) if (WORDS[k].startsWith(s)) break;
+        for (k = 0; k < WORDS.length; k++) {
+          if (WORDS[k].startsWith(s)) {
+            break;
+          }
+        }
         left = k;
-        for (; k < WORDS.length; k++) if (!WORDS[k].startsWith(s)) break;
+        for (; k < WORDS.length; k++) {
+          if (!WORDS[k].startsWith(s)) {
+            break;
+          }
+        }
         right = k - 1;
 
         assertEquals(
@@ -327,7 +337,11 @@ public class TernaryIntervalSearchTreeTest extends TestCase {
             t.rangeMap().get(s));
 
         s = s + " ";
-        for (k = 0; k < WORDS.length; k++) if (s.compareTo(WORDS[k]) < 0) break;
+        for (k = 0; k < WORDS.length; k++) {
+          if (s.compareTo(WORDS[k]) < 0) {
+            break;
+          }
+        }
 
         assertEquals(
             s,
@@ -336,24 +350,30 @@ public class TernaryIntervalSearchTreeTest extends TestCase {
 
         s = s.substring(0, s.length() - 1) + "~";
 
-        for (k = 0; k < WORDS.length; k++) if (s.compareTo(WORDS[k]) < 0) break;
+        for (k = 0; k < WORDS.length; k++) {
+          if (s.compareTo(WORDS[k]) < 0) {
+            break;
+          }
+        }
 
         assertEquals(s, Interval.valueOf(k - 1), t.getApproximatedInterval(s));
       }
+    }
 
     Collection<String> p = new ObjectRBTreeSet<>();
-    for (int i = 0; i < WORDS.length; i++)
-      for (int j = 0; j < WORDS[i].length(); j++) p.add(WORDS[i].substring(0, j + 1));
+    for (String word : WORDS) {
+      for (int j = 0; j < word.length(); j++) {
+        p.add(word.substring(0, j + 1));
+      }
+    }
     t = new TernaryIntervalSearchTree(p);
 
-    for (Iterator<String> i = p.iterator(); i.hasNext(); ) {
-      String s = i.next();
+    for (String s : p) {
       assertTrue(s, t.containsKey(s));
     }
 
     int j = 0;
-    for (Iterator<String> i = p.iterator(); i.hasNext(); ) {
-      String s = i.next();
+    for (String s : p) {
       assertEquals(s, t.list().get(j++).toString());
     }
   }

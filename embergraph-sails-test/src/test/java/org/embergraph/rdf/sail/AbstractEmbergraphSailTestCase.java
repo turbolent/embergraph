@@ -59,7 +59,7 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
   // ************************************************************
 
   /** Invoked from {@link TestCase#setUp()} for each test in the suite. */
-  protected void setUp(ProxyEmbergraphSailTestCase testCase) throws Exception {
+  protected void setUp(ProxyEmbergraphSailTestCase testCase) {
 
     begin = System.currentTimeMillis();
 

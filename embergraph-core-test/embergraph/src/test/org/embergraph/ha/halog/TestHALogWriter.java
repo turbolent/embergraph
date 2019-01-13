@@ -106,9 +106,9 @@ public class TestHALogWriter extends TestCase2 {
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 
@@ -691,17 +691,15 @@ public class TestHALogWriter extends TestCase2 {
 
         final Future<Void> f =
             executorService.submit(
-                new Callable<Void>() {
-                  public Void call() throws Exception {
-                    // should be immediately true.
-                    assertTrue(reader.hasMoreBuffers());
-                    // read data into reader's buffer.
-                    reader.processNextBuffer(rbuf);
-                    // should block until writer is closed.
-                    assertFalse(reader.hasMoreBuffers());
-                    // done - success.
-                    return null;
-                  }
+                () -> {
+                  // should be immediately true.
+                  assertTrue(reader.hasMoreBuffers());
+                  // read data into reader's buffer.
+                  reader.processNextBuffer(rbuf);
+                  // should block until writer is closed.
+                  assertFalse(reader.hasMoreBuffers());
+                  // done - success.
+                  return null;
                 });
 
         // Make sure the Futuer is blocked.
@@ -780,17 +778,15 @@ public class TestHALogWriter extends TestCase2 {
 
         final Future<Void> f =
             executorService.submit(
-                new Callable<Void>() {
-                  public Void call() throws Exception {
-                    // should be immediately true.
-                    assertTrue(reader.hasMoreBuffers());
-                    // read data into reader's buffer.
-                    reader.processNextBuffer(rbuf);
-                    // should block until writer is closed.
-                    assertFalse(reader.hasMoreBuffers());
-                    // done - success.
-                    return null;
-                  }
+                () -> {
+                  // should be immediately true.
+                  assertTrue(reader.hasMoreBuffers());
+                  // read data into reader's buffer.
+                  reader.processNextBuffer(rbuf);
+                  // should block until writer is closed.
+                  assertFalse(reader.hasMoreBuffers());
+                  // done - success.
+                  return null;
                 });
 
         // Make sure the Futuer is blocked.

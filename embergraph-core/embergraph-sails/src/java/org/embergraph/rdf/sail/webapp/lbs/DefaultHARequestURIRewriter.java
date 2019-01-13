@@ -35,8 +35,7 @@ public class DefaultHARequestURIRewriter implements IHARequestURIRewriter {
    * <p>This implementation is a NOP.
    */
   @Override
-  public void init(ServletConfig servletConfig, IIndexManager indexManager)
-      throws ServletException {}
+  public void init(ServletConfig servletConfig, IIndexManager indexManager) {}
 
   /*
    * {@inheritDoc}

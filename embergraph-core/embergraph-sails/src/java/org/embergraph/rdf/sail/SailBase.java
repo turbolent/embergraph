@@ -164,7 +164,7 @@ public abstract class SailBase implements Sail {
    * Do store-specific operations to initialize the store. The default implementation of this method
    * does nothing.
    */
-  protected void initializeInternal() throws SailException {}
+  protected void initializeInternal() {}
 
   public void shutDown() throws SailException {
     initializationLock.writeLock().lock();
@@ -221,7 +221,7 @@ public abstract class SailBase implements Sail {
   }
 
   /** Do store-specific operations to ensure proper shutdown of the store. */
-  protected abstract void shutDownInternal() throws SailException;
+  protected abstract void shutDownInternal();
 
   public SailConnection getConnection() throws SailException {
     initializationLock.readLock().lock();

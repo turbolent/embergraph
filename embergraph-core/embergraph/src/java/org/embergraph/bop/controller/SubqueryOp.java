@@ -332,7 +332,7 @@ public class SubqueryOp extends PipelineOp {
         this.parentContext = parentContext;
       }
 
-      public IRunningQuery call() throws Exception {
+      public IRunningQuery call() {
 
         /*
          * Binding set in which only the projected variables are

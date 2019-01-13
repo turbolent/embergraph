@@ -3576,7 +3576,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
               specialToken = (specialToken.next = matchedToken);
             }
           }
-          continue EOFLoop;
+          continue;
         }
       }
       int error_line = input_stream.getEndLine();

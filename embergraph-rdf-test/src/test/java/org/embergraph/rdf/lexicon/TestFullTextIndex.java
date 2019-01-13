@@ -229,7 +229,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
     return new LiteralImpl(s);
   }
 
-  public void test_fullTextIndex01() throws InterruptedException {
+  public void test_fullTextIndex01() {
 
     AbstractTripleStore store = getStore();
 
@@ -666,9 +666,9 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
             new StatementBuffer<>(
                 null /* focusStore */, store, terms.length /* capacity */, 0 /* queueCapacity */);
 
-        for (int i = 0; i < terms.length; i++) {
+        for (EmbergraphValue term : terms) {
 
-          buffer.add(s, p, terms[i]);
+          buffer.add(s, p, term);
         }
 
         buffer.flush();

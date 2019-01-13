@@ -96,7 +96,7 @@ class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
    * points and re-map the procedure across the newly determined split points.
    */
   @Override
-  protected void retry() throws Exception {
+  protected void retry() {
 
     synchronized (taskCountersByIndex) {
       taskCountersByIndex.redirectCount++;

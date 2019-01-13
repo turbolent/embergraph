@@ -49,7 +49,7 @@ public class TestGeoSpatialQueryIfGeospatialDisabled extends AbstractDataDrivenS
    * Submit a query and make sure it fails with proper exception if geospatial SERVCIE is not
    * enabled.
    */
-  public void testDocumentationBuiltin01() throws Exception {
+  public void testDocumentationBuiltin01() {
 
     try {
       new TestHelper(

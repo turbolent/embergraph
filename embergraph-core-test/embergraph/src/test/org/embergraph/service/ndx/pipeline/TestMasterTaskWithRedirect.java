@@ -454,7 +454,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
       }
 
       @Override
-      public Void call() throws Exception {
+      public Void call() {
 
         final KeyBuilder keyBuilder = new KeyBuilder(4);
 

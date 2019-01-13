@@ -446,7 +446,6 @@ public class FileChannelUtility {
              * during the read. We will continue to read if the
              * channel can be reopened.
              */
-            continue;
 
           } else if (InnerCause.isInnerCause(cause, ClosedChannelException.class)) {
 
@@ -457,7 +456,6 @@ public class FileChannelUtility {
              * FileChannel. We will continue to read if the channel
              * can be reopened.
              */
-            continue;
 
           } else {
 

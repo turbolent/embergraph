@@ -130,7 +130,7 @@ public class ICUVersionRecord implements Externalizable {
 
   private static final transient int CURRENT_VERSION = VERSION0;
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     final int version = in.readInt();
     switch (version) {
@@ -175,14 +175,13 @@ public class ICUVersionRecord implements Externalizable {
 
   /** A human readable representation of the data record. */
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass().getName());
-    sb.append("{icuVersion=" + icuVersion);
-    sb.append(",ucolRuntimeVersion=" + ucolRuntimeVersion);
-    sb.append(",ucolBuilderVersion=" + ucolBuilderVersion);
-    sb.append(",ucolTailoringsVersion=" + ucolTailoringsVersion);
-    sb.append("}");
-    return sb.toString();
+    String sb = getClass().getName()
+        + "{icuVersion=" + icuVersion
+        + ",ucolRuntimeVersion=" + ucolRuntimeVersion
+        + ",ucolBuilderVersion=" + ucolBuilderVersion
+        + ",ucolTailoringsVersion=" + ucolTailoringsVersion
+        + "}";
+    return sb;
   }
 
   public int hashCode() {

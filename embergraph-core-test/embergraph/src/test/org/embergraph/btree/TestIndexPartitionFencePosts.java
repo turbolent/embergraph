@@ -52,7 +52,7 @@ public class TestIndexPartitionFencePosts extends AbstractBTreeTestCase {
    *
    * @throws Exception
    */
-  public void test_onePartition() throws Exception {
+  public void test_onePartition() {
 
     final String name = "testIndex";
 

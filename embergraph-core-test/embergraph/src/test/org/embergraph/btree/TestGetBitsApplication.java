@@ -27,7 +27,7 @@ public class TestGetBitsApplication {
     doTestBits64("test_perf_getBits47", 47);
   }
 
-  static void doTestBits32(final String msg, final int bits) throws IOException {
+  static void doTestBits32(final String msg, final int bits) {
 
     final Random r = new Random();
 
@@ -80,7 +80,7 @@ public class TestGetBitsApplication {
     doAltTestBits64("test_perf_tstGetBits47", 47);
   }
 
-  static void doAltTestBits32(final String msg, final int bits) throws IOException {
+  static void doAltTestBits32(final String msg, final int bits) {
 
     final Random r = new Random();
 
@@ -117,7 +117,7 @@ public class TestGetBitsApplication {
         msg + " completed: " + runs + ", in " + (System.currentTimeMillis() - start) + "ms");
   }
 
-  static void doAltTestBits64(final String msg, final int bits) throws IOException {
+  static void doAltTestBits64(final String msg, final int bits) {
 
     final Random r = new Random();
 
@@ -154,7 +154,7 @@ public class TestGetBitsApplication {
         msg + " completed: " + runs + ", in " + (System.currentTimeMillis() - start) + "ms");
   }
 
-  static void doTestBits64(final String msg, final int bits) throws IOException {
+  static void doTestBits64(final String msg, final int bits) {
 
     final Random r = new Random();
 

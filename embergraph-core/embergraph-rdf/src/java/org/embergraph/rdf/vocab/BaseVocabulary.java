@@ -38,7 +38,6 @@ import org.embergraph.io.LongPacker;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
@@ -364,7 +363,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
    * the only access to the {@link Value}s is via {@link #get(Value)} and {@link
    * #getConstant(Value)}.
    */
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     if (val2iv != null) throw new IllegalStateException();
     if (iv2val != null) throw new IllegalStateException();

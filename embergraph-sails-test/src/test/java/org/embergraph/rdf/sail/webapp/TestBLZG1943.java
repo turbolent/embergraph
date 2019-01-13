@@ -103,14 +103,13 @@ public class TestBLZG1943 extends ProxyEmbergraphSailTestCase {
           i < 100;
           i++) { // repeat a couple of times to increase the chance for thread collisions
         // send update
-        final StringBuilder sb = new StringBuilder();
-        sb.append("PREFIX ogc: <http://www.opengis.net/ont/geosparql#> ");
-        sb.append(
-            "insert { ?s ogc:asWKT ?wkt } where { "
-                + "    ?s <http://lat> ?lat. ?s <http://lon> ?long. "
-                + "    bind(strdt(concat(\"POINT(\",str(?long),\" \",str(?lat),\")\"),ogc:wktLiteral) as ?wkt) }");
 
-        final Update update = conn.prepareUpdate(QueryLanguage.SPARQL, sb.toString());
+        String sb = "PREFIX ogc: <http://www.opengis.net/ont/geosparql#> "
+            + "insert { ?s ogc:asWKT ?wkt } where { "
+            + "    ?s <http://lat> ?lat. ?s <http://lon> ?long. "
+            + "    bind(strdt(concat(\"POINT(\",str(?long),\" \",str(?lat),\")\"),ogc:wktLiteral) as ?wkt) }";
+        final Update update = conn.prepareUpdate(QueryLanguage.SPARQL,
+            sb);
         update.execute();
       }
       conn.close();

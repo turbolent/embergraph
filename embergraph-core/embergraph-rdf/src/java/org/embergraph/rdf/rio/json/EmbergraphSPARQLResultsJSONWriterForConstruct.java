@@ -85,12 +85,8 @@ public class EmbergraphSPARQLResultsJSONWriterForConstruct implements RDFWriter 
   }
 
   @Override
-  public void handleNamespace(String prefix, String uri) throws RDFHandlerException {
-    try {
-      writer.handleNamespace(prefix, uri);
-    } catch (QueryResultHandlerException e) {
-      throw new RDFHandlerException(e);
-    }
+  public void handleNamespace(String prefix, String uri) {
+    writer.handleNamespace(prefix, uri);
   }
 
   @Override
@@ -108,7 +104,7 @@ public class EmbergraphSPARQLResultsJSONWriterForConstruct implements RDFWriter 
   }
 
   @Override
-  public void handleComment(String comment) throws RDFHandlerException {
+  public void handleComment(String comment) {
     // do nothing
   }
 

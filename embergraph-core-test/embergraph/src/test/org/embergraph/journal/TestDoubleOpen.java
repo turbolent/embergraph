@@ -227,7 +227,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
     }
 
     // @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       Journal tmp = null;
       //            boolean didDoubleOpen = false;

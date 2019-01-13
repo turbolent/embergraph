@@ -396,9 +396,9 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
       throw new NullPointerException();
     }
 
-    for (int i = 0; i < resource.length; i++) {
+    for (R r1 : resource) {
 
-      if (resource[i] == null) {
+      if (r1 == null) {
 
         throw new NullPointerException();
       }
@@ -458,9 +458,9 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
       lockedResources.put(t, new LinkedHashSet<>(initialCapacity));
     }
 
-    for (int i = 0; i < resource.length; i++) {
+    for (R r : resource) {
 
-      lock(t, resource[i], timeout);
+      lock(t, r, timeout);
     }
 
     if (INFO) {

@@ -103,14 +103,14 @@ public abstract class MetadataService extends DataService implements IMetadataSe
    * @throws InterruptedException
    */
   @Override
-  public Future<? extends Object> submit(Callable<? extends Object> task) {
+  public Future<?> submit(Callable<?> task) {
 
     // throw new UnsupportedOperationException();
     return super.submit(task);
   }
 
   public int nextPartitionId(String name)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -132,7 +132,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   }
 
   public PartitionLocator get(String name, long timestamp, final byte[] key)
-      throws InterruptedException, ExecutionException, IOException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -178,7 +178,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
 
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       MetadataIndex ndx = (MetadataIndex) getIndex(getOnlyResource());
 
@@ -187,7 +187,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   }
 
   public PartitionLocator find(String name, long timestamp, final byte[] key)
-      throws InterruptedException, ExecutionException, IOException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -233,7 +233,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
 
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       MetadataIndex ndx = (MetadataIndex) getIndex(getOnlyResource());
 
@@ -243,7 +243,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
   public void splitIndexPartition(
       String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -263,7 +263,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
   public void joinIndexPartition(
       String name, PartitionLocator[] oldLocators, PartitionLocator newLocator)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -283,7 +283,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
   public void moveIndexPartition(
       String name, PartitionLocator oldLocator, PartitionLocator newLocator)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -304,7 +304,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   /** @todo if if exits already? (and has consistent/inconsistent metadata)? */
   public UUID registerScaleOutIndex(
       final IndexMetadata metadata, final byte[][] separatorKeys, final UUID[] dataServices)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -358,7 +358,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   }
 
   public void dropScaleOutIndex(final String name)
-      throws IOException, InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException {
 
     setupLoggingContext();
 
@@ -397,7 +397,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
     /** @return The next partition identifier as an {@link Integer}. */
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       final MetadataIndex ndx = (MetadataIndex) getIndex(getOnlyResource());
 
@@ -448,7 +448,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
 
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       if (log.isInfoEnabled())
         log.info(
@@ -562,9 +562,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
         }
       }
 
-      for (int i = 0; i < newLocators.length; i++) {
-
-        PartitionLocator locator = newLocators[i];
+      for (PartitionLocator locator : newLocators) {
 
         //                PartitionLocator tmp = new PartitionLocator(
         //                        locator.getPartitionId(),
@@ -613,7 +611,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
 
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       if (log.isInfoEnabled())
         log.info(
@@ -650,9 +648,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
       }
 
       // remove the old locators from the metadata index.
-      for (int i = 0; i < oldLocators.length; i++) {
-
-        PartitionLocator locator = oldLocators[i];
+      for (PartitionLocator locator : oldLocators) {
 
         PartitionLocator pmd =
             (PartitionLocator)
@@ -723,7 +719,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
 
     @Override
-    protected Object doTask() throws Exception {
+    protected Object doTask() {
 
       if (log.isInfoEnabled())
         log.info(

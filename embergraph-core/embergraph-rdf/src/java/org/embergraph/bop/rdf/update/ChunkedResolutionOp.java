@@ -118,7 +118,7 @@ public class ChunkedResolutionOp extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       /*
        * Materialize everything.

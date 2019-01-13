@@ -925,72 +925,72 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
     sb.append("WriteExecutorService");
 
-    sb.append("{ paused=" + paused); // note: the raw counter value.
+    sb.append("{ paused=").append(paused); // note: the raw counter value.
 
-    sb.append(", nrunning=" + nrunning);
+    sb.append(", nrunning=").append(nrunning);
 
-    sb.append(", concurrentTaskCount=" + activeTaskCountWithLocksHeld);
+    sb.append(", concurrentTaskCount=").append(activeTaskCountWithLocksHeld);
 
-    sb.append(", activeTaskSetSize=" + active.size());
+    sb.append(", activeTaskSetSize=").append(active.size());
 
-    sb.append(", nwrites=" + nwrites);
+    sb.append(", nwrites=").append(nwrites);
 
-    sb.append(", groupCommitFlag=" + groupCommit);
+    sb.append(", groupCommitFlag=").append(groupCommit);
 
-    sb.append(", abortFlag=" + abort);
+    sb.append(", abortFlag=").append(abort);
 
-    sb.append(", lockHeldByCurrentThread=" + lock.isHeldByCurrentThread());
+    sb.append(", lockHeldByCurrentThread=").append(lock.isHeldByCurrentThread());
 
-    sb.append(", lockHoldCount=" + lock.getHoldCount());
+    sb.append(", lockHoldCount=").append(lock.getHoldCount());
 
-    sb.append(", lockQueueLength=" + lock.getQueueLength());
+    sb.append(", lockQueueLength=").append(lock.getQueueLength());
 
     if (lock.isHeldByCurrentThread()) {
 
       // these all require that we are holding the lock.
 
-      sb.append(", lockWaitQueueLength(unpaused)=" + lock.getWaitQueueLength(unpaused));
+      sb.append(", lockWaitQueueLength(unpaused)=").append(lock.getWaitQueueLength(unpaused));
 
-      sb.append(", lockWaitQueueLength(waiting)=" + lock.getWaitQueueLength(waiting));
+      sb.append(", lockWaitQueueLength(waiting)=").append(lock.getWaitQueueLength(waiting));
 
-      sb.append(", lockWaitQueueLength(commit)=" + lock.getWaitQueueLength(commit));
+      sb.append(", lockWaitQueueLength(commit)=").append(lock.getWaitQueueLength(commit));
     }
 
     /*
      * from super class.
      */
 
-    sb.append(", activeCount=" + getActiveCount());
+    sb.append(", activeCount=").append(getActiveCount());
 
-    sb.append(", queueSize=" + getQueue().size());
+    sb.append(", queueSize=").append(getQueue().size());
 
-    sb.append(", poolSize=" + getPoolSize());
+    sb.append(", poolSize=").append(getPoolSize());
 
-    sb.append(", largestPoolSize=" + getLargestPoolSize());
+    sb.append(", largestPoolSize=").append(getLargestPoolSize());
 
     /*
      * various stats.
      */
 
-    sb.append(", maxPoolSize=" + maxPoolSize);
+    sb.append(", maxPoolSize=").append(maxPoolSize);
 
-    sb.append(", maxRunning=" + maxRunning);
+    sb.append(", maxRunning=").append(maxRunning);
 
-    sb.append(", maxCommitLatency=" + maxCommitServiceTime);
+    sb.append(", maxCommitLatency=").append(maxCommitServiceTime);
 
-    sb.append(", maxLatencyUntilCommit=" + maxCommitWaitingTime);
+    sb.append(", maxLatencyUntilCommit=").append(maxCommitWaitingTime);
 
-    sb.append(", groupCommitCount=" + ngroupCommits);
+    sb.append(", groupCommitCount=").append(ngroupCommits);
 
-    sb.append(", abortCount=" + naborts);
+    sb.append(", abortCount=").append(naborts);
 
-    sb.append(", failedTaskCount=" + failedTaskCount);
+    sb.append(", failedTaskCount=").append(failedTaskCount);
 
-    sb.append(", successTaskCount=" + successTaskCount);
+    sb.append(", successTaskCount=").append(successTaskCount);
 
-    sb.append(", committedTaskCount=" + committedTaskCount);
+    sb.append(", committedTaskCount=").append(committedTaskCount);
 
-    sb.append(", overflowCount=" + noverflow);
+    sb.append(", overflowCount=").append(noverflow);
 
     sb.append("}");
 

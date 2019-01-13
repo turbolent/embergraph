@@ -14,7 +14,6 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphURIImpl;
 import org.embergraph.rdf.rules.RuleContextEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -390,8 +389,7 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
   }
 
   protected void compare(
-      final IChunkedOrderedIterator<ISolution> result, final Collection<IBindingSet> answer)
-      throws QueryEvaluationException {
+      final IChunkedOrderedIterator<ISolution> result, final Collection<IBindingSet> answer) {
 
     try {
 

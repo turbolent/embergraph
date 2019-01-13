@@ -309,11 +309,11 @@ public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {
 
     anns.add(new NV(BOp.Annotations.BOP_ID, idFactory.incrementAndGet()));
 
-    return new SPOPredicate(vars, anns.toArray(new NV[anns.size()]));
+    return new SPOPredicate(vars, anns.toArray(new NV[0]));
   }
 
   private IChunkedOrderedIterator<IBindingSet> runQuery(
-      final AbstractTripleStore db, final IRule rule) throws Exception {
+      final AbstractTripleStore db, final IRule rule) {
 
     fail("refactor test suite");
 

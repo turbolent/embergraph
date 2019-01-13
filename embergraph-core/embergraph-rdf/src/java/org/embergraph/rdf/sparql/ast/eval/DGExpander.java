@@ -402,7 +402,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         }
 
         /** Outer callable submits tasks for execution. */
-        public Void call() throws Exception {
+        public Void call() {
 
           final List<Future<Void>> tasks = new LinkedList<>();
 
@@ -459,7 +459,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
           this.termId = termId;
         }
 
-        public Void call() throws Exception {
+        public Void call() {
 
           if (log.isDebugEnabled()) log.debug("Running iterator: c=" + termId);
 

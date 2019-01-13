@@ -76,7 +76,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * </pre>
    */
   public void test_select_s_where_s_p_o()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o}";
 
@@ -115,7 +115,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * SELECT DISTINCT ?s where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_distinct() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_distinct() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select DISTINCT ?s where {?s ?p ?o}";
 
@@ -155,7 +155,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * SELECT REDUCED ?s where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_reduced() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_reduced() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select REDUCED ?s where {?s ?p ?o}";
 
@@ -197,7 +197,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    *
    * MP: Pretty sure this is an illegal query?
    */
-  public void test_groupBy_bareVar() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_groupBy_bareVar() throws TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} GROUP BY ?o";
 
@@ -249,7 +249,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * MP: Pretty sure this is an illegal query?
    */
   public void test_groupBy_bindExpr()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} GROUP BY (?o AS ?z)";
 
@@ -301,7 +301,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * MP: Pretty sure this is an illegal query?
    */
   public void test_groupBy_functionCall()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} GROUP BY str(?o)";
 
@@ -357,7 +357,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    *
    * MP: Pretty sure this is an illegal query?
    */
-  public void test_having() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_having() throws TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} HAVING (?o > ?s)";
 
@@ -412,7 +412,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * SELECT ?s where {?s ?p ?o} ORDER BY DESC(?s)
    * </pre>
    */
-  public void test_orderBy() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_orderBy() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} ORDER BY DESC(?s)";
 
@@ -456,7 +456,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * SELECT ?s where {?s ?p ?o} ORDER BY DESC(str(?s))
    * </pre>
    */
-  public void test_orderBy_expr() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_orderBy_expr() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "SELECT ?s where {?s ?p ?o} ORDER BY DESC(str(?s))";
 
@@ -501,7 +501,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * SELECT * where {?s ?p ?o}
    * </pre>
    */
-  public void test_select_star() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_select_star() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select * where {?s ?p ?o}";
 
@@ -544,7 +544,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * @throws TokenMgrError
    * @throws ParseException
    */
-  public void test_slice() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_slice() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where {?s ?p ?o} limit 10 offset 5";
 
@@ -590,7 +590,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * ASK where {?s ?p ?o}
    * </pre>
    */
-  public void test_ask() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_ask() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "ask where {?s ?p ?o}";
 
@@ -639,7 +639,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * IASTOptimizer} to rewrite the {@link QueryBase} in order to capture the semantics of a DESCRIBE
    * query.
    */
-  public void test_describe() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_describe() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "describe ?s where {?s ?p ?o}";
 
@@ -683,7 +683,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * IASTOptimizer} to rewrite the {@link QueryBase} in order to capture the semantics of a DESCRIBE
    * query.
    */
-  public void test_describe_star() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_describe_star() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "describe * where {?s ?p ?o}";
 
@@ -730,7 +730,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * IASTOptimizer} to rewrite the {@link QueryBase} in order to capture the semantics of a DESCRIBE
    * query.
    */
-  public void test_describe_iri() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_describe_iri() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "describe <http://www.embergraph.org>";
 
@@ -772,7 +772,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * query.
    */
   public void test_describe_vars_and_iris()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "describe ?s <http://www.embergraph.org> where {?s ?p ?o}";
 
@@ -820,7 +820,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * TODO Anzo has an extension of CONSTRUCT for quads which we should also support. It allows a
    * GRAPH graph pattern to be mixed in with the triple patterns.
    */
-  public void test_construct() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_construct() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "construct { ?s ?p ?o } where {?s ?p ?o}";
 
@@ -866,7 +866,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * @throws ParseException
    */
   public void test_construct_with_ground_terms()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -917,7 +917,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * @throws ParseException
    */
   public void test_construct_where_shortcut()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -981,7 +981,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * @throws MalformedQueryException
    */
   public void test_from_and_from_named()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1073,7 +1073,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * @throws ParseException
    */
   public void test_from_and_from_named_with_unknown_graph()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -1188,7 +1188,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
    * embergraph AST model is generated.
    */
   public void test_bnode_bracket_syntax_05()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""

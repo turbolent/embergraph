@@ -735,7 +735,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
 
       final StringBuilder sb = new StringBuilder();
 
-      sb.append(getClass().getName() + "{");
+      sb.append(getClass().getName()).append("{");
 
       DefaultNodeCoder.toString(this, sb);
 
@@ -756,11 +756,11 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
 
     final int nchildren = node.getChildCount();
 
-    sb.append(", nchildren=" + nchildren);
+    sb.append(", nchildren=").append(nchildren);
 
-    sb.append(", spannedTupleCount=" + node.getSpannedTupleCount());
+    sb.append(", spannedTupleCount=").append(node.getSpannedTupleCount());
 
-    sb.append(",\nkeys=" + node.getKeys());
+    sb.append(",\nkeys=").append(node.getKeys());
 
     {
       sb.append(",\nchildAddr=[");
@@ -790,12 +790,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
 
     if (node.hasVersionTimestamps()) {
 
-      sb.append(
-          ",\nversionTimestamps={min="
-              + node.getMinimumVersionTimestamp()
-              + ",max="
-              + node.getMaximumVersionTimestamp()
-              + "}");
+      sb.append(",\nversionTimestamps={min=").append(node.getMinimumVersionTimestamp())
+          .append(",max=").append(node.getMaximumVersionTimestamp()).append("}");
     }
 
     return sb;

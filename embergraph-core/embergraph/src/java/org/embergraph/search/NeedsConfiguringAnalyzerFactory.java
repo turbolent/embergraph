@@ -192,8 +192,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
    * @author jeremycarroll
    */
   private static class PatternAnalyzer extends AnalyzerPair {
-    public PatternAnalyzer(ConfigOptionsToAnalyzer lro, Pattern pattern, CharArraySet stopWords)
-        throws Exception {
+    public PatternAnalyzer(ConfigOptionsToAnalyzer lro, Pattern pattern, CharArraySet stopWords) {
       /*
       super(lro.languageRange, getConstructor(PatternAnalyzerImpl.class,Pattern.class, CharArraySet.class),
       	pattern, stopWords);
@@ -204,7 +203,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
           new PatternAnalyzerImpl(pattern, CharArraySet.EMPTY_SET));
     }
 
-    public PatternAnalyzer(ConfigOptionsToAnalyzer lro, Pattern pattern) throws Exception {
+    public PatternAnalyzer(ConfigOptionsToAnalyzer lro, Pattern pattern) {
       super(lro.languageRange, new PatternAnalyzerImpl(pattern, CharArraySet.EMPTY_SET));
     }
   }

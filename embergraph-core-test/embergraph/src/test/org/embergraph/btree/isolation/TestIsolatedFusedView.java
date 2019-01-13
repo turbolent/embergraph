@@ -65,7 +65,7 @@ public class TestIsolatedFusedView extends AbstractBTreeTestCase {
    *
    * @throws IOException
    */
-  public void test_writeSetIsolation() throws IOException {
+  public void test_writeSetIsolation() {
 
     final byte[] k3 = i2k(3);
     final byte[] k5 = i2k(5);

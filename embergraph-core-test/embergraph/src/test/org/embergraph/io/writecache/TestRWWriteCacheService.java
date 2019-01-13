@@ -124,14 +124,11 @@ public class TestRWWriteCacheService extends TestCase3 {
 
     // Await quorum meet.
     assertCondition(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              assertEquals(0L, quorum.token());
-            } catch (Exception e) {
-              fail();
-            }
+        () -> {
+          try {
+            assertEquals(0L, quorum.token());
+          } catch (Exception e) {
+            fail();
           }
         },
         5000 /*timeout*/,
@@ -176,13 +173,13 @@ public class TestRWWriteCacheService extends TestCase3 {
     super.tearDown();
   }
 
-  public void test_simpleRWService() throws IOException, InterruptedException {
+  public void test_simpleRWService() {
 
     writeCache.close();
     writeCache = null;
   }
 
-  public void test_simpleDataRWService() throws IOException {
+  public void test_simpleDataRWService() {
     try {
       final ByteBuffer data1 = getRandomData();
       final long addr1 = 2048;

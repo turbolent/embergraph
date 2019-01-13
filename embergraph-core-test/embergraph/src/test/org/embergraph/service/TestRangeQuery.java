@@ -622,7 +622,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
    *
    * @throws IOException
    */
-  public void test_reverseScan() throws IOException {
+  public void test_reverseScan() {
 
     final String name = "testIndex";
 

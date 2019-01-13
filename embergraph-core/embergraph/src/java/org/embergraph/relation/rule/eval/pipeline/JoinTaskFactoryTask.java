@@ -187,7 +187,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
    *
    * @return (A proxy for) the {@link Future} of the {@link DistributedJoinTask}.
    */
-  public Future call() throws Exception {
+  public Future call() {
 
     //        if (dataService == null)
     //            throw new IllegalStateException();

@@ -43,10 +43,10 @@ public class BenchmarkMatrix {
       int k = 1;
       types = new String[] {args[k++]};
       cpus = Integer.parseInt(args[k++]);
-      minSecs = new Double(args[k++]).doubleValue();
-      densities = new double[] {new Double(args[k++]).doubleValue()};
-      transposeA = new Boolean(args[k++]).booleanValue();
-      transposeB = new Boolean(args[k++]).booleanValue();
+      minSecs = Double.parseDouble(args[k++]);
+      densities = new double[] {Double.parseDouble(args[k++])};
+      transposeA = Boolean.valueOf(args[k++]).booleanValue();
+      transposeB = Boolean.valueOf(args[k++]).booleanValue();
 
       sizes = new int[args.length - k];
       for (int i = 0; k < args.length; k++, i++) sizes[i] = Integer.parseInt(args[k]);
@@ -76,9 +76,9 @@ public class BenchmarkMatrix {
       int k = 1;
       types = new String[] {args[k++]};
       cpus = Integer.parseInt(args[k++]);
-      minSecs = new Double(args[k++]).doubleValue();
-      densities = new double[] {new Double(args[k++]).doubleValue()};
-      transposeA = new Boolean(args[k++]).booleanValue();
+      minSecs = Double.parseDouble(args[k++]);
+      densities = new double[] {Double.parseDouble(args[k++])};
+      transposeA = Boolean.valueOf(args[k++]).booleanValue();
 
       sizes = new int[args.length - k];
       for (int i = 0; k < args.length; k++, i++) sizes[i] = Integer.parseInt(args[k]);
@@ -108,8 +108,8 @@ public class BenchmarkMatrix {
       int k = 1;
       types = new String[] {args[k++]};
       cpus = Integer.parseInt(args[k++]);
-      minSecs = new Double(args[k++]).doubleValue();
-      densities = new double[] {new Double(args[k++]).doubleValue()};
+      minSecs = Double.parseDouble(args[k++]);
+      densities = new double[] {Double.parseDouble(args[k++])};
       exponent = Integer.parseInt(args[k++]);
 
       sizes = new int[args.length - k];
@@ -139,8 +139,8 @@ public class BenchmarkMatrix {
       int k = 1;
       types = new String[] {args[k++]};
       cpus = Integer.parseInt(args[k++]);
-      minSecs = new Double(args[k++]).doubleValue();
-      densities = new double[] {new Double(args[k++]).doubleValue()};
+      minSecs = Double.parseDouble(args[k++]);
+      densities = new double[] {Double.parseDouble(args[k++])};
 
       sizes = new int[args.length - k];
       for (int i = 0; k < args.length; k++, i++) sizes[i] = Integer.parseInt(args[k]);
@@ -618,20 +618,8 @@ public class BenchmarkMatrix {
       final double alpha = omega * 0.25;
       final double beta = 1 - omega;
       cern.colt.function.Double9Function function =
-          new cern.colt.function.Double9Function() {
-            public final double apply(
-                double a00,
-                double a01,
-                double a02,
-                double a10,
-                double a11,
-                double a12,
-                double a20,
-                double a21,
-                double a22) {
-              return alpha * a11 + beta * (a01 + a10 + a12 + a21);
-            }
-          };
+          (a00, a01, a02, a10, a11, a12, a20, a21, a22) ->
+              alpha * a11 + beta * (a01 + a10 + a12 + a21);
 
       public String toString() {
         return "A.zAssign8Neighbors(5 point function) [Mflops/sec]";
@@ -660,20 +648,7 @@ public class BenchmarkMatrix {
       final double alpha = omega * 0.25;
       final double beta = 1 - omega;
       cern.colt.function.Double9Function function =
-          new cern.colt.function.Double9Function() {
-            public final double apply(
-                double a00,
-                double a01,
-                double a02,
-                double a10,
-                double a11,
-                double a12,
-                double a20,
-                double a21,
-                double a22) {
-              return alpha * a11 + beta * (a00 + a10 + a20 + a01 + a21 + a02 + a12 + a22);
-            }
-          };
+          (a00, a01, a02, a10, a11, a12, a20, a21, a22) -> alpha * a11 + beta * (a00 + a10 + a20 + a01 + a21 + a02 + a12 + a22);
 
       public String toString() {
         return "A.zAssign8Neighbors(9 point function) [Mflops/sec]";

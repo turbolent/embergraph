@@ -164,7 +164,7 @@ public class TestEmbergraphGraphClientInMemorySail extends AbstractTestEmbergrap
     }
   }
 
-  public static final void main(final String[] args) throws Exception {
+  public static final void main(final String[] args) {
 
     final String url = "http://localhost:9999/embergraph/sparql";
 

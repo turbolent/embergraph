@@ -101,7 +101,7 @@ public abstract class BlockingQueueTest extends JSR166TestCase {
   }
 
   /** take() throws InterruptedException immediately if interrupted before waiting */
-  public void testTakeFromEmptyAfterInterrupt() throws InterruptedException {
+  public void testTakeFromEmptyAfterInterrupt() {
     final BlockingQueue q = emptyCollection();
     Thread t =
         newStartedThread(

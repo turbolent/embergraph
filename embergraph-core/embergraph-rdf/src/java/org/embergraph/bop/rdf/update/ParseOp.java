@@ -732,7 +732,7 @@ public class ParseOp extends PipelineOp {
         return new Constant<>(iv);
       }
 
-      public void handleStatement(final Statement stmt) throws RDFHandlerException {
+      public void handleStatement(final Statement stmt) {
 
         final ListBindingSet bset = new ListBindingSet();
 

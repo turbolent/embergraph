@@ -574,8 +574,6 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
       // update the counter.
       counter.incrementAndGet();
 
-      return;
-
     } catch (Throwable t) {
 
       /*

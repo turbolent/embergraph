@@ -42,13 +42,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
   @Override
   protected IGraphFixtureFactory getGraphFixtureFactory() {
 
-    return new IGraphFixtureFactory() {
-
-      @Override
-      public IGraphFixture newGraphFixture() throws Exception {
-        return new SailGraphFixture();
-      }
-    };
+    return () -> new SailGraphFixture();
   }
 
   @Override
@@ -220,7 +214,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
 
       vertices = new LinkedHashSet<>(Arrays.asList(v1, v2, v3, v4, v5));
 
-      linkTypes = new LinkedHashSet<>(Arrays.asList(link));
+      linkTypes = new LinkedHashSet<>(Collections.singletonList(link));
     }
 
     public Value get_v1() {

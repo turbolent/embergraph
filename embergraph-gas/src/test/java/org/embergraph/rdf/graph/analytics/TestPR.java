@@ -31,7 +31,7 @@ public class TestPR extends AbstractSailGraphTestCase {
     super(name);
   }
 
-  public void testPR() throws Exception {
+  public void testPR() {
 
     // @TODO:  Write Test
     assert (true);

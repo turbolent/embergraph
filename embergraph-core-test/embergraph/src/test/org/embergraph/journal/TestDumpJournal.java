@@ -66,7 +66,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
   }
 
   /** Dump an empty journal. */
-  public void test_emptyJournal() throws IOException, InterruptedException, ExecutionException {
+  public void test_emptyJournal() {
 
     final Journal src = getStore(getProperties());
 
@@ -86,8 +86,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
   }
 
   /** Dump a journal with a single named index. */
-  public void test_journal_oneIndexNoData()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_oneIndexNoData() {
 
     final Journal src = getStore(getProperties());
 
@@ -114,8 +113,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
   /*
    * Test with a journal on which a single index has been registered with random data on the index.
    */
-  public void test_journal_oneIndexRandomData()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_oneIndexRandomData() {
 
     final Journal src = getStore(getProperties());
 
@@ -158,8 +156,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
    *     </a>
    */
-  public void test_journal_oneIndex_HTree_RandomData_withoutDumpPages()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_oneIndex_HTree_RandomData_withoutDumpPages() {
 
     final Journal src = getStore(getProperties());
 
@@ -197,8 +194,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
   }
 
   /** Test with an HTree. */
-  public void test_journal_oneIndex_HTree_RandomData_dumpPages()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_oneIndex_HTree_RandomData_dumpPages() {
 
     final Journal src = getStore(getProperties());
 
@@ -241,8 +237,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
    *     </a>
    */
-  public void test_journal_oneIndex_SolutionSetStream_NoData()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_oneIndex_SolutionSetStream_NoData() {
 
     final Journal src = getStore(getProperties());
 
@@ -297,8 +292,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
   /*
    * Test with a journal on which many indices have been registered and populated with random data.
    */
-  public void test_journal_manyIndicesRandomData()
-      throws IOException, InterruptedException, ExecutionException {
+  public void test_journal_manyIndicesRandomData() {
 
     final String PREFIX = "testIndex#";
     final int NUM_INDICES = 4;
@@ -525,7 +519,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         }
 
         @Override
-        public Void call() throws Exception {
+        public Void call() {
 
           new DumpJournal(src)
               .dumpJournal(
@@ -563,7 +557,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         }
 
         @Override
-        public Void call() throws Exception {
+        public Void call() {
 
           /*
            * Now write some more data, going through a series of commit

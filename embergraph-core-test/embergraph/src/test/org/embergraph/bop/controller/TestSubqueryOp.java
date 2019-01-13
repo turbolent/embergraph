@@ -95,7 +95,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
   private QueryEngine queryEngine;
 
   @Override
-  public void setUp() throws Exception {
+  public void setUp() {
 
     jnl = new Journal(getProperties());
 
@@ -132,7 +132,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
   }
 
   @Override
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     if (queryEngine != null) {
       queryEngine.shutdownNow();

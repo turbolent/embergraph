@@ -221,7 +221,7 @@ public class TestEmbergraphSailEmbeddedFederationWithQuads extends AbstractEmber
    */
   @SuppressWarnings("rawtypes")
   @Override
-  protected void setUp(final ProxyEmbergraphSailTestCase testCase) throws Exception {
+  protected void setUp(final ProxyEmbergraphSailTestCase testCase) {
 
     final File dataDir = new File(NAMESPACE);
 
@@ -269,9 +269,9 @@ public class TestEmbergraphSailEmbeddedFederationWithQuads extends AbstractEmber
 
       final File[] children = f.listFiles();
 
-      for (int i = 0; i < children.length; i++) {
+      for (File child : children) {
 
-        recursiveDelete(children[i]);
+        recursiveDelete(child);
       }
     }
 

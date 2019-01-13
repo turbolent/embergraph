@@ -159,12 +159,12 @@ public abstract class SampleBase {
   public String toString() {
     final StringBuilder sb = new StringBuilder();
     sb.append(getClass().getSimpleName());
-    sb.append("{estCard=" + estCard);
-    sb.append(",limit=" + limit);
-    sb.append(",estimateEnum=" + estimateEnum);
+    sb.append("{estCard=").append(estCard);
+    sb.append(",limit=").append(limit);
+    sb.append(",estimateEnum=").append(estimateEnum);
     {
       final IBindingSet[] tmp = sampleRef.get();
-      sb.append(",sampleSize=" + (tmp != null ? tmp.length : "N/A"));
+      sb.append(",sampleSize=").append(tmp != null ? tmp.length : "N/A");
     }
     toString(sb); // allow extension
     sb.append("}");

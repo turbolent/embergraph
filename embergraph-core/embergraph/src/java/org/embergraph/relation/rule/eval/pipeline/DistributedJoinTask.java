@@ -837,7 +837,7 @@ public class DistributedJoinTask extends JoinTask {
       this.sink = sink;
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       if (halt) throw new RuntimeException(firstCause.get());
 
@@ -968,15 +968,12 @@ public class DistributedJoinTask extends JoinTask {
 
   /** Helper establishes a {@link JoinTaskSink} on the target {@link IDataService}. */
   private static final Computable<SinkRequest, JoinTaskSink> getSink =
-      new Computable<SinkRequest, JoinTaskSink>() {
+      req -> {
 
-        public JoinTaskSink compute(final SinkRequest req) throws InterruptedException {
-
-          try {
-            return req.joinTask._getSink(req.locator);
-          } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-          }
+        try {
+          return req.joinTask._getSink(req.locator);
+        } catch (ExecutionException e) {
+          throw new RuntimeException(e);
         }
       };
 

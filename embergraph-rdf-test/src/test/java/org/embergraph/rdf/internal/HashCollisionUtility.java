@@ -975,7 +975,7 @@ public class HashCollisionUtility {
    *
    * @throws Exception
    */
-  public void shutdownNow() throws Exception {
+  public void shutdownNow() {
     log.debug("shutdownNow");
     parsing.set(false);
     if (parserService != null) parserService.shutdownNow();
@@ -1289,9 +1289,7 @@ public class HashCollisionUtility {
 
       final File[] files = fileOrDir.listFiles();
 
-      for (int i = 0; i < files.length; i++) {
-
-        final File f = files[i];
+      for (final File f : files) {
 
         parseFileOrDirectory(f, fallback);
       }
@@ -1379,8 +1377,7 @@ public class HashCollisionUtility {
     }
 
     private void parseFile(final File file)
-        throws IOException, RDFParseException, RDFHandlerException, NoSuchAlgorithmException,
-            InterruptedException {
+        throws IOException, RDFParseException, RDFHandlerException {
 
       if (!file.exists()) throw new RuntimeException("Not found: " + file);
 
@@ -1718,7 +1715,6 @@ public class HashCollisionUtility {
         nvalues++;
       }
 
-      return;
     } // bufferValue()
 
     /*
@@ -1908,7 +1904,7 @@ public class HashCollisionUtility {
       this.compressor = new RecordCompressor(Deflater.BEST_SPEED);
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       final long begin = System.currentTimeMillis();
 
@@ -1926,9 +1922,7 @@ public class HashCollisionUtility {
       Arrays.sort(a);
 
       // Index the values.
-      for (int i = 0; i < a.length; i++) {
-
-        final Bucket b = a[i];
+      for (final Bucket b : a) {
 
         // The key for that bucket.
         final byte[] baseKey = keyBuilder.reset().append(b.key).getKey();

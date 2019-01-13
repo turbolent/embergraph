@@ -90,7 +90,7 @@ public class PartitionedJoinGroup {
 
   /** The {@link IPredicate}s in the join graph (required joins). */
   public IPredicate<?>[] getJoinGraph() {
-    return joinGraph.toArray(new IPredicate[joinGraph.size()]);
+    return joinGraph.toArray(new IPredicate[0]);
   }
 
   /*
@@ -168,7 +168,7 @@ public class PartitionedJoinGroup {
     }
 
     final IConstraint[] constraints =
-        joinGraphConstraints.toArray(new IConstraint[joinGraphConstraints.size()]);
+        joinGraphConstraints.toArray(new IConstraint[0]);
 
     final IConstraint[][] attachedConstraints =
         getJoinGraphConstraints(path, constraints, null /* knownBound */, pathIsComplete);
@@ -219,7 +219,7 @@ public class PartitionedJoinGroup {
 
     // add the already known bound vars
     if (knownBoundVars != null) {
-      for (IVariable<?> v : knownBoundVars) boundVars.add(v);
+      boundVars.addAll(Arrays.asList(knownBoundVars));
     }
 
     /*
@@ -337,7 +337,7 @@ public class PartitionedJoinGroup {
       } // joinGraphConstraints != null;
 
       // store the constraint[] for that predicate.
-      ret[i] = constraints.toArray(new IConstraint[constraints.size()]);
+      ret[i] = constraints.toArray(new IConstraint[0]);
     } // next predicate in the join path.
 
     /*
@@ -353,7 +353,7 @@ public class PartitionedJoinGroup {
    * IPredicate} in the tail plan in which their variable(S) MIGHT have been bound.
    */
   public IPredicate<?>[] getTailPlan() {
-    return tailPlan.toArray(new IPredicate[tailPlan.size()]);
+    return tailPlan.toArray(new IPredicate[0]);
   }
 
   /*
@@ -392,7 +392,7 @@ public class PartitionedJoinGroup {
       return new IConstraint[0];
     }
 
-    return constraints.toArray(new IConstraint[constraints.size()]);
+    return constraints.toArray(new IConstraint[0]);
   }
 
   /*

@@ -318,105 +318,81 @@ public class TestSparseRowStore extends ProxyTestCase<IIndexManager> implements 
 
       // no schema.
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(null /* schema */, primaryKey);
 
-              srs.read(null /* schema */, primaryKey);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // no primary key.
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, null);
 
-              srs.read(schema, null);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // no schema.
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(null /*schema*/, primaryKey, fromTime, toTime, filter);
 
-              srs.read(null /*schema*/, primaryKey, fromTime, toTime, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // no primary key.
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, null /*primaryKey*/, fromTime, toTime, filter);
 
-              srs.read(schema, null /*primaryKey*/, fromTime, toTime, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // bad fromTime
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, primaryKey, CURRENT_ROW, 1L, filter);
 
-              srs.read(schema, primaryKey, CURRENT_ROW, 1L, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // bad fromTime.
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, primaryKey, -1L, 1L, filter);
 
-              srs.read(schema, primaryKey, -1L, 1L, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // bad toTime
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, primaryKey, 2L, -1L, filter);
 
-              srs.read(schema, primaryKey, 2L, -1L, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 
       // bad toTime
       fail(
-          new Callable() {
+          (Callable) () -> {
 
-            public Object call() {
+            srs.read(schema, primaryKey, 2L, 1L, filter);
 
-              srs.read(schema, primaryKey, 2L, 1L, filter);
-
-              return null;
-            }
+            return null;
           },
           IllegalArgumentException.class);
 

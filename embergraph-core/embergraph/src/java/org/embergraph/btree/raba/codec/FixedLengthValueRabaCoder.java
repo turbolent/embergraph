@@ -132,7 +132,7 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
   }
 
   @Override
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     len = in.readInt();
   }

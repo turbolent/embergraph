@@ -180,7 +180,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   }
 
   @Override
-  protected Repository createRepository() throws IOException {
+  protected Repository createRepository() {
 
     final EmbergraphSail sail = new EmbergraphSail(getProperties());
 

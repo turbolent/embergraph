@@ -819,8 +819,7 @@ public class EmbergraphRDFServletContextListener implements ServletContextListen
      * gets reported to the UI.
      */
     @Override
-    public AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
-        throws IOException {
+    public AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access) {
 
       return null;
     }

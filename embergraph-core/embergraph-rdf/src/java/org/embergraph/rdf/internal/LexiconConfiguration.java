@@ -257,63 +257,39 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
   @Override
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getName());
-
-    sb.append("{ " + AbstractTripleStore.Options.BLOBS_THRESHOLD + "=" + blobsThreshold);
-
-    sb.append(
-        ", "
-            + AbstractTripleStore.Options.INLINE_XSD_DATATYPE_LITERALS
-            + "="
-            + inlineXSDDatatypeLiterals);
-
-    sb.append(", " + AbstractTripleStore.Options.INLINE_TEXT_LITERALS + "=" + inlineTextLiterals);
-
-    sb.append(
-        ", " + AbstractTripleStore.Options.MAX_INLINE_TEXT_LENGTH + "=" + maxInlineTextLength);
-
-    sb.append(", " + AbstractTripleStore.Options.INLINE_BNODES + "=" + inlineBNodes);
-
-    sb.append(", " + AbstractTripleStore.Options.INLINE_DATE_TIMES + "=" + inlineDateTimes);
-
-    sb.append(
-        ", "
-            + AbstractTripleStore.Options.REJECT_INVALID_XSD_VALUES
-            + "="
-            + rejectInvalidXSDValues);
-
-    sb.append(
-        ", "
-            + AbstractTripleStore.Options.ENABLE_RAW_RECORDS_SUPPORT
-            + "="
-            + enableRawRecordsSupport);
-
-    sb.append(
-        ", "
-            + AbstractTripleStore.Options.EXTENSION_FACTORY_CLASS
-            + "="
-            + xFactory.getClass().getName());
-
-    sb.append(
-        ", " + AbstractTripleStore.Options.VOCABULARY_CLASS + "=" + vocab.getClass().getName());
-
-    sb.append(
-        ", "
-            + AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS
-            + "="
-            + uriFactory.getClass().getName());
-
-    sb.append(
-        ", "
-            + LexiconConfiguration.class.getName()
-            + ".inlineDatatypesToTextIndex="
-            + inlineDatatypesToTextIndex);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getName()
+        + "{ " + AbstractTripleStore.Options.BLOBS_THRESHOLD + "=" + blobsThreshold
+        + ", "
+        + AbstractTripleStore.Options.INLINE_XSD_DATATYPE_LITERALS
+        + "="
+        + inlineXSDDatatypeLiterals
+        + ", " + AbstractTripleStore.Options.INLINE_TEXT_LITERALS + "=" + inlineTextLiterals
+        + ", " + AbstractTripleStore.Options.MAX_INLINE_TEXT_LENGTH + "=" + maxInlineTextLength
+        + ", " + AbstractTripleStore.Options.INLINE_BNODES + "=" + inlineBNodes
+        + ", " + AbstractTripleStore.Options.INLINE_DATE_TIMES + "=" + inlineDateTimes
+        + ", "
+        + AbstractTripleStore.Options.REJECT_INVALID_XSD_VALUES
+        + "="
+        + rejectInvalidXSDValues
+        + ", "
+        + AbstractTripleStore.Options.ENABLE_RAW_RECORDS_SUPPORT
+        + "="
+        + enableRawRecordsSupport
+        + ", "
+        + AbstractTripleStore.Options.EXTENSION_FACTORY_CLASS
+        + "="
+        + xFactory.getClass().getName()
+        + ", " + AbstractTripleStore.Options.VOCABULARY_CLASS + "=" + vocab.getClass().getName()
+        + ", "
+        + AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS
+        + "="
+        + uriFactory.getClass().getName()
+        + ", "
+        + LexiconConfiguration.class.getName()
+        + ".inlineDatatypesToTextIndex="
+        + inlineDatatypesToTextIndex
+        + "}";
+    return sb;
   }
 
   @SuppressWarnings("rawtypes")
@@ -361,7 +337,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     /*
      * TODO Make this configurable.
      */
-    this.inlineDatatypesToTextIndex = new LinkedHashSet<>(Arrays.asList(XSD.IPV4));
+    this.inlineDatatypesToTextIndex = new LinkedHashSet<>(Collections.singletonList(XSD.IPV4));
 
     /*
      * Note: These collections are read-only so we do NOT need additional

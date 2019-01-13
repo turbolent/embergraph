@@ -367,10 +367,10 @@ public class TestBlobsIndex extends TestCase2 {
             ctor,
             new BlobsWriteProcResultHandler(a, readOnly, stats));
 
-        for (int i = 0; i < a.length; i++) {
+        for (KVO<EmbergraphValue> embergraphValueKVO : a) {
 
           // IV was not assigned (read-only and does not pre-exist).
-          assertNull(a[i].obj.getIV());
+          assertNull(embergraphValueKVO.obj.getIV());
         }
 
         assertEquals(a.length, stats.nunknown.get());
@@ -401,9 +401,9 @@ public class TestBlobsIndex extends TestCase2 {
          */
         final IKeyBuilder keyBuilder = h.newKeyBuilder();
 
-        for (int i = 0; i < a.length; i++) {
+        for (KVO<EmbergraphValue> embergraphValueKVO : a) {
 
-          final EmbergraphValue expected = a[i].obj;
+          final EmbergraphValue expected = embergraphValueKVO.obj;
 
           final IV<?, ?> iv = expected.getIV();
 
@@ -458,7 +458,9 @@ public class TestBlobsIndex extends TestCase2 {
                     + ")");
           }
 
-          if (log.isInfoEnabled()) log.info("i=" + expected + ", iv=" + iv);
+          if (log.isInfoEnabled()) {
+            log.info("i=" + expected + ", iv=" + iv);
+          }
         }
       }
 

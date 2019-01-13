@@ -77,7 +77,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    *
    * Note: This requires recursion back in through the {@link EmbergraphExprBuilder}.
    */
-  public void test_subSelect() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_subSelect() throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where { {select ?s where { ?s ?p ?o  } } }";
 
@@ -141,7 +141,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    *     OPTIONAL { SELECT }</a>
    */
   public void test_optional_subSelect()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select ?s where { optional {select ?s where { ?s ?p ?o  } } }";
 
@@ -200,7 +200,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_triplePattern_join_subSelect()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?s " + "{" + " ?s ?x ?o " + " {" + "   select ?x where { ?x ?p ?x }" + "  }" + "}";
@@ -269,7 +269,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * </pre>
    */
   public void test_select_star_select_star_s_p_o()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql = "select * { select * { ?s ?p ?o } }";
 
@@ -332,7 +332,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * Note: This requires recursion back in through the {@link EmbergraphExprBuilder}.
    */
   public void test_bind_join_subSelect()
-      throws MalformedQueryException, TokenMgrError, ParseException {
+      throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?s"
@@ -398,7 +398,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * Unit test for sub-SubSelect. There is a top-level query. It uses a subquery. The subquery uses
    * a subquery. The purpose of this is to test for the correct nesting of the generated AST.
    */
-  public void test_subSubSelect() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_subSubSelect() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "select ?s \n"
@@ -502,7 +502,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * }
    * </pre>
    */
-  public void test_exists() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_exists() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -576,7 +576,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * }
    * </pre>
    */
-  public void test_not_exists() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_not_exists() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         ""
@@ -657,7 +657,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
    * TODO Unit test to verify no recursion through the named subquery into a named subquery (this
    * will be rejected at the AST level so it is not critical to validate it here).
    */
-  public void test_namedSubquery() throws MalformedQueryException, TokenMgrError, ParseException {
+  public void test_namedSubquery() throws MalformedQueryException, TokenMgrError {
 
     final String sparql =
         "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"

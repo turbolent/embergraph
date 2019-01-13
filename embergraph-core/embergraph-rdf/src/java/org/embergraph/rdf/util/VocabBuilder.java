@@ -94,9 +94,7 @@ public class VocabBuilder {
 
       final File[] files = (filter != null ? file.listFiles(filter) : file.listFiles());
 
-      for (int i = 0; i < files.length; i++) {
-
-        final File f = files[i];
+      for (final File f : files) {
 
         loadFiles(depth + 1, f, baseURI, rdfFormat, filter);
       }
@@ -162,8 +160,6 @@ public class VocabBuilder {
 
         rdfParser.parse(reader, s);
 
-        return;
-
       } catch (Exception ex) {
 
         log.warn("Could not process file " + file + ": " + ex.getStackTrace());
@@ -183,7 +179,7 @@ public class VocabBuilder {
 
     public AddStatementHandler() {}
 
-    public void handleStatement(final Statement stmt) throws RDFHandlerException {
+    public void handleStatement(final Statement stmt) {
 
       final URI p = stmt.getPredicate();
 
@@ -384,36 +380,33 @@ public class VocabBuilder {
    * ntriples, etc as their file extension. gzip and zip extensions are also supported.
    */
   private static final FilenameFilter filter =
-      new FilenameFilter() {
+      (dir, name) -> {
 
-        public boolean accept(final File dir, final String name) {
+        if (new File(dir, name).isDirectory()) {
 
-          if (new File(dir, name).isDirectory()) {
+          // Skip hidden files.
+          return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
+          //
+          //                    // Skip .svn files.
+          //                    return false;
+          //
+          //                }
 
-            // Skip hidden files.
-            return !dir.isHidden(); //                if(dir.getName().equals(".svn")) {
-            //
-            //                    // Skip .svn files.
-            //                    return false;
-            //
-            //                }
-
-            // visit subdirectories.
-          }
-
-          // if recognizable as RDF.
-          boolean isRDF =
-              RDFFormat.forFileName(name) != null
-                  || (name.endsWith(".zip")
-                      && RDFFormat.forFileName(name.substring(0, name.length() - 4)) != null)
-                  || (name.endsWith(".gz")
-                      && RDFFormat.forFileName(name.substring(0, name.length() - 3)) != null);
-
-          if (log.isDebugEnabled())
-            log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
-
-          return isRDF;
+          // visit subdirectories.
         }
+
+        // if recognizable as RDF.
+        boolean isRDF =
+            RDFFormat.forFileName(name) != null
+                || (name.endsWith(".zip")
+                    && RDFFormat.forFileName(name.substring(0, name.length() - 4)) != null)
+                || (name.endsWith(".gz")
+                    && RDFFormat.forFileName(name.substring(0, name.length() - 3)) != null);
+
+        if (log.isDebugEnabled())
+          log.debug("dir=" + dir + ", name=" + name + " : isRDF=" + isRDF);
+
+        return isRDF;
       };
 
   /*

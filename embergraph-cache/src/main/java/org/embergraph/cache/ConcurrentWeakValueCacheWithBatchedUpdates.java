@@ -228,6 +228,12 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
     if (queue == null) throw new IllegalArgumentException();
 
+    /*
+     * Since processing the ReferenceQueue requires a lock, we let the thread which
+     * batches the access order updates remove entries for cleared references.
+     * [Historically this task was handled by the thread modifying the map in put() and
+     * putIfAbsent(), which caused contention for the lock inside of the ReferenceQueue.]
+     */
     this.queue =
         new HardReferenceQueueWithBatchingUpdates<>(
             EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
@@ -236,17 +242,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
             10, // threadLocalQueueNScan
             64, // threadLocalQueueCapacity
             32, // threadLocalTryLockSize
-            new IBatchedUpdateListener<V>() {
-              /*
-               * Since processing the ReferenceQueue requires a lock, we let the thread which
-               * batches the access order updates remove entries for cleared references.
-               * [Historically this task was handled by the thread modifying the map in put() and
-               * putIfAbsent(), which caused contention for the lock inside of the ReferenceQueue.]
-               */
-              public void didBatchUpdates() {
-                removeClearedEntries();
-              }
-            });
+            () -> removeClearedEntries());
 
     /*
      * We set the initial capacity of the ConcurrentHashMap to be larger

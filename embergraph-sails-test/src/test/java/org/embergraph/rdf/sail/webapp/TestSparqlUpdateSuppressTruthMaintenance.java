@@ -50,6 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.embergraph.rdf.sail.webapp;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import junit.framework.Test;
 import org.embergraph.journal.BufferMode;
@@ -71,7 +72,7 @@ public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager>
     return ProxySuiteHelper.suiteWhenStandalone(
         TestSparqlUpdateSuppressTruthMaintenance.class,
         "test.*",
-        new LinkedHashSet<>(Arrays.asList(BufferMode.MemStore)),
+        new LinkedHashSet<>(Collections.singletonList(BufferMode.MemStore)),
         TestMode.triplesPlusTruthMaintenance);
   }
 

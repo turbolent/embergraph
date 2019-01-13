@@ -98,16 +98,15 @@ public class AbstractSimpleInsertTest<S extends IIndexManager>
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
    */
   protected String getNamespaceDeclarations() {
-    final StringBuilder declarations = new StringBuilder();
-    declarations.append("PREFIX rdf: <" + RDF.NAMESPACE + "> \n");
-    declarations.append("PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n");
-    declarations.append("PREFIX dc: <" + DC.NAMESPACE + "> \n");
-    declarations.append("PREFIX foaf: <" + FOAF.NAMESPACE + "> \n");
-    declarations.append("PREFIX ex: <" + EX_NS + "> \n");
-    declarations.append("PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n");
-    declarations.append("\n");
 
-    return declarations.toString();
+    String declarations = ("PREFIX rdf: <" + RDF.NAMESPACE + "> \n")
+        + "PREFIX rdfs: <" + RDFS.NAMESPACE + "> \n"
+        + "PREFIX dc: <" + DC.NAMESPACE + "> \n"
+        + "PREFIX foaf: <" + FOAF.NAMESPACE + "> \n"
+        + "PREFIX ex: <" + EX_NS + "> \n"
+        + "PREFIX xsd: <" + XMLSchema.NAMESPACE + "> \n"
+        + "\n";
+    return declarations;
   }
 
   protected boolean hasStatement(
@@ -129,13 +128,12 @@ public class AbstractSimpleInsertTest<S extends IIndexManager>
   }
 
   protected void executeInsert(String where, boolean expected) throws Exception {
-    final StringBuilder update = new StringBuilder();
-    update.append(getNamespaceDeclarations());
-    update.append("INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where + " }");
 
     assertFalse(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    String update = getNamespaceDeclarations()
+        + "INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where + " }";
+    m_repo.prepareUpdate(update).evaluate();
 
     assertEquals(expected, hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
   }

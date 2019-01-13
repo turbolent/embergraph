@@ -87,11 +87,9 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     this.keys = new byte[src.keys.length][];
 
     // copy the defined keys.
-    for (int i = 0; i < nkeys; i++) {
-
-      // Note: copies the reference.
-      this.keys[i] = src.keys[i];
-    }
+    // Note: copies the reference.
+    if (nkeys >= 0)
+      System.arraycopy(src.keys, 0, this.keys, 0, nkeys);
   }
 
   /*
@@ -282,10 +280,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
 
     byte[] b = new byte[len];
 
-    for (int i = 0; i < len; i++) {
-
-      b[i] = key[off + i];
-    }
+    System.arraycopy(key, off + 0, b, 0, len);
 
     keys[nkeys++] = b;
 

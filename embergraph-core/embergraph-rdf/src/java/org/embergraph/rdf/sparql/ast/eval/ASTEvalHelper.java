@@ -313,7 +313,7 @@ public class ASTEvalHelper {
          */
 
         // The variables to be materialized.
-        final IVariable<?>[] vars = projectedSet.toArray(new IVariable[projectedSet.size()]);
+        final IVariable<?>[] vars = projectedSet.toArray(new IVariable[0]);
 
         // Wrap with chunked materialization logic.
         it2 =

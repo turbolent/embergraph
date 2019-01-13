@@ -620,7 +620,7 @@ public class Journal extends AbstractJournal
      *     HAJournalServer process </a>
      */
     private void messageFollowers(final long token, final long timeoutNanos)
-        throws IOException, InterruptedException, BrokenBarrierException, TimeoutException {
+        throws InterruptedException, BrokenBarrierException, TimeoutException {
 
       final long begin = System.nanoTime();
       final long nanos = timeoutNanos;
@@ -753,51 +753,49 @@ public class Journal extends AbstractJournal
 
           final ScheduledFuture<?> scheduledFuture =
               scheduledExecutorService.scheduleWithFixedDelay(
-                  new Runnable() {
-                    public void run() {
-                      try {
+                  () -> {
+                    try {
 
-                        // Verify service is still leader.
-                        quorum.assertLeader(token);
+                      // Verify service is still leader.
+                      quorum.assertLeader(token);
 
-                        // Verify service self-recognizes as leader.
-                        if (getHAStatus() != HAStatusEnum.Leader) {
+                      // Verify service self-recognizes as leader.
+                      if (getHAStatus() != HAStatusEnum.Leader) {
 
-                          throw new QuorumException();
-                        }
-
-                        // Verify messaged services still
-                        // joined.
-                        assertServicesStillJoined(quorum);
-
-                        for (Future<Void> f : futures) {
-                          if (f.isDone()) {
-                            /*
-                             * Note: If any follower fails
-                             * on the RMI, then that is
-                             * noticed here and the GATHER
-                             * will fail on the leader.
-                             *
-                             * TODO This should be robust as
-                             * long as a majority of the
-                             * services succeed. Right now
-                             * this will stop the GATHER if
-                             * any service fails on the RMI.
-                             */
-                            f.get();
-                          }
-                        }
-
-                      } catch (Throwable ex) {
-
-                        if (InnerCause.isInnerCause(ex, InterruptedException.class)) {
-
-                          // Normal termination.
-                          return;
-                        }
-
-                        logErrorAndResetBarrier(ex);
+                        throw new QuorumException();
                       }
+
+                      // Verify messaged services still
+                      // joined.
+                      assertServicesStillJoined(quorum);
+
+                      for (Future<Void> f : futures) {
+                        if (f.isDone()) {
+                          /*
+                           * Note: If any follower fails
+                           * on the RMI, then that is
+                           * noticed here and the GATHER
+                           * will fail on the leader.
+                           *
+                           * TODO This should be robust as
+                           * long as a majority of the
+                           * services succeed. Right now
+                           * this will stop the GATHER if
+                           * any service fails on the RMI.
+                           */
+                          f.get();
+                        }
+                      }
+
+                    } catch (Throwable ex) {
+
+                      if (InnerCause.isInnerCause(ex, InterruptedException.class)) {
+
+                        // Normal termination.
+                        return;
+                      }
+
+                      logErrorAndResetBarrier(ex);
                     }
                   },
                   initialDelay,
@@ -1478,8 +1476,7 @@ public class Journal extends AbstractJournal
      * @throws UnsupportedOperationException
      */
     @Override
-    public void gatherMinimumVisibleCommitTime(final IHAGatherReleaseTimeRequest req)
-        throws IOException {
+    public void gatherMinimumVisibleCommitTime(final IHAGatherReleaseTimeRequest req) {
 
       throw new UnsupportedOperationException();
     }
@@ -1780,7 +1777,7 @@ public class Journal extends AbstractJournal
     @Override
     public IHANotifyReleaseTimeResponse notifyEarliestCommitTime(
         final IHANotifyReleaseTimeRequest req)
-        throws IOException, InterruptedException, BrokenBarrierException {
+        throws InterruptedException, BrokenBarrierException {
 
       /*
        * Note: Do NOT error check [req] until we are in the try{} /
@@ -1942,15 +1939,8 @@ public class Journal extends AbstractJournal
       }
 
       // Note: Invocation against local HAGlue object (NOT RMI).
-      try {
 
-        return localService.getHAStatus();
-
-      } catch (IOException ex) {
-
-        // Note: Exception is never thrown (not RMI).
-        throw new RuntimeException(ex);
-      }
+      return localService.getHAStatus();
     }
 
     @Override
@@ -3561,12 +3551,11 @@ public class Journal extends AbstractJournal
 
         log.error(t, t);
 
-        return;
       }
     }
 
     /** Starts performance counter collection. */
-    protected void startDeferredTasks() throws IOException {
+    protected void startDeferredTasks() {
 
       // start collection on various work queues.
       {

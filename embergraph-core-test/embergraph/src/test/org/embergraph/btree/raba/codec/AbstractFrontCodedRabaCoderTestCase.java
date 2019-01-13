@@ -50,7 +50,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_example_ratio4() throws UnsupportedEncodingException {
+  public void test_example_ratio4() {
 
     final byte[][] a = new byte[4][];
     a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
@@ -89,7 +89,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_example_ratio3() throws UnsupportedEncodingException {
+  public void test_example_ratio3() {
 
     final byte[][] a = new byte[4][];
     a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
@@ -130,7 +130,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_example1_ratio2() throws UnsupportedEncodingException {
+  public void test_example1_ratio2() {
 
     final byte[][] a = new byte[4][];
     a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
@@ -170,7 +170,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
    *
    * @throws UnsupportedEncodingException
    */
-  public void test_example1_ratio1() throws UnsupportedEncodingException {
+  public void test_example1_ratio1() {
 
     final byte[][] a = new byte[4][];
     a[0] = "foo".getBytes(StandardCharsets.US_ASCII);

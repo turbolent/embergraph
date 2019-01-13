@@ -70,10 +70,10 @@ public class PartialEdge extends PartialElement implements Edge {
 
   public String toString() {
     final StringBuilder sb = new StringBuilder();
-    sb.append("id: " + super.getId());
-    sb.append(", from: " + from.getId());
-    sb.append(", to: " + to.getId());
-    sb.append(", label: " + label);
+    sb.append("id: ").append(super.getId());
+    sb.append(", from: ").append(from.getId());
+    sb.append(", to: ").append(to.getId());
+    sb.append(", label: ").append(label);
     sb.append(", props: ");
     super.appendProps(sb);
     return sb.toString();

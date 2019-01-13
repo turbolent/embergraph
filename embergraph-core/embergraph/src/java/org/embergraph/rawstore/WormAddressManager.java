@@ -478,25 +478,15 @@ public class WormAddressManager implements IAddressManager {
   /** A human readable representation of the state of the {@link WormAddressManager}. */
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(super.toString());
-
-    sb.append("{ offsetBits=" + offsetBits);
-
-    sb.append(", byteCountBits=" + byteCountBits);
-
-    sb.append(", maxOffset=" + Long.toHexString(maxOffset));
-
-    sb.append(", maxByteCount=" + Long.toHexString(maxByteCount));
-
-    sb.append(", offsetMask=" + Long.toHexString(offsetMask));
-
-    sb.append(", byteCountMask=" + Long.toHexString(byteCountMask));
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = super.toString()
+        + "{ offsetBits=" + offsetBits
+        + ", byteCountBits=" + byteCountBits
+        + ", maxOffset=" + Long.toHexString(maxOffset)
+        + ", maxByteCount=" + Long.toHexString(maxByteCount)
+        + ", offsetMask=" + Long.toHexString(offsetMask)
+        + ", byteCountMask=" + Long.toHexString(byteCountMask)
+        + "}";
+    return sb;
   }
 
   /*

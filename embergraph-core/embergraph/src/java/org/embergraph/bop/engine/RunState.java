@@ -297,18 +297,18 @@ class RunState {
     }
 
     StringBuilder toString(final StringBuilder sb) {
-      sb.append("{nsteps=" + stepCount);
-      sb.append(",allDone=" + allDone);
-      sb.append(",totalRunning=" + totalRunningCount);
-      sb.append(",totalAvailable=" + totalAvailableCount);
-      sb.append(",totalLastPassRemaining=" + totalLastPassRemainingCount);
-      sb.append(",services=" + serviceIds);
-      sb.append(",startedOn=" + startedOn);
-      sb.append(",doneOn=" + doneOn);
-      sb.append(",running=" + runningMap);
-      sb.append(",available=" + availableMap);
-      sb.append(",lastPassRequested=" + lastPassRequested);
-      sb.append(",atOnceRequired=" + atOnceRequired);
+      sb.append("{nsteps=").append(stepCount);
+      sb.append(",allDone=").append(allDone);
+      sb.append(",totalRunning=").append(totalRunningCount);
+      sb.append(",totalAvailable=").append(totalAvailableCount);
+      sb.append(",totalLastPassRemaining=").append(totalLastPassRemainingCount);
+      sb.append(",services=").append(serviceIds);
+      sb.append(",startedOn=").append(startedOn);
+      sb.append(",doneOn=").append(doneOn);
+      sb.append(",running=").append(runningMap);
+      sb.append(",available=").append(availableMap);
+      sb.append(",lastPassRequested=").append(lastPassRequested);
+      sb.append(",atOnceRequired=").append(atOnceRequired);
       sb.append("}");
       return sb;
     }
@@ -1394,21 +1394,21 @@ class RunState {
     sb.append("\tnlastPassRemaining");
     sb.append("\tallDone");
 
-    for (int i = 0; i < bopIds.length; i++) {
-
-      final Integer id = bopIds[i];
+    for (final Integer id : bopIds) {
 
       final BOp bop = innerState.bopIndex.get(id);
 
-      if (!(bop instanceof PipelineOp)) continue; // skip non-pipeline operators.
+      if (!(bop instanceof PipelineOp)) {
+        continue; // skip non-pipeline operators.
+      }
 
-      sb.append("\tnavail(id=" + id + ")");
+      sb.append("\tnavail(id=").append(id).append(")");
 
-      sb.append("\tnrun(id=" + id + ")");
+      sb.append("\tnrun(id=").append(id).append(")");
 
-      sb.append("\tnstartedOn(id=" + id + ")");
+      sb.append("\tnstartedOn(id=").append(id).append(")");
 
-      sb.append("\tndoneOn(id=" + id + ")");
+      sb.append("\tndoneOn(id=").append(id).append(")");
     }
 
     sb.append("\telapsed");
@@ -1525,13 +1525,13 @@ class RunState {
 
     Arrays.sort(bopIds);
 
-    for (int i = 0; i < bopIds.length; i++) {
-
-      final Integer id = bopIds[i];
+    for (final Integer id : bopIds) {
 
       final BOp bop = innerState.bopIndex.get(id);
 
-      if (!(bop instanceof PipelineOp)) continue; // skip non-pipeline operators.
+      if (!(bop instanceof PipelineOp)) {
+        continue; // skip non-pipeline operators.
+      }
 
       final AtomicLong nrunning = innerState.runningMap.get(id);
 
@@ -1541,13 +1541,13 @@ class RunState {
 
       final Set<?> doneSet = innerState.doneOn.get(id);
 
-      sb.append("\t" + (navailable == null ? "N/A" : navailable.get()));
+      sb.append("\t").append(navailable == null ? "N/A" : navailable.get());
 
-      sb.append("\t" + (nrunning == null ? "N/A" : nrunning.get()));
+      sb.append("\t").append(nrunning == null ? "N/A" : nrunning.get());
 
-      sb.append("\t" + (startedSet == null ? "N/A" : startedSet.size()));
+      sb.append("\t").append(startedSet == null ? "N/A" : startedSet.size());
 
-      sb.append("\t" + (doneSet == null ? "N/A" : doneSet.size()));
+      sb.append("\t").append(doneSet == null ? "N/A" : doneSet.size());
     }
 
     /*

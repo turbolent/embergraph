@@ -103,7 +103,7 @@ public class TestTransientJournal extends AbstractJournalTestCase {
    *
    * @throws IOException
    */
-  public void test_create_transient01() throws IOException {
+  public void test_create_transient01() {
 
     final Properties properties = getProperties();
 

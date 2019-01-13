@@ -186,20 +186,16 @@ class QuantileFinderTest {
     System.out.println("***********************************");
     Timer timer = new Timer().start();
 
-    for (int q = 0; q < quantiles.length; q++) {
-      int p = quantiles[q];
+    for (int p : quantiles) {
       System.out.println("------------------------------");
       System.out.println("computing for p = " + p);
-      for (int s = 0; s < sizes.length; s++) {
-        long N = sizes[s];
+      for (long N : sizes) {
         System.out.println("   ------------------------------");
         System.out.println("   computing for N = " + N);
-        for (int e = 0; e < epsilons.length; e++) {
-          double epsilon = epsilons[e];
+        for (double epsilon : epsilons) {
           System.out.println("      ------------------------------");
           System.out.println("      computing for e = " + epsilon);
-          for (int d = 0; d < deltas.length; d++) {
-            double delta = deltas[d];
+          for (double delta : deltas) {
             for (int knownCounter = 0; knownCounter < 2; knownCounter++) {
               boolean known_N;
               known_N = knownCounter == 0;
@@ -236,7 +232,9 @@ class QuantileFinderTest {
               */
               String knownStr = known_N ? "  known" : "unknown";
               long mem = finder.totalMemory();
-              if (mem == 0) mem = N;
+              if (mem == 0) {
+                mem = N;
+              }
               // else if (mem==0 && !known_N && N<0) mem = Long.MAX_VALUE; // actually infinity
               // else if (mem==0 && !known_N && N>=0) mem = N;
               // System.out.print("         (e,d,N,p)=("+epsilon+","+delta+","+N+","+p+") --> ");
@@ -308,8 +306,8 @@ class QuantileFinderTest {
     int chunks = Integer.parseInt(args[4]);
     boolean computeExactQuantilesAlso = args[5].equals("exact");
     boolean doShuffle = args[6].equals("shuffle");
-    double epsilon = new Double(args[7]).doubleValue();
-    double delta = new Double(args[8]).doubleValue();
+    double epsilon = Double.parseDouble(args[7]);
+    double delta = Double.parseDouble(args[8]);
     int quantiles = Integer.parseInt(args[9]);
     long max_N = Long.parseLong(args[10]);
 

@@ -12,10 +12,13 @@ public class ImmutableBinaryTrieTest extends TestCase {
 
   public void testImmutableBinaryTrie(List<String> strings) {
     ObjectArrayList<BitVector> vectors = new ObjectArrayList<>();
-    for (int i = 0; i < strings.size(); i++) {
-      BitVector v = LongArrayBitVector.ofLength(strings.get(i).length());
-      for (int j = 0; j < strings.get(i).length(); j++)
-        if (strings.get(i).charAt(j) == '1') v.set(j);
+    for (String string : strings) {
+      BitVector v = LongArrayBitVector.ofLength(string.length());
+      for (int j = 0; j < string.length(); j++) {
+        if (string.charAt(j) == '1') {
+          v.set(j);
+        }
+      }
       vectors.add(v);
     }
 

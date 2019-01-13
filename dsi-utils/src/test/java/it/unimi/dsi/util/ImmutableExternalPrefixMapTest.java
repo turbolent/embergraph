@@ -42,8 +42,7 @@ public class ImmutableExternalPrefixMapTest extends TestCase {
     t = new TernaryIntervalSearchTree(p);
 
     int j = 0;
-    for (Iterator<String> i = p.iterator(); i.hasNext(); ) {
-      String s = i.next();
+    for (String s : p) {
       assertTrue(s, d.containsKey(s));
       assertEquals(s, d.list().get(j++).toString());
       assertEquals(s, t.rangeMap().get(s), d.getInterval(s));

@@ -431,12 +431,12 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
   }
 
   @Override
-  public final Long visit(ASTLimit node, Object data) throws VisitorException {
+  public final Long visit(ASTLimit node, Object data) {
     return node.getValue();
   }
 
   @Override
-  public final Long visit(ASTOffset node, Object data) throws VisitorException {
+  public final Long visit(ASTOffset node, Object data) {
     return node.getValue();
   }
 

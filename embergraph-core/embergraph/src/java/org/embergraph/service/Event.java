@@ -473,7 +473,7 @@ public class Event implements Serializable {
         sb.append('\t');
         sb.append(s);
         sb.append("=");
-        sb.append("" + details.get(s));
+        sb.append("").append(details.get(s));
       }
       //            for (Map.Entry<String, Object> entry : details.entrySet()) {
       //                sb.append('\t');
@@ -533,7 +533,7 @@ public class Event implements Serializable {
    * @param s the tab delimited serialization
    * @throws ClassNotFoundException if any fields specify an invalid classname
    */
-  protected Event(final String s) throws ClassNotFoundException {
+  protected Event(final String s) {
     //        System.err.println(s);
     final MyStringTokenizer st = new MyStringTokenizer(s, "\t");
     try {

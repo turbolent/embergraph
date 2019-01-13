@@ -292,11 +292,11 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
           newSeq.add(
               new PathElt(
                   new PathAlternative(
-                      new PathSequence((PathElt[]) with.toArray(new PathElt[with.size()])),
-                      new PathSequence((PathElt[]) without.toArray(new PathElt[without.size()])))));
+                      new PathSequence((PathElt[]) with.toArray(new PathElt[0])),
+                      new PathSequence((PathElt[]) without.toArray(new PathElt[0])))));
 
           final PathSequence pathSeq2 =
-              new PathSequence(newSeq.toArray(new PathElt[newSeq.size()]));
+              new PathSequence(newSeq.toArray(new PathElt[0]));
 
           optimize(ctx, sa, group, ppInfo, pathSeq2, alpNode, queryHints, ppNode);
 
@@ -550,7 +550,7 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
     args[0] = p;
 
     System.arraycopy(
-        constants.toArray(new ConstantNode[constants.size()]), 0, args, 1, constants.size());
+        constants.toArray(new ConstantNode[0]), 0, args, 1, constants.size());
 
     final FunctionNode function = new FunctionNode(FunctionRegistry.NOT_IN, null, args);
 

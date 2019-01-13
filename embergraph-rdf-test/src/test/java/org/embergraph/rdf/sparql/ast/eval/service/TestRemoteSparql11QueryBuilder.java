@@ -169,7 +169,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
 
     final List<BindingSet> bindingSets = new LinkedList<>();
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -253,7 +253,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(new MapBindingSet());
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -361,7 +361,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -506,7 +506,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -629,7 +629,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -737,7 +737,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -860,7 +860,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     final IRemoteSparqlQueryBuilder fixture = newFixture(serviceNode, a);
 
@@ -940,7 +940,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
    *
    * <p>Note: This case can not be handled with the {@link RemoteSparql11QueryBuilder}.
    */
-  public void test_service_007() throws Exception {
+  public void test_service_007() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -995,7 +995,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     try {
 
@@ -1021,7 +1021,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
    *
    * <p>Note: This case can not be handled with the {@link RemoteSparql11QueryBuilder}.
    */
-  public void test_service_008() throws Exception {
+  public void test_service_008() {
 
     final EmbergraphURI serviceURI = valueFactory.createURI("http://www.embergraph.org/myService");
 
@@ -1079,7 +1079,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
       bindingSets.add(bset);
     }
 
-    final BindingSet[] a = bindingSets.toArray(new BindingSet[bindingSets.size()]);
+    final BindingSet[] a = bindingSets.toArray(new BindingSet[0]);
 
     try {
 

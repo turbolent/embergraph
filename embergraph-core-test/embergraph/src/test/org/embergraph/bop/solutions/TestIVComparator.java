@@ -124,12 +124,10 @@ public class TestIVComparator extends TestCase2 {
       }
 
       final IDatatypeURIResolver resolver =
-          new IDatatypeURIResolver() {
-            public EmbergraphURI resolve(final URI uri) {
-              final EmbergraphURI buri = f.createURI(uri.stringValue());
-              buri.setIV(new TermId<EmbergraphLiteral>(VTE.URI, termId++));
-              return buri;
-            }
+          uri -> {
+            final EmbergraphURI buri = f.createURI(uri.stringValue());
+            buri.setIV(new TermId<EmbergraphLiteral>(VTE.URI, termId++));
+            return buri;
           };
 
       final DateTimeExtension<EmbergraphValue> dtExt =

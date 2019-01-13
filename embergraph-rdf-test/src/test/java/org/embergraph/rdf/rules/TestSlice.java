@@ -30,7 +30,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;

@@ -31,7 +31,6 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
-import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.FunctionNode;
 import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 import org.embergraph.rdf.sparql.ast.GroupByNode;

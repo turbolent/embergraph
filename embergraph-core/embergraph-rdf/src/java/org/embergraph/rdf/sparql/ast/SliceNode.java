@@ -117,11 +117,11 @@ public class SliceNode extends SolutionModifierBase {
     final long offset = getOffset();
     final long limit = getLimit();
     if (offset != 0L) {
-      sb.append("offset=" + offset);
+      sb.append("offset=").append(offset);
     }
     if (limit != Long.MAX_VALUE) {
       if (offset != 0L) sb.append(",");
-      sb.append("limit=" + limit);
+      sb.append("limit=").append(limit);
     }
     sb.append(")");
     if (getQueryHints() != null && !getQueryHints().isEmpty()) {

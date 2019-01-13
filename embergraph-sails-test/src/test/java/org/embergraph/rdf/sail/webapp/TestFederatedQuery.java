@@ -207,7 +207,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    * @param i the index of the repository, starting with 1
    * @return
    */
-  private RemoteRepository getRepository(final int i) throws Exception {
+  private RemoteRepository getRepository(final int i) {
 
     final String ns = getNamespace(i);
 
@@ -329,15 +329,15 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     final URI william = f.createURI(EX_NS, "william");
 
     // clears the repository and adds new data
-    prepareTest("simple-default-graph.ttl", Arrays.asList("simple.ttl"));
+    prepareTest("simple-default-graph.ttl", Collections.singletonList("simple.ttl"));
 
     final StringBuilder qb = new StringBuilder();
     qb.append(" SELECT * \n");
     qb.append(" WHERE { \n");
-    qb.append("     SERVICE <" + getRepositoryUrl(1) + "> { \n");
-    qb.append("             ?X <" + FOAF.NAME + "> ?Y \n ");
+    qb.append("     SERVICE <").append(getRepositoryUrl(1)).append("> { \n");
+    qb.append("             ?X <").append(FOAF.NAME).append("> ?Y \n ");
     qb.append("     } \n ");
-    qb.append("     ?X a <" + FOAF.PERSON + "> . \n");
+    qb.append("     ?X a <").append(FOAF.PERSON).append("> . \n");
     qb.append(" } \n");
 
     final EmbergraphSailRemoteRepositoryConnection conn =
@@ -379,7 +379,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
 
   //  @Test
   public void test1() throws Exception {
-    prepareTest("data01.ttl", Arrays.asList("data01endpoint.ttl"));
+    prepareTest("data01.ttl", Collections.singletonList("data01endpoint.ttl"));
     execute("service01.rq", "service01.srx", false);
   }
 
@@ -459,7 +459,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
 
   //  @Test
   public void test6() throws Exception { //     fail("FIXME RESTORE"); // FIXME RESTORE
-    prepareTest(null, Arrays.asList("data06endpoint1.ttl"));
+    prepareTest(null, Collections.singletonList("data06endpoint1.ttl"));
     execute("service06.rq", "service06.srx", false);
   }
 
@@ -473,14 +473,14 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   //  @Test
   public void test8() throws Exception {
     /* test where the SERVICE expression is to be evaluated as ASK request */
-    prepareTest("data08.ttl", Arrays.asList("data08endpoint.ttl"));
+    prepareTest("data08.ttl", Collections.singletonList("data08endpoint.ttl"));
     execute("service08.rq", "service08.srx", false);
   }
 
   //  @Test
   public void test9() throws Exception {
     /* test where the service endpoint is bound at runtime through BIND */
-    prepareTest(null, Arrays.asList("data09endpoint.ttl"));
+    prepareTest(null, Collections.singletonList("data09endpoint.ttl"));
     execute("service09.rq", "service09.srx", false);
   }
 
@@ -491,7 +491,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   //  @Test
   public void test10() throws Exception {
     /* test how we deal with blank node */
-    prepareTest("data10.ttl", Arrays.asList("data10endpoint.ttl"));
+    prepareTest("data10.ttl", Collections.singletonList("data10endpoint.ttl"));
     execute("service10.rq", "service10.srx", false);
   }
 
@@ -504,7 +504,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    */
   public void test10b() throws Exception {
     /* test how we deal with blank node */
-    prepareTest("data10.ttl", Arrays.asList("data10endpoint.ttl"));
+    prepareTest("data10.ttl", Collections.singletonList("data10endpoint.ttl"));
     execute("service10b.rq", "service10.srx", false);
   }
 
@@ -512,7 +512,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   public void test11() throws Exception {
     /* test vectored join with more intermediate results */
     // clears the repository and adds new data + execute
-    prepareTest("data11.ttl", Arrays.asList("data11endpoint.ttl"));
+    prepareTest("data11.ttl", Collections.singletonList("data11endpoint.ttl"));
     execute("service11.rq", "service11.srx", false);
   }
 
@@ -575,13 +575,13 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    */
   public void test13b() throws Exception {
     /* test for bug SES-899: cross product is required */
-    prepareTest(null, Arrays.asList("data13.ttl"));
+    prepareTest(null, Collections.singletonList("data13.ttl"));
     execute("service13b.rq", "service13.srx", false);
   }
 
   public void testEmptyServiceBlock() throws Exception {
     /* test for bug SES-900: nullpointer for empty service block */
-    prepareTest(null, Arrays.asList("data13.ttl"));
+    prepareTest(null, Collections.singletonList("data13.ttl"));
     execute("service14.rq", "service14.srx", false);
   }
 
@@ -680,7 +680,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    * @throws IOException
    */
   private String readQueryString(final String queryResource)
-      throws RepositoryException, IOException {
+      throws IOException {
     final InputStream stream =
         TestFederatedQuery.class.getResourceAsStream(TEST_RESOURCE_PATH + queryResource);
     try {
@@ -905,8 +905,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    * @param expectedResult
    * @throws Exception
    */
-  private void compareGraphs(Set<Statement> queryResult, Set<Statement> expectedResult)
-      throws Exception {
+  private void compareGraphs(Set<Statement> queryResult, Set<Statement> expectedResult) {
     if (!ModelUtil.equals(expectedResult, queryResult)) {
       // Don't use RepositoryUtil.difference, it reports incorrect diffs
       /*

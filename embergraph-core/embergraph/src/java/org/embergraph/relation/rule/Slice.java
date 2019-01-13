@@ -91,7 +91,7 @@ public class Slice implements ISlice, Externalizable {
     return "Slice{offset=" + offset + ", limit=" + limit + ", last=" + last + "}";
   }
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     offset = in.readLong();
     limit = in.readLong();

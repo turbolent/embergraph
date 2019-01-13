@@ -15,7 +15,7 @@ import cern.colt.Timer;
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
  */
-public class Benchmark extends Object {
+public class Benchmark {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Benchmark() {}
   /** */
@@ -130,8 +130,8 @@ public class Benchmark extends Object {
     map.hashCollisions = 0;
     */
     int sum = 0;
-    for (int i = 0; i < keys.length; i++) {
-      sum += map.get(keys[i]);
+    for (int key : keys) {
+      sum += map.get(key);
       // System.out.println(map);
     }
     // System.out.println("probes="+map.hashCollisions);

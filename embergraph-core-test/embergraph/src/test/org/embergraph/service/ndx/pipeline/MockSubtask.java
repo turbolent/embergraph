@@ -35,9 +35,9 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
  */
 public abstract class MockSubtask<
         H extends MockMasterStats<L, HS>,
-        O extends Object,
+        O,
         E extends KVO<O>,
-        L extends Object,
+        L,
         S extends MockSubtask,
         HS extends MockSubtaskStats,
         M extends MockMaster<H, O, E, S, L, HS>>

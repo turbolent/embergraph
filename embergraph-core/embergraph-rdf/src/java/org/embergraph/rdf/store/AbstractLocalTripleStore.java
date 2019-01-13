@@ -81,18 +81,9 @@ public abstract class AbstractLocalTripleStore extends AbstractTripleStore {
       final long bytesPerRecord =
           totalWritten == 0 ? 0 : bytesWritten / (nodesWritten + leavesWritten);
 
-      sb.append(
-          (first ? "" : ", ")
-              + fqn
-              + "{nodes="
-              + nodesWritten
-              + ",leaves="
-              + leavesWritten
-              + ", bytes="
-              + bytesWritten
-              + ", averageBytesPerRecord="
-              + bytesPerRecord
-              + "}");
+      sb.append(first ? "" : ", ").append(fqn).append("{nodes=").append(nodesWritten)
+          .append(",leaves=").append(leavesWritten).append(", bytes=").append(bytesWritten)
+          .append(", averageBytesPerRecord=").append(bytesPerRecord).append("}");
 
       first = false;
     }
@@ -115,18 +106,9 @@ public abstract class AbstractLocalTripleStore extends AbstractTripleStore {
       final long bytesPerRecord =
           totalWritten == 0 ? 0 : bytesWritten / (nodesWritten + leavesWritten);
 
-      sb.append(
-          (first ? "" : ", ")
-              + fqn
-              + "{nodes="
-              + nodesWritten
-              + ",leaves="
-              + leavesWritten
-              + ", bytes="
-              + bytesWritten
-              + ", averageBytesPerRecord="
-              + bytesPerRecord
-              + "}");
+      sb.append(first ? "" : ", ").append(fqn).append("{nodes=").append(nodesWritten)
+          .append(",leaves=").append(leavesWritten).append(", bytes=").append(bytesWritten)
+          .append(", averageBytesPerRecord=").append(bytesPerRecord).append("}");
 
       first = false;
     }

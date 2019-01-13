@@ -759,7 +759,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
     tmp.add(resourceManager.getDataServiceUUID());
 
-    return tmp.toArray(new UUID[tmp.size()]);
+    return tmp.toArray(new UUID[0]);
   }
 
   //    /*
@@ -954,7 +954,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
      * @return <code>null</code>
      */
     @Override
-    protected Void doTask() throws Exception {
+    protected Void doTask() {
 
       updateEvent.start();
 

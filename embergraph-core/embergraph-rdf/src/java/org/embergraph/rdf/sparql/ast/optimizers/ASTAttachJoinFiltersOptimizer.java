@@ -252,7 +252,7 @@ public class ASTAttachJoinFiltersOptimizer implements IASTOptimizer {
       final FilterNode[][] assignedConstraints =
           sa.getJoinGraphConstraints(
               path,
-              joinFilters.toArray(new FilterNode[joinFilters.size()]),
+              joinFilters.toArray(new FilterNode[0]),
               knownBound,
               false /* pathIsComplete */);
 

@@ -80,7 +80,7 @@ public class CompressedTimestampExtension<V extends EmbergraphValue> implements 
   public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
 
     AbstractLiteralIV delegate = iv.getDelegate();
-    if (delegate == null || !(delegate instanceof PackedLongIV)) {
+    if (!(delegate instanceof PackedLongIV)) {
       throw new IllegalArgumentException();
     }
 

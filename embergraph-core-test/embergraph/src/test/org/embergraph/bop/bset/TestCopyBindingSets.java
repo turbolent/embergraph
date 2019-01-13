@@ -62,7 +62,7 @@ public class TestCopyBindingSets extends TestCase2 {
 
   List<IBindingSet> data = null;
 
-  public void setUp() throws Exception {
+  public void setUp() {
 
     setUpData();
   }
@@ -106,7 +106,7 @@ public class TestCopyBindingSets extends TestCase2 {
     }
   }
 
-  public void tearDown() throws Exception {
+  public void tearDown() {
 
     // clear reference.
     data = null;
@@ -118,7 +118,7 @@ public class TestCopyBindingSets extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_copyBindingSets() throws InterruptedException, ExecutionException {
+  public void test_copyBindingSets() {
 
     final int bopId = 1;
 
@@ -168,7 +168,7 @@ public class TestCopyBindingSets extends TestCase2 {
    * Testing against {@link Tee} which is a specialized {@link CopyOp} which requires that the
    * alternate sink is also specified. Gives us code coverage of {@link Tee} as well.
    */
-  public void test_copyToSinkAndAltSink() throws InterruptedException, ExecutionException {
+  public void test_copyToSinkAndAltSink() {
 
     final int bopId = 1;
 
@@ -227,7 +227,7 @@ public class TestCopyBindingSets extends TestCase2 {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public void test_copyBindingSetsWithConstraint() throws InterruptedException, ExecutionException {
+  public void test_copyBindingSetsWithConstraint() {
 
     final Var<?> x = Var.var("x");
 

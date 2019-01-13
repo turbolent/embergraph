@@ -141,7 +141,7 @@ public class DataSetJoin extends PipelineOp {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       final ICloseableIterator<IBindingSet[]> source = context.getSource();
 

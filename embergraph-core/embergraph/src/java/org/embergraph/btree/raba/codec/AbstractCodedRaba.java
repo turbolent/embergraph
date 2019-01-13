@@ -55,7 +55,7 @@ public abstract class AbstractCodedRaba implements ICodedRaba {
   }
 
   @Override
-  public final int add(DataInput in, int len) throws IOException {
+  public final int add(DataInput in, int len) {
     throw new UnsupportedOperationException();
   }
 

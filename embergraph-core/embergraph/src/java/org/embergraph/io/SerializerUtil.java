@@ -73,19 +73,18 @@ public class SerializerUtil {
         }
 
         /** Always returns the same reference. */
-        private Object readResolve() throws ObjectStreamException {
+        private Object readResolve() {
 
           return STREAMS;
         }
 
-        private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        private void writeObject(java.io.ObjectOutputStream out) {
 
           // NOP
 
         }
 
-        private void readObject(java.io.ObjectInputStream in)
-            throws IOException, ClassNotFoundException {
+        private void readObject(java.io.ObjectInputStream in) {
 
           // NOP
 
@@ -113,19 +112,18 @@ public class SerializerUtil {
         }
 
         /** Always returns the same reference. */
-        private Object readResolve() throws ObjectStreamException {
+        private Object readResolve() {
 
           return RECORDS;
         }
 
-        private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        private void writeObject(java.io.ObjectOutputStream out) {
 
           // NOP
 
         }
 
-        private void readObject(java.io.ObjectInputStream in)
-            throws IOException, ClassNotFoundException {
+        private void readObject(java.io.ObjectInputStream in) {
 
           // NOP
 

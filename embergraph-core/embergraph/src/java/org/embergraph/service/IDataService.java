@@ -294,7 +294,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
    * @see IDataServiceCallable
    */
   @Override
-  Future<? extends Object> submit(Callable<? extends Object> proc) throws RemoteException;
+  Future<?> submit(Callable<?> proc) throws RemoteException;
 
   /*
    * Read a low-level record from the described {@link IRawStore} described by the {@link

@@ -71,5 +71,5 @@ public interface IConflictResolver extends Serializable {
    *     conflict exists.
    * @return true iff the conflict was resolved.
    */
-  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple) throws Exception;
+  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple);
 }

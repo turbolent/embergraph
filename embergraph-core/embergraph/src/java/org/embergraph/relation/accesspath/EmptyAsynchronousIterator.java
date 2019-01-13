@@ -36,11 +36,11 @@ public class EmptyAsynchronousIterator<E> extends EmptyCloseableIterator<E>
     return true;
   }
 
-  public boolean hasNext(long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean hasNext(long timeout, TimeUnit unit) {
     return false;
   }
 
-  public E next(long timeout, TimeUnit unit) throws InterruptedException {
+  public E next(long timeout, TimeUnit unit) {
     return null;
   }
 }

@@ -133,7 +133,9 @@ public class DebugOutputBitStream extends OutputBitStream {
   public long write(final byte[] bits, final long len) throws IOException {
     if (len > Integer.MAX_VALUE) throw new IllegalArgumentException();
     MutableString s = new MutableString(" {");
-    for (int i = 0; i < bits.length; i++) s.append(byte2Binary(bits[i]));
+    for (byte bit : bits) {
+      s.append(byte2Binary(bit));
+    }
     pw.print(s.length((int) len).append("}"));
     return obs.write(bits, len);
   }

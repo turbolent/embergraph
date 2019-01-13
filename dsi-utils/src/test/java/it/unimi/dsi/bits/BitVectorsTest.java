@@ -64,7 +64,9 @@ public class BitVectorsTest extends TestCase {
     iterable.addAll(Arrays.asList(a));
 
     Iterator<LongArrayBitVector> iterator = iterable.iterator();
-    for (int i = 0; i < a.length; i++) assertEquals(a[i], iterator.next());
+    for (BitVector booleans : a) {
+      assertEquals(booleans, iterator.next());
+    }
     assertFalse(iterator.hasNext());
   }
 }

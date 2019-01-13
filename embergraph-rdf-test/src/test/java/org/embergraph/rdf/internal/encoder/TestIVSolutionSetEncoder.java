@@ -135,9 +135,7 @@ public class TestIVSolutionSetEncoder extends AbstractBindingSetEncoderTestCase 
 
     final DataInputBuffer in = new DataInputBuffer(out.array());
 
-    for (int i = 0; i < nsolutions; i++) {
-
-      final IBindingSet expected = expectedSolutions.get(i);
+    for (final IBindingSet expected : expectedSolutions) {
 
       final IBindingSet actual =
           ((IVSolutionSetDecoder) decoder).decodeSolution(in, true /* resolveCachedValues */);

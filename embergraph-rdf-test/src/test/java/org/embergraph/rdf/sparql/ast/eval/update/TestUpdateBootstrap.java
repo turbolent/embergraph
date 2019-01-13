@@ -233,7 +233,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
 
     // Run the update.
     final IRunningQuery future =
-        context.queryEngine.eval(left, bsets.toArray(new IBindingSet[bsets.size()]));
+        context.queryEngine.eval(left, bsets.toArray(new IBindingSet[0]));
 
     // Look for errors.
     future.get();
@@ -294,9 +294,11 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
 
         long expectedCount = values.length;
 
-        for (int i = 0; i < values.length; i++) {
+        for (EmbergraphValue value : values) {
 
-          if (values[i].getIV().isInline()) expectedCount--;
+          if (value.getIV().isInline()) {
+            expectedCount--;
+          }
         }
 
         assertEquals("mutationCount", expectedCount, stats.mutationCount.get());
@@ -487,9 +489,11 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
 
         long expectedCount = values.length;
 
-        for (int i = 0; i < values.length; i++) {
+        for (EmbergraphValue value : values) {
 
-          if (values[i].getIV().isInline()) expectedCount--;
+          if (value.getIV().isInline()) {
+            expectedCount--;
+          }
         }
 
         assertEquals("mutationCount", expectedCount, stats.mutationCount.get());

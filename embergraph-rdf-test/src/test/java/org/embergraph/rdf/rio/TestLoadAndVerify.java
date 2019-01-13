@@ -23,7 +23,6 @@ package org.embergraph.rdf.rio;
 
 import java.util.Properties;
 import org.embergraph.rdf.load.IStatementBufferFactory;
-import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 

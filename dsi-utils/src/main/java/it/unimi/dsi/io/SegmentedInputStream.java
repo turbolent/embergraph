@@ -272,13 +272,13 @@ public class SegmentedInputStream extends MeasurableInputStream {
   }
 
   @Override
-  public long length() throws IOException {
+  public long length() {
     ensureNotClosed();
     return segmentLen;
   }
 
   @Override
-  public long position() throws IOException {
+  public long position() {
     ensureNotClosed();
     return relativePos;
   }

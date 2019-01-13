@@ -269,9 +269,9 @@ public class ASTExistsOptimizer implements IASTOptimizer {
            * MAYBE bound in the graphPattern, retaining anything used
            * within the EXISTS graphPattern.
            */
-          final LinkedHashSet<IVariable<?>> vars = new LinkedHashSet<>();
+          final LinkedHashSet<IVariable<?>> vars;
           {
-            vars.addAll(exogenousVars);
+            vars = new LinkedHashSet<>(exogenousVars);
             sa.getMaybeIncomingBindings(p, vars);
             sa.getMaybeProducedBindings(p, vars, true /* recursive */);
             final Set<IVariable<?>> usedVars =

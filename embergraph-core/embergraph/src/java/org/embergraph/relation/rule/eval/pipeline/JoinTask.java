@@ -515,7 +515,7 @@ public abstract class JoinTask implements Callable<Void> {
    *
    * @return <code>null</code>.
    */
-  public Void call() throws Exception {
+  public Void call() {
 
     if (DEBUG) log.debug("orderIndex=" + orderIndex + ", partitionId=" + partitionId);
 
@@ -886,7 +886,7 @@ public abstract class JoinTask implements Callable<Void> {
      *     (true for all join dimensions exception the lastJoin and also true for query on the
      *     lastJoin) and that {@link IBlockingBuffer} has been closed.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       try {
 
@@ -1286,7 +1286,7 @@ public abstract class JoinTask implements Callable<Void> {
      *     (true for all join dimensions exception the lastJoin and also true for query on the
      *     lastJoin) and that {@link IBlockingBuffer} has been closed.
      */
-    public Void call() throws Exception {
+    public Void call() {
 
       if (halt) throw new RuntimeException(firstCause.get());
 
@@ -1351,8 +1351,6 @@ public abstract class JoinTask implements Callable<Void> {
             unsyncBuffer.add(bs);
           }
         }
-
-        return;
 
       } catch (Throwable t) {
 
@@ -1512,7 +1510,7 @@ public abstract class JoinTask implements Callable<Void> {
 
               // set the old solutions to the new solutions, and
               // move on to the next constraint
-              solutions = constraintSolutions.toArray(new IBindingSet[constraintSolutions.size()]);
+              solutions = constraintSolutions.toArray(new IBindingSet[0]);
             }
           }
 
@@ -1524,8 +1522,6 @@ public abstract class JoinTask implements Callable<Void> {
             }
           }
         }
-
-        return;
 
       } catch (Throwable t) {
 
@@ -1623,7 +1619,7 @@ public abstract class JoinTask implements Callable<Void> {
      *     (true for all join dimensions exception the lastJoin and also true for query on the
      *     lastJoin) and that {@link IBlockingBuffer} has been closed.
      */
-    public Boolean call() throws Exception {
+    public Boolean call() {
 
       try {
 

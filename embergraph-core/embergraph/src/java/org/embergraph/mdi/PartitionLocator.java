@@ -189,11 +189,11 @@ public class PartitionLocator implements IPartitionMetadata, Externalizable {
   /** The current version. */
   private static final transient short VERSION = VERSION1;
 
-  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(ObjectInput in) throws IOException {
 
     final short version = ShortPacker.unpackShort(in);
 
-    if (version != VERSION0 && version != VERSION1) {
+    if (version != VERSION1) {
 
       throw new IOException("Unknown version: " + version);
     }

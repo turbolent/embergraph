@@ -822,7 +822,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
   /** @throws IllegalStateException if the sail is already open. */
   @Override
-  protected void initializeInternal() throws SailException {
+  protected void initializeInternal() {
 
     if (openSail) throw new IllegalStateException();
 
@@ -887,7 +887,7 @@ public class EmbergraphSail extends SailBase implements Sail {
    * Otherwise this is a NOP.
    */
   @Override
-  protected void shutDownInternal() throws SailException {
+  protected void shutDownInternal() {
 
     if (openSail) {
 
@@ -974,7 +974,7 @@ public class EmbergraphSail extends SailBase implements Sail {
    *     requested)
    */
   @Override
-  public final boolean isWritable() throws SailException {
+  public final boolean isWritable() {
 
     if (getIndexManager() instanceof IRawStore) {
       // For backends that are willing to report whether or not they are
@@ -1183,7 +1183,7 @@ public class EmbergraphSail extends SailBase implements Sail {
    * @see #getConnection()
    * @see <a href="wiki.blazegraph.com/wiki/index.php?title=GroupCommit" > Group Commit (wiki) </a>
    */
-  public EmbergraphSailConnection getUnisolatedConnection() throws InterruptedException {
+  public EmbergraphSailConnection getUnisolatedConnection() {
 
     final UnisolatedCallable<EmbergraphSailConnection> task =
         new UnisolatedCallable<EmbergraphSailConnection>() {
@@ -2088,7 +2088,6 @@ public class EmbergraphSail extends SailBase implements Sail {
 
             log.error(t, t);
 
-            continue;
           }
         }
 
@@ -2434,9 +2433,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       final SailConnectionListener[] listeners =
           m_listeners.toArray(new SailConnectionListener[] {});
 
-      for (int i = 0; i < listeners.length; i++) {
-
-        final SailConnectionListener l = listeners[i];
+      for (final SailConnectionListener l : listeners) {
 
         if (added) {
 
@@ -2711,7 +2708,6 @@ public class EmbergraphSail extends SailBase implements Sail {
                 .removeAll();
       }
 
-      return;
     }
 
     /*
@@ -2788,8 +2784,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return size(true, contexts);
     }
 
-    private synchronized long size(final boolean exactSize, final Resource... contexts)
-        throws SailException {
+    private synchronized long size(final boolean exactSize, final Resource... contexts) {
 
       flushStatementBuffers(true /* assertions */, true /* retractions */);
 
@@ -3386,8 +3381,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //        }
 
     @Override
-    public synchronized CloseableIteration<? extends Resource, SailException> getContextIDs()
-        throws SailException {
+    public synchronized CloseableIteration<? extends Resource, SailException> getContextIDs() {
 
       if (!database.isQuads()) throw new UnsupportedOperationException();
 
@@ -3417,7 +3411,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         private boolean open = true;
 
         @Override
-        public void close() throws SailException {
+        public void close() {
           if (open) {
             open = false;
             next = null;
@@ -3432,7 +3426,7 @@ public class EmbergraphSail extends SailBase implements Sail {
           return false;
         }
 
-        private boolean _hasNext() throws SailException {
+        private boolean _hasNext() {
           if (next != null) return true;
           while (itr2.hasNext()) {
             next = (Resource) itr2.next();
@@ -3454,7 +3448,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         }
 
         @Override
-        public void remove() throws SailException {
+        public void remove() {
           /*
            * Note: remove is not supported. The semantics would
            * require that we removed all statements for the last
@@ -3593,7 +3587,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
 
     @Override
-    public final boolean isOpen() throws SailException {
+    public final boolean isOpen() {
 
       return openConn;
     }
@@ -4056,7 +4050,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         final Value o,
         final boolean includeInferred,
         final Resource... contexts)
-        throws RepositoryException, SailException {
+        throws SailException {
 
       final AbstractTripleStore tripleStore = getTripleStore();
 
@@ -4395,7 +4389,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * <p>{@inheritDoc}
      */
     @Override
-    public void begin() throws SailException {}
+    public void begin() {}
 
     /*
      * NOP.
@@ -4419,7 +4413,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * <p>{@inheritDoc}
      */
     @Override
-    public boolean isActive() throws UnknownSailTransactionStateException {
+    public boolean isActive() {
 
       return true;
     }
@@ -4433,7 +4427,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * <p>{@inheritDoc}
      */
     @Override
-    public void prepare() throws SailException {}
+    public void prepare() {}
 
     /*
      * This API is new with openrdf 2.7. It is not supported. Embergraph has a
@@ -4500,7 +4494,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         final Access access,
         final long txId,
         final ITransactionService txService) // , final Lock readLock)
-        throws IOException, DatasetNotFoundException {
+        throws DatasetNotFoundException {
 
       super(txId, access); // , false/* unisolated */, false/* readOnly */);
 
@@ -4720,7 +4714,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * @throws DatasetNotFoundException
      */
     EmbergraphSailReadOnlyConnection(final long txId, final ITransactionService txService)
-        throws IOException, DatasetNotFoundException {
+        throws DatasetNotFoundException {
 
       super(txId, null); // , false/* unisolated */, true/* readOnly */);
 
@@ -4862,7 +4856,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * @return <code>0L</code> since nothing was committed.
      */
     @Override
-    public synchronized long commit2() throws SailException {
+    public synchronized long commit2() {
 
       // NOP.
       return 0L; // Nothing committed.
@@ -4870,7 +4864,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     /** NOP */
     @Override
-    public synchronized void rollback() throws SailException {
+    public synchronized void rollback() {
 
       // NOP
 

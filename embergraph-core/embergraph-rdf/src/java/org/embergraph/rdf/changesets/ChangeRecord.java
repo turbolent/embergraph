@@ -54,7 +54,7 @@ public class ChangeRecord implements IChangeRecord {
 
     if (o == this) return true;
 
-    if (o == null || o instanceof IChangeRecord == false) return false;
+    if (o instanceof IChangeRecord == false) return false;
 
     final IChangeRecord rec = (IChangeRecord) o;
 
@@ -72,23 +72,16 @@ public class ChangeRecord implements IChangeRecord {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(action).append(": ").append(stmt);
-
-    return sb.toString();
+    return String.valueOf(action) + ": " + stmt;
   }
 
   /** Comparator imposes an {@link ISPO} order. */
   public static final Comparator<IChangeRecord> COMPARATOR =
-      new Comparator<IChangeRecord>() {
+      (r1, r2) -> {
 
-        public int compare(final IChangeRecord r1, final IChangeRecord r2) {
+        final ISPO spo1 = r1.getStatement();
+        final ISPO spo2 = r2.getStatement();
 
-          final ISPO spo1 = r1.getStatement();
-          final ISPO spo2 = r2.getStatement();
-
-          return SPOComparator.INSTANCE.compare(spo1, spo2);
-        }
+        return SPOComparator.INSTANCE.compare(spo1, spo2);
       };
 }

@@ -395,7 +395,7 @@ public class TestEventReceiver extends TestCase2 {
       this.nevents = nevents;
     }
 
-    public Void call() throws Exception {
+    public Void call() {
 
       final Random r = new Random();
 
@@ -676,7 +676,7 @@ public class TestEventReceiver extends TestCase2 {
     }
 
     @Override
-    public AbstractHTTPD newHttpd(int httpdPort, ICounterSetAccess access) throws IOException {
+    public AbstractHTTPD newHttpd(int httpdPort, ICounterSetAccess access) {
       return null;
     }
 

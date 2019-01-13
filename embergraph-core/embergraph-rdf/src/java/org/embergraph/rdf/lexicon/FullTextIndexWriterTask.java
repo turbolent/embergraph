@@ -31,7 +31,7 @@ class FullTextIndexWriterTask implements Callable<Long> {
   }
 
   /** Elapsed time for this operation. */
-  public Long call() throws Exception {
+  public Long call() {
 
     final long _begin = System.currentTimeMillis();
 

@@ -41,5 +41,5 @@ public interface HAGlueBase extends Remote {
    *
    * @todo This should be handled as a smart proxy so this method does not actually perform RMI.
    */
-  UUID getServiceId() throws IOException;
+  UUID getServiceId();
 }

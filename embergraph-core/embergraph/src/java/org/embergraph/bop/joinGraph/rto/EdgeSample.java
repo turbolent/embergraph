@@ -128,14 +128,14 @@ public class EdgeSample extends SampleBase {
 
   @Override
   protected void toString(final StringBuilder sb) {
-    sb.append(", sourceEstCard=" + sourceSample.estCard);
-    sb.append(", sourceEstimateEnum=" + sourceSample.estimateEnum);
-    sb.append(", inputCount=" + inputCount);
-    sb.append(", tuplesRead=" + tuplesRead);
-    sb.append(", sumRangeCount=" + sumRangeCount);
-    sb.append(", outputCount=" + outputCount);
-    sb.append(", adjustedCard=" + adjCard);
-    sb.append(", f=" + f);
-    sb.append(", estRead=" + estRead);
+    sb.append(", sourceEstCard=").append(sourceSample.estCard);
+    sb.append(", sourceEstimateEnum=").append(sourceSample.estimateEnum);
+    sb.append(", inputCount=").append(inputCount);
+    sb.append(", tuplesRead=").append(tuplesRead);
+    sb.append(", sumRangeCount=").append(sumRangeCount);
+    sb.append(", outputCount=").append(outputCount);
+    sb.append(", adjustedCard=").append(adjCard);
+    sb.append(", f=").append(f);
+    sb.append(", estRead=").append(estRead);
   }
 }

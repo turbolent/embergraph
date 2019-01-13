@@ -85,19 +85,16 @@ public class LatchedExecutor implements Executor {
 
   @Override
   public void execute(final Runnable r) {
+    /*
+     * Wrap the Runnable in a class that will start the next Runnable
+     * from the queue when it completes.
+     */
     if (!queue.offer(
-        new Runnable() {
-          /*
-           * Wrap the Runnable in a class that will start the next Runnable
-           * from the queue when it completes.
-           */
-          @Override
-          public void run() {
-            try {
-              r.run();
-            } finally {
-              scheduleNext();
-            }
+        () -> {
+          try {
+            r.run();
+          } finally {
+            scheduleNext();
           }
         })) {
       // The queue is full.
@@ -124,7 +121,6 @@ public class LatchedExecutor implements Executor {
         } catch (RejectedExecutionException ex) {
           // log error and poll the queue again.
           log.error(ex, ex);
-          continue;
         }
       } else {
         semaphore.release();

@@ -89,9 +89,7 @@ public class ASTJoinGroupPartition {
   /** @return the flat (ordered) list of nodes in the partition */
   public List<IGroupMemberNode> extractNodeList(final boolean includeOptionalOrMinusNode) {
 
-    final List<IGroupMemberNode> nodeList = new ArrayList<>();
-
-    nodeList.addAll(nonOptionalNonMinusNodes);
+    final List<IGroupMemberNode> nodeList = new ArrayList<>(nonOptionalNonMinusNodes);
     if (includeOptionalOrMinusNode && optionalOrMinus != null) nodeList.add(optionalOrMinus);
 
     return nodeList;
@@ -180,8 +178,7 @@ public class ASTJoinGroupPartition {
      * by this node, than it might be good to place this node right at the beginning, as this
      * implies a join that could restrict the intermediate result set.
      */
-    final Set<IVariable<?>> intersectionWithExternallyIncomings = new HashSet<>();
-    intersectionWithExternallyIncomings.addAll(externallyBound);
+    final Set<IVariable<?>> intersectionWithExternallyIncomings = new HashSet<>(externallyBound);
     intersectionWithExternallyIncomings.retainAll(maybeProducedByNode);
 
     if (!intersectionWithExternallyIncomings.isEmpty()) {
@@ -199,8 +196,7 @@ public class ASTJoinGroupPartition {
       final Set<IVariable<?>> desiredBound =
           bindingInfoMap.get(nonOptionalNonMinusNodes.get(i)).getDesiredBound();
 
-      final Set<IVariable<?>> intersection = new HashSet<>();
-      intersection.addAll(desiredBound);
+      final Set<IVariable<?>> intersection = new HashSet<>(desiredBound);
       intersection.retainAll(maybeProducedByNode);
 
       // if no more variables need to be bound, place the node

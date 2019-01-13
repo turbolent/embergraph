@@ -229,7 +229,7 @@ public class ClassPathUtil {
     @Override
     public boolean equals(Object other) {
 
-      if (other == null || !(other instanceof ClassPathUtilRequestConfig)) {
+      if (!(other instanceof ClassPathUtilRequestConfig)) {
         return false;
       }
 

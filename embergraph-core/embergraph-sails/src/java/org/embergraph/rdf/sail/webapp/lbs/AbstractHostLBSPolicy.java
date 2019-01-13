@@ -227,12 +227,12 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
           cause = ex;
         }
         if (cause != null) {
-          sb.append("(cause=" + cause + ")");
+          sb.append("(cause=").append(cause).append(")");
         }
       }
     }
 
-    sb.append(",hostTable=" + hostTableRef.get());
+    sb.append(",hostTable=").append(hostTableRef.get());
   }
 
   public AbstractHostLBSPolicy() {
@@ -313,24 +313,21 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     scheduledFuture =
         ((Journal) indexManager)
             .addScheduledTask(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    try {
-                      updateHostTable();
-                    } catch (RuntimeException ex) {
-                      if (InnerCause.isInnerCause(ex, InterruptedException.class)) {
-                        // Terminate if interrupted.
-                        throw ex;
-                      }
-                      /*
-                       * Note: If the task thows an exception it will not
-                       * be rescheduled, therefore log @ ERROR rather than
-                       * allowing the unchecked exception to be
-                       * propagated.
-                       */
-                      log.error(ex, ex);
+                () -> {
+                  try {
+                    updateHostTable();
+                  } catch (RuntimeException ex) {
+                    if (InnerCause.isInnerCause(ex, InterruptedException.class)) {
+                      // Terminate if interrupted.
+                      throw ex;
                     }
+                    /*
+                     * Note: If the task thows an exception it will not
+                     * be rescheduled, therefore log @ ERROR rather than
+                     * allowing the unchecked exception to be
+                     * propagated.
+                     */
+                    log.error(ex, ex);
                   }
                 },
                 hostDiscoveryInitialDelay,

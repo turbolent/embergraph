@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.LinkedHashSet;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.ASTContainer;

@@ -44,17 +44,16 @@ public class QuorumTokenTransitions {
 
   @Override
   public final String toString() {
-    final StringBuilder sb = new StringBuilder();
-    sb.append(getClass());
-    sb.append("{oldQuorumToken=" + currentQuorumToken);
-    sb.append(",newQuorumToken=" + newQuorumToken);
-    sb.append(",oldHAReadyToken=" + currentHAReadyToken);
-    sb.append(",didBreak=" + didBreak);
-    sb.append(",didMeet=" + didMeet);
-    sb.append(",didJoinMetQuorum=" + didJoinMetQuorum);
-    sb.append(",didLeaveMetQuorum=" + didLeaveMetQuorum);
-    sb.append("}");
-    return sb.toString();
+    String sb = String.valueOf(getClass())
+        + "{oldQuorumToken=" + currentQuorumToken
+        + ",newQuorumToken=" + newQuorumToken
+        + ",oldHAReadyToken=" + currentHAReadyToken
+        + ",didBreak=" + didBreak
+        + ",didMeet=" + didMeet
+        + ",didJoinMetQuorum=" + didJoinMetQuorum
+        + ",didLeaveMetQuorum=" + didLeaveMetQuorum
+        + "}";
+    return sb;
   }
 
   public QuorumTokenTransitions(

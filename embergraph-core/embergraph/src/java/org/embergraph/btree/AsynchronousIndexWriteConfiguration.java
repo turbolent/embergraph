@@ -141,29 +141,17 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append(getClass().getName());
-
-    sb.append("{ masterQueueCapacity=" + masterQueueCapacity);
-
-    sb.append(", masterChunkSize=" + masterChunkSize);
-
-    sb.append(", masterChunkTimeoutNanos=" + masterChunkTimeoutNanos);
-
-    sb.append(", sinkIdleTimeoutNanos=" + sinkIdleTimeoutNanos);
-
-    sb.append(", sinkPollTimeoutNanos=" + sinkPollTimeoutNanos);
-
-    sb.append(", sinkQueueCapacity=" + sinkQueueCapacity);
-
-    sb.append(", sinkChunkSize=" + sinkChunkSize);
-
-    sb.append(", sinkChunkTimeoutNanos=" + sinkChunkTimeoutNanos);
-
-    sb.append("}");
-
-    return sb.toString();
+    String sb = getClass().getName()
+        + "{ masterQueueCapacity=" + masterQueueCapacity
+        + ", masterChunkSize=" + masterChunkSize
+        + ", masterChunkTimeoutNanos=" + masterChunkTimeoutNanos
+        + ", sinkIdleTimeoutNanos=" + sinkIdleTimeoutNanos
+        + ", sinkPollTimeoutNanos=" + sinkPollTimeoutNanos
+        + ", sinkQueueCapacity=" + sinkQueueCapacity
+        + ", sinkChunkSize=" + sinkChunkSize
+        + ", sinkChunkTimeoutNanos=" + sinkChunkTimeoutNanos
+        + "}";
+    return sb;
   }
 
   /** <strong>De-serialization ctor</strong> */
@@ -237,7 +225,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private static final transient int VERSION0 = 0;
 
-  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+  public void readExternal(final ObjectInput in) throws IOException {
 
     final int version = (int) LongPacker.unpackLong(in);
 

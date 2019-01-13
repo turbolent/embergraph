@@ -408,8 +408,8 @@ public class TestTxDag extends TestCase {
     assertEquals("length", expected.length, actual.length);
     final int len = expected.length;
     Set values = new HashSet();
-    for (int i = 0; i < len; i++) {
-      values.add(Integer.valueOf(expected[i]));
+    for (int i1 : expected) {
+      values.add(Integer.valueOf(i1));
     }
     if (values.size() != expected.length) {
       throw new AssertionError("duplicate values in 'expected'.");
@@ -856,7 +856,7 @@ public class TestTxDag extends TestCase {
             // Choose new source and target since this edge already
             // exists.
             log.warn("edge exists: src=" + src + ", tgt=" + tgt);
-            continue; // repeat inner loop.
+            // repeat inner loop.
           } catch (DeadlockException ex) {
             /*
              * Adding this edge results in a deadlock. Verify that

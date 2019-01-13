@@ -115,7 +115,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
    * @return The response.
    * @throws Exception
    */
-  public Response doPost(final Request req) throws Exception {
+  public Response doPost(final Request req) {
 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }
@@ -127,7 +127,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
    * @return The response.
    * @throws Exception
    */
-  public Response doPut(final Request req) throws Exception {
+  public Response doPut(final Request req) {
 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }
@@ -139,7 +139,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
    * @return The response.
    * @throws Exception
    */
-  public Response doDelete(final Request req) throws Exception {
+  public Response doDelete(final Request req) {
 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }

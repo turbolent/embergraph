@@ -86,8 +86,8 @@ public class DistinctMultiTermAdvancer extends Advancer<SPO> {
 
     keyBuilder.reset();
 
-    for (int i = 0; i < ivs.length; i++) {
-      ivs[i].encode(keyBuilder);
+    for (IV iv : ivs) {
+      iv.encode(keyBuilder);
     }
 
     final byte[] fromKey = keyBuilder.getKey();

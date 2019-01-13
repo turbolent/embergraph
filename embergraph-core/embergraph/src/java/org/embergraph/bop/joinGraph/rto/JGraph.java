@@ -197,11 +197,11 @@ public class JGraph {
     sb.append("JoinGraph");
     sb.append("{V=[");
     for (Vertex v : V) {
-      sb.append("\nV[" + v.pred.getId() + "]=" + v);
+      sb.append("\nV[").append(v.pred.getId()).append("]=").append(v);
     }
     sb.append("{C=[");
     for (IConstraint c : C) {
-      sb.append("\nC[" + c.getId() + "]=" + c);
+      sb.append("\nC[").append(c.getId()).append("]=").append(c);
     }
     sb.append("\n]}");
     return sb.toString();
@@ -349,7 +349,7 @@ public class JGraph {
    */
   public Path runtimeOptimizer(
       final QueryEngine queryEngine, final Map<PathIds, EdgeSample> edgeSamples)
-      throws Exception, NoSolutionsException {
+      throws Exception {
 
     if (queryEngine == null) throw new IllegalArgumentException();
 
@@ -606,7 +606,7 @@ public class JGraph {
       tmp.add(paths[i]);
     }
 
-    return tmp.toArray(new Path[tmp.size()]);
+    return tmp.toArray(new Path[0]);
   }
 
   /*
@@ -639,11 +639,11 @@ public class JGraph {
 
     if (log.isInfoEnabled()) {
       final StringBuilder sb = new StringBuilder();
-      sb.append("limit=" + limit + ", nedges=" + nedges);
+      sb.append("limit=").append(limit).append(", nedges=").append(nedges);
       sb.append(", sampled vertices::\n");
       for (Vertex v : V) {
         if (v.sample != null) {
-          sb.append("id=" + v.pred.getId() + " : ");
+          sb.append("id=").append(v.pred.getId()).append(" : ");
           sb.append(v.sample.toString());
           sb.append("\n");
         }
@@ -1062,7 +1062,7 @@ public class JGraph {
      * best alternative now and prune the other alternatives for those
      * vertices.
      */
-    final Path[] paths_tp1 = tmpAll.toArray(new Path[tmpAll.size()]);
+    final Path[] paths_tp1 = tmpAll.toArray(new Path[0]);
 
     final Path[] paths_tp1_pruned = pruneJoinPaths(paths_tp1, edgeSamples);
 
@@ -1382,7 +1382,7 @@ public class JGraph {
     }
 
     @Override
-    public Void call() throws Exception {
+    public Void call() {
 
       v.sample(queryEngine, limit, sampleType);
 
@@ -1514,7 +1514,7 @@ public class JGraph {
       paths.add(f.get());
     }
 
-    return paths.toArray(new Path[paths.size()]);
+    return paths.toArray(new Path[0]);
   }
 
   /*
@@ -1669,7 +1669,7 @@ public class JGraph {
         keep.add(p);
       }
       // convert the retained paths to an array.
-      b = keep.toArray(new Path[keep.size()]);
+      b = keep.toArray(new Path[0]);
     }
     /*
      * Clear any entries from the edgeSamples map which are not prefixes of

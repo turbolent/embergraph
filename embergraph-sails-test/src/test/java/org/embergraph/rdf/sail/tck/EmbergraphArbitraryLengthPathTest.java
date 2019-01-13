@@ -82,7 +82,7 @@ public class EmbergraphArbitraryLengthPathTest extends TestCase {
   }
 
   //    @Override
-  protected SailRepository newRepository() throws RepositoryException {
+  protected SailRepository newRepository() {
 
     if (true) {
       final Properties props = getProperties();

@@ -620,9 +620,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
     CounterSet p = this;
 
-    for (int i = 0; i < a.length; i++) {
-
-      String name = a[i];
+    for (String name : a) {
 
       ICounterNode t = p.getChild(name);
 

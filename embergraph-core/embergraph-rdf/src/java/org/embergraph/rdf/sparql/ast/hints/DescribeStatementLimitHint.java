@@ -53,7 +53,6 @@ final class DescribeStatementLimitHint extends AbstractIntQueryHint {
       // _setQueryHint(context, scope, op, getName(), value);
       ((ProjectionNode) op).setDescribeStatementLimit(value);
 
-      return;
     }
 
     // throw new QueryHintException(scope, op, getName(), value);

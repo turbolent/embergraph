@@ -3456,13 +3456,9 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
               throw new AssertionError();
           }
 
-          sb.append(
-              "#"
-                  + (i + 1)
-                  + "\t"
-                  + stmt
-                  + (" (" + stmt.s() + "," + stmt.p() + "," + stmt.o() + "," + stmt.c() + ")")
-                  + "\n");
+          sb.append("#").append(i + 1).append("\t").append(stmt).append(" (").append(stmt.s())
+              .append(",").append(stmt.p()).append(",").append(stmt.o()).append(",")
+              .append(stmt.c()).append(")").append("\n");
 
           i++;
         }
@@ -3485,28 +3481,15 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         final Justification jst = itrj.next().getObject();
 
-        sb.append(
-            "#"
-                + (njust + 1) // + "\t"
-                + jst.toString(resolveTerms)
-                + "\n");
+        sb.append("#").append(njust + 1).append(jst.toString(resolveTerms)).append("\n");
 
         njust++;
       }
     }
 
-    sb.append(
-        "dumpStore: #statements="
-            + nstmts
-            + ", #explicit="
-            + nexplicit
-            + ", #inferred="
-            + ninferred
-            + ", #axioms="
-            + naxioms
-            + ", #history="
-            + nhistory
-            + (justifications ? ", #just=" + njust : ""));
+    sb.append("dumpStore: #statements=").append(nstmts).append(", #explicit=").append(nexplicit)
+        .append(", #inferred=").append(ninferred).append(", #axioms=").append(naxioms)
+        .append(", #history=").append(nhistory).append(justifications ? ", #just=" + njust : "");
 
     return sb;
   }
@@ -3526,7 +3509,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       while (itr.hasNext()) {
 
-        sb.append("\n" + itr.next());
+        sb.append("\n").append(itr.next());
       }
 
       return sb;

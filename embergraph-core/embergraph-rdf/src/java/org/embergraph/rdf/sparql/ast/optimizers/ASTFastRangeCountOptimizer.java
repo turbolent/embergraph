@@ -215,7 +215,6 @@ public class ASTFastRangeCountOptimizer implements IASTOptimizer {
       } else if (child instanceof ServiceNode) {
 
         // Do not rewrite things inside of a SERVICE node.
-        continue;
       }
     }
   }

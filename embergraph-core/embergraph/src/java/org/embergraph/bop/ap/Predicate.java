@@ -563,7 +563,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
 
     if (bopId != null) {
 
-      sb.append("[" + bopId + "]");
+      sb.append("[").append(bopId).append("]");
     }
 
     sb.append("(");

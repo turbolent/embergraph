@@ -912,43 +912,38 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** A human readable representation of the {@link IndexSegmentCheckpoint} record. */
   public String toString() {
 
-    final StringBuilder sb = new StringBuilder();
-
-    sb.append("magic=" + Integer.toHexString(MAGIC));
-    sb.append(", segmentUUID=" + segmentUUID);
-    sb.append(", offsetBits=" + offsetBits);
-    sb.append(", height=" + height);
-    sb.append(", nleaves=" + nleaves);
-    sb.append(", nnodes=" + nnodes);
-    sb.append(", nentries=" + nentries);
-    sb.append(", maxNodeOrLeafLength=" + maxNodeOrLeafLength);
-    sb.append(
-        ", leavesRegion={extent="
-            + extentLeaves
-            + ", offset="
-            + offsetLeaves
-            + "}, avgLeafSize="
-            + (nleaves == 0 ? 0 : (extentLeaves / nleaves)));
-    sb.append(
-        ", nodesRegion={extent="
-            + extentNodes
-            + ", offset="
-            + offsetNodes
-            + "}, avgNodeSize="
-            + (nnodes == 0 ? 0 : (extentNodes / nnodes)));
-    sb.append(", blobsRegion={extent=" + extentBlobs + ", offset=" + offsetBlobs + "}");
-    sb.append(", addrRoot=" + am.toString(addrRoot));
-    sb.append(", addrFirstLeaf=" + am.toString(addrFirstLeaf));
-    sb.append(", addrLastLeaf=" + am.toString(addrLastLeaf));
-    sb.append(", addrMetadata=" + am.toString(addrMetadata));
-    sb.append(", addrBloom=" + am.toString(addrBloom));
-    sb.append(", length=" + length);
-    sb.append(", compactingMerge=" + compactingMerge);
-    sb.append(", useChecksums=" + useChecksums);
-    sb.append(", checksum=" + checksum);
-    sb.append(", commitTime=" + new Date(commitTime));
-
-    return sb.toString();
+    String sb = ("magic=" + Integer.toHexString(MAGIC))
+        + ", segmentUUID=" + segmentUUID
+        + ", offsetBits=" + offsetBits
+        + ", height=" + height
+        + ", nleaves=" + nleaves
+        + ", nnodes=" + nnodes
+        + ", nentries=" + nentries
+        + ", maxNodeOrLeafLength=" + maxNodeOrLeafLength
+        + ", leavesRegion={extent="
+        + extentLeaves
+        + ", offset="
+        + offsetLeaves
+        + "}, avgLeafSize="
+        + (nleaves == 0 ? 0 : (extentLeaves / nleaves))
+        + ", nodesRegion={extent="
+        + extentNodes
+        + ", offset="
+        + offsetNodes
+        + "}, avgNodeSize="
+        + (nnodes == 0 ? 0 : (extentNodes / nnodes))
+        + ", blobsRegion={extent=" + extentBlobs + ", offset=" + offsetBlobs + "}"
+        + ", addrRoot=" + am.toString(addrRoot)
+        + ", addrFirstLeaf=" + am.toString(addrFirstLeaf)
+        + ", addrLastLeaf=" + am.toString(addrLastLeaf)
+        + ", addrMetadata=" + am.toString(addrMetadata)
+        + ", addrBloom=" + am.toString(addrBloom)
+        + ", length=" + length
+        + ", compactingMerge=" + compactingMerge
+        + ", useChecksums=" + useChecksums
+        + ", checksum=" + checksum
+        + ", commitTime=" + new Date(commitTime);
+    return sb;
   }
 
   /*

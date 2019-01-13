@@ -391,7 +391,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
             new AbstractTask<Void>(journal, ITx.UNISOLATED, resource) {
 
               @Override
-              protected Void doTask() throws Exception {
+              protected Void doTask() {
 
                 getJournal().registerIndex(resource, new IndexMetadata(resource, indexUUID));
 
@@ -526,10 +526,10 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
   }
 
   @Override
-  public void setUpComparisonTest(Properties properties) throws Exception {}
+  public void setUpComparisonTest(Properties properties) {}
 
   @Override
-  public void tearDownComparisonTest() throws Exception {}
+  public void tearDownComparisonTest() {}
 
   /*
    * Run the stress test configured in the code.
@@ -600,7 +600,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
      *
      * @param args
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
       // this is the test to be run.
       String className = StressTestGroupCommit.class.getName();
