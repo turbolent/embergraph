@@ -23,7 +23,6 @@ package org.embergraph.service;
 
 import cutthecrap.utils.striterators.IFilter;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Properties;
@@ -1160,7 +1159,7 @@ public abstract class DataService extends AbstractService
    *
    * @return The name of the index partition.
    */
-  public static final String getIndexPartitionName(final String name, final int partitionId) {
+  public static String getIndexPartitionName(final String name, final int partitionId) {
 
     if (name == null) {
 

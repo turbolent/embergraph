@@ -54,7 +54,7 @@ public class DatasetNode extends QueryNodeBase {
    * @return
    */
   @SuppressWarnings("rawtypes")
-  private static final DataSetSummary asDataSetSummary(final Set<IV> ivs, final boolean update) {
+  private static DataSetSummary asDataSetSummary(final Set<IV> ivs, final boolean update) {
     /*
      * Note: This will cause named-graphs-01b to fail.
      */

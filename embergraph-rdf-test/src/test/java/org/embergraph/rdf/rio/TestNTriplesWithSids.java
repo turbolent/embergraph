@@ -14,8 +14,6 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.rdf.store.DataLoader;
 import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParserRegistry;
 
 /*

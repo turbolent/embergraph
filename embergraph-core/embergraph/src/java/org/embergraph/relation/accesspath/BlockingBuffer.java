@@ -109,7 +109,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
    * @param ntries The #of tries.
    * @return The timeout (milliseconds).
    */
-  private static final long getTimeoutMillis(final int ntries) {
+  private static long getTimeoutMillis(final int ntries) {
 
     return ntries < 500 ? 10L : ntries < 1000 ? 100L : 250L;
   }
@@ -1210,7 +1210,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
      * <p>Note: Once the {@link BlockingBuffer} is closed (except for aborts), the consumer still
      * needs to drain the {@link BlockingBuffer#queue}.
      */
-    private final void checkFuture() {
+    private void checkFuture() {
 
       if (!futureIsDone && future != null && future.isDone()) {
 

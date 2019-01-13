@@ -17,9 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha;
 
-import java.io.IOException;
-import java.security.DigestException;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

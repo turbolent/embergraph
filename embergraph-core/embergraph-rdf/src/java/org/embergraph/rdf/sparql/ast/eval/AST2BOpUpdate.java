@@ -1736,7 +1736,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
    * @throws RepositoryException
    * @throws SailException
    */
-  private static final void clearOneGraph(final URI targetGraph, final AST2BOpUpdateContext context)
+  private static void clearOneGraph(final URI targetGraph, final AST2BOpUpdateContext context)
       throws RepositoryException, SailException {
 
     clearGraph(

@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -378,7 +379,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
 
             for (int k = 0; k < j; k++) {
 
-              if (resource[k] == resources[t]) {
+              if (Objects.equals(resource[k], resources[t])) {
 
                 duplicate = true;
 

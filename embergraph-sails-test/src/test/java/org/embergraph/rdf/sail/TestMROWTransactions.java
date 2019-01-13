@@ -730,24 +730,22 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     final long nruns = getLongArg(args, "-nruns", 1); // 1000;
 
     final Thread sailShutdown =
-        new Thread() {
-          public void run() {
-            final Random r = new Random();
-            while (true) {
-              try {
-                Thread.sleep(r.nextInt(50000));
-                if (sail.get().isOpen()) {
-                  log.warn("SHUTDOWN NOW");
-                  sail.get().shutDown();
-                }
-              } catch (InterruptedException e) {
-                break;
-              } catch (SailException e) {
-                log.warn(e);
+        new Thread(() -> {
+          final Random r = new Random();
+          while (true) {
+            try {
+              Thread.sleep(r.nextInt(50000));
+              if (sail.get().isOpen()) {
+                log.warn("SHUTDOWN NOW");
+                sail.get().shutDown();
               }
+            } catch (InterruptedException e) {
+              break;
+            } catch (SailException e) {
+              log.warn(e);
             }
           }
-        };
+        });
 
     sailShutdown.start();
 

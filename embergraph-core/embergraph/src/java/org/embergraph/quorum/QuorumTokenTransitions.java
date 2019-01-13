@@ -44,7 +44,7 @@ public class QuorumTokenTransitions {
 
   @Override
   public final String toString() {
-    String sb = String.valueOf(getClass())
+    String sb = getClass()
         + "{oldQuorumToken=" + currentQuorumToken
         + ",newQuorumToken=" + newQuorumToken
         + ",oldHAReadyToken=" + currentHAReadyToken
@@ -213,15 +213,15 @@ public class QuorumTokenTransitions {
   //    	return currentQuorumToken == newQuorumToken;
   //    }
 
-  private final boolean isBreak() {
+  private boolean isBreak() {
     return wasMet && !isMet;
   }
 
-  private final boolean isMeet() {
+  private boolean isMeet() {
     return isMet & !wasMet;
   }
 
-  private final boolean didJoin() {
+  private boolean didJoin() {
     return isMet && isJoined && !wasJoined;
   }
 
@@ -229,7 +229,7 @@ public class QuorumTokenTransitions {
   //    	return isBreak() && wasJoined;
   //    }
 
-  private final boolean didLeaveMet() {
+  private boolean didLeaveMet() {
     return isMet && wasJoined && !isJoined;
   }
 }

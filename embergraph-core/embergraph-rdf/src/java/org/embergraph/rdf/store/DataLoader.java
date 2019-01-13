@@ -56,8 +56,6 @@ import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.rio.LoadStats;
 import org.embergraph.rdf.rio.PresortRioLoader;
 import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.rio.RioLoaderEvent;
-import org.embergraph.rdf.rio.RioLoaderListener;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.openrdf.rio.RDFFormat;

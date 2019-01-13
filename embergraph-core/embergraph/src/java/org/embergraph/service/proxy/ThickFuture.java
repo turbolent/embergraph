@@ -25,7 +25,6 @@ import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /*
  * A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote

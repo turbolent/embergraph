@@ -24,7 +24,6 @@ import java.util.Properties;
 import java.util.UUID;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.Update;
 import org.openrdf.query.UpdateExecutionException;

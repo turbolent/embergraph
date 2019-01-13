@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.lexicon;
 
+import java.util.Objects;
 import java.util.Properties;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.axioms.NoAxioms;
@@ -83,7 +84,7 @@ public class TestVocabulary extends AbstractTripleStoreTestCase {
       final EmbergraphValueFactory f = store.getValueFactory();
 
       // Must be using the same namespace.
-      assertTrue(vocab.getNamespace() == f.getNamespace());
+      assertTrue(Objects.equals(vocab.getNamespace(), f.getNamespace()));
 
       final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
       final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);

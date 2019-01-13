@@ -28,8 +28,6 @@ import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.rmi.RemoteException;
-import java.security.DigestException;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -2507,7 +2505,7 @@ public abstract class AbstractJournal
    * @param commitTime The timestamp assigned to the commit.
    * @return The array of collected root addresses for the registered committers.
    */
-  private final long[] notifyCommitters(final long commitTime) {
+  private long[] notifyCommitters(final long commitTime) {
 
     assert commitTime > 0L;
 
@@ -5265,7 +5263,7 @@ public abstract class AbstractJournal
    * @param name The name.
    * @param ndx The persistence capable data structure.
    */
-  private final void _register(final String name, final ICheckpointProtocol ndx) {
+  private void _register(final String name, final ICheckpointProtocol ndx) {
 
     final ReadLock lock = _fieldReadWriteLock.readLock();
 

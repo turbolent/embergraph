@@ -1275,7 +1275,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   /*
    * Note: the range count is cached for a historical read to reduce round trips to the DataService.
    */
-  private final long historicalRangeCount(final byte[] fromKey, final byte[] toKey) {
+  private long historicalRangeCount(final byte[] fromKey, final byte[] toKey) {
 
     if (rangeCount == -1L) {
 

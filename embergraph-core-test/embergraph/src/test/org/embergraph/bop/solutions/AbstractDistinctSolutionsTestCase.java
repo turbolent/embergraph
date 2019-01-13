@@ -24,7 +24,6 @@ package org.embergraph.bop.solutions;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import junit.framework.TestCase2;
 import org.embergraph.bop.BOp;

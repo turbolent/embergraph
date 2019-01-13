@@ -1,6 +1,5 @@
 package org.embergraph.rwstore.sector;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import org.apache.log4j.Logger;

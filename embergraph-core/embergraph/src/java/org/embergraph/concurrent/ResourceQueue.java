@@ -187,7 +187,7 @@ public class ResourceQueue<R, T> {
    *
    * @exception IllegalStateException if the resource queue is dead.
    */
-  private final void assertNotDead() {
+  private void assertNotDead() {
 
     if (dead.get()) {
 
@@ -202,7 +202,7 @@ public class ResourceQueue<R, T> {
    *
    * @exception IllegalStateException if the resource queue is dead.
    */
-  private final void assertOwnsLock(Object tx) {
+  private void assertOwnsLock(Object tx) {
 
     if (queue.peek() != tx) {
 

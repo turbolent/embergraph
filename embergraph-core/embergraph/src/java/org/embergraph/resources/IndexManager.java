@@ -642,7 +642,7 @@ public abstract class IndexManager extends StoreManager {
     return btree;
   }
 
-  private final AbstractBTree getIndexOnJournal(
+  private AbstractBTree getIndexOnJournal(
       final String name, final long timestamp, final AbstractJournal journal) {
 
     final AbstractBTree btree;
@@ -729,7 +729,7 @@ public abstract class IndexManager extends StoreManager {
     return btree;
   }
 
-  private final IndexSegment getIndexOnSegment(
+  private IndexSegment getIndexOnSegment(
       final String name, final long timestamp, IndexSegmentStore segStore) {
 
     final IndexSegment btree;

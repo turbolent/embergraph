@@ -124,7 +124,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return v;
   }
 
-  static final SparqlEndpointConfig getConfig(final ServletContext servletContext) {
+  static SparqlEndpointConfig getConfig(final ServletContext servletContext) {
 
     return getEmbergraphRDFContext(servletContext).getConfig();
   }
@@ -134,7 +134,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return getEmbergraphRDFContext(getServletContext());
   }
 
-  static final EmbergraphRDFContext getEmbergraphRDFContext(final ServletContext servletContext) {
+  static EmbergraphRDFContext getEmbergraphRDFContext(final ServletContext servletContext) {
 
     //        if (m_context == null) {
     //

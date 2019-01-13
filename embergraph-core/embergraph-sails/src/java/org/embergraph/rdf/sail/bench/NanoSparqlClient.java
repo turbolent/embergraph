@@ -598,7 +598,7 @@ public class NanoSparqlClient {
    *     sequentially (origin ONE (1)).
    * @throws IOException
    */
-  private static final Map<String /* src */, String /* query */> readQueries(
+  private static Map<String /* src */, String /* query */> readQueries(
       final List<File> fileList, final Pattern delim) throws IOException {
 
     final Map<String /* src */, String /* query */> map = new LinkedHashMap<>();

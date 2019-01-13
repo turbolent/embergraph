@@ -10,7 +10,7 @@ public class JavaCharStream {
   /** Whether parser is static. */
   public static final boolean staticFlag = false;
 
-  static final int hexval(char c) throws java.io.IOException {
+  static int hexval(char c) throws java.io.IOException {
     switch (c) {
       case '0':
         return 0;

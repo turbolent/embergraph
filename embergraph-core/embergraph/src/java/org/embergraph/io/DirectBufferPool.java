@@ -623,7 +623,7 @@ public class DirectBufferPool {
    * @throws IllegalArgumentException if the buffer has already been released.
    * @throws InterruptedException
    */
-  private final void release(final ByteBuffer b) throws InterruptedException {
+  private void release(final ByteBuffer b) throws InterruptedException {
 
     if (!release(b, Long.MAX_VALUE, TimeUnit.MILLISECONDS)) {
 
@@ -640,7 +640,7 @@ public class DirectBufferPool {
    * @throws IllegalArgumentException if the buffer has already been released.
    * @throws InterruptedException
    */
-  private final boolean release(final ByteBuffer b, final long timeout, final TimeUnit units)
+  private boolean release(final ByteBuffer b, final long timeout, final TimeUnit units)
       throws InterruptedException {
 
     //        if(log.isInfoEnabled())

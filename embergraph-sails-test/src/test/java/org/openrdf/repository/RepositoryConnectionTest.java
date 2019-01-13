@@ -92,7 +92,6 @@ import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.repository.contextaware.ContextAwareConnection;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RioSetting;
 import org.openrdf.rio.helpers.RDFHandlerBase;

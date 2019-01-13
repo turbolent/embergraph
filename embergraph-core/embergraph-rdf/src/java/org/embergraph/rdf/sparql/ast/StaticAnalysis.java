@@ -1683,7 +1683,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
    * Helper method to determine the set of filters that will be fully bound assuming the specified
    * set of variables is bound.
    */
-  private final List<FilterNode> getBoundFilters(
+  private List<FilterNode> getBoundFilters(
       final JoinGroupNode group, final Set<IVariable<?>> knownBound) {
 
     final List<FilterNode> filters = new LinkedList<>();

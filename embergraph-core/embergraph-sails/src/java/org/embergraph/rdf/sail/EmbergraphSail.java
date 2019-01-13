@@ -142,13 +142,11 @@ import org.openrdf.query.Dataset;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.algebra.TupleExpr;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.NotifyingSailConnection;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailConnectionListener;
 import org.openrdf.sail.SailException;
-import org.openrdf.sail.UnknownSailTransactionStateException;
 import org.openrdf.sail.UpdateContext;
 
 // FIXME:  Sesame 2.8 not used for 2.1.4 Release

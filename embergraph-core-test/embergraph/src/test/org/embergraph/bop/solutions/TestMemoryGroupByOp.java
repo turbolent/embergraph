@@ -248,11 +248,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
       // Run the query.
       {
         final Thread t =
-            new Thread() {
-              public void run() {
-                ft.run();
-              }
-            };
+            new Thread(() -> ft.run());
         t.setDaemon(true);
         t.start();
       }

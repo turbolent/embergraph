@@ -41,7 +41,7 @@ public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDB
    *
    * @return An operand which is known to evaluate to an {@link XSDBooleanIV}.
    */
-  protected static final XSDBooleanIVValueExpression wrap(final IValueExpression<? extends IV> ve) {
+  protected static XSDBooleanIVValueExpression wrap(final IValueExpression<? extends IV> ve) {
 
     return ve instanceof XSDBooleanIVValueExpression
         ? (XSDBooleanIVValueExpression) ve

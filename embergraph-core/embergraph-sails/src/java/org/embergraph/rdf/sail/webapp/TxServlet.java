@@ -704,7 +704,7 @@ public class TxServlet extends EmbergraphRDFServlet {
    *     response was committed.
    * @throws IOException
    */
-  private final boolean getTxId(
+  private boolean getTxId(
       final HttpServletRequest req, final HttpServletResponse resp, final AtomicLong ref)
       throws IOException {
 

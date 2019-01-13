@@ -43,7 +43,6 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
@@ -162,7 +161,7 @@ public class VocabBuilder {
 
       } catch (Exception ex) {
 
-        log.warn("Could not process file " + file + ": " + ex.getStackTrace());
+        log.warn("Could not process file " + file + ": " + Arrays.toString(ex.getStackTrace()));
 
       } finally {
 

@@ -31,7 +31,6 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.store.BD;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
-import org.openrdf.sail.SailException;
 
 /*
  * Extended to expose the connection used to execute the SPARQL UPDATE request.

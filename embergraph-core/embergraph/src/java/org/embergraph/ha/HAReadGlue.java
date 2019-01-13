@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.ha;
 
-import java.io.IOException;
 import java.rmi.Remote;
 import java.util.concurrent.Future;
 import org.embergraph.ha.msg.IHAReadRequest;

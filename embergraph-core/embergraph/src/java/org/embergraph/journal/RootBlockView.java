@@ -872,7 +872,7 @@ public class RootBlockView implements IRootBlockView {
     return sb;
   }
 
-  private static final String toString(final DateFormat df, final long t) {
+  private static String toString(final DateFormat df, final long t) {
 
     return t + (t != 0L ? " [" + df.format(new Date(t)) + "]" : "");
   }

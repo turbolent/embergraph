@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import java.io.IOException;
 import java.util.Properties;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.vocab.NoVocabulary;
@@ -31,8 +30,6 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.memory.MemoryStore;
 
 /*

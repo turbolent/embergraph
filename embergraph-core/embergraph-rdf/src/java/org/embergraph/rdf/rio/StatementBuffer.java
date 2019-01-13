@@ -1844,7 +1844,7 @@ public class StatementBuffer<S extends Statement>
      * @param changeLog
      * @return The #of statements written on the database.
      */
-    private static final <S> long addStatements(
+    private static <S> long addStatements(
         final AbstractTripleStore database,
         final AbstractTripleStore statementStore,
         final EmbergraphStatement[] stmts,

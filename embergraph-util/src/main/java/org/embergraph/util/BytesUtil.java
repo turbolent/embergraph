@@ -144,7 +144,7 @@ public class BytesUtil {
    * @return If the two arrays have the same reference (including <code>null</code>) or if they have
    *     the same data.
    */
-  public static final boolean bytesEqual(final byte[] a, final byte[] b) {
+  public static boolean bytesEqual(final byte[] a, final byte[] b) {
 
     if (a == b) return true;
 
@@ -187,7 +187,7 @@ public class BytesUtil {
    *     recompiled for Windows. Also makes sure that it gets compiled and linked for Un*x. That
    *     should be tested from the ant installer and the result reported. Do the same for ICU4JNI.
    */
-  public static final int compareBytes(final byte[] a, final byte[] b) {
+  public static int compareBytes(final byte[] a, final byte[] b) {
     if (a == b) // includes a and b both null
     return 0;
 
@@ -293,7 +293,7 @@ public class BytesUtil {
    * @return a negative integer, zero, or a positive integer as the first argument is less than,
    *     equal to, or greater than the second.
    */
-  public static final int compareBytesWithLenAndOffset(
+  public static int compareBytesWithLenAndOffset(
       int aoff, int alen, final byte[] a, int boff, int blen, final byte[] b) {
 
     if (linked && alen > minlen && blen > minlen) {
@@ -329,7 +329,7 @@ public class BytesUtil {
    * @return The #of leading bytes in common (aka the index of the first byte in which the two
    *     arrays differ, although that index could lie beyond the end of one of the arrays).
    */
-  public static final int getPrefixLength(final byte[] a, final byte[] b) {
+  public static int getPrefixLength(final byte[] a, final byte[] b) {
 
     final int alen = a.length;
 
@@ -353,7 +353,7 @@ public class BytesUtil {
    * @param b A variable length unsigned byte array[].
    * @return A new byte[] containing the leading bytes in common between the two arrays.
    */
-  public static final byte[] getPrefix(final byte[] a, final byte[] b) {
+  public static byte[] getPrefix(final byte[] a, final byte[] b) {
 
     final int len = getPrefixLength(a, b);
 
@@ -371,7 +371,7 @@ public class BytesUtil {
    * @param key A variable length unsigned byte array.
    * @return A new unsigned byte[] that is the successor of the key.
    */
-  public static final byte[] successor(final byte[] key) {
+  public static byte[] successor(final byte[] key) {
 
     final int keylen = key.length;
 
@@ -426,7 +426,7 @@ public class BytesUtil {
   // * if the keys are equal.
   // * @throws IllegalArgumentException
   // * if the keys are out of order.
-  public static final byte[] getSeparatorKey(final byte[] givenKey, final byte[] priorKey) {
+  public static byte[] getSeparatorKey(final byte[] givenKey, final byte[] priorKey) {
 
     if (givenKey == null) throw new IllegalArgumentException();
 
@@ -475,7 +475,7 @@ public class BytesUtil {
    * @param key The key.
    * @return The string representation of the array as unsigned bytes.
    */
-  public static final String toString(final byte[] key) {
+  public static String toString(final byte[] key) {
 
     if (key == null) return NULL;
 
@@ -490,7 +490,7 @@ public class BytesUtil {
    * @param len The #of bytes to visit.
    * @return The string representation of the array as unsigned bytes.
    */
-  public static final String toString(final byte[] key, final int off, final int len) {
+  public static String toString(final byte[] key, final int off, final int len) {
 
     if (key == null) return NULL;
 
@@ -557,7 +557,7 @@ public class BytesUtil {
    *     key would be inserted into the array of keys. Note that this guarantees that the return
    *     value will be >= 0 if and only if the key is found.
    */
-  public static final int binarySearch(
+  public static int binarySearch(
       final byte[][] keys, final int base, final int nmem, final byte[] key) {
 
     int low = 0;
@@ -625,7 +625,7 @@ public class BytesUtil {
    * @param toKey The exclusive upper bound -or- <code>null</code> if there is no upper bound.
    * @return <code>true</code> unless the <i>key</i> is LT [fromKey] or GTE [toKey].
    */
-  public static final boolean rangeCheck(
+  public static boolean rangeCheck(
       final byte[] key, final byte[] fromKey, final byte[] toKey) {
 
     if (fromKey == null && toKey == null) {
@@ -713,7 +713,7 @@ public class BytesUtil {
    * @param nbits The #of bit flags.
    * @return The #of bytes required. This will be zero iff <i>nbits</i> is zero.
    */
-  public static final int bitFlagByteLength(final int nbits) {
+  public static int bitFlagByteLength(final int nbits) {
 
     return nbits / 8 + (nbits % 8 == 0 ? 0 : 1);
 
@@ -732,7 +732,7 @@ public class BytesUtil {
    * @param bitIndex The bit index.
    * @return The byte index.
    */
-  public static final int byteIndexForBit(final long bitIndex) {
+  public static int byteIndexForBit(final long bitIndex) {
 
     return ((int) (bitIndex / 8));
   }
@@ -747,7 +747,7 @@ public class BytesUtil {
    * @param bitIndex The bit index into the byte[].
    * @return The offset of the bit in the appropriate byte.
    */
-  public static final int withinByteIndexForBit(final long bitIndex) {
+  public static int withinByteIndexForBit(final long bitIndex) {
 
     return 7 - ((int) bitIndex) % 8;
   }
@@ -761,7 +761,7 @@ public class BytesUtil {
    * @param bitIndex The index of the bit.
    * @return The value of the bit.
    */
-  public static final boolean getBit(final byte[] buf, final long bitIndex) {
+  public static boolean getBit(final byte[] buf, final long bitIndex) {
 
     final int mask = (1 << withinByteIndexForBit(bitIndex));
 
@@ -782,7 +782,7 @@ public class BytesUtil {
    * @param bitIndex The index of the bit.
    * @return The old value of the bit.
    */
-  public static final boolean setBit(final byte[] buf, final long bitIndex, final boolean value) {
+  public static boolean setBit(final byte[] buf, final long bitIndex, final boolean value) {
 
     final int mask = (1 << withinByteIndexForBit(bitIndex));
 

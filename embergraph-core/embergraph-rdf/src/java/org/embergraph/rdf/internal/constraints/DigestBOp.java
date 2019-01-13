@@ -174,7 +174,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
 
   public String toString() {
 
-    String sb = String.valueOf(op())
+    String sb = op()
         + "(" + get(0) + ")";
     return sb;
   }

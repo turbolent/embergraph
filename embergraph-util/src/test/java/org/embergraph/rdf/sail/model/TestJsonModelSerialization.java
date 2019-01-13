@@ -1,8 +1,6 @@
 package org.embergraph.rdf.sail.model;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;
 import java.io.StringBufferInputStream;
 import java.io.StringWriter;

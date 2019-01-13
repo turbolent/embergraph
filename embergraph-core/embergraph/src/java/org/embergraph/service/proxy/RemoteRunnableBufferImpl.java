@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.proxy;
 
-import java.io.IOException;
 import java.util.concurrent.Future;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 

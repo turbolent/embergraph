@@ -37,7 +37,7 @@ public class BooleanListBitVector extends AbstractBitVector implements Serializa
   /** The backing list. */
   private final BooleanList list;
 
-  protected static final void ensureIntegerIndex(final long index) {
+  protected static void ensureIntegerIndex(final long index) {
     if (index > Integer.MAX_VALUE)
       throw new IllegalArgumentException(
           "This BitVector implementation accepts integer indices only");

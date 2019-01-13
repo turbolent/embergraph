@@ -2545,7 +2545,7 @@ public class TestKeyBuilder extends TestCase2 {
    *     <i>key</i> is <code>null</code>. If the <i>key</i> is a byte[], then the byte[] itself will
    *     be returned.
    */
-  public static final byte[] asSortKey(final Object val) {
+  public static byte[] asSortKey(final Object val) {
 
     if (val == null) {
 

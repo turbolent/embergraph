@@ -77,7 +77,7 @@ public class InetAddressUtil {
    * @param v The unsigned byte.
    * @return The corresponding signed value.
    */
-  static final byte decodeByte(final int v) {
+  static byte decodeByte(final int v) {
 
     int i = v;
 
@@ -99,7 +99,7 @@ public class InetAddressUtil {
    * @param v The signed byte.
    * @return The corresponding unsigned value.
    */
-  static final byte encodeByte(final int v) {
+  static byte encodeByte(final int v) {
 
     if (v > 127 || v < -128) throw new IllegalArgumentException("v=" + v);
 

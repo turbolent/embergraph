@@ -584,7 +584,7 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
   }
 
   /** Used during parsing to identify simple triple patterns. */
-  public static final boolean isSimpleIRI(final PathAlternative pathAlt) {
+  public static boolean isSimpleIRI(final PathAlternative pathAlt) {
 
     if (pathAlt.arity() == 1) {
 
@@ -602,7 +602,7 @@ public class ASTPropertyPathOptimizer extends AbstractJoinGroupOptimizer impleme
   }
 
   /** Used during parsing to identify simple triple patterns. */
-  public static final ConstantNode getSimpleIRI(final PathAlternative pathAlt) {
+  public static ConstantNode getSimpleIRI(final PathAlternative pathAlt) {
 
     if (pathAlt.arity() == 1) {
 

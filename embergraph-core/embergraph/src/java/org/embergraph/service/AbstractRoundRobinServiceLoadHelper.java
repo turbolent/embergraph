@@ -139,7 +139,7 @@ public abstract class AbstractRoundRobinServiceLoadHelper implements IServiceLoa
 
       assert uuid != null;
 
-      if (exclude != null && uuid.equals(exclude)) {
+      if (uuid.equals(exclude)) {
 
         nexcluded = 1;
 

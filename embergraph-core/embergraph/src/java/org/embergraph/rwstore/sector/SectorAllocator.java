@@ -62,7 +62,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 
   private static final Logger log = Logger.getLogger(SectorAllocator.class);
 
-  static final int getBitMask(int bits) {
+  static int getBitMask(int bits) {
     int ret = 0;
 
     for (int i = 0; i < bits; i++) ret += 1 << i;

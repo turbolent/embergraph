@@ -22,7 +22,7 @@ public class DummyConstantNode extends ConstantNode {
   private static final long serialVersionUID = 1393730362383536411L;
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static final IV toDummyIV(final EmbergraphValue val) {
+  public static IV toDummyIV(final EmbergraphValue val) {
 
     final IV dummy = TermId.mockIV(VTE.valueOf(val));
 

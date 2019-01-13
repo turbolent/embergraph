@@ -29,6 +29,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
@@ -314,7 +315,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     /** The second phase of the life-cycle, used for sanity checking. */
     public void validate() {
       if (pattern != null) {
-        if (className != null && className != PatternTokenizer.class.getName()) {
+        if (className != null && !Objects.equals(className, PatternTokenizer.class.getName())) {
           throw new RuntimeException(
               "Bad Option: Language range "
                   + languageRange
@@ -324,7 +325,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
         className = PatternTokenizer.class.getName();
       }
       if (this.wordBoundary != null) {
-        if (className != null && className != TermCompletionAnalyzer.class.getName()) {
+        if (className != null && !Objects.equals(className, TermCompletionAnalyzer.class.getName())) {
           throw new RuntimeException(
               "Bad Option: Language range "
                   + languageRange

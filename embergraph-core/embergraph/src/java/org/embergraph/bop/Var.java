@@ -1,6 +1,5 @@
 package org.embergraph.bop;
 
-import java.io.ObjectStreamException;
 import java.util.UUID;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 

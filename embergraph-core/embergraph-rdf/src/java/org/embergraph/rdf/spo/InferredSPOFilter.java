@@ -21,8 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
-import java.io.IOException;
-import java.io.ObjectStreamException;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.accesspath.IElementFilter;
 

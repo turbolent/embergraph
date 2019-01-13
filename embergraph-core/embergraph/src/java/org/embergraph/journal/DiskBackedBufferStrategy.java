@@ -302,7 +302,7 @@ public abstract class DiskBackedBufferStrategy extends BasicBufferStrategy
    * @throws IllegalStateException if the store is closed.
    * @throws IOException if the backing file can not be locked.
    */
-  private final synchronized FileChannel reopenChannel() throws IOException {
+  private synchronized FileChannel reopenChannel() throws IOException {
 
     assertOpen();
 

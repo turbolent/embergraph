@@ -689,7 +689,7 @@ public abstract class AbstractNode<
    *
    * @param key The key.
    */
-  protected static final String keyAsString(final byte[] key) {
+  protected static String keyAsString(final byte[] key) {
 
     return BytesUtil.toString(key);
   }

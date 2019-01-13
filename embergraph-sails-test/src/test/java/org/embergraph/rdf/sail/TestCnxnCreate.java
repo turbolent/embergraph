@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
@@ -187,14 +186,12 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
       final Semaphore c1 = new Semaphore(0);
 
       final Thread t =
-          new Thread() {
-            public void run() {
-              System.out.println("Running...");
-              uicnxn.set(sail.getUnisolatedConnection());
-              System.out.println("Releasing permit");
-              c1.release();
-            }
-          };
+          new Thread(() -> {
+            System.out.println("Running...");
+            uicnxn.set(sail.getUnisolatedConnection());
+            System.out.println("Releasing permit");
+            c1.release();
+          });
 
       t.start();
       c1.acquire();

@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.SocketException;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -922,7 +921,7 @@ public class NanoSparqlServer {
    * @param sub
    * @return
    */
-  static final String trimURISubstring(URL src, String sub) {
+  static String trimURISubstring(URL src, String sub) {
     final String s = src.toExternalForm();
     final int endIndex = s.lastIndexOf(sub);
     final String t = s.substring(0, endIndex);

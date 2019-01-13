@@ -3662,7 +3662,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/478">Cluster does not map input
    *     solution(s) across shards</a>
    */
-  private static final PipelineOp addStartOpOnCluster(
+  private static PipelineOp addStartOpOnCluster(
       final QueryBase queryBase, final AST2BOpContext ctx) {
 
     if (ctx.isCluster()) {
@@ -3696,7 +3696,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *
    * @return The {@link StartOp}.
    */
-  private static final PipelineOp addStartOp(final QueryBase queryBase, final AST2BOpContext ctx) {
+  private static PipelineOp addStartOp(final QueryBase queryBase, final AST2BOpContext ctx) {
 
     final PipelineOp start =
         applyQueryHints(
@@ -3732,7 +3732,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * @return
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private static final PipelineOp addAssignment(
+  private static PipelineOp addAssignment(
       PipelineOp left,
       //            final ASTBase dominatingASTNode,
       final AssignmentNode assignmentNode,
@@ -3926,7 +3926,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * @return
    */
   @SuppressWarnings("rawtypes")
-  private static final PipelineOp addConditional(
+  private static PipelineOp addConditional(
       PipelineOp left,
       final JoinGroupNode joinGroup,
       final FilterNode filter,
@@ -3995,7 +3995,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *     <p>See {@link JoinGroupNode#getInFilters()} for how and where this is currently disabled.
    */
   @SuppressWarnings("rawtypes")
-  private static final PipelineOp addKnownInConditional(
+  private static PipelineOp addKnownInConditional(
       PipelineOp left, final FilterNode filter, final AST2BOpContext ctx) {
 
     final InBOp bop = (InBOp) filter.getValueExpression();
@@ -4279,7 +4279,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * <p>Note: This should be conditional based on whether or not we are running on a cluster, but
    * also see https://sourceforge.net/apps/trac/bigdata/ticket/227.
    */
-  private static final PipelineOp addEndOp(PipelineOp left, final AST2BOpContext ctx) {
+  private static PipelineOp addEndOp(PipelineOp left, final AST2BOpContext ctx) {
 
     if (left != null
         && ctx.isCluster()
@@ -4307,7 +4307,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *     DISTINCT will be imposed and the results when streamed back to the controller will still be
    *     distinct.)
    */
-  private static final PipelineOp addDistinct(
+  private static PipelineOp addDistinct(
       PipelineOp left,
       final QueryBase query,
       final boolean preserveOrder,
@@ -4406,7 +4406,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * @return The left-most operator in the pipeline.
    */
   @SuppressWarnings("rawtypes")
-  private static final PipelineOp addAggregation(
+  private static PipelineOp addAggregation(
       PipelineOp left,
       final ProjectionNode projection,
       final GroupByNode groupBy,
@@ -4598,7 +4598,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
   /** Add an ORDER BY operator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private static final PipelineOp addOrderBy(
+  private static PipelineOp addOrderBy(
       PipelineOp left,
       final QueryBase queryBase,
       final OrderByNode orderBy,
@@ -4669,7 +4669,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
   }
 
   /** Impose an OFFSET and/or LIMIT on a query. */
-  private static final PipelineOp addSlice(
+  private static PipelineOp addSlice(
       PipelineOp left, final QueryBase queryBase, final SliceNode slice, final AST2BOpContext ctx) {
 
     final int bopId = ctx.nextId();
@@ -4710,7 +4710,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *     access path.)
    */
   @SuppressWarnings("rawtypes")
-  protected static final Predicate toPredicate(
+  protected static Predicate toPredicate(
       final StatementPatternNode sp, final AST2BOpContext ctx) {
 
     final QueryRoot query = ctx.astContainer.getOptimizedAST();
@@ -5152,7 +5152,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *     properly evaluate {@link IValueExpression}s during query optimization.
    */
   @SuppressWarnings("rawtypes")
-  public static final IValueExpression<? extends IV> toVE(
+  public static IValueExpression<? extends IV> toVE(
       final BOpContextBase context,
       final GlobalAnnotations globals,
       final IValueExpressionNode node) {
@@ -5217,7 +5217,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    *     resulted in a SPARQL type error.
    */
   @SuppressWarnings("rawtypes")
-  private static final IValueExpression<? extends IV> toVE2(
+  private static IValueExpression<? extends IV> toVE2(
       final BOpContextBase context, final IValueExpression<? extends IV> ve) {
 
     if (ve instanceof IVariableOrConstant) {
@@ -5304,7 +5304,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
    * @see ASTSetValueExpressionsOptimizer
    */
   @SuppressWarnings("rawtypes")
-  private static final IValueExpression<? extends IV> toVE1(
+  private static IValueExpression<? extends IV> toVE1(
       final BOpContextBase context,
       final GlobalAnnotations globals,
       final IValueExpressionNode node) {

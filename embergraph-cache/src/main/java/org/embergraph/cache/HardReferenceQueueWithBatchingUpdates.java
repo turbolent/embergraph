@@ -254,7 +254,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
    *
    * @return The thread-local queue used to batch updates to <i>this</i> queue.
    */
-  private final BatchQueue<T> getThreadLocalQueue() {
+  private BatchQueue<T> getThreadLocalQueue() {
 
     final Thread t = Thread.currentThread();
 

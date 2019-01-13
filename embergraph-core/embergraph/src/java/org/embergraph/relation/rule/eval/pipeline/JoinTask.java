@@ -306,7 +306,7 @@ public abstract class JoinTask implements Callable<Void> {
      * @return The thread-local buffer.
      * @throws RuntimeException if the join is halted.
      */
-    private final T get() {
+    private T get() {
       final Thread t = Thread.currentThread();
       T tmp = map.get(t);
       if (tmp == null) {

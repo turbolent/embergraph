@@ -1040,7 +1040,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
           if (!currentResources[0].getUUID().equals(getJournal().getRootBlockView().getUUID())) {
 
             throw new IllegalStateException(
-                "Expecting live journal to be the first resource: " + currentResources);
+                "Expecting live journal to be the first resource: " + Arrays
+                    .toString(currentResources));
           }
 
           /*

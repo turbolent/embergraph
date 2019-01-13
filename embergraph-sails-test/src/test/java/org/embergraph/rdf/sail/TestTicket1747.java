@@ -18,14 +18,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import java.io.IOException;
 import java.util.List;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
-import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -34,9 +32,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFParseException;
 
 /*
  * Test suite for an issue where IV resolution of vocabulary terms interferes with query parsing and

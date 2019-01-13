@@ -24,7 +24,6 @@ package it.unimi.dsi.bits;
 import it.unimi.dsi.compression.HuTuckerCodec;
 import it.unimi.dsi.fastutil.chars.Char2IntMap;
 import it.unimi.dsi.fastutil.chars.Char2IntOpenHashMap;
-import java.util.Iterator;
 
 /*
  * A transformation strategy mapping strings to their {@linkplain HuTuckerCodec Hu-Tucker encoding}.

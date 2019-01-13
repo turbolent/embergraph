@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop.fed;
 
-import cutthecrap.utils.striterators.ICloseableIterator;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.UUID;

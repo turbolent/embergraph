@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.service.ndx.pipeline;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.Callable;

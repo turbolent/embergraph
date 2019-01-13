@@ -1,6 +1,5 @@
 package org.embergraph.rdf.lexicon;
 
-import java.io.ObjectStreamException;
 import java.util.Comparator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.IV;

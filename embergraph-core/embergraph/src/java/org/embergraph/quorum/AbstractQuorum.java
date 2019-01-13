@@ -2529,7 +2529,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
                 launderThrowable(t);
               }
             }
-            if (lastId != null && clientId.equals(lastId)) {
+            if (clientId.equals(lastId)) {
               /*
                * If our client was the last service in the write
                * pipeline, then the new service is now its

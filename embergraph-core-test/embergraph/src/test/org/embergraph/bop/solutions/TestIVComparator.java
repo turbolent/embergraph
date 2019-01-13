@@ -38,7 +38,6 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.spo.SPO;
-import org.openrdf.model.URI;
 
 /*
  * Test suite for {@link IVComparator}.

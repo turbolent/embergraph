@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.embergraph.rdf.graph.AbstractGraphTestCase;
-import org.embergraph.rdf.graph.util.IGraphFixture;
 import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;

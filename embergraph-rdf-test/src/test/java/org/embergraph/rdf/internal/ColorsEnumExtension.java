@@ -120,7 +120,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
       this.b = b;
     }
 
-    public static final Color valueOf(final byte b) {
+    public static Color valueOf(final byte b) {
       switch (b) {
         case 0:
           return Red;

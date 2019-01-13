@@ -567,7 +567,7 @@ public abstract class AbstractTransactionService extends AbstractService
    * <p>TODO Why is this synchronized(this)? The timestamp factory is synchronized internally and
    * {@link #lastTimestamp} is volatile.
    */
-  private final synchronized long _nextTimestamp() {
+  private synchronized long _nextTimestamp() {
 
     return lastTimestamp = MillisecondTimestampFactory.nextMillis();
   }
@@ -1575,7 +1575,7 @@ public abstract class AbstractTransactionService extends AbstractService
    * @return A new transaction object using a distinct timestamp not in use by any transaction that
    *     will read from the same commit point.
    */
-  private final TxState getStartTime(final long timestamp)
+  private TxState getStartTime(final long timestamp)
       throws InterruptedException, TimeoutException {
 
     /*

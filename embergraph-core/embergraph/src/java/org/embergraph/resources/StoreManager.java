@@ -1169,7 +1169,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
      * @throws InterruptedException if the startup scan is interrupted.
      * @throws RuntimeException if bad files are encountered, etc.
      */
-    private final void start() throws InterruptedException {
+    private void start() throws InterruptedException {
 
       if (!isStarting()) {
 

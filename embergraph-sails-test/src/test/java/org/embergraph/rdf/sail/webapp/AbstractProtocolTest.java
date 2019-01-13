@@ -91,7 +91,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
   private boolean permit400s = false;
   private Header[] headers = null;
 
-  private final String getSparqlURL(final String serviceURL) {
+  private String getSparqlURL(final String serviceURL) {
     return serviceURL + "/sparql";
   }
 

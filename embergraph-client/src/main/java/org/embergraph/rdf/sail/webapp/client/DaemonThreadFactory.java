@@ -37,7 +37,7 @@ class DaemonThreadFactory implements ThreadFactory {
    * Returns an instance based on {@link Executors#defaultThreadFactory()} that configures the
    * thread for daemon mode.
    */
-  public static final ThreadFactory defaultThreadFactory() {
+  public static ThreadFactory defaultThreadFactory() {
 
     return _default;
   }

@@ -379,7 +379,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
     i = numStmts = 0;
   }
 
-  private final void assertOpen() {
+  private void assertOpen() {
 
     if (!open) {
 

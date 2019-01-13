@@ -501,7 +501,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
    * Returns the quantity <i>n</i> expressed as a per-second rate or "N/A" if the elapsed time is
    * zero.
    */
-  public static final String perSec(final int n, final long elapsed) {
+  public static String perSec(final int n, final long elapsed) {
 
     if (n == 0) return "0";
 

@@ -1914,7 +1914,7 @@ public class Journal extends AbstractJournal
      *
      * @return The {@link HAStatusEnum} or <code>null</code>.
      */
-    private final HAStatusEnum getHAStatus() {
+    private HAStatusEnum getHAStatus() {
 
       // Quorum iff HA.
       final Quorum<HAGlue, QuorumService<HAGlue>> quorum = getQuorum();
@@ -2082,7 +2082,7 @@ public class Journal extends AbstractJournal
      *     be case to Name2Addr </a>
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/530">Journal HA </a>
      */
-    private final long _newTx(final long timestamp) {
+    private long _newTx(final long timestamp) {
 
       IRawTx tx = null;
       try {
@@ -3296,7 +3296,7 @@ public class Journal extends AbstractJournal
    * <p>Note: An atomic reference provides us with a "lock" object which doubles as a reference. We
    * are not relying on its CAS properties.
    */
-  private final GlobalRowStoreHelper getGlobalRowStoreHelper() {
+  private GlobalRowStoreHelper getGlobalRowStoreHelper() {
 
     GlobalRowStoreHelper t = globalRowStoreHelper.get();
 

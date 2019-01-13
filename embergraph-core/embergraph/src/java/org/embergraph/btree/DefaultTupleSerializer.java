@@ -58,7 +58,7 @@ public class DefaultTupleSerializer<K, V>
    *
    * @deprecated by {@link IndexMetadata.Options#KEY_BUILDER_FACTORY}
    */
-  public static final IKeyBuilderFactory getDefaultKeyBuilderFactory() {
+  public static IKeyBuilderFactory getDefaultKeyBuilderFactory() {
 
     return new DefaultKeyBuilderFactory(new Properties());
   }
@@ -68,7 +68,7 @@ public class DefaultTupleSerializer<K, V>
    *
    * @deprecated by {@link IndexMetadata.Options#LEAF_KEYS_CODER}
    */
-  public static final IRabaCoder getDefaultLeafKeysCoder() {
+  public static IRabaCoder getDefaultLeafKeysCoder() {
 
     return DefaultFrontCodedRabaCoder.INSTANCE;
     //        return PrefixSerializer.INSTANCE;
@@ -80,7 +80,7 @@ public class DefaultTupleSerializer<K, V>
    *
    * @deprecated by {@link IndexMetadata.Options#LEAF_VALUES_CODER}
    */
-  public static final IRabaCoder getDefaultValuesCoder() {
+  public static IRabaCoder getDefaultValuesCoder() {
 
     return CanonicalHuffmanRabaCoder.INSTANCE;
     //        return DefaultDataSerializer.INSTANCE;

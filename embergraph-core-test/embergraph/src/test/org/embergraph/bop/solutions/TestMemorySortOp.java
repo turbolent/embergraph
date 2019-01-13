@@ -186,11 +186,7 @@ public class TestMemorySortOp extends TestCase2 {
     // Run the query.
     {
       final Thread t =
-          new Thread() {
-            public void run() {
-              ft.run();
-            }
-          };
+          new Thread(() -> ft.run());
       t.setDaemon(true);
       t.start();
     }
@@ -298,11 +294,7 @@ public class TestMemorySortOp extends TestCase2 {
     // Run the query.
     {
       final Thread t =
-          new Thread() {
-            public void run() {
-              ft.run();
-            }
-          };
+          new Thread(() -> ft.run());
       t.setDaemon(true);
       t.start();
     }
@@ -452,11 +444,7 @@ public class TestMemorySortOp extends TestCase2 {
       // Run the query.
       {
         final Thread t =
-            new Thread() {
-              public void run() {
-                ft.run();
-              }
-            };
+            new Thread(() -> ft.run());
         t.setDaemon(true);
         t.start();
       }

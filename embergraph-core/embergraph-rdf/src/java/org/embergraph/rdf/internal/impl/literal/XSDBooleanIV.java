@@ -56,7 +56,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
    * @return A new {@link XSDBooleanIV} for that truth value with NO cache value.
    * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as constants
    */
-  public static final XSDBooleanIV<EmbergraphLiteral> valueOf(final boolean b) {
+  public static XSDBooleanIV<EmbergraphLiteral> valueOf(final boolean b) {
     return (XSDBooleanIV<EmbergraphLiteral>) (b ? TRUE : FALSE).clone(true /*clearCache*/);
   }
 

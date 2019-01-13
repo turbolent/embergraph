@@ -62,7 +62,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
    *     public version of the URL. If it does not, then we won't be able to use the load
    *     balancer....
    */
-  protected static final String getContextPath() {
+  protected static String getContextPath() {
 
     return "/embergraph";
   }

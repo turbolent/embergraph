@@ -44,7 +44,7 @@ public class QueryHintRegistry {
    * @throws UnsupportedOperationException if there is already a {@link Factory} registered for that
    *     URI.
    */
-  public static final void add(final IQueryHint<?> queryHint) {
+  public static void add(final IQueryHint<?> queryHint) {
 
     if (registry.putIfAbsent(queryHint.getName(), queryHint) != null) {
 
@@ -59,7 +59,7 @@ public class QueryHintRegistry {
    * @return The {@link IQueryHint} -or- <code>null</code> if there is none registered for that
    *     name.
    */
-  public static final IQueryHint<?> get(final String name) {
+  public static IQueryHint<?> get(final String name) {
 
     return registry.get(name);
   }

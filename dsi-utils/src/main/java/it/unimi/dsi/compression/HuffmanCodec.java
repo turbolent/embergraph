@@ -22,7 +22,6 @@ package it.unimi.dsi.compression;
  */
 
 import cern.colt.Sorting;
-import cern.colt.function.IntComparator;
 import it.unimi.dsi.bits.BitVector;
 import it.unimi.dsi.bits.LongArrayBitVector;
 import java.io.Serializable;

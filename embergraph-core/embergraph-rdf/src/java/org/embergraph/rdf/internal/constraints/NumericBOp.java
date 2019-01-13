@@ -124,7 +124,7 @@ public class NumericBOp extends IVValueExpression<IV> implements INeedsMateriali
 
   public String toString() {
 
-    String sb = String.valueOf(op())
+    String sb = op()
         + "(" + left() + ")";
     return sb;
   }

@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import org.embergraph.btree.AbstractBTreeTestCase;

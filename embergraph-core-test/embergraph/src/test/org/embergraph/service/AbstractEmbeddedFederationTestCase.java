@@ -204,7 +204,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
    * @param expected
    * @param actual
    */
-  public static final void assertEquals(Split expected, Split actual) {
+  public static void assertEquals(Split expected, Split actual) {
 
     assertEquals("partition", expected.pmd, actual.pmd);
     assertEquals("fromIndex", expected.fromIndex, actual.fromIndex);

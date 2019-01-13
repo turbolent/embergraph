@@ -100,7 +100,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    * @param size a number of bits.
    * @return the number of words that are necessary to hold the given number of bits.
    */
-  protected static final int numWords(final long size) {
+  protected static int numWords(final long size) {
     assert !ASSERTS || (size + WORD_MASK) >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) ((size + WORD_MASK) >>> LOG2_BITS_PER_WORD);
   }
@@ -112,7 +112,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    * @return the index of the word that holds the bit of given index, or -1 if <code>index</code> is
    *     -1.
    */
-  protected static final int word(final long index) {
+  protected static int word(final long index) {
     assert !ASSERTS || index >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) (index >> LOG2_BITS_PER_WORD);
   }
@@ -127,7 +127,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    * @param index the index of a bit.
    * @return the inside-word index of the bit that would hold the bit of specified index.
    */
-  protected static final int bit(final long index) {
+  protected static int bit(final long index) {
     return (int) (index & WORD_MASK);
   }
 
@@ -137,7 +137,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    * @param index the index of a bit
    * @return a mask having a 1 exactly at the bit {@link #bit(long) bit(index)}.
    */
-  protected static final long mask(final long index) {
+  protected static long mask(final long index) {
     return 1L << (index & WORD_MASK);
   }
 

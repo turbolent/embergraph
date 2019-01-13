@@ -96,7 +96,7 @@ public class MovingAverageTask implements Runnable {
    * @param w The weight for the moving average in (0:1). Values around .2 seem appropriate.
    * @return The updated moving average.
    */
-  protected static final double getMovingAverage(final double avg, final double q, final double w) {
+  protected static double getMovingAverage(final double avg, final double q, final double w) {
 
     return (1 - w) * avg + (w * q);
   }

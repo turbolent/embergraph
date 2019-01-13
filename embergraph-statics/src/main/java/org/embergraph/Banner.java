@@ -382,7 +382,7 @@ public class Banner {
   private static final AtomicReference<Map<String, String>> buildInfoRef =
       new AtomicReference<>();
 
-  private static final String getBuildString() {
+  private static String getBuildString() {
 
     if (getBuildInfo().isEmpty()) return "";
 
@@ -406,7 +406,7 @@ public class Banner {
    * @return Build version if available and <code>null</code> otherwise.
    * @see #getBuildInfo()
    */
-  public static final String getVersion() {
+  public static String getVersion() {
 
     if (getBuildInfo().isEmpty()) {
 

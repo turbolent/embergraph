@@ -116,7 +116,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
   /** The byte offset of the field coding the #of entries in the raba. */
   private static final int O_SIZE = O_FLAGS + SIZEOF_FLAGS;
   /** The byte offset to the bit flags coding the nulls. */
-  private static final int O_NULLS(final byte version) {
+  private static int O_NULLS(final byte version) {
     if (version == VERSION0) return O_SIZE + SIZEOF_SIZE;
     return O_SIZE + SIZEOF_SIZE + SIZEOF_CAPACITY;
   }

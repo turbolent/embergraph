@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
 /*
@@ -86,7 +85,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
   public UUID[] getUnderUtilizedDataServices(
       final int minCount, final int maxCount, final UUID exclude) {
 
-    if (exclude != null && knownGood.equals(exclude)) {
+    if (knownGood.equals(exclude)) {
 
       throw new IllegalArgumentException();
     }
@@ -177,7 +176,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
 
       if (tmp == null) throw new AssertionError();
 
-      if (exclude != null && tmp.equals(exclude)) throw new AssertionError();
+      if (tmp.equals(exclude)) throw new AssertionError();
 
       uuids[n++] = tmp;
     }

@@ -1715,7 +1715,7 @@ public abstract class TestCase2 extends TestCase {
    * @param log The logger.
    * @return True if the logger would log messages at the DEBUG level.
    */
-  public static final boolean isDEBUG(Logger log) {
+  public static boolean isDEBUG(Logger log) {
 
     return log.getEffectiveLevel().toInt() <= Level.DEBUG.toInt();
   }
@@ -1728,7 +1728,7 @@ public abstract class TestCase2 extends TestCase {
    * @param log The logger.
    * @return True if the logger would log messages at the INFO level.
    */
-  public static final boolean isINFO(Logger log) {
+  public static boolean isINFO(Logger log) {
 
     return log.getEffectiveLevel().toInt() <= Level.INFO.toInt();
   }

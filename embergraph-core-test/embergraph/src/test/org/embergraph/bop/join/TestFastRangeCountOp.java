@@ -23,7 +23,6 @@ package org.embergraph.bop.join;
 
 import java.math.BigInteger;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import junit.framework.TestCase2;
 import org.embergraph.bop.BOp;

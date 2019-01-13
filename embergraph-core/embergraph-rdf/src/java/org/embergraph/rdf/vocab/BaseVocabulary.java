@@ -118,7 +118,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
    *
    * @throws IllegalStateException if {@link #init()} has already been invoked.
    */
-  private final synchronized void init(
+  private synchronized void init(
       final int declsInitialCapacity, final int valuesInitialCapacity) {
 
     if (valueFactory == null) throw new IllegalStateException();

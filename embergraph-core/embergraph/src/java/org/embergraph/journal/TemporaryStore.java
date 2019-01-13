@@ -275,7 +275,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
    * @param name The name.
    * @param ndx The data structure.
    */
-  private final void register(final String name, final ICheckpointProtocol ndx) {
+  private void register(final String name, final ICheckpointProtocol ndx) {
 
     synchronized (name2Addr) {
       assertOpen();

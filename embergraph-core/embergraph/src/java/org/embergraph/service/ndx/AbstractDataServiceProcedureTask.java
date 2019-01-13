@@ -297,7 +297,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
    *     {@link #call()} would return the value for {@link ISimpleIndexProcedure}.
    */
   @SuppressWarnings("unchecked")
-  private final void submit(final IDataService dataService, final String name) throws Exception {
+  private void submit(final IDataService dataService, final String name) throws Exception {
 
     /*
      * Note: The timestamp here is the one specified for the task. This

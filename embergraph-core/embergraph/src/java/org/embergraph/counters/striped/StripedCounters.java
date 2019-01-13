@@ -67,7 +67,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
   protected /*private*/ T parent;
 
   /** Return the stripe to be used by the caller's thread. */
-  private final int threadHash() {
+  private int threadHash() {
 
     return Math.abs(Thread.currentThread().hashCode() % a.length);
   }

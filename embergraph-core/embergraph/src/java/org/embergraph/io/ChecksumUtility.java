@@ -37,13 +37,7 @@ public class ChecksumUtility {
 
   /** ThreadLocal {@link ChecksumUtility} factory. */
   public static final ThreadLocal<ChecksumUtility> threadChk =
-      new ThreadLocal<ChecksumUtility>() {
-
-        protected ChecksumUtility initialValue() {
-
-          return new ChecksumUtility();
-        }
-      };
+      ThreadLocal.withInitial(() -> new ChecksumUtility());
 
   /*
    * static access to a ThreadLocal Checksum utility

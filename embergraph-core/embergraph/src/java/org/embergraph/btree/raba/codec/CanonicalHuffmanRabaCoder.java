@@ -2039,7 +2039,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
      *     key would be inserted into the array of keys. Note that this guarantees that the return
      *     value will be >= 0 if and only if the key is found.
      */
-    private final int binarySearch(final InputBitStream ibs, final byte[] key) throws IOException {
+    private int binarySearch(final InputBitStream ibs, final byte[] key) throws IOException {
 
       /*
        * The implementation codes the symbols in the key space one at a

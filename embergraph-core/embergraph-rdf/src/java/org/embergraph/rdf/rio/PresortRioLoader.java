@@ -21,7 +21,6 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFHandler;
-import org.openrdf.rio.RDFHandlerException;
 
 /*
  * Statement handler for the RIO RDF Parser that writes on a {@link StatementBuffer}.

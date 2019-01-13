@@ -82,7 +82,6 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.impl.AbstractOperation;
 import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.query.impl.DatasetImpl;

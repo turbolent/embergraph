@@ -281,7 +281,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
    *     be turned into a {@link Literal} without an index read.
    */
   @SuppressWarnings("rawtypes")
-  public static final Literal asLiteral(final IV iv) {
+  public static Literal asLiteral(final IV iv) {
 
     if (iv == null) throw new SparqlTypeErrorException();
 
@@ -311,7 +311,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
    *     be turned into a {@link Literal} without an index read.
    */
   @SuppressWarnings("rawtypes")
-  public static final Value asValue(final IV iv) {
+  public static Value asValue(final IV iv) {
 
     if (iv == null) throw new SparqlTypeErrorException();
 

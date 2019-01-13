@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rwstore;
 
-import java.io.IOException;
 import java.nio.channels.Channel;
 import java.nio.channels.FileChannel;
 import org.apache.log4j.Logger;

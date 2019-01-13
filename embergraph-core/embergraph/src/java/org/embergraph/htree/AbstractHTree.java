@@ -1327,7 +1327,7 @@ public abstract class AbstractHTree
    *     <p>and possibly
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/149 (NULL passed to readNodeOrLeaf)
    */
-  private final void doSyncTouch(final AbstractPage node) {
+  private void doSyncTouch(final AbstractPage node) {
 
     //        final long beginNanos = System.nanoTime();
 
@@ -1342,7 +1342,7 @@ public abstract class AbstractHTree
 
   }
 
-  private final void doTouch(final AbstractPage node) {
+  private void doTouch(final AbstractPage node) {
 
     //        final long beginNanos = System.nanoTime();
     //

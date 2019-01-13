@@ -23,9 +23,7 @@ package org.embergraph.bop.engine;
 
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;

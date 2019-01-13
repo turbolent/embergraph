@@ -249,7 +249,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     i = bufferCount = 0;
   }
 
-  private final void assertOpen() {
+  private void assertOpen() {
 
     if (!open) {
 

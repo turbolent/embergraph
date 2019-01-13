@@ -266,7 +266,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
    * @return The {@link Response} which will send that resource.
    * @throws IOException if the resource is not found on the classpath.
    */
-  private final Response sendClasspathResource(final DeclaredResource decl) throws IOException {
+  private Response sendClasspathResource(final DeclaredResource decl) throws IOException {
 
     if (decl == null) throw new IllegalArgumentException();
 

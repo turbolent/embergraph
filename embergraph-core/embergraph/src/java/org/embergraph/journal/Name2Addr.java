@@ -1416,7 +1416,7 @@ public class Name2Addr extends BTree {
    *     AbstractTripleStore.destroy() does not filter for correct prefix </a>
    */
   @SuppressWarnings("unchecked")
-  public static final Iterator<String> indexNameScan(final String prefix, final IIndex n2a) {
+  public static Iterator<String> indexNameScan(final String prefix, final IIndex n2a) {
 
     final byte[] fromKey;
     final byte[] toKey;

@@ -239,7 +239,7 @@ public class SparseRowStore implements IRowStoreConstants {
   //    }
 
   /** Verifies the given arguments. */
-  static final void assertArgs(
+  static void assertArgs(
       final Schema schema, final Object primaryKey, final long fromTime, final long toTime) {
 
     if (schema == null) throw new IllegalArgumentException("schema");
@@ -270,7 +270,7 @@ public class SparseRowStore implements IRowStoreConstants {
    *
    * @param writeTime
    */
-  static final void assertWriteTime(long writeTime) {
+  static void assertWriteTime(long writeTime) {
 
     if (writeTime == AUTO_TIMESTAMP) return;
 
@@ -280,7 +280,7 @@ public class SparseRowStore implements IRowStoreConstants {
   }
 
   /** Validates the column name productions */
-  static final void assertPropertyNames(final Map<String, Object> propertySet) {
+  static void assertPropertyNames(final Map<String, Object> propertySet) {
 
     if (propertySet == null) throw new IllegalArgumentException();
 

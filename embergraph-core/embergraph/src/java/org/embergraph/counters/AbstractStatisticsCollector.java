@@ -534,14 +534,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
   protected void installShutdownHook() {
 
     final Thread t =
-        new Thread() {
-
-          @Override
-          public void run() {
-
-            AbstractStatisticsCollector.this.stop();
-          }
-        };
+        new Thread(() -> AbstractStatisticsCollector.this.stop());
 
     t.setDaemon(true);
 

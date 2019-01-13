@@ -22,7 +22,7 @@ public abstract class Prefetch implements Iterator {
   private Object m_next;
   private boolean m_ready = false;
 
-  private final void checkInit() {
+  private void checkInit() {
     if (!m_ready) {
       m_next = getNext();
       m_ready = true;

@@ -3181,7 +3181,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
     135, 146, 147, 153, 154, 157, 158, 163, 164,
   };
 
-  private static final boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2) {
+  private static boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2) {
     switch (hiByte) {
       case 0:
         return ((jjbitVec2[i2] & l2) != 0L);
@@ -3190,7 +3190,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
     }
   }
 
-  private static final boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2) {
+  private static boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2) {
     switch (hiByte) {
       case 0:
         return ((jjbitVec4[i2] & l2) != 0L);
@@ -3213,7 +3213,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
     }
   }
 
-  private static final boolean jjCanMove_2(int hiByte, int i1, int i2, long l1, long l2) {
+  private static boolean jjCanMove_2(int hiByte, int i1, int i2, long l1, long l2) {
     switch (hiByte) {
       case 0:
         return ((jjbitVec11[i2] & l2) != 0L);

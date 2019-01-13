@@ -91,7 +91,7 @@ public class ListBindingSet implements IBindingSet {
   private final List<E> current;
 
   /** Return the symbol table on the top of the stack. */
-  private final List<E> current() {
+  private List<E> current() {
 
     return current;
     //		return stack.peek();
@@ -550,7 +550,7 @@ public class ListBindingSet implements IBindingSet {
       //            if (!o.isBound(vars[i]))
       //                return false;
       final IConstant<?> o_val = o.get(var);
-      if (null == o_val || !val.equals(o_val)) return false;
+      if (!val.equals(o_val)) return false;
     }
 
     return true;

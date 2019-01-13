@@ -31,7 +31,6 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.vocab.NoVocabulary;
-import org.openrdf.OpenRDFException;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.MalformedQueryException;

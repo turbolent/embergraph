@@ -1,7 +1,6 @@
 package it.unimi.dsi.parser.callback;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import java.io.IOException;
 import junit.framework.TestCase;
 
 public class LinkExtractorTest extends TestCase {

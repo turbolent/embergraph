@@ -213,17 +213,17 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
     return set;
   }
 
-  protected static final Set<VarNode> asSet(final VarNode[] a) {
+  protected static Set<VarNode> asSet(final VarNode[] a) {
 
     return new LinkedHashSet<>(Arrays.asList(a));
   }
 
-  protected static final Set<FilterNode> asSet(final FilterNode[] a) {
+  protected static Set<FilterNode> asSet(final FilterNode[] a) {
 
     return new LinkedHashSet<>(Arrays.asList(a));
   }
 
-  protected static final Set<Integer> asSet(final Integer[] a) {
+  protected static Set<Integer> asSet(final Integer[] a) {
 
     return new LinkedHashSet<>(Arrays.asList(a));
   }

@@ -62,7 +62,7 @@ public class ProxyTestSuite extends TestSuite {
    *
    * @exception IllegalArgumentException if the <i>delegate </i> is <code>null</code>.
    */
-  private final void checkDelegate(Test delegate) {
+  private void checkDelegate(Test delegate) {
 
     if (delegate == null) {
 

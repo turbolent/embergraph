@@ -24,7 +24,6 @@ package org.embergraph;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
@@ -95,7 +94,7 @@ public class EmbergraphStatics {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/730" > Allow configuration of
    *     embedded NSS jetty server using jetty-web.xml </a>
    */
-  public static final String getContextPath() {
+  public static String getContextPath() {
 
     return "/embergraph";
   }

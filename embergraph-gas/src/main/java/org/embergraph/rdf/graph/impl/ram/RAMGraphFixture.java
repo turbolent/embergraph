@@ -21,7 +21,6 @@ import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
 import org.embergraph.rdf.graph.util.AbstractGraphFixture;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
-import org.openrdf.sail.SailException;
 
 public class RAMGraphFixture extends AbstractGraphFixture {
 

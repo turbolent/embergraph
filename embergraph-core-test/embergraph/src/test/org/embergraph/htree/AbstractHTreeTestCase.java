@@ -115,7 +115,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
 
       if (!found) {
 
-        fail("Value not expected" + ": index=" + j + ", object=" + actualValue);
+        fail("Value not expected" + ": index=" + j + ", object=" + Arrays.toString(actualValue));
       }
     }
 
@@ -123,7 +123,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
 
       final byte[] actualValue = actual.next();
 
-      fail("Iterator will deliver too many objects object=" + actualValue);
+      fail("Iterator will deliver too many objects object=" + Arrays.toString(actualValue));
     }
   }
 

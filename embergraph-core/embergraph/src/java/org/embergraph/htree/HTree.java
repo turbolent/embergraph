@@ -484,7 +484,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    *
    * <p>Note: The {@link #getCounter()} is NOT changed by this method.
    */
-  private final void newRoot() {
+  private void newRoot() {
 
     //        height = 0;
 
@@ -846,7 +846,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    *
    * @return the checkpoint.
    */
-  private final Checkpoint _writeCheckpoint2() {
+  private Checkpoint _writeCheckpoint2() {
 
     assertNotTransient();
     assertNotReadOnly();
@@ -955,7 +955,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    * @return The {@link Checkpoint}.
    */
   @SuppressWarnings("unchecked")
-  private final Checkpoint newCheckpoint() {
+  private Checkpoint newCheckpoint() {
 
     try {
 

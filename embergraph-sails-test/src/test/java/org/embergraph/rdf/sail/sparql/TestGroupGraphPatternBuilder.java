@@ -27,7 +27,6 @@ import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.model.EmbergraphValue;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;

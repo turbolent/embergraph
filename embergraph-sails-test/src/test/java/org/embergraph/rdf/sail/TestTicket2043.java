@@ -18,13 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
@@ -39,7 +37,6 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
 
 /*
  * Unit test template for use in submission of bugs.

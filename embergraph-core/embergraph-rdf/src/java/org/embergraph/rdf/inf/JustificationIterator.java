@@ -525,7 +525,7 @@ public class JustificationIterator implements IJustificationIterator {
     src = null;
   }
 
-  private final void assertOpen() {
+  private void assertOpen() {
 
     if (!open) throw new IllegalStateException();
   }

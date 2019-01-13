@@ -227,7 +227,7 @@ public class Schema implements Externalizable {
    * @throws UnsupportedOperationException if the primary key type is {@link KeyType#Unicode}. See
    *     {@link #toKey(Object)}, which correctly forms the successor key in all cases.
    */
-  private final Object successor(final IKeyBuilder keyBuilder, final Object v) {
+  private Object successor(final IKeyBuilder keyBuilder, final Object v) {
 
     final KeyType keyType = getPrimaryKeyType();
 
@@ -436,7 +436,7 @@ public class Schema implements Externalizable {
    *     <i>key</i> is <code>null</code>. If the <i>key</i> is a byte[], then the byte[] itself will
    *     be returned.
    */
-  private static final byte[] asSortKey(final Object val) {
+  private static byte[] asSortKey(final Object val) {
 
     if (val == null) {
 

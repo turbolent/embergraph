@@ -28,7 +28,6 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.query.QueryEvaluationException;
 
 public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
 

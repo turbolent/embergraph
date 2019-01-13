@@ -1,6 +1,5 @@
 package org.embergraph.rdf.sail;
 
-import java.io.IOException;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -16,8 +15,6 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.memory.MemoryStore;
 
 /** Ticket 967 is an EOF exception on high load of HttpClient requests */

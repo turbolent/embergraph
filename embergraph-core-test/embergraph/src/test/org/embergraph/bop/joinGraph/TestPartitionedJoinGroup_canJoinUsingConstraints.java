@@ -675,7 +675,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
    * Unit tests for attaching constraints using a specific join path.
    */
 
-  private final Set<IConstraint> asSet(IConstraint[] a) {
+  private Set<IConstraint> asSet(IConstraint[] a) {
 
     return new LinkedHashSet<>(Arrays.asList(a));
   }

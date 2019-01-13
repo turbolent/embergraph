@@ -51,7 +51,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   private static final long serialVersionUID = 2;
 
   /** Return the <code>flags</code> byte for a {@link BlobIV}. */
-  public static final byte toFlags(final VTE vte) {
+  public static byte toFlags(final VTE vte) {
     /*
      * Note: XSDBoolean happens to be assigned the code value of 0, which is
      * the value we want when the data type enumeration will be ignored.

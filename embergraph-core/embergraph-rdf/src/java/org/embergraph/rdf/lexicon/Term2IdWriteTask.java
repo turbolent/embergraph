@@ -328,7 +328,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
    * @see LexiconKeyBuilder
    */
   @SuppressWarnings("unchecked")
-  private final KVO<EmbergraphValue>[] generateSortKeys(
+  private KVO<EmbergraphValue>[] generateSortKeys(
       final LexiconKeyBuilder keyBuilder, final EmbergraphValue[] terms, final int numTerms) {
 
     final KVO<EmbergraphValue>[] a = new KVO[numTerms];

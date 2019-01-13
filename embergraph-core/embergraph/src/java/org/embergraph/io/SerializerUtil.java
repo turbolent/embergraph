@@ -29,7 +29,6 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
 import java.nio.ByteBuffer;
 
 /*
@@ -136,7 +135,7 @@ public class SerializerUtil {
    * @param obj A {@link Serializable} object.
    * @return The serialized object state.
    */
-  public static final byte[] serialize(final Object obj) {
+  public static byte[] serialize(final Object obj) {
 
     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -165,7 +164,7 @@ public class SerializerUtil {
    * @return The de-serialized object -or- <code>null</code> iff the byte[] reference is <code>null
    *     </code>.
    */
-  public static final Object deserialize(byte[] b) {
+  public static Object deserialize(byte[] b) {
 
     if (b == null) return null;
 
@@ -180,7 +179,7 @@ public class SerializerUtil {
    * @param len The #of bytes in the object record.
    * @return The de-serialized object.
    */
-  public static final Object deserialize(final byte[] b, final int off, final int len) {
+  public static Object deserialize(final byte[] b, final int off, final int len) {
 
     final ByteArrayInputStream bais = new ByteArrayInputStream(b, off, len);
 
@@ -206,7 +205,7 @@ public class SerializerUtil {
    * @param is The input stream from which to read the serialized data.
    * @return The de-serialized object.
    */
-  public static final Object deserialize(final InputStream is) {
+  public static Object deserialize(final InputStream is) {
 
     try {
 
@@ -228,7 +227,7 @@ public class SerializerUtil {
    *     will be advanced to the limit.
    * @return The de-serialized object.
    */
-  public static final Object deserialize(final ByteBuffer buf) {
+  public static Object deserialize(final ByteBuffer buf) {
 
     if (true && buf.hasArray()) {
 

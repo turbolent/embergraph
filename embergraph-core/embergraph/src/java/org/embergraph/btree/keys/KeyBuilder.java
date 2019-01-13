@@ -714,7 +714,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    * @return The value that will impose the lexiographic ordering as an unsigned long integer.
    * @todo This is unused and untested.
    */
-  static final /*public*/ long encode(long v) {
+  static /*public*/ long encode(long v) {
 
     if (v < 0) {
 

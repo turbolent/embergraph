@@ -357,7 +357,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
    * @param flags A flags byte.
    * @return The {@link VTE} encoded in the flags byte.
    */
-  public static final VTE getVTE(final byte flags) {
+  public static VTE getVTE(final byte flags) {
 
     return VTE.valueOf((byte) (((flags & VTE_MASK) >>> VTE_SHIFT) & 0xff));
   }
@@ -386,7 +386,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
    * @param flags The flags byte.
    * @return The {@link VTE}
    */
-  public static final VTE getInternalValueTypeEnum(final byte flags) {
+  public static VTE getInternalValueTypeEnum(final byte flags) {
 
     return VTE.valueOf((byte) (((flags & VTE_MASK) >>> VTE_SHIFT) & 0xff));
   }

@@ -122,43 +122,43 @@ public final class SystemUtil {
    * Return the number of processors available on this machine. This is useful in classes like
    * Thread/Processor thread pool models.
    */
-  public static final int numProcessors() {
+  public static int numProcessors() {
     return m_processors;
   }
 
-  public static final String cpuInfo() {
+  public static String cpuInfo() {
     return m_cpuInfo;
   }
 
   /** Return the architecture name */
-  public static final String architecture() {
+  public static String architecture() {
     return m_architecture;
   }
 
   /** Return the Operating System name */
-  public static final String operatingSystem() {
+  public static String operatingSystem() {
     return m_osName;
   }
 
   /** Return the Operating System version */
-  public static final String osVersion() {
+  public static String osVersion() {
     return m_osVersion;
   }
 
   /** Return <code>true</code> if running on Microsoft Windows. */
-  public static final boolean isWindows() {
+  public static boolean isWindows() {
 
     return m_windows;
   }
 
   /** Return <code>true</code> if running on Linux. */
-  public static final boolean isLinux() {
+  public static boolean isLinux() {
 
     return m_linux;
   }
 
   /** Return <code>true</code> if running on OSX. */
-  public static final boolean isOSX() {
+  public static boolean isOSX() {
 
     return m_osx;
   }

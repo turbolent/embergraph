@@ -281,7 +281,7 @@ public class MathUtility implements IMathOpHandler {
    * @return The result.
    * @see XPathMathFunctions
    */
-  public static final NumericIV numericalFunc(final Literal lit, final NumericOp op) {
+  public static NumericIV numericalFunc(final Literal lit, final NumericOp op) {
 
     if (!checkNumericDatatype(lit)) throw new IllegalArgumentException("not numeric: " + lit);
 
@@ -321,7 +321,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final BigDecimal left, final NumericOp op) {
+  private static NumericIV numericalFunc(final BigDecimal left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDDecimalIV(left.abs());
@@ -337,7 +337,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final BigInteger left, final NumericOp op) {
+  private static NumericIV numericalFunc(final BigInteger left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDIntegerIV(left.abs());
@@ -353,7 +353,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final float left, final NumericOp op) {
+  private static NumericIV numericalFunc(final float left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDNumericIV(Math.abs(left));
@@ -369,7 +369,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final int left, final NumericOp op) {
+  private static NumericIV numericalFunc(final int left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDNumericIV(Math.abs(left));
@@ -385,7 +385,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final long left, final NumericOp op) {
+  private static NumericIV numericalFunc(final long left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDNumericIV(Math.abs(left));
@@ -401,7 +401,7 @@ public class MathUtility implements IMathOpHandler {
   }
 
   @Deprecated
-  private static final NumericIV numericalFunc(final double left, final NumericOp op) {
+  private static NumericIV numericalFunc(final double left, final NumericOp op) {
     switch (op) {
       case ABS:
         return new XSDNumericIV(Math.abs(left));
@@ -416,7 +416,7 @@ public class MathUtility implements IMathOpHandler {
     }
   }
 
-  private static final NumericIV numericalMath(
+  private static NumericIV numericalMath(
       final BigDecimal left, final BigDecimal right, final MathOp op) {
 
     switch (op) {
@@ -448,7 +448,7 @@ public class MathUtility implements IMathOpHandler {
     }
   }
 
-  private static final NumericIV numericalMath(
+  private static NumericIV numericalMath(
       final BigInteger left, final BigInteger right, final MathOp op) {
 
     switch (op) {
@@ -469,7 +469,7 @@ public class MathUtility implements IMathOpHandler {
     }
   }
 
-  private static final NumericIV numericalMath(
+  private static NumericIV numericalMath(
       final float left, final float right, final MathOp op) {
 
     switch (op) {
@@ -490,7 +490,7 @@ public class MathUtility implements IMathOpHandler {
     }
   }
 
-  private static final NumericIV numericalMath(
+  private static NumericIV numericalMath(
       final double left, final double right, final MathOp op) {
 
     switch (op) {

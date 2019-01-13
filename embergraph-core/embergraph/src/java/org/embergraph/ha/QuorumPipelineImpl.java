@@ -530,7 +530,6 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
           return;
         }
         if (oldDownStreamId != null
-            && newDownStreamId != null
             && oldDownStreamId.equals(newDownStreamId)) {
           /*
            * Nothing to do. The pipeline is already configured

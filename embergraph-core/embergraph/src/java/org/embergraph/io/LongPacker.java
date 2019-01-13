@@ -271,7 +271,7 @@ public class LongPacker {
    * @param v The unsigned long value.
    * @return The #of bytes onto which the unsigned long value was packed.
    */
-  public static final int packLong(final long v, final byte[] pbuf, final IByteBuffer buf) {
+  public static int packLong(final long v, final byte[] pbuf, final IByteBuffer buf) {
 
     /*
      * You can only pack non-negative long values with this method.
@@ -480,7 +480,7 @@ public class LongPacker {
    * @param off The offset from which the data will be unpacked.
    * @return The long value.
    */
-  public static final long unpackLong(final byte[] buf, int off) {
+  public static long unpackLong(final byte[] buf, int off) {
     int b = buf[off++];
     int nbytes;
     long l;

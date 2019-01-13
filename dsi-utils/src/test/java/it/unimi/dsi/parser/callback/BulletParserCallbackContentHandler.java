@@ -7,7 +7,6 @@ import it.unimi.dsi.lang.MutableString;
 import it.unimi.dsi.parser.Attribute;
 import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
-import java.util.Iterator;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 

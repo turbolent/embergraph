@@ -29,7 +29,6 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
-import org.openrdf.model.URI;
 
 /*
  * Unit tests for {@link XSDIntegerIV}.

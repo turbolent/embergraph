@@ -452,7 +452,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * <p>However, this method does <em>not</em> update {@link #readBits}. The caller should increment
    * {@link #readBits} by 8 at each call, unless the bit are used to load {@link #current}.
    */
-  private final int read() throws IOException {
+  private int read() throws IOException {
     if (noBuffer) {
       final int t = is.read();
       if (t == -1) throw new EOFException();
@@ -483,7 +483,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    *
    * @return {@link #fill}.
    */
-  private final int refill() throws IOException {
+  private int refill() throws IOException {
     assert !ASSERTS || fill < 16;
 
     if (avail > 1) {
@@ -524,7 +524,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @throws AssertionError if one tries to read more bits than available in the buffer and
    *     assertions are enabled.
    */
-  private final int readFromCurrent(final int len) throws IOException {
+  private int readFromCurrent(final int len) throws IOException {
 
     if (len == 0) return 0;
 

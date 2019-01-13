@@ -2701,7 +2701,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    * there.
    */
   @SuppressWarnings("rawtypes")
-  private final void handleSid(
+  private void handleSid(
       final SidIV sid, final Collection<IV<?, ?>> ivs, final Set<IV<?, ?>> unrequested) {
 
     final ISPO spo = sid.getInlineValue();
@@ -2723,7 +2723,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    * there.
    */
   @SuppressWarnings("rawtypes")
-  private final void handleTerm(
+  private void handleTerm(
       final IV<?, ?> iv, final Collection<IV<?, ?>> ivs, final Set<IV<?, ?>> unrequested) {
 
     if (iv instanceof SidIV) {
@@ -2746,7 +2746,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    * can materialize itself into a EmbergraphBNode properly.
    */
   @SuppressWarnings("rawtypes")
-  private final void cacheTerms(final SidIV sid, final Map<IV<?, ?>, EmbergraphValue> terms) {
+  private void cacheTerms(final SidIV sid, final Map<IV<?, ?>, EmbergraphValue> terms) {
 
     final ISPO spo = sid.getInlineValue();
 
@@ -2767,7 +2767,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    * can materialize itself into a EmbergraphBNode properly.
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private final void cacheTerm(final IV iv, final Map<IV<?, ?>, EmbergraphValue> terms) {
+  private void cacheTerm(final IV iv, final Map<IV<?, ?>, EmbergraphValue> terms) {
 
     if (iv instanceof SidIV) {
 
@@ -2927,7 +2927,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    *     against the TERMS index iff none of the fast paths succeed.
    */
   @SuppressWarnings("rawtypes")
-  private final EmbergraphValue getValue(final IV iv, final boolean readFromIndex) {
+  private EmbergraphValue getValue(final IV iv, final boolean readFromIndex) {
 
     // if (false) { // alternative forces the standard code path.
     // final Collection<IV> ivs = new LinkedList<IV>();

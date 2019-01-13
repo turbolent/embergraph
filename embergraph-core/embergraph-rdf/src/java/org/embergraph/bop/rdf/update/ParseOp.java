@@ -723,7 +723,7 @@ public class ParseOp extends PipelineOp {
       }
 
       @SuppressWarnings({"rawtypes", "unchecked"})
-      private final IConstant<IV> asConst(final Value v) {
+      private IConstant<IV> asConst(final Value v) {
 
         final IV iv = TermId.mockIV(VTE.valueOf(v));
 

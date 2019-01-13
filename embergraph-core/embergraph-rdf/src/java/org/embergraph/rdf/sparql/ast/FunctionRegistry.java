@@ -956,7 +956,7 @@ public class FunctionRegistry {
    *     last constraint in this vararg parameter will be used to validate the additional arguments.
    * @throws IllegalArgumentException if the type constraints are violated.
    */
-  public static final void checkArgs(final ValueExpressionNode[] args, final Class... types) {
+  public static void checkArgs(final ValueExpressionNode[] args, final Class... types) {
 
     if (args.length < types.length) {
 
@@ -982,7 +982,7 @@ public class FunctionRegistry {
    * @param args The function arguments.
    * @return The {@link IValueExpression}.
    */
-  public static final IValueExpression<? extends IV> toVE(
+  public static IValueExpression<? extends IV> toVE(
       final BOpContextBase context, // BLZG-1343
       final GlobalAnnotations globals,
       final URI functionURI,
@@ -1027,7 +1027,7 @@ public class FunctionRegistry {
    * @throws UnsupportedOperationException if there is already a {@link Factory} registered for that
    *     URI.
    */
-  public static final void add(final URI functionURI, final Factory factory) {
+  public static void add(final URI functionURI, final Factory factory) {
 
     if (factories.putIfAbsent(functionURI, factory) != null) {
 
@@ -1043,7 +1043,7 @@ public class FunctionRegistry {
    * @throws UnsupportedOperationException if the function URI has not been declared.
    * @throws UnsupportedOperationException if the alias URI has already been declared.
    */
-  public static final void addAlias(final URI functionURI, final URI aliasURI) {
+  public static void addAlias(final URI functionURI, final URI aliasURI) {
 
     if (!factories.containsKey(functionURI)) {
 

@@ -23,7 +23,6 @@ package it.unimi.dsi.io;
 
 import it.unimi.dsi.fastutil.io.MeasurableInputStream;
 import it.unimi.dsi.fastutil.io.RepositionableStream;
-import java.io.IOException;
 import java.io.Serializable;
 
 /*

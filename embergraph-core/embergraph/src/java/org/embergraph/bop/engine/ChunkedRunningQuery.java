@@ -925,7 +925,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    * @param t The {@link ChunkTask}.
    * @param cause The first cause (or <code>null</code> if the task did not end with an error).
    */
-  private final void sendHaltMessage(
+  private void sendHaltMessage(
       final UUID serviceId, final ChunkTask t, final Throwable cause) {
 
     final IHaltOpMessage msg =

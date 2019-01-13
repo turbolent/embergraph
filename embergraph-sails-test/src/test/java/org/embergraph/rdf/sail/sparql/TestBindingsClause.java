@@ -32,7 +32,6 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;

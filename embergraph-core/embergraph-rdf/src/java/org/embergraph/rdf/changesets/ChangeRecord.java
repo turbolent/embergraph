@@ -61,7 +61,7 @@ public class ChangeRecord implements IChangeRecord {
     final ISPO stmt2 = rec.getStatement();
 
     // statements are equal
-    if (stmt == stmt2 || (stmt != null && stmt2 != null && stmt.equals(stmt2))) {
+    if (stmt == stmt2 || (stmt != null && stmt.equals(stmt2))) {
 
       // actions are equal
       return action == rec.getChangeAction();
@@ -72,7 +72,7 @@ public class ChangeRecord implements IChangeRecord {
 
   public String toString() {
 
-    return String.valueOf(action) + ": " + stmt;
+    return action + ": " + stmt;
   }
 
   /** Comparator imposes an {@link ISPO} order. */

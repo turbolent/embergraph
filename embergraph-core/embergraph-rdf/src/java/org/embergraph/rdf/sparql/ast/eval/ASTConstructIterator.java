@@ -116,7 +116,7 @@ public class ASTConstructIterator
    *
    * @see #bnodes
    */
-  private final Map<String, EmbergraphBNode> getBNodeMap() {
+  private Map<String, EmbergraphBNode> getBNodeMap() {
 
     if (bnodes == null) {
 

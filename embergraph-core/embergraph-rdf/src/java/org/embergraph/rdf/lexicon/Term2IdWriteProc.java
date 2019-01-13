@@ -531,7 +531,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     out.writeByte((byte) scaleOutTermIdBitsToReverse);
   }
 
-  public static final VTE VTE(final byte code) {
+  public static VTE VTE(final byte code) {
 
     switch (code) {
       case ITermIndexCodes.TERM_CODE_URI:

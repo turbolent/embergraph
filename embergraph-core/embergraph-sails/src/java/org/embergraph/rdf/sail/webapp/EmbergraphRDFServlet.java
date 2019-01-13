@@ -409,7 +409,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
   }
 
   /** Factory for the {@link PipedInputStream}. */
-  protected static final PipedInputStream newPipedInputStream(final PipedOutputStream os)
+  protected static PipedInputStream newPipedInputStream(final PipedOutputStream os)
       throws IOException {
 
     return new PipedInputStream(os);

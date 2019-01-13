@@ -24,7 +24,6 @@ package org.embergraph.rdf.sail.sparql;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;

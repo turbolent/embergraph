@@ -1613,7 +1613,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
    * @throws IllegalStateException if the state transition is illegal.
    * @throws IllegalMonitorStateException if the current thread does not hold the {@link #lock}.
    */
-  private final void setRunState(final RunState newval) {
+  private void setRunState(final RunState newval) {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 

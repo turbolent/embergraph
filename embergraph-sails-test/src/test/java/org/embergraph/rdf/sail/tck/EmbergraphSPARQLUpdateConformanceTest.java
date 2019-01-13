@@ -50,7 +50,6 @@ import org.openrdf.query.Update;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11ManifestTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLUpdateConformanceTest;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
 /*

@@ -389,7 +389,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    * complain that some threads were not terminated if the webapp running embergraph is stopped. You
    * can invoke this method to terminate the stale reference cleaner thread.
    */
-  public static final void stopStaleReferenceCleaner() {
+  public static void stopStaleReferenceCleaner() {
 
     cleanerService.shutdownNow();
   }

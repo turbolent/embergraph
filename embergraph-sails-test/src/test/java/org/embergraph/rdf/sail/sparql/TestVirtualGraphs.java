@@ -32,7 +32,6 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;

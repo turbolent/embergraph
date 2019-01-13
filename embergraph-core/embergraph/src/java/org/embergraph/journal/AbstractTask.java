@@ -1673,7 +1673,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     }
   }
 
-  private final T call2() throws Exception {
+  private T call2() throws Exception {
 
     nanoTime_assignedWorker = System.nanoTime();
 

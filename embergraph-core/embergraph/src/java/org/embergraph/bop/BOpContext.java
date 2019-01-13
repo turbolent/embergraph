@@ -698,7 +698,7 @@ public class BOpContext<E> extends BOpContextBase {
    * @throws NullPointerException if an argument is <code>null</code>.
    */
   @Deprecated // with PipelineJoin.JoinTask.AccessPathTask.handleJoin()
-  public static final boolean bind(
+  public static boolean bind(
       final IPredicate<?> pred,
       final IConstraint[] constraints,
       final Object e,

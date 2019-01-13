@@ -1105,10 +1105,7 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         // Wait for the service ID to become available, trying every
         // two seconds, while logging failures.
-        while (true) {
-          if (getServiceUUID() != null) {
-            break;
-          }
+        while (getServiceUUID() == null) {
           if (elapsed > 1000 * 10)
             log.warn(
                 ERR_NO_SERVICE_UUID
@@ -1118,7 +1115,8 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
                     + getServiceName()
                     + ", elapsed="
                     + elapsed);
-          else if (log.isInfoEnabled()) log.info(ERR_NO_SERVICE_UUID);
+          else if (log.isInfoEnabled())
+            log.info(ERR_NO_SERVICE_UUID);
           try {
             Thread.sleep(2000);
           } catch (InterruptedException e) {

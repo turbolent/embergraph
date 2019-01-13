@@ -47,7 +47,6 @@ import org.openrdf.query.parser.sparql.manifest.ManifestTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11ManifestTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryException;
 
 /*
  * Test harness for running the SPARQL test suites against an {@link EmbeddedFederation}.

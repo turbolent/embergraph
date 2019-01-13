@@ -38,7 +38,6 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.test.MockTermIdFactory;
-import org.openrdf.model.URI;
 
 /*
  * Test suite for math operations on {@link PackedLongIV} and {@link CompressedTimestampExtension}.

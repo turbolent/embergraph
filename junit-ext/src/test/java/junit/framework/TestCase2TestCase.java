@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -116,7 +117,7 @@ public class TestCase2TestCase extends TestCase2 {
 
       if (!found) {
 
-        fail("Could not find index=" + i + " in " + order);
+        fail("Could not find index=" + i + " in " + Arrays.toString(order));
       }
     }
 

@@ -757,7 +757,7 @@ public abstract class ResourceService {
      * @throws SentErrorException
      * @throws IOException
      */
-    private final void sendFile(final UUID uuid, final File file)
+    private void sendFile(final UUID uuid, final File file)
         throws SentErrorException, IOException {
 
       final long length = file.length();
@@ -876,7 +876,7 @@ public abstract class ResourceService {
      * @throws SentErrorException
      * @throws IOException
      */
-    private final void sendBuffer(final UUID uuid, final ByteBuffer buffer)
+    private void sendBuffer(final UUID uuid, final ByteBuffer buffer)
         throws SentErrorException {
 
       /*

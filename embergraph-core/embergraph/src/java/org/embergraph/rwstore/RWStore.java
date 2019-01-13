@@ -4435,7 +4435,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @param addr The latched address.
    * @return The byte offset in the file.
    */
-  private final long physicalAddress(final int addr, final boolean nocheck) {
+  private long physicalAddress(final int addr, final boolean nocheck) {
 
     /*
      * Guard against concurrent mutation.

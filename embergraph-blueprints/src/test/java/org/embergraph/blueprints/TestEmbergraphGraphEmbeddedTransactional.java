@@ -27,7 +27,6 @@ import com.tinkerpop.blueprints.impls.GraphTest;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -263,7 +262,7 @@ public class TestEmbergraphGraphEmbeddedTransactional extends AbstractTestEmberg
     }
   }
 
-  public static final void main(final String[] args) throws Exception {
+  public static void main(final String[] args) throws Exception {
 
     { // create an in-memory instance
       final EmbergraphGraph graph = EmbergraphGraphFactory.create();

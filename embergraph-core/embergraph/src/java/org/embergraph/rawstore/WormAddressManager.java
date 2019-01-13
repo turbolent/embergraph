@@ -148,7 +148,7 @@ public class WormAddressManager implements IAddressManager {
    * @exception IllegalArgumentException if the parameter is out of range.
    * @return true otherwise.
    */
-  public static final boolean assertOffsetBits(final int offsetBits) {
+  public static boolean assertOffsetBits(final int offsetBits) {
 
     if (offsetBits < MIN_OFFSET_BITS || offsetBits > MAX_OFFSET_BITS) {
 
@@ -171,7 +171,7 @@ public class WormAddressManager implements IAddressManager {
    * @param offsetBits The #of bits to be used to represent the byte offset.
    * @return The maximum byte count that can be represented.
    */
-  public static final int getMaxByteCount(final int offsetBits) {
+  public static int getMaxByteCount(final int offsetBits) {
 
     assertOffsetBits(offsetBits);
 

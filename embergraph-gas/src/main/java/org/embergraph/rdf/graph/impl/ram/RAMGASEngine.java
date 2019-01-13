@@ -36,7 +36,6 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
-import org.openrdf.sail.SailException;
 
 public class RAMGASEngine extends GASEngine {
 

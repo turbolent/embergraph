@@ -180,7 +180,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
 
   public String toString() {
 
-    String sb = String.valueOf(op())
+    String sb = op()
         + "(" + left() + ")";
     return sb;
   }

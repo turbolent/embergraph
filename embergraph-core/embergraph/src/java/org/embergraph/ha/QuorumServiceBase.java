@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 import org.embergraph.ha.msg.IHASendState;
 import org.embergraph.ha.msg.IHASyncRequest;

@@ -17,6 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.service.fts;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 /*
@@ -59,6 +60,6 @@ public class FulltextSearchHiterator<A extends IFulltextSearchHit> implements It
 
   public String toString() {
 
-    return "FulltextSearchHiterator{nhits=" + hits.length + "} : " + hits;
+    return "FulltextSearchHiterator{nhits=" + hits.length + "} : " + Arrays.toString(hits);
   }
 }

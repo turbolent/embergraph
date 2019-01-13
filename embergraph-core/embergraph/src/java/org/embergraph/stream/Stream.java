@@ -864,7 +864,7 @@ public abstract class Stream implements ICheckpointProtocol {
    *
    * @return the checkpoint.
    */
-  private final Checkpoint _writeCheckpoint2() {
+  private Checkpoint _writeCheckpoint2() {
 
     assertNotTransient();
     assertNotReadOnly();
@@ -936,7 +936,7 @@ public abstract class Stream implements ICheckpointProtocol {
    * @return The {@link Checkpoint}.
    */
   @SuppressWarnings("unchecked")
-  private final Checkpoint newCheckpoint() {
+  private Checkpoint newCheckpoint() {
 
     try {
 

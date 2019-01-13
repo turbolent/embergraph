@@ -9,7 +9,6 @@ import java.io.InputStream;
 import junit.framework.TestCase2;
 import org.apache.log4j.Logger;
 import org.openrdf.model.Statement;
-import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;

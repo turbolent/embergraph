@@ -1,5 +1,6 @@
 package org.embergraph.search;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 /*
@@ -42,7 +43,7 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
 
   public String toString() {
 
-    return "Hiterator{nhits=" + hits.length + "} : " + hits;
+    return "Hiterator{nhits=" + hits.length + "} : " + Arrays.toString(hits);
   }
 
   public int size() {

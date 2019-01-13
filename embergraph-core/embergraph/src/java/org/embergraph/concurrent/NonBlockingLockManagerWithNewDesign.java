@@ -774,7 +774,7 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */ R extends Com
    * @throws IllegalStateException if the state transition is illegal.
    * @throws IllegalMonitorStateException if the current thread does not hold the {@link #lock}.
    */
-  private final void setServiceRunState(final ServiceRunState newval) {
+  private void setServiceRunState(final ServiceRunState newval) {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 

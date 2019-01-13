@@ -59,7 +59,6 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.zip.GZIPInputStream;
@@ -295,7 +294,6 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
               && prefixLength < prevTermLength
               && prevTerm.charAt(prefixLength) == s.charAt(prefixLength);
           prefixLength++) {
-        ;
       }
       for (int j = prefixLength; j < length; j++) {
         bits += codeWord[char2symbol.get(s.charAt(j))].size();

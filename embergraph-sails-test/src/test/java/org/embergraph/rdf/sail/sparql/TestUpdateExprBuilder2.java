@@ -26,7 +26,6 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ClearGraph;

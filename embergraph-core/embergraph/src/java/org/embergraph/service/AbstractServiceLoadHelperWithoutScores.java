@@ -119,7 +119,7 @@ public abstract class AbstractServiceLoadHelperWithoutScores extends AbstractSer
           continue;
         }
 
-        if (exclude != null && tmp.equals(exclude)) {
+        if (tmp.equals(exclude)) {
 
           // entry should have been cleared above.
           throw new RuntimeException();

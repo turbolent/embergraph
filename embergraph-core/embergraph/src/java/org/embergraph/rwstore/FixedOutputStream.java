@@ -18,7 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rwstore;
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 public class FixedOutputStream extends OutputStream {

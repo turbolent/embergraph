@@ -30,7 +30,7 @@ package org.embergraph.rdf.internal;
  */
 public class XPathMathFunctions {
 
-  public static final IV abs(final IV iv) {
+  public static IV abs(final IV iv) {
     throw new UnsupportedOperationException();
   }
 
@@ -47,7 +47,7 @@ public class XPathMathFunctions {
    *
    * @see http://www.w3.org/TR/xpath-functions/#func-ceiling
    */
-  public static final IV ceiling(final IV iv) {
+  public static IV ceiling(final IV iv) {
 
     // switch (iv.getDTE()) {
     // case XSDFloat:
@@ -61,11 +61,11 @@ public class XPathMathFunctions {
     throw new UnsupportedOperationException();
   }
 
-  public static final IV floor(final IV iv) {
+  public static IV floor(final IV iv) {
     throw new UnsupportedOperationException();
   }
 
-  public static final IV round(final IV iv) {
+  public static IV round(final IV iv) {
     throw new UnsupportedOperationException();
   }
 }

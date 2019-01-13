@@ -83,7 +83,7 @@ public class EmbergraphValueSerializer<V extends Value> {
    *     performance in 1.1.x versus 1.0.x </a>
    */
   //    private final static short currentVersion = VERSION0;
-  private static final short getVersion(final Value val) {
+  private static short getVersion(final Value val) {
 
     if (EmbergraphValueSerializer.getStringLength(val) < Short.MAX_VALUE) {
       /*

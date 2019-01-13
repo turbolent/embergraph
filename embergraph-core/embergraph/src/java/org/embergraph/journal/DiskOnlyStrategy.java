@@ -2046,7 +2046,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
    * Create/open the backing file for a {@link BufferMode#Temporary} store iff it has not been
    * created/opened.
    */
-  private final void createBackingFile() {
+  private void createBackingFile() {
 
     if (!fileOpened && temporaryStore) {
 
@@ -2343,7 +2343,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
     releaseWriteCache();
   }
 
-  private final synchronized void releaseWriteCache() {
+  private synchronized void releaseWriteCache() {
 
     final IBufferAccess tmp = writeCache == null ? null : writeCache.buf;
 

@@ -1429,7 +1429,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param key The key.
    * @return The string representation of the array as unsigned bytes.
    */
-  public static final String toString(final byte[] key) {
+  public static String toString(final byte[] key) {
 
     if (key == null) return NULL;
 
@@ -1444,7 +1444,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param len The #of bytes to visit.
    * @return The string representation of the array as unsigned bytes.
    */
-  public static final String toString(final byte[] key, final int off, final int len) {
+  public static String toString(final byte[] key, final int off, final int len) {
 
     if (key == null) return NULL;
 

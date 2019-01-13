@@ -23,7 +23,6 @@ package org.embergraph.gom.skin;
 import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Vector;
 import org.apache.log4j.Logger;
 import org.embergraph.gom.gpo.IGPO;

@@ -93,7 +93,7 @@ public class GOMWebUtil {
     return om;
   }
 
-  protected static final EmbergraphRDFContext getEmbergraphRDFContext(
+  protected static EmbergraphRDFContext getEmbergraphRDFContext(
       final ServletContext servletContext) {
 
     return getRequiredServletContextAttribute(

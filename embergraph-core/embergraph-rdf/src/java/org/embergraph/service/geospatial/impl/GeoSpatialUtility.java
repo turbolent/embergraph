@@ -79,7 +79,7 @@ public class GeoSpatialUtility {
 
     @Override
     public String toString() {
-      String buf = String.valueOf(getLat())
+      String buf = getLat()
           + "#"
           + getLon();
       return buf;
@@ -163,7 +163,7 @@ public class GeoSpatialUtility {
 
     @Override
     public String toString() {
-      String buf = String.valueOf(getLat())
+      String buf = getLat()
           + "#"
           + getLon()
           + "#"

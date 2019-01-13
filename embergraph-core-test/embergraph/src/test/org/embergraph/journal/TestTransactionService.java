@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
@@ -934,15 +933,12 @@ public class TestTransactionService extends TestCase2 {
          * right now.
          */
         final Thread t =
-            new Thread() {
+            new Thread(() -> {
 
-              public void run() {
+              final long tx3 = service.newTx(commitTime);
 
-                final long tx3 = service.newTx(commitTime);
-
-                fail("Not expecting service to create tx: " + tx3);
-              }
-            };
+              fail("Not expecting service to create tx: " + tx3);
+            });
 
         t.start();
 
@@ -963,31 +959,28 @@ public class TestTransactionService extends TestCase2 {
          * allocate a newTx for the desired commit point. Once [tx2] is
          * terminated, the main thread should be granted a new tx.
          */
-        new Thread() {
+        new Thread(() -> {
 
-          public void run() {
-
-            try {
-              log.info("sleeping in 2nd thread.");
-              Thread.sleep(250 /* ms */);
-              log.info("woke up in 2nd thread.");
-            } catch (InterruptedException e) {
-              throw new RuntimeException(e);
-            }
-
-            /*
-             * Terminate a running tx for the desired commit point,
-             * freeing a timestamp that may be used for the newTx()
-             * request in the main thread.
-             */
-
-            log.info("will terminate tx2: " + tx2);
-
-            service.commit(tx2);
-
-            log.info("did terminate tx2: " + tx2);
+          try {
+            log.info("sleeping in 2nd thread.");
+            Thread.sleep(250 /* ms */);
+            log.info("woke up in 2nd thread.");
+          } catch (InterruptedException e) {
+            throw new RuntimeException(e);
           }
-        }.start();
+
+          /*
+           * Terminate a running tx for the desired commit point,
+           * freeing a timestamp that may be used for the newTx()
+           * request in the main thread.
+           */
+
+          log.info("will terminate tx2: " + tx2);
+
+          service.commit(tx2);
+
+          log.info("did terminate tx2: " + tx2);
+        }).start();
 
         /*
          * This should block for a moment while the thread is sleeping
@@ -1830,19 +1823,16 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
+            // Tx is still running.
+            assertTrue(txState.isActive());
 
-              // Tx is still running.
-              assertTrue(txState.isActive());
-
-              // Still visible & active.
-              assertTrue(txState == service.getTxState(tx));
-            }
-          };
+            // Still visible & active.
+            assertTrue(txState == service.getTxState(tx));
+          });
 
       t.setDaemon(true);
 
@@ -1891,19 +1881,16 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
+            // Tx is still running.
+            assertTrue(txState.isActive());
 
-              // Tx is still running.
-              assertTrue(txState.isActive());
-
-              // Still visible & active.
-              assertTrue(txState == service.getTxState(tx));
-            }
-          };
+            // Still visible & active.
+            assertTrue(txState == service.getTxState(tx));
+          });
 
       t.setDaemon(true);
 
@@ -1947,16 +1934,13 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
-
-              // Still running.
-              assertTrue(txState.isActive());
-            }
-          };
+            // Still running.
+            assertTrue(txState.isActive());
+          });
 
       t.setDaemon(true);
 
@@ -2016,16 +2000,13 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
-
-              // Still running.
-              assertTrue(txState.isActive());
-            }
-          };
+            // Still running.
+            assertTrue(txState.isActive());
+          });
 
       t.setDaemon(true);
 
@@ -2070,16 +2051,13 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
-
-              // Still running.
-              assertTrue(txState.isActive());
-            }
-          };
+            // Still running.
+            assertTrue(txState.isActive());
+          });
 
       t.setDaemon(true);
 
@@ -2130,16 +2108,13 @@ public class TestTransactionService extends TestCase2 {
       assertTrue(txState.isActive());
 
       final Thread t =
-          new Thread() {
+          new Thread(() -> {
 
-            public void run() {
+            service.shutdown();
 
-              service.shutdown();
-
-              // Verify still active.
-              assertTrue(txState.isActive());
-            }
-          };
+            // Verify still active.
+            assertTrue(txState.isActive());
+          });
 
       t.setDaemon(true);
 

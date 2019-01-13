@@ -31,6 +31,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.lang.MutableString;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -107,7 +108,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     }
 
     public String toString() {
-      return "[" + path + ", " + word + "]";
+      return "[" + Arrays.toString(path) + ", " + word + "]";
     }
   }
 

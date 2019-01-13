@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.rule.eval.pipeline;
 
-import java.io.IOException;
 import java.nio.channels.ClosedByInterruptException;
 import java.util.LinkedList;
 import java.util.List;

@@ -24,7 +24,6 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import java.nio.channels.FileChannel;
-import java.security.DigestException;
 import java.security.MessageDigest;
 import java.util.Map;
 import java.util.UUID;
@@ -1878,7 +1877,7 @@ public class WORMStrategy extends AbstractBufferStrategy
    * Create/open the backing file for a {@link BufferMode#Temporary} store iff it has not been
    * created/opened.
    */
-  private final void createBackingFile() {
+  private void createBackingFile() {
 
     if (!fileOpened && temporaryStore) {
 
@@ -2287,7 +2286,7 @@ public class WORMStrategy extends AbstractBufferStrategy
    * @todo Should this get invoked from {@link #closeForWrites()} for HA? If read failover is
    *     handled by the {@link WriteCacheService} then we can not close it out here.
    */
-  private final void releaseWriteCache() {
+  private void releaseWriteCache() {
 
     if (writeCacheService != null) {
 

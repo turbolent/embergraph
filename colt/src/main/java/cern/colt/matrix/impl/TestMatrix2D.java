@@ -8,7 +8,6 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-import cern.colt.function.DoubleDoubleFunction;
 import cern.colt.function.DoubleFunction;
 import cern.colt.list.IntArrayList;
 import cern.colt.map.AbstractIntDoubleMap;

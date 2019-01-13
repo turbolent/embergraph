@@ -220,7 +220,7 @@ public class Latch {
    */
   //    *
   //    * @throws InterruptedException
-  private final void _signal() { // throws InterruptedException {
+  private void _signal() { // throws InterruptedException {
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
     //        lock.lock();
     ////        lock.lockInterruptibly();

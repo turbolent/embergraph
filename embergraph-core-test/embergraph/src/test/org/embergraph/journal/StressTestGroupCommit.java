@@ -183,59 +183,51 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
         final Condition done = lock.newCondition();
 
         final Thread t1 =
-            new Thread() {
+            new Thread(() -> {
 
-              @Override
-              public void run() {
+              for (int i = 0; i < ntasks / 2; i++) {
 
-                for (int i = 0; i < ntasks / 2; i++) {
+                // resource names are non-overlapping.
+                final String resource = "" + i;
 
-                  // resource names are non-overlapping.
-                  final String resource = "" + i;
+                final UUID indexUUID = UUID.randomUUID();
 
-                  final UUID indexUUID = UUID.randomUUID();
+                final BTree ndx = BTree.create(journal, new IndexMetadata(resource, indexUUID));
 
-                  final BTree ndx = BTree.create(journal, new IndexMetadata(resource, indexUUID));
-
-                  journal.registerIndex(resource, ndx);
-                }
-
-                lock.lock();
-                try {
-                  ndone.incrementAndGet();
-                  done.signal();
-                } finally {
-                  lock.unlock();
-                }
+                journal.registerIndex(resource, ndx);
               }
-            };
+
+              lock.lock();
+              try {
+                ndone.incrementAndGet();
+                done.signal();
+              } finally {
+                lock.unlock();
+              }
+            });
 
         final Thread t2 =
-            new Thread() {
+            new Thread(() -> {
+              for (int i = ntasks / 2; i < ntasks; i++) {
 
-              @Override
-              public void run() {
-                for (int i = ntasks / 2; i < ntasks; i++) {
+                // resource names are non-overlapping.
+                final String resource = "" + i;
 
-                  // resource names are non-overlapping.
-                  final String resource = "" + i;
+                final UUID indexUUID = UUID.randomUUID();
 
-                  final UUID indexUUID = UUID.randomUUID();
+                final BTree ndx = BTree.create(journal, new IndexMetadata(resource, indexUUID));
 
-                  final BTree ndx = BTree.create(journal, new IndexMetadata(resource, indexUUID));
-
-                  journal.registerIndex(resource, ndx);
-                }
-
-                lock.lock();
-                try {
-                  ndone.incrementAndGet();
-                  done.signal();
-                } finally {
-                  lock.unlock();
-                }
+                journal.registerIndex(resource, ndx);
               }
-            };
+
+              lock.lock();
+              try {
+                ndone.incrementAndGet();
+                done.signal();
+              } finally {
+                lock.unlock();
+              }
+            });
 
         t1.setDaemon(true);
         t2.setDaemon(true);

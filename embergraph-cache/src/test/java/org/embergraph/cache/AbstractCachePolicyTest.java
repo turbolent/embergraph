@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 import junit.framework.TestCase2;
@@ -156,7 +157,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
               + ": value references differ at index="
               + i
               + ", expected="
-              + expected
+              + Arrays.toString(expected)
               + ", actual="
               + actual,
           expectedEntry.getObject() == actualEntry.getObject());

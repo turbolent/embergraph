@@ -21,7 +21,6 @@ package org.embergraph.rdf.sail.remote;
 import info.aduna.iteration.CloseableIteration;
 import info.aduna.iteration.Iteration;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
@@ -66,7 +65,6 @@ import org.openrdf.rio.ParserConfig;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
 
 /*
  * An implementation of Sesame's RepositoryConnection interface that wraps a embergraph {@link

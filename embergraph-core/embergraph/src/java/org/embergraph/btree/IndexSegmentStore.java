@@ -896,7 +896,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    * @param length
    * @return
    */
-  private final ByteBuffer readFromBuffer(final long offset, final int length) {
+  private ByteBuffer readFromBuffer(final long offset, final int length) {
 
     /*
      * Note: In order to allow concurrent readers against the buffer, we
@@ -967,7 +967,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   }
 
   /** Read the record from the file. */
-  private final ByteBuffer readFromFile(final long offset, final int length) {
+  private ByteBuffer readFromFile(final long offset, final int length) {
 
     try {
 
@@ -1050,7 +1050,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    * @return The {@link FileChannel}.
    * @throws IOException if the backing file can not be locked.
    */
-  private final FileChannel reopenChannel() throws IOException {
+  private FileChannel reopenChannel() throws IOException {
 
     /*
      * Note: This is basically a double-checked locking pattern. It is
@@ -1373,7 +1373,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   /*
    * Reads the {@link IndexMetadata} record directly from the file (this is invoked by the ctor).
    */
-  private final IndexMetadata readMetadata() {
+  private IndexMetadata readMetadata() {
 
     final long addr = checkpoint.addrMetadata;
 

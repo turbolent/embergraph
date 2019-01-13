@@ -24,7 +24,6 @@ package org.embergraph.rdf.internal;
 import java.math.BigInteger;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

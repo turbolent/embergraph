@@ -645,23 +645,21 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
       final AtomicLong didTimeout = new AtomicLong(-1L);
 
       final Thread t =
-          new Thread() {
-            public void run() {
-              final long begin = System.currentTimeMillis();
-              try {
-                // wait for a quorum (but will not meet).
-                log.info("Waiting for quorum meet.");
-                quorum.awaitQuorum(timeout, TimeUnit.MILLISECONDS);
-              } catch (TimeoutException e) {
-                // This is what we are looking for.
-                final long elapsed = System.currentTimeMillis() - begin;
-                didTimeout.set(elapsed);
-                if (log.isInfoEnabled()) log.info("Timeout after " + elapsed + "ms");
-              } catch (Exception e) {
-                log.error(e, e);
-              }
+          new Thread(() -> {
+            final long begin = System.currentTimeMillis();
+            try {
+              // wait for a quorum (but will not meet).
+              log.info("Waiting for quorum meet.");
+              quorum.awaitQuorum(timeout, TimeUnit.MILLISECONDS);
+            } catch (TimeoutException e) {
+              // This is what we are looking for.
+              final long elapsed = System.currentTimeMillis() - begin;
+              didTimeout.set(elapsed);
+              if (log.isInfoEnabled()) log.info("Timeout after " + elapsed + "ms");
+            } catch (Exception e) {
+              log.error(e, e);
             }
-          };
+          });
       t.run();
       Thread.sleep(timeout + 250 /* ms */);
       t.interrupt();
@@ -706,23 +704,21 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
       final AtomicLong didTimeout = new AtomicLong(-1L);
 
       final Thread t =
-          new Thread() {
-            public void run() {
-              final long begin = System.currentTimeMillis();
-              try {
-                // wait for a quorum break (but will not break).
-                log.info("Waiting for quorum break.");
-                quorum.awaitBreak(timeout, TimeUnit.MILLISECONDS);
-              } catch (TimeoutException e) {
-                // This is what we are looking for.
-                final long elapsed = System.currentTimeMillis() - begin;
-                didTimeout.set(elapsed);
-                if (log.isInfoEnabled()) log.error("Timeout after " + elapsed + "ms");
-              } catch (Exception e) {
-                log.error(e, e);
-              }
+          new Thread(() -> {
+            final long begin = System.currentTimeMillis();
+            try {
+              // wait for a quorum break (but will not break).
+              log.info("Waiting for quorum break.");
+              quorum.awaitBreak(timeout, TimeUnit.MILLISECONDS);
+            } catch (TimeoutException e) {
+              // This is what we are looking for.
+              final long elapsed = System.currentTimeMillis() - begin;
+              didTimeout.set(elapsed);
+              if (log.isInfoEnabled()) log.error("Timeout after " + elapsed + "ms");
+            } catch (Exception e) {
+              log.error(e, e);
             }
-          };
+          });
       t.run();
       Thread.sleep(timeout + 250 /* ms */);
       t.interrupt();

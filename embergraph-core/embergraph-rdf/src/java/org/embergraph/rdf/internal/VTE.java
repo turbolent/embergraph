@@ -97,7 +97,7 @@ public enum VTE {
     throw new AssertionError();
   }
 
-  public static final VTE valueOf(char c) {
+  public static VTE valueOf(char c) {
     switch (c) {
       case 'U':
         return URI;
@@ -113,7 +113,7 @@ public enum VTE {
   }
 
   /** Determine the VTE based on the type of Value - URI, Literal, or BNode. */
-  public static final VTE valueOf(final Value v) {
+  public static VTE valueOf(final Value v) {
     if (v instanceof URI) return URI;
     if (v instanceof Literal) return LITERAL;
     if (v instanceof BNode) return BNODE;

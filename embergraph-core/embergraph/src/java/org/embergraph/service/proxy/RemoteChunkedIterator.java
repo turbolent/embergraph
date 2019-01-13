@@ -1,6 +1,5 @@
 package org.embergraph.service.proxy;
 
-import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;

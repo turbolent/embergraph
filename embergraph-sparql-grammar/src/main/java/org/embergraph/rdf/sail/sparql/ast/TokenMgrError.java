@@ -34,7 +34,7 @@ public class TokenMgrError extends Error {
    * Replaces unprintable characters by their escaped (or unicode escaped) equivalents in the given
    * string
    */
-  protected static final String addEscapes(String str) {
+  protected static String addEscapes(String str) {
     StringBuffer retval = new StringBuffer();
     char ch;
     for (int i = 0; i < str.length(); i++) {

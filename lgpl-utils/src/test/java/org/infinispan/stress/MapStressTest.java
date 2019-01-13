@@ -140,58 +140,52 @@ public class MapStressTest extends TestCase {
 
     for (int i = 0; i < numReaders; i++) {
       Thread getter =
-          new Thread() {
-            public void run() {
-              waitForStart();
-              long start = System.nanoTime();
-              int runs = 0;
-              while (run.get() && runs < readOps.size()) {
-                map.get(readOps.get(runs));
-                runs++;
-              }
-              perf.put(
-                  "GET" + Thread.currentThread().getId(),
-                  opsPerMS(System.nanoTime() - start, runs));
+          new Thread(() -> {
+            waitForStart();
+            long start = System.nanoTime();
+            int runs = 0;
+            while (run.get() && runs < readOps.size()) {
+              map.get(readOps.get(runs));
+              runs++;
             }
-          };
+            perf.put(
+                "GET" + Thread.currentThread().getId(),
+                opsPerMS(System.nanoTime() - start, runs));
+          });
       threads.add(getter);
     }
 
     for (int i = 0; i < numWriters; i++) {
       Thread putter =
-          new Thread() {
-            public void run() {
-              waitForStart();
-              long start = System.nanoTime();
-              int runs = 0;
-              while (run.get() && runs < writeOps.size()) {
-                map.put(writeOps.get(runs), runs);
-                runs++;
-              }
-              perf.put(
-                  "PUT" + Thread.currentThread().getId(),
-                  opsPerMS(System.nanoTime() - start, runs));
+          new Thread(() -> {
+            waitForStart();
+            long start = System.nanoTime();
+            int runs = 0;
+            while (run.get() && runs < writeOps.size()) {
+              map.put(writeOps.get(runs), runs);
+              runs++;
             }
-          };
+            perf.put(
+                "PUT" + Thread.currentThread().getId(),
+                opsPerMS(System.nanoTime() - start, runs));
+          });
       threads.add(putter);
     }
 
     for (int i = 0; i < numRemovers; i++) {
       Thread remover =
-          new Thread() {
-            public void run() {
-              waitForStart();
-              long start = System.nanoTime();
-              int runs = 0;
-              while (run.get() && runs < removeOps.size()) {
-                map.remove(removeOps.get(runs));
-                runs++;
-              }
-              perf.put(
-                  "REM" + Thread.currentThread().getId(),
-                  opsPerMS(System.nanoTime() - start, runs));
+          new Thread(() -> {
+            waitForStart();
+            long start = System.nanoTime();
+            int runs = 0;
+            while (run.get() && runs < removeOps.size()) {
+              map.remove(removeOps.get(runs));
+              runs++;
             }
-          };
+            perf.put(
+                "REM" + Thread.currentThread().getId(),
+                opsPerMS(System.nanoTime() - start, runs));
+          });
       threads.add(remover);
     }
 

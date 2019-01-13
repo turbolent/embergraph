@@ -17,7 +17,6 @@ package org.embergraph.rdf.graph.impl.ram;
 
 import org.embergraph.rdf.graph.AbstractGraphTestCase;
 import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
-import org.embergraph.rdf.graph.util.IGraphFixture;
 import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;

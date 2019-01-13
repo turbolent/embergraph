@@ -20,7 +20,6 @@ package org.embergraph.rdf.store;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Properties;
 import org.embergraph.rdf.store.DataLoader.ClosureEnum;

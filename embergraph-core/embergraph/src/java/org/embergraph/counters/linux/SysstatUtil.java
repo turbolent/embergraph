@@ -67,7 +67,7 @@ public class SysstatUtil {
    * @return The path to the specified utility. If the utility was not found, then the configured
    *     path to the utility will be returned anyway.
    */
-  public static final File getPath(final String cmd) {
+  public static File getPath(final String cmd) {
 
     File f, path;
     final File configuredPath =

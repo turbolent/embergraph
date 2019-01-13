@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Properties;
 import java.util.UUID;

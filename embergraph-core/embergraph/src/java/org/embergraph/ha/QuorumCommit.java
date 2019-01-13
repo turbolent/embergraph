@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.ha;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 /*
  * A non-remote interface for a member service in a {@link Quorum} defining methods to support

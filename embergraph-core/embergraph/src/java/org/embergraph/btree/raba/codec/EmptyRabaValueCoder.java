@@ -24,7 +24,6 @@ package org.embergraph.btree.raba.codec;
 
 import java.io.DataInput;
 import java.io.Externalizable;
-import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.OutputStream;

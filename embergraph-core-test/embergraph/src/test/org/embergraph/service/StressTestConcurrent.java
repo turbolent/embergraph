@@ -778,7 +778,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
     final KeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_INT);
 
-    private final byte[] nextKey() {
+    private byte[] nextKey() {
 
       // Note: MUST be + 1 so that the keys are strictly increasing!
       final int key = lastKey + r.nextInt(incRange) + 1;

@@ -21,7 +21,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -113,7 +112,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
   }
 
   /** Return the <code>flags</code> byte for a {@link SidIV}. */
-  public static final byte toFlags() {
+  public static byte toFlags() {
     /*
      * Note: XSDBoolean happens to be assigned the code value of 0, which is
      * the value we want when the data type enumeration will be ignored.

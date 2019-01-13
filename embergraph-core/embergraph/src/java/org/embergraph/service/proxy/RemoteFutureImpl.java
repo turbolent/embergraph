@@ -1,6 +1,5 @@
 package org.embergraph.service.proxy;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;

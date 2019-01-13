@@ -362,7 +362,7 @@ public class BTree extends AbstractBTree
    *
    * <p>Note: The {@link #getCounter()} is NOT changed by this method.
    */
-  private final void newRootLeaf() {
+  private void newRootLeaf() {
 
     height = 0;
 
@@ -635,7 +635,7 @@ public class BTree extends AbstractBTree
    *
    * @return <code>true</code> if anything was written.
    */
-  private final boolean flush() {
+  private boolean flush() {
 
     assertNotTransient();
     assertNotReadOnly();
@@ -824,7 +824,7 @@ public class BTree extends AbstractBTree
    *
    * @return the checkpoint.
    */
-  private final Checkpoint _writeCheckpoint2() {
+  private Checkpoint _writeCheckpoint2() {
 
     assertNotTransient();
     assertNotReadOnly();
@@ -939,7 +939,7 @@ public class BTree extends AbstractBTree
    * @return The {@link Checkpoint}.
    */
   @SuppressWarnings("unchecked")
-  private final Checkpoint newCheckpoint() {
+  private Checkpoint newCheckpoint() {
 
     try {
 

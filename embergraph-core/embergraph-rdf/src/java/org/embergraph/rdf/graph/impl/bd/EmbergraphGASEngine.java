@@ -266,7 +266,7 @@ public class EmbergraphGASEngine extends GASEngine {
       return timestamp;
     }
 
-    private final SPOKeyOrder getKeyOrder(final AbstractTripleStore kb, final boolean inEdges) {
+    private SPOKeyOrder getKeyOrder(final AbstractTripleStore kb, final boolean inEdges) {
       final SPOKeyOrder keyOrder;
       if (inEdges) {
         // in-edges: OSP / OCSP : [u] is the Object.

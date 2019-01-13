@@ -71,7 +71,6 @@ import org.openrdf.query.parser.sparql.manifest.ManifestTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11ManifestTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.dataset.DatasetRepository;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.helpers.BasicParserSettings;

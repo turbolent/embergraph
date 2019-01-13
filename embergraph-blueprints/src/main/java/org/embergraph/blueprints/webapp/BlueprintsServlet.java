@@ -19,7 +19,6 @@ package org.embergraph.blueprints.webapp;
 
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

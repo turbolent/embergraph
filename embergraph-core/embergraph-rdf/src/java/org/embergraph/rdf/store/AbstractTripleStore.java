@@ -3220,7 +3220,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   // private final String TERM_NOT_FOUND = "<NOT_FOUND>";
 
   /** Substitutes in well know namespaces (rdf, rdfs, etc). */
-  private final String abbrev(final URI uri) {
+  private String abbrev(final URI uri) {
 
     final String uriString = uri.toString();
 

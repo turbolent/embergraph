@@ -1,6 +1,5 @@
 package org.embergraph.rwstore.sector;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Properties;

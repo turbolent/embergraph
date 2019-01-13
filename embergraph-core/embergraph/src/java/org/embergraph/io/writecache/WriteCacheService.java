@@ -3431,7 +3431,7 @@ public abstract class WriteCacheService implements IWriteCache {
    * @param nbytes The #of bytes to be read.
    * @return The installed record in a newly allocated heap {@link ByteBuffer} .
    */
-  private final ByteBuffer _readFromLocalDiskIntoNewHeapByteBuffer(
+  private ByteBuffer _readFromLocalDiskIntoNewHeapByteBuffer(
       final long offset, final int nbytes) {
 
     if (log.isDebugEnabled()) log.debug("Allocating direct, nbytes: " + nbytes);

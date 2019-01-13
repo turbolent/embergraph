@@ -19,7 +19,6 @@ package org.embergraph.rdf.rio;
 
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.Iterator;
 import java.util.Vector;
 import org.apache.log4j.Logger;
 import org.embergraph.rdf.ServiceProviderHook;
@@ -27,7 +26,6 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandler;
-import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 

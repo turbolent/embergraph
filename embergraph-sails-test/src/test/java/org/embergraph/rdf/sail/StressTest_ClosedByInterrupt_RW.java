@@ -3,7 +3,6 @@ package org.embergraph.rdf.sail;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import junit.framework.TestCase;

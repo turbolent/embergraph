@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -1742,14 +1741,7 @@ public abstract class AbstractBTree
    * Tuple} to the containing {@link AbstractBTree} instance.
    */
   private final ThreadLocal<Tuple> lookupTuple =
-      new ThreadLocal<Tuple>() {
-
-        @Override
-        protected Tuple initialValue() {
-
-          return new Tuple(AbstractBTree.this, VALS);
-        }
-      };
+      ThreadLocal.withInitial(() -> new Tuple(AbstractBTree.this, VALS));
 
   /*
    * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests. The tuple does not copy
@@ -1762,14 +1754,7 @@ public abstract class AbstractBTree
    * Tuple} to the containing {@link AbstractBTree} instance.
    */
   private final ThreadLocal<Tuple> containsTuple =
-      new ThreadLocal<Tuple>() {
-
-        @Override
-        protected Tuple initialValue() {
-
-          return new Tuple(AbstractBTree.this, 0);
-        }
-      };
+      ThreadLocal.withInitial(() -> new Tuple(AbstractBTree.this, 0));
 
   @Override
   public final Object insert(Object key, Object value) {
@@ -3209,7 +3194,7 @@ public abstract class AbstractBTree
    *     <p>and possibly
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/149 (NULL passed to readNodeOrLeaf)
    */
-  private final void doSyncTouch(final AbstractNode<?> node) {
+  private void doSyncTouch(final AbstractNode<?> node) {
 
     //        final long beginNanos = System.nanoTime();
 
@@ -3224,7 +3209,7 @@ public abstract class AbstractBTree
 
   }
 
-  private final void doTouch(final AbstractNode<?> node) {
+  private void doTouch(final AbstractNode<?> node) {
 
     //        final long beginNanos = System.nanoTime();
     //

@@ -100,7 +100,7 @@ public class AccessSemaphore {
     return new ExclusiveAccess();
   }
 
-  private final void releaseExclusive() {
+  private void releaseExclusive() {
     exclusiveOwner = null;
     semaphore.release(maxShares);
   }
@@ -118,7 +118,7 @@ public class AccessSemaphore {
     return new SharedAccess();
   }
 
-  private final void releaseShared() {
+  private void releaseShared() {
     semaphore.release();
   }
 }

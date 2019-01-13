@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.journal;
 
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractHATransactionService;
 

@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.btree.raba.codec;
 
 import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.embergraph.btree.raba.IRaba;

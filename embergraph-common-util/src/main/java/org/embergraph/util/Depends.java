@@ -336,7 +336,7 @@ public class Depends {
   }
 
   /** Return an unmodifiable list of the dependencies. */
-  public static final List<Dep> depends() {
+  public static List<Dep> depends() {
 
     return Collections.unmodifiableList(Arrays.asList(depends));
   }

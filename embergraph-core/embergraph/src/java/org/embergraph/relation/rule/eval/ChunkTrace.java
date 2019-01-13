@@ -49,7 +49,7 @@ public class ChunkTrace {
    */
   protected static int col = -1;
 
-  public static final void chunk(final int orderIndex, final Object[] chunk) {
+  public static void chunk(final int orderIndex, final Object[] chunk) {
 
     if (col >= 0) {
 

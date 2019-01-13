@@ -20,6 +20,7 @@ package org.embergraph.service;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.Arrays;
 import java.util.UUID;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
@@ -93,7 +94,7 @@ public class TxId2CommitTimeIndex extends BTree {
     return keyBuilder.reset().append(tmp).getKey();
   }
 
-  private static final long decodeKey(final byte[] key) {
+  private static long decodeKey(final byte[] key) {
 
     return KeyBuilder.decodeLong(key, 0);
   }
@@ -247,7 +248,7 @@ public class TxId2CommitTimeIndex extends BTree {
 
     if (super.contains(key)) {
 
-      throw new IllegalArgumentException("entry exists: key=" + key + ", newValue=" + txState);
+      throw new IllegalArgumentException("entry exists: key=" + Arrays.toString(key) + ", newValue=" + txState);
     }
 
     final byte[] val = tupleSer.serializeVal(txState);

@@ -24,10 +24,8 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.service.ndx.pipeline;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import org.embergraph.relation.accesspath.BlockingBuffer;

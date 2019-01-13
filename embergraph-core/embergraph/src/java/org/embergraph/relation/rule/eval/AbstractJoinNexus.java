@@ -465,7 +465,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
   }
 
   @SuppressWarnings("unchecked")
-  private final void copyValues(
+  private void copyValues(
       final IElement e, final IPredicate<?> pred, final IBindingSet bindingSet) {
 
     for (int i = 0; i < pred.arity(); i++) {

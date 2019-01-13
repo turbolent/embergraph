@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-import java.io.IOException;
 import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 

@@ -207,7 +207,7 @@ public enum DTE {
     this.flags = flags;
   }
 
-  public static final DTE valueOf(final byte b) {
+  public static DTE valueOf(final byte b) {
     /*
      * Note: This switch MUST correspond to the declarations above (you can
      * not made the cases of the switch from [v] since it is not considered
@@ -262,7 +262,7 @@ public enum DTE {
    *     can handle any datatype) -or- <code>null</code> if the datatype {@link URI} is none of the
    *     datatypes for which native support is provided.
    */
-  public static final DTE valueOf(final URI datatype) {
+  public static DTE valueOf(final URI datatype) {
     /*
      * Note: This switch MUST correspond to the declarations above (you can
      * not make the cases of the switch from [v] since it is not considered

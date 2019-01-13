@@ -15,7 +15,6 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.embergraph.bop.IBindingSet;

@@ -23,7 +23,6 @@ package org.embergraph.relation.accesspath;
 
 import java.io.Serializable;
 import java.util.NoSuchElementException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,11 +44,11 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     super(name);
   }
 
-  private final ThickAsynchronousIterator<String> emptyIterator() {
+  private ThickAsynchronousIterator<String> emptyIterator() {
     return new ThickAsynchronousIterator<>(new String[]{});
   }
 
-  private final ThickAsynchronousIterator<String> iterator(final String... a) {
+  private ThickAsynchronousIterator<String> iterator(final String... a) {
     return new ThickAsynchronousIterator<>(a);
   }
 

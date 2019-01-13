@@ -56,7 +56,7 @@ public class Sorting extends cern.colt.PersistentObject {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Sorting() {}
   /** Compare two values, one of which is assumed to be Double.NaN */
-  private static final int compareNaN(double a, double b) {
+  private static int compareNaN(double a, double b) {
     if (a != a) {
       if (b != b) return 0; // NaN equals NaN
       else return 1; // e.g. NaN > 5
