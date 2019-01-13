@@ -24,7 +24,6 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 package org.embergraph.service;
 
 import java.util.Properties;
-import org.embergraph.ganglia.IGangliaDefaults;
 
 /*
  * Interface for clients of a {@link IEmbergraphFederation}.
@@ -407,55 +406,5 @@ public interface IEmbergraphClient<T> {
     /** The default http service port is ZERO (0), which means that a random port will be chosen. */
     String DEFAULT_HTTPD_PORT = "0";
 
-    /*
-     * Ganglia
-     */
-
-    // Listen
-
-    /** The multicast group used to join the ganglia performance monitoring network. */
-    String GANGLIA_LISTEN_GROUP = IEmbergraphClient.class.getName() + ".ganglia.listenGroup";
-
-    String DEFAULT_GANGLIA_LISTEN_GROUP = IGangliaDefaults.DEFAULT_GROUP;
-
-    /** The port for the multicast group used to join the ganglia performance monitoring network. */
-    String GANGLIA_LISTEN_PORT = IEmbergraphClient.class.getName() + ".ganglia.listenPort";
-
-    String DEFAULT_GANGLIA_LISTEN_PORT = Integer.toString(IGangliaDefaults.DEFAULT_PORT);
-
-    /*
-     * When <code>true</code>, the embedded {@link GangliaService} will listen on to the specified
-     * multicast group.
-     *
-     * <p>Note: If both {@link #GANGLIA_LISTEN} and {@link #GANGLIA_REPORT} are <code>false</code>
-     * then the embedded {@link GangliaService} will not be started.
-     */
-    String GANGLIA_LISTEN = IEmbergraphClient.class.getName() + ".ganglia.listen";
-
-    String DEFAULT_GANGLIA_LISTEN = "true";
-
-    // Report
-
-    /*
-     * When <code>true</code>, the embedded {@link GangliaService} will report performance metrics
-     * to the specified gmetad server(s).
-     *
-     * <p>Note: If both {@link #GANGLIA_LISTEN} and {@link #GANGLIA_REPORT} are <code>false</code>
-     * then the embedded {@link GangliaService} will not be started.
-     */
-    String GANGLIA_REPORT = IEmbergraphClient.class.getName() + ".ganglia.report";
-
-    String DEFAULT_GANGLIA_REPORT = "true";
-
-    /*
-     * An list of the metric servers (<code>gmetad</code> instances) to which metrics will be sent.
-     * The default is to send metrics to the well known multicast group for ganglia. Zero or more
-     * hosts may be specified, separated by whitespace or commas. The port for each host is optional
-     * and defaults to the well known port for ganglia. Each host may be either a unicast address or
-     * a multicast group.
-     */
-    String GANGLIA_SERVERS = IEmbergraphClient.class.getName() + ".ganglia.servers";
-
-    String DEFAULT_GANGLIA_SERVERS = IGangliaDefaults.DEFAULT_GROUP;
   }
 }

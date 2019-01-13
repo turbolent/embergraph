@@ -171,7 +171,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
    *
    * @see #updateHostTable()
    */
-  private final AtomicReference<HostTable> hostTableRef = new AtomicReference<HostTable>(null);
+  private final AtomicReference<HostTable> hostTableRef = new AtomicReference<>(null);
 
   /*
    * The {@link Future} of a task that periodically queries the ganglia peer for its up to date host
@@ -203,19 +203,17 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 
     super.toString(sb);
 
-    sb.append(",localForwardThreshold=" + localForwardThresholdRef.get());
-
-    sb.append(",hostDiscoveryInitialDelay=" + hostDiscoveryInitialDelay);
-
-    sb.append(",hostDiscoveryDelay=" + hostDiscoveryDelay);
-
-    sb.append(",scoringRule=" + scoringRuleRef.get());
+    sb.append(",localForwardThreshold=").append(localForwardThresholdRef.get());
+    sb.append(",hostDiscoveryInitialDelay=").append(hostDiscoveryInitialDelay);
+    sb.append(",hostDiscoveryDelay=").append(hostDiscoveryDelay);
+    sb.append(",scoringRule=").append(scoringRuleRef.get());
 
     // report whether or not the scheduled future is still running.
     {
       final ScheduledFuture<?> tmp = scheduledFuture;
       final boolean futureIsDone = tmp == null || tmp.isDone();
-      sb.append(",scheduledFuture=" + (tmp == null ? "N/A" : (futureIsDone ? "done" : "running")));
+      sb.append(",scheduledFuture=")
+          .append(tmp == null ? "N/A" : (futureIsDone ? "done" : "running"));
       if (futureIsDone && tmp != null) {
         // Check for error.
         Throwable cause = null;

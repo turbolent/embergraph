@@ -56,7 +56,7 @@ import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
  * This policy will periodically query the different {@link HAJournalServer} instances to obtain
  * their current metrics using that {@link CountersServlet}.
  *
- * <p>This is not as efficient as using ganglia. However, this plugin creates fewer dependencies and
+ * This plugin creates fewer dependencies and
  * is significantly easier to administer if the network does not support UDP multicast.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

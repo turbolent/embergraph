@@ -329,11 +329,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </dependency>
     <dependency>
       <groupId>org.embergraph</groupId>
-      <artifactId>embergraph-ganglia</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.embergraph</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>

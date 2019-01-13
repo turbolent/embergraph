@@ -60,8 +60,6 @@ public class TestAll extends TestCase {
 
     suite.addTest(org.embergraph.counters.striped.TestAll.suite());
 
-    suite.addTest(org.embergraph.counters.ganglia.TestAll.suite());
-
     return suite;
   }
 }

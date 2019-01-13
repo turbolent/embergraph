@@ -308,11 +308,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     </dependency>
     <dependency>
       <groupId>org.embergraph</groupId>
-      <artifactId>embergraph-ganglia</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.embergraph</groupId>
       <artifactId>ctc-striterators</artifactId>
       <version>${project.version}</version>
     </dependency>

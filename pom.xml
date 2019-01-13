@@ -220,7 +220,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <colt.version>${project.version}</colt.version>
     <fastutil.version>6.5.16</fastutil.version>
     <lgplutils.version>1.0.7-270114</lgplutils.version>
-    <embergraph.ganglia.version>1.0.4</embergraph.ganglia.version>
     <jackson.version>2.2.3</jackson.version>
     <blueprints.version>2.5.0</blueprints.version>
     <jettison.version>1.3.3</jettison.version>
@@ -329,7 +328,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-statics</module>
         <module>embergraph-cache</module>
         <module>embergraph-client</module>
-        <module>embergraph-ganglia</module>
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
         <module>embergraph-vocabularies</module>
@@ -361,7 +359,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <module>embergraph-statics</module>
         <module>embergraph-cache</module>
         <module>embergraph-client</module>
-        <module>embergraph-ganglia</module>
         <module>embergraph-gas</module>
         <module>embergraph-core/</module>
         <module>embergraph-vocabularies</module>

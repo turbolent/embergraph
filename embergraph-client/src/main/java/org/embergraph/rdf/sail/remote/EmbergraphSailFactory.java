@@ -108,56 +108,6 @@ public class EmbergraphSailFactory {
   }
 
   /*
-   * Convenience method to allow the testing of the URL normalization functionality.
-   *
-   * @see <a href="http://trac.blazegraph.com/ticket/1139">EmbergraphSailFactory.connect() </a>
-   */
-  @Deprecated // We are getting rid of this, right?
-  public static String testServiceEndpointUrl(final String serviceEndpoint) {
-    return normalizeEndpoint(serviceEndpoint);
-  }
-
-  /** Massage the service endpoint to ensure that it ends with </code>/embergraph</code> */
-  @Deprecated // We are getting rid of this, right?
-  private static String normalizeEndpoint(final String serviceEndpoint) {
-
-    if (serviceEndpoint.endsWith("/sparql")) {
-
-      return serviceEndpoint.substring(0, serviceEndpoint.length() - "/sparql".length());
-    }
-    if (serviceEndpoint.endsWith("/sparql/")) {
-
-      return serviceEndpoint.substring(0, serviceEndpoint.length() - "/sparql/".length());
-
-    } else if (serviceEndpoint.endsWith("/" + Config.PATH + "/")) {
-
-      return serviceEndpoint.substring(0, serviceEndpoint.length() - 1);
-
-    } else if (serviceEndpoint.endsWith("/" + Config.PATH)) {
-
-      return serviceEndpoint;
-
-    } else if (serviceEndpoint.contains("/" + Config.PATH) && serviceEndpoint.endsWith("/")) {
-      // This is the case of /embergraph/namespace/NAMESPACE/
-
-      return serviceEndpoint.substring(0, serviceEndpoint.length() - 1);
-
-    } else if (serviceEndpoint.contains("/" + Config.PATH)) {
-      // This is the case of /embergraph/namespace/NAMESPACE
-
-      return serviceEndpoint;
-
-    } else if (serviceEndpoint.endsWith("/")) {
-
-      return serviceEndpoint + Config.PATH;
-
-    } else {
-
-      return serviceEndpoint + "/" + Config.PATH;
-    }
-  }
-
-  /*
    * Open an existing persistent embergraph instance. If a journal does not exist at the specified
    * location then an exception will be thrown.
    */

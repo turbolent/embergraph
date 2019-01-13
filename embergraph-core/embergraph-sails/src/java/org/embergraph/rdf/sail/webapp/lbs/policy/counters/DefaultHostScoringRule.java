@@ -34,11 +34,7 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
  * fallback value is used.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- *     <p>FIXME GC time is a per-JVM metric that should be incorporated into our default scoring
- *     strartegy. It will only get reported by the ganglia plug in if it is setup to self-report
- *     that data. And it may not report it correctly if there is more than one {@link
- *     HAJournalService} per host. It is also available from the <code>/embergraph/counters</code>
- *     and could be exposed as a JMX MBean.
+ * FIXME: GC time is a per-JVM metric that should be incorporated into our default scoring strategy.
  */
 public class DefaultHostScoringRule implements IHostScoringRule {
 

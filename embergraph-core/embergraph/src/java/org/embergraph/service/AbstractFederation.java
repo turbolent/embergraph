@@ -61,16 +61,7 @@ import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.IServiceCounters;
 import org.embergraph.counters.OneShotInstrument;
-import org.embergraph.counters.ganglia.EmbergraphGangliaService;
-import org.embergraph.counters.ganglia.EmbergraphMetadataFactory;
-import org.embergraph.counters.ganglia.HostMetricsCollector;
-import org.embergraph.counters.ganglia.QueryEngineMetricsCollector;
 import org.embergraph.counters.query.QueryUtil;
-import org.embergraph.ganglia.DefaultMetadataFactory;
-import org.embergraph.ganglia.GangliaMetadataFactory;
-import org.embergraph.ganglia.GangliaSlopeEnum;
-import org.embergraph.ganglia.IGangliaDefaults;
-import org.embergraph.ganglia.util.GangliaUtil;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.TemporaryStoreFactory;
@@ -158,24 +149,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
     if (log.isInfoEnabled()) log.info("begin");
 
     try {
-
-      {
-        /*
-         * Note: The embedded GangliaService is executed on the main
-         * thread pool. We need to terminate the GangliaService in order
-         * for the thread pool to shutdown.
-         */
-
-        final FutureTask<Void> ft = gangliaFuture.getAndSet(null);
-
-        if (ft != null) {
-
-          ft.cancel(true /* mayInterruptIfRunning */);
-        }
-
-        // Clear the state reference.
-        gangliaService.set(null);
-      }
 
       // allow client requests to finish normally.
       new ShutdownHelper(threadPool, 10L /*logTimeout*/, TimeUnit.SECONDS) {
@@ -284,18 +257,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
         t.stop();
       }
-    }
-
-    {
-      final FutureTask<Void> ft = gangliaFuture.getAndSet(null);
-
-      if (ft != null) {
-
-        ft.cancel(true /* mayInterruptIfRunning */);
-      }
-
-      // Clear the state reference.
-      gangliaService.set(null);
     }
 
     // terminate sampling and reporting tasks immediately.
@@ -496,18 +457,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
   private final AtomicReference<AbstractStatisticsCollector> statisticsCollector =
       new AtomicReference<AbstractStatisticsCollector>();
 
-  /*
-   * Future for an embedded {@link GangliaService} which listens to <code>gmond</code> instances and
-   * other {@link GangliaService}s and reports out metrics from {@link #getCounters()} to the
-   * ganglia network.
-   */
-  private final AtomicReference<FutureTask<Void>> gangliaFuture =
-      new AtomicReference<FutureTask<Void>>();
-
-  /** The embedded ganglia peer. */
-  private final AtomicReference<EmbergraphGangliaService> gangliaService =
-      new AtomicReference<EmbergraphGangliaService>();
-
   @Override
   public ScheduledFuture<?> addScheduledTask(
       final Runnable task, final long initialDelay, final long delay, final TimeUnit unit) {
@@ -526,12 +475,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
               + unit);
 
     return scheduledExecutorService.scheduleWithFixedDelay(task, initialDelay, delay, unit);
-  }
-
-  /** The embedded ganglia peer. This can be used to obtain load balanced host reports, etc. */
-  public final EmbergraphGangliaService getGangliaService() {
-
-    return gangliaService.get();
   }
 
   /*
@@ -1228,30 +1171,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
          */
         startQueueStatisticsCollection();
 
-        /*
-         * Start embedded Ganglia peer. It will develop a snapshot of
-         * the cluster metrics in memory and will self-report metrics
-         * from the performance counter hierarchy to the ganglia
-         * network.
-         */
-        {
-          final Properties properties = getClient().getProperties();
-
-          final boolean listen =
-              Boolean.valueOf(
-                  properties.getProperty(
-                      IEmbergraphClient.Options.GANGLIA_LISTEN,
-                      IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN));
-
-          final boolean report =
-              Boolean.valueOf(
-                  properties.getProperty(
-                      IEmbergraphClient.Options.GANGLIA_REPORT,
-                      IEmbergraphClient.Options.DEFAULT_GANGLIA_REPORT));
-
-          if (listen || report) startGangliaService(statisticsCollector.get());
-        }
-
         // // notify the load balancer of this service join.
         // notifyJoin();
 
@@ -1336,198 +1255,6 @@ public abstract class AbstractFederation<T> implements IEmbergraphFederation<T> 
       }
 
       if (log.isInfoEnabled()) log.info("Collecting platform statistics: uuid=" + serviceUUID);
-    }
-
-    /*
-     * Start embedded Ganglia peer. It will develop a snapshot of the cluster metrics in memory and
-     * will self-report metrics from the performance counter hierarchy to the ganglia network.
-     *
-     * @param statisticsCollector Performance counters will be harvested from here.
-     * @see https://sourceforge.net/apps/trac/bigdata/ticket/441 (Ganglia Integration).
-     */
-    protected void startGangliaService(final AbstractStatisticsCollector statisticsCollector) {
-
-      if (statisticsCollector == null) return;
-
-      try {
-
-        final Properties properties = getClient().getProperties();
-
-        final String hostName = AbstractStatisticsCollector.fullyQualifiedHostName;
-
-        /*
-         * Note: This needs to be the value reported by the statistics
-         * collector since that it what makes it into the counter set
-         * path prefix for this service.
-         *
-         * TODO This implies that we can not enable the embedded ganglia
-         * peer unless platform level statistics collection is enabled.
-         * We should be able to separate out the collection of host
-         * metrics from whether or not we are collecting metrics from
-         * the embergraph service. Do this when moving the host and process
-         * (pidstat) collectors into the embergraph-ganglia module.
-         *
-         * TODO The LBS currently does not collect platform statistics.
-         * Once we move the platform statistics collection into the
-         * embergraph-ganglia module we can change that. However, the LBS
-         * will be going aware entirely once we (a) change over the
-         * ganglia state for host reports; and (b)
-         */
-        final String serviceName = statisticsCollector.getProcessName();
-
-        final InetAddress listenGroup =
-            InetAddress.getByName(
-                properties.getProperty(
-                    IEmbergraphClient.Options.GANGLIA_LISTEN_GROUP,
-                    IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN_GROUP));
-
-        final int listenPort =
-            Integer.valueOf(
-                properties.getProperty(
-                    IEmbergraphClient.Options.GANGLIA_LISTEN_PORT,
-                    IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN_PORT));
-
-        final boolean listen =
-            Boolean.valueOf(
-                properties.getProperty(
-                    IEmbergraphClient.Options.GANGLIA_LISTEN,
-                    IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN));
-
-        final boolean report =
-            Boolean.valueOf(
-                properties.getProperty(
-                    IEmbergraphClient.Options.GANGLIA_REPORT,
-                    IEmbergraphClient.Options.DEFAULT_GANGLIA_REPORT));
-
-        // Note: defaults to the listenGroup and port if nothing given.
-        final InetSocketAddress[] metricsServers =
-            GangliaUtil.parse(
-                // server(s)
-                properties.getProperty(
-                    IEmbergraphClient.Options.GANGLIA_SERVERS,
-                    IEmbergraphClient.Options.DEFAULT_GANGLIA_SERVERS),
-                // default host (same as listenGroup)
-                listenGroup.getHostName(),
-                // default port (same as listenGroup)
-                listenPort);
-
-        final int quietPeriod = IGangliaDefaults.QUIET_PERIOD;
-
-        final int initialDelay = IGangliaDefaults.INITIAL_DELAY;
-
-        /*
-         * Note: Use ZERO (0) if you are running gmond on the same host.
-         * That will prevent the GangliaService from transmitting a
-         * different heartbeat, which would confuse gmond and gmetad.
-         */
-        final int heartbeatInterval = 0; // IFF using gmond.
-        // final int heartbeatInterval =
-        // IGangliaDefaults.HEARTBEAT_INTERVAL;
-
-        // Use the report delay for the interval in which we scan the
-        // performance counters.
-        final int monitoringInterval =
-            (int)
-                TimeUnit.MILLISECONDS.toSeconds(
-                    Long.parseLong(
-                        properties.getProperty(
-                            Options.REPORT_DELAY, Options.DEFAULT_REPORT_DELAY)));
-
-        final String defaultUnits = IGangliaDefaults.DEFAULT_UNITS;
-
-        final GangliaSlopeEnum defaultSlope = IGangliaDefaults.DEFAULT_SLOPE;
-
-        final int defaultTMax = IGangliaDefaults.DEFAULT_TMAX;
-
-        final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
-
-        // Note: Factory is extensible (application can add its own
-        // delegates).
-        final GangliaMetadataFactory metadataFactory =
-            new GangliaMetadataFactory(
-                new DefaultMetadataFactory(defaultUnits, defaultSlope, defaultTMax, defaultDMax));
-
-        /*
-         * Layer on the ability to (a) recognize and align host
-         * embergraph's performance counters hierarchy with those declared
-         * by ganglia and; (b) provide nice declarations for various
-         * application counters of interest.
-         */
-        metadataFactory.add(
-            new EmbergraphMetadataFactory(
-                hostName, serviceName, defaultSlope, defaultTMax, defaultDMax, heartbeatInterval));
-
-        // The embedded ganglia peer.
-        final EmbergraphGangliaService gangliaService =
-            new EmbergraphGangliaService(
-                hostName,
-                serviceName,
-                metricsServers,
-                listenGroup,
-                listenPort,
-                listen, // listen
-                report, // report
-                false, // mock,
-                quietPeriod,
-                initialDelay,
-                heartbeatInterval,
-                monitoringInterval,
-                defaultDMax, // globalDMax
-                metadataFactory);
-
-        // Collect and report host metrics.
-        gangliaService.addMetricCollector(new HostMetricsCollector(statisticsCollector));
-
-        // Collect and report QueryEngine metrics.
-        gangliaService.addMetricCollector(
-            new QueryEngineMetricsCollector(AbstractFederation.this, statisticsCollector));
-
-        /*
-         * TODO The problem with reporting per-service statistics is
-         * that ganglia lacks a facility to readily aggregate statistics
-         * across services on a host (SMS + anything). The only way this
-         * can readily be made to work is if each service has a distinct
-         * metric for the same value (e.g., Mark and Sweep GC). However,
-         * that causes a very large number of distinct metrics. I have
-         * commented this out for now while I think it through some
-         * more. Maybe we will wind up only reporting the per-host
-         * counters to ganglia?
-         *
-         * Maybe the right way to handle this is to just filter by the
-         * service type? Basically, that is what we are doing for the
-         * QueryEngine metrics.
-         */
-        // Collect and report service metrics.
-        //                gangliaService.addMetricCollector(new ServiceMetricsCollector(
-        //                        statisticsCollector, null/* filter */));
-
-        // Wrap as Future.
-        final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, null);
-
-        // Save reference to future.
-        gangliaFuture.set(ft);
-
-        // Set the state reference.
-        AbstractFederation.this.gangliaService.set(gangliaService);
-
-        // Start the embedded ganglia service.
-        getExecutorService().submit(ft);
-
-      } catch (RejectedExecutionException t) {
-
-        /*
-         * Ignore.
-         *
-         * Note: This occurs if the federation shutdown() before we
-         * start the embedded ganglia peer. For example, it is common
-         * when running a short lived utility service such as
-         * ListServices.
-         */
-
-      } catch (Throwable t) {
-
-        log.error(t, t);
-      }
     }
 
     /** Start task to report service and counters to the load balancer. */

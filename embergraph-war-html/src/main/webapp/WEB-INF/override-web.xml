@@ -39,13 +39,9 @@
       polices will load balance read requests over the leader and
       followers in a manner that reflects the CPU, IO Wait, and GC
       Time associated with each service. The PlatformStatsPlugIn
-      and GangliaPlugIn MUST be enabled for the default load
+      MUST be enabled for the default load
       balancer policy to operate. It depends on those plugins to
       maintain a model of the load on the HA replication cluster.
-      The GangliaPlugIn should be run only as a listener if you are
-      are running the real gmond process on the host. If you are
-      not running gmond, then the GangliaPlugIn should be configured
-      as both a listener and a sender.
     </description>
     <servlet-class>org.embergraph.rdf.sail.webapp.HALoadBalancerServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -78,14 +74,6 @@
         service for reporting performance counters. This policy requires
         the PlatformStatsPlugIn and may also require platform specific
         metrics collection dependencies, e.g., sysstat.
-
-        org.embergraph.rdf.sail.webapp.lbs.policy.ganglia.GangliaLBSPolicy:
-
-        Load based proxying for read requests using ganglia. This policy
-        requires the requires the PlatformStatsPlugIn. In addition, either
-        gmond must be installed on each node or the embedded GangliaService
-        must be enabled such that performance metrics are collected and
-        reported.
 
         Some of these policies can be further configured using additional
         init-param elements that they understand. See the javadoc for the

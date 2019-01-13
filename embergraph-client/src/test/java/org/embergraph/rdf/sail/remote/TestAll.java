@@ -41,7 +41,6 @@ public class TestAll extends TestCase {
 
     final TestSuite suite = new TestSuite(TestAll.class.getPackage().getName());
 
-    suite.addTestSuite(EmbergraphSailFactoryTest.class);
     suite.addTestSuite(EmbergraphSailRemoteRepositoryConnectionTest.class);
 
     return suite;

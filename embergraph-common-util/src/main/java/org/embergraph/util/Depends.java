@@ -161,8 +161,6 @@ public class Depends {
    * Note: This embergraph module is under a different license (Apache 2.0) than the other
    * embergraph modules.
    */
-  private static final Dep embergraphGanglia =
-      new ApacheDep("embergraph-ganglia", "https://sourceforge.net/projects/embergraph/");
 
   private static final Dep colt =
       new Dep(
@@ -323,7 +321,6 @@ public class Depends {
           jacksonCore,
           blueprintsCore,
           rexsterCore,
-          embergraphGanglia,
           // scale-out
           jini,
           zookeeper,

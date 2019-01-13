@@ -136,8 +136,6 @@ public class Journal extends AbstractJournal
           org.embergraph.journal.QueueStatsPlugIn.Options,
           org.embergraph.journal.PlatformStatsPlugIn.Options,
           org.embergraph.journal.HttpPlugin.Options
-  // Note: Do not import. Forces embergraph-ganglia dependency.
-  // org.embergraph.journal.GangliaPlugIn.Options
   {
 
     /*
@@ -2996,16 +2994,6 @@ public class Journal extends AbstractJournal
     localTransactionManager.shutdown();
 
     {
-      final IPlugIn<?, ?> plugIn = pluginGanglia.get();
-
-      if (plugIn != null) {
-
-        // stop if running.
-        plugIn.stopService(false /* immediateShutdown */);
-      }
-    }
-
-    {
       final IPlugIn<?, ?> plugIn = pluginQueueStats.get();
 
       if (plugIn != null) {
@@ -3089,20 +3077,6 @@ public class Journal extends AbstractJournal
   public synchronized void shutdownNow() {
 
     if (!isOpen()) return;
-
-    /*
-     * Note: The ganglia plug in is executed on the main thread pool. We
-     * need to terminate it in order for the thread pool to shutdown.
-     */
-    {
-      final IPlugIn<?, ?> plugIn = pluginGanglia.get();
-
-      if (plugIn != null) {
-
-        // stop if running.
-        plugIn.stopService(true /* immediateShutdown */);
-      }
-    }
 
     {
       final IPlugIn<?, ?> plugIn = pluginQueueStats.get();
@@ -3480,18 +3454,6 @@ public class Journal extends AbstractJournal
       new AtomicReference<IPlugIn<Journal, ?>>();
 
   /*
-   * An optional plug in for Ganglia.
-   *
-   * <p>Note: The plug in concept was introduced to decouple the ganglia component. Do not introduce
-   * imports into the {@link Journal} class that would make the ganglia code a required dependency!
-   *
-   * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/609">embergraph-ganglia is
-   *     required dependency for Journal </a>
-   */
-  private final AtomicReference<IPlugIn<Journal, ?>> pluginGanglia =
-      new AtomicReference<IPlugIn<Journal, ?>>();
-
-  /*
    * Host wide performance counters (collected from the OS) (optional).
    *
    * @see PlatformStatsPlugIn
@@ -3505,15 +3467,6 @@ public class Journal extends AbstractJournal
     final AbstractStatisticsCollector t = plugin.getService();
 
     return t;
-  }
-
-  public Object getGangliaService() {
-
-    final IPlugIn<Journal, ?> plugin = pluginGanglia.get();
-
-    if (plugin == null) return null;
-
-    return plugin.getService();
   }
 
   /*
@@ -3643,31 +3596,6 @@ public class Journal extends AbstractJournal
         pluginHttpd.set(tmp);
       }
 
-      /*
-       * Start embedded ganglia peer. It will develop a snapshot of the metrics in memory for all
-       * nodes reporting in the ganglia network and will self-report metrics from the performance
-       * counter hierarchy to the ganglia network.
-       *
-       * <p>Note: Do NOT invoke this plug in unless it will start and run to avoid a CLASSPATH
-       * dependency on embergraph-ganglia when it is not used. The plugin requires platform
-       * statistics collection to run, so if you do not want to have a CLASSPATH dependency on
-       * ganglia, you need to disable the PlatformStatsPlugIn.
-       *
-       * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/609">embergraph-ganglia is
-       *     required dependency for Journal </a>
-       */
-      if (getPlatformStatisticsCollector() != null) {
-
-        final IPlugIn<Journal, ?> tmp = new GangliaPlugIn();
-
-        tmp.startService(Journal.this);
-
-        if (tmp.isRunning()) {
-
-          // Save reference iff started.
-          pluginGanglia.set(tmp);
-        }
-      }
     }
   } // class StartDeferredTasks
 

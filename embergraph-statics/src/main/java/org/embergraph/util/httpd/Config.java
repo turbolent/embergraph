@@ -27,7 +27,7 @@ public final class Config {
 
   public static final int HTTP_PORT = 9999;
 
-  public static final String PATH = "";
+  public static final String PATH = "embergraph";
 
   public static final String DEFAULT_HOST = "localhost";
 

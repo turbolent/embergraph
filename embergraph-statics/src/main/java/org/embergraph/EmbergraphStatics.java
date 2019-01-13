@@ -51,7 +51,6 @@ public class EmbergraphStatics {
    *
    * @see org.embergraph.counters.AbstractStatisticsCollector
    * @see Banner
-   * @see GangliaService#HOSTNAME
    * @see <a href="http://trac.blazegraph.com/ticket/886" >Provide workaround for bad reverse DNS
    *     setups</a>
    */
